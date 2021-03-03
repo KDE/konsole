@@ -1540,8 +1540,9 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint,
     // column (or left-most for right-to-left input)
     const int columnMax = edge ? _usedColumns : _usedColumns - 1;
     const int xOffset = edge ? _terminalFont->fontWidth() / 2 : 0;
-    int column = qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _terminalFont->fontWidth(), columnMax);
     int line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _terminalFont->fontHeight(), _usedLines - 1);
+    bool doubleWidth = line < _lineProperties.count() && _lineProperties[line] & LINE_DOUBLEWIDTH;
+    int column = qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _terminalFont->fontWidth() / (doubleWidth ? 2 : 1), columnMax);
 
     return qMakePair(line, column);
 }
