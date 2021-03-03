@@ -106,8 +106,9 @@ QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, i
     if (!absolute) {
         auto match = std::find_if(_currentDirContents.cbegin(), _currentDirContents.cend(),
                                   [&filename](const QString &s) {
-                                      return filename == s || // It's a direct child file or dir
-                                             filename.startsWith(s + QLatin1Char{'/'}); // It's inside a child dir
+                                      return filename == s // It's a direct child file or dir
+                                            || filename.startsWith(s + QLatin1Char{':'}) // filename:lineNumber (output of grep -n)
+                                            || filename.startsWith(s + QLatin1Char{'/'}); // It's inside a child dir
                                 });
 
         if (match == _currentDirContents.cend()) {
