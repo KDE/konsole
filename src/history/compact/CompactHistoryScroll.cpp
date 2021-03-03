@@ -129,10 +129,7 @@ void CompactHistoryScroll::setCellsAt(int position, const Character a[], int cou
 
 void CompactHistoryScroll::setCellsVectorAt(int position, const TextLine &cells)
 {
-    CompactHistoryLine *line = new (_blockList) CompactHistoryLine(cells, _blockList);
-
-    delete _lines.takeAt(position);
-    _lines.insert(position, line);
+    _lines[position]->setCharacters(cells);
 }
 
 void CompactHistoryScroll::setLineAt(int position, bool previousWrapped)

@@ -91,6 +91,61 @@ void CompactHistoryLine::getCharacters(Character *array, int size, int startColu
     }
 }
 
+void CompactHistoryLine::setCharacters(const TextLine &line)
+{
+    if (line.isEmpty()) {
+        if (_formatArray) {
+            _blockListRef.deallocate(_formatArray);
+        }
+        if (_text) {
+            _blockListRef.deallocate(_text);
+        }
+        _formatArray = nullptr;
+        _text = nullptr;
+        _formatLength = 0;
+        _length = 0;
+        return;
+    }
+    int new_length = line.size();
+
+    // count number of different formats in this text line
+    Character c = line[0];
+    int new_formatLength = 1;
+    for (auto &k : line) {
+        if (!(k.equalsFormat(c))) {
+            new_formatLength++; // format change detected
+            c = k;
+        }
+    }
+
+    if (_formatLength < new_formatLength) {
+        _blockListRef.deallocate(_formatArray);
+        _formatArray = static_cast<CharacterFormat *>(_blockListRef.allocate(sizeof(CharacterFormat) * new_formatLength));
+        Q_ASSERT(_formatArray != nullptr);
+    }
+
+    if (_length < new_length) {
+        _blockListRef.deallocate(_text);
+        _text = static_cast<uint *>(_blockListRef.allocate(sizeof(uint) * new_length));
+        Q_ASSERT(_text != nullptr);
+    }
+    _length = new_length;
+    _formatLength = new_formatLength;
+
+    c = line[0];
+    _formatArray[0].setFormat(c);
+    _formatArray[0].startPos = 0;
+    for (int i = 0, k = 1; i < _length; i++) {
+        if (!line[i].equalsFormat(c)) {
+            c = line[i];
+            _formatArray[k].setFormat(c);
+            _formatArray[k].startPos = i;
+            k++;
+        }
+        _text[i] = line[i].character;
+    }
+}
+
 bool CompactHistoryLine::isWrapped() const
 {
     return _wrapped;

@@ -27,6 +27,7 @@ public:
     static void *operator new(size_t size, CompactHistoryBlockList &blockList);
     static void operator delete(void *);
 
+    virtual void setCharacters(const TextLine &);
     virtual void getCharacters(Character *array, int size, int startColumn);
     virtual bool isWrapped() const;
     virtual void setWrapped(bool value);
