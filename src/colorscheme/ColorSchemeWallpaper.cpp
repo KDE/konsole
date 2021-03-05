@@ -25,7 +25,6 @@ ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path) :
 
 ColorSchemeWallpaper::~ColorSchemeWallpaper()
 {
-    delete _picture;
 }
 
 void ColorSchemeWallpaper::load()
@@ -36,7 +35,7 @@ void ColorSchemeWallpaper::load()
 
     // Create and load original pixmap
     if (_picture == nullptr) {
-        _picture = new QPixmap();
+        _picture = std::make_unique<QPixmap>();
     }
 
     if (_picture->isNull()) {

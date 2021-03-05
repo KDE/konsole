@@ -8,6 +8,8 @@
 
 #ifndef COLORSCHEMEWALLPAPER_H
 #define COLORSCHEMEWALLPAPER_H
+// STD
+#include <memory>
 
 // Qt
 #include <QMetaType>
@@ -46,7 +48,7 @@ namespace Konsole
         Q_DISABLE_COPY(ColorSchemeWallpaper)
 
         QString _path;
-        QPixmap *_picture;
+        std::unique_ptr<QPixmap> _picture;
     };
 
 }
