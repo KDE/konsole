@@ -8,6 +8,9 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+// STD
+#include <memory>
+
 // Qt
 #include <QRect>
 #include <QSet>
@@ -683,7 +686,7 @@ private:
     QVarLengthArray<LineProperty, 64> _lineProperties;
 
     // history buffer ---------------
-    HistoryScroll *_history;
+    std::unique_ptr<HistoryScroll> _history;
 
     // cursor location
     int _cuX;
@@ -742,7 +745,7 @@ private:
 
     // used in REP (repeating char)
     quint32 _lastDrawnChar;
-    EscapeSequenceUrlExtractor *_escapeSequenceUrlExtractor;
+    std::unique_ptr<EscapeSequenceUrlExtractor> _escapeSequenceUrlExtractor;
     void toggleUrlInput();
 
     // Vt102Emulation defined max argument value that can be passed to a Screen function

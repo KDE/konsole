@@ -20,23 +20,22 @@ bool HistoryTypeFile::isEnabled() const
     return true;
 }
 
-HistoryScroll *HistoryTypeFile::scroll(HistoryScroll *old) const
+void HistoryTypeFile::scroll(std::unique_ptr<HistoryScroll> &old) const
 {
-    if (dynamic_cast<HistoryFile *>(old) != nullptr) {
-        return old; // Unchanged.
+    if (dynamic_cast<HistoryFile *>(old.get()) != nullptr) {
+        return; // Unchanged.
     }
-    HistoryScroll *newScroll = new HistoryScrollFile();
+    auto newScroll = std::make_unique<HistoryScrollFile>();
 
     Character line[LINE_SIZE];
     int lines = (old != nullptr) ? old->getLines() : 0;
     for (int i = 0; i < lines; i++) {
         int size = old->getLineLen(i);
         if (size > LINE_SIZE) {
-            auto tmp_line = new Character[size];
-            old->getCells(i, 0, size, tmp_line);
-            newScroll->addCells(tmp_line, size);
+            auto tmp_line = std::make_unique<Character[]>(size);
+            old->getCells(i, 0, size, tmp_line.get());
+            newScroll->addCells(tmp_line.get(), size);
             newScroll->addLine(old->isWrappedLine(i));
-            delete [] tmp_line;
         } else {
             old->getCells(i, 0, size, line);
             newScroll->addCells(line, size);
@@ -44,8 +43,7 @@ HistoryScroll *HistoryTypeFile::scroll(HistoryScroll *old) const
         }
     }
 
-    delete old;
-    return newScroll;
+    old = std::move(newScroll);
 }
 
 int HistoryTypeFile::maximumLineCount() const

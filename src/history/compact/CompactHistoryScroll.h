@@ -7,6 +7,9 @@
 #ifndef COMPACTHISTORYSCROLL_H
 #define COMPACTHISTORYSCROLL_H
 
+// STD
+#include <deque>
+
 #include "konsoleprivate_export.h"
 
 #include "history/HistoryScroll.h"
@@ -17,7 +20,7 @@ namespace Konsole
 
 class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
 {
-    typedef QList<CompactHistoryLine *> HistoryArray;
+    typedef std::deque<std::unique_ptr<CompactHistoryLine>> HistoryArray;
 
 public:
     explicit CompactHistoryScroll(unsigned int maxLineCount = 1000);

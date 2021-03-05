@@ -29,37 +29,29 @@ int CompactHistoryType::maximumLineCount() const
     return _maxLines;
 }
 
-HistoryScroll *CompactHistoryType::scroll(HistoryScroll *old) const
+void CompactHistoryType::scroll(std::unique_ptr<HistoryScroll> &old) const
 {
-    if (old != nullptr) {
-        auto *newBuffer = dynamic_cast<CompactHistoryScroll *>(old);
-        if (newBuffer != nullptr) {
-            newBuffer->setMaxNbLines(_maxLines);
-            return newBuffer;
-        }
-
-        newBuffer = new CompactHistoryScroll(_maxLines);
-        
-        Character line[LINE_SIZE];
-        int lines = old->getLines();
-        int i = qMax((lines - (int)_maxLines - 1), 0);
-        for (; i < lines; i++) {
-            int size = old->getLineLen(i);
-            if (size > LINE_SIZE) {
-                auto tmp_line = new Character[size];
-                old->getCells(i, 0, size, tmp_line);
-                newBuffer->addCells(tmp_line, size);
-                newBuffer->addLine(old->isWrappedLine(i));
-                delete[] tmp_line;
-            } else {
-                old->getCells(i, 0, size, line);
-                newBuffer->addCells(line, size);
-                newBuffer->addLine(old->isWrappedLine(i));
-            }
-        }
-
-        delete old;
-        return newBuffer;
+    if (auto *newBuffer = dynamic_cast<CompactHistoryScroll *>(old.get())) {
+        newBuffer->setMaxNbLines(_maxLines);
+        return;
     }
-    return new CompactHistoryScroll(_maxLines);
+    auto newScroll = std::make_unique<CompactHistoryScroll>(_maxLines);
+
+    Character line[LINE_SIZE];
+    int lines = (old != nullptr) ? old->getLines() : 0;
+    int i = qMax((lines - (int)_maxLines - 1), 0);
+    for (; i < lines; i++) {
+        int size = old->getLineLen(i);
+        if (size > LINE_SIZE) {
+            auto tmp_line = std::make_unique<Character[]>(size);
+            old->getCells(i, 0, size, tmp_line.get());
+            newScroll->addCells(tmp_line.get(), size);
+            newScroll->addLine(old->isWrappedLine(i));
+        } else {
+            old->getCells(i, 0, size, line);
+            newScroll->addCells(line, size);
+            newScroll->addLine(old->isWrappedLine(i));
+        }
+    }
+    old = std::move(newScroll);
 }

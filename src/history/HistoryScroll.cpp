@@ -18,7 +18,6 @@ HistoryScroll::HistoryScroll(HistoryType *t) :
 
 HistoryScroll::~HistoryScroll()
 {
-    delete _historyType;
 }
 
 bool HistoryScroll::hasScroll()

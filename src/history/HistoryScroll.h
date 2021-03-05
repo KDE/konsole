@@ -7,6 +7,9 @@
 #ifndef HISTORYSCROLL_H
 #define HISTORYSCROLL_H
 
+// STD
+#include <memory>
+
 #include "konsoleprivate_export.h"
 
 // Konsole
@@ -68,7 +71,7 @@ public:
     }
 
 protected:
-    HistoryType *_historyType;
+    std::unique_ptr<HistoryType> _historyType;
     const int MAX_REFLOW_LINES = 20000;
 };
 

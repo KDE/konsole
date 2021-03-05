@@ -196,7 +196,7 @@ void HistoryTest::testHistoryReflow()
 
 void HistoryTest::testHistoryTypeChange()
 {
-    HistoryScroll *historyScroll = nullptr;
+    std::unique_ptr<HistoryScroll> historyScroll(nullptr);
 
     const char testString[] = "abcdefghijklmnopqrstuvwxyz1234567890";
     const int testStringSize = sizeof(testString) / sizeof(char) - 1;
@@ -208,11 +208,11 @@ void HistoryTest::testHistoryTypeChange()
 
     // None
     auto historyTypeNone = new HistoryTypeNone();
-    historyScroll = historyTypeNone->scroll(historyScroll);
+    historyTypeNone->scroll(historyScroll);
 
     // None to File
     auto historyTypeFile = new HistoryTypeFile();
-    historyScroll = historyTypeFile->scroll(historyScroll);
+    historyTypeFile->scroll(historyScroll);
 
     historyScroll->addCells(testImage, testStringSize);
     historyScroll->addLine(false);
@@ -223,23 +223,22 @@ void HistoryTest::testHistoryTypeChange()
 
     // File to Compact
     auto compactHistoryType = new CompactHistoryType(10);
-    historyScroll = compactHistoryType->scroll(historyScroll);
+    compactHistoryType->scroll(historyScroll);
 
     QCOMPARE(historyScroll->getLines(), 10);
     historyScroll->getCells(0, 0, 1, &testChar);
     QCOMPARE(testChar, testImage[testStringSize - 10]);
 
     // Compact to File
-    historyScroll = historyTypeFile->scroll(historyScroll);
+    historyTypeFile->scroll(historyScroll);
     QCOMPARE(historyScroll->getLines(), 10);
     historyScroll->getCells(0, 0, 1, &testChar);
     QCOMPARE(testChar, testImage[testStringSize - 10]);
 
     // File to None
-    historyScroll = historyTypeNone->scroll(historyScroll);
+    historyTypeNone->scroll(historyScroll);
     QCOMPARE(historyScroll->getLines(), 0);
 
-    delete historyScroll;
     delete historyTypeFile;
     delete historyTypeNone;
     delete compactHistoryType;

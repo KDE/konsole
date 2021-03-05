@@ -125,7 +125,7 @@ void HistoryScrollFile::setCellsVectorAt(int, const QVector<Character> &)
 
 int HistoryScrollFile::reflowLines(int columns)
 {
-    HistoryFile *reflowFile = new HistoryFile;
+    auto reflowFile = std::make_unique<HistoryFile>();
     reflowData newLine;
 
     auto reflowLineLen = [] (qint64 start, qint64 end) {
@@ -184,7 +184,6 @@ int HistoryScrollFile::reflowLines(int columns)
         currentPos++;
     }
 
-    delete reflowFile;
     return 0;
 }
 

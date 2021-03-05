@@ -21,7 +21,7 @@ public:
     bool isEnabled() const override;
     int maximumLineCount() const override;
 
-    HistoryScroll *scroll(HistoryScroll *) const override;
+    void scroll(std::unique_ptr<HistoryScroll> &) const override;
 };
 
 }

@@ -33,7 +33,7 @@ public:
      * Converts from one type of HistoryScroll to another or if given the
      * same type, returns it.
      */
-    virtual HistoryScroll *scroll(HistoryScroll *) const = 0;
+    virtual void scroll(std::unique_ptr<HistoryScroll> &) const = 0;
     /**
      * Returns true if the history size is unlimited.
      */

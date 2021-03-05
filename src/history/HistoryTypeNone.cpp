@@ -16,10 +16,9 @@ bool HistoryTypeNone::isEnabled() const
     return false;
 }
 
-HistoryScroll *HistoryTypeNone::scroll(HistoryScroll *old) const
+void HistoryTypeNone::scroll(std::unique_ptr<HistoryScroll> &old) const
 {
-    delete old;
-    return new HistoryScrollNone();
+    old = std::make_unique<HistoryScrollNone>();
 }
 
 int HistoryTypeNone::maximumLineCount() const

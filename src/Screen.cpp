@@ -60,7 +60,7 @@ Screen::Screen(int lines, int columns):
     _isResize(false),
     _enableReflowLines(false),
     _lineProperties(QVarLengthArray<LineProperty, 64>()),
-    _history(new HistoryScrollNone()),
+    _history(std::make_unique<HistoryScrollNone>()),
     _cuX(0),
     _cuY(0),
     _currentForeground(CharacterColor()),
@@ -78,7 +78,7 @@ Screen::Screen(int lines, int columns):
     _effectiveRendition(DEFAULT_RENDITION),
     _lastPos(-1),
     _lastDrawnChar(0),
-    _escapeSequenceUrlExtractor(new EscapeSequenceUrlExtractor())
+    _escapeSequenceUrlExtractor(std::make_unique<EscapeSequenceUrlExtractor>())
 {
     _escapeSequenceUrlExtractor->setScreen(this);
     _lineProperties.resize(_lines + 1);
@@ -91,8 +91,6 @@ Screen::Screen(int lines, int columns):
 
 Screen::~Screen()
 {
-    delete _history;
-    delete _escapeSequenceUrlExtractor;
 }
 
 void Screen::cursorUp(int n)
@@ -885,12 +883,11 @@ void Screen::displayCharacter(uint c)
             if (((oldChars) != nullptr) && extendedCharLength < 3) {
                 Q_ASSERT(extendedCharLength > 1);
                 Q_ASSERT(extendedCharLength < 65535); // redundant due to above check
-                auto chars = new uint[extendedCharLength + 1];
-                memcpy(chars, oldChars, sizeof(uint) * extendedCharLength);
+                auto chars = std::make_unique<uint[]>(extendedCharLength + 1);
+                std::copy_n(oldChars, extendedCharLength, chars.get());
                 chars[extendedCharLength] = c;
                 auto extChars = [this]() { return usedExtendedChars(); };
-                currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, extendedCharLength + 1, extChars);
-                delete[] chars;
+                currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars.get(), extendedCharLength + 1, extChars);
             }
         }
         return;
@@ -1662,16 +1659,17 @@ int Screen::getHistLines() const
     return _history->getLines();
 }
 
-void Screen::setScroll(const HistoryType& t , bool copyPreviousScroll)
+void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
 {
     clearSelection();
 
     if (copyPreviousScroll) {
-        _history = t.scroll(_history);
+        t.scroll(_history);
     } else {
-        HistoryScroll* oldScroll = _history;
-        _history = t.scroll(nullptr);
-        delete oldScroll;
+        // As 't' can be '_history' pointer, move it to a temporary smart pointer
+        // making _history = nullptr
+        auto oldHistory = std::move(_history);
+        t.scroll(_history);
     }
 }
 
@@ -1680,7 +1678,7 @@ bool Screen::hasScroll() const
     return _history->hasScroll();
 }
 
-const HistoryType& Screen::getScroll() const
+const HistoryType &Screen::getScroll() const
 {
     return _history->getType();
 }
@@ -1700,5 +1698,5 @@ void Screen::fillWithDefaultChar(Character* dest, int count)
 
 Konsole::EscapeSequenceUrlExtractor * Konsole::Screen::urlExtractor() const
 {
-    return _escapeSequenceUrlExtractor;
+    return _escapeSequenceUrlExtractor.get();
 }
