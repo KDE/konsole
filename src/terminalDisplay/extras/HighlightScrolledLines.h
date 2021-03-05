@@ -75,7 +75,7 @@ private:
     bool _enabled;
     QRect _rect;
     int _previousScrollCount;
-    QTimer *_timer;
+    std::unique_ptr<QTimer> _timer;
     bool _needToClear;
 };
 } // namespace Konsole

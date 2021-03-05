@@ -24,9 +24,6 @@ HighlightScrolledLines::HighlightScrolledLines()
 
 HighlightScrolledLines::~HighlightScrolledLines()
 {
-    if (_timer != nullptr) {
-        delete _timer;
-    }
 }
 
 bool HighlightScrolledLines::isEnabled()
@@ -62,10 +59,10 @@ void HighlightScrolledLines::setPreviousScrollCount(int scrollCount)
 void HighlightScrolledLines::setTimer(TerminalScrollBar *parent)
 {
     if (_enabled && _timer == nullptr) {
-        _timer = new QTimer();
+        _timer = std::make_unique<QTimer>();
         _timer->setSingleShot(true);
         _timer->setInterval(250);
-        _timer->connect(_timer, &QTimer::timeout, parent, &TerminalScrollBar::highlightScrolledLinesEvent);
+        _timer->connect(_timer.get(), &QTimer::timeout, parent, &TerminalScrollBar::highlightScrolledLinesEvent);
     }
 }
 
