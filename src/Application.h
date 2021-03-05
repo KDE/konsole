@@ -13,6 +13,8 @@
 // Konsole
 #include "widgets/ViewSplitter.h"
 
+#include "PluginSystem/PluginManager.h"
+
 namespace Konsole {
 class MainWindow;
 class Session;
@@ -79,6 +81,8 @@ private:
     MainWindow *_backgroundInstance;
     QSharedPointer<QCommandLineParser> m_parser;
     QStringList m_customCommand;
+    PluginManager m_pluginManager;
+
 };
 }
 #endif  // APPLICATION_H

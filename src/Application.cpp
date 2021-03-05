@@ -42,6 +42,7 @@ Application::Application(QSharedPointer<QCommandLineParser> parser,
     m_parser(parser),
     m_customCommand(customCommand)
 {
+    m_pluginManager.loadAllPlugins();
 }
 
 void Application::populateCommandLineParser(QCommandLineParser *parser)

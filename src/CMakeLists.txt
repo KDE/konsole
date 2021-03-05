@@ -104,6 +104,7 @@ add_subdirectory(profile)
 add_subdirectory(session)
 add_subdirectory(characters)
 add_subdirectory(decoders)
+add_subdirectory(PluginSystem)
 
 set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         BookmarkHandler.cpp
@@ -266,6 +267,7 @@ ecm_add_app_icon(konsole ICONS ${ICONS_SRCS})
 add_executable(konsole ${konsole_SRCS})
 target_link_libraries(konsole
   konsoleprivate
+  konsolepluginsystem
   KF5::XmlGui
   KF5::WindowSystem
   KF5::Bookmarks
