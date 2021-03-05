@@ -31,9 +31,10 @@ public:
     int  getLineLen(int lineno) override;
     void getCells(int lineno, int colno, int count, Character res[]) override;
     bool isWrappedLine(int lineno) override;
+    LineProperty getLineProperty(int lineno) override;
 
     void addCells(const Character text[], int count) override;
-    void addLine(bool previousWrapped = false) override;
+    void addLine(LineProperty lineProperty = 0) override;
 
     // Modify history
     void insertCellsVector(int position, const QVector<Character> &cells) override;

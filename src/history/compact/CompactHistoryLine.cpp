@@ -23,7 +23,7 @@ CompactHistoryLine::CompactHistoryLine(const TextLine &line, CompactHistoryBlock
     _formatArray(nullptr),
     _text(nullptr),
     _formatLength(0),
-    _wrapped(false)
+    _lineProperty(0)
 {
     if (!line.isEmpty()) {
         _length = line.size();
@@ -56,7 +56,7 @@ CompactHistoryLine::CompactHistoryLine(const TextLine &line, CompactHistoryBlock
             _text[i] = line[i].character;
         }
 
-        _wrapped = false;
+        _lineProperty = 0;
     }
 }
 
@@ -148,12 +148,26 @@ void CompactHistoryLine::setCharacters(const TextLine &line)
 
 bool CompactHistoryLine::isWrapped() const
 {
-    return _wrapped;
+    return _lineProperty & LINE_WRAPPED;
 }
 
 void CompactHistoryLine::setWrapped(bool value)
 {
-    _wrapped = value;
+    if (value) {
+        _lineProperty |= LINE_WRAPPED;
+    } else {
+        _lineProperty &= ~LINE_WRAPPED;
+    }
+}
+
+LineProperty CompactHistoryLine::getLineProperty() const
+{
+    return _lineProperty;
+}
+
+void CompactHistoryLine::setLineProperty(LineProperty value)
+{
+    _lineProperty = value;
 }
 
 unsigned int CompactHistoryLine::getLength() const

@@ -31,6 +31,8 @@ public:
     virtual void getCharacters(Character *array, int size, int startColumn);
     virtual bool isWrapped() const;
     virtual void setWrapped(bool value);
+    virtual LineProperty getLineProperty() const;
+    virtual void setLineProperty(LineProperty value);
     virtual unsigned int getLength() const;
 
 protected:
@@ -39,7 +41,7 @@ protected:
     quint16 _length;
     uint    *_text;
     quint16 _formatLength;
-    bool _wrapped;
+    LineProperty _lineProperty;
 };
 
 }

@@ -699,10 +699,7 @@ QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) con
 
     // copy properties for _lines in history
     for (int line = startLine; line < startLine + linesInHistory; line++) {
-        //TODO Support for line properties other than wrapped _lines
-        if (_history->isWrappedLine(line)) {
-            result[index] = static_cast<LineProperty>(result[index] | LINE_WRAPPED);
-        }
+        result[index] = _history->getLineProperty(line);
         index++;
     }
 
@@ -1615,7 +1612,7 @@ void Screen::addHistLine()
 
     if (hasScroll()) {
         _history->addCellsVector(_screenLines[0]);
-        _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
+        _history->addLine(_lineProperties[0]);
 
         newHistLines = _history->getLines();
 

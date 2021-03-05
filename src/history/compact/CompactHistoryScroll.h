@@ -31,10 +31,11 @@ public:
     int  getLineLen(int lineNumber) override;
     void getCells(int lineNumber, int startColumn, int count, Character buffer[]) override;
     bool isWrappedLine(int lineNumber) override;
+    LineProperty getLineProperty(int lineNumber) override;
 
     void addCells(const Character a[], int count) override;
     void addCellsVector(const TextLine &cells) override;
-    void addLine(bool previousWrapped = false) override;
+    void addLine(LineProperty lineProperty = 0) override;
 
     void insertCellsVector(int position, const TextLine &cells) override;
     void insertCells(int position, const Character a[], int count) override;

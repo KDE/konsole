@@ -49,9 +49,20 @@ bool HistoryScrollFile::isWrappedLine(int lineno)
         unsigned char flag = 0;
         _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char),
                        (lineno)*sizeof(unsigned char));
-        return flag != 0u;
+        return (flag & LINE_WRAPPED) != 0;
     }
     return false;
+}
+
+LineProperty HistoryScrollFile::getLineProperty(int lineno)
+{
+    if (lineno >= 0 && lineno <= getLines()) {
+        LineProperty flag = 0;
+        _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char),
+                       (lineno)*sizeof(unsigned char));
+        return flag;
+    }
+    return 0;
 }
 
 qint64 HistoryScrollFile::startOfLine(int lineno)
@@ -77,12 +88,11 @@ void HistoryScrollFile::addCells(const Character text[], int count)
     _cells.add(reinterpret_cast<const char*>(text), count * sizeof(Character));
 }
 
-void HistoryScrollFile::addLine(bool previousWrapped)
+void HistoryScrollFile::addLine(LineProperty lineProperty)
 {
     qint64 locn = _cells.len();
     _index.add(reinterpret_cast<char *>(&locn), sizeof(qint64));
-    unsigned char flags = previousWrapped ? 0x01 : 0x00;
-    _lineflags.add(reinterpret_cast<char *>(&flags), sizeof(char));
+    _lineflags.add(reinterpret_cast<char *>(&lineProperty), sizeof(char));
 }
 
 void HistoryScrollFile::insertCells(int, const Character[], int)

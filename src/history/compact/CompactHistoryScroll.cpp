@@ -44,11 +44,11 @@ void CompactHistoryScroll::addCells(const Character a[], int count)
     addCellsVector(newLine);
 }
 
-void CompactHistoryScroll::addLine(bool previousWrapped)
+void CompactHistoryScroll::addLine(LineProperty lineProperty)
 {
     auto line = _lines.back().get();
     ////qDebug() << "last line at address " << line;
-    line->setWrapped(previousWrapped);
+    line->setLineProperty(lineProperty);
 }
 
 int CompactHistoryScroll::getLines()
@@ -141,6 +141,12 @@ bool CompactHistoryScroll::isWrappedLine(int lineNumber)
 {
     Q_ASSERT(static_cast<size_t>(lineNumber) < _lines.size());
     return _lines[lineNumber]->isWrapped();
+}
+
+LineProperty CompactHistoryScroll::getLineProperty(int lineNumber)
+{
+    Q_ASSERT(static_cast<size_t>(lineNumber) < _lines.size());
+    return _lines[lineNumber]->getLineProperty();
 }
 
 int CompactHistoryScroll::reflowLines(int columns)
