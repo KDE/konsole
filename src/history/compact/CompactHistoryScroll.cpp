@@ -130,11 +130,11 @@ void CompactHistoryScroll::setCellsVectorAt(int position, const TextLine &cells)
     _lines[position]->setCharacters(cells);
 }
 
-void CompactHistoryScroll::setLineAt(int position, bool previousWrapped)
+void CompactHistoryScroll::setLineAt(int position, LineProperty lineProperty)
 {
     auto line = _lines.at(position).get();
 
-    line->setWrapped(previousWrapped);
+    line->setLineProperty(lineProperty);
 }
 
 bool CompactHistoryScroll::isWrappedLine(int lineNumber)
@@ -172,7 +172,7 @@ int CompactHistoryScroll::reflowLines(int columns)
         if (isWrappedLine(currentPos) && currentPos < getLines() - 1) {
             int next_linelen = getLineLen(currentPos + 1);
             auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
-            bool new_line_property = isWrappedLine(currentPos + 1);
+            LineProperty new_line_property = getLineProperty(currentPos + 1);
 
             // Join the lines
             getCells(currentPos, 0, curr_linelen, new_line);
@@ -189,11 +189,11 @@ int CompactHistoryScroll::reflowLines(int columns)
         if (curr_linelen > columns) {
             bool removeLine = getLines() == getMaxLines();
             auto *curr_line = getCharacterBuffer(curr_linelen);
-            bool curr_line_property = isWrappedLine(currentPos);
+            LineProperty curr_line_property = getLineProperty(currentPos);
             getCells(currentPos, 0, curr_linelen, curr_line);
 
             setCellsAt(currentPos, curr_line, columns);
-            setLineAt(currentPos, true);
+            setLineAt(currentPos, curr_line_property | LINE_WRAPPED);
             if (currentPos < getMaxLines() - 1) {
                 int correctPosition = (getLines() == getMaxLines()) ? 0 : 1;
                 insertCells(currentPos + 1, curr_line + columns, curr_linelen - columns);

@@ -58,7 +58,7 @@ public:
     virtual void removeCells(int position) = 0;
     virtual void setCellsAt(int position, const Character a[], int count) = 0;
     virtual void setCellsVectorAt(int position, const QVector<Character> &cells) = 0;
-    virtual void setLineAt(int position, bool previousWrapped) = 0;
+    virtual void setLineAt(int position, LineProperty lineProperty) = 0;
     virtual int reflowLines(int columns) = 0;
 
     //

@@ -87,6 +87,6 @@ int HistoryScrollNone::reflowLines(int)
     return 0;
 }
 
-void HistoryScrollNone::setLineAt(int , bool)
+void HistoryScrollNone::setLineAt(int , LineProperty)
 {
 }

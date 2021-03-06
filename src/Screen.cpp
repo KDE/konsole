@@ -511,11 +511,11 @@ void Screen::resizeImage(int new_lines, int new_columns)
         while (cursorLine < oldCursorLine && _history->getLines()) {
             int histPos = _history->getLines() - 1;
             int histLineLen = _history->getLineLen(histPos);
-            int isWrapped = _history->isWrappedLine(histPos) ? LINE_WRAPPED : LINE_DEFAULT;
+            LineProperty lineProperty = _history->getLineProperty(histPos);
             histLine.resize(histLineLen);
             _history->getCells(histPos, 0, histLineLen, histLine.data());
             _screenLines.insert(0, histLine);
-            _lineProperties.insert(0, isWrapped);
+            _lineProperties.insert(0, lineProperty);
             _history->removeCells(histPos);
             cursorLine++;
         }
@@ -1591,7 +1591,7 @@ void Screen::fastAddHistLine()
 {
     const bool removeLine = _history->getLines() == _history->getMaxLines();
     _history->addCellsVector(_screenLines[0]);
-    _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
+    _history->addLine(_lineProperties[0]);
 
     // If _history size > max history size it will drop a line from _history.
     // We need to verify if we need to remove a URL.

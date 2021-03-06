@@ -44,7 +44,7 @@ public:
     void setMaxNbLines(unsigned int lineCount);
     void setCellsAt(int position, const Character a[], int count) override;
     void setCellsVectorAt(int position, const TextLine &cells) override;
-    void setLineAt(int position, bool previousWrapped) override;
+    void setLineAt(int position, LineProperty lineProperty) override;
 
     int reflowLines(int columns) override;
 

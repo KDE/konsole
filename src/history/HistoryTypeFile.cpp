@@ -35,11 +35,11 @@ void HistoryTypeFile::scroll(std::unique_ptr<HistoryScroll> &old) const
             auto tmp_line = std::make_unique<Character[]>(size);
             old->getCells(i, 0, size, tmp_line.get());
             newScroll->addCells(tmp_line.get(), size);
-            newScroll->addLine(old->isWrappedLine(i));
+            newScroll->addLine(old->getLineProperty(i));
         } else {
             old->getCells(i, 0, size, line);
             newScroll->addCells(line, size);
-            newScroll->addLine(old->isWrappedLine(i));
+            newScroll->addLine(old->getLineProperty(i));
         }
     }
 
