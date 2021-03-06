@@ -48,11 +48,14 @@ ecm_mark_nongui_executable(HistoryTest)
 add_test(NAME HistoryTest COMMAND HistoryTest)
 target_link_libraries(HistoryTest ${KONSOLE_TEST_LIBS} KF5::Parts)
 
+# Temporary bypass for BKO 432379
+if(BUILD_SHARED_LIBS)
 add_executable(KeyboardTranslatorTest KeyboardTranslatorTest.cpp)
 ecm_mark_as_test(KeyboardTranslatorTest)
 ecm_mark_nongui_executable(KeyboardTranslatorTest)
 add_test(NAME KeyboardTranslatorTest COMMAND KeyboardTranslatorTest)
 target_link_libraries(KeyboardTranslatorTest ${KONSOLE_TEST_LIBS})
+endif(BUILD_SHARED_LIBS)
 
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(PartTest PartTest.cpp)
