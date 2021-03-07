@@ -8,9 +8,12 @@
 
 #include "IKonsolePlugin.h"
 
+#include <QMainWindow>
+
 namespace Konsole {
 struct IKonsolePlugin::Private {
     QString name;
+    QList<QMainWindow*> mainWindowList;
 };
 
 IKonsolePlugin::IKonsolePlugin(QObject *parent, const QVariantList &args) :
@@ -33,6 +36,17 @@ void IKonsolePlugin::setName(const QString& name)
 
 QString IKonsolePlugin::name() const {
     return d->name;
+}
+
+void IKonsolePlugin::addMainWindow(QMainWindow *mainWindow)
+{
+    d->mainWindowList.append(mainWindow);
+    createWidgetsForMainWindow(mainWindow);
+}
+
+void IKonsolePlugin::removeMainWindow(QMainWindow *mainWindow)
+{
+    d->mainWindowList.removeOne(mainWindow);
 }
 
 }

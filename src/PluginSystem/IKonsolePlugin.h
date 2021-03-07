@@ -32,15 +32,17 @@ public:
     IKonsolePlugin(QObject *parent, const QVariantList &args);
     ~IKonsolePlugin();
 
-    /* Returns the list of widgets that should be used on the dock areas. */
-    virtual QList<QDockWidget*> widgets() { return {}; }
-
     /* Always returns the current terminal display.
      * never store the pointer, as it can change during usage.
      */
     TerminalDisplay *currentTerminalDisplay();
     QString name() const;
 
+    // Usable only from PluginManager, please don't use.
+    void addMainWindow(QMainWindow *mainWindow);
+    void removeMainWindow(QMainWindow *mainWindow);
+
+    virtual void createWidgetsForMainWindow(QMainWindow *mainWindow) = 0;
 protected:
     void setName(const QString& pluginName);
 

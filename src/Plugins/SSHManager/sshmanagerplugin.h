@@ -7,7 +7,7 @@ class SSHManagerPlugin : public Konsole::IKonsolePlugin {
     Q_OBJECT
 public:
     SSHManagerPlugin(QObject *object, const QVariantList &args);
-
+    void createWidgetsForMainWindow(QMainWindow *mainWindow) override;
 };
 
 #endif
