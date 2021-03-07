@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Service
+Name=My fancy action plugin
+X-KDE-Library=konsole_sshmanagerplugin
+X-KDE-ServiceTypes=Konsole/Plugin
