@@ -9,9 +9,14 @@ class SSHManagerModel : public QStandardItemModel {
     Q_OBJECT
 public:
     SSHManagerModel(QObject *parent = nullptr);
+    ~SSHManagerModel();
+
     void setModel(SSHManagerModel *model);
     void addTopLevelItem(const QString& toplevel);
-    void addChildItem(const SSHConfigurationData &config, const QModelIndex& parent = QModelIndex());
+    void addChildItem(const SSHConfigurationData &config, const QString &parentName);
+
+    void load();
+    void save();
 };
 
 #endif

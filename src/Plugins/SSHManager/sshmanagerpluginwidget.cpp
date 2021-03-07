@@ -33,7 +33,8 @@ void SSHManagerTreeWidget::addSshInfo()
     data.port = ui->port->text();
     data.sshKey = ui->sshkey->text();
 
-    d->model->addChildItem(data);
+    // TODO: Allow a way to specify the Parent.
+    d->model->addChildItem(data, QStringLiteral("Default"));
     hideInfoPane();
 }
 

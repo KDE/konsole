@@ -23,9 +23,12 @@ PluginManager::PluginManager()
 {
 }
 
-PluginManager::~PluginManager() noexcept = default;
-
-
+PluginManager::~PluginManager() {
+    qDebug() << "Deleting the plugin manager";
+    for (IKonsolePlugin *plugin : d->plugins) {
+        delete plugin;
+    }
+}
 
 void PluginManager::loadAllPlugins()
 {
