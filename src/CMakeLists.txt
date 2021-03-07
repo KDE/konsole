@@ -105,6 +105,7 @@ add_subdirectory(session)
 add_subdirectory(characters)
 add_subdirectory(decoders)
 add_subdirectory(PluginSystem)
+add_subdirectory(Plugins)
 
 set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         BookmarkHandler.cpp
