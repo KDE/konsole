@@ -5,6 +5,8 @@ kcoreaddons_add_plugin(konsole_sshmanagerplugin
 SOURCES
     sshmanagerplugin.cpp
     sshmanagerpluginwidget.cpp
+    sshmanagermodel.cpp
+    sshconfigurationdata.cpp
     ${EXTRA_SSHPLUGIN_SRCS}
 JSON
     konsole_sshmanager.desktop
