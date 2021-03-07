@@ -39,6 +39,10 @@ public:
      * never store the pointer, as it can change during usage.
      */
     TerminalDisplay *currentTerminalDisplay();
+    QString name() const;
+
+protected:
+    void setName(const QString& pluginName);
 
 private:
     struct Private;

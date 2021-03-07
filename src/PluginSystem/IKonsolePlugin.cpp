@@ -12,7 +12,7 @@ K_PLUGIN_FACTORY(KonsolePluginFactory, registerPlugin<Konsole::IKonsolePlugin>(Q
 
 namespace Konsole {
 struct IKonsolePlugin::Private {
-
+    QString name;
 };
 
 IKonsolePlugin::IKonsolePlugin(QObject *parent, const QVariantList &args) :
@@ -23,9 +23,18 @@ IKonsolePlugin::IKonsolePlugin(QObject *parent, const QVariantList &args) :
 
 IKonsolePlugin::~IKonsolePlugin() = default;
 
-Konsole::TerminalDisplay * Konsole::IKonsolePlugin::currentTerminalDisplay()
+TerminalDisplay * IKonsolePlugin::currentTerminalDisplay()
 {
     return nullptr;
+}
+
+void IKonsolePlugin::setName(const QString& name)
+{
+    d->name = name;
+}
+
+QString IKonsolePlugin::name() const {
+    return d->name;
 }
 
 }

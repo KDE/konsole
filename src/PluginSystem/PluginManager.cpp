@@ -27,6 +27,7 @@ PluginManager::~PluginManager() noexcept = default;
 
 void PluginManager::loadAllPlugins()
 {
+    qDebug() << "Calling loadAllPlugins";
     KService::List services = KServiceTypeTrader::self()->query(QStringLiteral("Konsole/Plugin"));
 
     for(KService::Ptr service : services)
@@ -40,7 +41,9 @@ void PluginManager::loadAllPlugins()
 
         auto *plugin = factory->create<IKonsolePlugin>(this);
         d->plugins.push_back(plugin);
+        qDebug() << "Created" << plugin->name();
     }
+    qDebug() << "loadAllPlugins finished";
 }
 
 std::vector<IKonsolePlugin*> PluginManager::plugins() const
