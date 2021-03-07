@@ -385,6 +385,8 @@ void TabbedViewContainer::viewDestroyed(QObject *view)
     removeTab(idx);
     forgetView();
     _tabIconState.remove(widget);
+
+    Q_EMIT viewRemoved();
 }
 
 void TabbedViewContainer::forgetView()

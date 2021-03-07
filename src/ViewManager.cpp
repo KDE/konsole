@@ -687,6 +687,10 @@ TabbedViewContainer *ViewManager::createContainer()
            [this, container]() {
                containerViewsChanged(container);
            });
+    connect(container, &Konsole::TabbedViewContainer::viewRemoved, this,
+           [this, container]() {
+               containerViewsChanged(container);
+           });
 
     connect(container, &TabbedViewContainer::newViewRequest,
             this, &ViewManager::newViewRequest);

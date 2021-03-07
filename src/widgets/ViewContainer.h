@@ -187,6 +187,9 @@ Q_SIGNALS:
     /** Emitted when a view is added to the container. */
     void viewAdded(TerminalDisplay *view);
 
+    /** Emitted when a view is removed from container. */
+    void viewRemoved();
+
     /** detach the specific tab */
     void detachTab(int tabIdx);
 
