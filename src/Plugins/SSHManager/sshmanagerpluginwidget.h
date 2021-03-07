@@ -7,6 +7,8 @@ namespace Ui {
     class SSHTreeWidget;
 }
 
+class SSHManagerModel;
+
 class SSHManagerTreeWidget : public QWidget {
     Q_OBJECT
 public:
@@ -17,6 +19,9 @@ public:
     Q_SLOT void hideInfoPane();
     Q_SLOT void addSshInfo();
     Q_SLOT void clearSshInfo();
+
+    void setModel(SSHManagerModel *model);
+
 private:
     struct Private;
     std::unique_ptr<Ui::SSHTreeWidget> ui;

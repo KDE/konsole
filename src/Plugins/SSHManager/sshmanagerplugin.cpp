@@ -1,6 +1,7 @@
 #include "sshmanagerplugin.h"
 
 #include "sshmanagerpluginwidget.h"
+#include "sshmanagermodel.h"
 
 #include <QMainWindow>
 #include <QDockWidget>
@@ -10,16 +11,24 @@
 
 K_PLUGIN_CLASS_WITH_JSON(SSHManagerPlugin, "konsole_sshmanager.json")
 
-SSHManagerPlugin::SSHManagerPlugin(QObject *object, const QVariantList &args) :
-Konsole::IKonsolePlugin(object, args)
+struct SSHManagerPlugin::Private {
+    SSHManagerModel model;
+};
+
+SSHManagerPlugin::SSHManagerPlugin(QObject *object, const QVariantList &args)
+: Konsole::IKonsolePlugin(object, args)
+, d(std::make_unique<SSHManagerPlugin::Private>())
 {
     setName(QStringLiteral("SshManager"));
 }
+
+SSHManagerPlugin::~SSHManagerPlugin() = default;
 
 void SSHManagerPlugin::createWidgetsForMainWindow(QMainWindow *mainWindow)
 {
     auto *sshDockWidget = new QDockWidget(mainWindow);
     auto *managerWidget = new SSHManagerTreeWidget();
+    managerWidget->setModel(&d->model);
     sshDockWidget->setWidget(managerWidget);
     sshDockWidget->setWindowTitle(i18n("SSH Manager"));
     sshDockWidget->setObjectName(QStringLiteral("SSHManagerDock"));

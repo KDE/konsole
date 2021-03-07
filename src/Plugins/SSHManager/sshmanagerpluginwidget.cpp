@@ -1,9 +1,12 @@
 #include "sshmanagerpluginwidget.h"
 
+#include "sshmanagermodel.h"
+#include "sshconfigurationdata.h"
+
 #include "ui_sshwidget.h"
 
 struct SSHManagerTreeWidget::Private {
-
+    SSHManagerModel *model;
 };
 
 SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
@@ -24,6 +27,13 @@ SSHManagerTreeWidget::~SSHManagerTreeWidget() = default;
 
 void SSHManagerTreeWidget::addSshInfo()
 {
+    SSHConfigurationData data;
+    data.host = ui->hostname->text();
+    data.name = ui->name->text();
+    data.port = ui->port->text();
+    data.sshKey = ui->sshkey->text();
+
+    d->model->addChildItem(data);
     hideInfoPane();
 }
 
@@ -50,4 +60,10 @@ void SSHManagerTreeWidget::showInfoPane()
     ui->sshInfoPane->show();
     ui->btnAdd->show();
     ui->btnCancel->show();
+}
+
+void SSHManagerTreeWidget::setModel(SSHManagerModel* model)
+{
+    d->model = model;
+    ui->treeView->setModel(model);
 }
