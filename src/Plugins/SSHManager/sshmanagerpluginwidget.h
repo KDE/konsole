@@ -10,9 +10,13 @@ namespace Ui {
 class SSHManagerTreeWidget : public QWidget {
     Q_OBJECT
 public:
-    SSHManagerTreeWidget(QObject *parent = nullptr);
+    SSHManagerTreeWidget(QWidget *parent = nullptr);
     ~SSHManagerTreeWidget();
 
+    Q_SLOT void showInfoPane();
+    Q_SLOT void hideInfoPane();
+    Q_SLOT void addSshInfo();
+    Q_SLOT void clearSshInfo();
 private:
     struct Private;
     std::unique_ptr<Ui::SSHTreeWidget> ui;
