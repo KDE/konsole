@@ -18,7 +18,9 @@ struct PluginManager::Private {
     std::vector<IKonsolePlugin*> plugins;
 };
 
-PluginManager::PluginManager() {
+PluginManager::PluginManager()
+: d(std::make_unique<PluginManager::Private>())
+{
 }
 
 PluginManager::~PluginManager() noexcept = default;
@@ -27,23 +29,19 @@ PluginManager::~PluginManager() noexcept = default;
 
 void PluginManager::loadAllPlugins()
 {
-    qDebug() << "Calling loadAllPlugins";
-    KService::List services = KServiceTypeTrader::self()->query(QStringLiteral("Konsole/Plugin"));
-
-    for(KService::Ptr service : services)
-    {
-        KPluginFactory *factory = KPluginLoader(service->library()).factory();
-        if (!factory)
-        {
-            qDebug() << "KPluginFactory could not load the plugin:" << service->library();
+    QList<QObject*> pluginFactories = KPluginLoader::instantiatePlugins(QStringLiteral("konsoleplugins"));
+    for(QObject *pluginFactory : pluginFactories) {
+        auto factory = qobject_cast<KPluginFactory*>(pluginFactory);
+        if (!factory) {
             continue;
         }
 
-        auto *plugin = factory->create<IKonsolePlugin>(this);
+        auto *plugin = factory->create<IKonsolePlugin>();
+        if (!plugin) {
+            continue;
+        }
         d->plugins.push_back(plugin);
-        qDebug() << "Created" << plugin->name();
     }
-    qDebug() << "loadAllPlugins finished";
 }
 
 std::vector<IKonsolePlugin*> PluginManager::plugins() const

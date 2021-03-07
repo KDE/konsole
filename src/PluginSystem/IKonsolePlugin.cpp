@@ -8,8 +8,6 @@
 
 #include "IKonsolePlugin.h"
 
-K_PLUGIN_FACTORY(KonsolePluginFactory, registerPlugin<Konsole::IKonsolePlugin>(QStringLiteral("konsoleplugin"));)
-
 namespace Konsole {
 struct IKonsolePlugin::Private {
     QString name;
@@ -38,5 +36,3 @@ QString IKonsolePlugin::name() const {
 }
 
 }
-
-#include "IKonsolePlugin.moc"

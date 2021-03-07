@@ -11,3 +11,5 @@ target_link_libraries(konsolepluginsystem
     Qt5::Widgets
     konsoleprivate
 )
+
+install(TARGETS konsolepluginsystem ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
