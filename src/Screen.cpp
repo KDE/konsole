@@ -605,6 +605,7 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
     for (int line = startLine; line < startLine + count; line++) {
         const int length = qMin(_columns, _history->getLineLen(line));
         const int destLineOffset  = (line - startLine) * _columns;
+        const int lastColumn = (_history->getLineProperty(line) & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
 
         _history->getCells(line, 0, length, dest + destLineOffset);
 
@@ -614,7 +615,7 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
 
         // invert selected text
         if (_selBegin != -1) {
-            for (int column = 0; column < _columns; column++) {
+            for (int column = 0; column < lastColumn; column++) {
                 if (isSelected(column, line)) {
                     dest[destLineOffset + column].rendition |= RE_SELECTED;
                 }
@@ -630,6 +631,7 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
     for (int line = startLine; line < (startLine + count) ; line++) {
         int srcLineStartIndex  = line * _columns;
         int destLineStartIndex = (line - startLine) * _columns;
+        int lastColumn = (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
 
         for (int column = 0; column < _columns; column++) {
             int srcIndex = srcLineStartIndex + column;
@@ -638,7 +640,7 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
             dest[destIndex] = _screenLines[srcIndex / _columns].value(srcIndex % _columns, Screen::DefaultChar);
 
             // invert selected text
-            if (_selBegin != -1 && isSelected(column, line + _history->getLines())) {
+            if (_selBegin != -1 && isSelected(column, line + _history->getLines()) && column < lastColumn) {
                 dest[destIndex].rendition |= RE_SELECTED;
             }
         }
