@@ -163,7 +163,7 @@ int HistoryScrollFile::reflowLines(int columns)
         }
 
         // Now reflow the lines
-        while (reflowLineLen(startLine, endLine) > columns) {
+        while (reflowLineLen(startLine, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
             startLine += (qint64)columns * sizeof(Character);
             setNewLine(newLine, startLine, lineProperty | LINE_WRAPPED);
             reflowFile->add(reinterpret_cast<const char *>(&newLine), sizeof(reflowData));

@@ -186,7 +186,7 @@ int CompactHistoryScroll::reflowLines(int columns)
         }
 
         // if the current line > columns it will need a new line
-        if (curr_linelen > columns) {
+        if (curr_linelen > columns && !(getLineProperty(currentPos) & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
             bool removeLine = getLines() == getMaxLines();
             auto *curr_line = getCharacterBuffer(curr_linelen);
             LineProperty curr_line_property = getLineProperty(currentPos);

@@ -486,7 +486,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             }
 
             // If need to move to line below, copy from the current line, to the next one.
-            if (lineSize > new_columns) {
+            if (lineSize > new_columns && !(_lineProperties[currentPos] & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
                 auto values = _screenLines[currentPos].mid(new_columns);
                 _screenLines[currentPos].resize(new_columns);
                 _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
