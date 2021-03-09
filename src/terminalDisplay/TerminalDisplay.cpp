@@ -118,7 +118,6 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
     _screenWindow = window;
 
     if (!_screenWindow.isNull()) {
-        connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateLineProperties);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateImage);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::currentResultLineChanged , this , &Konsole::TerminalDisplay::updateImage);
         connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, this, [this]() {
@@ -436,7 +435,6 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 {
     _screenWindow->scrollBy(mode, amount, _scrollBar->scrollFullPage());
     _screenWindow->setTrackOutput(_screenWindow->atEndOfOutput());
-    updateLineProperties();
     updateImage();
     viewScrolledByUser();
 }
@@ -521,6 +519,7 @@ void TerminalDisplay::updateImage()
     Character* const newimg = _screenWindow->getImage();
     const int lines = _screenWindow->windowLines();
     const int columns = _screenWindow->windowColumns();
+    QVector<LineProperty> newLineProperties = _screenWindow->getLineProperties();
 
     _scrollBar->setScroll(_screenWindow->currentLine() , _screenWindow->lineCount());
 
@@ -609,12 +608,8 @@ void TerminalDisplay::updateImage()
             }
         }
 
-        //both the top and bottom halves of double height _lines must always be redrawn
-        //although both top and bottom halves contain the same characters, only
-        //the top one is actually
-        //drawn.
-        if (_lineProperties.count() > y) {
-            updateLine |= (_lineProperties[y] & LINE_DOUBLEHEIGHT_TOP);
+        if (y >= _lineProperties.count() || y >= newLineProperties.count() || _lineProperties[y] != newLineProperties[y]) {
+            updateLine = true;
         }
 
         // if the characters on the line are different in the old and the new _image
@@ -636,6 +631,7 @@ void TerminalDisplay::updateImage()
         // current line of the new _image
         memcpy((void*)currentLine, (const void*)newLine, columnsToUpdate * sizeof(Character));
     }
+    _lineProperties = newLineProperties;
 
     // if the new _image is smaller than the previous _image, then ensure that the area
     // outside the new _image is cleared
@@ -1550,15 +1546,6 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint,
 void TerminalDisplay::setExpandedMode(bool expand)
 {
     _headerBar->setExpandedMode(expand);
-}
-
-void TerminalDisplay::updateLineProperties()
-{
-    if (_screenWindow.isNull()) {
-        return;
-    }
-
-    _lineProperties = _screenWindow->getLineProperties();
 }
 
 void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)

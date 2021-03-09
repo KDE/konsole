@@ -351,11 +351,6 @@ public Q_SLOTS:
      * terminal screen ( see setScreenWindow() ) and redraw the display.
      */
     void updateImage();
-    /**
-     * Causes the terminal display to fetch the latest line status flags from the
-     * associated terminal screen ( see setScreenWindow() ).
-     */
-    void updateLineProperties();
 
     void setAutoCopySelectedText(bool enabled);
 
