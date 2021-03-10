@@ -460,7 +460,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     if (_enableReflowLines && new_columns != _columns) {
         int cursorLineCorrection = 0;
         if (_currentTerminalDisplay) {
-            // The 'zsh' works different from other shells when writting the command line.
+            // The 'zsh' works different from other shells when writing the command line.
             // It needs to identify the 'zsh' and calculate the new command line.
             auto sessionController = _currentTerminalDisplay->sessionController();
             auto terminal = sessionController->session()->foregroundProcessName();
