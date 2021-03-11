@@ -32,36 +32,9 @@
 
 using namespace Konsole;
 
-static bool profileIndexLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
-{
-    return p1->menuIndexAsInt() < p2->menuIndexAsInt();
-}
-
-static bool profileNameLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
-{
-    // Always put the Default/fallback profile at the top
-    if (p1->isFallback()) {
-        return true;
-    } else if (p2->isFallback()) {
-        return false;
-    }
-
-    return QString::localeAwareCompare(p1->name(), p2->name()) < 0;
-}
-
 static bool stringLessThan(const QString& p1, const QString& p2)
 {
     return QString::localeAwareCompare(p1, p2) < 0;
-}
-
-static void sortByIndexProfileList(QList<Profile::Ptr>& list)
-{
-    std::stable_sort(list.begin(), list.end(), profileIndexLessThan);
-}
-
-static void sortByNameProfileList(QList<Profile::Ptr>& list)
-{
-    std::stable_sort(list.begin(), list.end(), profileNameLessThan);
 }
 
 ProfileManager::ProfileManager()
@@ -247,41 +220,17 @@ void ProfileManager::loadAllProfiles()
 
 void ProfileManager::sortProfiles(QList<Profile::Ptr>& list)
 {
-    QList<Profile::Ptr> lackingIndices;
-    QList<Profile::Ptr> havingIndices;
-
-    for (const auto & i : list) {
-        if (i->menuIndexAsInt() == 0) {
-            lackingIndices.append(i);
-        } else {
-            havingIndices.append(i);
+    // Sort alphabetically
+    std::stable_sort(list.begin(), list.end(), [](const Profile::Ptr &p1, const Profile::Ptr &p2) {
+        // Always put the Default/fallback profile at the top
+        if (p1->isFallback()) {
+            return true;
+        } else if (p2->isFallback()) {
+            return false;
         }
-    }
 
-    // sort by index
-    sortByIndexProfileList(havingIndices);
-
-    // sort alphabetically those w/o an index
-    sortByNameProfileList(lackingIndices);
-
-    // Put those with indices in sequential order w/o any gaps
-    int i = 0;
-    for (i = 0; i < havingIndices.size(); ++i) {
-        Profile::Ptr tempProfile = havingIndices.at(i);
-        tempProfile->setProperty(Profile::MenuIndex, QString::number(i + 1));
-        havingIndices.replace(i, tempProfile);
-    }
-    // Put those w/o indices in sequential order
-    for (int j = 0; j < lackingIndices.size(); ++j) {
-        Profile::Ptr tempProfile = lackingIndices.at(j);
-        tempProfile->setProperty(Profile::MenuIndex, QString::number(j + 1 + i));
-        lackingIndices.replace(j, tempProfile);
-    }
-
-    // combine the 2 list: first those who had indices
-    list.clear();
-    list.append(havingIndices);
-    list.append(lackingIndices);
+        return QString::localeAwareCompare(p1->name(), p2->name()) < 0;
+    });
 }
 
 void ProfileManager::saveSettings()
@@ -302,7 +251,7 @@ QList<Profile::Ptr> ProfileManager::allProfiles()
     loadAllProfiles();
 
     auto loadedProfiles = _profiles.values();
-    sortByNameProfileList(loadedProfiles);
+    sortProfiles(loadedProfiles);
 
     return loadedProfiles;
 }

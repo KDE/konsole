@@ -731,8 +731,6 @@ public:
         return QKeySequence::fromString(property<QString>(Profile::PeekPrimaryKeySequence));
     }
 
-    int menuIndexAsInt() const;
-
     /** Return a list of all properties names and their type
      *  (for use with -p option).
      */

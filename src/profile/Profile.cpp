@@ -331,16 +331,6 @@ void Profile::registerProperty(const PropertyInfo& info)
     }
 }
 
-int Profile::menuIndexAsInt() const
-{
-    bool ok;
-    int index = menuIndex().toInt(&ok, 10);
-    if (ok) {
-        return index;
-    }
-    return 0;
-}
-
 const QStringList Profile::propertiesInfoList() const
 {
     QStringList info;

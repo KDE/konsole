@@ -156,10 +156,9 @@ public:
     Profile::Ptr fallbackProfile() const;
 
     /**
-     * Sorts the profile list by menuindex; those without an menuindex, sort by name.
-     *  The menuindex list is first and then the non-menuindex list.
+     * Sorts @p list of profiles alphabetically.
      *
-     * @param list The profile list to sort
+     * @param list The profiles list to sort
      */
     void sortProfiles(QList<Profile::Ptr> &list);
 
