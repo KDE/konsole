@@ -708,5 +708,7 @@ void TabbedViewContainer::setNavigationBehavior(int behavior)
 }
 
 void TabbedViewContainer::moveToNewTab(TerminalDisplay* display) {
+    // Ensure that the current terminal is not maximized so that the other views will be shown properly
+    activeViewSplitter()->handleMinimizeMaximize(false);
     addView(display);
 }
