@@ -48,9 +48,10 @@ public:
     ProfileList(bool addShortcuts, QObject *parent);
 
     /**
-     * Returns a list of actions representing profiles
+     * Returns a list of actions representing profiles, sorted by profile
+     * name.
      *
-     * The user-data associated with each action is the corresponding profile
+     * The user-data associated with each action is the corresponding profile.
      */
     QList<QAction *> actions();
 

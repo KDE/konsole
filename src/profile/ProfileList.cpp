@@ -17,6 +17,8 @@
 // Konsole
 #include "ProfileManager.h"
 
+#include <algorithm>
+
 using Konsole::Profile;
 using Konsole::ProfileList;
 
@@ -88,7 +90,7 @@ void ProfileList::updateAction(QAction* action , Profile::Ptr profile)
     action->setText(profile->name());
     action->setIcon(QIcon::fromTheme(profile->icon()));
 
-    Q_EMIT actionsChanged(_group->actions());
+    Q_EMIT actionsChanged(actions());
 }
 void ProfileList::shortcutChanged(const Profile::Ptr &profile, const QKeySequence& sequence)
 {
@@ -116,7 +118,7 @@ void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
         widget->removeAction(currentAction);
     }
 
-    widget->addActions(_group->actions());
+    widget->addActions(actions());
 }
 
 void ProfileList::addShortcutAction(const Profile::Ptr &profile)
@@ -135,7 +137,7 @@ void ProfileList::addShortcutAction(const Profile::Ptr &profile)
     for (QWidget *widget : qAsConst(_registeredWidgets)) {
         widget->addAction(action);
     }
-    Q_EMIT actionsChanged(_group->actions());
+    Q_EMIT actionsChanged(actions());
 
     updateEmptyAction();
 }
@@ -149,7 +151,7 @@ void ProfileList::removeShortcutAction(const Profile::Ptr &profile)
         for (QWidget *widget : qAsConst(_registeredWidgets)) {
             widget->removeAction(action);
         }
-        Q_EMIT actionsChanged(_group->actions());
+        Q_EMIT actionsChanged(actions());
     }
     updateEmptyAction();
 }
@@ -161,6 +163,20 @@ void ProfileList::triggered(QAction* action)
 
 QList<QAction*> ProfileList::actions()
 {
-    return _group->actions();
-}
+    auto actionsList = _group->actions();
+    std::sort(actionsList.begin(), actionsList.end(), [](QAction *a, QAction *b) {
+        // Remove '&', which is added by KAcceleratorManager
+        const QString aName = a->text().remove(QLatin1Char('&'));
+        const QString bName = b->text().remove(QLatin1Char('&'));
 
+        if (aName == QLatin1String("Default")) {
+            return true;
+        } else if (bName == QLatin1String("Default")) {
+            return false;
+        }
+
+        return QString::localeAwareCompare(aName, bName) < 0;
+    });
+
+    return actionsList;
+}
