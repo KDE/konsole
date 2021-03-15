@@ -236,8 +236,6 @@ void EditProfileDialog::save()
         return;
     }
 
-    const bool isFallback = _profile->isFallback();
-
     ProfileManager::instance()->changeProfile(_profile, _tempProfile->setProperties());
 
     // ensure that these settings are not undone by a call
@@ -249,14 +247,6 @@ void EditProfileDialog::save()
     }
 
     createTempProfile();
-
-    if (isFallback) {
-        // Needed to update the profile name in the dialog, if the user
-        // used "Apply" and the dialog is still open, since the fallback
-        // profile will have a unique name, e.g. "Profile 1", generated
-        // for it by the ProfileManager.
-        setProfile(_profile);
-    }
 
     _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 }
@@ -919,7 +909,7 @@ void EditProfileDialog::toggleAlternateScrolling(bool enable)
     updateTempProfileProperty(Profile::AlternateScrolling, enable);
 }
 
-void EditProfileDialog::toggleAllowColorFilter(bool enable) 
+void EditProfileDialog::toggleAllowColorFilter(bool enable)
 {
     updateTempProfileProperty(Profile::ColorFilterEnabled, enable);
 }

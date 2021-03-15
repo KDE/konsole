@@ -302,24 +302,12 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 {
     Q_ASSERT(profile);
 
-    const bool isFallback = profile->isFallback();
     const QString origPath = profile->path();
 
     const QString uniqueProfileName = generateUniqueName();
 
     // Don't save a profile with an empty name on disk
     persistent = persistent && !profile->name().isEmpty();
-
-    // If we are asked to store the fallback profile (which has an
-    // invalid path by design), we reset the path to an empty string
-    // which will make the profile writer automatically generate a
-    // proper path.
-    if (persistent && isFallback) {
-        profile->setProperty(Profile::UntranslatedName, uniqueProfileName);
-        profile->setProperty(Profile::Name, uniqueProfileName);
-        profile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
-        profile->setHidden(false);
-    }
 
     bool messageShown = false;
     // Insert the changes into the existing Profile instance
@@ -373,7 +361,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         // when creating a new profile, this works around a bug where
         // the newly created profile appears twice in the ProfileSettings
         // dialog
-        if (!isFallback && !origPath.isEmpty() && profile->path() != origPath) {
+        if (!origPath.isEmpty() && profile->path() != origPath) {
             // this is needed to include the old profile too
             _loadedAllProfiles = false;
             const QList<Profile::Ptr> availableProfiles = ProfileManager::instance()->allProfiles();
@@ -390,22 +378,8 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         }
     }
 
-    if (isFallback) {
-        // addProfile has to be called after a path has been set for
-        // "profile", otherwise the newly saved profile won't show up
-        // in the ProfileSettings dialog in the current Konsole window
-        addProfile(profile);
-        setDefaultProfile(profile);
-
-        // Since the profile object pointed to by _fallbackProfile has
-        // been given a name above, now init a fallback profile again.
-        // This way there is always a "Default" profile available in the
-        // context menu.
-        initFallbackProfile();
-    } else {
-        // notify the world about the change
-        Q_EMIT profileChanged(profile);
-    }
+    // Notify the world about the change
+    Q_EMIT profileChanged(profile);
 }
 
 void ProfileManager::addProfile(const Profile::Ptr &profile)
