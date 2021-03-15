@@ -923,8 +923,26 @@ void SessionController::editCurrentProfile()
         _editProfileDialog->deleteLater();
     }
 
+    auto profile = SessionManager::instance()->sessionProfile(session());
+    // Don't edit the Fallback profile, instead create a new one
+    if (profile->isFallback()) {
+        auto newProfile = Profile::Ptr(new Profile(profile));
+        newProfile->clone(profile, true);
+        const QString uniqueName = ProfileManager::instance()->generateUniqueName();
+        newProfile->setProperty(Profile::Name, uniqueName);
+        newProfile->setProperty(Profile::UntranslatedName, uniqueName);
+        profile = newProfile;
+        SessionManager::instance()->setSessionProfile(session(), profile);
+    }
+
     _editProfileDialog = new EditProfileDialog(QApplication::activeWindow());
-    _editProfileDialog->setProfile(SessionManager::instance()->sessionProfile(session()));
+    _editProfileDialog->setProfile(profile);
+
+    connect(_editProfileDialog, &QDialog::accepted, this, [profile]() {
+        ProfileManager::instance()->addProfile(profile);
+        ProfileManager::instance()->changeProfile(profile, profile->setProperties());
+    });
+
     _editProfileDialog->show();
 }
 

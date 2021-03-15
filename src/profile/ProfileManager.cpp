@@ -270,6 +270,19 @@ Profile::Ptr ProfileManager::fallbackProfile() const
     return _fallbackProfile;
 }
 
+QString ProfileManager::generateUniqueName() const
+{
+    const QStringList existingProfileNames = availableProfileNames();
+    int nameSuffix = 1;
+    QString uniqueProfileName;
+    do {
+        uniqueProfileName = QStringLiteral("Profile ") + QString::number(nameSuffix);
+        ++nameSuffix;
+    } while (existingProfileNames.contains(uniqueProfileName));
+
+    return uniqueProfileName;
+}
+
 QString ProfileManager::saveProfile(const Profile::Ptr &profile)
 {
     ProfileWriter writer;
@@ -292,16 +305,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     const bool isFallback = profile->isFallback();
     const QString origPath = profile->path();
 
-    const QStringList existingProfileNames = availableProfileNames();
-    // Generate a unique profile name
-    int nameSuffix = 1;
-    QString uniqueProfileName;
-    do {
-        uniqueProfileName = QStringLiteral("Profile ") + QString::number(nameSuffix);
-        ++nameSuffix;
-    } while (existingProfileNames.contains(uniqueProfileName));
-
-
+    const QString uniqueProfileName = generateUniqueName();
 
     // Don't save a profile with an empty name on disk
     persistent = persistent && !profile->name().isEmpty();
