@@ -90,12 +90,19 @@ void ProfileSettings::populateTable()
     connect(profilesList->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Konsole::ProfileSettings::tableSelectionChanged);
 }
 
-void ProfileSettings::tableSelectionChanged(const QItemSelection&)
+void ProfileSettings::tableSelectionChanged(const QItemSelection &selected)
 {
+    newProfileButton->setEnabled(true);
+
+    if (selected.isEmpty()) {
+        editProfileButton->setEnabled(false);
+        deleteProfileButton->setEnabled(false);
+        setAsDefaultButton->setEnabled(false);
+        return;
+    }
+
     const auto profile = currentProfile();
     const bool isNotDefault = profile != ProfileManager::instance()->defaultProfile();
-
-    newProfileButton->setEnabled(true);
 
     // See comment about isProfileWritable(profile) in editSelected()
     editProfileButton->setEnabled(isProfileWritable(profile));
@@ -126,14 +133,14 @@ void ProfileSettings::setSelectedAsDefault()
 
 void ProfileSettings::createProfile()
 {
-    // setup a temporary profile which is a clone of the selected profile
-    // or the default if no profile is selected
-    Profile::Ptr sourceProfile = currentProfile() ? currentProfile() : ProfileManager::instance()->defaultProfile();
-
-    Q_ASSERT(sourceProfile);
-
     auto newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
-    newProfile->clone(sourceProfile, true);
+
+    // If a profile is selected, clone its properties, otherwise the
+    // the fallback profile properties will be used
+    if (currentProfile()) {
+        newProfile->clone(currentProfile(), true);
+    }
+
     const QString uniqueName = ProfileManager::instance()->generateUniqueName();
     newProfile->setProperty(Profile::Name, uniqueName);
     newProfile->setProperty(Profile::UntranslatedName, uniqueName);
@@ -189,7 +196,7 @@ Profile::Ptr ProfileSettings::currentProfile() const
 {
     QItemSelectionModel* selection = profilesList->selectionModel();
 
-    if ((selection == nullptr) || selection->selectedRows().count() != 1) {
+    if ((selection == nullptr) || !selection->hasSelection()) {
         return Profile::Ptr();
     }
 
