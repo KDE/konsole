@@ -26,3 +26,4 @@ doxydoc/
 *.srctrlbm
 *.srctrldb
 *.srctrlprj
+.clang-format
