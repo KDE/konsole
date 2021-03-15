@@ -170,6 +170,11 @@ public:
     /** Returns the shortcut associated with a particular profile. */
     QKeySequence shortcut(Profile::Ptr profile) const;
 
+    /**
+     * Creates a unique name for a new profile, e.g. "Profile 1", "Profile 2" ...etc.
+     */
+    QString generateUniqueName() const;
+
 Q_SIGNALS:
 
     /** Emitted when a profile is added to the manager. */
