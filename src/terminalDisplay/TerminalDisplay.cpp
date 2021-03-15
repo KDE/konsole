@@ -1576,9 +1576,6 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         return;
     }
 
-    if (ev->button() != Qt::LeftButton) {
-        return;
-    }
     if (_screenWindow.isNull()) {
         return;
     }
@@ -1592,10 +1589,14 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         if(!_readOnly) {
             // Send just _ONE_ click event, since the first click of the double click
             // was already sent by the click handler
-            Q_EMIT mouseSignal(0, charColumn + 1,
+            Q_EMIT mouseSignal(ev->button() == Qt::LeftButton ? 0 : 2, charColumn + 1,
                              charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
-                             0);  // left button
+                             0);
         }
+        return;
+    }
+
+    if (ev->button() != Qt::LeftButton) {
         return;
     }
 
