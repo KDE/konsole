@@ -1264,21 +1264,23 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     // events then emit a mouse movement signal, unless the shift key is
     // being held down, which overrides this.
     if (_usesMouseTracking && !(ev->modifiers() & Qt::ShiftModifier)) {
-        int button = 3;
-        if ((ev->buttons() & Qt::LeftButton) != 0u) {
-            button = 0;
-        }
-        if ((ev->buttons() & Qt::MiddleButton) != 0u) {
-            button = 1;
-        }
-        if ((ev->buttons() & Qt::RightButton) != 0u) {
-            button = 2;
-        }
+        if (!_readOnly) {
+            int button = 3;
+            if ((ev->buttons() & Qt::LeftButton) != 0u) {
+                button = 0;
+            }
+            if ((ev->buttons() & Qt::MiddleButton) != 0u) {
+                button = 1;
+            }
+            if ((ev->buttons() & Qt::RightButton) != 0u) {
+                button = 2;
+            }
 
-        Q_EMIT mouseSignal(button,
-                         charColumn + 1,
-                         charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
-                         1);
+            Q_EMIT mouseSignal(button,
+                             charColumn + 1,
+                             charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
+                             1);
+        }
 
         return;
     }
@@ -1504,7 +1506,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
             //       outside the range. The procedure used in `mouseMoveEvent'
             //       applies here, too.
 
-            if (_usesMouseTracking && !(ev->modifiers() & Qt::ShiftModifier)) {
+            if (_usesMouseTracking && !(ev->modifiers() & Qt::ShiftModifier) && !_readOnly) {
                 Q_EMIT mouseSignal(0,
                                  charColumn + 1,
                                  charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 2);
@@ -1513,7 +1515,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
         _dragInfo.state = diNone;
     }
 
-    if (_usesMouseTracking &&
+    if (_usesMouseTracking && !_readOnly &&
             (ev->button() == Qt::RightButton || ev->button() == Qt::MiddleButton) &&
             !(ev->modifiers() & Qt::ShiftModifier)) {
         Q_EMIT mouseSignal(ev->button() == Qt::MiddleButton ? 1 : 2,
