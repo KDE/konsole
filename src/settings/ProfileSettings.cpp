@@ -134,10 +134,9 @@ void ProfileSettings::createProfile()
 
     auto newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
     newProfile->clone(sourceProfile, true);
-    // TODO: add number suffix when the name is taken
-    newProfile->setProperty(Profile::Name, i18nc("@item This will be used as part of the file name", "New Profile"));
-    newProfile->setProperty(Profile::UntranslatedName, QStringLiteral("New Profile"));
-    newProfile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
+    const QString uniqueName = ProfileManager::instance()->generateUniqueName();
+    newProfile->setProperty(Profile::Name, uniqueName);
+    newProfile->setProperty(Profile::UntranslatedName, uniqueName);
 
     // Consider https://blogs.kde.org/2009/03/26/how-crash-almost-every-qtkde-application-and-how-fix-it-0 before changing the below
     QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
