@@ -1416,10 +1416,23 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
+        _currentModes.mode[MODE_Mouse1000] = false;
+        _currentModes.mode[MODE_Mouse1001] = false;
+        _currentModes.mode[MODE_Mouse1002] = false;
+        _currentModes.mode[MODE_Mouse1003] = false;
+        _currentModes.mode[m] = true;
         Q_EMIT programRequestsMouseTracking(true);
         break;
     case MODE_Mouse1007:
         Q_EMIT enableAlternateScrolling(true);
+        break;
+    case MODE_Mouse1005:
+    case MODE_Mouse1006:
+    case MODE_Mouse1015:
+        _currentModes.mode[MODE_Mouse1005] = false;
+        _currentModes.mode[MODE_Mouse1006] = false;
+        _currentModes.mode[MODE_Mouse1015] = false;
+        _currentModes.mode[m] = true;
         break;
 
     case MODE_BracketedPaste:
@@ -1453,6 +1466,12 @@ void Vt102Emulation::resetMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
+        // Same behavior as xterm, these modes are mutually exclusive,
+        // and disabling any disables mouse tracking.
+        _currentModes.mode[MODE_Mouse1000] = false;
+        _currentModes.mode[MODE_Mouse1001] = false;
+        _currentModes.mode[MODE_Mouse1002] = false;
+        _currentModes.mode[MODE_Mouse1003] = false;
         Q_EMIT programRequestsMouseTracking(false);
         break;
     case MODE_Mouse1007:
