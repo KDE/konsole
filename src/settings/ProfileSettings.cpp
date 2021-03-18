@@ -145,16 +145,18 @@ void ProfileSettings::createProfile()
     newProfile->setProperty(Profile::Name, uniqueName);
     newProfile->setProperty(Profile::UntranslatedName, uniqueName);
 
-    // Consider https://blogs.kde.org/2009/03/26/how-crash-almost-every-qtkde-application-and-how-fix-it-0 before changing the below
-    QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
-    dialog.data()->setProfile(newProfile);
-    dialog.data()->selectProfileName();
+    auto *dialog = new EditProfileDialog(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setModal(true);
+    dialog->setProfile(newProfile);
+    dialog->selectProfileName();
 
-    if (dialog.data()->exec() == QDialog::Accepted) {
+    connect(dialog, &QDialog::accepted, this, [newProfile]() {
         ProfileManager::instance()->addProfile(newProfile);
         ProfileManager::instance()->changeProfile(newProfile, newProfile->setProperties());
-    }
-    delete dialog.data();
+    });
+
+    dialog->show();
 }
 void ProfileSettings::editSelected()
 {
@@ -167,29 +169,11 @@ void ProfileSettings::editSelected()
         return;
     }
 
-    EditProfileDialog *profileDialog = nullptr;
-    const auto sessionsList = SessionManager::instance()->sessions();
-    for (const Session *session : sessionsList) {
-        for (TerminalDisplay *terminalDisplay : session->views()) {
-            // Searching for already open EditProfileDialog instances
-            // for this profile
-            profileDialog = terminalDisplay->sessionController()->profileDialogPointer();
-            if (profileDialog == nullptr) {
-                continue;
-            }
-
-            if (profile->name() == profileDialog->lookupProfile()->name()
-                && profileDialog->isVisible()) {
-                // close opened edit dialog
-                profileDialog->close();
-            }
-        }
-    }
-
-    EditProfileDialog dialog(this);
-
-    dialog.setProfile(profile);
-    dialog.exec();
+    auto *dialog = new EditProfileDialog(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setModal(true);
+    dialog->setProfile(profile);
+    dialog->show();
 }
 
 Profile::Ptr ProfileSettings::currentProfile() const

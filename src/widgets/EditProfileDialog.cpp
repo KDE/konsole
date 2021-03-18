@@ -1117,6 +1117,7 @@ void EditProfileDialog::showFontDialog()
 {
     if (_fontDialog == nullptr) {
         _fontDialog = new FontDialog(this);
+        _fontDialog->setModal(true);
         connect(_fontDialog, &FontDialog::fontChanged, this, [this](const QFont &font) {
             preview(Profile::Font, font);
             updateFontPreview(font);
@@ -1129,13 +1130,12 @@ void EditProfileDialog::showFontDialog()
         });
         connect(_fontDialog, &FontDialog::rejected, this, [this]() {
             unpreview(Profile::Font);
-            const QFont font = _profile->font();
-            updateFontPreview(font);
+            updateFontPreview(_profile->font());
         });
     }
-    const QFont font = _profile->font();
-    _fontDialog->setFont(font);
-    _fontDialog->exec();
+
+    _fontDialog->setFont(_profile->font());
+    _fontDialog->show();
 }
 
 void EditProfileDialog::updateFontPreview(QFont font)
@@ -1487,9 +1487,9 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
         translator = _keyManager->defaultTranslator();
     }
 
-    Q_ASSERT(translator);
-
-    auto editor = new KeyBindingEditor(this);
+    auto *editor = new KeyBindingEditor(this);
+    editor->setAttribute(Qt::WA_DeleteOnClose);
+    editor->setModal(true);
 
     if (translator != nullptr) {
         editor->setup(translator, lookupProfile()->keyBindings(), isNewTranslator);
@@ -1497,11 +1497,10 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
     connect(editor, &Konsole::KeyBindingEditor::updateKeyBindingsListRequest,
             this, &Konsole::EditProfileDialog::updateKeyBindingsList);
-
     connect(editor, &Konsole::KeyBindingEditor::updateTempProfileKeyBindingsRequest,
             this, &Konsole::EditProfileDialog::updateTempProfileProperty);
 
-    editor->exec();
+    editor->show();
 }
 
 void EditProfileDialog::newKeyBinding()

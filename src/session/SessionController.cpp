@@ -948,11 +948,13 @@ void SessionController::editCurrentProfile()
 
 void SessionController::renameSession()
 {
-    const QString &sessionLocalTabTitleFormat = session()->tabTitleFormat(Session::LocalTabTitle);
-    const QString &sessionRemoteTabTitleFormat = session()->tabTitleFormat(Session::RemoteTabTitle);
-    const QColor &sessionTabColor = session()->color();
+    const QString sessionLocalTabTitleFormat = session()->tabTitleFormat(Session::LocalTabTitle);
+    const QString sessionRemoteTabTitleFormat = session()->tabTitleFormat(Session::RemoteTabTitle);
+    const QColor sessionTabColor = session()->color();
 
-    QScopedPointer<RenameTabDialog> dialog(new RenameTabDialog(QApplication::activeWindow()));
+    auto *dialog = new RenameTabDialog(QApplication::activeWindow());
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setModal(true);
     dialog->setTabTitleText(sessionLocalTabTitleFormat);
     dialog->setRemoteTabTitleText(sessionRemoteTabTitleFormat);
     dialog->setColor(sessionTabColor);
@@ -963,16 +965,10 @@ void SessionController::renameSession()
         dialog->focusTabTitleText();
     }
 
-    QPointer<Session> guard(session());
-    int result = dialog->exec();
-    if (guard.isNull()) {
-        return;
-    }
-
-    if (result != 0) {
-        const QString &tabTitle = dialog->tabTitleText();
-        const QString &remoteTabTitle = dialog->remoteTabTitleText();
-        const QColor &tabColor = dialog->color();
+    connect(dialog, &QDialog::accepted, this, [=]() {
+        const QString tabTitle = dialog->tabTitleText();
+        const QString remoteTabTitle = dialog->remoteTabTitleText();
+        const QColor tabColor = dialog->color();
 
         if (tabTitle != sessionLocalTabTitleFormat) {
             session()->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
@@ -992,7 +988,9 @@ void SessionController::renameSession()
             Q_EMIT tabColoredByUser(true);
             snapshot();
         }
-    }
+    });
+
+    dialog->show();
 }
 
 // This is called upon Menu->Close Sesssion and right-click on tab->Close Tab
@@ -1198,7 +1196,9 @@ void SessionController::copyInputToSelectedTabs()
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
     }
 
-    QPointer<CopyInputDialog> dialog = new CopyInputDialog(view());
+    auto *dialog = new CopyInputDialog(view());
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setModal(true);
     dialog->setMasterSession(session());
 
     const QList<Session*> sessionsList = _copyToGroup->sessions();
@@ -1208,13 +1208,7 @@ void SessionController::copyInputToSelectedTabs()
 
     dialog->setChosenSessions(currentGroup);
 
-    QPointer<Session> guard(session());
-    int result = dialog->exec();
-    if (guard.isNull()) {
-        return;
-    }
-
-    if (result == QDialog::Accepted) {
+    connect(dialog, &QDialog::accepted, this, [=]() {
         QSet<Session*> newGroup = dialog->chosenSessions();
         newGroup.remove(session());
 
@@ -1231,7 +1225,9 @@ void SessionController::copyInputToSelectedTabs()
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
         snapshot();
         Q_EMIT copyInputChanged(this);
-    }
+    });
+
+    dialog->show();
 }
 
 void SessionController::copyInputToNone()
@@ -1580,9 +1576,11 @@ void SessionController::changeSearchMatch()
 }
 void SessionController::showHistoryOptions()
 {
-    QScopedPointer<HistorySizeDialog> dialog(new HistorySizeDialog(QApplication::activeWindow()));
-    const HistoryType& currentHistory = session()->historyType();
+    auto *dialog = new HistorySizeDialog(QApplication::activeWindow());
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setModal(true);
 
+    const HistoryType &currentHistory = session()->historyType();
     if (currentHistory.isEnabled()) {
         if (currentHistory.isUnlimited()) {
             dialog->setMode(Enum::UnlimitedHistory);
@@ -1594,15 +1592,11 @@ void SessionController::showHistoryOptions()
         dialog->setMode(Enum::NoHistory);
     }
 
-    QPointer<Session> guard(session());
-    int result = dialog->exec();
-    if (guard.isNull()) {
-        return;
-    }
-
-    if (result != 0) {
+    connect(dialog, &QDialog::accepted, this, [this, dialog]() {
         scrollBackOptionsChanged(dialog->mode(), dialog->lineCount());
-    }
+    });
+
+    dialog->show();
 }
 void SessionController::sessionResizeRequest(const QSize& size)
 {
