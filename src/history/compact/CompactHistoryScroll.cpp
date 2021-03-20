@@ -53,7 +53,7 @@ void CompactHistoryScroll::addLine(bool previousWrapped)
 
 int CompactHistoryScroll::getLines()
 {
-    return _lines.size();
+    return static_cast<int>(_lines.size());
 }
 
 int CompactHistoryScroll::getMaxLines()
@@ -63,7 +63,7 @@ int CompactHistoryScroll::getMaxLines()
 
 int CompactHistoryScroll::getLineLen(int lineNumber)
 {
-    if ((lineNumber < 0) || ((size_t)lineNumber >= _lines.size())) {
+    if ((lineNumber < 0) || (static_cast<size_t>(lineNumber) >= _lines.size())) {
         //qDebug() << "requested line invalid: 0 < " << lineNumber << " < " <<_lines.size();
         //Q_ASSERT(lineNumber >= 0 && lineNumber < _lines.size());
         return 0;
@@ -78,7 +78,7 @@ void CompactHistoryScroll::getCells(int lineNumber, int startColumn, int count, 
     if (count == 0) {
         return;
     }
-    Q_ASSERT(lineNumber < _lines.size());
+    Q_ASSERT(static_cast<size_t>(lineNumber) < _lines.size());
     auto line = _lines[lineNumber].get();
     Q_ASSERT(startColumn >= 0);
     Q_ASSERT(static_cast<unsigned int>(startColumn) <= line->getLength() - count);
@@ -139,7 +139,7 @@ void CompactHistoryScroll::setLineAt(int position, bool previousWrapped)
 
 bool CompactHistoryScroll::isWrappedLine(int lineNumber)
 {
-    Q_ASSERT(lineNumber < _lines.size());
+    Q_ASSERT(static_cast<size_t>(lineNumber) < _lines.size());
     return _lines[lineNumber]->isWrapped();
 }
 
