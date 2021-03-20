@@ -123,8 +123,6 @@ public:
      */
     void setShowMenuAction(QAction *action);
 
-    EditProfileDialog *profileDialogPointer();
-
     // reimplemented
     QUrl url() const override;
     QString currentDir() const override;
@@ -350,7 +348,6 @@ private:
     QStringList _bookmarkValidProgramsToClear;
 
     bool _isSearchBarEnabled;
-    QPointer<EditProfileDialog> _editProfileDialog;
 
     QString _searchText;
     QPointer<IncrementalSearchBar> _searchBar;

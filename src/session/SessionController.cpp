@@ -120,7 +120,6 @@ SessionController::SessionController(Session* sessionParam, TerminalDisplay* vie
     , _showMenuAction(nullptr)
     , _bookmarkValidProgramsToClear(QStringList())
     , _isSearchBarEnabled(false)
-    , _editProfileDialog(nullptr)
     , _searchBar(viewParam->searchBar())
     , _monitorProcessFinish(false)
     , _escapedUrlFilter(nullptr)
@@ -248,9 +247,6 @@ SessionController::~SessionController()
 {
     _allControllers.remove(this);
 
-    if (!_editProfileDialog.isNull()) {
-        _editProfileDialog->deleteLater();
-    }
     if(factory() != nullptr) {
         factory()->removeClient(this);
     }
@@ -900,29 +896,8 @@ void SessionController::changeCodec(QTextCodec* codec)
     session()->setCodec(codec);
 }
 
-EditProfileDialog* SessionController::profileDialogPointer()
-{
-    return _editProfileDialog.data();
-}
-
 void SessionController::editCurrentProfile()
 {
-    // Searching for Edit profile dialog opened with the same profile
-    for (SessionController *controller : qAsConst(_allControllers)) {
-        if ( (controller->profileDialogPointer() != nullptr)
-             && controller->profileDialogPointer()->isVisible()
-             && (controller->profileDialogPointer()->lookupProfile()
-                 == SessionManager::instance()->sessionProfile(session())) ) {
-            controller->profileDialogPointer()->close();
-        }
-    }
-
-    // NOTE bug311270: For to prevent the crash, the profile must be reset.
-    if (!_editProfileDialog.isNull()) {
-        // exists but not visible
-        _editProfileDialog->deleteLater();
-    }
-
     auto profile = SessionManager::instance()->sessionProfile(session());
     // Don't edit the Fallback profile, instead create a new one
     if (profile->isFallback()) {
@@ -935,15 +910,17 @@ void SessionController::editCurrentProfile()
         SessionManager::instance()->setSessionProfile(session(), profile);
     }
 
-    _editProfileDialog = new EditProfileDialog(QApplication::activeWindow());
-    _editProfileDialog->setProfile(profile);
+    auto *dialog = new EditProfileDialog(QApplication::activeWindow());
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setModal(true);
+    dialog->setProfile(profile);
 
-    connect(_editProfileDialog, &QDialog::accepted, this, [profile]() {
+    connect(dialog, &QDialog::accepted, this, [profile]() {
         ProfileManager::instance()->addProfile(profile);
         ProfileManager::instance()->changeProfile(profile, profile->setProperties());
     });
 
-    _editProfileDialog->show();
+    dialog->show();
 }
 
 void SessionController::renameSession()
