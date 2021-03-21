@@ -1255,10 +1255,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     processFilters();
 
     _filterChain->mouseMoveEvent(this, ev, charLine, charColumn);
-    // for auto-hiding the cursor, we need mouseTracking
-    if (ev->buttons() == Qt::NoButton) {
-        return;
-    }
 
     // if the program running in the terminal is interested in Mouse Tracking
     // events then emit a mouse movement signal, unless the shift key is
@@ -1282,6 +1278,11 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
                              1);
         }
 
+        return;
+    }
+
+    // for auto-hiding the cursor, we need mouseTracking
+    if (ev->buttons() == Qt::NoButton) {
         return;
     }
 
