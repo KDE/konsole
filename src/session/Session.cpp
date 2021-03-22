@@ -118,7 +118,7 @@ Session::Session(QObject* parent) :
 
     connect(_emulation, &Konsole::Emulation::sessionAttributeChanged, this, &Konsole::Session::setSessionAttribute);
     connect(_emulation, &Konsole::Emulation::bell, this, [this]() {
-        Q_EMIT bellRequest(i18n("Bell in session '%1'", _nameTitle));
+        Q_EMIT bellRequest(i18n("Bell in '%1' (Session '%2')", _displayTitle, _nameTitle));
         this->setPendingNotification(Notification::Bell);
     });
     connect(_emulation, &Konsole::Emulation::zmodemDownloadDetected, this, &Konsole::Session::fireZModemDownloadDetected);
@@ -655,7 +655,7 @@ void Session::silenceTimerDone()
     }
 
     KNotification::event(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"),
-            i18n("Silence in session '%1'", _nameTitle), QPixmap(),
+            i18n("Silence in '%1' (Session '%2')", _displayTitle, _nameTitle), QPixmap(),
             QApplication::activeWindow(),
             KNotification::CloseWhenWidgetActivated);
     setPendingNotification(Notification::Silence);
@@ -1741,7 +1741,7 @@ void Session::handleActivity()
 
     if (_monitorActivity && !_notifiedActivity) {
         KNotification::event(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"),
-                             i18n("Activity in session '%1'", _nameTitle), QPixmap(),
+                             i18n("Activity in '%1' (Session '%2')", _displayTitle, _nameTitle), QPixmap(),
                              QApplication::activeWindow(),
                              KNotification::CloseWhenWidgetActivated);
 
