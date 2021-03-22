@@ -243,6 +243,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _drawOverlay(false)
     , _scrollBar(nullptr)
     , _terminalColor(nullptr)
+    , _terminalFont(std::make_unique<TerminalFont>(this))
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -316,8 +317,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 
     _terminalColor = new TerminalColor(this);
     connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::setPalette);
-
-    _terminalFont = new TerminalFont(this);
 
     _terminalPainter = new TerminalPainter(this);
     connect(this, &TerminalDisplay::drawContents, _terminalPainter, &TerminalPainter::drawContents);

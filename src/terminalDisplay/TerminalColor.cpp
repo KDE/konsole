@@ -20,8 +20,8 @@
 namespace Konsole
 {
 
-    TerminalColor::TerminalColor(QWidget *parent)
-        : QWidget(parent)
+    TerminalColor::TerminalColor(QObject *parent)
+        : QObject(parent)
         , m_opacity(1.0)
         , m_blendColor(qRgba(0, 0, 0, 0xff))
         , m_cursorColor(QColor())
@@ -112,7 +112,7 @@ namespace Konsole
             default:
                 break;
         }
-        return QWidget::event(event);
+        return QObject::event(event);
     }
     
     void TerminalColor::onColorsChanged() 

@@ -299,7 +299,7 @@ public:
 
     TerminalFont *terminalFont() const
     {
-        return _terminalFont;
+        return _terminalFont.get();
     }
 
     bool cursorBlinking() const
@@ -746,7 +746,7 @@ private:
     TerminalPainter *_terminalPainter;
     TerminalScrollBar *_scrollBar;
     TerminalColor *_terminalColor;
-    TerminalFont *_terminalFont;
+    std::unique_ptr<TerminalFont> _terminalFont;
 
     std::unique_ptr<KonsolePrintManager> _printManager;
 };

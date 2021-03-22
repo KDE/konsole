@@ -24,11 +24,11 @@ namespace Konsole
     class Profile;
     class ColorScheme;
 
-    class KONSOLEPRIVATE_EXPORT TerminalColor : public QWidget
+    class KONSOLEPRIVATE_EXPORT TerminalColor : public QObject
     {
         Q_OBJECT
     public:
-        explicit TerminalColor(QWidget *parent);
+        explicit TerminalColor(QObject *parent);
 
         void applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint randomSeed);
 

@@ -23,7 +23,7 @@
 namespace Konsole
 {
     TerminalFont::TerminalFont(QWidget *parent)
-        : QWidget(parent)
+        : m_parent(parent)
         , m_lineSpacing(0)
         , m_fontHeight(1)
         , m_fontWidth(1)
@@ -90,7 +90,7 @@ namespace Konsole
         // italic, etc) are stored in QFont independently, in almost all cases styleName is not needed.
         newFont.setStyleName(QString());
 
-        if (newFont == qobject_cast<QWidget*>(parent())->font()) {
+        if (newFont == qobject_cast<QWidget*>(m_parent)->font()) {
             // Do not process the same font again
             return;
         }
@@ -124,18 +124,18 @@ namespace Konsole
             qCDebug(KonsoleDebug) << " System  : " << nonMatching;
         }
 
-        qobject_cast<QWidget*>(parent())->setFont(newFont);
+        qobject_cast<QWidget*>(m_parent)->setFont(newFont);
         fontChange(newFont);
     }
 
     QFont TerminalFont::getVTFont() const
     {
-        return qobject_cast<QWidget*>(parent())->font();
+        return qobject_cast<QWidget*>(m_parent)->font();
     }
 
     void TerminalFont::increaseFontSize()
     {
-        QFont font = qobject_cast<QWidget*>(parent())->font();
+        QFont font = qobject_cast<QWidget*>(m_parent)->font();
         font.setPointSizeF(font.pointSizeF() + 1);
         setVTFont(font);
     }
@@ -144,7 +144,7 @@ namespace Konsole
     {
         const qreal MinimumFontSize = 6;
 
-        QFont font = qobject_cast<QWidget*>(parent())->font();
+        QFont font = qobject_cast<QWidget*>(m_parent)->font();
         font.setPointSizeF(qMax(font.pointSizeF() - 1, MinimumFontSize));
         setVTFont(font);
     }
@@ -153,7 +153,7 @@ namespace Konsole
     {
         const qreal MinimumFontSize = 6;
 
-        TerminalDisplay *display = qobject_cast<TerminalDisplay*>(parent());
+        TerminalDisplay *display = qobject_cast<TerminalDisplay*>(m_parent);
         QFont font = display->font();
         Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(display->sessionController()->session());
         const qreal defaultFontSize = currentProfile->font().pointSizeF();
@@ -164,7 +164,7 @@ namespace Konsole
     void TerminalFont::setLineSpacing(uint i)
     {
         m_lineSpacing = i;
-        fontChange(qobject_cast<QWidget*>(parent())->font());
+        fontChange(qobject_cast<QWidget*>(m_parent)->font());
     }
 
     uint TerminalFont::lineSpacing() const
@@ -204,7 +204,7 @@ namespace Konsole
 
     void TerminalFont::fontChange(const QFont &)
     {
-        QFontMetrics fm(qobject_cast<QWidget*>(parent())->font());
+        QFontMetrics fm(qobject_cast<QWidget*>(m_parent)->font());
         m_fontHeight = fm.height() + m_lineSpacing;
 
         Q_ASSERT(m_fontHeight > 0);
@@ -217,8 +217,7 @@ namespace Konsole
 
         m_fontAscent = fm.ascent();
 
-        qobject_cast<TerminalDisplay*>(parent())->propagateSize();
-        update();
+        qobject_cast<TerminalDisplay*>(m_parent)->propagateSize();
     }
 
 }

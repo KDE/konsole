@@ -18,9 +18,8 @@ class QFont;
 namespace Konsole
 {
 
-    class TerminalFont : public QWidget
+    class TerminalFont
     {
-        Q_OBJECT
     public:
         explicit TerminalFont(QWidget *parent = nullptr);
         ~TerminalFont() = default;
@@ -48,6 +47,7 @@ namespace Konsole
         void fontChange(const QFont &);
 
     private:
+        QWidget *m_parent;
         uint m_lineSpacing;
         int m_fontHeight;
         int m_fontWidth;
