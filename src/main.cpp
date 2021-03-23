@@ -310,6 +310,33 @@ void fillAboutData(KAboutData &aboutData)
     aboutData.addAuthor(i18nc("@info:credit", "Lars Doelle"),
                         i18nc("@info:credit", "Original author"),
                         QStringLiteral("lars.doelle@on-line.de"));
+    aboutData.addCredit(i18nc("@info:credit", "Ahmad Samir"),
+                        i18nc("@info:credit", "Major refactoring, bug fixes and major improvements"),
+                        QStringLiteral("a.samirh78@gmail.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Carlos Alves"),
+                        i18nc("@info:credit", "Major refactoring, bug fixes and major improvements"),
+                        QStringLiteral("cbc.alves@gmail.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Tomaz Canabrava"),
+                        i18nc("@info:credit", "Major refactoring, bug fixes and major improvements"),
+                        QStringLiteral("tcanabrava@kde.org"));
+    aboutData.addCredit(i18nc("@info:credit", "Gustavo Carneiro"),
+                        i18nc("@info:credit", "Major refactoring, bug fixes and major improvements"),
+                        QStringLiteral("gcarneiroa@hotmail.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Edwin Pujols"),
+                        i18nc("@info:credit", "Bug fixes and general improvements"),
+                        QStringLiteral("edwin.pujols5@outlook.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Martin T. H. Sandsmark"),
+                        i18nc("@info:credit", "Bug fixes and general improvements"),
+                        QStringLiteral("martin.sandsmark@kde.org"));
+    aboutData.addCredit(i18nc("@info:credit", "Nate Graham"),
+                        i18nc("@info:credit", "Bug fixes and general improvements"),
+                        QStringLiteral("nate@kde.org"));
+    aboutData.addCredit(i18nc("@info:credit", "Mariusz Glebocki"),
+                        i18nc("@info:credit", "Bug fixes and major improvements"),
+                        QStringLiteral("mglb@arccos-1.net"));
+    aboutData.addCredit(i18nc("@info:credit", "Thomas Surrel"),
+                        i18nc("@info:credit", "Bug fixes and general improvements"),
+                        QStringLiteral("thomas.surrel@protonmail.com"));
     aboutData.addCredit(i18nc("@info:credit", "Jekyll Wu"),
                         i18nc("@info:credit", "Bug fixes and general improvements"),
                         QStringLiteral("adaptee@gmail.com"));
