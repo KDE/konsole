@@ -338,6 +338,9 @@ public:
     // returns the position of the cursor in columns and lines
     QPoint cursorPosition() const;
 
+    // returns 0 - not selecting, 1 - pending selection (button pressed but no movement yet), 2 - selecting
+    int selectionState() const;
+
 public Q_SLOTS:
     /**
      * Scrolls current ScreenWindow

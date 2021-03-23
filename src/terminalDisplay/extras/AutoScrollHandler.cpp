@@ -6,6 +6,7 @@
 */
 
 #include "AutoScrollHandler.h"
+#include "../TerminalDisplay.h"
 #include <QApplication>
 #include <QAccessible>
 
@@ -42,6 +43,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
     case QEvent::MouseMove: {
         auto* mouseEvent = static_cast<QMouseEvent*>(event);
         bool mouseInWidget = widget()->rect().contains(mouseEvent->pos());
+        auto* terminalDisplay = static_cast<TerminalDisplay*>(parent());
         if (mouseInWidget) {
             if (_timerId != 0) {
                 killTimer(_timerId);
@@ -49,7 +51,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
 
             _timerId = 0;
         } else {
-            if ((_timerId == 0) && ((mouseEvent->buttons() & Qt::LeftButton) != 0U)) {
+            if ((_timerId == 0) && terminalDisplay->selectionState() != 0 && ((mouseEvent->buttons() & Qt::LeftButton) != 0U)) {
                 _timerId = startTimer(100);
             }
         }

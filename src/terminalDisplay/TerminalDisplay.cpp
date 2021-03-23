@@ -2886,3 +2886,8 @@ Character TerminalDisplay::getCursorCharacter(int column, int line)
 {
     return _image[loc(column, line)];
 }
+
+int TerminalDisplay::selectionState() const
+{
+    return _actSel;
+}
