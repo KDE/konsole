@@ -109,6 +109,7 @@ add_subdirectory(decoders)
 add_subdirectory(plugins)
 
 set(konsoleprivate_SRCS ${windowadaptors_SRCS}
+                        AppColorSchemeChooser.cpp
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
                         CheckableSessionModel.cpp

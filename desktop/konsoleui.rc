@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<gui name="konsole" version="18">
+<gui name="konsole" version="19">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -39,6 +39,7 @@
             <DefineGroup name="session-settings"/>
             <Action name="manage-profiles"/>
             <Action name="show-menubar"/>
+            <Action name="colorscheme-menu"/>
             <Separator/>
             <Action name="view-full-screen"/>
             <Separator/>

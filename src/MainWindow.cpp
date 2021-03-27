@@ -6,6 +6,7 @@
 
 // Own
 #include "MainWindow.h"
+#include "AppColorSchemeChooser.h"
 
 // Qt
 #include <QMenu>
@@ -336,6 +337,8 @@ void MainWindow::setupActions()
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), &QMenuBar::setVisible, collection);
     collection->setDefaultShortcut(_toggleMenuBarAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_M);
+    // Set up themes
+    actionCollection()->addAction(QStringLiteral("colorscheme-menu"), new AppColorSchemeChooser(actionCollection()));
 
     // Full Screen
     menuAction = KStandardAction::fullScreen(this, &MainWindow::viewFullScreen, this, collection);
