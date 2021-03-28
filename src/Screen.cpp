@@ -1245,6 +1245,8 @@ void Screen::clearEntireScreen()
 void Screen::helpAlign()
 {
     clearImage(loc(0, 0), loc(_columns - 1, _lines - 1), 'E');
+    _cuY = 0;
+    _cuX = 0;
 }
 
 void Screen::clearToEndOfLine()
