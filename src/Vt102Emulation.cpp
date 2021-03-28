@@ -780,6 +780,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
                                Q_EMIT imageResizeRequest(QSize(q, p)); // Note columns (x), rows (y) in QSize
                                break;
 
+    case token_csi_ps('t',   18) : reportSize();          break;
     // change tab text color : \e[28;<color>t  color: 0-16,777,215
     case token_csi_ps('t',   28) : /* IGNORED: konsole-specific KDE3-era extension, not implemented */ break;
 
@@ -1110,6 +1111,13 @@ void Vt102Emulation::reportCursorPosition()
 {
     char tmp[30];
     snprintf(tmp, sizeof(tmp), "\033[%d;%dR", _currentScreen->getCursorY() + 1, _currentScreen->getCursorX() + 1);
+    sendString(tmp);
+}
+
+void Vt102Emulation::reportSize()
+{
+    char tmp[30];
+    snprintf(tmp, sizeof(tmp), "\033[8;%d;%dt", _currentScreen->getLines(), _currentScreen->getColumns());
     sendString(tmp);
 }
 

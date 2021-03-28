@@ -146,6 +146,7 @@ private:
     void reportStatus();
     void reportAnswerBack();
     void reportCursorPosition();
+    void reportSize();
     void reportTerminalParms(int p);
 
     // clears the screen and resizes it to the specified
