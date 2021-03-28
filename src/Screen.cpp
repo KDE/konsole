@@ -754,6 +754,7 @@ void Screen::reset()
     // Clear screen, but preserve the current line
     scrollUp(0, _cuY);
     _cuY = 0;
+    _cuX = 0;
 
     _currentModes[MODE_Origin] = 0;
     _savedModes[MODE_Origin] = 0;
@@ -774,6 +775,7 @@ void Screen::reset()
     // Other terminal emulators reset the entire scroll history during a reset
     //    setScroll(getScroll(), false);
 
+    initTabStops();
     setDefaultRendition();
     saveCursor();
 }
