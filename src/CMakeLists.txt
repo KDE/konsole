@@ -245,7 +245,7 @@ set_target_properties(konsoleprivate PROPERTIES
 
 install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 
-set(konsole_KDEINIT_SRCS
+set(konsole_SRCS
    Application.cpp
    MainWindow.cpp
    main.cpp
@@ -261,10 +261,10 @@ set(konsole_KDEINIT_SRCS
 
 
 # Sets the icon on Windows and OSX
-ecm_add_app_icon(kdeinit_konsole ICONS ${ICONS_SRCS})
+ecm_add_app_icon(konsole ICONS ${ICONS_SRCS})
 
-kf5_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
-target_link_libraries(kdeinit_konsole
+add_executable(konsole ${konsole_SRCS})
+target_link_libraries(konsole
   konsoleprivate
   KF5::XmlGui
   KF5::WindowSystem
@@ -287,8 +287,7 @@ if(APPLE)
         MACOSX_BUNDLE_COPYRIGHT "1997-2020 The Konsole Developers")
 endif()
 
-install(TARGETS kdeinit_konsole konsole
-       ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS konsole ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ### Embedded Konsole KPart
 

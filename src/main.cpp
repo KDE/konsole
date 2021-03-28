@@ -79,7 +79,7 @@ public:
 // ***
 // Entry point into the Konsole terminal application.
 // ***
-extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 #ifdef PROFILE_STARTUP
     QElapsedTimer timer; timer.start();
