@@ -13,6 +13,8 @@
 #include <QPointer>
 #include <QWidget>
 
+#include <memory>
+
 // Konsole
 #include "../characters/Character.h"
 #include "konsoleprivate_export.h"
@@ -751,7 +753,7 @@ private:
     TerminalColor *_terminalColor;
     TerminalFont *_terminalFont;
 
-    KonsolePrintManager *_printManager;
+    std::unique_ptr<KonsolePrintManager> _printManager;
 };
 
 }

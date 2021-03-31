@@ -244,7 +244,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _drawOverlay(false)
     , _scrollBar(nullptr)
     , _terminalColor(nullptr)
-    , _printManager(nullptr)
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -340,7 +339,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     auto lgetBackgroundColor = [this]() {
         return _terminalColor->backgroundColor();
     };
-    _printManager = new KonsolePrintManager(ldrawBackground, ldrawContents, lgetBackgroundColor);
+
+    _printManager.reset(new KonsolePrintManager(ldrawBackground, ldrawContents, lgetBackgroundColor));
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -348,16 +348,8 @@ TerminalDisplay::~TerminalDisplay()
     disconnect(_blinkTextTimer);
     disconnect(_blinkCursorTimer);
 
-    delete _readOnlyMessageWidget;
-    delete _outputSuspendedMessageWidget;
     delete[] _image;
     delete _filterChain;
-
-    _readOnlyMessageWidget = nullptr;
-    _outputSuspendedMessageWidget = nullptr;
-
-    delete _terminalPainter;
-    delete _printManager;
 }
 
 void TerminalDisplay::setupHeaderVisibility()
@@ -2447,7 +2439,7 @@ void TerminalDisplay::dismissOutputSuspendedMessage()
 }
 
 KMessageWidget* TerminalDisplay::createMessageWidget(const QString &text) {
-    auto widget = new KMessageWidget(text);
+    auto *widget = new KMessageWidget(text, this);
     widget->setWordWrap(true);
     widget->setFocusProxy(this);
     widget->setCursor(Qt::ArrowCursor);
