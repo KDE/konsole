@@ -106,10 +106,10 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     auto *generalPageWidget = new QWidget(this);
     _generalUi = new Ui::EditProfileGeneralPage();
     _generalUi->setupUi(generalPageWidget);
-    auto *generalPageItem = addPage(generalPageWidget, generalPageName);
-    generalPageItem->setHeader(generalPageName);
-    generalPageItem->setIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
-    _pages[generalPageItem] = Page(&EditProfileDialog::setupGeneralPage);
+    _generalPageItem = addPage(generalPageWidget, generalPageName);
+    _generalPageItem->setHeader(generalPageName);
+    _generalPageItem->setIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
+    _pages[_generalPageItem] = Page(&EditProfileDialog::setupGeneralPage);
 
     // Tabs page
 
@@ -262,7 +262,7 @@ void EditProfileDialog::accept()
     // if the Apply button is disabled then no settings were changed
     // or the changes have already been saved by apply()
     if (_buttonBox->button(QDialogButtonBox::Apply)->isEnabled()) {
-        if (!isValidProfileName()) {
+        if (!isProfileNameValid()) {
             return;
         }
         save();
@@ -274,29 +274,36 @@ void EditProfileDialog::accept()
 
 void EditProfileDialog::apply()
 {
-    if (!isValidProfileName()) {
+    if (!isProfileNameValid()) {
         return;
     }
     save();
 }
 
-bool EditProfileDialog::isValidProfileName()
+void EditProfileDialog::setMessageGeneralPage(const QString &msg)
+{
+    _generalUi->generalPageMessageWidget->setText(msg);
+    _generalUi->generalPageMessageWidget->setMessageType(KMessageWidget::Error);
+    setCurrentPage(_generalPageItem);
+    _generalUi->generalPageMessageWidget->animatedShow();
+}
+
+bool EditProfileDialog::isProfileNameValid()
 {
     Q_ASSERT(_profile);
     Q_ASSERT(_tempProfile);
 
     // check whether the user has enough permissions to save the profile
     QFileInfo fileInfo(_profile->path());
-    if (fileInfo.exists() && !fileInfo.isWritable()) {
-        if (!_tempProfile->isPropertySet(Profile::Name)
-            || (_tempProfile->name() == _profile->name())) {
-                KMessageBox::sorry(this,
-                                   i18n("<p>Konsole does not have permission to save this profile to:<br /> \"%1\"</p>"
-                                        "<p>To be able to save settings you can either change the permissions "
-                                        "of the profile configuration file or change the profile name to save "
-                                        "the settings to a new profile.</p>", _profile->path()));
-                return false;
-        }
+    if (fileInfo.exists() && !fileInfo.isWritable()
+        && (!_tempProfile->isPropertySet(Profile::Name) || _tempProfile->name() == _profile->name())) {
+        setMessageGeneralPage(
+            xi18nc("@info",
+                   "Insufficient permissions to save settings to: <filename>%1</filename>.<nl/>"
+                   "Either change the permissions of that file or set a different name to save "
+                   "the settings to a new profile.",
+                   _profile->path()));
+        return false;
     }
 
     const QList<Profile::Ptr> existingProfiles = ProfileManager::instance()->allProfiles();
@@ -308,26 +315,28 @@ bool EditProfileDialog::isValidProfileName()
         }
     }
 
-    if ((_tempProfile->isPropertySet(Profile::Name)
-         && _tempProfile->name().isEmpty())
+    if ((_tempProfile->isPropertySet(Profile::Name) && _tempProfile->name().isEmpty())
         || (_profile->name().isEmpty() && _tempProfile->name().isEmpty())) {
-        KMessageBox::sorry(this,
-                           i18n("<p>Each profile must have a name before it can be saved "
-                                "into disk.</p>"));
-        // revert the name in the dialog
+        setMessageGeneralPage(i18nc("@info",
+                                    "Profile Name was empty; please set a name to be able to save settings."));
+        // Revert the name in the dialog
         _generalUi->profileNameEdit->setText(_profile->name());
         selectProfileName();
         return false;
-    } else if (!_tempProfile->name().isEmpty() && otherExistingProfileNames.contains(_tempProfile->name())) {
-        KMessageBox::sorry(this,
-                            i18n("<p>A profile with this name already exists.</p>"));
-        // revert the name in the dialog
-        _generalUi->profileNameEdit->setText(_profile->name());
-        selectProfileName();
-        return false;
-    } else {
-        return true;
     }
+
+    if (!_tempProfile->name().isEmpty() && otherExistingProfileNames.contains(_tempProfile->name())) {
+        setMessageGeneralPage(i18nc("@info",
+                                    "A profile with this name, '%1', already exists.",
+                                    _generalUi->profileNameEdit->text()));
+        // Revert the name in the dialog
+        _generalUi->profileNameEdit->setText(_profile->name());
+        selectProfileName();
+        return false;
+    }
+
+    // Valid name
+    return true;
 }
 
 QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr &group, int maxLength)
@@ -426,6 +435,10 @@ void Konsole::EditProfileDialog::selectProfileName()
 
 void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
 {
+    _generalUi->generalPageMessageWidget->setVisible(false);
+    _generalUi->generalPageMessageWidget->setWordWrap(true);
+    _generalUi->generalPageMessageWidget->setCloseButtonVisible(true);
+
     // basic profile options
     {
         ProfileGroup::Ptr group = profile->asGroup();

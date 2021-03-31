@@ -241,6 +241,8 @@ private:
     void setupAdvancedPage(const Profile::Ptr &profile);
     void setupMousePage(const Profile::Ptr &profile);
 
+    void setMessageGeneralPage(const QString &msg);
+
     int maxSpinBoxWidth(const KPluralHandlingSpinBox *spinBox, const KLocalizedString &suffix);
 
     // Returns the name of the colorScheme used in the current profile
@@ -307,7 +309,7 @@ private:
     // - the name matches the name of an already existing profile
     // - the existing profile config file is read-only
     // otherwise returns true.
-    bool isValidProfileName();
+    bool isProfileNameValid();
 
     Ui::EditProfileGeneralPage      *_generalUi;
     Ui::EditProfileTabsPage         *_tabsUi;
@@ -329,6 +331,7 @@ private:
     };
 
     QMap<KPageWidgetItem *, Page> _pages;
+    KPageWidgetItem *_generalPageItem = nullptr;
 
     Profile::Ptr _tempProfile;
     Profile::Ptr _profile;
