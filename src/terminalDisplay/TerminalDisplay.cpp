@@ -357,7 +357,6 @@ TerminalDisplay::~TerminalDisplay()
     _outputSuspendedMessageWidget = nullptr;
 
     delete _terminalPainter;
-    delete _terminalColor;
     delete _printManager;
 }
 
