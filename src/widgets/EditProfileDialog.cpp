@@ -348,7 +348,7 @@ QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr &group, int
     return caption;
 }
 
-void EditProfileDialog::updateCaption(const Profile::Ptr &profile)
+void EditProfileDialog::updateCaption(const Profile::Ptr &profile, EditProfileDialog::InitialProfileState state)
 {
     const int MAX_GROUP_CAPTION_LENGTH = 25;
     ProfileGroup::Ptr group = profile->asGroup();
@@ -359,18 +359,22 @@ void EditProfileDialog::updateCaption(const Profile::Ptr &profile)
                              group->profiles().count(),
                              caption));
     } else {
-        setWindowTitle(i18n("Edit Profile \"%1\"", profile->name()));
+        if (state == EditProfileDialog::NewProfile) {
+            setWindowTitle(i18n("Create New Profile"));
+        } else {
+            setWindowTitle(i18n("Edit Profile \"%1\"", profile->name()));
+        }
     }
 }
 
-void EditProfileDialog::setProfile(const Konsole::Profile::Ptr &profile)
+void EditProfileDialog::setProfile(const Konsole::Profile::Ptr &profile, EditProfileDialog::InitialProfileState state)
 {
     Q_ASSERT(profile);
 
     _profile = profile;
 
     // update caption
-    updateCaption(profile);
+    updateCaption(profile, state);
 
     // mark each page of the dialog as out of date
     // and force an update of the currently visible page

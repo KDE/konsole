@@ -899,6 +899,7 @@ void SessionController::changeCodec(QTextCodec* codec)
 void SessionController::editCurrentProfile()
 {
     auto profile = SessionManager::instance()->sessionProfile(session());
+    auto state = EditProfileDialog::ExistingProfile;
     // Don't edit the Fallback profile, instead create a new one
     if (profile->isFallback()) {
         auto newProfile = Profile::Ptr(new Profile(profile));
@@ -908,12 +909,13 @@ void SessionController::editCurrentProfile()
         newProfile->setProperty(Profile::UntranslatedName, uniqueName);
         profile = newProfile;
         SessionManager::instance()->setSessionProfile(session(), profile);
+        state = EditProfileDialog::NewProfile;
     }
 
     auto *dialog = new EditProfileDialog(QApplication::activeWindow());
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->setModal(true);
-    dialog->setProfile(profile);
+    dialog->setProfile(profile, state);
 
     connect(dialog, &QDialog::accepted, this, [profile]() {
         ProfileManager::instance()->addProfile(profile);

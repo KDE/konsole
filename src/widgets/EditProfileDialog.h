@@ -61,6 +61,11 @@ public:
     explicit EditProfileDialog(QWidget *parent = nullptr);
     ~EditProfileDialog() override;
 
+    enum InitialProfileState {
+        ExistingProfile,
+        NewProfile,
+    };
+
     /**
      * Initializes the dialog with the settings for the specified session
      * type.
@@ -69,8 +74,10 @@ public:
      * with the altered settings.
      *
      * @param profile The profile to be edited
+     * @param state Indicates whether @p profile is an already existing profile
+     * or a new one being created
      */
-    void setProfile(const Profile::Ptr &profile);
+    void setProfile(const Profile::Ptr &profile, InitialProfileState state = EditProfileDialog::ExistingProfile);
 
     /**
      * Selects the text in the profile name edit area.
@@ -263,7 +270,7 @@ private:
     void unpreviewAll();
     void enableIfNonEmptySelection(QWidget *widget, QItemSelectionModel *selectionModel);
 
-    void updateCaption(const Profile::Ptr &profile);
+    void updateCaption(const Profile::Ptr &profile, InitialProfileState state = EditProfileDialog::ExistingProfile);
     void updateTransparencyWarning();
 
     void updateFontPreview(QFont font);

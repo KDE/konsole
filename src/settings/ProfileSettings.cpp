@@ -148,7 +148,7 @@ void ProfileSettings::createProfile()
     auto *dialog = new EditProfileDialog(this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->setModal(true);
-    dialog->setProfile(newProfile);
+    dialog->setProfile(newProfile, EditProfileDialog::NewProfile);
     dialog->selectProfileName();
 
     connect(dialog, &QDialog::accepted, this, [newProfile]() {
