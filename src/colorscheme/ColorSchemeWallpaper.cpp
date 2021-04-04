@@ -23,9 +23,7 @@ ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path) :
 {
 }
 
-ColorSchemeWallpaper::~ColorSchemeWallpaper()
-{
-}
+ColorSchemeWallpaper::~ColorSchemeWallpaper() = default;
 
 void ColorSchemeWallpaper::load()
 {

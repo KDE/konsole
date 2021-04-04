@@ -89,9 +89,7 @@ Screen::Screen(int lines, int columns):
     reset();
 }
 
-Screen::~Screen()
-{
-}
+Screen::~Screen() = default;
 
 void Screen::cursorUp(int n)
 //=CUU
@@ -383,7 +381,7 @@ bool Screen::isResize()
     return _isResize;
 }
 
-void Screen::setReflowLines(bool enable) 
+void Screen::setReflowLines(bool enable)
 {
     _enableReflowLines = enable;
 }

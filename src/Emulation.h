@@ -17,6 +17,8 @@
 #include "Enumeration.h"
 #include "konsoleprivate_export.h"
 
+#include <memory>
+
 class QKeyEvent;
 
 namespace Konsole {
@@ -440,7 +442,7 @@ protected:
     //decodes an incoming C-style character stream into a unicode QString using
     //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
     const QTextCodec *_codec;
-    QTextDecoder *_decoder;
+    std::unique_ptr<QTextDecoder> _decoder;
     const KeyboardTranslator *_keyTranslator; // the keyboard layout
 
 protected Q_SLOTS:

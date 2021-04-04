@@ -24,12 +24,11 @@ Emulation::Emulation() :
     _windows(QList<ScreenWindow *>()),
     _currentScreen(nullptr),
     _codec(nullptr),
-    _decoder(nullptr),
     _keyTranslator(nullptr),
     _usesMouseTracking(false),
     _bracketedPasteMode(false),
-    _bulkTimer1(new QTimer(this)),
-    _bulkTimer2(new QTimer(this)),
+    _bulkTimer1(QTimer(this)),
+    _bulkTimer2(QTimer(this)),
     _imageSizeInitialized(false),
     _peekingPrimary(false),
     _activeScreenIndex(0)
@@ -104,7 +103,6 @@ Emulation::~Emulation()
 
     delete _screen[0];
     delete _screen[1];
-    delete _decoder;
 }
 
 void Emulation::setPeekPrimary(const bool doPeek)
@@ -161,8 +159,7 @@ void Emulation::setCodec(const QTextCodec *codec)
     if (codec != nullptr) {
         _codec = codec;
 
-        delete _decoder;
-        _decoder = _codec->makeDecoder();
+        _decoder.reset(_codec->makeDecoder());
 
         Q_EMIT useUtf8Request(utf8());
     } else {
