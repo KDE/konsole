@@ -327,7 +327,7 @@ bool EditProfileDialog::isProfileNameValid()
 
     if (!_tempProfile->name().isEmpty() && otherExistingProfileNames.contains(_tempProfile->name())) {
         setMessageGeneralPage(i18nc("@info",
-                                    "A profile with this name, '%1', already exists.",
+                                    "A profile with the name '%1', already exists.",
                                     _generalUi->profileNameEdit->text()));
         // Revert the name in the dialog
         _generalUi->profileNameEdit->setText(_profile->name());
