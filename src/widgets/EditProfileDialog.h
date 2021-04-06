@@ -94,8 +94,6 @@ public Q_SLOTS:
     // reimplemented
     void reject() override;
 
-    void apply();
-
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 

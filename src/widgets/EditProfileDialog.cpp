@@ -77,17 +77,16 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Apply);
     setButtonBox(_buttonBox);
 
-    QPushButton *okButton = _buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
-    connect(_buttonBox, &QDialogButtonBox::accepted, this, &Konsole::EditProfileDialog::accept);
-    connect(_buttonBox, &QDialogButtonBox::rejected, this, &Konsole::EditProfileDialog::reject);
+    _buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
 
-    // disable the apply button , since no modification has been made
-    _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
-
-    connect(_buttonBox->button(QDialogButtonBox::Apply),
-            &QPushButton::clicked, this,
-            &Konsole::EditProfileDialog::apply);
+    auto *applyButton = _buttonBox->button(QDialogButtonBox::Apply);
+    // Disable it, since no modifications have been made yet
+    applyButton->setEnabled(false);
+    connect(applyButton, &QPushButton::clicked, this, [this]() {
+        if (isProfileNameValid()) {
+            save();
+        }
+    });
 
     connect(_delayedPreviewTimer, &QTimer::timeout, this,
             &Konsole::EditProfileDialog::delayedPreviewActivate);
@@ -259,25 +258,11 @@ void EditProfileDialog::reject()
 
 void EditProfileDialog::accept()
 {
-    // if the Apply button is disabled then no settings were changed
-    // or the changes have already been saved by apply()
-    if (_buttonBox->button(QDialogButtonBox::Apply)->isEnabled()) {
-        if (!isProfileNameValid()) {
-            return;
-        }
+    if (isProfileNameValid()) {
         save();
+        unpreviewAll();
+        QDialog::accept();
     }
-
-    unpreviewAll();
-    QDialog::accept();
-}
-
-void EditProfileDialog::apply()
-{
-    if (!isProfileNameValid()) {
-        return;
-    }
-    save();
 }
 
 void EditProfileDialog::setMessageGeneralPage(const QString &msg)
