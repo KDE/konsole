@@ -32,7 +32,6 @@
 class QAction;
 class QMenu;
 class QMouseEvent;
-class KFileItem;
 
 namespace Konsole {
 class Session;
