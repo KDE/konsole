@@ -55,6 +55,8 @@ namespace Konsole
         strategy |= m_antialiasText ? QFont::PreferAntialias : QFont::NoAntialias;
 
         // Konsole cannot handle non-integer font metrics
+        // TODO: Qt6 will remove ForceIntegerMetrics
+        // "Use QFontMetrics to retrieve rounded font metrics."
         strategy |= QFont::ForceIntegerMetrics;
 
         // In case the provided font doesn't have some specific characters it should
@@ -71,6 +73,8 @@ namespace Konsole
             // Font listed in profile's dialog will not be updated.
             newFont = QFont(QStringLiteral("Monospace"));
             // Set style strategy without ForceIntegerMetrics for the font
+            // TODO: Qt6 will remove ForceIntegerMetrics
+            // "Use QFontMetrics to retrieve rounded font metrics."
             strategy &= ~QFont::ForceIntegerMetrics;
             newFont.setStyleHint(QFont::TypeWriter, QFont::StyleStrategy(strategy));
             qCDebug(KonsoleDebug)<<"Font changed to "<<newFont.toString();
