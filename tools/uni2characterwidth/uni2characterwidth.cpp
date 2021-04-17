@@ -540,7 +540,7 @@ bool code(QTextStream &out, const QVector<CharacterProperties> &props, const QVe
     QTextStream eout(stderr, QIODevice::WriteOnly);
 
     if(args.value(QStringLiteral("param")).isEmpty()) {
-        eout << QStringLiteral("Template file not specified.") << endl << endl;
+        eout << QStringLiteral("Template file not specified.") << Qt::endl << Qt::endl;
         return false;
     }
     QFile templateFile(args.value(QStringLiteral("param")));
@@ -692,14 +692,14 @@ bool details(QTextStream &out, const QVector<CharacterProperties> &props, const 
             rangesStats.insert(range.width, 0);
         rangesStats[range.width]++;
     }
-    out << QStringLiteral("# STATS") << endl;
-    out << QStringLiteral("#") << endl;
-    out << QStringLiteral("# Characters count for each width:") << endl;
+    out << QStringLiteral("# STATS") << Qt::endl;
+    out << QStringLiteral("#") << Qt::endl;
+    out << QStringLiteral("# Characters count for each width:") << Qt::endl;
     for(auto wi = widthStats.constBegin(); wi != widthStats.constEnd(); ++wi) {
         out << QString::asprintf("# %2d: %7d\n", int(wi.key()), widthStats[wi.key()]);
     }
-    out << QStringLiteral("#") << endl;
-    out << QStringLiteral("# Ranges count for each width:") << endl;
+    out << QStringLiteral("#") << Qt::endl;
+    out << QStringLiteral("# Ranges count for each width:") << Qt::endl;
     int howmany = 0;
     for(auto wi = rangesStats.constBegin(); wi != rangesStats.constEnd(); ++wi) {
         if(howmany >= 20) break;
@@ -891,7 +891,7 @@ int main(int argc, char *argv[]) {
 
     QTextStream eout(stderr, QIODevice::WriteOnly);
     if(unicodeDataFiles.isEmpty() && eastAsianWidthFiles.isEmpty() && emojiDataFiles.isEmpty() && genericWidthFiles.isEmpty()) {
-        eout << QStringLiteral("Input files not specified.") << endl << endl;
+        eout << QStringLiteral("Input files not specified.") << Qt::endl << Qt::endl;
         parser.showHelp(1);
     }
 
@@ -928,11 +928,11 @@ int main(int argc, char *argv[]) {
         int status = 0;
         if(generatorName != QStringLiteral("-")) {
             status = 1;
-            eout << QStringLiteral("Invalid output generator. Available generators:") << endl;
+            eout << QStringLiteral("Invalid output generator. Available generators:") << Qt::endl;
         }
 
         for(auto it = GENERATOR_FUNCS_MAP.constBegin(); it != GENERATOR_FUNCS_MAP.constEnd(); ++it) {
-            eout << it.key() << endl;
+            eout << it.key() << Qt::endl;
         }
         exit(status);
     }
@@ -942,7 +942,7 @@ int main(int argc, char *argv[]) {
     if(!outputFileName.isEmpty()) {
         outFile.setFileName(outputFileName);
         if(!outFile.open(QIODevice::WriteOnly)) {
-            eout << QStringLiteral("Could not open file ") << outputFileName << QStringLiteral(": ") << outFile.errorString() << endl;
+            eout << QStringLiteral("Could not open file ") << outputFileName << QStringLiteral(": ") << outFile.errorString() << Qt::endl;
             exit(1);
         }
     } else {
