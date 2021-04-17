@@ -62,8 +62,9 @@ void KonsolePrintManager::printRequest(pPrintContent pContent, QWidget *parent)
     KConfigGroup configGroup(KSharedConfig::openConfig(), "PrintOptions");
 
     if (configGroup.readEntry("ScaleOutput", true)) {
-        double scale = qMin(printer.pageRect().width() / static_cast<double>(parent->width()),
-                            printer.pageRect().height() / static_cast<double>(parent->height()));
+        QRect page_rect = printer.pageLayout().paintRectPixels(printer.resolution());
+        double scale = qMin(page_rect.width() / static_cast<double>(parent->width()),
+                            page_rect.height() / static_cast<double>(parent->height()));
         painter.scale(scale, scale);
     }
     
