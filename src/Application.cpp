@@ -294,11 +294,7 @@ bool Application::processTabsFromFileArgs(MainWindow *window)
         }
 
         QHash<QString, QString> lineTokens;
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
         QStringList lineParts = lineString.split(QStringLiteral(";;"), Qt::SkipEmptyParts);
-#else
-        QStringList lineParts = lineString.split(QStringLiteral(";;"), QString::SkipEmptyParts);
-#endif
 
         for (int i = 0; i < lineParts.size(); ++i) {
             QString key = lineParts.at(i).section(QLatin1Char(':'), 0, 0).trimmed().toLower();
