@@ -5,6 +5,8 @@
 
 #include "ui_sshwidget.h"
 
+#include <KLocalizedString>
+
 struct SSHManagerTreeWidget::Private {
     SSHManagerModel *model;
 };
@@ -15,6 +17,7 @@ ui(std::make_unique<Ui::SSHTreeWidget>()),
 d(std::make_unique<SSHManagerTreeWidget::Private>())
 {
     ui->setupUi(this);
+    ui->errorPanel->hide();
 
     connect(ui->newSSHConfig, &QPushButton::clicked, this, &SSHManagerTreeWidget::showInfoPane);
     connect(ui->btnAdd, &QPushButton::clicked, this, &SSHManagerTreeWidget::addSshInfo);
@@ -28,13 +31,50 @@ SSHManagerTreeWidget::~SSHManagerTreeWidget() = default;
 void SSHManagerTreeWidget::addSshInfo()
 {
     SSHConfigurationData data;
+    bool error = false;
+    QString errorString = QStringLiteral("<ul>");
+    const QString li = QStringLiteral("<li>");
+    const QString il = QStringLiteral("</li>");
+
+    if (ui->hostname->text().isEmpty()) {
+        error = true;
+        errorString += li +  i18n("Missing Hostname") + il;
+    }
+
+    if (ui->name->text().isEmpty()) {
+        error = true;
+        errorString += li +  i18n("Missing Name") + il;
+    }
+
+    if (ui->port->text().isEmpty()) {
+        error = true;
+        errorString += li +  i18n("Missing Port") + il;
+    }
+
+    if (ui->sshkey->text().isEmpty()) {
+        error = true;
+        errorString += li +  i18n("Missing SSH Key") + il;
+    }
+
+    if (ui->folder->currentText().isEmpty()) {
+        error = true;
+        errorString += li +  i18n("Missing Folder") + il;
+    }
+    errorString += QStringLiteral("</ul>");
+
+    if (error) {
+        ui->errorPanel->setText(errorString);
+        ui->errorPanel->show();
+        return;
+    }
+
     data.host = ui->hostname->text();
     data.name = ui->name->text();
     data.port = ui->port->text();
     data.sshKey = ui->sshkey->text();
 
     // TODO: Allow a way to specify the Parent.
-    d->model->addChildItem(data, QStringLiteral("Default"));
+    d->model->addChildItem(data, ui->folder->currentText());
     hideInfoPane();
 }
 

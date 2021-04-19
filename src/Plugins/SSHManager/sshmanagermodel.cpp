@@ -28,11 +28,18 @@ SSHManagerModel::~SSHManagerModel() noexcept
     save();
 }
 
-void SSHManagerModel::addTopLevelItem(const QString& name)
+QStandardItem *SSHManagerModel::addTopLevelItem(const QString& name)
 {
+    for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
+        if (invisibleRootItem()->child(i)->text() == name) {
+            return nullptr;
+        }
+    }
+
     auto *newItem = new QStandardItem();
     newItem->setText(name);
     invisibleRootItem()->appendRow(newItem);
+    return newItem;
 }
 
 void SSHManagerModel::addChildItem(const SSHConfigurationData &config, const QString& parentName)
@@ -46,7 +53,7 @@ void SSHManagerModel::addChildItem(const SSHConfigurationData &config, const QSt
     }
 
     if (!item) {
-        return;
+        item = addTopLevelItem(parentName);
     }
 
     auto newChild = new QStandardItem();

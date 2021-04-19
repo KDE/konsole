@@ -12,7 +12,7 @@ public:
     ~SSHManagerModel();
 
     void setModel(SSHManagerModel *model);
-    void addTopLevelItem(const QString& toplevel);
+    QStandardItem *addTopLevelItem(const QString& toplevel);
     void addChildItem(const SSHConfigurationData &config, const QString &parentName);
 
     void load();
