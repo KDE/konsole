@@ -18,6 +18,8 @@
 // Konsole
 #include "widgets/ViewSplitter.h"
 
+#include "PluginSystem/IKonsolePlugin.h"
+
 class QAction;
 class KActionMenu;
 class KToggleAction;
@@ -92,6 +94,11 @@ public:
      * @param frameless If true, no titlebar or frame is displayed.
      */
     void setRemoveWindowTitleBarAndFrame(bool frameless);
+
+    /**
+     * A reference to a plugin on the system.
+     */
+    void addPlugin(IKonsolePlugin *plugin);
 
 Q_SIGNALS:
 
@@ -183,7 +190,7 @@ private:
     KActionMenu *_newTabMenuAction;
 
     QPointer<SessionController> _pluggedController;
-
+    QList<IKonsolePlugin*> _plugins;
     bool _menuBarInitialVisibility;
     bool _menuBarInitialVisibilityApplied;
     bool _blurEnabled = false;

@@ -174,5 +174,6 @@ void SSHManagerTreeWidget::setModel(SSHManagerModel* model)
 
 void SSHManagerTreeWidget::setCurrentController(Konsole::SessionController *controller)
 {
+    qDebug() << "Controller changed to" << controller;
     d->controller = controller;
 }

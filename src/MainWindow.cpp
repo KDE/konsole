@@ -481,6 +481,13 @@ void MainWindow::newTab()
     createSession(defaultProfile, activeSessionDir());
 }
 
+void MainWindow::addPlugin(IKonsolePlugin *plugin)
+{
+    _plugins.append(plugin);
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, plugin,
+        &IKonsolePlugin::activeViewChanged);
+}
+
 void MainWindow::cloneTab()
 {
     Q_ASSERT(_pluggedController);
@@ -511,6 +518,7 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     // don't like this happening
     auto newView = _viewManager->createView(session);
     _viewManager->activeContainer()->addView(newView);
+
     return session;
 }
 

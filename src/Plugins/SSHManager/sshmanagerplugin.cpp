@@ -39,7 +39,7 @@ void SSHManagerPlugin::createWidgetsForMainWindow(QMainWindow *mainWindow)
     d->window = managerWidget;
 }
 
-void SSHManagerPlugin::sessionControllerChanged(Konsole::SessionController *controller)
+void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller)
 {
     d->window->setCurrentController(controller);
 }

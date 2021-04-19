@@ -165,6 +165,7 @@ MainWindow *Application::newMainWindow()
 
     for (auto *plugin : m_pluginManager.plugins()) {
         plugin->addMainWindow(window);
+        window->addPlugin(plugin);
     }
 
     return window;

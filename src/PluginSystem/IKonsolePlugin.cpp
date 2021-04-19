@@ -24,11 +24,6 @@ IKonsolePlugin::IKonsolePlugin(QObject *parent, const QVariantList &args) :
 
 IKonsolePlugin::~IKonsolePlugin() = default;
 
-TerminalDisplay * IKonsolePlugin::currentTerminalDisplay()
-{
-    return nullptr;
-}
-
 void IKonsolePlugin::setName(const QString& name)
 {
     d->name = name;

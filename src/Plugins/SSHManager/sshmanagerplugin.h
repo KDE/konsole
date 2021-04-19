@@ -16,7 +16,7 @@ public:
     ~SSHManagerPlugin();
 
     void createWidgetsForMainWindow(QMainWindow *mainWindow) override;
-    void sessionControllerChanged(Konsole::SessionController *controller);
+    void activeViewChanged(Konsole::SessionController *controller) override;
 
 private:
     struct Private;

@@ -32,10 +32,6 @@ public:
     IKonsolePlugin(QObject *parent, const QVariantList &args);
     ~IKonsolePlugin();
 
-    /* Always returns the current terminal display.
-     * never store the pointer, as it can change during usage.
-     */
-    TerminalDisplay *currentTerminalDisplay();
     QString name() const;
 
     // Usable only from PluginManager, please don't use.
@@ -43,6 +39,8 @@ public:
     void removeMainWindow(QMainWindow *mainWindow);
 
     virtual void createWidgetsForMainWindow(QMainWindow *mainWindow) = 0;
+    virtual void activeViewChanged(Konsole::SessionController *controller) = 0;
+
 protected:
     void setName(const QString& pluginName);
 
