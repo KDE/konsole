@@ -7,6 +7,10 @@
 
 #include <KLocalizedString>
 
+#include <QRegularExpression>
+#include <QIntValidator>
+#include <QRegularExpressionValidator>
+
 struct SSHManagerTreeWidget::Private {
     SSHManagerModel *model;
 };
@@ -18,6 +22,17 @@ d(std::make_unique<SSHManagerTreeWidget::Private>())
 {
     ui->setupUi(this);
     ui->errorPanel->hide();
+
+    // https://stackoverflow.com/questions/1418423/the-hostname-regex
+    const auto hostnameRegex = QRegularExpression(
+        QStringLiteral(R"(^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$)")
+    );
+
+    const auto* hostnameValidator = new QRegularExpressionValidator(hostnameRegex);
+    ui->hostname->setValidator(hostnameValidator);
+
+    const auto* portValidator = new QIntValidator(0, 9999);
+    ui->port->setValidator(portValidator);
 
     connect(ui->newSSHConfig, &QPushButton::clicked, this, &SSHManagerTreeWidget::showInfoPane);
     connect(ui->btnAdd, &QPushButton::clicked, this, &SSHManagerTreeWidget::addSshInfo);
