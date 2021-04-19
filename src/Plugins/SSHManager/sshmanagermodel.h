@@ -15,6 +15,8 @@ public:
     QStandardItem *addTopLevelItem(const QString& toplevel);
     void addChildItem(const SSHConfigurationData &config, const QString &parentName);
 
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+
     void load();
     void save();
 };

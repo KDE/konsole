@@ -110,3 +110,8 @@ void SSHManagerModel::save()
     }
     config.sync();
 }
+
+Qt::ItemFlags SSHManagerModel::flags(const QModelIndex &index) const
+{
+    return QStandardItemModel::flags(index) & ~Qt::ItemIsEditable;
+}
