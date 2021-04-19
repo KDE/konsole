@@ -5,6 +5,10 @@
 
 #include <memory>
 
+namespace Konsole {
+    class SessionController;
+}
+
 class SSHManagerPlugin : public Konsole::IKonsolePlugin {
     Q_OBJECT
 public:
@@ -12,6 +16,8 @@ public:
     ~SSHManagerPlugin();
 
     void createWidgetsForMainWindow(QMainWindow *mainWindow) override;
+    void sessionControllerChanged(Konsole::SessionController *controller);
+
 private:
     struct Private;
     std::unique_ptr<SSHManagerPlugin::Private> d;

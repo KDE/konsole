@@ -7,6 +7,9 @@ namespace Ui {
     class SSHTreeWidget;
 }
 
+namespace Konsole {
+    class SessionController;
+}
 class SSHManagerModel;
 
 class SSHManagerTreeWidget : public QWidget {
@@ -22,6 +25,7 @@ public:
 
     void setModel(SSHManagerModel *model);
     void triggerRemove();
+    void setCurrentController(Konsole::SessionController *controller);
 
 private:
     struct Private;

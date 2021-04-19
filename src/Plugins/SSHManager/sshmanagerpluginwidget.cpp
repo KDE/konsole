@@ -2,6 +2,7 @@
 
 #include "sshmanagermodel.h"
 #include "sshconfigurationdata.h"
+#include "session/SessionController.h"
 
 #include "profile/ProfileModel.h"
 
@@ -20,7 +21,8 @@
 #include <QDebug>
 
 struct SSHManagerTreeWidget::Private {
-    SSHManagerModel *model;
+    SSHManagerModel *model = nullptr;
+    Konsole::SessionController *controller = nullptr;
 };
 
 SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
@@ -168,4 +170,9 @@ void SSHManagerTreeWidget::setModel(SSHManagerModel* model)
 {
     d->model = model;
     ui->treeView->setModel(model);
+}
+
+void SSHManagerTreeWidget::setCurrentController(Konsole::SessionController *controller)
+{
+    d->controller = controller;
 }
