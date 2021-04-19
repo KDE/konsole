@@ -135,6 +135,8 @@ void SSHManagerTreeWidget::triggerRemove()
     if (QMessageBox::warning(this, i18n("Remove SSH Configurations"), i18n("You are about to remove ssh configurations, are you sure?")) == QMessageBox::Cancel) {
         return;
     }
+
+    d->model->removeIndex(selection.at(0));
 }
 
 void SSHManagerTreeWidget::clearSshInfo()

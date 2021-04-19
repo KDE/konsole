@@ -115,3 +115,8 @@ Qt::ItemFlags SSHManagerModel::flags(const QModelIndex &index) const
 {
     return QStandardItemModel::flags(index) & ~Qt::ItemIsEditable;
 }
+
+void SSHManagerModel::removeIndex(const QModelIndex& idx)
+{
+    removeRow(idx.row(), idx.parent());
+}
