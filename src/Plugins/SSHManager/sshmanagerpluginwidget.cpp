@@ -3,6 +3,8 @@
 #include "sshmanagermodel.h"
 #include "sshconfigurationdata.h"
 
+#include "profile/ProfileModel.h"
+
 #include "ui_sshwidget.h"
 
 #include <KLocalizedString>
@@ -10,6 +12,7 @@
 #include <QRegularExpression>
 #include <QIntValidator>
 #include <QRegularExpressionValidator>
+#include <QMessageBox>
 
 struct SSHManagerTreeWidget::Private {
     SSHManagerModel *model;
@@ -38,6 +41,7 @@ d(std::make_unique<SSHManagerTreeWidget::Private>())
     connect(ui->btnAdd, &QPushButton::clicked, this, &SSHManagerTreeWidget::addSshInfo);
     connect(ui->btnCancel, &QPushButton::clicked, this, &SSHManagerTreeWidget::hideInfoPane);
 
+    ui->profile->setModel(Konsole::ProfileModel::instance());
     hideInfoPane();
 }
 
@@ -75,6 +79,11 @@ void SSHManagerTreeWidget::addSshInfo()
         error = true;
         errorString += li +  i18n("Missing Folder") + il;
     }
+
+    if (ui->profile->currentText().isEmpty()) {
+        error = true;
+        errorString += li + i18n("An SSH session must have a profile") + il;
+    }
     errorString += QStringLiteral("</ul>");
 
     if (error) {
@@ -87,6 +96,7 @@ void SSHManagerTreeWidget::addSshInfo()
     data.name = ui->name->text();
     data.port = ui->port->text();
     data.sshKey = ui->sshkey->text();
+    data.profileName = ui->profile->currentText();
 
     // TODO: Allow a way to specify the Parent.
     d->model->addChildItem(data, ui->folder->currentText());
