@@ -8,6 +8,10 @@ class SSHConfigurationData;
 class SSHManagerModel : public QStandardItemModel {
     Q_OBJECT
 public:
+    enum Roles {
+        SSHRole = Qt::UserRole + 1
+    };
+
     SSHManagerModel(QObject *parent = nullptr);
     ~SSHManagerModel();
 

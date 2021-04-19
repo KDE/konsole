@@ -11,8 +11,6 @@
 
 #include "sshconfigurationdata.h"
 
-constexpr const int SSHRole = Qt::UserRole + 1;
-
 SSHManagerModel::SSHManagerModel(QObject *parent)
 : QStandardItemModel(parent)
 {

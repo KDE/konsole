@@ -3,6 +3,7 @@
 #include "sshmanagermodel.h"
 #include "sshconfigurationdata.h"
 #include "session/SessionController.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 #include "profile/ProfileModel.h"
 
@@ -64,6 +65,8 @@ d(std::make_unique<SSHManagerTreeWidget::Private>())
 
         menu->popup(ui->treeView->viewport()->mapToGlobal(pos));
     });
+
+    connect(ui->treeView, &QTreeView::doubleClicked, this, &SSHManagerTreeWidget::connectRequested);
 
     hideInfoPane();
 }
@@ -176,4 +179,37 @@ void SSHManagerTreeWidget::setCurrentController(Konsole::SessionController *cont
 {
     qDebug() << "Controller changed to" << controller;
     d->controller = controller;
+}
+
+void SSHManagerTreeWidget::connectRequested(const QModelIndex& idx)
+{
+    if (idx.parent() == d->model->invisibleRootItem()->index()) {
+        qDebug() << "Clicking on a folder";
+        return;
+    }
+    qDebug() << "Connecting";
+    auto item = d->model->itemFromIndex(idx);
+    auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
+
+    if (!d->controller) {
+        return;
+    }
+
+    QString sshCommand = QStringLiteral("ssh ");
+    if (data.port > -1) {
+        sshCommand += QStringLiteral("-p %1 ").arg(data.port);
+    }
+/*
+    if (!url.userName().isEmpty()) {
+        sshCommand += (url.userName() + QLatin1Char('@'));
+    }
+*/
+    if (!data.host.isEmpty()) {
+        sshCommand += data.host;
+    }
+
+    d->controller->session()->sendTextToTerminal(sshCommand, QLatin1Char('\r'));
+    if (d->controller->session()->views().count()) {
+        d->controller->session()->views().at(0)->setFocus();
+    }
 }

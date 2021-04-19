@@ -26,6 +26,7 @@ public:
     void setModel(SSHManagerModel *model);
     void triggerRemove();
     void setCurrentController(Konsole::SessionController *controller);
+    void connectRequested(const QModelIndex& idx);
 
 private:
     struct Private;
