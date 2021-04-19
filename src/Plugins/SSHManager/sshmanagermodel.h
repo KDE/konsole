@@ -14,6 +14,7 @@ public:
     void setModel(SSHManagerModel *model);
     QStandardItem *addTopLevelItem(const QString& toplevel);
     void addChildItem(const SSHConfigurationData &config, const QString &parentName);
+    void removeIndex(const QModelIndex& idx);
 
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 

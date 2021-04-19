@@ -9,10 +9,15 @@
 
 #include <KLocalizedString>
 
+#include <QAction>
 #include <QRegularExpression>
 #include <QIntValidator>
+#include <QItemSelectionModel>
 #include <QRegularExpressionValidator>
 #include <QMessageBox>
+#include <QPoint>
+#include <QMenu>
+#include <QDebug>
 
 struct SSHManagerTreeWidget::Private {
     SSHManagerModel *model;
@@ -42,6 +47,22 @@ d(std::make_unique<SSHManagerTreeWidget::Private>())
     connect(ui->btnCancel, &QPushButton::clicked, this, &SSHManagerTreeWidget::hideInfoPane);
 
     ui->profile->setModel(Konsole::ProfileModel::instance());
+
+    ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->treeView, &QTreeView::customContextMenuRequested, [this](const QPoint& pos){
+        if (!ui->treeView->indexAt(pos).isValid()) {
+            return;
+        }
+
+        QMenu *menu = new QMenu(this);
+        auto action = new QAction(QStringLiteral("Remove"), ui->treeView);
+        menu->addAction(action);
+
+        connect(action, &QAction::triggered, this, &SSHManagerTreeWidget::triggerRemove);
+
+        menu->popup(ui->treeView->viewport()->mapToGlobal(pos));
+    });
+
     hideInfoPane();
 }
 
@@ -100,7 +121,20 @@ void SSHManagerTreeWidget::addSshInfo()
 
     // TODO: Allow a way to specify the Parent.
     d->model->addChildItem(data, ui->folder->currentText());
+
     hideInfoPane();
+}
+
+void SSHManagerTreeWidget::triggerRemove()
+{
+    auto selection =  ui->treeView->selectionModel()->selectedIndexes();
+    if (selection.empty()) {
+        return;
+    }
+
+    if (QMessageBox::warning(this, i18n("Remove SSH Configurations"), i18n("You are about to remove ssh configurations, are you sure?")) == QMessageBox::Cancel) {
+        return;
+    }
 }
 
 void SSHManagerTreeWidget::clearSshInfo()

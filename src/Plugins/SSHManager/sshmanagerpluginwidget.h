@@ -21,6 +21,7 @@ public:
     Q_SLOT void clearSshInfo();
 
     void setModel(SSHManagerModel *model);
+    void triggerRemove();
 
 private:
     struct Private;
