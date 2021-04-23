@@ -378,12 +378,14 @@ namespace Konsole
         return (l1 > l2) ? l1/l2 : l2/l1;
     }
 
-    QColor calculateBackgroundColor(const Character* style, const QColor *colorTable)
+    std::optional<QColor> calculateBackgroundColor(const Character* style, const QColor *colorTable)
     {
         auto c1 = style->backgroundColor.color(colorTable);
         if (!(style->rendition & RE_SELECTED)) {
             return c1;
         }
+
+        const auto initialBG = c1;
 
         c1.setAlphaF(0.8);
 
@@ -391,6 +393,14 @@ namespace Konsole
         const auto fg = style->foregroundColor.color(colorTable);
 
         const auto contrast1 = wcag20Contrast(fg, blend1), contrast2 = wcag20Contrast(fg, blend2);
+        const auto contrastBG1 = wcag20Contrast(blend1, initialBG), contrastBG2 = wcag20Contrast(blend2, initialBG);
+
+        const auto fgFactor = 5.5; // if text contrast is too low against our calculated bg, then we flip to reverse
+        const auto bgFactor = 1.6; // if bg contrast is too low against default bg, then we flip to reverse
+
+        if ((contrast1 < fgFactor && contrast2 < fgFactor) || (contrastBG1 < bgFactor && contrastBG2 < bgFactor)) {
+            return {};
+        }
 
         return (contrast1 < contrast2) ? blend1 : blend2;
     }
@@ -399,14 +409,17 @@ namespace Konsole
                                 const Character *style, const QColor *colorTable, const LineProperty lineProperty)
     {
         // setup painter
-        const QColor foregroundColor = style->foregroundColor.color(colorTable);
-        const QColor backgroundColor = calculateBackgroundColor(style, colorTable);
+        QColor foregroundColor = style->foregroundColor.color(colorTable);
+        const QColor backgroundColor = calculateBackgroundColor(style, colorTable).value_or(foregroundColor);
+        if (backgroundColor == foregroundColor) {
+            foregroundColor = style->backgroundColor.color(colorTable);
+        }
 
         if (backgroundColor != colorTable[DEFAULT_BACK_COLOR]) {
             drawBackground(painter, rect, backgroundColor, false);
         }
 
-        QColor characterColor;
+        QColor characterColor = foregroundColor;
         if ((style->rendition & RE_CURSOR) != 0) {
             drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
         }
