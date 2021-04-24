@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<gui name="konsole" version="13">
+<gui name="konsole" version="14">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -29,6 +29,8 @@
             <Separator/>
             <Action name="detach-tab" />
             <Action name="detach-view"/>
+            <Action name="save-layout"/>
+            <Action name="load-layout"/>
             <Separator/>
             <DefineGroup name="session-view-operations"/>
         </Menu>
@@ -53,5 +55,8 @@
         <Action name="new-tab"/>
         <Action name="split-view-left-right"/>
         <Action name="split-view-top-bottom"/>
+        <Action name="load-terminals-layout-2x2"/>
+        <Action name="load-terminals-layout-2x1"/>
+        <Action name="load-terminals-layout-1x2"/>
     </ToolBar>
 </gui>

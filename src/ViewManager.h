@@ -307,6 +307,11 @@ public Q_SLOTS:
     /** DBus slot that sets ALL tabs' width to match their text */
     Q_SCRIPTABLE void setTabWidthToText(bool);
 
+    // Creates json file with split config
+    Q_SCRIPTABLE void saveLayoutFile();
+    Q_SCRIPTABLE void loadLayoutFile();
+    Q_SCRIPTABLE void loadLayout(QString File);
+
 private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();

@@ -12,9 +12,17 @@
 // Qt
 #include <QStringList>
 #include <QTabBar>
+#include <QStandardPaths>
+#include <QFile>
+#include <QFileDialog>
+
+
+#include <QJsonArray>
+#include <QJsonDocument>
 
 // KDE
 #include <KLocalizedString>
+#include <KMessageBox>
 #include <KActionCollection>
 #include <KConfigGroup>
 
@@ -114,6 +122,30 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("split-view-top-bottom"), action);
 
     action = new QAction(this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
+    action->setText(i18nc("@action:inmenu", "Load a new tab with layout 2x2 terminals"));
+    connect(action, &QAction::triggered,
+            this, [this](){
+            this->loadLayout(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/2x2-terminals.json"))); });
+    collection->addAction(QStringLiteral("load-terminals-layout-2x2"), action);
+
+    action = new QAction(this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
+    action->setText(i18nc("@action:inmenu", "Load a new tab with layout 2x1 terminals"));
+    connect(action, &QAction::triggered,
+            this, [this](){
+            this->loadLayout(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/2x1-terminals.json"))); });
+    collection->addAction(QStringLiteral("load-terminals-layout-2x1"), action);
+
+    action = new QAction(this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
+    action->setText(i18nc("@action:inmenu", "Load a new tab with layout 2x1 terminals"));
+    connect(action, &QAction::triggered,
+            this, [this](){
+            this->loadLayout(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/1x2-terminals.json"))); });
+    collection->addAction(QStringLiteral("load-terminals-layout-1x2"), action);
+
+    action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Expand View"));
     action->setEnabled(false);
     connect(action, &QAction::triggered, this, &ViewManager::expandActiveContainer);
@@ -133,6 +165,7 @@ void ViewManager::setupActions()
     action->setEnabled(true);
     action->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
     action->setText(i18nc("@action:inmenu", "Detach Current &View"));
+
 
     connect(action, &QAction::triggered, this, &ViewManager::detachActiveView);
     _multiSplitterOnlyActions << action;
@@ -895,6 +928,23 @@ QJsonObject saveSessionsRecurse(QSplitter *splitter) {
 
 } // namespace
 
+void ViewManager::saveLayoutFile() {
+    QFile file(QFileDialog::getSaveFileName(this->widget(), i18n("Save File"), QStringLiteral("~/"),
+                i18n("Konsole View Layout (*.json)")));
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        KMessageBox::sorry(this->widget(), i18n("A problem occurred when saving the Layout.\n%1", file.fileName()));
+    }
+
+    QJsonObject jsonSplit = saveSessionsRecurse(_viewContainer->activeViewSplitter());
+
+    if (!jsonSplit.isEmpty()){
+        file.write(QJsonDocument(jsonSplit).toJson());
+        qDebug() << "Maybe was saved";
+    }
+}
+
+
 void ViewManager::saveSessions(KConfigGroup &group)
 {
     QJsonArray rootArray;
@@ -909,7 +959,7 @@ void ViewManager::saveSessions(KConfigGroup &group)
 
 namespace {
 
-ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject& jsonSplitter, ViewManager *manager)
+ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject& jsonSplitter, ViewManager *manager, bool useSessionId)
 {
     const QJsonArray splitterWidgets = jsonSplitter[QStringLiteral("Widgets")].toArray();
     auto orientation = (jsonSplitter[QStringLiteral("Orientation")].toString() == QStringLiteral("Horizontal"))
@@ -923,11 +973,14 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject& jsonSplitter, Vi
         const auto sessionIterator = widgetJsonObject.constFind(QStringLiteral("SessionRestoreId"));
 
         if (sessionIterator != widgetJsonObject.constEnd()) {
-            Session *session = SessionManager::instance()->idToSession(sessionIterator->toInt());
+            Session *session = useSessionId
+                ? SessionManager::instance()->idToSession(sessionIterator->toInt())
+                : SessionManager::instance()->createSession();
+
             auto newView = manager->createView(session);
             currentSplitter->addWidget(newView);
         } else {
-            auto nextSplitter = restoreSessionsSplitterRecurse(widgetJsonObject, manager);
+            auto nextSplitter = restoreSessionsSplitterRecurse(widgetJsonObject, manager, useSessionId);
             currentSplitter->addWidget(nextSplitter);
         }
     }
@@ -935,12 +988,30 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject& jsonSplitter, Vi
 }
 
 } // namespace
+void ViewManager::loadLayout(QString file) {
+    QFile jsonFile(file);
+
+    if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        KMessageBox::sorry(this->widget(), i18n("A problem occurred when loading the Layout.\n%1", jsonFile.fileName()));
+    }
+    auto json = QJsonDocument::fromJson(jsonFile.readAll());
+    if (!json.isEmpty()){
+        auto splitter = restoreSessionsSplitterRecurse(json.object(), this, false);
+        _viewContainer->addSplitter(splitter, _viewContainer->count());
+    }
+}
+void ViewManager::loadLayoutFile() {
+
+    loadLayout(QFileDialog::getOpenFileName(this->widget(), i18n("Open File"), QStringLiteral("~/"),
+                i18n("Konsole View Layout (*.json)")));
+}
+
 void ViewManager::restoreSessions(const KConfigGroup &group)
 {
     const auto tabList = group.readEntry("Tabs", QByteArray("[]"));
     const auto jsonTabs = QJsonDocument::fromJson(tabList).array();
     for (const auto& jsonSplitter : jsonTabs) {
-        auto topLevelSplitter = restoreSessionsSplitterRecurse(jsonSplitter.toObject(), this);
+        auto topLevelSplitter = restoreSessionsSplitterRecurse(jsonSplitter.toObject(), this, true);
         _viewContainer->addSplitter(topLevelSplitter, _viewContainer->count());
     }
 

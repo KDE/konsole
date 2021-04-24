@@ -51,7 +51,11 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
             i18nc("@info:shell", "Name of profile to use for new Konsole instance"),
             QStringLiteral("name")
         },
-        { { QStringLiteral("fallback-profile") },
+        { { QStringLiteral("layout") },
+            i18nc("@info:shell", "json layoutfile to be loaded to use for new Konsole instance"),
+            QStringLiteral("file")
+        },
+         { { QStringLiteral("fallback-profile") },
             i18nc("@info:shell", "Use the internal FALLBACK profile")
         },
         { { QStringLiteral("workdir") },
@@ -210,7 +214,6 @@ int Application::newInstance()
             return 0;
         }
     }
-
     // select profile to use
     Profile::Ptr baseProfile = processProfileSelectArgs();
 
@@ -218,14 +221,20 @@ int Application::newInstance()
     // selected profile to be changed
     Profile::Ptr newProfile = processProfileChangeArgs(baseProfile);
 
-    // create new session
-    Session *session = window->createSession(newProfile, QString());
+    // if layout file is enable load it and create session from definitions,
+    // else create new session
+    if (m_parser->isSet(QStringLiteral("layout"))) {
+        window->viewManager()->loadLayout(m_parser->value(QStringLiteral("layout")));
+    } else {
+        Session *session = window->createSession(newProfile, QString());
 
-    if (m_parser->isSet(QStringLiteral("noclose"))) {
-        session->setAutoClose(false);
+        if (m_parser->isSet(QStringLiteral("noclose"))) {
+            session->setAutoClose(false);
+        }
     }
 
-    // if the background-mode argument is supplied, start the background
+
+        // if the background-mode argument is supplied, start the background
     // session ( or bring to the front if it already exists )
     if (m_parser->isSet(QStringLiteral("background-mode"))) {
         startBackgroundMode(window);

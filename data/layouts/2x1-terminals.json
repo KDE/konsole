@@ -1,0 +1,24 @@
+{
+    "Orientation": "Vertical",
+    "Widgets": [
+        {
+            "Orientation": "Horizontal",
+            "Widgets": [
+                {
+                    "SessionRestoreId": 0
+                },
+                {
+                    "SessionRestoreId": 0
+                }
+            ]
+        },
+        {
+            "Orientation": "Horizontal",
+            "Widgets": [
+                {
+                    "SessionRestoreId": 0
+                }
+            ]
+        }
+    ]
+}

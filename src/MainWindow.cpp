@@ -377,6 +377,20 @@ void MainWindow::setupActions()
     menuAction->setText(i18nc("@item", "Activate Menu"));
     collection->setDefaultShortcut(menuAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_F10);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::activateMenuBar);
+
+    auto action = collection->addAction(QStringLiteral("save-layout"));
+    action->setEnabled(true);
+    action->setText(i18nc("@action:inmenu", "Save tab layout to file"));
+    connect(action, &QAction::triggered, this, [this]() {
+        if (viewManager()) { viewManager()->saveLayoutFile(); }
+    });
+
+    action = collection->addAction(QStringLiteral("load-layout"));
+    action->setEnabled(true);
+    action->setText(i18nc("@action:inmenu", "Load tab layout from file"));
+    connect(action, &QAction::triggered, this, [this]() {
+        if (viewManager()) { viewManager()->loadLayoutFile(); }
+    });
 }
 
 void MainWindow::viewFullScreen(bool fullScreen)
