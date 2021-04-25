@@ -52,8 +52,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2020-09-16</date>
-<releaseinfo>Applications 20.12</releaseinfo>
+<date>2021-04-25</date>
+<releaseinfo>Applications 21.08</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -733,6 +733,25 @@ affect the newly created window.
 </term>
 <listitem><para><action>Opens the current split view in a
 separate window</action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Save tab layout to file</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Allows you to save the tab layout of the current view in a specialized
+&konsole; layout file which can then be loaded to restore one of your favorite layouts.</action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Load tab layout from file</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Allows you to load one of your favorite view layouts from the layout file that
+            has been saved using the <menuchoice><guimenu>View</guimenu><guimenuitem>Save tab layout to file</guimenuitem></menuchoice>
+menu item earlier.</action> The default layouts (2x2, 2x1, and 1x2) can be loaded via toolbar.
 </para></listitem>
 </varlistentry>
 
