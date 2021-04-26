@@ -17,6 +17,7 @@
 #include <KAcceleratorManager>
 #include <KActionCollection>
 #include <KActionMenu>
+#include <KIconUtils>
 #include <KShortcutsDialog>
 #include <KLocalizedString>
 #include <KWindowEffects>
@@ -28,7 +29,6 @@
 #include <KWindowSystem>
 #include <KXMLGUIFactory>
 #include <KNotifyConfigWidget>
-#include <KIconLoader>
 
 #include <kio_version.h>
 
@@ -437,7 +437,7 @@ void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
 
             Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
             if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
-                QIcon icon(KIconLoader::global()->loadIcon(profile->icon(), KIconLoader::Small, 0, KIconLoader::DefaultState, QStringList(QStringLiteral("emblem-favorite"))));
+                QIcon icon = KIconUtils::addOverlay(QIcon::fromTheme(profile->icon()), QIcon::fromTheme(QStringLiteral("emblem-favorite")), Qt::BottomRightCorner);
                 sessionAction->setIcon(icon);
                 setActionFont(true);
             } else {
