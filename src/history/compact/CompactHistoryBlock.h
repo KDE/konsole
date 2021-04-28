@@ -19,7 +19,7 @@ namespace Konsole
 class CompactHistoryBlock
 {
 public:
-    CompactHistoryBlock();
+    CompactHistoryBlock(size_t blockLength = 0);
 
     virtual ~CompactHistoryBlock();
 

@@ -38,9 +38,9 @@ public:
 protected:
     CompactHistoryBlockList &_blockListRef;
     CharacterFormat *_formatArray;
-    quint16 _length;
+    int _length;
     uint    *_text;
-    quint16 _formatLength;
+    int _formatLength;
     LineProperty _lineProperty;
 };
 

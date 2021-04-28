@@ -19,7 +19,7 @@ CompactHistoryBlockList::CompactHistoryBlockList()
 void *CompactHistoryBlockList::allocate(size_t size)
 {
     if (_blocks.empty() || _blocks.back()->remaining() < size) {
-        _blocks.push_back(std::make_unique<CompactHistoryBlock>());
+        _blocks.push_back(std::make_unique<CompactHistoryBlock>(size));
         ////qDebug() << "new block created, remaining " << block->remaining() << "number of blocks=" << _blocks.size();
     }
     return _blocks.back()->allocate(size);
