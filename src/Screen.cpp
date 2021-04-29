@@ -516,7 +516,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             _history->getCells(histPos, 0, histLineLen, histLine.data());
             _screenLines.insert(0, histLine);
             _lineProperties.insert(0, lineProperty);
-            _history->removeCells(histPos);
+            _history->removeCells();
             cursorLine++;
         }
     }

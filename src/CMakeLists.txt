@@ -159,9 +159,6 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         history/HistoryType.cpp
                         history/HistoryTypeFile.cpp
                         history/HistoryTypeNone.cpp
-                        history/compact/CompactHistoryBlock.cpp
-                        history/compact/CompactHistoryBlockList.cpp
-                        history/compact/CompactHistoryLine.cpp
                         history/compact/CompactHistoryScroll.cpp
                         history/compact/CompactHistoryType.cpp
                         widgets/DetachableTabBar.cpp

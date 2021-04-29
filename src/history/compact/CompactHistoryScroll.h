@@ -13,18 +13,17 @@
 #include "konsoleprivate_export.h"
 
 #include "history/HistoryScroll.h"
-#include "history/compact/CompactHistoryLine.h"
 
 namespace Konsole
 {
 
 class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
 {
-    typedef std::deque<std::unique_ptr<CompactHistoryLine>> HistoryArray;
+    typedef QVector<Character> TextLine;
 
 public:
     explicit CompactHistoryScroll(unsigned int maxLineCount = 1000);
-    ~CompactHistoryScroll() override;
+    ~CompactHistoryScroll() = default;
 
     int  getLines() override;
     int  getMaxLines() override;
@@ -34,26 +33,24 @@ public:
     LineProperty getLineProperty(int lineNumber) override;
 
     void addCells(const Character a[], int count) override;
-    void addCellsVector(const TextLine &cells) override;
     void addLine(LineProperty lineProperty = 0) override;
 
-    void insertCellsVector(int position, const TextLine &cells) override;
-    void insertCells(int position, const Character a[], int count) override;
-    void removeCells(int position) override;
+    void removeCells() override;
 
-    void setMaxNbLines(unsigned int lineCount);
-    void setCellsAt(int position, const Character a[], int count) override;
-    void setCellsVectorAt(int position, const TextLine &cells) override;
-    void setLineAt(int position, LineProperty lineProperty) override;
+    void setMaxNbLines(int lineCount);
 
     int reflowLines(int columns) override;
 
 private:
-    bool hasDifferentColors(const TextLine &line) const;
-    HistoryArray _lines;
-    CompactHistoryBlockList _blockList;
+    QList<Character> _cells;
+    QList<int> _index;
+    QList<LineProperty> _flags;
 
-    unsigned int _maxLineCount;
+    int _maxLineCount;
+
+    void removeFirstLine();
+    inline int lineLen(const int line);
+    inline int startOfLine(int line);
 };
 
 }

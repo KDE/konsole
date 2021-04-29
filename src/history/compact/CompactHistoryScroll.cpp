@@ -11,66 +11,79 @@
 
 using namespace Konsole;
 
+struct reflowData { // data to reflow lines
+    QList<int> index;
+    QList<LineProperty> flags;
+};
+
 CompactHistoryScroll::CompactHistoryScroll(unsigned int maxLineCount) :
     HistoryScroll(new CompactHistoryType(maxLineCount)),
-    _lines(),
-    _blockList(),
+    _cells(),
+    _index(),
+    _flags(),
     _maxLineCount(0)
 {
-    ////qDebug() << "scroll of length " << maxLineCount << " created";
     setMaxNbLines(maxLineCount);
 }
 
-CompactHistoryScroll::~CompactHistoryScroll()
+void CompactHistoryScroll::removeFirstLine()
 {
-    _lines.clear();
+    _flags.pop_front();
+
+    auto removing = _index.first();
+    _index.pop_front();
+    std::transform(_index.begin(), _index.end(), _index.begin(), [removing](int i) { return i - removing; });
+
+    while (_cells.size() > _index.last()) {
+        _cells.pop_front();
+    }
 }
 
-void CompactHistoryScroll::addCellsVector(const TextLine &cells)
+inline int CompactHistoryScroll::lineLen(int line)
 {
-    auto line = std::unique_ptr<CompactHistoryLine>(new (_blockList) CompactHistoryLine(cells, _blockList));
+    return line == 0 ? _index[0] : _index[line] - _index[line - 1];
+}
 
-    _lines.push_back(std::move(line));
-
-    if (_lines.size() > static_cast<size_t>(_maxLineCount)) {
-        _lines.pop_front();
-    }
+inline int CompactHistoryScroll::startOfLine(int line)
+{
+    return line == 0 ? 0 : _index[line - 1];
 }
 
 void CompactHistoryScroll::addCells(const Character a[], int count)
 {
-    TextLine newLine(count);
-    std::copy(a, a + count, newLine.begin());
-    addCellsVector(newLine);
+    std::copy(a, a + count, std::back_inserter(_cells));
+
+    _index.append(_cells.size());
+    _flags.append(LINE_DEFAULT);
+
+    if (_index.size() > _maxLineCount) {
+        removeFirstLine();
+    }
 }
 
 void CompactHistoryScroll::addLine(LineProperty lineProperty)
 {
-    auto line = _lines.back().get();
-    ////qDebug() << "last line at address " << line;
-    line->setLineProperty(lineProperty);
+    auto &flag = _flags.last();
+    flag = lineProperty;
 }
 
 int CompactHistoryScroll::getLines()
 {
-    return static_cast<int>(_lines.size());
+    return _index.size();
 }
 
 int CompactHistoryScroll::getMaxLines()
 {
-    return static_cast<int>(_maxLineCount);
+    return _maxLineCount;
 }
 
 int CompactHistoryScroll::getLineLen(int lineNumber)
 {
-    if ((lineNumber < 0) || (static_cast<size_t>(lineNumber) >= _lines.size())) {
-        //qDebug() << "requested line invalid: 0 < " << lineNumber << " < " <<_lines.size();
-        //Q_ASSERT(lineNumber >= 0 && lineNumber < _lines.size());
+    if (lineNumber < 0 || lineNumber >= _index.size()) {
         return 0;
     }
-    auto line = _lines[lineNumber].get();
-    ////qDebug() << "request for line at address " << line;
-    return line->getLength();
+
+    return lineLen(lineNumber);
 }
 
 void CompactHistoryScroll::getCells(int lineNumber, int startColumn, int count, Character buffer[])
@@ -78,137 +91,94 @@ void CompactHistoryScroll::getCells(int lineNumber, int startColumn, int count, 
     if (count == 0) {
         return;
     }
-    Q_ASSERT(static_cast<size_t>(lineNumber) < _lines.size());
-    auto line = _lines[lineNumber].get();
+    Q_ASSERT(lineNumber < _index.size());
+
     Q_ASSERT(startColumn >= 0);
-    Q_ASSERT(static_cast<unsigned int>(startColumn) <= line->getLength() - count);
-    line->getCharacters(buffer, count, startColumn);
+    Q_ASSERT(startColumn <= lineLen(lineNumber) - count);
+
+    auto startCopy = _cells.begin() + startOfLine(lineNumber);
+    auto endCopy = startCopy + count;
+    std::copy(startCopy, endCopy, buffer);
 }
 
-void CompactHistoryScroll::setMaxNbLines(unsigned int lineCount)
+void CompactHistoryScroll::setMaxNbLines(int lineCount)
 {
+    Q_ASSERT(lineCount >= 0);
     _maxLineCount = lineCount;
 
-    while (_lines.size() > static_cast<size_t>(lineCount)) {
-        _lines.pop_front();
-    }
-    ////qDebug() << "set max lines to: " << _maxLineCount;
-}
-
-void CompactHistoryScroll::insertCellsVector(int position, const TextLine &cells)
-{
-    auto line = std::unique_ptr<CompactHistoryLine>(new (_blockList) CompactHistoryLine(cells, _blockList));
-
-    _lines.insert(_lines.begin() + position, std::move(line));
-
-    if (_lines.size() > static_cast<size_t>(_maxLineCount)) {
-        _lines.pop_front();
+    while (_index.size() > lineCount) {
+        removeFirstLine();
     }
 }
 
-void CompactHistoryScroll::insertCells(int position, const Character a[], int count)
+void CompactHistoryScroll::removeCells()
 {
-    TextLine newLine(count);
-    std::copy(a, a + count, newLine.begin());
-    insertCellsVector(position, newLine);
-}
+    if (_index.size() > 1) {
+        _index.pop_back();
+        _flags.pop_back();
 
-void CompactHistoryScroll::removeCells(int position)
-{
-    _lines.erase(_lines.begin() + position);
-}
-
-void CompactHistoryScroll::setCellsAt(int position, const Character a[], int count)
-{
-    TextLine newLine(count);
-    std::copy(a, a + count, newLine.begin());
-    setCellsVectorAt(position, newLine);
-}
-
-void CompactHistoryScroll::setCellsVectorAt(int position, const TextLine &cells)
-{
-    _lines[position]->setCharacters(cells);
-}
-
-void CompactHistoryScroll::setLineAt(int position, LineProperty lineProperty)
-{
-    auto line = _lines.at(position).get();
-
-    line->setLineProperty(lineProperty);
+        while (_cells.size() > _index.last()) {
+            _cells.pop_back();
+        }
+    } else {
+        _cells.clear();
+        _index.clear();
+        _flags.clear();
+    }
 }
 
 bool CompactHistoryScroll::isWrappedLine(int lineNumber)
 {
-    Q_ASSERT(static_cast<size_t>(lineNumber) < _lines.size());
-    return _lines[lineNumber]->isWrapped();
+    Q_ASSERT(lineNumber < _index.size());
+    return _flags[lineNumber] & LINE_WRAPPED;
 }
 
 LineProperty CompactHistoryScroll::getLineProperty(int lineNumber)
 {
-    Q_ASSERT(static_cast<size_t>(lineNumber) < _lines.size());
-    return _lines[lineNumber]->getLineProperty();
+    Q_ASSERT(lineNumber < _index.size());
+    return _flags[lineNumber];
 }
 
 int CompactHistoryScroll::reflowLines(int columns)
 {
-    auto getCharacterBuffer = [](int size) {
-        static QVector<Character> characterBuffer(1024);
-        if (characterBuffer.count() < size) {
-            characterBuffer.resize(size);
-        }
+    reflowData newLine;
 
-        return characterBuffer.data();
+    auto reflowLineLen = [](int start, int end) {
+        return end - start;
+    };
+    auto setNewLine = [](reflowData &change, int index, LineProperty flag) {
+        change.index.append(index);
+        change.flags.append(flag);
     };
 
-    // Join the line and move the data to next line if needed
-    int removedLines = 0;
     int currentPos = 0;
-    if (getLines() > MAX_REFLOW_LINES) {
-        currentPos = getLines() - MAX_REFLOW_LINES;
-    }
     while (currentPos < getLines()) {
-        int curr_linelen = getLineLen(currentPos);
-        // Join wrapped line in current history position
-        if (isWrappedLine(currentPos) && currentPos < getLines() - 1) {
-            int next_linelen = getLineLen(currentPos + 1);
-            auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
-            LineProperty new_line_property = getLineProperty(currentPos + 1);
+        int startLine = startOfLine(currentPos);
+        int endLine = startOfLine(currentPos + 1);
+        LineProperty lineProperty = getLineProperty(currentPos);
 
-            // Join the lines
-            getCells(currentPos, 0, curr_linelen, new_line);
-            getCells(currentPos + 1, 0, next_linelen, new_line + curr_linelen);
-
-            // save the new_line in history and remove the next line
-            setCellsAt(currentPos, new_line, curr_linelen + next_linelen);
-            setLineAt(currentPos, new_line_property);
-            removeCells(currentPos + 1);
-            continue;
+        // Join the lines if they are wrapped
+        while (isWrappedLine(currentPos)) {
+            currentPos++;
+            endLine = startOfLine(currentPos + 1);
         }
 
-        // if the current line > columns it will need a new line
-        if (curr_linelen > columns && !(getLineProperty(currentPos) & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
-            bool removeLine = getLines() == getMaxLines();
-            auto *curr_line = getCharacterBuffer(curr_linelen);
-            LineProperty curr_line_property = getLineProperty(currentPos);
-            getCells(currentPos, 0, curr_linelen, curr_line);
-
-            setCellsAt(currentPos, curr_line, columns);
-            setLineAt(currentPos, curr_line_property | LINE_WRAPPED);
-            if (currentPos < getMaxLines() - 1) {
-                int correctPosition = (getLines() == getMaxLines()) ? 0 : 1;
-                insertCells(currentPos + 1, curr_line + columns, curr_linelen - columns);
-                setLineAt(currentPos + correctPosition, curr_line_property);
-            } else {
-                addCells(curr_line + columns, curr_linelen - columns);
-                addLine(curr_line_property);
-                currentPos--;
-            }
-            if (removeLine) {
-                removedLines += 1;
-            }
+        // Now reflow the lines
+        while (reflowLineLen(startLine, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
+            startLine += columns;
+            setNewLine(newLine, startLine, lineProperty | LINE_WRAPPED);
         }
+        setNewLine(newLine, endLine, lineProperty & ~LINE_WRAPPED);
         currentPos++;
     }
-    return removedLines;
-}
+    _index = newLine.index;
+    _flags = newLine.flags;
 
+    int deletedLines = 0;
+    while (getLines() > _maxLineCount) {
+        removeFirstLine();
+        ++deletedLines;
+    }
+
+    return deletedLines;
+}
