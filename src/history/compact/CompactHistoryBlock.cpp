@@ -9,13 +9,19 @@
 
 using namespace Konsole;
 
-CompactHistoryBlock::CompactHistoryBlock() :
-    _blockLength(4096 * 64), // 256kb
-    _head(static_cast<quint8 *>(mmap(nullptr, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0))),
+constexpr size_t BLOCK_LENGTH = 4096 * 64 ; // 256kb
+
+CompactHistoryBlock::CompactHistoryBlock(size_t blockLength) :
+    _blockLength(BLOCK_LENGTH),
     _tail(nullptr),
     _blockStart(nullptr),
     _allocCount(0)
 {
+    if (blockLength > _blockLength) {
+        _blockLength = blockLength;
+    }
+
+    _head = static_cast<quint8 *>(mmap(nullptr, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0));
     Q_ASSERT(_head != MAP_FAILED);
     _tail = _blockStart = _head;
 }

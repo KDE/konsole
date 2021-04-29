@@ -20,7 +20,7 @@ void *CompactHistoryBlockList::allocate(size_t size)
 {
     CompactHistoryBlock *block;
     if (list.isEmpty() || list.last()->remaining() < size) {
-        block = new CompactHistoryBlock();
+        block = new CompactHistoryBlock(size);
         list.append(block);
         ////qDebug() << "new block created, remaining " << block->remaining() << "number of blocks=" << list.size();
     } else {
