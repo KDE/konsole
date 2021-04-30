@@ -30,6 +30,8 @@
 #include <QDebug>
 #include <QtMath>
 
+#include <optional>
+
 // we use this to force QPainter to display text in LTR mode
 // more information can be found in: https://unicode.org/reports/tr9/
 const QChar LTR_OVERRIDE_CHAR(0x202D);
