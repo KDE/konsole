@@ -717,9 +717,7 @@ QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) con
 
 int Screen::getScreenLineColumns(const int line) const
 {
-    const int doubleWidthLine = _lineProperties[line] & LINE_DOUBLEWIDTH;
-
-    if (doubleWidthLine) {
+    if (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) {
         return _columns / 2;
     }
 
