@@ -20,37 +20,37 @@ HistoryScrollNone::HistoryScrollNone() :
 
 HistoryScrollNone::~HistoryScrollNone() = default;
 
-bool HistoryScrollNone::hasScroll()
+bool HistoryScrollNone::hasScroll() const
 {
     return false;
 }
 
-int HistoryScrollNone::getLines()
+int HistoryScrollNone::getLines() const
 {
     return 0;
 }
 
-int HistoryScrollNone::getMaxLines()
+int HistoryScrollNone::getMaxLines() const
 {
     return 0;
 }
 
-int HistoryScrollNone::getLineLen(int)
+int HistoryScrollNone::getLineLen(int) const
 {
     return 0;
 }
 
-bool HistoryScrollNone::isWrappedLine(int /*lineno*/)
+bool HistoryScrollNone::isWrappedLine(int /*lineno*/) const
 {
     return false;
 }
 
-LineProperty HistoryScrollNone::getLineProperty(int /*lineno*/)
+LineProperty HistoryScrollNone::getLineProperty(int /*lineno*/) const
 {
     return 0;
 }
 
-void HistoryScrollNone::getCells(int, int, int, Character [])
+void HistoryScrollNone::getCells(int, int, int, Character []) const
 {
 }
 

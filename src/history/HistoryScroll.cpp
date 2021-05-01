@@ -18,7 +18,7 @@ HistoryScroll::HistoryScroll(HistoryType *t) :
 
 HistoryScroll::~HistoryScroll() = default;
 
-bool HistoryScroll::hasScroll()
+bool HistoryScroll::hasScroll() const
 {
     return true;
 }

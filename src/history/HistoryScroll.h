@@ -31,18 +31,18 @@ public:
     explicit HistoryScroll(HistoryType *);
     virtual ~HistoryScroll();
 
-    virtual bool hasScroll();
+    virtual bool hasScroll() const;
 
     // access to history
-    virtual int  getLines() = 0;
-    virtual int  getMaxLines() = 0;
-    virtual int  getLineLen(int lineno) = 0;
-    virtual void getCells(int lineno, int colno, int count, Character res[]) = 0;
-    virtual bool isWrappedLine(int lineNumber) = 0;
-    virtual LineProperty getLineProperty(int lineno) = 0;
+    virtual int  getLines() const = 0;
+    virtual int  getMaxLines() const = 0;
+    virtual int  getLineLen(const int lineno) const = 0;
+    virtual void getCells(const int lineno, const int colno, const int count, Character res[]) const = 0;
+    virtual bool isWrappedLine(const int lineNumber) const = 0;
+    virtual LineProperty getLineProperty(const int lineno) const = 0;
 
     // adding lines.
-    virtual void addCells(const Character a[], int count) = 0;
+    virtual void addCells(const Character a[], const int count) = 0;
     // convenience method - this is virtual so that subclasses can take advantage
     // of QVector's implicit copying
     virtual void addCellsVector(const QVector<Character> &cells)
@@ -50,11 +50,11 @@ public:
         addCells(cells.data(), cells.size());
     }
 
-    virtual void addLine(LineProperty lineProperty = 0) = 0;
+    virtual void addLine(const LineProperty lineProperty = 0) = 0;
 
     // modify history
     virtual void removeCells() = 0;
-    virtual int reflowLines(int columns) = 0;
+    virtual int reflowLines(const int columns) = 0;
 
     //
     // FIXME:  Passing around constant references to HistoryType instances

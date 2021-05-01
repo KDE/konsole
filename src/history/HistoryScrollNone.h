@@ -23,21 +23,21 @@ public:
     HistoryScrollNone();
     ~HistoryScrollNone() override;
 
-    bool hasScroll() override;
+    bool hasScroll() const override;
 
-    int  getLines() override;
-    int  getMaxLines() override;
-    int  getLineLen(int lineno) override;
-    void getCells(int lineno, int colno, int count, Character res[]) override;
-    bool isWrappedLine(int lineno) override;
-    LineProperty getLineProperty(int lineno) override;
+    int  getLines() const override;
+    int  getMaxLines() const override;
+    int  getLineLen(const int lineno) const override;
+    void getCells(const int lineno, const int colno, const int count, Character res[]) const override;
+    bool isWrappedLine(const int lineno) const override;
+    LineProperty getLineProperty(const int lineno) const override;
 
-    void addCells(const Character a[], int count) override;
-    void addLine(LineProperty lineProperty = 0) override;
+    void addCells(const Character a[], const int count) override;
+    void addLine(const LineProperty lineProperty = 0) override;
 
     // Modify history (do nothing here)
     void removeCells() override;
-    int reflowLines(int) override;
+    int reflowLines(const int) override;
 };
 
 }

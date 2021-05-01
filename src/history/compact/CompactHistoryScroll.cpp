@@ -16,7 +16,7 @@ struct reflowData { // data to reflow lines
     QList<LineProperty> flags;
 };
 
-CompactHistoryScroll::CompactHistoryScroll(unsigned int maxLineCount) :
+CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount) :
     HistoryScroll(new CompactHistoryType(maxLineCount)),
     _cells(),
     _index(),
@@ -28,28 +28,28 @@ CompactHistoryScroll::CompactHistoryScroll(unsigned int maxLineCount) :
 
 void CompactHistoryScroll::removeFirstLine()
 {
-    _flags.pop_front();
+        _flags.pop_front();
 
     auto removing = _index.first();
-    _index.pop_front();
-    std::transform(_index.begin(), _index.end(), _index.begin(), [removing](int i) { return i - removing; });
+        _index.pop_front();
+        std::transform(_index.begin(), _index.end(), _index.begin(), [removing](int i) { return i - removing; });
 
     while (_cells.size() > _index.last()) {
         _cells.pop_front();
     }
 }
 
-inline int CompactHistoryScroll::lineLen(int line)
+inline int CompactHistoryScroll::lineLen(const int line) const
 {
     return line == 0 ? _index[0] : _index[line] - _index[line - 1];
 }
 
-inline int CompactHistoryScroll::startOfLine(int line)
+inline int CompactHistoryScroll::startOfLine(const int line) const
 {
     return line == 0 ? 0 : _index[line - 1];
 }
 
-void CompactHistoryScroll::addCells(const Character a[], int count)
+void CompactHistoryScroll::addCells(const Character a[], const int count)
 {
     std::copy(a, a + count, std::back_inserter(_cells));
 
@@ -61,23 +61,23 @@ void CompactHistoryScroll::addCells(const Character a[], int count)
     }
 }
 
-void CompactHistoryScroll::addLine(LineProperty lineProperty)
+void CompactHistoryScroll::addLine(const LineProperty lineProperty)
 {
     auto &flag = _flags.last();
     flag = lineProperty;
 }
 
-int CompactHistoryScroll::getLines()
+int CompactHistoryScroll::getLines() const
 {
     return _index.size();
 }
 
-int CompactHistoryScroll::getMaxLines()
+int CompactHistoryScroll::getMaxLines() const
 {
     return _maxLineCount;
 }
 
-int CompactHistoryScroll::getLineLen(int lineNumber)
+int CompactHistoryScroll::getLineLen(int lineNumber) const
 {
     if (lineNumber < 0 || lineNumber >= _index.size()) {
         return 0;
@@ -86,7 +86,7 @@ int CompactHistoryScroll::getLineLen(int lineNumber)
     return lineLen(lineNumber);
 }
 
-void CompactHistoryScroll::getCells(int lineNumber, int startColumn, int count, Character buffer[])
+void CompactHistoryScroll::getCells(const int lineNumber, const int startColumn, const int count, Character buffer[]) const
 {
     if (count == 0) {
         return;
@@ -101,7 +101,7 @@ void CompactHistoryScroll::getCells(int lineNumber, int startColumn, int count, 
     std::copy(startCopy, endCopy, buffer);
 }
 
-void CompactHistoryScroll::setMaxNbLines(int lineCount)
+void CompactHistoryScroll::setMaxNbLines(const int lineCount)
 {
     Q_ASSERT(lineCount >= 0);
     _maxLineCount = lineCount;
@@ -127,19 +127,19 @@ void CompactHistoryScroll::removeCells()
     }
 }
 
-bool CompactHistoryScroll::isWrappedLine(int lineNumber)
+bool CompactHistoryScroll::isWrappedLine(const int lineNumber) const
 {
     Q_ASSERT(lineNumber < _index.size());
-    return _flags[lineNumber] & LINE_WRAPPED;
+    return (_flags[lineNumber] & LINE_WRAPPED) > 0;
 }
 
-LineProperty CompactHistoryScroll::getLineProperty(int lineNumber)
+LineProperty CompactHistoryScroll::getLineProperty(const int lineNumber) const
 {
     Q_ASSERT(lineNumber < _index.size());
     return _flags[lineNumber];
 }
 
-int CompactHistoryScroll::reflowLines(int columns)
+int CompactHistoryScroll::reflowLines(const int columns)
 {
     reflowData newLine;
 

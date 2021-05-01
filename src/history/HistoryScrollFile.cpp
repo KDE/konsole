@@ -28,64 +28,58 @@ HistoryScrollFile::HistoryScrollFile() :
 
 HistoryScrollFile::~HistoryScrollFile() = default;
 
-int HistoryScrollFile::getLines()
+int HistoryScrollFile::getLines() const
 {
     return _index.len() / sizeof(qint64);
 }
 
-int HistoryScrollFile::getMaxLines()
+int HistoryScrollFile::getMaxLines() const
 {
     return getLines();
 }
 
-int HistoryScrollFile::getLineLen(int lineno)
+int HistoryScrollFile::getLineLen(const int lineno) const
 {
     return (startOfLine(lineno + 1) - startOfLine(lineno)) / sizeof(Character);
 }
 
-bool HistoryScrollFile::isWrappedLine(int lineno)
+bool HistoryScrollFile::isWrappedLine(const int lineno) const
 {
-    if (lineno >= 0 && lineno <= getLines()) {
-        unsigned char flag = 0;
-        _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char),
-                       (lineno)*sizeof(unsigned char));
-        return (flag & LINE_WRAPPED) != 0;
-    }
-    return false;
+    return (getLineProperty(lineno) & LINE_WRAPPED) > 0;
 }
 
-LineProperty HistoryScrollFile::getLineProperty(int lineno)
+LineProperty HistoryScrollFile::getLineProperty(const int lineno) const
 {
     if (lineno >= 0 && lineno <= getLines()) {
         LineProperty flag = 0;
         _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char),
-                       (lineno)*sizeof(unsigned char));
+                       (lineno) * sizeof(unsigned char));
         return flag;
     }
     return 0;
 }
 
-qint64 HistoryScrollFile::startOfLine(int lineno)
+qint64 HistoryScrollFile::startOfLine(const int lineno) const
 {
     if (lineno <= 0) {
         return 0;
     }
     if (lineno <= getLines()) {
         qint64 res = 0;
-        _index.get(reinterpret_cast<char*>(&res), sizeof(qint64), (lineno - 1)*sizeof(qint64));
+        _index.get(reinterpret_cast<char *>(&res), sizeof(qint64), (lineno - 1) * sizeof(qint64));
         return res;
     }
     return _cells.len();
 }
 
-void HistoryScrollFile::getCells(int lineno, int colno, int count, Character res[])
+void HistoryScrollFile::getCells(const int lineno, const int colno, const int count, Character res[]) const
 {
-    _cells.get(reinterpret_cast<char*>(res), count * sizeof(Character), startOfLine(lineno) + colno * sizeof(Character));
+    _cells.get(reinterpret_cast<char *>(res), count * sizeof(Character), startOfLine(lineno) + colno * sizeof(Character));
 }
 
-void HistoryScrollFile::addCells(const Character text[], int count)
+void HistoryScrollFile::addCells(const Character text[], const int count)
 {
-    _cells.add(reinterpret_cast<const char*>(text), count * sizeof(Character));
+    _cells.add(reinterpret_cast<const char *>(text), count * sizeof(Character));
 }
 
 void HistoryScrollFile::addLine(LineProperty lineProperty)
@@ -109,15 +103,15 @@ void HistoryScrollFile::removeCells()
     _lineflags.removeLast(res * sizeof(unsigned char));
 }
 
-int HistoryScrollFile::reflowLines(int columns)
+int HistoryScrollFile::reflowLines(const int columns)
 {
     auto reflowFile = std::make_unique<HistoryFile>();
     reflowData newLine;
 
-    auto reflowLineLen = [] (qint64 start, qint64 end) {
+    auto reflowLineLen = [](qint64 start, qint64 end) {
         return (int)((end - start) / sizeof(Character));
     };
-    auto setNewLine = [] (reflowData &change, qint64 index, LineProperty lineflag) {
+    auto setNewLine = [](reflowData &change, qint64 index, LineProperty lineflag) {
         change.index = index;
         change.lineFlag = lineflag;
     };

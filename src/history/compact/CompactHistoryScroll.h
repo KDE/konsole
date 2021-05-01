@@ -22,24 +22,24 @@ class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
     typedef QVector<Character> TextLine;
 
 public:
-    explicit CompactHistoryScroll(unsigned int maxLineCount = 1000);
+    explicit CompactHistoryScroll(const unsigned int maxLineCount = 1000);
     ~CompactHistoryScroll() = default;
 
-    int  getLines() override;
-    int  getMaxLines() override;
-    int  getLineLen(int lineNumber) override;
-    void getCells(int lineNumber, int startColumn, int count, Character buffer[]) override;
-    bool isWrappedLine(int lineNumber) override;
-    LineProperty getLineProperty(int lineNumber) override;
+    int  getLines() const override;
+    int  getMaxLines() const override;
+    int  getLineLen(const int lineNumber) const override;
+    void getCells(const int lineNumber, const int startColumn, const int count, Character buffer[]) const override;
+    bool isWrappedLine(const int lineNumber) const override;
+    LineProperty getLineProperty(const int lineNumber) const override;
 
-    void addCells(const Character a[], int count) override;
-    void addLine(LineProperty lineProperty = 0) override;
+    void addCells(const Character a[], const int count) override;
+    void addLine(const LineProperty lineProperty = 0) override;
 
     void removeCells() override;
 
-    void setMaxNbLines(int lineCount);
+    void setMaxNbLines(const int lineCount);
 
-    int reflowLines(int columns) override;
+    int reflowLines(const int columns) override;
 
 private:
     QList<Character> _cells;
@@ -49,8 +49,8 @@ private:
     int _maxLineCount;
 
     void removeFirstLine();
-    inline int lineLen(const int line);
-    inline int startOfLine(int line);
+    inline int lineLen(const int line) const;
+    inline int startOfLine(const int line) const;
 };
 
 }
