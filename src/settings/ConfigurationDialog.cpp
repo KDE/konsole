@@ -80,6 +80,8 @@ void ConfigurationDialog::addPage(KPageWidgetItem *item, bool manage)
 
     KPageDialog::addPage(item);
 
+    item->setParent(this);
+
     if (manage) {
         _manager->addWidget(item->widget());
         _groupManager->addChildren(item->widget());

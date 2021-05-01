@@ -759,11 +759,17 @@ void MainWindow::showManageProfilesDialog()
 
 void MainWindow::showSettingsDialog(const bool showProfilePage)
 {
-    static ConfigurationDialog *confDialog = nullptr;
-    static KPageWidgetItem *profilePage = nullptr;
+    ConfigurationDialog *confDialog = findChild<ConfigurationDialog *>();
+    const QString profilePageName = i18nc("@title Preferences page name", "Profiles");
+
     if (confDialog != nullptr) {
-        if (showProfilePage && profilePage != nullptr) {
-            confDialog->setCurrentPage(profilePage);
+        if (showProfilePage) {
+            for (auto page : confDialog->findChildren<KPageWidgetItem *>()) {
+                if (page->name().contains(profilePageName)) {
+                    confDialog->setCurrentPage(page);
+                    break;
+                }
+            }
         }
         confDialog->show();
         return;
@@ -776,8 +782,7 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
     generalPage->setIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
     confDialog->addPage(generalPage, true);
 
-    const QString profilePageName = i18nc("@title Preferences page name", "Profiles");
-    profilePage = new KPageWidgetItem(new ProfileSettings(confDialog), profilePageName);
+    auto *profilePage = new KPageWidgetItem(new ProfileSettings(confDialog), profilePageName);
     profilePage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-profiles")));
     confDialog->addPage(profilePage, true);
 
