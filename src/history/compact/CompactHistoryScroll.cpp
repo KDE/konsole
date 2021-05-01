@@ -28,14 +28,18 @@ CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount) :
 
 void CompactHistoryScroll::removeFirstLine()
 {
+    if (_index.size() > 1) {
         _flags.pop_front();
 
-    auto removing = _index.first();
+        const int removing = _index.first();
         _index.pop_front();
         std::transform(_index.begin(), _index.end(), _index.begin(), [removing](int i) { return i - removing; });
 
-    while (_cells.size() > _index.last()) {
-        _cells.pop_front();
+        _cells.erase(_cells.begin(), _cells.begin() + removing);
+    } else {
+        _flags.clear();
+        _index.clear();
+        _cells.clear();
     }
 }
 
@@ -117,9 +121,7 @@ void CompactHistoryScroll::removeCells()
         _index.pop_back();
         _flags.pop_back();
 
-        while (_cells.size() > _index.last()) {
-            _cells.pop_back();
-        }
+        _cells.erase(_cells.begin() + _index.last(), _cells.end());
     } else {
         _cells.clear();
         _index.clear();
