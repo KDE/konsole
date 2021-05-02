@@ -359,8 +359,8 @@ void Screen::saveCursor()
 
 void Screen::restoreCursor()
 {
-    _cuX     = qMin(_savedState.cursorColumn, getScreenLineColumns(_savedState.cursorLine) - 1);
     _cuY     = qMin(_savedState.cursorLine, _lines - 1);
+    _cuX     = qMin(_savedState.cursorColumn, getScreenLineColumns(_cuY) - 1);
     _currentRendition   = _savedState.rendition;
     _currentForeground   = _savedState.foreground;
     _currentBackground   = _savedState.background;
