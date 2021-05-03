@@ -239,7 +239,7 @@ target_link_libraries(konsoleprivate
 )
 
 set_target_properties(konsoleprivate PROPERTIES
-    VERSION ${KONSOLEPRIVATE_VERSION_STRING}
+    VERSION ${KONSOLEPRIVATE_VERSION}
     SOVERSION ${KONSOLEPRIVATE_SOVERSION}
 )
 
