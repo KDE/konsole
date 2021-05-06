@@ -27,3 +27,8 @@ doxydoc/
 *.srctrldb
 *.srctrlprj
 .clang-format
+/compile_commands.json
+.clangd
+.cache
+.idea
+/cmake-build*
