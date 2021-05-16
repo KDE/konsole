@@ -429,7 +429,7 @@ void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
         for (QAction *sessionAction : sessionActions) {
             _newTabMenuAction->menu()->addAction(sessionAction);
 
-            auto setActionFont = [sessionAction](bool isBold) {
+            auto setActionFontBold = [sessionAction](bool isBold) {
                 QFont actionFont = sessionAction->font();
                 actionFont.setBold(isBold);
                 sessionAction->setFont(actionFont);
@@ -439,10 +439,9 @@ void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
             if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
                 QIcon icon = KIconUtils::addOverlay(QIcon::fromTheme(profile->icon()), QIcon::fromTheme(QStringLiteral("emblem-favorite")), Qt::BottomRightCorner);
                 sessionAction->setIcon(icon);
-                setActionFont(true);
+                setActionFontBold(true);
             } else {
-                sessionAction->setIcon(QIcon::fromTheme(profile->icon()));
-                setActionFont(false);
+                setActionFontBold(false);
             }
         }
     } else {
