@@ -315,7 +315,13 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
 
     _terminalColor = new TerminalColor(this);
-    connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::setPalette);
+
+    connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, [this](const QPalette &pal) {
+        // This doesn't work well with other styles (e.g. Oxygen and Fusion)
+        if (style()->objectName().toLower() == QLatin1String("breeze")) {
+            _scrollBar->setPalette(pal);
+        }
+    });
 
     _terminalFont = new TerminalFont(this);
 
