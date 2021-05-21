@@ -247,6 +247,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
     setLayoutDirection(Qt::LeftToRight);
+    setInputMethodHints(Qt::ImhNoPredictiveText |  Qt::ImhNoAutoUppercase);
 
     _contentRect = QRect(_margin, _margin, 1, 1);
 
