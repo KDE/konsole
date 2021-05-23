@@ -100,7 +100,7 @@ void CompactHistoryScroll::getCells(const int lineNumber, const int startColumn,
     Q_ASSERT(startColumn >= 0);
     Q_ASSERT(startColumn <= lineLen(lineNumber) - count);
 
-    auto startCopy = _cells.begin() + startOfLine(lineNumber);
+    auto startCopy = _cells.begin() + startOfLine(lineNumber) + startColumn;
     auto endCopy = startCopy + count;
     std::copy(startCopy, endCopy, buffer);
 }
