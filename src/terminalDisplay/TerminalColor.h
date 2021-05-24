@@ -30,7 +30,7 @@ namespace Konsole
     public:
         explicit TerminalColor(QWidget *parent);
 
-        void applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, int randomSeed);
+        void applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint randomSeed);
 
         QColor backgroundColor() const;
         QColor foregroundColor() const;
