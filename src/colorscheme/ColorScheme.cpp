@@ -286,11 +286,14 @@ QColor ColorScheme::colorEntry(int index, uint randomSeed) const
     const double maxSaturation = qMax(range.saturation, baseSaturation);
     // Use rising linear distribution as colors with lower
     // saturation are less distinguishable.
-    std::piecewise_linear_distribution<> saturationDistribution({minSaturation, maxSaturation},
-                                                                [](double v) { return v; });
-    const double saturation = qFuzzyCompare(minSaturation, maxSaturation)
-                              ? baseSaturation
-                              : saturationDistribution(randomEngine);
+    double saturation;
+    if (qFuzzyCompare(minSaturation, maxSaturation)) {
+        saturation = baseSaturation;
+    } else {
+        std::piecewise_linear_distribution<> saturationDistribution({minSaturation, maxSaturation},
+                                                                    [](double v) { return v; });
+        saturation = saturationDistribution(randomEngine);
+    }
 
     // Lightness range has base value at its center. The base
     // value is clamped to prevent the range from shrinking.
@@ -300,16 +303,19 @@ QColor ColorScheme::colorEntry(int index, uint randomSeed) const
     const double maxLightness = qMin(baseLightness + range.lightness / 2.0, MaxLightness);
     // Use triangular distribution with peak at L=50.0.
     // Dark and very light colors are less distinguishable.
-    static const auto lightnessWeightsFunc = [](double v) { return 50.0 - qAbs(v - 50.0); };
-    std::piecewise_linear_distribution<> lightnessDistribution;
-    if (minLightness < 50.0 && 50.0 < maxLightness) {
-        lightnessDistribution = std::piecewise_linear_distribution<>({minLightness, 50.0, maxLightness}, lightnessWeightsFunc);
+    double lightness;
+    if (qFuzzyCompare(minLightness, maxLightness)) {
+        lightness = baseLightness;
     } else {
-        lightnessDistribution = std::piecewise_linear_distribution<>({minLightness, maxLightness}, lightnessWeightsFunc);
+        static const auto lightnessWeightsFunc = [](double v) { return 50.0 - qAbs(v - 50.0); };
+        std::piecewise_linear_distribution<> lightnessDistribution;
+        if (minLightness < 50.0 && 50.0 < maxLightness) {
+            lightnessDistribution = std::piecewise_linear_distribution<>({minLightness, 50.0, maxLightness}, lightnessWeightsFunc);
+        } else {
+            lightnessDistribution = std::piecewise_linear_distribution<>({minLightness, maxLightness}, lightnessWeightsFunc);
+        }
+        lightness = lightnessDistribution(randomEngine);
     }
-    const double lightness = qFuzzyCompare(minLightness, maxLightness)
-                             ? baseLightness
-                             : lightnessDistribution(randomEngine);
 
     double red;
     double green;
