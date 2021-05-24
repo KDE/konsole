@@ -30,7 +30,7 @@ namespace Konsole
         setColorTable(ColorScheme::defaultTable);
     }
     
-    void TerminalColor::applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, int randomSeed)
+    void TerminalColor::applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint randomSeed)
     {
         QColor table[TABLE_COLORS];
         colorScheme->getColorTable(table, randomSeed);
