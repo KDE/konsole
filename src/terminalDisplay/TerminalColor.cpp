@@ -121,7 +121,7 @@ namespace Konsole
 
         QColor buttonTextColor = m_colorTable[DEFAULT_FORE_COLOR];
         QColor backgroundColor = m_colorTable[DEFAULT_BACK_COLOR];
-        backgroundColor.setAlpha(m_opacity);
+        backgroundColor.setAlphaF(m_opacity);
 
         QColor buttonColor = backgroundColor.toHsv();
         if (buttonColor.valueF() < 0.5) {
