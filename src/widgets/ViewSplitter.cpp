@@ -13,7 +13,6 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 #include <QApplication>
-#include <QDebug>
 
 // C++
 #include <memory>
@@ -24,6 +23,9 @@
 
 using Konsole::ViewSplitter;
 using Konsole::TerminalDisplay;
+
+bool ViewSplitter::m_drawTopLevelHandler;
+Qt::Orientation ViewSplitter::m_topLevelHandlerDrawnOrientation;
 
 //TODO: Connect the TerminalDisplay destroyed signal here.
 
@@ -383,4 +385,69 @@ void Konsole::ViewSplitter::showEvent(QShowEvent *)
 {
     // Fixes lost focus in background mode.
     setFocusProxy(activeSplitter()->activeTerminalDisplay());
+}
+
+QPoint Konsole::ViewSplitter::mapToTopLevel(const QPoint p)
+{
+    if (auto parentSplitter = qobject_cast<ViewSplitter*>(parentWidget())) {
+        auto next_pos = mapToParent(p);
+        parentSplitter->mapToTopLevel(next_pos);
+    }
+    return p;
+}
+
+Konsole::ViewSplitterHandle::ViewSplitterHandle(Qt::Orientation orientation, QSplitter* parent)
+    : QSplitterHandle(orientation, parent)
+{
+}
+
+QSplitterHandle* ViewSplitter::createHandle()
+{
+    return new ViewSplitterHandle(orientation(), this);
+}
+
+namespace {
+    QList<int> allSplitterSizes;
+}
+
+void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
+{
+    auto parentSplitter = qobject_cast<ViewSplitter*>(parentWidget());
+    auto topLevelSplitter = parentSplitter->getToplevelSplitter();
+
+    QList<ViewSplitter*> splitters = topLevelSplitter->findChildren<ViewSplitter*>();
+    splitters.append(topLevelSplitter);
+
+    for (auto splitter : splitters) {
+        if (splitter->orientation() != orientation()) {
+            continue;
+        }
+
+        for (int size : splitter->sizes()) {
+            QPoint thisPoint = orientation() == Qt::Horizontal
+                ? QPoint(size, 0)
+                : QPoint(0, size);
+
+            QPoint splitterPos = splitter->mapToTopLevel(thisPoint);
+
+            const int ourPos = orientation() == Qt::Horizontal
+                ? splitterPos.x()
+                : splitterPos.y();
+
+            allSplitterSizes.push_back(ourPos);
+        }
+    }
+
+    QSplitterHandle::mousePressEvent(ev);
+}
+
+void Konsole::ViewSplitterHandle::mouseReleaseEvent(QMouseEvent *ev)
+{
+    allSplitterSizes.clear();
+    QSplitterHandle::mouseReleaseEvent(ev);
+}
+
+void Konsole::ViewSplitterHandle::mouseMoveEvent(QMouseEvent *ev)
+{
+    QSplitterHandle::mouseMoveEvent(ev);
 }

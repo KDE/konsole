@@ -9,6 +9,7 @@
 
 // Qt
 #include <QSplitter>
+#include <QSplitterHandle>
 
 // Konsole
 #include "konsoleprivate_export.h"
@@ -20,6 +21,16 @@ class QDragLeaveEvent;
 
 namespace Konsole {
 class TerminalDisplay;
+
+class ViewSplitterHandle : public QSplitterHandle {
+    Q_OBJECT
+public:
+    ViewSplitterHandle(Qt::Orientation orientation, QSplitter *parent);
+protected:
+    void mousePressEvent(QMouseEvent *ev) override;
+    void mouseReleaseEvent(QMouseEvent *ev) override;
+    void mouseMoveEvent(QMouseEvent *ev) override;
+};
 
 /**
  * A splitter which holds a number of ViewContainer objects and allows
@@ -106,6 +117,10 @@ public:
     void childEvent(QChildEvent* event) override;
     bool terminalMaximized() const { return m_terminalMaximized; }
 
+    QSplitterHandle *createHandle() override;
+
+    QPoint mapToTopLevel(const QPoint p);
+
 protected:
     void dragEnterEvent(QDragEnterEvent *ev) override;
     void dragMoveEvent(QDragMoveEvent *ev) override;
@@ -129,6 +144,9 @@ private:
     void updateSizes();
     bool m_terminalMaximized = false;
     bool m_blockPropagatedDeletion = false;
+
+    static bool m_drawTopLevelHandler;
+    static Qt::Orientation m_topLevelHandlerDrawnOrientation;
 };
 }
 #endif //VIEWSPLITTER_H
