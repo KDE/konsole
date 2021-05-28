@@ -13,8 +13,10 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 #include <QApplication>
-#include <memory>
+#include <QDebug>
 
+// C++
+#include <memory>
 
 // Konsole
 #include "widgets/ViewContainer.h"
@@ -106,12 +108,14 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
         auto newSplitter = new ViewSplitter();
         TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
         const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
+        splitter->m_blockPropagatedDeletion = true;
         newSplitter->addWidget(behavior == AddBehavior::AddBefore ? terminalDisplay : oldTerminalDisplay);
         newSplitter->addWidget(behavior == AddBehavior::AddBefore ? oldTerminalDisplay : terminalDisplay);
         newSplitter->setOrientation(containerOrientation);
         newSplitter->updateSizes();
         newSplitter->show();
         splitter->insertWidget(oldContainerIndex, newSplitter);
+        splitter->m_blockPropagatedDeletion = false;
     }
     splitter->updateSizes();
 }
@@ -128,7 +132,24 @@ void ViewSplitter::childEvent(QChildEvent *event)
             }
             deleteLater();
         }
-        if (findChild<TerminalDisplay*>() == nullptr) {
+        if (count() == 1) {
+            if (!m_blockPropagatedDeletion) {
+                auto *parent_splitter = qobject_cast<ViewSplitter *>(parentWidget());
+                if (parent_splitter) {
+                    parent_splitter->m_blockPropagatedDeletion = true;
+                    auto *wdg = widget(0);
+                    const int oldContainerIndex = parent_splitter->indexOf(this);
+                    wdg->setParent(nullptr);
+                    parent_splitter->insertWidget(oldContainerIndex, wdg);
+                    parent_splitter->m_blockPropagatedDeletion = false;
+                    wdg->setFocus();
+                    deleteLater();
+                }
+            }
+        }
+
+        const int numOfTerminals = findChildren<TerminalDisplay*>().count();
+        if (numOfTerminals == 0) {
             deleteLater();
         }
     }

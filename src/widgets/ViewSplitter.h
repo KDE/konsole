@@ -39,6 +39,7 @@ class KONSOLEPRIVATE_EXPORT ViewSplitter : public QSplitter
 
 public:
     explicit ViewSplitter(QWidget *parent = nullptr);
+
     enum class AddBehavior {AddBefore, AddAfter};
     /**
      * Locates the child ViewSplitter widget which currently has the focus
@@ -127,6 +128,7 @@ private:
 
     void updateSizes();
     bool m_terminalMaximized = false;
+    bool m_blockPropagatedDeletion = false;
 };
 }
 #endif //VIEWSPLITTER_H
