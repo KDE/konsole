@@ -137,11 +137,15 @@ void ViewSplitter::childEvent(QChildEvent *event)
                 auto *parent_splitter = qobject_cast<ViewSplitter *>(parentWidget());
                 if (parent_splitter) {
                     parent_splitter->m_blockPropagatedDeletion = true;
+                    auto sizes = parent_splitter->sizes();
                     auto *wdg = widget(0);
                     const int oldContainerIndex = parent_splitter->indexOf(this);
                     wdg->setParent(nullptr);
                     parent_splitter->insertWidget(oldContainerIndex, wdg);
                     parent_splitter->m_blockPropagatedDeletion = false;
+                    setParent(nullptr);
+
+                    parent_splitter->setSizes(sizes);
                     wdg->setFocus();
                     deleteLater();
                 }
