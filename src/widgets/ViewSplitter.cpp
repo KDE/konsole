@@ -433,6 +433,10 @@ namespace {
     QList<int> allSplitterSizes;
 
     int search_closest(const QList<int>& sorted_array, int x) {
+        if (sorted_array.isEmpty()) {
+            return -1;
+        }
+
         auto iter_geq = std::lower_bound(
             sorted_array.begin(),
             sorted_array.end(),
