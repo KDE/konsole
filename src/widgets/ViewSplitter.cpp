@@ -445,13 +445,14 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
             continue;
         }
 
-        // We need to iterate untill one before the last element.
-        // we can't snap to the last.
-        auto end = std::end(splitter->sizes()) - 1;
-        for (auto it = std::begin(splitter->sizes()); it < end; it++) {
+        int delta = 0;
+        for (auto point : splitter->sizes()) {
+            qDebug() << "Getting" << point;
+            delta += point;
             QPoint thisPoint = orientation() == Qt::Horizontal
-                ? QPoint(*it, 0)
-                : QPoint(0, *it);
+                ? QPoint(delta, 0)
+                : QPoint(0, delta);
+
 
             QPoint splitterPos = splitter->mapToTopLevel(thisPoint);
 
@@ -462,11 +463,12 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
             allSplitterSizes.push_back(ourPos);
         }
     }
+    std::sort(std::begin(allSplitterSizes), std::end(allSplitterSizes));
+    qDebug() << "All splitter sizes:" << allSplitterSizes;
 
     QPoint thisPoint = parentSplitter->mapToTopLevel(mapToParent(ev->pos()));
     const int thisValue = Qt::Horizontal ? thisPoint.x() : thisPoint.y();
 
-    std::sort(std::begin(allSplitterSizes), std::end(allSplitterSizes));
     allSplitterSizes.removeOne(thisValue);
 
     QSplitterHandle::mousePressEvent(ev);
