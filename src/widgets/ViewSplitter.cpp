@@ -13,6 +13,7 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 #include <QApplication>
+#include <QStack>
 
 // C++
 #include <memory>
@@ -387,14 +388,35 @@ void Konsole::ViewSplitter::showEvent(QShowEvent *)
     setFocusProxy(activeSplitter()->activeTerminalDisplay());
 }
 
-QPoint Konsole::ViewSplitter::mapToTopLevel(const QPoint p)
+QPoint Konsole::ViewSplitter::mapToTopLevel(const QPoint& p)
 {
-    auto parentSplitter = qobject_cast<ViewSplitter*>(parentWidget());
+    auto parentSplitter = qobject_cast<ViewSplitter*>(parent());
     if (parentSplitter) {
         auto next_pos = mapToParent(p);
         return parentSplitter->mapToTopLevel(next_pos);
     }
     return p;
+}
+
+QPoint Konsole::ViewSplitter::mapFromTopLevel(const QPoint& p)
+{
+    QStack<ViewSplitter*> tillTopLevel;
+    tillTopLevel.push(this);
+
+    auto parentSplitter = qobject_cast<ViewSplitter*>(parent());
+    while(parentSplitter) {
+        tillTopLevel.push(parentSplitter);
+        parentSplitter = qobject_cast<ViewSplitter*>(parentSplitter->parent());
+    }
+
+    tillTopLevel.pop();
+
+    QPoint retPoint = p;
+    while (!tillTopLevel.isEmpty()) {
+        ViewSplitter *view = tillTopLevel.pop();
+        retPoint = view->mapFromParent(retPoint);
+    }
+    return retPoint;
 }
 
 Konsole::ViewSplitterHandle::ViewSplitterHandle(Qt::Orientation orientation, QSplitter* parent)
@@ -424,7 +446,6 @@ namespace {
         int a = *(iter_geq - 1);
         int b = *(iter_geq);
 
-        qDebug() << "value" << x << "is near" << a << "or" << b;
         if (abs(x - a) < abs(x - b)) {
             return a;
         }
@@ -448,7 +469,6 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
 
         int delta = 0;
         for (auto point : splitter->sizes()) {
-            qDebug() << "Getting" << point;
             delta += point;
             QPoint thisPoint = orientation() == Qt::Horizontal
                 ? QPoint(delta, 0)
@@ -466,12 +486,9 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
     }
 
     std::sort(std::begin(allSplitterSizes), std::end(allSplitterSizes));
-    qDebug() << "All values we have" << allSplitterSizes;
 
     QPoint thisPoint = parentSplitter->mapToTopLevel(mapToParent(ev->pos()));
     const int thisValue = search_closest(allSplitterSizes, Qt::Horizontal ? thisPoint.x() : thisPoint.y());
-
-    qDebug() << "Trying to move" << thisPoint.x() << "mapped to" << thisValue;
     allSplitterSizes.removeOne(thisValue);
 
     { // context for the splitterSet temporary.
@@ -479,8 +496,6 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
         allSplitterSizes = QList<int>(std::begin(splitterSet), std::end(splitterSet));
     }
     std::sort(std::begin(allSplitterSizes), std::end(allSplitterSizes));
-
-    qDebug() << "All splitter sizes:" << allSplitterSizes;
 
     QSplitterHandle::mousePressEvent(ev);
 }
@@ -499,11 +514,11 @@ void Konsole::ViewSplitterHandle::mouseMoveEvent(QMouseEvent *ev)
 
     const int thisValue = Qt::Horizontal ? thisPoint.x() : thisPoint.y();
     const int nearest = search_closest(allSplitterSizes, thisValue );
-
-    if (qAbs(nearest - thisValue) <= 10) {
-        qDebug() << "Splitter is near glue threshould." << nearest;
-        // "Splitter is moving near another splitter, Glue them together.
-        // TODO: Figure out this.
+    const int threshould = qAbs(nearest - thisValue);
+    if (threshould <= 20) {
+        auto *thisSplitter = qobject_cast<ViewSplitter*>(splitter());
+        QPoint localPoint = thisSplitter->mapFromTopLevel(Qt::Horizontal ? QPoint(nearest, 0) : QPoint(0, nearest));
+        moveSplitter(Qt::Horizontal ? localPoint.x() : localPoint.y());
         return;
     }
 

@@ -119,8 +119,8 @@ public:
 
     QSplitterHandle *createHandle() override;
 
-    QPoint mapToTopLevel(const QPoint p);
-
+    QPoint mapToTopLevel(const QPoint& p);
+    QPoint mapFromTopLevel(const QPoint& p);
 protected:
     void dragEnterEvent(QDragEnterEvent *ev) override;
     void dragMoveEvent(QDragMoveEvent *ev) override;
