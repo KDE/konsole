@@ -424,6 +424,7 @@ namespace {
         int a = *(iter_geq - 1);
         int b = *(iter_geq);
 
+        qDebug() << "value" << x << "is near" << a << "or" << b;
         if (abs(x - a) < abs(x - b)) {
             return a;
         }
@@ -463,13 +464,23 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
             allSplitterSizes.push_back(ourPos);
         }
     }
+
     std::sort(std::begin(allSplitterSizes), std::end(allSplitterSizes));
-    qDebug() << "All splitter sizes:" << allSplitterSizes;
+    qDebug() << "All values we have" << allSplitterSizes;
 
     QPoint thisPoint = parentSplitter->mapToTopLevel(mapToParent(ev->pos()));
-    const int thisValue = Qt::Horizontal ? thisPoint.x() : thisPoint.y();
+    const int thisValue = search_closest(allSplitterSizes, Qt::Horizontal ? thisPoint.x() : thisPoint.y());
 
+    qDebug() << "Trying to move" << thisPoint.x() << "mapped to" << thisValue;
     allSplitterSizes.removeOne(thisValue);
+
+    { // context for the splitterSet temporary.
+        auto splitterSet = QSet<int>(std::begin(allSplitterSizes), std::end(allSplitterSizes));
+        allSplitterSizes = QList<int>(std::begin(splitterSet), std::end(splitterSet));
+    }
+    std::sort(std::begin(allSplitterSizes), std::end(allSplitterSizes));
+
+    qDebug() << "All splitter sizes:" << allSplitterSizes;
 
     QSplitterHandle::mousePressEvent(ev);
 }
