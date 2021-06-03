@@ -472,13 +472,15 @@ void Session::run()
         }
     }
 
+    // if none of the choices are available, print a warning
+    if (exec.isEmpty()) {
+        terminalWarning(i18n("Could not find an interactive shell to start."));
+        return;
+    }
+
     // if a program was specified via setProgram(), but it couldn't be found, print a warning
     if (exec != checkProgram(_program)) {
         terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.", _program, exec));
-        // if none of the choices are available, print a warning
-    } else if (programs.last() == checkProgram(exec)) {
-        terminalWarning(i18n("Could not find an interactive shell to start."));
-        return;
     }
 
     // if no arguments are specified, fall back to program name
