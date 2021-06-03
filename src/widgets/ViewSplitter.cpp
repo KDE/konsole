@@ -492,9 +492,8 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
     std::sort(std::begin(allSplitterSizes), std::end(allSplitterSizes));
 
     QPoint thisPoint = parentSplitter->mapToTopLevel(mapToParent(ev->pos()));
-    const int thisValue = search_closest(allSplitterSizes, Qt::Horizontal ? thisPoint.x() : thisPoint.y());
+    const int thisValue = search_closest(allSplitterSizes, orientation() == Qt::Horizontal ? thisPoint.x() : thisPoint.y());
     allSplitterSizes.removeOne(thisValue);
-
     { // context for the splitterSet temporary.
         auto splitterSet = QSet<int>(std::begin(allSplitterSizes), std::end(allSplitterSizes));
         allSplitterSizes = QList<int>(std::begin(splitterSet), std::end(splitterSet));
@@ -516,13 +515,13 @@ void Konsole::ViewSplitterHandle::mouseMoveEvent(QMouseEvent *ev)
 
     QPoint thisPoint = parentSplitter->mapToTopLevel(mapToParent(ev->pos()));
 
-    const int thisValue = Qt::Horizontal ? thisPoint.x() : thisPoint.y();
+    const int thisValue = orientation() == Qt::Horizontal ? thisPoint.x() : thisPoint.y();
     const int nearest = search_closest(allSplitterSizes, thisValue );
     const int threshould = qAbs(nearest - thisValue);
     if (threshould <= 20) {
         auto *thisSplitter = qobject_cast<ViewSplitter*>(splitter());
-        QPoint localPoint = thisSplitter->mapFromTopLevel(Qt::Horizontal ? QPoint(nearest, 0) : QPoint(0, nearest));
-        moveSplitter(Qt::Horizontal ? localPoint.x() : localPoint.y());
+        QPoint localPoint = thisSplitter->mapFromTopLevel(orientation() == Qt::Horizontal ? QPoint(nearest, 0) : QPoint(0, nearest));
+        moveSplitter(orientation() == Qt::Horizontal ? localPoint.x() : localPoint.y());
         return;
     }
 
