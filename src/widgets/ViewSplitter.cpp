@@ -126,35 +126,26 @@ void ViewSplitter::childEvent(QChildEvent *event)
 
     if (event->removed()) {
         if (count() == 0) {
-            auto *parent_splitter = qobject_cast<ViewSplitter *>(parentWidget());
+            auto *parent_splitter = qobject_cast<ViewSplitter *>(parent());
             if (parent_splitter != nullptr) {
                 setParent(nullptr);
             }
             deleteLater();
-        }
-        if (count() == 1) {
+        } else if (count() == 1) {
             if (!m_blockPropagatedDeletion) {
-                auto *parent_splitter = qobject_cast<ViewSplitter *>(parentWidget());
+                auto *parent_splitter = qobject_cast<ViewSplitter *>(parent());
                 if (parent_splitter) {
                     parent_splitter->m_blockPropagatedDeletion = true;
-                    auto sizes = parent_splitter->sizes();
+                    const auto sizes = parent_splitter->sizes();
                     auto *wdg = widget(0);
                     const int oldContainerIndex = parent_splitter->indexOf(this);
-                    wdg->setParent(nullptr);
-                    parent_splitter->insertWidget(oldContainerIndex, wdg);
+                    parent_splitter->replaceWidget(oldContainerIndex, wdg);
                     parent_splitter->m_blockPropagatedDeletion = false;
-                    setParent(nullptr);
-
                     parent_splitter->setSizes(sizes);
                     wdg->setFocus();
                     deleteLater();
                 }
             }
-        }
-
-        const int numOfTerminals = findChildren<TerminalDisplay*>().count();
-        if (numOfTerminals == 0) {
-            deleteLater();
         }
     }
 
