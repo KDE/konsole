@@ -205,49 +205,17 @@
        </property>
       </spacer>
      </item>
-     <item row="9" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
-      <widget class="QLabel" name="label">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Highlighting:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="9" column="1">
       <widget class="QCheckBox" name="highlightScrolledLinesButton">
        <property name="text">
-        <string>Highlight the lines coming into view</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
-      <widget class="QLabel" name="labelReflowLines">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Reflow Lines:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <string>Highlight new lines coming into view</string>
        </property>
       </widget>
      </item>
      <item row="10" column="1">
       <widget class="QCheckBox" name="reflowLinesButton">
        <property name="text">
-        <string>Reflow lines when terminal resizes</string>
+        <string>Reflow lines when the terminal is resized</string>
        </property>
       </widget>
      </item>
