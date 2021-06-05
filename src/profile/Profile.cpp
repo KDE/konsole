@@ -82,6 +82,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { HistoryMode , "HistoryMode" , SCROLLING_GROUP , QVariant::Int }
     , { HistorySize , "HistorySize" , SCROLLING_GROUP , QVariant::Int }
     , { ScrollBarPosition , "ScrollBarPosition" , SCROLLING_GROUP , QVariant::Int }
+    , { ScrollBarMatchTerminalColors, "ScrollBarMatchTerminalColors", INTERACTION_GROUP, QVariant::Bool }
     , { ScrollFullPage , "ScrollFullPage" , SCROLLING_GROUP , QVariant::Bool }
     , { HighlightScrolledLines , "HighlightScrolledLines" , SCROLLING_GROUP , QVariant::Bool }
     , { ReflowLines , "ReflowLines" , SCROLLING_GROUP , QVariant::Bool }
@@ -188,6 +189,7 @@ void Profile::useFallback()
     setProperty(HistoryMode, Enum::FixedSizeHistory);
     setProperty(HistorySize, 1000);
     setProperty(ScrollBarPosition, Enum::ScrollBarRight);
+    setProperty(ScrollBarMatchTerminalColors, true);
     setProperty(ScrollFullPage, false);
     setProperty(HighlightScrolledLines, true);
     setProperty(ReflowLines, true);

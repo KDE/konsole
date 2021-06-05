@@ -140,6 +140,14 @@ public:
          * See Enum::ScrollBarPositionEnum
          */
         ScrollBarPosition,
+
+        /**
+         * (bool) Whether the scrollbar colors will match the current
+         * terminal color scheme, or follow the current widget style
+         * color scheme.
+         */
+        ScrollBarMatchTerminalColors,
+
         /** (bool) Specifies whether the PageUp/Down will scroll the full
          * height or half height.
              */

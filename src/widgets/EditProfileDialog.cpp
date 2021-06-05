@@ -1606,6 +1606,11 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
     _scrollingUi->scrollFullPage->setChecked(Enum::ScrollPageFull == scrollFullPage);
     connect(_scrollingUi->scrollFullPage, &QPushButton::clicked, this, &EditProfileDialog::scrollFullPage);
 
+    _scrollingUi->scrollBarMatchTerminalColors->setChecked(profile->property<bool>(Profile::ScrollBarMatchTerminalColors));
+    connect(_scrollingUi->scrollBarMatchTerminalColors, &QCheckBox::toggled, this,  [this](bool checked) {
+        updateTempProfileProperty(Profile::ScrollBarMatchTerminalColors, checked);
+    });
+
     _scrollingUi->highlightScrolledLinesButton->setChecked(profile->property<bool>(Profile::HighlightScrolledLines));
     connect(_scrollingUi->highlightScrolledLinesButton, &QPushButton::clicked, this,  &EditProfileDialog::toggleHighlightScrolledLines);
 
