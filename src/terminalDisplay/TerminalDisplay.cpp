@@ -315,7 +315,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
 
     _terminalColor = new TerminalColor(this);
-    connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::setPalette);
 
     _terminalFont = new TerminalFont(this);
 
@@ -2799,6 +2798,14 @@ IncrementalSearchBar *TerminalDisplay::searchBar() const
 
 void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 {
+    const bool isMatchColor = profile->property<bool>(Profile::ScrollBarMatchTerminalColors);
+    if (isMatchColor) {
+        connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::setPalette, Qt::UniqueConnection);
+    } else {
+        disconnect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::setPalette);
+        _scrollBar->setPalette(QGuiApplication::palette());
+    }
+
     // load color scheme
     _colorScheme = ViewManager::colorSchemeForProfile(profile);
     _terminalColor->applyProfile(profile, _colorScheme, randomSeed());
