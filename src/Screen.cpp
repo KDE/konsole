@@ -19,11 +19,13 @@
 #include "terminalDisplay/TerminalDisplay.h"
 #include "session/SessionController.h"
 #include "session/Session.h"
+#include "session/SessionManager.h"
 
 #include "history/HistoryType.h"
 #include "history/HistoryScrollNone.h"
 #include "characters/ExtendedCharTable.h"
 #include "profile/Profile.h"
+#include "profile/ProfileManager.h"
 #include "EscapeSequenceUrlExtractor.h"
 
 using namespace Konsole;
@@ -620,7 +622,7 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
         if (_selBegin != -1) {
             for (int column = 0; column < lastColumn; ++column) {
                 if (isSelected(column, line)) {
-                    dest[destLineOffset + column].rendition |= RE_SELECTED;
+                    setTextSelectionRendition(dest[destLineOffset + column]);
                 }
             }
         }
@@ -644,11 +646,25 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
 
             dest[destIndex] = _screenLines.at(srcIndex / _columns).value(srcIndex % _columns, Screen::DefaultChar);
 
-            // invert selected text
             if (_selBegin != -1 && isSelected(column, line + _history->getLines()) && column < lastColumn) {
-                dest[destIndex].rendition |= RE_SELECTED;
+                setTextSelectionRendition(dest[destIndex]);
             }
         }
+    }
+}
+
+void Screen::setTextSelectionRendition(Character &ch) const
+{
+    Q_ASSERT(_currentTerminalDisplay);
+
+    auto currentProfile = SessionManager::instance()->sessionProfile(_currentTerminalDisplay->session());
+    const bool isInvert = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors)
+                                         : false;
+
+    if (isInvert) {
+        reverseRendition(ch);
+    } else {
+        ch.rendition |= RE_BLEND_SELECTION_COLORS;
     }
 }
 

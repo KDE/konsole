@@ -135,7 +135,7 @@ public:
 
     void setSessionController(SessionController *controller);
     SessionController *sessionController();
-    Session::Ptr currentSession() const;
+    Session::Ptr session() const;
 
     /**
      * Sets the shape of the keyboard cursor.  This is the cursor drawn

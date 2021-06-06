@@ -73,6 +73,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { TabColor, "TabColor", APPEARANCE_GROUP, QVariant::Color }
     , { DimValue, "DimmValue", APPEARANCE_GROUP, QVariant::Int }
     , { DimWhenInactive , "DimWhenInactive" , GENERAL_GROUP , QVariant::Bool }
+    , { InvertSelectionColors , "InvertSelectionColors" , GENERAL_GROUP , QVariant::Bool }
 
     // Keyboard
     , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP , QVariant::String }
@@ -169,6 +170,7 @@ void Profile::useFallback()
     setProperty(ShowTerminalSizeHint, true);
     setProperty(DimWhenInactive, false);
     setProperty(DimValue, 128);
+    setProperty(InvertSelectionColors, false);
     setProperty(StartInCurrentSessionDir, true);
     setProperty(MenuIndex, QStringLiteral("0"));
     setProperty(SilenceSeconds, 10);

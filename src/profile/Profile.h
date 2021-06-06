@@ -107,6 +107,10 @@ public:
         /** (bool) If the background color should change to indicate if the window is active
          */
         DimWhenInactive,
+        /**
+         * (bool) Whether to always invert the colors for text selection.
+         */
+        InvertSelectionColors,
         /** (QFont) The font to use in terminal displays using this profile. */
         Font,
         /** (QString) The name of the color scheme to use in terminal

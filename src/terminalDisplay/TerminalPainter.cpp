@@ -384,7 +384,7 @@ namespace Konsole
     std::optional<QColor> calculateBackgroundColor(const Character* style, const QColor *colorTable)
     {
         auto c1 = style->backgroundColor.color(colorTable);
-        if (!(style->rendition & RE_SELECTED)) {
+        if (!(style->rendition & RE_BLEND_SELECTION_COLORS)) {
             return c1;
         }
 

@@ -2801,7 +2801,7 @@ SessionController* TerminalDisplay::sessionController()
     return _sessionController;
 }
 
-Session::Ptr TerminalDisplay::currentSession() const
+Session::Ptr TerminalDisplay::session() const
 {
     return _sessionController->session();
 }

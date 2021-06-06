@@ -792,6 +792,11 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     connect(_appearanceUi->dimValue, &QSlider::valueChanged,
             this, &Konsole::EditProfileDialog::setDimValue);
 
+    _appearanceUi->invertSelectionColorsCheckbox->setChecked(profile->property<bool>(Profile::InvertSelectionColors));
+    connect(_appearanceUi->invertSelectionColorsCheckbox, &QCheckBox::toggled, this, [this](bool checked) {
+        updateTempProfileProperty(Profile::InvertSelectionColors, checked);
+    });
+
     _appearanceUi->displayVerticalLine->setChecked(profile->verticalLine());
     connect(_appearanceUi->displayVerticalLine, &QCheckBox::toggled,
             this, &EditProfileDialog::setVerticalLine);
