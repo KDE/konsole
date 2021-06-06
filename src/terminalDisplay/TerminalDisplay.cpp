@@ -1124,27 +1124,23 @@ void TerminalDisplay::setCenterContents(bool enable)
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                                Scrollbar                                  */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
 /*                                  Mouse                                    */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 {
-    if (_possibleTripleClick && (ev->button() == Qt::LeftButton)) {
-        mouseTripleClickEvent(ev);
-        return;
-    }
-
     if (!contentsRect().contains(ev->pos())) {
         return;
     }
 
-    if (_screenWindow.isNull()) {
+    if (!_screenWindow) {
+        return;
+    }
+
+    _screenWindow->screen()->setCurrentTerminalDisplay(this);
+
+    if (_possibleTripleClick && (ev->button() == Qt::LeftButton)) {
+        mouseTripleClickEvent(ev);
         return;
     }
 
@@ -2803,6 +2799,11 @@ void TerminalDisplay::setSessionController(SessionController* controller)
 SessionController* TerminalDisplay::sessionController()
 {
     return _sessionController;
+}
+
+Session::Ptr TerminalDisplay::currentSession() const
+{
+    return _sessionController->session();
 }
 
 IncrementalSearchBar *TerminalDisplay::searchBar() const

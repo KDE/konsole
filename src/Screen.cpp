@@ -629,16 +629,18 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
 
 void Screen::copyFromScreen(Character* dest , int startLine , int count) const
 {
-    Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= _lines);
+    const int endLine = startLine + count;
 
-    for (int line = startLine; line < (startLine + count); ++line) {
-        int srcLineStartIndex  = line * _columns;
-        int destLineStartIndex = (line - startLine) * _columns;
-        int lastColumn = (line < _lineProperties.size() && _lineProperties.at(line) & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
+    Q_ASSERT(startLine >= 0 && count > 0 && endLine <= _lines);
+
+    for (int line = startLine; line < endLine; ++line) {
+        const int srcLineStartIndex  = line * _columns;
+        const int destLineStartIndex = (line - startLine) * _columns;
+        const int lastColumn = (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
 
         for (int column = 0; column < _columns; ++column) {
-            int srcIndex = srcLineStartIndex + column;
-            int destIndex = destLineStartIndex + column;
+            const int srcIndex = srcLineStartIndex + column;
+            const int destIndex = destLineStartIndex + column;
 
             dest[destIndex] = _screenLines.at(srcIndex / _columns).value(srcIndex % _columns, Screen::DefaultChar);
 

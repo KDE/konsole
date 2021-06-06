@@ -53,6 +53,8 @@ class KONSOLESESSION_EXPORT Session : public QObject
     Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Session")
 
 public:
+    using Ptr = QPointer<Session>;
+
     Q_PROPERTY(QString name READ nameTitle)
     Q_PROPERTY(int processId READ processId)
     Q_PROPERTY(QString keyBindings READ keyBindings WRITE setKeyBindings)

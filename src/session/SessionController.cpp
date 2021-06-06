@@ -128,6 +128,7 @@ SessionController::SessionController(Session* sessionParam, TerminalDisplay* vie
     Q_ASSERT(viewParam);
 
     _sessionDisplayConnection = new SessionDisplayConnection(sessionParam, viewParam, this);
+    viewParam->setSessionController(this);
 
     // handle user interface related to session (menus etc.)
     if (isKonsolePart()) {
@@ -153,7 +154,6 @@ SessionController::SessionController(Session* sessionParam, TerminalDisplay* vie
     sessionAttributeChanged();
 
     connect(view(), &TerminalDisplay::compositeFocusChanged, this, &SessionController::viewFocusChangeHandler);
-    view()->setSessionController(this);
 
     // install filter on the view to highlight URLs and files
     updateFilterList(SessionManager::instance()->sessionProfile(session()));
