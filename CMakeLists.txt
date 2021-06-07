@@ -38,6 +38,10 @@ include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
 include(KDEClangFormat)
 
+
+# Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
+include(ECMEnableSanitizers)
+
 ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
     SOVERSION ${RELEASE_SERVICE_VERSION_MAJOR}
 )
