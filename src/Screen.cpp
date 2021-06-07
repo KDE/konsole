@@ -1430,6 +1430,7 @@ void Screen::writeToStream(TerminalCharacterDecoder* decoder,
                                       count,
                                       decoder,
                                       appendNewLine,
+                                      _blockSelectionMode,
                                       options);
 
         // if the selection goes beyond the end of the last line then
@@ -1479,6 +1480,7 @@ int Screen::copyLineToStream(int line ,
                              int count,
                              TerminalCharacterDecoder* decoder,
                              bool appendNewLine,
+                             bool isBlockSelectionMode,
                              const DecodingOptions options) const
 {
     const int lineLength = getLineLength(line);
@@ -1550,7 +1552,10 @@ int Screen::copyLineToStream(int line ,
     }
 
     if (appendNewLine) {
-        if ((currentLineProperties & LINE_WRAPPED) != 0) {
+        if (isBlockSelectionMode) {
+            characterBuffer[count] = options.testFlag(PreserveLineBreaks) ? Character('\n') : Character(' ');
+            count++;
+        } else if ((currentLineProperties & LINE_WRAPPED) != 0) {
             // do nothing extra when this line is wrapped.
         } else {
             // When users ask not to preserve the linebreaks, they usually mean:

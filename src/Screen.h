@@ -613,8 +613,9 @@ private:
     //count - the number of characters on the line to copy
     //decoder - a decoder which converts terminal characters (an Character array) into text
     //appendNewLine - if true a new line character (\n) is appended to the end of the line
+    //isBlockSelectionMode - takes that in consideration while appending a new line.
     int  copyLineToStream(int line, int start, int count, TerminalCharacterDecoder *decoder,
-                          bool appendNewLine, const DecodingOptions options) const;
+                          bool appendNewLine, bool isBlockSelectionMode, const DecodingOptions options) const;
 
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.
