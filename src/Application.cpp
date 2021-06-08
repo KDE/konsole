@@ -9,7 +9,7 @@
 
 // Qt
 #include <QApplication>
-#include <QHashIterator>
+#include <QHash>
 #include <QFileInfo>
 #include <QDir>
 #include <QCommandLineParser>
@@ -233,6 +233,11 @@ int Application::newInstance()
     } else {
         Session *session = window->createSession(newProfile, QString());
 
+        const QString workingDir = m_parser->value(QStringLiteral("workdir"));
+        if (!workingDir.isEmpty()) {
+            session->setInitialWorkingDirectory(workingDir);
+        }
+
         if (m_parser->isSet(QStringLiteral("noclose"))) {
             session->setAutoClose(false);
         }
@@ -340,7 +345,6 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
     const QString &title = tokens[QStringLiteral("title")];
     const QString &command = tokens[QStringLiteral("command")];
     const QString &profile = tokens[QStringLiteral("profile")];
-    const QString &workdir = tokens[QStringLiteral("workdir")];
     const QColor &color = tokens[QStringLiteral("tabcolor")];
 
     Profile::Ptr baseProfile;
@@ -377,19 +381,17 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
         shouldUseNewProfile = true;
     }
 
-    if (m_parser->isSet(QStringLiteral("workdir"))) {
-        newProfile->setProperty(Profile::Directory, m_parser->value(QStringLiteral("workdir")));
-        shouldUseNewProfile = true;
-    }
-
-    if (!workdir.isEmpty()) {
-        newProfile->setProperty(Profile::Directory, workdir);
-        shouldUseNewProfile = true;
-    }
-
     // Create the new session
     Profile::Ptr theProfile = shouldUseNewProfile ? newProfile : baseProfile;
     Session *session = window->createSession(theProfile, QString());
+
+    const QString wdirOptionName(QStringLiteral("workdir"));
+    auto it = tokens.constFind(wdirOptionName);
+    const QString workingDirectory = it != tokens.cend() ? it.value() : m_parser->value(wdirOptionName);
+
+    if (!workingDirectory.isEmpty()) {
+        session->setInitialWorkingDirectory(workingDirectory);
+    }
 
     if (m_parser->isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);
@@ -509,12 +511,6 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
     newProfile->setHidden(true);
-
-    // change the initial working directory
-    if (m_parser->isSet(QStringLiteral("workdir"))) {
-        newProfile->setProperty(Profile::Directory, m_parser->value(QStringLiteral("workdir")));
-        shouldUseNewProfile = true;
-    }
 
     // temporary changes to profile options specified on the command line
     const QStringList profileProperties = m_parser->values(QStringLiteral("p"));
