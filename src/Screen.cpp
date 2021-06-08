@@ -59,7 +59,7 @@ Screen::Screen(int lines, int columns):
     _oldTotalLines(0),
     _isResize(false),
     _enableReflowLines(false),
-    _lineProperties(QVarLengthArray<LineProperty, 64>()),
+    _lineProperties(_lines + 1),
     _history(std::make_unique<HistoryScrollNone>()),
     _cuX(0),
     _cuY(0),
@@ -81,7 +81,6 @@ Screen::Screen(int lines, int columns):
     _escapeSequenceUrlExtractor(std::make_unique<EscapeSequenceUrlExtractor>())
 {
     _escapeSequenceUrlExtractor->setScreen(this);
-    _lineProperties.resize(_lines + 1);
     std::fill(_lineProperties.begin(), _lineProperties.end(), LINE_DEFAULT);
 
     initTabStops();
@@ -409,7 +408,7 @@ void toDebug(const QVector<Character> &s, bool wrapped = false)
 
 int Screen::getCursorLine()
 {
-    if (_currentModes[MODE_AppScreen] == 1) {
+    if (isAppMode()) {
         return _savedState.cursorLine;
     }
     return _cuY;
@@ -417,7 +416,7 @@ int Screen::getCursorLine()
 
 void Screen::setCursorLine(int newLine)
 {
-    if (_currentModes[MODE_AppScreen] == 1) {
+    if (isAppMode()) {
         _savedState.cursorLine = newLine;
         _cuY = qBound(0, _cuY, _lines - 1);
     } else {
@@ -441,7 +440,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     // Check if _history need to change
     if (_enableReflowLines && new_columns != _columns && _history->getLines() && _history->getMaxLines()) {
         // Join next line from _screenLine to _history
-        while (_history->isWrappedLine(_history->getLines() - 1)) {
+        while (!_screenLines.isEmpty() && _history->isWrappedLine(_history->getLines() - 1)) {
             fastAddHistLine();
             cursorLine--;
         }
@@ -461,8 +460,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
             // It needs to identify the 'zsh' and calculate the new command line.
             auto sessionController = _currentTerminalDisplay->sessionController();
             auto terminal = sessionController->session()->foregroundProcessName();
-            if (terminal == QLatin1String("zsh") && cursorLine > 0 && (_lineProperties[cursorLine - 1] & LINE_WRAPPED) != 0) {
-                while (cursorLine + cursorLineCorrection > 0 && (_lineProperties[cursorLine + cursorLineCorrection - 1] & LINE_WRAPPED) != 0) {
+            if (terminal == QLatin1String("zsh") && cursorLine > 0 && (_lineProperties.at(cursorLine - 1) & LINE_WRAPPED) != 0) {
+                while (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection - 1) & LINE_WRAPPED) != 0) {
                     cursorLineCorrection--;
                 }
             }
@@ -472,8 +471,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
         int currentPos = 0;
         while (currentPos < (cursorLine + cursorLineCorrection) && currentPos < _screenLines.count() - 1) {
             // Join wrapped line in current position
-            if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
-                _screenLines[currentPos].append(std::move(_screenLines[currentPos + 1]));
+            if ((_lineProperties.at(currentPos) & LINE_WRAPPED) != 0) {
+                _screenLines[currentPos].append(_screenLines.at(currentPos + 1));
                 _screenLines.remove(currentPos + 1);
                 _lineProperties.remove(currentPos);
                 cursorLine--;
@@ -481,16 +480,16 @@ void Screen::resizeImage(int new_lines, int new_columns)
             }
 
             // Ignore whitespaces at the end of the line
-            int lineSize = _screenLines[currentPos].size();
-            while (lineSize > 0 && QChar(_screenLines[currentPos][lineSize - 1].character).isSpace()) {
+            int lineSize = _screenLines.at(currentPos).size();
+            while (lineSize > 0 && QChar(_screenLines.at(currentPos).at(lineSize - 1).character).isSpace()) {
                 lineSize--;
             }
 
             // If need to move to line below, copy from the current line, to the next one.
-            if (lineSize > new_columns && !(_lineProperties[currentPos] & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
-                auto values = _screenLines[currentPos].mid(new_columns);
+            if (lineSize > new_columns && !(_lineProperties.at(currentPos) & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
+                auto values = _screenLines.at(currentPos).mid(new_columns);
                 _screenLines[currentPos].resize(new_columns);
-                _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
+                _lineProperties.insert(currentPos + 1, _lineProperties.at(currentPos));
                 _screenLines.insert(currentPos + 1, std::move(values));
                 _lineProperties[currentPos] |= LINE_WRAPPED;
                 cursorLine++;
@@ -1591,8 +1590,8 @@ void Screen::writeLinesToStream(TerminalCharacterDecoder* decoder, int fromLine,
 void Screen::fastAddHistLine()
 {
     const bool removeLine = _history->getLines() == _history->getMaxLines();
-    _history->addCellsVector(_screenLines[0]);
-    _history->addLine(_lineProperties[0]);
+    _history->addCellsVector(_screenLines.at(0));
+    _history->addLine(_lineProperties.at(0));
 
     // If _history size > max history size it will drop a line from _history.
     // We need to verify if we need to remove a URL.
@@ -1601,7 +1600,7 @@ void Screen::fastAddHistLine()
     }
 
     _screenLines.pop_front();
-    _lineProperties.remove(0);
+    _lineProperties.pop_front();
 }
 
 void Screen::addHistLine()

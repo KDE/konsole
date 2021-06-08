@@ -662,6 +662,11 @@ private:
     // should be as minimal as possible
     static Character *getCharacterBuffer(const int size);
 
+    // Returns if its app mode or not
+    inline bool isAppMode()
+    {
+        return _currentModes[MODE_AppScreen] == 1;
+    }
     // Get the cursor line after checking if its app mode or not
     int getCursorLine();
     // Set the cursor line after checking if its app mode or not
@@ -690,7 +695,7 @@ private:
     bool _isResize;
     bool _enableReflowLines;
 
-    QVarLengthArray<LineProperty, 64> _lineProperties;
+    QVector<LineProperty> _lineProperties;
 
     // history buffer ---------------
     std::unique_ptr<HistoryScroll> _history;
