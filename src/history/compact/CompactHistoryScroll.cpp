@@ -1,4 +1,5 @@
 /*
+    SPDX-FileCopyrightText: 2021-2021 Carlos Alves <cbcalves@gmail.com>
     SPDX-FileCopyrightText: 1997, 1998 Lars Doelle <lars.doelle@on-line.de>
 
     SPDX-License-Identifier: GPL-2.0-or-later
@@ -6,7 +7,6 @@
 
 // Own
 #include "CompactHistoryScroll.h"
-
 #include "CompactHistoryType.h"
 
 using namespace Konsole;
@@ -41,16 +41,6 @@ void CompactHistoryScroll::removeFirstLine()
         _index.clear();
         _cells.clear();
     }
-}
-
-inline int CompactHistoryScroll::lineLen(const int line) const
-{
-    return line == 0 ? _index[0] : _index[line] - _index[line - 1];
-}
-
-inline int CompactHistoryScroll::startOfLine(const int line) const
-{
-    return line == 0 ? 0 : _index[line - 1];
 }
 
 void CompactHistoryScroll::addCells(const Character a[], const int count)
@@ -132,13 +122,13 @@ void CompactHistoryScroll::removeCells()
 bool CompactHistoryScroll::isWrappedLine(const int lineNumber) const
 {
     Q_ASSERT(lineNumber < _index.size());
-    return (_flags[lineNumber] & LINE_WRAPPED) > 0;
+    return (_flags.at(lineNumber) & LINE_WRAPPED) > 0;
 }
 
 LineProperty CompactHistoryScroll::getLineProperty(const int lineNumber) const
 {
     Q_ASSERT(lineNumber < _index.size());
-    return _flags[lineNumber];
+    return _flags.at(lineNumber);
 }
 
 int CompactHistoryScroll::reflowLines(const int columns)

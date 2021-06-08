@@ -1,4 +1,5 @@
 /*
+    SPDX-FileCopyrightText: 2021-2021 Carlos Alves <cbcalves@gmail.com>
     SPDX-FileCopyrightText: 1997, 1998 Lars Doelle <lars.doelle@on-line.de>
 
     SPDX-License-Identifier: GPL-2.0-or-later
@@ -7,11 +8,7 @@
 #ifndef COMPACTHISTORYSCROLL_H
 #define COMPACTHISTORYSCROLL_H
 
-// STD
-#include <deque>
-
 #include "konsoleprivate_export.h"
-
 #include "history/HistoryScroll.h"
 
 namespace Konsole
@@ -49,8 +46,16 @@ private:
     int _maxLineCount;
 
     void removeFirstLine();
-    inline int lineLen(const int line) const;
-    inline int startOfLine(const int line) const;
+
+    inline int lineLen(const int line) const
+    {
+        return line == 0 ? _index.at(0) : _index.at(line) - _index.at(line - 1);
+    }
+
+    inline int startOfLine(const int line) const
+    {
+        return line == 0 ? 0 : _index.at(line - 1);
+    }
 };
 
 }
