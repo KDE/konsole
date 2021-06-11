@@ -236,16 +236,16 @@ void Screen::deleteChars(int n)
     }
 
     // if cursor is beyond the end of the line there is nothing to do
-    if (_cuX >= _screenLines[_cuY].count()) {
+    if (_cuX >= _screenLines.at(_cuY).count()) {
         return;
     }
 
-    if (_cuX + n > _screenLines[_cuY].count()) {
-        n = _screenLines[_cuY].count() - _cuX;
+    if (_cuX + n > _screenLines.at(_cuY).count()) {
+        n = _screenLines.at(_cuY).count() - _cuX;
     }
 
     Q_ASSERT(n >= 0);
-    Q_ASSERT(_cuX + n <= _screenLines[_cuY].count());
+    Q_ASSERT(_cuX + n <= _screenLines.at(_cuY).count());
 
     _screenLines[_cuY].remove(_cuX, n);
 
@@ -254,7 +254,7 @@ void Screen::deleteChars(int n)
                                     _effectiveBackground,
                                     _effectiveRendition, false);
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
         _screenLines[_cuY].append(spaceWithCurrentAttrs);
     }
 }
@@ -265,13 +265,13 @@ void Screen::insertChars(int n)
         n = 1; // Default
     }
 
-    if (_screenLines[_cuY].size() < _cuX) {
+    if (_screenLines.at(_cuY).size() < _cuX) {
         _screenLines[_cuY].resize(_cuX);
     }
 
     _screenLines[_cuY].insert(_cuX, n, Character(' '));
 
-    if (_screenLines[_cuY].count() > getScreenLineColumns(_cuY)) {
+    if (_screenLines.at(_cuY).count() > getScreenLineColumns(_cuY)) {
         _screenLines[_cuY].resize(getScreenLineColumns(_cuY));
     }
 }
@@ -289,8 +289,9 @@ void Screen::repeatChars(int n)
     // So, a "normal" program should always use REP immediately after a visible
     // character (those other than escape sequences). So, _lastDrawnChar can be
     // safely used.
-    for (int i = 0; i < n; i++) {
+    while (n > 0) {
         displayCharacter(_lastDrawnChar);
+        --n;
     }
 }
 
@@ -442,7 +443,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
         // Join next line from _screenLine to _history
         while (!_screenLines.isEmpty() && _history->isWrappedLine(_history->getLines() - 1)) {
             fastAddHistLine();
-            cursorLine--;
+            --cursorLine;
         }
         auto removedLines = _history->reflowLines(new_columns);
 
@@ -462,7 +463,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             auto terminal = sessionController->session()->foregroundProcessName();
             if (terminal == QLatin1String("zsh") && cursorLine > 0 && (_lineProperties.at(cursorLine - 1) & LINE_WRAPPED) != 0) {
                 while (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection - 1) & LINE_WRAPPED) != 0) {
-                    cursorLineCorrection--;
+                    --cursorLineCorrection;
                 }
             }
         }
@@ -475,14 +476,14 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _screenLines[currentPos].append(_screenLines.at(currentPos + 1));
                 _screenLines.remove(currentPos + 1);
                 _lineProperties.remove(currentPos);
-                cursorLine--;
+                --cursorLine;
                 continue;
             }
 
             // Ignore whitespaces at the end of the line
             int lineSize = _screenLines.at(currentPos).size();
             while (lineSize > 0 && QChar(_screenLines.at(currentPos).at(lineSize - 1).character).isSpace()) {
-                lineSize--;
+                --lineSize;
             }
 
             // If need to move to line below, copy from the current line, to the next one.
@@ -492,7 +493,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _lineProperties.insert(currentPos + 1, _lineProperties.at(currentPos));
                 _screenLines.insert(currentPos + 1, std::move(values));
                 _lineProperties[currentPos] |= LINE_WRAPPED;
-                cursorLine++;
+                ++cursorLine;
             }
             currentPos += 1;
         }
@@ -501,7 +502,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     // Check if it need to move from _screenLine to _history
     while (cursorLine > new_lines - 1) {
         fastAddHistLine();
-        cursorLine--;
+        --cursorLine;
     }
 
     if (_enableReflowLines) {
@@ -517,7 +518,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             _screenLines.insert(0, histLine);
             _lineProperties.insert(0, lineProperty);
             _history->removeCells();
-            cursorLine++;
+            ++cursorLine;
         }
     }
 
@@ -602,7 +603,7 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
 {
     Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= _history->getLines());
 
-    for (int line = startLine; line < startLine + count; line++) {
+    for (int line = startLine; line < startLine + count; ++line) {
         const int length = qMin(_columns, _history->getLineLen(line));
         const int destLineOffset  = (line - startLine) * _columns;
         const int lastColumn = (_history->getLineProperty(line) & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
@@ -610,12 +611,14 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
         _history->getCells(line, 0, length, dest + destLineOffset);
 
         if (length < _columns) {
-            std::fill(&dest[destLineOffset + length], &dest[destLineOffset + _columns], Screen::DefaultChar);
+            const int begin = destLineOffset + length;
+            const int end = destLineOffset + _columns;
+            std::fill(dest + begin, dest + end, Screen::DefaultChar);
         }
 
         // invert selected text
         if (_selBegin != -1) {
-            for (int column = 0; column < lastColumn; column++) {
+            for (int column = 0; column < lastColumn; ++column) {
                 if (isSelected(column, line)) {
                     dest[destLineOffset + column].rendition |= RE_SELECTED;
                 }
@@ -628,16 +631,16 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
 {
     Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= _lines);
 
-    for (int line = startLine; line < (startLine + count) ; line++) {
+    for (int line = startLine; line < (startLine + count); ++line) {
         int srcLineStartIndex  = line * _columns;
         int destLineStartIndex = (line - startLine) * _columns;
-        int lastColumn = (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
+        int lastColumn = (line < _lineProperties.size() && _lineProperties.at(line) & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
 
-        for (int column = 0; column < _columns; column++) {
+        for (int column = 0; column < _columns; ++column) {
             int srcIndex = srcLineStartIndex + column;
             int destIndex = destLineStartIndex + column;
 
-            dest[destIndex] = _screenLines[srcIndex / _columns].value(srcIndex % _columns, Screen::DefaultChar);
+            dest[destIndex] = _screenLines.at(srcIndex / _columns).value(srcIndex % _columns, Screen::DefaultChar);
 
             // invert selected text
             if (_selBegin != -1 && isSelected(column, line + _history->getLines()) && column < lastColumn) {
@@ -674,7 +677,7 @@ void Screen::getImage(Character* dest, int size, int startLine, int endLine) con
 
     // invert display when in screen mode
     if (getMode(MODE_Screen)) {
-        for (int i = 0; i < mergedLines * _columns; i++) {
+        for (int i = 0; i < mergedLines * _columns; ++i) {
             reverseRendition(dest[i]); // for reverse display
         }
     }
@@ -700,16 +703,16 @@ QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) con
     int index = 0;
 
     // copy properties for _lines in history
-    for (int line = startLine; line < startLine + linesInHistory; line++) {
+    for (int line = startLine; line < startLine + linesInHistory; ++line) {
         result[index] = _history->getLineProperty(line);
-        index++;
+        ++index;
     }
 
     // copy properties for _lines in screen buffer
     const int firstScreenLine = startLine + linesInHistory - _history->getLines();
-    for (int line = firstScreenLine; line < firstScreenLine + linesInScreen; line++) {
-        result[index] = _lineProperties[line];
-        index++;
+    for (int line = firstScreenLine; line < firstScreenLine + linesInScreen; ++line) {
+        result[index] = _lineProperties.at(line);
+        ++index;
     }
 
     return result;
@@ -717,7 +720,7 @@ QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) con
 
 int Screen::getScreenLineColumns(const int line) const
 {
-    if (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) {
+    if (line < _lineProperties.size() && _lineProperties.at(line) & LINE_DOUBLEWIDTH) {
         return _columns / 2;
     }
 
@@ -757,7 +760,7 @@ void Screen::backspace()
 {
     _cuX = qMax(0, _cuX - 1);
 
-    if (_screenLines[_cuY].size() < _cuX + 1) {
+    if (_screenLines.at(_cuY).size() < _cuX + 1) {
         _screenLines[_cuY].resize(_cuX + 1);
     }
 }
@@ -770,10 +773,10 @@ void Screen::tab(int n)
     }
     while ((n > 0) && (_cuX < getScreenLineColumns(_cuY) - 1)) {
         cursorRight(1);
-        while ((_cuX < getScreenLineColumns(_cuY) - 1) && !_tabStops[_cuX]) {
+        while ((_cuX < getScreenLineColumns(_cuY) - 1) && !_tabStops.at(_cuX)) {
             cursorRight(1);
         }
-        n--;
+        --n;
     }
 }
 
@@ -785,10 +788,10 @@ void Screen::backtab(int n)
     }
     while ((n > 0) && (_cuX > 0)) {
         cursorLeft(1);
-        while ((_cuX > 0) && !_tabStops[_cuX]) {
+        while ((_cuX > 0) && !_tabStops.at(_cuX)) {
             cursorLeft(1);
         }
-        n--;
+        --n;
     }
 }
 
@@ -813,7 +816,7 @@ void Screen::initTabStops()
     // The 1st tabstop has to be one longer than the other.
     // i.e. the kids start counting from 0 instead of 1.
     // Other programs might behave correctly. Be aware.
-    for (int i = 0; i < _columns; i++) {
+    for (int i = 0; i < _columns; ++i) {
         _tabStops[i] = (i % 8 == 0 && i != 0);
     }
 }
@@ -857,14 +860,14 @@ void Screen::displayCharacter(uint c)
             return;
         }
         // Find previous "real character" to try to combine with
-        int charToCombineWithX = qMin(_cuX, _screenLines[_cuY].length());
+        int charToCombineWithX = qMin(_cuX, _screenLines.at(_cuY).length());
         int charToCombineWithY = _cuY;
         do {
             if (charToCombineWithX > 0) {
-                charToCombineWithX--;
+                --charToCombineWithX;
             } else if (charToCombineWithY > 0) { // Try previous line
-                charToCombineWithY--;
-                charToCombineWithX = _screenLines[charToCombineWithY].length() - 1;
+                --charToCombineWithY;
+                charToCombineWithX = _screenLines.at(charToCombineWithY).length() - 1;
             } else {
                 // Give up
                 return;
@@ -874,7 +877,7 @@ void Screen::displayCharacter(uint c)
             if (charToCombineWithX < 0) {
                 return;
             }
-        } while(!_screenLines[charToCombineWithY][charToCombineWithX].isRealCharacter);
+        } while(!_screenLines.at(charToCombineWithY).at(charToCombineWithX).isRealCharacter);
 
         Character& currentChar = _screenLines[charToCombineWithY][charToCombineWithX];
         if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0) {
@@ -901,7 +904,7 @@ void Screen::displayCharacter(uint c)
 
     if (_cuX + w > getScreenLineColumns(_cuY)) {
         if (getMode(MODE_Wrap)) {
-            _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties[_cuY] | LINE_WRAPPED);
+            _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties.at(_cuY) | LINE_WRAPPED);
             nextLine();
         } else {
             _cuX = qMax(getScreenLineColumns(_cuY) - w, 0);
@@ -909,7 +912,7 @@ void Screen::displayCharacter(uint c)
     }
 
     // ensure current line vector has enough elements
-    if (_screenLines[_cuY].size() < _cuX + w) {
+    if (_screenLines.at(_cuY).size() < _cuX + w) {
         _screenLines[_cuY].reserve(_columns);
         _screenLines[_cuY].resize(_cuX + w);
     }
@@ -936,9 +939,9 @@ void Screen::displayCharacter(uint c)
     int i = 0;
     const int newCursorX = _cuX + w--;
     while (w != 0) {
-        i++;
+        ++i;
 
-        if (_screenLines[_cuY].size() < _cuX + i + 1) {
+        if (_screenLines.at(_cuY).size() < _cuX + i + 1) {
             _screenLines[_cuY].resize(_cuX + i + 1);
         }
 
@@ -949,7 +952,7 @@ void Screen::displayCharacter(uint c)
         ch.rendition = _effectiveRendition;
         ch.isRealCharacter = false;
 
-        w--;
+        --w;
     }
     _cuX = newCursorX;
     _escapeSequenceUrlExtractor->appendUrlText(QChar(c));
@@ -1094,7 +1097,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
     //default character, the affected _lines can simply be shrunk.
     const bool isDefaultCh = (clearCh == Screen::DefaultChar);
 
-    for (int y = topLine; y <= bottomLine; y++) {
+    for (int y = topLine; y <= bottomLine; ++y) {
         _lineProperties[y] &= ~LINE_WRAPPED;
 
         const int endCol = (y == bottomLine) ? loce % _columns : _columns - 1;
@@ -1134,14 +1137,14 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     const int destY = dest / _columns;
     const int srcY = sourceBegin / _columns;
     if (dest < sourceBegin) {
-        for (int i = 0; i <= lines; i++) {
-            _screenLines[destY + i] = _screenLines[srcY + i];
-            _lineProperties[destY + i] = _lineProperties[srcY + i];
+        for (int i = 0; i <= lines; ++i) {
+            _screenLines[destY + i] = _screenLines.at(srcY + i);
+            _lineProperties[destY + i] = _lineProperties.at(srcY + i);
         }
     } else {
-        for (int i = lines; i >= 0; i--) {
+        for (int i = lines; i >= 0; --i) {
             _screenLines[destY + i ] = std::move(_screenLines[srcY + i]);
-            _lineProperties[destY + i] = _lineProperties[srcY + i];
+            _lineProperties[destY + i] = _lineProperties.at(srcY + i);
         }
     }
 
@@ -1246,7 +1249,7 @@ void Screen::setDefaultRendition()
 {
     setForeColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR);
     setBackColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR);
-    _currentRendition   = DEFAULT_RENDITION;
+    _currentRendition = DEFAULT_RENDITION;
     updateEffectiveRendition();
 }
 
@@ -1309,7 +1312,7 @@ void Screen::setSelectionStart(const int x, const int y, const bool blockSelecti
     _selBegin = loc(x, y);
     /* FIXME, HACK to correct for x too far to the right... */
     if (x == _columns) {
-        _selBegin--;
+        --_selBegin;
     }
 
     _selBottomRight = _selBegin;
@@ -1331,7 +1334,7 @@ void Screen::setSelectionEnd(const int x, const int y)
     } else {
         /* FIXME, HACK to correct for x too far to the right... */
         if (x == _columns) {
-            endPos--;
+            --endPos;
         }
 
         _selTopLeft = _selBegin;
@@ -1410,7 +1413,7 @@ void Screen::writeToStream(TerminalCharacterDecoder* decoder,
 
     Q_ASSERT(top >= 0 && left >= 0 && bottom >= 0 && right >= 0);
 
-    for (int y = top; y <= bottom; y++) {
+    for (int y = top; y <= bottom; ++y) {
         int start = 0;
         if (y == top || _blockSelectionMode) {
             start = left;
@@ -1522,10 +1525,10 @@ int Screen::copyLineToStream(int line ,
         screenLine = qMin(screenLine, _screenLinesSize);
 
         auto* data = _screenLines[screenLine].data();
-        int length = _screenLines[screenLine].count();
+        int length = _screenLines.at(screenLine).count();
 
         // Don't remove end spaces in lines that wrap
-        if (options.testFlag(TrimTrailingWhitespace) && ((_lineProperties[screenLine] & LINE_WRAPPED) == 0))
+        if (options.testFlag(TrimTrailingWhitespace) && ((_lineProperties.at(screenLine) & LINE_WRAPPED) == 0))
         {
             // ignore trailing white space at the end of the line
             while (length > 0 && QChar(data[length - 1].character).isSpace()) {
@@ -1554,13 +1557,13 @@ int Screen::copyLineToStream(int line ,
             // `treat LINEBREAK as SPACE, thus joining multiple _lines into
             // single line in the same way as 'J' does in VIM.`
             characterBuffer[count] = options.testFlag(PreserveLineBreaks) ? Character('\n') : Character(' ');
-            count++;
+            ++count;
         }
     }
 
     if ((options & TrimLeadingWhitespace) != 0U) {
         int spacesCount = 0;
-        for (spacesCount = 0; spacesCount < count; spacesCount++) {
+        for (spacesCount = 0; spacesCount < count; ++spacesCount) {
             if (QChar::category(characterBuffer[spacesCount].character) != QChar::Category::Separator_Space) {
                 break;
             }
@@ -1599,8 +1602,8 @@ void Screen::fastAddHistLine()
         _escapeSequenceUrlExtractor->historyLinesRemoved(1);
     }
 
-    _screenLines.pop_front();
-    _lineProperties.pop_front();
+    _screenLines.removeFirst();
+    _lineProperties.removeFirst();
 }
 
 void Screen::addHistLine()
@@ -1611,15 +1614,15 @@ void Screen::addHistLine()
     int newHistLines = _history->getLines();
 
     if (hasScroll()) {
-        _history->addCellsVector(_screenLines[0]);
-        _history->addLine(_lineProperties[0]);
+        _history->addCellsVector(_screenLines.at(0));
+        _history->addLine(_lineProperties.at(0));
 
         newHistLines = _history->getLines();
 
         // If the history is full, increment the count
         // of dropped _lines
         if (newHistLines == oldHistLines) {
-            _droppedLines++;
+            ++_droppedLines;
 
             // We removed a line, we need to verify if we need to remove a URL.
             _escapeSequenceUrlExtractor->historyLinesRemoved(1);
@@ -1696,9 +1699,9 @@ const HistoryType &Screen::getScroll() const
 void Screen::setLineProperty(LineProperty property , bool enable)
 {
     if (enable) {
-        _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties[_cuY] | property);
+        _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties.at(_cuY) | property);
     } else {
-        _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties[_cuY] & ~property);
+        _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties.at(_cuY) & ~property);
     }
 }
 void Screen::fillWithDefaultChar(Character* dest, int count)

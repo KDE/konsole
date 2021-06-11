@@ -29,10 +29,10 @@ CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount) :
 void CompactHistoryScroll::removeFirstLine()
 {
     if (_index.size() > 1) {
-        _flags.pop_front();
+        _flags.removeFirst();
 
         const int removing = _index.first();
-        _index.pop_front();
+        _index.removeFirst();
         std::transform(_index.begin(), _index.end(), _index.begin(), [removing](int i) { return i - removing; });
 
         _cells.erase(_cells.begin(), _cells.begin() + removing);
@@ -108,8 +108,8 @@ void CompactHistoryScroll::setMaxNbLines(const int lineCount)
 void CompactHistoryScroll::removeCells()
 {
     if (_index.size() > 1) {
-        _index.pop_back();
-        _flags.pop_back();
+        _index.removeLast();
+        _flags.removeLast();
 
         _cells.erase(_cells.begin() + _index.last(), _cells.end());
     } else {
@@ -163,8 +163,8 @@ int CompactHistoryScroll::reflowLines(const int columns)
         setNewLine(newLine, endLine, lineProperty & ~LINE_WRAPPED);
         currentPos++;
     }
-    _index = newLine.index;
-    _flags = newLine.flags;
+    _index = std::move(newLine.index);
+    _flags = std::move(newLine.flags);
 
     int deletedLines = 0;
     while (getLines() > _maxLineCount) {
