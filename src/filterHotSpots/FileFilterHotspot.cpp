@@ -30,7 +30,6 @@
 #include <KMessageBox>
 #include <KShell>
 
-
 #include "konsoledebug.h"
 #include "KonsoleSettings.h"
 #include "profile/Profile.h"
