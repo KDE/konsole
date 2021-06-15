@@ -321,14 +321,6 @@ void FileFilterHotSpot::startDrag()
     auto *mimeData = new QMimeData();
     mimeData->setUrls({QUrl::fromLocalFile(_filePath)});
 
-    auto lowerFilePath = _filePath.toLower();
-    if (lowerFilePath.endsWith(QStringLiteral("png"))
-        || lowerFilePath.endsWith(QStringLiteral("jpg"))
-        || lowerFilePath.endsWith(QStringLiteral("jpeg"))) {
-        mimeData->setImageData(QImage(_filePath));
-    }
-
     drag->setMimeData(mimeData);
-    Qt::DropAction result = drag->exec(Qt::CopyAction);
+    drag->exec(Qt::CopyAction);
 }
-
