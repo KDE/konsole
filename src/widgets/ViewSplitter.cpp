@@ -400,23 +400,12 @@ QPoint Konsole::ViewSplitter::mapToTopLevel(const QPoint& p)
 
 QPoint Konsole::ViewSplitter::mapFromTopLevel(const QPoint& p)
 {
-    QStack<ViewSplitter*> tillTopLevel;
-    tillTopLevel.push(this);
 
     auto parentSplitter = qobject_cast<ViewSplitter*>(parent());
-    while(parentSplitter) {
-        tillTopLevel.push(parentSplitter);
-        parentSplitter = qobject_cast<ViewSplitter*>(parentSplitter->parent());
+    if (parentSplitter) {
+        return mapFromParent(parentSplitter->mapFromTopLevel(p));
     }
-
-    tillTopLevel.pop();
-
-    QPoint retPoint = p;
-    while (!tillTopLevel.isEmpty()) {
-        ViewSplitter *view = tillTopLevel.pop();
-        retPoint = view->mapFromParent(retPoint);
-    }
-    return retPoint;
+    return p;
 }
 
 Konsole::ViewSplitterHandle::ViewSplitterHandle(Qt::Orientation orientation, QSplitter* parent)
