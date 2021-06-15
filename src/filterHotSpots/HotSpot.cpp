@@ -185,3 +185,13 @@ void HotSpot::debug() {
     qDebug() <<  type();
     qDebug() << _startLine << _endLine << _startColumn << _endColumn;
 }
+
+bool Konsole::HotSpot::hasDragOperation() const
+{
+    return false;
+}
+
+void Konsole::HotSpot::startDrag()
+{
+}
+

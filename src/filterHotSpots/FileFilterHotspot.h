@@ -49,6 +49,9 @@ public:
     void requestThumbnail(Qt::KeyboardModifiers modifiers, const QPoint &pos);
     void thumbnailRequested();
 
+    bool hasDragOperation() const override;
+    void startDrag() override;
+
     static void stopThumbnailGeneration();
 
     void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;

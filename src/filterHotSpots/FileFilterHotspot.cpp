@@ -18,6 +18,8 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QRegularExpression>
+#include <QDrag>
+#include <QMimeData>
 
 #include <KIO/ApplicationLauncherJob>
 #include <KIO/OpenUrlJob>
@@ -27,6 +29,7 @@
 #include <KFileItemListProperties>
 #include <KMessageBox>
 #include <KShell>
+
 
 #include "konsoledebug.h"
 #include "KonsoleSettings.h"
@@ -300,8 +303,33 @@ void FileFilterHotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
     stopThumbnailGeneration();
 }
 
-void Konsole::FileFilterHotSpot::keyPressEvent(Konsole::TerminalDisplay* td, QKeyEvent* ev)
+void FileFilterHotSpot::keyPressEvent(Konsole::TerminalDisplay* td, QKeyEvent* ev)
 {
     HotSpot::keyPressEvent(td, ev);
     requestThumbnail(ev->modifiers(), QCursor::pos());
 }
+
+
+bool FileFilterHotSpot::hasDragOperation() const
+{
+    return true;
+}
+
+void FileFilterHotSpot::startDrag()
+{
+    auto *drag = new QDrag(this);
+    auto *mimeData = new QMimeData();
+    mimeData->setUrls({QUrl::fromLocalFile(_filePath)});
+
+    auto lowerFilePath = _filePath.toLower();
+    if (lowerFilePath.endsWith(QStringLiteral("png"))
+        || lowerFilePath.endsWith(QStringLiteral("jpg"))
+        || lowerFilePath.endsWith(QStringLiteral("jpeg"))) {
+        mimeData->setImageData(QImage(_filePath));
+    }
+
+    drag->setMimeData(mimeData);
+    Qt::DropAction result = drag->exec(Qt::CopyAction);
+    qDebug() << "result" << result;
+}
+

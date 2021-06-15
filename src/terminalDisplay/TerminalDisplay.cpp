@@ -1165,6 +1165,11 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     processFilters();
 
     _filterChain->mouseMoveEvent(this, ev, charLine, charColumn);
+    auto hotSpotClick = _filterChain->hotSpotAt(charLine, charColumn);
+    if (hotSpotClick && hotSpotClick->hasDragOperation() && ev->modifiers() & Qt::Modifier::ALT) {
+        hotSpotClick->startDrag();
+        return;
+    }
 
     if (ev->button() == Qt::LeftButton) {
         // request the software keyboard, if any
