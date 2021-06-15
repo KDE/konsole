@@ -35,6 +35,37 @@ void ScreenTest::testLargeScreenCopyShortLine()
   doLargeScreenCopyVerification(putToScreen, expectedSelection);
 }
 
+void ScreenTest::testBlockSelection()
+{
+    Screen screen(largeScreenLines, largeScreenColumns);
+
+    const QString reallyBigTextForReflow = QStringLiteral(
+        "abcd efgh ijkl mnop qrst uvxz ABCD EFGH IJKL MNOP QRST UVXZ"
+    );
+
+    for(const auto c : reallyBigTextForReflow) {
+        screen.displayCharacter(c.toLatin1());
+    }
+
+    qDebug() << "Before reflow" << screen.text(0, 30, Screen::PlainText);
+
+    // this breaks the lines in `abcd efgh `
+    // reflowing everything to the lines below.
+    screen.setReflowLines(true);
+    screen.resizeImage(largeScreenLines, 10);
+
+    // This call seems to be doing something wrong, I'm missing the texts after
+    // the "reflow".
+    qDebug() << "After Reflow" << screen.text(0, 30, Screen::PlainText);
+
+    // True here means block selection.
+    screen.setSelectionStart(0, 0, true);
+    screen.setSelectionEnd(3, 0);
+
+    const QString selectedText = screen.selectedText(Screen::PlainText);
+    QCOMPARE(screen.selectedText(Screen::PlainText), QStringLiteral("abcd"));
+}
+
 void ScreenTest::testLargeScreenCopyEmptyLine()
 {
   const QString putToScreen;
