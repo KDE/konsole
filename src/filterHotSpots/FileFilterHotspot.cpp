@@ -330,6 +330,5 @@ void FileFilterHotSpot::startDrag()
 
     drag->setMimeData(mimeData);
     Qt::DropAction result = drag->exec(Qt::CopyAction);
-    qDebug() << "result" << result;
 }
 
