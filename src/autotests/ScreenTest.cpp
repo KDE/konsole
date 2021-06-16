@@ -47,23 +47,27 @@ void ScreenTest::testBlockSelection()
         screen.displayCharacter(c.toLatin1());
     }
 
-    qDebug() << "Before reflow" << screen.text(0, 30, Screen::PlainText);
 
     // this breaks the lines in `abcd efgh `
     // reflowing everything to the lines below.
     screen.setReflowLines(true);
-    screen.resizeImage(largeScreenLines, 10);
 
-    // This call seems to be doing something wrong, I'm missing the texts after
-    // the "reflow".
-    qDebug() << "After Reflow" << screen.text(0, 30, Screen::PlainText);
+    // reflow does not reflows cursor line, so let's move it a bit down.
+    screen.cursorDown(1);
+    screen.resizeImage(largeScreenLines, 10);
 
     // True here means block selection.
     screen.setSelectionStart(0, 0, true);
-    screen.setSelectionEnd(3, 0);
+    screen.setSelectionEnd(3, 1);
 
+    // after the resize, the string should be:
+    // abcd efgh
+    // ijkl mnop
+    // ...
+    // I'm selecting the first two lines of the first column of strings,
+    // so, abcd ijkl.
     const QString selectedText = screen.selectedText(Screen::PlainText);
-    QCOMPARE(screen.selectedText(Screen::PlainText), QStringLiteral("abcd"));
+    QCOMPARE(screen.selectedText(Screen::PlainText), QStringLiteral("abcd ijkl"));
 }
 
 void ScreenTest::testLargeScreenCopyEmptyLine()
