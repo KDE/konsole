@@ -877,7 +877,7 @@ void MainWindow::setBlur(bool blur)
     _blurEnabled = blur;
 
     if (!_pluggedController->isKonsolePart()) {
-        KWindowEffects::enableBlurBehind(winId(), blur);
+        KWindowEffects::enableBlurBehind(windowHandle(), blur);
     }
 }
 
