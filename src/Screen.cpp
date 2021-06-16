@@ -1552,15 +1552,11 @@ int Screen::copyLineToStream(int line ,
     }
 
     if (appendNewLine) {
-        if (isBlockSelectionMode) {
-            characterBuffer[count] = options.testFlag(PreserveLineBreaks) ? Character('\n') : Character(' ');
-            count++;
-        } else if ((currentLineProperties & LINE_WRAPPED) != 0) {
-            // do nothing extra when this line is wrapped.
-        } else {
-            // When users ask not to preserve the linebreaks, they usually mean:
-            // `treat LINEBREAK as SPACE, thus joining multiple _lines into
-            // single line in the same way as 'J' does in VIM.`
+        // When users ask not to preserve the linebreaks, they usually mean:
+        // `treat LINEBREAK as SPACE, thus joining multiple _lines into
+        // single line in the same way as 'J' does in VIM.`
+        const bool isLineWrapped = (currentLineProperties & LINE_WRAPPED) != 0;
+        if (isBlockSelectionMode || !isLineWrapped) {
             characterBuffer[count] = options.testFlag(PreserveLineBreaks) ? Character('\n') : Character(' ');
             ++count;
         }
