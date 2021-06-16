@@ -316,6 +316,7 @@ namespace Konsole
                 dirtyRegion |= scrollBar->highlightScrolledLines().rect();
                 scrollBar->highlightScrolledLines().rect() = new_highlight;
             }
+            dirtyRegion |= new_highlight;
 
             scrollBar->highlightScrolledLines().startTimer();
         } else if (!nothingChanged || scrollBar->highlightScrolledLines().isNeedToClear()) {
