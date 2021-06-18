@@ -18,6 +18,10 @@
 // Konsole
 #include "widgets/ViewSplitter.h"
 
+#include "pluginsystem/IKonsolePlugin.h"
+
+#include "konsole_export.h"
+
 class QAction;
 class KActionMenu;
 class KToggleAction;
@@ -41,7 +45,7 @@ class BookmarkHandler;
  *
  * Do not construct new main windows directly, use Application's newMainWindow() method.
  */
-class MainWindow : public KXmlGuiWindow
+class KONSOLE_EXPORT MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
@@ -93,6 +97,16 @@ public:
      */
     void setRemoveWindowTitleBarAndFrame(bool frameless);
 
+    /**
+     * A reference to a plugin on the system.
+     */
+    void addPlugin(IKonsolePlugin *plugin);
+
+    /**
+     * creates a new tab for the main window
+     */
+    void newTab();
+
 Q_SIGNALS:
 
     /**
@@ -128,7 +142,6 @@ protected:
     bool focusNextPrevChild(bool next) override;
 
 private Q_SLOTS:
-    void newTab();
     void cloneTab();
     void newWindow();
     void showManageProfilesDialog();
@@ -183,7 +196,7 @@ private:
     KActionMenu *_newTabMenuAction;
 
     QPointer<SessionController> _pluggedController;
-
+    QList<IKonsolePlugin*> _plugins;
     bool _menuBarInitialVisibility;
     bool _menuBarInitialVisibilityApplied;
     bool _blurEnabled = false;

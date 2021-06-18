@@ -13,6 +13,10 @@
 // Konsole
 #include "widgets/ViewSplitter.h"
 
+#include "pluginsystem/PluginManager.h"
+
+#include "konsole_export.h"
+
 namespace Konsole {
 class MainWindow;
 class Session;
@@ -30,7 +34,7 @@ class Profile;
  * The factory used to create new terminal sessions can be retrieved using
  * the sessionManager() accessor.
  */
-class Application : public QObject
+class KONSOLE_EXPORT Application : public QObject
 {
     Q_OBJECT
 
@@ -79,6 +83,8 @@ private:
     MainWindow *_backgroundInstance;
     QSharedPointer<QCommandLineParser> m_parser;
     QStringList m_customCommand;
+    PluginManager m_pluginManager;
+
 };
 }
 #endif  // APPLICATION_H

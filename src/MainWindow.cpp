@@ -494,6 +494,13 @@ void MainWindow::newTab()
     createSession(defaultProfile, activeSessionDir());
 }
 
+void MainWindow::addPlugin(IKonsolePlugin *plugin)
+{
+    _plugins.append(plugin);
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, plugin,
+        &IKonsolePlugin::activeViewChanged);
+}
+
 void MainWindow::cloneTab()
 {
     Q_ASSERT(_pluggedController);
@@ -524,6 +531,7 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     // don't like this happening
     auto newView = _viewManager->createView(session);
     _viewManager->activeContainer()->addView(newView);
+
     return session;
 }
 
@@ -968,11 +976,11 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     return KXmlGuiWindow::eventFilter(obj, event);
 }
 
-bool MainWindow::focusNextPrevChild(bool)
+bool MainWindow::focusNextPrevChild(bool v)
 {
-    // In stand-alone konsole, always disable implicit focus switching
-    // through 'Tab' and 'Shift+Tab'
-    //
-    // Kpart is another different story
-    return false;
+    if (qobject_cast<TerminalDisplay*>(focusWidget())) {
+        return false;
+    }
+
+    return QMainWindow::focusNextPrevChild(v);
 }

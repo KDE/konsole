@@ -34,6 +34,8 @@
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
 
+#include "pluginsystem/IKonsolePlugin.h"
+
 using namespace Konsole;
 
 Application::Application(QSharedPointer<QCommandLineParser> parser,
@@ -42,6 +44,7 @@ Application::Application(QSharedPointer<QCommandLineParser> parser,
     m_parser(parser),
     m_customCommand(customCommand)
 {
+    m_pluginManager.loadAllPlugins();
 }
 
 void Application::populateCommandLineParser(QCommandLineParser *parser)
@@ -163,6 +166,8 @@ MainWindow *Application::newMainWindow()
     connect(window, &Konsole::MainWindow::newWindowRequest, this,
             &Konsole::Application::createWindow);
     connect(window, &Konsole::MainWindow::terminalsDetached, this, &Konsole::Application::detachTerminals);
+
+    m_pluginManager.registerMainWindow(window);
 
     return window;
 }

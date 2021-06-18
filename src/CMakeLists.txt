@@ -244,10 +244,8 @@ set_target_properties(konsoleprivate PROPERTIES
 
 install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 
-set(konsole_SRCS
-   Application.cpp
+add_library(konsoleapp SHARED Application.cpp
    MainWindow.cpp
-   main.cpp
    settings/ConfigurationDialog.cpp
    settings/ConfigDialogButtonGroupManager.cpp
    settings/TemporaryFilesSettings.cpp
@@ -255,9 +253,32 @@ set(konsole_SRCS
    settings/ProfileSettings.cpp
    settings/TabBarSettings.cpp
    settings/ThumbnailsSettings.cpp
+   pluginsystem/IKonsolePlugin.cpp
+   pluginsystem/PluginManager.cpp
    delegates/ProfileShortcutDelegate.cpp
 )
 
+target_link_libraries(konsoleapp
+  konsoleprivate
+  KF5::XmlGui
+  KF5::WindowSystem
+  KF5::Bookmarks
+  KF5::I18n
+  KF5::KIOWidgets
+  KF5::NotifyConfig
+  KF5::Crash
+)
+
+set_target_properties(konsoleapp PROPERTIES
+    VERSION ${KONSOLEPRIVATE_VERSION_STRING}
+    SOVERSION ${KONSOLEPRIVATE_SOVERSION}
+)
+
+install(TARGETS konsoleapp ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+
+set(konsole_SRCS
+   main.cpp
+)
 
 # Sets the icon on Windows and OSX
 ecm_add_app_icon(konsole ICONS ${ICONS_SRCS})
@@ -265,6 +286,7 @@ ecm_add_app_icon(konsole ICONS ${ICONS_SRCS})
 add_executable(konsole ${konsole_SRCS})
 target_link_libraries(konsole
   konsoleprivate
+  konsoleapp
   KF5::XmlGui
   KF5::WindowSystem
   KF5::Bookmarks
