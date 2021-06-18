@@ -40,7 +40,7 @@ public:
     virtual void createWidgetsForMainWindow(Konsole::MainWindow *mainWindow) = 0;
     virtual void activeViewChanged(Konsole::SessionController *controller) = 0;
 
-    virtual QList<QAction*> menuBarActions(Konsole::MainWindow* mainWindow) const { return {}; };
+    virtual QList<QAction*> menuBarActions(Konsole::MainWindow* mainWindow) const { Q_UNUSED(mainWindow); return {}; };
 
 protected:
     void setName(const QString& pluginName);
