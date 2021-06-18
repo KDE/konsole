@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SSHTreeWidget</class>
+ <widget class="QWidget" name="SSHTreeWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>448</width>
+    <height>631</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLineEdit" name="filterText">
+       <property name="placeholderText">
+        <string>Filter...</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnInvertFilter">
+       <property name="text">
+        <string>Invert</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="SshTreeView" name="treeView">
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="KMessageWidget" name="errorPanel"/>
+   </item>
+   <item>
+    <widget class="QWidget" name="sshInfoPane" native="true">
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Identifier</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="name">
+        <property name="placeholderText">
+         <string>The name of this entry on the list</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>SSH Hostname</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="hostname">
+        <property name="placeholderText">
+         <string>The hostname of the server</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="port">
+        <property name="text">
+         <string>22</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>SSH Key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="sshkey">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>The private key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="folderLabel">
+        <property name="text">
+         <string>Folder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QComboBox" name="folder">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <property name="currentText">
+         <string>Default</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Profile</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QComboBox" name="profile">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="username">
+        <property name="placeholderText">
+         <string>Your username</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Username</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="useSshConfig">
+        <property name="text">
+         <string>Use ~/.ssh/config for key</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="newSSHConfig">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset theme="list-add">
+         <normaloff>.</normaloff>.</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnRemove">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset theme="list-remove">
+         <normaloff>.</normaloff>.</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnImport">
+       <property name="text">
+        <string>Import</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnEdit">
+       <property name="text">
+        <string>Edit</string>
+       </property>
+       <property name="icon">
+        <iconset theme="settings-edit">
+         <normaloff>.</normaloff>.</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAdd">
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SshTreeView</class>
+   <extends>QTreeView</extends>
+   <header>sshtreeview.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>treeView</tabstop>
+  <tabstop>newSSHConfig</tabstop>
+  <tabstop>name</tabstop>
+  <tabstop>hostname</tabstop>
+  <tabstop>port</tabstop>
+  <tabstop>sshkey</tabstop>
+  <tabstop>username</tabstop>
+  <tabstop>useSshConfig</tabstop>
+  <tabstop>folder</tabstop>
+  <tabstop>profile</tabstop>
+  <tabstop>btnAdd</tabstop>
+  <tabstop>btnCancel</tabstop>
+  <tabstop>btnEdit</tabstop>
+  <tabstop>btnRemove</tabstop>
+  <tabstop>btnImport</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
