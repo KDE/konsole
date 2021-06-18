@@ -52,7 +52,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo &process) :
     // options which take no arguments
     static const QString noArgumentOptions(QStringLiteral("1246AaCfgKkMNnqsTtVvXxYy"));
     // options which take one argument
-    static const QString singleArgumentOptions(QStringLiteral("bcDeFIiLlmOopRSWw"));
+    static const QString singleArgumentOptions(QStringLiteral("bcDeFIiJLlmOopRSWw"));
 
     if (ok) {
         // find the username, host and command arguments
