@@ -178,7 +178,6 @@ QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *ob
 TerminalDisplay::TerminalDisplay(QWidget* parent)
     : QWidget(parent)
     , _screenWindow(nullptr)
-    , _bellMasked(false)
     , _verticalLayout(new QVBoxLayout(this))
     , _lines(1)
     , _columns(1)
@@ -208,7 +207,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _copyTextAsHTML(true)
     , _middleClickPasteMode(Enum::PasteFromX11Selection)
     , _wordCharacters(QStringLiteral(":@-./_~"))
-    , _bellMode(Enum::NotifyBell)
+    , _bell(Enum::NotifyBell)
     , _allowBlinkingText(true)
     , _allowBlinkingCursor(false)
     , _textBlinking(false)
@@ -309,6 +308,10 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
             this, &TerminalDisplay::compositeFocusChanged);
     connect(focusWatcher, &CompositeWidgetFocusWatcher::compositeFocusChanged,
             _headerBar, &TerminalHeaderBar::setFocusIndicatorState);
+
+    connect(&_bell, &TerminalBell::visualBell, this, [this] {
+        _terminalColor->visualBell();
+    });
 
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::installFactory(Konsole::accessibleInterfaceFactory);
@@ -2505,48 +2508,9 @@ void TerminalDisplay::contextMenuEvent(QContextMenuEvent* event)
 /*                                                                       */
 /* --------------------------------------------------------------------- */
 
-void TerminalDisplay::setBellMode(int mode)
-{
-    _bellMode = mode;
-}
-
-int TerminalDisplay::bellMode() const
-{
-    return _bellMode;
-}
-
 void TerminalDisplay::bell(const QString& message)
 {
-    if (_bellMasked) {
-        return;
-    }
-
-    switch (_bellMode) {
-    case Enum::SystemBeepBell:
-        KNotification::beep();
-        break;
-    case Enum::NotifyBell:
-        // STABLE API:
-        //     Please note that these event names, "BellVisible" and "BellInvisible",
-        //     should not change and should be kept stable, because other applications
-        //     that use this code via KPart rely on these names for notifications.
-        KNotification::event(hasFocus() ? QStringLiteral("BellVisible") : QStringLiteral("BellInvisible"),
-                             message, QPixmap(), this);
-        break;
-    case Enum::VisualBell:
-        _terminalColor->visualBell();
-        break;
-    default:
-        break;
-    }
-
-    // limit the rate at which bells can occur.
-    // ...mainly for sound effects where rapid bells in sequence
-    // produce a horrible noise.
-    _bellMasked = true;
-    QTimer::singleShot(500, this, [this]() {
-        _bellMasked = false;
-    });
+    _bell.bell(message, hasFocus());
 }
 
 /* --------------------------------------------------------------------- */
@@ -2755,7 +2719,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     setWordCharacters(profile->wordCharacters());
 
     // bell mode
-    setBellMode(profile->property<int>(Profile::BellMode));
+    _bell.setBellMode(Enum::BellModeEnum(profile->property<int>(Profile::BellMode)));
 
     // mouse wheel zoom
     _mouseWheelZoom = profile->mouseWheelZoomEnabled();

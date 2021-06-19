@@ -24,6 +24,8 @@
 #include "ScrollState.h"
 #include "widgets/TerminalHeaderBar.h"
 
+#include "TerminalBell.h"
+
 class QDrag;
 class QDragEnterEvent;
 class QDropEvent;
@@ -207,22 +209,6 @@ public:
      * of a word ( in addition to letters and numbers ).
      */
     void setWordCharacters(const QString &wc);
-
-    /**
-     * Sets the type of effect used to alert the user when a 'bell' occurs in the
-     * terminal session.
-     *
-     * The terminal session can trigger the bell effect by calling bell() with
-     * the alert message.
-     */
-    void setBellMode(int mode);
-    /**
-     * Returns the type of effect used to alert the user when a 'bell' occurs in
-     * the terminal session.
-     *
-     * See setBellMode()
-     */
-    int bellMode() const;
 
     TerminalHeaderBar *headerBar() const
     {
@@ -659,7 +645,7 @@ private:
     Enum::MiddleClickPasteModeEnum _middleClickPasteMode;
 
     QString _wordCharacters;
-    int _bellMode;
+    TerminalBell _bell;
 
     bool _allowBlinkingText;  // allow text to blink
     bool _allowBlinkingCursor;  // allow cursor to blink
