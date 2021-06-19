@@ -172,6 +172,11 @@ Q_SIGNALS:
      */
     void requestPrint();
 
+    /**
+     * indicates to the connected terminal display that it should paste from the clipboard
+     */
+    void pasteFromClipboardRequested();
+
 public Q_SLOTS:
     /**
      * Issues a command to the session to navigate to the specified URL.

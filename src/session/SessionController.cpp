@@ -1078,7 +1078,7 @@ void SessionController::copy()
 
 void SessionController::paste()
 {
-    view()->pasteFromClipboard();
+    Q_EMIT pasteFromClipboardRequested();
 }
 void SessionController::pasteFromX11Selection()
 {
