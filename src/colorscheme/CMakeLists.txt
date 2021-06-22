@@ -18,6 +18,8 @@ ecm_qt_declare_logging_category(
     HEADER colorschemedebug.h
     IDENTIFIER ColorSchemeDebug
     CATEGORY_NAME org.kde.konsole.colorScheme
+    DESCRIPTION "Konsole - colorscheme"
+    EXPORT KONSOLE
 )
 
 add_library(konsolecolorscheme

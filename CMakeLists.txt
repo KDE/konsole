@@ -125,12 +125,11 @@ if (INSTALL_ICONS)
     ecm_install_icons( ICONS ${ICONS_SRCS} DESTINATION ${KDE_INSTALL_ICONDIR} )
 endif()
 
-
-if (${ECM_VERSION} STRGREATER "5.58.0")
-    install( FILES konsole.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR} )
-else()
-    install( FILES konsole.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
-endif()
+ecm_qt_install_logging_categories(
+    EXPORT KONSOLE
+    FILE konsole.categories
+    DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
+)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 

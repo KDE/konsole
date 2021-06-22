@@ -11,6 +11,8 @@ ecm_qt_declare_logging_category(
     HEADER charactersdebug.h
     IDENTIFIER CharactersDebug
     CATEGORY_NAME org.kde.konsole.characters
+    DESCRIPTION "Konsole - characters"
+    EXPORT KONSOLE
 )
 
 add_library(konsolecharacters OBJECT ${konsolecharacters_SRCS})

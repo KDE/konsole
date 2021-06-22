@@ -81,6 +81,8 @@ ecm_qt_declare_logging_category(
     HEADER konsoledebug.h
     IDENTIFIER KonsoleDebug
     CATEGORY_NAME org.kde.konsole
+    DESCRIPTION "Konsole"
+    EXPORT KONSOLE
 )
 
 add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
