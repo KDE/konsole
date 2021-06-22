@@ -220,6 +220,10 @@ constexpr int token_csi_psp(int a, int n)
 {
     return token_construct(12, a, n);
 }
+constexpr int token_csi_pq(int a)
+{
+    return token_construct(13, a, 0);
+}
 
 const int MAX_ARGUMENT = 40960;
 
@@ -325,9 +329,10 @@ void Vt102Emulation::initTokenizer()
 #define les(P,L,C) (p == (P) && s[L] < 256 && (charClass[s[(L)]] & (C)) == (C))
 #define eec(C)     (p >=  3  && cc == (C))
 #define ees(C)     (p >=  3  && cc < 256 && (charClass[cc] & (C)) == (C))
-#define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '!' && s[2] != '>' && cc < 256 && (charClass[cc] & (C)) == (C))
+#define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '!' && s[2] != '=' && s[2] != '>' && cc < 256 && (charClass[cc] & (C)) == (C))
 #define epp( )     (p >=  3  && s[2] == '?')
 #define epe( )     (p >=  3  && s[2] == '!')
+#define eeq( )     (p >=  3  && s[2] == '=')
 #define egt( )     (p >=  3  && s[2] == '>')
 #define esp( )     (p >=  4  && s[2] == SP )
 #define epsp( )    (p >=  5  && s[3] == SP )
@@ -422,6 +427,7 @@ void Vt102Emulation::receiveChar(uint cc)
     // <ESC> ']' ...
     if (osc         ) { return; }
     if (lec(3,2,'?')) { return; }
+    if (lec(3,2,'=')) { return; }
     if (lec(3,2,'>')) { return; }
     if (lec(3,2,'!')) { return; }
     if (lec(3,2,SP )) { return; }
@@ -450,8 +456,10 @@ void Vt102Emulation::receiveChar(uint cc)
     for (int i = 0; i <= argc; i++) {
         if (epp()) {
             processToken(token_csi_pr(cc,argv[i]), 0, 0);
+        } else if (eeq()) {
+            processToken(token_csi_pq(cc), 0, 0); // spec. case for ESC[=0c or ESC[=c
         } else if (egt()) {
-            processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC]>0c or ESC]>c
+            processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC[>0c or ESC[>c
         } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
         {
             // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
@@ -978,6 +986,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_vt52('='      ) :          setMode      (MODE_AppKeyPad); break; //VT52
     case token_vt52('>'      ) :        resetMode      (MODE_AppKeyPad); break; //VT52
 
+    case token_csi_pq('c'      ) :  reportTertiaryAttributes(          ); break; //VT420
     case token_csi_pg('c'      ) :  reportSecondaryAttributes(          ); break; //VT100
 
     default:
@@ -1019,6 +1028,13 @@ void Vt102Emulation::reportTerminalType()
     } else {
         sendString("\033/Z"); // I'm a VT52
     }
+}
+
+void Vt102Emulation::reportTertiaryAttributes()
+{
+  // Tertiary device attribute response DECRPTUI (Request was: ^[[=0c or ^[[=c)
+  // 7e4b4445 is hex for ASCII "~KDE"
+  sendString("\033P!|7e4b4445\033\\");
 }
 
 void Vt102Emulation::reportSecondaryAttributes()
