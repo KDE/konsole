@@ -139,6 +139,7 @@ private:
     void processSessionAttributeRequest(int tokenSize);
 
     void reportTerminalType();
+    void reportTertiaryAttributes();
     void reportSecondaryAttributes();
     void reportStatus();
     void reportAnswerBack();

@@ -219,6 +219,10 @@ constexpr int token_csi_psp(int a, int n)
 {
     return token_construct(12, a, n);
 }
+constexpr int token_csi_pq(int a)
+{
+    return token_construct(13, a, 0);
+}
 
 const int MAX_ARGUMENT = 40960;
 
@@ -326,6 +330,7 @@ void Vt102Emulation::initTokenizer()
 #define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '!' && s[2] != '>' && cc < 256 && (charClass[cc] & (C)) == (C))
 #define epp( )     (p >=  3  && s[2] == '?')
 #define epe( )     (p >=  3  && s[2] == '!')
+#define eeq( )     (p >=  3  && s[2] == '=')
 #define egt( )     (p >=  3  && s[2] == '>')
 #define esp( )     (p >=  4  && s[2] == SP )
 #define epsp( )    (p >=  5  && s[3] == SP )
@@ -433,8 +438,10 @@ void Vt102Emulation::receiveChar(uint cc)
     {
         if (epp()) {
             processToken(token_csi_pr(cc,argv[i]), 0, 0);
+        } else if (eeq()) {
+            processToken(token_csi_pe(cc), 0, 0); // spec. case for ESC[=0c or ESC[=c
         } else if (egt()) {
-            processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC]>0c or ESC]>c
+            processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC[>0c or ESC[>c
         } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
         {
             // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
@@ -960,6 +967,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_vt52('='      ) :          setMode      (MODE_AppKeyPad); break; //VT52
     case token_vt52('>'      ) :        resetMode      (MODE_AppKeyPad); break; //VT52
 
+    case token_csi_pe('='      ) :  reportTertiaryAttributes(          ); break; //VT100
     case token_csi_pg('c'      ) :  reportSecondaryAttributes(          ); break; //VT100
 
     default:
@@ -1000,6 +1008,12 @@ void Vt102Emulation::reportTerminalType()
   } else {
     sendString("\033/Z"); // I'm a VT52
   }
+}
+
+void Vt102Emulation::reportTertiaryAttributes()
+{
+  // Tertiary device attribute response DECRPTUI (Request was: ^[[=0c or ^[[=c)
+  sendString("\033P!|00000000\033\\");
 }
 
 void Vt102Emulation::reportSecondaryAttributes()
