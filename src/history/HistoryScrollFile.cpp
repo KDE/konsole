@@ -61,10 +61,12 @@ LineProperty HistoryScrollFile::getLineProperty(const int lineno) const
 
 qint64 HistoryScrollFile::startOfLine(const int lineno) const
 {
-    if (lineno <= 0) {
+    Q_ASSERT(lineno >= 0 && lineno <= getLines());
+
+    if (lineno == 0) {
         return 0;
     }
-    if (lineno <= getLines()) {
+    if (lineno < getLines()) {
         qint64 res = 0;
         _index.get(reinterpret_cast<char *>(&res), sizeof(qint64), (lineno - 1) * sizeof(qint64));
         return res;
@@ -127,7 +129,7 @@ int HistoryScrollFile::reflowLines(const int columns)
         LineProperty lineProperty = getLineProperty(currentPos);
 
         // Join the lines if they are wrapped
-        while (isWrappedLine(currentPos)) {
+        while (currentPos < getLines() - 1 && isWrappedLine(currentPos)) {
             currentPos++;
             endLine = startOfLine(currentPos + 1);
         }

@@ -150,7 +150,7 @@ int CompactHistoryScroll::reflowLines(const int columns)
         LineProperty lineProperty = getLineProperty(currentPos);
 
         // Join the lines if they are wrapped
-        while (isWrappedLine(currentPos)) {
+        while (currentPos < getLines() - 1 && isWrappedLine(currentPos)) {
             currentPos++;
             endLine = startOfLine(currentPos + 1);
         }
