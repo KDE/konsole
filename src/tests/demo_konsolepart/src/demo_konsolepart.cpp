@@ -59,7 +59,7 @@ demo_konsolepart::demo_konsolepart()
                               Qt::DirectConnection,
                               Q_RETURN_ARG(bool, blurEnabled));
     qWarning()<<"blur enabled: "<<blurEnabled;
-    KWindowEffects::enableBlurBehind(windowHandle(), blurEnabled);
+    KWindowEffects::enableBlurBehind(winId(), blurEnabled);
 }
 
 demo_konsolepart::~demo_konsolepart()

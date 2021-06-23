@@ -846,6 +846,13 @@ Scrollback and Reset</guimenuitem></menuchoice></term>
 and resets the terminal</action></para></listitem>
 </varlistentry>
 
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycap>F11</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Full Screen Mode</guimenuitem></menuchoice></term>
+<listitem><para><action>Toggles &konsole; filling the entire screen</action></para></listitem>
+</varlistentry>
+
 </variablelist>
 </sect2>
 
@@ -918,7 +925,7 @@ Current Profile...</guimenuitem></menuchoice></term>
 <varlistentry>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage
 Profiles...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens a editor for managing profiles</action>
+<listitem><para><action>Opens an editor for managing profiles</action>
 </para>
 </listitem>
 </varlistentry>
@@ -933,14 +940,28 @@ Menu Bar</guimenuitem></menuchoice></term>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycap>F11</keycap></shortcut>
-<guimenu>Settings</guimenu><guimenuitem>Full Screen Mode</guimenuitem></menuchoice></term>
-<listitem><para><action>Toggles &konsole; filling the entire screen</action></para></listitem>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Toolbars Shown</guimenuitem></menuchoice></term>
+<listitem><para><action>Allows visibility toggling of the &konsole; toolbars</action></para>
+</listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+<term><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Show
+Show Statusbar</guimenuitem></menuchoice></term>
+<listitem><para><action>Toggles the statusbar being visible</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Language...
+</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens window to choose an interface translation of &konsole;.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Keyboard
 Shortcuts...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the keyboard shortcut editor.</action> More on shortcuts configuration
 can be found in the <ulink url="help:/fundamentals/shortcuts.html">&kde; Fundamentals</ulink>.</para>
@@ -965,25 +986,28 @@ can be found in the <ulink url="help:/fundamentals/shortcuts.html">&kde; Fundame
 <entry>Previous Tab</entry>
 </row>
 <row>
-<entry><keycombo action="simul">&Ctrl;&Shift;<keysym>Left</keysym></keycombo></entry>
+<entry><keycombo action="simul">&Ctrl;&Alt;<keysym>Left</keysym></keycombo></entry>
 <entry>Move Tab Left</entry>
 </row>
 <row>
-<entry><keycombo action="simul">&Ctrl;&Shift;<keysym>Right</keysym></keycombo></entry>
+<entry><keycombo action="simul">&Ctrl;&Alt;<keysym>Right</keysym></keycombo></entry>
 <entry>Move Tab Right</entry>
 </row>
 <row>
 <entry><keycombo action="simul">&Ctrl;&Shift;<keysym>Ins</keysym></keycombo></entry>
 <entry>Paste Selection</entry>
 </row>
-<row>
-<entry><keycombo action="simul">&Shift;&Tab;</keycombo></entry>
-<entry>Next View Container</entry> <!--FIXME what is this:yurchor container widget which holds views-->
-</row>
 </tbody>
 </tgroup>
 </informaltable>
 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+Toolbars...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens <ulink url="help:/fundamentals/config.html#toolbars-items">the toolbar configuration window</ulink></action></para>
 </listitem>
 </varlistentry>
 
