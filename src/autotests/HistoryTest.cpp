@@ -93,8 +93,6 @@ void HistoryTest::testHistoryScroll()
     historyScroll = new HistoryScrollNone();
     QVERIFY(!historyScroll->hasScroll());
     QCOMPARE(historyScroll->getLines(), 0);
-    QCOMPARE(historyScroll->getLineLen(0), 0);
-    QCOMPARE(historyScroll->getLineLen(10), 0);
 
     const HistoryType &historyTypeNone = historyScroll->getType();
     QCOMPARE(historyTypeNone.isEnabled(), false);
@@ -107,8 +105,6 @@ void HistoryTest::testHistoryScroll()
     historyScroll = new HistoryScrollFile();
     QVERIFY(historyScroll->hasScroll());
     QCOMPARE(historyScroll->getLines(), 0);
-    QCOMPARE(historyScroll->getLineLen(0), 0);
-    QCOMPARE(historyScroll->getLineLen(10), 0);
 
     const HistoryType &historyTypeFile = historyScroll->getType();
     QCOMPARE(historyTypeFile.isEnabled(), true);
@@ -121,8 +117,6 @@ void HistoryTest::testHistoryScroll()
     historyScroll = new CompactHistoryScroll(42);
     QVERIFY(historyScroll->hasScroll());
     QCOMPARE(historyScroll->getLines(), 0);
-    QCOMPARE(historyScroll->getLineLen(0), 0);
-    QCOMPARE(historyScroll->getLineLen(10), 0);
 
     const HistoryType &compactHistoryType = historyScroll->getType();
     QCOMPARE(compactHistoryType.isEnabled(), true);
