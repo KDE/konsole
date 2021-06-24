@@ -947,8 +947,7 @@ Menu Bar</guimenuitem></menuchoice></term>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Show
-Show Statusbar</guimenuitem></menuchoice></term>
+<guimenu>Settings</guimenu><guimenuitem>Show Statusbar</guimenuitem></menuchoice></term>
 <listitem><para><action>Toggles the statusbar being visible</action></para></listitem>
 </varlistentry>
 
