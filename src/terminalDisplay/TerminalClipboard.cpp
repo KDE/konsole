@@ -141,7 +141,7 @@ bool isUnsafe(const QChar c) {
     return (c.category() == QChar::Category::Other_Control && std::find(ALLOWLIST.begin(), ALLOWLIST.end(), c.unicode()) != ALLOWLIST.end());
 }
 
-void copyToX11Selection(const QString &textToCopy, bool isHtml, bool autoCopySelectedText)
+void copyToX11Selection(const QString &textToCopy, const QString &htmlToCopy, bool autoCopySelectedText)
 {
     if (textToCopy.isEmpty()) {
         return;
@@ -150,8 +150,8 @@ void copyToX11Selection(const QString &textToCopy, bool isHtml, bool autoCopySel
     auto mimeData = new QMimeData;
     mimeData->setText(textToCopy);
 
-    if (isHtml) {
-        mimeData->setHtml(textToCopy);
+    if (!htmlToCopy.isEmpty()) {
+        mimeData->setHtml(htmlToCopy);
     }
 
     if (QApplication::clipboard()->supportsSelection()) {

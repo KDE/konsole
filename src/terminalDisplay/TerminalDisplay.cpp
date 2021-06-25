@@ -2181,11 +2181,10 @@ void TerminalDisplay::copyToX11Selection()
         return;
     }
 
-    const auto &text = _copyTextAsHTML ?
-                _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml)
-              : _screenWindow->selectedText(currentDecodingOptions());
+    const auto text = _screenWindow->selectedText(currentDecodingOptions());
+    const auto html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
 
-    terminalClipboard::copyToX11Selection(text, _copyTextAsHTML, _autoCopySelectedText);
+    terminalClipboard::copyToX11Selection(text, html, _autoCopySelectedText);
 }
 
 void TerminalDisplay::copyToClipboard()
