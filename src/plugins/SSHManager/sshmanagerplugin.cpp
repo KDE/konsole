@@ -64,18 +64,13 @@ void SSHManagerPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindo
 QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow* mainWindow) const
 {
     Q_UNUSED(mainWindow);
-    const QString show = i18n("Show SSH Manager");
-    const QString hide = i18n("Hide SSH Manager");
 
-    QAction *toggleVisibilityAction = new QAction(show, mainWindow);
+    QAction *toggleVisibilityAction = new QAction(i18n("Show SSH Manager"), mainWindow);
     toggleVisibilityAction->setCheckable(true);
     toggleVisibilityAction->setChecked(false);
-    toggleVisibilityAction->setText(show);
 
-    connect(toggleVisibilityAction, &QAction::triggered, this, [=] (bool visible) {
-        d->dockForWindow[mainWindow]->setVisible(visible);
-        toggleVisibilityAction->setText(visible ? hide : show);
-    });
+    connect(toggleVisibilityAction, &QAction::triggered,
+            d->dockForWindow[mainWindow], &QDockWidget::setVisible);
 
     return {toggleVisibilityAction};
 }
