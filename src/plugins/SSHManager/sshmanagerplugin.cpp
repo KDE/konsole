@@ -67,10 +67,11 @@ QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow* mainWindo
 
     QAction *toggleVisibilityAction = new QAction(i18n("Show SSH Manager"), mainWindow);
     toggleVisibilityAction->setCheckable(true);
-    toggleVisibilityAction->setChecked(false);
 
     connect(toggleVisibilityAction, &QAction::triggered,
             d->dockForWindow[mainWindow], &QDockWidget::setVisible);
+    connect(d->dockForWindow[mainWindow], &QDockWidget::visibilityChanged,
+            toggleVisibilityAction, &QAction::setChecked);
 
     return {toggleVisibilityAction};
 }
