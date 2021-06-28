@@ -22,7 +22,7 @@
 
 #include "sshconfigurationdata.h"
 
-Q_LOGGING_CATEGORY(SshManagerPlugin, "org.kde.konsole.plugin.sshmanager");
+Q_LOGGING_CATEGORY(SshManagerPlugin, "org.kde.konsole.plugin.sshmanager")
 
 namespace {
     const QString SshDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + QStringLiteral("/.ssh/");

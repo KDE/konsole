@@ -22,6 +22,6 @@ public:
     bool importedFromSshConfig = false;
 };
 
-Q_DECLARE_METATYPE(SSHConfigurationData);
+Q_DECLARE_METATYPE(SSHConfigurationData)
 
 #endif
