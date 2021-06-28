@@ -223,10 +223,6 @@
        <property name="text">
         <string>Edit</string>
        </property>
-       <property name="icon">
-        <iconset theme="settings-edit">
-         <normaloff>.</normaloff>.</iconset>
-       </property>
       </widget>
      </item>
      <item>
