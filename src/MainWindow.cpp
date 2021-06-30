@@ -129,7 +129,7 @@ MainWindow::MainWindow() :
     KAcceleratorManager::setNoAccel(menuBar());
 
     // create menus
-    setupGUI();
+    createGUI();
 
     // remember the original menu accelerators for later use
     rememberMenuAccelerators();
