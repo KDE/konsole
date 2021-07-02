@@ -31,6 +31,7 @@
 #include <KNotifyConfigWidget>
 
 #include <kio_version.h>
+#include <kwindowsystem_version.h>
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -885,7 +886,11 @@ void MainWindow::setBlur(bool blur)
     _blurEnabled = blur;
 
     if (!_pluggedController->isKonsolePart()) {
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
+        KWindowEffects::enableBlurBehind(winId(), blur);
+#else
         KWindowEffects::enableBlurBehind(windowHandle(), blur);
+#endif
     }
 }
 

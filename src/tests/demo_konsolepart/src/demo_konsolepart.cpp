@@ -17,6 +17,8 @@
 #include <KWindowSystem>
 #include <KWindowEffects>
 
+#include <kwindowsystem_version.h>
+
 // see below notes
 //#include "../../../WindowSystemInfo.h"
 
@@ -59,7 +61,11 @@ demo_konsolepart::demo_konsolepart()
                               Qt::DirectConnection,
                               Q_RETURN_ARG(bool, blurEnabled));
     qWarning()<<"blur enabled: "<<blurEnabled;
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
+    KWindowEffects::enableBlurBehind(winId(), blurEnabled);
+#else
     KWindowEffects::enableBlurBehind(windowHandle(), blurEnabled);
+#endif
 }
 
 demo_konsolepart::~demo_konsolepart()
