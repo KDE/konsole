@@ -12,8 +12,6 @@
 #include <QMenuBar>
 
 #include <KPluginFactory>
-#include <KPluginLoader>
-#include <KService>
 #include <KWindowEffects>
 #include <KWindowSystem>
 
@@ -75,14 +73,12 @@ demo_konsolepart::~demo_konsolepart()
 
 KParts::ReadOnlyPart *demo_konsolepart::createPart()
 {
-    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
-    Q_ASSERT(service);
-    KPluginFactory *factory = KPluginLoader(service->library()).factory();
-    Q_ASSERT(factory);
+    const KPluginFactory::Result<KParts::ReadOnlyPart> result =
+        KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(KPluginMetaData(QStringLiteral("konsolepart")), this);
 
-    auto *terminalPart = factory->create<KParts::ReadOnlyPart>(this);
+    Q_ASSERT(result);
 
-    return terminalPart;
+    return result.plugin;
 }
 
 void demo_konsolepart::manageProfiles()

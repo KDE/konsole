@@ -16,7 +16,7 @@ cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 # Match KDE Frameworks update Apr 2021
 set (QT_MIN_VERSION "5.15.0")
 
-set (KF5_MIN_VERSION "5.71.0")
+set (KF5_MIN_VERSION "5.86.0")
 
 # Release script will create bugzilla versions
 project(konsole VERSION ${RELEASE_SERVICE_VERSION})
