@@ -2,6 +2,5 @@
 ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml
 Categories=Konsole Color Schemes
 TargetDir=konsole
-AcceptHtmlDownloads=false
 Uncompress=archive
 RemoveDeadEntries=true
