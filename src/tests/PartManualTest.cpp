@@ -20,7 +20,6 @@
 // KDE
 #include <KPluginLoader>
 #include <KPluginFactory>
-#include <KService>
 #include <KMainWindow>
 #include <qtest.h>
 
@@ -106,9 +105,8 @@ void PartManualTest::shortcutTriggered()
 
 KParts::Part* PartManualTest::createPart()
 {
-    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
-    Q_ASSERT(service);
-    KPluginFactory* factory = KPluginLoader(service->library()).factory();
+    KPluginLoader loader(QStringLiteral("konsolepart"));
+    KPluginFactory* factory = loader.factory();
     Q_ASSERT(factory);
 
     auto* terminalPart = factory->create<KParts::Part>(this);

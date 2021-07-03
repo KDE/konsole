@@ -13,7 +13,6 @@
 
 #include <KPluginLoader>
 #include <KPluginFactory>
-#include <KService>
 #include <KWindowSystem>
 #include <KWindowEffects>
 
@@ -77,9 +76,8 @@ demo_konsolepart::~demo_konsolepart()
 
 KParts::ReadOnlyPart* demo_konsolepart::createPart()
 {
-    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
-    Q_ASSERT(service);
-    KPluginFactory* factory = KPluginLoader(service->library()).factory();
+    KPluginLoader loader(QStringLiteral("konsolepart"));
+    KPluginFactory* factory = loader.factory();
     Q_ASSERT(factory);
 
     auto* terminalPart = factory->create<KParts::ReadOnlyPart>(this);
