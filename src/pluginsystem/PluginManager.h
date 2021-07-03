@@ -13,7 +13,6 @@
 #include <QList>
 
 #include <memory>
-#include <KService>
 #include "konsole_export.h"
 
 namespace Konsole {

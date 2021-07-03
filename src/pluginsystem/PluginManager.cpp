@@ -10,6 +10,7 @@
 #include "IKonsolePlugin.h"
 #include "MainWindow.h"
 
+#include <KPluginLoader>
 #include <KPluginMetaData>
 
 namespace Konsole {

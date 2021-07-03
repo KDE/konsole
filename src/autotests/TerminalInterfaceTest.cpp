@@ -16,7 +16,8 @@
 #include <QDebug>
 
 // KDE
-#include <KService>
+#include <KPluginFactory>
+#include <KPluginLoader>
 #include <qtest.h>
 
 using namespace Konsole;
