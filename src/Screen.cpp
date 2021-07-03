@@ -1130,6 +1130,10 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
                 line.resize(endCol + 1);
             }
 
+            if (endCol == _columns - 1) {
+                line.resize(endCol + 1);
+            }
+
             if (startCol <= endCol) {
                 std::fill(line.begin() + startCol, line.begin() + (endCol + 1), clearCh);
             }
