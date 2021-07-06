@@ -1237,6 +1237,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         } else if (!entry.text().isEmpty()) {
             textToSend += entry.text(true,modifiers);
         } else {
+            Q_ASSERT(_codec);
             textToSend += _codec->fromUnicode(event->text());
         }
 

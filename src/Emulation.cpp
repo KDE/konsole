@@ -234,6 +234,8 @@ void Emulation::sendKeyEvent(QKeyEvent *ev)
 
 void Emulation::receiveData(const char *text, int length)
 {
+    Q_ASSERT(_decoder);
+
     bufferedUpdate();
 
     //send characters to terminal emulator

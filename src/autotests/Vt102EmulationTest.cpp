@@ -75,6 +75,37 @@ constexpr int token_csi_pe(int a)
     return token_construct(10, a, 0);
 }
 
+void Vt102EmulationTest::sendAndCompare(TestEmulation *em,
+        const char *input,
+        size_t inputLen,
+        const QString &expectedPrint,
+        const QByteArray &expectedSent
+        )
+{
+    em->_currentScreen->clearEntireScreen();
+
+    em->receiveData(input, inputLen);
+    QString printed = em->_currentScreen->text(0, em->_currentScreen->getColumns(), Screen::PlainText);
+    printed.chop(2); // Remove trailing space and newline
+    QCOMPARE(printed, expectedPrint);
+    QCOMPARE(em->lastSent, expectedSent);
+}
+
+void Vt102EmulationTest::testParse()
+{
+    TestEmulation em;
+    em.setCodec(TestEmulation::Utf8Codec);
+    Q_ASSERT(em._currentScreen != nullptr);
+
+    sendAndCompare(&em, "a", 1, QStringLiteral("a"), "");
+
+    const char tertiaryDeviceAttributes[] = {
+        0x1b, '[', '=', '0', 'c'
+    };
+    QEXPECT_FAIL("", "Fixed by https://invent.kde.org/utilities/konsole/-/merge_requests/416", Abort);
+    sendAndCompare(&em, tertiaryDeviceAttributes, sizeof tertiaryDeviceAttributes, QStringLiteral(""), "\033P!|00000000\033\\");
+}
+
 void Vt102EmulationTest::testTokenFunctions()
 {
     QCOMPARE(token_construct(0, 0, 0), TY_CONSTRUCT(0, 0, 0));
