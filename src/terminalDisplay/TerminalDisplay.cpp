@@ -75,7 +75,7 @@
 #include "TerminalScrollBar.h"
 #include "TerminalColor.h"
 #include "TerminalFonts.h"
-#include "TerminalClipboard.h"
+#include "TerminalPasting.h"
 
 using namespace Konsole;
 
@@ -1568,7 +1568,7 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
         if (_middleClickPasteMode == Enum::PasteFromX11Selection) {
             pasteFromX11Selection(appendEnter);
         } else if (_middleClickPasteMode == Enum::PasteFromClipboard) {
-            doPaste(terminalClipboard::pasteFromClipboard(), appendEnter);
+            doPaste(terminalPasting::pasteFromClipboard(), appendEnter);
         } else {
             Q_ASSERT(false);
         }
@@ -2120,7 +2120,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         }
     }
 
-    auto unsafeCharacters = terminalClipboard::checkForUnsafeCharacters(text);
+    auto unsafeCharacters = terminalPasting::checkForUnsafeCharacters(text);
 
     if (!unsafeCharacters.isEmpty()) {
         int result = KMessageBox::warningYesNoCancelList(window(),
@@ -2143,7 +2143,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         case KMessageBox::Cancel:
             return;
         case KMessageBox::Yes: {
-            text = terminalClipboard::sanitizeString(text);
+            text = terminalPasting::sanitizeString(text);
         }
         case KMessageBox::No:
             break;
@@ -2152,7 +2152,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         }
     }
 
-    auto pasteString = terminalClipboard::prepareStringForPasting(text, appendReturn, bracketedPasteMode());
+    auto pasteString = terminalPasting::prepareStringForPasting(text, appendReturn, bracketedPasteMode());
     if (pasteString.has_value()) {
         // perform paste by simulating keypress events
         QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
@@ -2181,11 +2181,26 @@ void TerminalDisplay::copyToX11Selection()
         return;
     }
 
-    const auto &text = _copyTextAsHTML ?
-                _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml)
-              : _screenWindow->selectedText(currentDecodingOptions());
 
-    terminalClipboard::copyToX11Selection(text, _copyTextAsHTML, _autoCopySelectedText);
+    const QString &text = _screenWindow->selectedText(currentDecodingOptions());
+    if (text.isEmpty()) {
+        return;
+    }
+
+    auto mimeData = new QMimeData;
+    mimeData->setText(text);
+
+    if (_copyTextAsHTML) {
+        mimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
+    }
+
+    if (QApplication::clipboard()->supportsSelection()) {
+        QApplication::clipboard()->setMimeData(mimeData, QClipboard::Selection);
+    }
+
+    if (_autoCopySelectedText) {
+        QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
+    }
 }
 
 void TerminalDisplay::copyToClipboard()
@@ -2650,7 +2665,7 @@ void TerminalDisplay::setSessionController(SessionController* controller)
 {
     _sessionController = controller;
     connect(_sessionController, &Konsole::SessionController::pasteFromClipboardRequested, [this] {
-        doPaste(terminalClipboard::pasteFromClipboard(), false);
+        doPaste(terminalPasting::pasteFromClipboard(), false);
     });
     _headerBar->finishHeaderSetup(controller);
 }

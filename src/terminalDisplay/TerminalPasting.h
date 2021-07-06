@@ -15,7 +15,8 @@ class QStringList;
 
 #include <optional>
 
-namespace Konsole::terminalClipboard {
+namespace Konsole {
+namespace terminalPasting {
 
 /**
  * Retrieves the content of the clipboard and preprocesses it for pasting
@@ -47,6 +48,5 @@ QStringList checkForUnsafeCharacters(const QString &text);
  */
 bool isUnsafe(const QChar c);
 
-void copyToX11Selection(const QString &textToCopy, bool copyAsHtml, bool autoCopySelectedText);
-
+}
 }

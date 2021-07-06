@@ -17,9 +17,10 @@
 #include <KShell>
 #include <KLocalizedString>
 
-#include "TerminalClipboard.h"
+#include "TerminalPasting.h"
 
-namespace Konsole::terminalClipboard {
+namespace Konsole {
+namespace terminalPasting {
 
 // Most code in Konsole uses UTF-32. We're filtering
 // UTF-16 here, as all control characters can be represented
@@ -141,26 +142,5 @@ bool isUnsafe(const QChar c) {
     return (c.category() == QChar::Category::Other_Control && std::find(ALLOWLIST.begin(), ALLOWLIST.end(), c.unicode()) != ALLOWLIST.end());
 }
 
-void copyToX11Selection(const QString &textToCopy, bool isHtml, bool autoCopySelectedText)
-{
-    if (textToCopy.isEmpty()) {
-        return;
-    }
-
-    auto mimeData = new QMimeData;
-    mimeData->setText(textToCopy);
-
-    if (isHtml) {
-        mimeData->setHtml(textToCopy);
-    }
-
-    if (QApplication::clipboard()->supportsSelection()) {
-        QApplication::clipboard()->setMimeData(mimeData, QClipboard::Selection);
-    }
-
-    if (autoCopySelectedText) {
-        QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
-    }
 }
-
 }
