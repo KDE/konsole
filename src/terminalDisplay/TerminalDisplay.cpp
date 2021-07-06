@@ -75,7 +75,6 @@
 #include "TerminalScrollBar.h"
 #include "TerminalColor.h"
 #include "TerminalFonts.h"
-#include "TerminalPasting.h"
 
 using namespace Konsole;
 
@@ -1568,7 +1567,7 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
         if (_middleClickPasteMode == Enum::PasteFromX11Selection) {
             pasteFromX11Selection(appendEnter);
         } else if (_middleClickPasteMode == Enum::PasteFromClipboard) {
-            doPaste(terminalPasting::pasteFromClipboard(), appendEnter);
+            pasteFromClipboard(appendEnter);
         } else {
             Q_ASSERT(false);
         }
@@ -2107,6 +2106,10 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         return;
     }
 
+    if (appendReturn) {
+        text.append(QLatin1String("\r"));
+    }
+
     if (text.length() > 8000) {
         if (KMessageBox::warningContinueCancel(window(),
                         i18np("Are you sure you want to paste %1 character?",
@@ -2120,7 +2123,56 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         }
     }
 
-    auto unsafeCharacters = terminalPasting::checkForUnsafeCharacters(text);
+    // Most code in Konsole uses UTF-32. We're filtering
+    // UTF-16 here, as all control characters can be represented
+    // in this encoding as single code unit. If you ever need to
+    // filter anything above 0xFFFF (specific code points or
+    // categories which contain such code points), convert text to
+    // UTF-32 using QString::toUcs4() and use QChar static
+    // methods which take "uint ucs4".
+    static const QVector<ushort> whitelist = { u'\t', u'\r', u'\n' };
+    static const auto isUnsafe = [](const QChar &c) {
+        return (c.category() == QChar::Category::Other_Control && !whitelist.contains(c.unicode()));
+    };
+    // Returns control sequence string (e.g. "^C") for control character c
+    static const auto charToSequence = [](const QChar &c) {
+        if (c.unicode() <= 0x1F) {
+            return QStringLiteral("^%1").arg(QChar(u'@' + c.unicode()));
+        } else if (c.unicode() == 0x7F) {
+            return QStringLiteral("^?");
+        } else if (c.unicode() >= 0x80 && c.unicode() <= 0x9F){
+            return QStringLiteral("^[%1").arg(QChar(u'@' + c.unicode() - 0x80));
+        }
+        return QString();
+    };
+
+    const QMap<ushort, QString> characterDescriptions = {
+        {0x0003, i18n("End Of Text/Interrupt: may exit the current process")},
+        {0x0004, i18n("End Of Transmission: may exit the current process")},
+        {0x0007, i18n("Bell: will try to emit an audible warning")},
+        {0x0008, i18n("Backspace")},
+        {0x0013, i18n("Device Control Three/XOFF: suspends output")},
+        {0x001a, i18n("Substitute/Suspend: may suspend current process")},
+        {0x001b, i18n("Escape: used for manipulating terminal state")},
+        {0x001c, i18n("File Separator/Quit: may abort the current process")},
+    };
+
+    QStringList unsafeCharacters;
+    for (const QChar &c : text) {
+        if (isUnsafe(c)) {
+            const QString sequence = charToSequence(c);
+            const QString description = characterDescriptions.value(c.unicode(), QString());
+            QString entry = QStringLiteral("U+%1").arg(c.unicode(), 4, 16, QLatin1Char('0'));
+            if(!sequence.isEmpty()) {
+                entry += QStringLiteral("\t%1").arg(sequence);
+            }
+            if(!description.isEmpty()) {
+                entry += QStringLiteral("\t%1").arg(description);
+            }
+            unsafeCharacters.append(entry);
+        }
+    }
+    unsafeCharacters.removeDuplicates();
 
     if (!unsafeCharacters.isEmpty()) {
         int result = KMessageBox::warningYesNoCancelList(window(),
@@ -2143,7 +2195,13 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         case KMessageBox::Cancel:
             return;
         case KMessageBox::Yes: {
-            text = terminalPasting::sanitizeString(text);
+            QString sanitized;
+            for (const QChar &c : text) {
+                if (!isUnsafe(c)) {
+                    sanitized.append(c);
+                }
+            }
+            text = sanitized;
         }
         case KMessageBox::No:
             break;
@@ -2152,8 +2210,17 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         }
     }
 
-    auto pasteString = terminalPasting::prepareStringForPasting(text, appendReturn, bracketedPasteMode());
-    if (pasteString.has_value()) {
+    if (!text.isEmpty()) {
+        // replace CRLF with CR first, fixes issues with pasting multiline
+        // text from gtk apps (e.g. Firefox), bug 421480
+        text.replace(QLatin1String("\r\n"), QLatin1String("\r"));
+
+        text.replace(QLatin1Char('\n'), QLatin1Char('\r'));
+        if (bracketedPasteMode()) {
+            text.remove(QLatin1String("\033"));
+            text.prepend(QLatin1String("\033[200~"));
+            text.append(QLatin1String("\033[201~"));
+        }
         // perform paste by simulating keypress events
         QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
         Q_EMIT keyPressedSignal(&e);
@@ -2222,6 +2289,32 @@ void TerminalDisplay::copyToClipboard()
     }
 
     QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
+}
+
+void TerminalDisplay::pasteFromClipboard(bool appendEnter)
+{
+    QString text;
+    const QMimeData *mimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
+
+    // When pasting urls of local files:
+    // - remove the scheme part, "file://"
+    // - paste the path(s) as a space-separated list of strings, which are quoted if needed
+    if (!mimeData->hasUrls()) { // fast path if there are no urls
+        text = mimeData->text();
+    } else { // handle local file urls
+        const QList<QUrl> list = mimeData->urls();
+        for (const QUrl &url : list) {
+            if (url.isLocalFile()) {
+                text += KShell::quoteArg(url.toLocalFile());
+                text += QLatin1Char(' ');
+            } else { // can users copy urls of both local and remote files at the same time?
+                text = mimeData->text();
+                break;
+            }
+        }
+    }
+
+    doPaste(text, appendEnter);
 }
 
 void TerminalDisplay::pasteFromX11Selection(bool appendEnter)
@@ -2664,9 +2757,6 @@ void TerminalDisplay::doDrag()
 void TerminalDisplay::setSessionController(SessionController* controller)
 {
     _sessionController = controller;
-    connect(_sessionController, &Konsole::SessionController::pasteFromClipboardRequested, [this] {
-        doPaste(terminalPasting::pasteFromClipboard(), false);
-    });
     _headerBar->finishHeaderSetup(controller);
 }
 
