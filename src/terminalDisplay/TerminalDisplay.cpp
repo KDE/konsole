@@ -1140,8 +1140,6 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         return;
     }
 
-    _screenWindow->screen()->setCurrentTerminalDisplay(this);
-
     if (_possibleTripleClick && (ev->button() == Qt::LeftButton)) {
         mouseTripleClickEvent(ev);
         return;
@@ -1707,7 +1705,6 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             QKeyEvent keyEvent(QEvent::KeyPress, keyCode, Qt::NoModifier);
 
             for (int i = 0; i < abs(lines); i++) {
-                _screenWindow->screen()->setCurrentTerminalDisplay(this);
                 Q_EMIT keyPressedSignal(&keyEvent);
             }
         } else if (_usesMouseTracking) {
@@ -2485,8 +2482,6 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     if (!_peekPrimaryShortcut.isEmpty() && _peekPrimaryShortcut.matches(QKeySequence(event->key() | event->modifiers()))) {
         peekPrimaryRequested(true);
     }
-
-    _screenWindow->screen()->setCurrentTerminalDisplay(this);
 
     if (!_readOnly) {
         _actSel = 0; // Key stroke implies a screen update, so TerminalDisplay won't

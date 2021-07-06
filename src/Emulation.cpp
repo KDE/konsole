@@ -84,6 +84,12 @@ ScreenWindow *Emulation::createWindow()
     return window;
 }
 
+void Emulation::setCurrentTerminalDisplay(TerminalDisplay *display)
+{
+    _screen[0]->setCurrentTerminalDisplay(display);
+    _screen[1]->setCurrentTerminalDisplay(display);
+}
+
 void Emulation::checkScreenInUse()
 {
     Q_EMIT primaryScreenInUse(_currentScreen == _screen[0]);

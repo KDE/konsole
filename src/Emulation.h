@@ -15,6 +15,7 @@
 
 // Konsole
 #include "Enumeration.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "konsoleprivate_export.h"
 
 #include <memory>
@@ -92,6 +93,11 @@ public:
      * TerminalDisplay::setScreenWindow() method.
      */
     ScreenWindow *createWindow();
+
+    /**
+     * Associates a TerminalDisplay with this emulation.
+     */
+    void setCurrentTerminalDisplay(TerminalDisplay *display);
 
     /** Returns the size of the screen image which the emulation produces */
     QSize imageSize() const;

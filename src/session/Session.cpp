@@ -339,6 +339,8 @@ void Session::addView(TerminalDisplay* widget)
 
     widget->setScreenWindow(_emulation->createWindow());
 
+    _emulation->setCurrentTerminalDisplay(widget);
+
     //connect view signals and slots
     connect(widget, &Konsole::TerminalDisplay::changedContentSizeSignal, this, &Konsole::Session::onViewSizeChange);
 
