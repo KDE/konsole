@@ -20,6 +20,7 @@
         "Name[sl]": "Upravljalnik SSH",
         "Name[sv]": "SSH-hanterare",
         "Name[uk]": "Керування SSH",
-        "Name[x-test]": "xxSSH Managerxx"
+        "Name[x-test]": "xxSSH Managerxx",
+        "Name[zh_CN]": "SSH 管理器"
     }
 }
