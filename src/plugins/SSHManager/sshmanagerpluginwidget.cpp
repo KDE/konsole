@@ -51,7 +51,7 @@ d(std::make_unique<SSHManagerTreeWidget::Private>())
         QStringLiteral(R"(^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$)")
     );
 
-    const auto* hostnameValidator = new QRegularExpressionValidator(hostnameRegex);
+    const auto* hostnameValidator = new QRegularExpressionValidator(hostnameRegex, this);
     ui->hostname->setValidator(hostnameValidator);
 
     const auto* portValidator = new QIntValidator(0, 9999);
