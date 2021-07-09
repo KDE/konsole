@@ -134,7 +134,7 @@ void SSHManagerModel::save()
         QStandardItem *groupItem = invisibleRootItem()->child(i);
         const QString groupName = groupItem->text();
         KConfigGroup baseGroup = config.group(groupName);
-        for (int e = 0, end = groupItem->rowCount(); e < end; e++) {
+        for (int e = 0, rend = groupItem->rowCount(); e < rend; e++) {
             QStandardItem *sshElement = groupItem->child(e);
             const auto data = sshElement->data(SSHRole).value<SSHConfigurationData>();
             KConfigGroup sshGroup = baseGroup.group(data.name.trimmed());
