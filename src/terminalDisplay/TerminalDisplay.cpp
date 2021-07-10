@@ -1795,6 +1795,12 @@ QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
 
 QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
 {
+    // Don't ask me why x and y are switched ¯\_(ツ)_/¯
+    QSharedPointer<HotSpot> hotspot = _filterChain->hotSpotAt(pnt.y(), pnt.x());
+    if (hotspot) {
+        return QPoint(hotspot->startColumn(), hotspot->startLine());
+    }
+
     const int regSize = qMax(_screenWindow->windowLines(), 10);
     const int firstVisibleLine = _screenWindow->currentLine();
 
@@ -1867,6 +1873,11 @@ out:
 
 QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
 {
+    QSharedPointer<HotSpot> hotspot = _filterChain->hotSpotAt(pnt.y(), pnt.x());
+    if (hotspot) {
+        return QPoint(hotspot->endColumn(), hotspot->endLine());
+    }
+
     const int regSize = qMax(_screenWindow->windowLines(), 10);
     const int curLine = _screenWindow->currentLine();
     int i = pnt.y();
