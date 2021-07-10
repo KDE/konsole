@@ -11,6 +11,7 @@
 #include "sshmanagermodel.h"
 
 #include "session/SessionController.h"
+#include "konsoledebug.h"
 
 #include <QMainWindow>
 #include <QDockWidget>
@@ -78,12 +79,29 @@ QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow* mainWindo
 
 void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller)
 {
+    activeViewChangedInternal(QPointer(controller));
+}
+
+void SSHManagerPlugin::activeViewChangedInternal(QPointer<Konsole::SessionController> controller)
+{
+    if (!controller) {
+        qCWarning(KonsoleDebug) << "Active view changed, but no controller";
+        return;
+    }
+
+    if (!controller->view()) {
+        qCWarning(KonsoleDebug) << controller << "does not have a view";
+        return;
+    }
+
     auto mainWindow = qobject_cast<Konsole::MainWindow*>(controller->view()->topLevelWidget());
 
-    // if we don't get a mainwindow here this *might* be just opening, call it again
+    // HACK: if we don't get a mainwindow here this *might* be just opening, call it again
     // later on.
+    // We really shouldn't use an arbitrary time delay, and we need to use a
+    // QPointer in case it gets deleted while the timer is running.
     if (!mainWindow) {
-        QTimer::singleShot(500, this, [this, controller]{ activeViewChanged(controller); });
+        QTimer::singleShot(500, this, [this, controller]{ activeViewChangedInternal(controller); });
         return;
     }
 
