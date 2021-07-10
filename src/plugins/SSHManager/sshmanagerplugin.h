@@ -29,6 +29,9 @@ public:
     void activeViewChanged(Konsole::SessionController *controller) override;
     QList<QAction*> menuBarActions(Konsole::MainWindow* mainWindow) const override;
 
+private Q_SLOTS:
+    void activeViewChangedInternal(QPointer<Konsole::SessionController> controller);
+
 private:
     std::unique_ptr<SSHManagerPluginPrivate> d;
 };
