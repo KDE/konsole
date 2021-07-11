@@ -131,6 +131,8 @@ ecm_qt_install_logging_categories(
     DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
 )
 
+option(ENABLE_PLUGIN_SSHMANAGER OFF)
+
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 # Do not do bulk whitespace/style changes without MRs and maintainer(s)
