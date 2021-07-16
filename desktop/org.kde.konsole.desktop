@@ -292,6 +292,7 @@ Exec=konsole
 
 [Desktop Action NewTab]
 Name=Open a New Tab
+Name[ar]=افتح لسانًا جديدًا
 Name[ast]=Abrir nuna llingüeta nueva
 Name[az]=Yeni vərəq açmaq
 Name[ca]=Obre una pestanya nova
