@@ -97,6 +97,7 @@
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
     <p>Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
+    <p xml:lang="ar">كونسول  هي محطة لتشغيل الأوامر في الصدفة. يوفر واجهة سطر أوامر للتحكم المباشر في جهاز الكمبيوتر الخاص بك.</p>
     <p xml:lang="ast">Konsole ye una terminal pa executar comandos de la shell. Apurre una llinia de comandos pa controlar direutamente l'ordenador.</p>
     <p xml:lang="az">Konsole, əmr təbəqəsini işlətmək üçün bir terminaldır. Kompüterinizi birbaşa idarə etmək üçün bir sətir interfeysi təmin edir.</p>
     <p xml:lang="ca">El Konsole és un terminal per a executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per a controlar directament l'ordinador.</p>
@@ -457,6 +458,7 @@
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/konsole/konsole.png</image>
       <caption>Konsole being used as a terminal emulator</caption>
+      <caption xml:lang="ar">يستخدم كونسول كمحاكي طرفيّة.</caption>
       <caption xml:lang="ast">Konsole usándose como un emulador de terminal</caption>
       <caption xml:lang="az">Konsole terminal emulyatoru olaraq istifadə olunur</caption>
       <caption xml:lang="ca">El Konsole s'usa com a emulador de terminal</caption>
