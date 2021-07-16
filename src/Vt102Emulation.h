@@ -59,7 +59,7 @@ struct CharCodes {
  * sequences.
  *
  */
-class Vt102Emulation : public Emulation
+class KONSOLEPRIVATE_EXPORT Vt102Emulation : public Emulation
 {
     Q_OBJECT
 
