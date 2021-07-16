@@ -56,6 +56,8 @@
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
 
+#include <konsoledebug.h>
+
 using namespace Konsole;
 
 MainWindow::MainWindow() :
@@ -889,7 +891,15 @@ void MainWindow::setBlur(bool blur)
 #if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
         KWindowEffects::enableBlurBehind(winId(), blur);
 #else
-        KWindowEffects::enableBlurBehind(windowHandle(), blur);
+        // Set the WA_NativeWindow attribute to force the creation of the QWindow.
+        // Without this QWidget::windowHandle() returns 0.
+        // See https://phabricator.kde.org/D23108
+        setAttribute(Qt::WA_NativeWindow);
+        if (QWindow *window = windowHandle()) {
+            KWindowEffects::enableBlurBehind(window, blur);
+        } else {
+            qCWarning(KonsoleDebug) << "Blur effect couldn't be enabled.";
+        }
 #endif
     }
 }
