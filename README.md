@@ -24,7 +24,7 @@ illustrated in the Konsole handbook, which can be accessed by browsing to
 
 1. Install dependencies. On neon:
 ```
-sudo apt Install
+apt install git cmake make g++ extra-cmake-modules qtbase5-dev libkf5config-dev libkf5auth-dev libkf5package-dev libkf5declarative-dev libkf5coreaddons-dev libkf5kcmutils-dev libkf5i18n-dev libqt5core5a libqt5widgets5 libqt5gui5 libqt5qml5 extra-cmake-modules qtbase5-dev kdelibs5-dev qt5-default libkf5notifyconfig-dev libkf5pty-dev libkf5notifications-dev libkf5parts-dev
 ```
 2. Clone with `git clone https://invent.kde.org/utilities/konsole.git`
 3. Make _build_ directory: `mkdir konsole\build`
