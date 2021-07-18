@@ -19,6 +19,15 @@ illustrated in the Konsole handbook, which can be accessed by browsing to
 | `/desktop`         | .desktop files for Konsole, used to launch the program from KDE's various menus and other application launchers.                                                                   |
 | `/data`            | Data files for use with Konsole as well as the keyboard setup and color schemes provided with Konsole.                                                                             |
 
+
+## HOWTO Build
+
+1. Install dependencies. On neon:
+```
+sudo apt Install
+```
+2. Clone with `git clone https://invent.kde.org/utilities/konsole.git`
+
 ## Contact
 
 Up-to-date information about the latest releases can be found on Konsole's
