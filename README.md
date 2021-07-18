@@ -27,6 +27,11 @@ illustrated in the Konsole handbook, which can be accessed by browsing to
 sudo apt Install
 ```
 2. Clone with `git clone https://invent.kde.org/utilities/konsole.git`
+3. Make _build_ directory: `mkdir konsole\build`
+4. Change into _build_ directory: `cd konsole\build`
+5. Configure: `cmake ..` (or `cmake .. -DCMAKE_INSTALL_PREFIX=/where/your/want/to/install`)
+6. Build: `make`
+7. Install: `make install`
 
 ## Contact
 
