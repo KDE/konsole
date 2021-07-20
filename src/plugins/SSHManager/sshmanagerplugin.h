@@ -28,11 +28,8 @@ public:
     ~SSHManagerPlugin() override;
 
     void createWidgetsForMainWindow(Konsole::MainWindow *mainWindow) override;
-    void activeViewChanged(Konsole::SessionController *controller) override;
+    void activeViewChanged(Konsole::SessionController *controller, Konsole::MainWindow *mainWindow) override;
     QList<QAction *> menuBarActions(Konsole::MainWindow *mainWindow) const override;
-
-private Q_SLOTS:
-    void activeViewChangedInternal(QPointer<Konsole::SessionController> controller);
 
 private:
     std::unique_ptr<SSHManagerPluginPrivate> d;

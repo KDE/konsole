@@ -22,6 +22,8 @@
 
 #include "konsole_export.h"
 
+#include <vector>
+
 class QAction;
 class KActionMenu;
 class KToggleAction;
@@ -204,7 +206,7 @@ private:
     KActionMenu *_newTabMenuAction;
 
     QPointer<SessionController> _pluggedController;
-    QList<IKonsolePlugin *> _plugins;
+    std::vector<IKonsolePlugin *> _plugins;
     bool _blurEnabled = false;
     bool _firstShowEvent = true;
 
