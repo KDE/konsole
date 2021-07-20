@@ -32,3 +32,12 @@ doxydoc/
 .cache
 .idea
 /cmake-build*
+
+!/tests/Makefile
+!/tests/*/Makefile
+
+/tests/bugs/spam-stderr
+/tests/features/signaltests
+/tests/legacy/audit
+/tests/legacy/quote
+/tests/misc/ripple
