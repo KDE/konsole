@@ -1875,7 +1875,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
 {
     QSharedPointer<HotSpot> hotspot = _filterChain->hotSpotAt(pnt.y(), pnt.x());
     if (hotspot) {
-        return QPoint(hotspot->endColumn(), hotspot->endLine());
+        return QPoint(hotspot->endColumn() - 1, hotspot->endLine());
     }
 
     const int regSize = qMax(_screenWindow->windowLines(), 10);
