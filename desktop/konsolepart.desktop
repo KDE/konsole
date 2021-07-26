@@ -106,6 +106,7 @@ Name[zh_CN]=终端仿真器
 Name[zh_TW]=終端機模擬程式
 
 Comment=Command line access
+Comment[ar]=الوصول إلى سطر الأوامر
 Comment[ast]=Accesu a la llinia de comandos
 Comment[az]=Əmrlər sətirinə giriş
 Comment[ca]=Accés a la línia d'ordres

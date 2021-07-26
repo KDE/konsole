@@ -194,6 +194,7 @@ GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 
 Comment=Command line access
+Comment[ar]=الوصول إلى سطر الأوامر
 Comment[ast]=Accesu a la llinia de comandos
 Comment[az]=Əmrlər sətirinə giriş
 Comment[ca]=Accés a la línia d'ordres
