@@ -17,6 +17,7 @@
 #include <KAcceleratorManager>
 #include <KActionCollection>
 #include <KActionMenu>
+#include <KCrash>
 #include <KIconUtils>
 #include <KShortcutsDialog>
 #include <KLocalizedString>
@@ -153,6 +154,7 @@ MainWindow::MainWindow() :
     if (statusBar() != nullptr) {
         statusBar()->installEventFilter(this);
     }
+    KCrash::initialize();
 }
 
 void MainWindow::updateUseTransparency()
