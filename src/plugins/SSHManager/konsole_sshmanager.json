@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Name": "SSH Manager",
+        "Name[ar]": "مدير SSH",
         "Name[az]": "SSH meneceri",
         "Name[ca@valencia]": "Gestor de SSH",
         "Name[ca]": "Gestor de SSH",
