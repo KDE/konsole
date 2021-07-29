@@ -131,8 +131,10 @@ MainWindow::MainWindow() :
     // in terminal applications
     KAcceleratorManager::setNoAccel(menuBar());
 
-    // create menus
-    createGUI();
+    constexpr KXmlGuiWindow::StandardWindowOptions guiOpts = ToolBar | Keys | Save | Create;
+    const QString xmlFile = componentName() + QLatin1String("ui.rc"); // Typically "konsoleui.rc"
+    // The "Create" flag will make it call createGUI()
+    setupGUI(guiOpts, xmlFile);
 
     // remember the original menu accelerators for later use
     rememberMenuAccelerators();
@@ -945,9 +947,14 @@ void MainWindow::showEvent(QShowEvent *event)
         menuBar()->setVisible(_menuBarInitialVisibility);
         _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
         _menuBarInitialVisibilityApplied = true;
-        if (!KonsoleSettings::saveGeometryOnExit()) {
-            resize(sizeHint());
-        }
+    }
+
+    if (!KonsoleSettings::saveGeometryOnExit()) {
+        // Delay resizing to here, so that the other parts of the UI
+        // (ViewManager, TabbedViewContainer, TerminalDisplay ... etc)
+        // have been created and TabbedViewContainer::sizeHint() returns
+        // a usuable size.
+        resize(sizeHint());
     }
 
     // Call parent method
