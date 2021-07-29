@@ -200,6 +200,7 @@ private:
     bool _menuBarInitialVisibility;
     bool _menuBarInitialVisibilityApplied;
     bool _blurEnabled = false;
+    bool _isSavedUiState = false;
 };
 }
 

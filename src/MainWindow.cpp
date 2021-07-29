@@ -70,13 +70,22 @@ MainWindow::MainWindow() :
     _menuBarInitialVisibility(true),
     _menuBarInitialVisibilityApplied(false)
 {
-    if (!KonsoleSettings::saveGeometryOnExit()) {
+    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
+    KConfigGroup cg = konsoleConfig->group(QStringLiteral("MainWindow"));
+    const bool isGroup = cg.exists();
+    if (isGroup) {
+        const QString stateConfig = cg.readEntry(QStringLiteral("State"));
+
+        // If "stateConfig" is empty then this is the very first run,
+        // i.e. no konsolerc file in $HOME
+        _isSavedUiState = !stateConfig.isEmpty();
+    }
+
+    if (isGroup && !KonsoleSettings::saveGeometryOnExit()) {
         // If we are not using the global Konsole save geometry on exit,
         // remove all geometry data from [MainWindow] in Konsolerc, so KWin will
         // manage it directly
-        KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
-        KConfigGroup group = konsoleConfig->group("MainWindow");
-        QMap<QString, QString> configEntries = group.entryMap();
+        QMap<QString, QString> configEntries = cg.entryMap();
         QMapIterator<QString, QString> i(configEntries);
 
         while (i.hasNext()) {
@@ -93,7 +102,7 @@ MainWindow::MainWindow() :
                 || i.key().contains(QLatin1String(" YPosition"))
 #endif
             ) {
-                group.deleteEntry(i.key());
+                cg.deleteEntry(i.key());
             }
         }
     }
@@ -949,7 +958,7 @@ void MainWindow::showEvent(QShowEvent *event)
         _menuBarInitialVisibilityApplied = true;
     }
 
-    if (!KonsoleSettings::saveGeometryOnExit()) {
+    if (!_isSavedUiState || !KonsoleSettings::saveGeometryOnExit()) {
         // Delay resizing to here, so that the other parts of the UI
         // (ViewManager, TabbedViewContainer, TerminalDisplay ... etc)
         // have been created and TabbedViewContainer::sizeHint() returns
