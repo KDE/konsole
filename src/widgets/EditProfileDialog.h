@@ -270,7 +270,7 @@ private:
     void unpreviewAll();
     void enableIfNonEmptySelection(QWidget *widget, QItemSelectionModel *selectionModel);
 
-    void updateCaption(const Profile::Ptr &profile, InitialProfileState state = EditProfileDialog::ExistingProfile);
+    void updateCaption(const Profile::Ptr &profile);
     void updateTransparencyWarning();
 
     void updateFontPreview(QFont font);
@@ -342,6 +342,8 @@ private:
     ColorSchemeEditor *_colorDialog;
     QDialogButtonBox *_buttonBox;
     FontDialog *_fontDialog;
+
+    InitialProfileState _profileState = ExistingProfile;
 };
 
 }

@@ -231,7 +231,19 @@ EditProfileDialog::~EditProfileDialog()
 
 void EditProfileDialog::save()
 {
+    const bool isNewProfile = _profileState == EditProfileDialog::NewProfile;
+
+    if (isNewProfile) {
+        ProfileManager::instance()->addProfile(_profile);
+    }
+
     if (_tempProfile->isEmpty()) {
+        if (isNewProfile) {
+            // New profile, we need to save it to disk, even if no settings
+            // were changed and _tempProfile is empty
+            ProfileManager::instance()->changeProfile(_profile, _profile->setProperties());
+        }
+
         return;
     }
 
@@ -342,7 +354,7 @@ QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr &group, int
     return caption;
 }
 
-void EditProfileDialog::updateCaption(const Profile::Ptr &profile, EditProfileDialog::InitialProfileState state)
+void EditProfileDialog::updateCaption(const Profile::Ptr &profile)
 {
     const int MAX_GROUP_CAPTION_LENGTH = 25;
     ProfileGroup::Ptr group = profile->asGroup();
@@ -353,7 +365,7 @@ void EditProfileDialog::updateCaption(const Profile::Ptr &profile, EditProfileDi
                              group->profiles().count(),
                              caption));
     } else {
-        if (state == EditProfileDialog::NewProfile) {
+        if (_profileState == EditProfileDialog::NewProfile) {
             setWindowTitle(i18n("Create New Profile"));
         } else {
             setWindowTitle(i18n("Edit Profile \"%1\"", profile->name()));
@@ -367,8 +379,10 @@ void EditProfileDialog::setProfile(const Konsole::Profile::Ptr &profile, EditPro
 
     _profile = profile;
 
+    _profileState = state;
+
     // update caption
-    updateCaption(profile, state);
+    updateCaption(profile);
 
     // mark each page of the dialog as out of date
     // and force an update of the currently visible page

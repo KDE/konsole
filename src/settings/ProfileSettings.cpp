@@ -151,11 +151,6 @@ void ProfileSettings::createProfile()
     dialog->setProfile(newProfile, EditProfileDialog::NewProfile);
     dialog->selectProfileName();
 
-    connect(dialog, &QDialog::accepted, this, [newProfile]() {
-        ProfileManager::instance()->addProfile(newProfile);
-        ProfileManager::instance()->changeProfile(newProfile, newProfile->setProperties());
-    });
-
     dialog->show();
 }
 void ProfileSettings::editSelected()

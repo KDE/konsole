@@ -917,11 +917,6 @@ void SessionController::editCurrentProfile()
     dialog->setModal(true);
     dialog->setProfile(profile, state);
 
-    connect(dialog, &QDialog::accepted, this, [profile]() {
-        ProfileManager::instance()->addProfile(profile);
-        ProfileManager::instance()->changeProfile(profile, profile->setProperties());
-    });
-
     dialog->show();
 }
 
