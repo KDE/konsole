@@ -30,7 +30,6 @@
 #include "DetachableTabBar.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewSplitter.h"
-#include "MainWindow.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
