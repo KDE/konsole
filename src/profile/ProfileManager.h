@@ -18,6 +18,8 @@
 #include <QVariant>
 #include <QStack>
 
+#include <set>
+
 // Konsole
 #include "Profile.h"
 
@@ -153,13 +155,6 @@ public:
     Profile::Ptr fallbackProfile() const;
 
     /**
-     * Sorts @p list of profiles alphabetically.
-     *
-     * @param list The profiles list to sort
-     */
-    void sortProfiles(QList<Profile::Ptr> &list);
-
-    /**
      * Associates a shortcut with a particular profile.
      */
     void setShortcut(Profile::Ptr profile, const QKeySequence &keySequence);
@@ -218,7 +213,20 @@ private:
     // otherwise
     QString saveProfile(const Profile::Ptr &profile);
 
-    QSet<Profile::Ptr> _profiles;  // list of all loaded profiles
+    static bool profileNamesCompare(const Profile::Ptr &p1, const Profile::Ptr &p2)
+    {
+        // Always put the Default/fallback profile at the top
+        if (p1->isFallback()) {
+            return true;
+        } else if (p2->isFallback()) {
+            return false;
+        }
+
+        return QString::localeAwareCompare(p1->name(), p2->name()) < 0;
+    }
+
+    // A list of all loaded profiles, sorted by profile name
+    std::set<Profile::Ptr, decltype(profileNamesCompare) *> _profiles{profileNamesCompare};
 
     Profile::Ptr _defaultProfile;
     Profile::Ptr _fallbackProfile;

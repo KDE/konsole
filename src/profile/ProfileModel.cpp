@@ -165,7 +165,6 @@ void ProfileModel::populate()
 {
     beginResetModel();
     m_profiles = ProfileManager::instance()->allProfiles();
-    ProfileManager::instance()->sortProfiles(m_profiles);
     endResetModel();
 }
 

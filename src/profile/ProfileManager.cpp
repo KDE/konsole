@@ -38,8 +38,7 @@ static bool stringLessThan(const QString& p1, const QString& p2)
 }
 
 ProfileManager::ProfileManager()
-    : _profiles(QSet<Profile::Ptr>())
-    , _defaultProfile(nullptr)
+    : _defaultProfile(nullptr)
     , _fallbackProfile(nullptr)
     , _loadedAllProfiles(false)
     , _shortcuts(QMap<QKeySequence, ShortcutData>())
@@ -75,7 +74,7 @@ ProfileManager::ProfileManager()
         }
     }
 
-    Q_ASSERT(_profiles.count() > 0);
+    Q_ASSERT(_profiles.size() > 0);
     Q_ASSERT(_defaultProfile);
 
     // get shortcuts and paths of profiles associated with
@@ -133,7 +132,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     }
 
     // check that we have not already loaded this profile
-    for (const Profile::Ptr &profile : qAsConst(_profiles)) {
+    for (const Profile::Ptr &profile : _profiles) {
         if (profile->path() == path) {
             return profile;
         }
@@ -218,21 +217,6 @@ void ProfileManager::loadAllProfiles()
     _loadedAllProfiles = true;
 }
 
-void ProfileManager::sortProfiles(QList<Profile::Ptr>& list)
-{
-    // Sort alphabetically
-    std::stable_sort(list.begin(), list.end(), [](const Profile::Ptr &p1, const Profile::Ptr &p2) {
-        // Always put the Default/fallback profile at the top
-        if (p1->isFallback()) {
-            return true;
-        } else if (p2->isFallback()) {
-            return false;
-        }
-
-        return QString::localeAwareCompare(p1->name(), p2->name()) < 0;
-    });
-}
-
 void ProfileManager::saveSettings()
 {
     // save default profile
@@ -250,15 +234,12 @@ QList<Profile::Ptr> ProfileManager::allProfiles()
 {
     loadAllProfiles();
 
-    auto loadedProfiles = _profiles.values();
-    sortProfiles(loadedProfiles);
-
-    return loadedProfiles;
+    return loadedProfiles();
 }
 
 QList<Profile::Ptr> ProfileManager::loadedProfiles() const
 {
-    return _profiles.values();
+    return {_profiles.cbegin(), _profiles.cend()};
 }
 
 Profile::Ptr ProfileManager::defaultProfile() const
@@ -384,7 +365,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 
 void ProfileManager::addProfile(const Profile::Ptr &profile)
 {
-    if (_profiles.isEmpty()) {
+    if (_profiles.empty()) {
         _defaultProfile = profile;
     }
 
@@ -409,7 +390,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
         }
 
         setShortcut(profile, QKeySequence());
-        _profiles.remove(profile);
+        _profiles.erase(profile);
 
         // mark the profile as hidden so that it does not show up in the
         // Manage Profiles dialog and is not saved to disk
@@ -430,7 +411,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
 
 void ProfileManager::setDefaultProfile(const Profile::Ptr &profile)
 {
-    Q_ASSERT(_profiles.contains(profile));
+    Q_ASSERT(_profiles.find(profile) != _profiles.cend());
 
     const auto oldDefault = _defaultProfile;
     _defaultProfile = profile;
