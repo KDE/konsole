@@ -17,8 +17,6 @@ GeneralSettings::GeneralSettings(QWidget *aParent)
     setupUi(this);
 
     connect(enableAllMessagesButton, &QPushButton::clicked, this, &Konsole::GeneralSettings::slotEnableAllMessages);
-
-    kcfg_ShowTerminalSizeHint->setVisible(false);
 }
 
 GeneralSettings::~GeneralSettings() = default;

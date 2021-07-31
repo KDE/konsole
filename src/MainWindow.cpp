@@ -66,7 +66,6 @@ MainWindow::MainWindow()
     , _toggleMenuBarAction(nullptr)
     , _newTabMenuAction(nullptr)
     , _pluggedController(nullptr)
-    , _menuBarInitialVisibility(true)
 {
     updateUseTransparency();
 
@@ -112,15 +111,6 @@ MainWindow::MainWindow()
     connect(KonsoleSettings::self(), &Konsole::KonsoleSettings::configChanged, this, &Konsole::MainWindow::applyKonsoleSettings);
 
     KCrash::initialize();
-}
-
-void MainWindow::applyMainWindowSettings(const KConfigGroup &config)
-{
-    KMainWindow::applyMainWindowSettings(config);
-
-    // Override the menubar state from the config file
-    menuBar()->setVisible(_menuBarInitialVisibility);
-    _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
 }
 
 bool MainWindow::wasWindowGeometrySaved() const
@@ -783,7 +773,6 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
 
 void MainWindow::applyKonsoleSettings()
 {
-    setMenuBarInitialVisibility(KonsoleSettings::showMenuBarByDefault());
     setRemoveWindowTitleBarAndFrame(KonsoleSettings::removeWindowTitleBarAndFrame());
     if (KonsoleSettings::allowMenuAccelerators()) {
         restoreMenuAccelerators();
@@ -854,9 +843,10 @@ void MainWindow::setBlur(bool blur)
     }
 }
 
-void MainWindow::setMenuBarInitialVisibility(bool visible)
+void MainWindow::setMenuBarInitialVisibility(bool showMenuBar)
 {
-    _menuBarInitialVisibility = visible;
+    _windowArgsMenuBarVisible.enabled = true;
+    _windowArgsMenuBarVisible.showMenuBar = showMenuBar;
 }
 
 void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
@@ -889,6 +879,17 @@ void MainWindow::showEvent(QShowEvent *event)
     // Apply this code on first show only
     if (_firstShowEvent) {
         _firstShowEvent = false;
+
+        // The initial visibility of menubar should be applied at this last
+        // moment. Otherwise, the initial visibility will be determined by
+        // what KMainWindow has automatically stored in konsolerc, but not by
+        // what users has explicitly configured
+        if (_windowArgsMenuBarVisible.enabled) {
+            menuBar()->setVisible(_windowArgsMenuBarVisible.showMenuBar);
+            _toggleMenuBarAction->setChecked(_windowArgsMenuBarVisible.showMenuBar);
+        } else {
+            _toggleMenuBarAction->setChecked(menuBar()->isVisible());
+        }
 
         if (!KonsoleSettings::rememberWindowSize() || !wasWindowGeometrySaved()) {
             // Delay resizing to here, so that the other parts of the UI

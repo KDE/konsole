@@ -5,11 +5,6 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="konsolerc" />
   <group name="KonsoleWindow">
-    <entry name="ShowMenuBarByDefault" type="Bool">
-      <label>Show menubar by default</label>
-      <tooltip>Show menubar by default in each Konsole window</tooltip>
-      <default>true</default>
-    </entry>
     <entry name="RemoveWindowTitleBarAndFrame" type="Bool">
       <label>Remove window titlebar and frame</label>
       <default>false</default>
@@ -27,11 +22,6 @@
       <label>Enable menu accelerators</label>
       <tooltip>Allow users to access top menu through Alt+Key combination</tooltip>
       <default>false</default>
-    </entry>
-    <entry name="ShowTerminalSizeHint" type="Bool">
-      <label>Show hint for terminal size after resizing</label>
-      <tooltip>Show terminal size in columns and lines in the center of window after resizing</tooltip>
-      <default>true</default>
     </entry>
     <entry name="RememberWindowSize" type="Bool">
       <label>Use current window size on next startup</label>

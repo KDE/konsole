@@ -88,7 +88,7 @@ public:
     /**
      * Set the initial visibility of the menubar.
      */
-    void setMenuBarInitialVisibility(bool visible);
+    void setMenuBarInitialVisibility(bool showMenuBar);
 
     /**
      * @brief Set the frameless state
@@ -172,8 +172,6 @@ public Q_SLOTS:
     void viewFullScreen(bool fullScreen);
 
 private:
-    void applyMainWindowSettings(const KConfigGroup &config) override;
-
     /**
      * Returns true if the window geometry was previously saved to the
      * config file, false otherwise.
@@ -205,9 +203,13 @@ private:
 
     QPointer<SessionController> _pluggedController;
     QList<IKonsolePlugin *> _plugins;
-    bool _menuBarInitialVisibility;
-    bool _firstShowEvent = true;
     bool _blurEnabled = false;
+    bool _firstShowEvent = true;
+
+    struct {
+        bool enabled = false; // indicates that we got a command line argument for menubar
+        bool showMenuBar = true;
+    } _windowArgsMenuBarVisible;
 };
 }
 
