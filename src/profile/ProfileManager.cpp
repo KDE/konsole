@@ -359,26 +359,9 @@ void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property
     if (persistent && !profile->isHidden()) {
         profile->setProperty(Profile::Path, saveProfile(profile));
 
-        // if the profile was renamed, after saving the new profile
-        // delete the old/redundant profile.
-        // only do this if origPath is not empty, because it's empty
-        // when creating a new profile, this works around a bug where
-        // the newly created profile appears twice in the ProfileSettings
-        // dialog
+        // origPath is empty when creating a new profile (i.e. no renaming)
         if (!origPath.isEmpty() && profile->path() != origPath) {
-            // this is needed to include the old profile too
-            _loadedAllProfiles = false;
-            const QList<Profile::Ptr> availableProfiles = ProfileManager::instance()->allProfiles();
-            for (const Profile::Ptr &oldProfile : availableProfiles) {
-                if (oldProfile->path() == origPath) {
-                    // assign the same shortcut of the old profile to
-                    // the newly renamed profile
-                    const auto oldShortcut = shortcut(oldProfile);
-                    if (deleteProfile(oldProfile)) {
-                        setShortcut(profile, oldShortcut);
-                    }
-                }
-            }
+            processProfileRenaming(profile, origPath);
         }
     }
 
@@ -388,6 +371,22 @@ void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property
 
     // Notify the world about the change
     Q_EMIT profileChanged(profile);
+}
+
+void ProfileManager::processProfileRenaming(Profile::Ptr profile, const QString &origPath)
+{
+    // We need all profiles here, including the old profile too
+    _loadedAllProfiles = false;
+    const QList<Profile::Ptr> availableProfiles = allProfiles();
+
+    for (const Profile::Ptr &oldProfile : availableProfiles) {
+        if (oldProfile->path() == origPath) {
+            const auto oldShortcut = shortcut(oldProfile);
+            if (deleteProfile(oldProfile)) {
+                setShortcut(profile, oldShortcut);
+            }
+        }
+    }
 }
 
 void ProfileManager::addProfile(const Profile::Ptr &profile)

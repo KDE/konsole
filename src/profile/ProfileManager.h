@@ -224,6 +224,12 @@ private:
     // A list of all loaded profiles, sorted by profile name
     std::vector<Profile::Ptr> _profiles;
 
+    // This is called after renaming a profile, and saving it to the new
+    // .profile on disk; this method will then delete the old profile (i.e.
+    // remove the old .profile from disk ...etc), and assign the keyboard
+    // shortcut (if any) of the old profile to the newly created one.
+    void processProfileRenaming(Profile::Ptr profile, const QString &origPath);
+
     Profile::Ptr _defaultProfile;
     Profile::Ptr _fallbackProfile;
 
