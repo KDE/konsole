@@ -278,22 +278,6 @@ void Pty::closePty()
     pty()->close();
 }
 
-void Pty::sendEof()
-{
-    if (pty()->masterFd() < 0) {
-        qCDebug(KonsoleDebug) << "Unable to get eof char attribute, terminal not connected.";
-        return;
-    }
-    struct ::termios ttyAttributes;
-    pty()->tcGetAttr(&ttyAttributes);
-    char eofChar = ttyAttributes.c_cc[VEOF];
-    if (pty()->write(QByteArray(1, eofChar)) == -1) {
-        qCDebug(KonsoleDebug) << "Unable to send EOF";
-    }
-
-    pty()->waitForBytesWritten();
-}
-
 int Pty::foregroundProcessGroup() const
 {
     const int master_fd = pty()->masterFd();

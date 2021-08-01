@@ -122,11 +122,6 @@ public:
      */
     void closePty();
 
-    /**
-     * Sends EOF to the controlled process, this is the preferred method of telling e. g. bash to close
-     */
-    void sendEof();
-
 public Q_SLOTS:
     /**
      * Put the pty into UTF-8 mode on systems which support it.
