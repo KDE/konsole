@@ -872,27 +872,16 @@ bool Session::closeInNormalWay()
         return true;
     }
 
-    static QSet<QString> knownShells({QStringLiteral("ash"), QStringLiteral("bash"), QStringLiteral("csh"), QStringLiteral("dash"), QStringLiteral("fish"), QStringLiteral("hush"), QStringLiteral("ksh"), QStringLiteral("mksh"), QStringLiteral("pdksh"), QStringLiteral("tcsh"), QStringLiteral("zsh")});
-
-    // If only the session's shell is running, try sending an EOF for a clean exit
-    if (!isForegroundProcessActive() && knownShells.contains(QFileInfo(_program).fileName())) {
-        _shellProcess->sendEof();
-
-        if (_shellProcess->waitForFinished(1000)) {
-            return true;
-        }
-        qWarning() << "shell did not close, sending SIGHUP";
-    }
-
-
-    // We tried asking nicely, ask a bit less nicely
+    // try SIGHUP, afterwards do hard kill
+    // this is the sequence used by most other terminal emulators like xterm, gnome-terminal, ...
+    // see bug 401898 for details about tries to have some "soft-terminate" via EOF character
     if (kill(SIGHUP)) {
         return true;
-    } else {
-        qWarning() << "Process " << processId() << " did not die with SIGHUP";
-        _shellProcess->closePty();
-        return (_shellProcess->waitForFinished(1000));
     }
+
+    qWarning() << "Process " << processId() << " did not die with SIGHUP";
+    _shellProcess->closePty();
+    return (_shellProcess->waitForFinished(1000));
 }
 
 bool Session::closeInForceWay()
