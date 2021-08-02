@@ -556,12 +556,12 @@ void ViewManager::focusAnotherTerminal(ViewSplitter *toplevelSplitter)
 
 void ViewManager::activateView(TerminalDisplay *view)
 {
-    Q_ASSERT(view != nullptr);
-
-    // focus the activated view, this will cause the SessionController
-    // to notify the world that the view has been focused and the appropriate UI
-    // actions will be plugged in.
-    view->setFocus(Qt::OtherFocusReason);
+    if (view) {
+        // focus the activated view, this will cause the SessionController
+        // to notify the world that the view has been focused and the appropriate UI
+        // actions will be plugged in.
+        view->setFocus(Qt::OtherFocusReason);
+    }
 }
 
 void ViewManager::splitLeftRight()
