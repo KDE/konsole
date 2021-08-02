@@ -109,6 +109,8 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
 file(GLOB ICONS_SRCS "data/icons/*.png")
 
+option(ENABLE_PLUGIN_SSHMANAGER "Build the SSHManager plugin" ON)
+
 add_subdirectory( src )
 add_subdirectory( data )
 add_subdirectory( desktop )
@@ -130,8 +132,6 @@ ecm_qt_install_logging_categories(
     FILE konsole.categories
     DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
 )
-
-option(ENABLE_PLUGIN_SSHMANAGER ON)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
