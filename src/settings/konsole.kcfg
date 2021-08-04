@@ -45,6 +45,9 @@
     </entry>
   </group>
   <group name="ThumbnailsSettings">
+     <entry name="EnableThumbnails" type="Bool">
+        <default>true</default>
+      </entry>
       <entry name="ThumbnailSize" type="Int">
         <label>Thumbnail Width</label>
         <tooltip>Sets the width of the thumbnail</tooltip>

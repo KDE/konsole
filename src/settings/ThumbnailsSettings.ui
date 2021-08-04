@@ -11,14 +11,14 @@
    </rect>
   </property>
   <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Size:</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="1" column="1">
     <widget class="QSpinBox" name="kcfg_ThumbnailSize">
      <property name="suffix">
       <string>px</string>
@@ -31,35 +31,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Mouse hover plus</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QCheckBox" name="kcfg_ThumbnailShift">
-     <property name="text">
-      <string>Shift</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QCheckBox" name="kcfg_ThumbnailAlt">
-     <property name="text">
-      <string>Alt</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QCheckBox" name="kcfg_ThumbnailCtrl">
-     <property name="text">
-      <string>Ctrl</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
+   <item row="2" column="0" colspan="2">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To use this feature, enable &lt;span style=&quot; font-weight:600;&quot;&gt;Mouse-&amp;gt;Miscellaneous-&amp;gt;Underline &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;files&lt;/span&gt; in your profile settings&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -75,7 +47,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="3" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Activation:</string>
@@ -84,6 +56,45 @@
       <number>0</number>
      </property>
     </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Mouse hover plus</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QCheckBox" name="kcfg_ThumbnailShift">
+     <property name="text">
+      <string>Shift</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="kcfg_ThumbnailAlt">
+     <property name="text">
+      <string>Alt</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QCheckBox" name="kcfg_ThumbnailCtrl">
+     <property name="text">
+      <string>Ctrl</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="kcfg_EnableThumbnails">
+       <property name="text">
+        <string>Enable thumbnails generation</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

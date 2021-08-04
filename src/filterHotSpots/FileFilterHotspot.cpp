@@ -209,7 +209,12 @@ void FileFilterHotSpot::setupMenu(QMenu *menu)
 bool FileFilterHotSpot::_canGenerateThumbnail = false;
 QPointer<KIO::PreviewJob> FileFilterHotSpot::_previewJob;
 
-void FileFilterHotSpot::requestThumbnail(Qt::KeyboardModifiers modifiers, const QPoint &pos) {
+void FileFilterHotSpot::requestThumbnail(Qt::KeyboardModifiers modifiers, const QPoint &pos)
+{
+    if (!KonsoleSettings::self()->enableThumbnails()) {
+        return;
+    }
+
     _canGenerateThumbnail = true;
     _eventModifiers = modifiers;
     _eventPos = pos;
