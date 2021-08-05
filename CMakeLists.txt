@@ -43,7 +43,7 @@ include(KDEClangFormat)
 include(ECMEnableSanitizers)
 
 ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
-    SOVERSION ${RELEASE_SERVICE_VERSION_MAJOR}
+    SOVERSION 1
 )
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
