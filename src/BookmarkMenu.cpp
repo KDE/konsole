@@ -13,6 +13,7 @@
 // KDE
 #include <KActionCollection>
 #include <KBookmarkManager>
+#include <KBookmarkOwner>
 #include <KBookmark>
 
 // Qt

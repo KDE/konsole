@@ -13,6 +13,7 @@
 
 // KDE
 #include <KBookmarkManager>
+#include <KBookmarkOwner>
 
 // Konsole
 #include "konsoleprivate_export.h"
