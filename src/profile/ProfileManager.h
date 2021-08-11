@@ -72,7 +72,7 @@ public:
      * profile configuration file from disk and parsing it.
      * Therefore it should only be done when necessary.
      */
-    void loadAllProfiles();
+    void loadAllProfiles(const QString &defaultProfileFileName = {});
 
     /**
      * Loads a profile from the specified path and registers
@@ -226,8 +226,6 @@ private:
 
     Profile::Ptr _defaultProfile;
     Profile::Ptr _fallbackProfile;
-
-    bool _loadedAllProfiles = false; // set to true after loadAllProfiles has been called
 
     struct ShortcutData {
         Profile::Ptr profileKey;
