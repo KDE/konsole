@@ -227,7 +227,7 @@ private:
     Profile::Ptr _defaultProfile;
     Profile::Ptr _fallbackProfile;
 
-    bool _loadedAllProfiles; // set to true after loadAllProfiles has been called
+    bool _loadedAllProfiles = false; // set to true after loadAllProfiles has been called
 
     struct ShortcutData {
         Profile::Ptr profileKey;

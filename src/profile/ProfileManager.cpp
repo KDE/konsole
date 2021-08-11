@@ -50,10 +50,6 @@ static bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
 }
 
 ProfileManager::ProfileManager()
-    : _defaultProfile(nullptr)
-    , _fallbackProfile(nullptr)
-    , _loadedAllProfiles(false)
-    , _shortcuts(QMap<QKeySequence, ShortcutData>())
 {
     // load fallback profile
     initFallbackProfile();
