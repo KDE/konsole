@@ -494,6 +494,13 @@ void ViewManager::sessionFinished()
         return;
     }
 
+    // The last session/tab? emit empty() so that close() is called in
+    // MainWindow, fixes #432077
+    if (_viewContainer->count() == 1) {
+        Q_EMIT empty();
+        return;
+    }
+
     auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 

@@ -114,7 +114,7 @@ MainWindow::MainWindow() :
 
     // create view manager
     _viewManager = new ViewManager(this, actionCollection());
-    connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::MainWindow::close);
+    connect(_viewManager, &Konsole::ViewManager::empty, this, &QWidget::close);
     connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this,
             &Konsole::MainWindow::activeViewChanged);
     connect(_viewManager, &Konsole::ViewManager::unplugController, this,
