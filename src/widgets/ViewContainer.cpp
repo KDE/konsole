@@ -145,6 +145,15 @@ ViewSplitter *TabbedViewContainer::viewSplitterAt(int index)
     return qobject_cast<ViewSplitter*>(widget(index));
 }
 
+int TabbedViewContainer::currentTabViewCount()
+{
+    if (auto *splitter = activeViewSplitter()) {
+        return splitter->findChildren<TerminalDisplay*>().count();
+    }
+
+    return 1;
+}
+
 void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
 {
     auto splitter = viewSplitterAt(index);

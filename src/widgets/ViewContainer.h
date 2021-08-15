@@ -135,6 +135,12 @@ public:
      */
     ViewSplitter *viewSplitterAt(int index);
 
+    /**
+     * Returns the number of split views (i.e. TerminalDisplay widgets)
+     * in this tab; if there are no split views, 1 is returned.
+     */
+    int currentTabViewCount();
+
     void connectTerminalDisplay(TerminalDisplay *display);
     void disconnectTerminalDisplay(TerminalDisplay *display);
     void moveTabLeft();

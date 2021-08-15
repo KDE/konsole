@@ -494,9 +494,9 @@ void ViewManager::sessionFinished()
         return;
     }
 
-    // The last session/tab? emit empty() so that close() is called in
-    // MainWindow, fixes #432077
-    if (_viewContainer->count() == 1) {
+    // The last session/tab, and only one view (no splits), emit empty()
+    // so that close() is called in MainWindow, fixes #432077
+    if (_viewContainer->count() == 1 && _viewContainer->currentTabViewCount() == 1) {
         Q_EMIT empty();
         return;
     }
