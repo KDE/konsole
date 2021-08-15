@@ -726,7 +726,16 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
     for (const QRect &rect : qAsConst(dirtyImageRegion)) {
         Q_EMIT drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties);
     }
-    Q_EMIT drawCurrentResultRect(paint, _searchResultRect);
+
+    if (screenWindow()->currentResultLine() != -1) {
+        _searchResultRect.setRect(0,
+                contentRect().top() + (screenWindow()->currentResultLine() - screenWindow()->currentLine()) * _terminalFont->fontHeight(),
+            columns() * terminalFont()->fontWidth(),
+            _terminalFont->fontHeight()
+        );
+        Q_EMIT drawCurrentResultRect(paint, _searchResultRect);
+    }
+
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
         Q_EMIT highlightScrolledLines(paint, _scrollBar->highlightScrolledLines().isTimerActive(), _scrollBar->highlightScrolledLines().rect());
     }

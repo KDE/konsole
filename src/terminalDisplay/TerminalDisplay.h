@@ -499,7 +499,7 @@ Q_SIGNALS:
                       int imageSize,
                       bool bidiEnabled,
                       QVector<LineProperty> lineProperties);
-    void drawCurrentResultRect(QPainter &painter, QRect searchResultRect);
+    void drawCurrentResultRect(QPainter &painter, const QRect &searchResultRect);
 
     void highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect);
     QRegion highlightScrolledLinesRegion(bool nothingChanged, TerminalScrollBar *scrollBar);

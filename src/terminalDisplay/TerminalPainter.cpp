@@ -222,20 +222,8 @@ void TerminalPainter::drawContents(Character *image,
     }
 }
 
-void TerminalPainter::drawCurrentResultRect(QPainter &painter, QRect searchResultRect)
+void TerminalPainter::drawCurrentResultRect(QPainter &painter, const QRect &searchResultRect)
 {
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-
-    if (display->screenWindow()->currentResultLine() == -1) {
-        return;
-    }
-
-    searchResultRect.setRect(0,
-                             display->contentRect().top()
-                                 + (display->screenWindow()->currentResultLine() - display->screenWindow()->currentLine())
-                                     * display->terminalFont()->fontHeight(),
-                             display->columns() * display->terminalFont()->fontWidth(),
-                             display->terminalFont()->fontHeight());
     painter.fillRect(searchResultRect, QColor(0, 0, 255, 80));
 }
 

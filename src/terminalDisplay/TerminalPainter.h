@@ -57,7 +57,7 @@ public Q_SLOTS:
                       QVector<LineProperty> lineProperties);
 
     // draw a transparent rectangle over the line of the current match
-    void drawCurrentResultRect(QPainter &painter, QRect searchResultRect);
+    void drawCurrentResultRect(QPainter &painter, const QRect &searchResultRect);
 
     // draw a thin highlight on the left of the screen for lines that have been scrolled into view
     void highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect);
