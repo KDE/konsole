@@ -678,6 +678,9 @@ void Vt102Emulation::processToken(int token, int p, int q)
     // change tab text color : \e[28;<color>t  color: 0-16,777,215
     case token_csi_ps('t',   28) : /* IGNORED: konsole-specific KDE3-era extension, not implemented */ break;
 
+    case token_csi_ps('t',  22) : /* IGNORED: Save icon and window title on stack */      break; //XTERM
+    case token_csi_ps('t',  23) : /* IGNORED: Restore icon and window title from stack */ break; //XTERM
+
     case token_csi_ps('K',   0) : _currentScreen->clearToEndOfLine     (          ); break;
     case token_csi_ps('K',   1) : _currentScreen->clearToBeginOfLine   (          ); break;
     case token_csi_ps('K',   2) : _currentScreen->clearEntireLine      (          ); break;
@@ -1562,6 +1565,8 @@ static QString hexdump2(uint *s, int len)
             snprintf(dump, sizeof(dump), "%s", "\\\\");
         } else if ((s[i]) > 32 && s[i] < 127) {
             snprintf(dump, sizeof(dump), "%c", s[i]);
+        } else if (s[i] == 0x1b) {
+            snprintf(dump, sizeof(dump), "ESC");
         } else {
             snprintf(dump, sizeof(dump), "\\%04x(hex)", s[i]);
         }
