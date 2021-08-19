@@ -242,6 +242,8 @@ private Q_SLOTS:
     void monitorProcessFinish(bool monitor);
     void renameSession();
     void switchProfile(const QExplicitlySharedDataPointer<Profile> &profile);
+    // Set the action text to either "Edit" or "Create New" Profile
+    void setEditProfileActionText(const QExplicitlySharedDataPointer<Profile> &profile);
     void handleWebShortcutAction();
     void configureWebShortcuts();
     void sendSignal(QAction *action);

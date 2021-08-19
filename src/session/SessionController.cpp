@@ -687,8 +687,8 @@ void SessionController::setupCommonActions()
 
     // Profile Options
     action = collection->addAction(QStringLiteral("edit-current-profile"), this, &SessionController::editCurrentProfile);
-    action->setText(i18n("Edit Current Profile..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
+    setEditProfileActionText(SessionManager::instance()->sessionProfile(session()));
 
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), this);
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
@@ -874,6 +874,17 @@ void SessionController::switchProfile(const Profile::Ptr &profile)
     SessionManager::instance()->setSessionProfile(session(), profile);
     _switchProfileMenu->setIcon(QIcon::fromTheme(profile->icon()));
     updateFilterList(profile);
+    setEditProfileActionText(profile);
+}
+
+void SessionController::setEditProfileActionText(const Profile::Ptr &profile)
+{
+    QAction *action = actionCollection()->action(QStringLiteral("edit-current-profile"));
+    if (profile->isFallback()) {
+        action->setText(i18n("Create New Profile..."));
+    } else {
+        action->setText(i18n("Edit Current Profile..."));
+    }
 }
 
 void SessionController::prepareSwitchProfileMenu()
@@ -898,6 +909,10 @@ void SessionController::changeCodec(QTextCodec* codec)
 
 void SessionController::editCurrentProfile()
 {
+    auto *dialog = new EditProfileDialog(QApplication::activeWindow());
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setModal(true);
+
     auto profile = SessionManager::instance()->sessionProfile(session());
     auto state = EditProfileDialog::ExistingProfile;
     // Don't edit the Fallback profile, instead create a new one
@@ -910,11 +925,12 @@ void SessionController::editCurrentProfile()
         profile = newProfile;
         SessionManager::instance()->setSessionProfile(session(), profile);
         state = EditProfileDialog::NewProfile;
+
+        connect(dialog, &QDialog::accepted, this, [this, profile]() {
+            setEditProfileActionText(profile);
+        });
     }
 
-    auto *dialog = new EditProfileDialog(QApplication::activeWindow());
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->setModal(true);
     dialog->setProfile(profile, state);
 
     dialog->show();
