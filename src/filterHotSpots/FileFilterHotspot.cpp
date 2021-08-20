@@ -30,7 +30,7 @@
 #include <KMessageBox>
 #include <KShell>
 
-#include <kwindowsystem_version.h>
+#include <kio_version.h>
 
 #include "konsoledebug.h"
 #include "KonsoleSettings.h"
@@ -184,11 +184,8 @@ void FileFilterHotSpot::setupMenu(QMenu *menu)
     const KFileItemListProperties itemProperties(itemList);
     _menuActions.setParent(this);
     _menuActions.setItemListProperties(itemProperties);
-#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
+#if KIO_VERSION < QT_VERSION_CHECK(5,82,0)
     _menuActions.addOpenWithActionsTo(menu);
-#else
-    _menuActions.insertOpenWithActionsTo(nullptr, menu, QStringList());
-#endif
 
     // Here we added the actions to the last part of the menu, but we need to move them up.
     // TODO: As soon as addOpenWithActionsTo accepts a index, change this.
@@ -203,6 +200,10 @@ void FileFilterHotSpot::setupMenu(QMenu *menu)
     auto *separator = new QAction(this);
     separator->setSeparator(true);
     menu->insertAction(firstAction, separator);
+#else
+    const QList<QAction *> actionList = menu->actions();
+    _menuActions.insertOpenWithActionsTo(!actionList.isEmpty() ? actionList.at(0) : nullptr, menu, QStringList());
+#endif
 }
 
 // Static variables for the HotSpot
