@@ -1790,12 +1790,13 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         copy->setShortcut(Konsole::ACCEL | Qt::SHIFT | Qt::Key_C);
 #endif
 
+        QList<QAction *> toRemove;
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc
         QSharedPointer<HotSpot> hotSpot = view()->filterActions(position);
         if (hotSpot != nullptr) {
             popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator );
             popup->addAction(contentSeparator);
-            hotSpot->setupMenu(popup.data());
+            toRemove = hotSpot->setupMenu(popup.data());
         }
 
         // always update this submenu before showing the context menu,
@@ -1821,11 +1822,8 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         if (!popup.isNull()) {
             delete contentSeparator;
             // Remove the 'Open with' actions from it.
-            const auto actList = popup->actions();
-            for (auto *action : actList) {
-                if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
-                    popup->removeAction(action);
-                }
+            for (auto *act : toRemove) {
+                popup->removeAction(act);
             }
 
             // Remove the Accelerator for the copy shortcut so we don't have two actions with same shortcut.

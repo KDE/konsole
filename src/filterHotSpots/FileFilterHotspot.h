@@ -43,7 +43,7 @@ public:
         * Opens kate for editing the file.
         */
     void activate(QObject *object = nullptr) override;
-    void setupMenu(QMenu *menu) override;
+    QList<QAction *> setupMenu(QMenu *menu) override;
 
     KFileItem fileItem() const;
     void requestThumbnail(Qt::KeyboardModifiers modifiers, const QPoint &pos);

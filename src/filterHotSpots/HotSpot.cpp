@@ -32,9 +32,9 @@ QList<QAction *> HotSpot::actions()
     return {};
 }
 
-void HotSpot::setupMenu(QMenu *)
+QList<QAction *> HotSpot::setupMenu(QMenu *)
 {
-
+    return {};
 }
 
 int HotSpot::startLine() const

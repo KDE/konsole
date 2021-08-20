@@ -177,8 +177,10 @@ QList<QAction *> FileFilterHotSpot::actions()
     return {action};
 }
 
-void FileFilterHotSpot::setupMenu(QMenu *menu)
+QList<QAction *> FileFilterHotSpot::setupMenu(QMenu *menu)
 {
+    const QList<QAction *> currentActions = menu->actions();
+
     const KFileItem fileItem(QUrl::fromLocalFile(_filePath));
     const KFileItemList itemList({fileItem});
     const KFileItemListProperties itemProperties(itemList);
@@ -204,6 +206,14 @@ void FileFilterHotSpot::setupMenu(QMenu *menu)
     const QList<QAction *> actionList = menu->actions();
     _menuActions.insertOpenWithActionsTo(!actionList.isEmpty() ? actionList.at(0) : nullptr, menu, QStringList());
 #endif
+
+    QList<QAction *> addedActions = menu->actions();
+    // addedActions will only contain the open-with actions
+    for (auto *act : currentActions) {
+        addedActions.removeOne(act);
+    }
+
+    return addedActions;
 }
 
 // Static variables for the HotSpot

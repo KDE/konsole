@@ -96,9 +96,15 @@ public:
     virtual void startDrag();
 
     /**
-        * Setups a menu with actions for the hotspot.
-        */
-    virtual void setupMenu(QMenu *menu);
+     * Sets a menu up with actions for the hotspot.
+     *
+     * Returns a list of the added actions (useful for removing e.g.
+     * the open-with actions before adding new ones to prevent duplicate
+     * open-with actions being shown in @p menu).
+     *
+     * The base implementation does nothing.
+     */
+    virtual QList<QAction *> setupMenu(QMenu *menu);
 
     QPair<QRegion, QRect> region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const;
 
