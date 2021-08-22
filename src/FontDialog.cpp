@@ -13,6 +13,7 @@
 
 // KDE
 #include <KLocalizedString>
+#include <kwidgetsaddons_version.h>
 
 using namespace Konsole;
 
@@ -24,7 +25,12 @@ FontDialog::FontDialog(QWidget *parent) :
 {
     setWindowTitle(i18nc("@title:window", "Select font"));
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
+    _fontChooser = new KFontChooser(KFontChooser::FixedFontsOnly, this);
+#else
     _fontChooser = new KFontChooser(this, KFontChooser::FixedFontsOnly);
+#endif
+
     _showAllFonts = new QCheckBox(i18nc("@action:button", "Show all fonts"), this);
     _showAllFontsWarningButton = new QToolButton(this);
     _buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok |
