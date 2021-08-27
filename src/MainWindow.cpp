@@ -67,8 +67,7 @@ MainWindow::MainWindow() :
     _toggleMenuBarAction(nullptr),
     _newTabMenuAction(nullptr),
     _pluggedController(nullptr),
-    _menuBarInitialVisibility(true),
-    _menuBarInitialVisibilityApplied(false)
+    _menuBarInitialVisibility(true)
 {
     KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
     KConfigGroup cg = konsoleConfig->group(QStringLiteral("MainWindow"));
@@ -947,23 +946,23 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
 
 void MainWindow::showEvent(QShowEvent *event)
 {
-    // Make sure the 'initial' visibility is applied only once.
-    if (!_menuBarInitialVisibilityApplied) {
+    // Apply this code on first show only
+    if (_firstShowEvent) {
+        _firstShowEvent = false;
         // the initial visibility of menubar should be applied at this last
         // moment. Otherwise, the initial visibility will be determined by
         // what KMainWindow has automatically stored in konsolerc, but not by
         // what users has explicitly configured .
         menuBar()->setVisible(_menuBarInitialVisibility);
         _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
-        _menuBarInitialVisibilityApplied = true;
-    }
 
-    if (!_isSavedUiState || !KonsoleSettings::saveGeometryOnExit()) {
-        // Delay resizing to here, so that the other parts of the UI
-        // (ViewManager, TabbedViewContainer, TerminalDisplay ... etc)
-        // have been created and TabbedViewContainer::sizeHint() returns
-        // a usuable size.
-        resize(sizeHint());
+        if (!_isSavedUiState || !KonsoleSettings::saveGeometryOnExit()) {
+            // Delay resizing to here, so that the other parts of the UI
+            // (ViewManager, TabbedViewContainer, TerminalDisplay ... etc)
+            // have been created and TabbedViewContainer::sizeHint() returns
+            // a usuable size.
+            resize(sizeHint());
+        }
     }
 
     // Call parent method
