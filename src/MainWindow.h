@@ -198,7 +198,7 @@ private:
     QPointer<SessionController> _pluggedController;
     QList<IKonsolePlugin*> _plugins;
     bool _menuBarInitialVisibility;
-    bool _menuBarInitialVisibilityApplied;
+    bool _firstShowEvent = true;
     bool _blurEnabled = false;
     bool _isSavedUiState = false;
 };
