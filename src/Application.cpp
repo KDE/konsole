@@ -13,6 +13,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QCommandLineParser>
+#include <QMenuBar>
 #include <QStandardPaths>
 #include <QTimer>
 
@@ -167,7 +168,18 @@ MainWindow *Application::newMainWindow()
             &Konsole::Application::createWindow);
     connect(window, &Konsole::MainWindow::terminalsDetached, this, &Konsole::Application::detachTerminals);
 
-    m_pluginManager.registerMainWindow(window);
+    if (!m_pluginManager.plugins().empty()) {
+        m_pluginManager.registerMainWindow(window);
+    } else {
+        const QList<QAction *> allActions = window->menuBar()->actions();
+        auto it = std::find_if(allActions.cbegin(), allActions.cend(), [](QAction *action) {
+            return action->objectName() == QLatin1String("plugins");
+        });
+
+        if (it != allActions.cend()) {
+            (*it)->setVisible(false);
+        }
+    }
 
     return window;
 }
