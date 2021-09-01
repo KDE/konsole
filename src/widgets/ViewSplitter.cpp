@@ -108,6 +108,7 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
     } else if (containerOrientation == splitter->orientation()) {
         splitter->insertWidget(currentIndex, terminalDisplay);
     } else {
+        QList<int> sizes = splitter->sizes();
         auto newSplitter = new ViewSplitter();
         TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
         const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
@@ -115,12 +116,12 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
         newSplitter->addWidget(behavior == AddBehavior::AddBefore ? terminalDisplay : oldTerminalDisplay);
         newSplitter->addWidget(behavior == AddBehavior::AddBefore ? oldTerminalDisplay : terminalDisplay);
         newSplitter->setOrientation(containerOrientation);
-        newSplitter->updateSizes();
         newSplitter->show();
         splitter->insertWidget(oldContainerIndex, newSplitter);
         splitter->m_blockPropagatedDeletion = false;
+        splitter->setSizes(sizes);
+        newSplitter->updateSizes();
     }
-    splitter->updateSizes();
 }
 
 void ViewSplitter::childEvent(QChildEvent *event)
