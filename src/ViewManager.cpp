@@ -52,7 +52,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _pluggedController(nullptr),
     _sessionMap(QHash<TerminalDisplay *, Session *>()),
     _actionCollection(collection),
-    _navigationMethod(NoNavigation),
+    _navigationMethod(TabbedNavigation),
     _navigationVisibility(NavigationNotSet),
     _managerId(0),
     _terminalDisplayHistoryIndex(-1)
