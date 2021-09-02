@@ -375,10 +375,10 @@ public:
 
     /**
      * A profile which contains a number of default settings for various
-     * properties.  This can be used as a parent for other profiles or a
+     * properties.  This can be used as a parent for other profiles or as a
      * fallback in case a profile cannot be loaded from disk.
      */
-    void useFallback();
+    void useBuiltin();
 
     /**
      * Changes the parent profile.  When calling the property() method,
@@ -422,16 +422,15 @@ public:
     bool isEmpty() const;
 
     /**
-     * Returns true if this profile is the fallback profile, i.e. the
-     * profile path is "FALLBACK/".
+     * Returns true if this profile is the built-in profile.
      */
-    bool isFallback() const;
+    bool isBuiltin() const;
 
     /**
      * Returns true if this is a 'hidden' profile which should not be
      * displayed in menus or saved to disk.
      *
-     * This is used for the fallback profile, in case there are no profiles on
+     * This is true for the built-in profile, in case there are no profiles on
      * disk which can be loaded, or for overlay profiles created to handle
      * command-line arguments which change profile properties.
      */

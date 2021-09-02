@@ -32,7 +32,7 @@ int ProfileModel::rowCount(const QModelIndex &unused) const
 {
     Q_UNUSED(unused)
 
-    // All profiles  plus the default profile that's always at index 0 on
+    // All profiles plus the built-in profile that's always on top
     return m_profiles.count();
 }
 
@@ -77,12 +77,12 @@ QVariant ProfileModel::data(const QModelIndex &idx, int role) const
         switch (role) {
         case Qt::DisplayRole: {
             QString txt = profile->name();
-            if (profile->isFallback()) {
-                txt += i18nc("@label:textbox added to the name of the Default/fallback profile, to point out it's read-only/hardcoded", " [Read-only]");
+            if (profile->isBuiltin()) {
+                txt += i18nc("@label:textbox added to the name of the built-in profile, to point out it's read-only", " [Read-only]");
             }
 
             if (ProfileManager::instance()->defaultProfile() == profile) {
-                txt += i18nc("@label:textbox added to the name of the current default profile", " (default)");
+                txt += i18nc("@label:textbox added to the name of the current default profile", " [Default]");
             }
 
             return txt;
@@ -97,7 +97,7 @@ QVariant ProfileModel::data(const QModelIndex &idx, int role) const
             }
             break;
         case Qt::ToolTipRole:
-            return profile->isFallback() ? QStringLiteral("Built-in/hardcoded") : profile->path();
+            return profile->isBuiltin() ? i18nc("@info:tooltip", "Built-in profile is always available") : profile->path();
         }
     } break;
 

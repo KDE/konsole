@@ -38,10 +38,10 @@ static bool stringLessThan(const QString &p1, const QString &p2)
 
 static bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
 {
-    // Always put the Default/fallback profile at the top
-    if (p1->isFallback()) {
+    // Always put the built-in profile at the top
+    if (p1->isBuiltin()) {
         return true;
-    } else if (p2->isFallback()) {
+    } else if (p2->isBuiltin()) {
         return false;
     }
 
@@ -51,9 +51,9 @@ static bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
 ProfileManager::ProfileManager()
     : m_config(KSharedConfig::openConfig())
 {
-    // load fallback profile
-    initFallbackProfile();
-    _defaultProfile = _fallbackProfile;
+    // ensure built-in profile is available
+    initBuiltinProfile();
+    _defaultProfile = _builtinProfile;
 
     // lookup the default profile specified in <App>rc
     // For stand-alone Konsole, m_config is just "konsolerc"
@@ -89,18 +89,17 @@ ProfileManager::Iterator ProfileManager::findProfile(const Profile::Ptr &profile
     return std::find(_profiles.cbegin(), _profiles.cend(), profile);
 }
 
-void ProfileManager::initFallbackProfile()
+void ProfileManager::initBuiltinProfile()
 {
-    _fallbackProfile = Profile::Ptr(new Profile());
-    _fallbackProfile->useFallback();
-    addProfile(_fallbackProfile);
+    _builtinProfile = Profile::Ptr(new Profile());
+    _builtinProfile->useBuiltin();
+    addProfile(_builtinProfile);
 }
 
 Profile::Ptr ProfileManager::loadProfile(const QString &shortPath)
 {
-    // the fallback profile has a 'special' path name, "FALLBACK/"
-    if (shortPath == _fallbackProfile->path()) {
-        return _fallbackProfile;
+    if (shortPath == builtinProfile()->path()) {
+        return builtinProfile();
     }
 
     QString path = shortPath;
@@ -144,14 +143,14 @@ Profile::Ptr ProfileManager::loadProfile(const QString &shortPath)
 
     if (recursionGuard.contains(path)) {
         qCDebug(KonsoleDebug) << "Ignoring attempt to load profile recursively from" << path;
-        return _fallbackProfile;
+        return _builtinProfile;
     }
     recursionGuard.push(path);
 
     // load the profile
     ProfileReader reader;
 
-    Profile::Ptr newProfile = Profile::Ptr(new Profile(fallbackProfile()));
+    Profile::Ptr newProfile = Profile::Ptr(new Profile(builtinProfile()));
     newProfile->setProperty(Profile::Path, path);
 
     QString parentProfilePath;
@@ -237,9 +236,9 @@ Profile::Ptr ProfileManager::defaultProfile() const
 {
     return _defaultProfile;
 }
-Profile::Ptr ProfileManager::fallbackProfile() const
+Profile::Ptr ProfileManager::builtinProfile() const
 {
-    return _fallbackProfile;
+    return _builtinProfile;
 }
 
 QString ProfileManager::generateUniqueName() const
@@ -276,36 +275,17 @@ void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property
     const QKeySequence origShortcut = shortcut(profile);
     const bool isDefaultProfile = profile == defaultProfile();
 
-    const QString uniqueProfileName = generateUniqueName();
-
     // Don't save a profile with an empty name on disk
     persistent = persistent && !profile->name().isEmpty();
 
-    bool messageShown = false;
     bool isNameChanged = false;
+
     // Insert the changes into the existing Profile instance
     for (auto it = propertyMap.cbegin(); it != propertyMap.cend(); ++it) {
         const auto property = it.key();
         auto value = it.value();
 
-        isNameChanged = property == Profile::Name || property == Profile::UntranslatedName;
-
-        // "Default" is reserved for the fallback profile, override it;
-        // The message is only shown if the user manually typed "Default"
-        // in the name box in the edit profile dialog; i.e. saving the
-        // fallback profile where the user didn't change the name at all,
-        // the uniqueProfileName is used silently a couple of lines above.
-        if (isNameChanged && value == QLatin1String("Default")) {
-            value = uniqueProfileName;
-            if (!messageShown) {
-                KMessageBox::sorry(nullptr,
-                                   i18n("The name \"Default\" is reserved for the built-in"
-                                        " fallback profile;\nthe profile is going to be"
-                                        " saved as \"%1\"",
-                                        uniqueProfileName));
-                messageShown = true;
-            }
-        }
+        isNameChanged |= property == Profile::Name || property == Profile::UntranslatedName;
 
         profile->setProperty(property, value);
     }

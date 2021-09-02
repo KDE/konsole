@@ -52,7 +52,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
     const auto options = QVector<QCommandLineOption>{
         {{QStringLiteral("profile")}, i18nc("@info:shell", "Name of profile to use for new Konsole instance"), QStringLiteral("name")},
         {{QStringLiteral("layout")}, i18nc("@info:shell", "json layoutfile to be loaded to use for new Konsole instance"), QStringLiteral("file")},
-        {{QStringLiteral("fallback-profile")}, i18nc("@info:shell", "Use the internal FALLBACK profile")},
+        {{QStringLiteral("builtin-profile")}, i18nc("@info:shell", "Use the built-in profile instead of the default profile")},
         {{QStringLiteral("workdir")}, i18nc("@info:shell", "Set the initial working directory of the new tab or window to 'dir'"), QStringLiteral("dir")},
         {{QStringLiteral("hold"), QStringLiteral("noclose")}, i18nc("@info:shell", "Do not close the initial session automatically when it ends.")},
         // BR: 373440
@@ -408,25 +408,20 @@ MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
 
 // Loads a profile.
 // If --profile <name> is given, loads profile <name>.
-// If --fallback-profile is given, loads profile FALLBACK/.
+// If --builtin-profile is given, loads built-in profile.
 // Else loads the default profile.
 Profile::Ptr Application::processProfileSelectArgs()
 {
-    Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
-
     if (m_parser->isSet(QStringLiteral("profile"))) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(m_parser->value(QStringLiteral("profile")));
         if (profile) {
             return profile;
         }
-    } else if (m_parser->isSet(QStringLiteral("fallback-profile"))) {
-        Profile::Ptr profile = ProfileManager::instance()->loadProfile(QStringLiteral("FALLBACK/"));
-        if (profile) {
-            return profile;
-        }
+    } else if (m_parser->isSet(QStringLiteral("builtin-profile"))) {
+        // no need to check twice: built-in and default profiles are always available
+        return ProfileManager::instance()->builtinProfile();
     }
-
-    return defaultProfile;
+    return ProfileManager::instance()->defaultProfile();
 }
 
 bool Application::processHelpArgs()

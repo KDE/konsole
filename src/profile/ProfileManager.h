@@ -76,8 +76,8 @@ public:
      *
      * @p path may be relative or absolute.  The path may just be the
      * base name of the profile to load (eg. if the profile's full path
-     * is "<konsole data dir>/My Profile.profile" then both
-     * "konsole/My Profile.profile" , "My Profile.profile" and
+     * is "<konsole data dir>/My Profile.profile" then any of the
+     * "konsole/My Profile.profile", "My Profile.profile" and
      * "My Profile" will be accepted)
      *
      * @return Pointer to a profile which can be passed to
@@ -87,12 +87,11 @@ public:
     Profile::Ptr loadProfile(const QString &shortPath);
 
     /**
-     * This creates a profile based on the fallback profile, it's shown
-     * as "Default". This is a special profile as it's not saved on disk
-     * but rather created from code in the Profile class, based on the default
-     * profile settings.
+     * Initialize built-in profile. It's shown as "Built-in". This is a
+     * special profile as it's not saved on disk but rather created from
+     * code in the Profile class, based on the default profile settings.
      */
-    void initFallbackProfile();
+    void initBuiltinProfile();
 
     /**
      * Searches for available profiles on-disk and returns a list
@@ -141,16 +140,16 @@ public:
     void setDefaultProfile(const Profile::Ptr &profile);
 
     /**
-     * Returns a Profile object describing the default profile
+     * Returns the current default profile.
      */
     Profile::Ptr defaultProfile() const;
 
     /**
-     * Returns a Profile object with hard-coded settings which is always available.
-     * This can be used as a parent for new profiles which provides suitable default settings
-     * for all properties.
+     * Returns a Profile object with some built-in sane defaults.
+     * It is always available, and it is NOT loaded from or saved to a file.
+     * This can be used as a parent for new profiles.
      */
-    Profile::Ptr fallbackProfile() const;
+    Profile::Ptr builtinProfile() const;
 
     /**
      * Associates a shortcut with a particular profile.
@@ -228,7 +227,7 @@ private:
     std::vector<Profile::Ptr> _profiles;
 
     Profile::Ptr _defaultProfile;
-    Profile::Ptr _fallbackProfile;
+    Profile::Ptr _builtinProfile;
 
     struct ShortcutData {
         Profile::Ptr profileKey;

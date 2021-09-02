@@ -132,10 +132,10 @@ void ProfileSettings::setSelectedAsDefault()
 
 void ProfileSettings::createProfile()
 {
-    auto newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
+    auto newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->builtinProfile()));
 
     // If a profile is selected, clone its properties, otherwise the
-    // the fallback profile properties will be used
+    // the built-in profile's properties will be used
     if (currentProfile()) {
         newProfile->clone(currentProfile(), true);
     }
@@ -156,9 +156,9 @@ void ProfileSettings::editSelected()
 {
     const auto profile = currentProfile();
 
-    // Read-only profiles, i.e. oens with .profile's that aren't writable
-    // for the user aren't editable, only clone-able by using the "New"
-    // button, this includes the Default/fallback profile, which is hardcoded.
+    // Read-only profiles (i.e. with non-user-writable .profile location)
+    // aren't editable, and can only be cloned using the "New" button.
+    // This includes the built-in profile, which is hardcoded.
     if (!isProfileWritable(profile)) {
         return;
     }
@@ -183,7 +183,7 @@ Profile::Ptr ProfileSettings::currentProfile() const
 
 bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
 {
-    if (!profile || profile->isFallback()) {
+    if (!profile || profile->isBuiltin()) {
         return false;
     }
 
@@ -193,7 +193,7 @@ bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
 
 bool ProfileSettings::isProfileWritable(Profile::Ptr profile) const
 {
-    return profile && !profile->isFallback() // Default/fallback profile is hardcoded
+    return profile && !profile->isBuiltin() // Built-in profile is hardcoded and never stored.
         && QFileInfo(profile->path()).isWritable();
 }
 

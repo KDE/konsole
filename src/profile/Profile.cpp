@@ -143,6 +143,16 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
 QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;
 QHash<Profile::Property, Profile::PropertyInfo> Profile::PropertyInfoByProperty;
 
+// Magic path for the built-in profile which is not a valid file name,
+// thus it can not interfere with regular profiles.
+// For backward compatibility with existing profiles, it should never change.
+static const QString BUILTIN_MAGIC_PATH = QStringLiteral("FALLBACK/");
+
+// UntranslatedName property of the built-in profile, as a char array.
+//
+// Note: regular profiles created in earlier versions of Konsole may have this name too.
+static const char BUILTIN_UNTRANSLATED_NAME_CHAR[] = "Built-in";
+
 void Profile::fillTableWithDefaultNames()
 {
     static bool filledDefaults = false;
@@ -160,14 +170,11 @@ void Profile::fillTableWithDefaultNames()
     filledDefaults = true;
 }
 
-void Profile::useFallback()
+void Profile::useBuiltin()
 {
-    // Fallback settings
-    setProperty(Name, i18nc("Name of the default/builtin profile", "Default"));
-    setProperty(UntranslatedName, QStringLiteral("Default"));
-    // magic path for the fallback profile which is not a valid
-    // non-directory file name
-    setProperty(Path, QStringLiteral("FALLBACK/"));
+    setProperty(Name, i18nc("Name of the built-in profile", BUILTIN_UNTRANSLATED_NAME_CHAR));
+    setProperty(UntranslatedName, QString::fromLatin1(BUILTIN_UNTRANSLATED_NAME_CHAR));
+    setProperty(Path, BUILTIN_MAGIC_PATH);
     setProperty(Command, QString::fromUtf8(qgetenv("SHELL")));
     // See Pty.cpp on why Arguments is populated
     setProperty(Arguments, QStringList() << QString::fromUtf8(qgetenv("SHELL")));
@@ -250,7 +257,7 @@ void Profile::useFallback()
     setProperty(VerticalLine, false);
     setProperty(VerticalLineAtChar, 80);
     setProperty(PeekPrimaryKeySequence, QString());
-    // Fallback should not be shown in menus
+    // Built-in profile should not be shown in menus
     setHidden(true);
 }
 
@@ -282,9 +289,9 @@ void Profile::clone(Profile::Ptr profile, bool differentOnly)
 
 Profile::~Profile() = default;
 
-bool Profile::isFallback() const
+bool Profile::isBuiltin() const
 {
-    return path() == QLatin1String{"FALLBACK/"};
+    return path() == BUILTIN_MAGIC_PATH;
 }
 
 bool Profile::isHidden() const

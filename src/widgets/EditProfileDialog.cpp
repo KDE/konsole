@@ -239,10 +239,10 @@ void EditProfileDialog::save()
 
     // Update the default profile if needed
     if (defaultChanged) {
-        Q_ASSERT(_profile != ProfileManager::instance()->fallbackProfile());
+        Q_ASSERT(_profile != ProfileManager::instance()->builtinProfile());
 
         bool defaultChecked = _generalUi->setAsDefaultButton->isChecked();
-        Profile::Ptr newDefault = defaultChecked ? _profile : ProfileManager::instance()->fallbackProfile();
+        Profile::Ptr newDefault = defaultChecked ? _profile : ProfileManager::instance()->builtinProfile();
         ProfileManager::instance()->setDefaultProfile(newDefault);
         _isDefault = defaultChecked;
     }

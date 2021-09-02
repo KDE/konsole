@@ -7,14 +7,21 @@
 // Own
 #include "ProfileTest.h"
 
-// KDE
+// Qt
+#include <QFile>
 #include <QFileInfo>
-#include <qtest.h>
+#include <QStandardPaths>
+#include <QTemporaryFile>
+#include <QTest>
+#include <QTextStream>
+
+// KDE
 
 // Konsole
 #include "../profile/Profile.h"
 #include "../profile/ProfileGroup.h"
 #include "../profile/ProfileManager.cpp"
+#include "../profile/ProfileReader.h"
 #include "../profile/ProfileWriter.h"
 
 #include <QStandardPaths>
@@ -234,7 +241,7 @@ void ProfileTest::testProfileNameSorting()
     int counter = 1;
     QCOMPARE(list.size(), origCount + counter++);
     // Built-in profile always at the top
-    QCOMPARE(list.at(0)->name(), QStringView(u"Default"));
+    QCOMPARE(list.at(0)->name(), QStringLiteral("Built-in"));
 
     QVERIFY(std::is_sorted(list.cbegin(), list.cend(), profileNameLessThan));
 
@@ -252,18 +259,49 @@ void ProfileTest::testProfileNameSorting()
     QCOMPARE(list.size(), origCount + counter++);
     QVERIFY(std::is_sorted(list.cbegin(), list.cend(), profileNameLessThan));
 
-    QCOMPARE(list.at(0)->name(), QLatin1String("Default"));
+    QCOMPARE(list.at(0)->name(), QStringLiteral("Built-in"));
 }
 
-void ProfileTest::testFallbackProfile()
+void ProfileTest::testBuiltinProfile()
 {
     // create a new profile
-    Profile *fallback = new Profile();
-    fallback->useFallback();
+    Profile::Ptr builtin = Profile::Ptr(new Profile);
+    QVERIFY(!builtin->isBuiltin());
 
-    QCOMPARE(fallback->property<QString>(Profile::UntranslatedName), QStringLiteral("Default"));
-    QCOMPARE(fallback->property<QString>(Profile::Path), QStringLiteral("FALLBACK/"));
-    delete fallback;
+    builtin->useBuiltin();
+    QVERIFY(builtin->isBuiltin());
+    QCOMPARE(builtin->untranslatedName(), QStringLiteral("Built-in"));
+    QCOMPARE(builtin->path(), QStringLiteral("FALLBACK/"));
+}
+
+void ProfileTest::testLoadProfileNamedAsBuiltin()
+{
+    // Create a new profile data which is literally named "Built-in".
+    // New code should support loading such profiles created in older versions,
+    // but new profiles must not be saved with such name.
+    Profile::Ptr builtin = Profile::Ptr(new Profile);
+    builtin->useBuiltin();
+
+    QString profileStr = QStringLiteral(
+        "[General]\n"
+        "Icon=terminator\n"
+        "Name=Built-in\n"
+        "Parent=FALLBACK/\n");
+
+    QTemporaryFile file(QStringLiteral("konsole.XXXXXX.profile"));
+    QVERIFY(file.open());
+    QTextStream(&file) << profileStr;
+
+    Profile::Ptr profile = Profile::Ptr(new Profile(builtin));
+
+    ProfileReader reader;
+    QString parentProfilePath;
+    QVERIFY(reader.readProfile(file.fileName(), profile, parentProfilePath));
+
+    QCOMPARE(profile->property<QString>(Profile::Icon), QStringLiteral("terminator"));
+    // It's called "Built-in", but its parent is the real built-in profile
+    QCOMPARE(profile->name(), builtin->name());
+    QCOMPARE(parentProfilePath, builtin->path());
 }
 
 QTEST_GUILESS_MAIN(ProfileTest)

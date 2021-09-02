@@ -916,7 +916,7 @@ void SessionController::switchProfile(const Profile::Ptr &profile)
 void SessionController::setEditProfileActionText(const Profile::Ptr &profile)
 {
     QAction *action = actionCollection()->action(QStringLiteral("edit-current-profile"));
-    if (profile->isFallback()) {
+    if (profile->isBuiltin()) {
         action->setText(i18n("Create New Profile..."));
     } else {
         action->setText(i18n("Edit Current Profile..."));
@@ -951,8 +951,8 @@ void SessionController::editCurrentProfile()
 
     auto profile = SessionManager::instance()->sessionProfile(session());
     auto state = EditProfileDialog::ExistingProfile;
-    // Don't edit the Fallback profile, instead create a new one
-    if (profile->isFallback()) {
+    // Don't edit the built-in profile, instead create a new one
+    if (profile->isBuiltin()) {
         auto newProfile = Profile::Ptr(new Profile(profile));
         newProfile->clone(profile, true);
         const QString uniqueName = ProfileManager::instance()->generateUniqueName();

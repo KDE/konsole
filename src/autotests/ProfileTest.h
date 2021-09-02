@@ -22,7 +22,8 @@ private Q_SLOTS:
     void testProfileGroup();
     void testProfileFileNames();
     void testProfileNameSorting();
-    void testFallbackProfile();
+    void testBuiltinProfile();
+    void testLoadProfileNamedAsBuiltin();
 };
 
 }

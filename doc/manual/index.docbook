@@ -1230,8 +1230,8 @@ instead of the default profile.</para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--fallback-profile</option></term>
-<listitem><para>Use the internal FALLBACK profile. This option is a shortcut for <option>--profile</option> <parameter>FALLBACK/</parameter>.<!--FIXME what is the internal Fallback profile--></para></listitem>
+<term><option>--builtin-profile</option></term>
+<listitem><para>Use the built-in profile instead of the current default profile.</para></listitem>
 </varlistentry>
 
 <varlistentry>
