@@ -182,19 +182,19 @@ void ProfileTest::testProfileGroup()
     QVERIFY(profile[0]->property<QString>(Profile::Command) != QLatin1String("fish"));
 }
 
-// Verify the correct file name is created from the untranslatedname
+// Verify the correct file name is created from the UntranslatedName
 void ProfileTest::testProfileFileNames()
 {
     Profile::Ptr profile = Profile::Ptr(new Profile);
     QFileInfo fileInfo;
-    auto writer = new ProfileWriter();
+    ProfileWriter writer;
 
     profile->setProperty(Profile::UntranslatedName, QStringLiteral("Indiana"));
-    fileInfo.setFile(writer->getPath(profile));
+    fileInfo.setFile(writer.getPath(profile));
     QCOMPARE(fileInfo.fileName(), QStringLiteral("Indiana.profile"));
 
     profile->setProperty(Profile::UntranslatedName, QStringLiteral("Old Paris"));
-    fileInfo.setFile(writer->getPath(profile));
+    fileInfo.setFile(writer.getPath(profile));
     QCOMPARE(fileInfo.fileName(), QStringLiteral("Old Paris.profile"));
 
     /* FIXME: deal w/ file systems that are case-insensitive
@@ -204,7 +204,7 @@ void ProfileTest::testProfileFileNames()
     */
     /*
     profile->setProperty(Profile::UntranslatedName, "New Profile");
-    fileInfo.setFile(writer->getPath(profile));
+    fileInfo.setFile(writer.getPath(profile));
     QCOMPARE(fileInfo.fileName(), QString("new profile.profile"));
     */
 
@@ -216,11 +216,9 @@ void ProfileTest::testProfileFileNames()
     */
     /*
     profile->setProperty(Profile::UntranslatedName, "new/profile");
-    fileInfo.setFile(writer->getPath(profile));
+    fileInfo.setFile(writer.getPath(profile));
     QCOMPARE(fileInfo.fileName(), QString("new_profile.profile"));
     */
-
-    delete writer;
 }
 
 void ProfileTest::testProfileNameSorting()
