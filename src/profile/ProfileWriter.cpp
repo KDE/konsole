@@ -35,6 +35,7 @@ QString ProfileWriter::getPath(const Profile::Ptr &profile)
 
     return localDataLocation % QLatin1String("/") % profile->untranslatedName() % QLatin1String(".profile");
 }
+
 void ProfileWriter::writeProperties(KConfig &config, const Profile::Ptr &profile, const Profile::PropertyInfo *properties)
 {
     const char *groupName = nullptr;
@@ -55,6 +56,7 @@ void ProfileWriter::writeProperties(KConfig &config, const Profile::Ptr &profile
         properties++;
     }
 }
+
 bool ProfileWriter::writeProfile(const QString &path, const Profile::Ptr &profile)
 {
     KConfig config(path, KConfig::NoGlobals);

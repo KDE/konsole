@@ -45,6 +45,7 @@ QStringList ProfileReader::findProfiles()
     }
     return profiles;
 }
+
 void ProfileReader::readProperties(const KConfig &config, Profile::Ptr profile, const Profile::PropertyInfo *properties)
 {
     const char *groupName = nullptr;
