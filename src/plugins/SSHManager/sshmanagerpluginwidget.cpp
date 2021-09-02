@@ -54,7 +54,9 @@ d(std::make_unique<SSHManagerTreeWidget::Private>())
     const auto* hostnameValidator = new QRegularExpressionValidator(hostnameRegex, this);
     ui->hostname->setValidator(hostnameValidator);
 
-    const auto* portValidator = new QIntValidator(0, 9999);
+    // System and User ports see:
+    // https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
+    const auto* portValidator = new QIntValidator(0, 49151);
     ui->port->setValidator(portValidator);
 
     connect(ui->newSSHConfig, &QPushButton::clicked, this, &SSHManagerTreeWidget::showInfoPane);
