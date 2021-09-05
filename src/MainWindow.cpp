@@ -426,47 +426,24 @@ void MainWindow::setProfileList(ProfileList *list)
 
 void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
 {
-    // If only 1 profile is to be shown in the menu, only display
-    // it if it is the non-default profile.
-    if (sessionActions.size() > 2) {
-        // Update the 'New Tab' KActionMenu
-        if (_newTabMenuAction->menu() != nullptr) {
-            _newTabMenuAction->menu()->clear();
-        } else {
-            _newTabMenuAction->setMenu(new QMenu());
-        }
-        for (QAction *sessionAction : sessionActions) {
-            _newTabMenuAction->menu()->addAction(sessionAction);
+    // Update the 'New Tab' KActionMenu
+    _newTabMenuAction->menu()->clear();
+    for (QAction *sessionAction : sessionActions) {
+        _newTabMenuAction->menu()->addAction(sessionAction);
 
-            auto setActionFontBold = [sessionAction](bool isBold) {
-                QFont actionFont = sessionAction->font();
-                actionFont.setBold(isBold);
-                sessionAction->setFont(actionFont);
-            };
+        auto setActionFontBold = [sessionAction](bool isBold) {
+            QFont actionFont = sessionAction->font();
+            actionFont.setBold(isBold);
+            sessionAction->setFont(actionFont);
+        };
 
-            Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-            if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
-                QIcon icon = KIconUtils::addOverlay(QIcon::fromTheme(profile->icon()), QIcon::fromTheme(QStringLiteral("emblem-favorite")), Qt::BottomRightCorner);
-                sessionAction->setIcon(icon);
-                setActionFontBold(true);
-            } else {
-                setActionFontBold(false);
-            }
-        }
-    } else {
-        if (_newTabMenuAction->menu() != nullptr) {
-            _newTabMenuAction->menu()->clear();
-        } else {
-            _newTabMenuAction->setMenu(new QMenu());
-        }
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-
-        // NOTE: Compare names w/o any '&'
-        if (sessionActions.size() == 2
-            && sessionActions[1]->text().remove(QLatin1Char('&')) != profile->name()) {
-            _newTabMenuAction->menu()->addAction(sessionActions[1]);
+        if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
+            QIcon icon = KIconUtils::addOverlay(QIcon::fromTheme(profile->icon()), QIcon::fromTheme(QStringLiteral("emblem-favorite")), Qt::BottomRightCorner);
+            sessionAction->setIcon(icon);
+            setActionFontBold(true);
         } else {
-            _newTabMenuAction->menu()->deleteLater();
+            setActionFontBold(false);
         }
     }
 }
