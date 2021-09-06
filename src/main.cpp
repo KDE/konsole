@@ -10,24 +10,24 @@
 
 // Own
 #include "Application.h"
-#include "MainWindow.h"
-#include "config-konsole.h"
 #include "KonsoleSettings.h"
+#include "MainWindow.h"
 #include "ViewManager.h"
+#include "config-konsole.h"
 #include "widgets/ViewContainer.h"
 
 // OS specific
-#include <qplatformdefs.h>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QDir>
 #include <QProxyStyle>
 #include <QStandardPaths>
-#include <QDir>
+#include <qplatformdefs.h>
 
 // KDE
 #include <KAboutData>
-#include <KLocalizedString>
 #include <KCrash>
+#include <KLocalizedString>
 #include <Kdelibs4ConfigMigrator>
 #include <Kdelibs4Migration>
 #include <kdbusservice.h>
@@ -35,9 +35,9 @@
 using Konsole::Application;
 
 #ifdef PROFILE_STARTUP
+#include <QDebug>
 #include <QElapsedTimer>
 #include <QTimer>
-#include <QDebug>
 #endif
 
 // fill the KAboutData structure with information about contributors to Konsole.
@@ -65,14 +65,12 @@ void deleteQApplication()
 // XDG_CURRENT_DESKTOP ≠ kde, then pressing and immediately releasing Alt
 // key makes focus get stuck in QMenu.
 // Upstream report: https://bugreports.qt.io/browse/QTBUG-77355
-class MenuStyle : public QProxyStyle {
+class MenuStyle : public QProxyStyle
+{
 public:
-    int styleHint(const StyleHint stylehint,
-                  const QStyleOption *opt,
-                  const QWidget *widget,
-                  QStyleHintReturn *returnData) const override {
-        return (stylehint == QStyle::SH_MenuBar_AltKeyNavigation)
-            ? 0 : QProxyStyle::styleHint(stylehint, opt, widget, returnData);
+    int styleHint(const StyleHint stylehint, const QStyleOption *opt, const QWidget *widget, QStyleHintReturn *returnData) const override
+    {
+        return (stylehint == QStyle::SH_MenuBar_AltKeyNavigation) ? 0 : QProxyStyle::styleHint(stylehint, opt, widget, returnData);
     }
 };
 
@@ -82,7 +80,8 @@ public:
 int main(int argc, char *argv[])
 {
 #ifdef PROFILE_STARTUP
-    QElapsedTimer timer; timer.start();
+    QElapsedTimer timer;
+    timer.start();
 #endif
 
     // enable high dpi support
@@ -141,16 +140,13 @@ int main(int argc, char *argv[])
     parser->process(args);
     about.processCommandLine(parser.data());
 
-
     /// ! DON'T TOUCH THIS ! ///
-    const KDBusService::StartupOption startupOption = Konsole::KonsoleSettings::useSingleInstance() && !needNewProcess ?
-        KDBusService::Unique :
-        KDBusService::Multiple;
+    const KDBusService::StartupOption startupOption =
+        Konsole::KonsoleSettings::useSingleInstance() && !needNewProcess ? KDBusService::Unique : KDBusService::Multiple;
     /// ! DON'T TOUCH THIS ! ///
     // If you need to change something here, add your logic _at the bottom_ of
     // shouldUseNewProcess(), after reading the explanations there for why you
     // probably shouldn't.
-
 
     atexit(deleteQApplication);
     // Ensure that we only launch a new instance if we need to
@@ -192,8 +188,7 @@ int main(int argc, char *argv[])
 
     // The activateRequested() signal is emitted when a second instance
     // of Konsole is started.
-    QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp,
-                     &Application::slotActivateRequested);
+    QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp, &Application::slotActivateRequested);
 
     if (app->isSessionRestored()) {
         restoreSession(konsoleApp);
@@ -240,14 +235,10 @@ bool shouldUseNewProcess(int argc, char *argv[])
 
     // take Qt options into consideration
     QStringList qtProblematicOptions;
-    qtProblematicOptions << QStringLiteral("--session")
-                         << QStringLiteral("--name")
-                         << QStringLiteral("--reverse")
-                         << QStringLiteral("--stylesheet")
+    qtProblematicOptions << QStringLiteral("--session") << QStringLiteral("--name") << QStringLiteral("--reverse") << QStringLiteral("--stylesheet")
                          << QStringLiteral("--graphicssystem");
 #if HAVE_X11
-    qtProblematicOptions << QStringLiteral("--display")
-                         << QStringLiteral("--visual");
+    qtProblematicOptions << QStringLiteral("--display") << QStringLiteral("--visual");
 #endif
     for (const QString &option : qAsConst(qtProblematicOptions)) {
         if (arguments.contains(option)) {
@@ -257,8 +248,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
 
     // take KDE options into consideration
     QStringList kdeProblematicOptions;
-    kdeProblematicOptions << QStringLiteral("--config")
-                          << QStringLiteral("--style");
+    kdeProblematicOptions << QStringLiteral("--config") << QStringLiteral("--style");
 #if HAVE_X11
     kdeProblematicOptions << QStringLiteral("--waitforwm");
 #endif
@@ -272,8 +262,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     // if users have explicitly requested starting a new process
     // Support --nofork to retain argument compatibility with older
     // versions.
-    if (arguments.contains(QStringLiteral("--separate"))
-        || arguments.contains(QStringLiteral("--nofork"))) {
+    if (arguments.contains(QStringLiteral("--separate")) || arguments.contains(QStringLiteral("--nofork"))) {
         return true;
     }
 
@@ -301,15 +290,14 @@ void fillAboutData(KAboutData &aboutData)
     aboutData.setOrganizationDomain("kde.org");
 
     aboutData.addAuthor(i18nc("@info:credit", "Kurt Hindenburg"),
-                        i18nc("@info:credit", "General maintainer, bug fixes and general"
-                                              " improvements"),
+                        i18nc("@info:credit",
+                              "General maintainer, bug fixes and general"
+                              " improvements"),
                         QStringLiteral("kurt.hindenburg@gmail.com"));
     aboutData.addAuthor(i18nc("@info:credit", "Robert Knight"),
                         i18nc("@info:credit", "Previous maintainer, ported to KDE4"),
                         QStringLiteral("robertknight@gmail.com"));
-    aboutData.addAuthor(i18nc("@info:credit", "Lars Doelle"),
-                        i18nc("@info:credit", "Original author"),
-                        QStringLiteral("lars.doelle@on-line.de"));
+    aboutData.addAuthor(i18nc("@info:credit", "Lars Doelle"), i18nc("@info:credit", "Original author"), QStringLiteral("lars.doelle@on-line.de"));
     aboutData.addCredit(i18nc("@info:credit", "Ahmad Samir"),
                         i18nc("@info:credit", "Major refactoring, bug fixes and major improvements"),
                         QStringLiteral("a.samirh78@gmail.com"));
@@ -328,78 +316,49 @@ void fillAboutData(KAboutData &aboutData)
     aboutData.addCredit(i18nc("@info:credit", "Martin T. H. Sandsmark"),
                         i18nc("@info:credit", "Bug fixes and general improvements"),
                         QStringLiteral("martin.sandsmark@kde.org"));
-    aboutData.addCredit(i18nc("@info:credit", "Nate Graham"),
-                        i18nc("@info:credit", "Bug fixes and general improvements"),
-                        QStringLiteral("nate@kde.org"));
+    aboutData.addCredit(i18nc("@info:credit", "Nate Graham"), i18nc("@info:credit", "Bug fixes and general improvements"), QStringLiteral("nate@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Mariusz Glebocki"),
                         i18nc("@info:credit", "Bug fixes and major improvements"),
                         QStringLiteral("mglb@arccos-1.net"));
     aboutData.addCredit(i18nc("@info:credit", "Thomas Surrel"),
                         i18nc("@info:credit", "Bug fixes and general improvements"),
                         QStringLiteral("thomas.surrel@protonmail.com"));
-    aboutData.addCredit(i18nc("@info:credit", "Jekyll Wu"),
-                        i18nc("@info:credit", "Bug fixes and general improvements"),
-                        QStringLiteral("adaptee@gmail.com"));
-    aboutData.addCredit(i18nc("@info:credit", "Waldo Bastian"),
-                        i18nc("@info:credit", "Bug fixes and general improvements"),
-                        QStringLiteral("bastian@kde.org"));
-    aboutData.addCredit(i18nc("@info:credit", "Stephan Binner"),
-                        i18nc("@info:credit", "Bug fixes and general improvements"),
-                        QStringLiteral("binner@kde.org"));
-    aboutData.addCredit(i18nc("@info:credit", "Thomas Dreibholz"),
-                        i18nc("@info:credit", "General improvements"),
-                        QStringLiteral("dreibh@iem.uni-due.de"));
-    aboutData.addCredit(i18nc("@info:credit", "Chris Machemer"),
-                        i18nc("@info:credit", "Bug fixes"),
-                        QStringLiteral("machey@ceinetworks.com"));
-    aboutData.addCredit(i18nc("@info:credit", "Francesco Cecconi"),
-                        i18nc("@info:credit", "Bug fixes"),
-                        QStringLiteral("francesco.cecconi@gmail.com"));
-    aboutData.addCredit(i18nc("@info:credit", "Stephan Kulow"),
-                        i18nc("@info:credit", "Solaris support and history"),
-                        QStringLiteral("coolo@kde.org"));
+    aboutData.addCredit(i18nc("@info:credit", "Jekyll Wu"), i18nc("@info:credit", "Bug fixes and general improvements"), QStringLiteral("adaptee@gmail.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Waldo Bastian"), i18nc("@info:credit", "Bug fixes and general improvements"), QStringLiteral("bastian@kde.org"));
+    aboutData.addCredit(i18nc("@info:credit", "Stephan Binner"), i18nc("@info:credit", "Bug fixes and general improvements"), QStringLiteral("binner@kde.org"));
+    aboutData.addCredit(i18nc("@info:credit", "Thomas Dreibholz"), i18nc("@info:credit", "General improvements"), QStringLiteral("dreibh@iem.uni-due.de"));
+    aboutData.addCredit(i18nc("@info:credit", "Chris Machemer"), i18nc("@info:credit", "Bug fixes"), QStringLiteral("machey@ceinetworks.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Francesco Cecconi"), i18nc("@info:credit", "Bug fixes"), QStringLiteral("francesco.cecconi@gmail.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Stephan Kulow"), i18nc("@info:credit", "Solaris support and history"), QStringLiteral("coolo@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Alexander Neundorf"),
                         i18nc("@info:credit", "Bug fixes and improved startup performance"),
                         QStringLiteral("neundorf@kde.org"));
-    aboutData.addCredit(i18nc("@info:credit", "Peter Silva"),
-                        i18nc("@info:credit", "Marking improvements"),
-                        QStringLiteral("Peter.A.Silva@gmail.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Peter Silva"), i18nc("@info:credit", "Marking improvements"), QStringLiteral("Peter.A.Silva@gmail.com"));
     aboutData.addCredit(i18nc("@info:credit", "Lotzi Boloni"),
-                        i18nc("@info:credit", "Embedded Konsole\n"
-                                              "Toolbar and session names"),
+                        i18nc("@info:credit",
+                              "Embedded Konsole\n"
+                              "Toolbar and session names"),
                         QStringLiteral("boloni@cs.purdue.edu"));
     aboutData.addCredit(i18nc("@info:credit", "David Faure"),
-                        i18nc("@info:credit", "Embedded Konsole\n"
-                                              "General improvements"),
+                        i18nc("@info:credit",
+                              "Embedded Konsole\n"
+                              "General improvements"),
                         QStringLiteral("faure@kde.org"));
-    aboutData.addCredit(i18nc("@info:credit", "Antonio Larrosa"),
-                        i18nc("@info:credit", "Visual effects"),
-                        QStringLiteral("larrosa@kde.org"));
+    aboutData.addCredit(i18nc("@info:credit", "Antonio Larrosa"), i18nc("@info:credit", "Visual effects"), QStringLiteral("larrosa@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Matthias Ettrich"),
-                        i18nc("@info:credit", "Code from the kvt project\n"
-                                              "General improvements"),
+                        i18nc("@info:credit",
+                              "Code from the kvt project\n"
+                              "General improvements"),
                         QStringLiteral("ettrich@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Warwick Allison"),
                         i18nc("@info:credit", "Schema and text selection improvements"),
                         QStringLiteral("warwick@troll.no"));
-    aboutData.addCredit(i18nc("@info:credit", "Dan Pilone"),
-                        i18nc("@info:credit", "SGI port"),
-                        QStringLiteral("pilone@slac.com"));
-    aboutData.addCredit(i18nc("@info:credit", "Kevin Street"),
-                        i18nc("@info:credit", "FreeBSD port"),
-                        QStringLiteral("street@iname.com"));
-    aboutData.addCredit(i18nc("@info:credit", "Sven Fischer"),
-                        i18nc("@info:credit", "Bug fixes"),
-                        QStringLiteral("herpes@kawo2.renditionwth-aachen.de"));
-    aboutData.addCredit(i18nc("@info:credit", "Dale M. Flaven"),
-                        i18nc("@info:credit", "Bug fixes"),
-                        QStringLiteral("dflaven@netport.com"));
-    aboutData.addCredit(i18nc("@info:credit", "Martin Jones"),
-                        i18nc("@info:credit", "Bug fixes"),
-                        QStringLiteral("mjones@powerup.com.au"));
-    aboutData.addCredit(i18nc("@info:credit", "Lars Knoll"),
-                        i18nc("@info:credit", "Bug fixes"),
-                        QStringLiteral("knoll@mpi-hd.mpg.de"));
+    aboutData.addCredit(i18nc("@info:credit", "Dan Pilone"), i18nc("@info:credit", "SGI port"), QStringLiteral("pilone@slac.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Kevin Street"), i18nc("@info:credit", "FreeBSD port"), QStringLiteral("street@iname.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Sven Fischer"), i18nc("@info:credit", "Bug fixes"), QStringLiteral("herpes@kawo2.renditionwth-aachen.de"));
+    aboutData.addCredit(i18nc("@info:credit", "Dale M. Flaven"), i18nc("@info:credit", "Bug fixes"), QStringLiteral("dflaven@netport.com"));
+    aboutData.addCredit(i18nc("@info:credit", "Martin Jones"), i18nc("@info:credit", "Bug fixes"), QStringLiteral("mjones@powerup.com.au"));
+    aboutData.addCredit(i18nc("@info:credit", "Lars Knoll"), i18nc("@info:credit", "Bug fixes"), QStringLiteral("knoll@mpi-hd.mpg.de"));
     aboutData.addCredit(i18nc("@info:credit", "Thanks to many others.\n"));
 }
 
@@ -415,8 +374,8 @@ void restoreSession(Application &app)
 
         // TODO: HACK without the code below the sessions would be `uninitialized`
         // and the tabs wouldn't display the correct information.
-        auto tabbedContainer = qobject_cast<Konsole::TabbedViewContainer*>(mainWindow->centralWidget());
-        for(int i = 0; i < tabbedContainer->count(); i++) {
+        auto tabbedContainer = qobject_cast<Konsole::TabbedViewContainer *>(mainWindow->centralWidget());
+        for (int i = 0; i < tabbedContainer->count(); i++) {
             tabbedContainer->setCurrentIndex(i);
         }
     }

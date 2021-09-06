@@ -13,18 +13,18 @@
 
 namespace Konsole
 {
-    /** Utility class to simplify code in SessionManager::applyProfile(). */
-    class ShouldApplyProperty
-    {
-    public:
-        ShouldApplyProperty(const Profile::Ptr &profile, bool modifiedOnly);
+/** Utility class to simplify code in SessionManager::applyProfile(). */
+class ShouldApplyProperty
+{
+public:
+    ShouldApplyProperty(const Profile::Ptr &profile, bool modifiedOnly);
 
-        bool shouldApply(Profile::Property property) const;
+    bool shouldApply(Profile::Property property) const;
 
-    private:
-        const Profile::Ptr _profile;
-        bool _modifiedPropertiesOnly;
-    };
+private:
+    const Profile::Ptr _profile;
+    bool _modifiedPropertiesOnly;
+};
 }
 
 #endif

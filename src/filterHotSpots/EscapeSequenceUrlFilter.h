@@ -12,11 +12,12 @@
 
 #include <QPointer>
 
-namespace Konsole {
+namespace Konsole
+{
 class Session;
 class TerminalDisplay;
 
-    /* This filter is different from the Url filter as there's no
+/* This filter is different from the Url filter as there's no
  * URL's in the screen. Vt102Emulation will store a vector of
  * URL/Text, we need to match if this is in the screen. For that we need a pointer
  * for the Vt102Emulation or at least the data structure that holds the information
@@ -28,6 +29,7 @@ public:
     EscapeSequenceUrlFilter(Session *session, TerminalDisplay *display);
 
     void process() override;
+
 private:
     QPointer<Session> _session;
     QPointer<TerminalDisplay> _window;

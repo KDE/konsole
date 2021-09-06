@@ -9,7 +9,7 @@
 using namespace Konsole;
 
 ThumbnailsSettings::ThumbnailsSettings(QWidget *aParent)
-: QWidget(aParent)
+    : QWidget(aParent)
 {
     setupUi(this);
 }

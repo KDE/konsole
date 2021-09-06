@@ -13,14 +13,14 @@
 #include "PrintOptions.h"
 
 // Qt
-#include <QRect>
 #include <QFont>
-#include <QPoint>
-#include <QWidget>
-#include <QPrinter>
 #include <QPainter>
+#include <QPoint>
 #include <QPointer>
 #include <QPrintDialog>
+#include <QPrinter>
+#include <QRect>
+#include <QWidget>
 
 // KDE
 #include <KConfigGroup>
@@ -48,10 +48,7 @@ void KonsolePrintManager::printRequest(pPrintContent pContent, QWidget *parent)
 
     dialog->setOptionTabs({options});
     dialog->setWindowTitle(i18n("Print Shell"));
-    QObject::connect(dialog,
-            QOverload<>::of(&QPrintDialog::accepted),
-            options,
-            &Konsole::PrintOptions::saveSettings);
+    QObject::connect(dialog, QOverload<>::of(&QPrintDialog::accepted), options, &Konsole::PrintOptions::saveSettings);
     if (dialog->exec() != QDialog::Accepted) {
         return;
     }
@@ -63,16 +60,14 @@ void KonsolePrintManager::printRequest(pPrintContent pContent, QWidget *parent)
 
     if (configGroup.readEntry("ScaleOutput", true)) {
         QRect page_rect = printer.pageLayout().paintRectPixels(printer.resolution());
-        double scale = qMin(page_rect.width() / static_cast<double>(parent->width()),
-                            page_rect.height() / static_cast<double>(parent->height()));
+        double scale = qMin(page_rect.width() / static_cast<double>(parent->width()), page_rect.height() / static_cast<double>(parent->height()));
         painter.scale(scale, scale);
     }
-    
+
     pContent(painter, configGroup.readEntry("PrinterFriendly", true));
 }
 
-void KonsolePrintManager::printContent(QPainter &painter, bool friendly, QPoint columnsLines,
-                                        pVTFontGet vtFontGet, pVTFontSet vtFontSet)
+void KonsolePrintManager::printContent(QPainter &painter, bool friendly, QPoint columnsLines, pVTFontGet vtFontGet, pVTFontSet vtFontSet)
 {
     // Reinitialize the font with the printers paint device so the font
     // measurement calculations will be done correctly

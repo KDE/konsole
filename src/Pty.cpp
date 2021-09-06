@@ -10,8 +10,8 @@
 #include "konsoledebug.h"
 
 // System
-#include <termios.h>
 #include <csignal>
+#include <termios.h>
 
 // Qt
 #include <QStringList>
@@ -22,14 +22,14 @@
 
 using Konsole::Pty;
 
-Pty::Pty(int masterFd, QObject *aParent) :
-    KPtyProcess(masterFd, aParent)
+Pty::Pty(int masterFd, QObject *aParent)
+    : KPtyProcess(masterFd, aParent)
 {
     init();
 }
 
-Pty::Pty(QObject *aParent) :
-    KPtyProcess(aParent)
+Pty::Pty(QObject *aParent)
+    : KPtyProcess(aParent)
 {
     init();
 }
@@ -117,8 +117,7 @@ bool Pty::flowControlEnabled() const
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        return ((ttmode.c_iflag & IXOFF) != 0U)
-               && ((ttmode.c_iflag & IXON) != 0U);
+        return ((ttmode.c_iflag & IXOFF) != 0U) && ((ttmode.c_iflag & IXON) != 0U);
     } else {
         qCDebug(KonsoleDebug) << "Unable to get flow control status, terminal not connected.";
         return _xonXoff;
@@ -219,8 +218,7 @@ void Pty::addEnvironmentVariables(const QStringList &environmentVariables)
     }
 }
 
-int Pty::start(const QString &programName, const QStringList &programArguments,
-               const QStringList &environmentList)
+int Pty::start(const QString &programName, const QStringList &programArguments, const QStringList &environmentList)
 {
     clearProgram();
 
@@ -243,8 +241,7 @@ int Pty::start(const QString &programName, const QStringList &programArguments,
     // does not have a translation for
     //
     // BR:149300
-    setEnv(QStringLiteral("LANGUAGE"), QString(),
-           false /* do not overwrite existing value if any */);
+    setEnv(QStringLiteral("LANGUAGE"), QString(), false /* do not overwrite existing value if any */);
 
     KProcess::start();
 
@@ -261,15 +258,15 @@ void Pty::setWriteable(bool writeable)
     if (QT_STAT(pty()->ttyName(), &sbuf) == 0) {
         if (writeable) {
             if (::chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP) < 0) {
-                qCDebug(KonsoleDebug) << "Could not set writeable on "<<pty()->ttyName();
+                qCDebug(KonsoleDebug) << "Could not set writeable on " << pty()->ttyName();
             }
         } else {
             if (::chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP | S_IWOTH)) < 0) {
-                qCDebug(KonsoleDebug) << "Could not unset writeable on "<<pty()->ttyName();
+                qCDebug(KonsoleDebug) << "Could not unset writeable on " << pty()->ttyName();
             }
         }
     } else {
-        qCDebug(KonsoleDebug) << "Could not stat "<<pty()->ttyName();
+        qCDebug(KonsoleDebug) << "Could not stat " << pty()->ttyName();
     }
 }
 

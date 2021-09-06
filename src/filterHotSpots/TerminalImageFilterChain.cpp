@@ -15,18 +15,16 @@
 
 using namespace Konsole;
 
-
-TerminalImageFilterChain::TerminalImageFilterChain(TerminalDisplay *terminalDisplay) :
-    FilterChain(terminalDisplay),
-    _buffer(nullptr),
-    _linePositions(nullptr)
+TerminalImageFilterChain::TerminalImageFilterChain(TerminalDisplay *terminalDisplay)
+    : FilterChain(terminalDisplay)
+    , _buffer(nullptr)
+    , _linePositions(nullptr)
 {
 }
 
 TerminalImageFilterChain::~TerminalImageFilterChain() = default;
 
-void TerminalImageFilterChain::setImage(const Character * const image, int lines, int columns,
-                                        const QVector<LineProperty> &lineProperties)
+void TerminalImageFilterChain::setImage(const Character *const image, int lines, int columns, const QVector<LineProperty> &lineProperties)
 {
     if (_filters.empty()) {
         return;

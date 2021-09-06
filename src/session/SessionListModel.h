@@ -13,7 +13,8 @@
 #include <QAbstractListModel>
 #include <QVariant>
 
-namespace Konsole {
+namespace Konsole
+{
 class Session;
 
 /**
@@ -60,4 +61,4 @@ private:
 };
 }
 
-#endif //SESSIONLISTMODEL_H
+#endif // SESSIONLISTMODEL_H

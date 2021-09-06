@@ -11,7 +11,6 @@
 
 namespace Konsole
 {
-
 class ProfileTest : public QObject
 {
     Q_OBJECT
@@ -27,4 +26,3 @@ private Q_SLOTS:
 }
 
 #endif // PROFILETEST_H
-

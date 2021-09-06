@@ -18,9 +18,9 @@
 
 using Konsole::RenameTabWidget;
 
-RenameTabWidget::RenameTabWidget(QWidget *parent) :
-    QWidget(parent),
-    _ui(nullptr)
+RenameTabWidget::RenameTabWidget(QWidget *parent)
+    : QWidget(parent)
+    , _ui(nullptr)
 {
     _ui = new Ui::RenameTabWidget();
     _ui->setupUi(this);
@@ -36,20 +36,15 @@ RenameTabWidget::RenameTabWidget(QWidget *parent) :
     _ui->tabColorCombo->setColors(listColors);
     _ui->tabColorCombo->setItemText(1, i18nc("@label:listbox No color selected", "None"));
 
-    connect(_ui->tabTitleEdit, &QLineEdit::textChanged, this,
-            &Konsole::RenameTabWidget::tabTitleFormatChanged);
-    connect(_ui->remoteTabTitleEdit, &QLineEdit::textChanged, this,
-            &Konsole::RenameTabWidget::remoteTabTitleFormatChanged);
-    connect(_ui->tabColorCombo, &KColorCombo::activated, this,
-            &Konsole::RenameTabWidget::tabColorChanged);
+    connect(_ui->tabTitleEdit, &QLineEdit::textChanged, this, &Konsole::RenameTabWidget::tabTitleFormatChanged);
+    connect(_ui->remoteTabTitleEdit, &QLineEdit::textChanged, this, &Konsole::RenameTabWidget::remoteTabTitleFormatChanged);
+    connect(_ui->tabColorCombo, &KColorCombo::activated, this, &Konsole::RenameTabWidget::tabColorChanged);
 
     _ui->tabTitleFormatButton->setContext(Session::LocalTabTitle);
-    connect(_ui->tabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected, this,
-            &Konsole::RenameTabWidget::insertTabTitleText);
+    connect(_ui->tabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected, this, &Konsole::RenameTabWidget::insertTabTitleText);
 
     _ui->remoteTabTitleFormatButton->setContext(Session::RemoteTabTitle);
-    connect(_ui->remoteTabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected,
-            this, &Konsole::RenameTabWidget::insertRemoteTabTitleText);
+    connect(_ui->remoteTabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected, this, &Konsole::RenameTabWidget::insertRemoteTabTitleText);
 }
 
 RenameTabWidget::~RenameTabWidget()

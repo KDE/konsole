@@ -7,10 +7,10 @@
 #ifndef DEMO_KONSOLEPART_H
 #define DEMO_KONSOLEPART_H
 
-#include <kde_terminal_interface.h>
 #include <KMainWindow>
 #include <KParts/Part>
 #include <KParts/ReadOnlyPart>
+#include <kde_terminal_interface.h>
 
 class demo_konsolepart : public KMainWindow
 {
@@ -28,12 +28,11 @@ public Q_SLOTS:
 private:
     Q_DISABLE_COPY(demo_konsolepart)
 
-    KParts::ReadOnlyPart* createPart();
+    KParts::ReadOnlyPart *createPart();
 
     KMainWindow *_mainWindow;
     KParts::ReadOnlyPart *_terminalPart;
     TerminalInterface *_terminal;
-
 };
 
 #endif

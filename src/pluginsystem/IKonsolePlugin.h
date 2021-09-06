@@ -8,24 +8,26 @@
 #ifndef IKONSOLEPLUGIN_H
 #define IKONSOLEPLUGIN_H
 
-#include <QList>
 #include <QDockWidget>
+#include <QList>
 #include <QObject>
 
 #include <terminalDisplay/TerminalDisplay.h>
 
-#include <KXMLGUIClient>
-#include <KPluginFactory>
 #include <KExportPlugin>
+#include <KPluginFactory>
+#include <KXMLGUIClient>
 
 #include <memory>
 
 #include "konsole_export.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class MainWindow;
 
-class KONSOLE_EXPORT IKonsolePlugin : public QObject {
+class KONSOLE_EXPORT IKonsolePlugin : public QObject
+{
     Q_OBJECT
 public:
     IKonsolePlugin(QObject *parent, const QVariantList &args);
@@ -40,10 +42,14 @@ public:
     virtual void createWidgetsForMainWindow(Konsole::MainWindow *mainWindow) = 0;
     virtual void activeViewChanged(Konsole::SessionController *controller) = 0;
 
-    virtual QList<QAction*> menuBarActions(Konsole::MainWindow* mainWindow) const { Q_UNUSED(mainWindow); return {}; };
+    virtual QList<QAction *> menuBarActions(Konsole::MainWindow *mainWindow) const
+    {
+        Q_UNUSED(mainWindow);
+        return {};
+    };
 
 protected:
-    void setName(const QString& pluginName);
+    void setName(const QString &pluginName);
 
 private:
     struct Private;

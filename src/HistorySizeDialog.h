@@ -14,11 +14,13 @@
 // Konsole
 #include "Enumeration.h"
 
-namespace Ui {
+namespace Ui
+{
 class HistorySizeDialog;
 }
 
-namespace Konsole {
+namespace Konsole
+{
 class HistorySizeDialog : public QDialog
 {
     Q_OBJECT

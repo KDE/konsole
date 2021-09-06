@@ -11,7 +11,6 @@
 
 namespace Konsole
 {
-
 class TerminalTest : public QObject
 {
     Q_OBJECT
@@ -27,4 +26,3 @@ private:
 }
 
 #endif // TERMINALTEST_H
-

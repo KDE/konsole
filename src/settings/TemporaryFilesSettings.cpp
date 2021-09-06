@@ -12,9 +12,8 @@
 
 using namespace Konsole;
 
-
-
-TemporaryFilesSettings::TemporaryFilesSettings(QWidget* aParent) : QWidget(aParent)
+TemporaryFilesSettings::TemporaryFilesSettings(QWidget *aParent)
+    : QWidget(aParent)
 {
     setupUi(this);
 
@@ -24,18 +23,16 @@ TemporaryFilesSettings::TemporaryFilesSettings(QWidget* aParent) : QWidget(aPare
     // Use "~" instead of full path. It looks nice and helps
     // in cases when home path is really long.
     const QString homePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    if(cachePath.startsWith(homePath)) {
+    if (cachePath.startsWith(homePath)) {
         cachePath.replace(0, homePath.length(), QStringLiteral("~"));
     }
 #endif
 
     // There's no way of doing this with strings placed in .ui file
     kcfg_scrollbackUseSystemLocation->setText(
-            i18nc("@option:radio File location; <filename>%1</filename>: path to directory placeholder",
-                  "System temporary directory (%1)", tempPath));
+        i18nc("@option:radio File location; <filename>%1</filename>: path to directory placeholder", "System temporary directory (%1)", tempPath));
     kcfg_scrollbackUseCacheLocation->setText(
-            i18nc("@option:radio File location; <filename>%1</filename>: path to directory placeholder",
-                  "User cache directory (%1)", cachePath));
+        i18nc("@option:radio File location; <filename>%1</filename>: path to directory placeholder", "User cache directory (%1)", cachePath));
 
     kcfg_scrollbackUseSpecifiedLocationDirectory->setMode(KFile::Directory);
 }

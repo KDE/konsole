@@ -13,7 +13,8 @@
 // Konsole
 #include "konsoleprivate_export.h"
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * A class to parse and extract information about shell commands.
  *

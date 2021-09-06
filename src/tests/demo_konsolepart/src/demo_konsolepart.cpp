@@ -7,15 +7,15 @@
 #include "demo_konsolepart.h"
 
 #include <QApplication>
+#include <QDebug>
 #include <QMenu>
 #include <QMenuBar>
-#include <QDebug>
 
-#include <KPluginLoader>
 #include <KPluginFactory>
+#include <KPluginLoader>
 #include <KService>
-#include <KWindowSystem>
 #include <KWindowEffects>
+#include <KWindowSystem>
 
 #include <kwindowsystem_version.h>
 
@@ -23,10 +23,10 @@
 //#include "../../../WindowSystemInfo.h"
 
 demo_konsolepart::demo_konsolepart()
-    : KMainWindow(),
-      _mainWindow(nullptr),
-      _terminalPart(nullptr),
-      _terminal(nullptr)
+    : KMainWindow()
+    , _mainWindow(nullptr)
+    , _terminalPart(nullptr)
+    , _terminal(nullptr)
 {
     const bool useTranslucency = KWindowSystem::compositingActive();
 
@@ -36,7 +36,7 @@ demo_konsolepart::demo_konsolepart()
     // This is used in EditProfileDialog to show the warnings about
     // transparency issues - needs refactoring as the above
     // include does not work
-//    WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
+    //    WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
 
     // Create terminal part and embed in into the main window
     _terminalPart = createPart();
@@ -44,24 +44,22 @@ demo_konsolepart::demo_konsolepart()
         return;
     }
 
-    QMenu* fileMenu = menuBar()->addMenu(QStringLiteral("File"));
-    QAction* manageProfilesAction = fileMenu->addAction(QStringLiteral("Manage Profiles..."));
+    QMenu *fileMenu = menuBar()->addMenu(QStringLiteral("File"));
+    QAction *manageProfilesAction = fileMenu->addAction(QStringLiteral("Manage Profiles..."));
     connect(manageProfilesAction, &QAction::triggered, this, &demo_konsolepart::manageProfiles);
-    QAction* quitAction = fileMenu->addAction(QStringLiteral("Quit"));
+    QAction *quitAction = fileMenu->addAction(QStringLiteral("Quit"));
     connect(quitAction, &QAction::triggered, this, &demo_konsolepart::quit);
 
     connect(_terminalPart, &KParts::ReadOnlyPart::destroyed, this, &demo_konsolepart::quit);
 
     setCentralWidget(_terminalPart->widget());
-    _terminal = qobject_cast<TerminalInterface*>(_terminalPart);
+    _terminal = qobject_cast<TerminalInterface *>(_terminalPart);
 
     // Test if blur is enabled for profile
     bool blurEnabled;
-    QMetaObject::invokeMethod(_terminalPart, "isBlurEnabled",
-                              Qt::DirectConnection,
-                              Q_RETURN_ARG(bool, blurEnabled));
-    qWarning()<<"blur enabled: "<<blurEnabled;
-#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
+    QMetaObject::invokeMethod(_terminalPart, "isBlurEnabled", Qt::DirectConnection, Q_RETURN_ARG(bool, blurEnabled));
+    qWarning() << "blur enabled: " << blurEnabled;
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5, 82, 0)
     KWindowEffects::enableBlurBehind(winId(), blurEnabled);
 #else
     KWindowEffects::enableBlurBehind(windowHandle(), blurEnabled);
@@ -75,22 +73,21 @@ demo_konsolepart::~demo_konsolepart()
     }
 }
 
-KParts::ReadOnlyPart* demo_konsolepart::createPart()
+KParts::ReadOnlyPart *demo_konsolepart::createPart()
 {
     KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
     Q_ASSERT(service);
-    KPluginFactory* factory = KPluginLoader(service->library()).factory();
+    KPluginFactory *factory = KPluginLoader(service->library()).factory();
     Q_ASSERT(factory);
 
-    auto* terminalPart = factory->create<KParts::ReadOnlyPart>(this);
+    auto *terminalPart = factory->create<KParts::ReadOnlyPart>(this);
 
     return terminalPart;
 }
 
 void demo_konsolepart::manageProfiles()
 {
-    QMetaObject::invokeMethod(_terminalPart, "showManageProfilesDialog",
-        Qt::QueuedConnection, Q_ARG(QWidget*, QApplication::activeWindow()));
+    QMetaObject::invokeMethod(_terminalPart, "showManageProfilesDialog", Qt::QueuedConnection, Q_ARG(QWidget *, QApplication::activeWindow()));
 }
 
 void demo_konsolepart::quit()

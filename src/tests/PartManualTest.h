@@ -9,14 +9,13 @@
 
 #include <QEventLoop>
 
-#include <kde_terminal_interface.h>
 #include <KParts/Part>
+#include <kde_terminal_interface.h>
 
 class QKeyEvent;
 
 namespace Konsole
 {
-
 class PartManualTest : public QObject
 {
     Q_OBJECT
@@ -24,22 +23,21 @@ class PartManualTest : public QObject
 private Q_SLOTS:
     void testShortcutOverride();
 
-// marked as protected so they are not treated as test cases
+    // marked as protected so they are not treated as test cases
 protected Q_SLOTS:
-    void overrideShortcut(QKeyEvent* event, bool& override);
+    void overrideShortcut(QKeyEvent *event, bool &override);
     void shortcutTriggered();
 
 private:
-    KParts::Part* createPart();
+    KParts::Part *createPart();
 
     // variables for testShortcutOverride()
     bool _shortcutTriggered;
     bool _overrideCalled;
     bool _override;
-    QEventLoop* _shortcutEventLoop;
+    QEventLoop *_shortcutEventLoop;
 };
 
 }
 
 #endif // PARTMANUALTEST_H
-

@@ -17,36 +17,33 @@ using namespace Konsole;
 
 void ScreenTest::doLargeScreenCopyVerification(const QString &putToScreen, const QString &expectedSelection)
 {
-  Screen screen(largeScreenLines, largeScreenColumns);
+    Screen screen(largeScreenLines, largeScreenColumns);
 
-  for(const auto &lineCharacter : putToScreen) {
-    screen.displayCharacter(lineCharacter.toLatin1());
-  }
+    for (const auto &lineCharacter : putToScreen) {
+        screen.displayCharacter(lineCharacter.toLatin1());
+    }
 
-  screen.setSelectionStart(0,0, false);
-  screen.setSelectionEnd(largeScreenColumns,0);
-  QCOMPARE(screen.selectedText(Screen::PlainText), expectedSelection);
+    screen.setSelectionStart(0, 0, false);
+    screen.setSelectionEnd(largeScreenColumns, 0);
+    QCOMPARE(screen.selectedText(Screen::PlainText), expectedSelection);
 }
 
 void ScreenTest::testLargeScreenCopyShortLine()
 {
-  const QString putToScreen = QStringLiteral("0123456789abcde");
-  const QString expectedSelection = QStringLiteral("0123456789abcde\n");
-  doLargeScreenCopyVerification(putToScreen, expectedSelection);
+    const QString putToScreen = QStringLiteral("0123456789abcde");
+    const QString expectedSelection = QStringLiteral("0123456789abcde\n");
+    doLargeScreenCopyVerification(putToScreen, expectedSelection);
 }
 
 void ScreenTest::testBlockSelection()
 {
     Screen screen(largeScreenLines, largeScreenColumns);
 
-    const QString reallyBigTextForReflow = QStringLiteral(
-        "abcd efgh ijkl mnop qrst uvxz ABCD EFGH IJKL MNOP QRST UVXZ"
-    );
+    const QString reallyBigTextForReflow = QStringLiteral("abcd efgh ijkl mnop qrst uvxz ABCD EFGH IJKL MNOP QRST UVXZ");
 
-    for(const auto c : reallyBigTextForReflow) {
+    for (const auto c : reallyBigTextForReflow) {
         screen.displayCharacter(c.toLatin1());
     }
-
 
     // this breaks the lines in `abcd efgh `
     // reflowing everything to the lines below.
@@ -72,23 +69,23 @@ void ScreenTest::testBlockSelection()
 
 void ScreenTest::testLargeScreenCopyEmptyLine()
 {
-  const QString putToScreen;
-  const QString expectedSelection = QStringLiteral("\n");
+    const QString putToScreen;
+    const QString expectedSelection = QStringLiteral("\n");
 
-  doLargeScreenCopyVerification(putToScreen, expectedSelection);
+    doLargeScreenCopyVerification(putToScreen, expectedSelection);
 }
 
 void ScreenTest::testLargeScreenCopyLongLine()
 {
-  QString putToScreen;
+    QString putToScreen;
 
-  // Make the line longer than screen size (1300 characters)
-  for(int i = 0; i <130; ++i) {
-    putToScreen.append(QStringLiteral("0123456789"));
-  }
-  const QString expectedSelection = putToScreen.left(1200);
+    // Make the line longer than screen size (1300 characters)
+    for (int i = 0; i < 130; ++i) {
+        putToScreen.append(QStringLiteral("0123456789"));
+    }
+    const QString expectedSelection = putToScreen.left(1200);
 
-  doLargeScreenCopyVerification(putToScreen, expectedSelection);
+    doLargeScreenCopyVerification(putToScreen, expectedSelection);
 }
 
 void ScreenTest::doComparePosition(Screen *screen, int y, int x)
@@ -97,9 +94,9 @@ void ScreenTest::doComparePosition(Screen *screen, int y, int x)
     QCOMPARE(screen->getCursorX(), x);
 }
 
-// Test: setCursorYX, setCursorX, setCursorY, cursorDown, cursorUp, 
+// Test: setCursorYX, setCursorX, setCursorY, cursorDown, cursorUp,
 // cursorRight, cursorLeft, cursorNextLine and cursorPreviousLine
-void ScreenTest::testCursorPosition() 
+void ScreenTest::testCursorPosition()
 {
     Screen *screen = new Screen(largeScreenLines, largeScreenColumns);
 

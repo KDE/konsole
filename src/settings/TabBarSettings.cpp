@@ -9,7 +9,8 @@
 
 using namespace Konsole;
 
-TabBarSettings::TabBarSettings(QWidget* parent) : QWidget(parent)
+TabBarSettings::TabBarSettings(QWidget *parent)
+    : QWidget(parent)
 {
     setupUi(this);
 
@@ -20,14 +21,10 @@ TabBarSettings::TabBarSettings(QWidget* parent) : QWidget(parent)
 
     // Enable CSS file selector only when tabbar is visible and custom css is active
     const auto updateStyleSheetFileEnable = [this](bool) {
-        kcfg_TabBarUserStyleSheetFile->setEnabled(kcfg_TabBarUseUserStyleSheet->isChecked()
-                                                  && !AlwaysHideTabBar->isChecked());
+        kcfg_TabBarUserStyleSheetFile->setEnabled(kcfg_TabBarUseUserStyleSheet->isChecked() && !AlwaysHideTabBar->isChecked());
     };
-    connect(kcfg_TabBarUseUserStyleSheet, &QAbstractButton::toggled,
-            this, updateStyleSheetFileEnable);
-    connect(AlwaysHideTabBar, &QAbstractButton::toggled,
-            this, updateStyleSheetFileEnable);
+    connect(kcfg_TabBarUseUserStyleSheet, &QAbstractButton::toggled, this, updateStyleSheetFileEnable);
+    connect(AlwaysHideTabBar, &QAbstractButton::toggled, this, updateStyleSheetFileEnable);
 }
 
 TabBarSettings::~TabBarSettings() = default;
-

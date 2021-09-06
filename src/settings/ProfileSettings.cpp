@@ -9,23 +9,23 @@
 
 // Qt
 #include <QFileInfo>
-#include <QStandardPaths>
-#include <QStandardItem>
 #include <QKeyEvent>
+#include <QStandardItem>
+#include <QStandardPaths>
 
 // Konsole
+#include "delegates/ProfileShortcutDelegate.h"
 #include "profile/ProfileManager.h"
 #include "profile/ProfileModel.h"
 #include "session/Session.h"
-#include "widgets/EditProfileDialog.h"
-#include "terminalDisplay/TerminalDisplay.h"
-#include "session/SessionManager.h"
 #include "session/SessionController.h"
-#include "delegates/ProfileShortcutDelegate.h"
+#include "session/SessionManager.h"
+#include "terminalDisplay/TerminalDisplay.h"
+#include "widgets/EditProfileDialog.h"
 
 using namespace Konsole;
 
-ProfileSettings::ProfileSettings(QWidget* parent)
+ProfileSettings::ProfileSettings(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
@@ -173,17 +173,13 @@ void ProfileSettings::editSelected()
 
 Profile::Ptr ProfileSettings::currentProfile() const
 {
-    QItemSelectionModel* selection = profilesList->selectionModel();
+    QItemSelectionModel *selection = profilesList->selectionModel();
 
     if ((selection == nullptr) || !selection->hasSelection()) {
         return Profile::Ptr();
     }
 
-    return selection
-        ->selectedIndexes()
-        .at(ProfileModel::PROFILE)
-        .data(ProfileModel::ProfilePtrRole)
-        .value<Profile::Ptr>();
+    return selection->selectedIndexes().at(ProfileModel::PROFILE).data(ProfileModel::ProfilePtrRole).value<Profile::Ptr>();
 }
 
 bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
@@ -193,14 +189,12 @@ bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
     }
 
     const QFileInfo fileInfo(profile->path());
-    return fileInfo.exists()
-        && QFileInfo(fileInfo.path()).isWritable(); // To delete a file, parent dir must be writable
+    return fileInfo.exists() && QFileInfo(fileInfo.path()).isWritable(); // To delete a file, parent dir must be writable
 }
 
 bool ProfileSettings::isProfileWritable(Profile::Ptr profile) const
 {
-    return profile
-        && !profile->isFallback() // Default/fallback profile is hardcoded
+    return profile && !profile->isFallback() // Default/fallback profile is hardcoded
         && QFileInfo(profile->path()).isWritable();
 }
 

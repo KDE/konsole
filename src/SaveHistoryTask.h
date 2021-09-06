@@ -14,7 +14,6 @@
 
 namespace Konsole
 {
-
 class TerminalCharacterDecoder;
 
 /**
@@ -44,15 +43,15 @@ private Q_SLOTS:
 
 private:
     class SaveJob // structure to keep information needed to process
-        // incoming data requests from jobs
+                  // incoming data requests from jobs
     {
     public:
-	QPointer<Session> session; // the session associated with a history save job
-	int lastLineFetched; // the last line processed in the previous data request
-	// set this to -1 at the start of the save job
+        QPointer<Session> session; // the session associated with a history save job
+        int lastLineFetched; // the last line processed in the previous data request
+        // set this to -1 at the start of the save job
 
-	TerminalCharacterDecoder *decoder;  // decoder used to convert terminal characters
-	// into output
+        TerminalCharacterDecoder *decoder; // decoder used to convert terminal characters
+        // into output
     };
 
     QHash<KJob *, SaveJob> _jobSession;

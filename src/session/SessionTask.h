@@ -8,14 +8,14 @@
 #ifndef SESSIONTASK_H
 #define SESSIONTASK_H
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QPointer>
 
 #include "Session.h"
 
-namespace Konsole {
-
+namespace Konsole
+{
 /**
  * Abstract class representing a task which can be performed on a group of sessions.
  *
@@ -63,11 +63,11 @@ Q_SIGNALS:
 
 protected:
     /** Returns a list of sessions in the group */
-    QList< QPointer<Session> > sessions() const;
+    QList<QPointer<Session>> sessions() const;
 
 private:
     bool _autoDelete;
-    QList< QPointer<Session> > _sessions;
+    QList<QPointer<Session>> _sessions;
 };
 
 }

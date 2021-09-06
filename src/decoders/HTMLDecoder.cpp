@@ -14,8 +14,8 @@
 #include <ExtendedCharTable.h>
 
 // Qt
-#include <QTextStream>
 #include <QFont>
+#include <QTextStream>
 
 using namespace Konsole;
 
@@ -48,10 +48,9 @@ HTMLDecoder::HTMLDecoder(const QString &colorSchemeName, const QFont &profileFon
     }
 }
 
-void HTMLDecoder::begin(QTextStream* output)
+void HTMLDecoder::begin(QTextStream *output)
 {
     _output = output;
-
 
     if (_validProfile) {
         QString style;
@@ -64,7 +63,6 @@ void HTMLDecoder::begin(QTextStream* output)
         } else {
             style.append(QStringLiteral("font-size:%1px;").arg(_profileFont.pixelSize()));
         }
-
 
         style.append(QStringLiteral("color:%1;").arg(_colorTable[DEFAULT_FORE_COLOR].name()));
         style.append(QStringLiteral("background-color:%1;").arg(_colorTable[DEFAULT_BACK_COLOR].name()));
@@ -92,8 +90,8 @@ void HTMLDecoder::end()
     _output = nullptr;
 }
 
-//TODO: Support for LineProperty (mainly double width , double height)
-void HTMLDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/)
+// TODO: Support for LineProperty (mainly double width , double height)
+void HTMLDecoder::decodeLine(const Character *const characters, int count, LineProperty /*properties*/)
 {
     Q_ASSERT(_output);
 
@@ -102,10 +100,8 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
     int spaceCount = 0;
 
     for (int i = 0; i < count; i++) {
-        //check if appearance of character is different from previous char
-        if (characters[i].rendition != _lastRendition  ||
-                characters[i].foregroundColor != _lastForeColor  ||
-                characters[i].backgroundColor != _lastBackColor) {
+        // check if appearance of character is different from previous char
+        if (characters[i].rendition != _lastRendition || characters[i].foregroundColor != _lastForeColor || characters[i].backgroundColor != _lastBackColor) {
             if (_innerSpanOpen) {
                 closeSpan(text);
                 _innerSpanOpen = false;
@@ -115,7 +111,7 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             _lastForeColor = characters[i].foregroundColor;
             _lastBackColor = characters[i].backgroundColor;
 
-            //build up style string
+            // build up style string
             QString style;
 
             bool useBold = (_lastRendition & RE_BOLD) != 0;
@@ -131,28 +127,28 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 
             style.append(QStringLiteral("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
 
-            //open the span with the current style
+            // open the span with the current style
             openSpan(text, style);
             _innerSpanOpen = true;
         }
 
-        //handle whitespace
+        // handle whitespace
         if (characters[i].isSpace()) {
             spaceCount++;
         } else {
             spaceCount = 0;
         }
 
-        //output current character
+        // output current character
         if (spaceCount < 2) {
             if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
                 ushort extendedCharLength = 0;
-                const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
+                const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
                 if (chars != nullptr) {
                     text.append(QString::fromUcs4(chars, extendedCharLength));
                 }
             } else {
-                //escape HTML tag characters and just display others as they are
+                // escape HTML tag characters and just display others as they are
                 const QChar ch = characters[i].character;
                 if (ch == QLatin1Char('<')) {
                     text.append(QLatin1String("&lt;"));
@@ -171,24 +167,24 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         }
     }
 
-    //close any remaining open inner spans
+    // close any remaining open inner spans
     if (_innerSpanOpen) {
         closeSpan(text);
         _innerSpanOpen = false;
     }
 
-    //start new line
+    // start new line
     text.append(QLatin1String("<br>"));
 
     *_output << text;
 }
 
-void HTMLDecoder::openSpan(QString& text , const QString& style)
+void HTMLDecoder::openSpan(QString &text, const QString &style)
 {
     text.append(QStringLiteral("<span style=\"%1\">").arg(style));
 }
 
-void HTMLDecoder::closeSpan(QString& text)
+void HTMLDecoder::closeSpan(QString &text)
 {
     text.append(QLatin1String("</span>"));
 }

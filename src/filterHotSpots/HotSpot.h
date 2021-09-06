@@ -11,8 +11,8 @@
 #include <QObject>
 
 #include <QList>
-#include <QRegion>
 #include <QRect>
+#include <QRegion>
 #include <QSharedPointer>
 
 class QAction;
@@ -20,21 +20,22 @@ class QMenu;
 class QMouseEvent;
 class QKeyEvent;
 
-namespace Konsole {
+namespace Konsole
+{
 class TerminalDisplay;
 
 /**
-* Represents an area of text which matched the pattern a particular filter has been looking for.
-*
-* Each hotspot has a type identifier associated with it ( such as a link or a highlighted section ),
-* and an action.  When the user performs some activity such as a mouse-click in a hotspot area ( the exact
-* action will depend on what is displaying the block of text which the filter is processing ), the hotspot's
-* activate() method should be called.  Depending on the type of hotspot this will trigger a suitable response.
-*
-* For example, if a hotspot represents a URL then a suitable action would be opening that URL in a web browser.
-* Hotspots may have more than one action, in which case the list of actions can be obtained using the
-* actions() method.  These actions may then be displayed in a popup menu or toolbar for example.
-*/
+ * Represents an area of text which matched the pattern a particular filter has been looking for.
+ *
+ * Each hotspot has a type identifier associated with it ( such as a link or a highlighted section ),
+ * and an action.  When the user performs some activity such as a mouse-click in a hotspot area ( the exact
+ * action will depend on what is displaying the block of text which the filter is processing ), the hotspot's
+ * activate() method should be called.  Depending on the type of hotspot this will trigger a suitable response.
+ *
+ * For example, if a hotspot represents a URL then a suitable action would be opening that URL in a web browser.
+ * Hotspots may have more than one action, in which case the list of actions can be obtained using the
+ * actions() method.  These actions may then be displayed in a popup menu or toolbar for example.
+ */
 class HotSpot : public QObject
 {
     // krazy suggest using Q_OBJECT here but moc can not handle
@@ -43,9 +44,9 @@ class HotSpot : public QObject
 
 public:
     /**
-        * Constructs a new hotspot which covers the area from (@p startLine,@p startColumn) to (@p endLine,@p endColumn)
-        * in a block of text.
-        */
+     * Constructs a new hotspot which covers the area from (@p startLine,@p startColumn) to (@p endLine,@p endColumn)
+     * in a block of text.
+     */
     HotSpot(int startLine, int startColumn, int endLine, int endColumn);
     virtual ~HotSpot();
 
@@ -73,23 +74,23 @@ public:
     /** Returns the column on endLine() where the hotspot area ends */
     int endColumn() const;
     /**
-        * Returns the type of the hotspot.  This is usually used as a hint for views on how to represent
-        * the hotspot graphically.  eg.  Link hotspots are typically underlined when the user mouses over them
-        */
+     * Returns the type of the hotspot.  This is usually used as a hint for views on how to represent
+     * the hotspot graphically.  eg.  Link hotspots are typically underlined when the user mouses over them
+     */
     Type type() const;
     /**
-        * Causes the action associated with a hotspot to be triggered.
-        *
-        * @param object The object which caused the hotspot to be triggered.  This is
-        * typically null ( in which case the default action should be performed ) or
-        * one of the objects from the actions() list.  In which case the associated
-        * action should be performed.
-        */
+     * Causes the action associated with a hotspot to be triggered.
+     *
+     * @param object The object which caused the hotspot to be triggered.  This is
+     * typically null ( in which case the default action should be performed ) or
+     * one of the objects from the actions() list.  In which case the associated
+     * action should be performed.
+     */
     virtual void activate(QObject *object = nullptr) = 0;
     /**
-        * Returns a list of actions associated with the hotspot which can be used in a
-        * menu or toolbar
-        */
+     * Returns a list of actions associated with the hotspot which can be used in a
+     * menu or toolbar
+     */
     virtual QList<QAction *> actions();
 
     virtual bool hasDragOperation() const;
@@ -113,7 +114,7 @@ public:
      * Type enum), otherwise returns false; mainly used in the input events, e.g. to not
      * change the shape of the mouse pointer to a pointing hand if the HotSpot doesn't
      * represent a clickable URI.
-    */
+     */
     bool isUrl();
 
     /** The base implementation does nothing */
@@ -122,20 +123,20 @@ public:
     /**
      * The mouse pointer shape is changed to a pointing hand; also because the underline
      * is painted under the link, update() is called on the TerminalDisplay widget.
-    */
+     */
     virtual void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev);
 
     /**
      * The mouse pointer is reset to the default shape, see TerminalDisplay::resetCursor();
      * also because the underline is hidden from under the link, update() is called on the
      * TerminalDisplay widget.
-    */
+     */
     virtual void mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev);
 
     /**
      * If the Ctrl key is pressed or TerminalDisplay::openLinksByDirectClick() is
      * true, the activate() method is called to handle/open the link, see activate().
-    */
+     */
     virtual void mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev);
 
     /**
@@ -143,7 +144,7 @@ public:
      *
      * Note that if TerminalDisplay::openLinksByDirectClick() is true the mouse pointer shape is always
      * changed to a pointing hand when hovering over a link, regardless of the state of the Ctrl key.
-    */
+     */
     virtual void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev);
 
     /**
@@ -152,7 +153,7 @@ public:
      *
      * Note that if TerminalDisplay::openLinksByDirectClick() is true the mouse pointer shape is always
      * changed to a pointing hand when hovering over a link, regardless of the state of the Ctrl key.
-    */
+     */
     virtual void keyReleaseEvent(TerminalDisplay *, QKeyEvent *ev);
 
     void debug();

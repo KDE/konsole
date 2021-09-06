@@ -11,7 +11,6 @@
 
 namespace Konsole
 {
-
 class SessionTest : public QObject
 {
     Q_OBJECT
@@ -26,4 +25,3 @@ private:
 }
 
 #endif // SESSIONTEST_H
-

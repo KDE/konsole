@@ -13,22 +13,21 @@
 using namespace Konsole;
 
 ShortcutItemDelegate::ShortcutItemDelegate(QObject *parent)
-    : QStyledItemDelegate(parent),
-    _modifiedEditors(QSet<QWidget*>()),
-    _itemsBeingEdited(QSet<QModelIndex>())
+    : QStyledItemDelegate(parent)
+    , _modifiedEditors(QSet<QWidget *>())
+    , _itemsBeingEdited(QSet<QModelIndex>())
 {
 }
 
 void ShortcutItemDelegate::editorModified()
 {
-    auto *editor = qobject_cast<FilteredKeySequenceEdit*>(sender());
+    auto *editor = qobject_cast<FilteredKeySequenceEdit *>(sender());
     Q_ASSERT(editor);
     _modifiedEditors.insert(editor);
     Q_EMIT commitData(editor);
     Q_EMIT closeEditor(editor);
 }
-void ShortcutItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
-                                        const QModelIndex &index) const
+void ShortcutItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     _itemsBeingEdited.remove(index);
 
@@ -42,7 +41,7 @@ void ShortcutItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *mod
     _modifiedEditors.remove(editor);
 }
 
-QWidget* ShortcutItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem&, const QModelIndex &index) const
+QWidget *ShortcutItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &, const QModelIndex &index) const
 {
     _itemsBeingEdited.insert(index);
 
@@ -56,8 +55,7 @@ QWidget* ShortcutItemDelegate::createEditor(QWidget *parent, const QStyleOptionV
 
     return editor;
 }
-void ShortcutItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
-                                 const QModelIndex &index) const
+void ShortcutItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (_itemsBeingEdited.contains(index)) {
         StyledBackgroundPainter::drawBackground(painter, option, index);
@@ -72,8 +70,7 @@ QSize ShortcutItemDelegate::sizeHint(const QStyleOptionViewItem &option, const Q
     const auto fm = option.fontMetrics;
 
     static const int editorMargins = 16; // chosen empirically
-    const int width = fm.boundingRect(shortcutString + QStringLiteral(", ...")).width()
-                      + editorMargins;
+    const int width = fm.boundingRect(shortcutString + QStringLiteral(", ...")).width() + editorMargins;
 
     return {width, QStyledItemDelegate::sizeHint(option, index).height()};
 }
@@ -85,11 +82,10 @@ void ShortcutItemDelegate::destroyEditor(QWidget *editor, const QModelIndex &ind
     editor->deleteLater();
 }
 
-
 void FilteredKeySequenceEdit::keyPressEvent(QKeyEvent *event)
 {
-    if(event->modifiers() == Qt::NoModifier) {
-        switch(event->key()) {
+    if (event->modifiers() == Qt::NoModifier) {
+        switch (event->key()) {
         case Qt::Key_Enter:
         case Qt::Key_Return:
             Q_EMIT editingFinished();
@@ -108,14 +104,12 @@ void FilteredKeySequenceEdit::keyPressEvent(QKeyEvent *event)
     QKeySequenceEdit::keyPressEvent(event);
 }
 
-void StyledBackgroundPainter::drawBackground(QPainter *painter, const QStyleOptionViewItem &option,
-        const QModelIndex&)
+void StyledBackgroundPainter::drawBackground(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &)
 {
-    const auto* opt = qstyleoption_cast<const QStyleOptionViewItem*>(&option);
-    const QWidget* widget = opt != nullptr ? opt->widget : nullptr;
+    const auto *opt = qstyleoption_cast<const QStyleOptionViewItem *>(&option);
+    const QWidget *widget = opt != nullptr ? opt->widget : nullptr;
 
-    QStyle* style = widget != nullptr ? widget->style() : QApplication::style();
+    QStyle *style = widget != nullptr ? widget->style() : QApplication::style();
 
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
 }
-

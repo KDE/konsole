@@ -10,9 +10,9 @@
 #define HIGHLIGHTSCROLLEDLINES_HPP
 
 // Qt
-#include <QWidget>
 #include <QRect>
 #include <QTimer>
+#include <QWidget>
 
 // Konsole
 #include "Enumeration.h"
@@ -22,12 +22,12 @@ namespace Konsole
 {
 class TerminalScrollBar;
 /**
- * Control the highlight the lines that are coming into view. 
- * A thin blue line on the left of the terminal that highlight 
- * the new lines in the following situations: 
- * - scrolling with the mouse 
- * - using the scroll bar 
- * - using the keyboard to move up/down 
+ * Control the highlight the lines that are coming into view.
+ * A thin blue line on the left of the terminal that highlight
+ * the new lines in the following situations:
+ * - scrolling with the mouse
+ * - using the scroll bar
+ * - using the keyboard to move up/down
  * - new lines resulting from the output of a command
  */
 class HighlightScrolledLines

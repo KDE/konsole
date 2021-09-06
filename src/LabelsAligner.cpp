@@ -9,8 +9,8 @@
 #include "LabelsAligner.h"
 
 // Qt
-#include <QWidget>
 #include <QGridLayout>
+#include <QWidget>
 
 using namespace Konsole;
 
@@ -24,7 +24,6 @@ void LabelsAligner::addLayout(QGridLayout *layout)
     _layouts.append(layout);
 }
 
-
 void LabelsAligner::addLayouts(const QVector<QGridLayout *> &layouts)
 {
     _layouts.append(layouts);
@@ -37,7 +36,7 @@ void LabelsAligner::setReferenceWidget(QWidget *refWidget)
 
 void LabelsAligner::updateLayouts()
 {
-    for (const auto *layout: qAsConst(_layouts)) {
+    for (const auto *layout : qAsConst(_layouts)) {
         QWidget *widget = layout->parentWidget();
         Q_ASSERT(widget);
         do {
@@ -60,7 +59,7 @@ void LabelsAligner::align()
     }
 
     int maxRight = 0;
-    for (const auto *layout: qAsConst(_layouts)) {
+    for (const auto *layout : qAsConst(_layouts)) {
         int left = getLeftMargin(layout);
         for (int row = 0; row < layout->rowCount(); ++row) {
             QLayoutItem *layoutItem = layout->itemAtPosition(row, LABELS_COLUMN);
@@ -85,7 +84,7 @@ void LabelsAligner::align()
         }
     }
 
-    for (auto *l: qAsConst(_layouts)) {
+    for (auto *l : qAsConst(_layouts)) {
         int left = getLeftMargin(l);
         l->setColumnMinimumWidth(LABELS_COLUMN, maxRight - left);
     }

@@ -17,7 +17,8 @@
 
 #include "konsole_export.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class MainWindow;
 class Session;
 class Profile;
@@ -40,8 +41,7 @@ class KONSOLE_EXPORT Application : public QObject
 
 public:
     /** Constructs a new Konsole application. */
-    explicit Application(QSharedPointer<QCommandLineParser> parser,
-                         const QStringList &customCommand);
+    explicit Application(QSharedPointer<QCommandLineParser> parser, const QStringList &customCommand);
 
     static void populateCommandLineParser(QCommandLineParser *parser);
     static QStringList getCustomCommand(QStringList &args);
@@ -60,7 +60,7 @@ public:
 
 private Q_SLOTS:
     void createWindow(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory);
-    void detachTerminals(ViewSplitter *splitter, const QHash<TerminalDisplay*, Session*>& sessionsMap);
+    void detachTerminals(ViewSplitter *splitter, const QHash<TerminalDisplay *, Session *> &sessionsMap);
 
     void toggleBackgroundInstance();
 
@@ -84,7 +84,6 @@ private:
     QSharedPointer<QCommandLineParser> m_parser;
     QStringList m_customCommand;
     PluginManager m_pluginManager;
-
 };
 }
-#endif  // APPLICATION_H
+#endif // APPLICATION_H

@@ -19,13 +19,16 @@ class QDragEnterEvent;
 class QDropEvent;
 class QDragLeaveEvent;
 
-namespace Konsole {
+namespace Konsole
+{
 class TerminalDisplay;
 
-class ViewSplitterHandle : public QSplitterHandle {
+class ViewSplitterHandle : public QSplitterHandle
+{
     Q_OBJECT
 public:
     ViewSplitterHandle(Qt::Orientation orientation, QSplitter *parent);
+
 protected:
     void mousePressEvent(QMouseEvent *ev) override;
     void mouseReleaseEvent(QMouseEvent *ev) override;
@@ -51,7 +54,7 @@ class KONSOLEPRIVATE_EXPORT ViewSplitter : public QSplitter
 public:
     explicit ViewSplitter(QWidget *parent = nullptr);
 
-    enum class AddBehavior {AddBefore, AddAfter};
+    enum class AddBehavior { AddBefore, AddAfter, };
     /**
      * Locates the child ViewSplitter widget which currently has the focus
      * and inserts the container into it.
@@ -69,7 +72,7 @@ public:
      * @param behavior Specifies whether to add new terminal after current
      *                 tab or at end.
      */
-    void addTerminalDisplay(TerminalDisplay* terminalDisplay, Qt::Orientation containerOrientation, AddBehavior behavior = AddBehavior::AddAfter);
+    void addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation, AddBehavior behavior = AddBehavior::AddAfter);
 
     /** Returns the child ViewSplitter widget which currently has the focus */
     ViewSplitter *activeSplitter();
@@ -114,17 +117,21 @@ public:
 
     void handleFocusDirection(Qt::Orientation orientation, int direction);
 
-    void childEvent(QChildEvent* event) override;
-    bool terminalMaximized() const { return m_terminalMaximized; }
+    void childEvent(QChildEvent *event) override;
+    bool terminalMaximized() const
+    {
+        return m_terminalMaximized;
+    }
 
     QSplitterHandle *createHandle() override;
 
-    QPoint mapToTopLevel(const QPoint& p);
-    QPoint mapFromTopLevel(const QPoint& p);
+    QPoint mapToTopLevel(const QPoint &p);
+    QPoint mapFromTopLevel(const QPoint &p);
+
 protected:
     void dragEnterEvent(QDragEnterEvent *ev) override;
     void dragMoveEvent(QDragMoveEvent *ev) override;
-    void dragLeaveEvent(QDragLeaveEvent * event) override;
+    void dragLeaveEvent(QDragLeaveEvent *event) override;
     void dropEvent(QDropEvent *ev) override;
     void showEvent(QShowEvent *) override;
 
@@ -149,4 +156,4 @@ private:
     static Qt::Orientation m_topLevelHandlerDrawnOrientation;
 };
 }
-#endif //VIEWSPLITTER_H
+#endif // VIEWSPLITTER_H

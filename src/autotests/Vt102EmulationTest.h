@@ -13,7 +13,6 @@
 
 namespace Konsole
 {
-
 class TestEmulation;
 
 class Vt102EmulationTest : public QObject
@@ -26,22 +25,19 @@ private Q_SLOTS:
     void testParse();
 
 private:
-    static void sendAndCompare(TestEmulation *em,
-            const char *input, size_t inputLen,
-            const QString &expectedPrint,
-            const QByteArray &expectedSent
-        );
+    static void sendAndCompare(TestEmulation *em, const char *input, size_t inputLen, const QString &expectedPrint, const QByteArray &expectedSent);
 };
 
-struct TestEmulation : public Vt102Emulation
-{
+struct TestEmulation : public Vt102Emulation {
     Q_OBJECT
     // Give us access to protected functions
     friend class Vt102EmulationTest;
 
     QByteArray lastSent;
+
 public:
-    void sendString(const QByteArray &string) override {
+    void sendString(const QByteArray &string) override
+    {
         lastSent = string;
         Vt102Emulation::sendString(string);
     }
@@ -50,4 +46,3 @@ public:
 }
 
 #endif // VT102EMULATIONTEST_H
-

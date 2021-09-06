@@ -9,7 +9,8 @@
 
 #include <qnamespace.h>
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * Platform-specific main shortcut "opcode":
  */
@@ -21,9 +22,9 @@ enum Modifier {
 #else
     ACCEL = Qt::CTRL,
     LEFT = Qt::Key_Left,
-    RIGHT = Qt::Key_Right
+    RIGHT = Qt::Key_Right,
 #endif
 };
 }
 
-#endif //SHORTCUT_H
+#endif // SHORTCUT_H

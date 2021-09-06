@@ -8,16 +8,16 @@
 #include "PartTest.h"
 
 // Qt
-#include <QLabel>
-#include <QVBoxLayout>
-#include <QFileInfo>
-#include <QTimer>
 #include <QDialog>
+#include <QFileInfo>
+#include <QLabel>
+#include <QTimer>
+#include <QVBoxLayout>
 // KDE
-#include <KPluginLoader>
 #include <KPluginFactory>
-#include <KPtyProcess>
+#include <KPluginLoader>
 #include <KPtyDevice>
+#include <KPtyProcess>
 #include <qtest.h>
 
 // Konsole
@@ -92,13 +92,11 @@ void PartTest::testFd(bool runShell)
     // to run without shell
     if (runShell) {
         // connect to an existing pty
-        bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype",
-                                                Qt::DirectConnection, Q_ARG(int, fd));
+        bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype", Qt::DirectConnection, Q_ARG(int, fd));
         QVERIFY(result);
     } else {
         // test the optional 2nd argument of openTeletype, to run without shell
-        bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype",
-                                                Qt::DirectConnection, Q_ARG(int, fd), Q_ARG(bool, false));
+        bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype", Qt::DirectConnection, Q_ARG(int, fd), Q_ARG(bool, false));
         QVERIFY(result);
     }
 
@@ -109,9 +107,8 @@ void PartTest::testFd(bool runShell)
 
     QPointer<QDialog> dialog = new QDialog();
     auto layout = new QVBoxLayout(dialog.data());
-    auto explanation = runShell
-        ? QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")
-        : QStringLiteral("Output of 'ping localhost' should appear standalone below for 5 seconds");
+    auto explanation = runShell ? QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")
+                                : QStringLiteral("Output of 'ping localhost' should appear standalone below for 5 seconds");
     layout->addWidget(new QLabel(explanation));
     layout->addWidget(terminalPart->widget());
     QTimer::singleShot(5000, dialog.data(), &QDialog::close);
@@ -131,7 +128,7 @@ KParts::Part *PartTest::createPart()
     }
 
     KPluginFactory *factory = KPluginLoader(konsolePartPlugin).factory();
-    if (factory == nullptr) {       // not found
+    if (factory == nullptr) { // not found
         return nullptr;
     }
 

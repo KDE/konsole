@@ -7,20 +7,20 @@
 
 #include "sshmanagerplugin.h"
 
-#include "sshmanagerpluginwidget.h"
 #include "sshmanagermodel.h"
+#include "sshmanagerpluginwidget.h"
 
-#include "session/SessionController.h"
 #include "konsoledebug.h"
+#include "session/SessionController.h"
 
-#include <QMainWindow>
 #include <QDockWidget>
 #include <QListView>
-#include <QTimer>
+#include <QMainWindow>
 #include <QMenuBar>
+#include <QTimer>
 
-#include <KLocalizedString>
 #include <KActionCollection>
+#include <KLocalizedString>
 
 #include "MainWindow.h"
 
@@ -29,13 +29,13 @@ K_PLUGIN_CLASS_WITH_JSON(SSHManagerPlugin, "konsole_sshmanager.json")
 struct SSHManagerPluginPrivate {
     SSHManagerModel model;
 
-    QMap<Konsole::MainWindow*, SSHManagerTreeWidget *> widgetForWindow;
-    QMap<Konsole::MainWindow*, QDockWidget *> dockForWindow;
+    QMap<Konsole::MainWindow *, SSHManagerTreeWidget *> widgetForWindow;
+    QMap<Konsole::MainWindow *, QDockWidget *> dockForWindow;
 };
 
 SSHManagerPlugin::SSHManagerPlugin(QObject *object, const QVariantList &args)
-: Konsole::IKonsolePlugin(object, args)
-, d(std::make_unique<SSHManagerPluginPrivate>())
+    : Konsole::IKonsolePlugin(object, args)
+    , d(std::make_unique<SSHManagerPluginPrivate>())
 {
     setName(QStringLiteral("SshManager"));
 }
@@ -57,22 +57,20 @@ void SSHManagerPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindo
     d->widgetForWindow[mainWindow] = managerWidget;
     d->dockForWindow[mainWindow] = sshDockWidget;
 
-    connect(managerWidget, &SSHManagerTreeWidget::requestNewTab, this, [mainWindow]{
+    connect(managerWidget, &SSHManagerTreeWidget::requestNewTab, this, [mainWindow] {
         mainWindow->newTab();
     });
 }
 
-QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow* mainWindow) const
+QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow *mainWindow) const
 {
     Q_UNUSED(mainWindow);
 
     QAction *toggleVisibilityAction = new QAction(i18n("Show SSH Manager"), mainWindow);
     toggleVisibilityAction->setCheckable(true);
 
-    connect(toggleVisibilityAction, &QAction::triggered,
-            d->dockForWindow[mainWindow], &QDockWidget::setVisible);
-    connect(d->dockForWindow[mainWindow], &QDockWidget::visibilityChanged,
-            toggleVisibilityAction, &QAction::setChecked);
+    connect(toggleVisibilityAction, &QAction::triggered, d->dockForWindow[mainWindow], &QDockWidget::setVisible);
+    connect(d->dockForWindow[mainWindow], &QDockWidget::visibilityChanged, toggleVisibilityAction, &QAction::setChecked);
 
     return {toggleVisibilityAction};
 }
@@ -94,14 +92,16 @@ void SSHManagerPlugin::activeViewChangedInternal(QPointer<Konsole::SessionContro
         return;
     }
 
-    auto mainWindow = qobject_cast<Konsole::MainWindow*>(controller->view()->topLevelWidget());
+    auto mainWindow = qobject_cast<Konsole::MainWindow *>(controller->view()->topLevelWidget());
 
     // HACK: if we don't get a mainwindow here this *might* be just opening, call it again
     // later on.
     // We really shouldn't use an arbitrary time delay, and we need to use a
     // QPointer in case it gets deleted while the timer is running.
     if (!mainWindow) {
-        QTimer::singleShot(500, this, [this, controller]{ activeViewChangedInternal(controller); });
+        QTimer::singleShot(500, this, [this, controller] {
+            activeViewChangedInternal(controller);
+        });
         return;
     }
 

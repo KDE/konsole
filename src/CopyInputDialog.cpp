@@ -11,8 +11,8 @@
 #include <QSortFilterProxyModel>
 
 // Konsole
-#include "ui_CopyInputDialog.h"
 #include "CheckableSessionModel.h"
+#include "ui_CopyInputDialog.h"
 
 #include <KLocalizedString>
 #include <QDialogButtonBox>
@@ -21,14 +21,14 @@
 
 using namespace Konsole;
 
-CopyInputDialog::CopyInputDialog(QWidget *parent) :
-    QDialog(parent)
+CopyInputDialog::CopyInputDialog(QWidget *parent)
+    : QDialog(parent)
     , _ui(nullptr)
     , _model(nullptr)
     , _masterSession(nullptr)
 {
     setWindowTitle(i18n("Copy Input"));
-    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     auto mainWidget = new QWidget(this);
     auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
@@ -44,10 +44,8 @@ CopyInputDialog::CopyInputDialog(QWidget *parent) :
     _ui = new Ui::CopyInputDialog();
     _ui->setupUi(mainWidget);
 
-    connect(_ui->selectAllButton, &QPushButton::clicked, this,
-            &Konsole::CopyInputDialog::selectAll);
-    connect(_ui->deselectAllButton, &QPushButton::clicked, this,
-            &Konsole::CopyInputDialog::deselectAll);
+    connect(_ui->selectAllButton, &QPushButton::clicked, this, &Konsole::CopyInputDialog::selectAll);
+    connect(_ui->deselectAllButton, &QPushButton::clicked, this, &Konsole::CopyInputDialog::deselectAll);
 
     _ui->filterEdit->setClearButtonEnabled(true);
     _ui->filterEdit->setFocus();
@@ -62,8 +60,7 @@ CopyInputDialog::CopyInputDialog(QWidget *parent) :
     filterProxyModel->setSourceModel(_model);
     filterProxyModel->setFilterKeyColumn(-1);
 
-    connect(_ui->filterEdit, &QLineEdit::textChanged, filterProxyModel,
-            &QSortFilterProxyModel::setFilterFixedString);
+    connect(_ui->filterEdit, &QLineEdit::textChanged, filterProxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
     _ui->sessionList->setModel(filterProxyModel);
     _ui->sessionList->setColumnHidden(0, true); // Hide number column
@@ -126,5 +123,5 @@ void CopyInputDialog::setRowChecked(int row, bool checked)
 {
     QAbstractItemModel *model = _ui->sessionList->model();
     QModelIndex index = model->index(row, _model->checkColumn());
-    model->setData(index, static_cast<int>( checked ? Qt::Checked : Qt::Unchecked), Qt::CheckStateRole);
+    model->setData(index, static_cast<int>(checked ? Qt::Checked : Qt::Unchecked), Qt::CheckStateRole);
 }

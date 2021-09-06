@@ -11,17 +11,17 @@
 
 using namespace Konsole;
 
-ScreenWindow::ScreenWindow(Screen *screen, QObject *parent) :
-    QObject(parent),
-    _screen(nullptr),
-    _windowBuffer(nullptr),
-    _windowBufferSize(0),
-    _bufferNeedsUpdate(true),
-    _windowLines(1),
-    _currentLine(0),
-    _currentResultLine(-1),
-    _trackOutput(true),
-    _scrollCount(0)
+ScreenWindow::ScreenWindow(Screen *screen, QObject *parent)
+    : QObject(parent)
+    , _screen(nullptr)
+    , _windowBuffer(nullptr)
+    , _windowBufferSize(0)
+    , _bufferNeedsUpdate(true)
+    , _windowLines(1)
+    , _currentLine(0)
+    , _currentResultLine(-1)
+    , _trackOutput(true)
+    , _scrollCount(0)
 {
     setScreen(screen);
 }
@@ -63,8 +63,7 @@ Character *ScreenWindow::getImage()
         return _windowBuffer;
     }
 
-    _screen->getImage(_windowBuffer, size,
-                      currentLine(), endWindowLine());
+    _screen->getImage(_windowBuffer, size, currentLine(), endWindowLine());
 
     // this window may look beyond the end of the screen, in which
     // case there will be an unused area which needs to be filled
@@ -102,8 +101,7 @@ void ScreenWindow::fillUnusedArea()
 //
 int ScreenWindow::endWindowLine() const
 {
-    return qMin(currentLine() + windowLines() - 1,
-                lineCount() - 1);
+    return qMin(currentLine() + windowLines() - 1, lineCount() - 1);
 }
 
 QVector<LineProperty> ScreenWindow::getLineProperties()
@@ -318,8 +316,7 @@ void ScreenWindow::notifyOutputChanged()
         // lines of output - in this case the screen
         // window's current line number will need to
         // be adjusted - otherwise the output will scroll
-        _currentLine = qMax(0, _currentLine
-                            -_screen->droppedLines());
+        _currentLine = qMax(0, _currentLine - _screen->droppedLines());
 
         // ensure that the screen window's current position does
         // not go beyond the bottom of the screen

@@ -13,12 +13,12 @@
 
 // Qt
 #include <QHash>
-#include <QVariant>
 #include <QRegularExpression>
+#include <QVariant>
 
 using namespace Konsole;
 
-QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString& input)
+QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString &input)
 {
     QHash<Profile::Property, QVariant> changes;
 

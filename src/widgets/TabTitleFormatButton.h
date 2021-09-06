@@ -8,13 +8,14 @@
 #define TABTITLEFORMATBUTTON_H
 
 // Qt
-#include <QPushButton>
 #include <QAction>
+#include <QPushButton>
 
 // Konsole
 #include "session/Session.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class TabTitleFormatButton : public QPushButton
 {
     Q_OBJECT

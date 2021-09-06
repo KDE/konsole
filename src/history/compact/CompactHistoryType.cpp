@@ -14,8 +14,8 @@ using namespace Konsole;
 // Reasonable line size
 static const int LINE_SIZE = 1024;
 
-CompactHistoryType::CompactHistoryType(unsigned int nbLines) :
-    _maxLines(nbLines)
+CompactHistoryType::CompactHistoryType(unsigned int nbLines)
+    : _maxLines(nbLines)
 {
 }
 

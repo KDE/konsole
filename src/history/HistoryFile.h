@@ -14,7 +14,6 @@
 
 namespace Konsole
 {
-
 /*
    An extendable tmpfile(1) based buffer.
 */
@@ -29,25 +28,25 @@ public:
     virtual void removeLast(qint64 loc);
     virtual qint64 len() const;
 
-    //mmaps the file in read-only mode
+    // mmaps the file in read-only mode
     void map();
-    //un-mmaps the file
+    // un-mmaps the file
     void unmap();
 
 private:
     qint64 _length;
     QTemporaryFile _tmpFile;
 
-    //pointer to start of mmap'ed file data, or 0 if the file is not mmap'ed
+    // pointer to start of mmap'ed file data, or 0 if the file is not mmap'ed
     uchar *_fileMap;
 
-    //incremented whenever 'add' is called and decremented whenever
+    // incremented whenever 'add' is called and decremented whenever
     //'get' is called.
-    //this is used to detect when a large number of lines are being read and processed from the history
-    //and automatically mmap the file for better performance (saves the overhead of many lseek-read calls).
+    // this is used to detect when a large number of lines are being read and processed from the history
+    // and automatically mmap the file for better performance (saves the overhead of many lseek-read calls).
     int _readWriteBalance;
 
-    //when _readWriteBalance goes below this threshold, the file will be mmap'ed automatically
+    // when _readWriteBalance goes below this threshold, the file will be mmap'ed automatically
     static const int MAP_THRESHOLD = -1000;
 };
 

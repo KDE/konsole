@@ -7,27 +7,27 @@
 
 #include "sshmanagerpluginwidget.h"
 
-#include "sshmanagermodel.h"
-#include "sshconfigurationdata.h"
 #include "session/SessionController.h"
+#include "sshconfigurationdata.h"
+#include "sshmanagermodel.h"
 #include "terminalDisplay/TerminalDisplay.h"
 
 #include "profile/ProfileModel.h"
 
-#include "ui_sshwidget.h"
 #include "sshmanagerfiltermodel.h"
+#include "ui_sshwidget.h"
 
 #include <KLocalizedString>
 
 #include <QAction>
-#include <QRegularExpression>
+#include <QDebug>
 #include <QIntValidator>
 #include <QItemSelectionModel>
-#include <QRegularExpressionValidator>
+#include <QMenu>
 #include <QMessageBox>
 #include <QPoint>
-#include <QMenu>
-#include <QDebug>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
 #include <QSortFilterProxyModel>
 
 struct SSHManagerTreeWidget::Private {
@@ -37,9 +37,9 @@ struct SSHManagerTreeWidget::Private {
 };
 
 SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
-: QWidget(parent),
-ui(std::make_unique<Ui::SSHTreeWidget>()),
-d(std::make_unique<SSHManagerTreeWidget::Private>())
+    : QWidget(parent)
+    , ui(std::make_unique<Ui::SSHTreeWidget>())
+    , d(std::make_unique<SSHManagerTreeWidget::Private>())
 {
     ui->setupUi(this);
     ui->errorPanel->hide();
@@ -47,23 +47,22 @@ d(std::make_unique<SSHManagerTreeWidget::Private>())
     d->filterModel = new SSHManagerFilterModel(this);
 
     // https://stackoverflow.com/questions/1418423/the-hostname-regex
-    const auto hostnameRegex = QRegularExpression(
-        QStringLiteral(R"(^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$)")
-    );
+    const auto hostnameRegex =
+        QRegularExpression(QStringLiteral(R"(^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$)"));
 
-    const auto* hostnameValidator = new QRegularExpressionValidator(hostnameRegex, this);
+    const auto *hostnameValidator = new QRegularExpressionValidator(hostnameRegex, this);
     ui->hostname->setValidator(hostnameValidator);
 
     // System and User ports see:
     // https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
-    const auto* portValidator = new QIntValidator(0, 49151);
+    const auto *portValidator = new QIntValidator(0, 49151);
     ui->port->setValidator(portValidator);
 
     connect(ui->newSSHConfig, &QPushButton::clicked, this, &SSHManagerTreeWidget::showInfoPane);
     connect(ui->btnCancel, &QPushButton::clicked, this, &SSHManagerTreeWidget::clearSshInfo);
     connect(ui->btnEdit, &QPushButton::clicked, this, &SSHManagerTreeWidget::editSshInfo);
     connect(ui->btnImport, &QPushButton::clicked, this, &SSHManagerTreeWidget::requestImport);
-    connect(ui->btnRemove,  &QPushButton::clicked, this, &SSHManagerTreeWidget::triggerRemove);
+    connect(ui->btnRemove, &QPushButton::clicked, this, &SSHManagerTreeWidget::triggerRemove);
     connect(ui->btnInvertFilter, &QPushButton::clicked, d->filterModel, &SSHManagerFilterModel::setInvertFilter);
 
     connect(ui->filterText, &QLineEdit::textChanged, this, [this] {
@@ -74,7 +73,7 @@ d(std::make_unique<SSHManagerTreeWidget::Private>())
     ui->profile->setModel(Konsole::ProfileModel::instance());
 
     ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->treeView, &QTreeView::customContextMenuRequested, [this](const QPoint& pos){
+    connect(ui->treeView, &QTreeView::customContextMenuRequested, [this](const QPoint &pos) {
         if (!ui->treeView->indexAt(pos).isValid()) {
             return;
         }
@@ -122,7 +121,7 @@ void SSHManagerTreeWidget::saveEdit()
         return;
     }
 
-    auto selection =  ui->treeView->selectionModel()->selectedIndexes();
+    auto selection = ui->treeView->selectionModel()->selectedIndexes();
     auto sourceIdx = d->filterModel->mapToSource(selection.at(0));
     d->model->editChildItem(info(), sourceIdx);
 
@@ -149,21 +148,17 @@ SSHConfigurationData SSHManagerTreeWidget::info() const
 
 void SSHManagerTreeWidget::triggerRemove()
 {
-    auto selection =  ui->treeView->selectionModel()->selectedIndexes();
+    auto selection = ui->treeView->selectionModel()->selectedIndexes();
     if (selection.empty()) {
         return;
     }
 
-    const QString dialogMessage = i18n(ui->treeView->model()->rowCount(selection.at(0))
-                ? "You are about to remove the folder %1,\n with multiple SSH Configurations, are you sure?"
-                : "You are about to remove %1, are you sure?")
+    const QString dialogMessage =
+        i18n(ui->treeView->model()->rowCount(selection.at(0)) ? "You are about to remove the folder %1,\n with multiple SSH Configurations, are you sure?"
+                                                              : "You are about to remove %1, are you sure?")
             .arg(selection.at(0).data(Qt::DisplayRole).toString());
 
-        int result = QMessageBox::warning(
-        this,
-        i18n("Remove SSH Configurations"),
-        dialogMessage,
-        QMessageBox::Ok, QMessageBox::Cancel);
+    int result = QMessageBox::warning(this, i18n("Remove SSH Configurations"), dialogMessage, QMessageBox::Ok, QMessageBox::Cancel);
 
     if (result == QMessageBox::Cancel) {
         return;
@@ -175,7 +170,7 @@ void SSHManagerTreeWidget::triggerRemove()
 
 void SSHManagerTreeWidget::editSshInfo()
 {
-    auto selection =  ui->treeView->selectionModel()->selectedIndexes();
+    auto selection = ui->treeView->selectionModel()->selectedIndexes();
     if (selection.empty()) {
         return;
     }
@@ -274,7 +269,7 @@ void SSHManagerTreeWidget::showInfoPane()
     connect(ui->btnAdd, &QPushButton::clicked, this, &SSHManagerTreeWidget::addSshInfo);
 }
 
-void SSHManagerTreeWidget::setModel(SSHManagerModel* model)
+void SSHManagerTreeWidget::setModel(SSHManagerModel *model)
 {
     d->model = model;
     d->filterModel->setSourceModel(model);
@@ -296,34 +291,34 @@ std::pair<bool, QString> SSHManagerTreeWidget::checkFields() const
 
     if (ui->hostname->text().isEmpty()) {
         error = true;
-        errorString += li +  i18n("Missing Hostname") + il;
+        errorString += li + i18n("Missing Hostname") + il;
     }
 
     if (ui->name->text().isEmpty()) {
         error = true;
-        errorString += li +  i18n("Missing Name") + il;
+        errorString += li + i18n("Missing Name") + il;
     }
 
     if (ui->port->text().isEmpty()) {
         error = true;
-        errorString += li +  i18n("Missing Port") + il;
+        errorString += li + i18n("Missing Port") + il;
     }
 
     if (ui->useSshConfig->checkState() == Qt::Checked) {
         if (ui->sshkey->text().count() || ui->username->text().count()) {
             error = true;
-            errorString += li +  i18n("If Use Ssh Config is set, do not specify sshkey or username.") + il;
+            errorString += li + i18n("If Use Ssh Config is set, do not specify sshkey or username.") + il;
         }
     } else {
         if (ui->sshkey->text().isEmpty() && ui->username->text().isEmpty()) {
             error = true;
-            errorString += li +  i18n("At least Username or SSHKey must be set") + il;
+            errorString += li + i18n("At least Username or SSHKey must be set") + il;
         }
     }
 
     if (ui->folder->currentText().isEmpty()) {
         error = true;
-        errorString += li +  i18n("Missing Folder") + il;
+        errorString += li + i18n("Missing Folder") + il;
     }
 
     if (ui->profile->currentText().isEmpty()) {
@@ -377,7 +372,7 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
     }
 }
 
-void SSHManagerTreeWidget::connectRequested(const QModelIndex& idx)
+void SSHManagerTreeWidget::connectRequested(const QModelIndex &idx)
 {
     if (!d->controller) {
         return;

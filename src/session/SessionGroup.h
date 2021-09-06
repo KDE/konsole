@@ -10,11 +10,12 @@
 #define SESSIONGROUP_H
 
 // Qt
-#include <QList>
 #include <QHash>
+#include <QList>
+#include <QObject>
 
-namespace Konsole {
-
+namespace Konsole
+{
 class Session;
 
 /**
@@ -60,7 +61,7 @@ public:
          * Any input key presses in the master sessions are sent to all
          * sessions in the group.
          */
-        CopyInputToAll = 1
+        CopyInputToAll = 1,
     };
 
     /**
@@ -81,6 +82,6 @@ private:
 
     int _masterMode;
 };
-}               // namespace Konsole
+} // namespace Konsole
 
-#endif          // SESSIONGROUP_H
+#endif // SESSIONGROUP_H

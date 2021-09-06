@@ -7,25 +7,25 @@
 
 #include "AutoScrollHandler.h"
 #include "../TerminalDisplay.h"
-#include <QApplication>
 #include <QAccessible>
+#include <QApplication>
 
 using namespace Konsole;
 
-AutoScrollHandler::AutoScrollHandler(QWidget* parent)
+AutoScrollHandler::AutoScrollHandler(QWidget *parent)
     : QObject(parent)
     , _timerId(0)
 {
     parent->installEventFilter(this);
 }
 
-void AutoScrollHandler::timerEvent(QTimerEvent* event)
+void AutoScrollHandler::timerEvent(QTimerEvent *event)
 {
     if (event->timerId() != _timerId) {
         return;
     }
 
-    auto* terminalDisplay = static_cast<TerminalDisplay*>(parent());
+    auto *terminalDisplay = static_cast<TerminalDisplay *>(parent());
     QMouseEvent mouseEvent(QEvent::MouseMove,
                            widget()->mapFromGlobal(QCursor::pos()),
                            Qt::NoButton,
@@ -35,16 +35,16 @@ void AutoScrollHandler::timerEvent(QTimerEvent* event)
     QApplication::sendEvent(widget(), &mouseEvent);
 }
 
-bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
+bool AutoScrollHandler::eventFilter(QObject *watched, QEvent *event)
 {
     Q_ASSERT(watched == parent());
     Q_UNUSED(watched)
 
     switch (event->type()) {
     case QEvent::MouseMove: {
-        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+        auto *mouseEvent = static_cast<QMouseEvent *>(event);
         bool mouseInWidget = widget()->rect().contains(mouseEvent->pos());
-        auto* terminalDisplay = static_cast<TerminalDisplay*>(parent());
+        auto *terminalDisplay = static_cast<TerminalDisplay *>(parent());
         if (mouseInWidget) {
             if (_timerId != 0) {
                 killTimer(_timerId);
@@ -60,7 +60,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
         break;
     }
     case QEvent::MouseButtonRelease: {
-        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+        auto *mouseEvent = static_cast<QMouseEvent *>(event);
         if ((_timerId != 0) && ((mouseEvent->buttons() & ~Qt::LeftButton) != 0U)) {
             killTimer(_timerId);
             _timerId = 0;

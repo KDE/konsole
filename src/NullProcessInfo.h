@@ -11,27 +11,27 @@
 
 namespace Konsole
 {
-
+/**
+ * Implementation of ProcessInfo which does nothing.
+ * Used on platforms where a suitable ProcessInfo subclass is not
+ * available.
+ *
+ * isValid() will always return false for instances of NullProcessInfo
+ */
+class NullProcessInfo : public ProcessInfo
+{
+public:
     /**
-     * Implementation of ProcessInfo which does nothing.
-     * Used on platforms where a suitable ProcessInfo subclass is not
-     * available.
-     *
-     * isValid() will always return false for instances of NullProcessInfo
+     * Constructs a new NullProcessInfo instance.
+     * See ProcessInfo::newInstance()
      */
-    class NullProcessInfo : public ProcessInfo
-    {
-    public:
-        /**
-         * Constructs a new NullProcessInfo instance.
-         * See ProcessInfo::newInstance()
-         */
-        explicit NullProcessInfo(int pid);
-    protected:
-        void readProcessInfo(int pid) override;
-        bool readCurrentDir(int pid) override;
-        void readUserName(void) override;
-    };
+    explicit NullProcessInfo(int pid);
+
+protected:
+    void readProcessInfo(int pid) override;
+    bool readCurrentDir(int pid) override;
+    void readUserName(void) override;
+};
 
 }
 

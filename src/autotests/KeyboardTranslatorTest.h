@@ -12,7 +12,6 @@
 
 namespace Konsole
 {
-
 class KeyboardTranslatorTest : public QObject
 {
     Q_OBJECT
@@ -27,4 +26,3 @@ private Q_SLOTS:
 }
 
 #endif // KEYBOARDTRANSLATORTEST_H
-

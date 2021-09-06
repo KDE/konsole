@@ -15,13 +15,14 @@
 #include <QVariantList>
 
 // Konsole
-#include "session/Session.h"
 #include "config-konsole.h"
+#include "session/Session.h"
 
 class QStringList;
 class QKeyEvent;
 
-namespace Konsole {
+namespace Konsole
+{
 class Session;
 class SessionController;
 class ViewManager;
@@ -90,10 +91,9 @@ public Q_SLOTS:
      *
      * This is highly experimental. Do not use it at the moment
      */
-    void createSession(const QString &profileName = QString(),
-                       const QString &directory = QString());
+    void createSession(const QString &profileName = QString(), const QString &directory = QString());
 
-    void showManageProfilesDialog(QWidget* parent);
+    void showManageProfilesDialog(QWidget *parent);
 
     /**
      * Shows the dialog used to edit the profile used by the active session.  The
@@ -137,11 +137,11 @@ public Q_SLOTS:
     void setMonitorSilenceEnabled(bool enabled);
 
     /**
-    * Toggles monitoring for activity in the active session. If activity is detected,
-    * the activityDetected() signal is emitted.
-    *
-    * @param enabled Whether to enable or disable monitoring for activity.
-    * */
+     * Toggles monitoring for activity in the active session. If activity is detected,
+     * the activityDetected() signal is emitted.
+     *
+     * @param enabled Whether to enable or disable monitoring for activity.
+     * */
     void setMonitorActivityEnabled(bool enabled);
 
     /**
@@ -200,6 +200,7 @@ private Q_SLOTS:
     void newTab();
     void overrideTerminalShortcut(QKeyEvent *, bool &override);
     void notificationChanged(Session::Notification notification, bool enabled);
+
 private:
     Session *activeSession() const;
 

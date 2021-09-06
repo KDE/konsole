@@ -13,41 +13,43 @@
 
 class QWidget;
 class QGridLayout;
-template<typename T> class QVector;
+template<typename T>
+class QVector;
 
 namespace Konsole
 {
-    /**
-     * An utility class for aligning 0th column in multiple QGridLayouts.
-     *
-     * Limitations:
-     * - a layout can't be nested in another layout
-     * - reference widget must be an ancestor of all added layouts
-     * - only 0th column is processed (widgets spanning multiple columns
-     *   are ignored)
-     */
-    class LabelsAligner: public QObject {
-        Q_OBJECT
+/**
+ * An utility class for aligning 0th column in multiple QGridLayouts.
+ *
+ * Limitations:
+ * - a layout can't be nested in another layout
+ * - reference widget must be an ancestor of all added layouts
+ * - only 0th column is processed (widgets spanning multiple columns
+ *   are ignored)
+ */
+class LabelsAligner : public QObject
+{
+    Q_OBJECT
 
-    public:
-        explicit LabelsAligner(QWidget *refWidget);
+public:
+    explicit LabelsAligner(QWidget *refWidget);
 
-        void addLayout(QGridLayout *layout);
-        void addLayouts(const QVector<QGridLayout *> &layouts);
-        void setReferenceWidget(QWidget *refWidget);
+    void addLayout(QGridLayout *layout);
+    void addLayouts(const QVector<QGridLayout *> &layouts);
+    void setReferenceWidget(QWidget *refWidget);
 
-    public Q_SLOTS:
-        void updateLayouts();
-        void align();
+public Q_SLOTS:
+    void updateLayouts();
+    void align();
 
-    private:
-        int getLeftMargin(const QGridLayout *layout);
+private:
+    int getLeftMargin(const QGridLayout *layout);
 
-        static constexpr int LABELS_COLUMN = 0;
+    static constexpr int LABELS_COLUMN = 0;
 
-        QWidget *_refWidget;
-        QVector<QGridLayout *> _layouts;
-    };
+    QWidget *_refWidget;
+    QVector<QGridLayout *> _layouts;
+};
 
 }
 

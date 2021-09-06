@@ -8,15 +8,16 @@
 #define INCREMENTALSEARCHBAR_H
 
 // Qt
-#include <QWidget>
 #include <QBitArray>
+#include <QWidget>
 
 class QAction;
 class QTimer;
 class QLineEdit;
 class QToolButton;
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * A widget which allows users to search incrementally through a document for a
  * a text string or regular expression.
@@ -54,7 +55,7 @@ public:
         /** Searches use regular expressions */
         RegExp = 2,
         /** Search from the bottom and up **/
-        ReverseSearch = 3
+        ReverseSearch = 3,
     };
 
     /**

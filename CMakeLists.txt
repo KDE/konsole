@@ -135,11 +135,7 @@ ecm_qt_install_logging_categories(
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-# Do not do bulk whitespace/style changes without MRs and maintainer(s)
-# approval.  clang-format executeable needs to be installed prior to initial
-# building; then do make clang-format.
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.c *.cpp *.h *.hpp)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
-# Let's not do pre-hooks yet
-#kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)

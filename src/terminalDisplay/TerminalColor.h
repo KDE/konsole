@@ -10,73 +10,72 @@
 #define TERMINALCOLOR_HPP
 
 // Qt
-#include <QWidget>
 #include <QColor>
+#include <QWidget>
 
 // Konsole
-#include "profile/Profile.h"
 #include "characters/CharacterColor.h"
 #include "konsoleprivate_export.h"
+#include "profile/Profile.h"
 
 namespace Konsole
 {
+class Profile;
+class ColorScheme;
 
-    class Profile;
-    class ColorScheme;
+class KONSOLEPRIVATE_EXPORT TerminalColor : public QObject
+{
+    Q_OBJECT
+public:
+    explicit TerminalColor(QObject *parent);
 
-    class KONSOLEPRIVATE_EXPORT TerminalColor : public QObject
+    void applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint randomSeed);
+
+    QColor backgroundColor() const;
+    QColor foregroundColor() const;
+    void setColorTable(const QColor *table);
+    const QColor *colorTable() const;
+
+    void setOpacity(qreal opacity);
+
+    void visualBell();
+
+    qreal opacity() const;
+    QRgb blendColor() const;
+
+    QColor cursorColor() const
     {
-        Q_OBJECT
-    public:
-        explicit TerminalColor(QObject *parent);
+        return m_cursorColor;
+    }
 
-        void applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint randomSeed);
+    QColor cursorTextColor() const
+    {
+        return m_cursorTextColor;
+    }
 
-        QColor backgroundColor() const;
-        QColor foregroundColor() const;
-        void setColorTable(const QColor *table);
-        const QColor *colorTable() const;
+public Q_SLOTS:
+    void setBackgroundColor(const QColor &color);
+    void setForegroundColor(const QColor &color);
 
-        void setOpacity(qreal opacity);
+Q_SIGNALS:
+    void onPalette(const QPalette &);
 
-        void visualBell();
+protected:
+    bool event(QEvent *event) override;
+    void onColorsChanged();
 
-        qreal opacity() const;
-        QRgb blendColor() const;
+private Q_SLOTS:
+    void swapFGBGColors();
 
-        QColor cursorColor() const
-        {
-            return m_cursorColor;
-        }
+private:
+    qreal m_opacity;
+    QRgb m_blendColor;
 
-        QColor cursorTextColor() const
-        {
-            return m_cursorTextColor;
-        }
+    QColor m_cursorColor;
+    QColor m_cursorTextColor;
 
-    public Q_SLOTS:
-        void setBackgroundColor(const QColor &color);
-        void setForegroundColor(const QColor &color);
-
-    Q_SIGNALS:
-        void onPalette(const QPalette &);
-
-    protected:
-        bool event(QEvent *event) override;
-        void onColorsChanged();
-
-    private Q_SLOTS:
-        void swapFGBGColors();
-
-    private:
-        qreal m_opacity;
-        QRgb m_blendColor;
-
-        QColor m_cursorColor;
-        QColor m_cursorTextColor;
-
-        QColor m_colorTable[TABLE_COLORS];
-    };
+    QColor m_colorTable[TABLE_COLORS];
+};
 }
 
 #endif

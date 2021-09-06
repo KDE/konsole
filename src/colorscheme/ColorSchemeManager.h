@@ -17,7 +17,8 @@
 // Konsole
 #include "ColorScheme.h"
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * Manages the color schemes available for use by terminal displays.
  * See ColorScheme
@@ -118,4 +119,4 @@ private:
 };
 }
 
-#endif //COLORSCHEMEMANAGER_H
+#endif // COLORSCHEMEMANAGER_H

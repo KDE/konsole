@@ -5,17 +5,17 @@
 */
 
 #include "ProfileModel.h"
-#include "ProfileManager.h"
 #include "Profile.h"
+#include "ProfileManager.h"
 
 #include <KLocalizedString>
 
-#include <QIcon>
 #include <QDebug>
+#include <QIcon>
 
 using namespace Konsole;
 
-ProfileModel* ProfileModel::instance()
+ProfileModel *ProfileModel::instance()
 {
     static ProfileModel self;
     return &self;
@@ -23,12 +23,9 @@ ProfileModel* ProfileModel::instance()
 
 ProfileModel::ProfileModel()
 {
-    connect(ProfileManager::instance(), &ProfileManager::profileAdded,
-            this, &ProfileModel::add);
-    connect(ProfileManager::instance(), &ProfileManager::profileRemoved,
-            this, &ProfileModel::remove);
-    connect(ProfileManager::instance(), &ProfileManager::profileChanged,
-            this, &ProfileModel::update);
+    connect(ProfileManager::instance(), &ProfileManager::profileAdded, this, &ProfileModel::add);
+    connect(ProfileManager::instance(), &ProfileManager::profileRemoved, this, &ProfileModel::remove);
+    connect(ProfileManager::instance(), &ProfileManager::profileChanged, this, &ProfileModel::update);
     populate();
 }
 int ProfileModel::rowCount(const QModelIndex &unused) const
@@ -39,7 +36,7 @@ int ProfileModel::rowCount(const QModelIndex &unused) const
     return m_profiles.count();
 }
 
-int ProfileModel::columnCount(const QModelIndex& unused) const
+int ProfileModel::columnCount(const QModelIndex &unused) const
 {
     Q_UNUSED(unused)
     return COLUMNS;
@@ -54,14 +51,16 @@ QVariant ProfileModel::headerData(int section, Qt::Orientation orientation, int 
         return {};
     }
 
-    switch(section) {
-        case NAME: return i18nc("@title:column Profile name", "Name");
-        case SHORTCUT: return i18nc("@title:column Profile keyboard shortcut", "Shortcut");
+    switch (section) {
+    case NAME:
+        return i18nc("@title:column Profile name", "Name");
+    case SHORTCUT:
+        return i18nc("@title:column Profile keyboard shortcut", "Shortcut");
     }
     return {};
 }
 
-QVariant ProfileModel::data(const QModelIndex& idx, int role) const
+QVariant ProfileModel::data(const QModelIndex &idx, int role) const
 {
     if (!idx.isValid()) {
         return {};
@@ -91,7 +90,7 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
         case Qt::DecorationRole:
             return QIcon::fromTheme(profile->icon());
         case Qt::FontRole:
-            if (ProfileManager::instance()->defaultProfile() == profile ) {
+            if (ProfileManager::instance()->defaultProfile() == profile) {
                 QFont font;
                 font.setBold(true);
                 return font;
@@ -100,22 +99,25 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
         case Qt::ToolTipRole:
             return profile->isFallback() ? QStringLiteral("Built-in/hardcoded") : profile->path();
         }
-    }
-    break;
+    } break;
 
     case SHORTCUT: {
         auto shortcut = ProfileManager::instance()->shortcut(profile);
         switch (role) {
-            case Qt::DisplayRole: return shortcut;
-            case Qt::EditRole: return shortcut;
-            case Qt::ToolTipRole: return i18nc("@info:tooltip", "Double click to change shortcut");
+        case Qt::DisplayRole:
+            return shortcut;
+        case Qt::EditRole:
+            return shortcut;
+        case Qt::ToolTipRole:
+            return i18nc("@info:tooltip", "Double click to change shortcut");
         }
         break;
     }
 
     case PROFILE: {
-        switch(role) {
-            case ProfilePtrRole: return QVariant::fromValue(profile);
+        switch (role) {
+        case ProfilePtrRole:
+            return QVariant::fromValue(profile);
         }
         break;
     }
@@ -124,14 +126,16 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
     return {};
 }
 
-Qt::ItemFlags ProfileModel::flags(const QModelIndex& idx) const
+Qt::ItemFlags ProfileModel::flags(const QModelIndex &idx) const
 {
     auto currentFlags = QAbstractTableModel::flags(idx);
 
-    switch(idx.column()) {
-        case NAME: return currentFlags & (~Qt::ItemIsEditable);
-        case SHORTCUT: return currentFlags | Qt::ItemIsEditable;
-        default: ;
+    switch (idx.column()) {
+    case NAME:
+        return currentFlags & (~Qt::ItemIsEditable);
+    case SHORTCUT:
+        return currentFlags | Qt::ItemIsEditable;
+    default:;
     }
     return currentFlags;
 }
@@ -185,11 +189,11 @@ void ProfileModel::remove(QExplicitlySharedDataPointer<Profile> profile)
 void ProfileModel::setDefault(QExplicitlySharedDataPointer<Profile> profile)
 {
     Q_UNUSED(profile)
-    Q_EMIT dataChanged(index(0, 0), index(0, COLUMNS-1), {Qt::DisplayRole});
+    Q_EMIT dataChanged(index(0, 0), index(0, COLUMNS - 1), {Qt::DisplayRole});
 }
 
 void ProfileModel::update(QExplicitlySharedDataPointer<Profile> profile)
 {
     int row = m_profiles.indexOf(profile);
-    dataChanged(index(row, 0), index(row, COLUMNS-1));
+    dataChanged(index(row, 0), index(row, COLUMNS - 1));
 }

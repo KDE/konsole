@@ -14,13 +14,12 @@
 
 namespace Konsole
 {
-
 class TerminalCharacterDecoderTest : public QObject
 {
     Q_OBJECT
 
 private Q_SLOTS:
-    Character* convertToCharacter(const QString &text, QVector<RenditionFlags> renditions);
+    Character *convertToCharacter(const QString &text, QVector<RenditionFlags> renditions);
     void testPlainTextDecoder();
     void testPlainTextDecoder_data();
     void testHTMLDecoder();
@@ -30,4 +29,3 @@ private Q_SLOTS:
 }
 
 #endif // TERMINALCHARACTERDECODERTEST_H
-

@@ -4,13 +4,9 @@
 
 #include <stdio.h>
 
-int
-main()
+int main()
 {
-  for (int i = 0; i < 100000000; i++)
-    {
-      fprintf (stderr, "foo %d\n", i);
+    for (int i = 0; i < 100000000; i++) {
+        fprintf(stderr, "foo %d\n", i);
     }
 }
-
-

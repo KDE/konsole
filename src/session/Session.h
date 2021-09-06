@@ -10,25 +10,26 @@
 #define SESSION_H
 
 // Qt
-#include <QStringList>
 #include <QHash>
-#include <QUuid>
-#include <QSize>
 #include <QProcess>
-#include <QWidget>
+#include <QSize>
+#include <QStringList>
 #include <QUrl>
+#include <QUuid>
+#include <QWidget>
 
 // Konsole
-#include "konsolesession_export.h"
-#include "config-konsole.h"
 #include "Shortcut_p.h"
+#include "config-konsole.h"
+#include "konsolesession_export.h"
 
 class QColor;
 
 class KConfigGroup;
 class KProcess;
 
-namespace Konsole {
+namespace Konsole
+{
 class Emulation;
 class Pty;
 class ProcessInfo;
@@ -145,7 +146,7 @@ public:
          * Tab title format used session currently contains
          * a connection to a remote computer (via SSH)
          */
-        RemoteTabTitle
+        RemoteTabTitle,
     };
 
     /**
@@ -169,7 +170,7 @@ public:
 
     /**
      * Sets the color user by this session for tab.
-     * 
+     *
      * @param color The background color for the tab.
      */
     void setColor(const QColor &color);
@@ -256,7 +257,7 @@ public:
         /** The name of the session. */
         NameRole,
         /** The title of the session which is displayed in tabs etc. */
-        DisplayedTitleRole
+        DisplayedTitleRole,
     };
 
     /**
@@ -357,20 +358,20 @@ public:
     }
 
     /**
-      * Possible values of the @p what parameter for setSessionAttribute().
-      * See the "Operating System Commands" section at:
-      * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
-      */
+     * Possible values of the @p what parameter for setSessionAttribute().
+     * See the "Operating System Commands" section at:
+     * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
+     */
     enum SessionAttributes {
         IconNameAndWindowTitle = 0,
         IconName = 1,
         WindowTitle = 2,
-        CurrentDirectory = 7,         // From VTE (supposedly 6 was for dir, 7 for file, but whatever)
+        CurrentDirectory = 7, // From VTE (supposedly 6 was for dir, 7 for file, but whatever)
         TextColor = 10,
         BackgroundColor = 11,
-        SessionName = 30,             // Non-standard
-        SessionIcon = 32,             // Non-standard
-        ProfileChange = 50            // this clashes with Xterm's font change command
+        SessionName = 30, // Non-standard
+        SessionIcon = 32, // Non-standard
+        ProfileChange = 50, // this clashes with Xterm's font change command
     };
 
     // Sets the text codec used by this sessions terminal emulation.
@@ -382,7 +383,7 @@ public:
 
     void sendSignal(int signal);
 
-    void reportColor(SessionAttributes r, const QColor& c, uint terminator);
+    void reportColor(SessionAttributes r, const QColor &c, uint terminator);
     void reportForegroundColor(const QColor &c, uint terminator);
     void reportBackgroundColor(const QColor &c, uint terminator);
 
@@ -404,7 +405,10 @@ public:
     Q_DECLARE_FLAGS(Notifications, Notification)
 
     /** Returns active notifications. */
-    Notifications activeNotifications() const { return _activeNotifications; }
+    Notifications activeNotifications() const
+    {
+        return _activeNotifications;
+    }
 
 public Q_SLOTS:
 
@@ -438,7 +442,7 @@ public Q_SLOTS:
      * Closes the terminal session. It kills the terminal process by calling
      * closeInNormalWay() and, optionally, closeInForceWay().
      */
-    //Q_SCRIPTABLE void close(); // This cause the menu issues bko 185466
+    // Q_SCRIPTABLE void close(); // This cause the menu issues bko 185466
     void close();
 
     /**
@@ -537,9 +541,9 @@ public Q_SLOTS:
     Q_SCRIPTABLE void sendMouseEvent(int buttons, int column, int line, int eventType);
 
     /**
-    * Returns the process id of the terminal process.
-    * This is the id used by the system API to refer to the process.
-    */
+     * Returns the process id of the terminal process.
+     * This is the id used by the system API to refer to the process.
+     */
     Q_SCRIPTABLE int processId() const;
 
     /**
@@ -550,9 +554,9 @@ public Q_SLOTS:
     Q_SCRIPTABLE int foregroundProcessId();
 
     /** Sets the text codec used by this sessions terminal emulation.
-      * Overloaded to accept a QByteArray for convenience since DBus
-      * does not accept QTextCodec directly.
-      */
+     * Overloaded to accept a QByteArray for convenience since DBus
+     * does not accept QTextCodec directly.
+     */
     Q_SCRIPTABLE bool setCodec(const QByteArray &name);
 
     /** Returns the codec used to decode incoming characters in this
@@ -575,10 +579,10 @@ public Q_SLOTS:
     Q_SCRIPTABLE QString title(int role) const;
 
     /** Returns the "friendly" version of the QUuid of this session.
-    * This is a QUuid with the braces and dashes removed, so it cannot be
-    * used to construct a new QUuid. The same text appears in the
-    * SHELL_SESSION_ID environment variable.
-    */
+     * This is a QUuid with the braces and dashes removed, so it cannot be
+     * used to construct a new QUuid. The same text appears in the
+     * SHELL_SESSION_ID environment variable.
+     */
     Q_SCRIPTABLE QString shellSessionId() const;
 
     /** Sets the session's tab title format for the specified @p context to @p format.
@@ -745,7 +749,7 @@ private Q_SLOTS:
 
     void onViewSizeChange(int height, int width);
 
-    //automatically detach views from sessions when view is destroyed
+    // automatically detach views from sessions when view is destroyed
     void viewDestroyed(QObject *view);
 
     void zmodemReadStatus();
@@ -790,7 +794,7 @@ private:
 
     QString validDirectory(const QString &dir) const;
 
-    QUuid _uniqueIdentifier;            // SHELL_SESSION_ID
+    QUuid _uniqueIdentifier; // SHELL_SESSION_ID
 
     Pty *_shellProcess;
     Emulation *_emulation;
@@ -825,7 +829,7 @@ private:
     bool _tabColorSetByUser;
 
     QString _iconName;
-    QString _iconText;        // not actually used
+    QString _iconText; // not actually used
     bool _addToUtmp;
     bool _flowControlEnabled;
 

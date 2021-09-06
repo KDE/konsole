@@ -17,8 +17,8 @@
 
 using namespace Konsole;
 
-FontDialog::FontDialog(QWidget *parent) :
-    QDialog(parent)
+FontDialog::FontDialog(QWidget *parent)
+    : QDialog(parent)
     , _fontChooser(nullptr)
     , _showAllFonts(nullptr)
     , _buttonBox(nullptr)
@@ -33,16 +33,13 @@ FontDialog::FontDialog(QWidget *parent) :
 
     _showAllFonts = new QCheckBox(i18nc("@action:button", "Show all fonts"), this);
     _showAllFontsWarningButton = new QToolButton(this);
-    _buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok |
-                                      QDialogButtonBox::Cancel,
-                                      Qt::Horizontal, this);
+    _buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, this);
 
-    _fontChooser->setSampleText(QStringLiteral(
-            "0OQ 1Il!| 5S 8B rnm :; ,. \"'` ~-= ({[<>]})\n"
-            "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\n"
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\n"
-            "abcdefghijklmnopqrstuvwxyz"
-    ));
+    _fontChooser->setSampleText(
+        QStringLiteral("0OQ 1Il!| 5S 8B rnm :; ,. \"'` ~-= ({[<>]})\n"
+                       "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\n"
+                       "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\n"
+                       "abcdefghijklmnopqrstuvwxyz"));
     _showAllFontsWarningButton->setIcon(QIcon::fromTheme(QStringLiteral("emblem-warning")));
     _showAllFontsWarningButton->setAutoRaise(true);
 
@@ -51,7 +48,9 @@ FontDialog::FontDialog(QWidget *parent) :
         _fontChooser->setFont(_fontChooser->font(), !enable);
     });
     connect(_showAllFontsWarningButton, &QToolButton::clicked, this, [this](bool) {
-        const QString message = i18nc("@info:status", "By its very nature, a terminal program requires font characters that are equal width (monospace). Any non monospaced font may cause display issues. This should not be necessary except in rare cases.");
+        const QString message = i18nc("@info:status",
+                                      "By its very nature, a terminal program requires font characters that are equal width (monospace). Any non monospaced "
+                                      "font may cause display issues. This should not be necessary except in rare cases.");
         const QPoint pos = QPoint(_showAllFonts->width() / 2, _showAllFonts->height());
         QWhatsThis::showText(_showAllFonts->mapToGlobal(pos), message, _showAllFonts);
     });

@@ -8,12 +8,11 @@
 #ifndef COMPACTHISTORYSCROLL_H
 #define COMPACTHISTORYSCROLL_H
 
-#include "konsoleprivate_export.h"
 #include "history/HistoryScroll.h"
+#include "konsoleprivate_export.h"
 
 namespace Konsole
 {
-
 class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
 {
     typedef QVector<Character> TextLine;
@@ -22,9 +21,9 @@ public:
     explicit CompactHistoryScroll(const unsigned int maxLineCount = 1000);
     ~CompactHistoryScroll() = default;
 
-    int  getLines() const override;
-    int  getMaxLines() const override;
-    int  getLineLen(const int lineNumber) const override;
+    int getLines() const override;
+    int getMaxLines() const override;
+    int getLineLen(const int lineNumber) const override;
     void getCells(const int lineNumber, const int startColumn, const int count, Character buffer[]) const override;
     bool isWrappedLine(const int lineNumber) const override;
     LineProperty getLineProperty(const int lineNumber) const override;

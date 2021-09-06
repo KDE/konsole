@@ -8,8 +8,8 @@
 #include "RenameTabDialog.h"
 
 // Konsole
-#include "ui_RenameTabDialog.h"
 #include "Shortcut_p.h"
+#include "ui_RenameTabDialog.h"
 
 #include <KLocalizedString>
 #include <QDialogButtonBox>
@@ -18,12 +18,12 @@
 
 using Konsole::RenameTabDialog;
 
-RenameTabDialog::RenameTabDialog(QWidget *parent) :
-    QDialog(parent),
-    _ui(nullptr)
+RenameTabDialog::RenameTabDialog(QWidget *parent)
+    : QDialog(parent)
+    , _ui(nullptr)
 {
     setWindowTitle(i18n("Tab Properties"));
-    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     auto mainWidget = new QWidget(this);
     auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);

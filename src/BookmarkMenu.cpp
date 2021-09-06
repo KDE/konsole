@@ -12,18 +12,18 @@
 
 // KDE
 #include <KActionCollection>
+#include <KBookmark>
 #include <KBookmarkManager>
 #include <KBookmarkOwner>
-#include <KBookmark>
 
 // Qt
 #include <QAction>
 #include <QMenu>
 
-#include <algorithm>    // std::any_of
+#include <algorithm> // std::any_of
 
-BookmarkMenu::BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *parentMenu, KActionCollection *collection) :
-    KBookmarkMenu (mgr, owner, parentMenu)
+BookmarkMenu::BookmarkMenu(KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *parentMenu, KActionCollection *collection)
+    : KBookmarkMenu(mgr, owner, parentMenu)
 {
     QAction *bookmarkAction;
     collection->addActions(parentMenu->actions());
@@ -52,8 +52,9 @@ void BookmarkMenu::maybeAddBookmark()
     const KBookmarkGroup rootGroup = manager()->root();
     const QUrl currUrl = owner()->currentUrl();
     const auto urlList = rootGroup.groupUrlList();
-    if (std::any_of(urlList.constBegin(), urlList.constEnd(),
-                   [currUrl] (const QUrl &url) { return url == currUrl; })) {
+    if (std::any_of(urlList.constBegin(), urlList.constEnd(), [currUrl](const QUrl &url) {
+            return url == currUrl;
+        })) {
         return;
     }
 

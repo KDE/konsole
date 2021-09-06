@@ -12,14 +12,16 @@
 
 #include <memory>
 
-namespace Konsole {
-    class SessionController;
-    class MainWindow;
+namespace Konsole
+{
+class SessionController;
+class MainWindow;
 }
 
 struct SSHManagerPluginPrivate;
 
-class SSHManagerPlugin : public Konsole::IKonsolePlugin {
+class SSHManagerPlugin : public Konsole::IKonsolePlugin
+{
     Q_OBJECT
 public:
     SSHManagerPlugin(QObject *object, const QVariantList &args);
@@ -27,7 +29,7 @@ public:
 
     void createWidgetsForMainWindow(Konsole::MainWindow *mainWindow) override;
     void activeViewChanged(Konsole::SessionController *controller) override;
-    QList<QAction*> menuBarActions(Konsole::MainWindow* mainWindow) const override;
+    QList<QAction *> menuBarActions(Konsole::MainWindow *mainWindow) const override;
 
 private Q_SLOTS:
     void activeViewChangedInternal(QPointer<Konsole::SessionController> controller);

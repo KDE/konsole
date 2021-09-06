@@ -12,11 +12,13 @@
 
 class QColor;
 
-namespace Ui {
+namespace Ui
+{
 class RenameTabWidget;
 }
 
-namespace Konsole {
+namespace Konsole
+{
 class RenameTabWidget : public QWidget
 {
     Q_OBJECT

@@ -16,11 +16,13 @@
 
 class QAbstractButton;
 
-namespace Ui {
+namespace Ui
+{
 class HistorySizeWidget;
 }
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * A widget for controlling history related options
  */

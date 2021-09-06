@@ -20,8 +20,8 @@ class KConfig;
 class QPixmap;
 class QPainter;
 
-namespace Konsole {
-
+namespace Konsole
+{
 class RandomizationRange;
 /**
  * Represents a color scheme for a terminal display.
@@ -38,7 +38,7 @@ public:
      */
     ColorScheme();
     ColorScheme(const ColorScheme &other);
-    ColorScheme& operator=(const ColorScheme &other) = delete;
+    ColorScheme &operator=(const ColorScheme &other) = delete;
     ~ColorScheme();
 
     /** Sets the descriptive name of the color scheme. */
@@ -181,11 +181,11 @@ private:
 
     ColorSchemeWallpaper::Ptr _wallpaper;
 
-    static const char * const colorNames[TABLE_COLORS];
-    static const char * const translatedColorNames[TABLE_COLORS];
+    static const char *const colorNames[TABLE_COLORS];
+    static const char *const translatedColorNames[TABLE_COLORS];
 };
 }
 
 Q_DECLARE_METATYPE(const Konsole::ColorScheme *)
 
-#endif //COLORSCHEME_H
+#endif // COLORSCHEME_H

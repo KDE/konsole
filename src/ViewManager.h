@@ -19,8 +19,8 @@
 class KActionCollection;
 class KConfigGroup;
 
-namespace Konsole {
-
+namespace Konsole
+{
 class ColorScheme;
 class Profile;
 class Session;
@@ -108,24 +108,24 @@ public:
          */
         TabbedNavigation,
         /** The container has no navigation widget. */
-        NoNavigation
+        NoNavigation,
     };
 
     /**
      * Describes the options for showing or hiding the container's navigation widget.
-    */
+     */
     enum NavigationVisibility {
-        NavigationNotSet,       // Don't rely on this information, Only use the settings.
+        NavigationNotSet, // Don't rely on this information, Only use the settings.
         AlwaysShowNavigation,
         ShowNavigationAsNeeded,
-        AlwaysHideNavigation
+        AlwaysHideNavigation,
     };
 
     /**
-      * Sets the visibility of the view container's navigation widget.
-      * The ViewContainer subclass is responsible for ensuring that this
-      * setting is respected as views are dded or removed from the container
-      */
+     * Sets the visibility of the view container's navigation widget.
+     * The ViewContainer subclass is responsible for ensuring that this
+     * setting is respected as views are dded or removed from the container
+     */
     void setNavigationVisibility(NavigationVisibility navigationVisibility);
 
     /** Returns the current mode for controlling the visibility of the
@@ -174,7 +174,7 @@ public:
     static bool profileHasBlurEnabled(const QExplicitlySharedDataPointer<Profile> &profile);
 
     /** returns the active tab from the view
-    */
+     */
     TabbedViewContainer *activeContainer();
     TerminalDisplay *createView(Session *session);
     void attachView(TerminalDisplay *terminal, Session *session);
@@ -183,8 +183,8 @@ public:
     /** Reorder the terminal display history list */
     void updateTerminalDisplayHistory(TerminalDisplay *terminalDisplay = nullptr, bool remove = false);
 
-    QHash<TerminalDisplay*, Session*> forgetAll(ViewSplitter* splitter);
-    Session* forgetTerminal(TerminalDisplay* terminal);
+    QHash<TerminalDisplay *, Session *> forgetAll(ViewSplitter *splitter);
+    Session *forgetTerminal(TerminalDisplay *terminal);
 
     /**
      * Creates and returns new session
@@ -192,14 +192,14 @@ public:
      * The session has specified @p profile, working @p directory
      * and configured environment.
      */
-    Session* createSession(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory = QString());
+    Session *createSession(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory = QString());
 
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();
 
     /** Emitted when a session is detached from a view owned by this ViewManager */
-    void terminalsDetached(ViewSplitter *splitter, QHash<TerminalDisplay*, Session*> sessionsMap);
+    void terminalsDetached(ViewSplitter *splitter, QHash<TerminalDisplay *, Session *> sessionsMap);
 
     /**
      * Emitted when the active view changes.
@@ -257,8 +257,8 @@ public Q_SLOTS:
     Q_SCRIPTABLE void setCurrentSession(int sessionId);
 
     /** DBus slot that creates a new session in the current view with the associated
-      * default profile and the default working directory
-      */
+     * default profile and the default working directory
+     */
     Q_SCRIPTABLE int newSession();
 
     /** DBus slot that creates a new session in the current view.
@@ -293,15 +293,15 @@ public Q_SLOTS:
     Q_SCRIPTABLE void prevSession();
 
     /** DBus slot that switches the current session (as returned by
-      * currentSession()) with the left (or previous) one in the
-      * navigation tab.
-      */
+     * currentSession()) with the left (or previous) one in the
+     * navigation tab.
+     */
     Q_SCRIPTABLE void moveSessionLeft();
 
     /** DBus slot that Switches the current session (as returned by
-      * currentSession()) with the right (or next) one in the navigation
-      * tab.
-      */
+     * currentSession()) with the right (or next) one in the navigation
+     * tab.
+     */
     Q_SCRIPTABLE void moveSessionRight();
 
     /** DBus slot that sets ALL tabs' width to match their text */
@@ -332,7 +332,7 @@ private Q_SLOTS:
     // controller detects when an associated view is given the focus
     // and emits a signal.  ViewManager listens for that signal
     // and then plugs the action into the UI
-    //void viewFocused( SessionController* controller );
+    // void viewFocused( SessionController* controller );
 
     // called when the active view in a ViewContainer changes, so
     // that we can plug the appropriate actions into the UI
@@ -398,8 +398,7 @@ private:
 
     // takes a view from a view container owned by a different manager and places it in
     // newContainer owned by this manager
-    void takeView(ViewManager *otherManager, TabbedViewContainer *otherContainer,
-                  TabbedViewContainer *newContainer, TerminalDisplay *view);
+    void takeView(ViewManager *otherManager, TabbedViewContainer *otherContainer, TabbedViewContainer *newContainer, TerminalDisplay *view);
     void splitView(Qt::Orientation orientation);
 
     // creates a new container which can hold terminal displays
@@ -414,7 +413,7 @@ private:
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.
     SessionController *createController(Session *session, TerminalDisplay *view);
-    void removeController(SessionController* controller);
+    void removeController(SessionController *controller);
 
     // Activates a different terminal when the TerminalDisplay
     // closes or is detached and another one should be focused.
@@ -446,7 +445,6 @@ private:
     // containers open
     QList<QAction *> _multiTabOnlyActions;
     QList<QAction *> _multiSplitterOnlyActions;
-
 };
 }
 

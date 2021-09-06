@@ -22,7 +22,8 @@ class QMenu;
 class QUrl;
 class KActionCollection;
 
-namespace Konsole {
+namespace Konsole
+{
 class ViewProperties;
 
 /**

@@ -6,17 +6,17 @@
 
 // Own
 #if !defined(Q_OS_WIN)
-    #include "UnixProcessInfo.h"
+#include "UnixProcessInfo.h"
 #endif
 
 // Unix
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
-#include <unistd.h>
+#include <cerrno>
+#include <netinet/in.h>
 #include <pwd.h>
 #include <sys/param.h>
-#include <cerrno>
+#include <sys/socket.h>
+#include <unistd.h>
 
 // Qt
 #include <QDebug>
@@ -45,7 +45,7 @@ void UnixProcessInfo::readProcessInfo(int pid)
         const QString &processNameString = name(&ok);
 
         if (ok && processNameString == QLatin1String("sudo")) {
-            //Append process name along with sudo
+            // Append process name along with sudo
             const QVector<QString> &args = arguments(&ok);
 
             if (ok && args.size() > 1) {
@@ -85,7 +85,7 @@ void UnixProcessInfo::readUserName()
         setUserName(QString());
         qWarning() << "getpwuid_r returned error : " << getpwStatus;
     }
-    delete [] getpwBuffer;
+    delete[] getpwBuffer;
 }
 
 #endif

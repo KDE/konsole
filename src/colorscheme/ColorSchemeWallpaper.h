@@ -23,33 +23,33 @@ class QPainter;
 
 namespace Konsole
 {
-    /**
-     * This class holds the wallpaper pixmap associated with a color scheme.
-     * The wallpaper object is shared between multiple TerminalDisplay.
-     */
-    class ColorSchemeWallpaper : public QSharedData
-    {
-    public:
-        typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
+/**
+ * This class holds the wallpaper pixmap associated with a color scheme.
+ * The wallpaper object is shared between multiple TerminalDisplay.
+ */
+class ColorSchemeWallpaper : public QSharedData
+{
+public:
+    typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
 
-        explicit ColorSchemeWallpaper(const QString &path);
-        ~ColorSchemeWallpaper();
+    explicit ColorSchemeWallpaper(const QString &path);
+    ~ColorSchemeWallpaper();
 
-        void load();
+    void load();
 
-        /** Returns true if wallpaper available and drawn */
-        bool draw(QPainter &painter, const QRect rect, qreal opacity = 1.0);
+    /** Returns true if wallpaper available and drawn */
+    bool draw(QPainter &painter, const QRect rect, qreal opacity = 1.0);
 
-        bool isNull() const;
+    bool isNull() const;
 
-        QString path() const;
+    QString path() const;
 
-    private:
-        Q_DISABLE_COPY(ColorSchemeWallpaper)
+private:
+    Q_DISABLE_COPY(ColorSchemeWallpaper)
 
-        QString _path;
-        std::unique_ptr<QPixmap> _picture;
-    };
+    QString _path;
+    std::unique_ptr<QPixmap> _picture;
+};
 
 }
 

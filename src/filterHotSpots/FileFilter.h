@@ -9,12 +9,13 @@
 #define FILE_FILTER
 
 #include <QPointer>
-#include <QString>
 #include <QSet>
+#include <QString>
 
 #include "RegExpFilter.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class Session;
 class HotSpot;
 

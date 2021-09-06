@@ -13,25 +13,25 @@
 #include <QKeyEvent>
 
 // Konsole
-#include "keyboardtranslator/KeyboardTranslator.h"
-#include "keyboardtranslator/KeyboardTranslatorManager.h"
 #include "Screen.h"
 #include "ScreenWindow.h"
+#include "keyboardtranslator/KeyboardTranslator.h"
+#include "keyboardtranslator/KeyboardTranslatorManager.h"
 
 using namespace Konsole;
 
-Emulation::Emulation() :
-    _windows(QList<ScreenWindow *>()),
-    _currentScreen(nullptr),
-    _codec(nullptr),
-    _keyTranslator(nullptr),
-    _usesMouseTracking(false),
-    _bracketedPasteMode(false),
-    _bulkTimer1(QTimer(this)),
-    _bulkTimer2(QTimer(this)),
-    _imageSizeInitialized(false),
-    _peekingPrimary(false),
-    _activeScreenIndex(0)
+Emulation::Emulation()
+    : _windows(QList<ScreenWindow *>())
+    , _currentScreen(nullptr)
+    , _codec(nullptr)
+    , _keyTranslator(nullptr)
+    , _usesMouseTracking(false)
+    , _bracketedPasteMode(false)
+    , _bulkTimer1(QTimer(this))
+    , _bulkTimer2(QTimer(this))
+    , _imageSizeInitialized(false)
+    , _peekingPrimary(false)
+    , _activeScreenIndex(0)
 {
     // create screens with a default size
     _screen[0] = new Screen(40, 80);
@@ -42,10 +42,8 @@ Emulation::Emulation() :
     QObject::connect(&_bulkTimer2, &QTimer::timeout, this, &Konsole::Emulation::showBulk);
 
     // listen for mouse status changes
-    connect(this, &Konsole::Emulation::programRequestsMouseTracking, this,
-            &Konsole::Emulation::setUsesMouseTracking);
-    connect(this, &Konsole::Emulation::programBracketedPasteModeChanged, this,
-            &Konsole::Emulation::bracketedPasteModeChanged);
+    connect(this, &Konsole::Emulation::programRequestsMouseTracking, this, &Konsole::Emulation::setUsesMouseTracking);
+    connect(this, &Konsole::Emulation::programBracketedPasteModeChanged, this, &Konsole::Emulation::bracketedPasteModeChanged);
 }
 
 bool Emulation::programUsesMouseTracking() const
@@ -73,13 +71,10 @@ ScreenWindow *Emulation::createWindow()
     auto window = new ScreenWindow(_currentScreen);
     _windows << window;
 
-    connect(window, &Konsole::ScreenWindow::selectionChanged, this,
-            &Konsole::Emulation::bufferedUpdate);
-    connect(window, &Konsole::ScreenWindow::selectionChanged, this,
-            &Konsole::Emulation::checkSelectedText);
+    connect(window, &Konsole::ScreenWindow::selectionChanged, this, &Konsole::Emulation::bufferedUpdate);
+    connect(window, &Konsole::ScreenWindow::selectionChanged, this, &Konsole::Emulation::checkSelectedText);
 
-    connect(this, &Konsole::Emulation::outputChanged, window,
-            &Konsole::ScreenWindow::notifyOutputChanged);
+    connect(this, &Konsole::Emulation::outputChanged, window, &Konsole::ScreenWindow::notifyOutputChanged);
 
     return window;
 }
@@ -238,14 +233,14 @@ void Emulation::receiveData(const char *text, int length)
 
     bufferedUpdate();
 
-    //send characters to terminal emulator
+    // send characters to terminal emulator
     for (const uint i : _decoder->toUnicode(text, length).toUcs4()) {
         receiveChar(i);
     }
 
-    //look for z-modem indicator
+    // look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move
-    //this check into the above for loop?
+    // this check into the above for loop?
     for (int i = 0; i < length - 4; i++) {
         if (text[i] == '\030') {
             if (qstrncmp(text + i + 1, "B00", 3) == 0) {
@@ -303,12 +298,7 @@ void Emulation::setImageSize(int lines, int columns)
         return;
     }
 
-    QSize screenSize[2] = {
-        QSize(_screen[0]->getColumns(),
-              _screen[0]->getLines()),
-        QSize(_screen[1]->getColumns(),
-              _screen[1]->getLines())
-    };
+    QSize screenSize[2] = {QSize(_screen[0]->getColumns(), _screen[0]->getLines()), QSize(_screen[1]->getColumns(), _screen[1]->getLines())};
     QSize newSize(columns, lines);
 
     if (newSize == screenSize[0] && newSize == screenSize[1]) {

@@ -13,7 +13,8 @@
 
 using namespace Konsole;
 
-PrintOptions::PrintOptions(QWidget *parent) : QWidget(parent)
+PrintOptions::PrintOptions(QWidget *parent)
+    : QWidget(parent)
 {
     setupUi(this);
 

@@ -11,8 +11,8 @@
 
 using namespace Konsole;
 
-ExtendedCharTable::ExtendedCharTable() :
-    _extendedCharTable(QHash<uint, uint *>())
+ExtendedCharTable::ExtendedCharTable()
+    : _extendedCharTable(QHash<uint, uint *>())
 {
 }
 
@@ -42,7 +42,7 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
             // this sequence already has an entry in the table,
             // return its hash
             return hash;
-        } 
+        }
         // if hash is already used by another, different sequence of unicode character
         // points then try next hash
         hash++;
@@ -90,7 +90,7 @@ uint *ExtendedCharTable::lookupExtendedChar(uint hash, ushort &length) const
     if (buffer != nullptr) {
         length = ushort(buffer[0]);
         return buffer + 1;
-    } 
+    }
     length = 0;
     return nullptr;
 }
@@ -104,8 +104,7 @@ uint ExtendedCharTable::extendedCharHash(const uint *unicodePoints, ushort lengt
     return hash;
 }
 
-bool ExtendedCharTable::extendedCharMatch(uint hash, const uint *unicodePoints,
-                                          ushort length) const
+bool ExtendedCharTable::extendedCharMatch(uint hash, const uint *unicodePoints, ushort length) const
 {
     uint *entry = _extendedCharTable[hash];
 

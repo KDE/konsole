@@ -11,7 +11,8 @@
 
 class KTextEdit;
 class QDialogButtonBox;
-namespace Konsole {
+namespace Konsole
+{
 class ZModemDialog : public QDialog
 {
     Q_OBJECT

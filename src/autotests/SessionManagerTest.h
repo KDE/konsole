@@ -9,7 +9,6 @@
 
 namespace Konsole
 {
-
 class SessionManagerTest : public QObject
 {
     Q_OBJECT
@@ -24,4 +23,3 @@ private Q_SLOTS:
 }
 
 #endif // SESSIONMANAGERTEST_H
-

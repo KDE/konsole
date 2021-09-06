@@ -7,23 +7,23 @@
 
 #include "HotSpot.h"
 
-#include <QMouseEvent>
 #include <QDebug>
+#include <QMouseEvent>
 
+#include "FileFilterHotspot.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
-#include "FileFilterHotspot.h"
 
 using namespace Konsole;
 
 HotSpot::~HotSpot() = default;
 
-HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn) :
-    _startLine(startLine),
-    _startColumn(startColumn),
-    _endLine(endLine),
-    _endColumn(endColumn),
-    _type(NotSpecified)
+HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn)
+    : _startLine(startLine)
+    , _startColumn(startColumn)
+    , _endLine(endLine)
+    , _endColumn(endColumn)
+    , _type(NotSpecified)
 {
 }
 
@@ -81,22 +81,13 @@ QPair<QRegion, QRect> HotSpot::region(int fontWidth, int fontHeight, int columns
                     (endLine() + 1) * fontHeight + top - 1);
         region |= r;
     } else {
-        r.setCoords(startColumn() * fontWidth + left,
-                    startLine() * fontHeight + top,
-                    (columns) * fontWidth + left - 1,
-                    (startLine() + 1) *fontHeight + top - 1);
+        r.setCoords(startColumn() * fontWidth + left, startLine() * fontHeight + top, (columns)*fontWidth + left - 1, (startLine() + 1) * fontHeight + top - 1);
         region |= r;
-        for (int line = startLine() + 1 ; line < endLine() ; line++) {
-            r.setCoords(0 *  fontWidth + left,
-                        line *  fontHeight + top,
-                        (columns)* fontWidth + left - 1,
-                        (line + 1)* fontHeight + top - 1);
+        for (int line = startLine() + 1; line < endLine(); line++) {
+            r.setCoords(0 * fontWidth + left, line * fontHeight + top, (columns)*fontWidth + left - 1, (line + 1) * fontHeight + top - 1);
             region |= r;
         }
-        r.setCoords(0 *  fontWidth + left,
-                    endLine()* fontHeight + top,
-                    (endColumn()) * fontWidth + left - 1,
-                    (endLine() + 1) * fontHeight + top - 1);
+        r.setCoords(0 * fontWidth + left, endLine() * fontHeight + top, (endColumn()) * fontWidth + left - 1, (endLine() + 1) * fontHeight + top - 1);
         region |= r;
     }
     return {region, r};
@@ -119,8 +110,7 @@ void HotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
         return;
     }
 
-    if (td->cursor().shape() != Qt::PointingHandCursor
-        && ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u)))) {
+    if (td->cursor().shape() != Qt::PointingHandCursor && ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u)))) {
         td->setCursor(Qt::PointingHandCursor);
     }
 
@@ -153,7 +143,7 @@ void HotSpot::mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev)
     }
 }
 
-void HotSpot::keyPressEvent(TerminalDisplay* td, QKeyEvent *ev)
+void HotSpot::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev)
 {
     if (!isUrl()) {
         return;
@@ -180,9 +170,10 @@ void HotSpot::keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev)
     td->resetCursor();
 }
 
-void HotSpot::debug() {
+void HotSpot::debug()
+{
     qDebug() << this;
-    qDebug() <<  type();
+    qDebug() << type();
     qDebug() << _startLine << _endLine << _startColumn << _endColumn;
 }
 
@@ -194,4 +185,3 @@ bool Konsole::HotSpot::hasDragOperation() const
 void Konsole::HotSpot::startDrag()
 {
 }
-

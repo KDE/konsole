@@ -15,37 +15,36 @@ class QString;
 
 namespace Konsole
 {
+/**
+ * A terminal character decoder which produces pretty HTML markup
+ */
+class KONSOLEDECODERS_EXPORT HTMLDecoder : public TerminalCharacterDecoder
+{
+public:
     /**
-     * A terminal character decoder which produces pretty HTML markup
+     * Constructs an HTML decoder using a default black-on-white color scheme.
      */
-    class KONSOLEDECODERS_EXPORT HTMLDecoder : public TerminalCharacterDecoder
-    {
-    public:
-        /**
-         * Constructs an HTML decoder using a default black-on-white color scheme.
-         */
-        explicit HTMLDecoder(const QString &colorSchemeName = QString(), const QFont &profileFont = QFont());
+    explicit HTMLDecoder(const QString &colorSchemeName = QString(), const QFont &profileFont = QFont());
 
-        void decodeLine(const Character * const characters, int count,
-                        LineProperty properties) override;
+    void decodeLine(const Character *const characters, int count, LineProperty properties) override;
 
-        void begin(QTextStream *output) override;
-        void end() override;
+    void begin(QTextStream *output) override;
+    void end() override;
 
-    private:
-        void openSpan(QString &text, const QString &style);
-        void closeSpan(QString &text);
+private:
+    void openSpan(QString &text, const QString &style);
+    void closeSpan(QString &text);
 
-        QTextStream *_output;
-        QString _colorSchemeName;
-        QFont _profileFont;
-        QColor _colorTable[TABLE_COLORS];
-        bool _innerSpanOpen;
-        RenditionFlags _lastRendition;
-        CharacterColor _lastForeColor;
-        CharacterColor _lastBackColor;
-        bool _validProfile;
-    };
+    QTextStream *_output;
+    QString _colorSchemeName;
+    QFont _profileFont;
+    QColor _colorTable[TABLE_COLORS];
+    bool _innerSpanOpen;
+    RenditionFlags _lastRendition;
+    CharacterColor _lastForeColor;
+    CharacterColor _lastBackColor;
+    bool _validProfile;
+};
 }
 
 #endif

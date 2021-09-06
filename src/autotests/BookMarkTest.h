@@ -11,7 +11,6 @@
 
 namespace Konsole
 {
-
 class BookMarkTest : public QObject
 {
     Q_OBJECT

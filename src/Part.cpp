@@ -8,18 +8,18 @@
 #include "Part.h"
 
 // Qt
-#include <QStringList>
 #include <QDir>
 #include <QKeyEvent>
 #include <QMetaEnum>
+#include <QStringList>
 #include <QUrl>
 
 // KDE
-#include <QAction>
 #include <KActionCollection>
-#include <KPluginFactory>
-#include <KLocalizedString>
 #include <KConfigDialog>
+#include <KLocalizedString>
+#include <KPluginFactory>
+#include <QAction>
 
 // Konsole
 #include "Emulation.h"
@@ -30,27 +30,24 @@
 #include "session/SessionManager.h"
 #include "settings/PartInfo.h"
 #include "settings/ProfileSettings.h"
-#include "widgets/EditProfileDialog.h"
 #include "terminalDisplay/TerminalDisplay.h"
+#include "widgets/EditProfileDialog.h"
 #include "widgets/ViewContainer.h"
 
 using namespace Konsole;
 
-K_PLUGIN_FACTORY_WITH_JSON(KonsolePartFactory,
-                           "konsolepart.json",
-                           registerPlugin<Konsole::Part>();)
+K_PLUGIN_FACTORY_WITH_JSON(KonsolePartFactory, "konsolepart.json", registerPlugin<Konsole::Part>();)
 
-Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &) :
-    KParts::ReadOnlyPart(parent),
-    _viewManager(nullptr),
-    _pluggedController(nullptr)
+Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &)
+    : KParts::ReadOnlyPart(parent)
+    , _viewManager(nullptr)
+    , _pluggedController(nullptr)
 {
     // create view widget
     _viewManager = new ViewManager(this, actionCollection());
     _viewManager->setNavigationMethod(ViewManager::NoNavigation);
 
-    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this,
-            &Konsole::Part::activeViewChanged);
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this, &Konsole::Part::activeViewChanged);
     connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::Part::terminalExited);
     connect(_viewManager, &Konsole::ViewManager::newViewRequest, this, &Konsole::Part::newTab);
 
@@ -207,9 +204,8 @@ QString Part::currentProfileName() const
 
 bool Part::setCurrentProfile(const QString &profileName)
 {
-
     Profile::Ptr profile;
-    for(auto p : ProfileManager::instance()->allProfiles()) {
+    for (auto p : ProfileManager::instance()->allProfiles()) {
         if (p->name() == profileName) {
             profile = p;
             break;
@@ -253,20 +249,16 @@ void Part::activeViewChanged(SessionController *controller)
     // remove existing controller
     if (_pluggedController != nullptr) {
         removeChildClient(_pluggedController);
-        disconnect(_pluggedController, &Konsole::SessionController::titleChanged, this,
-                   &Konsole::Part::activeViewTitleChanged);
-        disconnect(_pluggedController, &Konsole::SessionController::currentDirectoryChanged, this,
-                   &Konsole::Part::currentDirectoryChanged);
+        disconnect(_pluggedController, &Konsole::SessionController::titleChanged, this, &Konsole::Part::activeViewTitleChanged);
+        disconnect(_pluggedController, &Konsole::SessionController::currentDirectoryChanged, this, &Konsole::Part::currentDirectoryChanged);
     }
 
     // insert new controller
     insertChildClient(controller);
 
-    connect(controller, &Konsole::SessionController::titleChanged, this,
-            &Konsole::Part::activeViewTitleChanged);
+    connect(controller, &Konsole::SessionController::titleChanged, this, &Konsole::Part::activeViewTitleChanged);
     activeViewTitleChanged(controller);
-    connect(controller, &Konsole::SessionController::currentDirectoryChanged, this,
-            &Konsole::Part::currentDirectoryChanged);
+    connect(controller, &Konsole::SessionController::currentDirectoryChanged, this, &Konsole::Part::currentDirectoryChanged);
 
     disconnect(controller->view(), &TerminalDisplay::overrideShortcutCheck, this, &Part::overrideTerminalShortcut);
     connect(controller->view(), &TerminalDisplay::overrideShortcutCheck, this, &Part::overrideTerminalShortcut);
@@ -279,8 +271,7 @@ void Part::overrideTerminalShortcut(QKeyEvent *event, bool &override)
     // Shift+Insert is commonly used as the alternate shortcut for
     // pasting in KDE apps(including konsole), so it deserves some
     // special treatment.
-    if (((event->modifiers() & Qt::ShiftModifier) != 0U)
-        && (event->key() == Qt::Key_Insert)) {
+    if (((event->modifiers() & Qt::ShiftModifier) != 0U) && (event->key() == Qt::Key_Insert)) {
         override = false;
         return;
     }
@@ -302,21 +293,14 @@ void Part::showManageProfilesDialog(QWidget *parent)
         return;
     }
 
-    KConfigDialog *settingsDialog = new KConfigDialog(parent, QStringLiteral("konsolepartmanageprofiles"),
-                                                      KonsoleSettings::self());
+    KConfigDialog *settingsDialog = new KConfigDialog(parent, QStringLiteral("konsolepartmanageprofiles"), KonsoleSettings::self());
     settingsDialog->setFaceType(KPageDialog::Tabbed);
 
     auto profileSettings = new ProfileSettings(settingsDialog);
-    settingsDialog->addPage(profileSettings,
-                            i18nc("@title Preferences page name",
-                                  "Profiles"),
-                            QStringLiteral("configure"));
+    settingsDialog->addPage(profileSettings, i18nc("@title Preferences page name", "Profiles"), QStringLiteral("configure"));
 
     auto partInfoSettings = new PartInfoSettings(settingsDialog);
-    settingsDialog->addPage(partInfoSettings,
-                            i18nc("@title Preferences page name",
-                                  "Part Info"),
-                            QStringLiteral("dialog-information"));
+    settingsDialog->addPage(partInfoSettings, i18nc("@title Preferences page name", "Part Info"), QStringLiteral("dialog-information"));
 
     settingsDialog->show();
 }
@@ -372,14 +356,11 @@ void Part::setMonitorSilenceEnabled(bool enabled)
 
     if (enabled) {
         activeSession()->setMonitorSilence(true);
-        connect(activeSession(), &Konsole::Session::notificationsChanged,
-                this, &Konsole::Part::notificationChanged,
-                Qt::UniqueConnection);
+        connect(activeSession(), &Konsole::Session::notificationsChanged, this, &Konsole::Part::notificationChanged, Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorSilence(false);
         if (!activeSession()->isMonitorActivity()) {
-            disconnect(activeSession(), &Konsole::Session::notificationsChanged,
-                       this, &Konsole::Part::notificationChanged);
+            disconnect(activeSession(), &Konsole::Session::notificationsChanged, this, &Konsole::Part::notificationChanged);
         }
     }
 }
@@ -390,15 +371,11 @@ void Part::setMonitorActivityEnabled(bool enabled)
 
     if (enabled) {
         activeSession()->setMonitorActivity(true);
-        connect(activeSession(), &Konsole::Session::notificationsChanged,
-                this, &Konsole::Part::notificationChanged,
-                Qt::UniqueConnection);
+        connect(activeSession(), &Konsole::Session::notificationsChanged, this, &Konsole::Part::notificationChanged, Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorActivity(false);
         if (!activeSession()->isMonitorSilence()) {
-            disconnect(activeSession(), &Konsole::Session::notificationsChanged,
-                       this,
-                       &Konsole::Part::notificationChanged);
+            disconnect(activeSession(), &Konsole::Session::notificationsChanged, this, &Konsole::Part::notificationChanged);
         }
     }
 }

@@ -13,16 +13,19 @@
 
 #include "sshconfigurationdata.h"
 
-namespace Ui {
-    class SSHTreeWidget;
+namespace Ui
+{
+class SSHTreeWidget;
 }
 
-namespace Konsole {
-    class SessionController;
+namespace Konsole
+{
+class SessionController;
 }
 class SSHManagerModel;
 
-class SSHManagerTreeWidget : public QWidget {
+class SSHManagerTreeWidget : public QWidget
+{
     Q_OBJECT
 public:
     SSHManagerTreeWidget(QWidget *parent = nullptr);
@@ -58,7 +61,7 @@ public:
     void setModel(SSHManagerModel *model);
     void triggerRemove();
     void setCurrentController(Konsole::SessionController *controller);
-    void connectRequested(const QModelIndex& idx);
+    void connectRequested(const QModelIndex &idx);
     void handleImportedData(bool isImported);
 
 private:

@@ -12,18 +12,17 @@
 
 namespace Konsole
 {
+// specifies how much a particular color can be randomized by
+class RandomizationRange
+{
+public:
+    RandomizationRange();
+    bool isNull() const;
 
-    // specifies how much a particular color can be randomized by
-    class RandomizationRange
-    {
-    public:
-        RandomizationRange();
-        bool isNull() const;
-
-        double hue;
-        double saturation;
-        double lightness;
-    };
+    double hue;
+    double saturation;
+    double lightness;
+};
 
 }
 

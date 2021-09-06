@@ -9,7 +9,8 @@
 
 #include "ui_TabBarSettings.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class TabBarSettings : public QWidget, private Ui::TabBarSettings
 {
     Q_OBJECT

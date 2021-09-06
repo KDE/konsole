@@ -14,41 +14,39 @@
 
 using namespace Konsole;
 
-const QColor CharacterColorTest::DefaultColorTable[TABLE_COLORS] = {
-    QColor(0x00, 0x00, 0x00), // Dfore
-    QColor(0xFF, 0xFF, 0xFF), // Dback
-    QColor(0x00, 0x00, 0x00), // Black
-    QColor(0xB2, 0x18, 0x18), // Red
-    QColor(0x18, 0xB2, 0x18), // Green
-    QColor(0xB2, 0x68, 0x18), // Yellow
-    QColor(0x18, 0x18, 0xB2), // Blue
-    QColor(0xB2, 0x18, 0xB2), // Magenta
-    QColor(0x18, 0xB2, 0xB2), // Cyan
-    QColor(0xB2, 0xB2, 0xB2), // White
-    // intensive versions
-    QColor(0x00, 0x00, 0x00),
-    QColor(0xFF, 0xFF, 0xFF),
-    QColor(0x68, 0x68, 0x68),
-    QColor(0xFF, 0x54, 0x54),
-    QColor(0x54, 0xFF, 0x54),
-    QColor(0xFF, 0xFF, 0x54),
-    QColor(0x54, 0x54, 0xFF),
-    QColor(0xFF, 0x54, 0xFF),
-    QColor(0x54, 0xFF, 0xFF),
-    QColor(0xFF, 0xFF, 0xFF),
-    // Here are faint intensities, which may not be good.
-    // faint versions
-    QColor(0x00, 0x00, 0x00),
-    QColor(0xFF, 0xFF, 0xFF),
-    QColor(0x00, 0x00, 0x00),
-    QColor(0x65, 0x00, 0x00),
-    QColor(0x00, 0x65, 0x00),
-    QColor(0x65, 0x5E, 0x00),
-    QColor(0x00, 0x00, 0x65),
-    QColor(0x65, 0x00, 0x65),
-    QColor(0x00, 0x65, 0x65),
-    QColor(0x65, 0x65, 0x65)
-};
+const QColor CharacterColorTest::DefaultColorTable[TABLE_COLORS] = {QColor(0x00, 0x00, 0x00), // Dfore
+                                                                    QColor(0xFF, 0xFF, 0xFF), // Dback
+                                                                    QColor(0x00, 0x00, 0x00), // Black
+                                                                    QColor(0xB2, 0x18, 0x18), // Red
+                                                                    QColor(0x18, 0xB2, 0x18), // Green
+                                                                    QColor(0xB2, 0x68, 0x18), // Yellow
+                                                                    QColor(0x18, 0x18, 0xB2), // Blue
+                                                                    QColor(0xB2, 0x18, 0xB2), // Magenta
+                                                                    QColor(0x18, 0xB2, 0xB2), // Cyan
+                                                                    QColor(0xB2, 0xB2, 0xB2), // White
+                                                                    // intensive versions
+                                                                    QColor(0x00, 0x00, 0x00),
+                                                                    QColor(0xFF, 0xFF, 0xFF),
+                                                                    QColor(0x68, 0x68, 0x68),
+                                                                    QColor(0xFF, 0x54, 0x54),
+                                                                    QColor(0x54, 0xFF, 0x54),
+                                                                    QColor(0xFF, 0xFF, 0x54),
+                                                                    QColor(0x54, 0x54, 0xFF),
+                                                                    QColor(0xFF, 0x54, 0xFF),
+                                                                    QColor(0x54, 0xFF, 0xFF),
+                                                                    QColor(0xFF, 0xFF, 0xFF),
+                                                                    // Here are faint intensities, which may not be good.
+                                                                    // faint versions
+                                                                    QColor(0x00, 0x00, 0x00),
+                                                                    QColor(0xFF, 0xFF, 0xFF),
+                                                                    QColor(0x00, 0x00, 0x00),
+                                                                    QColor(0x65, 0x00, 0x00),
+                                                                    QColor(0x00, 0x65, 0x00),
+                                                                    QColor(0x65, 0x5E, 0x00),
+                                                                    QColor(0x00, 0x00, 0x65),
+                                                                    QColor(0x65, 0x00, 0x65),
+                                                                    QColor(0x00, 0x65, 0x65),
+                                                                    QColor(0x65, 0x65, 0x65)};
 
 void CharacterColorTest::init()
 {
@@ -62,7 +60,7 @@ void CharacterColorTest::testColorEntry()
 {
     QColor black = QColor(0x00, 0x00, 0x00);
     QColor white = QColor(0xFF, 0xFF, 0xFF);
-    QColor red   = QColor(0xB2, 0x18, 0x18);
+    QColor red = QColor(0xB2, 0x18, 0x18);
     QColor green = QColor(0x18, 0xB2, 0x18);
 
     // Test operator== operator!=
@@ -174,8 +172,8 @@ void CharacterColorTest::testColor256_data()
         const QString name = QStringLiteral("color256 color %1").arg(i);
         const auto u = i - 16;
         const auto color = QColor(((u / 36) % 6) != 0 ? (40 * ((u / 36) % 6) + 55) : 0,
-                      ((u / 6) % 6) != 0 ? (40 * ((u / 6) % 6) + 55) : 0,
-                      ((u / 1) % 6) != 0 ? (40 * ((u / 1) % 6) + 55) : 0);
+                                  ((u / 6) % 6) != 0 ? (40 * ((u / 6) % 6) + 55) : 0,
+                                  ((u / 1) % 6) != 0 ? (40 * ((u / 1) % 6) + 55) : 0);
         QTest::newRow(qPrintable(name)) << i << color;
     }
     for (int i = 232; i < 256; ++i) {

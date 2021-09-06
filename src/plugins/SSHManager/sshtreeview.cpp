@@ -9,14 +9,14 @@
 
 #include <QMouseEvent>
 
-SshTreeView::SshTreeView(QWidget* parent)
-: QTreeView(parent)
+SshTreeView::SshTreeView(QWidget *parent)
+    : QTreeView(parent)
 {
 }
 
 SshTreeView::~SshTreeView() noexcept = default;
 
-void SshTreeView::mouseReleaseEvent(QMouseEvent* ev)
+void SshTreeView::mouseReleaseEvent(QMouseEvent *ev)
 {
     const QModelIndex idxAt = indexAt(ev->pos());
     if (idxAt.isValid()) {

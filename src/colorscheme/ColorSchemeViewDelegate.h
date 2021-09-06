@@ -12,20 +12,20 @@
 
 namespace Konsole
 {
-    /**
-     * A delegate which can display and edit color schemes in a view.
-     */
-    class ColorSchemeViewDelegate : public QAbstractItemDelegate
-    {
-        Q_OBJECT
+/**
+ * A delegate which can display and edit color schemes in a view.
+ */
+class ColorSchemeViewDelegate : public QAbstractItemDelegate
+{
+    Q_OBJECT
 
-    public:
-        explicit ColorSchemeViewDelegate(QObject *parent = nullptr);
+public:
+    explicit ColorSchemeViewDelegate(QObject *parent = nullptr);
 
-        // reimplemented
-        void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-        QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-    };
+    // reimplemented
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+};
 
 }
 

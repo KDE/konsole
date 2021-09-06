@@ -9,7 +9,8 @@
 
 #include "ui_GeneralSettings.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class GeneralSettings : public QWidget, private Ui::GeneralSettings
 {
     Q_OBJECT

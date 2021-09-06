@@ -7,47 +7,50 @@
 
 #include "FileFilterHotspot.h"
 
-#include <QApplication>
 #include <QAction>
+#include <QApplication>
 #include <QBuffer>
 #include <QClipboard>
+#include <QDrag>
+#include <QKeyEvent>
 #include <QMenu>
-#include <QTimer>
-#include <QToolTip>
+#include <QMimeData>
 #include <QMimeDatabase>
 #include <QMouseEvent>
-#include <QKeyEvent>
 #include <QRegularExpression>
-#include <QDrag>
-#include <QMimeData>
+#include <QTimer>
+#include <QToolTip>
 
 #include <KIO/ApplicationLauncherJob>
 #include <KIO/OpenUrlJob>
 
+#include <KFileItemListProperties>
 #include <KIO/JobUiDelegate>
 #include <KLocalizedString>
-#include <KFileItemListProperties>
 #include <KMessageBox>
 #include <KShell>
 
 #include <kio_version.h>
 
-#include "konsoledebug.h"
 #include "KonsoleSettings.h"
+#include "konsoledebug.h"
 #include "profile/Profile.h"
 #include "session/SessionManager.h"
 #include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 
-
-FileFilterHotSpot::FileFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn,
-                                     const QStringList &capturedTexts, const QString &filePath,
+FileFilterHotSpot::FileFilterHotSpot(int startLine,
+                                     int startColumn,
+                                     int endLine,
+                                     int endColumn,
+                                     const QStringList &capturedTexts,
+                                     const QString &filePath,
                                      Session *session)
-  : RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts),
-    _filePath(filePath),
-    _session(session),
-    _thumbnailFinished(false)
+    : RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts)
+    , _filePath(filePath)
+    , _session(session)
+    , _thumbnailFinished(false)
 {
     setType(Link);
 }
@@ -111,8 +114,7 @@ void FileFilterHotSpot::activate(QObject *)
     // There was no match, i.e. regular url "path/to/file"
     // Clean up the file path; the second branch in the regex is for "path/to/file:"
     QString path(_filePath);
-    static const QRegularExpression cleanupRe(QStringLiteral(R"foo((:\d+[:]?|:)$)foo"),
-                                              QRegularExpression::DontCaptureOption);
+    static const QRegularExpression cleanupRe(QStringLiteral(R"foo((:\d+[:]?|:)$)foo"), QRegularExpression::DontCaptureOption);
     path.remove(cleanupRe);
     if (!editorExecPath.isEmpty()) { // Use the editor from the profile settings
         const QString fCmd = editorExecPath + QLatin1Char(' ') + path;
@@ -155,8 +157,8 @@ void FileFilterHotSpot::openWithEditorFromProfile(const QString &fullCmd, const 
         if (job->error() != 0) {
             // TODO: use KMessageWidget (like the "terminal is read-only" message)
             KMessageBox::sorry(QApplication::activeWindow(),
-                i18n("Could not open file with the text editor specified in the profile settings;\n"
-                     "it will be opened with the system default editor."));
+                               i18n("Could not open file with the text editor specified in the profile settings;\n"
+                                    "it will be opened with the system default editor."));
 
             openWithSysDefaultApp(path);
         }
@@ -186,7 +188,7 @@ QList<QAction *> FileFilterHotSpot::setupMenu(QMenu *menu)
     const KFileItemListProperties itemProperties(itemList);
     _menuActions.setParent(this);
     _menuActions.setItemListProperties(itemProperties);
-#if KIO_VERSION < QT_VERSION_CHECK(5,82,0)
+#if KIO_VERSION < QT_VERSION_CHECK(5, 82, 0)
     _menuActions.addOpenWithActionsTo(menu);
 
     // Here we added the actions to the last part of the menu, but we need to move them up.
@@ -231,7 +233,7 @@ void FileFilterHotSpot::requestThumbnail(Qt::KeyboardModifiers modifiers, const 
     _eventPos = pos;
 
     // Defer the real creation of the thumbnail by a few msec.
-    QTimer::singleShot(250, this, [this]{
+    QTimer::singleShot(250, this, [this] {
         thumbnailRequested();
     });
 }
@@ -245,7 +247,7 @@ void FileFilterHotSpot::stopThumbnailGeneration()
     }
 }
 
-void FileFilterHotSpot::showThumbnail(const KFileItem& item, const QPixmap& preview)
+void FileFilterHotSpot::showThumbnail(const KFileItem &item, const QPixmap &preview)
 {
     if (!_canGenerateThumbnail) {
         return;
@@ -256,13 +258,13 @@ void FileFilterHotSpot::showThumbnail(const KFileItem& item, const QPixmap& prev
     QBuffer buffer(&data);
     preview.save(&buffer, "PNG", 100);
 
-    const auto tooltipString = QStringLiteral("<img src='data:image/png;base64, %0'>")
-        .arg(QString::fromLocal8Bit(data.toBase64()));
+    const auto tooltipString = QStringLiteral("<img src='data:image/png;base64, %0'>").arg(QString::fromLocal8Bit(data.toBase64()));
 
     QToolTip::showText(_thumbnailPos, tooltipString, qApp->focusWidget());
 }
 
-void FileFilterHotSpot::thumbnailRequested() {
+void FileFilterHotSpot::thumbnailRequested()
+{
     if (!_canGenerateThumbnail) {
         return;
     }
@@ -287,7 +289,7 @@ void FileFilterHotSpot::thumbnailRequested() {
     _thumbnailFinished = false;
 
     // Show a "Loading" if Preview takes a long time.
-    QTimer::singleShot(10, this, [this]{
+    QTimer::singleShot(10, this, [this] {
         if (_previewJob == nullptr) {
             return;
         }
@@ -298,7 +300,7 @@ void FileFilterHotSpot::thumbnailRequested() {
 
     _previewJob = new KIO::PreviewJob(KFileItemList({fileItem()}), QSize(size, size));
     connect(_previewJob, &KIO::PreviewJob::gotPreview, this, &FileFilterHotSpot::showThumbnail);
-    connect(_previewJob, &KIO::PreviewJob::failed, this, []{
+    connect(_previewJob, &KIO::PreviewJob::failed, this, [] {
         qCDebug(KonsoleDebug) << "Error generating the preview" << _previewJob->errorString();
         QToolTip::hideText();
     });
@@ -324,12 +326,11 @@ void FileFilterHotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
     stopThumbnailGeneration();
 }
 
-void FileFilterHotSpot::keyPressEvent(Konsole::TerminalDisplay* td, QKeyEvent* ev)
+void FileFilterHotSpot::keyPressEvent(Konsole::TerminalDisplay *td, QKeyEvent *ev)
 {
     HotSpot::keyPressEvent(td, ev);
     requestThumbnail(ev->modifiers(), QCursor::pos());
 }
-
 
 bool FileFilterHotSpot::hasDragOperation() const
 {

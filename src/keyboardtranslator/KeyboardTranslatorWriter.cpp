@@ -15,9 +15,9 @@
 
 using namespace Konsole;
 
-KeyboardTranslatorWriter::KeyboardTranslatorWriter(QIODevice *destination) :
-    _destination(destination),
-    _writer(nullptr)
+KeyboardTranslatorWriter::KeyboardTranslatorWriter(QIODevice *destination)
+    : _destination(destination)
+    , _writer(nullptr)
 {
     Q_ASSERT(destination && destination->isWritable());
 

@@ -20,9 +20,9 @@
 using Konsole::Session;
 using Konsole::SessionListModel;
 
-SessionListModel::SessionListModel(QObject *parent) :
-    QAbstractListModel(parent),
-    _sessions(QList<Session *>())
+SessionListModel::SessionListModel(QObject *parent)
+    : QAbstractListModel(parent)
+    , _sessions(QList<Session *>())
 {
 }
 
@@ -32,8 +32,7 @@ void SessionListModel::setSessions(const QList<Session *> &sessions)
     _sessions = sessions;
 
     for (Session *session : sessions) {
-        connect(session, &Konsole::Session::finished, this,
-                &Konsole::SessionListModel::sessionFinished);
+        connect(session, &Konsole::Session::finished, this, &Konsole::SessionListModel::sessionFinished);
     }
 
     endResetModel();
@@ -85,7 +84,7 @@ QVariant SessionListModel::headerData(int section, Qt::Orientation orientation, 
 
     if (orientation == Qt::Vertical) {
         return QVariant();
-    } 
+    }
     switch (section) {
     case 0:
         return i18nc("@item:intable The session index", "Number");
@@ -128,6 +127,6 @@ QModelIndex SessionListModel::index(int row, int column, const QModelIndex &pare
 {
     if (hasIndex(row, column, parent)) {
         return createIndex(row, column, _sessions[row]);
-    } 
+    }
     return {};
 }

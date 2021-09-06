@@ -16,8 +16,8 @@
 
 using namespace std::literals::chrono_literals;
 
-namespace Konsole {
-
+namespace Konsole
+{
 constexpr auto MASK_TIMEOUT = 500ms;
 
 TerminalBell::TerminalBell(Enum::BellModeEnum bellMode)
@@ -36,8 +36,7 @@ void TerminalBell::bell(const QString &message, bool terminalHasFocus)
         //     Please note that these event names, "BellVisible" and "BellInvisible",
         //     should not change and should be kept stable, because other applications
         //     that use this code via KPart rely on these names for notifications.
-        KNotification::event(terminalHasFocus ? QStringLiteral("BellVisible") : QStringLiteral("BellInvisible"),
-                             message, QPixmap());
+        KNotification::event(terminalHasFocus ? QStringLiteral("BellVisible") : QStringLiteral("BellInvisible"), message, QPixmap());
         break;
     case Enum::VisualBell:
         Q_EMIT visualBell();

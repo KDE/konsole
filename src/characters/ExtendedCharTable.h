@@ -8,12 +8,13 @@
 #define EXTENDEDCHARTABLE_H
 
 // Qt
-#include <QSet>
 #include <QHash>
+#include <QSet>
 
 #include <functional>
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * A table which stores sequences of unicode characters, referenced
  * by hash keys.  The hash key itself is the same size as a unicode
@@ -23,7 +24,7 @@ namespace Konsole {
 class ExtendedCharTable
 {
 public:
-    typedef std::function<QSet<uint> ()> pExtendedChars;
+    typedef std::function<QSet<uint>()> pExtendedChars;
 
     /** Constructs a new character table. */
     ExtendedCharTable();
@@ -55,6 +56,7 @@ public:
 
     /** The global ExtendedCharTable instance. */
     static ExtendedCharTable instance;
+
 private:
     // calculates the hash key of a sequence of unicode points of size 'length'
     uint extendedCharHash(const uint *unicodePoints, ushort length) const;
@@ -69,4 +71,4 @@ private:
 
 }
 
-#endif  // end of EXTENDEDCHARTABLE_H
+#endif // end of EXTENDEDCHARTABLE_H

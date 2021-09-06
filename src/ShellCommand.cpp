@@ -48,7 +48,7 @@ QString ShellCommand::command() const
 {
     if (!_arguments.isEmpty()) {
         return _arguments[0];
-    } 
+    }
     return QString();
 }
 

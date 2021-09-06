@@ -8,10 +8,10 @@
 #define PROFILESETTINGS_H
 
 // Qt
-#include <QStyledItemDelegate>
-#include <QSet>
-#include <QKeySequenceEdit>
 #include <QExplicitlySharedDataPointer>
+#include <QKeySequenceEdit>
+#include <QSet>
+#include <QStyledItemDelegate>
 
 // KDE
 
@@ -23,7 +23,8 @@ class QItemSelection;
 class QStandardItem;
 class QStandardItemModel;
 
-namespace Konsole {
+namespace Konsole
+{
 class Profile;
 
 /**
@@ -54,7 +55,6 @@ public:
     void setShortcutEditorVisible(bool visible);
 
 protected:
-
 private Q_SLOTS:
     void slotAccepted();
     void deleteSelected();

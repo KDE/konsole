@@ -8,15 +8,14 @@
 
 #pragma once
 
-
 #include <QObject>
 
 #include <Enumeration.h>
 
 namespace Konsole
 {
-
-class TerminalBell : public QObject {
+class TerminalBell : public QObject
+{
     Q_OBJECT
 
 public:

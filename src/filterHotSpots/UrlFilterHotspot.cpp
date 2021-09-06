@@ -15,24 +15,21 @@
 #include <QClipboard>
 #include <QRegularExpression>
 
-#include <QIcon>
 #include <KLocalizedString>
+#include <QIcon>
 #include <QMouseEvent>
 
 #include "UrlFilter.h"
 #include "terminalDisplay/TerminalDisplay.h"
-//regexp matches:
+// regexp matches:
 // full url:
-
-
 
 using namespace Konsole;
 
 UrlFilterHotSpot::~UrlFilterHotSpot() = default;
 
-UrlFilterHotSpot::UrlFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn,
-                            const QStringList &capturedTexts) :
-    RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts)
+UrlFilterHotSpot::UrlFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts)
+    : RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts)
 {
     const UrlType kind = urlType();
     if (kind == Email) {
@@ -112,8 +109,12 @@ QList<QAction *> UrlFilterHotSpot::actions()
     openAction->setObjectName(QStringLiteral("open-action"));
     copyAction->setObjectName(QStringLiteral("copy-action"));
 
-    QObject::connect(openAction, &QAction::triggered, this, [this, openAction]{ activate(openAction); });
-    QObject::connect(copyAction, &QAction::triggered, this, [this, copyAction]{ activate(copyAction); });
+    QObject::connect(openAction, &QAction::triggered, this, [this, openAction] {
+        activate(openAction);
+    });
+    QObject::connect(copyAction, &QAction::triggered, this, [this, copyAction] {
+        activate(copyAction);
+    });
 
     return {openAction, copyAction};
 }

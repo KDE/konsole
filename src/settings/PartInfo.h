@@ -9,7 +9,8 @@
 
 #include "ui_PartInfo.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class PartInfoSettings : public QWidget, private Ui::PartInfoSettings
 {
     Q_OBJECT

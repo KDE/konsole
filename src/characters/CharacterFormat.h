@@ -11,7 +11,6 @@
 
 namespace Konsole
 {
-
 class CharacterFormat
 {
 public:

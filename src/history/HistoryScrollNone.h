@@ -13,7 +13,6 @@
 
 namespace Konsole
 {
-
 //////////////////////////////////////////////////////////////////////
 // Nothing-based history (no history :-)
 //////////////////////////////////////////////////////////////////////
@@ -25,9 +24,9 @@ public:
 
     bool hasScroll() const override;
 
-    int  getLines() const override;
-    int  getMaxLines() const override;
-    int  getLineLen(const int lineno) const override;
+    int getLines() const override;
+    int getMaxLines() const override;
+    int getLineLen(const int lineno) const override;
     void getCells(const int lineno, const int colno, const int count, Character res[]) const override;
     bool isWrappedLine(const int lineno) const override;
     LineProperty getLineProperty(const int lineno) const override;

@@ -9,10 +9,10 @@
 #define SESSIONCONTROLLER_H
 
 // Qt
-#include <QSet>
 #include <QPointer>
-#include <QString>
 #include <QRegularExpression>
+#include <QSet>
+#include <QString>
 
 // KDE
 #include <KXMLGUIClient>
@@ -20,10 +20,10 @@
 #include <memory>
 
 // Konsole
-#include "SessionDisplayConnection.h"
-#include "ViewProperties.h"
 #include "Enumeration.h"
 #include "Session.h"
+#include "SessionDisplayConnection.h"
+#include "ViewProperties.h"
 
 class QAction;
 class QTextCodec;
@@ -35,7 +35,8 @@ class KCodecAction;
 class QAction;
 class KActionMenu;
 
-namespace Konsole {
+namespace Konsole
+{
 class EditProfileDialog;
 class EscapeSequenceUrlFilter;
 class FileFilter;
@@ -76,7 +77,7 @@ public:
         CopyInputToSelectedTabsMode = 1,
 
         /** Do not copy keyboard input to other tabs */
-        CopyInputToNoneMode = 2
+        CopyInputToNoneMode = 2,
     };
 
     /**
@@ -263,7 +264,8 @@ private Q_SLOTS:
     void searchTextChanged(const QString &text);
     void searchCompleted(bool success);
 
-    void updateFilterList(const QExplicitlySharedDataPointer<Profile> &profile); // Called when the profile has changed, so we might need to change the list of filters
+    void updateFilterList(
+        const QExplicitlySharedDataPointer<Profile> &profile); // Called when the profile has changed, so we might need to change the list of filters
 
     void viewFocusChangeHandler(bool focused);
     void interactionHandler();
@@ -274,7 +276,7 @@ private Q_SLOTS:
     void highlightMatches(bool highlight);
     void scrollBackOptionsChanged(int mode, int lines);
     void sessionResizeRequest(const QSize &size);
-    void trackOutput(QKeyEvent *event);  // move view to end of current output
+    void trackOutput(QKeyEvent *event); // move view to end of current output
     // when a key press occurs in the
     // display area
 
@@ -363,4 +365,4 @@ private:
 
 }
 
-#endif //SESSIONCONTROLLER_H
+#endif // SESSIONCONTROLLER_H

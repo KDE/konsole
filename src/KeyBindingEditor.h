@@ -11,16 +11,18 @@
 #include <QDialog>
 
 // Konsole
-//TODO: Move away Profile::Property from the profile header.
+// TODO: Move away Profile::Property from the profile header.
 #include "profile/Profile.h"
 
 class QTableWidgetItem;
 
-namespace Ui {
+namespace Ui
+{
 class KeyBindingEditor;
 }
 
-namespace Konsole {
+namespace Konsole
+{
 class KeyboardTranslator;
 
 /**
@@ -54,8 +56,7 @@ public:
      *                    is an already existing one or a newly created
      *                    one, defaults to false.
      */
-    void setup(const KeyboardTranslator *translator, const QString &currentProfileTranslator,
-               bool isNewTranslator = false);
+    void setup(const KeyboardTranslator *translator, const QString &currentProfileTranslator, bool isNewTranslator = false);
 
     /**
      * Returns the modified translator describing the changes to the bindings
@@ -134,4 +135,4 @@ private:
 };
 }
 
-#endif //KEYBINDINGEDITOR_H
+#endif // KEYBINDINGEDITOR_H

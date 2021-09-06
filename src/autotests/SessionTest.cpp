@@ -10,8 +10,8 @@
 #include "qtest.h"
 
 // Konsole
-#include "../session/Session.h"
 #include "../Emulation.h"
+#include "../session/Session.h"
 
 using namespace Konsole;
 

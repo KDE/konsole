@@ -18,21 +18,21 @@
 #include <QString>
 
 // KDE
-#include <KSharedConfig>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KSharedConfig>
 
 // Konsole
-#include "ProfileReader.h"
-#include "ProfileWriter.h"
 #include "ProfileGroup.h"
 #include "ProfileModel.h"
+#include "ProfileReader.h"
+#include "ProfileWriter.h"
 
 using namespace Konsole;
 
-static bool stringLessThan(const QString& p1, const QString& p2)
+static bool stringLessThan(const QString &p1, const QString &p2)
 {
     return QString::localeAwareCompare(p1, p2) < 0;
 }
@@ -43,7 +43,7 @@ ProfileManager::ProfileManager()
     , _loadedAllProfiles(false)
     , _shortcuts(QMap<QKeySequence, ShortcutData>())
 {
-    //load fallback profile
+    // load fallback profile
     initFallbackProfile();
 
     // lookup the default profile specified in <App>rc
@@ -86,7 +86,7 @@ ProfileManager::ProfileManager()
 ProfileManager::~ProfileManager() = default;
 
 Q_GLOBAL_STATIC(ProfileManager, theProfileManager)
-ProfileManager* ProfileManager::instance()
+ProfileManager *ProfileManager::instance()
 {
     return theProfileManager;
 }
@@ -98,7 +98,7 @@ void ProfileManager::initFallbackProfile()
     addProfile(_fallbackProfile);
 }
 
-Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
+Profile::Ptr ProfileManager::loadProfile(const QString &shortPath)
 {
     // the fallback profile has a 'special' path name, "FALLBACK/"
     if (shortPath == _fallbackProfile->path()) {
@@ -209,7 +209,7 @@ void ProfileManager::loadAllProfiles()
         return;
     }
 
-    const QStringList& paths = availableProfilePaths();
+    const QStringList &paths = availableProfilePaths();
     for (const QString &path : paths) {
         loadProfile(path);
     }
@@ -271,15 +271,13 @@ QString ProfileManager::saveProfile(const Profile::Ptr &profile)
     QString newPath = writer.getPath(profile);
 
     if (!writer.writeProfile(newPath, profile)) {
-        KMessageBox::sorry(nullptr,
-                           i18n("Konsole does not have permission to save this profile to %1", newPath));
+        KMessageBox::sorry(nullptr, i18n("Konsole does not have permission to save this profile to %1", newPath));
     }
 
     return newPath;
 }
 
-void ProfileManager::changeProfile(Profile::Ptr profile,
-                                   QHash<Profile::Property, QVariant> propertyMap, bool persistent)
+void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property, QVariant> propertyMap, bool persistent)
 {
     Q_ASSERT(profile);
 
@@ -301,14 +299,14 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         // in the name box in the edit profile dialog; i.e. saving the
         // fallback profile where the user didn't change the name at all,
         // the uniqueProfileName is used silently a couple of lines above.
-        if ((property == Profile::Name || property == Profile::UntranslatedName)
-            && value == QLatin1String("Default")) {
+        if ((property == Profile::Name || property == Profile::UntranslatedName) && value == QLatin1String("Default")) {
             value = uniqueProfileName;
             if (!messageShown) {
                 KMessageBox::sorry(nullptr,
                                    i18n("The name \"Default\" is reserved for the built-in"
                                         " fallback profile;\nthe profile is going to be"
-                                        " saved as \"%1\"", uniqueProfileName));
+                                        " saved as \"%1\"",
+                                        uniqueProfileName));
                 messageShown = true;
             }
         }
@@ -382,8 +380,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
         // try to delete the config file
         if (profile->isPropertySet(Profile::Path) && QFile::exists(profile->path())) {
             if (!QFile::remove(profile->path())) {
-                qCDebug(KonsoleDebug) << "Could not delete profile: " << profile->path()
-                           << "The file is most likely in a directory which is read-only.";
+                qCDebug(KonsoleDebug) << "Could not delete profile: " << profile->path() << "The file is most likely in a directory which is read-only.";
 
                 return false;
             }
@@ -467,10 +464,10 @@ void ProfileManager::loadShortcuts()
     }
 }
 
-QString ProfileManager::normalizePath(const QString& path) const {
+QString ProfileManager::normalizePath(const QString &path) const
+{
     QFileInfo fileInfo(path);
-    const QString location = QStandardPaths::locate(
-            QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + fileInfo.fileName());
+    const QString location = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + fileInfo.fileName());
     return (!fileInfo.isAbsolute()) || location.isEmpty() ? path : fileInfo.fileName();
 }
 
@@ -489,8 +486,7 @@ void ProfileManager::saveShortcuts()
     }
 }
 
-void ProfileManager::setShortcut(Profile::Ptr profile ,
-                                 const QKeySequence& keySequence)
+void ProfileManager::setShortcut(Profile::Ptr profile, const QKeySequence &keySequence)
 {
     QKeySequence existingShortcut = shortcut(profile);
     _shortcuts.remove(existingShortcut);
@@ -514,12 +510,10 @@ QKeySequence ProfileManager::shortcut(Profile::Ptr profile) const
     QMapIterator<QKeySequence, ShortcutData> iter(_shortcuts);
     while (iter.hasNext()) {
         iter.next();
-        if (iter.value().profileKey == profile
-                || iter.value().profilePath == profile->path()) {
+        if (iter.value().profileKey == profile || iter.value().profilePath == profile->path()) {
             return iter.key();
         }
     }
 
     return QKeySequence();
 }
-

@@ -10,7 +10,8 @@
 
 #include <QString>
 
-class SSHConfigurationData {
+class SSHConfigurationData
+{
 public:
     QString name;
     QString host;

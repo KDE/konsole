@@ -17,47 +17,46 @@ class QFont;
 
 namespace Konsole
 {
+class TerminalFont
+{
+public:
+    explicit TerminalFont(QWidget *parent = nullptr);
+    ~TerminalFont() = default;
 
-    class TerminalFont
-    {
-    public:
-        explicit TerminalFont(QWidget *parent = nullptr);
-        ~TerminalFont() = default;
+    void applyProfile(const Profile::Ptr &profile);
 
-        void applyProfile(const Profile::Ptr &profile);
+    void setVTFont(const QFont &f);
+    QFont getVTFont() const;
 
-        void setVTFont(const QFont &f);
-        QFont getVTFont() const;
+    void increaseFontSize();
+    void decreaseFontSize();
+    void resetFontSize();
 
-        void increaseFontSize();
-        void decreaseFontSize();
-        void resetFontSize();
+    void setLineSpacing(uint);
+    uint lineSpacing() const;
 
-        void setLineSpacing(uint);
-        uint lineSpacing() const;
+    int fontHeight() const;
+    int fontWidth() const;
+    int fontAscent() const;
+    bool boldIntense() const;
+    bool antialiasText() const;
+    bool useFontLineCharacters() const;
 
-        int fontHeight() const;
-        int fontWidth() const;
-        int fontAscent() const;
-        bool boldIntense() const;
-        bool antialiasText() const;
-        bool useFontLineCharacters() const;
+protected:
+    void fontChange(const QFont &);
 
-    protected:
-        void fontChange(const QFont &);
+private:
+    QWidget *m_parent;
+    uint m_lineSpacing;
+    int m_fontHeight;
+    int m_fontWidth;
+    int m_fontAscent;
+    bool m_boldIntense;
+    bool m_antialiasText;
+    bool m_useFontLineCharacters;
 
-    private:
-        QWidget *m_parent;
-        uint m_lineSpacing;
-        int m_fontHeight;
-        int m_fontWidth;
-        int m_fontAscent;
-        bool m_boldIntense;
-        bool m_antialiasText;
-        bool m_useFontLineCharacters;
-
-        Profile::Ptr m_profile;
-    };
+    Profile::Ptr m_profile;
+};
 
 }
 

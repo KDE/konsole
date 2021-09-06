@@ -13,7 +13,8 @@
 
 class KConfig;
 
-namespace Konsole {
+namespace Konsole
+{
 /** Interface for all classes which can load profile settings from a file. */
 class KONSOLEPROFILE_EXPORT ProfileReader
 {
@@ -37,8 +38,7 @@ public:
     bool readProfile(const QString &path, Profile::Ptr profile, QString &parentProfile);
 
 private:
-    void readProperties(const KConfig &config, Profile::Ptr profile,
-                        const Profile::PropertyInfo *properties);
+    void readProperties(const KConfig &config, Profile::Ptr profile, const Profile::PropertyInfo *properties);
 };
 }
 

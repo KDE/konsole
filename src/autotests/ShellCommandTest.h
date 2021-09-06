@@ -14,7 +14,6 @@
 
 namespace Konsole
 {
-
 class ShellCommandTest : public QObject
 {
     Q_OBJECT
@@ -30,10 +29,8 @@ private Q_SLOTS:
     void testValidLeadingEnvCharacter();
     void testArgumentsWithSpaces();
     void testEmptyCommand();
-
 };
 
 }
 
 #endif // SHELLCOMMANDTEST_H
-

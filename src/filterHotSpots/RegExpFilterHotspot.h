@@ -11,25 +11,22 @@
 #include "HotSpot.h"
 #include <QStringList>
 
-namespace Konsole {
+namespace Konsole
+{
 /**
-    * Type of hotspot created by RegExpFilter.  The capturedTexts() method can be used to find the text
-    * matched by the filter's regular expression.
-    */
+ * Type of hotspot created by RegExpFilter.  The capturedTexts() method can be used to find the text
+ * matched by the filter's regular expression.
+ */
 class RegExpFilterHotSpot : public HotSpot
 {
 public:
-    RegExpFilterHotSpot(
-        int startLine,
-        int startColumn,
-        int endLine,
-        int endColumn,
-        const QStringList &capturedTexts);
+    RegExpFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts);
 
     void activate(QObject *object = nullptr) override;
 
     /** Returns the texts found by the filter when matching the filter's regular expression */
     QStringList capturedTexts() const;
+
 private:
     QStringList _capturedTexts;
 };

@@ -10,14 +10,14 @@
 #include "qtest.h"
 
 // Konsole
-#include "../session/Session.h"
 #include "../Emulation.h"
-#include "../history/HistoryTypeNone.h"
-#include "../history/HistoryTypeFile.h"
-#include "../history/compact/CompactHistoryType.h"
-#include "../history/HistoryScrollNone.h"
 #include "../history/HistoryScrollFile.h"
+#include "../history/HistoryScrollNone.h"
+#include "../history/HistoryTypeFile.h"
+#include "../history/HistoryTypeNone.h"
 #include "../history/compact/CompactHistoryScroll.h"
+#include "../history/compact/CompactHistoryType.h"
+#include "../session/Session.h"
 
 using namespace Konsole;
 

@@ -11,7 +11,6 @@
 
 namespace Konsole
 {
-
 class PtyTest : public QObject
 {
     Q_OBJECT
@@ -31,4 +30,3 @@ private Q_SLOTS:
 }
 
 #endif // PTYTEST_H
-

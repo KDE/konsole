@@ -8,25 +8,25 @@
 #include "SSHProcessInfo.h"
 
 // Unix
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
-#include <unistd.h>
+#include <cerrno>
+#include <netinet/in.h>
 #include <pwd.h>
 #include <sys/param.h>
-#include <cerrno>
+#include <sys/socket.h>
+#include <unistd.h>
 
 // Qt
 #include <QDebug>
 
 using namespace Konsole;
 
-SSHProcessInfo::SSHProcessInfo(const ProcessInfo &process) :
-    _process(process),
-    _user(QString()),
-    _host(QString()),
-    _port(QString()),
-    _command(QString())
+SSHProcessInfo::SSHProcessInfo(const ProcessInfo &process)
+    : _process(process)
+    , _user(QString())
+    , _host(QString())
+    , _port(QString())
+    , _command(QString())
 {
     bool ok = false;
 
@@ -194,4 +194,3 @@ QString SSHProcessInfo::format(const QString &input) const
 
     return output;
 }
-

@@ -8,8 +8,8 @@
 #include "HistoryFile.h"
 
 // Konsole
-#include "konsoledebug.h"
 #include "KonsoleSettings.h"
+#include "konsoledebug.h"
 
 // System
 #include <cerrno>
@@ -28,10 +28,10 @@ using namespace Konsole;
 Q_GLOBAL_STATIC(QString, historyFileLocation)
 
 // History File ///////////////////////////////////////////
-HistoryFile::HistoryFile() :
-    _length(0),
-    _fileMap(nullptr),
-    _readWriteBalance(0)
+HistoryFile::HistoryFile()
+    : _length(0)
+    , _fileMap(nullptr)
+    , _readWriteBalance(0)
 {
     // Determine the temp directory once
     // This class is called 3 times for each "unlimited" scrollback.
@@ -61,14 +61,15 @@ HistoryFile::HistoryFile() :
         // Validate file location
         const QFileInfo fi(fileLocation);
         if (fileLocation.isEmpty() || !fi.exists() || !fi.isDir() || !fi.isWritable()) {
-            qCWarning(KonsoleDebug)<<"Invalid scrollback folder "<<fileLocation<<"; using " << QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+            qCWarning(KonsoleDebug) << "Invalid scrollback folder " << fileLocation << "; using "
+                                    << QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
             // Per Qt docs, this path is never empty; not sure if that
             // means it always exists.
             fileLocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
             const QFileInfo fi2(fileLocation);
             if (!fi2.exists()) {
                 if (!QDir().mkpath(fileLocation)) {
-                    qCWarning(KonsoleDebug)<<"Unable to create scrollback folder "<<fileLocation;
+                    qCWarning(KonsoleDebug) << "Unable to create scrollback folder " << fileLocation;
                 }
             }
         }
@@ -101,9 +102,9 @@ HistoryFile::~HistoryFile()
     }
 }
 
-//TODO:  Mapping the entire file in will cause problems if the history file becomes exceedingly large,
+// TODO:  Mapping the entire file in will cause problems if the history file becomes exceedingly large,
 //(ie. larger than available memory).  HistoryFile::map() should only map in sections of the file at a time,
-//to avoid this.
+// to avoid this.
 void HistoryFile::map()
 {
     Q_ASSERT(_fileMap == nullptr);
@@ -113,7 +114,7 @@ void HistoryFile::map()
         _fileMap = _tmpFile.map(0, _length);
     }
 
-    //if mmap'ing fails, fall back to the read-lseek combination
+    // if mmap'ing fails, fall back to the read-lseek combination
     if (_fileMap == nullptr) {
         _readWriteBalance = 0;
         qCDebug(KonsoleDebug) << "mmap'ing history failed.  errno = " << errno;
@@ -129,7 +130,6 @@ void HistoryFile::unmap()
     }
 
     Q_ASSERT(_fileMap == nullptr);
-
 }
 
 void HistoryFile::add(const char *buffer, qint64 count)
@@ -158,16 +158,15 @@ void HistoryFile::add(const char *buffer, qint64 count)
 
 void HistoryFile::get(char *buffer, qint64 size, qint64 loc)
 {
-
     if (loc < 0 || size < 0 || loc + size > _length) {
         fprintf(stderr, "getHist(...,%lld,%lld): invalid args.\n", size, loc);
         return;
     }
 
-    //count number of get() calls vs. number of add() calls.
-    //If there are many more get() calls compared with add()
-    //calls (decided by using MAP_THRESHOLD) then mmap the log
-    //file to improve performance.
+    // count number of get() calls vs. number of add() calls.
+    // If there are many more get() calls compared with add()
+    // calls (decided by using MAP_THRESHOLD) then mmap the log
+    // file to improve performance.
     if (_readWriteBalance > INT_MIN) {
         _readWriteBalance--;
     }

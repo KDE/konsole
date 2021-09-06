@@ -8,9 +8,9 @@
 #define MAINWINDOW_H
 
 // Qt
+#include <QExplicitlySharedDataPointer>
 #include <QPointer>
 #include <QUrl>
-#include <QExplicitlySharedDataPointer>
 
 // KDE
 #include <KXmlGuiWindow>
@@ -26,7 +26,8 @@ class QAction;
 class KActionMenu;
 class KToggleAction;
 
-namespace Konsole {
+namespace Konsole
+{
 class ViewManager;
 class ViewProperties;
 class Session;
@@ -77,7 +78,7 @@ public:
      * @param profile The profile to use to create the new session.
      * @param url the URL representing the new SSH connection
      */
-    Session *createSSHSession(QExplicitlySharedDataPointer<Profile> profile , const QUrl &url);
+    Session *createSSHSession(QExplicitlySharedDataPointer<Profile> profile, const QUrl &url);
 
     /**
      * Helper method to make this window get input focus
@@ -88,7 +89,6 @@ public:
      * Set the initial visibility of the menubar.
      */
     void setMenuBarInitialVisibility(bool visible);
-
 
     /**
      * @brief Set the frameless state
@@ -124,7 +124,7 @@ Q_SIGNALS:
     /**
      * Emitted when a view for one session is detached from this window
      */
-    void terminalsDetached(ViewSplitter *splitter, QHash<TerminalDisplay*, Session*> sessionsMap);
+    void terminalsDetached(ViewSplitter *splitter, QHash<TerminalDisplay *, Session *> sessionsMap);
 
 protected:
     // Reimplemented for internal reasons.
@@ -196,7 +196,7 @@ private:
     KActionMenu *_newTabMenuAction;
 
     QPointer<SessionController> _pluggedController;
-    QList<IKonsolePlugin*> _plugins;
+    QList<IKonsolePlugin *> _plugins;
     bool _menuBarInitialVisibility;
     bool _firstShowEvent = true;
     bool _blurEnabled = false;

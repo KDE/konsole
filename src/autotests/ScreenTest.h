@@ -13,7 +13,6 @@
 
 namespace Konsole
 {
-
 class ScreenTest : public QObject
 {
     Q_OBJECT
@@ -36,4 +35,3 @@ private:
 }
 
 #endif // SCREENTEST_H
-

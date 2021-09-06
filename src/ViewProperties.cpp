@@ -11,11 +11,11 @@ using Konsole::ViewProperties;
 
 QHash<int, ViewProperties *> ViewProperties::_viewProperties;
 
-ViewProperties::ViewProperties(QObject *parent) :
-    QObject(parent),
-    _icon(QIcon()),
-    _title(QString()),
-    _identifier(0)
+ViewProperties::ViewProperties(QObject *parent)
+    : QObject(parent)
+    , _icon(QIcon())
+    , _title(QString())
+    , _identifier(0)
 {
 }
 

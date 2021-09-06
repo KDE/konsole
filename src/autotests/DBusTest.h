@@ -7,10 +7,10 @@
 #ifndef DBUSTEST_H
 #define DBUSTEST_H
 
-#include <QTest>
-#include <QDBusInterface>
 #include <QDBusConnectionInterface>
+#include <QDBusInterface>
 #include <QDBusReply>
+#include <QTest>
 #include <QTextCodec>
 
 #include <unistd.h>
@@ -19,19 +19,17 @@ class QProcess;
 
 namespace Konsole
 {
-
 class DBusTest : public QObject
 {
     Q_OBJECT
 public:
-
 private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
     void testSessions();
     void testWindows();
 
-// protected slots are not treated as test cases
+    // protected slots are not treated as test cases
 protected Q_SLOTS:
 
 private:
@@ -46,4 +44,3 @@ private:
 }
 
 #endif // DBUSTEST_H
-

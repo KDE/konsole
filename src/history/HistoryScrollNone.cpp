@@ -13,8 +13,8 @@ using namespace Konsole;
 
 // History Scroll None //////////////////////////////////////
 
-HistoryScrollNone::HistoryScrollNone() :
-    HistoryScroll(new HistoryTypeNone())
+HistoryScrollNone::HistoryScrollNone()
+    : HistoryScroll(new HistoryTypeNone())
 {
 }
 
@@ -50,11 +50,11 @@ LineProperty HistoryScrollNone::getLineProperty(int /*lineno*/) const
     return 0;
 }
 
-void HistoryScrollNone::getCells(int, int, int, Character []) const
+void HistoryScrollNone::getCells(int, int, int, Character[]) const
 {
 }
 
-void HistoryScrollNone::addCells(const Character [], int)
+void HistoryScrollNone::addCells(const Character[], int)
 {
 }
 

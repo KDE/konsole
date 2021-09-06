@@ -7,17 +7,18 @@
 
 #include "IKonsolePlugin.h"
 
-#include <QMainWindow>
 #include "MainWindow.h"
+#include <QMainWindow>
 
-namespace Konsole {
+namespace Konsole
+{
 struct IKonsolePlugin::Private {
     QString name;
-    QList<QMainWindow*> mainWindowList;
+    QList<QMainWindow *> mainWindowList;
 };
 
-IKonsolePlugin::IKonsolePlugin(QObject *parent, const QVariantList &args) :
-    d(std::make_unique<IKonsolePlugin::Private>())
+IKonsolePlugin::IKonsolePlugin(QObject *parent, const QVariantList &args)
+    : d(std::make_unique<IKonsolePlugin::Private>())
 {
     Q_UNUSED(parent)
     Q_UNUSED(args)
@@ -25,12 +26,13 @@ IKonsolePlugin::IKonsolePlugin(QObject *parent, const QVariantList &args) :
 
 IKonsolePlugin::~IKonsolePlugin() = default;
 
-void IKonsolePlugin::setName(const QString& name)
+void IKonsolePlugin::setName(const QString &name)
 {
     d->name = name;
 }
 
-QString IKonsolePlugin::name() const {
+QString IKonsolePlugin::name() const
+{
     return d->name;
 }
 

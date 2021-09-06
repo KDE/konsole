@@ -8,19 +8,18 @@
 #ifndef SEARCHHISTORYTASK_H
 #define SEARCHHISTORYTASK_H
 
-#include <QPointer>
 #include <QMap>
+#include <QPointer>
 #include <QRegularExpression>
 
-#include "session/SessionTask.h"
 #include "Enumeration.h"
 #include "ScreenWindow.h"
 #include "session/Session.h"
+#include "session/SessionTask.h"
 
 namespace Konsole
 {
-
-//class SearchHistoryThread;
+// class SearchHistoryThread;
 /**
  * A task which searches through the output of sessions for matches for a given regular expression.
  * SearchHistoryTask operates on ScreenWindow instances rather than sessions added by addSession().
@@ -76,10 +75,10 @@ public:
 private:
     using ScreenWindowPtr = QPointer<ScreenWindow>;
 
-    void executeOnScreenWindow(const QPointer<Session> &session, const ScreenWindowPtr& window);
-    void highlightResult(const ScreenWindowPtr& window, int findPos);
+    void executeOnScreenWindow(const QPointer<Session> &session, const ScreenWindowPtr &window);
+    void highlightResult(const ScreenWindowPtr &window, int findPos);
 
-    QMap< QPointer<Session>, ScreenWindowPtr > _windows;
+    QMap<QPointer<Session>, ScreenWindowPtr> _windows;
     QRegularExpression _regExp;
     Enum::SearchDirection _direction;
     int _startLine;

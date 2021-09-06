@@ -12,12 +12,12 @@
 #include "ColorScheme.h"
 
 // KDE
-#include <KWindowSystem>
 #include <KLocalizedString>
+#include <KWindowSystem>
 
 // Qt
-#include <QPainter>
 #include <QApplication>
+#include <QPainter>
 
 using namespace Konsole;
 
@@ -42,8 +42,7 @@ void ColorSchemeViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
 
     // Draw name
-    QPalette::ColorRole textColor = ((option.state & QStyle::State_Selected) != 0)
-                                    ? QPalette::HighlightedText : QPalette::Text;
+    QPalette::ColorRole textColor = ((option.state & QStyle::State_Selected) != 0) ? QPalette::HighlightedText : QPalette::Text;
     painter->setPen(option.palette.color(textColor));
     painter->setFont(option.font);
 
@@ -52,9 +51,7 @@ void ColorSchemeViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
     QFontMetrics profileFontMetrics(profileFont);
     const int sampleTextWidth = profileFontMetrics.boundingRect(sampleText).width();
 
-    painter->drawText(option.rect.adjusted(sampleTextWidth + 15, 0, 0, 0),
-                      Qt::AlignLeft | Qt::AlignVCenter,
-                      index.data(Qt::DisplayRole).toString());
+    painter->drawText(option.rect.adjusted(sampleTextWidth + 15, 0, 0, 0), Qt::AlignLeft | Qt::AlignVCenter, index.data(Qt::DisplayRole).toString());
 
     // Draw the preview
     const int x = option.rect.left();

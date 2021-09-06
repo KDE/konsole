@@ -11,15 +11,15 @@
 // Qt
 #include <QColor>
 
-namespace Konsole {
-
+namespace Konsole
+{
 // Attributed Character Representations ///////////////////////////////
 
 // Colors
 
-#define BASE_COLORS   (2+8)
-#define INTENSITIES   3
-#define TABLE_COLORS  (INTENSITIES*BASE_COLORS)
+#define BASE_COLORS (2 + 8)
+#define INTENSITIES 3
+#define TABLE_COLORS (INTENSITIES * BASE_COLORS)
 
 enum ColorTableIndex {
     ColorFgIndex,
@@ -77,11 +77,11 @@ enum ColorTableIndex {
    default foreground and default background color.
 */
 
-#define COLOR_SPACE_UNDEFINED   0
-#define COLOR_SPACE_DEFAULT     1
-#define COLOR_SPACE_SYSTEM      2
-#define COLOR_SPACE_256         3
-#define COLOR_SPACE_RGB         4
+#define COLOR_SPACE_UNDEFINED 0
+#define COLOR_SPACE_DEFAULT 1
+#define COLOR_SPACE_SYSTEM 2
+#define COLOR_SPACE_256 3
+#define COLOR_SPACE_RGB 4
 
 /**
  * Describes the color of a single character in the terminal.
@@ -92,11 +92,11 @@ class CharacterColor
 
 public:
     /** Constructs a new CharacterColor whose color and color space are undefined. */
-    CharacterColor() :
-        _colorSpace(COLOR_SPACE_UNDEFINED),
-        _u(0),
-        _v(0),
-        _w(0)
+    CharacterColor()
+        : _colorSpace(COLOR_SPACE_UNDEFINED)
+        , _u(0)
+        , _v(0)
+        , _w(0)
     {
     }
 
@@ -110,11 +110,11 @@ public:
      *
      * TODO : Add documentation about available color spaces.
      */
-    CharacterColor(quint8 colorSpace, int co) :
-        _colorSpace(colorSpace),
-        _u(0),
-        _v(0),
-        _w(0)
+    CharacterColor(quint8 colorSpace, int co)
+        : _colorSpace(colorSpace)
+        , _u(0)
+        , _v(0)
+        , _w(0)
     {
         switch (colorSpace) {
         case COLOR_SPACE_DEFAULT:
@@ -137,8 +137,16 @@ public:
         }
     }
 
-    quint8 colorSpace() const { return _colorSpace; }
-    void termColor(int *u, int *v, int *w) { *u = _u; *v = _v; *w = _w; }
+    quint8 colorSpace() const
+    {
+        return _colorSpace;
+    }
+    void termColor(int *u, int *v, int *w)
+    {
+        *u = _u;
+        *v = _v;
+        *w = _w;
+    }
 
     /**
      * Returns true if this character color entry is valid.
@@ -176,12 +184,12 @@ public:
      * Compares two colors and returns true if they represent the same color value and
      * use the same color space.
      */
-    friend bool operator ==(const CharacterColor &a, const CharacterColor &b);
+    friend bool operator==(const CharacterColor &a, const CharacterColor &b);
     /**
      * Compares two colors and returns true if they represent different color values
      * or use different color spaces.
      */
-    friend bool operator !=(const CharacterColor &a, const CharacterColor &b);
+    friend bool operator!=(const CharacterColor &a, const CharacterColor &b);
 
 private:
     quint8 _colorSpace;
@@ -192,15 +200,12 @@ private:
     quint8 _w;
 };
 
-inline bool operator ==(const CharacterColor &a, const CharacterColor &b)
+inline bool operator==(const CharacterColor &a, const CharacterColor &b)
 {
-    return a._colorSpace == b._colorSpace
-           && a._u == b._u
-           && a._v == b._v
-           && a._w == b._w;
+    return a._colorSpace == b._colorSpace && a._u == b._u && a._v == b._v && a._w == b._w;
 }
 
-inline bool operator !=(const CharacterColor &a, const CharacterColor &b)
+inline bool operator!=(const CharacterColor &a, const CharacterColor &b)
 {
     return !operator==(a, b);
 }

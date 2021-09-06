@@ -16,12 +16,12 @@ struct reflowData { // data to reflow lines
     QList<LineProperty> flags;
 };
 
-CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount) :
-    HistoryScroll(new CompactHistoryType(maxLineCount)),
-    _cells(),
-    _index(),
-    _flags(),
-    _maxLineCount(0)
+CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount)
+    : HistoryScroll(new CompactHistoryType(maxLineCount))
+    , _cells()
+    , _index()
+    , _flags()
+    , _maxLineCount(0)
 {
     setMaxNbLines(maxLineCount);
 }
@@ -33,7 +33,9 @@ void CompactHistoryScroll::removeFirstLine()
 
         const int removing = _index.first();
         _index.removeFirst();
-        std::transform(_index.begin(), _index.end(), _index.begin(), [removing](int i) { return i - removing; });
+        std::transform(_index.begin(), _index.end(), _index.begin(), [removing](int i) {
+            return i - removing;
+        });
 
         _cells.erase(_cells.begin(), _cells.begin() + removing);
     } else {

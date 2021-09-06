@@ -13,7 +13,6 @@
 
 namespace Konsole
 {
-
 SessionDisplayConnection::SessionDisplayConnection(Session *session, TerminalDisplay *view, QObject *parent)
     : QObject(parent)
 {
@@ -36,4 +35,4 @@ bool SessionDisplayConnection::isValid() const
     return !_session.isNull() && !_view.isNull();
 }
 
-}   // namespace Konsole
+} // namespace Konsole

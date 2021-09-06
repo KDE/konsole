@@ -53,7 +53,6 @@ void CharacterWidthTest::testWidth_data()
     QTest::newRow("0x2615  hot beverage (BUG 392171)") << uint(0x02615) << 2;
     QTest::newRow("0x26EA  church (BUG 392171)") << uint(0x026EA) << 2;
     QTest::newRow("0x1D11E musical symbol g clef (BUG 339439)") << uint(0x1D11E) << 1;
-
 }
 
 void CharacterWidthTest::testWidth()

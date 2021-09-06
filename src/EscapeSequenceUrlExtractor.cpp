@@ -9,11 +9,11 @@
 
 #include <QUrl>
 
-namespace Konsole {
-EscapeSequenceUrlExtractor::EscapeSequenceUrlExtractor()
-= default;
+namespace Konsole
+{
+EscapeSequenceUrlExtractor::EscapeSequenceUrlExtractor() = default;
 
-void Konsole::EscapeSequenceUrlExtractor::setScreen(Konsole::Screen* screen)
+void Konsole::EscapeSequenceUrlExtractor::setScreen(Konsole::Screen *screen)
 {
     _screen = screen;
     clear();
@@ -44,7 +44,7 @@ void EscapeSequenceUrlExtractor::appendUrlText(QChar c)
     _currentUrl.text += c;
 }
 
-void EscapeSequenceUrlExtractor::setUrl(const QString& url)
+void EscapeSequenceUrlExtractor::setUrl(const QString &url)
 {
     if (_allowedUriSchemas.contains(QUrl(url).scheme() + QLatin1String("://"))) {
         _currentUrl.url = url;
@@ -78,7 +78,7 @@ void EscapeSequenceUrlExtractor::clear()
     _history.clear();
 }
 
-void EscapeSequenceUrlExtractor::setAllowedLinkSchema(const QStringList& schema)
+void EscapeSequenceUrlExtractor::setAllowedLinkSchema(const QStringList &schema)
 {
     _allowedUriSchemas = schema;
 }
@@ -88,14 +88,14 @@ void EscapeSequenceUrlExtractor::historyLinesRemoved(int lines)
     for (auto &url : _history) {
         url.begin.row -= lines;
         url.end.row -= lines;
-   }
-    _history.erase(
-        std::remove_if(std::begin(_history), std::end(_history), [](const ExtractedUrl& url) {
-            const bool toRemove = url.begin.row < 0;
-            return toRemove;
-
-        }),
-        std::end(_history));
+    }
+    _history.erase(std::remove_if(std::begin(_history),
+                                  std::end(_history),
+                                  [](const ExtractedUrl &url) {
+                                      const bool toRemove = url.begin.row < 0;
+                                      return toRemove;
+                                  }),
+                   std::end(_history));
 }
 
 QVector<ExtractedUrl> EscapeSequenceUrlExtractor::history() const

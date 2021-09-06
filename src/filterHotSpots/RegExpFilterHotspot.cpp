@@ -9,15 +9,9 @@
 
 using namespace Konsole;
 
-
-RegExpFilterHotSpot::RegExpFilterHotSpot(
-    int startLine,
-    int startColumn,
-    int endLine,
-    int endColumn,
-    const QStringList &capturedTexts) :
-    HotSpot(startLine, startColumn, endLine, endColumn),
-    _capturedTexts(capturedTexts)
+RegExpFilterHotSpot::RegExpFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts)
+    : HotSpot(startLine, startColumn, endLine, endColumn)
+    , _capturedTexts(capturedTexts)
 {
     setType(Marker);
 }

@@ -12,26 +12,27 @@
 #include <memory>
 
 // Qt
+#include <QBitArray>
 #include <QRect>
 #include <QSet>
-#include <QVector>
-#include <QBitArray>
 #include <QVarLengthArray>
+#include <QVector>
 
 // Konsole
 #include "../characters/Character.h"
 #include "konsoleprivate_export.h"
 
-#define MODE_Origin    0
-#define MODE_Wrap      1
-#define MODE_Insert    2
-#define MODE_Screen    3
-#define MODE_Cursor    4
-#define MODE_NewLine   5
+#define MODE_Origin 0
+#define MODE_Wrap 1
+#define MODE_Insert 2
+#define MODE_Screen 3
+#define MODE_Cursor 4
+#define MODE_NewLine 5
 #define MODE_AppScreen 6
-#define MODES_SCREEN   7
+#define MODES_SCREEN 7
 
-namespace Konsole {
+namespace Konsole
+{
 class TerminalCharacterDecoder;
 class TerminalDisplay;
 class HistoryType;
@@ -73,13 +74,7 @@ public:
      * TrimTrailingWhitespace: Specifies whether trailing spaces should be
      *      trimmed in the returned text.
      */
-    enum DecodingOption {
-        PlainText = 0x0,
-        ConvertToHtml = 0x1,
-        PreserveLineBreaks = 0x2,
-        TrimLeadingWhitespace = 0x4,
-        TrimTrailingWhitespace = 0x8
-    };
+    enum DecodingOption { PlainText = 0x0, ConvertToHtml = 0x1, PreserveLineBreaks = 0x2, TrimLeadingWhitespace = 0x4, TrimTrailingWhitespace = 0x8, };
     Q_DECLARE_FLAGS(DecodingOptions, DecodingOption)
 
     /** Construct a new screen image of size @p lines by @p columns. */
@@ -329,9 +324,9 @@ public:
     void setDefaultRendition();
 
     /** Returns the column which the cursor is positioned at. */
-    int  getCursorX() const;
+    int getCursorX() const;
     /** Returns the line which the cursor is positioned on. */
-    int  getCursorY() const;
+    int getCursorY() const;
 
     /**
      * Resets the state of the screen.  This resets the various screen modes
@@ -461,9 +456,9 @@ public:
     bool hasSelection() const;
 
     /**
-      *  Returns true if the character at (@p x, @p y) is part of the
-      *  current selection.
-      */
+     *  Returns true if the character at (@p x, @p y) is part of the
+     *  current selection.
+     */
     bool isSelected(const int x, const int y) const;
 
     /**
@@ -563,9 +558,9 @@ public:
     void resetDroppedLines();
 
     /**
-      * Fills the buffer @p dest with @p count instances of the default (ie. blank)
-      * Character style.
-      */
+     * Fills the buffer @p dest with @p count instances of the default (ie. blank)
+     * Character style.
+     */
     static void fillWithDefaultChar(Character *dest, int count);
 
     void setCurrentTerminalDisplay(TerminalDisplay *display)
@@ -602,39 +597,44 @@ public:
     void setReflowLines(bool enable);
 
 private:
-    //copies a line of text from the screen or history into a stream using a
-    //specified character decoder.  Returns the number of lines actually copied,
-    //which may be less than 'count' if (start+count) is more than the number of characters on
-    //the line
+    // copies a line of text from the screen or history into a stream using a
+    // specified character decoder.  Returns the number of lines actually copied,
+    // which may be less than 'count' if (start+count) is more than the number of characters on
+    // the line
     //
-    //line - the line number to copy, from 0 (the earliest line in the history) up to
+    // line - the line number to copy, from 0 (the earliest line in the history) up to
     //         history->getLines() + lines - 1
-    //start - the first column on the line to copy
-    //count - the number of characters on the line to copy
-    //decoder - a decoder which converts terminal characters (an Character array) into text
-    //appendNewLine - if true a new line character (\n) is appended to the end of the line
-    //isBlockSelectionMode - takes that in consideration while appending a new line.
-    int  copyLineToStream(int line, int start, int count, TerminalCharacterDecoder *decoder,
-                          bool appendNewLine, bool isBlockSelectionMode, const DecodingOptions options) const;
+    // start - the first column on the line to copy
+    // count - the number of characters on the line to copy
+    // decoder - a decoder which converts terminal characters (an Character array) into text
+    // appendNewLine - if true a new line character (\n) is appended to the end of the line
+    // isBlockSelectionMode - takes that in consideration while appending a new line.
+    int copyLineToStream(int line,
+                         int start,
+                         int count,
+                         TerminalCharacterDecoder *decoder,
+                         bool appendNewLine,
+                         bool isBlockSelectionMode,
+                         const DecodingOptions options) const;
 
-    //fills a section of the screen image with the character 'c'
-    //the parameters are specified as offsets from the start of the screen image.
-    //the loc(x,y) macro can be used to generate these values from a column,line pair.
-    //if resetLineRendition is true, all completely cleared lines will be set to single-width.
+    // fills a section of the screen image with the character 'c'
+    // the parameters are specified as offsets from the start of the screen image.
+    // the loc(x,y) macro can be used to generate these values from a column,line pair.
+    // if resetLineRendition is true, all completely cleared lines will be set to single-width.
     void clearImage(int loca, int loce, char c, bool resetLineRendition = true);
 
-    //move screen image between 'sourceBegin' and 'sourceEnd' to 'dest'.
-    //the parameters are specified as offsets from the start of the screen image.
-    //the loc(x,y) macro can be used to generate these values from a column,line pair.
+    // move screen image between 'sourceBegin' and 'sourceEnd' to 'dest'.
+    // the parameters are specified as offsets from the start of the screen image.
+    // the loc(x,y) macro can be used to generate these values from a column,line pair.
     //
-    //NOTE: moveImage() can only move whole lines
+    // NOTE: moveImage() can only move whole lines
     void moveImage(int dest, int sourceBegin, int sourceEnd);
     // scroll up 'n' lines in current region, clearing the bottom 'n' lines
     void scrollUp(int from, int n);
     // scroll down 'n' lines in current region, clearing the top 'n' lines
     void scrollDown(int from, int n);
 
-    //when we handle scroll commands, we need to know which screenwindow will scroll
+    // when we handle scroll commands, we need to know which screenwindow will scroll
     TerminalDisplay *_currentTerminalDisplay;
 
     void addHistLine();
@@ -649,8 +649,7 @@ private:
     bool isSelectionValid() const;
     // copies text from 'startIndex' to 'endIndex' to a stream
     // startIndex and endIndex are positions generated using the loc(x,y) macro
-    void writeToStream(TerminalCharacterDecoder *decoder, int startIndex, int endIndex,
-                       const DecodingOptions options) const;
+    void writeToStream(TerminalCharacterDecoder *decoder, int startIndex, int endIndex, const DecodingOptions options) const;
     // copies 'count' lines from the screen buffer into 'dest',
     // starting from 'startLine', where 0 is the first line in the screen buffer
     void copyFromScreen(Character *dest, int startLine, int count) const;
@@ -678,7 +677,7 @@ private:
     // Get the cursor line after checking if its app mode or not
     int getCursorLine();
     // Set the cursor line after checking if its app mode or not
-    void setCursorLine (int newLine);
+    void setCursorLine(int newLine);
 
     int getLineLength(const int line) const;
 
@@ -690,9 +689,9 @@ private:
     int _lines;
     int _columns;
 
-    typedef QVector<Character> ImageLine;      // [0..columns]
-    QVector<ImageLine> _screenLines;             // [lines]
-    int _screenLinesSize;                // _screenLines.size()
+    typedef QVector<Character> ImageLine; // [0..columns]
+    QVector<ImageLine> _screenLines; // [lines]
+    int _screenLinesSize; // _screenLines.size()
 
     int _scrolledLines;
     QRect _lastScrolledRegion;
@@ -731,24 +730,24 @@ private:
 
     // selection -------------------
     int _selBegin; // The first location selected.
-    int _selTopLeft;    // TopLeft Location.
-    int _selBottomRight;    // Bottom Right Location.
-    bool _blockSelectionMode;  // Column selection mode
+    int _selTopLeft; // TopLeft Location.
+    int _selBottomRight; // Bottom Right Location.
+    bool _blockSelectionMode; // Column selection mode
 
     // effective colors and rendition ------------
     CharacterColor _effectiveForeground; // These are derived from
     CharacterColor _effectiveBackground; // the cu_* variables above
-    RenditionFlags _effectiveRendition;  // to speed up operation
+    RenditionFlags _effectiveRendition; // to speed up operation
 
     class SavedState
     {
     public:
-        SavedState() :
-            cursorColumn(0),
-            cursorLine(0),
-            rendition(0),
-            foreground(CharacterColor()),
-            background(CharacterColor())
+        SavedState()
+            : cursorColumn(0)
+            , cursorLine(0)
+            , rendition(0)
+            , foreground(CharacterColor())
+            , background(CharacterColor())
         {
         }
 
@@ -769,13 +768,11 @@ private:
     void toggleUrlInput();
 
     // Vt102Emulation defined max argument value that can be passed to a Screen function
-    const int MAX_SCREEN_ARGUMENT = 40960; 
+    const int MAX_SCREEN_ARGUMENT = 40960;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Screen::DecodingOptions)
 
 }
-
-
 
 #endif // SCREEN_H

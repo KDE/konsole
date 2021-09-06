@@ -8,17 +8,18 @@
 #define VIEWPROPERTIES_H
 
 // Qt
+#include <QColor>
+#include <QHash>
 #include <QIcon>
 #include <QObject>
-#include <QHash>
 #include <QUrl>
-#include <QColor>
 
 // Konsole
 #include "konsoleprivate_export.h"
 #include "session/Session.h"
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * Encapsulates user-visible information about the terminal session currently being displayed in a view,
  * such as the associated title and icon.
@@ -118,6 +119,7 @@ protected:
     void setColor(const QColor &color);
     /** Subclasses may call this method to change the identifier. */
     void setIdentifier(int id);
+
 private:
     Q_DISABLE_COPY(ViewProperties)
 
@@ -130,4 +132,4 @@ private:
 };
 }
 
-#endif //VIEWPROPERTIES_H
+#endif // VIEWPROPERTIES_H

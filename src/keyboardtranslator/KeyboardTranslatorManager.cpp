@@ -16,17 +16,17 @@
 #include "../konsoledebug.h"
 
 // Qt
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QDir>
 #include <QStandardPaths>
 
 using namespace Konsole;
 
-KeyboardTranslatorManager::KeyboardTranslatorManager() :
-    _haveLoadedAll(false),
-    _fallbackTranslator(nullptr),
-    _translators(QHash<QString, KeyboardTranslator *>())
+KeyboardTranslatorManager::KeyboardTranslatorManager()
+    : _haveLoadedAll(false)
+    , _fallbackTranslator(nullptr)
+    , _translators(QHash<QString, KeyboardTranslator *>())
 {
     _fallbackTranslator = new FallbackKeyboardTranslator();
 }
@@ -38,7 +38,7 @@ KeyboardTranslatorManager::~KeyboardTranslatorManager()
 }
 
 Q_GLOBAL_STATIC(KeyboardTranslatorManager, theKeyboardTranslatorManager)
-KeyboardTranslatorManager* KeyboardTranslatorManager::instance()
+KeyboardTranslatorManager *KeyboardTranslatorManager::instance()
 {
     return theKeyboardTranslatorManager;
 }
@@ -48,8 +48,7 @@ void KeyboardTranslatorManager::addTranslator(KeyboardTranslator *translator)
     _translators.insert(translator->name(), translator);
 
     if (!saveTranslator(translator)) {
-        qCDebug(KonsoleDebug) << "Unable to save translator" << translator->name()
-                              << "to disk.";
+        qCDebug(KonsoleDebug) << "Unable to save translator" << translator->name() << "to disk.";
     }
 }
 
@@ -88,8 +87,7 @@ const QString KeyboardTranslatorManager::findTranslatorPath(const QString &name)
 void KeyboardTranslatorManager::findTranslators()
 {
     QStringList list;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"),
-                                                       QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
     list.reserve(dirs.size());
 
     for (const QString &dir : dirs) {
@@ -136,8 +134,7 @@ const KeyboardTranslator *KeyboardTranslatorManager::findTranslator(const QStrin
 
 bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator *translator)
 {
-    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
-                        + QStringLiteral("/konsole/");
+    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole/");
     QDir().mkpath(dir);
     const QString path = dir + translator->name() + QStringLiteral(".keytab");
 
@@ -145,8 +142,7 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator *transla
 
     QFile destination(path);
     if (!destination.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qCDebug(KonsoleDebug) << "Unable to save keyboard translation:"
-                              << destination.errorString();
+        qCDebug(KonsoleDebug) << "Unable to save keyboard translation:" << destination.errorString();
         return false;
     }
 
@@ -176,8 +172,7 @@ KeyboardTranslator *KeyboardTranslatorManager::loadTranslator(const QString &nam
     return loadTranslator(&source, name);
 }
 
-KeyboardTranslator *KeyboardTranslatorManager::loadTranslator(QIODevice *source,
-                                                              const QString &name)
+KeyboardTranslator *KeyboardTranslatorManager::loadTranslator(QIODevice *source, const QString &name)
 {
     auto translator = new KeyboardTranslator(name);
     KeyboardTranslatorReader reader(source);

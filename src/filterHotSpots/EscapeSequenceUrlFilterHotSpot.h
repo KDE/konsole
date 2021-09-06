@@ -10,13 +10,12 @@
 
 #include "HotSpot.h"
 
-namespace Konsole {
-
+namespace Konsole
+{
 class EscapeSequenceUrlHotSpot : public HotSpot
 {
 public:
-    EscapeSequenceUrlHotSpot(int startLine, int startColumn, int endLine, int endColumn,
-            const QString &text, const QString &url);
+    EscapeSequenceUrlHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QString &text, const QString &url);
     void activate(QObject *obj) override;
 
 private:

@@ -13,14 +13,14 @@
 #define CONFIGURATIONDIALOG_H
 
 // Qt
-#include <QButtonGroup>
 #include <QAbstractButton>
-#include <QTimer>
+#include <QButtonGroup>
 #include <QMap>
+#include <QTimer>
 
 // KDE
-#include <KPageDialog>
 #include <KCoreConfigSkeleton>
+#include <KPageDialog>
 
 // Konsole
 #include "konsoleprivate_export.h"
@@ -28,15 +28,15 @@
 class QWidget;
 class KConfigDialogManager;
 
-namespace Konsole {
-
+namespace Konsole
+{
 class ConfigDialogButtonGroupManager;
 
 // KConfigDialog-like class, as the original KConfigDialog wraps
 // all pages in QScrollArea. KConfigDialog, when fixed, should
 // be source compatible with this class, so simple class replace
 // should suffice.
-class KONSOLEPRIVATE_EXPORT ConfigurationDialog: public KPageDialog
+class KONSOLEPRIVATE_EXPORT ConfigurationDialog : public KPageDialog
 {
     Q_OBJECT
 

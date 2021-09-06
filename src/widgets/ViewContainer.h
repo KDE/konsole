@@ -20,7 +20,8 @@ class QPoint;
 class QToolButton;
 class QMenu;
 
-namespace Konsole {
+namespace Konsole
+{
 class ViewProperties;
 class ViewManager;
 class TabbedViewContainer;
@@ -86,8 +87,8 @@ public:
     /** Changes the active view to the last view */
     void activateLastView();
 
-    void setCss(const QString& styleSheet = QString());
-    void setCssFromFile(const QUrl& url);
+    void setCss(const QString &styleSheet = QString());
+    void setCssFromFile(const QUrl &url);
 
     ViewSplitter *activeViewSplitter();
     /**
@@ -99,7 +100,7 @@ public:
         /** Moves the view to the left. */
         MoveViewLeft,
         /** Moves the view to the right. */
-        MoveViewRight
+        MoveViewRight,
     };
 
     /**
@@ -153,13 +154,13 @@ public:
         /** Put newly created tab at the end. */
         PutNewTabAtTheEnd = 0,
         /** Put newly created tab right after current tab. */
-        PutNewTabAfterCurrentTab = 1
+        PutNewTabAfterCurrentTab = 1,
     };
 
     void setNavigationBehavior(int behavior);
-    void terminalDisplayDropped(TerminalDisplay* terminalDisplay);
+    void terminalDisplayDropped(TerminalDisplay *terminalDisplay);
 
-    void moveToNewTab(TerminalDisplay* display);
+    void moveToNewTab(TerminalDisplay *display);
 
     QSize sizeHint() const override;
 
@@ -218,13 +219,19 @@ private:
     void forgetView();
 
     struct TabIconState {
-        TabIconState(): readOnly(false), broadcast(false), notification(Session::NoNotification) {}
+        TabIconState()
+            : readOnly(false)
+            , broadcast(false)
+            , notification(Session::NoNotification)
+        {
+        }
 
         bool readOnly;
         bool broadcast;
         Session::Notification notification;
 
-        bool isAnyStateActive() const {
+        bool isAnyStateActive() const
+        {
             return readOnly || broadcast || (notification != Session::NoNotification);
         }
     };
@@ -239,6 +246,5 @@ private:
     NewTabBehavior _newTabBehavior;
 };
 
-
 }
-#endif //VIEWCONTAINER_H
+#endif // VIEWCONTAINER_H

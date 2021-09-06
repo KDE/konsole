@@ -20,17 +20,17 @@
 #include <KConfigGroup>
 
 // Konsole
-#include "ShouldApplyProperty.h"
 #include "Enumeration.h"
-#include "Screen.h"
 #include "EscapeSequenceUrlExtractor.h"
+#include "Screen.h"
+#include "ShouldApplyProperty.h"
 
-#include "history/compact/CompactHistoryType.h"
 #include "history/HistoryTypeFile.h"
 #include "history/HistoryTypeNone.h"
+#include "history/compact/CompactHistoryType.h"
 
-#include "profile/ProfileManager.h"
 #include "profile/ProfileCommandParser.h"
+#include "profile/ProfileManager.h"
 
 #include "Session.h"
 #include "SessionController.h"
@@ -40,24 +40,21 @@
 
 using namespace Konsole;
 
-SessionManager::SessionManager() :
-    _sessions(QList<Session *>()),
-    _sessionProfiles(QHash<Session *, Profile::Ptr>()),
-    _sessionRuntimeProfiles(QHash<Session *, Profile::Ptr>()),
-    _restoreMapping(QHash<Session *, int>()),
-    _isClosingAllSessions(false)
+SessionManager::SessionManager()
+    : _sessions(QList<Session *>())
+    , _sessionProfiles(QHash<Session *, Profile::Ptr>())
+    , _sessionRuntimeProfiles(QHash<Session *, Profile::Ptr>())
+    , _restoreMapping(QHash<Session *, int>())
+    , _isClosingAllSessions(false)
 {
     ProfileManager *profileMananger = ProfileManager::instance();
-    connect(profileMananger, &Konsole::ProfileManager::profileChanged, this,
-            &Konsole::SessionManager::profileChanged);
+    connect(profileMananger, &Konsole::ProfileManager::profileChanged, this, &Konsole::SessionManager::profileChanged);
 }
 
 SessionManager::~SessionManager()
 {
     if (!_sessions.isEmpty()) {
-        qCDebug(KonsoleDebug) << "Konsole SessionManager destroyed with"
-                              << _sessions.count()
-                              <<"session(s) still alive";
+        qCDebug(KonsoleDebug) << "Konsole SessionManager destroyed with" << _sessions.count() << "session(s) still alive";
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
         for (Session *session : qAsConst(_sessions)) {
@@ -67,7 +64,7 @@ SessionManager::~SessionManager()
 }
 
 Q_GLOBAL_STATIC(SessionManager, theSessionManager)
-SessionManager* SessionManager::instance()
+SessionManager *SessionManager::instance()
 {
     return theSessionManager;
 }
@@ -102,21 +99,19 @@ Session *SessionManager::createSession(Profile::Ptr profile)
         ProfileManager::instance()->addProfile(profile);
     }
 
-    //configuration information found, create a new session based on this
+    // configuration information found, create a new session based on this
     auto session = new Session();
     Q_ASSERT(session);
     applyProfile(session, profile, false);
 
-    connect(session, &Konsole::Session::profileChangeCommandReceived, this,
-            &Konsole::SessionManager::sessionProfileCommandReceived);
+    connect(session, &Konsole::Session::profileChangeCommandReceived, this, &Konsole::SessionManager::sessionProfileCommandReceived);
 
-    //ask for notification when session dies
-    connect(session, &Konsole::Session::finished, this,
-            [this, session]() {
-                sessionTerminated(session);
-            });
+    // ask for notification when session dies
+    connect(session, &Konsole::Session::finished, this, [this, session]() {
+        sessionTerminated(session);
+    });
 
-    //add session to active list
+    // add session to active list
     _sessions << session;
     _sessionProfiles.insert(session, profile);
 
@@ -168,8 +163,7 @@ void SessionManager::setSessionProfile(Session *session, Profile::Ptr profile)
     Q_EMIT sessionUpdated(session);
 }
 
-void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
-                                  bool modifiedPropertiesOnly)
+void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile, bool modifiedPropertiesOnly)
 {
     Q_ASSERT(profile);
     _sessionProfiles[session] = profile;
@@ -205,7 +199,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
         // 18.08.0  -> 180800
         QStringList list = QStringLiteral(KONSOLE_VERSION).split(QLatin1Char('.'));
         if (list[2].length() < 2) {
-                list[2].prepend(QLatin1String("0"));
+            list[2].prepend(QLatin1String("0"));
         }
         const QString &numericVersion = list.join(QString());
 
@@ -216,8 +210,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
         session->setEnvironment(environment);
     }
 
-    if (apply.shouldApply(Profile::TerminalColumns)
-        || apply.shouldApply(Profile::TerminalRows)) {
+    if (apply.shouldApply(Profile::TerminalColumns) || apply.shouldApply(Profile::TerminalRows)) {
         const auto highlightScrolledLines = profile->property<bool>(Profile::HighlightScrolledLines);
         const auto rows = profile->property<int>(Profile::TerminalRows);
         auto columns = profile->property<int>(Profile::TerminalColumns);
@@ -240,12 +233,10 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
     // Preserve tab title changes, made by the user, when applying profile
     // changes or previewing color schemes
     if (apply.shouldApply(Profile::LocalTabTitleFormat) && !session->isTabTitleSetByUser()) {
-        session->setTabTitleFormat(Session::LocalTabTitle,
-                                   profile->localTabTitleFormat());
+        session->setTabTitleFormat(Session::LocalTabTitle, profile->localTabTitleFormat());
     }
     if (apply.shouldApply(Profile::RemoteTabTitleFormat) && !session->isTabTitleSetByUser()) {
-        session->setTabTitleFormat(Session::RemoteTabTitle,
-                                   profile->remoteTabTitleFormat());
+        session->setTabTitleFormat(Session::RemoteTabTitle, profile->remoteTabTitleFormat());
     }
     if (apply.shouldApply(Profile::TabColor) && !session->isTabColorSetByUser()) {
         session->setColor(profile->tabColor());
@@ -259,8 +250,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
             session->setHistoryType(HistoryTypeNone());
             break;
 
-        case Enum::FixedSizeHistory:
-        {
+        case Enum::FixedSizeHistory: {
             int lines = profile->historySize();
             session->setHistoryType(CompactHistoryType(lines));
             break;
@@ -351,8 +341,7 @@ void SessionManager::saveSessions(KConfig *config)
         QString name = QLatin1String("Session") + QString::number(n);
         KConfigGroup group(config, name);
 
-        group.writePathEntry("Profile",
-                             _sessionProfiles.value(session)->path());
+        group.writePathEntry("Profile", _sessionProfiles.value(session)->path());
         session->saveSession(group);
         _restoreMapping.insert(session, n);
         n++;

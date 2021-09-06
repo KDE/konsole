@@ -15,7 +15,6 @@
 
 namespace Konsole
 {
-
 class Session;
 class TerminalDisplay;
 

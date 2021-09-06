@@ -17,9 +17,9 @@
 
 using namespace Konsole;
 
-ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path) :
-    _path(path),
-    _picture(nullptr)
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path)
+    : _path(path)
+    , _picture(nullptr)
 {
 }
 

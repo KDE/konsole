@@ -8,8 +8,8 @@
 #include "ProfileTest.h"
 
 // KDE
-#include <qtest.h>
 #include <QFileInfo>
+#include <qtest.h>
 
 // Konsole
 #include "../profile/Profile.h"
@@ -99,24 +99,19 @@ void ProfileTest::testClone()
     target->clone(source, true);
 
     // check that properties from source have been cloned into target
-    QCOMPARE(source->property<bool>(Profile::AntiAliasFonts),
-             target->property<bool>(Profile::AntiAliasFonts));
-    QCOMPARE(source->property<int>(Profile::HistorySize),
-             target->property<int>(Profile::HistorySize));
+    QCOMPARE(source->property<bool>(Profile::AntiAliasFonts), target->property<bool>(Profile::AntiAliasFonts));
+    QCOMPARE(source->property<int>(Profile::HistorySize), target->property<int>(Profile::HistorySize));
 
     // check that Name and Path properties are handled specially and not cloned
-    QVERIFY(source->property<QString>(Profile::Name)
-            != target->property<QString>(Profile::Name));
-    QVERIFY(source->property<QString>(Profile::Path)
-            != target->property<QString>(Profile::Path));
+    QVERIFY(source->property<QString>(Profile::Name) != target->property<QString>(Profile::Name));
+    QVERIFY(source->property<QString>(Profile::Path) != target->property<QString>(Profile::Path));
 
     // check that Command property is not set in target because the values
     // are the same
     QVERIFY(!target->isPropertySet(Profile::Command));
     // check that ColorScheme property is cloned because the inherited values
     // from the source parent and target parent differ
-    QCOMPARE(source->property<QString>(Profile::ColorScheme),
-             target->property<QString>(Profile::ColorScheme));
+    QCOMPARE(source->property<QString>(Profile::ColorScheme), target->property<QString>(Profile::ColorScheme));
 }
 
 void ProfileTest::testProfileGroup()

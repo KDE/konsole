@@ -8,28 +8,28 @@
 #include "config-konsole.h"
 
 // Own
-#include "ProcessInfo.h"
 #include "NullProcessInfo.h"
+#include "ProcessInfo.h"
 #if !defined(Q_OS_WIN)
-    #include "UnixProcessInfo.h"
+#include "UnixProcessInfo.h"
 #endif
 #include "SSHProcessInfo.h"
 
 // Unix
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
-#include <unistd.h>
+#include <cerrno>
+#include <netinet/in.h>
 #include <pwd.h>
 #include <sys/param.h>
-#include <cerrno>
+#include <sys/socket.h>
+#include <unistd.h>
 
 // Qt
 #include <QDir>
 #include <QFileInfo>
-#include <QTextStream>
-#include <QStringList>
 #include <QHostInfo>
+#include <QStringList>
+#include <QTextStream>
 
 // KDE
 #include <KConfigGroup>
@@ -46,37 +46,36 @@
 #endif
 
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
+#include <sys/syslimits.h>
 #include <sys/types.h>
 #include <sys/user.h>
-#include <sys/syslimits.h>
-#   if defined(Q_OS_FREEBSD)
-#   include <libutil.h>
-#   include <sys/param.h>
-#   include <sys/queue.h>
-#   endif
+#if defined(Q_OS_FREEBSD)
+#include <libutil.h>
+#include <sys/param.h>
+#include <sys/queue.h>
+#endif
 #endif
 
 using namespace Konsole;
 
-ProcessInfo::ProcessInfo(int pid) :
-    _fields(ARGUMENTS)     // arguments
+ProcessInfo::ProcessInfo(int pid)
+    : _fields(ARGUMENTS) // arguments
     // are currently always valid,
     // they just return an empty
     // vector / map respectively
     // if no arguments
     // have been explicitly set
-    ,
-    _pid(pid),
-    _parentPid(0),
-    _foregroundPid(0),
-    _userId(0),
-    _lastError(NoError),
-    _name(QString()),
-    _userName(QString()),
-    _userHomeDir(QString()),
-    _currentDir(QString()),
-    _userNameRequired(true),
-    _arguments(QVector<QString>())
+    , _pid(pid)
+    , _parentPid(0)
+    , _foregroundPid(0)
+    , _userId(0)
+    , _lastError(NoError)
+    , _name(QString())
+    , _userName(QString())
+    , _userHomeDir(QString())
+    , _currentDir(QString())
+    , _userNameRequired(true)
+    , _arguments(QVector<QString>())
 {
 }
 
@@ -135,7 +134,7 @@ QSet<QString> ProcessInfo::commonDirNames()
 
 QString ProcessInfo::formatShortDir(const QString &input) const
 {
-    if(input == QStringLiteral("/")) {
+    if (input == QStringLiteral("/")) {
         return QStringLiteral("/");
     }
 
@@ -327,8 +326,8 @@ void ProcessInfo::setFileError(QFile::FileError error)
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
-    explicit LinuxProcessInfo(int pid) :
-        UnixProcessInfo(pid)
+    explicit LinuxProcessInfo(int pid)
+        : UnixProcessInfo(pid)
     {
     }
 
@@ -504,8 +503,8 @@ private:
 class FreeBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    explicit FreeBSDProcessInfo(int pid) :
-        UnixProcessInfo(pid)
+    explicit FreeBSDProcessInfo(int pid)
+        : UnixProcessInfo(pid)
     {
     }
 
@@ -570,10 +569,10 @@ private:
             return false;
         }
 
-        kInfoProc = new struct kinfo_proc [mibLength];
+        kInfoProc = new struct kinfo_proc[mibLength];
 
         if (sysctl(managementInfoBase, 4, kInfoProc, &mibLength, NULL, 0) == -1) {
-            delete [] kInfoProc;
+            delete[] kInfoProc;
             return false;
         }
 
@@ -593,7 +592,7 @@ private:
 
         readUserName();
 
-        delete [] kInfoProc;
+        delete[] kInfoProc;
         return true;
     }
 
@@ -629,8 +628,8 @@ private:
 class OpenBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    explicit OpenBSDProcessInfo(int pid) :
-        UnixProcessInfo(pid)
+    explicit OpenBSDProcessInfo(int pid)
+        : UnixProcessInfo(pid)
     {
     }
 
@@ -747,8 +746,8 @@ private:
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
-    explicit MacProcessInfo(int pid) :
-        UnixProcessInfo(pid)
+    explicit MacProcessInfo(int pid)
+        : UnixProcessInfo(pid)
     {
     }
 
@@ -781,19 +780,18 @@ private:
         if (sysctl(managementInfoBase, 4, nullptr, &mibLength, nullptr, 0) == -1) {
             return false;
         } else {
-            kInfoProc = new struct kinfo_proc [mibLength];
+            kInfoProc = new struct kinfo_proc[mibLength];
             if (sysctl(managementInfoBase, 4, kInfoProc, &mibLength, nullptr, 0) == -1) {
-                delete [] kInfoProc;
+                delete[] kInfoProc;
                 return false;
             } else {
                 const QString deviceNumber = QString::fromUtf8(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
-                const QString fullDeviceName = QStringLiteral("/dev/")
-                                               + deviceNumber.rightJustified(3, QLatin1Char('0'));
+                const QString fullDeviceName = QStringLiteral("/dev/") + deviceNumber.rightJustified(3, QLatin1Char('0'));
 
                 setParentPid(kInfoProc->kp_eproc.e_ppid);
                 setForegroundPid(kInfoProc->kp_eproc.e_pgid);
 
-                delete [] kInfoProc;
+                delete[] kInfoProc;
 
                 const QByteArray deviceName = fullDeviceName.toLatin1();
                 const char *ttyName = deviceName.data();
@@ -809,21 +807,19 @@ private:
                 managementInfoBase[3] = statInfo.st_rdev;
 
                 mibLength = 0;
-                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), nullptr,
-                           &mibLength, nullptr, 0) == -1) {
+                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), nullptr, &mibLength, nullptr, 0) == -1) {
                     return false;
                 }
 
-                kInfoProc = new struct kinfo_proc [mibLength];
-                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), kInfoProc,
-                           &mibLength, nullptr, 0) == -1) {
+                kInfoProc = new struct kinfo_proc[mibLength];
+                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), kInfoProc, &mibLength, nullptr, 0) == -1) {
                     return false;
                 }
 
                 // The foreground program is the first one
                 setName(QString::fromUtf8(kInfoProc->kp_proc.p_comm));
 
-                delete [] kInfoProc;
+                delete[] kInfoProc;
             }
             setPid(pid);
         }
@@ -852,8 +848,8 @@ private:
 class SolarisProcessInfo : public UnixProcessInfo
 {
 public:
-    explicit SolarisProcessInfo(int pid) :
-        UnixProcessInfo(pid)
+    explicit SolarisProcessInfo(int pid)
+        : UnixProcessInfo(pid)
     {
     }
 

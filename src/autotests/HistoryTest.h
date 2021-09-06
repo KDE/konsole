@@ -11,7 +11,6 @@
 
 namespace Konsole
 {
-
 class HistoryTest : public QObject
 {
     Q_OBJECT
@@ -31,4 +30,3 @@ private:
 }
 
 #endif // HISTORYTEST_H
-

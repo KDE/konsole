@@ -10,9 +10,9 @@
 #define SESSIONMANAGER_H
 
 // Qt
+#include <QExplicitlySharedDataPointer>
 #include <QHash>
 #include <QList>
-#include <QExplicitlySharedDataPointer>
 
 // TODO: Move the Property away from Profile.h
 #include "profile/Profile.h"
@@ -21,7 +21,8 @@
 
 class KConfig;
 
-namespace Konsole {
+namespace Konsole
+{
 class Session;
 class Profile;
 
@@ -67,7 +68,7 @@ public:
     Session *createSession(QExplicitlySharedDataPointer<Profile> profile = QExplicitlySharedDataPointer<Profile>());
 
     /** Sets the profile associated with a session. */
-    void setSessionProfile(Session *session,QExplicitlySharedDataPointer<Profile> profile);
+    void setSessionProfile(Session *session, QExplicitlySharedDataPointer<Profile> profile);
 
     /** Returns the profile associated with a session. */
     QExplicitlySharedDataPointer<Profile> sessionProfile(Session *session) const;
@@ -80,7 +81,7 @@ public:
     // System session management
     void saveSessions(KConfig *config);
     void restoreSessions(KConfig *config);
-    int  getRestoreId(Session *session);
+    int getRestoreId(Session *session);
     Session *idToSession(int id);
     bool isClosingAllSessions() const;
 
@@ -129,4 +130,4 @@ private:
 
 }
 
-#endif //SESSIONMANAGER_H
+#endif // SESSIONMANAGER_H

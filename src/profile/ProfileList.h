@@ -9,8 +9,8 @@
 
 // Qt
 #include <QList>
-#include <QSet>
 #include <QObject>
+#include <QSet>
 
 // Konsole
 #include "Profile.h"
@@ -20,7 +20,8 @@ class QAction;
 class QActionGroup;
 class QKeySequence;
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * ProfileList provides a list of actions which represent session profiles
  * that a SessionManager can create a session from.

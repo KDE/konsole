@@ -10,8 +10,8 @@
 #include "ProfileReader.h"
 
 // Qt
-#include <QFile>
 #include <QDir>
+#include <QFile>
 
 // KDE
 #include <KConfig>
@@ -23,9 +23,9 @@
 using namespace Konsole;
 
 // FIXME: A dup line from Profile.cpp - redo these
-static const char GENERAL_GROUP[]     = "General";
-static const char FEATURES_GROUP[]        = "Terminal Features";
-static const char URLHINTS_KEY[]          = "EnableUrlHints";
+static const char GENERAL_GROUP[] = "General";
+static const char FEATURES_GROUP[] = "Terminal Features";
+static const char URLHINTS_KEY[] = "EnableUrlHints";
 static const char URLHINTSMODIFIERS_KEY[] = "UrlHintsModifiers";
 
 ProfileReader::ProfileReader() = default;
@@ -37,18 +37,17 @@ QStringList ProfileReader::findProfiles()
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
     profiles.reserve(dirs.size());
 
-    for (const QString& dir : dirs) {
+    for (const QString &dir : dirs) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.profile"));
-        for (const QString& file : fileNames) {
+        for (const QString &file : fileNames) {
             profiles.append(dir + QLatin1Char('/') + file);
         }
     }
     return profiles;
 }
-void ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
-                                       const Profile::PropertyInfo* properties)
+void ProfileReader::readProperties(const KConfig &config, Profile::Ptr profile, const Profile::PropertyInfo *properties)
 {
-    const char* groupName = nullptr;
+    const char *groupName = nullptr;
     KConfigGroup group;
 
     while (properties->name != nullptr) {
@@ -61,8 +60,7 @@ void ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
             QString name(QLatin1String(properties->name));
 
             if (group.hasKey(name)) {
-                profile->setProperty(properties->property,
-                                     group.readEntry(name, QVariant(properties->type)));
+                profile->setProperty(properties->property, group.readEntry(name, QVariant(properties->type)));
             }
         }
 
@@ -70,7 +68,7 @@ void ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
     }
 }
 
-bool ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
+bool ProfileReader::readProfile(const QString &path, Profile::Ptr profile, QString &parentProfile)
 {
     if (!QFile::exists(path)) {
         return false;
@@ -110,4 +108,3 @@ bool ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QSt
 
     return true;
 }
-

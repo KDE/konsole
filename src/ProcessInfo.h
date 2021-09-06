@@ -12,7 +12,8 @@
 #include <QString>
 #include <QVector>
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * Takes a snapshot of the state of a process and provides access to
  * information such as the process name, parent process,
@@ -152,7 +153,7 @@ public:
         /** The nature of the error is unknown. */
         UnknownError,
         /** Konsole does not have permission to obtain the process information. */
-        PermissionsError
+        PermissionsError,
     };
 
     /**
@@ -160,15 +161,7 @@ public:
      */
     Error error() const;
 
-    enum Field {
-        PROCESS_ID = 1,
-        PARENT_PID = 2,
-        FOREGROUND_PID = 4,
-        ARGUMENTS = 8,
-        NAME = 16,
-        CURRENT_DIR = 32,
-        UID = 64
-    };
+    enum Field { PROCESS_ID = 1, PARENT_PID = 2, FOREGROUND_PID = 4, ARGUMENTS = 8, NAME = 16, CURRENT_DIR = 32, UID = 64, };
     Q_DECLARE_FLAGS(Fields, Field)
 
     // takes a full directory path and returns a
@@ -251,7 +244,6 @@ protected:
     bool userNameRequired() const;
 
 private:
-
     Fields _fields;
 
     int _pid;
@@ -277,4 +269,4 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(ProcessInfo::Fields)
 
 }
 
-#endif //PROCESSINFO_H
+#endif // PROCESSINFO_H

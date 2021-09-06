@@ -10,31 +10,32 @@
 // Qt
 #include <QPainter>
 
-namespace Konsole {
-
+namespace Konsole
+{
 /**
  * Helper functions for drawing characters from "Box Drawing" and "Block Elements" Unicode blocks.
  */
-namespace LineBlockCharacters {
+namespace LineBlockCharacters
+{
+/**
+ * Returns true if the character can be drawn by draw() function.
+ *
+ * @param ucs4cp Character to test's UCS4 code point
+ */
+inline static bool canDraw(uint ucs4cp)
+{
+    return (0x2500 <= ucs4cp && ucs4cp <= 0x259F);
+}
 
-    /**
-     * Returns true if the character can be drawn by draw() function.
-     *
-     * @param ucs4cp Character to test's UCS4 code point
-     */
-    inline static bool canDraw(uint ucs4cp) {
-        return (0x2500 <= ucs4cp && ucs4cp <= 0x259F);
-    }
-
-    /**
-     * Draws character.
-     *
-     * @param paint QPainter to draw on
-     * @param cellRect Rectangle to draw in
-     * @param chr Character to be drawn
-     * @param bold Whether the character should be boldface
-     */
-    void draw(QPainter &paint, const QRect &cellRect, const QChar &chr, bool bold);
+/**
+ * Draws character.
+ *
+ * @param paint QPainter to draw on
+ * @param cellRect Rectangle to draw in
+ * @param chr Character to be drawn
+ * @param bold Whether the character should be boldface
+ */
+void draw(QPainter &paint, const QRect &cellRect, const QChar &chr, bool bold);
 
 } // namespace LineBlockCharacters
 } // namespace Konsole

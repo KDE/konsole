@@ -10,7 +10,8 @@
 
 #include <QSortFilterProxyModel>
 
-class SSHManagerFilterModel : public QSortFilterProxyModel {
+class SSHManagerFilterModel : public QSortFilterProxyModel
+{
     Q_OBJECT
 public:
     SSHManagerFilterModel(QObject *parent);

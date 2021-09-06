@@ -11,23 +11,17 @@
 #include <KIO/OpenUrlJob>
 
 #include <QApplication>
-#include <QMouseEvent>
 #include <QDebug>
+#include <QMouseEvent>
 
 #include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 
-EscapeSequenceUrlHotSpot::EscapeSequenceUrlHotSpot(
-    int startLine,
-    int startColumn,
-    int endLine,
-    int endColumn,
-    const QString &text,
-    const QString &url) :
-    HotSpot(startLine, startColumn, endLine, endColumn),
-    _text(text),
-    _url(url)
+EscapeSequenceUrlHotSpot::EscapeSequenceUrlHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QString &text, const QString &url)
+    : HotSpot(startLine, startColumn, endLine, endColumn)
+    , _text(text)
+    , _url(url)
 {
     setType(EscapedUrl);
 }

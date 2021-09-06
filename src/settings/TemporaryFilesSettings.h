@@ -9,7 +9,8 @@
 
 #include "ui_TemporaryFilesSettings.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class TemporaryFilesSettings : public QWidget, private Ui::TemporaryFilesSettings
 {
     Q_OBJECT

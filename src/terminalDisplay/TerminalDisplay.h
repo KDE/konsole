@@ -17,11 +17,11 @@
 
 // Konsole
 #include "../characters/Character.h"
-#include "konsoleprivate_export.h"
-#include "ScreenWindow.h"
-#include "colorscheme/ColorScheme.h"
 #include "Enumeration.h"
+#include "ScreenWindow.h"
 #include "ScrollState.h"
+#include "colorscheme/ColorScheme.h"
+#include "konsoleprivate_export.h"
 #include "widgets/TerminalHeaderBar.h"
 
 #include "TerminalBell.h"
@@ -39,7 +39,8 @@ class QHideEvent;
 class QTimerEvent;
 class KMessageWidget;
 
-namespace Konsole {
+namespace Konsole
+{
 class TerminalPainter;
 class TerminalScrollBar;
 class TerminalColor;
@@ -72,10 +73,10 @@ public:
     explicit TerminalDisplay(QWidget *parent = nullptr);
     ~TerminalDisplay() override;
 
-    void showDragTarget(const QPoint& cursorPos);
+    void showDragTarget(const QPoint &cursorPos);
     void hideDragTarget();
 
-    void applyProfile(const QExplicitlySharedDataPointer<Profile>& profile);
+    void applyProfile(const QExplicitlySharedDataPointer<Profile> &profile);
 
     /**
      * Sets the seed used to generate random colors for the display
@@ -155,12 +156,12 @@ public:
      * Sets the Cursor Style (DECSCUSR) via escape sequences
      * @p shape cursor shape
      * @p isBlinking if true, the cursor will be set to blink
-    */
+     */
     void setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking);
     /**
      * Resets the cursor style to the current profile cursor shape and
      * blinking settings
-    */
+     */
     void resetCursorStyle();
 
     /**
@@ -169,7 +170,7 @@ public:
      * This will depend upon the height of the widget and the current font.
      * See fontHeight()
      */
-    int  lines() const
+    int lines() const
     {
         return _lines;
     }
@@ -181,7 +182,7 @@ public:
      * This will depend upon the width of the widget and the current font.
      * See fontWidth()
      */
-    int  columns() const
+    int columns() const
     {
         return _columns;
     }
@@ -217,8 +218,14 @@ public:
 
     void resetCursor();
 
-    QRect contentRect() const { return _contentRect; }
-    bool openLinksByDirectClick() const { return _openLinksByDirectClick; }
+    QRect contentRect() const
+    {
+        return _contentRect;
+    }
+    bool openLinksByDirectClick() const
+    {
+        return _openLinksByDirectClick;
+    }
 
     /**
      * Sets the terminal screen section which is displayed in this widget.
@@ -369,9 +376,9 @@ public Q_SLOTS:
     void pasteFromX11Selection(bool appendEnter = false);
 
     /**
-       * Changes whether the flow control warning box should be shown when the flow control
-       * stop key (Ctrl+S) are pressed.
-       */
+     * Changes whether the flow control warning box should be shown when the flow control
+     * stop key (Ctrl+S) are pressed.
+     */
     void setFlowControlWarningEnabled(bool enable);
     /**
      * Causes the widget to display or hide a message informing the user that terminal
@@ -426,7 +433,8 @@ public Q_SLOTS:
         return _colorScheme;
     }
 
-    Qt::Edge droppedEdge() const {
+    Qt::Edge droppedEdge() const
+    {
         return _overlayEdge;
     }
 
@@ -442,7 +450,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void requestToggleExpansion();
-    void requestMoveToNewTab(TerminalDisplay* display);
+    void requestMoveToNewTab(TerminalDisplay *display);
 
     /**
      * Emitted when the user presses a key whilst the terminal widget has focus.
@@ -484,16 +492,25 @@ Q_SIGNALS:
 
     void peekPrimaryRequested(bool doPeek);
 
-    void drawContents(Character *image, QPainter &paint, const QRect &rect, bool printerFriendly, int imageSize, bool bidiEnabled,
-        QVector<LineProperty> lineProperties);
+    void drawContents(Character *image,
+                      QPainter &paint,
+                      const QRect &rect,
+                      bool printerFriendly,
+                      int imageSize,
+                      bool bidiEnabled,
+                      QVector<LineProperty> lineProperties);
     void drawCurrentResultRect(QPainter &painter, QRect searchResultRect);
-    
-    void highlightScrolledLines(QPainter& painter, bool isTimerActive, QRect rect);
+
+    void highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect);
     QRegion highlightScrolledLinesRegion(bool nothingChanged, TerminalScrollBar *scrollBar);
-    
+
     void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting);
-    void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
-                            const Character *style, const QColor &characterColor, const LineProperty lineProperty);
+    void drawCharacters(QPainter &painter,
+                        const QRect &rect,
+                        const QString &text,
+                        const Character *style,
+                        const QColor &characterColor,
+                        const LineProperty lineProperty);
     void drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image);
 
 protected:
@@ -522,9 +539,7 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
     void doDrag();
-    enum DragState {
-        diNone, diPending, diDragging
-    };
+    enum DragState { diNone, diPending, diDragging, };
 
     struct DragInfo {
         DragState state;
@@ -596,7 +611,7 @@ private:
     Screen::DecodingOptions currentDecodingOptions();
 
     // Boilerplate setup for MessageWidget
-    KMessageWidget* createMessageWidget(const QString &text);
+    KMessageWidget *createMessageWidget(const QString &text);
 
     // the window onto the terminal screen which this display
     // is currently showing.
@@ -606,15 +621,15 @@ private:
 
     QVBoxLayout *_verticalLayout;
 
-    int _lines;      // the number of lines that can be displayed in the widget
-    int _columns;    // the number of columns that can be displayed in the widget
+    int _lines; // the number of lines that can be displayed in the widget
+    int _columns; // the number of columns that can be displayed in the widget
 
     // Character line and character column as per a previous call to
     // getCharacterPosition() in mouseMoveEvent().
     int _prevCharacterLine;
     int _prevCharacterColumn;
 
-    int _usedLines;  // the number of lines that are actually being used, this will be less
+    int _usedLines; // the number of lines that are actually being used, this will be less
     // than 'lines' if the character image provided with setImage() is smaller
     // than the maximum image size which can be displayed
 
@@ -639,10 +654,10 @@ private:
     bool _usesMouseTracking;
     bool _bracketedPasteMode;
 
-    QPoint _iPntSel;  // initial selection point
-    QPoint _pntSel;  // current selection point
-    QPoint _tripleSelBegin;  // help avoid flicker
-    int _actSel;     // selection state
+    QPoint _iPntSel; // initial selection point
+    QPoint _pntSel; // current selection point
+    QPoint _tripleSelBegin; // help avoid flicker
+    int _actSel; // selection state
     bool _wordSelectionMode;
     bool _lineSelectionMode;
     bool _preserveLineBreaks;
@@ -655,21 +670,21 @@ private:
     QString _wordCharacters;
     TerminalBell _bell;
 
-    bool _allowBlinkingText;  // allow text to blink
-    bool _allowBlinkingCursor;  // allow cursor to blink
-    bool _textBlinking;   // text is blinking, hide it when drawing
-    bool _cursorBlinking;     // cursor is blinking, hide it when drawing
+    bool _allowBlinkingText; // allow text to blink
+    bool _allowBlinkingCursor; // allow cursor to blink
+    bool _textBlinking; // text is blinking, hide it when drawing
+    bool _cursorBlinking; // cursor is blinking, hide it when drawing
     bool _hasTextBlinker; // has characters to blink
     QTimer *_blinkTextTimer;
     QTimer *_blinkCursorTimer;
 
-    bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
+    bool _openLinksByDirectClick; // Open URL and hosts by single mouse click
 
     bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text
     bool _dropUrlsAsText; // always paste URLs as text without showing copy/move menu
 
     Enum::TripleClickModeEnum _tripleClickMode;
-    bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
+    bool _possibleTripleClick; // is set in mouseDoubleClickEvent and deleted
     // after QApplication::doubleClickInterval() delay
 
     QLabel *_resizeWidget;
@@ -677,13 +692,13 @@ private:
 
     bool _flowControlWarningEnabled;
 
-    //widgets related to the warning message that appears when the user presses Ctrl+S to suspend
-    //terminal output - informing them what has happened and how to resume output
+    // widgets related to the warning message that appears when the user presses Ctrl+S to suspend
+    // terminal output - informing them what has happened and how to resume output
     KMessageWidget *_outputSuspendedMessageWidget;
 
     QSize _size;
 
-    ColorScheme const* _colorScheme;
+    ColorScheme const *_colorScheme;
     ColorSchemeWallpaper::Ptr _wallpaper;
 
     // list of filters currently applied to the display.  used for links and
@@ -695,20 +710,20 @@ private:
 
     InputMethodData _inputMethodData;
 
-    //the delay in milliseconds between redrawing blinking text
+    // the delay in milliseconds between redrawing blinking text
     static const int TEXT_BLINK_DELAY = 500;
 
-    //the duration of the size hint in milliseconds
+    // the duration of the size hint in milliseconds
     static const int SIZE_HINT_DURATION = 1000;
 
     SessionController *_sessionController;
 
-    bool _trimLeadingSpaces;   // trim leading spaces in selected text
-    bool _trimTrailingSpaces;   // trim trailing spaces in selected text
-    bool _mouseWheelZoom;   // enable mouse wheel zooming or not
+    bool _trimLeadingSpaces; // trim leading spaces in selected text
+    bool _trimTrailingSpaces; // trim trailing spaces in selected text
+    bool _mouseWheelZoom; // enable mouse wheel zooming or not
 
-    int _margin;      // the contents margin
-    bool _centerContents;   // center the contents between margins
+    int _margin; // the contents margin
+    bool _centerContents; // center the contents between margins
 
     KMessageWidget *_readOnlyMessageWidget; // Message shown at the top when read-only mode gets activated
 

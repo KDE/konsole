@@ -11,25 +11,26 @@
 
 #include <KLocalizedString>
 
-#include <KConfigGroup>
 #include <KConfig>
+#include <KConfigGroup>
 
 #include <QDebug>
-#include <QStandardPaths>
 #include <QFile>
-#include <QTextStream>
 #include <QLoggingCategory>
+#include <QStandardPaths>
+#include <QTextStream>
 
 #include "sshconfigurationdata.h"
 
 Q_LOGGING_CATEGORY(SshManagerPlugin, "org.kde.konsole.plugin.sshmanager")
 
-namespace {
-    const QString SshDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + QStringLiteral("/.ssh/");
+namespace
+{
+const QString SshDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + QStringLiteral("/.ssh/");
 }
 
 SSHManagerModel::SSHManagerModel(QObject *parent)
-: QStandardItemModel(parent)
+    : QStandardItemModel(parent)
 {
     load();
     if (invisibleRootItem()->rowCount() == 0) {
@@ -42,7 +43,7 @@ SSHManagerModel::~SSHManagerModel() noexcept
     save();
 }
 
-QStandardItem *SSHManagerModel::addTopLevelItem(const QString& name)
+QStandardItem *SSHManagerModel::addTopLevelItem(const QString &name)
 {
     for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
         if (invisibleRootItem()->child(i)->text() == name) {
@@ -57,7 +58,7 @@ QStandardItem *SSHManagerModel::addTopLevelItem(const QString& name)
     return newItem;
 }
 
-void SSHManagerModel::addChildItem(const SSHConfigurationData &config, const QString& parentName)
+void SSHManagerModel::addChildItem(const SSHConfigurationData &config, const QString &parentName)
 {
     QStandardItem *item = nullptr;
     for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
@@ -85,7 +86,7 @@ bool SSHManagerModel::setData(const QModelIndex &index, const QVariant &value, i
     return ret;
 }
 
-void SSHManagerModel::editChildItem(const SSHConfigurationData &config, const QModelIndex& idx)
+void SSHManagerModel::editChildItem(const SSHConfigurationData &config, const QModelIndex &idx)
 {
     QStandardItem *item = itemFromIndex(idx);
     item->setData(QVariant::fromValue(config), SSHRole);
@@ -96,7 +97,7 @@ void SSHManagerModel::editChildItem(const SSHConfigurationData &config, const QM
 QStringList SSHManagerModel::folders() const
 {
     QStringList retList;
-    for(int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
+    for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
         retList.push_back(invisibleRootItem()->child(i)->text());
     }
     return retList;
@@ -108,7 +109,7 @@ void SSHManagerModel::load()
     for (const QString &groupName : config.groupList()) {
         KConfigGroup group = config.group(groupName);
         addTopLevelItem(groupName);
-        for(const QString& sessionName : group.groupList()) {
+        for (const QString &sessionName : group.groupList()) {
             SSHConfigurationData data;
             KConfigGroup sessionGroup = group.group(sessionName);
             data.host = sessionGroup.readEntry("hostname");
@@ -161,7 +162,7 @@ Qt::ItemFlags SSHManagerModel::flags(const QModelIndex &index) const
     }
 }
 
-void SSHManagerModel::removeIndex(const QModelIndex& idx)
+void SSHManagerModel::removeIndex(const QModelIndex &idx)
 {
     removeRow(idx.row(), idx.parent());
 }
@@ -179,7 +180,7 @@ void SSHManagerModel::startImportFromSshConfig()
     importFromSshConfigFile(SshDir + QStringLiteral("config"));
 }
 
-void SSHManagerModel::importFromSshConfigFile(const QString& file)
+void SSHManagerModel::importFromSshConfigFile(const QString &file)
 {
     QFile sshConfig(file);
     if (!sshConfig.open(QIODevice::ReadOnly)) {
@@ -216,7 +217,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString& file)
 
         if (lists.at(0) == QStringLiteral("Host")) {
             if (line.contains(QLatin1Char('*'))) {
-                //Panic, ignore everything untill the next Host appears.
+                // Panic, ignore everything untill the next Host appears.
                 ignoreEntry = true;
                 continue;
             } else {
@@ -264,5 +265,3 @@ void SSHManagerModel::importFromSshConfigFile(const QString& file)
         addChildItem(data, tr("SSH Config"));
     }
 }
-
-

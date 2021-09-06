@@ -10,7 +10,8 @@
 
 #include "RegExpFilter.h"
 
-namespace Konsole {
+namespace Konsole
+{
 /** A filter which matches URLs in blocks of text */
 class UrlFilter : public RegExpFilter
 {
@@ -18,7 +19,7 @@ public:
     UrlFilter();
 
 protected:
-    QSharedPointer<HotSpot> newHotSpot(int beginRow, int beginColumn, int endRow, int endColumn, const QStringList & list) override;
+    QSharedPointer<HotSpot> newHotSpot(int beginRow, int beginColumn, int endRow, int endColumn, const QStringList &list) override;
 
 public:
     static const QRegularExpression FullUrlRegExp;

@@ -12,7 +12,6 @@
 
 namespace Konsole
 {
-
 class KONSOLEPRIVATE_EXPORT CompactHistoryType : public HistoryType
 {
 public:

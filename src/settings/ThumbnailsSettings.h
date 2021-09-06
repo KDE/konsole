@@ -9,7 +9,8 @@
 
 #include "ui_ThumbnailsSettings.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class ThumbnailsSettings : public QWidget, private Ui::ThumbnailsSettings
 {
     Q_OBJECT

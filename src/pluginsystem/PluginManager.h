@@ -12,24 +12,26 @@
 
 #include <QList>
 
-#include <memory>
 #include "konsole_export.h"
+#include <memory>
 
-namespace Konsole {
+namespace Konsole
+{
 class IKonsolePlugin;
 class MainWindow;
 
 struct PluginManagerPrivate;
 
-class KONSOLE_EXPORT PluginManager : public QObject {
+class KONSOLE_EXPORT PluginManager : public QObject
+{
     Q_OBJECT
 public:
     PluginManager();
     ~PluginManager();
     void loadAllPlugins();
-    void registerMainWindow(Konsole::MainWindow* window);
+    void registerMainWindow(Konsole::MainWindow *window);
 
-    std::vector<IKonsolePlugin*> plugins() const;
+    std::vector<IKonsolePlugin *> plugins() const;
 
 private:
     std::unique_ptr<PluginManagerPrivate> d;

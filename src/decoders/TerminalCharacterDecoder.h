@@ -8,8 +8,8 @@
 #define TERMINAL_CHARACTER_DECODER_H
 
 // Qt
-#include <QList>
 #include <QExplicitlySharedDataPointer>
+#include <QList>
 
 // Konsole characters
 #include <Character.h>
@@ -19,8 +19,8 @@
 
 class QTextStream;
 
-namespace Konsole {
-
+namespace Konsole
+{
 /**
  * Base class for terminal character decoders
  *
@@ -50,8 +50,7 @@ public:
      * @param count The number of characters
      * @param properties Additional properties which affect all characters in the line
      */
-    virtual void decodeLine(const Character * const characters, int count,
-                            LineProperty properties) = 0;
+    virtual void decodeLine(const Character *const characters, int count, LineProperty properties) = 0;
 };
 
 }

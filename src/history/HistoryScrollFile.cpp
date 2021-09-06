@@ -21,8 +21,8 @@
 
 using namespace Konsole;
 
-HistoryScrollFile::HistoryScrollFile() :
-    HistoryScroll(new HistoryTypeFile())
+HistoryScrollFile::HistoryScrollFile()
+    : HistoryScroll(new HistoryTypeFile())
 {
 }
 
@@ -52,8 +52,7 @@ LineProperty HistoryScrollFile::getLineProperty(const int lineno) const
 {
     if (lineno >= 0 && lineno <= getLines()) {
         LineProperty flag = 0;
-        _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char),
-                       (lineno) * sizeof(unsigned char));
+        _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char), (lineno) * sizeof(unsigned char));
         return flag;
     }
     return 0;

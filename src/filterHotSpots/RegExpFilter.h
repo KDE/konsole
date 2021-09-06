@@ -13,7 +13,8 @@
 #include <QRegularExpression>
 #include <QSharedPointer>
 
-namespace Konsole {
+namespace Konsole
+{
 class HotSpot;
 /**
  * A filter which searches for sections of text matching a regular expression and creates a new RegExpFilter::HotSpot
@@ -51,8 +52,7 @@ protected:
      * Called when a match for the regular expression is encountered.  Subclasses should reimplement this
      * to return custom hotspot types
      */
-    virtual QSharedPointer<HotSpot> newHotSpot(int startLine, int startColumn, int endLine,
-                                              int endColumn, const QStringList &capturedTexts);
+    virtual QSharedPointer<HotSpot> newHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts);
 
 private:
     QRegularExpression _searchText;

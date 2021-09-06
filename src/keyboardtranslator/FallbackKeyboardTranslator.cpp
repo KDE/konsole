@@ -11,8 +11,8 @@
 
 using namespace Konsole;
 
-FallbackKeyboardTranslator::FallbackKeyboardTranslator() :
-    KeyboardTranslator(QStringLiteral("fallback"))
+FallbackKeyboardTranslator::FallbackKeyboardTranslator()
+    : KeyboardTranslator(QStringLiteral("fallback"))
 {
     setDescription(QStringLiteral("Fallback Keyboard Translator"));
 

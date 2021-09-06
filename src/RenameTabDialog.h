@@ -10,11 +10,13 @@
 // KDE
 #include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
 class RenameTabDialog;
 }
 
-namespace Konsole {
+namespace Konsole
+{
 class RenameTabDialog : public QDialog
 {
     Q_OBJECT

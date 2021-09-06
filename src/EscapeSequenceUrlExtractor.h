@@ -8,15 +8,15 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+#include "Screen.h"
 #include <QObject>
 #include <QPointer>
-#include "Screen.h"
 
-
-namespace Konsole {
+namespace Konsole
+{
 /* Like QPoint, but with Row / Col
-* easier to read than x / y
-*/
+ * easier to read than x / y
+ */
 struct Coordinate {
     int row;
     int col;
@@ -35,7 +35,8 @@ struct ExtractedUrl {
 /* Stored in Screen, but used in V10Emulation to
  * store extracted URL's. Perhaps this should be a Model?
  */
-class EscapeSequenceUrlExtractor {
+class EscapeSequenceUrlExtractor
+{
 private:
     /* Tell us if we are currently reading or not a URL. */
     bool _reading = false;
@@ -52,7 +53,7 @@ private:
      * that will take over the history file.
      * TODO: make it configurable.
      */
-    //Not used ATM const int _maximumUrlHistory = 200;
+    // Not used ATM const int _maximumUrlHistory = 200;
 
     /* All of the extracted URL's. */
     QVector<ExtractedUrl> _history;
@@ -72,7 +73,7 @@ public:
     /* This is a list of URI schemas that are going to be supported, separated by semicolon.
      * like https://;file://
      */
-    void setAllowedLinkSchema(const QStringList& allowedSchemas);
+    void setAllowedLinkSchema(const QStringList &allowedSchemas);
 
     void setScreen(Screen *screen);
 
@@ -93,7 +94,7 @@ public:
     void appendUrlText(QChar c);
 
     /* The URL is parsed at once, store it at once. */
-    void setUrl(const QString& url);
+    void setUrl(const QString &url);
 
     /* All of the parsedURL's, used by TerminalDisplay to paint them
      * on screen. */

@@ -6,14 +6,14 @@
 
 // Own
 #include "DBusTest.h"
-#include "../session/Session.h"
 #include "../profile/Profile.h"
 #include "../profile/ProfileWriter.h"
+#include "../session/Session.h"
 
 // Qt
 #include <QProcess>
-#include <QSignalSpy>
 #include <QRandomGenerator>
+#include <QSignalSpy>
 #include <QStandardPaths>
 
 using namespace Konsole;
@@ -27,8 +27,7 @@ void DBusTest::initTestCase()
     QDBusConnectionInterface *bus = nullptr;
     QStringList konsoleServices;
 
-    if (!QDBusConnection::sessionBus().isConnected()
-        || ((bus = QDBusConnection::sessionBus().interface()) == nullptr)) {
+    if (!QDBusConnection::sessionBus().isConnected() || ((bus = QDBusConnection::sessionBus().interface()) == nullptr)) {
         QFAIL("Session bus not found");
     }
 
@@ -37,8 +36,7 @@ void DBusTest::initTestCase()
 
     // Find all current Konsoles' services running
     QStringList allServices = serviceReply;
-    for (QStringList::const_iterator it = allServices.constBegin(),
-         end = allServices.constEnd(); it != end; ++it) {
+    for (QStringList::const_iterator it = allServices.constBegin(), end = allServices.constEnd(); it != end; ++it) {
         const QString service = *it;
         if (service.startsWith(interfaceName)) {
             konsoleServices << service;
@@ -50,8 +48,7 @@ void DBusTest::initTestCase()
     auto profileWriter = new ProfileWriter();
 
     do {
-        _testProfileName = QStringLiteral("konsole-dbus-test-profile-%1")
-                                   .arg(QRandomGenerator::global()->generate());
+        _testProfileName = QStringLiteral("konsole-dbus-test-profile-%1").arg(QRandomGenerator::global()->generate());
         profile->setProperty(Profile::UntranslatedName, _testProfileName);
         profile->setProperty(Profile::Name, _testProfileName);
         _testProfilePath = profileWriter->getPath(profile);
@@ -79,8 +76,7 @@ void DBusTest::initTestCase()
 
     // Find dbus service of above Konsole
     allServices = serviceReply;
-    for (QStringList::const_iterator it = allServices.constBegin(),
-         end = allServices.constEnd(); it != end; ++it) {
+    for (QStringList::const_iterator it = allServices.constBegin(), end = allServices.constEnd(); it != end; ++it) {
         const QString service = *it;
         if (service.startsWith(interfaceName)) {
             if (!konsoleServices.contains(service)) {
@@ -89,12 +85,9 @@ void DBusTest::initTestCase()
         }
     }
 
-    QVERIFY2(!_interfaceName.isEmpty(),
-             "This test will only work in a Konsole window with a new PID.  A new Konsole PID can't be found.");
+    QVERIFY2(!_interfaceName.isEmpty(), "This test will only work in a Konsole window with a new PID.  A new Konsole PID can't be found.");
 
-    QDBusInterface iface(_interfaceName,
-                         QStringLiteral("/Windows/1"),
-                         QStringLiteral("org.kde.konsole.Konsole"));
+    QDBusInterface iface(_interfaceName, QStringLiteral("/Windows/1"), QStringLiteral("org.kde.konsole.Konsole"));
     QVERIFY(iface.isValid());
 }
 
@@ -107,13 +100,11 @@ void DBusTest::cleanupTestCase()
 
     // Need to take care of when user has CloseAllTabs=False otherwise
     // they will get a popup dialog when we try to close this.
-    QSignalSpy quitSpy(_process, SIGNAL(finished(int,QProcess::ExitStatus)));
+    QSignalSpy quitSpy(_process, SIGNAL(finished(int, QProcess::ExitStatus)));
 
     // Do not use QWidget::close(), as it shows question popup when
     // CloseAllTabs is set to false (default).
-    QDBusInterface iface(_interfaceName,
-                         QStringLiteral("/MainApplication"),
-                         QStringLiteral("org.qtproject.Qt.QCoreApplication"));
+    QDBusInterface iface(_interfaceName, QStringLiteral("/MainApplication"), QStringLiteral("org.qtproject.Qt.QCoreApplication"));
     QVERIFY2(iface.isValid(), "Unable to get a dbus interface to Konsole!");
 
     QDBusReply<void> instanceReply = iface.call(QStringLiteral("quit"));
@@ -133,9 +124,7 @@ void DBusTest::testSessions()
     QDBusReply<QString> stringReply;
     QDBusReply<QStringList> listReply;
 
-    QDBusInterface iface(_interfaceName,
-                         QStringLiteral("/Sessions/1"),
-                         QStringLiteral("org.kde.konsole.Session"));
+    QDBusInterface iface(_interfaceName, QStringLiteral("/Sessions/1"), QStringLiteral("org.kde.konsole.Session"));
     QVERIFY(iface.isValid());
 
     //****************** Test is/set MonitorActivity
@@ -183,8 +172,7 @@ void DBusTest::testSessions()
         QVERIFY(arrayReply.isValid());
         // Compare result with name due to aliases issue
         // Better way to do this?
-        QCOMPARE((QTextCodec::codecForName(arrayReply.value()))->name(),
-                 (QTextCodec::codecForName(availableCodecs[i]))->name());
+        QCOMPARE((QTextCodec::codecForName(arrayReply.value()))->name(), (QTextCodec::codecForName(availableCodecs[i]))->name());
     }
 
     //****************** Test is/set flowControlEnabled
@@ -207,7 +195,7 @@ void DBusTest::testSessions()
     QVERIFY(listReply.isValid());
 
     QStringList prevEnv = listReply.value();
-    //for (int i = 0; i < prevEnv.size(); ++i)
+    // for (int i = 0; i < prevEnv.size(); ++i)
     //    qDebug()<< prevEnv.at(i).toLocal8Bit().constData() << endl;
 
     voidReply = iface.call(QStringLiteral("setEnvironment"), QStringList());
@@ -275,9 +263,7 @@ void DBusTest::testWindows()
     int sessionCount = -1;
     int initialSessionId = -1;
 
-    QDBusInterface iface(_interfaceName,
-                         QStringLiteral("/Windows/1"),
-                         QStringLiteral("org.kde.konsole.Window"));
+    QDBusInterface iface(_interfaceName, QStringLiteral("/Windows/1"), QStringLiteral("org.kde.konsole.Window"));
     QVERIFY(iface.isValid());
 
     intReply = iface.call(QStringLiteral("sessionCount"));
@@ -309,9 +295,7 @@ void DBusTest::testWindows()
     newSessionId = intReply.value();
     QVERIFY(newSessionId != initialSessionId);
     {
-        QDBusInterface sessionIface(_interfaceName,
-                             QStringLiteral("/Sessions/%1").arg(newSessionId),
-                             QStringLiteral("org.kde.konsole.Session"));
+        QDBusInterface sessionIface(_interfaceName, QStringLiteral("/Sessions/%1").arg(newSessionId), QStringLiteral("org.kde.konsole.Session"));
         QVERIFY(iface.isValid());
 
         listReply = sessionIface.call(QStringLiteral("environment"));
@@ -328,9 +312,7 @@ void DBusTest::testWindows()
     newSessionId = intReply.value();
     QVERIFY(newSessionId != initialSessionId);
     {
-        QDBusInterface sessionIface(_interfaceName,
-                             QStringLiteral("/Sessions/%1").arg(newSessionId),
-                             QStringLiteral("org.kde.konsole.Session"));
+        QDBusInterface sessionIface(_interfaceName, QStringLiteral("/Sessions/%1").arg(newSessionId), QStringLiteral("org.kde.konsole.Session"));
         QVERIFY(iface.isValid());
 
         listReply = sessionIface.call(QStringLiteral("environment"));

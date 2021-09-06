@@ -7,7 +7,8 @@
 #ifndef ENUMERATION_H
 #define ENUMERATION_H
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * This class serves as a place for putting enum definitions that are
  * used or referenced in multiple places in the code. Keep it small.
@@ -32,7 +33,7 @@ public:
          * Typically this means that lines are recorded to
          * a file as they are scrolled off-screen.
          */
-        UnlimitedHistory = 2
+        UnlimitedHistory = 2,
     };
 
     /**
@@ -45,7 +46,7 @@ public:
         /** Show the scroll-bar on the right of the terminal display. */
         ScrollBarRight = 1,
         /** Do not show the scroll-bar. */
-        ScrollBarHidden = 2
+        ScrollBarHidden = 2,
     };
 
     /**
@@ -55,7 +56,7 @@ public:
         /** Scroll half page */
         ScrollPageHalf = 0,
         /** Scroll full page */
-        ScrollPageFull = 1
+        ScrollPageFull = 1,
     };
 
     /** This enum describes the shapes used to draw the cursor in terminal
@@ -69,7 +70,7 @@ public:
          */
         IBeamCursor = 1,
         /** Draw a line underneath the cursor's position. */
-        UnderlineCursor = 2
+        UnderlineCursor = 2,
     };
 
     /** This enum describes the behavior of triple click action . */
@@ -77,7 +78,7 @@ public:
         /** Select the whole line underneath the cursor. */
         SelectWholeLine = 0,
         /** Select from the current cursor position to the end of the line. */
-        SelectForwardsFromCursor = 1
+        SelectForwardsFromCursor = 1,
     };
 
     /** This enum describes the source from which mouse middle click pastes data . */
@@ -85,7 +86,7 @@ public:
         /** Paste from X11 Selection. */
         PasteFromX11Selection = 0,
         /** Paste from Clipboard. */
-        PasteFromClipboard = 1
+        PasteFromClipboard = 1,
     };
 
     /**
@@ -116,7 +117,7 @@ public:
         /** trigger visual bell(inverting the display's colors briefly). */
         VisualBell = 2,
         /** No bell effects */
-        NoBell = 3
+        NoBell = 3,
     };
 
     /**
@@ -131,7 +132,7 @@ public:
         /** Searches backwards through the output, starting at the
          * current selection.
          */
-        BackwardsSearch
+        BackwardsSearch,
     };
 };
 }

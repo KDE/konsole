@@ -7,12 +7,11 @@
 #ifndef PARTTEST_H
 #define PARTTEST_H
 
-#include <kde_terminal_interface.h>
 #include <KParts/Part>
+#include <kde_terminal_interface.h>
 
 namespace Konsole
 {
-
 class PartTest : public QObject
 {
     Q_OBJECT
@@ -24,10 +23,9 @@ private Q_SLOTS:
 
 private:
     void testFd(bool runShell);
-    KParts::Part* createPart();
+    KParts::Part *createPart();
 };
 
 }
 
 #endif // PARTTEST_H
-

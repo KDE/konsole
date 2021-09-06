@@ -13,14 +13,14 @@
 #include <KPluginLoader>
 #include <KPluginMetaData>
 
-namespace Konsole {
-
+namespace Konsole
+{
 struct PluginManagerPrivate {
-    std::vector<IKonsolePlugin*> plugins;
+    std::vector<IKonsolePlugin *> plugins;
 };
 
 PluginManager::PluginManager()
-: d(std::make_unique<PluginManagerPrivate>())
+    : d(std::make_unique<PluginManagerPrivate>())
 {
 }
 
@@ -32,7 +32,7 @@ PluginManager::~PluginManager()
 void PluginManager::loadAllPlugins()
 {
     QVector<KPluginMetaData> pluginMetaData = KPluginLoader::findPlugins(QStringLiteral("konsoleplugins"));
-    for(const auto &metaData : pluginMetaData) {
+    for (const auto &metaData : pluginMetaData) {
         KPluginLoader pluginLoader(metaData.fileName());
         KPluginFactory *factory = pluginLoader.factory();
         if (!factory) {
@@ -48,11 +48,11 @@ void PluginManager::loadAllPlugins()
     }
 }
 
-void PluginManager::registerMainWindow(Konsole::MainWindow* window)
+void PluginManager::registerMainWindow(Konsole::MainWindow *window)
 {
     window->unplugActionList(QStringLiteral("plugin-submenu"));
 
-    QList<QAction*> internalPluginSubmenus;
+    QList<QAction *> internalPluginSubmenus;
     for (auto *plugin : d->plugins) {
         plugin->addMainWindow(window);
         internalPluginSubmenus.append(plugin->menuBarActions(window));
@@ -62,7 +62,7 @@ void PluginManager::registerMainWindow(Konsole::MainWindow* window)
     window->plugActionList(QStringLiteral("plugin-submenu"), internalPluginSubmenus);
 }
 
-std::vector<IKonsolePlugin*> PluginManager::plugins() const
+std::vector<IKonsolePlugin *> PluginManager::plugins() const
 {
     return d->plugins;
 }

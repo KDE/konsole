@@ -10,41 +10,42 @@
 #define PROFILECOMMANDPARSER_H
 
 // Konsole
-#include "konsoleprofile_export.h"
 #include "Profile.h"
+#include "konsoleprofile_export.h"
 
 class QVariant;
-template<typename, typename> class QHash;
+template<typename, typename>
+class QHash;
 
 namespace Konsole
 {
+/**
+ * Parses an input string consisting of property names
+ * and assigned values and returns a table of properties
+ * and values.
+ *
+ * The input string will typically look like this:
+ *
+ * @code
+ *   PropertyName=Value;PropertyName=Value ...
+ * @endcode
+ *
+ * For example:
+ *
+ * @code
+ *   Icon=konsole;Directory=/home/bob
+ * @endcode
+ */
+class KONSOLEPROFILE_EXPORT ProfileCommandParser
+{
+public:
     /**
      * Parses an input string consisting of property names
-     * and assigned values and returns a table of properties
-     * and values.
-     *
-     * The input string will typically look like this:
-     *
-     * @code
-     *   PropertyName=Value;PropertyName=Value ...
-     * @endcode
-     *
-     * For example:
-     *
-     * @code
-     *   Icon=konsole;Directory=/home/bob
-     * @endcode
+     * and assigned values and returns a table of
+     * properties and values.
      */
-    class KONSOLEPROFILE_EXPORT ProfileCommandParser
-    {
-    public:
-        /**
-         * Parses an input string consisting of property names
-         * and assigned values and returns a table of
-         * properties and values.
-         */
-        QHash<Profile::Property, QVariant> parse(const QString &input);
-    };
+    QHash<Profile::Property, QVariant> parse(const QString &input);
+};
 }
 
 #endif

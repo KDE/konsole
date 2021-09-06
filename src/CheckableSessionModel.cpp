@@ -8,11 +8,11 @@
 
 using namespace Konsole;
 
-CheckableSessionModel::CheckableSessionModel(QObject *parent) :
-    SessionListModel(parent),
-    _checkedSessions(QSet<Session *>()),
-    _fixedSessions(QSet<Session *>()),
-    _checkColumn(0)
+CheckableSessionModel::CheckableSessionModel(QObject *parent)
+    : SessionListModel(parent)
+    , _checkedSessions(QSet<Session *>())
+    , _fixedSessions(QSet<Session *>())
+    , _checkColumn(0)
 {
 }
 
@@ -30,16 +30,14 @@ Qt::ItemFlags CheckableSessionModel::flags(const QModelIndex &index) const
     if (_fixedSessions.contains(session)) {
         return SessionListModel::flags(index) & ~Qt::ItemIsEnabled;
     }
-   return SessionListModel::flags(index) | Qt::ItemIsUserCheckable;
+    return SessionListModel::flags(index) | Qt::ItemIsUserCheckable;
 }
 
 QVariant CheckableSessionModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::CheckStateRole && index.column() == _checkColumn) {
         auto *session = static_cast<Session *>(index.internalPointer());
-        return QVariant::fromValue(static_cast<int>(
-            _checkedSessions.contains(session) ? Qt::Checked : Qt::Unchecked)
-        );
+        return QVariant::fromValue(static_cast<int>(_checkedSessions.contains(session) ? Qt::Checked : Qt::Unchecked));
     }
     return SessionListModel::data(index, role);
 }

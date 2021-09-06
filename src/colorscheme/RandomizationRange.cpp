@@ -15,16 +15,16 @@
 
 namespace Konsole
 {
+RandomizationRange::RandomizationRange()
+    : hue(0.0)
+    , saturation(0.0)
+    , lightness(0.0)
+{
+}
 
-    RandomizationRange::RandomizationRange()
-        : hue(0.0)
-        , saturation(0.0)
-        , lightness(0.0)
-    {}
-    
-    bool RandomizationRange::isNull() const
-    {
-        return qFuzzyIsNull(hue) && qFuzzyIsNull(saturation) && qFuzzyIsNull(lightness);
-    }
+bool RandomizationRange::isNull() const
+{
+    return qFuzzyIsNull(hue) && qFuzzyIsNull(saturation) && qFuzzyIsNull(lightness);
+}
 
 }

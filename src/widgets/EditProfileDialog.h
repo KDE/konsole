@@ -9,8 +9,8 @@
 #define EDITPROFILEDIALOG_H
 
 // KDE
-#include <KPageDialog>
 #include <KNS3/Entry>
+#include <KPageDialog>
 
 // Konsole
 #include "colorscheme/ColorScheme.h"
@@ -21,24 +21,26 @@
 #include "profile/ProfileGroup.h"
 
 #include "Enumeration.h"
-#include "keyboardtranslator/KeyboardTranslatorManager.h"
 #include "FontDialog.h"
 #include "LabelsAligner.h"
+#include "keyboardtranslator/KeyboardTranslatorManager.h"
 
 class KPluralHandlingSpinBox;
 class KLocalizedString;
 class QItemSelectionModel;
-namespace Ui {
-    class EditProfileGeneralPage;
-    class EditProfileTabsPage;
-    class EditProfileAppearancePage;
-    class EditProfileScrollingPage;
-    class EditProfileKeyboardPage;
-    class EditProfileMousePage;
-    class EditProfileAdvancedPage;
+namespace Ui
+{
+class EditProfileGeneralPage;
+class EditProfileTabsPage;
+class EditProfileAppearancePage;
+class EditProfileScrollingPage;
+class EditProfileKeyboardPage;
+class EditProfileMousePage;
+class EditProfileAdvancedPage;
 }
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * A dialog which allows the user to edit a profile.
  * After the dialog is created, it can be initialized with the settings
@@ -52,7 +54,7 @@ namespace Konsole {
  * the persistent argument set to false.  These changes are then
  * un-done when the dialog is closed.
  */
-class KONSOLEPRIVATE_EXPORT EditProfileDialog: public KPageDialog
+class KONSOLEPRIVATE_EXPORT EditProfileDialog : public KPageDialog
 {
     Q_OBJECT
 
@@ -219,16 +221,7 @@ private Q_SLOTS:
 private:
     Q_DISABLE_COPY(EditProfileDialog)
 
-    enum PageID {
-        GeneralPage = 0,
-        TabsPage,
-        AppearancePage,
-        ScrollingPage,
-        KeyboardPage,
-        MousePage,
-        AdvancedPage,
-        PagesCount
-    };
+    enum PageID { GeneralPage = 0, TabsPage, AppearancePage, ScrollingPage, KeyboardPage, MousePage, AdvancedPage, PagesCount, };
 
     // initialize various pages of the dialog
     void setupGeneralPage(const Profile::Ptr &profile);
@@ -309,20 +302,21 @@ private:
     // otherwise returns true.
     bool isProfileNameValid();
 
-    Ui::EditProfileGeneralPage      *_generalUi;
-    Ui::EditProfileTabsPage         *_tabsUi;
-    Ui::EditProfileAppearancePage   *_appearanceUi;
-    Ui::EditProfileScrollingPage    *_scrollingUi;
-    Ui::EditProfileKeyboardPage     *_keyboardUi;
-    Ui::EditProfileMousePage        *_mouseUi;
-    Ui::EditProfileAdvancedPage     *_advancedUi;
+    Ui::EditProfileGeneralPage *_generalUi;
+    Ui::EditProfileTabsPage *_tabsUi;
+    Ui::EditProfileAppearancePage *_appearanceUi;
+    Ui::EditProfileScrollingPage *_scrollingUi;
+    Ui::EditProfileKeyboardPage *_keyboardUi;
+    Ui::EditProfileMousePage *_mouseUi;
+    Ui::EditProfileAdvancedPage *_advancedUi;
 
     using PageSetupMethod = void (EditProfileDialog::*)(const Profile::Ptr &);
     struct Page {
         Page(PageSetupMethod page = nullptr, bool update = false)
             : setupPage(page)
             , needsUpdate(update)
-        {}
+        {
+        }
 
         PageSetupMethod setupPage;
         bool needsUpdate;

@@ -7,20 +7,22 @@
 #ifndef TERMINAL_HEADER_BAR_H
 #define TERMINAL_HEADER_BAR_H
 
-#include <QWidget>
-#include <QPoint>
 #include "session/Session.h"
+#include <QPoint>
+#include <QWidget>
 
 class QLabel;
 class QToolButton;
 class QBoxLayout;
 class QSplitter;
 
-namespace Konsole {
-    class TerminalDisplay;
-    class ViewProperties;
+namespace Konsole
+{
+class TerminalDisplay;
+class ViewProperties;
 
-class TerminalHeaderBar : public QWidget {
+class TerminalHeaderBar : public QWidget
+{
     Q_OBJECT
 public:
     // TODO: Verify if the terminalDisplay is needed, or some other thing like SessionController.
@@ -39,7 +41,7 @@ public Q_SLOTS:
     void updateSpecialState(ViewProperties *item);
 
 protected:
-    void paintEvent(QPaintEvent* paintEvent) override;
+    void paintEvent(QPaintEvent *paintEvent) override;
     void mousePressEvent(QMouseEvent *ev) override;
     void mouseReleaseEvent(QMouseEvent *ev) override;
     void mouseMoveEvent(QMouseEvent *ev) override;

@@ -10,18 +10,18 @@
 
 // Qt
 #include <QList>
-#include <QSet>
-#include <QObject>
-#include <QPointer>
-#include <QStringList>
-#include <QRegularExpression>
 #include <QMultiHash>
-#include <QRect>
+#include <QObject>
 #include <QPoint>
+#include <QPointer>
+#include <QRect>
+#include <QRegularExpression>
+#include <QSet>
+#include <QStringList>
 
 // KDE
-#include <KFileItemActions>
 #include <KFileItem>
+#include <KFileItemActions>
 #include <KIO/PreviewJob>
 
 #include <memory>
@@ -33,7 +33,8 @@ class QAction;
 class QMenu;
 class QMouseEvent;
 
-namespace Konsole {
+namespace Konsole
+{
 class Session;
 class HotSpot;
 
@@ -90,7 +91,7 @@ protected:
     /** Returns the internal buffer */
     const QString *buffer();
     /** Converts a character position within buffer() to a line and column */
-    std::pair<int,int> getLineColumn(int position);
+    std::pair<int, int> getLineColumn(int position);
 
 private:
     Q_DISABLE_COPY(Filter)

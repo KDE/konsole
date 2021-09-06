@@ -7,12 +7,12 @@
 #include "ColorFilterHotSpot.h"
 
 #include <QApplication>
-#include <QTimer>
 #include <QBuffer>
-#include <QToolTip>
 #include <QMouseEvent>
-#include <QPixmap>
 #include <QPainter>
+#include <QPixmap>
+#include <QTimer>
+#include <QToolTip>
 
 #include "KonsoleSettings.h"
 
@@ -20,8 +20,7 @@ using namespace Konsole;
 
 bool ColorFilterHotSpot::_canGenerateTooltip = false;
 
-ColorFilterHotSpot::ColorFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn,
-                                       const QStringList &capturedTexts, const QColor &color)
+ColorFilterHotSpot::ColorFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts, const QColor &color)
     : RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts)
     , _color(color)
 {
@@ -34,7 +33,7 @@ void ColorFilterHotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
     _toolPos = ev->globalPos();
     _canGenerateTooltip = true;
 
-    QTimer::singleShot(100, this, [&]{
+    QTimer::singleShot(100, this, [&] {
         tooltipRequested();
     });
 }
@@ -79,8 +78,7 @@ void ColorFilterHotSpot::tooltipRequested()
     QBuffer buffer(&data);
     pix.save(&buffer, "PNG");
 
-    const auto tooltipString = QStringLiteral("<img src='data:image/png;base64, %0'>")
-        .arg(QString::fromLocal8Bit(data.toBase64()));
+    const auto tooltipString = QStringLiteral("<img src='data:image/png;base64, %0'>").arg(QString::fromLocal8Bit(data.toBase64()));
 
     QPoint tooltipPosition = QPoint(_toolPos.x(), _toolPos.y());
     QToolTip::showText(tooltipPosition, tooltipString, qApp->focusWidget());

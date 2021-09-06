@@ -9,7 +9,8 @@
 
 class QWheelEvent;
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * Represents accumulation of wheel scroll from scroll events.
  *
@@ -22,14 +23,9 @@ namespace Konsole {
  * been reached (ideally 1 for pixel scroll values towards any action
  * that can be mapped to a pixel movement).
  */
-struct ScrollState
-{
-    enum {
-        DEFAULT_ANGLE_SCROLL_LINE = 120
-    };
-    enum {
-        DEGREES_PER_ANGLE_UNIT = 8
-    };
+struct ScrollState {
+    enum { DEFAULT_ANGLE_SCROLL_LINE = 120, };
+    enum { DEGREES_PER_ANGLE_UNIT = 8, };
     static inline int degreesToAngle(const int angle)
     {
         return angle * DEGREES_PER_ANGLE_UNIT;
@@ -59,8 +55,9 @@ struct ScrollState
      * the accumulated total. The other scroll style value is cleared. */
     int consumeSteps(int pixelStepSize, int angleStepSize);
 
-    ScrollState() : _remainingScrollAngle(0),
-        _remainingScrollPixel(0)
+    ScrollState()
+        : _remainingScrollAngle(0)
+        , _remainingScrollPixel(0)
     {
     }
 

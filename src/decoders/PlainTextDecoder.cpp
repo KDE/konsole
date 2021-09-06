@@ -35,7 +35,7 @@ void PlainTextDecoder::setTrailingWhitespace(bool enable)
     _includeTrailingWhitespace = enable;
 }
 
-void PlainTextDecoder::begin(QTextStream* output)
+void PlainTextDecoder::begin(QTextStream *output)
 {
     _output = output;
     if (!_linePositions.isEmpty()) {
@@ -58,7 +58,7 @@ QList<int> PlainTextDecoder::linePositions() const
     return _linePositions;
 }
 
-void PlainTextDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/)
+void PlainTextDecoder::decodeLine(const Character *const characters, int count, LineProperty /*properties*/)
 {
     Q_ASSERT(_output);
 
@@ -67,10 +67,10 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
         _linePositions << pos;
     }
 
-    //TODO should we ignore or respect the LINE_WRAPPED line property?
+    // TODO should we ignore or respect the LINE_WRAPPED line property?
 
-    //note:  we build up a QString and send it to the text stream rather writing into the text
-    //stream a character at a time because it is more efficient.
+    // note:  we build up a QString and send it to the text stream rather writing into the text
+    // stream a character at a time because it is more efficient.
     //(since QTextStream always deals with QStrings internally anyway)
     QString plainText;
     plainText.reserve(count);
@@ -92,14 +92,14 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     // if inclusion of trailing whitespace is disabled then find the end of the
     // line
     if (!_includeTrailingWhitespace) {
-        while(outputCount > 0 && characters[start + outputCount - 1].isSpace()) {
+        while (outputCount > 0 && characters[start + outputCount - 1].isSpace()) {
             outputCount--;
         }
     }
 
     // find out the last technically real character in the line
     int realCharacterGuard = -1;
-    for (int i = count - 1 ; i >= start ; i--) {
+    for (int i = count - 1; i >= start; i--) {
         // FIXME: the special case of '\n' here is really ugly
         // Maybe the '\n' should be added after calling this method in
         // Screen::copyLineToStream()
@@ -112,7 +112,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     for (int i = start; i < outputCount;) {
         if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
             ushort extendedCharLength = 0;
-            const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
+            const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
             if (chars != nullptr) {
                 const QString s = QString::fromUcs4(chars, extendedCharLength);
                 plainText.append(s);
@@ -132,7 +132,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
                 plainText.append(QString::fromUcs4(&characters[i].character, 1));
                 i += qMax(1, characters[i].width());
             } else {
-                ++i;  // should we 'break' directly here?
+                ++i; // should we 'break' directly here?
             }
         }
     }

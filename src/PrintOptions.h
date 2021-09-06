@@ -9,7 +9,8 @@
 
 #include "ui_PrintOptions.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class PrintOptions : public QWidget, private Ui::PrintOptions
 {
     Q_OBJECT

@@ -8,27 +8,25 @@
 #include "FilterChain.h"
 #include "Filter.h"
 
-#include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalColor.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
 
-#include <QRect>
+#include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
 #include <QPainter>
-#include <QDebug>
+#include <QRect>
 
 #include <algorithm>
 
-
 using namespace Konsole;
 FilterChain::FilterChain(TerminalDisplay *terminalDisplay)
-  : _terminalDisplay(terminalDisplay),
-    _showUrlHint(false),
-    _reverseUrlHints(false),
-    _urlHintsModifiers(Qt::NoModifier)
+    : _terminalDisplay(terminalDisplay)
+    , _showUrlHint(false)
+    , _reverseUrlHints(false)
+    , _urlHintsModifiers(Qt::NoModifier)
 {
-
 }
 FilterChain::~FilterChain()
 {
@@ -47,21 +45,21 @@ void FilterChain::removeFilter(Filter *filter)
 
 void FilterChain::reset()
 {
-    for(auto *filter : _filters) {
+    for (auto *filter : _filters) {
         filter->reset();
     }
 }
 
 void FilterChain::setBuffer(const QString *buffer, const QList<int> *linePositions)
 {
-    for(auto *filter : _filters) {
+    for (auto *filter : _filters) {
         filter->setBuffer(buffer, linePositions);
     }
 }
 
 void FilterChain::process()
 {
-    for( auto *filter : _filters) {
+    for (auto *filter : _filters) {
         filter->process();
     }
 }
@@ -73,10 +71,10 @@ void FilterChain::clear()
 
 QSharedPointer<HotSpot> FilterChain::hotSpotAt(int line, int column) const
 {
-    for(auto *filter : _filters) {
+    for (auto *filter : _filters) {
         QSharedPointer<HotSpot> spot = filter->hotSpotAt(line, column);
         if (spot != nullptr) {
-           return spot;
+            return spot;
         }
     }
     return nullptr;
@@ -87,10 +85,9 @@ QList<QSharedPointer<HotSpot>> FilterChain::hotSpots() const
     QList<QSharedPointer<HotSpot>> list;
     for (auto *filter : _filters) {
         list.append(filter->hotSpots());
-   }
+    }
     return list;
 }
-
 
 QRegion FilterChain::hotSpotRegion() const
 {
@@ -110,7 +107,7 @@ QRegion FilterChain::hotSpotRegion() const
 
             r.setLeft(0);
 
-            for (int line = hotSpot->startLine() + 1 ; line < hotSpot->endLine(); line++) {
+            for (int line = hotSpot->startLine() + 1; line < hotSpot->endLine(); line++) {
                 r.moveTop(line);
                 region |= _terminalDisplay->imageToWidget(r);
             }
@@ -126,10 +123,9 @@ QRegion FilterChain::hotSpotRegion() const
 int FilterChain::count(HotSpot::Type type) const
 {
     const auto hSpots = hotSpots();
-    return std::count_if(std::begin(hSpots), std::end(hSpots),
-            [type](const QSharedPointer<HotSpot> &s) {
-                return s->type() == type;
-            });
+    return std::count_if(std::begin(hSpots), std::end(hSpots), [type](const QSharedPointer<HotSpot> &s) {
+        return s->type() == type;
+    });
 }
 
 QList<QSharedPointer<HotSpot>> FilterChain::filterBy(HotSpot::Type type) const
@@ -195,7 +191,7 @@ bool FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine
     return false;
 }
 
-void  FilterChain::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn)
+void FilterChain::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn)
 {
     auto spot = hotSpotAt(charLine, charColumn);
     if (_hotSpotUnderMouse != spot) {
@@ -222,7 +218,7 @@ void FilterChain::mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev, int ch
     spot->mouseReleaseEvent(td, ev);
 }
 
-void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
+void FilterChain::paint(TerminalDisplay *td, QPainter &painter)
 {
     // get color of character under mouse and use it to draw
     // lines for filters
@@ -230,7 +226,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
 
     auto [cursorLine, cursorColumn] = td->getCharacterPosition(cursorPos, false);
 
-    Character cursorCharacter = td->getCursorCharacter( std::min(cursorColumn, td->columns() - 1), cursorLine);
+    Character cursorCharacter = td->getCursorCharacter(std::min(cursorColumn, td->columns() - 1), cursorLine);
     painter.setPen(QPen(cursorCharacter.foregroundColor.color(td->terminalColor()->colorTable())));
 
     // iterate over hotspots identified by the display's currently active filters
@@ -256,7 +252,8 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
     for (const auto &spot : spots) {
         QRegion region;
         if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl) {
-            QPair<QRegion, QRect> spotRegion = spot->region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect());
+            QPair<QRegion, QRect> spotRegion =
+                spot->region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect());
             region = spotRegion.first;
             QRect r = spotRegion.second;
 
@@ -281,7 +278,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
             spot->debug();
         }
 
-        for (int line = spot->startLine() ; line <= spot->endLine() ; line++) {
+        for (int line = spot->startLine(); line <= spot->endLine(); line++) {
             int startColumn = 0;
             int endColumn = td->columns() - 1; // TODO use number of _columns which are actually
             // occupied on this line rather than the width of the
@@ -322,7 +319,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
             r.setCoords(startColumn * td->terminalFont()->fontWidth() + td->contentRect().left(),
                         line * td->terminalFont()->fontHeight() + td->contentRect().top(),
                         endColumn * td->terminalFont()->fontWidth() + td->contentRect().left() - 1,
-                        (line + 1)* td->terminalFont()->fontHeight() + td->contentRect().top() - 1);
+                        (line + 1) * td->terminalFont()->fontHeight() + td->contentRect().top() - 1);
 
             // Underline link hotspots
             // TODO: Fix accessing the urlHint here.
@@ -336,12 +333,12 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
                 const int baseline = r.bottom() - metrics.descent();
                 // find the position of the underline below that
                 const int underlinePos = baseline + metrics.underlinePos();
-                painter.drawLine(r.left() , underlinePos, r.right() , underlinePos);
+                painter.drawLine(r.left(), underlinePos, r.right(), underlinePos);
 
                 // Marker hotspots simply have a transparent rectangular shape
                 // drawn on top of them
             } else if (spot->type() == HotSpot::Marker) {
-                //TODO - Do not use a hardcoded color for this
+                // TODO - Do not use a hardcoded color for this
                 const bool isCurrentResultLine = (td->screenWindow()->currentResultLine() == (spot->startLine() + td->screenWindow()->currentLine()));
                 QColor color = isCurrentResultLine ? QColor(255, 255, 0, 120) : QColor(255, 0, 0, 120);
                 painter.fillRect(r, color);

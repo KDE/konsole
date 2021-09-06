@@ -6,28 +6,28 @@
 
 #include "TerminalHeaderBar.h"
 
-#include "terminalDisplay/TerminalDisplay.h"
-#include "session/SessionController.h"
-#include "ViewProperties.h"
 #include "KonsoleSettings.h"
+#include "ViewProperties.h"
+#include "session/SessionController.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewSplitter.h"
 
 #include <KLocalizedString>
-#include <QBoxLayout>
-#include <QToolButton>
-#include <QLabel>
 #include <QApplication>
+#include <QBoxLayout>
+#include <QDrag>
+#include <QLabel>
+#include <QMimeData>
 #include <QPaintEvent>
-#include <QTabBar>
 #include <QPainter>
 #include <QSplitter>
 #include <QStyleOptionTabBarBase>
 #include <QStylePainter>
-#include <QDrag>
-#include <QMimeData>
+#include <QTabBar>
+#include <QToolButton>
 
-namespace Konsole {
-
+namespace Konsole
+{
 TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     : QWidget(parent)
 {
@@ -45,9 +45,9 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
 
     // Status icons
 
-    QLabel ** statusIcons[] = {&m_statusIconReadOnly, &m_statusIconCopyInput, &m_statusIconSilence, &m_statusIconActivity, &m_statusIconBell};
+    QLabel **statusIcons[] = {&m_statusIconReadOnly, &m_statusIconCopyInput, &m_statusIconSilence, &m_statusIconActivity, &m_statusIconBell};
 
-    for (auto **statusIcon: statusIcons) {
+    for (auto **statusIcon : statusIcons) {
         *statusIcon = new QLabel(this);
         (*statusIcon)->setAlignment(Qt::AlignCenter);
         (*statusIcon)->setFixedSize(20, 20);
@@ -56,11 +56,11 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
         m_boxLayout->addWidget(*statusIcon);
     }
 
-    m_statusIconReadOnly->setPixmap(QIcon::fromTheme(QStringLiteral("object-locked")).pixmap(QSize(16,16)));
-    m_statusIconCopyInput->setPixmap(QIcon::fromTheme(QStringLiteral("irc-voice")).pixmap(QSize(16,16)));
-    m_statusIconSilence->setPixmap(QIcon::fromTheme(QStringLiteral("system-suspend")).pixmap(QSize(16,16)));
-    m_statusIconActivity->setPixmap(QIcon::fromTheme(QStringLiteral("dialog-information")).pixmap(QSize(16,16)));
-    m_statusIconBell->setPixmap(QIcon::fromTheme(QStringLiteral("notifications")).pixmap(QSize(16,16)));
+    m_statusIconReadOnly->setPixmap(QIcon::fromTheme(QStringLiteral("object-locked")).pixmap(QSize(16, 16)));
+    m_statusIconCopyInput->setPixmap(QIcon::fromTheme(QStringLiteral("irc-voice")).pixmap(QSize(16, 16)));
+    m_statusIconSilence->setPixmap(QIcon::fromTheme(QStringLiteral("system-suspend")).pixmap(QSize(16, 16)));
+    m_statusIconActivity->setPixmap(QIcon::fromTheme(QStringLiteral("dialog-information")).pixmap(QSize(16, 16)));
+    m_statusIconBell->setPixmap(QIcon::fromTheme(QStringLiteral("notifications")).pixmap(QSize(16, 16)));
 
     // Title
 
@@ -79,8 +79,7 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_toggleExpandedMode->setCheckable(true);
     m_toggleExpandedMode->setToolTip(i18nc("@info:tooltip", "Maximize terminal"));
 
-    connect(m_toggleExpandedMode, &QToolButton::clicked,
-        this, &TerminalHeaderBar::requestToggleExpansion);
+    connect(m_toggleExpandedMode, &QToolButton::clicked, this, &TerminalHeaderBar::requestToggleExpansion);
 
     m_boxLayout->addWidget(m_toggleExpandedMode);
 
@@ -91,8 +90,7 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_moveToNewTab->setAutoRaise(true);
     m_moveToNewTab->setToolTip(i18nc("@info:tooltip", "Move terminal to new tab"));
 
-    connect(m_moveToNewTab, &QToolButton::clicked,
-            this, &TerminalHeaderBar::requestMoveToNewTab);
+    connect(m_moveToNewTab, &QToolButton::clicked, this, &TerminalHeaderBar::requestMoveToNewTab);
 
     m_boxLayout->addWidget(m_moveToNewTab);
 
@@ -124,25 +122,22 @@ void TerminalHeaderBar::mouseDoubleClickEvent(QMouseEvent *ev)
 // Hack until I can detangle the creation of the TerminalViews
 void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
 {
-    auto controller = dynamic_cast<SessionController*>(properties);
-    connect(properties, &Konsole::ViewProperties::titleChanged, this, [this, properties]{
+    auto controller = dynamic_cast<SessionController *>(properties);
+    connect(properties, &Konsole::ViewProperties::titleChanged, this, [this, properties] {
         m_terminalTitle->setText(properties->title());
     });
     m_terminalTitle->setText(properties->title());
 
     connect(properties, &Konsole::ViewProperties::iconChanged, this, [this, properties] {
-        m_terminalIcon->setPixmap(properties->icon().pixmap(QSize(22,22)));
+        m_terminalIcon->setPixmap(properties->icon().pixmap(QSize(22, 22)));
     });
-    m_terminalIcon->setPixmap(properties->icon().pixmap(QSize(22,22)));
+    m_terminalIcon->setPixmap(properties->icon().pixmap(QSize(22, 22)));
 
-    connect(properties, &Konsole::ViewProperties::notificationChanged, this,
-            &Konsole::TerminalHeaderBar::updateNotification);
+    connect(properties, &Konsole::ViewProperties::notificationChanged, this, &Konsole::TerminalHeaderBar::updateNotification);
 
-    connect(properties, &Konsole::ViewProperties::readOnlyChanged, this,
-            &Konsole::TerminalHeaderBar::updateSpecialState);
+    connect(properties, &Konsole::ViewProperties::readOnlyChanged, this, &Konsole::TerminalHeaderBar::updateSpecialState);
 
-    connect(properties, &Konsole::ViewProperties::copyInputChanged, this,
-            &Konsole::TerminalHeaderBar::updateSpecialState);
+    connect(properties, &Konsole::ViewProperties::copyInputChanged, this, &Konsole::TerminalHeaderBar::updateSpecialState);
 
     connect(m_closeBtn, &QToolButton::clicked, controller, &SessionController::closeSession);
 }
@@ -157,7 +152,7 @@ void TerminalHeaderBar::updateNotification(ViewProperties *item, Session::Notifi
 {
     Q_UNUSED(item)
 
-    switch(notification) {
+    switch (notification) {
     case Session::Notification::Silence:
         m_statusIconSilence->setVisible(enabled);
         break;
@@ -174,7 +169,7 @@ void TerminalHeaderBar::updateNotification(ViewProperties *item, Session::Notifi
 
 void TerminalHeaderBar::updateSpecialState(ViewProperties *item)
 {
-    auto controller = dynamic_cast<SessionController*>(item);
+    auto controller = dynamic_cast<SessionController *>(item);
 
     if (controller != nullptr) {
         m_statusIconReadOnly->setVisible(controller->isReadOnly());
@@ -204,9 +199,9 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
     const auto globalPos = parentWidget()->mapToGlobal(pos());
     auto *widget = qApp->widgetAt(globalPos.x() + 10, globalPos.y() - 10);
 
-    const bool isTabbar = qobject_cast<QTabBar*>(widget) != nullptr;
-    const bool isTerminalWidget = qobject_cast<TerminalDisplay*>(widget) != nullptr;
-    const bool isSplitter = (qobject_cast<QSplitter*>(widget) != nullptr) || (qobject_cast<QSplitterHandle*>(widget) != nullptr);
+    const bool isTabbar = qobject_cast<QTabBar *>(widget) != nullptr;
+    const bool isTerminalWidget = qobject_cast<TerminalDisplay *>(widget) != nullptr;
+    const bool isSplitter = (qobject_cast<QSplitter *>(widget) != nullptr) || (qobject_cast<QSplitterHandle *>(widget) != nullptr);
     if ((widget != nullptr) && !isTabbar && !isTerminalWidget && !isSplitter) {
         QStyleOptionTabBarBase optTabBase;
         QStylePainter p(this);
@@ -220,7 +215,7 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
     if (!m_terminalIsFocused) {
         auto p = qApp->palette();
         auto shadowColor = p.color(QPalette::ColorRole::Shadow);
-        shadowColor.setAlphaF( qreal(0.2) * shadowColor.alphaF() ); // same as breeze.
+        shadowColor.setAlphaF(qreal(0.2) * shadowColor.alphaF()); // same as breeze.
 
         QPainter painter(this);
         painter.setPen(Qt::NoPen);
@@ -229,7 +224,7 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
     }
 }
 
-void TerminalHeaderBar::mouseMoveEvent(QMouseEvent* ev)
+void TerminalHeaderBar::mouseMoveEvent(QMouseEvent *ev)
 {
     if (m_toggleExpandedMode->isChecked()) {
         return;
@@ -246,12 +241,12 @@ void TerminalHeaderBar::mouseMoveEvent(QMouseEvent* ev)
     }
 }
 
-void TerminalHeaderBar::mousePressEvent(QMouseEvent* ev)
+void TerminalHeaderBar::mousePressEvent(QMouseEvent *ev)
 {
     m_startDrag = ev->pos();
 }
 
-void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent* ev)
+void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent *ev)
 {
     Q_UNUSED(ev)
 }
@@ -266,12 +261,12 @@ QSplitter *TerminalHeaderBar::getTopLevelSplitter()
 {
     QWidget *p = parentWidget();
     // This is expected.
-    if (qobject_cast<TerminalDisplay*>(p) != nullptr) {
+    if (qobject_cast<TerminalDisplay *>(p) != nullptr) {
         p = p->parentWidget();
     }
 
     // this is also expected.
-    auto *innerSplitter = qobject_cast<ViewSplitter*>(p);
+    auto *innerSplitter = qobject_cast<ViewSplitter *>(p);
     if (innerSplitter == nullptr) {
         return nullptr;
     }
@@ -283,16 +278,14 @@ void TerminalHeaderBar::applyVisibilitySettings()
 {
     auto *settings = KonsoleSettings::self();
     auto toVisibility = settings->splitViewVisibility();
-    switch (toVisibility)
-    {
+    switch (toVisibility) {
     case KonsoleSettings::AlwaysShowSplitHeader:
         setVisible(true);
-    break;
+        break;
     case KonsoleSettings::ShowSplitHeaderWhenNeeded: {
-        const bool visible = !(getTopLevelSplitter()->findChildren<TerminalDisplay*>().count() == 1);
+        const bool visible = !(getTopLevelSplitter()->findChildren<TerminalDisplay *>().count() == 1);
         setVisible(visible);
-    }
-    break;
+    } break;
     case KonsoleSettings::AlwaysHideSplitHeader:
         setVisible(false);
     default:

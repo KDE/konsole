@@ -8,31 +8,32 @@
 
 // Konsole
 // TODO: Own header should be first, but this breaks compiling.
-#include "Session.h"
 #include "SessionGroup.h"
 #include "Emulation.h"
+#include "Session.h"
 
-namespace Konsole {
-
-SessionGroup::SessionGroup(QObject* parent)
-    : QObject(parent), _masterMode(0)
+namespace Konsole
+{
+SessionGroup::SessionGroup(QObject *parent)
+    : QObject(parent)
+    , _masterMode(0)
 {
 }
 
 SessionGroup::~SessionGroup() = default;
 
-QList<Session*> SessionGroup::sessions() const
+QList<Session *> SessionGroup::sessions() const
 {
     return _sessions.keys();
 }
 
-void SessionGroup::addSession(Session* session)
+void SessionGroup::addSession(Session *session)
 {
     connect(session, &Konsole::Session::finished, this, &Konsole::SessionGroup::sessionFinished);
     _sessions.insert(session, false);
 }
 
-void SessionGroup::removeSession(Session* session)
+void SessionGroup::removeSession(Session *session)
 {
     disconnect(session, &Konsole::Session::finished, this, &Konsole::SessionGroup::sessionFinished);
     setMasterStatus(session, false);
@@ -41,7 +42,7 @@ void SessionGroup::removeSession(Session* session)
 
 void SessionGroup::sessionFinished()
 {
-    auto* session = qobject_cast<Session*>(sender());
+    auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
     removeSession(session);
 }
@@ -51,7 +52,7 @@ void SessionGroup::setMasterMode(int mode)
     _masterMode = mode;
 }
 
-void SessionGroup::setMasterStatus(Session* session , bool master)
+void SessionGroup::setMasterStatus(Session *session, bool master)
 {
     const bool wasMaster = _sessions[session];
 
@@ -64,15 +65,14 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
     if (master) {
         connect(session->emulation(), &Konsole::Emulation::sendData, this, &Konsole::SessionGroup::forwardData);
     } else {
-        disconnect(session->emulation(), &Konsole::Emulation::sendData,
-                   this, &Konsole::SessionGroup::forwardData);
+        disconnect(session->emulation(), &Konsole::Emulation::sendData, this, &Konsole::SessionGroup::forwardData);
     }
 }
 
-void SessionGroup::forwardData(const QByteArray& data)
+void SessionGroup::forwardData(const QByteArray &data)
 {
     static bool _inForwardData = false;
-    if (_inForwardData) {  // Avoid recursive calls among session groups!
+    if (_inForwardData) { // Avoid recursive calls among session groups!
         // A recursive call happens when a master in group A calls forwardData()
         // in group B. If one of the destination sessions in group B is also a
         // master of a group including the master session of group A, this would
@@ -81,7 +81,7 @@ void SessionGroup::forwardData(const QByteArray& data)
     }
 
     _inForwardData = true;
-    const QList<Session*> sessionsKeys = _sessions.keys();
+    const QList<Session *> sessionsKeys = _sessions.keys();
     for (Session *other : sessionsKeys) {
         if (!_sessions[other]) {
             other->emulation()->sendString(data);
@@ -90,4 +90,4 @@ void SessionGroup::forwardData(const QByteArray& data)
     _inForwardData = false;
 }
 
-}       // namespace konsole
+} // namespace konsole

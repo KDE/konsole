@@ -11,9 +11,9 @@
 #include "config-konsole.h"
 
 // Qt
+#include <QDebug>
 #include <QDir>
 #include <QSignalSpy>
-#include <QDebug>
 
 // KDE
 #include <KPluginFactory>
@@ -32,7 +32,7 @@ using namespace Konsole;
  *  int foregroundProcessId()
  *  QString foregroundProcessName()
  *  QString currentWorkingDirectory() const
-*/
+ */
 
 void TerminalInterfaceTest::initTestCase()
 {
@@ -201,7 +201,7 @@ void TerminalInterfaceTest::testTerminalInterfaceV2()
         QFAIL("konsolepart not found.");
     }
 
-    TerminalInterfaceV2 *terminal = qobject_cast<TerminalInterfaceV2*>(_terminalPart);
+    TerminalInterfaceV2 *terminal = qobject_cast<TerminalInterfaceV2 *>(_terminalPart);
 
     QVERIFY(terminal);
     QVERIFY(terminal->setCurrentProfile(testProfile->name()));
@@ -226,7 +226,7 @@ KParts::Part *TerminalInterfaceTest::createPart()
     }
 
     KPluginFactory *factory = KPluginLoader(konsolePartPlugin).factory();
-    if (factory == nullptr) {       // not found
+    if (factory == nullptr) { // not found
         return nullptr;
     }
 

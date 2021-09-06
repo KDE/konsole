@@ -16,8 +16,8 @@
 #include "../characters/Character.h"
 #include "Screen.h"
 
-namespace Konsole {
-
+namespace Konsole
+{
 /**
  * Provides a window onto a section of a terminal screen.  A terminal widget can then render
  * the contents of the window and use the window to change the terminal screen's selection
@@ -182,7 +182,7 @@ public:
          * Scroll the window down by a given number of pages, where
          * one page is windowLines() lines
          */
-        ScrollPages
+        ScrollPages,
     };
 
     /**
@@ -263,10 +263,10 @@ private:
     bool _bufferNeedsUpdate;
 
     int _windowLines;
-    int _currentLine;  // see scrollTo() , currentLine()
+    int _currentLine; // see scrollTo() , currentLine()
     int _currentResultLine;
     bool _trackOutput; // see setTrackOutput() , trackOutput()
-    int _scrollCount;  // count of lines which the window has been scrolled by since
+    int _scrollCount; // count of lines which the window has been scrolled by since
     // the last call to resetScrollCount()
 };
 }

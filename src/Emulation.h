@@ -15,14 +15,15 @@
 
 // Konsole
 #include "Enumeration.h"
-#include "terminalDisplay/TerminalDisplay.h"
 #include "konsoleprivate_export.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 #include <memory>
 
 class QKeyEvent;
 
-namespace Konsole {
+namespace Konsole
+{
 class KeyboardTranslator;
 class HistoryType;
 class Screen;
@@ -401,12 +402,12 @@ Q_SIGNALS:
      * to the terminal.
      * @p shape cursor shape
      * @p isBlinking if true, the cursor will be set to blink
-    */
+     */
     void setCursorStyleRequest(Enum::CursorShapeEnum shape = Enum::BlockCursor, bool isBlinking = false);
     /**
      * Emitted when reset() is called to reset the cursor style to the
      * current profile cursor shape and blinking settings.
-    */
+     */
     void resetCursorStyleRequest();
 
 protected:
@@ -428,25 +429,22 @@ protected:
      */
     void setScreen(int index);
 
-    enum EmulationCodec {
-        LocaleCodec = 0,
-        Utf8Codec = 1
-    };
+    enum EmulationCodec { LocaleCodec = 0, Utf8Codec = 1, };
 
     void setCodec(EmulationCodec codec);
 
     QList<ScreenWindow *> _windows;
 
-    Screen *_currentScreen;  // pointer to the screen which is currently active,
+    Screen *_currentScreen; // pointer to the screen which is currently active,
     // this is one of the elements in the screen[] array
 
-    Screen *_screen[2];      // 0 = primary screen ( used by most programs, including the shell
+    Screen *_screen[2]; // 0 = primary screen ( used by most programs, including the shell
     //                      scrollbars are enabled in this mode )
     // 1 = alternate      ( used by vi , emacs etc.
     //                      scrollbars are not enabled in this mode )
 
-    //decodes an incoming C-style character stream into a unicode QString using
-    //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
+    // decodes an incoming C-style character stream into a unicode QString using
+    // the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
     const QTextCodec *_codec;
     std::unique_ptr<QTextDecoder> _decoder;
     const KeyboardTranslator *_keyTranslator; // the keyboard layout

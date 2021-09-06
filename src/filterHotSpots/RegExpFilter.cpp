@@ -7,16 +7,14 @@
 
 #include "RegExpFilter.h"
 
-
 #include "RegExpFilterHotspot.h"
 
 using namespace Konsole;
 
-RegExpFilter::RegExpFilter() :
-    _searchText(QRegularExpression())
+RegExpFilter::RegExpFilter()
+    : _searchText(QRegularExpression())
 {
 }
-
 
 void RegExpFilter::setRegExp(const QRegularExpression &regExp)
 {
@@ -45,12 +43,7 @@ void RegExpFilter::process()
         std::pair<int, int> start = getLineColumn(match.capturedStart());
         std::pair<int, int> end = getLineColumn(match.capturedEnd());
 
-        QSharedPointer<HotSpot> spot(
-            newHotSpot(start.first, start.second,
-                       end.first, end.second,
-                       match.capturedTexts()
-            )
-        );
+        QSharedPointer<HotSpot> spot(newHotSpot(start.first, start.second, end.first, end.second, match.capturedTexts()));
 
         if (spot == nullptr) {
             continue;
@@ -60,9 +53,7 @@ void RegExpFilter::process()
     }
 }
 
-QSharedPointer<HotSpot> RegExpFilter::newHotSpot(int startLine, int startColumn, int endLine,
-                                                int endColumn, const QStringList &capturedTexts)
+QSharedPointer<HotSpot> RegExpFilter::newHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts)
 {
-    return QSharedPointer<HotSpot>(new RegExpFilterHotSpot(startLine, startColumn,
-                                     endLine, endColumn, capturedTexts));
+    return QSharedPointer<HotSpot>(new RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts));
 }

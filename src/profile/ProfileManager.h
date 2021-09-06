@@ -10,20 +10,21 @@
 #define PROFILEMANAGER_H
 
 // Qt
-#include <QKeySequence>
 #include <QHash>
+#include <QKeySequence>
 #include <QList>
 #include <QSet>
+#include <QStack>
 #include <QStringList>
 #include <QVariant>
-#include <QStack>
 
 #include <set>
 
 // Konsole
 #include "Profile.h"
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * Manages profiles which specify various settings for terminal sessions
  * and their displays.
@@ -53,7 +54,7 @@ public:
      * Returns a list of all available profiles
      *
      * Initially only the profile currently set as the default is loaded.
-    *
+     *
      * When this method is called, it calls loadAllProfiles() internally to
      * ensure all available profiles are loaded and usable.
      */
@@ -134,8 +135,7 @@ public:
      * set this to false if you want to preview possible changes to a profile but do not
      * wish to make them permanent.
      */
-    void changeProfile(Profile::Ptr profile, QHash<Profile::Property, QVariant> propertyMap,
-                       bool persistent = true);
+    void changeProfile(Profile::Ptr profile, QHash<Profile::Property, QVariant> propertyMap, bool persistent = true);
 
     /**
      * Sets the @p profile as the default profile for creating new sessions
@@ -241,9 +241,9 @@ private:
 
     // finds out if it's a internal profile or an external one,
     // fixing the path to point to the correct location for the profile.
-    QString normalizePath(const QString& path) const;
+    QString normalizePath(const QString &path) const;
 };
 
 }
 
-#endif //PROFILEMANAGER_H
+#endif // PROFILEMANAGER_H

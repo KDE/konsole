@@ -12,8 +12,8 @@
 
 using namespace Konsole;
 
-TerminalDisplayAccessible::TerminalDisplayAccessible(TerminalDisplay *display) :
-    QAccessibleWidget(display, QAccessible::Terminal, display->sessionController()->userTitle())
+TerminalDisplayAccessible::TerminalDisplayAccessible(TerminalDisplay *display)
+    : QAccessibleWidget(display, QAccessible::Terminal, display->sessionController()->userTitle())
 {
 }
 
@@ -40,8 +40,7 @@ int TerminalDisplayAccessible::cursorPosition() const
     return offset + display()->screenWindow()->screen()->getCursorX();
 }
 
-void TerminalDisplayAccessible::selection(int selectionIndex, int *startOffset,
-                                          int *endOffset) const
+void TerminalDisplayAccessible::selection(int selectionIndex, int *startOffset, int *endOffset) const
 {
     *startOffset = 0;
     *endOffset = 0;
@@ -93,10 +92,8 @@ void TerminalDisplayAccessible::addSelection(int startOffset, int endOffset)
     if (display()->screenWindow() == nullptr) {
         return;
     }
-    display()->screenWindow()->setSelectionStart(columnForOffset(startOffset),
-                                                 lineForOffset(startOffset), false);
-    display()->screenWindow()->setSelectionEnd(columnForOffset(endOffset),
-                                               lineForOffset(endOffset));
+    display()->screenWindow()->setSelectionStart(columnForOffset(startOffset), lineForOffset(startOffset), false);
+    display()->screenWindow()->setSelectionEnd(columnForOffset(endOffset), lineForOffset(endOffset));
 }
 
 QString TerminalDisplayAccessible::attributes(int offset, int *startOffset, int *endOffset) const
@@ -145,8 +142,7 @@ void TerminalDisplayAccessible::setCursorPosition(int position)
         return;
     }
 
-    display()->screenWindow()->screen()->setCursorYX(lineForOffset(position),
-                                                     columnForOffset(position));
+    display()->screenWindow()->screen()->setCursorYX(lineForOffset(position), columnForOffset(position));
 }
 
 void *TerminalDisplayAccessible::interface_cast(QAccessible::InterfaceType type)

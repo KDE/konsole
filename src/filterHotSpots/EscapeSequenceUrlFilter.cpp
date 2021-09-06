@@ -7,14 +7,14 @@
 
 #include "EscapeSequenceUrlFilter.h"
 
-#include "session/Session.h"
-#include "terminalDisplay/TerminalDisplay.h"
 #include "EscapeSequenceUrlExtractor.h"
 #include "EscapeSequenceUrlFilterHotSpot.h"
+#include "session/Session.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 
-EscapeSequenceUrlFilter::EscapeSequenceUrlFilter(Session* session, TerminalDisplay *window)
+EscapeSequenceUrlFilter::EscapeSequenceUrlFilter(Session *session, TerminalDisplay *window)
 {
     _session = session;
     _window = window;
@@ -39,12 +39,7 @@ void EscapeSequenceUrlFilter::process()
             // TODO:
             // This uses Column / Row while everything else uses Row/Column.
             // Move everything else to QPoint begin / QPoint End.
-            new EscapeSequenceUrlHotSpot(beginRow, escapedUrl.begin.col,
-                    endRow, escapedUrl.end.col,
-                    escapedUrl.text,
-                    escapedUrl.url
-            )
-        );
+            new EscapeSequenceUrlHotSpot(beginRow, escapedUrl.begin.col, endRow, escapedUrl.end.col, escapedUrl.text, escapedUrl.url));
 
         addHotSpot(spot);
     }

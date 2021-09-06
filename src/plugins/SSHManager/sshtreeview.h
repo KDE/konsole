@@ -10,14 +10,15 @@
 
 #include <QTreeView>
 
-class SshTreeView : public QTreeView {
-Q_OBJECT
+class SshTreeView : public QTreeView
+{
+    Q_OBJECT
 public:
     SshTreeView(QWidget *parent = nullptr);
     ~SshTreeView() noexcept;
 
     // mouseClicked already exists but only sends QModelIndex
-    Q_SIGNAL void mouseButtonClicked(Qt::MouseButton button, const QModelIndex& idx);
+    Q_SIGNAL void mouseButtonClicked(Qt::MouseButton button, const QModelIndex &idx);
     void mouseReleaseEvent(QMouseEvent *ev) override;
 };
 

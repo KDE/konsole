@@ -20,7 +20,7 @@ CompositeWidgetFocusWatcher::CompositeWidgetFocusWatcher(QWidget *compositeWidge
 
 bool CompositeWidgetFocusWatcher::eventFilter(QObject *watched, QEvent *event)
 {
-    switch(event->type()) {
+    switch (event->type()) {
     case QEvent::Close:
     case QEvent::DeferredDelete:
     case QEvent::Destroy:
@@ -31,7 +31,7 @@ bool CompositeWidgetFocusWatcher::eventFilter(QObject *watched, QEvent *event)
         Q_EMIT compositeFocusChanged(true);
         break;
     case QEvent::FocusOut:
-        if(static_cast<QFocusEvent *>(event)->reason() != Qt::PopupFocusReason) {
+        if (static_cast<QFocusEvent *>(event)->reason() != Qt::PopupFocusReason) {
             Q_EMIT compositeFocusChanged(false);
         }
         break;
@@ -48,7 +48,7 @@ void CompositeWidgetFocusWatcher::registerWidgetAndChildren(QWidget *widget)
     if (widget->focusPolicy() != Qt::NoFocus) {
         widget->installEventFilter(this);
     }
-    for (auto *child: widget->children()) {
+    for (auto *child : widget->children()) {
         auto *childWidget = qobject_cast<QWidget *>(child);
         if (childWidget != nullptr) {
             registerWidgetAndChildren(childWidget);

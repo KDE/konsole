@@ -13,144 +13,143 @@
 #include "colorscheme/ColorScheme.h"
 
 // Qt
-#include <QTimer>
-#include <QPalette>
 #include <QApplication>
+#include <QPalette>
+#include <QTimer>
 
 namespace Konsole
 {
+TerminalColor::TerminalColor(QObject *parent)
+    : QObject(parent)
+    , m_opacity(1.0)
+    , m_blendColor(qRgba(0, 0, 0, 0xff))
+    , m_cursorColor(QColor())
+    , m_cursorTextColor(QColor())
+{
+    setColorTable(ColorScheme::defaultTable);
+}
 
-    TerminalColor::TerminalColor(QObject *parent)
-        : QObject(parent)
-        , m_opacity(1.0)
-        , m_blendColor(qRgba(0, 0, 0, 0xff))
-        , m_cursorColor(QColor())
-        , m_cursorTextColor(QColor())
-    {
-        setColorTable(ColorScheme::defaultTable);
-    }
-    
-    void TerminalColor::applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint randomSeed)
-    {
-        QColor table[TABLE_COLORS];
-        colorScheme->getColorTable(table, randomSeed);
-        setColorTable(table);
-        setOpacity(colorScheme->opacity());
+void TerminalColor::applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint randomSeed)
+{
+    QColor table[TABLE_COLORS];
+    colorScheme->getColorTable(table, randomSeed);
+    setColorTable(table);
+    setOpacity(colorScheme->opacity());
 
-        m_cursorColor = profile->useCustomCursorColor() ? profile->customCursorColor() : QColor();
-        m_cursorTextColor = profile->useCustomCursorColor() ? profile->customCursorTextColor() : QColor();
-    }
-    
-    QColor TerminalColor::backgroundColor() const
-    {
-        return m_colorTable[DEFAULT_BACK_COLOR];
-    }
-    
-    QColor TerminalColor::foregroundColor() const
-    {
-        return m_colorTable[DEFAULT_FORE_COLOR];
-    }
-    
-    void TerminalColor::setColorTable(const QColor *table) 
-    {
-        std::copy(table, table + TABLE_COLORS, m_colorTable);
-        setBackgroundColor(m_colorTable[DEFAULT_BACK_COLOR]);
+    m_cursorColor = profile->useCustomCursorColor() ? profile->customCursorColor() : QColor();
+    m_cursorTextColor = profile->useCustomCursorColor() ? profile->customCursorTextColor() : QColor();
+}
+
+QColor TerminalColor::backgroundColor() const
+{
+    return m_colorTable[DEFAULT_BACK_COLOR];
+}
+
+QColor TerminalColor::foregroundColor() const
+{
+    return m_colorTable[DEFAULT_FORE_COLOR];
+}
+
+void TerminalColor::setColorTable(const QColor *table)
+{
+    std::copy(table, table + TABLE_COLORS, m_colorTable);
+    setBackgroundColor(m_colorTable[DEFAULT_BACK_COLOR]);
+    onColorsChanged();
+}
+
+const QColor *TerminalColor::colorTable() const
+{
+    return m_colorTable;
+}
+
+void TerminalColor::setOpacity(qreal opacity)
+{
+    QColor color(m_blendColor);
+    color.setAlphaF(opacity);
+    m_opacity = opacity;
+
+    m_blendColor = color.rgba();
+    onColorsChanged();
+}
+
+void TerminalColor::visualBell()
+{
+    swapFGBGColors();
+    QTimer::singleShot(200, this, &TerminalColor::swapFGBGColors);
+}
+
+qreal TerminalColor::opacity() const
+{
+    return m_opacity;
+}
+
+QRgb TerminalColor::blendColor() const
+{
+    return m_blendColor;
+}
+
+void TerminalColor::setBackgroundColor(const QColor &color)
+{
+    m_colorTable[DEFAULT_BACK_COLOR] = color;
+    onColorsChanged();
+}
+
+void TerminalColor::setForegroundColor(const QColor &color)
+{
+    m_colorTable[DEFAULT_FORE_COLOR] = color;
+    onColorsChanged();
+}
+
+bool TerminalColor::event(QEvent *event)
+{
+    switch (event->type()) {
+    case QEvent::PaletteChange:
+    case QEvent::ApplicationPaletteChange:
         onColorsChanged();
-    }
-    
-    const QColor* TerminalColor::colorTable() const
-    {
-        return m_colorTable;
-    }
-    
-    void TerminalColor::setOpacity(qreal opacity) 
-    {
-        QColor color(m_blendColor);
-        color.setAlphaF(opacity);
-        m_opacity = opacity;
+        break;
 
-        m_blendColor = color.rgba();
-        onColorsChanged();
+    default:
+        break;
     }
-    
-    void TerminalColor::visualBell() 
-    {
-        swapFGBGColors();
-        QTimer::singleShot(200, this, &TerminalColor::swapFGBGColors);
-    }
-    
-    qreal TerminalColor::opacity() const
-    {
-        return m_opacity;
-    }
-    
-    QRgb TerminalColor::blendColor() const
-    {
-        return m_blendColor;
-    }
-    
-    void TerminalColor::setBackgroundColor(const QColor &color) 
-    {
-        m_colorTable[DEFAULT_BACK_COLOR] = color;
-        onColorsChanged();
-    }
-    
-    void TerminalColor::setForegroundColor(const QColor &color) 
-    {
-        m_colorTable[DEFAULT_FORE_COLOR] = color;
-        onColorsChanged();
-    }
-  
-    bool TerminalColor::event(QEvent *event) 
-    {
-        switch (event->type()) {
-            case QEvent::PaletteChange:
-            case QEvent::ApplicationPaletteChange:
-                onColorsChanged();
-                break;
-            
-            default:
-                break;
-        }
-        return QObject::event(event);
-    }
-    
-    void TerminalColor::onColorsChanged() 
-    {
-        QPalette palette = QApplication::palette();
+    return QObject::event(event);
+}
 
-        QColor buttonTextColor = m_colorTable[DEFAULT_FORE_COLOR];
-        QColor backgroundColor = m_colorTable[DEFAULT_BACK_COLOR];
-        backgroundColor.setAlphaF(m_opacity);
+void TerminalColor::onColorsChanged()
+{
+    QPalette palette = QApplication::palette();
 
-        QColor buttonColor = backgroundColor.toHsv();
-        if (buttonColor.valueF() < 0.5) {
-            buttonColor = buttonColor.lighter();
-        } else {
-            buttonColor = buttonColor.darker();
-        }
-        palette.setColor(QPalette::Button, buttonColor);
-        palette.setColor(QPalette::Window, backgroundColor);
-        palette.setColor(QPalette::Base, backgroundColor);
-        palette.setColor(QPalette::WindowText, buttonTextColor);
-        palette.setColor(QPalette::ButtonText, buttonTextColor);
+    QColor buttonTextColor = m_colorTable[DEFAULT_FORE_COLOR];
+    QColor backgroundColor = m_colorTable[DEFAULT_BACK_COLOR];
+    backgroundColor.setAlphaF(m_opacity);
 
-        QWidget *widget = qobject_cast<QWidget*>(parent());
-
-        widget->setPalette(palette);
-
-        Q_EMIT onPalette(palette);
-        
-        widget->update();
+    QColor buttonColor = backgroundColor.toHsv();
+    if (buttonColor.valueF() < 0.5) {
+        buttonColor = buttonColor.lighter();
+    } else {
+        buttonColor = buttonColor.darker();
     }
-    
-    void TerminalColor::swapFGBGColors() 
-    {
-        QColor color = m_colorTable[DEFAULT_BACK_COLOR];
-        m_colorTable[DEFAULT_BACK_COLOR] = m_colorTable[DEFAULT_FORE_COLOR];
-        m_colorTable[DEFAULT_FORE_COLOR] = color;
+    palette.setColor(QPalette::Button, buttonColor);
+    palette.setColor(QPalette::Window, backgroundColor);
+    palette.setColor(QPalette::Base, backgroundColor);
+    palette.setColor(QPalette::WindowText, buttonTextColor);
+    palette.setColor(QPalette::ButtonText, buttonTextColor);
 
-        onColorsChanged();
-    }
+    QWidget *widget = qobject_cast<QWidget *>(parent());
+
+    widget->setPalette(palette);
+
+    Q_EMIT onPalette(palette);
+
+    widget->update();
+}
+
+void TerminalColor::swapFGBGColors()
+{
+    QColor color = m_colorTable[DEFAULT_BACK_COLOR];
+    m_colorTable[DEFAULT_BACK_COLOR] = m_colorTable[DEFAULT_FORE_COLOR];
+    m_colorTable[DEFAULT_FORE_COLOR] = color;
+
+    onColorsChanged();
+}
 
 }

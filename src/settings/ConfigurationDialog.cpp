@@ -16,13 +16,12 @@
 #include "ConfigDialogButtonGroupManager.h"
 
 // Qt
-#include <QPushButton>
 #include <QDialogButtonBox>
+#include <QPushButton>
 
 // KDE
-#include <KLocalizedString>
 #include <KConfigDialogManager>
-
+#include <KLocalizedString>
 
 using namespace Konsole;
 
@@ -33,42 +32,32 @@ ConfigurationDialog::ConfigurationDialog(QWidget *parent, KCoreConfigSkeleton *c
     // Setting this after modifying buttonBox results in initial focus set to buttonBox.
     setFaceType(KPageDialog::List);
 
-    buttonBox()->setStandardButtons(QDialogButtonBox::RestoreDefaults
-                                  | QDialogButtonBox::Ok
-                                  | QDialogButtonBox::Apply
-                                  | QDialogButtonBox::Cancel);
-    connect(buttonBox()->button(QDialogButtonBox::Apply), &QAbstractButton::clicked,
-            this, &ConfigurationDialog::updateButtons);
-    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked,
-            this, &ConfigurationDialog::updateButtons);
+    buttonBox()->setStandardButtons(QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel);
+    connect(buttonBox()->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, this, &ConfigurationDialog::updateButtons);
+    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked, this, &ConfigurationDialog::updateButtons);
 
     _manager = new KConfigDialogManager(this, config);
 
     connect(_manager, QOverload<>::of(&KConfigDialogManager::settingsChanged), this, &ConfigurationDialog::settingsChangedSlot);
 
-    connect(_manager, &KConfigDialogManager::widgetModified,  this, &ConfigurationDialog::updateButtons);
+    connect(_manager, &KConfigDialogManager::widgetModified, this, &ConfigurationDialog::updateButtons);
 
-    connect(buttonBox()->button(QDialogButtonBox::Ok), &QAbstractButton::clicked,
-            _manager, &KConfigDialogManager::updateSettings);
-    connect(buttonBox()->button(QDialogButtonBox::Apply), &QAbstractButton::clicked,
-            _manager, &KConfigDialogManager::updateSettings);
-    connect(buttonBox()->button(QDialogButtonBox::Cancel), &QAbstractButton::clicked,
-            _manager, &KConfigDialogManager::updateWidgets);
-    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked,
-            _manager, &KConfigDialogManager::updateWidgetsDefault);
+    connect(buttonBox()->button(QDialogButtonBox::Ok), &QAbstractButton::clicked, _manager, &KConfigDialogManager::updateSettings);
+    connect(buttonBox()->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, _manager, &KConfigDialogManager::updateSettings);
+    connect(buttonBox()->button(QDialogButtonBox::Cancel), &QAbstractButton::clicked, _manager, &KConfigDialogManager::updateWidgets);
+    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked, _manager, &KConfigDialogManager::updateWidgetsDefault);
 
     _groupManager = new ConfigDialogButtonGroupManager(this, config);
     connect(_groupManager, &ConfigDialogButtonGroupManager::settingsChanged, this, &ConfigurationDialog::settingsChangedSlot);
-    connect(_groupManager, &ConfigDialogButtonGroupManager::widgetModified,  this, &ConfigurationDialog::updateButtons);
+    connect(_groupManager, &ConfigDialogButtonGroupManager::widgetModified, this, &ConfigurationDialog::updateButtons);
 
-    connect(buttonBox()->button(QDialogButtonBox::Ok), &QAbstractButton::clicked,
-            _groupManager, &ConfigDialogButtonGroupManager::updateSettings);
-    connect(buttonBox()->button(QDialogButtonBox::Apply), &QAbstractButton::clicked,
-            _groupManager, &ConfigDialogButtonGroupManager::updateSettings);
-    connect(buttonBox()->button(QDialogButtonBox::Cancel), &QAbstractButton::clicked,
-            _groupManager, &ConfigDialogButtonGroupManager::updateWidgets);
-    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked,
-            _groupManager, &ConfigDialogButtonGroupManager::updateWidgetsDefault);
+    connect(buttonBox()->button(QDialogButtonBox::Ok), &QAbstractButton::clicked, _groupManager, &ConfigDialogButtonGroupManager::updateSettings);
+    connect(buttonBox()->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, _groupManager, &ConfigDialogButtonGroupManager::updateSettings);
+    connect(buttonBox()->button(QDialogButtonBox::Cancel), &QAbstractButton::clicked, _groupManager, &ConfigDialogButtonGroupManager::updateWidgets);
+    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults),
+            &QAbstractButton::clicked,
+            _groupManager,
+            &ConfigDialogButtonGroupManager::updateWidgetsDefault);
 
     setApplyButtonEnabled(false);
 }

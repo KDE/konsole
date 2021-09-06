@@ -1,5 +1,5 @@
 /*
- 
+
    This is a tiny test program that can be used to track down
    strange effects of the emulation.
 
@@ -21,7 +21,7 @@
 
    This code was written by Lars Doelle <lars.doelle@on-line.de>.
    This code is in the public domain.
- 
+
 */
 
 #include <stdio.h>
@@ -31,25 +31,28 @@
 struct termios save;
 struct termios curr;
 
-#define HERE fprintf(stderr,"%s(%d): here.\n",__FILE__,__LINE__)
+#define HERE fprintf(stderr, "%s(%d): here.\n", __FILE__, __LINE__)
 
 main()
-{ int cc;
-  FILE* sysin = fopen("ttt","r");
-  tcgetattr(0, &save);
-  tcgetattr(0, &curr);
-  cfmakeraw(&curr);
-  tcsetattr(0, TCSANOW, &curr);
-  cc = fgetc(sysin);
-  while( cc > 0 )
-  { int tmp;
-    while (cc > 0)
-    {
-      fputc(cc,stdout); cc = fgetc(sysin);
-      if (cc == 0x1b) break;
+{
+    int cc;
+    FILE *sysin = fopen("ttt", "r");
+    tcgetattr(0, &save);
+    tcgetattr(0, &curr);
+    cfmakeraw(&curr);
+    tcsetattr(0, TCSANOW, &curr);
+    cc = fgetc(sysin);
+    while (cc > 0) {
+        int tmp;
+        while (cc > 0) {
+            fputc(cc, stdout);
+            cc = fgetc(sysin);
+            if (cc == 0x1b)
+                break;
+        }
+        tmp = fgetc(stdin);
+        if (tmp == 3)
+            break;
     }
-    tmp = fgetc(stdin);
-    if (tmp == 3) break;
-  }
-  tcsetattr(0, TCSANOW, &save);
+    tcsetattr(0, TCSANOW, &save);
 }

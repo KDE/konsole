@@ -10,17 +10,18 @@
 #define PROFILE_H
 
 // Qt
+#include <QColor>
+#include <QFont>
 #include <QHash>
+#include <QKeySequence>
 #include <QStringList>
 #include <QVariant>
-#include <QFont>
-#include <QColor>
-#include <QKeySequence>
 
 // Konsole
 #include "konsoleprofile_export.h"
 
-namespace Konsole {
+namespace Konsole
+{
 class ProfileGroup;
 
 /**
@@ -93,8 +94,8 @@ public:
          */
         Directory,
         /** (QString) The format used for tab titles when running normal
-          * commands.
-          */
+         * commands.
+         */
         LocalTabTitleFormat,
         /** (QString) The format used for tab titles when the session is
          * running a remote command (eg. SSH)
@@ -142,11 +143,11 @@ public:
         ScrollBarPosition,
         /** (bool) Specifies whether the PageUp/Down will scroll the full
          * height or half height.
-             */
+         */
         ScrollFullPage,
         /** (bool) Specifies whether the lines that are scrolled into view
          * should be highlighted.
-             */
+         */
         HighlightScrolledLines,
         /** (bool) Specifies whether the terminal will enable Bidirectional
          * text display
@@ -217,7 +218,7 @@ public:
          * option if the user wants to use a different editor.
          *
          * See Enum::TextEditorCmd
-        */
+         */
         TextEditorCmd,
         /**
          * (QString) This is the command string corresponding to Enum::CustomTextEditor.
@@ -312,7 +313,7 @@ public:
          * Default value is true.
          * See also, MODE_Mouse1007 in the Emulation header, which toggles
          * Alternate Scrolling with escape sequences.
-        */
+         */
         AlternateScrolling,
         /** (int) Keyboard modifiers to show URL hints */
         UrlHintsModifiers,
@@ -343,7 +344,7 @@ public:
         /** (bool) If true, text that matches a color in hex format
          *  when hovered by the mouse pointer.
          */
-        ColorFilterEnabled
+        ColorFilterEnabled,
     };
 
     Q_ENUM(Property)

@@ -15,15 +15,17 @@
 #include <QDialog>
 
 // Konsole
-#include "session/SessionManager.h"
 #include "session/Session.h"
 #include "session/SessionListModel.h"
+#include "session/SessionManager.h"
 
-namespace Ui {
+namespace Ui
+{
 class CopyInputDialog;
 }
 
-namespace Konsole {
+namespace Konsole
+{
 class CheckableSessionModel;
 
 /**

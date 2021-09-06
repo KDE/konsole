@@ -13,7 +13,6 @@
 
 namespace Konsole
 {
-
 class CharacterColorTest : public QObject
 {
     Q_OBJECT
@@ -41,4 +40,3 @@ private:
 }
 
 #endif // CHARACTERCOLORTEST_H
-

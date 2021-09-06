@@ -9,10 +9,9 @@
 
 namespace Konsole
 {
-
-SessionTask::SessionTask(QObject* parent)
-    :  QObject(parent)
-    ,  _autoDelete(false)
+SessionTask::SessionTask(QObject *parent)
+    : QObject(parent)
+    , _autoDelete(false)
 {
 }
 
@@ -26,7 +25,7 @@ bool SessionTask::autoDelete() const
     return _autoDelete;
 }
 
-void SessionTask::addSession(Session* session)
+void SessionTask::addSession(Session *session)
 {
     _sessions.append(session);
 }

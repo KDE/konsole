@@ -9,9 +9,9 @@
 
 #include <QDir>
 
+#include "profile/Profile.h"
 #include "session/Session.h"
 #include "session/SessionManager.h"
-#include "profile/Profile.h"
 
 #include "FileFilterHotspot.h"
 
@@ -20,8 +20,8 @@ using namespace Konsole;
 // static
 QRegularExpression FileFilter::_regex;
 
-FileFilter::FileFilter(Session *session, const QString &wordCharacters) :
-    _session(session)
+FileFilter::FileFilter(Session *session, const QString &wordCharacters)
+    : _session(session)
     , _dirPath(QString())
     , _currentDirContents()
 {
@@ -41,7 +41,7 @@ QString FileFilter::concatRegexPattern(QString wordCharacters) const
     }
 
     // Add minus at the end.
-    if (wordCharacters.contains(QLatin1Char('-'))){
+    if (wordCharacters.contains(QLatin1Char('-'))) {
         wordCharacters.remove(QLatin1Char('-'));
         wordCharacters.append(QLatin1Char('-'));
     }
@@ -54,33 +54,32 @@ QString FileFilter::concatRegexPattern(QString wordCharacters) const
          * on the HotSpot creation we verify if this is indeed a file, so there's
          * no problem on testing on random words on the screen.
          */
-            QStringLiteral(R"RX('[^'\n]+')RX")       // Matches everything between single quotes.
-            + QStringLiteral(R"RX(|"[^\n"]+")RX")   // Matches everything inside double quotes
-            // Matches a contiguous line of alphanumeric characters plus some special ones
-            // defined in the profile. With a special case for strings starting with '/' which
-            // denotes a path on Linux.
-            // Takes into account line numbers:
-            // - grep output with line numbers: "/path/to/file:123"
-            // - compiler error output: ":/path/to/file:123:123"
-            //
-            // ([^\n/\[]/) to not match "https://", and urls starting with "[" are matched by the
-            // next | branch (ctest stuff)
-            + QStringLiteral(R"RX(|([^\n\s/\[]/)?[\p{L}\w%1]+(:\d+)?(:\d+:)?)RX").arg(wordCharacters)
-            // - ctest error output: "[/path/to/file(123)]"
-            + QStringLiteral(R"RX(|\[[/\w%1]+\(\d+\)\])RX").arg(wordCharacters);
+        QStringLiteral(R"RX('[^'\n]+')RX") // Matches everything between single quotes.
+        + QStringLiteral(R"RX(|"[^\n"]+")RX") // Matches everything inside double quotes
+        // Matches a contiguous line of alphanumeric characters plus some special ones
+        // defined in the profile. With a special case for strings starting with '/' which
+        // denotes a path on Linux.
+        // Takes into account line numbers:
+        // - grep output with line numbers: "/path/to/file:123"
+        // - compiler error output: ":/path/to/file:123:123"
+        //
+        // ([^\n/\[]/) to not match "https://", and urls starting with "[" are matched by the
+        // next | branch (ctest stuff)
+        + QStringLiteral(R"RX(|([^\n\s/\[]/)?[\p{L}\w%1]+(:\d+)?(:\d+:)?)RX").arg(wordCharacters)
+        // - ctest error output: "[/path/to/file(123)]"
+        + QStringLiteral(R"RX(|\[[/\w%1]+\(\d+\)\])RX").arg(wordCharacters);
 
     return pattern;
 }
 
 /**
-  * File Filter - Construct a filter that works on local file paths using the
-  * posix portable filename character set combined with KDE's mimetype filename
-  * extension blob patterns.
-  * https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
-  */
+ * File Filter - Construct a filter that works on local file paths using the
+ * posix portable filename character set combined with KDE's mimetype filename
+ * extension blob patterns.
+ * https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
+ */
 
-QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, int endLine,
-                                              int endColumn, const QStringList &capturedTexts)
+QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts)
 {
     if (_session.isNull()) {
         return nullptr;
@@ -104,21 +103,19 @@ QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, i
 
     const bool absolute = filename.startsWith(QLatin1Char('/'));
     if (!absolute) {
-        auto match = std::find_if(_currentDirContents.cbegin(), _currentDirContents.cend(),
-                                  [&filename](const QString &s) {
-                                      return filename == s // It's a direct child file or dir
-                                            || filename.startsWith(s + QLatin1Char{':'}) // filename:lineNumber (output of grep -n)
-                                            || filename.startsWith(s + QLatin1Char{'/'}); // It's inside a child dir
-                                });
+        auto match = std::find_if(_currentDirContents.cbegin(), _currentDirContents.cend(), [&filename](const QString &s) {
+            return filename == s // It's a direct child file or dir
+                || filename.startsWith(s + QLatin1Char{':'}) // filename:lineNumber (output of grep -n)
+                || filename.startsWith(s + QLatin1Char{'/'}); // It's inside a child dir
+        });
 
         if (match == _currentDirContents.cend()) {
             return nullptr;
         }
     }
 
-    return QSharedPointer<HotSpot>(new FileFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts,
-                                                         !absolute ? _dirPath + filename : filename,
-                                                         _session));
+    return QSharedPointer<HotSpot>(
+        new FileFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts, !absolute ? _dirPath + filename : filename, _session));
 }
 
 void FileFilter::process()

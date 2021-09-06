@@ -12,14 +12,14 @@
 #include "BookmarkHandler.h"
 
 // Qt
+#include <QDir>
 #include <QFileInfo>
 #include <QStandardPaths>
-#include <QDir>
 
 // KDE
-#include <KShell>
 #include <KBookmarkOwner>
 #include <KLocalizedString>
+#include <KShell>
 
 // Konsole
 #include "BookmarkMenu.h"
@@ -27,24 +27,21 @@
 
 using namespace Konsole;
 
-BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, bool toplevel,
-                                 QObject *parent) :
-    QObject(parent),
-    KBookmarkOwner(),
-    _menu(menu),
-    _file(QString()),
-    _toplevel(toplevel),
-    _activeView(nullptr),
-    _views(QList<ViewProperties *>())
+BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, bool toplevel, QObject *parent)
+    : QObject(parent)
+    , KBookmarkOwner()
+    , _menu(menu)
+    , _file(QString())
+    , _toplevel(toplevel)
+    , _activeView(nullptr)
+    , _views(QList<ViewProperties *>())
 {
     setObjectName(QStringLiteral("BookmarkHandler"));
 
-    _file = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                   QStringLiteral("konsole/bookmarks.xml"));
+    _file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/bookmarks.xml"));
 
     if (_file.isEmpty()) {
-        _file = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
-                + QStringLiteral("/konsole");
+        _file = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole");
         QDir().mkpath(_file);
         _file += QStringLiteral("/bookmarks.xml");
     }
@@ -107,8 +104,7 @@ QString BookmarkHandler::titleForView(ViewProperties *view) const
     }
     if (!url.host().isEmpty()) {
         if (!url.userName().isEmpty()) {
-            return i18nc("@item:inmenu The user's name and host they are connected to via ssh",
-                         "%1 on %2", url.userName(), url.host());
+            return i18nc("@item:inmenu The user's name and host they are connected to via ssh", "%1 on %2", url.userName(), url.host());
         }
         return i18nc("@item:inmenu The host the user is connected to via ssh", "%1", url.host());
     }
@@ -135,7 +131,7 @@ QList<KBookmarkOwner::FutureBookmark> BookmarkHandler::currentBookmarkList() con
     list.reserve(_views.size());
 
     const QList<ViewProperties *> views = _views;
-    for (ViewProperties* view : views) {
+    for (ViewProperties *view : views) {
         list << KBookmarkOwner::FutureBookmark(titleForView(view), urlForView(view), iconForView(view));
     }
 

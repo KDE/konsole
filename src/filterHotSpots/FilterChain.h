@@ -8,10 +8,10 @@
 #ifndef FILTER_CHAIN
 #define FILTER_CHAIN
 
-#include <QString>
 #include <QList>
-#include <QSharedPointer>
 #include <QRegion>
+#include <QSharedPointer>
+#include <QString>
 
 #include "HotSpot.h"
 
@@ -86,15 +86,16 @@ public:
 
     void setReverseUrlHints(bool value);
     void setUrlHintsModifiers(Qt::KeyboardModifiers value);
+
 protected:
     QList<Filter *> _filters;
     TerminalDisplay *_terminalDisplay;
     QSharedPointer<HotSpot> _hotSpotUnderMouse;
 
     /* TODO: this should be profile related, not here. but
-    * currently this removes a bit of code from TerminalDisplay,
-    * so it's a good compromise
-    * */
+     * currently this removes a bit of code from TerminalDisplay,
+     * so it's a good compromise
+     * */
     bool _showUrlHint;
     bool _reverseUrlHints;
     Qt::KeyboardModifiers _urlHintsModifiers;

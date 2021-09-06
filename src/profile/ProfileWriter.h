@@ -13,7 +13,8 @@
 
 class KConfig;
 
-namespace Konsole {
+namespace Konsole
+{
 /** Interface for all classes which can write profile settings to a file. */
 class KONSOLEPROFILE_EXPORT ProfileWriter
 {
@@ -35,8 +36,7 @@ public:
     bool writeProfile(const QString &path, const Profile::Ptr &profile);
 
 private:
-    void writeProperties(KConfig &config, const Profile::Ptr &profile,
-                         const Profile::PropertyInfo *properties);
+    void writeProperties(KConfig &config, const Profile::Ptr &profile, const Profile::PropertyInfo *properties);
 };
 }
 

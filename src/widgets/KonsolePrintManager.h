@@ -20,30 +20,27 @@ class QPainter;
 
 namespace Konsole
 {
-    class KonsolePrintManager
-    {
-    public:
-        typedef std::function<void (QPainter&, bool)> pPrintContent;
-        typedef std::function<QFont ()> pVTFontGet;
-        typedef std::function<void (const QFont)> pVTFontSet;
-        typedef std::function<void (QPainter &painter,
-                                const QRect &rect,
-                                const QColor &backgroundColor,
-                                bool useOpacitySetting)> pDrawBackground;
-        typedef std::function<void (QPainter &paint, const QRect &rect, bool friendly)> pDrawContents;
-        typedef std::function<QColor ()> pColorGet;
+class KonsolePrintManager
+{
+public:
+    typedef std::function<void(QPainter &, bool)> pPrintContent;
+    typedef std::function<QFont()> pVTFontGet;
+    typedef std::function<void(const QFont)> pVTFontSet;
+    typedef std::function<void(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting)> pDrawBackground;
+    typedef std::function<void(QPainter &paint, const QRect &rect, bool friendly)> pDrawContents;
+    typedef std::function<QColor()> pColorGet;
 
-        KonsolePrintManager(pDrawBackground drawBackground, pDrawContents drawContents, pColorGet colorGet);
-        ~KonsolePrintManager() = default;
+    KonsolePrintManager(pDrawBackground drawBackground, pDrawContents drawContents, pColorGet colorGet);
+    ~KonsolePrintManager() = default;
 
-        void printRequest(pPrintContent pContent, QWidget *parent);
-        void printContent(QPainter &painter, bool friendly, QPoint columnsLines, pVTFontGet vtFontGet, pVTFontSet vtFontSet);
+    void printRequest(pPrintContent pContent, QWidget *parent);
+    void printContent(QPainter &painter, bool friendly, QPoint columnsLines, pVTFontGet vtFontGet, pVTFontSet vtFontSet);
 
-    private:
-        pDrawBackground _drawBackground;
-        pDrawContents _drawContents;
-        pColorGet _backgroundColor;
-    };
+private:
+    pDrawBackground _drawBackground;
+    pDrawContents _drawContents;
+    pColorGet _backgroundColor;
+};
 }
 
 #endif

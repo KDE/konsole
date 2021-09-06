@@ -11,7 +11,6 @@
 
 namespace Konsole
 {
-
 class CharacterWidthTest : public QObject
 {
     Q_OBJECT
@@ -20,10 +19,8 @@ private Q_SLOTS:
 
     void testWidth_data();
     void testWidth();
-
 };
 
 }
 
 #endif // CHARACTERWIDTHTEST_H
-

@@ -11,8 +11,8 @@
 
 using namespace Konsole;
 
-HistoryScroll::HistoryScroll(HistoryType *t) :
-    _historyType(t)
+HistoryScroll::HistoryScroll(HistoryType *t)
+    : _historyType(t)
 {
 }
 

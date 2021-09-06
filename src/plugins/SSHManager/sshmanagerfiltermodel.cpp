@@ -7,12 +7,12 @@
 
 #include "sshmanagerfiltermodel.h"
 
-SSHManagerFilterModel::SSHManagerFilterModel(QObject* parent)
-: QSortFilterProxyModel(parent)
+SSHManagerFilterModel::SSHManagerFilterModel(QObject *parent)
+    : QSortFilterProxyModel(parent)
 {
 }
 
-bool SSHManagerFilterModel::filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const
+bool SSHManagerFilterModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
     auto text = filterRegularExpression().pattern();
     if (text.isEmpty()) {

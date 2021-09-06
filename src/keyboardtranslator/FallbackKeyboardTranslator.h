@@ -14,12 +14,11 @@
 
 namespace Konsole
 {
-
-    class KONSOLEPRIVATE_EXPORT FallbackKeyboardTranslator : public KeyboardTranslator
-    {
-    public:
-        FallbackKeyboardTranslator();
-    };
+class KONSOLEPRIVATE_EXPORT FallbackKeyboardTranslator : public KeyboardTranslator
+{
+public:
+    FallbackKeyboardTranslator();
+};
 
 }
 

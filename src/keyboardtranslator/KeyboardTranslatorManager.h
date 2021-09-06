@@ -19,7 +19,8 @@
 
 class QIODevice;
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * Manages the keyboard translations available for use by terminal sessions,
  * see KeyboardTranslator.

@@ -17,11 +17,13 @@
 
 class QTableWidgetItem;
 
-namespace Ui {
+namespace Ui
+{
 class ColorSchemeEditor;
 }
 
-namespace Konsole {
+namespace Konsole
+{
 class ColorScheme;
 
 /**

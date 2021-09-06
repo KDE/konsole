@@ -11,7 +11,8 @@
 
 using namespace Konsole;
 
-GeneralSettings::GeneralSettings(QWidget* aParent) : QWidget(aParent)
+GeneralSettings::GeneralSettings(QWidget *aParent)
+    : QWidget(aParent)
 {
     setupUi(this);
 
@@ -26,4 +27,3 @@ void GeneralSettings::slotEnableAllMessages()
 {
     KMessageBox::enableAllMessages();
 }
-

@@ -11,11 +11,11 @@
 #include "RegExpFilterHotspot.h"
 
 #include <QList>
-#include <QString>
 #include <QPoint>
+#include <QString>
 
-#include <KFileItemActions>
 #include <KFileItem>
+#include <KFileItemActions>
 #include <KIO/PreviewJob>
 
 class QAction;
@@ -23,25 +23,25 @@ class QPixmap;
 class QKeyEvent;
 class QMouseEvent;
 
-namespace Konsole {
+namespace Konsole
+{
 class Session;
 class TerminalDisplay;
 
 /**
-* Hotspot type created by FileFilter instances.
-*/
+ * Hotspot type created by FileFilter instances.
+ */
 class FileFilterHotSpot : public RegExpFilterHotSpot
 {
 public:
-    FileFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn,
-                      const QStringList &capturedTexts, const QString &filePath, Session *session);
+    FileFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts, const QString &filePath, Session *session);
     ~FileFilterHotSpot() override;
 
     QList<QAction *> actions() override;
 
     /**
-        * Opens kate for editing the file.
-        */
+     * Opens kate for editing the file.
+     */
     void activate(QObject *object = nullptr) override;
     QList<QAction *> setupMenu(QMenu *menu) override;
 
@@ -63,7 +63,7 @@ private:
     void openWithSysDefaultApp(const QString &filePath) const;
     void openWithEditorFromProfile(const QString &fullCmd, const QString &path) const;
 
-    void showThumbnail(const KFileItem& item, const QPixmap& preview);
+    void showThumbnail(const KFileItem &item, const QPixmap &preview);
     QString _filePath;
     Session *_session = nullptr;
     KFileItemActions _menuActions;
@@ -74,9 +74,9 @@ private:
     bool _thumbnailFinished;
 
     /* This variable stores the pointer of the active HotSpot that
-        * is generating the thumbnail now, so we can bail out early.
-        * it's not used for pointer access.
-        */
+     * is generating the thumbnail now, so we can bail out early.
+     * it's not used for pointer access.
+     */
     static qintptr currentThumbnailHotspot;
     static bool _canGenerateThumbnail;
     static QPointer<KIO::PreviewJob> _previewJob;

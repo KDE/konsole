@@ -11,11 +11,9 @@
 
 using namespace Konsole;
 
-
-
-Filter::Filter() :
-    _linePositions(nullptr),
-    _buffer(nullptr)
+Filter::Filter()
+    : _linePositions(nullptr)
+    , _buffer(nullptr)
 {
 }
 
@@ -42,13 +40,10 @@ std::pair<int, int> Filter::getLineColumn(int position)
     Q_ASSERT(_buffer);
 
     for (int i = 0; i < _linePositions->count(); i++) {
-        const int nextLine = i == _linePositions->count() - 1
-            ? _buffer->length() + 1
-            : _linePositions->value(i + 1);
+        const int nextLine = i == _linePositions->count() - 1 ? _buffer->length() + 1 : _linePositions->value(i + 1);
 
         if (_linePositions->value(i) <= position && position < nextLine) {
-            return {i,  Character::stringWidth(buffer()->mid(_linePositions->value(i),
-                                                     position - _linePositions->value(i)))};
+            return {i, Character::stringWidth(buffer()->mid(_linePositions->value(i), position - _linePositions->value(i)))};
         }
     }
     return {-1, -1};
@@ -58,7 +53,6 @@ const QString *Filter::buffer()
 {
     return _buffer;
 }
-
 
 void Filter::addHotSpot(QSharedPointer<HotSpot> spot)
 {

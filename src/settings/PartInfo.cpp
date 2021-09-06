@@ -9,10 +9,10 @@
 
 using namespace Konsole;
 
-PartInfoSettings::PartInfoSettings(QWidget* parent) : QWidget(parent)
+PartInfoSettings::PartInfoSettings(QWidget *parent)
+    : QWidget(parent)
 {
     setupUi(this);
 }
 
 PartInfoSettings::~PartInfoSettings() = default;
-

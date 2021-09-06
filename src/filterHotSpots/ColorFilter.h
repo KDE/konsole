@@ -11,17 +11,16 @@
 
 namespace Konsole
 {
-    class ColorFilter : public RegExpFilter
-    {
-    public:
-        ColorFilter();
+class ColorFilter : public RegExpFilter
+{
+public:
+    ColorFilter();
 
-        static const QRegularExpression ColorRegExp;
+    static const QRegularExpression ColorRegExp;
 
-    protected:
-        QSharedPointer<HotSpot> newHotSpot(int startLine, int startColumn, int endLine,
-                                           int endColumn, const QStringList &capturedTexts) override;
-    };
+protected:
+    QSharedPointer<HotSpot> newHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts) override;
+};
 }
 
 #endif
