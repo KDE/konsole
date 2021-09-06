@@ -37,7 +37,7 @@ include(GenerateExportHeader)
 include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
 include(KDEClangFormat)
-
+include(KDEGitCommitHooks)
 
 # Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
 include(ECMEnableSanitizers)

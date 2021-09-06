@@ -429,7 +429,10 @@ protected:
      */
     void setScreen(int index);
 
-    enum EmulationCodec { LocaleCodec = 0, Utf8Codec = 1, };
+    enum EmulationCodec {
+        LocaleCodec = 0,
+        Utf8Codec = 1,
+    };
 
     void setCodec(EmulationCodec codec);
 

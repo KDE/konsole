@@ -45,100 +45,106 @@ using namespace Konsole;
 // The following are almost IBM standard color codes, with some slight
 // gamma correction for the dim colors to compensate for bright X screens.
 // It contains the 8 ansiterm/xterm colors in 2 intensities.
-const QColor ColorScheme::defaultTable[TABLE_COLORS] = {QColor(0x00, 0x00, 0x00), // Dfore
-                                                        QColor(0xFF, 0xFF, 0xFF), // Dback
-                                                        QColor(0x00, 0x00, 0x00), // Black
-                                                        QColor(0xB2, 0x18, 0x18), // Red
-                                                        QColor(0x18, 0xB2, 0x18), // Green
-                                                        QColor(0xB2, 0x68, 0x18), // Yellow
-                                                        QColor(0x18, 0x18, 0xB2), // Blue
-                                                        QColor(0xB2, 0x18, 0xB2), // Magenta
-                                                        QColor(0x18, 0xB2, 0xB2), // Cyan
-                                                        QColor(0xB2, 0xB2, 0xB2), // White
-                                                        // intensive versions
-                                                        QColor(0x00, 0x00, 0x00),
-                                                        QColor(0xFF, 0xFF, 0xFF),
-                                                        QColor(0x68, 0x68, 0x68),
-                                                        QColor(0xFF, 0x54, 0x54),
-                                                        QColor(0x54, 0xFF, 0x54),
-                                                        QColor(0xFF, 0xFF, 0x54),
-                                                        QColor(0x54, 0x54, 0xFF),
-                                                        QColor(0xFF, 0x54, 0xFF),
-                                                        QColor(0x54, 0xFF, 0xFF),
-                                                        QColor(0xFF, 0xFF, 0xFF),
-                                                        // Here are faint intensities, which may not be good.
-                                                        // faint versions
-                                                        QColor(0x00, 0x00, 0x00),
-                                                        QColor(0xFF, 0xFF, 0xFF),
-                                                        QColor(0x00, 0x00, 0x00),
-                                                        QColor(0x65, 0x00, 0x00),
-                                                        QColor(0x00, 0x65, 0x00),
-                                                        QColor(0x65, 0x5E, 0x00),
-                                                        QColor(0x00, 0x00, 0x65),
-                                                        QColor(0x65, 0x00, 0x65),
-                                                        QColor(0x00, 0x65, 0x65),
-                                                        QColor(0x65, 0x65, 0x65)};
+const QColor ColorScheme::defaultTable[TABLE_COLORS] = {
+    QColor(0x00, 0x00, 0x00), // Dfore
+    QColor(0xFF, 0xFF, 0xFF), // Dback
+    QColor(0x00, 0x00, 0x00), // Black
+    QColor(0xB2, 0x18, 0x18), // Red
+    QColor(0x18, 0xB2, 0x18), // Green
+    QColor(0xB2, 0x68, 0x18), // Yellow
+    QColor(0x18, 0x18, 0xB2), // Blue
+    QColor(0xB2, 0x18, 0xB2), // Magenta
+    QColor(0x18, 0xB2, 0xB2), // Cyan
+    QColor(0xB2, 0xB2, 0xB2), // White
+    // intensive versions
+    QColor(0x00, 0x00, 0x00),
+    QColor(0xFF, 0xFF, 0xFF),
+    QColor(0x68, 0x68, 0x68),
+    QColor(0xFF, 0x54, 0x54),
+    QColor(0x54, 0xFF, 0x54),
+    QColor(0xFF, 0xFF, 0x54),
+    QColor(0x54, 0x54, 0xFF),
+    QColor(0xFF, 0x54, 0xFF),
+    QColor(0x54, 0xFF, 0xFF),
+    QColor(0xFF, 0xFF, 0xFF),
+    // Here are faint intensities, which may not be good.
+    // faint versions
+    QColor(0x00, 0x00, 0x00),
+    QColor(0xFF, 0xFF, 0xFF),
+    QColor(0x00, 0x00, 0x00),
+    QColor(0x65, 0x00, 0x00),
+    QColor(0x00, 0x65, 0x00),
+    QColor(0x65, 0x5E, 0x00),
+    QColor(0x00, 0x00, 0x65),
+    QColor(0x65, 0x00, 0x65),
+    QColor(0x00, 0x65, 0x65),
+    QColor(0x65, 0x65, 0x65),
+};
 
-const char *const ColorScheme::colorNames[TABLE_COLORS] = {"Foreground",
-                                                           "Background",
-                                                           "Color0",
-                                                           "Color1",
-                                                           "Color2",
-                                                           "Color3",
-                                                           "Color4",
-                                                           "Color5",
-                                                           "Color6",
-                                                           "Color7",
-                                                           "ForegroundIntense",
-                                                           "BackgroundIntense",
-                                                           "Color0Intense",
-                                                           "Color1Intense",
-                                                           "Color2Intense",
-                                                           "Color3Intense",
-                                                           "Color4Intense",
-                                                           "Color5Intense",
-                                                           "Color6Intense",
-                                                           "Color7Intense",
-                                                           "ForegroundFaint",
-                                                           "BackgroundFaint",
-                                                           "Color0Faint",
-                                                           "Color1Faint",
-                                                           "Color2Faint",
-                                                           "Color3Faint",
-                                                           "Color4Faint",
-                                                           "Color5Faint",
-                                                           "Color6Faint",
-                                                           "Color7Faint"};
-const char *const ColorScheme::translatedColorNames[TABLE_COLORS] = {I18N_NOOP2("@item:intable palette", "Foreground"),
-                                                                     I18N_NOOP2("@item:intable palette", "Background"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 1"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 2"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 3"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 4"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 5"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 6"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 7"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 8"),
-                                                                     I18N_NOOP2("@item:intable palette", "Foreground (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Background (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 1 (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 2 (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 3 (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 4 (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 5 (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 6 (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 7 (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 8 (Intense)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Foreground (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Background (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 1 (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 2 (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 3 (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 4 (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 5 (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 6 (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 7 (Faint)"),
-                                                                     I18N_NOOP2("@item:intable palette", "Color 8 (Faint)")};
+const char *const ColorScheme::colorNames[TABLE_COLORS] = {
+    "Foreground",
+    "Background",
+    "Color0",
+    "Color1",
+    "Color2",
+    "Color3",
+    "Color4",
+    "Color5",
+    "Color6",
+    "Color7",
+    "ForegroundIntense",
+    "BackgroundIntense",
+    "Color0Intense",
+    "Color1Intense",
+    "Color2Intense",
+    "Color3Intense",
+    "Color4Intense",
+    "Color5Intense",
+    "Color6Intense",
+    "Color7Intense",
+    "ForegroundFaint",
+    "BackgroundFaint",
+    "Color0Faint",
+    "Color1Faint",
+    "Color2Faint",
+    "Color3Faint",
+    "Color4Faint",
+    "Color5Faint",
+    "Color6Faint",
+    "Color7Faint",
+};
+const char *const ColorScheme::translatedColorNames[TABLE_COLORS] = {
+    I18N_NOOP2("@item:intable palette", "Foreground"),
+    I18N_NOOP2("@item:intable palette", "Background"),
+    I18N_NOOP2("@item:intable palette", "Color 1"),
+    I18N_NOOP2("@item:intable palette", "Color 2"),
+    I18N_NOOP2("@item:intable palette", "Color 3"),
+    I18N_NOOP2("@item:intable palette", "Color 4"),
+    I18N_NOOP2("@item:intable palette", "Color 5"),
+    I18N_NOOP2("@item:intable palette", "Color 6"),
+    I18N_NOOP2("@item:intable palette", "Color 7"),
+    I18N_NOOP2("@item:intable palette", "Color 8"),
+    I18N_NOOP2("@item:intable palette", "Foreground (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Background (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 1 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 2 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 3 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 4 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 5 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 6 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 7 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 8 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Foreground (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Background (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 1 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 2 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 3 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 4 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 5 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 6 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 7 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 8 (Faint)"),
+};
 
 QString ColorScheme::colorNameForIndex(int index)
 {

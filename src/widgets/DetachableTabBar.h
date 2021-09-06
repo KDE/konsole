@@ -20,7 +20,11 @@ class DetachableTabBar : public QTabBar
 {
     Q_OBJECT
 public:
-    enum class DragType : unsigned char { NONE, OUTSIDE, WINDOW, };
+    enum class DragType : unsigned char {
+        NONE,
+        OUTSIDE,
+        WINDOW,
+    };
 
     explicit DetachableTabBar(QWidget *parent = nullptr);
 

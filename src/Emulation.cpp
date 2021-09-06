@@ -298,7 +298,8 @@ void Emulation::setImageSize(int lines, int columns)
         return;
     }
 
-    QSize screenSize[2] = {QSize(_screen[0]->getColumns(), _screen[0]->getLines()), QSize(_screen[1]->getColumns(), _screen[1]->getLines())};
+    QSize screenSize[2] = {QSize(_screen[0]->getColumns(), _screen[0]->getLines()), //
+                           QSize(_screen[1]->getColumns(), _screen[1]->getLines())};
     QSize newSize(columns, lines);
 
     if (newSize == screenSize[0] && newSize == screenSize[1]) {

@@ -221,7 +221,16 @@ private Q_SLOTS:
 private:
     Q_DISABLE_COPY(EditProfileDialog)
 
-    enum PageID { GeneralPage = 0, TabsPage, AppearancePage, ScrollingPage, KeyboardPage, MousePage, AdvancedPage, PagesCount, };
+    enum PageID {
+        GeneralPage = 0,
+        TabsPage,
+        AppearancePage,
+        ScrollingPage,
+        KeyboardPage,
+        MousePage,
+        AdvancedPage,
+        PagesCount,
+    };
 
     // initialize various pages of the dialog
     void setupGeneralPage(const Profile::Ptr &profile);

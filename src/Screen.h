@@ -74,7 +74,13 @@ public:
      * TrimTrailingWhitespace: Specifies whether trailing spaces should be
      *      trimmed in the returned text.
      */
-    enum DecodingOption { PlainText = 0x0, ConvertToHtml = 0x1, PreserveLineBreaks = 0x2, TrimLeadingWhitespace = 0x4, TrimTrailingWhitespace = 0x8, };
+    enum DecodingOption {
+        PlainText = 0x0,
+        ConvertToHtml = 0x1,
+        PreserveLineBreaks = 0x2,
+        TrimLeadingWhitespace = 0x4,
+        TrimTrailingWhitespace = 0x8,
+    };
     Q_DECLARE_FLAGS(DecodingOptions, DecodingOption)
 
     /** Construct a new screen image of size @p lines by @p columns. */

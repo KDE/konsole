@@ -161,7 +161,15 @@ public:
      */
     Error error() const;
 
-    enum Field { PROCESS_ID = 1, PARENT_PID = 2, FOREGROUND_PID = 4, ARGUMENTS = 8, NAME = 16, CURRENT_DIR = 32, UID = 64, };
+    enum Field {
+        PROCESS_ID = 1,
+        PARENT_PID = 2,
+        FOREGROUND_PID = 4,
+        ARGUMENTS = 8,
+        NAME = 16,
+        CURRENT_DIR = 32,
+        UID = 64,
+    };
     Q_DECLARE_FLAGS(Fields, Field)
 
     // takes a full directory path and returns a

@@ -34,7 +34,11 @@ public:
     void activate(QObject *object = nullptr) override;
 
 private:
-    enum UrlType { StandardUrl, Email, Unknown, };
+    enum UrlType {
+        StandardUrl,
+        Email,
+        Unknown,
+    };
     UrlType urlType() const;
 };
 

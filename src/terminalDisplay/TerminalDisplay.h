@@ -539,7 +539,11 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
     void doDrag();
-    enum DragState { diNone, diPending, diDragging, };
+    enum DragState {
+        diNone,
+        diPending,
+        diDragging,
+    };
 
     struct DragInfo {
         DragState state;

@@ -21,25 +21,27 @@ typedef unsigned char LineProperty;
 
 typedef quint16 RenditionFlags;
 
-const int LINE_DEFAULT = 0;
-const int LINE_WRAPPED = (1 << 0);
-const int LINE_DOUBLEWIDTH = (1 << 1);
-const int LINE_DOUBLEHEIGHT_TOP = (1 << 2);
-const int LINE_DOUBLEHEIGHT_BOTTOM = (1 << 3);
+/* clang-format off */
+const int LINE_DEFAULT              = 0;
+const int LINE_WRAPPED              = (1 << 0);
+const int LINE_DOUBLEWIDTH          = (1 << 1);
+const int LINE_DOUBLEHEIGHT_TOP     = (1 << 2);
+const int LINE_DOUBLEHEIGHT_BOTTOM  = (1 << 3);
 
-const RenditionFlags DEFAULT_RENDITION = 0;
-const RenditionFlags RE_BOLD = (1 << 0);
-const RenditionFlags RE_BLINK = (1 << 1);
-const RenditionFlags RE_UNDERLINE = (1 << 2);
-const RenditionFlags RE_REVERSE = (1 << 3); // Screen only
-const RenditionFlags RE_ITALIC = (1 << 4);
-const RenditionFlags RE_CURSOR = (1 << 5);
-const RenditionFlags RE_EXTENDED_CHAR = (1 << 6);
-const RenditionFlags RE_FAINT = (1 << 7);
-const RenditionFlags RE_STRIKEOUT = (1 << 8);
-const RenditionFlags RE_CONCEAL = (1 << 9);
-const RenditionFlags RE_OVERLINE = (1 << 10);
+const RenditionFlags DEFAULT_RENDITION  = 0;
+const RenditionFlags RE_BOLD            = (1 << 0);
+const RenditionFlags RE_BLINK           = (1 << 1);
+const RenditionFlags RE_UNDERLINE       = (1 << 2);
+const RenditionFlags RE_REVERSE         = (1 << 3); // Screen only
+const RenditionFlags RE_ITALIC          = (1 << 4);
+const RenditionFlags RE_CURSOR          = (1 << 5);
+const RenditionFlags RE_EXTENDED_CHAR   = (1 << 6);
+const RenditionFlags RE_FAINT           = (1 << 7);
+const RenditionFlags RE_STRIKEOUT       = (1 << 8);
+const RenditionFlags RE_CONCEAL         = (1 << 9);
+const RenditionFlags RE_OVERLINE        = (1 << 10);
 const RenditionFlags RE_BLEND_SELECTION_COLORS = (1 << 11);
+/* clang-format on */
 
 /**
  * A single character in the terminal which consists of a unicode character

@@ -24,17 +24,22 @@ const TabTitleFormatButton::Element TabTitleFormatButton::_localElements[] = {
     {QStringLiteral("%#"), I18N_NOOP("Session Number: %#")},
     {QStringLiteral("%u"), I18N_NOOP("User Name: %u")},
     {QStringLiteral("%h"), I18N_NOOP("Local Host: %h")},
-    {QStringLiteral("%B"), I18N_NOOP("User's Bourne prompt sigil: %B")} //  ($, or # for superuser)
+    {
+        QStringLiteral("%B"),
+        I18N_NOOP("User's Bourne prompt sigil: %B"),
+    } //  ($, or # for superuser)
 };
 const int TabTitleFormatButton::_localElementCount = sizeof(_localElements) / sizeof(TabTitleFormatButton::Element);
 
-const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {{QStringLiteral("%u"), I18N_NOOP("User Name: %u")},
-                                                                               {QStringLiteral("%U"), I18N_NOOP("User Name@ (if given): %U")},
-                                                                               {QStringLiteral("%h"), I18N_NOOP("Remote Host (Short): %h")},
-                                                                               {QStringLiteral("%H"), I18N_NOOP("Remote Host (Long): %H")},
-                                                                               {QStringLiteral("%c"), I18N_NOOP("Command and arguments: %c")},
-                                                                               {QStringLiteral("%w"), I18N_NOOP("Window Title Set by Shell: %w")},
-                                                                               {QStringLiteral("%#"), I18N_NOOP("Session Number: %#")}};
+const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {
+    {QStringLiteral("%u"), I18N_NOOP("User Name: %u")},
+    {QStringLiteral("%U"), I18N_NOOP("User Name@ (if given): %U")},
+    {QStringLiteral("%h"), I18N_NOOP("Remote Host (Short): %h")},
+    {QStringLiteral("%H"), I18N_NOOP("Remote Host (Long): %H")},
+    {QStringLiteral("%c"), I18N_NOOP("Command and arguments: %c")},
+    {QStringLiteral("%w"), I18N_NOOP("Window Title Set by Shell: %w")},
+    {QStringLiteral("%#"), I18N_NOOP("Session Number: %#")},
+};
 const int TabTitleFormatButton::_remoteElementCount = sizeof(_remoteElements) / sizeof(TabTitleFormatButton::Element);
 
 TabTitleFormatButton::TabTitleFormatButton(QWidget *parent)

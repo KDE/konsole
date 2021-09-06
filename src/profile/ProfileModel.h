@@ -23,8 +23,15 @@ class KONSOLEPROFILE_EXPORT ProfileModel : public QAbstractTableModel
 public:
     static ProfileModel *instance();
 
-    enum Roles { ProfilePtrRole = Qt::UserRole + 1, };
-    enum Column { NAME, SHORTCUT, PROFILE, COLUMNS, };
+    enum Roles {
+        ProfilePtrRole = Qt::UserRole + 1,
+    };
+    enum Column {
+        NAME,
+        SHORTCUT,
+        PROFILE,
+        COLUMNS,
+    };
     void populate();
     void add(QExplicitlySharedDataPointer<Profile> profile);
     void remove(QExplicitlySharedDataPointer<Profile> profile);

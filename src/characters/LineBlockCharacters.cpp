@@ -17,7 +17,7 @@ namespace Konsole
 {
 namespace LineBlockCharacters
 {
-enum LineType { LtNone = 0, LtDouble = 1, LtLight = 2, LtHeavy = 3, };
+enum LineType { LtNone = 0, LtDouble = 1, LtLight = 2, LtHeavy = 3 };
 
 // PackedLineTypes is an 8-bit number representing types of 4 line character's lines. Each line is
 // represented by 2 bits. Lines order, starting from MSB: top, right, bottom, left.
@@ -26,137 +26,123 @@ static inline constexpr quint8 makePackedLineTypes(LineType top, LineType right,
     return (int(top) & 3) << 6 | (int(right) & 3) << 4 | (int(bottom) & 3) << 2 | (int(left) & 3);
 }
 
+/* clang-format off */
 static constexpr const quint8 PackedLineTypesLut[] = {
     //                  top       right     bottom    left
-    makePackedLineTypes(LtNone, LtLight, LtNone, LtLight), /* U+2500 ─ */
-    makePackedLineTypes(LtNone, LtHeavy, LtNone, LtHeavy), /* U+2501 ━ */
-    makePackedLineTypes(LtLight, LtNone, LtLight, LtNone), /* U+2502 │ */
-    makePackedLineTypes(LtHeavy, LtNone, LtHeavy, LtNone), /* U+2503 ┃ */
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0, /* U+2504-0x250b */
-    makePackedLineTypes(LtNone, LtLight, LtLight, LtNone), /* U+250C ┌ */
-    makePackedLineTypes(LtNone, LtHeavy, LtLight, LtNone), /* U+250D ┍ */
-    makePackedLineTypes(LtNone, LtLight, LtHeavy, LtNone), /* U+250E ┎ */
-    makePackedLineTypes(LtNone, LtHeavy, LtHeavy, LtNone), /* U+250F ┏ */
-    makePackedLineTypes(LtNone, LtNone, LtLight, LtLight), /* U+2510 ┐ */
-    makePackedLineTypes(LtNone, LtNone, LtLight, LtHeavy), /* U+2511 ┑ */
-    makePackedLineTypes(LtNone, LtNone, LtHeavy, LtLight), /* U+2512 ┒ */
-    makePackedLineTypes(LtNone, LtNone, LtHeavy, LtHeavy), /* U+2513 ┓ */
-    makePackedLineTypes(LtLight, LtLight, LtNone, LtNone), /* U+2514 └ */
-    makePackedLineTypes(LtLight, LtHeavy, LtNone, LtNone), /* U+2515 ┕ */
-    makePackedLineTypes(LtHeavy, LtLight, LtNone, LtNone), /* U+2516 ┖ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtNone, LtNone), /* U+2517 ┗ */
-    makePackedLineTypes(LtLight, LtNone, LtNone, LtLight), /* U+2518 ┘ */
-    makePackedLineTypes(LtLight, LtNone, LtNone, LtHeavy), /* U+2519 ┙ */
-    makePackedLineTypes(LtHeavy, LtNone, LtNone, LtLight), /* U+251A ┚ */
-    makePackedLineTypes(LtHeavy, LtNone, LtNone, LtHeavy), /* U+251B ┛ */
-    makePackedLineTypes(LtLight, LtLight, LtLight, LtNone), /* U+251C ├ */
-    makePackedLineTypes(LtLight, LtHeavy, LtLight, LtNone), /* U+251D ┝ */
-    makePackedLineTypes(LtHeavy, LtLight, LtLight, LtNone), /* U+251E ┞ */
-    makePackedLineTypes(LtLight, LtLight, LtHeavy, LtNone), /* U+251F ┟ */
-    makePackedLineTypes(LtHeavy, LtLight, LtHeavy, LtNone), /* U+2520 ┠ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtLight, LtNone), /* U+2521 ┡ */
-    makePackedLineTypes(LtLight, LtHeavy, LtHeavy, LtNone), /* U+2522 ┢ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtHeavy, LtNone), /* U+2523 ┣ */
-    makePackedLineTypes(LtLight, LtNone, LtLight, LtLight), /* U+2524 ┤ */
-    makePackedLineTypes(LtLight, LtNone, LtLight, LtHeavy), /* U+2525 ┥ */
-    makePackedLineTypes(LtHeavy, LtNone, LtLight, LtLight), /* U+2526 ┦ */
-    makePackedLineTypes(LtLight, LtNone, LtHeavy, LtLight), /* U+2527 ┧ */
-    makePackedLineTypes(LtHeavy, LtNone, LtHeavy, LtLight), /* U+2528 ┨ */
-    makePackedLineTypes(LtHeavy, LtNone, LtLight, LtHeavy), /* U+2529 ┩ */
-    makePackedLineTypes(LtLight, LtNone, LtHeavy, LtHeavy), /* U+252A ┪ */
-    makePackedLineTypes(LtHeavy, LtNone, LtHeavy, LtHeavy), /* U+252B ┫ */
-    makePackedLineTypes(LtNone, LtLight, LtLight, LtLight), /* U+252C ┬ */
-    makePackedLineTypes(LtNone, LtLight, LtLight, LtHeavy), /* U+252D ┭ */
-    makePackedLineTypes(LtNone, LtHeavy, LtLight, LtLight), /* U+252E ┮ */
-    makePackedLineTypes(LtNone, LtHeavy, LtLight, LtHeavy), /* U+252F ┯ */
-    makePackedLineTypes(LtNone, LtLight, LtHeavy, LtLight), /* U+2530 ┰ */
-    makePackedLineTypes(LtNone, LtLight, LtHeavy, LtHeavy), /* U+2531 ┱ */
-    makePackedLineTypes(LtNone, LtHeavy, LtHeavy, LtLight), /* U+2532 ┲ */
-    makePackedLineTypes(LtNone, LtHeavy, LtHeavy, LtHeavy), /* U+2533 ┳ */
-    makePackedLineTypes(LtLight, LtLight, LtNone, LtLight), /* U+2534 ┴ */
-    makePackedLineTypes(LtLight, LtLight, LtNone, LtHeavy), /* U+2535 ┵ */
-    makePackedLineTypes(LtLight, LtHeavy, LtNone, LtLight), /* U+2536 ┶ */
-    makePackedLineTypes(LtLight, LtHeavy, LtNone, LtHeavy), /* U+2537 ┷ */
-    makePackedLineTypes(LtHeavy, LtLight, LtNone, LtLight), /* U+2538 ┸ */
-    makePackedLineTypes(LtHeavy, LtLight, LtNone, LtHeavy), /* U+2539 ┹ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtNone, LtLight), /* U+253A ┺ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtNone, LtHeavy), /* U+253B ┻ */
-    makePackedLineTypes(LtLight, LtLight, LtLight, LtLight), /* U+253C ┼ */
-    makePackedLineTypes(LtLight, LtLight, LtLight, LtHeavy), /* U+253D ┽ */
-    makePackedLineTypes(LtLight, LtHeavy, LtLight, LtLight), /* U+253E ┾ */
-    makePackedLineTypes(LtLight, LtHeavy, LtLight, LtHeavy), /* U+253F ┿ */
-    makePackedLineTypes(LtHeavy, LtLight, LtLight, LtLight), /* U+2540 ╀ */
-    makePackedLineTypes(LtLight, LtLight, LtHeavy, LtLight), /* U+2541 ╁ */
-    makePackedLineTypes(LtHeavy, LtLight, LtHeavy, LtLight), /* U+2542 ╂ */
-    makePackedLineTypes(LtHeavy, LtLight, LtLight, LtHeavy), /* U+2543 ╃ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtLight, LtLight), /* U+2544 ╄ */
-    makePackedLineTypes(LtLight, LtLight, LtHeavy, LtHeavy), /* U+2545 ╅ */
-    makePackedLineTypes(LtLight, LtHeavy, LtHeavy, LtLight), /* U+2546 ╆ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtLight, LtHeavy), /* U+2547 ╇ */
-    makePackedLineTypes(LtLight, LtHeavy, LtHeavy, LtHeavy), /* U+2548 ╈ */
-    makePackedLineTypes(LtHeavy, LtLight, LtHeavy, LtHeavy), /* U+2549 ╉ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtHeavy, LtLight), /* U+254A ╊ */
-    makePackedLineTypes(LtHeavy, LtHeavy, LtHeavy, LtHeavy), /* U+254B ╋ */
-    0,
-    0,
-    0,
-    0, /* U+254C - U+254F */
-    makePackedLineTypes(LtNone, LtDouble, LtNone, LtDouble), /* U+2550 ═ */
-    makePackedLineTypes(LtDouble, LtNone, LtDouble, LtNone), /* U+2551 ║ */
-    makePackedLineTypes(LtNone, LtDouble, LtLight, LtNone), /* U+2552 ╒ */
-    makePackedLineTypes(LtNone, LtLight, LtDouble, LtNone), /* U+2553 ╓ */
-    makePackedLineTypes(LtNone, LtDouble, LtDouble, LtNone), /* U+2554 ╔ */
-    makePackedLineTypes(LtNone, LtNone, LtLight, LtDouble), /* U+2555 ╕ */
-    makePackedLineTypes(LtNone, LtNone, LtDouble, LtLight), /* U+2556 ╖ */
-    makePackedLineTypes(LtNone, LtNone, LtDouble, LtDouble), /* U+2557 ╗ */
-    makePackedLineTypes(LtLight, LtDouble, LtNone, LtNone), /* U+2558 ╘ */
-    makePackedLineTypes(LtDouble, LtLight, LtNone, LtNone), /* U+2559 ╙ */
-    makePackedLineTypes(LtDouble, LtDouble, LtNone, LtNone), /* U+255A ╚ */
-    makePackedLineTypes(LtLight, LtNone, LtNone, LtDouble), /* U+255B ╛ */
-    makePackedLineTypes(LtDouble, LtNone, LtNone, LtLight), /* U+255C ╜ */
-    makePackedLineTypes(LtDouble, LtNone, LtNone, LtDouble), /* U+255D ╝ */
-    makePackedLineTypes(LtLight, LtDouble, LtLight, LtNone), /* U+255E ╞ */
-    makePackedLineTypes(LtDouble, LtLight, LtDouble, LtNone), /* U+255F ╟ */
-    makePackedLineTypes(LtDouble, LtDouble, LtDouble, LtNone), /* U+2560 ╠ */
-    makePackedLineTypes(LtLight, LtNone, LtLight, LtDouble), /* U+2561 ╡ */
-    makePackedLineTypes(LtDouble, LtNone, LtDouble, LtLight), /* U+2562 ╢ */
-    makePackedLineTypes(LtDouble, LtNone, LtDouble, LtDouble), /* U+2563 ╣ */
-    makePackedLineTypes(LtNone, LtDouble, LtLight, LtDouble), /* U+2564 ╤ */
-    makePackedLineTypes(LtNone, LtLight, LtDouble, LtLight), /* U+2565 ╥ */
-    makePackedLineTypes(LtNone, LtDouble, LtDouble, LtDouble), /* U+2566 ╦ */
-    makePackedLineTypes(LtLight, LtDouble, LtNone, LtDouble), /* U+2567 ╧ */
-    makePackedLineTypes(LtDouble, LtLight, LtNone, LtLight), /* U+2568 ╨ */
-    makePackedLineTypes(LtDouble, LtDouble, LtNone, LtDouble), /* U+2569 ╩ */
-    makePackedLineTypes(LtLight, LtDouble, LtLight, LtDouble), /* U+256A ╪ */
-    makePackedLineTypes(LtDouble, LtLight, LtDouble, LtLight), /* U+256B ╫ */
+    makePackedLineTypes(LtNone  , LtLight , LtNone  , LtLight ), /* U+2500 ─ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtNone  , LtHeavy ), /* U+2501 ━ */
+    makePackedLineTypes(LtLight , LtNone  , LtLight , LtNone  ), /* U+2502 │ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtHeavy , LtNone  ), /* U+2503 ┃ */
+    0, 0, 0, 0, 0, 0, 0, 0, /* U+2504-0x250b */
+    makePackedLineTypes(LtNone  , LtLight , LtLight , LtNone  ), /* U+250C ┌ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtLight , LtNone  ), /* U+250D ┍ */
+    makePackedLineTypes(LtNone  , LtLight , LtHeavy , LtNone  ), /* U+250E ┎ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtHeavy , LtNone  ), /* U+250F ┏ */
+    makePackedLineTypes(LtNone  , LtNone  , LtLight , LtLight ), /* U+2510 ┐ */
+    makePackedLineTypes(LtNone  , LtNone  , LtLight , LtHeavy ), /* U+2511 ┑ */
+    makePackedLineTypes(LtNone  , LtNone  , LtHeavy , LtLight ), /* U+2512 ┒ */
+    makePackedLineTypes(LtNone  , LtNone  , LtHeavy , LtHeavy ), /* U+2513 ┓ */
+    makePackedLineTypes(LtLight , LtLight , LtNone  , LtNone  ), /* U+2514 └ */
+    makePackedLineTypes(LtLight , LtHeavy , LtNone  , LtNone  ), /* U+2515 ┕ */
+    makePackedLineTypes(LtHeavy , LtLight , LtNone  , LtNone  ), /* U+2516 ┖ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtNone  , LtNone  ), /* U+2517 ┗ */
+    makePackedLineTypes(LtLight , LtNone  , LtNone  , LtLight ), /* U+2518 ┘ */
+    makePackedLineTypes(LtLight , LtNone  , LtNone  , LtHeavy ), /* U+2519 ┙ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtNone  , LtLight ), /* U+251A ┚ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtNone  , LtHeavy ), /* U+251B ┛ */
+    makePackedLineTypes(LtLight , LtLight , LtLight , LtNone  ), /* U+251C ├ */
+    makePackedLineTypes(LtLight , LtHeavy , LtLight , LtNone  ), /* U+251D ┝ */
+    makePackedLineTypes(LtHeavy , LtLight , LtLight , LtNone  ), /* U+251E ┞ */
+    makePackedLineTypes(LtLight , LtLight , LtHeavy , LtNone  ), /* U+251F ┟ */
+    makePackedLineTypes(LtHeavy , LtLight , LtHeavy , LtNone  ), /* U+2520 ┠ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtLight , LtNone  ), /* U+2521 ┡ */
+    makePackedLineTypes(LtLight , LtHeavy , LtHeavy , LtNone  ), /* U+2522 ┢ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtHeavy , LtNone  ), /* U+2523 ┣ */
+    makePackedLineTypes(LtLight , LtNone  , LtLight , LtLight ), /* U+2524 ┤ */
+    makePackedLineTypes(LtLight , LtNone  , LtLight , LtHeavy ), /* U+2525 ┥ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtLight , LtLight ), /* U+2526 ┦ */
+    makePackedLineTypes(LtLight , LtNone  , LtHeavy , LtLight ), /* U+2527 ┧ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtHeavy , LtLight ), /* U+2528 ┨ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtLight , LtHeavy ), /* U+2529 ┩ */
+    makePackedLineTypes(LtLight , LtNone  , LtHeavy , LtHeavy ), /* U+252A ┪ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtHeavy , LtHeavy ), /* U+252B ┫ */
+    makePackedLineTypes(LtNone  , LtLight , LtLight , LtLight ), /* U+252C ┬ */
+    makePackedLineTypes(LtNone  , LtLight , LtLight , LtHeavy ), /* U+252D ┭ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtLight , LtLight ), /* U+252E ┮ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtLight , LtHeavy ), /* U+252F ┯ */
+    makePackedLineTypes(LtNone  , LtLight , LtHeavy , LtLight ), /* U+2530 ┰ */
+    makePackedLineTypes(LtNone  , LtLight , LtHeavy , LtHeavy ), /* U+2531 ┱ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtHeavy , LtLight ), /* U+2532 ┲ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtHeavy , LtHeavy ), /* U+2533 ┳ */
+    makePackedLineTypes(LtLight , LtLight , LtNone  , LtLight ), /* U+2534 ┴ */
+    makePackedLineTypes(LtLight , LtLight , LtNone  , LtHeavy ), /* U+2535 ┵ */
+    makePackedLineTypes(LtLight , LtHeavy , LtNone  , LtLight ), /* U+2536 ┶ */
+    makePackedLineTypes(LtLight , LtHeavy , LtNone  , LtHeavy ), /* U+2537 ┷ */
+    makePackedLineTypes(LtHeavy , LtLight , LtNone  , LtLight ), /* U+2538 ┸ */
+    makePackedLineTypes(LtHeavy , LtLight , LtNone  , LtHeavy ), /* U+2539 ┹ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtNone  , LtLight ), /* U+253A ┺ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtNone  , LtHeavy ), /* U+253B ┻ */
+    makePackedLineTypes(LtLight , LtLight , LtLight , LtLight ), /* U+253C ┼ */
+    makePackedLineTypes(LtLight , LtLight , LtLight , LtHeavy ), /* U+253D ┽ */
+    makePackedLineTypes(LtLight , LtHeavy , LtLight , LtLight ), /* U+253E ┾ */
+    makePackedLineTypes(LtLight , LtHeavy , LtLight , LtHeavy ), /* U+253F ┿ */
+    makePackedLineTypes(LtHeavy , LtLight , LtLight , LtLight ), /* U+2540 ╀ */
+    makePackedLineTypes(LtLight , LtLight , LtHeavy , LtLight ), /* U+2541 ╁ */
+    makePackedLineTypes(LtHeavy , LtLight , LtHeavy , LtLight ), /* U+2542 ╂ */
+    makePackedLineTypes(LtHeavy , LtLight , LtLight , LtHeavy ), /* U+2543 ╃ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtLight , LtLight ), /* U+2544 ╄ */
+    makePackedLineTypes(LtLight , LtLight , LtHeavy , LtHeavy ), /* U+2545 ╅ */
+    makePackedLineTypes(LtLight , LtHeavy , LtHeavy , LtLight ), /* U+2546 ╆ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtLight , LtHeavy ), /* U+2547 ╇ */
+    makePackedLineTypes(LtLight , LtHeavy , LtHeavy , LtHeavy ), /* U+2548 ╈ */
+    makePackedLineTypes(LtHeavy , LtLight , LtHeavy , LtHeavy ), /* U+2549 ╉ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtHeavy , LtLight ), /* U+254A ╊ */
+    makePackedLineTypes(LtHeavy , LtHeavy , LtHeavy , LtHeavy ), /* U+254B ╋ */
+    0, 0, 0, 0, /* U+254C - U+254F */
+    makePackedLineTypes(LtNone  , LtDouble, LtNone  , LtDouble), /* U+2550 ═ */
+    makePackedLineTypes(LtDouble, LtNone  , LtDouble, LtNone  ), /* U+2551 ║ */
+    makePackedLineTypes(LtNone  , LtDouble, LtLight , LtNone  ), /* U+2552 ╒ */
+    makePackedLineTypes(LtNone  , LtLight , LtDouble, LtNone  ), /* U+2553 ╓ */
+    makePackedLineTypes(LtNone  , LtDouble, LtDouble, LtNone  ), /* U+2554 ╔ */
+    makePackedLineTypes(LtNone  , LtNone  , LtLight , LtDouble), /* U+2555 ╕ */
+    makePackedLineTypes(LtNone  , LtNone  , LtDouble, LtLight ), /* U+2556 ╖ */
+    makePackedLineTypes(LtNone  , LtNone  , LtDouble, LtDouble), /* U+2557 ╗ */
+    makePackedLineTypes(LtLight , LtDouble, LtNone  , LtNone  ), /* U+2558 ╘ */
+    makePackedLineTypes(LtDouble, LtLight , LtNone  , LtNone  ), /* U+2559 ╙ */
+    makePackedLineTypes(LtDouble, LtDouble, LtNone  , LtNone  ), /* U+255A ╚ */
+    makePackedLineTypes(LtLight , LtNone  , LtNone  , LtDouble), /* U+255B ╛ */
+    makePackedLineTypes(LtDouble, LtNone  , LtNone  , LtLight ), /* U+255C ╜ */
+    makePackedLineTypes(LtDouble, LtNone  , LtNone  , LtDouble), /* U+255D ╝ */
+    makePackedLineTypes(LtLight , LtDouble, LtLight , LtNone  ), /* U+255E ╞ */
+    makePackedLineTypes(LtDouble, LtLight , LtDouble, LtNone  ), /* U+255F ╟ */
+    makePackedLineTypes(LtDouble, LtDouble, LtDouble, LtNone  ), /* U+2560 ╠ */
+    makePackedLineTypes(LtLight , LtNone  , LtLight , LtDouble), /* U+2561 ╡ */
+    makePackedLineTypes(LtDouble, LtNone  , LtDouble, LtLight ), /* U+2562 ╢ */
+    makePackedLineTypes(LtDouble, LtNone  , LtDouble, LtDouble), /* U+2563 ╣ */
+    makePackedLineTypes(LtNone  , LtDouble, LtLight , LtDouble), /* U+2564 ╤ */
+    makePackedLineTypes(LtNone  , LtLight , LtDouble, LtLight ), /* U+2565 ╥ */
+    makePackedLineTypes(LtNone  , LtDouble, LtDouble, LtDouble), /* U+2566 ╦ */
+    makePackedLineTypes(LtLight , LtDouble, LtNone  , LtDouble), /* U+2567 ╧ */
+    makePackedLineTypes(LtDouble, LtLight , LtNone  , LtLight ), /* U+2568 ╨ */
+    makePackedLineTypes(LtDouble, LtDouble, LtNone  , LtDouble), /* U+2569 ╩ */
+    makePackedLineTypes(LtLight , LtDouble, LtLight , LtDouble), /* U+256A ╪ */
+    makePackedLineTypes(LtDouble, LtLight , LtDouble, LtLight ), /* U+256B ╫ */
     makePackedLineTypes(LtDouble, LtDouble, LtDouble, LtDouble), /* U+256C ╬ */
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0, /* U+256D - U+2573 */
-    makePackedLineTypes(LtNone, LtNone, LtNone, LtLight), /* U+2574 ╴ */
-    makePackedLineTypes(LtLight, LtNone, LtNone, LtNone), /* U+2575 ╵ */
-    makePackedLineTypes(LtNone, LtLight, LtNone, LtNone), /* U+2576 ╶ */
-    makePackedLineTypes(LtNone, LtNone, LtLight, LtNone), /* U+2577 ╷ */
-    makePackedLineTypes(LtNone, LtNone, LtNone, LtHeavy), /* U+2578 ╸ */
-    makePackedLineTypes(LtHeavy, LtNone, LtNone, LtNone), /* U+2579 ╹ */
-    makePackedLineTypes(LtNone, LtHeavy, LtNone, LtNone), /* U+257A ╺ */
-    makePackedLineTypes(LtNone, LtNone, LtHeavy, LtNone), /* U+257B ╻ */
-    makePackedLineTypes(LtNone, LtHeavy, LtNone, LtLight), /* U+257C ╼ */
-    makePackedLineTypes(LtLight, LtNone, LtHeavy, LtNone), /* U+257D ╽ */
-    makePackedLineTypes(LtNone, LtLight, LtNone, LtHeavy), /* U+257E ╾ */
-    makePackedLineTypes(LtHeavy, LtNone, LtLight, LtNone), /* U+257F ╿ */
+    0, 0, 0, 0, 0, 0, 0, /* U+256D - U+2573 */
+    makePackedLineTypes(LtNone  , LtNone  , LtNone  , LtLight ), /* U+2574 ╴ */
+    makePackedLineTypes(LtLight , LtNone  , LtNone  , LtNone  ), /* U+2575 ╵ */
+    makePackedLineTypes(LtNone  , LtLight , LtNone  , LtNone  ), /* U+2576 ╶ */
+    makePackedLineTypes(LtNone  , LtNone  , LtLight , LtNone  ), /* U+2577 ╷ */
+    makePackedLineTypes(LtNone  , LtNone  , LtNone  , LtHeavy ), /* U+2578 ╸ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtNone  , LtNone  ), /* U+2579 ╹ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtNone  , LtNone  ), /* U+257A ╺ */
+    makePackedLineTypes(LtNone  , LtNone  , LtHeavy , LtNone  ), /* U+257B ╻ */
+    makePackedLineTypes(LtNone  , LtHeavy , LtNone  , LtLight ), /* U+257C ╼ */
+    makePackedLineTypes(LtLight , LtNone  , LtHeavy , LtNone  ), /* U+257D ╽ */
+    makePackedLineTypes(LtNone  , LtLight , LtNone  , LtHeavy ), /* U+257E ╾ */
+    makePackedLineTypes(LtHeavy , LtNone  , LtLight , LtNone  ), /* U+257F ╿ */
 };
+/* clang-format on */
 
 // Bitwise rotate left
 template<typename T>
@@ -424,7 +410,7 @@ static inline bool drawDashedLineCharacter(QPainter &paint, int x, int y, int w,
 
     static const int LinesNumMax = 4;
 
-    enum Orientation { Horizontal, Vertical, };
+    enum Orientation { Horizontal, Vertical };
     struct {
         int linesNum;
         Orientation orientation;
@@ -432,44 +418,22 @@ static inline bool drawDashedLineCharacter(QPainter &paint, int x, int y, int w,
         qreal halfGap;
     } lineProps;
 
+    /* clang-format off */
     switch (code) {
-    case 0x4C:
-        lineProps = {2, Horizontal, lightPen, halfGapH};
-        break; // ╌
-    case 0x4D:
-        lineProps = {2, Horizontal, heavyPen, halfGapH};
-        break; // ╍
-    case 0x4E:
-        lineProps = {2, Vertical, lightPen, halfGapDDV};
-        break; // ╎
-    case 0x4F:
-        lineProps = {2, Vertical, heavyPen, halfGapDDV};
-        break; // ╏
-    case 0x04:
-        lineProps = {3, Horizontal, lightPen, halfGapH};
-        break; // ┄
-    case 0x05:
-        lineProps = {3, Horizontal, heavyPen, halfGapH};
-        break; // ┅
-    case 0x06:
-        lineProps = {3, Vertical, lightPen, halfGapV};
-        break; // ┆
-    case 0x07:
-        lineProps = {3, Vertical, heavyPen, halfGapV};
-        break; // ┇
-    case 0x08:
-        lineProps = {4, Horizontal, lightPen, halfGapH};
-        break; // ┈
-    case 0x09:
-        lineProps = {4, Horizontal, heavyPen, halfGapH};
-        break; // ┉
-    case 0x0A:
-        lineProps = {4, Vertical, lightPen, halfGapV};
-        break; // ┊
-    case 0x0B:
-        lineProps = {4, Vertical, heavyPen, halfGapV};
-        break; // ┋
+    case 0x4C: lineProps = {2, Horizontal, lightPen, halfGapH  }; break; // ╌
+    case 0x4D: lineProps = {2, Horizontal, heavyPen, halfGapH  }; break; // ╍
+    case 0x4E: lineProps = {2, Vertical  , lightPen, halfGapDDV}; break; // ╎
+    case 0x4F: lineProps = {2, Vertical  , heavyPen, halfGapDDV}; break; // ╏
+    case 0x04: lineProps = {3, Horizontal, lightPen, halfGapH  }; break; // ┄
+    case 0x05: lineProps = {3, Horizontal, heavyPen, halfGapH  }; break; // ┅
+    case 0x06: lineProps = {3, Vertical  , lightPen, halfGapV  }; break; // ┆
+    case 0x07: lineProps = {3, Vertical  , heavyPen, halfGapV  }; break; // ┇
+    case 0x08: lineProps = {4, Horizontal, lightPen, halfGapH  }; break; // ┈
+    case 0x09: lineProps = {4, Horizontal, heavyPen, halfGapH  }; break; // ┉
+    case 0x0A: lineProps = {4, Vertical  , lightPen, halfGapV  }; break; // ┊
+    case 0x0B: lineProps = {4, Vertical  , heavyPen, halfGapV  }; break; // ┋
     }
+    /* clang-format on */
 
     Q_ASSERT(lineProps.linesNum <= LinesNumMax);
     const int size = (lineProps.orientation == Horizontal ? w : h);

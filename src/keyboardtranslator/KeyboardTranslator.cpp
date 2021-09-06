@@ -39,8 +39,15 @@ KeyboardTranslator::Entry::Entry()
 
 bool KeyboardTranslator::Entry::operator==(const Entry &rhs) const
 {
-    return _keyCode == rhs._keyCode && _modifiers == rhs._modifiers && _modifierMask == rhs._modifierMask && _state == rhs._state
-        && _stateMask == rhs._stateMask && _command == rhs._command && _text == rhs._text;
+    /* clang-format off */
+    return _keyCode == rhs._keyCode
+        && _modifiers == rhs._modifiers
+        && _modifierMask == rhs._modifierMask
+        && _state == rhs._state
+        && _stateMask == rhs._stateMask
+        && _command == rhs._command
+        && _text == rhs._text;
+    /* clang-format on */
 }
 
 bool KeyboardTranslator::Entry::matches(int testKeyCode, Qt::KeyboardModifiers testKeyboardModifiers, States testState) const

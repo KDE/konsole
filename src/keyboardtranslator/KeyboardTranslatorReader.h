@@ -81,7 +81,14 @@ public:
 
 private:
     struct Token {
-        enum Type { TitleKeyword, TitleText, KeyKeyword, KeySequence, Command, OutputText, };
+        enum Type {
+            TitleKeyword,
+            TitleText,
+            KeyKeyword,
+            KeySequence,
+            Command,
+            OutputText,
+        };
         Type type;
         QString text;
     };

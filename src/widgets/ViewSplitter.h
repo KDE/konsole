@@ -54,7 +54,10 @@ class KONSOLEPRIVATE_EXPORT ViewSplitter : public QSplitter
 public:
     explicit ViewSplitter(QWidget *parent = nullptr);
 
-    enum class AddBehavior { AddBefore, AddAfter, };
+    enum class AddBehavior {
+        AddBefore,
+        AddAfter,
+    };
     /**
      * Locates the child ViewSplitter widget which currently has the focus
      * and inserts the container into it.

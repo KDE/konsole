@@ -24,8 +24,12 @@ namespace Konsole
  * that can be mapped to a pixel movement).
  */
 struct ScrollState {
-    enum { DEFAULT_ANGLE_SCROLL_LINE = 120, };
-    enum { DEGREES_PER_ANGLE_UNIT = 8, };
+    enum {
+        DEFAULT_ANGLE_SCROLL_LINE = 120,
+    };
+    enum {
+        DEGREES_PER_ANGLE_UNIT = 8,
+    };
     static inline int degreesToAngle(const int angle)
     {
         return angle * DEGREES_PER_ANGLE_UNIT;

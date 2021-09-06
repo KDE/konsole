@@ -56,11 +56,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
         {{QStringLiteral("workdir")}, i18nc("@info:shell", "Set the initial working directory of the new tab or window to 'dir'"), QStringLiteral("dir")},
         {{QStringLiteral("hold"), QStringLiteral("noclose")}, i18nc("@info:shell", "Do not close the initial session automatically when it ends.")},
         {{QStringLiteral("new-tab")}, i18nc("@info:shell", "Create a new tab in an existing window rather than creating a new window")},
-        {{QStringLiteral("tabs-from-file")},
-         i18nc("@info:shell",
-               "Create tabs as specified in given tabs configuration"
-               " file"),
-         QStringLiteral("file")},
+        {{QStringLiteral("tabs-from-file")}, i18nc("@info:shell", "Create tabs as specified in given tabs configuration file"), QStringLiteral("file")},
         {{QStringLiteral("background-mode")},
          i18nc("@info:shell", "Start Konsole in the background and bring to the front when Ctrl+Shift+F12 (by default) is pressed")},
         {{QStringLiteral("separate"), QStringLiteral("nofork")}, i18nc("@info:shell", "Run in a separate process")},

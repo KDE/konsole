@@ -46,8 +46,9 @@
 #endif
 
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
-#include <sys/syslimits.h>
 #include <sys/types.h>
+
+#include <sys/syslimits.h>
 #include <sys/user.h>
 #if defined(Q_OS_FREEBSD)
 #include <libutil.h>

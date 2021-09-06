@@ -11,18 +11,20 @@
 
 // The below is to verify the old #defines match the new constexprs
 // Just copy/paste for now from Vt102Emulation.cpp
+/* clang-format off */
 #define TY_CONSTRUCT(T, A, N) (((((int)(N)) & 0xffff) << 16) | ((((int)(A)) & 0xff) << 8) | (((int)(T)) & 0xff))
-#define TY_CHR() TY_CONSTRUCT(0, 0, 0)
-#define TY_CTL(A) TY_CONSTRUCT(1, A, 0)
-#define TY_ESC(A) TY_CONSTRUCT(2, A, 0)
+#define TY_CHR()        TY_CONSTRUCT(0, 0, 0)
+#define TY_CTL(A)       TY_CONSTRUCT(1, A, 0)
+#define TY_ESC(A)       TY_CONSTRUCT(2, A, 0)
 #define TY_ESC_CS(A, B) TY_CONSTRUCT(3, A, B)
-#define TY_ESC_DE(A) TY_CONSTRUCT(4, A, 0)
+#define TY_ESC_DE(A)    TY_CONSTRUCT(4, A, 0)
 #define TY_CSI_PS(A, N) TY_CONSTRUCT(5, A, N)
-#define TY_CSI_PN(A) TY_CONSTRUCT(6, A, 0)
+#define TY_CSI_PN(A)    TY_CONSTRUCT(6, A, 0)
 #define TY_CSI_PR(A, N) TY_CONSTRUCT(7, A, N)
-#define TY_VT52(A) TY_CONSTRUCT(8, A, 0)
-#define TY_CSI_PG(A) TY_CONSTRUCT(9, A, 0)
-#define TY_CSI_PE(A) TY_CONSTRUCT(10, A, 0)
+#define TY_VT52(A)      TY_CONSTRUCT(8, A, 0)
+#define TY_CSI_PG(A)    TY_CONSTRUCT(9, A, 0)
+#define TY_CSI_PE(A)    TY_CONSTRUCT(10, A, 0)
+/* clang-format on */
 
 using namespace Konsole;
 
