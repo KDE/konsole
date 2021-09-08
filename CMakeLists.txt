@@ -37,7 +37,8 @@ include(GenerateExportHeader)
 include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
 include(KDEClangFormat)
-include(KDEGitCommitHooks)
+# Remove OPTIONAL when we require EMC >= 5.79
+include(KDEGitCommitHooks OPTIONAL)
 
 # Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
 include(ECMEnableSanitizers)
@@ -138,4 +139,6 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAG
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.c *.cpp *.h *.hpp)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
-kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+if (ECM_VERSION VERSION_GREATER_EQUAL 5.79.0)
+    kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+endif()
