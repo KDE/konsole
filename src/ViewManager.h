@@ -13,6 +13,8 @@
 #include <QObject>
 #include <QPointer>
 
+#include <QDBusContext>
+
 #include "konsoleprivate_export.h"
 // Konsole
 
@@ -49,7 +51,7 @@ class ViewSplitter;
  * user interface elements specific to each display/session pair.
  *
  */
-class KONSOLEPRIVATE_EXPORT ViewManager : public QObject
+class KONSOLEPRIVATE_EXPORT ViewManager : public QObject, protected QDBusContext
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Window")
@@ -311,6 +313,8 @@ public Q_SLOTS:
     Q_SCRIPTABLE void saveLayoutFile();
     Q_SCRIPTABLE void loadLayoutFile();
     Q_SCRIPTABLE void loadLayout(QString File);
+
+    Q_SCRIPTABLE QString activationToken() const;
 
 private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected

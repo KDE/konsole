@@ -24,6 +24,7 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KWindowSystem>
 
 // Konsole
 #include <windowadaptor.h>
@@ -983,6 +984,28 @@ void ViewManager::loadLayout(QString file)
         _viewContainer->addSplitter(splitter, _viewContainer->count());
     }
 }
+
+QString ViewManager::activationToken() const
+{
+    Q_ASSERT(calledFromDBus());
+    QWindow *window = widget()->window()->windowHandle();
+    if (!window) {
+        return QString();
+    }
+    const int launchedSerial = KWindowSystem::lastInputSerial(window);
+    const auto msg = message();
+    setDelayedReply(true);
+
+    connect(KWindowSystem::self(), &KWindowSystem::xdgActivationTokenArrived, this, [msg, launchedSerial](int tokenSerial, const QString &token) {
+        if (tokenSerial == launchedSerial) {
+            auto reply = msg.createReply(token);
+            QDBusConnection::sessionBus().send(reply);
+        }
+    });
+    KWindowSystem::requestXdgActivationToken(window, launchedSerial, QString());
+    return QString();
+}
+
 void ViewManager::loadLayoutFile()
 {
     loadLayout(QFileDialog::getOpenFileName(this->widget(), i18n("Open File"), QStringLiteral("~/"), i18n("Konsole View Layout (*.json)")));
