@@ -642,6 +642,11 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     connect(session, &Konsole::Session::selectionChanged, controller, &Konsole::SessionController::selectionChanged);
     connect(view, &Konsole::TerminalDisplay::destroyed, controller, &Konsole::SessionController::deleteLater);
 
+    // The controller is destroyed when the (split) view is drag-dropped to a different window
+    connect(controller, &QObject::destroyed, this, [this] {
+        toggleActionsBasedOnState();
+    });
+
     // if this is the first controller created then set it as the active controller
     if (_pluggedController.isNull()) {
         controllerChanged(controller);

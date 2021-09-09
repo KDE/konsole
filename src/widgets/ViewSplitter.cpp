@@ -378,10 +378,12 @@ void Konsole::ViewSplitter::dropEvent(QDropEvent *ev)
 
             Qt::Orientation orientation = droppedEdge == Qt::LeftEdge || droppedEdge == Qt::RightEdge ? Qt::Horizontal : Qt::Vertical;
 
+            // Add the display so it can be counted correctly by ViewManager
+            addTerminalDisplay(source, orientation, behavior);
+
             // topLevel is the splitter that's connected with the ViewManager
             // that in turn can call the SessionController.
             Q_EMIT getToplevelSplitter()->terminalDisplayDropped(source);
-            addTerminalDisplay(source, orientation, behavior);
             source->setVisible(true);
             currentDragTarget = nullptr;
         }
