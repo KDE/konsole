@@ -295,6 +295,8 @@ void ViewManager::setupActions()
 
     connect(_viewContainer, &TabbedViewContainer::viewAdded, this, &ViewManager::toggleActionsBasedOnState);
     connect(_viewContainer, &QTabWidget::currentChanged, this, &ViewManager::toggleActionsBasedOnState);
+    // Let the view container remove the view before counting tabs
+    connect(_viewContainer, &TabbedViewContainer::viewRemoved, this, &ViewManager::toggleActionsBasedOnState);
 
     toggleActionsBasedOnState();
 }
@@ -445,6 +447,9 @@ void ViewManager::detachActiveView()
 
 void ViewManager::detachActiveTab()
 {
+    if (_viewContainer->count() < 2) {
+        return;
+    }
     const int currentIdx = _viewContainer->currentIndex();
     detachTab(currentIdx);
 }
