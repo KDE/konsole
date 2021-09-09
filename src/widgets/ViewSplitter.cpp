@@ -304,6 +304,15 @@ void ViewSplitter::handleMinimizeMaximize(bool maximize)
     }
 }
 
+void ViewSplitter::clearMaximized()
+{
+    ViewSplitter *top = getToplevelSplitter();
+    Q_ASSERT(top);
+    if (top->terminalMaximized()) {
+        top->toggleMaximizeCurrentTerminal();
+    }
+}
+
 ViewSplitter *ViewSplitter::getToplevelSplitter()
 {
     ViewSplitter *current = this;

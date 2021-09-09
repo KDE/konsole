@@ -103,7 +103,14 @@ public:
      */
     void toggleMaximizeCurrentTerminal();
 
-    void handleMinimizeMaximize(bool maximize);
+    /**
+     * Can be called on any ViewSplitter to find the top level splitter and ensure
+     * the active display isn't maximized. Do nothing if it's not maximized.
+     *
+     * Useful for ViewManager and TabbedViewContainer when removing or adding a
+     * display to the hierarchy so that the layout is reflowed correctly.
+     */
+    void clearMaximized();
 
     /** returns the splitter that has no splitter as a parent. */
     ViewSplitter *getToplevelSplitter();
@@ -156,6 +163,9 @@ private:
      * @p currentTerminalDisplay the only terminal display that will still be visible.
      */
     bool hideRecurse(TerminalDisplay *currentTerminalDisplay);
+
+    /** other classes should use clearmMaximized() */
+    void handleMinimizeMaximize(bool maximize);
 
     void updateSizes();
     bool m_terminalMaximized = false;

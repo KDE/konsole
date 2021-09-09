@@ -435,6 +435,7 @@ void ViewManager::detachActiveView()
     // find the currently active view and remove it from its container
     if ((_viewContainer->findChildren<TerminalDisplay *>()).count() > 1) {
         auto activeSplitter = _viewContainer->activeViewSplitter();
+        activeSplitter->clearMaximized();
         auto terminal = activeSplitter->activeTerminalDisplay();
         auto newSplitter = new ViewSplitter();
         newSplitter->addTerminalDisplay(terminal, Qt::Horizontal);
@@ -530,10 +531,8 @@ void ViewManager::sessionFinished()
     if (splitter == nullptr) {
         return;
     }
+    splitter->clearMaximized();
 
-    auto *toplevelSplitter = splitter->getToplevelSplitter();
-
-    toplevelSplitter->handleMinimizeMaximize(false);
     view->deleteLater();
     connect(view, &QObject::destroyed, this, [this]() {
         toggleActionsBasedOnState();
@@ -550,7 +549,7 @@ void ViewManager::sessionFinished()
 
     if (!_sessionMap.empty()) {
         updateTerminalDisplayHistory(view, true);
-        focusAnotherTerminal(toplevelSplitter);
+        focusAnotherTerminal(splitter->getToplevelSplitter());
     }
 }
 

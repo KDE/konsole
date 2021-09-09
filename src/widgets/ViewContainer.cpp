@@ -337,6 +337,7 @@ void TabbedViewContainer::addView(TerminalDisplay *view)
 void TabbedViewContainer::splitView(TerminalDisplay *view, Qt::Orientation orientation)
 {
     auto viewSplitter = qobject_cast<ViewSplitter *>(currentWidget());
+    viewSplitter->clearMaximized();
     viewSplitter->addTerminalDisplay(view, orientation);
     connectTerminalDisplay(view);
 }
@@ -699,6 +700,6 @@ void TabbedViewContainer::setNavigationBehavior(int behavior)
 void TabbedViewContainer::moveToNewTab(TerminalDisplay *display)
 {
     // Ensure that the current terminal is not maximized so that the other views will be shown properly
-    activeViewSplitter()->handleMinimizeMaximize(false);
+    activeViewSplitter()->clearMaximized();
     addView(display);
 }
