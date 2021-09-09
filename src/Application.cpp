@@ -121,18 +121,7 @@ MainWindow *Application::newMainWindow()
     connect(window, &Konsole::MainWindow::newWindowRequest, this, &Konsole::Application::createWindow);
     connect(window, &Konsole::MainWindow::terminalsDetached, this, &Konsole::Application::detachTerminals);
 
-    if (!m_pluginManager.plugins().empty()) {
-        m_pluginManager.registerMainWindow(window);
-    } else {
-        const QList<QAction *> allActions = window->menuBar()->actions();
-        auto it = std::find_if(allActions.cbegin(), allActions.cend(), [](QAction *action) {
-            return action->objectName() == QLatin1String("plugins");
-        });
-
-        if (it != allActions.cend()) {
-            (*it)->setVisible(false);
-        }
-    }
+    m_pluginManager.registerMainWindow(window);
 
     return window;
 }

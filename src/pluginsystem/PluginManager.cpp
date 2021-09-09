@@ -10,8 +10,11 @@
 #include "IKonsolePlugin.h"
 #include "MainWindow.h"
 
+#include <KLocalizedString>
 #include <KPluginLoader>
 #include <KPluginMetaData>
+
+#include <QAction>
 
 namespace Konsole
 {
@@ -57,6 +60,12 @@ void PluginManager::registerMainWindow(Konsole::MainWindow *window)
         plugin->addMainWindow(window);
         internalPluginSubmenus.append(plugin->menuBarActions(window));
         window->addPlugin(plugin);
+    }
+
+    if (internalPluginSubmenus.isEmpty()) {
+        auto *emptyMenuAct = new QAction(i18n("No plugins available"), this);
+        emptyMenuAct->setEnabled(false);
+        internalPluginSubmenus.append(emptyMenuAct);
     }
 
     window->plugActionList(QStringLiteral("plugin-submenu"), internalPluginSubmenus);
