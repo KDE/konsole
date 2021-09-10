@@ -188,7 +188,11 @@ void Profile::useFallback()
     setProperty(MouseWheelZoomEnabled, true);
     setProperty(AlternateScrolling, true);
 
+#ifdef Q_OS_MACOS
+    setProperty(KeyBindings, QStringLiteral("macos"));
+#else
     setProperty(KeyBindings, QStringLiteral("default"));
+#endif
     setProperty(ColorScheme, QStringLiteral("Breeze"));
     setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
 
