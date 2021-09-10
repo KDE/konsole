@@ -68,40 +68,6 @@ MainWindow::MainWindow()
     , _pluggedController(nullptr)
     , _menuBarInitialVisibility(true)
 {
-    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
-    KConfigGroup cg = konsoleConfig->group(QStringLiteral("MainWindow"));
-    const bool isGroup = cg.exists();
-    if (isGroup) {
-        const QString stateConfig = cg.readEntry(QStringLiteral("State"));
-
-        // If "stateConfig" is empty then this is the very first run,
-        // i.e. no konsolerc file in $HOME
-        _isSavedUiState = !stateConfig.isEmpty();
-    }
-
-    if (isGroup && !KonsoleSettings::saveGeometryOnExit()) {
-        // If we are not using the global Konsole save geometry on exit,
-        // remove all geometry data from [MainWindow] in Konsolerc, so KWin will
-        // manage it directly
-        QMap<QString, QString> configEntries = cg.entryMap();
-        QMapIterator<QString, QString> i(configEntries);
-
-        while (i.hasNext()) {
-            i.next();
-// After https://bugs.kde.org/show_bug.cgi?id=415150 was fixed in 5.74,
-// the config file keys changed
-#if KIO_VERSION < QT_VERSION_CHECK(5, 75, 0)
-            if (i.key().startsWith(QLatin1String("Width")) || i.key().startsWith(QLatin1String("Height"))
-#else
-            if (i.key().contains(QLatin1String(" Width")) || i.key().contains(QLatin1String(" Height")) || i.key().contains(QLatin1String(" XPosition"))
-                || i.key().contains(QLatin1String(" YPosition"))
-#endif
-            ) {
-                cg.deleteEntry(i.key());
-            }
-        }
-    }
-
     updateUseTransparency();
 
     // create actions for menus
@@ -146,6 +112,26 @@ MainWindow::MainWindow()
     connect(KonsoleSettings::self(), &Konsole::KonsoleSettings::configChanged, this, &Konsole::MainWindow::applyKonsoleSettings);
 
     KCrash::initialize();
+}
+
+bool MainWindow::wasWindowGeometrySaved() const
+{
+    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
+    KConfigGroup cg = konsoleConfig->group(QStringLiteral("MainWindow"));
+    if (!cg.exists()) { // First run, no existing konsolerc?
+        return false;
+    }
+
+    const QMap<QString, QString> entries = cg.entryMap();
+    for (auto it = entries.cbegin(), itEnd = entries.cend(); it != itEnd; ++it) {
+        const QString configKey = it.key();
+        if (configKey.contains(QLatin1String(" Width")) || configKey.contains(QLatin1String(" Height")) || configKey.contains(QLatin1String(" XPosition"))
+            || configKey.contains(QLatin1String(" YPosition"))) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void MainWindow::updateUseTransparency()
@@ -797,9 +783,10 @@ void MainWindow::applyKonsoleSettings()
     }
 
     _viewManager->activeContainer()->setNavigationBehavior(KonsoleSettings::newTabBehavior());
-    if (KonsoleSettings::saveGeometryOnExit() != autoSaveSettings()) {
-        setAutoSaveSettings(QStringLiteral("MainWindow"), KonsoleSettings::saveGeometryOnExit());
-    }
+
+    // Save the toolbar/menu/dockwidget states and the window geometry
+    setAutoSaveSettings();
+
     updateWindowCaption();
 }
 
@@ -900,7 +887,7 @@ void MainWindow::showEvent(QShowEvent *event)
         menuBar()->setVisible(_menuBarInitialVisibility);
         _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
 
-        if (!_isSavedUiState || !KonsoleSettings::saveGeometryOnExit()) {
+        if (!KonsoleSettings::saveGeometryOnExit() || !wasWindowGeometrySaved()) {
             // Delay resizing to here, so that the other parts of the UI
             // (ViewManager, TabbedViewContainer, TerminalDisplay ... etc)
             // have been created and TabbedViewContainer::sizeHint() returns

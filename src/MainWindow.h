@@ -172,6 +172,12 @@ public Q_SLOTS:
     void viewFullScreen(bool fullScreen);
 
 private:
+    /**
+     * Returns true if the window geometry was previously saved to the
+     * config file, false otherwise.
+     */
+    bool wasWindowGeometrySaved() const;
+
     void correctStandardShortcuts();
     void rememberMenuAccelerators();
     void removeMenuAccelerators();
@@ -200,7 +206,6 @@ private:
     bool _menuBarInitialVisibility;
     bool _firstShowEvent = true;
     bool _blurEnabled = false;
-    bool _isSavedUiState = false;
 };
 }
 
