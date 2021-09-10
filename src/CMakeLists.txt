@@ -283,9 +283,9 @@ set(konsole_SRCS
 )
 
 # Sets the icon on Windows and OSX
-ecm_add_app_icon(konsole ICONS ${ICONS_SRCS})
+ecm_add_app_icon(ICONS_SOURCES ICONS ${ICONS_SRCS})
 
-add_executable(konsole ${konsole_SRCS})
+add_executable(konsole ${konsole_SRCS} ${ICONS_SOURCES})
 target_link_libraries(konsole
   konsoleprivate
   konsoleapp
