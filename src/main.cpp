@@ -74,6 +74,31 @@ public:
     }
 };
 
+static void migrateRenamedConfigKeys()
+{
+    struct KeyInfo {
+        const char *groupName;
+        const char *oldKeyName;
+        const char *newKeyName;
+    };
+
+    static const KeyInfo keys[] = {{"KonsoleWindow", "SaveGeometryOnExit", "RememberWindowSize"}};
+
+    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
+
+    // Migrate renamed config keys
+    for (const auto &[group, oldName, newName] : keys) {
+        KConfigGroup cg = konsoleConfig->group(group);
+        if (cg.exists() && cg.hasKey(oldName)) {
+            const bool value = cg.readEntry(oldName, false);
+            cg.deleteEntry(oldName);
+            cg.writeEntry(newName, value);
+        }
+    }
+
+    konsoleConfig->sync();
+}
+
 // ***
 // Entry point into the Konsole terminal application.
 // ***
@@ -98,6 +123,8 @@ int main(int argc, char *argv[])
 
     auto app = new QApplication(argc, argv);
     app->setStyle(new MenuStyle());
+
+    migrateRenamedConfigKeys();
 
 #if defined(Q_OS_MACOS)
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends

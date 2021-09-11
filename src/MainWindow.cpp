@@ -890,7 +890,7 @@ void MainWindow::showEvent(QShowEvent *event)
     if (_firstShowEvent) {
         _firstShowEvent = false;
 
-        if (!KonsoleSettings::saveGeometryOnExit() || !wasWindowGeometrySaved()) {
+        if (!KonsoleSettings::rememberWindowSize() || !wasWindowGeometrySaved()) {
             // Delay resizing to here, so that the other parts of the UI
             // (ViewManager, TabbedViewContainer, TerminalDisplay ... etc)
             // have been created and TabbedViewContainer::sizeHint() returns
