@@ -114,6 +114,15 @@ MainWindow::MainWindow()
     KCrash::initialize();
 }
 
+void MainWindow::applyMainWindowSettings(const KConfigGroup &config)
+{
+    KMainWindow::applyMainWindowSettings(config);
+
+    // Override the menubar state from the config file
+    menuBar()->setVisible(_menuBarInitialVisibility);
+    _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
+}
+
 bool MainWindow::wasWindowGeometrySaved() const
 {
     KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
@@ -880,12 +889,6 @@ void MainWindow::showEvent(QShowEvent *event)
     // Apply this code on first show only
     if (_firstShowEvent) {
         _firstShowEvent = false;
-        // the initial visibility of menubar should be applied at this last
-        // moment. Otherwise, the initial visibility will be determined by
-        // what KMainWindow has automatically stored in konsolerc, but not by
-        // what users has explicitly configured .
-        menuBar()->setVisible(_menuBarInitialVisibility);
-        _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
 
         if (!KonsoleSettings::saveGeometryOnExit() || !wasWindowGeometrySaved()) {
             // Delay resizing to here, so that the other parts of the UI
