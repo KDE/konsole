@@ -640,11 +640,7 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     connect(session, &Konsole::Session::primaryScreenInUse, controller, &Konsole::SessionController::setupPrimaryScreenSpecificActions);
     connect(session, &Konsole::Session::selectionChanged, controller, &Konsole::SessionController::selectionChanged);
     connect(view, &Konsole::TerminalDisplay::destroyed, controller, &Konsole::SessionController::deleteLater);
-
-    // The controller is destroyed when the (split) view is drag-dropped to a different window
-    connect(controller, &QObject::destroyed, this, [this] {
-        toggleActionsBasedOnState();
-    });
+    connect(controller, &Konsole::SessionController::viewDragAndDropped, this, &Konsole::ViewManager::forgetController);
 
     // if this is the first controller created then set it as the active controller
     if (_pluggedController.isNull()) {
@@ -654,9 +650,20 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     return controller;
 }
 
+void ViewManager::forgetController()
+{
+    auto controller = static_cast<SessionController *>(sender());
+    Q_ASSERT(controller->session() != nullptr && controller->view() != nullptr);
+
+    forgetTerminal(controller->view());
+    toggleActionsBasedOnState();
+}
+
 // should this be handed by ViewManager::unplugController signal
 void ViewManager::removeController(SessionController *controller)
 {
+    Q_EMIT unplugController(controller);
+
     if (_pluggedController == controller) {
         _pluggedController.clear();
     }

@@ -173,6 +173,11 @@ Q_SIGNALS:
      */
     void requestPrint();
 
+    /**
+     * Emitted when the TerminalDisplay is drag-and-dropped to a new window.
+     */
+    void viewDragAndDropped();
+
 public Q_SLOTS:
     /**
      * Issues a command to the session to navigate to the specified URL.
