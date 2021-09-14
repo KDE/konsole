@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<gui name="konsole" version="17">
+<gui name="konsole" version="18">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -57,10 +57,6 @@
         <text>Main Toolbar</text>
         <index>0</index>
         <Action name="new-tab"/>
-        <Action name="split-view-left-right"/>
-        <Action name="split-view-top-bottom"/>
-        <Action name="load-terminals-layout-2x2"/>
-        <Action name="load-terminals-layout-2x1"/>
-        <Action name="load-terminals-layout-1x2"/>
+        <Action name="split-view"/>
     </ToolBar>
 </gui>
