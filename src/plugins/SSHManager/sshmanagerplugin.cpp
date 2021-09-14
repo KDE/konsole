@@ -21,6 +21,7 @@
 
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KCrash>
 
 #include "MainWindow.h"
 
@@ -38,6 +39,7 @@ SSHManagerPlugin::SSHManagerPlugin(QObject *object, const QVariantList &args)
     , d(std::make_unique<SSHManagerPluginPrivate>())
 {
     setName(QStringLiteral("SshManager"));
+    KCrash::initialize();
 }
 
 SSHManagerPlugin::~SSHManagerPlugin() = default;
