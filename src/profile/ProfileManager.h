@@ -18,7 +18,7 @@
 #include <QStringList>
 #include <QVariant>
 
-#include <set>
+#include <vector>
 
 // Konsole
 #include "Profile.h"
@@ -34,6 +34,8 @@ class KONSOLEPROFILE_EXPORT ProfileManager : public QObject
     Q_OBJECT
 
 public:
+    using Iterator = std::vector<Profile::Ptr>::const_iterator;
+
     /**
      * Constructs a new profile manager and loads information about the available
      * profiles.
@@ -213,20 +215,14 @@ private:
     // otherwise
     QString saveProfile(const Profile::Ptr &profile);
 
-    static bool profileNamesCompare(const Profile::Ptr &p1, const Profile::Ptr &p2)
-    {
-        // Always put the Default/fallback profile at the top
-        if (p1->isFallback()) {
-            return true;
-        } else if (p2->isFallback()) {
-            return false;
-        }
+    // Sorts _profiles by profile name
+    void sortProfiles();
 
-        return QString::localeAwareCompare(p1->name(), p2->name()) < 0;
-    }
+    // Uses std::find to find "profile" _profiles
+    Iterator findProfile(const Profile::Ptr &profile) const;
 
     // A list of all loaded profiles, sorted by profile name
-    std::set<Profile::Ptr, decltype(profileNamesCompare) *> _profiles{profileNamesCompare};
+    std::vector<Profile::Ptr> _profiles;
 
     Profile::Ptr _defaultProfile;
     Profile::Ptr _fallbackProfile;

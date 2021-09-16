@@ -16,10 +16,12 @@ class ProfileTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
+    void initTestCase();
     void testProfile();
     void testClone();
     void testProfileGroup();
     void testProfileFileNames();
+    void testProfileNameSorting();
     void testFallbackProfile();
 };
 

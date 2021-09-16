@@ -14,11 +14,19 @@
 // Konsole
 #include "../profile/Profile.h"
 #include "../profile/ProfileGroup.h"
+#include "../profile/ProfileManager.cpp"
 #include "../profile/ProfileWriter.h"
+
+#include <QStandardPaths>
 
 #include <array>
 
 using namespace Konsole;
+
+void ProfileTest::initTestCase()
+{
+    QStandardPaths::setTestModeEnabled(true);
+}
 
 void ProfileTest::testProfile()
 {
@@ -213,6 +221,40 @@ void ProfileTest::testProfileFileNames()
     */
 
     delete writer;
+}
+
+void ProfileTest::testProfileNameSorting()
+{
+    auto *manager = ProfileManager::instance();
+
+    const int origCount = manager->allProfiles().size();
+
+    Profile::Ptr profile1 = Profile::Ptr(new Profile);
+    profile1->setProperty(Profile::UntranslatedName, QStringLiteral("Indiana"));
+    manager->addProfile(profile1);
+    auto list = manager->allProfiles();
+    int counter = 1;
+    QCOMPARE(list.size(), origCount + counter++);
+    // Built-in profile always at the top
+    QCOMPARE(list.at(0)->name(), QStringView(u"Default"));
+
+    QVERIFY(std::is_sorted(list.cbegin(), list.cend(), profileNameLessThan));
+
+    Profile::Ptr profile2 = Profile::Ptr(new Profile);
+    profile2->setProperty(Profile::UntranslatedName, QStringLiteral("Old Paris"));
+    manager->addProfile(profile2);
+    list = manager->allProfiles();
+    QCOMPARE(list.size(), origCount + counter++);
+    QVERIFY(std::is_sorted(list.cbegin(), list.cend(), profileNameLessThan));
+
+    Profile::Ptr profile3 = Profile::Ptr(new Profile);
+    profile3->setProperty(Profile::UntranslatedName, QStringLiteral("New Zealand"));
+    manager->addProfile(profile3);
+    list = manager->allProfiles();
+    QCOMPARE(list.size(), origCount + counter++);
+    QVERIFY(std::is_sorted(list.cbegin(), list.cend(), profileNameLessThan));
+
+    QCOMPARE(list.at(0)->name(), QLatin1String("Default"));
 }
 
 void ProfileTest::testFallbackProfile()

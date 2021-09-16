@@ -37,6 +37,18 @@ static bool stringLessThan(const QString &p1, const QString &p2)
     return QString::localeAwareCompare(p1, p2) < 0;
 }
 
+static bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
+{
+    // Always put the Default/fallback profile at the top
+    if (p1->isFallback()) {
+        return true;
+    } else if (p2->isFallback()) {
+        return false;
+    }
+
+    return stringLessThan(p1->name(), p2->name());
+}
+
 ProfileManager::ProfileManager()
     : _defaultProfile(nullptr)
     , _fallbackProfile(nullptr)
@@ -89,6 +101,11 @@ Q_GLOBAL_STATIC(ProfileManager, theProfileManager)
 ProfileManager *ProfileManager::instance()
 {
     return theProfileManager;
+}
+
+ProfileManager::Iterator ProfileManager::findProfile(const Profile::Ptr &profile) const
+{
+    return std::find(_profiles.cbegin(), _profiles.cend(), profile);
 }
 
 void ProfileManager::initFallbackProfile()
@@ -230,10 +247,15 @@ void ProfileManager::saveSettings()
     appConfig->sync();
 }
 
+void ProfileManager::sortProfiles()
+{
+    std::sort(_profiles.begin(), _profiles.end(), profileNameLessThan);
+}
+
 QList<Profile::Ptr> ProfileManager::allProfiles()
 {
     loadAllProfiles();
-
+    sortProfiles();
     return loadedProfiles();
 }
 
@@ -289,17 +311,20 @@ void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property
     persistent = persistent && !profile->name().isEmpty();
 
     bool messageShown = false;
+    bool isNameChanged = false;
     // Insert the changes into the existing Profile instance
     for (auto it = propertyMap.cbegin(); it != propertyMap.cend(); ++it) {
         const auto property = it.key();
         auto value = it.value();
+
+        isNameChanged = property == Profile::Name || property == Profile::UntranslatedName;
 
         // "Default" is reserved for the fallback profile, override it;
         // The message is only shown if the user manually typed "Default"
         // in the name box in the edit profile dialog; i.e. saving the
         // fallback profile where the user didn't change the name at all,
         // the uniqueProfileName is used silently a couple of lines above.
-        if ((property == Profile::Name || property == Profile::UntranslatedName) && value == QLatin1String("Default")) {
+        if (isNameChanged && value == QLatin1String("Default")) {
             value = uniqueProfileName;
             if (!messageShown) {
                 KMessageBox::sorry(nullptr,
@@ -357,6 +382,10 @@ void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property
         }
     }
 
+    if (isNameChanged) {
+        sortProfiles();
+    }
+
     // Notify the world about the change
     Q_EMIT profileChanged(profile);
 }
@@ -367,9 +396,10 @@ void ProfileManager::addProfile(const Profile::Ptr &profile)
         _defaultProfile = profile;
     }
 
-    _profiles.insert(profile);
-
-    Q_EMIT profileAdded(profile);
+    if (findProfile(profile) == _profiles.cend()) {
+        _profiles.push_back(profile);
+        Q_EMIT profileAdded(profile);
+    }
 }
 
 bool ProfileManager::deleteProfile(Profile::Ptr profile)
@@ -387,7 +417,9 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
         }
 
         setShortcut(profile, QKeySequence());
-        _profiles.erase(profile);
+        if (auto it = findProfile(profile); it != _profiles.end()) {
+            _profiles.erase(it);
+        }
 
         // mark the profile as hidden so that it does not show up in the
         // Manage Profiles dialog and is not saved to disk
@@ -408,7 +440,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
 
 void ProfileManager::setDefaultProfile(const Profile::Ptr &profile)
 {
-    Q_ASSERT(_profiles.find(profile) != _profiles.cend());
+    Q_ASSERT(findProfile(profile) != _profiles.cend());
 
     const auto oldDefault = _defaultProfile;
     _defaultProfile = profile;

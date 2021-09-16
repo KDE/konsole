@@ -196,4 +196,6 @@ void ProfileModel::update(QExplicitlySharedDataPointer<Profile> profile)
 {
     int row = m_profiles.indexOf(profile);
     dataChanged(index(row, 0), index(row, COLUMNS - 1));
+    // Resort as the profile name could have changed
+    populate();
 }
