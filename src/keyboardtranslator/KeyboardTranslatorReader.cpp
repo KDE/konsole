@@ -328,30 +328,35 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
 
     text = text.simplified();
 
-    // title line: keyboard "title"
-    static const QRegularExpression title(QStringLiteral("keyboard\\s+\"(.*)\""));
-    // key line: key KeySequence : "output"
-    // key line: key KeySequence : command
-    static const QRegularExpression key(QStringLiteral("key\\s+(.+?)\\s*:\\s*(\"(.*)\"|\\w+)"));
-
     QList<Token> list;
+
     if (text.isEmpty()) {
         return list;
     }
 
-    QRegularExpressionMatch titleMatch(title.match(text));
+    // Example:
+    // keyboard "Default (XFree 4)"
+    static const QLatin1String prefix("keyboard");
+    if (text.startsWith(prefix)) {
+        text.remove(0, prefix.size()).remove(QLatin1Char('"'));
+        text = text.simplified();
+        if (!text.isEmpty()) {
+            Token titleToken = {Token::TitleKeyword, QString()};
+            Token textToken = {Token::TitleText, text};
+            list << titleToken << textToken;
+        }
 
-    if (titleMatch.hasMatch()) {
-        Token titleToken = {Token::TitleKeyword, QString()};
-        Token textToken = {Token::TitleText, titleMatch.captured(1)};
-
-        list << titleToken << textToken;
         return list;
     }
 
+    // Examples:
+    // key Enter-NewLine                 : "\r"
+    // key Home        -AnyMod-AppCuKeys : "\E[H"
+    static const QRegularExpression key(QStringLiteral(R"(key\s+(.+?)\s*:\s*(\"(.*)\"|\w+))"));
+
     QRegularExpressionMatch keyMatch(key.match(text));
     if (!keyMatch.hasMatch()) {
-        qCDebug(KonsoleDebug) << "Line in keyboard translator file could not be understood:" << text;
+        qCDebug(KonsoleDebug) << "Line in keyboard translator file could not be parsed:" << text;
         return list;
     }
 
@@ -361,14 +366,15 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
 
     list << keyToken << sequenceToken;
 
-    if (keyMatch.capturedRef(3).isEmpty()) {
+    // capturedTexts().at(3) is the output string
+    const QStringView outText = keyMatch.capturedView(3);
+    if (!outText.isEmpty()) {
+        Token outputToken = {Token::OutputText, outText.toString()};
+        list << outputToken;
+    } else {
         // capturedTexts().at(2) is a command
         Token commandToken = {Token::Command, keyMatch.captured(2)};
         list << commandToken;
-    } else {
-        // capturedTexts().at(3) is the output string
-        Token outputToken = {Token::OutputText, keyMatch.captured(3)};
-        list << outputToken;
     }
 
     return list;
