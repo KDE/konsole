@@ -11,6 +11,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMouseEvent>
+#include <QWindow>
 
 // KDE
 #include <KAcceleratorManager>
@@ -67,6 +68,11 @@ MainWindow::MainWindow()
     , _newTabMenuAction(nullptr)
     , _pluggedController(nullptr)
 {
+    // Set the WA_NativeWindow attribute to force the creation of the QWindow.
+    // Without this QWidget::windowHandle() returns 0.
+    // See https://phabricator.kde.org/D23108
+    setAttribute(Qt::WA_NativeWindow);
+
     updateUseTransparency();
 
     // create actions for menus
@@ -842,10 +848,6 @@ void MainWindow::setBlur(bool blur)
 #if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5, 82, 0)
         KWindowEffects::enableBlurBehind(winId(), blur);
 #else
-        // Set the WA_NativeWindow attribute to force the creation of the QWindow.
-        // Without this QWidget::windowHandle() returns 0.
-        // See https://phabricator.kde.org/D23108
-        setAttribute(Qt::WA_NativeWindow);
         if (QWindow *window = windowHandle()) {
             KWindowEffects::enableBlurBehind(window, blur);
         } else {
@@ -897,6 +899,13 @@ void MainWindow::showEvent(QShowEvent *event)
             // (ViewManager, TabbedViewContainer, TerminalDisplay ... etc)
             // have been created and TabbedViewContainer::sizeHint() returns
             // a usuable size.
+
+            // Remove the WindowMaximized state to override the Window-Maximized
+            // config key
+            if (QWindow *window = windowHandle()) {
+                window->setWindowStates(window->windowStates() & ~Qt::WindowMaximized);
+            }
+
             resize(sizeHint());
         }
     }
