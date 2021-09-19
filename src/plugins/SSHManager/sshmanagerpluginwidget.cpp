@@ -7,6 +7,7 @@
 
 #include "sshmanagerpluginwidget.h"
 
+#include "konsoledebug.h"
 #include "session/SessionController.h"
 #include "sshconfigurationdata.h"
 #include "sshmanagermodel.h"
@@ -278,7 +279,7 @@ void SSHManagerTreeWidget::setModel(SSHManagerModel *model)
 
 void SSHManagerTreeWidget::setCurrentController(Konsole::SessionController *controller)
 {
-    qDebug() << "Controller changed to" << controller;
+    qCDebug(KonsoleDebug) << "Controller changed to" << controller;
     d->controller = controller;
 }
 
