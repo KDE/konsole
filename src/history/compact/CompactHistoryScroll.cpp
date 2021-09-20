@@ -45,6 +45,20 @@ void CompactHistoryScroll::addCells(const Character a[], const int count)
     }
 }
 
+void CompactHistoryScroll::addCellsMove(Character characters[], const int count)
+{
+    std::move(characters, characters + count, std::back_inserter(_cells));
+
+    // store the (biased) start of next line + default flag
+    // the flag is later updated when addLine is called
+    _lineDatas.push_back({static_cast<unsigned int>(_cells.size() + _indexBias), LINE_DEFAULT});
+
+    if (_lineDatas.size() > _maxLineCount + 5) {
+        removeLinesFromTop(5);
+    }
+}
+
+
 void CompactHistoryScroll::addLine(const LineProperty lineProperty)
 {
     auto &flag = _lineDatas.back().flag;

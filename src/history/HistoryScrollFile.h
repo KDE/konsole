@@ -33,6 +33,7 @@ public:
     LineProperty getLineProperty(const int lineno) const override;
 
     void addCells(const Character text[], const int count) override;
+    void addCellsMove(Character text[], const int count) override { addCells(text, count); } // TODO: optimize, if there's any point
     void addLine(LineProperty lineProperty = 0) override;
 
     // Modify history

@@ -40,12 +40,13 @@ void CompactHistoryType::scroll(std::unique_ptr<HistoryScroll> &old) const
     Character line[LINE_SIZE];
     int lines = (old != nullptr) ? old->getLines() : 0;
     int i = qMax((lines - (int)_maxLines), 0);
+    std::vector<Character> tmp_line;
     for (; i < lines; i++) {
         int size = old->getLineLen(i);
         if (size > LINE_SIZE) {
-            auto tmp_line = std::make_unique<Character[]>(size);
-            old->getCells(i, 0, size, tmp_line.get());
-            newScroll->addCells(tmp_line.get(), size);
+            tmp_line.resize(size);
+            old->getCells(i, 0, size, tmp_line.data());
+            newScroll->addCellsMove(tmp_line.data(), size);
             newScroll->addLine(old->getLineProperty(i));
         } else {
             old->getCells(i, 0, size, line);

@@ -30,6 +30,7 @@ public:
     LineProperty getLineProperty(const int lineNumber) const override;
 
     void addCells(const Character a[], const int count) override;
+    void addCellsMove(Character a[], const int count) override;
     void addLine(const LineProperty lineProperty = 0) override;
 
     void removeCells() override;

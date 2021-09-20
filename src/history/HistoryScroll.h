@@ -43,6 +43,7 @@ public:
 
     // adding lines.
     virtual void addCells(const Character a[], const int count) = 0;
+    virtual void addCellsMove(Character a[], const int count) = 0;
     // convenience method - this is virtual so that subclasses can take advantage
     // of QVector's implicit copying
     virtual void addCellsVector(const QVector<Character> &cells)

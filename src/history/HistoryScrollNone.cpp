@@ -58,6 +58,10 @@ void HistoryScrollNone::addCells(const Character[], int)
 {
 }
 
+void HistoryScrollNone::addCellsMove(Character[], int)
+{
+}
+
 void HistoryScrollNone::addLine(LineProperty)
 {
 }
