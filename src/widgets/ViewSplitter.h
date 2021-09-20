@@ -33,6 +33,12 @@ protected:
     void mousePressEvent(QMouseEvent *ev) override;
     void mouseReleaseEvent(QMouseEvent *ev) override;
     void mouseMoveEvent(QMouseEvent *ev) override;
+    void mouseDoubleClickEvent(QMouseEvent *ev) override;
+private:
+    /* For some reason, the first time we double-click on the splitter handle
+     * the second mouse press event is not fired, nor is the double click event.
+     * We use this counter to detect a double click. */
+    int mouseReleaseEventCounter;
 };
 
 /**

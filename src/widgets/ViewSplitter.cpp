@@ -415,6 +415,7 @@ QPoint Konsole::ViewSplitter::mapFromTopLevel(const QPoint &p)
 
 Konsole::ViewSplitterHandle::ViewSplitterHandle(Qt::Orientation orientation, QSplitter *parent)
     : QSplitterHandle(orientation, parent)
+    , mouseReleaseEventCounter(0)
 {
 }
 
@@ -487,12 +488,17 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
     }
     std::sort(std::begin(allSplitterSizes), std::end(allSplitterSizes));
 
+    mouseReleaseEventCounter = 0;
+
     QSplitterHandle::mousePressEvent(ev);
 }
 
 void Konsole::ViewSplitterHandle::mouseReleaseEvent(QMouseEvent *ev)
 {
     allSplitterSizes.clear();
+    if (++mouseReleaseEventCounter > 1) {
+        mouseDoubleClickEvent(ev);
+    }
     QSplitterHandle::mouseReleaseEvent(ev);
 }
 
@@ -512,5 +518,29 @@ void Konsole::ViewSplitterHandle::mouseMoveEvent(QMouseEvent *ev)
         return;
     }
 
+    mouseReleaseEventCounter = 0;
+
     QSplitterHandle::mouseMoveEvent(ev);
+}
+
+void Konsole::ViewSplitterHandle::mouseDoubleClickEvent(QMouseEvent *ev)
+{
+    auto parentSplitter = qobject_cast<ViewSplitter*>(parentWidget());
+
+    if (parentSplitter->count() > 1) {
+        for (int i = 1; i < parentSplitter->count(); i++) {
+            if (parentSplitter->handle(i) != this) {
+                continue;
+            }
+            if (orientation() == Qt::Horizontal) {
+                moveSplitter(parentSplitter->widget(i - 1)->pos().x() + ((parentSplitter->widget(i)->pos().x() + parentSplitter->widget(i)->width() - (parentSplitter->widget(i - 1)->pos().x())) / 2));
+            } else {
+                moveSplitter(parentSplitter->widget(i - 1)->pos().y() + ((parentSplitter->widget(i)->pos().y() + parentSplitter->widget(i)->height() - (parentSplitter->widget(i - 1)->pos().y())) / 2));
+            }
+            break;
+        }
+    }
+
+    mouseReleaseEventCounter = 0;
+    QSplitterHandle::mouseDoubleClickEvent(ev);
 }
