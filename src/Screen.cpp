@@ -27,6 +27,13 @@
 #include "profile/Profile.h"
 #include "profile/ProfileManager.h"
 
+// For malloc_trim, which is a GNU extension
+#ifdef __GNUC__
+extern "C" {
+#include <malloc.h>
+}
+#endif
+
 using namespace Konsole;
 
 // Macro to convert x,y position on screen to position within an image.
@@ -1693,6 +1700,11 @@ void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
         auto oldHistory = std::move(_history);
         t.scroll(_history);
     }
+
+#ifdef __GNUC__
+    // We might have been using gigabytes of memory, so make sure it is actually released
+    malloc_trim(0);
+#endif
 }
 
 bool Screen::hasScroll() const
