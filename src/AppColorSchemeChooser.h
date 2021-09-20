@@ -9,9 +9,7 @@
 #define KONSOLE_COLOR_SCHEME_CHOOSER_H
 
 #include <QAction>
-#include <QApplication>
 #include <QObject>
-#include <QString>
 
 #include <KColorSchemeManager>
 
@@ -31,12 +29,9 @@ public:
     AppColorSchemeChooser(QObject *parent);
 
     QString currentSchemeName() const;
+
 private Q_SLOTS:
     void slotSchemeChanged(QAction *triggeredAction);
-
-private:
-    QString loadCurrentScheme() const;
-    void saveCurrentScheme(const QString &name);
 };
 
 #endif

@@ -39,7 +39,7 @@
             <DefineGroup name="session-settings"/>
             <Action name="manage-profiles"/>
             <Action name="show-menubar"/>
-            <Action name="colorscheme-menu"/>
+            <Action name="window-colorscheme-menu"/>
             <Separator/>
             <Action name="view-full-screen"/>
             <Separator/>

@@ -8,14 +8,8 @@
 #include "AppColorSchemeChooser.h"
 #include "konsoledebug.h"
 
-#include <QActionGroup>
-#include <QDirIterator>
-#include <QFileInfo>
 #include <QMenu>
 #include <QModelIndex>
-#include <QStandardPaths>
-#include <QStringList>
-#include <QtGlobal>
 
 #include <KActionCollection>
 #include <KActionMenu>
@@ -23,17 +17,15 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 
-#include "MainWindow.h"
-
 AppColorSchemeChooser::AppColorSchemeChooser(QObject *parent)
     : QAction(parent)
 {
-    auto manager = new KColorSchemeManager(parent);
+    auto *manager = new KColorSchemeManager(parent);
 
-    const auto scheme(currentSchemeName());
+    const QString scheme(currentSchemeName());
     qCDebug(KonsoleDebug) << "Color scheme : " << scheme;
 
-    auto selectionMenu = manager->createSchemeSelectionMenu(scheme, this);
+    auto *selectionMenu = manager->createSchemeSelectionMenu(scheme, this);
 
     connect(selectionMenu->menu(), &QMenu::triggered, this, &AppColorSchemeChooser::slotSchemeChanged);
 
@@ -41,39 +33,28 @@ AppColorSchemeChooser::AppColorSchemeChooser(QObject *parent)
 
     setMenu(selectionMenu->menu());
     menu()->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-color")));
-    menu()->setTitle(i18n("&Color Scheme"));
-}
-
-QString AppColorSchemeChooser::loadCurrentScheme() const
-{
-    KSharedConfigPtr config = KSharedConfig::openConfig();
-    KConfigGroup cg(config, "UiSettings");
-    return cg.readEntry("ColorScheme", QString());
-}
-
-void AppColorSchemeChooser::saveCurrentScheme(const QString &name)
-{
-    KSharedConfigPtr config = KSharedConfig::openConfig();
-    KConfigGroup cg(config, "UiSettings");
-    cg.writeEntry("ColorScheme", name);
-    cg.sync();
+    menu()->setTitle(i18n("&Window Color Scheme"));
 }
 
 QString AppColorSchemeChooser::currentSchemeName() const
 {
     if (!menu()) {
-        return loadCurrentScheme();
+        KSharedConfigPtr config = KSharedConfig::openConfig();
+        KConfigGroup cg(config, "UiSettings");
+        return cg.readEntry("WindowColorScheme", QString());
     }
 
-    QAction *const action = menu()->activeAction();
-
-    if (action) {
+    if (QAction *const action = menu()->activeAction()) {
         return KLocalizedString::removeAcceleratorMarker(action->text());
     }
+
     return QString();
 }
 
 void AppColorSchemeChooser::slotSchemeChanged(QAction *triggeredAction)
 {
-    saveCurrentScheme(KLocalizedString::removeAcceleratorMarker(triggeredAction->text()));
+    KSharedConfigPtr config = KSharedConfig::openConfig();
+    KConfigGroup cg(config, "UiSettings");
+    cg.writeEntry("WindowColorScheme", KLocalizedString::removeAcceleratorMarker(triggeredAction->text()));
+    cg.sync();
 }
