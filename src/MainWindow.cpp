@@ -378,6 +378,18 @@ void MainWindow::viewFullScreen(bool fullScreen)
     }
 }
 
+void MainWindow::applyMainWindowSettings(const KConfigGroup &config)
+{
+    KMainWindow::applyMainWindowSettings(config);
+
+    // Override the menubar state from the config file
+    if (_windowArgsMenuBarVisible.enabled) {
+        menuBar()->setVisible(_windowArgsMenuBarVisible.showMenuBar);
+    }
+
+    _toggleMenuBarAction->setChecked(menuBar()->isVisibleTo(this));
+}
+
 BookmarkHandler *MainWindow::bookmarkHandler() const
 {
     return _bookmarkHandler;
@@ -879,17 +891,6 @@ void MainWindow::showEvent(QShowEvent *event)
     // Apply this code on first show only
     if (_firstShowEvent) {
         _firstShowEvent = false;
-
-        // The initial visibility of menubar should be applied at this last
-        // moment. Otherwise, the initial visibility will be determined by
-        // what KMainWindow has automatically stored in konsolerc, but not by
-        // what users has explicitly configured
-        if (_windowArgsMenuBarVisible.enabled) {
-            menuBar()->setVisible(_windowArgsMenuBarVisible.showMenuBar);
-            _toggleMenuBarAction->setChecked(_windowArgsMenuBarVisible.showMenuBar);
-        } else {
-            _toggleMenuBarAction->setChecked(menuBar()->isVisible());
-        }
 
         if (!KonsoleSettings::rememberWindowSize() || !wasWindowGeometrySaved()) {
             // Delay resizing to here, so that the other parts of the UI

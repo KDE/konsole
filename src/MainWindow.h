@@ -172,6 +172,8 @@ public Q_SLOTS:
     void viewFullScreen(bool fullScreen);
 
 private:
+    void applyMainWindowSettings(const KConfigGroup &config) override;
+
     /**
      * Returns true if the window geometry was previously saved to the
      * config file, false otherwise.
