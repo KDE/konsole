@@ -56,7 +56,7 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
 
     // System and User ports see:
     // https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
-    const auto *portValidator = new QIntValidator(0, 49151);
+    const auto *portValidator = new QIntValidator(0, 49151, this);
     ui->port->setValidator(portValidator);
 
     connect(ui->newSSHConfig, &QPushButton::clicked, this, &SSHManagerTreeWidget::showInfoPane);
