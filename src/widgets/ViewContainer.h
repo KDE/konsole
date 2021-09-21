@@ -87,7 +87,6 @@ public:
     /** Changes the active view to the last view */
     void activateLastView();
 
-    void setCss(const QString &styleSheet = QString());
     void setCssFromFile(const QUrl &url);
 
     ViewSplitter *activeViewSplitter();
