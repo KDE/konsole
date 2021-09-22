@@ -201,8 +201,12 @@ void TabbedViewContainer::konsoleConfigChanged()
 
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
         setCssFromFile(KonsoleSettings::tabBarUserStyleSheetFile());
+        _stylesheetSet = true;
     } else {
-        setStyleSheet(QString());
+        if (_stylesheetSet) {
+            setStyleSheet(QString());
+            _stylesheetSet = false;
+        }
     }
 }
 

@@ -235,6 +235,8 @@ private:
         }
     };
 
+    bool _stylesheetSet = false;
+
     QHash<const QWidget *, TabIconState> _tabIconState;
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
