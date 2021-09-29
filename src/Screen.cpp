@@ -155,7 +155,8 @@ void Screen::cursorPreviousLine(int n)
         n = 1; // Default
     }
     _cuX = 0;
-    _cuY = qMax(0, _cuY - n);
+    const int stop = _cuY < _topMargin ? 0 : _topMargin;
+    _cuY = qMax(stop, _cuY - n);
 }
 
 void Screen::cursorRight(int n)
