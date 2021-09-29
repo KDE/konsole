@@ -759,6 +759,7 @@ private:
 
         int cursorColumn;
         int cursorLine;
+        int originMode;
         RenditionFlags rendition;
         CharacterColor foreground;
         CharacterColor background;

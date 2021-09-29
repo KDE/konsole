@@ -365,6 +365,7 @@ void Screen::saveCursor()
     _savedState.rendition = _currentRendition;
     _savedState.foreground = _currentForeground;
     _savedState.background = _currentBackground;
+    _savedState.originMode = _currentModes[MODE_Origin];
 }
 
 void Screen::restoreCursor()
@@ -375,6 +376,15 @@ void Screen::restoreCursor()
     _currentForeground = _savedState.foreground;
     _currentBackground = _savedState.background;
     updateEffectiveRendition();
+    _currentModes[MODE_Origin] = _savedState.originMode;
+    /* XXX: DEC STD-070 states that DECRC should make sure the cursor lies
+     * inside the scrolling region, but that behavior doesn't seem to be
+     * widespread (neither VT1xx, VT240, mlterm, vte do it, and xterm
+     * only limits the bottom margin).
+    if (getMode(MODE_Origin)) {
+        _cuY = qBound(_topMargin, _cuY, _bottomMargin);
+    }
+    */
 }
 
 int Screen::getOldTotalLines()
