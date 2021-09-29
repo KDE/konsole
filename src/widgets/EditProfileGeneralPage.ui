@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
+<ui version="5.0">
  <class>EditProfileGeneralPage</class>
  <widget class="QWidget" name="EditProfileGeneralPage">
   <property name="geometry">
@@ -70,16 +70,43 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="profileNameEdit">
-       <property name="toolTip">
-        <string>A descriptive name for the profile</string>
-       </property>
-       <property name="placeholderText">
-        <string comment="@label:textbox">Profile name</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="profileNameLayout">
+       <item>
+        <widget class="QLineEdit" name="profileNameEdit">
+         <property name="toolTip">
+          <string>A descriptive name for the profile</string>
+         </property>
+         <property name="placeholderText">
+          <string comment="@label:textbox">Profile name</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="setAsDefaultButton">
+         <property name="text">
+          <string>Default Profile</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="2" column="0" alignment="Qt::AlignRight">
+     <item row="2" column="0">
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>16</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_3">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -98,7 +125,7 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QLineEdit" name="commandEdit">
        <property name="toolTip">
         <string>The command to execute when new terminal sessions are created using this profile</string>
@@ -111,7 +138,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0" alignment="Qt::AlignRight">
+     <item row="4" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_9">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -130,7 +157,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <widget class="QLineEdit" name="initialDirEdit">
        <property name="toolTip">
         <string>The initial working directory for new terminal sessions using this profile</string>
@@ -143,7 +170,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="2">
+     <item row="4" column="2">
       <widget class="QToolButton" name="dirSelectButton">
        <property name="toolTip">
         <string>Choose the initial directory</string>
@@ -153,14 +180,14 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1" colspan="2">
+     <item row="5" column="1" colspan="2">
       <widget class="QCheckBox" name="startInSameDirButton">
        <property name="text">
         <string>Start in same directory as current session</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="0" alignment="Qt::AlignRight">
+     <item row="6" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_4">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -179,7 +206,7 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="1" colspan="2">
+     <item row="6" column="1" colspan="2">
       <layout class="QHBoxLayout">
        <property name="spacing">
         <number>0</number>
@@ -209,7 +236,7 @@
        </item>
       </layout>
      </item>
-     <item row="6" column="1">
+     <item row="7" column="1">
       <spacer>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -225,7 +252,7 @@
        </property>
       </spacer>
      </item>
-     <item row="7" column="0" alignment="Qt::AlignRight">
+     <item row="8" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_5">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -241,7 +268,7 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="1" colspan="2">
+     <item row="8" column="1" colspan="2">
       <layout class="QHBoxLayout">
        <property name="spacing">
         <number>0</number>
@@ -300,7 +327,7 @@
        </item>
       </layout>
      </item>
-     <item row="8" column="1" colspan="2">
+     <item row="9" column="1" colspan="2">
       <widget class="QLabel" name="useCurrentWindowSizeNote">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -319,7 +346,7 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0" alignment="Qt::AlignRight">
+     <item row="10" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="terminalBellLabel">
        <property name="text">
         <string>Terminal bell mode:</string>
@@ -329,7 +356,7 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="1" colspan="1" alignment="Qt::AlignLeft">
+     <item row="10" column="1" colspan="1" alignment="Qt::AlignLeft">
       <layout class="QHBoxLayout" name="terminalBellLayout">
        <item>
         <widget class="QComboBox" name="terminalBellCombo">

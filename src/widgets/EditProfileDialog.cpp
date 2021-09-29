@@ -229,13 +229,15 @@ void EditProfileDialog::save()
         ProfileManager::instance()->addProfile(_profile);
     }
 
-    if (_tempProfile->isEmpty()) {
+    bool defaultChanged = _isDefault != _generalUi->setAsDefaultButton->isChecked();
+
+    if (_tempProfile->isEmpty() && !defaultChanged) {
         if (isNewProfile) {
             // New profile, we need to save it to disk, even if no settings
             // were changed and _tempProfile is empty
             ProfileManager::instance()->changeProfile(_profile, _profile->setProperties());
         }
-
+        // no changes since last save
         return;
     }
 
@@ -247,6 +249,16 @@ void EditProfileDialog::save()
     while (iter.hasNext()) {
         iter.next();
         _previewedProperties.remove(iter.key());
+    }
+
+    // Update the default profile if needed
+    if (defaultChanged) {
+        Q_ASSERT(_profile != ProfileManager::instance()->fallbackProfile());
+
+        bool defaultChecked = _generalUi->setAsDefaultButton->isChecked();
+        Profile::Ptr newDefault = defaultChecked ? _profile : ProfileManager::instance()->fallbackProfile();
+        ProfileManager::instance()->setDefaultProfile(newDefault);
+        _isDefault = defaultChecked;
     }
 
     createTempProfile();
@@ -464,6 +476,16 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     _generalUi->terminalBellCombo->setModel(bellModeModel);
     _generalUi->terminalBellCombo->setCurrentIndex(profile->property<int>(Profile::BellMode));
 
+    _isDefault = profile == ProfileManager::instance()->defaultProfile();
+    _generalUi->setAsDefaultButton->setChecked(_isDefault);
+    QString appName = QCoreApplication::applicationName();
+    if (appName == QStringLiteral("konsole")) {
+        _generalUi->setAsDefaultButton->setText(i18n("Default profile"));
+    } else {
+        appName[0] = appName[0].toUpper();
+        _generalUi->setAsDefaultButton->setText(i18n("Default profile for new terminal sessions in %1", appName));
+    }
+
     // signals and slots
     connect(_generalUi->dirSelectButton, &QToolButton::clicked, this, &Konsole::EditProfileDialog::selectInitialDir);
     connect(_generalUi->iconSelectButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::selectIcon);
@@ -479,6 +501,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     connect(_generalUi->terminalBellCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](const int index) {
         updateTempProfileProperty(Profile::BellMode, index);
     });
+
+    connect(_generalUi->setAsDefaultButton, &QAbstractButton::toggled, this, &Konsole::EditProfileDialog::updateButtonApply);
 }
 
 void EditProfileDialog::showEnvironmentEditor()
@@ -1361,6 +1385,10 @@ void EditProfileDialog::updateButtonApply()
             userModified = true;
             break;
         }
+    }
+
+    if (_generalUi->setAsDefaultButton->isChecked() != _isDefault) {
+        userModified = true;
     }
 
     _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(userModified);

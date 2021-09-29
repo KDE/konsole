@@ -287,7 +287,7 @@ private:
     void createTempProfile();
 
     // Enable or disable apply button, used only within
-    // updateTempProfileProperty().
+    // updateTempProfileProperty() or when toggling the default profile.
     void updateButtonApply();
 
     static QString groupProfileNames(const ProfileGroup::Ptr &group, int maxLength = -1);
@@ -336,6 +336,8 @@ private:
 
     Profile::Ptr _tempProfile;
     Profile::Ptr _profile;
+
+    bool _isDefault;
 
     QHash<int, QVariant> _previewedProperties;
 
