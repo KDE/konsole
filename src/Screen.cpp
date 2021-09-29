@@ -144,7 +144,8 @@ void Screen::cursorNextLine(int n)
         n = MAX_SCREEN_ARGUMENT;
     }
     _cuX = 0;
-    _cuY = qMin(_cuY + n, _lines - 1);
+    const int stop = _cuY > _bottomMargin ? _lines - 1 : _bottomMargin;
+    _cuY = qMin(stop, _cuY + n);
 }
 
 void Screen::cursorPreviousLine(int n)
