@@ -1110,7 +1110,12 @@ void Vt102Emulation::sendString(const QByteArray &s)
 void Vt102Emulation::reportCursorPosition()
 {
     char tmp[30];
-    snprintf(tmp, sizeof(tmp), "\033[%d;%dR", _currentScreen->getCursorY() + 1, _currentScreen->getCursorX() + 1);
+    int y = _currentScreen->getCursorY() + 1;
+    int x = _currentScreen->getCursorX() + 1;
+    if (_currentScreen->getMode(MODE_Origin)) {
+        y -= _currentScreen->topMargin();
+    }
+    snprintf(tmp, sizeof(tmp), "\033[%d;%dR", y, x);
     sendString(tmp);
 }
 
