@@ -1076,10 +1076,11 @@ void Screen::scrollDown(int from, int n)
     if (from > _bottomMargin) {
         return;
     }
-    if (from + n > _bottomMargin) {
-        n = _bottomMargin - from;
+    if (n >= _bottomMargin + 1 - from) {
+        n = _bottomMargin + 1 - from;
+    } else {
+        moveImage(loc(0, from + n), loc(0, from), loc(_columns - 1, _bottomMargin - n));
     }
-    moveImage(loc(0, from + n), loc(0, from), loc(_columns - 1, _bottomMargin - n));
     clearImage(loc(0, from), loc(_columns - 1, from + n - 1), ' ');
 }
 
