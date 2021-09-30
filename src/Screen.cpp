@@ -309,6 +309,9 @@ void Screen::repeatChars(int n)
 
 void Screen::deleteLines(int n)
 {
+    if (_cuY < _topMargin) {
+        return;
+    }
     if (n < 1) {
         n = 1; // Default
     }
