@@ -132,6 +132,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     _reverseSearch->setCheckable(true);
     _reverseSearch->setToolTip(i18nc("@info:tooltip", "Sets whether search should start from the bottom"));
     connect(_reverseSearch, &QAction::toggled, this, &Konsole::IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting);
+    connect(_reverseSearch, &QAction::toggled, this, &Konsole::IncrementalSearchBar::reverseSearchToggled);
     updateButtonsAccordingToReverseSearchSetting();
     setOptions();
 

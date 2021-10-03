@@ -233,6 +233,7 @@ private Q_SLOTS:
     void searchFrom();
     void findNextInHistory();
     void findPreviousInHistory();
+    void updateMenuIconsAccordingToReverseSearchSetting();
     void changeSearchMatch();
     void saveHistory();
     void showHistoryOptions();

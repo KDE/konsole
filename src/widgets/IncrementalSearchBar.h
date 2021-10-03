@@ -106,6 +106,11 @@ Q_SIGNALS:
     void highlightMatchesToggled(bool);
     /**
      * Emitted when the user toggles the checkbox to indicate whether
+     * the search direction should be reversed.
+     */
+    void reverseSearchToggled(bool);
+    /**
+     * Emitted when the user toggles the checkbox to indicate whether
      * matching for the search text should be case sensitive
      */
     void matchCaseToggled(bool);

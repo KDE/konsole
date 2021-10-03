@@ -578,9 +578,12 @@ void SessionController::setupSearchBar()
     connect(_searchBar, &Konsole::IncrementalSearchBar::searchFromClicked, this, &Konsole::SessionController::searchFrom);
     connect(_searchBar, &Konsole::IncrementalSearchBar::findNextClicked, this, &Konsole::SessionController::findNextInHistory);
     connect(_searchBar, &Konsole::IncrementalSearchBar::findPreviousClicked, this, &Konsole::SessionController::findPreviousInHistory);
+    connect(_searchBar, &Konsole::IncrementalSearchBar::reverseSearchToggled, this, &Konsole::SessionController::updateMenuIconsAccordingToReverseSearchSetting);
     connect(_searchBar, &Konsole::IncrementalSearchBar::highlightMatchesToggled, this, &Konsole::SessionController::highlightMatches);
     connect(_searchBar, &Konsole::IncrementalSearchBar::matchCaseToggled, this, &Konsole::SessionController::changeSearchMatch);
     connect(_searchBar, &Konsole::IncrementalSearchBar::matchRegExpToggled, this, &Konsole::SessionController::changeSearchMatch);
+
+    updateMenuIconsAccordingToReverseSearchSetting();
 }
 
 void SessionController::setShowMenuAction(QAction *action)
@@ -1544,6 +1547,16 @@ void SessionController::findPreviousInHistory()
     setSearchStartTo(_prevSearchResultLine);
 
     beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::ForwardsSearch : Enum::BackwardsSearch);
+}
+void SessionController::updateMenuIconsAccordingToReverseSearchSetting()
+{
+    if (reverseSearchChecked()) {
+        _findNextAction->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
+        _findPreviousAction->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+    } else {
+        _findNextAction->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+        _findPreviousAction->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
+    }
 }
 void SessionController::changeSearchMatch()
 {
