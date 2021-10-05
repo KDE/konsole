@@ -291,12 +291,18 @@ void SessionManager::sessionProfileCommandReceived(const QString &text)
 
     // store the font for each view if zoom was applied so that they can
     // be restored after applying the new profile
-    QHash<TerminalDisplay *, QFont> zoomFontSizes;
+    struct ZoomFontInfo {
+        TerminalDisplay *display = nullptr;
+        QFont font;
+    };
+    std::vector<ZoomFontInfo> zoomFontSizes;
+
     const QList<TerminalDisplay *> viewsList = session->views();
+
     for (TerminalDisplay *view : viewsList) {
-        const QFont &viewCurFont = view->terminalFont()->getVTFont();
+        const QFont viewCurFont = view->terminalFont()->getVTFont();
         if (viewCurFont != _sessionProfiles[session]->font()) {
-            zoomFontSizes.insert(view, viewCurFont);
+            zoomFontSizes.push_back({view, viewCurFont});
         }
     }
 
@@ -321,12 +327,8 @@ void SessionManager::sessionProfileCommandReceived(const QString &text)
     applyProfile(newProfile, true);
     Q_EMIT sessionUpdated(session);
 
-    if (!zoomFontSizes.isEmpty()) {
-        QHashIterator<TerminalDisplay *, QFont> it(zoomFontSizes);
-        while (it.hasNext()) {
-            it.next();
-            it.key()->terminalFont()->setVTFont(it.value());
-        }
+    for (auto &[view, font] : zoomFontSizes) {
+        view->terminalFont()->setVTFont(font);
     }
 }
 
