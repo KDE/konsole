@@ -114,9 +114,9 @@ QString ProcessInfo::validCurrentDir() const
     return dir;
 }
 
-QSet<QString> ProcessInfo::_commonDirNames;
+QStringList ProcessInfo::_commonDirNames;
 
-QSet<QString> ProcessInfo::commonDirNames()
+QStringList ProcessInfo::commonDirNames()
 {
     static bool forTheFirstTime = true;
 
@@ -124,8 +124,8 @@ QSet<QString> ProcessInfo::commonDirNames()
         const KSharedConfigPtr &config = KSharedConfig::openConfig();
         const KConfigGroup &configGroup = config->group("ProcessInfo");
         // Need to make a local copy so the begin() and end() point to the same QList
-        const QStringList commonDirsList = configGroup.readEntry("CommonDirNames", QStringList());
-        _commonDirNames = QSet<QString>(commonDirsList.begin(), commonDirsList.end());
+        _commonDirNames = configGroup.readEntry("CommonDirNames", QStringList());
+        _commonDirNames.removeDuplicates();
 
         forTheFirstTime = false;
     }
@@ -135,26 +135,22 @@ QSet<QString> ProcessInfo::commonDirNames()
 
 QString ProcessInfo::formatShortDir(const QString &input) const
 {
-    if (input == QStringLiteral("/")) {
+    if (input == QLatin1Char('/')) {
         return QStringLiteral("/");
     }
 
     QString result;
 
-    const QStringList &parts = input.split(QDir::separator());
+    const QStringList parts = input.split(QDir::separator());
 
-    QSet<QString> dirNamesToShorten = commonDirNames();
-
-    QListIterator<QString> iter(parts);
-    iter.toBack();
+    QStringList dirNamesToShorten = commonDirNames();
 
     // go backwards through the list of the path's parts
     // adding abbreviations of common directory names
     // and stopping when we reach a dir name which is not
     // in the commonDirNames set
-    while (iter.hasPrevious()) {
-        const QString &part = iter.previous();
-
+    for (auto it = parts.crbegin(), endIt = parts.crend(); it != endIt; ++it) {
+        const QString &part = *it;
         if (dirNamesToShorten.contains(part)) {
             result.prepend(QDir::separator() + part[0]);
         } else {

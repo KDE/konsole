@@ -270,8 +270,8 @@ private:
 
     QVector<QString> _arguments;
 
-    static QSet<QString> commonDirNames();
-    static QSet<QString> _commonDirNames;
+    static QStringList commonDirNames();
+    static QStringList _commonDirNames;
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(ProcessInfo::Fields)
 

@@ -364,12 +364,12 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
 MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
 {
     MainWindow *window = nullptr;
+
     if (m_parser->isSet(QStringLiteral("new-tab"))) {
-        QListIterator<QWidget *> iter(QApplication::topLevelWidgets());
-        iter.toBack();
-        while (iter.hasPrevious()) {
-            window = qobject_cast<MainWindow *>(iter.previous());
-            if (window != nullptr) {
+        const QList<QWidget *> list = QApplication::topLevelWidgets();
+        for (auto it = list.crbegin(), endIt = list.crend(); it != endIt; ++it) {
+            window = qobject_cast<MainWindow *>(*it);
+            if (window) {
                 break;
             }
         }
