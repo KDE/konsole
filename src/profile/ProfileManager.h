@@ -16,6 +16,7 @@
 #include <QSet>
 #include <QStack>
 #include <QStringList>
+#include <QUrl>
 #include <QVariant>
 
 #include <vector>
@@ -229,13 +230,9 @@ private:
 
     struct ShortcutData {
         Profile::Ptr profileKey;
-        QString profilePath;
+        QKeySequence keySeq;
     };
-    QMap<QKeySequence, ShortcutData> _shortcuts; // shortcut keys -> profile path
-
-    // finds out if it's a internal profile or an external one,
-    // fixing the path to point to the correct location for the profile.
-    QString normalizePath(const QString &path) const;
+    std::vector<ShortcutData> _shortcuts;
 };
 
 }
