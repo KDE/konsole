@@ -64,6 +64,7 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     , _advancedUi(nullptr)
     , _tempProfile(nullptr)
     , _profile(nullptr)
+    , _isDefault(false)
     , _previewedProperties(QHash<int, QVariant>())
     , _delayedPreviewProperties(QHash<int, QVariant>())
     , _delayedPreviewTimer(new QTimer(this))
@@ -479,11 +480,11 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     _isDefault = profile == ProfileManager::instance()->defaultProfile();
     _generalUi->setAsDefaultButton->setChecked(_isDefault);
     QString appName = QCoreApplication::applicationName();
-    if (appName == QStringLiteral("konsole")) {
-        _generalUi->setAsDefaultButton->setText(i18n("Default profile"));
-    } else {
-        appName[0] = appName[0].toUpper();
+    if (!appName.isEmpty() && appName != QLatin1String("konsole")) {
+        appName[0] = appName.at(0).toUpper();
         _generalUi->setAsDefaultButton->setText(i18n("Default profile for new terminal sessions in %1", appName));
+    } else {
+        _generalUi->setAsDefaultButton->setText(i18n("Default profile"));
     }
 
     // signals and slots
