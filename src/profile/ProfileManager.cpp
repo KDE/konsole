@@ -215,9 +215,6 @@ void ProfileManager::loadAllProfiles(const QString &defaultProfileFileName)
 
 void ProfileManager::saveSettings()
 {
-    // save default profile
-    saveDefaultProfile();
-
     // save shortcuts
     saveShortcuts();
 
@@ -420,6 +417,8 @@ void ProfileManager::setDefaultProfile(const Profile::Ptr &profile)
     _defaultProfile = profile;
     ProfileModel::instance()->setDefault(profile);
 
+    saveDefaultProfile();
+
     // Setting/unsetting a profile as the default is a sort of a
     // "profile change", useful for updating the icon/font of the
     // "default profile in e.g. 'File -> New Tab' menu.
@@ -439,6 +438,7 @@ void ProfileManager::saveDefaultProfile()
     KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup group = appConfig->group("Desktop Entry");
     group.writeEntry("DefaultProfile", QUrl::fromLocalFile(path).fileName());
+    appConfig->sync();
 }
 
 void ProfileManager::loadShortcuts()
