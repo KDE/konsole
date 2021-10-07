@@ -215,12 +215,7 @@ void ProfileManager::loadAllProfiles(const QString &defaultProfileFileName)
 
 void ProfileManager::saveSettings()
 {
-    // save shortcuts
     saveShortcuts();
-
-    // ensure default/shortcuts settings are synced into disk
-    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
-    appConfig->sync();
 }
 
 void ProfileManager::sortProfiles()
@@ -467,17 +462,24 @@ void ProfileManager::loadShortcuts()
 
 void ProfileManager::saveShortcuts()
 {
-    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
-    KConfigGroup shortcutGroup = appConfig->group("Profile Shortcuts");
-    shortcutGroup.deleteGroup();
+    if (_profileShortcutsChanged) {
+        _profileShortcutsChanged = false;
 
-    for (const auto &[profile, keySeq] : _shortcuts) {
-        shortcutGroup.writeEntry(keySeq.toString(), profile->name());
+        KSharedConfigPtr appConfig = KSharedConfig::openConfig();
+        KConfigGroup shortcutGroup = appConfig->group("Profile Shortcuts");
+        shortcutGroup.deleteGroup();
+
+        for (const auto &[profile, keySeq] : _shortcuts) {
+            shortcutGroup.writeEntry(keySeq.toString(), profile->name());
+        }
+
+        appConfig->sync();
     }
 }
 
 void ProfileManager::setShortcut(Profile::Ptr profile, const QKeySequence &keySequence)
 {
+    _profileShortcutsChanged = true;
     QKeySequence existingShortcut = shortcut(profile);
 
     auto profileIt = std::find_if(_shortcuts.begin(), _shortcuts.end(), [&profile](const ShortcutData &data) {

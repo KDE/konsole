@@ -181,7 +181,7 @@ Q_SIGNALS:
     void shortcutChanged(const Profile::Ptr &profile, const QKeySequence &newShortcut);
 
 public Q_SLOTS:
-    /** Saves settings (shortcuts, default profile etc.) to disk. */
+    /** Saves settings (shortcuts) to disk. */
     void saveSettings();
 
 protected Q_SLOTS:
@@ -233,6 +233,10 @@ private:
         QKeySequence keySeq;
     };
     std::vector<ShortcutData> _shortcuts;
+
+    // Set to true when setShortcut() is called so that when the ProfileSettings
+    // dialog is accepted the profiles shorcut changes are saved
+    bool _profileShortcutsChanged = false;
 };
 
 }

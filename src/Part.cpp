@@ -67,10 +67,7 @@ Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &)
     createSession();
 }
 
-Part::~Part()
-{
-    ProfileManager::instance()->saveSettings();
-}
+Part::~Part() = default;
 
 bool Part::openFile()
 {

@@ -57,7 +57,6 @@ ProfileSettings::~ProfileSettings() = default;
 void ProfileSettings::slotAccepted()
 {
     ProfileManager::instance()->saveSettings();
-    deleteLater();
 }
 
 void ProfileSettings::doubleClicked(const QModelIndex &idx)

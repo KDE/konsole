@@ -54,9 +54,10 @@ public:
      */
     void setShortcutEditorVisible(bool visible);
 
-protected:
 private Q_SLOTS:
+    friend class MainWindow;
     void slotAccepted();
+
     void deleteSelected();
     void setSelectedAsDefault();
     void createProfile();

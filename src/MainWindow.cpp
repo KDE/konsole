@@ -766,9 +766,11 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
     generalPage->setIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
     confDialog->addPage(generalPage, true);
 
-    auto *profilePage = new KPageWidgetItem(new ProfileSettings(confDialog), profilePageName);
+    auto *profileSettings = new ProfileSettings(confDialog);
+    auto *profilePage = new KPageWidgetItem(profileSettings, profilePageName);
     profilePage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-profiles")));
     confDialog->addPage(profilePage, true);
+    connect(confDialog, &QDialog::accepted, profileSettings, &ProfileSettings::slotAccepted);
 
     const QString tabBarPageName = i18nc("@title Preferences page name", "Tab Bar / Splitters");
     auto tabBarPage = new KPageWidgetItem(new TabBarSettings(confDialog), tabBarPageName);

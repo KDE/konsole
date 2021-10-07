@@ -109,7 +109,6 @@ QStringList Application::getCustomCommand(QStringList &args)
 Application::~Application()
 {
     SessionManager::instance()->closeAllSessions();
-    ProfileManager::instance()->saveSettings();
 }
 
 MainWindow *Application::newMainWindow()
