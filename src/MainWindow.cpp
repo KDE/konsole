@@ -20,6 +20,7 @@
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KCrash>
+#include <KHamburgerMenu>
 #include <KIconUtils>
 #include <KLocalizedString>
 #include <KShortcutsDialog>
@@ -38,6 +39,7 @@
 
 // Konsole
 #include "BookmarkHandler.h"
+#include "BookmarkMenu.h"
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
 #include "WindowSystemInfo.h"
@@ -61,6 +63,8 @@
 
 #include <konsoledebug.h>
 
+#include <functional>
+
 using namespace Konsole;
 
 MainWindow::MainWindow()
@@ -70,6 +74,7 @@ MainWindow::MainWindow()
     , _toggleMenuBarAction(nullptr)
     , _newTabMenuAction(nullptr)
     , _pluggedController(nullptr)
+    , _hamburgerMenu(nullptr)
 {
     // Set the WA_NativeWindow attribute to force the creation of the QWindow.
     // Without this QWidget::windowHandle() returns 0.
@@ -372,6 +377,13 @@ void MainWindow::setupActions()
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), &QMenuBar::setVisible, collection);
     collection->setDefaultShortcut(_toggleMenuBarAction, Konsole::ACCEL | Qt::Key_M);
+    connect(_toggleMenuBarAction, &QAction::triggered, [=] {
+        // Remove menubar icons set for the hamburger menu, so they don't override
+        // the text when they appear in the in-window menubar
+        collection->action(QStringLiteral("bookmark"))->setIcon(QIcon());
+        static_cast<QMenu *>(factory()->container(QStringLiteral("plugins"), this))->setIcon(QIcon());
+    });
+
     // Set up themes
     actionCollection()->addAction(QStringLiteral("window-colorscheme-menu"), new AppColorSchemeChooser(actionCollection()));
 
@@ -411,6 +423,94 @@ void MainWindow::setupActions()
             viewManager()->loadLayoutFile();
         }
     });
+
+    // Hamburger menu for when the menubar is hidden
+    _hamburgerMenu = KStandardAction::hamburgerMenu(nullptr, nullptr, collection);
+    _hamburgerMenu->setShowMenuBarAction(_toggleMenuBarAction);
+    _hamburgerMenu->setMenuBar(menuBar());
+    connect(_hamburgerMenu, &KHamburgerMenu::aboutToShowMenu, [this]() {
+        updateHamburgerMenu();
+    });
+}
+
+void MainWindow::updateHamburgerMenu()
+{
+    KActionCollection *collection = actionCollection();
+    QList<KActionCollection *> allCollections = actionCollection()->allCollections();
+
+    std::function<QAction *(const QString &)> actionByName = [allCollections](const QString &name) {
+        for (auto *ac : allCollections) {
+            auto actions = ac->actions();
+            for (auto *action : actions) {
+                if (action->objectName() == name) {
+                    return action;
+                }
+            }
+        }
+        return static_cast<QAction *>(nullptr);
+    };
+    QMenu *menu = _hamburgerMenu->menu();
+    if (!menu) {
+        menu = new QMenu(widget());
+        _hamburgerMenu->setMenu(menu);
+    } else {
+        menu->clear();
+    }
+
+    menu->addAction(collection->action(QStringLiteral("new-window")));
+    menu->addAction(collection->action(QStringLiteral("new-tab")));
+    menu->addAction(actionByName(QStringLiteral("file_save_as")));
+
+    menu->addSeparator();
+
+    menu->addAction(actionByName(QStringLiteral("edit-copy")));
+    menu->addAction(actionByName(QStringLiteral("edit-paste")));
+    menu->addAction(actionByName(QStringLiteral("edit-find")));
+
+    menu->addSeparator();
+
+    // FIXME: missing
+    menu->addAction(actionByName(QStringLiteral("view-full-screen")));
+    menu->addAction(actionByName(QStringLiteral("view-split")));
+    // FIXME: this causes it to get duplicated and then there's a shortcut conflict
+    menu->addAction(actionByName(QStringLiteral("clear-history-and-reset")));
+    menu->addAction(actionByName(QStringLiteral("enlarge-font")));
+    menu->addAction(actionByName(QStringLiteral("reset-font-size")));
+    menu->addAction(actionByName(QStringLiteral("shrink-font")));
+
+    menu->addSeparator();
+
+    menu->addAction(actionByName(QStringLiteral("edit-current-profile")));
+    menu->addAction(actionByName(QStringLiteral("switch-profile")));
+
+    menu->addSeparator();
+
+    auto monitorMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("visibility")), i18nc("@action:inmenu menu for 'monitor for action' actions", "Monitor"));
+    monitorMenu->addAction(actionByName(QStringLiteral("monitor-silence")));
+    monitorMenu->addAction(actionByName(QStringLiteral("monitor-activity")));
+    monitorMenu->addAction(actionByName(QStringLiteral("monitor-process-finish")));
+    menu->addMenu(monitorMenu);
+    _hamburgerMenu->hideActionsOf(monitorMenu);
+
+    auto bookmarkMenu = collection->action(QStringLiteral("bookmark"));
+    bookmarkMenu->setIcon(QIcon::fromTheme(QStringLiteral("bookmarks")));
+    menu->addAction(bookmarkMenu);
+
+    auto pluginsMenu = static_cast<QMenu *>(factory()->container(QStringLiteral("plugins"), this));
+    pluginsMenu->setIcon(QIcon::fromTheme(QStringLiteral("plugins")));
+    menu->addMenu(pluginsMenu);
+
+    auto configureMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), i18nc("@action:inmenu menu for configure actions", "Configure"));
+    configureMenu->addAction(collection->action(QStringLiteral("edit-current-profile")));
+    configureMenu->addAction(collection->action(QString::fromUtf8(KStandardAction::name(KStandardAction::SwitchApplicationLanguage))));
+    configureMenu->addAction(collection->action(QString::fromUtf8(KStandardAction::name(KStandardAction::KeyBindings))));
+    configureMenu->addAction(collection->action(QString::fromUtf8(KStandardAction::name(KStandardAction::ConfigureToolbars))));
+    configureMenu->addAction(collection->action(QString::fromUtf8(KStandardAction::name(KStandardAction::Preferences))));
+    configureMenu->addAction(collection->action(QStringLiteral("configure-settings")));
+    configureMenu->addAction(collection->action(QStringLiteral("configure-language")));
+    configureMenu->addAction(collection->action(QStringLiteral("configure-shortcuts")));
+    configureMenu->addAction(collection->action(QStringLiteral("configure-notifications")));
+    _hamburgerMenu->hideActionsOf(configureMenu);
 }
 
 void MainWindow::viewFullScreen(bool fullScreen)
@@ -429,6 +529,10 @@ void MainWindow::applyMainWindowSettings(const KConfigGroup &config)
     // Override the menubar state from the config file
     if (_windowArgsMenuBarVisible.enabled) {
         menuBar()->setVisible(_windowArgsMenuBarVisible.showMenuBar);
+    } else {
+        // FIXME: only do this on first run; we don't want existing Konsole users
+        // to see any changes to their UI!
+        menuBar()->hide();
     }
 
     _toggleMenuBarAction->setChecked(menuBar()->isVisibleTo(this));

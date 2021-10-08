@@ -754,7 +754,7 @@ void SessionController::setupCommonActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
     setEditProfileActionText(SessionManager::instance()->sessionProfile(session()));
 
-    _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), this);
+    _switchProfileMenu = new KActionMenu(QIcon::fromTheme(QStringLiteral("exchange-positions")), i18n("Switch Profile"), this);
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
     connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
 #if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 77, 0)

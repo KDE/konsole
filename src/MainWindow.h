@@ -28,6 +28,7 @@
 class QAction;
 class KActionMenu;
 class KToggleAction;
+class KHamburgerMenu;
 
 namespace Konsole
 {
@@ -202,12 +203,14 @@ private:
     // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
     // with the same name in 'source' (see QAction::ActiveShortcut)
     static void syncActiveShortcuts(KActionCollection *dest, const KActionCollection *source);
+    void updateHamburgerMenu();
 
 private:
     ViewManager *_viewManager;
     BookmarkHandler *_bookmarkHandler;
     KToggleAction *_toggleMenuBarAction;
     KActionMenu *_newTabMenuAction;
+    KHamburgerMenu *_hamburgerMenu;
 
     QPointer<SessionController> _pluggedController;
     std::vector<IKonsolePlugin *> _plugins;
