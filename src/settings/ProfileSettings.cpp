@@ -30,12 +30,12 @@ ProfileSettings::ProfileSettings(QWidget *parent)
 {
     setupUi(this);
 
-    profilesList->setModel(ProfileModel::instance());
-    profilesList->setItemDelegateForColumn(ProfileModel::SHORTCUT, new ShortcutItemDelegate(this));
-    profilesList->setSelectionMode(QAbstractItemView::SingleSelection);
+    profileListView->setModel(ProfileModel::instance());
+    profileListView->setItemDelegateForColumn(ProfileModel::SHORTCUT, new ShortcutItemDelegate(this));
+    profileListView->setSelectionMode(QAbstractItemView::SingleSelection);
 
     // double clicking the profile name opens the profile edit dialog
-    connect(profilesList, &QAbstractItemView::doubleClicked, this, &Konsole::ProfileSettings::doubleClicked);
+    connect(profileListView, &QAbstractItemView::doubleClicked, this, &Konsole::ProfileSettings::doubleClicked);
 
     // populate the table with profiles
     populateTable();
@@ -71,23 +71,23 @@ void ProfileSettings::populateTable()
 {
     QStyleOptionViewItem opt;
     opt.features = QStyleOptionViewItem::HasCheckIndicator | QStyleOptionViewItem::HasDecoration;
-    auto *listHeader = profilesList->header();
+    auto *listHeader = profileListView->header();
 
-    profilesList->resizeColumnToContents(ProfileModel::NAME);
+    profileListView->resizeColumnToContents(ProfileModel::NAME);
 
     listHeader->setSectionResizeMode(ProfileModel::NAME, QHeaderView::ResizeMode::Stretch);
     listHeader->setSectionResizeMode(ProfileModel::SHORTCUT, QHeaderView::ResizeMode::ResizeToContents);
     listHeader->setStretchLastSection(false);
     listHeader->setSectionsMovable(false);
 
-    profilesList->hideColumn(ProfileModel::PROFILE);
+    profileListView->hideColumn(ProfileModel::PROFILE);
 
     // listen for changes in the table selection and update the state of the form's buttons
     // accordingly.
     //
     // it appears that the selection model is changed when the model itself is replaced,
     // so the signals need to be reconnected each time the model is updated.
-    connect(profilesList->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Konsole::ProfileSettings::tableSelectionChanged);
+    connect(profileListView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Konsole::ProfileSettings::tableSelectionChanged);
 }
 
 void ProfileSettings::tableSelectionChanged(const QItemSelection &selected)
@@ -173,7 +173,7 @@ void ProfileSettings::editSelected()
 
 Profile::Ptr ProfileSettings::currentProfile() const
 {
-    QItemSelectionModel *selection = profilesList->selectionModel();
+    QItemSelectionModel *selection = profileListView->selectionModel();
 
     if ((selection == nullptr) || !selection->hasSelection()) {
         return Profile::Ptr();
@@ -200,5 +200,5 @@ bool ProfileSettings::isProfileWritable(Profile::Ptr profile) const
 
 void ProfileSettings::setShortcutEditorVisible(bool visible)
 {
-    profilesList->setColumnHidden(ProfileModel::SHORTCUT, !visible);
+    profileListView->setColumnHidden(ProfileModel::SHORTCUT, !visible);
 }
