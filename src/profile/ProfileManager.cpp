@@ -436,11 +436,9 @@ void ProfileManager::saveDefaultProfile()
         path = writer.getPath(_defaultProfile);
     }
 
-    QFileInfo fileInfo(path);
-
     KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup group = appConfig->group("Desktop Entry");
-    group.writeEntry("DefaultProfile", fileInfo.fileName());
+    group.writeEntry("DefaultProfile", QUrl::fromLocalFile(path).fileName());
 }
 
 void ProfileManager::loadShortcuts()
