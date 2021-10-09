@@ -286,6 +286,8 @@ void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property
     Q_ASSERT(profile);
 
     const QString origPath = profile->path();
+    const QKeySequence origShortcut = shortcut(profile);
+    const bool isDefaultProfile = profile == defaultProfile();
 
     const QString uniqueProfileName = generateUniqueName();
 
@@ -340,30 +342,25 @@ void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property
     // it has no file on disk
     if (persistent && !profile->isHidden()) {
         profile->setProperty(Profile::Path, saveProfile(profile));
-
-        // if the profile was renamed, after saving the new profile
-        // delete the old/redundant profile.
-        // only do this if origPath is not empty, because it's empty
-        // when creating a new profile, this works around a bug where
-        // the newly created profile appears twice in the ProfileSettings
-        // dialog
-        if (!origPath.isEmpty() && profile->path() != origPath) {
-            // this is needed to include the old profile too
-            const QList<Profile::Ptr> availableProfiles = ProfileManager::instance()->allProfiles();
-            for (const Profile::Ptr &oldProfile : availableProfiles) {
-                if (oldProfile->path() == origPath) {
-                    // assign the same shortcut of the old profile to
-                    // the newly renamed profile
-                    const auto oldShortcut = shortcut(oldProfile);
-                    if (deleteProfile(oldProfile)) {
-                        setShortcut(profile, oldShortcut);
-                    }
-                }
-            }
-        }
     }
 
-    if (isNameChanged) {
+    if (isNameChanged) { // Renamed?
+        // origPath is empty when saving a new profile
+        if (!origPath.isEmpty()) {
+            // Delete the old/redundant .profile from disk
+            QFile::remove(origPath);
+
+            // Change the default profile name to the new one
+            if (isDefaultProfile) {
+                setDefaultProfile(profile);
+            }
+
+            // If the profile had a shortcut, re-assign it to the profile
+            if (!origShortcut.isEmpty()) {
+                setShortcut(profile, origShortcut);
+            }
+        }
+
         sortProfiles();
     }
 
