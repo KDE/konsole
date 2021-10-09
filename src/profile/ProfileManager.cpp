@@ -237,7 +237,6 @@ void ProfileManager::sortProfiles()
 
 QList<Profile::Ptr> ProfileManager::allProfiles()
 {
-    loadAllProfiles();
     sortProfiles();
     return loadedProfiles();
 }
@@ -350,7 +349,6 @@ void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property
         // dialog
         if (!origPath.isEmpty() && profile->path() != origPath) {
             // this is needed to include the old profile too
-            loadAllProfiles();
             const QList<Profile::Ptr> availableProfiles = ProfileManager::instance()->allProfiles();
             for (const Profile::Ptr &oldProfile : availableProfiles) {
                 if (oldProfile->path() == origPath) {

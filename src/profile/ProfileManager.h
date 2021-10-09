@@ -68,13 +68,6 @@ public:
     QList<Profile::Ptr> loadedProfiles() const;
 
     /**
-     * Loads all available profiles.  This involves reading each
-     * profile configuration file from disk and parsing it.
-     * Therefore it should only be done when necessary.
-     */
-    void loadAllProfiles(const QString &defaultProfileFileName = {});
-
-    /**
      * Loads a profile from the specified path and registers
      * it with the ProfileManager.
      *
@@ -196,6 +189,13 @@ private Q_SLOTS:
 
 private:
     Q_DISABLE_COPY(ProfileManager)
+
+    /**
+     * Loads all available profiles. This involves reading each
+     * profile configuration file from disk and parsing it.
+     * Therefore it should only be done when necessary.
+     */
+    void loadAllProfiles(const QString &defaultProfileFileName = {});
 
     // loads the mappings between shortcut key sequences and
     // profile paths
