@@ -1661,7 +1661,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 
 void EditProfileDialog::setTextEditorCombo(const Profile::Ptr &profile)
 {
-    std::array<Enum::TextEditorCmd, 7> editorsList =
+    static const Enum::TextEditorCmd editorsList[] =
         {Enum::Kate, Enum::KWrite, Enum::KDevelop, Enum::QtCreator, Enum::Gedit, Enum::gVim, Enum::CustomTextEditor};
 
     auto *editorCombo = _mouseUi->textEditorCombo;
