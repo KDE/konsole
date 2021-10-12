@@ -11,6 +11,7 @@ X-DBUS-StartupType=Unique
 StartupNotify=true
 X-KDE-AuthorizeAction=shell_access
 StartupWMClass=konsole
+Keywords=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh
 
 Name=Konsole
 Name[af]=Konsole
