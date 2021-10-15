@@ -12,6 +12,13 @@ StartupNotify=true
 X-KDE-AuthorizeAction=shell_access
 StartupWMClass=konsole
 Keywords=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh
+Keywords[az]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;terminal;konsol;işə salmaq;icra etmək;əmr;əmr sətri
+Keywords[ca]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh
+Keywords[es]=terminal;consola;script;guion;guión;lanzar;ejecutar;comando;orden;línea de órdenes;línea de comandos;cli;bash;sh;shell;intérprete;zsh
+Keywords[nl]=terminal;console;script;run;uitvoeren;commando;commandoregel;cli;bash;sh;shell;zsh
+Keywords[sv]=terminal;konsoll;skript;köra;kommando;kommandorad;bash;sh;skal;zsh
+Keywords[uk]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;термінал;консоль;скрипт;сценарій;виконати;запустити;команда;командний рядок;клі;командний інтерфейс;баш;оболонка;шел;зш;
+Keywords[x-test]=xxterminalxx;xxconsolexx;xxscriptxx;xxrunxx;xxexecutexx;xxcommandxx;xxcommand-linexx;xxcommandlinexx;xxclixx;xxbashxx;xxshxx;xxshellxx;xxzshxx
 
 Name=Konsole
 Name[af]=Konsole
