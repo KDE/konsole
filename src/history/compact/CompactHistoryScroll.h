@@ -10,10 +10,11 @@
 
 #include "history/HistoryScroll.h"
 #include "konsoleprivate_export.h"
+#include <deque>
 
 namespace Konsole
 {
-class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
+class KONSOLEPRIVATE_EXPORT CompactHistoryScroll final : public HistoryScroll
 {
     typedef QVector<Character> TextLine;
 
@@ -38,11 +39,11 @@ public:
     int reflowLines(const int columns) override;
 
 private:
-    QList<Character> _cells;
-    QList<int> _index;
-    QList<LineProperty> _flags;
+    std::deque<Character> _cells;
+    std::vector<int> _index;
+    std::vector<LineProperty> _flags;
 
-    int _maxLineCount;
+    size_t _maxLineCount;
 
     void removeFirstLine();
 

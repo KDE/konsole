@@ -937,7 +937,7 @@ void Screen::displayCharacter(uint c)
 
     // ensure current line vector has enough elements
     if (_screenLines.at(_cuY).size() < _cuX + w) {
-        _screenLines[_cuY].reserve(_columns);
+        //         _screenLines[_cuY].reserve(_columns);
         _screenLines[_cuY].resize(_cuX + w);
     }
 

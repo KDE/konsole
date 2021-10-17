@@ -12,15 +12,12 @@
 using namespace Konsole;
 
 struct reflowData { // data to reflow lines
-    QList<int> index;
-    QList<LineProperty> flags;
+    std::vector<int> index;
+    std::vector<LineProperty> flags;
 };
 
 CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount)
     : HistoryScroll(new CompactHistoryType(maxLineCount))
-    , _cells()
-    , _index()
-    , _flags()
     , _maxLineCount(0)
 {
     setMaxNbLines(maxLineCount);
@@ -29,13 +26,13 @@ CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount)
 void CompactHistoryScroll::removeFirstLine()
 {
     if (_index.size() > 1) {
-        _flags.removeFirst();
+        _flags.erase(_flags.begin());
 
-        const int removing = _index.first();
-        _index.removeFirst();
-        std::transform(_index.begin(), _index.end(), _index.begin(), [removing](int i) {
+        const int removing = _index.front();
+        std::transform(_index.begin() + 1, _index.end(), _index.begin(), [removing](int i) {
             return i - removing;
         });
+        _index.pop_back();
 
         _cells.erase(_cells.begin(), _cells.begin() + removing);
     } else {
@@ -49,8 +46,8 @@ void CompactHistoryScroll::addCells(const Character a[], const int count)
 {
     std::copy(a, a + count, std::back_inserter(_cells));
 
-    _index.append(_cells.size());
-    _flags.append(LINE_DEFAULT);
+    _index.push_back(_cells.size());
+    _flags.push_back(LINE_DEFAULT);
 
     if (_index.size() > _maxLineCount) {
         removeFirstLine();
@@ -59,7 +56,7 @@ void CompactHistoryScroll::addCells(const Character a[], const int count)
 
 void CompactHistoryScroll::addLine(const LineProperty lineProperty)
 {
-    auto &flag = _flags.last();
+    auto &flag = _flags.back();
     flag = lineProperty;
 }
 
@@ -75,7 +72,7 @@ int CompactHistoryScroll::getMaxLines() const
 
 int CompactHistoryScroll::getLineLen(int lineNumber) const
 {
-    if (lineNumber < 0 || lineNumber >= _index.size()) {
+    if (size_t(lineNumber) >= _index.size()) {
         return 0;
     }
 
@@ -87,7 +84,7 @@ void CompactHistoryScroll::getCells(const int lineNumber, const int startColumn,
     if (count == 0) {
         return;
     }
-    Q_ASSERT(lineNumber < _index.size());
+    Q_ASSERT((size_t)lineNumber < _index.size());
 
     Q_ASSERT(startColumn >= 0);
     Q_ASSERT(startColumn <= lineLen(lineNumber) - count);
@@ -102,7 +99,7 @@ void CompactHistoryScroll::setMaxNbLines(const int lineCount)
     Q_ASSERT(lineCount >= 0);
     _maxLineCount = lineCount;
 
-    while (_index.size() > lineCount) {
+    while (_index.size() > _maxLineCount) {
         removeFirstLine();
     }
 }
@@ -110,10 +107,10 @@ void CompactHistoryScroll::setMaxNbLines(const int lineCount)
 void CompactHistoryScroll::removeCells()
 {
     if (_index.size() > 1) {
-        _index.removeLast();
-        _flags.removeLast();
+        _index.pop_back();
+        _flags.pop_back();
 
-        _cells.erase(_cells.begin() + _index.last(), _cells.end());
+        _cells.erase(_cells.begin() + _index.back(), _cells.end());
     } else {
         _cells.clear();
         _index.clear();
@@ -123,13 +120,13 @@ void CompactHistoryScroll::removeCells()
 
 bool CompactHistoryScroll::isWrappedLine(const int lineNumber) const
 {
-    Q_ASSERT(lineNumber < _index.size());
+    Q_ASSERT((size_t)lineNumber < _index.size());
     return (_flags.at(lineNumber) & LINE_WRAPPED) > 0;
 }
 
 LineProperty CompactHistoryScroll::getLineProperty(const int lineNumber) const
 {
-    Q_ASSERT(lineNumber < _index.size());
+    Q_ASSERT((size_t)lineNumber < _index.size());
     return _flags.at(lineNumber);
 }
 
@@ -141,8 +138,8 @@ int CompactHistoryScroll::reflowLines(const int columns)
         return end - start;
     };
     auto setNewLine = [](reflowData &change, int index, LineProperty flag) {
-        change.index.append(index);
-        change.flags.append(flag);
+        change.index.push_back(index);
+        change.flags.push_back(flag);
     };
 
     int currentPos = 0;
@@ -169,7 +166,7 @@ int CompactHistoryScroll::reflowLines(const int columns)
     _flags = std::move(newLine.flags);
 
     int deletedLines = 0;
-    while (getLines() > _maxLineCount) {
+    while ((size_t)getLines() > _maxLineCount) {
         removeFirstLine();
         ++deletedLines;
     }
