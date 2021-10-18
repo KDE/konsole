@@ -765,14 +765,6 @@ private Q_SLOTS:
 
     void sessionAttributeRequest(int id, uint terminator);
 
-    /**
-     * Requests that the color the text for any tabs associated with
-     * this session should be changed;
-     *
-     * TODO: Document what the parameter does
-     */
-    void changeTabTextColor(int);
-
 private:
     Q_DISABLE_COPY(Session)
 

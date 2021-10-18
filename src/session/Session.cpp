@@ -123,7 +123,6 @@ Session::Session(QObject *parent)
     });
     connect(_emulation, &Konsole::Emulation::zmodemDownloadDetected, this, &Konsole::Session::fireZModemDownloadDetected);
     connect(_emulation, &Konsole::Emulation::zmodemUploadDetected, this, &Konsole::Session::fireZModemUploadDetected);
-    connect(_emulation, &Konsole::Emulation::changeTabTextColorRequest, this, &Konsole::Session::changeTabTextColor);
     connect(_emulation, &Konsole::Emulation::profileChangeCommandReceived, this, &Konsole::Session::profileChangeCommandReceived);
     connect(_emulation, &Konsole::Emulation::flowControlKeyPressed, this, &Konsole::Session::updateFlowControlState);
     connect(_emulation, &Konsole::Emulation::primaryScreenInUse, this, &Konsole::Session::onPrimaryScreenInUse);
@@ -693,11 +692,6 @@ void Session::updateFlowControlState(bool suspended)
             display->outputSuspended(false);
         }
     }
-}
-
-void Session::changeTabTextColor(int i)
-{
-    qCDebug(KonsoleDebug) << "Changing tab text color is not implemented " << i;
 }
 
 void Session::onPrimaryScreenInUse(bool use)

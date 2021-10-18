@@ -676,7 +676,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
                                break;
 
     // change tab text color : \e[28;<color>t  color: 0-16,777,215
-    case token_csi_ps('t',   28) : Q_EMIT changeTabTextColorRequest      ( p        );          break;
+    case token_csi_ps('t',   28) : /* IGNORED: konsole-specific KDE3-era extension, not implemented */ break;
 
     case token_csi_ps('K',   0) : _currentScreen->clearToEndOfLine     (          ); break;
     case token_csi_ps('K',   1) : _currentScreen->clearToBeginOfLine   (          ); break;

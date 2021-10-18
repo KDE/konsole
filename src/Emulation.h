@@ -273,16 +273,6 @@ Q_SIGNALS:
     void zmodemUploadDetected();
 
     /**
-     * Requests that the color of the text used
-     * to represent the tabs associated with this
-     * emulation be changed.  This is a Konsole-specific
-     * extension from pre-KDE 4 times.
-     *
-     * TODO: Document how the parameter works.
-     */
-    void changeTabTextColorRequest(int color);
-
-    /**
      * This is emitted when the program (typically editors and other full-screen
      * applications, ones that take up the whole terminal display), running in
      * the terminal indicates whether or not it is interested in Mouse Tracking
