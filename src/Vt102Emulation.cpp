@@ -670,9 +670,9 @@ void Vt102Emulation::processToken(int token, int p, int q)
                                 break;
     case token_esc_de('8'      ) : _currentScreen->helpAlign            (          ); break;
 
-    // resize = \e[8;<row>;<col>t
-    case token_csi_ps('t',   8) : setImageSize( p /*lines */, q /* columns */ );
-                               Q_EMIT imageResizeRequest(QSize(q, p));
+    // resize = \e[8;<rows>;<cols>t
+    case token_csi_ps('t',   8) : setImageSize( p /* rows */, q /* columns */ );
+                               Q_EMIT imageResizeRequest(QSize(q, p)); // Note columns (x), rows (y) in QSize
                                break;
 
     // change tab text color : \e[28;<color>t  color: 0-16,777,215
