@@ -1620,10 +1620,20 @@ int Session::foregroundProcessId()
 
 bool Session::isForegroundProcessActive()
 {
+    const auto pid = processId();
+    const auto fgid = _shellProcess->foregroundProcessGroup();
+
+    // On FreeBSD, after exiting the shell, the foreground GID is
+    // an invalid value, and the "shell" PID is 0. Those are not equal,
+    // so the check below would return true.
+    if (pid == 0) {
+        return false;
+    }
+
     // This check is wrong when Konsole is started with '-e cmd'
     // as there will only be one process.
     // See BKO 134581 for no popup when closing session
-    return (processId() != _shellProcess->foregroundProcessGroup());
+    return (pid != fgid);
 }
 
 QString Session::foregroundProcessName()
