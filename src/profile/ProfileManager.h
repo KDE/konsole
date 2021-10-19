@@ -19,6 +19,8 @@
 #include <QUrl>
 #include <QVariant>
 
+#include <KSharedConfig>
+
 #include <vector>
 
 // Konsole
@@ -181,7 +183,7 @@ Q_SIGNALS:
     void shortcutChanged(const Profile::Ptr &profile, const QKeySequence &newShortcut);
 
 public Q_SLOTS:
-    /** Saves settings (shortcuts) to disk. */
+    /** Saves settings (currently only profile shortcuts) to disk. */
     void saveSettings();
 
 protected Q_SLOTS:
@@ -237,6 +239,8 @@ private:
     // Set to true when setShortcut() is called so that when the ProfileSettings
     // dialog is accepted the profiles shorcut changes are saved
     bool _profileShortcutsChanged = false;
+
+    KSharedConfigPtr m_config;
 };
 
 }

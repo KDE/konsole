@@ -50,16 +50,16 @@ static bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
 }
 
 ProfileManager::ProfileManager()
+    : m_config(KSharedConfig::openConfig())
 {
     // load fallback profile
     initFallbackProfile();
     _defaultProfile = _fallbackProfile;
 
     // lookup the default profile specified in <App>rc
-    // for stand-alone Konsole, appConfig is just konsolerc
-    // for konsolepart, appConfig might be yakuakerc, dolphinrc, katerc...
-    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
-    KConfigGroup group = appConfig->group("Desktop Entry");
+    // For stand-alone Konsole, m_config is just "konsolerc"
+    // For konsolepart, m_config might be "yakuakerc", "dolphinrc", "katerc"...
+    KConfigGroup group = m_config->group("Desktop Entry");
     QString defaultProfileFileName = group.readEntry("DefaultProfile", "");
 
     // if the hosting application of konsolepart does not specify its own
@@ -430,16 +430,14 @@ void ProfileManager::saveDefaultProfile()
         path = writer.getPath(_defaultProfile);
     }
 
-    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
-    KConfigGroup group = appConfig->group("Desktop Entry");
+    KConfigGroup group = m_config->group("Desktop Entry");
     group.writeEntry("DefaultProfile", QUrl::fromLocalFile(path).fileName());
-    appConfig->sync();
+    m_config->sync();
 }
 
 void ProfileManager::loadShortcuts()
 {
-    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
-    KConfigGroup shortcutGroup = appConfig->group("Profile Shortcuts");
+    KConfigGroup shortcutGroup = m_config->group("Profile Shortcuts");
 
     const QLatin1String suffix(".profile");
     auto findByName = [this, suffix](const QString &name) {
@@ -465,15 +463,14 @@ void ProfileManager::saveShortcuts()
     if (_profileShortcutsChanged) {
         _profileShortcutsChanged = false;
 
-        KSharedConfigPtr appConfig = KSharedConfig::openConfig();
-        KConfigGroup shortcutGroup = appConfig->group("Profile Shortcuts");
+        KConfigGroup shortcutGroup = m_config->group("Profile Shortcuts");
         shortcutGroup.deleteGroup();
 
         for (const auto &[profile, keySeq] : _shortcuts) {
             shortcutGroup.writeEntry(keySeq.toString(), profile->name());
         }
 
-        appConfig->sync();
+        m_config->sync();
     }
 }
 
