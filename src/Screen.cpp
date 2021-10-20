@@ -96,6 +96,7 @@ void Screen::cursorUp(int n)
         n = 1; // Default
     }
     const int stop = _cuY < _topMargin ? 0 : _topMargin;
+    _cuX = qMin(_columns - 1, _cuX); // nowrap!
     _cuY = qMax(stop, _cuY - n);
 }
 
@@ -109,6 +110,7 @@ void Screen::cursorDown(int n)
         n = MAX_SCREEN_ARGUMENT;
     }
     const int stop = _cuY > _bottomMargin ? _lines - 1 : _bottomMargin;
+    _cuX = qMin(_columns - 1, _cuX); // nowrap!
     _cuY = qMin(stop, _cuY + n);
 }
 
@@ -118,6 +120,7 @@ void Screen::cursorLeft(int n)
     if (n < 1) {
         n = 1; // Default
     }
+    _cuX = qMin(_columns - 1, _cuX); // nowrap!
     _cuX = qMax(0, _cuX - n);
 }
 
@@ -768,6 +771,7 @@ void Screen::reset()
 
 void Screen::backspace()
 {
+    _cuX = qMin(_columns - 1, _cuX); // nowrap!
     _cuX = qMax(0, _cuX - 1);
 
     if (_screenLines.at(_cuY).size() < _cuX + 1) {
