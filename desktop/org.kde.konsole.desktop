@@ -23,6 +23,7 @@ Keywords[nl]=terminal;console;script;run;uitvoeren;commando;commandoregel;cli;ba
 Keywords[sv]=terminal;konsoll;skript;köra;kommando;kommandorad;bash;sh;skal;zsh
 Keywords[uk]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;термінал;консоль;скрипт;сценарій;виконати;запустити;команда;командний рядок;клі;командний інтерфейс;баш;оболонка;шел;зш;
 Keywords[x-test]=xxterminalxx;xxconsolexx;xxscriptxx;xxrunxx;xxexecutexx;xxcommandxx;xxcommand-linexx;xxcommandlinexx;xxclixx;xxbashxx;xxshxx;xxshellxx;xxzshxx
+Keywords[zh_CN]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;终端;控制台;脚本;执行;运行;命令;命令行;命令行界面;外壳
 
 Name=Konsole
 Name[af]=Konsole
