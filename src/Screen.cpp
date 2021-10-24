@@ -447,7 +447,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     // Check if _history need to change
     if (_enableReflowLines && new_columns != _columns && _history->getLines() && _history->getMaxLines()) {
         // Join next line from _screenLine to _history
-        while (!_screenLines.isEmpty() && _history->isWrappedLine(_history->getLines() - 1)) {
+        while (!_screenLines.empty() && _history->isWrappedLine(_history->getLines() - 1)) {
             fastAddHistLine();
             --cursorLine;
         }
@@ -476,11 +476,11 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
         // Analize the lines and move the data to lines below.
         int currentPos = 0;
-        while (currentPos < (cursorLine + cursorLineCorrection) && currentPos < _screenLines.count() - 1) {
+        while (currentPos < (cursorLine + cursorLineCorrection) && currentPos < (int)_screenLines.size() - 1) {
             // Join wrapped line in current position
             if ((_lineProperties.at(currentPos) & LINE_WRAPPED) != 0) {
                 _screenLines[currentPos].append(_screenLines.at(currentPos + 1));
-                _screenLines.remove(currentPos + 1);
+                _screenLines.erase(_screenLines.begin() + currentPos + 1);
                 _lineProperties.remove(currentPos);
                 --cursorLine;
                 continue;
@@ -497,7 +497,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 auto values = _screenLines.at(currentPos).mid(new_columns);
                 _screenLines[currentPos].resize(new_columns);
                 _lineProperties.insert(currentPos + 1, _lineProperties.at(currentPos));
-                _screenLines.insert(currentPos + 1, std::move(values));
+                _screenLines.insert(_screenLines.begin() + currentPos + 1, std::move(values));
                 _lineProperties[currentPos] |= LINE_WRAPPED;
                 ++cursorLine;
             }
@@ -514,14 +514,13 @@ void Screen::resizeImage(int new_lines, int new_columns)
     if (_enableReflowLines) {
         // Check cursor position and send from _history to _screenLines
         ImageLine histLine;
-        histLine.reserve(1024);
         while (cursorLine < oldCursorLine && _history->getLines()) {
             int histPos = _history->getLines() - 1;
             int histLineLen = _history->getLineLen(histPos);
             LineProperty lineProperty = _history->getLineProperty(histPos);
             histLine.resize(histLineLen);
             _history->getCells(histPos, 0, histLineLen, histLine.data());
-            _screenLines.insert(0, histLine);
+            _screenLines.insert(_screenLines.begin(), std::move(histLine));
             _lineProperties.insert(0, lineProperty);
             _history->removeCells();
             ++cursorLine;
@@ -529,7 +528,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     }
 
     _lineProperties.resize(new_lines + 1);
-    if (_lineProperties.size() > _screenLines.size()) {
+    if (_lineProperties.size() > (int)_screenLines.size()) {
         std::fill(_lineProperties.begin() + _screenLines.size(), _lineProperties.end(), LINE_DEFAULT);
     }
     _screenLines.resize(new_lines + 1);
@@ -936,7 +935,7 @@ void Screen::displayCharacter(uint c)
     }
 
     // ensure current line vector has enough elements
-    if (_screenLines.at(_cuY).size() < _cuX + w) {
+    if (_screenLines[_cuY].size() < _cuX + w) {
         //         _screenLines[_cuY].reserve(_columns);
         _screenLines[_cuY].resize(_cuX + w);
     }
@@ -1618,7 +1617,7 @@ void Screen::fastAddHistLine()
         _escapeSequenceUrlExtractor->historyLinesRemoved(1);
     }
 
-    _screenLines.removeFirst();
+    _screenLines.erase(_screenLines.begin());
     _lineProperties.removeFirst();
 }
 
