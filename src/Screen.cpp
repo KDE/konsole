@@ -481,7 +481,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             if ((_lineProperties.at(currentPos) & LINE_WRAPPED) != 0) {
                 _screenLines[currentPos].append(_screenLines.at(currentPos + 1));
                 _screenLines.erase(_screenLines.begin() + currentPos + 1);
-                _lineProperties.remove(currentPos);
+                _lineProperties.erase(_lineProperties.begin() + currentPos);
                 --cursorLine;
                 continue;
             }
@@ -496,7 +496,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             if (lineSize > new_columns && !(_lineProperties.at(currentPos) & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
                 auto values = _screenLines.at(currentPos).mid(new_columns);
                 _screenLines[currentPos].resize(new_columns);
-                _lineProperties.insert(currentPos + 1, _lineProperties.at(currentPos));
+                _lineProperties.insert(_lineProperties.begin() + currentPos + 1, _lineProperties.at(currentPos));
                 _screenLines.insert(_screenLines.begin() + currentPos + 1, std::move(values));
                 _lineProperties[currentPos] |= LINE_WRAPPED;
                 ++cursorLine;
@@ -521,14 +521,14 @@ void Screen::resizeImage(int new_lines, int new_columns)
             histLine.resize(histLineLen);
             _history->getCells(histPos, 0, histLineLen, histLine.data());
             _screenLines.insert(_screenLines.begin(), std::move(histLine));
-            _lineProperties.insert(0, lineProperty);
+            _lineProperties.insert(_lineProperties.begin(), lineProperty);
             _history->removeCells();
             ++cursorLine;
         }
     }
 
     _lineProperties.resize(new_lines + 1);
-    if (_lineProperties.size() > (int)_screenLines.size()) {
+    if (_lineProperties.size() > _screenLines.size()) {
         std::fill(_lineProperties.begin() + _screenLines.size(), _lineProperties.end(), LINE_DEFAULT);
     }
     _screenLines.resize(new_lines + 1);
@@ -641,7 +641,7 @@ void Screen::copyFromScreen(Character *dest, int startLine, int count) const
     for (int line = startLine; line < endLine; ++line) {
         const int srcLineStartIndex = line * _columns;
         const int destLineStartIndex = (line - startLine) * _columns;
-        const int lastColumn = (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
+        const int lastColumn = (line < (int)_lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
 
         for (int column = 0; column < _columns; ++column) {
             const int srcIndex = srcLineStartIndex + column;
@@ -738,7 +738,7 @@ QVector<LineProperty> Screen::getLineProperties(int startLine, int endLine) cons
 
 int Screen::getScreenLineColumns(const int line) const
 {
-    if (line < _lineProperties.size() && _lineProperties.at(line) & LINE_DOUBLEWIDTH) {
+    if (line < (int)_lineProperties.size() && _lineProperties.at(line) & LINE_DOUBLEWIDTH) {
         return _columns / 2;
     }
 
@@ -1562,7 +1562,7 @@ int Screen::copyLineToStream(int line,
         // count cannot be any greater than length
         count = qBound(0, count, length - start);
 
-        Q_ASSERT(screenLine < _lineProperties.count());
+        Q_ASSERT((size_t)screenLine < _lineProperties.size());
         currentLineProperties |= _lineProperties[screenLine];
     }
 
@@ -1618,7 +1618,7 @@ void Screen::fastAddHistLine()
     }
 
     _screenLines.erase(_screenLines.begin());
-    _lineProperties.removeFirst();
+    _lineProperties.erase(_lineProperties.begin());
 }
 
 void Screen::addHistLine()

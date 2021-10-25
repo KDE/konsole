@@ -708,7 +708,7 @@ private:
     bool _isResize;
     bool _enableReflowLines;
 
-    QVector<LineProperty> _lineProperties;
+    std::vector<LineProperty> _lineProperties;
 
     // history buffer ---------------
     std::unique_ptr<HistoryScroll> _history;
