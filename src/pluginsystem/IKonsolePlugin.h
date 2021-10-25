@@ -31,7 +31,7 @@ class KONSOLE_EXPORT IKonsolePlugin : public QObject
     Q_OBJECT
 public:
     IKonsolePlugin(QObject *parent, const QVariantList &args);
-    ~IKonsolePlugin();
+    ~IKonsolePlugin() override;
 
     QString name() const;
 

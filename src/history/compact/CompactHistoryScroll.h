@@ -19,7 +19,7 @@ class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
 
 public:
     explicit CompactHistoryScroll(const unsigned int maxLineCount = 1000);
-    ~CompactHistoryScroll() = default;
+    ~CompactHistoryScroll() override = default;
 
     int getLines() const override;
     int getMaxLines() const override;

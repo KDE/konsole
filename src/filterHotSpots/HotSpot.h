@@ -48,7 +48,7 @@ public:
      * in a block of text.
      */
     HotSpot(int startLine, int startColumn, int endLine, int endColumn);
-    virtual ~HotSpot();
+    ~HotSpot() override;
 
     enum Type {
         // the type of the hotspot is not specified

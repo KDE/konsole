@@ -27,7 +27,7 @@ class KONSOLE_EXPORT PluginManager : public QObject
     Q_OBJECT
 public:
     PluginManager();
-    ~PluginManager();
+    ~PluginManager() override;
     void loadAllPlugins();
     void registerMainWindow(Konsole::MainWindow *window);
 

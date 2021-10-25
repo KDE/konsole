@@ -23,7 +23,7 @@ public:
     };
 
     SSHManagerModel(QObject *parent = nullptr);
-    ~SSHManagerModel();
+    ~SSHManagerModel() override;
 
     QStandardItem *addTopLevelItem(const QString &toplevel);
     void addChildItem(const SSHConfigurationData &config, const QString &parentName);

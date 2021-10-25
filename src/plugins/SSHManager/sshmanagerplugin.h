@@ -25,7 +25,7 @@ class SSHManagerPlugin : public Konsole::IKonsolePlugin
     Q_OBJECT
 public:
     SSHManagerPlugin(QObject *object, const QVariantList &args);
-    ~SSHManagerPlugin();
+    ~SSHManagerPlugin() override;
 
     void createWidgetsForMainWindow(Konsole::MainWindow *mainWindow) override;
     void activeViewChanged(Konsole::SessionController *controller) override;

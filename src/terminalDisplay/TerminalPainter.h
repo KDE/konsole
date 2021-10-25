@@ -39,7 +39,7 @@ class TerminalPainter : public QObject
 {
 public:
     explicit TerminalPainter(QObject *parent = nullptr);
-    ~TerminalPainter() = default;
+    ~TerminalPainter() override = default;
 
 public Q_SLOTS:
     // -- Drawing helpers --

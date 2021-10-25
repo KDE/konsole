@@ -23,7 +23,7 @@ class KONSOLESESSION_EXPORT SessionDisplayConnection : public QObject
     Q_OBJECT
 public:
     SessionDisplayConnection(Session *session, TerminalDisplay *view, QObject *parent = nullptr);
-    ~SessionDisplayConnection() = default;
+    ~SessionDisplayConnection() override = default;
 
     QPointer<Session> session();
     QPointer<TerminalDisplay> view();

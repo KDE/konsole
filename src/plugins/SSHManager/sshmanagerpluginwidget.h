@@ -29,7 +29,7 @@ class SSHManagerTreeWidget : public QWidget
     Q_OBJECT
 public:
     SSHManagerTreeWidget(QWidget *parent = nullptr);
-    ~SSHManagerTreeWidget();
+    ~SSHManagerTreeWidget() override;
 
     // shows the panel for add a new ssh info.
     Q_SLOT void showInfoPane();
