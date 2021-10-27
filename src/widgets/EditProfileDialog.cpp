@@ -906,7 +906,7 @@ void EditProfileDialog::updateColorSchemeList(const QString &selectedColorScheme
         _appearanceUi->colorSchemeList->setModel(new QStandardItemModel(this));
     }
 
-    const ColorScheme *selectedColorScheme = ColorSchemeManager::instance()->findColorScheme(selectedColorSchemeName);
+    std::shared_ptr<const ColorScheme> selectedColorScheme = ColorSchemeManager::instance()->findColorScheme(selectedColorSchemeName);
 
     auto *model = qobject_cast<QStandardItemModel *>(_appearanceUi->colorSchemeList->model());
 
@@ -916,9 +916,9 @@ void EditProfileDialog::updateColorSchemeList(const QString &selectedColorScheme
 
     QStandardItem *selectedItem = nullptr;
 
-    const QList<const ColorScheme *> schemeList = ColorSchemeManager::instance()->allColorSchemes();
+    const QList<std::shared_ptr<const ColorScheme>> schemeList = ColorSchemeManager::instance()->allColorSchemes();
 
-    for (const ColorScheme *scheme : schemeList) {
+    for (const std::shared_ptr<const ColorScheme> &scheme : schemeList) {
         QStandardItem *item = new QStandardItem(scheme->description());
         item->setData(QVariant::fromValue(scheme), Qt::UserRole + 1);
         item->setData(QVariant::fromValue(_profile->font()), Qt::UserRole + 2);
@@ -1091,7 +1091,7 @@ void EditProfileDialog::preview(int property, const QVariant &value)
 
 void EditProfileDialog::previewColorScheme(const QModelIndex &index)
 {
-    const QString &name = index.data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+    const QString &name = index.data(Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>()->name();
     delayedPreview(Profile::ColorScheme, name);
 }
 
@@ -1135,7 +1135,7 @@ void EditProfileDialog::removeColorScheme()
     if (selected.isEmpty()) {
         return;
     }
-    const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+    const QString &name = selected.first().data(Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>()->name();
     Q_ASSERT(!name.isEmpty());
     if (ColorSchemeManager::instance()->deleteColorScheme(name)) {
         _appearanceUi->colorSchemeList->model()->removeRow(selected.first().row());
@@ -1148,7 +1148,7 @@ void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntri
     for (auto &entry : qAsConst(changedEntries)) {
         switch (entry.status()) {
         case KNS3::Entry::Installed:
-            for (const auto &file : entry.installedFiles()) {
+            for (const QString &file : entry.installedFiles()) {
                 if (ColorSchemeManager::instance()->loadColorScheme(file)) {
                     continue;
                 }
@@ -1188,7 +1188,7 @@ void EditProfileDialog::resetColorScheme()
     QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
-        const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+        const QString &name = selected.first().data(Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>()->name();
 
         ColorSchemeManager::instance()->deleteColorScheme(name);
 
@@ -1202,9 +1202,9 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
     // Finding selected ColorScheme
     QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
     QAbstractItemModel *model = _appearanceUi->colorSchemeList->model();
-    const ColorScheme *colors = nullptr;
+    std::shared_ptr<const ColorScheme> colors;
     if (!selected.isEmpty()) {
-        colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme *>();
+        colors = model->data(selected.first(), Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>();
     } else {
         colors = ColorSchemeManager::instance()->defaultColorScheme();
     }
@@ -1244,7 +1244,7 @@ void EditProfileDialog::editColorScheme()
 
 void EditProfileDialog::saveColorScheme(const ColorScheme &scheme, bool isNewScheme)
 {
-    auto newScheme = new ColorScheme(scheme);
+    std::shared_ptr<ColorScheme> newScheme = std::make_shared<ColorScheme>(scheme);
 
     // if this is a new color scheme, pick a name based on the description
     if (isNewScheme) {
@@ -1267,7 +1267,7 @@ void EditProfileDialog::colorSchemeSelected()
 
     if (!selected.isEmpty()) {
         QAbstractItemModel *model = _appearanceUi->colorSchemeList->model();
-        const auto *colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme *>();
+        std::shared_ptr<const ColorScheme> colors = model->data(selected.first(), Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>();
         if (colors != nullptr) {
             updateTempProfileProperty(Profile::ColorScheme, colors->name());
             previewColorScheme(selected.first());
@@ -1286,7 +1286,7 @@ void EditProfileDialog::updateColorSchemeButtons()
     QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
-        const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+        const QString &name = selected.first().data(Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>()->name();
 
         bool isResettable = ColorSchemeManager::instance()->canResetColorScheme(name);
         _appearanceUi->resetColorSchemeButton->setEnabled(isResettable);
@@ -1329,7 +1329,7 @@ void EditProfileDialog::updateTransparencyWarning()
     // zero or one indexes can be selected
     const QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
     for (const QModelIndex &index : selected) {
-        bool needTransparency = index.data(Qt::UserRole + 1).value<const ColorScheme *>()->opacity() < 1.0;
+        bool needTransparency = index.data(Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>()->opacity() < 1.0;
 
         if (!needTransparency) {
             _appearanceUi->transparencyWarningWidget->setHidden(true);

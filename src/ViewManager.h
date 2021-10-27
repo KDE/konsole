@@ -179,7 +179,7 @@ public:
     TerminalDisplay *createView(Session *session);
     void attachView(TerminalDisplay *terminal, Session *session);
 
-    static const ColorScheme *colorSchemeForProfile(const QExplicitlySharedDataPointer<Profile> &profile);
+    static std::shared_ptr<const ColorScheme> colorSchemeForProfile(const QExplicitlySharedDataPointer<Profile> &profile);
     /** Reorder the terminal display history list */
     void updateTerminalDisplayHistory(TerminalDisplay *terminalDisplay = nullptr, bool remove = false);
 

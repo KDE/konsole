@@ -44,7 +44,6 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     : QDialog(parent)
     , _isNewScheme(false)
     , _ui(nullptr)
-    , _colors(nullptr)
 {
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Apply);
     auto mainWidget = new QWidget(this);
@@ -133,7 +132,6 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
 
 ColorSchemeEditor::~ColorSchemeEditor()
 {
-    delete _colors;
     delete _ui;
 }
 
@@ -228,13 +226,11 @@ void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomized)
     _colors->setColorRandomization(randomized);
 }
 
-void ColorSchemeEditor::setup(const ColorScheme *scheme, bool isNewScheme)
+void ColorSchemeEditor::setup(const std::shared_ptr<const ColorScheme> &scheme, bool isNewScheme)
 {
     _isNewScheme = isNewScheme;
 
-    delete _colors;
-
-    _colors = new ColorScheme(*scheme);
+    _colors = std::make_shared<ColorScheme>(*scheme);
 
     if (_isNewScheme) {
         setWindowTitle(i18nc("@title:window", "New Color Scheme"));
@@ -264,7 +260,7 @@ void ColorSchemeEditor::setup(const ColorScheme *scheme, bool isNewScheme)
     _ui->wallpaperPath->setText(scheme->wallpaper()->path());
 }
 
-void ColorSchemeEditor::setupColorTable(const ColorScheme *colors)
+void ColorSchemeEditor::setupColorTable(const std::shared_ptr<ColorScheme> &colors)
 {
     QColor table[TABLE_COLORS];
     colors->getColorTable(table);

@@ -34,15 +34,11 @@ public:
      * requested via a call to findColorScheme()
      */
     ColorSchemeManager();
-    /**
-     * Destroys the ColorSchemeManager and saves any modified color schemes to disk.
-     */
-    ~ColorSchemeManager();
 
     /**
      * Returns the default color scheme for Konsole
      */
-    const ColorScheme *defaultColorScheme() const;
+    const std::shared_ptr<const ColorScheme> &defaultColorScheme() const;
 
     /**
      * Returns the color scheme with the given name or 0 if no
@@ -52,13 +48,13 @@ public:
      * The first time that a color scheme with a particular name is
      * requested, the configuration information is loaded from disk.
      */
-    const ColorScheme *findColorScheme(const QString &name);
+    std::shared_ptr<const ColorScheme> findColorScheme(const QString &name);
 
     /**
      * Adds a new color scheme to the manager.  If @p scheme has the same name as
      * an existing color scheme, it replaces the existing scheme.
      */
-    void addColorScheme(ColorScheme *scheme);
+    void addColorScheme(const std::shared_ptr<ColorScheme> &scheme);
 
     /**
      * Deletes a color scheme.  Returns true on successful deletion or false otherwise.
@@ -72,7 +68,7 @@ public:
      *
      * Subsequent calls will be inexpensive.
      */
-    QList<const ColorScheme *> allColorSchemes();
+    QList<std::shared_ptr<const ColorScheme>> allColorSchemes();
 
     /** Returns the global color scheme manager instance. */
     static ColorSchemeManager *instance();
@@ -89,11 +85,11 @@ public:
      */
     bool isColorSchemeDeletable(const QString &name);
 
-    // loads a color scheme from a KDE 4+ .colorscheme file
-    bool loadColorScheme(const QString &filePath);
-
     // unloads a color scheme by it's file path (doesn't delete!)
     bool unloadColorScheme(const QString &filePath);
+
+    // loads a color scheme from a KDE 4+ .colorscheme file
+    std::shared_ptr<const ColorScheme> loadColorScheme(const QString &filePath);
 
     // @returns the scheme name of a given file or a null string if the file is
     //   no theme
@@ -102,18 +98,12 @@ public:
 private:
     // returns a list of paths of color schemes in the KDE 4+ .colorscheme file format
     QStringList listColorSchemes();
-    // loads all of the color schemes
-    void loadAllColorSchemes();
     // finds the path of a color scheme
     QString findColorSchemePath(const QString &name) const;
     // @returns whether a path is a valid color scheme name
     static bool pathIsColorScheme(const QString &path);
 
-    QHash<QString, const ColorScheme *> _colorSchemes;
-
-    bool _haveLoadedAll;
-
-    static const ColorScheme _defaultColorScheme;
+    QHash<QString, std::weak_ptr<const ColorScheme>> _colorSchemes;
 
     Q_DISABLE_COPY(ColorSchemeManager)
 };

@@ -428,7 +428,7 @@ public Q_SLOTS:
     /**
      * Return the current color scheme
      */
-    ColorScheme const *colorScheme() const
+    const std::shared_ptr<const ColorScheme> &colorScheme() const
     {
         return _colorScheme;
     }
@@ -702,7 +702,7 @@ private:
 
     QSize _size;
 
-    ColorScheme const *_colorScheme;
+    std::shared_ptr<const ColorScheme> _colorScheme;
     ColorSchemeWallpaper::Ptr _wallpaper;
 
     // list of filters currently applied to the display.  used for links and

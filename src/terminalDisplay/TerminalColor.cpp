@@ -29,7 +29,7 @@ TerminalColor::TerminalColor(QObject *parent)
     setColorTable(ColorScheme::defaultTable);
 }
 
-void TerminalColor::applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint randomSeed)
+void TerminalColor::applyProfile(const Profile::Ptr &profile, const std::shared_ptr<const ColorScheme> &colorScheme, uint randomSeed)
 {
     QColor table[TABLE_COLORS];
     colorScheme->getColorTable(table, randomSeed);

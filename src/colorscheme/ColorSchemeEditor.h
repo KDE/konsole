@@ -48,14 +48,14 @@ public:
     ~ColorSchemeEditor() override;
 
     /** Initializes the dialog with the properties of the specified color scheme. */
-    void setup(const ColorScheme *scheme, bool isNewScheme);
+    void setup(const std::shared_ptr<const ColorScheme> &scheme, bool isNewScheme);
     /** Returns the modified color scheme. */
     ColorScheme &colorScheme() const;
     bool isNewScheme() const;
 
 Q_SIGNALS:
     /** Emitted when the colors in the color scheme change. */
-    void colorsChanged(ColorScheme *scheme);
+    void colorsChanged(std::shared_ptr<ColorScheme> scheme);
     /** Used to send back colorscheme changes into the profile edited */
     void colorSchemeSaveRequested(const ColorScheme &scheme, bool isNewScheme);
 
@@ -76,11 +76,11 @@ private Q_SLOTS:
 private:
     Q_DISABLE_COPY(ColorSchemeEditor)
 
-    void setupColorTable(const ColorScheme *table);
+    void setupColorTable(const std::shared_ptr<ColorScheme> &table);
 
     bool _isNewScheme;
     Ui::ColorSchemeEditor *_ui;
-    ColorScheme *_colors;
+    std::shared_ptr<ColorScheme> _colors;
 };
 }
 

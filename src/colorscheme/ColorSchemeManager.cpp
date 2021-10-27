@@ -23,14 +23,7 @@
 using namespace Konsole;
 
 ColorSchemeManager::ColorSchemeManager()
-    : _colorSchemes(QHash<QString, const ColorScheme *>())
-    , _haveLoadedAll(false)
 {
-}
-
-ColorSchemeManager::~ColorSchemeManager()
-{
-    qDeleteAll(_colorSchemes);
 }
 
 Q_GLOBAL_STATIC(ColorSchemeManager, theColorSchemeManager)
@@ -40,62 +33,55 @@ ColorSchemeManager *ColorSchemeManager::instance()
     return theColorSchemeManager;
 }
 
-void ColorSchemeManager::loadAllColorSchemes()
+QList<std::shared_ptr<const ColorScheme>> ColorSchemeManager::allColorSchemes()
 {
     int failed = 0;
 
-    const QStringList nativeColorSchemes = listColorSchemes();
-    for (const QString &colorScheme : nativeColorSchemes) {
-        if (!loadColorScheme(colorScheme)) {
+    QList<std::shared_ptr<const ColorScheme>> ret;
+    for (const QString &name : listColorSchemes()) {
+        std::shared_ptr<const ColorScheme> scheme = findColorScheme(colorSchemeNameFromPath(name));
+        if (!scheme) {
             failed++;
+            continue;
         }
+        ret.append(scheme);
     }
 
     if (failed > 0) {
         qCDebug(ColorSchemeDebug) << "failed to load " << failed << " color schemes.";
     }
 
-    _haveLoadedAll = true;
+    return ret;
 }
 
-QList<const ColorScheme *> ColorSchemeManager::allColorSchemes()
-{
-    if (!_haveLoadedAll) {
-        loadAllColorSchemes();
-    }
-
-    return _colorSchemes.values();
-}
-
-bool ColorSchemeManager::loadColorScheme(const QString &filePath)
+std::shared_ptr<const ColorScheme> ColorSchemeManager::loadColorScheme(const QString &filePath)
 {
     if (!pathIsColorScheme(filePath) || !QFile::exists(filePath)) {
-        return false;
+        return nullptr;
     }
 
-    auto name = colorSchemeNameFromPath(filePath);
+    const QString name = colorSchemeNameFromPath(filePath);
 
     KConfig config(filePath, KConfig::NoGlobals);
-    auto scheme = new ColorScheme();
+    std::shared_ptr<ColorScheme> scheme = std::make_shared<ColorScheme>();
     scheme->setName(name);
     scheme->read(config);
 
     if (scheme->name().isEmpty()) {
         qCDebug(ColorSchemeDebug) << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
-        delete scheme;
-        return false;
+        return nullptr;
     }
 
     if (!_colorSchemes.contains(name)) {
         _colorSchemes.insert(scheme->name(), scheme);
     } else {
         // qDebug() << "color scheme with name" << scheme->name() << "has already been" <<
-        //         "found, ignoring.";
+        //         "found, replacing.";
 
-        delete scheme;
+        _colorSchemes[name] = scheme;
     }
 
-    return true;
+    return scheme;
 }
 
 bool ColorSchemeManager::unloadColorScheme(const QString &filePath)
@@ -103,8 +89,7 @@ bool ColorSchemeManager::unloadColorScheme(const QString &filePath)
     if (!pathIsColorScheme(filePath)) {
         return false;
     }
-    auto name = colorSchemeNameFromPath(filePath);
-    delete _colorSchemes.take(name);
+    _colorSchemes.remove(colorSchemeNameFromPath(filePath));
     return true;
 }
 
@@ -131,20 +116,15 @@ QStringList ColorSchemeManager::listColorSchemes()
     return colorschemes;
 }
 
-const ColorScheme ColorSchemeManager::_defaultColorScheme;
-const ColorScheme *ColorSchemeManager::defaultColorScheme() const
+const std::shared_ptr<const ColorScheme> &ColorSchemeManager::defaultColorScheme() const
 {
-    return &_defaultColorScheme;
+    static const std::shared_ptr<const ColorScheme> defaultScheme = std::make_shared<const ColorScheme>();
+    return defaultScheme;
 }
 
-void ColorSchemeManager::addColorScheme(ColorScheme *scheme)
+void ColorSchemeManager::addColorScheme(const std::shared_ptr<ColorScheme> &scheme)
 {
-    // remove existing colorscheme with the same name
-    if (_colorSchemes.contains(scheme->name())) {
-        delete _colorSchemes.take(scheme->name());
-    }
-
-    _colorSchemes.insert(scheme->name(), scheme);
+    _colorSchemes[scheme->name()] = scheme;
 
     // save changes to disk
 
@@ -163,14 +143,14 @@ bool ColorSchemeManager::deleteColorScheme(const QString &name)
     // look up the path and delete
     QString path = findColorSchemePath(name);
     if (QFile::remove(path)) {
-        delete _colorSchemes.take(name);
+        _colorSchemes.remove(name);
         return true;
     }
     qCDebug(ColorSchemeDebug) << "Failed to remove color scheme -" << path;
     return false;
 }
 
-const ColorScheme *ColorSchemeManager::findColorScheme(const QString &name)
+std::shared_ptr<const ColorScheme> ColorSchemeManager::findColorScheme(const QString &name)
 {
     if (name.isEmpty()) {
         return defaultColorScheme();
@@ -185,17 +165,21 @@ const ColorScheme *ColorSchemeManager::findColorScheme(const QString &name)
     }
 
     if (_colorSchemes.contains(name)) {
-        return _colorSchemes[name];
+        std::shared_ptr<const ColorScheme> colorScheme = _colorSchemes.value(name).lock();
+        if (colorScheme) {
+            return colorScheme;
+        } else {
+            // Remove outdated weak pointer
+            _colorSchemes.remove(name);
+        }
     }
     // look for this color scheme
     QString path = findColorSchemePath(name);
-    if (!path.isEmpty() && loadColorScheme(path)) {
-        return findColorScheme(name);
+    if (path.isEmpty()) {
+        qCDebug(ColorSchemeDebug) << "Could not find color scheme - " << name;
+        return nullptr;
     }
-
-    qCDebug(ColorSchemeDebug) << "Could not find color scheme - " << name;
-
-    return nullptr;
+    return loadColorScheme(path);
 }
 
 QString ColorSchemeManager::findColorSchemePath(const QString &name) const

@@ -28,7 +28,7 @@ ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject *parent)
 
 void ColorSchemeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    const auto *scheme = index.data(Qt::UserRole + 1).value<const ColorScheme *>();
+    std::shared_ptr<const ColorScheme> scheme = index.data(Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>();
     QFont profileFont = index.data(Qt::UserRole + 2).value<QFont>();
     Q_ASSERT(scheme);
     if (scheme == nullptr) {

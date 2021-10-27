@@ -826,9 +826,9 @@ TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
     return display;
 }
 
-const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr &profile)
+std::shared_ptr<const ColorScheme> ViewManager::colorSchemeForProfile(const Profile::Ptr &profile)
 {
-    const ColorScheme *colorScheme = ColorSchemeManager::instance()->findColorScheme(profile->colorScheme());
+    std::shared_ptr<const ColorScheme> colorScheme = ColorSchemeManager::instance()->findColorScheme(profile->colorScheme());
     if (colorScheme == nullptr) {
         colorScheme = ColorSchemeManager::instance()->defaultColorScheme();
     }

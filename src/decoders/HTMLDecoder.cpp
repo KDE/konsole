@@ -28,7 +28,7 @@ HTMLDecoder::HTMLDecoder(const QString &colorSchemeName, const QFont &profileFon
     , _lastBackColor(CharacterColor())
     , _validProfile(false)
 {
-    const ColorScheme *colorScheme = nullptr;
+    std::shared_ptr<const ColorScheme> colorScheme = nullptr;
 
     if (!colorSchemeName.isEmpty()) {
         colorScheme = ColorSchemeManager::instance()->findColorScheme(colorSchemeName);

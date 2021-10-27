@@ -13,6 +13,9 @@
 #include <QMetaType>
 #include <QSharedData>
 
+// C++
+#include <memory>
+
 // Konsole
 #include "ColorSchemeWallpaper.h"
 
@@ -186,6 +189,6 @@ private:
 };
 }
 
-Q_DECLARE_METATYPE(const Konsole::ColorScheme *)
+Q_DECLARE_METATYPE(std::shared_ptr<const Konsole::ColorScheme>)
 
 #endif // COLORSCHEME_H

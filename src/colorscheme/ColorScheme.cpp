@@ -25,6 +25,12 @@
 // Konsole
 #include "colorschemedebug.h"
 
+//define DEBUG_LOADING_TIME
+#ifdef DEBUG_LOADING_TIME
+#include <QElapsedTimer>
+#endif
+
+
 namespace
 {
 const int FGCOLOR_INDEX = 0;
@@ -436,6 +442,10 @@ bool ColorScheme::blur() const
 
 void ColorScheme::read(const KConfig &config)
 {
+#ifdef DEBUG_LOADING_TIME
+    QElapsedTimer t; t.start();
+#endif
+
     KConfigGroup configGroup = config.group("General");
 
     const QString schemeDescription = configGroup.readEntry("Description", i18nc("@item", "Un-named Color Scheme"));
@@ -449,6 +459,10 @@ void ColorScheme::read(const KConfig &config)
     for (int i = 0; i < TABLE_COLORS; i++) {
         readColorEntry(config, i);
     }
+
+#ifdef DEBUG_LOADING_TIME
+    qDebug() << name() << "loaded in" << t.elapsed() << "ms";
+#endif
 }
 
 void ColorScheme::readColorEntry(const KConfig &config, int index)
