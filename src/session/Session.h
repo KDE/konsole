@@ -309,7 +309,19 @@ public:
     /** See setAutoClose() */
     bool autoClose() const;
 
-    /** Returns true if the user has started a program in the session. */
+    /**
+     * Returns true if the user has started a program in the session.
+     * Examples of what counts as a "program" are:
+     * - `vim` (interactive, blocks the shell)
+     * - `find /` (non-interactive, potentially long-running, blocks the shell)
+     * - a sub-shell started by hand (e.g. running `/bin/bash` from the shell in the session)
+     * **Non** examples are:
+     * - the shell started by the session (e.g. `/bin/bash`)
+     * - backgrounded processes (e.g. `find / &`)
+     *
+     * If all processes in the session have exited already, returns false.
+     *
+     */
     bool isForegroundProcessActive();
 
     /** Returns the name of the current foreground process. */
