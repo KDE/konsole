@@ -41,7 +41,7 @@
 <holder>&Jonathan.Singer;</holder>
 </copyright>
 <copyright>
-    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year><year>2017</year><year>2018</year><year>2020</year>
+    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year><year>2017</year><year>2018</year><year>2020</year><year>2021</year>
 <holder>&Kurt.Hindenburg;</holder>
 </copyright>
 
@@ -52,8 +52,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2021-04-25</date>
-<releaseinfo>Applications 21.08</releaseinfo>
+<date>2021-10-28</date>
+<releaseinfo>Applications 21.12</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -153,12 +153,6 @@ is now available in the <guilabel>Manage Profiles...</guilabel> dialog.
 </para></listitem>
 
 </orderedlist>
-</para>
-
-<para>
-Any profiles which have <guilabel>Show in Menu</guilabel> checked will be listed by their name in the
-<menuchoice><guimenu>File</guimenu><guisubmenu>New Tab</guisubmenu></menuchoice> menu.
-There will be no submenu if only the default profile is to be shown.
 </para>
 
 </sect1>
@@ -387,9 +381,11 @@ to show or hide the menubar.
 <guimenu>File</guimenu><guimenuitem>New Tab</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Opens a new tab with the default profile</action>
-<note><para>&konsole; ships with a default profile.
-Any new profiles added by the user will be listed in the submenu.
-There will be no submenu if only the default profile is to be shown.
+<note><para>
+The first profile in the submenu will always be "Default" which is the
+built-in profile.
+All other profiles will be listed below that in alphabetical order.
+The user specified default profile will be in bold type.
 </para></note>
 </para></listitem></varlistentry>
 
@@ -435,9 +431,9 @@ at the current directory</action>.  By default, that is
 <term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>W</keycap></keycombo></shortcut>
 <guimenu>File</guimenu>
-<guimenuitem>Close Tab</guimenuitem></menuchoice>
+<guimenuitem>Close Session</guimenuitem></menuchoice>
 </term>
-<listitem><para><action>Closes the current tab</action>
+<listitem><para><action>Closes the current session</action>
 </para></listitem>
 </varlistentry>
 
@@ -449,12 +445,8 @@ at the current directory</action>.  By default, that is
 </term>
 <listitem><para><action>Quits &konsole;</action></para>
 <note><para>&konsole; will display a confirmation dialog if there is more than one
-tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
-</para>
-<para>If you want to get the confirmation dialog get back, delete the entry
-<screen>[Notification Messages]
-CloseAllTabs=true</screen>
-in <filename>$<envar>XDG_CONFIG_HOME</envar>/konsolerc</filename>.
+session open or if there are certain programs running in any session.
+These dialogs can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
 </para>
 </note>
 </listitem>
@@ -678,24 +670,6 @@ Any output on one view is duplicated in the other view.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>X</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Close Active</guimenuitem></menuchoice>
-</term>
-<listitem><para><action>Closes the current view</action>
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>O</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Close Others</guimenuitem></menuchoice>
-</term>
-<listitem><para><action>Closes all non-current views</action>
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>]</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Expand View</guimenuitem></menuchoice>
 </term>
@@ -709,6 +683,15 @@ Any output on one view is duplicated in the other view.
 <guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Shrink View</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Makes the current view smaller</action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>E</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Toggle maximize current view</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Toggles the current view between current size and the maximize size</action>
 </para></listitem>
 </varlistentry>
 
@@ -902,6 +885,16 @@ Currently, &konsole; accepts the following:
 </variablelist>
 </sect2>
 
+<sect2 id="plugins-menu">
+<title>Plugins Menu</title>
+
+<para>Any installed plugins will be listed or
+"No plugins available"
+</para>
+
+</sect2>
+
+
 <sect2 id="settings-menu">
 <title>Settings Menu</title>
 <variablelist>
@@ -926,6 +919,14 @@ Current Profile...</guimenuitem></menuchoice></term>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage
 Profiles...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens an editor for managing profiles</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Window
+Color Scheme</guimenuitem></menuchoice></term>
+<listitem><para><action>Change &konsole;'s &GUI; to the specified scheme</action>
 </para>
 </listitem>
 </varlistentry>
