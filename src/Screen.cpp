@@ -936,7 +936,6 @@ void Screen::displayCharacter(uint c)
 
     // ensure current line vector has enough elements
     if (_screenLines[_cuY].size() < _cuX + w) {
-        //         _screenLines[_cuY].reserve(_columns);
         _screenLines[_cuY].resize(_cuX + w);
     }
 
@@ -1117,7 +1116,8 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
     Character clearCh(uint(c), _currentForeground, _currentBackground, DEFAULT_RENDITION, false);
 
     // if the character being used to clear the area is the same as the
-    // default character, the affected _lines can simply be shrunk.
+    // default character, the affected _lines can simply be filled
+    // with the default char
     const bool isDefaultCh = (clearCh == Screen::DefaultChar);
 
     for (int y = topLine; y <= bottomLine; ++y) {
@@ -1129,7 +1129,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
         QVector<Character> &line = _screenLines[y];
 
         if (isDefaultCh && endCol == _columns - 1) {
-            line.resize(startCol);
+            std::fill(line.begin() + startCol, line.end(), clearCh);
         } else {
             if (line.size() < endCol + 1) {
                 line.resize(endCol + 1);
@@ -1164,10 +1164,8 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     const int destY = dest / _columns;
     const int srcY = sourceBegin / _columns;
     if (dest < sourceBegin) {
-        for (int i = 0; i <= lines; ++i) {
-            _screenLines[destY + i] = _screenLines.at(srcY + i);
-            _lineProperties[destY + i] = _lineProperties.at(srcY + i);
-        }
+        std::rotate(_screenLines.begin() + destY, _screenLines.begin() + srcY, _screenLines.end());
+        std::rotate(_lineProperties.begin() + destY, _lineProperties.begin() + srcY, _lineProperties.end());
     } else {
         for (int i = lines; i >= 0; --i) {
             _screenLines[destY + i] = std::move(_screenLines[srcY + i]);
@@ -1617,7 +1615,12 @@ void Screen::fastAddHistLine()
         _escapeSequenceUrlExtractor->historyLinesRemoved(1);
     }
 
-    _screenLines.erase(_screenLines.begin());
+    // Rotate left + clear the last line
+    std::rotate(_screenLines.begin(), _screenLines.begin() + 1, _screenLines.end());
+    auto last = _screenLines.back();
+    Character clearCh(uint(' '), _currentForeground, _currentBackground, DEFAULT_RENDITION, false);
+    std::fill(last.begin(), last.end(), clearCh);
+
     _lineProperties.erase(_lineProperties.begin());
 }
 
