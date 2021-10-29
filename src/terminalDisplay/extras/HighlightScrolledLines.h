@@ -43,14 +43,6 @@ public:
      * Enable or disable the highlight lines
      */
     void setEnabled(bool enable);
-    /**
-     * Return if the highlight line needs to clear
-     */
-    bool isNeedToClear();
-    /**
-     * Set the highlight line needs to clear
-     */
-    void setNeedToClear(bool isNeeded);
     int getPreviousScrollCount();
     void setPreviousScrollCount(int scrollCount);
     /**
@@ -76,7 +68,6 @@ private:
     QRect _rect;
     int _previousScrollCount;
     std::unique_ptr<QTimer> _timer;
-    bool _needToClear;
 };
 } // namespace Konsole
 

@@ -18,7 +18,6 @@ HighlightScrolledLines::HighlightScrolledLines()
     : _enabled(false)
     , _previousScrollCount(0)
     , _timer(nullptr)
-    , _needToClear(false)
 {
 }
 
@@ -34,16 +33,6 @@ bool HighlightScrolledLines::isEnabled()
 void HighlightScrolledLines::setEnabled(bool enable)
 {
     _enabled = enable;
-}
-
-bool HighlightScrolledLines::isNeedToClear()
-{
-    return _needToClear;
-}
-
-void HighlightScrolledLines::setNeedToClear(bool isNeeded)
-{
-    _needToClear = isNeeded;
 }
 
 int HighlightScrolledLines::getPreviousScrollCount()

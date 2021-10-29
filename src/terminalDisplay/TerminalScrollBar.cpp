@@ -80,7 +80,6 @@ void TerminalScrollBar::setHighlightScrolledLines(bool highlight)
 {
     _highlightScrolledLines.setEnabled(highlight);
     _highlightScrolledLines.setTimer(this);
-    _highlightScrolledLines.setNeedToClear(true);
 }
 
 bool TerminalScrollBar::alternateScrolling() const
