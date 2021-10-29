@@ -668,7 +668,7 @@ void TerminalDisplay::updateImage()
     }
 
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
-        dirtyRegion |= Q_EMIT highlightScrolledLinesRegion(dirtyRegion.isEmpty(), _scrollBar);
+        dirtyRegion |= Q_EMIT highlightScrolledLinesRegion(_scrollBar);
     }
     _screenWindow->resetScrollCount();
 

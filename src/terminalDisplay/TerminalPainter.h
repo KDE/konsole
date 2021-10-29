@@ -63,7 +63,7 @@ public Q_SLOTS:
     void highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect);
 
     // compute which region need to be repainted for scrolled lines highlight
-    QRegion highlightScrolledLinesRegion(bool nothingChanged, TerminalScrollBar *scrollBar);
+    QRegion highlightScrolledLinesRegion(TerminalScrollBar *scrollBar);
 
     // draws the background for a text fragment
     // if useOpacitySetting is true then the color's alpha value will be set to

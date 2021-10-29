@@ -498,7 +498,7 @@ Q_SIGNALS:
     void drawCurrentResultRect(QPainter &painter, const QRect &searchResultRect);
 
     void highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect);
-    QRegion highlightScrolledLinesRegion(bool nothingChanged, TerminalScrollBar *scrollBar);
+    QRegion highlightScrolledLinesRegion(TerminalScrollBar *scrollBar);
 
     void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting);
     void drawCharacters(QPainter &painter,

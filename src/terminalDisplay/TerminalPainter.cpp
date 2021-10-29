@@ -240,7 +240,7 @@ void TerminalPainter::highlightScrolledLines(QPainter &painter, bool isTimerActi
     painter.fillRect(rect, color);
 }
 
-QRegion TerminalPainter::highlightScrolledLinesRegion(bool nothingChanged, TerminalScrollBar *scrollBar)
+QRegion TerminalPainter::highlightScrolledLinesRegion(TerminalScrollBar *scrollBar)
 {
     const auto display = qobject_cast<TerminalDisplay *>(sender());
 
@@ -285,10 +285,6 @@ QRegion TerminalPainter::highlightScrolledLinesRegion(bool nothingChanged, Termi
         dirtyRegion |= new_highlight;
 
         scrollBar->highlightScrolledLines().startTimer();
-    } else if (!nothingChanged || scrollBar->highlightScrolledLines().isNeedToClear()) {
-        dirtyRegion = scrollBar->highlightScrolledLines().rect();
-        scrollBar->highlightScrolledLines().rect().setRect(0, 0, 0, 0);
-        scrollBar->highlightScrolledLines().setNeedToClear(false);
     }
 
     return dirtyRegion;
