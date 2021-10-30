@@ -170,6 +170,6 @@ constexpr bool Character::equalsFormat(const Character &other) const
     return backgroundColor == other.backgroundColor && foregroundColor == other.foregroundColor && rendition == other.rendition;
 }
 }
-Q_DECLARE_TYPEINFO(Konsole::Character, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Konsole::Character, Q_MOVABLE_TYPE);
 
 #endif // CHARACTER_H

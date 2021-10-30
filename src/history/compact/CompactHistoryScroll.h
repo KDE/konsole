@@ -45,7 +45,7 @@ private:
 
     size_t _maxLineCount;
 
-    void removeFirstLine();
+    void removeLinesFromTop(int lines);
 
     inline int lineLen(const int line) const
     {
