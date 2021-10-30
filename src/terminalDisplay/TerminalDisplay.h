@@ -34,9 +34,12 @@ class QTimer;
 class QEvent;
 class QVBoxLayout;
 class QKeyEvent;
+class QScroller;
 class QShowEvent;
 class QHideEvent;
 class QTimerEvent;
+class QScrollEvent;
+class QScrollPrepareEvent;
 class KMessageWidget;
 
 namespace Konsole
@@ -532,6 +535,8 @@ protected:
     void mouseMoveEvent(QMouseEvent *ev) override;
     void wheelEvent(QWheelEvent *ev) override;
     bool focusNextPrevChild(bool next) override;
+    void scrollPrepareEvent(QScrollPrepareEvent *);
+    void scrollEvent(QScrollEvent *);
 
     void extendSelection(const QPoint &position);
 
@@ -610,6 +615,12 @@ private:
     QPoint findLineEnd(const QPoint &pnt);
     QPoint findWordStart(const QPoint &pnt);
     QPoint findWordEnd(const QPoint &pnt);
+
+    /**
+     * @param pnt A point, relative to this.
+     * @return true if the given point is in the area with the main terminal content and not in some other widget.
+     */
+    bool isInTerminalRegion(const QPoint &pnt) const;
 
     // Uses the current settings for trimming whitespace and preserving linebreaks to create a proper flag value for Screen
     Screen::DecodingOptions currentDecodingOptions();

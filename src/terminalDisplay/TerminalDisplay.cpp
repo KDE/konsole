@@ -27,6 +27,9 @@
 #include <QMimeData>
 #include <QPainter>
 #include <QPixmap>
+#include <QScrollEvent>
+#include <QScrollPrepareEvent>
+#include <QScroller>
 #include <QStyle>
 #include <QTimer>
 #include <QVBoxLayout>
@@ -291,6 +294,19 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     // this is an important optimization, it tells Qt
     // that TerminalDisplay will handle repainting its entire area.
     setAttribute(Qt::WA_OpaquePaintEvent);
+
+    setAttribute(Qt::WA_AcceptTouchEvents, true);
+
+    QScrollerProperties prop;
+    prop.setScrollMetric(QScrollerProperties::DecelerationFactor, 0.3);
+    prop.setScrollMetric(QScrollerProperties::MaximumVelocity, 1);
+    // Workaround for QTBUG-88249 (non-flick gestures recognized as accelerating flick)
+    prop.setScrollMetric(QScrollerProperties::AcceleratingFlickMaximumTime, 0.2);
+    prop.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+    prop.setScrollMetric(QScrollerProperties::VerticalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+    prop.setScrollMetric(QScrollerProperties::DragStartDistance, 0.0);
+    QScroller::scroller(this)->setScrollerProperties(prop);
+    QScroller::scroller(this)->grabGesture(this);
 
     // Add the stretch item once, the KMessageWidgets are inserted at index 0.
     _verticalLayout->addWidget(_headerBar);
@@ -1220,6 +1236,11 @@ QSharedPointer<HotSpot> TerminalDisplay::filterActions(const QPoint &position)
 
 void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
 {
+    if (QScroller::scroller(this)->state() != QScroller::Inactive) {
+        // Touchscreen is handled by scrollEvent()
+        return;
+    }
+
     if (!hasFocus() && KonsoleSettings::focusFollowsMouse()) {
         setFocus();
     }
@@ -1910,6 +1931,16 @@ out:
     return {x, y};
 }
 
+bool TerminalDisplay::isInTerminalRegion(const QPoint &point) const
+{
+    // clang-format off
+    const bool inMessageSuspendedWidget = _outputSuspendedMessageWidget &&
+                                          _outputSuspendedMessageWidget->isVisible() &&
+                                          _outputSuspendedMessageWidget->frameGeometry().contains(point);
+    // clang-format on
+    return !(!visibleRegion().contains(point) || _scrollBar->frameGeometry().contains(point) || inMessageSuspendedWidget);
+}
+
 Screen::DecodingOptions TerminalDisplay::currentDecodingOptions()
 {
     Screen::DecodingOptions decodingOptions;
@@ -2053,6 +2084,50 @@ void TerminalDisplay::setBracketedPasteMode(bool on)
 bool TerminalDisplay::bracketedPasteMode() const
 {
     return _bracketedPasteMode;
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                               Touch & Scroll                              */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+void TerminalDisplay::scrollPrepareEvent(QScrollPrepareEvent *event)
+{
+    // Ignore scroller events that were triggered in regions that we
+    // expect to handle the input different (e.g. the find dialog)
+    if (!isInTerminalRegion(event->startPos().toPoint())) {
+        return;
+    }
+
+    const int lineHeight = _terminalFont->fontHeight() + _terminalFont->lineSpacing();
+    // clang-format off
+    const QRect scrollableRegion = imageToWidget(QRect(
+        // Allow a line of overscroll in either direction: We'll be rounding the
+        // values QScroller gives us and still want to be able to scroll to every line.
+        0, 0,
+        0, _screenWindow->lineCount() + 1));
+    // clang-format on
+
+    // Give Qt the viewport and content window size
+    event->setViewportSize(contentsRect().size());
+    event->setContentPosRange(scrollableRegion);
+    event->setContentPos(QPointF(0.0, _screenWindow->currentLine() * lineHeight));
+
+    event->accept();
+}
+
+void TerminalDisplay::scrollEvent(QScrollEvent *event)
+{
+    const int lineHeight = _terminalFont->fontHeight() + _terminalFont->lineSpacing();
+    const int targetLine = int(event->contentPos().y() / lineHeight);
+    const int linesScrolled = targetLine - _screenWindow->currentLine();
+
+    if (linesScrolled != 0) {
+        scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, linesScrolled);
+    }
+
+    event->accept();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -2555,6 +2630,14 @@ bool TerminalDisplay::event(QEvent *event)
         }
         update();
         break;
+
+    case QEvent::ScrollPrepare:
+        scrollPrepareEvent(static_cast<QScrollPrepareEvent *>(event));
+        break;
+    case QEvent::Scroll:
+        scrollEvent(static_cast<QScrollEvent *>(event));
+        break;
+
     default:
         break;
     }
