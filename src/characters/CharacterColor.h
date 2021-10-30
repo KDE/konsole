@@ -92,7 +92,7 @@ class CharacterColor
 
 public:
     /** Constructs a new CharacterColor whose color and color space are undefined. */
-    CharacterColor()
+    constexpr CharacterColor()
         : _colorSpace(COLOR_SPACE_UNDEFINED)
         , _u(0)
         , _v(0)
@@ -110,7 +110,7 @@ public:
      *
      * TODO : Add documentation about available color spaces.
      */
-    CharacterColor(quint8 colorSpace, int co)
+    constexpr CharacterColor(quint8 colorSpace, int co)
         : _colorSpace(colorSpace)
         , _u(0)
         , _v(0)
@@ -137,11 +137,11 @@ public:
         }
     }
 
-    quint8 colorSpace() const
+    constexpr quint8 colorSpace() const
     {
         return _colorSpace;
     }
-    void termColor(int *u, int *v, int *w)
+    constexpr void termColor(int *u, int *v, int *w)
     {
         *u = _u;
         *v = _v;
@@ -151,7 +151,7 @@ public:
     /**
      * Returns true if this character color entry is valid.
      */
-    bool isValid() const
+    constexpr bool isValid() const
     {
         return _colorSpace != COLOR_SPACE_UNDEFINED;
     }
@@ -178,18 +178,18 @@ public:
      * The @p base is only used if this color is one of the 16 system colors, otherwise
      * it is ignored.
      */
-    QColor color(const QColor *base) const;
+    constexpr QColor color(const QColor *base) const;
 
     /**
      * Compares two colors and returns true if they represent the same color value and
      * use the same color space.
      */
-    friend bool operator==(const CharacterColor &a, const CharacterColor &b);
+    friend constexpr bool operator==(const CharacterColor &a, const CharacterColor &b);
     /**
      * Compares two colors and returns true if they represent different color values
      * or use different color spaces.
      */
-    friend bool operator!=(const CharacterColor &a, const CharacterColor &b);
+    friend constexpr bool operator!=(const CharacterColor &a, const CharacterColor &b);
 
 private:
     quint8 _colorSpace;
@@ -200,17 +200,17 @@ private:
     quint8 _w;
 };
 
-inline bool operator==(const CharacterColor &a, const CharacterColor &b)
+constexpr bool operator==(const CharacterColor &a, const CharacterColor &b)
 {
     return a._colorSpace == b._colorSpace && a._u == b._u && a._v == b._v && a._w == b._w;
 }
 
-inline bool operator!=(const CharacterColor &a, const CharacterColor &b)
+constexpr bool operator!=(const CharacterColor &a, const CharacterColor &b)
 {
     return !operator==(a, b);
 }
 
-inline const QColor color256(quint8 u, const QColor *base)
+constexpr QColor color256(quint8 u, const QColor *base)
 {
     //   0.. 16: system colors
     if (u < 8) {
@@ -236,7 +236,7 @@ inline const QColor color256(quint8 u, const QColor *base)
     return QColor(gray, gray, gray);
 }
 
-inline QColor CharacterColor::color(const QColor *base) const
+constexpr QColor CharacterColor::color(const QColor *base) const
 {
     switch (_colorSpace) {
     case COLOR_SPACE_DEFAULT:

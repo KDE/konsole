@@ -62,11 +62,11 @@ public:
      * @param _real Indicate whether this character really exists, or exists
      *              simply as place holder.
      */
-    explicit inline Character(uint _c = ' ',
-                              CharacterColor _f = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
-                              CharacterColor _b = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
-                              RenditionFlags _r = DEFAULT_RENDITION,
-                              bool _real = true)
+    explicit constexpr Character(uint _c = ' ',
+                                 CharacterColor _f = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
+                                 CharacterColor _b = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
+                                 RenditionFlags _r = DEFAULT_RENDITION,
+                                 bool _real = true)
         : character(_c)
         , rendition(_r)
         , foregroundColor(_f)
@@ -106,21 +106,21 @@ public:
     /**
      * returns true if the format (color, rendition flag) of the compared characters is equal
      */
-    bool equalsFormat(const Character &other) const;
+    constexpr bool equalsFormat(const Character &other) const;
 
     /**
      * Compares two characters and returns true if they have the same unicode character value,
      * rendition and colors.
      */
-    friend bool operator==(const Character &a, const Character &b);
+    friend constexpr bool operator==(const Character &a, const Character &b);
 
     /**
      * Compares two characters and returns true if they have different unicode character values,
      * renditions or colors.
      */
-    friend bool operator!=(const Character &a, const Character &b);
+    friend constexpr bool operator!=(const Character &a, const Character &b);
 
-    inline bool isSpace() const
+    constexpr bool isSpace() const
     {
         if (rendition & RE_EXTENDED_CHAR) {
             return false;
@@ -129,7 +129,7 @@ public:
         }
     }
 
-    inline int width() const
+    int width() const
     {
         return width(character);
     }
@@ -155,21 +155,21 @@ public:
     }
 };
 
-inline bool operator==(const Character &a, const Character &b)
+constexpr bool operator==(const Character &a, const Character &b)
 {
     return a.character == b.character && a.equalsFormat(b);
 }
 
-inline bool operator!=(const Character &a, const Character &b)
+constexpr bool operator!=(const Character &a, const Character &b)
 {
     return !operator==(a, b);
 }
 
-inline bool Character::equalsFormat(const Character &other) const
+constexpr bool Character::equalsFormat(const Character &other) const
 {
     return backgroundColor == other.backgroundColor && foregroundColor == other.foregroundColor && rendition == other.rendition;
 }
 }
-Q_DECLARE_TYPEINFO(Konsole::Character, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(Konsole::Character, Q_PRIMITIVE_TYPE);
 
 #endif // CHARACTER_H
