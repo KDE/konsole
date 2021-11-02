@@ -17,7 +17,6 @@
 #include <QStandardPaths>
 
 // KDE
-#include <KBookmarkOwner>
 #include <KLocalizedString>
 #include <KShell>
 

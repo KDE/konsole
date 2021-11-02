@@ -9,7 +9,6 @@
 
 #include "konsoledebug.h"
 #include "session/SessionController.h"
-#include "sshconfigurationdata.h"
 #include "sshmanagermodel.h"
 #include "terminalDisplay/TerminalDisplay.h"
 

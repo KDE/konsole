@@ -27,7 +27,6 @@
 #include <QRegion>
 #include <QString>
 #include <QTransform>
-#include <QVector>
 #include <QtMath>
 
 #include <optional>

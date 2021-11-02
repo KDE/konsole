@@ -14,7 +14,6 @@
 #include <ExtendedCharTable.h>
 
 // Qt
-#include <QFont>
 #include <QTextStream>
 
 using namespace Konsole;

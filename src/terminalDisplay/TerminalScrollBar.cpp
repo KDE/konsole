@@ -13,7 +13,6 @@
 #include "../characters/Character.h"
 #include "TerminalDisplay.h"
 #include "TerminalFonts.h"
-#include "extras/HighlightScrolledLines.h"
 #include "session/SessionController.h"
 
 // KDE

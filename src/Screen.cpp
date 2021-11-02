@@ -9,7 +9,6 @@
 #include "Screen.h"
 
 // Qt
-#include <QSet>
 #include <QTextStream>
 
 // Konsole decoders

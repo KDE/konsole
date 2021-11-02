@@ -22,7 +22,6 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KSharedConfig>
 
 // Konsole
 #include "ProfileGroup.h"
