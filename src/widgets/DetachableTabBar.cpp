@@ -26,7 +26,7 @@ DetachableTabBar::DetachableTabBar(QWidget *parent)
     , tabId(-1)
 {
     setAcceptDrops(true);
-    setElideMode(Qt::TextElideMode::ElideLeft);
+    setElideMode(Qt::TextElideMode::ElideMiddle);
     KAcceleratorManager::setNoAccel(this);
 }
 
