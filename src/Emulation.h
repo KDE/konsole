@@ -175,8 +175,10 @@ public:
      */
     virtual void clearEntireScreen() = 0;
 
-    /** Resets the state of the terminal. */
-    virtual void reset() = 0;
+    /** Resets the state of the terminal.
+     *
+     * @param softReset The reset was initiated by DECSTR */
+    virtual void reset(bool softReset = false) = 0;
 
     /**
      * Returns true if the active terminal program is interested in Mouse

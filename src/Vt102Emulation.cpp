@@ -93,18 +93,26 @@ void Vt102Emulation::clearEntireScreen()
     bufferedUpdate();
 }
 
-void Vt102Emulation::reset()
+void Vt102Emulation::reset(bool softReset)
 {
     // Save the current codec so we can set it later.
     // Ideally we would want to use the profile setting
     const QTextCodec *currentCodec = codec();
 
     resetTokenizer();
-    resetModes();
+    if (softReset) {
+        resetMode(MODE_AppCuKeys);
+        saveMode(MODE_AppCuKeys);
+        resetMode(MODE_AppKeyPad);
+        saveMode(MODE_AppKeyPad);
+    } else {
+        resetModes();
+    }
+
     resetCharset(0);
-    _screen[0]->reset();
+    _screen[0]->reset(softReset);
     resetCharset(1);
-    _screen[1]->reset();
+    _screen[1]->reset(softReset);
 
     if (currentCodec != nullptr) {
         setCodec(currentCodec);
@@ -1262,8 +1270,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_psp('q',  5) : Q_EMIT setCursorStyleRequest(Enum::IBeamCursor,     true);  break;
     case token_csi_psp('q',  6) : Q_EMIT setCursorStyleRequest(Enum::IBeamCursor,     false); break;
 
-    //FIXME: weird DEC reset sequence
-    case token_csi_pe('p'      ) : /* IGNORED: reset         (        ) */ break;
+    // DECSTR (Soft Terminal Reset)
+    case token_csi_pe('p'      ) : reset(true); break; //VT220
 
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
     case token_vt52('A'      ) : _currentScreen->cursorUp             (         1); break; //VT52

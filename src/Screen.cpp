@@ -782,12 +782,24 @@ int Screen::getScreenLineColumns(const int line) const
     return _columns;
 }
 
-void Screen::reset()
+void Screen::reset(bool softReset)
 {
     // Clear screen, but preserve the current line
-    scrollUp(0, _cuY);
-    _cuY = 0;
-    _cuX = 0;
+    if (!softReset) {
+        scrollUp(0, _cuY);
+        _cuY = 0;
+        _cuX = 0;
+
+        resetMode(MODE_Screen); // screen not inverse
+        resetMode(MODE_NewLine);
+
+        initTabStops();
+
+        if (_hasGraphics) {
+            delPlacements();
+            _currentTerminalDisplay->update();
+        }
+    }
 
     _currentModes[MODE_Origin] = 0;
     _savedModes[MODE_Origin] = 0;
@@ -799,8 +811,6 @@ void Screen::reset()
     saveMode(MODE_Insert); // overstroke
 
     setMode(MODE_Cursor); // cursor visible
-    resetMode(MODE_Screen); // screen not inverse
-    resetMode(MODE_NewLine);
 
     _topMargin = 0;
     _bottomMargin = _lines - 1;
@@ -808,14 +818,12 @@ void Screen::reset()
     // Other terminal emulators reset the entire scroll history during a reset
     //    setScroll(getScroll(), false);
 
-    initTabStops();
     setDefaultRendition();
     saveCursor();
 
-    if (_hasGraphics) {
-        delPlacements();
-        _currentTerminalDisplay->update();
-    }
+    // DECSTR homes the saved cursor even though it doesn't home the current cursor
+    _savedState.cursorColumn = 0;
+    _savedState.cursorLine = 0;
 }
 
 void Screen::backspace()
