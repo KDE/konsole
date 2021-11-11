@@ -57,6 +57,13 @@ public Q_SLOTS:
     void setBackgroundColor(const QColor &color);
     void setForegroundColor(const QColor &color);
 
+Q_SIGNALS:
+    void onPalette(const QPalette &);
+
+protected:
+    bool event(QEvent *event) override;
+    void onColorsChanged();
+
 private Q_SLOTS:
     void swapFGBGColors();
 
