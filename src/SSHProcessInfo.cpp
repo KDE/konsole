@@ -189,7 +189,12 @@ QString SSHProcessInfo::format(const QString &input) const
         output.replace(QLatin1String("%h"), _host.left(_host.indexOf(QLatin1Char('.'))));
     }
 
-    output.replace(QLatin1String("%H"), _host);
+    QString fullHost = _host;
+    if (!_port.isEmpty() && _port != QLatin1String("22")) {
+        fullHost.append(QLatin1Char(':'));
+        fullHost.append(_port);
+    }
+    output.replace(QLatin1String("%H"), fullHost);
     output.replace(QLatin1String("%c"), _command);
 
     return output;
