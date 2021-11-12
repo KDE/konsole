@@ -320,7 +320,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
 
     _terminalColor = new TerminalColor(this);
-    connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::setPalette);
+    connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::updatePalette);
 
     _terminalPainter = new TerminalPainter(this);
     connect(this, &TerminalDisplay::drawContents, _terminalPainter, &TerminalPainter::drawContents);

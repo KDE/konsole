@@ -84,6 +84,10 @@ public:
         return _highlightScrolledLines;
     }
 
+    void changeEvent(QEvent *e) override;
+
+    void updatePalette(const QPalette &pal);
+
 public Q_SLOTS:
 
     void scrollBarPositionChanged(int value);
@@ -94,6 +98,7 @@ private:
     bool _alternateScrolling;
     Enum::ScrollBarPositionEnum _scrollbarLocation;
     HighlightScrolledLines _highlightScrolledLines;
+    QPalette _backgroundMatchingPalette;
 };
 } // namespace Konsole
 

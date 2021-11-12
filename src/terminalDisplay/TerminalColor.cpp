@@ -134,13 +134,7 @@ void TerminalColor::onColorsChanged()
     palette.setColor(QPalette::WindowText, buttonTextColor);
     palette.setColor(QPalette::ButtonText, buttonTextColor);
 
-    QWidget *widget = qobject_cast<QWidget *>(parent());
-
-    widget->setPalette(palette);
-
     Q_EMIT onPalette(palette);
-
-    widget->update();
 }
 
 void TerminalColor::swapFGBGColors()

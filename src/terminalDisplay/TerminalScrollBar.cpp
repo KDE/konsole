@@ -19,7 +19,9 @@
 #include <KMessageWidget>
 
 // Qt
+#include <QGuiApplication>
 #include <QLabel>
+#include <QProxyStyle>
 #include <QRect>
 #include <QTimer>
 
@@ -214,4 +216,31 @@ void TerminalScrollBar::scrollImage(int lines, const QRect &screenWindowRegion, 
     // scroll the display vertically to match internal _image
     display->scroll(0, display->terminalFont()->fontHeight() * (-lines), scrollRect);
 }
+
+void TerminalScrollBar::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::StyleChange) {
+        updatePalette(_backgroundMatchingPalette);
+    }
+    QScrollBar::changeEvent(e);
+}
+
+void TerminalScrollBar::updatePalette(const QPalette &pal)
+{
+    _backgroundMatchingPalette = pal;
+
+    auto proxyStyle = qobject_cast<const QProxyStyle *>(style());
+    const QStyle *appStyle = proxyStyle ? proxyStyle->baseStyle() : style();
+
+    // Scrollbars in widget styles like Fusion or Plastique do not work well with custom
+    // scrollbar coloring, in particular in conjunction with light terminal background colors.
+    // Use custom colors only for widget styles matched by the allowlist below, otherwise
+    // fall back to generic widget colors.
+    if (appStyle->objectName() == QLatin1String("breeze")) {
+        setPalette(_backgroundMatchingPalette);
+    } else {
+        setPalette(QGuiApplication::palette());
+    }
+}
+
 } // namespace Konsole
