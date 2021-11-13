@@ -2538,6 +2538,12 @@ bool TerminalDisplay::event(QEvent *event)
     case QEvent::ShortcutOverride:
         eventHandled = handleShortcutOverrideEvent(static_cast<QKeyEvent *>(event));
         break;
+    case QEvent::PaletteChange:
+    case QEvent::ApplicationPaletteChange:
+        if (_terminalColor) {
+            _terminalColor->onColorsChanged();
+        }
+        break;
     case QEvent::FocusOut:
     case QEvent::FocusIn:
         if (_screenWindow != nullptr) {

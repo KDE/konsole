@@ -100,20 +100,6 @@ void TerminalColor::setForegroundColor(const QColor &color)
     onColorsChanged();
 }
 
-bool TerminalColor::event(QEvent *event)
-{
-    switch (event->type()) {
-    case QEvent::PaletteChange:
-    case QEvent::ApplicationPaletteChange:
-        onColorsChanged();
-        break;
-
-    default:
-        break;
-    }
-    return QObject::event(event);
-}
-
 void TerminalColor::onColorsChanged()
 {
     QPalette palette = QApplication::palette();
