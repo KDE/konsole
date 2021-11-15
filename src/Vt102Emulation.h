@@ -138,6 +138,7 @@ private:
 
     void processToken(int code, int p, int q);
     void processSessionAttributeRequest(int tokenSize);
+    void processChecksumRequest(int argc, int argv[]);
 
     void reportTerminalType();
     void reportTertiaryAttributes();

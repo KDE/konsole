@@ -7,6 +7,7 @@
 
 // Own
 #include "Vt102Emulation.h"
+#include "config-konsole.h"
 
 // Standard
 #include <cstdio>
@@ -270,6 +271,7 @@ const int DIG = 8; // Digit
 const int SCS = 16; // Select Character Set
 const int GRP = 32; // TODO: Document me
 const int CPS = 64; // Character which indicates end of window resize
+const int INT = 128; // Intermediate Byte (ECMA 48 5.4 -> CSI P..P I..I F)
 
 void Vt102Emulation::initTokenizer()
 {
@@ -283,6 +285,9 @@ void Vt102Emulation::initTokenizer()
     }
     for (i = 32; i < 256; ++i) {
         charClass[i] |= CHR;
+    }
+    for (i = 0x20; i < 0x30; ++i) {
+        charClass[i] |= INT;
     }
     for (s = (quint8 *)"@ABCDEFGHILMPSTXZbcdfry"; *s != 0U; ++s) {
         charClass[*s] |= CPN;
@@ -329,7 +334,7 @@ void Vt102Emulation::initTokenizer()
 #define les(P,L,C) (p == (P) && s[L] < 256 && (charClass[s[(L)]] & (C)) == (C))
 #define eec(C)     (p >=  3  && cc == (C))
 #define ees(C)     (p >=  3  && cc < 256 && (charClass[cc] & (C)) == (C))
-#define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '!' && s[2] != '=' && s[2] != '>' && cc < 256 && (charClass[cc] & (C)) == (C))
+#define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '!' && s[2] != '=' && s[2] != '>' && cc < 256 && (charClass[cc] & (C)) == (C) && (charClass[s[p-2]] & (INT)) != (INT) )
 #define epp( )     (p >=  3  && s[2] == '?')
 #define epe( )     (p >=  3  && s[2] == '!')
 #define eeq( )     (p >=  3  && s[2] == '=')
@@ -457,6 +462,8 @@ void Vt102Emulation::receiveChar(uint cc)
 
     if (ees(DIG)) { addDigit(cc-'0'); return; }
     if (eec(';')) { addArgument();    return; }
+    if (ees(INT)) { return; }
+    if (p >= 3 && cc == 'y' && s[p - 2] == '*') { processChecksumRequest(argc, argv); resetTokenizer(); return; }
     for (int i = 0; i <= argc; i++) {
         if (epp()) {
             processToken(token_csi_pr(cc,argv[i]), 0, 0);
@@ -474,7 +481,7 @@ void Vt102Emulation::receiveChar(uint cc)
             // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
             i += 2;
             processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_256, argv[i]);
-        } else {
+        } else if (p < 2 || (charClass[s[p-2]] & (INT)) != (INT)) {
             processToken(token_csi_ps(cc,argv[i]), 0, 0);
         }
     }
@@ -505,6 +512,75 @@ void Vt102Emulation::receiveChar(uint cc)
         resetTokenizer();
         return;
     }
+}
+
+void Vt102Emulation::processChecksumRequest(int argc, int argv[])
+{
+    int checksum = 0;
+    argc = argc;
+
+#if defined(ENABLE_DECRQCRA)
+    int top, left, bottom, right;
+
+    /* DEC STD-070 5-179 "If Pp is 0 or omitted, subsequent parameters are ignored
+     *  and a checksum for all page memory will be reported."
+     */
+    if (argv[1] == 0) {
+        argc = 1;
+    }
+    /* clang-format off */
+    if (argc >= 2) { top    = argv[2]; } else { top    = 1; }
+    if (argc >= 3) { left   = argv[3]; } else { left   = 1; }
+    if (argc >= 4) { bottom = argv[4]; } else { bottom = _currentScreen->getLines();   }
+    if (argc >= 5) { right  = argv[5]; } else { right  = _currentScreen->getColumns(); }
+    /* clang-format on */
+
+    if (top > bottom || left > right) {
+        return;
+    }
+
+    if (_currentScreen->getMode(MODE_Origin)) {
+        top += _currentScreen->topMargin();
+        bottom += _currentScreen->topMargin();
+    }
+
+    top = qBound(1, top, _currentScreen->getLines());
+    bottom = qBound(1, bottom, _currentScreen->getLines());
+
+    int imgsize = sizeof(Character) * _currentScreen->getLines() * _currentScreen->getColumns();
+    Character *image = (Character *)malloc(imgsize);
+    if (image == nullptr) {
+        fprintf(stderr, "couldn't alloc mem\n");
+        return;
+    }
+    _currentScreen->getImage(image, imgsize, _currentScreen->getHistLines(), _currentScreen->getHistLines() + _currentScreen->getLines() - 1);
+
+    for (int y = top - 1; y <= bottom - 1; y++) {
+        for (int x = left - 1; x <= right - 1; x++) {
+            // XXX: Apparently, VT520 uses 0x00 for uninitialized cells, konsole can't tell uninitialized cells from spaces
+            Character c = image[y * _currentScreen->getColumns() + x];
+
+            if (c.rendition & RE_CONCEAL) {
+                checksum += 0x20; // don't reveal secrets
+            } else {
+                checksum += c.character;
+            }
+
+            checksum += (c.rendition & RE_BOLD) / RE_BOLD * 0x80;
+            checksum += (c.rendition & RE_BLINK) / RE_BLINK * 0x40;
+            checksum += (c.rendition & RE_REVERSE) / RE_REVERSE * 0x20;
+            checksum += (c.rendition & RE_UNDERLINE) / RE_UNDERLINE * 0x10;
+        }
+    }
+
+    free(image);
+#endif
+
+    char tmp[30];
+    checksum = -checksum;
+    checksum &= 0xffff;
+    snprintf(tmp, sizeof(tmp), "\033P%d!~%04X\033\\", argv[0], checksum);
+    sendString(tmp);
 }
 
 void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
