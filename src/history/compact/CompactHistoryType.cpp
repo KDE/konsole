@@ -39,7 +39,7 @@ void CompactHistoryType::scroll(std::unique_ptr<HistoryScroll> &old) const
 
     Character line[LINE_SIZE];
     int lines = (old != nullptr) ? old->getLines() : 0;
-    int i = qMax((lines - (int)_maxLines - 1), 0);
+    int i = qMax((lines - (int)_maxLines), 0);
     for (; i < lines; i++) {
         int size = old->getLineLen(i);
         if (size > LINE_SIZE) {
