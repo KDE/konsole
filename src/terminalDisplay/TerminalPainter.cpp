@@ -137,7 +137,18 @@ void TerminalPainter::drawContents(Character *image,
                 }
                 return currentScript == script;
             };
+
+            // returns true if it's a braile char, false otherwise.
+            const auto isBraileChar = [&](int column) -> bool {
+                char32_t maybeBraile = image[display->loc(column, y)].character;
+                return maybeBraile >= 0x2800 && maybeBraile <= 0x28FF;
+            };
+
             const auto canBeGrouped = [&](int column) {
+                if (isBraileChar(x)) {
+                    return false;
+                }
+
                 return image[display->loc(column, y)].character <= 0x7e || (image[display->loc(column, y)].rendition & RE_EXTENDED_CHAR)
                     || (bidiEnabled && !doubleWidth);
             };
