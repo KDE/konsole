@@ -1703,9 +1703,11 @@ void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
         t.scroll(_history);
     }
 
+#ifdef Q_OS_LINUX
 #ifdef __GNUC__
     // We might have been using gigabytes of memory, so make sure it is actually released
     malloc_trim(0);
+#endif
 #endif
 }
 
