@@ -50,18 +50,6 @@ static inline bool isLineCharString(const QString &string)
     return LineBlockCharacters::canDraw(string.at(0).unicode());
 }
 
-static int baseCodePoint(const Character &ch)
-{
-    if (ch.rendition & RE_EXTENDED_CHAR) {
-        ushort extendedCharLength = 0;
-        const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
-        // FIXME: Coverity-Dereferencing chars, which is known to be nullptr
-        return chars[0];
-    } else {
-        return ch.character;
-    }
-}
-
 void TerminalPainter::drawContents(Character *image,
                                    QPainter &paint,
                                    const QRect &rect,
@@ -111,11 +99,12 @@ void TerminalPainter::drawContents(Character *image,
             const CharacterColor currentForeground = image[display->loc(x, y)].foregroundColor;
             const CharacterColor currentBackground = image[display->loc(x, y)].backgroundColor;
             const RenditionFlags currentRendition = image[display->loc(x, y)].rendition;
-            const QChar::Script currentScript = QChar::script(baseCodePoint(image[display->loc(x, y)]));
+            const QChar::Script currentScript = QChar::script(image[display->loc(x, y)].baseCodePoint());
 
             const auto isInsideDrawArea = [&](int column) {
                 return column <= rect.right();
             };
+
             const auto hasSameColors = [&](int column) {
                 return image[display->loc(column, y)].foregroundColor == currentForeground
                     && image[display->loc(column, y)].backgroundColor == currentBackground;
@@ -130,8 +119,8 @@ void TerminalPainter::drawContents(Character *image,
             const auto hasSameLineDrawStatus = [&](int column) {
                 return LineBlockCharacters::canDraw(image[display->loc(column, y)].character) == lineDraw;
             };
-            const auto isSameScript = [&](int column) {
-                const QChar::Script script = QChar::script(baseCodePoint(image[display->loc(column, y)]));
+            const auto isSameScript = [&](const Character &c) {
+                const QChar::Script script = QChar::script(c.baseCodePoint());
                 if (currentScript == QChar::Script_Common || script == QChar::Script_Common || currentScript == QChar::Script_Inherited
                     || script == QChar::Script_Inherited) {
                     return true;
@@ -142,8 +131,10 @@ void TerminalPainter::drawContents(Character *image,
             const Character &char_value = image[display->loc(x, y)];
 
             if (char_value.canBeGrouped(bidiEnabled, doubleWidth)) {
+                Character next_char = image[display->loc(x + len, y)];
+
                 while (isInsideDrawArea(x + len) && hasSameColors(x + len) && hasSameRendition(x + len) && hasSameWidth(x + len)
-                       && hasSameLineDrawStatus(x + len) && isSameScript(x + len) && image[display->loc(x + len, y)].canBeGrouped(bidiEnabled, doubleWidth)) {
+                       && hasSameLineDrawStatus(x + len) && isSameScript(next_char) && next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
                     const uint c = image[display->loc(x + len, y)].character;
                     if ((image[display->loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
@@ -166,6 +157,7 @@ void TerminalPainter::drawContents(Character *image,
                         len++;
                     }
                     len++;
+                    next_char = image[display->loc(x + len, y)];
                 }
             } else {
                 // Group spaces following any non-wide character with the character. This allows for

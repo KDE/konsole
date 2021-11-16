@@ -11,6 +11,7 @@
 // Konsole
 #include "CharacterColor.h"
 #include "CharacterWidth.h"
+#include "ExtendedCharTable.h"
 
 // Qt
 #include <QVector>
@@ -161,6 +162,17 @@ public:
         }
 
         return character <= 0x7e || (rendition & RE_EXTENDED_CHAR) || (bidirectionalEnabled && !isDoubleWidth);
+    }
+
+    inline int baseCodePoint() const
+    {
+        if (rendition & RE_EXTENDED_CHAR) {
+            ushort extendedCharLength = 0;
+            const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(character, extendedCharLength);
+            // FIXME: Coverity-Dereferencing chars, which is known to be nullptr
+            return chars[0];
+        }
+        return character;
     }
 };
 
