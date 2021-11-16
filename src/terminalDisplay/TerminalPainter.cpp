@@ -105,6 +105,7 @@ void TerminalPainter::drawContents(Character *image,
                 }
             }
 
+            // TODO: Move all those lambdas to Character, so it's easy to test.
             const bool lineDraw = LineBlockCharacters::canDraw(image[display->loc(x, y)].character);
             const bool doubleWidth = (image[qMin(display->loc(x, y) + 1, imageSize - 1)].character == 0);
             const CharacterColor currentForeground = image[display->loc(x, y)].foregroundColor;
