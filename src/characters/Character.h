@@ -153,6 +153,15 @@ public:
         QVector<uint> ucs4Str = str.toUcs4();
         return stringWidth(ucs4Str.constData(), ucs4Str.length());
     }
+
+    inline bool canBeGrouped(bool bidirectionalEnabled, bool isDoubleWidth) const
+    {
+        if (QChar::script(character) == QChar::Script_Braille) {
+            return false;
+        }
+
+        return character <= 0x7e || (rendition & RE_EXTENDED_CHAR) || (bidirectionalEnabled && !isDoubleWidth);
+    }
 };
 
 constexpr bool operator==(const Character &a, const Character &b)

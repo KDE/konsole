@@ -138,24 +138,11 @@ void TerminalPainter::drawContents(Character *image,
                 return currentScript == script;
             };
 
-            // returns true if it's a braile char, false otherwise.
-            const auto isBraileChar = [&](int column) -> bool {
-                char32_t maybeBraile = image[display->loc(column, y)].character;
-                return maybeBraile >= 0x2800 && maybeBraile <= 0x28FF;
-            };
+            const Character &char_value = image[display->loc(x, y)];
 
-            const auto canBeGrouped = [&](int column) {
-                if (isBraileChar(x)) {
-                    return false;
-                }
-
-                return image[display->loc(column, y)].character <= 0x7e || (image[display->loc(column, y)].rendition & RE_EXTENDED_CHAR)
-                    || (bidiEnabled && !doubleWidth);
-            };
-
-            if (canBeGrouped(x)) {
+            if (char_value.canBeGrouped(bidiEnabled, doubleWidth)) {
                 while (isInsideDrawArea(x + len) && hasSameColors(x + len) && hasSameRendition(x + len) && hasSameWidth(x + len)
-                       && hasSameLineDrawStatus(x + len) && isSameScript(x + len) && canBeGrouped(x + len)) {
+                       && hasSameLineDrawStatus(x + len) && isSameScript(x + len) && image[display->loc(x + len, y)].canBeGrouped(bidiEnabled, doubleWidth)) {
                     const uint c = image[display->loc(x + len, y)].character;
                     if ((image[display->loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
