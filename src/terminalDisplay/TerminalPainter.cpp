@@ -119,14 +119,6 @@ void TerminalPainter::drawContents(Character *image,
             const auto hasSameLineDrawStatus = [&](int column) {
                 return LineBlockCharacters::canDraw(image[display->loc(column, y)].character) == lineDraw;
             };
-            const auto isSameScript = [&](const Character &c) {
-                const QChar::Script script = QChar::script(c.baseCodePoint());
-                if (currentScript == QChar::Script_Common || script == QChar::Script_Common || currentScript == QChar::Script_Inherited
-                    || script == QChar::Script_Inherited) {
-                    return true;
-                }
-                return currentScript == script;
-            };
 
             const Character &char_value = image[display->loc(x, y)];
 
@@ -135,7 +127,7 @@ void TerminalPainter::drawContents(Character *image,
                     Character next_char = image[display->loc(x + len, y)];
 
                     if (!hasSameColors(x + len) || !hasSameRendition(x + len) || !hasSameWidth(x + len) || !hasSameLineDrawStatus(x + len)
-                        || !isSameScript(next_char) || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
+                        || !char_value.isSameScript(next_char) || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
                         break;
                     }
 
