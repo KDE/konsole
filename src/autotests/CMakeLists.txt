@@ -23,6 +23,12 @@ ecm_mark_nongui_executable(CharacterWidthTest)
 add_test(NAME CharacterWidthTest COMMAND CharacterWidthTest)
 target_link_libraries(CharacterWidthTest ${KONSOLE_TEST_LIBS})
 
+add_executable(CharacterTest CharacterTest.cpp)
+ecm_mark_as_test(CharacterTest)
+ecm_mark_nongui_executable(CharacterTest)
+add_test(NAME CharacterTest COMMAND CharacterTest)
+target_link_libraries(CharacterTest ${KONSOLE_TEST_LIBS})
+
 if ("$ENV{USER}" STREQUAL "jenkins")
     message(STATUS "We are running in jenkins; skipping DBusTest...")
 else()
