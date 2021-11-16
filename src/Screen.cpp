@@ -1164,8 +1164,8 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     const int destY = dest / _columns;
     const int srcY = sourceBegin / _columns;
     if (dest < sourceBegin) {
-        std::rotate(_screenLines.begin() + destY, _screenLines.begin() + srcY, _screenLines.end());
-        std::rotate(_lineProperties.begin() + destY, _lineProperties.begin() + srcY, _lineProperties.end());
+        std::rotate(_screenLines.begin() + destY, _screenLines.begin() + srcY, _screenLines.begin() + srcY + lines);
+        std::rotate(_lineProperties.begin() + destY, _lineProperties.begin() + srcY, _lineProperties.begin() + srcY + lines);
     } else {
         for (int i = lines; i >= 0; --i) {
             _screenLines[destY + i] = std::move(_screenLines[srcY + i]);
