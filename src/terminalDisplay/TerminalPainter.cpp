@@ -131,10 +131,14 @@ void TerminalPainter::drawContents(Character *image,
             const Character &char_value = image[display->loc(x, y)];
 
             if (char_value.canBeGrouped(bidiEnabled, doubleWidth)) {
-                Character next_char = image[display->loc(x + len, y)];
+                while (isInsideDrawArea(x + len)) {
+                    Character next_char = image[display->loc(x + len, y)];
 
-                while (isInsideDrawArea(x + len) && hasSameColors(x + len) && hasSameRendition(x + len) && hasSameWidth(x + len)
-                       && hasSameLineDrawStatus(x + len) && isSameScript(next_char) && next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
+                    if (!hasSameColors(x + len) || !hasSameRendition(x + len) || !hasSameWidth(x + len) || !hasSameLineDrawStatus(x + len)
+                        || !isSameScript(next_char) || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
+                        break;
+                    }
+
                     const uint c = image[display->loc(x + len, y)].character;
                     if ((image[display->loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
@@ -157,7 +161,6 @@ void TerminalPainter::drawContents(Character *image,
                         len++;
                     }
                     len++;
-                    next_char = image[display->loc(x + len, y)];
                 }
             } else {
                 // Group spaces following any non-wide character with the character. This allows for
