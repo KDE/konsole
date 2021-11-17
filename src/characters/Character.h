@@ -165,7 +165,7 @@ public:
         return character <= 0x7e || (rendition & RE_EXTENDED_CHAR) || (bidirectionalEnabled && !isDoubleWidth);
     }
 
-    inline int baseCodePoint() const
+    inline uint baseCodePoint() const
     {
         if (rendition & RE_EXTENDED_CHAR) {
             ushort extendedCharLength = 0;
