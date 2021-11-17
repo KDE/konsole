@@ -185,6 +185,11 @@ public:
         }
         return currentScript == script;
     };
+
+    inline bool hasSameColors(const Character &lhs) const
+    {
+        return lhs.foregroundColor == foregroundColor && lhs.backgroundColor == backgroundColor;
+    }
 };
 
 constexpr bool operator==(const Character &a, const Character &b)

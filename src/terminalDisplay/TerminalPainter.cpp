@@ -96,19 +96,12 @@ void TerminalPainter::drawContents(Character *image,
             // TODO: Move all those lambdas to Character, so it's easy to test.
             const bool lineDraw = LineBlockCharacters::canDraw(image[display->loc(x, y)].character);
             const bool doubleWidth = (image[qMin(display->loc(x, y) + 1, imageSize - 1)].character == 0);
-            const CharacterColor currentForeground = image[display->loc(x, y)].foregroundColor;
-            const CharacterColor currentBackground = image[display->loc(x, y)].backgroundColor;
             const RenditionFlags currentRendition = image[display->loc(x, y)].rendition;
-            const QChar::Script currentScript = QChar::script(image[display->loc(x, y)].baseCodePoint());
 
             const auto isInsideDrawArea = [&](int column) {
                 return column <= rect.right();
             };
 
-            const auto hasSameColors = [&](int column) {
-                return image[display->loc(column, y)].foregroundColor == currentForeground
-                    && image[display->loc(column, y)].backgroundColor == currentBackground;
-            };
             const auto hasSameRendition = [&](int column) {
                 return (image[display->loc(column, y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR);
             };
@@ -126,7 +119,7 @@ void TerminalPainter::drawContents(Character *image,
                 while (isInsideDrawArea(x + len)) {
                     Character next_char = image[display->loc(x + len, y)];
 
-                    if (!hasSameColors(x + len) || !hasSameRendition(x + len) || !hasSameWidth(x + len) || !hasSameLineDrawStatus(x + len)
+                    if (!char_value.hasSameColors(next_char) || !hasSameRendition(x + len) || !hasSameWidth(x + len) || !hasSameLineDrawStatus(x + len)
                         || !char_value.isSameScript(next_char) || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
                         break;
                     }
@@ -157,10 +150,12 @@ void TerminalPainter::drawContents(Character *image,
             } else {
                 // Group spaces following any non-wide character with the character. This allows for
                 // rendering ambiguous characters with wide glyphs without clipping them.
-                while (!doubleWidth && isInsideDrawArea(x + len) && image[display->loc(x + len, y)].character == ' ' && hasSameColors(x + len)
-                       && hasSameRendition(x + len)) {
-                    // univec intentionally not modified - trailing spaces are meaningless
-                    len++;
+                while (!doubleWidth && isInsideDrawArea(x + len)) {
+                    const Character next_char = image[display->loc(x + len, y)];
+                    if (next_char.character == ' ' && char_value.hasSameColors(next_char) && hasSameRendition(x + len)) {
+                        // univec intentionally not modified - trailing spaces are meaningless
+                        len++;
+                    }
                 }
             }
 
