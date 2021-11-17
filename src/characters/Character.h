@@ -158,11 +158,15 @@ public:
 
     inline bool canBeGrouped(bool bidirectionalEnabled, bool isDoubleWidth) const
     {
+        if (character <= 0x7e) {
+            return true;
+        }
+
         if (QChar::script(character) == QChar::Script_Braille) {
             return false;
         }
 
-        return character <= 0x7e || (rendition & RE_EXTENDED_CHAR) || (bidirectionalEnabled && !isDoubleWidth);
+        return (rendition & RE_EXTENDED_CHAR) || (bidirectionalEnabled && !isDoubleWidth);
     }
 
     inline uint baseCodePoint() const
