@@ -94,7 +94,6 @@ void TerminalPainter::drawContents(Character *image,
             }
 
             // TODO: Move all those lambdas to Character, so it's easy to test.
-            const bool lineDraw = LineBlockCharacters::canDraw(image[display->loc(x, y)].character);
             const bool doubleWidth = (image[qMin(display->loc(x, y) + 1, imageSize - 1)].character == 0);
 
             const auto isInsideDrawArea = [&](int column) {
@@ -105,9 +104,6 @@ void TerminalPainter::drawContents(Character *image,
                 const int characterLoc = qMin(display->loc(column, y) + 1, imageSize - 1);
                 return (image[characterLoc].character == 0) == doubleWidth;
             };
-            const auto hasSameLineDrawStatus = [&](int column) {
-                return LineBlockCharacters::canDraw(image[display->loc(column, y)].character) == lineDraw;
-            };
 
             const Character &char_value = image[display->loc(x, y)];
 
@@ -116,7 +112,8 @@ void TerminalPainter::drawContents(Character *image,
                     Character next_char = image[display->loc(x + len, y)];
 
                     if (!char_value.hasSameColors(next_char) || !char_value.hasSameRendition(next_char) || !hasSameWidth(x + len)
-                        || !hasSameLineDrawStatus(x + len) || !char_value.isSameScript(next_char) || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
+                        || !char_value.hasSameLineDrawStatus(next_char) || !char_value.isSameScript(next_char)
+                        || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
                         break;
                     }
 
