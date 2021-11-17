@@ -190,6 +190,11 @@ public:
     {
         return lhs.foregroundColor == foregroundColor && lhs.backgroundColor == backgroundColor;
     }
+
+    inline bool hasSameRendition(const Character &lhs) const
+    {
+        return (lhs.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR);
+    };
 };
 
 constexpr bool operator==(const Character &a, const Character &b)

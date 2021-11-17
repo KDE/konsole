@@ -102,9 +102,6 @@ void TerminalPainter::drawContents(Character *image,
                 return column <= rect.right();
             };
 
-            const auto hasSameRendition = [&](int column) {
-                return (image[display->loc(column, y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR);
-            };
             const auto hasSameWidth = [&](int column) {
                 const int characterLoc = qMin(display->loc(column, y) + 1, imageSize - 1);
                 return (image[characterLoc].character == 0) == doubleWidth;
@@ -119,8 +116,8 @@ void TerminalPainter::drawContents(Character *image,
                 while (isInsideDrawArea(x + len)) {
                     Character next_char = image[display->loc(x + len, y)];
 
-                    if (!char_value.hasSameColors(next_char) || !hasSameRendition(x + len) || !hasSameWidth(x + len) || !hasSameLineDrawStatus(x + len)
-                        || !char_value.isSameScript(next_char) || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
+                    if (!char_value.hasSameColors(next_char) || !char_value.hasSameRendition(next_char) || !hasSameWidth(x + len)
+                        || !hasSameLineDrawStatus(x + len) || !char_value.isSameScript(next_char) || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
                         break;
                     }
 
@@ -152,7 +149,7 @@ void TerminalPainter::drawContents(Character *image,
                 // rendering ambiguous characters with wide glyphs without clipping them.
                 while (!doubleWidth && isInsideDrawArea(x + len)) {
                     const Character next_char = image[display->loc(x + len, y)];
-                    if (next_char.character == ' ' && char_value.hasSameColors(next_char) && hasSameRendition(x + len)) {
+                    if (next_char.character == ' ' && char_value.hasSameColors(next_char) && char_value.hasSameRendition(next_char)) {
                         // univec intentionally not modified - trailing spaces are meaningless
                         len++;
                     }
