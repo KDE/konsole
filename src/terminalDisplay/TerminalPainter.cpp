@@ -111,9 +111,7 @@ void TerminalPainter::drawContents(Character *image,
                 while (isInsideDrawArea(x + len)) {
                     Character next_char = image[display->loc(x + len, y)];
 
-                    if (!char_value.hasSameColors(next_char) || !char_value.hasSameRendition(next_char) || !hasSameWidth(x + len)
-                        || !char_value.hasSameLineDrawStatus(next_char) || !char_value.isSameScript(next_char)
-                        || !next_char.canBeGrouped(bidiEnabled, doubleWidth)) {
+                    if (!hasSameWidth(x + len) || !next_char.canBeGrouped(bidiEnabled, doubleWidth) || !char_value.hasSameAttributes(next_char)) {
                         break;
                     }
 

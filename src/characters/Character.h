@@ -206,6 +206,11 @@ public:
         const bool lineDraw = LineBlockCharacters::canDraw(character);
         return LineBlockCharacters::canDraw(lhs.character) == lineDraw;
     };
+
+    inline bool hasSameAttributes(Character lhs) const
+    {
+        return hasSameColors(lhs) && hasSameRendition(lhs) && hasSameLineDrawStatus(lhs) && isSameScript(lhs);
+    }
 };
 
 constexpr bool operator==(const Character &a, const Character &b)
