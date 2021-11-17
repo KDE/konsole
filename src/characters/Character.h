@@ -176,7 +176,7 @@ public:
         return character;
     }
 
-    inline bool isSameScript(const Character &lhs) const
+    inline bool isSameScript(Character lhs) const
     {
         const QChar::Script script = QChar::script(lhs.baseCodePoint());
         const QChar::Script currentScript = QChar::script(baseCodePoint());
@@ -187,17 +187,17 @@ public:
         return currentScript == script;
     };
 
-    inline bool hasSameColors(const Character &lhs) const
+    inline bool hasSameColors(Character lhs) const
     {
         return lhs.foregroundColor == foregroundColor && lhs.backgroundColor == backgroundColor;
     }
 
-    inline bool hasSameRendition(const Character &lhs) const
+    inline bool hasSameRendition(Character lhs) const
     {
         return (lhs.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR);
     };
 
-    inline bool hasSameLineDrawStatus(const Character &lhs) const
+    inline bool hasSameLineDrawStatus(Character lhs) const
     {
         const bool lineDraw = LineBlockCharacters::canDraw(character);
         return LineBlockCharacters::canDraw(lhs.character) == lineDraw;
