@@ -544,6 +544,19 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         return;
     }
 
+    if (attribute == Session::ProfileChange) {
+        if (value.startsWith(QLatin1String("CursorShape="))) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            const auto numStr = QStringView(value).right(1);
+#else
+            const auto numStr = value.rightRef(1);
+#endif
+            const Enum::CursorShapeEnum shape = static_cast<Enum::CursorShapeEnum>(numStr.toInt());
+            Q_EMIT setCursorStyleRequest(shape);
+            return;
+        }
+    }
+
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
 }
