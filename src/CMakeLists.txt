@@ -273,7 +273,7 @@ target_link_libraries(konsoleapp
 )
 
 set_target_properties(konsoleapp PROPERTIES
-    VERSION ${KONSOLEPRIVATE_VERSION_STRING}
+    VERSION ${KONSOLEPRIVATE_VERSION}
     SOVERSION ${KONSOLEPRIVATE_SOVERSION}
 )
 
