@@ -788,6 +788,7 @@ Name[tr]=Odaklanmayan İzlenen Oturumda süreç tamamlandı
 Name[uk]=У нефокусованому сеансі спостереження завершено процес
 Name[x-test]=xxProcess finished in Non-Focused Monitored Sessionxx
 Name[zh_CN]=未取得焦点的被监视会话中的进程完成
+Name[zh_TW]=完成於未取得焦點工作階段的執行程序
 Comment=Process finished in a non-focused monitored session
 Comment[ar]=انتهت العملية في الجلسة المُراقبة غير مركز عليها
 Comment[ast]=Un procesu finó nuna sesión supervisada ensin el focu
@@ -819,6 +820,7 @@ Comment[tr]=Odaklanmayan, izlenen bir oturumda süreç tamamlandı
 Comment[uk]=У нефокусованому сеансі спостереження завершено роботу процесу
 Comment[x-test]=xxProcess finished in a non-focused monitored sessionxx
 Comment[zh_CN]=未取得焦点的被监视会话中的进程完成
+Comment[zh_TW]=完成於未取得焦點工作階段的執行程序
 Action=Popup
 
 [Event/ProcessFinished]
@@ -854,6 +856,7 @@ Name[tr]=İzlenen Oturumda işlem tamamlandı
 Name[uk]=У сеансі спостереження завершено процес
 Name[x-test]=xxProcess finished in Monitored Sessionxx
 Name[zh_CN]=被监视会话中的进程完成
+Name[zh_TW]=完成於監控中工作階段的執行程序
 Comment=Process finished in a monitored session
 Comment[ar]=انتهت العملية في الجلسة المُراقبة
 Comment[ast]=Un procesu finó nuna sesión supervisada
@@ -886,6 +889,7 @@ Comment[tr]=İşlem izlenen bir oturumda tamamlandı
 Comment[uk]=У сеансі спостереження завершено роботу процесу
 Comment[x-test]=xxProcess finished in a monitored sessionxx
 Comment[zh_CN]=被监视会话中的进程完成
+Comment[zh_TW]=完成於監控中工作階段的執行程序
 Action=Popup
 
 [Event/Finished]
