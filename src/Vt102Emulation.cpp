@@ -1045,9 +1045,9 @@ void Vt102Emulation::reportTerminalType()
 
 void Vt102Emulation::reportTertiaryAttributes()
 {
-  // Tertiary device attribute response DECRPTUI (Request was: ^[[=0c or ^[[=c)
-  // 7e4b4445 is hex for ASCII "~KDE"
-  sendString("\033P!|7e4b4445\033\\");
+    // Tertiary device attribute response DECRPTUI (Request was: ^[[=0c or ^[[=c)
+    // 7E4B4445 is hex for ASCII "~KDE"
+    sendString("\033P!|7E4B4445\033\\");
 }
 
 void Vt102Emulation::reportSecondaryAttributes()
