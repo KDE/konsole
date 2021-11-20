@@ -45,19 +45,19 @@ void DBusTest::initTestCase()
 
     // Create test profile
     auto profile = Profile::Ptr(new Profile());
-    auto profileWriter = new ProfileWriter();
+    ProfileWriter profileWriter;
 
     do {
         _testProfileName = QStringLiteral("konsole-dbus-test-profile-%1").arg(QRandomGenerator::global()->generate());
         profile->setProperty(Profile::UntranslatedName, _testProfileName);
         profile->setProperty(Profile::Name, _testProfileName);
-        _testProfilePath = profileWriter->getPath(profile);
+        _testProfilePath = profileWriter.getPath(profile);
     } while (QFile::exists(_testProfilePath));
     _testProfileEnv = QStringLiteral("TEST_PROFILE=%1").arg(_testProfileName);
     profile->setProperty(Profile::Environment, QStringList(_testProfileEnv));
     // %D = Current Directory (Long) - hacky way to check current directory
     profile->setProperty(Profile::LocalTabTitleFormat, QStringLiteral("%D"));
-    profileWriter->writeProfile(_testProfilePath, profile);
+    profileWriter.writeProfile(_testProfilePath, profile);
 
     // Create a new Konsole with a separate process id
     _process = new QProcess;
