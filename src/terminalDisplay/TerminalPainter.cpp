@@ -74,12 +74,14 @@ void TerminalPainter::drawContents(Character *image,
 
         for (; x <= rect.right(); x++) {
             int len = 1;
+            const int pos = display->loc(x, y);
+            const Character char_value = image[pos];
 
             // is this a single character or a sequence of characters ?
-            if ((image[display->loc(x, y)].rendition & RE_EXTENDED_CHAR) != 0) {
+            if ((char_value.rendition & RE_EXTENDED_CHAR) != 0) {
                 // sequence of characters
                 ushort extendedCharLength = 0;
-                const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(image[display->loc(x, y)].character, extendedCharLength);
+                const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(char_value.character, extendedCharLength);
                 if (chars != nullptr) {
                     Q_ASSERT(extendedCharLength > 1);
                     for (int index = 0; index < extendedCharLength; index++) {
@@ -87,36 +89,35 @@ void TerminalPainter::drawContents(Character *image,
                     }
                 }
             } else {
-                const uint c = image[display->loc(x, y)].character;
+                const uint c = char_value.character;
                 if (c != 0u) {
                     univec << c;
                 }
             }
 
             // TODO: Move all those lambdas to Character, so it's easy to test.
-            const bool doubleWidth = (image[qMin(display->loc(x, y) + 1, imageSize - 1)].character == 0);
+            const bool doubleWidth = (image[qMin(pos + 1, imageSize - 1)].character == 0);
 
-            const auto isInsideDrawArea = [&](int column) {
-                return column <= rect.right();
+            const auto isInsideDrawArea = [rectRight = rect.right()](int column) {
+                return column <= rectRight;
             };
 
-            const auto hasSameWidth = [&](int column) {
-                const int characterLoc = qMin(display->loc(column, y) + 1, imageSize - 1);
+            const auto hasSameWidth = [imageSize, image, doubleWidth](int nextPos) {
+                const int characterLoc = qMin(nextPos + 1, imageSize - 1);
                 return (image[characterLoc].character == 0) == doubleWidth;
             };
 
-            const Character &char_value = image[display->loc(x, y)];
-
             if (char_value.canBeGrouped(bidiEnabled, doubleWidth)) {
                 while (isInsideDrawArea(x + len)) {
-                    Character next_char = image[display->loc(x + len, y)];
+                    const int nextPos = display->loc(x + len, y);
+                    const Character next_char = image[nextPos];
 
                     if (!hasSameWidth(x + len) || !next_char.canBeGrouped(bidiEnabled, doubleWidth) || !char_value.hasSameAttributes(next_char)) {
                         break;
                     }
 
-                    const uint c = image[display->loc(x + len, y)].character;
-                    if ((image[display->loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
+                    const uint c = next_char.character;
+                    if ((next_char.rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
                         ushort extendedCharLength = 0;
                         const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
@@ -201,12 +202,12 @@ void TerminalPainter::drawContents(Character *image,
 
             // paint text fragment
             if (printerFriendly) {
-                drawPrinterFriendlyTextFragment(paint, textArea, unistr, &image[display->loc(x, y)], y < lineProperties.size() ? lineProperties[y] : 0);
+                drawPrinterFriendlyTextFragment(paint, textArea, unistr, &image[pos], y < lineProperties.size() ? lineProperties[y] : 0);
             } else {
                 drawTextFragment(paint,
                                  textArea,
                                  unistr,
-                                 &image[display->loc(x, y)],
+                                 &image[pos],
                                  display->terminalColor()->colorTable(),
                                  y < lineProperties.size() ? lineProperties[y] : 0);
             }
