@@ -184,12 +184,18 @@ public:
      * Compares two colors and returns true if they represent the same color value and
      * use the same color space.
      */
-    friend constexpr bool operator==(const CharacterColor &a, const CharacterColor &b);
+    friend constexpr bool operator==(const CharacterColor a, const CharacterColor b)
+    {
+        return a._colorSpace == b._colorSpace && a._u == b._u && a._v == b._v && a._w == b._w;
+    }
     /**
      * Compares two colors and returns true if they represent different color values
      * or use different color spaces.
      */
-    friend constexpr bool operator!=(const CharacterColor &a, const CharacterColor &b);
+    friend constexpr bool operator!=(const CharacterColor a, const CharacterColor b)
+    {
+        return !operator==(a, b);
+    }
 
 private:
     quint8 _colorSpace;
@@ -199,16 +205,6 @@ private:
     quint8 _v;
     quint8 _w;
 };
-
-constexpr bool operator==(const CharacterColor &a, const CharacterColor &b)
-{
-    return a._colorSpace == b._colorSpace && a._u == b._u && a._v == b._v && a._w == b._w;
-}
-
-constexpr bool operator!=(const CharacterColor &a, const CharacterColor &b)
-{
-    return !operator==(a, b);
-}
 
 constexpr QColor color256(quint8 u, const QColor *base)
 {
