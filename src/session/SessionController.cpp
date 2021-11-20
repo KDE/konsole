@@ -47,6 +47,7 @@
 
 #include <KIO/JobUiDelegate>
 #include <KIO/OpenUrlJob>
+#include <KFileItemListProperties>
 
 #include <kconfigwidgets_version.h>
 #include <kwidgetsaddons_version.h>
@@ -1826,7 +1827,22 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         copy->setShortcut(Konsole::ACCEL | Qt::SHIFT | Qt::Key_C);
 #endif
 
-        QList<QAction *> toRemove;
+        const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
+        KFileItem item(currentUrl);
+
+        const auto old = popup->actions();
+
+        const KFileItemListProperties props({item});
+        QScopedPointer<KFileItemActions> ac(new KFileItemActions(popup));
+        ac->setItemListProperties(props);
+        ac->insertOpenWithActionsTo(popup->actions().value(4, nullptr), popup, QStringList{qApp->desktopFileName()});
+
+        auto neu = popup->actions();
+        for (auto* elm : old) {
+            neu.removeAll(elm);
+        }
+
+        QList<QAction *> toRemove = std::move(neu);
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc
         QSharedPointer<HotSpot> hotSpot = view()->filterActions(position);
         if (hotSpot != nullptr) {
