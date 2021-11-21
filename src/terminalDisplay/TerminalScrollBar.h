@@ -77,7 +77,7 @@ public:
     }
 
     /**
-     * Return the higlight line control
+     * Return the highlight line control
      */
     HighlightScrolledLines &highlightScrolledLines()
     {

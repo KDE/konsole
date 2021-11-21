@@ -977,7 +977,7 @@ void SessionController::renameSession()
     dialog->show();
 }
 
-// This is called upon Menu->Close Sesssion and right-click on tab->Close Tab
+// This is called upon Menu->Close Session and right-click on tab->Close Tab
 bool SessionController::confirmClose() const
 {
     if (session()->isForegroundProcessActive()) {
@@ -1226,7 +1226,7 @@ void SessionController::copyInputToNone()
         return;
     }
 
-    // Once Qt5.14+ is the mininum, change to use range constructors
+    // Once Qt5.14+ is the minimum, change to use range constructors
     const QList<Session *> groupList = SessionManager::instance()->sessions();
     QSet<Session *> group(groupList.begin(), groupList.end());
 

@@ -903,7 +903,7 @@ void MainWindow::showEvent(QShowEvent *event)
             // Delay resizing to here, so that the other parts of the UI
             // (ViewManager, TabbedViewContainer, TerminalDisplay ... etc)
             // have been created and TabbedViewContainer::sizeHint() returns
-            // a usuable size.
+            // a usable size.
 
             // Remove the WindowMaximized state to override the Window-Maximized
             // config key

@@ -114,7 +114,7 @@ public:
     /** Sets the menu to be shown when the new view button is clicked.
      * Only valid if the QuickNewView feature is enabled.
      * The default implementation does nothing. */
-    // TODO: Reenable this later.
+    // TODO: Re-enable this later.
     //    void setNewViewMenu(QMenu *menu);
     void renameTab(int index);
     ViewManager *connectedViewManager();

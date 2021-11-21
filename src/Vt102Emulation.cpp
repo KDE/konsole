@@ -883,7 +883,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     //There are four mouse modes which xterm-compatible terminals can support - 1000,1001,1002,1003
     //Konsole currently supports mode 1000 (basic mouse press and release),  mode 1002 (dragging the mouse)
     //and mode 1003 (moving the mouse).
-    //TODO:  Implementation of mouse mode 1001 (something called hilight tracking).
+    //TODO:  Implementation of mouse mode 1001 (something called highlight tracking).
     //
 
     case token_csi_pr('h', 1000) :          setMode      (MODE_Mouse1000); break; //XTERM

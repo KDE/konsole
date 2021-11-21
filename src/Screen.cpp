@@ -400,7 +400,7 @@ void Screen::setReflowLines(bool enable)
    fail to compile on gcc 8.3.1 as of Feb 2021 due to for_each_n().
    See BKO: 432639
 
-// Debugging auxiliar functions to show what is written in screen or history
+// Debugging auxiliary functions to show what is written in screen or history
 void toDebug(const Character *s, int count, bool wrapped = false)
 {
     QString out;
@@ -478,7 +478,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             }
         }
 
-        // Analize the lines and move the data to lines below.
+        // Analyze the lines and move the data to lines below.
         int currentPos = 0;
         while (currentPos < (cursorLine + cursorLineCorrection) && currentPos < (int)_screenLines.size() - 1) {
             // Join wrapped line in current position

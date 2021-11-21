@@ -103,7 +103,7 @@ public:
     /* Clear all the URL's, this is triggered when the Screen is cleared. */
     void clear();
 
-    /* Iterates trough all the URL's and remove the ones that are currently
+    /* Iterates through all the URL's and remove the ones that are currently
      * out of bounds because we removed lines in the History
      */
     void historyLinesRemoved(int lines);

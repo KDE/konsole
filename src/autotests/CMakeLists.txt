@@ -35,7 +35,7 @@ else()
     message(STATUS "We are NOT running in jenkins; running DBusTest...")
 
     # This test fails on kf5-qt5 SUSEQt5.9 buildbot since Oct 28, 2018
-    # Believed due to frameworks regession; disable to avoid sysadmins having
+    # Believed due to frameworks regression; disable to avoid sysadmins having
     # to fix for every build
     # https://mail.kde.org/pipermail/kde-frameworks-devel/2018-November/073078.html
     # https://phabricator.kde.org/T9948

@@ -217,7 +217,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
 
         if (lists.at(0) == QStringLiteral("Host")) {
             if (line.contains(QLatin1Char('*'))) {
-                // Panic, ignore everything untill the next Host appears.
+                // Panic, ignore everything until the next Host appears.
                 ignoreEntry = true;
                 continue;
             } else {
