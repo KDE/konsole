@@ -149,12 +149,12 @@ public:
          * should be highlighted.
          */
         HighlightScrolledLines,
-        /** (bool) Specifies whether the terminal will enable Bidirectional
-         * text display
-         */
-        ReflowLines,
         /** (bool) Specifies whether the terminal will enable Reflow of
          * lines when terminal resizes.
+         */
+        ReflowLines,
+        /** (bool) Specifies whether the terminal will enable Bidirectional
+         * text display
          */
         BidiRenderingEnabled,
         /** (bool) Specifies whether text in terminal displays is allowed
