@@ -16,6 +16,12 @@
 #include <KWindowSystem>
 
 #include <kwindowsystem_version.h>
+#include <kservice_version.h>
+
+#if KSERVICE_VERSION < QT_VERSION_CHECK(5, 86, 0)
+#include <KPluginLoader>
+#include <KService>
+#endif
 
 // see below notes
 //#include "../../../WindowSystemInfo.h"
@@ -73,12 +79,22 @@ demo_konsolepart::~demo_konsolepart()
 
 KParts::ReadOnlyPart *demo_konsolepart::createPart()
 {
+#if KSERVICE_VERSION < QT_VERSION_CHECK(5, 86, 0)
+    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
+    Q_ASSERT(service);
+    KPluginFactory *factory = KPluginLoader(service->library()).factory();
+    Q_ASSERT(factory);
+
+    auto *terminalPart = factory->create<KParts::ReadOnlyPart>(this);
+    return terminalPart;
+#else
     const KPluginFactory::Result<KParts::ReadOnlyPart> result =
         KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(KPluginMetaData(QStringLiteral("konsolepart")), this);
 
     Q_ASSERT(result);
 
     return result.plugin;
+#endif
 }
 
 void demo_konsolepart::manageProfiles()
