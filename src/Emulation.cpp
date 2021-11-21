@@ -192,28 +192,30 @@ QString Emulation::keyBindings() const
 
 // process application unicode input to terminal
 // this is a trivial scanner
-void Emulation::receiveChar(uint c)
+void Emulation::receiveChars(const QVector<uint> &chars)
 {
-    c &= 0xff;
-    switch (c) {
-    case '\b':
-        _currentScreen->backspace();
-        break;
-    case '\t':
-        _currentScreen->tab();
-        break;
-    case '\n':
-        _currentScreen->newLine();
-        break;
-    case '\r':
-        _currentScreen->toStartOfLine();
-        break;
-    case 0x07:
-        Q_EMIT bell();
-        break;
-    default:
-        _currentScreen->displayCharacter(c);
-        break;
+    for (uint c : chars) {
+        c &= 0xff;
+        switch (c) {
+        case '\b':
+            _currentScreen->backspace();
+            break;
+        case '\t':
+            _currentScreen->tab();
+            break;
+        case '\n':
+            _currentScreen->newLine();
+            break;
+        case '\r':
+            _currentScreen->toStartOfLine();
+            break;
+        case 0x07:
+            Q_EMIT bell();
+            break;
+        default:
+            _currentScreen->displayCharacter(c);
+            break;
+        }
     }
 }
 
@@ -234,9 +236,8 @@ void Emulation::receiveData(const char *text, int length)
     bufferedUpdate();
 
     // send characters to terminal emulator
-    for (const uint i : _decoder->toUnicode(text, length).toUcs4()) {
-        receiveChar(i);
-    }
+    const QVector<uint> chars = _decoder->toUnicode(text, length).toUcs4();
+    receiveChars(chars);
 
     // look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move

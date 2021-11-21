@@ -86,7 +86,7 @@ protected:
     // reimplemented from Emulation
     void setMode(int mode) override;
     void resetMode(int mode) override;
-    void receiveChar(uint cc) override;
+    void receiveChars(const QVector<uint> &chars) override;
 
 private Q_SLOTS:
     // Causes sessionAttributeChanged() to be emitted for each (int,QString)

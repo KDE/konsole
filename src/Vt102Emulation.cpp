@@ -353,164 +353,166 @@ const int DEL = 127;
 const int SP = 32;
 
 // process an incoming unicode character
-void Vt102Emulation::receiveChar(uint cc)
+void Vt102Emulation::receiveChars(const QVector<uint> &chars)
 {
-    if (cc == DEL) {
-        return; // VT100: ignore.
-    }
-
-    if (ces(CTL)) {
-        // ignore control characters in the text part of osc (aka OSC) "ESC]"
-        // escape sequences; this matches what XTERM docs say
-        // Allow BEL and ESC here, it will either end the text or be removed later.
-        if (osc && cc != 0x1b && cc != 0x07) {
-            return;
+    for (uint cc : chars) {
+        if (cc == DEL) {
+            continue; // VT100: ignore.
         }
 
-        if (!osc) {
-            // DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
-            // This means, they do neither a resetTokenizer() nor a pushToToken(). Some of them, do
-            // of course. Guess this originates from a weakly layered handling of the X-on
-            // X-off protocol, which comes really below this level.
-            if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) {
-                resetTokenizer(); // VT100: CAN or SUB
+        if (ces(CTL)) {
+            // ignore control characters in the text part of osc (aka OSC) "ESC]"
+            // escape sequences; this matches what XTERM docs say
+            // Allow BEL and ESC here, it will either end the text or be removed later.
+            if (osc && cc != 0x1b && cc != 0x07) {
+                continue;
             }
-            if (cc != ESC) {
-                processToken(token_ctl(cc + '@'), 0, 0);
-                return;
-            }
-        }
-    }
-    // advance the state
-    addToCurrentToken(cc);
 
-    uint *s = tokenBuffer;
-    const int p = tokenBufferPos;
-
-    if (getMode(MODE_Ansi)) {
-        if (lec(1, 0, ESC)) {
-            return;
-        }
-        if (lec(1, 0, ESC + 128)) {
-            s[0] = ESC;
-            receiveChar('[');
-            return;
-        }
-        if (les(2, 1, GRP)) {
-            return;
-        }
-        // Operating System Command
-        if (p > 2 && s[1] == ']') {
-            // <ESC> ']' ... <ESC> '\'
-            if (s[p - 2] == ESC && s[p - 1] == '\\') {
-                // This runs two times per link, the first prepares the link to be read,
-                // the second finalizes it. The escape sequence is in two parts
-                //  start: '\e ] 8 ; <id-path> ; <url-part> \e \\'
-                //  end:   '\e ] 8 ; ; \e \\'
-                // GNU libtextstyle inserts the IDs, for instance; many examples
-                // do not.
-                if (s[2] == XTERM_EXTENDED::URL_LINK) {
-                    // printf '\e]8;;https://example.com\e\\This is a link\e]8;;\e\\\n'
-                    _currentScreen->urlExtractor()->toggleUrlInput();
+            if (!osc) {
+                // DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
+                // This means, they do neither a resetTokenizer() nor a pushToToken(). Some of them, do
+                // of course. Guess this originates from a weakly layered handling of the X-on
+                // X-off protocol, which comes really below this level.
+                if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) {
+                    resetTokenizer(); // VT100: CAN or SUB
                 }
-                processSessionAttributeRequest(p - 1);
-                resetTokenizer();
-                return;
-            }
-            // <ESC> ']' ... <ESC> + one character for reprocessing
-            if (s[p - 2] == ESC) {
-                processSessionAttributeRequest(p - 1);
-                resetTokenizer();
-                receiveChar(cc);
-                return;
-            }
-            // <ESC> ']' ... <BEL>
-            if (s[p - 1] == 0x07) {
-                processSessionAttributeRequest(p);
-                resetTokenizer();
-                return;
+                if (cc != ESC) {
+                    processToken(token_ctl(cc + '@'), 0, 0);
+                    continue;
+                }
             }
         }
+        // advance the state
+        addToCurrentToken(cc);
 
-        /* clang-format off */
-    // <ESC> ']' ...
-    if (osc         ) { return; }
-    if (lec(3,2,'?')) { return; }
-    if (lec(3,2,'=')) { return; }
-    if (lec(3,2,'>')) { return; }
-    if (lec(3,2,'!')) { return; }
-    if (lec(3,2,SP )) { return; }
-    if (lec(4,3,SP )) { return; }
-    if (lun(       )) { processToken(token_chr(), applyCharset(cc), 0);   resetTokenizer(); return; }
-    if (dcs         ) { return; /* TODO We don't xterm DCS, so we just eat it */ }
-    if (lec(2,0,ESC)) { processToken(token_esc(s[1]), 0, 0);              resetTokenizer(); return; }
-    if (les(3,1,SCS)) { processToken(token_esc_cs(s[1],s[2]), 0, 0);      resetTokenizer(); return; }
-    if (lec(3,1,'#')) { processToken(token_esc_de(s[2]), 0, 0);           resetTokenizer(); return; }
-    if (eps(    CPN)) { processToken(token_csi_pn(cc), argv[0],argv[1]);  resetTokenizer(); return; }
+        uint *s = tokenBuffer;
+        const int p = tokenBufferPos;
 
-    // resize = \e[8;<row>;<col>t
-    if (eps(CPS)) {
-        processToken(token_csi_ps(cc, argv[0]), argv[1], argv[2]);
+        if (getMode(MODE_Ansi)) {
+            if (lec(1, 0, ESC)) {
+                continue;
+            }
+            if (lec(1, 0, ESC + 128)) {
+                s[0] = ESC;
+                receiveChars(QVector<uint>{'['});
+                continue;
+            }
+            if (les(2, 1, GRP)) {
+                continue;
+            }
+            // Operating System Command
+            if (p > 2 && s[1] == ']') {
+                // <ESC> ']' ... <ESC> '\'
+                if (s[p - 2] == ESC && s[p - 1] == '\\') {
+                    // This runs two times per link, the first prepares the link to be read,
+                    // the second finalizes it. The escape sequence is in two parts
+                    //  start: '\e ] 8 ; <id-path> ; <url-part> \e \\'
+                    //  end:   '\e ] 8 ; ; \e \\'
+                    // GNU libtextstyle inserts the IDs, for instance; many examples
+                    // do not.
+                    if (s[2] == XTERM_EXTENDED::URL_LINK) {
+                        // printf '\e]8;;https://example.com\e\\This is a link\e]8;;\e\\\n'
+                        _currentScreen->urlExtractor()->toggleUrlInput();
+                    }
+                    processSessionAttributeRequest(p - 1);
+                    resetTokenizer();
+                    continue;
+                }
+                // <ESC> ']' ... <ESC> + one character for reprocessing
+                if (s[p - 2] == ESC) {
+                    processSessionAttributeRequest(p - 1);
+                    resetTokenizer();
+                    receiveChars(QVector<uint>{cc});
+                    continue;
+                }
+                // <ESC> ']' ... <BEL>
+                if (s[p - 1] == 0x07) {
+                    processSessionAttributeRequest(p);
+                    resetTokenizer();
+                    continue;
+                }
+            }
+
+            /* clang-format off */
+        // <ESC> ']' ...
+        if (osc         ) { continue; }
+        if (lec(3,2,'?')) { continue; }
+        if (lec(3,2,'=')) { continue; }
+        if (lec(3,2,'>')) { continue; }
+        if (lec(3,2,'!')) { continue; }
+        if (lec(3,2,SP )) { continue; }
+        if (lec(4,3,SP )) { continue; }
+        if (lun(       )) { processToken(token_chr(), applyCharset(cc), 0);   resetTokenizer(); continue; }
+        if (dcs         ) { continue; /* TODO We don't xterm DCS, so we just eat it */ }
+        if (lec(2,0,ESC)) { processToken(token_esc(s[1]), 0, 0);              resetTokenizer(); continue; }
+        if (les(3,1,SCS)) { processToken(token_esc_cs(s[1],s[2]), 0, 0);      resetTokenizer(); continue; }
+        if (lec(3,1,'#')) { processToken(token_esc_de(s[2]), 0, 0);           resetTokenizer(); continue; }
+        if (eps(    CPN)) { processToken(token_csi_pn(cc), argv[0],argv[1]);  resetTokenizer(); continue; }
+
+        // resize = \e[8;<row>;<col>t
+        if (eps(CPS)) {
+            processToken(token_csi_ps(cc, argv[0]), argv[1], argv[2]);
+            resetTokenizer();
+            continue;
+        }
+
+        if (epe(   )) { processToken(token_csi_pe(cc), 0, 0); resetTokenizer(); continue; }
+
+        if (esp (   )) { processToken(token_csi_sp(cc), 0, 0);           resetTokenizer(); continue; }
+        if (epsp(   )) { processToken(token_csi_psp(cc, argv[0]), 0, 0); resetTokenizer(); continue; }
+
+        if (ees(DIG)) { addDigit(cc-'0'); continue; }
+        if (eec(';')) { addArgument();    continue; }
+        if (ees(INT)) { continue; }
+        if (p >= 3 && cc == 'y' && s[p - 2] == '*') { processChecksumRequest(argc, argv); resetTokenizer(); continue; }
+        for (int i = 0; i <= argc; i++) {
+            if (epp()) {
+                processToken(token_csi_pr(cc,argv[i]), 0, 0);
+            } else if (eeq()) {
+                processToken(token_csi_pq(cc), 0, 0); // spec. case for ESC[=0c or ESC[=c
+            } else if (egt()) {
+                processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC[>0c or ESC[>c
+            } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
+            {
+                // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
+                i += 2;
+                processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i+1] << 8) | argv[i+2]);
+                i += 2;
+            } else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 5) {
+                // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
+                i += 2;
+                processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_256, argv[i]);
+            } else if (p < 2 || (charClass[s[p-2]] & (INT)) != (INT)) {
+                processToken(token_csi_ps(cc,argv[i]), 0, 0);
+            }
+        }
         resetTokenizer();
-        return;
-    }
-
-    if (epe(   )) { processToken(token_csi_pe(cc), 0, 0); resetTokenizer(); return; }
-
-    if (esp (   )) { processToken(token_csi_sp(cc), 0, 0);           resetTokenizer(); return; }
-    if (epsp(   )) { processToken(token_csi_psp(cc, argv[0]), 0, 0); resetTokenizer(); return; }
-
-    if (ees(DIG)) { addDigit(cc-'0'); return; }
-    if (eec(';')) { addArgument();    return; }
-    if (ees(INT)) { return; }
-    if (p >= 3 && cc == 'y' && s[p - 2] == '*') { processChecksumRequest(argc, argv); resetTokenizer(); return; }
-    for (int i = 0; i <= argc; i++) {
-        if (epp()) {
-            processToken(token_csi_pr(cc,argv[i]), 0, 0);
-        } else if (eeq()) {
-            processToken(token_csi_pq(cc), 0, 0); // spec. case for ESC[=0c or ESC[=c
-        } else if (egt()) {
-            processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC[>0c or ESC[>c
-        } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
-        {
-            // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
-            i += 2;
-            processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i+1] << 8) | argv[i+2]);
-            i += 2;
-        } else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 5) {
-            // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
-            i += 2;
-            processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_256, argv[i]);
-        } else if (p < 2 || (charClass[s[p-2]] & (INT)) != (INT)) {
-            processToken(token_csi_ps(cc,argv[i]), 0, 0);
-        }
-    }
-    resetTokenizer();
         /* clang-format on */
-    } else {
-        // VT52 Mode
-        if (lec(1, 0, ESC)) {
-            return;
-        }
-        if (les(1, 0, CHR)) {
-            processToken(token_chr(), s[0], 0);
+        } else {
+            // VT52 Mode
+            if (lec(1, 0, ESC)) {
+                continue;
+            }
+            if (les(1, 0, CHR)) {
+                processToken(token_chr(), s[0], 0);
+                resetTokenizer();
+                continue;
+            }
+            if (lec(2, 1, 'Y')) {
+                continue;
+            }
+            if (lec(3, 1, 'Y')) {
+                continue;
+            }
+            if (p < 4) {
+                processToken(token_vt52(s[1]), 0, 0);
+                resetTokenizer();
+                continue;
+            }
+            processToken(token_vt52(s[1]), s[2], s[3]);
             resetTokenizer();
-            return;
+            continue;
         }
-        if (lec(2, 1, 'Y')) {
-            return;
-        }
-        if (lec(3, 1, 'Y')) {
-            return;
-        }
-        if (p < 4) {
-            processToken(token_vt52(s[1]), 0, 0);
-            resetTokenizer();
-            return;
-        }
-        processToken(token_vt52(s[1]), s[2], s[3]);
-        resetTokenizer();
-        return;
     }
 }
 
