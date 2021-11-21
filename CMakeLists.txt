@@ -39,6 +39,7 @@ include(ECMQtDeclareLoggingCategory)
 include(KDEClangFormat)
 # Remove OPTIONAL when we require EMC >= 5.79
 include(KDEGitCommitHooks OPTIONAL)
+include(CheckIncludeFiles)
 
 # Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
 include(ECMEnableSanitizers)
@@ -92,6 +93,8 @@ set(HAVE_X11 ${X11_FOUND})
 
 # Check for function GETPWUID
 check_symbol_exists(getpwuid "pwd.h" HAVE_GETPWUID)
+
+check_include_files(malloc.h      HAVE_MALLOC_H)
 
 # See above includes for defaults
 add_definitions(

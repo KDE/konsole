@@ -11,3 +11,6 @@
 #cmakedefine USE_TERMINALINTERFACEV2
 
 #cmakedefine HAVE_GETPWUID ${HAVE_GETPWUID}
+
+/* Define to 1 if you have the <malloc.h> header file. */
+#cmakedefine HAVE_MALLOC_H 1
