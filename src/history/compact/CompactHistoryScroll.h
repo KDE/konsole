@@ -39,22 +39,48 @@ public:
     int reflowLines(const int columns) override;
 
 private:
+    /**
+     * This is the actual buffer that contains the cells
+     */
     std::deque<Character> _cells;
-    std::vector<int> _index;
+
+    /**
+     * This buffer contains the length of each line in _cells
+     * The size of this buffer is the number of lines we have.
+     */
+    std::vector<int> _lineLengths;
+
+    /**
+     * This contains the flag for each line
+     * size is always equal to _index
+     */
     std::vector<LineProperty> _flags;
 
+    /**
+     * Max number of lines we can hold
+     */
     size_t _maxLineCount;
 
+    /**
+     * Remove @p lines from the "start" of above buffers
+     */
     void removeLinesFromTop(int lines);
 
     inline int lineLen(const int line) const
     {
-        return line == 0 ? _index.at(0) : _index.at(line) - _index.at(line - 1);
+        return _lineLengths.at(line);
     }
 
+    /**
+     * Get the start of @p line in _cells buffer
+     *
+     * Since _index contains lengths of lines, we need
+     * to add up till we reach @p line. That will be the starting point
+     * of @p line.
+     */
     inline int startOfLine(const int line) const
     {
-        return line == 0 ? 0 : _index.at(line - 1);
+        return std::accumulate(_lineLengths.begin(), _lineLengths.begin() + line, 0);
     }
 };
 

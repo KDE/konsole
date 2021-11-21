@@ -25,19 +25,16 @@ CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount)
 
 void CompactHistoryScroll::removeLinesFromTop(int lines)
 {
-    if (_index.size() > 1) {
+    if (_lineLengths.size() > 1) {
         _flags.erase(_flags.begin(), _flags.begin() + lines);
 
-        const int removing = _index[lines - 1];
-        std::transform(_index.begin() + lines, _index.end(), _index.begin(), [removing](int i) {
-            return i - removing;
-        });
-        _index.erase(_index.end() - lines, _index.end());
+        const int removing = std::accumulate(_lineLengths.begin(), _lineLengths.begin() + lines, 0);
+        _lineLengths.erase(_lineLengths.begin(), _lineLengths.begin() + lines);
 
         _cells.erase(_cells.begin(), _cells.begin() + removing);
     } else {
         _flags.clear();
-        _index.clear();
+        _lineLengths.clear();
         _cells.clear();
     }
 }
@@ -46,10 +43,12 @@ void CompactHistoryScroll::addCells(const Character a[], const int count)
 {
     std::copy(a, a + count, std::back_inserter(_cells));
 
-    _index.push_back(_cells.size());
+    // store the length of line
+    _lineLengths.push_back(count);
+    // and the line's flag
     _flags.push_back(LINE_DEFAULT);
 
-    if (_index.size() > _maxLineCount + 5) {
+    if (_lineLengths.size() > _maxLineCount + 5) {
         removeLinesFromTop(5);
     }
 }
@@ -62,7 +61,7 @@ void CompactHistoryScroll::addLine(const LineProperty lineProperty)
 
 int CompactHistoryScroll::getLines() const
 {
-    return _index.size();
+    return _lineLengths.size();
 }
 
 int CompactHistoryScroll::getMaxLines() const
@@ -72,7 +71,7 @@ int CompactHistoryScroll::getMaxLines() const
 
 int CompactHistoryScroll::getLineLen(int lineNumber) const
 {
-    if (size_t(lineNumber) >= _index.size()) {
+    if (size_t(lineNumber) >= _lineLengths.size()) {
         return 0;
     }
 
@@ -84,7 +83,7 @@ void CompactHistoryScroll::getCells(const int lineNumber, const int startColumn,
     if (count == 0) {
         return;
     }
-    Q_ASSERT((size_t)lineNumber < _index.size());
+    Q_ASSERT((size_t)lineNumber < _lineLengths.size());
 
     Q_ASSERT(startColumn >= 0);
     Q_ASSERT(startColumn <= lineLen(lineNumber) - count);
@@ -99,35 +98,41 @@ void CompactHistoryScroll::setMaxNbLines(const int lineCount)
     Q_ASSERT(lineCount >= 0);
     _maxLineCount = lineCount;
 
-    if (_index.size() > _maxLineCount) {
-        int linesToRemove = _index.size() - _maxLineCount;
+    if (_lineLengths.size() > _maxLineCount) {
+        int linesToRemove = _lineLengths.size() - _maxLineCount;
         removeLinesFromTop(linesToRemove);
     }
 }
 
 void CompactHistoryScroll::removeCells()
 {
-    if (_index.size() > 1) {
-        _index.pop_back();
-        _flags.pop_back();
+    if (_lineLengths.size() > 1) {
+        /** Here we remove a line from the "end" of the buffers **/
 
-        _cells.erase(_cells.begin() + _index.back(), _cells.end());
+        // Get last line start
+        int lastLineStart = startOfLine(_lineLengths.size() - 1);
+        // remove it from _index
+        _lineLengths.pop_back();
+        // remove the flag for this line
+        _flags.pop_back();
+        // remove the line data
+        _cells.erase(_cells.begin() + lastLineStart, _cells.end());
     } else {
         _cells.clear();
-        _index.clear();
+        _lineLengths.clear();
         _flags.clear();
     }
 }
 
 bool CompactHistoryScroll::isWrappedLine(const int lineNumber) const
 {
-    Q_ASSERT((size_t)lineNumber < _index.size());
+    Q_ASSERT((size_t)lineNumber < _lineLengths.size());
     return (_flags.at(lineNumber) & LINE_WRAPPED) > 0;
 }
 
 LineProperty CompactHistoryScroll::getLineProperty(const int lineNumber) const
 {
-    Q_ASSERT((size_t)lineNumber < _index.size());
+    Q_ASSERT((size_t)lineNumber < _lineLengths.size());
     return _flags.at(lineNumber);
 }
 
@@ -145,25 +150,30 @@ int CompactHistoryScroll::reflowLines(const int columns)
 
     int currentPos = 0;
     while (currentPos < getLines()) {
-        int startLine = startOfLine(currentPos);
-        int endLine = startOfLine(currentPos + 1);
+        int lineStart = startOfLine(currentPos);
+        // next line will be startLine + length of startLine
+        // i.e., start of next line
+        int endLine = lineStart + lineLen(currentPos);
         LineProperty lineProperty = getLineProperty(currentPos);
 
         // Join the lines if they are wrapped
         while (currentPos < getLines() - 1 && isWrappedLine(currentPos)) {
             currentPos++;
-            endLine = startOfLine(currentPos + 1);
+            endLine += lineLen(currentPos);
         }
 
         // Now reflow the lines
-        while (reflowLineLen(startLine, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
-            startLine += columns;
-            setNewLine(newLine, startLine, lineProperty | LINE_WRAPPED);
+        int last = lineStart;
+        while (reflowLineLen(lineStart, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
+            lineStart += columns;
+            // new length = newLineStart - prevLineStart
+            setNewLine(newLine, lineStart - last, lineProperty | LINE_WRAPPED);
+            last = lineStart;
         }
-        setNewLine(newLine, endLine, lineProperty & ~LINE_WRAPPED);
+        setNewLine(newLine, endLine - last, lineProperty & ~LINE_WRAPPED);
         currentPos++;
     }
-    _index = std::move(newLine.index);
+    _lineLengths = std::move(newLine.index);
     _flags = std::move(newLine.flags);
 
     int deletedLines = 0;
