@@ -147,6 +147,9 @@ void TerminalPainter::drawContents(Character *image,
                     if (next_char.character == ' ' && char_value.hasSameColors(next_char) && char_value.hasSameRendition(next_char)) {
                         // univec intentionally not modified - trailing spaces are meaningless
                         len++;
+                    } else {
+                        // break otherwise, we don't want to be stuck in this loop
+                        break;
                     }
                 }
             }
