@@ -85,6 +85,11 @@ void TerminalPainter::drawContents(Character *image,
     QVector<uint> univec;
     univec.reserve(display->usedColumns());
 
+    const int leftPadding = display->contentRect().left() + display->contentsRect().left();
+    const int topPadding = display->contentRect().top() + display->contentsRect().top();
+    const int fontWidth = display->terminalFont()->fontWidth();
+    const int fontHeight = display->terminalFont()->fontHeight();
+
     for (int y = rect.y(); y <= rect.bottom(); y++) {
         int x = rect.x();
         bool doubleHeightLinePair = false;
@@ -206,11 +211,10 @@ void TerminalPainter::drawContents(Character *image,
             paint.setWorldTransform(textScale, true);
 
             // Calculate the area in which the text will be drawn
-            QRect textArea =
-                QRect(display->contentRect().left() + display->contentsRect().left() + display->terminalFont()->fontWidth() * x * (doubleWidthLine ? 2 : 1),
-                      display->contentRect().top() + display->contentsRect().top() + display->terminalFont()->fontHeight() * y,
-                      display->terminalFont()->fontWidth() * len,
-                      doubleHeight && !doubleHeightLinePair ? display->terminalFont()->fontHeight() / 2 : display->terminalFont()->fontHeight());
+            const int textX = leftPadding + fontWidth * x * (doubleWidthLine ? 2 : 1);
+            const int textY = topPadding + fontHeight * y;
+            const int textWidth = fontWidth * len;
+            const int textHeight = doubleHeight && !doubleHeightLinePair ? fontHeight / 2 : fontHeight;
 
             // move the calculated area to take account of scaling applied to the painter.
             // the position of the area from the origin (0,0) is scaled
@@ -218,9 +222,9 @@ void TerminalPainter::drawContents(Character *image,
             // transformation has been applied to the painter.  this ensures that
             // painting does actually start from textArea.topLeft()
             //(instead of textArea.topLeft() * painter-scale)
-            textArea.moveTopLeft(textScale.inverted().map(textArea.topLeft()));
+            const QRect textArea(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
 
-            QString unistr = QString::fromUcs4(univec.data(), univec.length());
+            const QString unistr = QString::fromUcs4(univec.data(), univec.length());
 
             univec.clear();
 
