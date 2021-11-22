@@ -549,13 +549,14 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
     painter.setPen(pen);
 
     if (display->cursorShape() == Enum::BlockCursor) {
-        painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
 
         if (display->hasFocus()) {
             painter.fillRect(cursorRect, cursorColor);
 
             QColor cursorTextColor = display->terminalColor()->cursorTextColor();
             characterColor = cursorTextColor.isValid() ? cursorTextColor : backgroundColor;
+        } else {
+            painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
         }
     } else if (display->cursorShape() == Enum::UnderlineCursor) {
         QLineF line(cursorRect.left() + halfWidth, cursorRect.bottom() - halfWidth, cursorRect.right() - halfWidth, cursorRect.bottom() - halfWidth);
