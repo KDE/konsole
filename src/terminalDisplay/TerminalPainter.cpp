@@ -538,6 +538,9 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
         return;
     }
 
+    // shift rectangle top down one pixel to leave some space
+    // between top and bottom
+    // noticeable when linespace>1
     QRectF cursorRect = rect.adjusted(0, 1, 0, 0);
 
     QColor color = display->terminalColor()->cursorColor();
@@ -553,13 +556,16 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
     painter.setPen(pen);
 
     if (display->cursorShape() == Enum::BlockCursor) {
-
         if (display->hasFocus()) {
             painter.fillRect(cursorRect, cursorColor);
 
+            // invert the color used to draw the text to ensure that the character at
+            // the cursor position is readable
             QColor cursorTextColor = display->terminalColor()->cursorTextColor();
             characterColor = cursorTextColor.isValid() ? cursorTextColor : backgroundColor;
         } else {
+            // draw the cursor outline, adjusting the area so that
+            // it is draw entirely inside cursorRect
             painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
         }
     } else if (display->cursorShape() == Enum::UnderlineCursor) {
