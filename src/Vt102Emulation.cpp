@@ -399,7 +399,11 @@ void Vt102Emulation::receiveChar(uint cc)
             // <ESC> ']' ... <ESC> '\'
             if (s[p - 2] == ESC && s[p - 1] == '\\') {
                 // This runs two times per link, the first prepares the link to be read,
-                // the second finalizes it.
+                // the second finalizes it. The escape sequence is in two parts
+                //  start: '\e ] 8 ; <id-path> ; <url-part> \e \\'
+                //  end:   '\e ] 8 ; ; \e \\'
+                // GNU libtextstyle inserts the IDs, for instance; many examples
+                // do not.
                 if (s[2] == XTERM_EXTENDED::URL_LINK) {
                     // printf '\e]8;;https://example.com\e\\This is a link\e]8;;\e\\\n'
                     _currentScreen->urlExtractor()->toggleUrlInput();
@@ -527,12 +531,16 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         reportDecodingError();
         return;
     }
-    // skip ';'
+    // skip initial ';'
     ++i;
 
     QString value = QString::fromUcs4(&tokenBuffer[i], tokenSize - i);
     if (_currentScreen->urlExtractor()->reading()) {
-        value.remove(0, 1);
+        // To handle '\e ] 8 ; <id-part> ; <url-part>' we discard
+        // the <id-part>. Often it is empty, but GNU libtextstyle
+        // may output an id here, see e.g.
+        // https://www.gnu.org/software/gettext/libtextstyle/manual/libtextstyle.html#index-styled_005fostream_005fset_005fhyperlink
+        value.remove(0, value.indexOf(QLatin1Char(';'))+1);
         _currentScreen->urlExtractor()->setUrl(value);
         return;
     }
