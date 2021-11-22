@@ -565,7 +565,7 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
             characterColor = cursorTextColor.isValid() ? cursorTextColor : backgroundColor;
         } else {
             // draw the cursor outline, adjusting the area so that
-            // it is draw entirely inside cursorRect
+            // it is drawn entirely inside cursorRect
             painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
         }
     } else if (display->cursorShape() == Enum::UnderlineCursor) {
@@ -660,16 +660,24 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         painter.setLayoutDirection(Qt::LeftToRight);
         int y = rect.y() + display->terminalFont()->fontAscent();
 
+        int shifted = 0;
         if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
             y -= display->terminalFont()->fontHeight() / 2;
         } else {
-            y += display->terminalFont()->lineSpacing();
+            // We shift half way down here to center
+            shifted = display->terminalFont()->lineSpacing() / 2;
+            y += shifted;
         }
 
         if (display->bidiEnabled()) {
             painter.drawText(rect.x(), y, text);
         } else {
             painter.drawText(rect.x(), y, LTR_OVERRIDE_CHAR + text);
+        }
+
+        if (shifted > 0) {
+            // To avoid rounding errors we shift the rest this way
+            y += display->terminalFont()->lineSpacing() - shifted;
         }
     }
     painter.setClipRegion(origClipRegion);
