@@ -193,7 +193,7 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _advancedUi->setupUi(advancedPageWidget);
     auto *advancedPageItem = addPage(advancedPageWidget, advancedPageName);
     advancedPageItem->setHeader(advancedPageName);
-    advancedPageItem->setIcon(QIcon::fromTheme(QStringLiteral("configure"), defaultIcon));
+    advancedPageItem->setIcon(QIcon::fromTheme(QStringLiteral("preferences-other"), defaultIcon));
     _pages[advancedPageItem] = Page(&EditProfileDialog::setupAdvancedPage);
 
     // there are various setupXYZPage() methods to load the items
