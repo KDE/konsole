@@ -1104,15 +1104,16 @@ bool Session::isRemote()
 QString Session::getDynamicTitle()
 {
     ProcessInfo *process = getProcessInfo();
+    std::unique_ptr<SSHProcessInfo> sshProcess;
 
     // format tab titles using process info
     bool ok = false;
     if (process->name(&ok) == QLatin1String("ssh") && ok) {
-        SSHProcessInfo sshInfo(*process);
+        sshProcess = std::make_unique<SSHProcessInfo>(*process);
         QString title = tabTitleFormat(Session::RemoteTabTitle);
         title.replace(QLatin1String("%w"), userTitle());
         title.replace(QLatin1String("%#"), QString::number(sessionId()));
-        return sshInfo.format(title);
+        return sshProcess->format(title);
     }
 
     /*
