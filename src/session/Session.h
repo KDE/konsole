@@ -872,6 +872,8 @@ private:
     static int lastSessionId;
 
     bool _isPrimaryScreen;
+
+    QString _currentHostName;
 };
 
 }

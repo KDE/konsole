@@ -1110,6 +1110,16 @@ QString Session::getDynamicTitle()
     bool ok = false;
     if (process->name(&ok) == QLatin1String("ssh") && ok) {
         sshProcess = std::make_unique<SSHProcessInfo>(*process);
+    }
+
+    QString currHostName = sshProcess ? sshProcess->host() : process->localHost();
+
+    if (_currentHostName != currHostName) {
+        _currentHostName = currHostName;
+        Q_EMIT hostnameChanged(currHostName);
+    }
+
+    if (sshProcess) {
         QString title = tabTitleFormat(Session::RemoteTabTitle);
         title.replace(QLatin1String("%w"), userTitle());
         title.replace(QLatin1String("%#"), QString::number(sessionId()));

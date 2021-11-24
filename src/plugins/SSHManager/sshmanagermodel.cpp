@@ -152,7 +152,7 @@ void SSHManagerModel::setSessionController(Konsole::SessionController *controlle
 
 void SSHManagerModel::triggerProfileChange(const QString &sshHost)
 {
-    Q_UNUSED(sshHost);
+    qDebug() << "Localhost changed to" << sshHost;
 }
 
 void SSHManagerModel::load()
