@@ -230,7 +230,7 @@ void SSHManagerTreeWidget::clearSshInfo()
     hideInfoPane();
     ui->name->setText({});
     ui->hostname->setText({});
-    ui->port->setText({});
+    ui->port->setText(QStringLiteral("22"));
     ui->sshkey->setText({});
 }
 
