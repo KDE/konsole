@@ -99,6 +99,28 @@ void SSHManagerModel::addChildItem(const SSHConfigurationData &config, const QSt
     parentItem->sortChildren(0);
 }
 
+std::optional<QString> SSHManagerModel::profileForHost(const QString &host) const
+{
+    auto *root = invisibleRootItem();
+
+    // iterate through folders:
+    for (int i = 0, end = root->rowCount(); i < end; ++i) {
+        // iterate throguh the items on folders;
+        auto folder = root->child(i);
+        for (int e = 0, inner_end = folder->rowCount(); e < inner_end; ++e) {
+            QStandardItem *ssh_item = folder->child(e);
+            auto data = ssh_item->data(SSHRole).value<SSHConfigurationData>();
+
+            // Return the profile name if the host matches.
+            if (data.host == host) {
+                return data.profileName;
+            }
+        }
+    }
+
+    return {};
+}
+
 bool SSHManagerModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     const bool ret = QStandardItemModel::setData(index, value, role);

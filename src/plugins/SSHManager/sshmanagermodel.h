@@ -12,6 +12,7 @@
 #include <QStandardItemModel>
 
 #include <memory>
+#include <optional>
 
 namespace Konsole
 {
@@ -54,6 +55,7 @@ public:
     void save();
 
     bool hasHost(const QString &hostName) const;
+    std::optional<QString> profileForHost(const QString &host) const;
 
 private:
     QStandardItem *m_sshConfigTopLevelItem = nullptr;
