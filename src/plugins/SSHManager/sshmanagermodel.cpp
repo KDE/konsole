@@ -23,6 +23,11 @@
 #include "profile/ProfileManager.h"
 #include "session/Session.h"
 #include "session/SessionController.h"
+#include "session/SessionManager.h"
+
+#include "profile/ProfileManager.h"
+#include "profile/ProfileModel.h"
+
 #include "sshconfigurationdata.h"
 
 Q_LOGGING_CATEGORY(SshManagerPlugin, "org.kde.konsole.plugin.sshmanager")
@@ -174,7 +179,25 @@ void SSHManagerModel::setSessionController(Konsole::SessionController *controlle
 
 void SSHManagerModel::triggerProfileChange(const QString &sshHost)
 {
-    qDebug() << "Localhost changed to" << sshHost;
+    auto *sm = Konsole::SessionManager::instance();
+    std::optional<QString> profileName = profileForHost(sshHost);
+
+    Konsole::Profile::Ptr profile;
+    if (profileName) {
+        for (auto pr : Konsole::ProfileManager::instance()->allProfiles()) {
+            if (pr->name() == profileName.value()) {
+                profile = pr;
+                break;
+            }
+        }
+    } else {
+        // TODO: Return to the profile that was active on `localhost` prior to
+        // activating the profile for the ssh manager. but I need to store a list of
+        // sessions and profiles to save. Currently, this is enough.
+        profile = Konsole::ProfileManager::instance()->defaultProfile();
+    }
+
+    sm->setSessionProfile(m_session, profile);
 }
 
 void SSHManagerModel::load()
