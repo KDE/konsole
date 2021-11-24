@@ -115,7 +115,8 @@ void SSHManagerModel::load()
             data.host = sessionGroup.readEntry("hostname");
             data.name = sessionGroup.readEntry("identifier");
             data.port = sessionGroup.readEntry("port");
-            data.profileName = sessionGroup.readEntry("profilename");
+            data.profileName = sessionGroup.readEntry("profileName");
+            data.username = sessionGroup.readEntry("username");
             data.sshKey = sessionGroup.readEntry("sshkey");
             data.useSshConfig = sessionGroup.readEntry<bool>("useSshConfig", false);
             data.importedFromSshConfig = sessionGroup.readEntry<bool>("importedFromSshConfig", false);
@@ -145,6 +146,7 @@ void SSHManagerModel::save()
             sshGroup.writeEntry("profileName", data.profileName.trimmed());
             sshGroup.writeEntry("sshkey", data.sshKey.trimmed());
             sshGroup.writeEntry("useSshConfig", data.useSshConfig);
+            sshGroup.writeEntry("username", data.username);
             sshGroup.writeEntry("importedFromSshConfig", data.importedFromSshConfig);
             sshGroup.sync();
         }
