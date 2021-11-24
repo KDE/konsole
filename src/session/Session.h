@@ -751,6 +751,12 @@ Q_SIGNALS:
      */
     void getBackgroundColor(uint terminator);
 
+    /**
+     * When a user enters a ssh session that changes where the `hostname` is
+     * this is emmited.
+     */
+    void hostnameChanged(const QString &hostname);
+
 private Q_SLOTS:
     void done(int, QProcess::ExitStatus);
 

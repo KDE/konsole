@@ -329,7 +329,9 @@ void SSHManagerTreeWidget::setModel(SSHManagerModel *model)
 void SSHManagerTreeWidget::setCurrentController(Konsole::SessionController *controller)
 {
     qCDebug(KonsoleDebug) << "Controller changed to" << controller;
+
     d->controller = controller;
+    d->model->setSessionController(controller);
 }
 
 std::pair<bool, QString> SSHManagerTreeWidget::checkFields() const

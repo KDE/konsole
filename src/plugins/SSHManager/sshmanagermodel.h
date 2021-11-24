@@ -13,6 +13,12 @@
 
 #include <memory>
 
+namespace Konsole
+{
+class SessionController;
+class Session;
+}
+
 class SSHConfigurationData;
 
 class SSHManagerModel : public QStandardItemModel
@@ -25,6 +31,13 @@ public:
 
     SSHManagerModel(QObject *parent = nullptr);
     ~SSHManagerModel() override;
+
+    void setSessionController(Konsole::SessionController *controller);
+
+    /** Connected to Session::hostnameChanged, tries to set the profile to
+     * the current configured profile for the specified SSH host
+     */
+    Q_SLOT void triggerProfileChange(const QString &sshHost);
 
     QStandardItem *addTopLevelItem(const QString &toplevel);
     void addChildItem(const SSHConfigurationData &config, const QString &parentName);
@@ -45,6 +58,7 @@ public:
 private:
     QStandardItem *m_sshConfigTopLevelItem = nullptr;
     QFileSystemWatcher m_sshConfigWatcher;
+    Konsole::Session *m_session = nullptr;
 };
 
 #endif

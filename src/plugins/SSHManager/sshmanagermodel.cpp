@@ -21,6 +21,8 @@
 #include <QTextStream>
 
 #include "profile/ProfileManager.h"
+#include "session/Session.h"
+#include "session/SessionController.h"
 #include "sshconfigurationdata.h"
 
 Q_LOGGING_CATEGORY(SshManagerPlugin, "org.kde.konsole.plugin.sshmanager")
@@ -135,6 +137,22 @@ bool SSHManagerModel::hasHost(const QString &host) const
         }
     }
     return false;
+}
+
+void SSHManagerModel::setSessionController(Konsole::SessionController *controller)
+{
+    if (m_session) {
+        disconnect(m_session, nullptr, this, nullptr);
+    }
+    m_session = controller->session();
+    Q_ASSERT(m_session);
+
+    connect(m_session, &Konsole::Session::hostnameChanged, this, &SSHManagerModel::triggerProfileChange);
+}
+
+void SSHManagerModel::triggerProfileChange(const QString &sshHost)
+{
+    Q_UNUSED(sshHost);
 }
 
 void SSHManagerModel::load()
