@@ -9,6 +9,7 @@
 #define SSHMANAGERMODEL_H
 
 #include <QFileSystemWatcher>
+#include <QMap>
 #include <QStandardItemModel>
 
 #include <memory>
@@ -61,6 +62,13 @@ private:
     QStandardItem *m_sshConfigTopLevelItem = nullptr;
     QFileSystemWatcher m_sshConfigWatcher;
     Konsole::Session *m_session = nullptr;
+
+    struct ProfileSession {
+        QString localhostSession;
+        bool initialized = false;
+    };
+
+    QMap<Konsole::Session *, ProfileSession> m_sessionToProfile;
 };
 
 #endif

@@ -118,11 +118,13 @@ std::optional<QString> SSHManagerModel::profileForHost(const QString &host) cons
 
             // Return the profile name if the host matches.
             if (data.host == host) {
+                qDebug() << "Found profile" << data.profileName << "for host" << host;
                 return data.profileName;
             }
         }
     }
 
+    qDebug() << "Didn't found a profile for host" << host;
     return {};
 }
 
@@ -180,24 +182,44 @@ void SSHManagerModel::setSessionController(Konsole::SessionController *controlle
 void SSHManagerModel::triggerProfileChange(const QString &sshHost)
 {
     auto *sm = Konsole::SessionManager::instance();
-    std::optional<QString> profileName = profileForHost(sshHost);
+    QString profileToLoad;
 
-    Konsole::Profile::Ptr profile;
-    if (profileName) {
-        for (auto pr : Konsole::ProfileManager::instance()->allProfiles()) {
-            if (pr->name() == profileName.value()) {
-                profile = pr;
-                break;
-            }
+    if (sshHost == QSysInfo::machineHostName()) {
+        // It's the first time that we call this, using the hostname as host.
+        // just prepare the session as a empty profile and set it as initialized to false.
+        if (!m_sessionToProfile.contains(m_session)) {
+            m_sessionToProfile[m_session] = ProfileSession{QString(), false};
+            return;
+        }
+
+        // We just loaded the localhost again, after a probable different profile.
+        // mark the profile to load as the one we stored previously.
+        else if (m_sessionToProfile[m_session].initialized) {
+            profileToLoad = m_sessionToProfile[m_session].localhostSession;
+            m_sessionToProfile.remove(m_session);
         }
     } else {
-        // TODO: Return to the profile that was active on `localhost` prior to
-        // activating the profile for the ssh manager. but I need to store a list of
-        // sessions and profiles to save. Currently, this is enough.
-        profile = Konsole::ProfileManager::instance()->defaultProfile();
+        // We just loaded a hostname that's not the localhost. save the current profile
+        // so we can restore it later on, and load the profile for it.
+        if (!m_sessionToProfile[m_session].initialized) {
+            m_sessionToProfile[m_session].initialized = true;
+            m_sessionToProfile[m_session].localhostSession = m_session->profile();
+        }
     }
 
-    sm->setSessionProfile(m_session, profile);
+    if (profileToLoad.isEmpty()) {
+        std::optional<QString> profileName = profileForHost(sshHost);
+        if (profileName) {
+            profileToLoad = *profileName;
+        }
+    }
+
+    for (auto pr : Konsole::ProfileManager::instance()->allProfiles()) {
+        if (pr->name() == profileToLoad) {
+            sm->setSessionProfile(m_session, pr);
+            return;
+        }
+    }
 }
 
 void SSHManagerModel::load()
