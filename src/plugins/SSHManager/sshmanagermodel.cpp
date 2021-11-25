@@ -176,6 +176,10 @@ void SSHManagerModel::setSessionController(Konsole::SessionController *controlle
     m_session = controller->session();
     Q_ASSERT(m_session);
 
+    connect(m_session, &QObject::destroyed, this, [this] {
+        m_session = nullptr;
+    });
+
     connect(m_session, &Konsole::Session::hostnameChanged, this, &SSHManagerModel::triggerProfileChange);
 }
 
