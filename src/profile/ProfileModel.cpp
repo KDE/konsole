@@ -118,8 +118,11 @@ QVariant ProfileModel::data(const QModelIndex &idx, int role) const
         switch (role) {
         case ProfilePtrRole:
             return QVariant::fromValue(profile);
+        case Qt::DisplayRole:
+            return profile->name();
+        case Qt::DecorationRole:
+            return QIcon::fromTheme(profile->icon());
         }
-        break;
     }
     }
 

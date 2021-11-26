@@ -87,6 +87,7 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
     });
 
     ui->profile->setModel(Konsole::ProfileModel::instance());
+    ui->profile->setModelColumn(Konsole::ProfileModel::PROFILE);
 
     ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->treeView, &QTreeView::customContextMenuRequested, [this](const QPoint &pos) {

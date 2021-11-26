@@ -20,6 +20,7 @@
 #include <QStandardPaths>
 #include <QTextStream>
 
+#include "profile/ProfileManager.h"
 #include "sshconfigurationdata.h"
 
 Q_LOGGING_CATEGORY(SshManagerPlugin, "org.kde.konsole.plugin.sshmanager")
@@ -234,6 +235,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
                 }
                 data.useSshConfig = true;
                 data.importedFromSshConfig = true;
+                data.profileName = Konsole::ProfileManager::instance()->defaultProfile()->name();
                 addChildItem(data, tr("SSH Config"));
                 data = {};
             }

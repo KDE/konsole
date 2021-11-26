@@ -26,12 +26,14 @@ public:
     enum Roles {
         ProfilePtrRole = Qt::UserRole + 1,
     };
+
     enum Column {
         NAME,
         SHORTCUT,
         PROFILE,
         COLUMNS,
     };
+
     void populate();
     void add(QExplicitlySharedDataPointer<Profile> profile);
     void remove(QExplicitlySharedDataPointer<Profile> profile);
