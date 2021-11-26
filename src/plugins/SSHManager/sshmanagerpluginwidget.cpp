@@ -33,6 +33,8 @@
 #include <QRegularExpressionValidator>
 #include <QSortFilterProxyModel>
 
+#include <KMessageBox>
+
 struct SSHManagerTreeWidget::Private {
     SSHManagerModel *model = nullptr;
     SSHManagerFilterModel *filterModel = nullptr;
@@ -161,9 +163,19 @@ void SSHManagerTreeWidget::triggerRemove()
                                                               : "You are about to remove %1, are you sure?")
             .arg(selection.at(0).data(Qt::DisplayRole).toString());
 
-    int result = QMessageBox::warning(this, i18n("Remove SSH Configurations"), dialogMessage, QMessageBox::Ok, QMessageBox::Cancel);
+    const QString dontShorAgainKey =
+        ui->treeView->model()->rowCount(selection.at(0)) ? QStringLiteral("remove_ssh_folder") : QStringLiteral("remove_ssh_config");
 
-    if (result == QMessageBox::Cancel) {
+    KMessageBox::ButtonCode result = KMessageBox::messageBox(this,
+                                                             KMessageBox::DialogType::WarningYesNo,
+                                                             i18n("Remove SSH Configurations"),
+                                                             i18n("Remove SSH Configurations"),
+                                                             KStandardGuiItem::yes(),
+                                                             KStandardGuiItem::no(),
+                                                             KStandardGuiItem::cancel(),
+                                                             dontShorAgainKey);
+
+    if (result == KMessageBox::ButtonCode::No) {
         return;
     }
 
