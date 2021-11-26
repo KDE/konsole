@@ -325,11 +325,6 @@ std::pair<bool, QString> SSHManagerTreeWidget::checkFields() const
         errorString += li + i18n("Missing Name") + il;
     }
 
-    if (ui->port->text().isEmpty()) {
-        error = true;
-        errorString += li + i18n("Missing Port") + il;
-    }
-
     if (ui->useSshConfig->checkState() == Qt::Checked) {
         if (ui->sshkey->text().count() || ui->username->text().count()) {
             error = true;
