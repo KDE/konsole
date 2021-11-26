@@ -27,12 +27,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnInvertFilter">
+      <widget class="QCheckBox" name="btnInvertFilter">
+       <property name="toolTip">
+        <string>Show entries that don't match the filter</string>
+       </property>
        <property name="text">
         <string>Invert</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -60,6 +60,9 @@
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="name">
+        <property name="toolTip">
+         <string>A name for this ssh entry</string>
+        </property>
         <property name="placeholderText">
          <string>The name of this entry on the list</string>
         </property>
@@ -74,6 +77,9 @@
       </item>
       <item row="1" column="1">
        <widget class="QLineEdit" name="hostname">
+        <property name="toolTip">
+         <string>The hostname of the server</string>
+        </property>
         <property name="placeholderText">
          <string>The hostname of the server</string>
         </property>
@@ -88,6 +94,9 @@
       </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="port">
+        <property name="toolTip">
+         <string>The port of the server, 22 is the default for ssh connections</string>
+        </property>
         <property name="text">
          <string>22</string>
         </property>
@@ -102,6 +111,9 @@
       </item>
       <item row="3" column="1">
        <widget class="QLineEdit" name="sshkey">
+        <property name="toolTip">
+         <string>The private key to be used for this connection</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -124,6 +136,9 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>For organizational purposes, this entry will be inside of this folder.</string>
         </property>
         <property name="editable">
          <bool>true</bool>
@@ -148,10 +163,16 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="toolTip">
+         <string>The profile to be active when the ssh session starts</string>
+        </property>
        </widget>
       </item>
       <item row="4" column="1">
        <widget class="QLineEdit" name="username">
+        <property name="toolTip">
+         <string>The username for the connection</string>
+        </property>
         <property name="placeholderText">
          <string>Your username</string>
         </property>
@@ -166,6 +187,9 @@
       </item>
       <item row="5" column="1">
        <widget class="QCheckBox" name="useSshConfig">
+        <property name="toolTip">
+         <string>If this is set, we don't rely on the SSH key set above, but on the configuration on ~/.ssh/config</string>
+        </property>
         <property name="text">
          <string>Use ~/.ssh/config for key</string>
         </property>
@@ -191,6 +215,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="newSSHConfig">
+       <property name="toolTip">
+        <string>Add a new SSH Entry</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -202,6 +229,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnRemove">
+       <property name="toolTip">
+        <string>Remove selected SSH entry</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -213,6 +243,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnImport">
+       <property name="toolTip">
+        <string>Import entries from ~/.ssh/config</string>
+       </property>
        <property name="text">
         <string>Import</string>
        </property>
@@ -220,6 +253,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnEdit">
+       <property name="toolTip">
+        <string>Edit selected entry</string>
+       </property>
        <property name="text">
         <string>Edit</string>
        </property>
@@ -227,6 +263,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnAdd">
+       <property name="toolTip">
+        <string>Add new SSH Configuration</string>
+       </property>
        <property name="text">
         <string>Add</string>
        </property>
@@ -234,6 +273,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnCancel">
+       <property name="toolTip">
+        <string>Cancel Add or Edit</string>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>
