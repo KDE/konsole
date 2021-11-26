@@ -53,6 +53,7 @@ QStandardItem *SSHManagerModel::addTopLevelItem(const QString &name)
 
     auto *newItem = new QStandardItem();
     newItem->setText(name);
+    newItem->setToolTip(i18n("%1 is a folder for SSH Entries", name));
     invisibleRootItem()->appendRow(newItem);
     invisibleRootItem()->sortChildren(0);
     return newItem;
@@ -74,7 +75,8 @@ void SSHManagerModel::addChildItem(const SSHConfigurationData &config, const QSt
 
     auto newChild = new QStandardItem();
     newChild->setData(QVariant::fromValue(config), SSHRole);
-    newChild->setData(config.name, Qt::DisplayRole);
+    newChild->setText(config.name);
+    newChild->setToolTip(i18n("Host: %1", config.host));
     item->appendRow(newChild);
     item->sortChildren(0);
 }
