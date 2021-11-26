@@ -12,6 +12,8 @@
 #include <QString>
 #include <QVector>
 
+#include "konsoleprivate_export.h"
+
 namespace Konsole
 {
 /**
@@ -56,7 +58,7 @@ namespace Konsole
  *   }
  * @endcode
  */
-class ProcessInfo
+class KONSOLEPRIVATE_EXPORT ProcessInfo
 {
 public:
     /**

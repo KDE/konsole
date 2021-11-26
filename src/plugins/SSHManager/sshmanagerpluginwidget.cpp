@@ -7,8 +7,11 @@
 
 #include "sshmanagerpluginwidget.h"
 
+#include "ProcessInfo.h"
 #include "konsoledebug.h"
+#include "session/Session.h"
 #include "session/SessionController.h"
+
 #include "sshmanagermodel.h"
 #include "terminalDisplay/TerminalDisplay.h"
 
@@ -380,6 +383,26 @@ void SSHManagerTreeWidget::connectRequested(const QModelIndex &idx)
 
     auto sourceIdx = d->filterModel->mapToSource(idx);
     if (sourceIdx.parent() == d->model->invisibleRootItem()->index()) {
+        return;
+    }
+
+    Konsole::ProcessInfo *info = d->controller->session()->getProcessInfo();
+    bool ok = false;
+    QString processName = info->name(&ok);
+    if (!ok) {
+        qDebug() << "Could not get the process name, assume that we can't request a connection";
+        return;
+    }
+
+    if (!QSet<QString>({QStringLiteral("fish"),
+                        QStringLiteral("bash"),
+                        QStringLiteral("dash"),
+                        QStringLiteral("sh"),
+                        QStringLiteral("csh"),
+                        QStringLiteral("ksh"),
+                        QStringLiteral("zsh")})
+             .contains(processName)) {
+        qDebug() << "You have an application running on the top of the shell, can't request a connection.";
         return;
     }
 

@@ -75,6 +75,9 @@ public:
     explicit Session(QObject *parent = nullptr);
     ~Session() override;
 
+    /* Returns the process info so the plugins can peek at it's name */
+    ProcessInfo *getProcessInfo();
+
     /**
      * Connect to an existing terminal.  When a new Session() is constructed it
      * automatically searches for and opens a new teletype.  If you want to
@@ -791,7 +794,6 @@ private:
     // if the program fails to start, or if the shell exits in
     // an unsuccessful manner
     void terminalWarning(const QString &message);
-    ProcessInfo *getProcessInfo();
     void updateSessionProcessInfo();
     bool updateForegroundProcessInfo();
     void updateWorkingDirectory();
