@@ -109,6 +109,9 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
 
     ui->treeView->setModel(d->filterModel);
 
+    // We have nothing selected, so there's nothing to edit.
+    ui->btnEdit->setEnabled(false);
+
     clearSshInfo();
 }
 
