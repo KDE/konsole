@@ -34,8 +34,8 @@
     #ifdef __GNUC__
     extern "C" {
             #include <malloc.h>
-        #endif
     }
+    #endif
 #endif
 
 using namespace Konsole;
