@@ -216,8 +216,6 @@ void SSHManagerTreeWidget::editSshInfo()
     ui->username->setText(data.username);
     ui->useSshConfig->setCheckState(data.useSshConfig ? Qt::Checked : Qt::Unchecked);
 
-    setEditComponentsEnabled(!data.importedFromSshConfig);
-
     // This is just for add. To edit the folder, the user will drag & drop.
     ui->folder->setCurrentText(QStringLiteral("not-used-here"));
     ui->folderLabel->hide();
@@ -231,12 +229,14 @@ void SSHManagerTreeWidget::editSshInfo()
 
 void SSHManagerTreeWidget::handleImportedData(bool isImported)
 {
+    QList<QWidget *> elements = {ui->hostname, ui->port, ui->username, ui->sshkey, ui->useSshConfig};
     if (isImported) {
-        ui->errorPanel->setText(QStringLiteral("You are currently viewing an imported SSH Profile, those are read only."));
+        ui->errorPanel->setText(QStringLiteral("Imported SSH Profile <br/> Some settings are read only."));
         ui->errorPanel->show();
-        ui->btnAdd->hide();
-    } else {
-        ui->errorPanel->hide();
+    }
+
+    for (auto *element : elements) {
+        element->setEnabled(!isImported);
     }
 }
 
@@ -378,7 +378,7 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
         } else {
             const auto item = d->model->itemFromIndex(sourceIdx);
             const auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
-            ui->btnEdit->setEnabled(!data.importedFromSshConfig);
+            ui->btnEdit->setEnabled(true);
 
             if (ui->sshInfoPane->isVisible()) {
                 handleImportedData(data.importedFromSshConfig);
