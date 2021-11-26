@@ -24,6 +24,7 @@
 
 #include <QAction>
 #include <QDebug>
+#include <QFileDialog>
 #include <QIntValidator>
 #include <QItemSelectionModel>
 #include <QMenu>
@@ -32,6 +33,7 @@
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 #include <QSortFilterProxyModel>
+#include <QStandardPaths>
 
 #include <KMessageBox>
 
@@ -69,6 +71,15 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
     connect(ui->btnImport, &QPushButton::clicked, this, &SSHManagerTreeWidget::requestImport);
     connect(ui->btnRemove, &QPushButton::clicked, this, &SSHManagerTreeWidget::triggerRemove);
     connect(ui->btnInvertFilter, &QPushButton::clicked, d->filterModel, &SSHManagerFilterModel::setInvertFilter);
+
+    connect(ui->btnFindSshKey, &QPushButton::clicked, this, [this] {
+        const QString homeFolder = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+        const QString sshFile = QFileDialog::getOpenFileName(this, i18n("SSH Key"), homeFolder + QStringLiteral("/.ssh"));
+        if (sshFile.isEmpty()) {
+            return;
+        }
+        ui->sshkey->setText(sshFile);
+    });
 
     connect(ui->filterText, &QLineEdit::textChanged, this, [this] {
         d->filterModel->setFilterRegularExpression(ui->filterText->text());

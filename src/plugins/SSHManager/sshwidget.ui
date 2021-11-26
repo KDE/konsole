@@ -110,15 +110,56 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QLineEdit" name="sshkey">
-        <property name="toolTip">
-         <string>The private key to be used for this connection</string>
-        </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLineEdit" name="sshkey">
+          <property name="toolTip">
+           <string>The private key to be used for this connection</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>The private key</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="btnFindSshKey">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset theme="folder-open"/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_7">
         <property name="text">
-         <string/>
+         <string>Username</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="username">
+        <property name="toolTip">
+         <string>The username for the connection</string>
         </property>
         <property name="placeholderText">
-         <string>The private key</string>
+         <string>Your username</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="useSshConfig">
+        <property name="toolTip">
+         <string>If this is set, we don't rely on the SSH key set above, but on the configuration on ~/.ssh/config</string>
+        </property>
+        <property name="text">
+         <string>Use ~/.ssh/config for key</string>
         </property>
        </widget>
       </item>
@@ -165,33 +206,6 @@
         </property>
         <property name="toolTip">
          <string>The profile to be active when the ssh session starts</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="username">
-        <property name="toolTip">
-         <string>The username for the connection</string>
-        </property>
-        <property name="placeholderText">
-         <string>Your username</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>Username</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QCheckBox" name="useSshConfig">
-        <property name="toolTip">
-         <string>If this is set, we don't rely on the SSH key set above, but on the configuration on ~/.ssh/config</string>
-        </property>
-        <property name="text">
-         <string>Use ~/.ssh/config for key</string>
         </property>
        </widget>
       </item>
