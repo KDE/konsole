@@ -259,6 +259,7 @@ void SSHManagerTreeWidget::clearSshInfo()
     ui->hostname->setText({});
     ui->port->setText(QStringLiteral("22"));
     ui->sshkey->setText({});
+    ui->treeView->setEnabled(true);
 }
 
 void SSHManagerTreeWidget::hideInfoPane()
@@ -294,6 +295,12 @@ void SSHManagerTreeWidget::showInfoPane()
     ui->btnAdd->setText(tr("Add"));
     disconnect(ui->btnAdd, nullptr, this, nullptr);
     connect(ui->btnAdd, &QPushButton::clicked, this, &SSHManagerTreeWidget::addSshInfo);
+
+    // Disable the tree view when in edit mode.
+    // This is important so the user don't click around
+    // losing the configuration he did.
+    // this will be enabled again when the user closes the panel.
+    ui->treeView->setEnabled(false);
 }
 
 void SSHManagerTreeWidget::setModel(SSHManagerModel *model)
