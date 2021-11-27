@@ -103,10 +103,13 @@ set_package_properties(KF5DocTools PROPERTIES DESCRIPTION
 )
 
 if(NOT APPLE)
-    find_package(X11)
-    set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
+    option(WITHOUT_X11 "Build without X11 integration (skips finding X11)" OFF)
+    if (NOT WITHOUT_X11)
+        find_package(X11)
+        set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
+        set(HAVE_X11 ${X11_FOUND})
+    endif()
 endif()
-set(HAVE_X11 ${X11_FOUND})
 
 # Check for function GETPWUID
 check_symbol_exists(getpwuid "pwd.h" HAVE_GETPWUID)
