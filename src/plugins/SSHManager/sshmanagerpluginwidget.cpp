@@ -178,7 +178,7 @@ void SSHManagerTreeWidget::triggerRemove()
                                                               : "You are about to remove %1, are you sure?")
             .arg(selection.at(0).data(Qt::DisplayRole).toString());
 
-    const QString dontShorAgainKey =
+    const QString dontAskAgainKey =
         ui->treeView->model()->rowCount(selection.at(0)) ? QStringLiteral("remove_ssh_folder") : QStringLiteral("remove_ssh_config");
 
     KMessageBox::ButtonCode result = KMessageBox::messageBox(this,
@@ -188,7 +188,7 @@ void SSHManagerTreeWidget::triggerRemove()
                                                              KStandardGuiItem::yes(),
                                                              KStandardGuiItem::no(),
                                                              KStandardGuiItem::cancel(),
-                                                             dontShorAgainKey);
+                                                             dontAskAgainKey);
 
     if (result == KMessageBox::ButtonCode::No) {
         return;
