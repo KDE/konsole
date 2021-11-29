@@ -54,6 +54,7 @@ void TerminalColor::setColorTable(const QColor *table)
 {
     std::copy(table, table + TABLE_COLORS, m_colorTable);
     setBackgroundColor(m_colorTable[DEFAULT_BACK_COLOR]);
+    onColorsChanged();
 }
 
 const QColor *TerminalColor::colorTable() const
@@ -68,6 +69,7 @@ void TerminalColor::setOpacity(qreal opacity)
     m_opacity = opacity;
 
     m_blendColor = color.rgba();
+    onColorsChanged();
 }
 
 void TerminalColor::visualBell()
@@ -89,11 +91,36 @@ QRgb TerminalColor::blendColor() const
 void TerminalColor::setBackgroundColor(const QColor &color)
 {
     m_colorTable[DEFAULT_BACK_COLOR] = color;
+    onColorsChanged();
 }
 
 void TerminalColor::setForegroundColor(const QColor &color)
 {
     m_colorTable[DEFAULT_FORE_COLOR] = color;
+    onColorsChanged();
+}
+
+void TerminalColor::onColorsChanged()
+{
+    QPalette palette = QApplication::palette();
+
+    QColor buttonTextColor = m_colorTable[DEFAULT_FORE_COLOR];
+    QColor backgroundColor = m_colorTable[DEFAULT_BACK_COLOR];
+    backgroundColor.setAlphaF(m_opacity);
+
+    QColor buttonColor = backgroundColor.toHsv();
+    if (buttonColor.valueF() < 0.5) {
+        buttonColor = buttonColor.lighter();
+    } else {
+        buttonColor = buttonColor.darker();
+    }
+    palette.setColor(QPalette::Button, buttonColor);
+    palette.setColor(QPalette::Window, backgroundColor);
+    palette.setColor(QPalette::Base, backgroundColor);
+    palette.setColor(QPalette::WindowText, buttonTextColor);
+    palette.setColor(QPalette::ButtonText, buttonTextColor);
+
+    Q_EMIT onPalette(palette);
 }
 
 void TerminalColor::swapFGBGColors()
@@ -101,6 +128,8 @@ void TerminalColor::swapFGBGColors()
     QColor color = m_colorTable[DEFAULT_BACK_COLOR];
     m_colorTable[DEFAULT_BACK_COLOR] = m_colorTable[DEFAULT_FORE_COLOR];
     m_colorTable[DEFAULT_FORE_COLOR] = color;
+
+    onColorsChanged();
 }
 
 }

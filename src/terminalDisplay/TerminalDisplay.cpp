@@ -256,6 +256,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 
     // create scroll bar for scrolling output up and down
     _scrollBar = new TerminalScrollBar(this);
+    _scrollBar->setAutoFillBackground(false);
     // set the scroll bar's slider to occupy the whole area of the scroll bar initially
     _scrollBar->setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
@@ -336,6 +337,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
 
     _terminalColor = new TerminalColor(this);
+    connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::updatePalette);
 
     _terminalPainter = new TerminalPainter(this);
     connect(this, &TerminalDisplay::drawContents, _terminalPainter, &TerminalPainter::drawContents);
@@ -2632,6 +2634,12 @@ bool TerminalDisplay::event(QEvent *event)
     switch (event->type()) {
     case QEvent::ShortcutOverride:
         eventHandled = handleShortcutOverrideEvent(static_cast<QKeyEvent *>(event));
+        break;
+    case QEvent::PaletteChange:
+    case QEvent::ApplicationPaletteChange:
+        if (_terminalColor) {
+            _terminalColor->onColorsChanged();
+        }
         break;
     case QEvent::FocusOut:
     case QEvent::FocusIn:

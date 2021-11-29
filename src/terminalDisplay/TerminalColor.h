@@ -36,6 +36,8 @@ public:
     void setColorTable(const QColor *table);
     const QColor *colorTable() const;
 
+    void onColorsChanged();
+
     void setOpacity(qreal opacity);
 
     void visualBell();
@@ -56,6 +58,9 @@ public:
 public Q_SLOTS:
     void setBackgroundColor(const QColor &color);
     void setForegroundColor(const QColor &color);
+
+Q_SIGNALS:
+    void onPalette(const QPalette &);
 
 private Q_SLOTS:
     void swapFGBGColors();
