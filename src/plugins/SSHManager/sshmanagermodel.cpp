@@ -54,7 +54,7 @@ QStandardItem *SSHManagerModel::addTopLevelItem(const QString &name)
 
     auto *newItem = new QStandardItem();
     newItem->setText(name);
-    newItem->setToolTip(i18n("%1 is a folder for SSH Entries", name));
+    newItem->setToolTip(i18n("%1 is a folder for SSH entries", name));
     invisibleRootItem()->appendRow(newItem);
     invisibleRootItem()->sortChildren(0);
     return newItem;
