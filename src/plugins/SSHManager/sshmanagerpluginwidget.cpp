@@ -430,13 +430,13 @@ void SSHManagerTreeWidget::connectRequested(const QModelIndex &idx)
         return;
     }
 
-    if (!QSet<QString>({QStringLiteral("fish"),
-                        QStringLiteral("bash"),
-                        QStringLiteral("dash"),
-                        QStringLiteral("sh"),
-                        QStringLiteral("csh"),
-                        QStringLiteral("ksh"),
-                        QStringLiteral("zsh")})
+    if (!QVector<QString>({QStringLiteral("fish"),
+                           QStringLiteral("bash"),
+                           QStringLiteral("dash"),
+                           QStringLiteral("sh"),
+                           QStringLiteral("csh"),
+                           QStringLiteral("ksh"),
+                           QStringLiteral("zsh")})
              .contains(processName)) {
         KMessageBox::messageBox(this,
                                 KMessageBox::DialogType::Sorry,
