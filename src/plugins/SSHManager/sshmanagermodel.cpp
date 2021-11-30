@@ -174,14 +174,6 @@ void SSHManagerModel::removeIndex(const QModelIndex &idx)
 
 void SSHManagerModel::startImportFromSshConfig()
 {
-    for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
-        QStandardItem *groupItem = invisibleRootItem()->child(i);
-        if (groupItem->data(Qt::DisplayRole).toString() == tr("SSH Config")) {
-            removeIndex(indexFromItem(groupItem));
-            break;
-        }
-    }
-
     importFromSshConfigFile(SshDir + QStringLiteral("config"));
 }
 
