@@ -268,7 +268,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
                 data.useSshConfig = true;
                 data.importedFromSshConfig = true;
                 data.profileName = Konsole::ProfileManager::instance()->defaultProfile()->name();
-                addChildItem(data, tr("SSH Config"));
+                addChildItem(data, i18n("SSH Config"));
             }
 
             data = {};
@@ -301,7 +301,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
             }
             data.useSshConfig = true;
             data.importedFromSshConfig = true;
-            addChildItem(data, tr("SSH Config"));
+            addChildItem(data, i18n("SSH Config"));
         }
     }
 }
