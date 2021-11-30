@@ -130,7 +130,8 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset theme="folder-open"/>
+           <iconset theme="folder-open">
+            <normaloff>.</normaloff>.</iconset>
           </property>
          </widget>
         </item>
@@ -256,16 +257,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnImport">
-       <property name="toolTip">
-        <string>Import entries from ~/.ssh/config</string>
-       </property>
-       <property name="text">
-        <string>Import</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="btnEdit">
        <property name="toolTip">
         <string>Edit selected entry</string>
@@ -326,7 +317,6 @@
   <tabstop>btnCancel</tabstop>
   <tabstop>btnEdit</tabstop>
   <tabstop>btnRemove</tabstop>
-  <tabstop>btnImport</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -68,7 +68,6 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
     connect(ui->newSSHConfig, &QPushButton::clicked, this, &SSHManagerTreeWidget::showInfoPane);
     connect(ui->btnCancel, &QPushButton::clicked, this, &SSHManagerTreeWidget::clearSshInfo);
     connect(ui->btnEdit, &QPushButton::clicked, this, &SSHManagerTreeWidget::editSshInfo);
-    connect(ui->btnImport, &QPushButton::clicked, this, &SSHManagerTreeWidget::requestImport);
     connect(ui->btnRemove, &QPushButton::clicked, this, &SSHManagerTreeWidget::triggerRemove);
     connect(ui->btnInvertFilter, &QPushButton::clicked, d->filterModel, &SSHManagerFilterModel::setInvertFilter);
 
@@ -269,7 +268,6 @@ void SSHManagerTreeWidget::hideInfoPane()
 {
     ui->newSSHConfig->show();
     ui->btnRemove->show();
-    ui->btnImport->show();
     ui->btnEdit->show();
     ui->sshInfoPane->hide();
     ui->btnAdd->hide();
@@ -281,7 +279,6 @@ void SSHManagerTreeWidget::showInfoPane()
 {
     ui->newSSHConfig->hide();
     ui->btnRemove->hide();
-    ui->btnImport->hide();
     ui->btnEdit->hide();
     ui->sshInfoPane->show();
     ui->btnAdd->show();
