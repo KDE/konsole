@@ -115,6 +115,22 @@ QStringList SSHManagerModel::folders() const
     return retList;
 }
 
+bool SSHManagerModel::hasHost(const QString &host) const
+{
+    // runs in O(N), should be ok for the amount of data peophe have.
+    for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
+        QStandardItem *iChild = invisibleRootItem()->child(i);
+        for (int e = 0, end = iChild->rowCount(); i < end; e++) {
+            QStandardItem *eChild = iChild->child(e);
+            const auto data = eChild->data(SSHManagerModel::Roles::SSHRole).value<SSHConfigurationData>();
+            if (data.host == host) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void SSHManagerModel::load()
 {
     auto config = KConfig(QStringLiteral("konsolesshconfig"), KConfig::OpenFlag::SimpleConfig);

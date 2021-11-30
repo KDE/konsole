@@ -39,6 +39,8 @@ public:
     void load();
     void save();
 
+    bool hasHost(const QString &hostName) const;
+
 private:
     QStandardItem *m_sshConfigTopLevelItem = nullptr;
 };
