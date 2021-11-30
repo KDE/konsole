@@ -256,12 +256,11 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
                 ignoreEntry = false;
             }
 
-            if (!data.host.isEmpty()) {
+            // When we hit this, that means that we just finished reading the
+            // *previous* host. so we need to add it to the list, if we can,
+            // and read the next value.
+            if (!data.host.isEmpty() && !hasHost(data.host)) {
                 // We already registered this entity.
-                if (hasHost(data.host)) {
-                    ignoreEntry = true;
-                    continue;
-                }
 
                 if (data.name.isEmpty()) {
                     data.name = data.host;
@@ -270,9 +269,9 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
                 data.importedFromSshConfig = true;
                 data.profileName = Konsole::ProfileManager::instance()->defaultProfile()->name();
                 addChildItem(data, tr("SSH Config"));
-                data = {};
             }
 
+            data = {};
             data.host = lists.at(1);
         }
 
