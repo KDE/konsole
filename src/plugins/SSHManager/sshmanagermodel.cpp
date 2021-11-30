@@ -34,6 +34,10 @@ SSHManagerModel::SSHManagerModel(QObject *parent)
     : QStandardItemModel(parent)
 {
     load();
+    if (!m_sshConfigTopLevelItem) {
+        // this also sets the m_sshConfigTopLevelItem if the text is `SSH Config`.
+        addTopLevelItem(i18n("SSH Config"));
+    }
     if (invisibleRootItem()->rowCount() == 0) {
         addTopLevelItem(i18n("Default"));
     }
@@ -57,6 +61,11 @@ QStandardItem *SSHManagerModel::addTopLevelItem(const QString &name)
     newItem->setToolTip(i18n("%1 is a folder for SSH entries", name));
     invisibleRootItem()->appendRow(newItem);
     invisibleRootItem()->sortChildren(0);
+
+    if (name == i18n("SSH Config")) {
+        m_sshConfigTopLevelItem = newItem;
+    }
+
     return newItem;
 }
 

@@ -38,6 +38,9 @@ public:
     void importFromSshConfigFile(const QString &file);
     void load();
     void save();
+
+private:
+    QStandardItem *m_sshConfigTopLevelItem = nullptr;
 };
 
 #endif
