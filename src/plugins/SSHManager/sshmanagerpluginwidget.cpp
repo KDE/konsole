@@ -89,9 +89,25 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
     ui->profile->setModelColumn(Konsole::ProfileModel::PROFILE);
 
     ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(ui->treeView, &QTreeView::customContextMenuRequested, [this](const QPoint &pos) {
-        if (!ui->treeView->indexAt(pos).isValid()) {
+        QModelIndex idx = ui->treeView->indexAt(pos);
+        if (!idx.isValid()) {
             return;
+        }
+
+        if (idx.data(Qt::DisplayRole) == i18n("SSH Config")) {
+            return;
+        }
+
+        auto sourceIdx = d->filterModel->mapToSource(idx);
+        const bool isParent = sourceIdx.parent() == d->model->invisibleRootItem()->index();
+        if (!isParent) {
+            const auto item = d->model->itemFromIndex(sourceIdx);
+            const auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
+            if (data.importedFromSshConfig) {
+                return;
+            }
         }
 
         QMenu *menu = new QMenu(this);
@@ -374,6 +390,13 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
 
         if (isParent) {
             setEditComponentsEnabled(false);
+            if (sourceIdx.data(Qt::DisplayRole).toString() == i18n("SSH Config")) {
+                ui->btnRemove->setEnabled(false);
+                ui->btnRemove->setToolTip(i18n("Cannot remove this folder"));
+            } else {
+                ui->btnRemove->setEnabled(true);
+                ui->btnRemove->setToolTip(i18n("Remove folder and all of it's contents"));
+            }
             ui->btnEdit->setEnabled(false);
             if (ui->sshInfoPane->isVisible()) {
                 ui->errorPanel->setText(i18n("Double click to change the folder name."));
