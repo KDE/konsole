@@ -382,7 +382,8 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
             const auto item = d->model->itemFromIndex(sourceIdx);
             const auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
             ui->btnEdit->setEnabled(true);
-
+            ui->btnRemove->setEnabled(!data.importedFromSshConfig);
+            ui->btnRemove->setToolTip(data.importedFromSshConfig ? i18n("You can't remove an automatically added entry.") : i18n("Remove selected entry"));
             if (ui->sshInfoPane->isVisible()) {
                 handleImportedData(data.importedFromSshConfig);
                 editSshInfo();
