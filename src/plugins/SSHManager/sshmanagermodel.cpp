@@ -251,6 +251,12 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
             }
 
             if (!data.host.isEmpty()) {
+                // We already registered this entity.
+                if (hasHost(data.host)) {
+                    ignoreEntry = true;
+                    continue;
+                }
+
                 if (data.name.isEmpty()) {
                     data.name = data.host;
                 }
@@ -284,11 +290,13 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
 
     // the last possible read
     if (data.host.count()) {
-        if (data.name.isEmpty()) {
-            data.name = data.host.trimmed();
+        if (!hasHost(data.host)) {
+            if (data.name.isEmpty()) {
+                data.name = data.host.trimmed();
+            }
+            data.useSshConfig = true;
+            data.importedFromSshConfig = true;
+            addChildItem(data, tr("SSH Config"));
         }
-        data.useSshConfig = true;
-        data.importedFromSshConfig = true;
-        addChildItem(data, tr("SSH Config"));
     }
 }
