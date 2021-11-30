@@ -194,6 +194,10 @@ Qt::ItemFlags SSHManagerModel::flags(const QModelIndex &index) const
 
 void SSHManagerModel::removeIndex(const QModelIndex &idx)
 {
+    if (idx.data(Qt::DisplayRole) == i18n("SSH Config")) {
+        m_sshConfigTopLevelItem = nullptr;
+    }
+
     removeRow(idx.row(), idx.parent());
 }
 
