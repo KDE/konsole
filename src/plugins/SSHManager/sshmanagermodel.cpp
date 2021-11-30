@@ -71,24 +71,24 @@ QStandardItem *SSHManagerModel::addTopLevelItem(const QString &name)
 
 void SSHManagerModel::addChildItem(const SSHConfigurationData &config, const QString &parentName)
 {
-    QStandardItem *item = nullptr;
+    QStandardItem *parentItem = nullptr;
     for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
         if (invisibleRootItem()->child(i)->text() == parentName) {
-            item = invisibleRootItem()->child(i);
+            parentItem = invisibleRootItem()->child(i);
             break;
         }
     }
 
-    if (!item) {
-        item = addTopLevelItem(parentName);
+    if (!parentItem) {
+        parentItem = addTopLevelItem(parentName);
     }
 
     auto newChild = new QStandardItem();
     newChild->setData(QVariant::fromValue(config), SSHRole);
     newChild->setText(config.name);
     newChild->setToolTip(i18n("Host: %1", config.host));
-    item->appendRow(newChild);
-    item->sortChildren(0);
+    parentItem->appendRow(newChild);
+    parentItem->sortChildren(0);
 }
 
 bool SSHManagerModel::setData(const QModelIndex &index, const QVariant &value, int role)
