@@ -41,6 +41,12 @@ SSHManagerModel::SSHManagerModel(QObject *parent)
     if (invisibleRootItem()->rowCount() == 0) {
         addTopLevelItem(i18n("Default"));
     }
+
+    m_sshConfigWatcher.addPath(SshDir + QStringLiteral("config"));
+    connect(&m_sshConfigWatcher, &QFileSystemWatcher::fileChanged, this, [this] {
+        startImportFromSshConfig();
+    });
+    startImportFromSshConfig();
 }
 
 SSHManagerModel::~SSHManagerModel() noexcept

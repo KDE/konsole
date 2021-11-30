@@ -8,6 +8,7 @@
 #ifndef SSHMANAGERMODEL_H
 #define SSHMANAGERMODEL_H
 
+#include <QFileSystemWatcher>
 #include <QStandardItemModel>
 
 #include <memory>
@@ -43,6 +44,7 @@ public:
 
 private:
     QStandardItem *m_sshConfigTopLevelItem = nullptr;
+    QFileSystemWatcher m_sshConfigWatcher;
 };
 
 #endif
