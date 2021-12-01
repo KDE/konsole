@@ -334,6 +334,7 @@ void MainWindow::setupActions()
 
     // Bookmark Menu
     KActionMenu *bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks"), collection);
+    bookmarkMenu->setPopupMode(QToolButton::InstantPopup); // Don't require press+hold
     _bookmarkHandler = new BookmarkHandler(collection, bookmarkMenu->menu(), true, this);
     collection->addAction(QStringLiteral("bookmark"), bookmarkMenu);
     connect(_bookmarkHandler, &Konsole::BookmarkHandler::openUrls, this, &Konsole::MainWindow::openUrls);
