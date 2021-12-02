@@ -395,7 +395,7 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
                 ui->btnRemove->setToolTip(i18n("Cannot remove this folder"));
             } else {
                 ui->btnRemove->setEnabled(true);
-                ui->btnRemove->setToolTip(i18n("Remove folder and all of it's contents"));
+                ui->btnRemove->setToolTip(i18n("Remove folder and all of its contents"));
             }
             ui->btnEdit->setEnabled(false);
             if (ui->sshInfoPane->isVisible()) {
