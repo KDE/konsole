@@ -526,7 +526,7 @@ void ColorScheme::write(KConfig &config) const
     configGroup.writeEntry("Opacity", _opacity);
     configGroup.writeEntry("Blur", _blur);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
-    configGroup.writeEntry("FillStyle", (int) _wallpaper->style());
+    configGroup.writeEntry("FillStyle", static_cast<int>(_wallpaper->style()));
     configGroup.writeEntry(EnableColorRandomizationKey, _colorRandomization);
 
     for (int i = 0; i < TABLE_COLORS; i++) {
