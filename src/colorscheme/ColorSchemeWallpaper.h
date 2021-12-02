@@ -30,9 +30,17 @@ namespace Konsole
 class ColorSchemeWallpaper : public QSharedData
 {
 public:
+    enum FillStyle
+    {
+        Tile = 0,
+        Stretch,
+        Center,
+        Adapt
+    };
+
     typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
 
-    explicit ColorSchemeWallpaper(const QString &path);
+    explicit ColorSchemeWallpaper(const QString &path, FillStyle style);
     ~ColorSchemeWallpaper();
 
     void load();
@@ -44,11 +52,17 @@ public:
 
     QString path() const;
 
+    FillStyle style() const;
+
 private:
     Q_DISABLE_COPY(ColorSchemeWallpaper)
 
     QString _path;
     std::unique_ptr<QPixmap> _picture;
+    FillStyle _style;
+
+    QRectF ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect);
+    Qt::AspectRatioMode RatioMode();
 };
 
 }

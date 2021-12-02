@@ -17,9 +17,10 @@
 
 using namespace Konsole;
 
-ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path)
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path, ColorSchemeWallpaper::FillStyle style)
     : _path(path)
     , _picture(nullptr)
+    , _style(style)
 {
 }
 
@@ -53,7 +54,12 @@ bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect rect, qreal opaci
     }
 
     if (qFuzzyCompare(qreal(1.0), opacity)) {
-        painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
+        if (_style == Tile) {
+            painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
+        } else {
+            QRectF srcRect = ScaledRect(painter.viewport().size(), _picture->size(), rect);
+            painter.drawPixmap(rect, *_picture, srcRect);
+        }
         return true;
     }
 
@@ -61,12 +67,59 @@ bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect rect, qreal opaci
     painter.setCompositionMode(QPainter::CompositionMode_Source);
     painter.fillRect(rect, QColor(0, 0, 0, 0));
     painter.setOpacity(opacity);
-    painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
+
+    if (_style == Tile) {
+        painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
+    } else {
+        QRectF srcRect = ScaledRect(painter.viewport().size(), _picture->size(), rect);
+        painter.drawPixmap(rect, *_picture, srcRect);
+    }
+
     painter.restore();
+
     return true;
 }
 
 QString ColorSchemeWallpaper::path() const
 {
     return _path;
+}
+
+ColorSchemeWallpaper::FillStyle ColorSchemeWallpaper::style() const
+{
+    return _style;
+}
+
+QRectF ColorSchemeWallpaper::ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect)
+{
+    QRectF scaledRect = QRectF();
+    QSize scaledSize = pictureSize.scaled(viewportSize, RatioMode());
+
+    double scaleX = pictureSize.width() / static_cast<double>(scaledSize.width());
+    double scaleY = pictureSize.height() / static_cast<double>(scaledSize.height());
+
+    double offsetX = (scaledSize.width() - viewportSize.width()) / 2.0;
+    double offsetY = (scaledSize.height() - viewportSize.height()) / 2.0;
+
+    scaledRect.setX((rect.x() + offsetX) * scaleX);
+    scaledRect.setY((rect.y() + offsetY) * scaleY);
+
+    scaledRect.setWidth(rect.width() * scaleX);
+    scaledRect.setHeight(rect.height() * scaleY);
+
+    return scaledRect;
+}
+
+Qt::AspectRatioMode ColorSchemeWallpaper::RatioMode()
+{
+    switch (_style) {
+    case Center:
+        return Qt::KeepAspectRatioByExpanding;
+    case Adapt:
+        return Qt::KeepAspectRatio;
+    case Tile:
+    case Stretch:
+    default:
+        return Qt::IgnoreAspectRatio;
+    }
 }

@@ -187,7 +187,7 @@ ColorScheme::ColorScheme()
     , _colorRandomization(false)
     , _wallpaper(nullptr)
 {
-    setWallpaper(QString());
+    setWallpaper(QString(), ColorSchemeWallpaper::Tile);
 }
 
 ColorScheme::ColorScheme(const ColorScheme &other)
@@ -464,7 +464,8 @@ void ColorScheme::read(const KConfig &config)
     _description = i18n(schemeDescription.toUtf8().constData());
     setOpacity(configGroup.readEntry("Opacity", 1.0));
     _blur = configGroup.readEntry("Blur", false);
-    setWallpaper(configGroup.readEntry("Wallpaper", QString()));
+    setWallpaper(configGroup.readEntry("Wallpaper", QString()),
+            static_cast<ColorSchemeWallpaper::FillStyle>(configGroup.readEntry("FillStyle", 0)));
     _colorRandomization = configGroup.readEntry(EnableColorRandomizationKey, false);
 
     for (int i = 0; i < TABLE_COLORS; i++) {
@@ -525,6 +526,7 @@ void ColorScheme::write(KConfig &config) const
     configGroup.writeEntry("Opacity", _opacity);
     configGroup.writeEntry("Blur", _blur);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
+    configGroup.writeEntry("FillStyle", (int) _wallpaper->style());
     configGroup.writeEntry(EnableColorRandomizationKey, _colorRandomization);
 
     for (int i = 0; i < TABLE_COLORS; i++) {
@@ -572,9 +574,9 @@ void ColorScheme::writeColorEntry(KConfig &config, int index) const
     checkAndMaybeSaveValue(RandomLightnessRangeKey, random.lightness);
 }
 
-void ColorScheme::setWallpaper(const QString &path)
+void ColorScheme::setWallpaper(const QString &path, ColorSchemeWallpaper::FillStyle style)
 {
-    _wallpaper = new ColorSchemeWallpaper(path);
+    _wallpaper = new ColorSchemeWallpaper(path, style);
 }
 
 ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
