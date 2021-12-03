@@ -719,7 +719,7 @@ separate window</action>
 </para></listitem>
 </varlistentry>
 
-<varlistentry>
+<varlistentry id="save-layout">
 <term><menuchoice>
 <guimenu>View</guimenu><guimenuitem>Save tab layout to file</guimenuitem></menuchoice>
 </term>
@@ -1214,6 +1214,11 @@ can be specified to modify its behavior.</para>
 <term><option>--profile</option> <parameter>file</parameter></term>
 <listitem><para><action>Start &konsole;</action> using the specified profile
 instead of the default profile.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--layout</option> <parameter>file</parameter></term>
+<listitem><para><action>Start &konsole;</action> using a <link linkend="save-layout">saved &JSON; layout file</link>.</para></listitem>
 </varlistentry>
 
 <varlistentry>
