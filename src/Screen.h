@@ -20,6 +20,7 @@
 
 // Konsole
 #include "../characters/Character.h"
+#include "EscapeSequenceUrlExtractor.h"
 #include "konsoleprivate_export.h"
 
 #define MODE_Origin 0
@@ -90,7 +91,7 @@ public:
     Screen(const Screen &) = delete;
     Screen &operator=(const Screen &) = delete;
 
-    EscapeSequenceUrlExtractor *urlExtractor() const;
+    EscapeSequenceUrlExtractor *urlExtractor();
 
     // VT100/2 Operations
     // Cursor Movement
@@ -771,7 +772,7 @@ private:
 
     // used in REP (repeating char)
     quint32 _lastDrawnChar;
-    std::unique_ptr<EscapeSequenceUrlExtractor> _escapeSequenceUrlExtractor;
+    EscapeSequenceUrlExtractor _escapeSequenceUrlExtractor;
     void toggleUrlInput();
 
     // Vt102Emulation defined max argument value that can be passed to a Screen function

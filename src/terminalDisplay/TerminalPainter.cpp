@@ -60,8 +60,13 @@ void TerminalPainter::drawContents(Character *image,
 {
     const auto display = qobject_cast<TerminalDisplay *>(sender());
 
-    QVector<uint> univec;
+    QVarLengthArray<uint> univec;
     univec.reserve(display->usedColumns());
+
+    const auto displayLeft = display->contentsRect().left();
+    const auto displayTop = display->contentsRect().top();
+    int fontHeight = display->terminalFont()->fontHeight();
+    int fontWidth = display->terminalFont()->fontWidth();
 
     for (int y = rect.y(); y <= rect.bottom(); y++) {
         int x = rect.x();
@@ -185,11 +190,10 @@ void TerminalPainter::drawContents(Character *image,
             paint.setWorldTransform(QTransform(textScale), true);
 
             // Calculate the area in which the text will be drawn
-            QRect textArea =
-                QRect(display->contentRect().left() + display->contentsRect().left() + display->terminalFont()->fontWidth() * x * (doubleWidthLine ? 2 : 1),
-                      display->contentRect().top() + display->contentsRect().top() + display->terminalFont()->fontHeight() * y,
-                      display->terminalFont()->fontWidth() * len,
-                      doubleHeight && !doubleHeightLinePair ? display->terminalFont()->fontHeight() / 2 : display->terminalFont()->fontHeight());
+            QRect textArea = QRect(display->contentRect().left() + displayLeft + fontWidth * x * (doubleWidthLine ? 2 : 1),
+                                   display->contentRect().top() + displayTop + fontHeight * y,
+                                   fontWidth * len,
+                                   doubleHeight && !doubleHeightLinePair ? fontHeight / 2 : fontHeight);
 
             // move the calculated area to take account of scaling applied to the painter.
             // the position of the area from the origin (0,0) is scaled

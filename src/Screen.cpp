@@ -87,9 +87,8 @@ Screen::Screen(int lines, int columns)
     , _effectiveRendition(DEFAULT_RENDITION)
     , _lastPos(-1)
     , _lastDrawnChar(0)
-    , _escapeSequenceUrlExtractor(std::make_unique<EscapeSequenceUrlExtractor>())
 {
-    _escapeSequenceUrlExtractor->setScreen(this);
+    _escapeSequenceUrlExtractor.setScreen(this);
     std::fill(_lineProperties.begin(), _lineProperties.end(), LINE_DEFAULT);
 
     initTabStops();
@@ -478,7 +477,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
         // If _history size > max history size it will drop a line from _history.
         // We need to verify if we need to remove a URL.
         if (removedLines) {
-            _escapeSequenceUrlExtractor->historyLinesRemoved(removedLines);
+            _escapeSequenceUrlExtractor.historyLinesRemoved(removedLines);
         }
     }
 
@@ -1001,7 +1000,7 @@ void Screen::displayCharacter(uint c)
         --w;
     }
     _cuX = newCursorX;
-    _escapeSequenceUrlExtractor->appendUrlText(QChar(c));
+    _escapeSequenceUrlExtractor.appendUrlText(QChar(c));
 }
 
 int Screen::scrolledLines() const
@@ -1154,7 +1153,12 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
         QVector<Character> &line = _screenLines[y];
 
         if (isDefaultCh && endCol == _columns - 1) {
-            std::fill(line.begin() + startCol, line.end(), clearCh);
+            static std::vector<Character> cl(_columns, DefaultChar);
+            if (Q_UNLIKELY((int)cl.size() < _columns)) {
+                cl.resize(_columns, DefaultChar);
+            }
+            auto copyAmount = std::distance(line.begin() + startCol, line.end());
+            memcpy(line.data() + startCol, cl.data(), copyAmount * sizeof(Character));
         } else {
             if (line.size() < endCol + 1) {
                 line.resize(endCol + 1);
@@ -1639,7 +1643,7 @@ void Screen::fastAddHistLine()
     // If _history size > max history size it will drop a line from _history.
     // We need to verify if we need to remove a URL.
     if (removeLine) {
-        _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+        _escapeSequenceUrlExtractor.historyLinesRemoved(1);
     }
 
     // Rotate left + clear the last line
@@ -1670,7 +1674,7 @@ void Screen::addHistLine()
             ++_droppedLines;
 
             // We removed a line, we need to verify if we need to remove a URL.
-            _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+            _escapeSequenceUrlExtractor.historyLinesRemoved(1);
         }
     }
 
@@ -1763,7 +1767,7 @@ void Screen::fillWithDefaultChar(Character *dest, int count)
     std::fill_n(dest, count, Screen::DefaultChar);
 }
 
-Konsole::EscapeSequenceUrlExtractor *Konsole::Screen::urlExtractor() const
+Konsole::EscapeSequenceUrlExtractor *Konsole::Screen::urlExtractor()
 {
-    return _escapeSequenceUrlExtractor.get();
+    return &_escapeSequenceUrlExtractor;
 }
