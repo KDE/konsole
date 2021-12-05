@@ -380,7 +380,7 @@ Q_SIGNALS:
     /**
      * Emitted when the text selection is changed
      */
-    void selectionChanged(const QString &text);
+    void selectionChanged(const bool selectionEmpty);
 
     /**
      * Emitted when terminal code requiring terminal's response received.

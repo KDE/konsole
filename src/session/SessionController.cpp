@@ -116,6 +116,8 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
     , _webSearchMenu(nullptr)
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
+    , _selectionEmpty(false)
+    , _selectionChanged(true)
     , _selectedText(QString())
     , _showMenuAction(nullptr)
     , _bookmarkValidProgramsToClear(QStringList())
@@ -448,19 +450,20 @@ void SessionController::setupPrimaryScreenSpecificActions(bool use)
     selectLineAction->setEnabled(use);
 }
 
-void SessionController::selectionChanged(const QString &selectedText)
+void SessionController::selectionChanged(const bool selectionEmpty)
 {
-    _selectedText = selectedText;
-    updateCopyAction(selectedText);
+    _selectionChanged = true;
+    _selectionEmpty = selectionEmpty;
+    updateCopyAction(selectionEmpty);
 }
 
-void SessionController::updateCopyAction(const QString &selectedText)
+void SessionController::updateCopyAction(const bool selectionEmpty)
 {
     QAction *copyAction = actionCollection()->action(QStringLiteral("edit_copy"));
     QAction *copyContextMenu = actionCollection()->action(QStringLiteral("edit_copy_contextmenu"));
     // copy action is meaningful only when some text is selected.
-    copyAction->setEnabled(!selectedText.isEmpty());
-    copyContextMenu->setVisible(!selectedText.isEmpty());
+    copyAction->setEnabled(!selectionEmpty);
+    copyContextMenu->setVisible(!selectionEmpty);
 }
 
 void SessionController::updateWebSearchMenu()
@@ -469,10 +472,14 @@ void SessionController::updateWebSearchMenu()
     _webSearchMenu->setVisible(false);
     _webSearchMenu->menu()->clear();
 
-    if (_selectedText.isEmpty()) {
+    if (_selectionEmpty) {
         return;
     }
 
+    if (_selectionChanged) {
+        _selectedText = view()->screenWindow()->selectedText(Screen::PreserveLineBreaks);
+        _selectionChanged = false;
+    }
     QString searchText = _selectedText;
     searchText = searchText.replace(QLatin1Char('\n'), QLatin1Char(' ')).replace(QLatin1Char('\r'), QLatin1Char(' ')).simplified();
 

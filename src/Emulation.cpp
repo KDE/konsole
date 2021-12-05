@@ -92,8 +92,8 @@ void Emulation::checkScreenInUse()
 
 void Emulation::checkSelectedText()
 {
-    QString text = _currentScreen->selectedText(Screen::PreserveLineBreaks);
-    Q_EMIT selectionChanged(text);
+    bool isEmpty = _currentScreen->isSelectionEmpty();
+    Q_EMIT selectionChanged(isEmpty);
 }
 
 Emulation::~Emulation()

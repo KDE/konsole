@@ -734,7 +734,7 @@ Q_SIGNALS:
      * This signal serves as a relayer of Emulation::selectedText(QString),
      * making it usable for higher level component.
      */
-    void selectionChanged(const QString &text);
+    void selectionChanged(const bool selectionChanged);
 
     /**
      * Emitted when foreground request ("\033]10;?\a") terminal code received.

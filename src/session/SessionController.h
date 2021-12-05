@@ -198,7 +198,7 @@ public Q_SLOTS:
     /**
      * update actions which are closely related with the selected text.
      */
-    void selectionChanged(const QString &selectedText);
+    void selectionChanged(const bool selectionEmpty);
 
     /**
      * close the associated session. This might involve user interaction for
@@ -293,7 +293,7 @@ private Q_SLOTS:
     void zmodemUpload();
 
     // update actions related with selected text
-    void updateCopyAction(const QString &selectedText);
+    void updateCopyAction(const bool selectionEmpty);
     void updateWebSearchMenu();
 
 private:
@@ -349,6 +349,8 @@ private:
     bool _listenForScreenWindowUpdates;
     bool _preventClose;
 
+    bool _selectionEmpty;
+    bool _selectionChanged;
     QString _selectedText;
 
     QAction *_showMenuAction;
