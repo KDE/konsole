@@ -1634,8 +1634,8 @@ int Screen::copyLineToStream(int line,
         }
     }
 
+    int spacesCount = 0;
     if ((options & TrimLeadingWhitespace) != 0U) {
-        int spacesCount = 0;
         for (spacesCount = 0; spacesCount < count; ++spacesCount) {
             if (QChar::category(characterBuffer[spacesCount].character) != QChar::Category::Separator_Space) {
                 break;
@@ -1646,13 +1646,11 @@ int Screen::copyLineToStream(int line,
             return 0;
         }
 
-        std::copy(characterBuffer + spacesCount, characterBuffer + count, characterBuffer);
-
         count -= spacesCount;
     }
 
     // decode line and write to text stream
-    decoder->decodeLine(characterBuffer, count, currentLineProperties);
+    decoder->decodeLine(characterBuffer + spacesCount, count, currentLineProperties);
 
     return count;
 }
