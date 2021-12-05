@@ -668,7 +668,8 @@ private:
     //   colors OR
     // - setting the RE_BLEND_SELECTION_COLORS RenditionFlag, which will
     //   blend the foreground/background colors
-    void setTextSelectionRendition(Character &ch) const;
+    void setTextSelectionRendition(Character &ch, const bool isInvert) const;
+    bool isInvertedRendition() const;
 
     // returns a buffer that can hold at most 'count' characters,
     // where the number of reallocations and object reinitializations

@@ -626,8 +626,20 @@ void Screen::updateEffectiveRendition()
     }
 }
 
+bool Screen::isInvertedRendition() const
+{
+    Q_ASSERT(_currentTerminalDisplay);
+
+    auto currentProfile = SessionManager::instance()->sessionProfile(_currentTerminalDisplay->session());
+    const bool isInvert = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
+
+    return isInvert;
+}
+
 void Screen::copyFromHistory(Character *dest, int startLine, int count) const
 {
+    const bool invertedRendition = isInvertedRendition();
+
     Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= _history->getLines());
 
     for (int line = startLine; line < startLine + count; ++line) {
@@ -647,7 +659,7 @@ void Screen::copyFromHistory(Character *dest, int startLine, int count) const
         if (_selBegin != -1) {
             for (int column = 0; column < lastColumn; ++column) {
                 if (isSelected(column, line)) {
-                    setTextSelectionRendition(dest[destLineOffset + column]);
+                    setTextSelectionRendition(dest[destLineOffset + column], invertedRendition);
                 }
             }
         }
@@ -657,6 +669,7 @@ void Screen::copyFromHistory(Character *dest, int startLine, int count) const
 void Screen::copyFromScreen(Character *dest, int startLine, int count) const
 {
     const int endLine = startLine + count;
+    const bool invertedRendition = isInvertedRendition();
 
     Q_ASSERT(startLine >= 0 && count > 0 && endLine <= _lines);
 
@@ -672,19 +685,14 @@ void Screen::copyFromScreen(Character *dest, int startLine, int count) const
             dest[destIndex] = _screenLines.at(srcIndex / _columns).value(srcIndex % _columns, Screen::DefaultChar);
 
             if (_selBegin != -1 && isSelected(column, line + _history->getLines()) && column < lastColumn) {
-                setTextSelectionRendition(dest[destIndex]);
+                setTextSelectionRendition(dest[destIndex], invertedRendition);
             }
         }
     }
 }
 
-void Screen::setTextSelectionRendition(Character &ch) const
+void Screen::setTextSelectionRendition(Character &ch, const bool isInvert) const
 {
-    Q_ASSERT(_currentTerminalDisplay);
-
-    auto currentProfile = SessionManager::instance()->sessionProfile(_currentTerminalDisplay->session());
-    const bool isInvert = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
-
     if (isInvert) {
         reverseRendition(ch);
     } else {
