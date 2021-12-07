@@ -585,7 +585,7 @@ void ColorScheme::setWallpaper(const QString &path, const ColorSchemeWallpaper::
     _wallpaper = new ColorSchemeWallpaper(path, style, anchor);
 }
 
-void ColorScheme::setWallpaper(const QString &path, const QString style, const QPointF &anchor)
+void ColorScheme::setWallpaper(const QString &path, const QString &style, const QPointF &anchor)
 {
     ColorSchemeWallpaper::FillStyle fstyle;
     fstyle = static_cast<ColorSchemeWallpaper::FillStyle>
@@ -593,7 +593,7 @@ void ColorScheme::setWallpaper(const QString &path, const QString style, const Q
                     QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>()
                     .keyToValue(style.toStdString().c_str())
                     , 0));
-                    
+
     setWallpaper(path, fstyle, anchor);
 }
 

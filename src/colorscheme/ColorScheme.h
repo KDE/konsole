@@ -134,7 +134,7 @@ public:
     bool blur() const;
 
     void setWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor);
-    void setWallpaper(const QString &path, const QString style, const QPointF &anchor);
+    void setWallpaper(const QString &path, const QString &style, const QPointF &anchor);
 
     ColorSchemeWallpaper::Ptr wallpaper() const;
 
