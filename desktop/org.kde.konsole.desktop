@@ -21,6 +21,7 @@ Keywords[en_GB]=terminal;console;script;run;execute;command;command-line;command
 Keywords[es]=terminal;consola;script;guion;guión;lanzar;ejecutar;comando;orden;línea de órdenes;línea de comandos;cli;bash;sh;shell;intérprete;zsh
 Keywords[fi]=pääte;konsoli;skripti;komentojono;aja;suorita;komento;komentorivi;cli;bash;sh;shell;komentotulkki;zsh
 Keywords[fr]=terminal ; console ; script ; lancer ; exécuter ;commande ; commande en ligne ; bash ; sh ; shell ; zsh
+Keywords[hu]=terminál;konzol;szkript;futtatás;végrehajtás;parancs;parancssor;parancssor;cli;bash;sh;shell;zsh
 Keywords[ia]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh
 Keywords[it]=terminale;console;script;esegui;comando;riga di comando;cli;bash;sh;shell;zsh
 Keywords[ko]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;터미널;콘솔;스크립트;실행;명령;명령줄;명령행
