@@ -103,7 +103,7 @@ QPointF ColorSchemeWallpaper::anchor() const
 QRectF ColorSchemeWallpaper::ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect)
 {
     QRectF scaledRect = QRectF();
-    QSize scaledSize = _style == NoResize ? pictureSize : pictureSize.scaled(viewportSize, RatioMode());
+    QSize scaledSize = _style == NoScaling ? pictureSize : pictureSize.scaled(viewportSize, RatioMode());
 
     double scaleX = pictureSize.width() / static_cast<double>(scaledSize.width());
     double scaleY = pictureSize.height() / static_cast<double>(scaledSize.height());

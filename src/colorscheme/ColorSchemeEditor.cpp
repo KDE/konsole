@@ -92,6 +92,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     connect(_ui->wallpaperSelectButton, &QToolButton::clicked, this, &Konsole::ColorSchemeEditor::selectWallpaper);
     connect(_ui->wallpaperPath, &QLineEdit::textChanged, this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
 
+    connect(_ui->wallpaperScalingType, &QComboBox::currentTextChanged, this, &Konsole::ColorSchemeEditor::scalingTypeChanged);
+    connect(_ui->wallpaperHorizontalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::horizontalAnchorChanged);
+    connect(_ui->wallpaperVerticalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::verticalAnchorChanged);
+
     // color table
     _ui->colorTable->setColumnCount(4);
     _ui->colorTable->setRowCount(COLOR_TABLE_ROW_LENGTH);
@@ -197,6 +201,47 @@ void ColorSchemeEditor::wallpaperPathChanged(const QString &path)
     }
 }
 
+void ColorSchemeEditor::scalingTypeChanged(QString style)
+{
+    _colors->setWallpaper(_colors->wallpaper()->path(), style, _colors->wallpaper()->anchor());
+}
+
+void ColorSchemeEditor::horizontalAnchorChanged(int pos)
+{
+    QPointF anch = _colors->wallpaper()->anchor();
+    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), QPointF(pos / 2.0, anch.y())); 
+    switch (pos) {
+    case 2:
+        _ui->wallpaperHorizontalAnchorPosition->setText(QString::fromLatin1("Right"));
+        break;
+    case 1:
+        _ui->wallpaperHorizontalAnchorPosition->setText(QString::fromLatin1("Center"));
+        break;
+    case 0:
+    default:
+        _ui->wallpaperHorizontalAnchorPosition->setText(QString::fromLatin1("Left"));
+        break;
+    }
+}
+
+void ColorSchemeEditor::verticalAnchorChanged(int pos)
+{
+    QPointF anch = _colors->wallpaper()->anchor();
+    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), QPointF(anch.x(), pos / 2.0));
+    switch (pos) {
+    case 2:
+        _ui->wallpaperVerticalAnchorPosition->setText(QString::fromLatin1("Bottom"));
+        break;
+    case 1:
+        _ui->wallpaperVerticalAnchorPosition->setText(QString::fromLatin1("Middle"));
+        break;
+    case 0:
+    default:
+        _ui->wallpaperVerticalAnchorPosition->setText(QString::fromLatin1("Top"));
+        break;
+    }
+}
+
 void ColorSchemeEditor::setDescription(const QString &description)
 {
     if (_colors != nullptr) {
@@ -257,7 +302,12 @@ void ColorSchemeEditor::setup(const std::shared_ptr<const ColorScheme> &scheme, 
     _ui->randomizedBackgroundCheck->setChecked(scheme->isColorRandomizationEnabled());
 
     // wallpaper stuff
+    int ax = qRound(scheme->wallpaper()->anchor().x() * 2.0);
+    int ay = qRound(scheme->wallpaper()->anchor().y() * 2.0);
     _ui->wallpaperPath->setText(scheme->wallpaper()->path());
+    _ui->wallpaperScalingType->setCurrentIndex(scheme->wallpaper()->style());
+    _ui->wallpaperHorizontalAnchorSlider->setValue(ax);
+    _ui->wallpaperVerticalAnchorSlider->setValue(ay);
 }
 
 void ColorSchemeEditor::setupColorTable(const std::shared_ptr<ColorScheme> &colors)

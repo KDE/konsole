@@ -37,8 +37,9 @@ public:
         Stretch,
         Crop,
         Adapt,
-        NoResize
+        NoScaling
     };
+    Q_ENUM(FillStyle)
 
     typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
 
@@ -59,6 +60,7 @@ public:
     QPointF anchor() const;
 
 private:
+    Q_GADGET
     Q_DISABLE_COPY(ColorSchemeWallpaper)
 
     QString _path;

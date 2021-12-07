@@ -69,6 +69,9 @@ private Q_SLOTS:
     void setRandomizedBackgroundColor(bool randomized);
     void editColorItem(QTableWidgetItem *item);
     void wallpaperPathChanged(const QString &path);
+    void scalingTypeChanged(QString style);
+    void horizontalAnchorChanged(int pos);
+    void verticalAnchorChanged(int pos);
     void selectWallpaper();
     /** Triggered by apply/ok buttons */
     void saveColorScheme();

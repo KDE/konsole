@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>364</width>
-    <height>376</height>
+    <height>460</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -118,6 +118,120 @@ To see any effect, set colors with saturation value greater than 0.</string>
        </property>
        <property name="text">
         <string>...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="wallpaperScalingLabel">
+       <property name="text">
+        <string>Wallpaper scaling:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="wallpaperScalingType">
+       <item>
+        <property name="text">
+         <string>Tile</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Stretch</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Crop</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Adapt</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>NoScaling</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="wallpaperHorizontalAnchorLabel">
+       <property name="text">
+        <string>Horizontal Anchor:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="wallpaperHorizontalAnchorSlider">
+       <property name="maximum">
+        <number>2</number>
+       </property>
+       <property name="singleStep">
+        <number>1</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksBelow</enum>
+       </property>
+       <property name="tickInterval">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="wallpaperHorizontalAnchorPosition">
+       <property name="text">
+        <string>Left</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="wallpaperVerticalAnchorLabel">
+       <property name="text">
+        <string>Vertical Anchor:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="wallpaperVerticalAnchorSlider">
+       <property name="maximum">
+        <number>2</number>
+       </property>
+       <property name="singleStep">
+        <number>1</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksBelow</enum>
+       </property>
+       <property name="tickInterval">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="wallpaperVerticalAnchorPosition">
+       <property name="text">
+        <string>Top</string>
        </property>
       </widget>
      </item>

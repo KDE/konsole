@@ -13,6 +13,7 @@
 
 // Qt
 #include <QPainter>
+#include <QMetaEnum>
 
 // KDE
 #include <KConfig>
@@ -466,7 +467,7 @@ void ColorScheme::read(const KConfig &config)
     _blur = configGroup.readEntry("Blur", false);
     setWallpaper(
             configGroup.readEntry("Wallpaper", QString()),
-            static_cast<ColorSchemeWallpaper::FillStyle>(configGroup.readEntry("FillStyle", 0)),
+            configGroup.readEntry("FillStyle", QString::fromLatin1("Tile")),
             configGroup.readEntry("Anchor", QPointF(0.5f, 0.5f)));
     _colorRandomization = configGroup.readEntry(EnableColorRandomizationKey, false);
 
@@ -528,7 +529,9 @@ void ColorScheme::write(KConfig &config) const
     configGroup.writeEntry("Opacity", _opacity);
     configGroup.writeEntry("Blur", _blur);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
-    configGroup.writeEntry("FillStyle", static_cast<int>(_wallpaper->style()));
+    configGroup.writeEntry("FillStyle", 
+                            QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>()
+                            .valueToKey(_wallpaper->style()));
     configGroup.writeEntry("Anchor", _wallpaper->anchor());
     configGroup.writeEntry(EnableColorRandomizationKey, _colorRandomization);
 
@@ -580,6 +583,18 @@ void ColorScheme::writeColorEntry(KConfig &config, int index) const
 void ColorScheme::setWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor)
 {
     _wallpaper = new ColorSchemeWallpaper(path, style, anchor);
+}
+
+void ColorScheme::setWallpaper(const QString &path, const QString style, const QPointF &anchor)
+{
+    ColorSchemeWallpaper::FillStyle fstyle;
+    fstyle = static_cast<ColorSchemeWallpaper::FillStyle>
+                (std::max(      //keyToValue returns -1 if key was not found, but we should default to 0
+                    QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>()
+                    .keyToValue(style.toStdString().c_str())
+                    , 0));
+                    
+    setWallpaper(path, fstyle, anchor);
 }
 
 ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
