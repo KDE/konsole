@@ -187,12 +187,12 @@ void ColorSchemeEditor::selectWallpaper()
 void ColorSchemeEditor::wallpaperPathChanged(const QString &path)
 {
     if (path.isEmpty()) {
-        _colors->setWallpaper(path, _colors->wallpaper()->style());
+        _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor());
     } else {
         QFileInfo i(path);
 
         if (i.exists() && i.isFile() && i.isReadable()) {
-            _colors->setWallpaper(path, _colors->wallpaper()->style());
+            _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor());
         }
     }
 }

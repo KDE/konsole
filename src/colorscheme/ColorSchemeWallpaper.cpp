@@ -17,11 +17,16 @@
 
 using namespace Konsole;
 
-ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path, ColorSchemeWallpaper::FillStyle style)
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor)
     : _path(path)
     , _picture(nullptr)
     , _style(style)
+    , _anchor(anchor)
 {
+    float x = _anchor.x(), y = _anchor.y();
+    
+    if(x < 0 || x > 1.0f || y < 0 || y > 1.0f)
+        _anchor = QPointF(0.5f, 0.5f);
 }
 
 ColorSchemeWallpaper::~ColorSchemeWallpaper() = default;
@@ -90,16 +95,21 @@ ColorSchemeWallpaper::FillStyle ColorSchemeWallpaper::style() const
     return _style;
 }
 
+QPointF ColorSchemeWallpaper::anchor() const
+{
+    return _anchor;
+} 
+
 QRectF ColorSchemeWallpaper::ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect)
 {
     QRectF scaledRect = QRectF();
-    QSize scaledSize = pictureSize.scaled(viewportSize, RatioMode());
+    QSize scaledSize = _style == NoResize ? pictureSize : pictureSize.scaled(viewportSize, RatioMode());
 
     double scaleX = pictureSize.width() / static_cast<double>(scaledSize.width());
     double scaleY = pictureSize.height() / static_cast<double>(scaledSize.height());
 
-    double offsetX = (scaledSize.width() - viewportSize.width()) / 2.0;
-    double offsetY = (scaledSize.height() - viewportSize.height()) / 2.0;
+    double offsetX = (scaledSize.width() - viewportSize.width()) * _anchor.x();
+    double offsetY = (scaledSize.height() - viewportSize.height()) * _anchor.y();
 
     scaledRect.setX((rect.x() + offsetX) * scaleX);
     scaledRect.setY((rect.y() + offsetY) * scaleY);
@@ -113,7 +123,7 @@ QRectF ColorSchemeWallpaper::ScaledRect(const QSize viewportSize, const QSize pi
 Qt::AspectRatioMode ColorSchemeWallpaper::RatioMode()
 {
     switch (_style) {
-    case Center:
+    case Crop:
         return Qt::KeepAspectRatioByExpanding;
     case Adapt:
         return Qt::KeepAspectRatio;

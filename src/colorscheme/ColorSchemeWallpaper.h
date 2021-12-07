@@ -14,6 +14,7 @@
 // Qt
 #include <QMetaType>
 #include <QSharedData>
+#include <QPointF>
 
 // Konsole
 #include "../characters/CharacterColor.h"
@@ -34,13 +35,14 @@ public:
     {
         Tile = 0,
         Stretch,
-        Center,
-        Adapt
+        Crop,
+        Adapt,
+        NoResize
     };
 
     typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
 
-    explicit ColorSchemeWallpaper(const QString &path, FillStyle style);
+    explicit ColorSchemeWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor);
     ~ColorSchemeWallpaper();
 
     void load();
@@ -54,12 +56,15 @@ public:
 
     FillStyle style() const;
 
+    QPointF anchor() const;
+
 private:
     Q_DISABLE_COPY(ColorSchemeWallpaper)
 
     QString _path;
     std::unique_ptr<QPixmap> _picture;
     FillStyle _style;
+    QPointF _anchor;
 
     QRectF ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect);
     Qt::AspectRatioMode RatioMode();
