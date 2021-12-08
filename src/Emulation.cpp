@@ -242,12 +242,16 @@ void Emulation::receiveData(const char *text, int length)
     // look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move
     // this check into the above for loop?
-    for (int i = 0; i < length - 4; i++) {
-        if (text[i] == '\030') {
-            if (qstrncmp(text + i + 1, "B00", 3) == 0) {
-                Q_EMIT zmodemDownloadDetected();
-            } else if (qstrncmp(text + i + 1, "B01", 3) == 0) {
-                Q_EMIT zmodemUploadDetected();
+    auto *found = static_cast<const char *>(memchr(text, '\030', length));
+    if (found) {
+        int startPos = text - found;
+        for (int i = startPos; i < length - 4; i++) {
+            if (text[i] == '\030') {
+                if (qstrncmp(text + i + 1, "B00", 3) == 0) {
+                    Q_EMIT zmodemDownloadDetected();
+                } else if (qstrncmp(text + i + 1, "B01", 3) == 0) {
+                    Q_EMIT zmodemUploadDetected();
+                }
             }
         }
     }
