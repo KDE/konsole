@@ -41,7 +41,7 @@ void CompactHistoryScroll::removeLinesFromTop(int lines)
 
 void CompactHistoryScroll::addCells(const Character a[], const int count)
 {
-    std::copy(a, a + count, std::back_inserter(_cells));
+    _cells.insert(_cells.end(), a, a + count);
 
     // store the length of line
     _lineLengths.push_back(count);
