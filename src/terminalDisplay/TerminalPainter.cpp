@@ -112,7 +112,7 @@ void TerminalPainter::drawContents(Character *image,
                     const int nextPos = display->loc(x + len, y);
                     const Character next_char = image[nextPos];
 
-                    if (!hasSameWidth(x + len) || !next_char.canBeGrouped(bidiEnabled, doubleWidth) || !char_value.hasSameAttributes(next_char)) {
+                    if (!hasSameWidth(nextPos) || !next_char.canBeGrouped(bidiEnabled, doubleWidth) || !char_value.hasSameAttributes(next_char)) {
                         break;
                     }
 
