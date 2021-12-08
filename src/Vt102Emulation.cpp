@@ -516,10 +516,9 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
     }
 }
 
-void Vt102Emulation::processChecksumRequest(int argc, int argv[])
+void Vt102Emulation::processChecksumRequest([[maybe_unused]] int argc, int argv[])
 {
     int checksum = 0;
-    argc = argc;
 
 #if defined(ENABLE_DECRQCRA)
     int top, left, bottom, right;
