@@ -1,5 +1,5 @@
 
-qt_wrap_ui(EXTRA_SSHPLUGIN_SRCS sshwidget.ui)
+ki18n_wrap_ui(EXTRA_SSHPLUGIN_SRCS sshwidget.ui)
 
 kcoreaddons_add_plugin(konsole_sshmanagerplugin
 SOURCES
