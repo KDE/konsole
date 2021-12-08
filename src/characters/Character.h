@@ -138,6 +138,21 @@ public:
 
     static int width(uint ucs4)
     {
+        // ASCII
+        if (ucs4 >= 0x20 && ucs4 < 0x7f)
+            return 1;
+
+        if (ucs4 >= 0xA0 && ucs4 <= 0xFF)
+            return 1;
+
+        // NULL
+        if (ucs4 == 0)
+            return 0;
+
+        // Control chars
+        if ((ucs4 > 0x0 && ucs4 < 0x20) || (ucs4 >= 0x7F && ucs4 < 0xA0))
+            return -1;
+
         return characterWidth(ucs4);
     }
 
