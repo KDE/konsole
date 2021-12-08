@@ -6,6 +6,7 @@
 */
 
 #include "EscapeSequenceUrlExtractor.h"
+#include "Screen.h"
 
 #include <QUrl>
 
@@ -19,22 +20,13 @@ void Konsole::EscapeSequenceUrlExtractor::setScreen(Konsole::Screen *screen)
     clear();
 }
 
-bool EscapeSequenceUrlExtractor::reading() const
-{
-    return _reading;
-}
-
 void EscapeSequenceUrlExtractor::beginUrlInput()
 {
     _reading = true;
 }
 
-void EscapeSequenceUrlExtractor::appendUrlText(QChar c)
+void EscapeSequenceUrlExtractor::appendUrlText_impl(QChar c)
 {
-    if (!reading()) {
-        return;
-    }
-
     if (_currentUrl.text.isEmpty()) {
         // We need to  on getCursorX because we want the position of the
         // last printed character, not the cursor.
