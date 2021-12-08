@@ -330,7 +330,6 @@ void Vt102Emulation::initTokenizer()
 
 /* clang-format off */
 #define lec(P,L,C) (p == (P) && s[(L)] == (C))
-#define lun(     ) (p ==  1  && cc >= 32 )
 #define les(P,L,C) (p == (P) && s[L] < 256 && (charClass[s[(L)]] & (C)) == (C))
 #define eec(C)     (p >=  3  && cc == (C))
 #define ees(C)     (p >=  3  && cc < 256 && (charClass[cc] & (C)) == (C))
@@ -358,6 +357,12 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
     for (uint cc : chars) {
         if (cc == DEL) {
             continue; // VT100: ignore.
+        }
+
+        // early out for displayable characters
+        if (getMode(MODE_Ansi) && tokenBufferPos == 0 && cc >= 32 && cc != (ESC + 128)) {
+            _currentScreen->displayCharacter(applyCharset(cc));
+            continue;
         }
 
         if (ces(CTL)) {
@@ -442,7 +447,6 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
         if (lec(3,2,'!')) { continue; }
         if (lec(3,2,SP )) { continue; }
         if (lec(4,3,SP )) { continue; }
-        if (lun(       )) { processToken(token_chr(), applyCharset(cc), 0);   resetTokenizer(); continue; }
         if (dcs         ) { continue; /* TODO We don't xterm DCS, so we just eat it */ }
         if (lec(2,0,ESC)) { processToken(token_esc(s[1]), 0, 0);              resetTokenizer(); continue; }
         if (les(3,1,SCS)) { processToken(token_esc_cs(s[1],s[2]), 0, 0);      resetTokenizer(); continue; }
