@@ -113,6 +113,7 @@
     <p xml:lang="fi">Konsole on pääte komentotulkkia varten. Se tarjoaa komentorivikäyttöliittymän tietokoneen hallitsemiseksi.</p>
     <p xml:lang="fr">Konsole est un terminal pour lancer une invite de commande. Il fournit une interface de ligne de commande pour contrôler directement votre ordinateur.</p>
     <p xml:lang="gl">Konsole é un terminal para executar un intérprete de ordes. Fornece unha interface de liña de ordes para controlar directamente o computador.</p>
+    <p xml:lang="hu">A Konsole egy terminál parancsértelmezők futtatásához. Parancssosor felületet biztosít a számítógépe közvetlen irányításához.</p>
     <p xml:lang="ia">Konsole es un terminal pro executar un shell de commando.  Illo provide un interfacie de linea de commando pro controlar directemente tu computator.</p>
     <p xml:lang="id">Konsole adalah sebuah terminal untuk menjalankan shell perintah. Ini menyediakan antarmuka baris perintah untuk secara langsung mengendalikan komputermu.</p>
     <p xml:lang="it">Konsole è un terminale per eseguire una shell di comandi. Fornisce un'interfaccia a riga di comando per controllare direttamente il tuo computer.</p>
@@ -475,6 +476,7 @@
       <caption xml:lang="fi">Pääte-emulaattorina käytetään Konsolea.</caption>
       <caption xml:lang="fr">Konsole est un émulateur de terminal</caption>
       <caption xml:lang="gl">Konsole usado como emulador de terminal.</caption>
+      <caption xml:lang="hu">A Konsole használata terminálemulárként</caption>
       <caption xml:lang="ia">Konsole es usate como un emulator de terminal</caption>
       <caption xml:lang="id">Konsole adalah wujud yang digunakan sebagai emulator terminal</caption>
       <caption xml:lang="it">Konsole utilizzata come un emulatore di terminale</caption>
