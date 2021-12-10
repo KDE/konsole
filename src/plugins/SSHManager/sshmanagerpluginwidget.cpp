@@ -188,10 +188,10 @@ void SSHManagerTreeWidget::triggerRemove()
         return;
     }
 
-    const QString dialogMessage =
-        i18n(ui->treeView->model()->rowCount(selection.at(0)) ? "You are about to remove the folder %1,\n with multiple SSH Configurations, are you sure?"
-                                                              : "You are about to remove %1, are you sure?")
-            .arg(selection.at(0).data(Qt::DisplayRole).toString());
+    const QString text = selection.at(0).data(Qt::DisplayRole).toString();
+    const QString dialogMessage = ui->treeView->model()->rowCount(selection.at(0))
+        ? i18n("You are about to remove the folder %1,\n with multiple SSH Configurations, are you sure?", text)
+        : i18n("You are about to remove %1, are you sure?", text);
 
     const QString dontAskAgainKey =
         ui->treeView->model()->rowCount(selection.at(0)) ? QStringLiteral("remove_ssh_folder") : QStringLiteral("remove_ssh_config");
