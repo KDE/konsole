@@ -639,19 +639,20 @@ bool Screen::isInvertedRendition() const
 void Screen::copyFromHistory(Character *dest, int startLine, int count) const
 {
     const bool invertedRendition = isInvertedRendition();
+    const int columns = _columns;
 
     Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= _history->getLines());
 
     for (int line = startLine; line < startLine + count; ++line) {
-        const int length = qMin(_columns, _history->getLineLen(line));
-        const int destLineOffset = (line - startLine) * _columns;
-        const int lastColumn = (_history->getLineProperty(line) & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
+        const int length = qMin(columns, _history->getLineLen(line));
+        const int destLineOffset = (line - startLine) * columns;
+        const int lastColumn = (_history->getLineProperty(line) & LINE_DOUBLEWIDTH) ? columns / 2 : columns;
 
         _history->getCells(line, 0, length, dest + destLineOffset);
 
-        if (length < _columns) {
+        if (length < columns) {
             const int begin = destLineOffset + length;
-            const int end = destLineOffset + _columns;
+            const int end = destLineOffset + columns;
             std::fill(dest + begin, dest + end, Screen::DefaultChar);
         }
 
@@ -670,22 +671,30 @@ void Screen::copyFromScreen(Character *dest, int startLine, int count) const
 {
     const int endLine = startLine + count;
     const bool invertedRendition = isInvertedRendition();
+    const int columns = _columns;
+    const int historyLines = _history->getLines();
 
     Q_ASSERT(startLine >= 0 && count > 0 && endLine <= _lines);
 
     for (int line = startLine; line < endLine; ++line) {
-        const int srcLineStartIndex = line * _columns;
-        const int destLineStartIndex = (line - startLine) * _columns;
-        const int lastColumn = (line < (int)_lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
+        const int destLineOffset = (line - startLine) * columns;
+        const int lastColumn = (line < (int)_lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? columns / 2 : columns;
+        const ImageLine srcLine = _screenLines.at(line);
+        const int length = qMin(columns, srcLine.size());
 
-        for (int column = 0; column < _columns; ++column) {
-            const int srcIndex = srcLineStartIndex + column;
-            const int destIndex = destLineStartIndex + column;
+        std::copy(srcLine.cbegin(), srcLine.cbegin() + length, dest + destLineOffset);
 
-            dest[destIndex] = _screenLines.at(srcIndex / _columns).value(srcIndex % _columns, Screen::DefaultChar);
+        if (length < columns) {
+            const int begin = destLineOffset + length;
+            const int end = destLineOffset + columns;
+            std::fill(dest + begin, dest + end, Screen::DefaultChar);
+        }
 
-            if (_selBegin != -1 && isSelected(column, line + _history->getLines()) && column < lastColumn) {
-                setTextSelectionRendition(dest[destIndex], invertedRendition);
+        if (_selBegin != -1) {
+            for (int column = 0; column < lastColumn; ++column) {
+                if (isSelected(column, line + historyLines)) {
+                    setTextSelectionRendition(dest[destLineOffset + column], invertedRendition);
+                }
             }
         }
     }
