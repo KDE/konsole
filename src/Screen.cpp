@@ -1141,8 +1141,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
     Character clearCh(uint(c), _currentForeground, _currentBackground, DEFAULT_RENDITION, false);
 
     // if the character being used to clear the area is the same as the
-    // default character, the affected _lines can simply be filled
-    // with the default char
+    // default character, the affected _lines can simply be shrunk.
     const bool isDefaultCh = (clearCh == Screen::DefaultChar);
 
     for (int y = topLine; y <= bottomLine; ++y) {
@@ -1154,7 +1153,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
         QVector<Character> &line = _screenLines[y];
 
         if (isDefaultCh && endCol == _columns - 1) {
-            std::fill(line.begin() + startCol, line.end(), clearCh);
+            line.resize(startCol);
         } else {
             if (line.size() < endCol + 1) {
                 line.resize(endCol + 1);
@@ -1189,7 +1188,23 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     const int destY = dest / _columns;
     const int srcY = sourceBegin / _columns;
     if (dest < sourceBegin) {
-        std::rotate(_screenLines.begin() + destY, _screenLines.begin() + srcY, _screenLines.begin() + srcY + lines);
+        /**
+         * This is basically a left rotate.
+         *
+         * - "dest -> src" is the range of lines we want to move to the end
+         * - "lines" is the range of lines that will be rotated
+         *
+         * we take lines [destY, srcY] and move them to the end of 'lines'.
+         * Then we remove the now moved-from lines [destY, srcY].
+         *
+         * std::rotate can be used here but it is slower than this approach.
+         */
+        auto from = std::make_move_iterator(_screenLines.begin() + destY);
+        auto to = std::make_move_iterator(_screenLines.begin() + srcY);
+
+        _screenLines.insert(_screenLines.begin() + lines + srcY, from, to);
+        _screenLines.erase(_screenLines.begin() + destY, _screenLines.begin() + srcY);
+
         std::rotate(_lineProperties.begin() + destY, _lineProperties.begin() + srcY, _lineProperties.begin() + srcY + lines);
     } else {
         for (int i = lines; i >= 0; --i) {
