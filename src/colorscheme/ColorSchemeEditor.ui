@@ -66,7 +66,7 @@ To see any effect, set colors with saturation value greater than 0.</string>
      <item>
       <widget class="QLabel" name="transparencyLabel">
        <property name="text">
-        <string>Background transparency:</string>
+        <string>Background color transparency:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -85,6 +85,40 @@ To see any effect, set colors with saturation value greater than 0.</string>
      </item>
      <item>
       <widget class="QLabel" name="transparencyPercentLabel">
+       <property name="text">
+        <string>Percent</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="wallpaperTransparencyLabel">
+       <property name="text">
+        <string>Wallpaper transparency:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="wallpaperTransparencySlider">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="wallpaperTransparencyPercentLabel">
        <property name="text">
         <string>Percent</string>
        </property>

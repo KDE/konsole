@@ -17,11 +17,12 @@
 
 using namespace Konsole;
 
-ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor)
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor, const qreal &opacity)
     : _path(path)
     , _picture(nullptr)
     , _style(style)
     , _anchor(anchor)
+    , _opacity(opacity)
 {
     float x = _anchor.x(), y = _anchor.y();
     
@@ -52,26 +53,17 @@ bool ColorSchemeWallpaper::isNull() const
     return _path.isEmpty();
 }
 
-bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect rect, qreal opacity)
+bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect rect, qreal bgColorOpacity, const QColor &backgroundColor)
 {
     if ((_picture == nullptr) || _picture->isNull()) {
         return false;
     }
 
-    if (qFuzzyCompare(qreal(1.0), opacity)) {
-        if (_style == Tile) {
-            painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
-        } else {
-            QRectF srcRect = ScaledRect(painter.viewport().size(), _picture->size(), rect);
-            painter.drawPixmap(rect, *_picture, srcRect);
-        }
-        return true;
-    }
-
     painter.save();
-    painter.setCompositionMode(QPainter::CompositionMode_Source);
-    painter.fillRect(rect, QColor(0, 0, 0, 0));
-    painter.setOpacity(opacity);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+    painter.setOpacity(bgColorOpacity);
+    painter.fillRect(rect, backgroundColor);
+    painter.setOpacity(_opacity);
 
     if (_style == Tile) {
         painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
@@ -98,7 +90,12 @@ ColorSchemeWallpaper::FillStyle ColorSchemeWallpaper::style() const
 QPointF ColorSchemeWallpaper::anchor() const
 {
     return _anchor;
-} 
+}
+
+qreal ColorSchemeWallpaper::opacity() const
+{
+    return _opacity;
+}
 
 QRectF ColorSchemeWallpaper::ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect)
 {

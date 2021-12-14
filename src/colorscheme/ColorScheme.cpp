@@ -188,7 +188,7 @@ ColorScheme::ColorScheme()
     , _colorRandomization(false)
     , _wallpaper(nullptr)
 {
-    setWallpaper(QString(), ColorSchemeWallpaper::Tile, QPointF(0.5f, 0.5f));
+    setWallpaper(QString(), ColorSchemeWallpaper::Tile, QPointF(0.5f, 0.5f), 1.0);
 }
 
 ColorScheme::ColorScheme(const ColorScheme &other)
@@ -465,10 +465,10 @@ void ColorScheme::read(const KConfig &config)
     _description = i18n(schemeDescription.toUtf8().constData());
     setOpacity(configGroup.readEntry("Opacity", 1.0));
     _blur = configGroup.readEntry("Blur", false);
-    setWallpaper(
-            configGroup.readEntry("Wallpaper", QString()),
-            configGroup.readEntry("FillStyle", QString::fromLatin1("Tile")),
-            configGroup.readEntry("Anchor", QPointF(0.5f, 0.5f)));
+    setWallpaper(configGroup.readEntry("Wallpaper", QString()),
+                 configGroup.readEntry("FillStyle", QString::fromLatin1("Tile")),
+                 configGroup.readEntry("Anchor", QPointF(0.5f, 0.5f)),
+                 configGroup.readEntry("WallpaperOpacity", 1.0));
     _colorRandomization = configGroup.readEntry(EnableColorRandomizationKey, false);
 
     for (int i = 0; i < TABLE_COLORS; i++) {
@@ -533,6 +533,7 @@ void ColorScheme::write(KConfig &config) const
                             QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>()
                             .valueToKey(_wallpaper->style()));
     configGroup.writeEntry("Anchor", _wallpaper->anchor());
+    configGroup.writeEntry("WallpaperOpacity", _wallpaper->opacity());
     configGroup.writeEntry(EnableColorRandomizationKey, _colorRandomization);
 
     for (int i = 0; i < TABLE_COLORS; i++) {
@@ -580,12 +581,12 @@ void ColorScheme::writeColorEntry(KConfig &config, int index) const
     checkAndMaybeSaveValue(RandomLightnessRangeKey, random.lightness);
 }
 
-void ColorScheme::setWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor)
+void ColorScheme::setWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor, const qreal &opacity)
 {
-    _wallpaper = new ColorSchemeWallpaper(path, style, anchor);
+    _wallpaper = new ColorSchemeWallpaper(path, style, anchor, opacity);
 }
 
-void ColorScheme::setWallpaper(const QString &path, const QString &style, const QPointF &anchor)
+void ColorScheme::setWallpaper(const QString &path, const QString &style, const QPointF &anchor, const qreal &opacity)
 {
     ColorSchemeWallpaper::FillStyle fstyle;
     fstyle = static_cast<ColorSchemeWallpaper::FillStyle>
@@ -594,7 +595,7 @@ void ColorScheme::setWallpaper(const QString &path, const QString &style, const 
                     .keyToValue(style.toStdString().c_str())
                     , 0));
 
-    setWallpaper(path, fstyle, anchor);
+    setWallpaper(path, fstyle, anchor, opacity);
 }
 
 ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const

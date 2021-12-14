@@ -89,6 +89,8 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     _ui->wallpaperPath->setClearButtonEnabled(true);
     _ui->wallpaperSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("image-x-generic")));
 
+    connect(_ui->wallpaperTransparencySlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::wallpaperOpacityChanged);
+
     connect(_ui->wallpaperSelectButton, &QToolButton::clicked, this, &Konsole::ColorSchemeEditor::selectWallpaper);
     connect(_ui->wallpaperPath, &QLineEdit::textChanged, this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
 
@@ -188,28 +190,36 @@ void ColorSchemeEditor::selectWallpaper()
     }
 }
 
+void ColorSchemeEditor::wallpaperOpacityChanged(int percent)
+{
+    _ui->wallpaperTransparencyPercentLabel->setText(QStringLiteral("%1%").arg(percent));
+
+    const qreal opacity = (100.0 - percent) / 100.0;
+    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), _colors->wallpaper()->anchor(), opacity);
+}
+
 void ColorSchemeEditor::wallpaperPathChanged(const QString &path)
 {
     if (path.isEmpty()) {
-        _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor());
+        _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
     } else {
         QFileInfo i(path);
 
         if (i.exists() && i.isFile() && i.isReadable()) {
-            _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor());
+            _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
         }
     }
 }
 
 void ColorSchemeEditor::scalingTypeChanged(QString style)
 {
-    _colors->setWallpaper(_colors->wallpaper()->path(), style, _colors->wallpaper()->anchor());
+    _colors->setWallpaper(_colors->wallpaper()->path(), style, _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
 }
 
 void ColorSchemeEditor::horizontalAnchorChanged(int pos)
 {
     QPointF anch = _colors->wallpaper()->anchor();
-    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), QPointF(pos / 2.0, anch.y())); 
+    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), QPointF(pos / 2.0, anch.y()), _colors->wallpaper()->opacity());
     switch (pos) {
     case 2:
         _ui->wallpaperHorizontalAnchorPosition->setText(QString::fromLatin1("Right"));
@@ -227,7 +237,7 @@ void ColorSchemeEditor::horizontalAnchorChanged(int pos)
 void ColorSchemeEditor::verticalAnchorChanged(int pos)
 {
     QPointF anch = _colors->wallpaper()->anchor();
-    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), QPointF(anch.x(), pos / 2.0));
+    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), QPointF(anch.x(), pos / 2.0), _colors->wallpaper()->opacity());
     switch (pos) {
     case 2:
         _ui->wallpaperVerticalAnchorPosition->setText(QString::fromLatin1("Bottom"));

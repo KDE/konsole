@@ -444,7 +444,8 @@ void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const
 {
     const auto display = qobject_cast<TerminalDisplay *>(sender());
 
-    if (useOpacitySetting && !display->wallpaper()->isNull() && display->wallpaper()->draw(painter, rect, display->terminalColor()->opacity())) {
+    if (useOpacitySetting && !display->wallpaper()->isNull()
+        && display->wallpaper()->draw(painter, rect, display->terminalColor()->opacity(), backgroundColor)) {
     } else if (qAlpha(display->terminalColor()->blendColor()) < 0xff && useOpacitySetting) {
 #if defined(Q_OS_MACOS)
         // TODO: On MacOS, using CompositionMode doesn't work. Altering the

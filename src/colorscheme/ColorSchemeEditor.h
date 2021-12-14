@@ -68,6 +68,7 @@ private Q_SLOTS:
     void setBlur(bool blur);
     void setRandomizedBackgroundColor(bool randomized);
     void editColorItem(QTableWidgetItem *item);
+    void wallpaperOpacityChanged(int percent);
     void wallpaperPathChanged(const QString &path);
     void scalingTypeChanged(QString style);
     void horizontalAnchorChanged(int pos);
