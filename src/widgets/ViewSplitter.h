@@ -156,7 +156,7 @@ Q_SIGNALS:
 
 private:
     /** recursively walks the object tree looking for Splitters and
-     * TerminalDisplays, hidding the ones that should be hidden.
+     * TerminalDisplays, hiding the ones that should be hidden.
      * If a terminal display is not hidden in a subtree, we cannot
      * hide the whole tree.
      *
