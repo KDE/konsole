@@ -81,6 +81,7 @@ private:
     Q_DISABLE_COPY(ColorSchemeEditor)
 
     void setupColorTable(const std::shared_ptr<ColorScheme> &table);
+    void enableWallpaperSettings(bool enable);
 
     bool _isNewScheme;
     Ui::ColorSchemeEditor *_ui;

@@ -202,11 +202,13 @@ void ColorSchemeEditor::wallpaperPathChanged(const QString &path)
 {
     if (path.isEmpty()) {
         _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
+        enableWallpaperSettings(false);
     } else {
         QFileInfo i(path);
 
         if (i.exists() && i.isFile() && i.isReadable()) {
             _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
+            enableWallpaperSettings(true);
         }
     }
 }
@@ -321,6 +323,7 @@ void ColorSchemeEditor::setup(const std::shared_ptr<const ColorScheme> &scheme, 
     _ui->wallpaperScalingType->setCurrentIndex(scheme->wallpaper()->style());
     _ui->wallpaperHorizontalAnchorSlider->setValue(ax);
     _ui->wallpaperVerticalAnchorSlider->setValue(ay);
+    enableWallpaperSettings(!scheme->wallpaper()->isNull());
 }
 
 void ColorSchemeEditor::setupColorTable(const std::shared_ptr<ColorScheme> &colors)
@@ -369,4 +372,12 @@ bool ColorSchemeEditor::isNewScheme() const
 void ColorSchemeEditor::saveColorScheme()
 {
     Q_EMIT colorSchemeSaveRequested(colorScheme(), _isNewScheme);
+}
+
+void ColorSchemeEditor::enableWallpaperSettings(bool enable)
+{
+    _ui->wallpaperHorizontalAnchorSlider->setEnabled(enable);
+    _ui->wallpaperVerticalAnchorSlider->setEnabled(enable);
+    _ui->wallpaperTransparencySlider->setEnabled(enable);
+    _ui->wallpaperScalingType->setEnabled(enable);
 }
