@@ -89,7 +89,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     _ui->wallpaperPath->setClearButtonEnabled(true);
     _ui->wallpaperSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("image-x-generic")));
 
-    connect(_ui->wallpaperTransparencySlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::wallpaperOpacityChanged);
+    connect(_ui->wallpaperTransparencySlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::setWallpaperOpacity);
 
     connect(_ui->wallpaperSelectButton, &QToolButton::clicked, this, &Konsole::ColorSchemeEditor::selectWallpaper);
     connect(_ui->wallpaperPath, &QLineEdit::textChanged, this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
@@ -190,7 +190,7 @@ void ColorSchemeEditor::selectWallpaper()
     }
 }
 
-void ColorSchemeEditor::wallpaperOpacityChanged(int percent)
+void ColorSchemeEditor::setWallpaperOpacity(int percent)
 {
     _ui->wallpaperTransparencyPercentLabel->setText(QStringLiteral("%1%").arg(percent));
 
@@ -301,9 +301,12 @@ void ColorSchemeEditor::setup(const std::shared_ptr<const ColorScheme> &scheme, 
     setupColorTable(_colors);
 
     // setup transparency slider
-    const int transparencyPercent = qRound((1 - _colors->opacity()) * 100);
-    _ui->transparencySlider->setValue(transparencyPercent);
-    setTransparencyPercentLabel(transparencyPercent);
+    const int colorTransparencyPercent = qRound((1 - _colors->opacity()) * 100);
+    const int wallpaperTransparencyPercent = qRound((1 - _colors->wallpaper()->opacity()) * 100);
+    _ui->transparencySlider->setValue(colorTransparencyPercent);
+    _ui->wallpaperTransparencySlider->setValue(wallpaperTransparencyPercent);
+    setTransparencyPercentLabel(colorTransparencyPercent);
+    setWallpaperOpacity(wallpaperTransparencyPercent);
 
     // blur behind window checkbox
     _ui->blurCheckBox->setChecked(scheme->blur());
