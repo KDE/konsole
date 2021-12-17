@@ -142,6 +142,23 @@ void TerminalPainter::drawContents(Character *image,
                         break;
                     }
 
+                    // Group spaces following any non-wide character with the character. This allows for
+                    // rendering ambiguous characters with wide glyphs without clipping them.
+                    // NOTE: This happens in the else case too, but we need it here as well.
+                    if (!doubleWidth && next_char.character == ' ' && char_value.equalsFormat(next_char)) {
+                        // univec intentionally not modified - trailing spaces are meaningless
+                        len++;
+                        while (isInsideDrawArea(x + len)) {
+                            const Character next_char = image[display->loc(x + len, y)];
+                            if (next_char.character == ' ' && char_value.hasSameColors(next_char) && char_value.hasSameRendition(next_char)) {
+                                len++;
+                            } else {
+                                break;
+                            }
+                        }
+                        break;
+                    }
+
                     const uint c = next_char.character;
                     if ((next_char.rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
