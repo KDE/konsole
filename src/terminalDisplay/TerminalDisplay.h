@@ -307,6 +307,14 @@ public:
         return _terminalFont.get();
     }
 
+    /**
+     * Return the current color scheme
+     */
+    const std::shared_ptr<const ColorScheme> &colorScheme() const
+    {
+        return _colorScheme;
+    }
+
     bool cursorBlinking() const
     {
         return _cursorBlinking;
@@ -435,14 +443,6 @@ public Q_SLOTS:
      * Sets whether the contents are centered between the margins.
      */
     void setCenterContents(bool enable);
-
-    /**
-     * Return the current color scheme
-     */
-    const std::shared_ptr<const ColorScheme> &colorScheme() const
-    {
-        return _colorScheme;
-    }
 
     Qt::Edge droppedEdge() const
     {
