@@ -773,13 +773,13 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
 
     auto *profileSettings = new ProfileSettings(confDialog);
     auto *profilePage = new KPageWidgetItem(profileSettings, profilePageName);
-    profilePage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-profiles")));
+    profilePage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-theme")));
     confDialog->addPage(profilePage, true);
     connect(confDialog, &QDialog::accepted, profileSettings, &ProfileSettings::slotAccepted);
 
     const QString tabBarPageName = i18nc("@title Preferences page name", "Tab Bar / Splitters");
     auto tabBarPage = new KPageWidgetItem(new TabBarSettings(confDialog), tabBarPageName);
-    tabBarPage->setIcon(QIcon::fromTheme(QStringLiteral("system-run")));
+    tabBarPage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-tabs")));
     confDialog->addPage(tabBarPage, true);
 
     const QString temporaryFilesPageName = i18nc("@title Preferences page name", "Temporary Files");

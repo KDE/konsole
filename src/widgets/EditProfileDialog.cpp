@@ -118,7 +118,7 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _tabsUi->setupUi(tabsPageWidget);
     auto *tabsPageItem = addPage(tabsPageWidget, tabsPageName);
     tabsPageItem->setHeader(tabsPageName);
-    tabsPageItem->setIcon(QIcon::fromTheme(QStringLiteral("tab-duplicate"), defaultIcon));
+    tabsPageItem->setIcon(QIcon::fromTheme(QStringLiteral("preferences-tabs"), defaultIcon));
     _pages[tabsPageItem] = Page(&EditProfileDialog::setupTabsPage);
 
     LabelsAligner tabsAligner(tabsPageWidget);
@@ -151,7 +151,7 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _scrollingUi->setupUi(scrollingPageWidget);
     auto *scrollingPageItem = addPage(scrollingPageWidget, scrollingPageName);
     scrollingPageItem->setHeader(scrollingPageName);
-    scrollingPageItem->setIcon(QIcon::fromTheme(QStringLiteral("transform-move-vertical"), defaultIcon));
+    scrollingPageItem->setIcon(QIcon::fromTheme(QStringLiteral("preferences-scroll"), defaultIcon));
     _pages[scrollingPageItem] = Page(&EditProfileDialog::setupScrollingPage);
 
     // adjust "history size" label height to match history size widget's first radio button
@@ -193,7 +193,7 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _advancedUi->setupUi(advancedPageWidget);
     auto *advancedPageItem = addPage(advancedPageWidget, advancedPageName);
     advancedPageItem->setHeader(advancedPageName);
-    advancedPageItem->setIcon(QIcon::fromTheme(QStringLiteral("configure"), defaultIcon));
+    advancedPageItem->setIcon(QIcon::fromTheme(QStringLiteral("preferences-other"), defaultIcon));
     _pages[advancedPageItem] = Page(&EditProfileDialog::setupAdvancedPage);
 
     // there are various setupXYZPage() methods to load the items
