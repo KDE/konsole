@@ -751,6 +751,7 @@ private:
         SavedState()
             : cursorColumn(0)
             , cursorLine(0)
+            , originMode(0)
             , rendition(0)
             , foreground(CharacterColor())
             , background(CharacterColor())
