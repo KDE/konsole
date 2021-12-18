@@ -44,17 +44,15 @@ private:
      */
     std::deque<Character> _cells;
 
+    struct LineData {
+        int length;
+        LineProperty flag;
+    };
     /**
-     * This buffer contains the length of each line in _cells
+     * This buffer contains the data about each line
      * The size of this buffer is the number of lines we have.
      */
-    std::vector<int> _lineLengths;
-
-    /**
-     * This contains the flag for each line
-     * size is always equal to _index
-     */
-    std::vector<LineProperty> _flags;
+    std::vector<LineData> _lineDatas;
 
     /**
      * Max number of lines we can hold
@@ -64,11 +62,11 @@ private:
     /**
      * Remove @p lines from the "start" of above buffers
      */
-    void removeLinesFromTop(int lines);
+    void removeLinesFromTop(size_t lines);
 
     inline int lineLen(const int line) const
     {
-        return _lineLengths.at(line);
+        return _lineDatas.at(line).length;
     }
 
     /**
@@ -80,7 +78,9 @@ private:
      */
     inline int startOfLine(const int line) const
     {
-        return std::accumulate(_lineLengths.begin(), _lineLengths.begin() + line, 0);
+        return std::accumulate(_lineDatas.begin(), _lineDatas.begin() + line, 0, [](int total, LineData ld) {
+            return total + ld.length;
+        });
     }
 };
 
