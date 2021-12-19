@@ -75,7 +75,7 @@ public Q_SLOTS:
     void drawCharacters(QPainter &painter,
                         const QRect &rect,
                         const QString &text,
-                        const Character *style,
+                        const Character style,
                         const QColor &characterColor,
                         const LineProperty lineProperty);
 
@@ -84,18 +84,19 @@ public Q_SLOTS:
 
 private:
     // draws a string of line graphics
-    void drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character *attributes);
+    void drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character attributes);
 
     // draws a section of text, all the text in this section
     // has a common color and style
     void drawTextFragment(QPainter &painter,
                           const QRect &rect,
                           const QString &text,
-                          const Character *style,
+                          Character style,
                           const QColor *colorTable,
+                          const bool invertedRendition,
                           const LineProperty lineProperty);
 
-    void drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text, const Character *style, const LineProperty lineProperty);
+    void drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text, Character style, const LineProperty lineProperty);
 
     // draws the cursor character
     void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor);

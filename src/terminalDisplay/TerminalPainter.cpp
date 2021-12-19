@@ -12,6 +12,7 @@
 // Konsole
 #include "../characters/ExtendedCharTable.h"
 #include "../characters/LineBlockCharacters.h"
+#include "../session/SessionManager.h"
 #include "TerminalColor.h"
 #include "TerminalFonts.h"
 #include "TerminalScrollBar.h"
@@ -50,6 +51,14 @@ static inline bool isLineCharString(const QString &string)
     return LineBlockCharacters::canDraw(string.at(0).unicode());
 }
 
+bool isInvertedRendition(const TerminalDisplay *display)
+{
+    auto currentProfile = SessionManager::instance()->sessionProfile(display->session());
+    const bool isInvert = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
+
+    return isInvert;
+}
+
 void TerminalPainter::drawContents(Character *image,
                                    QPainter &paint,
                                    const QRect &rect,
@@ -59,6 +68,7 @@ void TerminalPainter::drawContents(Character *image,
                                    QVector<LineProperty> lineProperties)
 {
     const auto display = qobject_cast<TerminalDisplay *>(sender());
+    const bool invertedRendition = isInvertedRendition(display);
 
     QVector<uint> univec;
     univec.reserve(display->usedColumns());
@@ -205,13 +215,14 @@ void TerminalPainter::drawContents(Character *image,
 
             // paint text fragment
             if (printerFriendly) {
-                drawPrinterFriendlyTextFragment(paint, textArea, unistr, &image[pos], y < lineProperties.size() ? lineProperties[y] : 0);
+                drawPrinterFriendlyTextFragment(paint, textArea, unistr, image[pos], y < lineProperties.size() ? lineProperties[y] : 0);
             } else {
                 drawTextFragment(paint,
                                  textArea,
                                  unistr,
-                                 &image[pos],
+                                 image[pos],
                                  display->terminalColor()->colorTable(),
+                                 invertedRendition,
                                  y < lineProperties.size() ? lineProperties[y] : 0);
             }
 
@@ -340,19 +351,15 @@ qreal wcag20Contrast(const QColor &c1, const QColor &c2)
     return (l1 > l2) ? l1 / l2 : l2 / l1;
 }
 
-std::optional<QColor> calculateBackgroundColor(const Character *style, const QColor *colorTable)
+std::optional<QColor> calculateBackgroundColor(const Character style, const QColor *colorTable)
 {
-    auto c1 = style->backgroundColor.color(colorTable);
-    if (!(style->rendition & RE_BLEND_SELECTION_COLORS)) {
-        return c1;
-    }
-
+    auto c1 = style.backgroundColor.color(colorTable);
     const auto initialBG = c1;
 
     c1.setAlphaF(0.8);
 
     const auto blend1 = alphaBlend(c1, colorTable[DEFAULT_FORE_COLOR]), blend2 = alphaBlend(c1, colorTable[DEFAULT_BACK_COLOR]);
-    const auto fg = style->foregroundColor.color(colorTable);
+    const auto fg = style.foregroundColor.color(colorTable);
 
     const auto contrast1 = wcag20Contrast(fg, blend1), contrast2 = wcag20Contrast(fg, blend2);
     const auto contrastBG1 = wcag20Contrast(blend1, initialBG), contrastBG2 = wcag20Contrast(blend2, initialBG);
@@ -367,18 +374,45 @@ std::optional<QColor> calculateBackgroundColor(const Character *style, const QCo
     return (contrast1 < contrast2) ? blend1 : blend2;
 }
 
+static void reverseRendition(Character &p)
+{
+    CharacterColor f = p.foregroundColor;
+    CharacterColor b = p.backgroundColor;
+
+    p.foregroundColor = b;
+    p.backgroundColor = f;
+}
+
 void TerminalPainter::drawTextFragment(QPainter &painter,
                                        const QRect &rect,
                                        const QString &text,
-                                       const Character *style,
+                                       Character style,
                                        const QColor *colorTable,
+                                       const bool invertedRendition,
                                        const LineProperty lineProperty)
 {
     // setup painter
-    QColor foregroundColor = style->foregroundColor.color(colorTable);
-    const QColor backgroundColor = calculateBackgroundColor(style, colorTable).value_or(foregroundColor);
-    if (backgroundColor == foregroundColor) {
-        foregroundColor = style->backgroundColor.color(colorTable);
+
+    // Sets the text selection colors, either:
+    // - using reverseRendition(), which inverts the foreground/background
+    //   colors OR
+    // - blending the foreground/background colors
+    if (style.rendition & RE_SELECTED) {
+        if (invertedRendition) {
+            reverseRendition(style);
+        }
+    }
+
+    QColor foregroundColor = style.foregroundColor.color(colorTable);
+    QColor backgroundColor = style.backgroundColor.color(colorTable);
+
+    if (style.rendition & RE_SELECTED) {
+        if (!invertedRendition) {
+            backgroundColor = calculateBackgroundColor(style, colorTable).value_or(foregroundColor);
+            if (backgroundColor == foregroundColor) {
+                foregroundColor = style.backgroundColor.color(colorTable);
+            }
+        }
     }
 
     if (backgroundColor != colorTable[DEFAULT_BACK_COLOR]) {
@@ -386,7 +420,7 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
     }
 
     QColor characterColor = foregroundColor;
-    if ((style->rendition & RE_CURSOR) != 0) {
+    if ((style.rendition & RE_CURSOR) != 0) {
         drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
     }
 
@@ -397,14 +431,13 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
 void TerminalPainter::drawPrinterFriendlyTextFragment(QPainter &painter,
                                                       const QRect &rect,
                                                       const QString &text,
-                                                      const Character *style,
+                                                      Character style,
                                                       const LineProperty lineProperty)
 {
-    Character print_style = *style;
-    print_style.foregroundColor = CharacterColor(COLOR_SPACE_RGB, 0x00000000);
-    print_style.backgroundColor = CharacterColor(COLOR_SPACE_RGB, 0xFFFFFFFF);
+    style.foregroundColor = CharacterColor(COLOR_SPACE_RGB, 0x00000000);
+    style.backgroundColor = CharacterColor(COLOR_SPACE_RGB, 0xFFFFFFFF);
 
-    drawCharacters(painter, rect, text, &print_style, QColor(), lineProperty);
+    drawCharacters(painter, rect, text, style, QColor(), lineProperty);
 }
 
 void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting)
@@ -475,17 +508,17 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
 void TerminalPainter::drawCharacters(QPainter &painter,
                                      const QRect &rect,
                                      const QString &text,
-                                     const Character *style,
+                                     const Character style,
                                      const QColor &characterColor,
                                      const LineProperty lineProperty)
 {
     const auto display = qobject_cast<TerminalDisplay *>(sender());
 
-    if (display->textBlinking() && ((style->rendition & RE_BLINK) != 0)) {
+    if (display->textBlinking() && ((style.rendition & RE_BLINK) != 0)) {
         return;
     }
 
-    if ((style->rendition & RE_CONCEAL) != 0) {
+    if ((style.rendition & RE_CONCEAL) != 0) {
         return;
     }
 
@@ -499,11 +532,11 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         return font.weight() >= boldWeight;
     };
 
-    const bool useBold = (((style->rendition & RE_BOLD) != 0) && display->terminalFont()->boldIntense());
-    const bool useUnderline = ((style->rendition & RE_UNDERLINE) != 0) || display->font().underline();
-    const bool useItalic = ((style->rendition & RE_ITALIC) != 0) || display->font().italic();
-    const bool useStrikeOut = ((style->rendition & RE_STRIKEOUT) != 0) || display->font().strikeOut();
-    const bool useOverline = ((style->rendition & RE_OVERLINE) != 0) || display->font().overline();
+    const bool useBold = (((style.rendition & RE_BOLD) != 0) && display->terminalFont()->boldIntense());
+    const bool useUnderline = ((style.rendition & RE_UNDERLINE) != 0) || display->font().underline();
+    const bool useItalic = ((style.rendition & RE_ITALIC) != 0) || display->font().italic();
+    const bool useStrikeOut = ((style.rendition & RE_STRIKEOUT) != 0) || display->font().strikeOut();
+    const bool useOverline = ((style.rendition & RE_OVERLINE) != 0) || display->font().overline();
 
     QFont currentFont = painter.font();
 
@@ -518,7 +551,7 @@ void TerminalPainter::drawCharacters(QPainter &painter,
     }
 
     // setup pen
-    const QColor foregroundColor = style->foregroundColor.color(display->terminalColor()->colorTable());
+    const QColor foregroundColor = style.foregroundColor.color(display->terminalColor()->colorTable());
     const QColor color = characterColor.isValid() ? characterColor : foregroundColor;
     QPen pen = painter.pen();
     if (pen.color() != color) {
@@ -558,11 +591,11 @@ void TerminalPainter::drawCharacters(QPainter &painter,
     painter.setClipping(origClipping);
 }
 
-void TerminalPainter::drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character *attributes)
+void TerminalPainter::drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character attributes)
 {
     painter.setRenderHint(QPainter::Antialiasing, display->terminalFont()->antialiasText());
 
-    const bool useBoldPen = (attributes->rendition & RE_BOLD) != 0 && display->terminalFont()->boldIntense();
+    const bool useBoldPen = (attributes.rendition & RE_BOLD) != 0 && display->terminalFont()->boldIntense();
 
     QRect cellRect = {x, y, display->terminalFont()->fontWidth(), display->terminalFont()->fontHeight()};
     for (int i = 0; i < str.length(); i++) {
@@ -584,7 +617,7 @@ void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRec
     QColor characterColor;
     const QColor background = display->terminalColor()->colorTable()[DEFAULT_BACK_COLOR];
     const QColor foreground = display->terminalColor()->colorTable()[DEFAULT_FORE_COLOR];
-    const Character *style = &image[display->loc(cursorPos.x(), cursorPos.y())];
+    const Character style = image[display->loc(cursorPos.x(), cursorPos.y())];
 
     drawBackground(painter, rect, background, true);
     drawCursor(painter, rect, foreground, background, characterColor);

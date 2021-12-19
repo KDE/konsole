@@ -19,7 +19,6 @@
 
 #include "session/Session.h"
 #include "session/SessionController.h"
-#include "session/SessionManager.h"
 #include "terminalDisplay/TerminalDisplay.h"
 
 #include "EscapeSequenceUrlExtractor.h"
@@ -27,7 +26,6 @@
 #include "history/HistoryScrollNone.h"
 #include "history/HistoryType.h"
 #include "profile/Profile.h"
-#include "profile/ProfileManager.h"
 
 #ifdef HAVE_MALLOC_H
     // For malloc_trim, which is a GNU extension
@@ -626,19 +624,8 @@ void Screen::updateEffectiveRendition()
     }
 }
 
-bool Screen::isInvertedRendition() const
-{
-    Q_ASSERT(_currentTerminalDisplay);
-
-    auto currentProfile = SessionManager::instance()->sessionProfile(_currentTerminalDisplay->session());
-    const bool isInvert = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
-
-    return isInvert;
-}
-
 void Screen::copyFromHistory(Character *dest, int startLine, int count) const
 {
-    const bool invertedRendition = isInvertedRendition();
     const int columns = _columns;
 
     Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= _history->getLines());
@@ -660,7 +647,7 @@ void Screen::copyFromHistory(Character *dest, int startLine, int count) const
         if (_selBegin != -1) {
             for (int column = 0; column < lastColumn; ++column) {
                 if (isSelected(column, line)) {
-                    setTextSelectionRendition(dest[destLineOffset + column], invertedRendition);
+                    dest[destLineOffset + column].rendition |= RE_SELECTED;
                 }
             }
         }
@@ -670,7 +657,6 @@ void Screen::copyFromHistory(Character *dest, int startLine, int count) const
 void Screen::copyFromScreen(Character *dest, int startLine, int count) const
 {
     const int endLine = startLine + count;
-    const bool invertedRendition = isInvertedRendition();
     const int columns = _columns;
     const int historyLines = _history->getLines();
 
@@ -693,19 +679,10 @@ void Screen::copyFromScreen(Character *dest, int startLine, int count) const
         if (_selBegin != -1) {
             for (int column = 0; column < lastColumn; ++column) {
                 if (isSelected(column, line + historyLines)) {
-                    setTextSelectionRendition(dest[destLineOffset + column], invertedRendition);
+                    dest[destLineOffset + column].rendition |= RE_SELECTED;
                 }
             }
         }
-    }
-}
-
-void Screen::setTextSelectionRendition(Character &ch, const bool isInvert) const
-{
-    if (isInvert) {
-        reverseRendition(ch);
-    } else {
-        ch.rendition |= RE_BLEND_SELECTION_COLORS;
     }
 }
 

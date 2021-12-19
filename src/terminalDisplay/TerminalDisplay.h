@@ -501,12 +501,8 @@ Q_SIGNALS:
     QRegion highlightScrolledLinesRegion(TerminalScrollBar *scrollBar);
 
     void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting);
-    void drawCharacters(QPainter &painter,
-                        const QRect &rect,
-                        const QString &text,
-                        const Character *style,
-                        const QColor &characterColor,
-                        const LineProperty lineProperty);
+    void
+    drawCharacters(QPainter &painter, const QRect &rect, const QString &text, Character style, const QColor &characterColor, const LineProperty lineProperty);
     void drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image);
 
 protected:

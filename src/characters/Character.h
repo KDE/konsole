@@ -42,7 +42,7 @@ const RenditionFlags RE_FAINT           = (1 << 7);
 const RenditionFlags RE_STRIKEOUT       = (1 << 8);
 const RenditionFlags RE_CONCEAL         = (1 << 9);
 const RenditionFlags RE_OVERLINE        = (1 << 10);
-const RenditionFlags RE_BLEND_SELECTION_COLORS = (1 << 11);
+const RenditionFlags RE_SELECTED        = (1 << 11);
 /* clang-format on */
 
 /**
