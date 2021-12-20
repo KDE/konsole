@@ -198,7 +198,7 @@ void SSHManagerTreeWidget::triggerRemove()
 
     KMessageBox::ButtonCode result = KMessageBox::messageBox(this,
                                                              KMessageBox::DialogType::WarningYesNo,
-                                                             i18n("Remove SSH Configurations"),
+                                                             dialogMessage,
                                                              i18n("Remove SSH Configurations"),
                                                              KStandardGuiItem::yes(),
                                                              KStandardGuiItem::no(),
