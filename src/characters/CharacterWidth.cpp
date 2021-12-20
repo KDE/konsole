@@ -15,6 +15,8 @@
 // To change anything here, edit CharacterWidth.src.cpp and regenerate the file
 // using following command:
 //
+// Dec 2021: 14 doesn't apply cleanly - needs researched
+//
 // uni2characterwidth -U "https://unicode.org/Public/13.0.0/ucd/UnicodeData.txt" -A "https://unicode.org/Public/13.0.0/ucd/EastAsianWidth.txt" -E
 // "https://unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt" -W "tools/uni2characterwidth/overrides.txt" --ambiguous-width=1 --emoji=presentation -g
 // "code:src/characters/CharacterWidth.src.cpp" "src/characters/CharacterWidth.cpp"
