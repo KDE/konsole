@@ -2482,11 +2482,6 @@ void TerminalDisplay::outputSuspended(bool suspended)
     suspended ? _outputSuspendedMessageWidget->animatedShow() : _outputSuspendedMessageWidget->animatedHide();
 }
 
-void TerminalDisplay::dismissOutputSuspendedMessage()
-{
-    outputSuspended(false);
-}
-
 KMessageWidget *TerminalDisplay::createMessageWidget(const QString &text)
 {
     auto *widget = new KMessageWidget(text, this);

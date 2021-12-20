@@ -575,8 +575,6 @@ private Q_SLOTS:
 
     void viewScrolledByUser();
 
-    void dismissOutputSuspendedMessage();
-
 private:
     Q_DISABLE_COPY(TerminalDisplay)
 
