@@ -3,22 +3,22 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-«*NOTE : -----------------------------------------------------------------------*»
-         // Typing in "«" and "»" characters in some keyboard layouts (X11):
-         //
-         //   English/UK: AltGr+Z AltGr+X
-         //   EurKEY:     AltGr+[ AltGr+]
-         //   German:     AltGr+X AltGr+Y
-         //   Polish:     AltGr+9 AltGr+0
-         //   English/US: N/A; You can try EurKEY which extends En/US layout with extra
-         //               characters available with AltGr[+Shift].
-         //
-         // Alternatively, you can use e.g. "<<<" and ">>>" and convert it to the valid
-         // characters using sed or your editor's replace function.
-         //
-         // This text  will not appear in an output file.
-«
-         * ----------------------------------------------------------------------- : NOTE *»
+/* clang-format off */
+«*NOTE:-----------------------------------------------------------------------*»
+// Typing in "«" and "»" characters in some keyboard layouts (X11):
+//
+//   English/UK: AltGr+Z AltGr+X
+//   EurKEY:     AltGr+[ AltGr+]
+//   German:     AltGr+X AltGr+Y
+//   Polish:     AltGr+9 AltGr+0
+//   English/US: N/A; You can try EurKEY which extends En/US layout with extra
+//               characters available with AltGr[+Shift].
+//
+// Alternatively, you can use e.g. "<<<" and ">>>" and convert it to the valid
+// characters using sed or your editor's replace function.
+//
+// This text  will not appear in an output file.
+«*-----------------------------------------------------------------------:NOTE*»
 //
 // «gen-file-warning»
 //
@@ -36,9 +36,10 @@
 #include "CharacterWidth.h"
 #include "konsolecharacters_export.h"
 
-                                                                                     struct Range {
+struct Range {
     uint first, last;
 };
+/* clang-format on */
 
 struct RangeLut {
     int8_t width;
@@ -50,19 +51,22 @@ enum {
     InvalidWidth = INT8_MIN,
 };
 
-static constexpr const int8_t DIRECT_LUT[] = {«!fmt "% d" :«direct - lut :
-    «!repeat 32 :«:«»,»»
+/* clang-format off */
+static constexpr const int8_t DIRECT_LUT[] = {«!fmt "% d":«direct-lut:
+    «!repeat 32:«:«»,»»
 »»};
 
-«ranges - luts :«: static constexpr const Range «name»[] = {«!fmt "%#.6x" :«ranges :
-    «!repeat 8 :«: {«first»,«last»},»»
+«ranges-luts:«:
+static constexpr const Range «name»[] = {«!fmt "%#.6x":«ranges:
+    «!repeat 8:«:{«first»,«last»},»»
 »»};
 »»
 
-    static constexpr const RangeLut RANGE_LUT_LIST[] = {«ranges - lut - list :
-    «: {«!fmt "% d" :«width»», «!fmt "%-16s" :«name»», «size»},»
+static constexpr const RangeLut RANGE_LUT_LIST[] = {«ranges-lut-list:
+    «:{«!fmt "% d":«width»», «!fmt "%-16s":«name»», «size»},»
 »};
-static constexpr const int RANGE_LUT_LIST_SIZE = «ranges - lut - list - size»;
+static constexpr const int RANGE_LUT_LIST_SIZE = «ranges-lut-list-size»;
+/* clang-format on */
 
 int KONSOLECHARACTERS_EXPORT characterWidth(uint ucs4)
 {
