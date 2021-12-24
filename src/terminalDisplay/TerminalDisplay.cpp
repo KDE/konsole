@@ -1859,9 +1859,23 @@ out:
 
 QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
 {
+    const int maxY = _screenWindow->lineCount() - 1;
+    const int maxX = _columns - 1;
+
     QSharedPointer<HotSpot> hotspot = _filterChain->hotSpotAt(pnt.y(), pnt.x());
     if (hotspot) {
-        return QPoint(hotspot->endColumn() - 1, hotspot->endLine());
+        int line = hotspot->endLine();
+        int col = hotspot->endColumn();
+
+        // Because of how filters work with end of line, we need this hack.
+        // It really should be fixed in filters, but this is the best we have until then
+        if (col > 0) {
+            col--;
+        } else {
+            col = maxX;
+            line--;
+        }
+        return { qBound(0, col, maxX), qBound(0, line, maxY) };
     }
 
     const int regSize = qMax(_screenWindow->windowLines(), 10);
@@ -1876,8 +1890,6 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     Character *tmp_image = nullptr;
     const QChar selClass = charClass(image[j]);
     const int imageSize = regSize * _columns;
-    const int maxY = _screenWindow->lineCount() - 1;
-    const int maxX = _columns - 1;
 
     while (true) {
         const int lineCount = lineProperties.count();
