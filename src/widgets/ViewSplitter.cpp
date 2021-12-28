@@ -377,6 +377,8 @@ void Konsole::ViewSplitter::dropEvent(QDropEvent *ev)
             return;
         }
         if (currentDragTarget != nullptr) {
+            m_blockPropagatedDeletion = true;
+
             currentDragTarget->hideDragTarget();
             auto source = qobject_cast<TerminalDisplay *>(ev->source());
             source->setVisible(false);
@@ -397,6 +399,8 @@ void Konsole::ViewSplitter::dropEvent(QDropEvent *ev)
             Q_EMIT getToplevelSplitter()->terminalDisplayDropped(source);
             source->setVisible(true);
             currentDragTarget = nullptr;
+
+            m_blockPropagatedDeletion = false;
         }
     }
 }
