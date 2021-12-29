@@ -21,12 +21,11 @@ CompactHistoryScroll::CompactHistoryScroll(const unsigned int maxLineCount)
 void CompactHistoryScroll::removeLinesFromTop(size_t lines)
 {
     if (_lineDatas.size() > 1) {
-        const int removing = std::accumulate(_lineDatas.begin(), _lineDatas.begin() + lines, 0, [](int total, LineData ld) {
-            return total + ld.length;
-        });
+        const unsigned int removing = _lineDatas.at(lines - 1).index;
         _lineDatas.erase(_lineDatas.begin(), _lineDatas.begin() + lines);
 
-        _cells.erase(_cells.begin(), _cells.begin() + removing);
+        _cells.erase(_cells.begin(), _cells.begin() + (removing - _indexBias));
+        _indexBias = removing;
     } else {
         _lineDatas.clear();
         _cells.clear();
@@ -37,9 +36,9 @@ void CompactHistoryScroll::addCells(const Character a[], const int count)
 {
     _cells.insert(_cells.end(), a, a + count);
 
-    // store the length of line + default flag
+    // store the (biased) start of next line + default flag
     // the flag is later updated when addLine is called
-    _lineDatas.push_back({count, LINE_DEFAULT});
+    _lineDatas.push_back({static_cast<unsigned int>(_cells.size() + _indexBias), LINE_DEFAULT});
 
     if (_lineDatas.size() > _maxLineCount + 5) {
         removeLinesFromTop(5);
@@ -135,33 +134,28 @@ int CompactHistoryScroll::reflowLines(const int columns)
     auto reflowLineLen = [](int start, int end) {
         return end - start;
     };
-    auto setNewLine = [](std::vector<LineData> &change, int length, LineProperty flag) {
-        change.push_back({length, flag});
+    auto setNewLine = [](std::vector<LineData> &change, unsigned int index, LineProperty flag) {
+        change.push_back({index, flag});
     };
 
     int currentPos = 0;
     while (currentPos < getLines()) {
-        int lineStart = startOfLine(currentPos);
-        // next line will be startLine + length of startLine
-        // i.e., start of next line
-        int endLine = lineStart + lineLen(currentPos);
+        int startLine = startOfLine(currentPos);
+        int endLine = startOfLine(currentPos + 1);
         LineProperty lineProperty = getLineProperty(currentPos);
 
         // Join the lines if they are wrapped
         while (currentPos < getLines() - 1 && isWrappedLine(currentPos)) {
             currentPos++;
-            endLine += lineLen(currentPos);
+            endLine = startOfLine(currentPos + 1);
         }
 
         // Now reflow the lines
-        int last = lineStart;
-        while (reflowLineLen(lineStart, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
-            lineStart += columns;
-            // new length = newLineStart - prevLineStart
-            setNewLine(newLineData, lineStart - last, lineProperty | LINE_WRAPPED);
-            last = lineStart;
+        while (reflowLineLen(startLine, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
+            startLine += columns;
+            setNewLine(newLineData, startLine + _indexBias, lineProperty | LINE_WRAPPED);
         }
-        setNewLine(newLineData, endLine - last, lineProperty & ~LINE_WRAPPED);
+        setNewLine(newLineData, endLine + _indexBias, lineProperty & ~LINE_WRAPPED);
         currentPos++;
     }
     _lineDatas = std::move(newLineData);

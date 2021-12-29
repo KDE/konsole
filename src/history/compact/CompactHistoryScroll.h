@@ -44,8 +44,24 @@ private:
      */
     std::deque<Character> _cells;
 
+    /**
+     * Each entry contains the start of the next line and the current line's
+     * properties.  The start of lines is biased by _indexBias, i.e. an index
+     * value of _indexBias corresponds to _cells' zero index.
+     *
+     * The use of a biased line start means we don't need to traverse the
+     * vector recalculating line starts when removing lines from the top, and
+     * also we don't need to traverse the vector to compute the start of a line
+     * as we would have to do if we stored line lengths.
+     *
+     * unsigned int means we're limited in common architectures to 4 million
+     * characters, but CompactHistoryScroll is limited by the UI to 1_000_000
+     * lines (see historyLineSpinner in src/widgets/HistorySizeWidget.ui), so
+     * enough for 1_000_000 lines of an average ~4295 length (and each
+     * Character takes 16 bytes, so that's 64Gb!).
+     */
     struct LineData {
-        int length;
+        unsigned int index;
         LineProperty flag;
     };
     /**
@@ -53,6 +69,7 @@ private:
      * The size of this buffer is the number of lines we have.
      */
     std::vector<LineData> _lineDatas;
+    unsigned int _indexBias;
 
     /**
      * Max number of lines we can hold
@@ -66,21 +83,17 @@ private:
 
     inline int lineLen(const int line) const
     {
-        return _lineDatas.at(line).length;
+        return line == 0 ? _lineDatas.at(0).index - _indexBias : _lineDatas.at(line).index - _lineDatas.at(line - 1).index;
     }
 
     /**
      * Get the start of @p line in _cells buffer
      *
-     * Since _index contains lengths of lines, we need
-     * to add up till we reach @p line. That will be the starting point
-     * of @p line.
+     * index actually contains the start of the next line.
      */
     inline int startOfLine(const int line) const
     {
-        return std::accumulate(_lineDatas.begin(), _lineDatas.begin() + line, 0, [](int total, LineData ld) {
-            return total + ld.length;
-        });
+        return line == 0 ? 0 : _lineDatas.at(line - 1).index - _indexBias;
     }
 };
 
