@@ -63,12 +63,7 @@ private:
     QFileSystemWatcher m_sshConfigWatcher;
     Konsole::Session *m_session = nullptr;
 
-    struct ProfileSession {
-        QString localhostSession;
-        bool initialized = false;
-    };
-
-    QMap<Konsole::Session *, ProfileSession> m_sessionToProfile;
+    QHash<Konsole::Session *, QString> m_sessionToProfileName;
 };
 
 #endif

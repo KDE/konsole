@@ -118,13 +118,11 @@ std::optional<QString> SSHManagerModel::profileForHost(const QString &host) cons
 
             // Return the profile name if the host matches.
             if (data.host == host) {
-                qDebug() << "Found profile" << data.profileName << "for host" << host;
                 return data.profileName;
             }
         }
     }
 
-    qDebug() << "Didn't found a profile for host" << host;
     return {};
 }
 
@@ -188,28 +186,37 @@ void SSHManagerModel::triggerProfileChange(const QString &sshHost)
     auto *sm = Konsole::SessionManager::instance();
     QString profileToLoad;
 
+    // This code is messy, Let's see if this can explain a bit.
+    // This if sequence tries to do two things:
+    // Stores the current profile, when we trigger a change - but only
+    // if our hostname is the localhost.
+    // and when we change to another profile (or go back to the local host)
+    // we need to restore the previous profile, not go to the default one.
+    // so this whole mess of m_sessionToProfile is just to load it correctly
+    // later on.
     if (sshHost == QSysInfo::machineHostName()) {
         // It's the first time that we call this, using the hostname as host.
         // just prepare the session as a empty profile and set it as initialized to false.
-        if (!m_sessionToProfile.contains(m_session)) {
-            m_sessionToProfile[m_session] = ProfileSession{QString(), false};
+        if (!m_sessionToProfileName.contains(m_session)) {
+            m_sessionToProfileName[m_session] = QString();
             return;
         }
 
         // We just loaded the localhost again, after a probable different profile.
         // mark the profile to load as the one we stored previously.
-        else if (m_sessionToProfile[m_session].initialized) {
-            profileToLoad = m_sessionToProfile[m_session].localhostSession;
-            m_sessionToProfile.remove(m_session);
+        else if (m_sessionToProfileName[m_session].count()) {
+            profileToLoad = m_sessionToProfileName[m_session];
+            m_sessionToProfileName.remove(m_session);
         }
     } else {
         // We just loaded a hostname that's not the localhost. save the current profile
         // so we can restore it later on, and load the profile for it.
-        if (!m_sessionToProfile[m_session].initialized) {
-            m_sessionToProfile[m_session].initialized = true;
-            m_sessionToProfile[m_session].localhostSession = m_session->profile();
+        if (m_sessionToProfileName[m_session].isEmpty()) {
+            m_sessionToProfileName[m_session] = m_session->profile();
         }
     }
+
+    // end of really bad code. can someone think of a better algorithm for this?
 
     if (profileToLoad.isEmpty()) {
         std::optional<QString> profileName = profileForHost(sshHost);
@@ -218,12 +225,15 @@ void SSHManagerModel::triggerProfileChange(const QString &sshHost)
         }
     }
 
-    for (auto pr : Konsole::ProfileManager::instance()->allProfiles()) {
-        if (pr->name() == profileToLoad) {
-            sm->setSessionProfile(m_session, pr);
-            return;
-        }
+    auto profiles = Konsole::ProfileManager::instance()->allProfiles();
+    auto findIt = std::find_if(std::begin(profiles), std::end(profiles), [&profileToLoad](const Konsole::Profile::Ptr &pr) {
+        return pr->name() == profileToLoad;
+    });
+    if (findIt == std::end(profiles)) {
+        return;
     }
+
+    sm->setSessionProfile(m_session, *findIt);
 }
 
 void SSHManagerModel::load()
