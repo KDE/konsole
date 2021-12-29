@@ -1827,6 +1827,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         copy->setShortcut(Konsole::ACCEL | Qt::SHIFT | Qt::Key_C);
 #endif
 
+        // Adds a "Open Folder With" action
         const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
         KFileItem item(currentUrl);
 
@@ -1841,14 +1842,26 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         for (auto* elm : old) {
             neu.removeAll(elm);
         }
+        // Finish Ading the "Open Folder With" action.
 
-        QList<QAction *> toRemove = std::move(neu);
+        QList<QAction *> toRemove;
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc
         QSharedPointer<HotSpot> hotSpot = view()->filterActions(position);
         if (hotSpot != nullptr) {
             popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator);
             popup->addAction(contentSeparator);
             toRemove = hotSpot->setupMenu(popup.data());
+
+            // Can happen if we click on a right click, on a folder.
+            // if this happens, we need to remove this action as we have
+            // already added the action before this if.
+            if (toRemove[0]->text() == i18n("&Open Folder With")) {
+                delete toRemove[0];
+                toRemove.removeFirst();
+            }
+            toRemove = toRemove + neu;
+        } else {
+            toRemove = neu;
         }
 
         // always update this submenu before showing the context menu,
