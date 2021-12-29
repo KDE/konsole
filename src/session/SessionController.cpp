@@ -1838,9 +1838,9 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         ac->setItemListProperties(props);
         ac->insertOpenWithActionsTo(popup->actions().value(4, nullptr), popup, QStringList{qApp->desktopFileName()});
 
-        auto neu = popup->actions();
+        auto newActions = popup->actions();
         for (auto* elm : old) {
-            neu.removeAll(elm);
+            newActions.removeAll(elm);
         }
         // Finish Ading the "Open Folder With" action.
 
@@ -1857,14 +1857,14 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
             // Open Folder With - with different folders on each.
             // Change the text of the second one, that points to the
             // current folder.
-            for (auto *action : neu) {
+            for (auto *action : newActions) {
                 if (action->objectName() == QStringLiteral("openWith_submenu")) {
                     action->setText(i18n("Open Current Folder With"));
                 }
             }
-            toRemove = toRemove + neu;
+            toRemove = toRemove + newActions;
         } else {
-            toRemove = neu;
+            toRemove = newActions;
         }
 
         // always update this submenu before showing the context menu,
