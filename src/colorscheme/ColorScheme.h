@@ -19,6 +19,11 @@
 // Konsole
 #include "ColorSchemeWallpaper.h"
 
+#include <ki18n_version.h>
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+#include <KLazyLocalizedString>
+#endif
+
 class KConfig;
 class QPixmap;
 class QPainter;
@@ -185,7 +190,11 @@ private:
     ColorSchemeWallpaper::Ptr _wallpaper;
 
     static const char *const colorNames[TABLE_COLORS];
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+    static const KLazyLocalizedString translatedColorNames[TABLE_COLORS];
+#else
     static const char *const translatedColorNames[TABLE_COLORS];
+#endif
 };
 }
 
