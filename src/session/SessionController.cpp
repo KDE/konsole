@@ -1852,12 +1852,15 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
             popup->addAction(contentSeparator);
             toRemove = hotSpot->setupMenu(popup.data());
 
-            // Can happen if we click on a right click, on a folder.
-            // if this happens, we need to remove this action as we have
-            // already added the action before this if.
-            if (toRemove[0]->text() == i18n("&Open Folder With")) {
-                delete toRemove[0];
-                toRemove.removeFirst();
+            // The action above can create an action for Open Folder With,
+            // for the selected folder, but then we have two different
+            // Open Folder With - with different folders on each.
+            // Change the text of the second one, that points to the
+            // current folder.
+            for (auto *action : neu) {
+                if (action->objectName() == QStringLiteral("openWith_submenu")) {
+                    action->setText(i18n("Open Current Folder With"));
+                }
             }
             toRemove = toRemove + neu;
         } else {
