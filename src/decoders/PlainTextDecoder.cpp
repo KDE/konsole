@@ -114,7 +114,9 @@ void PlainTextDecoder::decodeLine(const Character *const characters, int count, 
             ushort extendedCharLength = 0;
             const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
             if (chars != nullptr) {
-                characterBuffer.insert(characterBuffer.end(), extendedCharLength, *chars);
+                for (uint nchar = 0; nchar < extendedCharLength; nchar++) {
+                    characterBuffer.append(chars[nchar]);
+                }
                 i += qMax(1, Character::stringWidth(chars, extendedCharLength));
             } else {
                 ++i;
