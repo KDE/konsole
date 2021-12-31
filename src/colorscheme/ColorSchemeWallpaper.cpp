@@ -27,7 +27,7 @@ ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path, const ColorSchem
     float x = _anchor.x(), y = _anchor.y();
     
     if(x < 0 || x > 1.0f || y < 0 || y > 1.0f)
-        _anchor = QPointF(0.5f, 0.5f);
+        _anchor = QPointF(0.5, 0.5);
 }
 
 ColorSchemeWallpaper::~ColorSchemeWallpaper() = default;
