@@ -79,7 +79,7 @@ void TerminalPainter::drawContents(Character *image,
         bool doubleHeightLinePair = false;
 
         // Search for start of multi-column character
-        if ((image[display->loc(rect.x(), y)].character == 0u) && (x != 0)) {
+        if (image[display->loc(rect.x(), y)].isRightHalfOfDoubleWide() && (x != 0)) {
             x--;
         }
 
@@ -100,14 +100,13 @@ void TerminalPainter::drawContents(Character *image,
                     }
                 }
             } else {
-                const uint c = char_value.character;
-                if (c != 0u) {
-                    univec << c;
+                if (!char_value.isRightHalfOfDoubleWide()) {
+                    univec << char_value.character;
                 }
             }
 
             // TODO: Move all those lambdas to Character, so it's easy to test.
-            const bool doubleWidth = (image[qMin(pos + 1, imageSize - 1)].character == 0);
+            const bool doubleWidth = image[qMin(pos + 1, imageSize - 1)].isRightHalfOfDoubleWide();
 
             const auto isInsideDrawArea = [rectRight = rect.right()](int column) {
                 return column <= rectRight;
@@ -115,7 +114,7 @@ void TerminalPainter::drawContents(Character *image,
 
             const auto hasSameWidth = [imageSize, image, doubleWidth](int nextPos) {
                 const int characterLoc = qMin(nextPos + 1, imageSize - 1);
-                return (image[characterLoc].character == 0) == doubleWidth;
+                return image[characterLoc].isRightHalfOfDoubleWide() == doubleWidth;
             };
 
             if (char_value.canBeGrouped(bidiEnabled, doubleWidth)) {
@@ -166,7 +165,7 @@ void TerminalPainter::drawContents(Character *image,
             }
 
             // Adjust for trailing part of multi-column character
-            if ((x + len < display->usedColumns()) && (image[display->loc(x + len, y)].character == 0u)) {
+            if ((x + len < display->usedColumns()) && image[display->loc(x + len, y)].isRightHalfOfDoubleWide()) {
                 len++;
             }
 

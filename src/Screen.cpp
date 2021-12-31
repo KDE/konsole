@@ -1012,7 +1012,7 @@ void Screen::displayCharacter(uint c)
         }
 
         Character &ch = _screenLines[_cuY][_cuX + i];
-        ch.character = 0;
+        ch.setRightHalfOfDoubleWide();
         ch.foregroundColor = _effectiveForeground;
         ch.backgroundColor = _effectiveBackground;
         ch.rendition = _effectiveRendition;

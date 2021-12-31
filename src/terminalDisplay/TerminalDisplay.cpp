@@ -580,11 +580,11 @@ void TerminalDisplay::updateImage()
                 // We also take the next one into account to handle the situation
                 // where characters exceed their cell width.
                 if (dirtyMask[x] != 0) {
-                    if (newLine[x + 0].character == 0u) {
+                    if (newLine[x + 0].isRightHalfOfDoubleWide()) {
                         continue;
                     }
                     const bool lineDraw = LineBlockCharacters::canDraw(newLine[x + 0].character);
-                    const bool doubleWidth = (x + 1 == columnsToUpdate) ? false : (newLine[x + 1].character == 0);
+                    const bool doubleWidth = (x + 1 == columnsToUpdate) ? false : newLine[x + 1].isRightHalfOfDoubleWide();
                     const RenditionFlags cr = newLine[x].rendition;
                     const CharacterColor clipboard = newLine[x].backgroundColor;
                     if (newLine[x].foregroundColor != cf) {
@@ -594,11 +594,11 @@ void TerminalDisplay::updateImage()
                     for (len = 1; len < lln; ++len) {
                         const Character &ch = newLine[x + len];
 
-                        if (ch.character == 0u) {
+                        if (ch.isRightHalfOfDoubleWide()) {
                             continue; // Skip trailing part of multi-col chars.
                         }
 
-                        const bool nextIsDoubleWidth = (x + len + 1 == columnsToUpdate) ? false : (newLine[x + len + 1].character == 0);
+                        const bool nextIsDoubleWidth = (x + len + 1 == columnsToUpdate) ? false : newLine[x + len + 1].isRightHalfOfDoubleWide();
 
                         if (ch.foregroundColor != cf || ch.backgroundColor != clipboard || (ch.rendition & ~RE_EXTENDED_CHAR) != (cr & ~RE_EXTENDED_CHAR)
                             || (dirtyMask[x + len] == 0) || LineBlockCharacters::canDraw(ch.character) != lineDraw || nextIsDoubleWidth != doubleWidth) {

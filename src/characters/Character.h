@@ -227,6 +227,16 @@ public:
     {
         return hasSameColors(lhs) && hasSameRendition(lhs) && hasSameLineDrawStatus(lhs) && isSameScript(lhs);
     }
+
+    inline bool isRightHalfOfDoubleWide() const
+    {
+        return character == 0;
+    }
+
+    inline void setRightHalfOfDoubleWide()
+    {
+        character = 0;
+    }
 };
 
 constexpr bool operator==(const Character &a, const Character &b)
