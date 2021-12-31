@@ -919,7 +919,7 @@ void Screen::displayCharacter(uint c)
         return;
     } else if (w == 0) {
         const QChar::Category category = QChar::category(c);
-        if (category != QChar::Mark_NonSpacing && category != QChar::Letter_Other) {
+        if (category != QChar::Mark_NonSpacing && category != QChar::Letter_Other && category != QChar::Other_Format) {
             return;
         }
         // Find previous "real character" to try to combine with
