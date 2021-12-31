@@ -188,7 +188,7 @@ ColorScheme::ColorScheme()
     , _colorRandomization(false)
     , _wallpaper(nullptr)
 {
-    setWallpaper(QString(), ColorSchemeWallpaper::Tile, QPointF(0.5f, 0.5f), 1.0);
+    setWallpaper(QString(), ColorSchemeWallpaper::Tile, QPointF(0.5, 0.5), 1.0);
 }
 
 ColorScheme::ColorScheme(const ColorScheme &other)
@@ -467,7 +467,7 @@ void ColorScheme::read(const KConfig &config)
     _blur = configGroup.readEntry("Blur", false);
     setWallpaper(configGroup.readEntry("Wallpaper", QString()),
                  configGroup.readEntry("FillStyle", QString::fromLatin1("Tile")),
-                 configGroup.readEntry("Anchor", QPointF(0.5f, 0.5f)),
+                 configGroup.readEntry("Anchor", QPointF(0.5, 0.5)),
                  configGroup.readEntry("WallpaperOpacity", 1.0));
     _colorRandomization = configGroup.readEntry(EnableColorRandomizationKey, false);
 
