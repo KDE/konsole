@@ -928,7 +928,7 @@ void Screen::displayCharacter(uint c)
         do {
             if (charToCombineWithX > 0) {
                 --charToCombineWithX;
-            } else if (charToCombineWithY > 0) { // Try previous line
+            } else if (charToCombineWithY > 0 && _lineProperties.at(charToCombineWithY - 1) & LINE_WRAPPED) { // Try previous line
                 --charToCombineWithY;
                 charToCombineWithX = _screenLines.at(charToCombineWithY).length() - 1;
             } else {
