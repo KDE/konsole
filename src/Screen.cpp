@@ -940,7 +940,7 @@ void Screen::displayCharacter(uint c)
             if (charToCombineWithX < 0) {
                 return;
             }
-        } while (!_screenLines.at(charToCombineWithY).at(charToCombineWithX).isRealCharacter);
+        } while (_screenLines.at(charToCombineWithY).at(charToCombineWithX).isRightHalfOfDoubleWide());
 
         Character &currentChar = _screenLines[charToCombineWithY][charToCombineWithX];
         if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0) {
