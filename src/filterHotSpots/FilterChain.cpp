@@ -284,6 +284,8 @@ void FilterChain::paint(TerminalDisplay *td, QPainter &painter)
             // occupied on this line rather than the width of the
             // display in _columns
 
+            // FIXME: the left side condition is always false due to the
+            //        endColumn assignment above
             // Check image size so _image[] is valid (see makeImage)
             if (endColumn >= td->columns() || line >= td->lines()) {
                 break;
