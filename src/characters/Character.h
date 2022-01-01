@@ -12,6 +12,7 @@
 #include "CharacterColor.h"
 #include "CharacterWidth.h"
 #include "ExtendedCharTable.h"
+#include "Hangul.h"
 #include "LineBlockCharacters.h"
 
 // Qt
@@ -160,8 +161,17 @@ public:
     static int stringWidth(const uint *ucs4Str, int len)
     {
         int w = 0;
+        Hangul::SyllablePos hangulSyllablePos = Hangul::NotInSyllable;
+
         for (int i = 0; i < len; ++i) {
-            w += width(ucs4Str[i]);
+            const uint c = ucs4Str[i];
+
+            if (!Hangul::isHangul(c)) {
+                w += width(c);
+                hangulSyllablePos = Hangul::NotInSyllable;
+            } else {
+                w += Hangul::width(c, width(c), hangulSyllablePos);
+            }
         }
         return w;
     }

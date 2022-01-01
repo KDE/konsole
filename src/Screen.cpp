@@ -925,6 +925,7 @@ void Screen::displayCharacter(uint c)
         // Find previous "real character" to try to combine with
         int charToCombineWithX = qMin(_cuX, _screenLines.at(_cuY).length());
         int charToCombineWithY = _cuY;
+        bool previousChar = true;
         do {
             if (charToCombineWithX > 0) {
                 --charToCombineWithX;
@@ -933,16 +934,33 @@ void Screen::displayCharacter(uint c)
                 charToCombineWithX = _screenLines.at(charToCombineWithY).length() - 1;
             } else {
                 // Give up
-                return;
+                previousChar = false;
+                break;
             }
 
             // Failsafe
             if (charToCombineWithX < 0) {
-                return;
+                previousChar = false;
+                break;
             }
         } while (_screenLines.at(charToCombineWithY).at(charToCombineWithX).isRightHalfOfDoubleWide());
 
+        if (!previousChar) {
+            if (!Hangul::isHangul(c)) {
+                return;
+            } else {
+                w = 2;
+                goto notcombine;
+            }
+        }
+
         Character &currentChar = _screenLines[charToCombineWithY][charToCombineWithX];
+
+        if (Hangul::isHangul(c) && !Hangul::combinesWith(currentChar, c)) {
+            w = 2;
+            goto notcombine;
+        }
+
         if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0) {
             const uint chars[2] = {currentChar.character, c};
             currentChar.rendition |= RE_EXTENDED_CHAR;
@@ -954,7 +972,7 @@ void Screen::displayCharacter(uint c)
             ushort extendedCharLength;
             const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
             Q_ASSERT(oldChars);
-            if (((oldChars) != nullptr) && extendedCharLength < 3) {
+            if (((oldChars) != nullptr) && extendedCharLength < 8) {
                 Q_ASSERT(extendedCharLength > 1);
                 Q_ASSERT(extendedCharLength < 65535); // redundant due to above check
                 auto chars = std::make_unique<uint[]>(extendedCharLength + 1);
@@ -969,6 +987,7 @@ void Screen::displayCharacter(uint c)
         return;
     }
 
+notcombine:
     if (_cuX + w > getScreenLineColumns(_cuY)) {
         if (getMode(MODE_Wrap)) {
             _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties.at(_cuY) | LINE_WRAPPED);

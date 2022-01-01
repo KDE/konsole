@@ -131,7 +131,7 @@ void PlainTextDecoder::decodeLine(const Character *const characters, int count, 
             // of `dialog --infobox "qwe" 10 10` .
             if (characters[i].isRealCharacter || i <= realCharacterGuard) {
                 characterBuffer.append(characters[i].character);
-                i += qMax(1, characters[i].width());
+                i += qMax(1, Character::stringWidth(&characters[i].character, 1));
             } else {
                 ++i; // should we 'break' directly here?
             }
