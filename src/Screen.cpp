@@ -1693,10 +1693,10 @@ void Screen::addHistLine()
     bool beginIsTL = (_selBegin == _selTopLeft);
 
     // Adjust selection for the new point of reference
-    if (newHistLines > oldHistLines) {
+    if (newHistLines != oldHistLines) {
         if (_selBegin != -1) {
-            _selTopLeft += _columns;
-            _selBottomRight += _columns;
+            _selTopLeft += _columns * (newHistLines - oldHistLines);
+            _selBottomRight += _columns * (newHistLines - oldHistLines);
         }
     }
 
