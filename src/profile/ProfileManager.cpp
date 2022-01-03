@@ -206,7 +206,7 @@ void ProfileManager::loadAllProfiles(const QString &defaultProfileFileName)
     const QStringList &paths = availableProfilePaths();
     for (const QString &path : paths) {
         Profile::Ptr profile = loadProfile(path);
-        if (profile && !defaultProfileFileName.isEmpty() && path.endsWith(defaultProfileFileName)) {
+        if (profile && !defaultProfileFileName.isEmpty() && path.endsWith(QLatin1Char('/') + defaultProfileFileName)) {
             _defaultProfile = profile;
         }
     }
