@@ -278,7 +278,7 @@ void TerminalHeaderBar::applyVisibilitySettings()
 {
     auto *settings = KonsoleSettings::self();
     auto toVisibility = settings->splitViewVisibility();
-    const bool singleTerminalView = (getTopLevelSplitter()->findChildren<TerminalDisplay *>().count() == 1); 
+    const bool singleTerminalView = (getTopLevelSplitter()->findChildren<TerminalDisplay *>().count() == 1);
     switch (toVisibility) {
     case KonsoleSettings::AlwaysShowSplitHeader:
         m_toggleExpandedMode->setDisabled(singleTerminalView);
@@ -294,6 +294,5 @@ void TerminalHeaderBar::applyVisibilitySettings()
         break;
     }
 }
-
 
 }
