@@ -278,12 +278,14 @@ void TerminalHeaderBar::applyVisibilitySettings()
 {
     auto *settings = KonsoleSettings::self();
     auto toVisibility = settings->splitViewVisibility();
+    const bool singleTerminalView = (getTopLevelSplitter()->findChildren<TerminalDisplay *>().count() == 1); 
     switch (toVisibility) {
     case KonsoleSettings::AlwaysShowSplitHeader:
+        m_toggleExpandedMode->setDisabled(singleTerminalView);
         setVisible(true);
         break;
     case KonsoleSettings::ShowSplitHeaderWhenNeeded: {
-        const bool visible = !(getTopLevelSplitter()->findChildren<TerminalDisplay *>().count() == 1);
+        const bool visible = !(singleTerminalView);
         setVisible(visible);
     } break;
     case KonsoleSettings::AlwaysHideSplitHeader:
@@ -292,5 +294,6 @@ void TerminalHeaderBar::applyVisibilitySettings()
         break;
     }
 }
+
 
 }
