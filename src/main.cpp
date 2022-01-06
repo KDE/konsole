@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
                      QStringLiteral(KONSOLE_VERSION),
                      i18nc("@title", "Terminal emulator"),
                      KAboutLicense::GPL_V2,
-                     i18nc("@info:credit", "(c) 1997-2021, The Konsole Developers"),
+                     i18nc("@info:credit", "(c) 1997-2022, The Konsole Developers"),
                      QString(),
                      QStringLiteral("https://konsole.kde.org/"));
     fillAboutData(about);
