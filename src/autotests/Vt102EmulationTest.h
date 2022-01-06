@@ -28,7 +28,7 @@ private:
     static void sendAndCompare(TestEmulation *em, const char *input, size_t inputLen, const QString &expectedPrint, const QByteArray &expectedSent);
 };
 
-struct TestEmulation : public Vt102Emulation {
+class TestEmulation : public Vt102Emulation {
     Q_OBJECT
     // Give us access to protected functions
     friend class Vt102EmulationTest;
