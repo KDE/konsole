@@ -9,6 +9,7 @@
 #pragma once
 
 #include <QObject>
+#include <QWidget>
 
 #include <Enumeration.h>
 
@@ -20,7 +21,7 @@ class TerminalBell : public QObject
 
 public:
     TerminalBell(Enum::BellModeEnum bellMode);
-    void bell(const QString &message, bool terminalHasFocus);
+    void bell(QWidget *td, const QString &message, bool terminalHasFocus);
 
     /**
      * Sets the type of effect used to alert the user when a 'bell' occurs in the

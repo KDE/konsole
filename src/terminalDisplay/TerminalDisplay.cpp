@@ -2688,7 +2688,7 @@ void TerminalDisplay::contextMenuEvent(QContextMenuEvent *event)
 
 void TerminalDisplay::bell(const QString &message)
 {
-    _bell.bell(message, hasFocus());
+    _bell.bell(this, message, hasFocus());
 }
 
 /* --------------------------------------------------------------------- */

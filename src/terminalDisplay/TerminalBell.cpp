@@ -9,6 +9,7 @@
 #include "TerminalBell.h"
 
 #include <QTimer>
+#include <QWidget>
 
 #include <KNotification>
 
@@ -25,7 +26,7 @@ TerminalBell::TerminalBell(Enum::BellModeEnum bellMode)
 {
 }
 
-void TerminalBell::bell(const QString &message, bool terminalHasFocus)
+void TerminalBell::bell(QWidget *terminalDisplay, const QString &message, bool terminalHasFocus)
 {
     switch (_bellMode) {
     case Enum::SystemBeepBell:
@@ -36,7 +37,7 @@ void TerminalBell::bell(const QString &message, bool terminalHasFocus)
         //     Please note that these event names, "BellVisible" and "BellInvisible",
         //     should not change and should be kept stable, because other applications
         //     that use this code via KPart rely on these names for notifications.
-        KNotification::event(terminalHasFocus ? QStringLiteral("BellVisible") : QStringLiteral("BellInvisible"), message, QPixmap());
+        KNotification::event(terminalHasFocus ? QStringLiteral("BellVisible") : QStringLiteral("BellInvisible"), message, QPixmap(), terminalDisplay);
         break;
     case Enum::VisualBell:
         Q_EMIT visualBell();
