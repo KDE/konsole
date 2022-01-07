@@ -1104,7 +1104,10 @@ QString Session::getDynamicTitle()
     bool ok = false;
     if (process->name(&ok) == QLatin1String("ssh") && ok) {
         SSHProcessInfo sshInfo(*process);
-        return sshInfo.format(tabTitleFormat(Session::RemoteTabTitle));
+        QString title = tabTitleFormat(Session::RemoteTabTitle);
+        title.replace(QLatin1String("%w"), userTitle());
+        title.replace(QLatin1String("%#"), QString::number(sessionId()));
+        return sshInfo.format(title);
     }
 
     /*
@@ -1124,6 +1127,9 @@ QString Session::getDynamicTitle()
      *      'bob' would be returned)
      * </li>
      * <li> %D - Replaced with the current working directory of the process. </li>
+     * <li> %h - Replaced with the local host name. <li>
+     * <li> %w - Replaced with the window title set by the shell. </li>
+     * <li> %# - Replaced with the number of the session. <li>
      * </ul>
      */
     QString title = tabTitleFormat(Session::LocalTabTitle);
@@ -1144,6 +1150,9 @@ QString Session::getDynamicTitle()
     title.replace(QLatin1String("%u"), process->userName());
     title.replace(QLatin1String("%h"), Konsole::ProcessInfo::localHost());
     title.replace(QLatin1String("%n"), process->name(&ok));
+
+    title.replace(QLatin1String("%w"), userTitle());
+    title.replace(QLatin1String("%#"), QString::number(sessionId()));
 
     QString dir = _reportedWorkingUrl.toLocalFile();
     ok = true;
