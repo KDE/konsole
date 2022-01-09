@@ -43,7 +43,6 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KMessageWidget>
-#include <KNotification>
 #include <KShell>
 
 // Konsole
