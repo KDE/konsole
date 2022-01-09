@@ -656,10 +656,15 @@ void Session::silenceTimerDone()
         return;
     }
 
+    TerminalDisplay *view = nullptr;
+    if (!_views.isEmpty()) {
+        view = _views.first();
+    }
+
     KNotification::event(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"),
                          i18n("Silence in '%1' (Session '%2')", _displayTitle, _nameTitle),
                          QPixmap(),
-                         QApplication::activeWindow(),
+                         view,
                          KNotification::CloseWhenWidgetActivated);
     setPendingNotification(Notification::Silence);
 }
@@ -1728,11 +1733,16 @@ void Session::handleActivity()
     // TODO: should this hardcoded interval be user configurable?
     const int activityMaskInSeconds = 15;
 
+    TerminalDisplay *view = nullptr;
+    if (!_views.isEmpty()) {
+        view = _views.first();
+    }
+
     if (_monitorActivity && !_notifiedActivity) {
         KNotification::event(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"),
                              i18n("Activity in '%1' (Session '%2')", _displayTitle, _nameTitle),
                              QPixmap(),
-                             QApplication::activeWindow(),
+                             view,
                              KNotification::CloseWhenWidgetActivated);
 
         // mask activity notification for a while to avoid flooding

@@ -353,7 +353,7 @@ void SessionController::snapshot()
             KNotification::event(session()->hasFocus() ? QStringLiteral("ProcessFinished") : QStringLiteral("ProcessFinishedHidden"),
                                  i18n("The process '%1' has finished running in session '%2'", _previousForegroundProcessName, session()->nameTitle()),
                                  QPixmap(),
-                                 QApplication::activeWindow(),
+                                 view(),
                                  KNotification::CloseWhenWidgetActivated);
         }
         _previousForegroundProcessName = isForegroundProcessActive ? session()->foregroundProcessName() : QString();
