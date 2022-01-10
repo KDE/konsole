@@ -92,7 +92,7 @@ void Emulation::checkScreenInUse()
 
 void Emulation::checkSelectedText()
 {
-    bool isEmpty = _currentScreen->isSelectionEmpty();
+    bool isEmpty = !_currentScreen->hasSelection();
     Q_EMIT selectionChanged(isEmpty);
 }
 

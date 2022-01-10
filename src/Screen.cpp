@@ -1425,15 +1425,6 @@ bool Screen::isSelected(const int x, const int y) const
     return pos >= _selTopLeft && pos <= _selBottomRight && columnInSelection;
 }
 
-bool Screen::isSelectionEmpty() const
-{
-    if (!isSelectionValid()) {
-        return true;
-    }
-
-    return _selTopLeft == _selBottomRight;
-}
-
 QString Screen::selectedText(const DecodingOptions options) const
 {
     if (!isSelectionValid()) {

@@ -467,7 +467,6 @@ public:
      */
     bool isSelected(const int x, const int y) const;
 
-    bool isSelectionEmpty() const;
     /**
      * Convenience method.  Returns the currently selected text.
      * @param options See Screen::DecodingOptions
