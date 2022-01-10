@@ -570,7 +570,9 @@ void ViewManager::focusAnotherTerminal(ViewSplitter *toplevelSplitter)
                 }
             }
         }
-    } else if (_terminalDisplayHistory.count() >= 1) {
+    }
+
+    if (_terminalDisplayHistory.count() >= 1) {
         // Give focus to the last used terminal tab
         switchToTerminalDisplay(_terminalDisplayHistory[0]);
     }
