@@ -7,12 +7,10 @@
 
 #include "UrlFilterHotspot.h"
 
-#include <KIO/JobUiDelegate>
-#include <KIO/OpenUrlJob>
-
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
+#include <QDesktopServices>
 #include <QRegularExpression>
 
 #include <KLocalizedString>
@@ -77,9 +75,7 @@ void UrlFilterHotSpot::activate(QObject *object)
             url.prepend(QLatin1String("mailto:"));
         }
 
-        auto *job = new KIO::OpenUrlJob(QUrl(url));
-        job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-        job->start();
+        QDesktopServices::openUrl(QUrl(url));
     }
 }
 
