@@ -10,6 +10,7 @@ X-DocPath=konsole/index.html
 X-DBUS-StartupType=Unique
 StartupNotify=true
 X-KDE-AuthorizeAction=shell_access
+X-KDE-Shortcuts=Ctrl+Alt+T
 StartupWMClass=konsole
 Keywords=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh
 Keywords[ar]=طرفية;كونسول;سكربت;شغل;نفذ;أوامر;سطر-الأوامر;سطر الأوامر;cli;باش;صدفة;شل;zsh
