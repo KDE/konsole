@@ -91,6 +91,7 @@ MainWindow::MainWindow()
     connect(_viewManager, &Konsole::ViewManager::newViewWithProfileRequest, this, &Konsole::MainWindow::newFromProfile);
     connect(_viewManager, &Konsole::ViewManager::newViewRequest, this, &Konsole::MainWindow::newTab);
     connect(_viewManager, &Konsole::ViewManager::terminalsDetached, this, &Konsole::MainWindow::terminalsDetached);
+    connect(_viewManager, &Konsole::ViewManager::activationRequest, this, &Konsole::MainWindow::activationRequest);
 
     setCentralWidget(_viewManager->widget());
 
@@ -151,6 +152,11 @@ void MainWindow::updateUseTransparency()
     setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
     setAttribute(Qt::WA_NoSystemBackground, false);
     WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
+}
+
+void MainWindow::activationRequest()
+{
+    KWindowSystem::forceActiveWindow(winId());
 }
 
 void MainWindow::rememberMenuAccelerators()

@@ -1909,6 +1909,11 @@ Screen::DecodingOptions TerminalDisplay::currentDecodingOptions()
     return decodingOptions;
 }
 
+void TerminalDisplay::notificationClicked()
+{
+    Q_EMIT activationRequest();
+}
+
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent *ev)
 {
     if (_screenWindow.isNull()) {

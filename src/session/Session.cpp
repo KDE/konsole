@@ -622,11 +622,13 @@ void Session::silenceTimerDone()
         view = _views.first();
     }
 
-    KNotification::event(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"),
-                         i18n("Silence in '%1' (Session '%2')", _displayTitle, _nameTitle),
-                         QPixmap(),
-                         view,
-                         KNotification::CloseWhenWidgetActivated);
+    KNotification *notification = KNotification::event(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"),
+                                                       i18n("Silence in '%1' (Session '%2')", _displayTitle, _nameTitle),
+                                                       QPixmap(),
+                                                       view,
+                                                       KNotification::CloseWhenWidgetActivated);
+    notification->setDefaultAction(i18n("Show session"));
+    view->connect(notification, &KNotification::defaultActivated, view, &TerminalDisplay::notificationClicked);
     setPendingNotification(Notification::Silence);
 }
 
@@ -1778,11 +1780,13 @@ void Session::handleActivity()
     }
 
     if (_monitorActivity && !_notifiedActivity) {
-        KNotification::event(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"),
-                             i18n("Activity in '%1' (Session '%2')", _displayTitle, _nameTitle),
-                             QPixmap(),
-                             view,
-                             KNotification::CloseWhenWidgetActivated);
+        KNotification *notification = KNotification::event(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"),
+                                                           i18n("Activity in '%1' (Session '%2')", _displayTitle, _nameTitle),
+                                                           QPixmap(),
+                                                           view,
+                                                           KNotification::CloseWhenWidgetActivated);
+        notification->setDefaultAction(i18n("Show session"));
+        view->connect(notification, &KNotification::defaultActivated, view, &TerminalDisplay::notificationClicked);
 
         // mask activity notification for a while to avoid flooding
         _notifiedActivity = true;

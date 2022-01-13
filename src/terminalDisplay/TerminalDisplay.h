@@ -449,6 +449,8 @@ public Q_SLOTS:
     // Used for requestPrint
     void printScreen();
 
+    void notificationClicked();
+
 Q_SIGNALS:
     void requestToggleExpansion();
     void requestMoveToNewTab(TerminalDisplay *display);
@@ -487,6 +489,7 @@ Q_SIGNALS:
      */
     void overrideShortcutCheck(QKeyEvent *keyEvent, bool &override);
 
+    void activationRequest();
     void sendStringToEmu(const QByteArray &local8BitString);
 
     void compositeFocusChanged(bool focused);

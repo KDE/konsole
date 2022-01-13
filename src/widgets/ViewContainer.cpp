@@ -331,6 +331,9 @@ void TabbedViewContainer::addView(TerminalDisplay *view)
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
     connect(viewSplitter, &ViewSplitter::terminalDisplayDropped, this, &TabbedViewContainer::terminalDisplayDropped);
 
+    // Put this view on the foreground if it requests so, eg. on bell activity
+    connect(view, &TerminalDisplay::activationRequest, this, &Konsole::TabbedViewContainer::activateView);
+
     setCurrentIndex(index);
     Q_EMIT viewAdded(view);
 }
@@ -341,6 +344,8 @@ void TabbedViewContainer::splitView(TerminalDisplay *view, Qt::Orientation orien
     viewSplitter->clearMaximized();
     viewSplitter->addTerminalDisplay(view, orientation);
     connectTerminalDisplay(view);
+    // Put this view on the foreground if it requests so, eg. on bell activity
+    connect(view, &TerminalDisplay::activationRequest, this, &Konsole::TabbedViewContainer::activateView);
 }
 
 void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
@@ -386,6 +391,15 @@ void TabbedViewContainer::forgetView()
 {
     if (count() == 0) {
         Q_EMIT empty(this);
+    }
+}
+
+void TabbedViewContainer::activateView()
+{
+    if (QWidget *widget = qobject_cast<QWidget *>(sender())) {
+        auto topLevelSplitter = qobject_cast<ViewSplitter *>(widget->parentWidget())->getToplevelSplitter();
+        setCurrentWidget(topLevelSplitter);
+        widget->setFocus();
     }
 }
 

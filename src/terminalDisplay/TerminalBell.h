@@ -15,13 +15,15 @@
 
 namespace Konsole
 {
+class TerminalDisplay;
+
 class TerminalBell : public QObject
 {
     Q_OBJECT
 
 public:
     explicit TerminalBell(Enum::BellModeEnum bellMode);
-    void bell(QWidget *td, const QString &message, bool terminalHasFocus);
+    void bell(TerminalDisplay *td, const QString &message, bool terminalHasFocus);
 
     /**
      * Sets the type of effect used to alert the user when a 'bell' occurs in the
