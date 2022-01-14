@@ -81,7 +81,7 @@ private:
     void createTabFromArgs(MainWindow *window, const QHash<QString, QString> &);
 
     MainWindow *_backgroundInstance;
-    QMultiHash<QString, QString> m_commandLineArguments;
+    QSharedPointer<QCommandLineParser> m_parser;
     QStringList m_customCommand;
     PluginManager m_pluginManager;
 };

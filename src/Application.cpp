@@ -41,16 +41,10 @@ using namespace Konsole;
 
 Application::Application(QSharedPointer<QCommandLineParser> parser, const QStringList &customCommand)
     : _backgroundInstance(nullptr)
+    , m_parser(parser)
     , m_customCommand(customCommand)
 {
     m_pluginManager.loadAllPlugins();
-
-    const QStringList optionNames = parser->optionNames();
-    for (const QString &option : optionNames) {
-        for (const QString &value : parser->values(option)) {
-            m_commandLineArguments.insert(option, value);
-        }
-    }
 }
 
 void Application::populateCommandLineParser(QCommandLineParser *parser)
@@ -123,7 +117,7 @@ Application::~Application()
 
 MainWindow *Application::newMainWindow()
 {
-    WindowSystemInfo::HAVE_TRANSPARENCY = !m_commandLineArguments.contains(QStringLiteral("notransparency"));
+    WindowSystemInfo::HAVE_TRANSPARENCY = !m_parser->isSet(QStringLiteral("notransparency"));
 
     auto window = new MainWindow();
 
@@ -176,7 +170,7 @@ int Application::newInstance()
     // create a new window or use an existing one
     MainWindow *window = processWindowArgs(createdNewMainWindow);
 
-    if (m_commandLineArguments.contains(QStringLiteral("tabs-from-file"))) {
+    if (m_parser->isSet(QStringLiteral("tabs-from-file"))) {
         // create new session(s) as described in file
         if (!processTabsFromFileArgs(window)) {
             return 0;
@@ -191,24 +185,24 @@ int Application::newInstance()
 
     // if layout file is enable load it and create session from definitions,
     // else create new session
-    if (m_commandLineArguments.contains(QStringLiteral("layout"))) {
-        window->viewManager()->loadLayout(m_commandLineArguments.value(QStringLiteral("layout")));
+    if (m_parser->isSet(QStringLiteral("layout"))) {
+        window->viewManager()->loadLayout(m_parser->value(QStringLiteral("layout")));
     } else {
         Session *session = window->createSession(newProfile, QString());
 
-        const QString workingDir = m_commandLineArguments.value(QStringLiteral("workdir"));
+        const QString workingDir = m_parser->value(QStringLiteral("workdir"));
         if (!workingDir.isEmpty()) {
             session->setInitialWorkingDirectory(workingDir);
         }
 
-        if (m_commandLineArguments.contains(QStringLiteral("noclose"))) {
+        if (m_parser->isSet(QStringLiteral("noclose"))) {
             session->setAutoClose(false);
         }
     }
 
     // if the background-mode argument is supplied, start the background
     // session ( or bring to the front if it already exists )
-    if (m_commandLineArguments.contains(QStringLiteral("background-mode"))) {
+    if (m_parser->isSet(QStringLiteral("background-mode"))) {
         startBackgroundMode(window);
     } else {
         // Qt constrains top-level windows which have not been manually
@@ -259,7 +253,7 @@ profile: Shell
 bool Application::processTabsFromFileArgs(MainWindow *window)
 {
     // Open tab configuration file
-    const QString tabsFileName(m_commandLineArguments.value(QStringLiteral("tabs-from-file")));
+    const QString tabsFileName(m_parser->value(QStringLiteral("tabs-from-file")));
     QFile tabsFile(tabsFileName);
     if (!tabsFile.open(QFile::ReadOnly)) {
         qWarning() << "ERROR: Cannot open tabs file " << tabsFileName.toLocal8Bit().data();
@@ -346,13 +340,13 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
 
     const QString wdirOptionName(QStringLiteral("workdir"));
     auto it = tokens.constFind(wdirOptionName);
-    const QString workingDirectory = it != tokens.cend() ? it.value() : m_commandLineArguments.value(wdirOptionName);
+    const QString workingDirectory = it != tokens.cend() ? it.value() : m_parser->value(wdirOptionName);
 
     if (!workingDirectory.isEmpty()) {
         session->setInitialWorkingDirectory(workingDirectory);
     }
 
-    if (m_commandLineArguments.contains(QStringLiteral("noclose"))) {
+    if (m_parser->isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);
     }
 
@@ -374,7 +368,7 @@ MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
 {
     MainWindow *window = nullptr;
 
-    if (m_commandLineArguments.contains(QStringLiteral("new-tab"))) {
+    if (m_parser->isSet(QStringLiteral("new-tab"))) {
         const QList<QWidget *> list = QApplication::topLevelWidgets();
         for (auto it = list.crbegin(), endIt = list.crend(); it != endIt; ++it) {
             window = qobject_cast<MainWindow *>(*it);
@@ -389,18 +383,18 @@ MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
         window = newMainWindow();
 
         // override default menubar visibility
-        if (m_commandLineArguments.contains(QStringLiteral("show-menubar"))) {
+        if (m_parser->isSet(QStringLiteral("show-menubar"))) {
             window->setMenuBarInitialVisibility(true);
         }
-        if (m_commandLineArguments.contains(QStringLiteral("hide-menubar"))) {
+        if (m_parser->isSet(QStringLiteral("hide-menubar"))) {
             window->setMenuBarInitialVisibility(false);
         }
-        if (m_commandLineArguments.contains(QStringLiteral("fullscreen"))) {
+        if (m_parser->isSet(QStringLiteral("fullscreen"))) {
             window->viewFullScreen(true);
         }
-        if (m_commandLineArguments.contains(QStringLiteral("show-tabbar"))) {
+        if (m_parser->isSet(QStringLiteral("show-tabbar"))) {
             window->viewManager()->setNavigationVisibility(ViewManager::AlwaysShowNavigation);
-        } else if (m_commandLineArguments.contains(QStringLiteral("hide-tabbar"))) {
+        } else if (m_parser->isSet(QStringLiteral("hide-tabbar"))) {
             window->viewManager()->setNavigationVisibility(ViewManager::AlwaysHideNavigation);
         }
     }
@@ -415,12 +409,12 @@ Profile::Ptr Application::processProfileSelectArgs()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    if (m_commandLineArguments.contains(QStringLiteral("profile"))) {
-        Profile::Ptr profile = ProfileManager::instance()->loadProfile(m_commandLineArguments.value(QStringLiteral("profile")));
+    if (m_parser->isSet(QStringLiteral("profile"))) {
+        Profile::Ptr profile = ProfileManager::instance()->loadProfile(m_parser->value(QStringLiteral("profile")));
         if (profile) {
             return profile;
         }
-    } else if (m_commandLineArguments.contains(QStringLiteral("fallback-profile"))) {
+    } else if (m_parser->isSet(QStringLiteral("fallback-profile"))) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(QStringLiteral("FALLBACK/"));
         if (profile) {
             return profile;
@@ -432,10 +426,10 @@ Profile::Ptr Application::processProfileSelectArgs()
 
 bool Application::processHelpArgs()
 {
-    if (m_commandLineArguments.contains(QStringLiteral("list-profiles"))) {
+    if (m_parser->isSet(QStringLiteral("list-profiles"))) {
         listAvailableProfiles();
         return true;
-    } else if (m_commandLineArguments.contains(QStringLiteral("list-profile-properties"))) {
+    } else if (m_parser->isSet(QStringLiteral("list-profile-properties"))) {
         listProfilePropertyInfo();
         return true;
     }
@@ -470,7 +464,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     newProfile->setHidden(true);
 
     // temporary changes to profile options specified on the command line
-    const QStringList profileProperties = m_commandLineArguments.values(QStringLiteral("p"));
+    const QStringList profileProperties = m_parser->values(QStringLiteral("p"));
     for (const QString &value : profileProperties) {
         ProfileCommandParser parser;
 
@@ -542,7 +536,7 @@ void Application::toggleBackgroundInstance()
     }
 }
 
-void Application::slotActivateRequested(QStringList args, const QString &workingDir)
+void Application::slotActivateRequested(QStringList args, const QString & /*workingDir*/)
 {
     // QCommandLineParser expects the first argument to be the executable name
     // In the current version it just strips it away
@@ -551,22 +545,10 @@ void Application::slotActivateRequested(QStringList args, const QString &working
     m_customCommand = getCustomCommand(args);
 
     // We can't re-use QCommandLineParser instances, it preserves earlier parsed values
-    QCommandLineParser parser;
-    populateCommandLineParser(&parser);
-    parser.parse(args);
-
-    m_commandLineArguments.clear();
-
-    const QStringList optionNames = parser.optionNames();
-    for (const QString &option : optionNames) {
-        for (const QString &value : parser.values(option)) {
-            if (option == QLatin1String("workdir")) {
-                m_commandLineArguments.insert(option, QDir(workingDir).absolutePath());
-            } else {
-                m_commandLineArguments.insert(option, value);
-            }
-        }
-    }
+    auto parser = new QCommandLineParser;
+    populateCommandLineParser(parser);
+    parser->parse(args);
+    m_parser.reset(parser);
 
     newInstance();
 }
