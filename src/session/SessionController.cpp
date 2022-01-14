@@ -50,6 +50,7 @@
 #include <KFileItemListProperties>
 
 #include <kconfigwidgets_version.h>
+#include <kio_version.h>
 #include <kwidgetsaddons_version.h>
 
 // Konsole
@@ -1836,7 +1837,14 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         const KFileItemListProperties props({item});
         QScopedPointer<KFileItemActions> ac(new KFileItemActions(popup));
         ac->setItemListProperties(props);
+
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 82, 0)
         ac->insertOpenWithActionsTo(popup->actions().value(4, nullptr), popup, QStringList{qApp->desktopFileName()});
+#elif KIO_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+        ac->insertOpenWithActionsTo(popup->actions().value(4, nullptr), popup, QString());
+#else
+        ac->addOpenWithActionsTo(popup);
+#endif
 
         auto newActions = popup->actions();
         for (auto* elm : old) {
