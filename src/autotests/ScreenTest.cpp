@@ -41,7 +41,7 @@ void ScreenTest::testBlockSelection()
 
     const QString reallyBigTextForReflow = QStringLiteral("abcd efgh ijkl mnop qrst uvxz ABCD EFGH IJKL MNOP QRST UVXZ");
 
-    for (const auto c : reallyBigTextForReflow) {
+    for (const QChar &c : reallyBigTextForReflow) {
         screen.displayCharacter(c.toLatin1());
     }
 
