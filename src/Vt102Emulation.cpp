@@ -441,54 +441,58 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
             /* clang-format off */
         // <ESC> ']' ...
         if (osc         ) { continue; }
-        if (lec(3,2,'?')) { continue; }
-        if (lec(3,2,'=')) { continue; }
-        if (lec(3,2,'>')) { continue; }
-        if (lec(3,2,'!')) { continue; }
-        if (lec(3,2,SP )) { continue; }
-        if (lec(4,3,SP )) { continue; }
-        if (dcs         ) { continue; /* TODO We don't xterm DCS, so we just eat it */ }
-        if (lec(2,0,ESC)) { processToken(token_esc(s[1]), 0, 0);              resetTokenizer(); continue; }
-        if (les(3,1,SCS)) { processToken(token_esc_cs(s[1],s[2]), 0, 0);      resetTokenizer(); continue; }
-        if (lec(3,1,'#')) { processToken(token_esc_de(s[2]), 0, 0);           resetTokenizer(); continue; }
-        if (eps(    CPN)) { processToken(token_csi_pn(cc), argv[0],argv[1]);  resetTokenizer(); continue; }
 
-        // resize = \e[8;<row>;<col>t
-        if (eps(CPS)) {
-            processToken(token_csi_ps(cc, argv[0]), argv[1], argv[2]);
-            resetTokenizer();
-            continue;
-        }
+        if (p >= 3 && s[1] == '[') { // parsing a CSI sequence
+            if (lec(3,2,'?')) { continue; }
+            if (lec(3,2,'=')) { continue; }
+            if (lec(3,2,'>')) { continue; }
+            if (lec(3,2,'!')) { continue; }
+            if (lec(3,2,SP )) { continue; }
+            if (lec(4,3,SP )) { continue; }
+            if (eps(    CPN)) { processToken(token_csi_pn(cc), argv[0],argv[1]);  resetTokenizer(); continue; }
 
-        if (epe(   )) { processToken(token_csi_pe(cc), 0, 0); resetTokenizer(); continue; }
-
-        if (esp (   )) { processToken(token_csi_sp(cc), 0, 0);           resetTokenizer(); continue; }
-        if (epsp(   )) { processToken(token_csi_psp(cc, argv[0]), 0, 0); resetTokenizer(); continue; }
-
-        if (ees(DIG)) { addDigit(cc-'0'); continue; }
-        if (eec(';')) { addArgument();    continue; }
-        if (ees(INT)) { continue; }
-        if (p >= 3 && cc == 'y' && s[p - 2] == '*') { processChecksumRequest(argc, argv); resetTokenizer(); continue; }
-        for (int i = 0; i <= argc; i++) {
-            if (epp()) {
-                processToken(token_csi_pr(cc,argv[i]), 0, 0);
-            } else if (eeq()) {
-                processToken(token_csi_pq(cc), 0, 0); // spec. case for ESC[=0c or ESC[=c
-            } else if (egt()) {
-                processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC[>0c or ESC[>c
-            } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
-            {
-                // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
-                i += 2;
-                processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i+1] << 8) | argv[i+2]);
-                i += 2;
-            } else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 5) {
-                // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
-                i += 2;
-                processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_256, argv[i]);
-            } else if (p < 2 || (charClass[s[p-2]] & (INT)) != (INT)) {
-                processToken(token_csi_ps(cc,argv[i]), 0, 0);
+            // resize = \e[8;<row>;<col>t
+            if (eps(CPS)) {
+                processToken(token_csi_ps(cc, argv[0]), argv[1], argv[2]);
+                resetTokenizer();
+                continue;
             }
+
+            if (epe(   )) { processToken(token_csi_pe(cc), 0, 0); resetTokenizer(); continue; }
+
+            if (esp (   )) { processToken(token_csi_sp(cc), 0, 0);           resetTokenizer(); continue; }
+            if (epsp(   )) { processToken(token_csi_psp(cc, argv[0]), 0, 0); resetTokenizer(); continue; }
+
+            if (ees(DIG)) { addDigit(cc-'0'); continue; }
+            if (eec(';')) { addArgument();    continue; }
+            if (ees(INT)) { continue; }
+            if (p >= 3 && cc == 'y' && s[p - 2] == '*') { processChecksumRequest(argc, argv); resetTokenizer(); continue; }
+            for (int i = 0; i <= argc; i++) {
+                if (epp()) {
+                    processToken(token_csi_pr(cc,argv[i]), 0, 0);
+                } else if (eeq()) {
+                    processToken(token_csi_pq(cc), 0, 0); // spec. case for ESC[=0c or ESC[=c
+                } else if (egt()) {
+                    processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC[>0c or ESC[>c
+                } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
+                {
+                    // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
+                    i += 2;
+                    processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i+1] << 8) | argv[i+2]);
+                    i += 2;
+                } else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 5) {
+                    // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
+                    i += 2;
+                    processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_256, argv[i]);
+                } else if (p < 2 || (charClass[s[p-2]] & (INT)) != (INT)) {
+                    processToken(token_csi_ps(cc,argv[i]), 0, 0);
+                }
+            }
+        } else {
+            if (dcs         ) { continue; /* TODO We don't xterm DCS, so we just eat it */ }
+            if (lec(2,0,ESC)) { processToken(token_esc(s[1]), 0, 0);              resetTokenizer(); continue; }
+            if (les(3,1,SCS)) { processToken(token_esc_cs(s[1],s[2]), 0, 0);      resetTokenizer(); continue; }
+            if (lec(3,1,'#')) { processToken(token_esc_de(s[2]), 0, 0);           resetTokenizer(); continue; }
         }
         resetTokenizer();
         /* clang-format on */
