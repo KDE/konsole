@@ -124,11 +124,15 @@ private:
 #define MAX_TOKEN_LENGTH 256 // Max length of tokens (e.g. window title)
     void addToCurrentToken(uint cc);
     int tokenBufferPos;
+
+protected:
     uint tokenBuffer[MAX_TOKEN_LENGTH]; // FIXME: overflow?
+
+private:
 #define MAXARGS 15
     void addDigit(int dig);
     void addArgument();
-    int argv[MAXARGS];
+    int argv[MAXARGS] = {};
     int argc;
     void initTokenizer();
     // State machine for escape sequences containing large amount of data
@@ -146,11 +150,14 @@ private:
     quint32 imageId;
     QMap<char, qint64> savedKeys;
 
-    void reportDecodingError();
+protected:
+    virtual void reportDecodingError();
 
-    void processToken(int code, int p, int q);
-    void processSessionAttributeRequest(int tokenSize);
-    void processChecksumRequest(int argc, int argv[]);
+    virtual void processToken(int code, int p, int q);
+    virtual void processSessionAttributeRequest(int tokenSize);
+    virtual void processChecksumRequest(int argc, int argv[]);
+
+private:
     void processGraphicsToken(int tokenSize);
 
     void sendGraphicsReply(const QString &params, const QString &error);
