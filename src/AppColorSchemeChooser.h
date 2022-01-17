@@ -26,7 +26,7 @@ class KActionCollection;
 class KONSOLEPRIVATE_EXPORT AppColorSchemeChooser : public QAction
 {
 public:
-    AppColorSchemeChooser(QObject *parent);
+    explicit AppColorSchemeChooser(QObject *parent);
 
     QString currentSchemeName() const;
 

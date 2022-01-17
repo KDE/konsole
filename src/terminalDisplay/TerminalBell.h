@@ -20,7 +20,7 @@ class TerminalBell : public QObject
     Q_OBJECT
 
 public:
-    TerminalBell(Enum::BellModeEnum bellMode);
+    explicit TerminalBell(Enum::BellModeEnum bellMode);
     void bell(QWidget *td, const QString &message, bool terminalHasFocus);
 
     /**

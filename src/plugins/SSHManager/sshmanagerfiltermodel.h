@@ -14,7 +14,7 @@ class SSHManagerFilterModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    SSHManagerFilterModel(QObject *parent);
+    explicit SSHManagerFilterModel(QObject *parent);
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
     void setInvertFilter(bool invert);
 
