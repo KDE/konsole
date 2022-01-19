@@ -28,8 +28,10 @@
 #include <KAboutData>
 #include <KCrash>
 #include <KLocalizedString>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <Kdelibs4ConfigMigrator>
 #include <Kdelibs4Migration>
+#endif
 #include <kdbusservice.h>
 
 using Konsole::Application;
@@ -108,11 +110,11 @@ int main(int argc, char *argv[])
     QElapsedTimer timer;
     timer.start();
 #endif
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     // enable high dpi support
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
-
+#endif
     // Check if any of the arguments makes it impossible to re-use an existing process.
     // We need to do this manually and before creating a QApplication, because
     // QApplication takes/removes the Qt specific arguments that are incompatible.
@@ -181,7 +183,7 @@ int main(int argc, char *argv[])
     KDBusService dbusService(startupOption | KDBusService::NoExitOnFailure);
 
     needToDeleteQApplication = false;
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     Kdelibs4ConfigMigrator migrate(QStringLiteral("konsole"));
     migrate.setConfigFiles({QStringLiteral("konsolerc"), QStringLiteral("konsole.notifyrc")});
     migrate.setUiFiles({QStringLiteral("sessionui.rc"), QStringLiteral("partui.rc"), QStringLiteral("konsoleui.rc")});
@@ -208,7 +210,7 @@ int main(int argc, char *argv[])
             }
         }
     }
-
+#endif
     // If we reach this location, there was no existing copy of Konsole
     // running, so create a new instance.
     Application konsoleApp(parser, customCommand);
