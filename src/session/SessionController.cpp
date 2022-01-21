@@ -65,6 +65,7 @@
 #include "filterHotSpots/ColorFilter.h"
 #include "filterHotSpots/EscapeSequenceUrlFilter.h"
 #include "filterHotSpots/FileFilter.h"
+#include "filterHotSpots/FileFilterHotspot.h"
 #include "filterHotSpots/Filter.h"
 #include "filterHotSpots/FilterChain.h"
 #include "filterHotSpots/HotSpot.h"
@@ -1109,6 +1110,23 @@ void SessionController::closeSession()
 //   2) transform url to get the desired result (ssh -> sftp, etc)
 void SessionController::openBrowser()
 {
+    // if we requested the browser on a file, we can't use OpenUrlJob
+    // because it does not open the file in a browser, it opens another program
+    // based on it's mime type.
+    // so force open dolphin with  it selected.
+    // TODO: and for people that have other default file browsers such as
+    // konqueror and krusader?
+    if (_currentHotSpot && _currentHotSpot->type() == HotSpot::File) {
+        auto *fileHotSpot = qobject_cast<FileFilterHotSpot *>(_currentHotSpot.get());
+        assert(fileHotSpot);
+        fileHotSpot->fileItem().url();
+
+        auto job = new KIO::CommandLauncherJob(QStringLiteral("dolphin"), {fileHotSpot->fileItem().url().toLocalFile(), QStringLiteral("--select")});
+        job->start();
+
+        return;
+    }
+
     const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
 
     auto *job = new KIO::OpenUrlJob(currentUrl);

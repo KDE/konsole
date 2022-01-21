@@ -33,6 +33,7 @@ class TerminalDisplay;
  */
 class FileFilterHotSpot : public RegExpFilterHotSpot
 {
+    Q_OBJECT
 public:
     FileFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts, const QString &filePath, Session *session);
     ~FileFilterHotSpot() override;
@@ -46,6 +47,7 @@ public:
     QList<QAction *> setupMenu(QMenu *menu) override;
 
     KFileItem fileItem() const;
+
     void requestThumbnail(Qt::KeyboardModifiers modifiers, const QPoint &pos);
     void thumbnailRequested();
 
