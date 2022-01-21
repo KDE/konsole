@@ -16,6 +16,10 @@
 // Qt
 #include <QAction>
 #include <QApplication>
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingCall>
+
 #include <QFileDialog>
 #include <QIcon>
 #include <QKeyEvent>
@@ -1121,8 +1125,25 @@ void SessionController::openBrowser()
         assert(fileHotSpot);
         fileHotSpot->fileItem().url();
 
-        auto job = new KIO::CommandLauncherJob(QStringLiteral("dolphin"), {fileHotSpot->fileItem().url().toLocalFile(), QStringLiteral("--select")});
-        job->start();
+        QDBusConnection bus = QDBusConnection::sessionBus();
+        QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.FileManager1"),
+                                                              QStringLiteral("/org/freedesktop/FileManager1"),
+                                                              QStringLiteral("org.freedesktop.FileManager1"),
+                                                              QStringLiteral("ShowItems"));
+
+        QList<QVariant> arguments;
+        arguments.append(QStringLiteral("URIs"));
+        arguments.append(fileHotSpot->fileItem().url().toLocalFile());
+
+        message.setArguments(arguments);
+        auto reply = bus.asyncCall(message);
+        reply.waitForFinished();
+
+        if (reply.isError()) {
+            // error launching via dbus, do the more manual way.
+            auto job = new KIO::CommandLauncherJob(QStringLiteral("dolphin"), {fileHotSpot->fileItem().url().toLocalFile(), QStringLiteral("--select")});
+            job->start();
+        }
 
         return;
     }
