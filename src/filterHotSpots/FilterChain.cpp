@@ -251,7 +251,7 @@ void FilterChain::paint(TerminalDisplay *td, QPainter &painter)
 
     for (const auto &spot : spots) {
         QRegion region;
-        if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl) {
+        if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl || spot->type() == HotSpot::File) {
             QPair<QRegion, QRect> spotRegion =
                 spot->region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect());
             region = spotRegion.first;
@@ -259,7 +259,7 @@ void FilterChain::paint(TerminalDisplay *td, QPainter &painter)
 
             // TODO: Move this paint code to HotSpot->drawHint();
             // TODO: Fix the Url Hints access from the Profile.
-            if (_showUrlHint && spot->type() == HotSpot::Link) {
+            if (_showUrlHint && (spot->type() == HotSpot::Link || spot->type() == HotSpot::File)) {
                 if (urlNumber >= 0 && urlNumber < 10) {
                     // Position at the beginning of the URL
                     QRect hintRect(*region.begin());
@@ -327,7 +327,7 @@ void FilterChain::paint(TerminalDisplay *td, QPainter &painter)
             // TODO: Fix accessing the urlHint here.
             // TODO: Move this code to UrlFilterHotSpot.
             const bool hasMouse = region.contains(td->mapFromGlobal(QCursor::pos()));
-            if ((spot->type() == HotSpot::Link && _showUrlHint) || hasMouse) {
+            if (((spot->type() == HotSpot::Link || spot->type() == HotSpot::File) && _showUrlHint) || hasMouse) {
                 QFontMetrics metrics(td->font());
 
                 // find the baseline (which is the invisible line that the characters in the font sit on,

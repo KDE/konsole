@@ -52,7 +52,7 @@ FileFilterHotSpot::FileFilterHotSpot(int startLine,
     , _session(session)
     , _thumbnailFinished(false)
 {
-    setType(Link);
+    setType(File);
 }
 
 void FileFilterHotSpot::activate(QObject *)

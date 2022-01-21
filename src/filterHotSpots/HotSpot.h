@@ -53,7 +53,9 @@ public:
     enum Type {
         // the type of the hotspot is not specified
         NotSpecified,
-        // this hotspot represents a clickable link
+        // this hotspot rpresents a file on the filesystem
+        File,
+        // this hotspot represents a clickable URL link
         Link,
         // this hotspot represents a clickable e-mail address
         EMailAddress,

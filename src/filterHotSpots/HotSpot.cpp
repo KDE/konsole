@@ -101,7 +101,7 @@ void HotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev)
 
 bool HotSpot::isUrl()
 {
-    return (_type == HotSpot::Link || _type == HotSpot::EMailAddress || _type == HotSpot::EscapedUrl);
+    return (_type == HotSpot::Link || _type == HotSpot::EMailAddress || _type == HotSpot::EscapedUrl || _type == HotSpot::File);
 }
 
 void HotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
