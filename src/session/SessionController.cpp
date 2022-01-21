@@ -1854,11 +1854,11 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 
         QList<QAction *> toRemove;
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc
-        QSharedPointer<HotSpot> hotSpot = view()->filterActions(position);
-        if (hotSpot != nullptr) {
-            popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator);
+        _currentHotSpot = view()->filterActions(position);
+        if (_currentHotSpot != nullptr) {
+            popup->insertActions(popup->actions().value(0, nullptr), _currentHotSpot->actions() << contentSeparator);
             popup->addAction(contentSeparator);
-            toRemove = hotSpot->setupMenu(popup.data());
+            toRemove = _currentHotSpot->setupMenu(popup.data());
 
             // The action above can create an action for Open Folder With,
             // for the selected folder, but then we have two different

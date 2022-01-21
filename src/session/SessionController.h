@@ -50,6 +50,7 @@ class SessionGroup;
 class TerminalDisplay;
 class UrlFilter;
 class ColorFilter;
+class HotSpot;
 
 /**
  * Provides the menu actions to manipulate a single terminal session and view pair.
@@ -370,6 +371,8 @@ private:
     EscapeSequenceUrlFilter *_escapedUrlFilter;
 
     std::unique_ptr<KXMLGUIBuilder> _clientBuilder;
+
+    QSharedPointer<HotSpot> _currentHotSpot;
 };
 
 }
