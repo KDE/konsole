@@ -66,7 +66,10 @@ private:
     void showThumbnail(const KFileItem &item, const QPixmap &preview);
     QString _filePath;
     Session *_session = nullptr;
-    KFileItemActions _menuActions;
+
+    // This is a pointer for performance reasons
+    // constructing KFileItemActions is super expensive
+    KFileItemActions *_menuActions = nullptr;
 
     QPoint _eventPos;
     QPoint _thumbnailPos;

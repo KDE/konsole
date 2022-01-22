@@ -85,10 +85,10 @@ QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, i
         return nullptr;
     }
 
-    QString filename = capturedTexts.first();
+    const QString &filenameRef = capturedTexts.first();
+    QStringView filename = filenameRef;
     if (filename.startsWith(QLatin1Char('\'')) && filename.endsWith(QLatin1Char('\''))) {
-        filename.remove(0, 1);
-        filename.chop(1);
+        filename = filename.mid(1, filename.size() - 2);
     }
 
     // '.' and '..' could be valid hotspots, but '..................' most likely isn't
@@ -98,15 +98,31 @@ QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, i
     }
 
     if (filename.startsWith(QLatin1String("[/"))) { // ctest error output
-        filename.remove(0, 1);
+        filename = filename.mid(1);
     }
 
     const bool absolute = filename.startsWith(QLatin1Char('/'));
     if (!absolute) {
-        auto match = std::find_if(_currentDirContents.cbegin(), _currentDirContents.cend(), [&filename](const QString &s) {
-            return filename == s // It's a direct child file or dir
-                || filename.startsWith(s + QLatin1Char{':'}) // filename:lineNumber (output of grep -n)
-                || filename.startsWith(s + QLatin1Char{'/'}); // It's inside a child dir
+        auto match = std::find_if(_currentDirContents.cbegin(), _currentDirContents.cend(), [filename](const QString &s) {
+            // early out if first char doesn't match
+            if (!s.isEmpty() && filename.at(0) != s.at(0)) {
+                return false;
+            }
+
+            const bool startsWith = filename.startsWith(s);
+            if (startsWith) {
+                // are we equal ?
+                if (filename.size() == s.size()) {
+                    return true;
+                }
+                int onePast = s.size();
+                if (onePast < filename.size()) {
+                    if (filename.at(onePast) == QLatin1Char(':') || filename.at(onePast) == QLatin1Char('/')) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         });
 
         if (match == _currentDirContents.cend()) {
@@ -114,8 +130,13 @@ QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, i
         }
     }
 
-    return QSharedPointer<HotSpot>(
-        new FileFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts, !absolute ? _dirPath + filename : filename, _session));
+    return QSharedPointer<HotSpot>(new FileFilterHotSpot(startLine,
+                                                         startColumn,
+                                                         endLine,
+                                                         endColumn,
+                                                         capturedTexts,
+                                                         !absolute ? _dirPath + filename.toString() : filename.toString(),
+                                                         _session));
 }
 
 void FileFilter::process()
@@ -125,8 +146,7 @@ void FileFilter::process()
     if (_dirPath != dir.canonicalPath() + QLatin1Char('/')) {
         _dirPath = dir.canonicalPath() + QLatin1Char('/');
 
-        const auto tmpList = dir.entryList(QDir::Dirs | QDir::Files);
-        _currentDirContents = QSet<QString>(std::begin(tmpList), std::end(tmpList));
+        _currentDirContents = dir.entryList(QDir::Dirs | QDir::Files);
     }
 
     RegExpFilter::process();

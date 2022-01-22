@@ -41,7 +41,7 @@ private:
 
     QPointer<Session> _session;
     QString _dirPath;
-    QSet<QString> _currentDirContents;
+    QList<QString> _currentDirContents;
     static QRegularExpression _regex;
 };
 
