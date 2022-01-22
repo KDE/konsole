@@ -724,8 +724,9 @@ void Session::sessionAttributeRequest(int id, uint terminator)
     }
 }
 
-void Session::onViewSizeChange(int /*height*/, int /*width*/)
+void Session::onViewSizeChange(int height, int width)
 {
+    _shellProcess->setPixelSize(width, height);
     updateTerminalSize();
 }
 

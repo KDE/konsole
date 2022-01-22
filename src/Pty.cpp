@@ -11,6 +11,9 @@
 
 // System
 #include <csignal>
+#if !defined(Q_OS_WIN)
+#include <sys/ioctl.h> //ioctl() and TIOCSWINSZ
+#endif
 #include <termios.h>
 
 // Qt
@@ -85,7 +88,21 @@ void Pty::setWindowSize(int columns, int lines)
 
     if (pty()->masterFd() >= 0) {
         pty()->setWinSize(lines, columns);
+#if !defined(Q_OS_WIN)
+        struct winsize w;
+        w.ws_xpixel = _windowWidth;
+        w.ws_ypixel = _windowHeight;
+        w.ws_col = _windowColumns;
+        w.ws_row = _windowLines;
+        ioctl(pty()->masterFd(), TIOCSWINSZ, &w);
+#endif
     }
+}
+
+void Pty::setPixelSize(int width, int height)
+{
+    _windowWidth = width;
+    _windowHeight = height;
 }
 
 QSize Pty::windowSize() const

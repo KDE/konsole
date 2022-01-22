@@ -90,6 +90,7 @@ public:
      * used by this teletype.
      */
     void setWindowSize(int columns, int lines);
+    void setPixelSize(int width, int height);
 
     /** Returns the size of the window used by this teletype.  See setWindowSize() */
     QSize windowSize() const;
@@ -163,6 +164,8 @@ private:
 
     int _windowColumns;
     int _windowLines;
+    int _windowWidth;
+    int _windowHeight;
     char _eraseChar;
     bool _xonXoff;
     bool _utf8;
