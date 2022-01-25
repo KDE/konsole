@@ -244,7 +244,10 @@ void Emulation::receiveData(const char *text, int length)
     // this check into the above for loop?
     auto *found = static_cast<const char *>(memchr(text, '\030', length));
     if (found) {
-        int startPos = text - found;
+        auto startPos = text - found;
+        if (startPos < 0) {
+            return;
+        }
         for (int i = startPos; i < length - 4; i++) {
             if (text[i] == '\030') {
                 if (qstrncmp(text + i + 1, "B00", 3) == 0) {
