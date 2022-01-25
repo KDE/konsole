@@ -50,7 +50,9 @@
 #include <KIO/CommandLauncherJob>
 
 #include <KIO/JobUiDelegate>
+#include <KIO/OpenFileManagerWindowJob>
 #include <KIO/OpenUrlJob>
+
 #include <KFileItemListProperties>
 
 #include <kconfigwidgets_version.h>
@@ -1120,39 +1122,19 @@ void SessionController::openBrowser()
     // so force open dolphin with  it selected.
     // TODO: and for people that have other default file browsers such as
     // konqueror and krusader?
+
     if (_currentHotSpot && _currentHotSpot->type() == HotSpot::File) {
         auto *fileHotSpot = qobject_cast<FileFilterHotSpot *>(_currentHotSpot.get());
         assert(fileHotSpot);
-        fileHotSpot->fileItem().url();
-
-        QDBusConnection bus = QDBusConnection::sessionBus();
-        QDBusMessage message = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.FileManager1"),
-                                                              QStringLiteral("/org/freedesktop/FileManager1"),
-                                                              QStringLiteral("org.freedesktop.FileManager1"),
-                                                              QStringLiteral("ShowItems"));
-
-        QList<QVariant> arguments;
-        arguments.append(QStringLiteral("URIs"));
-        arguments.append(fileHotSpot->fileItem().url().toLocalFile());
-
-        message.setArguments(arguments);
-        auto reply = bus.asyncCall(message);
-        reply.waitForFinished();
-
-        if (reply.isError()) {
-            // error launching via dbus, do the more manual way.
-            auto job = new KIO::CommandLauncherJob(QStringLiteral("dolphin"), {fileHotSpot->fileItem().url().toLocalFile(), QStringLiteral("--select")});
-            job->start();
-        }
-
-        return;
+        auto *job = new KIO::OpenFileManagerWindowJob();
+        job->setHighlightUrls({fileHotSpot->fileItem().url()});
+        job->start();
+    } else {
+        const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
+        auto *job = new KIO::OpenUrlJob(currentUrl);
+        job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+        job->start();
     }
-
-    const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
-
-    auto *job = new KIO::OpenUrlJob(currentUrl);
-    job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-    job->start();
 }
 
 void SessionController::copy()
