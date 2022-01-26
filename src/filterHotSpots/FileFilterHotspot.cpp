@@ -189,7 +189,7 @@ QList<QAction *> FileFilterHotSpot::setupMenu(QMenu *menu)
     _menuActions.setParent(this);
     _menuActions.setItemListProperties(itemProperties);
 #if KIO_VERSION < QT_VERSION_CHECK(5, 82, 0)
-    _menuActions.addOpenWithActionsTo(menu);
+    _menuActions->addOpenWithActionsTo(menu);
 
     // Here we added the actions to the last part of the menu, but we need to move them up.
     // TODO: As soon as addOpenWithActionsTo accepts a index, change this.
