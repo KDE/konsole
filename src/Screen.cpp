@@ -1020,10 +1020,12 @@ void Screen::scrollUp(int n)
     if (n < 1) {
         n = 1; // Default
     }
-    if (_topMargin == 0) {
-        addHistLine(); // history.history
+    for (int i = 0; i < n; i++) {
+        if (_topMargin == 0) {
+            addHistLine(); // history.history
+        }
+        scrollUp(_topMargin, 1);
     }
-    scrollUp(_topMargin, n);
 }
 
 QRect Screen::lastScrolledRegion() const
