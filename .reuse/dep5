@@ -3,3 +3,11 @@ Upstream-Name: konsole
 Upstream-Contact: Kurt Hindenburg <khindenburg@kde.org>
 Source: https://invent.kde.org/utilities/konsole
 
+
+Files: .gitignore .git-blame-ignore-revs .krazy .editorconfig
+Copyright: None
+License: CC0-1.0
+
+Files: desktop/konsole.qrc
+Copyright: None
+License: CC0-1.0
