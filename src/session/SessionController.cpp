@@ -16,9 +16,6 @@
 // Qt
 #include <QAction>
 #include <QApplication>
-#include <QDBusConnection>
-#include <QDBusMessage>
-#include <QDBusPendingCall>
 
 #include <QFileDialog>
 #include <QIcon>
