@@ -25,6 +25,7 @@
 #include "widgets/TerminalHeaderBar.h"
 
 #include "TerminalBell.h"
+#include "TerminalGraphics.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -382,6 +383,18 @@ public:
 
     // Used to show/hide the message widget
     void updateReadOnlyState(bool readonly);
+
+    void addPlacement(TerminalGraphicsPlacement_t *p);
+    TerminalGraphicsPlacement_t *getGraphicsPlacement(int i);
+    void scrollUpVisiblePlacements(int n);
+    void delPlacements(int = 'a', qint64 = 0, qint64 = -1, int = 0, int = 0, int = 0);
+    void selectPlacements(int i);
+
+    bool hasGraphics() const
+    {
+        return _hasGraphics;
+    }
+
 
 public Q_SLOTS:
     /**
@@ -772,6 +785,11 @@ private:
     std::unique_ptr<TerminalFont> _terminalFont;
 
     std::unique_ptr<KonsolePrintManager> _printManager;
+
+    std::map<int, QImage *> _graphicsImages;
+    QVector<TerminalGraphicsPlacement_t *> _graphicsPlacementsArray[2];
+    QVector<TerminalGraphicsPlacement_t *> *_graphicsPlacements;
+    bool _hasGraphics;
 };
 
 }

@@ -419,6 +419,29 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
         drawBackground(painter, rect, backgroundColor, false);
     }
 
+    const auto display = qobject_cast<TerminalDisplay *>(sender());
+    int placementIdx = 0;
+    qreal opacity = painter.opacity();
+    int scrollDelta = display->terminalFont()->fontHeight() * (display->screenWindow()->currentLine() - display->screenWindow()->screen()->getHistLines());
+    const bool origClipping = painter.hasClipping();
+    const auto origClipRegion = painter.clipRegion();
+    if (display->hasGraphics()) {
+        painter.setClipRect(rect);
+        while (1) {
+            TerminalGraphicsPlacement_t *p = display->getGraphicsPlacement(placementIdx);
+            if (!p || p->z >= 0)
+                break;
+            int x = p->col * display->terminalFont()->fontWidth() + p->X;
+            int y = p->row * display->terminalFont()->fontHeight() + p->Y;
+            QRectF srcRect(0, 0, p->pixmap.width(), p->pixmap.height());
+            QRectF dstRect(x, y - scrollDelta, p->pixmap.width(), p->pixmap.height());
+            painter.setOpacity(p->opacity);
+            painter.drawPixmap(dstRect, p->pixmap, srcRect);
+            placementIdx++;
+        }
+        painter.setOpacity(opacity);
+    }
+
     QColor characterColor = foregroundColor;
     if ((style.rendition & RE_CURSOR) != 0) {
         drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
@@ -426,6 +449,25 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
 
     // draw text
     drawCharacters(painter, rect, text, style, characterColor, lineProperty);
+
+    if (display->hasGraphics()) {
+        while (1) {
+            TerminalGraphicsPlacement_t *p = display->getGraphicsPlacement(placementIdx);
+            if (!p)
+                break;
+            QPixmap image = p->pixmap;
+            int x = p->col * display->terminalFont()->fontWidth() + p->X;
+            int y = p->row * display->terminalFont()->fontHeight() + p->Y;
+            QRectF srcRect(0, 0, image.width(), image.height());
+            QRectF dstRect(x, y - scrollDelta, image.width(), image.height());
+            painter.setOpacity(p->opacity);
+            painter.drawPixmap(dstRect, image, srcRect);
+            placementIdx++;
+        }
+        painter.setOpacity(opacity);
+        painter.setClipRegion(origClipRegion);
+        painter.setClipping(origClipping);
+    }
 }
 
 void TerminalPainter::drawPrinterFriendlyTextFragment(QPainter &painter,
