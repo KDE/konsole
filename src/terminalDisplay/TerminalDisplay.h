@@ -384,6 +384,13 @@ public:
     // Used to show/hide the message widget
     void updateReadOnlyState(bool readonly);
 
+    // For kitty graphics protocol - image cache
+    QImage *getGraphicsImage(int id);
+    void setGraphicsImage(int id, QImage *pixmap);
+    std::map<int, QImage *>::iterator getGraphicsImagesBegin();
+    std::map<int, QImage *>::iterator getGraphicsImagesEnd();
+    int getFreeGraphicsImageId();
+
     void addPlacement(TerminalGraphicsPlacement_t *p);
     TerminalGraphicsPlacement_t *getGraphicsPlacement(int i);
     void scrollUpVisiblePlacements(int n);

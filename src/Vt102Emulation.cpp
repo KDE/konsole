@@ -26,6 +26,9 @@
 #include "keyboardtranslator/KeyboardTranslator.h"
 #include "session/SessionController.h"
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalFonts.h"
+
+#include <zlib.h>
 
 using Konsole::Vt102Emulation;
 
@@ -69,6 +72,10 @@ Vt102Emulation::Vt102Emulation()
     QObject::connect(_sessionAttributesUpdateTimer, &QTimer::timeout, this, &Konsole::Vt102Emulation::updateSessionAttributes);
 
     initTokenizer();
+    imageData = QByteArray();
+    imageId = 0;
+    savedKeys = QMap<char, qint64>();
+    tokenData = QByteArray();
 }
 
 Vt102Emulation::~Vt102Emulation() = default;
@@ -243,6 +250,7 @@ void Vt102Emulation::resetTokenizer()
     argc = 0;
     argv[0] = 0;
     argv[1] = 0;
+    tokenState = -1;
 }
 
 void Vt102Emulation::addDigit(int digit)
@@ -341,6 +349,7 @@ void Vt102Emulation::initTokenizer()
 #define esp( )     (p >=  4  && s[2] == SP )
 #define epsp( )    (p >=  5  && s[3] == SP )
 #define osc        (tokenBufferPos >= 2 && tokenBuffer[1] == ']')
+#define apc        (tokenBufferPos >= 2 && tokenBuffer[1] == '_')
 #define ces(C)     (cc < 256 && (charClass[cc] & (C)) == (C))
 #define dcs        (p >= 2   && s[0] == ESC && s[1] == 'P')
 
@@ -369,11 +378,11 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
             // ignore control characters in the text part of osc (aka OSC) "ESC]"
             // escape sequences; this matches what XTERM docs say
             // Allow BEL and ESC here, it will either end the text or be removed later.
-            if (osc && cc != 0x1b && cc != 0x07) {
+            if ((osc || apc) && cc != 0x1b && cc != 0x07) {
                 continue;
             }
 
-            if (!osc) {
+            if (!osc && !apc) {
                 // DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
                 // This means, they do neither a resetTokenizer() nor a pushToToken(). Some of them, do
                 // of course. Guess this originates from a weakly layered handling of the X-on
@@ -479,11 +488,45 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     }
                 }
             }
+            // Application Program Command
+            if (p > 2 && s[1] == '_') {
+                // <ESC> '_' ... <ESC> '\'
+                if (p > 3 && s[2] == 'G') {
+                    if (tokenState == -1) {
+                        tokenStateChange = ";";
+                        tokenState = 0;
+                    } else if (tokenState >= 0) {
+                        if ((uint)tokenStateChange[tokenState] == s[p - 1]) {
+                            tokenState++;
+                            tokenPos = p;
+                            if ((uint)tokenState == strlen(tokenStateChange)) {
+                                tokenState = -2;
+                                tokenData.clear();
+                            }
+                            continue;
+                        }
+                    } else if (tokenState == -2) {
+                        if (p - tokenPos == 4) {
+                            tokenData.append(QByteArray::fromBase64(QString::fromUcs4(&tokenBuffer[tokenPos], 4).toLocal8Bit()));
+                            tokenBufferPos -= 4;
+                            continue;
+                        }
+                    }
+                }
+                if (s[p - 1] == 0x07 || (s[p - 2] == ESC && s[p - 1] == '\\')) {
+                    if (s[2] == 'G') {
+                        // Graphics command
+                        processGraphicsToken(p);
+                        resetTokenizer();
+                        continue;
+                    }
+                }
+            }
 
             /* clang-format off */
         // <ESC> ']' ...
         if (osc         ) { continue; }
-
+        if (apc         ) { continue; }
         if (p >= 3 && s[1] == '[') { // parsing a CSI sequence
             if (lec(3,2,'?')) { continue; }
             if (lec(3,2,'=')) { continue; }
@@ -750,6 +793,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         p->X = 0;
         p->Y = 0;
         p->opacity = 1.0;
+        p->scrolling = true;
         p->col = _currentScreen->getCursorX();
         p->row = _currentScreen->getCursorY();
         p->pixmap = QPixmap::fromImage(image);
@@ -1230,6 +1274,220 @@ void Vt102Emulation::processToken(int token, int p, int q)
     /* clang-format on */
 }
 
+void Vt102Emulation::processGraphicsToken(int tokenSize)
+{
+    QString value = QString::fromUcs4(&tokenBuffer[3], tokenSize - 4);
+    QStringList list;
+    QImage *image = NULL;
+
+    int dataPos = value.indexOf(QLatin1Char(';'));
+    if (dataPos == -1) {
+        dataPos = value.size() - 1;
+    }
+    if (dataPos > 1024) {
+        reportDecodingError();
+        return;
+    }
+    list = value.mid(0, dataPos).split(QLatin1Char(','));
+
+    QMap<char, qint64> keys; // Keys may be signed or unsigned 32 bit integers
+
+    if (savedKeys.empty()) {
+        keys['a'] = 't';
+        keys['t'] = 'd';
+        keys['q'] = 0;
+        keys['m'] = 0;
+        keys['f'] = 32;
+        keys['i'] = 0;
+        keys['o'] = 0;
+        keys['X'] = 0;
+        keys['Y'] = 0;
+        keys['x'] = 0;
+        keys['y'] = 0;
+        keys['z'] = 0;
+        keys['C'] = 0;
+        keys['c'] = 0;
+        keys['r'] = 0;
+        keys['A'] = 255;
+        keys['I'] = 0;
+        keys['d'] = 'a';
+        keys['p'] = -1;
+    } else {
+        keys = QMap<char, qint64>(savedKeys);
+    }
+
+    for (int i = 0; i < list.size(); i++) {
+        if (list.at(i).at(1).toLatin1() != '=') {
+            reportDecodingError();
+            return;
+        }
+        if (list.at(i).at(2).isNumber() || list.at(i).at(2).toLatin1() == '-')
+            keys[list.at(i).at(0).toLatin1()] = list.at(i).mid(2).toInt();
+        else
+            keys[list.at(i).at(0).toLatin1()] = list.at(i).at(2).toLatin1();
+    }
+
+    if (keys['a'] == 't' || keys['a'] == 'T' || keys['a'] == 'q') {
+        if (keys['q'] < 2 && keys['t'] != 'd') {
+            QString params = QStringLiteral("i=") + QString::number(keys['i']);
+            QString error = QStringLiteral("ENOTSUPPORTED:");
+            sendGraphicsReply(params, error);
+            return;
+        }
+        if (keys['I']) {
+            keys['i'] = _currentScreen->currentTerminalDisplay()->getFreeGraphicsImageId();
+        }
+        if (imageId != keys['i']) {
+            imageId = keys['i'];
+            imageData = QByteArray();
+        }
+        imageData.append(tokenData);
+        tokenData.clear();
+        imageData.append(QByteArray::fromBase64(value.mid(dataPos + 1).toLocal8Bit()));
+        if (keys['m'] == 0) {
+            QByteArray *out = new QByteArray();
+            if (keys['o'] == 'z') {
+                int alloc;
+                unsigned char *data = (unsigned char *)imageData.constData();
+                z_stream stream;
+                [[maybe_unused]] int ret;
+                if (keys['f'] == 24 || keys['f'] == 32) {
+                    int bpp = keys['f'] / 8;
+                    alloc = bpp * keys['s'] * keys['v'];
+                } else {
+                    alloc = 8 * 1024 * 1024;
+                }
+                out->resize(alloc);
+
+                /* allocate inflate state */
+                stream.zalloc = (alloc_func)Z_NULL;
+                stream.zfree = (free_func)Z_NULL;
+                stream.opaque = (voidpf)Z_NULL;
+                stream.avail_in = imageData.size(); // size of input
+                stream.next_in = (Bytef *)data; // input char array
+                stream.avail_out = out->size(); // size of output
+                stream.next_out = (Bytef *)out->constData(); // output char array
+
+                ret = inflateInit(&stream);
+                inflate(&stream, Z_NO_FLUSH);
+                inflateEnd(&stream);
+
+                if (keys['f'] != 24 && keys['f'] != 32) {
+                    imageData.clear();
+                    imageData.append(*out);
+                }
+            } else {
+                out = NULL;
+            }
+            if (keys['f'] == 24 || keys['f'] == 32) {
+                enum QImage::Format format = keys['f'] == 24 ? QImage::Format_RGB888 : QImage::Format_RGBA8888;
+                if (!out) {
+                    out = new QByteArray(imageData.constData(), imageData.size());
+                }
+                image = new QImage((unsigned char *)out->constData(), 0 + keys['s'], 0 + keys['v'], 0 + keys['s'] * keys['f'] / 8, format);
+            } else {
+                image = new QImage();
+                if (!out) {
+                    out = &imageData;
+                }
+                image->loadFromData(*out);
+            }
+
+            if (keys['a'] == 'q') {
+                QString params = QStringLiteral("i=") + QString::number(keys['i']);
+                sendGraphicsReply(params, QString());
+            } else {
+                if (keys['i'])
+                    _currentScreen->currentTerminalDisplay()->setGraphicsImage(keys['i'], image);
+                if (keys['q'] == 0 && keys['a'] == 't') {
+                    QString params = QStringLiteral("i=") + QString::number(keys['i']);
+                    if (keys['I'])
+                        params = params + QStringLiteral(",I=") + QString::number(keys['I']);
+                    sendGraphicsReply(params, QString());
+                }
+            }
+            imageId = 0;
+            imageData = QByteArray();
+            savedKeys = QMap<char, qint64>();
+        } else {
+            if (savedKeys.empty()) {
+                savedKeys = QMap<char, qint64>(keys);
+                savedKeys.remove('m');
+            }
+        }
+    }
+    if (keys['a'] == 'p' || (keys['a'] == 'T' && keys['m'] == 0)) {
+        TerminalGraphicsPlacement_t *p;
+        if (keys['i'])
+            image = _currentScreen->currentTerminalDisplay()->getGraphicsImage(keys['i']);
+
+        if (image) {
+            p = new TerminalGraphicsPlacement_t();
+            p->id = keys['i'];
+            p->pid = keys['p'];
+            p->z = keys['z'];
+            p->X = keys['X'];
+            p->Y = keys['Y'];
+            p->opacity = (qreal)keys['A'];
+            p->scrolling = true;
+            p->col = _currentScreen->getCursorX();
+            p->row = _currentScreen->getCursorY();
+            p->pixmap = QPixmap::fromImage(*image);
+            if (keys['x'] || keys['y'] || keys['w'] || keys['h']) {
+                int w = keys['w'] ? keys['w'] : p->pixmap.width() - keys['x'];
+                int h = keys['h'] ? keys['h'] : p->pixmap.height() - keys['y'];
+                p->pixmap = p->pixmap.copy(keys['x'], keys['y'], w, h);
+            }
+            if (keys['c'] && keys['r']) {
+                p->pixmap = p->pixmap.scaled(keys['c'] * _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth(),
+                                             keys['r'] * _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight());
+            }
+            int rows = (p->Y + p->pixmap.height()) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight();
+            int cols = (p->X + p->pixmap.width() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth();
+            p->cols = cols;
+            p->rows = rows;
+            int needScroll = p->row + p->rows - _currentScreen->bottomMargin();
+            if (needScroll < 0)
+                needScroll = 0;
+            if (needScroll > 0)
+                _currentScreen->scrollUp(needScroll);
+            p->row -= needScroll;
+            _currentScreen->currentTerminalDisplay()->addPlacement(p);
+            if (keys['C'] == 0) {
+                _currentScreen->cursorDown(rows - needScroll);
+                _currentScreen->cursorRight(cols);
+            }
+            if (keys['q'] == 0 && keys['i']) {
+                QString params = QStringLiteral("i=") + QString::number(keys['i']);
+                if (keys['I'])
+                    params = params + QStringLiteral(",I=") + QString::number(keys['I']);
+                if (keys['p'] >= 0)
+                    params = params + QStringLiteral(",p=") + QString::number(keys['p']);
+                sendGraphicsReply(params, QString());
+            }
+        } else {
+            if (keys['q'] < 2) {
+                QString params = QStringLiteral("i=") + QString::number(keys['i']);
+                sendGraphicsReply(params, QStringLiteral("ENOENT:No such image"));
+            }
+        }
+    }
+    if (keys['a'] == 'd') {
+        int action = keys['d'] | 0x20;
+        int id = keys['i'];
+        int pid = keys['p'];
+        int x = keys['x'];
+        int y = keys['y'];
+        if (action == 'n') {
+        } else if (action == 'c') {
+            action = 'p';
+            x = _currentScreen->getCursorX();
+            y = _currentScreen->getCursorY();
+        }
+        _currentScreen->currentTerminalDisplay()->delPlacements(action, id, pid, x, y, keys['z']);
+    }
+}
+
 void Vt102Emulation::clearScreenAndSetColumns(int columnCount)
 {
     setImageSize(_currentScreen->getLines(), columnCount);
@@ -1241,6 +1499,12 @@ void Vt102Emulation::clearScreenAndSetColumns(int columnCount)
 void Vt102Emulation::sendString(const QByteArray &s)
 {
     Q_EMIT sendData(s);
+}
+
+void Vt102Emulation::sendGraphicsReply(QString params, QString error)
+{
+    sendString(
+        (QStringLiteral("\033_G") + params + QStringLiteral(";") + (error.isEmpty() ? QStringLiteral("OK") : error) + QStringLiteral("\033\\")).toLatin1());
 }
 
 void Vt102Emulation::reportCursorPosition()

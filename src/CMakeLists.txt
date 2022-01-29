@@ -230,6 +230,8 @@ qt5_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
 add_library(konsoleprivate ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 
+find_package(ZLIB)
+
 target_link_libraries(konsoleprivate
     PUBLIC
     konsoleprivate_core
@@ -241,6 +243,7 @@ target_link_libraries(konsoleprivate
     konsolecharacters
     konsoledecoders
     ${konsole_LIBS}
+    ZLIB::ZLIB
 )
 
 set_target_properties(konsoleprivate PROPERTIES

@@ -10,6 +10,7 @@
 
 // Qt
 #include <QHash>
+#include <QMap>
 #include <QPair>
 #include <QVector>
 
@@ -128,18 +129,29 @@ private:
     int argv[MAXARGS];
     int argc;
     void initTokenizer();
+    // State machine for escape sequences containing large amount of data
+    int tokenState;
+    const char *tokenStateChange;
+    int tokenPos;
+    QByteArray tokenData;
 
     // Set of flags for each of the ASCII characters which indicates
     // what category they fall into (printable character, control, digit etc.)
     // for the purposes of decoding terminal output
     int charClass[256];
 
+    QByteArray imageData;
+    quint32 imageId;
+    QMap<char, qint64> savedKeys;
+
     void reportDecodingError();
 
     void processToken(int code, int p, int q);
     void processSessionAttributeRequest(int tokenSize);
     void processChecksumRequest(int argc, int argv[]);
+    void processGraphicsToken(int tokenSize);
 
+    void sendGraphicsReply(QString params, QString error);
     void reportTerminalType();
     void reportTertiaryAttributes();
     void reportSecondaryAttributes();

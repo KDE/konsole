@@ -2952,6 +2952,39 @@ int TerminalDisplay::selectionState() const
     return _actSel;
 }
 
+QImage *TerminalDisplay::getGraphicsImage(int id)
+{
+    if (_graphicsImages.count(id)) {
+        return _graphicsImages[id];
+    }
+    return NULL;
+}
+
+void TerminalDisplay::setGraphicsImage(int id, QImage *pixmap)
+{
+    _graphicsImages[id] = pixmap;
+}
+
+std::map<int, QImage *>::iterator TerminalDisplay::getGraphicsImagesBegin()
+{
+    return _graphicsImages.begin();
+}
+
+std::map<int, QImage *>::iterator TerminalDisplay::getGraphicsImagesEnd()
+{
+    return _graphicsImages.end();
+}
+
+int TerminalDisplay::getFreeGraphicsImageId()
+{
+    int i = 1;
+    while (1) {
+        if (!_graphicsImages.count(i))
+            return i;
+        i++;
+    }
+}
+
 void TerminalDisplay::addPlacement(TerminalGraphicsPlacement_t *p)
 {
     int i;
