@@ -436,6 +436,48 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     resetTokenizer();
                     continue;
                 }
+                // Special case: iterm file protocol is a long escape sequence
+                if (tokenState == -1) {
+                    tokenStateChange = "1337;File=:";
+                    tokenState = 0;
+                } else if (tokenState >= 0) {
+                    if ((uint)tokenStateChange[tokenState] == s[p - 1]) {
+                        tokenState++;
+                        tokenPos = p;
+                        if ((uint)tokenState == strlen(tokenStateChange)) {
+                            tokenState = -2;
+                            tokenData.clear();
+                        }
+                        continue;
+                    }
+                } else if (tokenState == -2) {
+                    if (p - tokenPos == 4) {
+                        tokenData.append(QByteArray::fromBase64(QString::fromUcs4(&tokenBuffer[tokenPos], 4).toLocal8Bit()));
+                        tokenBufferPos -= 4;
+                        continue;
+                    }
+                }
+                // Special case: Session::Wallpaper is a long escape sequence
+                if (tokenState == -1) {
+                    tokenStateChange = "114502;,,";
+                    tokenState = 0;
+                } else if (tokenState >= 0) {
+                    if ((uint)tokenStateChange[tokenState] == s[p - 1]) {
+                        tokenState++;
+                        tokenPos = p;
+                        if ((uint)tokenState == strlen(tokenStateChange)) {
+                            tokenState = -2;
+                            tokenData.clear();
+                        }
+                        continue;
+                    }
+                } else if (tokenState == -2) {
+                    if (p - tokenPos == 4) {
+                        tokenData.append(QByteArray::fromBase64(QString::fromUcs4(&tokenBuffer[tokenPos], 4).toLocal8Bit()));
+                        tokenBufferPos -= 4;
+                        continue;
+                    }
+                }
             }
 
             /* clang-format off */
@@ -650,6 +692,90 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         }
     }
 
+    if (attribute == 1337) {
+        if (!value.startsWith(QLatin1String("File=")))
+            return;
+        int pos = value.indexOf(QLatin1Char(':'));
+        QStringList params = value.mid(5, pos - 5).split(QLatin1Char(';'));
+        int keepAspect = 1;
+        int scaledWidth = 0;
+        int scaledHeight = 0;
+        for (const auto &p : params) {
+            int eq = p.indexOf(QLatin1Char('='));
+            if (eq > 0) {
+                QString var = p.mid(0, eq);
+                QString val = p.mid(eq + 1);
+                if (var == QLatin1String("inline")) {
+                    if (val != QLatin1String("1"))
+                        return;
+                }
+                if (var == QLatin1String("preserveAspectRatio")) {
+                    if (val == QLatin1String("0"))
+                        keepAspect = 0;
+                }
+                if (var == QLatin1String("width")) {
+                    int unitPos = val.toStdString().find_first_not_of("0123456789");
+                    scaledWidth = val.mid(0, unitPos).toInt();
+                    if (unitPos == -1) {
+                        scaledWidth *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth();
+                    } else {
+                        if (val.mid(unitPos) == QLatin1String("%")) {
+                            scaledWidth *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth() * _currentScreen->getColumns() / 100;
+                        }
+                    }
+                }
+                if (var == QLatin1String("height")) {
+                    int unitPos = val.toStdString().find_first_not_of("0123456789");
+                    scaledHeight = val.mid(0, unitPos).toInt();
+                    if (unitPos == -1) {
+                        scaledHeight *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight();
+                    } else {
+                        if (val.mid(unitPos) == QLatin1String("%")) {
+                            scaledHeight *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight() * _currentScreen->getLines() / 100;
+                        }
+                    }
+                }
+            }
+        }
+
+        QImage image;
+
+        image.loadFromData(tokenData);
+        if (image.isNull())
+            return;
+        TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t();
+        p->id = -1;
+        p->pid = -1;
+        p->z = 1;
+        p->X = 0;
+        p->Y = 0;
+        p->opacity = 1.0;
+        p->col = _currentScreen->getCursorX();
+        p->row = _currentScreen->getCursorY();
+        p->pixmap = QPixmap::fromImage(image);
+        if (scaledWidth && scaledHeight) {
+            p->pixmap = p->pixmap.scaled(scaledWidth, scaledHeight, (Qt::AspectRatioMode)keepAspect);
+        } else {
+            if (keepAspect && scaledWidth) {
+                p->pixmap = p->pixmap.scaledToWidth(scaledWidth);
+            } else if (keepAspect && scaledHeight) {
+                p->pixmap = p->pixmap.scaledToHeight(scaledHeight);
+            }
+        }
+        int rows = (p->pixmap.height() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight() + 1;
+        int cols = (p->pixmap.width() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth() + 1;
+        p->cols = cols;
+        p->rows = rows;
+        int needScroll = p->row + p->rows - _currentScreen->bottomMargin() - 1;
+        if (needScroll < 0)
+            needScroll = 0;
+        if (needScroll > 0)
+            _currentScreen->scrollUp(needScroll);
+        p->row -= needScroll;
+        _currentScreen->currentTerminalDisplay()->addPlacement(p);
+        _currentScreen->cursorDown(rows - needScroll);
+        _currentScreen->cursorRight(cols);
+    }
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
 }
