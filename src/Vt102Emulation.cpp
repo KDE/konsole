@@ -25,6 +25,7 @@
 #include "EscapeSequenceUrlExtractor.h"
 #include "keyboardtranslator/KeyboardTranslator.h"
 #include "session/SessionController.h"
+#include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
 
@@ -340,6 +341,7 @@ void Vt102Emulation::initTokenizer()
 #define lec(P,L,C) (p == (P) && s[(L)] == (C))
 #define les(P,L,C) (p == (P) && s[L] < 256 && (charClass[s[(L)]] & (C)) == (C))
 #define eec(C)     (p >=  3  && cc == (C))
+#define ccc(C)     (cc < 256 && (charClass[cc] & (C)) == (C))
 #define ees(C)     (p >=  3  && cc < 256 && (charClass[cc] & (C)) == (C))
 #define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '!' && s[2] != '=' && s[2] != '>' && cc < 256 && (charClass[cc] & (C)) == (C) && (charClass[s[p-2]] & (INT)) != (INT) )
 #define epp( )     (p >=  3  && s[2] == '?')
@@ -349,9 +351,11 @@ void Vt102Emulation::initTokenizer()
 #define esp( )     (p >=  4  && s[2] == SP )
 #define epsp( )    (p >=  5  && s[3] == SP )
 #define osc        (tokenBufferPos >= 2 && tokenBuffer[1] == ']')
+//#define apc(C)     (p >= 3 && s[1] == '_' && s[2] == C)
 #define apc        (tokenBufferPos >= 2 && tokenBuffer[1] == '_')
 #define ces(C)     (cc < 256 && (charClass[cc] & (C)) == (C))
 #define dcs        (p >= 2   && s[0] == ESC && s[1] == 'P')
+#define sixel( )   (p == 1 && cc >= '?' && cc <= '~')
 
 /* clang-format on */
 
@@ -369,7 +373,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
         }
 
         // early out for displayable characters
-        if (getMode(MODE_Ansi) && tokenBufferPos == 0 && cc >= 32 && cc != (ESC + 128)) {
+        if (!getMode(MODE_Sixel) && getMode(MODE_Ansi) && tokenBufferPos == 0 && cc >= 32 && cc != (ESC + 128)) {
             _currentScreen->displayCharacter(applyCharset(cc));
             continue;
         }
@@ -401,6 +405,10 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
 
         uint *s = tokenBuffer;
         const int p = tokenBufferPos;
+
+        if (getMode(MODE_Sixel) && processSixel(cc)) {
+            continue;
+        }
 
         if (getMode(MODE_Ansi)) {
             if (lec(1, 0, ESC)) {
@@ -574,7 +582,18 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 }
             }
         } else {
-            if (dcs         ) { continue; /* TODO We don't xterm DCS, so we just eat it */ }
+            if (dcs) {
+                // Check for Sixel DCS q
+                if (p > 2 && cc == 'q') {
+                    setMode(MODE_Sixel);
+                    // This parameter appers to be ignored
+                    // m_preserveBackground = argv[2] == 1;
+                    resetTokenizer();
+                }
+                if (ccc(DIG)) { addDigit(cc-'0');}
+                if (cc == ';') { addArgument();}
+                continue;
+            }
             if (lec(2,0,ESC)) { processToken(token_esc(s[1]), 0, 0);              resetTokenizer(); continue; }
             if (les(3,1,SCS)) { processToken(token_esc_cs(s[1],s[2]), 0, 0);      resetTokenizer(); continue; }
             if (lec(3,1,'#')) { processToken(token_esc_de(s[2]), 0, 0);           resetTokenizer(); continue; }
@@ -913,6 +932,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_esc('>'      ) :        resetMode      (MODE_AppKeyPad); break;
     case token_esc('<'      ) :          setMode      (MODE_Ansi     ); break; //VT100
 
+    case token_esc('\\'      ) :       resetMode      (MODE_Sixel    ); break;
+
     case token_esc_cs('(', '0') :      setCharset           (0,    '0'); break; //VT100
     case token_esc_cs('(', 'A') :      setCharset           (0,    'A'); break; //VT100
     case token_esc_cs('(', 'B') :      setCharset           (0,    'B'); break; //VT100
@@ -1150,6 +1171,9 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s',  67) : /* IGNORED: DECBKM                   */ break; //XTERM
     case token_csi_pr('r',  67) : /* IGNORED: DECBKM                   */ break; //XTERM
 
+    case token_csi_pr('h',  80) : m_SixelScrolling = true;                break; //XTERM
+    case token_csi_pr('l',  80) : m_SixelScrolling = false;               break; //XTERM
+
     // XTerm defines the following modes:
     // SET_VT200_MOUSE             1000
     // SET_VT200_HIGHLIGHT_MOUSE   1001
@@ -1230,6 +1254,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s', 2004) :         saveMode      (MODE_BracketedPaste); break; //XTERM
     case token_csi_pr('r', 2004) :      restoreMode      (MODE_BracketedPaste); break; //XTERM
 
+    case token_csi_pr('S', 1) : if(argv[2]==1||argv[2]==4)sendString("\033[?1;0;256S"); break;
     // Set Cursor Style (DECSCUSR), VT520, with the extra xterm sequences
     // the first one is a special case, 'ESC[ q', which mimics 'ESC[1 q'
     // Using 0 to reset to default is matching VTE, but not any official standard.
@@ -1545,7 +1570,7 @@ void Vt102Emulation::reportTerminalType()
     // VT101:  ^[[?1;0c
     // VT102:  ^[[?6v
     if (getMode(MODE_Ansi)) {
-        sendString("\033[?1;2c"); // I'm a VT100
+        sendString("\033[?63;1;2;3;4;6;7;8c"); // VT320 with Sixel
     } else {
         sendString("\033/Z"); // I'm a VT52
     }
@@ -2126,4 +2151,316 @@ void Vt102Emulation::reportDecodingError()
 
     QString outputError = QStringLiteral("Undecodable sequence: ");
     outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
+}
+
+void Vt102Emulation::SixelModeEnable(int width, int height)
+{
+    if (width <= 0 || height <= 0) {
+        return;
+    }
+    m_actualSize = QSize(width, height);
+
+    // We assume square pixels because I'm lazy and didn't implement the stuff in vt102emulation.
+    int charactersWidth = width / 6 + 1;
+    int charactersHeight = height / 6 + 1;
+
+    m_currentImage = QImage(charactersWidth * 6 + 1, charactersHeight * 6 + 1, QImage::Format_Indexed8);
+    m_currentColor = 2;
+    m_currentX = 0;
+    m_verticalPosition = 0;
+    if (!m_currentImage.isNull()) {
+        m_SixelStarted = true;
+    }
+    m_currentImage.fill(0);
+    const QColor *colors = _currentScreen->currentTerminalDisplay()->terminalColor()->colorTable();
+    for (int i = 2; i < TABLE_COLORS; i++) {
+        m_currentImage.setColor(i - 2, colors[i].rgb());
+    }
+}
+
+void Vt102Emulation::SixelModeDisable()
+{
+    if (!m_SixelStarted) {
+        return;
+    }
+    m_SixelStarted = false;
+    TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t();
+    p->id = -1;
+    p->pid = -1;
+    p->z = 1;
+    p->X = 0;
+    p->Y = 0;
+    p->opacity = 1.0;
+    p->scrolling = m_SixelScrolling;
+    if (m_SixelScrolling) {
+        p->col = _currentScreen->getCursorX();
+        p->row = _currentScreen->getCursorY();
+    } else {
+        p->col = 0;
+        p->row = 0;
+    }
+    p->pixmap = QPixmap::fromImage(m_currentImage.copy(QRect(0, 0, m_actualSize.width(), m_actualSize.height())));
+    if (m_aspect != 1) {
+        p->pixmap = p->pixmap.scaled(p->pixmap.width(), m_aspect * p->pixmap.height());
+    }
+    int rows = (p->pixmap.height() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight() + 1;
+    int cols = (p->pixmap.width() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth() + 1;
+    p->cols = cols;
+    p->rows = rows;
+    if (m_SixelScrolling) {
+        int needScroll = p->row + p->rows - _currentScreen->bottomMargin();
+        if (needScroll < 0)
+            needScroll = 0;
+        if (needScroll > 0)
+            _currentScreen->scrollUp(needScroll);
+        p->row -= needScroll;
+        _currentScreen->cursorDown(rows - needScroll);
+        //_currentScreen->cursorRight(cols);
+    }
+    _currentScreen->currentTerminalDisplay()->addPlacement(p);
+}
+
+void Vt102Emulation::SixelColorChangeRGB(const int index, int red, int green, int blue)
+{
+    if (index < 0) {
+        return;
+    }
+
+    red = red * 255 / 100;
+    green = green * 255 / 100;
+    blue = blue * 255 / 100;
+
+    // QImage automatically handles the size of the color table
+    m_currentImage.setColor(index, qRgb(red, green, blue));
+    m_currentColor = index;
+}
+
+void Vt102Emulation::SixelColorChangeHSL(const int index, int hue, int saturation, int value)
+{
+    if (index < 0) {
+        return;
+    }
+
+    hue = qBound(0, hue, 360);
+    saturation = qBound(0, saturation, 100);
+    value = qBound(0, value, 100);
+
+    // libsixel is offset by 240 degrees, so we assume that is correct
+    hue = (hue + 240) % 360;
+
+    saturation = saturation * 255 / 100;
+    value = value * 255 / 100;
+
+    m_currentImage.setColor(index, QColor::fromHsl(hue, saturation, value).rgb());
+    m_currentColor = index;
+}
+
+void Vt102Emulation::SixelCharacterAdd(uint8_t character)
+{
+    if (!m_SixelStarted) {
+        return;
+    }
+
+    switch (character) {
+    case '\r':
+        m_currentX = 0;
+        return;
+    case '\n':
+        m_verticalPosition++;
+        return;
+    default:
+        break;
+    }
+    character -= '?';
+    const int top = m_verticalPosition * 6;
+    const int bottom = (m_verticalPosition + 1) * 6;
+
+    if (bottom >= m_currentImage.height() - 1 || m_currentX >= m_currentImage.width() - 1) {
+        // If we copy out of bounds it gets filled with 0
+        int newWidth = (qMax(m_currentX + 256, m_currentImage.width() + 256) / 6 + 1) * 6;
+        int newHeight = (qMax(bottom + 256, m_currentImage.height() + 256) / 6 + 1) * 6;
+        m_currentImage = m_currentImage.copy(0, 0, newWidth, newHeight);
+        if (m_currentImage.isNull()) {
+            m_SixelStarted = false;
+            return;
+        }
+    }
+    if (m_currentX > m_actualSize.width()) {
+        m_actualSize.setWidth(m_currentX);
+    }
+    if (bottom > m_actualSize.height()) {
+        m_actualSize.setHeight(bottom);
+    }
+
+    const ptrdiff_t bpl = m_currentImage.bytesPerLine();
+    uchar *data = m_currentImage.bits() + top * bpl + m_currentX;
+
+    if (m_preserveBackground) {
+        // Konsole is built without _any_ optimizations by default, so a little
+        // manual unrolling to avoid calling shift for every loop iteration.
+        if (character & (1 << 0)) {
+            data[0 * bpl] = m_currentColor;
+        }
+        if (character & (1 << 1)) {
+            data[1 * bpl] = m_currentColor;
+        }
+        if (character & (1 << 2)) {
+            data[2 * bpl] = m_currentColor;
+        }
+        if (character & (1 << 3)) {
+            data[3 * bpl] = m_currentColor;
+        }
+        if (character & (1 << 4)) {
+            data[4 * bpl] = m_currentColor;
+        }
+        if (character & (1 << 5)) {
+            data[5 * bpl] = m_currentColor;
+        }
+    } else {
+        for (int i = 0; i < 6; i++, data += bpl) {
+            *data = (character & (1 << i)) * m_currentColor;
+        }
+    }
+    m_currentX++;
+}
+
+bool Vt102Emulation::processSixel(uint cc)
+{
+    // std::cerr << "processSixel " << cc << std::endl;
+    if (cc == ESC) {
+        return false;
+    }
+
+    switch (cc) {
+    case '$':
+        SixelCharacterAdd('\r');
+        resetTokenizer();
+        return true;
+    case '-':
+        SixelCharacterAdd('\r');
+        SixelCharacterAdd('\n');
+        resetTokenizer();
+        return true;
+    default:
+        break;
+    }
+    uint *s = tokenBuffer;
+    const int p = tokenBufferPos;
+
+    if (p >= 2 && s[0] == ESC && s[1] == '\\') {
+        resetMode(MODE_Sixel);
+        SixelModeDisable();
+        resetTokenizer();
+        return true;
+    }
+    if (!m_SixelStarted && (sixel() || s[0] == '!' || s[0] == '#')) {
+        m_aspect = 1;
+        SixelModeEnable(30, 6);
+    }
+    if (sixel()) {
+        SixelCharacterAdd(uint8_t(cc));
+        resetTokenizer();
+        return true;
+    }
+    if (ccc(DIG)) {
+        addDigit(cc - '0');
+        return true;
+    }
+    if (cc == ';') {
+        addArgument();
+        return true;
+    }
+
+    if (s[0] == '"') {
+        if (p < 3) {
+            return true;
+        }
+        addArgument();
+
+        if (argc == 4) {
+            // We just ignore the pixel aspect ratio, it's dumb
+            // const int pixelWidth = argv[0];
+            // const int pixelHeight = argv[1];
+
+            if (!m_SixelStarted) {
+                m_aspect = (qreal)argv[0] / argv[1];
+                const int width = argv[2];
+                const int height = argv[3];
+                SixelModeEnable(width, height);
+            }
+            resetTokenizer();
+            receiveChars(QVector<uint>{cc}); // re-send the actual character
+            return true;
+        }
+        puts("Invalid raster definition");
+        for (int i = 0; i < argc; i++) {
+            printf("%d ", argv[i]);
+        }
+        puts("");
+        return false;
+    }
+
+    // Repeat character
+    if (s[0] == '!') {
+        if (p < 2) {
+            return true;
+        }
+        if (ces(DIG)) {
+            addDigit(cc - '0');
+            return true;
+        }
+
+        // We could optimize this, but meh
+        for (int i = 0; i < argv[0]; i++) {
+            SixelCharacterAdd(cc);
+        }
+        resetTokenizer();
+        return true;
+    }
+
+    if (s[0] == '#') {
+        if (p < 2) {
+            return true;
+        }
+        addArgument();
+        if (argc < 1) {
+            return false;
+        }
+        const int index = argv[0];
+        if (argc == 5) {
+            const int colorspace = argv[1];
+            switch (colorspace) {
+            case 1:
+                // Confusingly it is in HLS order...
+                SixelColorChangeHSL(index, argv[2], argv[4], argv[3]);
+                break;
+            case 2:
+                SixelColorChangeRGB(index, argv[2], argv[3], argv[4]);
+                break;
+            default:
+                printf("Invalid sixel colorspace %d\n", colorspace);
+                return false;
+            }
+        } else if (argc == 1 && argv[0] >= 0) { // could check max, but people should be able to do what they want idc
+            m_currentColor = index;
+        } else {
+            printf("Invalid %d\n", argc);
+            return false;
+        }
+        resetTokenizer();
+        receiveChars(QVector<uint>{cc}); // re-send the actual character
+        return true;
+    }
+    printf("Failed to parse sixel, leftover: ");
+    if (cc == ESC) {
+        printf("ESC ");
+    } else {
+        printf("%c ", char(cc));
+    }
+    if (s[0] == ESC) {
+        printf("ESC ");
+    } else {
+        printf("%c ", char(s[0]));
+    }
+    return false;
 }

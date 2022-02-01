@@ -35,7 +35,8 @@ class QKeyEvent;
 #define MODE_132Columns (MODES_SCREEN + 11) // 80 <-> 132 column mode switch (DECCOLM)
 #define MODE_Allow132Columns (MODES_SCREEN + 12) // Allow DECCOLM mode
 #define MODE_BracketedPaste (MODES_SCREEN + 13) // Xterm-style bracketed paste mode
-#define MODE_total (MODES_SCREEN + 14)
+#define MODE_Sixel (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
+#define MODE_total (MODES_SCREEN + 15)
 
 namespace Konsole
 {
@@ -191,6 +192,25 @@ private:
     QTimer *_sessionAttributesUpdateTimer;
 
     bool _reportFocusEvents;
+
+    // Sixel:
+    bool processSixel(uint cc);
+    void SixelModeEnable(int width, int height /*, bool preserveBackground*/);
+    void SixelModeDisable();
+    void SixelColorChangeRGB(const int index, int red, int green, int blue);
+    void SixelColorChangeHSL(const int index, int hue, int saturation, int value);
+    void SixelCharacterAdd(uint8_t character);
+    bool m_SixelStarted = false;
+    QImage m_currentImage;
+    int m_currentX = 0;
+    int m_verticalPosition = 0;
+    uint8_t m_currentColor = 0;
+    bool m_preserveBackground = true;
+    int m_previousWidth = 128;
+    int m_previousHeight = 32;
+    qreal m_aspect = 1.0;
+    bool m_SixelScrolling = true;
+    QSize m_actualSize; // For efficiency reasons, we keep the image in memory larger than what the end result is
 };
 
 }
