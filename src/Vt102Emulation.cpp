@@ -2276,7 +2276,6 @@ void Vt102Emulation::SixelCharacterAdd(uint8_t character)
 
 bool Vt102Emulation::processSixel(uint cc)
 {
-    // std::cerr << "processSixel " << cc << std::endl;
     if (cc == ESC) {
         return false;
     }
@@ -2342,11 +2341,6 @@ bool Vt102Emulation::processSixel(uint cc)
             receiveChars(QVector<uint>{cc}); // re-send the actual character
             return true;
         }
-        puts("Invalid raster definition");
-        for (int i = 0; i < argc; i++) {
-            printf("%d ", argv[i]);
-        }
-        puts("");
         return false;
     }
 
@@ -2388,29 +2382,16 @@ bool Vt102Emulation::processSixel(uint cc)
                 SixelColorChangeRGB(index, argv[2], argv[3], argv[4]);
                 break;
             default:
-                printf("Invalid sixel colorspace %d\n", colorspace);
                 return false;
             }
         } else if (argc == 1 && argv[0] >= 0) { // could check max, but people should be able to do what they want idc
             m_currentColor = index;
         } else {
-            printf("Invalid %d\n", argc);
             return false;
         }
         resetTokenizer();
         receiveChars(QVector<uint>{cc}); // re-send the actual character
         return true;
-    }
-    printf("Failed to parse sixel, leftover: ");
-    if (cc == ESC) {
-        printf("ESC ");
-    } else {
-        printf("%c ", char(cc));
-    }
-    if (s[0] == ESC) {
-        printf("ESC ");
-    } else {
-        printf("%c ", char(s[0]));
     }
     return false;
 }
