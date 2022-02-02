@@ -487,9 +487,17 @@ void Screen::resizeImage(int new_lines, int new_columns)
             // It needs to identify the 'zsh' and calculate the new command line.
             auto sessionController = _currentTerminalDisplay->sessionController();
             auto terminal = sessionController->session()->foregroundProcessName();
-            if (terminal == QLatin1String("zsh") && cursorLine > 0 && (_lineProperties.at(cursorLine - 1) & LINE_WRAPPED) != 0) {
-                while (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection - 1) & LINE_WRAPPED) != 0) {
+            if (terminal == QLatin1String("zsh")) {
+                while (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection) & LINE_PROMPT_START) == 0) {
                     --cursorLineCorrection;
+                }
+                if (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection) & LINE_PROMPT_START) != 0) {
+                    _lineProperties[cursorLine + cursorLineCorrection - 1] &= ~LINE_WRAPPED;
+                } else {
+                    cursorLineCorrection = 0;
+                    while (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection - 1) & LINE_WRAPPED) != 0) {
+                        --cursorLineCorrection;
+                    }
                 }
             }
         }

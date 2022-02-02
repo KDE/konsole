@@ -734,6 +734,12 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         return;
     }
 
+    if (attribute == 133) {
+        if (value == QLatin1String("A")) {
+            _currentScreen->setLineProperty(LINE_PROMPT_START, true);
+        }
+    }
+
     if (value == QLatin1String("?")) {
         // pass terminator type indication here, because OSC response terminator
         // should match the terminator of OSC request.
