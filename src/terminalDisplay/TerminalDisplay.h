@@ -392,6 +392,18 @@ public:
     int getFreeGraphicsImageId();
 
     void addPlacement(TerminalGraphicsPlacement_t *p);
+    int addPlacement(QPixmap pixmap,
+                     int &rows,
+                     int &cols,
+                     int row = -1,
+                     int col = -1,
+                     bool scrolling = true,
+                     int z = 1,
+                     int id = -1,
+                     int pid = -1,
+                     qreal opacity = 1.0,
+                     int X = 0,
+                     int Y = 0);
     TerminalGraphicsPlacement_t *getGraphicsPlacement(int i);
     void scrollUpVisiblePlacements(int n);
     void delPlacements(int = 'a', qint64 = 0, qint64 = -1, int = 0, int = 0, int = 0);

@@ -805,37 +805,20 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         image.loadFromData(tokenData);
         if (image.isNull())
             return;
-        TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t();
-        p->id = -1;
-        p->pid = -1;
-        p->z = 1;
-        p->X = 0;
-        p->Y = 0;
-        p->opacity = 1.0;
-        p->scrolling = true;
-        p->col = _currentScreen->getCursorX();
-        p->row = _currentScreen->getCursorY();
-        p->pixmap = QPixmap::fromImage(image);
+        QPixmap pixmap = QPixmap::fromImage(image);
         if (scaledWidth && scaledHeight) {
-            p->pixmap = p->pixmap.scaled(scaledWidth, scaledHeight, (Qt::AspectRatioMode)keepAspect);
+            pixmap = pixmap.scaled(scaledWidth, scaledHeight, (Qt::AspectRatioMode)keepAspect);
         } else {
             if (keepAspect && scaledWidth) {
-                p->pixmap = p->pixmap.scaledToWidth(scaledWidth);
+                pixmap = pixmap.scaledToWidth(scaledWidth);
             } else if (keepAspect && scaledHeight) {
-                p->pixmap = p->pixmap.scaledToHeight(scaledHeight);
+                pixmap = pixmap.scaledToHeight(scaledHeight);
             }
         }
-        int rows = (p->pixmap.height() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight() + 1;
-        int cols = (p->pixmap.width() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth() + 1;
-        p->cols = cols;
-        p->rows = rows;
-        int needScroll = p->row + p->rows - _currentScreen->bottomMargin() - 1;
-        if (needScroll < 0)
-            needScroll = 0;
+        int rows = -1, cols = -1;
+        int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols);
         if (needScroll > 0)
             _currentScreen->scrollUp(needScroll);
-        p->row -= needScroll;
-        _currentScreen->currentTerminalDisplay()->addPlacement(p);
         _currentScreen->cursorDown(rows - needScroll);
         _currentScreen->cursorRight(cols);
     }
@@ -1442,42 +1425,24 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
         }
     }
     if (keys['a'] == 'p' || (keys['a'] == 'T' && keys['m'] == 0)) {
-        TerminalGraphicsPlacement_t *p;
         if (keys['i'])
             image = _currentScreen->currentTerminalDisplay()->getGraphicsImage(keys['i']);
-
         if (image) {
-            p = new TerminalGraphicsPlacement_t();
-            p->id = keys['i'];
-            p->pid = keys['p'];
-            p->z = keys['z'];
-            p->X = keys['X'];
-            p->Y = keys['Y'];
-            p->opacity = (qreal)keys['A'];
-            p->scrolling = true;
-            p->col = _currentScreen->getCursorX();
-            p->row = _currentScreen->getCursorY();
-            p->pixmap = QPixmap::fromImage(*image);
+            QPixmap pixmap = QPixmap::fromImage(*image);
             if (keys['x'] || keys['y'] || keys['w'] || keys['h']) {
-                int w = keys['w'] ? keys['w'] : p->pixmap.width() - keys['x'];
-                int h = keys['h'] ? keys['h'] : p->pixmap.height() - keys['y'];
-                p->pixmap = p->pixmap.copy(keys['x'], keys['y'], w, h);
+                int w = keys['w'] ? keys['w'] : pixmap.width() - keys['x'];
+                int h = keys['h'] ? keys['h'] : pixmap.height() - keys['y'];
+                pixmap = pixmap.copy(keys['x'], keys['y'], w, h);
             }
             if (keys['c'] && keys['r']) {
-                p->pixmap = p->pixmap.scaled(keys['c'] * _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth(),
-                                             keys['r'] * _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight());
+                pixmap = pixmap.scaled(keys['c'] * _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth(),
+                                       keys['r'] * _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight());
             }
-            int rows = (p->Y + p->pixmap.height()) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight();
-            int cols = (p->X + p->pixmap.width() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth();
-            p->cols = cols;
-            p->rows = rows;
-            int needScroll = p->row + p->rows - _currentScreen->bottomMargin();
-            if (needScroll < 0)
-                needScroll = 0;
+            int rows = -1, cols = -1;
+            int needScroll = _currentScreen->currentTerminalDisplay()
+                                 ->addPlacement(pixmap, rows, cols, -1, -1, true, keys['z'], keys['i'], keys['p'], keys['A'] / 255.0, keys['X'], keys['Y']);
             if (needScroll > 0)
                 _currentScreen->scrollUp(needScroll);
-            p->row -= needScroll;
-            _currentScreen->currentTerminalDisplay()->addPlacement(p);
             if (keys['C'] == 0) {
                 _currentScreen->cursorDown(rows - needScroll);
                 _currentScreen->cursorRight(cols);
@@ -2184,40 +2149,25 @@ void Vt102Emulation::SixelModeDisable()
         return;
     }
     m_SixelStarted = false;
-    TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t();
-    p->id = -1;
-    p->pid = -1;
-    p->z = 1;
-    p->X = 0;
-    p->Y = 0;
-    p->opacity = 1.0;
-    p->scrolling = m_SixelScrolling;
+    int col, row;
     if (m_SixelScrolling) {
-        p->col = _currentScreen->getCursorX();
-        p->row = _currentScreen->getCursorY();
+        col = _currentScreen->getCursorX();
+        row = _currentScreen->getCursorY();
     } else {
-        p->col = 0;
-        p->row = 0;
+        col = 0;
+        row = 0;
     }
-    p->pixmap = QPixmap::fromImage(m_currentImage.copy(QRect(0, 0, m_actualSize.width(), m_actualSize.height())));
+    QPixmap pixmap = QPixmap::fromImage(m_currentImage.copy(QRect(0, 0, m_actualSize.width(), m_actualSize.height())));
     if (m_aspect != 1) {
-        p->pixmap = p->pixmap.scaled(p->pixmap.width(), m_aspect * p->pixmap.height());
+        pixmap = pixmap.scaled(pixmap.width(), m_aspect * pixmap.height());
     }
-    int rows = (p->pixmap.height() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight() + 1;
-    int cols = (p->pixmap.width() - 1) / _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth() + 1;
-    p->cols = cols;
-    p->rows = rows;
+    int rows = -1, cols = -1;
+    int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling);
     if (m_SixelScrolling) {
-        int needScroll = p->row + p->rows - _currentScreen->bottomMargin();
-        if (needScroll < 0)
-            needScroll = 0;
         if (needScroll > 0)
-            _currentScreen->scrollUp(needScroll);
-        p->row -= needScroll;
+            _currentScreen->scrollUp(needScroll + 1);
         _currentScreen->cursorDown(rows - needScroll);
-        //_currentScreen->cursorRight(cols);
     }
-    _currentScreen->currentTerminalDisplay()->addPlacement(p);
 }
 
 void Vt102Emulation::SixelColorChangeRGB(const int index, int red, int green, int blue)

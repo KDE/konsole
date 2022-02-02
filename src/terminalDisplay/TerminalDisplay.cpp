@@ -2985,6 +2985,40 @@ int TerminalDisplay::getFreeGraphicsImageId()
     }
 }
 
+int TerminalDisplay::addPlacement(QPixmap pixmap, int &rows, int &cols, int row, int col, bool scrolling, int z, int id, int pid, qreal opacity, int X, int Y)
+{
+    if (pixmap.isNull())
+        return -1;
+
+    TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t;
+    QPoint pos = cursorPosition();
+
+    if (row == -1)
+        row = pos.y();
+    if (col == -1)
+        col = pos.x();
+    if (rows == -1)
+        rows = (pixmap.height() - 1) / _terminalFont->fontHeight();
+    if (cols == -1)
+        cols = (pixmap.width() - 1) / _terminalFont->fontWidth() + 1;
+
+    p->pixmap = pixmap;
+    p->z = z;
+    p->row = row;
+    p->col = col;
+    p->rows = rows;
+    p->cols = cols;
+    p->id = id;
+    p->pid = pid;
+    p->opacity = opacity;
+    p->scrolling = scrolling;
+    p->X = X;
+    p->Y = Y;
+
+    addPlacement(p);
+    return qBound(0, row + rows - _lines + 1, rows);
+}
+
 void TerminalDisplay::addPlacement(TerminalGraphicsPlacement_t *p)
 {
     int i;
