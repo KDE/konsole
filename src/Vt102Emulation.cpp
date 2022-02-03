@@ -1237,7 +1237,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s', 2004) :         saveMode      (MODE_BracketedPaste); break; //XTERM
     case token_csi_pr('r', 2004) :      restoreMode      (MODE_BracketedPaste); break; //XTERM
 
-    case token_csi_pr('S', 1) : if(argv[2]==1||argv[2]==4)sendString("\033[?1;0;256S"); break;
+    case token_csi_pr('S',    1) : sixelQuery               (1          ); break;
+    case token_csi_pr('S',    2) : sixelQuery               (2          ); break;
     // Set Cursor Style (DECSCUSR), VT520, with the extra xterm sequences
     // the first one is a special case, 'ESC[ q', which mimics 'ESC[1 q'
     // Using 0 to reset to default is matching VTE, but not any official standard.
@@ -2118,18 +2119,38 @@ void Vt102Emulation::reportDecodingError()
     outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
 }
 
+void Vt102Emulation::sixelQuery(int q)
+{
+    char tmp[30];
+    if (q == 1) {
+        if (argv[2] == 1 || argv[2] == 4) {
+            snprintf(tmp, sizeof(tmp), "\033[?1;0;%dS", MAX_SIXEL_COLORS);
+            sendString(tmp);
+        }
+    }
+    if (q == 2) {
+        if (argv[2] == 1 || argv[2] == 4) {
+            snprintf(tmp, sizeof(tmp), "\033[?2;0;%d;%dS", MAX_IMAGE_DIM, MAX_IMAGE_DIM);
+            sendString(tmp);
+        }
+    }
+}
+
 void Vt102Emulation::SixelModeEnable(int width, int height)
 {
     if (width <= 0 || height <= 0) {
         return;
     }
+    if (width > MAX_IMAGE_DIM)
+        width = MAX_IMAGE_DIM;
+    if (height > MAX_IMAGE_DIM)
+        height = MAX_IMAGE_DIM;
     m_actualSize = QSize(width, height);
 
     // We assume square pixels because I'm lazy and didn't implement the stuff in vt102emulation.
-    int charactersWidth = width / 6 + 1;
     int charactersHeight = height / 6 + 1;
 
-    m_currentImage = QImage(charactersWidth * 6 + 1, charactersHeight * 6 + 1, QImage::Format_Indexed8);
+    m_currentImage = QImage(width, charactersHeight * 6 + 1, QImage::Format_Indexed8);
     m_currentColor = 2;
     m_currentX = 0;
     m_verticalPosition = 0;
@@ -2172,7 +2193,7 @@ void Vt102Emulation::SixelModeDisable()
 
 void Vt102Emulation::SixelColorChangeRGB(const int index, int red, int green, int blue)
 {
-    if (index < 0) {
+    if (index < 0 || index >= MAX_SIXEL_COLORS) {
         return;
     }
 
@@ -2187,7 +2208,7 @@ void Vt102Emulation::SixelColorChangeRGB(const int index, int red, int green, in
 
 void Vt102Emulation::SixelColorChangeHSL(const int index, int hue, int saturation, int value)
 {
-    if (index < 0) {
+    if (index < 0 || index >= MAX_SIXEL_COLORS) {
         return;
     }
 
@@ -2205,7 +2226,7 @@ void Vt102Emulation::SixelColorChangeHSL(const int index, int hue, int saturatio
     m_currentColor = index;
 }
 
-void Vt102Emulation::SixelCharacterAdd(uint8_t character)
+void Vt102Emulation::SixelCharacterAdd(uint8_t character, int repeat)
 {
     if (!m_SixelStarted) {
         return;
@@ -2224,16 +2245,84 @@ void Vt102Emulation::SixelCharacterAdd(uint8_t character)
     character -= '?';
     const int top = m_verticalPosition * 6;
     const int bottom = (m_verticalPosition + 1) * 6;
+    if (bottom > MAX_IMAGE_DIM) // Ignore lines below MAX_IMAGE_DIM
+        return;
+    repeat = std::clamp(repeat, 1, MAX_IMAGE_DIM - m_currentX); // Won't repeat beyond MAX_IMAGE_DIM
 
-    if (bottom >= m_currentImage.height() - 1 || m_currentX >= m_currentImage.width() - 1) {
+    if (bottom >= m_currentImage.height() - 1 || m_currentX + repeat >= m_currentImage.width()) {
         // If we copy out of bounds it gets filled with 0
-        int newWidth = (qMax(m_currentX + 256, m_currentImage.width() + 256) / 6 + 1) * 6;
+        int extraWidth = 255 + repeat; // Increase size by at least 256, to avoid increasing for every pixel
+        int newWidth = qMax(m_currentX + extraWidth, m_currentImage.width() + extraWidth);
         int newHeight = (qMax(bottom + 256, m_currentImage.height() + 256) / 6 + 1) * 6;
-        m_currentImage = m_currentImage.copy(0, 0, newWidth, newHeight);
+        newWidth = qMin(newWidth, MAX_IMAGE_DIM);
+        newHeight = qMin(newHeight, MAX_IMAGE_DIM);
+        if (newWidth != m_currentImage.width() || newHeight != m_currentImage.height())
+            m_currentImage = m_currentImage.copy(0, 0, newWidth, newHeight);
         if (m_currentImage.isNull()) {
             m_SixelStarted = false;
             return;
         }
+    }
+
+    const ptrdiff_t bpl = m_currentImage.bytesPerLine();
+    uchar *data = m_currentImage.bits() + top * bpl + m_currentX;
+
+    if (repeat == 1) {
+        if (m_preserveBackground) {
+            // Konsole is built without _any_ optimizations by default, so a little
+            // manual unrolling to avoid calling shift for every loop iteration.
+            if (character & (1 << 0)) {
+                data[0 * bpl] = m_currentColor;
+            }
+            if (character & (1 << 1)) {
+                data[1 * bpl] = m_currentColor;
+            }
+            if (character & (1 << 2)) {
+                data[2 * bpl] = m_currentColor;
+            }
+            if (character & (1 << 3)) {
+                data[3 * bpl] = m_currentColor;
+            }
+            if (character & (1 << 4)) {
+                data[4 * bpl] = m_currentColor;
+            }
+            if (character & (1 << 5)) {
+                data[5 * bpl] = m_currentColor;
+            }
+        } else {
+            for (int i = 0; i < 6; i++, data += bpl) {
+                *data = (character & (1 << i)) * m_currentColor;
+            }
+        }
+        m_currentX++;
+    } else {
+        if (m_preserveBackground) {
+            // Konsole is built without _any_ optimizations by default, so a little
+            // manual unrolling to avoid calling shift for every loop iteration.
+            if (character & (1 << 0)) {
+                memset(&data[0 * bpl], m_currentColor, repeat);
+            }
+            if (character & (1 << 1)) {
+                memset(&data[1 * bpl], m_currentColor, repeat);
+            }
+            if (character & (1 << 2)) {
+                memset(&data[2 * bpl], m_currentColor, repeat);
+            }
+            if (character & (1 << 3)) {
+                memset(&data[3 * bpl], m_currentColor, repeat);
+            }
+            if (character & (1 << 4)) {
+                memset(&data[4 * bpl], m_currentColor, repeat);
+            }
+            if (character & (1 << 5)) {
+                memset(&data[5 * bpl], m_currentColor, repeat);
+            }
+        } else {
+            for (int i = 0; i < 6; i++, data += bpl) {
+                memset(data, (character & (1 << i)) * m_currentColor, repeat);
+            }
+        }
+        m_currentX += repeat;
     }
     if (m_currentX > m_actualSize.width()) {
         m_actualSize.setWidth(m_currentX);
@@ -2241,37 +2330,6 @@ void Vt102Emulation::SixelCharacterAdd(uint8_t character)
     if (bottom > m_actualSize.height()) {
         m_actualSize.setHeight(bottom);
     }
-
-    const ptrdiff_t bpl = m_currentImage.bytesPerLine();
-    uchar *data = m_currentImage.bits() + top * bpl + m_currentX;
-
-    if (m_preserveBackground) {
-        // Konsole is built without _any_ optimizations by default, so a little
-        // manual unrolling to avoid calling shift for every loop iteration.
-        if (character & (1 << 0)) {
-            data[0 * bpl] = m_currentColor;
-        }
-        if (character & (1 << 1)) {
-            data[1 * bpl] = m_currentColor;
-        }
-        if (character & (1 << 2)) {
-            data[2 * bpl] = m_currentColor;
-        }
-        if (character & (1 << 3)) {
-            data[3 * bpl] = m_currentColor;
-        }
-        if (character & (1 << 4)) {
-            data[4 * bpl] = m_currentColor;
-        }
-        if (character & (1 << 5)) {
-            data[5 * bpl] = m_currentColor;
-        }
-    } else {
-        for (int i = 0; i < 6; i++, data += bpl) {
-            *data = (character & (1 << i)) * m_currentColor;
-        }
-    }
-    m_currentX++;
 }
 
 bool Vt102Emulation::processSixel(uint cc)
@@ -2354,10 +2412,7 @@ bool Vt102Emulation::processSixel(uint cc)
             return true;
         }
 
-        // We could optimize this, but meh
-        for (int i = 0; i < argv[0]; i++) {
-            SixelCharacterAdd(cc);
-        }
+        SixelCharacterAdd(cc, argv[0]);
         resetTokenizer();
         return true;
     }
@@ -2384,8 +2439,9 @@ bool Vt102Emulation::processSixel(uint cc)
             default:
                 return false;
             }
-        } else if (argc == 1 && argv[0] >= 0) { // could check max, but people should be able to do what they want idc
-            m_currentColor = index;
+        } else if (argc == 1 && index >= 0) { // Negative index is an error. Too large index is ignored
+            if (index < MAX_SIXEL_COLORS)
+                m_currentColor = index;
         } else {
             return false;
         }

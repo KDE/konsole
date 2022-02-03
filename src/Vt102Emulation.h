@@ -194,12 +194,15 @@ private:
     bool _reportFocusEvents;
 
     // Sixel:
+#define MAX_SIXEL_COLORS 256
+#define MAX_IMAGE_DIM 16384
+    void sixelQuery(int query);
     bool processSixel(uint cc);
     void SixelModeEnable(int width, int height /*, bool preserveBackground*/);
     void SixelModeDisable();
     void SixelColorChangeRGB(const int index, int red, int green, int blue);
     void SixelColorChangeHSL(const int index, int hue, int saturation, int value);
-    void SixelCharacterAdd(uint8_t character);
+    void SixelCharacterAdd(uint8_t character, int repeat = 1);
     bool m_SixelStarted = false;
     QImage m_currentImage;
     int m_currentX = 0;
