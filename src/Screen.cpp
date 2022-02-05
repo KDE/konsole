@@ -1056,8 +1056,9 @@ void Screen::scrollUp(int from, int n)
     // FIXME: make sure `topMargin', `bottomMargin', `from', `n' is in bounds.
     moveImage(loc(0, from), loc(0, from + n), loc(_columns, _bottomMargin));
     clearImage(loc(0, _bottomMargin - n + 1), loc(_columns - 1, _bottomMargin), ' ');
-    if (_currentTerminalDisplay->hasGraphics())
+    if (_currentTerminalDisplay->hasGraphics()) {
         _currentTerminalDisplay->scrollUpVisiblePlacements(n);
+    }
 }
 
 void Screen::scrollDown(int n)

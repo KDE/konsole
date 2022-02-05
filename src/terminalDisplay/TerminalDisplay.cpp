@@ -374,9 +374,11 @@ TerminalDisplay::~TerminalDisplay()
 
     delete[] _image;
     delete _filterChain;
-    for (int p = 0; p < 2; p++)
-        for (int i = 0; i < _graphicsPlacementsArray[p].size(); i++)
+    for (int p = 0; p < 2; p++) {
+        for (int i = 0; i < _graphicsPlacementsArray[p].size(); i++) {
             delete _graphicsPlacementsArray[p][i];
+        }
+    }
 }
 
 void TerminalDisplay::setupHeaderVisibility()
@@ -2979,28 +2981,34 @@ int TerminalDisplay::getFreeGraphicsImageId()
 {
     int i = 1;
     while (1) {
-        if (!_graphicsImages.count(i))
+        if (!_graphicsImages.count(i)) {
             return i;
+        }
         i++;
     }
 }
 
 int TerminalDisplay::addPlacement(QPixmap pixmap, int &rows, int &cols, int row, int col, bool scrolling, int z, int id, int pid, qreal opacity, int X, int Y)
 {
-    if (pixmap.isNull())
+    if (pixmap.isNull()) {
         return -1;
+    }
 
     TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t;
     QPoint pos = cursorPosition();
 
-    if (row == -1)
+    if (row == -1) {
         row = pos.y();
-    if (col == -1)
+    }
+    if (col == -1) {
         col = pos.x();
-    if (rows == -1)
+    }
+    if (rows == -1) {
         rows = (pixmap.height() - 1) / _terminalFont->fontHeight();
-    if (cols == -1)
+    }
+    if (cols == -1) {
         cols = (pixmap.width() - 1) / _terminalFont->fontWidth() + 1;
+    }
 
     p->pixmap = pixmap;
     p->z = z;
@@ -3024,11 +3032,12 @@ void TerminalDisplay::addPlacement(TerminalGraphicsPlacement_t *p)
     int i;
     // remove placement with the same id and pid, if pid is non zero
     if (p->pid >= 0 && p->id >= 0)
-        for (i = 0; i < _graphicsPlacements->size(); i++)
+        for (i = 0; i < _graphicsPlacements->size(); i++) {
             if (p->id == (*_graphicsPlacements)[i]->id && p->pid == (*_graphicsPlacements)[i]->pid) {
                 _graphicsPlacements->remove(i);
                 break;
             }
+        }
 
     for (i = 0; i < _graphicsPlacements->size() && p->z >= (*_graphicsPlacements)[i]->z; i++)
         ;
@@ -3053,16 +3062,18 @@ void TerminalDisplay::addPlacement(TerminalGraphicsPlacement_t *p)
 
 TerminalGraphicsPlacement_t *TerminalDisplay::getGraphicsPlacement(int i)
 {
-    if (i >= _graphicsPlacements->size())
+    if (i >= _graphicsPlacements->size()) {
         return NULL;
+    }
     return (*_graphicsPlacements)[i];
 }
 
 void TerminalDisplay::scrollUpVisiblePlacements(int n)
 {
     for (int i = _graphicsPlacements->size() - 1; i >= 0; i--) {
-        if ((*_graphicsPlacements)[i]->scrolling)
+        if ((*_graphicsPlacements)[i]->scrolling) {
             (*_graphicsPlacements)[i]->row -= n;
+        }
     }
 }
 

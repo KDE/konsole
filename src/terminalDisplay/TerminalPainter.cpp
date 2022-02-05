@@ -429,8 +429,9 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
         painter.setClipRect(rect);
         while (1) {
             TerminalGraphicsPlacement_t *p = display->getGraphicsPlacement(placementIdx);
-            if (!p || p->z >= 0)
+            if (!p || p->z >= 0) {
                 break;
+            }
             int x = p->col * display->terminalFont()->fontWidth() + p->X;
             int y = p->row * display->terminalFont()->fontHeight() + p->Y;
             QRectF srcRect(0, 0, p->pixmap.width(), p->pixmap.height());
@@ -453,8 +454,9 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
     if (display->hasGraphics()) {
         while (1) {
             TerminalGraphicsPlacement_t *p = display->getGraphicsPlacement(placementIdx);
-            if (!p)
+            if (!p) {
                 break;
+            }
             QPixmap image = p->pixmap;
             int x = p->col * display->terminalFont()->fontWidth() + p->X;
             int y = p->row * display->terminalFont()->fontHeight() + p->Y;

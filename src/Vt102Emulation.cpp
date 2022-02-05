@@ -755,8 +755,9 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     }
 
     if (attribute == 1337) {
-        if (!value.startsWith(QLatin1String("File=")))
+        if (!value.startsWith(QLatin1String("File="))) {
             return;
+        }
         int pos = value.indexOf(QLatin1Char(':'));
         QStringList params = value.mid(5, pos - 5).split(QLatin1Char(';'));
         int keepAspect = 1;
@@ -768,12 +769,14 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
                 QString var = p.mid(0, eq);
                 QString val = p.mid(eq + 1);
                 if (var == QLatin1String("inline")) {
-                    if (val != QLatin1String("1"))
+                    if (val != QLatin1String("1")) {
                         return;
+                    }
                 }
                 if (var == QLatin1String("preserveAspectRatio")) {
-                    if (val == QLatin1String("0"))
+                    if (val == QLatin1String("0")) {
                         keepAspect = 0;
+                    }
                 }
                 if (var == QLatin1String("width")) {
                     int unitPos = val.toStdString().find_first_not_of("0123456789");
@@ -803,8 +806,9 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         QImage image;
 
         image.loadFromData(tokenData);
-        if (image.isNull())
+        if (image.isNull()) {
             return;
+        }
         QPixmap pixmap = QPixmap::fromImage(image);
         if (scaledWidth && scaledHeight) {
             pixmap = pixmap.scaled(scaledWidth, scaledHeight, (Qt::AspectRatioMode)keepAspect);
@@ -817,8 +821,9 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         }
         int rows = -1, cols = -1;
         int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols);
-        if (needScroll > 0)
+        if (needScroll > 0) {
             _currentScreen->scrollUp(needScroll);
+        }
         _currentScreen->cursorDown(rows - needScroll);
         _currentScreen->cursorRight(cols);
     }
@@ -1330,10 +1335,11 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             reportDecodingError();
             return;
         }
-        if (list.at(i).at(2).isNumber() || list.at(i).at(2).toLatin1() == '-')
+        if (list.at(i).at(2).isNumber() || list.at(i).at(2).toLatin1() == '-') {
             keys[list.at(i).at(0).toLatin1()] = list.at(i).mid(2).toInt();
-        else
+        } else {
             keys[list.at(i).at(0).toLatin1()] = list.at(i).at(2).toLatin1();
+        }
     }
 
     if (keys['a'] == 't' || keys['a'] == 'T' || keys['a'] == 'q') {
@@ -1406,12 +1412,14 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                 QString params = QStringLiteral("i=") + QString::number(keys['i']);
                 sendGraphicsReply(params, QString());
             } else {
-                if (keys['i'])
+                if (keys['i']) {
                     _currentScreen->currentTerminalDisplay()->setGraphicsImage(keys['i'], image);
+                }
                 if (keys['q'] == 0 && keys['a'] == 't') {
                     QString params = QStringLiteral("i=") + QString::number(keys['i']);
-                    if (keys['I'])
+                    if (keys['I']) {
                         params = params + QStringLiteral(",I=") + QString::number(keys['I']);
+                    }
                     sendGraphicsReply(params, QString());
                 }
             }
@@ -1426,8 +1434,9 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
         }
     }
     if (keys['a'] == 'p' || (keys['a'] == 'T' && keys['m'] == 0)) {
-        if (keys['i'])
+        if (keys['i']) {
             image = _currentScreen->currentTerminalDisplay()->getGraphicsImage(keys['i']);
+        }
         if (image) {
             QPixmap pixmap = QPixmap::fromImage(*image);
             if (keys['x'] || keys['y'] || keys['w'] || keys['h']) {
@@ -1442,18 +1451,21 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             int rows = -1, cols = -1;
             int needScroll = _currentScreen->currentTerminalDisplay()
                                  ->addPlacement(pixmap, rows, cols, -1, -1, true, keys['z'], keys['i'], keys['p'], keys['A'] / 255.0, keys['X'], keys['Y']);
-            if (needScroll > 0)
+            if (needScroll > 0) {
                 _currentScreen->scrollUp(needScroll);
+            }
             if (keys['C'] == 0) {
                 _currentScreen->cursorDown(rows - needScroll);
                 _currentScreen->cursorRight(cols);
             }
             if (keys['q'] == 0 && keys['i']) {
                 QString params = QStringLiteral("i=") + QString::number(keys['i']);
-                if (keys['I'])
+                if (keys['I']) {
                     params = params + QStringLiteral(",I=") + QString::number(keys['I']);
-                if (keys['p'] >= 0)
+                }
+                if (keys['p'] >= 0) {
                     params = params + QStringLiteral(",p=") + QString::number(keys['p']);
+                }
                 sendGraphicsReply(params, QString());
             }
         } else {
@@ -2046,8 +2058,9 @@ void Vt102Emulation::resetMode(int m)
     case MODE_AppScreen:
         _screen[0]->clearSelection();
         setScreen(0);
-        if (_currentScreen->currentTerminalDisplay()) // We may get here before we have a TerminalDisplay
+        if (_currentScreen->currentTerminalDisplay()) { // We may get here before we have a TerminalDisplay
             _currentScreen->currentTerminalDisplay()->selectPlacements(0);
+        }
         break;
     }
     // FIXME: Currently this has a redundant condition as MODES_SCREEN is 7
@@ -2141,10 +2154,12 @@ void Vt102Emulation::SixelModeEnable(int width, int height)
     if (width <= 0 || height <= 0) {
         return;
     }
-    if (width > MAX_IMAGE_DIM)
+    if (width > MAX_IMAGE_DIM) {
         width = MAX_IMAGE_DIM;
-    if (height > MAX_IMAGE_DIM)
+    }
+    if (height > MAX_IMAGE_DIM) {
         height = MAX_IMAGE_DIM;
+    }
     m_actualSize = QSize(width, height);
 
     // We assume square pixels because I'm lazy and didn't implement the stuff in vt102emulation.
@@ -2185,8 +2200,9 @@ void Vt102Emulation::SixelModeDisable()
     int rows = -1, cols = -1;
     int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling);
     if (m_SixelScrolling) {
-        if (needScroll > 0)
+        if (needScroll > 0) {
             _currentScreen->scrollUp(needScroll + 1);
+        }
         _currentScreen->cursorDown(rows - needScroll);
     }
 }
@@ -2245,8 +2261,9 @@ void Vt102Emulation::SixelCharacterAdd(uint8_t character, int repeat)
     character -= '?';
     const int top = m_verticalPosition * 6;
     const int bottom = (m_verticalPosition + 1) * 6;
-    if (bottom > MAX_IMAGE_DIM) // Ignore lines below MAX_IMAGE_DIM
+    if (bottom > MAX_IMAGE_DIM) { // Ignore lines below MAX_IMAGE_DIM
         return;
+    }
     repeat = std::clamp(repeat, 1, MAX_IMAGE_DIM - m_currentX); // Won't repeat beyond MAX_IMAGE_DIM
 
     if (bottom >= m_currentImage.height() - 1 || m_currentX + repeat >= m_currentImage.width()) {
@@ -2256,8 +2273,9 @@ void Vt102Emulation::SixelCharacterAdd(uint8_t character, int repeat)
         int newHeight = (qMax(bottom + 256, m_currentImage.height() + 256) / 6 + 1) * 6;
         newWidth = qMin(newWidth, MAX_IMAGE_DIM);
         newHeight = qMin(newHeight, MAX_IMAGE_DIM);
-        if (newWidth != m_currentImage.width() || newHeight != m_currentImage.height())
+        if (newWidth != m_currentImage.width() || newHeight != m_currentImage.height()) {
             m_currentImage = m_currentImage.copy(0, 0, newWidth, newHeight);
+        }
         if (m_currentImage.isNull()) {
             m_SixelStarted = false;
             return;
@@ -2440,8 +2458,9 @@ bool Vt102Emulation::processSixel(uint cc)
                 return false;
             }
         } else if (argc == 1 && index >= 0) { // Negative index is an error. Too large index is ignored
-            if (index < MAX_SIXEL_COLORS)
+            if (index < MAX_SIXEL_COLORS) {
                 m_currentColor = index;
+            }
         } else {
             return false;
         }
