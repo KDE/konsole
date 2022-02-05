@@ -1276,6 +1276,10 @@ void Screen::clearToBeginOfScreen()
 void Screen::clearEntireScreen()
 {
     clearImage(loc(0, 0), loc(_columns - 1, _lines - 1), ' ');
+    if (_currentTerminalDisplay && _currentTerminalDisplay->hasGraphics()) {
+        _currentTerminalDisplay->delPlacements();
+        _currentTerminalDisplay->update();
+    }
 }
 
 /*! fill screen with 'E'
