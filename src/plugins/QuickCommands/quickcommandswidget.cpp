@@ -88,6 +88,7 @@ void QuickCommandsWidget::addMode()
 {
     ui->command->setPlainText({});
     ui->name->setText({});
+    ui->tooltip->setText({});
 
     ui->btnAdd->hide();
     ui->btnSave->show();
@@ -107,19 +108,23 @@ void QuickCommandsWidget::editMode()
 
 void QuickCommandsWidget::saveCommand()
 {
+    if (!valid())
+        return;
     if (priv->model->addChildItem(data(), ui->group->currentText()))
         viewMode();
     else
-        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("A duplicate name exists"));
+        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("A duplicate item exists"));
 }
 
 void QuickCommandsWidget::updateCommand()
 {
     const auto sourceIdx = priv->filterModel->mapToSource(ui->commandsTreeView->currentIndex());
+    if (!valid())
+        return;
     if (priv->model->editChildItem(data(), sourceIdx, ui->group->currentText()))
         viewMode();
     else
-        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("A duplicate name exists"));
+        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("A duplicate item exists"));
 }
 
 void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
@@ -146,6 +151,7 @@ void QuickCommandsWidget::triggerEdit()
     const auto item = priv->model->itemFromIndex(sourceIdx);
     const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
     ui->name->setText(data.name);
+    ui->tooltip->setText(data.tooltip);
     ui->command->setPlainText(data.command);
     ui->group->setCurrentText(item->parent()->text());
     editMode();
@@ -182,6 +188,7 @@ QuickCommandData QuickCommandsWidget::data() const
 {
     QuickCommandData data;
     data.name = ui->name->text().trimmed();
+    data.tooltip = ui->tooltip->text();
     data.command = ui->command->toPlainText();
     return data;
 }
@@ -194,4 +201,17 @@ void QuickCommandsWidget::setModel(QuickCommandsModel *model)
 void QuickCommandsWidget::setCurrentController(Konsole::SessionController *controller)
 {
     priv->controller = controller;
+}
+
+bool QuickCommandsWidget::valid()
+{
+    if (ui->name->text().isEmpty() || ui->name->text().trimmed().isEmpty()) {
+        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("Title can not be empty or blank"));
+        return false;
+    }
+    if (ui->command->toPlainText().isEmpty()) {
+        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("Command can not be empty"));
+        return false;
+    }
+    return true;
 }

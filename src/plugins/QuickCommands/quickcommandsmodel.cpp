@@ -29,6 +29,7 @@ void QuickCommandsModel::load()
             QuickCommandData data;
             KConfigGroup element = group.group(commandGroup);
             data.name = element.readEntry("name");
+            data.tooltip = element.readEntry("tooltip");
             data.command = element.readEntry("command");
             addChildItem(data, groupName);
         }
@@ -48,8 +49,9 @@ void QuickCommandsModel::save()
         for (int j = 0, end2 = groupItem->rowCount(); j < end2; j++) {
             QStandardItem *item = groupItem->child(j);
             const auto data = item->data(QuickCommandRole).value<QuickCommandData>();
-            KConfigGroup element = baseGroup.group(data.name.trimmed());
+            KConfigGroup element = baseGroup.group(data.name);
             element.writeEntry("name", data.name);
+            element.writeEntry("tooltip", data.tooltip);
             element.writeEntry("command", data.command);
             element.sync();
         }
@@ -99,11 +101,9 @@ bool QuickCommandsModel::addChildItem(const QuickCommandData &data, const QStrin
             return false;
     }
 
-    auto newChild = new QStandardItem();
-    newChild->setData(QVariant::fromValue(data), QuickCommandRole);
-    newChild->setText(data.name);
-    newChild->setToolTip(data.command);
-    parentItem->appendRow(newChild);
+    auto item = new QStandardItem();
+    updateItem(item, data);
+    parentItem->appendRow(item);
     parentItem->sortChildren(0);
     return true;
 }
@@ -121,11 +121,19 @@ bool QuickCommandsModel::editChildItem(const QuickCommandData &data, const QMode
             return false;
         parentItem->removeRow(item->row());
     } else {
-        item->setData(QVariant::fromValue(data), QuickCommandRole);
-        item->setText(data.name);
-        item->setToolTip(data.command);
+        updateItem(item, data);
         item->parent()->sortChildren(0);
     }
 
     return true;
+}
+
+void QuickCommandsModel::updateItem(QStandardItem *item, const QuickCommandData &data)
+{
+    item->setData(QVariant::fromValue(data), QuickCommandRole);
+    item->setText(data.name);
+    if (data.tooltip.trimmed().isEmpty())
+        item->setToolTip(data.command);
+    else
+        item->setToolTip(data.tooltip);
 }

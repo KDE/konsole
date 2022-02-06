@@ -11,6 +11,7 @@ class QuickCommandData
 {
 public:
     QString name;
+    QString tooltip;
     QString command;
 };
 

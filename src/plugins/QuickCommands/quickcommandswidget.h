@@ -49,6 +49,7 @@ public:
 private:
     QuickCommandData data() const;
     void prepareEdit();
+    bool valid();
     struct Private;
 
     std::unique_ptr<Ui::QuickCommandsWidget> ui;

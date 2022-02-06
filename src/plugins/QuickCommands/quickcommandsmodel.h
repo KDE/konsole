@@ -24,6 +24,7 @@ public:
 private:
     void load();
     void save();
+    void updateItem(QStandardItem *item, const QuickCommandData &data);
     QStandardItem *addTopLevelItem(const QString &groupName);
 };
 
