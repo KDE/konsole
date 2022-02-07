@@ -1,36 +1,5 @@
 {
     "KPlugin": {
-        "Name": "Quick Commands",
-        "Name[ar]": "Quick Commands",
-        "Name[az]": "Quick Commands",
-        "Name[ca@valencia]": "Quick Commands",
-        "Name[ca]": "Quick Commands",
-        "Name[cs]": "Quick Commands",
-        "Name[de]": "Quick Commands",
-        "Name[el]": "Quick Commands",
-        "Name[en_GB]": "Quick Commands",
-        "Name[es]": "Quick Commands",
-        "Name[eu]": "Quick Commands",
-        "Name[fi]": "Quick Commands",
-        "Name[fr]": "Quick Commands",
-        "Name[hu]": "Quick Commands",
-        "Name[ia]": "Quick Commands",
-        "Name[it]": "Quick Commands",
-        "Name[ko]": "Quick Commands",
-        "Name[nl]": "Quick Commands",
-        "Name[nn]": "Quick Commands",
-        "Name[pl]": "Quick Commands",
-        "Name[pt]": "Quick Commands",
-        "Name[pt_BR]": "Quick Commands",
-        "Name[ro]": "Quick Commands",
-        "Name[ru]": "Quick Commands",
-        "Name[sk]": "Quick Commands",
-        "Name[sl]": "Quick Commands",
-        "Name[sv]": "Quick Commands",
-        "Name[ta]": "Quick Commands",
-        "Name[tr]": "Quick Commands",
-        "Name[uk]": "Quick Commands",
-        "Name[x-test]": "xxQuick Commandsxx",
-        "Name[zh_CN]": "快捷指令"
+        "Name": "Quick Commands"
     }
 }

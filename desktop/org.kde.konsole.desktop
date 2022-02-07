@@ -15,6 +15,7 @@ StartupWMClass=konsole
 Keywords=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt
 Keywords[ar]=طرفية;كونسول;سكربت;شغل;نفذ;أوامر;سطر-الأوامر;سطر الأوامر;cli;باش;صدفة;شل;zsh
 Keywords[ca]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres
+Keywords[ca@valencia]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres
 Keywords[es]=terminal;consola;script;guion;guión;lanzar;ejecutar;comando;orden;línea de órdenes;línea de comandos;cli;bash;sh;shell;intérprete;zsh;cmd;introducción de órdenes
 Keywords[fr]=terminal ; console ; script ; lancer ; exécuter ;commande ; commande en ligne ; cli ; bash ; sh ; shell ; zsh ; invite de commandes
 Keywords[ia]=terminal;console;script;run;executa;commando;linea-de-commando;lineadecommando;cli;bash;sh;shell;zsh;cmd;command prompt
