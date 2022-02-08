@@ -199,6 +199,7 @@ private:
     void sixelQuery(int query);
     bool processSixel(uint cc);
     void SixelModeEnable(int width, int height /*, bool preserveBackground*/);
+    void SixelModeAbort();
     void SixelModeDisable();
     void SixelColorChangeRGB(const int index, int red, int green, int blue);
     void SixelColorChangeHSL(const int index, int hue, int saturation, int value);

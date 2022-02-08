@@ -377,7 +377,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
             continue;
         }
 
-        if (ces(CTL)) {
+        if (!getMode(MODE_Sixel) && ces(CTL)) {
             // ignore control characters in the text part of osc (aka OSC) "ESC]"
             // escape sequences; this matches what XTERM docs say
             // Allow BEL and ESC here, it will either end the text or be removed later.
@@ -2185,17 +2185,41 @@ void Vt102Emulation::SixelModeEnable(int width, int height)
     int charactersHeight = height / 6 + 1;
 
     m_currentImage = QImage(width, charactersHeight * 6 + 1, QImage::Format_Indexed8);
-    m_currentColor = 2;
+    m_currentColor = 3;
     m_currentX = 0;
     m_verticalPosition = 0;
     if (!m_currentImage.isNull()) {
         m_SixelStarted = true;
     }
     m_currentImage.fill(0);
-    const QColor *colors = _currentScreen->currentTerminalDisplay()->terminalColor()->colorTable();
-    for (int i = 2; i < TABLE_COLORS; i++) {
-        m_currentImage.setColor(i - 2, colors[i].rgb());
+    std::string initial_colors[16] = {"#000000",
+                                      "#3333CC",
+                                      "#CC2323",
+                                      "#33CC33",
+                                      "#CC33CC",
+                                      "#33CCCC",
+                                      "#CCCC33",
+                                      "#777777",
+                                      "#444444",
+                                      "#565699",
+                                      "#994444",
+                                      "#569956",
+                                      "#995699",
+                                      "#569999",
+                                      "#999956",
+                                      "#CCCCCC"};
+    for (int i = 0; i < 16; i++) {
+        m_currentImage.setColor(i, QColor(initial_colors[i].c_str()).rgb());
     }
+}
+
+void Vt102Emulation::SixelModeAbort()
+{
+    if (!m_SixelStarted) {
+        return;
+    }
+    m_SixelStarted = false;
+    m_currentImage = QImage();
 }
 
 void Vt102Emulation::SixelModeDisable()
@@ -2393,11 +2417,24 @@ bool Vt102Emulation::processSixel(uint cc)
     uint *s = tokenBuffer;
     const int p = tokenBufferPos;
 
-    if (p >= 2 && s[0] == ESC && s[1] == '\\') {
-        resetMode(MODE_Sixel);
-        SixelModeDisable();
-        resetTokenizer();
-        return true;
+    if (p == 2 && s[0] == ESC) {
+        switch (s[1]) {
+        case '\\':
+            resetMode(MODE_Sixel);
+            SixelModeDisable();
+            resetTokenizer();
+            return true;
+        case ESC:
+            resetTokenizer();
+            receiveChars(QVector<uint>{s[1]}); // re-send the actual character
+            return true;
+        default:
+            resetMode(MODE_Sixel);
+            SixelModeAbort();
+            resetTokenizer();
+            receiveChars(QVector<uint>{s[0], s[1]}); // re-send the actual character
+            return true;
+        }
     }
     if (!m_SixelStarted && (sixel() || s[0] == '!' || s[0] == '#')) {
         m_aspect = 1;
