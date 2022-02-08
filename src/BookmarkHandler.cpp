@@ -48,7 +48,10 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     KBookmarkManager *manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
     manager->setUpdate(true);
 
-    auto *bookmarkMenu = new BookmarkMenu(manager, this, _menu, toplevel ? collection : nullptr);
+    // This constructor is only called with toplevel as true; regardless the
+    // fourth argument can not be nullptr as it will crash in BookmarkMenu
+    // TODO: remove the toplevel boolean argument in API
+    auto *bookmarkMenu = new BookmarkMenu(manager, this, _menu, collection);
     bookmarkMenu->setParent(this);
 }
 
