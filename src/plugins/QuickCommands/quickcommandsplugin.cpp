@@ -38,7 +38,7 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
     qcDockWidget->setWindowTitle(i18n("Quick Commands"));
     qcDockWidget->setWidget(qcWidget);
     qcDockWidget->setObjectName(QStringLiteral("QuickCommandsDock"));
-    qcDockWidget->setVisible(true);
+    qcDockWidget->setVisible(false);
 
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, qcDockWidget);
 
