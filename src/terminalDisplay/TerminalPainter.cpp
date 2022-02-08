@@ -432,8 +432,8 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
             if (!p || p->z >= 0) {
                 break;
             }
-            int x = p->col * display->terminalFont()->fontWidth() + p->X;
-            int y = p->row * display->terminalFont()->fontHeight() + p->Y;
+            int x = p->col * display->terminalFont()->fontWidth() + p->X + display->contentRect().left();
+            int y = p->row * display->terminalFont()->fontHeight() + p->Y + display->contentRect().top();
             QRectF srcRect(0, 0, p->pixmap.width(), p->pixmap.height());
             QRectF dstRect(x, y - scrollDelta, p->pixmap.width(), p->pixmap.height());
             painter.setOpacity(p->opacity);
@@ -458,8 +458,8 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
                 break;
             }
             QPixmap image = p->pixmap;
-            int x = p->col * display->terminalFont()->fontWidth() + p->X;
-            int y = p->row * display->terminalFont()->fontHeight() + p->Y;
+            int x = p->col * display->terminalFont()->fontWidth() + p->X + display->contentRect().left();
+            int y = p->row * display->terminalFont()->fontHeight() + p->Y + display->contentRect().top();
             QRectF srcRect(0, 0, image.width(), image.height());
             QRectF dstRect(x, y - scrollDelta, image.width(), image.height());
             painter.setOpacity(p->opacity);

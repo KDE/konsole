@@ -4,7 +4,6 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-
 // Own
 #include "Vt102Emulation.h"
 #include "config-konsole.h"
@@ -827,11 +826,18 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         }
         int rows = -1, cols = -1;
         int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols);
-        if (needScroll > 0) {
-            _currentScreen->scrollUp(needScroll);
+        if (needScroll > 1) {
+            _currentScreen->scrollUp(needScroll - 1);
         }
-        _currentScreen->cursorDown(rows - needScroll);
-        _currentScreen->cursorRight(cols);
+        if (rows - needScroll - 1 > 0) {
+            _currentScreen->cursorDown(rows - needScroll - 1);
+        }
+        if (_currentScreen->getCursorX() + cols >= _currentScreen->getColumns()) {
+            _currentScreen->toStartOfLine();
+            _currentScreen->newLine();
+        } else {
+            _currentScreen->cursorRight(cols);
+        }
     }
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
@@ -1457,12 +1463,19 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             int rows = -1, cols = -1;
             int needScroll = _currentScreen->currentTerminalDisplay()
                                  ->addPlacement(pixmap, rows, cols, -1, -1, true, keys['z'], keys['i'], keys['p'], keys['A'] / 255.0, keys['X'], keys['Y']);
-            if (needScroll > 0) {
-                _currentScreen->scrollUp(needScroll);
+            if (needScroll > 1) {
+                _currentScreen->scrollUp(needScroll - 1);
             }
             if (keys['C'] == 0) {
-                _currentScreen->cursorDown(rows - needScroll);
-                _currentScreen->cursorRight(cols);
+                if (rows - needScroll - 1 > 0) {
+                    _currentScreen->cursorDown(rows - needScroll - 1);
+                }
+                if (_currentScreen->getCursorX() + cols >= _currentScreen->getColumns()) {
+                    _currentScreen->toStartOfLine();
+                    _currentScreen->newLine();
+                } else {
+                    _currentScreen->cursorRight(cols);
+                }
             }
             if (keys['q'] == 0 && keys['i']) {
                 QString params = QStringLiteral("i=") + QString::number(keys['i']);
@@ -2207,9 +2220,11 @@ void Vt102Emulation::SixelModeDisable()
     int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling);
     if (m_SixelScrolling) {
         if (needScroll > 0) {
-            _currentScreen->scrollUp(needScroll + 1);
+            _currentScreen->scrollUp(needScroll);
         }
-        _currentScreen->cursorDown(rows - needScroll);
+        if (rows - needScroll > 0) {
+            _currentScreen->cursorDown(rows - needScroll);
+        }
     }
 }
 

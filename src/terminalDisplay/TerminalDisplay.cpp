@@ -1018,6 +1018,21 @@ void TerminalDisplay::updateImageSize()
 
     if (_resizing) {
         showResizeNotification();
+        if (oldLines != _lines) {
+            // An image's vertical position is relative to top line of the
+            // terminal, but text is relative to the bottom line, so the
+            // position needs adjusting when the terminal is resized.
+            int histLines = 0;
+            int change = oldLines - _lines;
+            if (_screenWindow && _screenWindow->screen()) {
+                histLines = _screenWindow->screen()->getHistLines();
+            }
+            if (histLines) {
+                scrollUpVisiblePlacements(qMax(-histLines, change));
+            } else if (oldLines > _lines && cursorPosition().y() >= oldLines - change) {
+                scrollUpVisiblePlacements(cursorPosition().y() - _lines + 1);
+            }
+        }
         Q_EMIT changedContentSizeSignal(_contentRect.height(), _contentRect.width()); // expose resizeEvent
     }
 
@@ -3004,7 +3019,7 @@ int TerminalDisplay::addPlacement(QPixmap pixmap, int &rows, int &cols, int row,
         col = pos.x();
     }
     if (rows == -1) {
-        rows = (pixmap.height() - 1) / _terminalFont->fontHeight();
+        rows = (pixmap.height() - 1) / _terminalFont->fontHeight() + 1;
     }
     if (cols == -1) {
         cols = (pixmap.width() - 1) / _terminalFont->fontWidth() + 1;
