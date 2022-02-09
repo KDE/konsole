@@ -1,9 +1,12 @@
 {
     "KPlugin": {
         "Name": "Quick Commands",
+        "Name[ar]": "الأوامر السريعة",
         "Name[ca]": "Ordres ràpides",
         "Name[es]": "Órdenes rápidas",
+        "Name[fr]": "Commandes rapides",
         "Name[nl]": "Snelle commando's",
+        "Name[sl]": "Hitri ukazi",
         "Name[uk]": "Швидкі команди",
         "Name[x-test]": "xxQuick Commandsxx"
     }
