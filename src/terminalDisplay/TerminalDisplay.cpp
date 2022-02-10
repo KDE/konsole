@@ -3067,7 +3067,7 @@ void TerminalDisplay::addPlacement(TerminalGraphicsPlacement_t *p)
         TerminalGraphicsPlacement_t *placement = (*_graphicsPlacements)[i];
         if (placement->pid < 0) {
             QRect rect(placement->col, placement->row, placement->cols, placement->rows);
-            if (covered.contains(rect)) {
+            if (covered.intersected(rect) == QRegion(rect)) {
                 _graphicsPlacements->remove(i);
                 delete placement;
             } else {
