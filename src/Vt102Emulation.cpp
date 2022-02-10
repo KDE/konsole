@@ -1300,6 +1300,11 @@ void Vt102Emulation::processToken(int token, int p, int q)
     /* clang-format on */
 }
 
+void delete_func(void *p)
+{
+    delete (QByteArray *)p;
+}
+
 void Vt102Emulation::processGraphicsToken(int tokenSize)
 {
     QString value = QString::fromUcs4(&tokenBuffer[3], tokenSize - 4);
@@ -1411,7 +1416,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                 if (!out) {
                     out = new QByteArray(imageData.constData(), imageData.size());
                 }
-                image = new QImage((unsigned char *)out->constData(), 0 + keys['s'], 0 + keys['v'], 0 + keys['s'] * keys['f'] / 8, format);
+                image = new QImage((unsigned char *)out->constData(), 0 + keys['s'], 0 + keys['v'], 0 + keys['s'] * keys['f'] / 8, format, delete_func, out);
             } else {
                 image = new QImage();
                 if (!out) {
@@ -1451,6 +1456,10 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
         }
         if (image) {
             QPixmap pixmap = QPixmap::fromImage(*image);
+            if (!keys['i']) {
+                // We did not save the image, so delete it
+                delete image;
+            }
             if (keys['x'] || keys['y'] || keys['w'] || keys['h']) {
                 int w = keys['w'] ? keys['w'] : pixmap.width() - keys['x'];
                 int h = keys['h'] ? keys['h'] : pixmap.height() - keys['y'];

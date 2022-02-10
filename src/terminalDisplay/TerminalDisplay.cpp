@@ -3048,8 +3048,10 @@ void TerminalDisplay::addPlacement(TerminalGraphicsPlacement_t *p)
     // remove placement with the same id and pid, if pid is non zero
     if (p->pid >= 0 && p->id >= 0)
         for (i = 0; i < _graphicsPlacements->size(); i++) {
-            if (p->id == (*_graphicsPlacements)[i]->id && p->pid == (*_graphicsPlacements)[i]->pid) {
+            TerminalGraphicsPlacement_t *placement = (*_graphicsPlacements)[i];
+            if (p->id == placement->id && p->pid == placement->pid) {
                 _graphicsPlacements->remove(i);
+                delete placement;
                 break;
             }
         }
@@ -3085,9 +3087,15 @@ TerminalGraphicsPlacement_t *TerminalDisplay::getGraphicsPlacement(int i)
 
 void TerminalDisplay::scrollUpVisiblePlacements(int n)
 {
+    int histMaxLines = _screenWindow->screen()->getHistMaxLines();
     for (int i = _graphicsPlacements->size() - 1; i >= 0; i--) {
-        if ((*_graphicsPlacements)[i]->scrolling) {
-            (*_graphicsPlacements)[i]->row -= n;
+        TerminalGraphicsPlacement_t *placement = (*_graphicsPlacements)[i];
+        if (placement->scrolling) {
+            placement->row -= n;
+            if (placement->row + placement->rows < -histMaxLines) {
+                _graphicsPlacements->remove(i);
+                delete placement;
+            }
         }
     }
 }

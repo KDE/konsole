@@ -412,6 +412,7 @@ public:
 
     /** Return the number of lines in the history buffer. */
     int getHistLines() const;
+    int getHistMaxLines() const;
     /**
      * Sets the type of storage used to keep lines in the history.
      * If @p copyPreviousScroll is true then the contents of the previous

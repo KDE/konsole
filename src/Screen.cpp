@@ -1746,6 +1746,11 @@ int Screen::getHistLines() const
     return _history->getLines();
 }
 
+int Screen::getHistMaxLines() const
+{
+    return _history->getMaxLines();
+}
+
 void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
 {
     clearSelection();
