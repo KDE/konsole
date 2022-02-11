@@ -31,6 +31,15 @@
 #define MODE_AppScreen 6
 #define MODES_SCREEN 7
 
+struct TerminalGraphicsPlacement_t {
+    QPixmap pixmap;
+    qint64 id;
+    qint64 pid;
+    int z, X, Y, col, row, cols, rows;
+    qreal opacity;
+    bool scrolling;
+};
+
 namespace Konsole
 {
 class TerminalCharacterDecoder;
@@ -412,7 +421,6 @@ public:
 
     /** Return the number of lines in the history buffer. */
     int getHistLines() const;
-    int getHistMaxLines() const;
     /**
      * Sets the type of storage used to keep lines in the history.
      * If @p copyPreviousScroll is true then the contents of the previous
@@ -603,6 +611,29 @@ public:
     // Set reflow condition
     void setReflowLines(bool enable);
 
+    /* Graphics display functions */
+    int addPlacement(QPixmap pixmap,
+                     int &rows,
+                     int &cols,
+                     int row = -1,
+                     int col = -1,
+                     bool scrolling = true,
+                     bool moveCursor = true,
+                     int z = 1,
+                     int id = -1,
+                     int pid = -1,
+                     qreal opacity = 1.0,
+                     int X = 0,
+                     int Y = 0);
+    TerminalGraphicsPlacement_t *getGraphicsPlacement(int i);
+    void scrollUpVisiblePlacements(int n);
+    void delPlacements(int = 'a', qint64 = 0, qint64 = -1, int = 0, int = 0, int = 0);
+
+    bool hasGraphics() const
+    {
+        return _hasGraphics;
+    }
+
 private:
     // copies a line of text from the screen or history into a stream using a
     // specified character decoder.  Returns the number of lines actually copied,
@@ -771,6 +802,11 @@ private:
 
     // Vt102Emulation defined max argument value that can be passed to a Screen function
     const int MAX_SCREEN_ARGUMENT = 40960;
+
+    /* Graphics */
+    void addPlacement(TerminalGraphicsPlacement_t *p);
+    QVector<TerminalGraphicsPlacement_t *> _graphicsPlacements;
+    bool _hasGraphics;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Screen::DecodingOptions)

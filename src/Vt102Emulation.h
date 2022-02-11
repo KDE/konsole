@@ -152,7 +152,7 @@ private:
     void processChecksumRequest(int argc, int argv[]);
     void processGraphicsToken(int tokenSize);
 
-    void sendGraphicsReply(QString params, QString error);
+    void sendGraphicsReply(const QString &params, const QString &error);
     void reportTerminalType();
     void reportTertiaryAttributes();
     void reportSecondaryAttributes();
@@ -215,6 +215,11 @@ private:
     QPair<int, int> m_aspect = qMakePair(1, 1);
     bool m_SixelScrolling = true;
     QSize m_actualSize; // For efficiency reasons, we keep the image in memory larger than what the end result is
+
+    // Kitty
+    std::map<int, QImage *> _graphicsImages;
+    // For kitty graphics protocol - image cache
+    int getFreeGraphicsImageId();
 };
 
 }

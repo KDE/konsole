@@ -76,6 +76,8 @@ Vt102Emulation::Vt102Emulation()
     imageId = 0;
     savedKeys = QMap<char, qint64>();
     tokenData = QByteArray();
+
+    _graphicsImages = std::map<int, QImage *>();
 }
 
 Vt102Emulation::~Vt102Emulation() = default;
@@ -808,13 +810,12 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
             }
         }
 
-        QImage image;
-
-        image.loadFromData(tokenData);
-        if (image.isNull()) {
+        QPixmap pixmap = QPixmap();
+        pixmap.loadFromData(tokenData);
+        tokenData.clear();
+        if (pixmap.isNull()) {
             return;
         }
-        QPixmap pixmap = QPixmap::fromImage(image);
         if (scaledWidth && scaledHeight) {
             pixmap = pixmap.scaled(scaledWidth, scaledHeight, (Qt::AspectRatioMode)keepAspect);
         } else {
@@ -825,19 +826,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
             }
         }
         int rows = -1, cols = -1;
-        int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols);
-        if (needScroll > 1) {
-            _currentScreen->scrollUp(needScroll - 1);
-        }
-        if (rows - needScroll - 1 > 0) {
-            _currentScreen->cursorDown(rows - needScroll - 1);
-        }
-        if (_currentScreen->getCursorX() + cols >= _currentScreen->getColumns()) {
-            _currentScreen->toStartOfLine();
-            _currentScreen->newLine();
-        } else {
-            _currentScreen->cursorRight(cols);
-        }
+        _currentScreen->addPlacement(pixmap, rows, cols);
     }
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
@@ -1309,7 +1298,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
 {
     QString value = QString::fromUcs4(&tokenBuffer[3], tokenSize - 4);
     QStringList list;
-    QImage *image = NULL;
+    QImage *image = nullptr;
 
     int dataPos = value.indexOf(QLatin1Char(';'));
     if (dataPos == -1) {
@@ -1367,7 +1356,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             return;
         }
         if (keys['I']) {
-            keys['i'] = _currentScreen->currentTerminalDisplay()->getFreeGraphicsImageId();
+            keys['i'] = getFreeGraphicsImageId();
         }
         if (imageId != keys['i']) {
             imageId = keys['i'];
@@ -1409,7 +1398,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                     imageData.append(*out);
                 }
             } else {
-                out = NULL;
+                out = nullptr;
             }
             if (keys['f'] == 24 || keys['f'] == 32) {
                 enum QImage::Format format = keys['f'] == 24 ? QImage::Format_RGB888 : QImage::Format_RGBA8888;
@@ -1430,7 +1419,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                 sendGraphicsReply(params, QString());
             } else {
                 if (keys['i']) {
-                    _currentScreen->currentTerminalDisplay()->setGraphicsImage(keys['i'], image);
+                    _graphicsImages[keys['i']] = image;
                 }
                 if (keys['q'] == 0 && keys['a'] == 't') {
                     QString params = QStringLiteral("i=") + QString::number(keys['i']);
@@ -1452,7 +1441,11 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
     }
     if (keys['a'] == 'p' || (keys['a'] == 'T' && keys['m'] == 0)) {
         if (keys['i']) {
-            image = _currentScreen->currentTerminalDisplay()->getGraphicsImage(keys['i']);
+            if (_graphicsImages.count(keys['i'])) {
+                image = _graphicsImages[keys['i']];
+            } else {
+                image = nullptr;
+            }
         }
         if (image) {
             QPixmap pixmap = QPixmap::fromImage(*image);
@@ -1470,22 +1463,8 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                                        keys['r'] * _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight());
             }
             int rows = -1, cols = -1;
-            int needScroll = _currentScreen->currentTerminalDisplay()
-                                 ->addPlacement(pixmap, rows, cols, -1, -1, true, keys['z'], keys['i'], keys['p'], keys['A'] / 255.0, keys['X'], keys['Y']);
-            if (needScroll > 1) {
-                _currentScreen->scrollUp(needScroll - 1);
-            }
-            if (keys['C'] == 0) {
-                if (rows - needScroll - 1 > 0) {
-                    _currentScreen->cursorDown(rows - needScroll - 1);
-                }
-                if (_currentScreen->getCursorX() + cols >= _currentScreen->getColumns()) {
-                    _currentScreen->toStartOfLine();
-                    _currentScreen->newLine();
-                } else {
-                    _currentScreen->cursorRight(cols);
-                }
-            }
+            _currentScreen
+                ->addPlacement(pixmap, rows, cols, -1, -1, true, keys['C'] == 0, keys['z'], keys['i'], keys['p'], keys['A'] / 255.0, keys['X'], keys['Y']);
             if (keys['q'] == 0 && keys['i']) {
                 QString params = QStringLiteral("i=") + QString::number(keys['i']);
                 if (keys['I']) {
@@ -1515,7 +1494,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             x = _currentScreen->getCursorX();
             y = _currentScreen->getCursorY();
         }
-        _currentScreen->currentTerminalDisplay()->delPlacements(action, id, pid, x, y, keys['z']);
+        _currentScreen->delPlacements(action, id, pid, x, y, keys['z']);
     }
 }
 
@@ -1532,7 +1511,7 @@ void Vt102Emulation::sendString(const QByteArray &s)
     Q_EMIT sendData(s);
 }
 
-void Vt102Emulation::sendGraphicsReply(QString params, QString error)
+void Vt102Emulation::sendGraphicsReply(const QString &params, const QString &error)
 {
     sendString(
         (QStringLiteral("\033_G") + params + QStringLiteral(";") + (error.isEmpty() ? QStringLiteral("OK") : error) + QStringLiteral("\033\\")).toLatin1());
@@ -2040,9 +2019,8 @@ void Vt102Emulation::setMode(int m)
         _screen[1]->setDefaultRendition();
         _screen[1]->clearSelection();
         setScreen(1);
-        if (_currentScreen->currentTerminalDisplay()) { // We may get here before we have a TerminalDisplay
-            _currentScreen->currentTerminalDisplay()->selectPlacements(1);
-            _currentScreen->currentTerminalDisplay()->delPlacements(1);
+        if (_currentScreen) { // We may get here before we have a TerminalDisplay
+            _currentScreen->delPlacements(1);
         }
         break;
     }
@@ -2086,9 +2064,6 @@ void Vt102Emulation::resetMode(int m)
     case MODE_AppScreen:
         _screen[0]->clearSelection();
         setScreen(0);
-        if (_currentScreen->currentTerminalDisplay()) { // We may get here before we have a TerminalDisplay
-            _currentScreen->currentTerminalDisplay()->selectPlacements(0);
-        }
         break;
     }
     // FIXME: Currently this has a redundant condition as MODES_SCREEN is 7
@@ -2250,11 +2225,8 @@ void Vt102Emulation::SixelModeDisable()
         pixmap = pixmap.scaled(pixmap.width(), m_aspect.first * pixmap.height() / m_aspect.second);
     }
     int rows = -1, cols = -1;
-    int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling);
+    int needScroll = _currentScreen->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling, false);
     if (m_SixelScrolling) {
-        if (needScroll > 0) {
-            _currentScreen->scrollUp(needScroll);
-        }
         if (rows - needScroll > 0) {
             _currentScreen->cursorDown(rows - needScroll);
         }
@@ -2540,4 +2512,15 @@ bool Vt102Emulation::processSixel(uint cc)
         return true;
     }
     return false;
+}
+
+int Vt102Emulation::getFreeGraphicsImageId()
+{
+    int i = 1;
+    while (1) {
+        if (!_graphicsImages.count(i)) {
+            return i;
+        }
+        i++;
+    }
 }

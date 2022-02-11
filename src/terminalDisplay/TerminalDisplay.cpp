@@ -75,7 +75,6 @@
 
 #include "TerminalColor.h"
 #include "TerminalFonts.h"
-#include "TerminalGraphics.h"
 #include "TerminalPainter.h"
 #include "TerminalScrollBar.h"
 
@@ -359,12 +358,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     };
 
     _printManager.reset(new KonsolePrintManager(ldrawBackground, ldrawContents, lgetBackgroundColor));
-
-    _graphicsImages = std::map<int, QImage *>();
-    _graphicsPlacementsArray[0] = QVector<TerminalGraphicsPlacement_t *>();
-    _graphicsPlacementsArray[1] = QVector<TerminalGraphicsPlacement_t *>();
-    _graphicsPlacements = &_graphicsPlacementsArray[0];
-    _hasGraphics = false;
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -374,11 +367,6 @@ TerminalDisplay::~TerminalDisplay()
 
     delete[] _image;
     delete _filterChain;
-    for (int p = 0; p < 2; p++) {
-        for (int i = 0; i < _graphicsPlacementsArray[p].size(); i++) {
-            delete _graphicsPlacementsArray[p][i];
-        }
-    }
 }
 
 void TerminalDisplay::setupHeaderVisibility()
@@ -684,7 +672,7 @@ void TerminalDisplay::updateImage()
     _screenWindow->resetScrollCount();
 
     // update the parts of the display which have changed
-    if (_hasGraphics) {
+    if (_screenWindow->screen()->hasGraphics()) {
         update();
     } else {
         update(dirtyRegion);
@@ -1028,9 +1016,9 @@ void TerminalDisplay::updateImageSize()
                 histLines = _screenWindow->screen()->getHistLines();
             }
             if (histLines) {
-                scrollUpVisiblePlacements(qMax(-histLines, change));
+                _screenWindow->screen()->scrollUpVisiblePlacements(qMax(-histLines, change));
             } else if (oldLines > _lines && cursorPosition().y() >= oldLines - change) {
-                scrollUpVisiblePlacements(cursorPosition().y() - _lines + 1);
+                _screenWindow->screen()->scrollUpVisiblePlacements(cursorPosition().y() - _lines + 1);
             }
         }
         Q_EMIT changedContentSizeSignal(_contentRect.height(), _contentRect.width()); // expose resizeEvent
@@ -2969,191 +2957,4 @@ int TerminalDisplay::selectionState() const
     return _actSel;
 }
 
-QImage *TerminalDisplay::getGraphicsImage(int id)
-{
-    if (_graphicsImages.count(id)) {
-        return _graphicsImages[id];
-    }
-    return NULL;
-}
 
-void TerminalDisplay::setGraphicsImage(int id, QImage *pixmap)
-{
-    _graphicsImages[id] = pixmap;
-}
-
-std::map<int, QImage *>::iterator TerminalDisplay::getGraphicsImagesBegin()
-{
-    return _graphicsImages.begin();
-}
-
-std::map<int, QImage *>::iterator TerminalDisplay::getGraphicsImagesEnd()
-{
-    return _graphicsImages.end();
-}
-
-int TerminalDisplay::getFreeGraphicsImageId()
-{
-    int i = 1;
-    while (1) {
-        if (!_graphicsImages.count(i)) {
-            return i;
-        }
-        i++;
-    }
-}
-
-int TerminalDisplay::addPlacement(QPixmap pixmap, int &rows, int &cols, int row, int col, bool scrolling, int z, int id, int pid, qreal opacity, int X, int Y)
-{
-    if (pixmap.isNull()) {
-        return -1;
-    }
-
-    TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t;
-    QPoint pos = cursorPosition();
-
-    if (row == -1) {
-        row = pos.y();
-    }
-    if (col == -1) {
-        col = pos.x();
-    }
-    if (rows == -1) {
-        rows = (pixmap.height() - 1) / _terminalFont->fontHeight() + 1;
-    }
-    if (cols == -1) {
-        cols = (pixmap.width() - 1) / _terminalFont->fontWidth() + 1;
-    }
-
-    p->pixmap = pixmap;
-    p->z = z;
-    p->row = row;
-    p->col = col;
-    p->rows = rows;
-    p->cols = cols;
-    p->id = id;
-    p->pid = pid;
-    p->opacity = opacity;
-    p->scrolling = scrolling;
-    p->X = X;
-    p->Y = Y;
-
-    addPlacement(p);
-    return qBound(0, row + rows - _lines + 1, rows);
-}
-
-void TerminalDisplay::addPlacement(TerminalGraphicsPlacement_t *p)
-{
-    int i;
-    // remove placement with the same id and pid, if pid is non zero
-    if (p->pid >= 0 && p->id >= 0)
-        for (i = 0; i < _graphicsPlacements->size(); i++) {
-            TerminalGraphicsPlacement_t *placement = (*_graphicsPlacements)[i];
-            if (p->id == placement->id && p->pid == placement->pid) {
-                _graphicsPlacements->remove(i);
-                delete placement;
-                break;
-            }
-        }
-
-    for (i = 0; i < _graphicsPlacements->size() && p->z >= (*_graphicsPlacements)[i]->z; i++)
-        ;
-    _graphicsPlacements->insert(i, p);
-    _hasGraphics = true;
-    // Placements with pid<0 cannot be deleted, so remove those fully covered
-    // by others.
-    QRegion covered = QRegion();
-    for (int i = _graphicsPlacements->size() - 1; i >= 0; i--) {
-        TerminalGraphicsPlacement_t *placement = (*_graphicsPlacements)[i];
-        if (placement->pid < 0) {
-            QRect rect(placement->col, placement->row, placement->cols, placement->rows);
-            if (covered.intersected(rect) == QRegion(rect)) {
-                _graphicsPlacements->remove(i);
-                delete placement;
-            } else {
-                covered += rect;
-            }
-        }
-    }
-}
-
-TerminalGraphicsPlacement_t *TerminalDisplay::getGraphicsPlacement(int i)
-{
-    if (i >= _graphicsPlacements->size()) {
-        return NULL;
-    }
-    return (*_graphicsPlacements)[i];
-}
-
-void TerminalDisplay::scrollUpVisiblePlacements(int n)
-{
-    int histMaxLines = _screenWindow->screen()->getHistMaxLines();
-    for (int i = _graphicsPlacements->size() - 1; i >= 0; i--) {
-        TerminalGraphicsPlacement_t *placement = (*_graphicsPlacements)[i];
-        if (placement->scrolling) {
-            placement->row -= n;
-            if (placement->row + placement->rows < -histMaxLines) {
-                _graphicsPlacements->remove(i);
-                delete placement;
-            }
-        }
-    }
-}
-
-void TerminalDisplay::delPlacements(int del, qint64 id, qint64 pid, int x, int y, int z)
-{
-    for (int i = _graphicsPlacements->size() - 1; i >= 0; i--) {
-        TerminalGraphicsPlacement_t *placement = (*_graphicsPlacements)[i];
-        bool remove = false;
-        switch (del) {
-        case 1:
-            remove = true;
-            break;
-        case 'z':
-            if (placement->z == z) {
-                remove = true;
-            }
-            break;
-        case 'x':
-            if (placement->col <= x && x < placement->col + placement->cols) {
-                remove = true;
-            }
-            break;
-        case 'y':
-            if (placement->row <= y && y < placement->row + placement->rows) {
-                remove = true;
-            }
-            break;
-        case 'p':
-            if (placement->col <= x && x < placement->col + placement->cols && placement->row <= y && y < placement->row + placement->rows) {
-                remove = true;
-            }
-            break;
-        case 'q':
-            if (placement->col <= x && x < placement->col + placement->cols && placement->row <= y && y < placement->row + placement->rows
-                && placement->z == z) {
-                remove = true;
-            }
-            break;
-        case 'a':
-            if (placement->row + placement->rows > 0) {
-                remove = true;
-            }
-            break;
-        case 'i':
-            if (placement->id == id && (pid < 0 || placement->pid == pid)) {
-                remove = true;
-            }
-            break;
-        }
-        if (remove) {
-            _graphicsPlacements->remove(i);
-            delete placement;
-        }
-    }
-}
-
-void TerminalDisplay::selectPlacements(int i)
-{
-    _graphicsPlacements = &_graphicsPlacementsArray[i ? 1 : 0];
-}

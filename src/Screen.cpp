@@ -20,6 +20,7 @@
 #include "session/Session.h"
 #include "session/SessionController.h"
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalFonts.h"
 
 #include "EscapeSequenceUrlExtractor.h"
 #include "characters/ExtendedCharTable.h"
@@ -90,12 +91,20 @@ Screen::Screen(int lines, int columns)
     _escapeSequenceUrlExtractor->setScreen(this);
     std::fill(_lineProperties.begin(), _lineProperties.end(), LINE_DEFAULT);
 
+    _graphicsPlacements = QVector<TerminalGraphicsPlacement_t *>();
+    _hasGraphics = false;
+
     initTabStops();
     clearSelection();
     reset();
 }
 
-Screen::~Screen() = default;
+Screen::~Screen()
+{
+    for (int i = 0; i < _graphicsPlacements.size(); i++) {
+        delete _graphicsPlacements[i];
+    }
+}
 
 void Screen::cursorUp(int n)
 //=CUU
@@ -799,8 +808,8 @@ void Screen::reset()
     setDefaultRendition();
     saveCursor();
 
-    if (_currentTerminalDisplay && _currentTerminalDisplay->hasGraphics()) {
-        _currentTerminalDisplay->delPlacements();
+    if (_hasGraphics) {
+        delPlacements();
         _currentTerminalDisplay->update();
     }
 }
@@ -1064,8 +1073,8 @@ void Screen::scrollUp(int from, int n)
     // FIXME: make sure `topMargin', `bottomMargin', `from', `n' is in bounds.
     moveImage(loc(0, from), loc(0, from + n), loc(_columns, _bottomMargin));
     clearImage(loc(0, _bottomMargin - n + 1), loc(_columns - 1, _bottomMargin), ' ');
-    if (_currentTerminalDisplay->hasGraphics()) {
-        _currentTerminalDisplay->scrollUpVisiblePlacements(n);
+    if (_hasGraphics) {
+        scrollUpVisiblePlacements(n);
     }
 }
 
@@ -1284,8 +1293,8 @@ void Screen::clearToBeginOfScreen()
 void Screen::clearEntireScreen()
 {
     clearImage(loc(0, 0), loc(_columns - 1, _lines - 1), ' ');
-    if (_currentTerminalDisplay && _currentTerminalDisplay->hasGraphics()) {
-        _currentTerminalDisplay->delPlacements();
+    if (_hasGraphics) {
+        delPlacements();
         _currentTerminalDisplay->update();
     }
 }
@@ -1746,11 +1755,6 @@ int Screen::getHistLines() const
     return _history->getLines();
 }
 
-int Screen::getHistMaxLines() const
-{
-    return _history->getMaxLines();
-}
-
 void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
 {
     clearSelection();
@@ -1800,4 +1804,181 @@ void Screen::fillWithDefaultChar(Character *dest, int count)
 Konsole::EscapeSequenceUrlExtractor *Konsole::Screen::urlExtractor() const
 {
     return _escapeSequenceUrlExtractor.get();
+}
+
+int Screen::addPlacement(QPixmap pixmap,
+                         int &rows,
+                         int &cols,
+                         int row,
+                         int col,
+                         bool scrolling,
+                         bool moveCursor,
+                         int z,
+                         int id,
+                         int pid,
+                         qreal opacity,
+                         int X,
+                         int Y)
+{
+    if (pixmap.isNull()) {
+        return -1;
+    }
+
+    TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t;
+
+    if (row == -1) {
+        row = _cuY;
+    }
+    if (col == -1) {
+        col = _cuX;
+    }
+    if (rows == -1) {
+        rows = (pixmap.height() - 1) / _currentTerminalDisplay->terminalFont()->fontHeight() + 1;
+    }
+    if (cols == -1) {
+        cols = (pixmap.width() - 1) / _currentTerminalDisplay->terminalFont()->fontWidth() + 1;
+    }
+
+    p->pixmap = pixmap;
+    p->z = z;
+    p->row = row;
+    p->col = col;
+    p->rows = rows;
+    p->cols = cols;
+    p->id = id;
+    p->pid = pid;
+    p->opacity = opacity;
+    p->scrolling = scrolling;
+    p->X = X;
+    p->Y = Y;
+
+    addPlacement(p);
+    int needScroll = qBound(0, row + rows - _lines + 1, rows);
+    if (scrolling && needScroll > moveCursor) {
+        scrollUp(needScroll - moveCursor);
+    }
+    if (moveCursor) {
+        if (rows - needScroll - 1 > 0) {
+            cursorDown(rows - needScroll - 1);
+        }
+        if (_cuX + cols >= _columns) {
+            toStartOfLine();
+            newLine();
+        } else {
+            cursorRight(cols);
+        }
+    }
+
+    return qBound(0, row + rows - _lines + 1, rows);
+}
+
+void Screen::addPlacement(TerminalGraphicsPlacement_t *p)
+{
+    int i;
+    // remove placement with the same id and pid, if pid is non zero
+    if (p->pid >= 0 && p->id >= 0)
+        for (i = 0; i < _graphicsPlacements.size(); i++) {
+            TerminalGraphicsPlacement_t *placement = _graphicsPlacements[i];
+            if (p->id == placement->id && p->pid == placement->pid) {
+                _graphicsPlacements.remove(i);
+                delete placement;
+                break;
+            }
+        }
+
+    for (i = 0; i < _graphicsPlacements.size() && p->z >= _graphicsPlacements[i]->z; i++)
+        ;
+    _graphicsPlacements.insert(i, p);
+    _hasGraphics = true;
+    // Placements with pid<0 cannot be deleted, so remove those fully covered
+    // by others.
+    QRegion covered = QRegion();
+    for (i = _graphicsPlacements.size() - 1; i >= 0; i--) {
+        TerminalGraphicsPlacement_t *placement = _graphicsPlacements[i];
+        if (placement->pid < 0) {
+            QRect rect(placement->col, placement->row, placement->cols, placement->rows);
+            if (covered.intersected(rect) == QRegion(rect)) {
+                _graphicsPlacements.remove(i);
+                delete placement;
+            } else {
+                covered += rect;
+            }
+        }
+    }
+}
+
+TerminalGraphicsPlacement_t *Screen::getGraphicsPlacement(int i)
+{
+    if (i >= _graphicsPlacements.size()) {
+        return nullptr;
+    }
+    return _graphicsPlacements[i];
+}
+
+void Screen::scrollUpVisiblePlacements(int n)
+{
+    int histMaxLines = _history->getMaxLines();
+    for (int i = _graphicsPlacements.size() - 1; i >= 0; i--) {
+        TerminalGraphicsPlacement_t *placement = _graphicsPlacements[i];
+        if (placement->scrolling) {
+            placement->row -= n;
+            if (placement->row + placement->rows < -histMaxLines) {
+                _graphicsPlacements.remove(i);
+                delete placement;
+            }
+        }
+    }
+}
+
+void Screen::delPlacements(int del, qint64 id, qint64 pid, int x, int y, int z)
+{
+    for (int i = _graphicsPlacements.size() - 1; i >= 0; i--) {
+        TerminalGraphicsPlacement_t *placement = _graphicsPlacements[i];
+        bool remove = false;
+        switch (del) {
+        case 1:
+            remove = true;
+            break;
+        case 'z':
+            if (placement->z == z) {
+                remove = true;
+            }
+            break;
+        case 'x':
+            if (placement->col <= x && x < placement->col + placement->cols) {
+                remove = true;
+            }
+            break;
+        case 'y':
+            if (placement->row <= y && y < placement->row + placement->rows) {
+                remove = true;
+            }
+            break;
+        case 'p':
+            if (placement->col <= x && x < placement->col + placement->cols && placement->row <= y && y < placement->row + placement->rows) {
+                remove = true;
+            }
+            break;
+        case 'q':
+            if (placement->col <= x && x < placement->col + placement->cols && placement->row <= y && y < placement->row + placement->rows
+                && placement->z == z) {
+                remove = true;
+            }
+            break;
+        case 'a':
+            if (placement->row + placement->rows > 0) {
+                remove = true;
+            }
+            break;
+        case 'i':
+            if (placement->id == id && (pid < 0 || placement->pid == pid)) {
+                remove = true;
+            }
+            break;
+        }
+        if (remove) {
+            _graphicsPlacements.remove(i);
+            delete placement;
+        }
+    }
 }

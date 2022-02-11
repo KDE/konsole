@@ -10,6 +10,7 @@
 #include "TerminalPainter.h"
 
 // Konsole
+#include "../Screen.h"
 #include "../characters/ExtendedCharTable.h"
 #include "../characters/LineBlockCharacters.h"
 #include "../session/SessionManager.h"
@@ -420,15 +421,16 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
     }
 
     const auto display = qobject_cast<TerminalDisplay *>(sender());
+    Screen *screen = display->screenWindow()->screen();
     int placementIdx = 0;
     qreal opacity = painter.opacity();
-    int scrollDelta = display->terminalFont()->fontHeight() * (display->screenWindow()->currentLine() - display->screenWindow()->screen()->getHistLines());
+    int scrollDelta = display->terminalFont()->fontHeight() * (display->screenWindow()->currentLine() - screen->getHistLines());
     const bool origClipping = painter.hasClipping();
     const auto origClipRegion = painter.clipRegion();
-    if (display->hasGraphics()) {
+    if (screen->hasGraphics()) {
         painter.setClipRect(rect);
         while (1) {
-            TerminalGraphicsPlacement_t *p = display->getGraphicsPlacement(placementIdx);
+            TerminalGraphicsPlacement_t *p = screen->getGraphicsPlacement(placementIdx);
             if (!p || p->z >= 0) {
                 break;
             }
@@ -451,9 +453,9 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
     // draw text
     drawCharacters(painter, rect, text, style, characterColor, lineProperty);
 
-    if (display->hasGraphics()) {
+    if (screen->hasGraphics()) {
         while (1) {
-            TerminalGraphicsPlacement_t *p = display->getGraphicsPlacement(placementIdx);
+            TerminalGraphicsPlacement_t *p = screen->getGraphicsPlacement(placementIdx);
             if (!p) {
                 break;
             }
