@@ -625,7 +625,7 @@ public:
                      qreal opacity = 1.0,
                      int X = 0,
                      int Y = 0);
-    TerminalGraphicsPlacement_t *getGraphicsPlacement(int i);
+    TerminalGraphicsPlacement_t *getGraphicsPlacement(unsigned int i);
     void scrollUpVisiblePlacements(int n);
     void delPlacements(int = 'a', qint64 = 0, qint64 = -1, int = 0, int = 0, int = 0);
 
@@ -804,8 +804,8 @@ private:
     const int MAX_SCREEN_ARGUMENT = 40960;
 
     /* Graphics */
-    void addPlacement(TerminalGraphicsPlacement_t *p);
-    QVector<TerminalGraphicsPlacement_t *> _graphicsPlacements;
+    void addPlacement(std::unique_ptr<TerminalGraphicsPlacement_t> &u);
+    std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>> _graphicsPlacements;
     bool _hasGraphics;
 };
 

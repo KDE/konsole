@@ -91,7 +91,7 @@ Screen::Screen(int lines, int columns)
     _escapeSequenceUrlExtractor->setScreen(this);
     std::fill(_lineProperties.begin(), _lineProperties.end(), LINE_DEFAULT);
 
-    _graphicsPlacements = QVector<TerminalGraphicsPlacement_t *>();
+    _graphicsPlacements = std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>>();
     _hasGraphics = false;
 
     initTabStops();
@@ -99,12 +99,7 @@ Screen::Screen(int lines, int columns)
     reset();
 }
 
-Screen::~Screen()
-{
-    for (int i = 0; i < _graphicsPlacements.size(); i++) {
-        delete _graphicsPlacements[i];
-    }
-}
+Screen::~Screen() = default;
 
 void Screen::cursorUp(int n)
 //=CUU
@@ -1824,7 +1819,7 @@ int Screen::addPlacement(QPixmap pixmap,
         return -1;
     }
 
-    TerminalGraphicsPlacement_t *p = new TerminalGraphicsPlacement_t;
+    std::unique_ptr<TerminalGraphicsPlacement_t> p(new TerminalGraphicsPlacement_t);
 
     if (row == -1) {
         row = _cuY;
@@ -1872,68 +1867,82 @@ int Screen::addPlacement(QPixmap pixmap,
     return qBound(0, row + rows - _lines + 1, rows);
 }
 
-void Screen::addPlacement(TerminalGraphicsPlacement_t *p)
+void Screen::addPlacement(std::unique_ptr<TerminalGraphicsPlacement_t> &placement)
 {
-    int i;
+    std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>>::iterator i;
     // remove placement with the same id and pid, if pid is non zero
-    if (p->pid >= 0 && p->id >= 0)
-        for (i = 0; i < _graphicsPlacements.size(); i++) {
-            TerminalGraphicsPlacement_t *placement = _graphicsPlacements[i];
+    if (placement->pid >= 0 && placement->id >= 0) {
+        i = _graphicsPlacements.begin();
+        while (i != _graphicsPlacements.end()) {
+            TerminalGraphicsPlacement_t *p = i->get();
             if (p->id == placement->id && p->pid == placement->pid) {
-                _graphicsPlacements.remove(i);
-                delete placement;
+                _graphicsPlacements.erase(i);
                 break;
             }
+            i++;
         }
+    }
 
-    for (i = 0; i < _graphicsPlacements.size() && p->z >= _graphicsPlacements[i]->z; i++)
+    for (i = _graphicsPlacements.begin(); i != _graphicsPlacements.end() && placement->z >= i->get()->z; i++)
         ;
-    _graphicsPlacements.insert(i, p);
+    _graphicsPlacements.insert(i, std::move(placement));
     _hasGraphics = true;
-    // Placements with pid<0 cannot be deleted, so remove those fully covered
+    // Placements with pid<0 cannot be deleted by the application, so remove those fully covered
     // by others.
     QRegion covered = QRegion();
-    for (i = _graphicsPlacements.size() - 1; i >= 0; i--) {
-        TerminalGraphicsPlacement_t *placement = _graphicsPlacements[i];
-        if (placement->pid < 0) {
-            QRect rect(placement->col, placement->row, placement->cols, placement->rows);
+    std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>>::reverse_iterator rit;
+    rit = _graphicsPlacements.rbegin();
+    while (rit != _graphicsPlacements.rend()) {
+        TerminalGraphicsPlacement_t *p = rit->get();
+        if (p->pid < 0) {
+            QRect rect(p->col, p->row, p->cols, p->rows);
             if (covered.intersected(rect) == QRegion(rect)) {
-                _graphicsPlacements.remove(i);
-                delete placement;
+                std::advance(rit, 1);
+                _graphicsPlacements.erase(rit.base());
             } else {
                 covered += rect;
+                std::advance(rit, 1);
             }
+        } else {
+            std::advance(rit, 1);
         }
     }
 }
 
-TerminalGraphicsPlacement_t *Screen::getGraphicsPlacement(int i)
+TerminalGraphicsPlacement_t *Screen::getGraphicsPlacement(unsigned int i)
 {
     if (i >= _graphicsPlacements.size()) {
         return nullptr;
     }
-    return _graphicsPlacements[i];
+    return _graphicsPlacements[i].get();
 }
 
 void Screen::scrollUpVisiblePlacements(int n)
 {
+    std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>>::iterator i;
     int histMaxLines = _history->getMaxLines();
-    for (int i = _graphicsPlacements.size() - 1; i >= 0; i--) {
-        TerminalGraphicsPlacement_t *placement = _graphicsPlacements[i];
+    i = _graphicsPlacements.begin();
+    while (i != _graphicsPlacements.end()) {
+        TerminalGraphicsPlacement_t *placement = i->get();
         if (placement->scrolling) {
             placement->row -= n;
             if (placement->row + placement->rows < -histMaxLines) {
-                _graphicsPlacements.remove(i);
-                delete placement;
+                i = _graphicsPlacements.erase(i);
+            } else {
+                i++;
             }
+        } else {
+            i++;
         }
     }
 }
 
 void Screen::delPlacements(int del, qint64 id, qint64 pid, int x, int y, int z)
 {
-    for (int i = _graphicsPlacements.size() - 1; i >= 0; i--) {
-        TerminalGraphicsPlacement_t *placement = _graphicsPlacements[i];
+    std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>>::iterator i;
+    i = _graphicsPlacements.begin();
+    while (i != _graphicsPlacements.end()) {
+        TerminalGraphicsPlacement_t *placement = i->get();
         bool remove = false;
         switch (del) {
         case 1:
@@ -1977,8 +1986,9 @@ void Screen::delPlacements(int del, qint64 id, qint64 pid, int x, int y, int z)
             break;
         }
         if (remove) {
-            _graphicsPlacements.remove(i);
-            delete placement;
+            _graphicsPlacements.erase(i);
+        } else {
+            i++;
         }
     }
 }
