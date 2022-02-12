@@ -25,6 +25,7 @@ Keywords[sl]=terminal;console;script;run;execute;command;command-line;commandlin
 Keywords[sv]=terminal;konsoll;skript;köra;kommando;kommandorad;bash;sh;skal;zsh;cmd;kommandoprompt
 Keywords[uk]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;термінал;консоль;скрипт;сценарій;виконати;запустити;команда;командний рядок;клі;командний інтерфейс;баш;оболонка;шел;зш;кмд;командний запит
 Keywords[x-test]=xxterminalxx;xxconsolexx;xxscriptxx;xxrunxx;xxexecutexx;xxcommandxx;xxcommand-linexx;xxcommandlinexx;xxclixx;xxbashxx;xxshxx;xxshellxx;xxzshxx;xxcmdxx;xxcommand promptxx
+Keywords[zh_CN]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;终端;控制台;脚本;执行;运行;命令;命令行;命令行界面;外壳;命令行提示
 Keywords[zh_TW]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt
 
 Name=Konsole
