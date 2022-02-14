@@ -80,7 +80,12 @@ Vt102Emulation::Vt102Emulation()
     _graphicsImages = std::map<int, QImage *>();
 }
 
-Vt102Emulation::~Vt102Emulation() = default;
+Vt102Emulation::~Vt102Emulation()
+{
+    for (std::map<int, QImage *>::iterator iter = _graphicsImages.begin(); iter != _graphicsImages.end(); ++iter) {
+        delete iter->second;
+    }
+}
 
 void Vt102Emulation::clearEntireScreen()
 {
@@ -1440,12 +1445,8 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
         }
     }
     if (keys['a'] == 'p' || (keys['a'] == 'T' && keys['m'] == 0)) {
-        if (keys['i']) {
-            if (_graphicsImages.count(keys['i'])) {
-                image = _graphicsImages[keys['i']];
-            } else {
-                image = nullptr;
-            }
+        if (keys['a'] == 'p') {
+            image = _graphicsImages[keys['i']];
         }
         if (image) {
             QPixmap pixmap = QPixmap::fromImage(*image);
