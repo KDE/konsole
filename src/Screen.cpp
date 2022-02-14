@@ -1849,7 +1849,7 @@ int Screen::addPlacement(QPixmap pixmap,
 
     addPlacement(p);
     int needScroll = qBound(0, row + rows - _lines + 1, rows);
-    if (scrolling && needScroll > moveCursor) {
+    if (moveCursor && scrolling && needScroll > moveCursor) {
         scrollUp(needScroll - moveCursor);
     }
     if (moveCursor) {
