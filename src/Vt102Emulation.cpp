@@ -2020,8 +2020,9 @@ void Vt102Emulation::setMode(int m)
         _screen[1]->setDefaultRendition();
         _screen[1]->clearSelection();
         setScreen(1);
-        if (_currentScreen) { // We may get here before we have a TerminalDisplay
+        if (_currentScreen && _currentScreen->currentTerminalDisplay()) {
             _currentScreen->delPlacements(1);
+            _currentScreen->currentTerminalDisplay()->update();
         }
         break;
     }
@@ -2065,6 +2066,9 @@ void Vt102Emulation::resetMode(int m)
     case MODE_AppScreen:
         _screen[0]->clearSelection();
         setScreen(0);
+        if (_currentScreen && _currentScreen->currentTerminalDisplay()) {
+            _currentScreen->currentTerminalDisplay()->update();
+        }
         break;
     }
     // FIXME: Currently this has a redundant condition as MODES_SCREEN is 7
