@@ -18,6 +18,7 @@ Keywords[az]=terminal;konsol;skript;başlatmaq;icra;əmr;əmr-sətri;əmrsətri;
 Keywords[ca]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres
 Keywords[ca@valencia]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres
 Keywords[es]=terminal;consola;script;guion;guión;lanzar;ejecutar;comando;orden;línea de órdenes;línea de comandos;cli;bash;sh;shell;intérprete;zsh;cmd;introducción de órdenes
+Keywords[fi]=pääte;konsoli;skripti;komentojono;aja;suorita;komento;komentorivi;cli;bash;sh;shell;komentotulkki;zsh;komentokehote;kehote
 Keywords[fr]=terminal ; console ; script ; lancer ; exécuter ;commande ; commande en ligne ; cli ; bash ; sh ; shell ; zsh ; invite de commandes
 Keywords[ia]=terminal;console;script;run;executa;commando;linea-de-commando;lineadecommando;cli;bash;sh;shell;zsh;cmd;command prompt
 Keywords[nl]=terminal;console;script;run;uitvoeren;commando;commandoregel;cli;bash;sh;shell;zsh;cmd;commando-prompt
