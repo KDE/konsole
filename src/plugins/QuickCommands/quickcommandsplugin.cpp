@@ -11,6 +11,7 @@
 #include <QMainWindow>
 
 #include "MainWindow.h"
+#include <KLocalizedString>
 
 K_PLUGIN_CLASS_WITH_JSON(QuickCommandsPlugin, "konsole_quickcommands.json")
 
