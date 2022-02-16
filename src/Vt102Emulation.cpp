@@ -2246,8 +2246,8 @@ void Vt102Emulation::SixelModeDisable()
         row = 0;
     }
     QPixmap pixmap = QPixmap::fromImage(m_currentImage.copy(QRect(0, 0, m_actualSize.width(), m_actualSize.height())));
-    if (m_aspect != 1) {
-        pixmap = pixmap.scaled(pixmap.width(), m_aspect * pixmap.height());
+    if (m_aspect.first != m_aspect.second) {
+        pixmap = pixmap.scaled(pixmap.width(), m_aspect.first * pixmap.height() / m_aspect.second);
     }
     int rows = -1, cols = -1;
     int needScroll = _currentScreen->currentTerminalDisplay()->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling);
@@ -2446,7 +2446,7 @@ bool Vt102Emulation::processSixel(uint cc)
         }
     }
     if (!m_SixelStarted && (sixel() || s[0] == '!' || s[0] == '#')) {
-        m_aspect = 1;
+        m_aspect = qMakePair(1, 1);
         SixelModeEnable(30, 6);
     }
     if (sixel()) {
@@ -2475,7 +2475,11 @@ bool Vt102Emulation::processSixel(uint cc)
             // const int pixelHeight = argv[1];
 
             if (!m_SixelStarted) {
-                m_aspect = (qreal)argv[0] / argv[1];
+                if (argv[1] == 0 || argv[0] == 0) {
+                    m_aspect = qMakePair(1, 1);
+                } else {
+                    m_aspect = qMakePair(argv[0], argv[1]);
+                }
                 const int width = argv[2];
                 const int height = argv[3];
                 SixelModeEnable(width, height);

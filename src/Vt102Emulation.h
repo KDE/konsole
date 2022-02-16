@@ -212,7 +212,7 @@ private:
     bool m_preserveBackground = true;
     int m_previousWidth = 128;
     int m_previousHeight = 32;
-    qreal m_aspect = 1.0;
+    QPair<int, int> m_aspect = qMakePair(1, 1);
     bool m_SixelScrolling = true;
     QSize m_actualSize; // For efficiency reasons, we keep the image in memory larger than what the end result is
 };
