@@ -619,7 +619,8 @@ public:
                      int col = -1,
                      bool scrolling = true,
                      bool moveCursor = true,
-                     int z = 1,
+                     bool leaveText = false,
+                     int z = -1000,
                      int id = -1,
                      int pid = -1,
                      qreal opacity = 1.0,
@@ -660,6 +661,9 @@ private:
     // the loc(x,y) macro can be used to generate these values from a column,line pair.
     // if resetLineRendition is true, all completely cleared lines will be set to single-width.
     void clearImage(int loca, int loce, char c, bool resetLineRendition = true);
+
+    // erases a rectangular section of the screen.
+    void eraseBlock(int y, int x, int height, int width);
 
     // move screen image between 'sourceBegin' and 'sourceEnd' to 'dest'.
     // the parameters are specified as offsets from the start of the screen image.

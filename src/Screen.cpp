@@ -242,6 +242,15 @@ void Screen::eraseChars(int n)
     clearImage(loc(_cuX, _cuY), loc(p, _cuY), ' ', false);
 }
 
+void Screen::eraseBlock(int y, int x, int height, int width)
+{
+    width = qBound(0, width, _columns - x - 1);
+    height = qBound(0, height, _lines - y - 1);
+    for (int row = y; row < y + height; row++) {
+        clearImage(loc(x, row), loc(x + width - 1, row), ' ', false);
+    }
+}
+
 void Screen::deleteChars(int n)
 {
     Q_ASSERT(n >= 0);
@@ -1808,6 +1817,7 @@ int Screen::addPlacement(QPixmap pixmap,
                          int col,
                          bool scrolling,
                          bool moveCursor,
+                         bool leaveText,
                          int z,
                          int id,
                          int pid,
@@ -1847,6 +1857,9 @@ int Screen::addPlacement(QPixmap pixmap,
     p->X = X;
     p->Y = Y;
 
+    if (!leaveText) {
+        eraseBlock(row, col, rows, cols);
+    }
     addPlacement(p);
     int needScroll = qBound(0, row + rows - _lines + 1, rows);
     if (moveCursor && scrolling && needScroll > moveCursor) {

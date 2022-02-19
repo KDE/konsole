@@ -1464,8 +1464,20 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                                        keys['r'] * _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight());
             }
             int rows = -1, cols = -1;
-            _currentScreen
-                ->addPlacement(pixmap, rows, cols, -1, -1, true, keys['C'] == 0, keys['z'], keys['i'], keys['p'], keys['A'] / 255.0, keys['X'], keys['Y']);
+            _currentScreen->addPlacement(pixmap,
+                                         rows,
+                                         cols,
+                                         -1,
+                                         -1,
+                                         true,
+                                         keys['C'] == 0,
+                                         true,
+                                         keys['z'],
+                                         keys['i'],
+                                         keys['p'],
+                                         keys['A'] / 255.0,
+                                         keys['X'],
+                                         keys['Y']);
             if (keys['q'] == 0 && keys['i']) {
                 QString params = QStringLiteral("i=") + QString::number(keys['i']);
                 if (keys['I']) {
@@ -2230,7 +2242,7 @@ void Vt102Emulation::SixelModeDisable()
         pixmap = pixmap.scaled(pixmap.width(), m_aspect.first * pixmap.height() / m_aspect.second);
     }
     int rows = -1, cols = -1;
-    int needScroll = _currentScreen->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling, false);
+    int needScroll = _currentScreen->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling, false, false);
     if (m_SixelScrolling) {
         if (rows - needScroll > 0) {
             _currentScreen->cursorDown(rows - needScroll);
