@@ -17,6 +17,7 @@ Keywords[ar]=طرفية;كونسول;سكربت;شغل;نفذ;أوامر;سطر-
 Keywords[az]=terminal;konsol;skript;başlatmaq;icra;əmr;əmr-sətri;əmrsətri;müştəri;bash;sh;qabıq;zsh;cmd;əmr-lövhəsi
 Keywords[ca]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres
 Keywords[ca@valencia]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres
+Keywords[en_GB]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt
 Keywords[es]=terminal;consola;script;guion;guión;lanzar;ejecutar;comando;orden;línea de órdenes;línea de comandos;cli;bash;sh;shell;intérprete;zsh;cmd;introducción de órdenes
 Keywords[fi]=pääte;konsoli;skripti;komentojono;aja;suorita;komento;komentorivi;cli;bash;sh;shell;komentotulkki;zsh;komentokehote;kehote
 Keywords[fr]=terminal ; console ; script ; lancer ; exécuter ;commande ; commande en ligne ; cli ; bash ; sh ; shell ; zsh ; invite de commandes
