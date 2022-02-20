@@ -1548,8 +1548,8 @@ void Vt102Emulation::reportPixelSize()
     snprintf(tmp,
              sizeof(tmp),
              "\033[4;%d;%dt",
-             _currentScreen->currentTerminalDisplay()->contentRect().height(),
-             _currentScreen->currentTerminalDisplay()->contentRect().width());
+             _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight() * _currentScreen->getLines(),
+             _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth() * _currentScreen->getColumns());
     sendString(tmp);
 }
 
