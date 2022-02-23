@@ -1576,7 +1576,7 @@ void Vt102Emulation::reportTerminalType()
     // VT101:  ^[[?1;0c
     // VT102:  ^[[?6v
     if (getMode(MODE_Ansi)) {
-        sendString("\033[?63;1;2;3;4;6;7;8c"); // VT320 with Sixel
+        sendString("\033[?62;1;4c"); // I'm a VT2xx with 132 columns and Sixel
     } else {
         sendString("\033/Z"); // I'm a VT52
     }
@@ -1593,7 +1593,7 @@ void Vt102Emulation::reportSecondaryAttributes()
 {
     // Secondary device attribute response (Request was: ^[[>0c or ^[[>c)
     if (getMode(MODE_Ansi)) {
-        sendString("\033[>0;115;0c"); // Why 115?  ;)
+        sendString("\033[>1;115;0c"); // Why 115?  ;)
     } else {
         sendString("\033/Z"); // FIXME I don't think VT52 knows about it but kept for
     }
