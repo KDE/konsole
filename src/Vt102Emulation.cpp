@@ -539,9 +539,9 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     if (s[2] == 'G') {
                         // Graphics command
                         processGraphicsToken(p);
-                        resetTokenizer();
-                        continue;
                     }
+                    resetTokenizer();
+                    continue;
                 }
             }
 
