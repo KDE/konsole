@@ -1294,6 +1294,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
 
     case token_csi_pq('c'      ) :  reportTertiaryAttributes(          ); break; //VT420
     case token_csi_pg('c'      ) :  reportSecondaryAttributes(          ); break; //VT100
+    case token_csi_pg('q'      ) :  reportVersion(          ); break;
 
     default:
         reportDecodingError();
@@ -1598,6 +1599,11 @@ void Vt102Emulation::reportSecondaryAttributes()
         sendString("\033/Z"); // FIXME I don't think VT52 knows about it but kept for
     }
     // konsoles backward compatibility.
+}
+
+void Vt102Emulation::reportVersion()
+{
+    sendString("\033P>|Konsole " KONSOLE_VERSION "\033\\");
 }
 
 /* DECREPTPARM – Report Terminal Parameters

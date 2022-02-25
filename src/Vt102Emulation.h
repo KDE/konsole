@@ -156,6 +156,7 @@ private:
     void reportTerminalType();
     void reportTertiaryAttributes();
     void reportSecondaryAttributes();
+    void reportVersion();
     void reportStatus();
     void reportAnswerBack();
     void reportCursorPosition();
