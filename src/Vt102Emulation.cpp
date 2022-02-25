@@ -1273,6 +1273,10 @@ void Vt102Emulation::processToken(int token, int p, int q)
     // DECSTR (Soft Terminal Reset)
     case token_csi_pe('p'      ) : reset(true); break; //VT220
 
+    case token_csi_pq('c'      ) :  reportTertiaryAttributes(          ); break; //VT420
+    case token_csi_pg('c'      ) :  reportSecondaryAttributes(          ); break; //VT100
+    case token_csi_pg('q'      ) :  reportVersion(          ); break;
+
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
     case token_vt52('A'      ) : _currentScreen->cursorUp             (         1); break; //VT52
     case token_vt52('B'      ) : _currentScreen->cursorDown           (         1); break; //VT52
@@ -1291,10 +1295,6 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_vt52('<'      ) :          setMode      (MODE_Ansi     ); break; //VT52
     case token_vt52('='      ) :          setMode      (MODE_AppKeyPad); break; //VT52
     case token_vt52('>'      ) :        resetMode      (MODE_AppKeyPad); break; //VT52
-
-    case token_csi_pq('c'      ) :  reportTertiaryAttributes(          ); break; //VT420
-    case token_csi_pg('c'      ) :  reportSecondaryAttributes(          ); break; //VT100
-    case token_csi_pg('q'      ) :  reportVersion(          ); break;
 
     default:
         reportDecodingError();
