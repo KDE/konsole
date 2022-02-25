@@ -675,16 +675,169 @@ static inline bool drawBlockCharacter(QPainter &paint, int x, int y, int w, int 
     }
 }
 
-void draw(QPainter &paint, const QRect &cellRect, const QChar &chr, bool bold)
+static inline bool drawLegacyCharacter(QPainter &paint, int x, int y, int w, int h, uint code, bool bold)
+{
+    Q_UNUSED(bold)
+    QPainterPath path;
+    const QColor color = paint.pen().color();
+
+    if (code >= 0x13c && code <= 0x16f) {
+        // Smooth mosaic terminal graphic characters
+        QVector<QPointF> points(13);
+        for (int i = 0; i < 12; i++) {
+            qreal px = x + (i >> 2) * w / 2.0;
+            qreal py = y + (3 - (i & 3)) * h / 3.0;
+            points[i] = QPointF(px, py);
+        }
+        points[12] = QPointF(x + w / 2.0, y + h / 2.0);
+        QList<std::string> chars = {
+            "014",   "018",   "024",   "028",   "034",  "027;8", "02;8",  "017;8", // 0x1fb3c - 0x1fb43
+            "01;8",  "07;8",  "01:8",  "498",   "098",  "4:8",   "0:8",   "4;8", // 44 - 4b
+            "037:8", "03:8",  "03798", "0398",  "0378", "0298",  "13;84", "13;8", // 4c - 53
+            "23;84", "23;8",  "3;84",  "237",   "23;",  "137",   "13;",   "037", // 54 - 5b
+            "13;:",  "03;94", "03;9",  "03;:4", // 5c-5f
+            "03;:",  "03;4",  "7;:",   "3;:",   "7;9",  "3;9",   "7;8",   "23;9", // 60-67
+            "0<3;8", "03<;8", "03;<8", "03;8<", "03<",  "3;<",   "<;8",   "0<8" // 68-6f
+        };
+        std::string str = chars[code - 0x13c];
+        QVector<QPointF> vec;
+        for (uint i = 0; i < str.length(); i++) {
+            vec.append(points[str[i] - '0']);
+        }
+        path.addPolygon(QPolygonF(vec));
+        paint.fillPath(path, color);
+        return true;
+    }
+    if (code >= 0x170 && code <= 0x175) {
+        // Vertical eighths
+        path.addRect(QRectF(x + (code - 0x16f) * w / 8.0, y, w / 8.0, h));
+        paint.fillPath(path, color);
+        return true;
+    }
+    if (code >= 0x176 && code <= 0x17b) {
+        // Horizontal eighths
+        path.addRect(QRectF(x, y + (code - 0x175) * h / 8.0, w, h / 8.0));
+        paint.fillPath(path, color);
+        return true;
+    }
+    if (code >= 0x17c && code <= 0x17f) {
+        // Corner eighths
+        qreal y1 = y;
+        qreal y2 = y;
+        if (code == 0x17c || code == 0x17f) {
+            y1 += 7 * h / 8.0;
+        } else {
+            y2 += h / 8.0;
+        }
+        qreal x1 = x;
+        if (code > 0x17d) {
+            x1 += 7 * w / 8.0;
+        }
+        path.addRect(QRectF(x, y1, w, h / 8.0));
+        path.addRect(QRectF(x1, y2, w / 8.0, 7 * h / 8.0));
+        paint.fillPath(path, color);
+        return true;
+    }
+    if (code == 0x180) {
+        // Horizontal eighths 18
+        path.addRect(QRectF(x, y, w, h / 8.0));
+        path.addRect(QRectF(x, y + 7 * h / 8.0, w, h / 8.0));
+        paint.fillPath(path, color);
+        return true;
+    }
+    if (code == 0x181) {
+        // Horizontal eighths 1358
+        path.addRect(QRectF(x, y, w, h / 8.0));
+        path.addRect(QRectF(x, y + 2 * h / 8.0, w, h / 8.0));
+        path.addRect(QRectF(x, y + 4 * h / 8.0, w, h / 8.0));
+        path.addRect(QRectF(x, y + 7 * h / 8.0, w, h / 8.0));
+        paint.fillPath(path, color);
+        return true;
+    }
+    if (code >= 0x182 && code <= 0x186) {
+        // Horizontal upper 2,3,5,6,7 eighths
+        int hs[5] = {2, 3, 5, 6, 7};
+        path.addRect(QRectF(x, y, w, hs[code - 0x182] * h / 8.0));
+        paint.fillPath(path, color);
+        return true;
+    }
+    if (code >= 0x187 && code <= 0x18b) {
+        // Vertical right 2,3,5,6,7 eighths
+        int hs[5] = {2, 3, 5, 6, 7};
+        path.addRect(QRectF(x + (8 - hs[code - 0x187]) * w / 8.0, y, hs[code - 0x187] * w / 8.0, h));
+        paint.fillPath(path, color);
+        return true;
+    }
+
+    if (code >= 0x128) {
+        code += 1;
+    }
+    if (code >= 0x114) {
+        code += 1;
+    }
+    code += 1;
+
+    // Center point
+    const QPointF center = {
+        x + w / 2.0,
+        y + h / 2.0,
+    };
+
+    // Default rect fills entire cell
+    QRectF rect(x, y, w, h);
+    if (code <= 0x13f) {
+        const QRectF upperLeft(x, y, w / 2.0, h / 3.0);
+        const QRectF upperRight(center.x(), y, w / 2.0, h / 3.0);
+        const QRectF midLeft(x, y + h / 3.0, w / 2.0, h / 3.0);
+        const QRectF midRight(center.x(), y + h / 3.0, w / 2.0, h / 3.0);
+        const QRectF lowerLeft(x, y + 2.0 * h / 3.0, w / 2.0, h / 3.0);
+        const QRectF lowerRight(center.x(), y + 2.0 * h / 3.0, w / 2.0, h / 3.0);
+
+        if (code & 0x01) {
+            path.addRect(upperLeft);
+        }
+        if (code & 0x02) {
+            path.addRect(upperRight);
+        }
+        if (code & 0x04) {
+            path.addRect(midLeft);
+        }
+        if (code & 0x08) {
+            path.addRect(midRight);
+        }
+        if (code & 0x10) {
+            path.addRect(lowerLeft);
+        }
+        if (code & 0x20) {
+            path.addRect(lowerRight);
+        }
+
+        paint.fillPath(path, color);
+        return true;
+    }
+    return false;
+}
+
+void draw(QPainter &paint, const QRect &cellRect, const uint &chr, bool bold)
 {
     static const ushort FirstBoxDrawingCharacterCodePoint = 0x2500;
-    const uchar code = chr.unicode() - FirstBoxDrawingCharacterCodePoint;
+    static const uint FirstLegacyCharacterCodePoint = 0x1fb00;
+    uint code;
+    if (chr >= FirstLegacyCharacterCodePoint) {
+        code = chr - FirstLegacyCharacterCodePoint + 0x100;
+    } else {
+        code = chr - FirstBoxDrawingCharacterCodePoint;
+    }
 
     int x = cellRect.x();
     int y = cellRect.y();
     int w = cellRect.width();
     int h = cellRect.height();
 
+    if (code >= 0x100) {
+        drawLegacyCharacter(paint, x, y, w, h, code, bold);
+        return;
+    }
     // Each function below returns true when it has drawn the character, false otherwise.
     drawBasicLineCharacter(paint, x, y, w, h, code, bold) || drawDashedLineCharacter(paint, x, y, w, h, code, bold)
         || drawRoundedCornerLineCharacter(paint, x, y, w, h, code, bold) || drawDiagonalLineCharacter(paint, x, y, w, h, code, bold)

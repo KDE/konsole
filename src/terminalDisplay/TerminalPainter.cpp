@@ -49,7 +49,19 @@ static inline bool isLineCharString(const QString &string)
     if (string.length() == 0) {
         return false;
     }
-    return LineBlockCharacters::canDraw(string.at(0).unicode());
+    if (LineBlockCharacters::canDraw(string.at(0).unicode())) {
+        return true;
+    }
+    if (string.length() <= 1 || !string[0].isSurrogate()) {
+        return false;
+    }
+    uint ucs4;
+    if (string[0].isHighSurrogate()) {
+        ucs4 = QChar::surrogateToUcs4(string[0], string[1]);
+    } else {
+        ucs4 = QChar::surrogateToUcs4(string[1], string[0]);
+    }
+    return LineBlockCharacters::isLegacyComputingSymbol(ucs4);
 }
 
 bool isInvertedRendition(const TerminalDisplay *display)
@@ -642,10 +654,10 @@ void TerminalPainter::drawLineCharString(TerminalDisplay *display, QPainter &pai
     painter.setRenderHint(QPainter::Antialiasing, display->terminalFont()->antialiasText());
 
     const bool useBoldPen = (attributes.rendition & RE_BOLD) != 0 && display->terminalFont()->boldIntense();
-
     QRect cellRect = {x, y, display->terminalFont()->fontWidth(), display->terminalFont()->fontHeight()};
-    for (int i = 0; i < str.length(); i++) {
-        LineBlockCharacters::draw(painter, cellRect.translated(i * display->terminalFont()->fontWidth(), 0), str[i], useBoldPen);
+    QVector<uint> ucs4str = str.toUcs4();
+    for (int i = 0; i < ucs4str.length(); i++) {
+        LineBlockCharacters::draw(painter, cellRect.translated(i * display->terminalFont()->fontWidth(), 0), ucs4str[i], useBoldPen);
     }
     painter.setRenderHint(QPainter::Antialiasing, false);
 }

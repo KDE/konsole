@@ -28,6 +28,16 @@ inline static bool canDraw(uint ucs4cp)
 }
 
 /**
+ * Returns true if the character is a Legacy Computing Symbol and can be drawn by draw() function.
+ *
+ * @param ucs4cp Character to test's UCS4 code point
+ */
+inline static bool isLegacyComputingSymbol(uint ucs4cp)
+{
+    return (0x1fb00 <= ucs4cp && ucs4cp <= 0x1fb8b);
+}
+
+/**
  * Draws character.
  *
  * @param paint QPainter to draw on
@@ -35,7 +45,7 @@ inline static bool canDraw(uint ucs4cp)
  * @param chr Character to be drawn
  * @param bold Whether the character should be boldface
  */
-void draw(QPainter &paint, const QRect &cellRect, const QChar &chr, bool bold);
+void draw(QPainter &paint, const QRect &cellRect, const uint &chr, bool bold);
 
 } // namespace LineBlockCharacters
 } // namespace Konsole
