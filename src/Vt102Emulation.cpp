@@ -1165,8 +1165,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s',  67) : /* IGNORED: DECBKM                   */ break; //XTERM
     case token_csi_pr('r',  67) : /* IGNORED: DECBKM                   */ break; //XTERM
 
-    case token_csi_pr('h',  80) : m_SixelScrolling = true;                break; //XTERM
-    case token_csi_pr('l',  80) : m_SixelScrolling = false;               break; //XTERM
+    case token_csi_pr('h',  80) : m_SixelScrolling = false;               break;
+    case token_csi_pr('l',  80) : m_SixelScrolling = true;                break;
 
     // XTerm defines the following modes:
     // SET_VT200_MOUSE             1000
