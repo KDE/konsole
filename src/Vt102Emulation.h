@@ -163,6 +163,7 @@ private:
     void reportPixelSize();
     void reportCellSize();
     void reportSize();
+    void reportColor(int c, QColor color);
     void reportTerminalParms(int p);
 
     // clears the screen and resizes it to the specified
@@ -194,6 +195,8 @@ private:
     QTimer *_sessionAttributesUpdateTimer;
 
     bool _reportFocusEvents;
+
+    QColor colorTable[256];
 
     // Sixel:
 #define MAX_SIXEL_COLORS 256

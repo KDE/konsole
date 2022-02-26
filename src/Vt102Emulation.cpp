@@ -78,6 +78,10 @@ Vt102Emulation::Vt102Emulation()
     tokenData = QByteArray();
 
     _graphicsImages = std::map<int, QImage *>();
+
+    for (int i = 0; i < 256; i++) {
+        colorTable[i] = QColor();
+    }
 }
 
 Vt102Emulation::~Vt102Emulation()
@@ -751,6 +755,35 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     if (attribute == 133) {
         if (value == QLatin1String("A")) {
             _currentScreen->setLineProperty(LINE_PROMPT_START, true);
+        }
+    }
+    if (attribute == 4) {
+        // RGB colors
+        QStringList params = value.split(QLatin1Char(';'));
+        for (int i = 0; i < params.length(); i += 2) {
+            if (params.length() == i + 1) {
+                return;
+            }
+            int c = params[i].toInt();
+            if (params[i + 1] == QLatin1String("?")) {
+                QColor color = colorTable[c];
+                if (!color.isValid()) {
+                    color = CharacterColor(COLOR_SPACE_256, c).color(ColorScheme::defaultTable);
+                }
+                reportColor(c, color);
+                return;
+            }
+            QColor col(params[1]);
+            colorTable[c] = col;
+        }
+        return;
+    }
+    if (attribute == 104) {
+        // RGB colors
+        QStringList params = value.split(QLatin1Char(';'));
+        for (int i = 0; i < params.length(); i++) {
+            int c = params[i].toInt();
+            colorTable[c] = QColor();
         }
     }
 
@@ -1571,6 +1604,22 @@ void Vt102Emulation::reportCellSize()
              "\033[6;%d;%dt",
              _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight(),
              _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth());
+    sendString(tmp);
+}
+
+void Vt102Emulation::reportColor(int c, QColor color)
+{
+    char tmp[60];
+    snprintf(tmp,
+             sizeof(tmp),
+             "\033]4;%i;rgb:%02x%02x/%02x%02x/%02x%02x\007",
+             c,
+             color.red(),
+             color.red(),
+             color.green(),
+             color.green(),
+             color.blue(),
+             color.blue());
     sendString(tmp);
 }
 
