@@ -161,6 +161,7 @@ private:
     void reportAnswerBack();
     void reportCursorPosition();
     void reportPixelSize();
+    void reportCellSize();
     void reportSize();
     void reportTerminalParms(int p);
 
