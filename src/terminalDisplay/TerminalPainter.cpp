@@ -426,10 +426,6 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
         }
     }
 
-    if (backgroundColor != colorTable[DEFAULT_BACK_COLOR]) {
-        drawBackground(painter, rect, backgroundColor, false);
-    }
-
     const auto display = qobject_cast<TerminalDisplay *>(sender());
     Screen *screen = display->screenWindow()->screen();
     int placementIdx = 0;
@@ -453,6 +449,15 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
             placementIdx++;
         }
         painter.setOpacity(opacity);
+    }
+
+    bool drawBG = backgroundColor != colorTable[DEFAULT_BACK_COLOR];
+    if (screen->hasGraphics() && style.rendition == RE_CONCEAL) {
+        drawBG = false;
+    }
+
+    if (drawBG) {
+        drawBackground(painter, rect, backgroundColor, false);
     }
 
     QColor characterColor = foregroundColor;

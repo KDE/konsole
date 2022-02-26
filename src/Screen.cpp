@@ -243,9 +243,20 @@ void Screen::eraseChars(int n)
 void Screen::eraseBlock(int y, int x, int height, int width)
 {
     width = qBound(0, width, _columns - x - 1);
+    int endCol = x + width;
     height = qBound(0, height, _lines - y - 1);
+    Character chr(' ', CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR), CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR), RE_CONCEAL, false);
     for (int row = y; row < y + height; row++) {
-        clearImage(loc(x, row), loc(x + width - 1, row), ' ', false);
+        QVector<Character> &line = _screenLines[row];
+        if (line.size() < endCol + 1) {
+            line.resize(endCol + 1);
+        }
+        if (endCol == _columns - 1) {
+            line.resize(endCol + 1);
+        }
+        if (x <= endCol) {
+            std::fill(line.begin() + x, line.begin() + (endCol + 1), chr);
+        }
     }
 }
 
