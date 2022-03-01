@@ -16,6 +16,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
 #include <QLoggingCategory>
 #include <QStandardPaths>
 #include <QTextStream>
@@ -34,7 +35,7 @@ Q_LOGGING_CATEGORY(SshManagerPlugin, "org.kde.konsole.plugin.sshmanager")
 
 namespace
 {
-const QString SshDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + QStringLiteral("/.ssh/");
+const QString sshDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + QStringLiteral("/.ssh/");
 }
 
 SSHManagerModel::SSHManagerModel(QObject *parent)
@@ -48,12 +49,13 @@ SSHManagerModel::SSHManagerModel(QObject *parent)
     if (invisibleRootItem()->rowCount() == 0) {
         addTopLevelItem(i18n("Default"));
     }
-
-    m_sshConfigWatcher.addPath(SshDir + QStringLiteral("config"));
-    connect(&m_sshConfigWatcher, &QFileSystemWatcher::fileChanged, this, [this] {
+    if (QFileInfo::exists(sshDir +  QStringLiteral("config"))){
+        m_sshConfigWatcher.addPath(sshDir + QStringLiteral("config"));
+        connect(&m_sshConfigWatcher, &QFileSystemWatcher::fileChanged, this, [this] {
+            startImportFromSshConfig();
+        });
         startImportFromSshConfig();
-    });
-    startImportFromSshConfig();
+    }
 }
 
 SSHManagerModel::~SSHManagerModel() noexcept
@@ -308,7 +310,7 @@ void SSHManagerModel::removeIndex(const QModelIndex &idx)
 
 void SSHManagerModel::startImportFromSshConfig()
 {
-    importFromSshConfigFile(SshDir + QStringLiteral("config"));
+    importFromSshConfigFile(sshDir + QStringLiteral("config"));
 }
 
 void SSHManagerModel::importFromSshConfigFile(const QString &file)
@@ -342,7 +344,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
                 continue;
             }
 
-            importFromSshConfigFile(SshDir + lists.at(1));
+            importFromSshConfigFile(sshDir + lists.at(1));
             continue;
         }
 
