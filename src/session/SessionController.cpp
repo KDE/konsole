@@ -1853,7 +1853,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         const auto old = popup->actions();
 
         const KFileItemListProperties props({item});
-        QScopedPointer<KFileItemActions> ac(new KFileItemActions(popup));
+        QScopedPointer<KFileItemActions> ac(new KFileItemActions());
         ac->setItemListProperties(props);
 
 #if KIO_VERSION >= QT_VERSION_CHECK(5, 82, 0)
