@@ -816,6 +816,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
         int keepAspect = 1;
         int scaledWidth = 0;
         int scaledHeight = 0;
+        bool moveCursor = true;
         for (const auto &p : params) {
             int eq = p.indexOf(QLatin1Char('='));
             if (eq > 0) {
@@ -829,6 +830,11 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
                 if (var == QLatin1String("preserveAspectRatio")) {
                     if (val == QLatin1String("0")) {
                         keepAspect = 0;
+                    }
+                }
+                if (var == QLatin1String("doNotMoveCursor")) {
+                    if (val == QLatin1String("1")) {
+                        moveCursor = false;
                     }
                 }
                 if (var == QLatin1String("width")) {
@@ -872,7 +878,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
             }
         }
         int rows = -1, cols = -1;
-        _currentScreen->addPlacement(pixmap, rows, cols);
+        _currentScreen->addPlacement(pixmap, rows, cols, true, moveCursor);
     }
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
