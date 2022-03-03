@@ -600,7 +600,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 // Check for Sixel DCS q
                 if (p > 2 && cc == 'q') {
                     setMode(MODE_Sixel);
-                    // This parameter appers to be ignored
+                    // This parameter appears to be ignored
                     // m_preserveBackground = argv[2] == 1;
                     resetTokenizer();
                 }

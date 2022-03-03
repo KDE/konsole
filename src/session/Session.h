@@ -753,7 +753,7 @@ Q_SIGNALS:
 
     /**
      * When a user enters a ssh session that changes where the `hostname` is
-     * this is emmited.
+     * this is emitted.
      */
     void hostnameChanged(const QString &hostname);
 
