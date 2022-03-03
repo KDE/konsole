@@ -372,6 +372,7 @@ void Vt102Emulation::initTokenizer()
 #define epsp( )    (p >=  5  && s[3] == SP )
 #define osc        (tokenBufferPos >= 2 && tokenBuffer[1] == ']')
 //#define apc(C)     (p >= 3 && s[1] == '_' && s[2] == C)
+#define pm         (tokenBufferPos >= 2 && tokenBuffer[1] == '^')
 #define apc        (tokenBufferPos >= 2 && tokenBuffer[1] == '_')
 #define ces(C)     (cc < 256 && (charClass[cc] & (C)) == (C))
 #define dcs        (p >= 2   && s[0] == ESC && s[1] == 'P')
@@ -496,6 +497,13 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     }
                 }
             }
+            // Privacy Message
+            if (p > 2 && s[1] == '^') {
+                if (s[p - 1] == 0x07 || (s[p - 2] == ESC && s[p - 1] == '\\')) {
+                    resetTokenizer();
+                    continue;
+                }
+            }
             // Application Program Command
             if (p > 2 && s[1] == '_') {
                 // <ESC> '_' ... <ESC> '\'
@@ -534,6 +542,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
             /* clang-format off */
         // <ESC> ']' ...
         if (osc         ) { continue; }
+        if (pm          ) { continue; }
         if (apc         ) { continue; }
         if (p >= 3 && s[1] == '[') { // parsing a CSI sequence
             if (lec(3,2,'?')) { continue; }
