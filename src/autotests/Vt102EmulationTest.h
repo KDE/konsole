@@ -97,7 +97,7 @@ public:
         Vt102Emulation::sendString(string);
     }
 
-    void reportDecodingError() override
+    void reportDecodingError(int /*token*/) override
     {
         items.push_back(DecodingError{});
     }
@@ -110,11 +110,11 @@ public:
         }
     }
 
-    void processSessionAttributeRequest(int tokenSize) override
+    void processSessionAttributeRequest(const int tokenSize, const uint terminator) override
     {
         items.push_back(ProcessSessionAttributeRequest{std::vector<uint>(tokenBuffer, tokenBuffer + tokenSize)});
         if (!blockFurtherProcessing) {
-            Vt102Emulation::processSessionAttributeRequest(tokenSize);
+            Vt102Emulation::processSessionAttributeRequest(tokenSize, terminator);
         }
     }
 

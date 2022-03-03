@@ -13,6 +13,7 @@
 #include <unistd.h>
 
 // Qt
+#include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
 #include <QTimer>
@@ -253,6 +254,14 @@ constexpr int token_csi_pq(int a)
 {
     return token_construct(13, a, 0);
 }
+constexpr int token_osc(int a)
+{
+    return token_construct(14, a, 0);
+}
+constexpr int token_apc(int a)
+{
+    return token_construct(15, a, 0);
+}
 
 const int MAX_ARGUMENT = 40960;
 
@@ -386,253 +395,611 @@ const int DEL = 127;
 const int SP = 32;
 
 // process an incoming unicode character
+//
+// Parser based on the vt100.net diagram:
+// Williams, Paul Flo. “A parser for DEC’s ANSI-compatible video
+// terminals.” VT100.net. https://vt100.net/emu/dec_ansi_parser
+
+void Vt102Emulation::switchState(const ParserStates newState, const uint cc)
+{
+    switch (_state) {
+    case DcsPassthrough:
+        unhook();
+        break;
+    case OscString:
+        osc_end(cc);
+        break;
+    case SosPmApcString:
+        apc_end();
+        break;
+    default:
+        break;
+    }
+
+    _state = newState;
+}
+
+void Vt102Emulation::esc_dispatch(const uint cc)
+{
+    if (_ignore)
+        return;
+    if (_nIntermediate == 0) {
+        processToken(token_esc(cc), 0, 0);
+    } else if (_nIntermediate == 1) {
+        const uint intermediate = _intermediate[0];
+        if ((charClass[intermediate] & SCS) == SCS) {
+            processToken(token_esc_cs(intermediate, cc), 0, 0);
+        } else if (intermediate == '#') {
+            processToken(token_esc_de(cc), 0, 0);
+        }
+    }
+}
+
+void Vt102Emulation::clear()
+{
+    _nIntermediate = 0;
+    _ignore = false;
+    tokenBufferPos = 0;
+    tokenState = -1;
+    argc = 0;
+    argv[0] = 0;
+    argv[1] = 0;
+}
+
+#define MAX_INTERMEDIATES 1
+void Vt102Emulation::collect(const uint cc)
+{
+    addToCurrentToken(cc);
+    if (cc > 0x30)
+        return;
+    if (_nIntermediate >= MAX_INTERMEDIATES) {
+        _ignore = true;
+    }
+    _intermediate[_nIntermediate++] = cc;
+}
+
+void Vt102Emulation::param(const uint cc)
+{
+    addToCurrentToken(cc);
+    if ((charClass[cc] & DIG) == DIG) {
+        addDigit(cc - '0');
+    } else if (cc == ';') {
+        addArgument();
+    } else if (cc == ':') {
+        _ignore = true;
+    }
+}
+
+void Vt102Emulation::csi_dispatch(const uint cc)
+{
+    if (_ignore)
+        return;
+    if ((tokenBufferPos == 0 || (tokenBuffer[0] != '?' && tokenBuffer[0] != '!' && tokenBuffer[0] != '=' && tokenBuffer[0] != '>')) && cc < 256
+        && (charClass[cc] & CPN) == CPN && _nIntermediate == 0) {
+        processToken(token_csi_pn(cc), argv[0], argv[1]);
+    } else if ((tokenBufferPos == 0 || (tokenBuffer[0] != '?' && tokenBuffer[0] != '!' && tokenBuffer[0] != '=' && tokenBuffer[0] != '>')) && cc < 256
+               && (charClass[cc] & CPS) == CPS && _nIntermediate == 0) {
+        processToken(token_csi_ps(cc, argv[0]), argv[1], argv[2]);
+    } else if (tokenBufferPos != 0 && tokenBuffer[0] == '!') {
+        processToken(token_csi_pe(cc), 0, 0);
+    } else if (_nIntermediate == 1 && _intermediate[0] == ' ') {
+        if (tokenBufferPos == 1) {
+            processToken(token_csi_sp(cc), 0, 0);
+        } else {
+            processToken(token_csi_psp(cc, argv[0]), 0, 0);
+        }
+    } else if (cc == 'y' && _nIntermediate == 1 && _intermediate[0] == '*') {
+        processChecksumRequest(argc, argv);
+    } else {
+        for (int i = 0; i <= argc; i++) {
+            if (tokenBufferPos != 0 && tokenBuffer[0] == '?') {
+                processToken(token_csi_pr(cc, argv[i]), i, 0);
+            } else if (tokenBufferPos != 0 && tokenBuffer[0] == '=') {
+                processToken(token_csi_pq(cc), 0, 0);
+            } else if (tokenBufferPos != 0 && tokenBuffer[0] == '>') {
+                processToken(token_csi_pg(cc), 0, 0);
+            } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i + 1] == 2) {
+                // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
+                i += 2;
+                processToken(token_csi_ps(cc, argv[i - 2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i + 1] << 8) | argv[i + 2]);
+                i += 2;
+            } else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i + 1] == 5) {
+                // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
+                i += 2;
+                processToken(token_csi_ps(cc, argv[i - 2]), COLOR_SPACE_256, argv[i]);
+            } else if (_nIntermediate == 0) {
+                processToken(token_csi_ps(cc, argv[i]), 0, 0);
+            }
+        }
+    }
+}
+
+void Vt102Emulation::osc_start()
+{
+    tokenBufferPos = 0;
+}
+
+void Vt102Emulation::osc_put(const uint cc)
+{
+    addToCurrentToken(cc);
+
+    // Special case: iterm file protocol is a long escape sequence
+    if (tokenState == -1) {
+        tokenStateChange = "1337;File=:";
+        tokenState = 0;
+    }
+    if (tokenState >= 0) {
+        if ((uint)tokenStateChange[tokenState] == tokenBuffer[tokenBufferPos - 1]) {
+            tokenState++;
+            tokenPos = tokenBufferPos;
+            if ((uint)tokenState == strlen(tokenStateChange)) {
+                tokenState = -2;
+                tokenData.clear();
+            }
+            return;
+        }
+    } else if (tokenState == -2) {
+        if (tokenBufferPos - tokenPos == 4) {
+            tokenData.append(QByteArray::fromBase64(QString::fromUcs4(&tokenBuffer[tokenPos], 4).toLocal8Bit()));
+            tokenBufferPos -= 4;
+            return;
+        }
+    }
+}
+
+void Vt102Emulation::osc_end(const uint cc)
+{
+    // This runs two times per link, the first prepares the link to be read,
+    // the second finalizes it. The escape sequence is in two parts
+    //  start: '\e ] 8 ; <id-path> ; <url-part> \e \\'
+    //  end:   '\e ] 8 ; ; \e \\'
+    // GNU libtextstyle inserts the IDs, for instance; many examples
+    // do not.
+    if (tokenBuffer[0] == XTERM_EXTENDED::URL_LINK) {
+        // printf '\e]8;;https://example.com\e\\This is a link\e]8;;\e\\\n'
+        emit toggleUrlExtractionRequest();
+    }
+
+    processSessionAttributeRequest(tokenBufferPos, cc);
+}
+
+void Vt102Emulation::put(const uint cc)
+{
+    if (m_SixelPictureDefinition && cc >= 0x21) {
+        addToCurrentToken(cc);
+        processSixel(cc);
+    }
+}
+
+void Vt102Emulation::hook(const uint cc)
+{
+    if (cc == 'q' && _nIntermediate == 0) {
+        m_SixelPictureDefinition = true;
+        resetTokenizer();
+    }
+}
+
+void Vt102Emulation::unhook()
+{
+    m_SixelPictureDefinition = false;
+    SixelModeDisable();
+    resetTokenizer();
+}
+
+void Vt102Emulation::apc_start()
+{
+    tokenBufferPos = 0;
+}
+
+void Vt102Emulation::apc_put(const uint cc)
+{
+    addToCurrentToken(cc);
+
+    // <ESC> '_' ... <ESC> '\'
+    if (tokenBufferPos > 1 && tokenBuffer[0] == 'G') {
+        if (tokenState == -1) {
+            tokenStateChange = ";";
+            tokenState = 0;
+        } else if (tokenState >= 0) {
+            if ((uint)tokenStateChange[tokenState] == tokenBuffer[tokenBufferPos - 1]) {
+                tokenState++;
+                tokenPos = tokenBufferPos;
+                if ((uint)tokenState == strlen(tokenStateChange)) {
+                    tokenState = -2;
+                    tokenData.clear();
+                }
+            }
+        } else if (tokenState == -2) {
+            if (tokenBufferPos - tokenPos == 4) {
+                tokenData.append(QByteArray::fromBase64(QString::fromUcs4(&tokenBuffer[tokenPos], 4).toLocal8Bit()));
+                tokenBufferPos -= 4;
+            }
+        }
+    }
+}
+
+void Vt102Emulation::apc_end()
+{
+    if (tokenBuffer[0] == 'G') {
+        // Graphics command
+        processGraphicsToken(tokenBufferPos);
+        resetTokenizer();
+    }
+}
+
 void Vt102Emulation::receiveChars(const QVector<uint> &chars)
 {
     for (uint cc : chars) {
-        if (cc == DEL) {
-            continue; // VT100: ignore.
-        }
-
         // early out for displayable characters
-        if (!getMode(MODE_Sixel) && getMode(MODE_Ansi) && tokenBufferPos == 0 && cc >= 32 && cc != (ESC + 128)) {
+        if (_state == Ground && ((cc >= 0x20 && cc <= 0x7E) || cc >= 0xA0)) {
             _currentScreen->displayCharacter(applyCharset(cc));
             continue;
         }
 
-        if (!getMode(MODE_Sixel) && ces(CTL)) {
-            // ignore control characters in the text part of osc (aka OSC) "ESC]"
-            // escape sequences; this matches what XTERM docs say
-            // Allow BEL and ESC here, it will either end the text or be removed later.
-            if ((osc || apc) && cc != 0x1b && cc != 0x07) {
-                continue;
-            }
-
-            if (!osc && !apc) {
-                // DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
-                // This means, they do neither a resetTokenizer() nor a pushToToken(). Some of them, do
-                // of course. Guess this originates from a weakly layered handling of the X-on
-                // X-off protocol, which comes really below this level.
-                if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) {
-                    resetTokenizer(); // VT100: CAN or SUB
-                }
-                if (cc != ESC) {
-                    processToken(token_ctl(cc + '@'), 0, 0);
-                    continue;
-                }
-            }
-        }
-        // advance the state
-        addToCurrentToken(cc);
-
-        uint *s = tokenBuffer;
-        const int p = tokenBufferPos;
-
-        if (getMode(MODE_Sixel) && processSixel(cc)) {
-            continue;
-        }
-
         if (getMode(MODE_Ansi)) {
-            if (lec(1, 0, ESC)) {
-                continue;
-            }
-            if (lec(1, 0, ESC + 128)) {
-                s[0] = ESC;
-                receiveChars(QVector<uint>{'['});
-                continue;
-            }
-            if (les(2, 1, GRP)) {
-                continue;
-            }
-            // Operating System Command
-            if (p > 2 && s[1] == ']') {
-                // <ESC> ']' ... <ESC> '\'
-                if (s[p - 2] == ESC && s[p - 1] == '\\') {
-                    // This runs two times per link, the first prepares the link to be read,
-                    // the second finalizes it. The escape sequence is in two parts
-                    //  start: '\e ] 8 ; <id-path> ; <url-part> \e \\'
-                    //  end:   '\e ] 8 ; ; \e \\'
-                    // GNU libtextstyle inserts the IDs, for instance; many examples
-                    // do not.
-                    if (s[2] == XTERM_EXTENDED::URL_LINK) {
-                        // printf '\e]8;;https://example.com\e\\This is a link\e]8;;\e\\\n'
-                        emit toggleUrlExtractionRequest();
-                    }
-                    processSessionAttributeRequest(p - 1);
-                    resetTokenizer();
-                    continue;
-                }
-                // <ESC> ']' ... <ESC> + one character for reprocessing
-                if (s[p - 2] == ESC) {
-                    processSessionAttributeRequest(p - 1);
-                    resetTokenizer();
-                    receiveChars(QVector<uint>{cc});
-                    continue;
-                }
-                // <ESC> ']' ... <BEL>
-                if (s[p - 1] == 0x07) {
-                    processSessionAttributeRequest(p);
-                    resetTokenizer();
-                    continue;
-                }
-                // Special case: iterm file protocol is a long escape sequence
-                if (tokenState == -1) {
-                    tokenStateChange = "1337;File=:";
-                    tokenState = 0;
-                }
-                if (tokenState >= 0) {
-                    if ((uint)tokenStateChange[tokenState] == s[p - 1]) {
-                        tokenState++;
-                        tokenPos = p;
-                        if ((uint)tokenState == strlen(tokenStateChange)) {
-                            tokenState = -2;
-                            tokenData.clear();
-                        }
-                        continue;
-                    }
-                } else if (tokenState == -2) {
-                    if (p - tokenPos == 4) {
-                        tokenData.append(QByteArray::fromBase64(QString::fromUcs4(&tokenBuffer[tokenPos], 4).toLocal8Bit()));
-                        tokenBufferPos -= 4;
-                        continue;
-                    }
-                }
-            }
-            // Privacy Message
-            if (p > 2 && s[1] == '^') {
-                if (s[p - 1] == 0x07 || (s[p - 2] == ESC && s[p - 1] == '\\')) {
-                    resetTokenizer();
-                    continue;
-                }
-            }
-            // Application Program Command
-            if (p > 2 && s[1] == '_') {
-                // <ESC> '_' ... <ESC> '\'
-                if (p > 3 && s[2] == 'G') {
-                    if (tokenState == -1) {
-                        tokenStateChange = ";";
-                        tokenState = 0;
-                    } else if (tokenState >= 0) {
-                        if ((uint)tokenStateChange[tokenState] == s[p - 1]) {
-                            tokenState++;
-                            tokenPos = p;
-                            if ((uint)tokenState == strlen(tokenStateChange)) {
-                                tokenState = -2;
-                                tokenData.clear();
-                            }
-                            continue;
-                        }
-                    } else if (tokenState == -2) {
-                        if (p - tokenPos == 4) {
-                            tokenData.append(QByteArray::fromBase64(QString::fromUcs4(&tokenBuffer[tokenPos], 4).toLocal8Bit()));
-                            tokenBufferPos -= 4;
-                            continue;
-                        }
-                    }
-                }
-                if (s[p - 1] == 0x07 || (s[p - 2] == ESC && s[p - 1] == '\\')) {
-                    if (s[2] == 'G') {
-                        // Graphics command
-                        processGraphicsToken(p);
-                    }
-                    resetTokenizer();
-                    continue;
-                }
-            }
+            // First, process characters that act the same on all states, i.e.
+            // coming from "anywhere" in the VT100.net diagram.
+            switch (cc) {
+            case 0x1B:
+                switchState(Escape, cc);
+                clear();
+                break;
+            case 0x9B:
+                switchState(CsiEntry, cc);
+                clear();
+                break;
+            case 0x90:
+                switchState(DcsEntry, cc);
+                clear();
+                break;
+            case 0x9D:
+                osc_start();
+                switchState(OscString, cc);
+                break;
+            case 0x18:
+            case 0x1A:
+            case 0x80 ... 0x8F:
+            case 0x91 ... 0x97:
+            case 0x99 ... 0x9A:
+                processToken(token_ctl(cc + '@'), 0, 0);
+                switchState(Ground, cc);
+                break;
+            case 0x9C:
+                // no action
+                switchState(Ground, cc);
+                break;
+            case 0x98:
+            case 0x9E:
+            case 0x9F:
+                apc_start();
+                switchState(SosPmApcString, cc);
+                break;
 
-            /* clang-format off */
-        // <ESC> ']' ...
-        if (osc         ) { continue; }
-        if (pm          ) { continue; }
-        if (apc         ) { continue; }
-        if (p >= 3 && s[1] == '[') { // parsing a CSI sequence
-            if (lec(3,2,'?')) { continue; }
-            if (lec(3,2,'=')) { continue; }
-            if (lec(3,2,'>')) { continue; }
-            if (lec(3,2,'!')) { continue; }
-            if (lec(3,2,SP )) { continue; }
-            if (lec(4,3,SP )) { continue; }
-            if (eps(    CPN)) { processToken(token_csi_pn(cc), argv[0],argv[1]);  resetTokenizer(); continue; }
-
-            // resize = \e[8;<row>;<col>t
-            if (eps(CPS)) {
-                processToken(token_csi_ps(cc, argv[0]), argv[1], argv[2]);
-                resetTokenizer();
-                continue;
-            }
-
-            if (epe(   )) { processToken(token_csi_pe(cc), 0, 0); resetTokenizer(); continue; }
-
-            if (esp (   )) { processToken(token_csi_sp(cc), 0, 0);           resetTokenizer(); continue; }
-            if (epsp(   )) { processToken(token_csi_psp(cc, argv[0]), 0, 0); resetTokenizer(); continue; }
-
-            if (ees(DIG)) { addDigit(cc-'0'); continue; }
-            if (eec(';')) { addArgument();    continue; }
-            if (ees(INT)) { continue; }
-            if (p >= 3 && cc == 'y' && s[p - 2] == '*') { processChecksumRequest(argc, argv); resetTokenizer(); continue; }
-            for (int i = 0; i <= argc; i++) {
-                if (epp()) {
-                    processToken(token_csi_pr(cc,argv[i]), i, 0);
-                } else if (eeq()) {
-                    processToken(token_csi_pq(cc), 0, 0); // spec. case for ESC[=0c or ESC[=c
-                } else if (egt()) {
-                    processToken(token_csi_pg(cc), 0, 0); // spec. case for ESC[>0c or ESC[>c
-                } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
-                {
-                    // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
-                    i += 2;
-                    processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i+1] << 8) | argv[i+2]);
-                    i += 2;
-                } else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 5) {
-                    // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
-                    i += 2;
-                    processToken(token_csi_ps(cc, argv[i-2]), COLOR_SPACE_256, argv[i]);
-                } else if (p < 2 || (charClass[s[p-2]] & (INT)) != (INT)) {
-                    processToken(token_csi_ps(cc,argv[i]), 0, 0);
+            default:
+                // Now take the current state into account
+                switch (_state) {
+                case Ground:
+                    switch (cc) {
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    default:
+                        _currentScreen->displayCharacter(applyCharset(cc));
+                        break;
+                    }
+                    break;
+                case Escape:
+                    switch (cc) {
+                    case 0x5B:
+                        switchState(CsiEntry, cc);
+                        clear();
+                        break;
+                    case 0x30 ... 0x4F:
+                    case 0x51 ... 0x57:
+                    case 0x59 ... 0x5A:
+                    case 0x5C:
+                    case 0x60 ... 0x7E:
+                        esc_dispatch(cc);
+                        switchState(Ground, cc);
+                        break;
+                    case 0x20 ... 0x2F:
+                        collect(cc);
+                        switchState(EscapeIntermediate, cc);
+                        break;
+                    case 0x5D:
+                        osc_start();
+                        switchState(OscString, cc);
+                        break;
+                    case 0x50:
+                        switchState(DcsEntry, cc);
+                        clear();
+                        break;
+                    case 0x58:
+                    case 0x5E:
+                    case 0x5F:
+                        apc_start();
+                        switchState(SosPmApcString, cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case EscapeIntermediate:
+                    switch (cc) {
+                    case 0x30 ... 0x7E:
+                        esc_dispatch(cc);
+                        switchState(Ground, cc);
+                        break;
+                    case 0x20 ... 0x2F:
+                        collect(cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case CsiEntry:
+                    switch (cc) {
+                    case 0x40 ... 0x7E:
+                        csi_dispatch(cc);
+                        switchState(Ground, cc);
+                        break;
+                    case 0x30 ... 0x3B: // recognize 0x3A as part of params
+                        param(cc);
+                        switchState(CsiParam, cc);
+                        break;
+                    case 0x3C ... 0x3F:
+                        collect(cc);
+                        switchState(CsiParam, cc);
+                        break;
+                    case 0x20 ... 0x2F:
+                        collect(cc);
+                        switchState(CsiIntermediate, cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case CsiParam:
+                    switch (cc) {
+                    case 0x40 ... 0x7E:
+                        csi_dispatch(cc);
+                        switchState(Ground, cc);
+                        break;
+                    case 0x30 ... 0x3B: // recognize 0x3A as part of params
+                        param(cc);
+                        break;
+                    case 0x3C ... 0x3F:
+                        switchState(CsiIgnore, cc);
+                        break;
+                    case 0x20 ... 0x2F:
+                        collect(cc);
+                        switchState(CsiIntermediate, cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case CsiIntermediate:
+                    switch (cc) {
+                    case 0x40 ... 0x7E:
+                        csi_dispatch(cc);
+                        switchState(Ground, cc);
+                        break;
+                    case 0x20 ... 0x2F:
+                        collect(cc);
+                        break;
+                    case 0x30 ... 0x3F:
+                        switchState(CsiIgnore, cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case CsiIgnore:
+                    switch (cc) {
+                    case 0x40 ... 0x7E:
+                        switchState(Ground, cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x20 ... 0x3F:
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case DcsEntry:
+                    switch (cc) {
+                    case 0x40 ... 0x7E:
+                        hook(cc);
+                        switchState(DcsPassthrough, cc);
+                        break;
+                    case 0x30 ... 0x3B: // recognize 0x3A as part of params
+                        param(cc);
+                        switchState(DcsParam, cc);
+                        break;
+                    case 0x3C ... 0x3F:
+                        collect(cc);
+                        switchState(DcsParam, cc);
+                        break;
+                    case 0x20 ... 0x2F:
+                        collect(cc);
+                        switchState(DcsIntermediate, cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case DcsParam:
+                    switch (cc) {
+                    case 0x40 ... 0x7E:
+                        hook(cc);
+                        switchState(DcsPassthrough, cc);
+                        break;
+                    case 0x30 ... 0x3B: // recognize 0x3A as part of params
+                        param(cc);
+                        break;
+                    case 0x3C ... 0x3F:
+                        switchState(DcsIgnore, cc);
+                        break;
+                    case 0x20 ... 0x2F:
+                        collect(cc);
+                        switchState(DcsIntermediate, cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case DcsIntermediate:
+                    switch (cc) {
+                    case 0x40 ... 0x7E:
+                        hook(cc);
+                        switchState(DcsPassthrough, cc);
+                        break;
+                    case 0x20 ... 0x2F:
+                        collect(cc);
+                        break;
+                    case 0x30 ... 0x3F:
+                        switchState(DcsIgnore, cc);
+                        break;
+                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        processToken(token_ctl(cc + '@'), 0, 0);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case DcsPassthrough:
+                    switch (cc) {
+                    case 0 ... 0x7E: // 0x18, 0x1A, 0x1B already taken care of
+                        put(cc);
+                        break;
+                    case 0x9C:
+                        switchState(Ground, cc);
+                        break;
+                    case 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case DcsIgnore:
+                    switch (cc) {
+                    case 0x9C:
+                        switchState(Ground, cc);
+                        break;
+                    case 0 ... 0x7F:
+                        // ignore
+                        break;
+                    }
+                    break;
+                case OscString:
+                    switch (cc) {
+                    case 0x20 ... 0x7F:
+                        osc_put(cc);
+                        break;
+                    case 0x07: // recognize BEL as OSC terminator
+                    case 0x9C:
+                        switchState(Ground, cc);
+                        break;
+                    case 0 ... 0x06:
+                    case 0x08 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                        // ignore
+                        break;
+                    }
+                    break;
+                case SosPmApcString:
+                    switch (cc) {
+                    case 0 ... 0x7F: // 0x18, 0x1A, 0x1B already taken care of.
+                        apc_put(cc);
+                        // ignore
+                        break;
+                    case 0x9C:
+                        switchState(Ground, cc);
+                        break;
+                    }
+                    break;
                 }
+                break;
             }
-        } else {
-            if (dcs) {
-                // Check for Sixel DCS q
-                if (p > 2 && cc == 'q') {
-                    setMode(MODE_Sixel);
-                    // This parameter appears to be ignored
-                    // m_preserveBackground = argv[2] == 1;
-                    resetTokenizer();
-                }
-                if (ccc(DIG)) { addDigit(cc-'0');}
-                if (cc == ';') { addArgument();}
-                continue;
-            }
-            if (lec(2,0,ESC)) { processToken(token_esc(s[1]), 0, 0);              resetTokenizer(); continue; }
-            if (les(3,1,SCS)) { processToken(token_esc_cs(s[1],s[2]), 0, 0);      resetTokenizer(); continue; }
-            if (lec(3,1,'#')) { processToken(token_esc_de(s[2]), 0, 0);           resetTokenizer(); continue; }
-        }
-        resetTokenizer();
-        /* clang-format on */
         } else {
             // VT52 Mode
-            if (lec(1, 0, ESC)) {
-                continue;
+
+            // First, process characters that act the same on all states
+            switch (cc) {
+            case 0x18:
+            case 0x1A:
+                processToken(token_ctl(cc + '@'), 0, 0);
+                switchState(Ground, cc);
+                break;
+            case 0x1B:
+                switchState(Vt52Escape, cc);
+                break;
+            case 0 ... 0x17:
+            case 0x19:
+            case 0x1C ... 0x1F:
+                processToken(token_ctl(cc + '@'), 0, 0);
+                break;
+            default:
+                // Now take the current state into account
+                switch (_state) {
+                case Ground:
+                    _currentScreen->displayCharacter(applyCharset(cc));
+                    break;
+                case Vt52Escape:
+                    switch (cc) {
+                    case 'Y':
+                        switchState(Vt52CupRow, cc);
+                        break;
+                    case 0x20 ... 'X':
+                    case 'Z' ... 0x7F:
+                        processToken(token_vt52(cc), 0, 0);
+                        switchState(Ground, cc);
+                        break;
+                    }
+                    break;
+                case Vt52CupRow:
+                    tokenBuffer[0] = cc;
+                    switchState(Vt52CupColumn, cc);
+                    break;
+                case Vt52CupColumn:
+                    processToken(token_vt52('Y'), tokenBuffer[0], cc);
+                    switchState(Ground, cc);
+                    break;
+                default:
+                    break;
+                }
+                break;
             }
-            if (les(1, 0, CHR)) {
-                processToken(token_chr(), s[0], 0);
-                resetTokenizer();
-                continue;
-            }
-            if (lec(2, 1, 'Y')) {
-                continue;
-            }
-            if (lec(3, 1, 'Y')) {
-                continue;
-            }
-            if (p < 4) {
-                processToken(token_vt52(s[1]), 0, 0);
-                resetTokenizer();
-                continue;
-            }
-            processToken(token_vt52(s[1]), s[2], s[3]);
-            resetTokenizer();
-            continue;
         }
     }
 }
@@ -705,7 +1072,7 @@ void Vt102Emulation::processChecksumRequest([[maybe_unused]] int crargc, int cra
     sendString(tmp);
 }
 
-void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
+void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const uint terminator)
 {
     // Describes the window or terminal session attribute to change
     // See Session::SessionAttributes for possible values
@@ -713,11 +1080,11 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     int i;
 
     // ignore last character (ESC or BEL)
-    --tokenSize;
+    //--tokenSize;
 
     /* clang-format off */
     // skip first two characters (ESC, ']')
-    for (i = 2; i < tokenSize &&
+    for (i = 0; i < tokenSize &&
                 tokenBuffer[i] >= '0'  &&
                 tokenBuffer[i] <= '9'; i++)
     {
@@ -726,7 +1093,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     /* clang-format on */
 
     if (tokenBuffer[i] != ';') {
-        reportDecodingError();
+        reportDecodingError(token_osc(terminator));
         return;
     }
     // skip initial ';'
@@ -781,7 +1148,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     if (value == QLatin1String("?")) {
         // pass terminator type indication here, because OSC response terminator
         // should match the terminator of OSC request.
-        Q_EMIT sessionAttributeRequest(attribute, tokenBuffer[tokenSize]);
+        Q_EMIT sessionAttributeRequest(attribute, terminator);
         return;
     }
 
@@ -1328,7 +1695,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_vt52('>'      ) :        resetMode      (MODE_AppKeyPad); break; //VT52
 
     default:
-        reportDecodingError();
+        reportDecodingError(token);
         break;
     }
     /* clang-format on */
@@ -1341,16 +1708,16 @@ void delete_func(void *p)
 
 void Vt102Emulation::processGraphicsToken(int tokenSize)
 {
-    QString value = QString::fromUcs4(&tokenBuffer[3], tokenSize - 4);
+    QString value = QString::fromUcs4(&tokenBuffer[1], tokenSize - 1);
     QStringList list;
     QPixmap pixmap;
 
     int dataPos = value.indexOf(QLatin1Char(';'));
     if (dataPos == -1) {
-        dataPos = value.size() - 1;
+        dataPos = value.size();
     }
     if (dataPos > 1024) {
-        reportDecodingError();
+        reportDecodingError(token_apc('G'));
         return;
     }
     list = value.mid(0, dataPos).split(QLatin1Char(','));
@@ -1383,7 +1750,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
 
     for (int i = 0; i < list.size(); i++) {
         if (list.at(i).at(1).toLatin1() != '=') {
-            reportDecodingError();
+            reportDecodingError(token_apc('G'));
             return;
         }
         if (list.at(i).at(2).isNumber() || list.at(i).at(2).toLatin1() == '-') {
@@ -2221,7 +2588,7 @@ static QString hexdump2(uint *s, int len)
     return returnDump;
 }
 
-void Vt102Emulation::reportDecodingError()
+void Vt102Emulation::reportDecodingError(int token)
 {
     resetTokenizer();
 
@@ -2229,13 +2596,44 @@ void Vt102Emulation::reportDecodingError()
         SixelModeAbort();
     }
 
-    if (tokenBufferPos == 0 || (tokenBufferPos == 1 && (tokenBuffer[0] & 0xff) >= 32)) {
-        return;
+    QString outputError = QStringLiteral("Undecodable sequence: ");
+    printf("token: %x\n", token);
+    switch (token & 0xff) {
+    case 2:
+    case 3:
+    case 4:
+        outputError.append(QStringLiteral("ESC "));
+        break;
+    case 5:
+    case 6:
+    case 7:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+        outputError.append(QStringLiteral("CSI "));
+        break;
+    case 14:
+        outputError.append(QStringLiteral("OSC "));
+        break;
+    case 15:
+        outputError.append(QStringLiteral("APC "));
+        break;
+    }
+    if ((token & 0xff) != 8) { // VT52
+        outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
+    } else {
+        outputError.append(QStringLiteral("(VT52) ESC"));
     }
 
-    QString outputError = QStringLiteral("Undecodable sequence: ");
-    outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
-    qCDebug(KonsoleDebug).noquote() << outputError;
+    if ((token & 0xff) != 3) { // SCS
+        outputError.append((token >> 8) & 0xff);
+    } else {
+        outputError.append((token >> 16) & 0xff);
+    }
+
+    qDebug() << outputError;
 }
 
 void Vt102Emulation::sixelQuery(int q)

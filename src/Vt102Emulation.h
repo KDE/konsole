@@ -135,6 +135,49 @@ private:
     int argv[MAXARGS] = {};
     int argc;
     void initTokenizer();
+
+    enum ParserStates {
+        Ground,
+        Escape,
+        EscapeIntermediate,
+        CsiEntry,
+        CsiParam,
+        CsiIntermediate,
+        CsiIgnore,
+        DcsEntry,
+        DcsParam,
+        DcsIntermediate,
+        DcsPassthrough,
+        DcsIgnore,
+        OscString,
+        SosPmApcString,
+
+        Vt52Escape,
+        Vt52CupRow,
+        Vt52CupColumn,
+    };
+
+    ParserStates _state = Ground;
+    bool _ignore = false;
+    int _nIntermediate = 0;
+    unsigned char _intermediate[1];
+
+    void switchState(const ParserStates newState, const uint cc);
+    void esc_dispatch(const uint cc);
+    void clear();
+    void collect(const uint cc);
+    void param(const uint cc);
+    void csi_dispatch(const uint cc);
+    void osc_start();
+    void osc_put(const uint cc);
+    void osc_end(const uint cc);
+    void hook(const uint cc);
+    void unhook();
+    void put(const uint cc);
+    void apc_start();
+    void apc_put(const uint cc);
+    void apc_end();
+
     // State machine for escape sequences containing large amount of data
     int tokenState;
     const char *tokenStateChange;
@@ -151,10 +194,10 @@ private:
     QMap<char, qint64> savedKeys;
 
 protected:
-    virtual void reportDecodingError();
+    virtual void reportDecodingError(int token);
 
     virtual void processToken(int code, int p, int q);
-    virtual void processSessionAttributeRequest(int tokenSize);
+    virtual void processSessionAttributeRequest(const int tokenSize, const uint terminator);
     virtual void processChecksumRequest(int argc, int argv[]);
 
 private:
@@ -218,6 +261,7 @@ private:
     void SixelColorChangeRGB(const int index, int red, int green, int blue);
     void SixelColorChangeHSL(const int index, int hue, int saturation, int value);
     void SixelCharacterAdd(uint8_t character, int repeat = 1);
+    bool m_SixelPictureDefinition = false;
     bool m_SixelStarted = false;
     QImage m_currentImage;
     int m_currentX = 0;
