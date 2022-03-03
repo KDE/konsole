@@ -2020,7 +2020,7 @@ void Screen::delPlacements(int del, qint64 id, qint64 pid, int x, int y, int z)
             }
             break;
         case 'i':
-            if ((id < 0 || placement->id) == id && (pid < 0 || placement->pid == pid)) {
+            if ((id < 0 || placement->id == id) && (pid < 0 || placement->pid == pid)) {
                 remove = true;
             }
             break;
