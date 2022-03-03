@@ -32,10 +32,10 @@ private:
     KParts::Part *createPart();
 
     // variables for testShortcutOverride()
-    bool _shortcutTriggered;
-    bool _overrideCalled;
-    bool _override;
-    QEventLoop *_shortcutEventLoop;
+    bool _shortcutTriggered = false;
+    bool _overrideCalled = false;
+    bool _override = false;
+    QEventLoop *_shortcutEventLoop = nullptr;
 };
 
 }

@@ -26,7 +26,7 @@ private Q_SLOTS:
 private:
     KParts::Part *createPart();
 
-    KParts::Part *_terminalPart;
+    KParts::Part *_terminalPart = nullptr;
 };
 
 }
