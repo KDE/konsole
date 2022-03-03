@@ -562,7 +562,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
             if (p >= 3 && cc == 'y' && s[p - 2] == '*') { processChecksumRequest(argc, argv); resetTokenizer(); continue; }
             for (int i = 0; i <= argc; i++) {
                 if (epp()) {
-                    processToken(token_csi_pr(cc,argv[i]), 0, 0);
+                    processToken(token_csi_pr(cc,argv[i]), i, 0);
                 } else if (eeq()) {
                     processToken(token_csi_pq(cc), 0, 0); // spec. case for ESC[=0c or ESC[=c
                 } else if (egt()) {
@@ -1278,8 +1278,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s', 2004) :         saveMode      (MODE_BracketedPaste); break; //XTERM
     case token_csi_pr('r', 2004) :      restoreMode      (MODE_BracketedPaste); break; //XTERM
 
-    case token_csi_pr('S',    1) : sixelQuery               (1          ); break;
-    case token_csi_pr('S',    2) : sixelQuery               (2          ); break;
+    case token_csi_pr('S',    1) : if(!p) sixelQuery        (1          ); break;
+    case token_csi_pr('S',    2) : if(!p) sixelQuery        (2          ); break;
     // Set Cursor Style (DECSCUSR), VT520, with the extra xterm sequences
     // the first one is a special case, 'ESC[ q', which mimics 'ESC[1 q'
     // Using 0 to reset to default is matching VTE, but not any official standard.
@@ -2222,13 +2222,13 @@ void Vt102Emulation::sixelQuery(int q)
 {
     char tmp[30];
     if (q == 1) {
-        if (argv[2] == 1 || argv[2] == 4) {
+        if (argv[1] == 1 || argv[1] == 4) {
             snprintf(tmp, sizeof(tmp), "\033[?1;0;%dS", MAX_SIXEL_COLORS);
             sendString(tmp);
         }
     }
     if (q == 2) {
-        if (argv[2] == 1 || argv[2] == 4) {
+        if (argv[1] == 1 || argv[1] == 4) {
             snprintf(tmp, sizeof(tmp), "\033[?2;0;%d;%dS", MAX_IMAGE_DIM, MAX_IMAGE_DIM);
             sendString(tmp);
         }
