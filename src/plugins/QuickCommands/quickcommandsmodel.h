@@ -14,7 +14,7 @@ class QuickCommandsModel : public QStandardItemModel
     Q_OBJECT
 public:
     enum Roles { QuickCommandRole = Qt::UserRole + 1 };
-    QuickCommandsModel(QObject *parent = nullptr);
+    explicit QuickCommandsModel(QObject *parent = nullptr);
     ~QuickCommandsModel() override;
 
     QStringList groups() const;

@@ -28,7 +28,7 @@ class SSHManagerTreeWidget : public QWidget
 {
     Q_OBJECT
 public:
-    SSHManagerTreeWidget(QWidget *parent = nullptr);
+    explicit SSHManagerTreeWidget(QWidget *parent = nullptr);
     ~SSHManagerTreeWidget() override;
 
     // shows the panel for add a new ssh info.

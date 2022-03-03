@@ -31,7 +31,7 @@ public:
         SSHRole = Qt::UserRole + 1,
     };
 
-    SSHManagerModel(QObject *parent = nullptr);
+    explicit SSHManagerModel(QObject *parent = nullptr);
     ~SSHManagerModel() override;
 
     void setSessionController(Konsole::SessionController *controller);

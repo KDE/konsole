@@ -22,7 +22,7 @@ class QuickCommandsWidget : public QWidget
 {
     Q_OBJECT
 public:
-    QuickCommandsWidget(QWidget *parent = nullptr);
+    explicit QuickCommandsWidget(QWidget *parent = nullptr);
     ~QuickCommandsWidget() override;
 
     Q_SLOT void viewMode();
