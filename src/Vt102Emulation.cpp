@@ -478,28 +478,8 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 if (tokenState == -1) {
                     tokenStateChange = "1337;File=:";
                     tokenState = 0;
-                } else if (tokenState >= 0) {
-                    if ((uint)tokenStateChange[tokenState] == s[p - 1]) {
-                        tokenState++;
-                        tokenPos = p;
-                        if ((uint)tokenState == strlen(tokenStateChange)) {
-                            tokenState = -2;
-                            tokenData.clear();
-                        }
-                        continue;
-                    }
-                } else if (tokenState == -2) {
-                    if (p - tokenPos == 4) {
-                        tokenData.append(QByteArray::fromBase64(QString::fromUcs4(&tokenBuffer[tokenPos], 4).toLocal8Bit()));
-                        tokenBufferPos -= 4;
-                        continue;
-                    }
                 }
-                // Special case: Session::Wallpaper is a long escape sequence
-                if (tokenState == -1) {
-                    tokenStateChange = "114502;,,";
-                    tokenState = 0;
-                } else if (tokenState >= 0) {
+                if (tokenState >= 0) {
                     if ((uint)tokenStateChange[tokenState] == s[p - 1]) {
                         tokenState++;
                         tokenPos = p;
