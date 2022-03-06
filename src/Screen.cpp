@@ -1979,8 +1979,7 @@ void Screen::scrollUpVisiblePlacements(int n)
 
 void Screen::delPlacements(int del, qint64 id, qint64 pid, int x, int y, int z)
 {
-    std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>>::iterator i;
-    i = _graphicsPlacements.begin();
+    auto i = _graphicsPlacements.begin();
     while (i != _graphicsPlacements.end()) {
         TerminalGraphicsPlacement_t *placement = i->get();
         bool remove = false;
@@ -2026,7 +2025,7 @@ void Screen::delPlacements(int del, qint64 id, qint64 pid, int x, int y, int z)
             break;
         }
         if (remove) {
-            _graphicsPlacements.erase(i);
+            i = _graphicsPlacements.erase(i);
         } else {
             i++;
         }
