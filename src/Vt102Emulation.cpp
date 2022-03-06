@@ -839,7 +839,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
                 }
                 if (var == QLatin1String("width")) {
                     int unitPos = val.toStdString().find_first_not_of("0123456789");
-                    scaledWidth = val.mid(0, unitPos).toInt();
+                    scaledWidth = val.midRef(0, unitPos).toInt();
                     if (unitPos == -1) {
                         scaledWidth *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth();
                     } else {
@@ -850,7 +850,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
                 }
                 if (var == QLatin1String("height")) {
                     int unitPos = val.toStdString().find_first_not_of("0123456789");
-                    scaledHeight = val.mid(0, unitPos).toInt();
+                    scaledHeight = val.midRef(0, unitPos).toInt();
                     if (unitPos == -1) {
                         scaledHeight *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight();
                     } else {
@@ -1396,7 +1396,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             return;
         }
         if (list.at(i).at(2).isNumber() || list.at(i).at(2).toLatin1() == '-') {
-            keys[list.at(i).at(0).toLatin1()] = list.at(i).mid(2).toInt();
+            keys[list.at(i).at(0).toLatin1()] = list.at(i).midRef(2).toInt();
         } else {
             keys[list.at(i).at(0).toLatin1()] = list.at(i).at(2).toLatin1();
         }
@@ -1414,58 +1414,77 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
         }
         if (imageId != keys['i']) {
             imageId = keys['i'];
-            imageData = QByteArray();
+            imageData.clear();
         }
         imageData.append(tokenData);
         tokenData.clear();
         imageData.append(QByteArray::fromBase64(value.mid(dataPos + 1).toLocal8Bit()));
         if (keys['m'] == 0) {
-            QByteArray *out = new QByteArray();
+            imageId = 0;
+            savedKeys = QMap<char, qint64>();
+            QByteArray out;
             if (keys['o'] == 'z') {
                 int alloc;
                 unsigned char *data = (unsigned char *)imageData.constData();
                 z_stream stream;
-                [[maybe_unused]] int ret;
+                int ret;
                 if (keys['f'] == 24 || keys['f'] == 32) {
                     int bpp = keys['f'] / 8;
                     alloc = bpp * keys['s'] * keys['v'];
                 } else {
                     alloc = 8 * 1024 * 1024;
                 }
-                out->resize(alloc);
+                out.resize(alloc);
 
                 /* allocate inflate state */
                 stream.zalloc = (alloc_func)Z_NULL;
                 stream.zfree = (free_func)Z_NULL;
                 stream.opaque = (voidpf)Z_NULL;
-                stream.avail_in = imageData.size(); // size of input
-                stream.next_in = (Bytef *)data; // input char array
-                stream.avail_out = out->size(); // size of output
-                stream.next_out = (Bytef *)out->constData(); // output char array
+                stream.avail_in = imageData.size();
+                stream.next_in = (Bytef *)data;
+                stream.avail_out = out.size();
+                stream.next_out = (Bytef *)out.constData();
+                stream.total_out = 0;
+                stream.total_in = 0;
 
                 ret = inflateInit(&stream);
-                inflate(&stream, Z_NO_FLUSH);
+                if (ret != Z_OK) {
+                    imageData.clear();
+                    return;
+                }
+                ret = inflate(&stream, Z_FINISH);
                 inflateEnd(&stream);
+                if (ret != Z_OK && ret != Z_STREAM_END) {
+                    imageData.clear();
+                    return;
+                }
 
                 if (keys['f'] != 24 && keys['f'] != 32) {
                     imageData.clear();
-                    imageData.append(*out);
+                    imageData.append(out);
                 }
-            } else {
-                out = nullptr;
             }
             if (keys['f'] == 24 || keys['f'] == 32) {
                 enum QImage::Format format = keys['f'] == 24 ? QImage::Format_RGB888 : QImage::Format_RGBA8888;
-                if (!out) {
-                    out = new QByteArray(imageData.constData(), imageData.size());
+                QByteArray *pixelData; // Copy of the pixel data (imageData or out) that lives while the image does
+                if (out.isNull()) {
+                    pixelData = new QByteArray(imageData.constData(), imageData.size());
+                } else {
+                    pixelData = new QByteArray(out.constData(), out.size());
                 }
-                image = new QImage((unsigned char *)out->constData(), 0 + keys['s'], 0 + keys['v'], 0 + keys['s'] * keys['f'] / 8, format, delete_func, out);
+                image = new QImage((unsigned char *)pixelData->constData(),
+                                   0 + keys['s'],
+                                   0 + keys['v'],
+                                   0 + keys['s'] * keys['f'] / 8,
+                                   format,
+                                   delete_func,
+                                   pixelData);
             } else {
                 image = new QImage();
-                if (!out) {
-                    out = &imageData;
+                if (out.isNull()) {
+                    out = imageData;
                 }
-                image->loadFromData(*out);
+                image->loadFromData(out);
             }
 
             if (keys['a'] == 'q') {
@@ -1483,9 +1502,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                     sendGraphicsReply(params, QString());
                 }
             }
-            imageId = 0;
-            imageData = QByteArray();
-            savedKeys = QMap<char, qint64>();
+            imageData.clear();
         } else {
             if (savedKeys.empty()) {
                 savedKeys = QMap<char, qint64>(keys);
