@@ -20,6 +20,7 @@
 
 // KDE
 #include <KPtyDevice>
+#include <kpty_version.h>
 
 using Konsole::Pty;
 
@@ -85,13 +86,16 @@ void Pty::setWindowSize(int columns, int lines)
     _windowLines = lines;
 
     if (pty()->masterFd() >= 0) {
-        pty()->setWinSize(lines, columns);
+#if KPTY_VERSION >= QT_VERSION_CHECK(5, 92, 0)
+        pty()->setWinSize(_windowLines, _windowColumns, _windowHeight, _windowWidth);
+#else
         struct winsize w;
         w.ws_xpixel = _windowWidth;
         w.ws_ypixel = _windowHeight;
         w.ws_col = _windowColumns;
         w.ws_row = _windowLines;
         ioctl(pty()->masterFd(), TIOCSWINSZ, &w);
+#endif
     }
 }
 
