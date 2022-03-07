@@ -5,9 +5,7 @@
 */
 
 // Own
-#if !defined(Q_OS_WIN)
 #include "UnixProcessInfo.h"
-#endif
 
 // Unix
 #include <arpa/inet.h>
@@ -22,8 +20,6 @@
 #include <QDebug>
 
 using namespace Konsole;
-
-#if !defined(Q_OS_WIN)
 
 UnixProcessInfo::UnixProcessInfo(int pid)
     : ProcessInfo(pid)
@@ -87,5 +83,3 @@ void UnixProcessInfo::readUserName()
     }
     delete[] getpwBuffer;
 }
-
-#endif
