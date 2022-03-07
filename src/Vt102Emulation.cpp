@@ -285,7 +285,10 @@ void Vt102Emulation::addArgument()
 
 void Vt102Emulation::addToCurrentToken(uint cc)
 {
-    tokenBufferPos = qMin(tokenBufferPos, MAX_TOKEN_LENGTH - 1);
+    if (tokenBufferPos == MAX_TOKEN_LENGTH) {
+        tokenBufferPos--;
+        tokenBuffer[tokenBufferPos - 1] = tokenBuffer[tokenBufferPos];
+    }
     tokenBuffer[tokenBufferPos] = cc;
     tokenBufferPos++;
 }
