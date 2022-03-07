@@ -40,6 +40,8 @@ void Pty::init()
 {
     _windowColumns = 0;
     _windowLines = 0;
+    _windowWidth = 0;
+    _windowHeight = 0;
     _eraseChar = 0;
     _xonXoff = true;
     _utf8 = true;
@@ -48,7 +50,7 @@ void Pty::init()
     setFlowControlEnabled(_xonXoff);
     setUtf8Mode(_utf8);
 
-    setWindowSize(_windowColumns, _windowLines);
+    setWindowSize(_windowColumns, _windowLines, _windowWidth, _windowHeight);
 
     setUseUtmp(true);
     setPtyChannels(KPtyProcess::AllChannels);
@@ -80,10 +82,12 @@ void Pty::dataReceived()
     Q_EMIT receivedData(data.constData(), data.count());
 }
 
-void Pty::setWindowSize(int columns, int lines)
+void Pty::setWindowSize(int columns, int lines, int width, int height)
 {
     _windowColumns = columns;
     _windowLines = lines;
+    _windowWidth = width;
+    _windowHeight = height;
 
     if (pty()->masterFd() >= 0) {
 #if KPTY_VERSION >= QT_VERSION_CHECK(5, 92, 0)
@@ -99,15 +103,14 @@ void Pty::setWindowSize(int columns, int lines)
     }
 }
 
-void Pty::setPixelSize(int width, int height)
-{
-    _windowWidth = width;
-    _windowHeight = height;
-}
-
 QSize Pty::windowSize() const
 {
     return {_windowColumns, _windowLines};
+}
+
+QSize Pty::pixelSize() const
+{
+    return {_windowWidth, _windowHeight};
 }
 
 void Pty::setFlowControlEnabled(bool enable)

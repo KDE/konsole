@@ -47,6 +47,7 @@
 #include "profile/ProfileManager.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalFonts.h"
 #include "terminalDisplay/TerminalScrollBar.h"
 
 // Linux
@@ -724,9 +725,8 @@ void Session::sessionAttributeRequest(int id, uint terminator)
     }
 }
 
-void Session::onViewSizeChange(int height, int width)
+void Session::onViewSizeChange(int /* height */, int /* width */)
 {
-    _shellProcess->setPixelSize(width, height);
     updateTerminalSize();
 }
 
@@ -758,7 +758,17 @@ void Session::updateTerminalSize()
 void Session::updateWindowSize(int lines, int columns)
 {
     Q_ASSERT(lines > 0 && columns > 0);
-    _shellProcess->setWindowSize(columns, lines);
+
+    int width = 0;
+    int height = 0;
+    if (!_views.isEmpty()) {
+        // This is somewhat arbitrary. Views having potentially different font sizes is
+        // irreconcilable with the PTY user having accurate knowledge of the geometry.
+        QSize cr = _views.at(0)->contentRect().size();
+        width = cr.width();
+        height = cr.height();
+    }
+    _shellProcess->setWindowSize(columns, lines, width, height);
 }
 void Session::refresh()
 {
@@ -777,10 +787,13 @@ void Session::refresh()
     // send an email with method or patches to konsole-devel@kde.org
 
     const QSize existingSize = _shellProcess->windowSize();
-    _shellProcess->setWindowSize(existingSize.width() + 1, existingSize.height());
+    const QSize existingPxSize = _shellProcess->pixelSize();
+    _shellProcess->setWindowSize(existingSize.width() + 1, existingSize.height(),
+                                 existingPxSize.width() + 1, existingPxSize.height());
     // introduce small delay to avoid changing size too quickly
     QThread::usleep(500);
-    _shellProcess->setWindowSize(existingSize.width(), existingSize.height());
+    _shellProcess->setWindowSize(existingSize.width(), existingSize.height(),
+                                 existingPxSize.width(), existingPxSize.height());
 }
 
 void Session::sendSignal(int signal)

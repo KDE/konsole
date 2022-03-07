@@ -86,14 +86,16 @@ public:
     bool flowControlEnabled() const;
 
     /**
-     * Sets the size of the window (in columns and lines of characters)
-     * used by this teletype.
+     * Sets the size of the window (in columns and lines of characters,
+     * and width and height in pixels) used by this teletype.
      */
-    void setWindowSize(int columns, int lines);
-    void setPixelSize(int width, int height);
+    void setWindowSize(int columns, int lines, int width, int height);
 
-    /** Returns the size of the window used by this teletype.  See setWindowSize() */
+    /** Returns the size of the window used by this teletype in characters.  See setWindowSize() */
     QSize windowSize() const;
+
+    /** Returns the size of the window used by this teletype in pixels.  See setWindowSize() */
+    QSize pixelSize() const;
 
     /**
      * Sets the special character for erasing previous not-yet-erased character.

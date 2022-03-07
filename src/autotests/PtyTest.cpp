@@ -56,9 +56,12 @@ void PtyTest::testWindowSize()
 {
     Pty pty;
     QSize input(80, 40);
-    pty.setWindowSize(input.width(), input.height());
+    QSize pxInput(80 * 8, 40 * 16);
+    pty.setWindowSize(input.width(), input.height(), pxInput.width(), pxInput.height());
     QSize output = pty.windowSize();
     QCOMPARE(output, input);
+    QSize pxOutput = pty.pixelSize();
+    QCOMPARE(pxOutput, pxInput);
 }
 
 void PtyTest::testRunProgram()
