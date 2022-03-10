@@ -28,6 +28,7 @@ Keywords[nl]=terminal;console;script;run;uitvoeren;commando;commandoregel;cli;ba
 Keywords[pl]=terminal;konsola;skrypt;uruchom;wykonaj;polecenie;wiersz poleceń;linia komend;cli;bash;sh;powłoka;zsh;cmd;wiersz poleceń
 Keywords[pt_BR]=terminal;console;script;executar;rodar;comando;linha de comando;cli;bash;sh;shell;zsh;cmd;prompt de comando
 Keywords[ro]=terminal;consolă;script;rulează;execută;comandă;linie de comandă;bash;sh;interpretor;zsh;cmd;prompt comandă
+Keywords[sk]=terminál;konzola;skript;spustiť;vykonať;príkaz;príkazový riadok;príkazový riadok;cli;bash;sh;shell;zsh;cmd;príkazový riadok
 Keywords[sl]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;ukazni poziv
 Keywords[sv]=terminal;konsoll;skript;köra;kommando;kommandorad;bash;sh;skal;zsh;cmd;kommandoprompt
 Keywords[tr]=uçbirim;terminal;konsol;betik;çalıştır;komut;komut-satırı;komut satırı;cli;bash;sh;kabuk;shell;zsh;cmd;komut istemi
