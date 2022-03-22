@@ -94,7 +94,7 @@ set(HAVE_X11 ${X11_FOUND})
 # Check for function GETPWUID
 check_symbol_exists(getpwuid "pwd.h" HAVE_GETPWUID)
 
-check_include_files(malloc.h      HAVE_MALLOC_H)
+check_function_exists(malloc_trim HAVE_MALLOC_TRIM)
 
 # See above includes for defaults
 add_definitions(

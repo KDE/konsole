@@ -15,5 +15,5 @@
 
 #cmakedefine HAVE_GETPWUID ${HAVE_GETPWUID}
 
-/* Define to 1 if you have the <malloc.h> header file. */
-#cmakedefine HAVE_MALLOC_H 1
+/* Defined if system has the malloc_trim function, which is a GNU extension */
+#cmakedefine HAVE_MALLOC_TRIM

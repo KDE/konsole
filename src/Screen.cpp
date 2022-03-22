@@ -28,13 +28,11 @@
 #include "history/HistoryType.h"
 #include "profile/Profile.h"
 
-#ifdef HAVE_MALLOC_H
-    // For malloc_trim, which is a GNU extension
-    #ifdef __GNUC__
-    extern "C" {
-            #include <malloc.h>
-    }
-    #endif
+#ifdef HAVE_MALLOC_TRIM
+// For malloc_trim, which is a GNU extension
+extern "C" {
+#include <malloc.h>
+}
 #endif
 
 using namespace Konsole;
@@ -1799,12 +1797,11 @@ void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
         t.scroll(_history);
     }
     _graphicsPlacements.clear();
-#ifdef HAVE_MALLOC_H
+#ifdef HAVE_MALLOC_TRIM
+
 #ifdef Q_OS_LINUX
-#ifdef __GNUC__
     // We might have been using gigabytes of memory, so make sure it is actually released
     malloc_trim(0);
-#endif
 #endif
 #endif
 }
