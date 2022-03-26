@@ -21,7 +21,7 @@ configure_file(config-konsole.h.cmake
 
 ### Tests
 if(BUILD_TESTING)
-  find_package(Qt5Test ${QT_MIN_VERSION} CONFIG REQUIRED)
+  find_package(Qt${QT_MAJOR_VERSION}Test ${QT_MIN_VERSION} CONFIG REQUIRED)
   add_subdirectory(autotests)
   add_subdirectory(tests)
 endif()
@@ -40,9 +40,9 @@ option(KONSOLE_BUILD_UNI2CHARACTERWIDTH "Konsole: build uni2characterwidth execu
 # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
 # Generate dbus .xml files; do not store .xml in source folder
-qt5_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
+qt_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
 
-qt5_add_dbus_adaptor(windowadaptors_SRCS
+qt_add_dbus_adaptor(windowadaptors_SRCS
                     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                     ViewManager.h
                     Konsole::ViewManager)
@@ -50,8 +50,8 @@ qt5_add_dbus_adaptor(windowadaptors_SRCS
 
 set(konsole_LIBS
     KF5::XmlGui
-    Qt5::PrintSupport
-    Qt5::Xml
+    Qt${QT_MAJOR_VERSION}::PrintSupport
+    Qt${QT_MAJOR_VERSION}::Xml
     KF5::Notifications
     KF5::WindowSystem
     KF5::TextWidgets
@@ -99,8 +99,8 @@ add_library(konsolehelpers
     ${konsolehelpers_SRCS}
 )
 target_link_libraries(konsolehelpers
-    Qt5::Core
-    Qt5::Widgets
+    Qt${QT_MAJOR_VERSION}::Core
+    Qt${QT_MAJOR_VERSION}::Widgets
 )
 
 add_subdirectory(colorscheme)
@@ -225,7 +225,7 @@ ki18n_wrap_ui(konsoleprivate_SRCS
 )
 
 # add the resource files for the ui files
-qt5_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
+qt_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
 
 add_library(konsoleprivate ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)

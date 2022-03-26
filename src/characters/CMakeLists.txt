@@ -21,4 +21,4 @@ generate_export_header(konsolecharacters BASE_NAME konsolecharacters)
 target_include_directories(konsolecharacters
     PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
     INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(konsolecharacters Qt5::Gui)
+target_link_libraries(konsolecharacters Qt${QT_MAJOR_VERSION}::Gui)

@@ -3,7 +3,7 @@ include(ECMMarkNonGuiExecutable)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-set(KONSOLE_TEST_LIBS Qt5::Test konsoleprivate)
+set(KONSOLE_TEST_LIBS Qt${QT_MAJOR_VERSION}::Test konsoleprivate)
 
 add_executable(BookMarkTest BookMarkTest.cpp)
 ecm_mark_as_test(BookMarkTest)
@@ -44,7 +44,7 @@ else()
         ecm_mark_as_test(DBusTest)
         ecm_mark_nongui_executable(DBusTest)
         add_test(NAME DBusTest COMMAND DBusTest)
-        target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
+        target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt${QT_MAJOR_VERSION}::DBus)
     endif()
 endif()
 
