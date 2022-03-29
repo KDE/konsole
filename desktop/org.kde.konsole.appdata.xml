@@ -101,7 +101,7 @@
     <p xml:lang="ast">Konsole ye una terminal pa executar comandos de la shell. Apurre una llinia de comandos pa controlar direutamente l'ordenador.</p>
     <p xml:lang="az">Konsole, əmr təbəqəsini işlətmək üçün bir terminaldır. Kompüterinizi birbaşa idarə etmək üçün bir sətir interfeysi təmin edir.</p>
     <p xml:lang="ca">El Konsole és un terminal per a executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per a controlar directament l'ordinador.</p>
-    <p xml:lang="ca-valencia">El Konsole és un terminal per a executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per a controlar directament l'ordinador.</p>
+    <p xml:lang="ca-valencia">Konsole és un terminal per a executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per a controlar directament l'ordinador.</p>
     <p xml:lang="cs">Konsole je terminál pro spouštění příkazů v shellu. Poskytuje příkazovou řádku pro přímé ovládání vašeho počítače.</p>
     <p xml:lang="da">Konsole er en terminal til at køre en kommandoskal. Den giver en kommandolinjegrænseflade til at styre din computer direkte.</p>
     <p xml:lang="de">Konsole ist ein Terminal zum Ausführen einer Befehls-Shell. Es stellt eine Befehlszeile-Schnittstelle zur direkten Steuerung Ihres Rechner zur Verfügung.</p>
@@ -464,7 +464,7 @@
       <caption xml:lang="ast">Konsole usándose como un emulador de terminal</caption>
       <caption xml:lang="az">Konsole terminal emulyatoru olaraq istifadə olunur</caption>
       <caption xml:lang="ca">El Konsole s'usa com a emulador de terminal</caption>
-      <caption xml:lang="ca-valencia">El Konsole s'usa com a emulador de terminal</caption>
+      <caption xml:lang="ca-valencia">Konsole s'usa com a emulador de terminal</caption>
       <caption xml:lang="cs">Konsole je použita jako emulátor terminálu</caption>
       <caption xml:lang="da">Konsole der bruges som en terminalemulator</caption>
       <caption xml:lang="de">Konsole wird als Terminal-Emulator verwendet</caption>
