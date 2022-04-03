@@ -881,7 +881,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
             }
         }
         int rows = -1, cols = -1;
-        _currentScreen->addPlacement(pixmap, rows, cols, true, moveCursor);
+        _currentScreen->addPlacement(pixmap, rows, cols, -1, -1, true, moveCursor);
     }
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
