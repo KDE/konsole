@@ -1822,8 +1822,16 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
             case Qt::Key_S:
                 Q_EMIT flowControlKeyPressed(true);
                 break;
-            case Qt::Key_Q:
-            case Qt::Key_C: // cancel flow control
+            case Qt::Key_C:
+                if (m_SixelStarted) {
+                    SixelModeAbort();
+                }
+
+                // Allow the user to take back control
+                resetTokenizer();
+                Q_EMIT flowControlKeyPressed(false);
+                break;
+            case Qt::Key_Q: // cancel flow control
                 Q_EMIT flowControlKeyPressed(false);
                 break;
             }
@@ -2215,12 +2223,19 @@ static QString hexdump2(uint *s, int len)
 
 void Vt102Emulation::reportDecodingError()
 {
+    resetTokenizer();
+
+    if (m_SixelStarted) {
+        SixelModeAbort();
+    }
+
     if (tokenBufferPos == 0 || (tokenBufferPos == 1 && (tokenBuffer[0] & 0xff) >= 32)) {
         return;
     }
 
     QString outputError = QStringLiteral("Undecodable sequence: ");
     outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
+    qCDebug(KonsoleDebug).noquote() << outputError;
 }
 
 void Vt102Emulation::sixelQuery(int q)
@@ -2290,6 +2305,8 @@ void Vt102Emulation::SixelModeAbort()
     if (!m_SixelStarted) {
         return;
     }
+    resetMode(MODE_Sixel);
+    resetTokenizer();
     m_SixelStarted = false;
     m_currentImage = QImage();
 }
@@ -2493,9 +2510,7 @@ bool Vt102Emulation::processSixel(uint cc)
             receiveChars(QVector<uint>{s[1]}); // re-send the actual character
             return true;
         default:
-            resetMode(MODE_Sixel);
             SixelModeAbort();
-            resetTokenizer();
             receiveChars(QVector<uint>{s[0], s[1]}); // re-send the actual character
             return true;
         }
