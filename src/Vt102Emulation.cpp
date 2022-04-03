@@ -29,6 +29,8 @@
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
 
+#include <konsoledebug.h>
+
 using Konsole::Vt102Emulation;
 
 /*
@@ -1423,41 +1425,43 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             imageId = 0;
             savedKeys = QMap<char, qint64>();
             QByteArray out;
+
+            uint32_t byteCount = 0;
+            if (keys['f'] == 24 || keys['f'] == 32) {
+                int bpp = keys['f'] / 8;
+                byteCount = bpp * keys['s'] * keys['v'];
+            } else {
+                byteCount = 8 * 1024 * 1024;
+            }
+
             if (keys['o'] == 'z') {
-                uint32_t decompressedSize;
-                if (keys['f'] == 24 || keys['f'] == 32) {
-                    int bpp = keys['f'] / 8;
-                    decompressedSize = bpp * keys['s'] * keys['v'];
-                } else {
-                    decompressedSize = 8 * 1024 * 1024;
-                }
-                decompressedSize = qToBigEndian(decompressedSize);
-                imageData.prepend((char*)&decompressedSize, sizeof decompressedSize);
+                char header[sizeof byteCount];
+                qToBigEndian(byteCount, header);
+                imageData.prepend(header, sizeof header);
                 out = qUncompress(imageData);
 
                 if (keys['f'] != 24 && keys['f'] != 32) {
-                    imageData.clear();
-                    imageData.append(out);
+                    imageData = out;
                 }
             }
+            if (out.isEmpty()) {
+                out = imageData;
+            }
+
             if (keys['f'] == 24 || keys['f'] == 32) {
-                enum QImage::Format format = keys['f'] == 24 ? QImage::Format_RGB888 : QImage::Format_RGBA8888;
-                const uchar *pixelData;
-                if (out.isNull()) {
-                    pixelData = (const uchar*)imageData.constData();
-                } else {
-                    pixelData = (const uchar*)out.constData();
+                if (out.size() < byteCount) {
+                    qCWarning(KonsoleDebug) << "Not enough image data" << out.size() << "require" << byteCount;
+                    imageData.clear();
+                    return;
                 }
-                pixmap = QPixmap::fromImage(QImage(pixelData,
+                QImage::Format format = keys['f'] == 24 ? QImage::Format_RGB888 : QImage::Format_RGBA8888;
+                pixmap = QPixmap::fromImage(QImage((const uchar*)out.constData(),
                                    0 + keys['s'],
                                    0 + keys['v'],
                                    0 + keys['s'] * keys['f'] / 8,
                                    format));
                 pixmap.detach();
             } else {
-                if (out.isNull()) {
-                    out = imageData;
-                }
                 pixmap.loadFromData(out);
             }
 
