@@ -1449,7 +1449,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             }
 
             if (keys['f'] == 24 || keys['f'] == 32) {
-                if (out.size() < byteCount) {
+                if (unsigned(out.size()) < byteCount) {
                     qCWarning(KonsoleDebug) << "Not enough image data" << out.size() << "require" << byteCount;
                     imageData.clear();
                     return;
