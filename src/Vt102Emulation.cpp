@@ -2343,7 +2343,7 @@ void Vt102Emulation::SixelModeDisable()
         pixmap = pixmap.scaled(pixmap.width(), m_aspect.first * pixmap.height() / m_aspect.second);
     }
     int rows = -1, cols = -1;
-    int needScroll = _currentScreen->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling, false, false);
+    int needScroll = _currentScreen->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling, m_SixelScrolling, false);
     if (m_SixelScrolling) {
         if (rows - needScroll > 0) {
             _currentScreen->cursorDown(rows - needScroll);
