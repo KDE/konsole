@@ -114,7 +114,7 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
     , _findAction(nullptr)
     , _findNextAction(nullptr)
     , _findPreviousAction(nullptr)
-    , _interactionTimer(nullptr)
+    , _snapshotTimer(nullptr)
     , _searchStartLine(0)
     , _prevSearchResultLine(0)
     , _codecAction(nullptr)
@@ -209,28 +209,18 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
     connect(session(), &Konsole::Session::flowControlEnabledChanged, view(), &Konsole::TerminalDisplay::setFlowControlWarningEnabled);
     view()->setFlowControlWarningEnabled(session()->flowControlEnabled());
 
-    // take a snapshot of the session state every so often when
-    // user activity occurs
+    // take a snapshot of the session state shortly after any event occurs
     //
-    // the timer is owned by the session so that it will be destroyed along
-    // with the session
-    _interactionTimer = new QTimer(session());
-    _interactionTimer->setSingleShot(true);
-    _interactionTimer->setInterval(500);
-    connect(_interactionTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
-    connect(view(), &Konsole::TerminalDisplay::compositeFocusChanged, this, [this](bool focused) {
-        if (focused) {
-            interactionHandler();
-        }
-    });
-    connect(view(), &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::SessionController::interactionHandler);
-
-    // take a snapshot of the session state periodically in the background
-    auto backgroundTimer = new QTimer(session());
-    backgroundTimer->setSingleShot(false);
-    backgroundTimer->setInterval(2000);
-    connect(backgroundTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
-    backgroundTimer->start();
+    // Don't link the timer with the session or we will have an use after
+    // free in SessionController::eventFilter
+    _snapshotTimer = new QTimer(nullptr);
+    _snapshotTimer->setSingleShot(true);
+    _snapshotTimer->setInterval(500);
+    connect(_snapshotTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
+    // Install an event handler on QCoreApplication
+    // This will catch all events: key strokes, mouse moves/clicks...
+    // but also all changes that occur in all tabs
+    QCoreApplication::instance()->installEventFilter(this);
 
     // xterm '10;?' request
     connect(session(), &Konsole::Session::getForegroundColor, this, &Konsole::SessionController::sendForegroundColor);
@@ -255,6 +245,8 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
 
 SessionController::~SessionController()
 {
+    QCoreApplication::instance()->removeEventFilter(this);
+    delete _snapshotTimer;
     _allControllers.remove(this);
 
     if (factory() != nullptr) {
@@ -315,11 +307,6 @@ void SessionController::viewFocusChangeHandler(bool focused)
             copyInputToAllTabs();
         }
     }
-}
-
-void SessionController::interactionHandler()
-{
-    _interactionTimer->start();
 }
 
 void SessionController::snapshot()
@@ -1303,6 +1290,20 @@ void SessionController::searchClosed()
 {
     _isSearchBarEnabled = false;
     searchHistory(false);
+}
+
+bool SessionController::eventFilter(QObject *obj, QEvent *event)
+{
+    // Forward event to super class
+    bool ret = ViewProperties::eventFilter(obj, event);
+
+    // Start the snapshot timer if:
+    // - it is not already started
+    // - the event is not a timer timeout
+    if(!_snapshotTimer->isActive() && event->type() != QEvent::Timer) {
+        _snapshotTimer->start();
+    }
+    return ret;
 }
 
 void SessionController::updateFilterList(const Profile::Ptr &profile)

@@ -219,6 +219,10 @@ public Q_SLOTS:
     /** Close the incremental search */
     void searchClosed(); // called when the user clicks on the
 
+protected:
+    /** Start snapshot timer if needed */
+    bool eventFilter(QObject *obj, QEvent *event) override;
+
 private Q_SLOTS:
     // menu item handlers
     void openBrowser();
@@ -277,7 +281,6 @@ private Q_SLOTS:
         const QExplicitlySharedDataPointer<Profile> &profile); // Called when the profile has changed, so we might need to change the list of filters
 
     void viewFocusChangeHandler(bool focused);
-    void interactionHandler();
     void snapshot(); // called periodically as the user types
     // to take a snapshot of the state of the
     // foreground process in the terminal
@@ -338,7 +341,7 @@ private:
     QAction *_findNextAction;
     QAction *_findPreviousAction;
 
-    QTimer *_interactionTimer;
+    QTimer *_snapshotTimer;
 
     int _searchStartLine;
     int _prevSearchResultLine;
