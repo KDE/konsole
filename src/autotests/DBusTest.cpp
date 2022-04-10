@@ -67,6 +67,7 @@ void DBusTest::initTestCase()
 #else
     auto konsoleExec = QCoreApplication::applicationDirPath() + QStringLiteral("/konsole");
 #endif
+    qDebug()<<konsoleExec;
     _process->start(konsoleExec, QStringList(QStringLiteral("--separate")));
 
     if (!_process->waitForStarted()) {
@@ -74,7 +75,7 @@ void DBusTest::initTestCase()
     }
 
     // Wait for above Konsole to finish starting
-    QThread::sleep(5);
+    QThread::sleep(15);
 
     serviceReply = bus->registeredServiceNames();
     QVERIFY2(serviceReply.isValid(), "SessionBus interfaces not available");
@@ -83,6 +84,7 @@ void DBusTest::initTestCase()
     allServices = serviceReply;
     for (QStringList::const_iterator it = allServices.constBegin(), end = allServices.constEnd(); it != end; ++it) {
         const QString service = *it;
+        qDebug()<<"Service: "<<service;
         if (service.startsWith(interfaceName)) {
             if (!konsoleServices.contains(service)) {
                 _interfaceName = service;
