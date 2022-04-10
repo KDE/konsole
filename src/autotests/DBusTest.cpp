@@ -62,7 +62,12 @@ void DBusTest::initTestCase()
     // Create a new Konsole with a separate process id
     _process = new QProcess;
     _process->setProcessChannelMode(QProcess::ForwardedChannels);
-    _process->start(QStringLiteral("konsole"), QStringList(QStringLiteral("--separate")));
+#if defined(Q_OS_MACOS)
+    auto konsoleExec = QCoreApplication::applicationDirPath() + QStringLiteral("/konsole.app/Contents/MacOS/konsole");
+#else
+    auto konsoleExec = QCoreApplication::applicationDirPath() + QStringLiteral("/konsole");
+#endif
+    _process->start(konsoleExec, QStringList(QStringLiteral("--separate")));
 
     if (!_process->waitForStarted()) {
         QFAIL(QStringLiteral("Unable to exec a new Konsole").toLatin1().data());
