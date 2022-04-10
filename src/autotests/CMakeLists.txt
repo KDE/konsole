@@ -39,13 +39,11 @@ else()
     # to fix for every build
     # https://mail.kde.org/pipermail/kde-frameworks-devel/2018-November/073078.html
     # https://phabricator.kde.org/T9948
-    if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-        add_executable(DBusTest DBusTest.cpp)
-        ecm_mark_as_test(DBusTest)
-        ecm_mark_nongui_executable(DBusTest)
-        add_test(NAME DBusTest COMMAND DBusTest)
-        target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
-    endif()
+    add_executable(DBusTest DBusTest.cpp)
+    ecm_mark_as_test(DBusTest)
+    ecm_mark_nongui_executable(DBusTest)
+    add_test(NAME DBusTest COMMAND DBusTest)
+    target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
 endif()
 
 add_executable(HistoryTest HistoryTest.cpp)
