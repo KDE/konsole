@@ -63,9 +63,9 @@ void DBusTest::initTestCase()
     _process = new QProcess;
     _process->setProcessChannelMode(QProcess::ForwardedChannels);
 #if defined(Q_OS_MACOS)
-    auto konsoleExec = QCoreApplication::applicationDirPath() + QStringLiteral("/konsole.app/Contents/MacOS/konsole");
+    QString konsoleExec = QCoreApplication::applicationDirPath() + QStringLiteral("/konsole.app/Contents/MacOS/konsole");
 #else
-    auto konsoleExec = QCoreApplication::applicationDirPath() + QStringLiteral("/konsole");
+    QString konsoleExec = QCoreApplication::applicationDirPath() + QStringLiteral("/konsole");
 #endif
     qDebug()<<konsoleExec;
     _process->start(konsoleExec, QStringList(QStringLiteral("--separate")));
