@@ -1837,23 +1837,23 @@ Konsole::EscapeSequenceUrlExtractor *Konsole::Screen::urlExtractor() const
     return _escapeSequenceUrlExtractor.get();
 }
 
-int Screen::addPlacement(QPixmap pixmap,
-                         int &rows,
-                         int &cols,
-                         int row,
-                         int col,
-                         bool scrolling,
-                         bool moveCursor,
-                         bool leaveText,
-                         int z,
-                         int id,
-                         int pid,
-                         qreal opacity,
-                         int X,
-                         int Y)
+void Screen::addPlacement(QPixmap pixmap,
+                          int &rows,
+                          int &cols,
+                          int row,
+                          int col,
+                          bool scrolling,
+                          int moveCursor,
+                          bool leaveText,
+                          int z,
+                          int id,
+                          int pid,
+                          qreal opacity,
+                          int X,
+                          int Y)
 {
     if (pixmap.isNull()) {
-        return -1;
+        return;
     }
 
     std::unique_ptr<TerminalGraphicsPlacement_t> p(new TerminalGraphicsPlacement_t);
@@ -1888,23 +1888,21 @@ int Screen::addPlacement(QPixmap pixmap,
         eraseBlock(row, col, rows, cols);
     }
     addPlacement(p);
-    int needScroll = qBound(0, row + rows - _lines + 1, rows);
-    if (moveCursor && scrolling && needScroll > moveCursor) {
-        scrollUp(needScroll - moveCursor);
+    int needScroll = qBound(0, row + rows - _lines, rows);
+    if (moveCursor && scrolling && needScroll > 0) {
+        scrollUp(needScroll);
     }
     if (moveCursor) {
         if (rows - needScroll - 1 > 0) {
             cursorDown(rows - needScroll - 1);
         }
-        if (_cuX + cols >= _columns) {
+        if (moveCursor == 2 || _cuX + cols >= _columns) {
             toStartOfLine();
             newLine();
         } else {
             cursorRight(cols);
         }
     }
-
-    return qBound(0, row + rows - _lines + 1, rows);
 }
 
 void Screen::addPlacement(std::unique_ptr<TerminalGraphicsPlacement_t> &placement)
