@@ -25,6 +25,7 @@ Keywords[ia]=terminal;console;script;run;executa;commando;linea-de-commando;line
 Keywords[it]=terminale;console;script;esegui;comando;riga di comando;cli;bash;sh;shell;zsh;cmd;prompt dei comandi
 Keywords[ko]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;터미널;콘솔;스크립트;실행;명령;명령줄;명령행;명령 프롬프트;
 Keywords[nl]=terminal;console;script;run;uitvoeren;commando;commandoregel;cli;bash;sh;shell;zsh;cmd;commando-prompt
+Keywords[nn]=terminal;konsoll;skript;køyr;utfør;kommando;kommandolinje;kommando-linje;cli;bash;sh;shell;skal;zsh;cmd;leietekst
 Keywords[pl]=terminal;konsola;skrypt;uruchom;wykonaj;polecenie;wiersz poleceń;linia komend;cli;bash;sh;powłoka;zsh;cmd;wiersz poleceń
 Keywords[pt_BR]=terminal;console;script;executar;rodar;comando;linha de comando;cli;bash;sh;shell;zsh;cmd;prompt de comando
 Keywords[ro]=terminal;consolă;script;rulează;execută;comandă;linie de comandă;bash;sh;interpretor;zsh;cmd;prompt comandă
