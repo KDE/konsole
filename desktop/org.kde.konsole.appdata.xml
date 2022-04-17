@@ -129,7 +129,7 @@
     <p xml:lang="sk">Konsole je emulátor terminálu, často sa označuje ako terminál alebo shell. Emuluje rozhranie príkazového riadku v textovom okne.</p>
     <p xml:lang="sl">Konsole je posnemovalnik terminala, kjer teče ukazni jezik shell. Nudi vam ukazno vrstico, kjer lahko neposredno upravljate vaš računalnik.</p>
     <p xml:lang="sv">Terminal är en terminal för att köra ett kommandoskal. Det tillhandahåller ett kommandoradsgränssnitt för att direkt styra datorn.</p>
-    <p xml:lang="tr">Konsole, bir komut kabuğunu çalıştırmak için kullanılan bir uçbirimdir. Bilgisayarınızı doğrudan kontrol etmek için bir komut satırı arabirimi sağlar.</p>
+    <p xml:lang="tr">Konsole, komut kabukları çalıştırmak için kullanılan bir uçbirimdir. Bilgisayarınızı doğrudan denetlemek için bir komut satırı arabirimi sağlar.</p>
     <p xml:lang="uk">Konsole — це термінал для роботи з командною оболонкою. За її допомогою можна отримати доступ до інтерфейсу командного рядка для керування вашим комп'ютером.</p>
     <p xml:lang="x-test">xxKonsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.xx</p>
     <p xml:lang="zh-CN">Konsole 是一个运行命令 Shell 的终端。它提供了直接控制计算机的命令行接口。</p>
@@ -492,7 +492,7 @@
       <caption xml:lang="sk">Konsole používaný ako emulátor terminálu.</caption>
       <caption xml:lang="sl">Program Konsole, ko je uporabljen kot posnemovalnik terminala</caption>
       <caption xml:lang="sv">Terminal används som en terminalemulator.</caption>
-      <caption xml:lang="tr">Konsole, uçbirim öykünücüsü olarak kullanılıyor</caption>
+      <caption xml:lang="tr">Konsole, uçbirim öykünücü olarak kullanılıyor</caption>
       <caption xml:lang="uk">Konsole використовується як емулятор термінала</caption>
       <caption xml:lang="x-test">xxKonsole being used as a terminal emulatorxx</caption>
       <caption xml:lang="zh-CN">将 Konsole 用作终端仿真器</caption>
