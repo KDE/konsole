@@ -64,10 +64,11 @@ HistorySizeWidget::HistorySizeWidget(QWidget *parent)
     _ui->unlimitedHistoryWarningButton->hide();
     connect(_ui->unlimitedHistoryButton, &QAbstractButton::toggled, _ui->unlimitedHistoryWarningButton, &QWidget::setVisible);
     connect(_ui->unlimitedHistoryWarningButton, &QToolButton::clicked, this, [this](bool) {
-        const auto message = xi18nc("@info:tooltip",
-                                    "When using this option, the scrollback data will be written unencrypted to temporary files. Those temporary files will be "
-                                    "deleted automatically when Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → Configure Konsole → File "
-                                    "Location</emphasis> to select the location of the temporary files.");
+        const auto message =
+            xi18nc("@info:tooltip",
+                   "When using this option, the scrollback data will be written unencrypted to temporary files. Those temporary files will be "
+                   "deleted automatically when Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → Configure Konsole → Temporary "
+                   "Files</emphasis> to select the location of the temporary files.");
         const QPoint pos = QPoint(_ui->unlimitedHistoryWrapper->width() / 2, _ui->unlimitedHistoryWrapper->height());
         QWhatsThis::showText(_ui->unlimitedHistoryWrapper->mapToGlobal(pos), message, _ui->unlimitedHistoryWrapper);
     });
