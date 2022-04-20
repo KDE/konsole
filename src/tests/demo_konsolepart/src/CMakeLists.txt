@@ -10,7 +10,7 @@ target_link_libraries(demo_konsolepart
     KF5::I18n
     KF5::Parts
     KF5::Pty
-    Qt5::Widgets
+    Qt::Widgets
     KF5::XmlGui
     KF5::WindowSystem
 )
