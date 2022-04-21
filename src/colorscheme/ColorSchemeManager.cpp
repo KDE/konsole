@@ -203,7 +203,7 @@ bool ColorSchemeManager::isColorSchemeDeletable(const QString &name)
     const QString path = findColorSchemePath(name);
 
     QFileInfo fileInfo(path);
-    QFileInfo dirInfo = fileInfo.path();
+    QFileInfo dirInfo(fileInfo.path());
 
     return dirInfo.isWritable();
 }
