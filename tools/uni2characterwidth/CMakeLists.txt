@@ -7,7 +7,7 @@
 ###   See `uni2characterwidth --help` for usage information
 if(KONSOLE_BUILD_UNI2CHARACTERWIDTH)
 
-    find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
+    find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
         Core
     )
     find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
@@ -23,7 +23,7 @@ if(KONSOLE_BUILD_UNI2CHARACTERWIDTH)
 
     add_executable(uni2characterwidth ${uni2characterwidth_SRC})
     target_link_libraries(uni2characterwidth
-        Qt5::Core
+        Qt::Core
         KF5::KIOCore
     )
 

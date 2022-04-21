@@ -59,12 +59,16 @@ endif()
 ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
     SOVERSION 1
 )
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     DBus
     PrintSupport
     Widgets
 )
+
+if(QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat ${QT_MIN_VERSION} REQUIRED)
+endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     Bookmarks

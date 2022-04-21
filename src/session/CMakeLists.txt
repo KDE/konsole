@@ -5,9 +5,9 @@
 
 # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
 # Generate dbus .xml files; do not store .xml in source folder
-qt5_generate_dbus_interface(Session.h org.kde.konsole.Session.xml OPTIONS -m)
+qt_generate_dbus_interface(Session.h org.kde.konsole.Session.xml OPTIONS -m)
 
-qt5_add_dbus_adaptor(
+qt_add_dbus_adaptor(
     sessionadaptors_SRCS
     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
     Session.h
@@ -37,3 +37,7 @@ target_link_libraries(
     ${konsole_LIBS}
     konsoleprofile  # TODO: Must be removed from here, Used only for ProfileCommandParser::parse in SessionManager::sessionProfileCommandReceived
 )
+
+if(TARGET Qt6::Core5Compat)
+    target_link_libraries(konsolesession Qt6::Core5Compat)
+endif()
