@@ -8,6 +8,7 @@
 #define PROFILELIST_H
 
 // Qt
+#include <QAction>
 #include <QList>
 #include <QObject>
 #include <QSet>

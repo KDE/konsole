@@ -14,6 +14,7 @@
 #include <QFileDialog>
 #include <QIcon>
 #include <QInputDialog>
+#include <QMenu>
 #include <QPainter>
 #include <QPushButton>
 #include <QRegularExpressionValidator>

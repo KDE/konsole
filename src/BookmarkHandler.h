@@ -16,6 +16,7 @@
 #include <KBookmarkOwner>
 
 // Konsole
+#include "ViewProperties.h"
 #include "konsoleprivate_export.h"
 
 class QMenu;

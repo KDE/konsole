@@ -8,6 +8,9 @@
 #ifndef EDITPROFILEDIALOG_H
 #define EDITPROFILEDIALOG_H
 
+// Qt
+#include <QTextCodec>
+
 // KDE
 #include <KNS3/Entry>
 #include <KPageDialog>

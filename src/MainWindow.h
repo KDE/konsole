@@ -8,6 +8,7 @@
 #define MAINWINDOW_H
 
 // Qt
+#include <QAction>
 #include <QExplicitlySharedDataPointer>
 #include <QPointer>
 #include <QUrl>

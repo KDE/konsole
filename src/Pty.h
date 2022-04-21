@@ -10,14 +10,13 @@
 
 // Qt
 #include <QSize>
+#include <QtContainerFwd>
 
 // KDE
 #include <KPtyProcess>
 
 // Konsole
 #include "konsoleprivate_export.h"
-
-class QStringList;
 
 namespace Konsole
 {

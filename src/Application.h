@@ -11,6 +11,9 @@
 #include <QCommandLineParser>
 
 // Konsole
+#include "profile/Profile.h"
+#include "session/Session.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewSplitter.h"
 
 #include "pluginsystem/PluginManager.h"

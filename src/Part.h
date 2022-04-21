@@ -13,12 +13,12 @@
 
 // Qt
 #include <QVariantList>
+#include <QtContainerFwd>
 
 // Konsole
 #include "config-konsole.h"
 #include "session/Session.h"
 
-class QStringList;
 class QKeyEvent;
 
 namespace Konsole

@@ -13,8 +13,6 @@
 
 class QWidget;
 class QGridLayout;
-template<typename T>
-class QVector;
 
 namespace Konsole
 {

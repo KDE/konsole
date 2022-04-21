@@ -14,6 +14,7 @@
 #include <QProcess>
 #include <QSize>
 #include <QStringList>
+#include <QTextCodec>
 #include <QUrl>
 #include <QUuid>
 #include <QWidget>
