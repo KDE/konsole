@@ -10,9 +10,14 @@
 #include "IKonsolePlugin.h"
 #include "MainWindow.h"
 
+#include "kcoreaddons_version.h"
 #include <KLocalizedString>
-#include <KPluginLoader>
+#include <KPluginFactory>
 #include <KPluginMetaData>
+
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)
+#include <KPluginLoader>
+#endif
 
 #include <QAction>
 
@@ -34,6 +39,7 @@ PluginManager::~PluginManager()
 
 void PluginManager::loadAllPlugins()
 {
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)
     QVector<KPluginMetaData> pluginMetaData = KPluginLoader::findPlugins(QStringLiteral("konsoleplugins"));
     for (const auto &metaData : pluginMetaData) {
         KPluginLoader pluginLoader(metaData.fileName());
@@ -49,6 +55,17 @@ void PluginManager::loadAllPlugins()
 
         d->plugins.push_back(plugin);
     }
+#else
+    QVector<KPluginMetaData> pluginMetaData = KPluginMetaData::findPlugins(QStringLiteral("konsoleplugins"));
+    for (const auto &metaData : pluginMetaData) {
+        const KPluginFactory::Result result = KPluginFactory::instantiatePlugin<IKonsolePlugin>(metaData);
+        if (!result) {
+            continue;
+        }
+
+        d->plugins.push_back(result.plugin);
+    }
+#endif
 }
 
 void PluginManager::registerMainWindow(Konsole::MainWindow *window)
