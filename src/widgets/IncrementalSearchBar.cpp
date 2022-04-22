@@ -17,7 +17,14 @@
 
 // KDE
 #include "KonsoleSettings.h"
+
+#include <kconfigwidgets_version.h>
+#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 93, 0)
+#include <KStatefulBrush>
+#else
 #include <KColorScheme>
+#endif
+
 #include <KLocalizedString>
 #include <QLineEdit>
 
