@@ -56,7 +56,7 @@
           <number>0</number>
          </property>
          <item>
-          <layout class="QVBoxLayout">
+          <layout name="colorSchemesBtnLayout" class="QVBoxLayout">
            <property name="spacing">
             <number>6</number>
            </property>
@@ -97,13 +97,6 @@
              </property>
              <property name="text">
               <string>Defaults</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="KNS3::Button" name="downloadColorSchemeButton">
-             <property name="text">
-              <string>Get New...</string>
              </property>
             </widget>
            </item>
@@ -777,11 +770,6 @@
    <extends>QFrame</extends>
    <header>kmessagewidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KNS3::Button</class>
-   <extends>QPushButton</extends>
-   <header location="global">KNS3/Button</header>
   </customwidget>
  </customwidgets>
  <tabstops>

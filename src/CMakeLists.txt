@@ -242,6 +242,7 @@ target_link_libraries(konsoleprivate
     konsoleprofile
     konsolecharacters
     konsoledecoders
+    KF5::NewStuffWidgets
     ${konsole_LIBS}
     ZLIB::ZLIB
 )

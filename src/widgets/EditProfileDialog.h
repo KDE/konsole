@@ -10,7 +10,9 @@
 
 // KDE
 #include <KNS3/Entry>
+#include <KNSCore/EntryInternal>
 #include <KPageDialog>
+#include <knewstuff_version.h>
 
 // Konsole
 #include "colorscheme/ColorScheme.h"
@@ -140,7 +142,6 @@ private Q_SLOTS:
     void editColorScheme();
     void saveColorScheme(const ColorScheme &scheme, bool isNewScheme);
     void removeColorScheme();
-    void gotNewColorSchemes(const KNS3::Entry::List &changedEntries);
     void setVerticalLine(bool);
     void setVerticalLineColumn(int);
     void toggleBlinkingCursor(bool);
@@ -152,6 +153,12 @@ private Q_SLOTS:
     void terminalMarginChanged(int margin);
     void lineSpacingChanged(int);
     void setTerminalCenter(bool enable);
+
+#if KNEWSTUFF_VERSION >= QT_VERSION_CHECK(5, 91, 0)
+    void gotNewColorSchemes(const QList<KNSCore::EntryInternal> &changedEntries);
+#else
+    void gotNewColorSchemes(const KNS3::Entry::List &changedEntries);
+#endif
 
     /**
      * Deletes the selected colorscheme from the user's home dir location

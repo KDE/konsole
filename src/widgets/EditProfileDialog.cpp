@@ -34,6 +34,8 @@
 #include <KWindowSystem>
 #include <kconfigwidgets_version.h>
 
+#include <KNSWidgets/Button>
+
 // Konsole
 #include "ui_EditProfileAdvancedPage.h"
 #include "ui_EditProfileAppearancePage.h"
@@ -662,8 +664,6 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->removeColorSchemeButton->setEnabled(false);
     _appearanceUi->resetColorSchemeButton->setEnabled(false);
 
-    _appearanceUi->downloadColorSchemeButton->setConfigFile(QStringLiteral("konsole.knsrc"));
-
     // setup color list
     // select the colorScheme used in the current profile
     updateColorSchemeList(currentColorSchemeName());
@@ -680,7 +680,6 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     connect(_appearanceUi->editColorSchemeButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::editColorScheme);
     connect(_appearanceUi->removeColorSchemeButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::removeColorScheme);
     connect(_appearanceUi->newColorSchemeButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::newColorScheme);
-    connect(_appearanceUi->downloadColorSchemeButton, &KNS3::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
 
     connect(_appearanceUi->resetColorSchemeButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::resetColorScheme);
 
@@ -771,6 +770,17 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 
     _appearanceUi->displayVerticalLineAtColumn->setValue(profile->verticalLineAtChar());
     connect(_appearanceUi->displayVerticalLineAtColumn, QOverload<int>::of(&QSpinBox::valueChanged), this, &EditProfileDialog::setVerticalLineColumn);
+
+#if KNEWSTUFF_VERSION >= QT_VERSION_CHECK(5, 91, 0)
+    auto *getNewButton = new KNSWidgets::Button(this);
+    connect(getNewButton, &KNSWidgets::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
+#else
+    auto *getNewButton = new KNS3::Button(this);
+    connect(getNewButton, &KNS3::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
+#endif
+    getNewButton->setText(QStringLiteral("Get New..."));
+    getNewButton->setConfigFile(QStringLiteral("konsole.knsrc"));
+    _appearanceUi->colorSchemesBtnLayout->addWidget(getNewButton);
 }
 
 void EditProfileDialog::setAntialiasText(bool enable)
@@ -1135,7 +1145,11 @@ void EditProfileDialog::removeColorScheme()
     }
 }
 
+#if KNEWSTUFF_VERSION >= QT_VERSION_CHECK(5, 91, 0)
+void EditProfileDialog::gotNewColorSchemes(const QList<KNSCore::EntryInternal> &changedEntries)
+#else
 void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntries)
+#endif
 {
     int failures = 0;
     for (auto &entry : qAsConst(changedEntries)) {
