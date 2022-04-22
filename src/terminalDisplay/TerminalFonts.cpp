@@ -57,7 +57,9 @@ void TerminalFont::setVTFont(const QFont &f)
     // Konsole cannot handle non-integer font metrics
     // TODO: Qt6 will remove ForceIntegerMetrics
     // "Use QFontMetrics to retrieve rounded font metrics."
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     strategy |= QFont::ForceIntegerMetrics;
+#endif
 
     // In case the provided font doesn't have some specific characters it should
     // fall back to a Monospace fonts.
@@ -75,7 +77,9 @@ void TerminalFont::setVTFont(const QFont &f)
         // Set style strategy without ForceIntegerMetrics for the font
         // TODO: Qt6 will remove ForceIntegerMetrics
         // "Use QFontMetrics to retrieve rounded font metrics."
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         strategy &= ~QFont::ForceIntegerMetrics;
+#endif
         newFont.setStyleHint(QFont::TypeWriter, QFont::StyleStrategy(strategy));
         qCDebug(KonsoleDebug) << "Font changed to " << newFont.toString();
     }
@@ -97,12 +101,26 @@ void TerminalFont::setVTFont(const QFont &f)
 
     QFontInfo fontInfo(newFont);
 
+    // clang-format off
     // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch() - do not test it.
     // related?  https://bugreports.qt.io/browse/QTBUG-34082
-    if (fontInfo.family() != newFont.family() || !qFuzzyCompare(fontInfo.pointSizeF(), newFont.pointSizeF()) || fontInfo.styleHint() != newFont.styleHint()
-        || fontInfo.weight() != newFont.weight() || fontInfo.style() != newFont.style() || fontInfo.underline() != newFont.underline()
-        || fontInfo.strikeOut() != newFont.strikeOut() || fontInfo.rawMode() != newFont.rawMode()) {
-        const QString nonMatching = QString::asprintf("%s,%g,%d,%d,%d,%d,%d,%d,%d,%d",
+    if (fontInfo.family() != newFont.family()
+            || !qFuzzyCompare(fontInfo.pointSizeF(), newFont.pointSizeF())
+            || fontInfo.styleHint() != newFont.styleHint()
+            || fontInfo.weight() != newFont.weight()
+            || fontInfo.style() != newFont.style()
+            || fontInfo.underline() != newFont.underline()
+            || fontInfo.strikeOut() != newFont.strikeOut()
+            #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+            || fontInfo.rawMode() != newFont.rawMode()
+            #endif
+    ) { // clang-format on
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        static const char format[] = "%s,%g,%d,%d,%d,%d,%d,%d,%d";
+#else
+        static const char format[] = "%s,%g,%d,%d,%d,%d,%d,%d,%d,%d";
+#endif
+        const QString nonMatching = QString::asprintf(format,
                                                       qPrintable(fontInfo.family()),
                                                       fontInfo.pointSizeF(),
                                                       -1, // pixelSize is not used
@@ -112,8 +130,12 @@ void TerminalFont::setVTFont(const QFont &f)
                                                       static_cast<int>(fontInfo.underline()),
                                                       static_cast<int>(fontInfo.strikeOut()),
                                                       // Intentional newFont use - fixedPitch is bugged, see comment above
-                                                      static_cast<int>(newFont.fixedPitch()),
-                                                      static_cast<int>(fontInfo.rawMode()));
+                                                      static_cast<int>(newFont.fixedPitch())
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+                                                          ,
+                                                      static_cast<int>(fontInfo.rawMode())
+#endif
+        );
         qCDebug(KonsoleDebug) << "The font to use in the terminal can not be matched exactly on your system.";
         qCDebug(KonsoleDebug) << " Selected: " << newFont.toString();
         qCDebug(KonsoleDebug) << " System  : " << nonMatching;
