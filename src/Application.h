@@ -12,9 +12,9 @@
 
 // Konsole
 #include "widgets/ViewSplitter.h"
-
+#include "terminalDisplay/TerminalDisplay.h"
 #include "pluginsystem/PluginManager.h"
-
+#include "profile/Profile.h"
 #include "konsole_export.h"
 
 namespace Konsole

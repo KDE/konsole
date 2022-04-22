@@ -16,6 +16,7 @@
 #include <KBookmarkOwner>
 
 // Konsole
+#include "ViewProperties.h"
 #include "konsoleprivate_export.h"
 
 class QMenu;
@@ -24,7 +25,6 @@ class KActionCollection;
 
 namespace Konsole
 {
-class ViewProperties;
 
 /**
  * This class handles the communication between the bookmark menu and the active session,

@@ -8,6 +8,7 @@
 #define PROFILELIST_H
 
 // Qt
+#include <QAction>
 #include <QList>
 #include <QObject>
 #include <QSet>
@@ -16,7 +17,6 @@
 #include "Profile.h"
 #include "konsoleprofile_export.h"
 
-class QAction;
 class QActionGroup;
 class QKeySequence;
 
