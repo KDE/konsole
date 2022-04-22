@@ -580,10 +580,11 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         return;
     }
 
-    static constexpr int MaxFontWeight = 99;
+    static constexpr int MaxFontWeight = 99; // https://doc.qt.io/qt-5/qfont.html#Weight-enum
 
     const int normalWeight = display->font().weight();
-
+    // +26 makes "bold" from "normal", "normal" from "light", etc. It is 26 instead of not 25 to prefer
+    // bolder weight when 25 falls in the middle between two weights. See QFont::Weight
     const int boldWeight = qMin(normalWeight + 26, MaxFontWeight);
 
     const auto isBold = [boldWeight](const QFont &font) {
