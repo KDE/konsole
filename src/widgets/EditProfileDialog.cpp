@@ -1825,7 +1825,11 @@ int EditProfileDialog::maxSpinBoxWidth(const KPluralHandlingSpinBox *spinBox, co
     opt.frame = spinBox->hasFrame();
 
     const QSize hint(width, spinBox->sizeHint().height());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QSize spinBoxSize = style()->sizeFromContents(QStyle::CT_SpinBox, &opt, hint, spinBox);
+#else
     const QSize spinBoxSize = style()->sizeFromContents(QStyle::CT_SpinBox, &opt, hint, spinBox).expandedTo(QApplication::globalStrut());
+#endif
 
     return spinBoxSize.width();
 }

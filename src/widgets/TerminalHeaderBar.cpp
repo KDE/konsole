@@ -205,7 +205,7 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
     if ((widget != nullptr) && !isTabbar && !isTerminalWidget && !isSplitter) {
         QStyleOptionTabBarBase optTabBase;
         QStylePainter p(this);
-        optTabBase.init(this);
+        optTabBase.initFrom(this);
         optTabBase.shape = QTabBar::Shape::RoundedSouth;
         optTabBase.documentMode = false;
         p.drawPrimitive(QStyle::PE_FrameTabBarBase, optTabBase);
