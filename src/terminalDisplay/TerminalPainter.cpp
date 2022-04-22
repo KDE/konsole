@@ -22,7 +22,6 @@
 #include <QChar>
 #include <QColor>
 #include <QDebug>
-#include <QMatrix>
 #include <QPainter>
 #include <QPen>
 #include <QRect>
@@ -181,7 +180,7 @@ void TerminalPainter::drawContents(Character *image,
                 len++;
             }
 
-            QMatrix textScale;
+            QTransform textScale;
             bool doubleHeight = false;
             bool doubleWidthLine = false;
 
@@ -204,7 +203,7 @@ void TerminalPainter::drawContents(Character *image,
             }
 
             // Apply text scaling matrix
-            paint.setWorldTransform(QTransform(textScale), true);
+            paint.setWorldTransform(textScale, true);
 
             // Calculate the area in which the text will be drawn
             QRect textArea =
@@ -238,7 +237,7 @@ void TerminalPainter::drawContents(Character *image,
                                  y < lineProperties.size() ? lineProperties[y] : 0);
             }
 
-            paint.setWorldTransform(QTransform(textScale.inverted()), true);
+            paint.setWorldTransform(textScale.inverted(), true);
 
             x += len - 1;
         }
