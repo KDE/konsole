@@ -17,6 +17,17 @@
 using namespace Konsole;
 
 const TabTitleFormatButton::Element TabTitleFormatButton::_localElements[] = {
+
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+    {QStringLiteral("%n"), kli18n("Program Name: %n")},
+    {QStringLiteral("%d"), kli18n("Current Directory (Short): %d")},
+    {QStringLiteral("%D"), kli18n("Current Directory (Long): %D")},
+    {QStringLiteral("%w"), kli18n("Window Title Set by Shell: %w")},
+    {QStringLiteral("%#"), kli18n("Session Number: %#")},
+    {QStringLiteral("%u"), kli18n("User Name: %u")},
+    {QStringLiteral("%h"), kli18n("Local Host: %h")},
+    {QStringLiteral("%B"), kli18n("User's Bourne prompt sigil: %B")}, //  ($, or # for superuser)
+#else
     {QStringLiteral("%n"), I18N_NOOP("Program Name: %n")},
     {QStringLiteral("%d"), I18N_NOOP("Current Directory (Short): %d")},
     {QStringLiteral("%D"), I18N_NOOP("Current Directory (Long): %D")},
@@ -28,10 +39,21 @@ const TabTitleFormatButton::Element TabTitleFormatButton::_localElements[] = {
         QStringLiteral("%B"),
         I18N_NOOP("User's Bourne prompt sigil: %B"),
     } //  ($, or # for superuser)
+#endif
 };
+
 const int TabTitleFormatButton::_localElementCount = sizeof(_localElements) / sizeof(TabTitleFormatButton::Element);
 
 const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+    {QStringLiteral("%u"), kli18n("User Name: %u")},
+    {QStringLiteral("%U"), kli18n("User Name@ (if given): %U")},
+    {QStringLiteral("%h"), kli18n("Remote Host (Short): %h")},
+    {QStringLiteral("%H"), kli18n("Remote Host (Long): %H")},
+    {QStringLiteral("%c"), kli18n("Command and arguments: %c")},
+    {QStringLiteral("%w"), kli18n("Window Title Set by Shell: %w")},
+    {QStringLiteral("%#"), kli18n("Session Number: %#")},
+#else
     {QStringLiteral("%u"), I18N_NOOP("User Name: %u")},
     {QStringLiteral("%U"), I18N_NOOP("User Name@ (if given): %U")},
     {QStringLiteral("%h"), I18N_NOOP("Remote Host (Short): %h")},
@@ -39,6 +61,7 @@ const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {
     {QStringLiteral("%c"), I18N_NOOP("Command and arguments: %c")},
     {QStringLiteral("%w"), I18N_NOOP("Window Title Set by Shell: %w")},
     {QStringLiteral("%#"), I18N_NOOP("Session Number: %#")},
+#endif
 };
 const int TabTitleFormatButton::_remoteElementCount = sizeof(_remoteElements) / sizeof(TabTitleFormatButton::Element);
 
@@ -84,7 +107,11 @@ void TabTitleFormatButton::setContext(Session::TabTitleContext titleContext)
     menuActions.reserve(count);
 
     for (int i = 0; i < count; i++) {
-        QAction *action = new QAction(i18n(array[i].description), this);
+#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
+        auto *action = new QAction(array[i].description.toString(), this);
+#else
+        auto *action = new QAction(i18n(array[i].description), this);
+#endif
         action->setData(array[i].element);
         menuActions << action;
     }
