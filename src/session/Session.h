@@ -24,6 +24,7 @@
 #include "konsolesession_export.h"
 
 class QColor;
+class QTextCodec;
 
 class KConfigGroup;
 class KProcess;

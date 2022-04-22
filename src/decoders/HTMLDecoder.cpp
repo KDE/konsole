@@ -148,7 +148,7 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
                 }
             } else {
                 // escape HTML tag characters and just display others as they are
-                const QChar ch = characters[i].character;
+                const QChar ch(characters[i].character);
                 if (ch == QLatin1Char('<')) {
                     text.append(QLatin1String("&lt;"));
                 } else if (ch == QLatin1Char('>')) {

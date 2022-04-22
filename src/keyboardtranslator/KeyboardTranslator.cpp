@@ -118,7 +118,7 @@ QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards, Qt::Keyb
         }
 
         if (replacement == 'x') {
-            result.replace(i, 1, "\\x" + QByteArray(1, ch).toHex());
+            result.replace(i, 1, QByteArray{"\\x" + QByteArray(1, ch).toHex()});
         } else if (replacement != 0) {
             result.remove(i, 1);
             result.insert(i, '\\');
@@ -134,7 +134,7 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray &text) const
     QByteArray result(text);
 
     for (int i = 0; i < result.count() - 1; i++) {
-        QByteRef ch = result[i];
+        auto ch = result[i];
         if (ch == '\\') {
             char replacement[2] = {0, 0};
             int charsToRemove = 2;
@@ -341,12 +341,12 @@ void KeyboardTranslator::removeEntry(const Entry &entry)
 
 KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifiers modifiers, States state) const
 {
-    QHash<int, KeyboardTranslator::Entry>::const_iterator i = _entries.find(keyCode);
-    while (i != _entries.constEnd() && i.key() == keyCode) {
-        if (i.value().matches(keyCode, modifiers, state)) {
-            return i.value();
+    auto it = _entries.find(keyCode);
+    while (it != _entries.constEnd() && it.key() == keyCode) {
+        if (it.value().matches(keyCode, modifiers, state)) {
+            return it.value();
         }
-        ++i;
+        ++it;
     }
 
     return Entry(); // No matching entry

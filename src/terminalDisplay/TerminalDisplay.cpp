@@ -2067,7 +2067,7 @@ QChar TerminalDisplay::charClass(const Character &ch) const
             }
             return letterOrNumber ? QLatin1Char('a') : s.at(0);
         }
-        return 0;
+        return QChar{0};
     } else {
         const QChar qch(ch.character);
         if (qch.isSpace()) {

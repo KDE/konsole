@@ -834,7 +834,11 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
                 }
                 if (var == QLatin1String("width")) {
                     int unitPos = val.toStdString().find_first_not_of("0123456789");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                    scaledWidth = QStringView(val).mid(0, unitPos).toInt();
+#else
                     scaledWidth = val.midRef(0, unitPos).toInt();
+#endif
                     if (unitPos == -1) {
                         scaledWidth *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth();
                     } else {
@@ -845,7 +849,11 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
                 }
                 if (var == QLatin1String("height")) {
                     int unitPos = val.toStdString().find_first_not_of("0123456789");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                    scaledHeight = QStringView(val).mid(0, unitPos).toInt();
+#else
                     scaledHeight = val.midRef(0, unitPos).toInt();
+#endif
                     if (unitPos == -1) {
                         scaledHeight *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight();
                     } else {
@@ -1391,7 +1399,11 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             return;
         }
         if (list.at(i).at(2).isNumber() || list.at(i).at(2).toLatin1() == '-') {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            keys[list.at(i).at(0).toLatin1()] = QStringView(list.at(i)).mid(2).toInt();
+#else
             keys[list.at(i).at(0).toLatin1()] = list.at(i).midRef(2).toInt();
+#endif
         } else {
             keys[list.at(i).at(0).toLatin1()] = list.at(i).at(2).toLatin1();
         }
@@ -1755,8 +1767,8 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
             // coordinate+32, no matter what the locale is. We could easily
             // convert manually, but QString can also do it for us.
             QChar coords[2];
-            coords[0] = cx + 0x20;
-            coords[1] = cy + 0x20;
+            coords[0] = QChar(cx + 0x20);
+            coords[1] = QChar(cy + 0x20);
             QString coordsStr = QString(coords, 2);
             QByteArray utf8 = coordsStr.toUtf8();
             snprintf(command, sizeof(command), "\033[M%c%s", cb + 0x20, utf8.constData());

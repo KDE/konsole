@@ -729,7 +729,7 @@ void SessionController::setupCommonActions()
 #else
     collection->setDefaultShortcut(_findAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_F);
     collection->setDefaultShortcut(_findNextAction, Qt::Key_F3);
-    collection->setDefaultShortcut(_findPreviousAction, Qt::SHIFT | Qt::Key_F3);
+    collection->setDefaultShortcut(_findPreviousAction, QKeySequence{Qt::SHIFT | Qt::Key_F3});
 #endif
 
     // Character Encoding
