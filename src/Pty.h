@@ -150,7 +150,10 @@ Q_SIGNALS:
     void receivedData(const char *buffer, int length);
 
 protected:
+// TODO: remove this; in Qt6 use setChildProcessModifier() in init()
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     void setupChildProcess() override;
+#endif
 
 private Q_SLOTS:
     // called when data is received from the terminal process
