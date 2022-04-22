@@ -30,6 +30,9 @@ add_library(konsolesession
     OBJECT
     ${konsole_session_SRCS}
 )
+
+set_property(TARGET konsolesession PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 generate_export_header(konsolesession BASE_NAME konsolesession)
 target_include_directories(konsolesession PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(

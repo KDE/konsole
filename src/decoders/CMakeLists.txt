@@ -4,6 +4,8 @@ add_library(konsoledecoders
     PlainTextDecoder.cpp
     HTMLDecoder.cpp
 )
+
+set_target_properties(konsoledecoders PROPERTIES POSITION_INDEPENDENT_CODE ON)
 generate_export_header(konsoledecoders BASE_NAME konsoledecoders)
 target_include_directories(konsoledecoders
     PUBLIC ${CMAKE_CURRENT_BINARY_DIR}

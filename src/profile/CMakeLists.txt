@@ -12,6 +12,8 @@ OBJECT
     ProfileModel.cpp
     ${konsoleprofile_SRCS}
 )
+set_property(TARGET konsoleprofile PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 generate_export_header(konsoleprofile BASE_NAME konsoleprofile)
 target_include_directories(konsoleprofile PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(

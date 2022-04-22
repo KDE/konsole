@@ -89,6 +89,8 @@ ecm_qt_declare_logging_category(
 )
 
 add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
+# Needed to link this static lib to shared libs
+set_target_properties(konsoleprivate_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(konsoleprivate_core ${konsole_LIBS})
 
 set(konsolehelpers_SRCS
@@ -98,6 +100,7 @@ add_library(konsolehelpers
     STATIC
     ${konsolehelpers_SRCS}
 )
+set_target_properties(konsolehelpers PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(konsolehelpers
     Qt::Core
     Qt::Widgets

@@ -6,6 +6,8 @@ add_library(keyboardtranslator
     KeyboardTranslator.cpp
     KeyboardTranslatorReader.cpp
 )
+# Needed to link this static lib to shared libs
+set_target_properties(keyboardtranslator PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 target_link_libraries(
     keyboardtranslator
