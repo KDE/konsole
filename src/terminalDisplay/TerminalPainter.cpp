@@ -580,16 +580,21 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         return;
     }
 
-    static constexpr int MaxFontWeight = 99; // https://doc.qt.io/qt-5/qfont.html#Weight-enum
-
-    const int normalWeight = display->font().weight();
-    // +26 makes "bold" from "normal", "normal" from "light", etc. It is 26 instead of not 25 to prefer
-    // bolder weight when 25 falls in the middle between two weights. See QFont::Weight
-    const int boldWeight = qMin(normalWeight + 26, MaxFontWeight);
-
-    const auto isBold = [boldWeight](const QFont &font) {
-        return font.weight() >= boldWeight;
+    static const QFont::Weight FontWeights[] = {
+        QFont::Thin,
+        QFont::Light,
+        QFont::Normal,
+        QFont::Bold,
+        QFont::Black,
     };
+
+    // The weight used as bold depends on selected font's weight.
+    // "Regular" will use "Bold", but e.g. "Thin" will use "Light".
+    // Note that QFont::weight/setWeight() returns/takes an int in Qt5,
+    // and a QFont::Weight in Qt6
+    const auto normalWeight = display->font().weight();
+    auto it = std::upper_bound(std::begin(FontWeights), std::end(FontWeights), normalWeight);
+    const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
 
     const bool useBold = (((style.rendition & RE_BOLD) != 0) && display->terminalFont()->boldIntense());
     const bool useUnderline = ((style.rendition & RE_UNDERLINE) != 0) || display->font().underline();
@@ -599,8 +604,9 @@ void TerminalPainter::drawCharacters(QPainter &painter,
 
     QFont currentFont = painter.font();
 
-    if (isBold(currentFont) != useBold || currentFont.underline() != useUnderline || currentFont.italic() != useItalic
-        || currentFont.strikeOut() != useStrikeOut || currentFont.overline() != useOverline) {
+    const bool isCurrentBold = currentFont.weight() >= boldWeight;
+    if (isCurrentBold != useBold || currentFont.underline() != useUnderline || currentFont.italic() != useItalic || currentFont.strikeOut() != useStrikeOut
+        || currentFont.overline() != useOverline) {
         currentFont.setWeight(useBold ? boldWeight : normalWeight);
         currentFont.setUnderline(useUnderline);
         currentFont.setItalic(useItalic);
