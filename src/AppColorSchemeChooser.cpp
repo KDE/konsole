@@ -22,20 +22,23 @@ AppColorSchemeChooser::AppColorSchemeChooser(QObject *parent)
 {
     auto *manager = new KColorSchemeManager(parent);
 
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 93, 0)
     const QString scheme(currentSchemeName());
     qCDebug(KonsoleDebug) << "Color scheme : " << scheme;
-
     auto *selectionMenu = manager->createSchemeSelectionMenu(scheme, this);
-
     connect(selectionMenu->menu(), &QMenu::triggered, this, &AppColorSchemeChooser::slotSchemeChanged);
-
     manager->activateScheme(manager->indexForScheme(scheme));
+#else
+    manager->setAutosaveChanges(true);
+    KActionMenu *selectionMenu = manager->createSchemeSelectionMenu(this);
+#endif
 
     setMenu(selectionMenu->menu());
     menu()->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-color")));
     menu()->setTitle(i18n("&Window Color Scheme"));
 }
 
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 93, 0)
 QString AppColorSchemeChooser::currentSchemeName() const
 {
     if (!menu()) {
@@ -58,3 +61,4 @@ void AppColorSchemeChooser::slotSchemeChanged(QAction *triggeredAction)
     cg.writeEntry("WindowColorScheme", KLocalizedString::removeAcceleratorMarker(triggeredAction->text()));
     cg.sync();
 }
+#endif

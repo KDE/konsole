@@ -32,6 +32,7 @@
 #include <Kdelibs4ConfigMigrator>
 #include <Kdelibs4Migration>
 #endif
+#include <kconfigwidgets_version.h>
 #include <kdbusservice.h>
 
 using Konsole::Application;
@@ -97,6 +98,16 @@ static void migrateRenamedConfigKeys()
             cg.writeEntry(newName, value);
         }
     }
+
+    // With 5.93 KColorSchemeManager from KConfigWidgets, handles the loading
+    // and saving of the widget color scheme, and uses "ColorScheme" as the
+    // entry name, so clean-up here
+#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 93, 0)
+    KConfigGroup cg(konsoleConfig, "UiSettings");
+    const QString schemeName = cg.readEntry("WindowColorScheme");
+    cg.deleteEntry("WindowColorScheme");
+    cg.writeEntry("ColorScheme", schemeName);
+#endif
 
     konsoleConfig->sync();
 }

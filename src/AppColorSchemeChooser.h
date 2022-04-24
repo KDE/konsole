@@ -12,6 +12,7 @@
 #include <QObject>
 
 #include <KColorSchemeManager>
+#include <kconfigwidgets_version.h>
 
 // Konsole
 #include "konsoleprivate_export.h"
@@ -23,15 +24,19 @@ class KActionCollection;
  *
  * Furthermore, it will save the selection in the user configuration.
  */
+// TODO: Once the minimum KF version is changed to >= 5.93, remove this whole
+// class and move the couple of lines of code from the constructor to MainWindow
 class KONSOLEPRIVATE_EXPORT AppColorSchemeChooser : public QAction
 {
 public:
     explicit AppColorSchemeChooser(QObject *parent);
 
+    // Not needed with KF >= 5.93
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 93, 0)
     QString currentSchemeName() const;
-
 private Q_SLOTS:
     void slotSchemeChanged(QAction *triggeredAction);
+#endif
 };
 
 #endif
