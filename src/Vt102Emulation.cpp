@@ -72,12 +72,9 @@ Vt102Emulation::Vt102Emulation()
     QObject::connect(_sessionAttributesUpdateTimer, &QTimer::timeout, this, &Konsole::Vt102Emulation::updateSessionAttributes);
 
     initTokenizer();
-    imageData = QByteArray();
     imageId = 0;
     savedKeys = QMap<char, qint64>();
     tokenData = QByteArray();
-
-    _graphicsImages = std::map<int, QImage *>();
 
     for (int i = 0; i < 256; i++) {
         colorTable[i] = QColor();
@@ -86,9 +83,6 @@ Vt102Emulation::Vt102Emulation()
 
 Vt102Emulation::~Vt102Emulation()
 {
-    for (std::map<int, QImage *>::iterator iter = _graphicsImages.begin(); iter != _graphicsImages.end(); ++iter) {
-        delete iter->second;
-    }
 }
 
 void Vt102Emulation::clearEntireScreen()
@@ -862,7 +856,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
             }
         }
 
-        QPixmap pixmap = QPixmap();
+        QPixmap pixmap;
         pixmap.loadFromData(tokenData);
         tokenData.clear();
         if (pixmap.isNull()) {
@@ -1352,7 +1346,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
 {
     QString value = QString::fromUcs4(&tokenBuffer[3], tokenSize - 4);
     QStringList list;
-    QImage *image = nullptr;
+    QImage image;
 
     int dataPos = value.indexOf(QLatin1Char(';'));
     if (dataPos == -1) {
@@ -1472,7 +1466,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                 } else {
                     pixelData = new QByteArray(out.constData(), out.size());
                 }
-                image = new QImage((unsigned char *)pixelData->constData(),
+                image = QImage((unsigned char *)pixelData->constData(),
                                    0 + keys['s'],
                                    0 + keys['v'],
                                    0 + keys['s'] * keys['f'] / 8,
@@ -1480,11 +1474,10 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                                    delete_func,
                                    pixelData);
             } else {
-                image = new QImage();
                 if (out.isNull()) {
                     out = imageData;
                 }
-                image->loadFromData(out);
+                image.loadFromData(out);
             }
 
             if (keys['a'] == 'q') {
@@ -1514,12 +1507,8 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
         if (keys['a'] == 'p') {
             image = _graphicsImages[keys['i']];
         }
-        if (image) {
-            QPixmap pixmap = QPixmap::fromImage(*image);
-            if (!keys['i']) {
-                // We did not save the image, so delete it
-                delete image;
-            }
+        if (!image.isNull()) {
+            QPixmap pixmap = QPixmap::fromImage(image);
             if (keys['x'] || keys['y'] || keys['w'] || keys['h']) {
                 int w = keys['w'] ? keys['w'] : pixmap.width() - keys['x'];
                 int h = keys['h'] ? keys['h'] : pixmap.height() - keys['y'];
