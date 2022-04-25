@@ -83,6 +83,7 @@ public Q_SLOTS:
     void sendKeyEvent(QKeyEvent *) override;
     void sendMouseEvent(int buttons, int column, int line, int eventType) override;
     void focusChanged(bool focused) override;
+    void clearHistory() override;
 
 protected:
     // reimplemented from Emulation

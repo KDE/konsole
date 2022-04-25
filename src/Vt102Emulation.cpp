@@ -91,6 +91,13 @@ void Vt102Emulation::clearEntireScreen()
     bufferedUpdate();
 }
 
+void Vt102Emulation::clearHistory()
+{
+    _graphicsImages.clear();
+
+    Emulation::clearHistory();
+}
+
 void Vt102Emulation::reset(bool softReset)
 {
     // Save the current codec so we can set it later.

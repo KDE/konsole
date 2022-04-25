@@ -1798,7 +1798,7 @@ void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
         auto oldHistory = std::move(_history);
         t.scroll(_history);
     }
-
+    _graphicsPlacements.clear();
 #ifdef HAVE_MALLOC_H
 #ifdef Q_OS_LINUX
 #ifdef __GNUC__

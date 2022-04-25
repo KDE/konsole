@@ -120,7 +120,7 @@ public:
     /** Returns the history store used by this emulation.  See setHistory() */
     const HistoryType &history() const;
     /** Clears the history scroll. */
-    void clearHistory();
+    virtual void clearHistory();
 
     /**
      * Copies the output history from @p startLine to @p endLine
