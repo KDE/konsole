@@ -605,8 +605,13 @@ void TerminalPainter::drawCharacters(QPainter &painter,
     QFont currentFont = painter.font();
 
     const bool isCurrentBold = currentFont.weight() >= boldWeight;
-    if (isCurrentBold != useBold || currentFont.underline() != useUnderline || currentFont.italic() != useItalic || currentFont.strikeOut() != useStrikeOut
-        || currentFont.overline() != useOverline) {
+    // clang-format off
+    if (isCurrentBold != useBold
+        || currentFont.underline() != useUnderline
+        || currentFont.italic() != useItalic
+        || currentFont.strikeOut() != useStrikeOut
+        || currentFont.overline() != useOverline)
+    { // clang-format on
         currentFont.setWeight(useBold ? boldWeight : normalWeight);
         currentFont.setUnderline(useUnderline);
         currentFont.setItalic(useItalic);
