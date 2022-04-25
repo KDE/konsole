@@ -223,7 +223,7 @@ private:
     QSize m_actualSize; // For efficiency reasons, we keep the image in memory larger than what the end result is
 
     // Kitty
-    QHash<int, QImage> _graphicsImages;
+    QHash<int, QPixmap> _graphicsImages;
     // For kitty graphics protocol - image cache
     int getFreeGraphicsImageId();
 };

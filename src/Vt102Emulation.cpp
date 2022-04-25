@@ -1353,7 +1353,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
 {
     QString value = QString::fromUcs4(&tokenBuffer[3], tokenSize - 4);
     QStringList list;
-    QImage image;
+    QPixmap pixmap;
 
     int dataPos = value.indexOf(QLatin1Char(';'));
     if (dataPos == -1) {
@@ -1467,24 +1467,23 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             }
             if (keys['f'] == 24 || keys['f'] == 32) {
                 enum QImage::Format format = keys['f'] == 24 ? QImage::Format_RGB888 : QImage::Format_RGBA8888;
-                QByteArray *pixelData; // Copy of the pixel data (imageData or out) that lives while the image does
+                const uchar *pixelData;
                 if (out.isNull()) {
-                    pixelData = new QByteArray(imageData.constData(), imageData.size());
+                    pixelData = (const uchar*)imageData.constData();
                 } else {
-                    pixelData = new QByteArray(out.constData(), out.size());
+                    pixelData = (const uchar*)out.constData();
                 }
-                image = QImage((unsigned char *)pixelData->constData(),
+                pixmap = QPixmap::fromImage(QImage(pixelData,
                                    0 + keys['s'],
                                    0 + keys['v'],
                                    0 + keys['s'] * keys['f'] / 8,
-                                   format,
-                                   delete_func,
-                                   pixelData);
+                                   format));
+                pixmap.detach();
             } else {
                 if (out.isNull()) {
                     out = imageData;
                 }
-                image.loadFromData(out);
+                pixmap.loadFromData(out);
             }
 
             if (keys['a'] == 'q') {
@@ -1492,7 +1491,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                 sendGraphicsReply(params, QString());
             } else {
                 if (keys['i']) {
-                    _graphicsImages[keys['i']] = image;
+                    _graphicsImages[keys['i']] = pixmap;
                 }
                 if (keys['q'] == 0 && keys['a'] == 't') {
                     QString params = QStringLiteral("i=") + QString::number(keys['i']);
@@ -1512,10 +1511,9 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
     }
     if (keys['a'] == 'p' || (keys['a'] == 'T' && keys['m'] == 0)) {
         if (keys['a'] == 'p') {
-            image = _graphicsImages[keys['i']];
+            pixmap = _graphicsImages[keys['i']];
         }
-        if (!image.isNull()) {
-            QPixmap pixmap = QPixmap::fromImage(image);
+        if (!pixmap.isNull()) {
             if (keys['x'] || keys['y'] || keys['w'] || keys['h']) {
                 int w = keys['w'] ? keys['w'] : pixmap.width() - keys['x'];
                 int h = keys['h'] ? keys['h'] : pixmap.height() - keys['y'];
