@@ -53,10 +53,9 @@ void QuickCommandsModel::save()
             element.writeEntry("name", data.name);
             element.writeEntry("tooltip", data.tooltip);
             element.writeEntry("command", data.command);
-            element.sync();
         }
-        baseGroup.sync();
     }
+
     config.sync();
 }
 

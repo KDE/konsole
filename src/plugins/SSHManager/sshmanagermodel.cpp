@@ -283,10 +283,9 @@ void SSHManagerModel::save()
             sshGroup.writeEntry("useSshConfig", data.useSshConfig);
             sshGroup.writeEntry("username", data.username);
             sshGroup.writeEntry("importedFromSshConfig", data.importedFromSshConfig);
-            sshGroup.sync();
         }
-        baseGroup.sync();
     }
+
     config.sync();
 }
 
