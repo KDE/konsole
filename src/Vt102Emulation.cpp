@@ -16,6 +16,7 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include <QTimer>
+#include <QtEndian>
 
 // KDE
 #include <KLocalizedString>
@@ -27,8 +28,6 @@
 #include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
-
-#include <zlib.h>
 
 using Konsole::Vt102Emulation;
 
@@ -1425,40 +1424,17 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             savedKeys = QMap<char, qint64>();
             QByteArray out;
             if (keys['o'] == 'z') {
-                int alloc;
-                unsigned char *data = (unsigned char *)imageData.constData();
-                z_stream stream;
+                uint32_t decompressedSize;
                 int ret;
                 if (keys['f'] == 24 || keys['f'] == 32) {
                     int bpp = keys['f'] / 8;
-                    alloc = bpp * keys['s'] * keys['v'];
+                    decompressedSize = bpp * keys['s'] * keys['v'];
                 } else {
-                    alloc = 8 * 1024 * 1024;
+                    decompressedSize = 8 * 1024 * 1024;
                 }
-                out.resize(alloc);
-
-                /* allocate inflate state */
-                stream.zalloc = (alloc_func)Z_NULL;
-                stream.zfree = (free_func)Z_NULL;
-                stream.opaque = (voidpf)Z_NULL;
-                stream.avail_in = imageData.size();
-                stream.next_in = (Bytef *)data;
-                stream.avail_out = out.size();
-                stream.next_out = (Bytef *)out.constData();
-                stream.total_out = 0;
-                stream.total_in = 0;
-
-                ret = inflateInit(&stream);
-                if (ret != Z_OK) {
-                    imageData.clear();
-                    return;
-                }
-                ret = inflate(&stream, Z_FINISH);
-                inflateEnd(&stream);
-                if (ret != Z_OK && ret != Z_STREAM_END) {
-                    imageData.clear();
-                    return;
-                }
+                decompressedSize = qToBigEndian(decompressedSize);
+                imageData.prepend((char*)&decompressedSize, sizeof decompressedSize);
+                out = qUncompress(imageData);
 
                 if (keys['f'] != 24 && keys['f'] != 32) {
                     imageData.clear();
