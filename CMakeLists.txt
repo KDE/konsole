@@ -39,6 +39,7 @@ include(ECMQtDeclareLoggingCategory)
 include(KDEClangFormat)
 # Remove OPTIONAL when we require EMC >= 5.79
 include(KDEGitCommitHooks OPTIONAL)
+include(CheckFunctionExists)
 include(CheckIncludeFiles)
 
 # Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
