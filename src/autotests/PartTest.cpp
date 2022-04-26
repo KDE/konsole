@@ -15,10 +15,14 @@
 #include <QVBoxLayout>
 // KDE
 #include <KPluginFactory>
-#include <KPluginLoader>
 #include <KPtyDevice>
 #include <KPtyProcess>
 #include <qtest.h>
+
+#include <kcoreaddons_version.h>
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)
+#include <KPluginLoader>
+#endif
 
 // Konsole
 #include "../Pty.h"
@@ -122,6 +126,15 @@ void PartTest::testFd(bool runShell)
 
 KParts::Part *PartTest::createPart()
 {
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
+    const KPluginMetaData metaData(QStringLiteral("konsolepart"));
+    Q_ASSERT(metaData.isValid());
+
+    KPluginFactory::Result<KParts::Part> result = KPluginFactory::instantiatePlugin<KParts::Part>(metaData, this);
+    Q_ASSERT(result);
+
+    return result.plugin;
+#else
     auto konsolePartPlugin = KPluginLoader::findPlugin(QStringLiteral("konsolepart"));
     if (konsolePartPlugin.isNull()) {
         return nullptr;
@@ -135,6 +148,7 @@ KParts::Part *PartTest::createPart()
     auto *terminalPart = factory->create<KParts::Part>(this);
 
     return terminalPart;
+#endif
 }
 
 QTEST_MAIN(PartTest)

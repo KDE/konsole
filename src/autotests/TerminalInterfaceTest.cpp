@@ -17,7 +17,11 @@
 
 // KDE
 #include <KPluginFactory>
+#include <kcoreaddons_version.h>
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)
 #include <KPluginLoader>
+#endif
+
 #include <qtest.h>
 
 using namespace Konsole;
@@ -220,6 +224,15 @@ void TerminalInterfaceTest::testTerminalInterfaceV2()
 
 KParts::Part *TerminalInterfaceTest::createPart()
 {
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
+    const KPluginMetaData metaData(QStringLiteral("konsolepart"));
+    Q_ASSERT(metaData.isValid());
+
+    KPluginFactory::Result<KParts::Part> result = KPluginFactory::instantiatePlugin<KParts::Part>(metaData, this);
+    Q_ASSERT(result);
+
+    return result.plugin;
+#else
     auto konsolePartPlugin = KPluginLoader::findPlugin(QStringLiteral("konsolepart"));
     if (konsolePartPlugin.isNull()) {
         return nullptr;
@@ -233,6 +246,7 @@ KParts::Part *TerminalInterfaceTest::createPart()
     auto *terminalPart = factory->create<KParts::Part>(this);
 
     return terminalPart;
+#endif
 }
 
 QTEST_MAIN(TerminalInterfaceTest)
