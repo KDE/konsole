@@ -24,19 +24,13 @@
 
 using Konsole::Pty;
 
+Pty::Pty(QObject *aParent)
+    : Pty(-1, aParent)
+{
+}
+
 Pty::Pty(int masterFd, QObject *aParent)
     : KPtyProcess(masterFd, aParent)
-{
-    init();
-}
-
-Pty::Pty(QObject *aParent)
-    : KPtyProcess(aParent)
-{
-    init();
-}
-
-void Pty::init()
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     // Must call parent class child process modifier, as it sets file descriptors ...etc
