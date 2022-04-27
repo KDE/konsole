@@ -35,10 +35,7 @@ const TabTitleFormatButton::Element TabTitleFormatButton::_localElements[] = {
     {QStringLiteral("%#"), I18N_NOOP("Session Number: %#")},
     {QStringLiteral("%u"), I18N_NOOP("User Name: %u")},
     {QStringLiteral("%h"), I18N_NOOP("Local Host: %h")},
-    {
-        QStringLiteral("%B"),
-        I18N_NOOP("User's Bourne prompt sigil: %B"),
-    } //  ($, or # for superuser)
+    {QStringLiteral("%B"), I18N_NOOP("User's Bourne prompt sigil: %B")}, //  ($, or # for superuser)
 #endif
 };
 
