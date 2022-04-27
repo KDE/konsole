@@ -1425,7 +1425,6 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             QByteArray out;
             if (keys['o'] == 'z') {
                 uint32_t decompressedSize;
-                int ret;
                 if (keys['f'] == 24 || keys['f'] == 32) {
                     int bpp = keys['f'] / 8;
                     decompressedSize = bpp * keys['s'] * keys['v'];
