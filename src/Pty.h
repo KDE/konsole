@@ -150,7 +150,8 @@ Q_SIGNALS:
     void receivedData(const char *buffer, int length);
 
 protected:
-// TODO: remove this; in Qt6 use setChildProcessModifier() in init()
+    // TODO: remove this; the method is removed from QProcess in Qt6
+    // instead use setChildProcessModifier() in the constructor
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     void setupChildProcess() override;
 #endif
