@@ -1735,11 +1735,11 @@ void Screen::addHistLine()
 
         // If the history is full, increment the count
         // of dropped _lines
-        if (newHistLines == oldHistLines) {
-            ++_droppedLines;
+        if (newHistLines <= oldHistLines) {
+            _droppedLines += oldHistLines - newHistLines + 1;
 
-            // We removed a line, we need to verify if we need to remove a URL.
-            _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+            // We removed some lines, we need to verify if we need to remove a URL.
+            _escapeSequenceUrlExtractor->historyLinesRemoved(oldHistLines - newHistLines + 1);
         }
     }
 
