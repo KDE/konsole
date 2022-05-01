@@ -50,16 +50,9 @@ void TerminalImageFilterChain::setImage(const Character *const image, int lines,
         _linePositions->append(_buffer->length());
         decoder.decodeLine(image + i * columns, columns, LINE_DEFAULT);
 
-        // pretend that each line ends with a newline character.
+        // pretend that each non-wrapped line ends with a newline character.
         // this prevents a link that occurs at the end of one line
         // being treated as part of a link that occurs at the start of the next line
-        //
-        // the downside is that links which are spread over more than one line are not
-        // highlighted.
-        //
-        // TODO - Use the "line wrapped" attribute associated with lines in a
-        // terminal image to avoid adding this imaginary character for wrapped
-        // lines
         if ((lineProperties.value(i, LINE_DEFAULT) & LINE_WRAPPED) == 0) {
             lineStream << QLatin1Char('\n');
         }
