@@ -15,9 +15,51 @@ using namespace Konsole;
 // used for finding URLs in the text, especially if they are very general and could match very long
 // pieces of text.
 // Please be careful when altering them.
-// protocolname:// or www. followed by anything other than whitespaces, <, >, ', ", ], !, ), : and comma, and ends before whitespaces, <, >, ', ", ], !, ), :, comma and dot
-// I. e. it can end with anything as a part of the URL except .
-const QRegularExpression UrlFilter::FullUrlRegExp(QStringLiteral("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^!,\\s<>'\"\\]\\)\\:]+[^!,\\.\\s<>'\"\\]\\)\\:]"));
+
+// FullUrlRegExp is implemented based on:
+// https://datatracker.ietf.org/doc/html/rfc3986
+// See above URL for what "unreserved", "pct-encoded" ...etc mean, also
+// for the regex used for each part of the url being matched against
+
+// unreserved / pct-encoded / sub-delims
+// [a-z0-9\\-._~%!$&'()*+,;=]
+// The above string is used in various char[] below
+
+// All () groups are non-capturing (by using "(?:)" notation)
+// less bookkeeping on the PCRE engine side
+
+// scheme://
+// - Must start with an ASCII letter, preceeded by any non-word character,
+//   so "http" but not "mhttp"
+static const char scheme[] = "(?<=^|\\s|\\W)(?:[a-z][a-z0-9+\\-.]*://)";
+
+// user:password@
+static const char userInfo[] =
+    "(?:"
+    "[a-z0-9\\-._~%!$&'()*+,;=]+?:?"
+    "[a-z0-9\\-._~%!$&'()*+,;=]+@"
+    ")?";
+static const char host[] = "(?:[a-z0-9\\-._~%!$&'()*+,;=]+)"; // www.foo.bar
+static const char port[] = "(?::[0-9]+)?"; // :1234
+static const char path[] = "(?:[a-zA-Z0-9\\-._~%!$&'()*+,;=:@/]+)?"; // /path/to/some/place
+static const char query[] = "(?:\\?[a-z0-9\\-._~%!$&'()*+,;=:@/]+)?"; // "?somequery=bar"
+static const char fragment[] = "(?:#[a-z0-9/?]+)?";
+
+using LS1 = QLatin1String;
+
+/* clang-format off */
+const QRegularExpression UrlFilter::FullUrlRegExp(
+    LS1(scheme)
+    + LS1(userInfo)
+    + LS1(host)
+    + LS1(port)
+    + LS1(path)
+    + LS1(query)
+    + LS1(fragment)
+    );
+/* clang-format on */
+
+/////////////////////////////////////////////
 
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]

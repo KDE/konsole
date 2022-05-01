@@ -9,11 +9,14 @@
 #define URLFILTER_H
 
 #include "RegExpFilter.h"
+#include "konsoleprivate_export.h"
 
 namespace Konsole
 {
 /** A filter which matches URLs in blocks of text */
-class UrlFilter : public RegExpFilter
+
+// Exported for unittests
+class KONSOLEPRIVATE_EXPORT UrlFilter : public RegExpFilter
 {
 public:
     UrlFilter();
