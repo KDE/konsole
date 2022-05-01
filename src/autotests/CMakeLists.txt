@@ -129,3 +129,8 @@ ecm_mark_nongui_executable(Vt102EmulationTest)
 add_test(NAME Vt102EmulationTest COMMAND Vt102EmulationTest)
 target_link_libraries(Vt102EmulationTest ${KONSOLE_TEST_LIBS})
 
+include(ECMAddTests)
+ecm_add_test(
+    HotSpotFilterTest.cpp
+    LINK_LIBRARIES ${KONSOLE_TEST_LIBS}
+)
