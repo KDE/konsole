@@ -104,6 +104,14 @@ void QuickCommandsWidget::addMode()
 void QuickCommandsWidget::indexSelected(const QModelIndex &idx)
 {
     const auto sourceIdx = priv->filterModel->mapToSource(ui->commandsTreeView->currentIndex());
+    if (priv->model->rowCount(sourceIdx) != 0) {
+        ui->name->setText({});
+        ui->tooltip->setText({});
+        ui->command->setPlainText({});
+        ui->group->setCurrentText({});
+        return;
+    }
+
     const auto item = priv->model->itemFromIndex(sourceIdx);
     const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
     ui->name->setText(data.name);
