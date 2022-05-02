@@ -6,6 +6,7 @@ SOURCES
     quickcommandsplugin.cpp
     quickcommandswidget.cpp
     quickcommandsmodel.cpp
+    filtermodel.cpp
     ${EXTRA_QUICKCOMMANDSPLUGIN_SRCS}
 INSTALL_NAMESPACE
     "konsoleplugins"
