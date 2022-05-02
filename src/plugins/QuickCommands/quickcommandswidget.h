@@ -47,6 +47,8 @@ public:
 
     Q_SLOT void triggerDelete();
 
+    Q_SLOT void createMenu(const QPoint &pos);
+
     void setModel(QuickCommandsModel *model);
     void setCurrentController(Konsole::SessionController *controller);
 

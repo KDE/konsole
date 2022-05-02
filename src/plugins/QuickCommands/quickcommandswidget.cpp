@@ -44,28 +44,7 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
     connect(ui->commandsTreeView, &QTreeView::doubleClicked, this, &QuickCommandsWidget::invokeCommand);
     connect(ui->commandsTreeView, &QTreeView::clicked, this, &QuickCommandsWidget::indexSelected);
 
-    connect(ui->commandsTreeView, &QTreeView::customContextMenuRequested, [this](const QPoint &pos) {
-        QModelIndex idx = ui->commandsTreeView->indexAt(pos);
-        if (!idx.isValid())
-            return;
-        auto sourceIdx = priv->filterModel->mapToSource(idx);
-        const bool isParent = sourceIdx.parent() == priv->model->invisibleRootItem()->index();
-        QMenu *menu = new QMenu(this);
-
-        if (!isParent) {
-            auto actionEdit = new QAction(QStringLiteral("Edit"), ui->commandsTreeView);
-            menu->addAction(actionEdit);
-            connect(actionEdit, &QAction::triggered, this, &QuickCommandsWidget::editMode);
-        } else {
-            auto actionRename = new QAction(QStringLiteral("Rename"), ui->commandsTreeView);
-            menu->addAction(actionRename);
-            connect(actionRename, &QAction::triggered, this, &QuickCommandsWidget::triggerRename);
-        }
-        auto actionDelete = new QAction(QStringLiteral("Delete"), ui->commandsTreeView);
-        menu->addAction(actionDelete);
-        connect(actionDelete, &QAction::triggered, this, &QuickCommandsWidget::triggerDelete);
-        menu->popup(ui->commandsTreeView->viewport()->mapToGlobal(pos));
-    });
+    connect(ui->commandsTreeView, &QTreeView::customContextMenuRequested, this, &QuickCommandsWidget::createMenu);
     viewMode();
 }
 
@@ -234,4 +213,28 @@ bool QuickCommandsWidget::valid()
         return false;
     }
     return true;
+}
+
+void QuickCommandsWidget::createMenu(const QPoint &pos)
+{
+    QModelIndex idx = ui->commandsTreeView->indexAt(pos);
+    if (!idx.isValid())
+        return;
+    auto sourceIdx = priv->filterModel->mapToSource(idx);
+    const bool isParent = sourceIdx.parent() == priv->model->invisibleRootItem()->index();
+    QMenu *menu = new QMenu(this);
+
+    if (!isParent) {
+        auto actionEdit = new QAction(QStringLiteral("Edit"), ui->commandsTreeView);
+        menu->addAction(actionEdit);
+        connect(actionEdit, &QAction::triggered, this, &QuickCommandsWidget::editMode);
+    } else {
+        auto actionRename = new QAction(QStringLiteral("Rename"), ui->commandsTreeView);
+        menu->addAction(actionRename);
+        connect(actionRename, &QAction::triggered, this, &QuickCommandsWidget::triggerRename);
+    }
+    auto actionDelete = new QAction(QStringLiteral("Delete"), ui->commandsTreeView);
+    menu->addAction(actionDelete);
+    connect(actionDelete, &QAction::triggered, this, &QuickCommandsWidget::triggerDelete);
+    menu->popup(ui->commandsTreeView->viewport()->mapToGlobal(pos));
 }
