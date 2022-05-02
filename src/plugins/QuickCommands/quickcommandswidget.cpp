@@ -94,10 +94,6 @@ void QuickCommandsWidget::viewMode()
 
 void QuickCommandsWidget::addMode()
 {
-    ui->command->setPlainText({});
-    ui->name->setText({});
-    ui->tooltip->setText({});
-
     ui->btnAdd->hide();
     ui->btnSave->show();
     ui->btnUpdate->hide();
