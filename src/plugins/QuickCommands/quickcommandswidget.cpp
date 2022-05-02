@@ -55,7 +55,7 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
         if (!isParent) {
             auto actionEdit = new QAction(QStringLiteral("Edit"), ui->commandsTreeView);
             menu->addAction(actionEdit);
-            connect(actionEdit, &QAction::triggered, this, &QuickCommandsWidget::triggerEdit);
+            connect(actionEdit, &QAction::triggered, this, &QuickCommandsWidget::editMode);
         } else {
             auto actionRename = new QAction(QStringLiteral("Rename"), ui->commandsTreeView);
             menu->addAction(actionRename);
@@ -171,11 +171,6 @@ void QuickCommandsWidget::runCommand()
     if (priv->controller->session()->views().count()) {
         priv->controller->session()->views().at(0)->setFocus();
     }
-}
-
-void QuickCommandsWidget::triggerEdit()
-{
-    editMode();
 }
 
 void QuickCommandsWidget::triggerRename()

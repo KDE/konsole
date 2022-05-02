@@ -43,8 +43,6 @@ public:
 
     Q_SLOT void indexSelected(const QModelIndex &idx);
 
-    Q_SLOT void triggerEdit();
-
     Q_SLOT void triggerRename();
 
     Q_SLOT void triggerDelete();
