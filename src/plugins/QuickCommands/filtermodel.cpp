@@ -6,6 +6,7 @@
 */
 
 #include "filtermodel.h"
+#include <QDebug>
 
 FilterModel::FilterModel(QObject *parent)
     : QSortFilterProxyModel(parent)

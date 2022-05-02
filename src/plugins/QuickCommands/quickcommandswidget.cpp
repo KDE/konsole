@@ -30,6 +30,12 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
     connect(ui->btnSave, &QPushButton::clicked, this, &QuickCommandsWidget::saveCommand);
     connect(ui->btnUpdate, &QPushButton::clicked, this, &QuickCommandsWidget::updateCommand);
     connect(ui->btnCancel, &QPushButton::clicked, this, &QuickCommandsWidget::viewMode);
+    connect(ui->invertFilter, &QPushButton::clicked, priv->filterModel, &FilterModel::setInvertFilter);
+
+    connect(ui->filterLine, &QLineEdit::textChanged, this, [this] {
+        priv->filterModel->setFilterRegularExpression(ui->filterLine->text());
+        priv->filterModel->invalidate();
+    });
 
     ui->commandsTreeView->setModel(priv->filterModel);
     ui->commandsTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
