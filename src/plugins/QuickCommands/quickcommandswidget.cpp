@@ -30,6 +30,8 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
     connect(ui->btnSave, &QPushButton::clicked, this, &QuickCommandsWidget::saveCommand);
     connect(ui->btnUpdate, &QPushButton::clicked, this, &QuickCommandsWidget::updateCommand);
     connect(ui->btnCancel, &QPushButton::clicked, this, &QuickCommandsWidget::viewMode);
+    connect(ui->btnRun, &QPushButton::clicked, this, &QuickCommandsWidget::runCommand);
+
     connect(ui->invertFilter, &QPushButton::clicked, priv->filterModel, &FilterModel::setInvertFilter);
 
     connect(ui->filterLine, &QLineEdit::textChanged, this, [this] {
@@ -144,6 +146,16 @@ void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
     const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
     priv->controller->session()->sendTextToTerminal(data.command, QLatin1Char('\r'));
 
+    if (priv->controller->session()->views().count()) {
+        priv->controller->session()->views().at(0)->setFocus();
+    }
+}
+
+void QuickCommandsWidget::runCommand()
+{
+    qDebug() << "Running";
+    const QString command = ui->command->toPlainText();
+    priv->controller->session()->sendTextToTerminal(command, QLatin1Char('\r'));
     if (priv->controller->session()->views().count()) {
         priv->controller->session()->views().at(0)->setFocus();
     }

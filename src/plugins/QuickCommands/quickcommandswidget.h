@@ -36,6 +36,10 @@ public:
     Q_SLOT void updateCommand();
 
     Q_SLOT void invokeCommand(const QModelIndex &idx);
+    // Run a command from the currently selected Tree element
+
+    Q_SLOT void runCommand();
+    // Run the command from the Text Area
 
     Q_SLOT void triggerEdit();
 
