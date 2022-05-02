@@ -3,18 +3,18 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "quickcommandswidget.h"
+#include "filtermodel.h"
 #include "konsoledebug.h"
 #include "terminalDisplay/TerminalDisplay.h"
 
 #include <QMenu>
-#include <QSortFilterProxyModel>
 
 #include "ui_qcwidget.h"
 #include <KMessageBox>
 
 struct QuickCommandsWidget::Private {
     QuickCommandsModel *model = nullptr;
-    QSortFilterProxyModel *filterModel = nullptr;
+    FilterModel *filterModel = nullptr;
     Konsole::SessionController *controller = nullptr;
 };
 
@@ -25,7 +25,7 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    priv->filterModel = new QSortFilterProxyModel(this);
+    priv->filterModel = new FilterModel(this);
     connect(ui->btnAdd, &QPushButton::clicked, this, &QuickCommandsWidget::addMode);
     connect(ui->btnSave, &QPushButton::clicked, this, &QuickCommandsWidget::saveCommand);
     connect(ui->btnUpdate, &QPushButton::clicked, this, &QuickCommandsWidget::updateCommand);
