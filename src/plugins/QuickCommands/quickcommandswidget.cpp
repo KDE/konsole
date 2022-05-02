@@ -256,15 +256,15 @@ void QuickCommandsWidget::createMenu(const QPoint &pos)
     QMenu *menu = new QMenu(this);
 
     if (!isParent) {
-        auto actionEdit = new QAction(QStringLiteral("Edit"), ui->commandsTreeView);
+        auto actionEdit = new QAction(i18n("Edit"), ui->commandsTreeView);
         menu->addAction(actionEdit);
         connect(actionEdit, &QAction::triggered, this, &QuickCommandsWidget::editMode);
     } else {
-        auto actionRename = new QAction(QStringLiteral("Rename"), ui->commandsTreeView);
+        auto actionRename = new QAction(i18n("Rename"), ui->commandsTreeView);
         menu->addAction(actionRename);
         connect(actionRename, &QAction::triggered, this, &QuickCommandsWidget::triggerRename);
     }
-    auto actionDelete = new QAction(QStringLiteral("Delete"), ui->commandsTreeView);
+    auto actionDelete = new QAction(i18n("Delete"), ui->commandsTreeView);
     menu->addAction(actionDelete);
     connect(actionDelete, &QAction::triggered, this, &QuickCommandsWidget::triggerDelete);
     menu->popup(ui->commandsTreeView->viewport()->mapToGlobal(pos));
@@ -293,8 +293,8 @@ void QuickCommandsWidget::runShellCheck()
     ui->warning->setPlainText(errorString);
 
     if (errorString.isEmpty()) {
-        ui->tabWidget->setTabText(1, QStringLiteral("Warnings"));
+        ui->tabWidget->setTabText(1, i18n("Warnings"));
     } else {
-        ui->tabWidget->setTabText(1, QStringLiteral("Warnings (*)"));
+        ui->tabWidget->setTabText(1, i18n("Warnings (*)"));
     }
 }
