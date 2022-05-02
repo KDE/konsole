@@ -203,7 +203,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QPlainTextEdit" name="plainTextEdit"/>
+        <widget class="QPlainTextEdit" name="warning"/>
        </item>
       </layout>
      </widget>

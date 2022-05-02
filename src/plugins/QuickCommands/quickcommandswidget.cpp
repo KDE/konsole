@@ -11,11 +11,13 @@
 
 #include "ui_qcwidget.h"
 #include <KMessageBox>
+#include <QStandardPaths>
 
 struct QuickCommandsWidget::Private {
     QuickCommandsModel *model = nullptr;
     FilterModel *filterModel = nullptr;
     Konsole::SessionController *controller = nullptr;
+    bool hasShellCheck = false;
 };
 
 QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
@@ -24,6 +26,11 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
     , priv(std::make_unique<Private>())
 {
     ui->setupUi(this);
+
+    priv->hasShellCheck = !QStandardPaths::findExecutable(QStringLiteral("shellcheck")).isEmpty();
+    if (!priv->hasShellCheck) {
+        ui->warning->setPlainText(QStringLiteral("Missing executable shellcheck"));
+    }
 
     priv->filterModel = new FilterModel(this);
     connect(ui->btnAdd, &QPushButton::clicked, this, &QuickCommandsWidget::addMode);
