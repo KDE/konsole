@@ -116,6 +116,8 @@ void QuickCommandsWidget::indexSelected(const QModelIndex &idx)
     ui->tooltip->setText(data.tooltip);
     ui->command->setPlainText(data.command);
     ui->group->setCurrentText(item->parent()->text());
+
+    runShellCheck();
 }
 
 void QuickCommandsWidget::editMode()
@@ -150,6 +152,11 @@ void QuickCommandsWidget::updateCommand()
 
 void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
 {
+    if (!ui->warning->toPlainText().isEmpty()) {
+        QMessageBox::warning(this, QStringLiteral("Shell Errors"), i18n("Please fix all the warnings before trying to execute this script"));
+        return;
+    }
+
     if (!priv->controller) {
         return;
     }
@@ -168,6 +175,11 @@ void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
 
 void QuickCommandsWidget::runCommand()
 {
+    if (!ui->warning->toPlainText().isEmpty()) {
+        QMessageBox::warning(this, QStringLiteral("Shell Errors"), i18n("Please fix all the warnings before trying to execute this script"));
+        return;
+    }
+
     const QString command = ui->command->toPlainText();
     priv->controller->session()->sendTextToTerminal(command, QLatin1Char('\r'));
     if (priv->controller->session()->views().count()) {
