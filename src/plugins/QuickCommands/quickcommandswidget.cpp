@@ -42,6 +42,8 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
     ui->commandsTreeView->setModel(priv->filterModel);
     ui->commandsTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->commandsTreeView, &QTreeView::doubleClicked, this, &QuickCommandsWidget::invokeCommand);
+    connect(ui->commandsTreeView, &QTreeView::clicked, this, &QuickCommandsWidget::indexSelected);
+
     connect(ui->commandsTreeView, &QTreeView::customContextMenuRequested, [this](const QPoint &pos) {
         QModelIndex idx = ui->commandsTreeView->indexAt(pos);
         if (!idx.isValid())
@@ -103,6 +105,17 @@ void QuickCommandsWidget::addMode()
     prepareEdit();
 }
 
+void QuickCommandsWidget::indexSelected(const QModelIndex &idx)
+{
+    const auto sourceIdx = priv->filterModel->mapToSource(ui->commandsTreeView->currentIndex());
+    const auto item = priv->model->itemFromIndex(sourceIdx);
+    const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
+    ui->name->setText(data.name);
+    ui->tooltip->setText(data.tooltip);
+    ui->command->setPlainText(data.command);
+    ui->group->setCurrentText(item->parent()->text());
+}
+
 void QuickCommandsWidget::editMode()
 {
     ui->btnAdd->hide();
@@ -153,7 +166,6 @@ void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
 
 void QuickCommandsWidget::runCommand()
 {
-    qDebug() << "Running";
     const QString command = ui->command->toPlainText();
     priv->controller->session()->sendTextToTerminal(command, QLatin1Char('\r'));
     if (priv->controller->session()->views().count()) {
@@ -163,13 +175,6 @@ void QuickCommandsWidget::runCommand()
 
 void QuickCommandsWidget::triggerEdit()
 {
-    const auto sourceIdx = priv->filterModel->mapToSource(ui->commandsTreeView->currentIndex());
-    const auto item = priv->model->itemFromIndex(sourceIdx);
-    const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
-    ui->name->setText(data.name);
-    ui->tooltip->setText(data.tooltip);
-    ui->command->setPlainText(data.command);
-    ui->group->setCurrentText(item->parent()->text());
     editMode();
 }
 

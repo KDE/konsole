@@ -41,6 +41,8 @@ public:
     Q_SLOT void runCommand();
     // Run the command from the Text Area
 
+    Q_SLOT void indexSelected(const QModelIndex &idx);
+
     Q_SLOT void triggerEdit();
 
     Q_SLOT void triggerRename();
