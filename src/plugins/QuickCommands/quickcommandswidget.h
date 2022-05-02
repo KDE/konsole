@@ -49,6 +49,8 @@ public:
 
     Q_SLOT void createMenu(const QPoint &pos);
 
+    Q_SLOT void runShellCheck();
+
     void setModel(QuickCommandsModel *model);
     void setCurrentController(Konsole::SessionController *controller);
 

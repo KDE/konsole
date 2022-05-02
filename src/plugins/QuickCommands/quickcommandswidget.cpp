@@ -10,14 +10,19 @@
 #include <QMenu>
 
 #include "ui_qcwidget.h"
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <QStandardPaths>
+#include <QTabWidget>
+#include <QTemporaryFile>
+#include <QTimer>
 
 struct QuickCommandsWidget::Private {
     QuickCommandsModel *model = nullptr;
     FilterModel *filterModel = nullptr;
     Konsole::SessionController *controller = nullptr;
     bool hasShellCheck = false;
+    QTimer shellCheckTimer;
 };
 
 QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
@@ -31,6 +36,7 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
     if (!priv->hasShellCheck) {
         ui->warning->setPlainText(QStringLiteral("Missing executable shellcheck"));
     }
+    priv->shellCheckTimer.setSingleShot(true);
 
     priv->filterModel = new FilterModel(this);
     connect(ui->btnAdd, &QPushButton::clicked, this, &QuickCommandsWidget::addMode);
@@ -52,6 +58,12 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
     connect(ui->commandsTreeView, &QTreeView::clicked, this, &QuickCommandsWidget::indexSelected);
 
     connect(ui->commandsTreeView, &QTreeView::customContextMenuRequested, this, &QuickCommandsWidget::createMenu);
+
+    connect(&priv->shellCheckTimer, &QTimer::timeout, this, &QuickCommandsWidget::runShellCheck);
+    connect(ui->command, &QPlainTextEdit::textChanged, this, [this] {
+        priv->shellCheckTimer.start(250);
+    });
+
     viewMode();
 }
 
@@ -244,4 +256,33 @@ void QuickCommandsWidget::createMenu(const QPoint &pos)
     menu->addAction(actionDelete);
     connect(actionDelete, &QAction::triggered, this, &QuickCommandsWidget::triggerDelete);
     menu->popup(ui->commandsTreeView->viewport()->mapToGlobal(pos));
+}
+
+void QuickCommandsWidget::runShellCheck()
+{
+    if (!priv->hasShellCheck) {
+        return;
+    }
+
+    QTemporaryFile file;
+    file.open();
+
+    QTextStream ts(&file);
+    ts << "#!/bin/bash\n";
+    ts << ui->command->toPlainText();
+    file.close();
+
+    QString fName = file.fileName();
+    QProcess process;
+    process.start(QStringLiteral("shellcheck"), {fName});
+    process.waitForFinished();
+
+    const QString errorString = QString::fromLocal8Bit(process.readAllStandardOutput());
+    ui->warning->setPlainText(errorString);
+
+    if (errorString.isEmpty()) {
+        ui->tabWidget->setTabText(1, QStringLiteral("Warnings"));
+    } else {
+        ui->tabWidget->setTabText(1, QStringLiteral("Warnings (*)"));
+    }
 }
