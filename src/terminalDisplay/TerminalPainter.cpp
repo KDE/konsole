@@ -38,8 +38,9 @@ const QChar LTR_OVERRIDE_CHAR(0x202D);
 
 namespace Konsole
 {
-TerminalPainter::TerminalPainter(QObject *parent)
+TerminalPainter::TerminalPainter(TerminalDisplay *parent)
     : QObject(parent)
+    , m_parentDisplay(parent)
 {
 }
 
@@ -79,29 +80,28 @@ void TerminalPainter::drawContents(Character *image,
                                    bool bidiEnabled,
                                    QVector<LineProperty> lineProperties)
 {
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-    const bool invertedRendition = isInvertedRendition(display);
+    const bool invertedRendition = isInvertedRendition(m_parentDisplay);
 
     QVector<uint> univec;
-    univec.reserve(display->usedColumns());
+    univec.reserve(m_parentDisplay->usedColumns());
 
-    const int leftPadding = display->contentRect().left() + display->contentsRect().left();
-    const int topPadding = display->contentRect().top() + display->contentsRect().top();
-    const int fontWidth = display->terminalFont()->fontWidth();
-    const int fontHeight = display->terminalFont()->fontHeight();
+    const int leftPadding = m_parentDisplay->contentRect().left() + m_parentDisplay->contentsRect().left();
+    const int topPadding = m_parentDisplay->contentRect().top() + m_parentDisplay->contentsRect().top();
+    const int fontWidth = m_parentDisplay->terminalFont()->fontWidth();
+    const int fontHeight = m_parentDisplay->terminalFont()->fontHeight();
 
     for (int y = rect.y(); y <= rect.bottom(); y++) {
         int x = rect.x();
         bool doubleHeightLinePair = false;
 
         // Search for start of multi-column character
-        if (image[display->loc(rect.x(), y)].isRightHalfOfDoubleWide() && (x != 0)) {
+        if (image[m_parentDisplay->loc(rect.x(), y)].isRightHalfOfDoubleWide() && (x != 0)) {
             x--;
         }
 
         for (; x <= rect.right(); x++) {
             int len = 1;
-            const int pos = display->loc(x, y);
+            const int pos = m_parentDisplay->loc(x, y);
             const Character char_value = image[pos];
 
             // is this a single character or a sequence of characters ?
@@ -135,7 +135,7 @@ void TerminalPainter::drawContents(Character *image,
 
             if (char_value.canBeGrouped(bidiEnabled, doubleWidth)) {
                 while (isInsideDrawArea(x + len)) {
-                    const int nextPos = display->loc(x + len, y);
+                    const int nextPos = m_parentDisplay->loc(x + len, y);
                     const Character next_char = image[nextPos];
 
                     if (!hasSameWidth(nextPos) || !next_char.canBeGrouped(bidiEnabled, doubleWidth) || !char_value.hasSameAttributes(next_char)) {
@@ -149,7 +149,7 @@ void TerminalPainter::drawContents(Character *image,
                         // univec intentionally not modified - trailing spaces are meaningless
                         len++;
                         while (isInsideDrawArea(x + len)) {
-                            const Character next_char = image[display->loc(x + len, y)];
+                            const Character next_char = image[m_parentDisplay->loc(x + len, y)];
                             if (next_char.character == ' ' && char_value.hasSameColors(next_char) && char_value.hasSameRendition(next_char)) {
                                 len++;
                             } else {
@@ -186,7 +186,7 @@ void TerminalPainter::drawContents(Character *image,
                 // Group spaces following any non-wide character with the character. This allows for
                 // rendering ambiguous characters with wide glyphs without clipping them.
                 while (!doubleWidth && isInsideDrawArea(x + len)) {
-                    const Character next_char = image[display->loc(x + len, y)];
+                    const Character next_char = image[m_parentDisplay->loc(x + len, y)];
                     if (next_char.character == ' ' && char_value.hasSameColors(next_char) && char_value.hasSameRendition(next_char)) {
                         // univec intentionally not modified - trailing spaces are meaningless
                         len++;
@@ -198,7 +198,7 @@ void TerminalPainter::drawContents(Character *image,
             }
 
             // Adjust for trailing part of multi-column character
-            if ((x + len < display->usedColumns()) && image[display->loc(x + len, y)].isRightHalfOfDoubleWide()) {
+            if ((x + len < m_parentDisplay->usedColumns()) && image[m_parentDisplay->loc(x + len, y)].isRightHalfOfDoubleWide()) {
                 len++;
             }
 
@@ -253,7 +253,7 @@ void TerminalPainter::drawContents(Character *image,
                                  textArea,
                                  unistr,
                                  image[pos],
-                                 display->terminalColor()->colorTable(),
+                                 m_parentDisplay->terminalColor()->colorTable(),
                                  invertedRendition,
                                  y < lineProperties.size() ? lineProperties[y] : 0);
             }
@@ -276,45 +276,41 @@ void TerminalPainter::drawCurrentResultRect(QPainter &painter, const QRect &sear
 
 void TerminalPainter::highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect)
 {
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-
-    QColor color = QColor(display->terminalColor()->colorTable()[Color4Index]);
+    QColor color = QColor(m_parentDisplay->terminalColor()->colorTable()[Color4Index]);
     color.setAlpha(isTimerActive ? 255 : 150);
     painter.fillRect(rect, color);
 }
 
 QRegion TerminalPainter::highlightScrolledLinesRegion(TerminalScrollBar *scrollBar)
 {
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-
     QRegion dirtyRegion;
-    const int highlightLeftPosition = display->scrollBar()->scrollBarPosition() == Enum::ScrollBarLeft ? display->scrollBar()->width() : 0;
+    const int highlightLeftPosition = m_parentDisplay->scrollBar()->scrollBarPosition() == Enum::ScrollBarLeft ? m_parentDisplay->scrollBar()->width() : 0;
 
     int start = 0;
-    int nb_lines = abs(display->screenWindow()->scrollCount());
-    if (nb_lines > 0 && display->scrollBar()->maximum() > 0) {
+    int nb_lines = abs(m_parentDisplay->screenWindow()->scrollCount());
+    if (nb_lines > 0 && m_parentDisplay->scrollBar()->maximum() > 0) {
         QRect new_highlight;
         bool addToCurrentHighlight = scrollBar->highlightScrolledLines().isTimerActive()
-            && (display->screenWindow()->scrollCount() * scrollBar->highlightScrolledLines().getPreviousScrollCount() > 0);
+            && (m_parentDisplay->screenWindow()->scrollCount() * scrollBar->highlightScrolledLines().getPreviousScrollCount() > 0);
         if (addToCurrentHighlight) {
             const int oldScrollCount = scrollBar->highlightScrolledLines().getPreviousScrollCount();
-            if (display->screenWindow()->scrollCount() > 0) {
-                start = -1 * (oldScrollCount + display->screenWindow()->scrollCount()) + display->screenWindow()->windowLines();
+            if (m_parentDisplay->screenWindow()->scrollCount() > 0) {
+                start = -1 * (oldScrollCount + m_parentDisplay->screenWindow()->scrollCount()) + m_parentDisplay->screenWindow()->windowLines();
             } else {
                 start = -1 * oldScrollCount;
             }
-            scrollBar->highlightScrolledLines().setPreviousScrollCount(oldScrollCount + display->screenWindow()->scrollCount());
+            scrollBar->highlightScrolledLines().setPreviousScrollCount(oldScrollCount + m_parentDisplay->screenWindow()->scrollCount());
         } else {
-            start = display->screenWindow()->scrollCount() > 0 ? display->screenWindow()->windowLines() - nb_lines : 0;
-            scrollBar->highlightScrolledLines().setPreviousScrollCount(display->screenWindow()->scrollCount());
+            start = m_parentDisplay->screenWindow()->scrollCount() > 0 ? m_parentDisplay->screenWindow()->windowLines() - nb_lines : 0;
+            scrollBar->highlightScrolledLines().setPreviousScrollCount(m_parentDisplay->screenWindow()->scrollCount());
         }
 
         new_highlight.setRect(highlightLeftPosition,
-                              display->contentRect().top() + start * display->terminalFont()->fontHeight(),
+                              m_parentDisplay->contentRect().top() + start * m_parentDisplay->terminalFont()->fontHeight(),
                               scrollBar->highlightScrolledLines().HIGHLIGHT_SCROLLED_LINES_WIDTH,
-                              nb_lines * display->terminalFont()->fontHeight());
-        new_highlight.setTop(std::max(new_highlight.top(), display->contentRect().top()));
-        new_highlight.setBottom(std::min(new_highlight.bottom(), display->contentRect().bottom()));
+                              nb_lines * m_parentDisplay->terminalFont()->fontHeight());
+        new_highlight.setTop(std::max(new_highlight.top(), m_parentDisplay->contentRect().top()));
+        new_highlight.setBottom(std::min(new_highlight.bottom(), m_parentDisplay->contentRect().bottom()));
         if (!new_highlight.isValid()) {
             new_highlight = QRect(0, 0, 0, 0);
         }
@@ -447,11 +443,11 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
         }
     }
 
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-    Screen *screen = display->screenWindow()->screen();
+    Screen *screen = m_parentDisplay->screenWindow()->screen();
+
     int placementIdx = 0;
     qreal opacity = painter.opacity();
-    int scrollDelta = display->terminalFont()->fontHeight() * (display->screenWindow()->currentLine() - screen->getHistLines());
+    int scrollDelta = m_parentDisplay->terminalFont()->fontHeight() * (m_parentDisplay->screenWindow()->currentLine() - screen->getHistLines());
     const bool origClipping = painter.hasClipping();
     const auto origClipRegion = painter.clipRegion();
     if (screen->hasGraphics()) {
@@ -461,8 +457,8 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
             if (!p || p->z >= 0) {
                 break;
             }
-            int x = p->col * display->terminalFont()->fontWidth() + p->X + display->contentRect().left();
-            int y = p->row * display->terminalFont()->fontHeight() + p->Y + display->contentRect().top();
+            int x = p->col * m_parentDisplay->terminalFont()->fontWidth() + p->X + m_parentDisplay->contentRect().left();
+            int y = p->row * m_parentDisplay->terminalFont()->fontHeight() + p->Y + m_parentDisplay->contentRect().top();
             QRectF srcRect(0, 0, p->pixmap.width(), p->pixmap.height());
             QRectF dstRect(x, y - scrollDelta, p->pixmap.width(), p->pixmap.height());
             painter.setOpacity(p->opacity);
@@ -496,8 +492,8 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
                 break;
             }
             QPixmap image = p->pixmap;
-            int x = p->col * display->terminalFont()->fontWidth() + p->X + display->contentRect().left();
-            int y = p->row * display->terminalFont()->fontHeight() + p->Y + display->contentRect().top();
+            int x = p->col * m_parentDisplay->terminalFont()->fontWidth() + p->X + m_parentDisplay->contentRect().left();
+            int y = p->row * m_parentDisplay->terminalFont()->fontHeight() + p->Y + m_parentDisplay->contentRect().top();
             QRectF srcRect(0, 0, image.width(), image.height());
             QRectF dstRect(x, y - scrollDelta, image.width(), image.height());
             painter.setOpacity(p->opacity);
@@ -524,18 +520,16 @@ void TerminalPainter::drawPrinterFriendlyTextFragment(QPainter &painter,
 
 void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting)
 {
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-
-    if (useOpacitySetting && !display->wallpaper()->isNull()
-        && display->wallpaper()->draw(painter, rect, display->terminalColor()->opacity(), backgroundColor)) {
-    } else if (qAlpha(display->terminalColor()->blendColor()) < 0xff && useOpacitySetting) {
+    if (useOpacitySetting && !m_parentDisplay->wallpaper()->isNull()
+        && m_parentDisplay->wallpaper()->draw(painter, rect, m_parentDisplay->terminalColor()->opacity(), backgroundColor)) {
+    } else if (qAlpha(m_parentDisplay->terminalColor()->blendColor()) < 0xff && useOpacitySetting) {
 #if defined(Q_OS_MACOS)
         // TODO: On MacOS, using CompositionMode doesn't work. Altering the
         //       transparency in the color scheme alters the brightness.
         painter.fillRect(rect, backgroundColor);
 #else
         QColor color(backgroundColor);
-        color.setAlpha(qAlpha(display->terminalColor()->blendColor()));
+        color.setAlpha(qAlpha(m_parentDisplay->terminalColor()->blendColor()));
 
         const QPainter::CompositionMode originalMode = painter.compositionMode();
         painter.setCompositionMode(QPainter::CompositionMode_Source);
@@ -549,9 +543,7 @@ void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const
 
 void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor)
 {
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-
-    if (display->cursorBlinking()) {
+    if (m_parentDisplay->cursorBlinking()) {
         return;
     }
 
@@ -560,36 +552,37 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
     // noticeable when linespace>1
     QRectF cursorRect = rect.adjusted(0, 1, 0, 0);
 
-    QColor color = display->terminalColor()->cursorColor();
+    QColor color = m_parentDisplay->terminalColor()->cursorColor();
     QColor cursorColor = color.isValid() ? color : foregroundColor;
 
     QPen pen(cursorColor);
     // TODO: the relative pen width to draw the cursor is a bit hacky
     // and set to 1/12 of the font width. Visually it seems to work at
     // all scales but there must be better ways to do it
-    const qreal width = qMax(display->terminalFont()->fontWidth() / 12.0, 1.0);
+    const qreal width = qMax(m_parentDisplay->terminalFont()->fontWidth() / 12.0, 1.0);
     const qreal halfWidth = width / 2.0;
     pen.setWidthF(width);
     painter.setPen(pen);
 
-    if (display->cursorShape() == Enum::BlockCursor) {
-        if (display->hasFocus()) {
+    if (m_parentDisplay->cursorShape() == Enum::BlockCursor) {
+        if (m_parentDisplay->hasFocus()) {
             painter.fillRect(cursorRect, cursorColor);
 
             // invert the color used to draw the text to ensure that the character at
             // the cursor position is readable
-            QColor cursorTextColor = display->terminalColor()->cursorTextColor();
+            QColor cursorTextColor = m_parentDisplay->terminalColor()->cursorTextColor();
+
             characterColor = cursorTextColor.isValid() ? cursorTextColor : backgroundColor;
         } else {
             // draw the cursor outline, adjusting the area so that
             // it is drawn entirely inside cursorRect
             painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
         }
-    } else if (display->cursorShape() == Enum::UnderlineCursor) {
+    } else if (m_parentDisplay->cursorShape() == Enum::UnderlineCursor) {
         QLineF line(cursorRect.left() + halfWidth, cursorRect.bottom() - halfWidth, cursorRect.right() - halfWidth, cursorRect.bottom() - halfWidth);
         painter.drawLine(line);
 
-    } else if (display->cursorShape() == Enum::IBeamCursor) {
+    } else if (m_parentDisplay->cursorShape() == Enum::IBeamCursor) {
         QLineF line(cursorRect.left() + halfWidth, cursorRect.top() + halfWidth, cursorRect.left() + halfWidth, cursorRect.bottom() - halfWidth);
         painter.drawLine(line);
     }
@@ -602,9 +595,7 @@ void TerminalPainter::drawCharacters(QPainter &painter,
                                      const QColor &characterColor,
                                      const LineProperty lineProperty)
 {
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-
-    if (display->textBlinking() && ((style.rendition & RE_BLINK) != 0)) {
+    if (m_parentDisplay->textBlinking() && ((style.rendition & RE_BLINK) != 0)) {
         return;
     }
 
@@ -624,15 +615,15 @@ void TerminalPainter::drawCharacters(QPainter &painter,
     // "Regular" will use "Bold", but e.g. "Thin" will use "Light".
     // Note that QFont::weight/setWeight() returns/takes an int in Qt5,
     // and a QFont::Weight in Qt6
-    const auto normalWeight = display->font().weight();
+    const auto normalWeight = m_parentDisplay->font().weight();
     auto it = std::upper_bound(std::begin(FontWeights), std::end(FontWeights), normalWeight);
     const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
 
-    const bool useBold = (((style.rendition & RE_BOLD) != 0) && display->terminalFont()->boldIntense());
-    const bool useUnderline = ((style.rendition & RE_UNDERLINE) != 0) || display->font().underline();
-    const bool useItalic = ((style.rendition & RE_ITALIC) != 0) || display->font().italic();
-    const bool useStrikeOut = ((style.rendition & RE_STRIKEOUT) != 0) || display->font().strikeOut();
-    const bool useOverline = ((style.rendition & RE_OVERLINE) != 0) || display->font().overline();
+    const bool useBold = (((style.rendition & RE_BOLD) != 0) && m_parentDisplay->terminalFont()->boldIntense());
+    const bool useUnderline = ((style.rendition & RE_UNDERLINE) != 0) || m_parentDisplay->font().underline();
+    const bool useItalic = ((style.rendition & RE_ITALIC) != 0) || m_parentDisplay->font().italic();
+    const bool useStrikeOut = ((style.rendition & RE_STRIKEOUT) != 0) || m_parentDisplay->font().strikeOut();
+    const bool useOverline = ((style.rendition & RE_OVERLINE) != 0) || m_parentDisplay->font().overline();
 
     QFont currentFont = painter.font();
 
@@ -653,7 +644,7 @@ void TerminalPainter::drawCharacters(QPainter &painter,
     }
 
     // setup pen
-    const QColor foregroundColor = style.foregroundColor.color(display->terminalColor()->colorTable());
+    const QColor foregroundColor = style.foregroundColor.color(m_parentDisplay->terminalColor()->colorTable());
     const QColor color = characterColor.isValid() ? characterColor : foregroundColor;
     QPen pen = painter.pen();
     if (pen.color() != color) {
@@ -665,28 +656,28 @@ void TerminalPainter::drawCharacters(QPainter &painter,
     const auto origClipRegion = painter.clipRegion();
     painter.setClipRect(rect);
     // draw text
-    if (isLineCharString(text) && !display->terminalFont()->useFontLineCharacters()) {
+    if (isLineCharString(text) && !m_parentDisplay->terminalFont()->useFontLineCharacters()) {
         int y = rect.y();
 
         if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
-            y -= display->terminalFont()->fontHeight() / 2;
+            y -= m_parentDisplay->terminalFont()->fontHeight() / 2;
         }
 
-        drawLineCharString(display, painter, rect.x(), y, text, style);
+        drawLineCharString(m_parentDisplay, painter, rect.x(), y, text, style);
     } else {
         painter.setLayoutDirection(Qt::LeftToRight);
-        int y = rect.y() + display->terminalFont()->fontAscent();
+        int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent();
 
         int shifted = 0;
         if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
-            y -= display->terminalFont()->fontHeight() / 2;
+            y -= m_parentDisplay->terminalFont()->fontHeight() / 2;
         } else {
             // We shift half way down here to center
-            shifted = display->terminalFont()->lineSpacing() / 2;
+            shifted = m_parentDisplay->terminalFont()->lineSpacing() / 2;
             y += shifted;
         }
 
-        if (display->bidiEnabled()) {
+        if (m_parentDisplay->bidiEnabled()) {
             painter.drawText(rect.x(), y, text);
         } else {
             painter.drawText(rect.x(), y, LTR_OVERRIDE_CHAR + text);
@@ -694,7 +685,7 @@ void TerminalPainter::drawCharacters(QPainter &painter,
 
         if (shifted > 0) {
             // To avoid rounding errors we shift the rest this way
-            y += display->terminalFont()->lineSpacing() - shifted;
+            y += m_parentDisplay->terminalFont()->lineSpacing() - shifted;
         }
     }
     painter.setClipRegion(origClipRegion);
@@ -716,18 +707,16 @@ void TerminalPainter::drawLineCharString(TerminalDisplay *display, QPainter &pai
 
 void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image)
 {
-    const auto display = qobject_cast<TerminalDisplay *>(sender());
-
-    if (inputMethodData.preeditString.isEmpty() || !display->isCursorOnDisplay()) {
+    if (inputMethodData.preeditString.isEmpty() || !m_parentDisplay->isCursorOnDisplay()) {
         return;
     }
 
-    const QPoint cursorPos = display->cursorPosition();
+    const QPoint cursorPos = m_parentDisplay->cursorPosition();
 
     QColor characterColor;
-    const QColor background = display->terminalColor()->colorTable()[DEFAULT_BACK_COLOR];
-    const QColor foreground = display->terminalColor()->colorTable()[DEFAULT_FORE_COLOR];
-    const Character style = image[display->loc(cursorPos.x(), cursorPos.y())];
+    const QColor background = m_parentDisplay->terminalColor()->colorTable()[DEFAULT_BACK_COLOR];
+    const QColor foreground = m_parentDisplay->terminalColor()->colorTable()[DEFAULT_FORE_COLOR];
+    const Character style = image[m_parentDisplay->loc(cursorPos.x(), cursorPos.y())];
 
     drawBackground(painter, rect, background, true);
     drawCursor(painter, rect, foreground, background, characterColor);

@@ -38,7 +38,7 @@ class TerminalDisplay;
 class TerminalPainter : public QObject
 {
 public:
-    explicit TerminalPainter(QObject *parent = nullptr);
+    explicit TerminalPainter(TerminalDisplay *parentDisplay);
     ~TerminalPainter() override = default;
 
 public Q_SLOTS:
@@ -100,6 +100,8 @@ private:
 
     // draws the cursor character
     void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor);
+
+    TerminalDisplay *m_parentDisplay = nullptr;
 };
 
 }
