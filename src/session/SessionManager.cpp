@@ -105,12 +105,12 @@ Session *SessionManager::createSession(Profile::Ptr profile)
     Q_ASSERT(session);
     applyProfile(session, profile, false);
 
-    connect(session, &Konsole::Session::profileChangeCommandReceived, this, &Konsole::SessionManager::sessionProfileCommandReceived);
+    connect(session, &Konsole::Session::profileChangeCommandReceived, this, [this, session](const QString &text) {
+        sessionProfileCommandReceived(session, text);
+    });
 
     // ask for notification when session dies
-    connect(session, &Konsole::Session::finished, this, [this, session]() {
-        sessionTerminated(session);
-    });
+    connect(session, &Konsole::Session::finished, this, &SessionManager::sessionTerminated);
 
     // add session to active list
     _sessions << session;
@@ -292,9 +292,8 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
     }
 }
 
-void SessionManager::sessionProfileCommandReceived(const QString &text)
+void SessionManager::sessionProfileCommandReceived(Session *session, const QString &text)
 {
-    auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
     // store the font for each view if zoom was applied so that they can

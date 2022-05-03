@@ -1046,7 +1046,7 @@ void EditProfileDialog::delayedPreview(int property, const QVariant &value)
 
 void EditProfileDialog::delayedPreviewActivate()
 {
-    Q_ASSERT(qobject_cast<QTimer *>(sender()));
+    Q_ASSERT(_delayedPreviewTimer);
 
     QMutableHashIterator<int, QVariant> iter(_delayedPreviewProperties);
     if (iter.hasNext()) {

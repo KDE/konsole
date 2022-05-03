@@ -858,7 +858,9 @@ void Session::close()
         }
     } else {
         // terminal process has finished, just close the session
-        QTimer::singleShot(1, this, &Konsole::Session::finished);
+        QTimer::singleShot(1, this, [this]() {
+            Q_EMIT finished(this);
+        });
     }
 }
 
@@ -874,7 +876,7 @@ bool Session::closeInNormalWay()
     // 3). the user closes the tab explicitly
     //
     if (!isRunning()) {
-        Q_EMIT finished();
+        Q_EMIT finished(this);
         return true;
     }
 
@@ -969,7 +971,7 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
     }
 
     if (_closePerUserRequest) {
-        Q_EMIT finished();
+        Q_EMIT finished(this);
         return;
     }
 
@@ -991,7 +993,7 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
         message = i18n("Program '%1' crashed.", _program);
         terminalWarning(message);
     } else {
-        Q_EMIT finished();
+        Q_EMIT finished(this);
     }
 }
 

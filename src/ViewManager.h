@@ -326,7 +326,7 @@ private Q_SLOTS:
 
     // called when a session terminates - the view manager will delete any
     // views associated with the session
-    void sessionFinished();
+    void sessionFinished(Session *session);
     // called when one view has been destroyed
     void viewDestroyed(QWidget *view);
 
@@ -388,11 +388,11 @@ private Q_SLOTS:
     void controllerChanged(SessionController *controller);
 
     /**
-     * Disconnect this ViewManager and MainWindow from SessionController
-     * sender() and its associated view/session pair such as after a
-     * split-view has been drag-and-dropped to a new window.
+     * Disconnect this ViewManager and MainWindow from @p controller
+     * and its associated view/session pair such as after a split-view
+     * has been drag-and-dropped to a new window.
      */
-    void forgetController();
+    void forgetController(SessionController *controller);
 
     /* Detaches the tab at index tabIdx */
     void detachTab(int tabIdx);

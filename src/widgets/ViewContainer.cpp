@@ -258,7 +258,7 @@ void TabbedViewContainer::terminalDisplayDropped(TerminalDisplay *terminalDispla
         // Terminal from another window - recreate SessionController for current ViewManager
         disconnectTerminalDisplay(terminalDisplay);
         Session *terminalSession = terminalDisplay->sessionController()->session();
-        Q_EMIT terminalDisplay->sessionController()->viewDragAndDropped();
+        Q_EMIT terminalDisplay->sessionController()->viewDragAndDropped(terminalDisplay->sessionController());
         connectedViewManager()->attachView(terminalDisplay, terminalSession);
         connectTerminalDisplay(terminalDisplay);
     }

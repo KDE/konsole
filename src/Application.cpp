@@ -122,7 +122,13 @@ MainWindow *Application::newMainWindow()
     auto window = new MainWindow();
 
     connect(window, &Konsole::MainWindow::newWindowRequest, this, &Konsole::Application::createWindow);
-    connect(window, &Konsole::MainWindow::terminalsDetached, this, &Konsole::Application::detachTerminals);
+
+    connect(window,
+            &Konsole::MainWindow::terminalsDetached,
+            this,
+            [this, window](ViewSplitter *splitter, const QHash<TerminalDisplay *, Session *> &sessionsMap) {
+                detachTerminals(window, splitter, sessionsMap);
+            });
 
     m_pluginManager.registerMainWindow(window);
 
@@ -136,9 +142,8 @@ void Application::createWindow(const Profile::Ptr &profile, const QString &direc
     window->show();
 }
 
-void Application::detachTerminals(ViewSplitter *splitter, const QHash<TerminalDisplay *, Session *> &sessionsMap)
+void Application::detachTerminals(MainWindow *currentWindow, ViewSplitter *splitter, const QHash<TerminalDisplay *, Session *> &sessionsMap)
 {
-    auto *currentWindow = qobject_cast<MainWindow *>(sender());
     MainWindow *window = newMainWindow();
     ViewManager *manager = window->viewManager();
 

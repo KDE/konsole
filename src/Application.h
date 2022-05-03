@@ -60,7 +60,7 @@ public:
 
 private Q_SLOTS:
     void createWindow(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory);
-    void detachTerminals(ViewSplitter *splitter, const QHash<TerminalDisplay *, Session *> &sessionsMap);
+    void detachTerminals(MainWindow *currentWindow, ViewSplitter *splitter, const QHash<TerminalDisplay *, Session *> &sessionsMap);
 
     void toggleBackgroundInstance();
 

@@ -649,7 +649,7 @@ Q_SIGNALS:
     /**
      * Emitted when the terminal process exits.
      */
-    void finished();
+    void finished(Session *session);
 
     /**
      * Emitted when one of certain session attributes has been changed.

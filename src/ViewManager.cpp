@@ -507,7 +507,7 @@ Session *ViewManager::createSession(const Profile::Ptr &profile, const QString &
     return session;
 }
 
-void ViewManager::sessionFinished()
+void ViewManager::sessionFinished(Session *session)
 {
     // if this slot is called after the view manager's main widget
     // has been destroyed, do nothing
@@ -524,7 +524,6 @@ void ViewManager::sessionFinished()
         }
     }
 
-    auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
     auto view = _sessionMap.key(session);
@@ -690,9 +689,8 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     return controller;
 }
 
-void ViewManager::forgetController()
+void ViewManager::forgetController(SessionController *controller)
 {
-    auto controller = static_cast<SessionController *>(sender());
     Q_ASSERT(controller->session() != nullptr && controller->view() != nullptr);
 
     forgetTerminal(controller->view());

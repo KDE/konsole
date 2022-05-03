@@ -513,7 +513,9 @@ void SessionController::updateWebSearchMenu()
                 action = new QAction(searchProvider, _webSearchMenu);
                 action->setIcon(QIcon::fromTheme(filterData.iconNameForPreferredSearchProvider(searchProvider)));
                 action->setData(filterData.queryForPreferredSearchProvider(searchProvider));
-                connect(action, &QAction::triggered, this, &Konsole::SessionController::handleWebShortcutAction);
+                connect(action, &QAction::triggered, this, [this, action]() {
+                    handleWebShortcutAction(action);
+                });
                 _webSearchMenu->addAction(action);
             }
 
@@ -529,9 +531,8 @@ void SessionController::updateWebSearchMenu()
     }
 }
 
-void SessionController::handleWebShortcutAction()
+void SessionController::handleWebShortcutAction(QAction *action)
 {
-    auto *action = qobject_cast<QAction *>(sender());
     if (action == nullptr) {
         return;
     }
@@ -571,19 +572,16 @@ void Konsole::SessionController::sendBackgroundColor(uint terminator)
     session()->reportBackgroundColor(c, terminator);
 }
 
-void SessionController::toggleReadOnly()
+void SessionController::toggleReadOnly(QAction *action)
 {
-    auto *action = qobject_cast<QAction *>(sender());
     if (action != nullptr) {
         bool readonly = !isReadOnly();
         session()->setReadOnly(readonly);
     }
 }
 
-void SessionController::toggleAllowMouseTracking()
+void SessionController::toggleAllowMouseTracking(QAction *action)
 {
-    QAction *action = qobject_cast<QAction*>(sender());
-
     if (action == nullptr) {
         // Crash if running in debug build (aka. someone developing)
         Q_ASSERT(false && "Invalid function called toggleAllowMouseTracking");
@@ -764,12 +762,18 @@ void SessionController::setupCommonActions()
             &Konsole::SessionController::changeCodec);
 
     // Mouse tracking enabled
-    action = collection->addAction(QStringLiteral("allow-mouse-tracking"), this, &SessionController::toggleAllowMouseTracking);
+    action = collection->addAction(QStringLiteral("allow-mouse-tracking"), this);
+    connect(action, &QAction::toggled, this, [this, action]() {
+        toggleAllowMouseTracking(action);
+    });
     action->setText(i18nc("@item:inmenu Allows terminal applications to request mouse tracking", "Allow mouse tracking"));
     action->setCheckable(true);
 
     // Read-only
-    action = collection->addAction(QStringLiteral("view-readonly"), this, &SessionController::toggleReadOnly);
+    action = collection->addAction(QStringLiteral("view-readonly"), this);
+    connect(action, &QAction::toggled, this, [this, action]() {
+        toggleReadOnly(action);
+    });
     action->setText(i18nc("@item:inmenu A read only (locked) session", "Read-only"));
     action->setCheckable(true);
     updateReadOnlyActionStates();

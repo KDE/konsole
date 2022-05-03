@@ -40,9 +40,8 @@ void SessionGroup::removeSession(Session *session)
     _sessions.remove(session);
 }
 
-void SessionGroup::sessionFinished()
+void SessionGroup::sessionFinished(Session *session)
 {
-    auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
     removeSession(session);
 }

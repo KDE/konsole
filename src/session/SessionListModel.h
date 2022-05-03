@@ -54,7 +54,7 @@ protected:
     }
 
 private Q_SLOTS:
-    void sessionFinished();
+    void sessionFinished(Session *session);
 
 private:
     QList<Session *> _sessions;

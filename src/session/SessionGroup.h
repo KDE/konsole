@@ -73,7 +73,7 @@ public:
     void setMasterMode(int mode);
 
 private Q_SLOTS:
-    void sessionFinished();
+    void sessionFinished(Session *session);
     void forwardData(const QByteArray &data);
 
 private:
