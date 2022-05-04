@@ -342,19 +342,12 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::updatePalette);
 
     _terminalPainter = new TerminalPainter(this);
-    connect(this, &TerminalDisplay::drawContents, _terminalPainter, &TerminalPainter::drawContents);
-    connect(this, &TerminalDisplay::drawCurrentResultRect, _terminalPainter, &TerminalPainter::drawCurrentResultRect);
-    connect(this, &TerminalDisplay::highlightScrolledLines, _terminalPainter, &TerminalPainter::highlightScrolledLines);
-    connect(this, &TerminalDisplay::highlightScrolledLinesRegion, _terminalPainter, &TerminalPainter::highlightScrolledLinesRegion);
-    connect(this, &TerminalDisplay::drawBackground, _terminalPainter, &TerminalPainter::drawBackground);
-    connect(this, &TerminalDisplay::drawCharacters, _terminalPainter, &TerminalPainter::drawCharacters);
-    connect(this, &TerminalDisplay::drawInputMethodPreeditString, _terminalPainter, &TerminalPainter::drawInputMethodPreeditString);
 
     auto ldrawBackground = [this](QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting) {
-        Q_EMIT drawBackground(painter, rect, backgroundColor, useOpacitySetting);
+        _terminalPainter->drawBackground(painter, rect, backgroundColor, useOpacitySetting);
     };
     auto ldrawContents = [this](QPainter &paint, const QRect &rect, bool friendly) {
-        Q_EMIT drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _lineProperties);
+        _terminalPainter->drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _lineProperties);
     };
     auto lgetBackgroundColor = [this]() {
         return _terminalColor->backgroundColor();
@@ -670,7 +663,7 @@ void TerminalDisplay::updateImage()
     }
 
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
-        dirtyRegion |= Q_EMIT highlightScrolledLinesRegion(_scrollBar);
+        dirtyRegion |= _terminalPainter->highlightScrolledLinesRegion(_scrollBar);
     }
     _screenWindow->resetScrollCount();
 
@@ -732,7 +725,7 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
 
     for (const QRect &rect : region) {
         dirtyImageRegion += widgetToImage(rect);
-        Q_EMIT drawBackground(paint, rect, _terminalColor->backgroundColor(), true /* use opacity setting */);
+        _terminalPainter->drawBackground(paint, rect, _terminalColor->backgroundColor(), true /* use opacity setting */);
     }
 
     if (_displayVerticalLine) {
@@ -749,7 +742,7 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
     paint.setRenderHint(QPainter::TextAntialiasing, _terminalFont->antialiasText());
 
     for (const QRect &rect : qAsConst(dirtyImageRegion)) {
-        Q_EMIT drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties);
+        _terminalPainter->drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties);
     }
 
     if (screenWindow()->currentResultLine() != -1) {
@@ -758,13 +751,13 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
             columns() * terminalFont()->fontWidth(),
             _terminalFont->fontHeight()
         );
-        Q_EMIT drawCurrentResultRect(paint, _searchResultRect);
+        _terminalPainter->drawCurrentResultRect(paint, _searchResultRect);
     }
 
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
-        Q_EMIT highlightScrolledLines(paint, _scrollBar->highlightScrolledLines().isTimerActive(), _scrollBar->highlightScrolledLines().rect());
+        _terminalPainter->highlightScrolledLines(paint, _scrollBar->highlightScrolledLines().isTimerActive(), _scrollBar->highlightScrolledLines().rect());
     }
-    Q_EMIT drawInputMethodPreeditString(paint, preeditRect(), _inputMethodData, _image);
+    _terminalPainter->drawInputMethodPreeditString(paint, preeditRect(), _inputMethodData, _image);
     paintFilters(paint);
 
     const bool drawDimmed = _dimWhenInactive && !hasFocus();

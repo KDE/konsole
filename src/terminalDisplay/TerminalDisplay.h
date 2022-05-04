@@ -488,23 +488,6 @@ Q_SIGNALS:
 
     void peekPrimaryRequested(bool doPeek);
 
-    void drawContents(Character *image,
-                      QPainter &paint,
-                      const QRect &rect,
-                      bool printerFriendly,
-                      int imageSize,
-                      bool bidiEnabled,
-                      QVector<LineProperty> lineProperties);
-    void drawCurrentResultRect(QPainter &painter, const QRect &searchResultRect);
-
-    void highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect);
-    QRegion highlightScrolledLinesRegion(TerminalScrollBar *scrollBar);
-
-    void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting);
-    void
-    drawCharacters(QPainter &painter, const QRect &rect, const QString &text, Character style, const QColor &characterColor, const LineProperty lineProperty);
-    void drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image);
-
 protected:
     // events
     bool event(QEvent *event) override;
