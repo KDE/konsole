@@ -254,11 +254,12 @@ void TabbedViewContainer::moveActiveView(MoveDirection direction)
 
 void TabbedViewContainer::terminalDisplayDropped(TerminalDisplay *terminalDisplay)
 {
-    if (terminalDisplay->sessionController()->parent() != connectedViewManager()) {
+    auto *controller = terminalDisplay->sessionController();
+    if (controller->parent() != connectedViewManager()) {
         // Terminal from another window - recreate SessionController for current ViewManager
         disconnectTerminalDisplay(terminalDisplay);
-        Session *terminalSession = terminalDisplay->sessionController()->session();
-        Q_EMIT terminalDisplay->sessionController()->viewDragAndDropped(terminalDisplay->sessionController());
+        Session *terminalSession = controller->session();
+        Q_EMIT controller->viewDragAndDropped(controller);
         connectedViewManager()->attachView(terminalDisplay, terminalSession);
         connectTerminalDisplay(terminalDisplay);
     }
