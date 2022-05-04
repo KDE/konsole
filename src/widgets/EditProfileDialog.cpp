@@ -55,22 +55,7 @@ using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget *parent)
     : KPageDialog(parent)
-    , _generalUi(nullptr)
-    , _tabsUi(nullptr)
-    , _appearanceUi(nullptr)
-    , _scrollingUi(nullptr)
-    , _keyboardUi(nullptr)
-    , _mouseUi(nullptr)
-    , _advancedUi(nullptr)
-    , _tempProfile(nullptr)
-    , _profile(nullptr)
-    , _isDefault(false)
-    , _previewedProperties(QHash<int, QVariant>())
-    , _delayedPreviewProperties(QHash<int, QVariant>())
     , _delayedPreviewTimer(new QTimer(this))
-    , _colorDialog(nullptr)
-    , _buttonBox(nullptr)
-    , _fontDialog(nullptr)
 {
     setWindowTitle(i18n("Edit Profile"));
     setFaceType(KPageDialog::List);

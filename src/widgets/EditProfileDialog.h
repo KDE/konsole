@@ -312,13 +312,13 @@ private:
     // otherwise returns true.
     bool isProfileNameValid();
 
-    Ui::EditProfileGeneralPage *_generalUi;
-    Ui::EditProfileTabsPage *_tabsUi;
-    Ui::EditProfileAppearancePage *_appearanceUi;
-    Ui::EditProfileScrollingPage *_scrollingUi;
-    Ui::EditProfileKeyboardPage *_keyboardUi;
-    Ui::EditProfileMousePage *_mouseUi;
-    Ui::EditProfileAdvancedPage *_advancedUi;
+    Ui::EditProfileGeneralPage *_generalUi = nullptr;
+    Ui::EditProfileTabsPage *_tabsUi = nullptr;
+    Ui::EditProfileAppearancePage *_appearanceUi = nullptr;
+    Ui::EditProfileScrollingPage *_scrollingUi = nullptr;
+    Ui::EditProfileKeyboardPage *_keyboardUi = nullptr;
+    Ui::EditProfileMousePage *_mouseUi = nullptr;
+    Ui::EditProfileAdvancedPage *_advancedUi = nullptr;
 
     using PageSetupMethod = void (EditProfileDialog::*)(const Profile::Ptr &);
     struct Page {
@@ -338,16 +338,16 @@ private:
     Profile::Ptr _tempProfile;
     Profile::Ptr _profile;
 
-    bool _isDefault;
+    bool _isDefault = false;
 
     QHash<int, QVariant> _previewedProperties;
 
     QHash<int, QVariant> _delayedPreviewProperties;
-    QTimer *_delayedPreviewTimer;
+    QTimer *_delayedPreviewTimer = nullptr;
 
-    ColorSchemeEditor *_colorDialog;
-    QDialogButtonBox *_buttonBox;
-    FontDialog *_fontDialog;
+    ColorSchemeEditor *_colorDialog = nullptr;
+    QDialogButtonBox *_buttonBox = nullptr;
+    FontDialog *_fontDialog = nullptr;
 
     InitialProfileState _profileState = ExistingProfile;
 };
