@@ -4,8 +4,6 @@
 
 #include "quickcommandswidget.h"
 #include "konsoledebug.h"
-#include "quickcommandsmodel.h"
-#include "session/SessionController.h"
 #include "terminalDisplay/TerminalDisplay.h"
 
 #include <QMenu>

@@ -8,7 +8,6 @@
 #include "Hangul.h"
 
 // Qt
-#include <QtGlobal>
 
 // Konsole
 #include "Character.h"

@@ -9,7 +9,6 @@
 #include "TerminalBell.h"
 
 #include <QTimer>
-#include <QWidget>
 
 #include <KNotification>
 
