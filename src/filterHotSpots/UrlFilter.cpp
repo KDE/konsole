@@ -68,7 +68,7 @@ const QRegularExpression UrlFilter::FullUrlRegExp(
     + LS1(query)
     + LS1(fragment)
     , QRegularExpression::CaseInsensitiveOption);
-/* clang-format on */
+
 
 /////////////////////////////////////////////
 
@@ -77,9 +77,11 @@ const QRegularExpression UrlFilter::FullUrlRegExp(
 const QRegularExpression UrlFilter::EmailAddressRegExp(QStringLiteral("\\b(\\w|\\.|-|\\+)+@(\\w|\\.|-)+\\.\\w+\\b"));
 
 // matches full url or email address
-const QRegularExpression UrlFilter::CompleteUrlRegExp(QLatin1Char('(') + FullUrlRegExp.pattern() + QLatin1Char('|') + EmailAddressRegExp.pattern()
-                                                      + QLatin1Char(')'));
+const QRegularExpression UrlFilter::CompleteUrlRegExp(
+    QLatin1Char('(') + FullUrlRegExp.pattern() + QLatin1Char('|') + EmailAddressRegExp.pattern()+ QLatin1Char(')'),
+    QRegularExpression::CaseInsensitiveOption);
 
+/* clang-format on */
 UrlFilter::UrlFilter()
 {
     setRegExp(CompleteUrlRegExp);
