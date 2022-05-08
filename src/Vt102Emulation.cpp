@@ -760,12 +760,12 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     if (attribute == 4) {
         // RGB colors
         QStringList params = value.split(QLatin1Char(';'));
-        for (int i = 0; i < params.length(); i += 2) {
-            if (params.length() == i + 1) {
+        for (int j = 0; j < params.length(); j += 2) {
+            if (params.length() == j + 1) {
                 return;
             }
-            int c = params[i].toInt();
-            if (params[i + 1] == QLatin1String("?")) {
+            int c = params[j].toInt();
+            if (params[j + 1] == QLatin1String("?")) {
                 QColor color = colorTable[c];
                 if (!color.isValid()) {
                     color = CharacterColor(COLOR_SPACE_256, c).color(ColorScheme::defaultTable);
