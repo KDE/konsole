@@ -646,7 +646,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
     }
 }
 
-void Vt102Emulation::processChecksumRequest([[maybe_unused]] int argc, int argv[])
+void Vt102Emulation::processChecksumRequest([[maybe_unused]] int crargc, int crargv[])
 {
     int checksum = 0;
 
@@ -656,14 +656,14 @@ void Vt102Emulation::processChecksumRequest([[maybe_unused]] int argc, int argv[
     /* DEC STD-070 5-179 "If Pp is 0 or omitted, subsequent parameters are ignored
      *  and a checksum for all page memory will be reported."
      */
-    if (argv[1] == 0) {
-        argc = 1;
+    if (crargv[1] == 0) {
+        crargc = 1;
     }
     /* clang-format off */
-    if (argc >= 2) { top    = argv[2]; } else { top    = 1; }
-    if (argc >= 3) { left   = argv[3]; } else { left   = 1; }
-    if (argc >= 4) { bottom = argv[4]; } else { bottom = _currentScreen->getLines();   }
-    if (argc >= 5) { right  = argv[5]; } else { right  = _currentScreen->getColumns(); }
+    if (crargc >= 2) { top    = crargv[2]; } else { top    = 1; }
+    if (crargc >= 3) { left   = crargv[3]; } else { left   = 1; }
+    if (crargc >= 4) { bottom = crargv[4]; } else { bottom = _currentScreen->getLines();   }
+    if (crargc >= 5) { right  = crargv[5]; } else { right  = _currentScreen->getColumns(); }
     /* clang-format on */
 
     if (top > bottom || left > right) {
@@ -710,7 +710,7 @@ void Vt102Emulation::processChecksumRequest([[maybe_unused]] int argc, int argv[
     char tmp[30];
     checksum = -checksum;
     checksum &= 0xffff;
-    snprintf(tmp, sizeof(tmp), "\033P%d!~%04X\033\\", argv[0], checksum);
+    snprintf(tmp, sizeof(tmp), "\033P%d!~%04X\033\\", crargv[0], checksum);
     sendString(tmp);
 }
 
