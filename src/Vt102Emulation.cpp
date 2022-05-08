@@ -781,8 +781,8 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     if (attribute == 104) {
         // RGB colors
         QStringList params = value.split(QLatin1Char(';'));
-        for (int i = 0; i < params.length(); i++) {
-            int c = params[i].toInt();
+        for (int k = 0; k < params.length(); k++) {
+            int c = params[k].toInt();
             colorTable[c] = QColor();
         }
     }
