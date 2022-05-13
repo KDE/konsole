@@ -4,10 +4,11 @@
 
 #  A command-line tool to change the current tab's profile options.
 #
-#  Usage: konsoleprofile option=value
+#  Usage: konsoleprofile "option=value[;option=value;...]"
 #
-#  Example: 'konsoleprofile ColorScheme=WhiteOnBlack' will change the
-#  colorscheme used in current tab into WhiteOnBlack on the fly.
+#  Example: 'konsoleprofile "ColorScheme=WhiteOnBlack;TabColor=#FF0000"' will
+#  change the colorscheme used in current tab into WhiteOnBlack and the TabColor
+#  to red on the fly.
 #
 #  NOTE: This script MUST run within a konsole tab to take effect. The change
 #  is applied only to current tab. Other tabs using the same profile will not
@@ -17,14 +18,14 @@
 #   1. konsole --list-profile-properties
 #   2. refer to konsole/src/Profile.h
 #   3. visit the online reference:
-#       https://invent.kde.org/utilities/konsole/-/blob/master/src/Profile.h
+#       https://invent.kde.org/utilities/konsole/-/blob/master/src/profile/Profile.h
 #
 #  All of the logic is in konsole. This script is provided for convenience.
 
 if [ ! $# -eq 1 ]
     then
     echo ""
-    echo "Usage: $0 option=value"
+    echo "Usage: $0 \"option=value[;option=value;...]\""
     echo ""
     echo "For more documentation view this file $0"
     echo ""
