@@ -177,8 +177,9 @@ public:
 
     /** Resets the state of the terminal.
      *
-     * @param softReset The reset was initiated by DECSTR */
-    virtual void reset(bool softReset = false) = 0;
+     * @param softReset The reset was initiated by DECSTR
+     * @param preservePrompt Try to preserve the command prompt */
+    virtual void reset(bool softReset = false, bool preservePrompt = false) = 0;
 
     /**
      * Returns true if the active terminal program is interested in Mouse

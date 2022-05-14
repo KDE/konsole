@@ -357,10 +357,13 @@ public:
      * <li>New line mode is disabled.  TODO Document me</li>
      * </ul>
      *
-     * If @p clearScreen is true then the screen contents are erased entirely,
-     * otherwise they are unaltered.
+     * If @p softReset is true then perform a DECSTR,
+     * otherwise perform RIS (Reset to Initial State).
+     *
+     * If @p preservePrompt is true, then attempt to preserve the
+     * line with the command prompt even on a RIS.
      */
-    void reset(bool softReset = false);
+    void reset(bool softReset = false, bool preservePrompt = false);
 
     /**
      * Displays a new character at the current cursor position.

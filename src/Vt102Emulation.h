@@ -73,7 +73,7 @@ public:
 
     // reimplemented from Emulation
     void clearEntireScreen() override;
-    void reset(bool softReset = false) override;
+    void reset(bool softReset = false, bool preservePrompt = false) override;
     char eraseChar() const override;
 
 public Q_SLOTS:

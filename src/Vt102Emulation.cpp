@@ -97,7 +97,7 @@ void Vt102Emulation::clearHistory()
     Emulation::clearHistory();
 }
 
-void Vt102Emulation::reset(bool softReset)
+void Vt102Emulation::reset(bool softReset, bool preservePrompt)
 {
     // Save the current codec so we can set it later.
     // Ideally we would want to use the profile setting
@@ -114,9 +114,9 @@ void Vt102Emulation::reset(bool softReset)
     }
 
     resetCharset(0);
-    _screen[0]->reset(softReset);
+    _screen[0]->reset(softReset, preservePrompt);
     resetCharset(1);
-    _screen[1]->reset(softReset);
+    _screen[1]->reset(softReset, preservePrompt);
 
     if (currentCodec != nullptr) {
         setCodec(currentCodec);

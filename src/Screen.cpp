@@ -780,23 +780,28 @@ int Screen::getScreenLineColumns(const int line) const
     return _columns;
 }
 
-void Screen::reset(bool softReset)
+void Screen::reset(bool softReset, bool preservePrompt)
 {
     // Clear screen, but preserve the current line
     if (!softReset) {
-        scrollUp(0, _cuY);
-        _cuY = 0;
-        _cuX = 0;
+        if (preservePrompt) {
+            scrollUp(0, _cuY);
+            _cuY = 0;
+            if (_hasGraphics) {
+                delPlacements();
+                _currentTerminalDisplay->update();
+            }
+        } else {
+            clearEntireScreen();
+            _cuY = 0;
+            _cuX = 0;
+        }
 
         resetMode(MODE_Screen); // screen not inverse
         resetMode(MODE_NewLine);
 
         initTabStops();
 
-        if (_hasGraphics) {
-            delPlacements();
-            _currentTerminalDisplay->update();
-        }
     }
 
     _currentModes[MODE_Origin] = 0;

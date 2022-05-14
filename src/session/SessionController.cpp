@@ -1684,7 +1684,7 @@ void SessionController::clearHistoryAndReset()
     QByteArray name = profile->defaultEncoding().toUtf8();
 
     Emulation *emulation = session()->emulation();
-    emulation->reset();
+    emulation->reset(false, true);
     session()->refresh();
     session()->setCodec(QTextCodec::codecForName(name));
     clearHistory();
