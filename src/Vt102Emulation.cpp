@@ -1038,7 +1038,18 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     /* clang-format on */
 
     if (tokenBuffer[i] != ';') {
-        reportDecodingError(token_osc(terminator));
+        // No arguments
+        switch(attribute) {
+        case 104: // 104 without any argument means clear entire color table
+            for (int i=0; i<256; i++) {
+                colorTable[i] = QColor();
+            }
+            break;
+        default:
+            reportDecodingError(token_osc(terminator));
+            break;
+        }
+
         return;
     }
     // skip initial ';'
