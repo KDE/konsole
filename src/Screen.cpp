@@ -782,9 +782,11 @@ int Screen::getScreenLineColumns(const int line) const
 
 void Screen::reset(bool softReset, bool preservePrompt)
 {
-    // Clear screen, but preserve the current line
+    setDefaultRendition();
+
     if (!softReset) {
         if (preservePrompt) {
+            // Clear screen, but preserve the current line and X position
             scrollUp(0, _cuY);
             _cuY = 0;
             if (_hasGraphics) {
@@ -821,7 +823,6 @@ void Screen::reset(bool softReset, bool preservePrompt)
     // Other terminal emulators reset the entire scroll history during a reset
     //    setScroll(getScroll(), false);
 
-    setDefaultRendition();
     saveCursor();
 
     // DECSTR homes the saved cursor even though it doesn't home the current cursor
