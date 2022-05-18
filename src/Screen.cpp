@@ -1645,6 +1645,16 @@ int Screen::copyLineToStream(int line,
         auto *data = _screenLines[screenLine].data();
         int length = _screenLines.at(screenLine).count();
 
+        // Exclude trailing empty cells from count and don't bother processing them further.
+        // This is necessary because a newline gets added to the last line when
+        // the selection extends beyond the last character (last non-whitespace
+        // character when TrimTrailingWhitespace is true), so the returned
+        // count from this funtion must not include empty cells beyond that
+        // last character.
+        while (length > 0 && !data[length - 1].isRealCharacter) {
+            length--;
+        }
+
         // Don't remove end spaces in lines that wrap
         if (options.testFlag(TrimTrailingWhitespace) && ((_lineProperties.at(screenLine) & LINE_WRAPPED) == 0)) {
             // ignore trailing white space at the end of the line
