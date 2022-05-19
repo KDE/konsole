@@ -1201,7 +1201,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
             }
         }
 
-        if (!ev->modifiers()) {
+        if ((!usesMouseTracking() && !ev->modifiers()) || (usesMouseTracking() && ev->modifiers() == Qt::ShiftModifier)) {
             _lineSelectionMode = false;
             _wordSelectionMode = false;
         }
