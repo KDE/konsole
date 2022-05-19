@@ -429,7 +429,7 @@
           <string>When positioning the mouse over a hexadecimal color it will be displayed in a frame next to the mouse pointer</string>
          </property>
          <property name="text">
-          <string>Allow Color Filters</string>
+          <string>Preview Colors on hover</string>
          </property>
         </widget>
        </item>
