@@ -2,6 +2,7 @@
     This source file is part of Konsole, a terminal emulator.
 
     SPDX-FileCopyrightText: 2006-2008 Robert Knight <robertknight@gmail.com>
+    SPDX-FileCopyrightText: 2022 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -16,10 +17,22 @@
 // KDE
 #include <KLocalizedString>
 #include <QFontDatabase>
+#include <kcoreaddons_version.h>
 
 // Konsole
 #include "Enumeration.h"
 #include "ProfileGroup.h"
+#include "config-konsole.h"
+
+#ifdef HAVE_GETPWUID
+#include <pwd.h>
+#include <sys/types.h>
+#include <unistd.h>
+#endif
+
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+#include <KSandbox>
+#endif
 
 using namespace Konsole;
 
@@ -148,6 +161,31 @@ static const QString BUILTIN_MAGIC_PATH = QStringLiteral("FALLBACK/");
 // Note: regular profiles created in earlier versions of Konsole may have this name too.
 static const char BUILTIN_UNTRANSLATED_NAME_CHAR[] = "Built-in";
 
+static QString defaultShell()
+{
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+    if (!KSandbox::isFlatpak()) {
+        return QString::fromUtf8(qgetenv("SHELL"));
+    }
+
+#ifdef HAVE_GETPWUID
+    auto pw = getpwuid(getuid());
+    // pw: Do not pass the returned pointer to free.
+    if (pw != nullptr) {
+        QProcess proc;
+        proc.setProgram(QStringLiteral("getent"));
+        proc.setArguments({QStringLiteral("passwd"), QString::number(pw->pw_uid)});
+        KSandbox::startHostProcess(proc);
+        proc.waitForFinished();
+        return QString::fromUtf8(proc.readAllStandardOutput().simplified().split(':').at(6));
+    }
+    return {};
+#endif
+#else
+    return QString::fromUtf8(qgetenv("SHELL"));
+#endif
+}
+
 void Profile::fillTableWithDefaultNames()
 {
     static bool filledDefaults = false;
@@ -169,9 +207,9 @@ void Profile::useBuiltin()
     setProperty(Name, i18nc("Name of the built-in profile", BUILTIN_UNTRANSLATED_NAME_CHAR));
     setProperty(UntranslatedName, QString::fromLatin1(BUILTIN_UNTRANSLATED_NAME_CHAR));
     setProperty(Path, BUILTIN_MAGIC_PATH);
-    setProperty(Command, QString::fromUtf8(qgetenv("SHELL")));
+    setProperty(Command, defaultShell());
     // See Pty.cpp on why Arguments is populated
-    setProperty(Arguments, QStringList{QString::fromUtf8(qgetenv("SHELL"))});
+    setProperty(Arguments, QStringList{defaultShell()});
     setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
     setProperty(DefaultEncoding, QLatin1String(QTextCodec::codecForLocale()->name()));
     // Built-in profile should not be shown in menus

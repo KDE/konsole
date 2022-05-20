@@ -23,4 +23,5 @@ target_link_libraries(
     konsolecolorscheme
     keyboardtranslator
     konsolehelpers
+    KF5::CoreAddons
 )

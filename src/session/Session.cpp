@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2006-2008 Robert Knight <robertknight@gmail.com>
     SPDX-FileCopyrightText: 1997, 1998 Lars Doelle <lars.doelle@on-line.de>
     SPDX-FileCopyrightText: 2009 Thomas Dreibholz <dreibh@iem.uni-due.de>
+    SPDX-FileCopyrightText: 2022 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -27,6 +28,7 @@
 #include <KLocalizedString>
 #include <KNotification>
 #include <KProcess>
+#include <KPtyDevice>
 #include <KShell>
 #include <kcoreaddons_version.h>
 
@@ -54,6 +56,10 @@
 #if HAVE_GETPWUID
 #include <pwd.h>
 #include <sys/types.h>
+#endif
+
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+#include <KSandbox>
 #endif
 
 using namespace Konsole;
@@ -418,11 +424,24 @@ void Session::run()
 
 #if HAVE_GETPWUID
     auto pw = getpwuid(getuid());
-    // pw may be NULL
-    if (pw != nullptr) {
-        programs.insert(1, QString::fromLocal8Bit(pw->pw_shell));
-    }
     // pw: Do not pass the returned pointer to free.
+    if (pw != nullptr) {
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+        if (KSandbox::isFlatpak()) {
+            QProcess proc;
+            proc.setProgram(QStringLiteral("getent"));
+            proc.setArguments({QStringLiteral("passwd"), QString::number(pw->pw_uid)});
+            KSandbox::startHostProcess(proc);
+            proc.waitForFinished();
+            const auto shell = proc.readAllStandardOutput().simplified().split(':').at(6);
+            programs.insert(1, QString::fromUtf8(shell));
+        } else {
+            programs.insert(1, QString::fromLocal8Bit(pw->pw_shell));
+        }
+#else
+        programs.insert(1, QString::fromLocal8Bit(pw->pw_shell));
+#endif
+    }
 #endif
 
     QString exec;
@@ -458,6 +477,11 @@ void Session::run()
     _shellProcess->setFlowControlEnabled(_flowControlEnabled);
     _shellProcess->setEraseChar(_emulation->eraseChar());
     _shellProcess->setUseUtmp(_addToUtmp);
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+    if (KSandbox::isFlatpak()) {
+        _shellProcess->pty()->setCTtyEnabled(false); // not possibly inside sandbox
+    }
+#endif
 
     // this is not strictly accurate use of the COLORFGBG variable.  This does not
     // tell the terminal exactly which colors are being used, but instead approximates
@@ -476,7 +500,18 @@ void Session::run()
     const QString dbusObject = QStringLiteral("/Sessions/%1").arg(QString::number(_sessionId));
     addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_SESSION=%1").arg(dbusObject));
 
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+    _shellProcess->setProgram(exec);
+    _shellProcess->setArguments(arguments);
+    _shellProcess->setEnvironment(_environment);
+    const auto context = KSandbox::makeHostContext(*_shellProcess);
+    // The Pty class is incredibly janky and will topple over when starting with environment, so unset it again.
+    _shellProcess->setEnvironment({});
+    const auto result = _shellProcess->start(context.program, context.arguments, _environment);
+#else
     int result = _shellProcess->start(exec, arguments, _environment);
+#endif
+
     if (result < 0) {
         terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(QLatin1String(" "))));
         terminalWarning(_shellProcess->errorString());
