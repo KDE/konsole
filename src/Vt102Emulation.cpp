@@ -799,6 +799,10 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     }
 
     if (attribute == 1337) {
+        if (value.startsWith(QLatin1String("ReportCellSize"))) {
+            iTermReportCellSize();
+            return;
+        }
         if (!value.startsWith(QLatin1String("File="))) {
             return;
         }
@@ -1578,6 +1582,17 @@ void Vt102Emulation::reportPixelSize()
              "\033[4;%d;%dt",
              _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight() * _currentScreen->getLines(),
              _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth() * _currentScreen->getColumns());
+    sendString(tmp);
+}
+
+void Vt102Emulation::iTermReportCellSize()
+{
+    char tmp[50];
+    snprintf(tmp,
+             sizeof(tmp),
+             "\033]1337;ReportCellSize=%d.0;%d.0;1.0\007",
+             _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight(),
+             _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth());
     sendString(tmp);
 }
 

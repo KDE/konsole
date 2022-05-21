@@ -163,6 +163,7 @@ private:
     void reportCursorPosition();
     void reportPixelSize();
     void reportCellSize();
+    void iTermReportCellSize();
     void reportSize();
     void reportColor(int c, QColor color);
     void reportTerminalParms(int p);
