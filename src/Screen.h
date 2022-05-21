@@ -452,8 +452,9 @@ public:
      *
      * @param x The column index of the last character in the selection.
      * @param y The line index of the last character in the selection.
+     * @param trimTrailingWhitespace True if trailing whitespace is trimmed from the selection
      */
-    void setSelectionEnd(const int x, const int y);
+    void setSelectionEnd(const int x, const int y, const bool trimTrailingWhitespace);
 
     /**
      * Retrieves the start of the selection or the cursor position if there

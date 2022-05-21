@@ -114,7 +114,7 @@ public:
      * Sets the end of the selection to the given @p line and @p column within
      * the window.
      */
-    void setSelectionEnd(int column, int line);
+    void setSelectionEnd(int column, int line, bool trimTrailingWhitespace);
 
     /**
      * Sets the selection as the range specified by line @p start and line @p

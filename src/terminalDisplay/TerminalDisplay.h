@@ -354,6 +354,11 @@ public:
     // returns 0 - not selecting, 1 - pending selection (button pressed but no movement yet), 2 - selecting
     int selectionState() const;
 
+    bool trimTrailingWhitespace() const
+    {
+        return _trimTrailingSpaces;
+    }
+
     Qt::Edge droppedEdge() const
     {
         return _overlayEdge;

@@ -140,9 +140,9 @@ void ScreenWindow::setSelectionStart(int column, int line, bool columnMode)
     Q_EMIT selectionChanged();
 }
 
-void ScreenWindow::setSelectionEnd(int column, int line)
+void ScreenWindow::setSelectionEnd(int column, int line, bool trimTrailingWhitespace)
 {
-    _screen->setSelectionEnd(column, line + currentLine());
+    _screen->setSelectionEnd(column, line + currentLine(), trimTrailingWhitespace);
 
     _bufferNeedsUpdate = true;
     Q_EMIT selectionChanged();
@@ -153,7 +153,7 @@ void ScreenWindow::setSelectionByLineRange(int start, int end)
     clearSelection();
 
     _screen->setSelectionStart(0, start, false);
-    _screen->setSelectionEnd(windowColumns(), end);
+    _screen->setSelectionEnd(windowColumns(), end, false);
 
     _bufferNeedsUpdate = true;
     Q_EMIT selectionChanged();

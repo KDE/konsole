@@ -24,7 +24,7 @@ void ScreenTest::doLargeScreenCopyVerification(const QString &putToScreen, const
     }
 
     screen.setSelectionStart(0, 0, false);
-    screen.setSelectionEnd(largeScreenColumns, 0);
+    screen.setSelectionEnd(largeScreenColumns, 0, false);
     QCOMPARE(screen.selectedText(Screen::PlainText), expectedSelection);
 }
 
@@ -55,7 +55,7 @@ void ScreenTest::testBlockSelection()
 
     // True here means block selection.
     screen.setSelectionStart(0, 0, true);
-    screen.setSelectionEnd(3, 1);
+    screen.setSelectionEnd(3, 1, false);
 
     // after the resize, the string should be:
     // abcd efgh

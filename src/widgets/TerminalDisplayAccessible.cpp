@@ -93,7 +93,7 @@ void TerminalDisplayAccessible::addSelection(int startOffset, int endOffset)
         return;
     }
     display()->screenWindow()->setSelectionStart(columnForOffset(startOffset), lineForOffset(startOffset), false);
-    display()->screenWindow()->setSelectionEnd(columnForOffset(endOffset), lineForOffset(endOffset));
+    display()->screenWindow()->setSelectionEnd(columnForOffset(endOffset), lineForOffset(endOffset), display()->trimTrailingWhitespace());
 }
 
 QString TerminalDisplayAccessible::attributes(int offset, int *startOffset, int *endOffset) const

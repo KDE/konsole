@@ -1459,7 +1459,7 @@ void Screen::setSelectionStart(const int x, const int y, const bool blockSelecti
     _blockSelectionMode = blockSelectionMode;
 }
 
-void Screen::setSelectionEnd(const int x, const int y)
+void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWhitespace)
 {
     if (_selBegin == -1) {
         return;
@@ -1480,8 +1480,8 @@ void Screen::setSelectionEnd(const int x, const int y)
         _selBottomRight = endPos;
     }
 
-    // Normalize the selection in column mode
     if (_blockSelectionMode) {
+        // Normalize the selection in column mode
         const int topRow = _selTopLeft / _columns;
         const int topColumn = _selTopLeft % _columns;
         const int bottomRow = _selBottomRight / _columns;
@@ -1489,6 +1489,40 @@ void Screen::setSelectionEnd(const int x, const int y)
 
         _selTopLeft = loc(qMin(topColumn, bottomColumn), topRow);
         _selBottomRight = loc(qMax(topColumn, bottomColumn), bottomRow);
+    } else {
+        // Extend the selection to the rightmost column if beyond the last character in the line
+        const int bottomRow = _selBottomRight / _columns;
+        const int bottomColumn = _selBottomRight % _columns;
+
+        bool beyondLastColumn = true;
+        if (bottomRow < _history->getLines()) {
+            ImageLine histLine;
+            const int histLineLen = _history->getLineLen(bottomRow);
+            histLine.resize(histLineLen);
+
+            _history->getCells(bottomRow, 0, histLineLen, histLine.data());
+
+            for (int x = bottomColumn; x < histLineLen; x++) {
+                if (histLine.at(x).isRealCharacter && (!trimTrailingWhitespace || !QChar(histLine.at(x).character).isSpace())) {
+                    beyondLastColumn = false;
+                }
+            }
+        } else {
+            const size_t line = bottomRow - _history->getLines();
+            const int lastColumn = (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
+            const auto *data = _screenLines[line].data();
+            const int length = _screenLines.at(line).count();
+
+            for (int x = bottomColumn; x < lastColumn && x < length; x++) {
+                if (data[x].isRealCharacter && (!trimTrailingWhitespace || !QChar(data[x].character).isSpace())) {
+                    beyondLastColumn = false;
+                }
+            }
+        }
+
+        if (beyondLastColumn) {
+            _selBottomRight = loc(_columns - 1, bottomRow);
+        }
     }
 }
 

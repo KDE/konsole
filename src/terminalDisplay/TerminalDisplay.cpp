@@ -1491,9 +1491,9 @@ void TerminalDisplay::extendSelection(const QPoint &position)
     _pntSel.ry() += _scrollBar->value();
 
     if (_columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode) {
-        _screenWindow->setSelectionEnd(here.x(), here.y());
+        _screenWindow->setSelectionEnd(here.x(), here.y(), _trimTrailingSpaces);
     } else {
-        _screenWindow->setSelectionEnd(here.x() + offset, here.y());
+        _screenWindow->setSelectionEnd(here.x() + offset, here.y(), _trimTrailingSpaces);
     }
 }
 
@@ -1624,7 +1624,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent *ev)
         _actSel = 2; // within selection
 
         _screenWindow->setSelectionStart(bgnSel.x(), bgnSel.y(), false);
-        _screenWindow->setSelectionEnd(endSel.x(), endSel.y());
+        _screenWindow->setSelectionEnd(endSel.x(), endSel.y(), _trimTrailingSpaces);
 
         copyToX11Selection();
     }
@@ -2013,7 +2013,7 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
     }
 
     _iPntSel = findLineEnd(_iPntSel);
-    _screenWindow->setSelectionEnd(_iPntSel.x(), _iPntSel.y());
+    _screenWindow->setSelectionEnd(_iPntSel.x(), _iPntSel.y(), _trimTrailingSpaces);
 
     copyToX11Selection();
 
