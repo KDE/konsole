@@ -129,11 +129,22 @@ protected:
     uint tokenBuffer[MAX_TOKEN_LENGTH]; // FIXME: overflow?
 
 private:
-#define MAXARGS 15
+#define MAXARGS 16
     void addDigit(int dig);
     void addArgument();
-    int argv[MAXARGS] = {};
-    int argc;
+    void addSub();
+
+    struct subParam {
+        int value[MAXARGS];
+        int count;
+    };
+
+    struct {
+        int value[MAXARGS];
+        struct subParam sub[MAXARGS];
+        int count;
+    } params = {};
+
     void initTokenizer();
 
     enum ParserStates {

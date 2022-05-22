@@ -270,28 +270,44 @@ const int MAX_ARGUMENT = 40960;
 /* The tokenizer's state
 
    The state is represented by the buffer (tokenBuffer, tokenBufferPos),
-   and accompanied by decoded arguments kept in (argv,argc).
+   and accompanied by decoded arguments kept in params.
    Note that they are kept internal in the tokenizer.
 */
 
 void Vt102Emulation::resetTokenizer()
 {
     tokenBufferPos = 0;
-    argc = 0;
-    argv[0] = 0;
-    argv[1] = 0;
+    params.count = 0;
+    params.value[0] = 0;
+    params.value[1] = 0;
+    params.sub[0].value[0] = 0;
+    params.sub[0].count = 0;
     tokenState = -1;
 }
 
 void Vt102Emulation::addDigit(int digit)
 {
-    argv[argc] = qMin(10 * argv[argc] + digit, MAX_ARGUMENT);
+    if (params.sub[params.count].count == 0) {
+        params.value[params.count] = qMin(10 * params.value[params.count] + digit, MAX_ARGUMENT);
+    } else {
+        struct subParam *sub = &params.sub[params.count];
+        sub->value[sub->count] = qMin(10 * sub->value[sub->count] + digit, MAX_ARGUMENT);
+    }
 }
 
 void Vt102Emulation::addArgument()
 {
-    argc = qMin(argc + 1, MAXARGS - 1);
-    argv[argc] = 0;
+    params.count = qMin(params.count + 1, MAXARGS - 1);
+    params.value[params.count] = 0;
+    params.sub[params.count].value[0] = 0;
+    params.sub[params.count].count = 0;
+}
+
+void Vt102Emulation::addSub()
+{
+    struct subParam *sub = &params.sub[params.count];
+    sub->count = qMin(sub->count + 1, MAXARGS - 1);
+    sub->value[sub->count] = 0;
 }
 
 void Vt102Emulation::addToCurrentToken(uint cc)
@@ -439,11 +455,7 @@ void Vt102Emulation::clear()
 {
     _nIntermediate = 0;
     _ignore = false;
-    tokenBufferPos = 0;
-    tokenState = -1;
-    argc = 0;
-    argv[0] = 0;
-    argv[1] = 0;
+    resetTokenizer();
 }
 
 #define MAX_INTERMEDIATES 1
@@ -466,7 +478,7 @@ void Vt102Emulation::param(const uint cc)
     } else if (cc == ';') {
         addArgument();
     } else if (cc == ':') {
-        _ignore = true;
+        addSub();
     }
 }
 
@@ -476,39 +488,54 @@ void Vt102Emulation::csi_dispatch(const uint cc)
         return;
     if ((tokenBufferPos == 0 || (tokenBuffer[0] != '?' && tokenBuffer[0] != '!' && tokenBuffer[0] != '=' && tokenBuffer[0] != '>')) && cc < 256
         && (charClass[cc] & CPN) == CPN && _nIntermediate == 0) {
-        processToken(token_csi_pn(cc), argv[0], argv[1]);
+        processToken(token_csi_pn(cc), params.value[0], params.value[1]);
     } else if ((tokenBufferPos == 0 || (tokenBuffer[0] != '?' && tokenBuffer[0] != '!' && tokenBuffer[0] != '=' && tokenBuffer[0] != '>')) && cc < 256
                && (charClass[cc] & CPS) == CPS && _nIntermediate == 0) {
-        processToken(token_csi_ps(cc, argv[0]), argv[1], argv[2]);
+        processToken(token_csi_ps(cc, params.value[0]), params.value[1], params.value[2]);
     } else if (tokenBufferPos != 0 && tokenBuffer[0] == '!') {
         processToken(token_csi_pe(cc), 0, 0);
     } else if (_nIntermediate == 1 && _intermediate[0] == ' ') {
         if (tokenBufferPos == 1) {
             processToken(token_csi_sp(cc), 0, 0);
         } else {
-            processToken(token_csi_psp(cc, argv[0]), 0, 0);
+            processToken(token_csi_psp(cc, params.value[0]), 0, 0);
         }
     } else if (cc == 'y' && _nIntermediate == 1 && _intermediate[0] == '*') {
-        processChecksumRequest(argc, argv);
+        processChecksumRequest(params.count, params.value);
     } else {
-        for (int i = 0; i <= argc; i++) {
+        for (int i = 0; i <= params.count; i++) {
             if (tokenBufferPos != 0 && tokenBuffer[0] == '?') {
-                processToken(token_csi_pr(cc, argv[i]), i, 0);
+                processToken(token_csi_pr(cc, params.value[i]), i, 0);
             } else if (tokenBufferPos != 0 && tokenBuffer[0] == '=') {
                 processToken(token_csi_pq(cc), 0, 0);
             } else if (tokenBufferPos != 0 && tokenBuffer[0] == '>') {
                 processToken(token_csi_pg(cc), 0, 0);
-            } else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i + 1] == 2) {
+            } else if (cc == 'm' && params.count - i >= 4 && (params.value[i] == 38 || params.value[i] == 48) && params.value[i + 1] == 2) {
                 // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
                 i += 2;
-                processToken(token_csi_ps(cc, argv[i - 2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i + 1] << 8) | argv[i + 2]);
+                processToken(token_csi_ps(cc, params.value[i - 2]),
+                             COLOR_SPACE_RGB,
+                             (params.value[i] << 16) | (params.value[i + 1] << 8) | params.value[i + 2]);
                 i += 2;
-            } else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i + 1] == 5) {
+            } else if (cc == 'm' && params.sub[i].count >= 5 && (params.value[i] == 38 || params.value[i] == 48) && params.sub[i].value[1] == 2) {
+                // ESC[ ... 48:2:<id>:<red>:<green>:<blue> ... m -or- ESC[ ... 38:2:<id>:<red>:<green>:<blue> ... m
+                processToken(token_csi_ps(cc, params.value[i]),
+                             COLOR_SPACE_RGB,
+                             (params.sub[i].value[3] << 16) | (params.sub[i].value[4] << 8) | params.sub[i].value[5]);
+            } else if (cc == 'm' && params.sub[i].count == 4 && (params.value[i] == 38 || params.value[i] == 48) && params.sub[i].value[1] == 2) {
+                // ESC[ ... 48:2:<red>:<green>:<blue> ... m -or- ESC[ ... 38:2:<red>:<green>:<blue> ... m
+                processToken(token_csi_ps(cc, params.value[i]),
+                             COLOR_SPACE_RGB,
+                             (params.sub[i].value[2] << 16) | (params.sub[i].value[3] << 8) | params.sub[i].value[4]);
+            } else if (cc == 'm' && params.count - i >= 2 && (params.value[i] == 38 || params.value[i] == 48) && params.value[i + 1] == 5) {
                 // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
                 i += 2;
-                processToken(token_csi_ps(cc, argv[i - 2]), COLOR_SPACE_256, argv[i]);
+                processToken(token_csi_ps(cc, params.value[i - 2]), COLOR_SPACE_256, params.value[i]);
+            } else if (cc == 'm' && params.sub[i].count >= 2 && (params.value[i] == 38 || params.value[i] == 48) && params.sub[i].value[1] == 5) {
+                // ESC[ ... 48:5:<index> ... m -or- ESC[ ... 38:5:<index> ... m
+                processToken(token_csi_ps(cc, params.value[i]), COLOR_SPACE_256, params.sub[i].value[2]);
             } else if (_nIntermediate == 0) {
-                processToken(token_csi_ps(cc, argv[i]), 0, 0);
+                processToken(token_csi_ps(cc, params.value[i]), 0, 0);
             }
         }
     }
@@ -2640,13 +2667,13 @@ void Vt102Emulation::sixelQuery(int q)
 {
     char tmp[30];
     if (q == 1) {
-        if (argv[1] == 1 || argv[1] == 4) {
+        if (params.value[1] == 1 || params.value[1] == 4) {
             snprintf(tmp, sizeof(tmp), "\033[?1;0;%dS", MAX_SIXEL_COLORS);
             sendString(tmp);
         }
     }
     if (q == 2) {
-        if (argv[1] == 1 || argv[1] == 4) {
+        if (params.value[1] == 1 || params.value[1] == 4) {
             snprintf(tmp, sizeof(tmp), "\033[?2;0;%d;%dS", MAX_IMAGE_DIM, MAX_IMAGE_DIM);
             sendString(tmp);
         }
@@ -2937,19 +2964,19 @@ bool Vt102Emulation::processSixel(uint cc)
         }
         addArgument();
 
-        if (argc == 4) {
+        if (params.count == 4) {
             // We just ignore the pixel aspect ratio, it's dumb
-            // const int pixelWidth = argv[0];
-            // const int pixelHeight = argv[1];
+            // const int pixelWidth = params.value[0];
+            // const int pixelHeight = params.value[1];
 
             if (!m_SixelStarted) {
-                if (argv[1] == 0 || argv[0] == 0) {
+                if (params.value[1] == 0 || params.value[0] == 0) {
                     m_aspect = qMakePair(1, 1);
                 } else {
-                    m_aspect = qMakePair(argv[0], argv[1]);
+                    m_aspect = qMakePair(params.value[0], params.value[1]);
                 }
-                const int width = argv[2];
-                const int height = argv[3];
+                const int width = params.value[2];
+                const int height = params.value[3];
                 SixelModeEnable(width, height);
             }
             resetTokenizer();
@@ -2969,7 +2996,7 @@ bool Vt102Emulation::processSixel(uint cc)
             return true;
         }
 
-        SixelCharacterAdd(cc, argv[0]);
+        SixelCharacterAdd(cc, params.value[0]);
         resetTokenizer();
         return true;
     }
@@ -2979,24 +3006,24 @@ bool Vt102Emulation::processSixel(uint cc)
             return true;
         }
         addArgument();
-        if (argc < 1) {
+        if (params.count < 1) {
             return false;
         }
-        const int index = argv[0];
-        if (argc == 5) {
-            const int colorspace = argv[1];
+        const int index = params.value[0];
+        if (params.count == 5) {
+            const int colorspace = params.value[1];
             switch (colorspace) {
             case 1:
                 // Confusingly it is in HLS order...
-                SixelColorChangeHSL(index, argv[2], argv[4], argv[3]);
+                SixelColorChangeHSL(index, params.value[2], params.value[4], params.value[3]);
                 break;
             case 2:
-                SixelColorChangeRGB(index, argv[2], argv[3], argv[4]);
+                SixelColorChangeRGB(index, params.value[2], params.value[3], params.value[4]);
                 break;
             default:
                 return false;
             }
-        } else if (argc == 1 && index >= 0) { // Negative index is an error. Too large index is ignored
+        } else if (params.count == 1 && index >= 0) { // Negative index is an error. Too large index is ignored
             if (index < MAX_SIXEL_COLORS) {
                 m_currentColor = index;
             }
