@@ -1622,9 +1622,7 @@ int Screen::copyLineToStream(int line,
         // ensure that start position is before end of line
         start = qBound(0, start, lineLength - 1);
 
-        // retrieve line from history buffer.  It is assumed
-        // that the history buffer does not store trailing white space
-        // at the end of the line, so it does not need to be trimmed here
+        // retrieve line from history buffer
         if (count == -1) {
             count = lineLength - start;
         } else {
@@ -1640,6 +1638,13 @@ int Screen::copyLineToStream(int line,
 
         if (_history->isWrappedLine(line)) {
             currentLineProperties |= LINE_WRAPPED;
+        } else {
+            if (options.testFlag(TrimTrailingWhitespace)) {
+                // ignore trailing white space at the end of the line
+                while (count > 0 && QChar(characterBuffer[start + count - 1].character).isSpace()) {
+                    count--;
+                }
+            }
         }
     } else {
         if (count == -1) {
