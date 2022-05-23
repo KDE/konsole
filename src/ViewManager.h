@@ -318,6 +318,7 @@ private Q_SLOTS:
     void splitTopBottom();
     void expandActiveContainer();
     void shrinkActiveContainer();
+    void equalSizeAllContainers();
 
     // called when the "Detach View" menu item is selected
     void detachActiveView();

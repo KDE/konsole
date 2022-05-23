@@ -695,6 +695,14 @@ Any output on one view is duplicated in the other view.
 </para></listitem>
 </varlistentry>
 
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>\</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Equal size to all views</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Sets the same size for all views</action>
+</para></listitem>
+</varlistentry>
 
 <varlistentry>
 <term><menuchoice>
