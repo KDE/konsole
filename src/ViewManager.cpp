@@ -274,6 +274,14 @@ void ViewManager::setupActions()
     _multiTabOnlyActions << action;
     _viewContainer->addAction(action);
 
+    action = new QAction(this);
+    action->setText(i18nc("@action:inmenu", "Equal size to all views"));
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_Backslash);
+    action->setEnabled(false);
+    collection->addAction(QStringLiteral("equal-size-view"), action);
+    connect(action, &QAction::triggered, this, &ViewManager::equalSizeAllContainers);
+    _multiSplitterOnlyActions << action;
+
     // _viewSplitter->addAction(lastUsedViewReverseAction);
     const int SWITCH_TO_TAB_COUNT = 19;
     for (int i = 0; i < SWITCH_TO_TAB_COUNT; ++i) {
@@ -630,6 +638,40 @@ void ViewManager::expandActiveContainer()
 void ViewManager::shrinkActiveContainer()
 {
     _viewContainer->activeViewSplitter()->adjustActiveTerminalDisplaySize(-10);
+}
+
+void ViewManager::equalSizeAllContainers()
+{
+    auto processChildrens = [&processChildrens](ViewSplitter *viewSplitter) -> void {
+        // divide the size of the parent widget by the amount of children splits
+        auto setEqualSizes = [](ViewSplitter *viewSplitter) -> void {
+            auto hintSize = viewSplitter->size();
+            auto sizes = viewSplitter->sizes();
+            auto sharedSize = hintSize / sizes.size();
+            if (viewSplitter->orientation() == Qt::Horizontal) {
+                for (auto &&size : sizes) {
+                    size = sharedSize.width();
+                }
+            } else {
+                for (auto &&size : sizes) {
+                    size = sharedSize.height();
+                }
+            }
+            // set new sizes
+            viewSplitter->setSizes(sizes);
+        };
+
+        setEqualSizes(viewSplitter);
+
+        // set equal sizes for each splitter children
+        for (auto &&child : viewSplitter->children()) {
+            auto childViewSplitter = qobject_cast<ViewSplitter *>(child);
+            if (childViewSplitter) {
+                processChildrens(childViewSplitter);
+            }
+        }
+    };
+    processChildrens(_viewContainer->activeViewSplitter()->getToplevelSplitter());
 }
 
 SessionController *ViewManager::createController(Session *session, TerminalDisplay *view)

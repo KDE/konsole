@@ -25,6 +25,7 @@
                 <Action name="expand-active-view"/>
                 <Action name="shrink-active-view"/>
                 <Action name="toggle-maximize-current-view"/>
+                <Action name="equal-size-view"/>
             </Menu>
             <Separator/>
             <Action name="detach-tab" />
