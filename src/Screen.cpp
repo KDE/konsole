@@ -26,7 +26,6 @@
 #include "characters/ExtendedCharTable.h"
 #include "history/HistoryScrollNone.h"
 #include "history/HistoryType.h"
-#include "profile/Profile.h"
 
 #ifdef HAVE_MALLOC_TRIM
 // For malloc_trim, which is a GNU extension
