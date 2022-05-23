@@ -16,6 +16,8 @@
 #include <QTabWidget>
 #include <QTemporaryFile>
 #include <QTimer>
+#include <kmessagebox.h>
+#include <kstandardguiitem.h>
 
 struct QuickCommandsWidget::Private {
     QuickCommandsModel *model = nullptr;
@@ -176,8 +178,15 @@ void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
 void QuickCommandsWidget::runCommand()
 {
     if (!ui->warning->toPlainText().isEmpty()) {
-        QMessageBox::warning(this, QStringLiteral("Shell Errors"), i18n("Please fix all the warnings before trying to execute this script"));
-        return;
+        auto choice = KMessageBox::questionYesNo(this,
+                                                 i18n("There are some errors on the script, do you really want to execute it?"),
+                                                 i18n("Shell Errors"),
+                                                 KStandardGuiItem::yes(),
+                                                 KStandardGuiItem::no(),
+                                                 QStringLiteral("quick-commands-question"));
+        if (choice == KMessageBox::ButtonCode::No) {
+            return;
+        }
     }
 
     const QString command = ui->command->toPlainText();
