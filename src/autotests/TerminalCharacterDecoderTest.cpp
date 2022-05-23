@@ -20,10 +20,8 @@
 
 using namespace Konsole;
 
-Character *TerminalCharacterDecoderTest::convertToCharacter(const QString &text, QVector<RenditionFlags> renditions)
+void TerminalCharacterDecoderTest::convertToCharacter(Character *charResult, const QString &text, QVector<RenditionFlags> renditions)
 {
-    auto charResult = new Character[text.size()];
-
     // Force renditions size to match that of text; default will be DEFAULT_RENDITION.
     if (renditions.size() < text.size()) {
         renditions.resize(text.size());
@@ -32,7 +30,6 @@ Character *TerminalCharacterDecoderTest::convertToCharacter(const QString &text,
         charResult[i] = Character(text.at(i).unicode());
         charResult[i].rendition = renditions.at(i);
     }
-    return charResult;
 }
 
 void TerminalCharacterDecoderTest::testPlainTextDecoder_data()
@@ -61,15 +58,16 @@ void TerminalCharacterDecoderTest::testPlainTextDecoder()
     QFETCH(QString, result);
 
     TerminalCharacterDecoder *decoder = new PlainTextDecoder();
-    auto testCharacters = convertToCharacter(text, renditions);
+    auto testCharacters = new Character[text.size()];
+    convertToCharacter(testCharacters, text, renditions);
     QString outputString;
     QTextStream outputStream(&outputString);
     decoder->begin(&outputStream);
     decoder->decodeLine(testCharacters, text.size(), /* ignored */ LINE_DEFAULT);
     decoder->end();
-    QCOMPARE(outputString, result);
     delete[] testCharacters;
     delete decoder;
+    QCOMPARE(outputString, result);
 }
 
 void TerminalCharacterDecoderTest::testHTMLDecoder_data()
@@ -104,15 +102,16 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
     QFETCH(QString, result);
 
     TerminalCharacterDecoder *decoder = new HTMLDecoder();
-    auto testCharacters = convertToCharacter(text, renditions);
+    auto testCharacters = new Character[text.size()];
+    convertToCharacter(testCharacters, text, renditions);
     QString outputString;
     QTextStream outputStream(&outputString);
     decoder->begin(&outputStream);
     decoder->decodeLine(testCharacters, text.size(), /* ignored */ LINE_DEFAULT);
     decoder->end();
-    QCOMPARE(outputString, result);
     delete[] testCharacters;
     delete decoder;
+    QCOMPARE(outputString, result);
 }
 
 QTEST_GUILESS_MAIN(TerminalCharacterDecoderTest)

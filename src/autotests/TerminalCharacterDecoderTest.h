@@ -19,7 +19,7 @@ class TerminalCharacterDecoderTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    Character *convertToCharacter(const QString &text, QVector<RenditionFlags> renditions);
+    void convertToCharacter(Character *charResult, const QString &text, QVector<RenditionFlags> renditions);
     void testPlainTextDecoder();
     void testPlainTextDecoder_data();
     void testHTMLDecoder();
