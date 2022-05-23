@@ -1636,6 +1636,12 @@ int Screen::copyLineToStream(int line,
 
         _history->getCells(line, start, count, characterBuffer);
 
+        // Exclude trailing empty cells from count and don't bother processing them further.
+        // See the comment on the similar case for screen lines for an explanation.
+        while (count > 0 && !characterBuffer[start + count - 1].isRealCharacter) {
+            count--;
+        }
+
         if (_history->isWrappedLine(line)) {
             currentLineProperties |= LINE_WRAPPED;
         } else {
