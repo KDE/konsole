@@ -38,6 +38,7 @@ void DBusTest::initTestCase()
     QStringList allServices = serviceReply;
     for (QStringList::const_iterator it = allServices.constBegin(), end = allServices.constEnd(); it != end; ++it) {
         const QString service = *it;
+        qDebug()<<"SessionBus service: "<<service;
         if (service.startsWith(interfaceName)) {
             konsoleServices << service;
         }
