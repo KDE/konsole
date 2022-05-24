@@ -45,11 +45,13 @@ void PartTest::initTestCase()
 
 void PartTest::testFdShell()
 {
+    qDebug()<<"testFdShell running shell...";
     testFd(true);
 }
 
 void PartTest::testFdStandalone()
 {
+    qDebug()<<"testFdShell without running shell...";
     testFd(false);
 }
 
@@ -71,6 +73,7 @@ void PartTest::testFd(bool runShell)
         QSKIP("ping command not found.");
         return;
     }
+    qDebug()<<"Found ping "<<pingExe;
 
     // create a Konsole part and attempt to connect to it
     KParts::Part *terminalPart = createPart();
@@ -91,6 +94,7 @@ void PartTest::testFd(bool runShell)
     // test that the 2nd argument of openTeletype is optional,
     // to run without shell
     if (runShell) {
+qDebug()<<"runShell yes";
         // connect to an existing pty
         bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype", Qt::DirectConnection, Q_ARG(int, fd));
         QVERIFY(result);
@@ -105,6 +109,7 @@ void PartTest::testFd(bool runShell)
     // as soon as it becomes available and the terminal will not display any output
     ptyProcess.pty()->setSuspended(true);
 
+qDebug()<<"Opening dialog for ping...";
     QPointer<QDialog> dialog = new QDialog();
     auto layout = new QVBoxLayout(dialog.data());
     auto explanation = runShell ? QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")
