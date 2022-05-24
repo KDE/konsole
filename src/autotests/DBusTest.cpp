@@ -60,6 +60,8 @@ void DBusTest::initTestCase()
     profile->setProperty(Profile::LocalTabTitleFormat, QStringLiteral("%D"));
     profileWriter.writeProfile(_testProfilePath, profile);
 
+qDebug()<<_testProfilePath<<";"<<_testProfileEnv<<";"<<profile->command();
+qDebug()<<QString::fromUtf8(qgetenv("SHELL"));
     // Create a new Konsole with a separate process id
     _process = new QProcess;
     _process->setProcessChannelMode(QProcess::ForwardedChannels);
