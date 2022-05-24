@@ -61,14 +61,14 @@ add_test(NAME KeyboardTranslatorTest COMMAND KeyboardTranslatorTest)
 target_link_libraries(KeyboardTranslatorTest ${KONSOLE_TEST_LIBS})
 endif(BUILD_SHARED_LIBS)
 
-if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(PartTest PartTest.cpp)
     ecm_mark_as_test(PartTest)
     ecm_mark_nongui_executable(PartTest)
     add_test(NAME PartTest COMMAND PartTest)
     target_link_libraries(PartTest KF5::XmlGui KF5::Parts KF5::Pty
                                ${KONSOLE_TEST_LIBS})
-endif()
+#endif()
 
 add_executable(ProfileTest ProfileTest.cpp)
 ecm_mark_as_test(ProfileTest)
