@@ -666,352 +666,244 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
         if (getMode(MODE_Ansi)) {
             // First, process characters that act the same on all states, i.e.
             // coming from "anywhere" in the VT100.net diagram.
-            switch (cc) {
-            case 0x1B:
+            if (cc == 0x1B) {
                 switchState(Escape, cc);
                 clear();
-                break;
-            case 0x9B:
+            } else if (cc == 0x9B) {
                 switchState(CsiEntry, cc);
                 clear();
-                break;
-            case 0x90:
+            } else if (cc == 0x90) {
                 switchState(DcsEntry, cc);
                 clear();
-                break;
-            case 0x9D:
+            } else if (cc == 0x9D) {
                 osc_start();
                 switchState(OscString, cc);
-                break;
-            case 0x18:
-            case 0x1A:
-            case 0x80 ... 0x8F:
-            case 0x91 ... 0x97:
-            case 0x99 ... 0x9A:
+            } else if (cc == 0x18 || cc == 0x1A || (cc >= 0x80 && cc <= 0x8F) || (cc >= 0x91 && cc <= 0x97) || (cc >= 0x99 && cc <= 0x9A)) {
                 processToken(token_ctl(cc + '@'), 0, 0);
                 switchState(Ground, cc);
-                break;
-            case 0x9C:
+            } else if (cc == 0x9C) {
                 // no action
                 switchState(Ground, cc);
-                break;
-            case 0x98:
-            case 0x9E:
-            case 0x9F:
+            } else if (cc == 0x98 || cc == 0x9E || cc == 0x9F) {
                 apc_start();
                 switchState(SosPmApcString, cc);
-                break;
 
-            default:
+            } else {
                 // Now take the current state into account
                 switch (_state) {
                 case Ground:
-                    switch (cc) {
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    default:
+                    } else {
                         _currentScreen->displayCharacter(applyCharset(cc));
-                        break;
                     }
                     break;
                 case Escape:
-                    switch (cc) {
-                    case 0x5B:
+                    if (cc == 0x5B) {
                         switchState(CsiEntry, cc);
                         clear();
-                        break;
-                    case 0x30 ... 0x4F:
-                    case 0x51 ... 0x57:
-                    case 0x59 ... 0x5A:
-                    case 0x5C:
-                    case 0x60 ... 0x7E:
+                    } else if ((cc >= 0x30 && cc <= 0x4F) || (cc >= 0x51 && cc <= 0x57) || (cc >= 0x59 && cc <= 0x5A) || cc == 0x5C
+                               || (cc >= 0x60 && cc <= 0x7E)) {
                         esc_dispatch(cc);
                         switchState(Ground, cc);
-                        break;
-                    case 0x20 ... 0x2F:
+                    } else if (cc >= 0x20 && cc <= 0x2F) {
                         collect(cc);
                         switchState(EscapeIntermediate, cc);
-                        break;
-                    case 0x5D:
+                    } else if (cc == 0x5D) {
                         osc_start();
                         switchState(OscString, cc);
-                        break;
-                    case 0x50:
+                    } else if (cc == 0x50) {
                         switchState(DcsEntry, cc);
                         clear();
-                        break;
-                    case 0x58:
-                    case 0x5E:
-                    case 0x5F:
+                    } else if (cc == 0x58 || cc == 0x5E || cc == 0x5F) {
                         apc_start();
                         switchState(SosPmApcString, cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case EscapeIntermediate:
-                    switch (cc) {
-                    case 0x30 ... 0x7E:
+                    if (cc >= 0x30 && cc <= 0x7E) {
                         esc_dispatch(cc);
                         switchState(Ground, cc);
-                        break;
-                    case 0x20 ... 0x2F:
+                    } else if (cc >= 0x20 && cc <= 0x2F) {
                         collect(cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case CsiEntry:
-                    switch (cc) {
-                    case 0x40 ... 0x7E:
+                    if (cc >= 0x40 && cc <= 0x7E) {
                         csi_dispatch(cc);
                         switchState(Ground, cc);
-                        break;
-                    case 0x30 ... 0x3B: // recognize 0x3A as part of params
+                    } else if (cc >= 0x30 && cc <= 0x3B) { // recognize 0x3A as part of params
                         param(cc);
                         switchState(CsiParam, cc);
-                        break;
-                    case 0x3C ... 0x3F:
+                    } else if (cc >= 0x3C && cc <= 0x3F) {
                         collect(cc);
                         switchState(CsiParam, cc);
-                        break;
-                    case 0x20 ... 0x2F:
+                    } else if (cc >= 0x20 && cc <= 0x2F) {
                         collect(cc);
                         switchState(CsiIntermediate, cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case CsiParam:
-                    switch (cc) {
-                    case 0x40 ... 0x7E:
+                    if (cc >= 0x40 && cc <= 0x7E) {
                         csi_dispatch(cc);
                         switchState(Ground, cc);
-                        break;
-                    case 0x30 ... 0x3B: // recognize 0x3A as part of params
+                    } else if (cc >= 0x30 && cc <= 0x3B) { // recognize 0x3A as part of params
                         param(cc);
-                        break;
-                    case 0x3C ... 0x3F:
+                    } else if (cc >= 0x3C && cc <= 0x3F) {
                         switchState(CsiIgnore, cc);
-                        break;
-                    case 0x20 ... 0x2F:
+                    } else if (cc >= 0x20 && cc <= 0x2F) {
                         collect(cc);
                         switchState(CsiIntermediate, cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case CsiIntermediate:
-                    switch (cc) {
-                    case 0x40 ... 0x7E:
+                    if (cc >= 0x40 && cc <= 0x7E) {
                         csi_dispatch(cc);
                         switchState(Ground, cc);
-                        break;
-                    case 0x20 ... 0x2F:
+                    } else if (cc >= 0x20 && cc <= 0x2F) {
                         collect(cc);
-                        break;
-                    case 0x30 ... 0x3F:
+                    } else if (cc >= 0x30 && cc <= 0x3F) {
                         switchState(CsiIgnore, cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case CsiIgnore:
-                    switch (cc) {
-                    case 0x40 ... 0x7E:
+                    if (cc >= 0x40 && cc <= 0x7E) {
                         switchState(Ground, cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x20 ... 0x3F:
-                    case 0x7F:
+                    } else if ((cc >= 0x20 && cc <= 0x3F) || cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case DcsEntry:
-                    switch (cc) {
-                    case 0x40 ... 0x7E:
+                    if (cc >= 0x40 && cc <= 0x7E) {
                         hook(cc);
                         switchState(DcsPassthrough, cc);
-                        break;
-                    case 0x30 ... 0x3B: // recognize 0x3A as part of params
+                    } else if (cc >= 0x30 && cc <= 0x3B) { // recognize 0x3A as part of params
                         param(cc);
                         switchState(DcsParam, cc);
-                        break;
-                    case 0x3C ... 0x3F:
+                    } else if (cc >= 0x3C && cc <= 0x3F) {
                         collect(cc);
                         switchState(DcsParam, cc);
-                        break;
-                    case 0x20 ... 0x2F:
+                    } else if (cc >= 0x20 && cc <= 0x2F) {
                         collect(cc);
                         switchState(DcsIntermediate, cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case DcsParam:
-                    switch (cc) {
-                    case 0x40 ... 0x7E:
+                    if (cc >= 0x40 && cc <= 0x7E) {
                         hook(cc);
                         switchState(DcsPassthrough, cc);
-                        break;
-                    case 0x30 ... 0x3B: // recognize 0x3A as part of params
+                    } else if (cc >= 0x30 && cc <= 0x3B) { // recognize 0x3A as part of params
                         param(cc);
-                        break;
-                    case 0x3C ... 0x3F:
+                    } else if (cc >= 0x3C && cc <= 0x3F) {
                         switchState(DcsIgnore, cc);
-                        break;
-                    case 0x20 ... 0x2F:
+                    } else if (cc >= 0x20 && cc <= 0x2F) {
                         collect(cc);
                         switchState(DcsIntermediate, cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case DcsIntermediate:
-                    switch (cc) {
-                    case 0x40 ... 0x7E:
+                    if (cc >= 0x40 && cc <= 0x7E) {
                         hook(cc);
                         switchState(DcsPassthrough, cc);
-                        break;
-                    case 0x20 ... 0x2F:
+                    } else if (cc >= 0x20 && cc <= 0x2F) {
                         collect(cc);
-                        break;
-                    case 0x30 ... 0x3F:
+                    } else if (cc >= 0x30 && cc <= 0x3F) {
                         switchState(DcsIgnore, cc);
-                        break;
-                    case 0 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case DcsPassthrough:
-                    switch (cc) {
-                    case 0 ... 0x7E: // 0x18, 0x1A, 0x1B already taken care of
+                    if (cc <= 0x7E) { // 0x18, 0x1A, 0x1B already taken care of
                         put(cc);
-                        break;
-                    case 0x9C:
+                    } else if (cc == 0x9C) {
                         switchState(Ground, cc);
-                        break;
-                    case 0x7F:
+                    } else if (cc == 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case DcsIgnore:
-                    switch (cc) {
-                    case 0x9C:
+                    if (cc == 0x9C) {
                         switchState(Ground, cc);
-                        break;
-                    case 0 ... 0x7F:
+                    } else if (cc <= 0x7F) {
                         // ignore
-                        break;
                     }
                     break;
                 case OscString:
-                    switch (cc) {
-                    case 0x20 ... 0x7F:
+                    if (cc >= 0x20 && cc <= 0x7F) {
                         osc_put(cc);
-                        break;
-                    case 0x07: // recognize BEL as OSC terminator
-                    case 0x9C:
+                    } else if (cc == 0x07 // recognize BEL as OSC terminator
+                               || cc == 0x9C) {
                         switchState(Ground, cc);
-                        break;
-                    case 0 ... 0x06:
-                    case 0x08 ... 0x1F: // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x06 || (cc >= 0x08 && cc <= 0x1F)) { // 0x18, 0x1A, 0x1B already taken care of.
                         // ignore
-                        break;
                     }
                     break;
                 case SosPmApcString:
-                    switch (cc) {
-                    case 0 ... 0x7F: // 0x18, 0x1A, 0x1B already taken care of.
+                    if (cc <= 0x7F) { // 0x18, 0x1A, 0x1B already taken care of.
                         apc_put(cc);
                         // ignore
-                        break;
-                    case 0x9C:
+                    } else if (cc == 0x9C) {
                         switchState(Ground, cc);
-                        break;
                     }
                     break;
                 }
-                break;
             }
         } else {
             // VT52 Mode
 
             // First, process characters that act the same on all states
-            switch (cc) {
-            case 0x18:
-            case 0x1A:
+            if (cc == 0x18 || cc == 0x1A) {
                 processToken(token_ctl(cc + '@'), 0, 0);
                 switchState(Ground, cc);
-                break;
-            case 0x1B:
+            } else if (cc == 0x1B) {
                 switchState(Vt52Escape, cc);
-                break;
-            case 0 ... 0x17:
-            case 0x19:
-            case 0x1C ... 0x1F:
+            } else if (cc <= 0x17 || cc == 0x19 || (cc >= 0x1C && cc <= 0x1F)) {
                 processToken(token_ctl(cc + '@'), 0, 0);
-                break;
-            default:
+            } else {
                 // Now take the current state into account
                 switch (_state) {
                 case Ground:
                     _currentScreen->displayCharacter(applyCharset(cc));
                     break;
                 case Vt52Escape:
-                    switch (cc) {
-                    case 'Y':
+                    if (cc == 'Y') {
                         switchState(Vt52CupRow, cc);
-                        break;
-                    case 0x20 ... 'X':
-                    case 'Z' ... 0x7F:
+                    } else if ((cc >= 0x20 && cc <= 'X') || (cc >= 'Z' && cc <= 0x7F)) {
                         processToken(token_vt52(cc), 0, 0);
                         switchState(Ground, cc);
-                        break;
                     }
                     break;
                 case Vt52CupRow:
@@ -1025,7 +917,6 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 default:
                     break;
                 }
-                break;
             }
         }
     }
