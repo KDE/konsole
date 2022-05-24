@@ -52,6 +52,8 @@ void DBusTest::initTestCase()
         _testProfileName = QStringLiteral("konsole-dbus-test-profile-%1").arg(QRandomGenerator::global()->generate());
         profile->setProperty(Profile::UntranslatedName, _testProfileName);
         profile->setProperty(Profile::Name, _testProfileName);
+        profile->setProperty(Profile::Command, QStringLiteral("/bin/csh"));
+        profile->setProperty(Profile::Arguments, QStringLiteral("/bin/csh"));
         _testProfilePath = profileWriter.getPath(profile);
     } while (QFile::exists(_testProfilePath));
     _testProfileEnv = QStringLiteral("TEST_PROFILE=%1").arg(_testProfileName);
