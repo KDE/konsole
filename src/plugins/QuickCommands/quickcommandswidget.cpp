@@ -19,6 +19,11 @@
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 
+#include <KTextEditor/Document>
+#include <KTextEditor/Editor>
+#include <KTextEditor/View>
+#include <KTextEditor/ConfigInterface>
+
 struct QuickCommandsWidget::Private {
     QuickCommandsModel *model = nullptr;
     FilterModel *filterModel = nullptr;
@@ -53,6 +58,13 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
         priv->filterModel->setFilterRegularExpression(ui->filterLine->text());
         priv->filterModel->invalidate();
     });
+
+    auto doc = KTextEditor::Editor::instance()->createDocument(this);
+    auto view = doc->createView(this);
+    auto ciface = qobject_cast<KTextEditor::ConfigInterface*>(view);
+    ciface->setConfigValue(QStringLiteral("line-numbers"), true);
+    ciface->setConfigValue(QStringLiteral("modification-markers"), true);
+    ui->tabWidget->insertTab(0, view, i18n("Command"));
 
     ui->commandsTreeView->setModel(priv->filterModel);
     ui->commandsTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
