@@ -2,6 +2,7 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
 
+
 ### Handle DragonFlyBSD here instead of using __DragonFly__
 IF(${CMAKE_SYSTEM_NAME} MATCHES "DragonFly")
   set(HAVE_OS_DRAGONFLYBSD 1)
