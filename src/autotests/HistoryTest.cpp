@@ -11,47 +11,44 @@
 
 // Konsole
 #include "../Emulation.h"
-#include "../history/HistoryScrollFile.h"
-#include "../history/HistoryScrollNone.h"
-#include "../history/HistoryTypeFile.h"
-#include "../history/HistoryTypeNone.h"
-#include "../history/compact/CompactHistoryScroll.h"
-#include "../history/compact/CompactHistoryType.h"
 #include "../session/Session.h"
 
 using namespace Konsole;
 
+void HistoryTest::initTestCase()
+{
+}
+
+void HistoryTest::cleanupTestCase()
+{
+    delete[] testImage;
+    delete historyTypeNone;
+    delete historyTypeFile;
+    delete historyTypeCompact;
+}
+
 void HistoryTest::testHistoryNone()
 {
-    HistoryType *history;
-
-    history = new HistoryTypeNone();
-    QCOMPARE(history->isEnabled(), false);
-    QCOMPARE(history->isUnlimited(), false);
-    QCOMPARE(history->maximumLineCount(), 0);
-    delete history;
+    historyTypeNone = new HistoryTypeNone();
+    QCOMPARE(historyTypeNone->isEnabled(), false);
+    QCOMPARE(historyTypeNone->isUnlimited(), false);
+    QCOMPARE(historyTypeNone->maximumLineCount(), 0);
 }
 
 void HistoryTest::testHistoryFile()
 {
-    HistoryType *history;
-
-    history = new HistoryTypeFile();
-    QCOMPARE(history->isEnabled(), true);
-    QCOMPARE(history->isUnlimited(), true);
-    QCOMPARE(history->maximumLineCount(), -1);
-    delete history;
+    historyTypeFile = new HistoryTypeFile();
+    QCOMPARE(historyTypeFile->isEnabled(), true);
+    QCOMPARE(historyTypeFile->isUnlimited(), true);
+    QCOMPARE(historyTypeFile->maximumLineCount(), -1);
 }
 
 void HistoryTest::testCompactHistory()
 {
-    HistoryType *history;
-
-    history = new CompactHistoryType(42);
-    QCOMPARE(history->isEnabled(), true);
-    QCOMPARE(history->isUnlimited(), false);
-    QCOMPARE(history->maximumLineCount(), 42);
-    delete history;
+    historyTypeCompact = new CompactHistoryType(42);
+    QCOMPARE(historyTypeCompact->isEnabled(), true);
+    QCOMPARE(historyTypeCompact->isUnlimited(), false);
+    QCOMPARE(historyTypeCompact->maximumLineCount(), 42);
 }
 
 void HistoryTest::testEmulationHistory()
@@ -128,10 +125,7 @@ void HistoryTest::testHistoryScroll()
 
 void HistoryTest::testHistoryReflow()
 {
-    const char testString[] = "abcdefghijklmnopqrstuvwxyz1234567890";
-    const int testStringSize = sizeof(testString) / sizeof(char) - 1;
-    // testImage leaks on any failure
-    auto testImage = new Character[testStringSize];
+    testImage = new Character[testStringSize];
     Character testChar;
     for (int i = 0; i < testStringSize; i++) {
         testImage[i] = Character((uint)testString[i]);
@@ -182,7 +176,6 @@ void HistoryTest::testHistoryReflow()
     historyScrollFile->getCells(testStringSize - 1, 0, 1, &testChar);
     QCOMPARE(testChar, testImage[testStringSize - 1]);
 
-    delete[] testImage;
 }
 
 void HistoryTest::testHistoryTypeChange()

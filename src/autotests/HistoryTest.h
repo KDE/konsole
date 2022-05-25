@@ -9,6 +9,14 @@
 
 #include <kde_terminal_interface.h>
 
+#include "../characters/Character.h"
+#include "../history/HistoryScrollFile.h"
+#include "../history/HistoryScrollNone.h"
+#include "../history/HistoryTypeFile.h"
+#include "../history/HistoryTypeNone.h"
+#include "../history/compact/CompactHistoryScroll.h"
+#include "../history/compact/CompactHistoryType.h"
+
 namespace Konsole
 {
 class HistoryTest : public QObject
@@ -16,6 +24,8 @@ class HistoryTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
+    void initTestCase();
+    void cleanupTestCase();
     void testHistoryNone();
     void testHistoryFile();
     void testCompactHistory();
@@ -25,6 +35,12 @@ private Q_SLOTS:
     void testHistoryTypeChange();
 
 private:
+    static constexpr const char testString[] = "abcdefghijklmnopqrstuvwxyz1234567890";
+    static constexpr const int testStringSize = sizeof(testString) / sizeof(char) - 1;
+    Character *testImage = nullptr;
+    HistoryType *historyTypeNone = nullptr;
+    HistoryType *historyTypeFile = nullptr;
+    HistoryType *historyTypeCompact = nullptr;
 };
 
 }
