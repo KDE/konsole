@@ -246,7 +246,11 @@ void SSHManagerTreeWidget::editSshInfo()
     ui->name->setText(data.name);
     ui->port->setText(data.port);
     ui->sshkey->setText(data.sshKey);
-    ui->profile->setCurrentText(data.profileName);
+    if (data.profileName.isEmpty()) {
+        ui->profile->setCurrentIndex(0);
+    } else {
+        ui->profile->setCurrentText(data.profileName);
+    }
     ui->username->setText(data.username);
     ui->useSshConfig->setCheckState(data.useSshConfig ? Qt::Checked : Qt::Unchecked);
 
