@@ -879,6 +879,8 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                         switchState(Ground, cc);
                     }
                     break;
+                default:
+                    break;
                 }
             }
         } else {
