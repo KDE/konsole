@@ -65,6 +65,8 @@ public:
     void handleImportedData(bool isImported);
 
 private:
+    void updateProfileList();
+
     std::pair<bool, QString> checkFields() const;
     SSHConfigurationData info() const;
 

@@ -85,8 +85,9 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
         d->filterModel->invalidate();
     });
 
-    ui->profile->setModel(Konsole::ProfileModel::instance());
-    ui->profile->setModelColumn(Konsole::ProfileModel::PROFILE);
+    connect(Konsole::ProfileModel::instance(), &Konsole::ProfileModel::rowsRemoved, this, &SSHManagerTreeWidget::updateProfileList);
+    connect(Konsole::ProfileModel::instance(), &Konsole::ProfileModel::rowsInserted, this, &SSHManagerTreeWidget::updateProfileList);
+    updateProfileList();
 
     ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -131,6 +132,20 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
 }
 
 SSHManagerTreeWidget::~SSHManagerTreeWidget() = default;
+
+void SSHManagerTreeWidget::updateProfileList()
+{
+    ui->profile->clear();
+    ui->profile->addItem(i18n("Don't Change"));
+    auto model = Konsole::ProfileModel::instance();
+    for (int i = 0, end = model->rowCount(QModelIndex()); i < end; i++) {
+        const int column = Konsole::ProfileModel::Column::PROFILE;
+        const int role = Qt::DisplayRole;
+        const QModelIndex currIdx = model->index(i, column);
+        const auto profileName = model->data(currIdx, role).toString();
+        ui->profile->addItem(profileName);
+    }
+}
 
 void SSHManagerTreeWidget::addSshInfo()
 {
