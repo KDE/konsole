@@ -146,11 +146,12 @@ void TerminalPainter::drawContents(Character *image,
                     // rendering ambiguous characters with wide glyphs without clipping them.
                     // NOTE: This happens in the else case too, but we need it here as well.
                     if (!doubleWidth && next_char.character == ' ' && char_value.equalsFormat(next_char)) {
-                        // univec intentionally not modified - trailing spaces are meaningless
+                        univec << next_char.character;
                         len++;
                         while (isInsideDrawArea(x + len)) {
                             const Character next_char_gp = image[m_parentDisplay->loc(x + len, y)];
                             if (next_char_gp.character == ' ' && char_value.hasSameColors(next_char_gp) && char_value.hasSameRendition(next_char_gp)) {
+                                univec << next_char_gp.character;
                                 len++;
                             } else {
                                 break;
@@ -188,7 +189,7 @@ void TerminalPainter::drawContents(Character *image,
                 while (!doubleWidth && isInsideDrawArea(x + len)) {
                     const Character next_char = image[m_parentDisplay->loc(x + len, y)];
                     if (next_char.character == ' ' && char_value.hasSameColors(next_char) && char_value.hasSameRendition(next_char)) {
-                        // univec intentionally not modified - trailing spaces are meaningless
+                        univec << next_char.character;
                         len++;
                     } else {
                         // break otherwise, we don't want to be stuck in this loop
