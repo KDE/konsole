@@ -103,6 +103,8 @@ void QuickCommandsWidget::addMode()
 
 void QuickCommandsWidget::indexSelected(const QModelIndex &idx)
 {
+    Q_UNUSED(idx)
+
     const auto sourceIdx = priv->filterModel->mapToSource(ui->commandsTreeView->currentIndex());
     if (priv->model->rowCount(sourceIdx) != 0) {
         ui->name->setText({});
