@@ -846,7 +846,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     }
                     break;
                 case DcsPassthrough:
-                    if (cc <= 0x7E) { // 0x18, 0x1A, 0x1B already taken care of
+                    if (cc <= 0x7E || cc >= 0xA0) { // 0x18, 0x1A, 0x1B already taken care of
                         put(cc);
                     } else if (cc == 0x9C) {
                         switchState(Ground, cc);
@@ -862,7 +862,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     }
                     break;
                 case OscString:
-                    if (cc >= 0x20 && cc <= 0x7F) {
+                    if ((cc >= 0x20 && cc <= 0x7F) || cc >= 0xA0) {
                         osc_put(cc);
                     } else if (cc == 0x07 // recognize BEL as OSC terminator
                                || cc == 0x9C) {
@@ -872,7 +872,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     }
                     break;
                 case SosPmApcString:
-                    if (cc <= 0x7F) { // 0x18, 0x1A, 0x1B already taken care of.
+                    if (cc <= 0x7F || cc >= 0xA0) { // 0x18, 0x1A, 0x1B already taken care of.
                         apc_put(cc);
                         // ignore
                     } else if (cc == 0x9C) {
