@@ -1502,8 +1502,8 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
 
             _history->getCells(bottomRow, 0, histLineLen, histLine.data());
 
-            for (int x = bottomColumn; x < histLineLen; x++) {
-                if (histLine.at(x).isRealCharacter && (!trimTrailingWhitespace || !QChar(histLine.at(x).character).isSpace())) {
+            for (int j = bottomColumn; j < histLineLen; j++) {
+                if (histLine.at(j).isRealCharacter && (!trimTrailingWhitespace || !QChar(histLine.at(j).character).isSpace())) {
                     beyondLastColumn = false;
                 }
             }
@@ -1513,8 +1513,8 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
             const auto *data = _screenLines[line].data();
             const int length = _screenLines.at(line).count();
 
-            for (int x = bottomColumn; x < lastColumn && x < length; x++) {
-                if (data[x].isRealCharacter && (!trimTrailingWhitespace || !QChar(data[x].character).isSpace())) {
+            for (int k = bottomColumn; k < lastColumn && k < length; k++) {
+                if (data[k].isRealCharacter && (!trimTrailingWhitespace || !QChar(data[k].character).isSpace())) {
                     beyondLastColumn = false;
                 }
             }
