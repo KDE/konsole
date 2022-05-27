@@ -1706,7 +1706,7 @@ int Screen::copyLineToStream(int line,
         // This is necessary because a newline gets added to the last line when
         // the selection extends beyond the last character (last non-whitespace
         // character when TrimTrailingWhitespace is true), so the returned
-        // count from this funtion must not include empty cells beyond that
+        // count from this function must not include empty cells beyond that
         // last character.
         while (length > 0 && !data[length - 1].isRealCharacter) {
             length--;
