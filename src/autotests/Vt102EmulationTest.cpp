@@ -103,14 +103,14 @@ void Vt102EmulationTest::sendAndCompare(TestEmulation *em, const char *input, si
 void Vt102EmulationTest::testParse()
 {
     TestEmulation em;
+    em.reset();
     em.setCodec(TestEmulation::Utf8Codec);
     Q_ASSERT(em._currentScreen != nullptr);
 
     sendAndCompare(&em, "a", 1, QStringLiteral("a"), "");
 
     const char tertiaryDeviceAttributes[] = {0x1b, '[', '=', '0', 'c'};
-    QEXPECT_FAIL("", "Fixed by https://invent.kde.org/utilities/konsole/-/merge_requests/416", Abort);
-    sendAndCompare(&em, tertiaryDeviceAttributes, sizeof tertiaryDeviceAttributes, QStringLiteral(""), "\033P!|00000000\033\\");
+    sendAndCompare(&em, tertiaryDeviceAttributes, sizeof tertiaryDeviceAttributes, QStringLiteral(""), "\033P!|7E4B4445\033\\");
 }
 
 Q_DECLARE_METATYPE(std::vector<TestEmulation::Item>)
