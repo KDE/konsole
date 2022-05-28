@@ -394,7 +394,7 @@ void TabbedViewContainer::forgetView()
     }
 }
 
-void TabbedViewContainer::activateView()
+void TabbedViewContainer::activateView(const QString & /*xdgActivationToken*/)
 {
     if (QWidget *widget = qobject_cast<QWidget *>(sender())) {
         auto topLevelSplitter = qobject_cast<ViewSplitter *>(widget->parentWidget())->getToplevelSplitter();

@@ -154,8 +154,9 @@ void MainWindow::updateUseTransparency()
     WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
 }
 
-void MainWindow::activationRequest()
+void MainWindow::activationRequest(const QString &xdgActivationToken)
 {
+    KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
     KWindowSystem::forceActiveWindow(winId());
 }
 

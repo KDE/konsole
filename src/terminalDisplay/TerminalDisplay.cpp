@@ -1909,9 +1909,9 @@ Screen::DecodingOptions TerminalDisplay::currentDecodingOptions()
     return decodingOptions;
 }
 
-void TerminalDisplay::notificationClicked()
+void TerminalDisplay::notificationClicked(const QString &xdgActivationToken)
 {
-    Q_EMIT activationRequest();
+    Q_EMIT activationRequest(xdgActivationToken);
 }
 
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent *ev)

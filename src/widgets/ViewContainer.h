@@ -213,7 +213,7 @@ protected:
 private Q_SLOTS:
     void viewDestroyed(QObject *view);
     void konsoleConfigChanged();
-    void activateView();
+    void activateView(const QString &xdgActivationToken);
 
 private:
     void forgetView();

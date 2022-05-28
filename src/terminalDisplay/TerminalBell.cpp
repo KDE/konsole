@@ -41,7 +41,9 @@ void TerminalBell::bell(TerminalDisplay *terminalDisplay, const QString &message
         KNotification *notification =
             KNotification::event(terminalHasFocus ? QStringLiteral("BellVisible") : QStringLiteral("BellInvisible"), message, QPixmap(), terminalDisplay);
         notification->setDefaultAction(i18n("Show session"));
-        terminalDisplay->connect(notification, &KNotification::defaultActivated, terminalDisplay, &TerminalDisplay::notificationClicked);
+        connect(notification, &KNotification::defaultActivated, this, [notification, terminalDisplay]() {
+            terminalDisplay->notificationClicked(notification->xdgActivationToken());
+        });
     } break;
     case Enum::VisualBell:
         Q_EMIT visualBell();

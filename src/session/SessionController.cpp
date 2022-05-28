@@ -358,7 +358,9 @@ void SessionController::snapshot()
                                      view(),
                                      KNotification::CloseWhenWidgetActivated);
             notification->setDefaultAction(i18n("Show session"));
-            view()->connect(notification, &KNotification::defaultActivated, view(), &TerminalDisplay::notificationClicked);
+            connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
+                view()->notificationClicked(notification->xdgActivationToken());
+            });
         }
         _previousForegroundProcessName = isForegroundProcessActive ? session()->foregroundProcessName() : QString();
     }

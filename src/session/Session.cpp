@@ -628,7 +628,9 @@ void Session::silenceTimerDone()
                                                        view,
                                                        KNotification::CloseWhenWidgetActivated);
     notification->setDefaultAction(i18n("Show session"));
-    view->connect(notification, &KNotification::defaultActivated, view, &TerminalDisplay::notificationClicked);
+    connect(notification, &KNotification::defaultActivated, this, [view, notification]() {
+        view->notificationClicked(notification->xdgActivationToken());
+    });
     setPendingNotification(Notification::Silence);
 }
 
@@ -1786,7 +1788,9 @@ void Session::handleActivity()
                                                            view,
                                                            KNotification::CloseWhenWidgetActivated);
         notification->setDefaultAction(i18n("Show session"));
-        view->connect(notification, &KNotification::defaultActivated, view, &TerminalDisplay::notificationClicked);
+        connect(notification, &KNotification::defaultActivated, this, [view, notification]() {
+            view->notificationClicked(notification->xdgActivationToken());
+        });
 
         // mask activity notification for a while to avoid flooding
         _notifiedActivity = true;

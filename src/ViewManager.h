@@ -234,7 +234,7 @@ Q_SIGNALS:
     /** Requests creation of a new view, with the selected profile. */
     void newViewWithProfileRequest(const QExplicitlySharedDataPointer<Profile> &profile);
 
-    void activationRequest();
+    void activationRequest(const QString &xdgActivationToken);
 
 public Q_SLOTS:
     /** DBus slot that returns the number of sessions in the current view. */

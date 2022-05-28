@@ -170,7 +170,7 @@ private Q_SLOTS:
     void applyKonsoleSettings();
 
     // Ask the window manager to show this application window
-    void activationRequest();
+    void activationRequest(const QString &xdgActivationToken);
 
     void updateUseTransparency();
 
