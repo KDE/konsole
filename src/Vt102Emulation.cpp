@@ -282,6 +282,7 @@ void Vt102Emulation::resetTokenizer()
     params.value[1] = 0;
     params.sub[0].value[0] = 0;
     params.sub[0].count = 0;
+    params.hasSubParams = false;
     tokenState = -1;
 }
 
@@ -308,6 +309,7 @@ void Vt102Emulation::addSub()
     struct subParam *sub = &params.sub[params.count];
     sub->count = qMin(sub->count + 1, MAXARGS - 1);
     sub->value[sub->count] = 0;
+    params.hasSubParams = true;
 }
 
 void Vt102Emulation::addToCurrentToken(uint cc)
@@ -484,7 +486,7 @@ void Vt102Emulation::param(const uint cc)
 
 void Vt102Emulation::csi_dispatch(const uint cc)
 {
-    if (_ignore)
+    if (_ignore || (params.hasSubParams && cc != 'm')) // Be conservative for now
         return;
     if ((tokenBufferPos == 0 || (tokenBuffer[0] != '?' && tokenBuffer[0] != '!' && tokenBuffer[0] != '=' && tokenBuffer[0] != '>')) && cc < 256
         && (charClass[cc] & CPN) == CPN && _nIntermediate == 0) {
@@ -510,7 +512,8 @@ void Vt102Emulation::csi_dispatch(const uint cc)
                 processToken(token_csi_pq(cc), 0, 0);
             } else if (tokenBufferPos != 0 && tokenBuffer[0] == '>') {
                 processToken(token_csi_pg(cc), 0, 0);
-            } else if (cc == 'm' && params.count - i >= 4 && (params.value[i] == 38 || params.value[i] == 48) && params.value[i + 1] == 2) {
+            } else if (cc == 'm' && !params.hasSubParams && params.count - i >= 4 && (params.value[i] == 38 || params.value[i] == 48)
+                       && params.value[i + 1] == 2) {
                 // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
                 i += 2;
                 processToken(token_csi_ps(cc, params.value[i - 2]),
@@ -527,7 +530,8 @@ void Vt102Emulation::csi_dispatch(const uint cc)
                 processToken(token_csi_ps(cc, params.value[i]),
                              COLOR_SPACE_RGB,
                              (params.sub[i].value[2] << 16) | (params.sub[i].value[3] << 8) | params.sub[i].value[4]);
-            } else if (cc == 'm' && params.count - i >= 2 && (params.value[i] == 38 || params.value[i] == 48) && params.value[i + 1] == 5) {
+            } else if (cc == 'm' && !params.hasSubParams && params.count - i >= 2 && (params.value[i] == 38 || params.value[i] == 48)
+                       && params.value[i + 1] == 5) {
                 // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
                 i += 2;
                 processToken(token_csi_ps(cc, params.value[i - 2]), COLOR_SPACE_256, params.value[i]);

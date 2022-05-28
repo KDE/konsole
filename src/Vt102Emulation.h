@@ -135,7 +135,7 @@ private:
     void addSub();
 
     struct subParam {
-        int value[MAXARGS];
+        int value[MAXARGS]; // value[0] unused, it would correspond to the containing param value
         int count;
     };
 
@@ -143,6 +143,7 @@ private:
         int value[MAXARGS];
         struct subParam sub[MAXARGS];
         int count;
+        bool hasSubParams;
     } params = {};
 
     void initTokenizer();
