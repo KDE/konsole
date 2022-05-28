@@ -90,7 +90,7 @@ void Pty::setWindowSize(int columns, int lines, int width, int height)
     _windowHeight = height;
 
     if (pty()->masterFd() >= 0) {
-#if KPTY_VERSION >= QT_VERSION_CHECK(5, 92, 0)
+#if KPTY_VERSION >= QT_VERSION_CHECK(5, 93, 0)
         pty()->setWinSize(_windowLines, _windowColumns, _windowHeight, _windowWidth);
 #else
         struct winsize w;
