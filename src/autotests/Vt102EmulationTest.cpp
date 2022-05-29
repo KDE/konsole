@@ -257,6 +257,20 @@ void Vt102EmulationTest::testTokenizing_data()
     QTest::newRow("ESC [m")   << C{ESC, '[', 'm'} << I{ProcessToken{token_csi_ps('m', 0), 0, 0}};
     QTest::newRow("ESC [1m")  << C{ESC, '[', '1', 'm'} << I{ProcessToken{token_csi_ps('m', 1), 0, 0}};
     QTest::newRow("ESC [1;2m") << C{ESC, '[', '1', ';', '2', 'm'} << I{ProcessToken{token_csi_ps('m', 1), 0, 0}, ProcessToken{token_csi_ps('m', 2), 0, 0}};
+    QTest::newRow("ESC [38;2;193;202;218m") << C{ESC, '[', '3', '8', ';', '2', ';', '1', '9', '3', ';', '2', '0', '2', ';', '2', '1', '8', 'm'}
+                                            << I{ProcessToken{token_csi_ps('m', 38), 4, 0xC1CADA}};
+    QTest::newRow("ESC [38;2;193;202;218;2m") << C{ESC, '[', '3', '8', ';', '2', ';', '1', '9', '3', ';', '2', '0', '2', ';', '2', '1', '8', ';', '2', 'm'}
+                                              << I{ProcessToken{token_csi_ps('m', 38), 4, 0xC1CADA}, ProcessToken{token_csi_ps('m', 2), 0, 0}};
+    QTest::newRow("ESC [38:2:193:202:218m") << C{ESC, '[', '3', '8', ':', '2', ':', '1', '9', '3', ':', '2', '0', '2', ':', '2', '1', '8', 'm'}
+                                            << I{ProcessToken{token_csi_ps('m', 38), 4, 0xC1CADA}};
+    QTest::newRow("ESC [38:2:193:202:218;2m") << C{ESC, '[', '3', '8', ':', '2', ':', '1', '9', '3', ':', '2', '0', '2', ':', '2', '1', '8', ';', '2', 'm'}
+                                              << I{ProcessToken{token_csi_ps('m', 38), 4, 0xC1CADA}, ProcessToken{token_csi_ps('m', 2), 0, 0}};
+    QTest::newRow("ESC [38:2:1:193:202:218m") << C{ESC, '[', '3', '8', ':', '2', ':', '1', ':', '1', '9', '3', ':', '2', '0', '2', ':', '2', '1', '8', 'm'}
+                                              << I{ProcessToken{token_csi_ps('m', 38), 4, 0xC1CADA}};
+    QTest::newRow("ESC [38;5;255;2m") << C{ESC, '[', '3', '8', ';', '5', ';', '2', '5', '5', ';', '2', 'm'}
+                                      << I{ProcessToken{token_csi_ps('m', 38), 3, 255}, ProcessToken{token_csi_ps('m', 2), 0, 0}};
+    QTest::newRow("ESC [38:5:255m") << C{ESC, '[', '3', '8', ':', '5', ':', '2', '5', '5', 'm'}
+                                    << I{ProcessToken{token_csi_ps('m', 38), 3, 255}};
 
     QTest::newRow("ESC [5n")  << C{ESC, '[', '5', 'n'} << I{ProcessToken{token_csi_ps('n', 5), 0, 0}};
 

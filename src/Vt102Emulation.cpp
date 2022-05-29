@@ -468,6 +468,7 @@ void Vt102Emulation::collect(const uint cc)
         return;
     if (_nIntermediate >= MAX_INTERMEDIATES) {
         _ignore = true;
+        return;
     }
     _intermediate[_nIntermediate++] = cc;
 }
@@ -512,7 +513,7 @@ void Vt102Emulation::csi_dispatch(const uint cc)
                 processToken(token_csi_pq(cc), 0, 0);
             } else if (tokenBufferPos != 0 && tokenBuffer[0] == '>') {
                 processToken(token_csi_pg(cc), 0, 0);
-            } else if (cc == 'm' && !params.hasSubParams && params.count - i >= 4 && (params.value[i] == 38 || params.value[i] == 48)
+            } else if (cc == 'm' && !params.sub[i].count && params.count - i >= 4 && (params.value[i] == 38 || params.value[i] == 48)
                        && params.value[i + 1] == 2) {
                 // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
                 i += 2;
@@ -530,7 +531,7 @@ void Vt102Emulation::csi_dispatch(const uint cc)
                 processToken(token_csi_ps(cc, params.value[i]),
                              COLOR_SPACE_RGB,
                              (params.sub[i].value[2] << 16) | (params.sub[i].value[3] << 8) | params.sub[i].value[4]);
-            } else if (cc == 'm' && !params.hasSubParams && params.count - i >= 2 && (params.value[i] == 38 || params.value[i] == 48)
+            } else if (cc == 'm' && !params.sub[i].count && params.count - i >= 2 && (params.value[i] == 38 || params.value[i] == 48)
                        && params.value[i + 1] == 5) {
                 // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
                 i += 2;
@@ -682,15 +683,15 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
             } else if (cc == 0x9D) {
                 osc_start();
                 switchState(OscString, cc);
-            } else if (cc == 0x18 || cc == 0x1A || (cc >= 0x80 && cc <= 0x8F) || (cc >= 0x91 && cc <= 0x97) || (cc >= 0x99 && cc <= 0x9A)) {
+            } else if (cc == 0x98 || cc == 0x9E || cc == 0x9F) {
+                apc_start();
+                switchState(SosPmApcString, cc);
+            } else if (cc == 0x18 || cc == 0x1A || (cc >= 0x80 && cc <= 0x9A)) { // 0x90, 0x98 taken care of just above.
                 processToken(token_ctl(cc + '@'), 0, 0);
                 switchState(Ground, cc);
             } else if (cc == 0x9C) {
                 // no action
                 switchState(Ground, cc);
-            } else if (cc == 0x98 || cc == 0x9E || cc == 0x9F) {
-                apc_start();
-                switchState(SosPmApcString, cc);
 
             } else {
                 // Now take the current state into account
@@ -699,6 +700,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
                     } else {
+                        // 0x7F is ignored by displayCharacter(), since its Character::width() is -1
                         _currentScreen->displayCharacter(applyCharset(cc));
                     }
                     break;
@@ -795,7 +797,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                         switchState(Ground, cc);
                     } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);
-                    } else if ((cc >= 0x20 && cc <= 0x3F) || cc == 0x7F) {
+                    } else if ((/*cc >= 0x20 && */ cc <= 0x3F) || cc == 0x7F) { // cc <= 0x1F taking care of just above
                         // ignore
                     }
                     break;
@@ -871,7 +873,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     } else if (cc == 0x07 // recognize BEL as OSC terminator
                                || cc == 0x9C) {
                         switchState(Ground, cc);
-                    } else if (cc <= 0x06 || (cc >= 0x08 && cc <= 0x1F)) { // 0x18, 0x1A, 0x1B already taken care of.
+                    } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of. 0x07 taken care of just above.
                         // ignore
                     }
                     break;
@@ -896,7 +898,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 switchState(Ground, cc);
             } else if (cc == 0x1B) {
                 switchState(Vt52Escape, cc);
-            } else if (cc <= 0x17 || cc == 0x19 || (cc >= 0x1C && cc <= 0x1F)) {
+            } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B taken care of just above
                 processToken(token_ctl(cc + '@'), 0, 0);
             } else {
                 // Now take the current state into account
