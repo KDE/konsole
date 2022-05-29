@@ -35,7 +35,7 @@ class QKeyEvent;
 #define MODE_132Columns (MODES_SCREEN + 11) // 80 <-> 132 column mode switch (DECCOLM)
 #define MODE_Allow132Columns (MODES_SCREEN + 12) // Allow DECCOLM mode
 #define MODE_BracketedPaste (MODES_SCREEN + 13) // Xterm-style bracketed paste mode
-#define MODE_Sixel (MODES_SCREEN + 14) // Xterm-style bracketed paste mode
+#define MODE_Sixel (MODES_SCREEN + 14) // Sixel graphics
 #define MODE_total (MODES_SCREEN + 15)
 
 namespace Konsole
