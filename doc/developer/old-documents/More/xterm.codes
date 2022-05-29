@@ -36,7 +36,7 @@ x   VT                         Vertical Tab               (Ctrl-K) same as LF
 x   FF                         Form Feed or New Page (NP) (Ctrl-L) same as LF
 x   CR                         Carriage Return            (Ctrl-M)
 x   SO                    (A)  Lock Shift G1              (Ctrl-N)
-x   SI                    (A)  Lock Shift G0              (Ctrl-N)
+x   SI                    (A)  Lock Shift G0              (Ctrl-O)
 
 x   ESC # 8               (V)  Fill Screen with E's (for adjustment)
 
@@ -64,8 +64,8 @@ x   ESC O                 (A)  Single Shift G3
 x   ESC Z                      Send VT100 Identification String
 
 x   ESC [ Pn @ (dft:1)    (A)  Insert Blank Characters
-x   ESC [ Pn A (dft:1)         Cursor Up   
-x   ESC [ Pn B (dft:1)         Cursor Down 
+x   ESC [ Pn A (dft:1)         Cursor Up
+x   ESC [ Pn B (dft:1)         Cursor Down
 x   ESC [ Pn C (dft:1)         Cursor Right
 x   ESC [ Pn D (dft:1)         Cursor Left
 
