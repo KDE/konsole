@@ -699,8 +699,12 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 apc_start(cc);
                 switchState(SosPmApcString, cc);
             } else if (cc == 0x18 || cc == 0x1A || (cc >= 0x80 && cc <= 0x9A)) { // 0x90, 0x98 taken care of just above.
-                processToken(token_ctl(cc + '@'), 0, 0);
-                switchState(Ground, cc);
+                // konsole has always ignored CAN and SUB in OSC, extend the behavior a bit
+                // this differs from VT240, where 7-bit ST, 8-bit ST, ESC + chr, ***CAN, SUB, C1*** terminate and show SIXEL
+                if (_state != OscString && _state != SosPmApcString && _state != DcsPassthrough) {
+                    processToken(token_ctl(cc + '@'), 0, 0);
+                    switchState(Ground, cc);
+                }
             } else if (cc == 0x9C) {
                 // no action
                 switchState(Ground, cc);
