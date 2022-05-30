@@ -58,7 +58,11 @@ Fonts need to suit the needs of X11, QT and konsole.
   - 0x0d U+250c : BOX DRAWINGS LIGHT DOWN AND RIGHT
   - 0x0e U+2514 : BOX DRAWINGS LIGHT UP AND RIGHT
   - 0x0f U+253c : BOX DRAWINGS LIGHT VERTICAL AND HORIZONTAL
+  - 0x10 U+23ba : HORIZONTAL SCAN LINE-1
+  - 0x11 U+23bb : HORIZONTAL SCAN LINE-3
   - 0x12 U+2500 : BOX DRAWINGS LIGHT HORIZONTAL (scan line 5)
+  - 0x13 U+23bc : HORIZONTAL SCAN LINE-7
+  - 0x14 U+23bd : HORIZONTAL SCAN LINE-9
   - 0x15 U+251c : BOX DRAWINGS LIGHT VERTICAL AND RIGHT
   - 0x16 U+2524 : BOX DRAWINGS LIGHT VERTICAL AND LEFT
   - 0x17 U+2534 : BOX DRAWINGS LIGHT UP AND HORIZONTAL
@@ -68,17 +72,6 @@ Fonts need to suit the needs of X11, QT and konsole.
   - 0x01 U+25c6 : BLACK DIAMOND
   - 0x02 U+2592 : MEDIUM SHADE
   - 0x1F U+00b7 : MIDDLE DOT
-
-  The following graphical glyphs are defined in
-  VT100 fonts, too, but are not used in any program
-  i know about. Codes for them have been assigned
-  in the private unicode page. See the linux kernel
-  documentation file [unicode.txt] about this assignment.
-
-  - 0x10 U+f800 : DEC VT GRAPHICS HORIZONTAL LINE SCAN 1
-  - 0x11 U+f801 : DEC VT GRAPHICS HORIZONTAL LINE SCAN 3
-  - 0x13 U+f803 : DEC VT GRAPHICS HORIZONTAL LINE SCAN 7
-  - 0x14 U+f804 : DEC VT GRAPHICS HORIZONTAL LINE SCAN 9
 
   Also, the VT100 knows about the following glyphs,
   though omitting them is unlikely to break anything.
