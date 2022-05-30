@@ -1021,9 +1021,6 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     int attribute = 0;
     int i;
 
-    // ignore last character (ESC or BEL)
-    //--tokenSize;
-
     /* clang-format off */
     // skip first two characters (ESC, ']')
     for (i = 0; i < tokenSize &&
@@ -2818,10 +2815,6 @@ void Vt102Emulation::SixelCharacterAdd(uint8_t character, int repeat)
 
 bool Vt102Emulation::processSixel(uint cc)
 {
-    if (cc == ESC) {
-        return false;
-    }
-
     switch (cc) {
     case '$':
         SixelCharacterAdd('\r');
@@ -2838,23 +2831,6 @@ bool Vt102Emulation::processSixel(uint cc)
     uint *s = tokenBuffer;
     const int p = tokenBufferPos;
 
-    if (p == 2 && s[0] == ESC) {
-        switch (s[1]) {
-        case '\\':
-            resetMode(MODE_Sixel);
-            SixelModeDisable();
-            resetTokenizer();
-            return true;
-        case ESC:
-            resetTokenizer();
-            receiveChars(QVector<uint>{s[1]}); // re-send the actual character
-            return true;
-        default:
-            SixelModeAbort();
-            receiveChars(QVector<uint>{s[0], s[1]}); // re-send the actual character
-            return true;
-        }
-    }
     if (!m_SixelStarted && (sixel() || s[0] == '!' || s[0] == '#')) {
         m_aspect = qMakePair(1, 1);
         SixelModeEnable(30, 6);
