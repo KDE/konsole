@@ -149,8 +149,8 @@ void TerminalPainter::drawContents(Character *image,
                         // univec intentionally not modified - trailing spaces are meaningless
                         len++;
                         while (isInsideDrawArea(x + len)) {
-                            const Character next_char = image[m_parentDisplay->loc(x + len, y)];
-                            if (next_char.character == ' ' && char_value.hasSameColors(next_char) && char_value.hasSameRendition(next_char)) {
+                            const Character next_char_gp = image[m_parentDisplay->loc(x + len, y)];
+                            if (next_char_gp.character == ' ' && char_value.hasSameColors(next_char_gp) && char_value.hasSameRendition(next_char_gp)) {
                                 len++;
                             } else {
                                 break;
