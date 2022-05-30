@@ -13,7 +13,6 @@
 #include <unistd.h>
 
 // Qt
-#include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
 #include <QTimer>
@@ -2529,14 +2528,8 @@ static QString hexdump2(uint *s, int len)
 
 void Vt102Emulation::reportDecodingError(int token)
 {
-    resetTokenizer();
-
-    if (m_SixelStarted) {
-        SixelModeAbort();
-    }
-
     QString outputError = QStringLiteral("Undecodable sequence: ");
-    printf("token: %x\n", token);
+
     switch (token & 0xff) {
     case 2:
     case 3:
@@ -2572,7 +2565,13 @@ void Vt102Emulation::reportDecodingError(int token)
         outputError.append((token >> 16) & 0xff);
     }
 
-    qDebug() << outputError;
+    qCDebug(KonsoleDebug).noquote() << outputError;
+
+    resetTokenizer();
+
+    if (m_SixelStarted) {
+        SixelModeAbort();
+    }
 }
 
 void Vt102Emulation::sixelQuery(int q)
