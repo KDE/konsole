@@ -618,13 +618,25 @@ void Vt102Emulation::unhook()
     resetTokenizer();
 }
 
-void Vt102Emulation::apc_start()
+void Vt102Emulation::apc_start(const uint cc)
 {
     tokenBufferPos = 0;
+    if (cc == 0x9F || cc == 0x5F) {
+        _sosPmApc = Apc;
+    } else if (cc == 0x9E || cc == 0x5E) {
+        _sosPmApc = Pm;
+    } else {
+        // 0x98, 0x58
+        _sosPmApc = Sos;
+    }
 }
 
 void Vt102Emulation::apc_put(const uint cc)
 {
+    if (_sosPmApc != Apc) {
+        return;
+    }
+
     addToCurrentToken(cc);
 
     // <ESC> '_' ... <ESC> '\'
@@ -652,7 +664,7 @@ void Vt102Emulation::apc_put(const uint cc)
 
 void Vt102Emulation::apc_end()
 {
-    if (tokenBuffer[0] == 'G') {
+    if (_sosPmApc == Apc && tokenBuffer[0] == 'G') {
         // Graphics command
         processGraphicsToken(tokenBufferPos);
         resetTokenizer();
@@ -684,7 +696,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 osc_start();
                 switchState(OscString, cc);
             } else if (cc == 0x98 || cc == 0x9E || cc == 0x9F) {
-                apc_start();
+                apc_start(cc);
                 switchState(SosPmApcString, cc);
             } else if (cc == 0x18 || cc == 0x1A || (cc >= 0x80 && cc <= 0x9A)) { // 0x90, 0x98 taken care of just above.
                 processToken(token_ctl(cc + '@'), 0, 0);
@@ -722,7 +734,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                         switchState(DcsEntry, cc);
                         clear();
                     } else if (cc == 0x58 || cc == 0x5E || cc == 0x5F) {
-                        apc_start();
+                        apc_start(cc);
                         switchState(SosPmApcString, cc);
                     } else if (cc <= 0x1F) { // 0x18, 0x1A, 0x1B already taken care of.
                         processToken(token_ctl(cc + '@'), 0, 0);

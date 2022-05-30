@@ -169,6 +169,12 @@ private:
         Vt52CupColumn,
     };
 
+    enum {
+        Sos,
+        Pm,
+        Apc,
+    } _sosPmApc;
+
     ParserStates _state = Ground;
     bool _ignore = false;
     int _nIntermediate = 0;
@@ -186,7 +192,7 @@ private:
     void hook(const uint cc);
     void unhook();
     void put(const uint cc);
-    void apc_start();
+    void apc_start(const uint cc);
     void apc_put(const uint cc);
     void apc_end();
 
