@@ -34,6 +34,11 @@ demo_konsolepart::demo_konsolepart()
 {
     const bool useTranslucency = KWindowSystem::compositingActive();
 
+    // Set the WA_NativeWindow attribute to force the creation of the QWindow.
+    // Without this QWidget::windowHandle() returns 0.
+    // See https://phabricator.kde.org/D23108
+    setAttribute(Qt::WA_NativeWindow);
+
     setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
     setAttribute(Qt::WA_NoSystemBackground, false);
 
