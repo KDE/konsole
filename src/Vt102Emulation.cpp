@@ -1021,7 +1021,6 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     int i;
 
     /* clang-format off */
-    // skip first two characters (ESC, ']')
     for (i = 0; i < tokenSize &&
                 tokenBuffer[i] >= '0'  &&
                 tokenBuffer[i] <= '9'; i++)
