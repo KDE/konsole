@@ -45,6 +45,12 @@ include(CheckIncludeFiles)
 # Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
 include(ECMEnableSanitizers)
 
+if(ECM_GLOBAL_FIND_VERSION VERSION_LESS "5.82.0")
+    if(NOT QT_MAJOR_VERSION)
+        set(QT_MAJOR_VERSION "5")
+    endif()
+endif()
+
 if(QT_MAJOR_VERSION EQUAL "6")
     # ECMDeprecationSettings is in ECM since 5.91, this assumes if you're building
     # with Qt6, you have latest ECM anyway
