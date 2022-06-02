@@ -190,7 +190,7 @@ void ViewManager::setupActions()
 
     // keyboard shortcut only actions
     action = new QAction(i18nc("@action Shortcut entry", "Next Tab"), this);
-    const QList<QKeySequence> nextViewActionKeys{QKeySequence{Qt::SHIFT | Qt::Key_Right, Qt::CTRL | Qt::Key_PageDown}};
+    const QList<QKeySequence> nextViewActionKeys{QKeySequence{Qt::SHIFT | Qt::Key_Right}, QKeySequence{Qt::CTRL | Qt::Key_PageDown}};
     collection->setDefaultShortcuts(action, nextViewActionKeys);
     collection->addAction(QStringLiteral("next-tab"), action);
     connect(action, &QAction::triggered, this, &ViewManager::nextView);
@@ -198,7 +198,7 @@ void ViewManager::setupActions()
     // _viewSplitter->addAction(nextViewAction);
 
     action = new QAction(i18nc("@action Shortcut entry", "Previous Tab"), this);
-    const QList<QKeySequence> previousViewActionKeys{QKeySequence{Qt::SHIFT | Qt::Key_Left, Qt::CTRL | Qt::Key_PageUp}};
+    const QList<QKeySequence> previousViewActionKeys{QKeySequence{Qt::SHIFT | Qt::Key_Left}, QKeySequence{Qt::CTRL | Qt::Key_PageUp}};
     collection->setDefaultShortcuts(action, previousViewActionKeys);
     collection->addAction(QStringLiteral("previous-tab"), action);
     connect(action, &QAction::triggered, this, &ViewManager::previousView);
