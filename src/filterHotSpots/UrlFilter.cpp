@@ -51,7 +51,7 @@ static const char host[] = "(?:[" COMMON_1 "]++|" IPv6_literal ")?+"; // www.foo
 static const char port[] = "(?::[0-9]+)?+"; // :1234
 
 #define COMMON_2 "a-z0-9\\-._~%!$&'()*+,;=:@/"
-static const char path[] = "(?:/[" COMMON_2 "]+)?+"; // /path/to/some/place
+static const char path[] = "(?:/[" COMMON_2 "]*+)?+"; // /path/to/some/place
 static const char query[] = "(?:\\?[" COMMON_2 "]+)?+"; // "?somequery=bar"
 static const char fragment[] = "(?:#[" COMMON_2 "]+)?+"; // "#fragment"
 
