@@ -34,12 +34,12 @@ void Filter::setBuffer(const QString *buffer, const QList<int> *linePositions)
     _linePositions = linePositions;
 }
 
-std::pair<int, int> Filter::getLineColumn(int position)
+std::pair<int, int> Filter::getLineColumn(int prevline, int position)
 {
     Q_ASSERT(_linePositions);
     Q_ASSERT(_buffer);
 
-    for (int i = 0; i < _linePositions->count(); i++) {
+    for (int i = prevline; i < _linePositions->count(); i++) {
         const int nextLine = i == _linePositions->count() - 1 ? _buffer->length() + 1 : _linePositions->value(i + 1);
 
         if (_linePositions->value(i) <= position && position < nextLine) {

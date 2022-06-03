@@ -38,10 +38,13 @@ void RegExpFilter::process()
     }
 
     QRegularExpressionMatchIterator iterator(_searchText.globalMatch(*text));
+    int prevline = 0;
     while (iterator.hasNext()) {
         QRegularExpressionMatch match(iterator.next());
-        std::pair<int, int> start = getLineColumn(match.capturedStart());
-        std::pair<int, int> end = getLineColumn(match.capturedEnd());
+        std::pair<int, int> start = getLineColumn(prevline, match.capturedStart());
+        prevline = start.first;
+        std::pair<int, int> end = getLineColumn(prevline, match.capturedEnd());
+        prevline = end.first;
 
         QSharedPointer<HotSpot> spot(newHotSpot(start.first, start.second, end.first, end.second, match.capturedTexts()));
 
