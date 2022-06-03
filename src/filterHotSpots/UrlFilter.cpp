@@ -23,10 +23,12 @@ using namespace Konsole;
 //
 // It deviates from rfc3986:
 // - We only recognize URIs with authority (even if it is an empty authority)
-// - We match URIs starting with 'www.'
+// - We match URI suffixes starting with 'www.'
+// - We allow IPv6 literals right after 'www.', e.g: www.[dead::beef]
 // - "userinfo" is assumed to have a single ':' character
-// - We _don't_ match IPv6 addresses (e.g. http://[2010:836B:4179::836B:4179])
-//   or IPvFuture
+// - We _don't_ match IPvFuture addresses
+// - We allow any combination of hex digits, colons and dots as IPv6 addresses,
+//   e.g: https://[::::dead:::beef::123.666.666.666::dead::::beef::::]/foo
 // - "port" (':1234'), if present, is assumed to be non-empty
 // - We don't check the validity of percent-encoded characters
 //   (e.g. "www.example.com/foo%XXbar")
@@ -50,7 +52,8 @@ static const char userInfo[] =
     "[" COMMON_1 "]+?:?"
     "[" COMMON_1 "]++@"
     ")?+";
-static const char host[] = "(?:[" COMMON_1 "]*+)"; // www.foo.bar
+#define IPv6_literal "\\[[0-9a-fA-F:.]++\\]"
+static const char host[] = "(?:[" COMMON_1 "]++|" IPv6_literal ")?+"; // www.foo.bar
 static const char port[] = "(?::[0-9]+)?+"; // :1234
 
 #define COMMON_2 "a-z0-9\\-._~%!$&'()*+,;=:@/"
