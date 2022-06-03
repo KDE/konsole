@@ -60,17 +60,17 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
                                         << "https://example.com/foo,bar" << true;
 
     QTest::newRow("empty_query") << "http://example.com/?"
-                                 << "http://example.com" << true;
+                                 << "http://example.com/" << true;
     QTest::newRow("empty_fragment") << "http://example.com/#"
-                                    << "http://example.com" << true;
+                                    << "http://example.com/" << true;
 
     QTest::newRow("www_followed_by_colon") << "www.example.com:foo@bar.com"
                                            << "www.example.com" << true;
 
     QTest::newRow("ipv6") << "http://[2a00:1450:4001:829::200e]/"
-                          << "http://[2a00:1450:4001:829::200e]" << true;
+                          << "http://[2a00:1450:4001:829::200e]/" << true;
     QTest::newRow("ipv6_with_port") << "http://[2a00:1450:4001:829::200e]:80/"
-                                    << "http://[2a00:1450:4001:829::200e]:80" << true;
+                                    << "http://[2a00:1450:4001:829::200e]:80/" << true;
 }
 
 void HotSpotFilterTest::testUrlFilterRegex()
