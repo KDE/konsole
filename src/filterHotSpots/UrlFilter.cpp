@@ -25,7 +25,6 @@ using namespace Konsole;
 // - We only recognize URIs with authority (even if it is an empty authority)
 // - We match URI suffixes starting with 'www.'
 // - We allow IPv6 literals right after 'www.', e.g: www.[dead::beef]
-// - "userinfo" is assumed to have a single ':' character
 // - We _don't_ match IPvFuture addresses
 // - We allow any combination of hex digits, colons and dots as IPv6 addresses,
 //   e.g: https://[::::dead:::beef::123.666.666.666::dead::::beef::::]/foo
@@ -46,12 +45,7 @@ static const char scheme_or_www_end[] = ")";
 #define COMMON_1 "a-z0-9\\-._~%!$&'()*+,;="
 
 /* clang-format off */
-// user:password@
-static const char userInfo[] =
-    "(?:"
-    "[" COMMON_1 "]+?:?"
-    "[" COMMON_1 "]++@"
-    ")?+";
+static const char userInfo[] = "(?:[" COMMON_1 ":" "]++@)?+"; // user:password@
 #define IPv6_literal "\\[[0-9a-fA-F:.]++\\]"
 static const char host[] = "(?:[" COMMON_1 "]++|" IPv6_literal ")?+"; // www.foo.bar
 static const char port[] = "(?::[0-9]+)?+"; // :1234
