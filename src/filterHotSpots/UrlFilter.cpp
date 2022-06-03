@@ -37,7 +37,8 @@ using namespace Konsole;
 // scheme://
 // - Must start with an ASCII letter, preceeded by any non-word character,
 //   so "http" but not "mhttp"
-static const char scheme_or_www[] = "(?<=^|[\\s\\[\\]()'\"])(?:www\\.|[a-z][a-z0-9+\\-.]*+://)";
+static const char scheme_or_www[] = "(?<=^|[\\s\\[\\]()'\"])(?:www\\.|[a-z][a-z0-9+\\-.]*+://";
+static const char scheme_or_www_end[] = ")";
 
 // unreserved / pct-encoded / sub-delims
 #define COMMON_1 "a-z0-9\\-._~%!$&'()*+,;="
@@ -62,6 +63,7 @@ using LS1 = QLatin1String;
 const QRegularExpression UrlFilter::FullUrlRegExp(
     LS1(scheme_or_www)
     + LS1(userInfo)
+    + LS1(scheme_or_www_end)
     + LS1(host)
     + LS1(port)
     + LS1(path)
