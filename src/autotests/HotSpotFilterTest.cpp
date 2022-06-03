@@ -71,6 +71,9 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
                           << "http://[2a00:1450:4001:829::200e]/" << true;
     QTest::newRow("ipv6_with_port") << "http://[2a00:1450:4001:829::200e]:80/"
                                     << "http://[2a00:1450:4001:829::200e]:80/" << true;
+
+    QTest::newRow("query_with_question_marks") << "ldap://[2001:db8::7]/c=GB?objectClass?one"
+                                               << "ldap://[2001:db8::7]/c=GB?objectClass?one" << true;
 }
 
 void HotSpotFilterTest::testUrlFilterRegex()
