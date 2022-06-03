@@ -63,6 +63,9 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
                                  << "http://example.com" << true;
     QTest::newRow("empty_fragment") << "http://example.com/#"
                                     << "http://example.com" << true;
+
+    QTest::newRow("www_followed_by_colon") << "www.example.com:foo@bar.com"
+                                           << "www.example.com" << true;
 }
 
 void HotSpotFilterTest::testUrlFilterRegex()
