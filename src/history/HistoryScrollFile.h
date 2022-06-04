@@ -38,7 +38,7 @@ public:
 
     // Modify history
     void removeCells() override;
-    int reflowLines(const int columns) override;
+    int reflowLines(const int columns, std::map<int, int> * = nullptr) override;
 
 private:
     qint64 startOfLine(const int lineno) const;

@@ -55,7 +55,7 @@ public:
 
     // modify history
     virtual void removeCells() = 0;
-    virtual int reflowLines(const int columns) = 0;
+    virtual int reflowLines(const int columns, std::map<int, int> *deltas = nullptr) = 0;
 
     //
     // FIXME:  Passing around constant references to HistoryType instances

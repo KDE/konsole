@@ -37,7 +37,7 @@ public:
 
     void setMaxNbLines(const int lineCount);
 
-    int reflowLines(const int columns) override;
+    int reflowLines(const int columns, std::map<int, int> *deltas = nullptr) override;
 
 private:
     /**

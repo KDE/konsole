@@ -104,7 +104,7 @@ void HistoryScrollFile::removeCells()
     _lineflags.removeLast(res * sizeof(unsigned char));
 }
 
-int HistoryScrollFile::reflowLines(const int columns)
+int Konsole::HistoryScrollFile::reflowLines(const int columns, std::map<int, int> *)
 {
     auto reflowFile = std::make_unique<HistoryFile>();
     reflowData newLine;

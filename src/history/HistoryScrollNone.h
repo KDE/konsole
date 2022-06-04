@@ -37,7 +37,7 @@ public:
 
     // Modify history (do nothing here)
     void removeCells() override;
-    int reflowLines(const int) override;
+    int reflowLines(const int, std::map<int, int> * = nullptr) override;
 };
 
 }

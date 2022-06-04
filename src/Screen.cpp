@@ -476,7 +476,6 @@ void Screen::resizeImage(int new_lines, int new_columns)
     if ((new_lines == _lines) && (new_columns == _columns)) {
         return;
     }
-
     // Adjust scroll position, and fix glitches
     _oldTotalLines = getLines() + getHistLines();
     _isResize = true;
@@ -490,13 +489,19 @@ void Screen::resizeImage(int new_lines, int new_columns)
         while (!_screenLines.empty() && _history->isWrappedLine(_history->getLines() - 1)) {
             fastAddHistLine();
             --cursorLine;
+            scrollPlacements(1);
         }
-        auto removedLines = _history->reflowLines(new_columns);
+        std::map<int, int> deltas = {};
+        auto removedLines = _history->reflowLines(new_columns, &deltas);
 
         // If _history size > max history size it will drop a line from _history.
         // We need to verify if we need to remove a URL.
         if (removedLines && _escapeSequenceUrlExtractor) {
             _escapeSequenceUrlExtractor->historyLinesRemoved(removedLines);
+        }
+
+        for (const auto &[pos, delta] : deltas) {
+            scrollPlacements(delta, INT64_MIN, pos);
         }
     }
 
@@ -531,6 +536,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _screenLines.erase(_screenLines.begin() + currentPos + 1);
                 _lineProperties.erase(_lineProperties.begin() + currentPos);
                 --cursorLine;
+                scrollPlacements(1, currentPos);
                 continue;
             }
 
@@ -548,6 +554,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _screenLines.insert(_screenLines.begin() + currentPos + 1, std::move(values));
                 _lineProperties[currentPos] |= LINE_WRAPPED;
                 ++cursorLine;
+                scrollPlacements(-1, currentPos);
             }
             currentPos += 1;
         }
@@ -557,6 +564,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     while (cursorLine > new_lines - 1) {
         fastAddHistLine();
         --cursorLine;
+        scrollPlacements(1);
     }
 
     if (_enableReflowLines) {
@@ -572,6 +580,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             _lineProperties.insert(_lineProperties.begin(), lineProperty);
             _history->removeCells();
             ++cursorLine;
+            scrollPlacements(-1);
         }
     }
 
@@ -1121,7 +1130,7 @@ void Screen::scrollUp(int from, int n)
     moveImage(loc(0, from), loc(0, from + n), loc(_columns, _bottomMargin));
     clearImage(loc(0, _bottomMargin - n + 1), loc(_columns - 1, _bottomMargin), ' ');
     if (_hasGraphics) {
-        scrollUpVisiblePlacements(n);
+        scrollPlacements(n);
     }
 }
 
@@ -2043,14 +2052,14 @@ TerminalGraphicsPlacement_t *Screen::getGraphicsPlacement(unsigned int i)
     return _graphicsPlacements[i].get();
 }
 
-void Screen::scrollUpVisiblePlacements(int n)
+void Screen::scrollPlacements(int n, qint64 below, qint64 above)
 {
     std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>>::iterator i;
     int histMaxLines = _history->getMaxLines();
     i = _graphicsPlacements.begin();
     while (i != _graphicsPlacements.end()) {
         TerminalGraphicsPlacement_t *placement = i->get();
-        if (placement->scrolling) {
+        if ((placement->scrolling && below == INT64_MAX) || (placement->row > below && placement->row < above)) {
             placement->row -= n;
             if (placement->row + placement->rows < -histMaxLines) {
                 i = _graphicsPlacements.erase(i);

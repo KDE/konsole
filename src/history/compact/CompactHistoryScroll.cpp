@@ -141,7 +141,7 @@ LineProperty CompactHistoryScroll::getLineProperty(const int lineNumber) const
     return _lineDatas.at(lineNumber).flag;
 }
 
-int CompactHistoryScroll::reflowLines(const int columns)
+int CompactHistoryScroll::reflowLines(const int columns, std::map<int, int> *deltas)
 {
     std::vector<LineData> newLineData;
 
@@ -153,6 +153,8 @@ int CompactHistoryScroll::reflowLines(const int columns)
     };
 
     int currentPos = 0;
+    int newPos = 0;
+    int delta = 0;
     while (currentPos < getLines()) {
         int startLine = startOfLine(currentPos);
         int endLine = startOfLine(currentPos + 1);
@@ -168,9 +170,15 @@ int CompactHistoryScroll::reflowLines(const int columns)
         while (reflowLineLen(startLine, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
             startLine += columns;
             setNewLine(newLineData, startLine + _indexBias, lineProperty | LINE_WRAPPED);
+            newPos++;
         }
         setNewLine(newLineData, endLine + _indexBias, lineProperty & ~LINE_WRAPPED);
         currentPos++;
+        newPos++;
+        if (deltas && delta != newPos - currentPos) {
+            (*deltas)[currentPos - getLines()] = newPos - currentPos - delta;
+            delta = newPos - currentPos;
+        }
     }
     _lineDatas = std::move(newLineData);
 

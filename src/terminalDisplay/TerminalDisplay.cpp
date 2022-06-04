@@ -1002,21 +1002,6 @@ void TerminalDisplay::updateImageSize()
 
     if (_resizing) {
         showResizeNotification();
-        if (oldLines != _lines) {
-            // An image's vertical position is relative to top line of the
-            // terminal, but text is relative to the bottom line, so the
-            // position needs adjusting when the terminal is resized.
-            int histLines = 0;
-            int change = oldLines - _lines;
-            if (_screenWindow && _screenWindow->screen()) {
-                histLines = _screenWindow->screen()->getHistLines();
-            }
-            if (histLines) {
-                _screenWindow->screen()->scrollUpVisiblePlacements(qMax(-histLines, change));
-            } else if (oldLines > _lines && cursorPosition().y() >= oldLines - change) {
-                _screenWindow->screen()->scrollUpVisiblePlacements(cursorPosition().y() - _lines + 1);
-            }
-        }
         Q_EMIT changedContentSizeSignal(_contentRect.height(), _contentRect.width()); // expose resizeEvent
     }
 
