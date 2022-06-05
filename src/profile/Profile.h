@@ -743,7 +743,7 @@ public:
     /** Return a list of all properties names and their type
      *  (for use with -p option).
      */
-    const QStringList propertiesInfoList() const;
+    QStringList propertiesInfoList() const;
 
     /**
      * Returns the element from the Property enum associated with the

@@ -36,7 +36,7 @@ public:
     bool writeProfile(const QString &path, const Profile::Ptr &profile);
 
 private:
-    void writeProperties(KConfig &config, const Profile::Ptr &profile, const Profile::PropertyInfo *properties);
+    void writeProperties(KConfig &config, const Profile::Ptr &profile);
 };
 }
 

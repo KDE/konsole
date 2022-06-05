@@ -158,11 +158,7 @@ void Profile::fillTableWithDefaultNames()
         return;
     }
 
-    const PropertyInfo *iter = DefaultPropertyNames;
-    while (iter->name != nullptr) {
-        registerProperty(*iter);
-        iter++;
-    }
+    std::for_each(DefaultPropertyNames.cbegin(), DefaultPropertyNames.cend(), Profile::registerProperty);
 
     filledDefaults = true;
 }
@@ -267,20 +263,15 @@ Profile::Profile(const Profile::Ptr &parent)
 
 void Profile::clone(Profile::Ptr profile, bool differentOnly)
 {
-    const PropertyInfo *properties = DefaultPropertyNames;
-    while (properties->name != nullptr) {
-        Property current = properties->property;
+    for (const PropertyInfo &info : DefaultPropertyNames) {
+        Property current = info.property;
         QVariant otherValue = profile->property<QVariant>(current);
-        switch (current) {
-        case Name:
-        case Path:
-            break;
-        default:
-            if (!differentOnly || property<QVariant>(current) != otherValue) {
-                setProperty(current, otherValue);
-            }
+        if (current == Name || current == Path) { // These are unique per Profile
+            continue;
         }
-        properties++;
+        if (!differentOnly || property<QVariant>(current) != otherValue) {
+            setProperty(current, otherValue);
+        }
     }
 }
 
@@ -343,16 +334,14 @@ void Profile::registerProperty(const PropertyInfo &info)
     PropertyInfoByName.insert(name.toLower(), info);
 }
 
-const QStringList Profile::propertiesInfoList() const
+QStringList Profile::propertiesInfoList() const
 {
-    QStringList info;
-    const PropertyInfo *iter = DefaultPropertyNames;
-    while (iter->name != nullptr) {
-        info << QLatin1String(iter->name) + QStringLiteral(" : ") + QLatin1String(QVariant(iter->type).typeName());
-        iter++;
+    QStringList list;
+    list.reserve(DefaultPropertyNames.size());
+    for (const PropertyInfo &info : DefaultPropertyNames) {
+        list.push_back(QLatin1String(info.name) + QLatin1String(" : ") + QLatin1String(QVariant(info.type).typeName()));
     }
-
-    return info;
+    return list;
 }
 
 const Profile::GroupPtr Profile::asGroup() const

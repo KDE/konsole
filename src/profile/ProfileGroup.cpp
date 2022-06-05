@@ -30,21 +30,19 @@ QList<Profile::Ptr> ProfileGroup::profiles() const
 
 void ProfileGroup::updateValues()
 {
-    const PropertyInfo *properties = Profile::DefaultPropertyNames;
-    while (properties->name != nullptr) {
+    for (const PropertyInfo &info : Profile::DefaultPropertyNames) {
         // the profile group does not store a value for some properties
         // (eg. name, path) if even they are equal between profiles -
         //
         // the exception is when the group has only one profile in which
         // case it behaves like a standard Profile
-        if (_profiles.count() > 1 && !canInheritProperty(properties->property)) {
-            properties++;
+        if (_profiles.count() > 1 && !canInheritProperty(info.property)) {
             continue;
         }
 
         QVariant value;
         for (int i = 0; i < _profiles.count(); i++) {
-            QVariant profileValue = _profiles[i]->property<QVariant>(properties->property);
+            QVariant profileValue = _profiles[i]->property<QVariant>(info.property);
             if (value.isNull()) {
                 value = profileValue;
             } else if (value != profileValue) {
@@ -52,8 +50,7 @@ void ProfileGroup::updateValues()
                 break;
             }
         }
-        Profile::setProperty(properties->property, value);
-        properties++;
+        Profile::setProperty(info.property, value);
     }
 }
 

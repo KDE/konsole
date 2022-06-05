@@ -38,7 +38,7 @@ public:
     bool readProfile(const QString &path, Profile::Ptr profile, QString &parentProfile);
 
 private:
-    void readProperties(const KConfig &config, Profile::Ptr profile, const Profile::PropertyInfo *properties);
+    void readProperties(const KConfig &config, Profile::Ptr profile);
 };
 }
 

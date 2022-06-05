@@ -36,24 +36,22 @@ QString ProfileWriter::getPath(const Profile::Ptr &profile)
     return localDataLocation % QLatin1String("/") % profile->untranslatedName() % QLatin1String(".profile");
 }
 
-void ProfileWriter::writeProperties(KConfig &config, const Profile::Ptr &profile, const Profile::PropertyInfo *properties)
+void ProfileWriter::writeProperties(KConfig &config, const Profile::Ptr &profile)
 {
     const char *groupName = nullptr;
     KConfigGroup group;
 
-    while (properties->name != nullptr) {
-        if (properties->group != nullptr) {
-            if (groupName == nullptr || qstrcmp(groupName, properties->group) != 0) {
-                group = config.group(properties->group);
-                groupName = properties->group;
+    for (const Profile::PropertyInfo &info : Profile::DefaultPropertyNames) {
+        if (info.group != nullptr) {
+            if (groupName == nullptr || qstrcmp(groupName, info.group) != 0) {
+                group = config.group(info.group);
+                groupName = info.group;
             }
 
-            if (profile->isPropertySet(properties->property)) {
-                group.writeEntry(QLatin1String(properties->name), profile->property<QVariant>(properties->property));
+            if (profile->isPropertySet(info.property)) {
+                group.writeEntry(QLatin1String(info.name), profile->property<QVariant>(info.property));
             }
         }
-
-        properties++;
     }
 }
 
@@ -78,7 +76,7 @@ bool ProfileWriter::writeProfile(const QString &path, const Profile::Ptr &profil
     }
 
     // Write remaining properties
-    writeProperties(config, profile, Profile::DefaultPropertyNames);
+    writeProperties(config, profile);
 
     return true;
 }

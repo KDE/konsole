@@ -46,26 +46,24 @@ QStringList ProfileReader::findProfiles()
     return profiles;
 }
 
-void ProfileReader::readProperties(const KConfig &config, Profile::Ptr profile, const Profile::PropertyInfo *properties)
+void ProfileReader::readProperties(const KConfig &config, Profile::Ptr profile)
 {
     const char *groupName = nullptr;
     KConfigGroup group;
-
-    while (properties->name != nullptr) {
-        if (properties->group != nullptr) {
-            if (groupName == nullptr || qstrcmp(groupName, properties->group) != 0) {
-                group = config.group(properties->group);
-                groupName = properties->group;
-            }
-
-            QString name(QLatin1String(properties->name));
-
-            if (group.hasKey(name)) {
-                profile->setProperty(properties->property, group.readEntry(name, QVariant(properties->type)));
-            }
+    for (const Profile::PropertyInfo &info : Profile::DefaultPropertyNames) {
+        if (info.group == nullptr) {
+            continue;
+        }
+        if (groupName == nullptr || qstrcmp(groupName, info.group) != 0) {
+            group = config.group(info.group);
+            groupName = info.group;
         }
 
-        properties++;
+        const QString name(QLatin1String(info.name));
+
+        if (group.hasKey(name)) {
+            profile->setProperty(info.property, group.readEntry(name, QVariant(info.type)));
+        }
     }
 }
 
@@ -105,7 +103,7 @@ bool ProfileReader::readProfile(const QString &path, Profile::Ptr profile, QStri
     profile->setProperty(Profile::UntranslatedName, general.readEntryUntranslated("Name"));
 
     // Read remaining properties
-    readProperties(config, profile, Profile::DefaultPropertyNames);
+    readProperties(config, profile);
 
     return true;
 }
