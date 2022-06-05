@@ -40,7 +40,7 @@ static const char CURSOR_GROUP[] = "Cursor Options";
 static const char INTERACTION_GROUP[] = "Interaction Options";
 static const char ENCODING_GROUP[] = "Encoding Options";
 
-const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
+const std::vector<Profile::PropertyInfo> Profile::DefaultPropertyNames = {
     // General
     {Path, "Path", nullptr, QVariant::String},
     {Name, "Name", GENERAL_GROUP, QVariant::String},
@@ -135,10 +135,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
 
     // Encoding
     ,
-    {DefaultEncoding, "DefaultEncoding", ENCODING_GROUP, QVariant::String}
-
-    ,
-    {static_cast<Profile::Property>(0), nullptr, nullptr, QVariant::Invalid}};
+    {DefaultEncoding, "DefaultEncoding", ENCODING_GROUP, QVariant::String},
+};
 
 QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;
 

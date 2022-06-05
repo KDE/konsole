@@ -17,6 +17,8 @@
 #include <QStringList>
 #include <QVariant>
 
+#include <vector>
+
 // Konsole
 #include "konsoleprofile_export.h"
 
@@ -781,7 +783,7 @@ private:
         const char *group;
         QVariant::Type type;
     };
-    static const PropertyInfo DefaultPropertyNames[];
+    static const std::vector<PropertyInfo> DefaultPropertyNames;
 };
 
 inline bool Profile::canInheritProperty(Property p)
