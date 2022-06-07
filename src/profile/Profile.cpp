@@ -334,12 +334,17 @@ void Profile::registerProperty(const PropertyInfo &info)
     PropertyInfoByName.insert(name.toLower(), info);
 }
 
-QStringList Profile::propertiesInfoList() const
+// static
+const std::vector<std::string> &Profile::propertiesInfoList()
 {
-    QStringList list;
+    static std::vector<std::string> list;
+    if (!list.empty()) {
+        return list;
+    }
+
     list.reserve(DefaultPropertyNames.size());
     for (const PropertyInfo &info : DefaultPropertyNames) {
-        list.push_back(QLatin1String(info.name) + QLatin1String(" : ") + QLatin1String(QVariant(info.type).typeName()));
+        list.push_back(std::string(info.name) + " : " + QVariant(info.type).typeName());
     }
     return list;
 }

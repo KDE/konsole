@@ -448,11 +448,10 @@ void Application::listAvailableProfiles()
 
 void Application::listProfilePropertyInfo()
 {
-    Profile::Ptr tempProfile = ProfileManager::instance()->defaultProfile();
-    const QStringList names = tempProfile->propertiesInfoList();
+    const std::vector<std::string> &properties = Profile::propertiesInfoList();
 
-    for (const QString &name : names) {
-        printf("%s\n", name.toLocal8Bit().constData());
+    for (const auto &prop : properties) {
+        printf("%s\n", prop.c_str());
     }
 }
 
