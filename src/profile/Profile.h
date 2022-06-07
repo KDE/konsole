@@ -772,7 +772,6 @@ private:
     bool _hidden;
 
     static QHash<QString, PropertyInfo> PropertyInfoByName;
-    static QHash<Property, PropertyInfo> PropertyInfoByProperty;
 
     // Describes a property.  Each property has a name and group
     // which is used when saving/loading the profile.

@@ -141,7 +141,6 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     {static_cast<Profile::Property>(0), nullptr, nullptr, QVariant::Invalid}};
 
 QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;
-QHash<Profile::Property, Profile::PropertyInfo> Profile::PropertyInfoByProperty;
 
 // Magic path for the built-in profile which is not a valid file name,
 // thus it can not interfere with regular profiles.
@@ -344,12 +343,6 @@ void Profile::registerProperty(const PropertyInfo &info)
 {
     QString name = QLatin1String(info.name);
     PropertyInfoByName.insert(name.toLower(), info);
-
-    // only allow one property -> name map
-    // (multiple name -> property mappings are allowed though)
-    if (!PropertyInfoByProperty.contains(info.property)) {
-        PropertyInfoByProperty.insert(info.property, info);
-    }
 }
 
 const QStringList Profile::propertiesInfoList() const
