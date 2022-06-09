@@ -21,15 +21,6 @@
 using namespace Konsole;
 
 Emulation::Emulation()
-    : _windows(QList<ScreenWindow *>())
-    , _currentScreen(nullptr)
-    , _codec(nullptr)
-    , _keyTranslator(nullptr)
-    , _usesMouseTracking(false)
-    , _bracketedPasteMode(false)
-    , _imageSizeInitialized(false)
-    , _peekingPrimary(false)
-    , _activeScreenIndex(0)
 {
     // create screens with a default size
     _screen[0] = new Screen(40, 80);

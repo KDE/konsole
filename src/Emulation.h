@@ -433,7 +433,7 @@ protected:
 
     QList<ScreenWindow *> _windows;
 
-    Screen *_currentScreen; // pointer to the screen which is currently active,
+    Screen *_currentScreen = nullptr; // pointer to the screen which is currently active,
     // this is one of the elements in the screen[] array
 
     Screen *_screen[2]; // 0 = primary screen ( used by most programs, including the shell
@@ -443,9 +443,9 @@ protected:
 
     // decodes an incoming C-style character stream into a unicode QString using
     // the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
-    const QTextCodec *_codec;
+    const QTextCodec *_codec = nullptr;
     std::unique_ptr<QTextDecoder> _decoder;
-    const KeyboardTranslator *_keyTranslator; // the keyboard layout
+    const KeyboardTranslator *_keyTranslator = nullptr; // the keyboard layout
 
 protected Q_SLOTS:
     /**
@@ -474,13 +474,13 @@ private:
     void setScreenInternal(int index);
     Q_DISABLE_COPY(Emulation)
 
-    bool _usesMouseTracking;
-    bool _bracketedPasteMode;
+    bool _usesMouseTracking = false;
+    bool _bracketedPasteMode = false;
     QTimer _bulkTimer1{this};
     QTimer _bulkTimer2{this};
-    bool _imageSizeInitialized;
-    bool _peekingPrimary;
-    int _activeScreenIndex;
+    bool _imageSizeInitialized = false;
+    bool _peekingPrimary = false;
+    int _activeScreenIndex = 0;
 };
 }
 
