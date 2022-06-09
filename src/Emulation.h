@@ -476,8 +476,8 @@ private:
 
     bool _usesMouseTracking;
     bool _bracketedPasteMode;
-    QTimer _bulkTimer1;
-    QTimer _bulkTimer2;
+    QTimer _bulkTimer1{this};
+    QTimer _bulkTimer2{this};
     bool _imageSizeInitialized;
     bool _peekingPrimary;
     int _activeScreenIndex;
