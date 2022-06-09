@@ -77,39 +77,47 @@ public:
     }
 };
 
+// Used to control migrating config entries.
+// Increment when there are new keys to migrate.
+static int CurrentConfigVersion = 1;
+
 static void migrateRenamedConfigKeys()
 {
-    struct KeyInfo {
-        const char *groupName;
-        const char *oldKeyName;
-        const char *newKeyName;
-    };
-
-    static const KeyInfo keys[] = {{"KonsoleWindow", "SaveGeometryOnExit", "RememberWindowSize"}};
-
     KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
+    KConfigGroup verGroup = konsoleConfig->group("General");
+    const int savedVersion = verGroup.readEntry<int>("ConfigVersion", 0);
+    if (savedVersion < CurrentConfigVersion) {
+        struct KeyInfo {
+            const char *groupName;
+            const char *oldKeyName;
+            const char *newKeyName;
+        };
 
-    // Migrate renamed config keys
-    for (const auto &[group, oldName, newName] : keys) {
-        KConfigGroup cg = konsoleConfig->group(group);
-        if (cg.exists() && cg.hasKey(oldName)) {
-            const bool value = cg.readEntry(oldName, false);
-            cg.deleteEntry(oldName);
-            cg.writeEntry(newName, value);
+        static const KeyInfo keys[] = {{"KonsoleWindow", "SaveGeometryOnExit", "RememberWindowSize"}};
+
+        // Migrate renamed config keys
+        for (const auto &[group, oldName, newName] : keys) {
+            KConfigGroup cg = konsoleConfig->group(group);
+            if (cg.exists() && cg.hasKey(oldName)) {
+                const bool value = cg.readEntry(oldName, false);
+                cg.deleteEntry(oldName);
+                cg.writeEntry(newName, value);
+            }
         }
-    }
 
-    // With 5.93 KColorSchemeManager from KConfigWidgets, handles the loading
-    // and saving of the widget color scheme, and uses "ColorScheme" as the
-    // entry name, so clean-up here
+        // With 5.93 KColorSchemeManager from KConfigWidgets, handles the loading
+        // and saving of the widget color scheme, and uses "ColorScheme" as the
+        // entry name, so clean-up here
 #if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 93, 0)
-    KConfigGroup cg(konsoleConfig, "UiSettings");
-    const QString schemeName = cg.readEntry("WindowColorScheme");
-    cg.deleteEntry("WindowColorScheme");
-    cg.writeEntry("ColorScheme", schemeName);
+        KConfigGroup cg(konsoleConfig, "UiSettings");
+        const QString schemeName = cg.readEntry("WindowColorScheme");
+        cg.deleteEntry("WindowColorScheme");
+        cg.writeEntry("ColorScheme", schemeName);
 #endif
 
-    konsoleConfig->sync();
+        verGroup.writeEntry("ConfigVersion", CurrentConfigVersion);
+        konsoleConfig->sync();
+    }
 }
 
 // ***
