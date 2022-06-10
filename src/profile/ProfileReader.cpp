@@ -50,7 +50,7 @@ void ProfileReader::readProperties(const KConfig &config, Profile::Ptr profile)
 {
     const char *groupName = nullptr;
     KConfigGroup group;
-    for (const Profile::PropertyInfo &info : Profile::DefaultPropertyNames) {
+    for (const Profile::PropertyInfo &info : Profile::DefaultProperties) {
         if (info.group == nullptr) {
             continue;
         }
@@ -62,7 +62,7 @@ void ProfileReader::readProperties(const KConfig &config, Profile::Ptr profile)
         const QString name(QLatin1String(info.name));
 
         if (group.hasKey(name)) {
-            profile->setProperty(info.property, group.readEntry(name, QVariant(info.type)));
+            profile->setProperty(info.property, group.readEntry(name, QVariant(info.defaultValue.type())));
         }
     }
 }

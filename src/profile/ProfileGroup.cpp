@@ -30,7 +30,7 @@ QList<Profile::Ptr> ProfileGroup::profiles() const
 
 void ProfileGroup::updateValues()
 {
-    for (const PropertyInfo &info : Profile::DefaultPropertyNames) {
+    for (const PropertyInfo &info : Profile::DefaultProperties) {
         // the profile group does not store a value for some properties
         // (eg. name, path) if even they are equal between profiles -
         //

@@ -40,102 +40,100 @@ static const char CURSOR_GROUP[] = "Cursor Options";
 static const char INTERACTION_GROUP[] = "Interaction Options";
 static const char ENCODING_GROUP[] = "Encoding Options";
 
-const std::vector<Profile::PropertyInfo> Profile::DefaultPropertyNames = {
+const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     // General
-    {Path, "Path", nullptr, QVariant::String},
-    {Name, "Name", GENERAL_GROUP, QVariant::String},
-    {UntranslatedName, "UntranslatedName", nullptr, QVariant::String},
-    {Icon, "Icon", GENERAL_GROUP, QVariant::String},
-    {Command, "Command", nullptr, QVariant::String},
-    {Arguments, "Arguments", nullptr, QVariant::StringList},
-    {MenuIndex, "MenuIndex", nullptr, QVariant::String},
-    {Environment, "Environment", GENERAL_GROUP, QVariant::StringList},
-    {Directory, "Directory", GENERAL_GROUP, QVariant::String},
-    {LocalTabTitleFormat, "LocalTabTitleFormat", GENERAL_GROUP, QVariant::String},
-    {LocalTabTitleFormat, "tabtitle", nullptr, QVariant::String},
-    {RemoteTabTitleFormat, "RemoteTabTitleFormat", GENERAL_GROUP, QVariant::String},
-    {ShowTerminalSizeHint, "ShowTerminalSizeHint", GENERAL_GROUP, QVariant::Bool},
-    {StartInCurrentSessionDir, "StartInCurrentSessionDir", GENERAL_GROUP, QVariant::Bool},
-    {SilenceSeconds, "SilenceSeconds", GENERAL_GROUP, QVariant::Int},
-    {TerminalColumns, "TerminalColumns", GENERAL_GROUP, QVariant::Int},
-    {TerminalRows, "TerminalRows", GENERAL_GROUP, QVariant::Int},
-    {TerminalMargin, "TerminalMargin", GENERAL_GROUP, QVariant::Int},
-    {TerminalCenter, "TerminalCenter", GENERAL_GROUP, QVariant::Bool}
+    {Path, "Path", nullptr, QString()},
+    {Name, "Name", GENERAL_GROUP, QString()},
+    {UntranslatedName, "UntranslatedName", nullptr, QString()},
+    {Icon, "Icon", GENERAL_GROUP, QLatin1String("utilities-terminal")},
+    {Command, "Command", nullptr, QString()},
+    {Arguments, "Arguments", nullptr, QStringList()},
+    {MenuIndex, "MenuIndex", nullptr, QLatin1String("0")},
+    {Environment, "Environment", GENERAL_GROUP, QStringList{QLatin1String("TERM=xterm-256color"), QLatin1String("COLORTERM=truecolor")}},
+    {Directory, "Directory", GENERAL_GROUP, QString()},
+    {LocalTabTitleFormat, "LocalTabTitleFormat", GENERAL_GROUP, QLatin1String("%d : %n")},
+    {LocalTabTitleFormat, "tabtitle", nullptr, QLatin1String("%d : %n")},
+    {RemoteTabTitleFormat, "RemoteTabTitleFormat", GENERAL_GROUP, QLatin1String("(%u) %H")},
+    {ShowTerminalSizeHint, "ShowTerminalSizeHint", GENERAL_GROUP, true},
+    {StartInCurrentSessionDir, "StartInCurrentSessionDir", GENERAL_GROUP, true},
+    {SilenceSeconds, "SilenceSeconds", GENERAL_GROUP, 10},
+    {TerminalColumns, "TerminalColumns", GENERAL_GROUP, 110},
+    {TerminalRows, "TerminalRows", GENERAL_GROUP, 28},
+    {TerminalMargin, "TerminalMargin", GENERAL_GROUP, 1},
+    {TerminalCenter, "TerminalCenter", GENERAL_GROUP, false},
 
     // Appearance
-    ,
-    {Font, "Font", APPEARANCE_GROUP, QVariant::Font},
-    {ColorScheme, "ColorScheme", APPEARANCE_GROUP, QVariant::String},
-    {ColorScheme, "colors", nullptr, QVariant::String},
-    {AntiAliasFonts, "AntiAliasFonts", APPEARANCE_GROUP, QVariant::Bool},
-    {BoldIntense, "BoldIntense", APPEARANCE_GROUP, QVariant::Bool},
-    {UseFontLineCharacters, "UseFontLineChararacters", APPEARANCE_GROUP, QVariant::Bool},
-    {LineSpacing, "LineSpacing", APPEARANCE_GROUP, QVariant::Int},
-    {TabColor, "TabColor", APPEARANCE_GROUP, QVariant::Color},
-    {DimValue, "DimmValue", APPEARANCE_GROUP, QVariant::Int},
-    {DimWhenInactive, "DimWhenInactive", GENERAL_GROUP, QVariant::Bool},
-    {InvertSelectionColors, "InvertSelectionColors", GENERAL_GROUP, QVariant::Bool}
+    {Font, "Font", APPEARANCE_GROUP, QFont()},
+    {ColorScheme, "ColorScheme", APPEARANCE_GROUP, QLatin1String("Breeze")},
+    {ColorScheme, "colors", nullptr, QLatin1String("Breeze")},
+    {AntiAliasFonts, "AntiAliasFonts", APPEARANCE_GROUP, true},
+    {BoldIntense, "BoldIntense", APPEARANCE_GROUP, true},
+    {UseFontLineCharacters, "UseFontLineChararacters", APPEARANCE_GROUP, false},
+    {LineSpacing, "LineSpacing", APPEARANCE_GROUP, 0},
+    {TabColor, "TabColor", APPEARANCE_GROUP, QColor(QColor::Invalid)},
+    {DimValue, "DimmValue", APPEARANCE_GROUP, 128},
+    {DimWhenInactive, "DimWhenInactive", GENERAL_GROUP, false},
+    {InvertSelectionColors, "InvertSelectionColors", GENERAL_GROUP, false},
 
-    // Keyboard
-    ,
-    {KeyBindings, "KeyBindings", KEYBOARD_GROUP, QVariant::String}
+// Keyboard
+#ifdef Q_OS_MACOS
+    {KeyBindings, "KeyBindings", KEYBOARD_GROUP, QLatin1String("macos")},
+#else
+    {KeyBindings, "KeyBindings", KEYBOARD_GROUP, QLatin1String("default")},
+#endif
 
     // Scrolling
-    ,
-    {HistoryMode, "HistoryMode", SCROLLING_GROUP, QVariant::Int},
-    {HistorySize, "HistorySize", SCROLLING_GROUP, QVariant::Int},
-    {ScrollBarPosition, "ScrollBarPosition", SCROLLING_GROUP, QVariant::Int},
-    {ScrollFullPage, "ScrollFullPage", SCROLLING_GROUP, QVariant::Bool},
-    {HighlightScrolledLines, "HighlightScrolledLines", SCROLLING_GROUP, QVariant::Bool},
-    {ReflowLines, "ReflowLines", SCROLLING_GROUP, QVariant::Bool}
+    {HistoryMode, "HistoryMode", SCROLLING_GROUP, Enum::FixedSizeHistory},
+    {HistorySize, "HistorySize", SCROLLING_GROUP, 1000},
+    {ScrollBarPosition, "ScrollBarPosition", SCROLLING_GROUP, Enum::ScrollBarRight},
+    {ScrollFullPage, "ScrollFullPage", SCROLLING_GROUP, false},
+    {HighlightScrolledLines, "HighlightScrolledLines", SCROLLING_GROUP, true},
+    {ReflowLines, "ReflowLines", SCROLLING_GROUP, true},
 
     // Terminal Features
-    ,
-    {UrlHintsModifiers, "UrlHintsModifiers", TERMINAL_GROUP, QVariant::Int},
-    {ReverseUrlHints, "ReverseUrlHints", TERMINAL_GROUP, QVariant::Bool},
-    {BlinkingTextEnabled, "BlinkingTextEnabled", TERMINAL_GROUP, QVariant::Bool},
-    {FlowControlEnabled, "FlowControlEnabled", TERMINAL_GROUP, QVariant::Bool},
-    {BidiRenderingEnabled, "BidiRenderingEnabled", TERMINAL_GROUP, QVariant::Bool},
-    {BlinkingCursorEnabled, "BlinkingCursorEnabled", TERMINAL_GROUP, QVariant::Bool},
-    {BellMode, "BellMode", TERMINAL_GROUP, QVariant::Int},
-    {VerticalLine, "VerticalLine", TERMINAL_GROUP, QVariant::Bool},
-    {VerticalLineAtChar, "VerticalLineAtChar", TERMINAL_GROUP, QVariant::Int},
-    {PeekPrimaryKeySequence, "PeekPrimaryKeySequence", TERMINAL_GROUP, QVariant::String}
+    {UrlHintsModifiers, "UrlHintsModifiers", TERMINAL_GROUP, 0},
+    {ReverseUrlHints, "ReverseUrlHints", TERMINAL_GROUP, false},
+    {BlinkingTextEnabled, "BlinkingTextEnabled", TERMINAL_GROUP, true},
+    {FlowControlEnabled, "FlowControlEnabled", TERMINAL_GROUP, true},
+    {BidiRenderingEnabled, "BidiRenderingEnabled", TERMINAL_GROUP, true},
+    {BlinkingCursorEnabled, "BlinkingCursorEnabled", TERMINAL_GROUP, false},
+    {BellMode, "BellMode", TERMINAL_GROUP, Enum::NotifyBell},
+    {VerticalLine, "VerticalLine", TERMINAL_GROUP, false},
+    {VerticalLineAtChar, "VerticalLineAtChar", TERMINAL_GROUP, 80},
+    {PeekPrimaryKeySequence, "PeekPrimaryKeySequence", TERMINAL_GROUP, QString()},
+
     // Cursor
-    ,
-    {UseCustomCursorColor, "UseCustomCursorColor", CURSOR_GROUP, QVariant::Bool},
-    {CursorShape, "CursorShape", CURSOR_GROUP, QVariant::Int},
-    {CustomCursorColor, "CustomCursorColor", CURSOR_GROUP, QVariant::Color},
-    {CustomCursorTextColor, "CustomCursorTextColor", CURSOR_GROUP, QVariant::Color}
+    {UseCustomCursorColor, "UseCustomCursorColor", CURSOR_GROUP, false},
+    {CursorShape, "CursorShape", CURSOR_GROUP, Enum::BlockCursor},
+    {CustomCursorColor, "CustomCursorColor", CURSOR_GROUP, QColor(Qt::white)},
+    {CustomCursorTextColor, "CustomCursorTextColor", CURSOR_GROUP, QColor(Qt::black)},
 
     // Interaction
-    ,
-    {WordCharacters, "WordCharacters", INTERACTION_GROUP, QVariant::String},
-    {TripleClickMode, "TripleClickMode", INTERACTION_GROUP, QVariant::Int},
-    {UnderlineLinksEnabled, "UnderlineLinksEnabled", INTERACTION_GROUP, QVariant::Bool},
-    {UnderlineFilesEnabled, "UnderlineFilesEnabled", INTERACTION_GROUP, QVariant::Bool},
-    {OpenLinksByDirectClickEnabled, "OpenLinksByDirectClickEnabled", INTERACTION_GROUP, QVariant::Bool},
-    {TextEditorCmd, "TextEditorCmd", INTERACTION_GROUP, QVariant::Int},
-    {TextEditorCmdCustom, "TextEditorCmdCustom", INTERACTION_GROUP, QVariant::String},
-    {CtrlRequiredForDrag, "CtrlRequiredForDrag", INTERACTION_GROUP, QVariant::Bool},
-    {DropUrlsAsText, "DropUrlsAsText", INTERACTION_GROUP, QVariant::Bool},
-    {AutoCopySelectedText, "AutoCopySelectedText", INTERACTION_GROUP, QVariant::Bool},
-    {CopyTextAsHTML, "CopyTextAsHTML", INTERACTION_GROUP, QVariant::Bool},
-    {TrimLeadingSpacesInSelectedText, "TrimLeadingSpacesInSelectedText", INTERACTION_GROUP, QVariant::Bool},
-    {TrimTrailingSpacesInSelectedText, "TrimTrailingSpacesInSelectedText", INTERACTION_GROUP, QVariant::Bool},
-    {PasteFromSelectionEnabled, "PasteFromSelectionEnabled", INTERACTION_GROUP, QVariant::Bool},
-    {PasteFromClipboardEnabled, "PasteFromClipboardEnabled", INTERACTION_GROUP, QVariant::Bool},
-    {MiddleClickPasteMode, "MiddleClickPasteMode", INTERACTION_GROUP, QVariant::Int},
-    {MouseWheelZoomEnabled, "MouseWheelZoomEnabled", INTERACTION_GROUP, QVariant::Bool},
-    {AlternateScrolling, "AlternateScrolling", INTERACTION_GROUP, QVariant::Bool},
-    {AllowEscapedLinks, "AllowEscapedLinks", INTERACTION_GROUP, QVariant::Bool},
-    {EscapedLinksSchema, "EscapedLinksSchema", INTERACTION_GROUP, QVariant::String},
-    {ColorFilterEnabled, "ColorFilterEnabled", INTERACTION_GROUP, QVariant::Bool},
-    {AllowMouseTracking, "AllowMouseTracking", INTERACTION_GROUP, QVariant::Bool}
+    {WordCharacters, "WordCharacters", INTERACTION_GROUP, QLatin1String(":@-./_~?&=%+#")},
+    {TripleClickMode, "TripleClickMode", INTERACTION_GROUP, Enum::SelectWholeLine},
+    {UnderlineLinksEnabled, "UnderlineLinksEnabled", INTERACTION_GROUP, true},
+    {UnderlineFilesEnabled, "UnderlineFilesEnabled", INTERACTION_GROUP, false},
+    {OpenLinksByDirectClickEnabled, "OpenLinksByDirectClickEnabled", INTERACTION_GROUP, false},
+    {TextEditorCmd, "TextEditorCmd", INTERACTION_GROUP, Enum::Kate},
+    {TextEditorCmdCustom, "TextEditorCmdCustom", INTERACTION_GROUP, QLatin1String("kate PATH:LINE:COLUMN")},
+    {CtrlRequiredForDrag, "CtrlRequiredForDrag", INTERACTION_GROUP, true},
+    {DropUrlsAsText, "DropUrlsAsText", INTERACTION_GROUP, true},
+    {AutoCopySelectedText, "AutoCopySelectedText", INTERACTION_GROUP, false},
+    {CopyTextAsHTML, "CopyTextAsHTML", INTERACTION_GROUP, true},
+    {TrimLeadingSpacesInSelectedText, "TrimLeadingSpacesInSelectedText", INTERACTION_GROUP, false},
+    {TrimTrailingSpacesInSelectedText, "TrimTrailingSpacesInSelectedText", INTERACTION_GROUP, false},
+    {PasteFromSelectionEnabled, "PasteFromSelectionEnabled", INTERACTION_GROUP, true},
+    {PasteFromClipboardEnabled, "PasteFromClipboardEnabled", INTERACTION_GROUP, false},
+    {MiddleClickPasteMode, "MiddleClickPasteMode", INTERACTION_GROUP, Enum::PasteFromX11Selection},
+    {MouseWheelZoomEnabled, "MouseWheelZoomEnabled", INTERACTION_GROUP, true},
+    {AllowMouseTracking, "AllowMouseTracking", INTERACTION_GROUP, true},
+    {AlternateScrolling, "AlternateScrolling", INTERACTION_GROUP, true},
+    {AllowEscapedLinks, "AllowEscapedLinks", INTERACTION_GROUP, false},
+    {EscapedLinksSchema, "EscapedLinksSchema", INTERACTION_GROUP, QLatin1String("http://;https://;file://")},
+    {ColorFilterEnabled, "ColorFilterEnabled", INTERACTION_GROUP, true},
 
     // Encoding
-    ,
-    {DefaultEncoding, "DefaultEncoding", ENCODING_GROUP, QVariant::String},
+    {DefaultEncoding, "DefaultEncoding", ENCODING_GROUP, QString()},
 };
 
 QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;
@@ -158,98 +156,24 @@ void Profile::fillTableWithDefaultNames()
         return;
     }
 
-    std::for_each(DefaultPropertyNames.cbegin(), DefaultPropertyNames.cend(), Profile::registerProperty);
+    std::for_each(DefaultProperties.cbegin(), DefaultProperties.cend(), Profile::registerProperty);
 
     filledDefaults = true;
 }
 
 void Profile::useBuiltin()
 {
+    for (const PropertyInfo &propInfo : DefaultProperties) {
+        setProperty(propInfo.property, propInfo.defaultValue);
+    }
     setProperty(Name, i18nc("Name of the built-in profile", BUILTIN_UNTRANSLATED_NAME_CHAR));
     setProperty(UntranslatedName, QString::fromLatin1(BUILTIN_UNTRANSLATED_NAME_CHAR));
     setProperty(Path, BUILTIN_MAGIC_PATH);
     setProperty(Command, QString::fromUtf8(qgetenv("SHELL")));
     // See Pty.cpp on why Arguments is populated
-    setProperty(Arguments, QStringList() << QString::fromUtf8(qgetenv("SHELL")));
-    setProperty(Icon, QStringLiteral("utilities-terminal"));
-    setProperty(Environment, QStringList() << QStringLiteral("TERM=xterm-256color") << QStringLiteral("COLORTERM=truecolor"));
-    setProperty(LocalTabTitleFormat, QStringLiteral("%d : %n"));
-    setProperty(RemoteTabTitleFormat, QStringLiteral("(%u) %H"));
-    setProperty(ShowTerminalSizeHint, true);
-    setProperty(DimWhenInactive, false);
-    setProperty(DimValue, 128);
-    setProperty(InvertSelectionColors, false);
-    setProperty(StartInCurrentSessionDir, true);
-    setProperty(MenuIndex, QStringLiteral("0"));
-    setProperty(SilenceSeconds, 10);
-    setProperty(TerminalColumns, 110);
-    setProperty(TerminalRows, 28);
-    setProperty(TerminalMargin, 1);
-    setProperty(TerminalCenter, false);
-    setProperty(MouseWheelZoomEnabled, true);
-    setProperty(AlternateScrolling, true);
-    setProperty(AllowMouseTracking, true);
-
-#ifdef Q_OS_MACOS
-    setProperty(KeyBindings, QStringLiteral("macos"));
-#else
-    setProperty(KeyBindings, QStringLiteral("default"));
-#endif
-    setProperty(ColorScheme, QStringLiteral("Breeze"));
+    setProperty(Arguments, QStringList{QString::fromUtf8(qgetenv("SHELL"))});
     setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
-
-    setProperty(HistoryMode, Enum::FixedSizeHistory);
-    setProperty(HistorySize, 1000);
-    setProperty(ScrollBarPosition, Enum::ScrollBarRight);
-    setProperty(ScrollFullPage, false);
-    setProperty(HighlightScrolledLines, true);
-    setProperty(ReflowLines, true);
-
-    setProperty(FlowControlEnabled, true);
-    setProperty(UrlHintsModifiers, 0);
-    setProperty(ReverseUrlHints, false);
-    setProperty(BlinkingTextEnabled, true);
-    setProperty(UnderlineLinksEnabled, true);
-    setProperty(UnderlineFilesEnabled, false);
-    setProperty(OpenLinksByDirectClickEnabled, false);
-
-    setProperty(TextEditorCmd, Enum::Kate);
-    setProperty(TextEditorCmdCustom, QStringLiteral("kate PATH:LINE:COLUMN"));
-
-    setProperty(CtrlRequiredForDrag, true);
-    setProperty(AutoCopySelectedText, false);
-    setProperty(CopyTextAsHTML, true);
-    setProperty(TrimLeadingSpacesInSelectedText, false);
-    setProperty(TrimTrailingSpacesInSelectedText, false);
-    setProperty(DropUrlsAsText, true);
-    setProperty(PasteFromSelectionEnabled, true);
-    setProperty(PasteFromClipboardEnabled, false);
-    setProperty(MiddleClickPasteMode, Enum::PasteFromX11Selection);
-    setProperty(TripleClickMode, Enum::SelectWholeLine);
-    setProperty(ColorFilterEnabled, true);
-
-    setProperty(BlinkingCursorEnabled, false);
-    setProperty(BidiRenderingEnabled, true);
-    setProperty(LineSpacing, 0);
-    setProperty(CursorShape, Enum::BlockCursor);
-    setProperty(UseCustomCursorColor, false);
-    setProperty(CustomCursorColor, QColor(Qt::white));
-    setProperty(CustomCursorTextColor, QColor(Qt::black));
-    setProperty(BellMode, Enum::NotifyBell);
-
     setProperty(DefaultEncoding, QLatin1String(QTextCodec::codecForLocale()->name()));
-    setProperty(AntiAliasFonts, true);
-    setProperty(BoldIntense, true);
-    setProperty(UseFontLineCharacters, false);
-
-    setProperty(WordCharacters, QStringLiteral(":@-./_~?&=%+#"));
-
-    setProperty(TabColor, QColor(QColor::Invalid));
-    setProperty(AllowEscapedLinks, false);
-    setProperty(EscapedLinksSchema, QStringLiteral("http://;https://;file://"));
-    setProperty(VerticalLine, false);
-    setProperty(VerticalLineAtChar, 80);
-    setProperty(PeekPrimaryKeySequence, QString());
     // Built-in profile should not be shown in menus
     setHidden(true);
 }
@@ -263,7 +187,7 @@ Profile::Profile(const Profile::Ptr &parent)
 
 void Profile::clone(Profile::Ptr profile, bool differentOnly)
 {
-    for (const PropertyInfo &info : DefaultPropertyNames) {
+    for (const PropertyInfo &info : DefaultProperties) {
         Property current = info.property;
         QVariant otherValue = profile->property<QVariant>(current);
         if (current == Name || current == Path) { // These are unique per Profile
@@ -342,9 +266,9 @@ const std::vector<std::string> &Profile::propertiesInfoList()
         return list;
     }
 
-    list.reserve(DefaultPropertyNames.size());
-    for (const PropertyInfo &info : DefaultPropertyNames) {
-        list.push_back(std::string(info.name) + " : " + QVariant(info.type).typeName());
+    list.reserve(DefaultProperties.size());
+    for (const PropertyInfo &info : DefaultProperties) {
+        list.push_back(std::string(info.name) + " : " + info.defaultValue.typeName());
     }
     return list;
 }

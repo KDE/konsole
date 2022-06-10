@@ -781,9 +781,9 @@ private:
         Property property;
         const char *name;
         const char *group;
-        QVariant::Type type;
+        QVariant defaultValue;
     };
-    static const std::vector<PropertyInfo> DefaultPropertyNames;
+    static const std::vector<PropertyInfo> DefaultProperties;
 };
 
 inline bool Profile::canInheritProperty(Property p)

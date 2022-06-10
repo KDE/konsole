@@ -41,7 +41,7 @@ void ProfileWriter::writeProperties(KConfig &config, const Profile::Ptr &profile
     const char *groupName = nullptr;
     KConfigGroup group;
 
-    for (const Profile::PropertyInfo &info : Profile::DefaultPropertyNames) {
+    for (const Profile::PropertyInfo &info : Profile::DefaultProperties) {
         if (info.group != nullptr) {
             if (groupName == nullptr || qstrcmp(groupName, info.group) != 0) {
                 group = config.group(info.group);
