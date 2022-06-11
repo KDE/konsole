@@ -17,6 +17,8 @@ ecm_qt_declare_logging_category(
 )
 
 add_library(konsolecharacters OBJECT ${konsolecharacters_SRCS})
+# Needed to link this static lib to shared libs
+set_target_properties(konsolecharacters PROPERTIES POSITION_INDEPENDENT_CODE ON)
 generate_export_header(konsolecharacters BASE_NAME konsolecharacters)
 target_include_directories(konsolecharacters
     PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
