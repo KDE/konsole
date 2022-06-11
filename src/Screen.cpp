@@ -27,7 +27,7 @@
 #include "history/HistoryScrollNone.h"
 #include "history/HistoryType.h"
 
-#ifdef HAVE_MALLOC_TRIM
+#if HAVE_MALLOC_TRIM
 // For malloc_trim, which is a GNU extension
 extern "C" {
 #include <malloc.h>
@@ -1881,7 +1881,7 @@ void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
         t.scroll(_history);
     }
     _graphicsPlacements.clear();
-#ifdef HAVE_MALLOC_TRIM
+#if HAVE_MALLOC_TRIM
 
 #ifdef Q_OS_LINUX
     // We might have been using gigabytes of memory, so make sure it is actually released

@@ -195,7 +195,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 
 void TerminalInterfaceTest::testTerminalInterfaceV2()
 {
-#ifdef USE_TERMINALINTERFACEV2
+#if USE_TERMINALINTERFACEV2
     Profile::Ptr testProfile(new Profile);
     testProfile->useBuiltin();
     ProfileManager::instance()->addProfile(testProfile);

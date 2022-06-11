@@ -175,7 +175,7 @@ QString Part::currentWorkingDirectory() const
     return activeSession()->currentWorkingDirectory();
 }
 
-#ifdef USE_TERMINALINTERFACEV2
+#if USE_TERMINALINTERFACEV2
 QVariant Part::profileProperty(const QString &profileProperty) const
 {
     const auto metaEnum = QMetaEnum::fromType<Profile::Property>();

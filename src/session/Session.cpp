@@ -51,7 +51,7 @@
 #include "terminalDisplay/TerminalScrollBar.h"
 
 // Linux
-#ifdef HAVE_GETPWUID
+#if HAVE_GETPWUID
 #include <pwd.h>
 #include <sys/types.h>
 #endif
@@ -456,7 +456,7 @@ void Session::run()
 
     QStringList programs = {_program, QString::fromUtf8(qgetenv("SHELL")), QStringLiteral("/bin/sh")};
 
-#ifdef HAVE_GETPWUID
+#if HAVE_GETPWUID
     auto pw = getpwuid(getuid());
     // pw may be NULL
     if (pw != nullptr) {
@@ -925,7 +925,7 @@ void Session::sendText(const QString &text) const
         return;
     }
 
-#if !defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
+#if !REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS
     if (show_disallow_certain_dbus_methods_message) {
         KNotification::event(KNotification::Warning,
                              QStringLiteral("Konsole D-Bus Warning"),

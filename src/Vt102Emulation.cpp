@@ -641,7 +641,7 @@ void Vt102Emulation::processChecksumRequest([[maybe_unused]] int crargc, int cra
 {
     int checksum = 0;
 
-#if defined(ENABLE_DECRQCRA)
+#if ENABLE_DECRQCRA
     int top, left, bottom, right;
 
     /* DEC STD-070 5-179 "If Pp is 0 or omitted, subsequent parameters are ignored
