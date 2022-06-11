@@ -787,11 +787,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
 
     if (attribute == Session::ProfileChange) {
         if (value.startsWith(QLatin1String("CursorShape="))) {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             const auto numStr = QStringView(value).right(1);
-#else
-            const auto numStr = value.rightRef(1);
-#endif
             const Enum::CursorShapeEnum shape = static_cast<Enum::CursorShapeEnum>(numStr.toInt());
             Q_EMIT setCursorStyleRequest(shape);
             return;
@@ -834,11 +830,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
                 }
                 if (var == QLatin1String("width")) {
                     int unitPos = val.toStdString().find_first_not_of("0123456789");
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                     scaledWidth = QStringView(val).mid(0, unitPos).toInt();
-#else
-                    scaledWidth = val.midRef(0, unitPos).toInt();
-#endif
                     if (unitPos == -1) {
                         scaledWidth *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontWidth();
                     } else {
@@ -849,11 +841,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
                 }
                 if (var == QLatin1String("height")) {
                     int unitPos = val.toStdString().find_first_not_of("0123456789");
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                     scaledHeight = QStringView(val).mid(0, unitPos).toInt();
-#else
-                    scaledHeight = val.midRef(0, unitPos).toInt();
-#endif
                     if (unitPos == -1) {
                         scaledHeight *= _currentScreen->currentTerminalDisplay()->terminalFont()->fontHeight();
                     } else {
@@ -1399,11 +1387,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
             return;
         }
         if (list.at(i).at(2).isNumber() || list.at(i).at(2).toLatin1() == '-') {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             keys[list.at(i).at(0).toLatin1()] = QStringView(list.at(i)).mid(2).toInt();
-#else
-            keys[list.at(i).at(0).toLatin1()] = list.at(i).midRef(2).toInt();
-#endif
         } else {
             keys[list.at(i).at(0).toLatin1()] = list.at(i).at(2).toLatin1();
         }
