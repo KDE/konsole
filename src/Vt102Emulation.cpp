@@ -1150,6 +1150,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     }
 
     if (attribute == Image) {
+        bool inlineImage = false;
         if (value.startsWith(QLatin1String("ReportCellSize"))) {
             iTermReportCellSize();
             return;
@@ -1159,7 +1160,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         }
         int pos = value.indexOf(QLatin1Char(':'));
         QStringList params = value.mid(5, pos - 5).split(QLatin1Char(';'));
-        int keepAspect = 1;
+        bool keepAspect = true;
         int scaledWidth = 0;
         int scaledHeight = 0;
         bool moveCursor = true;
@@ -1169,19 +1170,13 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 QString var = p.mid(0, eq);
                 QString val = p.mid(eq + 1);
                 if (var == QLatin1String("inline")) {
-                    if (val != QLatin1String("1")) {
-                        return;
-                    }
+                    inlineImage = val == QLatin1String("1");
                 }
                 if (var == QLatin1String("preserveAspectRatio")) {
-                    if (val == QLatin1String("0")) {
-                        keepAspect = 0;
-                    }
+                    keepAspect = val == QLatin1String("0");
                 }
                 if (var == QLatin1String("doNotMoveCursor")) {
-                    if (val == QLatin1String("1")) {
-                        moveCursor = false;
-                    }
+                    moveCursor = val != QLatin1String("1");
                 }
                 if (var == QLatin1String("width")) {
                     int unitPos = val.toStdString().find_first_not_of("0123456789");
