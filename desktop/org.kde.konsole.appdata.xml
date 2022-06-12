@@ -115,7 +115,7 @@
     <p xml:lang="gl">Konsole é un terminal para executar un intérprete de ordes. Fornece unha interface de liña de ordes para controlar directamente o computador.</p>
     <p xml:lang="hu">A Konsole egy terminál parancsértelmezők futtatásához. Parancssosor felületet biztosít a számítógépe közvetlen irányításához.</p>
     <p xml:lang="ia">Konsole es un terminal pro executar un shell de commando.  Illo provide un interfacie de linea de commando pro controlar directemente tu computator.</p>
-    <p xml:lang="id">Konsole adalah sebuah terminal untuk menjalankan shell perintah. Ini menyediakan antarmuka baris perintah untuk secara langsung mengendalikan komputermu.</p>
+    <p xml:lang="id">Konsole adalah sebuah terminal untuk menjalankan shell perintah. Ini menyediakan antarmuka baris perintah untuk secara langsung mengendalikan komputer Anda.</p>
     <p xml:lang="it">Konsole è un terminale per eseguire una shell di comandi. Fornisce un'interfaccia a riga di comando per controllare direttamente il tuo computer.</p>
     <p xml:lang="ko">Konsole은 흔히 터미널, 혹은 셸이라고 불리는 X 터미널 에뮬레이터입니다. 텍스트 창에서 컴퓨터를 직접 재현하는 명령행 인터페이스를 재현합니다.</p>
     <p xml:lang="ml">കൺസോൾ എന്നത് ആജ്ഞ ഷെൽ റൺ ചെയ്യുന്നതിനുള്ള ഒരു ടെർമിനലാണ്. ഇത് കമ്പ്യൂട്ടറിനെ നേരിട്ട് നിയന്ത്രിക്കുന്നതിനുള്ള ഒരു ആജ്ഞാസ്ഥാനം നല്‍കുന്നു.</p>
@@ -246,7 +246,7 @@
       <li xml:lang="gl">Varios perfís.</li>
       <li xml:lang="hu">Több profil használatának lehetősége</li>
       <li xml:lang="ia">Profilos multiple</li>
-      <li xml:lang="id">Pofil yang multipel</li>
+      <li xml:lang="id">Beberapa profil</li>
       <li xml:lang="it">Profili multipli</li>
       <li xml:lang="ko">다중 프로필</li>
       <li xml:lang="lt">Daugybė profilių</li>
@@ -379,7 +379,7 @@
       <li xml:lang="gl">Busca.</li>
       <li xml:lang="hu">Keresés</li>
       <li xml:lang="ia">Cercante</li>
-      <li xml:lang="id">Mencari</li>
+      <li xml:lang="id">Pencarian</li>
       <li xml:lang="it">Ricerca</li>
       <li xml:lang="ko">찾기</li>
       <li xml:lang="lt">Paieška</li>
@@ -424,7 +424,7 @@
       <li xml:lang="gl">Posibilidade de gardar a saída.</li>
       <li xml:lang="hu">Kimenet mentése</li>
       <li xml:lang="ia">Salveguardante exito</li>
-      <li xml:lang="id">Menyimpan output</li>
+      <li xml:lang="id">Penyimpanan keluaran</li>
       <li xml:lang="it">Salvataggio del risultato</li>
       <li xml:lang="ko">출력 저장</li>
       <li xml:lang="lt">Išvesties įrašymas</li>
@@ -478,7 +478,7 @@
       <caption xml:lang="gl">Konsole usado como emulador de terminal.</caption>
       <caption xml:lang="hu">A Konsole használata terminálemulárként</caption>
       <caption xml:lang="ia">Konsole es usate como un emulator de terminal</caption>
-      <caption xml:lang="id">Konsole adalah wujud yang digunakan sebagai emulator terminal</caption>
+      <caption xml:lang="id">Konsole yang digunakan sebagai emulator terminal</caption>
       <caption xml:lang="it">Konsole utilizzata come un emulatore di terminale</caption>
       <caption xml:lang="ko">터미널 에뮬레이터로 사용 중인 Konsole</caption>
       <caption xml:lang="ml">കൺസോൾ നിലവിൽ ടെർമിനൽ അനുകരിക്കുന്നതിനായി ഉപയോഗിക്കുന്നു</caption>
