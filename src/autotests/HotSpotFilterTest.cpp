@@ -43,6 +43,9 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
     QTest::newRow("quote_before") << "\"http://www.ietf.org/rfc/rfc2396.txt"
                                   << "http://www.ietf.org/rfc/rfc2396.txt" << true;
 
+    QTest::newRow("grave_before") << "`https://foo.bar`"
+                                  << "https://foo.bar" << true;
+
     QTest::newRow("file_scheme") << "file:///some/file"
                                  << "file:///some/file" << true;
 

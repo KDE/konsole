@@ -38,7 +38,7 @@ using namespace Konsole;
 // scheme://
 // - Must start with an ASCII letter, preceeded by any non-word character,
 //   so "http" but not "mhttp"
-static const char scheme_or_www[] = "(?<=^|[\\s\\[\\]()'\"])(?:www\\.|[a-z][a-z0-9+\\-.]*+://";
+static const char scheme_or_www[] = "(?<=^|[\\s\\[\\]()'\"`])(?:www\\.|[a-z][a-z0-9+\\-.]*+://";
 static const char scheme_or_www_end[] = ")";
 
 // unreserved / pct-encoded / sub-delims
