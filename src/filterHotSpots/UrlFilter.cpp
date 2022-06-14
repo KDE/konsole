@@ -31,8 +31,12 @@ using namespace Konsole;
 // - "port" (':1234'), if present, is assumed to be non-empty
 // - We don't check the validity of percent-encoded characters
 //   (e.g. "www.example.com/foo%XXbar")
+// - We don't recognize URIs with unbalanced parens in regname, path, query or fragment.
+//   We do this to prevent URIs inside parentheses from getting extended to the closing
+//   parenthesis.  We still recognize unbalanced parens in userInfo, but the
+//   postfix @ should prevent most ambiguity.
 
-// All () groups are non-capturing (by using "(?:)" notation)
+// All non-recursive () groups are non-capturing (by using "(?:)" notation)
 // less bookkeeping on the PCRE engine side
 
 // scheme://
@@ -42,18 +46,19 @@ static const char scheme_or_www[] = "(?<=^|[\\s\\[\\]()'\"`])(?:www\\.|[a-z][a-z
 static const char scheme_or_www_end[] = ")";
 
 // unreserved / pct-encoded / sub-delims
-#define COMMON_1 "a-z0-9\\-._~%!$&'()*+,;="
+#define COMMON_1 "a-z0-9\\-._~%!$&'*+,;="
+#define BALANCED_PARENS(CHARS) "(?:[" CHARS "]++(\\((?:[" CHARS "]++|(?-1))*+\\))?+)"
 
 /* clang-format off */
-static const char userInfo[] = "(?:[" COMMON_1 ":" "]++@)?+"; // user:password@
+static const char userInfo[] = "(?:[" COMMON_1 ":()" "]++@)?+"; // user:password@
 #define IPv6_literal "\\[[0-9a-fA-F:.]++\\]"
-static const char host[] = "(?:[" COMMON_1 "]++|" IPv6_literal ")?+"; // www.foo.bar
+static const char host[] = "(?:" BALANCED_PARENS(COMMON_1) "++|" IPv6_literal ")?+"; // www.foo.bar
 static const char port[] = "(?::[0-9]+)?+"; // :1234
 
-#define COMMON_2 "a-z0-9\\-._~%!$&'()*+,;=:@/"
-static const char path[] = "(?:/[" COMMON_2 "]*+)?+"; // /path/to/some/place
-static const char query[] = "(?:\\?[" COMMON_2 "?]*+)?+"; // "?somequery=bar"
-static const char fragment[] = "(?:#[" COMMON_2 "?]*+)?+"; // "#fragment"
+#define COMMON_2 "a-z0-9\\-._~%!$&'*+,;=:@/"
+static const char path[] = "(?:/" BALANCED_PARENS(COMMON_2) "*+)?+"; // /path/to/some/place
+static const char query[] = "(?:\\?" BALANCED_PARENS(COMMON_2 "?") "*+)?+"; // "?somequery=bar"
+static const char fragment[] = "(?:#" BALANCED_PARENS(COMMON_2 "?") "*+)?+"; // "#fragment"
 
 using LS1 = QLatin1String;
 

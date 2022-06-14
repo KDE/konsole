@@ -37,6 +37,10 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
                                << "https://invent.kde.org/frameworks/ktexteditor/-/blob/master/README.md" << true;
     QTest::newRow("markup") << " [https://foobar](https://foobar)"
                             << "https://foobar" << true;
+    QTest::newRow("markup_parens") << "[unix-history-repo](https://github.com/dspinellis/unix-history-repo)"
+                                   << "https://github.com/dspinellis/unix-history-repo" << true;
+    QTest::newRow("markup_with_parens_inside_parens") << "[*Das verrückte Labyrinth*](https://en.wikipedia.org/wiki/Labyrinth_(board_game))"
+                                                      << "https://en.wikipedia.org/wiki/Labyrinth_(board_game)" << true;
 
     QTest::newRow("bracket_before") << "[198]http://www.ietf.org/rfc/rfc2396.txt"
                                     << "http://www.ietf.org/rfc/rfc2396.txt" << true;
@@ -77,6 +81,15 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
 
     QTest::newRow("query_with_question_marks") << "ldap://[2001:db8::7]/c=GB?objectClass?one"
                                                << "ldap://[2001:db8::7]/c=GB?objectClass?one" << true;
+
+    QTest::newRow("path_with_parens") << "https://en.wikipedia.org/wiki/C_(programming_language)"
+                                      << "https://en.wikipedia.org/wiki/C_(programming_language)" << true;
+    QTest::newRow("query_with_parens") << "http://en.wikipedia.org/w/index.php?title=Thresholding_(image_processing)&oldid=132306976"
+                                       << "http://en.wikipedia.org/w/index.php?title=Thresholding_(image_processing)&oldid=132306976" << true;
+    QTest::newRow("fragment_with_parens") << "https://en.wikipedia.org/wiki/ANSI_escape_code#CSI_(Control_Sequence_Introducer)_sequences"
+                                          << "https://en.wikipedia.org/wiki/ANSI_escape_code#CSI_(Control_Sequence_Introducer)_sequences" << true;
+    QTest::newRow("url_with_lots_of_parens") << "(https://foo(bar(baz(qux)quux)quuux))))"
+                                             << "https://foo(bar(baz(qux)quux)quuux)" << true;
 }
 
 void HotSpotFilterTest::testUrlFilterRegex()
