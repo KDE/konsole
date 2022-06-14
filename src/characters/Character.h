@@ -20,9 +20,11 @@
 
 namespace Konsole
 {
-typedef unsigned char LineProperty;
+typedef quint32 LineProperty;
 
 typedef quint16 RenditionFlags;
+
+typedef quint16 ExtraFlags;
 
 /* clang-format off */
 const int LINE_DEFAULT              = 0;
@@ -31,6 +33,10 @@ const int LINE_DOUBLEWIDTH          = (1 << 1);
 const int LINE_DOUBLEHEIGHT_TOP     = (1 << 2);
 const int LINE_DOUBLEHEIGHT_BOTTOM  = (1 << 3);
 const int LINE_PROMPT_START         = (1 << 4);
+const int LINE_INPUT_START          = (1 << 5);
+const int LINE_OUTPUT_START         = (1 << 6);
+const int LINE_LEN_POS              = 8;
+const int LINE_LEN_MASK             = (0xfff << LINE_LEN_POS);
 
 const RenditionFlags DEFAULT_RENDITION  = 0;
 const RenditionFlags RE_BOLD            = (1 << 0);
@@ -47,6 +53,16 @@ const RenditionFlags RE_OVERLINE        = (1 << 10);
 const RenditionFlags RE_SELECTED        = (1 << 11);
 const RenditionFlags RE_TRANSPARENT        = (1 << 12);
 
+const ExtraFlags EF_UNREAL       = 0;
+const ExtraFlags EF_REAL         = (1 << 0);
+const ExtraFlags EF_REPL         = (3 << 1);
+const ExtraFlags EF_REPL_PROMPT  = (1 << 1);
+const ExtraFlags EF_REPL_INPUT   = (2 << 1);
+const ExtraFlags EF_REPL_OUTPUT  = (3 << 1);
+
+#define setRepl(f, m) (((f) & ~EF_REPL) | ((m) * EF_REPL_PROMPT))
+#define LineLength(f) static_cast<int>(((f) & LINE_LEN_MASK) >> LINE_LEN_POS)
+#define SetLineLength(f, l) (((f) & ~LINE_LEN_MASK) | ((l) << LINE_LEN_POS))
 /* clang-format on */
 
 /**
@@ -65,19 +81,18 @@ public:
      * @param _b The color used to draw the character's background.
      * @param _r A set of rendition flags which specify how this character
      *           is to be drawn.
-     * @param _real Indicate whether this character really exists, or exists
-     *              simply as place holder.
+     * @param _flags Extra flags describing the character. not directly related to its rendition
      */
     explicit constexpr Character(uint _c = ' ',
                                  CharacterColor _f = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
                                  CharacterColor _b = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
                                  RenditionFlags _r = DEFAULT_RENDITION,
-                                 bool _real = true)
+                                 ExtraFlags _flags = EF_REAL)
         : character(_c)
         , rendition(_r)
         , foregroundColor(_f)
         , backgroundColor(_b)
-        , isRealCharacter(_real)
+        , flags(_flags)
     {
     }
 
@@ -107,7 +122,7 @@ public:
      *    PlaceHolderCharacter: a character which exists as place holder
      *    TabStopCharacter: a special place holder for HT("\t")
      */
-    bool isRealCharacter;
+    ExtraFlags flags;
 
     /**
      * returns true if the format (color, rendition flag) of the compared characters is equal

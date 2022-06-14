@@ -31,6 +31,11 @@
 #define MODE_AppScreen 6
 #define MODES_SCREEN 7
 
+#define REPL_None 0
+#define REPL_PROMPT 1
+#define REPL_INPUT 2
+#define REPL_OUTPUT 3
+
 struct TerminalGraphicsPlacement_t {
     QPixmap pixmap;
     qint64 id;
@@ -89,6 +94,9 @@ public:
         PreserveLineBreaks = 0x2,
         TrimLeadingWhitespace = 0x4,
         TrimTrailingWhitespace = 0x8,
+        ExcludePrompt = 0x10,
+        ExcludeInput = 0x20,
+        ExcludeOutput = 0x40,
     };
     Q_DECLARE_FLAGS(DecodingOptions, DecodingOption)
 
@@ -537,6 +545,37 @@ public:
     void setLineProperty(LineProperty property, bool enable);
 
     /**
+     * Set REPL mode (shell integration)
+     *
+     * @param mode is the REPL mode
+     * Possible modes are:
+     * REPL_None
+     * REPL_PROMPT
+     * REPL_INPUT
+     * REPL_OUTPUT
+     */
+    void setReplMode(int mode);
+    /** Return true if semantic shell integration is in use. */
+    bool hasRepl() const
+    {
+        return _hasRepl;
+    }
+    /** Return current REPL mode */
+    int replMode() const
+    {
+        return _replMode;
+    }
+    /** Return location of current REPL mode start. */
+    std::pair<int, int> replModeStart() const
+    {
+        return _replModeStart;
+    }
+    std::pair<int, int> replModeEnd() const
+    {
+        return _replModeEnd;
+    }
+
+    /**
      * Returns the number of lines that the image has been scrolled up or down by,
      * since the last call to resetScrolledLines().
      *
@@ -763,6 +802,10 @@ private:
     // states ----------------
     int _currentModes[MODES_SCREEN];
     int _savedModes[MODES_SCREEN];
+    int _replMode;
+    bool _hasRepl;
+    std::pair<int, int> _replModeStart;
+    std::pair<int, int> _replModeEnd;
 
     // ----------------------------
 

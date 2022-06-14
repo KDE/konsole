@@ -97,7 +97,7 @@ void PlainTextDecoder::decodeLine(const Character *const characters, int count, 
         // FIXME: the special case of '\n' here is really ugly
         // Maybe the '\n' should be added after calling this method in
         // Screen::copyLineToStream()
-        if (characters[i].isRealCharacter && characters[i].character != '\n') {
+        if ((characters[i].flags & EF_REAL) != 0 && characters[i].character != '\n') {
             realCharacterGuard = i;
             break;
         }
@@ -129,7 +129,7 @@ void PlainTextDecoder::decodeLine(const Character *const characters, int count, 
             // This feels tricky, but otherwise leading "whitespaces" may be
             // lost in some situation. One typical example is copying the result
             // of `dialog --infobox "qwe" 10 10` .
-            if (characters[i].isRealCharacter || i <= realCharacterGuard) {
+            if ((characters[i].flags & EF_REAL) != 0 || i <= realCharacterGuard) {
                 characterBuffer.append(characters[i].character);
                 i += qMax(1, Character::stringWidth(&characters[i].character, 1));
             } else {

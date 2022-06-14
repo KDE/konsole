@@ -50,7 +50,7 @@ using namespace Konsole;
 #endif
 
 const Character Screen::DefaultChar =
-    Character(' ', CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR), CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR), DEFAULT_RENDITION, false);
+    Character(' ', CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR), CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR), DEFAULT_RENDITION, 0);
 
 Screen::Screen(int lines, int columns)
     : _currentTerminalDisplay(nullptr)
@@ -73,6 +73,8 @@ Screen::Screen(int lines, int columns)
     , _currentRendition(DEFAULT_RENDITION)
     , _topMargin(0)
     , _bottomMargin(0)
+    , _replMode(REPL_None)
+    , _hasRepl(false)
     , _tabStops(QBitArray())
     , _selBegin(0)
     , _selTopLeft(0)
@@ -222,6 +224,7 @@ void Screen::reverseIndex()
 void Screen::nextLine()
 //=NEL
 {
+    _lineProperties[_cuY] = SetLineLength(_lineProperties[_cuY], _cuX);
     toStartOfLine();
     index();
 }
@@ -243,7 +246,7 @@ void Screen::eraseBlock(int y, int x, int height, int width)
     width = qBound(0, width, _columns - x - 1);
     int endCol = x + width;
     height = qBound(0, height, _lines - y - 1);
-    Character chr(' ', CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR), CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR), RE_TRANSPARENT, false);
+    Character chr(' ', CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR), CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR), RE_TRANSPARENT, 0);
     for (int row = y; row < y + height; row++) {
         QVector<Character> &line = _screenLines[row];
         if (line.size() < endCol + 1) {
@@ -282,7 +285,7 @@ void Screen::deleteChars(int n)
     _screenLines[_cuY].remove(_cuX, n);
 
     // Append space(s) with current attributes
-    Character spaceWithCurrentAttrs(' ', _effectiveForeground, _effectiveBackground, _effectiveRendition, false);
+    Character spaceWithCurrentAttrs(' ', _effectiveForeground, _effectiveBackground, _effectiveRendition, 0);
 
     for (int i = 0; i < n; ++i) {
         _screenLines[_cuY].append(spaceWithCurrentAttrs);
@@ -917,6 +920,7 @@ void Screen::initTabStops()
 void Screen::newLine()
 {
     if (getMode(MODE_NewLine)) {
+        _lineProperties[_cuY] = SetLineLength(_lineProperties[_cuY], _cuX);
         toStartOfLine();
     }
 
@@ -1047,7 +1051,7 @@ notcombine:
     currentChar.foregroundColor = _effectiveForeground;
     currentChar.backgroundColor = _effectiveBackground;
     currentChar.rendition = _effectiveRendition;
-    currentChar.isRealCharacter = true;
+    currentChar.flags = setRepl(EF_REAL, _replMode);
 
     _lastDrawnChar = c;
 
@@ -1065,11 +1069,17 @@ notcombine:
         ch.foregroundColor = _effectiveForeground;
         ch.backgroundColor = _effectiveBackground;
         ch.rendition = _effectiveRendition;
-        ch.isRealCharacter = false;
+        ch.flags = setRepl(EF_UNREAL, _replMode);
 
         --w;
     }
     _cuX = newCursorX;
+    if (_replMode != REPL_None && std::make_pair(_cuY, _cuX) >= _replModeEnd) {
+        _replModeEnd = std::make_pair(_cuY, _cuX);
+    }
+    if (LineLength(_lineProperties[_cuY]) < _cuX) {
+        _lineProperties[_cuY] = SetLineLength(_lineProperties[_cuY], _cuX);
+    }
 
     if (_escapeSequenceUrlExtractor) {
         _escapeSequenceUrlExtractor->appendUrlText(QChar(c));
@@ -1215,17 +1225,26 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
     const int topLine = loca / _columns;
     const int bottomLine = loce / _columns;
 
-    Character clearCh(uint(c), _currentForeground, _currentBackground, DEFAULT_RENDITION, false);
+    Character clearCh(uint(c), _currentForeground, _currentBackground, DEFAULT_RENDITION, 0);
 
     // if the character being used to clear the area is the same as the
     // default character, the affected _lines can simply be shrunk.
     const bool isDefaultCh = (clearCh == Screen::DefaultChar);
 
     for (int y = topLine; y <= bottomLine; ++y) {
-        _lineProperties[y] &= ~LINE_WRAPPED;
+        _lineProperties[y] = 0;
 
         const int endCol = (y == bottomLine) ? loce % _columns : _columns - 1;
         const int startCol = (y == topLine) ? loca % _columns : 0;
+
+        if (endCol < _columns - 1 || startCol > 0) {
+            _lineProperties[y] &= ~LINE_WRAPPED;
+            if (LineLength(_lineProperties[y]) < endCol && LineLength(_lineProperties[y]) > startCol) {
+                _lineProperties[y] = SetLineLength(_lineProperties[y], startCol);
+            }
+        } else {
+            _lineProperties[y] = LINE_DEFAULT;
+        }
 
         QVector<Character> &line = _screenLines[y];
 
@@ -1512,7 +1531,7 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
             _history->getCells(bottomRow, 0, histLineLen, histLine.data());
 
             for (int j = bottomColumn; j < histLineLen; j++) {
-                if (histLine.at(j).isRealCharacter && (!trimTrailingWhitespace || !QChar(histLine.at(j).character).isSpace())) {
+                if ((histLine.at(j).flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar(histLine.at(j).character).isSpace())) {
                     beyondLastColumn = false;
                 }
             }
@@ -1523,7 +1542,7 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
             const int length = _screenLines.at(line).count();
 
             for (int k = bottomColumn; k < lastColumn && k < length; k++) {
-                if (data[k].isRealCharacter && (!trimTrailingWhitespace || !QChar(data[k].character).isSpace())) {
+                if ((data[k].flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar(data[k].character).isSpace())) {
                     beyondLastColumn = false;
                 }
             }
@@ -1681,7 +1700,7 @@ int Screen::copyLineToStream(int line,
 
         // Exclude trailing empty cells from count and don't bother processing them further.
         // See the comment on the similar case for screen lines for an explanation.
-        while (count > 0 && !characterBuffer[start + count - 1].isRealCharacter) {
+        while (count > 0 && (characterBuffer[start + count - 1].flags & EF_REAL) == 0) {
             count--;
         }
 
@@ -1717,7 +1736,7 @@ int Screen::copyLineToStream(int line,
         // character when TrimTrailingWhitespace is true), so the returned
         // count from this function must not include empty cells beyond that
         // last character.
-        while (length > 0 && !data[length - 1].isRealCharacter) {
+        while (length > 0 && (data[length - 1].flags & EF_REAL) == 0) {
             length--;
         }
 
@@ -1908,6 +1927,20 @@ void Screen::setLineProperty(LineProperty property, bool enable)
         _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties.at(_cuY) & ~property);
     }
 }
+
+void Screen::setReplMode(int mode)
+{
+    if (_replMode != mode) {
+        _replMode = mode;
+        _replModeStart = std::make_pair(_cuY, _cuX);
+        _replModeEnd = std::make_pair(_cuY, _cuX);
+    }
+    if (mode != REPL_None) {
+        _hasRepl = true;
+        setLineProperty(LINE_PROMPT_START << (mode - REPL_PROMPT), true);
+    }
+}
+
 void Screen::fillWithDefaultChar(Character *dest, int count)
 {
     std::fill_n(dest, count, Screen::DefaultChar);
