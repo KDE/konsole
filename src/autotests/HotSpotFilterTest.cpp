@@ -88,8 +88,8 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
                                        << "http://en.wikipedia.org/w/index.php?title=Thresholding_(image_processing)&oldid=132306976" << true;
     QTest::newRow("fragment_with_parens") << "https://en.wikipedia.org/wiki/ANSI_escape_code#CSI_(Control_Sequence_Introducer)_sequences"
                                           << "https://en.wikipedia.org/wiki/ANSI_escape_code#CSI_(Control_Sequence_Introducer)_sequences" << true;
-    QTest::newRow("url_with_lots_of_parens") << "(https://foo(bar(baz(qux)quux)quuux))))"
-                                             << "https://foo(bar(baz(qux)quux)quuux)" << true;
+    QTest::newRow("url_with_lots_of_parens") << "(https://example.com/foo(bar(baz(qux)quux)quuux))))"
+                                             << "https://example.com/foo(bar(baz(qux)quux)quuux)" << true;
 }
 
 void HotSpotFilterTest::testUrlFilterRegex()
