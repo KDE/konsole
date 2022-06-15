@@ -31,7 +31,8 @@ using namespace Konsole;
 // - "port" (':1234'), if present, is assumed to be non-empty
 // - We don't check the validity of percent-encoded characters
 //   (e.g. "www.example.com/foo%XXbar")
-// - We don't recognize URIs with unbalanced parens in regname, path, query or fragment.
+// - We do not allow parenthesis in host.
+// - We don't recognize URIs with unbalanced parens in path, query or fragment.
 //   We do this to prevent URIs inside parentheses from getting extended to the closing
 //   parenthesis.  We still recognize unbalanced parens in userInfo, but the
 //   postfix @ should prevent most ambiguity.
@@ -52,7 +53,7 @@ static const char scheme_or_www_end[] = ")";
 /* clang-format off */
 static const char userInfo[] = "(?:[" COMMON_1 ":()" "]++@)?+"; // user:password@
 #define IPv6_literal "\\[[0-9a-fA-F:.]++\\]"
-static const char host[] = "(?:" BALANCED_PARENS(COMMON_1) "++|" IPv6_literal ")?+"; // www.foo.bar
+static const char host[] = "(?:[" COMMON_1 "]++|" IPv6_literal ")?+"; // www.foo.bar
 static const char port[] = "(?::[0-9]+)?+"; // :1234
 
 #define COMMON_2 "a-z0-9\\-._~%!$&'*+,;=:@/"
