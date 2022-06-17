@@ -243,7 +243,7 @@ void Screen::eraseBlock(int y, int x, int height, int width)
     width = qBound(0, width, _columns - x - 1);
     int endCol = x + width;
     height = qBound(0, height, _lines - y - 1);
-    Character chr(' ', CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR), CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR), RE_CONCEAL, false);
+    Character chr(' ', CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR), CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR), RE_TRANSPARENT, false);
     for (int row = y; row < y + height; row++) {
         QVector<Character> &line = _screenLines[row];
         if (line.size() < endCol + 1) {

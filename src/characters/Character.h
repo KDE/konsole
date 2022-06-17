@@ -45,6 +45,8 @@ const RenditionFlags RE_STRIKEOUT       = (1 << 8);
 const RenditionFlags RE_CONCEAL         = (1 << 9);
 const RenditionFlags RE_OVERLINE        = (1 << 10);
 const RenditionFlags RE_SELECTED        = (1 << 11);
+const RenditionFlags RE_TRANSPARENT        = (1 << 12);
+
 /* clang-format on */
 
 /**

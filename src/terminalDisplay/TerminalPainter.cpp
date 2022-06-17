@@ -470,7 +470,7 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
     }
 
     bool drawBG = backgroundColor != colorTable[DEFAULT_BACK_COLOR];
-    if (screen->hasGraphics() && style.rendition == RE_CONCEAL) {
+    if (screen->hasGraphics() && style.rendition == RE_TRANSPARENT) {
         drawBG = false;
     }
 
