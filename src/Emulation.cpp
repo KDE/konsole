@@ -244,7 +244,7 @@ void Emulation::receiveData(const char *text, int length)
     // this check into the above for loop?
     auto *found = static_cast<const char *>(memchr(text, '\030', length));
     if (found) {
-        auto startPos = text - found;
+        auto startPos = found - text;
         if (startPos < 0) {
             return;
         }
