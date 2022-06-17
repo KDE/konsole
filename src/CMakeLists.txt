@@ -62,6 +62,7 @@ qt_add_dbus_adaptor(
 
 set(konsole_LIBS
     KF5::XmlGui
+    Qt::Multimedia
     Qt::PrintSupport
     Qt::Xml
     KF5::Notifications

@@ -15,6 +15,7 @@
 // Qt
 #include <QEvent>
 #include <QKeyEvent>
+#include <QTemporaryFile>
 #include <QTimer>
 #include <QtEndian>
 
@@ -68,6 +69,7 @@ Vt102Emulation::Vt102Emulation()
     , _pendingSessionAttributesUpdates(QHash<int, QString>())
     , _sessionAttributesUpdateTimer(new QTimer(this))
     , _reportFocusEvents(false)
+    , player(nullptr)
 {
     _sessionAttributesUpdateTimer->setSingleShot(true);
     QObject::connect(_sessionAttributesUpdateTimer, &QTimer::timeout, this, &Konsole::Vt102Emulation::updateSessionAttributes);
@@ -1151,6 +1153,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
 
     if (attribute == Image) {
         bool inlineImage = false;
+        bool inlineMedia = false;
         if (value.startsWith(QLatin1String("ReportCellSize"))) {
             iTermReportCellSize();
             return;
@@ -1171,6 +1174,9 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 QString val = p.mid(eq + 1);
                 if (var == QLatin1String("inline")) {
                     inlineImage = val == QLatin1String("1");
+                }
+                if (var == QLatin1String("inlineMedia")) {
+                    inlineMedia = val == QLatin1String("1");
                 }
                 if (var == QLatin1String("preserveAspectRatio")) {
                     keepAspect = val == QLatin1String("0");
@@ -1202,7 +1208,21 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 }
             }
         }
-
+        if (inlineMedia) {
+            QTemporaryFile file;
+            file.open();
+            file.write(tokenData);
+            if (player == nullptr) {
+                player = new QMediaPlayer(this);
+                connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(deletePlayer(QMediaPlayer::MediaStatus)));
+            }
+            player->setMedia(QUrl::fromLocalFile(file.fileName()));
+            player->play();
+            return;
+        }
+        if (!inlineImage) {
+            return;
+        }
         QPixmap pixmap;
         pixmap.loadFromData(tokenData);
         tokenData.clear();
@@ -1223,6 +1243,14 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     }
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
+}
+
+void Vt102Emulation::deletePlayer(QMediaPlayer::MediaStatus mediaStatus)
+{
+    if (mediaStatus == QMediaPlayer::EndOfMedia || mediaStatus == QMediaPlayer::InvalidMedia) {
+        player->deleteLater();
+        player = nullptr;
+    }
 }
 
 void Vt102Emulation::updateSessionAttributes()
