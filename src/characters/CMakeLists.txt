@@ -1,6 +1,5 @@
 
 set(konsolecharacters_SRCS
-    CharacterFormat.cpp
     CharacterWidth.cpp
     Hangul.cpp
     LineBlockCharacters.cpp
