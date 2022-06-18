@@ -2157,7 +2157,6 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
     // look up key binding
     if (_keyTranslator != nullptr) {
         KeyboardTranslator::Entry entry = _keyTranslator->findEntry(event->key(), modifiers, states);
-
         // send result to terminal
         QByteArray textToSend;
 
@@ -2193,6 +2192,10 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
                     currentView->scrollScreenWindow(ScreenWindow::ScrollLines, -currentView->screenWindow()->currentLine());
                 } else if ((entry.command() & KeyboardTranslator::ScrollDownToBottomCommand) != 0) {
                     currentView->scrollScreenWindow(ScreenWindow::ScrollLines, lineCount());
+                } else if ((entry.command() & KeyboardTranslator::ScrollPromptUpCommand) != 0) {
+                    currentView->scrollScreenWindow(ScreenWindow::ScrollPrompts, -1);
+                } else if ((entry.command() & KeyboardTranslator::ScrollPromptDownCommand) != 0) {
+                    currentView->scrollScreenWindow(ScreenWindow::ScrollPrompts, 1);
                 }
             }
         } else if (!entry.text().isEmpty()) {

@@ -122,6 +122,10 @@ bool KeyboardTranslatorReader::parseAsCommand(const QString &text, KeyboardTrans
         command = KeyboardTranslator::ScrollUpToTopCommand;
     } else if (text.compare(QLatin1String("scrolldowntobottom"), Qt::CaseInsensitive) == 0) {
         command = KeyboardTranslator::ScrollDownToBottomCommand;
+    } else if (text.compare(QLatin1String("scrollpromptup"), Qt::CaseInsensitive) == 0) {
+        command = KeyboardTranslator::ScrollPromptUpCommand;
+    } else if (text.compare(QLatin1String("scrollpromptdown"), Qt::CaseInsensitive) == 0) {
+        command = KeyboardTranslator::ScrollPromptDownCommand;
     } else {
         return false;
     }

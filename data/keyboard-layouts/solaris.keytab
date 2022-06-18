@@ -100,9 +100,11 @@ key Space +Control : "\x00"
 #key Left  +Shift   : prevSession 
 #key Right +Shift   : nextSession 
 key Up    +Shift   : scrollLineUp 
-key PgUp +Shift   : scrollPageUp 
+key PgUp +Shift-Ctrl   : scrollPageUp 
 key Down  +Shift   : scrollLineDown 
-key PgDown  +Shift   : scrollPageDown 
+key PgDown  +Shift-Ctrl   : scrollPageDown 
 #key Insert+Shift   : emitSelection 
+key PgUp +Shift+Ctrl   : scrollPromptUp 
+key PgDown  +Shift+Ctrl   : scrollPromptDown 
 
 # keypad characters are not offered differently by Qt.

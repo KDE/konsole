@@ -185,10 +185,12 @@ key Space +Control : "\x00"
 # The scroll* operations refer to the history buffer.
 
 key Up    +Shift-AppScreen  : scrollLineUp
-key PgUp +Shift-AppScreen  : scrollPageUp
+key PgUp +Shift-Ctrl-AppScreen  : scrollPageUp
 key Home  +Shift-AppScreen  : scrollUpToTop
 key Down  +Shift-AppScreen  : scrollLineDown
-key PgDown  +Shift-AppScreen  : scrollPageDown
+key PgDown  +Shift-Ctrl-AppScreen  : scrollPageDown
 key End   +Shift-AppScreen  : scrollDownToBottom
+key PgUp +Shift+Ctrl-AppScreen  : scrollPromptUp
+key PgDown  +Shift+Ctrl-AppScreen  : scrollDownPrompt
 
 

@@ -183,6 +183,10 @@ public:
          * one page is windowLines() lines
          */
         ScrollPages,
+        /** Scroll by prompt (when using semantic shell integration)
+         * scrolls up/down until the given number of new prompts appear.
+         */
+        ScrollPrompts,
     };
 
     /**

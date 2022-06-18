@@ -95,8 +95,12 @@ public:
         ScrollUpToTopCommand = 32,
         /** Scroll the terminal display down to the end of history */
         ScrollDownToBottomCommand = 64,
+        /** Scroll the terminal display up to the next prompt */
+        ScrollPromptUpCommand = 128,
+        /** Scroll the terminal display down to the next prompt */
+        ScrollPromptDownCommand = 256,
         /** Echos the operating system specific erase character. */
-        EraseCommand = 256,
+        EraseCommand = 512,
     };
     Q_DECLARE_FLAGS(Commands, Command)
 

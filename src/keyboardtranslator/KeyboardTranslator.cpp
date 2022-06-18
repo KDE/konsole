@@ -262,6 +262,10 @@ QString KeyboardTranslator::Entry::resultToString(bool expandWildCards, Qt::Keyb
         return QStringLiteral("ScrollUpToTop");
     } else if (_command == ScrollDownToBottomCommand) {
         return QStringLiteral("ScrollDownToBottom");
+    } else if (_command == ScrollPromptUpCommand) {
+        return QStringLiteral("ScrollPromptUp");
+    } else if (_command == ScrollPromptDownCommand) {
+        return QStringLiteral("ScrollPromptDown");
     }
 
     return QString();

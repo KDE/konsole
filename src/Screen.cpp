@@ -1232,8 +1232,6 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
     const bool isDefaultCh = (clearCh == Screen::DefaultChar);
 
     for (int y = topLine; y <= bottomLine; ++y) {
-        _lineProperties[y] = 0;
-
         const int endCol = (y == bottomLine) ? loce % _columns : _columns - 1;
         const int startCol = (y == topLine) ? loca % _columns : 0;
 
