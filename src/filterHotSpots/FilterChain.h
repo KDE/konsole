@@ -86,6 +86,10 @@ public:
 
     void setReverseUrlHints(bool value);
     void setUrlHintsModifiers(Qt::KeyboardModifiers value);
+    bool showUrlHint() const
+    {
+        return _showUrlHint;
+    }
 
 protected:
     QList<Filter *> _filters;

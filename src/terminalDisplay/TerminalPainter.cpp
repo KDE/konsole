@@ -13,6 +13,7 @@
 #include "../Screen.h"
 #include "../characters/ExtendedCharTable.h"
 #include "../characters/LineBlockCharacters.h"
+#include "../filterHotSpots/FilterChain.h"
 #include "../session/SessionManager.h"
 #include "TerminalColor.h"
 #include "TerminalFonts.h"
@@ -91,8 +92,10 @@ void TerminalPainter::drawContents(Character *image,
     const int fontHeight = m_parentDisplay->terminalFont()->fontHeight();
 
     for (int y = rect.y(); y <= rect.bottom(); y++) {
+        const int textY = topPadding + fontHeight * y;
         int x = rect.x();
         bool doubleHeightLinePair = false;
+        LineProperty lineProperty = y < lineProperties.size() ? lineProperties[y] : 0;
 
         // Search for start of multi-column character
         if (image[m_parentDisplay->loc(rect.x(), y)].isRightHalfOfDoubleWide() && (x != 0)) {
@@ -207,16 +210,14 @@ void TerminalPainter::drawContents(Character *image,
             bool doubleHeight = false;
             bool doubleWidthLine = false;
 
-            if (y < lineProperties.size()) {
-                if ((lineProperties[y] & LINE_DOUBLEWIDTH) != 0) {
-                    textScale.scale(2, 1);
-                    doubleWidthLine = true;
-                }
+            if ((lineProperty & LINE_DOUBLEWIDTH) != 0) {
+                textScale.scale(2, 1);
+                doubleWidthLine = true;
+            }
 
-                doubleHeight = lineProperties[y] & (LINE_DOUBLEHEIGHT_TOP | LINE_DOUBLEHEIGHT_BOTTOM);
-                if (doubleHeight) {
-                    textScale.scale(1, 2);
-                }
+            doubleHeight = lineProperty & (LINE_DOUBLEHEIGHT_TOP | LINE_DOUBLEHEIGHT_BOTTOM);
+            if (doubleHeight) {
+                textScale.scale(1, 2);
             }
 
             if (y < lineProperties.size() - 1) {
@@ -230,7 +231,6 @@ void TerminalPainter::drawContents(Character *image,
 
             // Calculate the area in which the text will be drawn
             const int textX = leftPadding + fontWidth * x * (doubleWidthLine ? 2 : 1);
-            const int textY = topPadding + fontHeight * y;
             const int textWidth = fontWidth * len;
             const int textHeight = doubleHeight && !doubleHeightLinePair ? fontHeight / 2 : fontHeight;
 
@@ -248,20 +248,17 @@ void TerminalPainter::drawContents(Character *image,
 
             // paint text fragment
             if (printerFriendly) {
-                drawPrinterFriendlyTextFragment(paint, textArea, unistr, image[pos], y < lineProperties.size() ? lineProperties[y] : 0);
+                drawPrinterFriendlyTextFragment(paint, textArea, unistr, image[pos], lineProperty);
             } else {
-                drawTextFragment(paint,
-                                 textArea,
-                                 unistr,
-                                 image[pos],
-                                 m_parentDisplay->terminalColor()->colorTable(),
-                                 invertedRendition,
-                                 y < lineProperties.size() ? lineProperties[y] : 0);
+                drawTextFragment(paint, textArea, unistr, image[pos], m_parentDisplay->terminalColor()->colorTable(), invertedRendition, lineProperty);
             }
 
             paint.setWorldTransform(textScale.inverted(), true);
 
             x += len - 1;
+        }
+        if ((lineProperty & LINE_PROMPT_START) != 0 && m_parentDisplay->filterChain()->showUrlHint()) {
+            paint.drawLine(leftPadding, textY, m_parentDisplay->contentRect().right(), textY);
         }
 
         if (doubleHeightLinePair) {
@@ -482,6 +479,22 @@ void TerminalPainter::drawTextFragment(QPainter &painter,
     if ((style.rendition & RE_CURSOR) != 0) {
         drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
     }
+    if (m_parentDisplay->filterChain()->showUrlHint()) {
+        if ((style.flags & EF_REPL) == EF_REPL_PROMPT) {
+            int h, s, v;
+            characterColor.getHsv(&h, &s, &v);
+            s = s / 2;
+            v = v / 2;
+            characterColor.setHsv(h, s, v);
+        }
+        if ((style.flags & EF_REPL) == EF_REPL_INPUT) {
+            int h, s, v;
+            characterColor.getHsv(&h, &s, &v);
+            s = (511 + s) / 3;
+            v = (511 + v) / 3;
+            characterColor.setHsv(h, s, v);
+        }
+    }
 
     // draw text
     drawCharacters(painter, rect, text, style, characterColor, lineProperty);
@@ -652,7 +665,6 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         pen.setColor(color);
         painter.setPen(color);
     }
-
     const bool origClipping = painter.hasClipping();
     const auto origClipRegion = painter.clipRegion();
     painter.setClipRect(rect);
