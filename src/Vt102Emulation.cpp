@@ -2153,12 +2153,37 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
             }
         }
     }
-
     // look up key binding
     if (_keyTranslator != nullptr) {
         KeyboardTranslator::Entry entry = _keyTranslator->findEntry(event->key(), modifiers, states);
         // send result to terminal
         QByteArray textToSend;
+
+        int cuX = _currentScreen->getCursorX();
+        int cuY = _currentScreen->getCursorY();
+        if ((event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) && _currentScreen->replMode() == REPL_INPUT) {
+            if ((event->key() == Qt::Key_Up && _currentScreen->replModeStart() <= std::make_pair(cuY - 1, cuX))
+                || (event->key() == Qt::Key_Down && std::make_pair(cuY + 1, cuX) <= _currentScreen->replModeEnd())) {
+                entry = _keyTranslator->findEntry(event->key() == Qt::Key_Up ? Qt::Key_Left : Qt::Key_Right, Qt::NoModifier, states);
+                QVector<LineProperty> lineProperties =
+                    _currentScreen->getLineProperties(cuY - 1 + _currentScreen->getHistLines(),
+                                                      qMin(_currentScreen->getLines() - 1, cuY + 1) + _currentScreen->getHistLines());
+                int num = _currentScreen->getColumns();
+                if (event->key() == Qt::Key_Up) {
+                    if ((lineProperties[0] & LINE_WRAPPED) == 0) {
+                        num = cuX + qMax(0, LineLength(lineProperties[0]) - cuX) + 1;
+                    }
+                } else {
+                    if ((lineProperties[1] & LINE_WRAPPED) == 0 || (lineProperties[2] & LINE_WRAPPED) == 0) {
+                        num = LineLength(lineProperties[1]) - cuX + 1 + qMin(cuX - 1, LineLength(lineProperties[2]));
+                    }
+                }
+                for (int i = 1; i < num; i++) {
+                    // One more will be added by the rest of the code.
+                    textToSend += entry.text();
+                }
+            }
+        }
 
         // special handling for the Alt (aka. Meta) modifier.  pressing
         // Alt+[Character] results in Esc+[Character] being sent
