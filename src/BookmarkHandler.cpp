@@ -22,7 +22,6 @@
 
 // Konsole
 #include "BookmarkMenu.h"
-#include "ViewProperties.h"
 
 using namespace Konsole;
 

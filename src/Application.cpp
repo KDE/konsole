@@ -32,7 +32,6 @@
 #include "profile/ProfileManager.h"
 #include "session/Session.h"
 #include "session/SessionManager.h"
-#include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
 
 #include "pluginsystem/IKonsolePlugin.h"
