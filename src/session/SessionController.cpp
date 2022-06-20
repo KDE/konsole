@@ -457,6 +457,13 @@ void SessionController::updateCopyAction(const bool selectionEmpty)
     // copy action is meaningful only when some text is selected.
     copyAction->setEnabled(!selectionEmpty);
     copyContextMenu->setVisible(!selectionEmpty);
+    QAction *Action = actionCollection()->action(QStringLiteral("edit_copy_contextmenu_in"));
+    bool hasRepl = view() && view()->screenWindow() && view()->screenWindow()->screen() && view()->screenWindow()->screen()->hasRepl();
+    Action->setVisible(!selectionEmpty && hasRepl);
+    Action = actionCollection()->action(QStringLiteral("edit_copy_contextmenu_out"));
+    Action->setVisible(!selectionEmpty && hasRepl);
+    Action = actionCollection()->action(QStringLiteral("edit_copy_contextmenu_in_out"));
+    Action->setVisible(!selectionEmpty && hasRepl);
 }
 
 void SessionController::updateWebSearchMenu()
@@ -638,6 +645,24 @@ void SessionController::setupCommonActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
     action->setVisible(false);
     connect(action, &QAction::triggered, this, &SessionController::copy);
+
+    action = collection->addAction(QStringLiteral("edit_copy_contextmenu_in_out"));
+    action->setText(i18n("Copy except propmts"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+    action->setVisible(false);
+    connect(action, &QAction::triggered, this, &SessionController::copyInputOutput);
+
+    action = collection->addAction(QStringLiteral("edit_copy_contextmenu_in"));
+    action->setText(i18n("Copy user input"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+    action->setVisible(false);
+    connect(action, &QAction::triggered, this, &SessionController::copyInput);
+
+    action = collection->addAction(QStringLiteral("edit_copy_contextmenu_out"));
+    action->setText(i18n("Copy command output"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+    action->setVisible(false);
+    connect(action, &QAction::triggered, this, &SessionController::copyOutput);
 
     action = KStandardAction::paste(this, &SessionController::paste, collection);
     QList<QKeySequence> pasteShortcut;
@@ -1120,6 +1145,21 @@ void SessionController::openBrowser()
 void SessionController::copy()
 {
     view()->copyToClipboard();
+}
+
+void SessionController::copyInput()
+{
+    view()->copyToClipboard(Screen::ExcludePrompt | Screen::ExcludeOutput);
+}
+
+void SessionController::copyOutput()
+{
+    view()->copyToClipboard(Screen::ExcludePrompt | Screen::ExcludeInput);
+}
+
+void SessionController::copyInputOutput()
+{
+    view()->copyToClipboard(Screen::ExcludePrompt);
 }
 
 void SessionController::paste()

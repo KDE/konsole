@@ -2267,13 +2267,13 @@ void TerminalDisplay::copyToX11Selection()
     }
 }
 
-void TerminalDisplay::copyToClipboard()
+void TerminalDisplay::copyToClipboard(Screen::DecodingOptions options)
 {
     if (_screenWindow.isNull()) {
         return;
     }
 
-    const QString &text = _screenWindow->selectedText(currentDecodingOptions());
+    const QString &text = _screenWindow->selectedText(currentDecodingOptions() | options);
     if (text.isEmpty()) {
         return;
     }

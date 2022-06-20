@@ -49,6 +49,9 @@
     </MenuBar>
     <Menu name="session-popup-menu">
         <Action name="edit_copy_contextmenu"/>
+        <Action name="edit_copy_contextmenu_in"/>
+        <Action name="edit_copy_contextmenu_out"/>
+        <Action name="edit_copy_contextmenu_in_out"/>
         <Action name="edit_paste"/>
         <Action name="web-search"/>
         <Action name="open-browser"/>

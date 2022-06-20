@@ -399,7 +399,7 @@ public Q_SLOTS:
     void copyToX11Selection();
 
     /** Copies the selected text to the system clipboard. */
-    void copyToClipboard();
+    void copyToClipboard(Screen::DecodingOptions options = Screen::PlainText);
 
     /**
      * Pastes the content of the clipboard into the display.

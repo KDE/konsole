@@ -1784,9 +1784,34 @@ int Screen::copyLineToStream(int line,
 
         count -= spacesCount;
     }
+    // Filter CharacterBuffer
+    Character *newBuffer;
+    bool todel = false;
+    if ((options & (ExcludePrompt | ExcludeInput | ExcludeOutput)) != 0) {
+        newBuffer = new Character[count];
+        todel = true;
+        int p = 0;
+        for (int i = 0; i < count; i++) {
+            Character c = characterBuffer[spacesCount + i];
+            // fprintf(stderr, "copy %i   %i %i\n", i, c.character, c.flags);
+            if (((options & ExcludePrompt) != 0 && (c.flags & EF_REPL) == EF_REPL_PROMPT)
+                || ((options & ExcludeInput) != 0 && (c.flags & EF_REPL) == EF_REPL_INPUT)
+                || ((options & ExcludeOutput) != 0 && (c.flags & EF_REPL) == EF_REPL_OUTPUT)) {
+                continue;
+            }
+            newBuffer[p++] = c;
+        }
+        count = p;
+    } else {
+        newBuffer = characterBuffer + spacesCount;
+    }
 
     // decode line and write to text stream
-    decoder->decodeLine(characterBuffer + spacesCount, count, currentLineProperties);
+    decoder->decodeLine(newBuffer, count, currentLineProperties);
+
+    if (todel) {
+        delete newBuffer;
+    }
 
     return count;
 }

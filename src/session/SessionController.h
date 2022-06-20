@@ -227,6 +227,9 @@ private Q_SLOTS:
     // menu item handlers
     void openBrowser();
     void copy();
+    void copyInput();
+    void copyOutput();
+    void copyInputOutput();
     void paste();
     void selectAll();
     void selectLine();
