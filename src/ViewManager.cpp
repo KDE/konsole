@@ -157,13 +157,13 @@ void ViewManager::setupActions()
     action->setText(i18nc("@action:inmenu", "Expand View"));
     action->setEnabled(false);
     connect(action, &QAction::triggered, this, &ViewManager::expandActiveContainer);
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_BracketRight);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_BracketRight);
     collection->addAction(QStringLiteral("expand-active-view"), action);
     _multiSplitterOnlyActions << action;
 
     action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Shrink View"));
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_BracketLeft);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_BracketLeft);
     action->setEnabled(false);
     collection->addAction(QStringLiteral("shrink-active-view"), action);
     connect(action, &QAction::triggered, this, &ViewManager::shrinkActiveContainer);
@@ -179,7 +179,7 @@ void ViewManager::setupActions()
 
     // Ctrl+Shift+D is not used as a shortcut by default because it is too close
     // to Ctrl+D - which will terminate the session in many cases
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_H);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_H);
 
     action = collection->addAction(QStringLiteral("detach-tab"));
     action->setEnabled(true);
@@ -208,25 +208,25 @@ void ViewManager::setupActions()
     action = new QAction(i18nc("@action Shortcut entry", "Focus Above Terminal"), this);
     connect(action, &QAction::triggered, this, &ViewManager::focusUp);
     collection->addAction(QStringLiteral("focus-view-above"), action);
-    collection->setDefaultShortcut(action, Qt::SHIFT | Qt::CTRL | Qt::Key_Up);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_Up);
     _viewContainer->addAction(action);
     _multiSplitterOnlyActions << action;
 
     action = new QAction(i18nc("@action Shortcut entry", "Focus Below Terminal"), this);
-    collection->setDefaultShortcut(action, Qt::SHIFT | Qt::CTRL | Qt::Key_Down);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_Down);
     collection->addAction(QStringLiteral("focus-view-below"), action);
     connect(action, &QAction::triggered, this, &ViewManager::focusDown);
     _multiSplitterOnlyActions << action;
     _viewContainer->addAction(action);
 
     action = new QAction(i18nc("@action Shortcut entry", "Focus Left Terminal"), this);
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Konsole::LEFT);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_Left);
     connect(action, &QAction::triggered, this, &ViewManager::focusLeft);
     collection->addAction(QStringLiteral("focus-view-left"), action);
     _multiSplitterOnlyActions << action;
 
     action = new QAction(i18nc("@action Shortcut entry", "Focus Right Terminal"), this);
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Konsole::RIGHT);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_Right);
     connect(action, &QAction::triggered, this, &ViewManager::focusRight);
     collection->addAction(QStringLiteral("focus-view-right"), action);
     _multiSplitterOnlyActions << action;

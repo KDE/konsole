@@ -16,13 +16,11 @@ namespace Konsole
  */
 enum Modifier {
 #ifdef Q_OS_MACOS
-    ACCEL = Qt::META,
-    LEFT = Qt::Key_BracketLeft,
-    RIGHT = Qt::Key_BracketRight
-#else
+    // Use plain Command key for shortcuts
     ACCEL = Qt::CTRL,
-    LEFT = Qt::Key_Left,
-    RIGHT = Qt::Key_Right,
+#else
+    // Use Ctrl+Shift for shortcuts
+    ACCEL = Qt::CTRL | Qt::SHIFT,
 #endif
 };
 }

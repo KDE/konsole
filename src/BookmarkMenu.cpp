@@ -36,12 +36,14 @@ BookmarkMenu::BookmarkMenu(KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *
     disconnect(bookmarkAction, nullptr, this, nullptr);
     connect(bookmarkAction, &QAction::triggered, this, &BookmarkMenu::maybeAddBookmark);
 
+#ifndef Q_OS_MACOS // not needed on this platform, Cmd+B (shortcut) is different to Ctrl+B (^B in terminal)
     // replace Ctrl+B shortcut for bookmarks only if user hasn't already
     // changed the shortcut; however, if the user changed it to Ctrl+B
     // this will still get changed to Ctrl+Shift+B
-    if (bookmarkAction->shortcut() == QKeySequence(Konsole::ACCEL | Qt::Key_B)) {
-        collection->setDefaultShortcut(bookmarkAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_B);
+    if (bookmarkAction->shortcut() == QKeySequence(Qt::CTRL | Qt::Key_B)) {
+        collection->setDefaultShortcut(bookmarkAction, Qt::CTRL | Qt::SHIFT | Qt::Key_B);
     }
+#endif
 }
 
 void BookmarkMenu::maybeAddBookmark()

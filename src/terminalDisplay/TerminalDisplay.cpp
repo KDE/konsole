@@ -2540,6 +2540,14 @@ void TerminalDisplay::keyPressEvent(QKeyEvent *event)
         peekPrimaryRequested(true);
     }
 
+#ifdef Q_OS_MACOS // swap Ctrl and Meta
+    if (event->modifiers() & Qt::MetaModifier) {
+        event->setModifiers((event->modifiers() & ~Qt::MetaModifier) | Qt::ControlModifier);
+    } else if (event->modifiers() & Qt::ControlModifier) {
+        event->setModifiers((event->modifiers() & ~Qt::ControlModifier) | Qt::MetaModifier);
+    }
+#endif
+
     if (!_readOnly) {
         _actSel = 0; // Key stroke implies a screen update, so TerminalDisplay won't
                      // know where the current selection is.
