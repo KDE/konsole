@@ -70,7 +70,7 @@ private Q_SLOTS:
     void editColorItem(QTableWidgetItem *item);
     void setWallpaperOpacity(int percent);
     void wallpaperPathChanged(const QString &path);
-    void scalingTypeChanged(QString style);
+    void scalingTypeChanged(int styleIndex);
     void horizontalAnchorChanged(int pos);
     void verticalAnchorChanged(int pos);
     void selectWallpaper();

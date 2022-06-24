@@ -15,6 +15,7 @@
 #include <QFontMetrics>
 #include <QIcon>
 #include <QImageReader>
+#include <QMetaEnum>
 
 // KDE
 #include <KLocalizedString>
@@ -94,7 +95,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     connect(_ui->wallpaperSelectButton, &QToolButton::clicked, this, &Konsole::ColorSchemeEditor::selectWallpaper);
     connect(_ui->wallpaperPath, &QLineEdit::textChanged, this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
 
-    connect(_ui->wallpaperScalingType, &QComboBox::currentTextChanged, this, &Konsole::ColorSchemeEditor::scalingTypeChanged);
+	connect(_ui->wallpaperScalingType, (void(QComboBox::*)(int))&QComboBox:: currentIndexChanged, this, &Konsole::ColorSchemeEditor::scalingTypeChanged);
     connect(_ui->wallpaperHorizontalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::horizontalAnchorChanged);
     connect(_ui->wallpaperVerticalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::verticalAnchorChanged);
 
@@ -213,9 +214,10 @@ void ColorSchemeEditor::wallpaperPathChanged(const QString &path)
     }
 }
 
-void ColorSchemeEditor::scalingTypeChanged(QString style)
+void ColorSchemeEditor::scalingTypeChanged(int styleIndex)
 {
-    _colors->setWallpaper(_colors->wallpaper()->path(), style, _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
+	const char *style = QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>().valueToKey(styleIndex);
+    _colors->setWallpaper(_colors->wallpaper()->path(), QString::fromLatin1(style), _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
 }
 
 void ColorSchemeEditor::horizontalAnchorChanged(int pos)
