@@ -832,7 +832,7 @@ void SessionController::setupExtraActions()
     action = collection->addAction(QStringLiteral("shrink-font"), this, &SessionController::decreaseFontSize);
     action->setText(i18n("Shrink Font"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("format-font-size-less")));
-    collection->setDefaultShortcut(action, Qt::CTRL | Qt::Key_Minus);
+    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_Minus));
 
     action = collection->addAction(QStringLiteral("reset-font-size"), this, &SessionController::resetFontSize);
     action->setText(i18n("Reset Font Size"));
