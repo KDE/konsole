@@ -647,19 +647,17 @@ static inline bool drawBlockCharacter(QPainter &paint, int x, int y, int w, int 
         paint.fillRect(rect, color);
         return true;
     case 0x90: // Right half block
-        rect.moveLeft(center.x());
+        rect.setX(center.x());
         paint.fillRect(rect, color);
         return true;
     case 0x94: // Top one eighth block
         rect.setHeight(h / 8.0);
         paint.fillRect(rect, color);
         return true;
-    case 0x95: { // Right one eighth block
-        const qreal width = 7 * w / 8.0;
-        rect.moveLeft(x + width);
+    case 0x95: // Right one eighth block
+        rect.setX(x + 7 * w / 8.0);
         paint.fillRect(rect, color);
         return true;
-    }
     case 0x91: // Light shade
         paint.fillRect(rect, lightShade);
         return true;
