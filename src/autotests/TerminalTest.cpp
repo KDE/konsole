@@ -7,7 +7,7 @@
 // Own
 #include "TerminalTest.h"
 
-#include "qtest.h"
+#include <QTest>
 
 // Konsole
 #include "../terminalDisplay/TerminalColor.h"
@@ -15,23 +15,20 @@
 #include "../terminalDisplay/TerminalScrollBar.h"
 
 #include "../characters/CharacterColor.h"
-#include "colorscheme/ColorScheme.h"
 
 using namespace Konsole;
 
 void TerminalTest::testScrollBarPositions()
 {
-    auto display = new TerminalDisplay(nullptr);
+    TerminalDisplay display(nullptr);
 
     // ScrollBar Positions
-    display->scrollBar()->setScrollBarPosition(Enum::ScrollBarLeft);
-    QCOMPARE(display->scrollBar()->scrollBarPosition(), Enum::ScrollBarLeft);
-    display->scrollBar()->setScrollBarPosition(Enum::ScrollBarRight);
-    QCOMPARE(display->scrollBar()->scrollBarPosition(), Enum::ScrollBarRight);
-    display->scrollBar()->setScrollBarPosition(Enum::ScrollBarHidden);
-    QCOMPARE(display->scrollBar()->scrollBarPosition(), Enum::ScrollBarHidden);
-
-    delete display;
+    display.scrollBar()->setScrollBarPosition(Enum::ScrollBarLeft);
+    QCOMPARE(display.scrollBar()->scrollBarPosition(), Enum::ScrollBarLeft);
+    display.scrollBar()->setScrollBarPosition(Enum::ScrollBarRight);
+    QCOMPARE(display.scrollBar()->scrollBarPosition(), Enum::ScrollBarRight);
+    display.scrollBar()->setScrollBarPosition(Enum::ScrollBarHidden);
+    QCOMPARE(display.scrollBar()->scrollBarPosition(), Enum::ScrollBarHidden);
 }
 
 void TerminalTest::testColorTable()
@@ -43,11 +40,11 @@ void TerminalTest::testColorTable()
                                                QColor(0x68, 0x68, 0x68), QColor(0xFF, 0x54, 0x54), QColor(0x54, 0xFF, 0x54), QColor(0xFF, 0xFF, 0x54),
                                                QColor(0x54, 0x54, 0xFF), QColor(0xFF, 0x54, 0xFF), QColor(0x54, 0xFF, 0xFF), QColor(0x00, 0xFF, 0xFF)};
 
-    auto display = new TerminalDisplay(nullptr);
+    TerminalDisplay display(nullptr);
 
-    display->terminalColor()->setColorTable(defaultTable);
+    display.terminalColor()->setColorTable(defaultTable);
 
-    const QColor *colorTable = display->terminalColor()->colorTable();
+    const QColor *colorTable = display.terminalColor()->colorTable();
 
     for (int i = 0; i < TABLE_COLORS; i++) {
         QCOMPARE(colorTable[i], defaultTable[i]);
@@ -55,21 +52,17 @@ void TerminalTest::testColorTable()
 
     QColor colorEntry = QColor(0x00, 0x00, 0x00);
     QVERIFY(colorTable[1] != colorEntry);
-
-    delete display;
 }
 
 void TerminalTest::testSize()
 {
-    auto display = new TerminalDisplay(nullptr);
+    TerminalDisplay display(nullptr);
 
-    QCOMPARE(display->columns(), 1);
-    QCOMPARE(display->lines(), 1);
+    QCOMPARE(display.columns(), 1);
+    QCOMPARE(display.lines(), 1);
 
     // TODO: setSize doesn't change size...
-    // display->setSize(80, 25);
-
-    delete display;
+    // display.setSize(80, 25);
 }
 
 QTEST_MAIN(TerminalTest)
