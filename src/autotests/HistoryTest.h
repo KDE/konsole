@@ -38,9 +38,6 @@ private:
     static constexpr const char testString[] = "abcdefghijklmnopqrstuvwxyz1234567890";
     static constexpr const int testStringSize = sizeof(testString) / sizeof(char) - 1;
     Character *testImage = nullptr;
-    HistoryType *historyTypeNone = nullptr;
-    HistoryType *historyTypeFile = nullptr;
-    HistoryType *historyTypeCompact = nullptr;
 };
 
 }

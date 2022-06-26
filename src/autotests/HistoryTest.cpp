@@ -7,7 +7,7 @@
 // Own
 #include "HistoryTest.h"
 
-#include "qtest.h"
+#include <QTest>
 
 // Konsole
 #include "../Emulation.h"
@@ -22,14 +22,11 @@ void HistoryTest::initTestCase()
 void HistoryTest::cleanupTestCase()
 {
     delete[] testImage;
-    delete historyTypeNone;
-    delete historyTypeFile;
-    delete historyTypeCompact;
 }
 
 void HistoryTest::testHistoryNone()
 {
-    historyTypeNone = new HistoryTypeNone();
+    std::unique_ptr<HistoryType> historyTypeNone = std::make_unique<HistoryTypeNone>();
     QCOMPARE(historyTypeNone->isEnabled(), false);
     QCOMPARE(historyTypeNone->isUnlimited(), false);
     QCOMPARE(historyTypeNone->maximumLineCount(), 0);
@@ -37,7 +34,7 @@ void HistoryTest::testHistoryNone()
 
 void HistoryTest::testHistoryFile()
 {
-    historyTypeFile = new HistoryTypeFile();
+    std::unique_ptr<HistoryType> historyTypeFile = std::make_unique<HistoryTypeFile>();
     QCOMPARE(historyTypeFile->isEnabled(), true);
     QCOMPARE(historyTypeFile->isUnlimited(), true);
     QCOMPARE(historyTypeFile->maximumLineCount(), -1);
@@ -45,7 +42,7 @@ void HistoryTest::testHistoryFile()
 
 void HistoryTest::testCompactHistory()
 {
-    historyTypeCompact = new CompactHistoryType(42);
+    std::unique_ptr<HistoryType> historyTypeCompact = std::make_unique<CompactHistoryType>(42);
     QCOMPARE(historyTypeCompact->isEnabled(), true);
     QCOMPARE(historyTypeCompact->isUnlimited(), false);
     QCOMPARE(historyTypeCompact->maximumLineCount(), 42);
@@ -53,7 +50,7 @@ void HistoryTest::testCompactHistory()
 
 void HistoryTest::testEmulationHistory()
 {
-    auto session = new Session();
+    auto session = std::make_unique<Session>();
     Emulation *emulation = session->emulation();
 
     const HistoryType &historyTypeDefault = emulation->history();
@@ -78,8 +75,6 @@ void HistoryTest::testEmulationHistory()
     QCOMPARE(compactHistoryType.isEnabled(), true);
     QCOMPARE(compactHistoryType.isUnlimited(), false);
     QCOMPARE(compactHistoryType.maximumLineCount(), 42);
-
-    delete session;
 }
 
 void HistoryTest::testHistoryScroll()
@@ -175,7 +170,6 @@ void HistoryTest::testHistoryReflow()
     QCOMPARE(testChar, testImage[0]);
     historyScrollFile->getCells(testStringSize - 1, 0, 1, &testChar);
     QCOMPARE(testChar, testImage[testStringSize - 1]);
-
 }
 
 void HistoryTest::testHistoryTypeChange()
@@ -184,21 +178,21 @@ void HistoryTest::testHistoryTypeChange()
 
     const char testString[] = "abcdefghijklmnopqrstuvwxyz1234567890";
     const int testStringSize = sizeof(testString) / sizeof(char) - 1;
-    auto testImage = new Character[testStringSize];
+    auto testImage = std::make_unique<Character[]>(testStringSize);
     Character testChar;
     for (int i = 0; i < testStringSize; i++) {
         testImage[i] = Character((uint)testString[i]);
     }
 
     // None
-    auto historyTypeNone = new HistoryTypeNone();
+    auto historyTypeNone = std::make_unique<HistoryTypeNone>();
     historyTypeNone->scroll(historyScroll);
 
     // None to File
-    auto historyTypeFile = new HistoryTypeFile();
+    auto historyTypeFile = std::make_unique<HistoryTypeFile>();
     historyTypeFile->scroll(historyScroll);
 
-    historyScroll->addCells(testImage, testStringSize);
+    historyScroll->addCells(testImage.get(), testStringSize);
     historyScroll->addLine(false);
     QCOMPARE(historyScroll->reflowLines(1), 0);
     QCOMPARE(historyScroll->getLines(), testStringSize);
@@ -206,7 +200,7 @@ void HistoryTest::testHistoryTypeChange()
     QCOMPARE(testChar, testImage[0]);
 
     // File to Compact
-    auto compactHistoryType = new CompactHistoryType(10);
+    auto compactHistoryType = std::make_unique<CompactHistoryType>(10);
     compactHistoryType->scroll(historyScroll);
 
     QCOMPARE(historyScroll->getLines(), 10);
@@ -222,11 +216,6 @@ void HistoryTest::testHistoryTypeChange()
     // File to None
     historyTypeNone->scroll(historyScroll);
     QCOMPARE(historyScroll->getLines(), 0);
-
-    delete historyTypeFile;
-    delete historyTypeNone;
-    delete compactHistoryType;
-    delete[] testImage;
 }
 
 QTEST_MAIN(HistoryTest)
