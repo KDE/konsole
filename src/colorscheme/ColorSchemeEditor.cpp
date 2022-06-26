@@ -95,7 +95,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     connect(_ui->wallpaperSelectButton, &QToolButton::clicked, this, &Konsole::ColorSchemeEditor::selectWallpaper);
     connect(_ui->wallpaperPath, &QLineEdit::textChanged, this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
 
-	connect(_ui->wallpaperScalingType, (void(QComboBox::*)(int))&QComboBox:: currentIndexChanged, this, &Konsole::ColorSchemeEditor::scalingTypeChanged);
+    connect(_ui->wallpaperScalingType, (void(QComboBox::*)(int))&QComboBox::currentIndexChanged, this, &Konsole::ColorSchemeEditor::scalingTypeChanged);
     connect(_ui->wallpaperHorizontalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::horizontalAnchorChanged);
     connect(_ui->wallpaperVerticalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::verticalAnchorChanged);
 
