@@ -56,7 +56,6 @@ if(QT_MAJOR_VERSION EQUAL "6")
     # with Qt6, you have latest ECM anyway
     include(ECMDeprecationSettings)
     ecm_set_disabled_deprecation_versions(
-        SHOW_DEPRECATIONS
         QT 5.15.2
         KF 5.93.0
     )
