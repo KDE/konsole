@@ -113,14 +113,14 @@ void ViewManager::setupActions()
     action->setText(i18nc("@action:inmenu", "Split View Left/Right"));
     connect(action, &QAction::triggered, this, &ViewManager::splitLeftRight);
     collection->addAction(QStringLiteral("split-view-left-right"), action);
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_ParenLeft);
+    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_ParenLeft));
     splitViewActions->addAction(action);
 
     action = new QAction(this);
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
     action->setText(i18nc("@action:inmenu", "Split View Top/Bottom"));
     connect(action, &QAction::triggered, this, &ViewManager::splitTopBottom);
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_ParenRight);
+    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_ParenRight));
     collection->addAction(QStringLiteral("split-view-top-bottom"), action);
     splitViewActions->addAction(action);
 
