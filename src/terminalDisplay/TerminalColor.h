@@ -66,8 +66,8 @@ private Q_SLOTS:
     void swapFGBGColors();
 
 private:
-    qreal m_opacity;
-    QRgb m_blendColor;
+    qreal m_opacity = 1;
+    QRgb m_blendColor = qRgba(0, 0, 0, 0xff);
 
     QColor m_cursorColor;
     QColor m_cursorTextColor;

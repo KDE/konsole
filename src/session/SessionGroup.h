@@ -80,7 +80,7 @@ private:
     // maps sessions to their master status
     QHash<Session *, bool> _sessions;
 
-    int _masterMode;
+    int _masterMode = 0;
 };
 } // namespace Konsole
 

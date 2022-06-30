@@ -22,7 +22,6 @@ using Konsole::SessionListModel;
 
 SessionListModel::SessionListModel(QObject *parent)
     : QAbstractListModel(parent)
-    , _sessions(QList<Session *>())
 {
 }
 

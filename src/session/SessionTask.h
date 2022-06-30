@@ -66,7 +66,7 @@ protected:
     QList<QPointer<Session>> sessions() const;
 
 private:
-    bool _autoDelete;
+    bool _autoDelete = false;
     QList<QPointer<Session>> _sessions;
 };
 

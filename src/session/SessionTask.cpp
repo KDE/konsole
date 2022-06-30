@@ -11,7 +11,6 @@ namespace Konsole
 {
 SessionTask::SessionTask(QObject *parent)
     : QObject(parent)
-    , _autoDelete(false)
 {
 }
 

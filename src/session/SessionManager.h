@@ -125,7 +125,7 @@ private:
     QHash<Session *, QExplicitlySharedDataPointer<Profile>> _sessionProfiles;
     QHash<Session *, QExplicitlySharedDataPointer<Profile>> _sessionRuntimeProfiles;
     QHash<Session *, int> _restoreMapping;
-    bool _isClosingAllSessions;
+    bool _isClosingAllSessions = false;
 };
 
 }

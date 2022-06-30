@@ -21,10 +21,6 @@ namespace Konsole
 {
 TerminalColor::TerminalColor(QObject *parent)
     : QObject(parent)
-    , m_opacity(1.0)
-    , m_blendColor(qRgba(0, 0, 0, 0xff))
-    , m_cursorColor(QColor())
-    , m_cursorTextColor(QColor())
 {
     setColorTable(ColorScheme::defaultTable);
 }

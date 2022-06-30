@@ -16,7 +16,6 @@ namespace Konsole
 {
 SessionGroup::SessionGroup(QObject *parent)
     : QObject(parent)
-    , _masterMode(0)
 {
 }
 
