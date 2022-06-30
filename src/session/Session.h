@@ -809,26 +809,26 @@ private:
 
     QUuid _uniqueIdentifier; // SHELL_SESSION_ID
 
-    Pty *_shellProcess;
-    Emulation *_emulation;
+    Pty *_shellProcess = nullptr;
+    Emulation *_emulation = nullptr;
 
     QList<TerminalDisplay *> _views;
 
     // monitor activity & silence
-    bool _monitorActivity;
-    bool _monitorSilence;
-    bool _notifiedActivity;
-    int _silenceSeconds;
-    QTimer *_silenceTimer;
-    QTimer *_activityTimer;
+    bool _monitorActivity = false;
+    bool _monitorSilence = false;
+    bool _notifiedActivity = false;
+    int _silenceSeconds = 10;
+    QTimer *_silenceTimer = nullptr;
+    QTimer *_activityTimer = nullptr;
 
     void setPendingNotification(Notification notification, bool enable = true);
     void handleActivity();
 
     Notifications _activeNotifications;
 
-    bool _autoClose;
-    bool _closePerUserRequest;
+    bool _autoClose = true;
+    bool _closePerUserRequest = false;
 
     QString _nameTitle;
     QString _displayTitle;
@@ -838,41 +838,41 @@ private:
     QString _remoteTabTitleFormat;
     QColor _tabColor;
 
-    bool _tabTitleSetByUser;
-    bool _tabColorSetByUser;
+    bool _tabTitleSetByUser = false;
+    bool _tabColorSetByUser = false;
 
     QString _iconName;
     QString _iconText; // not actually used
-    bool _addToUtmp;
-    bool _flowControlEnabled;
+    bool _addToUtmp = true;
+    bool _flowControlEnabled = true;
 
     QString _program;
     QStringList _arguments;
 
     QStringList _environment;
-    int _sessionId;
+    int _sessionId = 0;
 
     QString _initialWorkingDir;
     QString _currentWorkingDir;
     QUrl _reportedWorkingUrl;
 
-    ProcessInfo *_sessionProcessInfo;
-    ProcessInfo *_foregroundProcessInfo;
-    int _foregroundPid;
+    ProcessInfo *_sessionProcessInfo = nullptr;
+    ProcessInfo *_foregroundProcessInfo = nullptr;
+    int _foregroundPid = 0;
 
     // ZModem
-    bool _zmodemBusy;
-    KProcess *_zmodemProc;
-    ZModemDialog *_zmodemProgress;
+    bool _zmodemBusy = false;
+    KProcess *_zmodemProc = nullptr;
+    ZModemDialog *_zmodemProgress = nullptr;
 
-    bool _hasDarkBackground;
+    bool _hasDarkBackground = false;
 
     QSize _preferredSize;
 
-    bool _readOnly;
+    bool _readOnly = false;
     static int lastSessionId;
 
-    bool _isPrimaryScreen;
+    bool _isPrimaryScreen = true;
 
     QString _currentHostName;
 };
