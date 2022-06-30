@@ -94,9 +94,9 @@ public Q_SLOTS:
     void highlightScrolledLinesEvent();
 
 private:
-    bool _scrollFullPage;
-    bool _alternateScrolling;
-    Enum::ScrollBarPositionEnum _scrollbarLocation;
+    bool _scrollFullPage = false;
+    bool _alternateScrolling = false;
+    Enum::ScrollBarPositionEnum _scrollbarLocation = Enum::ScrollBarRight;
     HighlightScrolledLines _highlightScrolledLines;
     QPalette _backgroundMatchingPalette;
 };

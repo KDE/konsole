@@ -29,7 +29,7 @@ private:
         return static_cast<QWidget *>(parent());
     }
 
-    int _timerId;
+    int _timerId = 0;
 };
 
 }

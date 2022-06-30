@@ -14,7 +14,6 @@ using namespace Konsole;
 
 AutoScrollHandler::AutoScrollHandler(QWidget *parent)
     : QObject(parent)
-    , _timerId(0)
 {
     parent->installEventFilter(this);
 }

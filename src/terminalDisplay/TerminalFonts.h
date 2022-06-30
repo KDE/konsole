@@ -46,14 +46,14 @@ protected:
     void fontChange(const QFont &);
 
 private:
-    QWidget *m_parent;
-    uint m_lineSpacing;
-    int m_fontHeight;
-    int m_fontWidth;
-    int m_fontAscent;
-    bool m_boldIntense;
-    bool m_antialiasText;
-    bool m_useFontLineCharacters;
+    QWidget *m_parent = nullptr;
+    uint m_lineSpacing = 0;
+    int m_fontHeight = 1;
+    int m_fontWidth = 1;
+    int m_fontAscent = 1;
+    bool m_boldIntense = false;
+    bool m_antialiasText = true;
+    bool m_useFontLineCharacters = false;
 
     Profile::Ptr m_profile;
 };

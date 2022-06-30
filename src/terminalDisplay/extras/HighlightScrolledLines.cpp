@@ -14,16 +14,9 @@
 
 namespace Konsole
 {
-HighlightScrolledLines::HighlightScrolledLines()
-    : _enabled(false)
-    , _previousScrollCount(0)
-    , _timer(nullptr)
-{
-}
+HighlightScrolledLines::HighlightScrolledLines() = default;
 
-HighlightScrolledLines::~HighlightScrolledLines()
-{
-}
+HighlightScrolledLines::~HighlightScrolledLines() = default;
 
 bool HighlightScrolledLines::isEnabled()
 {

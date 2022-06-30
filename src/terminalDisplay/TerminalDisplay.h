@@ -624,83 +624,83 @@ private:
 
     bool _bellMasked;
 
-    QVBoxLayout *_verticalLayout;
+    QVBoxLayout *_verticalLayout = nullptr;
 
-    int _lines; // the number of lines that can be displayed in the widget
-    int _columns; // the number of columns that can be displayed in the widget
+    int _lines = 1; // the number of lines that can be displayed in the widget
+    int _columns = 1; // the number of columns that can be displayed in the widget
 
     // Character line and character column as per a previous call to
     // getCharacterPosition() in mouseMoveEvent().
-    int _prevCharacterLine;
-    int _prevCharacterColumn;
+    int _prevCharacterLine = -1;
+    int _prevCharacterColumn = -1;
 
-    int _usedLines; // the number of lines that are actually being used, this will be less
+    int _usedLines = 1; // the number of lines that are actually being used, this will be less
     // than 'lines' if the character image provided with setImage() is smaller
     // than the maximum image size which can be displayed
 
-    int _usedColumns; // the number of columns that are actually being used, this will be less
+    int _usedColumns = 1; // the number of columns that are actually being used, this will be less
     // than 'columns' if the character image provided with setImage() is smaller
     // than the maximum image size which can be displayed
 
     QRect _contentRect;
-    Character *_image; // [lines][columns]
+    Character *_image = nullptr; // [lines][columns]
     // only the area [usedLines][usedColumns] in the image contains valid data
 
-    int _imageSize;
+    int _imageSize = 0;
     QVector<LineProperty> _lineProperties;
 
     QColor _colorTable[TABLE_COLORS];
 
-    uint _randomSeed;
+    uint _randomSeed = 0;
 
-    bool _resizing;
-    bool _showTerminalSizeHint;
-    bool _bidiEnabled;
-    bool _usesMouseTracking;
-    bool _allowMouseTracking;
-    bool _bracketedPasteMode;
+    bool _resizing = false;
+    bool _showTerminalSizeHint = true;
+    bool _bidiEnabled = false;
+    bool _usesMouseTracking = false;
+    bool _allowMouseTracking = true;
+    bool _bracketedPasteMode = false;
 
     QPoint _iPntSel; // initial selection point
     QPoint _pntSel; // current selection point
     QPoint _tripleSelBegin; // help avoid flicker
-    int _actSel; // selection state
-    bool _wordSelectionMode;
-    bool _lineSelectionMode;
-    bool _preserveLineBreaks;
-    bool _columnSelectionMode;
+    int _actSel = 0; // selection state
+    bool _wordSelectionMode = false;
+    bool _lineSelectionMode = false;
+    bool _preserveLineBreaks = true;
+    bool _columnSelectionMode = false;
 
-    bool _autoCopySelectedText;
-    bool _copyTextAsHTML;
-    Enum::MiddleClickPasteModeEnum _middleClickPasteMode;
+    bool _autoCopySelectedText = false;
+    bool _copyTextAsHTML = true;
+    Enum::MiddleClickPasteModeEnum _middleClickPasteMode = Enum::PasteFromX11Selection;
 
     QString _wordCharacters;
-    TerminalBell _bell;
+    TerminalBell _bell{Enum::NotifyBell};
 
-    bool _allowBlinkingText; // allow text to blink
-    bool _allowBlinkingCursor; // allow cursor to blink
-    bool _textBlinking; // text is blinking, hide it when drawing
-    bool _cursorBlinking; // cursor is blinking, hide it when drawing
-    bool _hasTextBlinker; // has characters to blink
-    QTimer *_blinkTextTimer;
-    QTimer *_blinkCursorTimer;
+    bool _allowBlinkingText = true; // allow text to blink
+    bool _allowBlinkingCursor = false; // allow cursor to blink
+    bool _textBlinking = false; // text is blinking, hide it when drawing
+    bool _cursorBlinking = false; // cursor is blinking, hide it when drawing
+    bool _hasTextBlinker = false; // has characters to blink
+    QTimer *_blinkTextTimer = nullptr;
+    QTimer *_blinkCursorTimer = nullptr;
 
-    bool _openLinksByDirectClick; // Open URL and hosts by single mouse click
+    bool _openLinksByDirectClick = false; // Open URL and hosts by single mouse click
 
-    bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text
-    bool _dropUrlsAsText; // always paste URLs as text without showing copy/move menu
+    bool _ctrlRequiredForDrag = true; // require Ctrl key for drag selected text
+    bool _dropUrlsAsText = false; // always paste URLs as text without showing copy/move menu
 
-    Enum::TripleClickModeEnum _tripleClickMode;
-    bool _possibleTripleClick; // is set in mouseDoubleClickEvent and deleted
+    Enum::TripleClickModeEnum _tripleClickMode = Enum::SelectWholeLine;
+    bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and deleted
     // after QApplication::doubleClickInterval() delay
 
-    QLabel *_resizeWidget;
-    QTimer *_resizeTimer;
+    QLabel *_resizeWidget = nullptr;
+    QTimer *_resizeTimer = nullptr;
 
-    bool _flowControlWarningEnabled;
+    bool _flowControlWarningEnabled = false;
 
     // widgets related to the warning message that appears when the user presses Ctrl+S to suspend
     // terminal output - informing them what has happened and how to resume output
-    KMessageWidget *_outputSuspendedMessageWidget;
+    KMessageWidget *_outputSuspendedMessageWidget = nullptr;
 
     QSize _size;
 
@@ -709,10 +709,10 @@ private:
 
     // list of filters currently applied to the display.  used for links and
     // search highlight
-    TerminalImageFilterChain *_filterChain;
-    bool _filterUpdateRequired;
+    TerminalImageFilterChain *_filterChain = nullptr;
+    bool _filterUpdateRequired = true;
 
-    Enum::CursorShapeEnum _cursorShape;
+    Enum::CursorShapeEnum _cursorShape = Enum::BlockCursor;
 
     InputMethodData _inputMethodData;
 
@@ -722,41 +722,41 @@ private:
     // the duration of the size hint in milliseconds
     static const int SIZE_HINT_DURATION = 1000;
 
-    SessionController *_sessionController;
+    SessionController *_sessionController = nullptr;
 
-    bool _trimLeadingSpaces; // trim leading spaces in selected text
-    bool _trimTrailingSpaces; // trim trailing spaces in selected text
-    bool _mouseWheelZoom; // enable mouse wheel zooming or not
+    bool _trimLeadingSpaces = false; // trim leading spaces in selected text
+    bool _trimTrailingSpaces = false; // trim trailing spaces in selected text
+    bool _mouseWheelZoom = false; // enable mouse wheel zooming or not
 
-    int _margin; // the contents margin
-    bool _centerContents; // center the contents between margins
+    int _margin = 1; // the contents margin
+    bool _centerContents = false; // center the contents between margins
 
-    KMessageWidget *_readOnlyMessageWidget; // Message shown at the top when read-only mode gets activated
+    KMessageWidget *_readOnlyMessageWidget = nullptr; // Message shown at the top when read-only mode gets activated
 
     // Needed to know whether the mode really changed between update calls
-    bool _readOnly;
+    bool _readOnly = false;
 
-    bool _dimWhenInactive;
+    bool _dimWhenInactive = false;
     int _dimValue;
 
     ScrollState _scrollWheelState;
-    IncrementalSearchBar *_searchBar;
-    TerminalHeaderBar *_headerBar;
+    IncrementalSearchBar *_searchBar = nullptr;
+    TerminalHeaderBar *_headerBar = nullptr;
     QRect _searchResultRect;
     friend class TerminalDisplayAccessible;
 
-    bool _drawOverlay;
+    bool _drawOverlay = false;
     Qt::Edge _overlayEdge;
 
     bool _hasCompositeFocus;
-    bool _displayVerticalLine;
-    int _displayVerticalLineAtChar;
+    bool _displayVerticalLine = false;
+    int _displayVerticalLineAtChar = 80;
 
     QKeySequence _peekPrimaryShortcut;
 
-    TerminalPainter *_terminalPainter;
-    TerminalScrollBar *_scrollBar;
-    TerminalColor *_terminalColor;
+    TerminalPainter *_terminalPainter = nullptr;
+    TerminalScrollBar *_scrollBar = nullptr;
+    TerminalColor *_terminalColor = nullptr;
     std::unique_ptr<TerminalFont> _terminalFont;
 
     std::unique_ptr<KonsolePrintManager> _printManager;

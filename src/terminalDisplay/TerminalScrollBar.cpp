@@ -29,9 +29,6 @@ namespace Konsole
 {
 TerminalScrollBar::TerminalScrollBar(QWidget *parent)
     : QScrollBar(parent)
-    , _scrollFullPage(false)
-    , _alternateScrolling(false)
-    , _scrollbarLocation(Enum::ScrollBarRight)
 {
     connect(this, &QScrollBar::valueChanged, this, &TerminalScrollBar::scrollBarPositionChanged);
 }

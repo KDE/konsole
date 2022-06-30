@@ -64,9 +64,9 @@ public:
     static const int HIGHLIGHT_SCROLLED_LINES_WIDTH = 3;
 
 private:
-    bool _enabled;
+    bool _enabled = false;
     QRect _rect;
-    int _previousScrollCount;
+    int _previousScrollCount = 0;
     std::unique_ptr<QTimer> _timer;
 };
 } // namespace Konsole

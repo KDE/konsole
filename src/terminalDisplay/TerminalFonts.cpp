@@ -24,14 +24,6 @@ namespace Konsole
 {
 TerminalFont::TerminalFont(QWidget *parent)
     : m_parent(parent)
-    , m_lineSpacing(0)
-    , m_fontHeight(1)
-    , m_fontWidth(1)
-    , m_fontAscent(1)
-    , m_boldIntense(false)
-    , m_antialiasText(true)
-    , m_useFontLineCharacters(false)
-    , m_profile(nullptr)
 {
 }
 
