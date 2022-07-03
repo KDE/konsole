@@ -48,7 +48,7 @@
   <name xml:lang="tr">Konsole</name>
   <name xml:lang="uk">Konsole</name>
   <name xml:lang="x-test">xxKonsolexx</name>
-  <name xml:lang="zh-CN">Konsole</name>
+  <name xml:lang="zh-CN">Konsole 命令行终端</name>
   <name xml:lang="zh-TW">Konsole</name>
   <summary>Terminal</summary>
   <summary xml:lang="ar">طرفيّة</summary>
@@ -135,7 +135,7 @@
     <p xml:lang="tr">Konsole, bir komut kabuğunu çalıştırmak için kullanılan bir uçbirimdir. Bilgisayarınızı doğrudan kontrol etmek için bir komut satırı arabirimi sağlar.</p>
     <p xml:lang="uk">Konsole — це термінал для роботи з командною оболонкою. За її допомогою можна отримати доступ до інтерфейсу командного рядка для керування вашим комп'ютером.</p>
     <p xml:lang="x-test">xxKonsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.xx</p>
-    <p xml:lang="zh-CN">Konsole 是一个运行命令 Shell 的终端。它提供了直接控制计算机的命令行接口。</p>
+    <p xml:lang="zh-CN">Konsole 是一款用于运行命令 Shell 的终端程序。它提供了直接控制计算机的命令行接口。</p>
     <p xml:lang="zh-TW">Konsole 是個用於執行指令 shell 的終端機。其提供能直接操作電腦的指令行介面。</p>
     <p>Features:</p>
     <p xml:lang="ar">الميزات:</p>
@@ -506,7 +506,7 @@
       <caption xml:lang="tr">Konsole, uçbirim öykünücüsü olarak kullanılıyor</caption>
       <caption xml:lang="uk">Konsole використовується як емулятор термінала</caption>
       <caption xml:lang="x-test">xxKonsole being used as a terminal emulatorxx</caption>
-      <caption xml:lang="zh-CN">将 Konsole 用作终端仿真器</caption>
+      <caption xml:lang="zh-CN">Konsole 作为终端仿真器使用</caption>
       <caption xml:lang="zh-TW">Konsole 是一款使用中的終端模擬器</caption>
     </screenshot>
   </screenshots>
