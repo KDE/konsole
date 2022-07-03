@@ -647,7 +647,7 @@ void SessionController::setupCommonActions()
     connect(action, &QAction::triggered, this, &SessionController::copy);
 
     action = collection->addAction(QStringLiteral("edit_copy_contextmenu_in_out"));
-    action->setText(i18n("Copy except propmts"));
+    action->setText(i18n("Copy except prompts"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
     action->setVisible(false);
     connect(action, &QAction::triggered, this, &SessionController::copyInputOutput);

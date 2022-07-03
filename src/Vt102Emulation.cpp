@@ -1048,19 +1048,19 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     }
 
     if (attribute == 133) {
-        if (value == QLatin1String("A") || value == QLatin1String("N") || value == QLatin1String("P")) {
+        if (value[0] == L'A' || value[0] == L'N' || value[0] == L'P') {
             _currentScreen->setReplMode(REPL_PROMPT);
         }
-        if (value == QLatin1String("L") && _currentScreen->getCursorX() > 0) {
+        if (value[0] == L'L' && _currentScreen->getCursorX() > 0) {
             _currentScreen->nextLine();
         }
-        if (value == QLatin1String("B")) {
+        if (value[0] == L'B') {
             _currentScreen->setReplMode(REPL_INPUT);
         }
-        if (value == QLatin1String("C")) {
+        if (value[0] == L'C') {
             _currentScreen->setReplMode(REPL_OUTPUT);
         }
-        if (value == QLatin1String("D")) {
+        if (value[0] == L'D') {
             _currentScreen->setReplMode(REPL_None);
         }
     }

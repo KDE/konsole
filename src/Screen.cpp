@@ -1225,6 +1225,11 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
     const int topLine = loca / _columns;
     const int bottomLine = loce / _columns;
 
+    // When readline shortens text, it uses clearImage() to remove the extraneous text
+    if (_replMode != REPL_None && std::make_pair(topLine, loca % _columns) <= _replModeEnd) {
+        _replModeEnd = std::make_pair(topLine, loca % _columns);
+    }
+
     Character clearCh(uint(c), _currentForeground, _currentBackground, DEFAULT_RENDITION, 0);
 
     // if the character being used to clear the area is the same as the
@@ -1241,7 +1246,12 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
                 _lineProperties[y] = SetLineLength(_lineProperties[y], startCol);
             }
         } else {
-            _lineProperties[y] = LINE_DEFAULT;
+            if (resetLineRendition) {
+                _lineProperties[y] = LINE_DEFAULT;
+            }
+            {
+                _lineProperties[y] &= ~(LINE_WRAPPED | LINE_PROMPT_START | LINE_INPUT_START | LINE_OUTPUT_START);
+            }
         }
 
         QVector<Character> &line = _screenLines[y];
@@ -1260,10 +1270,6 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
             if (startCol <= endCol) {
                 std::fill(line.begin() + startCol, line.begin() + (endCol + 1), clearCh);
             }
-        }
-
-        if (resetLineRendition && startCol == 0 && endCol == _columns - 1) {
-            _lineProperties[y] &= ~(LINE_DOUBLEWIDTH | LINE_DOUBLEHEIGHT_TOP | LINE_DOUBLEHEIGHT_BOTTOM);
         }
     }
 }

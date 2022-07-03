@@ -241,7 +241,7 @@ public:
 
     inline bool hasSameRendition(Character lhs) const
     {
-        return (lhs.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR);
+        return (lhs.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR) && lhs.flags == flags;
     };
 
     inline bool hasSameLineDrawStatus(Character lhs) const
