@@ -56,6 +56,7 @@ const RenditionFlags RE_TRANSPARENT        = (1 << 12);
 const ExtraFlags EF_UNREAL       = 0;
 const ExtraFlags EF_REAL         = (1 << 0);
 const ExtraFlags EF_REPL         = (3 << 1);
+const ExtraFlags EF_REPL_NONE    = (0 << 1);
 const ExtraFlags EF_REPL_PROMPT  = (1 << 1);
 const ExtraFlags EF_REPL_INPUT   = (2 << 1);
 const ExtraFlags EF_REPL_OUTPUT  = (3 << 1);
@@ -153,6 +154,11 @@ public:
     int width() const
     {
         return width(character);
+    }
+
+    int repl() const
+    {
+        return flags & EF_REPL;
     }
 
     static int width(uint ucs4)

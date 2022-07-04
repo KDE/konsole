@@ -465,6 +465,11 @@ public:
     void setSelectionEnd(const int x, const int y, const bool trimTrailingWhitespace);
 
     /**
+     * Selects a range of characters with the same REPL mode as the character at (@p x, @p y)
+     */
+    void selectReplContigious(const int x, const int y);
+
+    /**
      * Retrieves the start of the selection or the cursor position if there
      * is no selection.
      */
@@ -743,6 +748,8 @@ private:
     // starting from 'startLine', where 0 is the first line in the history
     void copyFromHistory(Character *dest, int startLine, int count) const;
 
+    Character getCharacter(int col, int row) const;
+
     // returns a buffer that can hold at most 'count' characters,
     // where the number of reallocations and object reinitializations
     // should be as minimal as possible
@@ -806,6 +813,8 @@ private:
     bool _hasRepl;
     std::pair<int, int> _replModeStart;
     std::pair<int, int> _replModeEnd;
+    std::pair<int, int> _replLastOutputStart;
+    std::pair<int, int> _replLastOutputEnd;
 
     // ----------------------------
 

@@ -75,6 +75,7 @@ Screen::Screen(int lines, int columns)
     , _bottomMargin(0)
     , _replMode(REPL_None)
     , _hasRepl(false)
+    , _replLastOutputStart(std::pair(-1, -1))
     , _tabStops(QBitArray())
     , _selBegin(0)
     , _selTopLeft(0)
@@ -1142,6 +1143,14 @@ void Screen::scrollUp(int from, int n)
     if (_hasGraphics) {
         scrollPlacements(n);
     }
+    if (_replMode != REPL_None) {
+        _replModeStart = std::make_pair(_replModeStart.first - 1, _replModeStart.second);
+        _replModeEnd = std::make_pair(_replModeEnd.first - 1, _replModeEnd.second);
+        if (_replLastOutputStart.first > -1) {
+            _replLastOutputStart = std::make_pair(_replLastOutputStart.first - 1, _replLastOutputStart.second);
+            _replLastOutputEnd = std::make_pair(_replLastOutputEnd.first - 1, _replLastOutputEnd.second);
+        }
+    }
 }
 
 void Screen::scrollDown(int n)
@@ -1569,9 +1578,120 @@ bool Screen::isSelected(const int x, const int y) const
     return pos >= _selTopLeft && pos <= _selBottomRight && columnInSelection;
 }
 
+Character Screen::getCharacter(int col, int row) const
+{
+    Character ch;
+    if (row >= _history->getLines()) {
+        ch = _screenLines[row - _history->getLines()].value(col);
+    } else {
+        if (col < _history->getLineLen(row)) {
+            _history->getCells(row, col, 1, &ch);
+        } else {
+            ch = Character();
+        }
+    }
+    return ch;
+}
+
+void Screen::selectReplContigious(const int x, const int y)
+{
+    // Avoid searching if in current input
+    if (_replMode == REPL_INPUT && _replModeStart <= std::pair(y, x) && std::pair(y, x) <= _replModeEnd) {
+        setSelectionStart(_replModeStart.second, _replModeStart.first, false);
+        setSelectionEnd(_replModeEnd.second, _replModeEnd.first, true);
+        Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged();
+        return;
+    }
+    int col = x;
+    int row = y;
+    if (row < _history->getLines()) {
+        col = std::min(col, _history->getLineLen(row) - 1);
+    } else {
+        col = std::min(col, _screenLines[row - _history->getLines()].size() - 1);
+    }
+    while (col > 0 && (getCharacter(col, row).flags & EF_REPL) == EF_REPL_NONE) {
+        col--;
+    }
+    if ((getCharacter(col, row).flags & EF_REPL) == EF_REPL_NONE) {
+        return;
+    }
+    int mode = getCharacter(col, row).flags & EF_REPL;
+    int startX = x;
+    int startY = y;
+    int lastX = x;
+    int lastY = y;
+    bool stop = false;
+    while (true) {
+        while (startX >= 0) {
+            // mode or NONE continue search, but ignore last run of NONEs
+            if (getCharacter(startX, startY).repl() == mode) {
+                lastX = startX;
+                lastY = startY;
+            }
+            if (getCharacter(startX, startY).repl() != mode && getCharacter(startX, startY).repl() != EF_REPL_NONE) {
+                stop = true;
+                startX = lastX;
+                startY = lastY;
+                break;
+            }
+            startX--;
+        }
+        if (stop) {
+            break;
+        }
+        startY--;
+        if (startY < 0) {
+            startY = 0;
+            startX = 0;
+            break;
+        }
+        startX = getLineLength(startY) - 1;
+    }
+    int endX = x;
+    int endY = y;
+    stop = false;
+    while (endY < _lines + _history->getLines()) {
+        while (endX < getLineLength(endY)) {
+            if (getCharacter(endX, endY).repl() != mode && getCharacter(endX, endY).repl() != EF_REPL_NONE) {
+                stop = true;
+                break;
+            }
+            endX++;
+        }
+        if (stop) {
+            break;
+        }
+        endX = 0;
+        endY++;
+    }
+    if (endX == 0) {
+        endY--;
+        endX = getLineLength(endY) - 1;
+    } else {
+        endX--;
+    }
+    setSelectionStart(startX, startY, false);
+    setSelectionEnd(endX, endY, true);
+    Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged();
+}
+
 QString Screen::selectedText(const DecodingOptions options) const
 {
     if (!isSelectionValid()) {
+        if (!_hasRepl) {
+            return QString();
+        }
+        int currentStart = (_history->getLines() + _replModeStart.first) * _columns + _replModeStart.second;
+        int currentEnd = (_history->getLines() + _replModeEnd.first) * _columns + _replModeEnd.second - 1;
+
+        if (_replMode == REPL_INPUT && currentStart > currentEnd && _replLastOutputStart.first > -1) {
+            // If no input yet, copy last output
+            currentStart = (_history->getLines() + _replLastOutputStart.first) * _columns + _replLastOutputStart.second;
+            currentEnd = (_history->getLines() + _replLastOutputEnd.first) * _columns + _replLastOutputEnd.second - 1;
+        }
+        if (currentEnd >= currentStart) {
+            return text(currentStart, currentEnd, options);
+        }
         return QString();
     }
 
@@ -1960,12 +2080,17 @@ void Screen::setLineProperty(LineProperty property, bool enable)
 void Screen::setReplMode(int mode)
 {
     if (_replMode != mode) {
+        if (_replMode == REPL_OUTPUT) {
+            _replLastOutputStart = _replModeStart;
+            _replLastOutputEnd = _replModeEnd;
+        }
         _replMode = mode;
         _replModeStart = std::make_pair(_cuY, _cuX);
         _replModeEnd = std::make_pair(_cuY, _cuX);
     }
     if (mode != REPL_None) {
         _hasRepl = true;
+        Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged(); // Enable copy action
         setLineProperty(LINE_PROMPT_START << (mode - REPL_PROMPT), true);
     }
 }

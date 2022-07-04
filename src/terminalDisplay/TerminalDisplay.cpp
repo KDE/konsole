@@ -1916,7 +1916,12 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent *ev)
     }
 
     auto [charLine, charColumn] = getCharacterPosition(ev->pos(), true);
-    selectLine(QPoint(charColumn, charLine), _tripleClickMode == Enum::SelectWholeLine);
+    if (_screenWindow->screen()->hasRepl() && ev->modifiers() & Qt::ControlModifier) {
+        _screenWindow->screen()->selectReplContigious(charColumn, charLine + _screenWindow->currentLine());
+        copyToX11Selection();
+    } else {
+        selectLine(QPoint(charColumn, charLine), _tripleClickMode == Enum::SelectWholeLine);
+    }
 }
 
 void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
