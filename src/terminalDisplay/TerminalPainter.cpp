@@ -239,7 +239,9 @@ void TerminalPainter::drawContents(Character *image,
 
             x += len - 1;
         }
-        if ((lineProperty & LINE_PROMPT_START) != 0 && m_parentDisplay->filterChain()->showUrlHint()) {
+        if ((lineProperty & LINE_PROMPT_START) != 0
+            && ((m_parentDisplay->semanticHints() == Enum::SemanticHintsURL && m_parentDisplay->filterChain()->showUrlHint())
+                || m_parentDisplay->semanticHints() == Enum::SemanticHintsAlways)) {
             QPen pen(m_parentDisplay->terminalColor()->foregroundColor());
             paint.setPen(pen);
             paint.drawLine(leftPadding, textY, m_parentDisplay->contentRect().right(), textY);

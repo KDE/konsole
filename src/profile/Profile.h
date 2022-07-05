@@ -349,7 +349,16 @@ public:
         ColorFilterEnabled,
 
         /** (bool) Allows mouse tracking */
-        AllowMouseTracking
+        AllowMouseTracking,
+
+        /** (int) Show semantic hints (lines between commands, lighter input):
+         * 0 for Never, 1 when showing URL hints, 2 for always
+         */
+        SemanticHints,
+        /** (bool) If true, convert Up/Down arrows when in input mode to Left/Right
+         * key presses that emulate the same cursor movement
+         */
+        SemanticUpDown,
     };
 
     Q_ENUM(Property)
@@ -738,6 +747,16 @@ public:
     QKeySequence peekPrimaryKeySequence() const
     {
         return QKeySequence::fromString(property<QString>(Profile::PeekPrimaryKeySequence));
+    }
+
+    int semanticHints() const
+    {
+        return property<int>(Profile::SemanticHints);
+    }
+
+    bool semanticUpDown() const
+    {
+        return property<bool>(Profile::SemanticUpDown);
     }
 
     /** Return a list of all properties names and their type

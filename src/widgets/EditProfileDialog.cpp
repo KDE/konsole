@@ -483,6 +483,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     connect(_generalUi->initialDirEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::initialDirChanged);
     connect(_generalUi->commandEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::commandChanged);
     connect(_generalUi->environmentEditButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::showEnvironmentEditor);
+    connect(_generalUi->semanticUpDown, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::semanticUpDown);
 
     connect(_generalUi->terminalColumnsEntry, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
     connect(_generalUi->terminalRowsEntry, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
@@ -492,6 +493,19 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     });
 
     connect(_generalUi->setAsDefaultButton, &QAbstractButton::toggled, this, &Konsole::EditProfileDialog::updateButtonApply);
+    const ButtonGroupOptions semanticHints = {
+        _generalUi->semanticHints, // group
+        Profile::SemanticHints, // profileProperty
+        false, // preview
+        {
+            // buttons
+            {_generalUi->semanticHintsNever, Enum::SemanticHintsNever},
+            {_generalUi->semanticHintsURL, Enum::SemanticHintsURL},
+            {_generalUi->semanticHintsAlways, Enum::SemanticHintsAlways},
+        },
+    };
+
+    setupButtonGroup(semanticHints, profile);
 }
 
 void EditProfileDialog::showEnvironmentEditor()
@@ -615,6 +629,11 @@ void EditProfileDialog::profileNameChanged(const QString &name)
 void EditProfileDialog::startInSameDir(bool sameDir)
 {
     updateTempProfileProperty(Profile::StartInCurrentSessionDir, sameDir);
+}
+
+void EditProfileDialog::semanticUpDown(bool enable)
+{
+    updateTempProfileProperty(Profile::SemanticUpDown, enable);
 }
 
 void EditProfileDialog::initialDirChanged(const QString &dir)

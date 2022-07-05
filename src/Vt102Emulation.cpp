@@ -2157,7 +2157,8 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 
         int cuX = _currentScreen->getCursorX();
         int cuY = _currentScreen->getCursorY();
-        if ((event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) && _currentScreen->replMode() == REPL_INPUT) {
+        if ((event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) && _currentScreen->replMode() == REPL_INPUT
+            && _currentScreen->currentTerminalDisplay()->semanticUpDown()) {
             if ((event->key() == Qt::Key_Up && _currentScreen->replModeStart() <= std::make_pair(cuY - 1, cuX))
                 || (event->key() == Qt::Key_Down && std::make_pair(cuY + 1, cuX) <= _currentScreen->replModeEnd())) {
                 entry = _keyTranslator->findEntry(event->key() == Qt::Key_Up ? Qt::Key_Left : Qt::Key_Right, Qt::NoModifier, states);

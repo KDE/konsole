@@ -2828,6 +2828,8 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _ctrlRequiredForDrag = profile->property<bool>(Profile::CtrlRequiredForDrag);
     _dropUrlsAsText = profile->property<bool>(Profile::DropUrlsAsText);
     _bidiEnabled = profile->bidiRenderingEnabled();
+    _semanticUpDown = profile->semanticUpDown();
+    _semanticHints = profile->semanticHints();
     _trimLeadingSpaces = profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText);
     _trimTrailingSpaces = profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText);
     _openLinksByDirectClick = profile->property<bool>(Profile::OpenLinksByDirectClickEnabled);
