@@ -1070,8 +1070,8 @@ bool SessionController::confirmClose() const
         int result = KMessageBox::warningYesNo(view()->window(),
                                                question,
                                                i18n("Confirm Close"),
-                                               KStandardGuiItem::yes(),
-                                               KStandardGuiItem::no(),
+                                               KGuiItem(i18nc("@action:button", "Close Program"), QStringLiteral("application-exit")),
+                                               KStandardGuiItem::cancel(),
                                                QStringLiteral("CloseSingleTab"));
         return result == KMessageBox::Yes;
     }
@@ -1102,7 +1102,11 @@ bool SessionController::confirmForceClose() const
                 title);
         }
 
-        int result = KMessageBox::warningYesNo(view()->window(), question, i18n("Confirm Close"));
+        int result = KMessageBox::warningYesNo(view()->window(),
+                                               question,
+                                               i18n("Confirm Close"),
+                                               KGuiItem(i18nc("@action:button", "Kill Program"), QStringLiteral("application-exit")),
+                                               KStandardGuiItem::cancel());
         return result == KMessageBox::Yes;
     }
     return true;
