@@ -157,7 +157,7 @@ void QuickCommandsWidget::updateCommand()
 void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
 {
     if (!ui->warning->toPlainText().isEmpty()) {
-        QMessageBox::warning(this, QStringLiteral("Shell Errors"), i18n("Please fix all the warnings before trying to execute this script"));
+        QMessageBox::warning(this, QStringLiteral("Shell Errors"), i18n("Please fix all the warnings before trying to run this script"));
         return;
     }
 
@@ -181,10 +181,10 @@ void QuickCommandsWidget::runCommand()
 {
     if (!ui->warning->toPlainText().isEmpty()) {
         auto choice = KMessageBox::questionYesNo(this,
-                                                 i18n("There are some errors on the script, do you really want to execute it?"),
+                                                 i18n("There are some errors on the script, do you really want to run it?"),
                                                  i18n("Shell Errors"),
-                                                 KStandardGuiItem::yes(),
-                                                 KStandardGuiItem::no(),
+                                                 KGuiItem(i18nc("@action:button", "Run"), QStringLiteral("system-run")),
+                                                 KStandardGuiItem::cancel(),
                                                  QStringLiteral("quick-commands-question"));
         if (choice == KMessageBox::ButtonCode::No) {
             return;
