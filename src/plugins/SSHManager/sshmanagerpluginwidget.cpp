@@ -68,7 +68,7 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
     connect(ui->newSSHConfig, &QPushButton::clicked, this, &SSHManagerTreeWidget::showInfoPane);
     connect(ui->btnCancel, &QPushButton::clicked, this, &SSHManagerTreeWidget::clearSshInfo);
     connect(ui->btnEdit, &QPushButton::clicked, this, &SSHManagerTreeWidget::editSshInfo);
-    connect(ui->btnRemove, &QPushButton::clicked, this, &SSHManagerTreeWidget::triggerRemove);
+    connect(ui->btnDelete, &QPushButton::clicked, this, &SSHManagerTreeWidget::triggerDelete);
     connect(ui->btnInvertFilter, &QPushButton::clicked, d->filterModel, &SSHManagerFilterModel::setInvertFilter);
 
     connect(ui->btnFindSshKey, &QPushButton::clicked, this, [this] {
@@ -111,10 +111,10 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
         }
 
         QMenu *menu = new QMenu(this);
-        auto action = new QAction(QStringLiteral("Remove"), ui->treeView);
+        auto action = new QAction(QIcon::fromTheme(QStringLiteral("edit-delete")), i18nc("@action:inmenu", "Delete"), ui->treeView);
         menu->addAction(action);
 
-        connect(action, &QAction::triggered, this, &SSHManagerTreeWidget::triggerRemove);
+        connect(action, &QAction::triggered, this, &SSHManagerTreeWidget::triggerDelete);
 
         menu->popup(ui->treeView->viewport()->mapToGlobal(pos));
     });
@@ -183,7 +183,7 @@ SSHConfigurationData SSHManagerTreeWidget::info() const
     return data;
 }
 
-void SSHManagerTreeWidget::triggerRemove()
+void SSHManagerTreeWidget::triggerDelete()
 {
     auto selection = ui->treeView->selectionModel()->selectedIndexes();
     if (selection.empty()) {
@@ -192,20 +192,18 @@ void SSHManagerTreeWidget::triggerRemove()
 
     const QString text = selection.at(0).data(Qt::DisplayRole).toString();
     const QString dialogMessage = ui->treeView->model()->rowCount(selection.at(0))
-        ? i18n("You are about to remove the folder %1,\n with multiple SSH Configurations, are you sure?", text)
-        : i18n("You are about to remove %1, are you sure?", text);
+        ? i18n("You are about to delete the folder %1,\n with multiple SSH Configurations, are you sure?", text)
+        : i18n("You are about to delete %1, are you sure?", text);
 
     const QString dontAskAgainKey =
         ui->treeView->model()->rowCount(selection.at(0)) ? QStringLiteral("remove_ssh_folder") : QStringLiteral("remove_ssh_config");
 
-    KMessageBox::ButtonCode result = KMessageBox::messageBox(this,
-                                                             KMessageBox::DialogType::WarningYesNo,
-                                                             dialogMessage,
-                                                             i18n("Remove SSH Configurations"),
-                                                             KStandardGuiItem::yes(),
-                                                             KStandardGuiItem::no(),
-                                                             KStandardGuiItem::cancel(),
-                                                             dontAskAgainKey);
+    int result = KMessageBox::warningYesNo(this,
+                                           dialogMessage,
+                                           i18nc("@title:window", "Delete SSH Configurations"),
+                                           KStandardGuiItem::del(),
+                                           KStandardGuiItem::cancel(),
+                                           dontAskAgainKey);
 
     if (result == KMessageBox::ButtonCode::No) {
         return;
@@ -285,7 +283,7 @@ void SSHManagerTreeWidget::clearSshInfo()
 void SSHManagerTreeWidget::hideInfoPane()
 {
     ui->newSSHConfig->show();
-    ui->btnRemove->show();
+    ui->btnDelete->show();
     ui->btnEdit->show();
     ui->sshInfoPane->hide();
     ui->btnAdd->hide();
@@ -296,7 +294,7 @@ void SSHManagerTreeWidget::hideInfoPane()
 void SSHManagerTreeWidget::showInfoPane()
 {
     ui->newSSHConfig->hide();
-    ui->btnRemove->hide();
+    ui->btnDelete->hide();
     ui->btnEdit->hide();
     ui->sshInfoPane->show();
     ui->btnAdd->show();
@@ -396,11 +394,11 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
         if (isParent) {
             setEditComponentsEnabled(false);
             if (sourceIdx.data(Qt::DisplayRole).toString() == i18n("SSH Config")) {
-                ui->btnRemove->setEnabled(false);
-                ui->btnRemove->setToolTip(i18n("Cannot remove this folder"));
+                ui->btnDelete->setEnabled(false);
+                ui->btnDelete->setToolTip(i18n("Cannot delete this folder"));
             } else {
-                ui->btnRemove->setEnabled(true);
-                ui->btnRemove->setToolTip(i18n("Remove folder and all of its contents"));
+                ui->btnDelete->setEnabled(true);
+                ui->btnDelete->setToolTip(i18n("Delete folder and all of its contents"));
             }
             ui->btnEdit->setEnabled(false);
             if (ui->sshInfoPane->isVisible()) {
@@ -410,8 +408,8 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
             const auto item = d->model->itemFromIndex(sourceIdx);
             const auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
             ui->btnEdit->setEnabled(true);
-            ui->btnRemove->setEnabled(!data.importedFromSshConfig);
-            ui->btnRemove->setToolTip(data.importedFromSshConfig ? i18n("You can't remove an automatically added entry.") : i18n("Remove selected entry"));
+            ui->btnDelete->setEnabled(!data.importedFromSshConfig);
+            ui->btnDelete->setToolTip(data.importedFromSshConfig ? i18n("You can't delete an automatically added entry.") : i18n("Delete selected entry"));
             if (ui->sshInfoPane->isVisible()) {
                 handleImportedData(data.importedFromSshConfig);
                 editSshInfo();

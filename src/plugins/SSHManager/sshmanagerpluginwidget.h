@@ -59,7 +59,7 @@ public:
     void setEditComponentsEnabled(bool enabled);
 
     void setModel(SSHManagerModel *model);
-    void triggerRemove();
+    void triggerDelete();
     void setCurrentController(Konsole::SessionController *controller);
     void connectRequested(const QModelIndex &idx);
     void handleImportedData(bool isImported);

@@ -240,15 +240,15 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnRemove">
+      <widget class="QPushButton" name="btnDelete">
        <property name="toolTip">
-        <string>Remove selected SSH entry</string>
+        <string>Delete selected SSH entry</string>
        </property>
        <property name="text">
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="list-remove">
+        <iconset theme="edit-delete">
          <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
@@ -313,7 +313,7 @@
   <tabstop>btnAdd</tabstop>
   <tabstop>btnCancel</tabstop>
   <tabstop>btnEdit</tabstop>
-  <tabstop>btnRemove</tabstop>
+  <tabstop>btnDelete</tabstop>
  </tabstops>
  <resources/>
  <connections/>
