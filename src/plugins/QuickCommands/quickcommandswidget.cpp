@@ -208,16 +208,11 @@ void QuickCommandsWidget::triggerDelete()
     const auto idx = ui->commandsTreeView->currentIndex();
     const QString text = idx.data(Qt::DisplayRole).toString();
     const QString dialogMessage = ui->commandsTreeView->model()->rowCount(idx)
-        ? i18n("You are about to remove the group %1,\n with multiple configurations, are you sure?", text)
-        : i18n("You are about to remove %1, are you sure?", text);
+        ? i18n("You are about to delete the group %1,\n with multiple configurations, are you sure?", text)
+        : i18n("You are about to delete %1, are you sure?", text);
 
-    KMessageBox::ButtonCode result = KMessageBox::messageBox(this,
-                                                             KMessageBox::DialogType::WarningYesNo,
-                                                             dialogMessage,
-                                                             i18n("Remove Quick Commands Configurations"),
-                                                             KStandardGuiItem::yes(),
-                                                             KStandardGuiItem::no(),
-                                                             KStandardGuiItem::cancel());
+    int result =
+        KMessageBox::warningYesNo(this, dialogMessage, i18n("Delete Quick Commands Configurations"), KStandardGuiItem::del(), KStandardGuiItem::cancel());
     if (result != KMessageBox::ButtonCode::Yes)
         return;
 
