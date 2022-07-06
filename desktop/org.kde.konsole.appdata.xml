@@ -45,6 +45,7 @@
   <name xml:lang="sr-ijekavian">Конзола</name>
   <name xml:lang="sr-ijekavianlatin">Konsole</name>
   <name xml:lang="sv">Terminal</name>
+  <name xml:lang="ta">கான்சோல்</name>
   <name xml:lang="tr">Konsole</name>
   <name xml:lang="uk">Konsole</name>
   <name xml:lang="x-test">xxKonsolexx</name>
@@ -92,6 +93,7 @@
   <summary xml:lang="sr-ijekavian">Терминал</summary>
   <summary xml:lang="sr-ijekavianlatin">Terminal</summary>
   <summary xml:lang="sv">Terminal</summary>
+  <summary xml:lang="ta">முனையம்</summary>
   <summary xml:lang="tr">Uçbirim</summary>
   <summary xml:lang="uk">Термінал</summary>
   <summary xml:lang="x-test">xxTerminalxx</summary>
@@ -132,6 +134,7 @@
     <p xml:lang="sk">Konsole je emulátor terminálu, často sa označuje ako terminál alebo shell. Emuluje rozhranie príkazového riadku v textovom okne.</p>
     <p xml:lang="sl">Konsole je posnemovalnik terminala, kjer teče ukazni jezik shell. Nudi vam ukazno vrstico, kjer lahko neposredno upravljate vaš računalnik.</p>
     <p xml:lang="sv">Terminal är en terminal för att köra ett kommandoskal. Det tillhandahåller ett kommandoradsgränssnitt för att direkt styra datorn.</p>
+    <p xml:lang="ta">கான்சோல், முனைய இடைமுகப்பை இயக்கும் செயலி ஆகும். உங்கள் கணினி நீங்கள் நேரடியாக கட்டுப்படுத்த இது உதவும்.</p>
     <p xml:lang="tr">Konsole, komut kabukları çalıştırmak için kullanılan bir uçbirimdir. Bilgisayarınızı doğrudan denetlemek için bir komut satırı arabirimi sağlar.</p>
     <p xml:lang="uk">Konsole — це термінал для роботи з командною оболонкою. За її допомогою можна отримати доступ до інтерфейсу командного рядка для керування вашим комп'ютером.</p>
     <p xml:lang="x-test">xxKonsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.xx</p>
@@ -179,6 +182,7 @@
     <p xml:lang="sr-ijekavian">Могућности:</p>
     <p xml:lang="sr-ijekavianlatin">Mogućnosti:</p>
     <p xml:lang="sv">Funktioner:</p>
+    <p xml:lang="ta">அம்சங்கள்:</p>
     <p xml:lang="tr">Özellikler:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
@@ -227,6 +231,7 @@
       <li xml:lang="sr-ijekavian">језичци</li>
       <li xml:lang="sr-ijekavianlatin">jezičci</li>
       <li xml:lang="sv">Flikar</li>
+      <li xml:lang="ta">கீற்றுகள்</li>
       <li xml:lang="tr">Sekmeler</li>
       <li xml:lang="uk">Вкладки.</li>
       <li xml:lang="x-test">xxTabsxx</li>
@@ -273,6 +278,7 @@
       <li xml:lang="sr-ijekavian">вишеструки профили</li>
       <li xml:lang="sr-ijekavianlatin">višestruki profili</li>
       <li xml:lang="sv">Flera profiler</li>
+      <li xml:lang="ta">பல பயன்முறைகள்</li>
       <li xml:lang="tr">Çoklu profiller</li>
       <li xml:lang="uk">Підтримка роботи з декількома профілями.</li>
       <li xml:lang="x-test">xxMultiple profilesxx</li>
@@ -318,6 +324,7 @@
       <li xml:lang="sr-ijekavian">надзирање тишине и активности</li>
       <li xml:lang="sr-ijekavianlatin">nadziranje tišine i aktivnosti</li>
       <li xml:lang="sv">Övervakning av tystnad och aktivitet</li>
+      <li xml:lang="ta">செயல்பாடு மற்றும் அமைதிக்காக கண்காணித்தல்</li>
       <li xml:lang="tr">Sessizlik ve Etkinlik izleme</li>
       <li xml:lang="uk">Спостереження за бездіяльністю та діями.</li>
       <li xml:lang="x-test">xxSilence and Activity monitoringxx</li>
@@ -363,6 +370,7 @@
       <li xml:lang="sr-ijekavian">обележивачи</li>
       <li xml:lang="sr-ijekavianlatin">obeleživači</li>
       <li xml:lang="sv">Stöd för bokmärken</li>
+      <li xml:lang="ta">நினைவுக்குறிக்கான ஆதரவு</li>
       <li xml:lang="tr">Yer imi desteği</li>
       <li xml:lang="uk">Підтримка закладок.</li>
       <li xml:lang="x-test">xxBookmark supportxx</li>
@@ -409,6 +417,7 @@
       <li xml:lang="sr-ijekavian">претрага</li>
       <li xml:lang="sr-ijekavianlatin">pretraga</li>
       <li xml:lang="sv">Sökning</li>
+      <li xml:lang="ta">தேடல்</li>
       <li xml:lang="tr">Arama</li>
       <li xml:lang="uk">Пошук.</li>
       <li xml:lang="x-test">xxSearchingxx</li>
@@ -455,6 +464,7 @@
       <li xml:lang="sr-ijekavian">уписивање излаза</li>
       <li xml:lang="sr-ijekavianlatin">upisivanje izlaza</li>
       <li xml:lang="sv">Spara utmatning</li>
+      <li xml:lang="ta">வெளியீட்டை சேமிப்பது</li>
       <li xml:lang="tr">Çıktıyı kaydetme</li>
       <li xml:lang="uk">Збереження виведених даних.</li>
       <li xml:lang="x-test">xxSaving outputxx</li>
@@ -503,6 +513,7 @@
       <caption xml:lang="sk">Konsole používaný ako emulátor terminálu.</caption>
       <caption xml:lang="sl">Program Konsole, ko je uporabljen kot posnemovalnik terminala</caption>
       <caption xml:lang="sv">Terminal används som en terminalemulator.</caption>
+      <caption xml:lang="ta">முனையக் கருவியாக கான்சோல் பயன்படுத்தப்படுவது</caption>
       <caption xml:lang="tr">Konsole, uçbirim öykünücü olarak kullanılıyor</caption>
       <caption xml:lang="uk">Konsole використовується як емулятор термінала</caption>
       <caption xml:lang="x-test">xxKonsole being used as a terminal emulatorxx</caption>
