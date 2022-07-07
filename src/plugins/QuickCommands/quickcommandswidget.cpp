@@ -115,11 +115,16 @@ void QuickCommandsWidget::indexSelected(const QModelIndex &idx)
     }
 
     const auto item = priv->model->itemFromIndex(sourceIdx);
-    const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
-    ui->name->setText(data.name);
-    ui->tooltip->setText(data.tooltip);
-    ui->command->setPlainText(data.command);
-    ui->group->setCurrentText(item->parent()->text());
+
+    if (item != nullptr && item->parent() != nullptr) {
+        const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
+        ui->name->setText(data.name);
+        ui->tooltip->setText(data.tooltip);
+        ui->command->setPlainText(data.command);
+        ui->group->setCurrentText(item->parent()->text());
+
+        runShellCheck();
+    }
 
     runShellCheck();
 }
