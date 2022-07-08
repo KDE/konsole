@@ -23,7 +23,6 @@
 
 // Konsole
 #include "EscapeSequenceUrlExtractor.h"
-#include "keyboardtranslator/KeyboardTranslator.h"
 #include "session/SessionController.h"
 #include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalDisplay.h"
@@ -2017,11 +2016,64 @@ void Vt102Emulation::reportAnswerBack()
         0 = Mouse button press
         1 = Mouse drag
         2 = Mouse button release
+        3 = Mouse click to move cursor in input field
 */
 
 void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 {
     if (cx < 1 || cy < 1) {
+        return;
+    }
+
+    if (eventType == 3) {
+        // We know we are in input mode
+        TerminalDisplay *currentView = _currentScreen->currentTerminalDisplay();
+        bool isReadOnly = false;
+        if (currentView != nullptr && currentView->sessionController() != nullptr) {
+            isReadOnly = currentView->sessionController()->isReadOnly();
+        }
+        auto point = std::make_pair(cy, cx);
+        if (!isReadOnly && _currentScreen->replModeStart() <= point && point <= _currentScreen->replModeEnd()) {
+            KeyboardTranslator::States states = KeyboardTranslator::NoState;
+
+            // get current states
+            if (getMode(MODE_NewLine)) {
+                states |= KeyboardTranslator::NewLineState;
+            }
+            if (getMode(MODE_Ansi)) {
+                states |= KeyboardTranslator::AnsiState;
+            }
+            if (getMode(MODE_AppCuKeys)) {
+                states |= KeyboardTranslator::CursorKeysState;
+            }
+            if (getMode(MODE_AppScreen)) {
+                states |= KeyboardTranslator::AlternateScreenState;
+            }
+            KeyboardTranslator::Entry LRKeys[2] = {_keyTranslator->findEntry(Qt::Key_Left, Qt::NoModifier, states),
+                                                   _keyTranslator->findEntry(Qt::Key_Right, Qt::NoModifier, states)};
+            QVector<LineProperty> lineProperties = _currentScreen->getLineProperties(cy + _currentScreen->getHistLines(), cy + _currentScreen->getHistLines());
+            cx = qMin(cx, LineLength(lineProperties[0]));
+            int cuX = _currentScreen->getCursorX();
+            int cuY = _currentScreen->getCursorY();
+            QByteArray textToSend;
+            if (cuY != cy) {
+                for (int i = abs(cy - cuY); i > 0; i--) {
+                    emulateUpDown(cy < cuY, LRKeys[cy > cuY], textToSend, i == 1 ? cx : -1);
+                    textToSend += LRKeys[cy > cuY].text();
+                }
+            } else {
+                if (cuX < cx) {
+                    for (int i = 0; i < cx - cuX; i++) {
+                        textToSend += LRKeys[1].text();
+                    }
+                } else {
+                    for (int i = 0; i < cuX - cx; i++) {
+                        textToSend += LRKeys[0].text();
+                    }
+                }
+            }
+            Q_EMIT sendData(textToSend);
+        }
         return;
     }
 
@@ -2074,6 +2126,37 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
     }
 
     sendString(command);
+}
+
+void Vt102Emulation::emulateUpDown(bool up, KeyboardTranslator::Entry entry, QByteArray &textToSend, int toCol)
+{
+    int cuX = _currentScreen->getCursorX();
+    int cuY = _currentScreen->getCursorY();
+    int realX = cuX;
+    QVector<LineProperty> lineProperties = _currentScreen->getLineProperties(cuY - 1 + _currentScreen->getHistLines(),
+                                                                             qMin(_currentScreen->getLines() - 1, cuY + 1) + _currentScreen->getHistLines());
+    int num = _currentScreen->getColumns();
+    if (up) {
+        if ((lineProperties[0] & LINE_WRAPPED) == 0) {
+            num = cuX + qMax(0, LineLength(lineProperties[0]) - cuX) + 1;
+        }
+    } else {
+        if ((lineProperties[1] & LINE_WRAPPED) == 0 || (lineProperties[2] & LINE_WRAPPED) == 0) {
+            realX = qMin(cuX, LineLength(lineProperties[2]) + 1);
+            num = LineLength(lineProperties[1]) - cuX + realX;
+        }
+    }
+    if (toCol > -1) {
+        if (toCol < realX) {
+            num += up ? realX - toCol : toCol - realX;
+        } else {
+            num += up ? realX - toCol : toCol - realX;
+        }
+    }
+    for (int i = 1; i < num; i++) {
+        // One more will be added by the rest of the code.
+        textToSend += entry.text();
+    }
 }
 
 /**
@@ -2159,26 +2242,11 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         int cuY = _currentScreen->getCursorY();
         if ((event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) && _currentScreen->replMode() == REPL_INPUT
             && _currentScreen->currentTerminalDisplay()->semanticUpDown()) {
-            if ((event->key() == Qt::Key_Up && _currentScreen->replModeStart() <= std::make_pair(cuY - 1, cuX))
-                || (event->key() == Qt::Key_Down && std::make_pair(cuY + 1, cuX) <= _currentScreen->replModeEnd())) {
-                entry = _keyTranslator->findEntry(event->key() == Qt::Key_Up ? Qt::Key_Left : Qt::Key_Right, Qt::NoModifier, states);
-                QVector<LineProperty> lineProperties =
-                    _currentScreen->getLineProperties(cuY - 1 + _currentScreen->getHistLines(),
-                                                      qMin(_currentScreen->getLines() - 1, cuY + 1) + _currentScreen->getHistLines());
-                int num = _currentScreen->getColumns();
-                if (event->key() == Qt::Key_Up) {
-                    if ((lineProperties[0] & LINE_WRAPPED) == 0) {
-                        num = cuX + qMax(0, LineLength(lineProperties[0]) - cuX) + 1;
-                    }
-                } else {
-                    if ((lineProperties[1] & LINE_WRAPPED) == 0 || (lineProperties[2] & LINE_WRAPPED) == 0) {
-                        num = LineLength(lineProperties[1]) - cuX + 1 + qMin(cuX - 1, LineLength(lineProperties[2]));
-                    }
-                }
-                for (int i = 1; i < num; i++) {
-                    // One more will be added by the rest of the code.
-                    textToSend += entry.text();
-                }
+            bool up = event->key() == Qt::Key_Up;
+            if ((up && _currentScreen->replModeStart() <= std::make_pair(cuY - 1, cuX))
+                || (!up && std::make_pair(cuY + 1, cuX) <= _currentScreen->replModeEnd())) {
+                entry = _keyTranslator->findEntry(up ? Qt::Key_Left : Qt::Key_Right, Qt::NoModifier, states);
+                emulateUpDown(up, entry, textToSend);
             }
         }
 

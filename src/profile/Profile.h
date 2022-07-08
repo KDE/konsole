@@ -359,6 +359,9 @@ public:
          * key presses that emulate the same cursor movement
          */
         SemanticUpDown,
+        /** (bool) If true, move cursor with Left/Right keys when mouse clicks in input area
+         */
+        SemanticInputClick,
     };
 
     Q_ENUM(Property)
@@ -757,6 +760,11 @@ public:
     bool semanticUpDown() const
     {
         return property<bool>(Profile::SemanticUpDown);
+    }
+
+    bool semanticInputClick() const
+    {
+        return property<bool>(Profile::SemanticInputClick);
     }
 
     /** Return a list of all properties names and their type

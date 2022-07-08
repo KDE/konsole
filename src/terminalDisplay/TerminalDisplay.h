@@ -776,6 +776,7 @@ private:
 
     int _semanticHints;
     bool _semanticUpDown;
+    bool _semanticInputClick;
 };
 
 }

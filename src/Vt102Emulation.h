@@ -17,6 +17,7 @@
 // Konsole
 #include "Emulation.h"
 #include "Screen.h"
+#include "keyboardtranslator/KeyboardTranslator.h"
 
 class QTimer;
 class QKeyEvent;
@@ -235,6 +236,8 @@ private:
     void reportSize();
     void reportColor(int c, QColor color);
     void reportTerminalParms(int p);
+
+    void emulateUpDown(bool up, KeyboardTranslator::Entry entry, QByteArray &textToSend, int toCol = -1);
 
     // clears the screen and resizes it to the specified
     // number of columns

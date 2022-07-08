@@ -1157,6 +1157,10 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
                 Q_EMIT mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
             }
         }
+        if (_semanticInputClick && (ev->modifiers() & Qt::ControlModifier) == 0 && _screenWindow->screen()->replMode() == REPL_INPUT) {
+            Q_EMIT mouseSignal(0, charColumn, charLine + _scrollBar->value() - _scrollBar->maximum(), 3);
+        }
+
     } else if (ev->button() == Qt::MiddleButton) {
         processMidButtonClick(ev);
     } else if (ev->button() == Qt::RightButton) {
@@ -2830,6 +2834,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _bidiEnabled = profile->bidiRenderingEnabled();
     _semanticUpDown = profile->semanticUpDown();
     _semanticHints = profile->semanticHints();
+    _semanticInputClick = profile->semanticInputClick();
     _trimLeadingSpaces = profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText);
     _trimTrailingSpaces = profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText);
     _openLinksByDirectClick = profile->property<bool>(Profile::OpenLinksByDirectClickEnabled);

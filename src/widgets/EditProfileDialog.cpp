@@ -474,6 +474,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     } else {
         _generalUi->setAsDefaultButton->setText(i18n("Default profile"));
     }
+    _generalUi->semanticUpDown->setChecked(profile->semanticUpDown());
+    _generalUi->semanticInputClick->setChecked(profile->semanticInputClick());
 
     // signals and slots
     connect(_generalUi->dirSelectButton, &QToolButton::clicked, this, &Konsole::EditProfileDialog::selectInitialDir);
@@ -484,6 +486,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     connect(_generalUi->commandEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::commandChanged);
     connect(_generalUi->environmentEditButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::showEnvironmentEditor);
     connect(_generalUi->semanticUpDown, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::semanticUpDown);
+    connect(_generalUi->semanticInputClick, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::semanticInputClick);
 
     connect(_generalUi->terminalColumnsEntry, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
     connect(_generalUi->terminalRowsEntry, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
@@ -504,7 +507,6 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
             {_generalUi->semanticHintsAlways, Enum::SemanticHintsAlways},
         },
     };
-
     setupButtonGroup(semanticHints, profile);
 }
 
@@ -634,6 +636,11 @@ void EditProfileDialog::startInSameDir(bool sameDir)
 void EditProfileDialog::semanticUpDown(bool enable)
 {
     updateTempProfileProperty(Profile::SemanticUpDown, enable);
+}
+
+void EditProfileDialog::semanticInputClick(bool enable)
+{
+    updateTempProfileProperty(Profile::SemanticInputClick, enable);
 }
 
 void EditProfileDialog::initialDirChanged(const QString &dir)

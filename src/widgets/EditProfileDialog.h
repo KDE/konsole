@@ -121,6 +121,7 @@ private Q_SLOTS:
     void startInSameDir(bool);
     void commandChanged(const QString &command);
     void semanticUpDown(bool);
+    void semanticInputClick(bool enable);
 
     // tab page
     void tabTitleFormatChanged(const QString &format);
