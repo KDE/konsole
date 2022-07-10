@@ -229,12 +229,18 @@
        <property name="text">
         <string>Run</string>
        </property>
+       <property name="icon">
+        <iconset theme="system-run"/>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btnAdd">
        <property name="text">
         <string>Add</string>
+       </property>
+       <property name="icon">
+        <iconset theme="list-add"/>
        </property>
       </widget>
      </item>
@@ -243,6 +249,9 @@
        <property name="text">
         <string>Save</string>
        </property>
+       <property name="icon">
+        <iconset theme="document-save"/>
+       </property>
       </widget>
      </item>
      <item>
@@ -250,12 +259,18 @@
        <property name="text">
         <string>Update</string>
        </property>
+       <property name="icon">
+        <iconset theme="view-refresh"/>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btnCancel">
        <property name="text">
         <string>Cancel</string>
+       </property>
+       <property name="icon">
+        <iconset theme="dialog-cancel"/>
        </property>
       </widget>
      </item>
