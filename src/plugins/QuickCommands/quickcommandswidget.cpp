@@ -126,7 +126,6 @@ void QuickCommandsWidget::indexSelected(const QModelIndex &idx)
         runShellCheck();
     }
 
-    runShellCheck();
 }
 
 void QuickCommandsWidget::editMode()
