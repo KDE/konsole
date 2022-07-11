@@ -281,7 +281,10 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
             view->screenWindow()->screen()->setEnableUrlExtractor(shouldEnableUrlExtractor);
             if (shouldEnableUrlExtractor) {
                 view->screenWindow()->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
-                connect(session->emulation(), &Emulation::toggleUrlExtractionRequest, view->screenWindow()->screen()->urlExtractor(), &EscapeSequenceUrlExtractor::toggleUrlInput);
+                connect(session->emulation(),
+                        &Emulation::toggleUrlExtractionRequest,
+                        view->screenWindow()->screen()->urlExtractor(),
+                        &EscapeSequenceUrlExtractor::toggleUrlInput);
             }
         }
     }

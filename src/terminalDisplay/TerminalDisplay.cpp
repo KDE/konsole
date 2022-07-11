@@ -688,10 +688,9 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
 
     if (screenWindow()->currentResultLine() != -1) {
         _searchResultRect.setRect(0,
-                contentRect().top() + (screenWindow()->currentResultLine() - screenWindow()->currentLine()) * _terminalFont->fontHeight(),
-            columns() * terminalFont()->fontWidth(),
-            _terminalFont->fontHeight()
-        );
+                                  contentRect().top() + (screenWindow()->currentResultLine() - screenWindow()->currentLine()) * _terminalFont->fontHeight(),
+                                  columns() * terminalFont()->fontWidth(),
+                                  _terminalFont->fontHeight());
         _terminalPainter->drawCurrentResultRect(paint, _searchResultRect);
     }
 
@@ -1812,7 +1811,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
             col = maxX;
             line--;
         }
-        return { qBound(0, col, maxX), qBound(0, line, maxY) };
+        return {qBound(0, col, maxX), qBound(0, line, maxY)};
     }
 
     const int regSize = qMax(_screenWindow->windowLines(), 10);
@@ -2893,5 +2892,3 @@ int TerminalDisplay::selectionState() const
 {
     return _actSel;
 }
-
-

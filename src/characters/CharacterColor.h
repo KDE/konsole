@@ -186,7 +186,7 @@ public:
      */
     friend constexpr bool operator==(const CharacterColor a, const CharacterColor b)
     {
-        return std::tie(a._colorSpace, a._u, a._v, a._w) == std::tie(b._colorSpace, b._u, b._v,  b._w);
+        return std::tie(a._colorSpace, a._u, a._v, a._w) == std::tie(b._colorSpace, b._u, b._v, b._w);
     }
     /**
      * Compares two colors and returns true if they represent different color values

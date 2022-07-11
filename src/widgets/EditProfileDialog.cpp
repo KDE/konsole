@@ -705,9 +705,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     connect(_appearanceUi->useFontLineCharactersButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::useFontLineCharacters);
 
     _mouseUi->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
-    connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this,
-            &Konsole::EditProfileDialog::toggleMouseWheelZoom);
-
+    connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 
     // cursor options
     _appearanceUi->enableBlinkingCursorButton->setChecked(profile->property<bool>(Profile::BlinkingCursorEnabled));

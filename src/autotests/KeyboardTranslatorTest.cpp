@@ -111,7 +111,6 @@ void KeyboardTranslatorTest::testFallback()
     QCOMPARE(QStringLiteral("\\t"), entry.resultToString());
     QVERIFY(entry.matches(Qt::Key_Tab, Qt::NoModifier, KeyboardTranslator::NoState));
     QVERIFY(entry == fallback->findEntry(Qt::Key_Tab, Qt::NoModifier));
-
 }
 
 void KeyboardTranslatorTest::testHexKeys()
@@ -181,7 +180,6 @@ void KeyboardTranslatorTest::testHexKeys()
     QVERIFY(entry == translator->findEntry(Qt::Key_Space, Qt::NoModifier));
     QVERIFY(!entry.matches(Qt::Key_Backspace, Qt::NoModifier, KeyboardTranslator::NoState));
     QVERIFY(!(entry == translator->findEntry(Qt::Key_Backspace, Qt::NoModifier)));
-
 }
 
 QTEST_GUILESS_MAIN(KeyboardTranslatorTest)

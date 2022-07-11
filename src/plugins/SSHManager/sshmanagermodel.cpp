@@ -49,7 +49,7 @@ SSHManagerModel::SSHManagerModel(QObject *parent)
     if (invisibleRootItem()->rowCount() == 0) {
         addTopLevelItem(i18n("Default"));
     }
-    if (QFileInfo::exists(sshDir +  QStringLiteral("config"))){
+    if (QFileInfo::exists(sshDir + QStringLiteral("config"))) {
         m_sshConfigWatcher.addPath(sshDir + QStringLiteral("config"));
         connect(&m_sshConfigWatcher, &QFileSystemWatcher::fileChanged, this, [this] {
             startImportFromSshConfig();

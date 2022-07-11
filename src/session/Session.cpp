@@ -752,12 +752,10 @@ void Session::refresh()
 
     const QSize existingSize = _shellProcess->windowSize();
     const QSize existingPxSize = _shellProcess->pixelSize();
-    _shellProcess->setWindowSize(existingSize.width() + 1, existingSize.height(),
-                                 existingPxSize.width() + 1, existingPxSize.height());
+    _shellProcess->setWindowSize(existingSize.width() + 1, existingSize.height(), existingPxSize.width() + 1, existingPxSize.height());
     // introduce small delay to avoid changing size too quickly
     QThread::usleep(500);
-    _shellProcess->setWindowSize(existingSize.width(), existingSize.height(),
-                                 existingPxSize.width(), existingPxSize.height());
+    _shellProcess->setWindowSize(existingSize.width(), existingSize.height(), existingPxSize.width(), existingPxSize.height());
 }
 
 void Session::sendSignal(int signal)

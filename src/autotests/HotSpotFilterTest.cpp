@@ -22,13 +22,13 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
     QTest::newRow("url_with_port") << "\nhttps://api.kde.org:2098"
                                    << "https://api.kde.org:2098" << true;
     QTest::newRow("url_with_port_trailing_slash") << "\nhttps://api.kde.org:2098/"
-                                   << "https://api.kde.org:2098/" << true;
+                                                  << "https://api.kde.org:2098/" << true;
     QTest::newRow("url_with_numeric_host") << "\nhttp://127.0.0.1"
-                                   << "http://127.0.0.1" << true;
+                                           << "http://127.0.0.1" << true;
     QTest::newRow("url_with_numeric_host_port") << "\nhttp://127.0.0.1:4000"
-                                   << "http://127.0.0.1:4000" << true;
+                                                << "http://127.0.0.1:4000" << true;
     QTest::newRow("url_with_numeric_host_port_slash") << "\nhttp://127.0.0.1:4000/"
-                                   << "http://127.0.0.1:4000/" << true;
+                                                      << "http://127.0.0.1:4000/" << true;
     QTest::newRow("url_with_path") << "https://api.kde.org/path/to/somewhere"
                                    << "https://api.kde.org/path/to/somewhere" << true;
     QTest::newRow("url_with_query") << "https://user:pass@api.kde.org?somequery=foo"

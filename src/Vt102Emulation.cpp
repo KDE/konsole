@@ -1042,7 +1042,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         // the <id-part>. Often it is empty, but GNU libtextstyle
         // may output an id here, see e.g.
         // https://www.gnu.org/software/gettext/libtextstyle/manual/libtextstyle.html#index-styled_005fostream_005fset_005fhyperlink
-        value.remove(0, value.indexOf(QLatin1Char(';'))+1);
+        value.remove(0, value.indexOf(QLatin1Char(';')) + 1);
         _currentScreen->urlExtractor()->setUrl(value);
         return;
     }
@@ -1760,11 +1760,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                     return;
                 }
                 QImage::Format format = keys['f'] == 24 ? QImage::Format_RGB888 : QImage::Format_RGBA8888;
-                pixmap = QPixmap::fromImage(QImage((const uchar*)out.constData(),
-                                   0 + keys['s'],
-                                   0 + keys['v'],
-                                   0 + keys['s'] * keys['f'] / 8,
-                                   format));
+                pixmap = QPixmap::fromImage(QImage((const uchar *)out.constData(), 0 + keys['s'], 0 + keys['v'], 0 + keys['s'] * keys['f'] / 8, format));
                 pixmap.detach();
             } else {
                 pixmap.loadFromData(out);

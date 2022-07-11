@@ -15,8 +15,8 @@
 #include <KWindowEffects>
 #include <KWindowSystem>
 
-#include <kwindowsystem_version.h>
 #include <kservice_version.h>
+#include <kwindowsystem_version.h>
 
 #if KSERVICE_VERSION < QT_VERSION_CHECK(5, 86, 0)
 #include <KPluginLoader>

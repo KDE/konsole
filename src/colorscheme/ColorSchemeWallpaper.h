@@ -13,8 +13,8 @@
 
 // Qt
 #include <QMetaType>
-#include <QSharedData>
 #include <QPointF>
+#include <QSharedData>
 
 // Konsole
 #include "../characters/CharacterColor.h"
@@ -31,13 +31,12 @@ namespace Konsole
 class ColorSchemeWallpaper : public QSharedData
 {
 public:
-    enum FillStyle
-    {
+    enum FillStyle {
         Tile = 0,
         Stretch,
         Crop,
         Adapt,
-        NoScaling
+        NoScaling,
     };
     Q_ENUM(FillStyle)
 

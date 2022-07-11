@@ -148,7 +148,7 @@ void SSHManagerTreeWidget::addSshInfo()
 
 void SSHManagerTreeWidget::saveEdit()
 {
-  //    SSHConfigurationData data; (not used?)
+    //    SSHConfigurationData data; (not used?)
     auto [error, errorString] = checkFields();
     if (error) {
         ui->errorPanel->setText(errorString);
@@ -179,7 +179,7 @@ SSHConfigurationData SSHManagerTreeWidget::info() const
     data.username = ui->username->text().trimmed();
     data.useSshConfig = ui->useSshConfig->checkState() == Qt::Checked;
     // if ui->username is enabled then we were not imported!
-    data.importedFromSshConfig=!ui->username->isEnabled();
+    data.importedFromSshConfig = !ui->username->isEnabled();
     return data;
 }
 
@@ -354,8 +354,8 @@ std::pair<bool, QString> SSHManagerTreeWidget::checkFields() const
     }
 
     if (ui->useSshConfig->checkState() == Qt::Checked) {
-      // If ui->username is not enabled then this was an autopopulated entry and we should not complain
-      if (ui->username->isEnabled() && (ui->sshkey->text().count() || ui->username->text().count())) {
+        // If ui->username is not enabled then this was an autopopulated entry and we should not complain
+        if (ui->username->isEnabled() && (ui->sshkey->text().count() || ui->username->text().count())) {
             error = true;
             errorString += li + i18n("If Use Ssh Config is set, do not specify sshkey or username.") + il;
         }

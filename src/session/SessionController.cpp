@@ -618,7 +618,10 @@ void SessionController::setupSearchBar()
     connect(_searchBar, &Konsole::IncrementalSearchBar::searchFromClicked, this, &Konsole::SessionController::searchFrom);
     connect(_searchBar, &Konsole::IncrementalSearchBar::findNextClicked, this, &Konsole::SessionController::findNextInHistory);
     connect(_searchBar, &Konsole::IncrementalSearchBar::findPreviousClicked, this, &Konsole::SessionController::findPreviousInHistory);
-    connect(_searchBar, &Konsole::IncrementalSearchBar::reverseSearchToggled, this, &Konsole::SessionController::updateMenuIconsAccordingToReverseSearchSetting);
+    connect(_searchBar,
+            &Konsole::IncrementalSearchBar::reverseSearchToggled,
+            this,
+            &Konsole::SessionController::updateMenuIconsAccordingToReverseSearchSetting);
     connect(_searchBar, &Konsole::IncrementalSearchBar::highlightMatchesToggled, this, &Konsole::SessionController::highlightMatches);
     connect(_searchBar, &Konsole::IncrementalSearchBar::matchCaseToggled, this, &Konsole::SessionController::changeSearchMatch);
     connect(_searchBar, &Konsole::IncrementalSearchBar::matchRegExpToggled, this, &Konsole::SessionController::changeSearchMatch);
@@ -1899,7 +1902,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 #endif
 
         auto newActions = popup->actions();
-        for (auto* elm : old) {
+        for (auto *elm : old) {
             newActions.removeAll(elm);
         }
         // Finish Ading the "Open Folder With" action.

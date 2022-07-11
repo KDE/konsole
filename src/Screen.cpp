@@ -825,7 +825,6 @@ void Screen::reset(bool softReset, bool preservePrompt)
         resetMode(MODE_NewLine);
 
         initTabStops();
-
     }
 
     _currentModes[MODE_Origin] = 0;

@@ -11,11 +11,11 @@
 #include <QCommandLineParser>
 
 // Konsole
-#include "widgets/ViewSplitter.h"
-#include "terminalDisplay/TerminalDisplay.h"
+#include "konsole_export.h"
 #include "pluginsystem/PluginManager.h"
 #include "profile/Profile.h"
-#include "konsole_export.h"
+#include "terminalDisplay/TerminalDisplay.h"
+#include "widgets/ViewSplitter.h"
 
 namespace Konsole
 {

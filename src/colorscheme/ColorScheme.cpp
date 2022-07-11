@@ -12,8 +12,8 @@
 #include "hsluv.h"
 
 // Qt
-#include <QPainter>
 #include <QMetaEnum>
+#include <QPainter>
 
 // KDE
 #include <KConfig>
@@ -26,7 +26,7 @@
 // Konsole
 #include "colorschemedebug.h"
 
-//define DEBUG_LOADING_TIME
+// define DEBUG_LOADING_TIME
 #ifdef DEBUG_LOADING_TIME
 #include <QElapsedTimer>
 #endif
@@ -455,7 +455,8 @@ bool ColorScheme::blur() const
 void ColorScheme::read(const KConfig &config)
 {
 #ifdef DEBUG_LOADING_TIME
-    QElapsedTimer t; t.start();
+    QElapsedTimer t;
+    t.start();
 #endif
 
     KConfigGroup configGroup = config.group("General");
@@ -529,9 +530,7 @@ void ColorScheme::write(KConfig &config) const
     configGroup.writeEntry("Opacity", _opacity);
     configGroup.writeEntry("Blur", _blur);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
-    configGroup.writeEntry("FillStyle", 
-                            QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>()
-                            .valueToKey(_wallpaper->style()));
+    configGroup.writeEntry("FillStyle", QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>().valueToKey(_wallpaper->style()));
     configGroup.writeEntry("Anchor", _wallpaper->anchor());
     configGroup.writeEntry("WallpaperOpacity", _wallpaper->opacity());
     configGroup.writeEntry(EnableColorRandomizationKey, _colorRandomization);
@@ -589,11 +588,9 @@ void ColorScheme::setWallpaper(const QString &path, const ColorSchemeWallpaper::
 void ColorScheme::setWallpaper(const QString &path, const QString &style, const QPointF &anchor, const qreal &opacity)
 {
     ColorSchemeWallpaper::FillStyle fstyle;
-    fstyle = static_cast<ColorSchemeWallpaper::FillStyle>
-                (std::max(      //keyToValue returns -1 if key was not found, but we should default to 0
-                    QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>()
-                    .keyToValue(style.toStdString().c_str())
-                    , 0));
+    fstyle = static_cast<ColorSchemeWallpaper::FillStyle>(std::max( // keyToValue returns -1 if key was not found, but we should default to 0
+        QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>().keyToValue(style.toStdString().c_str()),
+        0));
 
     setWallpaper(path, fstyle, anchor, opacity);
 }

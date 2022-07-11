@@ -58,7 +58,6 @@ void CompactHistoryScroll::addCellsMove(Character characters[], const int count)
     }
 }
 
-
 void CompactHistoryScroll::addLine(const LineProperty lineProperty)
 {
     auto &flag = _lineDatas.back().flag;
