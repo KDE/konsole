@@ -399,6 +399,8 @@ private Q_SLOTS:
     /* Detaches the tab at index tabIdx */
     void detachTab(int tabIdx);
 
+    void semanticSetupBash();
+
 private:
     Q_DISABLE_COPY(ViewManager)
 

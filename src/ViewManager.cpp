@@ -274,6 +274,12 @@ void ViewManager::setupActions()
     _multiTabOnlyActions << action;
     _viewContainer->addAction(action);
 
+    action = new QAction(i18nc("@action Shortcut entry", "Setup semantic integration (bash)"), this);
+    collection->addAction(QStringLiteral("semantic-setup-bash"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_BracketRight);
+    connect(action, &QAction::triggered, this, &ViewManager::semanticSetupBash);
+    _viewContainer->addAction(action);
+
     action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Equal size to all views"));
     collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_Backslash);
@@ -468,6 +474,22 @@ void ViewManager::detachTab(int tabIdx)
     ViewSplitter *splitter = _viewContainer->viewSplitterAt(tabIdx);
     QHash<TerminalDisplay *, Session *> detachedSessions = forgetAll(_viewContainer->viewSplitterAt(tabIdx));
     Q_EMIT terminalsDetached(splitter, detachedSessions);
+}
+
+void ViewManager::semanticSetupBash()
+{
+    int currentSessionId = currentSession();
+    // At least one display/session exists if we are splitting
+    Q_ASSERT(currentSessionId >= 0);
+
+    Session *activeSession = SessionManager::instance()->idToSession(currentSessionId);
+    Q_ASSERT(activeSession);
+
+    activeSession->sendTextToTerminal(QStringLiteral(R"(if [[ ! $PS1 =~ 133 ]] ; then
+        PS1='\[\e]133;L\a\]\[\e]133;A\a\]'$PS1'\[\e]133;B\a\]' ;
+        PS2='\[\e]133;A\a\]'$PS2'\[\e]133;B\a\]' ;
+        PS0='\[\e]133;C\a\]' ; fi)"),
+                                      QChar());
 }
 
 QHash<TerminalDisplay *, Session *> ViewManager::forgetAll(ViewSplitter *splitter)
