@@ -1185,47 +1185,47 @@ QString Session::getDynamicTitle()
             int UID = process->userId(&ok);
             if (!ok) {
                 title.replace(pos, 2, QStringLiteral("-"));
-                pos--;
+                pos++;
             } else {
                 // title.replace(QLatin1String("%I"), QString::number(UID));
                 if (UID == 0) {
                     title.replace(pos, 2, QStringLiteral("#"));
-                    pos--;
+                    pos++;
                 } else {
                     title.replace(pos, 2, QStringLiteral("$"));
-                    pos--;
+                    pos++;
                 }
             }
         } break;
         case 'u': {
             QString replacement = process->userName();
             title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
+            pos += replacement.size();
         } break;
         case 'h': {
             QString replacement = Konsole::ProcessInfo::localHost();
             title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
+            pos += replacement.size();
         } break;
         case 'n': {
             QString replacement = process->name(&ok);
             title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
+            pos += replacement.size();
         } break;
         case 'w': {
             QString replacement = userTitle();
             title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
+            pos += replacement.size();
         } break;
         case '#': {
             QString replacement = QString::number(sessionId());
             title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
+            pos += replacement.size();
         } break;
         case 'd':
             if (!dirOk) {
                 title.replace(pos, 2, QStringLiteral("-"));
-                pos--;
+                pos++;
             } else {
                 // allow for shortname to have the ~ as homeDir
                 const QString homeDir = process->userHomeDir();
@@ -1237,13 +1237,13 @@ QString Session::getDynamicTitle()
                 }
                 const QString replacement = process->formatShortDir(dir);
                 title.replace(pos, 2, replacement);
-                pos += replacement.size() - 2;
+                pos += replacement.size();
             }
             break;
         case 'D':
             if (!dirOk) {
                 title.replace(pos, 2, QStringLiteral("-"));
-                pos--;
+                pos++;
             } else {
                 // allow for shortname to have the ~ as homeDir
                 const QString homeDir = process->userHomeDir();
@@ -1254,9 +1254,11 @@ QString Session::getDynamicTitle()
                     }
                 }
                 title.replace(pos, 2, dir);
-                pos += dir.size() - 2;
+                pos += dir.size();
             }
             break;
+        default:
+            pos++;
         }
     }
 
