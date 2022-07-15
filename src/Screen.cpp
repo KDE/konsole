@@ -1935,7 +1935,7 @@ int Screen::copyLineToStream(int line,
     decoder->decodeLine(newBuffer, count, currentLineProperties);
 
     if (todel) {
-        delete newBuffer;
+        delete[] newBuffer;
     }
 
     return count;

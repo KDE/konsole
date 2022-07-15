@@ -868,16 +868,12 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 case DcsPassthrough:
                     if (cc <= 0x7E || cc >= 0xA0) { // 0x18, 0x1A, 0x1B already taken care of
                         put(cc);
-                    } else if (cc == 0x9C) {
-                        switchState(Ground, cc);
                     } else if (cc == 0x7F) {
                         // ignore
                     }
                     break;
                 case DcsIgnore:
-                    if (cc == 0x9C) {
-                        switchState(Ground, cc);
-                    } else if (cc <= 0x7F) {
+                    if (cc <= 0x7F) {
                         // ignore
                     }
                     break;
@@ -894,9 +890,6 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 case SosPmApcString:
                     if (cc <= 0x7F || cc >= 0xA0) { // 0x18, 0x1A, 0x1B already taken care of.
                         apc_put(cc);
-                        // ignore
-                    } else if (cc == 0x9C) {
-                        switchState(Ground, cc);
                     }
                     break;
                 default:
@@ -2147,11 +2140,7 @@ void Vt102Emulation::emulateUpDown(bool up, KeyboardTranslator::Entry entry, QBy
         }
     }
     if (toCol > -1) {
-        if (toCol < realX) {
-            num += up ? realX - toCol : toCol - realX;
-        } else {
-            num += up ? realX - toCol : toCol - realX;
-        }
+        num += up ? realX - toCol : toCol - realX;
     }
     for (int i = 1; i < num; i++) {
         // One more will be added by the rest of the code.
