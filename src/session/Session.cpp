@@ -1164,100 +1164,48 @@ QString Session::getDynamicTitle()
     QString title = tabTitleFormat(Session::LocalTabTitle);
     // search for and replace known marker
 
+    int UID = process->userId(&ok);
+    if (!ok) {
+        title.replace(QLatin1String("%B"), QStringLiteral("-"));
+    } else {
+        // title.replace(QLatin1String("%I"), QString::number(UID));
+        if (UID == 0) {
+            title.replace(QLatin1String("%B"), QStringLiteral("#"));
+        } else {
+            title.replace(QLatin1String("%B"), QStringLiteral("$"));
+        }
+    }
+
+    title.replace(QLatin1String("%u"), process->userName());
+    title.replace(QLatin1String("%h"), Konsole::ProcessInfo::localHost());
+    title.replace(QLatin1String("%n"), process->name(&ok));
+
+    title.replace(QLatin1String("%w"), userTitle());
+    title.replace(QLatin1String("%#"), QString::number(sessionId()));
+
     QString dir = _reportedWorkingUrl.toLocalFile();
-    bool dirOk = true;
+    ok = true;
     if (dir.isEmpty()) {
         // update current directory from process
         updateWorkingDirectory();
         // Previous process may have been freed in updateSessionProcessInfo()
         process = getProcessInfo();
-        dir = process->currentDir(&dirOk);
+        dir = process->currentDir(&ok);
     }
-
-    int pos = 0;
-    while ((pos = title.indexOf(QLatin1Char('%'), pos)) != -1) {
-        if (pos >= title.size() - 1) {
-            break;
+    if (!ok) {
+        title.replace(QLatin1String("%d"), QStringLiteral("-"));
+        title.replace(QLatin1String("%D"), QStringLiteral("-"));
+    } else {
+        // allow for shortname to have the ~ as homeDir
+        const QString homeDir = process->userHomeDir();
+        if (!homeDir.isEmpty()) {
+            if (dir.startsWith(homeDir)) {
+                dir.remove(0, homeDir.length());
+                dir.prepend(QLatin1Char('~'));
+            }
         }
-
-        switch (title.at(pos + 1).toLatin1()) {
-        case 'B': {
-            int UID = process->userId(&ok);
-            if (!ok) {
-                title.replace(pos, 2, QStringLiteral("-"));
-                pos--;
-            } else {
-                // title.replace(QLatin1String("%I"), QString::number(UID));
-                if (UID == 0) {
-                    title.replace(pos, 2, QStringLiteral("#"));
-                    pos--;
-                } else {
-                    title.replace(pos, 2, QStringLiteral("$"));
-                    pos--;
-                }
-            }
-        } break;
-        case 'u': {
-            QString replacement = process->userName();
-            title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
-        } break;
-        case 'h': {
-            QString replacement = Konsole::ProcessInfo::localHost();
-            title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
-        } break;
-        case 'n': {
-            QString replacement = process->name(&ok);
-            title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
-        } break;
-        case 'w': {
-            QString replacement = userTitle();
-            title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
-        } break;
-        case '#': {
-            QString replacement = QString::number(sessionId());
-            title.replace(pos, 2, replacement);
-            pos += replacement.size() - 2;
-        } break;
-        case 'd':
-            if (!dirOk) {
-                title.replace(pos, 2, QStringLiteral("-"));
-                pos--;
-            } else {
-                // allow for shortname to have the ~ as homeDir
-                const QString homeDir = process->userHomeDir();
-                if (!homeDir.isEmpty()) {
-                    if (dir.startsWith(homeDir)) {
-                        dir.remove(0, homeDir.length());
-                        dir.prepend(QLatin1Char('~'));
-                    }
-                }
-                const QString replacement = process->formatShortDir(dir);
-                title.replace(pos, 2, replacement);
-                pos += replacement.size() - 2;
-            }
-            break;
-        case 'D':
-            if (!dirOk) {
-                title.replace(pos, 2, QStringLiteral("-"));
-                pos--;
-            } else {
-                // allow for shortname to have the ~ as homeDir
-                const QString homeDir = process->userHomeDir();
-                if (!homeDir.isEmpty()) {
-                    if (dir.startsWith(homeDir)) {
-                        dir.remove(0, homeDir.length());
-                        dir.prepend(QLatin1Char('~'));
-                    }
-                }
-                title.replace(pos, 2, dir);
-                pos += dir.size() - 2;
-            }
-            break;
-        }
+        title.replace(QLatin1String("%D"), dir);
+        title.replace(QLatin1String("%d"), process->formatShortDir(dir));
     }
 
     return title;
