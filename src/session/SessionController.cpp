@@ -435,7 +435,7 @@ void SessionController::openUrl(const QUrl &url)
     } else {
         // TODO Implement handling for other Url types
 
-        KMessageBox::sorry(view()->window(), i18n("Konsole does not know how to open the bookmark: ") + url.toDisplayString());
+        KMessageBox::error(view()->window(), i18n("Konsole does not know how to open the bookmark: ") + url.toDisplayString());
 
         qCDebug(KonsoleDebug) << "Unable to open bookmark at url" << url << ", I do not know"
                               << " how to handle the protocol " << url.scheme();
@@ -2016,7 +2016,7 @@ void SessionController::zmodemDownload()
 void SessionController::zmodemUpload()
 {
     if (session()->isZModemBusy()) {
-        KMessageBox::sorry(view(), i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
+        KMessageBox::information(view(), i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
         return;
     }
 
@@ -2025,7 +2025,7 @@ void SessionController::zmodemUpload()
         zmodem = QStandardPaths::findExecutable(QStringLiteral("lsz"));
     }
     if (zmodem.isEmpty()) {
-        KMessageBox::sorry(view(),
+        KMessageBox::error(view(),
                            i18n("<p>No suitable ZModem software was found on this system.</p>"
                                 "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
         return;

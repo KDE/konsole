@@ -77,7 +77,7 @@ void SaveHistoryTask::execute()
 
         if (!url.isValid()) {
             // UI:  Can we make this friendlier?
-            KMessageBox::sorry(nullptr, i18n("%1 is an invalid URL, the output could not be saved.", url.url()));
+            KMessageBox::error(nullptr, i18n("%1 is an invalid URL, the output could not be saved.", url.url()));
             continue;
         }
 
@@ -158,7 +158,7 @@ void SaveHistoryTask::jobDataRequested(KIO::Job *job, QByteArray &data)
 void SaveHistoryTask::jobResult(KJob *job)
 {
     if (job->error() != 0) {
-        KMessageBox::sorry(nullptr, i18n("A problem occurred when saving the output.\n%1", job->errorString()));
+        KMessageBox::error(nullptr, i18n("A problem occurred when saving the output.\n%1", job->errorString()));
     }
 
     TerminalCharacterDecoder *decoder = _jobSession[job].decoder;

@@ -283,7 +283,7 @@ void KeyBindingEditor::accept()
     const auto newTranslator = new KeyboardTranslator(*_translator);
 
     if (newTranslator->description().isEmpty()) {
-        KMessageBox::sorry(this, i18n("A key bindings scheme cannot be saved with an empty description."));
+        KMessageBox::error(this, i18n("A key bindings scheme cannot be saved with an empty description."));
         delete newTranslator;
         return;
     }

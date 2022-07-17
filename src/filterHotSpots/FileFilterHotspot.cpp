@@ -156,9 +156,9 @@ void FileFilterHotSpot::openWithEditorFromProfile(const QString &fullCmd, const 
     connect(job, &KJob::result, this, [this, path, job]() {
         if (job->error() != 0) {
             // TODO: use KMessageWidget (like the "terminal is read-only" message)
-            KMessageBox::sorry(QApplication::activeWindow(),
-                               i18n("Could not open file with the text editor specified in the profile settings;\n"
-                                    "it will be opened with the system default editor."));
+            KMessageBox::information(QApplication::activeWindow(),
+                                     i18n("Could not open file with the text editor specified in the profile settings;\n"
+                                          "it will be opened with the system default editor."));
 
             openWithSysDefaultApp(path);
         }

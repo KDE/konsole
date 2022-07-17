@@ -462,14 +462,7 @@ void SSHManagerTreeWidget::connectRequested(const QModelIndex &idx)
     bool ok = false;
     QString processName = info->name(&ok);
     if (!ok) {
-        KMessageBox::messageBox(this,
-                                KMessageBox::DialogType::Sorry,
-                                i18n("Could not get the process name, assume that we can't request a connection"),
-                                i18n("Error issuing SSH Command"),
-                                KStandardGuiItem::yes(),
-                                KStandardGuiItem::no(),
-                                KStandardGuiItem::cancel(),
-                                QStringLiteral("error_process_name"));
+        KMessageBox::error(this, i18n("Could not get the process name, assume that we can't request a connection"), i18n("Error issuing SSH Command"));
         return;
     }
 
@@ -481,14 +474,7 @@ void SSHManagerTreeWidget::connectRequested(const QModelIndex &idx)
                            QStringLiteral("ksh"),
                            QStringLiteral("zsh")})
              .contains(processName)) {
-        KMessageBox::messageBox(this,
-                                KMessageBox::DialogType::Sorry,
-                                i18n("Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"),
-                                i18n("Error issuing SSH Command"),
-                                KStandardGuiItem::yes(),
-                                KStandardGuiItem::no(),
-                                KStandardGuiItem::cancel(),
-                                QStringLiteral("error_process_not_shell"));
+        KMessageBox::error(this, i18n("Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"), i18n("Error issuing SSH Command"));
         return;
     }
 
