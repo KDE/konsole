@@ -868,11 +868,13 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 case DcsPassthrough:
                     if (cc <= 0x7E || cc >= 0xA0) { // 0x18, 0x1A, 0x1B already taken care of
                         put(cc);
+                    // 0x9C already taken care of.
                     } else if (cc == 0x7F) {
                         // ignore
                     }
                     break;
                 case DcsIgnore:
+                    // 0x9C already taken care of.
                     if (cc <= 0x7F) {
                         // ignore
                     }
@@ -889,8 +891,9 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     break;
                 case SosPmApcString:
                     if (cc <= 0x7F || cc >= 0xA0) { // 0x18, 0x1A, 0x1B already taken care of.
-                        apc_put(cc);
+                        apc_put(cc); // while the vt100.net diagram has ignore here, konsole does process some APCs (kitty images).
                     }
+                    // 0x9C already taken care of.
                     break;
                 default:
                     break;
