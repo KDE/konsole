@@ -41,7 +41,7 @@ using namespace Konsole;
 // less bookkeeping on the PCRE engine side
 
 // scheme://
-// - Must start with an ASCII letter, preceeded by any non-word character,
+// - Must start with an ASCII letter, preceded by any non-word character,
 //   so "http" but not "mhttp"
 static const char scheme_or_www[] = "(?<=^|[\\s\\[\\]()'\"`])(?:www\\.|[a-z][a-z0-9+\\-.]*+://";
 static const char scheme_or_www_end[] = ")";
