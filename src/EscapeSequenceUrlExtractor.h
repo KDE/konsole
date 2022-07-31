@@ -64,7 +64,7 @@ private:
     QStringList _allowedUriSchemas;
 
     /* Pointer to the Screen, that actually holds the text data. */
-    Screen *_screen;
+    Screen *_screen = nullptr;
 
     void appendUrlText_impl(QChar c);
 
