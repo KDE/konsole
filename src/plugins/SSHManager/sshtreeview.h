@@ -14,7 +14,7 @@ class SshTreeView : public QTreeView
 {
     Q_OBJECT
 public:
-    SshTreeView(QWidget *parent = nullptr);
+    explicit SshTreeView(QWidget *parent = nullptr);
     ~SshTreeView() noexcept override;
 
     // mouseClicked already exists but only sends QModelIndex
