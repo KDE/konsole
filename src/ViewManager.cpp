@@ -124,6 +124,14 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("split-view-top-bottom"), action);
     splitViewActions->addAction(action);
 
+    action = new QAction(this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-auto")));
+    action->setText(i18nc("@action:inmenu", "Split View Automatically"));
+    connect(action, &QAction::triggered, this, &ViewManager::splitAuto);
+    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_Asterisk));
+    collection->addAction(QStringLiteral("split-view-auto"), action);
+    splitViewActions->addAction(action);
+
     splitViewActions->addSeparator();
 
     action = new QAction(this);
@@ -625,6 +633,18 @@ void ViewManager::splitLeftRight()
 void ViewManager::splitTopBottom()
 {
     splitView(Qt::Vertical);
+}
+
+void ViewManager::splitAuto()
+{
+    Qt::Orientation orientation;
+    auto activeTerminalDisplay = _viewContainer->activeViewSplitter()->activeTerminalDisplay();
+    if (activeTerminalDisplay->width() > activeTerminalDisplay->height()) {
+        orientation = Qt::Horizontal;
+    } else {
+        orientation = Qt::Vertical;
+    }
+    splitView(orientation);
 }
 
 void ViewManager::splitView(Qt::Orientation orientation)

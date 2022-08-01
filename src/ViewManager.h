@@ -318,6 +318,7 @@ private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
     void splitTopBottom();
+    void splitAuto();
     void expandActiveContainer();
     void shrinkActiveContainer();
     void equalSizeAllContainers();
