@@ -271,6 +271,8 @@ add_library(konsoleapp SHARED Application.cpp
    delegates/ProfileShortcutDelegate.cpp
 )
 
+target_compile_definitions(konsoleapp PRIVATE -DRELEASE_SERVICE_VERSION="${RELEASE_SERVICE_VERSION}")
+
 target_link_libraries(konsoleapp
   konsoleprivate
   KF5::XmlGui

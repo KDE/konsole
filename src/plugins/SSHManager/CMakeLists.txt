@@ -13,6 +13,7 @@ INSTALL_NAMESPACE
     "konsoleplugins"
 )
 
+configure_file(konsole_sshmanager.in.json konsole_sshmanager.json)
 target_link_libraries(konsole_sshmanagerplugin
     konsoleprivate
     konsoleapp
