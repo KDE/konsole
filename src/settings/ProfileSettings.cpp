@@ -196,8 +196,3 @@ bool ProfileSettings::isProfileWritable(Profile::Ptr profile) const
     return profile && !profile->isBuiltin() // Built-in profile is hardcoded and never stored.
         && QFileInfo(profile->path()).isWritable();
 }
-
-void ProfileSettings::setShortcutEditorVisible(bool visible)
-{
-    profileListView->setColumnHidden(ProfileModel::SHORTCUT, !visible);
-}

@@ -43,17 +43,6 @@ public:
     explicit ProfileSettings(QWidget *parent = nullptr);
     ~ProfileSettings() override;
 
-    /**
-     * Specifies whether the shortcut editor should be show.
-     * The shortcut editor allows shortcuts to be associated with
-     * profiles.  When a shortcut is changed, the dialog will call
-     * SessionManager::instance()->setShortcut() to update the shortcut
-     * associated with the profile.
-     *
-     * By default the editor is visible.
-     */
-    void setShortcutEditorVisible(bool visible);
-
 private Q_SLOTS:
     friend class MainWindow;
     void slotAccepted();
