@@ -312,7 +312,7 @@ void SessionManager::sessionProfileCommandReceived(Session *session, const QStri
     }
 
     ProfileCommandParser parser;
-    QHash<Profile::Property, QVariant> changes = parser.parse(text);
+    Profile::PropertyMap changes = parser.parse(text);
 
     Profile::Ptr newProfile;
     if (!_sessionRuntimeProfiles.contains(session)) {

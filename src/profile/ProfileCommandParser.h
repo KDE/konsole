@@ -44,7 +44,7 @@ public:
      * and assigned values and returns a table of
      * properties and values.
      */
-    QHash<Profile::Property, QVariant> parse(const QString &input);
+    Profile::PropertyMap parse(const QString &input);
 };
 }
 

@@ -267,7 +267,7 @@ QString ProfileManager::saveProfile(const Profile::Ptr &profile)
     return newPath;
 }
 
-void ProfileManager::changeProfile(Profile::Ptr profile, QHash<Profile::Property, QVariant> propertyMap, bool persistent)
+void ProfileManager::changeProfile(Profile::Ptr profile, Profile::PropertyMap propertyMap, bool persistent)
 {
     Q_ASSERT(profile);
 

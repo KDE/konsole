@@ -132,7 +132,7 @@ public:
      * set this to false if you want to preview possible changes to a profile but do not
      * wish to make them permanent.
      */
-    void changeProfile(Profile::Ptr profile, QHash<Profile::Property, QVariant> propertyMap, bool persistent = true);
+    void changeProfile(Profile::Ptr profile, Profile::PropertyMap propertyMap, bool persistent = true);
 
     /**
      * Sets the @p profile as the default profile for creating new sessions

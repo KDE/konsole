@@ -220,7 +220,7 @@ void Profile::useBuiltin()
 }
 
 Profile::Profile(const Profile::Ptr &parent)
-    : _propertyValues(QHash<Property, QVariant>())
+    : _propertyValues(PropertyMap())
     , _parent(parent)
     , _hidden(false)
 {
@@ -270,7 +270,7 @@ bool Profile::isEmpty() const
     return _propertyValues.isEmpty();
 }
 
-QHash<Profile::Property, QVariant> Profile::setProperties() const
+Profile::PropertyMap Profile::setProperties() const
 {
     return _propertyValues;
 }

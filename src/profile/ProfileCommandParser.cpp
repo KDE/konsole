@@ -18,9 +18,9 @@
 
 using namespace Konsole;
 
-QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString &input)
+Profile::PropertyMap ProfileCommandParser::parse(const QString &input)
 {
-    QHash<Profile::Property, QVariant> changes;
+    Profile::PropertyMap changes;
 
     // regular expression to parse profile change requests.
     //

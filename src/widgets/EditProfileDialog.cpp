@@ -1043,7 +1043,7 @@ void EditProfileDialog::unpreviewAll()
     _delayedPreviewTimer->stop();
     _delayedPreviewProperties.clear();
 
-    QHash<Profile::Property, QVariant> map;
+    Profile::PropertyMap map;
     QHashIterator<int, QVariant> iter(_previewedProperties);
     while (iter.hasNext()) {
         iter.next();
@@ -1064,7 +1064,7 @@ void EditProfileDialog::unpreview(int property)
         return;
     }
 
-    QHash<Profile::Property, QVariant> map;
+    Profile::PropertyMap map;
     map.insert(static_cast<Profile::Property>(property), _previewedProperties[property]);
     ProfileManager::instance()->changeProfile(_profile, map, false);
 
@@ -1092,7 +1092,7 @@ void EditProfileDialog::delayedPreviewActivate()
 
 void EditProfileDialog::preview(int property, const QVariant &value)
 {
-    QHash<Profile::Property, QVariant> map;
+    Profile::PropertyMap map;
     map.insert(static_cast<Profile::Property>(property), value);
 
     _delayedPreviewProperties.remove(property);

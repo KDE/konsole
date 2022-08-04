@@ -366,6 +366,8 @@ public:
 
     Q_ENUM(Property)
 
+    using PropertyMap = QHash<Property, QVariant>;
+
     /**
      * Constructs a new profile
      *
@@ -430,7 +432,7 @@ public:
     virtual bool isPropertySet(Property p) const;
 
     /** Returns a map of the properties set in this Profile instance. */
-    virtual QHash<Property, QVariant> setProperties() const;
+    virtual PropertyMap setProperties() const;
 
     /** Returns true if no properties have been set in this Profile instance. */
     bool isEmpty() const;
@@ -795,7 +797,7 @@ private:
     // returns true if the property can be inherited
     static bool canInheritProperty(Property p);
 
-    QHash<Property, QVariant> _propertyValues;
+    PropertyMap _propertyValues;
     Ptr _parent;
 
     bool _hidden;
