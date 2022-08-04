@@ -281,13 +281,15 @@ void ProfileManager::changeProfile(Profile::Ptr profile, Profile::PropertyMap pr
     bool isNameChanged = false;
 
     // Insert the changes into the existing Profile instance
+    profile->assignProperties(propertyMap);
+
+    // Check if the name changed
     for (auto it = propertyMap.cbegin(); it != propertyMap.cend(); ++it) {
         const auto property = it.key();
-        auto value = it.value();
-
         isNameChanged |= property == Profile::Name || property == Profile::UntranslatedName;
-
-        profile->setProperty(property, value);
+        if (isNameChanged) {
+            break;
+        }
     }
 
     // when changing a group, iterate through the profiles

@@ -322,11 +322,7 @@ void SessionManager::sessionProfileCommandReceived(Session *session, const QStri
         newProfile = _sessionRuntimeProfiles[session];
     }
 
-    QHashIterator<Profile::Property, QVariant> iter(changes);
-    while (iter.hasNext()) {
-        iter.next();
-        newProfile->setProperty(iter.key(), iter.value());
-    }
+    newProfile->assignProperties(changes);
 
     _sessionProfiles[session] = newProfile;
     applyProfile(newProfile, true);

@@ -280,6 +280,11 @@ void Profile::setProperty(Property p, const QVariant &value)
     _propertyValues.insert(p, value);
 }
 
+void Profile::assignProperties(const PropertyMap &map)
+{
+    _propertyValues.insert(map);
+}
+
 bool Profile::isPropertySet(Property p) const
 {
     return _propertyValues.contains(p);

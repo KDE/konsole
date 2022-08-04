@@ -426,6 +426,10 @@ public:
 
     /** Sets the value of the specified @p property to @p value. */
     virtual void setProperty(Property p, const QVariant &value);
+
+    /** Sets the Porperty/value pairs from @p map on this Profile */
+    void assignProperties(const PropertyMap &map);
+
     /** Returns true if the specified property has been set in this Profile
      * instance.
      */
