@@ -267,7 +267,7 @@ QString ProfileManager::saveProfile(const Profile::Ptr &profile)
     return newPath;
 }
 
-void ProfileManager::changeProfile(Profile::Ptr profile, Profile::PropertyMap propertyMap, bool persistent)
+void ProfileManager::changeProfile(Profile::Ptr profile, const Profile::PropertyMap &propertyMap, bool persistent)
 {
     Q_ASSERT(profile);
 
@@ -284,7 +284,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile, Profile::PropertyMap pr
     profile->assignProperties(propertyMap);
 
     // Check if the name changed
-    for (auto it = propertyMap.cbegin(); it != propertyMap.cend(); ++it) {
+    for (auto it = propertyMap.cbegin(), endIt = propertyMap.cend(); it != endIt; ++it) {
         const auto property = it.key();
         isNameChanged |= property == Profile::Name || property == Profile::UntranslatedName;
         if (isNameChanged) {
