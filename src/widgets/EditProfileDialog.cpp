@@ -224,17 +224,17 @@ void EditProfileDialog::save()
         if (isNewProfile) {
             // New profile, we need to save it to disk, even if no settings
             // were changed and _tempProfile is empty
-            ProfileManager::instance()->changeProfile(_profile, _profile->setProperties());
+            ProfileManager::instance()->changeProfile(_profile, _profile->properties());
         }
         // no changes since last save
         return;
     }
 
-    ProfileManager::instance()->changeProfile(_profile, _tempProfile->setProperties());
+    ProfileManager::instance()->changeProfile(_profile, _tempProfile->properties());
 
     // ensure that these settings are not undone by a call
     // to unpreview()
-    QHashIterator<Profile::Property, QVariant> iter(_tempProfile->setProperties());
+    QHashIterator<Profile::Property, QVariant> iter(_tempProfile->properties());
     while (iter.hasNext()) {
         iter.next();
         _previewedProperties.remove(iter.key());
@@ -1395,7 +1395,7 @@ void EditProfileDialog::updateButtonApply()
 {
     bool userModified = false;
 
-    QHashIterator<Profile::Property, QVariant> iter(_tempProfile->setProperties());
+    QHashIterator<Profile::Property, QVariant> iter(_tempProfile->properties());
     while (iter.hasNext()) {
         iter.next();
 

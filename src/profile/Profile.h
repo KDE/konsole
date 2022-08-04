@@ -432,7 +432,7 @@ public:
     virtual bool isPropertySet(Property p) const;
 
     /** Returns a map of the properties set in this Profile instance. */
-    virtual PropertyMap setProperties() const;
+    virtual PropertyMap properties() const;
 
     /** Returns true if no properties have been set in this Profile instance. */
     bool isEmpty() const;

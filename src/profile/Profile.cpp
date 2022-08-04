@@ -270,7 +270,7 @@ bool Profile::isEmpty() const
     return _propertyValues.isEmpty();
 }
 
-Profile::PropertyMap Profile::setProperties() const
+Profile::PropertyMap Profile::properties() const
 {
     return _propertyValues;
 }
