@@ -31,9 +31,9 @@ QString ProfileWriter::getPath(const Profile::Ptr &profile)
 {
     // If any changes are made to this location, check that programs using
     // the Konsole part can write/save profiles
-    static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole");
+    static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/konsole");
 
-    return localDataLocation % QLatin1String("/") % profile->untranslatedName() % QLatin1String(".profile");
+    return localDataLocation + QLatin1Char('/') + profile->untranslatedName() + QLatin1String(".profile");
 }
 
 void ProfileWriter::writeProperties(KConfig &config, const Profile::Ptr &profile)
