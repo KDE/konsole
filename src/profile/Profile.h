@@ -17,6 +17,7 @@
 #include <QStringList>
 #include <QVariant>
 
+#include <map>
 #include <vector>
 
 // Konsole
@@ -366,7 +367,7 @@ public:
 
     Q_ENUM(Property)
 
-    using PropertyMap = QHash<Property, QVariant>;
+    using PropertyMap = std::map<Property, QVariant>;
 
     /**
      * Constructs a new profile
@@ -427,8 +428,11 @@ public:
     /** Sets the value of the specified @p property to @p value. */
     virtual void setProperty(Property p, const QVariant &value);
 
+    void setProperty(Property p, QVariant &&value);
+
     /** Sets the Porperty/value pairs from @p map on this Profile */
     void assignProperties(const PropertyMap &map);
+    void assignProperties(PropertyMap &&map);
 
     /** Returns true if the specified property has been set in this Profile
      * instance.
@@ -436,7 +440,7 @@ public:
     virtual bool isPropertySet(Property p) const;
 
     /** Returns a map of the properties set in this Profile instance. */
-    virtual PropertyMap properties() const;
+    virtual const PropertyMap &properties() const;
 
     /** Returns true if no properties have been set in this Profile instance. */
     bool isEmpty() const;
@@ -833,8 +837,9 @@ inline T Profile::property(Property p) const
 template<>
 inline QVariant Profile::property(Property p) const
 {
-    if (_propertyValues.contains(p)) {
-        return _propertyValues[p];
+    auto it = _propertyValues.find(p);
+    if (it != _propertyValues.end()) {
+        return it->second;
     } else if (_parent && canInheritProperty(p)) {
         return _parent->property<QVariant>(p);
     } else {

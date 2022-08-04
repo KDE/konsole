@@ -267,27 +267,42 @@ const Profile::Ptr Profile::parent() const
 
 bool Profile::isEmpty() const
 {
-    return _propertyValues.isEmpty();
+    return _propertyValues.empty();
 }
 
-Profile::PropertyMap Profile::properties() const
+const Profile::PropertyMap &Profile::properties() const
 {
     return _propertyValues;
 }
 
 void Profile::setProperty(Property p, const QVariant &value)
 {
-    _propertyValues.insert(p, value);
+    _propertyValues.insert_or_assign(p, value);
+}
+
+void Profile::setProperty(Property p, QVariant &&value)
+{
+    _propertyValues.insert_or_assign(p, value);
 }
 
 void Profile::assignProperties(const PropertyMap &map)
 {
-    _propertyValues.insert(map);
+    for (const auto &[p, value] : map) {
+        setProperty(p, value);
+    }
+}
+
+void Profile::assignProperties(PropertyMap &&map)
+{
+    // If a key exists in both maps, we want to use the associated
+    // value from 'map'
+    map.merge(_propertyValues);
+    _propertyValues.swap(map);
 }
 
 bool Profile::isPropertySet(Property p) const
 {
-    return _propertyValues.contains(p);
+    return _propertyValues.find(p) != _propertyValues.cend();
 }
 
 Profile::Property Profile::lookupByName(const QString &name)

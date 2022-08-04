@@ -311,9 +311,6 @@ void SessionManager::sessionProfileCommandReceived(Session *session, const QStri
         }
     }
 
-    ProfileCommandParser parser;
-    Profile::PropertyMap changes = parser.parse(text);
-
     Profile::Ptr newProfile;
     if (!_sessionRuntimeProfiles.contains(session)) {
         newProfile = new Profile(_sessionProfiles[session]);
@@ -322,7 +319,8 @@ void SessionManager::sessionProfileCommandReceived(Session *session, const QStri
         newProfile = _sessionRuntimeProfiles[session];
     }
 
-    newProfile->assignProperties(changes);
+    ProfileCommandParser parser;
+    newProfile->assignProperties(parser.parse(text));
 
     _sessionProfiles[session] = newProfile;
     applyProfile(newProfile, true);

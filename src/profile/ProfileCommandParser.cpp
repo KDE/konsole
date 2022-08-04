@@ -35,8 +35,7 @@ Profile::PropertyMap ProfileCommandParser::parse(const QString &input)
     while (iterator.hasNext()) {
         QRegularExpressionMatch match(iterator.next());
         Profile::Property property = Profile::lookupByName(match.captured(1));
-        const QString value = match.captured(2);
-        changes.insert(property, value);
+        changes.insert_or_assign(property, match.captured(2));
     }
 
     return changes;

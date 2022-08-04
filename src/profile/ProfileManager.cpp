@@ -278,19 +278,13 @@ void ProfileManager::changeProfile(Profile::Ptr profile, const Profile::Property
     // Don't save a profile with an empty name on disk
     persistent = persistent && !profile->name().isEmpty();
 
-    bool isNameChanged = false;
-
     // Insert the changes into the existing Profile instance
     profile->assignProperties(propertyMap);
 
-    // Check if the name changed
-    for (auto it = propertyMap.cbegin(), endIt = propertyMap.cend(); it != endIt; ++it) {
-        const auto property = it.key();
-        isNameChanged |= property == Profile::Name || property == Profile::UntranslatedName;
-        if (isNameChanged) {
-            break;
-        }
-    }
+    const bool isRenamed = std::any_of(propertyMap.cbegin(), propertyMap.cend(), [](const auto &pair) {
+        Profile::Property prop = pair.first;
+        return prop == Profile::Name || prop == Profile::UntranslatedName;
+    });
 
     // when changing a group, iterate through the profiles
     // in the group and call changeProfile() on each of them
@@ -313,7 +307,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile, const Profile::Property
         profile->setProperty(Profile::Path, saveProfile(profile));
     }
 
-    if (isNameChanged) { // Renamed?
+    if (isRenamed) {
         // origPath is empty when saving a new profile
         if (!origPath.isEmpty()) {
             // Delete the old/redundant .profile from disk

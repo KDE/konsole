@@ -468,13 +468,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     const QStringList profileProperties = m_parser->values(QStringLiteral("p"));
     for (const QString &value : profileProperties) {
         ProfileCommandParser parser;
-
-        QHashIterator<Profile::Property, QVariant> iter(parser.parse(value));
-        while (iter.hasNext()) {
-            iter.next();
-            newProfile->setProperty(iter.key(), iter.value());
-        }
-
+        newProfile->assignProperties(parser.parse(value));
         shouldUseNewProfile = true;
     }
 

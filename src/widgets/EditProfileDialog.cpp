@@ -234,10 +234,9 @@ void EditProfileDialog::save()
 
     // ensure that these settings are not undone by a call
     // to unpreview()
-    QHashIterator<Profile::Property, QVariant> iter(_tempProfile->properties());
-    while (iter.hasNext()) {
-        iter.next();
-        _previewedProperties.remove(iter.key());
+    const Profile::PropertyMap &map = _tempProfile->properties();
+    for (const auto &[property, _] : map) {
+        _previewedProperties.remove(property);
     }
 
     // Update the default profile if needed
@@ -1047,11 +1046,11 @@ void EditProfileDialog::unpreviewAll()
     QHashIterator<int, QVariant> iter(_previewedProperties);
     while (iter.hasNext()) {
         iter.next();
-        map.insert(static_cast<Profile::Property>(iter.key()), iter.value());
+        map.insert({static_cast<Profile::Property>(iter.key()), iter.value()});
     }
 
     // undo any preview changes
-    if (!map.isEmpty()) {
+    if (!map.empty()) {
         ProfileManager::instance()->changeProfile(_profile, map, false);
     }
 }
@@ -1064,8 +1063,7 @@ void EditProfileDialog::unpreview(int property)
         return;
     }
 
-    Profile::PropertyMap map;
-    map.insert(static_cast<Profile::Property>(property), _previewedProperties[property]);
+    const Profile::PropertyMap map({{static_cast<Profile::Property>(property), _previewedProperties[property]}});
     ProfileManager::instance()->changeProfile(_profile, map, false);
 
     _previewedProperties.remove(property);
@@ -1092,8 +1090,9 @@ void EditProfileDialog::delayedPreviewActivate()
 
 void EditProfileDialog::preview(int property, const QVariant &value)
 {
-    Profile::PropertyMap map;
-    map.insert(static_cast<Profile::Property>(property), value);
+    // Copy "value" into the map before removing the key/value pair
+    // from _delayedPreviewProperties
+    const Profile::PropertyMap map{{static_cast<Profile::Property>(property), value}};
 
     _delayedPreviewProperties.remove(property);
 
@@ -1395,13 +1394,8 @@ void EditProfileDialog::updateButtonApply()
 {
     bool userModified = false;
 
-    QHashIterator<Profile::Property, QVariant> iter(_tempProfile->properties());
-    while (iter.hasNext()) {
-        iter.next();
-
-        Profile::Property property = iter.key();
-        QVariant value = iter.value();
-
+    const Profile::PropertyMap &map = _tempProfile->properties();
+    for (const auto &[property, value] : map) {
         // for previewed property
         if (_previewedProperties.contains(static_cast<int>(property))) {
             if (value != _previewedProperties.value(static_cast<int>(property))) {
