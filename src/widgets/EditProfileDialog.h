@@ -272,8 +272,8 @@ private:
     void showColorSchemeEditor(bool isNewScheme);
     void closeColorSchemeEditor();
 
-    void preview(int property, const QVariant &value);
-    void unpreview(int property);
+    void preview(Profile::Property prop, const QVariant &value);
+    void unpreview(Profile::Property prop);
     void unpreviewAll();
     void enableIfNonEmptySelection(QWidget *widget, QItemSelectionModel *selectionModel);
 
@@ -344,8 +344,7 @@ private:
 
     bool _isDefault = false;
 
-    QHash<int, QVariant> _previewedProperties;
-
+    Profile::PropertyMap _previewedProperties;
 
     ColorSchemeEditor *_colorDialog = nullptr;
     QDialogButtonBox *_buttonBox = nullptr;

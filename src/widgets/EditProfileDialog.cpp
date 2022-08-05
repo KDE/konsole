@@ -233,7 +233,7 @@ void EditProfileDialog::save()
     // to unpreview()
     const Profile::PropertyMap &map = _tempProfile->properties();
     for (const auto &[property, _] : map) {
-        _previewedProperties.remove(property);
+        _previewedProperties.erase(property);
     }
 
     // Update the default profile if needed
@@ -1022,34 +1022,26 @@ QSize EditProfileDialog::sizeHint() const
 
 void EditProfileDialog::unpreviewAll()
 {
-    Profile::PropertyMap map;
-    QHashIterator<int, QVariant> iter(_previewedProperties);
-    while (iter.hasNext()) {
-        iter.next();
-        map.insert({static_cast<Profile::Property>(iter.key()), iter.value()});
-    }
-
     // undo any preview changes
-    if (!map.empty()) {
-        ProfileManager::instance()->changeProfile(_profile, map, false);
+    if (!_previewedProperties.empty()) {
+        ProfileManager::instance()->changeProfile(_profile, _previewedProperties, false);
     }
 }
 
-void EditProfileDialog::unpreview(int property)
+void EditProfileDialog::unpreview(Profile::Property prop)
 {
-    if (!_previewedProperties.contains(property)) {
+    auto node = _previewedProperties.extract(prop);
+    if (!node) {
         return;
     }
 
-    const Profile::PropertyMap map({{static_cast<Profile::Property>(property), _previewedProperties[property]}});
+    Profile::PropertyMap map;
+    map.insert(std::move(node));
     ProfileManager::instance()->changeProfile(_profile, map, false);
-
-    _previewedProperties.remove(property);
 }
 
-void EditProfileDialog::preview(int property, const QVariant &value)
+void EditProfileDialog::preview(Profile::Property prop, const QVariant &value)
 {
-    const Profile::PropertyMap map{{static_cast<Profile::Property>(property), value}};
     const Profile::Ptr original = lookupProfile();
 
     // skip previews for profile groups if the profiles in the group
@@ -1057,16 +1049,14 @@ void EditProfileDialog::preview(int property, const QVariant &value)
     //
     // TODO - Save the original values for each profile and use to unpreview properties
     ProfileGroup::Ptr group = original->asGroup();
-    if (group && group->profiles().count() > 1 && original->property<QVariant>(static_cast<Profile::Property>(property)).isNull()) {
+    if (group && group->profiles().count() > 1 && original->property<QVariant>(prop).isNull()) {
         return;
     }
 
-    if (!_previewedProperties.contains(property)) {
-        _previewedProperties.insert(property, original->property<QVariant>(static_cast<Profile::Property>(property)));
-    }
+    _previewedProperties.insert({prop, original->property<QVariant>(prop)});
 
     // temporary change to color scheme
-    ProfileManager::instance()->changeProfile(_profile, map, false);
+    ProfileManager::instance()->changeProfile(_profile, {{prop, value}}, false);
 }
 
 void EditProfileDialog::previewColorScheme(const QModelIndex &index)
@@ -1346,26 +1336,29 @@ void EditProfileDialog::updateTempProfileProperty(Profile::Property property, co
 
 void EditProfileDialog::updateButtonApply()
 {
-    bool userModified = false;
-
-    const Profile::PropertyMap &map = _tempProfile->properties();
-    for (const auto &[property, value] : map) {
+    auto filterFunc = [this](const auto &keyValue) {
+        const auto &[property, value] = keyValue;
         // for previewed property
-        if (_previewedProperties.contains(static_cast<int>(property))) {
-            if (value != _previewedProperties.value(static_cast<int>(property))) {
-                userModified = true;
-                break;
+        auto it = _previewedProperties.find(property);
+        if (it != _previewedProperties.cend()) {
+            if (value != it->second) {
+                return true;
             }
             // for not-previewed property
             //
             // for the Profile::KeyBindings property, if it's set in the _tempProfile
             // then the user opened the edit key bindings dialog and clicked
             // OK, and could have add/removed a key bindings rule
-        } else if (property == Profile::KeyBindings || (value != _profile->property<QVariant>(property))) {
-            userModified = true;
-            break;
+        } else if (property == Profile::KeyBindings //
+                   || value != _profile->property<QVariant>(property)) {
+            return true;
         }
-    }
+
+        return false;
+    };
+
+    const Profile::PropertyMap &map = _tempProfile->properties();
+    bool userModified = std::any_of(map.cbegin(), map.cend(), filterFunc);
 
     if (_generalUi->setAsDefaultButton->isChecked() != _isDefault) {
         userModified = true;
