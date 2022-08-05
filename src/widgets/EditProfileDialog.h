@@ -100,9 +100,6 @@ public Q_SLOTS:
     // reimplemented
     void reject() override;
 
-protected:
-    bool eventFilter(QObject *watched, QEvent *event) override;
-
 private Q_SLOTS:
     QSize sizeHint() const override;
 
@@ -220,9 +217,6 @@ private Q_SLOTS:
 
     void setDefaultCodec(QTextCodec *);
 
-    // apply the first previewed changes stored up by delayedPreview()
-    void delayedPreviewActivate();
-
     void setTextEditorCombo(const Profile::Ptr &profile);
 
     void toggleAllowLinkEscapeSequence(bool);
@@ -279,7 +273,6 @@ private:
     void closeColorSchemeEditor();
 
     void preview(int property, const QVariant &value);
-    void delayedPreview(int property, const QVariant &value);
     void unpreview(int property);
     void unpreviewAll();
     void enableIfNonEmptySelection(QWidget *widget, QItemSelectionModel *selectionModel);
@@ -353,8 +346,6 @@ private:
 
     QHash<int, QVariant> _previewedProperties;
 
-    QHash<int, QVariant> _delayedPreviewProperties;
-    QTimer *_delayedPreviewTimer = nullptr;
 
     ColorSchemeEditor *_colorDialog = nullptr;
     QDialogButtonBox *_buttonBox = nullptr;

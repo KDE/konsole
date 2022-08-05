@@ -58,7 +58,6 @@ using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget *parent)
     : KPageDialog(parent)
-    , _delayedPreviewTimer(new QTimer(this))
 {
     setWindowTitle(i18n("Edit Profile"));
     setFaceType(KPageDialog::List);
@@ -76,8 +75,6 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
             save();
         }
     });
-
-    connect(_delayedPreviewTimer, &QTimer::timeout, this, &Konsole::EditProfileDialog::delayedPreviewActivate);
 
     // Set a fallback icon for non-plasma desktops as this dialog looks
     // terrible without all the icons on the left sidebar.  On GTK related
@@ -694,11 +691,10 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     updateColorSchemeList(currentColorSchemeName());
 
     _appearanceUi->colorSchemeList->setMouseTracking(true);
-    _appearanceUi->colorSchemeList->installEventFilter(this);
     _appearanceUi->colorSchemeList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
     connect(_appearanceUi->colorSchemeList->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Konsole::EditProfileDialog::colorSchemeSelected);
-    connect(_appearanceUi->colorSchemeList, &QListView::entered, this, &Konsole::EditProfileDialog::previewColorScheme);
+    connect(_appearanceUi->colorSchemeList, &QListView::activated, this, &Konsole::EditProfileDialog::previewColorScheme);
 
     updateColorSchemeButtons();
 
@@ -1012,19 +1008,6 @@ void EditProfileDialog::updateKeyBindingsList(const QString &selectKeyBindingsNa
     }
 }
 
-bool EditProfileDialog::eventFilter(QObject *watched, QEvent *event)
-{
-    if (watched == _appearanceUi->colorSchemeList && event->type() == QEvent::Leave) {
-        if (_tempProfile->isPropertySet(Profile::ColorScheme)) {
-            preview(Profile::ColorScheme, _tempProfile->colorScheme());
-        } else {
-            unpreview(Profile::ColorScheme);
-        }
-    }
-
-    return QDialog::eventFilter(watched, event);
-}
-
 QSize EditProfileDialog::sizeHint() const
 {
     QFontMetrics fm(font());
@@ -1039,9 +1022,6 @@ QSize EditProfileDialog::sizeHint() const
 
 void EditProfileDialog::unpreviewAll()
 {
-    _delayedPreviewTimer->stop();
-    _delayedPreviewProperties.clear();
-
     Profile::PropertyMap map;
     QHashIterator<int, QVariant> iter(_previewedProperties);
     while (iter.hasNext()) {
@@ -1057,8 +1037,6 @@ void EditProfileDialog::unpreviewAll()
 
 void EditProfileDialog::unpreview(int property)
 {
-    _delayedPreviewProperties.remove(property);
-
     if (!_previewedProperties.contains(property)) {
         return;
     }
@@ -1069,33 +1047,9 @@ void EditProfileDialog::unpreview(int property)
     _previewedProperties.remove(property);
 }
 
-void EditProfileDialog::delayedPreview(int property, const QVariant &value)
-{
-    _delayedPreviewProperties.insert(property, value);
-
-    _delayedPreviewTimer->stop();
-    _delayedPreviewTimer->start(300);
-}
-
-void EditProfileDialog::delayedPreviewActivate()
-{
-    Q_ASSERT(_delayedPreviewTimer);
-
-    QMutableHashIterator<int, QVariant> iter(_delayedPreviewProperties);
-    if (iter.hasNext()) {
-        iter.next();
-        preview(iter.key(), iter.value());
-    }
-}
-
 void EditProfileDialog::preview(int property, const QVariant &value)
 {
-    // Copy "value" into the map before removing the key/value pair
-    // from _delayedPreviewProperties
     const Profile::PropertyMap map{{static_cast<Profile::Property>(property), value}};
-
-    _delayedPreviewProperties.remove(property);
-
     const Profile::Ptr original = lookupProfile();
 
     // skip previews for profile groups if the profiles in the group
@@ -1118,7 +1072,7 @@ void EditProfileDialog::preview(int property, const QVariant &value)
 void EditProfileDialog::previewColorScheme(const QModelIndex &index)
 {
     const QString &name = index.data(Qt::UserRole + 1).value<std::shared_ptr<const ColorScheme>>()->name();
-    delayedPreview(Profile::ColorScheme, name);
+    preview(Profile::ColorScheme, name);
 }
 
 void EditProfileDialog::showFontDialog()
