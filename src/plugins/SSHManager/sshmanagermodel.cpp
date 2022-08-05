@@ -44,10 +44,10 @@ SSHManagerModel::SSHManagerModel(QObject *parent)
     load();
     if (!m_sshConfigTopLevelItem) {
         // this also sets the m_sshConfigTopLevelItem if the text is `SSH Config`.
-        addTopLevelItem(i18n("SSH Config"));
+        addTopLevelItem(i18nc("@item:inlistbox Hosts from ssh/config file", "SSH Config"));
     }
     if (invisibleRootItem()->rowCount() == 0) {
-        addTopLevelItem(i18n("Default"));
+        addTopLevelItem(i18nc("@item:inlistbox The default list of ssh hosts", "Default"));
     }
     if (QFileInfo::exists(sshDir + QStringLiteral("config"))) {
         m_sshConfigWatcher.addPath(sshDir + QStringLiteral("config"));
