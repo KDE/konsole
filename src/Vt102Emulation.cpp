@@ -2950,7 +2950,7 @@ bool Vt102Emulation::processSixel(uint cc)
         }
         addArgument();
 
-        if (params.count == 4) {
+        if (params.count == 4 || params.count == 2) {
             // We just ignore the pixel aspect ratio, it's dumb
             // const int pixelWidth = params.value[0];
             // const int pixelHeight = params.value[1];
@@ -2961,8 +2961,16 @@ bool Vt102Emulation::processSixel(uint cc)
                 } else {
                     m_aspect = qMakePair(params.value[0], params.value[1]);
                 }
-                const int width = params.value[2];
-                const int height = params.value[3];
+                int width;
+                int height;
+                if (params.count == 4) {
+                    width = params.value[2];
+                    height = params.value[3];
+                } else {
+                    // Default size
+                    width = 8;
+                    height = 6;
+                }
                 SixelModeEnable(width, height);
             }
             resetTokenizer();
