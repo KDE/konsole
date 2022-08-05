@@ -1006,8 +1006,18 @@ QJsonObject saveSessionsRecurse(QSplitter *splitter)
 
 void ViewManager::saveLayoutFile()
 {
-    QFile file(QFileDialog::getSaveFileName(this->widget(), i18nc("@title:window", "Save File"), QStringLiteral("~/"), i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));
+    QString fileName(QFileDialog::getSaveFileName(this->widget(), i18nc("@title:window", "Save File"), QStringLiteral("~/"), i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));
 
+    // User pressed cancel in dialog
+    if (fileName.isEmpty()) {
+        return;
+    }
+
+    if (!fileName.endsWith(QStringLiteral(".json"))) {
+        fileName.append(QStringLiteral(".json"));
+    }
+
+    QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         KMessageBox::error(this->widget(), i18nc("@label:textbox", "A problem occurred when saving the Layout.\n%1", file.fileName()));
     }
@@ -1062,6 +1072,11 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject &jsonSplitter, Vi
 } // namespace
 void ViewManager::loadLayout(QString file)
 {
+    // User pressed cancel in dialog
+    if (file.isEmpty()) {
+        return;
+    }
+
     QFile jsonFile(file);
 
     if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
