@@ -1006,10 +1006,10 @@ QJsonObject saveSessionsRecurse(QSplitter *splitter)
 
 void ViewManager::saveLayoutFile()
 {
-    QFile file(QFileDialog::getSaveFileName(this->widget(), i18n("Save File"), QStringLiteral("~/"), i18n("Konsole View Layout (*.json)")));
+    QFile file(QFileDialog::getSaveFileName(this->widget(), i18nc("@title:window", "Save File"), QStringLiteral("~/"), i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));
 
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        KMessageBox::error(this->widget(), i18n("A problem occurred when saving the Layout.\n%1", file.fileName()));
+        KMessageBox::error(this->widget(), i18nc("@label:textbox", "A problem occurred when saving the Layout.\n%1", file.fileName()));
     }
 
     QJsonObject jsonSplit = saveSessionsRecurse(_viewContainer->activeViewSplitter());
@@ -1065,7 +1065,7 @@ void ViewManager::loadLayout(QString file)
     QFile jsonFile(file);
 
     if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        KMessageBox::error(this->widget(), i18n("A problem occurred when loading the Layout.\n%1", jsonFile.fileName()));
+        KMessageBox::error(this->widget(), i18nc("@label:textbox", "A problem occurred when loading the Layout.\n%1", jsonFile.fileName()));
     }
     auto json = QJsonDocument::fromJson(jsonFile.readAll());
     if (!json.isEmpty()) {
@@ -1075,7 +1075,7 @@ void ViewManager::loadLayout(QString file)
 }
 void ViewManager::loadLayoutFile()
 {
-    loadLayout(QFileDialog::getOpenFileName(this->widget(), i18n("Open File"), QStringLiteral("~/"), i18n("Konsole View Layout (*.json)")));
+    loadLayout(QFileDialog::getOpenFileName(this->widget(), i18nc("@title:window", "Open File"), QStringLiteral("~/"), i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));
 }
 
 void ViewManager::restoreSessions(const KConfigGroup &group)
