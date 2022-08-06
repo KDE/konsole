@@ -286,9 +286,8 @@ private:
     // always come after the preview operation.
     void updateTempProfileProperty(Profile::Property, const QVariant &value);
 
-    // helper method for creating an empty & hidden profile and assigning
-    // it to _tempProfile.
-    void createTempProfile();
+    // helper method for clearing all _tempProfile properies and marking it hidden
+    void resetTempProfile();
 
     // Enable or disable apply button, used only within
     // updateTempProfileProperty() or when toggling the default profile.

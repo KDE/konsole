@@ -58,7 +58,10 @@ using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget *parent)
     : KPageDialog(parent)
+    , _tempProfile(new Profile{})
 {
+    _tempProfile->setHidden(true);
+
     setWindowTitle(i18n("Edit Profile"));
     setFaceType(KPageDialog::List);
 
@@ -192,8 +195,6 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     // not been updated since the last profile change and will need
     // to be refreshed when the user switches to them
     connect(this, &KPageDialog::currentPageChanged, this, &Konsole::EditProfileDialog::preparePage);
-
-    createTempProfile();
 }
 
 EditProfileDialog::~EditProfileDialog()
@@ -231,10 +232,7 @@ void EditProfileDialog::save()
 
     // ensure that these settings are not undone by a call
     // to unpreview()
-    const Profile::PropertyMap &map = _tempProfile->properties();
-    for (const auto &[property, _] : map) {
-        _previewedProperties.erase(property);
-    }
+    _previewedProperties.clear();
 
     // Update the default profile if needed
     if (defaultChanged) {
@@ -246,7 +244,7 @@ void EditProfileDialog::save()
         _isDefault = defaultChecked;
     }
 
-    createTempProfile();
+    resetTempProfile();
 
     _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 }
@@ -373,9 +371,7 @@ void EditProfileDialog::setProfile(const Konsole::Profile::Ptr &profile, EditPro
     }
     preparePage(currentPage());
 
-    if (_tempProfile) {
-        createTempProfile();
-    }
+    resetTempProfile();
 }
 
 const QString EditProfileDialog::currentColorSchemeName() const
@@ -1317,9 +1313,9 @@ void EditProfileDialog::updateTransparencyWarning()
     }
 }
 
-void EditProfileDialog::createTempProfile()
+void EditProfileDialog::resetTempProfile()
 {
-    _tempProfile = Profile::Ptr(new Profile);
+    _tempProfile->clear();
     _tempProfile->setHidden(true);
 }
 
