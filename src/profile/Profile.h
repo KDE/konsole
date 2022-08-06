@@ -446,6 +446,15 @@ public:
     bool isEmpty() const;
 
     /**
+     * Clears all set properties in this profile. Afte calling this, isEmpty()
+     * will return true.
+     */
+    void clear()
+    {
+        _propertyValues.clear();
+    }
+
+    /**
      * Returns true if this profile is the built-in profile.
      */
     bool isBuiltin() const;
