@@ -378,14 +378,9 @@ void EditProfileDialog::setProfile(const Konsole::Profile::Ptr &profile, EditPro
     }
 }
 
-const Profile::Ptr EditProfileDialog::lookupProfile() const
-{
-    return _profile;
-}
-
 const QString EditProfileDialog::currentColorSchemeName() const
 {
-    const QString &currentColorSchemeName = lookupProfile()->colorScheme();
+    const QString &currentColorSchemeName = _profile->colorScheme();
     return currentColorSchemeName;
 }
 
@@ -395,7 +390,7 @@ void EditProfileDialog::preparePage(KPageWidgetItem *current, KPageWidgetItem *b
     Q_ASSERT(current);
     Q_ASSERT(_pages.contains(current));
 
-    const Profile::Ptr profile = lookupProfile();
+    const Profile::Ptr profile = _profile;
     auto setupPage = _pages[current].setupPage;
     Q_ASSERT(profile);
     Q_ASSERT(setupPage);
@@ -509,7 +504,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
 void EditProfileDialog::showEnvironmentEditor()
 {
     bool ok;
-    const Profile::Ptr profile = lookupProfile();
+    const Profile::Ptr profile = _profile;
 
     QStringList currentEnvironment;
 
@@ -1042,7 +1037,7 @@ void EditProfileDialog::unpreview(Profile::Property prop)
 
 void EditProfileDialog::preview(Profile::Property prop, const QVariant &value)
 {
-    const Profile::Ptr original = lookupProfile();
+    const Profile::Ptr original = _profile;
 
     // skip previews for profile groups if the profiles in the group
     // have conflicting original values for the property
@@ -1370,7 +1365,7 @@ void EditProfileDialog::updateButtonApply()
 void EditProfileDialog::setupKeyboardPage(const Profile::Ptr & /* profile */)
 {
     // setup translator list
-    updateKeyBindingsList(lookupProfile()->keyBindings());
+    updateKeyBindingsList(_profile->keyBindings());
 
     connect(_keyboardUi->keyBindingList->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Konsole::EditProfileDialog::keyBindingSelected);
     connect(_keyboardUi->newKeyBindingsButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::newKeyBinding);
@@ -1435,7 +1430,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     editor->setModal(true);
 
     if (translator != nullptr) {
-        editor->setup(translator, lookupProfile()->keyBindings(), isNewTranslator);
+        editor->setup(translator, _profile->keyBindings(), isNewTranslator);
     }
 
     connect(editor, &Konsole::KeyBindingEditor::updateKeyBindingsListRequest, this, &Konsole::EditProfileDialog::updateKeyBindingsList);

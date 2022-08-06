@@ -92,7 +92,6 @@ public:
      * and make it easy for them to change it.
      */
     void selectProfileName();
-    const Profile::Ptr lookupProfile() const;
 
 public Q_SLOTS:
     // reimplemented
