@@ -398,6 +398,11 @@ public:
     // Used to show/hide the message widget
     void updateReadOnlyState(bool readonly);
 
+    // Get mapping between visual and logical positions in line
+    // returns the index of the last non space character.
+    int bidiMap(Character *screenline, QString &line, int *log2line, int *line2log, uint16_t *shapemap, int32_t *vis2line, bool shape = true, bool bidi = true)
+        const;
+
 public Q_SLOTS:
     /**
      * Causes the terminal display to fetch the latest character image from the associated
@@ -669,6 +674,8 @@ private:
     bool _resizing = false;
     bool _showTerminalSizeHint = true;
     bool _bidiEnabled = false;
+    bool _bidiLineLTR = true;
+    bool _bidiTableDirOverride = true;
     bool _usesMouseTracking = false;
     bool _allowMouseTracking = true;
     bool _bracketedPasteMode = false;

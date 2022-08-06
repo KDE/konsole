@@ -35,6 +35,15 @@ void TerminalFont::applyProfile(const Profile::Ptr &profile)
     m_useFontLineCharacters = profile->useFontLineCharacters();
     m_lineSpacing = uint(profile->lineSpacing());
     setVTFont(profile->font());
+    extraFonts[0] = profile->emojiFont();
+    if (extraFonts[0] == QFont()) {
+        extraFonts[0] = QFont(QStringLiteral("Noto Color Emoji"));
+        // extraFonts[0] = QFont(QStringLiteral("Apple Color Emoji"));
+        // extraFonts[0] = QFont(QStringLiteral("Emoji One"));
+        if (extraFonts[0] == QFont()) {
+            extraFonts.remove(0);
+        }
+    }
 }
 
 void TerminalFont::setVTFont(const QFont &f)
@@ -196,6 +205,26 @@ int TerminalFont::fontAscent() const
     return m_fontAscent;
 }
 
+int TerminalFont::lineWidth() const
+{
+    return m_lineWidth;
+}
+
+int TerminalFont::underlinePos() const
+{
+    return m_underlinePos;
+}
+
+int TerminalFont::strikeOutPos() const
+{
+    return m_strikeOutPos;
+}
+
+int TerminalFont::overlinePos() const
+{
+    return m_overlinePos;
+}
+
 bool TerminalFont::boldIntense() const
 {
     return m_boldIntense;
@@ -225,8 +254,21 @@ void TerminalFont::fontChange(const QFont &)
     }
 
     m_fontAscent = fm.ascent();
+    m_lineWidth = fm.lineWidth();
+    m_underlinePos = fm.underlinePos();
+    m_strikeOutPos = fm.strikeOutPos();
+    m_overlinePos = fm.overlinePos();
 
     qobject_cast<TerminalDisplay *>(m_parent)->propagateSize();
 }
 
+bool TerminalFont::hasExtraFont(int i) const
+{
+    return extraFonts.contains(i);
+}
+
+QFont TerminalFont::getExtraFont(int i) const
+{
+    return extraFonts[i];
+}
 }

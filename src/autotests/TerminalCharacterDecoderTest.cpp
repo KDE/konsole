@@ -28,7 +28,7 @@ void TerminalCharacterDecoderTest::convertToCharacter(Character *charResult, con
     }
     for (int i = 0; i < text.size(); ++i) {
         charResult[i] = Character(text.at(i).unicode());
-        charResult[i].rendition = renditions.at(i);
+        charResult[i].rendition.all = renditions.at(i);
     }
 }
 

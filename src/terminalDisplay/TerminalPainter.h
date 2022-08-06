@@ -54,7 +54,8 @@ public Q_SLOTS:
                       bool PrinterFriendly,
                       int imageSize,
                       bool bidiEnabled,
-                      QVector<LineProperty> lineProperties);
+                      QVector<LineProperty> lineProperties,
+                      CharacterColor const *ulColorTable = nullptr);
 
     // draw a transparent rectangle over the line of the current match
     void drawCurrentResultRect(QPainter &painter, const QRect &searchResultRect);
@@ -86,22 +87,48 @@ private:
     // draws a string of line graphics
     void drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character attributes);
 
-    // draws a section of text, all the text in this section
-    // has a common color and style
-    void drawTextFragment(QPainter &painter,
-                          const QRect &rect,
-                          const QString &text,
-                          Character style,
-                          const QColor *colorTable,
-                          const bool invertedRendition,
-                          const LineProperty lineProperty);
-
-    void drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text, Character style, const LineProperty lineProperty);
-
     // draws the cursor character
     void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor);
 
     TerminalDisplay *m_parentDisplay = nullptr;
+    void drawBelowText(QPainter &painter,
+                       const QRect &rect,
+                       Character *style,
+                       int startX,
+                       int width,
+                       int fontWidth,
+                       const QColor *colorTable,
+                       const bool invertedRendition,
+                       int *vis2line,
+                       int *line2log,
+                       bool bidiEnabled);
+    void drawAboveText(QPainter &painter,
+                       const QRect &rect,
+                       Character *style,
+                       int startX,
+                       int width,
+                       int fontWidth,
+                       const QColor *colorTable,
+                       const bool invertedRendition,
+                       int *vis2line,
+                       int *line2log,
+                       bool bidiEnabled,
+                       CharacterColor const *ulColorTable);
+    void drawImagesBelowText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx);
+    void drawImagesAboveText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx);
+
+    void drawTextCharacters(QPainter &painter,
+                            const QRect &rect,
+                            const QString &text,
+                            Character style,
+                            const QColor *colorTable,
+                            const bool invertedRendition,
+                            const LineProperty lineProperty,
+                            bool printerFriendly,
+                            RenditionFlags &oldRendition,
+                            QColor oldColor,
+                            int normalWeight,
+                            QFont::Weight boldWeight);
 };
 
 }

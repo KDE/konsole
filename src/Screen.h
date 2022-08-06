@@ -314,6 +314,7 @@ public:
      * @see Character::rendition
      */
     void setRendition(RenditionFlags rendition);
+    void setUnderlineType(int type);
     /**
      * Disables the given @p rendition flag.  Rendition flags control the appearance
      * of characters on the screen.
@@ -345,6 +346,13 @@ public:
      * character's rendition flags back to the default settings.
      */
     void setDefaultRendition();
+
+    void setULColor(int space, int color);
+
+    CharacterColor const *ulColorTable() const
+    {
+        return _ulColors;
+    };
 
     /** Returns the column which the cursor is positioned at. */
     int getCursorX() const;
@@ -642,7 +650,7 @@ public:
         for (int i = 0; i < _lines; ++i) {
             const ImageLine &il = _screenLines[i];
             for (int j = 0; j < il.length(); ++j) {
-                if (il[j].rendition & RE_EXTENDED_CHAR) {
+                if (il[j].rendition.f.extended) {
                     result << il[j].character;
                 }
             }
@@ -800,7 +808,12 @@ private:
     // cursor color and rendition info
     CharacterColor _currentForeground;
     CharacterColor _currentBackground;
-    RenditionFlags _currentRendition;
+    RenditionFlagsC _currentRendition;
+
+    CharacterColor _ulColors[15];
+    int _ulColorQueueStart;
+    int _ulColorQueueEnd;
+    int _currentULColor;
 
     // margins ----------------
     int _topMargin;
@@ -829,7 +842,7 @@ private:
     // effective colors and rendition ------------
     CharacterColor _effectiveForeground; // These are derived from
     CharacterColor _effectiveBackground; // the cu_* variables above
-    RenditionFlags _effectiveRendition; // to speed up operation
+    RenditionFlagsC _effectiveRendition; // to speed up operation
 
     class SavedState
     {
@@ -838,7 +851,7 @@ private:
             : cursorColumn(0)
             , cursorLine(0)
             , originMode(0)
-            , rendition(0)
+            , rendition({0})
             , foreground(CharacterColor())
             , background(CharacterColor())
         {
@@ -847,7 +860,7 @@ private:
         int cursorColumn;
         int cursorLine;
         int originMode;
-        RenditionFlags rendition;
+        RenditionFlagsC rendition;
         CharacterColor foreground;
         CharacterColor background;
     };

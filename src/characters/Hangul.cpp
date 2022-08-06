@@ -133,7 +133,7 @@ bool Hangul::combinesWith(Character prevChar, uint c)
 {
     Hangul::SyllablePos syllablePos = Hangul::NotInSyllable;
 
-    if ((prevChar.rendition & RE_EXTENDED_CHAR) == 0) {
+    if (prevChar.rendition.f.extended == 0) {
         const uint prev = prevChar.character;
         updateHangulSyllablePos(syllablePos, prev);
     } else {

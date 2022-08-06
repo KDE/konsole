@@ -90,6 +90,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {DimValue, "DimmValue", APPEARANCE_GROUP, 128},
     {DimWhenInactive, "DimWhenInactive", GENERAL_GROUP, false},
     {InvertSelectionColors, "InvertSelectionColors", GENERAL_GROUP, false},
+    {EmojiFont, "EmojiFont", APPEARANCE_GROUP, QFont()},
 
 // Keyboard
 #ifdef Q_OS_MACOS
@@ -112,6 +113,8 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {BlinkingTextEnabled, "BlinkingTextEnabled", TERMINAL_GROUP, true},
     {FlowControlEnabled, "FlowControlEnabled", TERMINAL_GROUP, true},
     {BidiRenderingEnabled, "BidiRenderingEnabled", TERMINAL_GROUP, true},
+    {BidiLineLTR, "BidiLineLTR", TERMINAL_GROUP, true},
+    {BidiTableDirOverride, "BidiTableDirOverride", TERMINAL_GROUP, true},
     {BlinkingCursorEnabled, "BlinkingCursorEnabled", TERMINAL_GROUP, false},
     {BellMode, "BellMode", TERMINAL_GROUP, Enum::NotifyBell},
     {VerticalLine, "VerticalLine", TERMINAL_GROUP, false},

@@ -511,7 +511,7 @@ void Vt102Emulation::csi_dispatch(const uint cc)
                 processToken(token_csi_pq(cc), 0, 0);
             } else if (tokenBufferPos != 0 && tokenBuffer[0] == '>') {
                 processToken(token_csi_pg(cc), 0, 0);
-            } else if (cc == 'm' && !params.sub[i].count && params.count - i >= 4 && (params.value[i] == 38 || params.value[i] == 48)
+            } else if (cc == 'm' && !params.sub[i].count && params.count - i >= 4 && (params.value[i] == 38 || params.value[i] == 48 || params.value[i] == 58)
                        && params.value[i + 1] == 2) {
                 // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
                 i += 2;
@@ -519,22 +519,27 @@ void Vt102Emulation::csi_dispatch(const uint cc)
                              COLOR_SPACE_RGB,
                              (params.value[i] << 16) | (params.value[i + 1] << 8) | params.value[i + 2]);
                 i += 2;
-            } else if (cc == 'm' && params.sub[i].count >= 5 && (params.value[i] == 38 || params.value[i] == 48) && params.sub[i].value[1] == 2) {
+            } else if (cc == 'm' && params.sub[i].count >= 5 && (params.value[i] == 38 || params.value[i] == 48 || params.value[i] == 58)
+                       && params.sub[i].value[1] == 2) {
                 // ESC[ ... 48:2:<id>:<red>:<green>:<blue> ... m -or- ESC[ ... 38:2:<id>:<red>:<green>:<blue> ... m
                 processToken(token_csi_ps(cc, params.value[i]),
                              COLOR_SPACE_RGB,
                              (params.sub[i].value[3] << 16) | (params.sub[i].value[4] << 8) | params.sub[i].value[5]);
-            } else if (cc == 'm' && params.sub[i].count == 4 && (params.value[i] == 38 || params.value[i] == 48) && params.sub[i].value[1] == 2) {
+            } else if (cc == 'm' && params.sub[i].count == 4 && (params.value[i] == 38 || params.value[i] == 48 || params.value[i] == 58)
+                       && params.sub[i].value[1] == 2) {
                 // ESC[ ... 48:2:<red>:<green>:<blue> ... m -or- ESC[ ... 38:2:<red>:<green>:<blue> ... m
                 processToken(token_csi_ps(cc, params.value[i]),
                              COLOR_SPACE_RGB,
                              (params.sub[i].value[2] << 16) | (params.sub[i].value[3] << 8) | params.sub[i].value[4]);
-            } else if (cc == 'm' && !params.sub[i].count && params.count - i >= 2 && (params.value[i] == 38 || params.value[i] == 48)
+            } else if (cc == 'm' && params.sub[i].count == 1 && params.value[i] == 4) {
+                processToken(token_csi_ps(cc, params.value[i]), params.sub[i].value[1], 1);
+            } else if (cc == 'm' && !params.sub[i].count && params.count - i >= 2 && (params.value[i] == 38 || params.value[i] == 48 || params.value[i] == 58)
                        && params.value[i + 1] == 5) {
                 // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
                 i += 2;
                 processToken(token_csi_ps(cc, params.value[i - 2]), COLOR_SPACE_256, params.value[i]);
-            } else if (cc == 'm' && params.sub[i].count >= 2 && (params.value[i] == 38 || params.value[i] == 48) && params.sub[i].value[1] == 5) {
+            } else if (cc == 'm' && params.sub[i].count >= 2 && (params.value[i] == 38 || params.value[i] == 48 || params.value[i] == 58)
+                       && params.sub[i].value[1] == 5) {
                 // ESC[ ... 48:5:<index> ... m -or- ESC[ ... 38:5:<index> ... m
                 processToken(token_csi_ps(cc, params.value[i]), COLOR_SPACE_256, params.sub[i].value[2]);
             } else if (_nIntermediate == 0) {
@@ -985,16 +990,16 @@ void Vt102Emulation::processChecksumRequest([[maybe_unused]] int crargc, int cra
             // XXX: Apparently, VT520 uses 0x00 for uninitialized cells, konsole can't tell uninitialized cells from spaces
             Character c = image[y * _currentScreen->getColumns() + x];
 
-            if (c.rendition & RE_CONCEAL) {
+            if (c.rendition.f.conceal) {
                 checksum += 0x20; // don't reveal secrets
             } else {
                 checksum += c.character;
             }
 
-            checksum += (c.rendition & RE_BOLD) / RE_BOLD * 0x80;
-            checksum += (c.rendition & RE_BLINK) / RE_BLINK * 0x40;
-            checksum += (c.rendition & RE_REVERSE) / RE_REVERSE * 0x20;
-            checksum += (c.rendition & RE_UNDERLINE) / RE_UNDERLINE * 0x10;
+            checksum += c.rendition.f.bold * 0x80;
+            checksum += c.rendition.f.blink * 0x40;
+            checksum += c.rendition.f.reverse * 0x20;
+            checksum += !!(c.rendition.all & RE_UNDERLINE_MASK) * 0x10;
         }
     }
 
@@ -1353,7 +1358,13 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_ps('m',   1) : _currentScreen->  setRendition     (RE_BOLD     ); break; //VT100
     case token_csi_ps('m',   2) : _currentScreen->  setRendition     (RE_FAINT    ); break;
     case token_csi_ps('m',   3) : _currentScreen->  setRendition     (RE_ITALIC   ); break; //VT100
-    case token_csi_ps('m',   4) : _currentScreen->  setRendition     (RE_UNDERLINE); break; //VT100
+    case token_csi_ps('m',   4) :
+        if (q == 1) {
+            _currentScreen->setUnderlineType(p);
+        } else {
+            _currentScreen->setUnderlineType(RE_UNDERLINE);
+        }
+        break; //VT100
     case token_csi_ps('m',   5) : _currentScreen->  setRendition     (RE_BLINK    ); break; //VT100
     case token_csi_ps('m',   7) : _currentScreen->  setRendition     (RE_REVERSE  ); break;
     case token_csi_ps('m',   8) : _currentScreen->  setRendition     (RE_CONCEAL  ); break;
@@ -1362,11 +1373,11 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_ps('m',  10) : /* IGNORED: mapping related          */ break; //LINUX
     case token_csi_ps('m',  11) : /* IGNORED: mapping related          */ break; //LINUX
     case token_csi_ps('m',  12) : /* IGNORED: mapping related          */ break; //LINUX
-    case token_csi_ps('m',  21) : _currentScreen->resetRendition     (RE_BOLD     ); break;
+    case token_csi_ps('m',  21) : _currentScreen->setUnderlineType(RE_UNDERLINE_DOUBLE); break;
     case token_csi_ps('m',  22) : _currentScreen->resetRendition     (RE_BOLD     );
                                _currentScreen->resetRendition     (RE_FAINT    ); break;
     case token_csi_ps('m',  23) : _currentScreen->resetRendition     (RE_ITALIC   ); break; //VT100
-    case token_csi_ps('m',  24) : _currentScreen->resetRendition     (RE_UNDERLINE); break;
+    case token_csi_ps('m',  24) : _currentScreen->resetRendition     (RE_UNDERLINE_MASK); break;
     case token_csi_ps('m',  25) : _currentScreen->resetRendition     (RE_BLINK    ); break;
     case token_csi_ps('m',  27) : _currentScreen->resetRendition     (RE_REVERSE  ); break;
     case token_csi_ps('m',  28) : _currentScreen->resetRendition     (RE_CONCEAL  ); break;
@@ -1398,6 +1409,10 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_ps('m',   48) : _currentScreen->setBackColor         (p,       q); break;
 
     case token_csi_ps('m',   49) : _currentScreen->setBackColor         (COLOR_SPACE_DEFAULT,  1); break;
+
+    case token_csi_ps('m',   58) : _currentScreen->setULColor           (p,       q); break;
+
+    case token_csi_ps('m',   59) : _currentScreen->setULColor           (COLOR_SPACE_UNDEFINED,  0); break;
 
     case token_csi_ps('m',   90) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  8); break;
     case token_csi_ps('m',   91) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  9); break;

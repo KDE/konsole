@@ -21,7 +21,7 @@ class FontDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit FontDialog(QWidget *parent = nullptr);
+    explicit FontDialog(QWidget *parent = nullptr, bool emoji = false, const QFont font = QFont());
 
     QFont font() const
     {
@@ -37,6 +37,7 @@ private:
     QCheckBox *_showAllFonts;
     QToolButton *_showAllFontsWarningButton;
     QDialogButtonBox *_buttonBox;
+    bool _emoji;
 };
 }
 

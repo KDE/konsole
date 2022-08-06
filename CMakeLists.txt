@@ -102,6 +102,8 @@ set_package_properties(KF5DocTools PROPERTIES DESCRIPTION
     TYPE OPTIONAL
 )
 
+find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
+
 if(NOT APPLE)
     option(WITHOUT_X11 "Build without X11 integration (skips finding X11)" OFF)
     if (NOT WITHOUT_X11)

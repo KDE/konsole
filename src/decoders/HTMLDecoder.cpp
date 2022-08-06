@@ -100,13 +100,14 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
 
     for (int i = 0; i < count; i++) {
         // check if appearance of character is different from previous char
-        if (characters[i].rendition != _lastRendition || characters[i].foregroundColor != _lastForeColor || characters[i].backgroundColor != _lastBackColor) {
+        if (characters[i].rendition.all != _lastRendition || characters[i].foregroundColor != _lastForeColor
+            || characters[i].backgroundColor != _lastBackColor) {
             if (_innerSpanOpen) {
                 closeSpan(text);
                 _innerSpanOpen = false;
             }
 
-            _lastRendition = characters[i].rendition;
+            _lastRendition = characters[i].rendition.all;
             _lastForeColor = characters[i].foregroundColor;
             _lastBackColor = characters[i].backgroundColor;
 
@@ -118,7 +119,7 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
                 style.append(QLatin1String("font-weight:bold;"));
             }
 
-            if ((_lastRendition & RE_UNDERLINE) != 0) {
+            if ((_lastRendition & RE_UNDERLINE_MASK) != 0) {
                 style.append(QLatin1String("font-decoration:underline;"));
             }
 
@@ -140,7 +141,7 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
 
         // output current character
         if (spaceCount < 2) {
-            if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
+            if ((characters[i].rendition.all & RE_EXTENDED_CHAR) != 0) {
                 ushort extendedCharLength = 0;
                 const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
                 if (chars != nullptr) {

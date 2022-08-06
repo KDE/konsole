@@ -78,6 +78,12 @@
 #include "TerminalPainter.h"
 #include "TerminalScrollBar.h"
 
+#include "unicode/localpointer.h"
+#include "unicode/ubidi.h"
+#include "unicode/uchar.h"
+#include "unicode/ushape.h"
+#include "unicode/utypes.h"
+
 using namespace Konsole;
 
 inline int TerminalDisplay::loc(int x, int y) const
@@ -147,6 +153,14 @@ void TerminalDisplay::setScreenWindow(ScreenWindow *window)
         }
     }
 }
+
+static UCharDirection BiDiClass([[maybe_unused]] const void *context, UChar32 c)
+{
+    if (c >= 0x2500 && c <= 0x25ff) {
+        return U_LEFT_TO_RIGHT;
+    }
+    return U_CHAR_DIRECTION_COUNT;
+};
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -511,7 +525,7 @@ void TerminalDisplay::updateImage()
 
         if (!_resizing) { // not while _resizing, we're expecting a paintEvent
             for (x = 0; x < columnsToUpdate; ++x) {
-                _hasTextBlinker |= (newLine[x].rendition & RE_BLINK);
+                _hasTextBlinker |= newLine[x].rendition.f.blink;
 
                 // Start drawing if this character or the next one differs.
                 // We also take the next one into account to handle the situation
@@ -522,7 +536,7 @@ void TerminalDisplay::updateImage()
                     }
                     const bool lineDraw = LineBlockCharacters::canDraw(newLine[x + 0].character);
                     const bool doubleWidth = (x + 1 == columnsToUpdate) ? false : newLine[x + 1].isRightHalfOfDoubleWide();
-                    const RenditionFlags cr = newLine[x].rendition;
+                    const RenditionFlags cr = newLine[x].rendition.all;
                     const CharacterColor clipboard = newLine[x].backgroundColor;
                     if (newLine[x].foregroundColor != cf) {
                         cf = newLine[x].foregroundColor;
@@ -537,7 +551,7 @@ void TerminalDisplay::updateImage()
 
                         const bool nextIsDoubleWidth = (x + len + 1 == columnsToUpdate) ? false : newLine[x + len + 1].isRightHalfOfDoubleWide();
 
-                        if (ch.foregroundColor != cf || ch.backgroundColor != clipboard || (ch.rendition & ~RE_EXTENDED_CHAR) != (cr & ~RE_EXTENDED_CHAR)
+                        if (ch.foregroundColor != cf || ch.backgroundColor != clipboard || (ch.rendition.all & ~RE_EXTENDED_CHAR) != (cr & ~RE_EXTENDED_CHAR)
                             || (dirtyMask[x + len] == 0) || LineBlockCharacters::canDraw(ch.character) != lineDraw || nextIsDoubleWidth != doubleWidth) {
                             break;
                         }
@@ -683,7 +697,7 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
     paint.setRenderHint(QPainter::TextAntialiasing, _terminalFont->antialiasText());
 
     for (const QRect &rect : qAsConst(dirtyImageRegion)) {
-        _terminalPainter->drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties);
+        _terminalPainter->drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties, _screenWindow->screen()->ulColorTable());
     }
 
     if (screenWindow()->currentResultLine() != -1) {
@@ -1479,6 +1493,19 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint &widgetPoint,
     int column =
         qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _terminalFont->fontWidth() / (doubleWidth ? 2 : 1), columnMax);
 
+    // Visual column to logical
+    if (_bidiEnabled && column < _usedColumns) {
+#define MAX_LINE_WIDTH 1024
+        int log2line[MAX_LINE_WIDTH];
+        int line2log[MAX_LINE_WIDTH];
+        uint16_t shapemap[MAX_LINE_WIDTH];
+        int32_t vis2line[MAX_LINE_WIDTH];
+        const int pos = loc(0, line);
+        QString line;
+        bidiMap(_image + pos, line, log2line, line2log, shapemap, vis2line, false);
+        column = line2log[vis2line[column]];
+    }
+
     return qMakePair(line, column);
 }
 
@@ -1874,7 +1901,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
 out:
     y -= curLine;
     // In word selection mode don't select @ (64) if at end of word.
-    if (((image[j].rendition & RE_EXTENDED_CHAR) == 0) && (QChar(image[j].character) == QLatin1Char('@')) && (y > pnt.y() || x > pnt.x())) {
+    if ((image[j].rendition.f.extended == 0) && (QChar(image[j].character) == QLatin1Char('@')) && (y > pnt.y() || x > pnt.x())) {
         if (x > 0) {
             x--;
         } else {
@@ -1992,7 +2019,7 @@ bool TerminalDisplay::focusNextPrevChild(bool next)
 
 QChar TerminalDisplay::charClass(const Character &ch) const
 {
-    if ((ch.rendition & RE_EXTENDED_CHAR) != 0) {
+    if (ch.rendition.f.extended != 0) {
         ushort extendedCharLength = 0;
         const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
         if ((chars != nullptr) && extendedCharLength > 0) {
@@ -2832,6 +2859,8 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _ctrlRequiredForDrag = profile->property<bool>(Profile::CtrlRequiredForDrag);
     _dropUrlsAsText = profile->property<bool>(Profile::DropUrlsAsText);
     _bidiEnabled = profile->bidiRenderingEnabled();
+    _bidiLineLTR = profile->bidiLineLTR();
+    _bidiTableDirOverride = profile->bidiTableDirOverride();
     _semanticUpDown = profile->semanticUpDown();
     _semanticHints = profile->semanticHints();
     _semanticInputClick = profile->semanticInputClick();
@@ -2898,4 +2927,70 @@ Character TerminalDisplay::getCursorCharacter(int column, int line)
 int TerminalDisplay::selectionState() const
 {
     return _actSel;
+}
+
+int TerminalDisplay::bidiMap(Character *screenline, QString &line, int *log2line, int *line2log, uint16_t *shapemap, int32_t *vis2line, bool shape, bool bidi)
+    const
+{
+    const int linewidth = _usedColumns;
+    uint64_t notSkipped[MAX_LINE_WIDTH / 64] = {};
+    int i;
+    int lastNonSpace = 0;
+    for (i = 0; i < linewidth; i++) {
+        log2line[i] = line.size();
+        line2log[line.size()] = i;
+        notSkipped[line.size() / 64] |= 1ul << (line.size() % 64);
+        const Character char_value = screenline[i];
+        if (char_value.rendition.f.extended != 0) {
+            // sequence of characters
+            ushort extendedCharLength = 0;
+            const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(char_value.character, extendedCharLength);
+            if (chars != nullptr) {
+                Q_ASSERT(extendedCharLength > 1);
+                line += QString::fromUcs4(chars, extendedCharLength);
+            }
+            lastNonSpace = i;
+        } else {
+            line += QString::fromUcs4(&char_value.character, 1);
+            if (!line[line.size() - 1].isSpace()) {
+                lastNonSpace = i;
+            }
+        }
+    }
+    log2line[i] = line.size();
+    // line.truncate(lastNonSpace + 1);
+    UErrorCode errorCode = U_ZERO_ERROR;
+    if (shape) {
+        UChar shaped_line[MAX_LINE_WIDTH];
+        u_shapeArabic(reinterpret_cast<const UChar *>(line.utf16()),
+                      line.length(),
+                      shaped_line,
+                      1024,
+                      U_SHAPE_AGGREGATE_TASHKEEL_NOOP | U_SHAPE_LENGTH_FIXED_SPACES_NEAR | U_SHAPE_LETTERS_SHAPE,
+                      &errorCode);
+        for (int i = 0; i < line.length(); i++) {
+            if (line[i] != shaped_line[i]) {
+                shapemap[i] = shaped_line[i];
+            }
+        }
+    }
+    if (!bidi) {
+        return lastNonSpace;
+    }
+    UBiDi *ubidi = ubidi_open();
+    UBiDiLevel paraLevel = _bidiLineLTR ? 0 : UBIDI_DEFAULT_LTR;
+    if (_bidiTableDirOverride) {
+        ubidi_setClassCallback(ubidi, BiDiClass, nullptr, nullptr, nullptr, &errorCode);
+    }
+    ubidi_setPara(ubidi, reinterpret_cast<const UChar *>(line.utf16()), line.length(), paraLevel, nullptr, &errorCode);
+    int len = ubidi_getProcessedLength(ubidi);
+    int32_t semi_vis2line[MAX_LINE_WIDTH];
+    ubidi_getVisualMap(ubidi, semi_vis2line, &errorCode);
+    int p = 0;
+    for (int i = 0; i < len; i++) {
+        if ((notSkipped[i / 64] & (1ul << (i % 64))) != 0) {
+            vis2line[p++] = semi_vis2line[i];
+        }
+    }
+    return lastNonSpace;
 }

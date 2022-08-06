@@ -160,6 +160,14 @@ public:
          * text display
          */
         BidiRenderingEnabled,
+        /** (bool) If true, lines are always LTR. Otherwise, decided by
+         * first strong charachter as defined by the BiDi algorithm.
+         */
+        BidiLineLTR,
+        /** (bool) Specifies whether the table drawing characters will be
+         * considered strong LTR by the BiDi algorithm.
+         */
+        BidiTableDirOverride,
         /** (bool) Specifies whether text in terminal displays is allowed
          * to blink.
          */
@@ -363,6 +371,9 @@ public:
         /** (bool) If true, move cursor with Left/Right keys when mouse clicks in input area
          */
         SemanticInputClick,
+        /** (QFont) Emoji font override
+         */
+        EmojiFont,
     };
 
     Q_ENUM(Property)
@@ -569,6 +580,12 @@ public:
         return property<QFont>(Profile::Font);
     }
 
+    /** Convenience method for property<QFont>(Profile::EmojiFont) */
+    QFont emojiFont() const
+    {
+        return property<QFont>(Profile::EmojiFont);
+    }
+
     /** Convenience method for property<QString>(Profile::ColorScheme) */
     QString colorScheme() const
     {
@@ -597,6 +614,18 @@ public:
     bool bidiRenderingEnabled() const
     {
         return property<bool>(Profile::BidiRenderingEnabled);
+    }
+
+    /** Convenience method for property<bool>(Profile::BidiLineLTR) */
+    bool bidiLineLTR() const
+    {
+        return property<bool>(Profile::BidiLineLTR);
+    }
+
+    /** Convenience method for property<bool>(Profile::BidiTableDirOverride) */
+    bool bidiTableDirOverride() const
+    {
+        return property<bool>(Profile::BidiTableDirOverride);
     }
 
     /** Convenience method for property<bool>(Profile::LineSpacing) */

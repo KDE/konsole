@@ -70,7 +70,10 @@ Screen::Screen(int lines, int columns)
     , _cuY(0)
     , _currentForeground(CharacterColor())
     , _currentBackground(CharacterColor())
-    , _currentRendition(DEFAULT_RENDITION)
+    , _currentRendition({DEFAULT_RENDITION})
+    , _ulColorQueueStart(0)
+    , _ulColorQueueEnd(0)
+    , _currentULColor(0)
     , _topMargin(0)
     , _bottomMargin(0)
     , _replMode(REPL_None)
@@ -83,7 +86,7 @@ Screen::Screen(int lines, int columns)
     , _blockSelectionMode(false)
     , _effectiveForeground(CharacterColor())
     , _effectiveBackground(CharacterColor())
-    , _effectiveRendition(DEFAULT_RENDITION)
+    , _effectiveRendition({DEFAULT_RENDITION})
     , _lastPos(-1)
     , _lastDrawnChar(0)
     , _escapeSequenceUrlExtractor(nullptr)
@@ -286,7 +289,7 @@ void Screen::deleteChars(int n)
     _screenLines[_cuY].remove(_cuX, n);
 
     // Append space(s) with current attributes
-    Character spaceWithCurrentAttrs(' ', _effectiveForeground, _effectiveBackground, _effectiveRendition, 0);
+    Character spaceWithCurrentAttrs(' ', _effectiveForeground, _effectiveBackground, _effectiveRendition.all, 0);
 
     for (int i = 0; i < n; ++i) {
         _screenLines[_cuY].append(spaceWithCurrentAttrs);
@@ -646,7 +649,7 @@ void Screen::reverseRendition(Character &p) const
 void Screen::updateEffectiveRendition()
 {
     _effectiveRendition = _currentRendition;
-    if ((_currentRendition & RE_REVERSE) != 0) {
+    if ((_currentRendition.f.reverse) != 0) {
         _effectiveForeground = _currentBackground;
         _effectiveBackground = _currentForeground;
     } else {
@@ -654,12 +657,12 @@ void Screen::updateEffectiveRendition()
         _effectiveBackground = _currentBackground;
     }
 
-    if ((_currentRendition & RE_BOLD) != 0) {
-        if ((_currentRendition & RE_FAINT) == 0) {
+    if ((_currentRendition.f.bold) != 0) {
+        if ((_currentRendition.f.faint) == 0) {
             _effectiveForeground.setIntensive();
         }
     } else {
-        if ((_currentRendition & RE_FAINT) != 0) {
+        if ((_currentRendition.f.faint) != 0) {
             _effectiveForeground.setFaint();
         }
     }
@@ -688,7 +691,7 @@ void Screen::copyFromHistory(Character *dest, int startLine, int count) const
         if (_selBegin != -1) {
             for (int column = 0; column < lastColumn; ++column) {
                 if (isSelected(column, line)) {
-                    dest[destLineOffset + column].rendition |= RE_SELECTED;
+                    dest[destLineOffset + column].rendition.f.selected = 1;
                 }
             }
         }
@@ -720,7 +723,7 @@ void Screen::copyFromScreen(Character *dest, int startLine, int count) const
         if (_selBegin != -1) {
             for (int column = 0; column < lastColumn; ++column) {
                 if (isSelected(column, line + historyLines)) {
-                    dest[destLineOffset + column].rendition |= RE_SELECTED;
+                    dest[destLineOffset + column].rendition.f.selected = 1;
                 }
             }
         }
@@ -761,7 +764,7 @@ void Screen::getImage(Character *dest, int size, int startLine, int endLine) con
     // mark the character at the current cursor position
     int cursorIndex = loc(visX, _cuY + linesInHistoryBuffer);
     if (getMode(MODE_Cursor) && cursorIndex < _columns * mergedLines) {
-        dest[cursorIndex].rendition |= RE_CURSOR;
+        dest[cursorIndex].rendition.f.cursor = 1;
     }
 }
 
@@ -947,13 +950,14 @@ void Screen::displayCharacter(uint c)
     // putting the cursor one right to the last column of the screen.
 
     int w = Character::width(c);
-
+    const QChar::Category category = QChar::category(c);
     if (w < 0) {
         // Non-printable character
         return;
-    } else if (w == 0) {
-        const QChar::Category category = QChar::category(c);
-        if (category != QChar::Mark_NonSpacing && category != QChar::Letter_Other && category != QChar::Other_Format) {
+    } else if (category == QChar::Mark_SpacingCombining || w == 0 || Character::emoji(c) || c == 0x20E3) {
+        bool emoji = Character::emoji(c);
+        if (category != QChar::Mark_SpacingCombining && category != QChar::Mark_NonSpacing && category != QChar::Letter_Other && category != QChar::Other_Format
+            && !emoji && c != 0x20E3) {
             return;
         }
         // Find previous "real character" to try to combine with
@@ -980,6 +984,9 @@ void Screen::displayCharacter(uint c)
         } while (_screenLines.at(charToCombineWithY).at(charToCombineWithX).isRightHalfOfDoubleWide());
 
         if (!previousChar) {
+            if (emoji) {
+                goto notcombine;
+            }
             if (!Hangul::isHangul(c)) {
                 return;
             } else {
@@ -990,24 +997,88 @@ void Screen::displayCharacter(uint c)
 
         Character &currentChar = _screenLines[charToCombineWithY][charToCombineWithX];
 
+        if (c == 0x20E3) {
+            // Combining Enclosing Keycap - only combines with presentation mode #,*,0-9
+            if ((currentChar.character != 0x23 && currentChar.character != 0x2A && (currentChar.character < '0' || currentChar.character > '9'))
+                || (currentChar.flags & EF_EMOJI_REPRESENTATION) == 0) {
+                // Is this the right thing TODO?
+                return;
+            }
+        }
+        if (c == 0xFE0F) {
+            // Emoji presentation - should not be included
+            currentChar.flags |= EF_EMOJI_REPRESENTATION;
+            return;
+        }
+        if (c == 0x200D) {
+            // Zero width joiner
+            currentChar.flags |= EF_EMOJI_REPRESENTATION;
+        }
+        if (c >= 0xE0020 && c <= 0xE007F) {
+            // Tags - used for some flags
+            currentChar.flags |= EF_EMOJI_REPRESENTATION;
+        }
+
+        if (c >= 0x1f3fb && c <= 0x1f3ff) {
+            // Emoji modifier Fitzpatrick - changes skin color
+            uint currentUcs4 = currentChar.character;
+            if (currentChar.rendition.f.extended == 1) {
+                ushort extendedCharLength;
+                const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
+                currentUcs4 = oldChars[extendedCharLength - 1];
+            }
+            if (currentUcs4 < 0x261d || (currentUcs4 > 0x270d && currentUcs4 < 0x1efff) || currentUcs4 > 0x1faff) {
+                goto notcombine;
+            }
+            currentChar.flags |= EF_EMOJI_REPRESENTATION;
+        } else if (c >= 0x1f1e6 && c <= 0x1f1ff) {
+            // Regional indicators - flag components
+            if (currentChar.rendition.f.extended == 1 || currentChar.character < 0x1f1e6 || currentChar.character > 0x1f1ff) {
+                goto notcombine;
+            }
+            currentChar.flags |= EF_EMOJI_REPRESENTATION;
+        } else if (emoji) {
+            if (currentChar.rendition.f.extended == 0) {
+                goto notcombine;
+            }
+            ushort extendedCharLength;
+            const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
+            if (oldChars[extendedCharLength - 1] != 0x200d) {
+                goto notcombine;
+            }
+        }
+
         if (Hangul::isHangul(c) && !Hangul::combinesWith(currentChar, c)) {
             w = 2;
             goto notcombine;
         }
 
-        if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0) {
+        if (currentChar.rendition.f.extended == 0) {
             const uint chars[2] = {currentChar.character, c};
-            currentChar.rendition |= RE_EXTENDED_CHAR;
+            currentChar.rendition.f.extended = 1;
             auto extChars = [this]() {
                 return usedExtendedChars();
             };
             currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, 2, extChars);
+            if (category == QChar::Mark_SpacingCombining) {
+                // ensure current line vector has enough elements
+                if (_screenLines[_cuY].size() < _cuX + w) {
+                    _screenLines[_cuY].resize(_cuX + w);
+                }
+                Character &ch = _screenLines[_cuY][_cuX];
+                ch.setRightHalfOfDoubleWide();
+                ch.foregroundColor = _effectiveForeground;
+                ch.backgroundColor = _effectiveBackground;
+                ch.rendition = _effectiveRendition;
+                ch.flags = setRepl(EF_UNREAL, _replMode);
+                _cuX += 1;
+            }
         } else {
             ushort extendedCharLength;
             const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
+            Q_ASSERT(extendedCharLength > 1);
             Q_ASSERT(oldChars);
-            if (((oldChars) != nullptr) && extendedCharLength < 8) {
-                Q_ASSERT(extendedCharLength > 1);
+            if (((oldChars) != nullptr) && extendedCharLength < 10) {
                 Q_ASSERT(extendedCharLength < 65535); // redundant due to above check
                 auto chars = std::make_unique<uint[]>(extendedCharLength + 1);
                 std::copy_n(oldChars, extendedCharLength, chars.get());
@@ -1051,7 +1122,10 @@ notcombine:
     currentChar.foregroundColor = _effectiveForeground;
     currentChar.backgroundColor = _effectiveBackground;
     currentChar.rendition = _effectiveRendition;
-    currentChar.flags = setRepl(EF_REAL, _replMode);
+    currentChar.flags = setRepl(EF_REAL, _replMode) | SetULColor(0, _currentULColor);
+    if (Character::emojiPresentation(c)) {
+        currentChar.flags |= EF_EMOJI_REPRESENTATION;
+    }
 
     _lastDrawnChar = c;
 
@@ -1416,13 +1490,19 @@ void Screen::clearEntireLine()
 
 void Screen::setRendition(RenditionFlags rendition)
 {
-    _currentRendition |= rendition;
+    _currentRendition.all |= rendition;
+    updateEffectiveRendition();
+}
+
+void Screen::setUnderlineType(int type)
+{
+    _currentRendition.f.underline = type;
     updateEffectiveRendition();
 }
 
 void Screen::resetRendition(RenditionFlags rendition)
 {
-    _currentRendition &= ~rendition;
+    _currentRendition.all &= ~rendition;
     updateEffectiveRendition();
 }
 
@@ -1430,7 +1510,7 @@ void Screen::setDefaultRendition()
 {
     setForeColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR);
     setBackColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR);
-    _currentRendition = DEFAULT_RENDITION;
+    _currentRendition = {DEFAULT_RENDITION};
     updateEffectiveRendition();
 }
 
@@ -1453,6 +1533,31 @@ void Screen::setBackColor(int space, int color)
         updateEffectiveRendition();
     } else {
         setBackColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR);
+    }
+}
+
+void Screen::setULColor(int space, int color)
+{
+    CharacterColor col(quint8(space), color);
+    if (col.isValid()) {
+        int end = _ulColorQueueEnd;
+        if (end < _ulColorQueueStart) {
+            end += 15;
+        }
+        for (int i = _ulColorQueueStart; i < end; i++) {
+            if (col == _ulColors[i % 15]) {
+                _currentULColor = i % 15 + 1;
+                return;
+            }
+        }
+        _ulColors[_ulColorQueueEnd] = col;
+        _currentULColor = _ulColorQueueEnd + 1;
+        _ulColorQueueEnd = (_ulColorQueueEnd + 1) % 15;
+        if (_ulColorQueueEnd == _ulColorQueueStart) {
+            _ulColorQueueStart = (_ulColorQueueStart + 1) % 15;
+        }
+    } else {
+        _currentULColor = 0;
     }
 }
 
@@ -1920,7 +2025,6 @@ int Screen::copyLineToStream(int line,
         int p = 0;
         for (int i = 0; i < count; i++) {
             Character c = characterBuffer[spacesCount + i];
-            // fprintf(stderr, "copy %i   %i %i\n", i, c.character, c.flags);
             if (((options & ExcludePrompt) != 0 && (c.flags & EF_REPL) == EF_REPL_PROMPT)
                 || ((options & ExcludeInput) != 0 && (c.flags & EF_REPL) == EF_REPL_INPUT)
                 || ((options & ExcludeOutput) != 0 && (c.flags & EF_REPL) == EF_REPL_OUTPUT)) {

@@ -23,6 +23,7 @@
 #include <QChar>
 #include <QColor>
 #include <QDebug>
+#include <QElapsedTimer>
 #include <QPainter>
 #include <QPen>
 #include <QRect>
@@ -68,9 +69,7 @@ static inline bool isLineCharString(const QString &string)
 bool isInvertedRendition(const TerminalDisplay *display)
 {
     auto currentProfile = SessionManager::instance()->sessionProfile(display->session());
-    const bool isInvert = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
-
-    return isInvert;
+    return currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
 }
 
 void TerminalPainter::drawContents(Character *image,
@@ -79,167 +78,165 @@ void TerminalPainter::drawContents(Character *image,
                                    bool printerFriendly,
                                    int imageSize,
                                    bool bidiEnabled,
-                                   QVector<LineProperty> lineProperties)
+                                   QVector<LineProperty> lineProperties,
+                                   CharacterColor const *ulColorTable)
 {
     const bool invertedRendition = isInvertedRendition(m_parentDisplay);
 
     QVector<uint> univec;
     univec.reserve(m_parentDisplay->usedColumns());
+    int placementIdx = 0;
 
     const int leftPadding = m_parentDisplay->contentRect().left() + m_parentDisplay->contentsRect().left();
     const int topPadding = m_parentDisplay->contentRect().top() + m_parentDisplay->contentsRect().top();
     const int fontWidth = m_parentDisplay->terminalFont()->fontWidth();
     const int fontHeight = m_parentDisplay->terminalFont()->fontHeight();
+    const QRect textArea(QPoint(leftPadding + fontWidth * rect.x(), topPadding + rect.y() * fontHeight),
+                         QSize(rect.width() * fontWidth, rect.height() * fontHeight));
+    if (!printerFriendly) {
+        drawImagesBelowText(paint, textArea, fontWidth, fontHeight, placementIdx);
+    }
+
+    static const QFont::Weight FontWeights[] = {
+        QFont::Thin,
+        QFont::Light,
+        QFont::Normal,
+        QFont::Bold,
+        QFont::Black,
+    };
+    const auto normalWeight = m_parentDisplay->font().weight();
+    auto it = std::upper_bound(std::begin(FontWeights), std::end(FontWeights), normalWeight);
+    const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
+    paint.setRenderHint(QPainter::Antialiasing, m_parentDisplay->terminalFont()->antialiasText());
+    paint.setLayoutDirection(Qt::LeftToRight);
 
     for (int y = rect.y(); y <= rect.bottom(); y++) {
         const int textY = topPadding + fontHeight * y;
-        int x = rect.x();
         bool doubleHeightLinePair = false;
+        int x = rect.x();
         LineProperty lineProperty = y < lineProperties.size() ? lineProperties[y] : 0;
 
         // Search for start of multi-column character
         if (image[m_parentDisplay->loc(rect.x(), y)].isRightHalfOfDoubleWide() && (x != 0)) {
             x--;
         }
+        QTransform textScale;
+        bool doubleHeight = false;
+        bool doubleWidthLine = false;
 
+        if ((lineProperty & LINE_DOUBLEWIDTH) != 0) {
+            textScale.scale(2, 1);
+            doubleWidthLine = true;
+        }
+
+        doubleHeight = lineProperty & (LINE_DOUBLEHEIGHT_TOP | LINE_DOUBLEHEIGHT_BOTTOM);
+        if (doubleHeight) {
+            textScale.scale(1, 2);
+        }
+
+        if (y < lineProperties.size() - 1) {
+            if (((lineProperties[y] & LINE_DOUBLEHEIGHT_TOP) != 0) && ((lineProperties[y + 1] & LINE_DOUBLEHEIGHT_BOTTOM) != 0)) {
+                doubleHeightLinePair = true;
+            }
+        }
+
+        // Apply text scaling matrix
+        paint.setWorldTransform(textScale, true);
+        // Calculate the area in which the text will be drawn
+        const int textX = leftPadding + fontWidth * rect.x() * (doubleWidthLine ? 2 : 1);
+        const int textWidth = fontWidth * rect.width();
+        const int textHeight = doubleHeight && !doubleHeightLinePair ? fontHeight / 2 : fontHeight;
+        int pos = m_parentDisplay->loc(0, y);
+
+        // move the calculated area to take account of scaling applied to the painter.
+        // the position of the area from the origin (0,0) is scaled
+        // by the opposite of whatever
+        // transformation has been applied to the painter.  this ensures that
+        // painting does actually start from textArea.topLeft()
+        //(instead of textArea.topLeft() * painter-scale)
+        QString line;
+#define MAX_LINE_WIDTH 1024
+        int log2line[MAX_LINE_WIDTH];
+        int line2log[MAX_LINE_WIDTH];
+        uint16_t shapemap[MAX_LINE_WIDTH];
+        int32_t vis2line[MAX_LINE_WIDTH];
+        int lastNonSpace = m_parentDisplay->bidiMap(image + pos, line, log2line, line2log, shapemap, vis2line, bidiEnabled, bidiEnabled);
+        const QRect textArea(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
+        if (!printerFriendly) {
+            drawBelowText(paint,
+                          textArea,
+                          image + pos,
+                          rect.x(),
+                          rect.width(),
+                          fontWidth,
+                          m_parentDisplay->terminalColor()->colorTable(),
+                          invertedRendition,
+                          vis2line,
+                          line2log,
+                          bidiEnabled);
+        }
+
+        RenditionFlags oldRendition = -1;
+        QColor oldColor = QColor();
         for (; x <= rect.right(); x++) {
-            int len = 1;
-            const int pos = m_parentDisplay->loc(x, y);
-            const Character char_value = image[pos];
-
-            // is this a single character or a sequence of characters ?
-            if ((char_value.rendition & RE_EXTENDED_CHAR) != 0) {
-                // sequence of characters
-                ushort extendedCharLength = 0;
-                const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(char_value.character, extendedCharLength);
-                if (chars != nullptr) {
-                    Q_ASSERT(extendedCharLength > 1);
-                    for (int index = 0; index < extendedCharLength; index++) {
-                        univec << chars[index];
-                    }
-                }
+            if (x > lastNonSpace) {
+                // What about the cursor?
+                // break;
+            }
+            int log_x;
+            int line_x;
+            if (bidiEnabled) {
+                line_x = vis2line[x];
+                log_x = line2log[line_x];
             } else {
-                if (!char_value.isRightHalfOfDoubleWide()) {
-                    univec << char_value.character;
-                }
+                log_x = x;
             }
 
-            // TODO: Move all those lambdas to Character, so it's easy to test.
-            const bool doubleWidth = image[qMin(pos + 1, imageSize - 1)].isRightHalfOfDoubleWide();
+            const Character char_value = image[pos + log_x];
 
-            const auto isInsideDrawArea = [rectRight = rect.right()](int column) {
-                return column <= rectRight;
-            };
-
-            const auto hasSameWidth = [imageSize, image, doubleWidth](int nextPos) {
-                const int characterLoc = qMin(nextPos + 1, imageSize - 1);
-                return image[characterLoc].isRightHalfOfDoubleWide() == doubleWidth;
-            };
-
-            if (char_value.canBeGrouped(bidiEnabled, doubleWidth)) {
-                while (isInsideDrawArea(x + len)) {
-                    const int nextPos = m_parentDisplay->loc(x + len, y);
-                    const Character next_char = image[nextPos];
-
-                    if (!hasSameWidth(nextPos) || !next_char.canBeGrouped(bidiEnabled, doubleWidth) || !char_value.hasSameAttributes(next_char)) {
-                        break;
-                    }
-
-                    const uint c = next_char.character;
-                    if ((next_char.rendition & RE_EXTENDED_CHAR) != 0) {
-                        // sequence of characters
-                        ushort extendedCharLength = 0;
-                        const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
-                        if (chars != nullptr) {
-                            Q_ASSERT(extendedCharLength > 1);
-                            for (int index = 0; index < extendedCharLength; index++) {
-                                univec << chars[index];
-                            }
-                        }
-                    } else {
-                        // single character
-                        if (c != 0u) {
-                            univec << c;
-                        }
-                    }
-
-                    if (doubleWidth) {
-                        len++;
-                    }
-                    len++;
-                }
-            } else {
-                // Group spaces following any non-wide character with the character. This allows for
-                // rendering ambiguous characters with wide glyphs without clipping them.
-                while (!doubleWidth && isInsideDrawArea(x + len)) {
-                    const Character next_char = image[m_parentDisplay->loc(x + len, y)];
-                    if (next_char.character == ' ' && char_value.hasSameColors(next_char) && char_value.hasSameRendition(next_char)) {
-                        univec << next_char.character;
-                        len++;
-                    } else {
-                        // break otherwise, we don't want to be stuck in this loop
-                        break;
-                    }
-                }
+            if (!printerFriendly && char_value.isSpace() && char_value.rendition.f.cursor == 0) {
+                continue;
             }
 
-            // Adjust for trailing part of multi-column character
-            if ((x + len < m_parentDisplay->usedColumns()) && image[m_parentDisplay->loc(x + len, y)].isRightHalfOfDoubleWide()) {
-                len++;
-            }
-
-            QTransform textScale;
-            bool doubleHeight = false;
-            bool doubleWidthLine = false;
-
-            if ((lineProperty & LINE_DOUBLEWIDTH) != 0) {
-                textScale.scale(2, 1);
-                doubleWidthLine = true;
-            }
-
-            doubleHeight = lineProperty & (LINE_DOUBLEHEIGHT_TOP | LINE_DOUBLEHEIGHT_BOTTOM);
-            if (doubleHeight) {
-                textScale.scale(1, 2);
-            }
-
-            if (y < lineProperties.size() - 1) {
-                if (((lineProperties[y] & LINE_DOUBLEHEIGHT_TOP) != 0) && ((lineProperties[y + 1] & LINE_DOUBLEHEIGHT_BOTTOM) != 0)) {
-                    doubleHeightLinePair = true;
-                }
-            }
-
-            // Apply text scaling matrix
-            paint.setWorldTransform(textScale, true);
-
-            // Calculate the area in which the text will be drawn
-            const int textX = leftPadding + fontWidth * x * (doubleWidthLine ? 2 : 1);
-            const int textWidth = fontWidth * len;
-            const int textHeight = doubleHeight && !doubleHeightLinePair ? fontHeight / 2 : fontHeight;
-
-            // move the calculated area to take account of scaling applied to the painter.
-            // the position of the area from the origin (0,0) is scaled
-            // by the opposite of whatever
-            // transformation has been applied to the painter.  this ensures that
-            // painting does actually start from textArea.topLeft()
-            //(instead of textArea.topLeft() * painter-scale)
-            const QRect textArea(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
-
-            const QString unistr = QString::fromUcs4(univec.data(), univec.length());
-
-            univec.clear();
+            const QString unistr = line.mid(log2line[log_x], log2line[log_x + 1] - log2line[log_x]);
 
             // paint text fragment
-            if (printerFriendly) {
-                drawPrinterFriendlyTextFragment(paint, textArea, unistr, image[pos], lineProperty);
-            } else {
-                drawTextFragment(paint, textArea, unistr, image[pos], m_parentDisplay->terminalColor()->colorTable(), invertedRendition, lineProperty);
+            if (unistr.length() && unistr[0] != QChar(0)) {
+                int textWidth = fontWidth * 1;
+                int textX = leftPadding + fontWidth * x * (doubleWidthLine ? 2 : 1);
+                const QRect textAreaOneChar(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
+                drawTextCharacters(paint,
+                                   textAreaOneChar,
+                                   unistr,
+                                   image[pos + log_x],
+                                   m_parentDisplay->terminalColor()->colorTable(),
+                                   invertedRendition,
+                                   lineProperty,
+                                   printerFriendly,
+                                   oldRendition,
+                                   oldColor,
+                                   normalWeight,
+                                   boldWeight);
             }
-
-            paint.setWorldTransform(textScale.inverted(), true);
-
-            x += len - 1;
         }
-        if ((lineProperty & LINE_PROMPT_START) != 0
+        if (!printerFriendly) {
+            drawAboveText(paint,
+                          textArea,
+                          image + pos,
+                          rect.x(),
+                          rect.width(),
+                          fontWidth,
+                          m_parentDisplay->terminalColor()->colorTable(),
+                          invertedRendition,
+                          vis2line,
+                          line2log,
+                          bidiEnabled,
+                          ulColorTable);
+        }
+
+        paint.setRenderHint(QPainter::Antialiasing, false);
+        paint.setWorldTransform(textScale.inverted(), true);
+        if ((lineProperty & LINE_PROMPT_START)
             && ((m_parentDisplay->semanticHints() == Enum::SemanticHintsURL && m_parentDisplay->filterChain()->showUrlHint())
                 || m_parentDisplay->semanticHints() == Enum::SemanticHintsAlways)) {
             QPen pen(m_parentDisplay->terminalColor()->foregroundColor());
@@ -250,6 +247,9 @@ void TerminalPainter::drawContents(Character *image,
         if (doubleHeightLinePair) {
             y++;
         }
+    }
+    if (!printerFriendly) {
+        drawImagesAboveText(paint, textArea, fontWidth, fontHeight, placementIdx);
     }
 }
 
@@ -395,129 +395,6 @@ static void reverseRendition(Character &p)
     p.backgroundColor = f;
 }
 
-void TerminalPainter::drawTextFragment(QPainter &painter,
-                                       const QRect &rect,
-                                       const QString &text,
-                                       Character style,
-                                       const QColor *colorTable,
-                                       const bool invertedRendition,
-                                       const LineProperty lineProperty)
-{
-    // setup painter
-
-    // Sets the text selection colors, either:
-    // - using reverseRendition(), which inverts the foreground/background
-    //   colors OR
-    // - blending the foreground/background colors
-    if (style.rendition & RE_SELECTED) {
-        if (invertedRendition) {
-            reverseRendition(style);
-        }
-    }
-
-    QColor foregroundColor = style.foregroundColor.color(colorTable);
-    QColor backgroundColor = style.backgroundColor.color(colorTable);
-
-    if (style.rendition & RE_SELECTED) {
-        if (!invertedRendition) {
-            backgroundColor = calculateBackgroundColor(style, colorTable).value_or(foregroundColor);
-            if (backgroundColor == foregroundColor) {
-                foregroundColor = style.backgroundColor.color(colorTable);
-            }
-        }
-    }
-
-    Screen *screen = m_parentDisplay->screenWindow()->screen();
-
-    int placementIdx = 0;
-    qreal opacity = painter.opacity();
-    int scrollDelta = m_parentDisplay->terminalFont()->fontHeight() * (m_parentDisplay->screenWindow()->currentLine() - screen->getHistLines());
-    const bool origClipping = painter.hasClipping();
-    const auto origClipRegion = painter.clipRegion();
-    if (screen->hasGraphics()) {
-        painter.setClipRect(rect);
-        while (1) {
-            TerminalGraphicsPlacement_t *p = screen->getGraphicsPlacement(placementIdx);
-            if (!p || p->z >= 0) {
-                break;
-            }
-            int x = p->col * m_parentDisplay->terminalFont()->fontWidth() + p->X + m_parentDisplay->contentRect().left();
-            int y = p->row * m_parentDisplay->terminalFont()->fontHeight() + p->Y + m_parentDisplay->contentRect().top();
-            QRectF srcRect(0, 0, p->pixmap.width(), p->pixmap.height());
-            QRectF dstRect(x, y - scrollDelta, p->pixmap.width(), p->pixmap.height());
-            painter.setOpacity(p->opacity);
-            painter.drawPixmap(dstRect, p->pixmap, srcRect);
-            placementIdx++;
-        }
-        painter.setOpacity(opacity);
-    }
-
-    bool drawBG = backgroundColor != colorTable[DEFAULT_BACK_COLOR];
-    if (screen->hasGraphics() && style.rendition == RE_TRANSPARENT) {
-        drawBG = false;
-    }
-
-    if (drawBG) {
-        drawBackground(painter, rect, backgroundColor, false);
-    }
-
-    QColor characterColor = foregroundColor;
-    if ((style.rendition & RE_CURSOR) != 0) {
-        drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
-    }
-    if (m_parentDisplay->filterChain()->showUrlHint()) {
-        if ((style.flags & EF_REPL) == EF_REPL_PROMPT) {
-            int h, s, v;
-            characterColor.getHsv(&h, &s, &v);
-            s = s / 2;
-            v = v / 2;
-            characterColor.setHsv(h, s, v);
-        }
-        if ((style.flags & EF_REPL) == EF_REPL_INPUT) {
-            int h, s, v;
-            characterColor.getHsv(&h, &s, &v);
-            s = (511 + s) / 3;
-            v = (511 + v) / 3;
-            characterColor.setHsv(h, s, v);
-        }
-    }
-
-    // draw text
-    drawCharacters(painter, rect, text, style, characterColor, lineProperty);
-
-    if (screen->hasGraphics()) {
-        while (1) {
-            TerminalGraphicsPlacement_t *p = screen->getGraphicsPlacement(placementIdx);
-            if (!p) {
-                break;
-            }
-            QPixmap image = p->pixmap;
-            int x = p->col * m_parentDisplay->terminalFont()->fontWidth() + p->X + m_parentDisplay->contentRect().left();
-            int y = p->row * m_parentDisplay->terminalFont()->fontHeight() + p->Y + m_parentDisplay->contentRect().top();
-            QRectF srcRect(0, 0, image.width(), image.height());
-            QRectF dstRect(x, y - scrollDelta, image.width(), image.height());
-            painter.setOpacity(p->opacity);
-            painter.drawPixmap(dstRect, image, srcRect);
-            placementIdx++;
-        }
-        painter.setOpacity(opacity);
-        painter.setClipRegion(origClipRegion);
-        painter.setClipping(origClipping);
-    }
-}
-
-void TerminalPainter::drawPrinterFriendlyTextFragment(QPainter &painter,
-                                                      const QRect &rect,
-                                                      const QString &text,
-                                                      Character style,
-                                                      const LineProperty lineProperty)
-{
-    style.foregroundColor = CharacterColor(COLOR_SPACE_RGB, 0x00000000);
-    style.backgroundColor = CharacterColor(COLOR_SPACE_RGB, 0xFFFFFFFF);
-
-    drawCharacters(painter, rect, text, style, QColor(), lineProperty);
-}
-
 void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting)
 {
     if (useOpacitySetting && !m_parentDisplay->wallpaper()->isNull()
@@ -595,11 +472,11 @@ void TerminalPainter::drawCharacters(QPainter &painter,
                                      const QColor &characterColor,
                                      const LineProperty lineProperty)
 {
-    if (m_parentDisplay->textBlinking() && ((style.rendition & RE_BLINK) != 0)) {
+    if (m_parentDisplay->textBlinking() && (style.rendition.f.blink != 0)) {
         return;
     }
 
-    if ((style.rendition & RE_CONCEAL) != 0) {
+    if (style.rendition.f.conceal != 0) {
         return;
     }
 
@@ -619,11 +496,11 @@ void TerminalPainter::drawCharacters(QPainter &painter,
     auto it = std::upper_bound(std::begin(FontWeights), std::end(FontWeights), normalWeight);
     const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
 
-    const bool useBold = (((style.rendition & RE_BOLD) != 0) && m_parentDisplay->terminalFont()->boldIntense());
-    const bool useUnderline = ((style.rendition & RE_UNDERLINE) != 0) || m_parentDisplay->font().underline();
-    const bool useItalic = ((style.rendition & RE_ITALIC) != 0) || m_parentDisplay->font().italic();
-    const bool useStrikeOut = ((style.rendition & RE_STRIKEOUT) != 0) || m_parentDisplay->font().strikeOut();
-    const bool useOverline = ((style.rendition & RE_OVERLINE) != 0) || m_parentDisplay->font().overline();
+    const bool useBold = ((style.rendition.f.bold != 0) && m_parentDisplay->terminalFont()->boldIntense());
+    const bool useUnderline = (style.rendition.f.underline != 0) || m_parentDisplay->font().underline();
+    const bool useItalic = (style.rendition.f.italic != 0) || m_parentDisplay->font().italic();
+    const bool useStrikeOut = (style.rendition.f.strikeout != 0) || m_parentDisplay->font().strikeOut();
+    const bool useOverline = (style.rendition.f.overline != 0) || m_parentDisplay->font().overline();
 
     QFont currentFont = painter.font();
 
@@ -633,7 +510,8 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         || currentFont.underline() != useUnderline
         || currentFont.italic() != useItalic
         || currentFont.strikeOut() != useStrikeOut
-        || currentFont.overline() != useOverline)
+        || currentFont.overline() != useOverline
+    )
     { // clang-format on
         currentFont.setWeight(useBold ? boldWeight : normalWeight);
         currentFont.setUnderline(useUnderline);
@@ -651,9 +529,6 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         pen.setColor(color);
         painter.setPen(color);
     }
-    const bool origClipping = painter.hasClipping();
-    const auto origClipRegion = painter.clipRegion();
-    painter.setClipRect(rect);
     // draw text
     if (isLineCharString(text) && !m_parentDisplay->terminalFont()->useFontLineCharacters()) {
         int y = rect.y();
@@ -687,21 +562,16 @@ void TerminalPainter::drawCharacters(QPainter &painter,
             y += m_parentDisplay->terminalFont()->lineSpacing() - shifted;
         }
     }
-    painter.setClipRegion(origClipRegion);
-    painter.setClipping(origClipping);
 }
 
 void TerminalPainter::drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character attributes)
 {
-    painter.setRenderHint(QPainter::Antialiasing, display->terminalFont()->antialiasText());
-
-    const bool useBoldPen = (attributes.rendition & RE_BOLD) != 0 && display->terminalFont()->boldIntense();
+    const bool useBoldPen = (attributes.rendition.f.bold) != 0 && display->terminalFont()->boldIntense();
     QRect cellRect = {x, y, display->terminalFont()->fontWidth(), display->terminalFont()->fontHeight()};
     QVector<uint> ucs4str = str.toUcs4();
     for (int i = 0; i < ucs4str.length(); i++) {
         LineBlockCharacters::draw(painter, cellRect.translated(i * display->terminalFont()->fontWidth(), 0), ucs4str[i], useBoldPen);
     }
-    painter.setRenderHint(QPainter::Antialiasing, false);
 }
 
 void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image)
@@ -724,4 +594,407 @@ void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRec
     inputMethodData.previousPreeditRect = rect;
 }
 
+void TerminalPainter::drawBelowText(QPainter &painter,
+                                    const QRect &rect,
+                                    Character *style,
+                                    int startX,
+                                    int width,
+                                    int fontWidth,
+                                    const QColor *colorTable,
+                                    const bool invertedRendition,
+                                    int *vis2line,
+                                    int *line2log,
+                                    bool bidiEnabled)
+{
+    // setup painter
+
+    bool first = true;
+    QRect constRect(0, 0, 0, 0);
+    QColor backgroundColor;
+    QColor foregroundColor;
+    bool drawBG = false;
+    int lastX = 0;
+
+    for (int i = 0;; i++) {
+        int x;
+        if (bidiEnabled && i < width) {
+            x = line2log[vis2line[i + startX]];
+        } else {
+            x = i + startX;
+        }
+
+        if (first || style[x].rendition.all != style[lastX].rendition.all || style[x].foregroundColor != style[lastX].foregroundColor
+            || style[x].backgroundColor != style[lastX].backgroundColor || i == width) {
+            if (first) {
+                first = false;
+            } else {
+                if (drawBG) {
+                    painter.fillRect(constRect, backgroundColor);
+                }
+            }
+            if (i == width) {
+                return;
+            }
+            // Sets the text selection colors, either:
+            // - using reverseRendition(), which inverts the foreground/background
+            //   colors OR
+            // - blending the foreground/background colors
+            if (style[x].rendition.f.selected && invertedRendition) {
+                backgroundColor = style[x].foregroundColor.color(colorTable);
+                foregroundColor = style[x].backgroundColor.color(colorTable);
+            } else {
+                foregroundColor = style[x].foregroundColor.color(colorTable);
+                backgroundColor = style[x].backgroundColor.color(colorTable);
+            }
+
+            if (style[x].rendition.f.selected) {
+                if (!invertedRendition) {
+                    backgroundColor = calculateBackgroundColor(style[x], colorTable).value_or(foregroundColor);
+                    if (backgroundColor == foregroundColor) {
+                        foregroundColor = style[x].backgroundColor.color(colorTable);
+                    }
+                }
+            }
+            drawBG = backgroundColor != colorTable[DEFAULT_BACK_COLOR];
+            if (style[x].rendition.f.transparent) {
+                drawBG = false;
+            }
+            constRect = QRect(rect.x() + fontWidth * i, rect.y(), fontWidth, rect.height());
+        } else {
+            constRect.setWidth(constRect.width() + fontWidth);
+        }
+        lastX = x;
+    }
+}
+
+void TerminalPainter::drawAboveText(QPainter &painter,
+                                    const QRect &rect,
+                                    Character *style,
+                                    int startX,
+                                    int width,
+                                    int fontWidth,
+                                    const QColor *colorTable,
+                                    const bool invertedRendition,
+                                    int *vis2line,
+                                    int *line2log,
+                                    bool bidiEnabled,
+                                    CharacterColor const *ulColorTable)
+{
+    bool first = true;
+    QRect constRect(0, 0, 0, 0);
+    QColor backgroundColor;
+    QColor foregroundColor;
+    int lastX = 0;
+    int startUnderline = -1;
+    int startOverline = -1;
+    int startStrikeOut = -1;
+
+    for (int i = 0;; i++) {
+        int x;
+        if (bidiEnabled && i < width) {
+            x = line2log[vis2line[i + startX]];
+        } else {
+            x = i + startX;
+        }
+
+        if (first || ((style[x].rendition.all ^ style[lastX].rendition.all) & RE_MASK_ABOVE) || ((style[x].flags ^ style[lastX].flags) & EF_UNDERLINE_COLOR)
+            || style[x].foregroundColor != style[lastX].foregroundColor || style[x].backgroundColor != style[lastX].backgroundColor || i == width) {
+            if (first) {
+                first = false;
+            } else {
+                if ((i == width || style[x].rendition.f.strikeout == 0) && startStrikeOut >= 0) {
+                    QPen pen(foregroundColor);
+                    int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent();
+                    pen.setWidth(m_parentDisplay->terminalFont()->lineWidth());
+                    painter.setPen(pen);
+                    painter.drawLine(rect.x() + fontWidth * startStrikeOut,
+                                     y - m_parentDisplay->terminalFont()->strikeOutPos(),
+                                     rect.x() + fontWidth * i - 1,
+                                     y - m_parentDisplay->terminalFont()->strikeOutPos());
+                    startStrikeOut = -1;
+                }
+                if ((i == width || style[x].rendition.f.overline == 0) && startOverline >= 0) {
+                    QPen pen(foregroundColor);
+                    int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent();
+                    pen.setWidth(m_parentDisplay->terminalFont()->lineWidth());
+                    painter.setPen(pen);
+                    painter.drawLine(rect.x() + fontWidth * startOverline,
+                                     y - m_parentDisplay->terminalFont()->overlinePos(),
+                                     rect.x() + fontWidth * i - 1,
+                                     y - m_parentDisplay->terminalFont()->overlinePos());
+                    startOverline = -1;
+                }
+                int underline = style[lastX].rendition.f.underline;
+                if ((i == width || style[x].rendition.f.underline != underline || ((style[x].flags ^ style[lastX].flags) & EF_UNDERLINE_COLOR))
+                    && startUnderline >= 0) {
+                    QPen pen(foregroundColor);
+                    if (ulColorTable != nullptr && (style[lastX].flags & EF_UNDERLINE_COLOR) != 0) {
+                        pen.setColor(ulColorTable[((style[lastX].flags & EF_UNDERLINE_COLOR)) / EF_UNDERLINE_COLOR_1 - 1].color(colorTable));
+                    }
+                    int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->underlinePos()
+                        + m_parentDisplay->terminalFont()->lineWidth();
+                    int lw = m_parentDisplay->terminalFont()->lineWidth();
+                    if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
+                        y = rect.bottom() - 1;
+                        lw = 1;
+                    } else {
+                        if (lw + lw + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->underlinePos() > rect.height()) {
+                            lw = rect.height() - m_parentDisplay->terminalFont()->fontAscent() - m_parentDisplay->terminalFont()->underlinePos() - lw;
+                        }
+                    }
+                    pen.setWidth(lw);
+                    if (underline == RE_UNDERLINE_DOT) {
+                        pen.setStyle(Qt::DotLine);
+                    } else if (underline == RE_UNDERLINE_DASH) {
+                        pen.setStyle(Qt::DashLine);
+                    }
+                    if (underline == RE_UNDERLINE_CURL) {
+                        QVector<qreal> dashes(2, 2);
+                        pen.setDashPattern(dashes);
+                    }
+                    painter.setPen(pen);
+                    painter.drawLine(rect.x() + fontWidth * startUnderline, y, rect.x() + fontWidth * i - 1, y);
+                    if (underline == RE_UNDERLINE_DOUBLE) {
+                        painter.drawLine(rect.x() + fontWidth * startUnderline, y - 2, rect.x() + fontWidth * i - 1, y - 2);
+                    }
+                    if (underline == RE_UNDERLINE_CURL) {
+                        painter.drawLine(rect.x() + fontWidth * startUnderline + 2, y - 1, rect.x() + fontWidth * i - 1, y - 1);
+                    }
+
+                    startUnderline = -1;
+                }
+            }
+            if (i == width) {
+                return;
+            }
+            // Sets the text selection colors, either:
+            // - using reverseRendition(), which inverts the foreground/background
+            //   colors OR
+            // - blending the foreground/background colors
+            if (style[x].rendition.f.selected && invertedRendition) {
+                backgroundColor = style[x].foregroundColor.color(colorTable);
+                foregroundColor = style[x].backgroundColor.color(colorTable);
+            } else {
+                foregroundColor = style[x].foregroundColor.color(colorTable);
+                backgroundColor = style[x].backgroundColor.color(colorTable);
+            }
+
+            if (style[x].rendition.f.selected) {
+                if (!invertedRendition) {
+                    backgroundColor = calculateBackgroundColor(style[x], colorTable).value_or(foregroundColor);
+                    if (backgroundColor == foregroundColor) {
+                        foregroundColor = style[x].backgroundColor.color(colorTable);
+                    }
+                }
+            }
+            if (style[x].rendition.f.strikeout && startStrikeOut == -1) {
+                startStrikeOut = i;
+            }
+            if (style[x].rendition.f.overline && startOverline == -1) {
+                startOverline = i;
+            }
+            if (style[x].rendition.f.underline && startUnderline == -1) {
+                startUnderline = i;
+            }
+            lastX = x;
+        }
+    }
+}
+
+void TerminalPainter::drawImagesBelowText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx)
+{
+    Screen *screen = m_parentDisplay->screenWindow()->screen();
+
+    placementIdx = 0;
+    qreal opacity = painter.opacity();
+    int scrollDelta = m_parentDisplay->terminalFont()->fontHeight() * (m_parentDisplay->screenWindow()->currentLine() - screen->getHistLines());
+    const bool origClipping = painter.hasClipping();
+    const auto origClipRegion = painter.clipRegion();
+    if (screen->hasGraphics()) {
+        painter.setClipRect(rect);
+        while (1) {
+            TerminalGraphicsPlacement_t *p = screen->getGraphicsPlacement(placementIdx);
+            if (!p || p->z >= 0) {
+                break;
+            }
+            int x = p->col * fontWidth + p->X + m_parentDisplay->contentRect().left();
+            int y = p->row * fontHeight + p->Y + m_parentDisplay->contentRect().top();
+            QRectF srcRect(0, 0, p->pixmap.width(), p->pixmap.height());
+            QRectF dstRect(x, y - scrollDelta, p->pixmap.width(), p->pixmap.height());
+            painter.setOpacity(p->opacity);
+            painter.drawPixmap(dstRect, p->pixmap, srcRect);
+            placementIdx++;
+        }
+        painter.setOpacity(opacity);
+        painter.setClipRegion(origClipRegion);
+        painter.setClipping(origClipping);
+    }
+}
+
+void TerminalPainter::drawImagesAboveText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx)
+{
+    // setup painter
+    Screen *screen = m_parentDisplay->screenWindow()->screen();
+
+    qreal opacity = painter.opacity();
+    int scrollDelta = fontHeight * (m_parentDisplay->screenWindow()->currentLine() - screen->getHistLines());
+    const bool origClipping = painter.hasClipping();
+    const auto origClipRegion = painter.clipRegion();
+
+    if (screen->hasGraphics()) {
+        painter.setClipRect(rect);
+        while (1) {
+            TerminalGraphicsPlacement_t *p = screen->getGraphicsPlacement(placementIdx);
+            if (!p) {
+                break;
+            }
+            QPixmap image = p->pixmap;
+            int x = p->col * fontWidth + p->X + m_parentDisplay->contentRect().left();
+            int y = p->row * fontHeight + p->Y + m_parentDisplay->contentRect().top();
+            QRectF srcRect(0, 0, image.width(), image.height());
+            QRectF dstRect(x, y - scrollDelta, image.width(), image.height());
+            painter.setOpacity(p->opacity);
+            painter.drawPixmap(dstRect, image, srcRect);
+            placementIdx++;
+        }
+        painter.setOpacity(opacity);
+        painter.setClipRegion(origClipRegion);
+        painter.setClipping(origClipping);
+    }
+}
+
+void TerminalPainter::drawTextCharacters(QPainter &painter,
+                                         const QRect &rect,
+                                         const QString &text,
+                                         Character style,
+                                         const QColor *colorTable,
+                                         const bool invertedRendition,
+                                         const LineProperty lineProperty,
+                                         bool printerFriendly,
+                                         RenditionFlags &oldRendition,
+                                         QColor oldColor,
+                                         int normalWeight,
+                                         QFont::Weight boldWeight)
+{
+    // setup painter
+    if (style.rendition.f.conceal != 0) {
+        return;
+    }
+    QColor characterColor;
+    if (!printerFriendly) {
+        // Sets the text selection colors, either:
+        // - invertedRendition, which inverts the foreground/background colors OR
+        // - blending the foreground/background colors
+        if (m_parentDisplay->textBlinking() && (style.rendition.f.blink != 0)) {
+            return;
+        }
+
+        if (style.rendition.f.selected) {
+            if (invertedRendition) {
+                reverseRendition(style);
+            }
+        }
+
+        QColor foregroundColor = style.foregroundColor.color(colorTable);
+        QColor backgroundColor = style.backgroundColor.color(colorTable);
+
+        if (style.rendition.f.selected) {
+            if (!invertedRendition) {
+                backgroundColor = calculateBackgroundColor(style, colorTable).value_or(foregroundColor);
+                if (backgroundColor == foregroundColor) {
+                    foregroundColor = style.backgroundColor.color(colorTable);
+                }
+            }
+        }
+
+        characterColor = foregroundColor;
+        if (style.rendition.f.cursor != 0) {
+            drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
+        }
+        if (m_parentDisplay->filterChain()->showUrlHint()) {
+            if ((style.flags & EF_REPL) == EF_REPL_PROMPT) {
+                int h, s, v;
+                characterColor.getHsv(&h, &s, &v);
+                s = s / 2;
+                v = v / 2;
+                characterColor.setHsv(h, s, v);
+            }
+            if ((style.flags & EF_REPL) == EF_REPL_INPUT) {
+                int h, s, v;
+                characterColor.getHsv(&h, &s, &v);
+                s = (511 + s) / 3;
+                v = (511 + v) / 3;
+                characterColor.setHsv(h, s, v);
+            }
+        }
+    } else {
+        characterColor = QColor(0, 0, 0);
+    }
+
+    // The weight used as bold depends on selected font's weight.
+    // "Regular" will use "Bold", but e.g. "Thin" will use "Light".
+    // Note that QFont::weight/setWeight() returns/takes an int in Qt5,
+    // and a QFont::Weight in Qt6
+    QFont savedFont;
+    bool restoreFont = false;
+    if ((style.flags & EF_EMOJI_REPRESENTATION) && m_parentDisplay->terminalFont()->hasExtraFont(0)) {
+        savedFont = painter.font();
+        restoreFont = true;
+        painter.setFont(m_parentDisplay->terminalFont()->getExtraFont(0));
+    } else {
+        if (oldRendition != style.rendition.all) {
+            const bool useBold = ((style.rendition.f.bold != 0) && m_parentDisplay->terminalFont()->boldIntense());
+            const bool useItalic = (style.rendition.f.italic != 0) || m_parentDisplay->font().italic();
+
+            QFont currentFont = painter.font();
+
+            const bool isCurrentBold = currentFont.weight() >= boldWeight;
+            if (isCurrentBold != useBold || currentFont.italic() != useItalic) {
+                currentFont.setWeight(useBold ? boldWeight : normalWeight);
+                currentFont.setItalic(useItalic);
+                painter.setFont(currentFont);
+            }
+        }
+    }
+
+    if (characterColor != oldColor) {
+        QPen pen = painter.pen();
+        if (pen.color() != characterColor) {
+            painter.setPen(characterColor);
+        }
+    }
+    // const bool origClipping = painter.hasClipping();
+    // const auto origClipRegion = painter.clipRegion();
+    // painter.setClipRect(rect);
+    // draw text
+    if (isLineCharString(text) && !m_parentDisplay->terminalFont()->useFontLineCharacters()) {
+        int y = rect.y();
+
+        if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
+            y -= m_parentDisplay->terminalFont()->fontHeight() / 2;
+        }
+
+        drawLineCharString(m_parentDisplay, painter, rect.x(), y, text, style);
+    } else {
+        int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent();
+
+        if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
+            y -= m_parentDisplay->terminalFont()->fontHeight() / 2;
+        } else {
+            // We shift half way down here to center
+            y += m_parentDisplay->terminalFont()->lineSpacing() / 2;
+        }
+        painter.drawText(rect.x(), y, text);
+        if (0 && text.toUcs4().length() > 1) {
+            fprintf(stderr, " %i  ", text.toUcs4().length());
+            for (int i = 0; i < text.toUcs4().length(); i++) {
+                fprintf(stderr, " %04x  ", text.toUcs4()[i]);
+            }
+            fprintf(stderr, "\n");
+        }
+    }
+    if (restoreFont) {
+        painter.setFont(savedFont);
+    }
+}
 }

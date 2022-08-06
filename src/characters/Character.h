@@ -22,7 +22,27 @@ namespace Konsole
 {
 typedef quint32 LineProperty;
 
+#pragma pack(1)
+typedef union {
+    quint16 all;
+    struct {
+        uint bold : 1;
+        uint blink : 1;
+        uint transparent : 1;
+        uint reverse : 1;
+        uint italic : 1;
+        uint cursor : 1;
+        uint extended : 1;
+        uint faint : 1;
+        uint strikeout : 1;
+        uint conceal : 1;
+        uint overline : 1;
+        uint selected : 1;
+        uint underline : 4;
+    } f;
+} RenditionFlagsC;
 typedef quint16 RenditionFlags;
+#pragma pack()
 
 typedef quint16 ExtraFlags;
 
@@ -41,7 +61,7 @@ const int LINE_LEN_MASK             = (0xfff << LINE_LEN_POS);
 const RenditionFlags DEFAULT_RENDITION  = 0;
 const RenditionFlags RE_BOLD            = (1 << 0);
 const RenditionFlags RE_BLINK           = (1 << 1);
-const RenditionFlags RE_UNDERLINE       = (1 << 2);
+const RenditionFlags RE_TRANSPARENT     = (1 << 2);
 const RenditionFlags RE_REVERSE         = (1 << 3); // Screen only
 const RenditionFlags RE_ITALIC          = (1 << 4);
 const RenditionFlags RE_CURSOR          = (1 << 5);
@@ -51,7 +71,17 @@ const RenditionFlags RE_STRIKEOUT       = (1 << 8);
 const RenditionFlags RE_CONCEAL         = (1 << 9);
 const RenditionFlags RE_OVERLINE        = (1 << 10);
 const RenditionFlags RE_SELECTED        = (1 << 11);
-const RenditionFlags RE_TRANSPARENT        = (1 << 12);
+const RenditionFlags RE_UNDERLINE_MASK  = (15 << 12);
+const RenditionFlags RE_UNDERLINE_NONE  = 0;
+const RenditionFlags RE_UNDERLINE       = 1;
+const RenditionFlags RE_UNDERLINE_DOUBLE= 2;
+const RenditionFlags RE_UNDERLINE_CURL  = 3;
+const RenditionFlags RE_UNDERLINE_DOT   = 4;
+const RenditionFlags RE_UNDERLINE_DASH  = 5;
+// Masks of flags that matter for drawing what is below/above the text
+const RenditionFlags RE_MASK_UNDER = RE_TRANSPARENT | RE_REVERSE | RE_CURSOR | RE_SELECTED;
+const RenditionFlags RE_MASK_ABOVE = RE_TRANSPARENT | RE_REVERSE | RE_CURSOR | RE_SELECTED | RE_STRIKEOUT | RE_CONCEAL | RE_OVERLINE | RE_UNDERLINE_MASK;
+
 
 const ExtraFlags EF_UNREAL       = 0;
 const ExtraFlags EF_REAL         = (1 << 0);
@@ -60,7 +90,11 @@ const ExtraFlags EF_REPL_NONE    = (0 << 1);
 const ExtraFlags EF_REPL_PROMPT  = (1 << 1);
 const ExtraFlags EF_REPL_INPUT   = (2 << 1);
 const ExtraFlags EF_REPL_OUTPUT  = (3 << 1);
+const ExtraFlags EF_UNDERLINE_COLOR = (15 << 3);
+const ExtraFlags EF_UNDERLINE_COLOR_1 = (1 << 3);
+const ExtraFlags EF_EMOJI_REPRESENTATION = (1 << 7);
 
+#define SetULColor(f, m) (((f) & ~EF_UNDERLINE_COLOR) | ((m) * EF_UNDERLINE_COLOR_1))
 #define setRepl(f, m) (((f) & ~EF_REPL) | ((m) * EF_REPL_PROMPT))
 #define LineLength(f) static_cast<int>(((f) & LINE_LEN_MASK) >> LINE_LEN_POS)
 #define SetLineLength(f, l) (((f) & ~LINE_LEN_MASK) | ((l) << LINE_LEN_POS))
@@ -90,7 +124,7 @@ public:
                                  RenditionFlags _r = DEFAULT_RENDITION,
                                  ExtraFlags _flags = EF_REAL)
         : character(_c)
-        , rendition(_r)
+        , rendition({_r})
         , foregroundColor(_f)
         , backgroundColor(_b)
         , flags(_flags)
@@ -106,7 +140,7 @@ public:
     uint character;
 
     /** A combination of RENDITION flags which specify options for drawing the character. */
-    RenditionFlags rendition;
+    RenditionFlagsC rendition;
 
     /** The foreground color used to draw this character. */
     CharacterColor foregroundColor;
@@ -114,14 +148,10 @@ public:
     /** The color used to draw this character's background. */
     CharacterColor backgroundColor;
 
-    /** Indicate whether this character really exists, or exists simply as place holder.
-     *
-     *  TODO: this boolean filed can be further improved to become a enum filed, which
-     *  indicates different roles:
-     *
-     *    RealCharacter: a character which really exists
-     *    PlaceHolderCharacter: a character which exists as place holder
-     *    TabStopCharacter: a special place holder for HT("\t")
+    /** Flags which are not specific to rendition
+     * Indicate whether this character really exists, or exists simply as place holder.
+     * REPL mode
+     * Character type (script, etc.)
      */
     ExtraFlags flags;
 
@@ -144,7 +174,7 @@ public:
 
     constexpr bool isSpace() const
     {
-        if (rendition & RE_EXTENDED_CHAR) {
+        if (rendition.f.extended) {
             return false;
         } else {
             return QChar(character).isSpace();
@@ -159,6 +189,79 @@ public:
     int repl() const
     {
         return flags & EF_REPL;
+    }
+
+    static constexpr int emojiPresentation1Start = 8986;
+    static constexpr int emojiPresentation1End = 11093;
+    static constexpr int emojiPresentation2Start = 126980;
+    static constexpr int emojiPresentation2End = 129782;
+    /* clang-format off */
+    static constexpr uint64_t emojiPresentation1Bits[] = {
+        0x3, 0x0, 0x0, 0x2478000, 0x0, 0x0, 0x0, 0x0,
+        0x0, 0x0, 0x0, 0xc00001800000000, 0x3ffc00000000000, 0x200002000000000, 0x4100c1800030080, 0x308090b010000,
+        0x2e14000000004000, 0x3800000000000000, 0x2000400000, 0x0, 0x0, 0x0, 0x0, 0x0,
+        0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+        0x840000000000006
+    };
+    static constexpr uint64_t emojiPresentation2Bits[] = {
+        0x1, 0x0, 0x0, 0x800, 0x0, 0x0, 0x7fe400, 0x2ffffffc00000000,
+        0x77c80000400000, 0x3000, 0x0, 0xf000000000000000,
+        0xfffbfe001fffffff, 0xfdffffffffffffff, 0xfffffffff000ffff, 0xfff11ffff000f87f,
+        0xd7ffffffffffffff, 0xffffffffffffffff, 0xffffffffffffffff, 0xf9ffffffffffffff,
+        0x3ffffffffffffff, 0x40000ffffff780, 0x100060000, 0xff80000000000000,
+        0xffffffffffffffff, 0xf000000000000fff, 0xffffffffffffffff, 0x1ff01800e0e7103, 0x0, 0x0, 0x0, 0x10fff0000000,
+        0x0, 0x0, 0x0, 0x0, 0xff7fffffffffff00, 0xfffffffffffffffb, 0xffffffffffffffff, 0xfffffffffffffff,
+        0x0, 0xf1f1f00000000000, 0xf07ff1fffffff007, 0x7f00ff03ff003
+    };
+    /* clang-format on */
+
+    static bool emojiPresentation(uint ucs4)
+    {
+        if (ucs4 >= emojiPresentation1Start && ucs4 <= emojiPresentation1End) {
+            return (emojiPresentation1Bits[(ucs4 - emojiPresentation1Start) / 64] & (1l << ((ucs4 - emojiPresentation1Start) % 64))) != 0;
+        } else if (ucs4 >= emojiPresentation2Start && ucs4 <= emojiPresentation2End) {
+            return (emojiPresentation2Bits[(ucs4 - emojiPresentation2Start) / 64] & (1l << ((ucs4 - emojiPresentation2Start) % 64))) != 0;
+        }
+        return false;
+    }
+
+    static constexpr int emoji1Start = 8252;
+    static constexpr int emoji1End = 12953;
+    static constexpr int emoji2Start = 126980;
+    static constexpr int emoji2End = 129782;
+    /* clang-format off */
+    static constexpr uint64_t emoji1Bits[] = {
+        0x2001, 0x0, 0x0, 0x2000004000000000, 0x0, 0x60003f000000, 0x0, 0x0,
+        0x0, 0x0, 0x0, 0x1000c0000000, 0x0, 0x0, 0x70ffe00000080000, 0x0,
+        0x0, 0x0, 0x40, 0x0, 0x0, 0x400c00000000000, 0x8000000000000010, 0x700c44d2132401f7,
+        0x8000169800fff050, 0x30c831afc0000c, 0x7bf0600001ac1306, 0x1801022054bf242, 0x1800b850900, 0x1000200e000000, 0x8, 0x0,
+        0x0, 0x0, 0x0, 0x300000000000000, 0x0, 0x0, 0x0, 0x0,
+        0x0, 0x0, 0x0, 0x180000e00, 0x2100000, 0x0, 0x0, 0x0,
+        0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+        0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10000000000000,
+        0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+        0x0, 0x28000000
+    };
+    static constexpr uint64_t emoji2Bits[] = {
+        0x1, 0x0, 0x0, 0x800, 0x0, 0xc00300000000000, 0x7fe400, 0x6ffffffc00000000,
+        0x7fc80000400000, 0x3000, 0x0, 0xf000000000000000,
+        0xffffffff3fffffff, 0xffffffffffffffff, 0xfffffffffcecffff, 0xfffb9fffffffffff,
+        0xffffffffffffffff, 0xffffffffffffffff, 0xffffffffffffffff, 0xfbffffffffffffff,
+        0x3ffffffffffffff, 0x7f980ffffff7e0, 0xc1006013000613c8, 0xffc08810a700e001,
+        0xffffffffffffffff, 0xf000000000000fff, 0xffffffffffffffff, 0x1ff91a3fe0e7f83, 0x0, 0x0, 0x0, 0x10fff0000000,
+        0x0, 0x0, 0x0, 0x0, 0xff7fffffffffff00, 0xfffffffffffffffb, 0xffffffffffffffff, 0xfffffffffffffff,
+        0x0, 0xf1f1f00000000000, 0xf07ff1fffffff007, 0x7f00ff03ff003
+    };
+    /* clang-format on */
+
+    static bool emoji(uint ucs4)
+    {
+        if (ucs4 >= emoji1Start && ucs4 <= emoji1End) {
+            return (emoji1Bits[(ucs4 - emoji1Start) / 64] & (1l << ((ucs4 - emoji1Start) % 64))) != 0;
+        } else if (ucs4 >= emoji2Start && ucs4 <= emoji2End) {
+            return (emoji2Bits[(ucs4 - emoji2Start) / 64] & (1l << ((ucs4 - emoji2Start) % 64))) != 0;
+        }
+        return false;
     }
 
     static int width(uint ucs4)
@@ -205,22 +308,9 @@ public:
         return stringWidth(ucs4Str.constData(), ucs4Str.length());
     }
 
-    inline bool canBeGrouped(bool bidirectionalEnabled, bool isDoubleWidth) const
-    {
-        if (character <= 0x7e) {
-            return true;
-        }
-
-        if (QChar::script(character) == QChar::Script_Braille) {
-            return false;
-        }
-
-        return (rendition & RE_EXTENDED_CHAR) || (bidirectionalEnabled && !isDoubleWidth);
-    }
-
     inline uint baseCodePoint() const
     {
-        if (rendition & RE_EXTENDED_CHAR) {
+        if (rendition.f.extended) {
             ushort extendedCharLength = 0;
             const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(character, extendedCharLength);
             // FIXME: Coverity-Dereferencing chars, which is known to be nullptr
@@ -247,7 +337,7 @@ public:
 
     inline bool hasSameRendition(Character lhs) const
     {
-        return (lhs.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR) && lhs.flags == flags;
+        return (lhs.rendition.all & ~RE_EXTENDED_CHAR) == (rendition.all & ~RE_EXTENDED_CHAR) && lhs.flags == flags;
     };
 
     inline bool hasSameLineDrawStatus(Character lhs) const
@@ -284,7 +374,7 @@ constexpr bool operator!=(const Character &a, const Character &b)
 
 constexpr bool Character::equalsFormat(const Character &other) const
 {
-    return backgroundColor == other.backgroundColor && foregroundColor == other.foregroundColor && rendition == other.rendition;
+    return backgroundColor == other.backgroundColor && foregroundColor == other.foregroundColor && rendition.all == other.rendition.all;
 }
 }
 Q_DECLARE_TYPEINFO(Konsole::Character, Q_MOVABLE_TYPE);

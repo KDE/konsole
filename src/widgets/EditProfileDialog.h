@@ -151,6 +151,9 @@ private Q_SLOTS:
     void terminalMarginChanged(int margin);
     void lineSpacingChanged(int);
     void setTerminalCenter(bool enable);
+    void togglebidiRendering(bool);
+    void togglebidiTableDirOverride(bool);
+    void togglebidiLineLTR(bool);
 
 #if KNEWSTUFF_VERSION >= QT_VERSION_CHECK(5, 91, 0)
     void gotNewColorSchemes(const QList<KNSCore::EntryInternal> &changedEntries);
@@ -168,6 +171,7 @@ private Q_SLOTS:
     void colorSchemeSelected();
     void previewColorScheme(const QModelIndex &index);
     void showFontDialog();
+    void showEmojiFontDialog();
     void toggleMouseWheelZoom(bool enable);
 
     // scrolling page
@@ -210,7 +214,6 @@ private Q_SLOTS:
     // advanced page
     void toggleBlinkingText(bool);
     void toggleFlowControl(bool);
-    void togglebidiRendering(bool);
     void updateUrlHintsModifier(bool);
     void toggleReverseUrlHints(bool);
 
@@ -280,6 +283,7 @@ private:
     void updateTransparencyWarning();
 
     void updateFontPreview(QFont font);
+    void updateEmojiFontPreview(QFont font);
 
     // Update _tempProfile in a way of respecting the apply button.
     // When used with some previewed property, this method should
@@ -347,6 +351,7 @@ private:
     ColorSchemeEditor *_colorDialog = nullptr;
     QDialogButtonBox *_buttonBox = nullptr;
     FontDialog *_fontDialog = nullptr;
+    FontDialog *_emojiFontDialog = nullptr;
 
     InitialProfileState _profileState = ExistingProfile;
 };

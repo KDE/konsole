@@ -697,6 +697,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 
     connect(_appearanceUi->chooseFontButton, &QAbstractButton::clicked, this, &EditProfileDialog::showFontDialog);
 
+    connect(_appearanceUi->emojiFontPreview, &QAbstractButton::clicked, this, &EditProfileDialog::showEmojiFontDialog);
+
     // setup font preview
     const bool antialias = profile->antiAliasFonts();
 
@@ -705,6 +707,10 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 
     _appearanceUi->fontPreview->setFont(profileFont);
     _appearanceUi->fontPreview->setText(QStringLiteral("%1 %2pt").arg(profileFont.family()).arg(profileFont.pointSize()));
+
+    QFont emojiFont = profile->emojiFont();
+    _appearanceUi->emojiFontPreview->setFont(profileFont);
+    _appearanceUi->emojiFontPreview->setText(QStringLiteral("%1 %2pt").arg(emojiFont.family()).arg(emojiFont.pointSize()));
 
     // setup font smoothing
     _appearanceUi->antialiasTextButton->setChecked(antialias);
@@ -791,6 +797,17 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     getNewButton->setText(QStringLiteral("Get New..."));
     getNewButton->setConfigFile(QStringLiteral("konsole.knsrc"));
     _appearanceUi->colorSchemesBtnLayout->addWidget(getNewButton);
+
+    _appearanceUi->enableBidiRenderingButton->setChecked(profile->bidiRenderingEnabled());
+    connect(_appearanceUi->enableBidiRenderingButton, &QPushButton::toggled, this, &EditProfileDialog::togglebidiRendering);
+
+    _appearanceUi->enableBidiTableDirOverrideButton->setChecked(profile->property<bool>(Profile::BidiTableDirOverride));
+    connect(_appearanceUi->enableBidiTableDirOverrideButton, &QPushButton::toggled, this, &EditProfileDialog::togglebidiTableDirOverride);
+    _appearanceUi->enableBidiTableDirOverrideButton->setEnabled(profile->bidiRenderingEnabled());
+
+    _appearanceUi->bidiLineLTR->setChecked(profile->property<bool>(Profile::BidiLineLTR));
+    connect(_appearanceUi->bidiLineLTR, &QPushButton::toggled, this, &EditProfileDialog::togglebidiLineLTR);
+    _appearanceUi->bidiLineLTR->setEnabled(profile->bidiRenderingEnabled());
 }
 
 void EditProfileDialog::setAntialiasText(bool enable)
@@ -1076,9 +1093,31 @@ void EditProfileDialog::showFontDialog()
             updateFontPreview(_profile->font());
         });
     }
-
     _fontDialog->setFont(_profile->font());
     _fontDialog->show();
+}
+
+void EditProfileDialog::showEmojiFontDialog()
+{
+    if (_emojiFontDialog == nullptr) {
+        _emojiFontDialog = new FontDialog(this, true, _profile->emojiFont());
+        _emojiFontDialog->setModal(true);
+        connect(_emojiFontDialog, &FontDialog::fontChanged, this, [this](const QFont &font) {
+            preview(Profile::EmojiFont, font);
+            updateEmojiFontPreview(font);
+        });
+        connect(_emojiFontDialog, &FontDialog::accepted, this, [this]() {
+            const QFont font = _emojiFontDialog->font();
+            preview(Profile::EmojiFont, font);
+            updateTempProfileProperty(Profile::EmojiFont, font);
+            updateEmojiFontPreview(font);
+        });
+        connect(_emojiFontDialog, &FontDialog::rejected, this, [this]() {
+            unpreview(Profile::EmojiFont);
+            updateEmojiFontPreview(_profile->emojiFont());
+        });
+    }
+    _emojiFontDialog->show();
 }
 
 void EditProfileDialog::updateFontPreview(QFont font)
@@ -1088,6 +1127,15 @@ void EditProfileDialog::updateFontPreview(QFont font)
 
     _appearanceUi->fontPreview->setFont(font);
     _appearanceUi->fontPreview->setText(QStringLiteral("%1 %2pt").arg(font.family()).arg(font.pointSize()));
+}
+
+void EditProfileDialog::updateEmojiFontPreview(QFont font)
+{
+    bool aa = _profile->antiAliasFonts();
+    font.setStyleStrategy(aa ? QFont::PreferAntialias : QFont::NoAntialias);
+    QFont emojiFont = _profile->emojiFont();
+    _appearanceUi->emojiFontPreview->setFont(_profile->font());
+    _appearanceUi->emojiFontPreview->setText(QStringLiteral("%1 %2pt").arg(emojiFont.family()).arg(emojiFont.pointSize()));
 }
 
 void EditProfileDialog::removeColorScheme()
@@ -1732,8 +1780,6 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
     connect(_advancedUi->enableFlowControlButton, &QPushButton::toggled, this, &EditProfileDialog::toggleFlowControl);
     _appearanceUi->enableBlinkingCursorButton->setChecked(profile->property<bool>(Profile::BlinkingCursorEnabled));
     connect(_appearanceUi->enableBlinkingCursorButton, &QPushButton::toggled, this, &EditProfileDialog::toggleBlinkingCursor);
-    _advancedUi->enableBidiRenderingButton->setChecked(profile->property<bool>(Profile::BidiRenderingEnabled));
-    connect(_advancedUi->enableBidiRenderingButton, &QPushButton::toggled, this, &EditProfileDialog::togglebidiRendering);
     _advancedUi->enableReverseUrlHints->setChecked(profile->property<bool>(Profile::ReverseUrlHints));
     connect(_advancedUi->enableReverseUrlHints, &QPushButton::toggled, this, &EditProfileDialog::toggleReverseUrlHints);
 
@@ -1820,6 +1866,18 @@ void EditProfileDialog::wordCharactersChanged(const QString &text)
 void EditProfileDialog::togglebidiRendering(bool enable)
 {
     updateTempProfileProperty(Profile::BidiRenderingEnabled, enable);
+    _appearanceUi->enableBidiTableDirOverrideButton->setEnabled(enable);
+    _appearanceUi->bidiLineLTR->setEnabled(enable);
+}
+
+void EditProfileDialog::togglebidiTableDirOverride(bool enable)
+{
+    updateTempProfileProperty(Profile::BidiTableDirOverride, enable);
+}
+
+void EditProfileDialog::togglebidiLineLTR(bool enable)
+{
+    updateTempProfileProperty(Profile::BidiLineLTR, enable);
 }
 
 void EditProfileDialog::toggleUnderlineLinks(bool enable)

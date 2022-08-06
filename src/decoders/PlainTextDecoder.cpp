@@ -110,7 +110,7 @@ void PlainTextDecoder::decodeLine(const Character *const characters, int count, 
     characterBuffer.reserve(count);
 
     for (int i = start; i < outputCount;) {
-        if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
+        if (characters[i].rendition.f.extended != 0) {
             ushort extendedCharLength = 0;
             const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
             if (chars != nullptr) {
