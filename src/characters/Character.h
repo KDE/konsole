@@ -78,6 +78,7 @@ const RenditionFlags RE_UNDERLINE_DOUBLE= 2;
 const RenditionFlags RE_UNDERLINE_CURL  = 3;
 const RenditionFlags RE_UNDERLINE_DOT   = 4;
 const RenditionFlags RE_UNDERLINE_DASH  = 5;
+const RenditionFlags RE_UNDERLINE_BIT   = (1 << 12);
 // Masks of flags that matter for drawing what is below/above the text
 const RenditionFlags RE_MASK_UNDER = RE_TRANSPARENT | RE_REVERSE | RE_CURSOR | RE_SELECTED;
 const RenditionFlags RE_MASK_ABOVE = RE_TRANSPARENT | RE_REVERSE | RE_CURSOR | RE_SELECTED | RE_STRIKEOUT | RE_CONCEAL | RE_OVERLINE | RE_UNDERLINE_MASK;

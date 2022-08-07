@@ -45,10 +45,10 @@ void TerminalCharacterDecoderTest::testPlainTextDecoder_data()
      */
     QTest::newRow("simple text with default rendition") << "hello" << QVector<RenditionFlags>(6).fill(DEFAULT_RENDITION) << "hello";
     QTest::newRow("simple text with bold rendition") << "hello" << QVector<RenditionFlags>(6).fill(RE_BOLD) << "hello";
-    QTest::newRow("simple text with underline and italic rendition") << "hello" << QVector<RenditionFlags>(6).fill(RE_UNDERLINE | RE_ITALIC) << "hello";
+    QTest::newRow("simple text with underline and italic rendition") << "hello" << QVector<RenditionFlags>(6).fill(RE_UNDERLINE_BIT | RE_ITALIC) << "hello";
 
     QTest::newRow("simple text with default rendition (shorten)") << "hello" << QVector<RenditionFlags>(4).fill(DEFAULT_RENDITION) << "hello";
-    QTest::newRow("simple text with underline rendition (shorten)") << "hello" << QVector<RenditionFlags>(4).fill(RE_UNDERLINE) << "hello";
+    QTest::newRow("simple text with underline rendition (shorten)") << "hello" << QVector<RenditionFlags>(4).fill(RE_UNDERLINE_BIT) << "hello";
 }
 
 void TerminalCharacterDecoderTest::testPlainTextDecoder()
@@ -87,7 +87,7 @@ void TerminalCharacterDecoderTest::testHTMLDecoder_data()
         << R"(<span style="font-family:monospace"><span style="font-weight:bold;color:#000000;background-color:#ffffff;">hello</span><br></span>)";
     // The below is wrong; only the first rendition is used (eg ignores the |)
     QTest::newRow("simple text with underline and italic rendition")
-        << "hello" << QVector<RenditionFlags>(6).fill(RE_UNDERLINE | RE_ITALIC)
+        << "hello" << QVector<RenditionFlags>(6).fill(RE_UNDERLINE_BIT | RE_ITALIC)
         << R"(<span style="font-family:monospace"><span style="font-decoration:underline;color:#000000;background-color:#ffffff;">hello</span><br></span>)";
 
     QTest::newRow("text with &")

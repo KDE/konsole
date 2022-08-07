@@ -111,6 +111,15 @@ void TerminalPainter::drawContents(Character *image,
     paint.setLayoutDirection(Qt::LeftToRight);
 
     for (int y = rect.y(); y <= rect.bottom(); y++) {
+        int pos = m_parentDisplay->loc(0, y);
+        if (pos > imageSize) {
+            break;
+        }
+        int right = rect.right();
+        if (pos + right > imageSize) {
+            right = imageSize - pos;
+        }
+
         const int textY = topPadding + fontHeight * y;
         bool doubleHeightLinePair = false;
         int x = rect.x();
@@ -146,7 +155,6 @@ void TerminalPainter::drawContents(Character *image,
         const int textX = leftPadding + fontWidth * rect.x() * (doubleWidthLine ? 2 : 1);
         const int textWidth = fontWidth * rect.width();
         const int textHeight = doubleHeight && !doubleHeightLinePair ? fontHeight / 2 : fontHeight;
-        int pos = m_parentDisplay->loc(0, y);
 
         // move the calculated area to take account of scaling applied to the painter.
         // the position of the area from the origin (0,0) is scaled
@@ -178,7 +186,7 @@ void TerminalPainter::drawContents(Character *image,
 
         RenditionFlags oldRendition = -1;
         QColor oldColor = QColor();
-        for (; x <= rect.right(); x++) {
+        for (; x <= right; x++) {
             if (x > lastNonSpace) {
                 // What about the cursor?
                 // break;
@@ -623,8 +631,8 @@ void TerminalPainter::drawBelowText(QPainter &painter,
             x = i + startX;
         }
 
-        if (first || style[x].rendition.all != style[lastX].rendition.all || style[x].foregroundColor != style[lastX].foregroundColor
-            || style[x].backgroundColor != style[lastX].backgroundColor || i == width) {
+        if (first || i == width || style[x].rendition.all != style[lastX].rendition.all || style[x].foregroundColor != style[lastX].foregroundColor
+            || style[x].backgroundColor != style[lastX].backgroundColor) {
             if (first) {
                 first = false;
             } else {
@@ -697,8 +705,9 @@ void TerminalPainter::drawAboveText(QPainter &painter,
             x = i + startX;
         }
 
-        if (first || ((style[x].rendition.all ^ style[lastX].rendition.all) & RE_MASK_ABOVE) || ((style[x].flags ^ style[lastX].flags) & EF_UNDERLINE_COLOR)
-            || style[x].foregroundColor != style[lastX].foregroundColor || style[x].backgroundColor != style[lastX].backgroundColor || i == width) {
+        if (first || i == width || ((style[x].rendition.all ^ style[lastX].rendition.all) & RE_MASK_ABOVE)
+            || ((style[x].flags ^ style[lastX].flags) & EF_UNDERLINE_COLOR) || style[x].foregroundColor != style[lastX].foregroundColor
+            || style[x].backgroundColor != style[lastX].backgroundColor) {
             if (first) {
                 first = false;
             } else {
