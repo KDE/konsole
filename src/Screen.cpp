@@ -1510,6 +1510,7 @@ void Screen::setDefaultRendition()
 {
     setForeColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR);
     setBackColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR);
+    _currentULColor = 0;
     _currentRendition = {DEFAULT_RENDITION};
     updateEffectiveRendition();
 }
