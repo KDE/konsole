@@ -1490,6 +1490,7 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint &widgetPoint,
     const int xOffset = edge ? _terminalFont->fontWidth() / 2 : 0;
     int line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _terminalFont->fontHeight(), _usedLines - 1);
     bool doubleWidth = line < _lineProperties.count() && _lineProperties[line] & LINE_DOUBLEWIDTH;
+    bool shaped;
     int column =
         qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _terminalFont->fontWidth() / (doubleWidth ? 2 : 1), columnMax);
 
@@ -1502,7 +1503,7 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint &widgetPoint,
         int32_t vis2line[MAX_LINE_WIDTH];
         const int pos = loc(0, line);
         QString line;
-        bidiMap(_image + pos, line, log2line, line2log, shapemap, vis2line, false);
+        bidiMap(_image + pos, line, log2line, line2log, shapemap, vis2line, shaped, false);
         column = line2log[vis2line[column]];
     }
 
@@ -2929,13 +2930,21 @@ int TerminalDisplay::selectionState() const
     return _actSel;
 }
 
-int TerminalDisplay::bidiMap(Character *screenline, QString &line, int *log2line, int *line2log, uint16_t *shapemap, int32_t *vis2line, bool shape, bool bidi)
-    const
+int TerminalDisplay::bidiMap(Character *screenline,
+                             QString &line,
+                             int *log2line,
+                             int *line2log,
+                             uint16_t *shapemap,
+                             int32_t *vis2line,
+                             bool &shaped,
+                             bool shape,
+                             bool bidi) const
 {
     const int linewidth = _usedColumns;
     uint64_t notSkipped[MAX_LINE_WIDTH / 64] = {};
     int i;
     int lastNonSpace = 0;
+    shaped = false;
     for (i = 0; i < linewidth; i++) {
         log2line[i] = line.size();
         line2log[line.size()] = i;
@@ -2969,8 +2978,9 @@ int TerminalDisplay::bidiMap(Character *screenline, QString &line, int *log2line
                       U_SHAPE_AGGREGATE_TASHKEEL_NOOP | U_SHAPE_LENGTH_FIXED_SPACES_NEAR | U_SHAPE_LETTERS_SHAPE,
                       &errorCode);
         for (int i = 0; i < line.length(); i++) {
+            shapemap[i] = shaped_line[i];
             if (line[i] != shaped_line[i]) {
-                shapemap[i] = shaped_line[i];
+                shaped = true;
             }
         }
     }

@@ -168,7 +168,8 @@ void TerminalPainter::drawContents(Character *image,
         int line2log[MAX_LINE_WIDTH];
         uint16_t shapemap[MAX_LINE_WIDTH];
         int32_t vis2line[MAX_LINE_WIDTH];
-        int lastNonSpace = m_parentDisplay->bidiMap(image + pos, line, log2line, line2log, shapemap, vis2line, bidiEnabled, bidiEnabled);
+        bool shaped;
+        int lastNonSpace = m_parentDisplay->bidiMap(image + pos, line, log2line, line2log, shapemap, vis2line, shaped, bidiEnabled, bidiEnabled);
         const QRect textArea(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
         if (!printerFriendly) {
             drawBelowText(paint,
@@ -206,7 +207,10 @@ void TerminalPainter::drawContents(Character *image,
                 continue;
             }
 
-            const QString unistr = line.mid(log2line[log_x], log2line[log_x + 1] - log2line[log_x]);
+            QString unistr = line.mid(log2line[log_x], log2line[log_x + 1] - log2line[log_x]);
+            if (shaped) {
+                unistr[0] = shapemap[log2line[log_x]];
+            }
 
             // paint text fragment
             if (unistr.length() && unistr[0] != QChar(0)) {
@@ -994,7 +998,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
             y += m_parentDisplay->terminalFont()->lineSpacing() / 2;
         }
         painter.drawText(rect.x(), y, text);
-        if (0 && text.toUcs4().length() > 1) {
+        if (0 && text.toUcs4().length() >= 1) {
             fprintf(stderr, " %i  ", text.toUcs4().length());
             for (int i = 0; i < text.toUcs4().length(); i++) {
                 fprintf(stderr, " %04x  ", text.toUcs4()[i]);

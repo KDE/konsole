@@ -400,8 +400,15 @@ public:
 
     // Get mapping between visual and logical positions in line
     // returns the index of the last non space character.
-    int bidiMap(Character *screenline, QString &line, int *log2line, int *line2log, uint16_t *shapemap, int32_t *vis2line, bool shape = true, bool bidi = true)
-        const;
+    int bidiMap(Character *screenline,
+                QString &line,
+                int *log2line,
+                int *line2log,
+                uint16_t *shapemap,
+                int32_t *vis2line,
+                bool &shaped,
+                bool shape = true,
+                bool bidi = true) const;
 
 public Q_SLOTS:
     /**
