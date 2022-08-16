@@ -4,6 +4,7 @@
 
 install( PROGRAMS org.kde.konsole.desktop  DESTINATION ${KDE_INSTALL_APPDIR} )
 install( FILES org.kde.konsole.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
+install( FILES org.kde.konsole.desktop DESTINATION ${KDE_INSTALL_DATADIR}/kglobalaccel)
 
 if(ECM_VERSION VERSION_GREATER_EQUAL "5.89.0")
     install(FILES terminalemulator.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPESDIR})
