@@ -1143,8 +1143,10 @@ void Screen::scrollUp(int from, int n)
         scrollPlacements(n);
     }
     if (_replMode != REPL_None) {
-        _replModeStart = std::make_pair(_replModeStart.first - 1, _replModeStart.second);
-        _replModeEnd = std::make_pair(_replModeEnd.first - 1, _replModeEnd.second);
+        if (_replModeStart.first > 0) {
+            _replModeStart = std::make_pair(_replModeStart.first - 1, _replModeStart.second);
+            _replModeEnd = std::make_pair(_replModeEnd.first - 1, _replModeEnd.second);
+        }
         if (_replLastOutputStart.first > -1) {
             _replLastOutputStart = std::make_pair(_replLastOutputStart.first - 1, _replLastOutputStart.second);
             _replLastOutputEnd = std::make_pair(_replLastOutputEnd.first - 1, _replLastOutputEnd.second);
