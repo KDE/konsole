@@ -50,7 +50,7 @@ public:
      * @param count The number of characters
      * @param properties Additional properties which affect all characters in the line
      */
-    virtual void decodeLine(const Character *const characters, int count, LineProperty properties) = 0;
+    virtual void decodeLine(const Character *characters, int count, LineProperty properties) = 0;
 };
 
 }
