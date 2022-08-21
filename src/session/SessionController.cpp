@@ -46,7 +46,12 @@
 
 #include <KIO/CommandLauncherJob>
 
+#include <kio_version.h>
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
+#include <KIO/JobUiDelegateFactory>
+#else
 #include <KIO/JobUiDelegate>
+#endif
 #include <KIO/OpenFileManagerWindowJob>
 #include <KIO/OpenUrlJob>
 
@@ -552,7 +557,11 @@ void SessionController::handleWebShortcutAction(QAction *action)
         const QUrl url = filterData.uri();
 
         auto *job = new KIO::OpenUrlJob(url);
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
+        job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+#else
         job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+#endif
         job->start();
     }
 }
@@ -1159,7 +1168,11 @@ void SessionController::openBrowser()
     } else {
         const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
         auto *job = new KIO::OpenUrlJob(currentUrl);
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
+        job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+#else
         job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+#endif
         job->start();
     }
 }

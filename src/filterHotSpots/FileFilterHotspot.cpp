@@ -25,7 +25,12 @@
 #include <KIO/OpenUrlJob>
 
 #include <KFileItemListProperties>
+#include <kio_version.h>
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
+#include <KIO/JobUiDelegateFactory>
+#else
 #include <KIO/JobUiDelegate>
+#endif
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KShell>
@@ -127,7 +132,11 @@ void FileFilterHotSpot::activate(QObject *)
 void FileFilterHotSpot::openWithSysDefaultApp(const QString &filePath) const
 {
     auto *job = new KIO::OpenUrlJob(QUrl::fromLocalFile(filePath));
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
+    job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+#else
     job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+#endif
     job->setRunExecutables(false); // Always open scripts, shell/python/perl... etc, as text
     job->start();
 }
