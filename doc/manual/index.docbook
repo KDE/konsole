@@ -342,6 +342,46 @@ on the <guilabel>Mouse</guilabel> tab in the profile settings dialog.
 
 </sect1>
 
+<sect1 id="semantic-shell-integration">
+<title>Semantic Shell Integration</title>
+
+<para>A shell program running in Konsole may emit escape sequences that partition the text
+displayed into three types: shell prompt, user input and command output. Using this semantic information enables
+various enhancements in Konsole.
+
+<itemizedlist>
+<listitem><para>
+<keycombo action="simul">&Ctrl;&Shift;<keycap>PgUp</keycap></keycombo>
+and
+<keycombo action="simul">&Ctrl;&Shift;<keycap>PgDown</keycap></keycombo>
+scroll up/down to previous/next command prompt.</para></listitem>
+<listitem><para>Visual hints: a line is displayed above each prompt, prompt colors are less intense,
+and output colors are more intense. This may be configured to never show, always show, or only when URL hints are shown.
+</para></listitem>
+<listitem><para>
+Context menu options
+<guimenuitem>Copy user input</guimenuitem>
+<guimenuitem>Copy command output</guimenuitem>
+<guimenuitem>Copy except prompt</guimenuitem>
+may be used to filter selection when it is copied to the clipboard.
+</para></listitem>
+<listitem><para>When selection is empty, copy to clipboard action copies the current input line if it is not empty,
+or the last output if there is no current input.
+</para></listitem>
+<listitem><para>Pressing Up/Down arrow when editing a long input, will instead place the cursor one line up/down by
+sending the appropriate number of Left/Right key events to the shell. Configurable in the profile settings.</para></listitem>
+<listitem><para>Clicking the mouse on text input will place the cursor in the clicked location. Configurable in the profile settings.</para></listitem>
+</itemizedlist>
+</para>
+
+<para>
+Semantic shell integration needs to be setup in the shell.
+Pressing <keycombo>&Ctrl;&Alt;<keycap>]</keycap></keycombo> will paste the necessary commands needed in bash.
+For other shells, such as fish, zsh, python, etc. consult the relevant program's documentation.
+</para>
+
+</sect1>
+
 </chapter>
 
 <chapter id="commandreference">
