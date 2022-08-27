@@ -127,7 +127,7 @@ private:
                             bool printerFriendly,
                             RenditionFlags &oldRendition,
                             QColor oldColor,
-                            int normalWeight,
+                            QFont::Weight normalWeight,
                             QFont::Weight boldWeight);
 };
 

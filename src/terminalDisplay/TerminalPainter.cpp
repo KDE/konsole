@@ -104,7 +104,7 @@ void TerminalPainter::drawContents(Character *image,
         QFont::Bold,
         QFont::Black,
     };
-    const auto normalWeight = m_parentDisplay->font().weight();
+    const QFont::Weight normalWeight = static_cast<QFont::Weight>(m_parentDisplay->font().weight()); // Qt6: cast can go away
     auto it = std::upper_bound(std::begin(FontWeights), std::end(FontWeights), normalWeight);
     const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
     paint.setRenderHint(QPainter::Antialiasing, m_parentDisplay->terminalFont()->antialiasText());
@@ -886,7 +886,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
                                          bool printerFriendly,
                                          RenditionFlags &oldRendition,
                                          QColor oldColor,
-                                         int normalWeight,
+                                         QFont::Weight normalWeight,
                                          QFont::Weight boldWeight)
 {
     // setup painter

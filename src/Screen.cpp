@@ -1714,7 +1714,7 @@ void Screen::selectReplContigious(const int x, const int y)
     if (row < _history->getLines()) {
         col = std::min(col, _history->getLineLen(row) - 1);
     } else {
-        col = std::min(col, _screenLines[row - _history->getLines()].size() - 1);
+        col = std::min(col, int(_screenLines[row - _history->getLines()].size()) - 1);
     }
     while (col > 0 && (getCharacter(col, row).flags & EF_REPL) == EF_REPL_NONE) {
         col--;

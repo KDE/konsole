@@ -1048,19 +1048,19 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     }
 
     if (attribute == 133) {
-        if (value[0] == L'A' || value[0] == L'N' || value[0] == L'P') {
+        if (value[0] == QLatin1Char('A') || value[0] == QLatin1Char('N') || value[0] == QLatin1Char('P')) {
             _currentScreen->setReplMode(REPL_PROMPT);
         }
-        if (value[0] == L'L' && _currentScreen->getCursorX() > 0) {
+        if (value[0] == QLatin1Char('L') && _currentScreen->getCursorX() > 0) {
             _currentScreen->nextLine();
         }
-        if (value[0] == L'B') {
+        if (value[0] == QLatin1Char('B')) {
             _currentScreen->setReplMode(REPL_INPUT);
         }
-        if (value[0] == L'C') {
+        if (value[0] == QLatin1Char('C')) {
             _currentScreen->setReplMode(REPL_OUTPUT);
         }
-        if (value[0] == L'D') {
+        if (value[0] == QLatin1Char('D')) {
             _currentScreen->setReplMode(REPL_None);
         }
     }
@@ -2671,9 +2671,9 @@ void Vt102Emulation::reportDecodingError(int token)
     }
 
     if ((token & 0xff) != 3) { // SCS
-        outputError.append((token >> 8) & 0xff);
+        outputError.append(QLatin1Char((token >> 8) & 0xff));
     } else {
-        outputError.append((token >> 16) & 0xff);
+        outputError.append(QLatin1Char((token >> 16) & 0xff));
     }
 
     qCDebug(KonsoleDebug).noquote() << outputError;
