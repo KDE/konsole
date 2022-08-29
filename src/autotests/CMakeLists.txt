@@ -4,6 +4,8 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate)
 
+# ATM issue with non-termination due to message dialog
+if(QT_MAJOR_VERSION EQUAL "5")
 if ("$ENV{USER}" STREQUAL "jenkins")
     message(STATUS "We are running in jenkins; skipping DBusTest...")
 else()
@@ -17,6 +19,7 @@ else()
     if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
         ecm_add_test(DBusTest.cpp LINK_LIBRARIES ${KONSOLE_TEST_LIBS} Qt::DBus)
     endif()
+endif()
 endif()
 
 # Temporary bypass for BKO 432379
