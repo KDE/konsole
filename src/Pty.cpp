@@ -258,11 +258,7 @@ int Pty::start(const QString &programName, const QStringList &programArguments, 
 {
     clearProgram();
 
-    // For historical reasons, the first argument in programArguments is the
-    // name of the program to execute, so create a list consisting of all
-    // but the first argument to pass to setProgram()
-    Q_ASSERT(programArguments.count() >= 1);
-    setProgram(programName, programArguments.mid(1));
+    setProgram(programName, programArguments);
 
     addEnvironmentVariables(environmentList);
 
