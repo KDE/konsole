@@ -468,6 +468,11 @@ void Session::run()
     // if no arguments are specified, fall back to program name
     QStringList arguments = _arguments.join(QLatin1Char(' ')).isEmpty() ? QStringList() << exec : _arguments;
 
+    // For historical reasons, the first argument in _arguments is the
+    // name of the program to execute, remove it in favor of the actual program name
+    Q_ASSERT(arguments.count() >= 1);
+    arguments = arguments.mid(1);
+
     if (!_initialWorkingDir.isEmpty()) {
         _shellProcess->setInitialWorkingDirectory(_initialWorkingDir);
     } else {
