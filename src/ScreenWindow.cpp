@@ -209,7 +209,7 @@ QPoint ScreenWindow::cursorPosition() const
 
 int ScreenWindow::currentLine() const
 {
-    return qBound(0, _currentLine, lineCount() - windowLines());
+    return qBound(0, _currentLine, std::max(0, lineCount() - windowLines()));
 }
 
 int ScreenWindow::currentResultLine() const
