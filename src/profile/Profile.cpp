@@ -120,6 +120,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {VerticalLine, "VerticalLine", TERMINAL_GROUP, false},
     {VerticalLineAtChar, "VerticalLineAtChar", TERMINAL_GROUP, 80},
     {PeekPrimaryKeySequence, "PeekPrimaryKeySequence", TERMINAL_GROUP, QString()},
+    {LineNumbers, "LineNumbers", TERMINAL_GROUP, 0},
 
     // Cursor
     {UseCustomCursorColor, "UseCustomCursorColor", CURSOR_GROUP, false},

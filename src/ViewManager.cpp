@@ -294,6 +294,12 @@ void ViewManager::setupActions()
     connect(action, &QAction::triggered, this, &ViewManager::toggleSemanticHints);
     _viewContainer->addAction(action);
 
+    action = new QAction(i18nc("@action Shortcut entry", "Toggle line numbers display"), this);
+    collection->addAction(QStringLiteral("toggle-line-numbers"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_Backslash);
+    connect(action, &QAction::triggered, this, &ViewManager::toggleLineNumbers);
+    _viewContainer->addAction(action);
+
     action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Equal size to all views"));
     collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_Backslash);
@@ -519,6 +525,22 @@ void ViewManager::toggleSemanticHints()
     auto activeTerminalDisplay = _viewContainer->activeViewSplitter()->activeTerminalDisplay();
     const char *names[3] = {"Never", "Sometimes", "Always"};
     activeTerminalDisplay->showNotification(i18n("Semantic hints ") + i18n(names[profile->semanticHints()]));
+    activeTerminalDisplay->update();
+}
+
+void ViewManager::toggleLineNumbers()
+{
+    int currentSessionId = currentSession();
+    Q_ASSERT(currentSessionId >= 0);
+    Session *activeSession = SessionManager::instance()->idToSession(currentSessionId);
+    Q_ASSERT(activeSession);
+    auto profile = SessionManager::instance()->sessionProfile(activeSession);
+
+    profile->setProperty(Profile::LineNumbers, (profile->lineNumbers() + 1) % 3);
+
+    auto activeTerminalDisplay = _viewContainer->activeViewSplitter()->activeTerminalDisplay();
+    const char *names[3] = {"Never", "Sometimes", "Always"};
+    activeTerminalDisplay->showNotification(i18n("Line numbers ") + i18n(names[profile->lineNumbers()]));
     activeTerminalDisplay->update();
 }
 

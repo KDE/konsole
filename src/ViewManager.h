@@ -404,6 +404,8 @@ private Q_SLOTS:
 
     void toggleSemanticHints();
 
+    void toggleLineNumbers();
+
 private:
     Q_DISABLE_COPY(ViewManager)
 

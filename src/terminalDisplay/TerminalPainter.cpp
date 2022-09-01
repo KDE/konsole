@@ -78,6 +78,7 @@ void TerminalPainter::drawContents(Character *image,
     auto currentProfile = SessionManager::instance()->sessionProfile(m_parentDisplay->session());
     const bool invertedRendition = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
     const Enum::Hints semanticHints = currentProfile ? static_cast<Enum::Hints>(currentProfile->semanticHints()) : Enum::HintsNever;
+    const Enum::Hints lineNumbers = currentProfile ? static_cast<Enum::Hints>(currentProfile->lineNumbers()) : Enum::HintsNever;
 
     QVector<uint> univec;
     univec.reserve(m_parentDisplay->usedColumns());
@@ -249,6 +250,16 @@ void TerminalPainter::drawContents(Character *image,
             QPen pen(m_parentDisplay->terminalColor()->foregroundColor());
             paint.setPen(pen);
             paint.drawLine(leftPadding, textY, m_parentDisplay->contentRect().right(), textY);
+        }
+        if ((lineNumbers == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || lineNumbers == Enum::HintsAlways) {
+            QRect rect(m_parentDisplay->contentRect().right() - 4 * fontWidth, textY, m_parentDisplay->contentRect().right(), textY + fontHeight);
+            QPen pen(QColor(0xC00000));
+            paint.setPen(pen);
+            QFont currentFont = paint.font();
+            currentFont.setWeight(normalWeight);
+            currentFont.setItalic(false);
+            paint.setFont(currentFont);
+            paint.drawText(rect, Qt::AlignLeft, QString::number(y + m_parentDisplay->screenWindow()->currentLine()));
         }
 
         if (doubleHeightLinePair) {

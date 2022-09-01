@@ -374,6 +374,10 @@ public:
         /** (QFont) Emoji font override
          */
         EmojiFont,
+        /** When to show line numbers.
+         * 0 for Never, 1 when showing URL hints, 2 for always
+         */
+        LineNumbers,
     };
 
     Q_ENUM(Property)
@@ -803,6 +807,11 @@ public:
     int semanticHints() const
     {
         return property<int>(Profile::SemanticHints);
+    }
+
+    int lineNumbers() const
+    {
+        return property<int>(Profile::LineNumbers);
     }
 
     bool semanticUpDown() const
