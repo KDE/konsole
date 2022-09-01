@@ -645,13 +645,17 @@ void TerminalDisplay::updateImage()
     QAccessible::updateAccessibility(&cursorEvent);
 #endif
 }
-
 void TerminalDisplay::showResizeNotification()
 {
-    if (_showTerminalSizeHint && isVisible()) {
+    showNotification(i18n("Size: %1 x %2", _columns, _lines));
+}
+
+void TerminalDisplay::showNotification(QString text)
+{
+    if ((text.isEmpty() || _showTerminalSizeHint) && isVisible()) {
         if (_resizeWidget == nullptr) {
-            _resizeWidget = new QLabel(i18n("Size: XXX x XXX"), this);
-            _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().boundingRect(i18n("Size: XXX x XXX")).width());
+            _resizeWidget = new QLabel(text, this);
+            _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().boundingRect(text).width());
             _resizeWidget->setMinimumHeight(_resizeWidget->sizeHint().height());
             _resizeWidget->setAlignment(Qt::AlignCenter);
 
@@ -662,8 +666,8 @@ void TerminalDisplay::showResizeNotification()
             _resizeTimer->setSingleShot(true);
             connect(_resizeTimer, &QTimer::timeout, _resizeWidget, &QLabel::hide);
         }
-        QString sizeStr = i18n("Size: %1 x %2", _columns, _lines);
-        _resizeWidget->setText(sizeStr);
+        _resizeWidget->setText(text);
+        _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().boundingRect(text).width() + 16);
         _resizeWidget->move((width() - _resizeWidget->width()) / 2, (height() - _resizeWidget->height()) / 2 + 20);
         _resizeWidget->show();
         _resizeTimer->start();

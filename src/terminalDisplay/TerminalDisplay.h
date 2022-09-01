@@ -410,6 +410,8 @@ public:
                 bool shape = true,
                 bool bidi = true) const;
 
+    void showNotification(QString text);
+
 public Q_SLOTS:
     /**
      * Causes the terminal display to fetch the latest character image from the associated
