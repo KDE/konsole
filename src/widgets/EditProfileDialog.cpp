@@ -489,9 +489,9 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
         false, // preview
         {
             // buttons
-            {_generalUi->semanticHintsNever, Enum::SemanticHintsNever},
-            {_generalUi->semanticHintsURL, Enum::SemanticHintsURL},
-            {_generalUi->semanticHintsAlways, Enum::SemanticHintsAlways},
+            {_generalUi->semanticHintsNever, Enum::HintsNever},
+            {_generalUi->semanticHintsURL, Enum::HintsURL},
+            {_generalUi->semanticHintsAlways, Enum::HintsAlways},
         },
     };
     setupButtonGroup(semanticHints, profile);

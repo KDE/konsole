@@ -61,10 +61,10 @@ public:
 
     /** This enum describes semantic hints appearance
      */
-    enum SemanticHints {
-        SemanticHintsNever = 0,
-        SemanticHintsURL = 1,
-        SemanticHintsAlways = 2,
+    enum Hints {
+        HintsNever = 0,
+        HintsURL = 1,
+        HintsAlways = 2,
     };
 
     /** This enum describes the shapes used to draw the cursor in terminal

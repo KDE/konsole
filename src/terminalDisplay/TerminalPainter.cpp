@@ -66,12 +66,6 @@ static inline bool isLineCharString(const QString &string)
     return LineBlockCharacters::isLegacyComputingSymbol(ucs4);
 }
 
-bool isInvertedRendition(const TerminalDisplay *display)
-{
-    auto currentProfile = SessionManager::instance()->sessionProfile(display->session());
-    return currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
-}
-
 void TerminalPainter::drawContents(Character *image,
                                    QPainter &paint,
                                    const QRect &rect,
@@ -81,7 +75,9 @@ void TerminalPainter::drawContents(Character *image,
                                    QVector<LineProperty> lineProperties,
                                    CharacterColor const *ulColorTable)
 {
-    const bool invertedRendition = isInvertedRendition(m_parentDisplay);
+    auto currentProfile = SessionManager::instance()->sessionProfile(m_parentDisplay->session());
+    const bool invertedRendition = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
+    const Enum::Hints semanticHints = currentProfile ? static_cast<Enum::Hints>(currentProfile->semanticHints()) : Enum::HintsNever;
 
     QVector<uint> univec;
     univec.reserve(m_parentDisplay->usedColumns());
@@ -249,8 +245,7 @@ void TerminalPainter::drawContents(Character *image,
         paint.setRenderHint(QPainter::Antialiasing, false);
         paint.setWorldTransform(textScale.inverted(), true);
         if ((lineProperty & LINE_PROMPT_START)
-            && ((m_parentDisplay->semanticHints() == Enum::SemanticHintsURL && m_parentDisplay->filterChain()->showUrlHint())
-                || m_parentDisplay->semanticHints() == Enum::SemanticHintsAlways)) {
+            && ((semanticHints == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || semanticHints == Enum::HintsAlways)) {
             QPen pen(m_parentDisplay->terminalColor()->foregroundColor());
             paint.setPen(pen);
             paint.drawLine(leftPadding, textY, m_parentDisplay->contentRect().right(), textY);

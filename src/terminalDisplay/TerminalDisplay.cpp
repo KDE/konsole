@@ -2867,7 +2867,6 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _bidiLineLTR = profile->bidiLineLTR();
     _bidiTableDirOverride = profile->bidiTableDirOverride();
     _semanticUpDown = profile->semanticUpDown();
-    _semanticHints = profile->semanticHints();
     _semanticInputClick = profile->semanticInputClick();
     _trimLeadingSpaces = profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText);
     _trimTrailingSpaces = profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText);

@@ -288,6 +288,12 @@ void ViewManager::setupActions()
     connect(action, &QAction::triggered, this, &ViewManager::semanticSetupBash);
     _viewContainer->addAction(action);
 
+    action = new QAction(i18nc("@action Shortcut entry", "Toggle semantic hints display"), this);
+    collection->addAction(QStringLiteral("toggle-semantic-hints"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_BracketLeft);
+    connect(action, &QAction::triggered, this, &ViewManager::toggleSemanticHints);
+    _viewContainer->addAction(action);
+
     action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Equal size to all views"));
     collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_Backslash);
@@ -498,6 +504,22 @@ void ViewManager::semanticSetupBash()
         PS2='\[\e]133;A\a\]'$PS2'\[\e]133;B\a\]' ;
         PS0='\[\e]133;C\a\]' ; fi)"),
                                       QChar());
+}
+
+void ViewManager::toggleSemanticHints()
+{
+    int currentSessionId = currentSession();
+    Q_ASSERT(currentSessionId >= 0);
+    Session *activeSession = SessionManager::instance()->idToSession(currentSessionId);
+    Q_ASSERT(activeSession);
+    auto profile = SessionManager::instance()->sessionProfile(activeSession);
+
+    profile->setProperty(Profile::SemanticHints, (profile->semanticHints() + 1) % 3);
+
+    auto activeTerminalDisplay = _viewContainer->activeViewSplitter()->activeTerminalDisplay();
+    const char *names[3] = {"Never", "Sometimes", "Always"};
+    activeTerminalDisplay->showNotification(i18n("Semantic hints ") + i18n(names[profile->semanticHints()]));
+    activeTerminalDisplay->update();
 }
 
 QHash<TerminalDisplay *, Session *> ViewManager::forgetAll(ViewSplitter *splitter)

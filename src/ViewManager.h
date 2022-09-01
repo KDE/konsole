@@ -402,6 +402,8 @@ private Q_SLOTS:
 
     void semanticSetupBash();
 
+    void toggleSemanticHints();
+
 private:
     Q_DISABLE_COPY(ViewManager)
 

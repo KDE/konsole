@@ -340,11 +340,6 @@ public:
         return _semanticUpDown;
     }
 
-    int semanticHints() const
-    {
-        return _semanticHints;
-    }
-
     ColorSchemeWallpaper::Ptr wallpaper() const
     {
         return _wallpaper;
@@ -790,7 +785,6 @@ private:
 
     std::unique_ptr<KonsolePrintManager> _printManager;
 
-    int _semanticHints;
     bool _semanticUpDown;
     bool _semanticInputClick;
 };
