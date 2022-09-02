@@ -157,7 +157,6 @@ void SSHQuickAccessWidget::selectPrevious()
         const QModelIndex lastFolder = d->filterModel->index(d->filterModel->rowCount() - 1, 0);
         const QModelIndex lastEntry = d->filterModel->index(d->filterModel->rowCount(lastFolder) - 1, 0, lastFolder);
 
-        qDebug() << lastFolder << lastEntry;
         if (lastEntry.isValid()) {
             slModel->select(lastEntry, flag);
         } else {
@@ -203,6 +202,11 @@ void SSHQuickAccessWidget::selectPrevious()
     }
 
     // Last possible child. we need to go to the next parent, *or* wrap.
+    if (curr.row() == 0 && !curr.parent().isValid()) {
+        lambdaLastFolder();
+        return;
+    }
+
     slModel->select(parent, flag);
 }
 
@@ -210,17 +214,16 @@ bool SSHQuickAccessWidget::eventFilter(QObject *watched, QEvent *event)
 {
     if (watched == d->filterLine) {
         if (event->type() == QEvent::KeyPress) {
-            qDebug() << "Event" << event->type();
             auto keyEvent = dynamic_cast<QKeyEvent *>(event);
             switch (keyEvent->key()) {
             case Qt::Key_Up:
                 selectPrevious();
-                break;
+                return true;
             case Qt::Key_Down:
                 selectNext();
-                break;
+                return true;
             default:
-                break;
+                return false;
             }
             return true;
         }
