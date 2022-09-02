@@ -62,7 +62,6 @@ public:
     void setModel(SSHManagerModel *model);
     void triggerDelete();
     void setCurrentController(Konsole::SessionController *controller);
-    void connectRequested(const QModelIndex &idx);
     void handleImportedData(bool isImported);
 
 protected:

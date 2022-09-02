@@ -18,6 +18,7 @@
 #include "profile/ProfileModel.h"
 
 #include "sshmanagerfiltermodel.h"
+#include "sshmanagerplugin.h"
 #include "ui_sshwidget.h"
 
 #include <KLocalizedString>
@@ -118,7 +119,10 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
         menu->popup(ui->treeView->viewport()->mapToGlobal(pos));
     });
 
-    connect(ui->treeView, &QTreeView::doubleClicked, this, &SSHManagerTreeWidget::connectRequested);
+    connect(ui->treeView, &QTreeView::doubleClicked, this, [this](const QModelIndex &idx) {
+        SSHManagerPlugin::requestConnection(d->filterModel, d->model, d->controller, idx);
+    });
+
     connect(ui->treeView, &SshTreeView::mouseButtonClicked, this, &SSHManagerTreeWidget::handleTreeClick);
 
     ui->treeView->setModel(d->filterModel);
@@ -441,66 +445,7 @@ void SSHManagerTreeWidget::handleTreeClick(Qt::MouseButton btn, const QModelInde
         }
 
         Q_EMIT requestNewTab();
-        connectRequested(idx);
-    }
-}
-
-void SSHManagerTreeWidget::connectRequested(const QModelIndex &idx)
-{
-    if (!d->controller) {
-        return;
-    }
-
-    auto sourceIdx = d->filterModel->mapToSource(idx);
-    if (sourceIdx.parent() == d->model->invisibleRootItem()->index()) {
-        return;
-    }
-
-    Konsole::ProcessInfo *info = d->controller->session()->getProcessInfo();
-    bool ok = false;
-    QString processName = info->name(&ok);
-    if (!ok) {
-        KMessageBox::error(this, i18n("Could not get the process name, assume that we can't request a connection"), i18n("Error issuing SSH Command"));
-        return;
-    }
-
-    if (!QVector<QString>({QStringLiteral("fish"),
-                           QStringLiteral("bash"),
-                           QStringLiteral("dash"),
-                           QStringLiteral("sh"),
-                           QStringLiteral("csh"),
-                           QStringLiteral("ksh"),
-                           QStringLiteral("zsh")})
-             .contains(processName)) {
-        KMessageBox::error(this, i18n("Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"), i18n("Error issuing SSH Command"));
-        return;
-    }
-
-    auto item = d->model->itemFromIndex(sourceIdx);
-    auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
-
-    QString sshCommand = QStringLiteral("ssh ");
-    if (!data.useSshConfig) {
-        if (data.sshKey.length()) {
-            sshCommand += QStringLiteral("-i %1 ").arg(data.sshKey);
-        }
-
-        if (data.port.length()) {
-            sshCommand += QStringLiteral("-p %1 ").arg(data.port);
-        }
-
-        if (!data.username.isEmpty()) {
-            sshCommand += data.username + QLatin1Char('@');
-        }
-    }
-
-    if (!data.host.isEmpty()) {
-        sshCommand += data.host;
-    }
-
-    d->controller->session()->sendTextToTerminal(sshCommand, QLatin1Char('\r'));
-    if (d->controller->session()->views().count()) {
-        d->controller->session()->views().at(0)->setFocus();
+        SSHManagerPlugin::requestConnection(d->filterModel, d->model, d->controller, sourceIdx);
     }
 }
 

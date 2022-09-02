@@ -8,8 +8,6 @@ SOURCES
     sshmanagermodel.cpp
     sshmanagerfiltermodel.cpp
     sshtreeview.cpp
-    sshquickaccesswidget.cpp
-    sshquickaccesswidget.h
     ${EXTRA_SSHPLUGIN_SRCS}
 INSTALL_NAMESPACE
     "konsoleplugins"

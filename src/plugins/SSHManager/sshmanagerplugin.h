@@ -18,6 +18,9 @@ class SessionController;
 class MainWindow;
 }
 
+class QSortFilterProxyModel;
+class QStandardItemModel;
+
 struct SSHManagerPluginPrivate;
 
 class SSHManagerPlugin : public Konsole::IKonsolePlugin
@@ -30,6 +33,9 @@ public:
     void createWidgetsForMainWindow(Konsole::MainWindow *mainWindow) override;
     void activeViewChanged(Konsole::SessionController *controller, Konsole::MainWindow *mainWindow) override;
     QList<QAction *> menuBarActions(Konsole::MainWindow *mainWindow) const override;
+
+    static void
+    requestConnection(QSortFilterProxyModel *filterModel, QStandardItemModel *model, Konsole::SessionController *controller, const QModelIndex &idx);
 
 private:
     std::unique_ptr<SSHManagerPluginPrivate> d;

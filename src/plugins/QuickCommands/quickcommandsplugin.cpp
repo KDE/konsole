@@ -7,6 +7,10 @@
 #include "quickcommandsmodel.h"
 #include "quickcommandswidget.h"
 
+#include <KActionCollection>
+#include <KCommandBar>
+#include <QMainWindow>
+
 #include "MainWindow.h"
 #include <KLocalizedString>
 
@@ -16,7 +20,7 @@ K_PLUGIN_CLASS_WITH_JSON(QuickCommandsPlugin, "konsole_quickcommands.json")
 
 struct QuickCommandsPlugin::Private {
     QuickCommandsModel model;
-
+    QAction *showQuickAccess = nullptr;
     QMap<Konsole::MainWindow *, QuickCommandsWidget *> widgetForWindow;
     QMap<Konsole::MainWindow *, QDockWidget *> dockForWindow;
 };
@@ -25,6 +29,7 @@ QuickCommandsPlugin::QuickCommandsPlugin(QObject *object, const QVariantList &ar
     : Konsole::IKonsolePlugin(object, args)
     , priv(std::make_unique<Private>())
 {
+    priv->showQuickAccess = new QAction();
     setName(QStringLiteral("QuickCommands"));
 }
 
@@ -48,8 +53,39 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
 
 void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controller, Konsole::MainWindow *mainWindow)
 {
-    if (mainWindow)
+    priv->showQuickAccess->deleteLater();
+    priv->showQuickAccess = new QAction(i18n("Show Quick Access for SSH Actions"));
+
+    priv->showQuickAccess->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_G));
+    controller->view()->addAction(priv->showQuickAccess);
+
+    Konsole::TerminalDisplay *terminalDisplay = controller->view();
+    connect(priv->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controller] {
+        KCommandBar bar(terminalDisplay->topLevelWidget());
+        QList<QAction *> actions;
+        for (int i = 0; i < priv->model.rowCount(); i++) {
+            QModelIndex folder = priv->model.index(i, 0);
+            for (int e = 0; e < priv->model.rowCount(folder); e++) {
+                QModelIndex idx = priv->model.index(e, 0, folder);
+                QAction *act = new QAction(idx.data().toString());
+                connect(act, &QAction::triggered, this, [this, idx, controller] {
+                    const auto item = priv->model.itemFromIndex(idx);
+                    const auto data = item->data(QuickCommandsModel::QuickCommandRole).value<QuickCommandData>();
+                    controller->session()->sendTextToTerminal(data.command, QLatin1Char('\r'));
+                });
+                actions.append(act);
+            }
+        }
+
+        QVector<KCommandBar::ActionGroup> groups;
+        groups.push_back(KCommandBar::ActionGroup{i18n("Quick Commands"), actions});
+        bar.setActions(groups);
+        bar.exec();
+    });
+
+    if (mainWindow) {
         priv->widgetForWindow[mainWindow]->setCurrentController(controller);
+    }
 }
 
 QList<QAction *> QuickCommandsPlugin::menuBarActions(Konsole::MainWindow *mainWindow) const
