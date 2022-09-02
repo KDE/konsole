@@ -56,7 +56,7 @@ QList<QAction *> QuickCommandsPlugin::menuBarActions(Konsole::MainWindow *mainWi
 {
     QAction *toggleVisibilityAction = new QAction(i18n("Show Quick Commands"), mainWindow);
     toggleVisibilityAction->setCheckable(true);
-
+    toggleVisibilityAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F1));
     connect(toggleVisibilityAction, &QAction::triggered, priv->dockForWindow[mainWindow], &QDockWidget::setVisible);
     connect(priv->dockForWindow[mainWindow], &QDockWidget::visibilityChanged, toggleVisibilityAction, &QAction::setChecked);
 
