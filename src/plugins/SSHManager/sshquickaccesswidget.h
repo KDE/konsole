@@ -31,6 +31,9 @@ public:
     ~SSHQuickAccessWidget();
     void setSessionController(Konsole::SessionController *controller);
 
+    void selectPrevious();
+    void selectNext();
+
     void showEvent(QShowEvent *ev) override;
     void focusInEvent(QFocusEvent *ev) override;
     void keyPressEvent(QKeyEvent *ev) override;
