@@ -8,6 +8,7 @@
 #ifndef SSSHMANAGERPLUGINWIDGET_H
 #define SSSHMANAGERPLUGINWIDGET_H
 
+#include <QModelIndex>
 #include <QWidget>
 #include <memory>
 

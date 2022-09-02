@@ -18,6 +18,8 @@
 #include <KLocalizedString>
 
 #include "MainWindow.h"
+#include "sshquickaccesswidget.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 K_PLUGIN_CLASS_WITH_JSON(SSHManagerPlugin, "konsole_sshmanager.json")
 
@@ -26,16 +28,30 @@ struct SSHManagerPluginPrivate {
 
     QMap<Konsole::MainWindow *, SSHManagerTreeWidget *> widgetForWindow;
     QMap<Konsole::MainWindow *, QDockWidget *> dockForWindow;
+    SSHQuickAccessWidget *quickAccess = nullptr;
+    QAction *showQuickAccess = nullptr;
 };
 
 SSHManagerPlugin::SSHManagerPlugin(QObject *object, const QVariantList &args)
     : Konsole::IKonsolePlugin(object, args)
     , d(std::make_unique<SSHManagerPluginPrivate>())
 {
+    d->quickAccess = new SSHQuickAccessWidget(&d->model);
+    connect(d->quickAccess, &QObject::destroyed, this, [this] {
+        // quick access can be destroyed if a terminal display is destroyed.
+        // so, just create a new one.
+        d->quickAccess = new SSHQuickAccessWidget(&d->model);
+    });
+
+    d->showQuickAccess = new QAction();
+
     setName(QStringLiteral("SshManager"));
 }
 
-SSHManagerPlugin::~SSHManagerPlugin() = default;
+SSHManagerPlugin::~SSHManagerPlugin()
+{
+    disconnect(d->quickAccess);
+}
 
 void SSHManagerPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindow)
 {
@@ -70,10 +86,30 @@ QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow *mainWindo
     return {toggleVisibilityAction};
 }
 
+#include <iostream>
+
 void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller, Konsole::MainWindow *mainWindow)
 {
     Q_ASSERT(controller);
     Q_ASSERT(mainWindow);
+
+    auto terminalDisplay = controller->view();
+
+    d->quickAccess->hide();
+    d->quickAccess->setParent(terminalDisplay);
+    d->quickAccess->setSessionController(controller);
+
+    d->showQuickAccess->deleteLater();
+    d->showQuickAccess = new QAction(i18n("Show Quick Access for SSH Actions"));
+
+    d->showQuickAccess->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_H));
+    terminalDisplay->addAction(d->showQuickAccess);
+
+    connect(d->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay] {
+        d->quickAccess->show();
+        d->quickAccess->setFocus();
+        terminalDisplay->installEventFilter(d->quickAccess);
+    });
 
     if (mainWindow) {
         d->widgetForWindow[mainWindow]->setCurrentController(controller);
