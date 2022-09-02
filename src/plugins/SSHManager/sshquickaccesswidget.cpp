@@ -7,6 +7,8 @@
 
 #include "sshquickaccesswidget.h"
 
+#include "sshmanagerfiltermodel.h"
+
 #include <session/SessionController.h>
 #include <terminalDisplay/TerminalDisplay.h>
 
@@ -22,19 +24,25 @@
 
 struct SSHQuickAccessWidget::Private {
     QAbstractItemModel *model = nullptr;
+    SSHManagerFilterModel *filterModel = nullptr;
     Konsole::SessionController *controller = nullptr;
+    QTreeView *view = nullptr;
 };
 
 SSHQuickAccessWidget::SSHQuickAccessWidget(QAbstractItemModel *model, QWidget *parent)
     : QWidget(parent)
     , d(std::make_unique<SSHQuickAccessWidget::Private>())
 {
+    d->filterModel = new SSHManagerFilterModel(this);
+    d->filterModel->setSourceModel(model);
+
     auto *filter = new QLineEdit(this);
     filter->setPlaceholderText(tr("Filter"));
 
     auto *view = new QTreeView(this);
     view->setHeaderHidden(true);
-    view->setModel(model);
+    view->setModel(d->filterModel);
+    d->view = view;
 
     auto *layout = new QBoxLayout(QBoxLayout::Direction::TopToBottom);
     layout->addWidget(filter);
@@ -43,6 +51,10 @@ SSHQuickAccessWidget::SSHQuickAccessWidget(QAbstractItemModel *model, QWidget *p
 
     layout->setSpacing(0);
     d->model = model;
+
+    connect(filter, &QLineEdit::textChanged, this, [this, filter] {
+        d->filterModel->setFilterRegularExpression(filter->text());
+    });
 }
 
 SSHQuickAccessWidget::~SSHQuickAccessWidget() = default;
@@ -78,6 +90,11 @@ void SSHQuickAccessWidget::showEvent(QShowEvent *ev)
     int eigth = rect.width() / 8;
     rect.adjust(eigth, eigth, -eigth, -eigth);
     setGeometry(eigth, rect.topLeft().y(), rect.width(), rect.height());
+
+    for (int i = 0; i < d->view->model()->rowCount(); i++) {
+        QModelIndex idx = d->view->model()->index(i, 0);
+        d->view->expand(idx);
+    }
 }
 
 bool SSHQuickAccessWidget::eventFilter(QObject *watched, QEvent *event)
