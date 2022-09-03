@@ -10,6 +10,7 @@
 #include <KActionCollection>
 #include <KCommandBar>
 #include <QMainWindow>
+#include <QSettings>
 
 #include "MainWindow.h"
 #include <KLocalizedString>
@@ -46,6 +47,16 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
     qcDockWidget->setVisible(false);
 
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, qcDockWidget);
+    connect(qcWidget, &QuickCommandsWidget::quickAccessShortcutChanged, this, [this](QKeySequence s) {
+        priv->showQuickAccess->setShortcut(s);
+
+        QString sequenceText = s.toString();
+        QSettings settings;
+        settings.beginGroup(QStringLiteral("plugins"));
+        settings.beginGroup(QStringLiteral("quickcommands"));
+        settings.setValue(QStringLiteral("shortcut"), sequenceText);
+        settings.sync();
+    });
 
     priv->widgetForWindow[mainWindow] = qcWidget;
     priv->dockForWindow[mainWindow] = qcDockWidget;
@@ -54,9 +65,19 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
 void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controller, Konsole::MainWindow *mainWindow)
 {
     priv->showQuickAccess->deleteLater();
-    priv->showQuickAccess = new QAction(i18n("Show Quick Access for SSH Actions"));
+    priv->showQuickAccess = new QAction(i18n("Show Quick Access"));
 
-    priv->showQuickAccess->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_G));
+    QSettings settings;
+    settings.beginGroup(QStringLiteral("plugins"));
+    settings.beginGroup(QStringLiteral("quickcommands"));
+
+    const QKeySequence def(Qt::CTRL + Qt::ALT + Qt::Key_G);
+    const QString defText = def.toString();
+    const QString entry = settings.value(QStringLiteral("shortcut"), defText).toString();
+    const QKeySequence shortcutEntry(entry);
+
+    priv->showQuickAccess->setShortcut(shortcutEntry);
+
     controller->view()->addAction(priv->showQuickAccess);
 
     Konsole::TerminalDisplay *terminalDisplay = controller->view();

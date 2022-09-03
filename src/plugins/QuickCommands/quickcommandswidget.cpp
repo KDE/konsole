@@ -12,6 +12,7 @@
 #include "ui_qcwidget.h"
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <QSettings>
 #include <QStandardPaths>
 #include <QTemporaryFile>
 #include <QTimer>
@@ -70,6 +71,21 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
     });
 
     viewMode();
+
+    QSettings settings;
+    settings.beginGroup(QStringLiteral("plugins"));
+    settings.beginGroup(QStringLiteral("quickcommands"));
+
+    const QKeySequence def(Qt::CTRL + Qt::ALT + Qt::Key_G);
+    const QString defText = def.toString();
+    const QString entry = settings.value(QStringLiteral("shortcut"), defText).toString();
+    const QKeySequence shortcutEntry(entry);
+
+    connect(ui->keySequenceEdit, &QKeySequenceEdit::keySequenceChanged, this, [this] {
+        auto shortcut = ui->keySequenceEdit->keySequence();
+        Q_EMIT quickAccessShortcutChanged(shortcut);
+    });
+    ui->keySequenceEdit->setKeySequence(shortcutEntry);
 }
 
 QuickCommandsWidget::~QuickCommandsWidget() = default;

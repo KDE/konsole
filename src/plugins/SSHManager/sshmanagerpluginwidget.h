@@ -1,3 +1,4 @@
+    Q_SIGNAL void quickAccessShortcutChanged(QKeySequence shortcut);
 /*  This file was part of the KDE libraries
 
     SPDX-FileCopyrightText: 2021 Tomaz Canabrava <tcanabrava@kde.org>
@@ -63,6 +64,8 @@ public:
     void triggerDelete();
     void setCurrentController(Konsole::SessionController *controller);
     void handleImportedData(bool isImported);
+
+    Q_SIGNAL void quickAccessShortcutChanged(QKeySequence shortcut);
 
 protected:
     void showEvent(QShowEvent *) override;

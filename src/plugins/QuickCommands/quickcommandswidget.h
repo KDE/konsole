@@ -5,7 +5,9 @@
 #ifndef QUICKCOMMANDSWIDGET_H
 #define QUICKCOMMANDSWIDGET_H
 
+#include <QKeySequence>
 #include <QWidget>
+
 #include <memory>
 
 #include "quickcommanddata.h"
@@ -53,6 +55,8 @@ public:
 
     void setModel(QuickCommandsModel *model);
     void setCurrentController(Konsole::SessionController *controller);
+
+    Q_SIGNAL void quickAccessShortcutChanged(QKeySequence shortcut);
 
 protected:
     void showEvent(QShowEvent *) override;

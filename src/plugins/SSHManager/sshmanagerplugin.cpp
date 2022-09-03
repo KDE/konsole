@@ -26,6 +26,7 @@
 #include <KCommandBar>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <QSettings>
 
 #include "MainWindow.h"
 #include "terminalDisplay/TerminalDisplay.h"
@@ -71,6 +72,17 @@ void SSHManagerPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindo
     connect(managerWidget, &SSHManagerTreeWidget::requestNewTab, this, [mainWindow] {
         mainWindow->newTab();
     });
+
+    connect(managerWidget, &SSHManagerTreeWidget::quickAccessShortcutChanged, this, [this](QKeySequence s) {
+        d->showQuickAccess->setShortcut(s);
+
+        QString sequenceText = s.toString();
+        QSettings settings;
+        settings.beginGroup(QStringLiteral("plugins"));
+        settings.beginGroup(QStringLiteral("sshplugin"));
+        settings.setValue(QStringLiteral("ssh_shortcut"), sequenceText);
+        settings.sync();
+    });
 }
 
 QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow *mainWindow) const
@@ -98,7 +110,16 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
     d->showQuickAccess->deleteLater();
     d->showQuickAccess = new QAction(i18n("Show Quick Access for SSH Actions"));
 
-    d->showQuickAccess->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_H));
+    QSettings settings;
+    settings.beginGroup(QStringLiteral("plugins"));
+    settings.beginGroup(QStringLiteral("sshplugin"));
+
+    const QKeySequence def(Qt::CTRL + Qt::ALT + Qt::Key_H);
+    const QString defText = def.toString();
+    const QString entry = settings.value(QStringLiteral("ssh_shortcut"), defText).toString();
+    const QKeySequence shortcutEntry(entry);
+
+    d->showQuickAccess->setShortcut(shortcutEntry);
     terminalDisplay->addAction(d->showQuickAccess);
 
     connect(d->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controller] {
