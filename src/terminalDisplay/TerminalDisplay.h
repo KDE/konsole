@@ -26,6 +26,12 @@
 
 #include "TerminalBell.h"
 
+#include "unicode/localpointer.h"
+#include "unicode/ubidi.h"
+#include "unicode/uchar.h"
+#include "unicode/ushape.h"
+#include "unicode/utypes.h"
+
 class QDrag;
 class QDragEnterEvent;
 class QDropEvent;
@@ -787,6 +793,8 @@ private:
 
     bool _semanticUpDown;
     bool _semanticInputClick;
+
+    UBiDi *ubidi = nullptr;
 };
 
 }

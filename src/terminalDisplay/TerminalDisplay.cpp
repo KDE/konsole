@@ -78,12 +78,6 @@
 #include "TerminalPainter.h"
 #include "TerminalScrollBar.h"
 
-#include "unicode/localpointer.h"
-#include "unicode/ubidi.h"
-#include "unicode/uchar.h"
-#include "unicode/ushape.h"
-#include "unicode/utypes.h"
-
 using namespace Konsole;
 
 inline int TerminalDisplay::loc(int x, int y) const
@@ -309,6 +303,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     };
 
     _printManager.reset(new KonsolePrintManager(ldrawBackground, ldrawContents, lgetBackgroundColor));
+    ubidi = ubidi_open();
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -318,6 +313,8 @@ TerminalDisplay::~TerminalDisplay()
 
     delete[] _image;
     delete _filterChain;
+
+    ubidi_close(ubidi);
 }
 
 void TerminalDisplay::setupHeaderVisibility()
@@ -2990,7 +2987,6 @@ int TerminalDisplay::bidiMap(Character *screenline,
     if (!bidi) {
         return lastNonSpace;
     }
-    UBiDi *ubidi = ubidi_open();
     UBiDiLevel paraLevel = _bidiLineLTR ? 0 : UBIDI_DEFAULT_LTR;
     if (_bidiTableDirOverride) {
         ubidi_setClassCallback(ubidi, BiDiClass, nullptr, nullptr, nullptr, &errorCode);
