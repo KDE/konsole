@@ -26,12 +26,6 @@
 
 #include "TerminalBell.h"
 
-#include "unicode/localpointer.h"
-#include "unicode/ubidi.h"
-#include "unicode/uchar.h"
-#include "unicode/ushape.h"
-#include "unicode/utypes.h"
-
 class QDrag;
 class QDragEnterEvent;
 class QDropEvent;
@@ -47,6 +41,8 @@ class QTimerEvent;
 class QScrollEvent;
 class QScrollPrepareEvent;
 class KMessageWidget;
+
+struct UBiDi;
 
 namespace Konsole
 {

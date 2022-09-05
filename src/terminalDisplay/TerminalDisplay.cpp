@@ -78,6 +78,12 @@
 #include "TerminalPainter.h"
 #include "TerminalScrollBar.h"
 
+#include "unicode/localpointer.h"
+#include "unicode/ubidi.h"
+#include "unicode/uchar.h"
+#include "unicode/ushape.h"
+#include "unicode/utypes.h"
+
 using namespace Konsole;
 
 inline int TerminalDisplay::loc(int x, int y) const
