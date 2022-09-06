@@ -42,7 +42,12 @@ public:
 
     typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
 
-    explicit ColorSchemeWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor, const qreal &opacity);
+    explicit ColorSchemeWallpaper(const QString &path,
+                                  const ColorSchemeWallpaper::FillStyle style,
+                                  const QPointF &anchor,
+                                  const qreal &opacity,
+                                  const bool &flipHorizontal,
+                                  const bool &flipVertical);
     ~ColorSchemeWallpaper();
 
     void load();
@@ -60,6 +65,10 @@ public:
 
     qreal opacity() const;
 
+    bool flipHorizontal() const;
+
+    bool flipVertical() const;
+
 private:
     Q_GADGET
     Q_DISABLE_COPY(ColorSchemeWallpaper)
@@ -69,6 +78,8 @@ private:
     FillStyle _style;
     QPointF _anchor;
     qreal _opacity;
+    bool _flipHorizontal;
+    bool _flipVertical;
 
     QRectF ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect);
     Qt::AspectRatioMode RatioMode();

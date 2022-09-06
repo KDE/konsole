@@ -99,6 +99,9 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     connect(_ui->wallpaperHorizontalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::horizontalAnchorChanged);
     connect(_ui->wallpaperVerticalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::verticalAnchorChanged);
 
+    connect(_ui->wallpaperFlipHorizontalCheckBox, &QCheckBox::toggled, this, &Konsole::ColorSchemeEditor::wallpaperFlipHorizontalChanged);
+    connect(_ui->wallpaperFlipVerticalCheckBox, &QCheckBox::toggled, this, &Konsole::ColorSchemeEditor::wallpaperFlipVerticalChanged);
+
     // color table
     _ui->colorTable->setColumnCount(4);
     _ui->colorTable->setRowCount(COLOR_TABLE_ROW_LENGTH);
@@ -196,19 +199,34 @@ void ColorSchemeEditor::setWallpaperOpacity(int percent)
     _ui->wallpaperTransparencyPercentLabel->setText(QStringLiteral("%1%").arg(percent));
 
     const qreal opacity = (100.0 - percent) / 100.0;
-    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), _colors->wallpaper()->anchor(), opacity);
+    _colors->setWallpaper(_colors->wallpaper()->path(),
+                          _colors->wallpaper()->style(),
+                          _colors->wallpaper()->anchor(),
+                          opacity,
+                          _colors->wallpaper()->flipHorizontal(),
+                          _colors->wallpaper()->flipVertical());
 }
 
 void ColorSchemeEditor::wallpaperPathChanged(const QString &path)
 {
     if (path.isEmpty()) {
-        _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
+        _colors->setWallpaper(path,
+                              _colors->wallpaper()->style(),
+                              _colors->wallpaper()->anchor(),
+                              _colors->wallpaper()->opacity(),
+                              _colors->wallpaper()->flipHorizontal(),
+                              _colors->wallpaper()->flipVertical());
         enableWallpaperSettings(false);
     } else {
         QFileInfo i(path);
 
         if (i.exists() && i.isFile() && i.isReadable()) {
-            _colors->setWallpaper(path, _colors->wallpaper()->style(), _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
+            _colors->setWallpaper(path,
+                                  _colors->wallpaper()->style(),
+                                  _colors->wallpaper()->anchor(),
+                                  _colors->wallpaper()->opacity(),
+                                  _colors->wallpaper()->flipHorizontal(),
+                                  _colors->wallpaper()->flipVertical());
             enableWallpaperSettings(true);
         }
     }
@@ -217,13 +235,43 @@ void ColorSchemeEditor::wallpaperPathChanged(const QString &path)
 void ColorSchemeEditor::scalingTypeChanged(int styleIndex)
 {
     const char *style = QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>().valueToKey(styleIndex);
-    _colors->setWallpaper(_colors->wallpaper()->path(), QString::fromLatin1(style), _colors->wallpaper()->anchor(), _colors->wallpaper()->opacity());
+    _colors->setWallpaper(_colors->wallpaper()->path(),
+                          QString::fromLatin1(style),
+                          _colors->wallpaper()->anchor(),
+                          _colors->wallpaper()->opacity(),
+                          _colors->wallpaper()->flipHorizontal(),
+                          _colors->wallpaper()->flipVertical());
+}
+
+void ColorSchemeEditor::wallpaperFlipHorizontalChanged(bool horizontal)
+{
+    _colors->setWallpaper(_colors->wallpaper()->path(),
+                          _colors->wallpaper()->style(),
+                          _colors->wallpaper()->anchor(),
+                          _colors->wallpaper()->opacity(),
+                          horizontal,
+                          _colors->wallpaper()->flipVertical());
+}
+
+void ColorSchemeEditor::wallpaperFlipVerticalChanged(bool vertical)
+{
+    _colors->setWallpaper(_colors->wallpaper()->path(),
+                          _colors->wallpaper()->style(),
+                          _colors->wallpaper()->anchor(),
+                          _colors->wallpaper()->opacity(),
+                          _colors->wallpaper()->flipHorizontal(),
+                          vertical);
 }
 
 void ColorSchemeEditor::horizontalAnchorChanged(int pos)
 {
     QPointF anch = _colors->wallpaper()->anchor();
-    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), QPointF(pos / 2.0, anch.y()), _colors->wallpaper()->opacity());
+    _colors->setWallpaper(_colors->wallpaper()->path(),
+                          _colors->wallpaper()->style(),
+                          QPointF(pos / 2.0, anch.y()),
+                          _colors->wallpaper()->opacity(),
+                          _colors->wallpaper()->flipHorizontal(),
+                          _colors->wallpaper()->flipVertical());
     switch (pos) {
     case 2:
         _ui->wallpaperHorizontalAnchorPosition->setText(QString::fromLatin1("Right"));
@@ -241,7 +289,12 @@ void ColorSchemeEditor::horizontalAnchorChanged(int pos)
 void ColorSchemeEditor::verticalAnchorChanged(int pos)
 {
     QPointF anch = _colors->wallpaper()->anchor();
-    _colors->setWallpaper(_colors->wallpaper()->path(), _colors->wallpaper()->style(), QPointF(anch.x(), pos / 2.0), _colors->wallpaper()->opacity());
+    _colors->setWallpaper(_colors->wallpaper()->path(),
+                          _colors->wallpaper()->style(),
+                          QPointF(anch.x(), pos / 2.0),
+                          _colors->wallpaper()->opacity(),
+                          _colors->wallpaper()->flipHorizontal(),
+                          _colors->wallpaper()->flipVertical());
     switch (pos) {
     case 2:
         _ui->wallpaperVerticalAnchorPosition->setText(QString::fromLatin1("Bottom"));
@@ -323,6 +376,8 @@ void ColorSchemeEditor::setup(const std::shared_ptr<const ColorScheme> &scheme, 
     int ay = qRound(scheme->wallpaper()->anchor().y() * 2.0);
     _ui->wallpaperPath->setText(scheme->wallpaper()->path());
     _ui->wallpaperScalingType->setCurrentIndex(scheme->wallpaper()->style());
+    _ui->wallpaperFlipHorizontalCheckBox->setChecked(scheme->wallpaper()->flipHorizontal());
+    _ui->wallpaperFlipVerticalCheckBox->setChecked(scheme->wallpaper()->flipVertical());
     _ui->wallpaperHorizontalAnchorSlider->setValue(ax);
     _ui->wallpaperVerticalAnchorSlider->setValue(ay);
     enableWallpaperSettings(!scheme->wallpaper()->isNull());
@@ -382,4 +437,6 @@ void ColorSchemeEditor::enableWallpaperSettings(bool enable)
     _ui->wallpaperVerticalAnchorSlider->setEnabled(enable);
     _ui->wallpaperTransparencySlider->setEnabled(enable);
     _ui->wallpaperScalingType->setEnabled(enable);
+    _ui->wallpaperFlipHorizontalCheckBox->setEnabled(enable);
+    _ui->wallpaperFlipVerticalCheckBox->setEnabled(enable);
 }

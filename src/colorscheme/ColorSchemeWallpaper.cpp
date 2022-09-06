@@ -17,12 +17,19 @@
 
 using namespace Konsole;
 
-ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path, const ColorSchemeWallpaper::FillStyle style, const QPointF &anchor, const qreal &opacity)
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path,
+                                           const ColorSchemeWallpaper::FillStyle style,
+                                           const QPointF &anchor,
+                                           const qreal &opacity,
+                                           const bool &flipHorizontal,
+                                           const bool &flipVertical)
     : _path(path)
     , _picture(nullptr)
     , _style(style)
     , _anchor(anchor)
     , _opacity(opacity)
+    , _flipHorizontal(flipHorizontal)
+    , _flipVertical(flipVertical)
 {
     float x = _anchor.x(), y = _anchor.y();
 
@@ -44,7 +51,9 @@ void ColorSchemeWallpaper::load()
     }
 
     if (_picture->isNull()) {
-        _picture->load(_path);
+        QImage image(_path);
+        QImage transformed = image.mirrored(flipHorizontal(), flipVertical());
+        _picture->convertFromImage(transformed);
     }
 }
 
@@ -85,6 +94,16 @@ QString ColorSchemeWallpaper::path() const
 ColorSchemeWallpaper::FillStyle ColorSchemeWallpaper::style() const
 {
     return _style;
+}
+
+bool ColorSchemeWallpaper::flipHorizontal() const
+{
+    return _flipHorizontal;
+}
+
+bool ColorSchemeWallpaper::flipVertical() const
+{
+    return _flipVertical;
 }
 
 QPointF ColorSchemeWallpaper::anchor() const

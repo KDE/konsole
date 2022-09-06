@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>364</width>
-    <height>460</height>
+    <height>474</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -193,6 +193,31 @@ To see any effect, set colors with saturation value greater than 0.</string>
          <string>NoScaling</string>
         </property>
        </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="wallpaperFlipLabel">
+       <property name="text">
+        <string>Wallpaper flip:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="wallpaperFlipHorizontalCheckBox">
+        <property name="text">
+        <string>Horizontal</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="wallpaperFlipVerticalCheckBox">
+        <property name="text">
+        <string>Vertical</string>
+       </property>
       </widget>
      </item>
     </layout>
