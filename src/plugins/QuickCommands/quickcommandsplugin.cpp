@@ -14,6 +14,7 @@
 
 #include "MainWindow.h"
 #include <KLocalizedString>
+#include <KMessageBox>
 
 #include <QDockWidget>
 
@@ -96,6 +97,14 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
                 });
                 actions.append(act);
             }
+        }
+
+        if (actions.isEmpty()) // no quick commands found, must give feedback to the user about that
+        {
+            const QString feedbackMessage = QStringLiteral("Please enable the plugin on Plugins -> Quick Commands");
+            const QString feedbackTitle = QStringLiteral("Plugins - Quick Commands");
+            KMessageBox::sorry(terminalDisplay->topLevelWidget(), feedbackMessage, feedbackTitle);
+            return;
         }
 
         QVector<KCommandBar::ActionGroup> groups;
