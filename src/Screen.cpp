@@ -11,6 +11,7 @@
 #include "config-konsole.h"
 
 // Qt
+#include <QFile>
 #include <QTextStream>
 
 // Konsole decoders
@@ -1657,9 +1658,31 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
             }
         }
     } else {
-        const size_t line = bottomRow - _history->getLines();
+        size_t line = bottomRow - _history->getLines();
         const int lastColumn = (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
         const auto *data = _screenLines[line].data();
+
+        // This should never happen, but it's happening. this is just to gather some information
+        // about the crash.
+        // Do not let this code go to a release.
+        if (_screenLines.size() < line) {
+            QFile konsoleInfo(QStringLiteral("~/konsole_info_crash_array_out_of_bounds.txt"));
+            konsoleInfo.open(QIODevice::WriteOnly);
+            QTextStream messages(&konsoleInfo);
+
+            messages << "_selBegin" << _selBegin << "\n";
+            messages << "endPos" << endPos << "\n";
+            messages << "_selBottomRight" << _selBottomRight << "\n";
+            messages << "bottomRow Calculation: (_selBottomRight / _columns) = " << _selBottomRight << "/" << _columns << "\n";
+            messages << "line Calculation: (bottomRow - _history->getLines()) = " << bottomRow << "-" << _history->getLines() << "\n";
+            messages << "_screenLines.count()" << _screenLines.size() << "\n";
+            messages << "line" << line << "\n";
+        }
+
+        // HACK: do not crash.
+        if (_screenLines.size() < line) {
+            line = _screenLines.size() - 1;
+        }
         const int length = _screenLines.at(line).count();
 
         for (int k = bottomColumn; k < lastColumn && k < length; k++) {
