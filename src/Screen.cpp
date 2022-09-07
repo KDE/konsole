@@ -1637,40 +1637,40 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
 
         _selTopLeft = loc(qMin(topColumn, bottomColumn), topRow);
         _selBottomRight = loc(qMax(topColumn, bottomColumn), bottomRow);
+        return;
+    }
+    // Extend the selection to the rightmost column if beyond the last character in the line
+    const int bottomRow = _selBottomRight / _columns;
+    const int bottomColumn = _selBottomRight % _columns;
+
+    bool beyondLastColumn = true;
+    if (bottomRow < _history->getLines()) {
+        ImageLine histLine;
+        const int histLineLen = _history->getLineLen(bottomRow);
+        histLine.resize(histLineLen);
+
+        _history->getCells(bottomRow, 0, histLineLen, histLine.data());
+
+        for (int j = bottomColumn; j < histLineLen; j++) {
+            if ((histLine.at(j).flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar(histLine.at(j).character).isSpace())) {
+                beyondLastColumn = false;
+            }
+        }
     } else {
-        // Extend the selection to the rightmost column if beyond the last character in the line
-        const int bottomRow = _selBottomRight / _columns;
-        const int bottomColumn = _selBottomRight % _columns;
+        const size_t line = bottomRow - _history->getLines();
+        const int lastColumn = (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
+        const auto *data = _screenLines[line].data();
+        const int length = _screenLines.at(line).count();
 
-        bool beyondLastColumn = true;
-        if (bottomRow < _history->getLines()) {
-            ImageLine histLine;
-            const int histLineLen = _history->getLineLen(bottomRow);
-            histLine.resize(histLineLen);
-
-            _history->getCells(bottomRow, 0, histLineLen, histLine.data());
-
-            for (int j = bottomColumn; j < histLineLen; j++) {
-                if ((histLine.at(j).flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar(histLine.at(j).character).isSpace())) {
-                    beyondLastColumn = false;
-                }
-            }
-        } else {
-            const size_t line = bottomRow - _history->getLines();
-            const int lastColumn = (line < _lineProperties.size() && _lineProperties[line] & LINE_DOUBLEWIDTH) ? _columns / 2 : _columns;
-            const auto *data = _screenLines[line].data();
-            const int length = _screenLines.at(line).count();
-
-            for (int k = bottomColumn; k < lastColumn && k < length; k++) {
-                if ((data[k].flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar(data[k].character).isSpace())) {
-                    beyondLastColumn = false;
-                }
+        for (int k = bottomColumn; k < lastColumn && k < length; k++) {
+            if ((data[k].flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar(data[k].character).isSpace())) {
+                beyondLastColumn = false;
             }
         }
+    }
 
-        if (beyondLastColumn) {
-            _selBottomRight = loc(_columns - 1, bottomRow);
-        }
+    if (beyondLastColumn) {
+        _selBottomRight = loc(_columns - 1, bottomRow);
     }
 }
 
