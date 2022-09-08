@@ -71,8 +71,7 @@ private Q_SLOTS:
     void setWallpaperOpacity(int percent);
     void wallpaperPathChanged(const QString &path);
     void scalingTypeChanged(int styleIndex);
-    void wallpaperFlipHorizontalChanged(bool horizontal);
-    void wallpaperFlipVerticalChanged(bool vertical);
+    void flipTypeChanged(int flipTypeIndex);
     void horizontalAnchorChanged(int pos);
     void verticalAnchorChanged(int pos);
     void selectWallpaper();

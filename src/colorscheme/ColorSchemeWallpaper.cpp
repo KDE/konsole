@@ -21,15 +21,13 @@ ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path,
                                            const ColorSchemeWallpaper::FillStyle style,
                                            const QPointF &anchor,
                                            const qreal &opacity,
-                                           const bool &flipHorizontal,
-                                           const bool &flipVertical)
+                                           const ColorSchemeWallpaper::FlipType flipType)
     : _path(path)
     , _picture(nullptr)
     , _style(style)
     , _anchor(anchor)
     , _opacity(opacity)
-    , _flipHorizontal(flipHorizontal)
-    , _flipVertical(flipVertical)
+    , _flipType(flipType)
 {
     float x = _anchor.x(), y = _anchor.y();
 
@@ -51,8 +49,8 @@ void ColorSchemeWallpaper::load()
     }
 
     if (_picture->isNull()) {
-        QImage image(_path);
-        QImage transformed = image.mirrored(flipHorizontal(), flipVertical());
+        const QImage image(_path);
+        const QImage transformed = FlipImage(image, _flipType);
         _picture->convertFromImage(transformed);
     }
 }
@@ -96,14 +94,9 @@ ColorSchemeWallpaper::FillStyle ColorSchemeWallpaper::style() const
     return _style;
 }
 
-bool ColorSchemeWallpaper::flipHorizontal() const
+ColorSchemeWallpaper::FlipType ColorSchemeWallpaper::flipType() const
 {
-    return _flipHorizontal;
-}
-
-bool ColorSchemeWallpaper::flipVertical() const
-{
-    return _flipVertical;
+    return _flipType;
 }
 
 QPointF ColorSchemeWallpaper::anchor() const
@@ -147,5 +140,19 @@ Qt::AspectRatioMode ColorSchemeWallpaper::RatioMode()
     case Stretch:
     default:
         return Qt::IgnoreAspectRatio;
+    }
+}
+
+QImage ColorSchemeWallpaper::FlipImage(const QImage image, const ColorSchemeWallpaper::FlipType flipType)
+{
+    switch (flipType) {
+    case Horizontal:
+        return image.mirrored(true, false);
+    case Vertical:
+        return image.mirrored(false, true);
+    case Both:
+        return image.mirrored(true, true);
+    default:
+        return image;
     }
 }

@@ -207,17 +207,27 @@ To see any effect, set colors with saturation value greater than 0.</string>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="wallpaperFlipHorizontalCheckBox">
+      <widget class="QComboBox" name="wallpaperFlipType">
+       <item>
         <property name="text">
-        <string>Horizontal</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="wallpaperFlipVerticalCheckBox">
+         <string>NoFlip</string>
+        </property>
+       </item>
+       <item>
         <property name="text">
-        <string>Vertical</string>
-       </property>
+         <string>Horizontal</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Vertical</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Both</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>

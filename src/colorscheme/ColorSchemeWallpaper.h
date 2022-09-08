@@ -40,14 +40,21 @@ public:
     };
     Q_ENUM(FillStyle)
 
+    enum FlipType {
+        NoFlip = 0,
+        Horizontal,
+        Vertical,
+        Both,
+    };
+    Q_ENUM(FlipType)
+
     typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
 
     explicit ColorSchemeWallpaper(const QString &path,
                                   const ColorSchemeWallpaper::FillStyle style,
                                   const QPointF &anchor,
                                   const qreal &opacity,
-                                  const bool &flipHorizontal,
-                                  const bool &flipVertical);
+                                  const ColorSchemeWallpaper::FlipType flipType);
     ~ColorSchemeWallpaper();
 
     void load();
@@ -65,9 +72,7 @@ public:
 
     qreal opacity() const;
 
-    bool flipHorizontal() const;
-
-    bool flipVertical() const;
+    FlipType flipType() const;
 
 private:
     Q_GADGET
@@ -78,11 +83,11 @@ private:
     FillStyle _style;
     QPointF _anchor;
     qreal _opacity;
-    bool _flipHorizontal;
-    bool _flipVertical;
+    FlipType _flipType;
 
     QRectF ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect);
     Qt::AspectRatioMode RatioMode();
+    QImage FlipImage(const QImage image, const ColorSchemeWallpaper::FlipType flipType);
 };
 
 }

@@ -188,7 +188,7 @@ ColorScheme::ColorScheme()
     , _colorRandomization(false)
     , _wallpaper(nullptr)
 {
-    setWallpaper(QString(), ColorSchemeWallpaper::Tile, QPointF(0.5, 0.5), 1.0, false, false);
+    setWallpaper(QString(), ColorSchemeWallpaper::Tile, QPointF(0.5, 0.5), 1.0, ColorSchemeWallpaper::NoFlip);
 }
 
 ColorScheme::ColorScheme(const ColorScheme &other)
@@ -470,8 +470,7 @@ void ColorScheme::read(const KConfig &config)
                  configGroup.readEntry("FillStyle", QString::fromLatin1("Tile")),
                  configGroup.readEntry("Anchor", QPointF(0.5, 0.5)),
                  configGroup.readEntry("WallpaperOpacity", 1.0),
-                 configGroup.readEntry("WallpaperFlipHorizontal", false),
-                 configGroup.readEntry("WallpaperFlipVertical", false));
+                 configGroup.readEntry("WallpaperFlipType", QString::fromLatin1("NoFlip")));
     _colorRandomization = configGroup.readEntry(EnableColorRandomizationKey, false);
 
     for (int i = 0; i < TABLE_COLORS; i++) {
@@ -533,8 +532,7 @@ void ColorScheme::write(KConfig &config) const
     configGroup.writeEntry("Blur", _blur);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
     configGroup.writeEntry("FillStyle", QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>().valueToKey(_wallpaper->style()));
-    configGroup.writeEntry("WallpaperFlipHorizontal", _wallpaper->flipHorizontal());
-    configGroup.writeEntry("WallpaperFlipVertical", _wallpaper->flipVertical());
+    configGroup.writeEntry("WallpaperFlipType", QMetaEnum::fromType<ColorSchemeWallpaper::FlipType>().valueToKey(_wallpaper->flipType()));
     configGroup.writeEntry("Anchor", _wallpaper->anchor());
     configGroup.writeEntry("WallpaperOpacity", _wallpaper->opacity());
     configGroup.writeEntry(EnableColorRandomizationKey, _colorRandomization);
@@ -588,25 +586,24 @@ void ColorScheme::setWallpaper(const QString &path,
                                const ColorSchemeWallpaper::FillStyle style,
                                const QPointF &anchor,
                                const qreal &opacity,
-                               const bool &flipHorizontal,
-                               const bool &flipVertical)
+                               const ColorSchemeWallpaper::FlipType flipType)
 {
-    _wallpaper = new ColorSchemeWallpaper(path, style, anchor, opacity, flipHorizontal, flipVertical);
+    _wallpaper = new ColorSchemeWallpaper(path, style, anchor, opacity, flipType);
 }
 
-void ColorScheme::setWallpaper(const QString &path,
-                               const QString &style,
-                               const QPointF &anchor,
-                               const qreal &opacity,
-                               const bool &flipHorizontal,
-                               const bool &flipVertical)
+void ColorScheme::setWallpaper(const QString &path, const QString &style, const QPointF &anchor, const qreal &opacity, const QString &flipType)
 {
     ColorSchemeWallpaper::FillStyle fstyle;
     fstyle = static_cast<ColorSchemeWallpaper::FillStyle>(std::max( // keyToValue returns -1 if key was not found, but we should default to 0
         QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>().keyToValue(style.toStdString().c_str()),
         0));
 
-    setWallpaper(path, fstyle, anchor, opacity, flipHorizontal, flipVertical);
+    ColorSchemeWallpaper::FlipType ftype;
+    ftype = static_cast<ColorSchemeWallpaper::FlipType>(std::max( // keyToValue returns -1 if key was not found, but we should default to 0
+        QMetaEnum::fromType<ColorSchemeWallpaper::FlipType>().keyToValue(flipType.toStdString().c_str()),
+        0));
+
+    setWallpaper(path, fstyle, anchor, opacity, ftype);
 }
 
 ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const

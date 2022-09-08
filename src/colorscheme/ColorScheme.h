@@ -137,10 +137,9 @@ public:
                       const ColorSchemeWallpaper::FillStyle style,
                       const QPointF &anchor,
                       const qreal &opacity,
-                      const bool &flipHorizontal,
-                      const bool &flipVertical);
-    void
-    setWallpaper(const QString &path, const QString &style, const QPointF &anchor, const qreal &opacity, const bool &flipHorizontal, const bool &flipVertical);
+                      const ColorSchemeWallpaper::FlipType flipType);
+
+    void setWallpaper(const QString &path, const QString &style, const QPointF &anchor, const qreal &opacity, const QString &flipType);
 
     ColorSchemeWallpaper::Ptr wallpaper() const;
 
