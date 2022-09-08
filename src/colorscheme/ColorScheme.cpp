@@ -470,8 +470,8 @@ void ColorScheme::read(const KConfig &config)
                  configGroup.readEntry("FillStyle", QString::fromLatin1("Tile")),
                  configGroup.readEntry("Anchor", QPointF(0.5, 0.5)),
                  configGroup.readEntry("WallpaperOpacity", 1.0),
-                 configGroup.readEntry("wallpaperFlipHorizontal", false),
-                 configGroup.readEntry("wallpaperFlipVertical", false));
+                 configGroup.readEntry("WallpaperFlipHorizontal", false),
+                 configGroup.readEntry("WallpaperFlipVertical", false));
     _colorRandomization = configGroup.readEntry(EnableColorRandomizationKey, false);
 
     for (int i = 0; i < TABLE_COLORS; i++) {
