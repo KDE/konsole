@@ -533,8 +533,8 @@ void ColorScheme::write(KConfig &config) const
     configGroup.writeEntry("Blur", _blur);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
     configGroup.writeEntry("FillStyle", QMetaEnum::fromType<ColorSchemeWallpaper::FillStyle>().valueToKey(_wallpaper->style()));
-    configGroup.writeEntry("wallpaperFlipHorizontal", _wallpaper->flipHorizontal());
-    configGroup.writeEntry("wallpaperFlipVertical", _wallpaper->flipVertical());
+    configGroup.writeEntry("WallpaperFlipHorizontal", _wallpaper->flipHorizontal());
+    configGroup.writeEntry("WallpaperFlipVertical", _wallpaper->flipVertical());
     configGroup.writeEntry("Anchor", _wallpaper->anchor());
     configGroup.writeEntry("WallpaperOpacity", _wallpaper->opacity());
     configGroup.writeEntry(EnableColorRandomizationKey, _colorRandomization);
