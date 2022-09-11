@@ -10,9 +10,9 @@
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
-#include <QDesktopServices>
 #include <QRegularExpression>
 
+#include <KIO/OpenUrlJob>
 #include <KLocalizedString>
 #include <QIcon>
 #include <QMouseEvent>
@@ -75,7 +75,8 @@ void UrlFilterHotSpot::activate(QObject *object)
             url.prepend(QLatin1String("mailto:"));
         }
 
-        QDesktopServices::openUrl(QUrl(url));
+        auto *job = new KIO::OpenUrlJob(QUrl(url));
+        job->start();
     }
 }
 
