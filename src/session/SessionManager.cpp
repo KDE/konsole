@@ -275,7 +275,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
     }
     if (apply.shouldApply(Profile::AllowEscapedLinks) || apply.shouldApply(Profile::ReflowLines)) {
         const bool shouldEnableUrlExtractor = profile->allowEscapedLinks();
-        const bool enableReflowLines = profile->allowEscapedLinks();
+        const bool enableReflowLines = profile->property<bool>(Profile::ReflowLines);
         for (TerminalDisplay *view : session->views()) {
             view->screenWindow()->screen()->setReflowLines(enableReflowLines);
             view->screenWindow()->screen()->setEnableUrlExtractor(shouldEnableUrlExtractor);
