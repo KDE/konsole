@@ -23,6 +23,7 @@ private Q_SLOTS:
     void testLargeScreenCopyLongLine();
     void testBlockSelection();
     void testCursorPosition();
+    void pierreBug();
 
 private:
     void doLargeScreenCopyVerification(const QString &putToScreen, const QString &expectedSelection);

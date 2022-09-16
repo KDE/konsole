@@ -67,6 +67,33 @@ void ScreenTest::testBlockSelection()
     QCOMPARE(selectedText, QStringLiteral("abcd ijkl"));
 }
 
+void ScreenTest::pierreBug()
+{
+    Screen screen(largeScreenLines, largeScreenColumns);
+
+    const QString reallyBigTextForReflow = QStringLiteral("ABCDEFGHIJKLMNOPQRSTU\n");
+
+    for (int i = 0; i < 3; i++) {
+        for (const QChar &c : reallyBigTextForReflow) {
+            screen.displayCharacter(c.toLatin1());
+        }
+    }
+
+    // this breaks the lines in `abcd efgh `
+    // reflowing everything to the lines below.
+    screen.setReflowLines(true);
+
+    // reflow does not reflows cursor line, so let's move it a bit down.
+    screen.cursorDown(1);
+    screen.resizeImage(largeScreenLines, 10);
+
+    screen.setSelectionStart(8, 5, false);
+    screen.setSelectionEnd(3, 7, false);
+
+    const QString selectedText = screen.selectedText(Screen::PlainText);
+    QCOMPARE(selectedText, QStringLiteral("abcd efgh ijkl"));
+}
+
 void ScreenTest::testLargeScreenCopyEmptyLine()
 {
     const QString putToScreen;
