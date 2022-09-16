@@ -10,8 +10,8 @@
 #include "Emulation.h"
 
 // Qt
+#include <QDebug>
 #include <QKeyEvent>
-
 // Konsole
 #include "Screen.h"
 #include "ScreenWindow.h"
@@ -196,6 +196,7 @@ void Emulation::receiveChars(const QVector<uint> &chars)
             _currentScreen->newLine();
             break;
         case '\r':
+            qWarning() << "receiveChars";
             _currentScreen->toStartOfLine();
             break;
         case 0x07:
@@ -298,7 +299,7 @@ void Emulation::setImageSize(int lines, int columns)
     QSize screenSize[2] = {QSize(_screen[0]->getColumns(), _screen[0]->getLines()), //
                            QSize(_screen[1]->getColumns(), _screen[1]->getLines())};
     QSize newSize(columns, lines);
-
+    qWarning() << "resize";
     if (newSize == screenSize[0] && newSize == screenSize[1]) {
         // If this method is called for the first time, always emit
         // SIGNAL(imageSizeChange()), even if the new size is the same as the

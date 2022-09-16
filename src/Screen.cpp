@@ -11,9 +11,9 @@
 #include "config-konsole.h"
 
 // Qt
+#include <QDebug>
 #include <QFile>
 #include <QTextStream>
-
 // Konsole decoders
 #include <HTMLDecoder.h>
 #include <PlainTextDecoder.h>
@@ -230,6 +230,7 @@ void Screen::nextLine()
 //=NEL
 {
     _lineProperties[_cuY] = SetLineLength(_lineProperties[_cuY], _cuX);
+    qWarning() << "nextLine";
     toStartOfLine();
     index();
 }
@@ -481,13 +482,14 @@ void Screen::setCursorLine(int newLine)
 
 void Screen::resizeImage(int new_lines, int new_columns)
 {
+    qWarning() << "rezizze imagge";
     if ((new_lines == _lines) && (new_columns == _columns)) {
         return;
     }
     // Adjust scroll position, and fix glitches
     _oldTotalLines = getLines() + getHistLines();
     _isResize = true;
-
+    qWarning() << "rezizze imagge2";
     int cursorLine = getCursorLine();
     const int oldCursorLine = (cursorLine == _lines - 1 || cursorLine > new_lines - 1) ? new_lines - 1 : cursorLine;
 
@@ -534,10 +536,10 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 }
             }
         }
-
+        qWarning() << "moving cursor down?" << (cursorLine + cursorLineCorrection) << (int)_screenLines.size();
         // Analyze the lines and move the data to lines below.
         int currentPos = 0;
-        while (currentPos < (cursorLine + cursorLineCorrection) && currentPos < (int)_screenLines.size() - 1) {
+        while (currentPos < (cursorLine + cursorLineCorrection) && currentPos < (int)_screenLines.size()) {
             // Join wrapped line in current position
             if ((_lineProperties.at(currentPos) & LINE_WRAPPED) != 0) {
                 _screenLines[currentPos].append(_screenLines.at(currentPos + 1));
@@ -553,7 +555,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             while (lineSize > 0 && QChar(_screenLines.at(currentPos).at(lineSize - 1).character).isSpace()) {
                 --lineSize;
             }
-
+            qWarning() << "need to move cursor down?" << lineSize << new_columns;
             // If need to move to line below, copy from the current line, to the next one.
             if (lineSize > new_columns && !(_lineProperties.at(currentPos) & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
                 auto values = _screenLines.at(currentPos).mid(new_columns);
@@ -561,6 +563,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _lineProperties.insert(_lineProperties.begin() + currentPos + 1, _lineProperties.at(currentPos));
                 _screenLines.insert(_screenLines.begin() + currentPos + 1, std::move(values));
                 _lineProperties[currentPos] |= LINE_WRAPPED;
+                qWarning() << "ADDING LINE_WRAPPED in resizeimage" << currentPos << (int)_screenLines.size() << (cursorLine + cursorLineCorrection)
+                           << cursorLine << cursorLineCorrection;
                 ++cursorLine;
                 scrollPlacements(-1, currentPos);
             }
@@ -925,6 +929,7 @@ void Screen::newLine()
 {
     if (getMode(MODE_NewLine)) {
         _lineProperties[_cuY] = SetLineLength(_lineProperties[_cuY], _cuX);
+        qWarning() << "newLine";
         toStartOfLine();
     }
 
@@ -953,12 +958,14 @@ void Screen::displayCharacter(uint c)
     int w = Character::width(c);
     const QChar::Category category = QChar::category(c);
     if (w < 0) {
+        qWarning() << "return 957";
         // Non-printable character
         return;
     } else if (category == QChar::Mark_SpacingCombining || w == 0 || Character::emoji(c) || c == 0x20E3) {
         bool emoji = Character::emoji(c);
         if (category != QChar::Mark_SpacingCombining && category != QChar::Mark_NonSpacing && category != QChar::Letter_Other && category != QChar::Other_Format
             && !emoji && c != 0x20E3) {
+            qWarning() << "return 963";
             return;
         }
         // Find previous "real character" to try to combine with
@@ -986,11 +993,14 @@ void Screen::displayCharacter(uint c)
 
         if (!previousChar) {
             if (emoji) {
+                qWarning() << "notcombine 989";
                 goto notcombine;
             }
             if (!Hangul::isHangul(c)) {
+                qWarning() << "return 993";
                 return;
             } else {
+                qWarning() << "notcombine 994";
                 w = 2;
                 goto notcombine;
             }
@@ -1002,11 +1012,13 @@ void Screen::displayCharacter(uint c)
             // Combining Enclosing Keycap - only combines with presentation mode #,*,0-9
             if ((currentChar.character != 0x23 && currentChar.character != 0x2A && (currentChar.character < '0' || currentChar.character > '9'))
                 || (currentChar.flags & EF_EMOJI_REPRESENTATION) == 0) {
+                qWarning() << "return 1006";
                 // Is this the right thing TODO?
                 return;
             }
         }
         if (c == 0xFE0F) {
+            qWarning() << "return 1011";
             // Emoji presentation - should not be included
             currentChar.flags |= EF_EMOJI_REPRESENTATION;
             return;
@@ -1029,28 +1041,33 @@ void Screen::displayCharacter(uint c)
                 currentUcs4 = oldChars[extendedCharLength - 1];
             }
             if (currentUcs4 < 0x261d || (currentUcs4 > 0x270d && currentUcs4 < 0x1efff) || currentUcs4 > 0x1faff) {
+                qWarning() << "notcombine 1033";
                 goto notcombine;
             }
             currentChar.flags |= EF_EMOJI_REPRESENTATION;
         } else if (c >= 0x1f1e6 && c <= 0x1f1ff) {
             // Regional indicators - flag components
             if (currentChar.rendition.f.extended == 1 || currentChar.character < 0x1f1e6 || currentChar.character > 0x1f1ff) {
+                qWarning() << "notcombine 1040";
                 goto notcombine;
             }
             currentChar.flags |= EF_EMOJI_REPRESENTATION;
         } else if (emoji) {
             if (currentChar.rendition.f.extended == 0) {
+                qWarning() << "notcombine 1046";
                 goto notcombine;
             }
             ushort extendedCharLength;
             const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
             if (oldChars[extendedCharLength - 1] != 0x200d) {
+                qWarning() << "notcombine 1052";
                 goto notcombine;
             }
         }
 
         if (Hangul::isHangul(c) && !Hangul::combinesWith(currentChar, c)) {
             w = 2;
+            qWarning() << "notcombine 1059";
             goto notcombine;
         }
 
@@ -1090,12 +1107,15 @@ void Screen::displayCharacter(uint c)
                 currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars.get(), extendedCharLength + 1, extChars);
             }
         }
+        qWarning() << "return 1100";
         return;
     }
 
 notcombine:
+    qWarning() << _cuX << w << getScreenLineColumns(_cuY) << getMode(MODE_Wrap);
     if (_cuX + w > getScreenLineColumns(_cuY)) {
         if (getMode(MODE_Wrap)) {
+            qWarning() << "ADDING LINE_WRAPPED to _cuY" << _cuY;
             _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties.at(_cuY) | LINE_WRAPPED);
             nextLine();
         } else {
@@ -1149,6 +1169,7 @@ notcombine:
         --w;
     }
     _cuX = newCursorX;
+    qWarning() << "end of displaycharacter" << newCursorX;
     if (_replMode != REPL_None && std::make_pair(_cuY, _cuX) >= _replModeEnd) {
         _replModeEnd = std::make_pair(_cuY, _cuX);
     }
@@ -1267,6 +1288,7 @@ void Screen::setCursorX(int x)
     if (x < 1) {
         x = 1; // Default
     }
+    qWarning() << "setCursorX";
     _cuX = qBound(0, x - 1, _columns - 1);
 }
 
@@ -1284,6 +1306,7 @@ void Screen::setCursorY(int y)
 
 void Screen::toStartOfLine()
 {
+    qWarning() << "toStartOfLine";
     _cuX = 0;
 }
 
@@ -1326,6 +1349,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
         const int startCol = (y == topLine) ? loca % _columns : 0;
 
         if (endCol < _columns - 1 || startCol > 0) {
+            qWarning() << "REMOVING LINE_WRAPPED from" << y << "because endCol < _columns - 1 || startCol > 0)" << endCol << _columns - 1 << startCol;
             _lineProperties[y] &= ~LINE_WRAPPED;
             if (LineLength(_lineProperties[y]) < endCol && LineLength(_lineProperties[y]) > startCol) {
                 _lineProperties[y] = SetLineLength(_lineProperties[y], startCol);
@@ -1335,6 +1359,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
                 _lineProperties[y] = LINE_DEFAULT;
             }
             {
+                qWarning() << "REMOVING LINE_WRAPPED from" << y;
                 _lineProperties[y] &= ~(LINE_WRAPPED | LINE_PROMPT_START | LINE_INPUT_START | LINE_OUTPUT_START);
             }
         }
@@ -1959,6 +1984,7 @@ int Screen::copyLineToStream(int line,
         }
 
         if (_history->isWrappedLine(line)) {
+            qWarning() << "ADDING LINE_WRAPPED";
             currentLineProperties |= LINE_WRAPPED;
         } else {
             if (options.testFlag(TrimTrailingWhitespace)) {
@@ -2013,6 +2039,7 @@ int Screen::copyLineToStream(int line,
 
         Q_ASSERT((size_t)screenLine < _lineProperties.size());
         currentLineProperties |= _lineProperties[screenLine];
+        qWarning() << "ASSSS" << screenLine << (_lineProperties[screenLine] & LINE_WRAPPED);
     }
 
     if (appendNewLine) {
@@ -2020,7 +2047,9 @@ int Screen::copyLineToStream(int line,
         // `treat LINEBREAK as SPACE, thus joining multiple _lines into
         // single line in the same way as 'J' does in VIM.`
         const bool isLineWrapped = (currentLineProperties & LINE_WRAPPED) != 0;
+        qWarning() << isLineWrapped;
         if (isBlockSelectionMode || !isLineWrapped) {
+            qWarning() << "TRIGGERING BUG";
             characterBuffer[count] = options.testFlag(PreserveLineBreaks) ? Character('\n') : Character(' ');
             ++count;
         }
@@ -2310,6 +2339,7 @@ void Screen::addPlacement(QPixmap pixmap,
             cursorDown(rows - needScroll - 1);
         }
         if (moveCursor == 2 || _cuX + cols >= _columns) {
+            qWarning() << "addPlacement";
             toStartOfLine();
             newLine();
         } else {
