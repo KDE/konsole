@@ -2492,6 +2492,23 @@ KMessageWidget *TerminalDisplay::createMessageWidget(const QString &text)
     return widget;
 }
 
+void TerminalDisplay::setSelectMode(bool mode)
+{
+    _readOnly = mode;
+    Screen *screen = screenWindow()->screen();
+    if (mode) {
+        screen->initSelCursor();
+        screen->clearSelection();
+        screen->setMode(MODE_SelectCursor);
+        _actSel = 0;
+        _selModeModifiers = 0;
+        _selModeByModifiers = false;
+    } else {
+        screen->resetMode(MODE_SelectCursor);
+    }
+    screenWindow()->notifyOutputChanged();
+}
+
 void TerminalDisplay::updateReadOnlyState(bool readonly)
 {
     if (_readOnly == readonly) {
@@ -2513,8 +2530,159 @@ void TerminalDisplay::updateReadOnlyState(bool readonly)
     _readOnly = readonly;
 }
 
+#define SELECT_BY_MODIFIERS                                                                                                                                    \
+    if (startSelect) {                                                                                                                                         \
+        _screenWindow->clearSelection();                                                                                                                       \
+        _actSel = 2;                                                                                                                                           \
+        screen->selSetSelectionStart(false);                                                                                                                   \
+        _selModeByModifiers = true;                                                                                                                            \
+    }
+
 void TerminalDisplay::keyPressEvent(QKeyEvent *event)
 {
+    Screen *screen = screenWindow()->screen();
+    int histLines = screen->getHistLines();
+    bool moved = true;
+    if (session()->getSelectMode()) {
+        int y;
+        bool startSelect = false;
+        int modifiers = event->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
+        if (_selModeModifiers != modifiers) {
+            if (modifiers == 0) {
+                if (_selModeByModifiers) {
+                    _actSel = 0;
+                    _selModeModifiers = 0;
+                    _selModeByModifiers = false;
+                }
+            } else {
+                if (event->key() >= Qt::Key_Home && event->key() <= Qt::Key_PageDown) {
+                    startSelect = true;
+                    _selModeModifiers = modifiers;
+                }
+            }
+        }
+        switch (event->key()) {
+        case Qt::Key_Left:
+        case Qt::Key_H:
+            SELECT_BY_MODIFIERS;
+            y = screen->selCursorLeft(1);
+            if (histLines + y < screenWindow()->currentLine()) {
+                scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine());
+            }
+            break;
+        case Qt::Key_Up:
+        case Qt::Key_K:
+            SELECT_BY_MODIFIERS;
+            y = screen->selCursorUp(1);
+            if (histLines + y < screenWindow()->currentLine()) {
+                scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine());
+            }
+            break;
+        case Qt::Key_Right:
+        case Qt::Key_L:
+            SELECT_BY_MODIFIERS;
+            y = screen->selCursorRight(1);
+            if (histLines + y >= screenWindow()->currentLine() + screen->getLines()) {
+                scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine() - screen->getLines() + 1);
+            }
+            break;
+        case Qt::Key_Down:
+        case Qt::Key_J:
+            SELECT_BY_MODIFIERS;
+            y = screen->selCursorDown(1);
+            if (histLines + y >= screenWindow()->currentLine() + screen->getLines()) {
+                scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine() - screen->getLines() + 1);
+            }
+            break;
+        case Qt::Key_Home:
+            SELECT_BY_MODIFIERS;
+            screen->selCursorLeft(0);
+            break;
+        case Qt::Key_End:
+            SELECT_BY_MODIFIERS;
+            screen->selCursorRight(0);
+            break;
+        case Qt::Key_V:
+            if (_actSel == 0 || _selModeByModifiers) {
+                _screenWindow->clearSelection();
+                _actSel = 2;
+                _lineSelectionMode = event->text() == QStringLiteral("V");
+                screen->selSetSelectionStart(_lineSelectionMode);
+                _selModeByModifiers = 0;
+            } else {
+                _actSel = 0;
+            }
+            break;
+        case Qt::Key_PageUp:
+            SELECT_BY_MODIFIERS;
+            y = screen->selCursorUp(-_scrollBar->scrollFullPage());
+            if (histLines + y < screenWindow()->currentLine()) {
+                scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine());
+            }
+            break;
+        case Qt::Key_PageDown:
+            SELECT_BY_MODIFIERS;
+            y = screen->selCursorDown(-_scrollBar->scrollFullPage());
+            if (histLines + y >= screenWindow()->currentLine() + screen->getLines()) {
+                scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine() - screen->getLines() + 1);
+            }
+            break;
+        case Qt::Key_F:
+        case Qt::Key_D:
+            if (event->modifiers() & Qt::ControlModifier) {
+                y = screen->selCursorDown(-(event->key() == Qt::Key_F));
+                if (histLines + y >= screenWindow()->currentLine() + screen->getLines()) {
+                    scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine() - screen->getLines() + 1);
+                }
+            } else {
+                moved = false;
+            }
+            break;
+        case Qt::Key_B:
+        case Qt::Key_U:
+            if (event->modifiers() & Qt::ControlModifier) {
+                y = screen->selCursorUp(-(event->key() == Qt::Key_B));
+                if (histLines + y < screenWindow()->currentLine()) {
+                    scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine());
+                }
+            } else {
+                moved = false;
+            }
+            break;
+        case Qt::Key_G:
+            if (event->text() == QStringLiteral("G")) {
+                y = screen->selCursorDown(-2);
+                screen->selCursorRight(0);
+                if (histLines + y >= screenWindow()->currentLine() + screen->getLines()) {
+                    scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine() - screen->getLines() + 1);
+                }
+            } else {
+                y = screen->selCursorUp(-2);
+                screen->selCursorLeft(0);
+                if (histLines + y < screenWindow()->currentLine()) {
+                    scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine());
+                }
+            }
+            break;
+        default:
+            moved = false;
+            break;
+        }
+        if (event->text() == QStringLiteral("^")) {
+            // Might be on different key(), depending on keyboard layout
+            screen->selCursorLeft(0);
+            moved = true;
+        } else if (event->text() == QStringLiteral("$")) {
+            // Might be on different key(), depending on keyboard layout
+            screen->selCursorRight(0);
+            moved = true;
+        }
+        if (moved && _actSel > 0) {
+            screen->selSetSelectionEnd(_lineSelectionMode);
+        }
+        screenWindow()->notifyOutputChanged();
+        return;
+    }
     {
         auto [charLine, charColumn] = getCharacterPosition(mapFromGlobal(QCursor::pos()), !usesMouseTracking());
 
@@ -2933,6 +3101,13 @@ Character TerminalDisplay::getCursorCharacter(int column, int line)
 int TerminalDisplay::selectionState() const
 {
     return _actSel;
+}
+
+void TerminalDisplay::clearMouseSelection()
+{
+    if (!session()->getSelectMode()) {
+        screenWindow()->clearSelection();
+    }
 }
 
 int TerminalDisplay::bidiMap(Character *screenline,

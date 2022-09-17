@@ -452,12 +452,14 @@ void SessionController::setupPrimaryScreenSpecificActions(bool use)
     QAction *clearAction = collection->action(QStringLiteral("clear-history"));
     QAction *resetAction = collection->action(QStringLiteral("clear-history-and-reset"));
     QAction *selectAllAction = collection->action(QStringLiteral("select-all"));
+    QAction *selectModeAction = collection->action(QStringLiteral("select-mode"));
     QAction *selectLineAction = collection->action(QStringLiteral("select-line"));
 
     // these actions are meaningful only when primary screen is used.
     clearAction->setEnabled(use);
     resetAction->setEnabled(use);
     selectAllAction->setEnabled(use);
+    selectModeAction->setEnabled(use);
     selectLineAction->setEnabled(use);
 }
 
@@ -715,6 +717,11 @@ void SessionController::setupCommonActions()
     action = collection->addAction(QStringLiteral("select-all"), this, &SessionController::selectAll);
     action->setText(i18n("&Select All"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-select-all")));
+
+    action = collection->addAction(QStringLiteral("select-mode"), this, &SessionController::selectMode);
+    action->setText(i18n("Select &Mode"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-select")));
+    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_D));
 
     action = collection->addAction(QStringLiteral("select-line"), this, &SessionController::selectLine);
     action->setText(i18n("Select &Line"));
@@ -1208,6 +1215,17 @@ void SessionController::selectAll()
 {
     view()->selectAll();
 }
+void SessionController::selectMode()
+{
+    if (!session().isNull()) {
+        QAction *readonlyAction = actionCollection()->action(QStringLiteral("view-readonly"));
+        bool Mode = session()->getSelectMode();
+        session()->setSelectMode(!Mode);
+        readonlyAction->setEnabled(Mode);
+        view()->setSelectMode(!Mode);
+    }
+}
+
 void SessionController::selectLine()
 {
     view()->selectCurrentLine();
@@ -1563,7 +1581,7 @@ void SessionController::searchTextChanged(const QString &text)
     _searchText = text;
 
     if (text.isEmpty()) {
-        view()->screenWindow()->clearSelection();
+        view()->clearMouseSelection();
         view()->screenWindow()->scrollTo(_searchStartLine);
     }
 
@@ -1673,7 +1691,7 @@ void SessionController::changeSearchMatch()
     Q_ASSERT(_searchFilter);
 
     // reset Selection for new case match
-    view()->screenWindow()->clearSelection();
+    view()->clearMouseSelection();
     beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
 }
 void SessionController::showHistoryOptions()

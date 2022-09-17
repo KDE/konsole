@@ -52,8 +52,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2021-10-28</date>
-<releaseinfo>Applications 21.12</releaseinfo>
+<date>2022-09-16</date>
+<releaseinfo>Applications 22.12</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -109,6 +109,29 @@ to open this window).
 </para>
 
 </sect1>
+
+<sect1 id="selection">
+<title>Selection Mode</title>
+<para>&konsole; has a selction by keyboard mode. In this mode it is possible to move around the scrollback and select text
+without the mouse.</para>
+
+<para>
+Enter and leave this mode by using the keyboard shortcut (<keycombo action="simul">&Ctrl;&Shift;<keycap>D</keycap></keycombo> by default).
+</para>
+
+<para>
+Moving the cursor: Arrows, <keycap>PageUp</keycap>, <keycap>PageDown</keycap>, <keycap>Home</keycap>, <keycap>End</keycap>.
+</para>
+
+<para>Moving the cursor <application>vi</application> style: h,j,k,l, to move one character, <keycap>Ctrl</keycap>+b,f,u,d for page up/down or half page up/down.</para>
+
+<para>
+Select text by using <keycap>Ctrl</keycap> or <keycap>Shift</keycap> with arrows, or by using <keycap>V</keycap> to start selection, moving the cursor and then <keycap>V</keycap> again to end selection.
+<keycombo>&Shift;<keycap>V</keycap></keycombo> selects whole lines, instead of characters.
+</para>
+
+</sect1>
+
 
 <sect1 id="profiles">
 <title>Profiles</title>

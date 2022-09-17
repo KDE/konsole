@@ -395,6 +395,13 @@ public:
     // Used to show/hide the message widget
     void updateReadOnlyState(bool readonly);
 
+    void setSelectMode(bool readonly);
+
+    bool getReadOnly() const
+    {
+        return _readOnly;
+    }
+
     // Get mapping between visual and logical positions in line
     // returns the index of the last non space character.
     int bidiMap(Character *screenline,
@@ -408,6 +415,10 @@ public:
                 bool bidi = true) const;
 
     void showNotification(QString text);
+
+    //
+    // Clear mouse selection, but not keyboard selection
+    void clearMouseSelection();
 
 public Q_SLOTS:
     /**
@@ -791,6 +802,9 @@ private:
     bool _semanticInputClick;
 
     UBiDi *ubidi = nullptr;
+
+    int _selModeModifiers;
+    bool _selModeByModifiers; // Selection started by Shift+Arrow
 };
 
 }

@@ -406,6 +406,9 @@ public:
     bool isReadOnly() const;
     void setReadOnly(bool readOnly);
 
+    bool getSelectMode() const;
+    void setSelectMode(bool mode);
+
     // Returns true if the current screen is the secondary/alternate one
     // or false if it's the primary/normal buffer
     bool isPrimaryScreen();
@@ -875,6 +878,8 @@ private:
     bool _isPrimaryScreen = true;
 
     QString _currentHostName;
+
+    bool _selectMode = false;
 };
 
 }

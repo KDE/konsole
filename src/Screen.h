@@ -29,7 +29,8 @@
 #define MODE_Cursor 4
 #define MODE_NewLine 5
 #define MODE_AppScreen 6
-#define MODES_SCREEN 7
+#define MODE_SelectCursor 7
+#define MODES_SCREEN 8
 
 #define REPL_None 0
 #define REPL_PROMPT 1
@@ -148,6 +149,16 @@ public:
     void setCursorX(int x);
     /** Position the cursor at line @p y, column @p x. */
     void setCursorYX(int y, int x);
+
+    void initSelCursor();
+    int selCursorUp(int n);
+    int selCursorDown(int n);
+    int selCursorLeft(int n);
+    int selCursorRight(int n);
+
+    int selSetSelectionStart(int mode);
+    int selSetSelectionEnd(int mode);
+
     /**
      * Sets the margins for scrolling the screen.
      *
@@ -804,6 +815,10 @@ private:
     // cursor location
     int _cuX;
     int _cuY;
+
+    // select mode cursor location
+    int _selCuX;
+    int _selCuY;
 
     // cursor color and rendition info
     CharacterColor _currentForeground;

@@ -176,6 +176,117 @@ void Screen::cursorRight(int n)
     _cuX = qMin(getScreenLineColumns(_cuY) - 1, _cuX + n);
 }
 
+void Screen::initSelCursor()
+{
+    _selCuX = _cuX;
+    _selCuY = _cuY;
+}
+
+int Screen::selCursorUp(int n)
+{
+    if (n == 0) {
+        // Half page
+        n = _lines / 2;
+    } else if (n == -1) {
+        // Full page
+        n = _lines;
+    } else if (n == -2) {
+        // First line
+        n = _selCuY + _history->getLines();
+    }
+    _selCuY = qMax(-_history->getLines(), _selCuY - n);
+    return _selCuY;
+}
+
+int Screen::selCursorDown(int n)
+{
+    if (n == 0) {
+        // Half page
+        n = _lines / 2;
+    } else if (n == -1) {
+        // Full page
+        n = _lines;
+    } else if (n == -2) {
+        // Last line
+        n = _lines - 1 - _selCuY;
+    }
+    _selCuY = qMin(_lines - 1, _selCuY + n);
+    return _selCuY;
+}
+
+int Screen::selCursorLeft(int n)
+{
+    if (n == 0) {
+        // Home
+        n = _selCuX;
+    }
+    if (_selCuX >= n) {
+        _selCuX -= n;
+    } else {
+        if (_selCuY > -_history->getLines()) {
+            _selCuY -= 1;
+            _selCuX = qMax(_columns - n + _selCuX, 0);
+        } else {
+            _selCuX = 0;
+        }
+    }
+    return _selCuY;
+}
+
+int Screen::selCursorRight(int n)
+{
+    if (n == 0) {
+        // End
+        n = _columns - _selCuX - 1;
+    }
+    if (_selCuX + n < _columns) {
+        _selCuX += n;
+    } else {
+        if (_selCuY < _lines - 1) {
+            _selCuY += 1;
+            _selCuX = qMin(n + _selCuX - _columns, _columns - 1);
+        } else {
+            _selCuX = _columns - 1;
+        }
+    }
+    return _selCuY;
+}
+
+int Screen::selSetSelectionStart(int mode)
+{
+    // mode: 0 = character selection
+    //       1 = line selection
+    int x = _selCuX;
+    if (mode == 1) {
+        x = 0;
+    }
+    setSelectionStart(x, _selCuY + _history->getLines(), false);
+    return 0;
+}
+
+int Screen::selSetSelectionEnd(int mode)
+{
+    int y = _selCuY + _history->getLines();
+    int x = _selCuX;
+    if (mode == 1) {
+        int l = _selBegin / _columns;
+        if (y < l) {
+            if (_selBegin % _columns == 0) {
+                setSelectionStart(_columns - 1, l, false);
+            }
+            x = 0;
+        } else {
+            x = _columns - 1;
+            if (_selBegin % _columns != 0) {
+                setSelectionStart(0, l, false);
+            }
+        }
+    }
+    setSelectionEnd(x, y, false);
+    Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged();
+    return 0;
+}
+
 void Screen::setMargins(int top, int bot)
 //=STBM
 {
@@ -767,6 +878,11 @@ void Screen::getImage(Character *dest, int size, int startLine, int endLine) con
     if (getMode(MODE_Cursor) && cursorIndex < _columns * mergedLines) {
         dest[cursorIndex].rendition.f.cursor = 1;
     }
+    cursorIndex = loc(_selCuX, _selCuY - startLine + _history->getLines());
+
+    if (getMode(MODE_SelectCursor) && cursorIndex >= 0 && cursorIndex < _columns * mergedLines) {
+        dest[cursorIndex].rendition.f.cursor = 1;
+    }
 }
 
 QVector<LineProperty> Screen::getLineProperties(int startLine, int endLine) const
@@ -841,6 +957,7 @@ void Screen::reset(bool softReset, bool preservePrompt)
     saveMode(MODE_Insert); // overstroke
 
     setMode(MODE_Cursor); // cursor visible
+    resetMode(MODE_SelectCursor);
 
     _topMargin = 0;
     _bottomMargin = _lines - 1;

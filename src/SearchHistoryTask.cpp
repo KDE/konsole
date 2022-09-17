@@ -148,10 +148,11 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
             string.clear();
             line = endLine;
         } while (startLine != endLine);
-
-        // if no match was found, clear selection to indicate this
-        window->clearSelection();
-        window->notifyOutputChanged();
+        if (!session->getSelectMode()) {
+            // if no match was found, clear selection to indicate this,
+            window->clearSelection();
+            window->notifyOutputChanged();
+        }
     }
 
     Q_EMIT completed(false);

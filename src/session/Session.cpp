@@ -1857,6 +1857,17 @@ void Session::setReadOnly(bool readOnly)
         Q_EMIT readOnlyChanged();
     }
 }
+bool Session::getSelectMode() const
+{
+    return _selectMode;
+}
+
+void Session::setSelectMode(bool mode)
+{
+    if (_selectMode != mode) {
+        _selectMode = mode;
+    }
+}
 
 void Session::setColor(const QColor &color)
 {

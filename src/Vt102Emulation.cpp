@@ -2040,8 +2040,11 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
         // We know we are in input mode
         TerminalDisplay *currentView = _currentScreen->currentTerminalDisplay();
         bool isReadOnly = false;
-        if (currentView != nullptr && currentView->sessionController() != nullptr) {
-            isReadOnly = currentView->sessionController()->isReadOnly();
+        // if (currentView != nullptr && currentView->sessionController() != nullptr) {
+        //     isReadOnly = currentView->sessionController()->isReadOnly();
+        // }
+        if (currentView != nullptr) {
+            isReadOnly = currentView->getReadOnly();
         }
         auto point = std::make_pair(cy, cx);
         if (!isReadOnly && _currentScreen->replModeStart() <= point && point <= _currentScreen->replModeEnd()) {
@@ -2196,8 +2199,11 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 
     TerminalDisplay *currentView = _currentScreen->currentTerminalDisplay();
     bool isReadOnly = false;
-    if (currentView != nullptr && currentView->sessionController() != nullptr) {
-        isReadOnly = currentView->sessionController()->isReadOnly();
+    // if (currentView != nullptr && currentView->sessionController() != nullptr) {
+    //     isReadOnly = currentView->sessionController()->isReadOnly();
+    // }
+    if (currentView != nullptr) {
+        isReadOnly = currentView->getReadOnly();
     }
 
     // get current states
