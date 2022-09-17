@@ -1334,6 +1334,7 @@ void Screen::scrollUp(int from, int n)
     if (_hasGraphics) {
         scrollPlacements(n);
     }
+    _selCuY = qMax(_selCuY - n, -_history->getLines());
     if (_replMode != REPL_None) {
         if (_replModeStart.first > 0) {
             _replModeStart = std::make_pair(_replModeStart.first - 1, _replModeStart.second);
