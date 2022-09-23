@@ -101,11 +101,10 @@ void ProfileSettings::tableSelectionChanged(const QItemSelection &selected)
     const auto profile = currentProfile();
     const bool isNotDefault = profile != ProfileManager::instance()->defaultProfile();
 
-    // See comment about isProfileWritable(profile) in editSelected()
-    editProfileButton->setEnabled(isProfileWritable(profile));
+    editProfileButton->setEnabled(profile && profile->isEditable());
 
     // Do not allow the current default profile of the session to be removed
-    deleteProfileButton->setEnabled(isNotDefault && isProfileDeletable(profile));
+    deleteProfileButton->setEnabled(profile && isNotDefault && profile->isDeletable());
 
     setAsDefaultButton->setEnabled(isNotDefault);
 }
@@ -154,10 +153,8 @@ void ProfileSettings::editSelected()
 {
     const auto profile = currentProfile();
 
-    // Read-only profiles (i.e. with non-user-writable .profile location)
-    // aren't editable, and can only be cloned using the "New" button.
-    // This includes the built-in profile, which is hardcoded.
-    if (!isProfileWritable(profile)) {
+    // Uneditable profiles can only be cloned using the "New" button.
+    if (!(profile && profile->isEditable())) {
         return;
     }
 
@@ -177,20 +174,4 @@ Profile::Ptr ProfileSettings::currentProfile() const
     }
 
     return selection->selectedIndexes().at(ProfileModel::PROFILE).data(ProfileModel::ProfilePtrRole).value<Profile::Ptr>();
-}
-
-bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
-{
-    if (!profile || profile->isBuiltin()) {
-        return false;
-    }
-
-    const QFileInfo fileInfo(profile->path());
-    return fileInfo.exists() && QFileInfo(fileInfo.path()).isWritable(); // To delete a file, parent dir must be writable
-}
-
-bool ProfileSettings::isProfileWritable(Profile::Ptr profile) const
-{
-    return profile && !profile->isBuiltin() // Built-in profile is hardcoded and never stored.
-        && QFileInfo(profile->path()).isWritable();
 }

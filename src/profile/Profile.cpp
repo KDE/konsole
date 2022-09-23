@@ -11,6 +11,7 @@
 #include "Profile.h"
 
 // Qt
+#include <QFileInfo>
 #include <QTextCodec>
 
 // KDE
@@ -248,6 +249,20 @@ Profile::~Profile() = default;
 bool Profile::isBuiltin() const
 {
     return path() == BUILTIN_MAGIC_PATH;
+}
+
+bool Profile::isEditable() const
+{
+    // Read-only profiles (i.e. with non-user-writable .profile location)
+    // aren't editable. This includes the built-in profile, which is hardcoded.
+    return !isBuiltin() && QFileInfo(path()).isWritable();
+}
+
+bool Profile::isDeletable() const
+{
+    // To delete a file, parent dir must be writable
+    const QFileInfo fileInfo(path());
+    return !isBuiltin() && fileInfo.exists() && QFileInfo(fileInfo.path()).isWritable();
 }
 
 bool Profile::isHidden() const

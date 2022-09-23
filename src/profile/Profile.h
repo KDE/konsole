@@ -475,6 +475,16 @@ public:
     bool isBuiltin() const;
 
     /**
+     * Returns true if this profile is editable.
+     */
+    bool isEditable() const;
+
+    /**
+     * Returns true if this profile can be deleted.
+     */
+    bool isDeletable() const;
+
+    /**
      * Returns true if this is a 'hidden' profile which should not be
      * displayed in menus or saved to disk.
      *

@@ -59,9 +59,6 @@ private Q_SLOTS:
 private:
     QExplicitlySharedDataPointer<Profile> currentProfile() const;
 
-    bool isProfileDeletable(QExplicitlySharedDataPointer<Profile> profile) const;
-    bool isProfileWritable(QExplicitlySharedDataPointer<Profile> profile) const;
-
     // updates the profile table to be in sync with the
     // session manager
     void populateTable();
