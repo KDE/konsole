@@ -373,7 +373,7 @@ void MainWindow::setupActions()
 
     auto action = collection->addAction(QStringLiteral("save-layout"));
     action->setEnabled(true);
-    action->setText(i18nc("@action:inmenu", "Save tab layout to file"));
+    action->setText(i18nc("@action:inmenu", "Save Tab Layout..."));
     connect(action, &QAction::triggered, this, [this]() {
         if (viewManager()) {
             viewManager()->saveLayoutFile();
@@ -382,7 +382,7 @@ void MainWindow::setupActions()
 
     action = collection->addAction(QStringLiteral("load-layout"));
     action->setEnabled(true);
-    action->setText(i18nc("@action:inmenu", "Load tab layout from file"));
+    action->setText(i18nc("@action:inmenu", "Load Tab Layout..."));
     connect(action, &QAction::triggered, this, [this]() {
         if (viewManager()) {
             viewManager()->loadLayoutFile();
