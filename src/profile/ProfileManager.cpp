@@ -16,6 +16,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QString>
+#include <QUrl>
 
 // KDE
 #include <KConfig>

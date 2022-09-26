@@ -13,7 +13,6 @@
 
 // Qt
 #include <QMetaEnum>
-#include <QPainter>
 
 // KDE
 #include <KConfig>

@@ -26,7 +26,6 @@
 #include <QLabel>
 #include <QMimeData>
 #include <QPainter>
-#include <QPixmap>
 #include <QScrollEvent>
 #include <QScrollPrepareEvent>
 #include <QScroller>

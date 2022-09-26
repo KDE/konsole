@@ -13,7 +13,6 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QHash>
-#include <QMenuBar>
 #include <QStandardPaths>
 #include <QTimer>
 

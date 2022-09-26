@@ -9,9 +9,7 @@
 #include "konsoledebug.h"
 
 #include <QMenu>
-#include <QModelIndex>
 
-#include <KActionCollection>
 #include <KActionMenu>
 #include <KConfigGroup>
 #include <KLocalizedString>

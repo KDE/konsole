@@ -10,8 +10,6 @@
 
 #include <QObject>
 
-#include <QList>
-
 #include "konsole_export.h"
 #include <memory>
 

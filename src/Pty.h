@@ -10,7 +10,6 @@
 
 // Qt
 #include <QSize>
-#include <QtContainerFwd>
 
 // KDE
 #include <KPtyProcess>

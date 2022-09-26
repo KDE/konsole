@@ -22,7 +22,6 @@
 #include <QKeyEvent>
 #include <QList>
 #include <QMenu>
-#include <QPainter>
 #include <QStandardPaths>
 #include <QUrl>
 

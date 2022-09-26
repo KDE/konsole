@@ -11,7 +11,6 @@
 
 #include <QColor>
 #include <QPoint>
-#include <QPointer>
 
 namespace Konsole
 {

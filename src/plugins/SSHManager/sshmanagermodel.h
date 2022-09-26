@@ -9,7 +9,6 @@
 #define SSHMANAGERMODEL_H
 
 #include <QFileSystemWatcher>
-#include <QMap>
 #include <QStandardItemModel>
 
 #include <memory>

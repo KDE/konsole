@@ -14,10 +14,6 @@
 #include "konsoleprofile_export.h"
 
 // Qt
-#include <QColor>
-#include <QFont>
-#include <QHash>
-#include <QStringList>
 #include <QVariant>
 
 namespace Konsole

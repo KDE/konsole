@@ -11,7 +11,6 @@
 #include "Profile.h"
 
 // Qt
-#include <QRegularExpression>
 #include <QTextCodec>
 
 // KDE

@@ -10,7 +10,6 @@
 
 #include <KLocalizedString>
 
-#include <QDebug>
 #include <QIcon>
 
 using namespace Konsole;

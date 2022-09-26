@@ -23,16 +23,13 @@
 #include <KLocalizedString>
 
 #include <QAction>
-#include <QDebug>
 #include <QFileDialog>
 #include <QIntValidator>
 #include <QItemSelectionModel>
 #include <QMenu>
-#include <QMessageBox>
 #include <QPoint>
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
-#include <QSortFilterProxyModel>
 #include <QStandardPaths>
 
 #include <KMessageBox>

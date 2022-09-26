@@ -13,10 +13,6 @@
 #define CONFIGURATIONDIALOG_H
 
 // Qt
-#include <QAbstractButton>
-#include <QButtonGroup>
-#include <QMap>
-#include <QTimer>
 
 // KDE
 #include <KCoreConfigSkeleton>

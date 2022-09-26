@@ -8,7 +8,6 @@
 #define CHECKABLESESSIONMODEL_H
 
 // Qt
-#include <QPointer>
 #include <QSet>
 
 // Konsole

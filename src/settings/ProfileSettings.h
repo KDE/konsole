@@ -9,9 +9,6 @@
 
 // Qt
 #include <QExplicitlySharedDataPointer>
-#include <QKeySequenceEdit>
-#include <QSet>
-#include <QStyledItemDelegate>
 
 // KDE
 

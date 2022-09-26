@@ -11,18 +11,10 @@
 // Qt
 #include <QList>
 #include <QMultiHash>
-#include <QObject>
 #include <QPoint>
-#include <QPointer>
-#include <QRect>
-#include <QRegularExpression>
-#include <QSet>
-#include <QStringList>
 
 // KDE
 #include <KFileItem>
-#include <KFileItemActions>
-#include <KIO/PreviewJob>
 
 #include <memory>
 

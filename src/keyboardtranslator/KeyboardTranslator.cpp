@@ -16,10 +16,7 @@
 #include <cstdio>
 
 // Qt
-#include <QBuffer>
 #include <QKeySequence>
-#include <QRegularExpression>
-#include <QTextStream>
 
 // KDE
 #include <KLocalizedString>

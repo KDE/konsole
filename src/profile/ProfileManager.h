@@ -10,14 +10,9 @@
 #define PROFILEMANAGER_H
 
 // Qt
-#include <QHash>
 #include <QKeySequence>
 #include <QList>
-#include <QSet>
-#include <QStack>
 #include <QStringList>
-#include <QUrl>
-#include <QVariant>
 
 #include <KSharedConfig>
 

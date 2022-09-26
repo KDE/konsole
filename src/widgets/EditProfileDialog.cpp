@@ -14,8 +14,6 @@
 #include <QFileDialog>
 #include <QIcon>
 #include <QInputDialog>
-#include <QMenu>
-#include <QPainter>
 #include <QPushButton>
 #include <QRegularExpressionValidator>
 #include <QStandardItem>
@@ -29,8 +27,6 @@
 #include <KCodecAction>
 #include <KIconDialog>
 #include <KLocalizedString>
-#include <KMessageBox>
-#include <KNSCore/Engine>
 #include <KWindowSystem>
 #include <kconfigwidgets_version.h>
 

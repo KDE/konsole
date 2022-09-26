@@ -14,7 +14,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 
-#include <QDebug>
 #include <QFile>
 #include <QFileInfo>
 #include <QLoggingCategory>

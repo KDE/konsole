@@ -13,7 +13,6 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <QStandardPaths>
-#include <QTabWidget>
 #include <QTemporaryFile>
 #include <QTimer>
 #include <kmessagebox.h>

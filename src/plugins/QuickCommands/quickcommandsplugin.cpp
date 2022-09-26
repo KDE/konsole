@@ -7,11 +7,10 @@
 #include "quickcommandsmodel.h"
 #include "quickcommandswidget.h"
 
-#include <KActionCollection>
-#include <QMainWindow>
-
 #include "MainWindow.h"
 #include <KLocalizedString>
+
+#include <QDockWidget>
 
 K_PLUGIN_CLASS_WITH_JSON(QuickCommandsPlugin, "konsole_quickcommands.json")
 

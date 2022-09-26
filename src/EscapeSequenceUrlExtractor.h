@@ -9,7 +9,6 @@
 */
 
 #include <QObject>
-#include <QPointer>
 
 namespace Konsole
 {

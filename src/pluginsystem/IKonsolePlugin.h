@@ -8,15 +8,12 @@
 #ifndef IKONSOLEPLUGIN_H
 #define IKONSOLEPLUGIN_H
 
-#include <QDockWidget>
 #include <QList>
 #include <QObject>
 
 #include <terminalDisplay/TerminalDisplay.h>
 
-#include <KExportPlugin>
 #include <KPluginFactory>
-#include <KXMLGUIClient>
 
 #include <memory>
 

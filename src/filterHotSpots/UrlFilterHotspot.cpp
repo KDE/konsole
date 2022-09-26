@@ -10,12 +10,10 @@
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
-#include <QRegularExpression>
 
 #include <KIO/OpenUrlJob>
 #include <KLocalizedString>
 #include <QIcon>
-#include <QMouseEvent>
 
 #include "UrlFilter.h"
 #include "terminalDisplay/TerminalDisplay.h"

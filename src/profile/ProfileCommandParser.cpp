@@ -12,9 +12,7 @@
 // Konsole
 
 // Qt
-#include <QHash>
 #include <QRegularExpression>
-#include <QVariant>
 
 using namespace Konsole;
 

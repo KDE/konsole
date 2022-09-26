@@ -13,7 +13,6 @@
 
 // Qt
 #include <QVariantList>
-#include <QtContainerFwd>
 
 // Konsole
 #include "config-konsole.h"

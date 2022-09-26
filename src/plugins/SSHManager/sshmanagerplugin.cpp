@@ -14,12 +14,7 @@
 #include "session/SessionController.h"
 
 #include <QDockWidget>
-#include <QListView>
-#include <QMainWindow>
-#include <QMenuBar>
-#include <QTimer>
 
-#include <KActionCollection>
 #include <KLocalizedString>
 
 #include "MainWindow.h"

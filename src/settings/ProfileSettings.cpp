@@ -9,8 +9,6 @@
 
 // Qt
 #include <QFileInfo>
-#include <QKeyEvent>
-#include <QStandardItem>
 #include <QStandardPaths>
 
 // Konsole

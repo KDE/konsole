@@ -9,7 +9,6 @@
 #include "template.h"
 #include <QDebug>
 #include <QRegularExpression>
-#include <QRegularExpressionMatch>
 
 static const QString unescape(const QStringRef &str)
 {

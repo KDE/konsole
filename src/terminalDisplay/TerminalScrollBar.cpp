@@ -16,14 +16,11 @@
 #include "session/SessionController.h"
 
 // KDE
-#include <KMessageWidget>
 
 // Qt
 #include <QGuiApplication>
-#include <QLabel>
 #include <QProxyStyle>
 #include <QRect>
-#include <QTimer>
 
 namespace Konsole
 {

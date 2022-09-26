@@ -13,7 +13,6 @@
 #include <QChildEvent>
 #include <QDragEnterEvent>
 #include <QMimeData>
-#include <QStack>
 
 // C++
 #include <memory>

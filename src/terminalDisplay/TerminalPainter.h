@@ -10,10 +10,7 @@
 #define TERMINALPAINTER_HPP
 
 // Qt
-#include <QPointer>
-#include <QScrollBar>
 #include <QVector>
-#include <QWidget>
 
 // Konsole
 #include "../characters/Character.h"

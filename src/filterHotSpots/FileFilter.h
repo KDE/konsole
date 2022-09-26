@@ -9,7 +9,6 @@
 #define FILE_FILTER
 
 #include <QPointer>
-#include <QSet>
 #include <QString>
 
 #include "RegExpFilter.h"

@@ -9,7 +9,6 @@
 
 // Qt
 #include <QExplicitlySharedDataPointer>
-#include <QList>
 
 // Konsole characters
 #include <Character.h>

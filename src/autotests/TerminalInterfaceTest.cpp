@@ -11,7 +11,6 @@
 #include "config-konsole.h"
 
 // Qt
-#include <QDebug>
 #include <QDir>
 #include <QSignalSpy>
 
