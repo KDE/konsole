@@ -202,7 +202,7 @@ Q_SIGNALS:
     /** set the color tab */
     void setColor(int index, const QColor &color);
 
-    /** remve the color tab */
+    /** remove the color tab */
     void removeColor(int idx);
 
 protected:

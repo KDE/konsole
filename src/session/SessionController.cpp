@@ -1921,7 +1921,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         for (auto *elm : old) {
             newActions.removeAll(elm);
         }
-        // Finish Ading the "Open Folder With" action.
+        // Finish Adding the "Open Folder With" action.
 
         QList<QAction *> toRemove;
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc

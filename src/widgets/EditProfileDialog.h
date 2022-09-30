@@ -290,7 +290,7 @@ private:
     // always come after the preview operation.
     void updateTempProfileProperty(Profile::Property, const QVariant &value);
 
-    // helper method for clearing all _tempProfile properies and marking it hidden
+    // helper method for clearing all _tempProfile properties and marking it hidden
     void resetTempProfile();
 
     // Enable or disable apply button, used only within

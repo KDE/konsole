@@ -161,7 +161,7 @@ public:
          */
         BidiRenderingEnabled,
         /** (bool) If true, lines are always LTR. Otherwise, decided by
-         * first strong charachter as defined by the BiDi algorithm.
+         * first strong character as defined by the BiDi algorithm.
          */
         BidiLineLTR,
         /** (bool) Specifies whether the table drawing characters will be
@@ -445,7 +445,7 @@ public:
 
     void setProperty(Property p, QVariant &&value);
 
-    /** Sets the Porperty/value pairs from @p map on this Profile */
+    /** Sets the Property/value pairs from @p map on this Profile */
     void assignProperties(const PropertyMap &map);
     void assignProperties(PropertyMap &&map);
 
