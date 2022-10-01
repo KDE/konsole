@@ -1216,7 +1216,11 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 player = new QMediaPlayer(this);
                 connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(deletePlayer(QMediaPlayer::MediaStatus)));
             }
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             player->setMedia(QUrl::fromLocalFile(file.fileName()));
+#else
+            player->setSource(QUrl::fromLocalFile(file.fileName()));
+#endif
             player->play();
             return;
         }
