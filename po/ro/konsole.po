@@ -1,0 +1,5663 @@
+# Traducerea konsole.po în Română
+# Copyright (C) 2003, 2004, 2005, 2008 Free Software Foundation, Inc.
+# Claudiu Costin <claudiuc@kde.org>, 2003, 2004, 2005.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2020, 2021, 2022.
+# Laurenţiu Buzdugan <lbuz@rolix.org>, 2009.
+# Cristian Oneț <onet.cristian@gmail.com>, 2011, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: konsole\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:52+0000\n"
+"PO-Revision-Date: 2022-06-01 15:35+0100\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Claudiu Costin,Sergiu Bivol,Grigore Moldovan"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ",sergiu@cip.md,grigore.moldovan@googlemail.com"
+
+#. i18n: ectx: Menu (file)
+#: ../desktop/konsoleui.rc:6
+#, kde-format
+msgid "File"
+msgstr "Fișier"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnEdit)
+#. i18n: ectx: Menu (edit)
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:268
+#: plugins/SSHManager/sshwidget.ui:262
+#, kde-format
+msgid "Edit"
+msgstr "Modifică"
+
+#. i18n: ectx: Menu (view)
+#: ../desktop/konsoleui.rc:19
+#, kde-format
+msgid "View"
+msgstr "Vizualizare"
+
+#. i18n: ectx: Menu (view-split)
+#: ../desktop/konsoleui.rc:20
+#, kde-format
+msgid "Split View"
+msgstr "Desparte vizualizarea"
+
+#. i18n: ectx: Menu (settings)
+#: ../desktop/konsoleui.rc:39
+#, kde-format
+msgid "Settings"
+msgstr "Configurări"
+
+#. i18n: ectx: Menu (plugins)
+#: ../desktop/konsoleui.rc:52
+#, kde-format
+msgid "Plugins"
+msgstr "Extensii"
+
+#. i18n: ectx: Menu (help)
+#: ../desktop/konsoleui.rc:55
+#, kde-format
+msgid "Help"
+msgstr "Ajutor"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: ../desktop/konsoleui.rc:59
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Bara de unelte principală"
+
+#. i18n: ectx: Menu (history)
+#: ../desktop/partui.rc:14
+#, kde-format
+msgid "S&crollback"
+msgstr "Re&venire"
+
+#. i18n: ectx: ToolBar (sessionToolbar)
+#: ../desktop/sessionui.rc:70
+#, kde-format
+msgid "Session Toolbar"
+msgstr "Bara de unelte cu sesiuni"
+
+#: AppColorSchemeChooser.cpp:36
+#, kde-format
+msgid "&Window Color Scheme"
+msgstr "Schema de c&ulori a ferestrei"
+
+#: Application.cpp:51
+#, kde-format
+msgctxt "@info:shell"
+msgid "Name of profile to use for new Konsole instance"
+msgstr "Denumirea profilului de folosit pentru noua instanță a Konsolei"
+
+#: Application.cpp:52
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Name of profile to use for new Konsole instance"
+msgctxt "@info:shell"
+msgid "json layoutfile to be loaded to use for new Konsole instance"
+msgstr "Denumirea profilului de folosit pentru noua instanță a Konsolei"
+
+#: Application.cpp:53
+#, fuzzy, kde-format
+#| msgid "Create a new profile based on the selected profile"
+msgctxt "@info:shell"
+msgid "Use the built-in profile instead of the default profile"
+msgstr "Creează un profil nou, bazat pe profilul ales"
+
+#: Application.cpp:54
+#, kde-format
+msgctxt "@info:shell"
+msgid "Set the initial working directory of the new tab or window to 'dir'"
+msgstr "Stabilește dosarul de lucru inițial al noii file sau ferestre la „dir”"
+
+#: Application.cpp:55
+#, kde-format
+msgctxt "@info:shell"
+msgid "Do not close the initial session automatically when it ends."
+msgstr "Nu închide automat sesiunea inițială când se termină."
+
+#: Application.cpp:59
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Create a new tab in an existing window rather than creating a new window "
+"('Run all Konsole windows in a single process' must be enabled)"
+msgstr ""
+"Creează o filă nouă într-o fereastră existentă, în loc de o fereastră nouă "
+"(„Rulează toate ferestrele de Konsolă în același proces” trebuie să fie "
+"activată)"
+
+#: Application.cpp:60
+#, kde-format
+msgctxt "@info:shell"
+msgid "Create tabs as specified in given tabs configuration file"
+msgstr ""
+"Creează file după cum este specificat în fișierul de configurare a filelor"
+
+#: Application.cpp:62
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
+"(by default) is pressed"
+msgstr ""
+"Pornește Konsolă în fundal și o aduce în față la apăsarea Ctrl+Shift+F12 "
+"(implicit)"
+
+#: Application.cpp:63
+#, kde-format
+msgctxt "@info:shell"
+msgid "Run in a separate process"
+msgstr "Rulează în proces separat"
+
+#: Application.cpp:64
+#, kde-format
+msgctxt "@info:shell"
+msgid "Show the menubar, overriding the default setting"
+msgstr "Arată bara de meniu, trecând peste configurarea implicită"
+
+#: Application.cpp:65
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the menubar, overriding the default setting"
+msgstr "Ascunde bara de meniu, trecând peste configurarea implicită"
+
+#: Application.cpp:66
+#, kde-format
+msgctxt "@info:shell"
+msgid "Show the tabbar, overriding the default setting"
+msgstr "Arată bara de file, trecând peste configurarea implicită"
+
+#: Application.cpp:67
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the tabbar, overriding the default setting"
+msgstr "Ascunde bara de file, trecând peste configurarea implicită"
+
+#: Application.cpp:68
+#, kde-format
+msgctxt "@info:shell"
+msgid "Start Konsole in fullscreen mode"
+msgstr "Pornește Konsolă în regim de ecran complet"
+
+#: Application.cpp:69
+#, kde-format
+msgctxt "@info:shell"
+msgid "Disable transparent backgrounds, even if the system supports them."
+msgstr "Dezactivează fundalurile transparente, chiar dacă sistemul le susține."
+
+#: Application.cpp:70
+#, kde-format
+msgctxt "@info:shell"
+msgid "List the available profiles"
+msgstr "Enumeră profilurile disponibile"
+
+#: Application.cpp:71
+#, kde-format
+msgctxt "@info:shell"
+msgid "List all the profile properties names and their type (for use with -p)"
+msgstr ""
+"Enumeră toate numele de proprietăți ale profilului și tipul acestora (pentru "
+"a fi utilizate cu -p)"
+
+#: Application.cpp:72
+#, kde-format
+msgctxt "@info:shell"
+msgid "Change the value of a profile property."
+msgstr "Schimbă valoarea unei proprietăți a profilului."
+
+#: Application.cpp:74
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Command to execute. This option will catch all following arguments, so use "
+"it as the last option."
+msgstr ""
+"Comanda de executat. Această opțiune va prinde toate argumentele ulterioare, "
+"deci utilizați-o ca opțiune finală."
+
+#: Application.cpp:77
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Force re-using the existing instance even if it breaks functionality, e. g. "
+"--new-tab. Mostly for debugging."
+msgstr ""
+
+#: Application.cpp:84
+#, kde-format
+msgctxt "@info:shell"
+msgid "Arguments passed to command"
+msgstr "Argumente transmise comenzii"
+
+#: Application.cpp:511
+#, kde-format
+msgctxt "@item"
+msgid "Toggle Background Window"
+msgstr "Comută fereastra de fundal"
+
+#: BookmarkHandler.cpp:108
+#, kde-format
+msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
+msgid "%1 on %2"
+msgstr "%1 pe %2"
+
+#: BookmarkHandler.cpp:110
+#, kde-format
+msgctxt "@item:inmenu The host the user is connected to via ssh"
+msgid "%1"
+msgstr "%1"
+
+#: colorscheme/ColorScheme.cpp:131
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground"
+msgstr "Prim-plan"
+
+#: colorscheme/ColorScheme.cpp:132
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background"
+msgstr "Fundal"
+
+#: colorscheme/ColorScheme.cpp:133
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1"
+msgstr "Culoare 1"
+
+#: colorscheme/ColorScheme.cpp:134
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2"
+msgstr "Culoare 2"
+
+#: colorscheme/ColorScheme.cpp:135
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3"
+msgstr "Culoare 3"
+
+#: colorscheme/ColorScheme.cpp:136
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4"
+msgstr "Culoare 4"
+
+#: colorscheme/ColorScheme.cpp:137
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5"
+msgstr "Culoare 5"
+
+#: colorscheme/ColorScheme.cpp:138
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6"
+msgstr "Culoare 6"
+
+#: colorscheme/ColorScheme.cpp:139
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7"
+msgstr "Culoare 7"
+
+#: colorscheme/ColorScheme.cpp:140
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8"
+msgstr "Culoare 8"
+
+#: colorscheme/ColorScheme.cpp:141
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground (Intense)"
+msgstr "Prim-plan (intens)"
+
+#: colorscheme/ColorScheme.cpp:142
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background (Intense)"
+msgstr "Fundal (intens)"
+
+#: colorscheme/ColorScheme.cpp:143
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1 (Intense)"
+msgstr "Culoare 1 (intens)"
+
+#: colorscheme/ColorScheme.cpp:144
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2 (Intense)"
+msgstr "Culoare 2 (intens)"
+
+#: colorscheme/ColorScheme.cpp:145
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3 (Intense)"
+msgstr "Culoare 3 (intens)"
+
+#: colorscheme/ColorScheme.cpp:146
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4 (Intense)"
+msgstr "Culoare 4 (intens)"
+
+#: colorscheme/ColorScheme.cpp:147
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5 (Intense)"
+msgstr "Culoare 5 (intens)"
+
+#: colorscheme/ColorScheme.cpp:148
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6 (Intense)"
+msgstr "Culoare 6 (intens)"
+
+#: colorscheme/ColorScheme.cpp:149
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7 (Intense)"
+msgstr "Culoare 7 (intens)"
+
+#: colorscheme/ColorScheme.cpp:150
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8 (Intense)"
+msgstr "Culoare 8 (intens)"
+
+#: colorscheme/ColorScheme.cpp:151
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground (Faint)"
+msgstr "Prim-plan (palid)"
+
+#: colorscheme/ColorScheme.cpp:152
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background (Faint)"
+msgstr "Fundal (palid)"
+
+#: colorscheme/ColorScheme.cpp:153
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1 (Faint)"
+msgstr "Culoare 1 (palid)"
+
+#: colorscheme/ColorScheme.cpp:154
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2 (Faint)"
+msgstr "Culoare 2 (palid)"
+
+#: colorscheme/ColorScheme.cpp:155
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3 (Faint)"
+msgstr "Culoare 3 (palid)"
+
+#: colorscheme/ColorScheme.cpp:156
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4 (Faint)"
+msgstr "Culoare 4 (palid)"
+
+#: colorscheme/ColorScheme.cpp:157
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5 (Faint)"
+msgstr "Culoare 5 (palid)"
+
+#: colorscheme/ColorScheme.cpp:158
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6 (Faint)"
+msgstr "Culoare 6 (palid)"
+
+#: colorscheme/ColorScheme.cpp:159
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7 (Faint)"
+msgstr "Culoare 7 (palid)"
+
+#: colorscheme/ColorScheme.cpp:160
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8 (Faint)"
+msgstr "Culoare 8 (palid)"
+
+#: colorscheme/ColorScheme.cpp:463
+#, kde-format
+msgctxt "@item"
+msgid "Un-named Color Scheme"
+msgstr "Schemă de culori anonimă"
+
+#: colorscheme/ColorSchemeEditor.cpp:109
+#, kde-format
+msgctxt "@label:listbox Column header text for color names"
+msgid "Name"
+msgstr "Denumire"
+
+#: colorscheme/ColorSchemeEditor.cpp:109
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual colors"
+msgid "Color"
+msgstr "Culoare"
+
+#: colorscheme/ColorSchemeEditor.cpp:110
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual intense colors"
+msgid "Intense color"
+msgstr "Culoare intensă"
+
+#: colorscheme/ColorSchemeEditor.cpp:111
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual faint colors"
+msgid "Faint color"
+msgstr "Culoare palidă"
+
+#: colorscheme/ColorSchemeEditor.cpp:136
+#, kde-format
+msgctxt "@info:status"
+msgid ""
+"The background transparency setting will not be used because your desktop "
+"does not appear to support transparent windows."
+msgstr ""
+"Transparența fundalului nu va fi folosită deoarece calculatorul "
+"dumneavoastră nu pare să susțină ferestre transparente."
+
+#: colorscheme/ColorSchemeEditor.cpp:187
+#, kde-format
+msgctxt "@title:window"
+msgid "Select wallpaper image file"
+msgstr "Alege fișier cu imaginea de tapet"
+
+#: colorscheme/ColorSchemeEditor.cpp:189
+#, kde-format
+msgctxt "@label:textbox Filter in file open dialog"
+msgid "Supported Images"
+msgstr "Imagini susținute"
+
+#: colorscheme/ColorSchemeEditor.cpp:333
+#, kde-format
+msgctxt "@title:window"
+msgid "New Color Scheme"
+msgstr "Schemă de culori nouă"
+
+#: colorscheme/ColorSchemeEditor.cpp:336
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Color Scheme"
+msgstr "Modifică schema de culori"
+
+#: colorscheme/ColorSchemeEditor.cpp:382
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose color"
+msgstr "Apăsați pentru a alege culoarea"
+
+#: colorscheme/ColorSchemeEditor.cpp:387
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose intense color"
+msgstr "Apăsați pentru a alege culoarea intensă"
+
+#: colorscheme/ColorSchemeEditor.cpp:392
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose Faint color"
+msgstr "Apăsați pentru a alege culoarea palidă"
+
+#. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
+#. i18n: ectx: property (text), widget (QLabel, discriptionLabel)
+#: colorscheme/ColorSchemeEditor.ui:31 KeyBindingEditor.ui:31
+#, kde-format
+msgid "Description:"
+msgstr "Descriere:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, randomizedBackgroundCheck)
+#: colorscheme/ColorSchemeEditor.ui:50
+#, kde-format
+msgid ""
+"Hue and saturation values of default foreground and background colors are "
+"randomized by default. Some color schemes might use different randomization "
+"settings.\n"
+"To see any effect, set colors with saturation value greater than 0."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
+#: colorscheme/ColorSchemeEditor.ui:53
+#, kde-format
+msgid "Randomly adjust colors for each session"
+msgstr "Ajustează aleator culorile fiecărei sesiuni"
+
+#. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
+#: colorscheme/ColorSchemeEditor.ui:60
+#, kde-format
+msgid "Blur background"
+msgstr "Estompează fundalul"
+
+#. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
+#: colorscheme/ColorSchemeEditor.ui:69
+#, kde-format
+msgid "Background color transparency:"
+msgstr "Transparență culoare fundal:"
+
+#. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
+#. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
+#: colorscheme/ColorSchemeEditor.ui:89 colorscheme/ColorSchemeEditor.ui:123
+#, kde-format
+msgid "Percent"
+msgstr "Procente"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
+#: colorscheme/ColorSchemeEditor.ui:103
+#, kde-format
+msgid "Wallpaper transparency:"
+msgstr "Transparență tapet:"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
+#: colorscheme/ColorSchemeEditor.ui:137
+#, kde-format
+msgid "Background image:"
+msgstr "Imagine de fundal:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, wallpaperPath)
+#: colorscheme/ColorSchemeEditor.ui:144
+#, kde-format
+msgid "Edit the path of the background image"
+msgstr "Modifică calea imaginii de fundal"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, wallpaperSelectButton)
+#: colorscheme/ColorSchemeEditor.ui:151
+#, kde-format
+msgid "Choose the background image"
+msgstr "Alege imaginea de fundal"
+
+#. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
+#. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
+#. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:127
+#: widgets/EditProfileGeneralPage.ui:183
+#, kde-format
+msgid "..."
+msgstr "..."
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
+#: colorscheme/ColorSchemeEditor.ui:165
+#, kde-format
+msgid "Wallpaper scaling:"
+msgstr "Scalare tapet:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:173
+#, kde-format
+msgid "Tile"
+msgstr "Mozaic"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:178
+#, kde-format
+msgid "Stretch"
+msgstr "Întinde"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:183
+#, kde-format
+msgid "Crop"
+msgstr "Decupează"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:188
+#, kde-format
+msgid "Adapt"
+msgstr "Adaptează"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:193
+#, kde-format
+msgid "NoScaling"
+msgstr "FărăScalare"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
+#: colorscheme/ColorSchemeEditor.ui:205
+#, fuzzy, kde-format
+#| msgid "Wallpaper scaling:"
+msgid "Wallpaper flip:"
+msgstr "Scalare tapet:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:213
+#, kde-format
+msgid "NoFlip"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:218
+#, fuzzy, kde-format
+#| msgid "Horizontal Anchor:"
+msgid "Horizontal"
+msgstr "Ancoră orizontală:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:223
+#, fuzzy, kde-format
+#| msgid "Vertical Anchor:"
+msgid "Vertical"
+msgstr "Ancoră verticală:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:228
+#, kde-format
+msgid "Both"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
+#: colorscheme/ColorSchemeEditor.ui:240
+#, kde-format
+msgid "Horizontal Anchor:"
+msgstr "Ancoră orizontală:"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
+#: colorscheme/ColorSchemeEditor.ui:266
+#, kde-format
+msgid "Left"
+msgstr "Stânga"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
+#: colorscheme/ColorSchemeEditor.ui:277
+#, kde-format
+msgid "Vertical Anchor:"
+msgstr "Ancoră verticală:"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
+#: colorscheme/ColorSchemeEditor.ui:303
+#, kde-format
+msgid "Top"
+msgstr "Sus"
+
+#: colorscheme/ColorSchemeViewDelegate.cpp:50
+#, kde-format
+msgid "AaZz09..."
+msgstr "AaZz09…"
+
+#: CopyInputDialog.cpp:30
+#, kde-format
+msgid "Copy Input"
+msgstr "Copiază intrarea"
+
+#. i18n: ectx: property (text), widget (QLabel, filterLabel)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: CopyInputDialog.ui:19 KeyBindingEditor.ui:41
+#, kde-format
+msgid "Filter:"
+msgstr "Filtru:"
+
+#. i18n: ectx: property (text), widget (QPushButton, selectAllButton)
+#: CopyInputDialog.ui:46
+#, kde-format
+msgid "Select All"
+msgstr "Selectează tot"
+
+#. i18n: ectx: property (text), widget (QPushButton, deselectAllButton)
+#: CopyInputDialog.ui:53
+#, kde-format
+msgid "Deselect All"
+msgstr "Deselectează tot"
+
+#: filterHotSpots/FileFilterHotspot.cpp:169
+#, kde-format
+msgid ""
+"Could not open file with the text editor specified in the profile settings;\n"
+"it will be opened with the system default editor."
+msgstr ""
+
+#: filterHotSpots/FileFilterHotspot.cpp:183
+#, kde-format
+msgid "Copy Location"
+msgstr "Copiază amplasarea"
+
+#: filterHotSpots/FileFilterHotspot.cpp:210
+#, kde-format
+msgid "open with"
+msgstr "deschide cu"
+
+#: filterHotSpots/FileFilterHotspot.cpp:308
+#, kde-format
+msgid "Generating Thumbnail"
+msgstr "Se generează miniatura"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:90
+#, kde-format
+msgid "Open Link"
+msgstr "Deschide legătura"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Copy Link Address"
+msgstr "Copiază adresa legăturii"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:95
+#, kde-format
+msgid "Send Email To..."
+msgstr "Trimite e-mail către..."
+
+#: filterHotSpots/UrlFilterHotspot.cpp:97
+#, kde-format
+msgid "Copy Email Address"
+msgstr "Copiază adresa de e-mail"
+
+#: FontDialog.cpp:27
+#, kde-format
+msgctxt "@title:window"
+msgid "Select font"
+msgstr "Alege fontul"
+
+#: FontDialog.cpp:43
+#, kde-format
+msgctxt "@action:button"
+msgid "Show all fonts"
+msgstr "Arată toate fonturile"
+
+#: FontDialog.cpp:70
+#, kde-format
+msgctxt "@info:status"
+msgid ""
+"By its very nature, a terminal program requires font characters that are "
+"equal width (monospace). Any non monospaced font may cause display issues. "
+"This should not be necessary except in rare cases."
+msgstr ""
+"Prin natura sa, un program de terminal necesită caractere cu lățimi egale "
+"(monospațiate). Orice font ne-monospațiat poate provoca probleme de afișare. "
+"Aceasta n-ar trebui să fie necesară decât în cazuri rare."
+
+#: HistorySizeDialog.cpp:26
+#, kde-format
+msgctxt "@title:window"
+msgid "Adjust Scrollback"
+msgstr "Ajustează revenirea"
+
+#: HistorySizeDialog.cpp:47
+#, kde-format
+msgctxt "@info:status"
+msgid "Any adjustments are only temporary to this session."
+msgstr "Orice ajustări sunt numai temporare în această sesiune."
+
+#: KeyBindingEditor.cpp:54
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Enter descriptive label"
+msgstr "Introduceți o etichetă descriptivă"
+
+#: KeyBindingEditor.cpp:63
+#, kde-format
+msgid "Key Combination"
+msgstr "Combinație de taste"
+
+#: KeyBindingEditor.cpp:63
+#, kde-format
+msgid "Output"
+msgstr "Ieșire"
+
+#: KeyBindingEditor.cpp:219 KeyBindingEditor.cpp:220
+#, kde-format
+msgid "New Key Binding List"
+msgstr "Listă de combinații de taste nouă"
+
+#: KeyBindingEditor.cpp:223
+#, kde-format
+msgid "Edit Key Binding List"
+msgstr "Editează lista combinațiilor de taste"
+
+#: KeyBindingEditor.cpp:286
+#, kde-format
+msgid "A key bindings scheme cannot be saved with an empty description."
+msgstr ""
+"O schemă de combinații de taste nu poate fi salvată cu descriere goală."
+
+#. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
+#. i18n: ectx: property (text), widget (QPushButton, btnAdd)
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:240
+#: plugins/SSHManager/sshwidget.ui:272
+#, kde-format
+msgid "Add"
+msgstr "Adaugă"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeEntryButton)
+#. i18n: ectx: property (text), widget (QPushButton, removeKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, removeColorSchemeButton)
+#: KeyBindingEditor.ui:72 widgets/EditProfileAppearancePage.ui:89
+#: widgets/EditProfileKeyboardPage.ui:95
+#, kde-format
+msgid "Remove"
+msgstr "Elimină"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: KeyBindingEditor.ui:94
+#, kde-format
+msgctxt "Title of the area where you test your keys are properly configured"
+msgid "Test Area"
+msgstr "Zonă de probă"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: KeyBindingEditor.ui:115
+#, kde-format
+msgid "Input:"
+msgstr "Intrare:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: KeyBindingEditor.ui:128
+#, kde-format
+msgid "Output:"
+msgstr "Ieșire:"
+
+#: main.cpp:155
+#, kde-format
+msgctxt "@title"
+msgid "Konsole"
+msgstr "Konsolă"
+
+#: main.cpp:157
+#, kde-format
+msgctxt "@title"
+msgid "Terminal emulator"
+msgstr "Emulator de terminal"
+
+#: main.cpp:159
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 1997-2022, The Konsole Developers"
+msgstr "(c) 1997-2022, Dezvoltatorii Konsolă"
+
+#: main.cpp:333
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kurt Hindenburg"
+msgstr "Kurt Hindenburg"
+
+#: main.cpp:335
+#, kde-format
+msgctxt "@info:credit"
+msgid "General maintainer, bug fixes and general improvements"
+msgstr "Responsabil general, corecții de erori și îmbunătățiri generale"
+
+#: main.cpp:338
+#, kde-format
+msgctxt "@info:credit"
+msgid "Robert Knight"
+msgstr "Robert Knight"
+
+#: main.cpp:339
+#, kde-format
+msgctxt "@info:credit"
+msgid "Previous maintainer, ported to KDE4"
+msgstr "Responsabilul precedent, portarea spre KDE4"
+
+#: main.cpp:341
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lars Doelle"
+msgstr "Lars Doelle"
+
+#: main.cpp:341
+#, kde-format
+msgctxt "@info:credit"
+msgid "Original author"
+msgstr "Autorul original"
+
+#: main.cpp:342
+#, kde-format
+msgctxt "@info:credit"
+msgid "Ahmad Samir"
+msgstr "Ahmad Samir"
+
+#: main.cpp:343 main.cpp:346 main.cpp:349 main.cpp:352
+#, kde-format
+msgctxt "@info:credit"
+msgid "Major refactoring, bug fixes and major improvements"
+msgstr "Restructurare majoră, corectarea defectelor și îmbunătățiri majore"
+
+#: main.cpp:345
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carlos Alves"
+msgstr "Carlos Alves"
+
+#: main.cpp:348
+#, kde-format
+msgctxt "@info:credit"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:351
+#, kde-format
+msgctxt "@info:credit"
+msgid "Gustavo Carneiro"
+msgstr "Gustavo Carneiro"
+
+#: main.cpp:354
+#, kde-format
+msgctxt "@info:credit"
+msgid "Edwin Pujols"
+msgstr "Edwin Pujols"
+
+#: main.cpp:355 main.cpp:358 main.cpp:360 main.cpp:365 main.cpp:367
+#: main.cpp:368 main.cpp:369
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes and general improvements"
+msgstr "Corecții de defecte și îmbunătățiri generale"
+
+#: main.cpp:357
+#, kde-format
+msgctxt "@info:credit"
+msgid "Martin T. H. Sandsmark"
+msgstr "Martin T. H. Sandsmark"
+
+#: main.cpp:360
+#, kde-format
+msgctxt "@info:credit"
+msgid "Nate Graham"
+msgstr "Nate Graham"
+
+#: main.cpp:361
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mariusz Glebocki"
+msgstr "Mariusz Glebocki"
+
+#: main.cpp:362
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes and major improvements"
+msgstr "Corecții de erori și îmbunătățiri majore"
+
+#: main.cpp:364
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thomas Surrel"
+msgstr "Thomas Surrel"
+
+#: main.cpp:367
+#, kde-format
+msgctxt "@info:credit"
+msgid "Jekyll Wu"
+msgstr "Jekyll Wu"
+
+#: main.cpp:368
+#, kde-format
+msgctxt "@info:credit"
+msgid "Waldo Bastian"
+msgstr "Waldo Bastian"
+
+#: main.cpp:369
+#, kde-format
+msgctxt "@info:credit"
+msgid "Stephan Binner"
+msgstr "Stephan Binner"
+
+#: main.cpp:370
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thomas Dreibholz"
+msgstr "Thomas Dreibholz"
+
+#: main.cpp:370
+#, kde-format
+msgctxt "@info:credit"
+msgid "General improvements"
+msgstr "Îmbunătățiri generale"
+
+#: main.cpp:371
+#, kde-format
+msgctxt "@info:credit"
+msgid "Chris Machemer"
+msgstr "Chris Machemer"
+
+#: main.cpp:371 main.cpp:372 main.cpp:399 main.cpp:400 main.cpp:401
+#: main.cpp:402
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes"
+msgstr "Corecții de erori"
+
+#: main.cpp:372
+#, kde-format
+msgctxt "@info:credit"
+msgid "Francesco Cecconi"
+msgstr "Francesco Cecconi"
+
+#: main.cpp:373
+#, kde-format
+msgctxt "@info:credit"
+msgid "Stephan Kulow"
+msgstr "Stephan Kulow"
+
+#: main.cpp:373
+#, kde-format
+msgctxt "@info:credit"
+msgid "Solaris support and history"
+msgstr "Suport pentru Solaris și istoric"
+
+#: main.cpp:374
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Neundorf"
+msgstr "Alexander Neundorf"
+
+#: main.cpp:375
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes and improved startup performance"
+msgstr "Corecții și îmbunătățirea performanțelor de pornire"
+
+#: main.cpp:377
+#, kde-format
+msgctxt "@info:credit"
+msgid "Peter Silva"
+msgstr "Peter Silva"
+
+#: main.cpp:377
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marking improvements"
+msgstr "Îmbunătățiri de marcaj"
+
+#: main.cpp:378
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lotzi Boloni"
+msgstr "Lotzi Boloni"
+
+#: main.cpp:380
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Embedded Konsole\n"
+"Toolbar and session names"
+msgstr ""
+"Consolă încorporată\n"
+"Bara de unelte și denumirile sesiunilor"
+
+#: main.cpp:383
+#, kde-format
+msgctxt "@info:credit"
+msgid "David Faure"
+msgstr "David Faure"
+
+#: main.cpp:385
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Embedded Konsole\n"
+"General improvements"
+msgstr ""
+"Consolă încorporată\n"
+"Îmbunătățiri generale"
+
+#: main.cpp:388
+#, kde-format
+msgctxt "@info:credit"
+msgid "Antonio Larrosa"
+msgstr "Antonio Larrosa"
+
+#: main.cpp:388
+#, kde-format
+msgctxt "@info:credit"
+msgid "Visual effects"
+msgstr "Efecte vizuale"
+
+#: main.cpp:389
+#, kde-format
+msgctxt "@info:credit"
+msgid "Matthias Ettrich"
+msgstr "Matthias Ettrich"
+
+#: main.cpp:391
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Code from the kvt project\n"
+"General improvements"
+msgstr ""
+"Cod din proiectul kvt\n"
+"Îmbunătățiri generale"
+
+#: main.cpp:394
+#, kde-format
+msgctxt "@info:credit"
+msgid "Warwick Allison"
+msgstr "Warwick Allison"
+
+#: main.cpp:395
+#, kde-format
+msgctxt "@info:credit"
+msgid "Schema and text selection improvements"
+msgstr "Îmbunătățiri la scheme și selecție de text"
+
+#: main.cpp:397
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dan Pilone"
+msgstr "Dan Pilone"
+
+#: main.cpp:397
+#, kde-format
+msgctxt "@info:credit"
+msgid "SGI port"
+msgstr "Portare SGI"
+
+#: main.cpp:398
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kevin Street"
+msgstr "Kevin Street"
+
+#: main.cpp:398
+#, kde-format
+msgctxt "@info:credit"
+msgid "FreeBSD port"
+msgstr "Portare FreeBSD"
+
+#: main.cpp:399
+#, kde-format
+msgctxt "@info:credit"
+msgid "Sven Fischer"
+msgstr "Sven Fischer"
+
+#: main.cpp:400
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dale M. Flaven"
+msgstr "Dale M. Flaven"
+
+#: main.cpp:401
+#, kde-format
+msgctxt "@info:credit"
+msgid "Martin Jones"
+msgstr "Martin Jones"
+
+#: main.cpp:402
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lars Knoll"
+msgstr "Lars Knoll"
+
+#: main.cpp:403
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thanks to many others.\n"
+msgstr "Mulțumiri multor altora.\n"
+
+#: MainWindow.cpp:314
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&New Tab"
+msgstr "Filă &nouă"
+
+#: MainWindow.cpp:324
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Clone Tab"
+msgstr "&Clonează fila"
+
+#: MainWindow.cpp:331
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Window"
+msgstr "&Fereastră nouă"
+
+#: MainWindow.cpp:338
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close Window"
+msgstr "Închide fereastra"
+
+#: MainWindow.cpp:343
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Bookmarks"
+msgstr "&Semne de carte"
+
+#: MainWindow.cpp:364
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Manage Profiles..."
+msgstr "Gestiune profiluri..."
+
+#: MainWindow.cpp:370
+#, kde-format
+msgctxt "@item"
+msgid "Activate Menu"
+msgstr "Activează meniul"
+
+#: MainWindow.cpp:376
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save tab layout to file"
+msgctxt "@action:inmenu"
+msgid "Save Tab Layout..."
+msgstr "Salvează aranjamentul filelor în fișier"
+
+#: MainWindow.cpp:385
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Load tab layout from file"
+msgctxt "@action:inmenu"
+msgid "Load Tab Layout..."
+msgstr "Încarcă aranjamentul filelor din fișier"
+
+#: MainWindow.cpp:618 MainWindow.cpp:635
+#, kde-format
+msgctxt "@info"
+msgid "There is a process running in this window. Do you still want to quit?"
+msgid_plural ""
+"There are %1 processes running in this window. Do you still want to quit?"
+msgstr[0] "Este un proces rulând în această fereastră. Ieșiți oricum?"
+msgstr[1] "Sunt %1 procese rulând în această fereastră. Ieșiți oricum?"
+msgstr[2] "Sunt %1 de procese rulând în această fereastră. Ieșiți oricum?"
+
+#: MainWindow.cpp:624 MainWindow.cpp:641 MainWindow.cpp:655
+#, kde-format
+msgctxt "@title"
+msgid "Confirm Close"
+msgstr "Confirmă închiderea"
+
+#: MainWindow.cpp:625 MainWindow.cpp:642 MainWindow.cpp:656
+#, kde-format
+msgctxt "@action:button"
+msgid "Close &Window"
+msgstr "Închi&de fereastra"
+
+#: MainWindow.cpp:643 MainWindow.cpp:657
+#, kde-format
+msgctxt "@action:button"
+msgid "Close Current &Tab"
+msgstr "Închide fila curen&tă"
+
+#: MainWindow.cpp:652
+#, kde-format
+msgctxt "@info"
+msgid "There are %1 open terminals in this window. Do you still want to quit?"
+msgstr "Sunt %1 terminale deschise în această fereastră. Terminați oricum?"
+
+#: MainWindow.cpp:759 Part.cpp:297
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Profiles"
+msgstr "Profiluri"
+
+#: MainWindow.cpp:776
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "General"
+msgstr "Generale"
+
+#: MainWindow.cpp:787
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Tab Bar / Splitters"
+msgstr "Bara de file / Despărțitori"
+
+#: MainWindow.cpp:792
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Temporary Files"
+msgstr "Fișiere temporare"
+
+#: MainWindow.cpp:797
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Thumbnails"
+msgstr "Miniaturi"
+
+#: Part.cpp:300
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Part Info"
+msgstr "Informații componentă"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, QuickCommandsWidget)
+#: plugins/QuickCommands/qcwidget.ui:14
+#, kde-format
+msgid "Form"
+msgstr "Formular"
+
+#. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
+#. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
+#: plugins/QuickCommands/qcwidget.ui:53 plugins/SSHManager/sshwidget.ui:32
+#, kde-format
+msgid "Invert"
+msgstr "Inversează"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: plugins/QuickCommands/qcwidget.ui:91
+#, kde-format
+msgid "Title"
+msgstr "Titlu"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: plugins/QuickCommands/qcwidget.ui:101
+#, kde-format
+msgid "Tooltip"
+msgstr "Indiciu"
+
+#. i18n: ectx: property (text), widget (QLabel, labelGroup)
+#: plugins/QuickCommands/qcwidget.ui:111
+#, kde-format
+msgid "Group"
+msgstr "Grup"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, group)
+#. i18n: ectx: property (currentText), widget (QComboBox, folder)
+#: plugins/QuickCommands/qcwidget.ui:122 plugins/SSHManager/sshwidget.ui:186
+#, kde-format
+msgid "Default"
+msgstr "Implicit"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: plugins/QuickCommands/qcwidget.ui:137
+#, kde-format
+msgid "Command"
+msgstr "Comandă"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: plugins/QuickCommands/qcwidget.ui:187
+#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#, kde-format
+msgid "Warnings"
+msgstr "Avertismente"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnRun)
+#: plugins/QuickCommands/qcwidget.ui:230
+#, kde-format
+msgid "Run"
+msgstr "Execută"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnSave)
+#: plugins/QuickCommands/qcwidget.ui:250
+#, kde-format
+msgid "Save"
+msgstr "Salvează"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
+#: plugins/QuickCommands/qcwidget.ui:260
+#, kde-format
+msgid "Update"
+msgstr "Actualizează"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnCancel)
+#: plugins/QuickCommands/qcwidget.ui:270 plugins/SSHManager/sshwidget.ui:282
+#, kde-format
+msgid "Cancel"
+msgstr "Renunță"
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:38
+#, kde-format
+msgid "Quick Commands"
+msgstr "Comenzi rapide"
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:57
+#, kde-format
+msgid "Show Quick Commands"
+msgstr "Arată comenzi rapide"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:146
+#: plugins/QuickCommands/quickcommandswidget.cpp:157
+#, kde-format
+msgid "A duplicate item exists"
+msgstr "Există un element duplicat"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:163
+#, fuzzy, kde-format
+#| msgid "Please fix all the warnings before trying to execute this script"
+msgid "Please fix all the warnings before trying to run this script"
+msgstr ""
+"Remediați toate avertismentele înainte de a încerca să executați acest script"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:187
+#, fuzzy, kde-format
+#| msgid ""
+#| "There are some errors on the script, do you really want to execute it?"
+msgid "There are some errors on the script, do you really want to run it?"
+msgstr "Sunt erori în script, sigur doriți să-l executați?"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:188
+#, kde-format
+msgid "Shell Errors"
+msgstr "Erori de consolă"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:189
+#, fuzzy, kde-format
+#| msgid "Run"
+msgctxt "@action:button"
+msgid "Run"
+msgstr "Execută"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:214
+#, fuzzy, kde-format
+#| msgid ""
+#| "You are about to remove the group %1,\n"
+#| " with multiple configurations, are you sure?"
+msgid ""
+"You are about to delete the group %1,\n"
+" with multiple configurations, are you sure?"
+msgstr ""
+"Sunteți pe cale să eliminați grupul %1\n"
+" cu multiple configurări. Sunteți sigur?"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#, fuzzy, kde-format
+#| msgid "You are about to remove %1, are you sure?"
+msgid "You are about to delete %1, are you sure?"
+msgstr "Sunteți pe cale să eliminați %1. Sunteți sigur?"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#, fuzzy, kde-format
+#| msgid "Remove Quick Commands Configurations"
+msgid "Delete Quick Commands Configurations"
+msgstr "Elimină configurările comenzilor rapide"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:248
+#, kde-format
+msgid "Title can not be empty or blank"
+msgstr "Titlul nu poate fi gol sau vid"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#, kde-format
+msgid "Command can not be empty"
+msgstr "Comanda nu poate fi goală"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#, kde-format
+msgid "Rename"
+msgstr "Redenumește"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#, kde-format
+msgid "Delete"
+msgstr "Șterge"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:307
+#, kde-format
+msgid "Warnings (*)"
+msgstr "Avertismente (*)"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:46
+#, fuzzy, kde-format
+#| msgid "SSH Config"
+msgctxt "@item:inlistbox Hosts from ssh/config file"
+msgid "SSH Config"
+msgstr "Configurări SSH"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:49
+#, fuzzy, kde-format
+#| msgid "Default"
+msgctxt "@item:inlistbox The default list of ssh hosts"
+msgid "Default"
+msgstr "Implicit"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:75
+#, kde-format
+msgid "%1 is a folder for SSH entries"
+msgstr "%1 e un dosar pentru înregistrări SSH"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:79
+#: plugins/SSHManager/sshmanagermodel.cpp:302
+#: plugins/SSHManager/sshmanagermodel.cpp:370
+#: plugins/SSHManager/sshmanagermodel.cpp:403
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:97
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#, kde-format
+msgid "SSH Config"
+msgstr "Configurări SSH"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:103
+#, kde-format
+msgid "Host: %1"
+msgstr "Gazdă: %1"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:46
+#, kde-format
+msgid "SSH Manager"
+msgstr "Gestionar SSH"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:64
+#, kde-format
+msgid "Show SSH Manager"
+msgstr "Arată gestionarul SSH"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:73
+#: plugins/SSHManager/sshwidget.ui:105
+#, kde-format
+msgid "SSH Key"
+msgstr "Cheie SSH"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:112
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "@action:inmenu"
+msgid "Delete"
+msgstr "Șterge"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:136
+#, kde-format
+msgid "Don't Change"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:207
+#, fuzzy, kde-format
+#| msgid ""
+#| "You are about to remove the folder %1,\n"
+#| " with multiple SSH Configurations, are you sure?"
+msgid ""
+"You are about to delete the folder %1,\n"
+" with multiple SSH Configurations, are you sure?"
+msgstr ""
+"Sunteți pe cale să eliminați dosarul %1\n"
+" cu multiple configurări SSH. Sunteți sigur?"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:215
+#, fuzzy, kde-format
+#| msgid "Remove SSH Configurations"
+msgctxt "@title:window"
+msgid "Delete SSH Configurations"
+msgstr "Elimină configurările SSH"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:362
+#, kde-format
+msgid "Missing Hostname"
+msgstr "Lipsește gazda"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:367
+#, kde-format
+msgid "Missing Name"
+msgstr "Lipsește numele"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:374
+#, kde-format
+msgid "If Use Ssh Config is set, do not specify sshkey or username."
+msgstr ""
+"Dacă e activat „Folosește configurare SSH”, nu specificați cheia SSH sau "
+"utilizatorul."
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
+#, kde-format
+msgid "At least Username or SSHKey must be set"
+msgstr "Cel puțin Utilizator sau Cheie SSH trebuiesc specificate"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:385
+#, kde-format
+msgid "Missing Folder"
+msgstr "Dosar lipsă"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#, kde-format
+msgid "An SSH session must have a profile"
+msgstr "O sesiune SSH trebuie să aibă profil"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#, fuzzy, kde-format
+#| msgid "Cannot remove this folder"
+msgid "Cannot delete this folder"
+msgstr "Acest dosar nu poate fi eliminat"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#, fuzzy, kde-format
+#| msgid "Remove folder and all of its contents"
+msgid "Delete folder and all of its contents"
+msgstr "Elimină dosarul și tot conținutul acestuia"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:421
+#, kde-format
+msgid "Double click to change the folder name."
+msgstr "Dublu-clic pentru a schimba denumirea dosarului."
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#, fuzzy, kde-format
+#| msgid "You can't remove an automatically added entry."
+msgid "You can't delete an automatically added entry."
+msgstr "Nu puteți elimina o înregistrare adăugată automat."
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#, fuzzy, kde-format
+#| msgid "Remove selected entry"
+msgid "Delete selected entry"
+msgstr "Elimină înregistrarea aleasă"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#, kde-format
+msgid ""
+"Could not get the process name, assume that we can't request a connection"
+msgstr ""
+"Denumirea procesului nu a putut fi obținută, se consideră că nu putem cere o "
+"conexiune"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#, kde-format
+msgid "Error issuing SSH Command"
+msgstr "Eroare la emiterea comenzii SSH"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#, kde-format
+msgid ""
+"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
+msgstr ""
+"Nu se poate emite o comandă SSH în afara aplicației shell (cum ar fi bash, "
+"zsh, sh)"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#: plugins/SSHManager/sshwidget.ui:19
+#, kde-format
+msgid "Filter..."
+msgstr "Filtru…"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
+#: plugins/SSHManager/sshwidget.ui:29
+#, kde-format
+msgid "Show entries that don't match the filter"
+msgstr "Arată înregistrări ce nu se potrivesc filtrului"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: plugins/SSHManager/sshwidget.ui:54
+#, kde-format
+msgid "Identifier"
+msgstr "Identificator"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, name)
+#: plugins/SSHManager/sshwidget.ui:61
+#, kde-format
+msgid "A name for this ssh entry"
+msgstr "O denumire pentru această înregistrare SSH"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
+#: plugins/SSHManager/sshwidget.ui:64
+#, kde-format
+msgid "The name of this entry on the list"
+msgstr "Denumirea acestei înregistrări în listă"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: plugins/SSHManager/sshwidget.ui:71
+#, kde-format
+msgid "SSH Hostname"
+msgstr "Gazdă SSH"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
+#: plugins/SSHManager/sshwidget.ui:78 plugins/SSHManager/sshwidget.ui:81
+#, kde-format
+msgid "The hostname of the server"
+msgstr "Numele de gazdă al serverului"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: plugins/SSHManager/sshwidget.ui:88
+#, kde-format
+msgid "Port"
+msgstr "Port"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, port)
+#: plugins/SSHManager/sshwidget.ui:95
+#, kde-format
+msgid "The port of the server, 22 is the default for ssh connections"
+msgstr "Portul serverului, 22 e implicit pentru conexiuni SSH"
+
+#. i18n: ectx: property (text), widget (QLineEdit, port)
+#: plugins/SSHManager/sshwidget.ui:98
+#, kde-format
+msgid "22"
+msgstr "22"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:114
+#, kde-format
+msgid "The private key to be used for this connection"
+msgstr "Cheia privată de folosit pentru această conexiune"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:120
+#, kde-format
+msgid "The private key"
+msgstr "Cheia privată"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: plugins/SSHManager/sshwidget.ui:140
+#, kde-format
+msgid "Username"
+msgstr "Utilizator"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:147
+#, kde-format
+msgid "The username for the connection"
+msgstr "Numele de utilizator pentru conexiune"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:150
+#, kde-format
+msgid "Your username"
+msgstr "Numele tău de utilizator"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
+#: plugins/SSHManager/sshwidget.ui:157
+#, kde-format
+msgid ""
+"If this is set, we don't rely on the SSH key set above, but on the "
+"configuration on ~/.ssh/config"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
+#: plugins/SSHManager/sshwidget.ui:160
+#, kde-format
+msgid "Use ~/.ssh/config for key"
+msgstr "Folosește ~/.ssh/config pentru cheie"
+
+#. i18n: ectx: property (text), widget (QLabel, folderLabel)
+#: plugins/SSHManager/sshwidget.ui:167
+#, kde-format
+msgid "Folder"
+msgstr "Dosar"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, folder)
+#: plugins/SSHManager/sshwidget.ui:180
+#, kde-format
+msgid "For organizational purposes, this entry will be inside of this folder."
+msgstr "În scop organizatoric, această înregistrare se va afla în acest dosar."
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: plugins/SSHManager/sshwidget.ui:193
+#, kde-format
+msgid "Profile"
+msgstr "Profil"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, profile)
+#: plugins/SSHManager/sshwidget.ui:206
+#, kde-format
+msgid "The profile to be active when the ssh session starts"
+msgstr "Profilul ce va fi activ când începe sesiunea SSH"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
+#: plugins/SSHManager/sshwidget.ui:231
+#, kde-format
+msgid "Add a new SSH Entry"
+msgstr "Adaugă înregistrare SSH nouă"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
+#: plugins/SSHManager/sshwidget.ui:245
+#, fuzzy, kde-format
+#| msgid "Remove selected SSH entry"
+msgid "Delete selected SSH entry"
+msgstr "Elimină înregistrarea SSH aleasă"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
+#: plugins/SSHManager/sshwidget.ui:259
+#, kde-format
+msgid "Edit selected entry"
+msgstr "Modifică înregistrarea aleasă"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
+#: plugins/SSHManager/sshwidget.ui:269
+#, kde-format
+msgid "Add new SSH Configuration"
+msgstr "Adaugă configurare SSH nouă"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
+#: plugins/SSHManager/sshwidget.ui:279
+#, kde-format
+msgid "Cancel Add or Edit"
+msgstr "Renunță la adăugare sau redactare"
+
+#: pluginsystem/PluginManager.cpp:83
+#, kde-format
+msgid "No plugins available"
+msgstr "Nicio extensie disponibilă"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
+#. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
+#: PrintOptions.ui:14 PrintOptions.ui:20
+#, kde-format
+msgid "Output Options"
+msgstr "Opțiuni pentru ieșire"
+
+#. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
+#. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
+#: PrintOptions.ui:39 settings/konsole.kcfg:165
+#, kde-format
+msgid "Printer &friendly mode (black text, no background)"
+msgstr "Regim prietenos cu imprimanta (text negru, &fără fundal)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
+#. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
+#: PrintOptions.ui:46 settings/konsole.kcfg:169
+#, kde-format
+msgid "&Scale output"
+msgstr "&Scalează ieșirea"
+
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:459
+#, kde-format
+msgid "Default profile"
+msgstr "Profil implicit"
+
+#: profile/ProfileManager.cpp:265
+#, kde-format
+msgid "Konsole does not have permission to save this profile to %1"
+msgstr "Konsola nu are permisiunea de a salva acest profil în %1"
+
+#: profile/ProfileModel.cpp:55
+#, kde-format
+msgctxt "@title:column Profile name"
+msgid "Name"
+msgstr "Denumire"
+
+#: profile/ProfileModel.cpp:57
+#, kde-format
+msgctxt "@title:column Profile keyboard shortcut"
+msgid "Shortcut"
+msgstr "Scurtătură"
+
+#: profile/ProfileModel.cpp:80
+#, kde-format
+msgctxt ""
+"@label:textbox added to the name of the built-in profile, to point out it's "
+"read-only"
+msgid " [Read-only]"
+msgstr " [Numai-citire]"
+
+#: profile/ProfileModel.cpp:84
+#, kde-format
+msgctxt "@label:textbox added to the name of the current default profile"
+msgid " [Default]"
+msgstr " [Implicit]"
+
+#: profile/ProfileModel.cpp:99
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Built-in profile is always available"
+msgstr "Profilul încorporat e disponibil întotdeauna"
+
+#: profile/ProfileModel.cpp:111
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Double click to change shortcut"
+msgstr "Dublu-clic pentru a schimba scurtătura"
+
+#: RenameTabDialog.cpp:25
+#, kde-format
+msgid "Tab Properties"
+msgstr "Proprietăți filă"
+
+#: SaveHistoryTask.cpp:68
+#, kde-format
+msgid "Save Output From %1"
+msgstr "Salvează ieșirea de la %1"
+
+#: SaveHistoryTask.cpp:80
+#, kde-format
+msgid "%1 is an invalid URL, the output could not be saved."
+msgstr "%1 nu este un URL valid. Ieșirea nu a putut fi salvată."
+
+#: SaveHistoryTask.cpp:161
+#, kde-format
+msgid ""
+"A problem occurred when saving the output.\n"
+"%1"
+msgstr ""
+"A intervenit o problemă la salvarea ieșirii.\n"
+"%1"
+
+#: schemas.cpp:1
+#, kde-format
+msgid "Black on Light Yellow"
+msgstr "Negru pe galben deschis"
+
+#: schemas.cpp:2
+#, kde-format
+msgid "Black on Random Light"
+msgstr "Negru pe culoare deschisă"
+
+#: schemas.cpp:3
+#, kde-format
+msgid "Black on White"
+msgstr "Negru pe alb"
+
+#: schemas.cpp:4
+#, kde-format
+msgid "Blue on Black"
+msgstr "Albastru pe negru"
+
+#: schemas.cpp:5
+#, kde-format
+msgid "Breeze"
+msgstr "Briză"
+
+#: schemas.cpp:6
+#, kde-format
+msgid "Dark Pastels"
+msgstr "Pasteluri întunecate"
+
+#: schemas.cpp:7
+#, kde-format
+msgid "Green on Black"
+msgstr "Verde pe negru"
+
+#: schemas.cpp:8
+#, kde-format
+msgid "Linux Colors"
+msgstr "Culori Linux"
+
+#: schemas.cpp:9
+#, kde-format
+msgid "Red on Black"
+msgstr "Roșu pe negru"
+
+#: schemas.cpp:10
+#, kde-format
+msgid "Solarized"
+msgstr "Solarizat"
+
+#: schemas.cpp:11
+#, kde-format
+msgid "Solarized Light"
+msgstr "Solarizat, luminos"
+
+#: schemas.cpp:12
+#, kde-format
+msgid "White on Black"
+msgstr "Alb pe negru"
+
+#: schemas.cpp:13
+#, kde-format
+msgid "Default (XFree 4)"
+msgstr "Implicit (XFree 4)"
+
+#: schemas.cpp:14
+#, kde-format
+msgid "Linux console"
+msgstr "Consolă Linux"
+
+#: schemas.cpp:15
+#, kde-format
+msgid "macOS"
+msgstr "macOS"
+
+#: schemas.cpp:16
+#, kde-format
+msgid "Solaris console"
+msgstr "Consolă Solaris"
+
+#: session/Session.cpp:88
+#, kde-format
+msgid "Bell in '%1' (Session '%2')"
+msgstr "Clopoțel în „%1” (sesiunea „%2”)"
+
+#: session/Session.cpp:373
+#, kde-format
+msgid "Could not find binary: "
+msgstr "Nu s-a putut găsi binarul: "
+
+#: session/Session.cpp:382
+#, kde-format
+msgctxt "@info:shell Alert the user with red color text"
+msgid "Warning: "
+msgstr "Atenție: "
+
+#: session/Session.cpp:457
+#, kde-format
+msgid "Could not find an interactive shell to start."
+msgstr "Nu s-a găsit o consolă interactivă de pornit."
+
+#: session/Session.cpp:463 session/Session.cpp:465
+#, kde-format
+msgid ""
+"Could not find '%1', starting '%2' instead.  Please check your profile "
+"settings."
+msgstr ""
+"Nu s-a putut găsi „%1” - pornesc „%2” în loc.  Verificați-vă configurările "
+"profilului."
+
+#: session/Session.cpp:516
+#, kde-format
+msgid "Could not start program '%1' with arguments '%2'."
+msgstr "Nu s-a putut porni programul „%1” cu argumentele „%2”."
+
+#: session/Session.cpp:661
+#, kde-format
+msgid "Silence in '%1' (Session '%2')"
+msgstr "Liniște în „%1” (sesiunea „%2”)"
+
+#: session/Session.cpp:665 session/Session.cpp:1825
+#: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#, fuzzy, kde-format
+#| msgid "&Close Session"
+msgid "Show session"
+msgstr "În&chide sesiunea"
+
+#: session/Session.cpp:929
+#, kde-format
+msgid ""
+"The D-Bus methods sendText/runCommand were just used.  There are security "
+"concerns about allowing these methods to be public.  If desired, these "
+"methods can be changed to internal use only by re-compiling Konsole. <p>This "
+"warning will only show once for this Konsole instance.</p>"
+msgstr ""
+"Metodele D-Bus sendText/runCommand tocmai au fost folosite.  Există "
+"îngrijorări de securitate legate de permiterea acestor metode să fie "
+"publice.  Dacă doriți, puteți schimba aceste metode să fie doar pentru uz "
+"intern prin recompilarea Konsolei. <p>Acest avertisment va fi arătat doar o "
+"dată pentru această instanță a Konsolei.</p>"
+
+#: session/Session.cpp:965
+#, kde-format
+msgctxt "@info:shell This session is done"
+msgid "Finished"
+msgstr "Terminat"
+
+#: session/Session.cpp:979 session/Session.cpp:990
+#, kde-format
+msgid "Program '%1' crashed."
+msgstr "Programul „%1” a eșuat."
+
+#: session/Session.cpp:981
+#, kde-format
+msgid "Program '%1' exited with status %2."
+msgstr "Programul '%1' a ieșit cu codul de eroare %2."
+
+#: session/Session.cpp:1489
+#, kde-format
+msgid "ZModem Progress"
+msgstr "Progres ZModem"
+
+#: session/Session.cpp:1821
+#, kde-format
+msgid "Activity in '%1' (Session '%2')"
+msgstr "Activitate în „%1” (sesiunea „%2”)"
+
+#: session/SessionController.cpp:147
+#, kde-format
+msgid "Konsole"
+msgstr "Konsolă"
+
+#: session/SessionController.cpp:360
+#, kde-format
+msgid "The process '%1' has finished running in session '%2'"
+msgstr "Procesul „%1” a terminat de rulat în sesiunea „%2”"
+
+#: session/SessionController.cpp:442
+#, kde-format
+msgid "Konsole does not know how to open the bookmark: "
+msgstr "Konsola nu știe cum să deschidă semnul de carte: "
+
+#: session/SessionController.cpp:521
+#, kde-format
+msgid "Search for '%1' with"
+msgstr "Caută „%1” cu"
+
+#: session/SessionController.cpp:537
+#, kde-format
+msgid "Configure Web Shortcuts..."
+msgstr "Configurare scurtături Web..."
+
+#: session/SessionController.cpp:651
+#, kde-format
+msgid "&Close Session"
+msgstr "În&chide sesiunea"
+
+#: session/SessionController.cpp:658
+#, kde-format
+msgid "Open File Manager"
+msgstr "Deschide gestionarul de fișiere"
+
+#: session/SessionController.cpp:670
+#, kde-format
+msgid "Copy"
+msgstr "Copiază"
+
+#: session/SessionController.cpp:676
+#, kde-format
+msgid "Copy except prompts"
+msgstr ""
+
+#: session/SessionController.cpp:682
+#, fuzzy, kde-format
+#| msgid "Copy Input"
+msgid "Copy user input"
+msgstr "Copiază intrarea"
+
+#: session/SessionController.cpp:688
+#, fuzzy, kde-format
+#| msgid "Copy Input"
+msgid "Copy command output"
+msgstr "Copiază intrarea"
+
+#: session/SessionController.cpp:703
+#, kde-format
+msgid "Paste Selection"
+msgstr "Lipește selecția"
+
+#: session/SessionController.cpp:710
+#, kde-format
+msgid "Web Search"
+msgstr "Căutare web"
+
+#: session/SessionController.cpp:716
+#, kde-format
+msgid "&Select All"
+msgstr "&Selectează tot"
+
+#: session/SessionController.cpp:720
+#, kde-format
+msgid "Select &Line"
+msgstr "Selectează &linia"
+
+#: session/SessionController.cpp:723
+#, kde-format
+msgid "Save Output &As..."
+msgstr "Salvează ieșirea c&a..."
+
+#: session/SessionController.cpp:729
+#, kde-format
+msgid "&Print Screen..."
+msgstr "Ti&părește ecranul..."
+
+#: session/SessionController.cpp:733
+#, kde-format
+msgid "Adjust Scrollback..."
+msgstr "Ajustează revenirea..."
+
+#: session/SessionController.cpp:737
+#, kde-format
+msgid "Clear Scrollback"
+msgstr "Curăță revenirea"
+
+#: session/SessionController.cpp:741
+#, kde-format
+msgid "Clear Scrollback and Reset"
+msgstr "Curăță revenirea și reinițializează"
+
+#: session/SessionController.cpp:750
+#, kde-format
+msgid "Switch Profile"
+msgstr "Comută profilul"
+
+#: session/SessionController.cpp:779
+#, kde-format
+msgid "Set &Encoding"
+msgstr "Stabil&ește codarea"
+
+#: session/SessionController.cpp:799
+#, kde-format
+msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
+msgid "Allow mouse tracking"
+msgstr "Permite urmărirea mausului"
+
+#: session/SessionController.cpp:807
+#, kde-format
+msgctxt "@item:inmenu A read only (locked) session"
+msgid "Read-only"
+msgstr "Numai-citire"
+
+#: session/SessionController.cpp:818
+#, kde-format
+msgid "&Configure or Rename Tab..."
+msgstr "&Configurează sau redenumește fila..."
+
+#: session/SessionController.cpp:824
+#, kde-format
+msgid "&All Tabs in Current Window"
+msgstr "To&ate filele în fereastra actuală"
+
+#: session/SessionController.cpp:831
+#, kde-format
+msgid "&Select Tabs..."
+msgstr "&Alege filele..."
+
+#: session/SessionController.cpp:837
+#, kde-format
+msgctxt "@action:inmenu Do not select any tabs"
+msgid "&None"
+msgstr "&Niciuna"
+
+#: session/SessionController.cpp:845
+#, kde-format
+msgid "Copy Input To"
+msgstr "Copiază intrarea la"
+
+#: session/SessionController.cpp:852
+#, kde-format
+msgid "&ZModem Upload..."
+msgstr "Încărcare &ZModem..."
+
+#: session/SessionController.cpp:857
+#, kde-format
+msgid "Monitor for &Activity"
+msgstr "Monitorizează pentru &activitate"
+
+#: session/SessionController.cpp:863
+#, kde-format
+msgid "Monitor for &Silence"
+msgstr "Monit&orizează pentru tăcere"
+
+#: session/SessionController.cpp:869
+#, kde-format
+msgid "Monitor for Process Finishing"
+msgstr "Monitorizează terminarea procesului"
+
+#: session/SessionController.cpp:876
+#, kde-format
+msgid "Enlarge Font"
+msgstr "Mărește fontul"
+
+#: session/SessionController.cpp:884
+#, kde-format
+msgid "Shrink Font"
+msgstr "Micșorează fontul"
+
+#: session/SessionController.cpp:889
+#, kde-format
+msgid "Reset Font Size"
+msgstr "Reinițializează dimensiunea fontului"
+
+#: session/SessionController.cpp:894
+#, kde-format
+msgid "Send Signal"
+msgstr "Trimite semnal"
+
+#: session/SessionController.cpp:898
+#, kde-format
+msgid "&Suspend Task"
+msgstr "&Suspendă sarcina"
+
+#: session/SessionController.cpp:903
+#, kde-format
+msgid "&Continue Task"
+msgstr "&Continuă sarcina"
+
+#: session/SessionController.cpp:908
+#, kde-format
+msgid "&Hangup"
+msgstr "&Agață"
+
+#: session/SessionController.cpp:913
+#, kde-format
+msgid "&Interrupt Task"
+msgstr "Întrerupe sarc&ina"
+
+#: session/SessionController.cpp:918
+#, kde-format
+msgid "&Terminate Task"
+msgstr "&Termină sarcina"
+
+#: session/SessionController.cpp:923
+#, kde-format
+msgid "&Kill Task"
+msgstr "&Omoară sarcina"
+
+#: session/SessionController.cpp:928
+#, kde-format
+msgid "User Signal &1"
+msgstr "Semnal utilizator &1"
+
+#: session/SessionController.cpp:933
+#, kde-format
+msgid "User Signal &2"
+msgstr "Semnal utilizator &2"
+
+#: session/SessionController.cpp:950
+#, kde-format
+msgid "Create New Profile..."
+msgstr "Creează profil nou…"
+
+#: session/SessionController.cpp:952
+#, kde-format
+msgid "Edit Current Profile..."
+msgstr "Editează profilul curent..."
+
+#: session/SessionController.cpp:1069
+#, kde-format
+msgid ""
+"A program is currently running in this session.  Are you sure you want to "
+"close it?"
+msgstr "Un program rulează în această sesiune. Sigur îl închideți?"
+
+#: session/SessionController.cpp:1073
+#, kde-format
+msgid ""
+"The program '%1' is currently running in this session.  Are you sure you "
+"want to close it?"
+msgstr "Programul „%1” rulează în această sesiune. Sigur îl închideți?"
+
+#: session/SessionController.cpp:1080 session/SessionController.cpp:1115
+#, kde-format
+msgid "Confirm Close"
+msgstr "Confirmă închiderea"
+
+#: session/SessionController.cpp:1081
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Close Tab"
+msgctxt "@action:button"
+msgid "Close Program"
+msgstr "Închide fila"
+
+#: session/SessionController.cpp:1104
+#, kde-format
+msgid ""
+"A program in this session would not die.  Are you sure you want to kill it "
+"by force?"
+msgstr ""
+"Un program din această sesiune nu vrea să se închidă. Sigur doriți să-l "
+"închideți forțat?"
+
+#: session/SessionController.cpp:1108
+#, kde-format
+msgid ""
+"The program '%1' is in this session would not die.  Are you sure you want to "
+"kill it by force?"
+msgstr ""
+"Programul „%1” din această sesiune nu vrea să se închidă. Sigur doriți să-l "
+"închideți forțat?"
+
+#: session/SessionController.cpp:1116
+#, kde-format
+msgctxt "@action:button"
+msgid "Kill Program"
+msgstr ""
+
+#: session/SessionController.cpp:1941
+#, kde-format
+msgid "Open Current Folder With"
+msgstr "Deschide dosarul actual cu"
+
+#: session/SessionController.cpp:2011
+#, kde-format
+msgid "Save ZModem Download to..."
+msgstr "Salvează descărcare ZModem la…"
+
+#: session/SessionController.cpp:2021
+#, kde-format
+msgid ""
+"<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
+"software was found on this system.</p><p>You may wish to install the 'rzsz' "
+"or 'lrzsz' package.</p>"
+msgstr ""
+"<p>O încercare de a transfera un fișier prin ZModem a fost detectată, dar "
+"nici un program pentru ZModem nu a fost găsit </p><p>E nevoie a se instala "
+"unul din pachetele 'rzsz' sau 'lrzsz'.</p>"
+
+#: session/SessionController.cpp:2031
+#, kde-format
+msgid ""
+"<p>The current session already has a ZModem file transfer in progress.</p>"
+msgstr ""
+"<p>Sesiunea curentă are deja un transfer de fișiere ZModem în curs.</p>"
+
+#: session/SessionController.cpp:2041
+#, kde-format
+msgid ""
+"<p>No suitable ZModem software was found on this system.</p><p>You may wish "
+"to install the 'rzsz' or 'lrzsz' package.</p>"
+msgstr ""
+"<p>Nici un program ZModem nu a fost găsit în acest sistem.</p><p>E nevoie a "
+"se instala unul din pachetele 'rzsz' sau 'lrzsz'.</p>"
+
+#: session/SessionController.cpp:2046
+#, kde-format
+msgid "Select Files for ZModem Upload"
+msgstr "Alege fișiere pentru încărcare ZModem"
+
+#: session/SessionListModel.cpp:89
+#, kde-format
+msgctxt "@item:intable The session index"
+msgid "Number"
+msgstr "Număr"
+
+#: session/SessionListModel.cpp:91
+#, kde-format
+msgctxt "@item:intable The session title"
+msgid "Title"
+msgstr "Titlu"
+
+#: settings/ConfigurationDialog.cpp:31
+#, kde-format
+msgctxt "@title:window"
+msgid "Configure"
+msgstr "Configurează"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:55
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "Caută:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:68 settings/konsole.kcfg:22
+#, kde-format
+msgid "Enable menu accelerators"
+msgstr "Activează acceleratorii meniului"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:81
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "Dacă e activată, configurările profilului vor fi ignorate"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:84
+#, kde-format
+msgid "Remember window size"
+msgstr "Memorizează dimensiunea ferestrei"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:97 settings/konsole.kcfg:17
+#, kde-format
+msgid "Show window title on the titlebar"
+msgstr "Arată titlul ferestrei în bara de titlu"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "Focalizează terminalele când indicatorul mausului trece peste ele"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:117 settings/konsole.kcfg:69
+#, kde-format
+msgid "Match using regular expressions"
+msgstr "Potrivește folosind expresii regulate"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:130 settings/konsole.kcfg:33
+#, kde-format
+msgid "When launching Konsole re-use existing process if possible"
+msgstr "La lansarea Konsolei, refolosește procesul existent dacă se poate"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
+#, kde-format
+msgid "Run all Konsole windows in a single process"
+msgstr "Rulează toate ferestrele de Konsolă în același proces"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:146
+#, kde-format
+msgid "Highlight all matches"
+msgstr "Evidențiază toate potrivirile"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/GeneralSettings.ui:175 settings/konsole.kcfg:65
+#, kde-format
+msgid "Sets whether the search is case sensitive"
+msgstr "Stabilește dacă căutarea este sensibilă la registru"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#: settings/GeneralSettings.ui:178
+#, kde-format
+msgid "Case sensitive"
+msgstr "Sensibil la registru"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:185 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "Elimină bara de titlu și chenarul ferestrei"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:208
+#, kde-format
+msgid "Process and window:"
+msgstr "Proces și fereastră:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:218
+#, kde-format
+msgid "Notifications:"
+msgstr "Notificări:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:236
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "Toate dialogurile vor fi afișate din nou"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:239
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "Activează toate mesajele „Nu mai întreba”"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:267 settings/konsole.kcfg:79
+#, kde-format
+msgid "Sets whether search should start from the bottom"
+msgstr "Stabilește dacă căutarea trebuie să înceapă de jos"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:270 settings/konsole.kcfg:78
+#, kde-format
+msgid "Search backwards"
+msgstr "Caută înapoi"
+
+#. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/konsole.kcfg:18
+#, kde-format
+msgid "Show window title set by escape sequence on the titlebar"
+msgstr ""
+"Arată titlul ferestrei stabilit de secvența de eludare în bara de titlu"
+
+#. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/konsole.kcfg:23
+#, kde-format
+msgid "Allow users to access top menu through Alt+Key combination"
+msgstr ""
+"Permite utilizatorilor să acceseze meniul de sus prin combinația Alt+Tastă"
+
+#. i18n: ectx: label, entry (RememberWindowSize), group (KonsoleWindow)
+#: settings/konsole.kcfg:27
+#, kde-format
+msgid "Use current window size on next startup"
+msgstr "Folosește dimensiunea curentă a ferestrei la următoarea lansare"
+
+#. i18n: ectx: tooltip, entry (RememberWindowSize), group (KonsoleWindow)
+#: settings/konsole.kcfg:28
+#, kde-format
+msgid "The window size will be saved upon exiting Konsole"
+msgstr "Dimensiunea ferestrei va fi salvată la ieșirea din Konsolă"
+
+#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:42
+#, kde-format
+msgid "Thumbnail Width"
+msgstr "Lățime miniaturi"
+
+#. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:43
+#, kde-format
+msgid "Sets the width of the thumbnail"
+msgstr "Stabilește lățimea miniaturilor"
+
+#. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:47 settings/konsole.kcfg:48
+#, kde-format
+msgid "Use Shift to display a thumbnail"
+msgstr "Folosește Shift pentru a afișa o miniatură"
+
+#. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#, kde-format
+msgid "Use Alt to display a thumbnail"
+msgstr "Folosește Alt pentru a afișa o miniatură"
+
+#. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#, kde-format
+msgid "Use Ctrl to display a thumbnail"
+msgstr "Folosește Ctrl pentru a afișa o miniatură"
+
+#. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/konsole.kcfg:64
+#, kde-format
+msgid "Search is case sensitive"
+msgstr "Căutarea e sensibilă la registru"
+
+#. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
+#: settings/konsole.kcfg:73
+#, kde-format
+msgid "Highlight all search matches"
+msgstr "Evidențiază toate potrivirile căutării"
+
+#. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
+#: settings/konsole.kcfg:74
+#, kde-format
+msgid "Sets whether matching text should be highlighted"
+msgstr "Stabilește dacă textul potrivit trebuie evidențiat"
+
+#. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
+#. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
+#: settings/konsole.kcfg:85 settings/konsole.kcfg:105
+#, kde-format
+msgid "Control the visibility of the whole tab bar"
+msgstr "Controlează vizibilitatea întregii bare de file"
+
+#. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
+#: settings/konsole.kcfg:94
+#, kde-format
+msgid "Control the size of the handle between panels"
+msgstr "Controlează dimensiunea mânerului dintre panouri"
+
+#. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
+#: settings/konsole.kcfg:114
+#, kde-format
+msgid "Control the position of the tab bar"
+msgstr "Controlează poziția barei de file"
+
+#. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
+#: settings/konsole.kcfg:122
+#, kde-format
+msgid "Control the visual style of the tab bar"
+msgstr "Controlează stilul vizual al barei de file"
+
+#. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
+#: settings/konsole.kcfg:126
+#, kde-format
+msgid "Use a user-defined .css file for the tab bar"
+msgstr "Folosește un fișier .css personalizat pentru bara de file"
+
+#. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
+#: settings/konsole.kcfg:130
+#, kde-format
+msgid "The .css file to use for the tab bar style"
+msgstr "Fișierul .css de utilizat pentru stilul barei de file"
+
+#. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
+#: settings/konsole.kcfg:134
+#, kde-format
+msgid "Allow middle-clicking on open tabs to close them"
+msgstr "Permite clicului mijlociu pe filele deschise să le închidă"
+
+#. i18n: ectx: label, entry (NewTabButton), group (TabBar)
+#: settings/konsole.kcfg:138
+#, kde-format
+msgid "Control the visibility of 'New Tab' button on the tab bar"
+msgstr "Controlează vizibilitatea butonului „Filă nouă” pe bara de file"
+
+#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#: settings/konsole.kcfg:142
+#, kde-format
+msgid "Control where the \"Close tab\" button will be displayed"
+msgstr "Controlează unde să fie afișat butonul „Închide fila”"
+
+#. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
+#: settings/konsole.kcfg:151
+#, kde-format
+msgid "Control where to put the new tab"
+msgstr "Controlează unde să fie pusă fila nouă"
+
+#. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
+#: settings/konsole.kcfg:159
+#, kde-format
+msgid "Expand the tab widths"
+msgstr "Extinde lățimile filelor"
+
+#. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
+#: settings/konsole.kcfg:175
+#, kde-format
+msgid "For scrollback files, use system-wide folder location"
+msgstr ""
+
+#. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
+#: settings/konsole.kcfg:179
+#, kde-format
+msgid "For scrollback files, use user's specific folder location"
+msgstr ""
+
+#. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
+#: settings/konsole.kcfg:183
+#, kde-format
+msgid "For scrollback files, use specified folder location"
+msgstr ""
+
+#. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
+#: settings/konsole.kcfg:187
+#, kde-format
+msgid "For scrollback files, use this folder"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/PartInfo.ui:29
+#, kde-format
+msgid ""
+"<html><head/><body><p>Applications that use KonsolePart share profiles.</"
+"p><p>They do not share with Konsole or other applications:<ul><li>default "
+"profile</li><li>show in menu</li><li>shortcuts</li></ul></p><p>Feel free to "
+"open a Konsole <a href=\"https://bugs.kde.org/enter_bug.cgi?"
+"format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
+"a change to how these are handled.</body></html>"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
+#: settings/ProfileSettings.ui:39
+#, kde-format
+msgid "Create a new profile based on the selected profile"
+msgstr "Creează un profil nou, bazat pe profilul ales"
+
+#. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
+#: settings/ProfileSettings.ui:42
+#, kde-format
+msgid "&New..."
+msgstr "&Nou..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
+#: settings/ProfileSettings.ui:52
+#, kde-format
+msgid ""
+"Edit the selected profile (this button is disabled for read-only profiles)"
+msgstr ""
+"Modifică profilul ales (acest buton e dezactivat pentru profiluri numai-"
+"citire)"
+
+#. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
+#: settings/ProfileSettings.ui:55
+#, kde-format
+msgid "&Edit..."
+msgstr "&Modifică…"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
+#: settings/ProfileSettings.ui:65
+#, kde-format
+msgid "Delete the selected profile"
+msgstr "Șterge profilul ales"
+
+#. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
+#: settings/ProfileSettings.ui:68
+#, kde-format
+msgid "&Remove"
+msgstr "&Elimină"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
+#: settings/ProfileSettings.ui:78
+#, kde-format
+msgid "Set the selected profile as the default for new terminal sessions"
+msgstr "Stabilește profilul ales ca implicit pentru sesiunile noi de terminal"
+
+#. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
+#: settings/ProfileSettings.ui:81
+#, kde-format
+msgid "&Set as Default"
+msgstr "&Stabilește ca implicit"
+
+#. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
+#: settings/TabBarSettings.ui:36
+#, kde-format
+msgctxt "@title:tab Tab bar settings"
+msgid "Appearance"
+msgstr "Aspect"
+
+#. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
+#: settings/TabBarSettings.ui:50
+#, kde-format
+msgid "Show:"
+msgstr "Arată:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
+#: settings/TabBarSettings.ui:60
+#, kde-format
+msgid "When needed"
+msgstr "Când este nevoie"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
+#: settings/TabBarSettings.ui:70
+#, kde-format
+msgid "Alwa&ys"
+msgstr "Înt&otdeauna"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
+#: settings/TabBarSettings.ui:80
+#, kde-format
+msgid "&Never"
+msgstr "&Niciodată"
+
+#. i18n: ectx: property (text), widget (QLabel, positionLabel)
+#: settings/TabBarSettings.ui:106
+#, kde-format
+msgid "Position:"
+msgstr "Poziție:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
+#: settings/TabBarSettings.ui:116
+#, kde-format
+msgid "Be&low terminal area"
+msgstr "Sub zona termina&lului"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Top)
+#: settings/TabBarSettings.ui:126
+#, kde-format
+msgid "Above terminal area"
+msgstr "Deasupra zonei terminalului"
+
+#. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
+#: settings/TabBarSettings.ui:152
+#, kde-format
+msgid "Show Close Tab button:"
+msgstr "Arată butonul de închidere a filei:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
+#: settings/TabBarSettings.ui:162
+#, kde-format
+msgid "&On each tab"
+msgstr "Pe fiec&are filă"
+
+#. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
+#: settings/TabBarSettings.ui:172
+#, kde-format
+msgid "On &the tab bar"
+msgstr "Pe ba&ra de file"
+
+#. i18n: ectx: property (text), widget (QRadioButton, None)
+#: settings/TabBarSettings.ui:182
+#, kde-format
+msgctxt "Do not show a close button"
+msgid "None"
+msgstr "Niciunul"
+
+#. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
+#. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
+#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:344
+#, kde-format
+msgctxt "@item:intext Miscellaneous Options"
+msgid "Miscellaneous:"
+msgstr "Diverse:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
+#: settings/TabBarSettings.ui:218
+#, kde-format
+msgid "Show 'New Tab' button"
+msgstr "Arată butonul „Filă nouă”"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
+#: settings/TabBarSettings.ui:225
+#, kde-format
+msgid "Expand individual tab widths to full window"
+msgstr "Extinde lățimile filelor individuale până la fereastra plină"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
+#: settings/TabBarSettings.ui:232
+#, kde-format
+msgid "Use user-defined stylesheet:"
+msgstr "Folosește foaie de stil definită de utilizator:"
+
+#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_scrollbackUseSpecifiedLocationDirectory)
+#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
+#: settings/TabBarSettings.ui:258 settings/TemporaryFilesSettings.ui:53
+#, kde-format
+msgid "text/css"
+msgstr "text/css"
+
+#. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
+#: settings/TabBarSettings.ui:261
+#, kde-format
+msgctxt "@item:intext Optional file path is empty"
+msgid "(none)"
+msgstr "(niciuna)"
+
+#. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
+#: settings/TabBarSettings.ui:284
+#, kde-format
+msgctxt "@title:tab Tab bar settings"
+msgid "Behavior"
+msgstr "Comportament"
+
+#. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
+#: settings/TabBarSettings.ui:298
+#, kde-format
+msgid "Put new tabs:"
+msgstr "Pune filele noi:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
+#: settings/TabBarSettings.ui:308
+#, kde-format
+msgid "At &the end"
+msgstr "La sfârși&t"
+
+#. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
+#: settings/TabBarSettings.ui:318
+#, kde-format
+msgid "After current &tab"
+msgstr "După fila curen&tă"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
+#: settings/TabBarSettings.ui:354
+#, kde-format
+msgid "Close tab on middle-click"
+msgstr "Închide fila cu clic mijlociu"
+
+#. i18n: ectx: attribute (title), widget (QWidget, splitTab)
+#: settings/TabBarSettings.ui:377
+#, kde-format
+msgid "Splits"
+msgstr "Despărțituri"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/TabBarSettings.ui:383
+#, kde-format
+msgid "Show Header:"
+msgstr "Arată antet:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
+#: settings/TabBarSettings.ui:390
+#, kde-format
+msgctxt "@option:radio When needed show the split header"
+msgid "When needed"
+msgstr "Când este nevoie"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
+#: settings/TabBarSettings.ui:400
+#, kde-format
+msgctxt "@option:radio Never show the split header"
+msgid "Never"
+msgstr "Niciodată"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/TabBarSettings.ui:426
+#, kde-format
+msgid "Drag Handle Size:"
+msgstr "Dimensiune mâner de tragere:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
+#: settings/TabBarSettings.ui:436
+#, kde-format
+msgctxt "@option:radio Small height/width of splitter widget"
+msgid "Small"
+msgstr "Mică"
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
+#: settings/TabBarSettings.ui:446
+#, kde-format
+msgctxt "@option:radio Medium height/width of splitter widget"
+msgid "Medium"
+msgstr "Medie"
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
+#: settings/TabBarSettings.ui:456
+#, kde-format
+msgctxt "@option:radio Large height/width of splitter widget"
+msgid "Large"
+msgstr "Mare"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
+#: settings/TabBarSettings.ui:479
+#, kde-format
+msgctxt "@option:radio Always show the split header"
+msgid "Always"
+msgstr "Întotdeauna"
+
+#: settings/TemporaryFilesSettings.cpp:31
+#, kde-format
+msgctxt ""
+"@option:radio File location; <filename>%1</filename>: path to directory "
+"placeholder"
+msgid "System temporary directory (%1)"
+msgstr "Dosarul temporar al sistemului (%1)"
+
+#: settings/TemporaryFilesSettings.cpp:33
+#, kde-format
+msgctxt ""
+"@option:radio File location; <filename>%1</filename>: path to directory "
+"placeholder"
+msgid "User cache directory (%1)"
+msgstr "Dosarul pentru cache al utilizatorului (%1)"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: settings/TemporaryFilesSettings.ui:37
+#, kde-format
+msgid "Scrollback file location:"
+msgstr "Amplasarea fișierului pentru revenire:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
+#: settings/TemporaryFilesSettings.ui:79
+#, kde-format
+msgctxt "@option:radio Custom (file location); followed by text entry field"
+msgid "Custom:"
+msgstr "Personalizată:"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/ThumbnailsSettings.ui:17
+#, kde-format
+msgid "Size:"
+msgstr "Dimensiune:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
+#: settings/ThumbnailsSettings.ui:24
+#, kde-format
+msgid "px"
+msgstr "px"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/ThumbnailsSettings.ui:37
+#, kde-format
+msgid ""
+"<html><head/><body><p>To use this feature, enable <span style=\" font-"
+"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
+"font-weight:600;\">files</span> in your profile settings</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Pentru a folosi această funcție, activați <span style="
+"\" font-weight:600;\">Maus-&gt;Diverse-&gt;Subliniază </span><span style=\" "
+"font-weight:600;\">fișierele</span> în configurările profilului "
+"dumneavoastră</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/ThumbnailsSettings.ui:53
+#, kde-format
+msgid "Activation:"
+msgstr "Activare:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: settings/ThumbnailsSettings.ui:63
+#, kde-format
+msgid "Mouse hover plus"
+msgstr "Planarea mausului plus"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
+#: settings/ThumbnailsSettings.ui:70
+#, kde-format
+msgid "Shift"
+msgstr "Shift"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
+#: settings/ThumbnailsSettings.ui:77
+#, kde-format
+msgid "Alt"
+msgstr "Alt"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
+#: settings/ThumbnailsSettings.ui:84
+#, kde-format
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
+#: settings/ThumbnailsSettings.ui:93
+#, kde-format
+msgid "Enable thumbnails generation"
+msgstr "Activează generarea miniaturilor"
+
+#: terminalDisplay/TerminalDisplay.cpp:652
+#, kde-format
+msgid "Size: %1 x %2"
+msgstr "Dimensiune: %1 x %2"
+
+#: terminalDisplay/TerminalDisplay.cpp:2167
+#, kde-format
+msgid "Are you sure you want to paste %1 character?"
+msgid_plural "Are you sure you want to paste %1 characters?"
+msgstr[0] "Sigur lipiți %1 caracter?"
+msgstr[1] "Sigur lipiți %1 caractere?"
+msgstr[2] "Sigur lipiți %1 de caractere?"
+
+#: terminalDisplay/TerminalDisplay.cpp:2168
+#, kde-format
+msgid "Confirm Paste"
+msgstr "Confirmă lipirea"
+
+#: terminalDisplay/TerminalDisplay.cpp:2201
+#, kde-format
+msgid "End Of Text/Interrupt: may exit the current process"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2202
+#, kde-format
+msgid "End Of Transmission: may exit the current process"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2203
+#, kde-format
+msgid "Bell: will try to emit an audible warning"
+msgstr "Clopoțel: se va încerca emiterea unei avertizări sonore"
+
+#: terminalDisplay/TerminalDisplay.cpp:2204
+#, kde-format
+msgid "Backspace"
+msgstr "Backspace"
+
+#: terminalDisplay/TerminalDisplay.cpp:2205
+#, kde-format
+msgid "Device Control Three/XOFF: suspends output"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2206
+#, kde-format
+msgid "Substitute/Suspend: may suspend current process"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2207
+#, kde-format
+msgid "Escape: used for manipulating terminal state"
+msgstr "Escape: folosit pentru manipularea stării terminalului"
+
+#: terminalDisplay/TerminalDisplay.cpp:2208
+#, kde-format
+msgid "File Separator/Quit: may abort the current process"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2231
+#, kde-format
+msgid ""
+"The text you're trying to paste contains hidden control characters, do you "
+"want to filter them out?"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2234
+#, kde-format
+msgctxt "@title"
+msgid "Confirm Paste"
+msgstr "Confirmă lipirea"
+
+#: terminalDisplay/TerminalDisplay.cpp:2235
+#, kde-format
+msgctxt "@action:button"
+msgid "Paste &without control characters"
+msgstr "Lipește &fără caractere de control"
+
+#: terminalDisplay/TerminalDisplay.cpp:2236
+#, kde-format
+msgctxt "@action:button"
+msgid "&Paste everything"
+msgstr "Li&pește tot"
+
+#: terminalDisplay/TerminalDisplay.cpp:2237
+#, kde-format
+msgctxt "@action:button"
+msgid "&Cancel"
+msgstr "&Renunță"
+
+#: terminalDisplay/TerminalDisplay.cpp:2466
+#, kde-format
+msgid ""
+"<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
+"Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
+"b> to resume.</qt>"
+msgstr ""
+"<qt>Ieșirea a fost <a href=\"https://en.wikipedia.org/wiki/"
+"Software_flow_control\">suspendată</a> prin apăsarea Ctrl+S. Apăsați <b>Ctrl"
+"+Q</b> pentru a relua.</qt>"
+
+#: terminalDisplay/TerminalDisplay.cpp:2504
+#, kde-format
+msgid "This terminal is read-only."
+msgstr "Acest terminal e numai pentru citire."
+
+#: terminalDisplay/TerminalDisplay.cpp:2743
+#, kde-format
+msgid "Change &Directory To"
+msgstr "Schimbă &dosarul la"
+
+#: terminalDisplay/TerminalDisplay.cpp:2776
+#, kde-format
+msgid "&Paste Location"
+msgstr "Li&pește amplasarea"
+
+#: ViewManager.cpp:106
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View"
+msgstr "Desparte vizualizarea"
+
+#: ViewManager.cpp:113
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View Left/Right"
+msgstr "Desparte vizualizarea stânga/dreapta"
+
+#: ViewManager.cpp:121
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View Top/Bottom"
+msgstr "Desparte vizualizarea sus/jos"
+
+#: ViewManager.cpp:129
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Top/Bottom"
+msgctxt "@action:inmenu"
+msgid "Split View Automatically"
+msgstr "Desparte vizualizarea sus/jos"
+
+#: ViewManager.cpp:139
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 2x2 terminals"
+msgstr "Încarcă o filă nouă cu aranjament de 2x2 terminale"
+
+#: ViewManager.cpp:148
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 2x1 terminals"
+msgstr "Încarcă o filă nouă cu aranjament de 2x1 terminale"
+
+#: ViewManager.cpp:157
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 1x2 terminals"
+msgstr "Încarcă o filă nouă cu aranjament de 1x2 terminale"
+
+#: ViewManager.cpp:165
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Expand View"
+msgstr "Extinde vizualizarea"
+
+#: ViewManager.cpp:173
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Shrink View"
+msgstr "Îngustează vizualizarea"
+
+#: ViewManager.cpp:183
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Detach Current &View"
+msgstr "Detașează &vizualizarea actuală"
+
+#: ViewManager.cpp:195
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Detach Current &Tab"
+msgstr "De&tașează fila actuală"
+
+#: ViewManager.cpp:200
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Next Tab"
+msgstr "Fila următoare"
+
+#: ViewManager.cpp:208
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Previous Tab"
+msgstr "Fila precedentă"
+
+#: ViewManager.cpp:216
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Above Terminal"
+msgstr "Focalizează terminalul de sus"
+
+#: ViewManager.cpp:223
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Below Terminal"
+msgstr "Focalizează terminalul de jos"
+
+#: ViewManager.cpp:230
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Left Terminal"
+msgstr "Focalizează terminalul din stânga"
+
+#: ViewManager.cpp:236
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Right Terminal"
+msgstr "Focalizează terminalul din dreapta"
+
+#: ViewManager.cpp:242
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Switch to Last Tab"
+msgstr "Schimbă la ultima filă"
+
+#: ViewManager.cpp:247
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Last Used Tabs"
+msgstr "Ultimele file folosite"
+
+#: ViewManager.cpp:252
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle Between Two Tabs"
+msgstr "Comută între două file"
+
+#: ViewManager.cpp:257
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Last Used Tabs (Reverse)"
+msgstr "Ultimele file folosite (invers)"
+
+#: ViewManager.cpp:262
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle maximize current view"
+msgstr "Comută maximizarea vizualizării actuale"
+
+#: ViewManager.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Toggle maximize current view"
+msgstr "Comută maximizarea vizualizării actuale"
+
+#: ViewManager.cpp:271
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Move tab to the right"
+msgstr "Mută fila la dreapta"
+
+#: ViewManager.cpp:278
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Move tab to the left"
+msgstr "Mută fila la stânga"
+
+#: ViewManager.cpp:285
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Setup semantic integration (bash)"
+msgstr ""
+
+#: ViewManager.cpp:291
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle semantic hints display"
+msgstr ""
+
+#: ViewManager.cpp:297
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle line numbers display"
+msgstr ""
+
+#: ViewManager.cpp:304
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Equal size to all views"
+msgstr ""
+
+#: ViewManager.cpp:314
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Switch to Tab %1"
+msgstr "Schimbă la fila %1"
+
+#: ViewManager.cpp:527
+#, fuzzy, kde-format
+#| msgid "Text interaction"
+msgid "Semantic hints "
+msgstr "Interacțiune cu textul"
+
+#: ViewManager.cpp:543
+#, fuzzy, kde-format
+#| msgid "Fixed number of lines: "
+msgid "Line numbers "
+msgstr "Număr constant de linii: "
+
+#: ViewManager.cpp:1074
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Save tab layout to file"
+msgctxt "@title:window"
+msgid "Save Tab Layout"
+msgstr "Salvează aranjamentul filelor în fișier"
+
+#: ViewManager.cpp:1076 ViewManager.cpp:1163
+#, fuzzy, kde-format
+#| msgid "Konsole View Layout (*.json)"
+msgctxt "@item:inlistbox"
+msgid "Konsole View Layout (*.json)"
+msgstr "Aranjament de vizualizări Konsolă (*.json)"
+
+#: ViewManager.cpp:1089
+#, fuzzy, kde-format
+#| msgid ""
+#| "A problem occurred when saving the Layout.\n"
+#| "%1"
+msgctxt "@label:textbox"
+msgid ""
+"A problem occurred when saving the Layout.\n"
+"%1"
+msgstr ""
+"A intervenit o problemă la salvarea aranjamentului.\n"
+"%1"
+
+#: ViewManager.cpp:1150
+#, fuzzy, kde-format
+#| msgid ""
+#| "A problem occurred when loading the Layout.\n"
+#| "%1"
+msgctxt "@label:textbox"
+msgid ""
+"A problem occurred when loading the Layout.\n"
+"%1"
+msgstr ""
+"A intervenit o problemă la încărcarea aranjamentului.\n"
+"%1"
+
+#: ViewManager.cpp:1161
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Load tab layout from file"
+msgctxt "@title:window"
+msgid "Load Tab Layout"
+msgstr "Încarcă aranjamentul filelor din fișier"
+
+#: Vt102Emulation.cpp:2313
+#, kde-format
+msgid ""
+"No keyboard translator available.  The information needed to convert key "
+"presses into characters to send to the terminal is missing."
+msgstr ""
+"Niciun translator de tastatură disponibil.  Lipsește informația necesară "
+"pentru a converti apăsările de taste în caractere de trimis terminalului."
+
+#. i18n: ectx: property (text), widget (QLabel, urlHintsLabel)
+#: widgets/EditProfileAdvancedPage.ui:37
+#, kde-format
+msgid "Key combination to show URL hints:"
+msgstr "Combinație de taste pentru a arăta indicii URL:"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
+#: widgets/EditProfileAdvancedPage.ui:69
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Shift"
+msgstr "Shift"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
+#: widgets/EditProfileAdvancedPage.ui:88
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
+#: widgets/EditProfileAdvancedPage.ui:107
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Alt"
+msgstr "Alt"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
+#: widgets/EditProfileAdvancedPage.ui:126
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Meta"
+msgstr "Meta"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileAdvancedPage.ui:172
+#, kde-format
+msgctxt "Items that do not fit in other categories"
+msgid "Miscellaneous:"
+msgstr "Diverse:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
+#: widgets/EditProfileAdvancedPage.ui:182
+#, fuzzy, kde-format
+#| msgid "Sets whether search should start from the bottom"
+msgid "Number URL hints in reverse, starting from the bottom"
+msgstr "Stabilește dacă căutarea trebuie să înceapă de jos"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
+#: widgets/EditProfileAdvancedPage.ui:185
+#, kde-format
+msgid "Reverse URL hint numbering"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingTextButton)
+#: widgets/EditProfileAdvancedPage.ui:198
+#, kde-format
+msgid "Allow terminal programs to create blinking sections of text"
+msgstr "Permite programelor din terminal să creeze secțiuni clipitoare de text"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingTextButton)
+#: widgets/EditProfileAdvancedPage.ui:201
+#, kde-format
+msgid "Allow blinking text"
+msgstr "Permite text clipitor"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableFlowControlButton)
+#: widgets/EditProfileAdvancedPage.ui:214
+#, kde-format
+msgid "Allow the output to be suspended by pressing Ctrl+S"
+msgstr "Permite suspendarea ieșirii prin apăsarea Ctrl+S"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
+#: widgets/EditProfileAdvancedPage.ui:217
+#, kde-format
+msgid "Flow control"
+msgstr "Controlul fluxului"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAdvancedPage.ui:231
+#: widgets/EditProfileAppearancePage.ui:813
+#, kde-format
+msgid ""
+"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
+"Hebrew only)"
+msgstr ""
+"Activează afișarea Bi-Direcțională pe terminale (valabilă numai pentru "
+"arabă, farsi și ebraică)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAdvancedPage.ui:234
+#: widgets/EditProfileAppearancePage.ui:816
+#, kde-format
+msgid "Bi-Directional text rendering"
+msgstr "Randare bidirecțională a textului"
+
+#. i18n: ectx: property (text), widget (QLabel, label_14)
+#: widgets/EditProfileAdvancedPage.ui:258
+#, kde-format
+msgid "Default character encoding:"
+msgstr "Codarea implicită a caracterelor:"
+
+#. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
+#: widgets/EditProfileAdvancedPage.ui:278
+#, kde-format
+msgid "Shortcut for peeking the primary screen:"
+msgstr "Scurtătură pentru o privire la ecranul primar:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
+#: widgets/EditProfileAppearancePage.ui:33
+#, kde-format
+msgid "Color scheme && font"
+msgstr "Schemă de culori și font"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:66
+#, kde-format
+msgid "Create a new color scheme based upon the selected scheme"
+msgstr "Creează o nouă schemă de culori pe baza celei alese"
+
+#. i18n: ectx: property (text), widget (QPushButton, newColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:69
+#, kde-format
+msgctxt "@action:button Create an alternate color scheme"
+msgid "New..."
+msgstr "Nouă..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:76
+#, kde-format
+msgid "Edit the selected color scheme"
+msgstr "Modifică schema de culori aleasă"
+
+#. i18n: ectx: property (text), widget (QPushButton, editKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, environmentEditButton)
+#. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
+#. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:79
+#: widgets/EditProfileGeneralPage.ui:224 widgets/EditProfileKeyboardPage.ui:85
+#: widgets/EditProfileMousePage.ui:310
+#, kde-format
+msgid "Edit..."
+msgstr "Modifică..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:86
+#, kde-format
+msgid "Delete the selected color scheme"
+msgstr "Șterge schema de culori aleasă"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:96
+#, kde-format
+msgid "Reset the selected color scheme settings to the default values"
+msgstr ""
+"Reinițializează configurările schemei de culori alese la valorile predefinite"
+
+#. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:99
+#: widgets/EditProfileKeyboardPage.ui:105
+#, kde-format
+msgid "Defaults"
+msgstr "Predefinite"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: widgets/EditProfileAppearancePage.ui:132
+#, kde-format
+msgid "Font:"
+msgstr "Font:"
+
+#. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
+#: widgets/EditProfileAppearancePage.ui:164
+#, kde-format
+msgctxt "@action:button open a dialog with list of fonts"
+msgid "Choose..."
+msgstr "Alege..."
+
+#. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
+#: widgets/EditProfileAppearancePage.ui:171
+#, kde-format
+msgid "Smooth fonts"
+msgstr "Fonturi netede"
+
+#. i18n: ectx: property (text), widget (QCheckBox, boldIntenseButton)
+#: widgets/EditProfileAppearancePage.ui:178
+#, kde-format
+msgid "Draw intense colors in bold font"
+msgstr "Desenează culorile intense în font aldin"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:185
+#, kde-format
+msgid "Use the selected font for line characters instead of the builtin code"
+msgstr ""
+"Folosește fontul ales pentru caractere de linie în locul codului încorporat"
+
+#. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:188
+#, kde-format
+msgid "Use line characters contained in font"
+msgstr "Folosește caractere de linie din font"
+
+#. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
+#: widgets/EditProfileAppearancePage.ui:196
+#, kde-format
+msgid "Cursor"
+msgstr "Cursor"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileAppearancePage.ui:216
+#, kde-format
+msgid "Shape:"
+msgstr "Formă:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
+#: widgets/EditProfileAppearancePage.ui:226
+#, kde-format
+msgctxt "A solid rectangular"
+msgid "Block"
+msgstr "Bloc"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
+#: widgets/EditProfileAppearancePage.ui:236
+#, kde-format
+msgctxt "A vertical line on the left edge"
+msgid "I-Beam"
+msgstr "Bară I"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
+#: widgets/EditProfileAppearancePage.ui:246
+#, kde-format
+msgctxt "A hortizonal line on the bottom edge"
+msgid "Underline"
+msgstr "Subliniere"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/EditProfileAppearancePage.ui:278
+#, kde-format
+msgctxt "Cursor color options"
+msgid "Color:"
+msgstr "Culoare:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:294
+#, kde-format
+msgid "Set the cursor to match the color of the character underneath it."
+msgstr "Potrivește cursorul la culoarea caracterului de sub el."
+
+#. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:297
+#, kde-format
+msgid "Match current character"
+msgstr "Potrivește la caracterul actual"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:313
+#, kde-format
+msgid "Use a custom, fixed color for the cursor"
+msgstr "Folosește o culoare personalizată, fixă pentru cursor"
+
+#. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:316
+#, kde-format
+msgid "Custom cursor color"
+msgstr "Culoare cursor personalizată"
+
+#. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
+#: widgets/EditProfileAppearancePage.ui:347
+#, kde-format
+msgid "Cursor:"
+msgstr "Cursor:"
+
+#. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
+#: widgets/EditProfileAppearancePage.ui:360
+#, kde-format
+msgid "Select the color used to draw the cursor"
+msgstr "Alegeți culoarea folosită pentru a desena cursorul"
+
+#. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
+#: widgets/EditProfileAppearancePage.ui:380
+#, kde-format
+msgid "Text:"
+msgstr "Text:"
+
+#. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
+#: widgets/EditProfileAppearancePage.ui:393
+#, kde-format
+msgid "Select the color used to draw the character underneath the cursor"
+msgstr "Alegeți culoarea folosită pentru a desena caracterul de sub cursor"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileAppearancePage.ui:418
+#, kde-format
+msgid "Blinking:"
+msgstr "Clipitor:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
+#: widgets/EditProfileAppearancePage.ui:434
+#, kde-format
+msgid "Make the cursor blink regularly"
+msgstr "Fă cursorul să clipească regulat"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
+#. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
+#: widgets/EditProfileAppearancePage.ui:437
+#: widgets/EditProfileAppearancePage.ui:664
+#, kde-format
+msgid "Enabled"
+msgstr "Activat"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#. i18n: ectx: attribute (title), widget (QWidget, miscTab)
+#: widgets/EditProfileAppearancePage.ui:460 widgets/EditProfileMousePage.ui:249
+#, kde-format
+msgctxt "Items that do not fit in other categories"
+msgid "Miscellaneous"
+msgstr "Diverse"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileAppearancePage.ui:471
+#, kde-format
+msgid "Window:"
+msgstr "Fereastră:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
+#: widgets/EditProfileAppearancePage.ui:478
+#, kde-format
+msgid ""
+"Show terminal size in columns and lines in the center of window after "
+"resizing"
+msgstr ""
+"Arată dimensiunea terminalului în coloane și linii, în centrul ferestrei, "
+"după redimensionare"
+
+#. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
+#: widgets/EditProfileAppearancePage.ui:481
+#, kde-format
+msgid "Show hint for terminal size after resizing"
+msgstr "Arată indiciu pentru dimensiunea terminalului după redimensionare"
+
+#. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
+#: widgets/EditProfileAppearancePage.ui:488
+#, kde-format
+msgid "Always invert the colors of selected text"
+msgstr "Inversează culorile textului ales întotdeauna"
+
+#. i18n: ectx: property (text), widget (QLabel, dimLabel)
+#: widgets/EditProfileAppearancePage.ui:497
+#, kde-format
+msgid "Darkening strength:"
+msgstr "Intensitate întunecare:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: widgets/EditProfileAppearancePage.ui:522
+#, kde-format
+msgid "Inactive Terminals:"
+msgstr "Terminale inactive:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
+#: widgets/EditProfileAppearancePage.ui:532
+#, kde-format
+msgctxt "@title:group"
+msgid "Terminal contents"
+msgstr "Conținut terminal"
+
+#. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
+#: widgets/EditProfileAppearancePage.ui:544
+#, kde-format
+msgid "Line spacing:"
+msgstr "Spațiere linii:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
+#: widgets/EditProfileAppearancePage.ui:562
+#, kde-format
+msgid "The number of pixels between two lines"
+msgstr "Numărul de pixeli dintre două linii"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
+#. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
+#: widgets/EditProfileAppearancePage.ui:565
+#: widgets/EditProfileAppearancePage.ui:617
+#, kde-format
+msgctxt "(pixels) visual size unit"
+msgid " px"
+msgstr " px"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileAppearancePage.ui:599
+#, kde-format
+msgid "Margins:"
+msgstr "Margini:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: widgets/EditProfileAppearancePage.ui:651
+#, kde-format
+msgid "Align to center:"
+msgstr "Aliniază la centru:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:674
+#, kde-format
+msgid "Indicate whether the window is active by dimming the colors"
+msgstr "Indică dacă fereastra e activă prin estomparea culorilor"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:677
+#, kde-format
+msgid "Darken"
+msgstr "Întunecă"
+
+#. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
+#: widgets/EditProfileAppearancePage.ui:719
+#, kde-format
+msgid "Display Vertical line at column:"
+msgstr "Afișează linie verticală la coloana:"
+
+#. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
+#: widgets/EditProfileAppearancePage.ui:760
+#, kde-format
+msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
+#: widgets/EditProfileAppearancePage.ui:763
+#, kde-format
+msgid "Complex Text Layout"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileAppearancePage.ui:787
+#, fuzzy, kde-format
+#| msgid "Font:"
+msgid "Emoji Font:"
+msgstr "Font:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
+#: widgets/EditProfileAppearancePage.ui:829
+#, kde-format
+msgid "Lines are always LTR, rather than determined by first strong character"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
+#: widgets/EditProfileAppearancePage.ui:832
+#, kde-format
+msgid "force LTR line direction"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
+#: widgets/EditProfileAppearancePage.ui:845
+#, kde-format
+msgid "Treat table drawing characters as strong LTR."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
+#: widgets/EditProfileAppearancePage.ui:848
+#, kde-format
+msgid "Table characters BiDi mode override"
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:62
+#, kde-format
+msgid "Edit Profile"
+msgstr "Modifică profilul"
+
+#: widgets/EditProfileDialog.cpp:89
+#, kde-format
+msgctxt "@title:tab Generic, common options"
+msgid "General"
+msgstr "Generale"
+
+#: widgets/EditProfileDialog.cpp:100
+#, kde-format
+msgid "Tabs"
+msgstr "File"
+
+#: widgets/EditProfileDialog.cpp:117
+#, kde-format
+msgid "Appearance"
+msgstr "Aspect"
+
+#: widgets/EditProfileDialog.cpp:133
+#, kde-format
+msgid "Scrolling"
+msgstr "Derulare"
+
+#: widgets/EditProfileDialog.cpp:147
+#, kde-format
+msgid "Keyboard"
+msgstr "Tastatură"
+
+#: widgets/EditProfileDialog.cpp:148
+#, kde-format
+msgid "Key bindings"
+msgstr "Asocieri de taste"
+
+#: widgets/EditProfileDialog.cpp:159
+#, kde-format
+msgid "Mouse"
+msgstr "Maus"
+
+#: widgets/EditProfileDialog.cpp:175
+#, kde-format
+msgctxt "@title:tab Complex options"
+msgid "Advanced"
+msgstr "Avansate"
+
+#: widgets/EditProfileDialog.cpp:281
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Insufficient permissions to save settings to: <filename>%1</filename>.<nl/"
+">Either change the permissions of that file or set a different name to save "
+"the settings to a new profile."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:298
+#, kde-format
+msgctxt "@info"
+msgid "Profile Name was empty; please set a name to be able to save settings."
+msgstr ""
+"Denumirea profilului era goală. Alegeți o denumire pentru a putea salva "
+"configurările."
+
+#: widgets/EditProfileDialog.cpp:306
+#, kde-format
+msgctxt "@info"
+msgid "A profile with the name \"%1\" already exists."
+msgstr "Există deja un profil cu denumirea „%1”."
+
+#: widgets/EditProfileDialog.cpp:341
+#, kde-format
+msgid "Editing profile: %2"
+msgid_plural "Editing %1 profiles: %2"
+msgstr[0] "Modificare profil: %2"
+msgstr[1] "Modificare %1 profile: %2"
+msgstr[2] "Modificare %1 de profile: %2"
+
+#: widgets/EditProfileDialog.cpp:344
+#, kde-format
+msgid "Create New Profile"
+msgstr "Creează profil nou"
+
+#: widgets/EditProfileDialog.cpp:346
+#, kde-format
+msgid "Edit Profile \"%1\""
+msgstr "Modifică profilul „%1”"
+
+#: widgets/EditProfileDialog.cpp:436
+#, kde-format
+msgctxt ""
+"Suffix of the number of columns (N columns). The leading space is needed to "
+"separate it from the number value."
+msgid " column"
+msgid_plural " columns"
+msgstr[0] " coloană"
+msgstr[1] " coloane"
+msgstr[2] " de coloane"
+
+#: widgets/EditProfileDialog.cpp:438
+#, kde-format
+msgctxt ""
+"Suffix of the number of rows (N rows). The leading space is needed to "
+"separate it from the number value."
+msgid " row"
+msgid_plural " rows"
+msgstr[0] " rând"
+msgstr[1] " rânduri"
+msgstr[2] " de rânduri"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "System Bell"
+msgstr "Clopoțel de sistem"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "System Notifications"
+msgstr "Notificări de sistem"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "Visual Bell"
+msgstr "Clopoțel vizual"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "Ignore Bell Events"
+msgstr "Ignoră evenimente de clopoțel"
+
+#: widgets/EditProfileDialog.cpp:457
+#, kde-format
+msgid "Default profile for new terminal sessions in %1"
+msgstr "Profil implicit pentru sesiunile noi de terminal în %1"
+
+#: widgets/EditProfileDialog.cpp:514
+#, kde-format
+msgid "Edit Environment"
+msgstr "Modifică mediul"
+
+#: widgets/EditProfileDialog.cpp:515
+#, kde-format
+msgid "One environment variable per line"
+msgstr "O variabilă de mediu pe linie"
+
+#: widgets/EditProfileDialog.cpp:546
+#, kde-format
+msgctxt "Unit of time"
+msgid " second"
+msgid_plural " seconds"
+msgstr[0] " secundă"
+msgstr[1] " secunde"
+msgstr[2] " de secunde"
+
+#: widgets/EditProfileDialog.cpp:645
+#, kde-format
+msgid "Select Initial Directory"
+msgstr "Alegeți dosarul inițial"
+
+#: widgets/EditProfileDialog.cpp:1169
+#, kde-kuit-format
+msgctxt "@info"
+msgid "Scheme <resource>%1</resource> failed to load."
+msgstr "Încărcarea schemei <resource>%1</resource> a eșuat."
+
+#: widgets/EditProfileDialog.cpp:1348
+#, kde-format
+msgid ""
+"This color scheme uses a transparent background which does not appear to be "
+"supported on your desktop"
+msgstr ""
+"Această schemă de culori utilizează fundal transparent, care nu pare să fie "
+"susținut de calculatorul dumneavoastră"
+
+#: widgets/EditProfileDialog.cpp:1354
+#, kde-format
+msgid ""
+"Konsole was started before desktop effects were enabled. You need to restart "
+"Konsole to see transparent background."
+msgstr ""
+"Konsola a fost pornită înainte de activarea efectelor de birou. Trebuie să "
+"reporniți Konsola pentru a vedea fundalul transparent."
+
+#: widgets/EditProfileDialog.cpp:1745
+#, kde-format
+msgid ""
+"The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
+"\n"
+"PATH    will be replaced by the path to the text file\n"
+"LINE    will be replaced by the line number\n"
+"COLUMN  (optional) will be replaced by the column number\n"
+"Note: you will need to replace 'PATH:LINE:COLUMN' by the actual\n"
+"syntax the editor you want to use supports; e.g.:\n"
+"gedit +LINE:COLUMN PATH\n"
+"\n"
+"If PATH or LINE aren't present in the command, this setting\n"
+"will be ignored and the file will be opened by the default text\n"
+"editor."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:1758
+#, kde-format
+msgid "Text Editor Custom Command"
+msgstr "Comandă personalizată pentru redactor de text"
+
+#. i18n: ectx: attribute (title), widget (QWidget, general)
+#: widgets/EditProfileGeneralPage.ui:39
+#, fuzzy, kde-format
+#| msgid "Default character encoding:"
+msgid "General Settings"
+msgstr "Codarea implicită a caracterelor:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
+#: widgets/EditProfileGeneralPage.ui:63
+#, kde-format
+msgid "Select the icon displayed on tabs using this profile"
+msgstr "Alege pictograma afișată pe file cu acest profil"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
+#: widgets/EditProfileGeneralPage.ui:81
+#, kde-format
+msgid "A descriptive name for the profile"
+msgstr "Un nume sugestiv pentru profil"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
+#: widgets/EditProfileGeneralPage.ui:84
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Profile name"
+msgstr "Denumire profil"
+
+#. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
+#: widgets/EditProfileGeneralPage.ui:91
+#, kde-format
+msgid "Default Profile"
+msgstr "Profil implicit"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/EditProfileGeneralPage.ui:122
+#, kde-format
+msgid "Command:"
+msgstr "Comandă:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, commandEdit)
+#: widgets/EditProfileGeneralPage.ui:135
+#, kde-format
+msgid ""
+"The command to execute when new terminal sessions are created using this "
+"profile"
+msgstr ""
+"Comanda de executat la crearea noilor sesiuni de terminal create cu acest "
+"profil"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
+#: widgets/EditProfileGeneralPage.ui:141
+#, kde-format
+msgid "/bin/sh"
+msgstr "/bin/sh"
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: widgets/EditProfileGeneralPage.ui:154
+#, kde-format
+msgid "Initial directory:"
+msgstr "Director inițial:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
+#: widgets/EditProfileGeneralPage.ui:167
+#, kde-format
+msgid ""
+"The initial working directory for new terminal sessions using this profile"
+msgstr ""
+"Directorul de lucru inițial pentru sesiunile de terminal ce folosesc acest "
+"profil"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
+#: widgets/EditProfileGeneralPage.ui:173
+#, kde-format
+msgid "/home/username"
+msgstr "/home/utilizator"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, dirSelectButton)
+#: widgets/EditProfileGeneralPage.ui:180
+#, kde-format
+msgid "Choose the initial directory"
+msgstr "Alegeți dosarul inițial"
+
+#. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
+#: widgets/EditProfileGeneralPage.ui:190
+#, kde-format
+msgid "Start in same directory as current session"
+msgstr "Pornește în același dosar ca sesiunea actuală"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileGeneralPage.ui:203
+#, kde-format
+msgid "Environment:"
+msgstr "Mediu:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
+#: widgets/EditProfileGeneralPage.ui:221
+#, kde-format
+msgid "Edit the list of environment variables and associated values"
+msgstr "Modifică lista variabilelor de mediu și valorile asociate"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: widgets/EditProfileGeneralPage.ui:268
+#, kde-format
+msgid "Initial terminal size:"
+msgstr "Dimensiune terminal inițială:"
+
+#. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
+#: widgets/EditProfileGeneralPage.ui:343
+#, kde-format
+msgctxt "@info"
+msgid ""
+"<html><head/><body><p><span style=\" font-style:italic;\">Settings → "
+"Configure Konsole → General → Remember window size</span> must be disabled "
+"for these entries to work.</p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-style:italic;\">Configurări → "
+"Configurează Konsolă → Generale → Memorizează dimensiunea ferestrei</span> "
+"trebuie dezactivat pentru ca aceste înregistrări să funcționeze.</p></body></"
+"html>"
+
+#. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
+#: widgets/EditProfileGeneralPage.ui:356
+#, kde-format
+msgid "Terminal bell mode:"
+msgstr "Regim clopoțel de terminal:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, semantic)
+#: widgets/EditProfileGeneralPage.ui:374
+#, fuzzy, kde-format
+#| msgid "Text interaction"
+msgid "Semantic Integration"
+msgstr "Interacțiune cu textul"
+
+#. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
+#: widgets/EditProfileGeneralPage.ui:380
+#, kde-format
+msgid "Up/Down Arrows emulation"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#: widgets/EditProfileGeneralPage.ui:387
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
+#: widgets/EditProfileGeneralPage.ui:397
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Never show the split header"
+#| msgid "Never"
+msgctxt "Never"
+msgid "Never"
+msgstr "Niciodată"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
+#: widgets/EditProfileGeneralPage.ui:407
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Always show the split header"
+#| msgid "Always"
+msgctxt "Always"
+msgid "Always"
+msgstr "Întotdeauna"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileGeneralPage.ui:423
+#, kde-format
+msgid "Semantic hints:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
+#: widgets/EditProfileGeneralPage.ui:433
+#, kde-format
+msgid "Mouse click in input line moves cursor"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, note)
+#: widgets/EditProfileKeyboardPage.ui:29
+#, fuzzy, kde-format
+#| msgid ""
+#| "Key bindings control how combinations of keystrokes in the terminal "
+#| "window are converted into the stream of characters which are sent to the "
+#| "current terminal program."
+msgctxt "@info"
+msgid ""
+"Key bindings control how combinations of keystrokes in the terminal window "
+"are converted into the stream of characters that is then sent to the current "
+"terminal program. For more information on how to customize the key bindings "
+"check the Konsole Handbook."
+msgstr ""
+"Combinațiile de taste controlează modul în care apăsarea combinată a "
+"tastelor în fereastra terminalului este convertită într-un flux de caractere "
+"trimise programului ce rulează în terminal."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:72
+#, kde-format
+msgid "Create a new key bindings scheme based upon the selected bindings"
+msgstr ""
+"Creează o nouă schemă de combinații de taste pe baza combinațiilor alese"
+
+#. i18n: ectx: property (text), widget (QPushButton, newKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:75
+#, kde-format
+msgctxt "@action:button Create an alternate key binding"
+msgid "New..."
+msgstr "Nouă..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:82
+#, kde-format
+msgid "Edit the selected key bindings scheme"
+msgstr "Modifică schema aleasă de combinații de taste"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, removeKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:92
+#, kde-format
+msgid "Delete the selected key bindings scheme"
+msgstr "Șterge schema aleasă de combinații de taste"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, resetKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:102
+#, kde-format
+msgid "Reset the selected key bindings scheme to its default values"
+msgstr ""
+"Reinițializează schema de combinații de taste aleasă la valorile implicite"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: widgets/EditProfileMousePage.ui:33
+#, kde-format
+msgid "Text interaction"
+msgstr "Interacțiune cu textul"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, label_11)
+#. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
+#: widgets/EditProfileMousePage.ui:47 widgets/EditProfileMousePage.ui:68
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Characters which are considered part of a word when double-clicking to "
+"select whole words in the terminal."
+msgstr ""
+"Caractere ce vor fi considerate parte a unui cuvânt atunci când faceți dublu-"
+"clic pentru a selecta cuvinte întregi în terminal."
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: widgets/EditProfileMousePage.ui:50
+#, kde-format
+msgid "Word characters:"
+msgstr "Caractere de cuvânt:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileMousePage.ui:91
+#, kde-format
+msgid "Triple-click selects:"
+msgstr "Triplu-clic alege:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
+#: widgets/EditProfileMousePage.ui:101
+#, kde-format
+msgid "The whole line"
+msgstr "Întreaga linie"
+
+#. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
+#: widgets/EditProfileMousePage.ui:111
+#, kde-format
+msgid "From mouse position to the end of line"
+msgstr "De la poziția mausului până la sfârșitul liniei"
+
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: widgets/EditProfileMousePage.ui:137
+#, kde-format
+msgid "Middle-click pastes:"
+msgstr "Clic mijlociu lipește:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, pasteFromClipboardButton)
+#: widgets/EditProfileMousePage.ui:147
+#, kde-format
+msgid "From clipboard"
+msgstr "Din clipboard"
+
+#. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
+#: widgets/EditProfileMousePage.ui:157
+#, kde-format
+msgid "From selection"
+msgstr "Din selecție"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileMousePage.ui:183
+#, kde-format
+msgid "Copy options:"
+msgstr "Opțiuni de copiere:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
+#: widgets/EditProfileMousePage.ui:193
+#, kde-format
+msgid "Automatically copy selected text into clipboard"
+msgstr "Copiază automat textul ales în clipboard"
+
+#. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
+#: widgets/EditProfileMousePage.ui:196
+#, kde-format
+msgid "Copy on select"
+msgstr "Copiază la selecție"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
+#: widgets/EditProfileMousePage.ui:203
+#, kde-format
+msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
+msgstr "Copiază textul ca HTML (inclusiv formatare, fonturi, culori, etc.)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
+#: widgets/EditProfileMousePage.ui:206
+#, kde-format
+msgid "Copy text as HTML"
+msgstr "Copiază textul ca HTML"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, trimLeadingSpacesButton)
+#: widgets/EditProfileMousePage.ui:213
+#, kde-format
+msgid "Trim leading spaces in selected text, useful in some instances"
+msgstr "Tunde spațiile inițiale din textul ales, util în unele situații"
+
+#. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
+#: widgets/EditProfileMousePage.ui:216
+#, kde-format
+msgid "Trim leading spaces"
+msgstr "Tunde spațiile inițiale"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
+#: widgets/EditProfileMousePage.ui:223
+#, kde-format
+msgid "Trim trailing spaces in selected text, useful in some instances"
+msgstr "Tunde spațiile finale din textul ales, util în unele situații"
+
+#. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
+#: widgets/EditProfileMousePage.ui:226
+#, kde-format
+msgid "Trim trailing spaces"
+msgstr "Tunde spațiile finale"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
+#: widgets/EditProfileMousePage.ui:263
+#, kde-format
+msgid ""
+"Text recognized as a link or an email address will be underlined when "
+"hovered by the mouse pointer."
+msgstr ""
+"Textul recunoscut ca legătură sau adresă de e-mail va fi subliniat la "
+"planarea cu indicatorul mausului."
+
+#. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
+#: widgets/EditProfileMousePage.ui:266
+#, kde-format
+msgid "Underline links"
+msgstr "Subliniază legăturile"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
+#: widgets/EditProfileMousePage.ui:273
+#, kde-format
+msgid ""
+"Text recognized as a file will be underlined when hovered by the mouse "
+"pointer."
+msgstr ""
+"Textul recunoscut ca fișier va fi subliniat la planarea cu indicatorul "
+"mausului."
+
+#. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
+#: widgets/EditProfileMousePage.ui:276
+#, kde-format
+msgid "Underline files"
+msgstr "Subliniază fișierele"
+
+#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
+#: widgets/EditProfileMousePage.ui:285
+#, kde-format
+msgid "Text Editor Command: "
+msgstr "Comandă pentru redactor de text: "
+
+#. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
+#. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
+#: widgets/EditProfileMousePage.ui:291 widgets/EditProfileMousePage.ui:303
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Text editor to use when opening text file URLs at a given line/column."
+msgstr ""
+"Redactorul de text de folosit pentru deschiderea URL-urilor spre fișiere "
+"textuale la linia/coloana dată."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
+#: widgets/EditProfileMousePage.ui:329
+#, kde-format
+msgid ""
+"Text recognized as a file, link or an email address can be opened by direct "
+"mouse click."
+msgstr ""
+"Textul recunoscut ca fișier, legătură sau adresă de e-mail poate fi deschis "
+"prin apăsare directă cu mausul."
+
+#. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
+#: widgets/EditProfileMousePage.ui:332
+#, kde-format
+msgid "Open files/links by direct click"
+msgstr "Deschide fișiere/legături prin clic direct"
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
+#: widgets/EditProfileMousePage.ui:343
+#, kde-format
+msgid "Allow escape sequences for links"
+msgstr "Permite secvențe de eludare pentru legături"
+
+#. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
+#: widgets/EditProfileMousePage.ui:350
+#, kde-format
+msgid ""
+"<b>WARNING</b>: This has security implications as it allows malicious URLs "
+"to be shown as another URL or hidden.<br>Make sure you understand the "
+"implications before turning this on."
+msgstr ""
+"<b>AVERTISMENT</b>: Aceasta are implicații de securitate deoarece permite "
+"URL-urilor dăunătoare să fie arătate ca alt URL sau ascunse.<br>Asigurați-vă "
+"că înțelegeți implicațiile înainte să activați aceasta."
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileMousePage.ui:368
+#, kde-format
+msgid "Allowed link formats: "
+msgstr "Formate permise pentru legături: "
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
+#: widgets/EditProfileMousePage.ui:378
+#, kde-format
+msgid "The formats of possible links, like http://, https:// and file://"
+msgstr "Formatele potențialelor legături, ca http://, https:// și file://"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
+#: widgets/EditProfileMousePage.ui:389
+#, kde-format
+msgid "Selected text will require control key plus click to drag."
+msgstr "Textul ales va necesita tasta Control și clic pentru a fi tras."
+
+#. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
+#: widgets/EditProfileMousePage.ui:392
+#, kde-format
+msgid "Require Ctrl key for drag && drop"
+msgstr "Cere tasta Ctrl pentru tragere-și-lăsare"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
+#: widgets/EditProfileMousePage.ui:399
+#, kde-format
+msgid ""
+"Mouse scroll wheel will emulate up/down key presses in programs that use the "
+"Alternate Screen buffer (e.g. less)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
+#: widgets/EditProfileMousePage.ui:402
+#, kde-format
+msgid "Enable Alternate Screen buffer scrolling"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
+#: widgets/EditProfileMousePage.ui:409
+#, kde-format
+msgid ""
+"Always paste dropped files and URLs as text without offering move, copy and "
+"link actions."
+msgstr ""
+"Lipește întotdeauna fișiere și URL-uri lăsate ca text, fără a oferi acțiuni "
+"de mutare, copiere și legare."
+
+#. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
+#: widgets/EditProfileMousePage.ui:412
+#, kde-format
+msgid "Disable drag && drop menu for files && URLs"
+msgstr "Dezactivează meniul „trage și lasă” pentru fișiere și URL-uri"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
+#: widgets/EditProfileMousePage.ui:419
+#, kde-format
+msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
+msgstr "Apăsarea Ctrl+rotița mausului va mări/micșora mărimea textului."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
+#: widgets/EditProfileMousePage.ui:422
+#, kde-format
+msgid "Allow Ctrl+scrollwheel to zoom text size"
+msgstr "Permite Ctrl+rotiță pentru scalarea dimensiunii textului"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
+#: widgets/EditProfileMousePage.ui:429
+#, kde-format
+msgid ""
+"When positioning the mouse over a hexadecimal color it will be displayed in "
+"a frame next to the mouse pointer"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
+#: widgets/EditProfileMousePage.ui:432
+#, kde-format
+msgid "Preview Colors on hover"
+msgstr "Previzualizează culori la planare"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
+#: widgets/EditProfileMousePage.ui:452
+#, kde-format
+msgid ""
+"Some terminal applications have mouse support, this allows them to get it by "
+"default. It can be toggled on/off while running as well."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
+#: widgets/EditProfileMousePage.ui:455
+#, kde-format
+msgid "Allow terminal applications to handle clicks and drags"
+msgstr "Permite aplicațiilor din terminal să manipuleze clicuri și trageri"
+
+#. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
+#: widgets/EditProfileScrollingPage.ui:43
+#, kde-format
+msgid "Scrollback:"
+msgstr "Revenire:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileScrollingPage.ui:85
+#, kde-format
+msgid "Scroll Page Up/Down:"
+msgstr "Derulează pagină în sus/jos:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
+#: widgets/EditProfileScrollingPage.ui:101
+#, kde-format
+msgid "Scroll the page the half height of window"
+msgstr "Derulează pagina cu jumătate din înălțimea ferestrei"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
+#: widgets/EditProfileScrollingPage.ui:104
+#, kde-format
+msgid "Half screen height"
+msgstr "Jumătate din înălțimea ecranului"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
+#: widgets/EditProfileScrollingPage.ui:114
+#, kde-format
+msgid "Scroll the page the full height of window"
+msgstr "Derulează pagina cu toată înălțimea ferestrei"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
+#: widgets/EditProfileScrollingPage.ui:117
+#, kde-format
+msgid "Full screen height"
+msgstr "Toată înălțimea ecranului"
+
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: widgets/EditProfileScrollingPage.ui:149
+#, kde-format
+msgid "Scrollbar position:"
+msgstr "Poziția barei de derulare:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
+#: widgets/EditProfileScrollingPage.ui:159
+#, kde-format
+msgid "Show the scroll bar on the right side of the terminal window"
+msgstr "Arată bara de derulare în dreapta ferestrei terminalului"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
+#: widgets/EditProfileScrollingPage.ui:162
+#, kde-format
+msgctxt "@option:radio Show scrollbar on the right side"
+msgid "Right side"
+msgstr "Partea dreaptă"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
+#: widgets/EditProfileScrollingPage.ui:172
+#, kde-format
+msgid "Show the scroll bar on the left side of the terminal window"
+msgstr "Arată bara de derulare în stânga ferestrei terminalului"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
+#: widgets/EditProfileScrollingPage.ui:175
+#, kde-format
+msgctxt "@option:radio Show scrollbar on the left side"
+msgid "Left side"
+msgstr "Partea stângă"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
+#: widgets/EditProfileScrollingPage.ui:185
+#, kde-format
+msgctxt "@option:radio Hide the scroll bar"
+msgid "Hidden"
+msgstr "Ascunsă"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileScrollingPage.ui:217
+#, kde-format
+msgid "Highlighting:"
+msgstr "Evidențiere:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
+#: widgets/EditProfileScrollingPage.ui:227
+#, kde-format
+msgid "Highlight the lines coming into view"
+msgstr "Evidențiază liniile ce intră în cadru"
+
+#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
+#: widgets/EditProfileScrollingPage.ui:240
+#, kde-format
+msgid "Reflow Lines:"
+msgstr "Rescurge liniile:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
+#: widgets/EditProfileScrollingPage.ui:250
+#, kde-format
+msgid "Reflow lines when terminal resizes"
+msgstr "Rescurge liniile la redimensionarea terminalului"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
+#: widgets/EditProfileTabsPage.ui:43
+#, kde-format
+msgid "Tab Titles"
+msgstr "Titluri file"
+
+#. i18n: ectx: property (title), widget (QGroupBox, tabMonitoringGroup)
+#: widgets/EditProfileTabsPage.ui:62
+#, kde-format
+msgid "Tab Monitoring"
+msgstr "Monitorizare file"
+
+#. i18n: ectx: property (text), widget (QLabel, silenceSecondsLabel)
+#: widgets/EditProfileTabsPage.ui:74
+#, kde-format
+msgid "Threshold for continuous silence:"
+msgstr "Prag pentru liniște continuă:"
+
+#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
+#: widgets/EditProfileTabsPage.ui:87
+#, kde-format
+msgid "The threshold for continuous silence to be detected by Konsole"
+msgstr "Prag pentru liniștea continuă care să fie detectată de Konsolă"
+
+#: widgets/HistorySizeWidget.cpp:40
+#, kde-format
+msgctxt "@label:textbox Unit of scrollback"
+msgid " line"
+msgid_plural " lines"
+msgstr[0] " linie"
+msgstr[1] " linii"
+msgstr[2] " de linii"
+
+#: widgets/HistorySizeWidget.cpp:57
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"When using this option, the scrollback data will be saved to RAM. If you "
+"choose a huge value, your system may run out of free RAM and cause serious "
+"issues with your system."
+msgstr ""
+
+#: widgets/HistorySizeWidget.cpp:69
+#, kde-kuit-format
+msgctxt "@info:tooltip"
+msgid ""
+"When using this option, the scrollback data will be written unencrypted to "
+"temporary files. Those temporary files will be deleted automatically when "
+"Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → Configure "
+"Konsole → Temporary Files</emphasis> to select the location of the temporary "
+"files."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
+#: widgets/HistorySizeWidget.ui:60
+#, kde-format
+msgid "Limit the remembered output to a fixed number of lines"
+msgstr "Limitează ieșirea memorizată la un anumit număr de linii"
+
+#. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
+#: widgets/HistorySizeWidget.ui:63
+#, kde-format
+msgid "Fixed size:"
+msgstr "Dimensiune fixă:"
+
+#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
+#: widgets/HistorySizeWidget.ui:73
+#, kde-format
+msgid "Number of lines of output to remember"
+msgstr "Numărul de linii ale ieșirii de memorizat"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
+#: widgets/HistorySizeWidget.ui:135
+#, kde-format
+msgid "Remember all output produced by the terminal"
+msgstr "Memorizează toată ieșirea produsă de terminal"
+
+#. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
+#: widgets/HistorySizeWidget.ui:138
+#, kde-format
+msgctxt "Save all lines to the scrollback history"
+msgid "Unlimited"
+msgstr "Nelimitat"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
+#: widgets/HistorySizeWidget.ui:174
+#, kde-format
+msgid "Do not remember previous output"
+msgstr "Nu memoriza ieșirea precedentă"
+
+#. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
+#: widgets/HistorySizeWidget.ui:177
+#, kde-format
+msgctxt "Do not save any lines to the scrollback history"
+msgid "None"
+msgstr "Niciuna"
+
+#: widgets/IncrementalSearchBar.cpp:54
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find..."
+msgstr "Găsește…"
+
+#: widgets/IncrementalSearchBar.cpp:56
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Enter the text to search for here"
+msgstr "Introduceți aici textul de căutat"
+
+#: widgets/IncrementalSearchBar.cpp:80
+#, kde-format
+msgctxt "@action:button Go to the next phrase"
+msgid "Next"
+msgstr "Următoare"
+
+#: widgets/IncrementalSearchBar.cpp:83
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Find the next match for the current search phrase"
+msgstr "Găsește următoarea potrivire pentru fraza căutată"
+
+#: widgets/IncrementalSearchBar.cpp:90
+#, kde-format
+msgctxt "@action:button Go to the previous phrase"
+msgid "Previous"
+msgstr "Precedentă"
+
+#: widgets/IncrementalSearchBar.cpp:92
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Find the previous match for the current search phrase"
+msgstr "Găsește potrivirea precedentă pentru fraza căutată"
+
+#: widgets/IncrementalSearchBar.cpp:107
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "Arată meniul cu opțiuni"
+
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "Închide bara de căutare"
+
+#: widgets/IncrementalSearchBar.cpp:124
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Case sensitive"
+msgstr "Sensibil la registru"
+
+#: widgets/IncrementalSearchBar.cpp:126
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether the search is case sensitive"
+msgstr "Stabilește dacă căutarea este sensibilă la registru"
+
+#: widgets/IncrementalSearchBar.cpp:129
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Match regular expression"
+msgstr "Potrivire expresie regulată"
+
+#: widgets/IncrementalSearchBar.cpp:133
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Highlight all matches"
+msgstr "Evidențiază toate potrivirile"
+
+#: widgets/IncrementalSearchBar.cpp:135
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether matching text should be highlighted"
+msgstr "Stabilește dacă textul potrivit trebuie evidențiat"
+
+#: widgets/IncrementalSearchBar.cpp:138
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Search backwards"
+msgstr "Caută înapoi"
+
+#: widgets/IncrementalSearchBar.cpp:140
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether search should start from the bottom"
+msgstr "Stabilește dacă căutarea trebuie să înceapă de jos"
+
+#: widgets/IncrementalSearchBar.cpp:170
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Search for the current search phrase from the bottom"
+msgstr "Caută fraza cerută începând de jos"
+
+#: widgets/IncrementalSearchBar.cpp:175
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Search for the current search phrase from the top"
+msgstr "Caută fraza cerută începând de sus"
+
+#: widgets/KonsolePrintManager.cpp:50
+#, kde-format
+msgid "Print Shell"
+msgstr "Tipărește interpretorul"
+
+#: widgets/RenameTabWidget.cpp:37
+#, kde-format
+msgctxt "@label:listbox No color selected"
+msgid "None"
+msgstr "Niciuna"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, remoteTabTitleEdit)
+#: widgets/RenameTabWidget.ui:41
+#, kde-format
+msgid ""
+"Tab title format used when a remote command (e.g. connection to another "
+"computer via SSH) is being executed"
+msgstr ""
+"Formatul de titlu al filei utilizat la executarea unei comenzi la distanță "
+"(de ex.: conexiunea la alt calculator prin SSH)"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/RenameTabWidget.ui:60
+#, kde-format
+msgid "Remote tab title format:"
+msgstr "Format de titlu al filei distante:"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/RenameTabWidget.ui:79
+#, kde-format
+msgid "Tab title format:"
+msgstr "Format titlu filă:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
+#: widgets/RenameTabWidget.ui:98
+#, kde-format
+msgid "Normal tab title format"
+msgstr "Format de titlu al filei normale"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/RenameTabWidget.ui:105
+#, kde-format
+msgid "Tab Color:"
+msgstr "Culoare filă:"
+
+#: widgets/TabTitleFormatButton.cpp:22 widgets/TabTitleFormatButton.cpp:31
+#, c-format, kde-format
+msgid "Program Name: %n"
+msgstr "Denumire program: %n"
+
+#: widgets/TabTitleFormatButton.cpp:23 widgets/TabTitleFormatButton.cpp:32
+#, c-format, kde-format
+msgid "Current Directory (Short): %d"
+msgstr "Dosar curent (scurt): %d"
+
+#: widgets/TabTitleFormatButton.cpp:24 widgets/TabTitleFormatButton.cpp:33
+#, kde-format
+msgid "Current Directory (Long): %D"
+msgstr "Dosar curent (lung): %D"
+
+#: widgets/TabTitleFormatButton.cpp:25 widgets/TabTitleFormatButton.cpp:34
+#: widgets/TabTitleFormatButton.cpp:51 widgets/TabTitleFormatButton.cpp:59
+#, kde-format
+msgid "Window Title Set by Shell: %w"
+msgstr "Titlul ferestrei stabilit de consolă: %w"
+
+#: widgets/TabTitleFormatButton.cpp:26 widgets/TabTitleFormatButton.cpp:35
+#: widgets/TabTitleFormatButton.cpp:52 widgets/TabTitleFormatButton.cpp:60
+#, kde-format
+msgid "Session Number: %#"
+msgstr "Numărul sesiunii: %#"
+
+#: widgets/TabTitleFormatButton.cpp:27 widgets/TabTitleFormatButton.cpp:36
+#: widgets/TabTitleFormatButton.cpp:46 widgets/TabTitleFormatButton.cpp:54
+#, c-format, kde-format
+msgid "User Name: %u"
+msgstr "Nume utilizator: %u"
+
+#: widgets/TabTitleFormatButton.cpp:28 widgets/TabTitleFormatButton.cpp:37
+#, kde-format
+msgid "Local Host: %h"
+msgstr "Gazdă locală: %h"
+
+#: widgets/TabTitleFormatButton.cpp:29 widgets/TabTitleFormatButton.cpp:38
+#, kde-format
+msgid "User's Bourne prompt sigil: %B"
+msgstr ""
+
+#: widgets/TabTitleFormatButton.cpp:47 widgets/TabTitleFormatButton.cpp:55
+#, kde-format
+msgid "User Name@ (if given): %U"
+msgstr "Nume utilizator@ (dacă e dat): %U"
+
+#: widgets/TabTitleFormatButton.cpp:48 widgets/TabTitleFormatButton.cpp:56
+#, kde-format
+msgid "Remote Host (Short): %h"
+msgstr "Gazdă distantă (scurt): %h"
+
+#: widgets/TabTitleFormatButton.cpp:49 widgets/TabTitleFormatButton.cpp:57
+#, kde-format
+msgid "Remote Host (Long): %H"
+msgstr "Gazdă distantă (lung): %H"
+
+#: widgets/TabTitleFormatButton.cpp:50 widgets/TabTitleFormatButton.cpp:58
+#, c-format, kde-format
+msgid "Command and arguments: %c"
+msgstr "Comandă și argumente: %c"
+
+#: widgets/TabTitleFormatButton.cpp:69
+#, kde-format
+msgid "Insert"
+msgstr "Inserează"
+
+#: widgets/TabTitleFormatButton.cpp:94
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert title format"
+msgstr "Inserează formatul titlului"
+
+#: widgets/TabTitleFormatButton.cpp:98
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert remote title format"
+msgstr "Inserează formatul titlului distant"
+
+#: widgets/TerminalHeaderBar.cpp:80 widgets/TerminalHeaderBar.cpp:188
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Maximize terminal"
+msgstr "Maximizează terminalul"
+
+#: widgets/TerminalHeaderBar.cpp:91
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Move terminal to new tab"
+msgstr "Mută terminalul în filă nouă"
+
+#: widgets/TerminalHeaderBar.cpp:101
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close terminal"
+msgstr "Închide terminalul"
+
+#: widgets/TerminalHeaderBar.cpp:186
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Restore terminal"
+msgstr "Restabilește terminalul"
+
+#: widgets/ViewContainer.cpp:57
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open a new tab"
+msgstr "Deschide o filă nouă"
+
+#: widgets/ViewContainer.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close this tab"
+msgstr "Închide această filă"
+
+#: widgets/ViewContainer.cpp:95
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Detach Tab"
+msgstr "&Detașează fila"
+
+#: widgets/ViewContainer.cpp:101
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Configure or Rename Tab..."
+msgstr "&Configurează sau redenumește fila…"
+
+#: widgets/ViewContainer.cpp:106
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close Tab"
+msgstr "Închide fila"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "@title:window"
+#~ msgid "Save File"
+#~ msgstr "Salvează fișierul"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "@title:window"
+#~ msgid "Open File"
+#~ msgstr "Deschide fișier"
+
+#~ msgid "Size: XXX x XXX"
+#~ msgstr "Dimensiune: XXX x XXX"
+
+#~ msgid "Get New..."
+#~ msgstr "Obține noi..."
+
+#~ msgctxt "Name of the default/builtin profile"
+#~ msgid "Default"
+#~ msgstr "Implicit"
+
+#~ msgid ""
+#~ "The name \"Default\" is reserved for the built-in fallback profile;\n"
+#~ "the profile is going to be saved as \"%1\""
+#~ msgstr ""
+#~ "Denumirea „Implicit” e rezervată pentru profilul de rezervă încorporat.\n"
+#~ "Profilul va fi salvat ca „%1”"
+
+#~ msgctxt "@label:textbox added to the name of the current default profile"
+#~ msgid " (default)"
+#~ msgstr " (implicit)"
+
+#~ msgid "Allow Color Filters"
+#~ msgstr "Permite filtre de culori"
+
+#~ msgid "Import"
+#~ msgstr "Importă"
+
+#~ msgid "Missing Port"
+#~ msgstr "Lipsește portul"
+
+#~ msgid "Show menubar"
+#~ msgstr "Arată bara de meniu"
+
+#~ msgid "Show menubar by default"
+#~ msgstr "Arată implicit bara de meniu"
+
+#~ msgid "Show menubar by default in each Konsole window"
+#~ msgstr "Arată bara de meniu implicit în fiecare fereastră Konsolă"
+
+#, fuzzy
+#~| msgid "Open File Manager"
+#~ msgid "Hide SSH Manager"
+#~ msgstr "Deschide gestionarul de fișiere"
+
+#~ msgid ""
+#~ "<p>Each profile must have a name before it can be saved into disk.</p>"
+#~ msgstr ""
+#~ "<p>Fiecare profil trebuie să aibă o denumire înainte să poată fi salvat "
+#~ "pe disc.</p>"
+
+#, fuzzy
+#~| msgid "(Default)"
+#~ msgctxt "@label:textbox Name of the current default profile"
+#~ msgid " (Default)"
+#~ msgstr "(Implicit)"
+
+#, fuzzy
+#~| msgid "New Color Scheme"
+#~ msgid "Color from theme"
+#~ msgstr "Schemă de culori nouă"
+
+#~ msgctxt "The default name of a profile"
+#~ msgid "Profile #%1"
+#~ msgstr "Profil #%1"
+
+#, fuzzy
+#~| msgctxt "@title:column Display profile in file menu"
+#~| msgid "Show in Menu"
+#~ msgctxt ""
+#~ "@info:tooltip List item's checkbox for making item (profile) visible in a "
+#~ "menu"
+#~ msgid "Show profile in menu"
+#~ msgstr "Arată în meniu"
+
+#, fuzzy
+#~| msgid "Tab Bar"
+#~ msgctxt "@title Preferences page name"
+#~ msgid "Tab Bar"
+#~ msgstr "Bara de file"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Rename Tab..."
+#~ msgstr "&Redenumire filă..."
+
+#, fuzzy
+#~| msgid "Confirm Paste"
+#~ msgctxt "@action:button"
+#~ msgid "Confirm &paste"
+#~ msgstr "Confirmă lipirea"
+
+#~ msgid "Vary the background color for each tab"
+#~ msgstr "Variază culoarea fundalului pentru fiecare filă"
+
+#~ msgctxt "@title Preferences page name"
+#~ msgid "TabBar"
+#~ msgstr "Bară de file"
+
+#, fuzzy
+#~| msgid "&Paste Location"
+#~ msgctxt "@title Preferences page name"
+#~ msgid "File Location"
+#~ msgstr "Li&pește amplasarea"
+
+#, fuzzy
+#~| msgid "&Paste Location"
+#~ msgid "Use system &location"
+#~ msgstr "Li&pește amplasarea"
+
+#, fuzzy
+#~| msgid "&Paste Location"
+#~ msgid "Use user specific location"
+#~ msgstr "Li&pește amplasarea"
+
+#, fuzzy
+#~| msgid "&Paste Location"
+#~ msgid "Use specified loca&tion"
+#~ msgstr "Li&pește amplasarea"
+
+#~ msgid "Konsole Window"
+#~ msgstr "Fereastra Konsolă"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Click to toggle status"
+#~ msgstr "Apăsați pentru a comuta starea"
+
+#~ msgctxt "@title:column Profile label"
+#~ msgid "Name"
+#~ msgstr "Denumire"
+
+#~ msgid "&New Profile..."
+#~ msgstr "Profil &nou..."
+
+#~ msgid "&Edit Profile..."
+#~ msgstr "&Editare profil..."
+
+#~ msgid "&Delete Profile"
+#~ msgstr "Ș&terge profilul"
+
+#~ msgid "Tab bar position:"
+#~ msgstr "Poziție bară de file:"
+
+#~ msgid "Always Show Tab Bar"
+#~ msgstr "Afișează bara de file întotdeauna"
+
+#~ msgid "Show Tab Bar When Needed"
+#~ msgstr "Afișează bara de file când e nevoie"
+
+#~ msgid "Always Hide Tab Bar"
+#~ msgstr "Ascunde întotdeauna bara de file"
+
+#~ msgid "Tab bar visibility:"
+#~ msgstr "Vizibilitate bară de file:"
+
+#~ msgid "New tab behavior:"
+#~ msgstr "Comportament filă nouă:"
+
+#~ msgid "Put New Tab At The End"
+#~ msgstr "Pune fila nouă la sfârșit"
+
+#~ msgid "Put New Tab After Current Tab"
+#~ msgstr "Pune fila nouă după fila curentă"
+
+#~ msgctxt "@action Shortcut entry"
+#~ msgid "Next View Container"
+#~ msgstr "Următorul container de vizualizări"
+
+#~ msgid "&Close Tab"
+#~ msgstr "Î&nchide fila"
+
+#~ msgctxt "@action:inmenu Close Active View"
+#~ msgid "Close Active"
+#~ msgstr "Închide vizualizarea activă"
+
+#~ msgctxt "@action:inmenu Close Other Views"
+#~ msgid "Close Others"
+#~ msgstr "Închide celelalte vizualizări"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#, fuzzy
+#~| msgid "Select All"
+#~ msgid "Select Any Font"
+#~ msgstr "Selectează tot"
+
+#~ msgid "Select Fixed Width Font"
+#~ msgstr "Alegeți un font de lățime fixă"
+
+#~ msgctxt "@title:group Generic, common options"
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Rows"
+#~ msgstr "Rânduri"
+
+#~ msgid "This will not alter any open windows."
+#~ msgstr "Aceasta nu va altera nicio fereastră deschisă."
+
+#~ msgid "Preview:"
+#~ msgstr "Previzualizare:"
+
+#~ msgid "Select the font used in this profile"
+#~ msgstr "Alegeți fontul de utilizat în acest profil"
+
+#~ msgid "Scroll Bar"
+#~ msgstr "Bara de derulare"
+
+#~ msgid "Hide the scroll bar"
+#~ msgstr "Ascunde bara de derulare"
+
+#~ msgctxt "@option:radio Hide the scroll bar"
+#~ msgid "Hide"
+#~ msgstr "Ascunde"
+
+#~ msgid "Show on left side"
+#~ msgstr "Afișează pe partea stângă"
+
+#~ msgid "Select Text"
+#~ msgstr "Selectează text"
+
+#~ msgid "Characters considered part of a word when double clicking:"
+#~ msgstr "Caracterele considerate parte a unui cuvânt la dublu-clic:"
+
+#~ msgid "Which part of current line should be selected with triple click ."
+#~ msgstr "Care parte a liniei curente trebuie selectată cu triplu-clic."
+
+#~ msgid "Copy && Paste"
+#~ msgstr "Copiere și lipire"
+
+#~ msgid "Mouse middle button:"
+#~ msgstr "Buton de mijloc al mausului:"
+
+#~ msgid "Enable flow control using Ctrl+S, Ctrl+Q"
+#~ msgstr "Activează controlul scurgerii utilizând Ctrl+S, Ctrl+Q"
+
+#~ msgid "Cursor shape:"
+#~ msgstr "Formă cursor:"
+
+#~ msgid "Encoding"
+#~ msgstr "Codare"
+
+#~ msgctxt "@action:button Pick an encoding"
+#~ msgid "Select"
+#~ msgstr "Alege"
+
+#~ msgid "No scrollback"
+#~ msgstr "Fără revenire"
+
+#~ msgid "Show application name on the titlebar"
+#~ msgstr "Arată denumirea aplicației în bara de titlu"
+
+#~ msgid "Show \"- Konsole\" on the titlebar"
+#~ msgstr "Arată „- Konsolă” în bara de titlu"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Close Tab"
+#~ msgstr "În&chide fila"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Create a new tab. Press and hold to select profile from menu"
+#~ msgstr ""
+#~ "Creează o filă nouă. Apăsați și țineți pentru a alege profilul din meniu"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "<title>Tab Bar</title><para>The tab bar allows you to switch and move "
+#~ "tabs. You can double-click a tab to change its name.</para>"
+#~ msgstr ""
+#~ "<title>Bara de file</title><para>Bara de file vă permite să comutați și "
+#~ "să mutați filele. Puteți face dublu-clic pe o filă pentru a-i schimba "
+#~ "denumirea.</para>"
+
+#~ msgctxt "@action:button Display options menu"
+#~ msgid "Options"
+#~ msgstr "Opțiuni"
+
+#~ msgctxt "@action:button Search from bottom"
+#~ msgid "From bottom"
+#~ msgstr "De jos"
+
+#~ msgctxt "@action:button Search from top"
+#~ msgid "From top"
+#~ msgstr "De sus"
+
+#~ msgid "Profile name is empty."
+#~ msgstr "Denumirea profilului este vidă."
+
+#~ msgid "&Stop"
+#~ msgstr "&Oprește"
+
+#~ msgid "Icon:"
+#~ msgstr "Pictogramă:"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Click to rename profile"
+#~ msgstr "Apăsați pentru a redenumi profilul"
+
+#, fuzzy
+#~| msgid "Konsole"
+#~ msgctxt "@title"
+#~ msgid "Demo KonsolePart"
+#~ msgstr "Konsolă"
+
+#~ msgid "DEC VT420 Terminal"
+#~ msgstr "Terminal DEC VT420"
+
+#~ msgctxt "@info:shell"
+#~ msgid "Use --nofork to run in the foreground (helpful with the -e option)."
+#~ msgstr "Folosiți --nofork pentru a rula în prim-plan (util cu opțiunea -e)."
+
+#~ msgctxt "@title:window"
+#~ msgid "Manage Profiles"
+#~ msgstr "Gestionează profiluri"
+
+#~ msgid "Manage Profiles..."
+#~ msgstr "Gestiune profiluri..."
+
+#~ msgctxt "@title"
+#~ msgid "<application>Konsole</application>"
+#~ msgstr "<application>Konsolă</application>"
+
+#~ msgid "Shell"
+#~ msgstr "Interpretor"
+
+#~ msgid "--- Type anything in this box ---"
+#~ msgstr "--- Tastați orice în această casetă ---"
+
+#~ msgid "Set the window size and position for this profile when exiting"
+#~ msgstr ""
+#~ "Stabilește dimensiunea și poziția ferestrei pentru acest profil la ieșire"
+
+#~ msgid "Save window size and position on exit"
+#~ msgstr "Salvează dimensiunea și poziția ferestrei la ieșire"
+
+#~ msgid "Accessible Color Scheme"
+#~ msgstr "Schemă de culori accesibilă"
+
+#~ msgid "%1, size %2"
+#~ msgstr "%1, mărime %2"
+
+#~ msgid "Adjust the font size used in this profile"
+#~ msgstr "Ajustează dimensiunea fontului folosit în acest profil"
+
+#~ msgid ""
+#~ "Try to enable transparency, even if the system does not appear to support "
+#~ "it."
+#~ msgstr ""
+#~ "Încearcă activarea transparenței, chiar dacă sistemul nu pare să o "
+#~ "suporte."
+
+#~ msgid "Input"
+#~ msgstr "Intrare"
+
+#~ msgid "Fixed size scrollback: "
+#~ msgstr "Revenire de mărime fixă:"
+
+#~ msgid "Edit normal tab title format"
+#~ msgstr "Editează formatul titlului filei normale"
+
+#~ msgid "Edit tab title format used when executing remote commands"
+#~ msgstr ""
+#~ "Editează formatul titlului de file utilizat la executarea comenzilor "
+#~ "distante"
+
+#~ msgid "Allow terminal programs to resize the window"
+#~ msgstr "Permite programelor din terminal să redimensioneze fereastra"
+
+#~ msgid "Allow programs to resize terminal window"
+#~ msgstr "Permite programeor să redimensioneze fereastra"
+
+#~ msgid "Configure Current Profile..."
+#~ msgstr "Configurare profil curent..."
+
+#~ msgid "The wallpaper picture file path"
+#~ msgstr "Calea către imaginea de fundal"
+
+#~ msgid "&Switch Profile"
+#~ msgstr "Comută p&rofilul"
+
+#~ msgid "Debug"
+#~ msgstr "Depanare"
+
+#~ msgid "Show or hide the menu bar in terminal windows"
+#~ msgstr "Afișează sau ascunde bara de meniu în ferestrele terminalului"
+
+#~ msgid "Seconds to detect silence:"
+#~ msgstr "Secunde pentru detectarea liniștii:"
+
+#~ msgid "Disable scrollback"
+#~ msgstr "Dezactivare revenire"
+
+#~ msgid "&Paste as text"
+#~ msgstr "Li&pește ca text"
+
+#~ msgid ""
+#~ "All characters from the current word to the end of line will be selected."
+#~ msgstr ""
+#~ "Vor fi alese toate caracterele de la cuvântul actual până la sfârșitul "
+#~ "liniei."
+
+#~ msgid "Triple click selects from current word forward"
+#~ msgstr "Triplu-clic selectează de la cuvântul actual înainte"
+
+#~ msgid "&Change Profile"
+#~ msgstr "S&chimbă profilul"
+
+#~ msgid "Change Profile"
+#~ msgstr "Schimbare profil"
+
+#~ msgid "Maintainer"
+#~ msgstr "Responsabil"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#~ msgid "Remote Connection..."
+#~ msgstr "Conexiune la distanță..."
+
+#~ msgid "User:"
+#~ msgstr "Utilizator:"
+
+#~ msgid "Lookup..."
+#~ msgstr "Căutare..."
+
+#~ msgid "Service:"
+#~ msgstr "Serviciu:"
+
+#~ msgid "SSH"
+#~ msgstr "SSH"
+
+#~ msgid "Secure FTP"
+#~ msgstr "Secure FTP"
+
+#~ msgid "Background color:"
+#~ msgstr "Culoare fundal:"
+
+#~ msgid "Save as custom session"
+#~ msgstr "Salvează ca sesiune particularizată"
+
+#~ msgid "Connect"
+#~ msgstr "Conectare"
+
+#~ msgid "Next View"
+#~ msgstr "Vizualizarea următoare"
+
+#~ msgid "Previous View"
+#~ msgstr "Vizualizarea precedentă"
+
+#~ msgid "Match case"
+#~ msgstr "Sensibil la registru"
+
+#~ msgid ""
+#~ "Sets whether the search phrase is interpreted as normal text or as a "
+#~ "regular expression"
+#~ msgstr ""
+#~ "Stabilește dacă fraza căutată este interpretată ca text sau ca expresie "
+#~ "regulată"
+
+#~ msgid "Search reached bottom, continued from top."
+#~ msgstr "Căutarea a atins sfârșitul, continuată de la început."
+
+#~ msgid "Search reached top, continued from bottom."
+#~ msgstr "Căutarea a atins începutul, continuată de la sfârșit."
+
+#~ msgid "New &Tab"
+#~ msgstr "&Filă nouă"
+
+#~ msgid "Move the selected profile up in the menu list"
+#~ msgstr "Mută profilul ales în sus pe lista meniului"
+
+#~ msgid "Move Up"
+#~ msgstr "Mută în sus"
+
+#~ msgid "Move the selected profile down in the menu list"
+#~ msgstr "Mută profilul ales în jos pe lista meniului"
+
+#~ msgid "Move Down"
+#~ msgstr "Mută în jos"
+
+#~ msgid "Word characters for double-click selection: "
+#~ msgstr "Caractere de cuvânt pentru selecție dublu-clic:"
+
+#, fuzzy
+#~| msgid "Clear && Reset"
+#~ msgid "Clear and Reset"
+#~ msgstr "Curăță și reinițializează"
+
+#~ msgid "Character Encoding"
+#~ msgstr "Codarea caracterelor"
+
+#~ msgid "&Detach View"
+#~ msgstr "&Detașează vizualizarea"
+
+#~ msgid "Decrease Text Size"
+#~ msgstr "Micșorează dimensiunea textului"
+
+#~ msgid "Search Output..."
+#~ msgstr "Caută în ieșire..."
+
+#~ msgid "Find Next"
+#~ msgstr "Caută următorul"
+
+#~ msgid "Find Previous"
+#~ msgstr "Caută precedentul"
+
+#~ msgid "Open Browser Here"
+#~ msgstr "Deschide un navigator aici"
+
+#~ msgid "C&lear Display"
+#~ msgstr "C&urăță afișajul"
+
+#~ msgid "KWrited - Listening on Device %1"
+#~ msgstr "KWrited - Ascult pe dispozitivul %1"
+
+#~ msgid "FONT PREVIEW TEXT"
+#~ msgstr "TEXT PREVIZUALIZARE FONT | ăâîșț"
+
+#~ msgid "DEFAULTENCODING"
+#~ msgstr "CODAREIMPLICITĂ"
+
+#~ msgid "New"
+#~ msgstr "Nouă"
+
+#~ msgid "Select &Tab Color"
+#~ msgstr "Alegere &culoare filă"
+
+#~ msgid "Enable transparent backgrounds"
+#~ msgstr "Activează fundaluri transparente"
+
+#~ msgid "TextLabel"
+#~ msgstr "EtichetăText"

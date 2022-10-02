@@ -1,0 +1,3573 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+ "dtd/kdedbx45.dtd" [
+<!ENTITY % Catalan  "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+<!ENTITY Ahmad.Samir '<personname
+><firstname
+>Ahmad</firstname
+><surname
+>Samir</surname
+></personname
+>'>
+<!ENTITY Ahmad.Samir.mail '<email
+>a.samirh78@gmail.com</email
+>'>
+]>
+
+<book id="konsole" lang="&language;">
+
+<bookinfo>
+<title
+>Manual del &konsole;</title>
+<authorgroup>
+<author
+>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author
+>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
+
+<othercredit role="developer"
+>&Robert.Knight; &Robert.Knight.mail; </othercredit>
+
+<othercredit role="developer"
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail; </othercredit>
+
+<othercredit role="developer"
+>&Waldo.Bastian; &Waldo.Bastian.mail; </othercredit>
+
+<othercredit role="reviewer"
+>&Mike.McBride; &Mike.McBride.mail; </othercredit>
+
+&traductor.Antoni.Bella; 
+
+</authorgroup>
+
+<copyright>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>&Jonathan.Singer;</holder>
+</copyright>
+<copyright>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year
+><year
+>2018</year
+><year
+>2020</year
+><year
+>2021</year>
+<holder
+>&Kurt.Hindenburg;</holder>
+</copyright>
+
+<copyright>
+    <year
+>2018</year>
+<holder
+>&Ahmad.Samir;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2 d'octubre de 2021</date>
+<releaseinfo
+>Aplicacions 21.12</releaseinfo>
+
+<abstract
+><para
+>El &konsole; és l'emulador de terminal del &kde;.</para
+></abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>konsole</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>ordre</keyword>
+<keyword
+>línia</keyword>
+<keyword
+>terminal</keyword>
+<keyword
+>cli</keyword>
+</keywordset>
+
+</bookinfo>
+<chapter id="introduction">
+<title
+>Introducció</title>
+
+<sect1 id="terminal">
+<title
+>Què és un terminal?</title>
+
+<para
+>El &konsole; és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordres). Emula una interfície de línia d'ordres en una finestra de només text. </para>
+
+<para
+>El &konsole; normalment executa un intèrpret d'ordres, una aplicació que executa les ordres que escriviu. Quin intèrpret s'executa al &konsole; dependrà del vostre arranjament. Consulteu la documentació del sistema operatiu per a saber quin intèrpret és, com configurar-lo i com utilitzar-lo. </para>
+</sect1>
+
+<sect1 id="scrollback">
+<title
+>Historial</title>
+
+<para
+>El &konsole; utilitza la noció de desplaçar enrere per a permetre als usuaris veure la sortida mostrada anteriorment. De manera predeterminada, el desplaçament enrere està activat i establert a desar 1.000 línies de la sortida, a més del que es mostra actualment a la pantalla. </para>
+<para
+>Segons les línies es van desplaçant fora de la part superior de la pantalla, es poden tornar a veure movent la barra de desplaçament cap amunt, movent la roda del ratolí o usant les tecles <keycombo action="simul"
+>&Maj;<keycap
+>Re Pàg</keycap
+></keycombo
+> (per a anar una pàgina enrere), <keycombo action="simul"
+>&Maj;<keycap
+>Av Pàg</keycap
+></keycombo
+> (per a anar una pàgina endavant), <keycombo action="simul"
+>&Maj;<keysym
+>Fletxa amunt</keysym
+></keycombo
+> (per a anar una línia amunt) i <keycombo action="simul"
+>&Maj;<keysym
+>Fletxa avall</keysym
+></keycombo
+> (per a anar una línia avall). </para>
+<para
+>Es pot canviar la quantitat de desplaçament utilitzant <keycombo action="simul"
+>&Maj;<keycap
+>Re Pàg/Av Pàg</keycap
+></keycombo
+> entre mitja pàgina i pàgina sencera a la pestanya <guilabel
+>Barra de desplaçament</guilabel
+> de la finestra de configuració del perfil (utilitzeu <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Edita el perfil actual...</guimenuitem
+></menuchoice
+> per a obrir aquesta finestra). </para>
+
+</sect1>
+
+<sect1 id="profiles">
+<title
+>Perfils</title>
+<para
+>Els perfils permeten a l'usuari ràpidament i fàcilment automatitzar l'execució d'ordres comunes. Com a exemples es poden incloure: <itemizedlist>
+<listitem
+><para
+>ssh en una altra màquina.</para
+></listitem>
+<listitem
+><para
+>Començar una sessió d'irc.</para
+></listitem>
+<listitem
+><para
+>Ús de «tail» per a veure un fitxer.</para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para
+>Tots els perfils nous i modificats es desen a la carpeta d'inici de l'usuari local a <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+>.</para>
+
+<para
+>Procediment per a crear un perfil nou: <orderedlist>
+<listitem
+><para
+>Feu clic sobre l'entrada del menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Gestiona els perfils...</guimenuitem
+> </menuchoice
+>.</para
+></listitem>
+
+<listitem
+><para
+>Alterna a la pàgina <guibutton
+>Perfils</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Feu clic sobre el botó <guibutton
+>Perfil nou...</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Ompliu la primera entrada amb un nom. Aquest és el nom que es mostrarà en el menú, i serà l'etiqueta usada en comptes de <guilabel
+>Shell</guilabel
+> quan inicieu una sessió d'aquest tipus. </para
+></listitem>
+
+<listitem
+><para
+>Introduïu una ordre de la mateixa manera en què ho faríeu si obríssiu un nou terminal i escriviu l'ordre. Per al nostre primer exemple, escriviu <userinput
+><command
+>ssh</command
+> <replaceable
+>administració</replaceable
+></userinput
+>.</para
+></listitem>
+
+<listitem
+><para
+>Sobre les altres pestanyes del diàleg, configureu l'aparença d'aquesta sessió. Podeu configurar diferents tipus de lletra, un esquema de color, tipus de $<envar
+>TERM</envar
+> i moltes altres opcions per a cada sessió.</para
+></listitem>
+
+<listitem
+><para
+>Premeu el botó <guibutton
+>D'acord</guibutton
+>. Ara restarà disponible la nova sessió en el diàleg <guilabel
+>Gestiona els perfils...</guilabel
+>. </para
+></listitem>
+
+</orderedlist>
+</para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title
+>Botons del ratolí</title>
+
+<para
+>Aquesta secció detalla la utilització dels botons del ratolí per a dretans. Per a esquerrans, canvieu els botons esquerre i dret en el text que segueix. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><mousebutton
+>Esquerre</mousebutton
+></term>
+
+<listitem
+><para
+>Tots els clics amb el &BER; s'envien a l'aplicació amb suport per a l'ús del ratolí executada en el &konsole;. Si una aplicació pot reaccionar als clics del ratolí, el &konsole; ho indicarà mostrant una fletxa de cursor. Si no, mostrarà un cursor amb forma de I (una barra).</para>
+
+<para
+>Mantenint premut el &BER; i arrossegant el punter per la pantalla amb una aplicació sense suport de l'ús del ratolí seleccionareu una regió del text. Mentre s'arrossega el punter, el text marcat es mostrarà ressaltat perquè es vegi millor. Seleccioneu <guimenuitem
+>Copia</guimenuitem
+> des del menú <guimenu
+>Edita</guimenu
+> per a copiar el text marcat al porta-retalls i que es pugui usar més tard amb el &konsole; o una altra aplicació. El text seleccionat es pot arrossegar i deixar anar en aplicacions compatibles. Manteniu premuda la tecla &Ctrl; i arrossegueu el text cap a la ubicació desitjada.</para>
+
+<para
+>Normalment, s'inseriran caràcters de salt de línia al final de cada línia seleccionada. Això és millor per a retallar codi font, o la sortida d'una ordre en particular. Per a text normal, els salts de línia no solen ser importants. A vegades un preferiria que el text fos una cadena de caràcters que es formati automàticament en enganxar-los en una altra aplicació. Per a seleccionar el mode de text com a cadena, manteniu premuda la tecla &Ctrl; mentre continueu seleccionant normalment.</para>
+
+<para
+>Prement les tecles &Ctrl; i &Alt; a la vegada que el &BER; seleccionareu text en columnes. </para>
+
+<para
+>Doble clic amb el &BER; per a seleccionar una paraula. Triple clic per a seleccionar una línia sencera.</para>
+
+<para
+>Si s'abasta la vora superior o inferior de l'àrea de text mentre s'està seleccionant, el &konsole; farà un desplaçament amunt o avall, exposant finalment el text al cau de l'historial. El desplaçament s'aturarà quan el ratolí s'aturi.</para>
+
+<para
+>Després de deixar anar el botó del ratolí, el &konsole; intentarà mantenir visible el text en el porta-retalls mantenint per a això ressaltada l'àrea seleccionada. L'àrea marcada es tornarà normal tan aviat com s'alteri el contingut del porta-retalls, es modifiqui el text de l'àrea marcada o es faci clic amb el &BER;.</para>
+
+<para
+>Per a marcar text en una aplicació amb suport per a l'ús del ratolí (per exemple, Midnight Commander), s'ha de fer clic mentre es prem a la vegada la tecla &Maj;.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Mig</mousebutton
+></term>
+
+<listitem
+><para
+>Prement el &BMR; s'enganxarà el text actual en el porta-retalls. Mantenint premuda la tecla &Ctrl; mentre es prem el &BMR; s'enganxarà el text i s'afegirà una línia nova. El qual és còmode per a executar una ordre enganxada amb rapidesa, però pot ser perillós, de manera que s'ha d'utilitzar amb precaució. </para>
+
+<note
+><para
+>Si teniu un ratolí amb tan sols dos botons, en prémer ambdós a la vegada s'emularà el &BMR; d'un ratolí amb tres botons.</para
+></note>
+
+<para
+>Si teniu una <mousebutton
+>roda</mousebutton
+> com a botó central, fer-la rodar en un programa sense suport per a l'ús del ratolí mourà la barra de desplaçament del &konsole;.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Dret</mousebutton
+></term>
+<listitem>
+<para
+>Aquests elements apareixeran en el menú quan es premi el &BDR;:</para>
+<itemizedlist>
+<listitem
+><para
+><guimenuitem
+>Copia</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Enganxa</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>Amb una selecció de text apareixerà un submenú <guisubmenu
+>Cerca</guisubmenu
+> amb una llista de les dreceres web preferides i una opció per a configurar les dreceres web.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Obre al gestor de fitxers</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Estableix la codificació</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Neteja l'historial</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Ajusta l'historial...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Mostra la barra de menús</guimenuitem
+>, només quan està oculta</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Canvia el perfil</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Edita el perfil actual...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Tanca la pestanya</guimenuitem
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>En una aplicació amb suport de ratolí, prémer la tecla &Maj; a la vegada que el &BDR; perquè aparegui el menú emergent. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="drag-and-drop">
+<title
+>Arrossegar i deixar anar</title>
+<para
+>Si arrossegueu un fitxer, carpeta o &URL; sobre una finestra del &konsole;, apareixerà un menú contextual amb les següents accions: </para>
+<screenshot>
+<screeninfo
+>Menú contextual «Arrossega i deixa anar»</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Menú contextual «Arrossega i deixa anar»</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Maj;</shortcut
+><guimenuitem
+>Mou aquí</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Mou l'element arrossegat dins la carpeta actual. Aquest element només apareixerà al menú contextual si teniu els drets per a eliminar el fitxer o la carpeta en qüestió. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Ctrl;</shortcut
+><guimenuitem
+>Copia aquí</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Copia l'element arrossegat dins la carpeta actual.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Maj;</keycombo
+></shortcut
+><guimenuitem
+>Enllaça aquí</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Insereix un enllaç simbòlic cap a l'element arrossegat.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Enganxa la ubicació</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Insereix el camí complet de l'element arrossegat al cursor.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Canvia el directori a </guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Si s'arrossega una carpeta, aquesta acció apareixerà al menú contextual i us permetrà canviar la carpeta de treball de la sessió del &konsole;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Esc;</shortcut
+><guimenuitem
+>Cancel·la</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Suspèn l'acció d'arrossegar i deixar anar.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Si premeu les dreceres abans de deixar anar el &BER; durant l'arrossegament i deixat anar, no apareixerà cap menú contextual i les accions s'executaran immediatament. </para>
+
+<para
+>Si voleu utilitzar de manera predeterminada la tecla &Ctrl; per a arrossegar i deixar anar, o inhabilitar el menú contextual per a inserir els &URL; com a text, activeu les opcions corresponents a la pestanya <guilabel
+>Ratolí</guilabel
+> en el diàleg de configuració del perfil. </para>
+
+</sect1>
+
+<sect1 id="semantic-shell-integration">
+<title
+>Integració semàntica de l'intèrpret d'ordres</title>
+
+<para
+>Un programa de l'intèrpret d'ordres que s'executa en el Konsole pot emetre seqüències d'escapada que divideixen el text que es mostra en tres tipus: indicador de l'intèrpret d'ordres, entrada de l'usuari i sortida de l'ordre. L'ús d'aquesta informació semàntica permet diverses millores en el Konsole. <itemizedlist>
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>Re Pàg</keycap
+></keycombo
+> i <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>Av Pàg</keycap
+></keycombo
+> desplaça amunt/avall a l'indicador d'ordres anterior/següent.</para
+></listitem>
+<listitem
+><para
+>Consells visuals: es mostra una línia per sobre de cada indicador, els colors de l'indicador són menys intensos i els colors de la sortida són més intensos. Això es pot configurar perquè no es mostri mai, es mostri sempre, o només quan es mostren els consells d'URL. </para
+></listitem>
+<listitem
+><para
+>Les opcions del menú contextual <guimenuitem
+>Copia l'entrada de l'usuari</guimenuitem
+> <guimenuitem
+>Copia la sortida de l'ordre</guimenuitem
+> <guimenuitem
+>Copia excepte l'indicador</guimenuitem
+> es poden utilitzar per a filtrar la selecció quan es copia al porta-retalls. </para
+></listitem>
+<listitem
+><para
+>Quan la selecció està buida, l'acció copia al porta-retalls copia la línia d'entrada actual si no està buida, o l'última sortida si no hi ha entrada actual. </para
+></listitem>
+<listitem
+><para
+>En prémer la fletxa amunt/avall quan s'edita una entrada llarga, el cursor se situarà una línia amunt/avall enviant el nombre adequat d'esdeveniments de tecla esquerra/dreta a l'intèrpret d'ordres. Es pot configurar a la configuració del perfil.</para
+></listitem>
+<listitem
+><para
+>En fer clic amb el ratolí sobre l'entrada de text, el cursor se situarà a la ubicació on s'ha fet clic. Es pot configurar a la configuració del perfil.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Cal configurar la integració semàntica de l'intèrpret d'ordres en l'intèrpret d'ordres. En prémer <keycombo
+>&Ctrl;&Alt;<keycap
+>]</keycap
+></keycombo
+> s'enganxaran les ordres necessàries per al bash. Per a altres intèrprets d'ordres, com ara el fish, zsh, python, etc., consulteu la documentació del programa pertinent. </para>
+
+</sect1>
+
+</chapter>
+
+<chapter id="commandreference">
+<title
+>Referència d'ordres</title>
+
+<sect1 id="menubar">
+<title
+>La barra de menús</title>
+
+<para
+>La barra de menús es troba a la part superior de la finestra del &konsole;. Si el menú està ocult, es pot arribar a <guimenuitem
+>Mostra la barra de menús</guimenuitem
+> fent clic <mousebutton
+>dret</mousebutton
+> a la finestra (sempre que no hi hagi una aplicació a pantalla completa en aquesta finestra, com «vi», «minicom», &etc;) La drecera predeterminada es llista després de cada element de menú. </para>
+<para
+>De manera alternativa podeu utilitzar la drecera <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>M</keycap
+></keycombo
+> per a mostrar o ocultar la barra de menús. </para>
+<sect2 id="file-menu">
+<title
+>El menú Fitxer</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Finestra nova</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Obre una finestra nova del &konsole; amb el perfil predeterminat.</action>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Pestanya nova</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Obre una pestanya nova amb el perfil predeterminat.</action>
+<note
+><para
+>El primer perfil en el submenú sempre serà «Predeterminat», el qual és el perfil incorporat. Tots els altres perfils es llisten a continuació en ordre alfabètic. El perfil predeterminat especificat per l'usuari estarà en negreta. </para
+></note>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Clona la pestanya</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Intenta clonar la pestanya actual en una pestanya nova.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Desa la sortida com a...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Desa l'historial actual com a un fitxer de text o html.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Imprimeix la pantalla...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Imprimeix la pantalla actual.</action
+> De manera predeterminada, la sortida s'escalarà per a ajustar-la a la mida del paper on imprimiu amb el color del text en negre i sense fons. Es poden canviar aquestes opcions al diàleg d'impressió sobre la pestanya <guilabel
+>Opcions de sortida</guilabel
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Obre el gestor de fitxers</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Obre el gestor de fitxers del &kde; al directori actual</action
+>. De manera predeterminada, aquest és el <ulink url="help:/dolphin/index.html"
+>&dolphin;</ulink
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Tanca la sessió</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Tanca la sessió actual.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Tanca la finestra</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Surt del &konsole;.</action
+></para>
+<note
+><para
+>El &konsole; mostrarà un diàleg de confirmació si hi ha més d'una sessió oberta o si hi ha determinats programes executant-se en qualsevol sessió. Aquest diàleg es pot desactivar fent clic a la casella de selecció <guibutton
+>No ho tornis a preguntar</guibutton
+>. </para>
+</note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>El menú Edita</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Copia</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Copia el text seleccionat al porta-retalls.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>V</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+><guimenuitem
+>Enganxa</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Enganxa text des del porta-retalls a la localització del cursor.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Edita</guimenu
+> <guimenuitem
+>Selecciona-ho tot</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Selecciona tot</action
+> el text a la finestra actual. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Edita</guimenu
+><guisubmenu
+>Copia l'entrada a</guisubmenu
+><guimenuitem
+>Totes les pestanyes en la finestra actual</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Permet l'entrada des de la sessió actual per a enviar-la simultàniament a totes les sessions a la finestra actual.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+><guisubmenu
+>Copia l'entrada a</guisubmenu
+><guimenuitem
+>Pestanyes seleccionades...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Permet l'entrada des de la sessió actual per a enviar-la simultàniament a les sessions triades per l'usuari.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+><guisubmenu
+>Copia l'entrada a</guisubmenu
+><guimenuitem
+>Cap</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Atura l'enviament de l'entrada des de la sessió actual a les altres sessions.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Edita</guimenu
+> <guisubmenu
+>Envia un senyal</guisubmenu
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Envia el senyal especificat al procés de la línia d'ordres, o un altre procés, que es va iniciar quan es va iniciar la sessió nova</action
+>.</para
+><para
+>Actualment els senyals disponibles són:</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>per a suspendre la tasca</entry>
+</row>
+<row>
+<entry
+><errorcode
+>CONT</errorcode
+></entry>
+<entry
+>continua si l'havíeu suspès</entry>
+</row>
+<row>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>detecta una penjada sobre el terminal controlat, o mata el procés controlat</entry>
+</row>
+<row>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>interromp des del teclat</entry>
+</row>
+<row>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>senyal de finalització</entry>
+</row>
+<row>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>senyal de matar</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>senyal d'usuari 1</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>senyal d'usuari 2</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para
+>Consulteu les pàgines del manual del sistema per a obtenir més informació sobre donar l'ordre: <userinput
+><command
+>man</command
+> <option
+>7 signal</option
+></userinput
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+><guimenuitem
+>Configura les opcions de la pestanya...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre un diàleg que us permetrà canviar el format del nom, el format per al títol de la pestanya remota i el color de la pestanya actual</action
+> (<link linkend="configure-tab-settings-dialog"
+>més informació</link
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+><guimenuitem
+>Envia per ZModem...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre un diàleg per a seleccionar un fitxer que serà enviat si es troba instal·lat el programari necessari.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre una barra de cerca a la part inferior de la finestra del &konsole;. </action
+></para>
+<para
+>Permet majúscules i minúscules, cap endavant o cap enrere, i les cerques amb expressions regulars.</para>
+</listitem>
+</varlistentry>
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch
+-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca la següent</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Mou a la següent instància de la cerca</action
+>. Si la barra de cerca té el focus, també podreu utilitzar la drecera &Intro;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Maj;<keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca l'anterior</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Mou a l'anterior instància de la cerca</action
+>. Si la barra de cerca té el focus, també podreu utilitzar la drecera <keycombo action="simul"
+>&Maj;&Intro;</keycombo
+>.</para
+></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>El menú Visualitza</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guisubmenu
+>Divideix la vista</guisubmenu
+><guimenuitem
+>Divideix la vista esquerra/dreta</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Divideix totes les pestanyes en vistes esquerra i dreta.</action>
+</para
+><para
+>Qualsevol sortida en una vista serà duplicada en les altres. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guisubmenu
+>Divideix la vista</guisubmenu
+><guimenuitem
+>Divideix la vista superior/inferior</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Divideix totes les pestanyes en vistes superior i inferior.</action>
+</para
+><para
+>Qualsevol sortida en una vista serà duplicada en les altres. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guisubmenu
+>Divideix la vista</guisubmenu
+><guimenuitem
+>Expandeix la vista</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Fa més gran la vista actual.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guisubmenu
+>Divideix la vista</guisubmenu
+><guimenuitem
+>Redueix la vista</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Fa més petita la vista actual.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>E</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guisubmenu
+>Divideix la vista</guisubmenu
+><guimenuitem
+>Commuta la maximització de la vista actual</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Alterna la vista actual entre la mida actual i la mida màxima</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>\</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guisubmenu
+>Divideix la vista</guisubmenu
+><guimenuitem
+>Mateixa mida per a totes les vistes</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Estableix la mateixa mida per a totes les vistes</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Separa la pestanya actual</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Obre la pestanya actual en una finestra a part.</action>
+</para
+><para
+>Sortir de la finestra anterior del &konsole; no afectarà la finestra que s'acaba de crear. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Separa la vista actual</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Obre la vista dividida actual en una finestra a part.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry id="save-layout">
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Desa la disposició de les pestanyes a un fitxer</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Permet desar la disposició de les pestanyes de la vista actual en un fitxer de disposició especialitzat del &konsole; que després es podrà carregar per a restaurar una de les vostres disposicions preferides.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Carrega la disposició de la pestanya des d'un fitxer</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Permet carregar una de les vostres disposicions preferides des del fitxer de disposició que s'ha desat utilitzant l'anterior element de menú <menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Desa la disposició de la pestanya a un fitxer</guimenuitem
+></menuchoice
+>.</action
+> Les disposicions predeterminades (2x2, 2x1 i 1x2) es poden carregar a través de la barra d'eines. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Vigila el silenci</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Alterna la vigilància de la pestanya actual per a la manca d'activitat.</action>
+</para
+><para
+>De manera predeterminada, després de 10 segons d'inactivitat, apareixerà una icona informativa a la pestanya de la sessió. El tipus d'alertes es pot canviar a través de <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura les notificacions</guimenuitem
+><guimenuitem
+>Silenci en una sessió controlada</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Vigila l'activitat</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Alterna la vigilància de la pestanya actual per a l'activitat.</action>
+</para
+><para
+>Sobre qualsevol activitat, apareixerà una icona informativa a la pestanya de la sessió. El tipus d'alertes es pot canviar a través de <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura les notificacions</guimenuitem
+><guimenuitem
+>Activitat en una sessió controlada</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Vigila la finalització del procés</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Alterna la vigilància de la pestanya actual per a la finalització del procés</action
+>. </para
+><para
+>Si està marcada, en finalitzar el procés actual, el &konsole; mostrarà una notificació <guilabel
+>El procés «<replaceable
+>nom del procés</replaceable
+>» ha finalitzat l'execució a la sessió «<replaceable
+>nom de la sessió</replaceable
+>»</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Només de lectura</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Alterna la sessió a només de lectura: no s'acceptarà cap entrada, arrossegar i deixar anar estarà inhabilitat. </action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Augmenta el tipus de lletra</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Augmenta la mida del tipus de lletra del text.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Reinicia la mida del tipus de lletra</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Reinicia la mida del tipus de lletra del text al valor del perfil predeterminat.</action
+></para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Minva el tipus de lletra</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Minva la mida del tipus de lletra del text.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Estableix la codificació</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Estableix la codificació dels caràcters.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Neteja l'historial</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Esborra el text a l'historial.</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>X</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Neteja l'historial i reinicia</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Esborra el text a la pestanya actual i a l'historial, i reinicia el terminal.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F11</keycap
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Mode de pantalla completa</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Alterna el &konsole; per a ocupar tota la pantalla.</action
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>El menú Adreces d'interès</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Adreces d'interès</guimenu
+><guimenuitem
+>Afegeix una adreça d'interès</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Afegeix la ubicació actual.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+><guimenuitem
+>Pestanyes d'adreces d'interès com a carpeta...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Afegeix totes les pestanyes a una carpeta d'adreces d'interès.</action>
+</para
+><para
+>S'obrirà un diàleg per al nom de la carpeta per a les adreces d'interès. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+><guimenuitem
+>Carpeta nova d'adreces d'interès...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Afegeix una carpeta nova a la llista d'adreces d'interès.</action>
+</para
+><para
+>S'obrirà un diàleg per al nom de la carpeta per a les adreces d'interès. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+><guimenuitem
+>Edita les adreces d'interès</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre l'editor de les adreces d'interès.</action
+></para>
+<note
+><para
+>El programa keditbookmarks haurà d'estar instal·lat perquè aparegui aquest element del menú.</para>
+<para
+>Podeu utilitzar l'editor d'adreces d'interès per a afegir manualment els &URL;. Actualment el &konsole; accepta els següents: <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://usuari@màquina:port</para
+></listitem>
+<listitem
+><para
+>telnet://usuari@màquina:port</para
+></listitem>
+</itemizedlist>
+</para
+></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="plugins-menu">
+<title
+>El menú Connectors</title>
+
+<para
+>Llistarà qualsevol connector instal·lat o mostrarà «No hi ha cap connector disponible» </para>
+
+</sect2>
+
+
+<sect2 id="settings-menu">
+<title
+>El menú Arranjament</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Edita el perfil actual...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre un diàleg per a configurar el perfil actual.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Canvia el perfil</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Canvia el perfil actual a un dels perfils llistats.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Gestiona els perfils...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre un editor per a la gestió dels perfils.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Esquema de color de les finestres</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Canvia la &IGU; del &konsole; a l'esquema especificat</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Mostra la barra de menús</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Canvia la visibilitat de la barra de menús.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Barres d'eines mostrades</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Permet alternar la visibilitat de les barres d'eines del &konsole;.</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Mostra la barra d'estat</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Canvia la visibilitat de la barra d'estat.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Configura l'idioma... </guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre una finestra per a triar una traducció per a la interfície del &konsole;.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Configura les dreceres de teclat...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre l'editor de dreceres de teclat.</action
+> Trobareu més informació sobre la configuració de les dreceres en els <ulink url="help:/fundamentals/shortcuts.html"
+>Fonaments del &kde;</ulink
+>.</para>
+
+<para
+>De manera addicional, el &konsole; disposa d'algunes dreceres especials que no es corresponen amb cap element del menú:</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Drecera</entry>
+<entry
+>Descripció</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycombo action="simul"
+>&Maj;<keysym
+>Fletxa dreta</keysym
+></keycombo
+></entry>
+<entry
+>Pestanya següent</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Maj;<keysym
+>Fletxa esquerra</keysym
+></keycombo
+></entry>
+<entry
+>Pestanya anterior</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;&Left;</keycombo
+></entry>
+<entry
+>Mou la pestanya a l'esquerra</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;&Right;</keycombo
+></entry>
+<entry
+>Mou la pestanya a la dreta</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>Inser</keycap
+></keycombo
+></entry>
+<entry
+>Enganxa la selecció</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura les barres d'eines...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre <ulink url="help:/fundamentals/config.html#toolbars-items"
+>la finestra de configuració de la barra d'eines</ulink
+>.</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura les notificacions...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre l'editor de les notificacions.</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &konsole;...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre l'editor de la configuració del &konsole;.</action
+></para>
+<para
+>Aquest diàleg té opcions que influeixen en l'aparença i el comportament de la finestra del &konsole;. </para>
+<itemizedlist>
+    <listitem>
+        <para
+>La pàgina <guilabel
+>General</guilabel
+> permet configurar la visibilitat de la barra de menús, recordar la mida de la finestra del &konsole;, executar totes les finestres del &konsole; en un sol procés, habilitar els acceleradors de menú, mostrar el títol de la finestra a la barra de títol, eliminar la barra de títol i el marc de la finestra, i enfocar els terminals quan el punter del ratolí es troba a sobre seu. També és possible configurar la sensibilitat de majúscules i minúscules a la cerca, l'ús d'una expressió regular, ressaltar totes les coincidències i la direcció de la cerca (<guilabel
+>Cerca cap enrere</guilabel
+> és el valor predeterminat). La pàgina <guilabel
+>General</guilabel
+> també és el lloc on podreu fer <guibutton
+>Activa tots els missatges «No ho tornis a preguntar»</guibutton
+> si es van desactivar abans. </para>
+    </listitem>
+    <listitem>
+        <para
+>La pàgina <guilabel
+>Perfils</guilabel
+> està pensada per a crear i gestionar els <link linkend="profiles"
+>perfils</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>Emprant la pàgina <guilabel
+>Barra de pestanyes/Divisors</guilabel
+> podreu configurar la visibilitat i la ubicació de la barra de pestanyes, definir el comportament de les pestanyes i ajustar les opcions dels botons a les pestanyes. És possible configurar si voleu <guilabel
+>Mostra el botó «Pestanya nova»</guilabel
+> i <guilabel
+>Amplia l'amplada de la pestanya individual a la finestra completa</guilabel
+> o configurar <guilabel
+>Usa el full d'estil definit per l'usuari</guilabel
+>. La pestanya <guilabel
+>Comportament</guilabel
+> es pot fer servir per a definir el lloc de les pestanyes noves (<guilabel
+>Al final</guilabel
+> o <guilabel
+>Després de la pestanya actual</guilabel
+>) i tancar les pestanyes amb un clic del &BMR;. </para>
+        <para
+>També és possible configurar la visibilitat dels divisors (<guilabel
+>Quan calgui</guilabel
+> (predeterminat), <guilabel
+>Sempre</guilabel
+>, o <guilabel
+>Mai</guilabel
+>) i definir la mida de la nansa per a arrossegar els divisors (<guilabel
+>Petita</guilabel
+> (predeterminat), <guilabel
+>Mitjana</guilabel
+> o <guilabel
+>Gran</guilabel
+>) utilitzant la pestanya <guilabel
+>Divisors</guilabel
+> de la seva pàgina de configuració. </para>
+    </listitem>
+    <listitem>
+        <para
+>La pàgina <guilabel
+>Fitxers temporals</guilabel
+> s'utilitza per a definir la ubicació del <link linkend="scrollback"
+>fitxer de l'historial</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>La pàgina <guilabel
+>Miniatures</guilabel
+> es pot utilitzar per a definir la mida de les miniatures i les opcions d'activació (podreu triar la tecla de control per a l'activació &Maj;, &Alt; i &Ctrl;). </para>
+        <note>
+            <para
+>Per a utilitzar la característica de miniatures que mostra les miniatures de les imatges als emergents quan es mostren en passar per sobre dels elements d'imatge amb el punter del ratolí, haureu d'habilitar el subratllat del fitxer per al vostre perfil actual: <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Edita el perfil actual...</guimenuitem
+><guimenuitem
+>Ratolí</guimenuitem
+><guimenuitem
+>Miscel·lània</guimenuitem
+><guimenuitem
+>Subratlla els fitxers</guimenuitem
+></menuchoice
+>. </para>
+        </note>
+    </listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title
+>El menú Ajuda</title>
+<para
+>El &konsole; té la configuració comuna al &kde; i els elements del menú <guimenu
+>Ajuda</guimenu
+>. Per a obtenir més informació, llegiu la secció sobre <ulink url="help:/fundamentals/menus.html#menus-help"
+>El menú Ajuda</ulink
+> en els fonaments del &kde;. </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+</sect2>
+
+</sect1>
+
+<sect1 id="console-dialogs">
+<title
+>Diàlegs del &konsole;</title>
+
+<sect2 id="configure-tab-settings-dialog">
+<title
+>Configurar el diàleg Opcions de la pestanya</title>
+
+<para
+>El format del nom, el format per al títol de la pestanya remota i el color de la pestanya actual es pot canviar des d'aquest diàleg. El diàleg es pot mostrar a través del menú, la drecera <keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+> o fent doble clic sobre la pestanya a la barra de pestanyes. Aquests canvis seran temporals i poden ser permanents editant el perfil actual. </para>
+
+<para
+>El &konsole; substituirà aquests testimonis a les pestanyes locals: </para>
+<itemizedlist mark="opencircle">
+<listitem
+><para
+>%n : nom del programa</para
+></listitem>
+<listitem
+><para
+>%d : directori actual (curt)</para
+></listitem>
+<listitem
+><para
+>%D : directori actual (llarg)</para
+></listitem>
+<listitem
+><para
+>%h : màquina remota (curt)</para
+></listitem>
+<listitem
+><para
+>%u : nom d'usuari</para
+></listitem>
+<listitem
+><para
+>%B : secretisme de l'indicador de Bourne de l'usuari ($ = usuari normal, # = superusuari)</para
+></listitem>
+<listitem
+><para
+>%w : títol de la finestra establert per l'intèrpret d'ordres</para
+></listitem>
+<listitem
+><para
+>%# : número de la sessió</para
+></listitem>
+</itemizedlist>
+
+<para
+>El &konsole; substituirà aquests testimonis a les pestanyes remotes: <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c : programa actual</para
+></listitem>
+    <listitem
+><para
+>%h : màquina remota (curt)</para
+></listitem>
+    <listitem
+><para
+>%H : màquina remota (llarg)</para
+></listitem>
+    <listitem
+><para
+>%u : nom d'usuari</para
+></listitem>
+    <listitem
+><para
+>%U : nom d'usuari@ (si s'indica)</para
+></listitem>
+    <listitem
+><para
+>%w : títol de la finestra establert per l'intèrpret d'ordres</para
+></listitem>
+    <listitem
+><para
+>%# : número de la sessió</para
+></listitem>
+</itemizedlist>
+
+</para>
+<para
+>Exemples: <itemizedlist mark="opencircle">
+
+<listitem
+><para
+><userinput
+>%d : %n</userinput
+> amb /usr/src com directori actual i executant <application
+>bash</application
+> es mostrarà <guibutton
+>src : bash</guibutton
+>. </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%D : %n</userinput
+> amb /usr/src com directori actual i executant <application
+>top</application
+> es mostrarà <guibutton
+>/usr/src : top</guibutton
+>. </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%w (%#)</userinput
+> amb ~ com directori actual i executant <application
+>vim</application
+> en la primera pestanya es mostrarà <guibutton
+>[NoName] (~) - VIM(1)</guibutton
+>. </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect2>
+
+<sect2 id="copy-input-dialog">
+<title
+>El diàleg Copia l'entrada a</title>
+
+<para
+>El text introduït en una pestanya es pot enviar simultàniament a altres pestanyes. Aquest diàleg us permetrà seleccionar quines pestanyes rebran aquesta entrada. La pestanya actual restarà en gris. </para>
+
+</sect2>
+
+<sect2 id="scrollback-options-dialog">
+<title
+>El diàleg Ajusta l'historial</title>
+
+<para
+>L'opció <link linkend="scrollback"
+>Historial</link
+> per a la grandària d'aquest es pot canviar en aquest diàleg. Qualsevol canvi només serà per a la pestanya actual i no serà desat per al perfil actual. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title
+>Opcions de la línia d'ordres</title>
+
+<para
+>Quan s'inicia el &konsole; des de la línia d'ordres, es poden especificar diverses opcions per a modificar el seu comportament.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--help</option
+></term>
+<listitem
+><para
+><action
+>Llista diverses opcions</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--profile</option
+> <parameter
+>fitxer</parameter
+></term>
+<listitem
+><para
+><action
+>Inicia el &konsole;</action
+> emprant el perfil indicat en comptes del perfil predeterminat.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--layout</option
+> <parameter
+>fitxer</parameter
+></term>
+<listitem
+><para
+><action
+>Inicia el &konsole;</action
+> emprant el <link linkend="save-layout"
+>fitxer de disposició en &JSON; desat</link
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--builtin-profile</option
+></term>
+<listitem
+><para
+>Usa el perfil integrat en lloc del perfil predeterminat actual.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--workdir</option
+> <parameter
+>dir</parameter
+></term>
+<listitem
+><para
+><action
+>Obre amb</action
+> <parameter
+>dir</parameter
+> com a directori de treball inicial.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hold, --noclose</option
+></term>
+<listitem
+><para
+><action
+>No tanca</action
+> la sessió inicial automàticament quan finalitzi. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--new-tab</option
+></term>
+<listitem
+><para
+><action
+>Crea una pestanya nova</action
+> en una finestra existent abans de crear una finestra nova. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--tabs-from-file</option
+> <parameter
+>fitxer</parameter
+></term>
+<listitem
+><para
+><action
+>Crea pestanyes</action
+> com s'especifica al fitxer de configuració de pestanyes indicat. </para>
+<note
+><para
+>El fitxer té una pestanya per a cada línia en el següent format:</para>
+<para
+>Cada línia especifica una pestanya a obrir, utilitzant un màxim de quatre camps per a especificar com serà oberta. Els camps estan delimitats amb <userinput
+>;;</userinput
+> i un nom de camp haurà de tenir un <userinput
+>:</userinput
+> afegit. Les línies en blanc o amb <userinput
+>#</userinput
+> al començament seran ignorades, de manera que podeu utilitzar una línia que comenci amb <userinput
+>#</userinput
+> per a afegir comentaris. </para>
+
+<simplelist>
+<member
+><userinput
+>title:</userinput
+> un nom per a aquesta pestanya, si està en blanc o no es declara s'utilitzarà el valor predeterminat</member>
+<member
+><userinput
+>workdir:</userinput
+> directori de treball, si està en blanc o no es declara s'utilitzarà <filename class="directory"
+> ~</filename
+></member>
+<member
+><userinput
+>profile:</userinput
+> un perfil que utilitzarà el &konsole;, si està en blanc o no es declara s'utilitzarà el valor predeterminat</member>
+<member
+><userinput
+>command:</userinput
+> una ordre a executar</member>
+</simplelist>
+<para
+>Cada línia ha de tenir almenys un camp <userinput
+>command</userinput
+> (ordre) o <userinput
+>profile</userinput
+> (perfil). </para>
+<para
+>Exemple: <userinput
+>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput
+></para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--background-mode</option
+></term>
+<listitem
+><para
+><action
+>Inicia el &konsole;</action
+> en segon pla i el fa venir al davant quan es prem la drecera <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>F12</keycap
+></keycombo
+> (predeterminada). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--separate</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+><action
+>Executa</action
+> la nova instància del &konsole; en un procés separat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-menubar</option
+></term>
+<listitem
+><para
+><action
+>Mostra</action
+> la barra de menús, anul·la el comportament predeterminat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-menubar</option
+></term>
+<listitem
+><para
+><action
+>Oculta</action
+> la barra de menús, anul·la el comportament predeterminat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Mostra</action
+> la barra de tasques, anul·la el comportament predeterminat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Oculta</action
+> la barra de tasques, anul·la el comportament predeterminat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fullscreen</option
+></term>
+<listitem
+><para
+><action
+>Inicia el &konsole; en el mode de pantalla completa</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--notransparency</option
+></term>
+<listitem
+><para
+><action
+>Inhabilita</action
+> els fons transparents, encara que el sistema els permeti. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profiles</option
+></term>
+<listitem
+><para
+><action
+>Llista</action
+> tots els perfils disponibles. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profile-properties</option
+></term>
+<listitem>
+<para
+><action
+>Llista</action
+> totes les propietats possibles amb nom i tipus. Vegeu l'opció <option
+>-p</option
+>. </para>
+<para
+>Per a més informació, visiteu la <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
+>&konsole; API Reference</ulink
+>. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-p</option
+> <parameter
+>property=valor</parameter
+></term>
+<listitem
+><para
+><action
+>Canvia</action
+> el valor d'una propietat del perfil.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>ordre</parameter
+></term>
+<listitem
+><para
+><action
+>Executa</action
+> <parameter
+>ordre</parameter
+> en comptes de l'intèrpret d'ordres normal.</para>
+<note
+><para
+>Aquesta opció detectarà tots els arguments passats al &konsole;, i els executarà com <parameter
+>ordre</parameter
+>. Pel que aquesta opció s'ha d'utilitzar sempre com a l'última opció.</para
+></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>El &konsole; també accepta opcions genèriques de les &Qt; i dels &kf5-full;, vegeu les pàgines man de qt5options i kf5options.</para>
+
+</chapter>
+
+<chapter id="scripting">
+<title
+>Creació de scripts del &konsole;</title>
+
+<para
+>El &konsole; permet nombrosos mètodes que es poden utilitzar amb &DBus;. </para>
+<para
+>Hi ha dues maneres d'utilitzar la interfície de &DBus;: La &IGU; de les &Qt; és <application
+>qdbusviewer</application
+> i la línia d'ordres <application
+>qdbus</application
+>. </para>
+
+<para
+>Exemples: <itemizedlist mark='opencircle'>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> mostrarà tots els serveis disponibles. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole</option
+> mostrarà la interfície de &DBus; per al &konsole;. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+> mostrarà els mètodes per a controlar la finestra 1. </para>
+</listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+> mostrarà els mètodes per a controlar la finestra actual. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+> mostrarà els mètodes per a controlar la sessió 1. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+> mostrarà els mètodes per a controlar la sessió actual. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+> mostrarà els mètodes per a controlar la sessió actual del &konsole;. </para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Si qualsevol de les ordres anteriors surt amb: El servei «org.kde.konsole» no existeix, canvieu <option
+>org.kde.konsole</option
+> a un dels següents: <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (seleccionarà el primer pid) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (això es pot utilitzar des del &konsole; actual) </para
+></listitem>
+<listitem
+><para>
+<option
+>trieu-ne un des de la sortida de «qdbus | grep konsole»</option>
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Per a més informació, visiteu <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>La guia d'aprenentatge de &DBus;</ulink
+>. </para>
+
+</chapter>
+
+<chapter id="key-bindings">
+<title
+>Lligams de tecla amb la terminal</title>
+
+<sect1>
+<title
+>Com utilitzar els lligams de tecla amb el &konsole;</title>
+
+<sect2 id="intro">
+<title
+>Introducció</title>
+<para
+>El &konsole; utilitza fitxers *.keytab per a traduir les combinacions de tecles en caràcters de control i seqüències d'escapament que s'envien a l'intèrpret d'ordres o a programes interactius (generalment programes que utilitzen la memòria intermèdia d'una pantalla alternativa, &pex;, <application
+>vim</application
+>, <application
+>less</application
+>, <application
+>screen</application
+>) executant-se a l'intèrpret d'ordres.</para>
+
+<para
+>Els usuaris poden personalitzar la configuració dels vincles de tecla al &konsole; utilitzant l'Editor per als lligams de tecla. Es pot configurar una combinació de tecles per a enviar un control específic o una seqüència d'escapament al terminal.</para>
+
+<para
+>Podeu obrir l'Editor per als lligams de tecla des de l'entrada del menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Edita el perfil actual...</guimenuitem
+></menuchoice
+>, i anant a la pestanya <guilabel
+>Teclat</guilabel
+>. Allà hi ha els esquemes de lligams de tecla que apareixen de manera predeterminada al &konsole;.</para>
+</sect2>
+
+<sect2 id="table-fields">
+<title
+>Combinacions de tecles i modes</title>
+
+<para
+>Les combinacions de tecles segueixen el patró: <programlisting
+>Tecla (+|-) modes</programlisting>
+</para>
+
+<para
+>per exemple: <programlisting
+>Up+Shift+AppScreen
+Down+Shift-AppScreen
+Space+Ctrl
+</programlisting>
+</para>
+
+<para
+>Els noms de les tecles es defineixen en el fitxer de capçalera qnamespace.h, amb el prefix «Qt::Key_» suprimit, per a una llista dels noms de tecla, consulteu l'<ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum"
+>enumeració de Qt::Key a la documentació de les &Qt;</ulink
+>.</para>
+
+<para
+>Un signe de «+» precedint un nom de mode, voldrà dir que aquest mode està <emphasis
+>establert</emphasis
+>; per a una tecla modificadora, això vol dir que s'ha de prémer, mentre que per a tots els altres modes voldrà dir que aquest mode en particular està en vigor (&ead;, actiu). Per exemple, «+Ctrl» vol dir que la combinació de tecles només funcionarà si es prem la tecla &Ctrl;.</para>
+
+<para
+>Un signe de «-» precedint un nom de mode, voldrà dir que aquest mode es <emphasis
+>reinicia</emphasis
+>; bàsicament, això és tot el contrari de posar «+» abans d'un nom de mode, de manera que per a una tecla modificadora això voldrà dir que no s'ha de prémer la tecla, mentre que per a tots els altres modes voldrà dir que aquest mode en particular està inactiu. Per exemple, «-Ctrl» voldrà dir que la combinació de tecles només funcionarà si <emphasis
+>no</emphasis
+> es prem la tecla &Ctrl;.</para>
+
+<note>
+<para
+>Si el nom d'un mode no està present en una combinació de tecles, s'ignorarà el seu estat.</para>
+</note>
+
+<para
+>Els modes admesos de lligams de tecla es llisten a continuació:</para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Alt, Ctrl, Shift</term>
+<listitem>
+<para
+>Es poden utilitzar un o més d'aquests modes en una combinació de tecles, si s'estableix algun d'ells, la combinació de tecles utilitzarà aquesta tecla modificadora, respectivament; i viceversa si es reinicia</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AnyModifier</term>
+<listitem>
+<para
+>Si aquest mode és estableix, la combinació de tecles utilitzarà qualsevol tecla modificadora (qualsevol de les tres tecles modificadores anteriors); i viceversa si es reinicia</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ansi</term>
+<listitem>
+<para
+>Si aquest mode és estableix, el &konsole; enviarà seqüències d'escapament i de control ANSI</para>
+<para
+>Si es reinicia amb aquest mode, el &konsole; enviarà seqüències d'escapament i de control VT52</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppScreen</term>
+<listitem>
+<para
+>Si aquest mode és estableix, la combinació de tecles només afectarà els programes interactius que utilitzen la memòria intermèdia d'una pantalla alternativa</para>
+<para
+>Si es reinicia amb aquest mode, la combinació de tecles només afectarà la terminal quan s'utilitzi la memòria intermèdia d'una pantalla normal</para>
+
+<note>
+<para
+>El &konsole; utilitza dues memòries intermèdies de pantalla:</para>
+<itemizedlist>
+<listitem>
+<para
+>La memòria intermèdia d'una pantalla normal (predeterminat): permet desplaçar-vos per a veure les línies anteriors de la sortida, aquesta és la memòria intermèdia predeterminada que normalment feu servir per a executar ordres, &etc;</para>
+</listitem>
+<listitem>
+<para
+>La memòria intermèdia d'una pantalla alternativa: la terminal canviarà a aquesta memòria intermèdia quan executeu un programa interactiu (&pex;, <application
+>less</application
+>, <application
+>vim</application
+>, <application
+>screen</application
+>, <application
+>tmux</application
+>, &etc;)</para>
+</listitem>
+</itemizedlist>
+</note>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KeyPad</term>
+<listitem>
+<para
+>Si aquest mode és estableix, la combinació de tecles utilitzarà una tecla en el teclat numèric. Aquest mode és útil per a distingir entre les tecles del teclat i les tecles del teclat numèric. Per exemple, quan Bloq Núm està <emphasis
+>actiu</emphasis
+>, podeu configurar dues combinacions de tecles separades, una amb la tecla «1» del teclat (normalment sota la tecla <keycap
+>F1</keycap
+>) i l'altra amb la tecla «1» del teclat numèric. El mateix concepte s'aplica quan Bloq Núm està <emphasis
+>desactivat</emphasis
+> per a les tecles Fi, Inici, tecles del cursor, &etc; al teclat numèric</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppCursorKeys</term>
+<listitem>
+<para
+>Aquest mode implementa el <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
+>Mode de tecles del cursor (DECCKM)</ulink
+> de VT100. Controla les seqüències d'escapament que envia cada tecla del cursor (<keycap
+>Fletxa amunt</keycap
+>, <keycap
+>Fletxa avall</keycap
+>, <keycap
+>Fletxa dreta</keycap
+>, <keycap
+>Fletxa esquerra</keycap
+>), depenent de si aquest mode està establert o reiniciat</para>
+<para
+>De manera predeterminada, el &konsole; segueix el comportament de XTerm de tractar les tecles <keycap
+>Inici</keycap
+> i <keycap
+>Fi</keycap
+> com a tecles de cursor respecte a DECCKM</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppKeyPad</term>
+<listitem>
+<para
+>Si aquest mode és estableix, la combinació de tecles només funcionarà quan el teclat numèric es trobi en el mode d'aplicació (DECKPAM)</para>
+<para
+>Si aquest mode és reinicia, la combinació de tecles només funcionarà quan el teclat numèric es trobi en el mode numèric (DECKPNM)</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>NewLine</term>
+<listitem>
+<para
+>Si aquest mode és estableix, la tecla <keycap
+>Retorn</keycap
+> del teclat numèric enviarà tant el retorn de carro «\r» com els caràcters de control de línia nova «\n»</para>
+<para
+>Si aquest mode és reinicia, la tecla <keycap
+>Retorn</keycap
+> només enviarà un retorn de carro «\r»</para>
+<para
+>El mateix s'aplica a la tecla <keycap
+>Retorn</keycap
+> del teclat numèric</para>
+<para
+>Aquest mode emula el <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
+>LNM - Mode salt de línia/línia nova</ulink
+></para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Cal tenir en compte que cada combinació de tecles i els modes (estableix/reinicia) haurà de ser única. Per exemple, considereu les dues regles següents:</para>
+
+<itemizedlist>
+<listitem
+><para
+>A+Shift : «A»</para
+></listitem>
+<listitem
+><para
+>a : «a»</para
+></listitem>
+</itemizedlist>
+<para
+>El &konsole; <emphasis
+>no</emphasis
+> acceptarà la regla amb la lletra petita «a», haureu d'afegir un «-Shift» a aquesta regla perquè funcioni.</para>
+</sect2>
+
+<sect2 id="output-field">
+<title
+>El camp de sortida</title>
+
+<para
+>Al camp de sortida hi podeu afegir les seqüències d'escapament o caràcters de control que voleu que el &konsole; enviï al terminal quan es premi la combinació de tecles associada.</para>
+
+<para
+>També podeu utilitzar qualsevol de les paraules clau següents, cadascuna de les quals té un significat especial al &konsole;:</para>
+
+<itemizedlist>
+<listitem
+><para
+>scrollUpLine : desplaça una línia amunt al cau de desplaçament de l'historial de l'intèrpret d'ordres</para
+></listitem>
+<listitem
+><para
+>scrollUpPage : desplaça una pàgina amunt al cau de desplaçament de l'historial de l'intèrpret d'ordres</para
+></listitem>
+<listitem
+><para
+>scrollDownLine : desplaça una línia avall al cau de desplaçament de l'historial de l'intèrpret d'ordres</para
+></listitem>
+<listitem
+><para
+>scrollDownPage : desplaça una pàgina avall al cau de desplaçament de l'historial de l'intèrpret d'ordres</para
+></listitem>
+<listitem
+><para
+>scrollUpToTop : desplaça amunt fins al començament del cau de desplaçament de l'historial de l'intèrpret d'ordres</para
+></listitem>
+<listitem
+><para
+>scrollDownToBottom : desplaça avall fins al final del cau de desplaçament de l'historial de l'intèrpret d'ordres</para
+></listitem>
+</itemizedlist>
+
+<para
+>També podeu utilitzar cadenes amb sintaxi de cadena C; podeu utilitzar les següents seqüències d'escapada:</para>
+
+<itemizedlist>
+<listitem
+><para
+>\E : Escapada</para
+></listitem>
+<listitem
+><para
+>\\ : Barra inversa</para
+></listitem>
+<listitem
+><para
+>\" : Cometes</para
+></listitem>
+<listitem
+><para
+>\t : Tabulació</para
+></listitem>
+<listitem
+><para
+>\r : Retorn de carro</para
+></listitem>
+<listitem
+><para
+>\n : Línia nova</para
+></listitem>
+<listitem
+><para
+>\b : Retrocés</para
+></listitem>
+<listitem>
+<para
+>\xHH : on HH són dos dígits hexadecimals</para>
+<tip>
+<para
+>Això es pot utilitzar per a enviar caràcters de control &ASCII;, &pex;, <quote
+>\x00</quote
+> és el caràcter NUL</para>
+</tip>
+</listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="other-factors">
+<title
+>Altres recursos del sistema</title>
+<para
+>Hi ha altres recursos del sistema que poden afectar els lligams de tecla amb la terminal:</para>
+<itemizedlist>
+<listitem>
+<para
+>Consulteu la base de dades <ulink url="man:terminfo(5)"
+>terminfo</ulink
+> o <ulink url="man:termcap(5)"
+>termcap</ulink
+> per a les seqüències d'escapament i els caràcters de control esperats que se suposa que envia cada combinació de tecles.</para>
+</listitem>
+<listitem>
+<para
+>És probable que el vostre sistema tingui altres bases de dades de teclat que també calgui sincronitzar, (&pex;, <ulink url="man:bash(1)"
+>/etc/inputrc i readline</ulink
+> per a l'intèrpret d'ordres <application
+>BASH</application
+>), ja que afecten les operacions (interaccions) lligades amb les combinacions de tecles.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="further-reading">
+<title
+>Informació relacionada</title>
+<para
+>Per a obtenir més informació sobre les seqüències d'escapament i els caràcters de control, consulteu la documentació següent:</para>
+<itemizedlist>
+<listitem>
+<para
+><ulink url="https://www.vt100.net/docs/vt100-ug/"
+>La guia d'usuari de VT100</ulink
+></para>
+</listitem>
+<listitem>
+<para
+><ulink url="https://vt100.net/docs/vt102-ug/"
+>La guia d'usuari de VT102</ulink
+></para>
+</listitem>
+<listitem>
+<para
+>L'entenedora i indispensable documentació <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html"
+>Seqüències de control de XTerm</ulink
+></para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title
+>Usar els fulls d'estil per a la barra de pestanyes</title>
+<para
+>El full d'estil predeterminat per a la barra de pestanyes estableix l'amplada màxima i mínima de les pestanyes. L'usuari pot crear un fitxer <filename role="extension"
+>.css</filename
+> i fer que el &konsole; l'utilitzi com a full d'estil per a la barra de pestanyes. Al fitxer <filename role="extension"
+>.css</filename
+>, el giny a utilitzar és <userinput
+>QTabBar::tab</userinput
+>. </para>
+<para
+>Per a més informació, considereu llegir la <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
+>pàgina per als fulls d'estil de les &Qt;</ulink
+> </para>
+
+<para
+>Exemples: </para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Canvia el fons de la pestanya seleccionada a gris clar <programlisting
+>QTabBar::tab:selected {
+    background: #999999
+}
+</programlisting>
+</para
+></listitem>
+
+
+<listitem
+><para
+>Canvia el text de la pestanya seleccionada a vermell <programlisting
+>QTabBar::tab:selected {
+    color: red
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Totes les pestanyes seran d'almenys 200 píxels d'amplada <programlisting
+>QTabBar::tab {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Només la pestanya seleccionada serà d'almenys 200 píxels d'amplada <programlisting
+>QTabBar::tab::selected {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Qualsevol d'aquests estils es poden combinar en una sola fila <programlisting
+>QTabBar::tab::selected {
+    background: #999999;
+    color: red;
+    min-width: 200px;
+}
+QTabBar::tab {
+    min-width: 100px
+}
+</programlisting>
+</para
+></listitem>
+
+
+</itemizedlist>
+</para>
+
+</chapter>
+
+<chapter id="faqtips">
+<title
+>Sabíeu que? Qüestions comunes i més</title>
+
+<sect1 id="didyouknow">
+<title
+>Sabíeu que?</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>En prémer &Ctrl; mentre se selecciona text farà que els canvis de línia es converteixin en espais quan l'enganxeu. </para
+></listitem>
+
+<listitem
+><para
+>Prement les tecles <keycombo action="simul"
+>&Ctrl;&Alt;</keycombo
+> mentre se selecciona text se seleccionaran columnes. </para
+></listitem>
+
+<listitem
+><para
+>La combinació <keycombo action="simul"
+>&Ctrl;<mousebutton
+>Roda</mousebutton
+></keycombo
+> ampliarà la mida del text, igual que en el Konqueror i Firefox. </para
+></listitem>
+
+<listitem
+><para
+>Quan un programa avalua qualsevol dels botons del ratolí, prement la tecla &Maj; farà aparèixer el menú emergent. </para
+></listitem>
+
+<listitem
+><para
+>La drecera <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>F10</keycap
+></keycombo
+> activarà el menú. </para
+></listitem>
+
+<listitem
+><para
+>Les tecles <keycombo action="simul"
+>&Maj;<keycap
+>Inser</keycap
+></keycombo
+> l'inseriran en el porta-retalls. </para
+></listitem>
+
+<listitem
+><para
+>En fer doble clic se selecciona una paraula sencera. Si es continua prement el botó del ratolí i movent el ratolí s'estendrà la selecció. </para
+></listitem>
+
+<listitem
+><para
+>En fer triple clic se selecciona una línia sencera Si es continua prement el botó del ratolí i movent el ratolí s'estendrà la selecció. </para
+></listitem>
+
+<listitem
+><para
+>Hi ha una característica oculta per al formatador «%d» en el títol de la pestanya. Podeu indicar al &konsole; que abreugi el nom del directori al seu primer caràcter. Per exemple, «/camí/a/konsole/src» es pot abreujar a «konsole/s». Per a habilitar i controlar aquesta característica oculta, obriu el <filename
+>konsolerc</filename
+> a <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> i afegiu-hi les línies següents:</para>
+
+<para
+><programlisting
+>[ProcessInfo]
+CommonDirNames=nom1,nom2,nom3...
+</programlisting>
+
+<note
+><para
+>Si utilitzeu <application
+>Yakuake</application
+>, només caldrà que editeu el <filename
+>yakuakerc</filename
+> a <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+>.</para
+></note>
+
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="commonissues">
+<title
+>Qüestions comunes</title>
+<itemizedlist>
+
+<listitem>
+<para
+>Alguns tipus de lletra no estan disponibles per a utilitzar-los en el &konsole;, encara que estiguin disponibles en altres aplicacions. Això no vol dir que hi hagi un error al &konsole;. El &konsole; requereix tipus de lletra mono-espaiades per a oferir el millor resultat visual, de manera que sols demana a les &Qt; la llista de tipus de lletra mono-espaiades.</para>
+
+<para
+>A partir de la versió 16.08 (agost de 2016), el &konsole; es pot configurar per a permetre seleccionar qualsevol tipus de lletra amb l'advertiment que la visualització pot no ser correcta.</para>
+</listitem>
+
+<listitem
+><para
+>Des del KDE 4 totes les pestanyes utilitzen el mateix identificador de procés. Això té l'efecte secundari que si el procés d'una pestanya té problemes, totes les altres també en poden tenir. </para>
+<para
+>Això és més notori quan una ordre que es connecta a un dispositiu extern o un sistema (ssh, nfs) té problemes. </para
+></listitem>
+
+<listitem
+><para
+>El &konsole; tracta als arguments després de l'opció <option
+>-e</option
+> com una ordre i els executa directament, en lloc d'analitzar-los i, possiblement, dividir-los en subordres per a la seva execució. Això és diferent de xterm. </para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem
+><para
+><command
+>konsole -e "ordre_1 ; ordre_2"</command
+> no funciona </para
+></listitem>
+
+    <listitem
+><para
+><command
+>konsole -e $SHELL -c "ordre_1 ; ordre_2"</command
+> funciona </para
+></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
+<listitem
+><para
+>El &konsole; no ofereix comoditat per al funcionament d'accedir a l'intèrpret d'ordres, ja que als desenvolupadors no els agrada la idea de córrer l'accés a l'intèrpret d'ordres en un emulador de terminal. </para>
+<para
+>Per descomptat, els usuaris poden executar l'accés a l'intèrpret d'ordres al &konsole; si realment ho necessiten. Editeu el perfil d'usuari i modifiqueu la seva ordre a la forma d'iniciar un accés a l'intèrpret d'ordres de manera explícita, com «<command
+>bash -l</command
+>» i «<command
+>zsh -l</command
+>». </para>
+</listitem>
+
+<listitem
+><para
+>L'opció <option
+>--new-tab</option
+> de vegades es comporta de forma estranya. Pot crear una finestra nova, o una pestanya nova en una altra finestra existent del &konsole;, en lloc de la finestra del &konsole; actual. </para>
+<para
+>Aquest comportament és estrany, però no és necessàriament erroni. Aquesta opció intenta tornar a utilitzar les finestres existents del &konsole;, però no totes les finestres del &konsole; són reutilitzables. Totes les finestres del &konsole; obertes a través del &krunner; són reutilitzables, mentre que la majoria de les finestres del &konsole; obertes des de la línia d'ordres no ho són. </para>
+</listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title
+>Crèdits i llicència</title>
+
+<para
+>L'aplicació &konsole; actualment és mantinguda per en &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Entre els anteriors mantenidors del &konsole; s'inclouen: &Robert.Knight; &Robert.Knight.mail; i &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+
+<para
+>L'aplicació &konsole; Copyright &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
+
+<para
+>Aquest document va ser escrit originalment per en &Jonathan.Singer; &Jonathan.Singer.mail;</para>
+
+<para
+>Aquest document ha estat actualitzat per al &kde; 4.x per en &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Aquest document ha estat actualitzat per al &kde; 3.4 per en &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Convertit originalment a DocBook <acronym
+>SGML</acronym
+> per en &Mike.McBride; i &Lauri.Watts;</para>
+
+<para
+>Traductor/Revisor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="links">
+<title
+>Enllaços</title>
+
+<para
+>Per a més informació, visiteu aquests llocs web:</para>
+<itemizedlist>
+<listitem
+><para
+><ulink url="https://userbase.kde.org/Konsole/ca"
+>La pàgina web del &konsole; al wiki &kde; UserBase</ulink
+>&nbsp;</para
+></listitem>
+<listitem
+><para
+><ulink url="https://konsole.kde.org/"
+>Pàgina web del &konsole;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel"
+>Llista de correu del &konsole;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://freebsd.kde.org/"
+>El &kde; a FreeBSD</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://solaris.kde.org/"
+>El &kde; a &Solaris;</ulink
+></para
+></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+

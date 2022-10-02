@@ -1,0 +1,3621 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+ "dtd/kdedbx45.dtd" [
+<!ENTITY % Ukrainian "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+<!ENTITY Ahmad.Samir '<personname
+><firstname
+>Ahmad</firstname
+><surname
+>Samir</surname
+></personname
+>'>
+<!ENTITY Ahmad.Samir.mail '<email
+>a.samirh78@gmail.com</email
+>'>
+]>
+
+<book id="konsole" lang="&language;">
+
+<bookinfo>
+<title
+>Підручник з &konsole;</title>
+<authorgroup>
+<author
+>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author
+>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
+
+<othercredit role="developer"
+>&Robert.Knight; &Robert.Knight.mail; </othercredit>
+
+<othercredit role="developer"
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail; </othercredit>
+
+<othercredit role="developer"
+>&Waldo.Bastian; &Waldo.Bastian.mail; </othercredit>
+
+<othercredit role="reviewer"
+>&Mike.McBride; &Mike.McBride.mail; </othercredit>
+
+<othercredit role="translator"
+><firstname
+>Юрій</firstname
+><surname
+>Чорноіван</surname
+><affiliation
+><address
+><email
+>yurchor@ukr.net</email
+></address
+></affiliation
+><contrib
+>Переклад українською</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>&Jonathan.Singer;</holder>
+</copyright>
+<copyright>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year
+><year
+>2018</year
+><year
+>2020</year
+><year
+>2021</year>
+<holder
+>&Kurt.Hindenburg;</holder>
+</copyright>
+
+<copyright>
+    <year
+>2018</year>
+<holder
+>&Ahmad.Samir;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>28 жовтня 2021 року</date>
+<releaseinfo
+>Програми 21.12</releaseinfo>
+
+<abstract
+><para
+>&konsole; — це імітатор термінала для &kde;.</para
+></abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>konsole</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>команда</keyword>
+<keyword
+>рядок</keyword>
+<keyword
+>термінал</keyword>
+<keyword
+>cli</keyword>
+</keywordset>
+
+</bookinfo>
+<chapter id="introduction">
+<title
+>Вступ</title>
+
+<sect1 id="terminal">
+<title
+>Що таке термінал?</title>
+
+<para
+>&konsole; — це графічний емулятор термінала, який часто називають терміналом або оболонкою. Ця програма імітує інтерфейс командного рядка у вікні, що працює лише у текстовому режимі. </para>
+
+<para
+>Типово, &konsole; запускає командну оболонку, програму, за допомогою якої система може виконувати введені вами команди. Назва оболонки, яку запустить &konsole;, залежить від вашої операційної системи та параметрів вашого облікового запису. Зверніться до документації з вашої операційної системи, щоб дізнатися більше про оболонку та способи її використання. </para>
+</sect1>
+
+<sect1 id="scrollback">
+<title
+>Буфер гортання</title>
+
+<para
+>У &konsole; термін «буфер гортання» використовується на позначення збережених програмою даних, які раніше було виведено на екран. Типово, буфер гортання увімкнено, у ньому зберігається 1000 рядків виведених даних, окрім тих рядків, які показано на екрані. </para>
+<para
+>Після того, як текстові рядки зникнуть за верхнім краєм екрана, ви можете їх переглянути пересування вгору перегляду за допомогою панелі гортання, за допомогою коліщатка миші або за допомогою клавіш <keycombo action="simul"
+>&Shift;<keycap
+>Page Up</keycap
+></keycombo
+> (щоб повернутися назад), <keycombo action="simul"
+>&Shift;<keycap
+>Page Down</keycap
+></keycombo
+> (щоб перейти вперед), <keycombo action="simul"
+>&Shift;<keycap
+>↑</keycap
+></keycombo
+> (щоб перейти на рядок вгору) і <keycombo action="simul"
+>&Shift;<keycap
+>↓</keycap
+></keycombo
+> (щоб перейти на рядок вниз). </para>
+<para
+>Розмір гортання за допомогою комбінацій клавіш <keycombo action="simul"
+>&Shift;<keycap
+>Page Up/Down</keycap
+></keycombo
+> можна перемикати між половиною і цілою сторінкою за допомогою вкладки <guilabel
+>Гортання</guilabel
+> вікна налаштування профілю (скористайтеся пунктом меню <menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Редагувати поточний профіль...</guimenuitem
+></menuchoice
+>, щоб відкрити це вікно). </para>
+
+</sect1>
+
+<sect1 id="profiles">
+<title
+>Профілі</title>
+<para
+>Профілі забезпечують користувачеві простий і швидкий запуск звичайних команд. Серед прикладів використання профілів: <itemizedlist>
+<listitem
+><para
+>ssh-доступ до іншого комп’ютера</para
+></listitem>
+<listitem
+><para
+>запуск сеансу irc</para
+></listitem>
+<listitem
+><para
+>використання tail для спостереження за файлом</para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para
+>Усі нові і змінені профілі зберігаються у локальній домашній теці користувача, у підтеці <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+>.</para>
+
+<para
+>Порядок дій зі створення нового профілю: <orderedlist>
+<listitem
+><para
+>Виберіть пункт меню <menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Керування профілями...</guimenuitem
+> </menuchoice
+></para
+></listitem>
+
+<listitem
+><para
+>Перейдіть на сторінку <guibutton
+>Профілі</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Натисніть кнопку <guibutton
+>Створити профіль...</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>У першому полі вкажіть назву. Цю назву буде показано у меню, вона буде типовою міткою замість <guilabel
+>Оболонки</guilabel
+>, коли ви запустите сеанс цього типу. </para
+></listitem>
+
+<listitem
+><para
+>Введіть команду так, як ви це робите у звичайній оболонці. У першому зі згаданих вище прикладів ви можете написати <userinput
+><command
+>ssh</command
+> <replaceable
+>призначення</replaceable
+></userinput
+>.</para
+></listitem>
+
+<listitem
+><para
+>На інших вкладках цього діалогового вікна ви можете налаштувати вигляд сеансу. Там ви можете змінити шрифт, схему кольорів, тип змінної $<envar
+>TERM</envar
+>, а також багато інших параметрів кожного з сеансів.</para
+></listitem>
+
+<listitem
+><para
+>Натисніть кнопку <guibutton
+>Гаразд</guibutton
+>. Тепер доступ до нового сеансу можна отримати за допомогою діалогового вікна <guilabel
+>Керування профілями...</guilabel
+>. </para
+></listitem>
+
+</orderedlist>
+</para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title
+>Кнопки мишки</title>
+
+<para
+>У цьому розділі описано використання кнопок у типовому порядку кнопок миші для користувача, який надає перевагу користуванню мишею правою рукою. Якщо ви шульга, там, де у тексті написано про праву кнопку, вам слід скористатися лівою. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><mousebutton
+>Ліва</mousebutton
+></term>
+
+<listitem
+><para
+>Всі сигнали про клацання лівою кнопкою миші буде надіслано обробнику таких сигналів програми, яку запущено у &konsole;. Якщо програма може реагувати на клацання мишею, &konsole; повідомить вам про це показом курсора у вигляді стрілки. Якщо це не так, ви побачите звичайний прямокутний вертикальний курсор.</para>
+
+<para
+>Утримування натиснутою лівої кнопки миші з одночасним перетягуванням вказівника миші у вікні програми, яка не може працювати з мишею, позначає область тексту. У процесі перетягування позначений текст виділятиметься інвертованим кольором відносно навколишнього тексту. Щоб скопіювати позначений текст до буфера для подальшого використання у &konsole; або іншій програмі, скористайтеся пунктом <guimenuitem
+>Копіювати</guimenuitem
+> з меню <guimenu
+>Зміни</guimenu
+>. Утримуйте натиснутою клавішу &Ctrl;, а потім перетягніть позначений фрагмент тексту у бажане місце.</para>
+
+<para
+>Зазвичай, у кінці кожного з обраних рядків буде додано символ переходу до наступного рядка. Такі правила дуже добре працюють для вирізання і вставлення коду програм або виводу якоїсь команди. У звичайному тексті місця розбиття рядків часто не є важливими. Іноді бажано, щоб текст сприймався як неперервний потік символів, який буде автоматично переформатовано під час вставлення до іншої програми. Щоб здійснити вибір у режимі текстового потоку, утримуйте натиснутою клавішу &Ctrl; під час вибору.</para>
+
+<para
+>Натискання клавіш &Ctrl; і &Alt; одночасно з клацанням лівою кнопкою миші призведе до вибору стовпчиків тексту. </para>
+
+<para
+>Подвійне клацання лівою кнопкою миші призведе до вибору слова, потрійне — вибору всього рядка.</para>
+
+<para
+>Якщо під час вибору область досягне верхнього або нижнього краю вікна програми, &konsole; прокрути область перегляду вгору або вниз, аж до кінця тексту у буфері гортання. Прокручування буде припинено після завершення рухів мишею.</para>
+
+<para
+>Після відпускання кнопки миші &konsole; зберігає текст у буфері, позначаючи виділену область інвертованим кольором. Виділена область повернеться до звичайного, неінвертованого, вигляду одразу після зміни вмісту буфера, зміни тексту у виділеній області або клацання лівою кнопкою миші.</para>
+
+<para
+>Щоб позначати текст у програмі, яка може працювати з мишею (наприклад, Midnight Commander), під час клацання кнопкою миші слід утримувати натисненою клавішу &Shift;.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Середня</mousebutton
+></term>
+
+<listitem
+><para
+>Натискання середньої кнопки миші вставляє текст, що зберігається у буфері. Утримування натиснутою клавіші &Ctrl; під час натискання середньої кнопки миші вставляє текст з додаванням наприкінці символу нового рядка. Зручно для пришвидшення виконання вставленої команди, але під час використання цього прийому слід зберігати обережність. </para>
+
+<note
+><para
+>Якщо у вашого комп’ютера миша лише з двома кнопками, ви можете імітувати натискання середньої кнопки миші одночасним натисканням лівої і правої кнопок миші.</para
+></note>
+
+<para
+>Якщо замість середньої кнопки на вашій миші встановлено <mousebutton
+>коліщатко</mousebutton
+>, його прокручування у програмі, яка не може працювати з мишею, гортатиме область перегляду &konsole;.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Права</mousebutton
+></term>
+<listitem>
+<para
+>Вказані нижче пункти буде показано у меню, яке можна відкрити клацанням правою кнопкою миші:</para>
+<itemizedlist>
+<listitem
+><para
+><guimenuitem
+>Копіювати</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Вставити</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>Якщо позначено фрагмент тексту, буде показано підменю <guisubmenu
+>Шукати</guisubmenu
+> зі списком вибраних вебскорочень та пунктом налаштовування вебскорочень.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Відкрити менеджер файлів</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Встановити кодування</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Спорожнити буфер гортання</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Виправити гортання…</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Показати смужку меню</guimenuitem
+>, лише якщо смужку меню приховано.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Перемкнути профіль</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Редагувати поточний профіль…</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Закрити вкладку</guimenuitem
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>У програмі, що може працювати з мишею, натискання клавіші &Shift; разом з одночасним натисканням правою кнопки миші викличе контекстне меню. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="drag-and-drop">
+<title
+>Перетягування зі скиданням</title>
+<para
+>Якщо ви перетягнете піктограму файла, теки або позначку адреси до вікна &konsole;, програма покаже меню з такими пунктами дій: </para>
+<screenshot>
+<screeninfo
+>Контекстне меню перетягування зі скиданням</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Контекстне меню перетягування зі скиданням</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Shift;</shortcut
+><guimenuitem
+>Пересунути сюди</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Пересунути перетягнутий об’єкт до поточної теки. Цей пункт буде показано у контекстному меню, лише якщо у вас є права доступу на вилучення скинутого файла або теки. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Ctrl;</shortcut
+><guimenuitem
+>Копіювати сюди</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Копіювати перетягнутий об’єкт до поточної теки.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;</keycombo
+></shortcut
+><guimenuitem
+>Створити посилання</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Вставити символічне посилання на скинутий об’єкт.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Вставити адресу</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Вставити до командного рядка у позицію курсора повний шлях до скинутого об’єкта.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Змінити каталог</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Якщо буде скинуто теку, у контекстному меню буде показано цей пункт. За допомогою цього пункту ви можете змінити робочий каталог у сеансі &konsole;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Esc;</shortcut
+><guimenuitem
+>Скасувати</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Перервати дію з перетягування зі скиданням.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Якщо ви натиснете клавіатурні скорочення пунктів дій до відпускання лівої кнопки миші під час перетягування зі скиданням, контекстне меню показано не буде, — відповідну дію буде негайно виконано. </para>
+
+<para
+>Якщо ви хочете використовувати клавішу &Ctrl; для перетягування даних зі скиданням або вимкнути контекстне меню для типового вставляння адреси як тексту, позначте відповідні пункти на вкладці <guilabel
+>Миша</guilabel
+> діалогового вікна параметрів профілю. </para>
+
+</sect1>
+
+<sect1 id="semantic-shell-integration">
+<title
+>Інтеграція семантичної оболонки</title>
+
+<para
+>Програма-оболонка, яку запущено у Konsole може видавати керівні послідовності, які ділять показаний текст на три типи: запит оболонки, введені користувачем дані і дані, які виведено командою. Використання цієї семантичної інформації надає змогу реалізувати різноманітні удосконалення у Konsole. <itemizedlist>
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgUp</keycap
+></keycombo
+> і <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgDown</keycap
+></keycombo
+> гортають вгору або вниз до попереднього або наступного запиту щодо команди.</para
+></listitem>
+<listitem
+><para
+>Візуальні підказки: над кожним запитом буде показано лінію, кольори запиту будуть менш інтенсивними, а кольори виведених даних — більш. Для цього параметра можна визначити значення «ніколи не показувати», «завжди показувати» і «показувати лише підказки для адрес». </para
+></listitem>
+<listitem
+><para
+>Пунктами контекстного меню <guimenuitem
+>Копіювати введене користувачем</guimenuitem
+>, <guimenuitem
+>Копіювати виведення команди</guimenuitem
+> та <guimenuitem
+>Копіювати без рядка запиту</guimenuitem
+> можна скористатися для фільтрування позначеного при копіюванні до буфера обміну даними. </para
+></listitem>
+<listitem
+><para
+>Якщо нічого не позначено, дія з копіювання до буфера обміну даними копіюватиме поточний рядок введених даних, якщо він не є порожнім, або останні виведені дані, якщо нічого не було введено. </para
+></listitem>
+<listitem
+><para
+>Натискання клавіш «стрілка вгору» і «стрілка вниз» при редагуванні довгих вхідних даних переводитиме курсор на рядок вище або нижче шляхом надсилання відповідної кількості подій натискання клавіш зі стрілкою ліворуч або праворуч до командної оболонки. Таку поведінку можна налаштувати у параметрах профілю.</para
+></listitem>
+<listitem
+><para
+>Клацання кнопкою миші, коли вказівник перебуває у рядку введення тексту, призведе до пересування курсора у позицію клацання. Цю поведінку можна налаштувати у параметрах профілю.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Семантичну інтеграцію до оболонки слід окремо налаштовувати в оболонці. У bash натискання комбінації клавіш <keycombo
+>&Ctrl;&Alt;<keycap
+>]</keycap
+></keycombo
+> вставить потрібні команди. Щоб дізнатися більше про те, як налаштувати fish, zsh, python тощо, зверніться до документації з відповідних програм. </para>
+
+</sect1>
+
+</chapter>
+
+<chapter id="commandreference">
+<title
+>Довідка з команд</title>
+
+<sect1 id="menubar">
+<title
+>Смужка меню</title>
+
+<para
+>Панель меню знаходиться вгорі вікна &konsole;. Якщо панель меню сховано, <guimenuitem
+>Показати смужку меню</guimenuitem
+> можна наведенням вказівника миші на вікно програми з наступним клацанням <mousebutton
+>правою</mousebutton
+> кнопкою миші і вибором відповідного пункту контекстного меню (якщо у вікні не запущено у повноекранному режимі програм на зразок vi, minicom тощо). Поряд з кожним пунктом меню ви побачите клавіатурне скорочення, що відповідає цьому пункту. </para>
+<para
+>Крім того, ви можете скористатися натисканням комбінації клавіш <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+>, щоб наказати програмі показати або приховати смужку меню. </para>
+<sect2 id="file-menu">
+<title
+>Меню «Файл»</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Файл</guimenu
+><guimenuitem
+>Нове вікно</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Відкриває нове окреме вікно &konsole; з типовим профілем</action>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Файл</guimenu
+><guimenuitem
+>Нова вкладка</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Відкриває нову вкладку з типовим профілем</action>
+<note
+><para
+>Першим профілем у підменю завжди буде «Типовий», тобто вбудований профіль. Усі інші профілі стоятимуть у списку нижче, упорядковані за абеткою. Вказаний користувачем типовий профіль буде позначено напівжирним шрифтом. </para
+></note>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Клонувати вкладку</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Спробувати створити клон поточної вкладки у новій вкладці</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Зберегти виведене як…</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Зберігає поточний вивід до текстового файла або файла HTML.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Надрукувати зображення з екрана...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Надрукувати поточне зображення з вікна програми.</action
+> Типово, виведені дані буде масштабовано відповідно до розмірів аркуша і надруковано чорним кольором без тла. Змінити ці параметри друку можна за допомогою вкладки <guilabel
+>Параметри виведення</guilabel
+> діалогового вікна налаштовування друку.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Відкрити менеджер файлів</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Відкриває програму для роботи з файлами у &kde; у поточному каталозі</action
+>. Типово, цією програмою буде <ulink url="help:/dolphin/index.html"
+>&dolphin;</ulink
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Закрити сеанс</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Завершує поточний сеанс</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Файл</guimenu
+><guimenuitem
+>Закрити вікно</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Завершує роботу &konsole;</action
+></para>
+<note
+><para
+>&konsole; відкриє діалогове вікно підтвердження виходу, якщо відкрито декілька сеансів або якщо певні програми працюють у якомусь із сеансів. Показ таких вікон можна вимкнути позначенням пункту <guibutton
+>Більше не питати</guibutton
+>. </para>
+</note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Меню «Зміни»</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Копіювати</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Копіює виділений текст до буфера</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>V</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Зміни</guimenu
+><guimenuitem
+>Вставити</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вставляє текст з буфера за поточним розташуванням курсора</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Позначити все</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Позначає весь текст</action
+> у поточному вікні </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Зміни</guimenu
+><guisubmenu
+>Копіювати введене до...</guisubmenu
+><guimenuitem
+>Всіх вкладок у поточному вікні</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Надає змогу виводити інформацію з поточного сеансу до всіх сеансів у поточному вікні</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Зміни</guimenu
+><guisubmenu
+>Копіювати введене до...</guisubmenu
+><guimenuitem
+>Обрати вкладки...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Надає змогу виводити інформацію з поточного сеансу до сеансів, вказаних користувачем</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Зміни</guimenu
+><guisubmenu
+>Копіювати введене до...</guisubmenu
+><guimenuitem
+>Нікуди</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Зупинити надсилання вхідних даних з поточного сеансу до будь-яких інших</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Надіслати сигнал</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Надіслати процесу командної оболонки або іншому процесу, запущеному на початку нового сеансу, певний сигнал</action
+>.</para
+><para
+>У поточній версії передбачено такі сигнали:</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>щоб зупинити процес</entry>
+</row>
+<row>
+<entry
+><errorcode
+>CONT</errorcode
+></entry>
+<entry
+>продовжити виконання, якщо зупинено</entry>
+</row>
+<row>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>на керованому терміналі виявлено помилку або передчасне завершення керованого процесу</entry>
+</row>
+<row>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>перервати з клавіатури</entry>
+</row>
+<row>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>сигнал переривання роботи</entry>
+</row>
+<row>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>сигнал аварійного припинення роботи</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>сигнал користувача 1</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>сигнал користувача 2</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para
+>Подальшу інформацію можна отримати зі сторінок підручника щодо системних команд. Щоб ознайомитися з ним, віддайте команду <userinput
+><command
+>man</command
+> <option
+>7 signal</option
+></userinput
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Зміни</guimenu
+><guimenuitem
+>Налаштувати параметри вкладки...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває діалогове вікно, яке надасть вам змогу змінити формат назви, заголовок вкладки віддаленого з'єднання та колір поточної поточної вкладки</action
+> (<link linkend="configure-tab-settings-dialog"
+>докладніше</link
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Зміни</guimenu
+><guimenuitem
+>Вивантаження ZModem...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває діалогове вікно вибору файла для вивантаження, якщо встановлено відповідне програмне забезпечення</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Пошук...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває панель пошуку внизу вікна &konsole; </action
+></para>
+<para
+>За його допомогою можна виконувати пошук з врахуванням регістру, вперед чи назад, за формальним виразом.</para>
+</listitem>
+</varlistentry>
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch
+-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Гортання</guimenu
+><guimenuitem
+>Знайти далі</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Перейти до наступного результату пошуку</action
+>. Якщо рядок введення ключа пошуку перебуває у фокусі, ви можете також скористатися клавіатурним скороченням &Enter;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Shift;<keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Гортання</guimenu
+> <guimenuitem
+>Знайти попереднє</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Перейти до попереднього результату пошуку</action
+>. Якщо рядок введення ключа пошуку перебуває у фокусі, ви можете також скористатися клавіатурним скороченням <keycombo action="simul"
+>&Shift;&Enter;</keycombo
+>.</para
+></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Меню «Перегляд»</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guisubmenu
+>Розділений перегляд</guisubmenu
+> <guimenuitem
+>Розділити перегляд: ліворуч/праворуч</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Ділить всі вкладки на ліву і праву частини</action>
+</para
+><para
+>Всю інформацію, виведену у одній частині, буде здубльовано у іншій. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Розділений перегляд</guisubmenu
+> <guimenuitem
+>Розділити перегляд: вгорі/внизу</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Розділяє всі вкладки на верхню і нижню частини</action>
+</para
+><para
+>Всю інформацію, виведену у одній частині, буде здубльовано у іншій. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Розділений перегляд</guisubmenu
+> <guimenuitem
+>Розгорнути перегляд</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Робить поточну область перегляду більшою</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Розділений перегляд</guisubmenu
+> <guimenuitem
+>Згорнути перегляд</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Робить поточну область перегляду меншою</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Розділений перегляд</guisubmenu
+> <guimenuitem
+>Перемкнути максимізацію поточної панелі</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Перемикає поточну панель перегляду між поточним розміром та максимізованим</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>\</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Розділений перегляд</guisubmenu
+> <guimenuitem
+>Однаковий розмір усіх панелей</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Встановити однаковий розмір для усіх панелей перегляду</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Відокремити поточну вкладку</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Відкриває поточну вкладку у окремому вікні</action>
+</para
+><para
+>Завершення роботи у попередньому вікні &konsole; не вплине на нове створене вікно. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Відокремити поточну панель</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Відкриває поточну розділену панель у окремому вікні</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry id="save-layout">
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Зберегти компонування вкладок до файла</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Надає вам змогу зберегти компонування вкладок поточної панелі перегляду до спеціалізовано файла компонувань &konsole;, який згодом можна завантажити для відновлення одного з ваших улюблених компонувань.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Завантажити компонування вкладок з файла</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Надає вам змогу завантажити одне з ваших улюблених компонувань панелі перегляду з файла компонування, який раніше було збережено за допомогою пункту меню <menuchoice
+><guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Зберегти компонування вкладок до файла</guimenuitem
+></menuchoice
+>.</action
+> Типові компонування (2x2, 2x1 і 1x2) можна завантажити за допомогою панелі інструментів. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guisubmenu
+>Розділений перегляд</guisubmenu
+> <guimenuitem
+>Розгорнути перегляд</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вмикає або вимикає режим спостереження за відсутністю активності у поточній вкладці</action>
+</para
+><para
+>Типово, після 10 секунд відсутності активності на вкладці сеансу з’являється піктограма інформації. Тип сповіщено можна змінити за допомогою пункту меню <menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Налаштування сповіщень</guimenuitem
+> <guimenuitem
+>Тиша у сеансі, за яким ведеться спостереження</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Спостерігати за активністю</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вмикає або вимикає спостереження за діяльністю у поточній вкладці</action>
+</para
+><para
+>У результаті будь-якої діяльності на вкладці сеансу з’явиться піктограма сповіщення. Тип сповіщено можна змінити за допомогою пункту меню <menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Налаштування сповіщень</guimenuitem
+> <guimenuitem
+>Діяльність у сеансі, за яким ведеться спостереження</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Слідкувати за завершенням процесу</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вмикає або вимикає спостереження за завершення процесу у поточній вкладці</action
+>. </para
+><para
+>Якщо позначено, коли поточний процес завершить роботу, &konsole; покаже сповіщення <guilabel
+>Процес «<replaceable
+>назва процесу</replaceable
+>» завершив роботу у сеансі «<replaceable
+>назва сеансу</replaceable
+>»</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Лише читання</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вмикає або вимикає режим «лише читання» для сеансу. У режимі «лише читання» вхідні дані не приймаються, а перетягування зі скиданням вимкнено. </action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Збільшити шрифт</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Збільшує розмір шрифту тексту</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>0</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Відновити розмір шрифту</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відновлює типовий для профілю розмір шрифту тексту</action
+></para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Зменшити шрифт</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Зменшує розмір шрифту тексту</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Встановити кодування</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Встановлює таблицю кодування символів</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Спорожнити буфер гортання</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вилучає весь текст з буфера гортання</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>K</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Спорожнити буфер гортання і відновити початковий стан</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вилучає весь текст, збережений на поточній вкладці та дані гортання, і відновлює початковий стан термінала</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F11</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Повноекранний режим</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вмикає або вимикає режим, коли вікно &konsole; заповнює весь екран</action
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Меню «Закладки»</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Закладки</guimenu
+> <guimenuitem
+>Додати закладку</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Додає до закладок поточну адресу</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Закладки</guimenu
+><guimenuitem
+>Додати закладки як теку...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Додає всі вкладки до теки закладок</action>
+</para
+><para
+>Відкриває діалогове вікно для введення назви теки закладок. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Закладки</guimenu
+><guimenuitem
+>Нова тека закладок...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Додає нову теку до списку закладок</action>
+</para
+><para
+>Відкриває діалогове вікно для введення назви теки закладок. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Закладки</guimenu
+><guimenuitem
+>Редагувати закладки</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває редактор закладок</action
+></para>
+<note
+><para
+>Щоб ви могли скористатися цим пунктом меню, слід встановити програму keditbookmarks.</para>
+<para
+>Щоб вручну додати адреси URL, ви можете скористатися редактором закладок. Поточна версія &konsole; підтримує такі адреси: <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://користувач@вузол:порт</para
+></listitem>
+<listitem
+><para
+>telnet://користувач@вузол:порт</para
+></listitem>
+</itemizedlist>
+</para
+></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="plugins-menu">
+<title
+>Меню «Додатки»</title>
+
+<para
+>Буде показано список усіх встановлених додатків або повідомлення «Немає доступних додатків» </para>
+
+</sect2>
+
+
+<sect2 id="settings-menu">
+<title
+>Меню «Параметри»</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Редагувати поточний профіль...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває діалогове вікно налаштування поточного профілю</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Перемкнути профіль</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Перемкнути поточний профіль на профіль зі списку</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Керування профілями...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває редактор для керування профілями</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Схема кольорів вікна</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Змінити в інтерфейсі користувача &konsole; схему кольорів на вказану</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Параметри</guimenu
+><guimenuitem
+>Показувати смужку меню</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вмикає або вимикає видимість панелі меню</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Показані панелі</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Уможливлює перемикання видимості панелей інструментів &konsole;</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Показати смужку стану</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вмикає або вимикає видимість смужки стану</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Налаштувати мову...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває вікно для вибору перекладу інтерфейсу &konsole;.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Налаштувати клавіатурні скорочення...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкрити редактор клавіатурних скорочень.</action
+> Докладніший опис налаштовування скорочень можна знайти у <ulink url="help:/fundamentals/shortcuts.html"
+>підручнику з основ роботи у &kde;</ulink
+>.</para>
+
+<para
+>Крім того, у &konsole; передбачено декілька спеціальних комбінацій клавіш, які не мають відповідного пункту меню:</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Комбінація клавіш</entry>
+<entry
+>Опис</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>→</keysym
+></keycombo
+></entry>
+<entry
+>Наступна вкладка</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>←</keysym
+></keycombo
+></entry>
+<entry
+>Попередня вкладка</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>←</keysym
+></keycombo
+></entry>
+<entry
+>Пересунути вкладку ліворуч</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>→</keysym
+></keycombo
+></entry>
+<entry
+>Пересунути вкладку праворуч</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>Ins</keysym
+></keycombo
+></entry>
+<entry
+>Вставити позначене</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Налаштувати пенали...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває <ulink url="help:/fundamentals/config.html#toolbars-items"
+>вікно налаштовування панелей інструментів</ulink
+></action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Налаштувати сповіщення...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває редактор сповіщень</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Налаштувати &konsole;...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває редактор параметрів &konsole;</action
+></para>
+<para
+>За допомогою цього діалогового вікна можна керувати виглядом і поведінкою вікна &konsole;. </para>
+<itemizedlist>
+    <listitem>
+        <para
+>За допомогою сторінки <guilabel
+>Загальне</guilabel
+> можна налаштувати видимість панелі меню, запам'ятовування розміру вікна &konsole;, роботу усіх вікон &konsole; у одному процесі, увімкнути клавіатурні скорочення у меню, показ заголовка вікна на смужці заголовка, вилучення смужки заголовка вікна та рамки, а також фокусування терміналів при наведенні на них вказівника миші. Також можна налаштувати чутливість пошуку до регістру символів, використання формальних виразів, підсвічування усіх відповідників та напрям пошуку (типовим є <guilabel
+>Пошук назад</guilabel
+>). Крім того, сторінка <guilabel
+>Загальне</guilabel
+> є місцем, де ви можете <guibutton
+>Увімкнути усі повідомлення «Більше не питати»</guibutton
+>, якщо їх було раніше вимкнено. </para>
+    </listitem>
+    <listitem>
+        <para
+>Сторінку <guilabel
+>Профілі</guilabel
+> призначено для налаштовування створення та обробки <link linkend="profiles"
+>профілі</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>За допомогою сторінки <guilabel
+>Вкладки/Поділ на панелі</guilabel
+> ви можете налаштувати видимість та розташування панелі вкладки, визначити поведінку вкладок і скоригувати параметри кнопок. Можна налаштувати, чи слід програмі <guilabel
+>Показувати кнопку «Нова вкладка»</guilabel
+> і <guilabel
+>Розгортання окремих вкладок на усю ширину вікна</guilabel
+> або налаштувати, чи слід <guilabel
+>Використовувати таблицю стилів користувача</guilabel
+>. За допомогою вкладки <guilabel
+>Поведінка</guilabel
+> можна визначити розташування нових вкладок (<guilabel
+>У кінці</guilabel
+> або <guilabel
+>Після поточної вкладки</guilabel
+>) і закриття вкладок за допомогою клацання середньою кнопкою миші. </para>
+        <para
+>Також можна налаштувати видимість заголовків поділених панелей (<guilabel
+>Якщо потрібно</guilabel
+> (типовий варіант), <guilabel
+>Завжди</guilabel
+> або <guilabel
+>Ніколи</guilabel
+>) та визначити розмір засобу перетягування межі між поділеними панелями (<guilabel
+>Малий</guilabel
+> (типовий варіант), <guilabel
+>Середній</guilabel
+> або <guilabel
+>Великий</guilabel
+>) за допомогою вкладки <guilabel
+>Поділені панелі</guilabel
+> цієї сторінки налаштувань. </para>
+    </listitem>
+    <listitem>
+        <para
+>За допомогою сторінки <guilabel
+>Тимчасові файли</guilabel
+> можна визначити розташування файла <link linkend="scrollback"
+>буфера гортання</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>Сторінкою <guilabel
+>Мініатюри</guilabel
+> можна скористатися для визначення розміру мініатюр та параметрів їх активації (ви можете вибрати клавішу керування активацією з набору &Shift;, &Alt; або &Ctrl;). </para>
+        <note>
+            <para
+>Щоб скористатися можливістю показу мініатюр (показу мініатюр зображень на контекстних панелях при наведенні вказівника миші на пункти зображень), вам слід увімкнути підкреслювання назв файлів у вашому поточному профілі: <menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Редагувати поточний профіль...</guimenuitem
+><guimenuitem
+>Миша</guimenuitem
+><guimenuitem
+>Інше</guimenuitem
+><guimenuitem
+>Підкреслювати файли</guimenuitem
+></menuchoice
+>. </para>
+        </note>
+    </listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title
+>Меню «Довідка»</title>
+<para
+>У &konsole; передбачено типові пункти меню <guimenu
+>Довідка</guimenu
+> &kde; Щоб дізнатися більше, ознайомтеся з розділом, присвяченим <ulink url="help:/fundamentals/menus.html#menus-help"
+>меню «Довідка»</ulink
+> підручника з основ роботи у &kde;. </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+</sect2>
+
+</sect1>
+
+<sect1 id="console-dialogs">
+<title
+>Діалогові вікна &konsole;</title>
+
+<sect2 id="configure-tab-settings-dialog">
+<title
+>Діалогове вікно налаштовування параметрів вкладки</title>
+
+<para
+>За допомогою цього діалогового вікна ви зможете змінити формат назви, формат заголовка вкладки віддаленого з'єднання та колір поточної вкладки. Відкрити це діалогове вікно можна за допомогою пункту меню, клавіатурного скорочення <keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+> або наведення вказівника на панель вкладок з наступним подвійним клацанням. Внесені зміни є тимчасовими — їх можна зробити сталими, якщо змінити поточний профіль. </para>
+
+<para
+>У &konsole; ви можете використовувати такі замінники для локальних вкладок: </para>
+<itemizedlist mark="opencircle">
+<listitem
+><para
+>%n : назва програми</para
+></listitem>
+<listitem
+><para
+>%d : назва поточного каталогу (скорочено)</para
+></listitem>
+<listitem
+><para
+>%D : назва поточного каталогу (повністю)</para
+></listitem>
+<listitem
+><para
+>%h : локальний вузол (скорочено)</para
+></listitem>
+<listitem
+><para
+>%u : користувач</para
+></listitem>
+<listitem
+><para
+>%B : символ запиту до користувача ($ = звичайний користувач, # = суперкористувач)</para
+></listitem>
+<listitem
+><para
+>%w : заголовок вікна, встановлений оболонкою</para
+></listitem>
+<listitem
+><para
+>%# : номер сеансу</para
+></listitem>
+</itemizedlist>
+
+<para
+>У &konsole; ви можете використовувати такі замінники для віддалених вузлів: <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c : поточна програма</para
+></listitem>
+    <listitem
+><para
+>%h : віддалений вузол (коротка версія)</para
+></listitem>
+    <listitem
+><para
+>%H : віддалений вузол (назва повністю)</para
+></listitem>
+    <listitem
+><para
+>%u : користувач</para
+></listitem>
+    <listitem
+><para
+>%U : ім’я користувача@ (якщо вказано)</para
+></listitem>
+    <listitem
+><para
+>%w : заголовок вікна, встановлений оболонкою</para
+></listitem>
+    <listitem
+><para
+>%# : номер сеансу</para
+></listitem>
+</itemizedlist>
+
+</para>
+<para
+>Приклади: <itemizedlist mark="opencircle">
+
+<listitem
+><para
+><userinput
+>%d : %n</userinput
+>, якщо поточним каталогом є /usr/src і запущено <application
+>bash</application
+>, дасть <guibutton
+>src : bash</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%D : %n</userinput
+>, якщо поточним каталогом є /usr/src і запущено <application
+>top</application
+>, дасть <guibutton
+>/usr/src : top</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%w (%#)</userinput
+>, якщо поточним каталогом є ~, і запущено <application
+>vim</application
+> у першій вкладці, дасть <guibutton
+>[No Name] (~) - VIM(1)</guibutton
+> </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect2>
+
+<sect2 id="copy-input-dialog">
+<title
+>Діалогове вікно копіювання введення</title>
+
+<para
+>Текст введений у одній з вкладом можна одночасно надіслати і у інші вкладки. За допомогою цього діалогового вікна ви можете обрати вкладки, які отримуватимуть введені дані. Позначку поточної вкладки буде показано сірим кольором. </para>
+
+</sect2>
+
+<sect2 id="scrollback-options-dialog">
+<title
+>Діалогове вікно виправлення гортання</title>
+
+<para
+>За допомогою цього діалогового вікна можна змінити параметри розмірів журналу <link linkend="scrollback"
+>гортання</link
+>. Всі зміни стосуватимуться лише поточної вкладки і не зберігатимуться до профілю. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title
+>Параметри командного рядка</title>
+
+<para
+>При запуску &konsole; з командного рядка ви можете визначати різні параметри, щоб змінити початкову поведінку програми.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--help</option
+></term>
+<listitem
+><para
+><action
+>Показати список всіх параметрів</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--profile</option
+> <parameter
+>файл</parameter
+></term>
+<listitem
+><para
+><action
+>Запускає &konsole;</action
+> з вказаним профілем замість типового.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--layout</option
+> <parameter
+>файл</parameter
+></term>
+<listitem
+><para
+><action
+>Запустити &konsole;</action
+> з використанням <link linkend="save-layout"
+>збереженого файла компонування &JSON;</link
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--builtin-profile</option
+></term>
+<listitem
+><para
+>Використати вбудований профіль замість поточного типового профілю.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--workdir</option
+> <parameter
+>каталог</parameter
+></term>
+<listitem
+><para
+><action
+>Відкриває</action
+> програму у <parameter
+>каталозі</parameter
+> як початковому робочому.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hold, --noclose</option
+></term>
+<listitem
+><para
+><action
+>Не закривати</action
+> початковий сеанс автоматично після завершення. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--new-tab</option
+></term>
+<listitem
+><para
+><action
+>Створює нову вкладку</action
+> у існуючому вікні без створення нового вікна. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--tabs-from-file </option
+><parameter
+>файл</parameter
+></term>
+<listitem
+><para
+><action
+>Створює нові вкладки</action
+>, параметри яких вказано у файлі налаштувань вкладок. </para>
+<note
+><para
+>Кожній вкладці у файлі відповідає один рядок у такому форматі:</para>
+<para
+>У кожному рядку визначаються параметри вкладки, яку слід відкрити за допомогою 4 полів. Записи полів розмежовуються символами <userinput
+>;;</userinput
+>, до назви поля слід дописувати <userinput
+>:</userinput
+>. Порожні рядки або рядки, що починаються з <userinput
+>#</userinput
+>, буде проігноровано, тому рядки, що починаються з <userinput
+>#</userinput
+>, можна використовувати для коментарів. </para>
+
+<simplelist>
+<member
+><userinput
+>title:</userinput
+> — назва цієї вкладки. Типова вкладка, якщо є порожнім або невизначеним.</member>
+<member
+><userinput
+>workdir:</userinput
+> — робочий каталог. Типовим каталогом, якщо є порожнім або невизначеним, є <filename class="directory"
+>~</filename
+>.</member>
+<member
+><userinput
+>profile:</userinput
+> — профіль &konsole;, яким слід скористатися. Типовий профіль, якщо є порожнім або невизначеним.</member>
+<member
+><userinput
+>command:</userinput
+> — команда, яку слід виконати.</member>
+</simplelist>
+<para
+>У кожному рядку має міститися принаймні одне поле <userinput
+>command</userinput
+> або <userinput
+>profile</userinput
+>. </para>
+<para
+>Приклад: <userinput
+>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput
+></para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--background-mode</option
+></term>
+<listitem
+><para
+><action
+>Запустити &konsole;</action
+> у фоновому режимі і розгорнути програму, якщо буде натиснуто <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F12</keycap
+></keycombo
+> (типова комбінація) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--separate</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+><action
+>Запускає</action
+> новий екземпляр &konsole; у окремому процесі. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-menubar</option
+></term>
+<listitem
+><para
+><action
+>Показати</action
+> панель меню, перевизначивши типову поведінку. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-menubar</option
+></term>
+<listitem
+><para
+><action
+>Приховати</action
+> панель меню, перевизначивши типову поведінку. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Показати</action
+> панель вкладок, перевизначивши типову поведінку. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Приховати</action
+> панель вкладок, перевизначивши типову поведінку. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fullscreen</option
+></term>
+<listitem
+><para
+><action
+>Запустити &konsole; у повноекранному режимі</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--notransparency</option
+></term>
+<listitem
+><para
+><action
+>Вимкнути</action
+> прозорість тла, навіть якщо система її підтримує. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profiles</option
+></term>
+<listitem
+><para
+><action
+>Показує список</action
+> всіх доступних профілів. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profile-properties</option
+></term>
+<listitem>
+<para
+><action
+>Показати список</action
+> всіх можливих властивостей з назвою і типом. Див. параметр <option
+>-p</option
+>. </para>
+<para
+>Щоб дізнатися більше, будь ласка, зверніться до <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
+>довідника з програмного інтерфейсу &konsole;</ulink
+>. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-p</option
+> <parameter
+>властивість=значення</parameter
+></term>
+<listitem
+><para
+><action
+>Змінює</action
+> значення властивості профілю.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>команда</parameter
+></term>
+<listitem
+><para
+><action
+>Виконує</action
+> <parameter
+>команду</parameter
+> замість звичайної оболонки.</para>
+<note
+><para
+>У разі використання цього параметра буде взято до уваги всі наступні параметри, передані &konsole;, і виконано їх як <parameter
+>команду</parameter
+>. Отже, цей параметр слід використовувати останнім.</para
+></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Крім того, для &konsole; можна вказувати загальні параметри &Qt; та &kf5-full;. Докладніший опис можна знайти на сторінках довідки (man) qt5options і kf5options.</para>
+
+</chapter>
+
+<chapter id="scripting">
+<title
+>Написання скриптів до &konsole;</title>
+
+<para
+>У &konsole; передбачено підтримку декількох методів, якими можна скористатися за допомогою &DBus;. </para>
+<para
+>Існує два способи скористатися інтерфейсом &DBus;: графічний інтерфейс <application
+>qdbusviewer</application
+>, та інструмент командного рядка <application
+>qdbus</application
+>, що є складовими частинами &Qt;. </para>
+
+<para
+>Приклади: <itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Команда <prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> покаже список всіх доступних служб. </para
+></listitem>
+
+<listitem
+><para
+>Команда <prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole</option
+> покаже інтерфейс &DBus; програми &konsole;. </para
+></listitem>
+
+<listitem
+><para
+>Команда <prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+> покаже методи керування вікном 1. </para>
+</listitem>
+
+<listitem
+><para
+>Команда <prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+> покаже методи керування поточним вікном. </para
+></listitem>
+
+<listitem
+><para
+>Команда <prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+> покаже методи керування сеансом 1. </para
+></listitem>
+
+<listitem
+><para
+>Команда <prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+> покаже методи керування поточним сеансом. </para
+></listitem>
+
+<listitem
+><para
+>Команда <prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+> покаже методи керування поточним сеансом &konsole;. </para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Якщо якась із наведених вище команд призведе до виведення такого повідомлення: «Service 'org.kde.konsole' does not exist», замініть <option
+>org.kde.konsole</option
+> на один з таких рядків: <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (буде вибрано перший ідентифікатор процесу) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (цим можна скористатися з поточного вікна &konsole;) </para
+></listitem>
+<listitem
+><para>
+<option
+>якийсь із варіантів, які виводяться командою «qdbus | grep konsole»</option>
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Докладніші відомості можна знайти у <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>підручнику з &DBus;</ulink
+>. </para>
+
+</chapter>
+
+<chapter id="key-bindings">
+<title
+>Прив'язки до клавіш у терміналі</title>
+
+<sect1>
+<title
+>Як у &konsole; використовуються прив'язки клавіш</title>
+
+<sect2 id="intro">
+<title
+>Вступ</title>
+<para
+>Для перетворення комбінацій клавіш на керівні символи, які надсилаються до командної оболонки або до інтерактивних програм (типово, програм, які використовують альтернативний буфер системи, зокрема <application
+>vim</application
+>, <application
+>less</application
+>, <application
+>screen</application
+>), які запущено у командній оболонці, &konsole; використовує файли *.keytab.</para>
+
+<para
+>Користувачі можуть налаштовувати параметри прив'язки клавіш у &konsole; за допомогою редактора прив'язок клавіш. Можна налаштувати комбінацію клавіш для надсилання певної керівної послідовності символів до термінала.</para>
+
+<para
+>Відкрити редактор прив'язок клавіатури можна за допомогою пункту меню <menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Редагувати поточний профіль</guimenuitem
+></menuchoice
+>. Далі, слід перейти на вкладку <guilabel
+>Клавіатура</guilabel
+>. Там буде показано схеми прив'язки клавіш, які типово постачаються разом із &konsole;.</para>
+</sect2>
+
+<sect2 id="table-fields">
+<title
+>Комбінації клавіш і режими</title>
+
+<para
+>Комбінації клавіш записуються у такому форматі: <programlisting
+>Клавіша (+|-) Режими</programlisting>
+</para>
+
+<para
+>Приклади: <programlisting
+>Up+Shift+AppScreen
+Down+Shift-AppScreen
+Space+Ctrl
+</programlisting>
+</para>
+
+<para
+>Назви клавіш визначаються у файлів заголовків qnamespace.h. Достатньо лише вилучити префікс <quote
+>Qt::Key_</quote
+>. Список назв клавіш також наведено у <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum"
+>документації до Qt::Key бібліотеки &Qt;</ulink
+>.</para>
+
+<para
+>Додавання <quote
+>+</quote
+> перед назвою режиму означає, що цей режим <emphasis
+>встановлено</emphasis
+>; для клавіші-модифікатора це означає, що клавішу натиснуто, а для усіх інших режимів це означає, що режиму увімкнено (тобто активовано). Наприклад, <quote
+>+Ctrl</quote
+> означає, що комбінація клавіш працюватиме, лише якщо натиснуто клавішу &Ctrl;.</para>
+
+<para
+>Додавання <quote
+>-</quote
+> перед назвою режиму означає, що цей режим <emphasis
+>скинуто</emphasis
+>; загалом, це протилежність до додавання <quote
+>+</quote
+> перед назвою режиму. Отже, для клавіші-модифікатора це означає, що клавішу не натиснуто, а для усіх інших режимів це означає, що відповідний режим є неактивним. Наприклад, <quote
+>-Ctrl</quote
+> означає, що комбінація клавіш працюватиме, лише якщо клавішу &Ctrl; <emphasis
+>не</emphasis
+> натиснуто.</para>
+
+<note>
+<para
+>Якщо у записі комбінації клавіш не вказано режим, її стан ігнорується.</para>
+</note>
+
+<para
+>Нижче наведено список підтримуваних режимів прив'язки клавіш:</para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Alt, Ctrl, Shift</term>
+<listitem>
+<para
+>У комбінації клавіш можна використовувати один або декілька цих режимів. Якщо встановлено будь-який з цих режимів, у комбінації клавіш використовуватиметься відповідна клавіша-модифікатор. Якщо ж режим скинуто, клавіша у комбінації не використовуватиметься.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AnyModifier</term>
+<listitem>
+<para
+>Якщо цей режим встановлено, комбінація клавіш використовуватиме будь-яку клавішу-модифікатор (будь-яку з попередніх трьох клавіш-модифікаторів); і навпаки, якщо режим скинуто.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ansi</term>
+<listitem>
+<para
+>Якщо встановлено цей режим, &konsole; надсилатиме керівні послідовності ANSI.</para>
+<para
+>Якщо цей режим скинуто, &konsole; надсилатиме керівні послідовності VT52.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppScreen</term>
+<listitem>
+<para
+>Якщо встановлено цей режим, комбінація клавіш працюватиме лише у інтерактивних програмах, які використовують альтернативний буфер.</para>
+<para
+>Якщо скинуто цей режим, комбінація клавіш працюватиме у терміналі, лише якщо у ньому використано звичайний буфер.</para>
+
+<note>
+<para
+>У &konsole; використовується два буфери даних:</para>
+<itemizedlist>
+<listitem>
+<para
+>Звичайний буфер (типовий): надає вам змогу гортати журнал для перегляду попередніх рядків виведення; це типовий буфер, яким ви зазвичай користуєтеся для виконання команд тощо.</para>
+</listitem>
+<listitem>
+<para
+>Альтернативний буфер: термінал перемикається на цей буфер, коли ви запускаєте інтерактивну програму (наприклад, <application
+>less</application
+>, <application
+>vim</application
+>, <application
+>screen</application
+>, <application
+>tmux</application
+> тощо)</para>
+</listitem>
+</itemizedlist>
+</note>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KeyPad</term>
+<listitem>
+<para
+>Якщо встановлено цей режим, комбінація клавіш використовує клавішу із цифрової панелі (бічної панелі клавіатури). Цей режим корисний для розрізнення клавіш на основному блоці клавіатури і клавіш на цифровій панелі. Наприклад, якщо Num Lock <emphasis
+>увімкнено</emphasis
+>, ви можете налаштувати дві окремі комбінації клавіш: одну з використанням клавіші із написом <quote
+>1</quote
+> на основному блоці клавіатури (зазвичай, цю клавішу розташовано під клавішею <keycap
+>F1</keycap
+>) та іншу з використанням клавіші із написом <quote
+>1</quote
+> на цифровому блоці. Те саме стосується випадку, коли Num Lock <emphasis
+>вимкнено</emphasis
+>, і клавіш End, Home, клавіш із стрілками на цифровому блоці.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppCursorKeys</term>
+<listitem>
+<para
+>Цей режим реалізує <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
+>режим клавіш курсора (DECCKM)</ulink
+> VT100. Він керує керівними послідовностями, які надсилають клавіші керування курсором (<keycap
+>↑</keycap
+>, <keycap
+>↓</keycap
+>, <keycap
+>→</keycap
+>, <keycap
+>←</keycap
+>), залежно від того, встановлено чи скинуто цей режим.</para>
+<para
+>Типово, &konsole; працює як XTerm у обробці клавіш <keycap
+>Home</keycap
+> і <keycap
+>End</keycap
+> як клавіш керування курсором із урахуванням DECCKM</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppKeyPad</term>
+<listitem>
+<para
+>Якщо встановлено цей режим, комбінація клавіш працюватиме, лише якщо цифрова панель перебуває у режимі застосування (DECKPAM).</para>
+<para
+>Якщо скинуто цей режим, комбінація клавіш працюватиме, лише якщо цифрова панель перебуває у цифровому режимі (DECKPNM).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>NewLine</term>
+<listitem>
+<para
+>Якщо встановлено цей режим, клавіша <keycap
+>Return</keycap
+> (Enter) на основній клавіатурі надсилатиме і символ повернення каретки, «\r», і символ нового рядка, «\n».</para>
+<para
+>Якщо цей режим скинуто, клавіша <keycap
+>Return</keycap
+> надсилатиме лише символ повернення каретки «\r»</para>
+<para
+>Те саме стосується клавіші &Enter; на цифровій панелі</para>
+<para
+>Цей режим імітує <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
+>LNM — режим заповнення рядка/нового рядка</ulink
+></para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Зауважте, що комбінації клавіш і режимів (встановлення і скидання) не повинні повторюватися. Наприклад, розгляньмо такі два правила:</para>
+
+<itemizedlist>
+<listitem
+><para
+>A+Shift : <quote
+>A</quote
+></para
+></listitem>
+<listitem
+><para
+>a : <quote
+>a</quote
+></para
+></listitem>
+</itemizedlist>
+<para
+>&konsole; <emphasis
+>не</emphasis
+> прийме правило із малою літерою <quote
+>a</quote
+>. Щоб правило працювало, слід додати до нього <quote
+>-Shift</quote
+>.</para>
+</sect2>
+
+<sect2 id="output-field">
+<title
+>Поле виведення</title>
+
+<para
+>У полі виведення ви можете додати керівні послідовності або символи, які &konsole; має надсилати до термінала, коли натиснуто відповідну комбінацію клавіш.</para>
+
+<para
+>Ви також можете скористатися будь-яким із вказаних нижче ключових слів, кожне з яких має особливе значення у &konsole;:</para>
+
+<itemizedlist>
+<listitem
+><para
+>scrollUpLine : гортати вгору на один рядок у буфері журналу командної оболонки</para
+></listitem>
+<listitem
+><para
+>scrollUpPage : гортати вгору на одну сторінку у буфері журналу командної оболонки</para
+></listitem>
+<listitem
+><para
+>scrollDownLine : гортати вниз на один рядок у буфері журналу командної оболонки</para
+></listitem>
+<listitem
+><para
+>scrollDownPage : гортати вниз на одну сторінку у буфері журналу командної оболонки</para
+></listitem>
+<listitem
+><para
+>scrollUpToTop : гортати вгору до початку буфера журналу командної оболонки</para
+></listitem>
+<listitem
+><para
+>scrollDownToBottom : гортати вниз до кінця буфера журналу командної оболонки</para
+></listitem>
+</itemizedlist>
+
+<para
+>Ви також можете користуватися рядками у синтаксисі рядків C. Зокрема, можна скористатися такими керівними послідовностями:</para>
+
+<itemizedlist>
+<listitem
+><para
+>\E : Escape</para
+></listitem>
+<listitem
+><para
+>\\ : Зворотна риска</para
+></listitem>
+<listitem
+><para
+>\" : Подвійні лапки</para
+></listitem>
+<listitem
+><para
+>\t : Tab</para
+></listitem>
+<listitem
+><para
+>\r : повернення каретки</para
+></listitem>
+<listitem
+><para
+>\n : новий рядок</para
+></listitem>
+<listitem
+><para
+>\b : витирання символу ліворуч</para
+></listitem>
+<listitem>
+<para
+>\xHH : де HH — дві шістнадцяткові цифри</para>
+<tip>
+<para
+>Цим можна скористатися для надсилання керівних символів у ASCII, зокрема <quote
+>\x00</quote
+> — NUL-символу</para>
+</tip>
+</listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="other-factors">
+<title
+>Інші системні ресурси</title>
+<para
+>Прив'язки клавіш у терміналі можуть стосуватися інших системних ресурсів:</para>
+<itemizedlist>
+<listitem>
+<para
+>Зверніться до бази даних <ulink url="man:terminfo(5)"
+>terminfo</ulink
+> або <ulink url="man:termcap(5)"
+>termcap</ulink
+>, щоб дізнатися більше про очікувані керівні послідовності і символи, які можна надсилати за допомогою комбінацій клавіш.</para>
+</listitem>
+<listitem>
+<para
+>Ймовірно, у вашій системі можуть бути інші бази даних клавіш, які також можна синхронізувати (наприклад, <ulink url="man:bash(1)"
+>/etc/inputrc та readline</ulink
+> для оболонки <application
+>BASH</application
+>), оскільки вони впливають на дії (взаємодії), пов'язані із комбінацією клавіш.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="further-reading">
+<title
+>Інформація для подальшого ознайомлення</title>
+<para
+>Щоб дізнатися більше про керівні послідовності та символи, ознайомтеся із такими ресурсами документації:</para>
+<itemizedlist>
+<listitem>
+<para
+><ulink url="https://www.vt100.net/docs/vt100-ug/"
+>Підручник користувача VT100</ulink
+></para>
+</listitem>
+<listitem>
+<para
+><ulink url="https://vt100.net/docs/vt102-ug/"
+>Підручник користувача VT102</ulink
+></para>
+</listitem>
+<listitem>
+<para
+>Повна і необхідна документація щодо <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html"
+>керівних послідовностей XTerm</ulink
+></para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title
+>Використання таблиці стилів для панелі вкладок</title>
+<para
+>У типовій таблиці стилів для панелі вкладок визначається мінімальна та максимальна ширина заголовка вкладки. Користувач може створити файл <filename role="extension"
+>.css</filename
+> і наказати &konsole; використовувати створену таблицю стилів для панелі вкладок. У файлі <filename role="extension"
+>.css</filename
+> слід визначати властивості віджета <userinput
+>QTabBar::tab</userinput
+>. </para>
+<para
+>Докладніший опис можна знайти на <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
+>сторінці Проєкту &Qt; щодо таблиць стилів</ulink
+> </para>
+
+<para
+>Приклади: </para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Змінити колір тла позначеної вкладки на світло-сірий <programlisting
+>QTabBar::tab:selected {
+    background: #999999
+}
+</programlisting>
+</para
+></listitem>
+
+
+<listitem
+><para
+>Змінити колір тексту заголовка позначеної вкладки на червоний <programlisting
+>QTabBar::tab:selected {
+    color: red
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Зробити так, щоб ширина усіх вкладок була не меншою за 200 пікселів <programlisting
+>QTabBar::tab {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Зробити так, щоб лише ширина позначеної вкладки була не меншою за 200 пікселів <programlisting
+>QTabBar::tab::selected {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Усі ці фрагменти можна поєднати у одному файлі <programlisting
+>QTabBar::tab::selected {
+    background: #999999;
+    color: red;
+    min-width: 200px;
+}
+QTabBar::tab {
+    min-width: 100px
+}
+</programlisting>
+</para
+></listitem>
+
+
+</itemizedlist>
+</para>
+
+</chapter>
+
+<chapter id="faqtips">
+<title
+>Корисні поради, типові проблеми та інші зауваження</title>
+
+<sect1 id="didyouknow">
+<title
+>Чи знаєте ви…</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Натискання &Ctrl; під час вибору тексту призведе до заміни символів розривів рядків на пробіли під час вставлення. </para
+></listitem>
+
+<listitem
+><para
+>Одночасне натискання клавіш <keycombo action="simul"
+>&Ctrl;&Alt;</keycombo
+> під час позначення фрагмента тексту надасть змогу позначати стовпчики тексту. </para
+></listitem>
+
+<listitem
+><para
+>Використання комбінації <keycombo action="simul"
+>&Ctrl;<mousebutton
+>коліщатко миші</mousebutton
+></keycombo
+> надає змогу змінювати масштаб показу тексту, подібно до &konqueror; та Firefox. </para
+></listitem>
+
+<listitem
+><para
+>Якщо програма очікує на натискання миші, викликати контекстне меню можна натисканням клавіші &Shift;. </para
+></listitem>
+
+<listitem
+><para
+>Натискання комбінації клавіш <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F10</keycap
+></keycombo
+> активує меню. </para
+></listitem>
+
+<listitem
+><para
+>За допомогою комбінації клавіш <keycombo action="simul"
+>&Shift;<keycap
+>Insert</keycap
+></keycombo
+> можна вставити дані з буфера обміну даними. </para
+></listitem>
+
+<listitem
+><para
+>Подвійним клацанням можна позначити слово. Якщо продовжити утримувати ліву кнопку миші і пересунути вказівник, позначену область буде розширено. </para
+></listitem>
+
+<listitem
+><para
+>Потрійним клацанням можна позначити рядок. Якщо продовжити утримувати ліву кнопку миші і пересунути вказівник, позначену область буде розширено. </para
+></listitem>
+
+<listitem
+><para
+>У виразі для заголовка вкладки для елемента «%d» передбачено приховану можливість. Ви можете наказати &konsole; скоротити назву каталогу до його першого символу. Наприклад, "/шлях/до/konsole/src" можна скоротити до "konsole/s". Якщо вам хочеться увімкнути і керувати цією прихованою можливістю, відкрийте для редагування файл <filename
+>konsolerc</filename
+> у каталозі, що визначається командою <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+>, і додайте до нього такі рядки:</para>
+
+<para
+><programlisting
+>[ProcessInfo]
+CommonDirNames=назва1,назва2,назва3...
+</programlisting>
+
+<note
+><para
+>Якщо ви користуєтеся <application
+>Yakuake</application
+>, вам слід змінити файл <filename
+>yakuakerc</filename
+> у каталозі, що визначається командою <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+>.</para
+></note>
+
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="commonissues">
+<title
+>Типові проблеми</title>
+<itemizedlist>
+
+<listitem>
+<para
+>Деякими шрифтами у &konsole; скористатися не можна, хоча цими шрифтами можна користуватися у інших програмах. Це не є свідченням вад у &konsole;. Для того, щоб написи у &konsole; було зручно читати, слід використовувати моноширинні шрифти, тому програма просить бібліотеку &Qt; показувати у списку лише моноширинні шрифти.</para>
+
+<para
+>Починаючи з версії 16.08 (серпень 2016), &konsole; можна налаштувати на використання будь-якого шрифту, але при цьому може постраждати правильність показу даних.</para>
+</listitem>
+
+<listitem
+><para
+>З версії для KDE 4 усі вкладки працюють у межах процесу з єдиним ідентифікатором. Тому, якщо у одній з вкладок виникають проблеми, ці проблеми можуть поширитися і на інші вкладки. </para>
+<para
+>Це особливо помітно, якщо проблеми виникають з командами, які працюють з зовнішніми пристроями або системами (ssh, nfs). </para
+></listitem>
+
+<listitem
+><para
+>&konsole; вважає аргументи після параметра <option
+>-e</option
+> однією командою і виконує її безпосередньо, без обробки і можливого поділу на підкоманди для наступного виконання. Цим програма відрізняється від xterm. </para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem
+><para
+><command
+>konsole -e "команда ; команда2"</command
+> не працюватиме </para
+></listitem>
+
+    <listitem
+><para
+><command
+>konsole -e $SHELL -c "команда1 ; команда2"</command
+> працюватиме </para
+></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
+<listitem
+><para
+>У &konsole; не передбачено засобів роботи з оболонкою входу до системи, оскільки розробники не вважають доцільною ідею реалізації оболонки входу до системи у емуляторі термінала. </para>
+<para
+>Звичайно ж, ніхто не зможе забрати у користувача можливості запуску оболонки входу до системи з &konsole;, якщо це дуже потрібно. Внесіть зміни до профілю, яким користуєтеся: змініть команду профілю так, щоб вона запускала оболонку входу до системи явно, наприклад «<command
+>bash -l</command
+>» або «<command
+>zsh -l</command
+>». </para>
+</listitem>
+
+<listitem
+><para
+>Використання параметра <option
+>--new-tab</option
+> іноді призводить до дивних наслідків. Може бути створено нове вікно або створено вкладку у іншому відкритому вікні &konsole;, замість поточного вікна &konsole;. </para>
+<para
+>Така поведінка може здатися дивною, але її не обов’язково пов’язано з вадами. У разі використання параметра <option
+>--new-tab</option
+> програма намагається скористатися вже відкритими вікнами &konsole;, але не всі вікна &konsole; можна використати повторно. Всі вікна &konsole;, відкриті за допомогою &krunner; можна використовувати повторно, але більшість вікон &konsole;, відкритих за допомогою командного рядка, — ні. </para>
+</listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title
+>Подяки і авторські права</title>
+
+<para
+>Поточну версію &konsole; супроводжує &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Серед попередніх супровідників &konsole; були  &Robert.Knight; &Robert.Knight.mail; та &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+
+<para
+>Авторські права на програму &konsole; належать &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
+
+<para
+>Початкову версію цього документа було створено &Jonathan.Singer; &Jonathan.Singer.mail;</para>
+
+<para
+>Цей документ було оновлено для &kde; 4.x &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Цей документ було оновлення для &kde; 3.4, автор —  &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Початковий документ перетворено на <acronym
+>SGML</acronym
+> DocBook &Mike.McBride; і &Lauri.Watts;</para>
+
+<para
+>Переклад українською: Юрій Чорноіван <email
+>yurchor@ukr.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="links">
+<title
+>Посилання</title>
+
+<para
+>Щоб дізнатися більше, будь ласка, відвідайте ці вебсайти:</para>
+<itemizedlist>
+<listitem
+><para
+><ulink url="https://userbase.kde.org/Konsole/uk"
+>Домашня сторінка &konsole; на UserBase &kde;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://konsole.kde.org/"
+>Домашня сторінка &konsole;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel"
+>Список листування, присвячений &konsole;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://freebsd.kde.org/"
+>&kde; у FreeBSD</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://solaris.kde.org/"
+>&kde; у &Solaris;</ulink
+></para
+></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+

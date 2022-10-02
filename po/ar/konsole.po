@@ -1,0 +1,5601 @@
+# translation of konsole.po to Arabic
+# translation of konsole.po to
+# Copyright (C) 2001,2002, 2004, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Mohammed Gamal <f2c2001@yahoo.com>, 2001.
+# Sayed Jaffer Al-Mosawi <mosawi@arabeyes.org>, 2002.
+# Isam Bayazidi <bayazidi@arabeyes.org>, 2002.
+# Munzir Taha <munzir@kacst.edu.sa>, 2004.
+# محمد سعد  Mohamed SAAD <metehyi@free.fr>, 2006.
+# Youssef Chahibi <chahibi@gmail.com>, 2007.
+# zayed <zayed.alsaidi@gmail.com>, 2008.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010, 2021, 2022.
+# Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2012, 2014.
+# Safa Alfulaij <safaalfulaij@hotmail.con>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: konsole\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:52+0000\n"
+"PO-Revision-Date: 2022-10-01 13:19+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+"محمد جمال,عصام بايزيدي,Mohamed SAAD محمد سعد ,زايد السعيدي, صفا الفليج,"
+"عبدالرحيم الفاخوري"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"doc@arabeyes.org,bayazidi@arabeyes.org,metehyi@free.fr,zayed.alsaidi@gmail."
+"com,safaalfulaij@hotmail.com,abdilra7eem@yahoo.com"
+
+#. i18n: ectx: Menu (file)
+#: ../desktop/konsoleui.rc:6
+#, kde-format
+msgid "File"
+msgstr "ملف"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnEdit)
+#. i18n: ectx: Menu (edit)
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:268
+#: plugins/SSHManager/sshwidget.ui:262
+#, kde-format
+msgid "Edit"
+msgstr "حرر"
+
+#. i18n: ectx: Menu (view)
+#: ../desktop/konsoleui.rc:19
+#, kde-format
+msgid "View"
+msgstr "اعرض"
+
+#. i18n: ectx: Menu (view-split)
+#: ../desktop/konsoleui.rc:20
+#, kde-format
+msgid "Split View"
+msgstr "افصل العرض"
+
+#. i18n: ectx: Menu (settings)
+#: ../desktop/konsoleui.rc:39
+#, kde-format
+msgid "Settings"
+msgstr "الإعدادات"
+
+#. i18n: ectx: Menu (plugins)
+#: ../desktop/konsoleui.rc:52
+#, kde-format
+msgid "Plugins"
+msgstr "القوابس"
+
+#. i18n: ectx: Menu (help)
+#: ../desktop/konsoleui.rc:55
+#, kde-format
+msgid "Help"
+msgstr "مساعدة"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: ../desktop/konsoleui.rc:59
+#, kde-format
+msgid "Main Toolbar"
+msgstr "شريط الأدوات الرّئيسيّ"
+
+#. i18n: ectx: Menu (history)
+#: ../desktop/partui.rc:14
+#, kde-format
+msgid "S&crollback"
+msgstr "&مرر للخلف"
+
+#. i18n: ectx: ToolBar (sessionToolbar)
+#: ../desktop/sessionui.rc:70
+#, kde-format
+msgid "Session Toolbar"
+msgstr "شريط أدوات الجلسة"
+
+#: AppColorSchemeChooser.cpp:36
+#, kde-format
+msgid "&Window Color Scheme"
+msgstr "&نسق ألوان جديد"
+
+#: Application.cpp:51
+#, kde-format
+msgctxt "@info:shell"
+msgid "Name of profile to use for new Konsole instance"
+msgstr "اسم تشكيلة  لتستخدمها نسخة كونسول الجديدة"
+
+#: Application.cpp:52
+#, kde-format
+msgctxt "@info:shell"
+msgid "json layoutfile to be loaded to use for new Konsole instance"
+msgstr "ملف json layoutfile ليتم تحميله لاستخدامه لنسخة كونسول جديدة"
+
+#: Application.cpp:53
+#, kde-format
+msgctxt "@info:shell"
+msgid "Use the built-in profile instead of the default profile"
+msgstr "استخدم التشكيلة المضمنة عوضا عن التشكيلة المبدئية"
+
+#: Application.cpp:54
+#, kde-format
+msgctxt "@info:shell"
+msgid "Set the initial working directory of the new tab or window to 'dir'"
+msgstr "ضع دليل عمل مبدئي للسان الجديد أو النافذة إلى 'dir'"
+
+#: Application.cpp:55
+#, kde-format
+msgctxt "@info:shell"
+msgid "Do not close the initial session automatically when it ends."
+msgstr "لا تغلق الجلسة الابتدائية آلية عندما تنتهي."
+
+#: Application.cpp:59
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Create a new tab in an existing window rather than creating a new window "
+"('Run all Konsole windows in a single process' must be enabled)"
+msgstr ""
+"أنشئ لسان جديد في النافذة الموجودة بدلا عن إنشاء نافذة جديدة (يجب تفعيل 'شغّل "
+"كل نوافذ كونسول على عملية واحدة')"
+
+#: Application.cpp:60
+#, kde-format
+msgctxt "@info:shell"
+msgid "Create tabs as specified in given tabs configuration file"
+msgstr "أنشئ ألسنة كما هو محدد في ملف ضبط الألسنة المعطى"
+
+#: Application.cpp:62
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
+"(by default) is pressed"
+msgstr ""
+"ابدأ كونسول في الخلفية و أحضره إلى الأمام عن ضغط مفتاح Ctrl+Shift+F12 "
+"(مبدئيا)"
+
+#: Application.cpp:63
+#, kde-format
+msgctxt "@info:shell"
+msgid "Run in a separate process"
+msgstr "نفِّذ في عملية منفصلة"
+
+#: Application.cpp:64
+#, kde-format
+msgctxt "@info:shell"
+msgid "Show the menubar, overriding the default setting"
+msgstr "أظهر شريط القوائم، متجاوزًا الإعداد الافتراضي"
+
+#: Application.cpp:65
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the menubar, overriding the default setting"
+msgstr "أخفِ شريط القوائم، متجاوزًا الإعداد الافتراضي"
+
+#: Application.cpp:66
+#, kde-format
+msgctxt "@info:shell"
+msgid "Show the tabbar, overriding the default setting"
+msgstr "أظهر شريط الألسنة، متجاوزًا الإعداد الافتراضي"
+
+#: Application.cpp:67
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the tabbar, overriding the default setting"
+msgstr "أخفِ شريط الألسنة، متجاوزًا الإعداد الافتراضي"
+
+#: Application.cpp:68
+#, kde-format
+msgctxt "@info:shell"
+msgid "Start Konsole in fullscreen mode"
+msgstr "ابدأ كونسول في وضع ملء الشاشة"
+
+#: Application.cpp:69
+#, kde-format
+msgctxt "@info:shell"
+msgid "Disable transparent backgrounds, even if the system supports them."
+msgstr "عطل الخلفية الشفافة ، حتى ولو كان النظام يدعمها."
+
+#: Application.cpp:70
+#, kde-format
+msgctxt "@info:shell"
+msgid "List the available profiles"
+msgstr "قائمة التشكيلات المتوفرة"
+
+#: Application.cpp:71
+#, kde-format
+msgctxt "@info:shell"
+msgid "List all the profile properties names and their type (for use with -p)"
+msgstr "اعرض لائحة بكل أسماء خصائص الأوضاع وأنواعها (لتستخدم مع p-)"
+
+#: Application.cpp:72
+#, kde-format
+msgctxt "@info:shell"
+msgid "Change the value of a profile property."
+msgstr "غير قيمة خاصية تشكلية."
+
+#: Application.cpp:74
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Command to execute. This option will catch all following arguments, so use "
+"it as the last option."
+msgstr ""
+"الأمر للتنفيذ. سيلتقط هذا الخيار كل المعامِلات اللاحقة، لذا استخدمه كخيار "
+"أخير."
+
+#: Application.cpp:77
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Force re-using the existing instance even if it breaks functionality, e. g. "
+"--new-tab. Mostly for debugging."
+msgstr ""
+"فرض إعادة استخدام المثيل الحالي حتى إذا ضيعت الوظائف، على سبيل المثال.‏--new-"
+"tab. في الغالب من أجل التنقيح. "
+
+#: Application.cpp:84
+#, kde-format
+msgctxt "@info:shell"
+msgid "Arguments passed to command"
+msgstr "المعاملات الممررة إلى أمر"
+
+#: Application.cpp:511
+#, kde-format
+msgctxt "@item"
+msgid "Toggle Background Window"
+msgstr "بدِّل النافذة الخلفية"
+
+#: BookmarkHandler.cpp:108
+#, kde-format
+msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
+msgid "%1 on %2"
+msgstr "%1 على %2"
+
+#: BookmarkHandler.cpp:110
+#, kde-format
+msgctxt "@item:inmenu The host the user is connected to via ssh"
+msgid "%1"
+msgstr "%1"
+
+#: colorscheme/ColorScheme.cpp:131
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground"
+msgstr "الأمامية"
+
+#: colorscheme/ColorScheme.cpp:132
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background"
+msgstr "الخلفية"
+
+#: colorscheme/ColorScheme.cpp:133
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1"
+msgstr "اللون ١"
+
+#: colorscheme/ColorScheme.cpp:134
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2"
+msgstr "اللون ٢"
+
+#: colorscheme/ColorScheme.cpp:135
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3"
+msgstr "اللون ٣"
+
+#: colorscheme/ColorScheme.cpp:136
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4"
+msgstr "اللون ٤"
+
+#: colorscheme/ColorScheme.cpp:137
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5"
+msgstr "اللون ٥"
+
+#: colorscheme/ColorScheme.cpp:138
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6"
+msgstr "اللون ٦"
+
+#: colorscheme/ColorScheme.cpp:139
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7"
+msgstr "اللون ٧"
+
+#: colorscheme/ColorScheme.cpp:140
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8"
+msgstr "اللون ٨"
+
+#: colorscheme/ColorScheme.cpp:141
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground (Intense)"
+msgstr "الأمامية (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:142
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background (Intense)"
+msgstr "الخلفية (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:143
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1 (Intense)"
+msgstr "اللون ١ (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:144
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2 (Intense)"
+msgstr "اللون ٢ (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:145
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3 (Intense)"
+msgstr "اللون ٣ (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:146
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4 (Intense)"
+msgstr "اللون ٤ (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:147
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5 (Intense)"
+msgstr "اللون ٥ (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:148
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6 (Intense)"
+msgstr "اللون ٦ (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:149
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7 (Intense)"
+msgstr "اللون ٧ (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:150
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8 (Intense)"
+msgstr "اللون ٨ (مكثف)"
+
+#: colorscheme/ColorScheme.cpp:151
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground (Faint)"
+msgstr "الأمامية (باهتة)"
+
+#: colorscheme/ColorScheme.cpp:152
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background (Faint)"
+msgstr "الخلفية (باهتة)"
+
+#: colorscheme/ColorScheme.cpp:153
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1 (Faint)"
+msgstr "اللون ١ (باهت)"
+
+#: colorscheme/ColorScheme.cpp:154
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2 (Faint)"
+msgstr "اللون ٢ (باهت)"
+
+#: colorscheme/ColorScheme.cpp:155
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3 (Faint)"
+msgstr "اللون ٣ (باهت)"
+
+#: colorscheme/ColorScheme.cpp:156
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4 (Faint)"
+msgstr "اللون ٤ (باهت)"
+
+#: colorscheme/ColorScheme.cpp:157
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5 (Faint)"
+msgstr "اللون ٥ (باهت)"
+
+#: colorscheme/ColorScheme.cpp:158
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6 (Faint)"
+msgstr "اللون ٦ (باهت)"
+
+#: colorscheme/ColorScheme.cpp:159
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7 (Faint)"
+msgstr "اللون ٧ (باهت)"
+
+#: colorscheme/ColorScheme.cpp:160
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8 (Faint)"
+msgstr "اللون ٨ (باهت)"
+
+#: colorscheme/ColorScheme.cpp:463
+#, kde-format
+msgctxt "@item"
+msgid "Un-named Color Scheme"
+msgstr "مخطط لوني غير مسمى"
+
+#: colorscheme/ColorSchemeEditor.cpp:109
+#, kde-format
+msgctxt "@label:listbox Column header text for color names"
+msgid "Name"
+msgstr "الاسم"
+
+#: colorscheme/ColorSchemeEditor.cpp:109
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual colors"
+msgid "Color"
+msgstr "اللون"
+
+#: colorscheme/ColorSchemeEditor.cpp:110
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual intense colors"
+msgid "Intense color"
+msgstr "لون غامق"
+
+#: colorscheme/ColorSchemeEditor.cpp:111
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual faint colors"
+msgid "Faint color"
+msgstr "لون باهت"
+
+#: colorscheme/ColorSchemeEditor.cpp:136
+#, kde-format
+msgctxt "@info:status"
+msgid ""
+"The background transparency setting will not be used because your desktop "
+"does not appear to support transparent windows."
+msgstr ""
+"لن يتم استخدام إعدادات الخلفية الشفافة بسبب أن سطح  مكتبك لا يدعم النوافذ "
+"الشفافة فيما يبدو."
+
+#: colorscheme/ColorSchemeEditor.cpp:187
+#, kde-format
+msgctxt "@title:window"
+msgid "Select wallpaper image file"
+msgstr "اختر ملف صورة الخلفية"
+
+#: colorscheme/ColorSchemeEditor.cpp:189
+#, kde-format
+msgctxt "@label:textbox Filter in file open dialog"
+msgid "Supported Images"
+msgstr "الصور المدعومة"
+
+#: colorscheme/ColorSchemeEditor.cpp:333
+#, kde-format
+msgctxt "@title:window"
+msgid "New Color Scheme"
+msgstr "نسق ألوان جديد"
+
+#: colorscheme/ColorSchemeEditor.cpp:336
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Color Scheme"
+msgstr "حرر التشكيلة الألوان"
+
+#: colorscheme/ColorSchemeEditor.cpp:382
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose color"
+msgstr "انقر لانتقاء لون"
+
+#: colorscheme/ColorSchemeEditor.cpp:387
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose intense color"
+msgstr "انقر لتختار تركيز اللون"
+
+#: colorscheme/ColorSchemeEditor.cpp:392
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose Faint color"
+msgstr "انقر للاختيار لون باهت"
+
+#. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
+#. i18n: ectx: property (text), widget (QLabel, discriptionLabel)
+#: colorscheme/ColorSchemeEditor.ui:31 KeyBindingEditor.ui:31
+#, kde-format
+msgid "Description:"
+msgstr "الوصف:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, randomizedBackgroundCheck)
+#: colorscheme/ColorSchemeEditor.ui:50
+#, kde-format
+msgid ""
+"Hue and saturation values of default foreground and background colors are "
+"randomized by default. Some color schemes might use different randomization "
+"settings.\n"
+"To see any effect, set colors with saturation value greater than 0."
+msgstr ""
+"تختار قيم تدرج اللون والتشبع للألوان الافتراضية للمقدمة والخلفية بشكل "
+"عشوائي. قد تستخدم بعض تشكيلات الألوان إعدادات عشوائية. \n"
+"لمشاهدة أي تأثير ، اضبط الألوان بقيمة تشبع أكبر من ٠ ."
+
+#. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
+#: colorscheme/ColorSchemeEditor.ui:53
+#, kde-format
+msgid "Randomly adjust colors for each session"
+msgstr "اضبط الألوان بشكل عشوائي لكل جلسة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
+#: colorscheme/ColorSchemeEditor.ui:60
+#, kde-format
+msgid "Blur background"
+msgstr "خلفية معماة"
+
+#. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
+#: colorscheme/ColorSchemeEditor.ui:69
+#, kde-format
+msgid "Background color transparency:"
+msgstr "شفافية لون الخلفية:"
+
+#. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
+#. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
+#: colorscheme/ColorSchemeEditor.ui:89 colorscheme/ColorSchemeEditor.ui:123
+#, kde-format
+msgid "Percent"
+msgstr "في المائة"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
+#: colorscheme/ColorSchemeEditor.ui:103
+#, kde-format
+msgid "Wallpaper transparency:"
+msgstr "شفافية الخلفية:"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
+#: colorscheme/ColorSchemeEditor.ui:137
+#, kde-format
+msgid "Background image:"
+msgstr "صورة الخلفية:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, wallpaperPath)
+#: colorscheme/ColorSchemeEditor.ui:144
+#, kde-format
+msgid "Edit the path of the background image"
+msgstr "حرّر مسار صورة الخلفية"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, wallpaperSelectButton)
+#: colorscheme/ColorSchemeEditor.ui:151
+#, kde-format
+msgid "Choose the background image"
+msgstr "اختر صورة الخلفية"
+
+#. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
+#. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
+#. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:127
+#: widgets/EditProfileGeneralPage.ui:183
+#, kde-format
+msgid "..."
+msgstr "..."
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
+#: colorscheme/ColorSchemeEditor.ui:165
+#, kde-format
+msgid "Wallpaper scaling:"
+msgstr "حجم الخلفية:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:173
+#, kde-format
+msgid "Tile"
+msgstr "قطعة"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:178
+#, kde-format
+msgid "Stretch"
+msgstr "ممدد"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:183
+#, kde-format
+msgid "Crop"
+msgstr "مقتص"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:188
+#, kde-format
+msgid "Adapt"
+msgstr "متكيف"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:193
+#, kde-format
+msgid "NoScaling"
+msgstr "بدون تكبير"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
+#: colorscheme/ColorSchemeEditor.ui:205
+#, kde-format
+msgid "Wallpaper flip:"
+msgstr "عكس الخلفية:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:213
+#, kde-format
+msgid "NoFlip"
+msgstr "بدون عكس"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:218
+#, kde-format
+msgid "Horizontal"
+msgstr "أفقي"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:223
+#, kde-format
+msgid "Vertical"
+msgstr "رأسي"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:228
+#, kde-format
+msgid "Both"
+msgstr "كليهما"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
+#: colorscheme/ColorSchemeEditor.ui:240
+#, kde-format
+msgid "Horizontal Anchor:"
+msgstr "التثبيت الأفقي:"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
+#: colorscheme/ColorSchemeEditor.ui:266
+#, kde-format
+msgid "Left"
+msgstr "يسار"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
+#: colorscheme/ColorSchemeEditor.ui:277
+#, kde-format
+msgid "Vertical Anchor:"
+msgstr "التثبيت العمودي:"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
+#: colorscheme/ColorSchemeEditor.ui:303
+#, kde-format
+msgid "Top"
+msgstr "أعلى"
+
+#: colorscheme/ColorSchemeViewDelegate.cpp:50
+#, kde-format
+msgid "AaZz09..."
+msgstr "AaZz09..."
+
+#: CopyInputDialog.cpp:30
+#, kde-format
+msgid "Copy Input"
+msgstr "انسخ الدخْل"
+
+#. i18n: ectx: property (text), widget (QLabel, filterLabel)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: CopyInputDialog.ui:19 KeyBindingEditor.ui:41
+#, kde-format
+msgid "Filter:"
+msgstr "المرشح:"
+
+#. i18n: ectx: property (text), widget (QPushButton, selectAllButton)
+#: CopyInputDialog.ui:46
+#, kde-format
+msgid "Select All"
+msgstr "اختر الكل"
+
+#. i18n: ectx: property (text), widget (QPushButton, deselectAllButton)
+#: CopyInputDialog.ui:53
+#, kde-format
+msgid "Deselect All"
+msgstr "ألغ اختيار الكل"
+
+#: filterHotSpots/FileFilterHotspot.cpp:169
+#, kde-format
+msgid ""
+"Could not open file with the text editor specified in the profile settings;\n"
+"it will be opened with the system default editor."
+msgstr ""
+"تعذر فتح الملف باستخدام محرر النصوص المحدد في إعدادات ملف التشكيلة ؛ \n"
+"سيفتح باستخدام محرر النظام المبدئي."
+
+#: filterHotSpots/FileFilterHotspot.cpp:183
+#, kde-format
+msgid "Copy Location"
+msgstr "انسخ المكان"
+
+#: filterHotSpots/FileFilterHotspot.cpp:210
+#, kde-format
+msgid "open with"
+msgstr "افتح في"
+
+#: filterHotSpots/FileFilterHotspot.cpp:308
+#, kde-format
+msgid "Generating Thumbnail"
+msgstr "يولد مصغرات"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:90
+#, kde-format
+msgid "Open Link"
+msgstr "افتح الوصلة"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Copy Link Address"
+msgstr "انسخ عنوان الوصلة"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:95
+#, kde-format
+msgid "Send Email To..."
+msgstr "أرسِل بريد الإلكتروني إلى...."
+
+#: filterHotSpots/UrlFilterHotspot.cpp:97
+#, kde-format
+msgid "Copy Email Address"
+msgstr "انسخ عنوان البريد الإلكتروني"
+
+#: FontDialog.cpp:27
+#, kde-format
+msgctxt "@title:window"
+msgid "Select font"
+msgstr "اختر خط"
+
+#: FontDialog.cpp:43
+#, kde-format
+msgctxt "@action:button"
+msgid "Show all fonts"
+msgstr "اعرض كلّ الخطوط"
+
+#: FontDialog.cpp:70
+#, kde-format
+msgctxt "@info:status"
+msgid ""
+"By its very nature, a terminal program requires font characters that are "
+"equal width (monospace). Any non monospaced font may cause display issues. "
+"This should not be necessary except in rare cases."
+msgstr ""
+"يتطلب البرنامج الطرفي ، بحكم طبيعته ، أحرف خط متساوية العرض (مسافة أحادية). "
+"قد يتسبب أي خط غير أحادي المسافة في حدوث مشكلات في العرض.لا ينبغي أن يكون "
+"هذا ضروريًا إلا في حالات نادرة."
+
+#: HistorySizeDialog.cpp:26
+#, kde-format
+msgctxt "@title:window"
+msgid "Adjust Scrollback"
+msgstr "اضبط التمرير للخلف"
+
+#: HistorySizeDialog.cpp:47
+#, kde-format
+msgctxt "@info:status"
+msgid "Any adjustments are only temporary to this session."
+msgstr "كل التغييرات مؤقتة لهذه الجلسة."
+
+#: KeyBindingEditor.cpp:54
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Enter descriptive label"
+msgstr "أدخل لصيقة واصفة"
+
+#: KeyBindingEditor.cpp:63
+#, kde-format
+msgid "Key Combination"
+msgstr "مجموعة مفاتيح"
+
+#: KeyBindingEditor.cpp:63
+#, kde-format
+msgid "Output"
+msgstr "المخرجات"
+
+#: KeyBindingEditor.cpp:219 KeyBindingEditor.cpp:220
+#, kde-format
+msgid "New Key Binding List"
+msgstr "قائمة مفاتيح ربط جديدة"
+
+#: KeyBindingEditor.cpp:223
+#, kde-format
+msgid "Edit Key Binding List"
+msgstr "حرر  قائمة مفاتيح ربط"
+
+#: KeyBindingEditor.cpp:286
+#, kde-format
+msgid "A key bindings scheme cannot be saved with an empty description."
+msgstr "لا يمكن حفظ تشكيلة روابط المفاتيح مع وصف فارغ."
+
+#. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
+#. i18n: ectx: property (text), widget (QPushButton, btnAdd)
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:240
+#: plugins/SSHManager/sshwidget.ui:272
+#, kde-format
+msgid "Add"
+msgstr "أضف"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeEntryButton)
+#. i18n: ectx: property (text), widget (QPushButton, removeKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, removeColorSchemeButton)
+#: KeyBindingEditor.ui:72 widgets/EditProfileAppearancePage.ui:89
+#: widgets/EditProfileKeyboardPage.ui:95
+#, kde-format
+msgid "Remove"
+msgstr "أزل"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: KeyBindingEditor.ui:94
+#, kde-format
+msgctxt "Title of the area where you test your keys are properly configured"
+msgid "Test Area"
+msgstr "مساحة اختبار"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: KeyBindingEditor.ui:115
+#, kde-format
+msgid "Input:"
+msgstr "المدخلات:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: KeyBindingEditor.ui:128
+#, kde-format
+msgid "Output:"
+msgstr "الناتج:"
+
+#: main.cpp:155
+#, kde-format
+msgctxt "@title"
+msgid "Konsole"
+msgstr "كونسول"
+
+#: main.cpp:157
+#, kde-format
+msgctxt "@title"
+msgid "Terminal emulator"
+msgstr "محاكي الطرفية"
+
+#: main.cpp:159
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 1997-2022, The Konsole Developers"
+msgstr "(c) 1997-2022, مطوري كونسول"
+
+#: main.cpp:333
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kurt Hindenburg"
+msgstr "Kurt Hindenburg"
+
+#: main.cpp:335
+#, kde-format
+msgctxt "@info:credit"
+msgid "General maintainer, bug fixes and general improvements"
+msgstr "المشرف العام، إصلاح علل وتحسينات عامة"
+
+#: main.cpp:338
+#, kde-format
+msgctxt "@info:credit"
+msgid "Robert Knight"
+msgstr "Robert Knight"
+
+#: main.cpp:339
+#, kde-format
+msgctxt "@info:credit"
+msgid "Previous maintainer, ported to KDE4"
+msgstr "المدير السابق، نُقِلَت إلى كدي 4."
+
+#: main.cpp:341
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lars Doelle"
+msgstr "Lars Doelle"
+
+#: main.cpp:341
+#, kde-format
+msgctxt "@info:credit"
+msgid "Original author"
+msgstr "المؤلّف الأصلي"
+
+#: main.cpp:342
+#, kde-format
+msgctxt "@info:credit"
+msgid "Ahmad Samir"
+msgstr "Ahmad Samir"
+
+#: main.cpp:343 main.cpp:346 main.cpp:349 main.cpp:352
+#, kde-format
+msgctxt "@info:credit"
+msgid "Major refactoring, bug fixes and major improvements"
+msgstr "إعادة هيكلة كبرى وإصلاحات أخطاء وتحسينات كبيرة "
+
+#: main.cpp:345
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carlos Alves"
+msgstr "Carlos Alves"
+
+#: main.cpp:348
+#, kde-format
+msgctxt "@info:credit"
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: main.cpp:351
+#, kde-format
+msgctxt "@info:credit"
+msgid "Gustavo Carneiro"
+msgstr "Gustavo Carneiro"
+
+#: main.cpp:354
+#, kde-format
+msgctxt "@info:credit"
+msgid "Edwin Pujols"
+msgstr "Edwin Pujols"
+
+#: main.cpp:355 main.cpp:358 main.cpp:360 main.cpp:365 main.cpp:367
+#: main.cpp:368 main.cpp:369
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes and general improvements"
+msgstr "إصلاح علل وتحسينات عامة"
+
+#: main.cpp:357
+#, kde-format
+msgctxt "@info:credit"
+msgid "Martin T. H. Sandsmark"
+msgstr "Martin T. H. Sandsmark"
+
+#: main.cpp:360
+#, kde-format
+msgctxt "@info:credit"
+msgid "Nate Graham"
+msgstr "Nate Graham"
+
+#: main.cpp:361
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mariusz Glebocki"
+msgstr "Mariusz Glebocki"
+
+#: main.cpp:362
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes and major improvements"
+msgstr "إصلاح علل وتحسينات كبيرة"
+
+#: main.cpp:364
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thomas Surrel"
+msgstr "Thomas Surrel"
+
+#: main.cpp:367
+#, kde-format
+msgctxt "@info:credit"
+msgid "Jekyll Wu"
+msgstr "Jekyll Wu"
+
+#: main.cpp:368
+#, kde-format
+msgctxt "@info:credit"
+msgid "Waldo Bastian"
+msgstr "Waldo Bastian"
+
+#: main.cpp:369
+#, kde-format
+msgctxt "@info:credit"
+msgid "Stephan Binner"
+msgstr "Stephan Binner"
+
+#: main.cpp:370
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thomas Dreibholz"
+msgstr "Thomas Dreibholz"
+
+#: main.cpp:370
+#, kde-format
+msgctxt "@info:credit"
+msgid "General improvements"
+msgstr "تحسينات عامة"
+
+#: main.cpp:371
+#, kde-format
+msgctxt "@info:credit"
+msgid "Chris Machemer"
+msgstr "Chris Machemer"
+
+#: main.cpp:371 main.cpp:372 main.cpp:399 main.cpp:400 main.cpp:401
+#: main.cpp:402
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes"
+msgstr "إصلاح العلل"
+
+#: main.cpp:372
+#, kde-format
+msgctxt "@info:credit"
+msgid "Francesco Cecconi"
+msgstr "Francesco Cecconi"
+
+#: main.cpp:373
+#, kde-format
+msgctxt "@info:credit"
+msgid "Stephan Kulow"
+msgstr "Stephan Kulow"
+
+#: main.cpp:373
+#, kde-format
+msgctxt "@info:credit"
+msgid "Solaris support and history"
+msgstr "دعم سولاريس والتاريخ"
+
+#: main.cpp:374
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Neundorf"
+msgstr "Alexander Neundorf"
+
+#: main.cpp:375
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes and improved startup performance"
+msgstr "إصلاح علل و تحسين أداء البدء"
+
+#: main.cpp:377
+#, kde-format
+msgctxt "@info:credit"
+msgid "Peter Silva"
+msgstr "Peter Silva"
+
+#: main.cpp:377
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marking improvements"
+msgstr "تحسينات التأشير"
+
+#: main.cpp:378
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lotzi Boloni"
+msgstr "Lotzi Boloni"
+
+#: main.cpp:380
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Embedded Konsole\n"
+"Toolbar and session names"
+msgstr ""
+"كونسول المدمج\n"
+"أسماء شريط الأدوات و الجلسات"
+
+#: main.cpp:383
+#, kde-format
+msgctxt "@info:credit"
+msgid "David Faure"
+msgstr "David Faure"
+
+#: main.cpp:385
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Embedded Konsole\n"
+"General improvements"
+msgstr ""
+"كونسول المدمج\n"
+"تحسينات عامة"
+
+#: main.cpp:388
+#, kde-format
+msgctxt "@info:credit"
+msgid "Antonio Larrosa"
+msgstr "Antonio Larrosa"
+
+#: main.cpp:388
+#, kde-format
+msgctxt "@info:credit"
+msgid "Visual effects"
+msgstr "تأثيرات مرئية"
+
+#: main.cpp:389
+#, kde-format
+msgctxt "@info:credit"
+msgid "Matthias Ettrich"
+msgstr "Matthias Ettrich"
+
+#: main.cpp:391
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Code from the kvt project\n"
+"General improvements"
+msgstr ""
+"شفرة من مشروع kvt\n"
+"تحسينات عامة"
+
+#: main.cpp:394
+#, kde-format
+msgctxt "@info:credit"
+msgid "Warwick Allison"
+msgstr "Warwick Allison"
+
+#: main.cpp:395
+#, kde-format
+msgctxt "@info:credit"
+msgid "Schema and text selection improvements"
+msgstr "تحسينات في المخططات و إنتقاء النص"
+
+#: main.cpp:397
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dan Pilone"
+msgstr "Dan Pilone"
+
+#: main.cpp:397
+#, kde-format
+msgctxt "@info:credit"
+msgid "SGI port"
+msgstr "النقل إلى SGI"
+
+#: main.cpp:398
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kevin Street"
+msgstr "Kevin Street"
+
+#: main.cpp:398
+#, kde-format
+msgctxt "@info:credit"
+msgid "FreeBSD port"
+msgstr "النقل إلى FreeBSD"
+
+#: main.cpp:399
+#, kde-format
+msgctxt "@info:credit"
+msgid "Sven Fischer"
+msgstr "Sven Fischer"
+
+#: main.cpp:400
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dale M. Flaven"
+msgstr "Dale M. Flaven"
+
+#: main.cpp:401
+#, kde-format
+msgctxt "@info:credit"
+msgid "Martin Jones"
+msgstr "Martin Jones"
+
+#: main.cpp:402
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lars Knoll"
+msgstr "Lars Knoll"
+
+#: main.cpp:403
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thanks to many others.\n"
+msgstr "والشكر موصول إلى آخرين.\n"
+
+#: MainWindow.cpp:314
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&New Tab"
+msgstr "لسان &جديد"
+
+#: MainWindow.cpp:324
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Clone Tab"
+msgstr "استنس&خ اللسان"
+
+#: MainWindow.cpp:331
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Window"
+msgstr "&نافذة جديدة"
+
+#: MainWindow.cpp:338
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close Window"
+msgstr "أغلق النافذة"
+
+#: MainWindow.cpp:343
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Bookmarks"
+msgstr "ال&علامات"
+
+#: MainWindow.cpp:364
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Manage Profiles..."
+msgstr "أدر التشكيلات..."
+
+#: MainWindow.cpp:370
+#, kde-format
+msgctxt "@item"
+msgid "Activate Menu"
+msgstr "القائمة الفعالة"
+
+#: MainWindow.cpp:376
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Save Tab Layout..."
+msgstr "احفظ تخطيط الألسنة…"
+
+#: MainWindow.cpp:385
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load Tab Layout..."
+msgstr "حمّل تخطيط الألسن…"
+
+#: MainWindow.cpp:618 MainWindow.cpp:635
+#, kde-format
+msgctxt "@info"
+msgid "There is a process running in this window. Do you still want to quit?"
+msgid_plural ""
+"There are %1 processes running in this window. Do you still want to quit?"
+msgstr[0] ""
+"هناك عملية ما زالت تعمل في هذه النافذة، هل أنت متأكد أنك تريد الخروج؟"
+msgstr[1] ""
+"هناك عملية ما زالت تعمل في هذه النافذة، هل أنت متأكد أنك تريد الخروج؟"
+msgstr[2] ""
+"هناك عمليتان ما زالتا تعملان في هذه النافذة، هل أنت متأكد أنك تريد الخروج؟"
+msgstr[3] ""
+"هناك %1 عمليات ما زالت تعمل في هذه النافذة، هل أنت متأكد أنك تريد الخروج؟"
+msgstr[4] ""
+"هناك %1 عملية ما زالت تعمل في هذه النافذة، هل أنت متأكد أنك تريد الخروج؟"
+msgstr[5] ""
+"هناك %1 عملية ما زالت تعمل في هذه النافذة، هل أنت متأكد أنك تريد الخروج؟"
+
+#: MainWindow.cpp:624 MainWindow.cpp:641 MainWindow.cpp:655
+#, kde-format
+msgctxt "@title"
+msgid "Confirm Close"
+msgstr "أكد الغلق"
+
+#: MainWindow.cpp:625 MainWindow.cpp:642 MainWindow.cpp:656
+#, kde-format
+msgctxt "@action:button"
+msgid "Close &Window"
+msgstr "أغلق ال&نافذة"
+
+#: MainWindow.cpp:643 MainWindow.cpp:657
+#, kde-format
+msgctxt "@action:button"
+msgid "Close Current &Tab"
+msgstr "أ&غلق اللسان الحالي"
+
+#: MainWindow.cpp:652
+#, kde-format
+msgctxt "@info"
+msgid "There are %1 open terminals in this window. Do you still want to quit?"
+msgstr "يوجد %1 طرفيات مفتوحة ، هل أنت متأكد أنك تريد الخروج؟"
+
+#: MainWindow.cpp:759 Part.cpp:297
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Profiles"
+msgstr "التّشكيلات"
+
+#: MainWindow.cpp:776
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "General"
+msgstr "عام"
+
+#: MainWindow.cpp:787
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Tab Bar / Splitters"
+msgstr "شريط اللسان / فواصل"
+
+#: MainWindow.cpp:792
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Temporary Files"
+msgstr "الملفّات المؤقّتة"
+
+#: MainWindow.cpp:797
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Thumbnails"
+msgstr "المصغّرات"
+
+#: Part.cpp:300
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Part Info"
+msgstr "معلومات الجزء"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, QuickCommandsWidget)
+#: plugins/QuickCommands/qcwidget.ui:14
+#, kde-format
+msgid "Form"
+msgstr "استمارة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
+#. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
+#: plugins/QuickCommands/qcwidget.ui:53 plugins/SSHManager/sshwidget.ui:32
+#, kde-format
+msgid "Invert"
+msgstr "اعكس"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: plugins/QuickCommands/qcwidget.ui:91
+#, kde-format
+msgid "Title"
+msgstr "العنوان"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: plugins/QuickCommands/qcwidget.ui:101
+#, kde-format
+msgid "Tooltip"
+msgstr "التلميحة"
+
+#. i18n: ectx: property (text), widget (QLabel, labelGroup)
+#: plugins/QuickCommands/qcwidget.ui:111
+#, kde-format
+msgid "Group"
+msgstr "المجموعة"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, group)
+#. i18n: ectx: property (currentText), widget (QComboBox, folder)
+#: plugins/QuickCommands/qcwidget.ui:122 plugins/SSHManager/sshwidget.ui:186
+#, kde-format
+msgid "Default"
+msgstr "المبدئي"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: plugins/QuickCommands/qcwidget.ui:137
+#, kde-format
+msgid "Command"
+msgstr "الأمر:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: plugins/QuickCommands/qcwidget.ui:187
+#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#, kde-format
+msgid "Warnings"
+msgstr "التّحذيرات"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnRun)
+#: plugins/QuickCommands/qcwidget.ui:230
+#, kde-format
+msgid "Run"
+msgstr "شغّل"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnSave)
+#: plugins/QuickCommands/qcwidget.ui:250
+#, kde-format
+msgid "Save"
+msgstr "احفظ"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
+#: plugins/QuickCommands/qcwidget.ui:260
+#, kde-format
+msgid "Update"
+msgstr "حدّث"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnCancel)
+#: plugins/QuickCommands/qcwidget.ui:270 plugins/SSHManager/sshwidget.ui:282
+#, kde-format
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:38
+#, kde-format
+msgid "Quick Commands"
+msgstr "الأوامر السريعة"
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:57
+#, kde-format
+msgid "Show Quick Commands"
+msgstr "أظهر الأوامر السريعة"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:146
+#: plugins/QuickCommands/quickcommandswidget.cpp:157
+#, kde-format
+msgid "A duplicate item exists"
+msgstr "كرّر عنصر موجود"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:163
+#, kde-format
+msgid "Please fix all the warnings before trying to run this script"
+msgstr "الرجاء إصلاح جميع التحذيرات قبل محاولة تشغيل هذا السكربت"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:187
+#, kde-format
+msgid "There are some errors on the script, do you really want to run it?"
+msgstr "يوجد عدة أخطاء في هذا السكربت، هل ترغب حقاً في تشغيله؟"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:188
+#, kde-format
+msgid "Shell Errors"
+msgstr "أخطاء شل"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:189
+#, kde-format
+msgctxt "@action:button"
+msgid "Run"
+msgstr "شغّل"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:214
+#, kde-format
+msgid ""
+"You are about to delete the group %1,\n"
+" with multiple configurations, are you sure?"
+msgstr ""
+"أنت على وشك حذف مجموعة %1 \n"
+"مع العديد من الإعدادات،  أما زلت متأكّد؟"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#, kde-format
+msgid "You are about to delete %1, are you sure?"
+msgstr "أنت على وشك حذف  %1، هل أنت متأكّد؟"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#, kde-format
+msgid "Delete Quick Commands Configurations"
+msgstr "احذف إعدادات الأوامر السريعة"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:248
+#, kde-format
+msgid "Title can not be empty or blank"
+msgstr "لا يجب أن يكون العنوان فارغًا"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#, kde-format
+msgid "Command can not be empty"
+msgstr "الأمر لا يمكن أن يكون فارغاً"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#, kde-format
+msgid "Rename"
+msgstr "أعد التسمية"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#, kde-format
+msgid "Delete"
+msgstr "احذف"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:307
+#, kde-format
+msgid "Warnings (*)"
+msgstr "التّحذيرات (*)"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:46
+#, kde-format
+msgctxt "@item:inlistbox Hosts from ssh/config file"
+msgid "SSH Config"
+msgstr "ضبط SSH"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:49
+#, kde-format
+msgctxt "@item:inlistbox The default list of ssh hosts"
+msgid "Default"
+msgstr "المبدئي"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:75
+#, kde-format
+msgid "%1 is a folder for SSH entries"
+msgstr "‏%1 هو مجلد لمدخلات SSH"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:79
+#: plugins/SSHManager/sshmanagermodel.cpp:302
+#: plugins/SSHManager/sshmanagermodel.cpp:370
+#: plugins/SSHManager/sshmanagermodel.cpp:403
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:97
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#, kde-format
+msgid "SSH Config"
+msgstr "ضبط SSH"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:103
+#, kde-format
+msgid "Host: %1"
+msgstr "المضيف: %1"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:46
+#, kde-format
+msgid "SSH Manager"
+msgstr "مدير SSH"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:64
+#, kde-format
+msgid "Show SSH Manager"
+msgstr "أظهر مدير SSH"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:73
+#: plugins/SSHManager/sshwidget.ui:105
+#, kde-format
+msgid "SSH Key"
+msgstr "مفتاح SSH"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:112
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete"
+msgstr "احذف"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:136
+#, kde-format
+msgid "Don't Change"
+msgstr "لا تغيير"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:207
+#, kde-format
+msgid ""
+"You are about to delete the folder %1,\n"
+" with multiple SSH Configurations, are you sure?"
+msgstr ""
+"أنت على وشك حذف المجلد %1 \n"
+"يحوي المجلد على ملفات ضبط متعددة لـ SSH،  أما زلت متأكّد؟"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:215
+#, kde-format
+msgctxt "@title:window"
+msgid "Delete SSH Configurations"
+msgstr "احذف إعدادات SSH"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:362
+#, kde-format
+msgid "Missing Hostname"
+msgstr "اسم المضيف مفقود"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:367
+#, kde-format
+msgid "Missing Name"
+msgstr "الاسم مفقود"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:374
+#, kde-format
+msgid "If Use Ssh Config is set, do not specify sshkey or username."
+msgstr "إذا عُيّن استخدام Ssh Config ، فلا تحدد مفتاح ssh أو اسم المستخدم."
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
+#, kde-format
+msgid "At least Username or SSHKey must be set"
+msgstr "يجب على الأقل كتابة اسم المستخدم أو مفتاح SSH"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:385
+#, kde-format
+msgid "Missing Folder"
+msgstr "المجلد مفقود"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#, kde-format
+msgid "An SSH session must have a profile"
+msgstr "جلسة SSH يجب أن تملك تشكيلة"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#, kde-format
+msgid "Cannot delete this folder"
+msgstr "تعذر حذف هذا المجلد"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#, kde-format
+msgid "Delete folder and all of its contents"
+msgstr "احذف المجلد وجميع محتوياته"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:421
+#, kde-format
+msgid "Double click to change the folder name."
+msgstr "انقر مزدوجًا لتغيير اسم المجلد"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#, kde-format
+msgid "You can't delete an automatically added entry."
+msgstr "لا يمكنك حذف مدخلة مضافة آليا."
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#, kde-format
+msgid "Delete selected entry"
+msgstr "احذف المدخلة المحددة"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#, kde-format
+msgid ""
+"Could not get the process name, assume that we can't request a connection"
+msgstr "لا يمكن الحصول على اسم العملية، ربما لم نتمكن من طلب اتصال"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#, kde-format
+msgid "Error issuing SSH Command"
+msgstr "خطأ في إصدار أمر SSH"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#, kde-format
+msgid ""
+"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
+msgstr "لا يمكن إصدار أمرر SSH خارج تطبيق الصدفة (مثل bash و zsh و sh)"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#: plugins/SSHManager/sshwidget.ui:19
+#, kde-format
+msgid "Filter..."
+msgstr "رشّح..."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
+#: plugins/SSHManager/sshwidget.ui:29
+#, kde-format
+msgid "Show entries that don't match the filter"
+msgstr "أعرض المدخلات التي لا تطابق المرشح"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: plugins/SSHManager/sshwidget.ui:54
+#, kde-format
+msgid "Identifier"
+msgstr "المعرف"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, name)
+#: plugins/SSHManager/sshwidget.ui:61
+#, kde-format
+msgid "A name for this ssh entry"
+msgstr "اسم لمدخلة ssh هذه"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
+#: plugins/SSHManager/sshwidget.ui:64
+#, kde-format
+msgid "The name of this entry on the list"
+msgstr "اسم هذه المدخلة في القائمة"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: plugins/SSHManager/sshwidget.ui:71
+#, kde-format
+msgid "SSH Hostname"
+msgstr "اسم مضيف SSH"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
+#: plugins/SSHManager/sshwidget.ui:78 plugins/SSHManager/sshwidget.ui:81
+#, kde-format
+msgid "The hostname of the server"
+msgstr "اسم مضيف للخادم"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: plugins/SSHManager/sshwidget.ui:88
+#, kde-format
+msgid "Port"
+msgstr "المنفذ"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, port)
+#: plugins/SSHManager/sshwidget.ui:95
+#, kde-format
+msgid "The port of the server, 22 is the default for ssh connections"
+msgstr "منفذ الخادوم، ٢٢ هو المنفذ المبدئي لاتصالات ssh"
+
+#. i18n: ectx: property (text), widget (QLineEdit, port)
+#: plugins/SSHManager/sshwidget.ui:98
+#, kde-format
+msgid "22"
+msgstr "22"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:114
+#, kde-format
+msgid "The private key to be used for this connection"
+msgstr "المفتاح الخاص الذي سيستخدم لهذا الاتصال"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:120
+#, kde-format
+msgid "The private key"
+msgstr "المفتاح الخاص"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: plugins/SSHManager/sshwidget.ui:140
+#, kde-format
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:147
+#, kde-format
+msgid "The username for the connection"
+msgstr "اسم المستخدم للاتصال"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:150
+#, kde-format
+msgid "Your username"
+msgstr "اسم المستخدم الخاص بك"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
+#: plugins/SSHManager/sshwidget.ui:157
+#, kde-format
+msgid ""
+"If this is set, we don't rely on the SSH key set above, but on the "
+"configuration on ~/.ssh/config"
+msgstr ""
+"إذا مكنت هذه ؛ فلن نعتمد على مفتاح SSH المعين في الأعلى، لكن سنعتمد على "
+"الضبط الموجود في ‎~/.ssh/config"
+
+#. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
+#: plugins/SSHManager/sshwidget.ui:160
+#, kde-format
+msgid "Use ~/.ssh/config for key"
+msgstr "استخدم ~/.ssh/config للمفتاح"
+
+#. i18n: ectx: property (text), widget (QLabel, folderLabel)
+#: plugins/SSHManager/sshwidget.ui:167
+#, kde-format
+msgid "Folder"
+msgstr "المجلد"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, folder)
+#: plugins/SSHManager/sshwidget.ui:180
+#, kde-format
+msgid "For organizational purposes, this entry will be inside of this folder."
+msgstr "من أجل التنظيم ستكون هذه المدخلة بداخل هذا المجلد."
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: plugins/SSHManager/sshwidget.ui:193
+#, kde-format
+msgid "Profile"
+msgstr "التشكيلة"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, profile)
+#: plugins/SSHManager/sshwidget.ui:206
+#, kde-format
+msgid "The profile to be active when the ssh session starts"
+msgstr "التشكيلة التي ستنشط عندما تبدأ جلسة ssh"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
+#: plugins/SSHManager/sshwidget.ui:231
+#, kde-format
+msgid "Add a new SSH Entry"
+msgstr "أضف مدخلة SSH جديدة"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
+#: plugins/SSHManager/sshwidget.ui:245
+#, kde-format
+msgid "Delete selected SSH entry"
+msgstr "احذف مدخلة SSH المحددة"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
+#: plugins/SSHManager/sshwidget.ui:259
+#, kde-format
+msgid "Edit selected entry"
+msgstr "حرر المدخلة المحددة"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
+#: plugins/SSHManager/sshwidget.ui:269
+#, kde-format
+msgid "Add new SSH Configuration"
+msgstr "أضف إعدادات  SSH جديدة"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
+#: plugins/SSHManager/sshwidget.ui:279
+#, kde-format
+msgid "Cancel Add or Edit"
+msgstr "ألغ الإضافة أو التحرير"
+
+#: pluginsystem/PluginManager.cpp:83
+#, kde-format
+msgid "No plugins available"
+msgstr "لا يوجد ملحقات"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
+#. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
+#: PrintOptions.ui:14 PrintOptions.ui:20
+#, kde-format
+msgid "Output Options"
+msgstr "خيارات الإخراج"
+
+#. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
+#. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
+#: PrintOptions.ui:39 settings/konsole.kcfg:165
+#, kde-format
+msgid "Printer &friendly mode (black text, no background)"
+msgstr "نمط الا&قتصادي (كتابة بالأسود ، لا خلفية )"
+
+#. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
+#. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
+#: PrintOptions.ui:46 settings/konsole.kcfg:169
+#, kde-format
+msgid "&Scale output"
+msgstr "&حجّم المخرجات"
+
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:459
+#, kde-format
+msgid "Default profile"
+msgstr "التشكيلة الافتراضية"
+
+#: profile/ProfileManager.cpp:265
+#, kde-format
+msgid "Konsole does not have permission to save this profile to %1"
+msgstr "لا يملك كونسول الصلاحيات لحفظ هذه التشكيلة في %1"
+
+#: profile/ProfileModel.cpp:55
+#, kde-format
+msgctxt "@title:column Profile name"
+msgid "Name"
+msgstr "الاسم"
+
+#: profile/ProfileModel.cpp:57
+#, kde-format
+msgctxt "@title:column Profile keyboard shortcut"
+msgid "Shortcut"
+msgstr "الاختصار"
+
+#: profile/ProfileModel.cpp:80
+#, kde-format
+msgctxt ""
+"@label:textbox added to the name of the built-in profile, to point out it's "
+"read-only"
+msgid " [Read-only]"
+msgstr " [للقراءة فقط]"
+
+#: profile/ProfileModel.cpp:84
+#, kde-format
+msgctxt "@label:textbox added to the name of the current default profile"
+msgid " [Default]"
+msgstr " [المبدئيّ]"
+
+#: profile/ProfileModel.cpp:99
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Built-in profile is always available"
+msgstr "التشكيل المضمن دائما متوفر"
+
+#: profile/ProfileModel.cpp:111
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Double click to change shortcut"
+msgstr "انقر مزدوجًا لتغيير الاختصار"
+
+#: RenameTabDialog.cpp:25
+#, kde-format
+msgid "Tab Properties"
+msgstr "خصائص اللسان"
+
+#: SaveHistoryTask.cpp:68
+#, kde-format
+msgid "Save Output From %1"
+msgstr "احفظ مخرجات من %1"
+
+#: SaveHistoryTask.cpp:80
+#, kde-format
+msgid "%1 is an invalid URL, the output could not be saved."
+msgstr "العنوان %1 غير صالح ، لا يمكن حفظ المخرجات."
+
+#: SaveHistoryTask.cpp:161
+#, kde-format
+msgid ""
+"A problem occurred when saving the output.\n"
+"%1"
+msgstr ""
+"حصلت مشكلة أثناء حفظ المخرجات.\n"
+"%1"
+
+#: schemas.cpp:1
+#, kde-format
+msgid "Black on Light Yellow"
+msgstr "أسود على أصفر خفيف"
+
+#: schemas.cpp:2
+#, kde-format
+msgid "Black on Random Light"
+msgstr "أسود على لون خفيف"
+
+#: schemas.cpp:3
+#, kde-format
+msgid "Black on White"
+msgstr "أسود على أبيض"
+
+#: schemas.cpp:4
+#, kde-format
+msgid "Blue on Black"
+msgstr "أزرق على أسود"
+
+#: schemas.cpp:5
+#, kde-format
+msgid "Breeze"
+msgstr "النسيم"
+
+#: schemas.cpp:6
+#, kde-format
+msgid "Dark Pastels"
+msgstr "بستيلات غامقة"
+
+#: schemas.cpp:7
+#, kde-format
+msgid "Green on Black"
+msgstr "أخضر على أسود"
+
+#: schemas.cpp:8
+#, kde-format
+msgid "Linux Colors"
+msgstr "ألوان لينكس"
+
+#: schemas.cpp:9
+#, kde-format
+msgid "Red on Black"
+msgstr "أحمر على أسود"
+
+#: schemas.cpp:10
+#, kde-format
+msgid "Solarized"
+msgstr "شمسي"
+
+#: schemas.cpp:11
+#, kde-format
+msgid "Solarized Light"
+msgstr "ضوء شمسي"
+
+#: schemas.cpp:12
+#, kde-format
+msgid "White on Black"
+msgstr "أبيض على أسود"
+
+#: schemas.cpp:13
+#, kde-format
+msgid "Default (XFree 4)"
+msgstr "افتراضي (XFree 4)"
+
+#: schemas.cpp:14
+#, kde-format
+msgid "Linux console"
+msgstr "لوحة تحكم لينكس"
+
+#: schemas.cpp:15
+#, kde-format
+msgid "macOS"
+msgstr "ماك اوس"
+
+#: schemas.cpp:16
+#, kde-format
+msgid "Solaris console"
+msgstr "لوحة تحكم سولاريز"
+
+#: session/Session.cpp:88
+#, kde-format
+msgid "Bell in '%1' (Session '%2')"
+msgstr "جرس في  '%1' ( الجلسة '%2')"
+
+#: session/Session.cpp:373
+#, kde-format
+msgid "Could not find binary: "
+msgstr "لا يمكن إيجاد الملف التنفيذي:"
+
+#: session/Session.cpp:382
+#, kde-format
+msgctxt "@info:shell Alert the user with red color text"
+msgid "Warning: "
+msgstr "تحذير:"
+
+#: session/Session.cpp:457
+#, kde-format
+msgid "Could not find an interactive shell to start."
+msgstr "لا يمكن إيجاد محارة تفاعلية ليبدأ بها."
+
+#: session/Session.cpp:463 session/Session.cpp:465
+#, kde-format
+msgid ""
+"Could not find '%1', starting '%2' instead.  Please check your profile "
+"settings."
+msgstr ""
+"لا يمكن إيجاد  '%1', سيبدأ بـ '%2' عوضا عن ذلك. رجاءا تأكد من إعدادات "
+"التشكيلة."
+
+#: session/Session.cpp:516
+#, kde-format
+msgid "Could not start program '%1' with arguments '%2'."
+msgstr "لا يمكن بدء البرنامج  '%1' بالمعاملات '%2'."
+
+#: session/Session.cpp:661
+#, kde-format
+msgid "Silence in '%1' (Session '%2')"
+msgstr "سكوت في '%1' (الجلسة '%2')"
+
+#: session/Session.cpp:665 session/Session.cpp:1825
+#: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#, kde-format
+msgid "Show session"
+msgstr "اعرض الجلسة"
+
+#: session/Session.cpp:929
+#, kde-format
+msgid ""
+"The D-Bus methods sendText/runCommand were just used.  There are security "
+"concerns about allowing these methods to be public.  If desired, these "
+"methods can be changed to internal use only by re-compiling Konsole. <p>This "
+"warning will only show once for this Konsole instance.</p>"
+msgstr ""
+"استخدمت طريقة D-Bus sendText / runCommand للتو. هناك مخاوف أمنية بشأن السماح "
+"بأن تكون هذه الأساليب عامة. إذا رغبت في ذلك ، يمكن تغيير هذه الطرق إلى "
+"الاستخدام الداخلي فقط عن طريق إعادة تجميع كونسول. <p> سيظهر هذا التحذير مرة "
+"واحدة فقط لمثيل كونسول هذا. </p>"
+
+#: session/Session.cpp:965
+#, kde-format
+msgctxt "@info:shell This session is done"
+msgid "Finished"
+msgstr "انتهى"
+
+#: session/Session.cpp:979 session/Session.cpp:990
+#, kde-format
+msgid "Program '%1' crashed."
+msgstr "انهار البرنامج '%1' ."
+
+#: session/Session.cpp:981
+#, kde-format
+msgid "Program '%1' exited with status %2."
+msgstr "البرنامج '%1' خرج بالحالة %2."
+
+#: session/Session.cpp:1489
+#, kde-format
+msgid "ZModem Progress"
+msgstr "تقدّم ZModem"
+
+#: session/Session.cpp:1821
+#, kde-format
+msgid "Activity in '%1' (Session '%2')"
+msgstr "نشاط في '%1' (الجلسة '%2')"
+
+#: session/SessionController.cpp:147
+#, kde-format
+msgid "Konsole"
+msgstr "كونسول"
+
+#: session/SessionController.cpp:360
+#, kde-format
+msgid "The process '%1' has finished running in session '%2'"
+msgstr "انتهت العملية '%1' من العمل في الجلسة '%2'"
+
+#: session/SessionController.cpp:442
+#, kde-format
+msgid "Konsole does not know how to open the bookmark: "
+msgstr "لا يعرف كونسول كيف يفتح العلامة: "
+
+#: session/SessionController.cpp:521
+#, kde-format
+msgid "Search for '%1' with"
+msgstr "ابحث عن '%1' بـ"
+
+#: session/SessionController.cpp:537
+#, kde-format
+msgid "Configure Web Shortcuts..."
+msgstr "اضبط اختصارات الوِب..."
+
+#: session/SessionController.cpp:651
+#, kde-format
+msgid "&Close Session"
+msgstr "أ&غلق الجلسة"
+
+#: session/SessionController.cpp:658
+#, kde-format
+msgid "Open File Manager"
+msgstr "افتح مدير الملفات"
+
+#: session/SessionController.cpp:670
+#, kde-format
+msgid "Copy"
+msgstr "انسخ"
+
+#: session/SessionController.cpp:676
+#, kde-format
+msgid "Copy except prompts"
+msgstr "انسخ ماعدا المطالبات"
+
+#: session/SessionController.cpp:682
+#, kde-format
+msgid "Copy user input"
+msgstr "انسخ دخْل المستخدم"
+
+#: session/SessionController.cpp:688
+#, kde-format
+msgid "Copy command output"
+msgstr "انسخ خرج الأمر"
+
+#: session/SessionController.cpp:703
+#, kde-format
+msgid "Paste Selection"
+msgstr "ألصق المحدد"
+
+#: session/SessionController.cpp:710
+#, kde-format
+msgid "Web Search"
+msgstr "بحث الوِب"
+
+#: session/SessionController.cpp:716
+#, kde-format
+msgid "&Select All"
+msgstr "ا&ختر الكل"
+
+#: session/SessionController.cpp:720
+#, kde-format
+msgid "Select &Line"
+msgstr "انتقِ &خطًّا"
+
+#: session/SessionController.cpp:723
+#, kde-format
+msgid "Save Output &As..."
+msgstr "احفظ ال&مخرجات كـ ..."
+
+#: session/SessionController.cpp:729
+#, kde-format
+msgid "&Print Screen..."
+msgstr "ا&طبع الشاشة..."
+
+#: session/SessionController.cpp:733
+#, kde-format
+msgid "Adjust Scrollback..."
+msgstr "اضبط التمرير الخلفي..."
+
+#: session/SessionController.cpp:737
+#, kde-format
+msgid "Clear Scrollback"
+msgstr "امسح التمرير الخلفي"
+
+#: session/SessionController.cpp:741
+#, kde-format
+msgid "Clear Scrollback and Reset"
+msgstr "امح التمرير الخلفي و أعد الضبط"
+
+#: session/SessionController.cpp:750
+#, kde-format
+msgid "Switch Profile"
+msgstr "بدِّل الوَضع"
+
+#: session/SessionController.cpp:779
+#, kde-format
+msgid "Set &Encoding"
+msgstr "عيّن ال&تشفير"
+
+#: session/SessionController.cpp:799
+#, kde-format
+msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
+msgid "Allow mouse tracking"
+msgstr "مكّن تتبع الفأرة"
+
+#: session/SessionController.cpp:807
+#, kde-format
+msgctxt "@item:inmenu A read only (locked) session"
+msgid "Read-only"
+msgstr "للقراءة فقط"
+
+#: session/SessionController.cpp:818
+#, kde-format
+msgid "&Configure or Rename Tab..."
+msgstr "ا&ضبط أو أعد تسمية لسان..."
+
+#: session/SessionController.cpp:824
+#, kde-format
+msgid "&All Tabs in Current Window"
+msgstr "&جميع الألسنة في النافذة الحالية"
+
+#: session/SessionController.cpp:831
+#, kde-format
+msgid "&Select Tabs..."
+msgstr "ا&ختر الألسنة..."
+
+#: session/SessionController.cpp:837
+#, kde-format
+msgctxt "@action:inmenu Do not select any tabs"
+msgid "&None"
+msgstr "&لا شيء"
+
+#: session/SessionController.cpp:845
+#, kde-format
+msgid "Copy Input To"
+msgstr "انسخ المدخلات إلى "
+
+#: session/SessionController.cpp:852
+#, kde-format
+msgid "&ZModem Upload..."
+msgstr "&رفع ZModem ..."
+
+#: session/SessionController.cpp:857
+#, kde-format
+msgid "Monitor for &Activity"
+msgstr "راقب الن&شاط"
+
+#: session/SessionController.cpp:863
+#, kde-format
+msgid "Monitor for &Silence"
+msgstr "مراقبة الس&كون"
+
+#: session/SessionController.cpp:869
+#, kde-format
+msgid "Monitor for Process Finishing"
+msgstr "راقب لانتهاء العملية"
+
+#: session/SessionController.cpp:876
+#, kde-format
+msgid "Enlarge Font"
+msgstr "كبّر الخط"
+
+#: session/SessionController.cpp:884
+#, kde-format
+msgid "Shrink Font"
+msgstr "قلص الخط"
+
+#: session/SessionController.cpp:889
+#, kde-format
+msgid "Reset Font Size"
+msgstr "صفّر حجم الخط"
+
+#: session/SessionController.cpp:894
+#, kde-format
+msgid "Send Signal"
+msgstr "أرسل إشارة"
+
+#: session/SessionController.cpp:898
+#, kde-format
+msgid "&Suspend Task"
+msgstr "&علّق المهمة"
+
+#: session/SessionController.cpp:903
+#, kde-format
+msgid "&Continue Task"
+msgstr "&تابع المهمة"
+
+#: session/SessionController.cpp:908
+#, kde-format
+msgid "&Hangup"
+msgstr "ا&فصل"
+
+#: session/SessionController.cpp:913
+#, kde-format
+msgid "&Interrupt Task"
+msgstr "قا&طع المهمة"
+
+#: session/SessionController.cpp:918
+#, kde-format
+msgid "&Terminate Task"
+msgstr "أ&نهِ المهمة"
+
+#: session/SessionController.cpp:923
+#, kde-format
+msgid "&Kill Task"
+msgstr "ا&قتل المهمة"
+
+#: session/SessionController.cpp:928
+#, kde-format
+msgid "User Signal &1"
+msgstr "إشارة المستخدم &1"
+
+#: session/SessionController.cpp:933
+#, kde-format
+msgid "User Signal &2"
+msgstr "إشارة المستخدم &2"
+
+#: session/SessionController.cpp:950
+#, kde-format
+msgid "Create New Profile..."
+msgstr "أنشئ تشكيلة جديدة..."
+
+#: session/SessionController.cpp:952
+#, kde-format
+msgid "Edit Current Profile..."
+msgstr "حرّر التشكيلة الحالية..."
+
+#: session/SessionController.cpp:1069
+#, kde-format
+msgid ""
+"A program is currently running in this session.  Are you sure you want to "
+"close it?"
+msgstr "يوجد برنامج يعمل الآن في هذه الجلسة. هل أنت متأكد أنك تريد إغلاقها؟"
+
+#: session/SessionController.cpp:1073
+#, kde-format
+msgid ""
+"The program '%1' is currently running in this session.  Are you sure you "
+"want to close it?"
+msgstr "البرنامج '%1' يعمل حاليا في هذه الجلسة. أمتأكد أنك تريد إغلاقها؟"
+
+#: session/SessionController.cpp:1080 session/SessionController.cpp:1115
+#, kde-format
+msgid "Confirm Close"
+msgstr "أكد الغلق"
+
+#: session/SessionController.cpp:1081
+#, kde-format
+msgctxt "@action:button"
+msgid "Close Program"
+msgstr "أغلق البرنامج"
+
+#: session/SessionController.cpp:1104
+#, kde-format
+msgid ""
+"A program in this session would not die.  Are you sure you want to kill it "
+"by force?"
+msgstr "يوجد برنامج في هذه الجلسة لن يموت. هل أنت متأكد أنك تريد قتلها بالقوة؟"
+
+#: session/SessionController.cpp:1108
+#, kde-format
+msgid ""
+"The program '%1' is in this session would not die.  Are you sure you want to "
+"kill it by force?"
+msgstr "البرنامج '%1' لن يموت في هذه الجلسة. أمتأكد أنك تريد إغلاقها؟"
+
+#: session/SessionController.cpp:1116
+#, kde-format
+msgctxt "@action:button"
+msgid "Kill Program"
+msgstr "اقتل البرنامج"
+
+#: session/SessionController.cpp:1941
+#, kde-format
+msgid "Open Current Folder With"
+msgstr "افتح المجلد الحالي بـ"
+
+#: session/SessionController.cpp:2011
+#, kde-format
+msgid "Save ZModem Download to..."
+msgstr "احفظ تحميل ZModem إلى ..."
+
+#: session/SessionController.cpp:2021
+#, kde-format
+msgid ""
+"<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
+"software was found on this system.</p><p>You may wish to install the 'rzsz' "
+"or 'lrzsz' package.</p>"
+msgstr ""
+"<p>اكتشفت محالة لنقل ملف  ZModem ؛ ولكن لا يوجد برنامج ZModem مناسب في "
+"النظام.</p><p>قد ترغب في تثبيت حزمة  'rzsz' أو 'lrzsz' .</p>"
+
+#: session/SessionController.cpp:2031
+#, kde-format
+msgid ""
+"<p>The current session already has a ZModem file transfer in progress.</p>"
+msgstr "<p>الجلسة الحالية تحوي على عملية نقل ملف ZModem بالفعل.</p>"
+
+#: session/SessionController.cpp:2041
+#, kde-format
+msgid ""
+"<p>No suitable ZModem software was found on this system.</p><p>You may wish "
+"to install the 'rzsz' or 'lrzsz' package.</p>"
+msgstr ""
+"<p>لا يوجد برنامج ZModem مناسب في النظام.</p><p>قد ترغب في تثبيت حزمة  "
+"'rzsz' أو 'lrzsz' .</p>"
+
+#: session/SessionController.cpp:2046
+#, kde-format
+msgid "Select Files for ZModem Upload"
+msgstr "اختر ملفات لرفع  ZModem"
+
+#: session/SessionListModel.cpp:89
+#, kde-format
+msgctxt "@item:intable The session index"
+msgid "Number"
+msgstr "الرقم"
+
+#: session/SessionListModel.cpp:91
+#, kde-format
+msgctxt "@item:intable The session title"
+msgid "Title"
+msgstr "العنوان"
+
+#: settings/ConfigurationDialog.cpp:31
+#, kde-format
+msgctxt "@title:window"
+msgid "Configure"
+msgstr "اضبط"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:55
+#, kde-format
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "ابحث:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:68 settings/konsole.kcfg:22
+#, kde-format
+msgid "Enable menu accelerators"
+msgstr "مكّن مسرّعات القوائم"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:81
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr "إذا كان مفعَّلاً، فسيتم تجاهل إعدادات الوَضع"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:84
+#, kde-format
+msgid "Remember window size"
+msgstr "تذكر حجم النافذة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:97 settings/konsole.kcfg:17
+#, kde-format
+msgid "Show window title on the titlebar"
+msgstr "أظهر عنوان النافذة في شريط العنوان"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr "ركّز على الطّرفيّات عند تحرّك مؤشّر الفأرة فوقها"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:117 settings/konsole.kcfg:69
+#, kde-format
+msgid "Match using regular expressions"
+msgstr "طابق باستخدام التعابير النمطية"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:130 settings/konsole.kcfg:33
+#, kde-format
+msgid "When launching Konsole re-use existing process if possible"
+msgstr "عند بدء تشغيل كونسول ، أعد استخدام العملية الحالية إن أمكن"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
+#, kde-format
+msgid "Run all Konsole windows in a single process"
+msgstr "شغّل كل نوافذ كونسول على عملية واحدة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:146
+#, kde-format
+msgid "Highlight all matches"
+msgstr "أبرز كل المتطابقات"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/GeneralSettings.ui:175 settings/konsole.kcfg:65
+#, kde-format
+msgid "Sets whether the search is case sensitive"
+msgstr "اختر إذا ما كانت حالة الأحرف حساسة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#: settings/GeneralSettings.ui:178
+#, kde-format
+msgid "Case sensitive"
+msgstr "حسّاس لحالة الأحرف"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:185 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr "أزل إطار النافذة و شريط العنوان"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:208
+#, kde-format
+msgid "Process and window:"
+msgstr "العملية والنافذة:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:218
+#, kde-format
+msgid "Notifications:"
+msgstr "الإخطارات:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:236
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "سيتم عرض كل الحوارات مرة أخرى"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:239
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "فعِّل كل نوافذ \"لا تسأل مجدّدًا"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:267 settings/konsole.kcfg:79
+#, kde-format
+msgid "Sets whether search should start from the bottom"
+msgstr "حدِّد ما إذا كان يجب بدء البحث من الأسفل"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:270 settings/konsole.kcfg:78
+#, kde-format
+msgid "Search backwards"
+msgstr "ابحث بالعكس"
+
+#. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/konsole.kcfg:18
+#, kde-format
+msgid "Show window title set by escape sequence on the titlebar"
+msgstr "أظهر عنوان النافذة الذي تم تعيينه بواسطة تسلسل الهروب على شريط العنوان"
+
+#. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/konsole.kcfg:23
+#, kde-format
+msgid "Allow users to access top menu through Alt+Key combination"
+msgstr "اسمح للمستخدمين أن يصِلوا إلى القائمة العلوية باستخدام تركيبة مفتاح Alt"
+
+#. i18n: ectx: label, entry (RememberWindowSize), group (KonsoleWindow)
+#: settings/konsole.kcfg:27
+#, kde-format
+msgid "Use current window size on next startup"
+msgstr "استخدم حجم النافذة الحالية عند بدء التشغيل"
+
+#. i18n: ectx: tooltip, entry (RememberWindowSize), group (KonsoleWindow)
+#: settings/konsole.kcfg:28
+#, kde-format
+msgid "The window size will be saved upon exiting Konsole"
+msgstr "سيُحفَظ حجم النافذة عند الخروج من كونسول"
+
+#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:42
+#, kde-format
+msgid "Thumbnail Width"
+msgstr "عرض المصغرة"
+
+#. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:43
+#, kde-format
+msgid "Sets the width of the thumbnail"
+msgstr "تحدد عرض المصغرة"
+
+#. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:47 settings/konsole.kcfg:48
+#, kde-format
+msgid "Use Shift to display a thumbnail"
+msgstr "استخدم Shift لعرض المصغرة"
+
+#. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#, kde-format
+msgid "Use Alt to display a thumbnail"
+msgstr "استخدم Alt لعرض المصغرة"
+
+#. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#, kde-format
+msgid "Use Ctrl to display a thumbnail"
+msgstr "استخدم Ctrl لعرض المصغرة"
+
+#. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/konsole.kcfg:64
+#, kde-format
+msgid "Search is case sensitive"
+msgstr "البحث حساس لحالة الأحرف"
+
+#. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
+#: settings/konsole.kcfg:73
+#, kde-format
+msgid "Highlight all search matches"
+msgstr "أبرز كل متطابقات البحث"
+
+#. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
+#: settings/konsole.kcfg:74
+#, kde-format
+msgid "Sets whether matching text should be highlighted"
+msgstr "اختر إذا ما كنت تريد إبراز النص المتطابق"
+
+#. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
+#. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
+#: settings/konsole.kcfg:85 settings/konsole.kcfg:105
+#, kde-format
+msgid "Control the visibility of the whole tab bar"
+msgstr "تحكم بعرض شريط الألسنة بأكمله"
+
+#. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
+#: settings/konsole.kcfg:94
+#, kde-format
+msgid "Control the size of the handle between panels"
+msgstr "تحكم في حجم المقبض بين الألواح"
+
+#. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
+#: settings/konsole.kcfg:114
+#, kde-format
+msgid "Control the position of the tab bar"
+msgstr "تحكّم في موقع شريط الألسنة"
+
+#. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
+#: settings/konsole.kcfg:122
+#, kde-format
+msgid "Control the visual style of the tab bar"
+msgstr "تحكم بالشكل المرئي لشريط الألسنة"
+
+#. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
+#: settings/konsole.kcfg:126
+#, kde-format
+msgid "Use a user-defined .css file for the tab bar"
+msgstr "استخدم ملف .css معرّف من قبل المستخدم لشريط علامات التبويب"
+
+#. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
+#: settings/konsole.kcfg:130
+#, kde-format
+msgid "The .css file to use for the tab bar style"
+msgstr "ملف css. الذي سيُستخدَم لشكل شريط الألسنة"
+
+#. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
+#: settings/konsole.kcfg:134
+#, kde-format
+msgid "Allow middle-clicking on open tabs to close them"
+msgstr "اسمح بالنقر الأوسط على الألسنة المفتوحة لإغلاقها"
+
+#. i18n: ectx: label, entry (NewTabButton), group (TabBar)
+#: settings/konsole.kcfg:138
+#, kde-format
+msgid "Control the visibility of 'New Tab' button on the tab bar"
+msgstr "تحكم برؤية زر 'لسان جديد' على شريط الألسنة"
+
+#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#: settings/konsole.kcfg:142
+#, kde-format
+msgid "Control where the \"Close tab\" button will be displayed"
+msgstr "تحكم في مكان عرض زر \"إغلاق لسان\""
+
+#. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
+#: settings/konsole.kcfg:151
+#, kde-format
+msgid "Control where to put the new tab"
+msgstr "تحكم بمكان وضع اللسان الجديد"
+
+#. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
+#: settings/konsole.kcfg:159
+#, kde-format
+msgid "Expand the tab widths"
+msgstr "وسع عرض اللسان"
+
+#. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
+#: settings/konsole.kcfg:175
+#, kde-format
+msgid "For scrollback files, use system-wide folder location"
+msgstr "بالنسبة لملفات التمرير ، استخدم موقع المجلد على مستوى النظام"
+
+#. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
+#: settings/konsole.kcfg:179
+#, kde-format
+msgid "For scrollback files, use user's specific folder location"
+msgstr "بالنسبة لملفات التمرير ، استخدم موقع خاص بالمستخدم"
+
+#. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
+#: settings/konsole.kcfg:183
+#, kde-format
+msgid "For scrollback files, use specified folder location"
+msgstr "بالنسبة لملفات التمرير ، استخدم موقع مجلد مخصص"
+
+#. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
+#: settings/konsole.kcfg:187
+#, kde-format
+msgid "For scrollback files, use this folder"
+msgstr "بالنسبة لملفات التمرير ، استخدم هذا المجلد"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/PartInfo.ui:29
+#, kde-format
+msgid ""
+"<html><head/><body><p>Applications that use KonsolePart share profiles.</"
+"p><p>They do not share with Konsole or other applications:<ul><li>default "
+"profile</li><li>show in menu</li><li>shortcuts</li></ul></p><p>Feel free to "
+"open a Konsole <a href=\"https://bugs.kde.org/enter_bug.cgi?"
+"format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
+"a change to how these are handled.</body></html>"
+msgstr ""
+"<html><head/><body> <p> التطبيقات التي تستخدم جزء كونسول تتشارك التشكيلات. </"
+"p> <p> لا تتشارك مع كونسول أو تطبيقات أخرى: <ul> <li> التشكيلة المبدئية </ "
+"li> < li> إظهار في القائمة </ li> <li> الاختصارات </ li> </ul> </p> <p> لا "
+"تتردد في فتح كونسول <a href = \"https://bugs.kde.org/enter_bug .cgi؟format = "
+"guided & product = konsole & component = kpart \"> تقرير الخطأ </a> إذا كنت "
+"ترغب في تغيير كيفية التعامل معها. </ body> </html> "
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
+#: settings/ProfileSettings.ui:39
+#, kde-format
+msgid "Create a new profile based on the selected profile"
+msgstr "أنشئ تشكيلة بالاعتماد على التشكيلة المحددة"
+
+#. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
+#: settings/ProfileSettings.ui:42
+#, kde-format
+msgid "&New..."
+msgstr "&جديد..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
+#: settings/ProfileSettings.ui:52
+#, kde-format
+msgid ""
+"Edit the selected profile (this button is disabled for read-only profiles)"
+msgstr "حرر التشكيلة المحددة (هذا الزر معطل لتشكيلات القراءة فقط)"
+
+#. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
+#: settings/ProfileSettings.ui:55
+#, kde-format
+msgid "&Edit..."
+msgstr "&حرّر..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
+#: settings/ProfileSettings.ui:65
+#, kde-format
+msgid "Delete the selected profile"
+msgstr "احذف التشكيلة المحددة"
+
+#. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
+#: settings/ProfileSettings.ui:68
+#, kde-format
+msgid "&Remove"
+msgstr "أ&زل"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
+#: settings/ProfileSettings.ui:78
+#, kde-format
+msgid "Set the selected profile as the default for new terminal sessions"
+msgstr "اضبط التشكيلة المحددة على أنها الافتراضية لجلسات الطرفية الجديدة"
+
+#. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
+#: settings/ProfileSettings.ui:81
+#, kde-format
+msgid "&Set as Default"
+msgstr "ا&جعلها الافتراضية"
+
+#. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
+#: settings/TabBarSettings.ui:36
+#, kde-format
+msgctxt "@title:tab Tab bar settings"
+msgid "Appearance"
+msgstr "المظهر"
+
+#. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
+#: settings/TabBarSettings.ui:50
+#, kde-format
+msgid "Show:"
+msgstr "أظهر:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
+#: settings/TabBarSettings.ui:60
+#, kde-format
+msgid "When needed"
+msgstr "عند الحاجة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
+#: settings/TabBarSettings.ui:70
+#, kde-format
+msgid "Alwa&ys"
+msgstr "&دائما"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
+#: settings/TabBarSettings.ui:80
+#, kde-format
+msgid "&Never"
+msgstr "&البتة"
+
+#. i18n: ectx: property (text), widget (QLabel, positionLabel)
+#: settings/TabBarSettings.ui:106
+#, kde-format
+msgid "Position:"
+msgstr "الموقع:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
+#: settings/TabBarSettings.ui:116
+#, kde-format
+msgid "Be&low terminal area"
+msgstr "أ&سفل منطقة الطرفية"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Top)
+#: settings/TabBarSettings.ui:126
+#, kde-format
+msgid "Above terminal area"
+msgstr "أعلى منطقة الطرفية"
+
+#. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
+#: settings/TabBarSettings.ui:152
+#, kde-format
+msgid "Show Close Tab button:"
+msgstr "أظهر زر إغلاق اللسان:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
+#: settings/TabBarSettings.ui:162
+#, kde-format
+msgid "&On each tab"
+msgstr "&على كل لسان"
+
+#. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
+#: settings/TabBarSettings.ui:172
+#, kde-format
+msgid "On &the tab bar"
+msgstr "على &شريط الألسنة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, None)
+#: settings/TabBarSettings.ui:182
+#, kde-format
+msgctxt "Do not show a close button"
+msgid "None"
+msgstr "بدون"
+
+#. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
+#. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
+#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:344
+#, kde-format
+msgctxt "@item:intext Miscellaneous Options"
+msgid "Miscellaneous:"
+msgstr "متنوّع:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
+#: settings/TabBarSettings.ui:218
+#, kde-format
+msgid "Show 'New Tab' button"
+msgstr "أظهر زرّا  'لسان جديد'"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
+#: settings/TabBarSettings.ui:225
+#, kde-format
+msgid "Expand individual tab widths to full window"
+msgstr "وسّع عرض اللسان المفرد إلى ملء النافذة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
+#: settings/TabBarSettings.ui:232
+#, kde-format
+msgid "Use user-defined stylesheet:"
+msgstr "استخدم صفحة أسلوب معرفة من قبل المستخدم:"
+
+#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_scrollbackUseSpecifiedLocationDirectory)
+#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
+#: settings/TabBarSettings.ui:258 settings/TemporaryFilesSettings.ui:53
+#, kde-format
+msgid "text/css"
+msgstr "text/css"
+
+#. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
+#: settings/TabBarSettings.ui:261
+#, kde-format
+msgctxt "@item:intext Optional file path is empty"
+msgid "(none)"
+msgstr "(بلا)"
+
+#. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
+#: settings/TabBarSettings.ui:284
+#, kde-format
+msgctxt "@title:tab Tab bar settings"
+msgid "Behavior"
+msgstr "السّلوك"
+
+#. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
+#: settings/TabBarSettings.ui:298
+#, kde-format
+msgid "Put new tabs:"
+msgstr "ضع الألسنة الجديدة:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
+#: settings/TabBarSettings.ui:308
+#, kde-format
+msgid "At &the end"
+msgstr "عند ال&نهاية"
+
+#. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
+#: settings/TabBarSettings.ui:318
+#, kde-format
+msgid "After current &tab"
+msgstr "&بعد اللسان الحالي"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
+#: settings/TabBarSettings.ui:354
+#, kde-format
+msgid "Close tab on middle-click"
+msgstr "أغلق اللسان بالنقر الأوسط"
+
+#. i18n: ectx: attribute (title), widget (QWidget, splitTab)
+#: settings/TabBarSettings.ui:377
+#, kde-format
+msgid "Splits"
+msgstr "التّجزئات"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/TabBarSettings.ui:383
+#, kde-format
+msgid "Show Header:"
+msgstr "أظهر التّرويسة:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
+#: settings/TabBarSettings.ui:390
+#, kde-format
+msgctxt "@option:radio When needed show the split header"
+msgid "When needed"
+msgstr "عند الحاجة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
+#: settings/TabBarSettings.ui:400
+#, kde-format
+msgctxt "@option:radio Never show the split header"
+msgid "Never"
+msgstr "أبدًا"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/TabBarSettings.ui:426
+#, kde-format
+msgid "Drag Handle Size:"
+msgstr "حجم مقبض السحب:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
+#: settings/TabBarSettings.ui:436
+#, kde-format
+msgctxt "@option:radio Small height/width of splitter widget"
+msgid "Small"
+msgstr "صغير"
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
+#: settings/TabBarSettings.ui:446
+#, kde-format
+msgctxt "@option:radio Medium height/width of splitter widget"
+msgid "Medium"
+msgstr "متوسط"
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
+#: settings/TabBarSettings.ui:456
+#, kde-format
+msgctxt "@option:radio Large height/width of splitter widget"
+msgid "Large"
+msgstr "كبير"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
+#: settings/TabBarSettings.ui:479
+#, kde-format
+msgctxt "@option:radio Always show the split header"
+msgid "Always"
+msgstr "دائما"
+
+#: settings/TemporaryFilesSettings.cpp:31
+#, kde-format
+msgctxt ""
+"@option:radio File location; <filename>%1</filename>: path to directory "
+"placeholder"
+msgid "System temporary directory (%1)"
+msgstr "دليل النظام المؤقت (%1)"
+
+#: settings/TemporaryFilesSettings.cpp:33
+#, kde-format
+msgctxt ""
+"@option:radio File location; <filename>%1</filename>: path to directory "
+"placeholder"
+msgid "User cache directory (%1)"
+msgstr "استخدم دليل الخبيئة (%1)"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: settings/TemporaryFilesSettings.ui:37
+#, kde-format
+msgid "Scrollback file location:"
+msgstr "موقع ملف التمرير الخلفي:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
+#: settings/TemporaryFilesSettings.ui:79
+#, kde-format
+msgctxt "@option:radio Custom (file location); followed by text entry field"
+msgid "Custom:"
+msgstr "مخصص:"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/ThumbnailsSettings.ui:17
+#, kde-format
+msgid "Size:"
+msgstr "الحجم:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
+#: settings/ThumbnailsSettings.ui:24
+#, kde-format
+msgid "px"
+msgstr "بكسل"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/ThumbnailsSettings.ui:37
+#, kde-format
+msgid ""
+"<html><head/><body><p>To use this feature, enable <span style=\" font-"
+"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
+"font-weight:600;\">files</span> in your profile settings</p></body></html>"
+msgstr ""
+"<html><head/><body><p>لتستخدم هذه الميزة، مكن <span style=\" font-weight:600;"
+"\">الفأرة-&gt;متنوع-&gt;تسطير </span><span style=\" font-weight:600;"
+"\">الملفات</span> في إعدادات التشكيلة</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/ThumbnailsSettings.ui:53
+#, kde-format
+msgid "Activation:"
+msgstr "التفعيل:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: settings/ThumbnailsSettings.ui:63
+#, kde-format
+msgid "Mouse hover plus"
+msgstr "تمرير الفأرة زائد"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
+#: settings/ThumbnailsSettings.ui:70
+#, kde-format
+msgid "Shift"
+msgstr "Shift"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
+#: settings/ThumbnailsSettings.ui:77
+#, kde-format
+msgid "Alt"
+msgstr " Alt"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
+#: settings/ThumbnailsSettings.ui:84
+#, kde-format
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
+#: settings/ThumbnailsSettings.ui:93
+#, kde-format
+msgid "Enable thumbnails generation"
+msgstr "مكّن توليد المصغرات"
+
+#: terminalDisplay/TerminalDisplay.cpp:652
+#, kde-format
+msgid "Size: %1 x %2"
+msgstr "القياس: %1 × %2"
+
+#: terminalDisplay/TerminalDisplay.cpp:2167
+#, kde-format
+msgid "Are you sure you want to paste %1 character?"
+msgid_plural "Are you sure you want to paste %1 characters?"
+msgstr[0] "هل أنت متأكد من لصق لا محارف؟"
+msgstr[1] "هل أنت متأكد من لصق محرف واحد؟"
+msgstr[2] "هل أنت متأكد من لصق محرفان؟"
+msgstr[3] "هل أنت متأكد من لصق %1 محارف؟"
+msgstr[4] "هل أنت متأكد من لصق %1 محرفًا؟"
+msgstr[5] "هل أنت متأكد من لصق %1 محرف؟"
+
+#: terminalDisplay/TerminalDisplay.cpp:2168
+#, kde-format
+msgid "Confirm Paste"
+msgstr "تأكيد اللصق"
+
+#: terminalDisplay/TerminalDisplay.cpp:2201
+#, kde-format
+msgid "End Of Text/Interrupt: may exit the current process"
+msgstr "نهاية النص/المقاطعة: قد تخرج من العملية الحالية"
+
+#: terminalDisplay/TerminalDisplay.cpp:2202
+#, kde-format
+msgid "End Of Transmission: may exit the current process"
+msgstr "نهاية النقل: قد تخرج من العملية الحالية"
+
+#: terminalDisplay/TerminalDisplay.cpp:2203
+#, kde-format
+msgid "Bell: will try to emit an audible warning"
+msgstr "الجرس: سيحاول إصدار تحذير صوتي"
+
+#: terminalDisplay/TerminalDisplay.cpp:2204
+#, kde-format
+msgid "Backspace"
+msgstr "مسافة للخلف"
+
+#: terminalDisplay/TerminalDisplay.cpp:2205
+#, kde-format
+msgid "Device Control Three/XOFF: suspends output"
+msgstr "التحكم بالجهاز الثالثة/XOFF: يعلق الخرج"
+
+#: terminalDisplay/TerminalDisplay.cpp:2206
+#, kde-format
+msgid "Substitute/Suspend: may suspend current process"
+msgstr "بديل/ معلق: قد يوقف العملية الحالية"
+
+#: terminalDisplay/TerminalDisplay.cpp:2207
+#, kde-format
+msgid "Escape: used for manipulating terminal state"
+msgstr "الهروب: يستخدم للتلاعب بالحالة الطرفية"
+
+#: terminalDisplay/TerminalDisplay.cpp:2208
+#, kde-format
+msgid "File Separator/Quit: may abort the current process"
+msgstr "فاصل/ إنهاء الملف: قد يحبط العملية الحالية"
+
+#: terminalDisplay/TerminalDisplay.cpp:2231
+#, kde-format
+msgid ""
+"The text you're trying to paste contains hidden control characters, do you "
+"want to filter them out?"
+msgstr "يحتوي النص الذي تحاول لصقه على أحرف تحكم مخفية، هل تريد تصفيتها؟ "
+
+#: terminalDisplay/TerminalDisplay.cpp:2234
+#, kde-format
+msgctxt "@title"
+msgid "Confirm Paste"
+msgstr "تأكيد اللصق"
+
+#: terminalDisplay/TerminalDisplay.cpp:2235
+#, kde-format
+msgctxt "@action:button"
+msgid "Paste &without control characters"
+msgstr "ألصق &بدون أحرف التحكم"
+
+#: terminalDisplay/TerminalDisplay.cpp:2236
+#, kde-format
+msgctxt "@action:button"
+msgid "&Paste everything"
+msgstr "ألصق &كل شيء"
+
+#: terminalDisplay/TerminalDisplay.cpp:2237
+#, kde-format
+msgctxt "@action:button"
+msgid "&Cancel"
+msgstr "أل&غِ"
+
+#: terminalDisplay/TerminalDisplay.cpp:2466
+#, kde-format
+msgid ""
+"<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
+"Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
+"b> to resume.</qt>"
+msgstr ""
+"<qt>تم <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
+"\">تعليق</a> المخرجات بواسطة ضغط  Ctrl+S.  اضغط  <b>Ctrl+Q</b> للاستئناف.</"
+"qt>"
+
+#: terminalDisplay/TerminalDisplay.cpp:2504
+#, kde-format
+msgid "This terminal is read-only."
+msgstr "الطرفية للقراءة فقط"
+
+#: terminalDisplay/TerminalDisplay.cpp:2743
+#, kde-format
+msgid "Change &Directory To"
+msgstr "غيّر ال&دليل إلى"
+
+#: terminalDisplay/TerminalDisplay.cpp:2776
+#, kde-format
+msgid "&Paste Location"
+msgstr "أ&لصق المكان"
+
+#: ViewManager.cpp:106
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View"
+msgstr "افصل العرض"
+
+#: ViewManager.cpp:113
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View Left/Right"
+msgstr "افصل العرض يمين/يسار"
+
+#: ViewManager.cpp:121
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View Top/Bottom"
+msgstr "افصل العرض فوق/تحت"
+
+#: ViewManager.cpp:129
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View Automatically"
+msgstr "افصل العرض آلياً"
+
+#: ViewManager.cpp:139
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 2x2 terminals"
+msgstr "حمّل لسان جديد بتخطيط طرفيات ٢×٢"
+
+#: ViewManager.cpp:148
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 2x1 terminals"
+msgstr "حمّل لسان جديد بتخطيط طرفيات ٢×١"
+
+#: ViewManager.cpp:157
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 1x2 terminals"
+msgstr "حمّل لسان جديد بتخطيط طرفيات 1×٢"
+
+#: ViewManager.cpp:165
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Expand View"
+msgstr "عرض موسع"
+
+#: ViewManager.cpp:173
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Shrink View"
+msgstr "عرض مقلص"
+
+#: ViewManager.cpp:183
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Detach Current &View"
+msgstr "افصل ال&عرض الحالي"
+
+#: ViewManager.cpp:195
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Detach Current &Tab"
+msgstr "ا&فصل اللسان الحالي"
+
+#: ViewManager.cpp:200
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Next Tab"
+msgstr "لسان جديد"
+
+#: ViewManager.cpp:208
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Previous Tab"
+msgstr "اللسان السابق"
+
+#: ViewManager.cpp:216
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Above Terminal"
+msgstr "ركز أعلى الطرفية"
+
+#: ViewManager.cpp:223
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Below Terminal"
+msgstr "ركز أسفل الطرفية"
+
+#: ViewManager.cpp:230
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Left Terminal"
+msgstr "ركز يسار الطرفية"
+
+#: ViewManager.cpp:236
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Right Terminal"
+msgstr "ركز يمين الطرفية"
+
+#: ViewManager.cpp:242
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Switch to Last Tab"
+msgstr "انتقل إلى آخر لسان"
+
+#: ViewManager.cpp:247
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Last Used Tabs"
+msgstr "آخر لسان مستعمل"
+
+#: ViewManager.cpp:252
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle Between Two Tabs"
+msgstr "بدّل بين لسانيين"
+
+#: ViewManager.cpp:257
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Last Used Tabs (Reverse)"
+msgstr "آخر لسان مستعمل (معكوس)"
+
+#: ViewManager.cpp:262
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle maximize current view"
+msgstr "بدّل تكبير العرض الحالي"
+
+#: ViewManager.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Toggle maximize current view"
+msgstr "بدّل تكبير العرض الحالي"
+
+#: ViewManager.cpp:271
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Move tab to the right"
+msgstr "حرك اللسان لليمين"
+
+#: ViewManager.cpp:278
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Move tab to the left"
+msgstr "حرك اللسان لليسار"
+
+#: ViewManager.cpp:285
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Setup semantic integration (bash)"
+msgstr "ضبط التكامل الدلالي (باش)"
+
+#: ViewManager.cpp:291
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle semantic hints display"
+msgstr "بدّل بين إظهار التلميحات الدلالية"
+
+#: ViewManager.cpp:297
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle line numbers display"
+msgstr "بدّل بين عرض أرقام الأسطر"
+
+#: ViewManager.cpp:304
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Equal size to all views"
+msgstr "حجم متساوي لجميع العروض"
+
+#: ViewManager.cpp:314
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Switch to Tab %1"
+msgstr "انتقل إلى اللسان %1"
+
+#: ViewManager.cpp:527
+#, kde-format
+msgid "Semantic hints "
+msgstr "التلميحات الدلالية "
+
+#: ViewManager.cpp:543
+#, kde-format
+msgid "Line numbers "
+msgstr "أرقام الأسطر "
+
+#: ViewManager.cpp:1074
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Tab Layout"
+msgstr "احفظ تخطيط الألسنة"
+
+#: ViewManager.cpp:1076 ViewManager.cpp:1163
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Konsole View Layout (*.json)"
+msgstr "تخطيط عرض كونسول (*.json)"
+
+#: ViewManager.cpp:1089
+#, kde-format
+msgctxt "@label:textbox"
+msgid ""
+"A problem occurred when saving the Layout.\n"
+"%1"
+msgstr ""
+"حصلت مشكلة أثناء حفظ التخطيط.\n"
+"%1"
+
+#: ViewManager.cpp:1150
+#, kde-format
+msgctxt "@label:textbox"
+msgid ""
+"A problem occurred when loading the Layout.\n"
+"%1"
+msgstr ""
+"حصلت مشكلة أثناء تحميل التخطيط.\n"
+"%1"
+
+#: ViewManager.cpp:1161
+#, kde-format
+msgctxt "@title:window"
+msgid "Load Tab Layout"
+msgstr "حمّل تخطيط الألسن"
+
+#: Vt102Emulation.cpp:2313
+#, kde-format
+msgid ""
+"No keyboard translator available.  The information needed to convert key "
+"presses into characters to send to the terminal is missing."
+msgstr ""
+"لا يوجد مترجم لوحة المفاتيح. معلومات تحويل ضغط المفتاح إلى المحرف -ليرسلها "
+"إلى الطرفية - مفقودة."
+
+#. i18n: ectx: property (text), widget (QLabel, urlHintsLabel)
+#: widgets/EditProfileAdvancedPage.ui:37
+#, kde-format
+msgid "Key combination to show URL hints:"
+msgstr "توليفة المفاتيح لعرض تلميحة العنوان:"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
+#: widgets/EditProfileAdvancedPage.ui:69
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Shift"
+msgstr "Shift"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
+#: widgets/EditProfileAdvancedPage.ui:88
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
+#: widgets/EditProfileAdvancedPage.ui:107
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Alt"
+msgstr "Alt"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
+#: widgets/EditProfileAdvancedPage.ui:126
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Meta"
+msgstr "Meta"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileAdvancedPage.ui:172
+#, kde-format
+msgctxt "Items that do not fit in other categories"
+msgid "Miscellaneous:"
+msgstr "متنوّع:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
+#: widgets/EditProfileAdvancedPage.ui:182
+#, kde-format
+msgid "Number URL hints in reverse, starting from the bottom"
+msgstr "رقّم تلميحات العنوان بالعكس بدءا من الأسفل."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
+#: widgets/EditProfileAdvancedPage.ui:185
+#, kde-format
+msgid "Reverse URL hint numbering"
+msgstr "الترقيم العكسي لتلميحة العنوان"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingTextButton)
+#: widgets/EditProfileAdvancedPage.ui:198
+#, kde-format
+msgid "Allow terminal programs to create blinking sections of text"
+msgstr "اسمح لبرامج الطرفية أن تنشئ تحديد وماض للنص"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingTextButton)
+#: widgets/EditProfileAdvancedPage.ui:201
+#, kde-format
+msgid "Allow blinking text"
+msgstr "اسمح بالنص الوماض"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableFlowControlButton)
+#: widgets/EditProfileAdvancedPage.ui:214
+#, kde-format
+msgid "Allow the output to be suspended by pressing Ctrl+S"
+msgstr "اسمح بتعليق المخرجات بواسطة الضغط على Ctrl+S"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
+#: widgets/EditProfileAdvancedPage.ui:217
+#, kde-format
+msgid "Flow control"
+msgstr "مسار التحكم"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAdvancedPage.ui:231
+#: widgets/EditProfileAppearancePage.ui:813
+#, kde-format
+msgid ""
+"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
+"Hebrew only)"
+msgstr ""
+"مكن عرض ثنائي الاتجاه في الطرفية (صالح للعربية أو الفارسية أو العبرية فقط)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAdvancedPage.ui:234
+#: widgets/EditProfileAppearancePage.ui:816
+#, kde-format
+msgid "Bi-Directional text rendering"
+msgstr "عرض ثنائي الاتجاه للنص"
+
+#. i18n: ectx: property (text), widget (QLabel, label_14)
+#: widgets/EditProfileAdvancedPage.ui:258
+#, kde-format
+msgid "Default character encoding:"
+msgstr "ترميز المحارف المبدئي:"
+
+#. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
+#: widgets/EditProfileAdvancedPage.ui:278
+#, kde-format
+msgid "Shortcut for peeking the primary screen:"
+msgstr "اختصار لإلقاء نظرة خاطفة على الشاشة الرئيسية:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
+#: widgets/EditProfileAppearancePage.ui:33
+#, kde-format
+msgid "Color scheme && font"
+msgstr "مخطط الألوان والخط"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:66
+#, kde-format
+msgid "Create a new color scheme based upon the selected scheme"
+msgstr "أنشئ مخطط لوني جديد بالاعتماد على المخطط المحدد"
+
+#. i18n: ectx: property (text), widget (QPushButton, newColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:69
+#, kde-format
+msgctxt "@action:button Create an alternate color scheme"
+msgid "New..."
+msgstr "جديد..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:76
+#, kde-format
+msgid "Edit the selected color scheme"
+msgstr "حرر المخطط اللوني المحدد"
+
+#. i18n: ectx: property (text), widget (QPushButton, editKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, environmentEditButton)
+#. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
+#. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:79
+#: widgets/EditProfileGeneralPage.ui:224 widgets/EditProfileKeyboardPage.ui:85
+#: widgets/EditProfileMousePage.ui:310
+#, kde-format
+msgid "Edit..."
+msgstr "حرر..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:86
+#, kde-format
+msgid "Delete the selected color scheme"
+msgstr "احذف المخطط اللوني المحدد"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:96
+#, kde-format
+msgid "Reset the selected color scheme settings to the default values"
+msgstr "أعد تعيين إعدادات تشكيلة الألوان المحددة إلى القيم المبدئية"
+
+#. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:99
+#: widgets/EditProfileKeyboardPage.ui:105
+#, kde-format
+msgid "Defaults"
+msgstr "المبدئيات"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: widgets/EditProfileAppearancePage.ui:132
+#, kde-format
+msgid "Font:"
+msgstr "الخط:"
+
+#. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
+#: widgets/EditProfileAppearancePage.ui:164
+#, kde-format
+msgctxt "@action:button open a dialog with list of fonts"
+msgid "Choose..."
+msgstr "اختر..."
+
+#. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
+#: widgets/EditProfileAppearancePage.ui:171
+#, kde-format
+msgid "Smooth fonts"
+msgstr "خطوط ناعمة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, boldIntenseButton)
+#: widgets/EditProfileAppearancePage.ui:178
+#, kde-format
+msgid "Draw intense colors in bold font"
+msgstr "ارسم ألوان مكثفة في الخط العريض"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:185
+#, kde-format
+msgid "Use the selected font for line characters instead of the builtin code"
+msgstr "استخدم الخط المحدد محارف السطر بدلاً من الرمز المدمج"
+
+#. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:188
+#, kde-format
+msgid "Use line characters contained in font"
+msgstr "استخدم محارف السطر المضمنة في الخط"
+
+#. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
+#: widgets/EditProfileAppearancePage.ui:196
+#, kde-format
+msgid "Cursor"
+msgstr "المؤشر"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileAppearancePage.ui:216
+#, kde-format
+msgid "Shape:"
+msgstr "الشكل:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
+#: widgets/EditProfileAppearancePage.ui:226
+#, kde-format
+msgctxt "A solid rectangular"
+msgid "Block"
+msgstr "كتلة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
+#: widgets/EditProfileAppearancePage.ui:236
+#, kde-format
+msgctxt "A vertical line on the left edge"
+msgid "I-Beam"
+msgstr "عمود قائم"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
+#: widgets/EditProfileAppearancePage.ui:246
+#, kde-format
+msgctxt "A hortizonal line on the bottom edge"
+msgid "Underline"
+msgstr "تسطير"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/EditProfileAppearancePage.ui:278
+#, kde-format
+msgctxt "Cursor color options"
+msgid "Color:"
+msgstr "اللون:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:294
+#, kde-format
+msgid "Set the cursor to match the color of the character underneath it."
+msgstr "اجعل المؤشر يطابق لون المحرف الذي تحته"
+
+#. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:297
+#, kde-format
+msgid "Match current character"
+msgstr "طابق المحرف الحالي"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:313
+#, kde-format
+msgid "Use a custom, fixed color for the cursor"
+msgstr "استخدم لون مؤشر ثابت و مخصص"
+
+#. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:316
+#, kde-format
+msgid "Custom cursor color"
+msgstr "لون المخصص للمؤشر"
+
+#. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
+#: widgets/EditProfileAppearancePage.ui:347
+#, kde-format
+msgid "Cursor:"
+msgstr "المؤشر:"
+
+#. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
+#: widgets/EditProfileAppearancePage.ui:360
+#, kde-format
+msgid "Select the color used to draw the cursor"
+msgstr "اختر لون الذي سيرسم به  المؤشر"
+
+#. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
+#: widgets/EditProfileAppearancePage.ui:380
+#, kde-format
+msgid "Text:"
+msgstr "نص:"
+
+#. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
+#: widgets/EditProfileAppearancePage.ui:393
+#, kde-format
+msgid "Select the color used to draw the character underneath the cursor"
+msgstr "اختر لون الذي سيرسم به المحرف تحت المؤشر"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileAppearancePage.ui:418
+#, kde-format
+msgid "Blinking:"
+msgstr "الوميض:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
+#: widgets/EditProfileAppearancePage.ui:434
+#, kde-format
+msgid "Make the cursor blink regularly"
+msgstr "اجعل المؤشر يومض بانتظام"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
+#. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
+#: widgets/EditProfileAppearancePage.ui:437
+#: widgets/EditProfileAppearancePage.ui:664
+#, kde-format
+msgid "Enabled"
+msgstr "ممكّن"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#. i18n: ectx: attribute (title), widget (QWidget, miscTab)
+#: widgets/EditProfileAppearancePage.ui:460 widgets/EditProfileMousePage.ui:249
+#, kde-format
+msgctxt "Items that do not fit in other categories"
+msgid "Miscellaneous"
+msgstr "متنوّع"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileAppearancePage.ui:471
+#, kde-format
+msgid "Window:"
+msgstr "النافذة:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
+#: widgets/EditProfileAppearancePage.ui:478
+#, kde-format
+msgid ""
+"Show terminal size in columns and lines in the center of window after "
+"resizing"
+msgstr "أظهر حجم الطرفية كأعمدة وصفوف في وسط النافذة بعد تغيير الحجم"
+
+#. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
+#: widgets/EditProfileAppearancePage.ui:481
+#, kde-format
+msgid "Show hint for terminal size after resizing"
+msgstr "أظهر تلميح لحجم الطرفية بعد تغيير الحجم"
+
+#. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
+#: widgets/EditProfileAppearancePage.ui:488
+#, kde-format
+msgid "Always invert the colors of selected text"
+msgstr "دائما اعكس ألوان النص المحدد"
+
+#. i18n: ectx: property (text), widget (QLabel, dimLabel)
+#: widgets/EditProfileAppearancePage.ui:497
+#, kde-format
+msgid "Darkening strength:"
+msgstr "شدة التقتيم:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: widgets/EditProfileAppearancePage.ui:522
+#, kde-format
+msgid "Inactive Terminals:"
+msgstr "الطرفية الخاملة:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
+#: widgets/EditProfileAppearancePage.ui:532
+#, kde-format
+msgctxt "@title:group"
+msgid "Terminal contents"
+msgstr "محتويات الطرفية"
+
+#. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
+#: widgets/EditProfileAppearancePage.ui:544
+#, kde-format
+msgid "Line spacing:"
+msgstr "تباعد الأسطر:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
+#: widgets/EditProfileAppearancePage.ui:562
+#, kde-format
+msgid "The number of pixels between two lines"
+msgstr "عدد البكلسات بين كل سطرين"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
+#. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
+#: widgets/EditProfileAppearancePage.ui:565
+#: widgets/EditProfileAppearancePage.ui:617
+#, kde-format
+msgctxt "(pixels) visual size unit"
+msgid " px"
+msgstr " بكسل"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileAppearancePage.ui:599
+#, kde-format
+msgid "Margins:"
+msgstr "الهوامش:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: widgets/EditProfileAppearancePage.ui:651
+#, kde-format
+msgid "Align to center:"
+msgstr "حاذِ إلى الوسط:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:674
+#, kde-format
+msgid "Indicate whether the window is active by dimming the colors"
+msgstr "حدد ما إذا كانت النافذة نشطة عن طريق تعتيم الألوان"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:677
+#, kde-format
+msgid "Darken"
+msgstr "تقتيم"
+
+#. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
+#: widgets/EditProfileAppearancePage.ui:719
+#, kde-format
+msgid "Display Vertical line at column:"
+msgstr "اعرض سطر رأسي عند العمود:"
+
+#. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
+#: widgets/EditProfileAppearancePage.ui:760
+#, kde-format
+msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+msgstr "<html><head/><body><p>تخطيط النصوص المعقدة</p></body></html>"
+
+#. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
+#: widgets/EditProfileAppearancePage.ui:763
+#, kde-format
+msgid "Complex Text Layout"
+msgstr "تخطيط النصوص المعقدة"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileAppearancePage.ui:787
+#, kde-format
+msgid "Emoji Font:"
+msgstr "خط صورة تعبيرية:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
+#: widgets/EditProfileAppearancePage.ui:829
+#, kde-format
+msgid "Lines are always LTR, rather than determined by first strong character"
+msgstr ""
+"السطور دائمًا من اليسار إلى اليمين، بدلاً من تحديدها بواسطة الحرف الأول القوي"
+
+#. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
+#: widgets/EditProfileAppearancePage.ui:832
+#, kde-format
+msgid "force LTR line direction"
+msgstr "أجبر أن يكون السطر من اليسار إلى اليمين"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
+#: widgets/EditProfileAppearancePage.ui:845
+#, kde-format
+msgid "Treat table drawing characters as strong LTR."
+msgstr "تعامل مع أحرف رسم الجدول على أنها حروف من اليسار إلى اليمين قوية."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
+#: widgets/EditProfileAppearancePage.ui:848
+#, kde-format
+msgid "Table characters BiDi mode override"
+msgstr "تجاوز وضع أحرف الجدول ثنائي الاتجاه"
+
+#: widgets/EditProfileDialog.cpp:62
+#, kde-format
+msgid "Edit Profile"
+msgstr "حرر التشكيلة"
+
+#: widgets/EditProfileDialog.cpp:89
+#, kde-format
+msgctxt "@title:tab Generic, common options"
+msgid "General"
+msgstr "عام"
+
+#: widgets/EditProfileDialog.cpp:100
+#, kde-format
+msgid "Tabs"
+msgstr "الألسنة"
+
+#: widgets/EditProfileDialog.cpp:117
+#, kde-format
+msgid "Appearance"
+msgstr "المظهر"
+
+#: widgets/EditProfileDialog.cpp:133
+#, kde-format
+msgid "Scrolling"
+msgstr "التمرير"
+
+#: widgets/EditProfileDialog.cpp:147
+#, kde-format
+msgid "Keyboard"
+msgstr "لوحة المفاتيح"
+
+#: widgets/EditProfileDialog.cpp:148
+#, kde-format
+msgid "Key bindings"
+msgstr "ارتباطات المفاتيح"
+
+#: widgets/EditProfileDialog.cpp:159
+#, kde-format
+msgid "Mouse"
+msgstr "الفأرة"
+
+#: widgets/EditProfileDialog.cpp:175
+#, kde-format
+msgctxt "@title:tab Complex options"
+msgid "Advanced"
+msgstr "متقدم"
+
+#: widgets/EditProfileDialog.cpp:281
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Insufficient permissions to save settings to: <filename>%1</filename>.<nl/"
+">Either change the permissions of that file or set a different name to save "
+"the settings to a new profile."
+msgstr ""
+"أذونات غير كافية لحفظ الإعدادات إلى: <filename>%1</filename>. <nl/> إما أن "
+"تقوم بتغيير أذونات هذا الملف أو تعيين اسم مختلف لحفظ الإعدادات في تشكيلة "
+"جديدة."
+
+#: widgets/EditProfileDialog.cpp:298
+#, kde-format
+msgctxt "@info"
+msgid "Profile Name was empty; please set a name to be able to save settings."
+msgstr "اسم التشكيلة كان فارغًا؛ يرجى تعيين اسم لتتمكن من حفظ الإعدادات."
+
+#: widgets/EditProfileDialog.cpp:306
+#, kde-format
+msgctxt "@info"
+msgid "A profile with the name \"%1\" already exists."
+msgstr "يوجد تشكيلة باسم \"%1\" بالفعل."
+
+#: widgets/EditProfileDialog.cpp:341
+#, kde-format
+msgid "Editing profile: %2"
+msgid_plural "Editing %1 profiles: %2"
+msgstr[0] " %1 "
+msgstr[1] "تحرير التشكيلة: %2"
+msgstr[2] "تحرير التشكيلتين: %2"
+msgstr[3] "تحرير %1 التشكيلات: %2"
+msgstr[4] "تحرير %1 تشكيلة: %2"
+msgstr[5] "تحرير %1 تشكيلة: %2"
+
+#: widgets/EditProfileDialog.cpp:344
+#, kde-format
+msgid "Create New Profile"
+msgstr "أنشئ تشكيلة جديدة"
+
+#: widgets/EditProfileDialog.cpp:346
+#, kde-format
+msgid "Edit Profile \"%1\""
+msgstr "حرر التشكيلة \"%1\""
+
+#: widgets/EditProfileDialog.cpp:436
+#, kde-format
+msgctxt ""
+"Suffix of the number of columns (N columns). The leading space is needed to "
+"separate it from the number value."
+msgid " column"
+msgid_plural " columns"
+msgstr[0] " العمود"
+msgstr[1] " عمود واحد"
+msgstr[2] " عمودين"
+msgstr[3] " أعمدة"
+msgstr[4] "عمودا"
+msgstr[5] " عمود"
+
+#: widgets/EditProfileDialog.cpp:438
+#, kde-format
+msgctxt ""
+"Suffix of the number of rows (N rows). The leading space is needed to "
+"separate it from the number value."
+msgid " row"
+msgid_plural " rows"
+msgstr[0] " صف"
+msgstr[1] " صف واحد"
+msgstr[2] " صفين"
+msgstr[3] " صفوف"
+msgstr[4] " صفا"
+msgstr[5] " صف"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "System Bell"
+msgstr "جرس النظام"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "System Notifications"
+msgstr "إخطارات النّظام"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "Visual Bell"
+msgstr "الجرس المرئي"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "Ignore Bell Events"
+msgstr "تجاهل أحداث الجرس"
+
+#: widgets/EditProfileDialog.cpp:457
+#, kde-format
+msgid "Default profile for new terminal sessions in %1"
+msgstr "التشكيلة الافتراضية لجلسات الطرفية الجديدة في %1"
+
+#: widgets/EditProfileDialog.cpp:514
+#, kde-format
+msgid "Edit Environment"
+msgstr "حرر البيئة"
+
+#: widgets/EditProfileDialog.cpp:515
+#, kde-format
+msgid "One environment variable per line"
+msgstr "متغير بيئة واحد لكل سطر جديد"
+
+#: widgets/EditProfileDialog.cpp:546
+#, kde-format
+msgctxt "Unit of time"
+msgid " second"
+msgid_plural " seconds"
+msgstr[0] "أقل من ثانية"
+msgstr[1] " ثانية واحدة"
+msgstr[2] " ثانيتان"
+msgstr[3] " ثوان"
+msgstr[4] " ثانية"
+msgstr[5] " ثانية"
+
+#: widgets/EditProfileDialog.cpp:645
+#, kde-format
+msgid "Select Initial Directory"
+msgstr "اختر دليل مبدئي"
+
+#: widgets/EditProfileDialog.cpp:1169
+#, kde-kuit-format
+msgctxt "@info"
+msgid "Scheme <resource>%1</resource> failed to load."
+msgstr "فشل تحميل التشكيلة <resource>%1</resource>."
+
+#: widgets/EditProfileDialog.cpp:1348
+#, kde-format
+msgid ""
+"This color scheme uses a transparent background which does not appear to be "
+"supported on your desktop"
+msgstr ""
+"هذا المخطط اللوني يستخدم خلفية شفافة والتي لا يدعمها سطح مكتبك فيما يبدو."
+
+#: widgets/EditProfileDialog.cpp:1354
+#, kde-format
+msgid ""
+"Konsole was started before desktop effects were enabled. You need to restart "
+"Konsole to see transparent background."
+msgstr ""
+"بدء كونسول قبل أن تُفعّل تأثيرات سطح المكتب. عليك إعادة تشغيل كونسول لتعيين "
+"خلفية شفّافة."
+
+#: widgets/EditProfileDialog.cpp:1745
+#, kde-format
+msgid ""
+"The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
+"\n"
+"PATH    will be replaced by the path to the text file\n"
+"LINE    will be replaced by the line number\n"
+"COLUMN  (optional) will be replaced by the column number\n"
+"Note: you will need to replace 'PATH:LINE:COLUMN' by the actual\n"
+"syntax the editor you want to use supports; e.g.:\n"
+"gedit +LINE:COLUMN PATH\n"
+"\n"
+"If PATH or LINE aren't present in the command, this setting\n"
+"will be ignored and the file will be opened by the default text\n"
+"editor."
+msgstr ""
+"التنسيق على سبيل المثال 'اسم_المحرر المسار:السطر:العمود'\n"
+"\n"
+"المسار    سيستبدل بالمسار إلى ملف النص\n"
+"السطر    سيتبدل برقم السطر\n"
+"العمود  (اختياري) سيستبدل برقم العمود\n"
+"ملاحظة: ستحتاج إلى استبدال 'المسار:السطر:العمود' بالقواعد\n"
+"التي يدعمها المحرر الذي ترغب به؛ على سبيل المثال:\n"
+"gedit +السطر:العمود المسار\n"
+"\n"
+"إذا لم يكن المسار أو السطر موجودا في الأمر ؛ فإن هذه الإعدادات\n"
+"ستتجاهل ويفتح الملف بالمحرر النصي\n"
+"المبدئي."
+
+#: widgets/EditProfileDialog.cpp:1758
+#, kde-format
+msgid "Text Editor Custom Command"
+msgstr "أمر محرر النصوص المخصص"
+
+#. i18n: ectx: attribute (title), widget (QWidget, general)
+#: widgets/EditProfileGeneralPage.ui:39
+#, kde-format
+msgid "General Settings"
+msgstr "إعدادات عامة"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
+#: widgets/EditProfileGeneralPage.ui:63
+#, kde-format
+msgid "Select the icon displayed on tabs using this profile"
+msgstr "اختر أيقونة لتعرض على الألسنة التي تستعمل هذه التشكيلة"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
+#: widgets/EditProfileGeneralPage.ui:81
+#, kde-format
+msgid "A descriptive name for the profile"
+msgstr "اسم وصفي للتشكيلة"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
+#: widgets/EditProfileGeneralPage.ui:84
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Profile name"
+msgstr "اسم اللاحة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
+#: widgets/EditProfileGeneralPage.ui:91
+#, kde-format
+msgid "Default Profile"
+msgstr "التشكيلة الافتراضية"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/EditProfileGeneralPage.ui:122
+#, kde-format
+msgid "Command:"
+msgstr "الأمر:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, commandEdit)
+#: widgets/EditProfileGeneralPage.ui:135
+#, kde-format
+msgid ""
+"The command to execute when new terminal sessions are created using this "
+"profile"
+msgstr "الأمر مراد تنفيذه عند إنشاء جلسة طرفية جديدة باستخدام هذه التشكيلة"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
+#: widgets/EditProfileGeneralPage.ui:141
+#, kde-format
+msgid "/bin/sh"
+msgstr "/bin/sh"
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: widgets/EditProfileGeneralPage.ui:154
+#, kde-format
+msgid "Initial directory:"
+msgstr "الدليل المبدئي:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
+#: widgets/EditProfileGeneralPage.ui:167
+#, kde-format
+msgid ""
+"The initial working directory for new terminal sessions using this profile"
+msgstr "دليل العمل المبدئي لجلسات الطرفية التي تستخدم هذه التشكيلة"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
+#: widgets/EditProfileGeneralPage.ui:173
+#, kde-format
+msgid "/home/username"
+msgstr "/home/username"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, dirSelectButton)
+#: widgets/EditProfileGeneralPage.ui:180
+#, kde-format
+msgid "Choose the initial directory"
+msgstr "اختر الدليل المبدئي"
+
+#. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
+#: widgets/EditProfileGeneralPage.ui:190
+#, kde-format
+msgid "Start in same directory as current session"
+msgstr "ابدأ بنفس الدليل الموجود في الجلسة الحالية"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileGeneralPage.ui:203
+#, kde-format
+msgid "Environment:"
+msgstr "البيئة:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
+#: widgets/EditProfileGeneralPage.ui:221
+#, kde-format
+msgid "Edit the list of environment variables and associated values"
+msgstr "حرر قائمة متغيرات البيئة و القيم المصاحبة لها"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: widgets/EditProfileGeneralPage.ui:268
+#, kde-format
+msgid "Initial terminal size:"
+msgstr "حجم الطرفية المبدئي:"
+
+#. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
+#: widgets/EditProfileGeneralPage.ui:343
+#, kde-format
+msgctxt "@info"
+msgid ""
+"<html><head/><body><p><span style=\" font-style:italic;\">Settings → "
+"Configure Konsole → General → Remember window size</span> must be disabled "
+"for these entries to work.</p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-style:italic;\">إعدادات ← ضبط "
+"كونسول ← عام ← تذكر حجم النافذة</span> يجب أن تعطل لهذه المدخلات حتى تعمل.</"
+"p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
+#: widgets/EditProfileGeneralPage.ui:356
+#, kde-format
+msgid "Terminal bell mode:"
+msgstr "نمط جرس الطرفية:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, semantic)
+#: widgets/EditProfileGeneralPage.ui:374
+#, kde-format
+msgid "Semantic Integration"
+msgstr "التكامل الدلالي"
+
+#. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
+#: widgets/EditProfileGeneralPage.ui:380
+#, kde-format
+msgid "Up/Down Arrows emulation"
+msgstr "محاكاة أسهم أعلى/أسفل"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#: widgets/EditProfileGeneralPage.ui:387
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr "عند عرض تلميحة العنوان"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
+#: widgets/EditProfileGeneralPage.ui:397
+#, kde-format
+msgctxt "Never"
+msgid "Never"
+msgstr "البتة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
+#: widgets/EditProfileGeneralPage.ui:407
+#, kde-format
+msgctxt "Always"
+msgid "Always"
+msgstr "دائما"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileGeneralPage.ui:423
+#, kde-format
+msgid "Semantic hints:"
+msgstr "تلميحات الدلالية:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
+#: widgets/EditProfileGeneralPage.ui:433
+#, kde-format
+msgid "Mouse click in input line moves cursor"
+msgstr "عندما تنقر الفأرة على سطر الإدخال تحرك المؤشر"
+
+#. i18n: ectx: property (text), widget (QLabel, note)
+#: widgets/EditProfileKeyboardPage.ui:29
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Key bindings control how combinations of keystrokes in the terminal window "
+"are converted into the stream of characters that is then sent to the current "
+"terminal program. For more information on how to customize the key bindings "
+"check the Konsole Handbook."
+msgstr ""
+"تتحكم روابط المفاتيح في كيفية تحويل مجموعات ضغطات المفاتيح في النافذة "
+"الطرفية إلى دفق الأحرف الذي يتم إرساله بعد ذلك إلى برنامج المحطة الطرفية "
+"الحالي. لمزيد من المعلومات حول كيفية تخصيص روابط المفاتيح ، راجع دليل "
+"كونسول. "
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:72
+#, kde-format
+msgid "Create a new key bindings scheme based upon the selected bindings"
+msgstr "أنشئ تشكيلة ربط مفاتيح بالاعتماد على الربط المحدد"
+
+#. i18n: ectx: property (text), widget (QPushButton, newKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:75
+#, kde-format
+msgctxt "@action:button Create an alternate key binding"
+msgid "New..."
+msgstr "جديد..."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:82
+#, kde-format
+msgid "Edit the selected key bindings scheme"
+msgstr "حرر تشكيلة ربط المفاتيح المحددة"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, removeKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:92
+#, kde-format
+msgid "Delete the selected key bindings scheme"
+msgstr "احذف تشكيلة ربط المفاتيح المحددة"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, resetKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:102
+#, kde-format
+msgid "Reset the selected key bindings scheme to its default values"
+msgstr "أعد تعيين تشكيلة ربط المفاتيح المحددة إلى قيمه المبدئية"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: widgets/EditProfileMousePage.ui:33
+#, kde-format
+msgid "Text interaction"
+msgstr "تفاعل النص"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, label_11)
+#. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
+#: widgets/EditProfileMousePage.ui:47 widgets/EditProfileMousePage.ui:68
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Characters which are considered part of a word when double-clicking to "
+"select whole words in the terminal."
+msgstr ""
+"المحارف التي تعتبر جزء من كلمة عند النقر المزدوج لتحديد كامل الكلمات في "
+"الطرفية"
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: widgets/EditProfileMousePage.ui:50
+#, kde-format
+msgid "Word characters:"
+msgstr "محارف الكلمة:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileMousePage.ui:91
+#, kde-format
+msgid "Triple-click selects:"
+msgstr "النقر الثلاثي يحدد:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
+#: widgets/EditProfileMousePage.ui:101
+#, kde-format
+msgid "The whole line"
+msgstr "كامل السطر الحالي"
+
+#. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
+#: widgets/EditProfileMousePage.ui:111
+#, kde-format
+msgid "From mouse position to the end of line"
+msgstr "من موقع الفأرة إلى نهاية السطر"
+
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: widgets/EditProfileMousePage.ui:137
+#, kde-format
+msgid "Middle-click pastes:"
+msgstr "إلصاق بالنّقر بالوسط:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, pasteFromClipboardButton)
+#: widgets/EditProfileMousePage.ui:147
+#, kde-format
+msgid "From clipboard"
+msgstr "من الحافظة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
+#: widgets/EditProfileMousePage.ui:157
+#, kde-format
+msgid "From selection"
+msgstr "من التحديد"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileMousePage.ui:183
+#, kde-format
+msgid "Copy options:"
+msgstr "خيارات النسخ:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
+#: widgets/EditProfileMousePage.ui:193
+#, kde-format
+msgid "Automatically copy selected text into clipboard"
+msgstr "نسخ النص تلقائيًّا إلى الحافظة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
+#: widgets/EditProfileMousePage.ui:196
+#, kde-format
+msgid "Copy on select"
+msgstr "انسخ عند التحديد"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
+#: widgets/EditProfileMousePage.ui:203
+#, kde-format
+msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
+msgstr ""
+"انسخ النص بصيغة HTML (بما في ذلك التنسيق ووجوه الخطوط والألوان ... إلخ)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
+#: widgets/EditProfileMousePage.ui:206
+#, kde-format
+msgid "Copy text as HTML"
+msgstr "انسخ النص  كHTML"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, trimLeadingSpacesButton)
+#: widgets/EditProfileMousePage.ui:213
+#, kde-format
+msgid "Trim leading spaces in selected text, useful in some instances"
+msgstr "اقتطع الفراغات السابقة في النص المحدد، مفيد في بعض الحالات"
+
+#. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
+#: widgets/EditProfileMousePage.ui:216
+#, kde-format
+msgid "Trim leading spaces"
+msgstr "اقتطع الفراغات السابقة"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
+#: widgets/EditProfileMousePage.ui:223
+#, kde-format
+msgid "Trim trailing spaces in selected text, useful in some instances"
+msgstr "اقتطع الفراغات اللاحقة في النص المحدد، مفيد في بعض الحالات"
+
+#. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
+#: widgets/EditProfileMousePage.ui:226
+#, kde-format
+msgid "Trim trailing spaces"
+msgstr "اقتطع الفراغات اللاحقة"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
+#: widgets/EditProfileMousePage.ui:263
+#, kde-format
+msgid ""
+"Text recognized as a link or an email address will be underlined when "
+"hovered by the mouse pointer."
+msgstr ""
+"النص المكتشف بأنه رابط أو عنوان بريد إلكتروني سيتم تسطيره عند تحليق مؤشر "
+"الفأرة فوقه."
+
+#. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
+#: widgets/EditProfileMousePage.ui:266
+#, kde-format
+msgid "Underline links"
+msgstr "تسطير الوصلات:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
+#: widgets/EditProfileMousePage.ui:273
+#, kde-format
+msgid ""
+"Text recognized as a file will be underlined when hovered by the mouse "
+"pointer."
+msgstr "النص المكتشف بأنه ملف سيسطر عند تحليق مؤشر الفأرة فوقه."
+
+#. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
+#: widgets/EditProfileMousePage.ui:276
+#, kde-format
+msgid "Underline files"
+msgstr "تسطير الملفات"
+
+#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
+#: widgets/EditProfileMousePage.ui:285
+#, kde-format
+msgid "Text Editor Command: "
+msgstr "أمر محرّر نصوص: "
+
+#. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
+#. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
+#: widgets/EditProfileMousePage.ui:291 widgets/EditProfileMousePage.ui:303
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Text editor to use when opening text file URLs at a given line/column."
+msgstr ""
+"محرر نصوص لاستخدامه عند فتح عناوين URL للملفات النصية في سطر / عمود معين."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
+#: widgets/EditProfileMousePage.ui:329
+#, kde-format
+msgid ""
+"Text recognized as a file, link or an email address can be opened by direct "
+"mouse click."
+msgstr ""
+"النص المكتشف بأنه ملف أو رابط أو عنوان بريد إلكتروني يمكن أن يُفتَح بالنقر "
+"المباشر بالفأرة."
+
+#. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
+#: widgets/EditProfileMousePage.ui:332
+#, kde-format
+msgid "Open files/links by direct click"
+msgstr "افتح الملفات/الروابط بنقرة مباشرة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
+#: widgets/EditProfileMousePage.ui:343
+#, kde-format
+msgid "Allow escape sequences for links"
+msgstr "اسمح بسلاسل الهروب للوصلات"
+
+#. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
+#: widgets/EditProfileMousePage.ui:350
+#, kde-format
+msgid ""
+"<b>WARNING</b>: This has security implications as it allows malicious URLs "
+"to be shown as another URL or hidden.<br>Make sure you understand the "
+"implications before turning this on."
+msgstr ""
+"<b> تحذير </ b>: هذا له تداعيات أمنية لأنه يسمح بإظهار عناوين URL الضارة "
+"كعنوان URL آخر أو بإخفائها. <br> تأكد من فهمك للآثار قبل تشغيل هذا."
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileMousePage.ui:368
+#, kde-format
+msgid "Allowed link formats: "
+msgstr "اسمح بتنسيقات الروابط: "
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
+#: widgets/EditProfileMousePage.ui:378
+#, kde-format
+msgid "The formats of possible links, like http://, https:// and file://"
+msgstr "التنسيقات المحتملة للوصلات، مثل http:// و https:// و file://"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
+#: widgets/EditProfileMousePage.ui:389
+#, kde-format
+msgid "Selected text will require control key plus click to drag."
+msgstr "النص المحدد سيتطلب زر تحكم إضافة إلى نقرة للسحب"
+
+#. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
+#: widgets/EditProfileMousePage.ui:392
+#, kde-format
+msgid "Require Ctrl key for drag && drop"
+msgstr "تطلب ضغط المفتاح Ctrl للسحب والإفلات"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
+#: widgets/EditProfileMousePage.ui:399
+#, kde-format
+msgid ""
+"Mouse scroll wheel will emulate up/down key presses in programs that use the "
+"Alternate Screen buffer (e.g. less)"
+msgstr ""
+"ستحاكي عجلة تمرير الفأرة ضغطات المفاتيح لأعلى / لأسفل في البرامج التي تستخدم "
+"المخزن المؤقت للشاشة البديلة (على سبيل المثال less)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
+#: widgets/EditProfileMousePage.ui:402
+#, kde-format
+msgid "Enable Alternate Screen buffer scrolling"
+msgstr "تفعيل التمرير في المخزن المؤقت للشاشة البديلة"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
+#: widgets/EditProfileMousePage.ui:409
+#, kde-format
+msgid ""
+"Always paste dropped files and URLs as text without offering move, copy and "
+"link actions."
+msgstr ""
+"قم دائمًا بلصق الملفات وعناوين URL التي تم إسقاطها كنص بدون تقديم إجراءات "
+"النقل والنسخ والربط."
+
+#. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
+#: widgets/EditProfileMousePage.ui:412
+#, kde-format
+msgid "Disable drag && drop menu for files && URLs"
+msgstr "عطّل قائمة السحب والإسقاط للملفات والعناوين"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
+#: widgets/EditProfileMousePage.ui:419
+#, kde-format
+msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
+msgstr "ضغط المفتاح Ctrl مع استخدام عجلة التمرير سيزيد/ينقص حجم الخط."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
+#: widgets/EditProfileMousePage.ui:422
+#, kde-format
+msgid "Allow Ctrl+scrollwheel to zoom text size"
+msgstr "اسمح لعجلة التمرير ومفتاح Ctrl بالتحكم بحجم الخط"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
+#: widgets/EditProfileMousePage.ui:429
+#, kde-format
+msgid ""
+"When positioning the mouse over a hexadecimal color it will be displayed in "
+"a frame next to the mouse pointer"
+msgstr ""
+"عند وضع الفأرة فوق لون سداسي عشري ، سيتم عرضه في إطار بجوار مؤشر الفأرة"
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
+#: widgets/EditProfileMousePage.ui:432
+#, kde-format
+msgid "Preview Colors on hover"
+msgstr "عاين الألوان عند الحوم"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
+#: widgets/EditProfileMousePage.ui:452
+#, kde-format
+msgid ""
+"Some terminal applications have mouse support, this allows them to get it by "
+"default. It can be toggled on/off while running as well."
+msgstr ""
+"بعض تطبيقات الطرفية تدعم الفأرة، هذا الخيار سيسمح تمكينها بشكل افتراضي. يمكن "
+"تشغيل أو تعطيل هذه الميزة أثناء التشغيل أيضا."
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
+#: widgets/EditProfileMousePage.ui:455
+#, kde-format
+msgid "Allow terminal applications to handle clicks and drags"
+msgstr "اسمح لتطبيقات الطرفية بتعامل مع النقرات و السحب"
+
+#. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
+#: widgets/EditProfileScrollingPage.ui:43
+#, kde-format
+msgid "Scrollback:"
+msgstr "التمرير الخلفي:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileScrollingPage.ui:85
+#, kde-format
+msgid "Scroll Page Up/Down:"
+msgstr "مقدار التمرير لأعلى/لأسفل:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
+#: widgets/EditProfileScrollingPage.ui:101
+#, kde-format
+msgid "Scroll the page the half height of window"
+msgstr "مرِّر الصفحة نصف ارتفاع النافذة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
+#: widgets/EditProfileScrollingPage.ui:104
+#, kde-format
+msgid "Half screen height"
+msgstr "نصف ارتفاع الشاشة"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
+#: widgets/EditProfileScrollingPage.ui:114
+#, kde-format
+msgid "Scroll the page the full height of window"
+msgstr "مرِّر الصفحة بكامل ارتفاع النافذة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
+#: widgets/EditProfileScrollingPage.ui:117
+#, kde-format
+msgid "Full screen height"
+msgstr "ارتفاع الشاشة الكامل"
+
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: widgets/EditProfileScrollingPage.ui:149
+#, kde-format
+msgid "Scrollbar position:"
+msgstr "مكان شريط التمرير:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
+#: widgets/EditProfileScrollingPage.ui:159
+#, kde-format
+msgid "Show the scroll bar on the right side of the terminal window"
+msgstr "اعرض شريط التمرير على يمين نافذة الطرفية"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
+#: widgets/EditProfileScrollingPage.ui:162
+#, kde-format
+msgctxt "@option:radio Show scrollbar on the right side"
+msgid "Right side"
+msgstr "الجانب اليمين"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
+#: widgets/EditProfileScrollingPage.ui:172
+#, kde-format
+msgid "Show the scroll bar on the left side of the terminal window"
+msgstr "اعرض شريط التمرير على يسار نافذة الطرفية"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
+#: widgets/EditProfileScrollingPage.ui:175
+#, kde-format
+msgctxt "@option:radio Show scrollbar on the left side"
+msgid "Left side"
+msgstr "الجانب الأيسر"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
+#: widgets/EditProfileScrollingPage.ui:185
+#, kde-format
+msgctxt "@option:radio Hide the scroll bar"
+msgid "Hidden"
+msgstr "مخفي"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileScrollingPage.ui:217
+#, kde-format
+msgid "Highlighting:"
+msgstr "الإبراز:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
+#: widgets/EditProfileScrollingPage.ui:227
+#, kde-format
+msgid "Highlight the lines coming into view"
+msgstr "أبرز السطور الآتية في العرض"
+
+#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
+#: widgets/EditProfileScrollingPage.ui:240
+#, kde-format
+msgid "Reflow Lines:"
+msgstr "إعادة دفق السطور:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
+#: widgets/EditProfileScrollingPage.ui:250
+#, kde-format
+msgid "Reflow lines when terminal resizes"
+msgstr "إعادة دفق السطور عند تغيير حجم الطرفية"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
+#: widgets/EditProfileTabsPage.ui:43
+#, kde-format
+msgid "Tab Titles"
+msgstr "عناوين الألسنة"
+
+#. i18n: ectx: property (title), widget (QGroupBox, tabMonitoringGroup)
+#: widgets/EditProfileTabsPage.ui:62
+#, kde-format
+msgid "Tab Monitoring"
+msgstr "مراقبة الألسنة"
+
+#. i18n: ectx: property (text), widget (QLabel, silenceSecondsLabel)
+#: widgets/EditProfileTabsPage.ui:74
+#, kde-format
+msgid "Threshold for continuous silence:"
+msgstr "عتبة السكون المستمر:"
+
+#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
+#: widgets/EditProfileTabsPage.ui:87
+#, kde-format
+msgid "The threshold for continuous silence to be detected by Konsole"
+msgstr "عتبة السكون المستمر ليكتشفها كونسول"
+
+#: widgets/HistorySizeWidget.cpp:40
+#, kde-format
+msgctxt "@label:textbox Unit of scrollback"
+msgid " line"
+msgid_plural " lines"
+msgstr[0] " سطر"
+msgstr[1] " سطر واحد"
+msgstr[2] " سطران"
+msgstr[3] " أسطر"
+msgstr[4] " سطرا"
+msgstr[5] " سطر"
+
+#: widgets/HistorySizeWidget.cpp:57
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"When using this option, the scrollback data will be saved to RAM. If you "
+"choose a huge value, your system may run out of free RAM and cause serious "
+"issues with your system."
+msgstr ""
+"عند استخدام هذا الخيار ، سيتم حفظ بيانات التمرير في ذاكرة الوصول العشوائي. "
+"إذا اخترت قيمة كبيرة، فقد ينفد نظامك من ذاكرة الوصول العشوائي المتاحة ويسبب "
+"مشكلات خطيرة في نظامك."
+
+#: widgets/HistorySizeWidget.cpp:69
+#, kde-kuit-format
+msgctxt "@info:tooltip"
+msgid ""
+"When using this option, the scrollback data will be written unencrypted to "
+"temporary files. Those temporary files will be deleted automatically when "
+"Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → Configure "
+"Konsole → Temporary Files</emphasis> to select the location of the temporary "
+"files."
+msgstr ""
+"عند استخدام هذا الخيار، ستُحفَظ بيانات التمرير للخلف غير معماة إلى ملفات "
+"مؤقتة. ستُحذَف هذه الملفات آليًّا عندما يُغلق كونسول بطريقة اعتيادية. <nl/> "
+"استخدم <emphasis> إعدادات ← ضبط كونسول ← الملفات المؤقتة </emphasis> لتحديد "
+"موقع الملفات المؤقتة"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
+#: widgets/HistorySizeWidget.ui:60
+#, kde-format
+msgid "Limit the remembered output to a fixed number of lines"
+msgstr "حد المخرجات المتذكرة بعدد ثابت من الأسطر"
+
+#. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
+#: widgets/HistorySizeWidget.ui:63
+#, kde-format
+msgid "Fixed size:"
+msgstr "حجم ثابت:"
+
+#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
+#: widgets/HistorySizeWidget.ui:73
+#, kde-format
+msgid "Number of lines of output to remember"
+msgstr "عدد الأسطر التي سيتم تذكرها من المخرجات"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
+#: widgets/HistorySizeWidget.ui:135
+#, kde-format
+msgid "Remember all output produced by the terminal"
+msgstr "تذكر كل المخرجات الصادرة من الطرفية"
+
+#. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
+#: widgets/HistorySizeWidget.ui:138
+#, kde-format
+msgctxt "Save all lines to the scrollback history"
+msgid "Unlimited"
+msgstr "غير محدود"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
+#: widgets/HistorySizeWidget.ui:174
+#, kde-format
+msgid "Do not remember previous output"
+msgstr "لا تتذكّر المخرجات السابقة"
+
+#. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
+#: widgets/HistorySizeWidget.ui:177
+#, kde-format
+msgctxt "Do not save any lines to the scrollback history"
+msgid "None"
+msgstr "بلا"
+
+#: widgets/IncrementalSearchBar.cpp:54
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find..."
+msgstr "بحث..."
+
+#: widgets/IncrementalSearchBar.cpp:56
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Enter the text to search for here"
+msgstr "أدخل نص لتبحث عنه هنا"
+
+#: widgets/IncrementalSearchBar.cpp:80
+#, kde-format
+msgctxt "@action:button Go to the next phrase"
+msgid "Next"
+msgstr "التّالي"
+
+#: widgets/IncrementalSearchBar.cpp:83
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Find the next match for the current search phrase"
+msgstr "أعثر على المتطابقة التالية لعبارة البحث الحالية"
+
+#: widgets/IncrementalSearchBar.cpp:90
+#, kde-format
+msgctxt "@action:button Go to the previous phrase"
+msgid "Previous"
+msgstr "السابق"
+
+#: widgets/IncrementalSearchBar.cpp:92
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Find the previous match for the current search phrase"
+msgstr "أعثر على المتطابقة السابقة لعبارة البحث الحالية"
+
+#: widgets/IncrementalSearchBar.cpp:107
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "اعرض قائمة الخيارات"
+
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "أغلق شريط البحث"
+
+#: widgets/IncrementalSearchBar.cpp:124
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Case sensitive"
+msgstr "حسّاس لحالة الأحرف"
+
+#: widgets/IncrementalSearchBar.cpp:126
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether the search is case sensitive"
+msgstr "اختر إذا ما كانت حالة الأحرف حساسة"
+
+#: widgets/IncrementalSearchBar.cpp:129
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Match regular expression"
+msgstr "طابق التعابير النمطية"
+
+#: widgets/IncrementalSearchBar.cpp:133
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Highlight all matches"
+msgstr "أبرز كل المتطابقات"
+
+#: widgets/IncrementalSearchBar.cpp:135
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether matching text should be highlighted"
+msgstr "اختر إذا ما كنت تريد إبراز النص المتطابق"
+
+#: widgets/IncrementalSearchBar.cpp:138
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Search backwards"
+msgstr "ابحث بالعكس"
+
+#: widgets/IncrementalSearchBar.cpp:140
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether search should start from the bottom"
+msgstr "حدِّد ما إذا كان يجب بدء البحث من الأسفل"
+
+#: widgets/IncrementalSearchBar.cpp:170
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Search for the current search phrase from the bottom"
+msgstr "ابحث عن عبارة البحث الحالية من الأسفل"
+
+#: widgets/IncrementalSearchBar.cpp:175
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Search for the current search phrase from the top"
+msgstr "ابحث عن عبارة البحث الحالية من الأعلى"
+
+#: widgets/KonsolePrintManager.cpp:50
+#, kde-format
+msgid "Print Shell"
+msgstr "صَدفة الطباعة"
+
+#: widgets/RenameTabWidget.cpp:37
+#, kde-format
+msgctxt "@label:listbox No color selected"
+msgid "None"
+msgstr "بلا"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, remoteTabTitleEdit)
+#: widgets/RenameTabWidget.ui:41
+#, kde-format
+msgid ""
+"Tab title format used when a remote command (e.g. connection to another "
+"computer via SSH) is being executed"
+msgstr ""
+"تنسيق عنوان اللسان عندما ينفذ أمر بعيد (على سبيل المثال اتصال بحاسوب آخر عن "
+"طريق SSH )"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/RenameTabWidget.ui:60
+#, kde-format
+msgid "Remote tab title format:"
+msgstr "تنسيق عناوين الألسنة البعيدة:"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/RenameTabWidget.ui:79
+#, kde-format
+msgid "Tab title format:"
+msgstr "تنسيق عنوان اللسان:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
+#: widgets/RenameTabWidget.ui:98
+#, kde-format
+msgid "Normal tab title format"
+msgstr "التنسيق عناوين الألسنة العادية"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/RenameTabWidget.ui:105
+#, kde-format
+msgid "Tab Color:"
+msgstr "لون اللسان:"
+
+#: widgets/TabTitleFormatButton.cpp:22 widgets/TabTitleFormatButton.cpp:31
+#, c-format, kde-format
+msgid "Program Name: %n"
+msgstr "اسم البرنامج: %n"
+
+#: widgets/TabTitleFormatButton.cpp:23 widgets/TabTitleFormatButton.cpp:32
+#, c-format, kde-format
+msgid "Current Directory (Short): %d"
+msgstr "الدليل الحالي (قصير): %d"
+
+#: widgets/TabTitleFormatButton.cpp:24 widgets/TabTitleFormatButton.cpp:33
+#, kde-format
+msgid "Current Directory (Long): %D"
+msgstr "الدليل الحالي (طويل): %D"
+
+#: widgets/TabTitleFormatButton.cpp:25 widgets/TabTitleFormatButton.cpp:34
+#: widgets/TabTitleFormatButton.cpp:51 widgets/TabTitleFormatButton.cpp:59
+#, kde-format
+msgid "Window Title Set by Shell: %w"
+msgstr "عنوان النافذة الذي تضبطه الصدفة: %w"
+
+#: widgets/TabTitleFormatButton.cpp:26 widgets/TabTitleFormatButton.cpp:35
+#: widgets/TabTitleFormatButton.cpp:52 widgets/TabTitleFormatButton.cpp:60
+#, kde-format
+msgid "Session Number: %#"
+msgstr "رقم الجلسة: %#"
+
+#: widgets/TabTitleFormatButton.cpp:27 widgets/TabTitleFormatButton.cpp:36
+#: widgets/TabTitleFormatButton.cpp:46 widgets/TabTitleFormatButton.cpp:54
+#, c-format, kde-format
+msgid "User Name: %u"
+msgstr "اسم المستخدم: %u"
+
+#: widgets/TabTitleFormatButton.cpp:28 widgets/TabTitleFormatButton.cpp:37
+#, kde-format
+msgid "Local Host: %h"
+msgstr "المضيف المحلي: %h"
+
+#: widgets/TabTitleFormatButton.cpp:29 widgets/TabTitleFormatButton.cpp:38
+#, kde-format
+msgid "User's Bourne prompt sigil: %B"
+msgstr "موجة بورن سيجل الخاصة بالمستخدم: %B"
+
+#: widgets/TabTitleFormatButton.cpp:47 widgets/TabTitleFormatButton.cpp:55
+#, kde-format
+msgid "User Name@ (if given): %U"
+msgstr "اسم المستخدم @ (إذا معطى): %U"
+
+#: widgets/TabTitleFormatButton.cpp:48 widgets/TabTitleFormatButton.cpp:56
+#, kde-format
+msgid "Remote Host (Short): %h"
+msgstr "المضيف البعيد (قصير): %h"
+
+#: widgets/TabTitleFormatButton.cpp:49 widgets/TabTitleFormatButton.cpp:57
+#, kde-format
+msgid "Remote Host (Long): %H"
+msgstr "المضيف البعيد (طويل): %أ"
+
+#: widgets/TabTitleFormatButton.cpp:50 widgets/TabTitleFormatButton.cpp:58
+#, c-format, kde-format
+msgid "Command and arguments: %c"
+msgstr "الأمر و المعاملات: %c"
+
+#: widgets/TabTitleFormatButton.cpp:69
+#, kde-format
+msgid "Insert"
+msgstr "أدرج"
+
+#: widgets/TabTitleFormatButton.cpp:94
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert title format"
+msgstr "أدخل تنسيق عنوان:"
+
+#: widgets/TabTitleFormatButton.cpp:98
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert remote title format"
+msgstr "تنسيق عناوين الألسنة البعيدة:"
+
+#: widgets/TerminalHeaderBar.cpp:80 widgets/TerminalHeaderBar.cpp:188
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Maximize terminal"
+msgstr "كبّر الطرفية"
+
+#: widgets/TerminalHeaderBar.cpp:91
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Move terminal to new tab"
+msgstr "انقل الطرفية للسان جديد"
+
+#: widgets/TerminalHeaderBar.cpp:101
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close terminal"
+msgstr "أغلق الطرفية"
+
+#: widgets/TerminalHeaderBar.cpp:186
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Restore terminal"
+msgstr "استعد الطّرفيّة"
+
+#: widgets/ViewContainer.cpp:57
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Open a new tab"
+msgstr "افتح لسانًا جديدًا"
+
+#: widgets/ViewContainer.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close this tab"
+msgstr "أغلق هذا اللسان"
+
+#: widgets/ViewContainer.cpp:95
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Detach Tab"
+msgstr "ا&فصل اللسان"
+
+#: widgets/ViewContainer.cpp:101
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Configure or Rename Tab..."
+msgstr "اضبط أو أ&عد تسمية لسان..."
+
+#: widgets/ViewContainer.cpp:106
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close Tab"
+msgstr "أغلق اللسان"
+
+#~ msgctxt "@title:window"
+#~ msgid "Save File"
+#~ msgstr "احفظ الملف"
+
+#~ msgctxt "@title:window"
+#~ msgid "Open File"
+#~ msgstr "افتح ملفاً"
+
+#~ msgid "Size: XXX x XXX"
+#~ msgstr "القياس: XXX × XXX"
+
+#~ msgid "Get New..."
+#~ msgstr "احصل على جديد..."
+
+#~ msgctxt "@info:shell"
+#~ msgid "Use the internal FALLBACK profile"
+#~ msgstr "استعمل التشكيلة الاحتياطية الداخلية"
+
+#~ msgctxt "Name of the default/builtin profile"
+#~ msgid "Default"
+#~ msgstr "المبدئيّ"
+
+#~ msgid ""
+#~ "The name \"Default\" is reserved for the built-in fallback profile;\n"
+#~ "the profile is going to be saved as \"%1\""
+#~ msgstr ""
+#~ "الاسم \"Default\" محجوز للتشكيلة الاحتياطية المضمنة؛ \n"
+#~ "ستحفظ التشكيلة كـ \"%1\""
+
+#~ msgctxt "@label:textbox added to the name of the current default profile"
+#~ msgid " (default)"
+#~ msgstr " (المبدئيّ)"
+
+#~ msgid "Allow Color Filters"
+#~ msgstr "اسمح بمرشحات الألوان"
+
+#~ msgid "Import"
+#~ msgstr "استورد"
+
+#~ msgid "Missing Port"
+#~ msgstr "المنفذ مفقود"
+
+#~ msgid "Show menubar"
+#~ msgstr "اعرض شريط القوائم"
+
+#~ msgid "Show menubar by default"
+#~ msgstr "أظهر شريط القوائم افتراضيًا"
+
+#~ msgid "Show menubar by default in each Konsole window"
+#~ msgstr "اظهر شريط الألسنة افتراضيًا لكل نافذة من كونسول"
+
+#, fuzzy
+#~| msgid "Open File Manager"
+#~ msgid "Hide SSH Manager"
+#~ msgstr "افتح مدير الملفات"
+
+#~ msgid ""
+#~ "<p>Each profile must have a name before it can be saved into disk.</p>"
+#~ msgstr "<p>يجب أن يكون لكل وَضع اسم قبل أن يُحفَظ على القرص.</p>"
+
+#, fuzzy
+#~| msgid "&Set as Default"
+#~ msgctxt "@label:textbox Name of the current default profile"
+#~ msgid " (Default)"
+#~ msgstr "ا&جعلها الافتراضية"
+
+#, fuzzy
+#~| msgid "New Color Scheme"
+#~ msgid "Color from theme"
+#~ msgstr "مخطط لوني جديد"
+
+#, fuzzy
+#~| msgid "Edit Profile \"%1\""
+#~ msgctxt "The default name of a profile"
+#~ msgid "Profile #%1"
+#~ msgstr "حرر التشكيلة \"%1\""
+
+#, fuzzy
+#~| msgctxt "@title:column Display profile in file menu"
+#~| msgid "Show in Menu"
+#~ msgctxt ""
+#~ "@info:tooltip List item's checkbox for making item (profile) visible in a "
+#~ "menu"
+#~ msgid "Show profile in menu"
+#~ msgstr "اعرض في القائمة"
+
+#, fuzzy
+#~| msgid "Tab Bar"
+#~ msgctxt "@title Preferences page name"
+#~ msgid "Tab Bar"
+#~ msgstr "شريط الألسنة"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Rename Tab..."
+#~ msgstr "أ&عد تسمية لسان..."
+
+#, fuzzy
+#~| msgid "Confirm Paste"
+#~ msgctxt "@action:button"
+#~ msgid "Confirm &paste"
+#~ msgstr "تأكيد اللصق"
+
+#~ msgid "Vary the background color for each tab"
+#~ msgstr "فاوت لون الخلفية لكل لسان"
+
+#~ msgctxt "@title Preferences page name"
+#~ msgid "TabBar"
+#~ msgstr "شريط الألسنة"
+
+#, fuzzy
+#~| msgid "&Paste Location"
+#~ msgctxt "@title Preferences page name"
+#~ msgid "File Location"
+#~ msgstr "أ&لصق المكان"
+
+#, fuzzy
+#~| msgid "&Paste Location"
+#~ msgid "Use system &location"
+#~ msgstr "أ&لصق المكان"
+
+#, fuzzy
+#~| msgid "&Paste Location"
+#~ msgid "Use user specific location"
+#~ msgstr "أ&لصق المكان"
+
+#, fuzzy
+#~| msgid "&Paste Location"
+#~ msgid "Use specified loca&tion"
+#~ msgstr "أ&لصق المكان"
+
+#~ msgid "Konsole Window"
+#~ msgstr "نافذة كونسول"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Click to toggle status"
+#~ msgstr "انقر لتبديل الحالة"
+
+#~ msgctxt "@title:column Profile label"
+#~ msgid "Name"
+#~ msgstr "الاسم"
+
+#~ msgid "&New Profile..."
+#~ msgstr "ت&شكيلة جديدة..."
+
+#~ msgid "&Edit Profile..."
+#~ msgstr "&حرر التشكيلة..."
+
+#~ msgid "&Delete Profile"
+#~ msgstr "ا&حذف التشكيلة"
+
+#~ msgid "Tab bar position:"
+#~ msgstr "مكان شريط الألسنة:"
+
+#~ msgid "Always Show Tab Bar"
+#~ msgstr "أظهر دائما شريط الألسنة "
+
+#~ msgid "Show Tab Bar When Needed"
+#~ msgstr "أظهر شريط الألسنة عند الحاجة"
+
+#~ msgid "Always Hide Tab Bar"
+#~ msgstr "دائماً أخف شريط الألسنة"
+
+#~ msgid "Tab bar visibility:"
+#~ msgstr "عرض شريط الألسنة:"
+
+#~ msgid "New tab behavior:"
+#~ msgstr "سلوك اللسان الجديد:"
+
+#~ msgid "Put New Tab At The End"
+#~ msgstr "ضع اللسان الجديد في النهاية"
+
+#~ msgid "Put New Tab After Current Tab"
+#~ msgstr "ضع اللسان الجديد بعد اللسان الحالي"
+
+#~ msgctxt "@action Shortcut entry"
+#~ msgid "Next View Container"
+#~ msgstr "حاوي العرض التالي"
+
+#~ msgid "&Close Tab"
+#~ msgstr "أ&غلق اللسان"
+
+#~ msgctxt "@action:inmenu Close Active View"
+#~ msgid "Close Active"
+#~ msgstr "أغلق النشطة"
+
+#~ msgctxt "@action:inmenu Close Other Views"
+#~ msgid "Close Others"
+#~ msgstr "أغلق الأخرى"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#, fuzzy
+#~| msgid "Select All"
+#~ msgid "Select Any Font"
+#~ msgstr "اختر الكل"
+
+#~ msgid "Select Fixed Width Font"
+#~ msgstr "اختر الخط ثابت العرض"
+
+#~ msgctxt "@title:group Generic, common options"
+#~ msgid "General"
+#~ msgstr "عام"
+
+#~ msgid "Rows"
+#~ msgstr "صفوف"
+
+#~ msgid "This will not alter any open windows."
+#~ msgstr "لن يغير هذا أي نوافذ مفتوحة."
+
+#~ msgid "Preview:"
+#~ msgstr "المعاينة:"
+
+#~ msgid "Select the font used in this profile"
+#~ msgstr "اختر الخط المستخدم في هذه التشكيلة"
+
+#~ msgid "Scroll Bar"
+#~ msgstr "شريط التمرير"
+
+#~ msgid "Hide the scroll bar"
+#~ msgstr "أخف شريط التمرير"
+
+#~ msgctxt "@option:radio Hide the scroll bar"
+#~ msgid "Hide"
+#~ msgstr "أخفِ"
+
+#~ msgid "Show on left side"
+#~ msgstr "اعرض على الجانب اليسار"
+
+#~ msgid "Select Text"
+#~ msgstr "حدّد النص"
+
+#, fuzzy
+#~ msgid "Characters considered part of a word when double clicking:"
+#~ msgstr "المحارف التي تعتبر جزء من كلمة عند النقر المزدوج :"
+
+#~ msgid "Which part of current line should be selected with triple click ."
+#~ msgstr "أي جزء من السطر الحالي يجب تحديده بالنقر الثلاثي ."
+
+#~ msgid "Copy && Paste"
+#~ msgstr "انسخ والصق"
+
+#~ msgid "Mouse middle button:"
+#~ msgstr "زر الفأرة الأوسط:"
+
+#~ msgid "Enable flow control using Ctrl+S, Ctrl+Q"
+#~ msgstr "مكن التحكم بالدفق باستعمال Ctrl+S و  Ctrl+Q"
+
+#~ msgid "Cursor shape:"
+#~ msgstr "شكل المؤشر:"
+
+#~ msgid "Encoding"
+#~ msgstr "الترميز"
+
+#~ msgctxt "@action:button Pick an encoding"
+#~ msgid "Select"
+#~ msgstr "اختر"
+
+#~ msgid "No scrollback"
+#~ msgstr "لا يوجد تمرير للخلف"
+
+#~ msgid "Show application name on the titlebar"
+#~ msgstr "اعرض اسم التطبيق في شريط العنوان"
+
+#~ msgid "Show \"- Konsole\" on the titlebar"
+#~ msgstr "اعرض عبارة \"- Konsole\" في شريط العنوان"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Close Tab"
+#~ msgstr "أ&غلق اللسان"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Create a new tab. Press and hold to select profile from menu"
+#~ msgstr "أنشئ لساناً جديداً. اضغط باستمرار لاختيار الوَضع من القائمة"
+
+#~ msgctxt "@action:button Display options menu"
+#~ msgid "Options"
+#~ msgstr "خيارات"
+
+#~ msgctxt "@action:button Search from bottom"
+#~ msgid "From bottom"
+#~ msgstr "من الأسفل"
+
+#~ msgctxt "@action:button Search from top"
+#~ msgid "From top"
+#~ msgstr "من الأعلى"
+
+#~ msgid "Profile name is empty."
+#~ msgstr "اسم التشكيلة فارغ."
+
+#~ msgid "&Stop"
+#~ msgstr "&قف"
+
+#~ msgid "Icon:"
+#~ msgstr "الأيقونة:"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Click to rename profile"
+#~ msgstr "انقر لإعادة تسمية التشكيلة"
+
+#, fuzzy
+#~| msgid "Konsole"
+#~ msgctxt "@title"
+#~ msgid "Demo KonsolePart"
+#~ msgstr "كونسول"
+
+#~ msgid "DEC VT420 Terminal"
+#~ msgstr "طرفية DEC VT420 "
+
+#~ msgctxt "@info:shell"
+#~ msgid "Use --nofork to run in the foreground (helpful with the -e option)."
+#~ msgstr "استخدم nofork-- في الواجهة (مفيدة مع خيار e-)."
+
+#~ msgctxt "@title:window"
+#~ msgid "Manage Profiles"
+#~ msgstr "أدر التشكيلات"
+
+#~ msgid "Manage Profiles..."
+#~ msgstr "أدر التشكيلات..."
+
+#~ msgctxt "@title"
+#~ msgid "<application>Konsole</application>"
+#~ msgstr "<application>كونسول</application>"
+
+#~ msgid "Shell"
+#~ msgstr "المحارة"
+
+#~ msgid "--- Type anything in this box ---"
+#~ msgstr "--- اطبع أي شيء في هذا الصندوق ---"
+
+#~ msgid "Set the window size and position for this profile when exiting"
+#~ msgstr "ضع حجم النافذة و موضعها لهذه التشكيلة عن الخروج"
+
+#~ msgid "Save window size and position on exit"
+#~ msgstr "احفظ حجم النافذة و موضعها عن الخروج"
+
+#, fuzzy
+#~| msgid "Accessible Color Scheme"
+#~ msgid "Accessible Color Scheme"
+#~ msgstr "مخطط لوني سهل الوصول"
+
+#~ msgid "%1, size %2"
+#~ msgstr "%1 ، حجم %2"
+
+#~ msgid "Adjust the font size used in this profile"
+#~ msgstr "عدل مقاس الخط المستخدم في هذه التشكيلة"
+
+#~ msgid ""
+#~ "Try to enable transparency, even if the system does not appear to support "
+#~ "it."
+#~ msgstr "حاول تفعيل الشفافية ،حتى لو كان النظام لا يدعمها ظاهريا."
+
+#~ msgid "Input"
+#~ msgstr "الدخْل"
+
+#~ msgid "Fixed size scrollback: "
+#~ msgstr "لا تعرض شريط التمرير"
+
+#~ msgid "Edit normal tab title format"
+#~ msgstr "حرر تنسيق عناوين الألسنة العادية"
+
+#~ msgid "Edit tab title format used when executing remote commands"
+#~ msgstr "حرر تنسيق عناوين الألسنة المستخدمة عند تنفيذ أوامر بعيدة"
+
+#~ msgid "Allow terminal programs to resize the window"
+#~ msgstr "اسمح لبرامج الطرفية بأن تحجم النافذة"
+
+#~ msgid "Allow programs to resize terminal window"
+#~ msgstr "اسمح للبرامج أن تحجم نافذة الطرفية"
+
+#~ msgid "Configure Current Profile..."
+#~ msgstr "اضبط التشكيلة الحالية..."
+
+#, fuzzy
+#~| msgid "Edit Profile"
+#~ msgid "&Switch Profile"
+#~ msgstr "حرر التشكيلة"
+
+#~ msgid "Debug"
+#~ msgstr "التنقيح"
+
+#~ msgid "Show or hide the menu bar in terminal windows"
+#~ msgstr "اعرض أو أخف شريط القائمة في نوافذ الطرفية"
+
+#~ msgid "Disable scrollback"
+#~ msgstr "عطل التمرير الخلفي"
+
+#, fuzzy
+#~| msgid "&Paste"
+#~ msgid "&Paste as text"
+#~ msgstr "أ&لصق"
+
+#~ msgid ""
+#~ "All characters from the current word to the end of line will be selected."
+#~ msgstr "جميع المحارف من الكملة الحالية إلى نهاية السطر ستحدد."
+
+#~ msgid "Triple click selects from current word forward"
+#~ msgstr "ثلاث نقرات ستحدد من الكلمة الحالية إلى الأمام"
+
+#~ msgid "&Change Profile"
+#~ msgstr "غير التش&كيلة"
+
+#~ msgid "Change Profile"
+#~ msgstr "احفظ تش&كيل الجلسة..."
+
+#~ msgid "Maintainer"
+#~ msgstr "المشرف"
+
+#~ msgid "Author"
+#~ msgstr "المؤلف"
+
+#~ msgid "Remote Connection..."
+#~ msgstr "اتصال عن بعد..."
+
+#~ msgid "User:"
+#~ msgstr "المستخدم:"
+
+#~ msgid "Lookup..."
+#~ msgstr "يبحث..."
+
+#~ msgid "Service:"
+#~ msgstr "الخدمة:"
+
+#~ msgid "SSH"
+#~ msgstr "SSH"
+
+#~ msgid "Secure FTP"
+#~ msgstr "FTP آمن "
+
+#~ msgid "Background color:"
+#~ msgstr "لون الخلفية:"
+
+#~ msgid "Save as custom session"
+#~ msgstr "احفظ كجلسة مخصصة"
+
+#~ msgid "Connect"
+#~ msgstr "اتصل"
+
+#~ msgid "Next View"
+#~ msgstr "العرض التالي"
+
+#~ msgid "Previous View"
+#~ msgstr "العرض السابق"
+
+#~ msgid "Match case"
+#~ msgstr "طابق الحالة"
+
+#~ msgid ""
+#~ "Sets whether the search phrase is interpreted as normal text or as a "
+#~ "regular expression"
+#~ msgstr ""
+#~ "يحدد إذا ما كان يجب ترجمة عبارة البحث على أنها نص عادي أو تعبير نمطي"
+
+#~ msgid "Search reached bottom, continued from top."
+#~ msgstr "وصل البحث إلى القاع ، المتابعة من القمة."
+
+#~ msgid "Search reached top, continued from bottom."
+#~ msgstr "وصل البحث إلى القمة ، المتابعة من القاع."
+
+#~ msgid "New &Tab"
+#~ msgstr "&لسان جديد"
+
+#~ msgid "Move the selected profile up in the menu list"
+#~ msgstr "حرك التشكيلة المحدد للأعلى في لائحة القائمة"
+
+#~ msgid "Move Up"
+#~ msgstr "حرك للأعلى"
+
+#~ msgid "Move the selected profile down in the menu list"
+#~ msgstr "حرك التشكيلة المحدد للأسفل في لائحة القائمة"
+
+#~ msgid "Move Down"
+#~ msgstr "حرك للأسفل"
+
+#~ msgid "Word characters for double-click selection: "
+#~ msgstr "محارف الكلمة لتحديد النقر المزدوج:"
+
+#, fuzzy
+#~| msgid "Clear && Reset"
+#~ msgid "Clear and Reset"
+#~ msgstr "امسح وأعد الضبط"
+
+#~ msgid "Character Encoding"
+#~ msgstr "ترميز المحارف"
+
+#~ msgid "&Detach View"
+#~ msgstr "عرض م&فصول"
+
+#~ msgid "Decrease Text Size"
+#~ msgstr "انقص حجم النص"
+
+#~ msgid "Search Output..."
+#~ msgstr "ابحث في الخرج..."
+
+#~ msgid "Find Next"
+#~ msgstr "أعثر على التالي"
+
+#~ msgid "Find Previous"
+#~ msgstr "أعثر على السابق"
+
+#~ msgid "Open Browser Here"
+#~ msgstr "افتح المتصفح هنا"
+
+#~ msgid "C&lear Display"
+#~ msgstr "ا&مسح العرض"

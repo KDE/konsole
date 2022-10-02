@@ -1,0 +1,3601 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+ "dtd/kdedbx45.dtd" [
+<!ENTITY % Dutch "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+<!ENTITY Ahmad.Samir '<personname
+><firstname
+>Ahmad</firstname
+><surname
+>Samir</surname
+></personname
+>'>
+<!ENTITY Ahmad.Samir.mail '<email
+>a.samirh78@gmail.com</email
+>'>
+]>
+
+<book id="konsole" lang="&language;">
+
+<bookinfo>
+<title
+>Het handboek van &konsole;</title>
+<authorgroup>
+<author
+>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author
+>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
+
+<othercredit role="developer"
+>&Robert.Knight; &Robert.Knight.mail; </othercredit>
+
+<othercredit role="developer"
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail; </othercredit>
+
+<othercredit role="developer"
+>&Waldo.Bastian; &Waldo.Bastian.mail; </othercredit>
+
+<othercredit role="reviewer"
+>&Mike.McBride; &Mike.McBride.mail; </othercredit>
+
+&Niels.Reedijk;&Bram.Schoenmakers;&Tijmen.Baarda;&Antoon.Tolboom; 
+
+</authorgroup>
+
+<copyright>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>&Jonathan.Singer;</holder>
+</copyright>
+<copyright>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year
+><year
+>2018</year
+><year
+>2020</year
+><year
+>2021</year>
+<holder
+>&Kurt.Hindenburg;</holder>
+</copyright>
+
+<copyright>
+    <year
+>2018</year>
+<holder
+>&Ahmad.Samir;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2021-10-28</date>
+<releaseinfo
+>Applications 21.12</releaseinfo>
+
+<abstract
+><para
+>&konsole; is de terminalemulator van &kde;.</para
+></abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>konsole</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>commando</keyword>
+<keyword
+>regel</keyword>
+<keyword
+>terminal</keyword>
+<keyword
+>cli</keyword>
+</keywordset>
+
+</bookinfo>
+<chapter id="introduction">
+<title
+>Inleiding</title>
+
+<sect1 id="terminal">
+<title
+>Wat is een terminal?</title>
+
+<para
+>&konsole; is een X-terminalemulator, vaak een terminal of shell genoemd. Het emuleert een commandoprompt in een venster met alleen tekst. </para>
+
+<para
+>De typische manier voor het uitvoeren van &konsole; is een commandoshell, een toepassing die commando's, die u typt, uitvoert. De shell die de &konsole; uitvoert hangt af van uw accountinstellingen. Consulteer de documentatie van uw systeem om te weten te komen welke shell dat is, hoe deze in te stellen en hoe deze te gebruiken. </para>
+</sect1>
+
+<sect1 id="scrollback">
+<title
+>Terugschuiven</title>
+
+<para
+>&konsole; gebruikt de terugschuiven-mogelijkheid om eerder getoonde uitvoer te bekijken. Standaard is terugschuiven actief en worden 1000 regels bewaard naast de inhoud van het huidige scherm.  </para>
+<para
+>De regels die bovenaan het scherm uitrollen, kunt u toch bekijken door de schuifbalk naar boven te bewegen, met het muiswiel of met de toetsen <keycombo action="simul"
+>&Shift;<keycap
+>Page Up</keycap
+></keycombo
+> (om een pagina terug te gaan), <keycombo action="simul"
+>&Shift;<keycap
+>Page Down</keycap
+></keycombo
+> (om een pagina verder te gaan), <keycombo action="simul"
+>&Shift;<keycap
+>Pijltje omhoog</keycap
+></keycombo
+> (om een regel omhoog te gaan) en <keycombo action="simul"
+>&Shift;<keycap
+>Pijltje omlaag</keycap
+></keycombo
+> (om een regel omlaag te gaan). </para>
+<para
+>De hoeveelheid voor schuiven met <keycombo action="simul"
+>&Shift;<keycap
+>Page Up/Down</keycap
+></keycombo
+> kan omgeschakeld worden tussen een halve en hele pagina in het tabblad <guilabel
+>Schuiven</guilabel
+> van het instellingenvenster voor het profiel (gebruik <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Huidige profiel bewerken...</guimenuitem
+></menuchoice
+> om dit venster te bewerken). </para>
+
+</sect1>
+
+<sect1 id="profiles">
+<title
+>Profielen</title>
+<para
+>Profielen laten de gebruiker snel en eenvoudig een aantal veelvoorkomende commando's automatiseren. Voorbeelden kunnen zijn: <itemizedlist>
+<listitem
+><para
+>met ssh aanmelden op een andere computer</para
+></listitem>
+<listitem
+><para
+>een irc-sessie starten</para
+></listitem>
+<listitem
+><para
+>tail gebruiken om een bestand te volgen</para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para
+>Alle nieuwe en gewijzigde profielen zijn opgeslagen in de persoonlijke map van de gebruiker in <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+>.</para>
+
+<para
+>Procedure om een nieuw profiel aan te maken: <orderedlist>
+<listitem
+><para
+>Klik in het menu op <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Profielen beheren...</guimenuitem
+></menuchoice
+></para
+></listitem>
+
+<listitem
+><para
+>Schakel naar de pagina <guibutton
+>Profielen</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Klik op de knop <guibutton
+>Nieuw profiel...</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Vul in het eerste veld een naam in. Deze naam zal worden getoond in het menu en wordt standaard gebruikt in plaats van <guilabel
+>Shell</guilabel
+> wanneer u een nieuwe sessie start van dit type. </para
+></listitem>
+
+<listitem
+><para
+>Voer het commando in dat u ook gebruikt in een nieuw-geopende shell om de taak uit te voeren. Voor het voorbeeld hierboven kunt u het volgende intypen: <userinput
+><command
+>ssh</command
+> <replaceable
+>administratie</replaceable
+></userinput
+>.</para
+></listitem>
+
+<listitem
+><para
+>In de andere tabbladen van de dialoog kunt u het uiterlijk van deze sessie instellen. Voor iedere sessie kunt u bijvoorbeeld een ander lettertype, kleurschema en $<envar
+>TERM</envar
+>-type instellen en vele andere instellingen voor elke sessie.</para
+></listitem>
+
+<listitem
+><para
+>Klik op de knop <guibutton
+>OK</guibutton
+> . De nieuwe sessie is nu beschikbaar in de dialoog <guilabel
+>Profielen beheren...</guilabel
+>. </para
+></listitem>
+
+</orderedlist>
+</para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title
+>Muisknoppen</title>
+
+<para
+>In deze sectie wordt het gebruik van de muis uitgelegd ervan uitgaande dat u de muis rechtshandig hebt ingesteld. Als u een linkshandige muisinstelling hebt, draai de woorden links en rechts dan om in de tekst hieronder. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><mousebutton
+>Links</mousebutton
+></term>
+
+<listitem
+><para
+>Telkens wanner u met de &LMB; klikt, wordt dit doorgegeven aan  terminaltoepassingen die op de muis kunnen reageren. &konsole; toont een pijlcursor indien het terminalprogramma de muis ondersteunt. Als dat niet het geval is wordt een I-vormige cursor weergegeven.</para>
+
+<para
+>Als u de &LMB; ingedrukt houdt en sleept over het scherm bij een programma zonder muisondersteuning, wordt een gedeelte van de tekst gemarkeerd. Terwijl u met de muis sleept, wordt de gemarkeerde tekst in een omgekeerde kleur weergegeven. Als u <guimenuitem
+>Kopiëren</guimenuitem
+> selecteert van het menu <guimenu
+>Bewerken</guimenu
+> wordt de tekst naar het klembord gekopieerd voor verder gebruik in &konsole; of een andere toepassing. De geselecteerde tekst kan ook naar hiermee compatibele programma's worden gesleept. Houd de &Ctrl;-toets ingedrukt en sleep de geselecteerde tekst naar de gewenste locatie.</para>
+
+<para
+>Gewoonlijk worden de nieuwe-regel tekens aan het eind van elke regel geselecteerd. Dit is het beste voor het kopiëren en plakken van broncode of de uitvoer van een bepaald commando. Voor gewone tekst zijn de regelafbrekingen vaak niet belangrijk. Als u liever de tekst als een stroom tekens wilt, houd dan de toets &Ctrl; ingedrukt bij het selecteren.</para>
+
+<para
+>Als u de toetsen &Ctrl; en &Alt; ingedrukt houdt samen met de &LMB;, dan kunt u tekst in kolommen selecteren. </para>
+
+<para
+>Dubbelklik met de &LMB; om een woord te selecteren, en klik driemaal om een hele regel te selecteren.</para>
+
+<para
+>Als de boven- of onderkant van het tekstgebied aangeraakt wordt tijdens het markeren, dan schuift &konsole; naar boven of beneden, om de tekst in de geschiedenisbuffer weer te geven. &konsole; stopt met schuiven zodra de muis stilstaat.</para>
+
+<para
+>Nadat de muis is losgelaten, laat &konsole; de tekst gemarkeerd om aan te geven dat deze tekst zich nu op het klembord bevindt. Dit wordt weer normaal zodra de inhoud van het klembord gewijzigd wordt, de tekst in het gemarkeerde gebied gewijzigd wordt of wanneer de &LMB; ingedrukt wordt.</para>
+
+<para
+>Om tekst te markeren in een programma dat de muis wel ondersteunt (bijvoorbeeld Midnight Commander) drukt u de toets &Shift; in bij het klikken.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Middelste knop</mousebutton
+></term>
+
+<listitem
+><para
+>Door het indrukken van de &MMB; wordt de tekst die zich op dat moment op het klembord bevindt in het venster geplakt. Als u de toets &Ctrl; ingedrukt houdt terwijl u op de middelste muisknop drukt wordt de tekst ook geplakt en wordt een nieuwe-regel achtergevoegd. Dit is gemakkelijk voor het plakken en direct uitvoeren van een commando, maar het kan ook gevaarlijk zijn, gebruik het dus met voorzichtigheid. </para>
+
+<note
+><para
+>Als u een muis met slechts twee knoppen heeft, kunt u de &MMB; van een drieknopsmuis emuleren door de &LMB; en de &RMB; gelijktijdig in te drukken.</para
+></note>
+
+<para
+>Als uw muis een <mousebutton
+>wieltje</mousebutton
+> heeft die de functie van &MMB; heeft, kunt u daarmee de schuifbalk van &konsole; verplaatsen.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Rechts</mousebutton
+></term>
+<listitem>
+<para
+>Deze items verschijnen in het menu wanneer de &RMB; wordt ingedrukt:</para>
+<itemizedlist>
+<listitem
+><para
+><guimenuitem
+>Kopiëren</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Plakken</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>Met een selectie van test verschijnt een submenu <guisubmenu
+>Zoeken naar</guisubmenu
+> met een lijst van de websneltoetsen van voorkeur en een optie om websneltoetsen in te stellen.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Bestandsbeheer openen</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Codering instellen</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Geschiedenis opschonen</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Terugschuiven aanpassen...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Menubalk tonen</guimenuitem
+>, alleen wanneer de menubalk is verborgen</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Profiel omschakelen</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Huidig profiel bewerken...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Tabblad sluiten</guimenuitem
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>In toepassingen die muisondersteuning hebben, is het nodig om de toets &Shift; ingedrukt te houdenterwijl u op de &RMB; klikt om het contextmenu te tonen. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="drag-and-drop">
+<title
+>Slepen en loslaten</title>
+<para
+>Als u een bestand, map of &URL; op een venster van &konsole;, laat vallen verschijnt er een contextmenu met deze acties: </para>
+<screenshot>
+<screeninfo
+>Contextmenu bij slepen en neerzetten</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Contextmenu bij slepen en loslaten</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Shift;</shortcut
+><guimenuitem
+>Hierheen verplaatsen</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Verplaats het neergezette item naar de huidige map. Dit item verschijnt alleen in het contextmenu, als u de rechten hebt om het neergezette bestand of map te verwijderen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Ctrl;</shortcut
+><guimenuitem
+>Hierheen kopiëren</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Kopieert het neergezette item naar de huidige map.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;</keycombo
+></shortcut
+><guimenuitem
+>Hierheen verbinden</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Voegt een symbolische koppeling in naar het neergezette item.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Locatie plakken</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Voegt het volledige pad van het neergezette item in bij de cursor.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Map wijzigen naar</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Als een map wordt neergezet, dan verschijnt deze actie in het contextmenu en stelt u in staat de werkmap van de &konsole;-sessie te wijzigen.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Esc;</shortcut
+><guimenuitem
+>Annuleren</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Breek de actie slepen en neerzetten af.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Als u de sneltoetsen indrukt voor het loslaten van de &LMB; bij slepen en neerzetten, zal geen contextmenu verschijnen en zullen de acties onmiddellijk worden uitgevoerd. </para>
+
+<para
+>Als u de toets &Ctrl; wilt gebruiken voor slepen en loslaten of het contextmenu wilt uitschakelen om &URL;'s standaard als tekst in te voegen, schakel dan de overeenkomstige opties in op het tabblad <guilabel
+>Muis</guilabel
+> in de dialoog profielinstellingen. </para>
+
+</sect1>
+
+<sect1 id="semantic-shell-integration">
+<title
+>Semantische shell-integratie</title>
+
+<para
+>Een shell-programma uitgevoerd in Konsole kan escape-sequences sturen die de getoonde tekst in drie typen opdeelt: shell-prompt, gebruikersinvoer en uitvoer van commando. Deze semantische informatie gebruiken maakt verschillende verbeteringen in Konsole mogelijk. <itemizedlist>
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgUp</keycap
+></keycombo
+> en <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgDown</keycap
+></keycombo
+> schuiven omhoog/omlaag naar vorige/volgende commando-prompt.</para
+></listitem>
+<listitem
+><para
+>Visuele tips: een regel wordt boven elke prompt getoond, kleuren van prompt zijn minder intens en uitvoerkleuren zijn intenser. Dit kan geconfigureerd worden tot nooit tonen, altijd tonen of alleen wanneer URL-tips getoond worden. </para
+></listitem>
+<listitem
+><para
+>Opties in contextmenu <guimenuitem
+>Gebruikersinvoer kopiëren</guimenuitem
+> <guimenuitem
+>Commando-uitvoer</guimenuitem
+> <guimenuitem
+>Kopiëren behalve prompt</guimenuitem
+> kan gebruikt worden om selectie te filteren wanneer het gekopieerd wordt naar het klembord. </para
+></listitem>
+<listitem
+><para
+>Wanneer de selectie leeg is zal de actie kopieer naar clipboard de huidige invoerregel kopiëren als deze not leeg is of de laatste uitvoer als er geen huidige invoer is. </para
+></listitem>
+<listitem
+><para
+>De pijl omhoog/omlaag indrukken bij bewerken van een lange invoer, zal in plaats daarvan de cursor één regel omhoog/omlaag plaatsen door het verzenden van het juiste aantal links/rechts toetsgebeurtenissen naar de shell te sturen. Te configureren in de profielinstellingen.</para
+></listitem>
+<listitem
+><para
+>De muis op tekstinvoer klikken zal de cursor plaatsen in de geklikte locatie. Te configureren in de profielinstellingen.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Semantische shell-integratie moet ingesteld worden in de shell. Op <keycombo
+>&Ctrl;&Alt;<keycap
+>]</keycap
+></keycombo
+> drukken zal de in bash benodigde commando's plakken. Voor andere shells, zoals fish, zsh, python, etc. raadpleeg de relevante documentatie van de programma's. </para>
+
+</sect1>
+
+</chapter>
+
+<chapter id="commandreference">
+<title
+>Opdrachtenoverzicht</title>
+
+<sect1 id="menubar">
+<title
+>De menubalk</title>
+
+<para
+>De menubalk staat bovenaan het &konsole;-venster. Wanneer de menubalk verborgen is kan <guimenuitem
+>Menubalk tonen</guimenuitem
+>bereikt worden door een <mousebutton
+>rechts</mousebutton
+>-klik in het venster (zolang er geen schermvullende toepassingen in dat scherm actief zijn, zoals vi, micom, enz.). De standaard sneltoets wordt achter ieder menu-item getoond. </para>
+<para
+>Als alternatief kunt u de sneltoets <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+> gebruiken om de menubalk te tonen of te verbergen. </para>
+<sect2 id="file-menu">
+<title
+>Menu Bestand</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Nieuw venster</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Opent een nieuw apart venster van &konsole; met het standaard profiel</action>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Nieuw tabblad</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Opent een nieuw tabblad met het standaard profiel</action>
+<note
+><para
+>Het eerste profiel in het submenu zal altijd "Standaard" zijn, wat het ingebouwde profiel is. Alle andere profielen zullen er onder staan in alfabetisch volgorde. Het door de gebruiker gespecificeerde standaard profiel zal in een vet lettertype staan. </para
+></note>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Tabblad klonen</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Probeert het huidige tabblad in een nieuw tabblad te klonen</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Uitvoer opslaan als...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Slaat het huidige terugschuiven op als tekst- of html-bestand</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Schermafdruk ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Druk het huidige scherm af.</action
+> Standaard wordt de uitvoer geschaald om op het papier waarop wordt afgedrukt te passen met zwart als tekstkleur en geen achtergrond. In de dialoog voor het afdrukken kunnen deze opties worden veranderd in het tabblad <guilabel
+>Uitvoeropties</guilabel
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Bestandsbeheerder hier openen</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Opent &kde;'s bestandsbeheerder in de huidige map</action
+>. Standaard is dit <ulink url="help:/dolphin/index.html"
+>&dolphin;</ulink
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Sessie sluiten</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>De huidige sessie wordt gesloten</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Venster sluiten</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Sluit &konsole;</action
+></para>
+<note
+><para
+>&konsole; zal een bevestigingsdialoog tonen indien er meer dan een sessie open is of als er bepaalde programma's in een sessie actief zijn. Deze dialogen kunnen uitgeschakeld worden door op het keuzevakje <guibutton
+>Niet opnieuw vragen</guibutton
+> te klikken. </para>
+</note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Menu Bewerken</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Kopiëren</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Kopieert de geselecteerde tekst naar het klembord</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>V</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Plakken</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Plakt de tekst die op het klembord staat op de cursorpositie</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Alles selecteren</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Selecteert alle</action
+> tekst in het huidige venster </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bewerken</guimenu
+> <guisubmenu
+>Kopieer invoer naar</guisubmenu
+><guimenuitem
+>Alle tabs in huidige venster</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Staat toe invoer van de huidige sessie tegelijk naar andere alle sessies in het huidige venster te sturen</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+><guisubmenu
+>Kopieer invoer naar</guisubmenu
+><guimenuitem
+>Tabs selecteren...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Staat toe invoer van de huidige sessie tegelijk naar gelijktijdig naar door de gebruiker gekozen sessies te sturen</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+><guisubmenu
+>Kopieer invoer naar</guisubmenu
+><guimenuitem
+>Geen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Stop met verzenden van invoer uit de huidige sessie naar andere sessies</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bewerken</guimenu
+> <guisubmenu
+>Signaal verzenden</guisubmenu
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Stuur het gespecificeerde signaal naar het shell-proces of ander proces, dat was gestart toen de nieuwe sessie was gestart</action
+>.</para
+><para
+>Nu beschikbare signalen zijn:</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>om het proces te stoppen</entry>
+</row>
+<row>
+<entry
+><errorcode
+>Doorgaan (CONT)</errorcode
+></entry>
+<entry
+>doorgaan indien gestopt</entry>
+</row>
+<row>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>ophangen gedetecteerd op de besturende terminal of de dood van het besturende proces</entry>
+</row>
+<row>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>interrupt vanaf het toetsenbord</entry>
+</row>
+<row>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>signaal voor programmabeëindiging</entry>
+</row>
+<row>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>afbreeksignaal</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>Gebruikersignaal 1</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>Gebruikersignaal 1</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para
+>Kijk in de man-pagina's van uw systeem voor verdere details door het commando <userinput
+><command
+>man</command
+> <option
+>7 signal</option
+></userinput
+> te geven.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Tabbladinstellingen configureren...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een dialoogvenster waarin u het naamformaat, het tabbladtitelformaat op afstand en de kleur van het huidige tabblad kunt wijzigen</action
+> (<link linkend="configure-tab-settings-dialog"
+>meer info</link
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+><guimenuitem
+>ZModem upload...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een dialoog om een bestand te selecteren dat geüpload moet worden als de vereiste software is geïnstalleerd</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Zoeken...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een zoekbalk onderin het venster van &konsole; </action
+></para>
+<para
+>Dit maakt het hoofdlettergevoelig, voorwaarts of achterwaarts, en op reguliere expressies zoeken mogelijk.</para>
+</listitem>
+</varlistentry>
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch
+-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Volgende zoeken</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Gaat naar het volgende gezochte </action
+>. Als de zoekbalk focus heeft, dan kunt u ook de sneltoets &Enter; gebruiken.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Shift;<keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Vorige zoeken</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Gaat naar het vorige exemplaar van het gezochte </action
+>. Als de zoekbalk focus heeft, dan kunt u ook de sneltoets <keycombo action="simul"
+>&Shift;&Enter;</keycombo
+> gebruiken.</para
+></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Menu Beeld</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guisubmenu
+>Beeld splitsen</guisubmenu
+><guimenuitem
+>Beeld verticaal opsplitsen</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Splitst alle tabbladen in een linker en rechter helft</action>
+</para
+><para
+>Alle uitvoer in de ene helft wordt in de andere helft gekopieerd. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guisubmenu
+>Beeld splitsen</guisubmenu
+><guimenuitem
+>Beeld horizontaal opsplitsen</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Splitst all tabbladen in een onderste en bovenste helft</action>
+</para
+><para
+>Alle uitvoer in de ene helft wordt in de andere helft gekopieerd. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guisubmenu
+>Beeld splitsen</guisubmenu
+><guimenuitem
+>Deelvenster uitbreiden</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Maakt het actieve deelvenster groter</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guisubmenu
+>Beeld splitsen</guisubmenu
+><guimenuitem
+>Deelvenster krimpen</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Maakt het actieve deelvenster kleiner</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guisubmenu
+>Beeld splitsen</guisubmenu
+><guimenuitem
+>Maximale huidige weergave omschakelen</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Schakelt de huidige weergave tussen de huidige grootte en de gemaximaliseerde grootte</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>\</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guisubmenu
+>Beeld splitsen</guisubmenu
+><guimenuitem
+>Alle weergaven gelijke grootte</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Stelt dezelfde grootte in voor alle weergaven</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Huidig tabblad losmaken</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Het huidige tabblad wordt in een apart venster geopend</action>
+</para
+><para
+>Het afsluiten van het vorige &konsole;-venster zal geen effect hebben op het nieuw aangemaakte venster. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Huidige beeld losmaken</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Het huidige gesplitste beeld wordt in een apart venster geopend</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry id="save-layout">
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Tabbladindeling naar bestand opslaan</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Biedt u het opslaan van de tabbladindeling van het huidige beeld in een gespecialiseerd indelingsbestand van &konsole; die geladen kan worden om een van uw favoriete indelingen te herstellen.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Tabbladindeling uit bestand laden</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Biedt u het laden van een van uw favoriete tabbladindelingen uit het indelingsbestand dat u eerder hebt opgeslagen met menu-item <menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Tabbladindeling naar bestand opslaan</guimenuitem
+></menuchoice
+>.</action
+> De standaard indelingen (2x2, 2x1 en 1x2) kunnen geladen worden via de werkbalk. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Speuren naar stilte</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Activeert het speuren naar inactiviteit in het huidige tabblad</action>
+</para
+><para
+>Standaard zal er na 10 seconden inactiviteit een informatiepictogram in de sessietab verschijnen. Het type van de melding kan veranderd worden in <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Meldingen instellen</guimenuitem
+><guimenuitem
+>Stilte in geobserveerde sessie</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Speuren naar activiteit</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Activeert het speuren naar activiteit in het huidige tabblad</action>
+</para
+><para
+>Na een activiteit zal er een informatiepictogram op de sessietab verschijnen. Het type van de melding kan veranderd worden in <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Meldingen instellen</guimenuitem
+><guimenuitem
+>Stilte in geobserveerde sessie</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Monitor voor procesbeëindiging</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Schakelt het monitoren van het huidige tabblad om voor de procesbeëindiging</action
+>. </para
+><para
+>Indien geactiveerd, na beëindiging van het huidige proces, zal &konsole; een melding tonen <guilabel
+>Het proces '<replaceable
+>naam van het proces</replaceable
+>' is geëindigd actief te zijn in sessie '<replaceable
+>naam van de sessie</replaceable
+>'</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Alleen-lezen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Schakelt de sessie om naar alleen-lezen: er wordt geen invoer geaccepteerd, slepen en loslaten is uitgeschakeld. </action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Lettertype vergroten</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Verhoogt de afmetingen van de tekst</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>0</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Tekengrootte resetten</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>De tekengrootte van tekst resetten naar de standaard van het profiel</action
+></para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Lettertype verkleinen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Verkleint de afmetingen van de tekst</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Tekensetcodering instellen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Stelt de tekensetcodering in</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Terugschuiven wissen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Wist alle tekst van het terugschuiven</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>K</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Terugschuiven wissen en resetten</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Wist alle tekst in het huidige tabblad en van terugschuiven en de terminal wordt gereset</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F11</keycap
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Modus volledig scherm</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Schakelt &konsole; naar volledige scherm-modus</action
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Het menu Bladwijzers</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bladwijzers</guimenu
+><guimenuitem
+>Bladwijzer toevoegen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Voegt de huidige locatie toe</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bladwijzers</guimenu
+><guimenuitem
+>Tabs bewaren als bladwijzermap...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Voegt alle tabbladen toe als een bladwijzermap</action>
+</para
+><para
+>Opent een dialoog voor het opgeven van een naam voor de bladwijzermap. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bladwijzers</guimenu
+><guimenuitem
+>Nieuwe bladwijzermap...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Voegt een nieuwe map toe aan de lijst met bladwijzers</action>
+</para
+><para
+>Opent een dialoog voor het opgeven van een naam voor de bladwijzermap. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bladwijzers</guimenu
+><guimenuitem
+>Bladwijzers bewerken...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent de bladwijzerbewerker</action
+></para>
+<note
+><para
+>Het programma keditbookmarks moet geïnstalleerd zijn om dit menu-item te laten verschijnen.</para>
+<para
+>U kunt de bladwijzerbewerker gebruiken om handmatig URL-adressen toe te voegen. Op dit moment accepteert &konsole; het volgende: <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://gebruiker@host:poort</para
+></listitem>
+<listitem
+><para
+>telnet://gebruiker@host:poort</para
+></listitem>
+</itemizedlist>
+</para
+></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="plugins-menu">
+<title
+>Menu Plug-ins</title>
+
+<para
+>Elke geïnstalleerde plug-in zal in een lijst komen of "Geen plug-ins beschikbaar" </para>
+
+</sect2>
+
+
+<sect2 id="settings-menu">
+<title
+>Menu Instellingen</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Huidig profiel bewerken...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een dialoog om het huidige profiel in te stellen</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Profiel omschakelen...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Schakel het huidige profiel om naar een profiel uit de lijst</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Profielen beheren...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een bewerker om de profielen te beheren</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Kleurschema van venster</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>De &GUI; van &konsole; wijzigen naar het gespecificeerde schema</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Menubalk tonen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Maakt de menubalk zichtbaar</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Getoonde werkbalken</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Biedt zichtbaarheid omschakelen van de werkbalken van &konsole;</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Statusbalk tonen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Maakt de statusbalk zichtbaar</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Taal configureren...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent venster om een taal voor het interface van &konsole; te kiezen.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Sneltoetsen configureren...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent de bewerker van sneltoetsen.</action
+> Meer over de configuratie van sneltoetsen is te vinden in <ulink url="help:/fundamentals/shortcuts.html"
+>&kde; Fundamentals</ulink
+>.</para>
+
+<para
+>Bovendien heeft &konsole; een paar speciale sneltoetsen zonder een overeenkomstig menu-item:</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Sneltoets</entry>
+<entry
+>Beschrijving</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Rechts</keysym
+></keycombo
+></entry>
+<entry
+>Volgend tabblad</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Links</keysym
+></keycombo
+></entry>
+<entry
+>Vorig tabblad</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Left</keysym
+></keycombo
+></entry>
+<entry
+>Tabblad naar links verplaatsen</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Right</keysym
+></keycombo
+></entry>
+<entry
+>Tabblad naar rechts verplaatsen</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>Ins</keysym
+></keycombo
+></entry>
+<entry
+>Selectie plakken</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Werkbalken instellen...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent <ulink url="help:/fundamentals/config.html#toolbars-items"
+>het configuratievenster voor de werkbalk</ulink
+></action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Notificaties instellen...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een notificatiebewerker</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>&konsole; instellen...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent instellingenbewerker van &konsole;</action
+></para>
+<para
+>Deze dialoog heeft opties die het uiterlijk en het gedrag van het venster van &konsole; beïnvloeden. </para>
+<itemizedlist>
+    <listitem>
+        <para
+>De pagina <guilabel
+>Algemeen</guilabel
+> biedt het configureren van de zichtbaarheid van de menubalk, onthouden van de venstergrotte van &konsole;, actief zijn van alle vensters van &konsole; in een enkel proces, inschakelen van menuversnellers, het tonen van de venstertitel op de titelbalk, verwijderen van de titelbalk en frame en focus geven aan terminals wanneer de muisaanwijzer er over beweegt. Het is ook mogelijk om gevoeligheid voor hoofd-/kleine letters te configureren bij zoeken, gebruik van de reguliere expressie, accentueren van alle overeenkomsten en de zoekrichting (<guilabel
+>Achterwaarts zoeken</guilabel
+> is de standaard). De pagina <guilabel
+>Algemeen</guilabel
+> is ook de plek waar u opnieuw <guibutton
+>Alle "Niet meer vragen" berichten inschakelen</guibutton
+> kunt instellen als ze eerder zijn uitgeschakeld. </para>
+    </listitem>
+    <listitem>
+        <para
+>De pagina <guilabel
+>Profielen</guilabel
+> is bedoeld voor aanmaken en behandelen van <link linkend="profiles"
+>profielen</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>Op de pagina <guilabel
+>Tabbladbalk/Spitters</guilabel
+> kunt u de zichtbaarheid en plaatsing van tabbladbalk configureren, gedrag van tabs definiëren en de opties voor de tabbladen kunt verfijnen. Het is mogelijk om <guilabel
+>'Nieuw tabblad' knop tonen</guilabel
+> te configureren als u dat wilt en <guilabel
+>Individuele tabbladbreedtes naar volledig venster</guilabel
+> of <guilabel
+>Gebruiker-gedefinieerd stijlblad</guilabel
+> te configureren. Het tabblad <guilabel
+>Gedraag</guilabel
+> kan gebruikt worden om de plaats te definiëren voor de nieuwe tabbladen (<guilabel
+>Aan het eind</guilabel
+> of <guilabel
+>Na huidig tabblad</guilabel
+>) en tabbladen sluiten met een &MMB; klik. </para>
+        <para
+>Het is ook mogelijk om zichtbaarheid van de gesplitste koppen te configureren (<guilabel
+>Indien nodig</guilabel
+> (standaard), <guilabel
+>Altijd</guilabel
+> of <guilabel
+>Nooit</guilabel
+>) en de grootte van het sleephandvat voor splitsen als (<guilabel
+>Klein</guilabel
+> (standaard), <guilabel
+>Middel</guilabel
+> of <guilabel
+>Groot</guilabel
+>) te definiëren met het tabblad <guilabel
+>Splitsen</guilabel
+> van deze configuratiepagina. </para>
+    </listitem>
+    <listitem>
+        <para
+>De pagina <guilabel
+>Tijdelijke bestanden</guilabel
+> wordt gebruikt om de bestandslocatie <link linkend="scrollback"
+>scrollback</link
+> te definiëren. </para>
+    </listitem>
+    <listitem>
+        <para
+>De pagina <guilabel
+>Miniaturen</guilabel
+> kan gebruikt worden om de grootte van miniaturen te definiëren en opties activeren (u kunt de besturingstoets voor activeren kiezen uit &Shift;, &Alt;, en &Ctrl;). </para>
+        <note>
+            <para
+>Om de mogelijkheid miniaturen die miniaturen van afbeeldingen in pop-ups laten zien bij zweven met de muisaanwijzer boven afbeeldingsitems, zou u onderstrepen van bestanden voor uw huidige profiel moeten inschakelen: <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Huidige profiel bewerken...</guimenuitem
+><guimenuitem
+>Muis</guimenuitem
+><guimenuitem
+>Diversen</guimenuitem
+><guimenuitem
+>Bestanden onderstrepen</guimenuitem
+></menuchoice
+>. </para>
+        </note>
+    </listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title
+>Menu Help</title>
+<para
+>&konsole; heeft een aantal van de algemene &kde; items in het menu <guimenu
+>Help</guimenu
+>, voor meer informatie lees de sectie hierover in het <ulink url="help:/fundamentals/menus.html#menus-help"
+>Menu Help</ulink
+> van de basisinformatie van &kde;. </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+</sect2>
+
+</sect1>
+
+<sect1 id="console-dialogs">
+<title
+>Dialogen van &konsole;</title>
+
+<sect2 id="configure-tab-settings-dialog">
+<title
+>Dialoog Tabbladinstellingen configureren</title>
+
+<para
+>Het naamformaat, het tabbladtitelformaat op afstand van het huidige tabblad kan worden aangepast vanuit deze dialoog. De dialoog kan worden getoond via het menu, de sneltoets <keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+> of door op een tabblad te dubbelklikken. Deze aanpassingen zijn tijdelijk en kunnen permanent worden gemaakt door het huidige profiel te bewerken. </para>
+
+<para
+>&konsole; zal deze plaatshouders vervangen voor lokale tabs: </para>
+<itemizedlist mark="opencircle">
+<listitem
+><para
+>%n : programmanaam</para
+></listitem>
+<listitem
+><para
+>%d : huidige map (kort)</para
+></listitem>
+<listitem
+><para
+>%D : huidige map (lang)</para
+></listitem>
+<listitem
+><para
+>%h : lokale host (kort)</para
+></listitem>
+<listitem
+><para
+>%u : gebruikersnaam</para
+></listitem>
+<listitem
+><para
+>%B : Bourne-prompt-"sigil" van gebruiker ($ = normale gebruiker, # = superuser)</para
+></listitem>
+<listitem
+><para
+>%w : venstertitel ingesteld door de shell</para
+></listitem>
+<listitem
+><para
+>%# : sessienummer</para
+></listitem>
+</itemizedlist>
+
+<para
+>&konsole; zal deze plaatshouders vervangen door tabs op afstand: <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c : huidige programma</para
+></listitem>
+    <listitem
+><para
+>%h : host op afstand (kort)</para
+></listitem>
+    <listitem
+><para
+>%H : host op afstand (lang)</para
+></listitem>
+    <listitem
+><para
+>%u : gebruikersnaam</para
+></listitem>
+    <listitem
+><para
+>%U : gebruikersnaam@ (indien gegeven)</para
+></listitem>
+    <listitem
+><para
+>%w : venstertitel ingesteld door de shell</para
+></listitem>
+    <listitem
+><para
+>%# : sessienummer</para
+></listitem>
+</itemizedlist>
+
+</para>
+<para
+>Voorbeelden: <itemizedlist mark="opencircle">
+
+<listitem
+><para
+><userinput
+>%d : %n</userinput
+> met /usr/src als huidige map en met <application
+>bash</application
+> draaiend zal <guibutton
+>src : bash</guibutton
+> tonen </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%D : %n</userinput
+> met /usr/src als huidige map en met <application
+>top</application
+> draaiend zal <guibutton
+>/usr/src : top</guibutton
+> tonen </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%w (%#)</userinput
+> met ~ als huidige map en met <application
+>vim</application
+> draaiend zal <guibutton
+>[Geen naam] (~) - VIM(1)</guibutton
+> tonen </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect2>
+
+<sect2 id="copy-input-dialog">
+<title
+>De dialoog Invoer Kopiëren</title>
+
+<para
+>De tekst ingevoerd in het ene tabblad kan tegelijk naar andere tabbladen gestuurd worden. Deze dialoog laat u selecteren welke tabbladen die invoer krijgen. Het huidige tabblad zal niet selecteerbaar zijn. </para>
+
+</sect2>
+
+<sect2 id="scrollback-options-dialog">
+<title
+>De dialoog terugschuiven aanpassen</title>
+
+<para
+>De opties <link linkend="scrollback"
+>terugschuiven</link
+> voor de grootte van de geschiedenis kan via deze dialoog gewijzigd worden. Elke wijziging is alleen voor het huidige tabblad en zullen niet worden opgeslagen in het profiel. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title
+>Commandoregel-opties</title>
+
+<para
+>Als u &konsole; vanaf de commandoregel opstart, kunt u bepaalde opties opgeven om het gedrag ervan te wijzigen.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--help</option
+></term>
+<listitem
+><para
+><action
+>Verschillende opties tonen</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--profile</option
+> <parameter
+>bestandsnaam</parameter
+></term>
+<listitem
+><para
+><action
+>&konsole; opstarten</action
+> met het gespecificeerde profiel in plaats van de standaard.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--layout</option
+> <parameter
+>bestand</parameter
+></term>
+<listitem
+><para
+><action
+>&konsole; opstarten</action
+> met een <link linkend="save-layout"
+>opgeslagen &JSON;-indelingsbestand</link
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--builtin-profile</option
+></term>
+<listitem
+><para
+>Het ingebouwde profiel gebruiken in plaats van het huidige standaard profiel.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--workdir</option
+> <parameter
+>map</parameter
+></term>
+<listitem
+><para
+><action
+>Openen met</action
+> <parameter
+>map</parameter
+> als initiële werkmap.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hold, --noclose</option
+></term>
+<listitem
+><para
+><action
+>Sluit niet</action
+> de beginsessie automatisch wanneer het eindigt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--new-tab</option
+></term>
+<listitem
+><para
+><action
+>Maakt een nieuw tabblad </action
+> aan in een bestaand venster in plaats van het aanmaken van een nieuw venster. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--tabs-from-file </option
+><parameter
+>bestand</parameter
+></term>
+<listitem
+><para
+><action
+>Maakt nieuwe tabbladen aan</action
+> zoals gespecificeerd in het gegeven bestand met tabbladconfiguraties. </para>
+<note
+><para
+>Het bestand heeft een tab per regel in de volgende indeling:</para>
+<para
+>Elke regel specificeert een te openen tabblad met gebruik van tot 4 velden die specificeren hoe het geopend moet worden. Velden worden gescheiden door <userinput
+>;;</userinput
+> en aan een veldnaam moet een <userinput
+>:</userinput
+> worden achtergevoegd. Lege regels of regels die met <userinput
+>#</userinput
+> beginnen worden genegeerd, u kunt dus een regel die met <userinput
+>#</userinput
+> begint gebruiken om een toelichting toe te voegen. </para>
+
+<simplelist>
+<member
+><userinput
+>title:</userinput
+> een naam voor dit tabblad, tabblad standaard indien leeg of niet gespecificeerd</member>
+<member
+><userinput
+>workdir:</userinput
+> werkmap, <filename class="directory"
+> ~</filename
+> indien leeg of niet gespecificeerd</member>
+<member
+><userinput
+>profile:</userinput
+> een te gebruiken &konsole;-profiel, de standaard indien leeg of niet gespecificeerd</member>
+<member
+><userinput
+>command:</userinput
+> een uit te voeren commando</member>
+</simplelist>
+<para
+>Elke regel moet minstens een van de velden <userinput
+>command</userinput
+> of <userinput
+>profile</userinput
+> bevatten. </para>
+<para
+>Voorbeeld: <userinput
+>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput
+></para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--background-mode</option
+></term>
+<listitem
+><para
+><action
+>Start &konsole;</action
+> op de achtergrond en breng het naar de voorgrond als <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F12</keycap
+></keycombo
+> (standaard) wordt ingedrukt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--separate</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+><action
+>Voer uit</action
+> het nieuwe exemplaar van &konsole; in een apart proces. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-menubar</option
+></term>
+<listitem
+><para
+><action
+>Toon</action
+> de menubalk, boven de standaard instellingen uitgaan. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-menubar</option
+></term>
+<listitem
+><para
+><action
+>Verberg</action
+> de menubalk, boven de standaard instellingen uitgaan. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Toon</action
+> de tabbladbalk, boven de standaard instellingen uitgaan. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Verberg</action
+> de tabbladbalk, boven de standaard instellingen uitgaan. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fullscreen</option
+></term>
+<listitem
+><para
+><action
+>&konsole; schermvullend starten</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--notransparency</option
+></term>
+<listitem
+><para
+>Transparante achtergrond <action
+>uitschakelen</action
+>, zelfs als het systeem dit ondersteunt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profiles</option
+></term>
+<listitem
+><para
+><action
+>Toon</action
+> een lijst van alle beschikbare profielen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profile-properties</option
+></term>
+<listitem>
+<para
+><action
+>Maak een lijst</action
+> van alle mogelijke eigenschappen met naam en type. Zie de optie <option
+>-p</option
+>. </para>
+<para
+>Voor meer informatie bezoekt u <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
+>&konsole; API Reference</ulink
+>. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-p</option
+> <parameter
+>eigenschap=waarde</parameter
+></term>
+<listitem
+><para
+><action
+>Verander</action
+> de waarde van een profieleigenschap.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>commando</parameter
+></term>
+<listitem
+><para
+><parameter
+>commando</parameter
+> <action
+>uitvoeren</action
+> in plaats van de normale shell.</para>
+<note
+><para
+>Deze optie vangt alle volgende argumenten overgegeven naar &konsole; en voer ze uit als <parameter
+>commando</parameter
+>. Deze optie zou dus altijd als laatste optie moeten worden gebruikt.</para
+></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>&konsole; accepteert ook algemene &Qt;- en &kf5-full;-opties, zie manpagina's qt5options en kf5options.</para>
+
+</chapter>
+
+<chapter id="scripting">
+<title
+>Scripting &konsole;</title>
+
+<para
+>&konsole; ondersteunt een aantal methoden die gebruikt kunnen worden met &DBus;. </para>
+<para
+>Er zijn twee manieren om het &DBus;-interface te gebruiken: &Qt;'s &GUI; <application
+>qdbusviewer</application
+> en de commandoregel <application
+>qdbus</application
+>. </para>
+
+<para
+>Voorbeelden: <itemizedlist mark='opencircle'>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> zal alle beschikbare services tonen. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole</option
+> zal het &DBus;-interface van &konsole; tonen. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+> zal methoden tonen voor besturing van venster 1. </para>
+</listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+> zal methoden tonen voor besturing van het huidige venster. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+> zal methoden tonen voor besturing van sessie 1. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+> zal methoden tonen voor besturing van de huidige sessie. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+> zal methoden tonen voor besturing van de huidige sessie van &konsole;. </para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Als een van de bovenstaande opdrachten uitvoer geeft als: Service 'org.kde.konsole' bestaat niet, wijzig <option
+>org.kde.konsole</option
+> dan in een van het volgende: <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (zal de eerste pid kiezen) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (dit kan gebruikt worden vanuit de huidige &konsole;) </para
+></listitem>
+<listitem
+><para>
+<option
+>selecteer er een uit de uitvoer van 'qdbus | grep konsole'</option>
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Voor meer informatie, bezoek dan <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>&DBus;-tutorial (Engels)</ulink
+>. </para>
+
+</chapter>
+
+<chapter id="key-bindings">
+<title
+>Toetsenbindingen</title>
+
+<sect1>
+<title
+>Hoe &konsole; toetsenbindingen gebruikt</title>
+
+<sect2 id="intro">
+<title
+>Inleiding</title>
+<para
+>&konsole; gebruikt *.keytab bestanden om toetscombinaties te vertalen in besturingstekens en escape sequences die verzonden worden naar de shell of naar interactieve programma's (typisch programma's die de Alternate Screen-buffer gebruiken, &eg; <application
+>vim</application
+>, <application
+>less</application
+>, <application
+>screen</application
+>) die draaien in de shell.</para>
+
+<para
+>Gebruikers kunnen de instellingen voor bindingen van toetsen aanpassen in &konsole; door de toetsenbindingenbewerker te gebruiken. Een toetscombinatie kan geconfigureerd worden om een specifieke control of escape sequence naar de terminal te sturen.</para>
+
+<para
+>U kunt de toetsenbindingenbewerker openen vanuit het menu-item <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Huidig profiel bewerken</guimenuitem
+></menuchoice
+> en gaan naar het tabblad <guilabel
+>Toetsenbord</guilabel
+>. Hier zijn in een lijst de schema's van toetsenbindingen die met &konsole; meekomen.</para>
+</sect2>
+
+<sect2 id="table-fields">
+<title
+>Toetscombinaties en modi</title>
+
+<para
+>Toetscombinaties volgen het patroon: <programlisting
+>Toets (+|-) modi</programlisting>
+</para>
+
+<para
+>bijvoorbeeld: <programlisting
+>Up+Shift+AppScreen
+Down+Shift-AppScreen
+Space+Ctrl
+</programlisting>
+</para>
+
+<para
+>Toetsnamen zijn gedefinieerd in het bestand qnamespace.h header, met het voorvoegsel <quote
+>Qt::Key_</quote
+> verwijderd, voor een lijst met toetsnamen bekijk de <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum"
+>opsomming Qt::Key in de &Qt;-documentatie</ulink
+>.</para>
+
+<para
+>Een <quote
+>+</quote
+> die aan een modusnaam vooraf gaat betekent dat modus is <emphasis
+>ingesteld</emphasis
+>; voor een modificatietoets, wat betekent dat het is ingedrukt, terwijl voor alle andere modi het betekent dat een specifieke modus actief is. Bijvoorbeeld <quote
+>+Ctrl</quote
+> dat de toestcombinatie alleen zal werken als de &Ctrl;-toets is ingedrukt.</para>
+
+<para
+>Een <quote
+>-</quote
+> die aan een modusnaam vooraf gaat betekent dat modus is <emphasis
+>gereset</emphasis
+>; in de basis betekent dit het tegenovergestelde van <quote
+>+</quote
+> vooraf aan een modusnaam, dus voor een modificatietoets betekent dat de toets niet is ingedrukt, terwijl voor alle andere modi het betekent dat de specifieke modus inactief is. Bijvoorbeeld <quote
+>-Ctrl</quote
+> betekent dat de toetscombinatie alleen zal werken als de &Ctrl;-toets <emphasis
+>niet</emphasis
+> is ingedrukt.</para>
+
+<note>
+<para
+>Als een modusnaam niet aanwezig is in een toetscombinatie, wordt zijn status genegeerd.</para>
+</note>
+
+<para
+>De ondersteunde toetsenbindingsmodi staan hieronder in een lijst:</para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Alt, Ctrl, Shift</term>
+<listitem>
+<para
+>Eén of meer van deze modi kunnen gebruikt worden in een toetscombinatie, als elk van hen is gezet, gebruikt de toetscombinatie die modificatietoets, respectievelijk; en omgekeerd als het een reset is</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AnyModifier</term>
+<listitem>
+<para
+>Als deze modus is gezet gebruikt de toetscombinatie elke modificatietoets (elk van de vorige drie modificatietoetsen); en omgekeerd als het een reset is</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ansi</term>
+<listitem>
+<para
+>Als deze modus is gezet zal &konsole; ANSI escape- en controlsequences verzenden</para>
+<para
+>Als deze modus gereset is zal &konsole; VT52 escape en control sequences verzenden</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppScreen</term>
+<listitem>
+<para
+>Als deze modus is ingesteld zal de toetscombinatie alleen interactieve programma's beïnvloeden die de Alternate Screen-buffer gebruiken</para>
+<para
+>Als deze modus is gereset zal de toetscombinatie alleen de terminal beïnvloeden wanneer het de normale schermbuffer gebruikt</para>
+
+<note>
+<para
+>&konsole; maakt gebruik van twee schermbuffers:</para>
+<itemizedlist>
+<listitem>
+<para
+>De normale schermbuffer (standaard): stelt u in staat om terug te schuiven om vorige regels uitvoer te bekijken, dit is de standaard buffer die u gewoonlijk gebruikt om commando's uit te voeren... &etc;</para>
+</listitem>
+<listitem>
+<para
+>De Alternate Screen-buffer: de terminal schakelt naar deze buffer wanneer u een interactief programma (&eg; <application
+>less</application
+>, <application
+>vim</application
+>, <application
+>screen</application
+>, <application
+>tmux</application
+>... &etc;) gebruikt</para>
+</listitem>
+</itemizedlist>
+</note>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Toetsenbordje</term>
+<listitem>
+<para
+>Als deze modus is ingesteld gebruikt de toetscombinatie een toets op het toetsenbordje (Nummertoetsenbordje). Deze modus is nuttig om te onderscheid te maken tussen toetsen op het toetsenbord en toetsen op het toetsenbordje. Wanneer bijvoorbeeld Num Lock <emphasis
+>aan</emphasis
+> is kunt u twee aparte toestcombinaties configureren, een die de toets met label <quote
+>1</quote
+> op het toetsenbord heeft (gewoonlijk onder de toets <keycap
+>F1</keycap
+>) en de ander die de toets met label <quote
+>1</quote
+> heeft op het toetsenbordje. Hetzelfde concept is van toepassing wanneer Num Lock is <emphasis
+>uit</emphasis
+> voor de toetsen End, Home, pijltjestoetsen ...etc oo het toetsenbordje</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppCursorKeys</term>
+<listitem>
+<para
+>Deze modus implementeert de VT100 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
+>Cursor Keys Mode (DECCKM)</ulink
+>. Het bestuurt de escape sequences die elke Cursor-toets (<keycap
+>Omhoog</keycap
+>, <keycap
+>Omlaag</keycap
+>, <keycap
+>Rechts</keycap
+>, <keycap
+>Links</keycap
+>) verstuurt, afhankelijk van of deze modus is gezet of gereset</para>
+<para
+>Standaard volgt &konsole; het XTerm-gedrag voor behandeling van de toetsen <keycap
+>Home</keycap
+> en <keycap
+>End</keycap
+> als cursor-toetsen met betrekking op DECCKM</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppKeyPad</term>
+<listitem>
+<para
+>Als deze modus is gezet zal de toetscombinatie alleen werken wanneer het toetsenbordje zich in Application Modus (DECKPAM) bevindt</para>
+<para
+>Als deze modus gereset is zal de toetscombinatie alleen werken wanneer het toetsenbordje in numerieke modus (DECKPNM) is</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Nieuwe regel</term>
+<listitem>
+<para
+>Als deze modus is gezet zal de toets <keycap
+>Return</keycap
+> (Enter) op het toetsenbord zowel Carriage Return "\r" als New Line "\n" stuurtekens verzenden</para>
+<para
+>Als deze modus is gereset zal de toets <keycap
+>Return</keycap
+> alleen een Carriage Return "\r" verzenden</para>
+<para
+>Hetzelfde is van toepassing op de toets <keycap
+>Enter</keycap
+> op het toetsenbordje</para>
+<para
+>Deze modus emuleert de <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
+>LNM - Line Feed/New Line Mode</ulink
+></para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Merk op dat elke combinatie van Toets en Modi (gezet/gereset) uniek moet zijn. Bekijk de volgende twee regels:</para>
+
+<itemizedlist>
+<listitem
+><para
+>A+Shift : <quote
+>A</quote
+></para
+></listitem>
+<listitem
+><para
+>a : <quote
+>a</quote
+></para
+></listitem>
+</itemizedlist>
+<para
+>&konsole; zal de kleine letter <quote
+>a</quote
+> regel <emphasis
+>niet</emphasis
+> accepteren, u moet een <quote
+>-Shift</quote
+> aan die regel toevoegen om deze te laten werken.</para>
+</sect2>
+
+<sect2 id="output-field">
+<title
+>Het uitvoerveld</title>
+
+<para
+>In het uitvoerveld kunt u de escape sequences of control tekens toevoegen die u wilt dat &konsole; naar de terminal verzend wanneer de bijbehorende toetscombinatie wordt ingedrukt.</para>
+
+<para
+>U kunt ook elke van de volgende sleutelwoorden gebruiken, elk van dezen heeft een speciale betekenis in &konsole;:</para>
+
+<itemizedlist>
+<listitem
+><para
+>scrollUpLine : schuif één regel omhoog in de schuifbuffer van de shell-geschiedenis</para
+></listitem>
+<listitem
+><para
+>scrollUpPage : schuif één pagina omhoog in de schuifbuffer van de shell-geschiedenis</para
+></listitem>
+<listitem
+><para
+>scrollDownLine : schuif één regel omlaag in de schuifbuffer van de shell-geschiedenis</para
+></listitem>
+<listitem
+><para
+>scrollDownPage : schuif één pagina omlaag in de schuifbuffer van de shell-geschiedenis</para
+></listitem>
+<listitem
+><para
+>scrollUpToTop : schuif omhoog naar het begin van de schuifbuffer van de shell-geschiedenis</para
+></listitem>
+<listitem
+><para
+>scrollDownToBottom : schuif omlaag naar het eind van de schuifbuffer van de shell-geschiedenis</para
+></listitem>
+</itemizedlist>
+
+<para
+>U kunt ook tekenreeksen gebruiken met C-string syntaxis; U zou de volgende escapes sequences kunnen gebruiken:</para>
+
+<itemizedlist>
+<listitem
+><para
+>\E : Escape</para
+></listitem>
+<listitem
+><para
+>\\ : Backslash</para
+></listitem>
+<listitem
+><para
+>\" : Aanhalingsteken</para
+></listitem>
+<listitem
+><para
+>\t : Tab</para
+></listitem>
+<listitem
+><para
+>\r : Carriage Return</para
+></listitem>
+<listitem
+><para
+>\n : Nieuwe-regel</para
+></listitem>
+<listitem
+><para
+>\b : Backspace</para
+></listitem>
+<listitem>
+<para
+>\xHH : waar HH twee hex-tekens zijn</para>
+<tip>
+<para
+>Dit kan gebruikt worden om &ASCII; control-tekens te verzenden, &eg; <quote
+>\x00</quote
+> wat het NUL-teken is</para>
+</tip>
+</listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="other-factors">
+<title
+>Andere systeembronnen</title>
+<para
+>Er zijn andere systeembronnen die toetsenbindingen kunnen beïnvloeden:</para>
+<itemizedlist>
+<listitem>
+<para
+>Kijk ook in de database <ulink url="man:terminfo(5)"
+>terminfo</ulink
+> of <ulink url="man:termcap(5)"
+>termcap</ulink
+> voor de verwachte escape sequences en control tekens die elke toetscombinatie verondersteld wordt te verzenden.</para>
+</listitem>
+<listitem>
+<para
+>Het is waarschijnlijk dat uw systeem andere toetsenborddatabases heeft die ook gesynchroniseerd moeten worden, (&eg; <ulink url="man:bash(1)"
+>/etc/inputrc en readline</ulink
+> voor de <application
+>BASH-shell</application
+>) omdat ze de werking (interacties) binden aan toetscombinaties.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="further-reading">
+<title
+>Verdere leesstof</title>
+<para
+>Voor meer informatie over escape sequences en control tekens, bekijk de volgende documentatie:</para>
+<itemizedlist>
+<listitem>
+<para
+><ulink url="https://www.vt100.net/docs/vt100-ug/"
+>De VT100 gebruikersgids</ulink
+></para>
+</listitem>
+<listitem>
+<para
+><ulink url="https://vt100.net/docs/vt102-ug/"
+>De VT102 gebruikersgids</ulink
+></para>
+</listitem>
+<listitem>
+<para
+>De uitgebreide en onmisbare documentatie <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html"
+>XTerm Control Sequences</ulink
+></para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title
+>Stijlblad gebruiken voor de tabbladbalk</title>
+<para
+>Het standaard stijlblad voor de tabbladbalk stelt de minimale en maximale tabbreedte in. De gebruiker kan een <filename role="extension"
+>.css</filename
+>-bestand maken en laat &konsole; dat als het stijlblad voor de tabbladbalk gebruiken. In het <filename role="extension"
+>.css</filename
+>-bestand, is het te gebruiken widget <userinput
+>QTabBar::tab</userinput
+>. </para>
+<para
+>Voor meer informatie, lees <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
+>&Qt; stijlbladen</ulink
+> </para>
+
+<para
+>Voorbeelden: </para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>De geselecteerde achtergrond van het tabblad wijzigen naar lichtgrijs <programlisting
+>QTabBar::tab:selected {
+    background: #999999
+}
+</programlisting>
+</para
+></listitem>
+
+
+<listitem
+><para
+>De geselecteerde tekst op het tabblad naar rood wijzigen <programlisting
+>QTabBar::tab:selected {
+    color: red
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Alle tabbladen zullen minstens 200 pixels in breedte zijn <programlisting
+>QTabBar::tab {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Alleen het geselecteerde tabblad zal minstens 200 pixels in breedte zijn <programlisting
+>QTabBar::tab::selected {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Elk hiervan kan gecombineerd worden in één bestand <programlisting
+>QTabBar::tab::selected {
+    background: #999999;
+    color: red;
+    min-width: 200px;
+}
+QTabBar::tab {
+    min-width: 100px
+}
+</programlisting>
+</para
+></listitem>
+
+
+</itemizedlist>
+</para>
+
+</chapter>
+
+<chapter id="faqtips">
+<title
+>Wist u dat? Algemene zaken en meer</title>
+
+<sect1 id="didyouknow">
+<title
+>Wist u dat?</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>De toets &Ctrl; ingedrukt houden bij het selecteren van tekst zorgt er voor dat regelafbrekingen spaties worden bij plakken. </para
+></listitem>
+
+<listitem
+><para
+>Als u de toetsen <keycombo action="simul"
+>&Ctrl;&Alt;</keycombo
+> ingedrukt houdt bij het selecteren van tekst dan worden kolommen geselecteerd. </para
+></listitem>
+
+<listitem
+><para
+>De combinatie <keycombo action="simul"
+>&Ctrl;<mousebutton
+>Muiswiel</mousebutton
+></keycombo
+> zoomt de tekstgrootte, zoals in konqueror en firefox. </para
+></listitem>
+
+<listitem
+><para
+>Wanneer een programma een van beide muisknoppen evalueert, dan laat de &Shift;-toets indrukken het popup-menu verschijnen. </para
+></listitem>
+
+<listitem
+><para
+>De sneltoets <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F10</keycap
+></keycombo
+> maakt het menu actief. </para
+></listitem>
+
+<listitem
+><para
+>De toetsen <keycombo action="simul"
+>&Shift;<keycap
+>Insert</keycap
+></keycombo
+> voegen het klembord in. </para
+></listitem>
+
+<listitem
+><para
+>Dubbelklikken zal een geheel woord selecteren. Doorgaan met het indrukken van de muisknop en de muis verplaatsen vergroot de selectie. </para
+></listitem>
+
+<listitem
+><para
+>Driemaal klikken zal een gehele regel selecteren. De muisknop ingedrukt houden en de muis verplaatsen zal de selectie uitbreiden. </para
+></listitem>
+
+<listitem
+><para
+>Er is een verborgen functie voor de "%d"-formatter in het tabblad Titel. U kunt &konsole; vertellen om een mapnaam af te korten in zijn eerste teken. Bijvoorbeeld: "/path/to/konsole/src" kan afgekort worden tot "konsole/s". Als u deze verborgen functie wilt inschakelen, dan opent u <filename
+>konsolerc</filename
+> in <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> en voegt u de volgende regels toe:</para>
+
+<para
+><programlisting
+>[ProcessInfo]
+CommonDirNames=naam1,naam2,naam3...
+</programlisting>
+
+<note
+><para
+>Als u <application
+>Yakuake</application
+> gebruikt, dan moet u in plaats daarvan het bestand <filename
+>yakuakerc</filename
+> in <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> bewerken.</para
+></note>
+
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="commonissues">
+<title
+>Gezamenlijke zaken</title>
+<itemizedlist>
+
+<listitem>
+<para
+>Sommige lettertypes kunnen niet beschikbaar zijn voor gebruik in &konsole;, hoewel ze beschikbaar zijn in andere toepassingen. Dat betekent niet dat er zich een bug in &konsole; bevindt. &konsole; vereist lettertypen met vaste breedte om het beste visuele resultaat te krijgen, het vraagt &Qt; dus om alleen lettertypen met vaste breedte te tonen.</para>
+
+<para
+>Vanaf versie 16.08 (augustus 2016) kan &konsole; geconfigureerd worden om elk lettertype te selecteren met het nadeel dat het getoonde mogelijk niet juist is.</para>
+</listitem>
+
+<listitem
+><para
+>Sinds KDE4 gebruiken alle tabbladen hetzelfde proces-id. Dit heeft als neveneffect dat als het proces van een tabblad problemen heeft, alle andere tabbladen dezelfde problemen ervaren. </para>
+<para
+>Dit is het meest te merken wanneer een commando die een verbinding heeft met een extern apparaat of systeem (ssh, nfs) problemen heeft. </para
+></listitem>
+
+<listitem
+><para
+>&konsole; behandelt argumenten na de optie <option
+>-e</option
+> als één commando en voert het direct uit, in plaats van het te ontleden en het mogelijk op te delen in subcommando's om uit te voeren. Dit is anders dan in xterm. </para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem
+><para
+><command
+>konsole -e "commando1 ; commando2"</command
+> werkt niet </para
+></listitem>
+
+    <listitem
+><para
+><command
+>konsole -e $SHELL -c "commando1 ; commando2"</command
+> werkt </para
+></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
+<listitem
+><para
+>&konsole; biedt geen hulp door een login-shell uit te voeren, omdat ontwikkelaars niet van het idee houden om een login-shell uit te voeren in een terminalemulator. </para>
+<para
+>Natuurlijk kunnen gebruikers nog steeds een login-shell uitvoeren in &konsole; als ze dat echt nodig hebben. Bewerk het te gebruiken profiel en wijzig zijn commando naar de vorm voor het expliciet opstarten van een login-shell, zoals "<command
+>bash -l</command
+>" en "<command
+>zsh -l</command
+>". </para>
+</listitem>
+
+<listitem
+><para
+>De optie <option
+>--new-tab</option
+> gedraagt zich soms vreemd. Het kan een nieuw venster aanmaken of het kan een nieuw tabblad aanmaken in een andere bestaand &konsole;-venster in plaats van het huidige &konsole;-venster. </para>
+<para
+>Deze gedragingen lijken vreemd, maar het zijn niet noodzakelijk bugs. De optie <option
+>--new-tab</option
+> probeert een bestaand &konsole;-venster te hergebruiken, maar niet alle &konsole;-vensters zijn te hergebruiken. Alle &konsole;-vensters geopend via &krunner; zijn te hergebruiken, terwijl de meeste &konsole;-vensters geopend vanaf de commandoregel dat niet zijn. </para>
+</listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title
+>Dankbetuigingen en copyright</title>
+
+<para
+>&konsole; wordt op dit moment onderhouden door &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Daarvoor werd &konsole; onderhouden door &Robert.Knight; &Robert.Knight.mail; en &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+
+<para
+>De toepassing &konsole; Copyright &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
+
+<para
+>Dit document is oorspronkelijk geschreven door &Jonathan.Singer; &Jonathan.Singer.mail;</para>
+
+<para
+>Dit document is bijgewerkt naar &kde; 4.x door &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Dit document is bijgewerkt naar &kde; 3.4 door &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Geconverteerd naar DocBook <acronym
+>SGML</acronym
+> door &Mike.McBride; en &Lauri.Watts;</para>
+
+&meld.fouten;&vertaling.niels;&vertaling.bram;&vertaling.tijmen;&nagelezen.rinse;&nagelezen.antoon;&vertaling.kristof; &underFDL; &underGPL; </chapter>
+
+<appendix id="links">
+<title
+>Links</title>
+
+<para
+>Meer informatie kunt u vinden op de volgende websites:</para>
+<itemizedlist>
+<listitem
+><para
+><ulink url="https://userbase.kde.org/Konsole"
+>De website van &konsole; op &kde;'s UserBase</ulink
+>&nbsp;</para
+></listitem>
+<listitem
+><para
+><ulink url="https://konsole.kde.org/"
+>De homepage van &konsole;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel"
+>De mailinglijst van &konsole;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://freebsd.kde.org/"
+>&kde; op FreeBSD</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://solaris.kde.org/"
+>&kde; op &Solaris;</ulink
+></para
+></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+

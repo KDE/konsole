@@ -1,0 +1,3585 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+ "dtd/kdedbx45.dtd" [
+<!ENTITY % Swedish "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+<!ENTITY Ahmad.Samir '<personname
+><firstname
+>Ahmad</firstname
+><surname
+>Samir</surname
+></personname
+>'>
+<!ENTITY Ahmad.Samir.mail '<email
+>a.samirh78@gmail.com</email
+>'>
+]>
+
+<book id="konsole" lang="&language;">
+
+<bookinfo>
+<title
+>Handbok Terminal</title>
+<authorgroup>
+<author
+>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author
+>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
+
+<othercredit role="developer"
+>&Robert.Knight; &Robert.Knight.mail; </othercredit>
+
+<othercredit role="developer"
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail; </othercredit>
+
+<othercredit role="developer"
+>&Waldo.Bastian; &Waldo.Bastian.mail; </othercredit>
+
+<othercredit role="reviewer"
+>&Mike.McBride; &Mike.McBride.mail; </othercredit>
+
+<othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>&Jonathan.Singer;</holder>
+</copyright>
+<copyright>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year
+><year
+>2018</year
+><year
+>2020</year
+><year
+>2021</year>
+<holder
+>&Kurt.Hindenburg;</holder>
+</copyright>
+
+<copyright>
+    <year
+>2018</year>
+<holder
+>&Ahmad.Samir;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2021-10-28</date>
+<releaseinfo
+>Program 21.12</releaseinfo>
+
+<abstract
+><para
+>Terminal är &kde;:s terminalemulator.</para
+></abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>konsole</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>kommando</keyword>
+<keyword
+>rad</keyword>
+<keyword
+>terminal</keyword>
+<keyword
+>kommandorad</keyword>
+</keywordset>
+
+</bookinfo>
+<chapter id="introduction">
+<title
+>Introduktion</title>
+
+<sect1 id="terminal">
+<title
+>Vad är en terminal?</title>
+
+<para
+>Programmet Terminal är en X-terminalemulator, ofta kallat en terminal eller ett skal. Den ger dig en kommandorad i ett fönster med bara text. </para>
+
+<para
+>Terminal kör normalt ett kommandoskal, ett program som kör kommandon du skriver in. Skalet som Terminal kör beror på dina kontoinställningar. Titta i operativsystemets dokumentation för att ta reda på vad ett skal är, hur man anpassar det och använder det. </para>
+</sect1>
+
+<sect1 id="scrollback">
+<title
+>Historik</title>
+
+<para
+>Terminal använder begreppet historik för att låta användare visa utmatning som visats tidigare. Normalt är historik aktiverat och inställt att spara 1000 rader utmatning förutom det som för närvarande visas på skärmen. </para>
+<para
+>När textrader rullar upp ovanför skärmens överkant, kan de granskas genom att flytta rullningslisten uppåt, genom att använda mushjulet, eller genom att använda tangenterna <keycombo action="simul"
+>&Shift; <keycap
+>Page Up</keycap
+></keycombo
+> (för att flytta bakåt), <keycombo action="simul"
+>&Shift; <keycap
+>Page Down</keycap
+></keycombo
+> (för att flytta framåt), <keycombo action="simul"
+>&Shift; <keycap
+>Upp</keycap
+></keycombo
+> (för att flytta upp en rad) och <keycombo action="simul"
+>&Shift; <keycap
+>Ner</keycap
+></keycombo
+> (för att flytta ner en rad). </para>
+<para
+> Hur mycket <keycombo action="simul"
+>&Shift;<keycap
+>Page Up/Page Down</keycap
+></keycombo
+> rullar kan ändras mellan en halv och en hel sida under fliken <guilabel
+>Historik</guilabel
+> i profilens inställningsfönster (använd <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Redigera nuvarande profil...</guimenuitem
+></menuchoice
+> för att visa fönstret). </para>
+
+</sect1>
+
+<sect1 id="profiles">
+<title
+>Profiler</title>
+<para
+>Profiler låter användare snabbt och enkelt automatisera körning av vanliga kommandon. Exempel skulle kunna omfatta: <itemizedlist>
+<listitem
+><para
+>Anslut till en annan dator med ssh</para
+></listitem>
+<listitem
+><para
+>Starta en IRC-session</para
+></listitem>
+<listitem
+><para
+>Använd tail för att bevaka en fil</para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para
+>Alla nya och ändrade profiler sparas i användarens lokala hemkatalog i <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+>.</para>
+
+<para
+>Procedur för att skapa en ny profil: <orderedlist>
+<listitem
+><para
+>Klicka på menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Hantera profiler...</guimenuitem
+></menuchoice
+></para
+></listitem>
+
+<listitem
+><para
+>Byt till sidan <guibutton
+>Profiler</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Klicka på knappen <guibutton
+>Ny profil...</guibutton
+></para
+></listitem>
+
+<listitem
+><para
+>Fyll i den första raden med ett namn. Det är namnet som visas i menyn, och som används som standardrubrik istället för <guilabel
+>Skal</guilabel
+> när du startar en session av den här typen. </para
+></listitem>
+
+<listitem
+><para
+>Skriv in ett kommando precis som du normalt skulle göra om du öppnade ett nytt skal, och skulle utföra kommandot. I vårt första exempel ovan, skulle du kunna skriva <userinput
+><command
+>ssh</command
+> <replaceable
+>administration</replaceable
+></userinput
+>.</para
+></listitem>
+
+<listitem
+><para
+>Ställ in sessionens utseende under dialogrutans övriga flikar. Du kan använda ett annat teckensnitt, färgschema och typ av $<envar
+>TERM</envar
+> och många andra inställningar för varje session.</para
+></listitem>
+
+<listitem
+><para
+>Klicka på knappen <guibutton
+>Ok</guibutton
+>. Den nya sessionen är nu tillgänglig i dialogrutan <guilabel
+>Hantera profiler...</guilabel
+>. </para
+></listitem>
+
+</orderedlist>
+</para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title
+>Musknappar</title>
+
+<para
+>Det här avsnittet beskriver användning av musknapparna med den vanliga inställningen av musknapparna för högerhänta. För vänsterhänta, byt vänster och höger i nedanstående text. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><mousebutton
+>Vänster</mousebutton
+></term>
+
+<listitem
+><para
+>Ett klick på <mousebutton
+>vänster</mousebutton
+> knapp skickas som en händelse till programmet som körs i Terminal. Om ett program reagerar på musklick, indikerar Terminal detta genom att visa en pilmarkör. Om inte visas en I-formad (stapel) markör.</para>
+
+<para
+>Att hålla nere <mousebutton
+>vänster</mousebutton
+>knappen och dra musen över skärmen med ett program som inte känner till musen, markerar ett område av texten. Medan man drar musen visas den markerade texten i omvända färger som synligt gensvar. Välj <guimenuitem
+>Kopiera</guimenuitem
+> i menyn <guimenu
+>Redigera</guimenu
+> för att kopiera den markerade texten till klippbordet för ytterligare användning i Terminal eller ett annat program. Den markerade texten kan också dras och släppas i program som kan hantera detta. Håll nere &Ctrl;-tangenten och dra den markerade texten till önskad plats.</para>
+
+<para
+>Normalt så infogas nyradstecken i slutet på varje rad som väljs. Det här är bäst för klipp och klistra av källkod, eller utmatning från ett enskilt kommando. För normal text är radbrytningar ofta inte viktiga. Man kan ibland föredra att texten är en sekvens av tecken som automatiskt formatteras om när de klipps in i ett annat program. För att välja med teckensekvensläge, håll nere &Ctrl;-tangenten och välj som vanligt.</para>
+
+<para
+>Att trycka på &Ctrl;- och &Alt;-tangenterna tillsammans med vänster musknapp väljer text i kolumner. </para>
+
+<para
+>Dubbelklicka med <mousebutton
+>vänster</mousebutton
+>knappen för att markera ett ord. Trippelklicka för att markera en hel rad.</para>
+
+<para
+>Om den övre eller nedre kanten av textområdet rörs medan man markerar, rullar Terminal texten uppåt eller neråt, och visar till slut text i historikbufferten. Rullningen stannar när musen stannar.</para>
+
+<para
+>Efter musen släpps försöker Terminal behålla texten på klippbordet synlig genom att behålla det markerade området i omvända färger. Det markerade området återgår till normalläge så fort innehållet i klippbordet ändras, texten i det markerade området ändras eller <mousebutton
+>vänster</mousebutton
+>-knappen klickas.</para>
+
+<para
+>För att markera text i ett program som känner till musen (t.ex Midnight Commander), måste &Shift;-tangenten hållas nere när man klickar.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Mitten</mousebutton
+></term>
+
+<listitem
+><para
+>Att trycka på <mousebutton
+>mitt</mousebutton
+>knappen klistrar in text som för närvarande finns på klippbordet. Att hålla nere &Ctrl;-tangenten när du trycker på <mousebutton
+>mitt</mousebutton
+>knappen, klistrar in texten och lägger till en nyrad. Det är praktiskt för att snabbt utföra inklistrade kommandon, men det kan vara farligt, så använd det med försiktighet. </para>
+
+<note
+><para
+>Om du har en mus med bara två knappar, emuleras <mousebutton
+>mitten</mousebutton
+>knappen på en mus med tre knappar genom att trycka på både <mousebutton
+>vänster</mousebutton
+>- och <mousebutton
+>höger</mousebutton
+>knappen..</para
+></note>
+
+<para
+>Om du har ett <mousebutton
+>hjul</mousebutton
+> som musens mittenknapp, flyttar det Terminals rullningslist för program som inte hanterar musen.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Höger</mousebutton
+></term>
+<listitem>
+<para
+>Följande alternativ visas i menyn när höger musknapp trycks ner:</para>
+<itemizedlist>
+<listitem
+><para
+><guimenuitem
+>Kopiera</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Klistra in</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>Med en textmarkering, undermenyn <guisubmenu
+>Sök efter</guisubmenu
+> med en lista över föredragna webbgenvägar och ett alternativ för att anpassa webbgenvägar.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Öppna filhanterare</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Ange kodning</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Töm historik</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Justera historik...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Visa menyrad</guimenuitem
+>, bara när menyraden är dold</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Byt profil</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Redigera nuvarande profil...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Stäng flik</guimenuitem
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>I ett program som hanterar musen, tryck på &Shift;-tangenten tillsammans med höger musknapp för att visa den sammanhangsberoende menyn. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="drag-and-drop">
+<title
+>Drag och släpp</title>
+<para
+>Om du släpper en fil, katalog eller webbadress på ett fönster i Terminal, visas en sammanhangsberoende meny med följande alternativ: </para>
+<screenshot>
+<screeninfo
+>Sammanhangsberoende meny för drag och släpp</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Sammanhangsberoende meny för drag och släpp</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Shift;</shortcut
+><guimenuitem
+>Flytta hit</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Flytta det släppta objektet till arbetskatalogen. Alternativet visas bara i den sammanhangsberoende menyn om du har rättigheter att ta bort den släppta filen eller katalogen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Ctrl;</shortcut
+><guimenuitem
+>Kopiera hit</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Kopiera det släppta objektet till arbetskatalogen.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;</keycombo
+></shortcut
+><guimenuitem
+>Länka hit</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Infoga en symbolisk länk till det släppta objektet.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Klistra in plats</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Infoga den fullständiga filsökvägen till det släppta objektet vid markören.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Byt katalog till</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Om en katalog släpps, visas alternativet i den sammanhangsberoende menyn och låter dig byta arbetskatalog för sessionen i Terminal.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Esc</keycap
+></shortcut
+><guimenuitem
+>Avbryt</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Avbryt drag och släpp-åtgärden</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Om du trycker på snabbtangenterna innan vänster musknapp släpps vid drag och släpp, visas ingen sammanhangsberoende meny och åtgärderna utförs omedelbart. </para>
+
+<para
+>Om du vill använda &Ctrl;-tangenten dra och släpp eller inaktivera den sammanhangsberoende menyn för att normalt infoga webbadresser som text, aktivera motsvarande alternativ under fliken <guilabel
+>Mus</guilabel
+> i dialogrutan för profilinställningar. </para>
+
+</sect1>
+
+</chapter>
+
+<chapter id="commandreference">
+<title
+>Kommandoreferens</title>
+
+<sect1 id="menubar">
+<title
+>Menyraden</title>
+
+<para
+>Menyraden är längst upp i terminalfönstret. Om menyraden är dold, kan <guimenuitem
+>Visa menyrad</guimenuitem
+> nås genom att <mousebutton
+>höger</mousebutton
+>klicka i fönstret (under förutsättning att inte något fullskärmsprogram som vi, minicom, etc. kör i fönstret). Förvald snabbtangent anges efter varje menyalternativ. </para>
+<para
+>Som alternativ kan du använda genvägen <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+> för att visa eller dölja menyraden. </para>
+<sect2 id="file-menu">
+<title
+>Menyn Arkiv</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Nytt fönster</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Öppnar ett nytt separat terminalfönster med förvald profil</action>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Ny flik</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Öppnar en ny flik med förvald profil</action>
+<note
+><para
+>Den första profilen i undermenyn är alltid "Förval", som är den inbyggda profilen. Alla andra profiler listas under den i alfabetisk ordning. Den användarspecificerade förvalda profilen visas med fetstil. </para
+></note>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Duplicera flik</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Försöker duplicera den nuvarande fliken som en ny flik</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Spara historik som...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Sparar den nuvarande historiken som en text- eller HTML-fil</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Skriv ut skärmen...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Skriv ut den nuvarande skärmen.</action
+> Normalt skalas utskriften för att passa storleken på pappret som skrivs på, med svart textfärg och ingen bakgrund. Alternativen kan ändras under fliken <guilabel
+>Utskriftsalternativ</guilabel
+> på utskriftsdialogrutan.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Öppna filhanterare</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Öppnar &kde;:s filhanterare i arbetskatalogen</action
+>. Normalt är det <ulink url="help:/dolphin/index.html"
+>&dolphin;</ulink
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Stäng session</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Stänger aktuell session</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Stäng fönster</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Avslutar Terminal</action
+></para>
+<note
+><para
+>Terminal visar en bekräftelsedialogruta om det finns mer än en session öppen eller om det finns vissa program som kör i någon session. Dialogrutorna kan inaktiveras genom att klicka på kryssrutan <guibutton
+>Fråga inte igen</guibutton
+>. </para>
+</note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Menyn Redigera</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigera</guimenu
+><guimenuitem
+>Kopiera</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Kopiera den markerade texten till klippbordet</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>V</keycap
+></keycombo
+></shortcut
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Klistra in</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Klistrar in text från klippbordet på markörens plats</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Markera alla</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Markerar all</action
+> test i nuvarande fönster. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Redigera</guimenu
+><guisubmenu
+>Kopiera indata till</guisubmenu
+><guimenuitem
+>Alla flikar i aktuellt fönster</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Tillåter att inmatning från aktuell session samtidigt skickas till alla sessioner i aktuellt fönster</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigera</guimenu
+><guisubmenu
+>Kopiera indata till</guisubmenu
+><guimenuitem
+>Välj flikar...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Tillåter att inmatning från aktuell session samtidigt skickas till sessioner utvalda av användaren</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigera</guimenu
+><guisubmenu
+>Kopiera indata till</guisubmenu
+><guimenuitem
+>Ingen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Sluta skicka inmatning från aktuell session till andra sessioner</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Redigera</guimenu
+> <guisubmenu
+>Skicka signal</guisubmenu
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Skicka angiven signal till skalprocessen, eller en annan process som sattes igång när den nya sessionen startades</action
+>.</para
+><para
+>Signaler som för närvarande är tillgängliga:</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>för att stoppa process</entry>
+</row>
+<row>
+<entry
+><errorcode
+>CONT</errorcode
+></entry>
+<entry
+>fortsätt om stoppad</entry>
+</row>
+<row>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>kontrollterminalen detekterade påläggningssignal, eller den kontrollerade processen dog</entry>
+</row>
+<row>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>avbrott från tangentbordet</entry>
+</row>
+<row>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>termineringssignal</entry>
+</row>
+<row>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>dödande signal</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>användarsignal 1</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>användarsignal 2</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para
+>Se systemets manualsidor för ytterligare detaljerad information genom att använda kommandot <userinput
+><command
+>man</command
+> <option
+>7 signal</option
+></userinput
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigera</guimenu
+><guimenuitem
+>Anpassa flikinställningar...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar en dialogruta som låter dig ändra namnformat, fjärrflikars rubrikformat och färgen på aktuell flik</action
+> (<link linkend="configure-tab-settings-dialog"
+>mer information</link
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigera</guimenu
+><guimenuitem
+>Uppladdning med Zmodem...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Visar en dialogruta för att välja en fil som ska laddas upp om nödvändig programvara är installerad</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigera</guimenu
+><guimenuitem
+>Sök...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar en sökrad längst ner i terminalfönstret </action
+></para>
+<para
+>Det här gör det möjligt att använda skiftlägeskänslig sökning, framåt och bakåt, och sökning med reguljära uttryck.</para>
+</listitem>
+</varlistentry>
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch
+-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Historik</guimenu
+><guimenuitem
+>Sök igen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Går till nästa sökresultat</action
+>. Om sökraden har fokus, kan returtangenten också användas som genväg.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Shift;<keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Historik</guimenu
+><guimenuitem
+>Sök föregående</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Går till föregående sökresultat</action
+>. Om sökraden har fokus, kan genvägen <keycombo action="simul"
+>&Shift; <keycap
+>Retur</keycap
+></keycombo
+> också användas.</para
+></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Menyn Visa</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guisubmenu
+>Dela vy</guisubmenu
+><guimenuitem
+>Dela vyn vänster/höger</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Delar alla flikar i vänster- och högervyer</action>
+</para
+><para
+>All utmatning i en vy dupliceras i den andra vyn. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guisubmenu
+>Dela vy</guisubmenu
+><guimenuitem
+>Dela vyn topp/botten</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Delar alla flikar i topp- och bottenvyer</action>
+</para
+><para
+>All utmatning i en vy dupliceras i den andra vyn. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guisubmenu
+>Dela vy</guisubmenu
+><guimenuitem
+>Expandera vy</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Gör den aktuella vyn större</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guisubmenu
+>Dela vyn</guisubmenu
+><guimenuitem
+>Krymp vy</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Gör den aktuella vyn mindre</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guisubmenu
+>Dela vy</guisubmenu
+><guimenuitem
+>Maximera eller minimera aktuell vy</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Byter aktuell vy mellan nuvarande storlek och den maximerade storleken</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>\</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guisubmenu
+>Dela vy</guisubmenu
+><guimenuitem
+>Samma storlek för alla vyer</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Ställer in samma storlek för alla vyer</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Koppla loss aktuell flik</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Öppnar aktuell flik i ett separat fönster</action>
+</para
+><para
+>Att avsluta det föregående terminalfönstret påverkar inte det nyskapade fönstret. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Koppla loss aktuell vy</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Öppnar den aktuella delade vyn i ett separat fönster</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry id="save-layout">
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Spara fliklayout i fil</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Låter dig spara den aktuella vyns fliklayout i en särskild terminallayoutfil, som sedan kan läsas in för att återställa en av dina favoritlayouter.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Läs in fliklayout från fil</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Låter dig läsa in en av dina favoritlayouter från layoutfilen som tidigare har sparats med menyalternativet <menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Spara fliklayout i fil</guimenuitem
+></menuchoice
+>.</action
+> Standardlayouterna (2 x 2, 2 x 1 och 1 x 2) kan läsas in via verktygsraden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Övervakare av tystnad</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändrar övervakning av aktuell flik för avsaknad av aktivitet</action>
+</para
+><para
+>Normalt visas en informationsikon på sessionens flik, efter 10 sekunder utan aktivitet. Typ av meddelanden kan ändras via <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Anpassa underrättelser</guimenuitem
+><guimenuitem
+>Tystnad i övervakad session</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Övervakare av aktivitet</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändrar övervakning av aktuell flik för aktivitet</action>
+</para
+><para
+>Vid någon aktivitet visas en informationsikon på sessionens flik. Typ av meddelanden kan ändras via <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Anpassa underrättelser</guimenuitem
+><guimenuitem
+>Aktivitet i övervakad session</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Övervakare av processavslutning</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändrar övervakning av aktuell flik för avslutning av processen</action
+> </para
+><para
+>Om markerad, visar Terminal en underrättelse när den aktuella processen avslutas: <guilabel
+>Processen '<replaceable
+>processnamnet</replaceable
+>' har slutat köra i session '<replaceable
+>sessionsnamnet</replaceable
+>'</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Skrivskyddad</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändrar sessionen så den är skrivskyddad: ingen inmatning accepteras, drag och släpp är inaktiverad. </action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Öka teckenstorlek</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ökar textens teckenstorlek</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>0</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Återställ teckenstorlek</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Återställ textens teckenstorlek till profilens värde</action
+></para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Minska teckenstorlek</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Minskar textens teckenstorlek</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Teckenkodning</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ställer in teckenkodningen</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Töm historik</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Tömmer texten i historiken</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>K</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Töm historik och återställ</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Tömmer text i den aktuella fliken och historiken, samt återställer terminalen</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F11</keycap
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Fullskärmsläge</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändrar att terminalen fyller hela skärmen</action
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Menyn Bokmärken</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bokmärken</guimenu
+><guimenuitem
+>Lägg till bokmärke</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Lägger till nuvarande plats</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bokmärken</guimenu
+><guimenuitem
+>Skapa bokmärken för flikar som en katalog...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Lägger till alla flikar i en bokmärkeskatalog</action>
+</para
+><para
+>En dialogruta visas för bokmärkeskatalogens namn. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bokmärken</guimenu
+><guimenuitem
+>Ny bokmärkeskatalog...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Lägger till en ny katalog i bokmärkeslistan</action>
+</para
+><para
+>En dialogruta visas för bokmärkeskatalogens namn. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Redigera bokmärken</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar bokmärkeseditorn</action
+></para>
+<note
+><para
+>Programmet keditbookmarks måste vara installerat för att menyalternativet ska visas.</para>
+<para
+>Du kan använda bokmärkeseditorn för att manuellt lägga till webbadresser. För närvarande accepterar Terminal följande: <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://användare@värddator:port</para
+></listitem>
+<listitem
+><para
+>telnet://användare@värddator:port</para
+></listitem>
+</itemizedlist>
+</para
+></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="plugins-menu">
+<title
+>Menyn Insticksprogram</title>
+
+<para
+>Alla installerade insticksprogram listas eller "Inga insticksprogram tillgängliga" </para>
+
+</sect2>
+
+
+<sect2 id="settings-menu">
+<title
+>Menyn Inställningar</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Redigera nuvarande profil...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar en dialogruta för att anpassa den nuvarande profilen</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Byt profil</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Byter nuvarande profil mot en listad profil</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Hantera profiler...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar en editor för att hantera profiler</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Fönsterfärgschema</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändra Terminals grafiska gränssnitt till angivet schema</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Visa menyrad</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändrar menyradens synlighet</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Visade verktygsrader</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Gör det möjligt att ändra synlighet för verktygsraderna i &konsole;</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Visa statusrad</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändrar statusradens synlighet</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa språk...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar ett fönster för att välja översättning för gränssnittet i &konsole;.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa snabbtangenter...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Visar snabbtangenteditorn.</action
+> Mer om inställning av snabbtangenter finns i <ulink url="help:/fundamentals/shortcuts.html"
+>&kde;:s grunder</ulink
+>.</para>
+
+<para
+>Dessutom har Terminal några få särskilda genvägar utan motsvarande menyalternativ:</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Genväg</entry>
+<entry
+>Beskrivning</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Högerpil</keysym
+></keycombo
+></entry>
+<entry
+>Nästa flik</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Vänsterpil</keysym
+></keycombo
+></entry>
+<entry
+>Föregående flik</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Vänsterpil</keysym
+></keycombo
+></entry>
+<entry
+>Flytta flik åt vänster</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Högerpil</keysym
+></keycombo
+></entry>
+<entry
+>Flytta flik åt höger</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>Insert</keysym
+></keycombo
+></entry>
+<entry
+>Klistra in markering</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa verktygsrader...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar <ulink url="help:/fundamentals/config.html#toolbars-items"
+>inställningsfönstret för verktygsrader</ulink
+></action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa meddelanden...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar editorn av underrättelsemeddelanden</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &konsole;...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar inställningseditorn i Terminal</action
+></para>
+<para
+>Dialogrutan har alternativ som påverkar utseende och beteende för fönstret i Terminal. </para>
+<itemizedlist>
+    <listitem>
+        <para
+>Sidan <guilabel
+>Allmänt</guilabel
+> gör det möjligt att anpassa menyradens synlighet, om Terminals fönsterstorleken ska kommas ihåg, om alla fönster i Terminal ska köras i en enda process, om menygenvägar ska aktiveras, om fönstertiteln ska visas i namnlisten, om fönstrets namnlist och ram ska tas bort, och om terminaler ska få fokus när muspekaren flyttas till dem. Det är också möjligt att anpassa sökningens skiftlägeskänslighet, användning av reguljära uttryck, markering av alla träffar, och sökriktningen (<guilabel
+>Sök bakåt</guilabel
+> är förval). Sidan <guilabel
+>Allmänt</guilabel
+> är också där du kan <guibutton
+>Aktivera alla "Fråga inte igen"-meddelanden</guibutton
+> igen om de tidigare har stängts av. </para>
+    </listitem>
+    <listitem>
+        <para
+>Sidan <guilabel
+>Profiler</guilabel
+> är avsedd för att skapa och hantera <link linkend="profiles"
+>profiler</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>Genom att använda sidan <guilabel
+>Flikrad och delare</guilabel
+> kan du anpassa flikradens synlighet och placering, definiera flikarnas beteende och finjustera flikknapparnas alternativ. Det är möjligt att ställa in om du vill <guilabel
+>Visa knappen 'Ny flik'</guilabel
+> och <guilabel
+>Expandera individuella flikbredder till hela fönster</guilabel
+> eller anpassa <guilabel
+>Använd användardefinierad stilmall</guilabel
+>. Fliken <guilabel
+>Beteende</guilabel
+> kan användas för att definiera platsen för nya flikar (<guilabel
+>Lägg till sist</guilabel
+> eller <guilabel
+>Efter aktuell flik</guilabel
+>) och stängning av flikar med mittenklick. </para>
+        <para
+>Det är också möjligt att anpassa delningsrubrikernas synlighet (<guilabel
+>Vid behov</guilabel
+> (förval), <guilabel
+>Alltid</guilabel
+> eller <guilabel
+>Aldrig</guilabel
+>) och definiera storleken på draggreppen för avdelare (<guilabel
+>Liten</guilabel
+> (förval), <guilabel
+>Medium</guilabel
+> eller <guilabel
+>Stor</guilabel
+>) genom att använda fliken <guilabel
+>Avdelningar</guilabel
+> på inställningssidan. </para>
+    </listitem>
+    <listitem>
+        <para
+>Sidan <guilabel
+>Tillfälliga filer</guilabel
+> används för att definiera platsen för <link linkend="scrollback"
+>historikens</link
+> fil. </para>
+    </listitem>
+    <listitem>
+        <para
+>Sidan <guilabel
+>Miniatyrbilder</guilabel
+> kan användas för att definiera alternativen för miniatyrbildsstorlek och aktivering (du kan välja kontrolltangent för aktivering från &Shift;, &Alt; och &Ctrl;). </para>
+        <note>
+            <para
+>För att använda miniatyrbildsfunktionen som visar miniatyrbilder i meddelanderutor när muspekaren hålls över bildobjekt, måste du aktivera filunderstrykning i den nuvarande profilen: <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Redigera nuvarande profil...</guimenuitem
+><guimenuitem
+>Mus</guimenuitem
+><guimenuitem
+>Diverse</guimenuitem
+><guimenuitem
+>Stryk under filer</guimenuitem
+></menuchoice
+>. </para>
+        </note>
+    </listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title
+>Menyn Hjälp</title>
+<para
+>&konsole; har några av &kde;:s vanliga menyalternativ i menyn <guimenu
+>Hjälp</guimenu
+>. För mer information läs avsnittet om <ulink url="help:/fundamentals/menus.html#menus-help"
+>hjälpmenyn</ulink
+> i &kde;:s grunder. </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+</sect2>
+
+</sect1>
+
+<sect1 id="console-dialogs">
+<title
+>Dialogrutor i &konsole;</title>
+
+<sect2 id="configure-tab-settings-dialog">
+<title
+>Dialogrutan Anpassa flikinställningar</title>
+
+<para
+>Namnformatet, fjärrflikars rubrikformat, och färgen på den aktuella fliken kan ändras med dialogrutan. Dialogrutan kan visas via menyn, genvägen <keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+> eller genom att dubbelklicka på fliken i flikraden. Ändringarna är tillfälliga och kan göras permanenta genom att redigera nuvarande profil. </para>
+
+<para
+>Terminal ersätter följande markörer i lokala flikar: </para>
+<itemizedlist mark="opencircle">
+<listitem
+><para
+>%n : programnamn</para
+></listitem>
+<listitem
+><para
+>%d : arbetskatalog (kort)</para
+></listitem>
+<listitem
+><para
+>%D : arbetskatalog (lång)</para
+></listitem>
+<listitem
+><para
+>%h : lokal värddator (kort)</para
+></listitem>
+<listitem
+><para
+>%u : användarnamn</para
+></listitem>
+<listitem
+><para
+>%B : användarens Bourne prompter ($ = normal användare, # = systemadministratör)</para
+></listitem>
+<listitem
+><para
+>%w : fönsterrubrik inställd av skalet</para
+></listitem>
+<listitem
+><para
+>%# : sessionsnummer</para
+></listitem>
+</itemizedlist>
+
+<para
+>Terminal ersätter följande markörer i fjärrflikar: <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c : aktuellt program</para
+></listitem>
+    <listitem
+><para
+>%h : fjärrvärddator (kort)</para
+></listitem>
+    <listitem
+><para
+>%H : fjärrvärddator (lång)</para
+></listitem>
+    <listitem
+><para
+>%u : användarnamn</para
+></listitem>
+    <listitem
+><para
+>%U : användarnamn@ (om angivet)</para
+></listitem>
+    <listitem
+><para
+>%w : fönsterrubrik inställd av skalet</para
+></listitem>
+    <listitem
+><para
+>%# : sessionsnummer</para
+></listitem>
+</itemizedlist>
+
+</para>
+<para
+>Exempel: <itemizedlist mark="opencircle">
+
+<listitem
+><para
+><userinput
+>%d : %n</userinput
+> med /usr/src som arbetskatalog och programmet <application
+>bash</application
+> visar <guibutton
+>src : bash</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%D : %n</userinput
+> med /usr/src som arbetskatalog och programmet <application
+>top</application
+> körs visas <guibutton
+>/usr/src : top</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%w (%#)</userinput
+> med ~ som arbetskatalog och <application
+>vim</application
+> körs under den första fliken visas <guibutton
+>[No Name] (~) - VIM(1)</guibutton
+> </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect2>
+
+<sect2 id="copy-input-dialog">
+<title
+>Dialogruta för kopiera indata</title>
+
+<para
+>Texten som matas in under en flik kan samtidigt skickas till andra flikar. Dialogrutan låter dig välja vilka flikar som tar emot inmatningen. Den nuvarande fliken kommer att vara grå och inaktiverad. </para>
+
+</sect2>
+
+<sect2 id="scrollback-options-dialog">
+<title
+>Dialogrutan Justera historik</title>
+
+<para
+>Alternativet för <link linkend="scrollback"
+>historikens storlek</link
+> kan ändras i den här dialogrutan. Eventuella ändringar gäller bara för aktuell flik och sparas inte i profilen. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title
+>Kommandoradsväljare</title>
+
+<para
+>När Terminal startas från kommandoraden kan olika väljare anges för att ändra dess beteende.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--help</option
+></term>
+<listitem
+><para
+><action
+>Listar olika väljare</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--profile</option
+> <parameter
+>fil</parameter
+></term>
+<listitem
+><para
+><action
+>Starta Terminal</action
+> med en angiven profil istället för standardprofilen.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--layout</option
+> <parameter
+>fil</parameter
+></term>
+<listitem
+><para
+><action
+>Starta Terminal</action
+> med en <link linkend="save-layout"
+>sparad &JSON;-layoutfil</link
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--builtin-profile</option
+></term>
+<listitem
+><para
+>Använd den inbyggda profilen istället för standardprofilen.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--workdir</option
+> <parameter
+>katalog</parameter
+></term>
+<listitem
+><para
+><action
+>Öppna med</action
+> <parameter
+>katalog</parameter
+> som ursprunglig arbetskatalog.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hold, --noclose</option
+></term>
+<listitem
+><para
+><action
+>Stäng inte</action
+> ursprunglig session automatiskt när den avslutas. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--new-tab</option
+></term>
+<listitem
+><para
+><action
+>Skapa en ny flik</action
+> i ett befintligt fönster istället för att skapa ett nytt fönster. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--tabs-from-file </option
+><parameter
+>fil</parameter
+></term>
+<listitem
+><para
+><action
+>Skapa flikar</action
+> som anges i den angivna flikinställningsfilen. </para>
+<note
+><para
+>Filen har en flik per rad med följande format:</para>
+<para
+>Varje rad specificerar en flik att öppna med upp till 4 fält som anger hur den ska öppnas. Fält avgränsas med <userinput
+>;;</userinput
+> och ett fältnamn måste ha ett <userinput
+>:</userinput
+> tillagt i slutet. Tomma rader eller rader med <userinput
+>#</userinput
+> i början ignoreras, så du kan använda en rad som börjar med <userinput
+>#</userinput
+> för att lägga till kommentarer. </para>
+
+<simplelist>
+<member
+><userinput
+>title:</userinput
+> ett namn på fliken, flikens förvalda värde om det är tomt eller inte angivet</member>
+<member
+><userinput
+>workdir:</userinput
+> arbetskatalog, <filename class="directory"
+> ~</filename
+> om tomt eller inte angivet</member>
+<member
+><userinput
+>profile:</userinput
+> en profil i Terminal att använda, den förvalda om tomt eller inte angivet</member>
+<member
+><userinput
+>command:</userinput
+> ett kommando att köra</member>
+</simplelist>
+<para
+>Varje rad måste åtminstone innehålla ett av fälten <userinput
+>command</userinput
+> eller <userinput
+>profile</userinput
+> </para>
+<para
+>Exempel: <userinput
+>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput
+></para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--background-mode</option
+></term>
+<listitem
+><para
+><action
+>Starta terminalen</action
+> i bakgrunden och lägg den överst när tangenten <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F12</keycap
+></keycombo
+> (förval) trycks. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--separate</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+><action
+>Kör</action
+> den nya instansen av Terminal i en separat process. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-menubar</option
+></term>
+<listitem
+><para
+><action
+>Visa</action
+> menyraden, och överskrid standardbeteendet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-menubar</option
+></term>
+<listitem
+><para
+><action
+>Dölj</action
+> menyraden, och överskrid standardbeteendet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Visa</action
+> flikraden, och överskrid standardbeteendet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Dölj</action
+> fllikraden, och överskrid standardbeteendet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fullscreen</option
+></term>
+<listitem
+><para
+><action
+>Starta Terminal i fullskärmsläge</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--notransparency</option
+></term>
+<listitem
+><para
+><action
+>Inaktivera</action
+> genomskinliga bakgrunder även om systemet stöder dem. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profiles</option
+></term>
+<listitem
+><para
+><action
+>Lista</action
+> alla tillgängliga profiler. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profile-properties</option
+></term>
+<listitem>
+<para
+><action
+>Lista</action
+> alla möjliga egenskaper med namn och typ. Se väljaren <option
+>-p</option
+>. </para>
+<para
+>För mer information, besök gärna <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
+>&konsole; API Reference</ulink
+>. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>egenskap=värde</parameter
+></term>
+<listitem
+><para
+><action
+>Ändra</action
+> värdet på en profilegenskap.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>kommando</parameter
+></term>
+<listitem
+><para
+><action
+>Kör</action
+> <parameter
+>kommando</parameter
+> istället för det vanliga skalet.</para>
+<note
+><para
+>Väljaren tar alla följande argument som skickas till Terminal, och kör det som <parameter
+>kommando</parameter
+>. Så väljaren ska alltid vara den sista.</para
+></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Terminal accepterar också generella &Qt;- och &kde; Ramverk 5-väljare, se manualsidorna qt5options och kf5options.</para>
+
+</chapter>
+
+<chapter id="scripting">
+<title
+>Skriva skript för Terminal</title>
+
+<para
+>Terminal stöder en mängd metoder som kan användas med &DBus;. </para>
+<para
+>Det finns två sätt att använda &DBus; gränssnittet: &Qt;:s grafiska gränssnitt <application
+>qdbusviewer</application
+> och kommandoradprogrammet <application
+>qdbus</application
+>. </para>
+
+<para
+>Exempel: <itemizedlist mark='opencircle'>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> visar alla tillgängliga tjänster. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole</option
+> visar &DBus; gränssnittet i Terminal. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+> visar metoder för att styra fönster 1. </para>
+</listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+> visar metoder för att styra aktuellt fönster. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+> visar metoder för att styra session 1. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+> visar metoder för att styra aktuell session. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+> visar metoder för att styra aktuell session i Terminal. </para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Om något av ovanstående kommandon skriver ut: Tjänsten 'org.kde.konsole' finns inte, ändra då <option
+>org.kde.konsole</option
+> till något av följande: <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (väljer första process-id) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (kan användas i den aktuella terminalen) </para
+></listitem>
+<listitem
+><para>
+<option
+>välj ett från utmatningen av 'qdbus | grep konsole'</option>
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>För mer information, besök gärna <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>&DBus; tutorial</ulink
+>. </para>
+
+</chapter>
+
+<chapter id="key-bindings">
+<title
+>Tangentbindningar i terminalen</title>
+
+<sect1>
+<title
+>Hur Terminal använder tangentbindningar</title>
+
+<sect2 id="intro">
+<title
+>Introduktion</title>
+<para
+>Terminal använder *.keytab-filer för att översätta tangentkombinationer till kontrolltecken och escape-följder som skickas till skalet eller till interaktiva program (typiskt program som använder den alternativa skärmbufferten, t.ex. <application
+>vim</application
+>, <application
+>less</application
+>, <application
+>screen</application
+>) som kör i ett skal.</para>
+
+<para
+>Användare kan anpassa tangentbindningarna i Terminal med Tangentbindningseditorn. En tangentkombination kan ställas in att skicka en specifik kontroll- eller escape-följd till terminalen.</para>
+
+<para
+>Tangentbindningseditorn kan öppnas med menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Redigera nuvarande profil</guimenuitem
+></menuchoice
+>, och gå till fliken <guilabel
+>Tangentbord</guilabel
+>. Där listas de tangentbindningsscheman som normalt levereras med Terminal.</para>
+</sect2>
+
+<sect2 id="table-fields">
+<title
+>Tangentkombinationer och lägen</title>
+
+<para
+>Tangentkombinationer följer mönstret: <programlisting
+>Tangent (+|-) Lägen</programlisting>
+</para>
+
+<para
+>exempelvis: <programlisting
+>Up+Shift+AppScreen
+Down+Shift-AppScreen
+Space+Ctrl
+</programlisting>
+</para>
+
+<para
+>Tangentnamn definieras i deklarationsfilen qnamespace.h, med prefixet <quote
+>Qt::Key_</quote
+> borttaget. Titta på <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum"
+>Qt::Key enumeration i &Qt;-dokumentationen</ulink
+> för en lista med tangentnamn.</para>
+
+<para
+>Ett <quote
+>+</quote
+> som föregår ett lägesnamn betyder att läget <emphasis
+>används</emphasis
+>. För en väljartangent betyder det att den hålls nere, medan för alla andra lägen betyder det att det specifika läget är i kraft (dvs. aktivt). Exempelvis betyder <quote
+>+Ctrl</quote
+> att tangentkombinationen bara fungerar om &Ctrl;-tangenten hålls nere.</para>
+
+<para
+>Ett <quote
+>-</quote
+> som föregår ett lägesnamn betyder att läget <emphasis
+>återställs</emphasis
+>. I huvudsak är det motsatsen av att placera <quote
+>+</quote
+> framför ett lägesnamn, och för en väljartangent betyder det alltså att tangenten inte hålls nere, medan för alla andra lägen betyder det att det specifika läget är inaktivt. Exempelvis betyder <quote
+>-Ctrl</quote
+> att tangentkombinationen bara fungerar om &Ctrl;-tangenten <emphasis
+>inte</emphasis
+> hålls nere.</para>
+
+<note>
+<para
+>Om ett lägesnamn inte finns med i en tangentkombination ignoreras dess tillstånd.</para>
+</note>
+
+<para
+>Tangentbindningslägen som stöds listas nedan:</para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Alt, Ctrl, Shift</term>
+<listitem>
+<para
+>En eller flera av dessa lägen kan användas i en tangentkombination. Om någon av dem är aktiv använder tangentkombinationen respektive väljartangent, och vice versa om den är inaktiv.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AnyModifier</term>
+<listitem>
+<para
+>Om läget är aktivt, använder tangentkombinationen vilken som helst av väljartangenterna (någon av de tre tidigare väljartangenterna), och vice versa om det är inaktivt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ansi</term>
+<listitem>
+<para
+>Om läget är aktivt, skickar Terminal ANSI escape- och kontrollföljder.</para>
+<para
+>Om läget är inaktivt, skickar Terminal VT52 escape- och kontrollföljder.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppScreen</term>
+<listitem>
+<para
+>Om läget är aktivt, påverkar tangentkombinationen bara interaktiva program som använder den alternativa skärmbufferten.</para>
+<para
+>Om läget är inaktivt, påverkar tangentkombinationen bara terminalen när den använder den normala skärmbufferten.</para>
+
+<note>
+<para
+>Terminal använder sig av två skärmbuffertar:</para>
+<itemizedlist>
+<listitem>
+<para
+>Den normala skärmbufferten (förvald): Låter dig rulla bakåt för att titta på tidigare utmatade rader. Den är den normala bufferten som oftast används för att utföra kommandon, etc.</para>
+</listitem>
+<listitem>
+<para
+>Den alternativa skärmbufferten: Terminalen byter till denna buffert när ett interaktivt program körs (t.ex. <application
+>less</application
+>, <application
+>vim</application
+>, <application
+>screen</application
+>, <application
+>tmux</application
+>... etc.).</para>
+</listitem>
+</itemizedlist>
+</note>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KeyPad</term>
+<listitem>
+<para
+>Om läget är aktivt, använder tangentkombinationen en tangent på det numeriska tangentbordet. Läget är användbart för att skilja på tangenter på tangentbordet och tangenter på det numeriska tangentbordet. Exempelvis kan två separata tangentkombinationer ställas in när Num Lock är <emphasis
+>på</emphasis
+>, en med tangenten betecknad med <quote
+>1</quote
+> på tangentbordet (oftast under tangenten <keycap
+>F1</keycap
+>) och den andra med tangenten betecknad med <quote
+>1</quote
+> på det numeriska tangentbordet. Samma koncept gäller när Num Lock är <emphasis
+>av</emphasis
+> för piltangenterna och tangenterna End, Home, etc. på det numeriska tangentbordet.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppCursorKeys</term>
+<listitem>
+<para
+>Läget implementerar VT100 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
+>piltangentläget (DECCKM)</ulink
+>. Det bestämmer escape-sekvenser som varje piltangent (<keycap
+>upp</keycap
+>, <keycap
+>ner</keycap
+>, <keycap
+>höger</keycap
+>, <keycap
+>vänster</keycap
+>) skickar, beroende på om läget är aktivt eller inaktivt.</para>
+<para
+>Normalt följer Terminal beteendet hos XTerm att behandla tangenterna <keycap
+>Home</keycap
+> och <keycap
+>End</keycap
+> som piltangenter med avseende på DECCKM.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppKeyPad</term>
+<listitem>
+<para
+>Om läget är aktivt, fungerar bara tangentkombinationen när det numeriska tangentbordet är i programläge (DECKPAM).</para>
+<para
+>Om läget är inaktivt, fungerar bara tangentkombinationen när det numeriska tangentbordet är i numeriskt läge (DECKPNM).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>NewLine</term>
+<listitem>
+<para
+>Om läget är aktivt, skickar <keycap
+>Retur</keycap
+> (Enter)-tangenten på tangentbordet både kontrolltecknen vagnretur "\r" och nyrad "\n".</para>
+<para
+>Om läget är inaktivt, skickar <keycap
+>Retur</keycap
+>-tangenten bara vagnretur "\r".</para>
+<para
+>Samma sak gäller för tangenten <keycap
+>Enter</keycap
+> på det numeriska tangentbordet.</para>
+<para
+>Läget emulerar <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
+>LNM - Line Feed/New Line</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Observera att varje kombination av tangent och läge (aktivt/inaktivt) måste vara unikt. Betrakta exempelvis följande två regler:</para>
+
+<itemizedlist>
+<listitem
+><para
+>A+Shift : <quote
+>A</quote
+></para
+></listitem>
+<listitem
+><para
+>a : <quote
+>a</quote
+></para
+></listitem>
+</itemizedlist>
+<para
+>Terminal accepterar <emphasis
+>inte</emphasis
+> regeln för den lilla bokstaven <quote
+>a</quote
+>, utan <quote
+>-Shift</quote
+> måste läggas till i regeln för att få den att fungera.</para>
+</sect2>
+
+<sect2 id="output-field">
+<title
+>Utmatningsfältet</title>
+
+<para
+>I utmatningsfältet kan escape-sekvenser eller kontrolltecken som du vill att Terminal ska skicka till terminalen när den associerade tangentkombinationen används.</para>
+
+<para
+>Du kan också använda något av följande nyckelord, som vart och ett har en särskilt betydelse i Terminal:</para>
+
+<itemizedlist>
+<listitem
+><para
+>scrollUpLine : rulla upp en rad i bufferten med skalhistorik</para
+></listitem>
+<listitem
+><para
+>scrollUpPage : rulla upp en sida i bufferten med skalhistorik</para
+></listitem>
+<listitem
+><para
+>scrollDownLine : rulla ner en rad i bufferten med skalhistorik</para
+></listitem>
+<listitem
+><para
+>scrollDownPage : rulla ner en sida i bufferten med skalhistorik</para
+></listitem>
+<listitem
+><para
+>scrollUpToTop : rulla upp till början av bufferten med skalhistorik</para
+></listitem>
+<listitem
+><para
+>scrollDownToBottom : rulla ner till slutet av bufferten med skalhistorik</para
+></listitem>
+</itemizedlist>
+
+<para
+>Du kan också använda strängar med C-strängsyntax, och följande Escape-sekvenser kan användas:</para>
+
+<itemizedlist>
+<listitem
+><para
+>\E : Escape</para
+></listitem>
+<listitem
+><para
+>\\ : Bakstreck</para
+></listitem>
+<listitem
+><para
+>\" : Dubbla citationstecken</para
+></listitem>
+<listitem
+><para
+>\t : Tabulator</para
+></listitem>
+<listitem
+><para
+>\r : Vagnretur</para
+></listitem>
+<listitem
+><para
+>\n : Nyrad</para
+></listitem>
+<listitem
+><para
+>\b : Baksteg</para
+></listitem>
+<listitem>
+<para
+>\xHH : där HH är två hexadecimala siffror</para>
+<tip>
+<para
+>Detta kan användas för att skicka &ASCII;-kontrolltecken, t.ex. <quote
+>\x00</quote
+> som är tecknet NUL.</para>
+</tip>
+</listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="other-factors">
+<title
+>Andra systemresurser</title>
+<para
+>Det finns andra systemresurser som kan påverka terminalens tangentbindningar:</para>
+<itemizedlist>
+<listitem>
+<para
+>Se databaserna <ulink url="man:terminfo(5)"
+>terminfo</ulink
+> eller <ulink url="man:termcap(5)"
+>termcap</ulink
+> för förväntade escape-sekvenser och kontrolltecken som varje tangentkombination förväntas skicka.</para>
+</listitem>
+<listitem>
+<para
+>Troligtvis har systemet andra tangentbordsdatabaser som också måste vara synkroniserade (t.ex. <ulink url="man:bash(1)"
+>/etc/inputrc och readline</ulink
+> för skalet <application
+>BASH</application
+>) eftersom de påverkar åtgärderna (interaktionen) kopplade till tangentkombinationer.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="further-reading">
+<title
+>Ytterligare läsning</title>
+<para
+>För mer information om escape-sekvenser och kontrolltecken, se följande dokumentation:</para>
+<itemizedlist>
+<listitem>
+<para
+><ulink url="https://www.vt100.net/docs/vt100-ug/"
+>VT100 användarguide</ulink
+></para>
+</listitem>
+<listitem>
+<para
+><ulink url="https://vt100.net/docs/vt102-ug/"
+>VT102 användarguide</ulink
+></para>
+</listitem>
+<listitem>
+<para
+>Den omfattande och oumbärliga dokumentationen <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html"
+>XTerm Control Sequences</ulink
+></para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title
+>Använda stilmallar för flikraden</title>
+<para
+>Den förvalda stilmallen för flikraden ställer in minimal och maximal flikbredd. Användaren kan skapa en <filename role="extension"
+>.css</filename
+>-fil och låta Terminal använda den som stilmall för flikraden. Den grafiska komponenten som ska användas i <filename role="extension"
+>.css</filename
+>-filen är <userinput
+>QTabBar::tab</userinput
+>. </para>
+<para
+>För mer information, läs gärna <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
+>&Qt; stilmallar</ulink
+> </para>
+
+<para
+>Exempel: </para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Ändra den markerade flikens bakgrund till ljusgrå <programlisting
+>QTabBar::tab:selected {
+    background: #999999
+}
+</programlisting>
+</para
+></listitem>
+
+
+<listitem
+><para
+>Ändra den markerade flikens text till röd <programlisting
+>QTabBar::tab:selected {
+    color: red
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Alla flikar är minst 200 bildpunkter breda <programlisting
+>QTabBar::tab {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Bara den markerade fliken är minst 200 bildpunkter bred <programlisting
+>QTabBar::tab::selected {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Alla dessa kan kombineras i en fil <programlisting
+>QTabBar::tab::selected {
+    background: #999999;
+    color: red;
+    min-width: 200px;
+}
+QTabBar::tab {
+    min-width: 100px
+}
+</programlisting>
+</para
+></listitem>
+
+
+</itemizedlist>
+</para>
+
+</chapter>
+
+<chapter id="faqtips">
+<title
+>Visste du att, vanliga problem med mera</title>
+
+<sect1 id="didyouknow">
+<title
+>Visste du att?</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Att trycka på &Ctrl; medan text markeras gör att radslut ändras till mellanslag när texten klistras in. </para
+></listitem>
+
+<listitem
+><para
+>Att trycka på <keycombo action="simul"
+>&Ctrl;&Alt;</keycombo
+>-tangenterna medan text markeras kommer att markera kolumner. </para
+></listitem>
+
+<listitem
+><para
+>Kombinationen <keycombo action="simul"
+>&Ctrl;<mousebutton
+>hjul</mousebutton
+></keycombo
+> zoomar textstorleken, som i Konqueror och Firefox. </para
+></listitem>
+
+<listitem
+><para
+>När ett program utvärderar någon av musknapparna, är det möjligt att få den sammanhangsberoende menyn att visas genom att trycka på skifttangenten. </para
+></listitem>
+
+<listitem
+><para
+>Genvägen <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F10</keycap
+></keycombo
+> aktiverar menyn. </para
+></listitem>
+
+<listitem
+><para
+>Tangenterna <keycombo action="simul"
+>&Shift;<keycap
+>Insert</keycap
+></keycombo
+> infogar klippbordets innehåll. </para
+></listitem>
+
+<listitem
+><para
+>Att dubbelklicka markerar ett helt ord. Genom att fortsätta hålla nere musknappen och flytta musen utökas markeringen. </para
+></listitem>
+
+<listitem
+><para
+>Att trippelklicka markerar en hel rad. Genom att fortsätta hålla nere musknappen och flytta musen utökas markeringen. </para
+></listitem>
+
+<listitem
+><para
+>Det finns en dold funktion för formateringen "%d" i fliknamnet. Du kan tala om för Terminal att förkorta ett katalognamn till dess första tecken. Exempelvis kan "/söväg/till/konsole/src" förkortas till "konsole/s". Om du vill aktivera och hantera denna dolda funktion, öppna <filename
+>konsolerc</filename
+> i <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> och lägg till följande rader:</para>
+
+<para
+><programlisting
+>[ProcessInfo]
+CommonDirNames=namn1,namn2,namn3...
+</programlisting>
+
+<note
+><para
+>Om du använder <application
+>Yakuake</application
+>, ska du redigera <filename
+>yakuakerc</filename
+> i <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> istället.</para
+></note>
+
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="commonissues">
+<title
+>Vanliga problem</title>
+<itemizedlist>
+
+<listitem>
+<para
+>Vissa teckensnitt kanske inte är tillgängliga för användning i Terminal, även om de är tillgängliga i andra program. Det betyder inte att det finns ett fel i Terminal. Terminal kräver teckensnitt med fast breddsteg för att tillhandahålla det bästa visuella resultatet, alltså begär programmet att &Qt; bara ska lista teckensnitt med fast breddsteg.</para>
+
+<para
+>Fån och med version 16.08 (augusti 2016) kan Terminal anpassas att tillåta val av vilket teckensnitt som helst, med det förbehållet att visningen kanske inte blir korrekt.</para>
+</listitem>
+
+<listitem
+><para
+>Sedan KDE4 använder alla flikarna samma processidentifierare. Det får sidoeffekten att om processerna under en flik har problem kan alla andra flikar också råka ut för problem. </para>
+<para
+>Det märks mest när ett kommando som ansluter till en extern enhet eller system har problem (ssh, nfs). </para
+></listitem>
+
+<listitem
+><para
+>Terminal behandlar väljare efter väljaren <option
+>-e</option
+> som ett kommando och kör det direkt, istället för att tolka och möjligtvis dela upp det i delkommandon att köra. Det skiljer sig från xterm. </para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem
+><para
+><command
+>konsole -e "kommando1 ; kommando2"</command
+> fungerar inte </para
+></listitem>
+
+    <listitem
+><para
+><command
+>konsole -e $SHELL -c "kommando1 ; kommando2"</command
+> fungerar </para
+></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
+<listitem
+><para
+>Terminal tillhandahåller inte ett bekvämt sätt att köra inloggningsskal, eftersom utvecklare inte tycker om idén att köra inloggningsskal i en terminalemulator. </para>
+<para
+>Användare kan naturligtvis ändå köra inloggningsskal i Terminal om de verkligen behöver göra det. Redigera profilen som används och ändra dess kommando till formen som explicit startar ett inloggningsskal, såsom  "<command
+>bash -l</command
+>" och "<command
+>zsh -l</command
+>". </para>
+</listitem>
+
+<listitem
+><para
+>Väljaren <option
+>--new-tab</option
+> fungerar ibland underligt. Den kan skapa nya fönster, eller kan skapa en ny flik i ett annat befintligt Terminal-fönster istället för det nuvarande Terminal-fönstret. </para>
+<para
+>Beteendet verkar underligt, men är inte nödvändigtvis fel. Väljaren <option
+>--new-tab</option
+> försöker återanvända befintliga Terminal-fönster, men inte alla Terminal-fönster är återanvändbara. Alla Terminal-fönster som har öppnats via Kör program är återanvändbara, medan de flesta Terminal-fönster som öppnats från kommandoraden inte är det. </para>
+</listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title
+>Tack till och Copyright</title>
+
+<para
+>&konsole; underhålls för närvarande av &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>&konsole; underhölls tidigare av &Robert.Knight; &Robert.Knight.mail;  och &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+
+<para
+>Programmet &konsole; Copyright &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
+
+<para
+>Det här dokumentet skrevs ursprungligen av &Jonathan.Singer; &Jonathan.Singer.mail;</para>
+
+<para
+>Det här dokumentet uppdaterades för &kde; 4.x av &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Det här dokumentet uppdaterades för &kde; 3.4 av &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Överfört till DocBook <acronym
+>SGML</acronym
+> av &Mike.McBride; och &Lauri.Watts;</para>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="links">
+<title
+>Länkar</title>
+
+<para
+>För mer information besök gärna följande webbplatser:</para>
+<itemizedlist>
+<listitem
+><para
+><ulink url="https://userbase.kde.org/Konsole"
+>&konsole;s hemsida på &kde;:s användarbas</ulink
+>&nbsp;</para
+></listitem>
+<listitem
+><para
+><ulink url="https://konsole.kde.org/"
+>&konsole;s hemsida</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel"
+>&konsole;s e-postlista</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://freebsd.kde.org/"
+>&kde; på FreeBSD</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://solaris.kde.org/"
+>&kde; på &Solaris;</ulink
+></para
+></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+

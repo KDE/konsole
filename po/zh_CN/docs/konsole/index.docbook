@@ -1,0 +1,3438 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+ "dtd/kdedbx45.dtd" [
+<!ENTITY % Continental-Chinese "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+<!ENTITY Ahmad.Samir '<personname
+><firstname
+>Ahmad</firstname
+><surname
+>Samir</surname
+></personname
+>'>
+<!ENTITY Ahmad.Samir.mail '<email
+>a.samirh78@gmail.com</email
+>'>
+]>
+
+<book id="konsole" lang="&language;">
+
+<bookinfo>
+<title
+>&konsole; 手册</title>
+<authorgroup>
+<author
+>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author
+>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
+
+<othercredit role="developer"
+>&Robert.Knight; &Robert.Knight.mail; </othercredit>
+
+<othercredit role="developer"
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail; </othercredit>
+
+<othercredit role="developer"
+>&Waldo.Bastian; &Waldo.Bastian.mail; </othercredit>
+
+<othercredit role="reviewer"
+>&Mike.McBride; &Mike.McBride.mail; </othercredit>
+
+<author
+><firstname
+>Funda</firstname
+> <surname
+>Wang</surname
+></author
+><author
+><firstname
+>Yunhe</firstname
+> <surname
+>Guo</surname
+></author
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>&Jonathan.Singer;</holder>
+</copyright>
+<copyright>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year
+><year
+>2018</year
+><year
+>2020</year>
+<holder
+>&Kurt.Hindenburg;</holder>
+</copyright>
+
+<copyright>
+    <year
+>2018</year>
+<holder
+>&Ahmad.Samir;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2020-07-02</date>
+<releaseinfo
+>应用版本 20.08</releaseinfo>
+
+<abstract
+><para
+>&konsole; 是 &kde; 的终端模拟器。</para
+></abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>konsole</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>命令</keyword>
+<keyword
+>行</keyword>
+<keyword
+>终端</keyword>
+<keyword
+>cli</keyword>
+</keywordset>
+
+</bookinfo>
+<chapter id="introduction">
+<title
+>介绍</title>
+
+<sect1 id="terminal">
+<title
+>什么是终端？</title>
+
+<para
+>&konsole; 是一个 X 终端模拟器，通常称为终端或者 shell。它通过一个文本窗口来模拟命令行界面。 </para>
+
+<para
+>&konsole; 一般运行一个命令 shell，它执行您输入的命令。&konsole; 运行的 shell 取决于您的帐号设置。请查阅您的操作系统文档来了解什么是 shell，如何配置以及使用它。 </para>
+</sect1>
+
+<sect1 id="scrollback">
+<title
+>回滚</title>
+
+<para
+>&konsole; 使用回滚的概念来让用户查看之前显示的输出。默认情况下，回滚被打开，并且设置为保存在当前屏幕显示的内容之外额外显示 1000 行输出。 </para>
+<para
+>在文本行从上方滚动出屏幕之后，通过将滚动条上移可以再次查看它们。可以使用鼠标滚轮或者使用 <keycombo action="simul"
+>&Shift;<keycap
+>Page Up</keycap
+></keycombo
+> (往回滚)，<keycombo action="simul"
+>&Shift;<keycap
+>Page Down</keycap
+></keycombo
+> (往前滚)，<keycombo action="simul"
+>&Shift;<keycap
+>上箭头</keycap
+></keycombo
+> (往上滚动一行) 以及 <keycombo action="simul"
+>&Shift;<keycap
+>下箭头</keycap
+></keycombo
+> (向下滚动一行) 按键来完成。 </para>
+<para
+>使用 <keycombo action="simul"
+>&Shift;<keycap
+>Page Up/Down</keycap
+></keycombo
+> 滚动的距离可以在半页和一页之间切换，该设置位于配置方案窗口 (可用 <menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>编辑当前配置方案...</guimenuitem
+></menuchoice
+> 打开该窗口) 中的 <guilabel
+>回滚</guilabel
+> 页面。 </para>
+
+</sect1>
+
+<sect1 id="profiles">
+<title
+>配置方案</title>
+<para
+>配置方案使得用户能够迅速且简单地自动化运行各种命令。样例包括： <itemizedlist>
+<listitem
+><para
+>ssh 到另一台计算机</para
+></listitem>
+<listitem
+><para
+>开始一个 irc 会话</para
+></listitem>
+<listitem
+><para
+>使用 tail 来观察一个文件</para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para
+>所有新的和修改过的配置方案都保存在用户的本地主文件夹中，位于 <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+>。</para>
+
+<para
+>建立新配置方案的步骤： <orderedlist>
+<listitem
+><para
+>点击菜单项 <menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>管理配置方案...</guimenuitem
+></menuchoice
+></para
+></listitem>
+
+<listitem
+><para
+>切换到 <guibutton
+>配置文件</guibutton
+> 页面。</para
+></listitem>
+
+<listitem
+><para
+>点击按钮 <guibutton
+>新配置方案...</guibutton
+>。</para
+></listitem>
+
+<listitem
+><para
+>在第一个项目中填入名称。这个名称会出现在菜单中，并且在您新建一个这种类型的会话时会替代 <guilabel
+>Shell</guilabel
+> 作为默认标签显示。 </para
+></listitem>
+
+<listitem
+><para
+>就像您平时打开一个新的 shell 并且输入命令那样，普通地输入您的命令。拿我们的第一个例子来说，您可以输入 <userinput
+><command
+>ssh</command
+> <replaceable
+>administration</replaceable
+></userinput
+>。</para
+></listitem>
+
+<listitem
+><para
+>在这个对话框的另一个页面中可以配置此会话的外观。您可以为每个会话配置不同字体，配色方案，$<envar
+>TERM</envar
+> 类型，以及许多其他设置。</para
+></listitem>
+
+<listitem
+><para
+>点击 <guibutton
+>确定</guibutton
+> 按钮。现在，新会话会出现在 <guilabel
+>管理配置方案...</guilabel
+> 对话框中。 </para
+></listitem>
+
+</orderedlist>
+</para>
+
+<para
+>所有选中了 <guilabel
+>在菜单中显示</guilabel
+> 的配置方案均会以它们的名称出现在 <menuchoice
+><guimenu
+>文件</guimenu
+><guisubmenu
+>新标签页</guisubmenu
+></menuchoice
+> 菜单中。如果只有默认配置方案可显示，那此处不会有次级菜单。 </para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title
+>鼠标按钮</title>
+
+<para
+>本章节按照常见的右手持鼠标的按键顺序来介绍它们的功能。对于左手持鼠标的按键顺序，请在下文中互换左键和右键。 </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><mousebutton
+>左键</mousebutton
+></term>
+
+<listitem
+><para
+>所有 &LMB; 点击会被发给 &konsole; 中运行的支持鼠标的应用程序。如果一个程序会对鼠标点击进行处理，&konsole; 会通过显示一个箭头鼠标来表示。否则的话，会显示一个工字型 (文字输入) 的鼠标。</para>
+
+<para
+>在一个不支持鼠标的应用程序中，在屏幕上按住 &LMB; 并拖拽鼠标会标记一块文字。拖动鼠标时，标记的文字会以反色显示，从而给予视觉反馈。从 <guimenu
+>编辑</guimenu
+> 菜单中选择 <guimenuitem
+>复制</guimenuitem
+> 可将标记的文字复制到剪贴板中，从而在 &konsole; 或者其他程序中使用。选中的文字也可被拖拽到兼容的程序中。按住 &Ctrl; 键，随后将文字拖到想要的位置。</para>
+
+<para
+>一般来说，在每个选中的行的末尾会插入换行符。对于剪切粘帖源代码或者某个命令的输出，这工作得很好。对于一般文本，换行符常常并不重要。人们可能会有另一种偏好：选中的文本会被以一串连续的字符保存，它们将在被粘帖到另一个应用程序中时被重新格式化。要以连续字符模式选择文本，在选择时按住 &Ctrl; 键。</para>
+
+<para
+>在使用 &LMB; 选择文本时同时按住 &Ctrl; 和 &Alt; 键可按照列选择文本。 </para>
+
+<para
+>使用 &LMB; 双击来选择一个词语；三击可以选择整行。</para>
+
+<para
+>如果在标记过程中碰到了文本区域的上下边缘，&konsole; 会向上或向下滚动，显示出历史记录中的文字。当鼠标停止移动时，滚动也停止。</para>
+
+<para
+>松开鼠标后，&konsole; 会通过将选中部分高亮来标记出剪贴板中的文本内容。当剪贴板中的内容变化，或者选中区域的文字变化，或者 &LMB; 点击后，标记区域会变回正常显示。</para>
+
+<para
+>要在一个支持鼠标的程序中标记文字 (例如 Midnight Commander)，标记时可按住 &Shift; 键。</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>中键</mousebutton
+></term>
+
+<listitem
+><para
+>点击 &MMB; 会粘帖当前剪贴板中的文本。按住 &Ctrl; 键再按 &MMB; 时粘帖文本会附带一个换行符。对于快速粘帖命令来说这很方便，但是也有一定的危险性，请谨慎使用。 </para>
+
+<note
+><para
+>如果您的鼠标只有两个按键，同时按下 &LMB; 与 &RMB; 会模拟三键鼠标的 &MMB; 键。</para
+></note>
+
+<para
+>如果您的鼠标有一个 <mousebutton
+>滚轮</mousebutton
+> 作为中键，那么在不支持鼠标的程序中滚动它会移动 &konsole; 的滚动条。</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>右键</mousebutton
+></term>
+<listitem>
+<para
+>当按下 &RMB; 时，菜单中会有这些项目：</para>
+<itemizedlist>
+<listitem
+><para
+><guimenuitem
+>复制</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>粘贴</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>选中文字时，子菜单 <guisubmenu
+>搜索</guisubmenu
+>，其中列出偏好的网络快捷方式，以及一个配置网络快捷方式的选项。</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>打开文件管理器</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>设置编码</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>清除回滚</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>调整回滚...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>显示菜单栏</guimenuitem
+>，当菜单栏隐藏时</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>切换配置方案</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>编辑当前配置方案...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>关闭标签页</guimenuitem
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>在一个支持鼠标的应用程序中，同时按下 &Shift; 键与 &RMB; 来弹出右键菜单。 </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="drag-and-drop">
+<title
+>拖放</title>
+<para
+>如果您将一个文件、目录或 &URL; 拖放到 &konsole; 窗口中，会出现一个包含下列项目的右键菜单： </para>
+<screenshot>
+<screeninfo
+>拖放右键菜单</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>拖放右键菜单</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Shift;</shortcut
+><guimenuitem
+>移动到此处</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>将拖放的项目移动到当前目录。仅当您有权限删除拖放的文件或目录时，该项才会出现。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Ctrl;</shortcut
+><guimenuitem
+>复制到此处</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>复制拖放的项目到当前目录。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;</keycombo
+></shortcut
+><guimenuitem
+>链接到此处</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>在此处建立一个到拖放项目的符号链接。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>粘帖位置</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>将拖放项目的完整路径插入到光标处。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>更换目录到</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>如果您拖放了一个目录，右键菜单中的这个操作让您可以切换当前 &konsole; 会话的工作目录。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Esc;</shortcut
+><guimenuitem
+>取消</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>取消拖放操作。</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>如果您在松开 &LMB; 前按下快捷键，那么不会有右键菜单出现，操作会被立即执行。 </para>
+
+<para
+>如果您想使用 &Ctrl; 键来进行拖放操作，或者禁用右键菜单来默认以文本方式插入 &URL;，在配置方案设置对话框的 <guilabel
+>鼠标</guilabel
+>页面中启用对应选项即可。 </para>
+
+</sect1>
+
+</chapter>
+
+<chapter id="commandreference">
+<title
+>命令参考</title>
+
+<sect1 id="menubar">
+<title
+>菜单栏</title>
+
+<para
+>菜单栏位于 &konsole; 窗口顶部。如果菜单栏被隐藏了，那么可以通过在窗口中 <mousebutton
+>右键</mousebutton
+> 点击来 <guimenuitem
+>显示菜单栏</guimenuitem
+> (只要这时候窗口中没有运行全屏程序，例如 vi，minicom 等)。默认快捷键在每个菜单项后面显示。 </para>
+<para
+>另一方面，您也可以使用 <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+> 来显示或隐藏菜单栏。 </para>
+<sect2 id="file-menu">
+<title
+>文件菜单</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>文件</guimenu
+><guimenuitem
+>新窗口</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>用默认配置方案打开一个新 &konsole; 窗口</action>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>文件</guimenu
+><guimenuitem
+>新标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>用默认配置方案打开一个新标签</action>
+<note
+><para
+>&konsole; 自带一个默认配置方案。所有用户添加的新配置方案都会在子菜单中列出。如果只有默认配置方案需要显示，那就不会有子菜单。 </para
+></note>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>文件</guimenu
+> <guimenuitem
+>复制标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>尝试在一个新标签中复制当前标签</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>文件</guimenu
+> <guimenuitem
+>输出保存为...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将当前的回滚内容保存为文本文件或 html 文件</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>文件</guimenu
+> <guimenuitem
+>打印屏幕 ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打印当前屏幕。</action
+> 默认情况下，输出会缩放到打印用的纸张大小，文字为黑色，没有背景。在打印对话框中，这些选项均可在 <guilabel
+>输出选项</guilabel
+> 页面中改变。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>文件</guimenu
+> <guimenuitem
+>打开文件管理器</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>在当前目录打开 &kde; 的文件管理器</action
+>。默认情况下，会使用 <ulink url="help:/dolphin/index.html"
+>&dolphin;</ulink
+>。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>文件</guimenu
+> <guimenuitem
+>关闭标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>关闭当前标签</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>文件</guimenu
+> <guimenuitem
+>关闭窗口</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>退出 &konsole;</action
+></para>
+<note
+><para
+>如果打开了超过一个标签，&konsole; 会显示一个确认窗口。通过点击 <guibutton
+>不再询问</guibutton
+> 复选框可以禁用此对话框。 </para>
+<para
+>如果您想要再次启用这个确认对话框，删除 <filename
+>$<envar
+>XDG_CONFIG_HOME</envar
+>/konsolerc</filename
+> 中的 <screen
+>[Notification Messages] CloseAllTabs=true</screen
+> 项目。 </para>
+</note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>编辑菜单</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+> <guimenuitem
+>复制</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将选中文字复制到剪贴板</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>V</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+><guimenuitem
+>粘帖</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>从剪贴板中将文字粘帖到当前光标位置</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>编辑</guimenu
+><guimenuitem
+>全部选择</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>选中所有</action
+> 当前窗口中的文本 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>编辑</guimenu
+><guisubmenu
+>输入复制到</guisubmenu
+><guimenuitem
+>当前窗口内的全部标签</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将当前会话中的输入同时发送给当前窗口中的所有会话</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+><guisubmenu
+>输入复制到</guisubmenu
+><guimenuitem
+>选择标签...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将当前会话中的输入同时发送给用户选择的其他会话</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+><guisubmenu
+>输入复制到</guisubmenu
+><guimenuitem
+>无</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>不将当前会话的输入发送到其他会话</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>编辑</guimenu
+> <guisubmenu
+>发送信号</guisubmenu
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将指定信号发送给新会话建立时创建的 shell 进程或者其他进程</action
+>。</para
+><para
+>目前支持的信号有：</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>暂停进程</entry>
+</row>
+<row>
+<entry
+><errorcode
+>CONT</errorcode
+></entry>
+<entry
+>恢复，如果已暂停</entry>
+</row>
+<row>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>在控制终端中检测到了挂起事件，或者控制进程已死亡</entry>
+</row>
+<row>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>来自键盘的中断</entry>
+</row>
+<row>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>终止信号</entry>
+</row>
+<row>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>杀信号</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>用户信号1</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>用户信号2</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para
+>您可通过使用命令 <userinput
+><command
+>man</command
+> <option
+>7 signal</option
+></userinput
+> 来参照系统的手册页，获得详细信息。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+><guimenuitem
+>配置标签页设置...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打开对话框，更改名称格式，远程标签页标题格式以及当前标签页颜色</action
+> (<link linkend="configure-tab-settings-dialog"
+>更多信息</link
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+><guimenuitem
+>ZModem 上传...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>如果安装了必需的软件的话，打开一个对话框，其中可以选择一个文件进行上传</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+><guimenuitem
+>查找...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>在 &konsole; 窗口的底端显示一个搜索条 </action
+></para>
+<para
+>用它可以进行各种搜索，例如大小写敏感的，向前或向后的，以及使用正则表达式的。</para>
+</listitem>
+</varlistentry>
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch
+-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+><guimenuitem
+>查找下一个</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>移动到下一个搜索结果</action
+>。如果焦点在搜索框，您也可以使用快捷键 &Enter;。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Shift;<keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>编辑</guimenu
+><guimenuitem
+>查找上一个</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>移动到上一个搜索结果</action
+>。如果焦点在搜索条，您也可以使用快捷键 <keycombo action="simul"
+>&Shift;&Enter;</keycombo
+>。</para
+></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>视图菜单</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guisubmenu
+>拆分视图</guisubmenu
+><guimenuitem
+>左右拆分标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>将所有标签拆分为左右视图</action>
+</para
+><para
+>在一个视图中的所有输出会被重现于另一个视图。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guisubmenu
+>拆分视图</guisubmenu
+><guimenuitem
+>上下拆分标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>将所有标签拆分为上下视图</action>
+</para
+><para
+>在一个视图中的所有输出会被重现于另一个视图。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>X</keycap
+></keycombo
+></shortcut
+> <guimenu
+>视图</guimenu
+><guisubmenu
+>拆分视图</guisubmenu
+><guimenuitem
+>关闭活动</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>关闭当前视图</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guisubmenu
+>拆分视图</guisubmenu
+><guimenuitem
+>关闭其它标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>关闭所有其他视图</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guisubmenu
+>拆分视图</guisubmenu
+><guimenuitem
+>展开标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>使当前的视图扩大</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guisubmenu
+>拆分视图</guisubmenu
+><guimenuitem
+>卷起标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>使当前的视图缩小</action>
+</para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>视图</guimenu
+><guimenuitem
+>拆分当前标签</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>在一个新窗口中打开当前标签</action>
+</para
+><para
+>退出上一个 &konsole; 窗口不会影响新创建的窗口。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>视图</guimenu
+><guimenuitem
+>拆分当前视图</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>在单独的窗口中打开当前的拆分视图</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guimenuitem
+>静止状态监视器</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>切换是否监视当前标签缺乏活动的状态</action>
+</para
+><para
+>默认来说，在10秒钟没有活动之后，一个信息图标会显示在这个会话的标签上。警告类型可以通过 <menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>配置通知</guimenuitem
+><guimenuitem
+>被监视会话中的缄默</guimenuitem
+></menuchoice
+> 改变。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guimenuitem
+>活动状态监视器</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>切换是否监视当前标签有活动</action>
+</para
+><para
+>只要有任何活动，一个信息图标会显示在这个会话的标签上。警告类型可以通过 <menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>配置通知</guimenuitem
+><guimenuitem
+>被监视会话中的活动</guimenuitem
+></menuchoice
+> 改变。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>视图</guimenu
+><guimenuitem
+>监视进程完成</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打开/关闭当前标签页进程完成的监视</action
+>。 </para
+><para
+>如果选中，当前进程完成时，&konsole;会显示通知<guilabel
+>进程“<replaceable
+>进程名称</replaceable
+>”已完成于会话“<replaceable
+>会话名称</replaceable
+>”</guilabel
+>。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>视图</guimenu
+><guimenuitem
+>只读</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将会话切换为只读：不接受任何输入，禁用拖放。 </action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guimenuitem
+>放大字体</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>增大字体大小</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>0</keycap
+></keycombo
+></shortcut
+> <guimenu
+>视图</guimenu
+><guimenuitem
+>重置字体大小</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将文本字体大小重置为配置方案默认值</action
+></para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guimenuitem
+>缩小字体</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>减小字体大小</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>查看</guimenu
+> <guimenuitem
+>设定编码</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>设置字符编码</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>查看</guimenu
+><guimenuitem
+>清除回滚</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>清除回滚中的文字</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>K</keycap
+></keycombo
+></shortcut
+> <guimenu
+>查看</guimenu
+><guimenuitem
+>清除回滚并重置</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>清除回滚中的文字，并且重置终端</action
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>书签菜单</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>书签</guimenu
+><guimenuitem
+>添加书签</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>添加当前位置</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>书签</guimenu
+><guimenuitem
+>将标签添加为书签文件夹...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将所有标签添加为一个书签文件夹</action>
+</para
+><para
+>会出现一个对话框来请求文件夹名。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>书签</guimenu
+><guimenuitem
+>新建书签文件夹...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>在书签列表中添加一个新文件夹</action>
+</para
+><para
+>会出现一个对话框来请求文件夹名。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>书签</guimenu
+><guimenuitem
+>编辑书签</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打开书签编辑器</action
+></para>
+<note
+><para
+>必须安装 keditbookmarks 程序，此菜单项才能显示。</para>
+<para
+>您可以使用书签编辑器来手动添加 URL。目前，&konsole; 接受以下这些： <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://user@host:port</para
+></listitem>
+<listitem
+><para
+>telnet://user@host:port</para
+></listitem>
+</itemizedlist>
+</para
+></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>设置菜单</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>编辑当前方案...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打开一个可编辑当前配置方案的对话框</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>切换配置方案</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>将当前配置方案切换为列出的配置方案之一</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>管理配置方案...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打开一个管理配置方案的对话框</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>设置</guimenu
+><guimenuitem
+>显示菜单栏</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>切换菜单栏是否可见</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F11</keycap
+></shortcut
+> <guimenu
+>设置</guimenu
+><guimenuitem
+>全屏模式</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>切换 &konsole; 是否占满整个屏幕</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>配置快捷键...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打开键盘快捷键编辑器。</action
+> 关于快捷键配置的更多信息可参见 <ulink url="help:/fundamentals/shortcuts.html"
+>&kde; 基础</ulink
+>.</para>
+
+<para
+>另外，&konsole; 还有一些特别的快捷方式，它们没有对应的菜单项：</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>快捷键</entry>
+<entry
+>说明</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>右</keysym
+></keycombo
+></entry>
+<entry
+>下一个标签</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>左</keysym
+></keycombo
+></entry>
+<entry
+>上一个标签</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>左</keysym
+></keycombo
+></entry>
+<entry
+>向左移动标签</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>右</keysym
+></keycombo
+></entry>
+<entry
+>向右移动标签</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>插入</keysym
+></keycombo
+></entry>
+<entry
+>粘贴选中内容</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;&Tab;</keycombo
+></entry>
+<entry
+>下一视图容器</entry
+> <!--FIXME what is this:yurchor container widget which holds views-->
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>配置通知...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打开通知编辑器</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>配置 &konsole;...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>打开 &konsole; 设置编辑器</action
+></para>
+<para
+>此对话框控制 &konsole; 窗口的外观和行为。 </para>
+<itemizedlist>
+    <listitem>
+        <para
+><guilabel
+>常规</guilabel
+>页面配置菜单栏可见性，记住 &konsole; 窗口大小，单进程运行所有 &konsole; 窗口，启用菜单加速器，在标题栏显示窗口标题，移除窗口标题栏和边框。您也可以配置搜索大小写敏感，正则表达式用法，高亮所有匹配项，和搜索方向 (默认<guilabel
+>向后搜索</guilabel
+>)。<guilabel
+>常规</guilabel
+>页面也是您重新<guibutton
+>启用所有“不再询问”消息</guibutton
+>的地方。 </para>
+    </listitem>
+    <listitem>
+        <para
+><guilabel
+>配置方案</guilabel
+>页面用于创建和管理<link linkend="profiles"
+>配置方案</link
+>。 </para>
+    </listitem>
+    <listitem>
+        <para
+><guilabel
+>标签栏/分割器</guilabel
+>页面可以配置标签栏的可见性和位置，定义标签页行为并调整标签页按钮选项。您可以配置<guilabel
+>显示“新建标签页”按钮</guilabel
+>和<guilabel
+>扩展单个标签页宽度到整个窗口</guilabel
+>，或<guilabel
+>使用用户自定义样式表</guilabel
+>。<guilabel
+>行为</guilabel
+>标签页可以定义新建标签页的位置 (<guilabel
+>末尾</guilabel
+>或<guilabel
+>当前标签页之后</guilabel
+>) 以及&MMB;点击关闭标签页。 </para>
+        <para
+>您也可以用此配置页中的<guilabel
+>拆分</guilabel
+>标签页来配置分离头的可见性 (<guilabel
+>需要时</guilabel
+> (默认), <guilabel
+>总是</guilabel
+> 或 <guilabel
+>从不</guilabel
+>)以及定义拖动柄大小 (<guilabel
+>小</guilabel
+> (默认), <guilabel
+>中</guilabel
+> 或 <guilabel
+>大</guilabel
+>)。 </para>
+    </listitem>
+    <listitem>
+        <para
+><guilabel
+>临时文件</guilabel
+>页面定义<link linkend="scrollback"
+>回滚</link
+>文件保存位置。 </para>
+    </listitem>
+    <listitem>
+        <para
+><guilabel
+>缩略图</guilabel
+>页面定义缩略图尺寸和激活选项 (您可以选择 &Shift;, &Alt; 和 &Ctrl; 作为激活键)。 </para>
+        <note>
+            <para
+>要使用缩略图功能在鼠标悬停于图像文件时显示弹出缩略图，您需要在当前配置文件中启用文件下划线：<menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>编辑当前配置文件...</guimenuitem
+><guimenuitem
+>鼠标</guimenuitem
+><guimenuitem
+>杂项</guimenuitem
+><guimenuitem
+>文件下划线</guimenuitem
+></menuchoice
+>。 </para>
+        </note>
+    </listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title
+>帮助菜单</title>
+<para
+>&konsole; 具有一些常见的 &kde; <guimenu
+>帮助</guimenu
+> 菜单项，有关详细信息，请参阅 &kde; 基础知识的 <ulink url="help:/fundamentals/menus.html#menus-help"
+>帮助菜单</ulink
+> 一节。 </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+</sect2>
+
+</sect1>
+
+<sect1 id="console-dialogs">
+<title
+>&konsole; 对话框</title>
+
+<sect2 id="configure-tab-settings-dialog">
+<title
+>配置标签页对话框</title>
+
+<para
+>当前标签页的名称格式，远程标签页标题格式和颜色，都可以在对话框中更改。可以通过菜单、快捷键 <keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+> 或者双击标签栏中的一个标签来打开这个对话框。这些改动是临时的，但通过编辑当前配置方案，可以成为永久改动。 </para>
+
+<para
+>对本地标签，&konsole; 会替换这些变量： </para>
+<itemizedlist mark="opencircle">
+<listitem
+><para
+>%n : 程序名称</para
+></listitem>
+<listitem
+><para
+>%d : 当前目录 (短)</para
+></listitem>
+<listitem
+><para
+>%D : 当前目录 (长)</para
+></listitem>
+<listitem
+><para
+>%h : 本地主机 (短)</para
+></listitem>
+<listitem
+><para
+>%u : 用户名</para
+></listitem>
+<listitem
+><para
+>%B：用户的 Bourne 提示符签名($=普通用户，#=超级用户)</para
+></listitem>
+<listitem
+><para
+>%w : shell 设置的窗口标题</para
+></listitem>
+<listitem
+><para
+>%#：会话编号</para
+></listitem>
+</itemizedlist>
+
+<para
+>对远程标签，&konsole; 会替换这些变量： <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c︰当前程序</para
+></listitem>
+    <listitem
+><para
+>%h︰远程主机 (短)</para
+></listitem>
+    <listitem
+><para
+>%H︰远程主机 (长)</para
+></listitem>
+    <listitem
+><para
+>%u : 用户名</para
+></listitem>
+    <listitem
+><para
+>%U：用户名@ (如果给定的话)</para
+></listitem>
+    <listitem
+><para
+>%w : shell 设置的窗口标题</para
+></listitem>
+    <listitem
+><para
+>%#：会话编号</para
+></listitem>
+</itemizedlist>
+
+</para>
+<para
+>样例： <itemizedlist mark="opencircle">
+
+<listitem
+><para
+><userinput
+>%d : %n</userinput
+> 如果 /usr/src 是当前目录，并且正在运行 <application
+>bash</application
+>，那会显示 <guibutton
+>src : bash</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%D : %n</userinput
+> 如果 /usr/src 是当前目录，并且正在运行<application
+>top</application
+>，那会显示 <guibutton
+>/usr/src : top</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%w (%#)</userinput
+> 如果当前目录是 ~ ，并且正在第一个标签运行 <application
+>vim</application
+>，那会显示 <guibutton
+>[No Name] (~) - VIM(1)</guibutton
+> </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect2>
+
+<sect2 id="copy-input-dialog">
+<title
+>复制输入对话框</title>
+
+<para
+>在一个标签中输入的文字可以同时发送给其他标签。这个对话框使您可以选择哪些标签应该接受这些输入。当前标签会被标记为灰色。 </para>
+
+</sect2>
+
+<sect2 id="scrollback-options-dialog">
+<title
+>调整回滚对话框</title>
+
+<para
+><link linkend="scrollback"
+>回滚</link
+> 的历史大小可在此对话框修改。所有改动仅对当前标签有效，并且不会被保存到配置方案中。 </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title
+>命令行选项</title>
+
+<para
+>当从命令行启动 &konsole; 时，可以指定各种选项来改变它的行为。</para>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--帮助</option
+></term>
+<listitem
+><para
+><action
+>列出各种选项</action
+>。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--profile</option
+> <parameter
+>文件</parameter
+></term>
+<listitem
+><para
+>使用指定配置方案 <action
+>启动 &konsole;</action
+>，而不是默认配置方案。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fallback-profile</option
+></term>
+<listitem
+><para
+>使用内部的 FALLBACK (默认) 配置方案。这个选项是 <option
+>--profile</option
+> <parameter
+>FALLBACK/</parameter
+> 的一个缩略版。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--workdir</option
+> <parameter
+>目录</parameter
+></term>
+<listitem
+><para
+><action
+>启动时使用</action
+> <parameter
+>目录</parameter
+> 作为初始工作目录。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hold, --noclose</option
+></term>
+<listitem
+><para
+>在其结束时<action
+>不要关闭</action
+>初始会话。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--new-tab</option
+></term>
+<listitem
+><para
+>在现有窗口中 <action
+>建立一个新标签</action
+>，而不是建立一个新窗口。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--tabs-from-file </option
+><parameter
+>文件</parameter
+></term>
+<listitem
+><para
+>根据给定的标签配置文件 <action
+>建立标签</action
+>。 </para>
+<note
+><para
+>这个文件每行指定一个标签，格式为：</para>
+<para
+>每行指定一个需要打开的标签，最多用4个域来指定如何打开它。域之间使用 <userinput
+>;;</userinput
+> 分隔，每个域名后面必须附带有一个 <userinput
+>:</userinput
+>。空行以及用 <userinput
+>#</userinput
+> 开头的行会被忽略，因此您可以通过使用 <userinput
+>#</userinput
+> 开头的行来添加注释。 </para>
+
+<simplelist>
+<member
+><userinput
+>title:</userinput
+> 标签名字，如果没指定或者为空的话会使用默认值</member>
+<member
+><userinput
+>workdir:</userinput
+> 工作目录，如果为空或没指定那会使用 <filename class="directory"
+> ~</filename
+></member>
+<member
+><userinput
+>profile:</userinput
+> 要使用的 &konsole; 配置方案，如果为空或者未指定那会使用默认值</member>
+<member
+><userinput
+>command:</userinput
+> 要运行的命令</member>
+</simplelist>
+<para
+>每行应至少包含 <userinput
+>command</userinput
+> 或 <userinput
+>profile</userinput
+> 域的其中之一。 </para>
+<para
+>例如：<userinput
+>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput
+></para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--background-mode</option
+></term>
+<listitem
+><para
+>在后台<action
+>启动 &konsole;</action
+>，并在<keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F12</keycap
+></keycombo
+> (默认设置) 按下时将其移到前台。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--separate</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+>在一个独立进程中<action
+>运行</action
+> &konsole; 的新实例。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-menubar</option
+></term>
+<listitem
+><para
+><action
+>显示</action
+>菜单栏，覆盖默认行为。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-menubar</option
+></term>
+<listitem
+><para
+><action
+>隐藏</action
+>菜单栏，覆盖默认行为。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-tabbar</option
+></term>
+<listitem
+><para
+><action
+>显示</action
+>标签栏，覆盖默认行为。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-tabbar</option
+></term>
+<listitem
+><para
+><action
+>隐藏</action
+>标签栏，覆盖默认行为。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fullscreen</option
+></term>
+<listitem
+><para
+><action
+>以全屏模式启动 &konsole;</action
+>。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--notransparency</option
+></term>
+<listitem
+><para
+><action
+>禁用</action
+>半透明背景，即使系统支持它。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profiles</option
+></term>
+<listitem
+><para
+><action
+>列出</action
+>所有可用配置方案。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profile-properties</option
+></term>
+<listitem>
+<para
+><action
+>列出</action
+>所有可用属性的名字和类型。参见选项 <option
+>-p</option
+>。 </para>
+<para
+>详情请访问 <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
+>&konsole; 接口参考</ulink
+>。 </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-p</option
+> <parameter
+>属性=值</parameter
+></term>
+<listitem
+><para
+><action
+>改变</action
+>一个配置方案属性的值。</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>命令</parameter
+></term>
+<listitem
+><para
+><action
+>执行</action
+> <parameter
+>命令</parameter
+>而不是默认 shell。</para>
+<note
+><para
+>这个选项会捕获所有在它之后传给 &konsole; 的参数，并且将它们作为一个 <parameter
+>命令</parameter
+> 执行。因此，该参数应作为最后一个参数指定。</para
+></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>&konsole; 也接受一般的 &Qt; 和 &kf5-full; 选项，参见手册页面 qt5options 和 kf5options。</para>
+
+</chapter>
+
+<chapter id="scripting">
+<title
+>&konsole; 脚本编程</title>
+
+<para
+>&konsole; 支持若干可以通过 &DBus; 进行的操作。 </para>
+<para
+>有两种使用 &DBus; 接口的方法：&Qt; 的 &GUI; 工具 <application
+>qdbusviewer</application
+> 以及命令行的 <application
+>qdbus</application
+>。 </para>
+
+<para
+>样例： <itemizedlist mark='opencircle'>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> 会显示所有可用服务。 </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole</option
+> 会显示 &konsole; 的 &DBus; 接口。 </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+> 会显示可用于控制窗口1的方法。 </para>
+</listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+> 会显示可用于控制当前窗口的方法。 </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+> 会显示可用于控制会话1的方法。 </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+> 会显示可用于控制当前会话的方法。 </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+> 会显示可用于控制当前 &konsole; 会话的方法。 </para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>如果以上任意一个命令输出：Service 'org.kde.konsole' does not exist，将 <option
+>org.kde.konsole</option
+> 改为以下某个： <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (会选择第一个进程号) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (这可以在当前 &konsole; 使用) </para
+></listitem>
+<listitem
+><para>
+<option
+>从 'qdbus | grep konsole' 的输出中选择一个</option>
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>如需更多信息，请访问 <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>&DBus; 向导</ulink
+>。 </para>
+
+</chapter>
+
+<chapter id="key-bindings">
+<title
+>终端按键绑定</title>
+
+<sect1>
+<title
+>&konsole; 如何使用按键绑定</title>
+
+<sect2 id="intro">
+<title
+>介绍</title>
+<para
+>&konsole; 使用 *.keytab 文件将组合键转换为控制字符和转义序列，这些字符和转义序列将发送到 shell 或在 shell 中运行的交互式程序(通常是使用备用屏幕缓冲区的程序，例如：<application
+>vim</application
+>、<application
+>less</application
+>、<application
+>screen</application
+>)。</para>
+
+<para
+>用户可以使用按键绑定编辑器自定义 &konsole; 中的按键绑定设置。可以将组合键配置为向终端发送特定的控制或转义序列。</para>
+
+<para
+>您可以从菜单项 <menuchoice
+><guimenu
+>设置</guimenu
+><guimenuitem
+>编辑当前配置方案</guimenuitem
+></menuchoice
+> 打开按键绑定编辑器，然后转到 <guilabel
+>键盘</guilabel
+> 选项卡。列出了 &konsole; 默认情况下附带的按键绑定模式。</para>
+</sect2>
+
+<sect2 id="table-fields">
+<title
+>组合键和模式</title>
+
+<para
+>组合键遵循以下模式： <programlisting
+>按键(+|-)模式</programlisting>
+</para>
+
+<para
+>例如： <programlisting
+>Up+Shift+AppScreen
+Down+Shift-AppScreen
+Space+Ctrl
+</programlisting>
+</para>
+
+<para
+>按键名在 qnampace.h 头文件中定义，删除了 <quote
+>qt::KEY_</quote
+> 前缀，有关键名的列表，请查看 <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum"
+>&Qt; 文档中的 Qt::Key 枚举</ulink
+>。</para>
+
+<para
+>模式名称前面的 <quote
+>+</quote
+> 表示模式是 <emphasis
+>设置</emphasis
+>；对于修改键，这意味着按下了它，而对于所有其他模式，它意味着特定模式正在生效(&ie; 活动)。例如：<quote
+>+Ctrl</quote
+> 表示组合键只有在按下&Ctrl; 键时才起作用。</para>
+
+<para
+>模式名称前面的 <quote
+>-</quote
+> 表示模式是 <emphasis
+>重置</emphasis
+>；基本上这与将 <quote
+>+</quote
+> 放在模式名称之前是相反的，因此对于修饰键而言，这意味着该键没有被按下，而对于所有其他模式，这意味着特定模式处于非活动状态。例如：<quote
+>-Ctrl</quote
+> 表示只有在未按下 &Ctrl; 键 <emphasis
+>not</emphasis
+> 时，组合键才有效。</para>
+
+<note>
+<para
+>如果组合键中不存在模式名称，则忽略其状态。</para>
+</note>
+
+<para
+>下面列出了支持的按键绑定模式：</para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Alt, Ctrl, Shift</term>
+<listitem>
+<para
+>可以在组合键中使用这些模式中的一个或多个，如果设置了其中任何一个，则组合键将分别使用该修改键；如果重置，则反之亦然</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>任意修饰符</term>
+<listitem>
+<para
+>如果设置了此模式，则组合键使用任何修改键(前三个修改键中的任意一个)；如果重置，则反之亦然</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ansi</term>
+<listitem>
+<para
+>如果设置了此模式，&konsole; 将发送 ANSI 转义和控制序列</para>
+<para
+>如果重置此模式，&konsole; 将发送 VT52 转义和控制序列</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>应用程序屏幕</term>
+<listitem>
+<para
+>如果设置了此模式，则组合键将仅影响使用备用屏幕缓冲区的交互式程序</para>
+<para
+>如果重置此模式，则组合键只会在终端使用正常屏幕缓冲区时影响终端</para>
+
+<note>
+<para
+>&konsole; 使用两个屏幕缓冲区：</para>
+<itemizedlist>
+<listitem>
+<para
+>正常屏幕缓冲区(默认)：允许您向后滚动以查看前面的输出行，这是您通常用来执行命令的默认缓冲区... &etc;</para>
+</listitem>
+<listitem>
+<para
+>备用屏幕缓冲区：当您运行交互程序时，终端切换到此缓冲区(例如：<application
+>less</application
+>、<application
+>vim</application
+>、<application
+>screen</application
+>、<application
+>tmux</application
+>.&etc;)</para>
+</listitem>
+</itemizedlist>
+</note>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>键盘</term>
+<listitem>
+<para
+>如果设置了此模式，则组合键使用键盘(数字键盘)上的键。此模式对于区分键盘上的键和小键盘上的键很有用。例如，当 Num Lock 设置为 <emphasis
+>on</emphasis
+> 时，您可以配置两个单独的键组合，一个使用键盘上标记为 <quote
+>1</quote
+> 的键(通常在 <keycap
+>F1</keycap
+> 键下)，另一个使用键盘上标记为 <quote
+>1</quote
+> 的键。同样的概念也适用当键盘上的 End、Home、光标键...等的 Num Lock <emphasis
+>OFF</emphasis
+> 时，</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>应用程序光标按键</term>
+<listitem>
+<para
+>此模式实现 VT100 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
+>光标按键模式(DECCKM)</ulink
+>。它控制每个光标键(<keycap
+>上</keycap
+>、<keycap
+>下</keycap
+>、<keycap
+>右</keycap
+>、<keycap
+>左</keycap
+>)发送的转义序列，具体取决于此模式是设置还是重置</para>
+<para
+>默认情况下，&konsole; 遵循 XTerm 行为，将 <keycap
+>Home</keycap
+> 和 <keycap
+>End</keycap
+> 键视为相对于 DECCKM 的光标键</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>应用程序键盘</term>
+<listitem>
+<para
+>如果设置了此模式，则组合键仅在键盘处于应用程序模式(DECKPAM)时才起作用</para>
+<para
+>如果重置此模式，则组合键仅在键盘处于数字模式(DECKPNM)时有效</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>换行</term>
+<listitem>
+<para
+>如果设置了此模式，键盘上的 <keycap
+>Return</keycap
+> (Enter)键将同时发送回车符 "\r" 和换行符 "\n"</para>
+<para
+>如果重置此模式，<keycap
+>Return</keycap
+> 键将仅发送回车符 "\r"</para>
+<para
+>这同样适用于键盘上的 <keycap
+>Enter</keycap
+> 键</para>
+<para
+>此模式模拟 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
+>LNM - 换行/新建行模式</ulink
+></para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>请注意，键和模式(设置/重置)的每个组合必须是唯一的。例如，考虑以下两条规则：</para>
+
+<itemizedlist>
+<listitem
+><para
+>A+Shift : <quote
+>A</quote
+></para
+></listitem>
+<listitem
+><para
+>a : <quote
+>a</quote
+></para
+></listitem>
+</itemizedlist>
+<para
+>&konsole; 如果 <emphasis
+>not</emphasis
+> 接受小写字母 <quote
+>a</quote
+> 规则，则必须向该规则添加 <quote
+>-Shift</quote
+> 才能使其工作。</para>
+</sect2>
+
+<sect2 id="output-field">
+<title
+>输出字段</title>
+
+<para
+>在输出字段中，您可以添加您希望 &konsole; 在相关组合键被按下时发送到终端的转义序列或控制字符。</para>
+
+<para
+>您还可以使用以下任意关键字，每个关键字在 &konsole; 中都有特殊含义：</para>
+
+<itemizedlist>
+<listitem
+><para
+>向上滚动行：在 shell 历史回滚缓冲区中向上滚动一行</para
+></listitem>
+<listitem
+><para
+>向上滚动页面：在 shell 历史回滚缓冲区中向上滚动一页</para
+></listitem>
+<listitem
+><para
+>向下滚动行：向下滚动 shell 历史回滚缓冲区中的一行</para
+></listitem>
+<listitem
+><para
+>向下滚动页面：在 shell 历史回滚缓冲区中向下滚动一页</para
+></listitem>
+<listitem
+><para
+>向上滚动到顶部：向上滚动到 shell 历史回滚缓冲区的开头</para
+></listitem>
+<listitem
+><para
+>向下滚动到底部：向下滚动到 shell 历史回滚缓冲区的末尾</para
+></listitem>
+</itemizedlist>
+
+<para
+>您还可以将字符串与 C 字符串语法一起使用；您可以使用以下转义序列：</para>
+
+<itemizedlist>
+<listitem
+><para
+>\E ：转义</para
+></listitem>
+<listitem
+><para
+>\\ : 反斜线</para
+></listitem>
+<listitem
+><para
+>\" : 双引号</para
+></listitem>
+<listitem
+><para
+>\t ：制表符</para
+></listitem>
+<listitem
+><para
+>\r ：回车</para
+></listitem>
+<listitem
+><para
+>\n ：换行</para
+></listitem>
+<listitem
+><para
+>\b ：退格键</para
+></listitem>
+<listitem>
+<para
+>\xHH ：其中 HH 是两个十六进制数字</para>
+<tip>
+<para
+>这可用于发送 &ASCII; 控制字符，&eg; <quote
+>\x00</quote
+> 它是 NUL 字符</para>
+</tip>
+</listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="other-factors">
+<title
+>其他系统资源</title>
+<para
+>还有其他可能影响终端按键绑定的系统资源：</para>
+<itemizedlist>
+<listitem>
+<para
+>有关每个键组合应该发送的预期转义序列和控制字符，请查阅 <ulink url="man:terminfo(5)"
+>终端信息</ulink
+> 或 <ulink url="man:termcap(5)"
+>termcap</ulink
+> 数据库。</para>
+</listitem>
+<listitem>
+<para
+>您的系统可能还有其他也必须同步的键盘数据库(&eg; <ulink url="man:bash(1)"
+>/etc/inputrc 和 readline</ulink
+> 对于 <application
+>BASH shell</application
+>)，因为它们会影响绑定到组合键的操作(交互)。</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="further-reading">
+<title
+>进一步阅读</title>
+<para
+>有关转义序列和控制字符的详细信息，请查看以下文档：</para>
+<itemizedlist>
+<listitem>
+<para
+><ulink url="https://www.vt100.net/docs/vt100-ug/"
+>VT100 用户指南</ulink
+></para>
+</listitem>
+<listitem>
+<para
+><ulink url="https://vt100.net/docs/vt102-ug/"
+>VT102 用户指南</ulink
+></para>
+</listitem>
+<listitem>
+<para
+>全面且不可或缺的 <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html"
+>XTerm 控件序列</ulink
+> 文档</para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title
+>在标签栏使用样式表</title>
+<para
+>标签栏的默认样式表设定了标签的最小和最大宽度。用户可以建立一个 <filename role="extension"
+>.css</filename
+> 文件，并且让 &konsole; 用它作为标签栏的样式表。在这个 <filename role="extension"
+>.css</filename
+> 文件中，应指定 <userinput
+>QTabBar::tab</userinput
+> 控件。 </para>
+<para
+>如需了解更多信息，您可阅读 <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
+>&Qt; 样式表</ulink
+> </para>
+
+<para
+>样例： </para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>将选择标签的背景色改为亮灰色 <programlisting
+>QTabBar::tab:selected {
+    background: #999999
+}
+</programlisting>
+</para
+></listitem>
+
+
+<listitem
+><para
+>改变选中标签的文字颜色为红色 <programlisting
+>QTabBar::tab:selected {
+    color: red
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>所有标签都至少有 200 像素宽 <programlisting
+>QTabBar::tab {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>仅当前标签会有至少 200 像素宽 <programlisting
+>QTabBar::tab::selected {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>任意这些都可以被合并到一个文件中 <programlisting
+>QTabBar::tab::selected {
+    background: #999999;
+    color: red;
+    min-width: 200px;
+}
+QTabBar::tab {
+    min-width: 100px
+}
+</programlisting>
+</para
+></listitem>
+
+
+</itemizedlist>
+</para>
+
+</chapter>
+
+<chapter id="faqtips">
+<title
+>您知道吗？，常见问题及其他</title>
+
+<sect1 id="didyouknow">
+<title
+>您知道吗？</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>选择文本时按住 &Ctrl;，可使换行符在粘帖时被转化为空格。 </para
+></listitem>
+
+<listitem
+><para
+>选择文本时按住 <keycombo action="simul"
+>&Ctrl;&Alt;</keycombo
+> 会以列来选择。 </para
+></listitem>
+
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;<mousebutton
+>滚轮</mousebutton
+></keycombo
+> 的组合会缩放文字大小，就像 konqueror 和 firefox 中一样。 </para
+></listitem>
+
+<listitem
+><para
+>如果一个程序会处理任意鼠标操作，按住 &Shift; 键可让您有机会打开弹出菜单。 </para
+></listitem>
+
+<listitem
+><para
+>快捷键 <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F10</keycap
+></keycombo
+> 会激活菜单。 </para
+></listitem>
+
+<listitem
+><para
+>快捷键 <keycombo action="simul"
+>&Shift;<keycap
+>Insert</keycap
+></keycombo
+> 会粘帖剪贴板内容。 </para
+></listitem>
+
+<listitem
+><para
+>双击会选择一整个单词。持续按住鼠标按键并且拖动鼠标可扩大选择区域。 </para
+></listitem>
+
+<listitem
+><para
+>三击会选择一整行。持续按住鼠标按键并且拖动鼠标可扩大选择区域。 </para
+></listitem>
+
+<listitem
+><para
+>标签标题中的 “%d” 格式符有个隐藏的功能。您可以让 &konsole; 将一个目录名称缩略为它的第一个字符。例如，“/path/to/konsole/src” 可以缩略为 “konsole/s”。如果您想要启用并且控制这个隐藏功能，打开 <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> 位置中的 <filename
+>konsolerc</filename
+> 文件并添加下列行：</para>
+
+<para
+><programlisting
+>[ProcessInfo]
+CommonDirNames=名字1，名字2，名字3...
+</programlisting>
+
+<note
+><para
+>如果您使用 <application
+>Yakuake</application
+>，您需要转而编辑 <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> 中的 <filename
+>yakuakerc</filename
+>。</para
+></note>
+
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="commonissues">
+<title
+>常见问题</title>
+<itemizedlist>
+
+<listitem>
+<para
+>某些字体无法在 &konsole; 中使用，虽然它们在其他应用程序中可用。这并不说明 &konsole; 有问题。&konsole; 需要等宽字体来达到最好的显示效果，因此它会让 &Qt; 仅列出等宽字体。</para>
+
+<para
+>从版本 16.08 (2016年8月) 开始，&konsole; 可以被配置为允许选择任何字体，但是这可能会有显示上出错的问题。</para>
+</listitem>
+
+<listitem
+><para
+>从 KDE4 开始所有的标签使用相同的进程 ID。作为一个副作用，如果一个标签的进程有问题，所有其他标签可能都会遇到问题。 </para>
+<para
+>在某个会连接到外部设备或者系统 (ssh，nfs) 的命令出问题时，这最明显。 </para
+></listitem>
+
+<listitem
+><para
+>&konsole; 将 <option
+>-e</option
+> 选项后的参数作为一整个命令对待，它并不会解析它们并将其分割为多个子命令执行，而会将其直接执行。这和 xterm 不同。 </para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem
+><para
+><command
+>konsole -e "命令1 ; 命令2"</command
+> 是不行的 </para
+></listitem>
+
+    <listitem
+><para
+><command
+>konsole -e $SHELL -c "命令1 ; 命令2"</command
+> 可以 </para
+></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
+<listitem
+><para
+>&konsole; 并不提供运行登录 shell 的便利功能，因为开发者并不喜欢在终端模拟器中运行登录 shell 的想法。 </para>
+<para
+>当然，用户依旧可以在 &konsole; 中运行登录 shell，如果他们真的需要的话。编辑要使用的配置方案，将命令改为显式启动登录 shell 的形式，例如“<command
+>bash -l</command
+>” 以及“<command
+>zsh -l</command
+>”。 </para>
+</listitem>
+
+<listitem
+><para
+><option
+>--new-tab</option
+> 选项有时候会有奇怪的行为。他可能会建立一个新窗口，也可能在另一个已有的 &konsole; 窗口中建立一个新标签，而不是当前 &konsole; 窗口。 </para>
+<para
+>这些行为看上去很奇怪，但是那并不一定有问题。<option
+>--new-tab</option
+> 选项尝试重用现有的 &konsole; 窗口，但是并不是所有的 &konsole; 窗口都能被重用。所有使用 &krunner; 打开的 &konsole; 窗口都可被重用，但是多数通过命令行打开的 &konsole; 窗口不行。 </para>
+</listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title
+>贡献与版权</title>
+
+<para
+>&konsole; 目前由 &Kurt.Hindenburg; &Kurt.Hindenburg.mail; 维护</para>
+
+<para
+>之前的 &konsole; 维护者包括：&Robert.Knight; &Robert.Knight.mail; 与 &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+
+<para
+>应用程序 &konsole; 版权 &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
+
+<para
+>本文档最初由 &Jonathan.Singer; &Jonathan.Singer.mail; 编写</para>
+
+<para
+>本文档由 &Kurt.Hindenburg; &Kurt.Hindenburg.mail; 更新到 &kde; 4.x</para>
+
+<para
+>本文档由 &Kurt.Hindenburg; &Kurt.Hindenburg.mail; 更新到 &kde; 3.4</para>
+
+<para
+>由 &Mike.McBride; 和 &Lauri.Watts; 转换为 DocBook <acronym
+>SGML</acronym
+></para>
+
+<para
+><ulink url="http://i18n.linux.net.cn"
+>开源软件国际化之简体中文组</ulink
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="links">
+<title
+>链接</title>
+
+<para
+>如需更多信息，请访问这些网站：</para>
+<itemizedlist>
+<listitem
+><para
+><ulink url="https://userbase.kde.org/Konsole"
+>&konsole; 在 &kde; 的 UserBase 的主页</ulink
+>&nbsp;</para
+></listitem>
+<listitem
+><para
+><ulink url="https://konsole.kde.org/"
+>&konsole; 的主页</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel"
+>&konsole; 的邮件列表</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://freebsd.kde.org/"
+>FreeBSD 上的 &kde;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://solaris.kde.org/"
+>&Solaris; 上的 &kde;</ulink
+></para
+></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+

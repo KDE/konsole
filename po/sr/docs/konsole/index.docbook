@@ -1,0 +1,3306 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+ "dtd/kdedbx45.dtd" [
+<!ENTITY % Serbian "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+]>
+
+<book id="konsole" lang="&language;">
+
+<bookinfo>
+<title
+>Приручник за <application
+>Конзолу</application
+></title>
+<authorgroup>
+<author
+><personname
+><firstname
+>Џонатан</firstname
+> <surname
+>Сингер</surname
+></personname
+> &Jonathan.Singer.mail;</author>
+<author
+><personname
+><firstname
+>Курт</firstname
+> <surname
+>Хинденбург</surname
+></personname
+> &Kurt.Hindenburg.mail;</author>
+
+<othercredit role="developer"
+><personname
+><firstname
+>Роберт</firstname
+> <surname
+>Најт</surname
+></personname
+> &Robert.Knight.mail; </othercredit>
+
+<othercredit role="developer"
+><personname
+><firstname
+>Курт</firstname
+> <surname
+>Хинденбург</surname
+></personname
+> &Kurt.Hindenburg.mail; </othercredit>
+
+<othercredit role="developer"
+><personname
+><firstname
+>Валдо</firstname
+> <surname
+>Бастијан</surname
+></personname
+> &Waldo.Bastian.mail; </othercredit>
+
+<othercredit role="reviewer"
+><personname
+><firstname
+>Мајк</firstname
+> <surname
+>Мекбрајд</surname
+></personname
+> &Mike.McBride.mail; </othercredit>
+
+<othercredit role="translator"
+><firstname
+>Драган</firstname
+><surname
+>Пантелић</surname
+><affiliation
+><address
+><email
+>falcon-10@gmx.de</email
+></address
+></affiliation
+><contrib
+>превод</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>Џонатан Сингер</holder>
+</copyright>
+<copyright>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year>
+<holder
+>Курт Хинденбург</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>28. 1. 2017.</date>
+<releaseinfo
+>Програми КДЕ‑а 17.04</releaseinfo>
+
+<abstract
+><para
+><application
+>Конзола</application
+> је КДЕ‑ов емулатор терминала.</para
+></abstract>
+
+<keywordset>
+<keyword
+>КДЕ</keyword>
+<keyword
+>Конзола</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>командна</keyword>
+<keyword
+>линија</keyword>
+<keyword
+>терминал</keyword>
+<keyword
+>ЦЛИ</keyword>
+</keywordset>
+
+</bookinfo>
+<chapter id="introduction">
+<title
+>Увод</title>
+
+<sect1 id="terminal">
+<title
+>Шта је терминал?</title>
+
+<para
+><application
+>Конзола</application
+> је икс емулатор терминала (често и само терминал, или шкољка). Емулира сучеље командне линије у прозору са чистим текстом. </para>
+
+<para
+><application
+>Конзола</application
+> обично извршава командну шкољку, програм који извршава наредбе које уносите. Која ће то бити шкољка зависи од поставки вашег налога. Више о тој шкољци, како да је подесите и користите, можете наћи у документацији оперативног система. </para>
+</sect1>
+
+<sect1 id="scrollback">
+<title
+>Препис</title>
+
+<para
+><application
+>Конзола</application
+> користи концепт преписа да омогући кориснику преглед претходно произведеног излаза. Препис је подразумевано укључен и постављен да памти 1000 редова излаза поврх тренутно приказаних на екрану. </para>
+<para
+>Редови текста који отклизе изван врха екрана могу се прегледати померањем клизачке траке нагоре, окретањем точкића миша, пречицом <keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>PageUp</keycap
+></keycombo
+> (за померање уназад), <keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>PageDown</keycap
+></keycombo
+> (за померање унапред), <keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>стрелица горе</keycap
+></keycombo
+> (за један ред нагоре) и <keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>стрелица доле</keycap
+></keycombo
+> (за један ред надоле). </para>
+<para
+><keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>PageUp</keycap
+></keycombo
+> и <keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>PageDown</keycap
+></keycombo
+> померају или пола странице или целу страницу, што се може одредити под језичком <guilabel
+>Клизање</guilabel
+> у прозору поставе профила (<menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Уреди текући профил...</guimenuitem
+></menuchoice
+>). </para>
+
+</sect1>
+
+<sect1 id="profiles">
+<title
+>Профили</title>
+<para
+>Профили допуштају кориснику да брзо и лако аутоматизује извршавање уобичајених наредби. Неки примери: <itemizedlist>
+<listitem
+><para
+><command
+>ssh</command
+> на други рачунар</para
+></listitem>
+<listitem
+><para
+>покретање <acronym
+>ИРЦ</acronym
+> сесије</para
+></listitem>
+<listitem
+><para
+><command
+>tail</command
+> за надгледање фајла</para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para
+>Сви нови и измењени профили уписују се у корисникову домаћу фасциклу под <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+>.</para>
+
+<para
+>Поступак стварања новог профила: <orderedlist>
+<listitem
+><para
+>Кликните на ставку менија <menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Управљај профилима...</guimenuitem
+> </menuchoice
+></para
+></listitem>
+
+<listitem
+><para
+>Кликните на дугме <guibutton
+>Нови профил...</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Попуните први унос именом. Оно ће се приказивати у менију, и бити подразумевана етикета (уместо <guilabel
+>Шкољка</guilabel
+>) кад покренете сесију овог типа. </para
+></listitem>
+
+<listitem
+><para
+>Унесите наредбу, тачно као кад бисте отворили нову шкољку и извршили је. За наш први горњи пример, могли бисте уписати <userinput
+><command
+>ssh</command
+> <replaceable
+>administracija</replaceable
+></userinput
+>.</para
+></listitem>
+
+<listitem
+><para
+>Под другим језичцима дијалога, подесите изглед сесије. За сваку сесију можете подесити другачији фонт, шему боја, терминал ($<envar
+>TERM</envar
+>), и многе друге поставке.</para
+></listitem>
+
+<listitem
+><para
+>Притисните дугме <guibutton
+>У реду</guibutton
+>. Нова сесија сада је доступна у дијалогу <guilabel
+>Управљај профилима...</guilabel
+>. </para
+></listitem>
+
+</orderedlist>
+</para>
+
+<para
+>Сваки профил коме је попуњено <guilabel
+>дато у менију</guilabel
+> биће наведен по имену у менију <menuchoice
+><guimenu
+>Фајл</guimenu
+><guisubmenu
+>Нови језичак</guisubmenu
+></menuchoice
+>. Ако се приказује само подразумевани профил, подменија неће бити. </para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title
+>Дугмад миша</title>
+
+<para
+>Ова секција описује употребу дугмади миша за уобичајени десноруки редослед. За леворуки редослед, размените ‘лево’ и ‘десно’ у даљем тексту. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><mousebutton
+>лево</mousebutton
+></term>
+
+<listitem
+><para
+>Сви кликови <mousebutton
+>левим</mousebutton
+> дугметом биће послати програму свесном миша који се извршава у <application
+>Конзоли</application
+>. Ако програм реагује на кликове мишем, <application
+>Конзола</application
+> на то указује курсором у виду стрелице. Ако не, курсор је облика усправне црте.</para>
+
+<para
+>Држање притиснутог <mousebutton
+>левог</mousebutton
+> дугмета и превлачење миша преко екрана обележиће потез текста, ако програм није свестан миша. Обележени текст при превлачењу се приказује изврнутом бојом, ради визуелног одзива. Изаберите <guimenuitem
+>Копирај</guimenuitem
+> из менија <guimenu
+>Уређивање</guimenu
+> да бисте копирали обележени текст у клипборд, ради даље употребе у <application
+>Конзоли</application
+> или другом програму. Изабрани текст такође се може превлачити у сагласне програме: држите притиснут тастер <keycap
+>Ctrl</keycap
+> и превуците текст на жељено место.</para>
+
+<para
+>Знакови новог реда нормално се умећу на крају сваког изабраног реда. Ово је најбоље за исецање и налепљивање изворног кода, или излаза одређене наредбе. За обичан текст, преломи редова често нису важни: некада је погодније да текст буде ток знакова који се аутоматски поново форматира при налепљивању у други програм. За избор у режиму тока знакова, држите притиснут тастер <keycap
+>Ctrl</keycap
+> при бирању.</para>
+
+<para
+>Држање тастера <keycap
+>Ctrl</keycap
+> и <keycap
+>Alt</keycap
+> заједно са <mousebutton
+>левим</mousebutton
+> дугметом миша бираће текст по колонама. </para>
+
+<para
+>Двокликните <mousebutton
+>левим</mousebutton
+> дугметом да изаберете реч, а трокликните да изаберете цео ред.</para>
+
+<para
+>Ако се при обележавању досегне горња или доња ивица области текста, <application
+>Конзола</application
+> клиза горе или доле, излажући још текста из бафера историјата. Клизање престаје кад престане кретање миша.</para>
+
+<para
+>Пошто се пусти миш, <application
+>Конзола</application
+> покушава да задржи текст у клипборду видљивим, одржавањем обележене области изврнутом. Обележена област враћа се у нормалу чим се измени садржај клипборда, измени текст унутар области, или кликне <mousebutton
+>левим</mousebutton
+> дугметом.</para>
+
+<para
+>За обележавање текста у програму свесном миша (на пример, Поноћни командир), при кликтању се мора држати притиснут тастер <keycap
+>Shift</keycap
+>.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>средње</mousebutton
+></term>
+
+<listitem
+><para
+>Притисак <mousebutton
+>средњег</mousebutton
+> дугмета налепљује текст тренутно у клипборду. Ако притом држите притиснут тастер <keycap
+>Ctrl</keycap
+>, текст се налепљује са придодатим новим редом. Ово је згодно за брзо извршавање налепљених наредби, али може бити и опасно, па будите опрезни. </para>
+
+<note
+><para
+>Ако миш има само два дугмета, истовремени притисак и <mousebutton
+>левог</mousebutton
+> и <mousebutton
+>десног</mousebutton
+> дугмета симулира <mousebutton
+>средње</mousebutton
+> дугме миша са три дугмета.</para
+></note>
+
+<para
+>Ако средње дугме има и <mousebutton
+>точкић</mousebutton
+>, његово обртање у програму несвесном миша помераће <application
+>Конзолину</application
+> клизачку траку.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>десно</mousebutton
+></term>
+<listitem>
+<para
+>Мени на десно дугме миша даје следеће ставке:</para>
+<itemizedlist>
+<listitem
+><para
+><guimenuitem
+>Копирај</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Налепи</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>При изабраном тексту, подмени <guisubmenu
+>Потражи „&lt;текст&gt;“ помоћу</guisubmenu
+> са списком пожељних веб пречица и опцијом за њихово подешавање.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Отвори менаџер фајлова</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Постави кодирање</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Очисти препис</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Подеси препис...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Прикажи траку менија</guimenuitem
+>, само када је трака менија сакривена.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Промени профил</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Уреди текући профил...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Затвори језичак</guimenuitem
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>У програму свесном миша, за добијање искачућег менија држите тастер <keycap
+>Shift</keycap
+> при притиску <mousebutton
+>десног</mousebutton
+> дугмета. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="drag-and-drop">
+<title
+>Превлачење</title>
+<para
+>Ако превучете фајл, фасциклу или УРЛ на <application
+>Конзолин</application
+> прозор, појавиће се контекстни мени са овим радњама: </para
+>  
+<screenshot>
+<screeninfo
+>Контекстни мени при превлачењу.</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Контекстни мени при превлачењу.</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Shift</keycap
+></shortcut
+><guimenuitem
+>Премести овде</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Премешта превучену ставку у текућу фасциклу. Контекстни мени даје ову радњу само ако имате дозволе за брисање превученог фајла или фасцикле. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Ctrl</keycap
+></shortcut
+><guimenuitem
+>Копирај овде</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Копира превучену ставку у текућу фасциклу.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+></keycombo
+></shortcut
+><guimenuitem
+>Повежи овде</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Умеће симболичку везу ка превученој ставци.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Налепи локацију</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Умеће пуну путању превучене ставке код курсора.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Промени фасциклу на</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Ова радња се јавља ако се превуче фасцикла, омогућавајући вам да промените тренутну радну фасциклу <application
+>Конзолине</application
+> сесије.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Esc</keycap
+></shortcut
+><guimenuitem
+>Одустани</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Отказује радњу превлачења.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Ако при превлачењу притиснете једну од горепоменутих пречица пре него што пустите лево дугме миша, контекстни мени не искаче и радња се одмах извршава. </para>
+
+<para
+>Ако желите да користите тастер <keycap
+>Ctrl</keycap
+> за превлачење, или да укинете контекстни мени и УРЛ‑ови подразумевано умећете као текст, укључите одговарајуће опције под језичком <guilabel
+>Миш</guilabel
+> у дијалогу поставки профила. </para>
+
+</sect1>
+
+</chapter>
+
+<chapter id="commandreference">
+<title
+>Попис наредби</title>
+
+<sect1 id="menubar">
+<title
+>Трака менија </title>
+
+<para
+>Трака менија је на врху <application
+>Конзолиног</application
+> прозора. Ако је трака менија сакривена, до ставке <guimenuitem
+>Прикажи траку менија</guimenuitem
+> може се доћи <mousebutton
+>десним</mousebutton
+> кликом у прозору (под условом да се не извршава целоекрански програм, као што су Ви, Миником, итд.) Подразумевана пречица наведена је после сваке ставке. </para>
+<para
+>Алтернативно можете користити пречицу <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>M</keycap
+></keycombo
+> да прикажете или сакријете траку менија. </para>
+<sect2 id="file-menu">
+<title
+>Мени <guimenu
+>Фајл</guimenu
+></title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Фајл</guimenu
+><guimenuitem
+>Нови прозор</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Отвара нов, засебан <application
+>Конзолин</application
+> прозор са подразумеваним профилом.</action>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Фајл</guimenu
+><guimenuitem
+>Нови језичак</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Отвара нови језичак са подразумеваним профилом.</action>
+<note
+><para
+><application
+>Конзола</application
+> долази са подразумеваним профилом. Сви профили које је додао корисник биће набројани у подменију. Ако се приказује само подразумевани профил, подменија неће бити. </para
+></note>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Фајл</guimenu
+> <guimenuitem
+>Умножи језичак</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Покушава да клонира текући језичак као нови језичак.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Фајл</guimenu
+> <guimenuitem
+>Сачувај излаз као...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Уписује текући препис у текстуални или ХТМЛ фајл.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Фајл</guimenu
+> <guimenuitem
+>Одштампај екран...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Штампа тренутни екран.</action
+> Подразумевано се излаз уклапа у величину папира, и штампа се црном бојом текста и без позадине. Ове опције можете изменити у дијалогу штампања под језичком <guilabel
+>Опције излаза</guilabel
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Фајл</guimenu
+> <guimenuitem
+>Отвори менаџер фајлова</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Отвара КДЕ‑ов менаџер фајлова над текућом фасциклом.</action
+> Подразумевано је то <ulink url="help:/dolphin/index.html"
+><application
+>Делфин</application
+></ulink
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Фајл</guimenu
+> <guimenuitem
+>Затвори језичак</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Затвара текући језичак.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Фајл</guimenu
+><guimenuitem
+>Затвори прозор</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Напушта <application
+>Конзолу</application
+>.</action
+></para>
+<note
+><para
+>Ако има више од једног језичка, <application
+>Конзола</application
+> издати дијалог за потврду. Могуће га је искључити попуњавањем кућице <guibutton
+>Не питај више</guibutton
+>. </para>
+<para
+>Ако желите да поново добијате дијалог за потврду, обришите ставку <screen
+>[Notification Messages]
+CloseAllTabs=true</screen
+> у <filename
+>$<envar
+>XDG_CONFIG_HOME</envar
+>/konsolerc</filename
+>. </para>
+</note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Мени <guimenu
+>Уређивање</guimenu
+></title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+> <guimenuitem
+>Копирај</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Копира изабрани текст у клипборд.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>V</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+><guimenuitem
+>Налепи</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Налепљује текст из клипборда на локацији курсора.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Уређивање</guimenu
+><guimenuitem
+>Изабери све</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Изабира сав текст</action
+> у текућем прозору. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Уређивање</guimenu
+><guisubmenu
+>Копирај унос у</guisubmenu
+><guimenuitem
+>све језичке у текућем прозору</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Чини да унос у текућој сесији буде истовремено слат свим сесијама у текућем прозору.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+><guisubmenu
+>Копирај унос у</guisubmenu
+><guimenuitem
+>изабране језичке...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Чини да унос у текућој сесији буде истовремено слат сесијама које изабере корисник.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+> <guisubmenu
+>Копирај унос у</guisubmenu
+><guimenuitem
+>нигде</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Зауставља слање уноса из текуће сесије у друге сесије.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Уређивање</guimenu
+> <guisubmenu
+>Пошаљи сигнал</guisubmenu
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Шаље задати сигнал процесу шкољке, или другом процесу, који је покренут при покретању нове сесије.</action
+></para
+><para
+>Тренутно расположиви сигнали:</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>зауставља процес</entry>
+</row>
+<row>
+<entry
+><errorcode
+>CONT</errorcode
+></entry>
+<entry
+>наставља заустављено</entry>
+</row>
+<row>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>откривен прекид на контролишућем терминалу, или укинут контролишући процес</entry>
+</row>
+<row>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>прекид са тастатуре</entry>
+</row>
+<row>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>сигнал обустављања</entry>
+</row>
+<row>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>сигнал укидања</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>кориснички сигнал 1</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>кориснички сигнал 2</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para
+>Погледајте упутне странице система за више детаља, извршавањем наредбе <userinput
+><command
+>man</command
+> <option
+>7 signal</option
+></userinput
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+><keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+><guimenuitem
+>Преименуј језичак...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара дијалог у којем можете изменити име текућег језичка.</action
+> (<link linkend="rename-tab-dialog"
+>Више о овоме.</link
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+><keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+><guimenuitem
+>Отпреми з‑модемом...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара дијалог за избор фајла који треба отпремити (ако је инсталиран неопходан софтвер).</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+> <guimenuitem
+>Нађи...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара траку претраге на дну прозора <application
+>Конзоле</application
+>. </action
+></para>
+<para
+>Омогућава претраге са разликовањем величине слова, унапред и уназад, и са регуларним изразима.</para>
+</listitem>
+</varlistentry>
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+ 
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+ 
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch 
+-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+><guimenuitem
+>Нађи следеће</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Прелази на следећи нађени примерак</action
+>. Ако је фокус на траци претраге, може да се употреби и пречица <keycap
+>Enter</keycap
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Уређивање</guimenu
+><guimenuitem
+>Нађи претходно</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Прелази на претходни нађени примерак</action
+>. Ако је фокус на траци претраге, може да се употреби и пречица <keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>Enter</keycap
+></keycombo
+>.</para
+></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Мени <guimenu
+>Приказ</guimenu
+></title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guisubmenu
+>Подељен приказ</guisubmenu
+><guimenuitem
+>Подели приказ лево/десно</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Дели све језичке на леви и десни приказ.</action>
+</para
+><para
+>Сав излаз у једном приказу одсликава се и на други. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guisubmenu
+>Подељен приказ</guisubmenu
+><guimenuitem
+>Подели приказ горе/доле</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Дели све језичке на горњи и доњи приказ.</action>
+</para
+><para
+>Сав излаз у једном приказу одсликава се и на други. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guisubmenu
+>Подељен приказ</guisubmenu
+><guimenuitem
+>Затвори активни</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Затвара текући приказ.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guisubmenu
+>Подељен приказ</guisubmenu
+><guimenuitem
+>Затвори друге</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Затвара све приказе осим текућег.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guisubmenu
+>Подељен приказ</guisubmenu
+><guimenuitem
+>Рашири приказ</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Увећава текући приказ.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guisubmenu
+>Подељен приказ</guisubmenu
+><guimenuitem
+>Скупи приказ</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Смањује текући приказ.</action>
+</para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guimenuitem
+>Откачи текући језичак</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Отвара текући језичак у засебном прозору.</action>
+</para
+><para
+>Напуштање претходног прозора <application
+>Конзоле</application
+> неће утицати на новостворени. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guimenuitem
+>Надгледај тишину</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Надгледање недостатка активности под текућим језичком.</action>
+</para
+><para
+>Подразумевано, после 10 секунди неактивности на језичку сесије појавиће се иконица обавештења. Тип упозорења може се променити помоћу <menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Подеси обавештења</guimenuitem
+><guimenuitem
+>Тишина у надгледаној сесији</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guimenuitem
+>Надгледај активност</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Надгледање активности под текућим језичком.</action>
+</para
+><para
+>На било какву активност, на језичку сесије појављује се иконица обавештења. Тип упозорења може се изменити помоћу <menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Подеси обавештења</guimenuitem
+><guimenuitem
+>Активност у надгледаној сесији</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guimenuitem
+>Повећај фонт</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Повећава величину фонта за текст. </action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guimenuitem
+>Смањи фонт</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Смањује величину фонта за текст.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+> <guimenuitem
+>Постави кодирање</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Поставља кодирање знакова.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Приказ</guimenu
+><guimenuitem
+>Очисти препис</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Чисти текст из пописа.</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>K</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Приказ</guimenu
+><guimenuitem
+>Очисти препис и ресетуј</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Чисти текст под текућим језичком и у попису, и ресетује терминал.</action
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Мени <guimenu
+>Обележивачи</guimenu
+></title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Обележивачи</guimenu
+><guimenuitem
+>Додај обележивач</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Додаје тренутну локацију.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Обележивачи</guimenu
+><guimenuitem
+>Обележи језичке као фасциклу...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Додаје све језичке у фасциклу обележивача.</action>
+</para
+><para
+>Отвориће се дијалог за име фасцикле обележивача. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Обележивачи</guimenu
+><guimenuitem
+>Нова фасцикла обележивача...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Додаје нову фасциклу списку обележивача.</action>
+</para
+><para
+>Отвориће се дијалог за име фасцикле обележивача. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Обележивачи</guimenu
+><guimenuitem
+>Уреди обележиваче</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара уређивач обележивача.</action
+></para>
+
+<note
+><para
+>Уређивача обележивача можете користити за ручно додавање УРЛ‑ова. <application
+>Конзола</application
+> тренутно прихвата следеће: <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://корисник@домаћин:порт</para
+></listitem>
+<listitem
+><para
+>telnet://корисник@домаћин:порт</para
+></listitem>
+</itemizedlist>
+</para
+></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>Мени <guimenu
+>Подешавање</guimenu
+></title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Уреди текући профил...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара дијалог за подешавање текућег профила.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Промени профил</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Пребацује са текућег на неки од набројаних профила.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Управљај профилима...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара уређивач за управљање профилима.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Прикажи траку менија</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Приказује или скрива траку менија.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+><keycap
+>F11</keycap
+></keycap
+></shortcut
+> <guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Преко целог екрана</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Пребацује <application
+>Конзолу</application
+> преко целог екрана.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Подеси пречице...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара уређивач пречица са тастатуре.</action
+> Више о подешавању пречица потражите у <ulink url="help:/fundamentals/shortcuts.html"
+>Основама КДЕ‑а</ulink
+>.</para>
+
+<para
+><application
+>Конзола</application
+> има још неке специјалне пречице, ван видљивих ставки менија:</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>пречица</entry>
+<entry
+>опис</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycombo action="simul"
+><keycap
+>Shift</keycap
+><keysym
+>десно</keysym
+></keycombo
+></entry>
+<entry
+>Следећи језичак</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+><keycap
+>Shift</keycap
+><keysym
+>лево</keysym
+></keycombo
+></entry>
+<entry
+>Претходни језичак</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keysym
+>лево</keysym
+></keycombo
+></entry>
+<entry
+>Помери језичак улево</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keysym
+>десно</keysym
+></keycombo
+></entry>
+<entry
+>Помери језичак удесно</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>Ins</keycap
+></keycombo
+></entry>
+<entry
+>Налепи избор</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>Tab</keycap
+></keycombo
+></entry>
+<entry
+>Следећи садржалац приказа</entry
+> <!--FIXME what is this:yurchor container widget which holds views-->
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Подеси обавештења...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара уређивач обавештења.</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Подешавање</guimenu
+><guimenuitem
+>Подеси Конзолу...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Отвара уређивач <application
+>Конзолиних</application
+> поставки.</action
+></para>
+<para
+>Овај дијалог нуди опције за изглед и понашање траке језичака, и опште опције за прозор <application
+>Конзоле</application
+>. </para
+></listitem>
+<!-- FIXME
+since 4.9 Move options influencing tabbar from profiles into global setting
+Add global option for showing window title on titlebar
+When the window title from current session is emtpy, fallback to using
+  tab title-->
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title
+>Мени <guimenu
+>Помоћ</guimenu
+></title>
+<para
+>Мени <guimenu
+>Помоћ</guimenu
+> садржи уобичајене ставке за КДЕ програме, за више детаља погледајте <ulink url="help:/fundamentals/ui.html#menus-help"
+>одељак о менију помоћи</ulink
+> у Основама КДЕ‑а. </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+</sect2>
+
+</sect1>
+
+<sect1 id="console-dialogs">
+<title
+><application
+>Конзолини</application
+> дијалози</title>
+
+<sect2 id="rename-tab-dialog">
+<title
+>Дијалог за преименовање језичка</title>
+
+<para
+>У овом дијалогу се може изменити име текућег језичка. Дозовите га кроз мени, пречицом <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+><keycap
+>S</keycap
+></keycombo
+> или двокликом на језичак на траци језичака. Промене се могу учинит трајним уређивањем текућег профила. </para>
+
+<para
+><application
+>Конзола</application
+> ће смењивати следеће токене за локалне језичке: </para>
+<itemizedlist mark="opencircle">
+<listitem
+><para
+>%n — име програма</para
+></listitem>
+<listitem
+><para
+>%d — текућа фасцикла (кратко)</para
+></listitem>
+<listitem
+><para
+>%D — текућа фасцикла (дугачко)</para
+></listitem>
+<listitem
+><para
+>%h — локални домаћин (кратко)</para
+></listitem>
+<listitem
+><para
+>%u — корисничко име</para
+></listitem>
+<listitem
+><para
+>%w — наслов прозора постављен шкољком</para
+></listitem>
+<listitem
+><para
+>%# — број сесије</para
+></listitem>
+</itemizedlist>
+
+<para
+><application
+>Конзола</application
+> ће смењивати следеће токене за удаљене језичке: <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c — текући програм</para
+></listitem>
+    <listitem
+><para
+>%h — удаљени домаћин (кратко)</para
+></listitem>
+    <listitem
+><para
+>%H — удаљени домаћин (дугачко)</para
+></listitem>
+    <listitem
+><para
+>%u — корисничко име</para
+></listitem>
+    <listitem
+><para
+>%U — корисничко име@ (ако је дато)</para
+></listitem>
+    <listitem
+><para
+>%w — наслов прозора постављен шкољком</para
+></listitem>
+    <listitem
+><para
+>%# — број сесије</para
+></listitem>
+</itemizedlist>
+
+</para>
+<para
+>Примери: <itemizedlist mark="opencircle">
+
+<listitem
+><para
+><userinput
+>%d : %n</userinput
+>, ако је <filename
+>/usr/src</filename
+> текућа фасцикла и извршава се <command
+>bash</command
+>, приказаће <guibutton
+>src : bash</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%D : %n</userinput
+>, ако је <filename
+>/usr/src</filename
+> текућа фасцикла и извршава се <command
+>top</command
+>, приказаће <guibutton
+>/usr/src : top</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%w (%#)</userinput
+>, ако је <filename
+>~</filename
+> текућа фасцикла и <command
+>vim</command
+> се извршава под првим језичком, приказаће <guibutton
+>[No Name] (~) - VIM(1)</guibutton
+> </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect2>
+
+<sect2 id="copy-input-dialog">
+<title
+>Дијалог за копирање улаза</title>
+
+<para
+>Текст унет под једним језичком може се истовремено проследити другим. Овај дијалог омогућава избор језичака који ће примити тај улаз. Текући језичак ће бити засивљен. </para>
+
+</sect2>
+
+<sect2 id="scrollback-options-dialog">
+<title
+>Дијалог за подешавање преписа</title>
+
+<para
+>У овом дијалогу могу се изменити опције за величину историјата <link linkend="scrollback"
+>преписа</link
+>. Измене важе само за текући језичак и неће бити сачуване у профилу. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title
+>Опције командне линије</title>
+
+<para
+>При покретању <application
+>Конзоле</application
+> из командне линије, могу се задати неке опције за промену понашања.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--help</option
+></term>
+<listitem
+><para
+><action
+>Набраја доступне опције.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--profile</option
+> <parameter
+>fajl</parameter
+></term>
+<listitem
+><para
+><action
+>Покреће <application
+>Конзолу</application
+></action
+> са задатим профилом уместо подразумеваног.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fallback-profile</option
+></term>
+<listitem
+><para
+>Користи унутрашњи одступни профил. Ова опција је пречица за <option
+>--profile</option
+> <parameter
+>FALLBACK/</parameter
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--workdir</option
+> <parameter
+>fas</parameter
+></term>
+<listitem
+><para
+><action
+>Отвара <application
+>Конзолу</application
+></action
+> са <parameter
+>fas</parameter
+> као почетном радном фасциклом.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hold, --noclose</option
+></term>
+<listitem
+><para
+><action
+>Без аутоматског затварања</action
+> почетне сесије када се заврши. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--new-tab</option
+></term>
+<listitem
+><para
+><action
+>Ствара нови језичак</action
+> у постојећем прозору, уместо да се отвори нови. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--tabs-from-file </option
+><parameter
+>fajl</parameter
+></term>
+<listitem
+><para
+><action
+>Ствара језичке</action
+> како је наведено у датом поставном фајлу језичака. </para>
+<note
+><para
+>Фајл садржи један језичак по реду, у следећем формату:</para>
+<para
+>Сваки ред наводи језичак који треба отворити преко до четири поља. Поља се раздвајају <userinput
+>;;</userinput
+>, а име поља мора да има <userinput
+>:</userinput
+> на крају. Празни редови и редови са <userinput
+>#</userinput
+> на почетку игноришу се, тако да <userinput
+>#</userinput
+> можете користити за додавање коментара. </para>
+
+<simplelist>
+<member
+><userinput
+>title:</userinput
+> — име језичка, узима се подразумевано ако је празно или се не зада</member>
+<member
+><userinput
+>workdir:</userinput
+> — радна фасцикла, узима се <filename class="directory"
+>~</filename
+> ако је празно или се не зада</member>
+<member
+><userinput
+>profile:</userinput
+> — жељени <application
+>Конзолин</application
+> профил, узима се подразумеван ако је празно или се не зада</member>
+<member
+><userinput
+>command:</userinput
+> — наредба за извршавање</member>
+</simplelist>
+<para
+>Сваки ред треба да садржи бар једно од поља <userinput
+>command</userinput
+> и <userinput
+>profile</userinput
+>. </para>
+<para
+>Пример: <userinput
+>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput
+></para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--background-mode</option
+></term>
+<listitem
+><para
+><action
+>Покреће <application
+>Конзолу</application
+></action
+> у позадини, тако да може да се дозове напред притиском на <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>F12</keycap
+></keycombo
+> (подразумевано). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--separate</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+><action
+>Покреће</action
+> нови примерак <application
+>Конзоле</application
+> у засебном процесу. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-menubar</option
+></term>
+<listitem
+><para
+><action
+>Приказује траку менија</action
+>, потискујући подразумевано понашање. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-menubar</option
+></term>
+<listitem
+><para
+><action
+>Сакрива траку менија</action
+>, потискујући подразумевано понашање. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Приказује траку задатака</action
+>, потискујући подразумевано понашање. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Сакрива траку задатака</action
+>, потискујући подразумевано понашање. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fullscreen</option
+></term>
+<listitem
+><para
+><action
+>Покреће <application
+>Конзолу</application
+> преко целог екрана.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--notransparency</option
+></term>
+<listitem
+><para
+><action
+>Искључује провидне позадине</action
+>, чак и кад их систем подржава. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profiles</option
+></term>
+<listitem
+><para
+><action
+>Набраја</action
+> све доступне профиле. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profile-properties</option
+></term>
+<listitem>
+<para
+><action
+>Набраја</action
+> сва позната својства овог имена и типа. В. опцију <option
+>-p</option
+>. </para>
+<para
+>За више информација посетите <ulink url="http://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html#a57848e15fe69d3f27565851fe7cda429"
+>документацију АПИ‑ја <application
+>Конзоле</application
+></ulink
+>. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-p</option
+> <parameter
+>svojstvo=vrednost</parameter
+></term>
+<listitem
+><para
+><action
+>Мења</action
+> вредност својства у профилу.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>naredba</parameter
+></term>
+<listitem
+><para
+><action
+>Извршава</action
+> се дата наредба уместо нормалне шкољке.</para>
+<note
+><para
+>Ова опција чини да <application
+>Конзола</application
+> ухвати све аргументе који следе и изврши их као <parameter
+>naredba</parameter
+>. Зато увек мора бити последња од свих опција.</para
+></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+><application
+>Конзола</application
+> прихвата и генеричке КуТ и КФ5 опције, погледајте упутне странице за <literal
+>qt5options</literal
+> и <literal
+>kf5options</literal
+>.</para>
+
+</chapter>
+
+<chapter id="scripting">
+<title
+>Скриптовање <application
+>Конзоле</application
+></title>
+
+<para
+><application
+>Конзола</application
+> пружа бројне методе који се могу позвати преко д‑буса. </para>
+<para
+>Постоје два начина за употребу д‑бус сучеља: графички, кроз КуТ‑ов Приказивач д‑буса (<command
+>qdbusviewer</command
+>), и у командној линији наредбом <command
+>qdbus</command
+>. </para>
+
+<para
+>Примери: <itemizedlist mark='opencircle'>
+
+<listitem
+><para
+><prompt
+>%</prompt
+> <command
+>qdbus</command
+> приказује све доступне сервисе. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>%</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole</option
+> приказује д‑бус сучеље за <application
+>Конзолу</application
+>. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>%</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+> приказује методе за управљање прозором 1. </para>
+</listitem>
+
+<listitem
+><para
+><prompt
+>%</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+> приказује методе за управљање текућим прозором. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>%</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+> приказује методе за управљање сесијом 1. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>%</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+> приказује методе за управљање текућом сесијом. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>%</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+> приказује методе за управљање текућом сесијом <application
+>Конзоле</application
+>. </para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Ако нека од претходних наредби испише „Сервис org.kde.konsole не постоји“, замените <option
+>org.kde.konsole</option
+> једним од: <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (бира први ПИД) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (може да се употреби у текућој <application
+>Конзоли</application
+>) </para
+></listitem>
+<listitem
+><para>
+<option
+>избором једног из исписа <literal
+>qdbus | grep konsole</literal
+></option>
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>За више детаља, погледајте <ulink url="http://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>туторијал о д‑бусу</ulink
+>. </para>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title
+>Опис стила за траку језичака</title>
+<para
+>Подразумевани опис стила траке језичака одређује најмању и највећу ширину језичака. Корисник може да састави ЦСС фајл и зада га <application
+>Конзоли</application
+> као опис стила за траку језичака. Унутар ЦСС фајла користи се виџет <userinput
+>QTabBar::tab</userinput
+>. </para>
+<para
+>За више информација прочитајте <ulink url="http://doc.qt.io/qt-5/stylesheet.html"
+>страницу о КуТ‑овим описима стилова</ulink
+>. </para>
+
+<para
+>Примери: </para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Мења позадину изабраног језичка на светло сиву: <programlisting
+>QTabBar::tab:selected {
+    background: #999999
+}
+</programlisting>
+</para
+></listitem>
+
+
+<listitem
+><para
+>Мења текст изабраног језичка на црвено: <programlisting
+>QTabBar::tab:selected {
+    color: red
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Сви језичци да буду широки најмање 200 пиксела: <programlisting
+>QTabBar::tab {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Само изабрани језичак биће широк најмање 200 пиксела: <programlisting
+>QTabBar::tab::selected {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Све ово може да стоји заједно у истом фајлу: <programlisting
+>QTabBar::tab::selected {
+    background: #999999;
+    color: red;
+    min-width: 200px;
+}
+QTabBar::tab {
+    min-width: 100px
+}
+</programlisting>
+</para
+></listitem>
+
+
+</itemizedlist>
+</para>
+
+</chapter>
+
+<chapter id="faqtips">
+<title
+>„Да ли сте знали?“, чести проблеми и још тога</title>
+
+<sect1 id="didyouknow">
+<title
+>Да ли сте знали?</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Држање <keycap
+>Ctrl‑а</keycap
+> при избору текста учиниће да се преломи редова претворе у размаке при налепљивању. </para
+></listitem>
+
+<listitem
+><para
+>Држање тастера <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+></keycombo
+> при избору текста даје бирање по колонама. </para
+></listitem>
+
+<listitem
+><para
+>Комбинација <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><mousebutton
+>точкић</mousebutton
+></keycombo
+> увеличава и умањује текст, као у <application
+>К‑освајачу</application
+> и <application
+>Фајерфоксу</application
+>. </para
+></listitem>
+
+<listitem
+><para
+>Ако програм хвата дугмад миша, искачући мени се ипак може добити држањем <keycap
+>Shift‑а</keycap
+>. </para
+></listitem>
+
+<listitem
+><para
+>Пречица <keycombo action="simul"
+><keycap
+>Ctrl</keycap
+><keycap
+>Shift</keycap
+><keycap
+>F10</keycap
+></keycombo
+> активира мени. </para
+></listitem>
+
+<listitem
+><para
+>Притисак тастера <keycombo action="simul"
+><keycap
+>Shift</keycap
+><keycap
+>Insert</keycap
+></keycombo
+> умеће из клипборда. </para
+></listitem>
+
+<listitem
+><para
+>Двокликом се бира цела реч. Наставите да држите дугме и померате миш да бисте проширили избор. </para
+></listitem>
+
+<listitem
+><para
+>Трокликом се бира цео ред. Наставите да држите дугме и померате миш да бисте проширили избор. </para
+></listitem>
+
+<listitem
+><para
+>Постоји једна скривена могућност форматске директиве <literal
+>%d</literal
+> у наслову језичка: можете рећи <application
+>Конзоли</application
+> да скрати име фасцикле на само први знак. На пример, <literal
+>/path/to/konsole/src</literal
+> може бити скраћено на <literal
+>konsole/s</literal
+>. Ако желите да активирате и испробате ову могућност, у <filename
+>konsolerc</filename
+> у <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> додајте следеће редове:</para>
+
+<para
+><programlisting
+>[ProcessInfo]
+CommonDirNames=ime1,ime2,ime3...
+</programlisting>
+
+<note
+><para
+>Ако користите Јакуаке, онда ово треба да додате у <filename
+>yakuakerc</filename
+> у <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+>.</para
+></note>
+
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="commonissues">
+<title
+>Чести проблеми</title>
+<itemizedlist>
+
+<listitem>
+<para
+>Неки од фонтова могу бити недоступни у <application
+>Конзоли</application
+> иако их има у другим програмима. Ово није услед грешке у <application
+>Конзоли</application
+>, већ зато што <application
+>Конзола</application
+> захтева једноширинске фонтове ради најбољег визуелног дојма, па само њих и испоставља.</para>
+
+<para
+>Почев од издања 16.08 (август 2016) <application
+>Конзола</application
+> може да се подеси да дозволи избор било којег фонта, што међутим може изазвати грешке у приказу.</para>
+</listitem>
+
+<listitem
+><para
+>Од КДЕ‑а 4, сви језичци деле исти ИД процеса. Споредни ефекат овога је да ако процес једног језичка има неких проблема, они се могу одразити и на остале језичке. </para>
+<para
+>Ово је најприметније када наредба која се повезују са спољашњим уређајем или системом (нпр. <command
+>ssh</command
+>, <command
+>nfs</command
+>) има проблема. </para
+></listitem>
+
+<listitem
+><para
+><application
+>Конзола</application
+> прихвата све аргументе после опције <option
+>-e</option
+> као јединствену наредбу и директно је извршава, место да је рашчлани и можда подели у поднаредбе за извршавање. Ово се разликује од Икс‑терма. </para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem
+><para
+><command
+>konsole -e "naredba1 ; naredba2"</command
+> не ради </para
+></listitem>
+
+    <listitem
+><para
+><command
+>konsole -e $SHELL -c "naredba1 ; naredba2"</command
+> ради </para
+></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
+<listitem
+><para
+><application
+>Конзола</application
+> не пружа посебне погодности за извршавање пријавне шкољке, јер се њеним програмерима не свиђа идеја извршавања пријавне шкољке у емулатору терминала. </para>
+<para
+>Наравно, корисник свеједно може покренути пријавну шкољку у <application
+>Конзоли</application
+> ако то баш жели. Уредите профил у употреби тако да његова наредба изричито покреће пријавну шкољку, рецимо <userinput
+>bash -l</userinput
+> или <userinput
+>zsh -l</userinput
+>. </para>
+</listitem>
+
+<listitem
+><para
+>Опција <option
+>--new-tab</option
+> некад се чудно понаша. Може отворити нови прозор, или нови језичак у другом прозору <application
+>Конзоле</application
+> уместо у текућем. </para>
+<para
+>Иако делује чудно, овакво понашање није обавезно услед грешке. Опција <option
+>--new-tab</option
+> покушава да употреби постојеће прозоре <application
+>Конзоле</application
+>, али неки од њих можда нису употребљиви. У употребљиве спадају сви прозори отворени преко <application
+>К‑извођача</application
+>, док они отворени из командне линије углавном не. </para>
+</listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title
+>Заслуге и ауторска права</title>
+
+<para
+><application
+>Конзолу</application
+> тренутно одржава <personname
+><firstname
+>Курт</firstname
+> <surname
+>Хинденбург</surname
+></personname
+> &Kurt.Hindenburg.mail;</para>
+
+<para
+>Претходни одржаваоци <application
+>Конзоле</application
+>, између осталих, били су: <personname
+><firstname
+>Роберт</firstname
+> <surname
+>Најт</surname
+></personname
+> &Robert.Knight.mail; и <personname
+><firstname
+>Валдо</firstname
+> <surname
+>Бастијан</surname
+></personname
+> &Waldo.Bastian.mail;.</para>
+
+<para
+><application
+>Конзола</application
+> (програм), © 1997-2008, <personname
+><firstname
+>Ларс</firstname
+> <surname
+>Деле</surname
+></personname
+> &Lars.Doelle.mail;.</para>
+
+<para
+>Овај документ је првобитно написао <personname
+><firstname
+>Џонатан</firstname
+> <surname
+>Сингер</surname
+></personname
+> &Jonathan.Singer.mail;.</para>
+
+<para
+>Овај документ је за КДЕ 4.x ажурирао <personname
+><firstname
+>Курт</firstname
+> <surname
+>Хинденбург</surname
+></personname
+>.</para>
+
+<para
+>Овај документ је за КДЕ 3.4 ажурирао <personname
+><firstname
+>Курт</firstname
+> <surname
+>Хинденбург</surname
+></personname
+> &Kurt.Hindenburg.mail;.</para>
+
+<para
+>На докбук СГМЛ првобитно претворили <personname
+><firstname
+>Мајк</firstname
+> <surname
+>Мекбрајд</surname
+></personname
+> и <personname
+><firstname
+>Лори</firstname
+> <surname
+>Вотс</surname
+></personname
+>.</para>
+
+<para
+>Превео Драган Пантелић <email
+>falcon-10@gmx.de</email
+>.</para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="links">
+<title
+>Везе</title>
+
+<para
+>За више информација посетите ове веб сајтове:</para>
+<itemizedlist>
+<listitem
+><para
+><ulink url="http://userbase.kde.org/Konsole"
+>домаћа страница <application
+>Конзоле</application
+> на Корисничкој бази КДЕ‑а</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="http://konsole.kde.org/"
+>домаћа страница <application
+>Конзоле</application
+></ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="http://mail.kde.org/mailman/listinfo/konsole-devel"
+>поштанска листа <application
+>Конзоле</application
+></ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="http://freebsd.kde.org/"
+>КДЕ на ФриБСД‑у</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="http://solaris.kde.org/"
+>КДЕ на Соларису</ulink
+></para
+></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+

@@ -1,0 +1,5679 @@
+# translation of konsole.po to Punjabi
+# Amanpreet Singh Alam <aalam@redhat.com>, 2004, 2005.
+# Amanpreet Singh Alam <amanpreetalam@yahoo.com>, 2005.
+# Amanpreet Singh Brar <aalam@redhat.com>, 2005.
+# AP S Alam <aalam@users.sf.net>, 2007.
+# A S Alam <aalam@users.sf.net>, 2007, 2009, 2010, 2011, 2012, 2018, 2019.
+# ASB <aalam@users.sf.net>, 2007, 2013, 2014, 2015, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: konsole\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 00:52+0000\n"
+"PO-Revision-Date: 2019-01-27 15:02-0800\n"
+"Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
+"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ਅ.ਸ.ਆਲਮ. ੨੦੦੪-੨੦੧੯"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "alam.yellow@gmail.com"
+
+#. i18n: ectx: Menu (file)
+#: ../desktop/konsoleui.rc:6
+#, kde-format
+msgid "File"
+msgstr "ਫਾਇਲ"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnEdit)
+#. i18n: ectx: Menu (edit)
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:268
+#: plugins/SSHManager/sshwidget.ui:262
+#, kde-format
+msgid "Edit"
+msgstr "ਸੋਧ"
+
+#. i18n: ectx: Menu (view)
+#: ../desktop/konsoleui.rc:19
+#, kde-format
+msgid "View"
+msgstr "ਝਲਕ"
+
+#. i18n: ectx: Menu (view-split)
+#: ../desktop/konsoleui.rc:20
+#, kde-format
+msgid "Split View"
+msgstr "ਝਲਕ ਵੰਡੋ"
+
+#. i18n: ectx: Menu (settings)
+#: ../desktop/konsoleui.rc:39
+#, kde-format
+msgid "Settings"
+msgstr "ਸੈਟਿੰਗਾਂ"
+
+#. i18n: ectx: Menu (plugins)
+#: ../desktop/konsoleui.rc:52
+#, kde-format
+msgid "Plugins"
+msgstr ""
+
+#. i18n: ectx: Menu (help)
+#: ../desktop/konsoleui.rc:55
+#, kde-format
+msgid "Help"
+msgstr "ਮਦਦ"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: ../desktop/konsoleui.rc:59
+#, kde-format
+msgid "Main Toolbar"
+msgstr ""
+
+#. i18n: ectx: Menu (history)
+#: ../desktop/partui.rc:14
+#, kde-format
+msgid "S&crollback"
+msgstr "ਸਕਰੋਲ-ਬੈਕ(&c)"
+
+#. i18n: ectx: ToolBar (sessionToolbar)
+#: ../desktop/sessionui.rc:70
+#, fuzzy, kde-format
+#| msgid "Session Number: %#"
+msgid "Session Toolbar"
+msgstr "ਸ਼ੈਸ਼ਨ ਨੰਬਰ: %#"
+
+#: AppColorSchemeChooser.cpp:36
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "New Color Scheme"
+msgid "&Window Color Scheme"
+msgstr "ਨਵੀਂ ਰੰਗ ਸਕੀਮ"
+
+#: Application.cpp:51
+#, kde-format
+msgctxt "@info:shell"
+msgid "Name of profile to use for new Konsole instance"
+msgstr "ਨਵੇਂ ਕਨਸੋਲ ਮੌਕੇ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਪਰੋਫਾਇਲ ਨਾਂ"
+
+#: Application.cpp:52
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Name of profile to use for new Konsole instance"
+msgctxt "@info:shell"
+msgid "json layoutfile to be loaded to use for new Konsole instance"
+msgstr "ਨਵੇਂ ਕਨਸੋਲ ਮੌਕੇ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਪਰੋਫਾਇਲ ਨਾਂ"
+
+#: Application.cpp:53
+#, fuzzy, kde-format
+#| msgid "Create a new profile based upon the selected profile"
+msgctxt "@info:shell"
+msgid "Use the built-in profile instead of the default profile"
+msgstr "ਚੁਣੇ ਪਰੋਫਾਇਲ ਨਾਲ ਇੱਕ ਨਵਾਂ ਪਰੋਫਾਇਲ ਬਣਾਓ"
+
+#: Application.cpp:54
+#, kde-format
+msgctxt "@info:shell"
+msgid "Set the initial working directory of the new tab or window to 'dir'"
+msgstr "ਇਸ ਪਰੋਫਾਇਲ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਨਵੇਂ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨ ਲਈ ਸ਼ੁਰੂਆਤੀ ਵਰਕਿੰਗ ਡਾਇਰੈਕਟਰੀ"
+
+#: Application.cpp:55
+#, kde-format
+msgctxt "@info:shell"
+msgid "Do not close the initial session automatically when it ends."
+msgstr "ਜਦੋਂ ਬੰਦ ਹੋਵੇ ਤਾਂ ਸ਼ੁਰੂਆਤੀ ਸ਼ੈਸ਼ਨ ਆਟੋਮੈਟਿਕ ਹੀ ਬੰਦ ਨਾ ਕਰੋ।"
+
+#: Application.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid ""
+#| "Create a new tab in an existing window rather than creating a new window"
+msgctxt "@info:shell"
+msgid ""
+"Create a new tab in an existing window rather than creating a new window "
+"('Run all Konsole windows in a single process' must be enabled)"
+msgstr "ਨਵੀਂ ਵਿੰਡੋ ਬਣਾਉਣ ਦੀ ਬਜਾਏ ਇੱਕ ਮੌਜੂਦਾ ਵਿੰਡੋ ਵਿੱਚ ਇੱਕ ਨਵੀਂ ਟੈਬ ਖੋਲ੍ਹੋ"
+
+#: Application.cpp:60
+#, kde-format
+msgctxt "@info:shell"
+msgid "Create tabs as specified in given tabs configuration file"
+msgstr ""
+
+#: Application.cpp:62
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
+"(by default) is pressed"
+msgstr ""
+"ਕਨਸੋਲ ਬੈਕਗਰਾਊਂਡ 'ਚ ਸ਼ੁਰੂ ਕਰੋ ਤੇ ਅੱਗੇ ਤਦ ਲਿਆਉ, ਜਦੋਂ Ctrl+Shift+F12 ਸਵਿੱਚ (ਡਿਫਾਲਟ) ਦੱਬੀ ਜਾਵੇ"
+
+#: Application.cpp:63
+#, fuzzy, kde-format
+#| msgid "Run in a separate process"
+msgctxt "@info:shell"
+msgid "Run in a separate process"
+msgstr "ਵੱਖਰੇ ਪਰੋਸੈਸ ਵਿੱਚ ਚਲਾਓ"
+
+#: Application.cpp:64
+#, kde-format
+msgctxt "@info:shell"
+msgid "Show the menubar, overriding the default setting"
+msgstr "ਡਿਫਾਲਟ ਸੈਟਿੰਗ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਕੇ ਮੇਨੂ-ਪੱਟੀ ਵੇਖਾਓ"
+
+#: Application.cpp:65
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the menubar, overriding the default setting"
+msgstr "ਡਿਫਾਲਟ ਸੈਟਿੰਗ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਕੇ ਮੇਨੂ-ਪੱਟੀ ਓਹਲੇ ਕਰੋ"
+
+#: Application.cpp:66
+#, kde-format
+msgctxt "@info:shell"
+msgid "Show the tabbar, overriding the default setting"
+msgstr "ਡਿਫਾਲਟ ਸੈਟਿੰਗ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਕੇ ਟੈਬ-ਪੱਟੀ ਵੇਖਾਓ"
+
+#: Application.cpp:67
+#, kde-format
+msgctxt "@info:shell"
+msgid "Hide the tabbar, overriding the default setting"
+msgstr "ਡਿਫਾਲਟ ਸੈਟਿੰਗ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਕੇ ਟੈਬ-ਪੱਟੀ ਓਹਲੇ"
+
+#: Application.cpp:68
+#, kde-format
+msgctxt "@info:shell"
+msgid "Start Konsole in fullscreen mode"
+msgstr "ਪੂਰੀ ਸਕਰੀਨ ਮੋਡ ਵਿੱਚ ਕਨਸੋਲ ਸ਼ੁਰੂ"
+
+#: Application.cpp:69
+#, kde-format
+msgctxt "@info:shell"
+msgid "Disable transparent backgrounds, even if the system supports them."
+msgstr ""
+
+#: Application.cpp:70
+#, kde-format
+msgctxt "@info:shell"
+msgid "List the available profiles"
+msgstr "ਉਪਲੱਬਧ ਪਰੋਫਾਇਲਾਂ ਦੀ ਲਿਸਟ"
+
+#: Application.cpp:71
+#, kde-format
+msgctxt "@info:shell"
+msgid "List all the profile properties names and their type (for use with -p)"
+msgstr ""
+
+#: Application.cpp:72
+#, kde-format
+msgctxt "@info:shell"
+msgid "Change the value of a profile property."
+msgstr "ਇੱਕ ਪਰੋਫਾਇਲ ਵਿਸ਼ੇਸ਼ਤਾ ਦਾ ਮੁੱਲ ਬਦਲੋ।"
+
+#: Application.cpp:74
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Command to execute. This option will catch all following arguments, so use "
+"it as the last option."
+msgstr ""
+
+#: Application.cpp:77
+#, kde-format
+msgctxt "@info:shell"
+msgid ""
+"Force re-using the existing instance even if it breaks functionality, e. g. "
+"--new-tab. Mostly for debugging."
+msgstr ""
+
+#: Application.cpp:84
+#, kde-format
+msgctxt "@info:shell"
+msgid "Arguments passed to command"
+msgstr "ਕਮਾਂਡ ਲਈ ਆਰਗੂਮੈਂਟ ਦਿਓ"
+
+#: Application.cpp:511
+#, kde-format
+msgctxt "@item"
+msgid "Toggle Background Window"
+msgstr "ਬੈਕਗਰਾਊਂਡ ਵਿੰਡੋ ਬਦਲੋ"
+
+#: BookmarkHandler.cpp:108
+#, kde-format
+msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
+msgid "%1 on %2"
+msgstr "%2 ਉੱਤੇ %1"
+
+#: BookmarkHandler.cpp:110
+#, kde-format
+msgctxt "@item:inmenu The host the user is connected to via ssh"
+msgid "%1"
+msgstr "%1"
+
+#: colorscheme/ColorScheme.cpp:131
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground"
+msgstr "ਫਾਰਗਰਾਊਂਡ"
+
+#: colorscheme/ColorScheme.cpp:132
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background"
+msgstr "ਬੈਕਗਰਾਊਂਡ"
+
+#: colorscheme/ColorScheme.cpp:133
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1"
+msgstr "ਰੰਗ 1"
+
+#: colorscheme/ColorScheme.cpp:134
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2"
+msgstr "ਰੰਗ 2"
+
+#: colorscheme/ColorScheme.cpp:135
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3"
+msgstr "ਰੰਗ 3"
+
+#: colorscheme/ColorScheme.cpp:136
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4"
+msgstr "ਰੰਗ 4"
+
+#: colorscheme/ColorScheme.cpp:137
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5"
+msgstr "ਰੰਗ 5"
+
+#: colorscheme/ColorScheme.cpp:138
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6"
+msgstr "ਰੰਗ 6"
+
+#: colorscheme/ColorScheme.cpp:139
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7"
+msgstr "ਰੰਗ 7"
+
+#: colorscheme/ColorScheme.cpp:140
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8"
+msgstr "ਰੰਗ 8"
+
+#: colorscheme/ColorScheme.cpp:141
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground (Intense)"
+msgstr "ਫਾਰਗਰਾਊਂਡ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:142
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background (Intense)"
+msgstr "ਬੈਕਗਰਾਊਂਡ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:143
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1 (Intense)"
+msgstr "ਰੰਗ ੧ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:144
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2 (Intense)"
+msgstr "ਰੰਗ ੨ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:145
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3 (Intense)"
+msgstr "ਰੰਗ ੩ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:146
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4 (Intense)"
+msgstr "ਰੰਗ ੪ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:147
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5 (Intense)"
+msgstr "ਰੰਗ ੫ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:148
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6 (Intense)"
+msgstr "ਰੰਗ ੬ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:149
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7 (Intense)"
+msgstr "ਰੰਗ ੭ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:150
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8 (Intense)"
+msgstr "ਰੰਗ ੮ (ਇਟੈਂਸ)"
+
+#: colorscheme/ColorScheme.cpp:151
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Foreground (Faint)"
+msgstr "ਫਾਰਗਰਾਊਂਡ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:152
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Background (Faint)"
+msgstr "ਬੈਕਗਰਾਊਂਡ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:153
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 1 (Faint)"
+msgstr "ਰੰਗ ੧ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:154
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 2 (Faint)"
+msgstr "ਰੰਗ ੨ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:155
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 3 (Faint)"
+msgstr "ਰੰਗ ੩ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:156
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 4 (Faint)"
+msgstr "ਰੰਗ ੪ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:157
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 5 (Faint)"
+msgstr "ਰੰਗ ੫ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:158
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 6 (Faint)"
+msgstr "ਰੰਗ ੬ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:159
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 7 (Faint)"
+msgstr "ਰੰਗ ੭ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:160
+#, kde-format
+msgctxt "@item:intable palette"
+msgid "Color 8 (Faint)"
+msgstr "ਰੰਗ ੮ (ਮੱਧਮ)"
+
+#: colorscheme/ColorScheme.cpp:463
+#, kde-format
+msgctxt "@item"
+msgid "Un-named Color Scheme"
+msgstr "ਬਿਨ-ਨਾਂ ਰੰਗ ਸਕੀਮ"
+
+#: colorscheme/ColorSchemeEditor.cpp:109
+#, kde-format
+msgctxt "@label:listbox Column header text for color names"
+msgid "Name"
+msgstr "ਨਾਂ"
+
+#: colorscheme/ColorSchemeEditor.cpp:109
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual colors"
+msgid "Color"
+msgstr "ਰੰਗ"
+
+#: colorscheme/ColorSchemeEditor.cpp:110
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual intense colors"
+msgid "Intense color"
+msgstr "ਤੇਜ਼ ਰੰਗ"
+
+#: colorscheme/ColorSchemeEditor.cpp:111
+#, kde-format
+msgctxt "@label:listbox Column header text for the actual faint colors"
+msgid "Faint color"
+msgstr "ਮੱਧਮ ਰੰਗ"
+
+#: colorscheme/ColorSchemeEditor.cpp:136
+#, kde-format
+msgctxt "@info:status"
+msgid ""
+"The background transparency setting will not be used because your desktop "
+"does not appear to support transparent windows."
+msgstr ""
+
+#: colorscheme/ColorSchemeEditor.cpp:187
+#, kde-format
+msgctxt "@title:window"
+msgid "Select wallpaper image file"
+msgstr "ਵਾਲਪੇਪਰ ਚਿੱਤਰ ਫਾਇਲ ਨੂੰ ਚੁਣੋ"
+
+#: colorscheme/ColorSchemeEditor.cpp:189
+#, kde-format
+msgctxt "@label:textbox Filter in file open dialog"
+msgid "Supported Images"
+msgstr "ਸਹਾਇਕ ਚਿੱਤਰ"
+
+#: colorscheme/ColorSchemeEditor.cpp:333
+#, kde-format
+msgctxt "@title:window"
+msgid "New Color Scheme"
+msgstr "ਨਵੀਂ ਰੰਗ ਸਕੀਮ"
+
+#: colorscheme/ColorSchemeEditor.cpp:336
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Color Scheme"
+msgstr "ਰੰਗ ਸਕੀਮ ਸੋਧ"
+
+#: colorscheme/ColorSchemeEditor.cpp:382
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose color"
+msgstr "ਰੰਗ ਚੁਣਨ ਲਈ ਕਲਿੱਕ ਕਰੋ"
+
+#: colorscheme/ColorSchemeEditor.cpp:387
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose intense color"
+msgstr "ਤੇਜ਼ ਰੰਗ ਚੁਣਨ ਲਈ ਕਲਿੱਕ ਕਰੋ"
+
+#: colorscheme/ColorSchemeEditor.cpp:392
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Click to choose intense color"
+msgctxt "@info:tooltip"
+msgid "Click to choose Faint color"
+msgstr "ਤੇਜ਼ ਰੰਗ ਚੁਣਨ ਲਈ ਕਲਿੱਕ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
+#. i18n: ectx: property (text), widget (QLabel, discriptionLabel)
+#: colorscheme/ColorSchemeEditor.ui:31 KeyBindingEditor.ui:31
+#, kde-format
+msgid "Description:"
+msgstr "ਵੇਰਵਾ:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, randomizedBackgroundCheck)
+#: colorscheme/ColorSchemeEditor.ui:50
+#, kde-format
+msgid ""
+"Hue and saturation values of default foreground and background colors are "
+"randomized by default. Some color schemes might use different randomization "
+"settings.\n"
+"To see any effect, set colors with saturation value greater than 0."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
+#: colorscheme/ColorSchemeEditor.ui:53
+#, kde-format
+msgid "Randomly adjust colors for each session"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
+#: colorscheme/ColorSchemeEditor.ui:60
+#, kde-format
+msgid "Blur background"
+msgstr "ਧੁੰਦਲੀ ਬੈਕਗਰਾਊਂਡ"
+
+#. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
+#: colorscheme/ColorSchemeEditor.ui:69
+#, fuzzy, kde-format
+#| msgid "Background transparency:"
+msgid "Background color transparency:"
+msgstr "ਬੈਕਗਰਾਊਂਡ ਪਾਰਦਰਸ਼ਤਾ:"
+
+#. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
+#. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
+#: colorscheme/ColorSchemeEditor.ui:89 colorscheme/ColorSchemeEditor.ui:123
+#, kde-format
+msgid "Percent"
+msgstr "ਫੀ-ਸਦੀ"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
+#: colorscheme/ColorSchemeEditor.ui:103
+#, fuzzy, kde-format
+#| msgid "Background transparency:"
+msgid "Wallpaper transparency:"
+msgstr "ਬੈਕਗਰਾਊਂਡ ਪਾਰਦਰਸ਼ਤਾ:"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
+#: colorscheme/ColorSchemeEditor.ui:137
+#, kde-format
+msgid "Background image:"
+msgstr "ਬੈਕਗਰਾਊਂਡ ਚਿੱਤਰ:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, wallpaperPath)
+#: colorscheme/ColorSchemeEditor.ui:144
+#, kde-format
+msgid "Edit the path of the background image"
+msgstr "ਬੈਕਗਰਾਊਂਡ ਚਿੱਤਰ ਦਾ ਪਾਥ ਸੋਧੋ"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, wallpaperSelectButton)
+#: colorscheme/ColorSchemeEditor.ui:151
+#, kde-format
+msgid "Choose the background image"
+msgstr "ਬੈਕਗਰਾਊਂਡ ਚਿੱਤਰ ਚੁਣੋ"
+
+#. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
+#. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
+#. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:127
+#: widgets/EditProfileGeneralPage.ui:183
+#, kde-format
+msgid "..."
+msgstr "..."
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
+#: colorscheme/ColorSchemeEditor.ui:165
+#, fuzzy, kde-format
+#| msgid "Wallpaper:"
+msgid "Wallpaper scaling:"
+msgstr "ਵਾਲਪੇਪਰ:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:173
+#, kde-format
+msgid "Tile"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:178
+#, kde-format
+msgid "Stretch"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:183
+#, kde-format
+msgid "Crop"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:188
+#, kde-format
+msgid "Adapt"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
+#: colorscheme/ColorSchemeEditor.ui:193
+#, fuzzy, kde-format
+#| msgid "Scrolling"
+msgid "NoScaling"
+msgstr "ਸਕਰੋਲਿੰਗ"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
+#: colorscheme/ColorSchemeEditor.ui:205
+#, fuzzy, kde-format
+#| msgid "Wallpaper:"
+msgid "Wallpaper flip:"
+msgstr "ਵਾਲਪੇਪਰ:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:213
+#, kde-format
+msgid "NoFlip"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:218
+#, kde-format
+msgid "Horizontal"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:223
+#, kde-format
+msgid "Vertical"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
+#: colorscheme/ColorSchemeEditor.ui:228
+#, kde-format
+msgid "Both"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
+#: colorscheme/ColorSchemeEditor.ui:240
+#, kde-format
+msgid "Horizontal Anchor:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
+#: colorscheme/ColorSchemeEditor.ui:266
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Show scrollbar on the left side"
+#| msgid "Left side"
+msgid "Left"
+msgstr "ਖੱਬੇ ਪਾਸੇ"
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
+#: colorscheme/ColorSchemeEditor.ui:277
+#, kde-format
+msgid "Vertical Anchor:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
+#: colorscheme/ColorSchemeEditor.ui:303
+#, kde-format
+msgid "Top"
+msgstr ""
+
+#: colorscheme/ColorSchemeViewDelegate.cpp:50
+#, kde-format
+msgid "AaZz09..."
+msgstr "AaZz09..."
+
+#: CopyInputDialog.cpp:30
+#, kde-format
+msgid "Copy Input"
+msgstr "ਇੰਪੁੱਟ ਕਾਪੀ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QLabel, filterLabel)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: CopyInputDialog.ui:19 KeyBindingEditor.ui:41
+#, kde-format
+msgid "Filter:"
+msgstr "ਫਿਲਟਰ:"
+
+#. i18n: ectx: property (text), widget (QPushButton, selectAllButton)
+#: CopyInputDialog.ui:46
+#, kde-format
+msgid "Select All"
+msgstr "ਸਭ ਚੁਣੋ"
+
+#. i18n: ectx: property (text), widget (QPushButton, deselectAllButton)
+#: CopyInputDialog.ui:53
+#, kde-format
+msgid "Deselect All"
+msgstr "ਸਭ ਅਣ-ਚੁਣੇ"
+
+#: filterHotSpots/FileFilterHotspot.cpp:169
+#, kde-format
+msgid ""
+"Could not open file with the text editor specified in the profile settings;\n"
+"it will be opened with the system default editor."
+msgstr ""
+
+#: filterHotSpots/FileFilterHotspot.cpp:183
+#, fuzzy, kde-format
+#| msgid "Copy options:"
+msgid "Copy Location"
+msgstr "ਕਾਪੀ ਕਰਨ ਚੋਣਾਂ:"
+
+#: filterHotSpots/FileFilterHotspot.cpp:210
+#, kde-format
+msgid "open with"
+msgstr ""
+
+#: filterHotSpots/FileFilterHotspot.cpp:308
+#, kde-format
+msgid "Generating Thumbnail"
+msgstr ""
+
+#: filterHotSpots/UrlFilterHotspot.cpp:90
+#, kde-format
+msgid "Open Link"
+msgstr "ਲਿੰਕ ਖੋਲ੍ਹੋ"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:92
+#, kde-format
+msgid "Copy Link Address"
+msgstr "ਲਿੰਕ ਐਡਰੈੱਸ ਕਾਪੀ ਕਰੋ"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:95
+#, kde-format
+msgid "Send Email To..."
+msgstr "...ਨੂੰ ਈਮੇਲ ਭੇਜੋ"
+
+#: filterHotSpots/UrlFilterHotspot.cpp:97
+#, kde-format
+msgid "Copy Email Address"
+msgstr "ਈਮੇਲ ਐਡਰੈੱਸ ਕਾਪੀ ਕਰੋ"
+
+#: FontDialog.cpp:27
+#, kde-format
+msgctxt "@title:window"
+msgid "Select font"
+msgstr "ਫੋਂਟ ਚੁਣੋ"
+
+#: FontDialog.cpp:43
+#, kde-format
+msgctxt "@action:button"
+msgid "Show all fonts"
+msgstr "ਸਾਰੇ ਫ਼ੋਂਟ ਵੇਖਾਓ"
+
+#: FontDialog.cpp:70
+#, kde-format
+msgctxt "@info:status"
+msgid ""
+"By its very nature, a terminal program requires font characters that are "
+"equal width (monospace). Any non monospaced font may cause display issues. "
+"This should not be necessary except in rare cases."
+msgstr ""
+
+#: HistorySizeDialog.cpp:26
+#, kde-format
+msgctxt "@title:window"
+msgid "Adjust Scrollback"
+msgstr "ਸਕਰੋਲ-ਬੈਕ ਅਡਜੱਸਟ"
+
+#: HistorySizeDialog.cpp:47
+#, kde-format
+msgctxt "@info:status"
+msgid "Any adjustments are only temporary to this session."
+msgstr "ਕੋਈ ਵੀ ਕੀਤਾ ਬਦਲਾਅ ਕੇਵਲ ਇਹ ਸ਼ੈਸ਼ਨ ਲਈ ਆਰਜ਼ੀ ਹੀ ਹੈ।"
+
+#: KeyBindingEditor.cpp:54
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Enter descriptive label"
+msgstr ""
+
+#: KeyBindingEditor.cpp:63
+#, kde-format
+msgid "Key Combination"
+msgstr "ਸਵਿੱਚ ਮਿਸ਼ਰਨ"
+
+#: KeyBindingEditor.cpp:63
+#, kde-format
+msgid "Output"
+msgstr "ਆਉਟਪੁੱਟ"
+
+#: KeyBindingEditor.cpp:219 KeyBindingEditor.cpp:220
+#, kde-format
+msgid "New Key Binding List"
+msgstr "ਨਵੀਂ ਕੀ ਬਾਈਡਿੰਗ ਲਿਸਟ"
+
+#: KeyBindingEditor.cpp:223
+#, kde-format
+msgid "Edit Key Binding List"
+msgstr "ਕੀ ਬਾਈਡਿੰਗ ਲਿਸਟ ਸੋਧ"
+
+#: KeyBindingEditor.cpp:286
+#, kde-format
+msgid "A key bindings scheme cannot be saved with an empty description."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
+#. i18n: ectx: property (text), widget (QPushButton, btnAdd)
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:240
+#: plugins/SSHManager/sshwidget.ui:272
+#, kde-format
+msgid "Add"
+msgstr "ਸ਼ਾਮਲ"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeEntryButton)
+#. i18n: ectx: property (text), widget (QPushButton, removeKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, removeColorSchemeButton)
+#: KeyBindingEditor.ui:72 widgets/EditProfileAppearancePage.ui:89
+#: widgets/EditProfileKeyboardPage.ui:95
+#, kde-format
+msgid "Remove"
+msgstr "ਹਟਾਓ"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: KeyBindingEditor.ui:94
+#, kde-format
+msgctxt "Title of the area where you test your keys are properly configured"
+msgid "Test Area"
+msgstr "ਟੈਸਟ ਖੇਤਰ"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: KeyBindingEditor.ui:115
+#, kde-format
+msgid "Input:"
+msgstr "ਇੰਪੁੱਟ:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: KeyBindingEditor.ui:128
+#, kde-format
+msgid "Output:"
+msgstr "ਆਉਟਪੁੱਟ:"
+
+#: main.cpp:155
+#, kde-format
+msgctxt "@title"
+msgid "Konsole"
+msgstr "ਕੇਨਸੋਲ"
+
+#: main.cpp:157
+#, kde-format
+msgctxt "@title"
+msgid "Terminal emulator"
+msgstr "ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ"
+
+#: main.cpp:159
+#, kde-format
+msgctxt "@info:credit"
+msgid "(c) 1997-2022, The Konsole Developers"
+msgstr ""
+
+#: main.cpp:333
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kurt Hindenburg"
+msgstr ""
+
+#: main.cpp:335
+#, kde-format
+msgctxt "@info:credit"
+msgid "General maintainer, bug fixes and general improvements"
+msgstr "ਪ੍ਰਬੰਧਕ, ਬੱਗ ਸਥਿਰ ਕੀਤੇ ਅਤੇ ਆਮ ਸੁਧਾਰ"
+
+#: main.cpp:338
+#, kde-format
+msgctxt "@info:credit"
+msgid "Robert Knight"
+msgstr "ਰਾਬਰਟ ਨਾਈਟ"
+
+#: main.cpp:339
+#, kde-format
+msgctxt "@info:credit"
+msgid "Previous maintainer, ported to KDE4"
+msgstr ""
+
+#: main.cpp:341
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lars Doelle"
+msgstr "ਲਾਰਸ ਡੂਇੱਲੇ"
+
+#: main.cpp:341
+#, kde-format
+msgctxt "@info:credit"
+msgid "Original author"
+msgstr "ਅਸਲੀ ਲੇਖਕ"
+
+#: main.cpp:342
+#, kde-format
+msgctxt "@info:credit"
+msgid "Ahmad Samir"
+msgstr ""
+
+#: main.cpp:343 main.cpp:346 main.cpp:349 main.cpp:352
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "General maintainer, bug fixes and general improvements"
+msgctxt "@info:credit"
+msgid "Major refactoring, bug fixes and major improvements"
+msgstr "ਪ੍ਰਬੰਧਕ, ਬੱਗ ਸਥਿਰ ਕੀਤੇ ਅਤੇ ਆਮ ਸੁਧਾਰ"
+
+#: main.cpp:345
+#, kde-format
+msgctxt "@info:credit"
+msgid "Carlos Alves"
+msgstr ""
+
+#: main.cpp:348
+#, kde-format
+msgctxt "@info:credit"
+msgid "Tomaz Canabrava"
+msgstr ""
+
+#: main.cpp:351
+#, kde-format
+msgctxt "@info:credit"
+msgid "Gustavo Carneiro"
+msgstr ""
+
+#: main.cpp:354
+#, kde-format
+msgctxt "@info:credit"
+msgid "Edwin Pujols"
+msgstr ""
+
+#: main.cpp:355 main.cpp:358 main.cpp:360 main.cpp:365 main.cpp:367
+#: main.cpp:368 main.cpp:369
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes and general improvements"
+msgstr "ਬੱਗ ਸਥਿਰ ਕੀਤੇ ਅਤੇ ਆਮ ਸੁਧਾਰ"
+
+#: main.cpp:357
+#, kde-format
+msgctxt "@info:credit"
+msgid "Martin T. H. Sandsmark"
+msgstr ""
+
+#: main.cpp:360
+#, kde-format
+msgctxt "@info:credit"
+msgid "Nate Graham"
+msgstr ""
+
+#: main.cpp:361
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mariusz Glebocki"
+msgstr ""
+
+#: main.cpp:362
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "Bug fixes and general improvements"
+msgctxt "@info:credit"
+msgid "Bug fixes and major improvements"
+msgstr "ਬੱਗ ਸਥਿਰ ਕੀਤੇ ਅਤੇ ਆਮ ਸੁਧਾਰ"
+
+#: main.cpp:364
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thomas Surrel"
+msgstr ""
+
+#: main.cpp:367
+#, kde-format
+msgctxt "@info:credit"
+msgid "Jekyll Wu"
+msgstr ""
+
+#: main.cpp:368
+#, kde-format
+msgctxt "@info:credit"
+msgid "Waldo Bastian"
+msgstr "ਵਾਲਡੋ ਬਾਸਟਿਨ"
+
+#: main.cpp:369
+#, kde-format
+msgctxt "@info:credit"
+msgid "Stephan Binner"
+msgstr "ਸਟੀਫਨ ਬਿੱਨੀਰ"
+
+#: main.cpp:370
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thomas Dreibholz"
+msgstr ""
+
+#: main.cpp:370
+#, kde-format
+msgctxt "@info:credit"
+msgid "General improvements"
+msgstr "ਆਮ ਸੁਧਾਰ"
+
+#: main.cpp:371
+#, kde-format
+msgctxt "@info:credit"
+msgid "Chris Machemer"
+msgstr "ਕਰਿਸ ਮਾਚੀਮੀਰ"
+
+#: main.cpp:371 main.cpp:372 main.cpp:399 main.cpp:400 main.cpp:401
+#: main.cpp:402
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes"
+msgstr "ਬੱਗ ਸਥਿਰ"
+
+#: main.cpp:372
+#, kde-format
+msgctxt "@info:credit"
+msgid "Francesco Cecconi"
+msgstr ""
+
+#: main.cpp:373
+#, kde-format
+msgctxt "@info:credit"
+msgid "Stephan Kulow"
+msgstr "ਸਟੀਫਨ ਕੋਲੋ"
+
+#: main.cpp:373
+#, kde-format
+msgctxt "@info:credit"
+msgid "Solaris support and history"
+msgstr "Solaris ਸਹਾਇਤਾ ਅਤੇ ਅਤੀਤ"
+
+#: main.cpp:374
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Neundorf"
+msgstr "Alexander Neundorf"
+
+#: main.cpp:375
+#, kde-format
+msgctxt "@info:credit"
+msgid "Bug fixes and improved startup performance"
+msgstr "ਬੱਗ ਫਿਕਸ ਅਤੇ ਸ਼ੁਰੂਆਤੀ ਕਾਰਗੁਜ਼ਾਰੀ ਸੁਧਾਰ"
+
+#: main.cpp:377
+#, kde-format
+msgctxt "@info:credit"
+msgid "Peter Silva"
+msgstr "ਪੀਟਰ ਸੀਲਵਾ"
+
+#: main.cpp:377
+#, kde-format
+msgctxt "@info:credit"
+msgid "Marking improvements"
+msgstr "ਸੁਧਾਰ ਕੀਤੇ"
+
+#: main.cpp:378
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lotzi Boloni"
+msgstr "ਲੁਟਜ਼ੀ ਬੋਲੋਨੀ"
+
+#: main.cpp:380
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Embedded Konsole\n"
+"Toolbar and session names"
+msgstr ""
+"ਸ਼ਾਮਲ ਕਨਸੋਂਲ\n"
+"ਟੂਲਬਾਰ ਅਤੇ ਸ਼ੈਸ਼ਨ ਨਾਂ"
+
+#: main.cpp:383
+#, kde-format
+msgctxt "@info:credit"
+msgid "David Faure"
+msgstr "ਡੇਵਿਡ ਫਾਉਰੀ"
+
+#: main.cpp:385
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Embedded Konsole\n"
+"General improvements"
+msgstr ""
+"ਇੰਬੈੱਡ ਕਨਸੋਲ\n"
+"ਆਮ ਸੁਧਾਰ"
+
+#: main.cpp:388
+#, kde-format
+msgctxt "@info:credit"
+msgid "Antonio Larrosa"
+msgstr "ਐਂਟੋਨੀਓ ਲਾਰੋਸਾ"
+
+#: main.cpp:388
+#, kde-format
+msgctxt "@info:credit"
+msgid "Visual effects"
+msgstr "ਦਿੱਖ ਪਰਭਾਵ"
+
+#: main.cpp:389
+#, kde-format
+msgctxt "@info:credit"
+msgid "Matthias Ettrich"
+msgstr "ਮੈਥੂਸ ਇੱਟਰਿਚ"
+
+#: main.cpp:391
+#, kde-format
+msgctxt "@info:credit"
+msgid ""
+"Code from the kvt project\n"
+"General improvements"
+msgstr ""
+"kvt ਪ੍ਰੋਜੈਕਟ ਤੋਂ ਕੋਡ\n"
+"ਆਮ ਸੁਧਾਰ"
+
+#: main.cpp:394
+#, kde-format
+msgctxt "@info:credit"
+msgid "Warwick Allison"
+msgstr "ਵਾਵਿਕ ਐਲੀਸਨ"
+
+#: main.cpp:395
+#, kde-format
+msgctxt "@info:credit"
+msgid "Schema and text selection improvements"
+msgstr "ਸਕੀਮਾਂ ਅਤੇ ਪਾਠ ਚੋਣ ਸੁਧਾਰ"
+
+#: main.cpp:397
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dan Pilone"
+msgstr "ਡੇਨ ਪਾਲੋਨ"
+
+#: main.cpp:397
+#, kde-format
+msgctxt "@info:credit"
+msgid "SGI port"
+msgstr "SGI ਪੋਰਟ"
+
+#: main.cpp:398
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kevin Street"
+msgstr "ਕੇਵਿਨ ਸਟਰੀਟ"
+
+#: main.cpp:398
+#, kde-format
+msgctxt "@info:credit"
+msgid "FreeBSD port"
+msgstr "FreeBSD ਪੋਰਟ"
+
+#: main.cpp:399
+#, kde-format
+msgctxt "@info:credit"
+msgid "Sven Fischer"
+msgstr "ਸਵੀਨ ਫਿਸਚੀਰ"
+
+#: main.cpp:400
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dale M. Flaven"
+msgstr "ਡਲੀ ਐਂਮ. ਫਲਾਵਿਨ"
+
+#: main.cpp:401
+#, kde-format
+msgctxt "@info:credit"
+msgid "Martin Jones"
+msgstr "ਮਾਰਤਿਨ ਜੋਨਜ਼"
+
+#: main.cpp:402
+#, kde-format
+msgctxt "@info:credit"
+msgid "Lars Knoll"
+msgstr "ਲਾਰਸ ਕਨੱਲ"
+
+#: main.cpp:403
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thanks to many others.\n"
+msgstr "ਕਈ ਹੋਰਾਂ ਦਾ ਧੰਨਵਾਦ ਹੈ।\n"
+
+#: MainWindow.cpp:314
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&New Tab"
+msgstr "ਨਵੀਂ ਟੈਬ(&N)"
+
+#: MainWindow.cpp:324
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Clone Tab"
+msgstr "ਟੈਬ ਕਲੋਨ ਕਰੋ(&C)"
+
+#: MainWindow.cpp:331
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Window"
+msgstr "ਨਵੀਂ ਵਿੰਡੋ(&W)"
+
+#: MainWindow.cpp:338
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close Window"
+msgstr "ਵਿੰਡੋ ਬੰਦ ਕਰੋ"
+
+#: MainWindow.cpp:343
+#, kde-format
+msgctxt "@title:menu"
+msgid "&Bookmarks"
+msgstr "ਬੁੱਕਮਾਰਕ(&B)"
+
+#: MainWindow.cpp:364
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Manage Profiles..."
+msgstr "....ਪਰੋਫਾਇਲ ਪਰਬੰਧ"
+
+#: MainWindow.cpp:370
+#, kde-format
+msgctxt "@item"
+msgid "Activate Menu"
+msgstr "ਮੇਨੂ ਐਕਟੀਵੇਟ ਕਰੋ"
+
+#: MainWindow.cpp:376
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Move Tab Left"
+msgctxt "@action:inmenu"
+msgid "Save Tab Layout..."
+msgstr "ਟੈਬ ਖੱਬੇ ਭੇਜੋ"
+
+#: MainWindow.cpp:385
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load Tab Layout..."
+msgstr ""
+
+#: MainWindow.cpp:618 MainWindow.cpp:635
+#, kde-format
+msgctxt "@info"
+msgid "There is a process running in this window. Do you still want to quit?"
+msgid_plural ""
+"There are %1 processes running in this window. Do you still want to quit?"
+msgstr[0] "ਇਸ ਵਿੰਡੋ ਵਿੱਚ ਇੱਕ ਪਰੋਸੈਸ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+msgstr[1] "ਇਸ ਵਿੰਡੋ ਵਿੱਚ %1 ਪਰੋਸੈਸ ਚੱਲ ਰਹੇ ਹਨ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: MainWindow.cpp:624 MainWindow.cpp:641 MainWindow.cpp:655
+#, kde-format
+msgctxt "@title"
+msgid "Confirm Close"
+msgstr "ਬੰਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ"
+
+#: MainWindow.cpp:625 MainWindow.cpp:642 MainWindow.cpp:656
+#, kde-format
+msgctxt "@action:button"
+msgid "Close &Window"
+msgstr "ਵਿੰਡੋ ਬੰਦ ਕਰੋ(&W)"
+
+#: MainWindow.cpp:643 MainWindow.cpp:657
+#, kde-format
+msgctxt "@action:button"
+msgid "Close Current &Tab"
+msgstr "ਮੌਜੂਦਾ ਟੈਬ ਬੰਦ ਕਰੋ(&T)"
+
+#: MainWindow.cpp:652
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid ""
+#| "There is a process running in this window. Do you still want to quit?"
+#| msgid_plural ""
+#| "There are %1 processes running in this window. Do you still want to quit?"
+msgctxt "@info"
+msgid "There are %1 open terminals in this window. Do you still want to quit?"
+msgstr "ਇਸ ਵਿੰਡੋ ਵਿੱਚ ਇੱਕ ਪਰੋਸੈਸ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: MainWindow.cpp:759 Part.cpp:297
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Profiles"
+msgstr "ਪਰੋਫਾਇਲ"
+
+#: MainWindow.cpp:776
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "General"
+msgstr "ਆਮ"
+
+#: MainWindow.cpp:787
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Tab Bar / Splitters"
+msgstr ""
+
+#: MainWindow.cpp:792
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Temporary Files"
+msgstr ""
+
+#: MainWindow.cpp:797
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Thumbnails"
+msgstr ""
+
+#: Part.cpp:300
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Part Info"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, QuickCommandsWidget)
+#: plugins/QuickCommands/qcwidget.ui:14
+#, kde-format
+msgid "Form"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
+#. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
+#: plugins/QuickCommands/qcwidget.ui:53 plugins/SSHManager/sshwidget.ui:32
+#, kde-format
+msgid "Invert"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: plugins/QuickCommands/qcwidget.ui:91
+#, fuzzy, kde-format
+#| msgctxt "@item:intable The session title"
+#| msgid "Title"
+msgid "Title"
+msgstr "ਟਾਈਟਲ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: plugins/QuickCommands/qcwidget.ui:101
+#, kde-format
+msgid "Tooltip"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelGroup)
+#: plugins/QuickCommands/qcwidget.ui:111
+#, kde-format
+msgid "Group"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, group)
+#. i18n: ectx: property (currentText), widget (QComboBox, folder)
+#: plugins/QuickCommands/qcwidget.ui:122 plugins/SSHManager/sshwidget.ui:186
+#, fuzzy, kde-format
+#| msgctxt "Name of the default/builtin profile"
+#| msgid "Default"
+msgid "Default"
+msgstr "ਡਿਫਾਲਟ"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: plugins/QuickCommands/qcwidget.ui:137
+#, fuzzy, kde-format
+#| msgid "Command:"
+msgid "Command"
+msgstr "ਕਮਾਂਡ:"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: plugins/QuickCommands/qcwidget.ui:187
+#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#, fuzzy, kde-format
+#| msgctxt "@info:shell Alert the user with red color text"
+#| msgid "Warning: "
+msgid "Warnings"
+msgstr "ਚੇਤਾਵਨੀ: "
+
+#. i18n: ectx: property (text), widget (QPushButton, btnRun)
+#: plugins/QuickCommands/qcwidget.ui:230
+#, kde-format
+msgid "Run"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, btnSave)
+#: plugins/QuickCommands/qcwidget.ui:250
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgid "Save"
+msgstr "ਫਾਇਲ ਖੋਲ੍ਹੋ"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
+#: plugins/QuickCommands/qcwidget.ui:260
+#, kde-format
+msgid "Update"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, btnCancel)
+#: plugins/QuickCommands/qcwidget.ui:270 plugins/SSHManager/sshwidget.ui:282
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Cancel paste"
+msgid "Cancel"
+msgstr "ਚੇਪਣਾ ਰੱਦ ਕਰੋ(&C)"
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:38
+#, fuzzy, kde-format
+#| msgid "Command:"
+msgid "Quick Commands"
+msgstr "ਕਮਾਂਡ:"
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:57
+#, kde-format
+msgid "Show Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:146
+#: plugins/QuickCommands/quickcommandswidget.cpp:157
+#, kde-format
+msgid "A duplicate item exists"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:163
+#, kde-format
+msgid "Please fix all the warnings before trying to run this script"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:187
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid ""
+#| "There is a process running in this window. Do you still want to quit?"
+#| msgid_plural ""
+#| "There are %1 processes running in this window. Do you still want to quit?"
+msgid "There are some errors on the script, do you really want to run it?"
+msgstr "ਇਸ ਵਿੰਡੋ ਵਿੱਚ ਇੱਕ ਪਰੋਸੈਸ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:188
+#, kde-format
+msgid "Shell Errors"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:189
+#, kde-format
+msgctxt "@action:button"
+msgid "Run"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:214
+#, kde-format
+msgid ""
+"You are about to delete the group %1,\n"
+" with multiple configurations, are you sure?"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#, kde-format
+msgid "You are about to delete %1, are you sure?"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#, fuzzy, kde-format
+#| msgid "Remote Connection"
+msgid "Delete Quick Commands Configurations"
+msgstr "ਰਿਮੋਟ ਕੁਨੈਕਸ਼ਨ"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:248
+#, kde-format
+msgid "Title can not be empty or blank"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#, fuzzy, kde-format
+#| msgid "Command to execute"
+msgid "Command can not be empty"
+msgstr "ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#, fuzzy, kde-format
+#| msgid "Rename Tab"
+msgid "Rename"
+msgstr "ਟੈਬ ਨਾਂ ਬਦਲੋ"
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandswidget.cpp:307
+#, fuzzy, kde-format
+#| msgctxt "@info:shell Alert the user with red color text"
+#| msgid "Warning: "
+msgid "Warnings (*)"
+msgstr "ਚੇਤਾਵਨੀ: "
+
+#: plugins/SSHManager/sshmanagermodel.cpp:46
+#, fuzzy, kde-format
+#| msgid "Confirm Close"
+msgctxt "@item:inlistbox Hosts from ssh/config file"
+msgid "SSH Config"
+msgstr "ਬੰਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:49
+#, fuzzy, kde-format
+#| msgctxt "Name of the default/builtin profile"
+#| msgid "Default"
+msgctxt "@item:inlistbox The default list of ssh hosts"
+msgid "Default"
+msgstr "ਡਿਫਾਲਟ"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:75
+#, kde-format
+msgid "%1 is a folder for SSH entries"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagermodel.cpp:79
+#: plugins/SSHManager/sshmanagermodel.cpp:302
+#: plugins/SSHManager/sshmanagermodel.cpp:370
+#: plugins/SSHManager/sshmanagermodel.cpp:403
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:97
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#, fuzzy, kde-format
+#| msgid "Confirm Close"
+msgid "SSH Config"
+msgstr "ਬੰਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ"
+
+#: plugins/SSHManager/sshmanagermodel.cpp:103
+#, fuzzy, kde-format
+#| msgid "Host:"
+msgid "Host: %1"
+msgstr "ਹੋਸਟ:"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:46
+#, kde-format
+msgid "SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:64
+#, fuzzy, kde-format
+#| msgid "Show Menu Bar"
+msgid "Show SSH Manager"
+msgstr "ਮੇਨੂ ਪੱਟੀ ਵੇਖਾਓ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:73
+#: plugins/SSHManager/sshwidget.ui:105
+#, kde-format
+msgid "SSH Key"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:112
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Delete"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:136
+#, kde-format
+msgid "Don't Change"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:207
+#, kde-format
+msgid ""
+"You are about to delete the folder %1,\n"
+" with multiple SSH Configurations, are you sure?"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:215
+#, fuzzy, kde-format
+#| msgid "Remote Connection"
+msgctxt "@title:window"
+msgid "Delete SSH Configurations"
+msgstr "ਰਿਮੋਟ ਕੁਨੈਕਸ਼ਨ"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:362
+#, kde-format
+msgid "Missing Hostname"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:367
+#, kde-format
+msgid "Missing Name"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:374
+#, kde-format
+msgid "If Use Ssh Config is set, do not specify sshkey or username."
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
+#, kde-format
+msgid "At least Username or SSHKey must be set"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:385
+#, kde-format
+msgid "Missing Folder"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#, kde-format
+msgid "An SSH session must have a profile"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#, kde-format
+msgid "Cannot delete this folder"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#, kde-format
+msgid "Delete folder and all of its contents"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:421
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Double click to change shortcut"
+msgid "Double click to change the folder name."
+msgstr "ਸ਼ਾਰਟਕੱਟ ਬਦਲਣ ਲਈ ਦੋ ਵਾਰ ਕਲਿੱਕ ਕਰੋ"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#, fuzzy, kde-format
+#| msgctxt "@info:shell"
+#| msgid "Do not close the initial session automatically when it ends."
+msgid "You can't delete an automatically added entry."
+msgstr "ਜਦੋਂ ਬੰਦ ਹੋਵੇ ਤਾਂ ਸ਼ੁਰੂਆਤੀ ਸ਼ੈਸ਼ਨ ਆਟੋਮੈਟਿਕ ਹੀ ਬੰਦ ਨਾ ਕਰੋ।"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#, fuzzy, kde-format
+#| msgid "Edit the selected profile(s)"
+msgid "Delete selected entry"
+msgstr "ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਸੋਧੋ"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#, kde-format
+msgid ""
+"Could not get the process name, assume that we can't request a connection"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#, kde-format
+msgid "Error issuing SSH Command"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#, kde-format
+msgid ""
+"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
+msgstr ""
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#: plugins/SSHManager/sshwidget.ui:19
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Filter"
+msgid "Filter..."
+msgstr "ਫਿਲਟਰ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
+#: plugins/SSHManager/sshwidget.ui:29
+#, kde-format
+msgid "Show entries that don't match the filter"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: plugins/SSHManager/sshwidget.ui:54
+#, kde-format
+msgid "Identifier"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, name)
+#: plugins/SSHManager/sshwidget.ui:61
+#, fuzzy, kde-format
+#| msgid "The number of pixels between two lines"
+msgid "A name for this ssh entry"
+msgstr "ਦੋ ਲਾਈਨਾਂ ਦੇ ਵਿਚਾਲੇ ਪਿਕਸਲਾਂ ਦੀ ਗਿਣਤੀ"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
+#: plugins/SSHManager/sshwidget.ui:64
+#, fuzzy, kde-format
+#| msgid "The number of pixels between two lines"
+msgid "The name of this entry on the list"
+msgstr "ਦੋ ਲਾਈਨਾਂ ਦੇ ਵਿਚਾਲੇ ਪਿਕਸਲਾਂ ਦੀ ਗਿਣਤੀ"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: plugins/SSHManager/sshwidget.ui:71
+#, kde-format
+msgid "SSH Hostname"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
+#: plugins/SSHManager/sshwidget.ui:78 plugins/SSHManager/sshwidget.ui:81
+#, fuzzy, kde-format
+#| msgid "Change the shape of the cursor"
+msgid "The hostname of the server"
+msgstr "ਕਰਸਰ ਦੀ ਸ਼ਕਲ ਬਦਲੋ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: plugins/SSHManager/sshwidget.ui:88
+#, kde-format
+msgid "Port"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, port)
+#: plugins/SSHManager/sshwidget.ui:95
+#, kde-format
+msgid "The port of the server, 22 is the default for ssh connections"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLineEdit, port)
+#: plugins/SSHManager/sshwidget.ui:98
+#, kde-format
+msgid "22"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:114
+#, kde-format
+msgid "The private key to be used for this connection"
+msgstr ""
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:120
+#, fuzzy, kde-format
+#| msgid "&Terminate Task"
+msgid "The private key"
+msgstr "ਕੰਮ ਖਤਮ ਕਰੋ(&T)"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: plugins/SSHManager/sshwidget.ui:140
+#, fuzzy, kde-format
+#| msgid "User Name: %u"
+msgid "Username"
+msgstr "ਵਰਤੋਂਕਾਰ ਨਾਂ: %u"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:147
+#, fuzzy, kde-format
+#| msgid "New Remote Connection"
+msgid "The username for the connection"
+msgstr "ਨਵਾਂ ਰਿਮੋਟ ਕੁਨੈਕਸ਼ਨ"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:150
+#, fuzzy, kde-format
+#| msgctxt "NAME OF TRANSLATORS"
+#| msgid "Your names"
+msgid "Your username"
+msgstr "ਅ.ਸ.ਆਲਮ. ੨੦੦੪-੨੦੧੯"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
+#: plugins/SSHManager/sshwidget.ui:157
+#, kde-format
+msgid ""
+"If this is set, we don't rely on the SSH key set above, but on the "
+"configuration on ~/.ssh/config"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
+#: plugins/SSHManager/sshwidget.ui:160
+#, kde-format
+msgid "Use ~/.ssh/config for key"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, folderLabel)
+#: plugins/SSHManager/sshwidget.ui:167
+#, kde-format
+msgid "Folder"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, folder)
+#: plugins/SSHManager/sshwidget.ui:180
+#, kde-format
+msgid "For organizational purposes, this entry will be inside of this folder."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: plugins/SSHManager/sshwidget.ui:193
+#, fuzzy, kde-format
+#| msgctxt "@title Preferences page name"
+#| msgid "Profiles"
+msgid "Profile"
+msgstr "ਪਰੋਫਾਇਲ"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, profile)
+#: plugins/SSHManager/sshwidget.ui:206
+#, kde-format
+msgid "The profile to be active when the ssh session starts"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
+#: plugins/SSHManager/sshwidget.ui:231
+#, kde-format
+msgid "Add a new SSH Entry"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
+#: plugins/SSHManager/sshwidget.ui:245
+#, fuzzy, kde-format
+#| msgid "Edit the selected profile(s)"
+msgid "Delete selected SSH entry"
+msgstr "ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਸੋਧੋ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
+#: plugins/SSHManager/sshwidget.ui:259
+#, fuzzy, kde-format
+#| msgid "Edit the selected profile(s)"
+msgid "Edit selected entry"
+msgstr "ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਸੋਧੋ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
+#: plugins/SSHManager/sshwidget.ui:269
+#, fuzzy, kde-format
+#| msgid "Remote Connection"
+msgid "Add new SSH Configuration"
+msgstr "ਰਿਮੋਟ ਕੁਨੈਕਸ਼ਨ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
+#: plugins/SSHManager/sshwidget.ui:279
+#, kde-format
+msgid "Cancel Add or Edit"
+msgstr ""
+
+#: pluginsystem/PluginManager.cpp:83
+#, fuzzy, kde-format
+#| msgid "No profiles available"
+msgid "No plugins available"
+msgstr "ਕੋਈ ਪਰੋਫਾਇਲ ਉਪਲੱਬਧ ਹੈ"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
+#. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
+#: PrintOptions.ui:14 PrintOptions.ui:20
+#, kde-format
+msgid "Output Options"
+msgstr "ਆਉਟਪੁੱਟ ਚੋਣਾਂ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
+#. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
+#: PrintOptions.ui:39 settings/konsole.kcfg:165
+#, kde-format
+msgid "Printer &friendly mode (black text, no background)"
+msgstr "ਪਰਿੰਟਰ ਸਹਿਯੋਗੀ ਢੰਗ( ਕਾਲ਼ੇ ਅੱਖਰ, ਕੋਈ ਬੈਕਗਰਾਊਂਡ ਨਹੀਂ)(&f)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
+#. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
+#: PrintOptions.ui:46 settings/konsole.kcfg:169
+#, kde-format
+msgid "&Scale output"
+msgstr "ਆਉਟਪੁੱਟ ਸਕੇਲ ਕਰੋ(&S)"
+
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:459
+#, kde-format
+msgid "Default profile"
+msgstr "ਡਿਫਾਲਟ ਪਰੋਫਾਇਲ"
+
+#: profile/ProfileManager.cpp:265
+#, kde-format
+msgid "Konsole does not have permission to save this profile to %1"
+msgstr ""
+
+#: profile/ProfileModel.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox Column header text for color names"
+#| msgid "Name"
+msgctxt "@title:column Profile name"
+msgid "Name"
+msgstr "ਨਾਂ"
+
+#: profile/ProfileModel.cpp:57
+#, fuzzy, kde-format
+#| msgctxt "@title:column Profile shortcut text"
+#| msgid "Shortcut"
+msgctxt "@title:column Profile keyboard shortcut"
+msgid "Shortcut"
+msgstr "ਸ਼ਾਰਟਕੱਟ"
+
+#: profile/ProfileModel.cpp:80
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu A read only (locked) session"
+#| msgid "Read-only"
+msgctxt ""
+"@label:textbox added to the name of the built-in profile, to point out it's "
+"read-only"
+msgid " [Read-only]"
+msgstr "ਕੇਵਲ-ਪੜ੍ਹਨ ਲਈ"
+
+#: profile/ProfileModel.cpp:84
+#, fuzzy, kde-format
+#| msgctxt "Name of the default/builtin profile"
+#| msgid "Default"
+msgctxt "@label:textbox added to the name of the current default profile"
+msgid " [Default]"
+msgstr "ਡਿਫਾਲਟ"
+
+#: profile/ProfileModel.cpp:99
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Built-in profile is always available"
+msgstr ""
+
+#: profile/ProfileModel.cpp:111
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Double click to change shortcut"
+msgstr "ਸ਼ਾਰਟਕੱਟ ਬਦਲਣ ਲਈ ਦੋ ਵਾਰ ਕਲਿੱਕ ਕਰੋ"
+
+#: RenameTabDialog.cpp:25
+#, kde-format
+msgid "Tab Properties"
+msgstr ""
+
+#: SaveHistoryTask.cpp:68
+#, kde-format
+msgid "Save Output From %1"
+msgstr "%1 ਤੋਂ ਆਉਟਪੁੱਟ ਸੰਭਾਲੋ"
+
+#: SaveHistoryTask.cpp:80
+#, kde-format
+msgid "%1 is an invalid URL, the output could not be saved."
+msgstr "%1 ਇੱਕ ਗਲਤੀ URL ਹੈ, ਆਉਟਪੁੱਟ ਸੰਭਾਲੀ ਨਹੀਂ ਜਾ ਸਕੀ ਹੈ।"
+
+#: SaveHistoryTask.cpp:161
+#, kde-format
+msgid ""
+"A problem occurred when saving the output.\n"
+"%1"
+msgstr ""
+"ਆਉਟਪੁੱਟ ਸੰਭਾਲਣ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।\n"
+"%1"
+
+#: schemas.cpp:1
+#, kde-format
+msgid "Black on Light Yellow"
+msgstr "ਹਲਕੇ ਪੀਲੇ 'ਤੇ ਕਾਲਾ"
+
+#: schemas.cpp:2
+#, kde-format
+msgid "Black on Random Light"
+msgstr "ਰਲਵੀਂ ਲਾਇਟ ਉੱਤੇ ਕਾਲਾ"
+
+#: schemas.cpp:3
+#, kde-format
+msgid "Black on White"
+msgstr "ਸਫੈਦ 'ਤੇ ਕਾਲਾ"
+
+#: schemas.cpp:4
+#, kde-format
+msgid "Blue on Black"
+msgstr "ਕਾਲੇ ਉੱਤੇ ਚਿੱਟਾ"
+
+#: schemas.cpp:5
+#, kde-format
+msgid "Breeze"
+msgstr "ਬਰੀਜ਼"
+
+#: schemas.cpp:6
+#, kde-format
+msgid "Dark Pastels"
+msgstr "ਡਾਰਕ ਪਿਸਟਲਸ"
+
+#: schemas.cpp:7
+#, kde-format
+msgid "Green on Black"
+msgstr "ਕਾਲੇ 'ਤੇ ਹਰਾ"
+
+#: schemas.cpp:8
+#, kde-format
+msgid "Linux Colors"
+msgstr "ਲਿਨਕਸ ਰੰਗ"
+
+#: schemas.cpp:9
+#, kde-format
+msgid "Red on Black"
+msgstr "ਕਾਲੇ ਉੱਤੇ ਲਾਲ"
+
+#: schemas.cpp:10
+#, kde-format
+msgid "Solarized"
+msgstr "ਸੋਲਾਈਜ਼ਡ"
+
+#: schemas.cpp:11
+#, kde-format
+msgid "Solarized Light"
+msgstr "ਸੋਲਾਈਜ਼ਡ ਰੌਸ਼ਨੀ"
+
+#: schemas.cpp:12
+#, kde-format
+msgid "White on Black"
+msgstr "ਕਾਲੇ 'ਤੇ ਚਿੱਟਾ"
+
+#: schemas.cpp:13
+#, kde-format
+msgid "Default (XFree 4)"
+msgstr "ਮੂਲ (XFree 4)"
+
+#: schemas.cpp:14
+#, kde-format
+msgid "Linux console"
+msgstr "ਲਿਨਕਸ ਕੰਨਸੋਲ"
+
+#: schemas.cpp:15
+#, kde-format
+msgid "macOS"
+msgstr ""
+
+#: schemas.cpp:16
+#, kde-format
+msgid "Solaris console"
+msgstr "ਸਲੋਰਸ ਕੰਨਸੋਲ"
+
+#: session/Session.cpp:88
+#, fuzzy, kde-format
+#| msgid "Bell in session '%1'"
+msgid "Bell in '%1' (Session '%2')"
+msgstr "ਸ਼ੈਸ਼ਨ '%1' ਵਿੱਚ ਘੰਟੀ ਵੱਜੀ"
+
+#: session/Session.cpp:373
+#, kde-format
+msgid "Could not find binary: "
+msgstr "ਬਾਈਨਰੀ ਨਹੀਂ ਲੱਭਿਆ ਜਾ ਸਕਿਆ: "
+
+#: session/Session.cpp:382
+#, kde-format
+msgctxt "@info:shell Alert the user with red color text"
+msgid "Warning: "
+msgstr "ਚੇਤਾਵਨੀ: "
+
+#: session/Session.cpp:457
+#, kde-format
+msgid "Could not find an interactive shell to start."
+msgstr ""
+
+#: session/Session.cpp:463 session/Session.cpp:465
+#, kde-format
+msgid ""
+"Could not find '%1', starting '%2' instead.  Please check your profile "
+"settings."
+msgstr ""
+
+#: session/Session.cpp:516
+#, kde-format
+msgid "Could not start program '%1' with arguments '%2'."
+msgstr "ਪਰੋਗਰਾਮ '%1' ਆਰਗੂਮੈਂਟ '%2' ਨਾਲ ਚਾਲੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।"
+
+#: session/Session.cpp:661
+#, fuzzy, kde-format
+#| msgid "Silence in session '%1'"
+msgid "Silence in '%1' (Session '%2')"
+msgstr "ਸ਼ੈਸ਼ਨ '%1' ਵਿੱਚ ਖਾਮੋਸ਼ੀ"
+
+#: session/Session.cpp:665 session/Session.cpp:1825
+#: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#, fuzzy, kde-format
+#| msgid "&Close Session"
+msgid "Show session"
+msgstr "ਸ਼ੈਸ਼ਨ ਬੰਦ ਕਰੋ(&C)"
+
+#: session/Session.cpp:929
+#, kde-format
+msgid ""
+"The D-Bus methods sendText/runCommand were just used.  There are security "
+"concerns about allowing these methods to be public.  If desired, these "
+"methods can be changed to internal use only by re-compiling Konsole. <p>This "
+"warning will only show once for this Konsole instance.</p>"
+msgstr ""
+
+#: session/Session.cpp:965
+#, kde-format
+msgctxt "@info:shell This session is done"
+msgid "Finished"
+msgstr "ਸਮਾਪਤ"
+
+#: session/Session.cpp:979 session/Session.cpp:990
+#, kde-format
+msgid "Program '%1' crashed."
+msgstr "ਪਰੋਗਰਾਮ '%1' ਕਰੈਸ਼ ਹੋ ਗਿਆ।"
+
+#: session/Session.cpp:981
+#, kde-format
+msgid "Program '%1' exited with status %2."
+msgstr "ਪਰੋਗਰਾਮ '%1' ਹਾਲਤ %2 ਵਿੱਚ ਬੰਦ ਹੋ ਗਿਆ ਹੈ।"
+
+#: session/Session.cpp:1489
+#, kde-format
+msgid "ZModem Progress"
+msgstr "ZModem ਤਰੱਕੀ"
+
+#: session/Session.cpp:1821
+#, fuzzy, kde-format
+#| msgid "Activity in session '%1'"
+msgid "Activity in '%1' (Session '%2')"
+msgstr "ਸ਼ੈਸ਼ਨ '%1' ਵਿੱਚ ਕਾਰਵਾਈ"
+
+#: session/SessionController.cpp:147
+#, kde-format
+msgid "Konsole"
+msgstr "ਕੇ-ਨਸੋਲ"
+
+#: session/SessionController.cpp:360
+#, kde-format
+msgid "The process '%1' has finished running in session '%2'"
+msgstr ""
+
+#: session/SessionController.cpp:442
+#, kde-format
+msgid "Konsole does not know how to open the bookmark: "
+msgstr "ਕਨਸੋਲ ਨਹੀਂ ਜਾਣਦੀ ਹੈ ਕਿ ਬੁੱਕਮਾਰਕ ਕਿਵੇਂ ਖੋਲ੍ਹਣਾ ਹੈ: "
+
+#: session/SessionController.cpp:521
+#, kde-format
+msgid "Search for '%1' with"
+msgstr "'%1' ਨਾਲ ਖੋਜੋ"
+
+#: session/SessionController.cpp:537
+#, kde-format
+msgid "Configure Web Shortcuts..."
+msgstr "ਵੈੱਬ ਸ਼ਾਰਟਕੱਟ ਸੰਰਚਨਾ..."
+
+#: session/SessionController.cpp:651
+#, kde-format
+msgid "&Close Session"
+msgstr "ਸ਼ੈਸ਼ਨ ਬੰਦ ਕਰੋ(&C)"
+
+#: session/SessionController.cpp:658
+#, kde-format
+msgid "Open File Manager"
+msgstr "ਫਾਇਲ ਮੈਨੇਜਰ ਖੋਲ੍ਹੋ"
+
+#: session/SessionController.cpp:670
+#, fuzzy, kde-format
+#| msgid "&Copy"
+msgid "Copy"
+msgstr "ਕਾਪੀ ਕਰੋ(&C)"
+
+#: session/SessionController.cpp:676
+#, kde-format
+msgid "Copy except prompts"
+msgstr ""
+
+#: session/SessionController.cpp:682
+#, fuzzy, kde-format
+#| msgid "Copy Input"
+msgid "Copy user input"
+msgstr "ਇੰਪੁੱਟ ਕਾਪੀ ਕਰੋ"
+
+#: session/SessionController.cpp:688
+#, fuzzy, kde-format
+#| msgid "Copy Input"
+msgid "Copy command output"
+msgstr "ਇੰਪੁੱਟ ਕਾਪੀ ਕਰੋ"
+
+#: session/SessionController.cpp:703
+#, kde-format
+msgid "Paste Selection"
+msgstr "ਚੋਣ ਚੇਪੋ"
+
+#: session/SessionController.cpp:710
+#, kde-format
+msgid "Web Search"
+msgstr "ਵੈੱਬ ਖੋਜ"
+
+#: session/SessionController.cpp:716
+#, kde-format
+msgid "&Select All"
+msgstr "ਸਭ ਚੁਣੋ(&S)"
+
+#: session/SessionController.cpp:720
+#, kde-format
+msgid "Select &Line"
+msgstr "ਲਾਈਨ ਚੁਣੋ(&L)"
+
+#: session/SessionController.cpp:723
+#, kde-format
+msgid "Save Output &As..."
+msgstr "ਆਉਟਪੁੱਟ ਇੰਝ ਸੰਭਾਲੋ(&A)..."
+
+#: session/SessionController.cpp:729
+#, kde-format
+msgid "&Print Screen..."
+msgstr "...ਸਕਰੀਨ ਪਰਿੰਟ ਕਰੋ(&P)"
+
+#: session/SessionController.cpp:733
+#, kde-format
+msgid "Adjust Scrollback..."
+msgstr "ਸਕਰੋਲ-ਬੈਕ ਅਡਜੱਸਟ..."
+
+#: session/SessionController.cpp:737
+#, kde-format
+msgid "Clear Scrollback"
+msgstr "ਸਕਰੋਲ-ਬੈਕ ਸਾਫ਼ ਕਰੋ"
+
+#: session/SessionController.cpp:741
+#, kde-format
+msgid "Clear Scrollback and Reset"
+msgstr "ਸਕਰੋਲ-ਬੈਕ ਸਾਫ਼ ਕਰੋ ਅਤੇ ਮੁੜ-ਸੈੱਟ"
+
+#: session/SessionController.cpp:750
+#, kde-format
+msgid "Switch Profile"
+msgstr "ਪਰੋਫਾਇਲ ਬਦਲੋ"
+
+#: session/SessionController.cpp:779
+#, kde-format
+msgid "Set &Encoding"
+msgstr "ਇੰਕੋਡਿੰਗ ਸੈੱਟ ਕਰੋ(&E)"
+
+#: session/SessionController.cpp:799
+#, kde-format
+msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
+msgid "Allow mouse tracking"
+msgstr ""
+
+#: session/SessionController.cpp:807
+#, kde-format
+msgctxt "@item:inmenu A read only (locked) session"
+msgid "Read-only"
+msgstr "ਕੇਵਲ-ਪੜ੍ਹਨ ਲਈ"
+
+#: session/SessionController.cpp:818
+#, fuzzy, kde-format
+#| msgid "&Rename Tab..."
+msgid "&Configure or Rename Tab..."
+msgstr "ਟੈਬ ਨਾਂ ਬਦਲੋ(&R)..."
+
+#: session/SessionController.cpp:824
+#, kde-format
+msgid "&All Tabs in Current Window"
+msgstr "ਮੌਜੂਦਾ ਵਿੰਡੋ ਵਿੱਚ ਸਭ ਟੈਬਾਂ(&A)"
+
+#: session/SessionController.cpp:831
+#, kde-format
+msgid "&Select Tabs..."
+msgstr "ਟੈਬ ਚੁਣੋ(&S)..."
+
+#: session/SessionController.cpp:837
+#, kde-format
+msgctxt "@action:inmenu Do not select any tabs"
+msgid "&None"
+msgstr "ਕੋਈ ਨਹੀਂ(&N)"
+
+#: session/SessionController.cpp:845
+#, kde-format
+msgid "Copy Input To"
+msgstr "ਇੰਪੁੱਟ ਕਾਪੀ ਕਰੋ"
+
+#: session/SessionController.cpp:852
+#, kde-format
+msgid "&ZModem Upload..."
+msgstr "&ZModem ਅੱਪਲੋਡ..."
+
+#: session/SessionController.cpp:857
+#, kde-format
+msgid "Monitor for &Activity"
+msgstr "ਕਾਰਵਾਈ ਲਈ ਨਿਗਰਾਨੀ(&A)"
+
+#: session/SessionController.cpp:863
+#, kde-format
+msgid "Monitor for &Silence"
+msgstr "ਖਾਮੋਸ਼ੀ ਲਈ ਨਿਗਰਾਨੀ(&S)"
+
+#: session/SessionController.cpp:869
+#, fuzzy, kde-format
+#| msgid "Monitor for &Activity"
+msgid "Monitor for Process Finishing"
+msgstr "ਕਾਰਵਾਈ ਲਈ ਨਿਗਰਾਨੀ(&A)"
+
+#: session/SessionController.cpp:876
+#, kde-format
+msgid "Enlarge Font"
+msgstr "ਫੋਂਟ ਵੱਡੇ ਕਰੋ"
+
+#: session/SessionController.cpp:884
+#, kde-format
+msgid "Shrink Font"
+msgstr "ਫੋਂਟ ਸੁੰਘੜੋ"
+
+#: session/SessionController.cpp:889
+#, kde-format
+msgid "Reset Font Size"
+msgstr "ਫ਼ੋਂਟ ਆਕਾਰ ਮੁੜ-ਸੈੱਟ ਕਰੋ"
+
+#: session/SessionController.cpp:894
+#, kde-format
+msgid "Send Signal"
+msgstr "ਸਿਗਨਲ ਭੇਜੋ"
+
+#: session/SessionController.cpp:898
+#, kde-format
+msgid "&Suspend Task"
+msgstr "ਕੰਮ ਸਸਪੈਂਡ(&S)"
+
+#: session/SessionController.cpp:903
+#, kde-format
+msgid "&Continue Task"
+msgstr "ਕੰਮ ਜਾਰੀ ਰੱਖੋ(&C)"
+
+#: session/SessionController.cpp:908
+#, kde-format
+msgid "&Hangup"
+msgstr "ਹੈਗਅੱਪ(&H)"
+
+#: session/SessionController.cpp:913
+#, kde-format
+msgid "&Interrupt Task"
+msgstr "ਟਾਸਕ ਰੋਕੋ(&I)"
+
+#: session/SessionController.cpp:918
+#, kde-format
+msgid "&Terminate Task"
+msgstr "ਕੰਮ ਖਤਮ ਕਰੋ(&T)"
+
+#: session/SessionController.cpp:923
+#, kde-format
+msgid "&Kill Task"
+msgstr "ਕੰਮ ਧੱਕੇ ਨਾਲ ਖਤਮ(&K)"
+
+#: session/SessionController.cpp:928
+#, kde-format
+msgid "User Signal &1"
+msgstr "ਵਰਤੋਂਕਾਰ ਸਿਗਨਲ &1"
+
+#: session/SessionController.cpp:933
+#, kde-format
+msgid "User Signal &2"
+msgstr "ਵਰਤੋਂਕਾਰ ਸਿਗਨਲ &2"
+
+#: session/SessionController.cpp:950
+#, fuzzy, kde-format
+#| msgctxt "@item This will be used as part of the file name"
+#| msgid "New Profile"
+msgid "Create New Profile..."
+msgstr "ਨਵਾਂ ਪਰੋਫਾਇਲ"
+
+#: session/SessionController.cpp:952
+#, kde-format
+msgid "Edit Current Profile..."
+msgstr "ਮੌਜੂਦਾ ਪਰੋਫਾਇਲ ਸੋਧ..."
+
+#: session/SessionController.cpp:1069
+#, kde-format
+msgid ""
+"A program is currently running in this session.  Are you sure you want to "
+"close it?"
+msgstr "ਇੱਕ ਪਰੋਗਰਾਮ ਹੁਣ ਇਸ ਸ਼ੈਸ਼ਨ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: session/SessionController.cpp:1073
+#, kde-format
+msgid ""
+"The program '%1' is currently running in this session.  Are you sure you "
+"want to close it?"
+msgstr "ਪਰੋਗਰਾਮ '%1' ਹੁਣ ਇਸ ਸ਼ੈਸ਼ਨ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: session/SessionController.cpp:1080 session/SessionController.cpp:1115
+#, kde-format
+msgid "Confirm Close"
+msgstr "ਬੰਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ"
+
+#: session/SessionController.cpp:1081
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Close Tab"
+msgctxt "@action:button"
+msgid "Close Program"
+msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#: session/SessionController.cpp:1104
+#, kde-format
+msgid ""
+"A program in this session would not die.  Are you sure you want to kill it "
+"by force?"
+msgstr ""
+"ਇਹ ਸ਼ੈਸ਼ਨ ਵਿੱਚ ਚੱਲਦਾ ਪ੍ਰੋਗਰਾਮ ਖਤਮ ਨਹੀਂ ਹੋਵੇਗਾ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਧੱਕੇ ਨਾਲ ਖਤਮ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: session/SessionController.cpp:1108
+#, kde-format
+msgid ""
+"The program '%1' is in this session would not die.  Are you sure you want to "
+"kill it by force?"
+msgstr ""
+"ਪਰੋਗਰਾਮ '%1' ਹੁਣ ਇਸ ਸ਼ੈਸ਼ਨ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਧੱਕੇ ਨਾਲ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: session/SessionController.cpp:1116
+#, kde-format
+msgctxt "@action:button"
+msgid "Kill Program"
+msgstr ""
+
+#: session/SessionController.cpp:1941
+#, kde-format
+msgid "Open Current Folder With"
+msgstr ""
+
+#: session/SessionController.cpp:2011
+#, kde-format
+msgid "Save ZModem Download to..."
+msgstr "... ਉੱਤੇ ਜੇਮਾਡਮ ਨੂੰ ਡਾਊਨਲੋਡ ਸੰਭਾਲੋ"
+
+#: session/SessionController.cpp:2021
+#, kde-format
+msgid ""
+"<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
+"software was found on this system.</p><p>You may wish to install the 'rzsz' "
+"or 'lrzsz' package.</p>"
+msgstr ""
+
+#: session/SessionController.cpp:2031
+#, kde-format
+msgid ""
+"<p>The current session already has a ZModem file transfer in progress.</p>"
+msgstr ""
+
+#: session/SessionController.cpp:2041
+#, kde-format
+msgid ""
+"<p>No suitable ZModem software was found on this system.</p><p>You may wish "
+"to install the 'rzsz' or 'lrzsz' package.</p>"
+msgstr ""
+
+#: session/SessionController.cpp:2046
+#, kde-format
+msgid "Select Files for ZModem Upload"
+msgstr "ZModem ਅੱਪਲੋਡ ਲਈ ਫਾਇਲਾਂ ਚੁਣੋ"
+
+#: session/SessionListModel.cpp:89
+#, kde-format
+msgctxt "@item:intable The session index"
+msgid "Number"
+msgstr "ਨੰਬਰ"
+
+#: session/SessionListModel.cpp:91
+#, kde-format
+msgctxt "@item:intable The session title"
+msgid "Title"
+msgstr "ਟਾਈਟਲ"
+
+#: settings/ConfigurationDialog.cpp:31
+#, fuzzy, kde-format
+#| msgid "Confirm Close"
+msgctxt "@title:window"
+msgid "Configure"
+msgstr "ਬੰਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/GeneralSettings.ui:55
+#, fuzzy, kde-format
+#| msgid "Web Search"
+msgctxt "@item:intext Search options"
+msgid "Search:"
+msgstr "ਵੈੱਬ ਖੋਜ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
+#. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:68 settings/konsole.kcfg:22
+#, kde-format
+msgid "Enable menu accelerators"
+msgstr "ਮੇਨੂ ਐਕਸਰਲੇਟਰ ਚਾਲੂ ਕਰੋ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:81
+#, kde-format
+msgid "If enabled, profile settings will be ignored"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
+#: settings/GeneralSettings.ui:84
+#, kde-format
+msgid "Remember window size"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
+#. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:97 settings/konsole.kcfg:17
+#, kde-format
+msgid "Show window title on the titlebar"
+msgstr "ਟਾਈਟਲ-ਪੱਟੀ ਵਿੱਚ ਵਿੰਡੋ ਟਾਈਟਲ ਵੇਖਾਓ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
+#. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
+#, kde-format
+msgid "Focus terminals when the mouse pointer is moved over them"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
+#. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
+#: settings/GeneralSettings.ui:117 settings/konsole.kcfg:69
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Match regular expression"
+msgid "Match using regular expressions"
+msgstr "ਰੈਗੂਲਰ ਸਮੀਕਰਨ ਮੇਲ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:130 settings/konsole.kcfg:33
+#, kde-format
+msgid "When launching Konsole re-use existing process if possible"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
+#. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
+#, kde-format
+msgid "Run all Konsole windows in a single process"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
+#: settings/GeneralSettings.ui:146
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Highlight all matches"
+msgid "Highlight all matches"
+msgstr "ਸਭ ਮਿਲਦੇ ਹਾਈਲਾਈਟ ਕਰੋ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/GeneralSettings.ui:175 settings/konsole.kcfg:65
+#, kde-format
+msgid "Sets whether the search is case sensitive"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
+#: settings/GeneralSettings.ui:178
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Case sensitive"
+msgid "Case sensitive"
+msgstr "ਆਕਾਰ ਪ੍ਰਤੀ ਸੰਵੇਦਨਸ਼ੀਲ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
+#. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
+#: settings/GeneralSettings.ui:185 settings/konsole.kcfg:9
+#, kde-format
+msgid "Remove window titlebar and frame"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/GeneralSettings.ui:208
+#, kde-format
+msgid "Process and window:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/GeneralSettings.ui:218
+#, fuzzy, kde-format
+#| msgid "Notifications"
+msgid "Notifications:"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:236
+#, kde-format
+msgid "All dialogs will be shown again"
+msgstr "ਸਭ ਡਾਈਲਾਗ ਫੇਰ ਵੇਖਾਏ ਜਾਣਗੇ"
+
+#. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
+#: settings/GeneralSettings.ui:239
+#, kde-format
+msgid "Enable all \"Don't Ask Again\" messages"
+msgstr "ਸਭ \"ਫ਼ੇਰ ਨਾ ਪੁੱਛੋ\" ਸੁਨੇਿਹਆਂ ਨੂੰ ਸਮਰੱਥ ਕਰੋ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:267 settings/konsole.kcfg:79
+#, kde-format
+msgid "Sets whether search should start from the bottom"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
+#. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
+#: settings/GeneralSettings.ui:270 settings/konsole.kcfg:78
+#, kde-format
+msgid "Search backwards"
+msgstr "ਪਿੱਛੇ ਵੱਲ ਖੋਜ"
+
+#. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
+#: settings/konsole.kcfg:18
+#, fuzzy, kde-format
+#| msgid "Show window title on the titlebar"
+msgid "Show window title set by escape sequence on the titlebar"
+msgstr "ਟਾਈਟਲ-ਪੱਟੀ ਵਿੱਚ ਵਿੰਡੋ ਟਾਈਟਲ ਵੇਖਾਓ"
+
+#. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
+#: settings/konsole.kcfg:23
+#, kde-format
+msgid "Allow users to access top menu through Alt+Key combination"
+msgstr ""
+
+#. i18n: ectx: label, entry (RememberWindowSize), group (KonsoleWindow)
+#: settings/konsole.kcfg:27
+#, kde-format
+msgid "Use current window size on next startup"
+msgstr "ਅਗਲੀ ਵਾਰ ਸ਼ੁਰੂ ਕਰਨ ਸਮੇਂ ਮੌਜੂਦਾ ਵਿੰਡੋ ਆਕਾਰ ਨੂੰ ਵਰਤੋਂ"
+
+#. i18n: ectx: tooltip, entry (RememberWindowSize), group (KonsoleWindow)
+#: settings/konsole.kcfg:28
+#, kde-format
+msgid "The window size will be saved upon exiting Konsole"
+msgstr "ਕੇਨਸੋਲ ਬੰਦ ਕਰਨ ਸਮੇਂ ਵਿੰਡੋ ਸਾਈਜ਼ ਸੰਭਾਲਿਆ ਜਾਵੇਗਾ"
+
+#. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:42
+#, kde-format
+msgid "Thumbnail Width"
+msgstr ""
+
+#. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:43
+#, kde-format
+msgid "Sets the width of the thumbnail"
+msgstr ""
+
+#. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:47 settings/konsole.kcfg:48
+#, kde-format
+msgid "Use Shift to display a thumbnail"
+msgstr ""
+
+#. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:52 settings/konsole.kcfg:53
+#, kde-format
+msgid "Use Alt to display a thumbnail"
+msgstr ""
+
+#. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
+#. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
+#: settings/konsole.kcfg:57 settings/konsole.kcfg:58
+#, kde-format
+msgid "Use Ctrl to display a thumbnail"
+msgstr ""
+
+#. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
+#: settings/konsole.kcfg:64
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Case sensitive"
+msgid "Search is case sensitive"
+msgstr "ਆਕਾਰ ਪ੍ਰਤੀ ਸੰਵੇਦਨਸ਼ੀਲ"
+
+#. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
+#: settings/konsole.kcfg:73
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Highlight all matches"
+msgid "Highlight all search matches"
+msgstr "ਸਭ ਮਿਲਦੇ ਹਾਈਲਾਈਟ ਕਰੋ"
+
+#. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
+#: settings/konsole.kcfg:74
+#, kde-format
+msgid "Sets whether matching text should be highlighted"
+msgstr ""
+
+#. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
+#. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
+#: settings/konsole.kcfg:85 settings/konsole.kcfg:105
+#, kde-format
+msgid "Control the visibility of the whole tab bar"
+msgstr "ਪੂਰੀ ਟੈਬ ਪੱਟੀ ਦੀ ਦਿੱਖ ਨੂੰ ਕੰਟਰੋਲ ਕਰੋ"
+
+#. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
+#: settings/konsole.kcfg:94
+#, fuzzy, kde-format
+#| msgid "Control the visibility of the whole tab bar"
+msgid "Control the size of the handle between panels"
+msgstr "ਪੂਰੀ ਟੈਬ ਪੱਟੀ ਦੀ ਦਿੱਖ ਨੂੰ ਕੰਟਰੋਲ ਕਰੋ"
+
+#. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
+#: settings/konsole.kcfg:114
+#, kde-format
+msgid "Control the position of the tab bar"
+msgstr "ਟੈਬ ਪੱਟੀ ਦੀ ਸਥਿਤੀ ਕੰਟਰੋਲ"
+
+#. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
+#: settings/konsole.kcfg:122
+#, kde-format
+msgid "Control the visual style of the tab bar"
+msgstr ""
+
+#. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
+#: settings/konsole.kcfg:126
+#, fuzzy, kde-format
+#| msgid "Use a custom, fixed color for the cursor"
+msgid "Use a user-defined .css file for the tab bar"
+msgstr "ਕਰਸਰ ਲਈ ਇੱਕ ਪਸੰਦੀਦਾ, ਪੱਕਾ ਰੰਗ ਵਰਤੋਂ"
+
+#. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
+#: settings/konsole.kcfg:130
+#, kde-format
+msgid "The .css file to use for the tab bar style"
+msgstr ""
+
+#. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
+#: settings/konsole.kcfg:134
+#, kde-format
+msgid "Allow middle-clicking on open tabs to close them"
+msgstr ""
+
+#. i18n: ectx: label, entry (NewTabButton), group (TabBar)
+#: settings/konsole.kcfg:138
+#, fuzzy, kde-format
+#| msgid "Control the visibility of the whole tab bar"
+msgid "Control the visibility of 'New Tab' button on the tab bar"
+msgstr "ਪੂਰੀ ਟੈਬ ਪੱਟੀ ਦੀ ਦਿੱਖ ਨੂੰ ਕੰਟਰੋਲ ਕਰੋ"
+
+#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#: settings/konsole.kcfg:142
+#, kde-format
+msgid "Control where the \"Close tab\" button will be displayed"
+msgstr ""
+
+#. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
+#: settings/konsole.kcfg:151
+#, kde-format
+msgid "Control where to put the new tab"
+msgstr "ਕੰਟਰੋਲ ਕਰੋ ਕਿ ਕਿੱਥੇ ਨਵੀਂ ਟੈਬ ਰੱਖਣੀ ਹੈ"
+
+#. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
+#: settings/konsole.kcfg:159
+#, kde-format
+msgid "Expand the tab widths"
+msgstr ""
+
+#. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
+#: settings/konsole.kcfg:175
+#, kde-format
+msgid "For scrollback files, use system-wide folder location"
+msgstr ""
+
+#. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
+#: settings/konsole.kcfg:179
+#, kde-format
+msgid "For scrollback files, use user's specific folder location"
+msgstr ""
+
+#. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
+#: settings/konsole.kcfg:183
+#, kde-format
+msgid "For scrollback files, use specified folder location"
+msgstr ""
+
+#. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
+#: settings/konsole.kcfg:187
+#, kde-format
+msgid "For scrollback files, use this folder"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/PartInfo.ui:29
+#, kde-format
+msgid ""
+"<html><head/><body><p>Applications that use KonsolePart share profiles.</"
+"p><p>They do not share with Konsole or other applications:<ul><li>default "
+"profile</li><li>show in menu</li><li>shortcuts</li></ul></p><p>Feel free to "
+"open a Konsole <a href=\"https://bugs.kde.org/enter_bug.cgi?"
+"format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
+"a change to how these are handled.</body></html>"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
+#: settings/ProfileSettings.ui:39
+#, fuzzy, kde-format
+#| msgid "Create a new profile based upon the selected profile"
+msgid "Create a new profile based on the selected profile"
+msgstr "ਚੁਣੇ ਪਰੋਫਾਇਲ ਨਾਲ ਇੱਕ ਨਵਾਂ ਪਰੋਫਾਇਲ ਬਣਾਓ"
+
+#. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
+#: settings/ProfileSettings.ui:42
+#, fuzzy, kde-format
+#| msgctxt "@action:button Create an alternate color scheme"
+#| msgid "New..."
+msgid "&New..."
+msgstr "...ਨਵਾਂ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
+#: settings/ProfileSettings.ui:52
+#, fuzzy, kde-format
+#| msgid "Set the selected profile as the default for new terminal sessions"
+msgid ""
+"Edit the selected profile (this button is disabled for read-only profiles)"
+msgstr "ਨਵੇਂ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨਾਂ ਲਈ ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਮੂਲ ਸੈੱਟ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
+#: settings/ProfileSettings.ui:55
+#, fuzzy, kde-format
+#| msgid "Edit..."
+msgid "&Edit..."
+msgstr "...ਸੋਧ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
+#: settings/ProfileSettings.ui:65
+#, fuzzy, kde-format
+#| msgid "Delete the selected profile(s)"
+msgid "Delete the selected profile"
+msgstr "ਚੁਣੇ ਪਰੋਫਾਇਲ ਹਟਾਓ"
+
+#. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
+#: settings/ProfileSettings.ui:68
+#, fuzzy, kde-format
+#| msgid "Remove"
+msgid "&Remove"
+msgstr "ਹਟਾਓ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
+#: settings/ProfileSettings.ui:78
+#, kde-format
+msgid "Set the selected profile as the default for new terminal sessions"
+msgstr "ਨਵੇਂ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨਾਂ ਲਈ ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਮੂਲ ਸੈੱਟ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
+#: settings/ProfileSettings.ui:81
+#, kde-format
+msgid "&Set as Default"
+msgstr "ਡਿਫਾਲਟ ਵਜੋਂ ਸੈੱਟ ਕਰੋ(&S)"
+
+#. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
+#: settings/TabBarSettings.ui:36
+#, fuzzy, kde-format
+#| msgid "Appearance"
+msgctxt "@title:tab Tab bar settings"
+msgid "Appearance"
+msgstr "ਦਿੱਖ"
+
+#. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
+#: settings/TabBarSettings.ui:50
+#, fuzzy, kde-format
+#| msgctxt "@title:column Display profile in file menu"
+#| msgid "Show"
+msgid "Show:"
+msgstr "ਵੇਖਾਓ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
+#: settings/TabBarSettings.ui:60
+#, kde-format
+msgid "When needed"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
+#: settings/TabBarSettings.ui:70
+#, kde-format
+msgid "Alwa&ys"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
+#: settings/TabBarSettings.ui:80
+#, kde-format
+msgid "&Never"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, positionLabel)
+#: settings/TabBarSettings.ui:106
+#, fuzzy, kde-format
+#| msgid "Description:"
+msgid "Position:"
+msgstr "ਵੇਰਵਾ:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
+#: settings/TabBarSettings.ui:116
+#, fuzzy, kde-format
+#| msgid "Below Terminal Area"
+msgid "Be&low terminal area"
+msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਹੇਠਾਂ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Top)
+#: settings/TabBarSettings.ui:126
+#, fuzzy, kde-format
+#| msgid "Above Terminal Area"
+msgid "Above terminal area"
+msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਉੱਤੇ"
+
+#. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
+#: settings/TabBarSettings.ui:152
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Close Tab"
+msgid "Show Close Tab button:"
+msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
+#: settings/TabBarSettings.ui:162
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Detach Tab"
+msgid "&On each tab"
+msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(&D)"
+
+#. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
+#: settings/TabBarSettings.ui:172
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Detach Tab"
+msgid "On &the tab bar"
+msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(&D)"
+
+#. i18n: ectx: property (text), widget (QRadioButton, None)
+#: settings/TabBarSettings.ui:182
+#, fuzzy, kde-format
+#| msgid "None"
+msgctxt "Do not show a close button"
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
+#. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
+#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:344
+#, fuzzy, kde-format
+#| msgid "Miscellaneous"
+msgctxt "@item:intext Miscellaneous Options"
+msgid "Miscellaneous:"
+msgstr "ਫੁਟਕਲ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
+#: settings/TabBarSettings.ui:218
+#, fuzzy, kde-format
+#| msgid "Show 'New Tab' and 'Close Tab' buttons"
+msgid "Show 'New Tab' button"
+msgstr "'ਨਵੀਂ ਟੈਬ' ਅਤੇ 'ਟੈਬ ਬੰਦ ਕਰੋ' ਬਟਨ ਵੇਖੋ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
+#: settings/TabBarSettings.ui:225
+#, kde-format
+msgid "Expand individual tab widths to full window"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
+#: settings/TabBarSettings.ui:232
+#, fuzzy, kde-format
+#| msgid "Use user-defined stylesheet"
+msgid "Use user-defined stylesheet:"
+msgstr "ਵਰਤੋਂਕਾਰ ਵਲੋਂ ਪ੍ਰਭਾਸ਼ਿਤ ਸਟਾਇਲ ਸੀਟਾਂ ਵਰਤੋਂ"
+
+#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_scrollbackUseSpecifiedLocationDirectory)
+#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
+#: settings/TabBarSettings.ui:258 settings/TemporaryFilesSettings.ui:53
+#, kde-format
+msgid "text/css"
+msgstr "text/css"
+
+#. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
+#: settings/TabBarSettings.ui:261
+#, kde-format
+msgctxt "@item:intext Optional file path is empty"
+msgid "(none)"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
+#: settings/TabBarSettings.ui:284
+#, fuzzy, kde-format
+#| msgid "Behavior"
+msgctxt "@title:tab Tab bar settings"
+msgid "Behavior"
+msgstr "ਰਵੱਈਆ"
+
+#. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
+#: settings/TabBarSettings.ui:298
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Create new tab"
+msgid "Put new tabs:"
+msgstr "ਨਵੀਂ ਟੈਬ ਬਣਾਉ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
+#: settings/TabBarSettings.ui:308
+#, kde-format
+msgid "At &the end"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
+#: settings/TabBarSettings.ui:318
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Close current tab"
+msgid "After current &tab"
+msgstr "ਮੌਜੂਦਾ ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
+#: settings/TabBarSettings.ui:354
+#, kde-format
+msgid "Close tab on middle-click"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, splitTab)
+#: settings/TabBarSettings.ui:377
+#, fuzzy, kde-format
+#| msgid "Split View"
+msgid "Splits"
+msgstr "ਝਲਕ ਵੰਡੋ"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/TabBarSettings.ui:383
+#, fuzzy, kde-format
+#| msgid "Show Menu Bar"
+msgid "Show Header:"
+msgstr "ਮੇਨੂ ਪੱਟੀ ਵੇਖਾਓ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
+#: settings/TabBarSettings.ui:390
+#, kde-format
+msgctxt "@option:radio When needed show the split header"
+msgid "When needed"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
+#: settings/TabBarSettings.ui:400
+#, kde-format
+msgctxt "@option:radio Never show the split header"
+msgid "Never"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/TabBarSettings.ui:426
+#, kde-format
+msgid "Drag Handle Size:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
+#: settings/TabBarSettings.ui:436
+#, fuzzy, kde-format
+#| msgctxt "@item:inrange Minimum Size"
+#| msgid "Small"
+msgctxt "@option:radio Small height/width of splitter widget"
+msgid "Small"
+msgstr "ਛੋਟਾ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
+#: settings/TabBarSettings.ui:446
+#, kde-format
+msgctxt "@option:radio Medium height/width of splitter widget"
+msgid "Medium"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
+#: settings/TabBarSettings.ui:456
+#, fuzzy, kde-format
+#| msgctxt "@item:inrange Maximum Size"
+#| msgid "Large"
+msgctxt "@option:radio Large height/width of splitter widget"
+msgid "Large"
+msgstr "ਵੱਡਾ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
+#: settings/TabBarSettings.ui:479
+#, kde-format
+msgctxt "@option:radio Always show the split header"
+msgid "Always"
+msgstr ""
+
+#: settings/TemporaryFilesSettings.cpp:31
+#, kde-format
+msgctxt ""
+"@option:radio File location; <filename>%1</filename>: path to directory "
+"placeholder"
+msgid "System temporary directory (%1)"
+msgstr ""
+
+#: settings/TemporaryFilesSettings.cpp:33
+#, kde-format
+msgctxt ""
+"@option:radio File location; <filename>%1</filename>: path to directory "
+"placeholder"
+msgid "User cache directory (%1)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: settings/TemporaryFilesSettings.ui:37
+#, fuzzy, kde-format
+#| msgid "Scrollback File Location"
+msgid "Scrollback file location:"
+msgstr "ਸਕਰੋਲ-ਬੈਕ ਲਈ ਫਾਇਲ ਟਿਕਾਣਾ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
+#: settings/TemporaryFilesSettings.ui:79
+#, kde-format
+msgctxt "@option:radio Custom (file location); followed by text entry field"
+msgid "Custom:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/ThumbnailsSettings.ui:17
+#, kde-format
+msgid "Size:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
+#: settings/ThumbnailsSettings.ui:24
+#, fuzzy, kde-format
+#| msgctxt "(pixels) visual size unit"
+#| msgid " px"
+msgid "px"
+msgstr "ਪਿਕਸਲ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: settings/ThumbnailsSettings.ui:37
+#, kde-format
+msgid ""
+"<html><head/><body><p>To use this feature, enable <span style=\" font-"
+"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
+"font-weight:600;\">files</span> in your profile settings</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/ThumbnailsSettings.ui:53
+#, fuzzy, kde-format
+#| msgctxt "@item"
+#| msgid "Activate Menu"
+msgid "Activation:"
+msgstr "ਮੇਨੂ ਐਕਟੀਵੇਟ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: settings/ThumbnailsSettings.ui:63
+#, kde-format
+msgid "Mouse hover plus"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
+#: settings/ThumbnailsSettings.ui:70
+#, fuzzy, kde-format
+#| msgid "Shift"
+msgid "Shift"
+msgstr "ਸਿਫਟ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
+#: settings/ThumbnailsSettings.ui:77
+#, fuzzy, kde-format
+#| msgid "Alt"
+msgid "Alt"
+msgstr "Alt"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
+#: settings/ThumbnailsSettings.ui:84
+#, fuzzy, kde-format
+#| msgctxt "key on keyboard"
+#| msgid "Ctrl"
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
+#: settings/ThumbnailsSettings.ui:93
+#, fuzzy, kde-format
+#| msgid "Enable menu accelerators"
+msgid "Enable thumbnails generation"
+msgstr "ਮੇਨੂ ਐਕਸਰਲੇਟਰ ਚਾਲੂ ਕਰੋ"
+
+#: terminalDisplay/TerminalDisplay.cpp:652
+#, kde-format
+msgid "Size: %1 x %2"
+msgstr "ਅਕਾਰ: %1 x %2"
+
+#: terminalDisplay/TerminalDisplay.cpp:2167
+#, kde-format
+msgid "Are you sure you want to paste %1 character?"
+msgid_plural "Are you sure you want to paste %1 characters?"
+msgstr[0] "ਕੀ ਤੁਸੀਂ %1 ਅੱਖਰ ਚੇਪਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+msgstr[1] "ਕੀ ਤੁਸੀਂ %1 ਅੱਖਰ ਚੇਪਣੇ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: terminalDisplay/TerminalDisplay.cpp:2168
+#, kde-format
+msgid "Confirm Paste"
+msgstr "ਚੇਪਣ ਦੀ ਪੁਸ਼ਟੀ"
+
+#: terminalDisplay/TerminalDisplay.cpp:2201
+#, kde-format
+msgid "End Of Text/Interrupt: may exit the current process"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2202
+#, kde-format
+msgid "End Of Transmission: may exit the current process"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2203
+#, kde-format
+msgid "Bell: will try to emit an audible warning"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2204
+#, kde-format
+msgid "Backspace"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2205
+#, kde-format
+msgid "Device Control Three/XOFF: suspends output"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2206
+#, kde-format
+msgid "Substitute/Suspend: may suspend current process"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2207
+#, kde-format
+msgid "Escape: used for manipulating terminal state"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2208
+#, kde-format
+msgid "File Separator/Quit: may abort the current process"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2231
+#, kde-format
+msgid ""
+"The text you're trying to paste contains hidden control characters, do you "
+"want to filter them out?"
+msgstr ""
+
+#: terminalDisplay/TerminalDisplay.cpp:2234
+#, fuzzy, kde-format
+#| msgid "Confirm Paste"
+msgctxt "@title"
+msgid "Confirm Paste"
+msgstr "ਚੇਪਣ ਦੀ ਪੁਸ਼ਟੀ"
+
+#: terminalDisplay/TerminalDisplay.cpp:2235
+#, fuzzy, kde-format
+#| msgid "Set cursor color to match current character"
+msgctxt "@action:button"
+msgid "Paste &without control characters"
+msgstr "ਮੌਜੂਦਾ ਅੱਖਰ ਨਾਲ ਰਲਦਾ ਕਰਸਰ ਰੰਗ ਸੈੱਟ ਕਰੋ"
+
+#: terminalDisplay/TerminalDisplay.cpp:2236
+#, fuzzy, kde-format
+#| msgid "Paste Selection"
+msgctxt "@action:button"
+msgid "&Paste everything"
+msgstr "ਚੋਣ ਚੇਪੋ"
+
+#: terminalDisplay/TerminalDisplay.cpp:2237
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Cancel paste"
+msgctxt "@action:button"
+msgid "&Cancel"
+msgstr "ਚੇਪਣਾ ਰੱਦ ਕਰੋ(&C)"
+
+#: terminalDisplay/TerminalDisplay.cpp:2466
+#, kde-format
+msgid ""
+"<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
+"Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
+"b> to resume.</qt>"
+msgstr ""
+"<qt>ਆਉਟਪੁੱਟ ਨੂੰ Ctrl+S ਦਬਾ ਕੇ <a href=\"https://en.wikipedia.org/wiki/"
+"Software_flow_control\">ਸਸਪੈਂਡ</a> ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।  ਮੁੜ-ਪਰਾਪਤ ਕਰਨ ਲਈ <b>Ctrl+Q</"
+"b> ਦੱਬੋ ਜੀ। ਇਹ ਸੁਨੇਹੇ ਨੂੰ 10 ਸਕਿੰਟਾਂ ਵਿੱਚ ਹਟਾਇਆ ਜਾਵੇਗਾ।</qt>"
+
+#: terminalDisplay/TerminalDisplay.cpp:2504
+#, kde-format
+msgid "This terminal is read-only."
+msgstr "ਇਹ ਟਰਮੀਨਲ ਕੇਵਲ ਪੜ੍ਹਨ ਲਈ ਹੈ।"
+
+#: terminalDisplay/TerminalDisplay.cpp:2743
+#, kde-format
+msgid "Change &Directory To"
+msgstr "ਡਾਇਰੈਕਟਰੀ ਬਦਲੋ(&D)"
+
+#: terminalDisplay/TerminalDisplay.cpp:2776
+#, kde-format
+msgid "&Paste Location"
+msgstr "ਟਿਕਾਣਾ ਚੇਪੋ(&P)"
+
+#: ViewManager.cpp:106
+#, fuzzy, kde-format
+#| msgid "Split View"
+msgctxt "@action:inmenu"
+msgid "Split View"
+msgstr "ਝਲਕ ਵੰਡੋ"
+
+#: ViewManager.cpp:113
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View Left/Right"
+msgstr "ਝਲਕ ਖੱਬੇ/ਸੱਜੇ ਵੰਡੋ"
+
+#: ViewManager.cpp:121
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Split View Top/Bottom"
+msgstr "ਝਲਕ ਉੱਤੇ/ਹੇਠਾਂ ਵੰਡੋ"
+
+#: ViewManager.cpp:129
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Top/Bottom"
+msgctxt "@action:inmenu"
+msgid "Split View Automatically"
+msgstr "ਝਲਕ ਉੱਤੇ/ਹੇਠਾਂ ਵੰਡੋ"
+
+#: ViewManager.cpp:139
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 2x2 terminals"
+msgstr ""
+
+#: ViewManager.cpp:148
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 2x1 terminals"
+msgstr ""
+
+#: ViewManager.cpp:157
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Load a new tab with layout 1x2 terminals"
+msgstr ""
+
+#: ViewManager.cpp:165
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Expand View"
+msgstr "ਝਲਕ ਫੈਲਾਓ"
+
+#: ViewManager.cpp:173
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Shrink View"
+msgstr "ਝਲਕ ਸੁੰਘੜੋ"
+
+#: ViewManager.cpp:183
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "D&etach Current Tab"
+msgctxt "@action:inmenu"
+msgid "Detach Current &View"
+msgstr "ਮੌਜੂਦਾ ਟੈਬ ਵੱਖ ਕਰੋ(&e)"
+
+#: ViewManager.cpp:195
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "D&etach Current Tab"
+msgctxt "@action:inmenu"
+msgid "Detach Current &Tab"
+msgstr "ਮੌਜੂਦਾ ਟੈਬ ਵੱਖ ਕਰੋ(&e)"
+
+#: ViewManager.cpp:200
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Next Tab"
+msgstr "ਨਵੀਂ ਟੈਬ"
+
+#: ViewManager.cpp:208
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Previous Tab"
+msgstr "ਟੈਗ ਪਿੱਛੇ"
+
+#: ViewManager.cpp:216
+#, fuzzy, kde-format
+#| msgid "Above Terminal Area"
+msgctxt "@action Shortcut entry"
+msgid "Focus Above Terminal"
+msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਉੱਤੇ"
+
+#: ViewManager.cpp:223
+#, fuzzy, kde-format
+#| msgid "Below Terminal Area"
+msgctxt "@action Shortcut entry"
+msgid "Focus Below Terminal"
+msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਹੇਠਾਂ"
+
+#: ViewManager.cpp:230
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Left Terminal"
+msgstr ""
+
+#: ViewManager.cpp:236
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Focus Right Terminal"
+msgstr ""
+
+#: ViewManager.cpp:242
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Switch to Last Tab"
+msgstr "ਪਿਛਲੀ ਟੈਬ ਲਈ ਸਵਿੱਚ ਕਰੋ"
+
+#: ViewManager.cpp:247
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Last Used Tabs"
+msgstr "ਪਿਛਲੀ ਵਰਤੀਆਂ ਟੈਬਾਂ"
+
+#: ViewManager.cpp:252
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle Between Two Tabs"
+msgstr "ਦੋ ਟੈਬਾਂ ਵਿਚਾਲੇ ਬਦਲੋ"
+
+#: ViewManager.cpp:257
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Last Used Tabs (Reverse)"
+msgstr "ਪਿਛਲੀ ਵਰਤੀਆਂ ਟੈਬਾਂ (ਉਲਟ)"
+
+#: ViewManager.cpp:262
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle maximize current view"
+msgstr ""
+
+#: ViewManager.cpp:263
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Toggle maximize current view"
+msgstr ""
+
+#: ViewManager.cpp:271
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Move Tab Right"
+msgctxt "@action Shortcut entry"
+msgid "Move tab to the right"
+msgstr "ਟੈਬ ਸੱਜੇ ਭੇਜੋ"
+
+#: ViewManager.cpp:278
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Move Tab Left"
+msgctxt "@action Shortcut entry"
+msgid "Move tab to the left"
+msgstr "ਟੈਬ ਖੱਬੇ ਭੇਜੋ"
+
+#: ViewManager.cpp:285
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Setup semantic integration (bash)"
+msgstr ""
+
+#: ViewManager.cpp:291
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle semantic hints display"
+msgstr ""
+
+#: ViewManager.cpp:297
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Toggle line numbers display"
+msgstr ""
+
+#: ViewManager.cpp:304
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Equal size to all views"
+msgstr ""
+
+#: ViewManager.cpp:314
+#, kde-format
+msgctxt "@action Shortcut entry"
+msgid "Switch to Tab %1"
+msgstr "ਟੈਬ %1 ਲਈ ਸਵਿੱਚ ਕਰੋ"
+
+#: ViewManager.cpp:527
+#, fuzzy, kde-format
+#| msgid "Text interaction"
+msgid "Semantic hints "
+msgstr "ਲਿਖਤ ਦਖ਼ਲ"
+
+#: ViewManager.cpp:543
+#, fuzzy, kde-format
+#| msgid "Fixed number of lines: "
+msgid "Line numbers "
+msgstr "ਲਾਇਨਾਂ ਦੀ ਸਥਿਰ ਗਿਣਤੀ: "
+
+#: ViewManager.cpp:1074
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Move Tab Left"
+msgctxt "@title:window"
+msgid "Save Tab Layout"
+msgstr "ਟੈਬ ਖੱਬੇ ਭੇਜੋ"
+
+#: ViewManager.cpp:1076 ViewManager.cpp:1163
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Konsole View Layout (*.json)"
+msgstr ""
+
+#: ViewManager.cpp:1089
+#, fuzzy, kde-format
+#| msgid ""
+#| "A problem occurred when saving the output.\n"
+#| "%1"
+msgctxt "@label:textbox"
+msgid ""
+"A problem occurred when saving the Layout.\n"
+"%1"
+msgstr ""
+"ਆਉਟਪੁੱਟ ਸੰਭਾਲਣ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।\n"
+"%1"
+
+#: ViewManager.cpp:1150
+#, fuzzy, kde-format
+#| msgid ""
+#| "A problem occurred when saving the output.\n"
+#| "%1"
+msgctxt "@label:textbox"
+msgid ""
+"A problem occurred when loading the Layout.\n"
+"%1"
+msgstr ""
+"ਆਉਟਪੁੱਟ ਸੰਭਾਲਣ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।\n"
+"%1"
+
+#: ViewManager.cpp:1161
+#, kde-format
+msgctxt "@title:window"
+msgid "Load Tab Layout"
+msgstr ""
+
+#: Vt102Emulation.cpp:2313
+#, kde-format
+msgid ""
+"No keyboard translator available.  The information needed to convert key "
+"presses into characters to send to the terminal is missing."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, urlHintsLabel)
+#: widgets/EditProfileAdvancedPage.ui:37
+#, kde-format
+msgid "Key combination to show URL hints:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
+#: widgets/EditProfileAdvancedPage.ui:69
+#, fuzzy, kde-format
+#| msgid "Shift"
+msgctxt "key on keyboard"
+msgid "Shift"
+msgstr "ਸਿਫਟ"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
+#: widgets/EditProfileAdvancedPage.ui:88
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
+#: widgets/EditProfileAdvancedPage.ui:107
+#, fuzzy, kde-format
+#| msgid "Alt"
+msgctxt "key on keyboard"
+msgid "Alt"
+msgstr "Alt"
+
+#. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
+#: widgets/EditProfileAdvancedPage.ui:126
+#, kde-format
+msgctxt "key on keyboard"
+msgid "Meta"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileAdvancedPage.ui:172
+#, fuzzy, kde-format
+#| msgid "Miscellaneous"
+msgctxt "Items that do not fit in other categories"
+msgid "Miscellaneous:"
+msgstr "ਫੁਟਕਲ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
+#: widgets/EditProfileAdvancedPage.ui:182
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Find the next match for the current search phrase"
+msgid "Number URL hints in reverse, starting from the bottom"
+msgstr "ਮੌਜੂਦਾ ਖੋਜ ਸ਼ਬਦ ਦਾ ਅਗਲਾ ਮੇਲ ਲੱਭੋ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
+#: widgets/EditProfileAdvancedPage.ui:185
+#, kde-format
+msgid "Reverse URL hint numbering"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingTextButton)
+#: widgets/EditProfileAdvancedPage.ui:198
+#, fuzzy, kde-format
+#| msgid "Allow terminal programs to resize the window"
+msgid "Allow terminal programs to create blinking sections of text"
+msgstr "ਟਰਮੀਨਲ ਕਾਰਜਾਂ ਨੂੰ ਝਰੋਖੇ ਦਾ ਆਕਾਰ ਬਦਲਣ ਦਿਓ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingTextButton)
+#: widgets/EditProfileAdvancedPage.ui:201
+#, kde-format
+msgid "Allow blinking text"
+msgstr "ਝਪਕਦਾ ਪਾਠ ਮਨਜ਼ੂਰ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableFlowControlButton)
+#: widgets/EditProfileAdvancedPage.ui:214
+#, kde-format
+msgid "Allow the output to be suspended by pressing Ctrl+S"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
+#: widgets/EditProfileAdvancedPage.ui:217
+#, fuzzy, kde-format
+#| msgid "Control"
+msgid "Flow control"
+msgstr "ਕੰਟਰੋਲ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAdvancedPage.ui:231
+#: widgets/EditProfileAppearancePage.ui:813
+#, kde-format
+msgid ""
+"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
+"Hebrew only)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAdvancedPage.ui:234
+#: widgets/EditProfileAppearancePage.ui:816
+#, fuzzy, kde-format
+#| msgid "Enable Bi-Directional text rendering"
+msgid "Bi-Directional text rendering"
+msgstr "ਦੋ-ਦਿਸ਼ਾਵੀਂ ਟੈਕਸਟ ਰੈਂਡਰਿੰਗ ਚਾਲੂ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_14)
+#: widgets/EditProfileAdvancedPage.ui:258
+#, kde-format
+msgid "Default character encoding:"
+msgstr "ਮੂਲ ਅੱਖਰ ਇੰਕੋਡਿੰਗ:"
+
+#. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
+#: widgets/EditProfileAdvancedPage.ui:278
+#, kde-format
+msgid "Shortcut for peeking the primary screen:"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
+#: widgets/EditProfileAppearancePage.ui:33
+#, fuzzy, kde-format
+#| msgid "Color Scheme && Background"
+msgid "Color scheme && font"
+msgstr "ਰੰਗ ਸਕੀਮ ਅਤੇ ਬੈਕਗਰਾਊਂਡ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:66
+#, kde-format
+msgid "Create a new color scheme based upon the selected scheme"
+msgstr "ਚੁਣੇ ਥੀਮ ਦੇ ਮੁਤਾਬਕ ਨਵੀਂ ਰੰਗ ਸਕੀਮ ਬਣਾਓ"
+
+#. i18n: ectx: property (text), widget (QPushButton, newColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:69
+#, kde-format
+msgctxt "@action:button Create an alternate color scheme"
+msgid "New..."
+msgstr "...ਨਵਾਂ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:76
+#, kde-format
+msgid "Edit the selected color scheme"
+msgstr "ਚੁਣੀ ਰੰਗ ਸਕੀਮ ਸੋਧੋ"
+
+#. i18n: ectx: property (text), widget (QPushButton, editKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, environmentEditButton)
+#. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
+#. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:79
+#: widgets/EditProfileGeneralPage.ui:224 widgets/EditProfileKeyboardPage.ui:85
+#: widgets/EditProfileMousePage.ui:310
+#, kde-format
+msgid "Edit..."
+msgstr "...ਸੋਧ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:86
+#, kde-format
+msgid "Delete the selected color scheme"
+msgstr "ਚੁਣੀ ਰੰਗ ਸਕੀਮ ਹਟਾਓ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:96
+#, fuzzy, kde-format
+#| msgid "Delete the selected color scheme"
+msgid "Reset the selected color scheme settings to the default values"
+msgstr "ਚੁਣੀ ਰੰਗ ਸਕੀਮ ਹਟਾਓ"
+
+#. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
+#. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
+#: widgets/EditProfileAppearancePage.ui:99
+#: widgets/EditProfileKeyboardPage.ui:105
+#, kde-format
+msgid "Defaults"
+msgstr "ਡਿਫਾਲਟ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: widgets/EditProfileAppearancePage.ui:132
+#, fuzzy, kde-format
+#| msgid "Font"
+msgid "Font:"
+msgstr "ਫੋਂਟ"
+
+#. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
+#: widgets/EditProfileAppearancePage.ui:164
+#, kde-format
+msgctxt "@action:button open a dialog with list of fonts"
+msgid "Choose..."
+msgstr "...ਚੁਣੋ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
+#: widgets/EditProfileAppearancePage.ui:171
+#, kde-format
+msgid "Smooth fonts"
+msgstr "ਸਮੂਥ ਫੋਂਟ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, boldIntenseButton)
+#: widgets/EditProfileAppearancePage.ui:178
+#, kde-format
+msgid "Draw intense colors in bold font"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:185
+#, kde-format
+msgid "Use the selected font for line characters instead of the builtin code"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:188
+#, kde-format
+msgid "Use line characters contained in font"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
+#: widgets/EditProfileAppearancePage.ui:196
+#, kde-format
+msgid "Cursor"
+msgstr "ਕਰਸਰ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileAppearancePage.ui:216
+#, kde-format
+msgid "Shape:"
+msgstr "ਸ਼ਕਲ:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
+#: widgets/EditProfileAppearancePage.ui:226
+#, fuzzy, kde-format
+#| msgctxt "The shape of the cursor"
+#| msgid "Block"
+msgctxt "A solid rectangular"
+msgid "Block"
+msgstr "ਪਾਬੰਦੀ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
+#: widgets/EditProfileAppearancePage.ui:236
+#, fuzzy, kde-format
+#| msgctxt "The shape of the cursor, similar to a capital I"
+#| msgid "I-Beam"
+msgctxt "A vertical line on the left edge"
+msgid "I-Beam"
+msgstr "I-Beam"
+
+#. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
+#: widgets/EditProfileAppearancePage.ui:246
+#, fuzzy, kde-format
+#| msgctxt "The shape of the cursor"
+#| msgid "Underline"
+msgctxt "A hortizonal line on the bottom edge"
+msgid "Underline"
+msgstr "ਹੇਠਾਂ ਰੇਖਾ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/EditProfileAppearancePage.ui:278
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox Column header text for the actual colors"
+#| msgid "Color"
+msgctxt "Cursor color options"
+msgid "Color:"
+msgstr "ਰੰਗ"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:294
+#, fuzzy, kde-format
+#| msgid "Set cursor color to match current character"
+msgid "Set the cursor to match the color of the character underneath it."
+msgstr "ਮੌਜੂਦਾ ਅੱਖਰ ਨਾਲ ਰਲਦਾ ਕਰਸਰ ਰੰਗ ਸੈੱਟ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:297
+#, fuzzy, kde-format
+#| msgid "Set cursor color to match current character"
+msgid "Match current character"
+msgstr "ਮੌਜੂਦਾ ਅੱਖਰ ਨਾਲ ਰਲਦਾ ਕਰਸਰ ਰੰਗ ਸੈੱਟ ਕਰੋ"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:313
+#, kde-format
+msgid "Use a custom, fixed color for the cursor"
+msgstr "ਕਰਸਰ ਲਈ ਇੱਕ ਪਸੰਦੀਦਾ, ਪੱਕਾ ਰੰਗ ਵਰਤੋਂ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
+#: widgets/EditProfileAppearancePage.ui:316
+#, fuzzy, kde-format
+#| msgid "Custom cursor color:"
+msgid "Custom cursor color"
+msgstr "ਪਸੰਦੀਦਾ ਕਰਸਰ ਰੰਗ:"
+
+#. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
+#: widgets/EditProfileAppearancePage.ui:347
+#, fuzzy, kde-format
+#| msgid "Cursor"
+msgid "Cursor:"
+msgstr "ਕਰਸਰ"
+
+#. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
+#: widgets/EditProfileAppearancePage.ui:360
+#, kde-format
+msgid "Select the color used to draw the cursor"
+msgstr "ਕਰਸਰ ਬਣਾਉਣ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਰੰਗ ਚੁਣੋ"
+
+#. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
+#: widgets/EditProfileAppearancePage.ui:380
+#, kde-format
+msgid "Text:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
+#: widgets/EditProfileAppearancePage.ui:393
+#, fuzzy, kde-format
+#| msgid "Select the color used to draw the cursor"
+msgid "Select the color used to draw the character underneath the cursor"
+msgstr "ਕਰਸਰ ਬਣਾਉਣ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਰੰਗ ਚੁਣੋ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileAppearancePage.ui:418
+#, fuzzy, kde-format
+#| msgid "Blinking cursor"
+msgid "Blinking:"
+msgstr "ਝਪਕਦੀ ਕਰਸਰ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
+#: widgets/EditProfileAppearancePage.ui:434
+#, kde-format
+msgid "Make the cursor blink regularly"
+msgstr "ਕਰਸਰ ਨੂੰ ਲਗਾਤਾਰ ਝਪਕਦੀ ਬਣਾਓ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
+#. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
+#: widgets/EditProfileAppearancePage.ui:437
+#: widgets/EditProfileAppearancePage.ui:664
+#, kde-format
+msgid "Enabled"
+msgstr "ਸਮਰੱਥ ਹੈ"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#. i18n: ectx: attribute (title), widget (QWidget, miscTab)
+#: widgets/EditProfileAppearancePage.ui:460 widgets/EditProfileMousePage.ui:249
+#, fuzzy, kde-format
+#| msgid "Miscellaneous"
+msgctxt "Items that do not fit in other categories"
+msgid "Miscellaneous"
+msgstr "ਫੁਟਕਲ"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileAppearancePage.ui:471
+#, kde-format
+msgid "Window:"
+msgstr "ਵਿੰਡੋ:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
+#: widgets/EditProfileAppearancePage.ui:478
+#, kde-format
+msgid ""
+"Show terminal size in columns and lines in the center of window after "
+"resizing"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
+#: widgets/EditProfileAppearancePage.ui:481
+#, kde-format
+msgid "Show hint for terminal size after resizing"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
+#: widgets/EditProfileAppearancePage.ui:488
+#, kde-format
+msgid "Always invert the colors of selected text"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, dimLabel)
+#: widgets/EditProfileAppearancePage.ui:497
+#, kde-format
+msgid "Darkening strength:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: widgets/EditProfileAppearancePage.ui:522
+#, fuzzy, kde-format
+#| msgid "Initial terminal size:"
+msgid "Inactive Terminals:"
+msgstr "ਸ਼ੁਰੂਆਤ ਟਰਮੀਨਲ ਆਕਾਰ:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
+#: widgets/EditProfileAppearancePage.ui:532
+#, fuzzy, kde-format
+#| msgid "Terminal Features"
+msgctxt "@title:group"
+msgid "Terminal contents"
+msgstr "ਟਰਮੀਨਲ ਫੀਚਰ"
+
+#. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
+#: widgets/EditProfileAppearancePage.ui:544
+#, fuzzy, kde-format
+#| msgid "Line Spacing:"
+msgid "Line spacing:"
+msgstr "ਲਾਈਨ ਫਾਸਲਾ:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
+#: widgets/EditProfileAppearancePage.ui:562
+#, kde-format
+msgid "The number of pixels between two lines"
+msgstr "ਦੋ ਲਾਈਨਾਂ ਦੇ ਵਿਚਾਲੇ ਪਿਕਸਲਾਂ ਦੀ ਗਿਣਤੀ"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
+#. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
+#: widgets/EditProfileAppearancePage.ui:565
+#: widgets/EditProfileAppearancePage.ui:617
+#, kde-format
+msgctxt "(pixels) visual size unit"
+msgid " px"
+msgstr "ਪਿਕਸਲ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileAppearancePage.ui:599
+#, kde-format
+msgid "Margins:"
+msgstr "ਹਾਸ਼ੀਏ:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: widgets/EditProfileAppearancePage.ui:651
+#, kde-format
+msgid "Align to center:"
+msgstr "ਕੇਂਦਰ ਵਿੱਚ ਇਕਸਾਰ ਕਰੋ:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:674
+#, kde-format
+msgid "Indicate whether the window is active by dimming the colors"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:677
+#, kde-format
+msgid "Darken"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
+#: widgets/EditProfileAppearancePage.ui:719
+#, kde-format
+msgid "Display Vertical line at column:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
+#: widgets/EditProfileAppearancePage.ui:760
+#, kde-format
+msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
+#: widgets/EditProfileAppearancePage.ui:763
+#, kde-format
+msgid "Complex Text Layout"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileAppearancePage.ui:787
+#, fuzzy, kde-format
+#| msgid "Font"
+msgid "Emoji Font:"
+msgstr "ਫੋਂਟ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
+#: widgets/EditProfileAppearancePage.ui:829
+#, kde-format
+msgid "Lines are always LTR, rather than determined by first strong character"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
+#: widgets/EditProfileAppearancePage.ui:832
+#, kde-format
+msgid "force LTR line direction"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
+#: widgets/EditProfileAppearancePage.ui:845
+#, kde-format
+msgid "Treat table drawing characters as strong LTR."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
+#: widgets/EditProfileAppearancePage.ui:848
+#, kde-format
+msgid "Table characters BiDi mode override"
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:62
+#, kde-format
+msgid "Edit Profile"
+msgstr "ਪਰੋਫਾਇਲ ਸੋਧ"
+
+#: widgets/EditProfileDialog.cpp:89
+#, kde-format
+msgctxt "@title:tab Generic, common options"
+msgid "General"
+msgstr "ਆਮ"
+
+#: widgets/EditProfileDialog.cpp:100
+#, kde-format
+msgid "Tabs"
+msgstr "ਟੈਬ"
+
+#: widgets/EditProfileDialog.cpp:117
+#, kde-format
+msgid "Appearance"
+msgstr "ਦਿੱਖ"
+
+#: widgets/EditProfileDialog.cpp:133
+#, kde-format
+msgid "Scrolling"
+msgstr "ਸਕਰੋਲਿੰਗ"
+
+#: widgets/EditProfileDialog.cpp:147
+#, kde-format
+msgid "Keyboard"
+msgstr "ਕੀ-ਬੋਰਡ"
+
+#: widgets/EditProfileDialog.cpp:148
+#, kde-format
+msgid "Key bindings"
+msgstr "ਸਵਿੱਚ ਬਾਈਡਿੰਗ"
+
+#: widgets/EditProfileDialog.cpp:159
+#, kde-format
+msgid "Mouse"
+msgstr "ਮਾਊਸ"
+
+#: widgets/EditProfileDialog.cpp:175
+#, kde-format
+msgctxt "@title:tab Complex options"
+msgid "Advanced"
+msgstr "ਤਕਨੀਕੀ"
+
+#: widgets/EditProfileDialog.cpp:281
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"Insufficient permissions to save settings to: <filename>%1</filename>.<nl/"
+">Either change the permissions of that file or set a different name to save "
+"the settings to a new profile."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:298
+#, kde-format
+msgctxt "@info"
+msgid "Profile Name was empty; please set a name to be able to save settings."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:306
+#, kde-format
+msgctxt "@info"
+msgid "A profile with the name \"%1\" already exists."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:341
+#, kde-format
+msgid "Editing profile: %2"
+msgid_plural "Editing %1 profiles: %2"
+msgstr[0] "ਪਰੋਫਾਇਲ ਸੋਧ: %2"
+msgstr[1] "%1 ਪਰੋਫਾਇਲ ਸੋਧ: %2"
+
+#: widgets/EditProfileDialog.cpp:344
+#, fuzzy, kde-format
+#| msgctxt "@item This will be used as part of the file name"
+#| msgid "New Profile"
+msgid "Create New Profile"
+msgstr "ਨਵਾਂ ਪਰੋਫਾਇਲ"
+
+#: widgets/EditProfileDialog.cpp:346
+#, kde-format
+msgid "Edit Profile \"%1\""
+msgstr "ਪਰੋਫਾਇਲ \"%1\" ਸੋਧ"
+
+#: widgets/EditProfileDialog.cpp:436
+#, fuzzy, kde-format
+#| msgctxt "Suffix of the number of columns (N columns)"
+#| msgid " column"
+#| msgid_plural " columns"
+msgctxt ""
+"Suffix of the number of columns (N columns). The leading space is needed to "
+"separate it from the number value."
+msgid " column"
+msgid_plural " columns"
+msgstr[0] "ਕਾਲਮ"
+msgstr[1] "ਕਾਲਮ"
+
+#: widgets/EditProfileDialog.cpp:438
+#, kde-format
+msgctxt ""
+"Suffix of the number of rows (N rows). The leading space is needed to "
+"separate it from the number value."
+msgid " row"
+msgid_plural " rows"
+msgstr[0] ""
+msgstr[1] ""
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "System Bell"
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:448
+#, fuzzy, kde-format
+#| msgid "Notifications"
+msgid "System Notifications"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ"
+
+#: widgets/EditProfileDialog.cpp:448
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "Visual effects"
+msgid "Visual Bell"
+msgstr "ਦਿੱਖ ਪਰਭਾਵ"
+
+#: widgets/EditProfileDialog.cpp:448
+#, kde-format
+msgid "Ignore Bell Events"
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:457
+#, fuzzy, kde-format
+#| msgid "Set the selected profile as the default for new terminal sessions"
+msgid "Default profile for new terminal sessions in %1"
+msgstr "ਨਵੇਂ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨਾਂ ਲਈ ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਮੂਲ ਸੈੱਟ ਕਰੋ"
+
+#: widgets/EditProfileDialog.cpp:514
+#, kde-format
+msgid "Edit Environment"
+msgstr "ਇੰਵਾਇਰਨਮੈਂਟ ਸੋਧ"
+
+#: widgets/EditProfileDialog.cpp:515
+#, kde-format
+msgid "One environment variable per line"
+msgstr "ਹਰੇਕ ਲਾਈਨ ਲਈ ਇੱਕ ਇੰਵਾਇਰਨਮੈਂਟ ਵੇਰੀਬਲ"
+
+#: widgets/EditProfileDialog.cpp:546
+#, kde-format
+msgctxt "Unit of time"
+msgid " second"
+msgid_plural " seconds"
+msgstr[0] " ਸਕਿੰਟ"
+msgstr[1] " ਸਕਿੰਟ"
+
+#: widgets/EditProfileDialog.cpp:645
+#, kde-format
+msgid "Select Initial Directory"
+msgstr "ਸ਼ੁਰੂਆਤੀ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ"
+
+#: widgets/EditProfileDialog.cpp:1169
+#, kde-kuit-format
+msgctxt "@info"
+msgid "Scheme <resource>%1</resource> failed to load."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:1348
+#, kde-format
+msgid ""
+"This color scheme uses a transparent background which does not appear to be "
+"supported on your desktop"
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:1354
+#, kde-format
+msgid ""
+"Konsole was started before desktop effects were enabled. You need to restart "
+"Konsole to see transparent background."
+msgstr ""
+"ਕਨਸੋਲ ਨੂੰ ਡੈਸਕਟਾਪ ਪ੍ਰਭਾਵ ਨੂੰ ਚਾਲੂ ਹੋਣ ਤੋਂ ਪਹਿਲਾਂ ਸ਼ੁਰੂ ਕੀਤਾ ਗਿਆ ਸੀ। ਪਾਰਦਰਸ਼ੀ (ਟਰਾਂਸਪਰੇਟ) "
+"ਬੈਕਗਰਾਊਂਡ ਵੇਖਣ ਲਈ ਤੁਹਾਨੂੰ ਕਨਸੋਲ ਮੁੜ-ਚਾਲੂ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।"
+
+#: widgets/EditProfileDialog.cpp:1745
+#, kde-format
+msgid ""
+"The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
+"\n"
+"PATH    will be replaced by the path to the text file\n"
+"LINE    will be replaced by the line number\n"
+"COLUMN  (optional) will be replaced by the column number\n"
+"Note: you will need to replace 'PATH:LINE:COLUMN' by the actual\n"
+"syntax the editor you want to use supports; e.g.:\n"
+"gedit +LINE:COLUMN PATH\n"
+"\n"
+"If PATH or LINE aren't present in the command, this setting\n"
+"will be ignored and the file will be opened by the default text\n"
+"editor."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:1758
+#, kde-format
+msgid "Text Editor Custom Command"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, general)
+#: widgets/EditProfileGeneralPage.ui:39
+#, fuzzy, kde-format
+#| msgid "Default Search Settings"
+msgid "General Settings"
+msgstr "ਮੂਲ ਖੋਜ ਸੈਟਿੰਗਾਂ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
+#: widgets/EditProfileGeneralPage.ui:63
+#, kde-format
+msgid "Select the icon displayed on tabs using this profile"
+msgstr "ਇਸ ਪਰੋਫਾਇਲ ਦੀ ਵਰਤੋਂ ਕਰਨ ਵਾਲੀਆਂ ਟੈਬਾਂ ਲਈ ਵੇਖਾਉਣ ਵਾਲਾ ਆਈਕਾਨ ਚੁਣੋ"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
+#: widgets/EditProfileGeneralPage.ui:81
+#, kde-format
+msgid "A descriptive name for the profile"
+msgstr "ਪਰੋਫਾਇਲ ਲਈ ਵੇਰਵੇ ਵਾਸਤੇ ਨਾਂ"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
+#: widgets/EditProfileGeneralPage.ui:84
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Profile name"
+msgstr "ਪਰੋਫਾਇਲ ਨਾਂ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
+#: widgets/EditProfileGeneralPage.ui:91
+#, fuzzy, kde-format
+#| msgid "Default profile"
+msgid "Default Profile"
+msgstr "ਡਿਫਾਲਟ ਪਰੋਫਾਇਲ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/EditProfileGeneralPage.ui:122
+#, kde-format
+msgid "Command:"
+msgstr "ਕਮਾਂਡ:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, commandEdit)
+#: widgets/EditProfileGeneralPage.ui:135
+#, kde-format
+msgid ""
+"The command to execute when new terminal sessions are created using this "
+"profile"
+msgstr "ਇਸ ਪਰੋਫਾਇਲ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਨਵਾਂ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨ ਚਲਾਉਣ ਦੌਰਾਨ ਚਲਾਉਣ ਲਈ ਕਮਾਂਡ"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
+#: widgets/EditProfileGeneralPage.ui:141
+#, kde-format
+msgid "/bin/sh"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: widgets/EditProfileGeneralPage.ui:154
+#, kde-format
+msgid "Initial directory:"
+msgstr "ਸ਼ੁਰੂਆਤੀ ਡਾਇਰੈਕਟਰੀ:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
+#: widgets/EditProfileGeneralPage.ui:167
+#, kde-format
+msgid ""
+"The initial working directory for new terminal sessions using this profile"
+msgstr "ਇਸ ਪਰੋਫਾਇਲ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਨਵੇਂ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨ ਲਈ ਸ਼ੁਰੂਆਤੀ ਵਰਕਿੰਗ ਡਾਇਰੈਕਟਰੀ"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
+#: widgets/EditProfileGeneralPage.ui:173
+#, kde-format
+msgid "/home/username"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, dirSelectButton)
+#: widgets/EditProfileGeneralPage.ui:180
+#, kde-format
+msgid "Choose the initial directory"
+msgstr "ਸ਼ੁਰੂਆਤੀ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
+#: widgets/EditProfileGeneralPage.ui:190
+#, fuzzy, kde-format
+#| msgid "Start in same directory as current tab"
+msgid "Start in same directory as current session"
+msgstr "ਜਿੱਥੇ ਟੈਬ ਹੈ, ਉਹੀ ਡਾਇਰੈਕਟਰੀ ਖੋਲ੍ਹੋ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: widgets/EditProfileGeneralPage.ui:203
+#, kde-format
+msgid "Environment:"
+msgstr "ਵਾਤਾਵਰਨ:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
+#: widgets/EditProfileGeneralPage.ui:221
+#, kde-format
+msgid "Edit the list of environment variables and associated values"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: widgets/EditProfileGeneralPage.ui:268
+#, kde-format
+msgid "Initial terminal size:"
+msgstr "ਸ਼ੁਰੂਆਤ ਟਰਮੀਨਲ ਆਕਾਰ:"
+
+#. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
+#: widgets/EditProfileGeneralPage.ui:343
+#, kde-format
+msgctxt "@info"
+msgid ""
+"<html><head/><body><p><span style=\" font-style:italic;\">Settings → "
+"Configure Konsole → General → Remember window size</span> must be disabled "
+"for these entries to work.</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
+#: widgets/EditProfileGeneralPage.ui:356
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Terminal emulator"
+msgid "Terminal bell mode:"
+msgstr "ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ"
+
+#. i18n: ectx: attribute (title), widget (QWidget, semantic)
+#: widgets/EditProfileGeneralPage.ui:374
+#, fuzzy, kde-format
+#| msgid "Text interaction"
+msgid "Semantic Integration"
+msgstr "ਲਿਖਤ ਦਖ਼ਲ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
+#: widgets/EditProfileGeneralPage.ui:380
+#, kde-format
+msgid "Up/Down Arrows emulation"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#: widgets/EditProfileGeneralPage.ui:387
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
+#: widgets/EditProfileGeneralPage.ui:397
+#, kde-format
+msgctxt "Never"
+msgid "Never"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
+#: widgets/EditProfileGeneralPage.ui:407
+#, kde-format
+msgctxt "Always"
+msgid "Always"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileGeneralPage.ui:423
+#, kde-format
+msgid "Semantic hints:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
+#: widgets/EditProfileGeneralPage.ui:433
+#, kde-format
+msgid "Mouse click in input line moves cursor"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, note)
+#: widgets/EditProfileKeyboardPage.ui:29
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Key bindings control how combinations of keystrokes in the terminal window "
+"are converted into the stream of characters that is then sent to the current "
+"terminal program. For more information on how to customize the key bindings "
+"check the Konsole Handbook."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:72
+#, kde-format
+msgid "Create a new key bindings scheme based upon the selected bindings"
+msgstr "ਚੁਣੀ ਬਾਈਡਿੰਗ ਨਾਲ ਇੱਕ ਨਵੀਂ ਸਵਿੱਚ ਬਾਈਡਿੰਗ ਸਕੀਮ ਬਣਾਓ"
+
+#. i18n: ectx: property (text), widget (QPushButton, newKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:75
+#, kde-format
+msgctxt "@action:button Create an alternate key binding"
+msgid "New..."
+msgstr "...ਨਵਾਂ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:82
+#, fuzzy, kde-format
+#| msgid "Edit the selected key bindings list"
+msgid "Edit the selected key bindings scheme"
+msgstr "ਚੁਣੀ ਸਵਿੱਚ ਬਾਈਡਿੰਗ ਸੂਚੀ ਸੋਧੋ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, removeKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:92
+#, fuzzy, kde-format
+#| msgid "Delete the selected key bindings list"
+msgid "Delete the selected key bindings scheme"
+msgstr "ਚੁਣੀ ਸਵਿੱਚ ਬਾਈਡਿੰਗ ਸੂਚੀ ਹਟਾਓ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, resetKeyBindingsButton)
+#: widgets/EditProfileKeyboardPage.ui:102
+#, fuzzy, kde-format
+#| msgid "Delete the selected color scheme"
+msgid "Reset the selected key bindings scheme to its default values"
+msgstr "ਚੁਣੀ ਰੰਗ ਸਕੀਮ ਹਟਾਓ"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: widgets/EditProfileMousePage.ui:33
+#, kde-format
+msgid "Text interaction"
+msgstr "ਲਿਖਤ ਦਖ਼ਲ"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, label_11)
+#. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
+#: widgets/EditProfileMousePage.ui:47 widgets/EditProfileMousePage.ui:68
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Characters which are considered part of a word when double-clicking to "
+"select whole words in the terminal."
+msgstr ""
+"ਅੱਖਰ, ਜੋ ਕਿ ਇੱਕ ਸ਼ਬਦ ਦਾ ਭਾਗ ਮੰਨੇ ਗਏ ਹਨ, ਜਦੋਂ ਦੋ ਵਾਰ ਕਲਿੱਕ ਕੀਤਾ ਗਿਆ ਤਾਂ ਟਰਮੀਨਲ ਵਿੱਚ ਪੂਰਾ "
+"ਸ਼ਬਦ ਚੁਣਿਆ ਜਾਵੇਗਾ।"
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: widgets/EditProfileMousePage.ui:50
+#, kde-format
+msgid "Word characters:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileMousePage.ui:91
+#, kde-format
+msgid "Triple-click selects:"
+msgstr "ਤੀਹਰਾ-ਕਲਿੱਕ ਚੁਣੇ:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
+#: widgets/EditProfileMousePage.ui:101
+#, kde-format
+msgid "The whole line"
+msgstr "ਪੂਰੀ ਲਾਈਨ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
+#: widgets/EditProfileMousePage.ui:111
+#, kde-format
+msgid "From mouse position to the end of line"
+msgstr "ਮਾਊਸ ਸਥਿਤੀ ਤੋਂ ਲਾਈਨ ਦੇ ਅੰਤ ਤੱਕ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: widgets/EditProfileMousePage.ui:137
+#, kde-format
+msgid "Middle-click pastes:"
+msgstr "ਮੱਧ ਕਲਿੱਕ ਚੇਪੋ:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, pasteFromClipboardButton)
+#: widgets/EditProfileMousePage.ui:147
+#, kde-format
+msgid "From clipboard"
+msgstr "ਕਲਿੱਪਬੋਰਡ ਤੋਂ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
+#: widgets/EditProfileMousePage.ui:157
+#, kde-format
+msgid "From selection"
+msgstr "ਚੋਣ ਤੋਂ"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileMousePage.ui:183
+#, kde-format
+msgid "Copy options:"
+msgstr "ਕਾਪੀ ਕਰਨ ਚੋਣਾਂ:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
+#: widgets/EditProfileMousePage.ui:193
+#, kde-format
+msgid "Automatically copy selected text into clipboard"
+msgstr "ਚੁਣਿਆ ਟੈਕਸਟ ਆਪਣੇ-ਆਪ ਹੀ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
+#: widgets/EditProfileMousePage.ui:196
+#, kde-format
+msgid "Copy on select"
+msgstr "ਚੁਣੇ ਉੱਤੇ ਕਾਪੀ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
+#: widgets/EditProfileMousePage.ui:203
+#, kde-format
+msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
+#: widgets/EditProfileMousePage.ui:206
+#, kde-format
+msgid "Copy text as HTML"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, trimLeadingSpacesButton)
+#: widgets/EditProfileMousePage.ui:213
+#, kde-format
+msgid "Trim leading spaces in selected text, useful in some instances"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
+#: widgets/EditProfileMousePage.ui:216
+#, fuzzy, kde-format
+#| msgid "Trim trailing spaces"
+msgid "Trim leading spaces"
+msgstr "ਪਿਛਲੀ ਖਾਲੀ ਥਾਂ ਹਟਾਓ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
+#: widgets/EditProfileMousePage.ui:223
+#, kde-format
+msgid "Trim trailing spaces in selected text, useful in some instances"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
+#: widgets/EditProfileMousePage.ui:226
+#, kde-format
+msgid "Trim trailing spaces"
+msgstr "ਪਿਛਲੀ ਖਾਲੀ ਥਾਂ ਹਟਾਓ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
+#: widgets/EditProfileMousePage.ui:263
+#, kde-format
+msgid ""
+"Text recognized as a link or an email address will be underlined when "
+"hovered by the mouse pointer."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
+#: widgets/EditProfileMousePage.ui:266
+#, fuzzy, kde-format
+#| msgid "Underline links"
+msgid "Underline links"
+msgstr "ਲਿੰਕ ਹੇਠਾਂ ਰੇਖਾ "
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
+#: widgets/EditProfileMousePage.ui:273
+#, kde-format
+msgid ""
+"Text recognized as a file will be underlined when hovered by the mouse "
+"pointer."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
+#: widgets/EditProfileMousePage.ui:276
+#, kde-format
+msgid "Underline files"
+msgstr "ਫਾਇਲਾਂ ਹੇਠਾਂ ਰੇਖਾ"
+
+#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
+#: widgets/EditProfileMousePage.ui:285
+#, kde-format
+msgid "Text Editor Command: "
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
+#. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
+#: widgets/EditProfileMousePage.ui:291 widgets/EditProfileMousePage.ui:303
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Text editor to use when opening text file URLs at a given line/column."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
+#: widgets/EditProfileMousePage.ui:329
+#, kde-format
+msgid ""
+"Text recognized as a file, link or an email address can be opened by direct "
+"mouse click."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
+#: widgets/EditProfileMousePage.ui:332
+#, fuzzy, kde-format
+#| msgid "Open links by direct click"
+msgid "Open files/links by direct click"
+msgstr "ਸਿੱਧੇ ਕਲਿੱਕ ਨਾਲ ਲਿੰਕ ਖੋਲ੍ਹੋ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
+#: widgets/EditProfileMousePage.ui:343
+#, kde-format
+msgid "Allow escape sequences for links"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
+#: widgets/EditProfileMousePage.ui:350
+#, kde-format
+msgid ""
+"<b>WARNING</b>: This has security implications as it allows malicious URLs "
+"to be shown as another URL or hidden.<br>Make sure you understand the "
+"implications before turning this on."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileMousePage.ui:368
+#, fuzzy, kde-format
+#| msgid "Allow blinking text"
+msgid "Allowed link formats: "
+msgstr "ਝਪਕਦਾ ਪਾਠ ਮਨਜ਼ੂਰ"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
+#: widgets/EditProfileMousePage.ui:378
+#, kde-format
+msgid "The formats of possible links, like http://, https:// and file://"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
+#: widgets/EditProfileMousePage.ui:389
+#, kde-format
+msgid "Selected text will require control key plus click to drag."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
+#: widgets/EditProfileMousePage.ui:392
+#, kde-format
+msgid "Require Ctrl key for drag && drop"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
+#: widgets/EditProfileMousePage.ui:399
+#, kde-format
+msgid ""
+"Mouse scroll wheel will emulate up/down key presses in programs that use the "
+"Alternate Screen buffer (e.g. less)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
+#: widgets/EditProfileMousePage.ui:402
+#, kde-format
+msgid "Enable Alternate Screen buffer scrolling"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
+#: widgets/EditProfileMousePage.ui:409
+#, kde-format
+msgid ""
+"Always paste dropped files and URLs as text without offering move, copy and "
+"link actions."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
+#: widgets/EditProfileMousePage.ui:412
+#, kde-format
+msgid "Disable drag && drop menu for files && URLs"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
+#: widgets/EditProfileMousePage.ui:419
+#, kde-format
+msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
+#: widgets/EditProfileMousePage.ui:422
+#, kde-format
+msgid "Allow Ctrl+scrollwheel to zoom text size"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
+#: widgets/EditProfileMousePage.ui:429
+#, kde-format
+msgid ""
+"When positioning the mouse over a hexadecimal color it will be displayed in "
+"a frame next to the mouse pointer"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
+#: widgets/EditProfileMousePage.ui:432
+#, kde-format
+msgid "Preview Colors on hover"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
+#: widgets/EditProfileMousePage.ui:452
+#, kde-format
+msgid ""
+"Some terminal applications have mouse support, this allows them to get it by "
+"default. It can be toggled on/off while running as well."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
+#: widgets/EditProfileMousePage.ui:455
+#, kde-format
+msgid "Allow terminal applications to handle clicks and drags"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
+#: widgets/EditProfileScrollingPage.ui:43
+#, kde-format
+msgid "Scrollback:"
+msgstr "ਸਕਰੋਲ-ਬੈਕ:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/EditProfileScrollingPage.ui:85
+#, kde-format
+msgid "Scroll Page Up/Down:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
+#: widgets/EditProfileScrollingPage.ui:101
+#, kde-format
+msgid "Scroll the page the half height of window"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
+#: widgets/EditProfileScrollingPage.ui:104
+#, fuzzy, kde-format
+#| msgid "Half Page Height"
+msgid "Half screen height"
+msgstr "ਅੱਧੀ ਪੇਜ਼ ਉਚਾਈ"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
+#: widgets/EditProfileScrollingPage.ui:114
+#, kde-format
+msgid "Scroll the page the full height of window"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
+#: widgets/EditProfileScrollingPage.ui:117
+#, fuzzy, kde-format
+#| msgid "Full Page Height"
+msgid "Full screen height"
+msgstr "ਪੂਰੀ ਪੇਜ਼ ਉਚਾਈ"
+
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: widgets/EditProfileScrollingPage.ui:149
+#, fuzzy, kde-format
+#| msgid "Tab bar position:"
+msgid "Scrollbar position:"
+msgstr "ਟੈਬ ਪੱਟੀ ਸਥਿਤੀ:"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
+#: widgets/EditProfileScrollingPage.ui:159
+#, kde-format
+msgid "Show the scroll bar on the right side of the terminal window"
+msgstr "ਟਰਮੀਨਲ ਦੇ ਸੱਜੇ ਪਾਸੇ ਸਕਰੋਲ ਪੱਟੀ ਵੇਖਾਓ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
+#: widgets/EditProfileScrollingPage.ui:162
+#, kde-format
+msgctxt "@option:radio Show scrollbar on the right side"
+msgid "Right side"
+msgstr "ਸੱਜੇ ਪਾਸੇ"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
+#: widgets/EditProfileScrollingPage.ui:172
+#, kde-format
+msgid "Show the scroll bar on the left side of the terminal window"
+msgstr "ਟਰਮੀਨਲ ਦੇ ਖੱਬੇ ਪਾਸੇ ਸਕਰੋਲ ਪੱਟੀ ਵੇਖਾਓ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
+#: widgets/EditProfileScrollingPage.ui:175
+#, kde-format
+msgctxt "@option:radio Show scrollbar on the left side"
+msgid "Left side"
+msgstr "ਖੱਬੇ ਪਾਸੇ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
+#: widgets/EditProfileScrollingPage.ui:185
+#, kde-format
+msgctxt "@option:radio Hide the scroll bar"
+msgid "Hidden"
+msgstr "ਲੁਕਵਾਂ"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileScrollingPage.ui:217
+#, kde-format
+msgid "Highlighting:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
+#: widgets/EditProfileScrollingPage.ui:227
+#, kde-format
+msgid "Highlight the lines coming into view"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
+#: widgets/EditProfileScrollingPage.ui:240
+#, kde-format
+msgid "Reflow Lines:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
+#: widgets/EditProfileScrollingPage.ui:250
+#, kde-format
+msgid "Reflow lines when terminal resizes"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
+#: widgets/EditProfileTabsPage.ui:43
+#, kde-format
+msgid "Tab Titles"
+msgstr "ਟੈਬ ਟਾਈਟਲ"
+
+#. i18n: ectx: property (title), widget (QGroupBox, tabMonitoringGroup)
+#: widgets/EditProfileTabsPage.ui:62
+#, kde-format
+msgid "Tab Monitoring"
+msgstr "ਟੈਬ ਨਿਗਰਾਨੀ"
+
+#. i18n: ectx: property (text), widget (QLabel, silenceSecondsLabel)
+#: widgets/EditProfileTabsPage.ui:74
+#, kde-format
+msgid "Threshold for continuous silence:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
+#: widgets/EditProfileTabsPage.ui:87
+#, kde-format
+msgid "The threshold for continuous silence to be detected by Konsole"
+msgstr ""
+
+#: widgets/HistorySizeWidget.cpp:40
+#, kde-format
+msgctxt "@label:textbox Unit of scrollback"
+msgid " line"
+msgid_plural " lines"
+msgstr[0] " ਲਾਈਨ"
+msgstr[1] " ਲਾਈਨਾਂ"
+
+#: widgets/HistorySizeWidget.cpp:57
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"When using this option, the scrollback data will be saved to RAM. If you "
+"choose a huge value, your system may run out of free RAM and cause serious "
+"issues with your system."
+msgstr ""
+
+#: widgets/HistorySizeWidget.cpp:69
+#, kde-kuit-format
+msgctxt "@info:tooltip"
+msgid ""
+"When using this option, the scrollback data will be written unencrypted to "
+"temporary files. Those temporary files will be deleted automatically when "
+"Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → Configure "
+"Konsole → Temporary Files</emphasis> to select the location of the temporary "
+"files."
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
+#: widgets/HistorySizeWidget.ui:60
+#, kde-format
+msgid "Limit the remembered output to a fixed number of lines"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
+#: widgets/HistorySizeWidget.ui:63
+#, kde-format
+msgid "Fixed size:"
+msgstr "ਸਥਿਰ ਆਕਾਰ:"
+
+#. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
+#: widgets/HistorySizeWidget.ui:73
+#, kde-format
+msgid "Number of lines of output to remember"
+msgstr "ਯਾਦ ਰੱਖਣ ਲਈ ਆਉਟਪੁੱਟ ਲਾਇਨਾਂ ਦੀ ਗਿਣਤੀ"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
+#: widgets/HistorySizeWidget.ui:135
+#, kde-format
+msgid "Remember all output produced by the terminal"
+msgstr "ਟਰਮੀਨਲ ਰਾਹੀਂ ਤਿਆਰ ਸਭ ਆਉਟਪੁੱਟ ਯਾਦ ਰੱਖੋ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
+#: widgets/HistorySizeWidget.ui:138
+#, fuzzy, kde-format
+#| msgid "Unlimited"
+msgctxt "Save all lines to the scrollback history"
+msgid "Unlimited"
+msgstr "ਬੇਅੰਤ"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
+#: widgets/HistorySizeWidget.ui:174
+#, kde-format
+msgid "Do not remember previous output"
+msgstr "ਪਿਛਲੀ ਆਉਟਪੁੱਟ ਯਾਦ ਨਾ ਰੱਖੋ"
+
+#. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
+#: widgets/HistorySizeWidget.ui:177
+#, fuzzy, kde-format
+#| msgid "None"
+msgctxt "Do not save any lines to the scrollback history"
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: widgets/IncrementalSearchBar.cpp:54
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Find..."
+msgstr "ਖੋਜੋ..."
+
+#: widgets/IncrementalSearchBar.cpp:56
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Enter the text to search for here"
+msgstr "ਖੋਜ ਕਰਨ ਲਈ ਟੈਕਸਟ ਇੱਥੇ ਦਿਓ"
+
+#: widgets/IncrementalSearchBar.cpp:80
+#, kde-format
+msgctxt "@action:button Go to the next phrase"
+msgid "Next"
+msgstr "ਅੱਗੇ"
+
+#: widgets/IncrementalSearchBar.cpp:83
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Find the next match for the current search phrase"
+msgstr "ਮੌਜੂਦਾ ਖੋਜ ਸ਼ਬਦ ਦਾ ਅਗਲਾ ਮੇਲ ਲੱਭੋ"
+
+#: widgets/IncrementalSearchBar.cpp:90
+#, kde-format
+msgctxt "@action:button Go to the previous phrase"
+msgid "Previous"
+msgstr "ਪਿੱਛੇ"
+
+#: widgets/IncrementalSearchBar.cpp:92
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Find the previous match for the current search phrase"
+msgstr "ਮੌਜੂਦਾ ਖੋਜ ਸ਼ਬਦ ਦਾ ਪਿਛਲਾ ਮੇਲ ਲੱਭੋ"
+
+#: widgets/IncrementalSearchBar.cpp:107
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Display the options menu"
+msgstr "ਚੋਣ ਮੇਨੂ ਵੇਖਾਉ"
+
+#: widgets/IncrementalSearchBar.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Close the search bar"
+msgstr "ਖੋਜ ਪੱਟੀ ਬੰਦ ਕਰੋ"
+
+#: widgets/IncrementalSearchBar.cpp:124
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Case sensitive"
+msgstr "ਆਕਾਰ ਪ੍ਰਤੀ ਸੰਵੇਦਨਸ਼ੀਲ"
+
+#: widgets/IncrementalSearchBar.cpp:126
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether the search is case sensitive"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:129
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Match regular expression"
+msgstr "ਰੈਗੂਲਰ ਸਮੀਕਰਨ ਮੇਲ"
+
+#: widgets/IncrementalSearchBar.cpp:133
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Highlight all matches"
+msgstr "ਸਭ ਮਿਲਦੇ ਹਾਈਲਾਈਟ ਕਰੋ"
+
+#: widgets/IncrementalSearchBar.cpp:135
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets whether matching text should be highlighted"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:138
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Search backwards"
+msgstr "ਪਿੱਛੇ ਵੱਲ ਖੋਜੋ"
+
+#: widgets/IncrementalSearchBar.cpp:140
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Find the next match for the current search phrase"
+msgctxt "@info:tooltip"
+msgid "Sets whether search should start from the bottom"
+msgstr "ਮੌਜੂਦਾ ਖੋਜ ਸ਼ਬਦ ਦਾ ਅਗਲਾ ਮੇਲ ਲੱਭੋ"
+
+#: widgets/IncrementalSearchBar.cpp:170
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Find the next match for the current search phrase"
+msgctxt "@info:tooltip"
+msgid "Search for the current search phrase from the bottom"
+msgstr "ਮੌਜੂਦਾ ਖੋਜ ਸ਼ਬਦ ਦਾ ਅਗਲਾ ਮੇਲ ਲੱਭੋ"
+
+#: widgets/IncrementalSearchBar.cpp:175
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Find the next match for the current search phrase"
+msgctxt "@info:tooltip"
+msgid "Search for the current search phrase from the top"
+msgstr "ਮੌਜੂਦਾ ਖੋਜ ਸ਼ਬਦ ਦਾ ਅਗਲਾ ਮੇਲ ਲੱਭੋ"
+
+#: widgets/KonsolePrintManager.cpp:50
+#, kde-format
+msgid "Print Shell"
+msgstr "ਸ਼ੈੱਲ ਪਰਿੰਟ ਕਰੋ"
+
+#: widgets/RenameTabWidget.cpp:37
+#, fuzzy, kde-format
+#| msgid "None"
+msgctxt "@label:listbox No color selected"
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, remoteTabTitleEdit)
+#: widgets/RenameTabWidget.ui:41
+#, kde-format
+msgid ""
+"Tab title format used when a remote command (e.g. connection to another "
+"computer via SSH) is being executed"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: widgets/RenameTabWidget.ui:60
+#, kde-format
+msgid "Remote tab title format:"
+msgstr "ਰਿਮੋਟ ਟੈਬ ਟਾਈਟਲ ਫਾਰਮੈਟ:"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/RenameTabWidget.ui:79
+#, kde-format
+msgid "Tab title format:"
+msgstr "ਟੈਬ ਟਾਈਟਲ ਫਾਰਮੈਟ:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
+#: widgets/RenameTabWidget.ui:98
+#, kde-format
+msgid "Normal tab title format"
+msgstr "ਆਮ ਟੈਬ ਟਾਈਟਲ ਫਾਰਮੈਟ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: widgets/RenameTabWidget.ui:105
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox Column header text for the actual colors"
+#| msgid "Color"
+msgid "Tab Color:"
+msgstr "ਰੰਗ"
+
+#: widgets/TabTitleFormatButton.cpp:22 widgets/TabTitleFormatButton.cpp:31
+#, c-format, kde-format
+msgid "Program Name: %n"
+msgstr "ਪਰੋਗਰਾਮ ਨਾਂ: %n"
+
+#: widgets/TabTitleFormatButton.cpp:23 widgets/TabTitleFormatButton.cpp:32
+#, c-format, kde-format
+msgid "Current Directory (Short): %d"
+msgstr "ਮੌਜੂਦਾ ਡਾਇਰੈਕਟਰੀ (ਛੋਟਾ): %d"
+
+#: widgets/TabTitleFormatButton.cpp:24 widgets/TabTitleFormatButton.cpp:33
+#, kde-format
+msgid "Current Directory (Long): %D"
+msgstr "ਮੌਜੂਦਾ ਡਾਇਰੈਕਟਰੀ (ਲੰਮਾ): %D"
+
+#: widgets/TabTitleFormatButton.cpp:25 widgets/TabTitleFormatButton.cpp:34
+#: widgets/TabTitleFormatButton.cpp:51 widgets/TabTitleFormatButton.cpp:59
+#, kde-format
+msgid "Window Title Set by Shell: %w"
+msgstr "ਵਿੰਡੋ ਟਾਈਟਲ ਸ਼ੈਲ ਵੱਲੋਂ ਸੈੱਟ ਕੀਤਾ: %w"
+
+#: widgets/TabTitleFormatButton.cpp:26 widgets/TabTitleFormatButton.cpp:35
+#: widgets/TabTitleFormatButton.cpp:52 widgets/TabTitleFormatButton.cpp:60
+#, kde-format
+msgid "Session Number: %#"
+msgstr "ਸ਼ੈਸ਼ਨ ਨੰਬਰ: %#"
+
+#: widgets/TabTitleFormatButton.cpp:27 widgets/TabTitleFormatButton.cpp:36
+#: widgets/TabTitleFormatButton.cpp:46 widgets/TabTitleFormatButton.cpp:54
+#, c-format, kde-format
+msgid "User Name: %u"
+msgstr "ਵਰਤੋਂਕਾਰ ਨਾਂ: %u"
+
+#: widgets/TabTitleFormatButton.cpp:28 widgets/TabTitleFormatButton.cpp:37
+#, kde-format
+msgid "Local Host: %h"
+msgstr "ਲੋਕਲ ਹੋਸਟ: %h"
+
+#: widgets/TabTitleFormatButton.cpp:29 widgets/TabTitleFormatButton.cpp:38
+#, kde-format
+msgid "User's Bourne prompt sigil: %B"
+msgstr ""
+
+#: widgets/TabTitleFormatButton.cpp:47 widgets/TabTitleFormatButton.cpp:55
+#, kde-format
+msgid "User Name@ (if given): %U"
+msgstr "ਵਰਤੋਂਕਾਰ ਨਾਂ@ (ਜੇ ਦਿੱਤਾ ਹੈ): %U"
+
+#: widgets/TabTitleFormatButton.cpp:48 widgets/TabTitleFormatButton.cpp:56
+#, kde-format
+msgid "Remote Host (Short): %h"
+msgstr "ਰਿਮੋਟ ਹੋਸਟ (ਛੋਟਾ): %h"
+
+#: widgets/TabTitleFormatButton.cpp:49 widgets/TabTitleFormatButton.cpp:57
+#, kde-format
+msgid "Remote Host (Long): %H"
+msgstr "ਰਿਮੋਟ ਹੋਸਟ (ਲੰਮਾ): %H"
+
+#: widgets/TabTitleFormatButton.cpp:50 widgets/TabTitleFormatButton.cpp:58
+#, c-format, kde-format
+msgid "Command and arguments: %c"
+msgstr "ਕਮਾਂਡ ਅਤੇ ਆਰਗੂਮੈਂਟ: %c"
+
+#: widgets/TabTitleFormatButton.cpp:69
+#, kde-format
+msgid "Insert"
+msgstr "ਸ਼ਾਮਲ"
+
+#: widgets/TabTitleFormatButton.cpp:94
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert title format"
+msgstr "ਟਾਈਟਲ ਫਾਰਮੈਟ ਸ਼ਾਮਲ"
+
+#: widgets/TabTitleFormatButton.cpp:98
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Insert remote title format"
+msgstr "ਰਿਮੋਟ ਟਾਈਟਲ ਫਾਰਮੈਟ ਸ਼ਾਮਲ"
+
+#: widgets/TerminalHeaderBar.cpp:80 widgets/TerminalHeaderBar.cpp:188
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Close tab"
+msgctxt "@info:tooltip"
+msgid "Maximize terminal"
+msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#: widgets/TerminalHeaderBar.cpp:91
+#, fuzzy, kde-format
+#| msgid "Above Terminal Area"
+msgctxt "@info:tooltip"
+msgid "Move terminal to new tab"
+msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਉੱਤੇ"
+
+#: widgets/TerminalHeaderBar.cpp:101
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Close tab"
+msgctxt "@info:tooltip"
+msgid "Close terminal"
+msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#: widgets/TerminalHeaderBar.cpp:186
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Close tab"
+msgctxt "@info:tooltip"
+msgid "Restore terminal"
+msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#: widgets/ViewContainer.cpp:57
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Detach Tab"
+msgctxt "@info:tooltip"
+msgid "Open a new tab"
+msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(&D)"
+
+#: widgets/ViewContainer.cpp:62
+#, fuzzy, kde-format
+#| msgctxt "@info:whatsthis"
+#| msgid "Close the active tab"
+msgctxt "@info:tooltip"
+msgid "Close this tab"
+msgstr "ਸਰਗਰਮ ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#: widgets/ViewContainer.cpp:95
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Detach Tab"
+msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(&D)"
+
+#: widgets/ViewContainer.cpp:101
+#, fuzzy, kde-format
+#| msgid "&Rename Tab..."
+msgctxt "@action:inmenu"
+msgid "&Configure or Rename Tab..."
+msgstr "ਟੈਬ ਨਾਂ ਬਦਲੋ(&R)..."
+
+#: widgets/ViewContainer.cpp:106
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Close Tab"
+msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "@title:window"
+#~ msgid "Save File"
+#~ msgstr "ਫਾਇਲ ਖੋਲ੍ਹੋ"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "@title:window"
+#~ msgid "Open File"
+#~ msgstr "ਫਾਇਲ ਖੋਲ੍ਹੋ"
+
+#~ msgid "Size: XXX x XXX"
+#~ msgstr "ਅਕਾਰ: XXX x XXX"
+
+#~ msgid "Get New..."
+#~ msgstr "...ਨਵੇਂ ਲਵੋ"
+
+#~ msgctxt "Name of the default/builtin profile"
+#~ msgid "Default"
+#~ msgstr "ਡਿਫਾਲਟ"
+
+#, fuzzy
+#~| msgctxt "Name of the default/builtin profile"
+#~| msgid "Default"
+#~ msgctxt "@label:textbox added to the name of the current default profile"
+#~ msgid " (default)"
+#~ msgstr "ਡਿਫਾਲਟ"
+
+#, fuzzy
+#~| msgctxt "@info:credit"
+#~| msgid "SGI port"
+#~ msgid "Import"
+#~ msgstr "SGI ਪੋਰਟ"
+
+#, fuzzy
+#~| msgid "Show Menu Bar"
+#~ msgid "Show menubar"
+#~ msgstr "ਮੇਨੂ ਪੱਟੀ ਵੇਖਾਓ"
+
+#~ msgid "Show menubar by default"
+#~ msgstr "ਮੇਨੂਪੱਟੀ ਡਿਫਾਲਟ ਹੀ ਵੇਖਾਓ"
+
+#~ msgid "Show menubar by default in each Konsole window"
+#~ msgstr "ਹਰ ਕੇਨਸੋਲ ਵਿੱਚ ਮੇਨੂ-ਪੱਟੀ ਡਿਫਾਲਟ ਵੇਖਾਉ ਹੀ।"
+
+#, fuzzy
+#~| msgid "Open File Manager"
+#~ msgid "Hide SSH Manager"
+#~ msgstr "ਫਾਇਲ ਮੈਨੇਜਰ ਖੋਲ੍ਹੋ"
+
+#, fuzzy
+#~| msgctxt "Name of the default/builtin profile"
+#~| msgid "Default"
+#~ msgctxt "@label:textbox Name of the current default profile"
+#~ msgid " (Default)"
+#~ msgstr "ਡਿਫਾਲਟ"
+
+#, fuzzy
+#~| msgctxt "@title:window"
+#~| msgid "New Color Scheme"
+#~ msgid "Color from theme"
+#~ msgstr "ਨਵੀਂ ਰੰਗ ਸਕੀਮ"
+
+#~ msgctxt "The default name of a profile"
+#~ msgid "Profile #%1"
+#~ msgstr "ਪਰੋਫਾਇਲ #%1"
+
+#, fuzzy
+#~| msgctxt "@title:column Display profile in file menu"
+#~| msgid "Show in Menu"
+#~ msgctxt ""
+#~ "@info:tooltip List item's checkbox for making item (profile) visible in a "
+#~ "menu"
+#~ msgid "Show profile in menu"
+#~ msgstr "ਮੇਨੂ 'ਚ ਵੇਖਾਓ"
+
+#, fuzzy
+#~| msgid "Tab Bar"
+#~ msgctxt "@title Preferences page name"
+#~ msgid "Tab Bar"
+#~ msgstr "ਟੈਬ ਪੱਟੀ"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Rename Tab..."
+#~ msgstr "ਟੈਬ ਨਾਂ ਬਦਲੋ(&R)..."
+
+#~ msgctxt "@action:button"
+#~ msgid "Confirm &paste"
+#~ msgstr "ਚੇਪਣ ਦੀ ਪੁਸ਼ਟੀ(&p)"
+
+#~ msgid "Vary the background color for each tab"
+#~ msgstr "ਹਰੇਕ ਟੈਬ ਲਈ ਬੈਕਗਰਾਊਂਡ ਰੰਗ ਵੱਖ ਵੱਖ"
+
+#~ msgctxt "@title Preferences page name"
+#~ msgid "TabBar"
+#~ msgstr "ਟੈਬਪੱਟੀ"
+
+#~ msgctxt "@title Preferences page name"
+#~ msgid "File Location"
+#~ msgstr "ਫਾਇਲ ਦਾ ਟਿਕਾਣਾ"
+
+#~ msgid "Use system &location"
+#~ msgstr "ਸਿਸਟਮ ਟਿਕਾਣੇ ਨੂੰ ਵਰਤੋਂ(&l)"
+
+#~ msgid "Use user specific location"
+#~ msgstr "ਵਰਤੋਂਕਾਰ ਖਾਸ ਟਿਕਾਣੇ ਨੂੰ ਵਰਤੋਂ"
+
+#~ msgid "Use specified loca&tion"
+#~ msgstr "ਖਾਸ ਟਿਕਾਣੇ ਵਰਤੋਂ(&t)"
+
+#~ msgid "Konsole Window"
+#~ msgstr "ਕਨਸੋਲ ਵਿੰਡੋ"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Click to toggle status"
+#~ msgstr "ਸਥਿਤੀ ਬਦਲਣ ਲਈ ਕਲਿੱਕ"
+
+#~ msgctxt "@title:column Profile label"
+#~ msgid "Name"
+#~ msgstr "ਨਾਂ"
+
+#~ msgid "&New Profile..."
+#~ msgstr "ਨਵਾਂ ਪਰੋਫਾਇਲ(&N)..."
+
+#~ msgid "&Edit Profile..."
+#~ msgstr "ਪਰੋਫਾਇਲ ਸੋਧ(&E)..."
+
+#~ msgid "&Delete Profile"
+#~ msgstr "ਪਰੋਫਾਇਲ ਹਟਾਓ(&D)"
+
+#~ msgid "Tab bar position:"
+#~ msgstr "ਟੈਬ ਪੱਟੀ ਸਥਿਤੀ:"
+
+#~ msgid "Always Show Tab Bar"
+#~ msgstr "ਹਮੇਸ਼ਾਂ ਟੈਬ ਪੱਟੀ ਵੇਖੋ"
+
+#~ msgid "Show Tab Bar When Needed"
+#~ msgstr "ਜਦੋਂ ਲੋੜ ਹੋਵੇ ਤਾਂ ਟੈਬ ਪੱਟੀ ਵੇਖੋ"
+
+#~ msgid "Always Hide Tab Bar"
+#~ msgstr "ਟੈਬ ਪੱਟੀ ਹਮੇਸ਼ਾਂ ਓਹਲੇ"
+
+#~ msgid "Tab bar visibility:"
+#~ msgstr "ਟੈਬ ਪੱਟੀ ਦਿੱਖ:"
+
+#~ msgid "New tab behavior:"
+#~ msgstr "ਨਵੀਂ ਟੈਬ ਰਵੱਈਆ:"
+
+#~ msgid "Put New Tab At The End"
+#~ msgstr "ਨਵੀਂ ਟੈਬ ਅੰਤ ਉੱਤੇ ਰੱਖੋ"
+
+#~ msgid "Put New Tab After Current Tab"
+#~ msgstr "ਨਵੀਂ ਟੈਬ ਮੌਜੂਦਾ ਟੈਬ ਦੇ ਬਾਅਦ ਰੱਖੋ"
+
+#~ msgctxt "@action Shortcut entry"
+#~ msgid "Next View Container"
+#~ msgstr "ਅੱਗੇ ਝਲਕ ਕੰਨਟੇਨਰ"
+
+#~ msgid "&Close Tab"
+#~ msgstr "ਟੈਬ ਬੰਦ ਕਰੋ(&C)"
+
+#~ msgctxt "@action:inmenu Close Active View"
+#~ msgid "Close Active"
+#~ msgstr "ਸਰਗਰਮ ਬੰਦ ਕਰੋ"
+
+#~ msgctxt "@action:inmenu Close Other Views"
+#~ msgid "Close Others"
+#~ msgstr "ਹੋਰ ਬੰਦ ਕਰੋ"
+
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "Select Any Font"
+#~ msgstr "ਕੋਈ ਵੀ ਫ਼ੋਂਟ ਚੁਣੋ"
+
+#~ msgid "Select Fixed Width Font"
+#~ msgstr "ਸਥਿਰੀ ਚੌੜਾਈ ਫੋਂਟ ਚੁਣੋ"
+
+#~ msgctxt "@title:group Generic, common options"
+#~ msgid "General"
+#~ msgstr "ਆਮ"
+
+#~ msgid "Rows"
+#~ msgstr "ਕਤਾਰਾਂ"
+
+#~ msgid "Preview:"
+#~ msgstr "ਝਲਕ:"
+
+#~ msgid "Select the font used in this profile"
+#~ msgstr "ਇਹ ਪਰੋਫਾਇਲ ਵਿੱਚ ਵਰਤੇ ਜਾਂਦੇ ਫੋਂਟ ਚੁਣੋ"
+
+#~ msgid "Scroll Bar"
+#~ msgstr "ਸਕਰੋਲ ਪੱਟੀ"
+
+#~ msgid "Hide the scroll bar"
+#~ msgstr "ਸਕਰੋਲ ਪੱਟੀ ਓਹਲੇ"
+
+#~ msgctxt "@option:radio Hide the scroll bar"
+#~ msgid "Hide"
+#~ msgstr "ਓਹਲੇ"
+
+#~ msgid "Show on left side"
+#~ msgstr "ਖੱਬੇ ਪਾਸੇ ਵੇਖਾਓ"
+
+#~ msgid "Select Text"
+#~ msgstr "ਟੈਕਸਟ ਚੁਣੋ"
+
+#~ msgid "Characters considered part of a word when double clicking:"
+#~ msgstr "ਅੱਖਰ, ਜੋ ਕਿ ਇੱਕ ਸ਼ਬਦ ਦਾ ਭਾਗ ਮੰਨੇ ਗਏ ਹਨ, ਜਦੋਂ ਦੋ ਵਾਰ ਕਲਿੱਕ ਕੀਤਾ ਗਿਆ:"
+
+#~ msgid "Copy && Paste"
+#~ msgstr "ਕਾਪੀ ਕਰੋ ਤੇ ਚੇਪੋ"
+
+#~ msgid "Mouse middle button:"
+#~ msgstr "ਮਾਊਸ ਮੱਧ ਬਟਨ:"
+
+#~ msgid "Enable flow control using Ctrl+S, Ctrl+Q"
+#~ msgstr "Ctrl+S , Ctrl+Q ਨਾਲ ਫਲੋ ਕੰਟਰੋਲ ਚਾਲੂ"
+
+#~ msgid "Cursor shape:"
+#~ msgstr "ਕਰਸਰ ਸ਼ਕਲ:"
+
+#~ msgid "Encoding"
+#~ msgstr "ਇੰਕੋਡਿੰਗ"
+
+#~ msgctxt "@action:button Pick an encoding"
+#~ msgid "Select"
+#~ msgstr "ਚੁਣੋ"
+
+#~ msgid "No scrollback"
+#~ msgstr "ਕੋਈ ਸਕਰੋਲ-ਬੈਕ ਨਹੀਂ"
+
+#~ msgid "Show application name on the titlebar"
+#~ msgstr "ਟਾਈਟਲ-ਪੱਟੀ ਵਿੱਚ ਐਪਲੀਕੇਸ਼ਨ ਨਾਂ ਵੇਖਾਓ"
+
+#~ msgid "Show \"- Konsole\" on the titlebar"
+#~ msgstr "ਟਾਈਟਲ-ਪੱਟੀ ਉੱਤੇ \"- ਕਨਸੋਲ\" ਵੇਖਾਓ"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "&Close Tab"
+#~ msgstr "ਟੈਬ ਬੰਦ ਕਰੋ(&C)"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid "Create a new tab. Press and hold to select profile from menu"
+#~ msgstr "ਨਵੀਂ ਟੈਬ ਬਣਾਉ। ਮੇਨੂ ਤੋਂ ਪਰੋਫਾਇਲ ਦੱਬੋ ਅਤੇ ਫੜੀ ਰੱਖੋ।"
+
+#~ msgctxt "@info:whatsthis"
+#~ msgid ""
+#~ "<title>Tab Bar</title><para>The tab bar allows you to switch and move "
+#~ "tabs. You can double-click a tab to change its name.</para>"
+#~ msgstr ""
+#~ "<title>ਟੈਬ ਬਾਰ</title><para>ਟੈਬ ਬਾਰ ਤੁਹਾਨੂੰ ਟੈਬਾਂ ਵਿੱਚ ਬਦਲਣ ਅਤੇ ਏਧਰ-ਓਧਰ ਜਾਣ ਲਈ "
+#~ "ਸਹਾਇਕ ਹੈ। ਤੁਸੀਂ ਟੈਬ ਉੱਤੇ ਡਬਲ ਕਲਿੱਕ ਕਰਕੇ ਇਸ ਦਾ ਨਾਂ ਬਦਲ ਸਕਦੇ ਹੋ।</para>"
+
+#~ msgctxt "@action:button Display options menu"
+#~ msgid "Options"
+#~ msgstr "ਚੋਣਾਂ"
+
+#~ msgctxt "@action:button Search from bottom"
+#~ msgid "From bottom"
+#~ msgstr "ਹੇਠਾਂ ਤੋਂ"
+
+#~ msgctxt "@action:button Search from top"
+#~ msgid "From top"
+#~ msgstr "ਉੱਤੇ ਤੋਂ"
+
+#~ msgid "Profile name is empty."
+#~ msgstr "ਪਰੋਫਾਇਲ ਨਾਂ:"
+
+#~ msgid "&Stop"
+#~ msgstr "ਰੋਕੋ(&S)"
+
+#~ msgid "Icon:"
+#~ msgstr "ਆਈਕਾਨ:"
+
+#~ msgctxt "@info:tooltip"
+#~ msgid "Click to rename profile"
+#~ msgstr "ਪਰੋਫਾਇਲ ਨਾਂ ਬਦਲਣ ਲਈ ਕਲਿੱਕ"
+
+#, fuzzy
+#~| msgctxt "@title"
+#~| msgid "Konsole"
+#~ msgctxt "@title"
+#~ msgid "Demo KonsolePart"
+#~ msgstr "ਕੇਨਸੋਲ"
+
+#~ msgid "DEC VT420 Terminal"
+#~ msgstr "DEC VT420 ਟਰਮੀਨਲ"
+
+#~ msgctxt "@title:window"
+#~ msgid "Manage Profiles"
+#~ msgstr "ਪਰੋਫਾਇਲ ਪਰਬੰਧ"
+
+#~ msgid "Manage Profiles..."
+#~ msgstr "ਪਰੋਫਾਇਲ ਪਰਬੰਧ..."
+
+#~ msgctxt "@title"
+#~ msgid "<application>Konsole</application>"
+#~ msgstr "<application>ਕੇਨਸੋਲ</application>"
+
+#~ msgid "Shell"
+#~ msgstr "ਸ਼ੈੱਲ"
+
+#~ msgid "--- Type anything in this box ---"
+#~ msgstr "--- ਇਹ ਬਾਕਸ ਵਿੱਚ ਕੁਝ ਵੀ ਲਿਖੋ ---"
+
+#~ msgid "Set the window size and position for this profile when exiting"
+#~ msgstr "ਇਹ ਪਰੋਫਾਇਲ ਲਈ ਵਿੰਡੋ ਆਕਾਰ ਅਤੇ ਸਥਿਤੀ ਸੈੱਟ ਕਰੋ, ਜਦੋਂ ਬੰਦ ਕਰਨਾ ਹੋਵੇ"
+
+#~ msgid "Save window size and position on exit"
+#~ msgstr "ਵਿੰਡੋ ਆਕਾਰ ਅਤੇ ਸਥਿਤੀ ਬੰਦ ਕਰਨ ਸਮੇਂ ਸੰਭਾਲੋ"
+
+#~ msgid "Accessible Color Scheme"
+#~ msgstr "ਪਹੁੰਚ ਰੰਗ ਸਕੀਮ"
+
+#~ msgid "%1, size %2"
+#~ msgstr "%1, ਆਕਾਰ %2"
+
+#~ msgid "Adjust the font size used in this profile"
+#~ msgstr "ਇਸ ਪਰੋਫਾਇਲ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਫੋਂਟ ਸਾਈਜ਼ ਅਡਜੱਸਟ ਕਰੋ"
+
+#~ msgid "Input"
+#~ msgstr "ਇੰਪੁੱਟ"
+
+#~ msgid "Fixed size scrollback: "
+#~ msgstr "ਸਥਿਰ ਆਕਾਰ ਸਕਰੋਲ-ਬੈਕ: "
+
+#~ msgid "Edit normal tab title format"
+#~ msgstr "ਆਮ ਟੈਬ ਟਾਈਟਲ ਫਾਰਮੈਟ ਸੋਧੋ"
+
+#~ msgid "Allow programs to resize terminal window"
+#~ msgstr "ਕਾਰਜਾਂ ਨੂੰ ਟਰਮੀਨਲ ਝਰੋਖੇ ਦਾ ਆਕਾਰ ਬਦਲਣ ਦਿਓ"
+
+#~ msgid "Configure Current Profile..."
+#~ msgstr "ਮੌਜੂਦਾ ਪਰੋਫਾਇਲ ਸੰਰਚਨਾ..."
+
+#~ msgid "The wallpaper picture file path"
+#~ msgstr "ਵਾਲ ਪੇਪਰ ਤਸਵੀਰ ਫਾਇਲ ਪਾਥ"
+
+#~ msgid "&Switch Profile"
+#~ msgstr "ਪਰੋਫਾਇਲ ਬਦਲੋ(&S)"
+
+#~ msgid "Debug"
+#~ msgstr "ਡੀਬੱਗ"
+
+#~ msgid "Show or hide the menu bar in terminal windows"
+#~ msgstr "ਟਰਮੀਨਲ ਵਿੰਡੋ ਵਿੱਚ ਮੇਨੂ ਬਾਰ ਵੇਖੋ ਜਾਂ ਓਹਲੇ"
+
+#~ msgid "Disable scrollback"
+#~ msgstr "ਸਕਰੋਲ-ਬੈਕ ਆਯੋਗ"
+
+#~ msgid "&Paste as text"
+#~ msgstr "ਟੈਕਸਟ ਵਜੋਂ ਚੇਪੋ(&P)"
+
+#~ msgid "&Change Profile"
+#~ msgstr "ਪਰੋਫਾਇਲ ਬਦਲੋ(&C)"
+
+#~ msgid "Change Profile"
+#~ msgstr "ਪਰੋਫਾਇਲ ਬਦਲੋ"
+
+#~ msgid "Maintainer"
+#~ msgstr "ਪਰਬੰਧਕ"
+
+#~ msgid "Author"
+#~ msgstr "ਲੇਖਕ"
+
+#~ msgid "Remote Connection..."
+#~ msgstr "ਰਿਮੋਟ ਕੁਨੈਕਸ਼ਨ..."
+
+#~ msgid "User:"
+#~ msgstr "ਯੂਜ਼ਰ:"
+
+#~ msgid "Lookup..."
+#~ msgstr "ਖੋਜ..."
+
+#~ msgid "Service:"
+#~ msgstr "ਸੇਵਾ:"
+
+#~ msgid "SSH"
+#~ msgstr "SSH"
+
+#~ msgid "Secure FTP"
+#~ msgstr "Secure FTP"
+
+#~ msgid "Background color:"
+#~ msgstr "ਬੈਕਗਰਾਊਂਡ ਰੰਗ:"
+
+#~ msgid "Save as custom session"
+#~ msgstr "ਇੱਕ ਪਸੰਦੀਦਾ ਸ਼ੈਸ਼ਨ ਵਾਂਗ ਸੰਭਾਲੋ"
+
+#~ msgid "Connect"
+#~ msgstr "ਕੁਨੈਕਟ ਕਰੋ"
+
+#~ msgid "Next View"
+#~ msgstr "ਅੱਗੇ ਝਲਕ"
+
+#~ msgid "Previous View"
+#~ msgstr "ਪਿਛੇ ਝਲਕ"
+
+#~ msgid "Match case"
+#~ msgstr "ਰਲਦਾ ਮੇਲ"
+
+#~ msgid "New &Tab"
+#~ msgstr "ਨਵੀਂ ਟੈਬ(&T)"
+
+#~| msgid "Set the selected profile as the default for new terminal sessions"
+#~ msgid "Move the selected profile up in the menu list"
+#~ msgstr "ਮੇਨੂ ਲਿਸਟ ਵਿੱਚ ਚੁਣੇ ਪਰੋਫਾਇਲ ਨੂੰ ਉੱਤੇ ਭੇਜੋ"
+
+#~ msgid "Move Up"
+#~ msgstr "ਉੱਤੇ ਭੇਜੋ"
+
+#~| msgid "Set the selected profile as the default for new terminal sessions"
+#~ msgid "Move the selected profile down in the menu list"
+#~ msgstr "ਮੇਨੂ ਲਿਸਟ ਵਿੱਚ ਚੁਣੇ ਪਰੋਫਾਇਲ ਨੂੰ ਹੇਠਾਂ ਭੇਜੋ"
+
+#~ msgid "Move Down"
+#~ msgstr "ਹੇਠਾਂ ਭੇਜੋ"
+
+#~ msgid "Enter new tab text:"
+#~ msgstr "ਨਵੀਂ ਟੈਬ ਪਾਠ ਦਿਓ:"
+
+#, fuzzy
+#~| msgid "Clear && Reset"
+#~ msgid "Clear and Reset"
+#~ msgstr "ਸਾਫ਼ ਕਰੋ ਅਤੇ ਮੁੜ-ਸੈੱਟ"
+
+#~ msgid "Character Encoding"
+#~ msgstr "ਕਰੈਕਟਰ ਇੰਕੋਡਿੰਗ"
+
+#~ msgid "&Detach View"
+#~ msgstr "ਝਲਕ ਵੱਖ ਕਰੋ(&D)"
+
+#~ msgid "Decrease Text Size"
+#~ msgstr "ਟੈਕਸਟ ਸਾਈਜ਼ ਘਟਾਓ"
+
+#~ msgid "Search Output..."
+#~ msgstr "ਖੋਜ ਆਉਟਪੁੱਟ..."
+
+#~ msgid "Find Next"
+#~ msgstr "ਅੱਗੇ ਲੱਭੋ"
+
+#~ msgid "Find Previous"
+#~ msgstr "ਪਿੱਛੇ ਲੱਭੋ"
+
+#~ msgid "Open Browser Here"
+#~ msgstr "ਬਰਾਊਜ਼ਰ ਇੱਥੇ ਖੋਲ੍ਹੋ"
+
+#~ msgid "C&lear Display"
+#~ msgstr "ਡਿਸਪਲੇਅ ਸਾਫ਼ ਕਰੋ(&l)"
