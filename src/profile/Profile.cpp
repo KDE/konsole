@@ -184,7 +184,10 @@ static QString defaultShell()
         proc.setArguments({QStringLiteral("passwd"), QString::number(pw->pw_uid)});
         KSandbox::startHostProcess(proc);
         proc.waitForFinished();
-        return QString::fromUtf8(proc.readAllStandardOutput().simplified().split(':').at(6));
+        const auto output = proc.readAllStandardOutput().simplified();
+        if (auto parts = QString::fromUtf8(output).split(QLatin1Char(':')); output.size() >= 7) {
+            return parts.at(6);
+        }
     }
     return {};
 #endif
