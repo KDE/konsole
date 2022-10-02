@@ -13,9 +13,9 @@
 #include <unistd.h>
 
 // Qt
+#include <QBuffer>
 #include <QEvent>
 #include <QKeyEvent>
-#include <QTemporaryFile>
 #include <QTimer>
 #include <QtEndian>
 
@@ -1209,17 +1209,19 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             }
         }
         if (inlineMedia) {
-            QTemporaryFile file;
-            file.open();
-            file.write(tokenData);
             if (player == nullptr) {
                 player = new QMediaPlayer(this);
                 connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(deletePlayer(QMediaPlayer::MediaStatus)));
             }
+            delete (QIODevice *)(player->mediaStream());
+            QBuffer *buffer = new QBuffer(player);
+            buffer->setData(tokenData);
+            buffer->open(QIODevice::ReadOnly);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            player->setMedia(QUrl::fromLocalFile(file.fileName()));
+            player->setMedia(QMediaContent(), buffer);
+
 #else
-            player->setSource(QUrl::fromLocalFile(file.fileName()));
+            player->setSource(QMediaContent(), buffer);
 #endif
             player->play();
             return;
@@ -1252,6 +1254,8 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
 void Vt102Emulation::deletePlayer(QMediaPlayer::MediaStatus mediaStatus)
 {
     if (mediaStatus == QMediaPlayer::EndOfMedia || mediaStatus == QMediaPlayer::InvalidMedia) {
+        QIODevice *buffer = (QIODevice *)(player->mediaStream());
+        buffer->deleteLater();
         player->deleteLater();
         player = nullptr;
     }
