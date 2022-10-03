@@ -72,7 +72,7 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
     settings.beginGroup(QStringLiteral("plugins"));
     settings.beginGroup(QStringLiteral("quickcommands"));
 
-    const QKeySequence def(Qt::CTRL + Qt::ALT + Qt::Key_G);
+    const QKeySequence def(Qt::CTRL | Qt::ALT | Qt::Key_G);
     const QString defText = def.toString();
     const QString entry = settings.value(QStringLiteral("shortcut"), defText).toString();
     const QKeySequence shortcutEntry(entry);
