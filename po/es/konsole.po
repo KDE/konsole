@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:52+0000\n"
+"POT-Creation-Date: 2022-10-03 00:52+0000\n"
 "PO-Revision-Date: 2022-10-01 22:05+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -3543,7 +3543,7 @@ msgstr "Control del flujo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:813
+#: widgets/EditProfileAppearancePage.ui:817
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3554,7 +3554,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:816
+#: widgets/EditProfileAppearancePage.ui:820
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Texto bidireccional"
@@ -3884,25 +3884,25 @@ msgid "Display Vertical line at column:"
 msgstr "Mostrar una línea vertical en la columna:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:760
+#: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr "<html><head/><body><p>Disposición de texto compleja</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:763
+#: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
 msgstr "Disposición de texto compleja"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:787
+#: widgets/EditProfileAppearancePage.ui:791
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Tipo de letra para emojis:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:829
+#: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
@@ -3910,19 +3910,19 @@ msgstr ""
 "determinadas por el primer carácter fuerte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:832
+#: widgets/EditProfileAppearancePage.ui:836
 #, kde-format
 msgid "force LTR line direction"
 msgstr "Forzar dirección de línea de izquierda a derecha"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:845
+#: widgets/EditProfileAppearancePage.ui:849
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Tratar los caracteres de dibujo de tablas como LTR fuertes."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:848
+#: widgets/EditProfileAppearancePage.ui:852
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Sustitución del modo BiDi de los caracteres de tablas"

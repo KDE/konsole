@@ -16,16 +16,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:52+0000\n"
-"PO-Revision-Date: 2022-09-10 07:56+0200\n"
+"POT-Creation-Date: 2022-10-03 00:52+0000\n"
+"PO-Revision-Date: 2022-10-02 06:39+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Poedit 3.1.1\n"
 
@@ -1256,20 +1256,16 @@ msgid "Activate Menu"
 msgstr "Omogoči meni"
 
 #: MainWindow.cpp:376
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Shrani zavihek v datoteko"
+msgstr "Shrani razporeditev zavihka…"
 
 #: MainWindow.cpp:385
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Naloži zavihek iz datoteke"
+msgstr "Naloži razporeditev zavihka…"
 
 #: MainWindow.cpp:618 MainWindow.cpp:635
 #, kde-format
@@ -3389,12 +3385,10 @@ msgid "Line numbers "
 msgstr "Številke vrstic "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Shrani zavihek v datoteko"
+msgstr "Shrani razporeditev zavihka"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3423,12 +3417,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Naloži zavihek iz datoteke"
+msgstr "Naloži razporeditev zavihka"
 
 #: Vt102Emulation.cpp:2313
 #, kde-format
@@ -3518,7 +3510,7 @@ msgstr "Kontrola toka"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:813
+#: widgets/EditProfileAppearancePage.ui:817
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3529,7 +3521,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:816
+#: widgets/EditProfileAppearancePage.ui:820
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Dvosmeren prikaz besedila"
@@ -3854,44 +3846,44 @@ msgid "Display Vertical line at column:"
 msgstr "Kaži navpično črto pri stolpcu:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:760
+#: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Kompleksna razporeditev besedila</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:763
+#: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
 msgstr "Kompleksna razporeditev besedila"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:787
+#: widgets/EditProfileAppearancePage.ui:791
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Pisava čustvenčka:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:829
+#: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr "Črte so vedno L->D, smeri ne določa prvi krepki znak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:832
+#: widgets/EditProfileAppearancePage.ui:836
 #, kde-format
 msgid "force LTR line direction"
 msgstr "vsili smer vrstice L->D"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:845
+#: widgets/EditProfileAppearancePage.ui:849
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Obravnavaj znake izrisa tabele kot krepki L->D."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:848
+#: widgets/EditProfileAppearancePage.ui:852
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Preglasitev dvosmernega načina znakov tabele"

@@ -16,15 +16,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:52+0000\n"
-"PO-Revision-Date: 2022-03-23 12:03+0300\n"
-"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
-"Language-Team: Basealt Translation Team\n"
+"POT-Creation-Date: 2022-10-03 00:52+0000\n"
+"PO-Revision-Date: 2022-10-02 20:12+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.1\n"
+"X-Generator: Lokalize 21.08.3\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -126,11 +126,10 @@ msgstr ""
 "Файл макета окна в формате JSON, используемый для новых сеансов Konsole."
 
 #: Application.cpp:53
-#, fuzzy, kde-format
-#| msgid "Create a new profile based on the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Создать новый профиль на базе выбранного"
+msgstr "Использовать встроенный профиль вместо профиля по умолчанию"
 
 #: Application.cpp:54
 #, kde-format
@@ -658,36 +657,33 @@ msgstr "Не масштабировать"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Масштабирование фонового изображения:"
+msgstr "Поворот фонового изображения:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Не поворачивать"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Привязка по горизонтали:"
+msgstr "По горизонтали:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "Привязка по вертикали:"
+msgstr "По вертикали:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "По вертикали и горизонтали"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -1458,7 +1454,7 @@ msgstr "Такой объект уже существует"
 #: plugins/QuickCommands/quickcommandswidget.cpp:163
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
-msgstr ""
+msgstr "Перед запуском сценария исправьте все предупреждения"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:187
 #, fuzzy, kde-format
@@ -1471,36 +1467,31 @@ msgstr "В этом окне открыто несколько терминал�
 #: plugins/QuickCommands/quickcommandswidget.cpp:188
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Ошибки оболочки"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:189
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "Запустить"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the group %1,\n"
-#| " with multiple configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
 "Подтвердите удаление группы «%1»,\n"
-"содержащей конфигурации подключений SSH."
+"содержащей несколько конфигураций."
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
-#, fuzzy, kde-format
-#| msgid "You are about to remove %1, are you sure?"
+#, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Подтвердите удаление «%1»."
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:218
-#, fuzzy, kde-format
-#| msgid "Remove Quick Commands Configurations"
+#, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Удалить конфигурацию быстрых команд"
 
@@ -1515,33 +1506,28 @@ msgid "Command can not be empty"
 msgstr "Команда не может быть пустой"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:272
-#, fuzzy, kde-format
-#| msgid "Rename Tab"
+#, kde-format
 msgid "Rename"
-msgstr "Переименовать вкладку"
+msgstr "Переименовать"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:307
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings (*)"
-msgstr "Предупреждение: "
+msgstr "Предупреждения (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "SSH Config"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "Конфигурация SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "По умолчанию"
@@ -1587,18 +1573,15 @@ msgstr "Ключ SSH:"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:136
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Не изменять"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:207
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the folder %1,\n"
-#| " with multiple SSH Configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
@@ -1607,11 +1590,10 @@ msgstr ""
 "содержащей конфигурации для подключений SSH."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:215
-#, fuzzy, kde-format
-#| msgid "Remove SSH Configurations"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr "Удалить конфигурации SSH"
+msgstr "Удаление конфигураций SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:362
 #, kde-format
@@ -1646,14 +1628,12 @@ msgid "An SSH session must have a profile"
 msgstr "Для сеанса SSH необходимо задать используемый им профиль Konsole"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
-#, fuzzy, kde-format
-#| msgid "Cannot remove this folder"
+#, kde-format
 msgid "Cannot delete this folder"
 msgstr "Не удалось удалить эту папку"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
-#, fuzzy, kde-format
-#| msgid "Remove folder and all of its contents"
+#, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Удалить папку и всё её содержимое"
 
@@ -1663,14 +1643,12 @@ msgid "Double click to change the folder name."
 msgstr "Щёлкните дважды, чтобы изменить имя папки"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
-#, fuzzy, kde-format
-#| msgid "You can't remove an automatically added entry."
+#, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Запись, добавленная автоматически, не может быть удалена."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
-#, fuzzy, kde-format
-#| msgid "Remove selected entry"
+#, kde-format
 msgid "Delete selected entry"
 msgstr "Удалить выбранную запись"
 
@@ -1833,10 +1811,9 @@ msgstr "Создать запись"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:245
-#, fuzzy, kde-format
-#| msgid "Remove selected SSH entry"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "Удалить выбранную запись"
+msgstr "Удалить выбранные записи SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:259
@@ -1905,11 +1882,7 @@ msgid "Shortcut"
 msgstr "Комбинация клавиш"
 
 #: profile/ProfileModel.cpp:80
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox added to the name of the Default/fallback profile, to "
-#| "point out it's read-only/hardcoded"
-#| msgid " [Read-only]"
+#, kde-format
 msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
@@ -1917,17 +1890,16 @@ msgid " [Read-only]"
 msgstr " [Только чтение]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "По умолчанию"
+msgstr " [По умолчанию]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "Встроенный профиль доступен всегда"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2081,10 +2053,9 @@ msgstr "Нет активности в «%1» (сеанс «%2»)"
 
 #: session/Session.cpp:665 session/Session.cpp:1825
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
-#, fuzzy, kde-format
-#| msgid "&Close Session"
+#, kde-format
 msgid "Show session"
-msgstr "Закрыть с&еанс"
+msgstr "Показать сеанс"
 
 #: session/Session.cpp:929
 #, kde-format
@@ -2386,12 +2357,10 @@ msgid "Confirm Close"
 msgstr "Подтверждение выхода"
 
 #: session/SessionController.cpp:1081
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "Закрыть вкладку"
+msgstr "Закрыть программу"
 
 #: session/SessionController.cpp:1104
 #, kde-format
@@ -2411,7 +2380,7 @@ msgstr "В сеансе выполняется программа «%1». Пре
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Завершить выполнение"
 
 #: session/SessionController.cpp:1941
 #, kde-format
@@ -3278,12 +3247,10 @@ msgid "Split View Top/Bottom"
 msgstr "Разделить окно по горизонтали"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Разделить окно по горизонтали"
+msgstr "Разделить окно автоматически"
 
 #: ViewManager.cpp:139
 #, kde-format
@@ -3442,24 +3409,20 @@ msgid "Switch to Tab %1"
 msgstr "Переключиться на вкладку %1"
 
 #: ViewManager.cpp:527
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Обработка текста"
+msgstr "Семантические подсказки "
 
 #: ViewManager.cpp:543
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "Количество сохраняемых строк: "
+msgstr "Номера строк "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Сохранить макет вкладки в файл"
+msgstr "Сохранение макета вкладок"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, fuzzy, kde-format
@@ -3495,12 +3458,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Загрузить макет вкладки из файла"
+msgstr "Загрузка макета вкладок"
 
 #: Vt102Emulation.cpp:2313
 #, kde-format
@@ -3590,7 +3551,7 @@ msgstr "Управление потоком"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:813
+#: widgets/EditProfileAppearancePage.ui:817
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3599,7 +3560,7 @@ msgstr "Поддержка вывода справа налево (только 
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:816
+#: widgets/EditProfileAppearancePage.ui:820
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Поддержка вывода справа налево"
@@ -3925,44 +3886,44 @@ msgid "Display Vertical line at column:"
 msgstr "Вертикальная линия по столбцу:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:760
+#: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:763
+#: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:787
+#: widgets/EditProfileAppearancePage.ui:791
 #, fuzzy, kde-format
 #| msgid "Font:"
 msgid "Emoji Font:"
 msgstr "Шрифт:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:829
+#: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:832
+#: widgets/EditProfileAppearancePage.ui:836
 #, kde-format
 msgid "force LTR line direction"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:845
+#: widgets/EditProfileAppearancePage.ui:849
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:848
+#: widgets/EditProfileAppearancePage.ui:852
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr ""

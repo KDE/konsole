@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:52+0000\n"
-"PO-Revision-Date: 2022-09-20 01:56\n"
+"POT-Creation-Date: 2022-10-03 00:52+0000\n"
+"PO-Revision-Date: 2022-10-02 15:49\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -1239,20 +1239,16 @@ msgid "Activate Menu"
 msgstr "激活菜单"
 
 #: MainWindow.cpp:376
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "保存标签布局到文件"
+msgstr ""
 
 #: MainWindow.cpp:385
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "从文件加载标签布局"
+msgstr ""
 
 #: MainWindow.cpp:618 MainWindow.cpp:635
 #, kde-format
@@ -3343,12 +3339,10 @@ msgid "Line numbers "
 msgstr ""
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "保存标签布局到文件"
+msgstr ""
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3377,12 +3371,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "从文件加载标签布局"
+msgstr ""
 
 #: Vt102Emulation.cpp:2313
 #, kde-format
@@ -3470,7 +3462,7 @@ msgstr "流控制"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:813
+#: widgets/EditProfileAppearancePage.ui:817
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3479,7 +3471,7 @@ msgstr "在终端内启用双向显示 (只对阿拉伯语、波斯语或希伯�
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:816
+#: widgets/EditProfileAppearancePage.ui:820
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "双向文字渲染"
@@ -3802,43 +3794,43 @@ msgid "Display Vertical line at column:"
 msgstr "显示竖线于列："
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:760
+#: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:763
+#: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:787
+#: widgets/EditProfileAppearancePage.ui:791
 #, kde-format
 msgid "Emoji Font:"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:829
+#: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:832
+#: widgets/EditProfileAppearancePage.ui:836
 #, kde-format
 msgid "force LTR line direction"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:845
+#: widgets/EditProfileAppearancePage.ui:849
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:848
+#: widgets/EditProfileAppearancePage.ui:852
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr ""
@@ -5014,11 +5006,3 @@ msgstr "配置或重命名标签...(&C)"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "关闭标签页"
-
-#~ msgctxt "@title:window"
-#~ msgid "Save File"
-#~ msgstr "保存文件"
-
-#~ msgctxt "@title:window"
-#~ msgid "Open File"
-#~ msgstr "打开文件"
