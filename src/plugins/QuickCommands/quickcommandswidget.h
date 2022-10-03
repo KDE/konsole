@@ -54,6 +54,9 @@ public:
     void setModel(QuickCommandsModel *model);
     void setCurrentController(Konsole::SessionController *controller);
 
+protected:
+    void showEvent(QShowEvent *) override;
+
 private:
     QuickCommandData data() const;
     void prepareEdit();

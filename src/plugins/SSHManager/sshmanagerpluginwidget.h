@@ -64,6 +64,9 @@ public:
     void connectRequested(const QModelIndex &idx);
     void handleImportedData(bool isImported);
 
+protected:
+    void showEvent(QShowEvent *) override;
+
 private:
     void updateProfileList();
 

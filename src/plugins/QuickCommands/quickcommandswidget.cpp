@@ -15,6 +15,9 @@
 #include <QStandardPaths>
 #include <QTemporaryFile>
 #include <QTimer>
+
+#include <QShowEvent>
+
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 
@@ -23,6 +26,7 @@ struct QuickCommandsWidget::Private {
     FilterModel *filterModel = nullptr;
     Konsole::SessionController *controller = nullptr;
     bool hasShellCheck = false;
+    bool isSetup = false;
     QTimer shellCheckTimer;
 };
 
@@ -305,5 +309,13 @@ void QuickCommandsWidget::runShellCheck()
         ui->tabWidget->setTabText(1, i18n("Warnings"));
     } else {
         ui->tabWidget->setTabText(1, i18n("Warnings (*)"));
+    }
+}
+
+void QuickCommandsWidget::showEvent(QShowEvent *)
+{
+    if (!priv->isSetup) {
+        ui->commandsTreeView->expandAll();
+        priv->isSetup = true;
     }
 }

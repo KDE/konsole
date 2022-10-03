@@ -38,6 +38,7 @@ struct SSHManagerTreeWidget::Private {
     SSHManagerModel *model = nullptr;
     SSHManagerFilterModel *filterModel = nullptr;
     Konsole::SessionController *controller = nullptr;
+    bool isSetup = false;
 };
 
 SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
@@ -500,5 +501,13 @@ void SSHManagerTreeWidget::connectRequested(const QModelIndex &idx)
     d->controller->session()->sendTextToTerminal(sshCommand, QLatin1Char('\r'));
     if (d->controller->session()->views().count()) {
         d->controller->session()->views().at(0)->setFocus();
+    }
+}
+
+void SSHManagerTreeWidget::showEvent(QShowEvent *)
+{
+    if (!d->isSetup) {
+        ui->treeView->expandAll();
+        d->isSetup = true;
     }
 }
