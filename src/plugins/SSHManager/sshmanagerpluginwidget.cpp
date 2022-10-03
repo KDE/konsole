@@ -140,7 +140,7 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
     settings.beginGroup(QStringLiteral("plugins"));
     settings.beginGroup(QStringLiteral("sshplugin"));
 
-    const QKeySequence def(Qt::CTRL + Qt::ALT + Qt::Key_H);
+    const QKeySequence def(Qt::CTRL | Qt::ALT | Qt::Key_H);
     const QString defText = def.toString();
     const QString entry = settings.value(QStringLiteral("ssh_shortcut"), defText).toString();
     const QKeySequence shortcutEntry(entry);
