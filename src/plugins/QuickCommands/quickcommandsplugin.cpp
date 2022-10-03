@@ -103,7 +103,7 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
         {
             const QString feedbackMessage = QStringLiteral("Please enable the plugin on Plugins -> Quick Commands");
             const QString feedbackTitle = QStringLiteral("Plugins - Quick Commands");
-            KMessageBox::sorry(terminalDisplay->topLevelWidget(), feedbackMessage, feedbackTitle);
+            KMessageBox::error(terminalDisplay->topLevelWidget(), feedbackMessage, feedbackTitle);
             return;
         }
 

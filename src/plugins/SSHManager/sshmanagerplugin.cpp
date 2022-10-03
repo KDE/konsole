@@ -141,7 +141,7 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
         {
             const QString feedbackMessage = QStringLiteral("Please enable the plugin on Plugins -> SSH Manager");
             const QString feedbackTitle = QStringLiteral("Plugins - SSH Manager");
-            KMessageBox::sorry(terminalDisplay->topLevelWidget(), feedbackMessage, feedbackTitle);
+            KMessageBox::error(terminalDisplay->topLevelWidget(), feedbackMessage, feedbackTitle);
             return;
         }
 
