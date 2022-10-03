@@ -37,7 +37,7 @@ public:
     {
         addCells(text, count);
     } // TODO: optimize, if there's any point
-    void addLine(LineProperty lineProperty = 0) override;
+    void addLine(LineProperty lineProperty = LineProperty()) override;
 
     // Modify history
     void removeCells() override;

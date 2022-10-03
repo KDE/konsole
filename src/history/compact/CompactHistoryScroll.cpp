@@ -38,7 +38,7 @@ void CompactHistoryScroll::addCells(const Character a[], const int count)
 
     // store the (biased) start of next line + default flag
     // the flag is later updated when addLine is called
-    _lineDatas.push_back({static_cast<unsigned int>(_cells.size() + _indexBias), LINE_DEFAULT});
+    _lineDatas.push_back({static_cast<unsigned int>(_cells.size() + _indexBias), LineProperty()});
 
     if (_lineDatas.size() > _maxLineCount + 5) {
         removeLinesFromTop(5);
@@ -51,7 +51,7 @@ void CompactHistoryScroll::addCellsMove(Character characters[], const int count)
 
     // store the (biased) start of next line + default flag
     // the flag is later updated when addLine is called
-    _lineDatas.push_back({static_cast<unsigned int>(_cells.size() + _indexBias), LINE_DEFAULT});
+    _lineDatas.push_back({static_cast<unsigned int>(_cells.size() + _indexBias), LineProperty()});
 
     if (_lineDatas.size() > _maxLineCount + 5) {
         removeLinesFromTop(5);
@@ -131,7 +131,7 @@ void CompactHistoryScroll::removeCells()
 bool CompactHistoryScroll::isWrappedLine(const int lineNumber) const
 {
     Q_ASSERT((size_t)lineNumber < _lineDatas.size());
-    return (_lineDatas.at(lineNumber).flag & LINE_WRAPPED) > 0;
+    return (_lineDatas.at(lineNumber).flag.flags.f.wrapped) > 0;
 }
 
 LineProperty CompactHistoryScroll::getLineProperty(const int lineNumber) const
@@ -166,12 +166,14 @@ int CompactHistoryScroll::reflowLines(const int columns, std::map<int, int> *del
         }
 
         // Now reflow the lines
-        while (reflowLineLen(startLine, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
+        while (reflowLineLen(startLine, endLine) > columns && !(lineProperty.flags.f.doubleheight_bottom | lineProperty.flags.f.doubleheight_top)) {
             startLine += columns;
-            setNewLine(newLineData, startLine + _indexBias, lineProperty | LINE_WRAPPED);
+            lineProperty.flags.f.wrapped = 1;
+            setNewLine(newLineData, startLine + _indexBias, lineProperty);
             newPos++;
         }
-        setNewLine(newLineData, endLine + _indexBias, lineProperty & ~LINE_WRAPPED);
+        lineProperty.flags.f.wrapped = 0;
+        setNewLine(newLineData, endLine + _indexBias, lineProperty);
         currentPos++;
         newPos++;
         if (deltas && delta != newPos - currentPos) {

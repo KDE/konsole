@@ -566,7 +566,7 @@ public:
      *
      * @param enable true to apply the attribute to the current line or false to remove it
      */
-    void setLineProperty(LineProperty property, bool enable);
+    void setLineProperty(quint16 property, bool enable);
 
     /**
      * Set REPL mode (shell integration)

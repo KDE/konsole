@@ -120,7 +120,7 @@ void TerminalPainter::drawContents(Character *image,
         const int textY = topPadding + fontHeight * y;
         bool doubleHeightLinePair = false;
         int x = rect.x();
-        LineProperty lineProperty = y < lineProperties.size() ? lineProperties[y] : 0;
+        LineProperty lineProperty = y < lineProperties.size() ? lineProperties[y] : LineProperty();
 
         // Search for start of multi-column character
         if (image[m_parentDisplay->loc(rect.x(), y)].isRightHalfOfDoubleWide() && (x != 0)) {
@@ -130,18 +130,18 @@ void TerminalPainter::drawContents(Character *image,
         bool doubleHeight = false;
         bool doubleWidthLine = false;
 
-        if ((lineProperty & LINE_DOUBLEWIDTH) != 0) {
+        if ((lineProperty.flags.f.doublewidth) != 0) {
             textScale.scale(2, 1);
             doubleWidthLine = true;
         }
 
-        doubleHeight = lineProperty & (LINE_DOUBLEHEIGHT_TOP | LINE_DOUBLEHEIGHT_BOTTOM);
+        doubleHeight = lineProperty.flags.f.doubleheight_top | lineProperty.flags.f.doubleheight_bottom;
         if (doubleHeight) {
             textScale.scale(1, 2);
         }
 
         if (y < lineProperties.size() - 1) {
-            if (((lineProperties[y] & LINE_DOUBLEHEIGHT_TOP) != 0) && ((lineProperties[y + 1] & LINE_DOUBLEHEIGHT_BOTTOM) != 0)) {
+            if (((lineProperties[y].flags.f.doubleheight_top) != 0) && ((lineProperties[y + 1].flags.f.doubleheight_bottom) != 0)) {
                 doubleHeightLinePair = true;
             }
         }
@@ -245,7 +245,7 @@ void TerminalPainter::drawContents(Character *image,
 
         paint.setRenderHint(QPainter::Antialiasing, false);
         paint.setWorldTransform(textScale.inverted(), true);
-        if ((lineProperty & LINE_PROMPT_START)
+        if ((lineProperty.flags.f.prompt_start)
             && ((semanticHints == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || semanticHints == Enum::HintsAlways)) {
             QPen pen(m_parentDisplay->terminalColor()->foregroundColor());
             paint.setPen(pen);
@@ -551,7 +551,7 @@ void TerminalPainter::drawCharacters(QPainter &painter,
     if (isLineCharString(text) && !m_parentDisplay->terminalFont()->useFontLineCharacters()) {
         int y = rect.y();
 
-        if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
+        if (lineProperty.flags.f.doubleheight_bottom) {
             y -= m_parentDisplay->terminalFont()->fontHeight() / 2;
         }
 
@@ -561,7 +561,7 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent();
 
         int shifted = 0;
-        if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
+        if (lineProperty.flags.f.doubleheight_bottom) {
             y -= m_parentDisplay->terminalFont()->fontHeight() / 2;
         } else {
             // We shift half way down here to center
@@ -607,7 +607,7 @@ void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRec
 
     drawBackground(painter, rect, background, true);
     drawCursor(painter, rect, foreground, background, characterColor);
-    drawCharacters(painter, rect, inputMethodData.preeditString, style, characterColor, 0);
+    drawCharacters(painter, rect, inputMethodData.preeditString, style, characterColor, LineProperty());
 
     inputMethodData.previousPreeditRect = rect;
 }
@@ -989,7 +989,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
     if (isLineCharString(text) && !m_parentDisplay->terminalFont()->useFontLineCharacters()) {
         int y = rect.y();
 
-        if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
+        if (lineProperty.flags.f.doubleheight_bottom) {
             y -= m_parentDisplay->terminalFont()->fontHeight() / 2;
         }
 
@@ -997,7 +997,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
     } else {
         int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent();
 
-        if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
+        if (lineProperty.flags.f.doubleheight_bottom) {
             y -= m_parentDisplay->terminalFont()->fontHeight() / 2;
         } else {
             // We shift half way down here to center

@@ -63,7 +63,7 @@ void TerminalCharacterDecoderTest::testPlainTextDecoder()
     QString outputString;
     QTextStream outputStream(&outputString);
     decoder->begin(&outputStream);
-    decoder->decodeLine(testCharacters, text.size(), /* ignored */ LINE_DEFAULT);
+    decoder->decodeLine(testCharacters, text.size(), /* ignored */ LineProperty());
     decoder->end();
     delete[] testCharacters;
     delete decoder;
@@ -107,7 +107,7 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
     QString outputString;
     QTextStream outputStream(&outputString);
     decoder->begin(&outputStream);
-    decoder->decodeLine(testCharacters, text.size(), /* ignored */ LINE_DEFAULT);
+    decoder->decodeLine(testCharacters, text.size(), /* ignored */ LineProperty());
     decoder->end();
     delete[] testCharacters;
     delete decoder;

@@ -47,7 +47,7 @@ bool HistoryScrollNone::isWrappedLine(int /*lineno*/) const
 
 LineProperty HistoryScrollNone::getLineProperty(int /*lineno*/) const
 {
-    return 0;
+    return LineProperty();
 }
 
 void HistoryScrollNone::getCells(int, int, int, Character[]) const

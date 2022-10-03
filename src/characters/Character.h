@@ -20,9 +20,37 @@
 
 namespace Konsole
 {
-typedef quint32 LineProperty;
-
 #pragma pack(1)
+class LineProperty
+{
+public:
+    explicit constexpr LineProperty(quint16 f = 0, uint l = 0, uint c = 0)
+        : flags({f})
+        , length(l)
+        , counter(c)
+    {
+    }
+    union {
+        quint16 all;
+        struct {
+            uint wrapped : 1;
+            uint doublewidth : 1;
+            uint doubleheight_top : 1;
+            uint doubleheight_bottom : 1;
+            uint prompt_start : 1;
+            uint output_start : 1;
+            uint input_start : 1;
+            uint output : 1;
+        } f;
+    } flags;
+    qint16 length;
+    quint16 counter;
+    bool operator!=(const LineProperty &rhs) const
+    {
+        return (flags.all != rhs.flags.all);
+    }
+};
+
 typedef union {
     quint16 all;
     struct {
@@ -47,7 +75,6 @@ typedef quint16 RenditionFlags;
 typedef quint16 ExtraFlags;
 
 /* clang-format off */
-const int LINE_DEFAULT              = 0;
 const int LINE_WRAPPED              = (1 << 0);
 const int LINE_DOUBLEWIDTH          = (1 << 1);
 const int LINE_DOUBLEHEIGHT_TOP     = (1 << 2);
@@ -55,8 +82,6 @@ const int LINE_DOUBLEHEIGHT_BOTTOM  = (1 << 3);
 const int LINE_PROMPT_START         = (1 << 4);
 const int LINE_INPUT_START          = (1 << 5);
 const int LINE_OUTPUT_START         = (1 << 6);
-const int LINE_LEN_POS              = 8;
-const int LINE_LEN_MASK             = (0xfff << LINE_LEN_POS);
 
 const RenditionFlags DEFAULT_RENDITION  = 0;
 const RenditionFlags RE_BOLD            = (1 << 0);
@@ -97,8 +122,6 @@ const ExtraFlags EF_EMOJI_REPRESENTATION = (1 << 7);
 
 #define SetULColor(f, m) (((f) & ~EF_UNDERLINE_COLOR) | ((m) * EF_UNDERLINE_COLOR_1))
 #define setRepl(f, m) (((f) & ~EF_REPL) | ((m) * EF_REPL_PROMPT))
-#define LineLength(f) static_cast<int>(((f) & LINE_LEN_MASK) >> LINE_LEN_POS)
-#define SetLineLength(f, l) (((f) & ~LINE_LEN_MASK) | ((l) << LINE_LEN_POS))
 /* clang-format on */
 
 /**

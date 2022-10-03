@@ -48,12 +48,12 @@ void TerminalImageFilterChain::setImage(const Character *const image, int lines,
 
     for (int i = 0; i < lines; i++) {
         _linePositions->append(_buffer->length());
-        decoder.decodeLine(image + i * columns, columns, LINE_DEFAULT);
+        decoder.decodeLine(image + i * columns, columns, LineProperty());
 
         // pretend that each non-wrapped line ends with a newline character.
         // this prevents a link that occurs at the end of one line
         // being treated as part of a link that occurs at the start of the next line
-        if ((lineProperties.value(i, LINE_DEFAULT) & LINE_WRAPPED) == 0) {
+        if ((lineProperties.value(i, LineProperty()).flags.f.wrapped) == 0) {
             lineStream << QLatin1Char('\n');
         }
     }

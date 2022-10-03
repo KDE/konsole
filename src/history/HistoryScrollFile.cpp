@@ -45,17 +45,17 @@ int HistoryScrollFile::getLineLen(const int lineno) const
 
 bool HistoryScrollFile::isWrappedLine(const int lineno) const
 {
-    return (getLineProperty(lineno) & LINE_WRAPPED) > 0;
+    return (getLineProperty(lineno).flags.f.wrapped) > 0;
 }
 
 LineProperty HistoryScrollFile::getLineProperty(const int lineno) const
 {
     if (lineno >= 0 && lineno <= getLines()) {
-        LineProperty flag = 0;
+        LineProperty flag = LineProperty();
         _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char), (lineno) * sizeof(unsigned char));
         return flag;
     }
-    return 0;
+    return LineProperty();
 }
 
 qint64 HistoryScrollFile::startOfLine(const int lineno) const
@@ -134,12 +134,14 @@ int Konsole::HistoryScrollFile::reflowLines(const int columns, std::map<int, int
         }
 
         // Now reflow the lines
-        while (reflowLineLen(startLine, endLine) > columns && !(lineProperty & (LINE_DOUBLEHEIGHT_BOTTOM | LINE_DOUBLEHEIGHT_TOP))) {
+        while (reflowLineLen(startLine, endLine) > columns && !(lineProperty.flags.f.doubleheight_bottom | lineProperty.flags.f.doubleheight_top)) {
             startLine += (qint64)columns * sizeof(Character);
-            setNewLine(newLine, startLine, lineProperty | LINE_WRAPPED);
+            lineProperty.flags.f.wrapped = 1;
+            setNewLine(newLine, startLine, lineProperty);
             reflowFile->add(reinterpret_cast<const char *>(&newLine), sizeof(reflowData));
         }
-        setNewLine(newLine, endLine, lineProperty & ~LINE_WRAPPED);
+        lineProperty.flags.f.wrapped = 0;
+        setNewLine(newLine, endLine, lineProperty);
         reflowFile->add(reinterpret_cast<const char *>(&newLine), sizeof(reflowData));
         currentPos++;
     }

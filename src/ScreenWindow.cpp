@@ -243,7 +243,7 @@ void ScreenWindow::scrollBy(RelativeScrollMode mode, int amount, bool fullPage)
             QVector<LineProperty> properties = _screen->getLineProperties(0, currentLine());
             while (i > 0 && amount < 0) {
                 i--;
-                if ((properties[i] & LINE_PROMPT_START) != 0) {
+                if ((properties[i].flags.f.prompt_start) != 0) {
                     if (++amount == 0) {
                         break;
                     }
@@ -253,7 +253,7 @@ void ScreenWindow::scrollBy(RelativeScrollMode mode, int amount, bool fullPage)
             QVector<LineProperty> properties = _screen->getLineProperties(currentLine(), _screen->getHistLines());
             while (i < _screen->getHistLines() && amount > 0) {
                 i++;
-                if ((properties[i - currentLine()] & LINE_PROMPT_START) != 0) {
+                if ((properties[i - currentLine()].flags.f.prompt_start) != 0) {
                     if (--amount == 0) {
                         break;
                     }

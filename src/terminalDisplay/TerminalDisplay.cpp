@@ -1497,7 +1497,7 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint &widgetPoint,
     const int columnMax = edge ? _usedColumns : _usedColumns - 1;
     const int xOffset = edge ? _terminalFont->fontWidth() / 2 : 0;
     int line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _terminalFont->fontHeight(), _usedLines - 1);
-    bool doubleWidth = line < _lineProperties.count() && _lineProperties[line] & LINE_DOUBLEWIDTH;
+    bool doubleWidth = line < _lineProperties.count() && _lineProperties[line].flags.f.doublewidth;
     bool shaped;
     int column =
         qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _terminalFont->fontWidth() / (doubleWidth ? 2 : 1), columnMax);
@@ -1710,7 +1710,7 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
     while (lineInHistory > 0) {
         for (; line > 0; line--, lineInHistory--) {
             // Does previous line wrap around?
-            if ((lineProperties[line - 1] & LINE_WRAPPED) == 0) {
+            if ((lineProperties[line - 1].flags.f.wrapped) == 0) {
                 return {0, lineInHistory - topVisibleLine};
             }
         }
@@ -1744,7 +1744,7 @@ QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
     while (lineInHistory < maxY) {
         for (; line < lineProperties.count() && lineInHistory < maxY; line++, lineInHistory++) {
             // Does current line wrap around?
-            if ((lineProperties[line] & LINE_WRAPPED) == 0) {
+            if ((lineProperties[line].flags.f.wrapped) == 0) {
                 return {_columns - 1, lineInHistory - topVisibleLine};
             }
         }
@@ -1792,7 +1792,7 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
                 goto out;
             } else if (imgLine > 0) {
                 // not the first line in the session
-                if ((lineProperties[imgLine - 1] & LINE_WRAPPED) != 0) {
+                if ((lineProperties[imgLine - 1].flags.f.wrapped) != 0) {
                     // have continuation on prev line
                     if (charClass(image[imgLoc - 1]) == selClass) {
                         x = _columns;
@@ -1878,7 +1878,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
                 }
                 goto out;
             } else if (i < lineCount - 1) {
-                if (((lineProperties[i] & LINE_WRAPPED) != 0) && charClass(image[j + 1]) == selClass &&
+                if (((lineProperties[i].flags.f.wrapped) != 0) && charClass(image[j + 1]) == selClass &&
                     // A colon right before whitespace is never part of a word
                     !(image[j + 1].character == ':' && charClass(image[j + 2]) == QLatin1Char(' '))) {
                     x = -1;
@@ -1888,7 +1888,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
                 }
                 goto out;
             } else if (y < maxY) {
-                if (i < lineCount && ((lineProperties[i] & LINE_WRAPPED) == 0)) {
+                if (i < lineCount && ((lineProperties[i].flags.f.wrapped) == 0)) {
                     goto out;
                 }
                 break;
@@ -2421,7 +2421,7 @@ QVariant TerminalDisplay::inputMethodQuery(Qt::InputMethodQuery query) const
         PlainTextDecoder decoder;
         decoder.begin(&stream);
         if (isCursorOnDisplay()) {
-            decoder.decodeLine(&_image[loc(0, cursorPos.y())], _usedColumns, LINE_DEFAULT);
+            decoder.decodeLine(&_image[loc(0, cursorPos.y())], _usedColumns, LineProperty());
         }
         decoder.end();
         return lineText;

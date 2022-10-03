@@ -136,7 +136,7 @@ void HistoryTest::testHistoryReflow()
 
     QCOMPARE(compactHistoryScroll->getMaxLines(), 10);
     compactHistoryScroll->addCells(testImage, testStringSize);
-    compactHistoryScroll->addLine(false);
+    compactHistoryScroll->addLine();
     QCOMPARE(compactHistoryScroll->getLines(), 1);
     QCOMPARE(compactHistoryScroll->reflowLines(10), 0);
     QCOMPARE(compactHistoryScroll->getLines(), 4);
@@ -155,7 +155,7 @@ void HistoryTest::testHistoryReflow()
 
     QCOMPARE(historyScrollFile->getMaxLines(), 0);
     historyScrollFile->addCells(testImage, testStringSize);
-    historyScrollFile->addLine(false);
+    historyScrollFile->addLine();
     QCOMPARE(historyScrollFile->getLines(), 1);
     QCOMPARE(historyScrollFile->getMaxLines(), 1);
     QCOMPARE(historyScrollFile->reflowLines(10), 0);
@@ -193,7 +193,7 @@ void HistoryTest::testHistoryTypeChange()
     historyTypeFile->scroll(historyScroll);
 
     historyScroll->addCells(testImage.get(), testStringSize);
-    historyScroll->addLine(false);
+    historyScroll->addLine();
     QCOMPARE(historyScroll->reflowLines(1), 0);
     QCOMPARE(historyScroll->getLines(), testStringSize);
     historyScroll->getCells(0, 0, 1, &testChar);

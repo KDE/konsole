@@ -2074,7 +2074,7 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
             KeyboardTranslator::Entry LRKeys[2] = {_keyTranslator->findEntry(Qt::Key_Left, Qt::NoModifier, states),
                                                    _keyTranslator->findEntry(Qt::Key_Right, Qt::NoModifier, states)};
             QVector<LineProperty> lineProperties = _currentScreen->getLineProperties(cy + _currentScreen->getHistLines(), cy + _currentScreen->getHistLines());
-            cx = qMin(cx, LineLength(lineProperties[0]));
+            cx = qMin(cx, (int)lineProperties[0].length);
             int cuX = _currentScreen->getCursorX();
             int cuY = _currentScreen->getCursorY();
             QByteArray textToSend;
@@ -2159,13 +2159,13 @@ void Vt102Emulation::emulateUpDown(bool up, KeyboardTranslator::Entry entry, QBy
                                                                              qMin(_currentScreen->getLines() - 1, cuY + 1) + _currentScreen->getHistLines());
     int num = _currentScreen->getColumns();
     if (up) {
-        if ((lineProperties[0] & LINE_WRAPPED) == 0) {
-            num = cuX + qMax(0, LineLength(lineProperties[0]) - cuX) + 1;
+        if ((lineProperties[0].flags.f.wrapped) == 0) {
+            num = cuX + qMax(0, lineProperties[0].length - cuX) + 1;
         }
     } else {
-        if ((lineProperties[1] & LINE_WRAPPED) == 0 || (lineProperties[2] & LINE_WRAPPED) == 0) {
-            realX = qMin(cuX, LineLength(lineProperties[2]) + 1);
-            num = LineLength(lineProperties[1]) - cuX + realX;
+        if ((lineProperties[1].flags.f.wrapped) == 0 || (lineProperties[2].flags.f.wrapped) == 0) {
+            realX = qMin(cuX, lineProperties[2].length + 1);
+            num = lineProperties[1].length - cuX + realX;
         }
     }
     if (toCol > -1) {

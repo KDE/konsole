@@ -51,7 +51,7 @@ public:
         addCells(cells.data(), cells.size());
     }
 
-    virtual void addLine(const LineProperty lineProperty = 0) = 0;
+    virtual void addLine(const LineProperty lineProperty = LineProperty()) = 0;
 
     // modify history
     virtual void removeCells() = 0;
