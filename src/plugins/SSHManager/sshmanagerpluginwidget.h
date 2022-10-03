@@ -1,4 +1,3 @@
-    Q_SIGNAL void quickAccessShortcutChanged(QKeySequence shortcut);
 /*  This file was part of the KDE libraries
 
     SPDX-FileCopyrightText: 2021 Tomaz Canabrava <tcanabrava@kde.org>
