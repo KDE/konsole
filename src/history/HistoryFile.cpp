@@ -9,6 +9,7 @@
 
 // Konsole
 #include "KonsoleSettings.h"
+#include "characters/Character.h"
 #include "konsoledebug.h"
 
 // System
@@ -158,7 +159,7 @@ void HistoryFile::add(const char *buffer, qint64 count)
 
 void HistoryFile::get(char *buffer, qint64 size, qint64 loc)
 {
-    if (loc < 0 || size < 0 || loc + size > _length) {
+    if (loc < 0 || size < 0 || loc + size > (qint64)(_length * sizeof(LineProperty))) {
         fprintf(stderr, "getHist(...,%lld,%lld): invalid args.\n", size, loc);
         return;
     }
@@ -186,6 +187,41 @@ void HistoryFile::get(char *buffer, qint64 size, qint64 loc)
         rc = _tmpFile.read(buffer, size);
         if (rc < 0) {
             perror("HistoryFile::get.read");
+            return;
+        }
+    }
+}
+
+void HistoryFile::set(char *buffer, qint64 size, qint64 loc)
+{
+    if (loc < 0 || size < 0 || loc + size > qint64(_length * sizeof(LineProperty))) {
+        fprintf(stderr, "setHist(...,%lld,%lld): invalid args.\n", size, loc);
+        return;
+    }
+
+    // count number of get() calls vs. number of add() calls.
+    // If there are many more get() calls compared with add()
+    // calls (decided by using MAP_THRESHOLD) then mmap the log
+    // file to improve performance.
+    if (_readWriteBalance > INT_MIN) {
+        _readWriteBalance--;
+    }
+    if ((_fileMap == nullptr) && _readWriteBalance < MAP_THRESHOLD) {
+        map();
+    }
+
+    if (_fileMap != nullptr) {
+        memcpy(_fileMap + loc, buffer, size);
+    } else {
+        qint64 rc = 0;
+
+        if (!_tmpFile.seek(loc)) {
+            perror("HistoryFile::set.seek");
+            return;
+        }
+        rc = _tmpFile.write(buffer, size);
+        if (rc < 0) {
+            perror("HistoryFile::set.write");
             return;
         }
     }

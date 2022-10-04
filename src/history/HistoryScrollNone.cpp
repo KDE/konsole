@@ -50,6 +50,10 @@ LineProperty HistoryScrollNone::getLineProperty(int /*lineno*/) const
     return LineProperty();
 }
 
+void HistoryScrollNone::setLineProperty(int /*lineno*/, LineProperty /*prop*/)
+{
+}
+
 void HistoryScrollNone::getCells(int, int, int, Character[]) const
 {
 }

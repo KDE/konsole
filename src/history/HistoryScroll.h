@@ -40,6 +40,7 @@ public:
     virtual void getCells(const int lineno, const int colno, const int count, Character res[]) const = 0;
     virtual bool isWrappedLine(const int lineNumber) const = 0;
     virtual LineProperty getLineProperty(const int lineno) const = 0;
+    virtual void setLineProperty(const int lineno, LineProperty prop) = 0;
 
     // adding lines.
     virtual void addCells(const Character a[], const int count) = 0;

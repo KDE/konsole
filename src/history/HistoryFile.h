@@ -25,6 +25,7 @@ public:
 
     virtual void add(const char *buffer, qint64 count);
     virtual void get(char *buffer, qint64 size, qint64 loc);
+    virtual void set(char *buffer, qint64 size, qint64 loc);
     virtual void removeLast(qint64 loc);
     virtual qint64 len() const;
 

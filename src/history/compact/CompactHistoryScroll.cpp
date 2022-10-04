@@ -140,6 +140,12 @@ LineProperty CompactHistoryScroll::getLineProperty(const int lineNumber) const
     return _lineDatas.at(lineNumber).flag;
 }
 
+void CompactHistoryScroll::setLineProperty(const int lineNumber, LineProperty prop)
+{
+    Q_ASSERT((size_t)lineNumber < _lineDatas.size());
+    _lineDatas.at(lineNumber).flag = prop;
+}
+
 int CompactHistoryScroll::reflowLines(const int columns, std::map<int, int> *deltas)
 {
     std::vector<LineData> newLineData;

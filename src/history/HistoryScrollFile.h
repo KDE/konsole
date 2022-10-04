@@ -31,6 +31,7 @@ public:
     void getCells(const int lineno, const int colno, const int count, Character res[]) const override;
     bool isWrappedLine(const int lineno) const override;
     LineProperty getLineProperty(const int lineno) const override;
+    void setLineProperty(const int lineno, LineProperty prop) override;
 
     void addCells(const Character text[], const int count) override;
     void addCellsMove(Character text[], const int count) override

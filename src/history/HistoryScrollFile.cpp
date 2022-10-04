@@ -52,10 +52,17 @@ LineProperty HistoryScrollFile::getLineProperty(const int lineno) const
 {
     if (lineno >= 0 && lineno <= getLines()) {
         LineProperty flag = LineProperty();
-        _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char), (lineno) * sizeof(unsigned char));
+        _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(LineProperty), (lineno) * sizeof(LineProperty));
         return flag;
     }
     return LineProperty();
+}
+
+void HistoryScrollFile::setLineProperty(const int lineno, LineProperty prop)
+{
+    if (lineno >= 0 && lineno <= getLines()) {
+        _lineflags.set(reinterpret_cast<char *>(&prop), sizeof(LineProperty), (lineno) * sizeof(LineProperty));
+    }
 }
 
 qint64 HistoryScrollFile::startOfLine(const int lineno) const
@@ -87,7 +94,7 @@ void HistoryScrollFile::addLine(LineProperty lineProperty)
 {
     qint64 locn = _cells.len();
     _index.add(reinterpret_cast<char *>(&locn), sizeof(qint64));
-    _lineflags.add(reinterpret_cast<char *>(&lineProperty), sizeof(char));
+    _lineflags.add(reinterpret_cast<char *>(&lineProperty), sizeof(LineProperty));
 }
 
 void HistoryScrollFile::removeCells()
@@ -101,7 +108,7 @@ void HistoryScrollFile::removeCells()
     }
     res = qMax(0, getLines() - 1);
     _index.removeLast(res * sizeof(qint64));
-    _lineflags.removeLast(res * sizeof(unsigned char));
+    _lineflags.removeLast(res * sizeof(LineProperty));
 }
 
 int Konsole::HistoryScrollFile::reflowLines(const int columns, std::map<int, int> *)
@@ -150,7 +157,7 @@ int Konsole::HistoryScrollFile::reflowLines(const int columns, std::map<int, int
     if (getLines() > MAX_REFLOW_LINES) {
         currentPos = getLines() - MAX_REFLOW_LINES;
         _index.removeLast(currentPos * sizeof(qint64));
-        _lineflags.removeLast(currentPos * sizeof(char));
+        _lineflags.removeLast(currentPos * sizeof(LineProperty));
     } else {
         _index.removeLast(0);
         _lineflags.removeLast(0);
@@ -162,7 +169,7 @@ int Konsole::HistoryScrollFile::reflowLines(const int columns, std::map<int, int
     while (currentPos < totalLines) {
         reflowFile->get(reinterpret_cast<char *>(&newLine), sizeof(reflowData), currentPos * sizeof(reflowData));
 
-        _lineflags.add(reinterpret_cast<char *>(&newLine.lineFlag), sizeof(char));
+        _lineflags.add(reinterpret_cast<char *>(&newLine.lineFlag), sizeof(LineProperty));
         _index.add(reinterpret_cast<char *>(&newLine.index), sizeof(qint64));
         currentPos++;
     }
