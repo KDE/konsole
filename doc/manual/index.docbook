@@ -112,7 +112,7 @@ to open this window).
 
 <sect1 id="selection">
 <title>Selection Mode</title>
-<para>&konsole; has a selction by keyboard mode. In this mode it is possible to move around the scrollback and select text
+<para>&konsole; has a selection by keyboard mode. In this mode it is possible to move around the scrollback and select text
 without the mouse.</para>
 
 <para>
