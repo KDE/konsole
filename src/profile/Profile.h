@@ -378,6 +378,18 @@ public:
          * 0 for Never, 1 when showing URL hints, 2 for always
          */
         LineNumbers,
+        /** When to show Red error bars
+         */
+        ErrorBars,
+        /** When to show Red error background
+         */
+        ErrorBackground,
+        /** When to show alternating gray bars
+         */
+        AlternatingBars,
+        /** When to show alternating background
+         */
+        AlternatingBackground,
     };
 
     Q_ENUM(Property)

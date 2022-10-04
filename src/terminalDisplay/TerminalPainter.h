@@ -98,7 +98,8 @@ private:
                        const bool invertedRendition,
                        int *vis2line,
                        int *line2log,
-                       bool bidiEnabled);
+                       bool bidiEnabled,
+                       QColor background);
     void drawAboveText(QPainter &painter,
                        const QRect &rect,
                        Character *style,

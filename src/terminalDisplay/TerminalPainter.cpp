@@ -79,6 +79,11 @@ void TerminalPainter::drawContents(Character *image,
     const bool invertedRendition = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
     const Enum::Hints semanticHints = currentProfile ? static_cast<Enum::Hints>(currentProfile->semanticHints()) : Enum::HintsNever;
     const Enum::Hints lineNumbers = currentProfile ? static_cast<Enum::Hints>(currentProfile->lineNumbers()) : Enum::HintsNever;
+    const Enum::Hints errorBars = currentProfile ? static_cast<Enum::Hints>(currentProfile->property<int>(Profile::ErrorBars)) : Enum::HintsNever;
+    const Enum::Hints errorBackground = currentProfile ? static_cast<Enum::Hints>(currentProfile->property<int>(Profile::ErrorBackground)) : Enum::HintsNever;
+    const Enum::Hints alternatingBars = currentProfile ? static_cast<Enum::Hints>(currentProfile->property<int>(Profile::AlternatingBars)) : Enum::HintsNever;
+    const Enum::Hints alternatingBackground =
+        currentProfile ? static_cast<Enum::Hints>(currentProfile->property<int>(Profile::AlternatingBackground)) : Enum::HintsNever;
 
     QVector<uint> univec;
     univec.reserve(m_parentDisplay->usedColumns());
@@ -169,6 +174,15 @@ void TerminalPainter::drawContents(Character *image,
         int lastNonSpace = m_parentDisplay->bidiMap(image + pos, line, log2line, line2log, shapemap, vis2line, shaped, bidiEnabled, bidiEnabled);
         const QRect textArea(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
         if (!printerFriendly) {
+            QColor background = m_parentDisplay->terminalColor()->backgroundColor();
+            if (lineProperty.flags.f.error
+                && ((errorBackground == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || errorBackground == Enum::HintsAlways)) {
+                background = QColor(48, 0, 0);
+            } else if ((lineProperty.counter & 1)
+                       && ((alternatingBackground == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint())
+                           || alternatingBackground == Enum::HintsAlways)) {
+                background = QColor(40, 40, 40);
+            }
             drawBelowText(paint,
                           textArea,
                           image + pos,
@@ -179,7 +193,8 @@ void TerminalPainter::drawContents(Character *image,
                           invertedRendition,
                           vis2line,
                           line2log,
-                          bidiEnabled);
+                          bidiEnabled,
+                          background);
         }
 
         RenditionFlags oldRendition = -1;
@@ -250,6 +265,19 @@ void TerminalPainter::drawContents(Character *image,
             QPen pen(m_parentDisplay->terminalColor()->foregroundColor());
             paint.setPen(pen);
             paint.drawLine(leftPadding, textY, m_parentDisplay->contentRect().right(), textY);
+        }
+        if ((lineProperty.counter & 1)
+            && ((alternatingBars == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || alternatingBars == Enum::HintsAlways)) {
+            QPen pen(QColor("dark gray"));
+            pen.setWidth(2);
+            paint.setPen(pen);
+            paint.drawLine(leftPadding, textY, leftPadding, textY + fontHeight);
+        }
+        if (lineProperty.flags.f.error && ((errorBars == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || errorBars == Enum::HintsAlways)) {
+            QPen pen(QColor("red"));
+            pen.setWidth(4);
+            paint.setPen(pen);
+            paint.drawLine(leftPadding, textY, leftPadding, textY + fontHeight);
         }
         if ((lineNumbers == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || lineNumbers == Enum::HintsAlways) {
             QRect rect(m_parentDisplay->contentRect().right() - 4 * fontWidth, textY, m_parentDisplay->contentRect().right(), textY + fontHeight);
@@ -622,7 +650,8 @@ void TerminalPainter::drawBelowText(QPainter &painter,
                                     const bool invertedRendition,
                                     int *vis2line,
                                     int *line2log,
-                                    bool bidiEnabled)
+                                    bool bidiEnabled,
+                                    QColor background)
 {
     // setup painter
 
@@ -672,6 +701,9 @@ void TerminalPainter::drawBelowText(QPainter &painter,
                         foregroundColor = style[x].backgroundColor.color(colorTable);
                     }
                 }
+            }
+            if (backgroundColor == colorTable[DEFAULT_BACK_COLOR]) {
+                backgroundColor = background;
             }
             drawBG = backgroundColor != colorTable[DEFAULT_BACK_COLOR];
             if (style[x].rendition.f.transparent) {

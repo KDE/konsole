@@ -77,6 +77,10 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {TerminalRows, "TerminalRows", GENERAL_GROUP, 28},
     {TerminalMargin, "TerminalMargin", GENERAL_GROUP, 1},
     {TerminalCenter, "TerminalCenter", GENERAL_GROUP, false},
+    {ErrorBars, "ErrorBars", GENERAL_GROUP, 2},
+    {ErrorBackground, "ErrorBackground", GENERAL_GROUP, 1},
+    {AlternatingBars, "AlternatingBars", GENERAL_GROUP, 2},
+    {AlternatingBackground, "AlternatingBackground", GENERAL_GROUP, 1},
 
     // Appearance
     {Font, "Font", APPEARANCE_GROUP, QFont()},
