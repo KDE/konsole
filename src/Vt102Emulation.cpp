@@ -1067,7 +1067,14 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         auto list = value.split(QLatin1Char(';'));
         for (int i = 1; i < list.size(); i++) {
             int eq = list.at(i).indexOf(QLatin1Char('='));
-            if (eq > 0) {
+            if (i == 1 && value[0] == QLatin1Char('D')) {
+                // Special case - exit code without '='
+                params[QLatin1String("exit_code")] = list.at(1);
+                int exitCode = list.at(1).toInt();
+                if (exitCode) {
+                    _currentScreen->setExitCode(exitCode);
+                }
+            } else if (eq > 0) {
                 params[list.at(i).mid(0, eq)] = list.at(i).mid(eq + 1);
             }
         }

@@ -579,6 +579,7 @@ public:
      * REPL_OUTPUT
      */
     void setReplMode(int mode);
+    void setExitCode(int exitCode);
     /** Return true if semantic shell integration is in use. */
     bool hasRepl() const
     {

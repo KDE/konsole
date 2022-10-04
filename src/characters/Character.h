@@ -41,6 +41,7 @@ public:
             uint output_start : 1;
             uint input_start : 1;
             uint output : 1;
+            uint error : 1;
         } f;
     } flags;
     qint16 length;

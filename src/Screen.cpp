@@ -2346,6 +2346,26 @@ void Screen::setReplMode(int mode)
     }
 }
 
+void Screen::setExitCode(int /*exitCode*/)
+{
+    int y = _cuY - 1;
+    while (y >= 0) {
+        _lineProperties[y].flags.f.error = 1;
+        if (_lineProperties[y].flags.f.prompt_start) {
+            return;
+        }
+        y--;
+    }
+    while (y > -_history->getLines()) {
+        LineProperty prop = _history->getLineProperty(y + _history->getLines());
+        prop.flags.f.error = 1;
+        _history->setLineProperty(y + _history->getLines(), prop);
+        if (prop.flags.f.prompt_start) {
+            return;
+        }
+        y--;
+    }
+}
 void Screen::fillWithDefaultChar(Character *dest, int count)
 {
     std::fill_n(dest, count, Screen::DefaultChar);
