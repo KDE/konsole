@@ -1047,6 +1047,7 @@ void Screen::newLine()
     }
 
     index();
+    _lineProperties[_cuY].counter = commandCounter;
 }
 
 void Screen::checkSelection(int from, int to)
@@ -2331,6 +2332,8 @@ void Screen::setReplMode(int mode)
         if (_replMode == REPL_OUTPUT) {
             _replLastOutputStart = _replModeStart;
             _replLastOutputEnd = _replModeEnd;
+        } else if (_replMode == REPL_PROMPT) {
+            _lineProperties[_cuY].counter = ++commandCounter;
         }
         _replMode = mode;
         _replModeStart = std::make_pair(_cuY, _cuX);

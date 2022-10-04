@@ -843,6 +843,7 @@ private:
     std::pair<int, int> _replModeEnd;
     std::pair<int, int> _replLastOutputStart;
     std::pair<int, int> _replLastOutputEnd;
+    int commandCounter = 0;
 
     // ----------------------------
 
