@@ -8,8 +8,8 @@
 #define SESSIONDISPLAYCONNECTION_H
 
 // Qt
+#include <QObject>
 #include <QPointer>
-
 // Konsole
 #include "konsolesession_export.h"
 
