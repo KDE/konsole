@@ -506,7 +506,7 @@ void ViewManager::semanticSetupBash()
     Q_ASSERT(activeSession);
 
     activeSession->sendTextToTerminal(QStringLiteral(R"(if [[ ! $PS1 =~ 133 ]] ; then
-        PS1='\[\e]133;L\a\]\[\e]133;A\a\]'$PS1'\[\e]133;B\a\]' ;
+        PS1='\[\e]133;L\a\]\[\e]133;D;$?\]\[\e]133;A\a\]'$PS1'\[\e]133;B\a\]' ;
         PS2='\[\e]133;A\a\]'$PS2'\[\e]133;B\a\]' ;
         PS0='\[\e]133;C\a\]' ; fi)"),
                                       QChar());
