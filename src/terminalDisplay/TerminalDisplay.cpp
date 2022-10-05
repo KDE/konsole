@@ -43,6 +43,7 @@
 #include <KMessageBox>
 #include <KMessageWidget>
 #include <KShell>
+#include <kwidgetsaddons_version.h>
 
 // Konsole
 #include "extras/AutoScrollHandler.h"
@@ -2227,19 +2228,27 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
 
     if (!unsafeCharacters.isEmpty()) {
         int result =
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+            KMessageBox::warningTwoActionsCancelList(window(),
+#else
             KMessageBox::warningYesNoCancelList(window(),
-                                                i18n("The text you're trying to paste contains hidden control characters, "
-                                                     "do you want to filter them out?"),
-                                                unsafeCharacters,
-                                                i18nc("@title", "Confirm Paste"),
-                                                KGuiItem(i18nc("@action:button", "Paste &without control characters"), QStringLiteral("filter-symbolic")),
-                                                KGuiItem(i18nc("@action:button", "&Paste everything"), QStringLiteral("edit-paste")),
-                                                KGuiItem(i18nc("@action:button", "&Cancel"), QStringLiteral("dialog-cancel")),
-                                                QStringLiteral("ShowPasteUnprintableWarning"));
+#endif
+                                                     i18n("The text you're trying to paste contains hidden control characters, "
+                                                          "do you want to filter them out?"),
+                                                     unsafeCharacters,
+                                                     i18nc("@title", "Confirm Paste"),
+                                                     KGuiItem(i18nc("@action:button", "Paste &without control characters"), QStringLiteral("filter-symbolic")),
+                                                     KGuiItem(i18nc("@action:button", "&Paste everything"), QStringLiteral("edit-paste")),
+                                                     KGuiItem(i18nc("@action:button", "&Cancel"), QStringLiteral("dialog-cancel")),
+                                                     QStringLiteral("ShowPasteUnprintableWarning"));
         switch (result) {
         case KMessageBox::Cancel:
             return;
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        case KMessageBox::PrimaryAction: {
+#else
         case KMessageBox::Yes: {
+#endif
             QString sanitized;
             for (const QChar &c : text) {
                 if (!isUnsafe(c)) {
@@ -2248,7 +2257,11 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
             }
             text = sanitized;
         }
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        case KMessageBox::SecondaryAction:
+#else
         case KMessageBox::No:
+#endif
             break;
         default:
             break;

@@ -1082,13 +1082,21 @@ bool SessionController::confirmClose() const
                 title);
         }
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        int result = KMessageBox::warningTwoActions(view()->window(),
+#else
         int result = KMessageBox::warningYesNo(view()->window(),
-                                               question,
-                                               i18n("Confirm Close"),
-                                               KGuiItem(i18nc("@action:button", "Close Program"), QStringLiteral("application-exit")),
-                                               KStandardGuiItem::cancel(),
-                                               QStringLiteral("CloseSingleTab"));
+#endif
+                                                    question,
+                                                    i18n("Confirm Close"),
+                                                    KGuiItem(i18nc("@action:button", "Close Program"), QStringLiteral("application-exit")),
+                                                    KStandardGuiItem::cancel(),
+                                                    QStringLiteral("CloseSingleTab"));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        return result == KMessageBox::PrimaryAction;
+#else
         return result == KMessageBox::Yes;
+#endif
     }
     return true;
 }
@@ -1117,12 +1125,20 @@ bool SessionController::confirmForceClose() const
                 title);
         }
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        int result = KMessageBox::warningTwoActions(view()->window(),
+#else
         int result = KMessageBox::warningYesNo(view()->window(),
-                                               question,
-                                               i18n("Confirm Close"),
-                                               KGuiItem(i18nc("@action:button", "Kill Program"), QStringLiteral("application-exit")),
-                                               KStandardGuiItem::cancel());
+#endif
+                                                    question,
+                                                    i18n("Confirm Close"),
+                                                    KGuiItem(i18nc("@action:button", "Kill Program"), QStringLiteral("application-exit")),
+                                                    KStandardGuiItem::cancel());
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        return result == KMessageBox::PrimaryAction;
+#else
         return result == KMessageBox::Yes;
+#endif
     }
     return true;
 }

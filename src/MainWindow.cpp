@@ -32,6 +32,7 @@
 #include <KXMLGUIFactory>
 
 #include <kio_version.h>
+#include <kwidgetsaddons_version.h>
 #include <kwindowsystem_version.h>
 
 // Konsole
@@ -613,58 +614,82 @@ bool MainWindow::queryClose()
 
     if (!processesRunning.isEmpty()) {
         if (openTabs == 1) {
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+            result = KMessageBox::warningTwoActionsList(this,
+#else
             result = KMessageBox::warningYesNoList(this,
-                                                   i18ncp("@info",
-                                                          "There is a process running in this window. "
-                                                          "Do you still want to quit?",
-                                                          "There are %1 processes running in this window. "
-                                                          "Do you still want to quit?",
-                                                          processesRunning.count()),
-                                                   processesRunning,
-                                                   i18nc("@title", "Confirm Close"),
-                                                   KGuiItem(i18nc("@action:button", "Close &Window"), QStringLiteral("window-close")),
-                                                   KStandardGuiItem::cancel(),
-                                                   // don't ask again name is wrong but I can't update.
-                                                   // this is not about tabs anymore. it's about empty tabs *or* splits.
-                                                   QStringLiteral("CloseAllTabs"));
+#endif
+                                                        i18ncp("@info",
+                                                               "There is a process running in this window. "
+                                                               "Do you still want to quit?",
+                                                               "There are %1 processes running in this window. "
+                                                               "Do you still want to quit?",
+                                                               processesRunning.count()),
+                                                        processesRunning,
+                                                        i18nc("@title", "Confirm Close"),
+                                                        KGuiItem(i18nc("@action:button", "Close &Window"), QStringLiteral("window-close")),
+                                                        KStandardGuiItem::cancel(),
+                                                        // don't ask again name is wrong but I can't update.
+                                                        // this is not about tabs anymore. it's about empty tabs *or* splits.
+                                                        QStringLiteral("CloseAllTabs"));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+            if (result == KMessageBox::SecondaryAction) // SecondaryAction is equal to cancel closing
+#else
             if (result == KMessageBox::No) // No is equal to cancel closing
+#endif
                 result = KMessageBox::Cancel;
         } else {
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+            result = KMessageBox::warningTwoActionsCancelList(this,
+#else
             result = KMessageBox::warningYesNoCancelList(this,
-                                                         i18ncp("@info",
-                                                                "There is a process running in this window. "
-                                                                "Do you still want to quit?",
-                                                                "There are %1 processes running in this window. "
-                                                                "Do you still want to quit?",
-                                                                processesRunning.count()),
-                                                         processesRunning,
-                                                         i18nc("@title", "Confirm Close"),
-                                                         KGuiItem(i18nc("@action:button", "Close &Window"), QStringLiteral("window-close")),
-                                                         KGuiItem(i18nc("@action:button", "Close Current &Tab"), QStringLiteral("tab-close")),
-                                                         KStandardGuiItem::cancel(),
-                                                         // don't ask again name is wrong but I can't update.
-                                                         // this is not about tabs anymore. it's about empty tabs *or* splits.
-                                                         QStringLiteral("CloseAllTabs"));
+#endif
+                                                              i18ncp("@info",
+                                                                     "There is a process running in this window. "
+                                                                     "Do you still want to quit?",
+                                                                     "There are %1 processes running in this window. "
+                                                                     "Do you still want to quit?",
+                                                                     processesRunning.count()),
+                                                              processesRunning,
+                                                              i18nc("@title", "Confirm Close"),
+                                                              KGuiItem(i18nc("@action:button", "Close &Window"), QStringLiteral("window-close")),
+                                                              KGuiItem(i18nc("@action:button", "Close Current &Tab"), QStringLiteral("tab-close")),
+                                                              KStandardGuiItem::cancel(),
+                                                              // don't ask again name is wrong but I can't update.
+                                                              // this is not about tabs anymore. it's about empty tabs *or* splits.
+                                                              QStringLiteral("CloseAllTabs"));
         }
     } else {
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        result = KMessageBox::warningTwoActionsCancel(this,
+#else
         result = KMessageBox::warningYesNoCancel(this,
-                                                 i18nc("@info",
-                                                       "There are %1 open terminals in this window. "
-                                                       "Do you still want to quit?",
-                                                       openTabs),
-                                                 i18nc("@title", "Confirm Close"),
-                                                 KGuiItem(i18nc("@action:button", "Close &Window"), QStringLiteral("window-close")),
-                                                 KGuiItem(i18nc("@action:button", "Close Current &Tab"), QStringLiteral("tab-close")),
-                                                 KStandardGuiItem::cancel(),
-                                                 // don't ask again name is wrong but I can't update.
-                                                 // this is not about tabs anymore. it's about empty tabs *or* splits.
-                                                 QStringLiteral("CloseAllEmptyTabs"));
+#endif
+                                                      i18nc("@info",
+                                                            "There are %1 open terminals in this window. "
+                                                            "Do you still want to quit?",
+                                                            openTabs),
+                                                      i18nc("@title", "Confirm Close"),
+                                                      KGuiItem(i18nc("@action:button", "Close &Window"), QStringLiteral("window-close")),
+                                                      KGuiItem(i18nc("@action:button", "Close Current &Tab"), QStringLiteral("tab-close")),
+                                                      KStandardGuiItem::cancel(),
+                                                      // don't ask again name is wrong but I can't update.
+                                                      // this is not about tabs anymore. it's about empty tabs *or* splits.
+                                                      QStringLiteral("CloseAllEmptyTabs"));
     }
 
     switch (result) {
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    case KMessageBox::PrimaryAction:
+#else
     case KMessageBox::Yes:
+#endif
         return true;
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    case KMessageBox::SecondaryAction:
+#else
     case KMessageBox::No:
+#endif
         if ((!_pluggedController.isNull()) && (!_pluggedController->session().isNull())) {
             if (!(_pluggedController->session()->closeInNormalWay())) {
                 if (_pluggedController->confirmForceClose()) {

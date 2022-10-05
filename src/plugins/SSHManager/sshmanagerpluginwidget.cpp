@@ -22,6 +22,8 @@
 #include "ui_sshwidget.h"
 
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <kwidgetsaddons_version.h>
 
 #include <QAction>
 #include <QFileDialog>
@@ -36,8 +38,6 @@
 #include <QSortFilterProxyModel>
 
 #include <QStandardPaths>
-
-#include <KMessageBox>
 
 struct SSHManagerTreeWidget::Private {
     SSHManagerModel *model = nullptr;
@@ -234,14 +234,22 @@ void SSHManagerTreeWidget::triggerDelete()
     const QString dontAskAgainKey =
         ui->treeView->model()->rowCount(selection.at(0)) ? QStringLiteral("remove_ssh_folder") : QStringLiteral("remove_ssh_config");
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    int result = KMessageBox::warningTwoActions(this,
+#else
     int result = KMessageBox::warningYesNo(this,
-                                           dialogMessage,
-                                           i18nc("@title:window", "Delete SSH Configurations"),
-                                           KStandardGuiItem::del(),
-                                           KStandardGuiItem::cancel(),
-                                           dontAskAgainKey);
+#endif
+                                                dialogMessage,
+                                                i18nc("@title:window", "Delete SSH Configurations"),
+                                                KStandardGuiItem::del(),
+                                                KStandardGuiItem::cancel(),
+                                                dontAskAgainKey);
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    if (result == KMessageBox::ButtonCode::SecondaryAction) {
+#else
     if (result == KMessageBox::ButtonCode::No) {
+#endif
         return;
     }
 
