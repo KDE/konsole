@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-04 00:48+0000\n"
-"PO-Revision-Date: 2022-10-01 05:04+0300\n"
+"PO-Revision-Date: 2022-10-04 11:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2143,10 +2143,9 @@ msgid "&Select All"
 msgstr "&Tümünü Seç"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Satır &Seç"
+msgstr "&Kip Seç"
 
 #: session/SessionController.cpp:727
 #, kde-format

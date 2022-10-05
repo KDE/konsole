@@ -106,9 +106,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->28 жовтня 2021 року</date>
+>16 вересня 2022 року</date>
 <releaseinfo
->Програми 21.12</releaseinfo>
+>Програми 22.12</releaseinfo>
 
 <abstract
 ><para
@@ -188,6 +188,55 @@
 >, щоб відкрити це вікно). </para>
 
 </sect1>
+
+<sect1 id="selection">
+<title
+>Режим вибору</title>
+<para
+>&konsole; has a selection by keyboard mode. In this mode it is possible to move around the scrollback and select text without the mouse.</para>
+
+<para
+>Увійти або вийти з цього режиму можна за допомогою натискання комбінації клавіш (типово, <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>D</keycap
+></keycombo
+>). </para>
+
+<para
+>Пересування курсора: клавіші зі стрілками, <keycap
+>PageUp</keycap
+>, <keycap
+>PageDown</keycap
+>, <keycap
+>Home</keycap
+>, <keycap
+>End</keycap
+>. </para>
+
+<para
+>Пересування курсора у стилі <application
+>vi</application
+>: h,j,k,l для пересування на один символ, <keycap
+>Ctrl</keycap
+>+b,f,u,d для пересування на сторінку вгору або вниз чи на пів сторінки вгору або вниз.</para>
+
+<para
+>Позначати текст можна за допомогою одночасного натискання <keycap
+>Ctrl</keycap
+> або <keycap
+>Shift</keycap
+> і клавіш зі стрілками або за допомогою натискання <keycap
+>V</keycap
+>, щоб розпочати позначення, пересування курсора і натискання <keycap
+>V</keycap
+> знову, щоб завершити позначення. Комбінація <keycombo
+>&Shift;<keycap
+>V</keycap
+></keycombo
+> позначає цілі рядки, замість символів. </para>
+
+</sect1>
+
 
 <sect1 id="profiles">
 <title

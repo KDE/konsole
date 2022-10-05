@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-04 00:48+0000\n"
-"PO-Revision-Date: 2022-09-13 20:02+0530\n"
+"PO-Revision-Date: 2022-10-04 21:42+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -1248,20 +1248,16 @@ msgid "Activate Menu"
 msgstr "பட்டியை செயல்படுத்து"
 
 #: MainWindow.cpp:376
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "கீற்றுகளின் தளவமைப்பை கோப்புக்கு சேமி"
+msgstr "கீற்றுகளின் தளவமைப்பை சேமி..."
 
 #: MainWindow.cpp:385
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "கீற்றுகளின் தளவமைப்பை கோப்பிலிருந்து ஏற்று"
+msgstr "கீற்றுகளின் தளவமைப்பை ஏற்று..."
 
 #: MainWindow.cpp:618 MainWindow.cpp:635
 #, kde-format
@@ -2133,10 +2129,9 @@ msgid "&Select All"
 msgstr "&அனைத்தையும் தேர்ந்தெடு"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "&வரியை தேர்ந்தெடு"
+msgstr "&தேர்வுப் பயன்முறை"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3387,12 +3382,10 @@ msgid "Line numbers "
 msgstr "வரியேண்கள்"
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "கீற்றுகளின் தளவமைப்பை கோப்புக்கு சேமி"
+msgstr "கீற்றுகளின் தளவமைப்பை சேமித்தல்"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3421,12 +3414,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "கீற்றுகளின் தளவமைப்பை கோப்பிலிருந்து ஏற்று"
+msgstr "கீற்றுகளின் தளவமைப்பை ஏற்றுல்"
 
 #: Vt102Emulation.cpp:2319
 #, kde-format

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-04 00:48+0000\n"
-"PO-Revision-Date: 2022-09-09 09:34+0100\n"
+"PO-Revision-Date: 2022-10-04 09:52+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -1272,20 +1272,16 @@ msgid "Activate Menu"
 msgstr "Activar o Menu"
 
 #: MainWindow.cpp:376
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Gravar a disposição de páginas num ficheiro"
+msgstr "Gravar a Disposição de Páginas..."
 
 #: MainWindow.cpp:385
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Carregar a disposição de páginas de um ficheiro"
+msgstr "Carregar uma Disposição de Páginas..."
 
 #: MainWindow.cpp:618 MainWindow.cpp:635
 #, kde-format
@@ -2168,10 +2164,9 @@ msgid "&Select All"
 msgstr "&Seleccionar Tudo"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Seleccionar a &Linha"
+msgstr "&Modo de Selecção"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3424,12 +3419,10 @@ msgid "Line numbers "
 msgstr "Números de linha "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Gravar a disposição de páginas num ficheiro"
+msgstr "Gravar a Disposição de Páginas"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3458,12 +3451,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Carregar a disposição de páginas de um ficheiro"
+msgstr "Carregar uma Disposição de Páginas"
 
 #: Vt102Emulation.cpp:2319
 #, kde-format
@@ -5163,11 +5154,3 @@ msgstr "&Configurar ou Mudar o Nome da Página..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Fechar a Página"
-
-#~ msgctxt "@title:window"
-#~ msgid "Save File"
-#~ msgstr "Gravar o Ficheiro"
-
-#~ msgctxt "@title:window"
-#~ msgid "Open File"
-#~ msgstr "Abrir um Ficheiro"

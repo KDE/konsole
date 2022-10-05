@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-04 00:48+0000\n"
-"PO-Revision-Date: 2022-10-01 23:53+0200\n"
+"PO-Revision-Date: 2022-10-04 10:18+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2159,10 +2159,9 @@ msgid "&Select All"
 msgstr "Alles &selecteren"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Rege&l selecteren"
+msgstr "&Modus selecteren"
 
 #: session/SessionController.cpp:727
 #, kde-format

@@ -92,9 +92,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2 d'octubre de 2021</date>
+>16 de setembre de 2022</date>
 <releaseinfo
->Aplicacions 21.12</releaseinfo>
+>Applications 22.12</releaseinfo>
 
 <abstract
 ><para
@@ -174,6 +174,55 @@
 > per a obrir aquesta finestra). </para>
 
 </sect1>
+
+<sect1 id="selection">
+<title
+>Mode de selecció</title>
+<para
+>&konsole; has a selection by keyboard mode. In this mode it is possible to move around the scrollback and select text without the mouse.</para>
+
+<para
+>Entreu i sortiu d'aquest mode emprant la drecera de teclat predeterminada (<keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>D</keycap
+></keycombo
+>). </para>
+
+<para
+>Moure el cursor: Fletxes, <keycap
+>Re Pàg</keycap
+>, <keycap
+>Av Pàg</keycap
+>, <keycap
+>Inici</keycap
+>, <keycap
+>Fi</keycap
+>. </para>
+
+<para
+>Moure el cursor a l'estil del <application
+>vi</application
+>: h,j,k,l per a moure's un caràcter, <keycap
+>Ctrl</keycap
+>+b,f,u,d per retrocedir/avançar una pàgina o retrocedir/avançar mitja pàgina.</para>
+
+<para
+>Seleccioneu el text emprant <keycap
+>Ctrl</keycap
+> o <keycap
+>Maj</keycap
+> amb les fletxes, o emprant <keycap
+>V</keycap
+> per a iniciar la selecció, moure el cursor i després <keycap
+>V</keycap
+> una altre vegada per acabar la selecció. <keycombo
+>&Maj;<keycap
+>V</keycap
+></keycombo
+> selecciona línies senceres en lloc de caràcters. </para>
+
+</sect1>
+
 
 <sect1 id="profiles">
 <title

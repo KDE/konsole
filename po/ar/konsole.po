@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-04 00:48+0000\n"
-"PO-Revision-Date: 2022-10-01 13:19+0400\n"
+"PO-Revision-Date: 2022-10-04 16:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -2145,10 +2145,9 @@ msgid "&Select All"
 msgstr "ا&ختر الكل"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "انتقِ &خطًّا"
+msgstr "&نمط التحديد"
 
 #: session/SessionController.cpp:727
 #, kde-format

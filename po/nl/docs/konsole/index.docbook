@@ -92,9 +92,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2021-10-28</date>
+>2022-09-16</date>
 <releaseinfo
->Applications 21.12</releaseinfo>
+>Applications 22.12</releaseinfo>
 
 <abstract
 ><para
@@ -174,6 +174,55 @@
 > om dit venster te bewerken). </para>
 
 </sect1>
+
+<sect1 id="selection">
+<title
+>Selectiemodus</title>
+<para
+>&konsole; has a selection by keyboard mode. In this mode it is possible to move around the scrollback and select text without the mouse.</para>
+
+<para
+>Ga deze modus in of uit met de standaard sneltoets (<keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>D</keycap
+></keycombo
+>). </para>
+
+<para
+>Verplaatsen van de cursor: pijlen, <keycap
+>PageUp</keycap
+>, <keycap
+>PageDown</keycap
+>, <keycap
+>Home</keycap
+>, <keycap
+>End</keycap
+>. </para>
+
+<para
+>Verplaatsen van de cursor op de <application
+>vi</application
+> manier: h,j,k,l, om één tekenpositie te bewegen, <keycap
+>Ctrl</keycap
+>+b,f,u,d voor pagina omhoog/omlaag of halve pagina omhoog/omlaag.</para>
+
+<para
+>Selecteer tekst door <keycap
+>Ctrl</keycap
+> of <keycap
+>Shift</keycap
+> te gebruiken met pijlen of door <keycap
+>V</keycap
+> te gebruiken om een selectie te beginnen, de cursor verplaatsen en dan <keycap
+>V</keycap
+> opnieuw om de selectie te beëindigen. <keycombo
+>&Shift;<keycap
+>V</keycap
+></keycombo
+> selecteert gehele regels, in plaats van tekens. </para>
+
+</sect1>
+
 
 <sect1 id="profiles">
 <title
