@@ -179,7 +179,7 @@
 <title
 >Mode de selecció</title>
 <para
->&konsole; has a selection by keyboard mode. In this mode it is possible to move around the scrollback and select text without the mouse.</para>
+>El &konsole; té un mode de selecció per teclat. En aquest mode és possible moure's per l'historial i seleccionar text sense el ratolí.</para>
 
 <para
 >Entreu i sortiu d'aquest mode emprant la drecera de teclat predeterminada (<keycombo action="simul"

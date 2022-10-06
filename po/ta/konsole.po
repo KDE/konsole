@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:48+0000\n"
+"POT-Creation-Date: 2022-10-06 00:49+0000\n"
 "PO-Revision-Date: 2022-10-04 21:42+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -37,7 +37,7 @@ msgstr "கோப்பு"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:268
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:272
 #: plugins/SSHManager/sshwidget.ui:262
 #, kde-format
 msgid "Edit"
@@ -1374,7 +1374,7 @@ msgstr "கட்டளை"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:187
-#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#: plugins/QuickCommands/quickcommandswidget.cpp:309
 #, kde-format
 msgid "Warnings"
 msgstr "எச்சரிக்கைகள்"
@@ -1413,34 +1413,34 @@ msgstr "விரை கட்டளைகள்"
 msgid "Show Quick Commands"
 msgstr "விரை கட்டளைகளை காட்டு"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:146
-#: plugins/QuickCommands/quickcommandswidget.cpp:157
+#: plugins/QuickCommands/quickcommandswidget.cpp:150
+#: plugins/QuickCommands/quickcommandswidget.cpp:161
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "இதேபோல ஏற்கனவே ஒன்று உள்ளது"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:163
+#: plugins/QuickCommands/quickcommandswidget.cpp:167
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr "இச்சிறுநிரலை இயக்குமுன் அனைத்து எச்சரிக்கைகளையும் சரிசெய்யுங்கள்"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:187
+#: plugins/QuickCommands/quickcommandswidget.cpp:191
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "இச்சிறுநிரலில் சிக்கல்கள் உள்ளன. உறுதியாக இதை இயக்க வேண்டுமா?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:188
+#: plugins/QuickCommands/quickcommandswidget.cpp:192
 #, kde-format
 msgid "Shell Errors"
 msgstr "முனைய சிக்கல்கள்"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:189
+#: plugins/QuickCommands/quickcommandswidget.cpp:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "இயக்கு"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:214
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1449,38 +1449,38 @@ msgstr ""
 "பல அமைப்புகளை கொண்ட %1\n"
 "என்ற குழுவை நீக்கப் போகிறீர்கள். உறுதியாக செய்யலாமா?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:215
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:219
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:209
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "%1 என்பதை நீக்கப் போகிறீர்கள். உறுதியாக செய்யலாமா?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:222
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "விரை கட்டளைகளை நீக்குவது"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:248
+#: plugins/QuickCommands/quickcommandswidget.cpp:252
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "தலைப்பு காலியாக இருக்கக்கூடாது"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#: plugins/QuickCommands/quickcommandswidget.cpp:256
 #, kde-format
 msgid "Command can not be empty"
 msgstr "கட்டளை காலியாக இருக்கக்கூடாது"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
 msgid "Rename"
 msgstr "மறுபெயரிடு"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#: plugins/QuickCommands/quickcommandswidget.cpp:280
 #, kde-format
 msgid "Delete"
 msgstr "நீக்கு"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:307
+#: plugins/QuickCommands/quickcommandswidget.cpp:311
 #, kde-format
 msgid "Warnings (*)"
 msgstr "எச்சரிக்கைகள் (*)"
@@ -1506,8 +1506,8 @@ msgstr "%1, SSH பதிவுகளுக்கான அடைவாகும
 #: plugins/SSHManager/sshmanagermodel.cpp:302
 #: plugins/SSHManager/sshmanagermodel.cpp:370
 #: plugins/SSHManager/sshmanagermodel.cpp:403
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:97
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:98
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH அமைப்பு"
@@ -1528,24 +1528,24 @@ msgid "Show SSH Manager"
 msgstr "SSH மேலாளியை காட்டு"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:73
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:74
 #: plugins/SSHManager/sshwidget.ui:105
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH சாவி"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:112
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "நீக்கு"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:136
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:137
 #, kde-format
 msgid "Don't Change"
 msgstr "மாற்றாதே"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:207
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1554,70 +1554,70 @@ msgstr ""
 "பல்வேறு SSH அமைப்புகளை கொண்ட %1\n"
 "என்ற அடைவை நீக்கவிருக்கிறீர்கள். உறுதியாக நீக்கலாமா?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:215
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:216
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH அமைப்புகளை நீக்குவது"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:362
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:363
 #, kde-format
 msgid "Missing Hostname"
 msgstr "புரவன் பெயரை காணவில்லை"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:367
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:368
 #, kde-format
 msgid "Missing Name"
 msgstr "பெயரை காணவில்லை"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:374
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:375
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "'SSH அமைப்புகளிலிருந்து' என்பது தேர்ந்தெடுக்கப்பட்டிருந்தால், SSH சாவியையோ பயனர்பெயரையோ "
 "குறிப்பிட வேண்டாம்."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:380
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "பயனர் பெயரோ SSH சாவியோ அமைக்கப்பட்டிருக்க வேண்டும்"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:385
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Folder"
 msgstr "அடைவை காணவில்லை"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH அமர்வுக்கான பயன்முறை அமைக்கப்பட்டிருக்க வேண்டும்"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "இவ்வடைவை நீக்க முடியாது"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:418
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "அடைவையும் அதிலுள்ளவற்றையும் நீக்கும்"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:421
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "அடைவின் பெயரை மாற்ற இரட்டை கிளிக் செய்யவும்."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "தானாக சேர்க்கப்பட்ட பதிவை நீக்க முடியாது."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, kde-format
 msgid "Delete selected entry"
 msgstr "தேர்ந்தெடுத்துள்ள பதிவை நீக்கு"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
@@ -1625,13 +1625,13 @@ msgstr ""
 "நிரலின் பெயரை கண்டுபிடிக்க முடியாத‍தால், இணைப்பை உருவாக்க முடியவில்லை என்று "
 "கருதப்படுகிறது"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "SSH கட்டளையை இயக்குவதில் சிக்கல்"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

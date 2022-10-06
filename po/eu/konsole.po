@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:48+0000\n"
+"POT-Creation-Date: 2022-10-06 00:49+0000\n"
 "PO-Revision-Date: 2022-10-04 06:20+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -47,7 +47,7 @@ msgstr "Fitxategia"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:268
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:272
 #: plugins/SSHManager/sshwidget.ui:262
 #, kde-format
 msgid "Edit"
@@ -1389,7 +1389,7 @@ msgstr "Komandoa"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:187
-#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#: plugins/QuickCommands/quickcommandswidget.cpp:309
 #, kde-format
 msgid "Warnings"
 msgstr "Abisuak"
@@ -1428,34 +1428,34 @@ msgstr "Komando azkarrak"
 msgid "Show Quick Commands"
 msgstr "Erakutsi komando azkarrak"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:146
-#: plugins/QuickCommands/quickcommandswidget.cpp:157
+#: plugins/QuickCommands/quickcommandswidget.cpp:150
+#: plugins/QuickCommands/quickcommandswidget.cpp:161
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "Bikoiztutako elementu bat dago"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:163
+#: plugins/QuickCommands/quickcommandswidget.cpp:167
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr "Mesedez, konpondu abisu guztiak gidoia ibiltzen saiatu aurretik"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:187
+#: plugins/QuickCommands/quickcommandswidget.cpp:191
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "Gidoian errore batzuk daude, benetan ibili nahi duzu?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:188
+#: plugins/QuickCommands/quickcommandswidget.cpp:192
 #, kde-format
 msgid "Shell Errors"
 msgstr "Oskolaren erroreak"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:189
+#: plugins/QuickCommands/quickcommandswidget.cpp:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Ibili"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:214
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1464,38 +1464,38 @@ msgstr ""
 "%1 taldea ezabatzera zoaz, konfigurazio anitz dituena,\n"
 "ziur zaude? "
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:215
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:219
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:209
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "%1 ezabatzera zoaz, ziur zaude?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:222
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Ezabatu Komando Azkarren konfigurazioak"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:248
+#: plugins/QuickCommands/quickcommandswidget.cpp:252
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "Titulua ezin da hutsik edo bete gabe egon"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#: plugins/QuickCommands/quickcommandswidget.cpp:256
 #, kde-format
 msgid "Command can not be empty"
 msgstr "Komandoa ezin da hutsik egon"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
 msgid "Rename"
 msgstr "Berrizendatu"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#: plugins/QuickCommands/quickcommandswidget.cpp:280
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:307
+#: plugins/QuickCommands/quickcommandswidget.cpp:311
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Abisuak (*)"
@@ -1521,8 +1521,8 @@ msgstr "%1 SSH sarreretarako karpeta bat da"
 #: plugins/SSHManager/sshmanagermodel.cpp:302
 #: plugins/SSHManager/sshmanagermodel.cpp:370
 #: plugins/SSHManager/sshmanagermodel.cpp:403
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:97
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:98
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH konfigurazioa"
@@ -1543,24 +1543,24 @@ msgid "Show SSH Manager"
 msgstr "Erakutsi SSH kudeatzailea"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:73
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:74
 #: plugins/SSHManager/sshwidget.ui:105
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH gakoa"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:112
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:136
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:137
 #, kde-format
 msgid "Don't Change"
 msgstr "Ez aldatu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:207
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1569,83 +1569,83 @@ msgstr ""
 "%1 karpeta ezabatzera zoaz, SSH konfigurazio\n"
 "anitz dituena, ziur zaude?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:215
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:216
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Ezabatu SSH konfigurazioak"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:362
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:363
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Ostalari-izena falta da"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:367
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:368
 #, kde-format
 msgid "Missing Name"
 msgstr "Izena falta da"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:374
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:375
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Erabili SSH konfigurazioa ezarrita badago, ez zehaztu SSH-gako edo "
 "erabiltzaile-izenik."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:380
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Gutxienez erabiltzaile-izena edo SSH-gakoa ezarri behar da"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:385
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Folder"
 msgstr "Karpeta falta da"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH saio batek profil bat izan behar du"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Ezin du karpeta hau ezabatu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:418
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Ezabatu karpeta eta haren eduki guztia"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:421
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Klik-bikoitza karpeta-izena aldatzeko."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Ezin duzu ezabatu automatikoki gehitutako sarrera bat."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Ezabatu hautatutako sarrera"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
 "Ezin izan du prozesu-izena lortu, jo ezazu ezin dugula konexio bat eskatu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Errorea SSH komandoa jaulkitzean"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:48+0000\n"
+"POT-Creation-Date: 2022-10-06 00:49+0000\n"
 "PO-Revision-Date: 2022-02-10 10:52+0800\n"
 "Last-Translator: Chaoting Liu <brli@chakralinux.org>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "檔案"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:268
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:272
 #: plugins/SSHManager/sshwidget.ui:262
 #, kde-format
 msgid "Edit"
@@ -1374,7 +1374,7 @@ msgstr "指令"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:187
-#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#: plugins/QuickCommands/quickcommandswidget.cpp:309
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1415,18 +1415,18 @@ msgstr "快捷指令"
 msgid "Show Quick Commands"
 msgstr "顯示快捷指令"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:146
-#: plugins/QuickCommands/quickcommandswidget.cpp:157
+#: plugins/QuickCommands/quickcommandswidget.cpp:150
+#: plugins/QuickCommands/quickcommandswidget.cpp:161
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "存在重複項目"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:163
+#: plugins/QuickCommands/quickcommandswidget.cpp:167
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:187
+#: plugins/QuickCommands/quickcommandswidget.cpp:191
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid ""
@@ -1434,18 +1434,18 @@ msgstr ""
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "此視窗中目前有 %1 個開啟的終端機。您確定要離開嗎？"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:188
+#: plugins/QuickCommands/quickcommandswidget.cpp:192
 #, kde-format
 msgid "Shell Errors"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:189
+#: plugins/QuickCommands/quickcommandswidget.cpp:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:214
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are about to remove the group %1,\n"
@@ -1457,41 +1457,41 @@ msgstr ""
 "您即將移除分頁群組 %1 ，\n"
 "內含多個設定檔，確定移除？"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:215
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:219
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:209
 #, fuzzy, kde-format
 #| msgid "You are about to remove %1, are you sure?"
 msgid "You are about to delete %1, are you sure?"
 msgstr "您即將移除 %1 ，確定嗎？"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:222
 #, fuzzy, kde-format
 #| msgid "Remove Quick Commands Configurations"
 msgid "Delete Quick Commands Configurations"
 msgstr "移除快捷指令設定"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:248
+#: plugins/QuickCommands/quickcommandswidget.cpp:252
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "標題不能是空白"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#: plugins/QuickCommands/quickcommandswidget.cpp:256
 #, kde-format
 msgid "Command can not be empty"
 msgstr "指令不能是空的"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, fuzzy, kde-format
 #| msgid "Rename Tab"
 msgid "Rename"
 msgstr "重新命名分頁"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#: plugins/QuickCommands/quickcommandswidget.cpp:280
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:307
+#: plugins/QuickCommands/quickcommandswidget.cpp:311
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1521,8 +1521,8 @@ msgstr "%1 是儲存 SSH 設定檔的資料夾"
 #: plugins/SSHManager/sshmanagermodel.cpp:302
 #: plugins/SSHManager/sshmanagermodel.cpp:370
 #: plugins/SSHManager/sshmanagermodel.cpp:403
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:97
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:98
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH 設定"
@@ -1543,24 +1543,24 @@ msgid "Show SSH Manager"
 msgstr "顯示 SSH 管理員"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:73
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:74
 #: plugins/SSHManager/sshwidget.ui:105
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH 金鑰"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:112
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:136
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:137
 #, kde-format
 msgid "Don't Change"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:207
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are about to remove the folder %1,\n"
@@ -1572,85 +1572,85 @@ msgstr ""
 "您即將移除 %1 資料夾，\n"
 "其中還有多個 SSH 設定值，確認移除？"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:215
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:216
 #, fuzzy, kde-format
 #| msgid "Remove SSH Configurations"
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "移除 SSH 設定值"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:362
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:363
 #, kde-format
 msgid "Missing Hostname"
 msgstr "未指定主機名稱"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:367
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:368
 #, kde-format
 msgid "Missing Name"
 msgstr "未指定名稱"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:374
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:375
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr "啟用「使用 SSH 設定檔」後，請勿再自行指定 SSH 金鑰或使用者名稱。"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:380
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "至少需指定使用者名稱或 SSH 金鑰"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:385
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Folder"
 msgstr "找不到資料夾"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "所有 SSH 工作階段都必須指定設定值"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
 #, fuzzy, kde-format
 #| msgid "Cannot remove this folder"
 msgid "Cannot delete this folder"
 msgstr "無法移除本資料夾"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:418
 #, fuzzy, kde-format
 #| msgid "Remove folder and all of its contents"
 msgid "Delete folder and all of its contents"
 msgstr "移除資料夾及其內的所以檔案"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:421
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "按兩下以重新命名資料夾"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, fuzzy, kde-format
 #| msgid "You can't remove an automatically added entry."
 msgid "You can't delete an automatically added entry."
 msgstr "無法移除自動加入的設定檔"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, fuzzy, kde-format
 #| msgid "Remove selected entry"
 msgid "Delete selected entry"
 msgstr "移除選取的 SSH 設定檔"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "無法取得程序名稱，可能因為是無法連線"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "下達 SSH 命令時出錯"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

@@ -193,7 +193,7 @@
 <title
 >Режим вибору</title>
 <para
->&konsole; has a selection by keyboard mode. In this mode it is possible to move around the scrollback and select text without the mouse.</para>
+>У &konsole; передбачено режим позначення тексту за допомогою клавіатури. У цьому режимі можна гортати і позначати текст без використання вказівника миші.</para>
 
 <para
 >Увійти або вийти з цього режиму можна за допомогою натискання комбінації клавіш (типово, <keycombo action="simul"

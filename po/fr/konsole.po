@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:48+0000\n"
-"PO-Revision-Date: 2022-09-16 18:57+0200\n"
+"POT-Creation-Date: 2022-10-06 00:49+0000\n"
+"PO-Revision-Date: 2022-10-05 14:32+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -58,7 +58,7 @@ msgstr "Fichier"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:268
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:272
 #: plugins/SSHManager/sshwidget.ui:262
 #, kde-format
 msgid "Edit"
@@ -1282,20 +1282,16 @@ msgid "Activate Menu"
 msgstr "Activer le menu"
 
 #: MainWindow.cpp:376
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Enregistrer la disposition d'un onglet ver un fichier"
+msgstr "Enregistrer une disposition d'onglets..."
 
 #: MainWindow.cpp:385
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Charger la disposition d'un onglet à partir du fichier"
+msgstr "Charger une disposition d'onglets..."
 
 #: MainWindow.cpp:618 MainWindow.cpp:635
 #, kde-format
@@ -1417,7 +1413,7 @@ msgstr "Commande"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:187
-#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#: plugins/QuickCommands/quickcommandswidget.cpp:309
 #, kde-format
 msgid "Warnings"
 msgstr "Avertissements"
@@ -1456,36 +1452,36 @@ msgstr "Commandes rapides"
 msgid "Show Quick Commands"
 msgstr "Afficher les commandes rapides"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:146
-#: plugins/QuickCommands/quickcommandswidget.cpp:157
+#: plugins/QuickCommands/quickcommandswidget.cpp:150
+#: plugins/QuickCommands/quickcommandswidget.cpp:161
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "Un élément dupliqué existe."
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:163
+#: plugins/QuickCommands/quickcommandswidget.cpp:167
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 "Veuillez corriger tous les avertissements de tenter de lancer ce script."
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:187
+#: plugins/QuickCommands/quickcommandswidget.cpp:191
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr ""
 "Il y a plusieurs erreurs dans ce script. Voulez-vous vraiment le lancer ?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:188
+#: plugins/QuickCommands/quickcommandswidget.cpp:192
 #, kde-format
 msgid "Shell Errors"
 msgstr "Erreurs du shell"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:189
+#: plugins/QuickCommands/quickcommandswidget.cpp:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Exécuter"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:214
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1494,39 +1490,39 @@ msgstr ""
 "Vous êtes sur le point de supprimer le groupe %1, \n"
 "avec plusieurs configurations. Voulez-vous vraiment le supprimer ?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:215
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:219
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:209
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr ""
 "Vous êtes sur le point de supprimer %1. Voulez-vous vraiment le supprimer ?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:222
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Supprimer les configurations des commandes rapides"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:248
+#: plugins/QuickCommands/quickcommandswidget.cpp:252
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "Le titre ne peut être vide ou blanc."
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#: plugins/QuickCommands/quickcommandswidget.cpp:256
 #, kde-format
 msgid "Command can not be empty"
 msgstr "La commande ne peut être vide."
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
 msgid "Rename"
 msgstr "Renommer"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#: plugins/QuickCommands/quickcommandswidget.cpp:280
 #, kde-format
 msgid "Delete"
 msgstr "Supprimer"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:307
+#: plugins/QuickCommands/quickcommandswidget.cpp:311
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Avertissements (*)"
@@ -1552,8 +1548,8 @@ msgstr "%1 est un dossier d'entrées « SSH »"
 #: plugins/SSHManager/sshmanagermodel.cpp:302
 #: plugins/SSHManager/sshmanagermodel.cpp:370
 #: plugins/SSHManager/sshmanagermodel.cpp:403
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:97
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:98
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
 #, kde-format
 msgid "SSH Config"
 msgstr "Configuration « SSH »"
@@ -1574,24 +1570,24 @@ msgid "Show SSH Manager"
 msgstr "Afficher le gestionnaire de clés SSH"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:73
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:74
 #: plugins/SSHManager/sshwidget.ui:105
 #, kde-format
 msgid "SSH Key"
 msgstr "Clé SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:112
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Supprimer"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:136
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:137
 #, kde-format
 msgid "Don't Change"
 msgstr "Ne pas modifier"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:207
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1600,70 +1596,70 @@ msgstr ""
 "Vous êtes sur le point de supprimer le dossier %1,\n"
 "avec plusieurs configurations « SSH ». Voulez-vous vraiment le supprimer ? "
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:215
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:216
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Supprimer les configurations « SSH »"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:362
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:363
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Nom d'hôte manquant"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:367
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:368
 #, kde-format
 msgid "Missing Name"
 msgstr "Nom manquant"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:374
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:375
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Si la configuration indique l'utilisation de « SSH », ne spécifiez pas de "
 "clé « SSH » ou de nom d'utilisateur."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:380
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Au moins un nom d'utilisateur ou une clé SSH doit être défini."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:385
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Folder"
 msgstr "Dossier manquant"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:390
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "Une session SSH doit posséder un profil."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Impossible de supprimer ce dossier "
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:418
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Supprimer un dossier et la totalité de son contenu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:421
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Double cliquez pour modifier le nom du dossier."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Vous ne pouvez supprimer une entrée ajoutée automatiquement."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:428
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Supprimer l'entrée sélectionnée"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
@@ -1671,13 +1667,13 @@ msgstr ""
 "Impossible d'obtenir le nom du processus, signifiant qu'il est impossible de "
 "demander une connexion."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Erreur après lancement d'une commande « SSH »"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:474
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
@@ -2187,10 +2183,9 @@ msgid "&Select All"
 msgstr "Tout &sélectionner"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Sélectionner la &ligne"
+msgstr "Sélectionnez un &mode"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3449,12 +3444,10 @@ msgid "Line numbers "
 msgstr "Numéros de lignes "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Enregistrer la disposition d'un onglet ver un fichier"
+msgstr "Enregistrer une disposition d'onglets"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3483,12 +3476,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Charger la disposition d'un onglet à partir du fichier"
+msgstr "Charger une disposition d'onglets"
 
 #: Vt102Emulation.cpp:2319
 #, kde-format
