@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-06 00:49+0000\n"
+"POT-Creation-Date: 2022-10-07 00:50+0000\n"
 "PO-Revision-Date: 2022-10-04 10:18+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -53,8 +53,8 @@ msgstr "Bestand"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:272
-#: plugins/SSHManager/sshwidget.ui:262
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:288
+#: plugins/SSHManager/sshwidget.ui:366
 #, kde-format
 msgid "Edit"
 msgstr "Bewerken"
@@ -615,7 +615,7 @@ msgstr "De achtergrondafbeelding kiezen"
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
-#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:127
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:305
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
@@ -856,8 +856,8 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
-#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:240
-#: plugins/SSHManager/sshwidget.ui:272
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
+#: plugins/SSHManager/sshwidget.ui:376
 #, kde-format
 msgid "Add"
 msgstr "Toevoegen"
@@ -1357,114 +1357,136 @@ msgstr "Info over Part"
 msgid "Form"
 msgstr "Formulier"
 
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: plugins/QuickCommands/qcwidget.ui:22
+#, fuzzy, kde-format
+#| msgctxt "@title:column Profile keyboard shortcut"
+#| msgid "Shortcut"
+msgid "Shortcut:"
+msgstr "Sneltoets"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
+#, kde-format
+msgid "Filter..."
+msgstr "Filteren..."
+
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
-#: plugins/QuickCommands/qcwidget.ui:53 plugins/SSHManager/sshwidget.ui:32
+#: plugins/QuickCommands/qcwidget.ui:59 plugins/SSHManager/sshwidget.ui:46
 #, kde-format
 msgid "Invert"
 msgstr "Inverteren"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/QuickCommands/qcwidget.ui:91
+#: plugins/QuickCommands/qcwidget.ui:97
 #, kde-format
 msgid "Title"
 msgstr "Titel"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/QuickCommands/qcwidget.ui:101
+#: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
 msgstr "Tekstballon"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
-#: plugins/QuickCommands/qcwidget.ui:111
+#: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
 msgstr "Groep"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:122 plugins/SSHManager/sshwidget.ui:186
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:244
 #, kde-format
 msgid "Default"
 msgstr "Standaard"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: plugins/QuickCommands/qcwidget.ui:137
+#: plugins/QuickCommands/qcwidget.ui:143
 #, kde-format
 msgid "Command"
 msgstr "Commando"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
-#: plugins/QuickCommands/qcwidget.ui:187
-#: plugins/QuickCommands/quickcommandswidget.cpp:309
+#: plugins/QuickCommands/qcwidget.ui:193
+#: plugins/QuickCommands/quickcommandswidget.cpp:325
 #, kde-format
 msgid "Warnings"
 msgstr "Waarschuwingen"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
-#: plugins/QuickCommands/qcwidget.ui:230
+#: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
 msgstr "Uitvoeren"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
-#: plugins/QuickCommands/qcwidget.ui:250
+#: plugins/QuickCommands/qcwidget.ui:258
 #, kde-format
 msgid "Save"
 msgstr "Opslaan"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
-#: plugins/QuickCommands/qcwidget.ui:260
+#: plugins/QuickCommands/qcwidget.ui:269
 #, kde-format
 msgid "Update"
 msgstr "Bijwerken"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:270 plugins/SSHManager/sshwidget.ui:282
+#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:386
 #, kde-format
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:38
+#: plugins/QuickCommands/quickcommandsplugin.cpp:45
+#: plugins/QuickCommands/quickcommandsplugin.cpp:111
 #, kde-format
 msgid "Quick Commands"
 msgstr "Snelle commando's"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:57
+#: plugins/QuickCommands/quickcommandsplugin.cpp:69
+#, fuzzy, kde-format
+#| msgid "Show Quick Commands"
+msgid "Show Quick Access"
+msgstr "Snelle commando's tonen"
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Snelle commando's tonen"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:150
-#: plugins/QuickCommands/quickcommandswidget.cpp:161
+#: plugins/QuickCommands/quickcommandswidget.cpp:166
+#: plugins/QuickCommands/quickcommandswidget.cpp:177
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "Een dubbel item bestaat"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:167
+#: plugins/QuickCommands/quickcommandswidget.cpp:183
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 "Alle waarschuwingen repareren alvorens te proberen dit script uit te voeren"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:191
+#: plugins/QuickCommands/quickcommandswidget.cpp:207
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "Er zijn enige fouten in dit script, wilt u het toch uitvoeren?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:192
+#: plugins/QuickCommands/quickcommandswidget.cpp:208
 #, kde-format
 msgid "Shell Errors"
 msgstr "Fouten in shell"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:193
+#: plugins/QuickCommands/quickcommandswidget.cpp:209
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Uitvoeren"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:234
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1473,38 +1495,38 @@ msgstr ""
 "U staat op het punt de groep %1 te verwijderen,\n"
 " met meerdere configuraties, toch doen?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:219
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "U staat op het punt de %1 te verwijderen, zeker weten?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:222
+#: plugins/QuickCommands/quickcommandswidget.cpp:238
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Configuraties met snelle commando's verwijderen"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#: plugins/QuickCommands/quickcommandswidget.cpp:268
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "Titel mag niet leeg of blanco zijn"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:256
+#: plugins/QuickCommands/quickcommandswidget.cpp:272
 #, kde-format
 msgid "Command can not be empty"
 msgstr "Commando kan niet leeg zijn"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#: plugins/QuickCommands/quickcommandswidget.cpp:292
 #, kde-format
 msgid "Rename"
 msgstr "Hernoemen"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:280
+#: plugins/QuickCommands/quickcommandswidget.cpp:296
 #, kde-format
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:311
+#: plugins/QuickCommands/quickcommandswidget.cpp:327
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Waarschuwingen (*)"
@@ -1530,8 +1552,8 @@ msgstr "%1 is een map voor SSH-items"
 #: plugins/SSHManager/sshmanagermodel.cpp:302
 #: plugins/SSHManager/sshmanagermodel.cpp:370
 #: plugins/SSHManager/sshmanagermodel.cpp:403
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:98
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH-configuratie"
@@ -1541,35 +1563,67 @@ msgstr "SSH-configuratie"
 msgid "Host: %1"
 msgstr "Host: %1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:46
+#: plugins/SSHManager/sshmanagerplugin.cpp:63
 #, kde-format
 msgid "SSH Manager"
 msgstr "SSH-beheerder"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:64
+#: plugins/SSHManager/sshmanagerplugin.cpp:92
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "SSH-beheerder tonen"
 
+#: plugins/SSHManager/sshmanagerplugin.cpp:111
+#, kde-format
+msgid "Show Quick Access for SSH Actions"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:149
+#, kde-format
+msgid "SSH Entries"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:177
+#, kde-format
+msgid ""
+"Could not get the process name, assume that we can't request a connection"
+msgstr ""
+"Kon de procesnaam niet ophalen, neem aan dat we geen verbinding kunnen "
+"aanvragen"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:177
+#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#, kde-format
+msgid "Error issuing SSH Command"
+msgstr "Fout bij uitvoeren van SSH-commando"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#, kde-format
+msgid ""
+"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
+msgstr ""
+"Kan geen SSH-commando buiten de shell-toepassing (bijv. bash, zsh, sh) "
+"uitvoeren"
+
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:74
-#: plugins/SSHManager/sshwidget.ui:105
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
+#: plugins/SSHManager/sshwidget.ui:161
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH-sleutel"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:113
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:118
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:137
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
 msgstr "Nier wijzigen"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1578,184 +1632,152 @@ msgstr ""
 "U staat op het punt de map %1 te verwijderen,\n"
 " met meerdere SSH-configuraties, toch doen?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:216
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH-configuraties verwijderen"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:363
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Hostnaam ontbreekt"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:368
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "Missing Name"
 msgstr "Naam ontbreekt"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:375
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Als SSH-configuratie is gezet, specificeer dan niet de SSH-sleutel of "
 "gebruikersnaam."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:380
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:403
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Tenminste gebruikersnaam of SSH-sleutel moet gezet zijn"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
 #, kde-format
 msgid "Missing Folder"
 msgstr "Map ontbreekt"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "Een SSH-sessie moet een profiel hebben"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Kan deze map niet verwijderen"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:418
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Map en alle inhoud ervan verwijderen"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Dubbelklik om de naam van de map te wijzigen"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "U kunt geen automatisch toegevoegd item verwijderen."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Geselecteerd item verwijderen"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
-#, kde-format
-msgid ""
-"Could not get the process name, assume that we can't request a connection"
-msgstr ""
-"Kon de procesnaam niet ophalen, neem aan dat we geen verbinding kunnen "
-"aanvragen"
-
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
-#, kde-format
-msgid "Error issuing SSH Command"
-msgstr "Fout bij uitvoeren van SSH-commando"
-
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
-#, kde-format
-msgid ""
-"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
-msgstr ""
-"Kan geen SSH-commando buiten de shell-toepassing (bijv. bash, zsh, sh) "
-"uitvoeren"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, kde-format
-msgid "Filter..."
-msgstr "Filteren..."
+#, fuzzy, kde-format
+#| msgctxt "@title:column Profile keyboard shortcut"
+#| msgid "Shortcut"
+msgid "Shortcut"
+msgstr "Sneltoets"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
-#: plugins/SSHManager/sshwidget.ui:29
+#: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
 msgstr "Items tonen die niet overeenkomen met het filter"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: plugins/SSHManager/sshwidget.ui:54
+#: plugins/SSHManager/sshwidget.ui:74
 #, kde-format
 msgid "Identifier"
 msgstr "Identifier"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:61
+#: plugins/SSHManager/sshwidget.ui:87
 #, kde-format
 msgid "A name for this ssh entry"
 msgstr "Een naam van dit ssh-item"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:64
+#: plugins/SSHManager/sshwidget.ui:90
 #, kde-format
 msgid "The name of this entry on the list"
 msgstr "De naam van dit item op de lijst"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/SSHManager/sshwidget.ui:71
+#: plugins/SSHManager/sshwidget.ui:103
 #, kde-format
 msgid "SSH Hostname"
 msgstr "SSH-hostnaam"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
-#: plugins/SSHManager/sshwidget.ui:78 plugins/SSHManager/sshwidget.ui:81
+#: plugins/SSHManager/sshwidget.ui:116 plugins/SSHManager/sshwidget.ui:119
 #, kde-format
 msgid "The hostname of the server"
 msgstr "De hostnaam van de server"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/SSHManager/sshwidget.ui:88
+#: plugins/SSHManager/sshwidget.ui:132
 #, kde-format
 msgid "Port"
 msgstr "Poort"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:95
+#: plugins/SSHManager/sshwidget.ui:145
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
 msgstr "De poort van de server, 22 is de standaard voor ssh-verbindingen"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:98
+#: plugins/SSHManager/sshwidget.ui:148
 #, kde-format
 msgid "22"
 msgstr "22"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:114
-#, kde-format
-msgid "The private key to be used for this connection"
-msgstr "De private sleutel om te gebruiken voor deze verbinding"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:120
-#, kde-format
-msgid "The private key"
-msgstr "De privé sleutel"
-
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:140
+#: plugins/SSHManager/sshwidget.ui:174
 #, kde-format
 msgid "Username"
 msgstr "Gebruikersnaam"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:147
+#: plugins/SSHManager/sshwidget.ui:187
 #, kde-format
 msgid "The username for the connection"
 msgstr "De gebruikersnaam voor de verbinding"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:150
+#: plugins/SSHManager/sshwidget.ui:190
 #, kde-format
 msgid "Your username"
 msgstr "Uw gebruikersnaam"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:157
+#: plugins/SSHManager/sshwidget.ui:203
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1765,61 +1787,73 @@ msgstr ""
 "ingesteld, maar van de configuratie in ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:160
+#: plugins/SSHManager/sshwidget.ui:206
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "~/.ssh/config voor sleutel gebruiken"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:167
+#: plugins/SSHManager/sshwidget.ui:219
 #, kde-format
 msgid "Folder"
 msgstr "Map"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:180
+#: plugins/SSHManager/sshwidget.ui:238
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr "Vanwege organisatorische redenen zal dit item in deze map zijn."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:193
+#: plugins/SSHManager/sshwidget.ui:257
 #, kde-format
 msgid "Profile"
 msgstr "Profiel"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:206
+#: plugins/SSHManager/sshwidget.ui:276
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "Het profiel dat actief zal zijn wanneer de ssh-sessie start"
 
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:292
+#, kde-format
+msgid "The private key to be used for this connection"
+msgstr "De private sleutel om te gebruiken voor deze verbinding"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:298
+#, kde-format
+msgid "The private key"
+msgstr "De privé sleutel"
+
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:231
+#: plugins/SSHManager/sshwidget.ui:335
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "Een nieuw SSH-item toevoegen"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:245
+#: plugins/SSHManager/sshwidget.ui:349
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "Geselecteerde SSH-item verwijderen"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:259
+#: plugins/SSHManager/sshwidget.ui:363
 #, kde-format
 msgid "Edit selected entry"
 msgstr "Geselecteerd item bewerken"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:269
+#: plugins/SSHManager/sshwidget.ui:373
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "Nieuwe SSH-configuratie toevoegen"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:279
+#: plugins/SSHManager/sshwidget.ui:383
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "Annuleer voeg toe of bewerk"

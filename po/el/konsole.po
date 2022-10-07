@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-06 00:49+0000\n"
+"POT-Creation-Date: 2022-10-07 00:50+0000\n"
 "PO-Revision-Date: 2021-11-06 10:52+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -46,8 +46,8 @@ msgstr "Αρχείο"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:272
-#: plugins/SSHManager/sshwidget.ui:262
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:288
+#: plugins/SSHManager/sshwidget.ui:366
 #, kde-format
 msgid "Edit"
 msgstr "Επεξεργασία"
@@ -610,7 +610,7 @@ msgstr "Επιλέξτε την εικόνα ταπετσαρίας"
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
-#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:127
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:305
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
@@ -854,8 +854,8 @@ msgstr "Αδυναμία αποθήκευσης θέματος συνδυασμ�
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
-#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:240
-#: plugins/SSHManager/sshwidget.ui:272
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
+#: plugins/SSHManager/sshwidget.ui:376
 #, kde-format
 msgid "Add"
 msgstr "Προσθήκη"
@@ -1363,15 +1363,30 @@ msgstr "Πληροφορίες τμήματος"
 msgid "Form"
 msgstr "Φόρμα"
 
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: plugins/QuickCommands/qcwidget.ui:22
+#, fuzzy, kde-format
+#| msgctxt "@title:column Profile keyboard shortcut"
+#| msgid "Shortcut"
+msgid "Shortcut:"
+msgstr "Συντόμευση"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
+#, kde-format
+msgid "Filter..."
+msgstr "Φιλτράρισμα..."
+
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
-#: plugins/QuickCommands/qcwidget.ui:53 plugins/SSHManager/sshwidget.ui:32
+#: plugins/QuickCommands/qcwidget.ui:59 plugins/SSHManager/sshwidget.ui:46
 #, kde-format
 msgid "Invert"
 msgstr "Αντιστροφή"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/QuickCommands/qcwidget.ui:91
+#: plugins/QuickCommands/qcwidget.ui:97
 #, fuzzy, kde-format
 #| msgctxt "@item:intable The session title"
 #| msgid "Title"
@@ -1379,34 +1394,34 @@ msgid "Title"
 msgstr "Τίτλος"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/QuickCommands/qcwidget.ui:101
+#: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
-#: plugins/QuickCommands/qcwidget.ui:111
+#: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:122 plugins/SSHManager/sshwidget.ui:186
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:244
 #, kde-format
 msgid "Default"
 msgstr "Προκαθορισμένο"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: plugins/QuickCommands/qcwidget.ui:137
+#: plugins/QuickCommands/qcwidget.ui:143
 #, fuzzy, kde-format
 #| msgid "Command:"
 msgid "Command"
 msgstr "Εντολή:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
-#: plugins/QuickCommands/qcwidget.ui:187
-#: plugins/QuickCommands/quickcommandswidget.cpp:309
+#: plugins/QuickCommands/qcwidget.ui:193
+#: plugins/QuickCommands/quickcommandswidget.cpp:325
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1414,53 +1429,59 @@ msgid "Warnings"
 msgstr "Προειδοποίηση: "
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
-#: plugins/QuickCommands/qcwidget.ui:230
+#: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
-#: plugins/QuickCommands/qcwidget.ui:250
+#: plugins/QuickCommands/qcwidget.ui:258
 #, fuzzy, kde-format
 #| msgid "Save File"
 msgid "Save"
 msgstr "Αποθήκευση αρχείου"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
-#: plugins/QuickCommands/qcwidget.ui:260
+#: plugins/QuickCommands/qcwidget.ui:269
 #, kde-format
 msgid "Update"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:270 plugins/SSHManager/sshwidget.ui:282
+#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:386
 #, kde-format
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:38
+#: plugins/QuickCommands/quickcommandsplugin.cpp:45
+#: plugins/QuickCommands/quickcommandsplugin.cpp:111
 #, fuzzy, kde-format
 #| msgid "Command:"
 msgid "Quick Commands"
 msgstr "Εντολή:"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:57
+#: plugins/QuickCommands/quickcommandsplugin.cpp:69
+#, kde-format
+msgid "Show Quick Access"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "Show Quick Commands"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:150
-#: plugins/QuickCommands/quickcommandswidget.cpp:161
+#: plugins/QuickCommands/quickcommandswidget.cpp:166
+#: plugins/QuickCommands/quickcommandswidget.cpp:177
 #, kde-format
 msgid "A duplicate item exists"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:167
+#: plugins/QuickCommands/quickcommandswidget.cpp:183
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:191
+#: plugins/QuickCommands/quickcommandswidget.cpp:207
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid ""
@@ -1470,18 +1491,18 @@ msgstr ""
 "Υπάρχουν %1 ανοιχτά τερματικά σε αυτό το παράθυρο. Σίγουρα θέλετε να "
 "κλείσετε;"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:192
+#: plugins/QuickCommands/quickcommandswidget.cpp:208
 #, kde-format
 msgid "Shell Errors"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:193
+#: plugins/QuickCommands/quickcommandswidget.cpp:209
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:234
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are about to remove the folder %1,\n"
@@ -1493,8 +1514,8 @@ msgstr ""
 "Πρόκειται να διαγράψετε τον φάκελο %1,\n"
 " με πολλές SSH διαμορφώσεις, είστε βέβαιοι;"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:219
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are about to remove the folder %1,\n"
@@ -1504,35 +1525,35 @@ msgstr ""
 "Πρόκειται να διαγράψετε τον φάκελο %1,\n"
 " με πολλές SSH διαμορφώσεις, είστε βέβαιοι;"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:222
+#: plugins/QuickCommands/quickcommandswidget.cpp:238
 #, fuzzy, kde-format
 #| msgid "Remove SSH Configurations"
 msgid "Delete Quick Commands Configurations"
 msgstr "Διαγραφή διαμορφώσεων SSH"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#: plugins/QuickCommands/quickcommandswidget.cpp:268
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:256
+#: plugins/QuickCommands/quickcommandswidget.cpp:272
 #, fuzzy, kde-format
 #| msgid "Command to execute"
 msgid "Command can not be empty"
 msgstr "Εντολή προς εκτέλεση"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#: plugins/QuickCommands/quickcommandswidget.cpp:292
 #, fuzzy, kde-format
 #| msgid "Rename Tab"
 msgid "Rename"
 msgstr "Μετονομασία καρτέλας"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:280
+#: plugins/QuickCommands/quickcommandswidget.cpp:296
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:311
+#: plugins/QuickCommands/quickcommandswidget.cpp:327
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1563,8 +1584,8 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:302
 #: plugins/SSHManager/sshmanagermodel.cpp:370
 #: plugins/SSHManager/sshmanagermodel.cpp:403
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:98
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Configure"
@@ -1577,35 +1598,63 @@ msgstr "Διαμόρφωση"
 msgid "Host: %1"
 msgstr "Υπολογιστής:"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:46
+#: plugins/SSHManager/sshmanagerplugin.cpp:63
 #, kde-format
 msgid "SSH Manager"
 msgstr "Διαχειριστής SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:64
+#: plugins/SSHManager/sshmanagerplugin.cpp:92
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "Εμφάνιση διαχειριστή SSH"
 
+#: plugins/SSHManager/sshmanagerplugin.cpp:111
+#, kde-format
+msgid "Show Quick Access for SSH Actions"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:149
+#, kde-format
+msgid "SSH Entries"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:177
+#, kde-format
+msgid ""
+"Could not get the process name, assume that we can't request a connection"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:177
+#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#, kde-format
+msgid "Error issuing SSH Command"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#, kde-format
+msgid ""
+"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:74
-#: plugins/SSHManager/sshwidget.ui:105
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
+#: plugins/SSHManager/sshwidget.ui:161
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH κλειδί"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:113
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:118
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:137
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are about to remove the folder %1,\n"
@@ -1617,185 +1666,157 @@ msgstr ""
 "Πρόκειται να διαγράψετε τον φάκελο %1,\n"
 " με πολλές SSH διαμορφώσεις, είστε βέβαιοι;"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:216
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
 #, fuzzy, kde-format
 #| msgid "Remove SSH Configurations"
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Διαγραφή διαμορφώσεων SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:363
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Λείπει το όνομα του υπολογιστή"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:368
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "Missing Name"
 msgstr "Λείπει το όνομα"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:375
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Αν γίνεται χρήση του ssh config, μην ορίσετε ssh κλειδί ή όνομα χρήστη."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:380
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:403
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Τουλάχιστον ένα όνομα χρήστη ή ένα SSHKey πρέπει να ρυθμιστεί"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
 #, kde-format
 msgid "Missing Folder"
 msgstr "Λείπει ο φάκελος"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "Μια συνεδρία ssh πρέπει να έχει προφίλ"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:418
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Με διπλό κλικ αλλάζετε το όνομα του φακέλου."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
 #, fuzzy, kde-format
 #| msgctxt "@info:shell"
 #| msgid "Do not close the initial session automatically when it ends."
 msgid "You can't delete an automatically added entry."
 msgstr "Να μην κλείνει αυτόματα η αρχική συνεδρία όταν ολοκληρωθεί."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile(s)"
 msgid "Delete selected entry"
 msgstr "Επεξεργασία των επιλεγμένων προφίλ"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
-#, kde-format
-msgid ""
-"Could not get the process name, assume that we can't request a connection"
-msgstr ""
-
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
-#, kde-format
-msgid "Error issuing SSH Command"
-msgstr ""
-
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
-#, kde-format
-msgid ""
-"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
-msgstr ""
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, kde-format
-msgid "Filter..."
-msgstr "Φιλτράρισμα..."
+#, fuzzy, kde-format
+#| msgctxt "@title:column Profile keyboard shortcut"
+#| msgid "Shortcut"
+msgid "Shortcut"
+msgstr "Συντόμευση"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
-#: plugins/SSHManager/sshwidget.ui:29
+#: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: plugins/SSHManager/sshwidget.ui:54
+#: plugins/SSHManager/sshwidget.ui:74
 #, kde-format
 msgid "Identifier"
 msgstr "Αναγνωριστικό"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:61
+#: plugins/SSHManager/sshwidget.ui:87
 #, fuzzy, kde-format
 #| msgid "The name of this entry on the list"
 msgid "A name for this ssh entry"
 msgstr "Το όνομα αυτής της καταχώρησης στη λίστα"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:64
+#: plugins/SSHManager/sshwidget.ui:90
 #, kde-format
 msgid "The name of this entry on the list"
 msgstr "Το όνομα αυτής της καταχώρησης στη λίστα"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/SSHManager/sshwidget.ui:71
+#: plugins/SSHManager/sshwidget.ui:103
 #, kde-format
 msgid "SSH Hostname"
 msgstr "SSH όνομα υπολογιστή"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
-#: plugins/SSHManager/sshwidget.ui:78 plugins/SSHManager/sshwidget.ui:81
+#: plugins/SSHManager/sshwidget.ui:116 plugins/SSHManager/sshwidget.ui:119
 #, kde-format
 msgid "The hostname of the server"
 msgstr "Το όνομα του εξυπηρετητή"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/SSHManager/sshwidget.ui:88
+#: plugins/SSHManager/sshwidget.ui:132
 #, kde-format
 msgid "Port"
 msgstr "Θύρα"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:95
+#: plugins/SSHManager/sshwidget.ui:145
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:98
+#: plugins/SSHManager/sshwidget.ui:148
 #, kde-format
 msgid "22"
 msgstr "22"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:114
-#, kde-format
-msgid "The private key to be used for this connection"
-msgstr ""
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:120
-#, kde-format
-msgid "The private key"
-msgstr "Το ιδιωτικό κλειδί"
-
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:140
+#: plugins/SSHManager/sshwidget.ui:174
 #, kde-format
 msgid "Username"
 msgstr "Όνομα χρήστη"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:147
+#: plugins/SSHManager/sshwidget.ui:187
 #, fuzzy, kde-format
 #| msgid "New Remote Connection"
 msgid "The username for the connection"
 msgstr "Νέα απομακρυσμένη σύνδεση"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:150
+#: plugins/SSHManager/sshwidget.ui:190
 #, kde-format
 msgid "Your username"
 msgstr "το όνομα χρήστη"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:157
+#: plugins/SSHManager/sshwidget.ui:203
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1803,64 +1824,76 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:160
+#: plugins/SSHManager/sshwidget.ui:206
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "Χρήση του ~/.ssh/config για το κλειδί"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:167
+#: plugins/SSHManager/sshwidget.ui:219
 #, kde-format
 msgid "Folder"
 msgstr "Φάκελος"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:180
+#: plugins/SSHManager/sshwidget.ui:238
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:193
+#: plugins/SSHManager/sshwidget.ui:257
 #, kde-format
 msgid "Profile"
 msgstr "Προφίλ"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:206
+#: plugins/SSHManager/sshwidget.ui:276
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr ""
 
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:292
+#, kde-format
+msgid "The private key to be used for this connection"
+msgstr ""
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:298
+#, kde-format
+msgid "The private key"
+msgstr "Το ιδιωτικό κλειδί"
+
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:231
+#: plugins/SSHManager/sshwidget.ui:335
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:245
+#: plugins/SSHManager/sshwidget.ui:349
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile(s)"
 msgid "Delete selected SSH entry"
 msgstr "Επεξεργασία των επιλεγμένων προφίλ"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:259
+#: plugins/SSHManager/sshwidget.ui:363
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile(s)"
 msgid "Edit selected entry"
 msgstr "Επεξεργασία των επιλεγμένων προφίλ"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:269
+#: plugins/SSHManager/sshwidget.ui:373
 #, fuzzy, kde-format
 #| msgid "Remove SSH Configurations"
 msgid "Add new SSH Configuration"
 msgstr "Διαγραφή διαμορφώσεων SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:279
+#: plugins/SSHManager/sshwidget.ui:383
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr ""

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-06 00:49+0000\n"
+"POT-Creation-Date: 2022-10-07 00:50+0000\n"
 "PO-Revision-Date: 2022-10-02 20:12+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -53,8 +53,8 @@ msgstr "Файл"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:272
-#: plugins/SSHManager/sshwidget.ui:262
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:288
+#: plugins/SSHManager/sshwidget.ui:366
 #, kde-format
 msgid "Edit"
 msgstr "Правка"
@@ -613,7 +613,7 @@ msgstr "Выбрать фоновое изображение"
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
-#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:127
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:305
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
@@ -856,8 +856,8 @@ msgstr "Для сохранения список привязок клавиш �
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
-#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:240
-#: plugins/SSHManager/sshwidget.ui:272
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
+#: plugins/SSHManager/sshwidget.ui:376
 #, kde-format
 msgid "Add"
 msgstr "Добавить"
@@ -1364,47 +1364,62 @@ msgstr "Компонент Konsole"
 msgid "Form"
 msgstr "Форма"
 
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: plugins/QuickCommands/qcwidget.ui:22
+#, fuzzy, kde-format
+#| msgctxt "@title:column Profile keyboard shortcut"
+#| msgid "Shortcut"
+msgid "Shortcut:"
+msgstr "Комбинация клавиш"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
+#, kde-format
+msgid "Filter..."
+msgstr "Введите текст для фильтрации…"
+
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
-#: plugins/QuickCommands/qcwidget.ui:53 plugins/SSHManager/sshwidget.ui:32
+#: plugins/QuickCommands/qcwidget.ui:59 plugins/SSHManager/sshwidget.ui:46
 #, kde-format
 msgid "Invert"
 msgstr "Инвертировать"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/QuickCommands/qcwidget.ui:91
+#: plugins/QuickCommands/qcwidget.ui:97
 #, kde-format
 msgid "Title"
 msgstr "Название"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/QuickCommands/qcwidget.ui:101
+#: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
 msgstr "Подсказка"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
-#: plugins/QuickCommands/qcwidget.ui:111
+#: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
 msgstr "Группа"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:122 plugins/SSHManager/sshwidget.ui:186
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:244
 #, kde-format
 msgid "Default"
 msgstr "По умолчанию"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: plugins/QuickCommands/qcwidget.ui:137
+#: plugins/QuickCommands/qcwidget.ui:143
 #, kde-format
 msgid "Command"
 msgstr "Команда"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
-#: plugins/QuickCommands/qcwidget.ui:187
-#: plugins/QuickCommands/quickcommandswidget.cpp:309
+#: plugins/QuickCommands/qcwidget.ui:193
+#: plugins/QuickCommands/quickcommandswidget.cpp:325
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1412,51 +1427,58 @@ msgid "Warnings"
 msgstr "Предупреждение: "
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
-#: plugins/QuickCommands/qcwidget.ui:230
+#: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
-#: plugins/QuickCommands/qcwidget.ui:250
+#: plugins/QuickCommands/qcwidget.ui:258
 #, kde-format
 msgid "Save"
 msgstr "Сохранить"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
-#: plugins/QuickCommands/qcwidget.ui:260
+#: plugins/QuickCommands/qcwidget.ui:269
 #, kde-format
 msgid "Update"
 msgstr "Обновить"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:270 plugins/SSHManager/sshwidget.ui:282
+#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:386
 #, kde-format
 msgid "Cancel"
 msgstr "Отмена"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:38
+#: plugins/QuickCommands/quickcommandsplugin.cpp:45
+#: plugins/QuickCommands/quickcommandsplugin.cpp:111
 #, kde-format
 msgid "Quick Commands"
 msgstr "Быстрые команды"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:57
+#: plugins/QuickCommands/quickcommandsplugin.cpp:69
+#, fuzzy, kde-format
+#| msgid "Show Quick Commands"
+msgid "Show Quick Access"
+msgstr "Показывать быстрые команды"
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Показывать быстрые команды"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:150
-#: plugins/QuickCommands/quickcommandswidget.cpp:161
+#: plugins/QuickCommands/quickcommandswidget.cpp:166
+#: plugins/QuickCommands/quickcommandswidget.cpp:177
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "Такой объект уже существует"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:167
+#: plugins/QuickCommands/quickcommandswidget.cpp:183
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr "Перед запуском сценария исправьте все предупреждения"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:191
+#: plugins/QuickCommands/quickcommandswidget.cpp:207
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid ""
@@ -1464,18 +1486,18 @@ msgstr "Перед запуском сценария исправьте все �
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "В этом окне открыто несколько терминалов (%1). Действительно выйти?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:192
+#: plugins/QuickCommands/quickcommandswidget.cpp:208
 #, kde-format
 msgid "Shell Errors"
 msgstr "Ошибки оболочки"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:193
+#: plugins/QuickCommands/quickcommandswidget.cpp:209
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Запустить"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:234
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1484,38 +1506,38 @@ msgstr ""
 "Подтвердите удаление группы «%1»,\n"
 "содержащей несколько конфигураций."
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:219
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Подтвердите удаление «%1»."
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:222
+#: plugins/QuickCommands/quickcommandswidget.cpp:238
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Удалить конфигурацию быстрых команд"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:252
+#: plugins/QuickCommands/quickcommandswidget.cpp:268
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "Название не может быть пустым"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:256
+#: plugins/QuickCommands/quickcommandswidget.cpp:272
 #, kde-format
 msgid "Command can not be empty"
 msgstr "Команда не может быть пустой"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:276
+#: plugins/QuickCommands/quickcommandswidget.cpp:292
 #, kde-format
 msgid "Rename"
 msgstr "Переименовать"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:280
+#: plugins/QuickCommands/quickcommandswidget.cpp:296
 #, kde-format
 msgid "Delete"
 msgstr "Удалить"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:311
+#: plugins/QuickCommands/quickcommandswidget.cpp:327
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Предупреждения (*)"
@@ -1541,8 +1563,8 @@ msgstr "Для хранения записей о SSH-подключениях �
 #: plugins/SSHManager/sshmanagermodel.cpp:302
 #: plugins/SSHManager/sshmanagermodel.cpp:370
 #: plugins/SSHManager/sshmanagermodel.cpp:403
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:98
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
 #, kde-format
 msgid "SSH Config"
 msgstr "Конфигурация SSH"
@@ -1552,35 +1574,65 @@ msgstr "Конфигурация SSH"
 msgid "Host: %1"
 msgstr "Хост: %1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:46
+#: plugins/SSHManager/sshmanagerplugin.cpp:63
 #, kde-format
 msgid "SSH Manager"
 msgstr "Менеджер SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:64
+#: plugins/SSHManager/sshmanagerplugin.cpp:92
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "Показать менеджер SSH"
 
+#: plugins/SSHManager/sshmanagerplugin.cpp:111
+#, kde-format
+msgid "Show Quick Access for SSH Actions"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:149
+#, kde-format
+msgid "SSH Entries"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:177
+#, kde-format
+msgid ""
+"Could not get the process name, assume that we can't request a connection"
+msgstr ""
+"Не удалось получить имя процесса. Скорее всего это связано с невозможностью "
+"получить данные подключения"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:177
+#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#, kde-format
+msgid "Error issuing SSH Command"
+msgstr "Ошибка формирования команды SSH"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#, kde-format
+msgid ""
+"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
+msgstr "Ошибка передачи команды SSH из приложения оболочки (bash, zsh, sh...)"
+
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:74
-#: plugins/SSHManager/sshwidget.ui:105
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
+#: plugins/SSHManager/sshwidget.ui:161
 #, kde-format
 msgid "SSH Key"
 msgstr "Ключ SSH:"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:113
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:118
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Удалить"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:137
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
 msgstr "Не изменять"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:208
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1589,182 +1641,152 @@ msgstr ""
 "Подтвердите удаление папки «%1»,\n"
 "содержащей конфигурации для подключений SSH."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:216
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Удаление конфигураций SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:363
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Не указано имя хоста"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:368
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "Missing Name"
 msgstr "Не указно имя"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:375
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Если включён параметр «Конфигурация SSH», то использовать параметры «Ключ "
 "SSH» и «Имя пользователя» не требуется."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:380
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:403
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Необходимо задать имя пользователя или ключ SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
 #, kde-format
 msgid "Missing Folder"
 msgstr "Папка отсуствует"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "Для сеанса SSH необходимо задать используемый им профиль Konsole"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Не удалось удалить эту папку"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:418
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Удалить папку и всё её содержимое"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Щёлкните дважды, чтобы изменить имя папки"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Запись, добавленная автоматически, не может быть удалена."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Удалить выбранную запись"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
-#, kde-format
-msgid ""
-"Could not get the process name, assume that we can't request a connection"
-msgstr ""
-"Не удалось получить имя процесса. Скорее всего это связано с невозможностью "
-"получить данные подключения"
-
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:463
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
-#, kde-format
-msgid "Error issuing SSH Command"
-msgstr "Ошибка формирования команды SSH"
-
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:475
-#, kde-format
-msgid ""
-"Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
-msgstr "Ошибка передачи команды SSH из приложения оболочки (bash, zsh, sh...)"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
+#. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, kde-format
-msgid "Filter..."
-msgstr "Введите текст для фильтрации…"
+#, fuzzy, kde-format
+#| msgctxt "@title:column Profile keyboard shortcut"
+#| msgid "Shortcut"
+msgid "Shortcut"
+msgstr "Комбинация клавиш"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
-#: plugins/SSHManager/sshwidget.ui:29
+#: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
 msgstr "Показать записи, не соответствующие заданному фильтру"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: plugins/SSHManager/sshwidget.ui:54
+#: plugins/SSHManager/sshwidget.ui:74
 #, kde-format
 msgid "Identifier"
 msgstr "Идентификатор:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:61
+#: plugins/SSHManager/sshwidget.ui:87
 #, kde-format
 msgid "A name for this ssh entry"
 msgstr "Название этой записи ssh"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:64
+#: plugins/SSHManager/sshwidget.ui:90
 #, kde-format
 msgid "The name of this entry on the list"
 msgstr "Название этой записи"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/SSHManager/sshwidget.ui:71
+#: plugins/SSHManager/sshwidget.ui:103
 #, kde-format
 msgid "SSH Hostname"
 msgstr "Хост SSH:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
-#: plugins/SSHManager/sshwidget.ui:78 plugins/SSHManager/sshwidget.ui:81
+#: plugins/SSHManager/sshwidget.ui:116 plugins/SSHManager/sshwidget.ui:119
 #, kde-format
 msgid "The hostname of the server"
 msgstr "Имя хоста SSH"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/SSHManager/sshwidget.ui:88
+#: plugins/SSHManager/sshwidget.ui:132
 #, kde-format
 msgid "Port"
 msgstr "Порт:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:95
+#: plugins/SSHManager/sshwidget.ui:145
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
 msgstr "Номер порта сервера. По умолчанию для ssh используется порт 22."
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:98
+#: plugins/SSHManager/sshwidget.ui:148
 #, kde-format
 msgid "22"
 msgstr "22"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:114
-#, kde-format
-msgid "The private key to be used for this connection"
-msgstr "Закрытый ключ, используемый в этой записи"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:120
-#, kde-format
-msgid "The private key"
-msgstr "Закрытый ключ"
-
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:140
+#: plugins/SSHManager/sshwidget.ui:174
 #, kde-format
 msgid "Username"
 msgstr "Имя пользователя:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:147
+#: plugins/SSHManager/sshwidget.ui:187
 #, kde-format
 msgid "The username for the connection"
 msgstr "Имя пользователя, используемое в этой записи"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:150
+#: plugins/SSHManager/sshwidget.ui:190
 #, kde-format
 msgid "Your username"
 msgstr "Имя пользователя"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:157
+#: plugins/SSHManager/sshwidget.ui:203
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1774,61 +1796,73 @@ msgstr ""
 "«~/.ssh/config», а не указанны выше"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:160
+#: plugins/SSHManager/sshwidget.ui:206
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "Использовать ключ из ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:167
+#: plugins/SSHManager/sshwidget.ui:219
 #, kde-format
 msgid "Folder"
 msgstr "Папка:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:180
+#: plugins/SSHManager/sshwidget.ui:238
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr "Запись будет сохранена внутри этой папки."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:193
+#: plugins/SSHManager/sshwidget.ui:257
 #, kde-format
 msgid "Profile"
 msgstr "Профиль:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:206
+#: plugins/SSHManager/sshwidget.ui:276
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "Профиль, активируемый при запуске сеанса "
 
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:292
+#, kde-format
+msgid "The private key to be used for this connection"
+msgstr "Закрытый ключ, используемый в этой записи"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:298
+#, kde-format
+msgid "The private key"
+msgstr "Закрытый ключ"
+
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:231
+#: plugins/SSHManager/sshwidget.ui:335
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "Создать запись"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:245
+#: plugins/SSHManager/sshwidget.ui:349
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "Удалить выбранные записи SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:259
+#: plugins/SSHManager/sshwidget.ui:363
 #, kde-format
 msgid "Edit selected entry"
 msgstr "Изменить выбранную запись"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:269
+#: plugins/SSHManager/sshwidget.ui:373
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "Добавить новую запись подключения с использованием протокола SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:279
+#: plugins/SSHManager/sshwidget.ui:383
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "Отменить создание или изменение записи"
