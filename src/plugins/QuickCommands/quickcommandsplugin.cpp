@@ -46,6 +46,7 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
     qcDockWidget->setWidget(qcWidget);
     qcDockWidget->setObjectName(QStringLiteral("QuickCommandsDock"));
     qcDockWidget->setVisible(false);
+    qcDockWidget->setAllowedAreas(Qt::DockWidgetArea::LeftDockWidgetArea | Qt::DockWidgetArea::RightDockWidgetArea);
 
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, qcDockWidget);
     connect(qcWidget, &QuickCommandsWidget::quickAccessShortcutChanged, this, [this](QKeySequence s) {

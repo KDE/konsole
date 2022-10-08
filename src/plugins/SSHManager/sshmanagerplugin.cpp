@@ -63,6 +63,7 @@ void SSHManagerPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindo
     sshDockWidget->setWindowTitle(i18n("SSH Manager"));
     sshDockWidget->setObjectName(QStringLiteral("SSHManagerDock"));
     sshDockWidget->setVisible(false);
+    sshDockWidget->setAllowedAreas(Qt::DockWidgetArea::LeftDockWidgetArea | Qt::DockWidgetArea::RightDockWidgetArea);
 
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, sshDockWidget);
 
