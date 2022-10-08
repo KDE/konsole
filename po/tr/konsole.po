@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-07 00:50+0000\n"
-"PO-Revision-Date: 2022-10-04 11:49+0300\n"
+"PO-Revision-Date: 2022-10-07 08:37+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1349,11 +1349,9 @@ msgstr "Form"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Kısayol"
+msgstr "Kısayol:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1438,10 +1436,9 @@ msgid "Quick Commands"
 msgstr "Hızlı Komutlar"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Hızlı Komutları Göster"
+msgstr "Hızlı Erişim'i Göster"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
@@ -1565,12 +1562,12 @@ msgstr "SSH Yöneticisini Göster"
 #: plugins/SSHManager/sshmanagerplugin.cpp:111
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "SSH Eylemleri için Hızlı Erişim'i Göster"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:149
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH Girdileri"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:177
 #, kde-format
@@ -1681,9 +1678,7 @@ msgstr "Seçili girdiyi sil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Kısayol"
 

@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-07 00:50+0000\n"
-"PO-Revision-Date: 2022-10-04 06:20+0200\n"
+"PO-Revision-Date: 2022-10-07 05:35+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -1351,11 +1351,9 @@ msgstr "Inprimakia"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Lasterbidea"
+msgstr "Lasterbidea:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1440,10 +1438,9 @@ msgid "Quick Commands"
 msgstr "Komando azkarrak"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Erakutsi komando azkarrak"
+msgstr "Erakutsi sarbide azkarrak"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
@@ -1567,12 +1564,12 @@ msgstr "Erakutsi SSH kudeatzailea"
 #: plugins/SSHManager/sshmanagerplugin.cpp:111
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Erakutsi SSH ekintzetarako sarbide azkarra"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:149
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH sarrerak"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:177
 #, kde-format
@@ -1686,9 +1683,7 @@ msgstr "Ezabatu hautatutako sarrera"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Lasterbidea"
 

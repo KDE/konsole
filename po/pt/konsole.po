@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-07 00:50+0000\n"
-"PO-Revision-Date: 2022-10-04 09:52+0100\n"
+"PO-Revision-Date: 2022-10-07 09:14+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -1363,11 +1363,9 @@ msgstr "Formulário"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Atalho"
+msgstr "Atalho:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1452,10 +1450,9 @@ msgid "Quick Commands"
 msgstr "Comandos Rápidos"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Mostrar os Comandos Rápidos"
+msgstr "Mostrar o Acesso Rápido"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
@@ -1580,12 +1577,12 @@ msgstr "Mostrar o Gestor de SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:111
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Mostrar o Acesso Rápido para as Acções do SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:149
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Itens do SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:177
 #, kde-format
@@ -1701,9 +1698,7 @@ msgstr "Remover o item seleccionado"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Atalho"
 

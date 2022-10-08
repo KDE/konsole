@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-07 00:50+0000\n"
-"PO-Revision-Date: 2022-10-04 07:20+0300\n"
+"PO-Revision-Date: 2022-10-07 07:25+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1348,11 +1348,9 @@ msgstr "Форма"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Скорочення"
+msgstr "Скорочення:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1437,10 +1435,9 @@ msgid "Quick Commands"
 msgstr "Швидкі команди"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Показати швидкі команди"
+msgstr "Показати швидкий доступ"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
@@ -1566,12 +1563,12 @@ msgstr "Показати керування SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:111
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Показати швидкий доступ до дій SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:149
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Записи SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:177
 #, kde-format
@@ -1687,9 +1684,7 @@ msgstr "Вилучити позначений запис"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Скорочення"
 

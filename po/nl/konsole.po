@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-07 00:50+0000\n"
-"PO-Revision-Date: 2022-10-04 10:18+0200\n"
+"PO-Revision-Date: 2022-10-07 10:49+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -1359,11 +1359,9 @@ msgstr "Formulier"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Sneltoets"
+msgstr "Sneltoets:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1448,10 +1446,9 @@ msgid "Quick Commands"
 msgstr "Snelle commando's"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Snelle commando's tonen"
+msgstr "Snelle toegang tonen"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:123
 #, kde-format
@@ -1576,12 +1573,12 @@ msgstr "SSH-beheerder tonen"
 #: plugins/SSHManager/sshmanagerplugin.cpp:111
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Snelle toegang tonen voor ssh-acties"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:149
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH-items"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:177
 #, kde-format
@@ -1697,9 +1694,7 @@ msgstr "Geselecteerd item verwijderen"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Sneltoets"
 

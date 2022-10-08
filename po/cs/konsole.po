@@ -1323,11 +1323,9 @@ msgstr "Formulář"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Zkratka"
+msgstr "Zkratka:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1649,9 +1647,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Zkratka"
 
@@ -2139,10 +2135,9 @@ msgid "&Select All"
 msgstr "Vybr&at vše"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Vybrat řáde&k"
+msgstr ""
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -5044,11 +5039,3 @@ msgstr ""
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Zavřít kartu"
-
-#~ msgctxt "@title:window"
-#~ msgid "Save File"
-#~ msgstr "Uložit soubor"
-
-#~ msgctxt "@title:window"
-#~ msgid "Open File"
-#~ msgstr "Otevřít soubor"

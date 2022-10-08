@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-07 00:50+0000\n"
-"PO-Revision-Date: 2022-10-05 06:02+0200\n"
+"PO-Revision-Date: 2022-10-07 06:30+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2117,11 +2117,9 @@ msgid "&Select All"
 msgstr "&ყველას არჩევა"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Select font"
+#, kde-format
 msgid "Select &Mode"
-msgstr "აირჩიეთ ფონტი"
+msgstr "აირჩიეთ &რეჟიმი"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3048,7 +3046,7 @@ msgstr[1] ""
 #: terminalDisplay/TerminalDisplay.cpp:2168
 #, kde-format
 msgid "Confirm Paste"
-msgstr ""
+msgstr "ჩასმის დადასტურება"
 
 #: terminalDisplay/TerminalDisplay.cpp:2201
 #, kde-format
@@ -4077,7 +4075,7 @@ msgstr "/bin/sh"
 #: widgets/EditProfileGeneralPage.ui:154
 #, kde-format
 msgid "Initial directory:"
-msgstr ""
+msgstr "საწყისი საქაღალდე:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:167
