@@ -1277,8 +1277,9 @@ void TerminalDisplay::extendSelection(const QPoint &position)
     }
 
     if (_iPntSel.x() < 0 || _iPntSel.y() < 0 || _pntSel.x() < 0 || _pntSel.y() < 0) {
-        _iPntSel = _pntSel = position;
-        return;
+        _iPntSel = _pntSel = _screenWindow->cursorPosition();
+        _iPntSel.ry() += _scrollBar->value();
+        _pntSel.ry() += _scrollBar->value();
     }
 
     // if ( !contentsRect().contains(ev->pos()) ) return;
