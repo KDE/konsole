@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-07 00:50+0000\n"
+"POT-Creation-Date: 2022-10-09 00:52+0000\n"
 "PO-Revision-Date: 2022-02-10 10:52+0800\n"
 "Last-Translator: Chaoting Liu <brli@chakralinux.org>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1421,18 +1421,18 @@ msgid "Cancel"
 msgstr "取消(&C)"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:45
-#: plugins/QuickCommands/quickcommandsplugin.cpp:111
+#: plugins/QuickCommands/quickcommandsplugin.cpp:112
 #, kde-format
 msgid "Quick Commands"
 msgstr "快捷指令"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:69
+#: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, fuzzy, kde-format
 #| msgid "Show Quick Commands"
 msgid "Show Quick Access"
 msgstr "顯示快捷指令"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:123
+#: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "顯示快捷指令"
@@ -1540,9 +1540,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1 是儲存 SSH 設定檔的資料夾"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:302
-#: plugins/SSHManager/sshmanagermodel.cpp:370
-#: plugins/SSHManager/sshmanagermodel.cpp:403
+#: plugins/SSHManager/sshmanagermodel.cpp:308
+#: plugins/SSHManager/sshmanagermodel.cpp:376
+#: plugins/SSHManager/sshmanagermodel.cpp:409
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
 #, kde-format
@@ -1559,34 +1559,34 @@ msgstr "本地端主機：%1"
 msgid "SSH Manager"
 msgstr "SSH 管理員"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:92
+#: plugins/SSHManager/sshmanagerplugin.cpp:93
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "顯示 SSH 管理員"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:111
+#: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:149
+#: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:177
+#: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "無法取得程序名稱，可能因為是無法連線"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:177
-#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#: plugins/SSHManager/sshmanagerplugin.cpp:178
+#: plugins/SSHManager/sshmanagerplugin.cpp:190
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "下達 SSH 命令時出錯"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#: plugins/SSHManager/sshmanagerplugin.cpp:190
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

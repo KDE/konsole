@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-07 00:50+0000\n"
+"POT-Creation-Date: 2022-10-09 00:52+0000\n"
 "PO-Revision-Date: 2022-07-20 11:10+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -1426,18 +1426,18 @@ msgid "Cancel"
 msgstr "İmtina"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:45
-#: plugins/QuickCommands/quickcommandsplugin.cpp:111
+#: plugins/QuickCommands/quickcommandsplugin.cpp:112
 #, kde-format
 msgid "Quick Commands"
 msgstr "Sürətli əmrlər"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:69
+#: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, fuzzy, kde-format
 #| msgid "Show Quick Commands"
 msgid "Show Quick Access"
 msgstr "Sürətli əmrləri göstərmək"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:123
+#: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Sürətli əmrləri göstərmək"
@@ -1535,9 +1535,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1 SSH girişləri üçün qovluqdur"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:302
-#: plugins/SSHManager/sshmanagermodel.cpp:370
-#: plugins/SSHManager/sshmanagermodel.cpp:403
+#: plugins/SSHManager/sshmanagermodel.cpp:308
+#: plugins/SSHManager/sshmanagermodel.cpp:376
+#: plugins/SSHManager/sshmanagermodel.cpp:409
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
 #, kde-format
@@ -1554,22 +1554,22 @@ msgstr "Host: %1"
 msgid "SSH Manager"
 msgstr "SSH meneceri"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:92
+#: plugins/SSHManager/sshmanagerplugin.cpp:93
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "SSH menecerini göstərmək"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:111
+#: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:149
+#: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:177
+#: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
@@ -1577,13 +1577,13 @@ msgstr ""
 "Prosesin adını almaq mümkün olmadı, hesab edin ki, biz bağlantı sorğusu "
 "göndərə bilmirik"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:177
-#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#: plugins/SSHManager/sshmanagerplugin.cpp:178
+#: plugins/SSHManager/sshmanagerplugin.cpp:190
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "SSH əmri verilərkən xəta baş verdi"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:189
+#: plugins/SSHManager/sshmanagerplugin.cpp:190
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
