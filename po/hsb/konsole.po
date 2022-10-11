@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-09 00:52+0000\n"
+"POT-Creation-Date: 2022-10-11 00:50+0000\n"
 "PO-Revision-Date: 2021-10-15 10:45+0200\n"
 "Last-Translator: Prof. Dr. Eduard Werner <e.werner@rz.uni-leipzig.de>\n"
 "Language-Team: Upper Sorbian\n"
@@ -89,7 +89,7 @@ msgstr "Wróćo přesuwać"
 msgid "Session Toolbar"
 msgstr "Nastrojowy pas za posedźenje"
 
-#: AppColorSchemeChooser.cpp:36
+#: AppColorSchemeChooser.cpp:37
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "Kombinacija &barbow za wokno"

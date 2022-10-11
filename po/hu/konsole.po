@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-09 00:52+0000\n"
+"POT-Creation-Date: 2022-10-11 00:50+0000\n"
 "PO-Revision-Date: 2022-01-25 10:17+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -92,7 +92,7 @@ msgstr "P&ufferelés"
 msgid "Session Toolbar"
 msgstr "Munkamenet eszköztár"
 
-#: AppColorSchemeChooser.cpp:36
+#: AppColorSchemeChooser.cpp:37
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Ablak színsémája"

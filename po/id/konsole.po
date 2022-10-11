@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-09 00:52+0000\n"
+"POT-Creation-Date: 2022-10-11 00:50+0000\n"
 "PO-Revision-Date: 2022-09-27 18:12+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -93,7 +93,7 @@ msgstr "Per&guliran"
 msgid "Session Toolbar"
 msgstr "Bilah Alat Sesi"
 
-#: AppColorSchemeChooser.cpp:36
+#: AppColorSchemeChooser.cpp:37
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Skema Warna Jendela"

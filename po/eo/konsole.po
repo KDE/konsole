@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-09 00:52+0000\n"
+"POT-Creation-Date: 2022-10-11 00:50+0000\n"
 "PO-Revision-Date: 2008-01-16 07:58-0600\n"
 "Last-Translator: Cindy McKee <cfmckee@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -100,7 +100,7 @@ msgstr "Rulumhistorio"
 msgid "Session Toolbar"
 msgstr "Nomo"
 
-#: AppColorSchemeChooser.cpp:36
+#: AppColorSchemeChooser.cpp:37
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
