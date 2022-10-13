@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-11 00:50+0000\n"
-"PO-Revision-Date: 2022-07-15 12:02+0200\n"
+"PO-Revision-Date: 2022-10-12 15:43+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -652,23 +652,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Ancora Horizontal:"
+msgstr "Horizontal"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "Ancora vertical:"
+msgstr "Vertical"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Ambe"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -1352,7 +1350,7 @@ msgstr "Formulario"
 #| msgctxt "@title:column Profile keyboard shortcut"
 #| msgid "Shortcut"
 msgid "Shortcut:"
-msgstr "Via Breve"
+msgstr "Via breve:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1520,8 +1518,7 @@ msgid "Warnings (*)"
 msgstr "Avisos (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "SSH Config"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "Configura SSH"
@@ -3444,7 +3441,7 @@ msgstr "Intergration Semantic"
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line numbers "
-msgstr "Numero de lineas fixate:"
+msgstr "Numeros de linea"
 
 #: ViewManager.cpp:1074
 #, fuzzy, kde-format
@@ -3455,17 +3452,13 @@ msgid "Save Tab Layout"
 msgstr "Slveguarda disposition de scheda a file"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
-#, fuzzy, kde-format
-#| msgid "Konsole View Layout (*.json)"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole View Layout (*.json)"
 
 #: ViewManager.cpp:1089
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
@@ -3475,10 +3468,7 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1150
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when loading the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"

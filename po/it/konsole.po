@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-11 00:50+0000\n"
-"PO-Revision-Date: 2022-09-17 09:45+0200\n"
+"PO-Revision-Date: 2022-10-08 01:12+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -1258,20 +1258,16 @@ msgid "Activate Menu"
 msgstr "Attiva menu"
 
 #: MainWindow.cpp:376
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Salva la disposizione delle schede su file"
+msgstr "Salva la disposizione delle schede..."
 
 #: MainWindow.cpp:385
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Carica disposizione delle schede da file"
+msgstr "Carica la disposizione delle schede..."
 
 #: MainWindow.cpp:618 MainWindow.cpp:635
 #, kde-format
@@ -1352,11 +1348,9 @@ msgstr "Modulo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Scorciatoia"
+msgstr "Scorciatoia:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1441,10 +1435,9 @@ msgid "Quick Commands"
 msgstr "Comandi rapidi"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Mostra comandi rapidi"
+msgstr "Mostra accesso rapido"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1568,12 +1561,12 @@ msgstr "Mostra il gestore SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Mostra accesso rapido per le azioni SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Voci SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
@@ -1689,9 +1682,7 @@ msgstr "Elimina la voce selezionata"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Scorciatoia"
 
@@ -2186,10 +2177,9 @@ msgid "&Select All"
 msgstr "&Seleziona tutto"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Seleziona &riga"
+msgstr "&Modalità di selezione"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3448,12 +3438,10 @@ msgid "Line numbers "
 msgstr "Numeri di riga "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Salva la disposizione delle schede su file"
+msgstr "Salva la disposizione delle schede"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3482,12 +3470,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Carica disposizione delle schede da file"
+msgstr "Carica la disposizione delle schede"
 
 #: Vt102Emulation.cpp:2319
 #, kde-format
