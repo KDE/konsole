@@ -17,14 +17,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-11 00:50+0000\n"
-"PO-Revision-Date: 2022-10-02 20:12+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2022-10-13 09:31+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 22.04.3\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -36,14 +36,14 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 "Денис Першин,Герман Жеболдов,Григорий Мохин,Леонид Кантер,Андрей Черепанов,"
-"Александр Яворский,Ярослав Сидловский"
+"Александр Яворский,Ярослав Сидловский,Олеся Герасименко"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "dyp@perchine.com,Hermann.Zheboldov@shq.ru,mok@kde.ru,leon@asplinux.ru,"
-"skull@kde.ru,kekcuha@gmail.com,zawertun@gmail.com"
+"skull@kde.ru,kekcuha@gmail.com,zawertun@gmail.com,translation-team@basealt.ru"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -657,9 +657,9 @@ msgstr "Не масштабировать"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, kde-format
+#, fuzzy, kde-format
 msgid "Wallpaper flip:"
-msgstr "Поворот фонового изображения:"
+msgstr "Масштабирование фонового изображения:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
@@ -669,15 +669,15 @@ msgstr "Не поворачивать"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, kde-format
+#, fuzzy, kde-format
 msgid "Horizontal"
-msgstr "По горизонтали:"
+msgstr "Привязка по горизонтали:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, kde-format
+#, fuzzy, kde-format
 msgid "Vertical"
-msgstr "По вертикали:"
+msgstr "Привязка по вертикали:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
@@ -1273,16 +1273,12 @@ msgstr "Открыть меню"
 
 #: MainWindow.cpp:376
 #, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Сохранить макет вкладки в файл"
 
 #: MainWindow.cpp:385
 #, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Загрузить макет вкладки из файла"
@@ -1367,8 +1363,6 @@ msgstr "Форма"
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
 #, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
 msgid "Shortcut:"
 msgstr "Комбинация клавиш"
 
@@ -1420,17 +1414,15 @@ msgstr "Команда"
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:325
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "Предупреждение: "
+msgstr "Предупреждения"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "Запустить"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:258
@@ -1458,7 +1450,6 @@ msgstr "Быстрые команды"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, fuzzy, kde-format
-#| msgid "Show Quick Commands"
 msgid "Show Quick Access"
 msgstr "Показывать быстрые команды"
 
@@ -1479,12 +1470,9 @@ msgid "Please fix all the warnings before trying to run this script"
 msgstr "Перед запуском сценария исправьте все предупреждения"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:207
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "There are %1 open terminals in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "В этом окне открыто несколько терминалов (%1). Действительно выйти?"
+msgstr "В сценарии имеются ошибки. Запустить его несмотря на это?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:208
 #, kde-format
@@ -1543,13 +1531,13 @@ msgid "Warnings (*)"
 msgstr "Предупреждения (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "Конфигурация SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "По умолчанию"
@@ -1707,8 +1695,6 @@ msgstr "Удалить выбранную запись"
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
 #, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
 msgid "Shortcut"
 msgstr "Комбинация клавиш"
 
@@ -2174,19 +2160,17 @@ msgstr "Копировать"
 #: session/SessionController.cpp:678
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Копировать без строки запроса"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
-msgstr "Копировать ввод"
+msgstr "Копировать ввод пользователя"
 
 #: session/SessionController.cpp:690
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "Копировать ввод"
+msgstr "Копировать вывод команды"
 
 #: session/SessionController.cpp:705
 #, kde-format
@@ -2205,7 +2189,6 @@ msgstr "&Выделить всё"
 
 #: session/SessionController.cpp:722
 #, fuzzy, kde-format
-#| msgid "Select &Line"
 msgid "Select &Mode"
 msgstr "Выделить &строку"
 
@@ -3119,7 +3102,7 @@ msgstr "Активация:"
 #: settings/ThumbnailsSettings.ui:63
 #, kde-format
 msgid "Mouse hover plus"
-msgstr "При наведении курсора мыши с нажатием:"
+msgstr "При наведении указателя мыши с нажатием:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
 #: settings/ThumbnailsSettings.ui:70
@@ -3287,10 +3270,10 @@ msgid "Split View Top/Bottom"
 msgstr "Разделить окно по горизонтали"
 
 #: ViewManager.cpp:129
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Разделить окно автоматически"
+msgstr "Разделить окно по горизонтали"
 
 #: ViewManager.cpp:139
 #, kde-format
@@ -3422,7 +3405,7 @@ msgstr "Переместить вкладку влево"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Настроить семантическую интеграцию (bash)"
 
 #: ViewManager.cpp:291
 #, kde-format
@@ -3440,7 +3423,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Одинаковый размер во всех представлениях"
 
 #: ViewManager.cpp:314
 #, kde-format
@@ -3449,33 +3432,29 @@ msgid "Switch to Tab %1"
 msgstr "Переключиться на вкладку %1"
 
 #: ViewManager.cpp:527
-#, kde-format
+#, fuzzy, kde-format
 msgid "Semantic hints "
-msgstr "Семантические подсказки "
+msgstr "Семантические подсказки:"
 
 #: ViewManager.cpp:543
-#, kde-format
+#, fuzzy, kde-format
 msgid "Line numbers "
-msgstr "Номера строк "
+msgstr "Количество сохраняемых строк: "
 
 #: ViewManager.cpp:1074
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Сохранение макета вкладок"
+msgstr "Сохранить макет вкладки в файл"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, fuzzy, kde-format
-#| msgid "Konsole View Layout (*.json)"
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Макет окна Konsole (*.json)"
 
 #: ViewManager.cpp:1089
 #, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the Layout.\n"
-#| "%1"
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
@@ -3486,9 +3465,6 @@ msgstr ""
 
 #: ViewManager.cpp:1150
 #, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when loading the Layout.\n"
-#| "%1"
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
@@ -3498,10 +3474,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Загрузка макета вкладок"
+msgstr "Загрузить макет вкладки из файла"
 
 #: Vt102Emulation.cpp:2319
 #, kde-format
@@ -3940,7 +3916,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:791
 #, fuzzy, kde-format
-#| msgid "Font:"
 msgid "Emoji Font:"
 msgstr "Шрифт:"
 
@@ -4195,10 +4170,9 @@ msgstr "Команда для запуска редактора текста"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:39
-#, fuzzy, kde-format
-#| msgid "Current Tab Settings"
+#, kde-format
 msgid "General Settings"
-msgstr "Параметры текущей вкладки"
+msgstr "Основные параметры"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:63
@@ -4319,39 +4293,33 @@ msgstr "Режим вывода сигналов:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:374
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic Integration"
-msgstr "Обработка текста"
+msgstr "Семантическая интеграция"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Эмуляция стрелок «вверх» и «вниз»"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
 #: widgets/EditProfileGeneralPage.ui:387
-#, fuzzy, kde-format
-#| msgid "Enable URL hints"
+#, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr "Выделять ссылки"
+msgstr "Активация ссылок"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #: widgets/EditProfileGeneralPage.ui:397
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgctxt "Never"
 msgid "Never"
 msgstr "Никогда"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #: widgets/EditProfileGeneralPage.ui:407
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Всегда"
@@ -4360,13 +4328,13 @@ msgstr "Всегда"
 #: widgets/EditProfileGeneralPage.ui:423
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Семантические подсказки:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:433
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Нажатие кнопки мыши в строке ввода перемещает указатель"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
@@ -4701,7 +4669,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Предварительный просмотр цветов при наведении указателя мыши"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
@@ -4869,14 +4837,7 @@ msgstr ""
 "или снижению производительности компьютера."
 
 #: widgets/HistorySizeWidget.cpp:69
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "When using this option, the scrollback data will be written unencrypted "
-#| "to temporary files. Those temporary files will be deleted automatically "
-#| "when Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → "
-#| "Configure Konsole → File Location</emphasis> to select the location of "
-#| "the temporary files."
+#, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "When using this option, the scrollback data will be written unencrypted to "
@@ -4887,9 +4848,9 @@ msgid ""
 msgstr ""
 "В этом режиме весь журнал вывода будет храниться на диске, во временных "
 "незашифрованных файлах. При корректном завершении работы Konsole эти файлы "
-"будут автоматически удаляться.<nl/>Каталог для этих временных файлов можно "
-"выбрать, открыв диалог настройки (<emphasis>Настройка → Настроить Konsole…</"
-"emphasis>) на вкладке «Расположение файлов»."
+"будут автоматически удаляться.<nl/>Каталог для этих временных файлов "
+"возможно указать в соответствующем разделе настройки: <emphasis>Настройка → "
+"Настроить Konsole… → Временные файлы</emphasis>."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
@@ -5217,13 +5178,11 @@ msgid "Close Tab"
 msgstr "Закрыть вкладку"
 
 #, fuzzy
-#~| msgid "Save File"
 #~ msgctxt "@title:window"
 #~ msgid "Save File"
 #~ msgstr "Сохранение файла"
 
 #, fuzzy
-#~| msgid "Open File"
 #~ msgctxt "@title:window"
 #~ msgid "Open File"
 #~ msgstr "Открыть файл"
@@ -5273,7 +5232,6 @@ msgstr "Закрыть вкладку"
 #~ msgstr "Показывать меню в каждом окне"
 
 #, fuzzy
-#~| msgid "Open File Manager"
 #~ msgid "Hide SSH Manager"
 #~ msgstr "Открыть диспетчер файлов"
 
@@ -5282,7 +5240,6 @@ msgstr "Закрыть вкладку"
 #~ msgstr "<p>Перед сохранением профиля на диск укажите его название.</p>"
 
 #, fuzzy
-#~| msgid " (Default)"
 #~ msgctxt "@label:textbox Name of the current default profile"
 #~ msgid " (Default)"
 #~ msgstr " (Стандартный)"
@@ -5599,14 +5556,11 @@ msgstr "Закрыть вкладку"
 #~ msgstr "Щёлкните, чтобы переименовать профиль"
 
 #, fuzzy
-#~| msgctxt "@title"
-#~| msgid "Konsole"
 #~ msgctxt "@title"
 #~ msgid "Demo KonsolePart"
 #~ msgstr "Konsole"
 
 #, fuzzy
-#~| msgid "(c) 1997-2015, The Konsole Developers"
 #~ msgctxt "@info:credit"
 #~ msgid "(c) 2017, The Konsole Developers"
 #~ msgstr "© Разработчики Konsole, 1997-2015"
@@ -5687,7 +5641,6 @@ msgstr "Закрыть вкладку"
 #~ msgstr "Путь к файлу фонового изображения"
 
 #, fuzzy
-#~| msgid "Edit Profile"
 #~ msgid "&Switch Profile"
 #~ msgstr "Изменить профиль"
 
@@ -5792,7 +5745,6 @@ msgstr "Закрыть вкладку"
 #~ msgstr "Дополнительные символы слова: "
 
 #, fuzzy
-#~| msgid "Clear && Reset"
 #~ msgid "Clear and Reset"
 #~ msgstr "Удалить весь в&ывод сеанса и сбросить"
 

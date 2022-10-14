@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-11 00:50+0000\n"
-"PO-Revision-Date: 2022-10-04 21:42+0530\n"
+"PO-Revision-Date: 2022-10-13 21:33+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -1336,11 +1336,9 @@ msgstr "படிவம்"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "சுருக்குவழி"
+msgstr "சுருக்குவழி:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1425,10 +1423,9 @@ msgid "Quick Commands"
 msgstr "விரை கட்டளைகள்"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "விரை கட்டளைகளை காட்டு"
+msgstr "விரை அணுகலைக் காட்டு"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1552,12 +1549,12 @@ msgstr "SSH மேலாளியை காட்டு"
 #: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "SSH செயல்களை விரைவாக அணுக உதவு"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH பதிவுகள்"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
@@ -1671,9 +1668,7 @@ msgstr "தேர்ந்தெடுத்துள்ள பதிவை ந�
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "சுருக்குவழி"
 
