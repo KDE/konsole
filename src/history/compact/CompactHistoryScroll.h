@@ -70,7 +70,7 @@ private:
      * The size of this buffer is the number of lines we have.
      */
     std::vector<LineData> _lineDatas;
-    unsigned int _indexBias;
+    unsigned int _indexBias = 0;
 
     /**
      * Max number of lines we can hold
