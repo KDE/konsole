@@ -339,11 +339,14 @@ void EditProfileDialog::updateCaption(const Profile::Ptr &profile)
     if (group && group->profiles().count() > 1) {
         QString caption = groupProfileNames(group, MAX_GROUP_CAPTION_LENGTH);
         setWindowTitle(i18np("Editing profile: %2", "Editing %1 profiles: %2", group->profiles().count(), caption));
+        updateButtonApply();
     } else {
         if (_profileState == EditProfileDialog::NewProfile) {
             setWindowTitle(i18n("Create New Profile"));
+            _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
         } else {
             setWindowTitle(i18n("Edit Profile \"%1\"", profile->name()));
+            updateButtonApply();
         }
     }
 }
