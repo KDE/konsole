@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-11 00:50+0000\n"
+"POT-Creation-Date: 2022-10-17 00:50+0000\n"
 "PO-Revision-Date: 2012-12-20 16:07+0700\n"
 "Last-Translator: sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros>\n"
@@ -39,7 +39,7 @@ msgstr "ឯកសារ​"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:288
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
 #: plugins/SSHManager/sshwidget.ui:366
 #, kde-format
 msgid "Edit"
@@ -1261,49 +1261,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "សូម​អរគុណ​ចំពោះ​អ្នក​ផ្សេង​ទៀត​ជាច្រើន ។\n"
 
-#: MainWindow.cpp:314
+#: MainWindow.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "ផ្ទាំង​​ថ្មី"
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:325
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "ក្លូន​ផ្ទាំង"
 
-#: MainWindow.cpp:331
+#: MainWindow.cpp:332
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "បង្អួច​ថ្មី"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "បិទ​បង្អួច"
 
-#: MainWindow.cpp:343
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "ចំណាំ"
 
-#: MainWindow.cpp:364
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "គ្រប់គ្រង​ទម្រង់..."
 
-#: MainWindow.cpp:370
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "ធ្វើ​ឲ្យ​ម៉ឺនុយ​សកម្ម​"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:377
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -1311,13 +1311,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "ផ្លាស់​ទី​ផ្ទាំង​​ទៅ​ឆ្វេង"
 
-#: MainWindow.cpp:385
+#: MainWindow.cpp:386
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:618 MainWindow.cpp:635
+#: MainWindow.cpp:623 MainWindow.cpp:648
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1329,13 +1329,13 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "មាន​ផ្ទាំង %1 បើក​នៅ​ក្នុង​បង្អួច​នេះ ។ តើ​អ្នក​នៅតែ​ចង់​បោះបង់​ឬ ?"
 
-#: MainWindow.cpp:624 MainWindow.cpp:641 MainWindow.cpp:655
+#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "បិទ​ការ​អះអាង"
 
-#: MainWindow.cpp:625 MainWindow.cpp:642 MainWindow.cpp:656
+#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Close Window"
@@ -1343,7 +1343,7 @@ msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "បិទ​បង្អួច"
 
-#: MainWindow.cpp:643 MainWindow.cpp:657
+#: MainWindow.cpp:656 MainWindow.cpp:674
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Close Current Tab"
@@ -1351,7 +1351,7 @@ msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "បិទ​ផ្ទាំង​បច្ចុប្បន្ន"
 
-#: MainWindow.cpp:652
+#: MainWindow.cpp:669
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1361,7 +1361,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "មាន​ផ្ទាំង %1 បើក​នៅ​ក្នុង​បង្អួច​នេះ ។ តើ​អ្នក​នៅតែ​ចង់​បោះបង់​ឬ ?"
 
-#: MainWindow.cpp:759 Part.cpp:297
+#: MainWindow.cpp:784 Part.cpp:297
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1369,25 +1369,25 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "ទម្រង់​ថ្មី​"
 
-#: MainWindow.cpp:776
+#: MainWindow.cpp:801
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ទូទៅ"
 
-#: MainWindow.cpp:787
+#: MainWindow.cpp:812
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:792
+#: MainWindow.cpp:817
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:797
+#: MainWindow.cpp:822
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1465,7 +1465,7 @@ msgstr "ពាក្យ​បញ្ជា ៖"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:325
+#: plugins/QuickCommands/quickcommandswidget.cpp:347
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1514,18 +1514,18 @@ msgstr ""
 msgid "Show Quick Commands"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:166
-#: plugins/QuickCommands/quickcommandswidget.cpp:177
+#: plugins/QuickCommands/quickcommandswidget.cpp:168
+#: plugins/QuickCommands/quickcommandswidget.cpp:179
 #, kde-format
 msgid "A duplicate item exists"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:183
+#: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:207
+#: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1534,57 +1534,57 @@ msgstr ""
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "មាន​ផ្ទាំង %1 បើក​នៅ​ក្នុង​បង្អួច​នេះ ។ តើ​អ្នក​នៅតែ​ចង់​បោះបង់​ឬ ?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:234
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:245
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:238
+#: plugins/QuickCommands/quickcommandswidget.cpp:254
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:268
+#: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:294
 #, kde-format
 msgid "Command can not be empty"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:292
+#: plugins/QuickCommands/quickcommandswidget.cpp:314
 #, fuzzy, kde-format
 #| msgid "Rename Tab"
 msgid "Rename"
 msgstr "ប្តូរ​ឈ្មោះ​ផ្ទាំង​"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:296
+#: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:327
+#: plugins/QuickCommands/quickcommandswidget.cpp:349
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1615,7 +1615,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:376
 #: plugins/SSHManager/sshmanagermodel.cpp:409
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "SSH Config"
@@ -1691,65 +1691,65 @@ msgid ""
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:243
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Hostname"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
 #, kde-format
 msgid "Missing Name"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:403
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "Missing Folder"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:449
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, fuzzy, kde-format
 #| msgid "Double click to change shortcut"
 msgid "Double click to change the folder name."
 msgstr "ចុច​​ទ្វេដង ដើម្បី​​ប្ដូរ​ផ្លូវកាត់"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, fuzzy, kde-format
 #| msgid "Do not close the initial session automatically when it ends."
 msgid "You can't delete an automatically added entry."
 msgstr "កុំបិទ​សម័យ​ចាប់ផ្ដើម​ដោយស្វ័យប្រវត្តិ នៅពេល​វា​ចប់ ។"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile(s)"
 msgid "Delete selected entry"
@@ -1953,7 +1953,7 @@ msgstr "បោះពុម្ព របៀប​ងាយស្រួល (អត
 msgid "&Scale output"
 msgstr "លទ្ធផល​មាត្រដ្ឋាន"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:459
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile"
 msgstr "ទម្រង់​លំនាំដើម"
@@ -2462,26 +2462,26 @@ msgid ""
 "want to close it?"
 msgstr "បច្ចុប្បន្ន កម្មវិធី '%1' កំពុង​​ដំណើរការ​​នៅ​ក្នុង​សម័យ​នេះ ។ តើ​អ្នក​ពិតជា​ចង់​បិទ​វា​ឬ ?"
 
-#: session/SessionController.cpp:1087 session/SessionController.cpp:1122
+#: session/SessionController.cpp:1091 session/SessionController.cpp:1134
 #, kde-format
 msgid "Confirm Close"
 msgstr "បិទ​ការ​អះអាង"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1092
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "បិទ​ផ្ទាំង​"
 
-#: session/SessionController.cpp:1111
+#: session/SessionController.cpp:1119
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "កម្មវិធី​នៅ​ក្នុង​សម័យ​នេះ​មិន​គួរ​ត្រូវ​បាន​បិទ​ទេ ។ តើ​អ្នក​ពិតជា​ចង់​បិទ​វា​ដោយ​បង្ខំ​មែន​ឬ ?"
 
-#: session/SessionController.cpp:1115
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2489,24 +2489,24 @@ msgid ""
 msgstr ""
 "កម្មវិធី '%1' ដែល​មាន​នៅ​ក្នុង​សម័យ​នេះ​មិន​គួរ​ត្រូវ​បាន​បិទ​ទេ ។ តើ​អ្នក​ពិតជា​ចង់​បិទ​វា​ដោយ​បង្ខំ​មែន​ឬ ?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1135
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1959
+#: session/SessionController.cpp:1975
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2029
+#: session/SessionController.cpp:2045
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "រក្សាទុក​ការទាញយក ZModem ទៅ​​ក្នុង..."
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2055
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2516,13 +2516,13 @@ msgstr ""
 "<p>ការ​ប៉ុនប៉ង​ផ្ទេរ​ឯកសារ​របស់ ZModem ត្រូវ​បាន​រក​ឃើញ ប៉ុន្តែ​រក​ឃើញ​កម្មវិធី ZModem មិន​សមរម្យ​នៅ​ក្នុង​"
 "ប្រព័ន្ធ​នេះ ។</p><p>អ្នក​អាច​ដំឡើង​កញ្ចប់ 'rzsz' ឬ 'lrzsz' ។</p>"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2065
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>សម័យ​បច្ចុប្បន្ន​មាន​ការ​ផ្ទេរឯកសារ ZModem កំពុង​ដំណើរការ​រួច​ហើយ ។</p>"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2075
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2531,7 +2531,7 @@ msgstr ""
 "<p>រក​មិនឃើញ​កម្មវិធី ZModem ដែល​សមរម្យ​នៅ​ក្នុង​ប្រព័ន្ធ​នេះ​ទេ ។</p><p>អ្នក​អាច​ដំឡើង​​កញ្ចប់  "
 "'rzsz' ឬ 'lrzsz' ។</p>"
 
-#: session/SessionController.cpp:2064
+#: session/SessionController.cpp:2080
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ជ្រើស​ឯកសារ​សម្រាប់​ផ្ទុក ZModem ឡើង"
@@ -3245,98 +3245,98 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr "បើក​ការ​បង្កើន​ល្បឿន​ម៉ឺនុយ"
 
-#: terminalDisplay/TerminalDisplay.cpp:652
+#: terminalDisplay/TerminalDisplay.cpp:653
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "ទំហំ ៖ %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2167
+#: terminalDisplay/TerminalDisplay.cpp:2168
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "Confirm Paste"
 msgstr "បិទ​ការ​អះអាង"
 
-#: terminalDisplay/TerminalDisplay.cpp:2201
+#: terminalDisplay/TerminalDisplay.cpp:2202
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2234
+#: terminalDisplay/TerminalDisplay.cpp:2239
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "បិទ​ការ​អះអាង"
 
-#: terminalDisplay/TerminalDisplay.cpp:2235
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "កំណត់​ទស្សន៍ទ្រនិច​ដើម្បី​ផ្គូផ្គង​តួ​អក្សរ​បច្ចុប្បន្ន"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "បិទភ្ជាប់​ជម្រើស"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2466
+#: terminalDisplay/TerminalDisplay.cpp:2479
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3349,17 +3349,17 @@ msgstr ""
 "<qt>លទ្ធផលត្រូវ​បានផ្អាក <a href=\"http://en.wikipedia.org/wiki/XON\">ផ្អាក​</a> ដោយ​"
 "ចុច​បញ្ជា(Crtl)​+S ។ ចុច​<b>បញ្ជា​(Ctrl)+Q</b> ដើម្បី​ធ្វើ​បន្ត​​ ។</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2521
+#: terminalDisplay/TerminalDisplay.cpp:2534
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2911
+#: terminalDisplay/TerminalDisplay.cpp:2924
 #, kde-format
 msgid "Change &Directory To"
 msgstr "ផ្លាស់ប្ដូរ​ថត​ទៅកាន់"
 
-#: terminalDisplay/TerminalDisplay.cpp:2944
+#: terminalDisplay/TerminalDisplay.cpp:2957
 #, kde-format
 msgid "&Paste Location"
 msgstr "បិទភ្ជាប់​ទីតាំង"
@@ -4177,18 +4177,18 @@ msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "កែសម្រួល​ទម្រង់ %1 ៖ %2"
 
-#: widgets/EditProfileDialog.cpp:344
+#: widgets/EditProfileDialog.cpp:345
 #, fuzzy, kde-format
 #| msgid "&New Profile..."
 msgid "Create New Profile"
 msgstr "ទម្រង់​ថ្មី..."
 
-#: widgets/EditProfileDialog.cpp:346
+#: widgets/EditProfileDialog.cpp:348
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "កែ​សម្រួល​ទម្រង់ \"%1\""
 
-#: widgets/EditProfileDialog.cpp:436
+#: widgets/EditProfileDialog.cpp:439
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4197,7 +4197,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] ""
 
-#: widgets/EditProfileDialog.cpp:438
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4206,72 +4206,72 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] ""
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, fuzzy, kde-format
 #| msgid "&Paste Location"
 msgid "System Notifications"
 msgstr "បិទភ្ជាប់​ទីតាំង"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, fuzzy, kde-format
 #| msgctxt "@info:credit"
 #| msgid "Visual effects"
 msgid "Visual Bell"
 msgstr "Visual effects"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:460
 #, fuzzy, kde-format
 #| msgid "Set the selected profile as the default for new terminal sessions"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "កំណត់​ទម្រង់​ដែល​បាន​ជ្រើស​ជា​លំនាំ​ដើម​សម្រាប់​សម័យ​ស្ថានីយ​ថ្មី"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgid "Edit Environment"
 msgstr "កែ​សម្រួល​បរិស្ថាន​"
 
-#: widgets/EditProfileDialog.cpp:515
+#: widgets/EditProfileDialog.cpp:518
 #, fuzzy, kde-format
 #| msgid "One environment variable per line"
 msgid "One environment variable per line"
 msgstr "មួយ​អថេរ​បរិស្ថាន​ក្នុង​មួយ​ជួរ"
 
-#: widgets/EditProfileDialog.cpp:546
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] "វិនាទី"
 
-#: widgets/EditProfileDialog.cpp:645
+#: widgets/EditProfileDialog.cpp:648
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "ជ្រើស​ថត​ដំបូង​"
 
-#: widgets/EditProfileDialog.cpp:1169
+#: widgets/EditProfileDialog.cpp:1172
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1348
+#: widgets/EditProfileDialog.cpp:1351
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "ពណ៌​ចម្រុះ​នេះ​មាន​ផ្ទៃ​ខាងក្រោយ​ថ្លា​ ដែល​មិន​ត្រូវ​បាន​គាំទ្រ​នៅ​លើ​ផ្ទៃ​តុ​របស់​អ្នក​ទេ"
 
-#: widgets/EditProfileDialog.cpp:1354
+#: widgets/EditProfileDialog.cpp:1357
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4280,7 +4280,7 @@ msgstr ""
 "កុងសូល​បាន​ចាប់ផ្ដើម​នៅ​មុន​ពេល​បើក​បែបផែន​ផ្ទៃតុ ។ អ្នក​ចាំបាច់​ត្រូវតែ​ចាប់ផ្ដើម​កុងសូល​ឡើងវិញ​ដើម្បី​ឃើញ​ផ្ទៃ​"
 "ខាងក្រោយ​ថ្លា ។"
 
-#: widgets/EditProfileDialog.cpp:1745
+#: widgets/EditProfileDialog.cpp:1748
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4297,7 +4297,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1758
+#: widgets/EditProfileDialog.cpp:1761
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

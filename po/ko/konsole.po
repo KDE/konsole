@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-11 00:50+0000\n"
+"POT-Creation-Date: 2022-10-17 00:50+0000\n"
 "PO-Revision-Date: 2022-10-03 16:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-i18n-doc@kde.org>\n"
@@ -38,7 +38,7 @@ msgstr "파일"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:288
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
 #: plugins/SSHManager/sshwidget.ui:366
 #, kde-format
 msgid "Edit"
@@ -1201,49 +1201,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "이 외의 많은 사람들에게 감사드립니다.\n"
 
-#: MainWindow.cpp:314
+#: MainWindow.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "새 탭(&N)"
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:325
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "탭 복제(&C)"
 
-#: MainWindow.cpp:331
+#: MainWindow.cpp:332
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "새 창(&W)"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "창 닫기"
 
-#: MainWindow.cpp:343
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "책갈피(&B)"
 
-#: MainWindow.cpp:364
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "프로필 관리..."
 
-#: MainWindow.cpp:370
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "메뉴 활성화"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:377
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -1251,7 +1251,7 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "파일에 탭 레이아웃 저장하기"
 
-#: MainWindow.cpp:385
+#: MainWindow.cpp:386
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"
@@ -1259,7 +1259,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "파일에서 탭 레이아웃 불러오기"
 
-#: MainWindow.cpp:618 MainWindow.cpp:635
+#: MainWindow.cpp:623 MainWindow.cpp:648
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1267,55 +1267,55 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "현재 창에 프로세스 %1개가 실행 중입니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:624 MainWindow.cpp:641 MainWindow.cpp:655
+#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "닫기 확인"
 
-#: MainWindow.cpp:625 MainWindow.cpp:642 MainWindow.cpp:656
+#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "창 닫기(&W)"
 
-#: MainWindow.cpp:643 MainWindow.cpp:657
+#: MainWindow.cpp:656 MainWindow.cpp:674
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "현재 탭 닫기(&T)"
 
-#: MainWindow.cpp:652
+#: MainWindow.cpp:669
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "현재 창에 터미널 %1개가 열려 있습니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:759 Part.cpp:297
+#: MainWindow.cpp:784 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "프로필"
 
-#: MainWindow.cpp:776
+#: MainWindow.cpp:801
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "일반"
 
-#: MainWindow.cpp:787
+#: MainWindow.cpp:812
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "탭 표시줄/구분자"
 
-#: MainWindow.cpp:792
+#: MainWindow.cpp:817
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "임시 파일"
 
-#: MainWindow.cpp:797
+#: MainWindow.cpp:822
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1388,7 +1388,7 @@ msgstr "명령"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:325
+#: plugins/QuickCommands/quickcommandswidget.cpp:347
 #, kde-format
 msgid "Warnings"
 msgstr "경고"
@@ -1434,34 +1434,34 @@ msgstr "빠른 명령 표시"
 msgid "Show Quick Commands"
 msgstr "빠른 명령 표시"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:166
-#: plugins/QuickCommands/quickcommandswidget.cpp:177
+#: plugins/QuickCommands/quickcommandswidget.cpp:168
+#: plugins/QuickCommands/quickcommandswidget.cpp:179
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "중복된 항목이 있음"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:183
+#: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr "이 스크립트를 실행하기 전에 경고를 수정하십시오"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:207
+#: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "스크립트에 오류가 있습니다. 계속 실행하시겠습니까?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
 msgstr "셸 오류"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "실행"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:234
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1470,38 +1470,38 @@ msgstr ""
 "설정 여러 개가 들어 있는 그룹 %1을(를)\n"
 "삭제하려고 합니다. 계속 진행하시겠습니까?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:245
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "%1을(를) 삭제하려고 합니다. 계속 진행하시겠습니까?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:238
+#: plugins/QuickCommands/quickcommandswidget.cpp:254
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "빠른 명령 설정 삭제"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:268
+#: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "제목을 비워 둘 수 없음"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:294
 #, kde-format
 msgid "Command can not be empty"
 msgstr "명령을 비워 둘 수 없음"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:292
+#: plugins/QuickCommands/quickcommandswidget.cpp:314
 #, kde-format
 msgid "Rename"
 msgstr "이름 바꾸기"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:296
+#: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:327
+#: plugins/QuickCommands/quickcommandswidget.cpp:349
 #, kde-format
 msgid "Warnings (*)"
 msgstr "경고(*)"
@@ -1528,7 +1528,7 @@ msgstr "%1은(는) SSH 항목의 폴더임"
 #: plugins/SSHManager/sshmanagermodel.cpp:376
 #: plugins/SSHManager/sshmanagermodel.cpp:409
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH 설정"
@@ -1603,63 +1603,63 @@ msgstr ""
 "SSH 설정 여러 개가 들어 있는 폴더 %1을(를)\n"
 "삭제하려고 합니다. 계속 진행하시겠습니까?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:243
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH 설정 삭제"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Hostname"
 msgstr "호스트 이름이 지정되지 않았음"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
 #, kde-format
 msgid "Missing Name"
 msgstr "이름이 지정되지 않았음"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr "SSH 설정 사용을 선택했으면 SSH 키나 사용자 이름을 지정하지 마십시오."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:403
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "최소한 사용자 이름이나 SSH 키를 설정해야 함"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "Missing Folder"
 msgstr "폴더가 없음"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH 세션에는 프로필을 지정해야 함"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "이 폴더를 삭제할 수 없음"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:449
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "폴더와 그 모든 내용 삭제"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "폴더 이름을 바꾸려면 두 번 클릭하십시오."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "자동으로 추가된 항목을 삭제할 수 없습니다."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, kde-format
 msgid "Delete selected entry"
 msgstr "선택한 항목 삭제"
@@ -1853,7 +1853,7 @@ msgstr "프린터 친화 모드 (검은 텍스트, 배경색 없음)(&F)"
 msgid "&Scale output"
 msgstr "출력 크기 조정(&S)"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:459
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile"
 msgstr "기본 프로필"
@@ -2353,18 +2353,18 @@ msgid ""
 "want to close it?"
 msgstr "이 세션에서 프로그램 '%1'이(가) 실행 중입니다. 닫으시겠습니까?"
 
-#: session/SessionController.cpp:1087 session/SessionController.cpp:1122
+#: session/SessionController.cpp:1091 session/SessionController.cpp:1134
 #, kde-format
 msgid "Confirm Close"
 msgstr "닫기 확인"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1092
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "프로그램 닫기"
 
-#: session/SessionController.cpp:1111
+#: session/SessionController.cpp:1119
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2372,7 +2372,7 @@ msgid ""
 msgstr ""
 "이 세션에서 실행 중인 프로그램이 죽지 않습니다. 강제로 종료하시겠습니까?"
 
-#: session/SessionController.cpp:1115
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2381,23 +2381,23 @@ msgstr ""
 "이 세션에서 실행 중인 프로그램 '%1'이(가) 죽지 않습니다. 강제로 종료하시겠습"
 "니까?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1135
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "프로그램 죽이기"
 
-#: session/SessionController.cpp:1959
+#: session/SessionController.cpp:1975
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "다음으로 현재 폴더 열기"
 
-#: session/SessionController.cpp:2029
+#: session/SessionController.cpp:2045
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "다른 이름으로 ZModem 다운로드 저장..."
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2055
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2408,13 +2408,13 @@ msgstr ""
 "웨어를 찾을 수 없습니다.</p><p>'rzsz' 또는 'lrzsz' 패키지를 설치해 보십시오."
 "</p>"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2065
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>현재 세션에서 ZModem 파일 전송이 진행 중입니다.</p>"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2075
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2423,7 +2423,7 @@ msgstr ""
 "<p>시스템에서 ZModem 소프트웨어를 찾을 수 없습니다.</p><p>'rzsz' 또는 "
 "'lrzsz' 패키지를 설치해 보십시오.</p>"
 
-#: session/SessionController.cpp:2064
+#: session/SessionController.cpp:2080
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem으로 업로드할 파일 선택"
@@ -3098,63 +3098,63 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "축소판 생성 활성화"
 
-#: terminalDisplay/TerminalDisplay.cpp:652
+#: terminalDisplay/TerminalDisplay.cpp:653
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "크기: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2167
+#: terminalDisplay/TerminalDisplay.cpp:2168
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "%1글자를 붙여 넣으시겠습니까?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, kde-format
 msgid "Confirm Paste"
 msgstr "붙여넣기 확인"
 
-#: terminalDisplay/TerminalDisplay.cpp:2201
+#: terminalDisplay/TerminalDisplay.cpp:2202
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "텍스트 끝/인터럽트: 현재 프로세스를 종료할 수도 있음"
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "전송 끝: 현재 프로세스를 종료할 수도 있음"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "벨: 들을 수 있는 경고 전송 시도"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Backspace"
 msgstr "백스페이스"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "장치 제어 3(DC3)/XOFF: 출력 일시 정지"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "대체/정지: 현재 프로세스 일시 정지"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "이스케이프: 터미널 상태 변경에 사용"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "파일 구분자/끝내기: 현재 프로세스를 종료할 수도 있음"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3163,31 +3163,31 @@ msgstr ""
 "붙여넣을 텍스트에 숨겨져 있는 제어 문자가 들어 있습니다. 해당 문자를 제거하시"
 "겠습니까?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2234
+#: terminalDisplay/TerminalDisplay.cpp:2239
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "붙여넣기 확인"
 
-#: terminalDisplay/TerminalDisplay.cpp:2235
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "제어 문자를 제외하고 붙여넣기(&W)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "모두 붙여넣기(&P)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "취소(&C)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2466
+#: terminalDisplay/TerminalDisplay.cpp:2479
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3198,17 +3198,17 @@ msgstr ""
 "Software_flow_control\">중단되었습니다</a>. <b>Ctrl+Q</b> 키를 눌러서 다시 시"
 "작하십시오.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2521
+#: terminalDisplay/TerminalDisplay.cpp:2534
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "이 터미널은 읽기 전용입니다."
 
-#: terminalDisplay/TerminalDisplay.cpp:2911
+#: terminalDisplay/TerminalDisplay.cpp:2924
 #, kde-format
 msgid "Change &Directory To"
 msgstr "다음으로 디렉터리 변경(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2944
+#: terminalDisplay/TerminalDisplay.cpp:2957
 #, kde-format
 msgid "&Paste Location"
 msgstr "붙여넣을 위치(&P)"
@@ -3984,17 +3984,17 @@ msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "프로필 %1개 편집: %2"
 
-#: widgets/EditProfileDialog.cpp:344
+#: widgets/EditProfileDialog.cpp:345
 #, kde-format
 msgid "Create New Profile"
 msgstr "새 프로필 만들기"
 
-#: widgets/EditProfileDialog.cpp:346
+#: widgets/EditProfileDialog.cpp:348
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" 프로필 편집"
 
-#: widgets/EditProfileDialog.cpp:436
+#: widgets/EditProfileDialog.cpp:439
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4003,7 +4003,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] "열"
 
-#: widgets/EditProfileDialog.cpp:438
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4012,60 +4012,60 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] "행"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Bell"
 msgstr "시스템 벨"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Notifications"
 msgstr "시스템 알림:"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Visual Bell"
 msgstr "벨 시각화"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "벨 이벤트 무시"
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:460
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1의 새 터미널 세션의 기본 프로필"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgid "Edit Environment"
 msgstr "환경 편집"
 
-#: widgets/EditProfileDialog.cpp:515
+#: widgets/EditProfileDialog.cpp:518
 #, kde-format
 msgid "One environment variable per line"
 msgstr "한 줄에 환경 변수 하나씩"
 
-#: widgets/EditProfileDialog.cpp:546
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] "초"
 
-#: widgets/EditProfileDialog.cpp:645
+#: widgets/EditProfileDialog.cpp:648
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "초기 디렉터리 선택"
 
-#: widgets/EditProfileDialog.cpp:1169
+#: widgets/EditProfileDialog.cpp:1172
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "배열 <resource>%1</resource>을(를) 불러올 수 없습니다."
 
-#: widgets/EditProfileDialog.cpp:1348
+#: widgets/EditProfileDialog.cpp:1351
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4074,7 +4074,7 @@ msgstr ""
 "이 색 배열은 현재 데스크톱 환경에서 지원하지 않는 투명 배경을 사용하고 있습니"
 "다"
 
-#: widgets/EditProfileDialog.cpp:1354
+#: widgets/EditProfileDialog.cpp:1357
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4083,7 +4083,7 @@ msgstr ""
 "데스크톱 효과를 활성화하기 전에 Konsole을 시작했습니다. 투명한 배경을 보려면 "
 "Konsole을 다시 시작해야 합니다."
 
-#: widgets/EditProfileDialog.cpp:1745
+#: widgets/EditProfileDialog.cpp:1748
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4111,7 +4111,7 @@ msgstr ""
 "PATH 또는 LINE이 명령에 없으면, 이 설정을 무시하고 \n"
 "기본 텍스트 편집기로 파일을 엽니다."
 
-#: widgets/EditProfileDialog.cpp:1758
+#: widgets/EditProfileDialog.cpp:1761
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "텍스트 편집기 사용자 정의 명령"

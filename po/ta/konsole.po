@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-11 00:50+0000\n"
+"POT-Creation-Date: 2022-10-17 00:50+0000\n"
 "PO-Revision-Date: 2022-10-13 21:33+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -37,7 +37,7 @@ msgstr "கோப்பு"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:288
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
 #: plugins/SSHManager/sshwidget.ui:366
 #, kde-format
 msgid "Edit"
@@ -1205,61 +1205,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "மேலும் பலருக்கும் நன்றி.\n"
 
-#: MainWindow.cpp:314
+#: MainWindow.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&புதிய கீற்று"
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:325
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&கீற்றை நகலெடு"
 
-#: MainWindow.cpp:331
+#: MainWindow.cpp:332
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "புதிய &சாளரம்"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "சாளரத்தை மூடு"
 
-#: MainWindow.cpp:343
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&நினைவுக்குறிகள்"
 
-#: MainWindow.cpp:364
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "பயன்முறைகளை நிர்வகி..."
 
-#: MainWindow.cpp:370
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "பட்டியை செயல்படுத்து"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:377
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "கீற்றுகளின் தளவமைப்பை சேமி..."
 
-#: MainWindow.cpp:385
+#: MainWindow.cpp:386
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "கீற்றுகளின் தளவமைப்பை ஏற்று..."
 
-#: MainWindow.cpp:618 MainWindow.cpp:635
+#: MainWindow.cpp:623 MainWindow.cpp:648
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1268,55 +1268,55 @@ msgid_plural ""
 msgstr[0] "இச்சாளரத்தில் ஓர் நிரல் இயங்கிக்கொண்டிருக்கிறது. உறுதியாக வெளியேற வேண்டுமா?"
 msgstr[1] "இச்சாளரத்தில் %1 நிரல்கள் இயங்கிக்கொண்டிருக்கின்றன. உறுதியாக வெளியேற வேண்டுமா?"
 
-#: MainWindow.cpp:624 MainWindow.cpp:641 MainWindow.cpp:655
+#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "வெளியேறுவதை உறுதிப்படுத்தல்"
 
-#: MainWindow.cpp:625 MainWindow.cpp:642 MainWindow.cpp:656
+#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&சாளரத்தை மூடு"
 
-#: MainWindow.cpp:643 MainWindow.cpp:657
+#: MainWindow.cpp:656 MainWindow.cpp:674
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "&தற்போதைய கீற்றை மூடு"
 
-#: MainWindow.cpp:652
+#: MainWindow.cpp:669
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "இச்சாளரத்தில் %1 முனையங்கள் திறந்துள்ளன. உறுதியாக வேளியேற வேண்டுமா?"
 
-#: MainWindow.cpp:759 Part.cpp:297
+#: MainWindow.cpp:784 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "பயன்முறைகள்"
 
-#: MainWindow.cpp:776
+#: MainWindow.cpp:801
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "பொது"
 
-#: MainWindow.cpp:787
+#: MainWindow.cpp:812
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "கீற்றுப்பட்டை / பிரிப்பான்கள்"
 
-#: MainWindow.cpp:792
+#: MainWindow.cpp:817
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "தற்காலிக கோப்புகள்"
 
-#: MainWindow.cpp:797
+#: MainWindow.cpp:822
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1387,7 +1387,7 @@ msgstr "கட்டளை"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:325
+#: plugins/QuickCommands/quickcommandswidget.cpp:347
 #, kde-format
 msgid "Warnings"
 msgstr "எச்சரிக்கைகள்"
@@ -1432,34 +1432,34 @@ msgstr "விரை அணுகலைக் காட்டு"
 msgid "Show Quick Commands"
 msgstr "விரை கட்டளைகளை காட்டு"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:166
-#: plugins/QuickCommands/quickcommandswidget.cpp:177
+#: plugins/QuickCommands/quickcommandswidget.cpp:168
+#: plugins/QuickCommands/quickcommandswidget.cpp:179
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "இதேபோல ஏற்கனவே ஒன்று உள்ளது"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:183
+#: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr "இச்சிறுநிரலை இயக்குமுன் அனைத்து எச்சரிக்கைகளையும் சரிசெய்யுங்கள்"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:207
+#: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "இச்சிறுநிரலில் சிக்கல்கள் உள்ளன. உறுதியாக இதை இயக்க வேண்டுமா?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
 msgstr "முனைய சிக்கல்கள்"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "இயக்கு"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:234
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1468,38 +1468,38 @@ msgstr ""
 "பல அமைப்புகளை கொண்ட %1\n"
 "என்ற குழுவை நீக்கப் போகிறீர்கள். உறுதியாக செய்யலாமா?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:245
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "%1 என்பதை நீக்கப் போகிறீர்கள். உறுதியாக செய்யலாமா?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:238
+#: plugins/QuickCommands/quickcommandswidget.cpp:254
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "விரை கட்டளைகளை நீக்குவது"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:268
+#: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "தலைப்பு காலியாக இருக்கக்கூடாது"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:294
 #, kde-format
 msgid "Command can not be empty"
 msgstr "கட்டளை காலியாக இருக்கக்கூடாது"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:292
+#: plugins/QuickCommands/quickcommandswidget.cpp:314
 #, kde-format
 msgid "Rename"
 msgstr "மறுபெயரிடு"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:296
+#: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
 msgid "Delete"
 msgstr "நீக்கு"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:327
+#: plugins/QuickCommands/quickcommandswidget.cpp:349
 #, kde-format
 msgid "Warnings (*)"
 msgstr "எச்சரிக்கைகள் (*)"
@@ -1526,7 +1526,7 @@ msgstr "%1, SSH பதிவுகளுக்கான அடைவாகும
 #: plugins/SSHManager/sshmanagermodel.cpp:376
 #: plugins/SSHManager/sshmanagermodel.cpp:409
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH அமைப்பு"
@@ -1603,65 +1603,65 @@ msgstr ""
 "பல்வேறு SSH அமைப்புகளை கொண்ட %1\n"
 "என்ற அடைவை நீக்கவிருக்கிறீர்கள். உறுதியாக நீக்கலாமா?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:243
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH அமைப்புகளை நீக்குவது"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Hostname"
 msgstr "புரவன் பெயரை காணவில்லை"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
 #, kde-format
 msgid "Missing Name"
 msgstr "பெயரை காணவில்லை"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "'SSH அமைப்புகளிலிருந்து' என்பது தேர்ந்தெடுக்கப்பட்டிருந்தால், SSH சாவியையோ பயனர்பெயரையோ "
 "குறிப்பிட வேண்டாம்."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:403
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "பயனர் பெயரோ SSH சாவியோ அமைக்கப்பட்டிருக்க வேண்டும்"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "Missing Folder"
 msgstr "அடைவை காணவில்லை"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH அமர்வுக்கான பயன்முறை அமைக்கப்பட்டிருக்க வேண்டும்"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "இவ்வடைவை நீக்க முடியாது"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:449
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "அடைவையும் அதிலுள்ளவற்றையும் நீக்கும்"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "அடைவின் பெயரை மாற்ற இரட்டை கிளிக் செய்யவும்."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "தானாக சேர்க்கப்பட்ட பதிவை நீக்க முடியாது."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, kde-format
 msgid "Delete selected entry"
 msgstr "தேர்ந்தெடுத்துள்ள பதிவை நீக்கு"
@@ -1853,7 +1853,7 @@ msgstr "&அச்சடிப்பதற்குரிய பயன்மு�
 msgid "&Scale output"
 msgstr "&வெளியீட்டின் அளவை மாற்று"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:459
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile"
 msgstr "இயல்பிருப்பு பயன்முறை"
@@ -2346,18 +2346,18 @@ msgid ""
 msgstr ""
 "இவ்வமர்வில் '%1' என்ற நிரல் இயங்கிக் கொண்டிருக்கிறது. உறுதியாக அதை மூட விரும்புகிறீர்களா?"
 
-#: session/SessionController.cpp:1087 session/SessionController.cpp:1122
+#: session/SessionController.cpp:1091 session/SessionController.cpp:1134
 #, kde-format
 msgid "Confirm Close"
 msgstr "மூடுவதை உறுதிசெய்யுங்கள்"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1092
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "நிரலை மூடு"
 
-#: session/SessionController.cpp:1111
+#: session/SessionController.cpp:1119
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2365,7 +2365,7 @@ msgid ""
 msgstr ""
 "இவ்வமர்விலுள்ள ஓர் நிரல் வெளியேற மறுக்கிறது. அதை கட்டாயப்படுத்தி முடிவடைய வைக்கலாமா?"
 
-#: session/SessionController.cpp:1115
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2374,23 +2374,23 @@ msgstr ""
 "இவ்வமர்விலுள்ள '%1' என்ற நிரல் வெளியேற மறுக்கிறது. அதை கட்டாயப்படுத்தி முடிவடைய "
 "வைக்கலாமா?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1135
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "நிரலை கட்டாயப்படுத்தி மூடு"
 
-#: session/SessionController.cpp:1959
+#: session/SessionController.cpp:1975
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "தற்போதைய அடைவை இதனால் திற"
 
-#: session/SessionController.cpp:2029
+#: session/SessionController.cpp:2045
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "&ZModem பதிவிறக்கத்தை இங்கு சேமி…"
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2055
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2405,7 +2405,7 @@ msgstr ""
 "மென்பொருள் அமைப்பில் இல்லை.\n"
 "<p> 'rzsz' அல்லது 'lrzsz' தொகுப்பை வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2065
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2413,7 +2413,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<பி>நடப்பு அமர்வில் ஏற்கனவே உள்ள Z மோடம் கோப்பு இடமாற்றம் நடைமுறையில் உள்ளது."
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2075
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2425,7 +2425,7 @@ msgstr ""
 "<p>பொருத்தமான Z மோடம் மென்பொருள் அமைப்பு கிடைக்கவில்லை.\n"
 " <p>'rzsz' அல்லது 'lrzsz '  தொகுப்பு வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2064
+#: session/SessionController.cpp:2080
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"
@@ -3105,64 +3105,64 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr "சிறுபட உருவாக்கத்தை இயக்கு"
 
-#: terminalDisplay/TerminalDisplay.cpp:652
+#: terminalDisplay/TerminalDisplay.cpp:653
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "அளவு: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2167
+#: terminalDisplay/TerminalDisplay.cpp:2168
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "%1 எழுத்தை உறுதியாக ஒட்ட வேண்டுமா?"
 msgstr[1] "%1 எழுத்துகளை உறுதியாக ஒட்ட வேண்டுமா?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, kde-format
 msgid "Confirm Paste"
 msgstr "ஒட்டுவதை உறுதிசெய்யுங்கள்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2201
+#: terminalDisplay/TerminalDisplay.cpp:2202
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: தற்போதைய பணியை வெளியேற செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission: தற்போதைய பணியை வெளியேற செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "மணி: கேட்க‍க்கூடிய எச்சரிக்கையை எழுப்ப முயற்சிக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: வெளியீட்டை முடக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: தற்போதைய பணியை இடைநிறுத்தலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: முனையத்தின் நிலையை மாற்றியமைக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: தற்போதைய பணியை ரத்து செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3170,31 +3170,31 @@ msgid ""
 msgstr ""
 "நீங்கள் ஒட்ட முயற்சிக்கும் உரை, மறைந்த கட்டுப்பாடு குறிகளைக் கொண்டது. அவற்றை நீக்க வேண்டுமா?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2234
+#: terminalDisplay/TerminalDisplay.cpp:2239
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "ஒட்டுவதை உறுதிசெய்யுங்கள்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2235
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&கட்டுப்பாடு குறிகளை நீக்கி ஒட்டு"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&அப்படியே ஒட்டு"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&ரத்து செய்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2466
+#: terminalDisplay/TerminalDisplay.cpp:2479
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3205,17 +3205,17 @@ msgstr ""
 "wiki/Software_flow_control\">இடைநிறுத்தப்பட்டுள்ளது</a>. வெளியீடு தொடர <b>Ctrl+Q</"
 "b> என்பதை அழுத்துங்கள்.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2521
+#: terminalDisplay/TerminalDisplay.cpp:2534
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "இம்முனையம் படிக்க மட்டும் கூடியது."
 
-#: terminalDisplay/TerminalDisplay.cpp:2911
+#: terminalDisplay/TerminalDisplay.cpp:2924
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&இந்த அடைவிற்கு மாறு"
 
-#: terminalDisplay/TerminalDisplay.cpp:2944
+#: terminalDisplay/TerminalDisplay.cpp:2957
 #, kde-format
 msgid "&Paste Location"
 msgstr "&இருப்பிடத்தை ஒட்டு"
@@ -3994,17 +3994,17 @@ msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "திருத்தப்படும் பயன்முறை: %2"
 msgstr[1] "திருத்தப்படும் %1 பயன்முறைகள்: %2"
 
-#: widgets/EditProfileDialog.cpp:344
+#: widgets/EditProfileDialog.cpp:345
 #, kde-format
 msgid "Create New Profile"
 msgstr "புதிய பயன்முறையை உருவாக்குவது"
 
-#: widgets/EditProfileDialog.cpp:346
+#: widgets/EditProfileDialog.cpp:348
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" என்ற பயன்முறையை திருத்துவது"
 
-#: widgets/EditProfileDialog.cpp:436
+#: widgets/EditProfileDialog.cpp:439
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4014,7 +4014,7 @@ msgid_plural " columns"
 msgstr[0] " நெடுவரிசை"
 msgstr[1] " நெடுவரிசைகள்"
 
-#: widgets/EditProfileDialog.cpp:438
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4024,42 +4024,42 @@ msgid_plural " rows"
 msgstr[0] " வரி"
 msgstr[1] " வரிகள்"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Bell"
 msgstr "கணினி மணி"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Notifications"
 msgstr "கணினி அறிவிப்புகள்"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Visual Bell"
 msgstr "காட்சிவழி மணி"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "மணியெழுப்பப்படுவதை பொருட்படுத்தாதே"
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:460
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1 என்பதிலுள்ள புதிய முனைய அமர்வுகளுக்கான இயல்பிருப்பு பயன்முறை"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgid "Edit Environment"
 msgstr "சூழலை திருத்துவது"
 
-#: widgets/EditProfileDialog.cpp:515
+#: widgets/EditProfileDialog.cpp:518
 #, kde-format
 msgid "One environment variable per line"
 msgstr "வரிக்கு ஒரு சூழல் மாறியை உள்ளிடுங்கள்"
 
-#: widgets/EditProfileDialog.cpp:546
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4067,18 +4067,18 @@ msgid_plural " seconds"
 msgstr[0] " நொடி"
 msgstr[1] " நொடிகள்"
 
-#: widgets/EditProfileDialog.cpp:645
+#: widgets/EditProfileDialog.cpp:648
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "முதலடைவை தேர்வு செய்வது"
 
-#: widgets/EditProfileDialog.cpp:1169
+#: widgets/EditProfileDialog.cpp:1172
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> என்ற திட்டத்தை ஏற்ற முடியவில்லை."
 
-#: widgets/EditProfileDialog.cpp:1348
+#: widgets/EditProfileDialog.cpp:1351
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4087,7 +4087,7 @@ msgstr ""
 "இந்நிறத்திட்டம் ஒளிபுகும் பின்பலத்தை பயன்படுத்துகிறது. அதை உங்கள் பணிமேடை ஆதரிப்பதுபோல் "
 "தெரியவில்லை."
 
-#: widgets/EditProfileDialog.cpp:1354
+#: widgets/EditProfileDialog.cpp:1357
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4096,7 +4096,7 @@ msgstr ""
 "பணிமேடை அசைவூட்டங்கள் இயக்கப்படுமுன் கான்சோல் துவக்கப்பட்டது. ஒளிபுகும் பின்புலத்தைப் பார்க்க "
 "நீங்கள் கான்சோலை மீள்துவக்க வேண்டும்."
 
-#: widgets/EditProfileDialog.cpp:1745
+#: widgets/EditProfileDialog.cpp:1748
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4123,7 +4123,7 @@ msgstr ""
 "PATH அல்லது LINE இக்கட்டளையில் இல்லாத பட்சத்தில், இத்தேர்வு பொருட்படுத்தப்படாது; "
 "இயல்பிருப்பு உரைத்திருத்தியிலேயே உரைக்கோப்பு திறக்கப்படும்."
 
-#: widgets/EditProfileDialog.cpp:1758
+#: widgets/EditProfileDialog.cpp:1761
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "உரைத்திருத்திக்கான தனிப்பயன் கட்டளை"

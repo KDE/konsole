@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-11 00:50+0000\n"
+"POT-Creation-Date: 2022-10-17 00:50+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -42,7 +42,7 @@ msgstr "Fajl"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:288
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
 #: plugins/SSHManager/sshwidget.ui:366
 #, kde-format
 msgid "Edit"
@@ -1221,49 +1221,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Taksama my vieĺmi ŭdziačnyja inšym liudziam, jakija dapamahali.\n"
 
-#: MainWindow.cpp:314
+#: MainWindow.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Novaja ŭkladka"
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:325
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klanavać ukladku"
 
-#: MainWindow.cpp:331
+#: MainWindow.cpp:332
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Novaje &akno"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Zakryć akno"
 
-#: MainWindow.cpp:343
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Zakladki"
 
-#: MainWindow.cpp:364
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Kiravannie profiliami..."
 
-#: MainWindow.cpp:370
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktyvacyja mieniu"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:377
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -1271,7 +1271,7 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Zachavać makiet ukladak u fajl"
 
-#: MainWindow.cpp:385
+#: MainWindow.cpp:386
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"
@@ -1279,7 +1279,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Zahruzić makiet ukladak z fajla"
 
-#: MainWindow.cpp:618 MainWindow.cpp:635
+#: MainWindow.cpp:623 MainWindow.cpp:648
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1290,55 +1290,55 @@ msgstr[1] "U hetym aknie zapuščanyja %1 pracesy. Chočacie vyjsci?"
 msgstr[2] "U hetym aknie zapuščana %1 pracesaŭ. Chočacie vyjsci?"
 msgstr[3] "U hetym aknie zapuščana %1 pracesy. Chočacie vyjsci?"
 
-#: MainWindow.cpp:624 MainWindow.cpp:641 MainWindow.cpp:655
+#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Pacvierdzić zakryccio"
 
-#: MainWindow.cpp:625 MainWindow.cpp:642 MainWindow.cpp:656
+#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Zakryć akno"
 
-#: MainWindow.cpp:643 MainWindow.cpp:657
+#: MainWindow.cpp:656 MainWindow.cpp:674
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Zakryć biahučuju &ŭkladku"
 
-#: MainWindow.cpp:652
+#: MainWindow.cpp:669
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "U hetym aknie adkryty(a) %1 terminal(y). Chočacie vyjsci?"
 
-#: MainWindow.cpp:759 Part.cpp:297
+#: MainWindow.cpp:784 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profili"
 
-#: MainWindow.cpp:776
+#: MainWindow.cpp:801
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Asnoŭnyja nalady"
 
-#: MainWindow.cpp:787
+#: MainWindow.cpp:812
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Paneĺ ukladak / Padzialiaĺniki"
 
-#: MainWindow.cpp:792
+#: MainWindow.cpp:817
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Časovyja fajly"
 
-#: MainWindow.cpp:797
+#: MainWindow.cpp:822
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1411,7 +1411,7 @@ msgstr "Zahad"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:325
+#: plugins/QuickCommands/quickcommandswidget.cpp:347
 #, kde-format
 msgid "Warnings"
 msgstr "Papiaredžanni"
@@ -1457,72 +1457,72 @@ msgstr "Pakazvać chutkija zahady"
 msgid "Show Quick Commands"
 msgstr "Pakazvać chutkija zahady"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:166
-#: plugins/QuickCommands/quickcommandswidget.cpp:177
+#: plugins/QuickCommands/quickcommandswidget.cpp:168
+#: plugins/QuickCommands/quickcommandswidget.cpp:179
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "Josć paŭtorny eliemient"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:183
+#: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr "Pierad zapuskam hetaha skrypta vypraŭcie ŭsie papiaredžanni"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:207
+#: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "U hetym skrypcie josć pamylki. Chočacie zapuscić jaho?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
 msgstr "Pamylki abalonki"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Zapuscić"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:234
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr "Sapraŭdy chočacie vydalić hrupu %1 z niekaĺkimi kanfihuracyjami?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:245
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Sapraŭdy chočacie vydalić %1?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:238
+#: plugins/QuickCommands/quickcommandswidget.cpp:254
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Vydalić kanfihuracyi chutkich zahadaŭ"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:268
+#: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "Zahalovak nie moža być pustym"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:294
 #, kde-format
 msgid "Command can not be empty"
 msgstr "Zahad nie moža być pustym"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:292
+#: plugins/QuickCommands/quickcommandswidget.cpp:314
 #, kde-format
 msgid "Rename"
 msgstr "Zmianić nazvu"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:296
+#: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
 msgid "Delete"
 msgstr "Vydalić"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:327
+#: plugins/QuickCommands/quickcommandswidget.cpp:349
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Papiaredžanni (*)"
@@ -1549,7 +1549,7 @@ msgstr "%1 - kataloh dlia zapisaŭ SSH"
 #: plugins/SSHManager/sshmanagermodel.cpp:376
 #: plugins/SSHManager/sshmanagermodel.cpp:409
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, kde-format
 msgid "SSH Config"
 msgstr "Kanfihuracyja SSH"
@@ -1629,66 +1629,66 @@ msgid ""
 " with multiple SSH Configurations, are you sure?"
 msgstr "Sapraŭdy chočacie vydalić kataloh %1 z niekaĺkimi kanfihuracyjami SSH?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:243
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Vydalić kanfihuracyi SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Niama nazvy chosta"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
 #, kde-format
 msgid "Missing Name"
 msgstr "Niama nazvy"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Kali abrana vykarystannie fajla kanfihuracyi SSH, nie paznačajcie fajl "
 "kliuča SSH abo imia karystaĺnika."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:403
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Musić być paznačana imia karystaĺnika abo kliuč SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "Missing Folder"
 msgstr "Niama kataloha"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "Sieans SSH pavinien mieć profiĺ"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Nie ŭdalosia vydalić hety kataloh"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:449
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Vydalić kataloh i ŭsio jaho zmiesciva"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Dvojčy pstryknicie, kab zmianić nazvu kataloha."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, fuzzy, kde-format
 #| msgid "You cant delete an automatically added entry."
 msgid "You can't delete an automatically added entry."
 msgstr "Vy nie možacie vydalić aŭtamatyčna dadadzieny zapis."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Vydalić abrany zapis"
@@ -1887,7 +1887,7 @@ msgstr "Režym &druku (čorny tekst, biez fonu)"
 msgid "&Scale output"
 msgstr "&Vyvad maštabu"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:459
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile"
 msgstr "Pradvyznačany profiĺ"
@@ -2401,18 +2401,18 @@ msgid ""
 "want to close it?"
 msgstr "U hetym sieansie pracuje prahrama \"%1\". Sapraŭdy chočacie zakryć?"
 
-#: session/SessionController.cpp:1087 session/SessionController.cpp:1122
+#: session/SessionController.cpp:1091 session/SessionController.cpp:1134
 #, kde-format
 msgid "Confirm Close"
 msgstr "Pacvierdzić zakryccio"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1092
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Zakryć prahramu"
 
-#: session/SessionController.cpp:1111
+#: session/SessionController.cpp:1119
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2421,7 +2421,7 @@ msgstr ""
 "Prahrama ŭ hetym sieansie nie choča zaviaršać praces. Sapraŭdy chočacie "
 "prymusova zniščyć praces?"
 
-#: session/SessionController.cpp:1115
+#: session/SessionController.cpp:1123
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program %1 is in this session would not die.  Are you sure you want "
@@ -2433,23 +2433,23 @@ msgstr ""
 "Prahrama \"%1\" ŭ hetym sieansie nie choča zaviaršać praces. Sapraŭdy "
 "chočacie prymusova zniščyć praces?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1135
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Zniščyć praces prahramy"
 
-#: session/SessionController.cpp:1959
+#: session/SessionController.cpp:1975
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Adkryć &biahučy kataloh z dapamohaj"
 
-#: session/SessionController.cpp:2029
+#: session/SessionController.cpp:2045
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Zachavać spampavanyja z dapamohaj pratakola ZModem fajly u..."
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2055
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2464,7 +2464,7 @@ msgstr ""
 "hetaj sistemie nie znojdziena adpaviednaha prahramnaha zabiespiačennia "
 "ZModem.</p><p>Vy možacie ŭstaliavać pakunak \"rzsz\" abo \"lrzsz\".</p>"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2065
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2472,7 +2472,7 @@ msgstr ""
 "<p>U biahučym sieansie ŭžo vykonvajecca praces pieradačy fajlaŭ pa "
 "pratakolie ZModem.</p>"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2075
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on this system.</p><p>You may "
@@ -2485,7 +2485,7 @@ msgstr ""
 "ZModem.</p><p>Mahčyma, vy zachočacie ŭstaliavać pakunak \"rzsz\" abo \"lrzsz"
 "\".</p>"
 
-#: session/SessionController.cpp:2064
+#: session/SessionController.cpp:2080
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Abiarycie fajly dlia zapampoŭvannia z dapamohaj pratakola ZModem"
@@ -3172,12 +3172,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Ukliučyć hienieravannie minijaciur"
 
-#: terminalDisplay/TerminalDisplay.cpp:652
+#: terminalDisplay/TerminalDisplay.cpp:653
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Pamier: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2167
+#: terminalDisplay/TerminalDisplay.cpp:2168
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3186,52 +3186,52 @@ msgstr[1] "Sapraŭdy chočacie ŭstavić %1 simvaly?"
 msgstr[2] "Sapraŭdy chočacie ŭstavić %1 simvalaŭ?"
 msgstr[3] "Sapraŭdy chočacie ŭstavić %1 simvaly?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Pacvierdzić ustaŭliannie"
 
-#: terminalDisplay/TerminalDisplay.cpp:2201
+#: terminalDisplay/TerminalDisplay.cpp:2202
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: moža skončyć biahučy praces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission: moža skončyć biahučy praces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell: pasprabuje vydać hukavy sihnal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: prypyniaje vyvad"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: pasprabuje prypynić biahučy praces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: vykarystoŭvajecca dlia kiravannia stanam terminala"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: moža pierarvać biahučy praces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, fuzzy, kde-format
 #| msgid ""
 #| "The text youre trying to paste contains hidden control characters, do you "
@@ -3243,31 +3243,31 @@ msgstr ""
 "Tekst, jaki vy sprabujecie ŭstavić, zmiaščaje schavanyja kiroŭnyja simvaly. "
 "Chočacie adfiĺtravać ich?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2234
+#: terminalDisplay/TerminalDisplay.cpp:2239
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Pacvierdzić ustaŭliannie"
 
-#: terminalDisplay/TerminalDisplay.cpp:2235
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Ustavić &biez kiroŭnych simvalaŭ"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Ustavić &usio"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Skasavać"
 
-#: terminalDisplay/TerminalDisplay.cpp:2466
+#: terminalDisplay/TerminalDisplay.cpp:2479
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3278,17 +3278,17 @@ msgstr ""
 "\">prypynieny</a> naciskanniem Ctrl+S. Kab adnavić, nacisnicie <b>Ctrl+Q</b>."
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2521
+#: terminalDisplay/TerminalDisplay.cpp:2534
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Hety terminal dastupny toĺki dlia čytannia."
 
-#: terminalDisplay/TerminalDisplay.cpp:2911
+#: terminalDisplay/TerminalDisplay.cpp:2924
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Z&mianić kataloh na"
 
-#: terminalDisplay/TerminalDisplay.cpp:2944
+#: terminalDisplay/TerminalDisplay.cpp:2957
 #, kde-format
 msgid "&Paste Location"
 msgstr "Ustavić &razmiaščennie"
@@ -4078,17 +4078,17 @@ msgstr[1] "Redahavannie %1 profiliaŭ: %2"
 msgstr[2] "Redahavannie %1 profiliaŭ: %2"
 msgstr[3] "Redahavannie %1 profiliaŭ: %2"
 
-#: widgets/EditProfileDialog.cpp:344
+#: widgets/EditProfileDialog.cpp:345
 #, kde-format
 msgid "Create New Profile"
 msgstr "Stvaryć novy profiĺ"
 
-#: widgets/EditProfileDialog.cpp:346
+#: widgets/EditProfileDialog.cpp:348
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Redahavać profiĺ \"%1\""
 
-#: widgets/EditProfileDialog.cpp:436
+#: widgets/EditProfileDialog.cpp:439
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4100,7 +4100,7 @@ msgstr[1] " slupki"
 msgstr[2] " slupki"
 msgstr[3] " slupki"
 
-#: widgets/EditProfileDialog.cpp:438
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4112,42 +4112,42 @@ msgstr[1] " radki"
 msgstr[2] " radki"
 msgstr[3] " radki"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Bell"
 msgstr "Sistemnaje hukavoje apaviaščennie"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistemnyja apaviaščenni"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizualizacyja hukavoha apaviaščennia"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Nie zvažać na padziei dlia hukavych apaviaščenniaŭ"
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:460
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Pradvyznačany profiĺ dlia novych sieansaŭ terminala ŭ %1"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgid "Edit Environment"
 msgstr "Redahavać asiaroddzie"
 
-#: widgets/EditProfileDialog.cpp:515
+#: widgets/EditProfileDialog.cpp:518
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Adna zmiennaja asiaroddzia na radok"
 
-#: widgets/EditProfileDialog.cpp:546
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4157,18 +4157,18 @@ msgstr[1] " siekundy"
 msgstr[2] " siekund"
 msgstr[3] " siekundy"
 
-#: widgets/EditProfileDialog.cpp:645
+#: widgets/EditProfileDialog.cpp:648
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Abrać pačatkovy kataloh"
 
-#: widgets/EditProfileDialog.cpp:1169
+#: widgets/EditProfileDialog.cpp:1172
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Nie ŭdalosia zahruzić schiemu <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1348
+#: widgets/EditProfileDialog.cpp:1351
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4177,7 +4177,7 @@ msgstr ""
 "U hetaj kolieravaj schiemie vykarystoŭvajecca prazrysty fon, jaki nie "
 "padtrymlivajecca vašym pracoŭnym asiaroddziem"
 
-#: widgets/EditProfileDialog.cpp:1354
+#: widgets/EditProfileDialog.cpp:1357
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4186,7 +4186,7 @@ msgstr ""
 "Prahrama Konsole byla zapuščanaja da ŭkliučennia efiektaŭ pracoŭnaha "
 "asiaroddzia. Kab ubačyć prazrysty fon, vam treba pierazapuscić Konsole."
 
-#: widgets/EditProfileDialog.cpp:1745
+#: widgets/EditProfileDialog.cpp:1748
 #, fuzzy, kde-format
 #| msgid ""
 #| "The format is e.g. editorExec PATH:LINE:COLUMN\n"
@@ -4229,7 +4229,7 @@ msgstr ""
 "budzie praihnaravany, i fajl budzie adkryty ŭ pradvyznačanym tekstavym "
 "redaktary."
 
-#: widgets/EditProfileDialog.cpp:1758
+#: widgets/EditProfileDialog.cpp:1761
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Advoĺny zahad tekstavaha redaktara"

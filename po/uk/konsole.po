@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-11 00:50+0000\n"
+"POT-Creation-Date: 2022-10-17 00:50+0000\n"
 "PO-Revision-Date: 2022-10-07 07:25+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -42,7 +42,7 @@ msgstr "Файл"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:288
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
 #: plugins/SSHManager/sshwidget.ui:366
 #, kde-format
 msgid "Edit"
@@ -1215,61 +1215,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Подяка багатьом іншим.\n"
 
-#: MainWindow.cpp:314
+#: MainWindow.cpp:315
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Н&ова вкладка"
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:325
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Клонувати вкладку"
 
-#: MainWindow.cpp:331
+#: MainWindow.cpp:332
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Нове ві&кно"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Закрити вікно"
 
-#: MainWindow.cpp:343
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Закладки"
 
-#: MainWindow.cpp:364
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Керування профілями…"
 
-#: MainWindow.cpp:370
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Задіяти меню"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:377
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Зберегти компонування вкладок…"
 
-#: MainWindow.cpp:385
+#: MainWindow.cpp:386
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Завантажити компонування вкладок…"
 
-#: MainWindow.cpp:618 MainWindow.cpp:635
+#: MainWindow.cpp:623 MainWindow.cpp:648
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1280,55 +1280,55 @@ msgstr[1] "У цьому вікні працюють %1 процеси. Ви с�
 msgstr[2] "У цьому вікні працюють %1 процесів. Ви справді хочете його закрити?"
 msgstr[3] "У цьому вікні працює процес. Ви справді хочете його закрити?"
 
-#: MainWindow.cpp:624 MainWindow.cpp:641 MainWindow.cpp:655
+#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Підтвердження закриття"
 
-#: MainWindow.cpp:625 MainWindow.cpp:642 MainWindow.cpp:656
+#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Закрити в&ікно"
 
-#: MainWindow.cpp:643 MainWindow.cpp:657
+#: MainWindow.cpp:656 MainWindow.cpp:674
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Закрити поточну в&кладку"
 
-#: MainWindow.cpp:652
+#: MainWindow.cpp:669
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "У цьому вікні відкрито %1 терміналів. Ви справді хочете його закрити?"
 
-#: MainWindow.cpp:759 Part.cpp:297
+#: MainWindow.cpp:784 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Профілі"
 
-#: MainWindow.cpp:776
+#: MainWindow.cpp:801
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Загальне"
 
-#: MainWindow.cpp:787
+#: MainWindow.cpp:812
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Вкладки/Поділ на панелі"
 
-#: MainWindow.cpp:792
+#: MainWindow.cpp:817
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Тимчасові файли"
 
-#: MainWindow.cpp:797
+#: MainWindow.cpp:822
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1399,7 +1399,7 @@ msgstr "Команда"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:325
+#: plugins/QuickCommands/quickcommandswidget.cpp:347
 #, kde-format
 msgid "Warnings"
 msgstr "Попередження"
@@ -1444,36 +1444,36 @@ msgstr "Показати швидкий доступ"
 msgid "Show Quick Commands"
 msgstr "Показати швидкі команди"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:166
-#: plugins/QuickCommands/quickcommandswidget.cpp:177
+#: plugins/QuickCommands/quickcommandswidget.cpp:168
+#: plugins/QuickCommands/quickcommandswidget.cpp:179
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "Виявлено запис-дублікат"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:183
+#: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 "Будь ласка, виправте усі попередження, перш ніж намагатися виконати цей "
 "скрипт"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:207
+#: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "У скрипті є помилки. Ви справді хочете виконати його?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
 msgstr "Помилки оболонки"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Запустити"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:234
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1482,38 +1482,38 @@ msgstr ""
 "Ви наказали програмі вилучити групу %1,\n"
 " де зберігається декілька наборів налаштувань. Ви справді цього хочете?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:245
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Ви наказали програмі вилучити %1. Ви справді цього хочете?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:238
+#: plugins/QuickCommands/quickcommandswidget.cpp:254
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Вилучити налаштування швидких команд"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:268
+#: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "Заголовок не може бути порожнім"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:272
+#: plugins/QuickCommands/quickcommandswidget.cpp:294
 #, kde-format
 msgid "Command can not be empty"
 msgstr "Команда не може бути порожньою"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:292
+#: plugins/QuickCommands/quickcommandswidget.cpp:314
 #, kde-format
 msgid "Rename"
 msgstr "Перейменувати"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:296
+#: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
 msgid "Delete"
 msgstr "Вилучити"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:327
+#: plugins/QuickCommands/quickcommandswidget.cpp:349
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Попередження (*)"
@@ -1540,7 +1540,7 @@ msgstr "%1 є текою для записів SSH"
 #: plugins/SSHManager/sshmanagermodel.cpp:376
 #: plugins/SSHManager/sshmanagermodel.cpp:409
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:436
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, kde-format
 msgid "SSH Config"
 msgstr "Налаштування SSH"
@@ -1619,65 +1619,65 @@ msgstr ""
 "Ви наказали програмі вилучити теку %1,\n"
 " де зберігається декілька наборів налаштувань SSH. Ви справді цього хочете?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:243
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Вилучення налаштувань SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:386
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Не вказано назви вузла"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
 #, kde-format
 msgid "Missing Name"
 msgstr "Не вказано назви"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:398
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Якщо встановлено використання налаштувань SSH, не слід вказувати ключ SSH "
 "або ім'я користувача."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:403
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Слід встановити або ім'я користувача, або ключ SSH"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:409
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "Missing Folder"
 msgstr "Не вказано теки"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:414
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "Сеанс SSH повинен мати профіль"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Не вдалося вилучити цю теку"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:449
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Вилучити теку і увесь її вміст"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Двічі клацніть лівою кнопкою миші, щоб змінити назву теки."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Не можна вилучати автоматично доданий запис."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:452
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Вилучити позначений запис"
@@ -1869,7 +1869,7 @@ msgstr "&Оптимізувати для друку (чорний текст б�
 msgid "&Scale output"
 msgstr "&Масштабувати результат"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:459
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile"
 msgstr "Типовий профіль"
@@ -2364,18 +2364,18 @@ msgid ""
 "want to close it?"
 msgstr "В цьому сеансі в даний час виконується програма «%1». Дійсно закрити?"
 
-#: session/SessionController.cpp:1087 session/SessionController.cpp:1122
+#: session/SessionController.cpp:1091 session/SessionController.cpp:1134
 #, kde-format
 msgid "Confirm Close"
 msgstr "Підтвердження закриття"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1092
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Закрити програму"
 
-#: session/SessionController.cpp:1111
+#: session/SessionController.cpp:1119
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2384,7 +2384,7 @@ msgstr ""
 "Програма у цьому сеансі не бажає завершувати роботу. Хочете завершити її "
 "роботу у примусовому режимі?"
 
-#: session/SessionController.cpp:1115
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2393,23 +2393,23 @@ msgstr ""
 "Програма «%1» у цьому сеансі не бажає завершувати роботу. Хочете завершити "
 "її роботу у примусовому режимі?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1135
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Завершити роботу програми"
 
-#: session/SessionController.cpp:1959
+#: session/SessionController.cpp:1975
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Відкрити поточну теку за допомогою"
 
-#: session/SessionController.cpp:2029
+#: session/SessionController.cpp:2045
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Зберегти отримання ZModem до…"
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2055
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2420,7 +2420,7 @@ msgstr ""
 "програмного забезпечення ZModem.</p><p>Вам, ймовірно, слід встановити "
 "пакунок «rzsz» або «lrzsz».</p>"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2065
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2428,7 +2428,7 @@ msgstr ""
 "<p>У поточному сеансі вже виконується передавання файлів за допомогою ZModem."
 "</p>"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2075
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2437,7 +2437,7 @@ msgstr ""
 "<p>У системі не виявлено програмного забезпечення ZModem.</p><p>Вам, "
 "ймовірно, слід встановити пакунок «rzsz» або «lrzsz».</p>"
 
-#: session/SessionController.cpp:2064
+#: session/SessionController.cpp:2080
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Оберіть файли для вивантаження за допомогою ZModem"
@@ -3119,12 +3119,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Увімкнути створення мініатюр"
 
-#: terminalDisplay/TerminalDisplay.cpp:652
+#: terminalDisplay/TerminalDisplay.cpp:653
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Розмір: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2167
+#: terminalDisplay/TerminalDisplay.cpp:2168
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3133,53 +3133,53 @@ msgstr[1] "Ви справді хочете вставити %1 символи?"
 msgstr[2] "Ви справді хочете вставити %1 символів?"
 msgstr[3] "Ви справді хочете вставити один символ?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Підтвердження закриття"
 
-#: terminalDisplay/TerminalDisplay.cpp:2201
+#: terminalDisplay/TerminalDisplay.cpp:2202
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Кінець тексту/Переривання: може перервати роботу поточного процесу"
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 "Кінець переданих даних: може призвести до завершення роботи поточного процесу"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Гудок: намагається попередити звуком"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "3-й код керування пристроєм/XOFF: призупиняє виведення даних"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Заміна/Призупинення: може призупинити виконання поточного процесу"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: використовується для керування станом термінала"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Роздільник файлів/Вихід: може перервати роботу поточного процесу"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3188,31 +3188,31 @@ msgstr ""
 "У тексті, який ви намагаєтеся вставити, містяться приховані керівні символи. "
 "Хочете виконати фільтрування таких символів?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2234
+#: terminalDisplay/TerminalDisplay.cpp:2239
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Підтвердження вставлення"
 
-#: terminalDisplay/TerminalDisplay.cpp:2235
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Вставити &без керівних символів"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Вставити усе"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Скасувати"
 
-#: terminalDisplay/TerminalDisplay.cpp:2466
+#: terminalDisplay/TerminalDisplay.cpp:2479
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3223,17 +3223,17 @@ msgstr ""
 "Software_flow_control\">призупинено</a> натисканням Ctrl+S. Натисніть <b>Ctrl"
 "+Q</b>, щоб його поновити.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2521
+#: terminalDisplay/TerminalDisplay.cpp:2534
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Термінал відкрито лише для читання."
 
-#: terminalDisplay/TerminalDisplay.cpp:2911
+#: terminalDisplay/TerminalDisplay.cpp:2924
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Змінити &каталог"
 
-#: terminalDisplay/TerminalDisplay.cpp:2944
+#: terminalDisplay/TerminalDisplay.cpp:2957
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Вставити адресу"
@@ -4015,17 +4015,17 @@ msgstr[1] "Редагування %1 профілів: %2"
 msgstr[2] "Редагування %1 профілів: %2"
 msgstr[3] "Редагування профілю: %2"
 
-#: widgets/EditProfileDialog.cpp:344
+#: widgets/EditProfileDialog.cpp:345
 #, kde-format
 msgid "Create New Profile"
 msgstr "Створення профілю"
 
-#: widgets/EditProfileDialog.cpp:346
+#: widgets/EditProfileDialog.cpp:348
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Змінити профіль «%1»"
 
-#: widgets/EditProfileDialog.cpp:436
+#: widgets/EditProfileDialog.cpp:439
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4037,7 +4037,7 @@ msgstr[1] " стовпчики"
 msgstr[2] " стовпчиків"
 msgstr[3] " стовпчик"
 
-#: widgets/EditProfileDialog.cpp:438
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4049,42 +4049,42 @@ msgstr[1] " рядки"
 msgstr[2] " рядків"
 msgstr[3] " рядок"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Bell"
 msgstr "Системний дзвінок"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Notifications"
 msgstr "Системні сповіщення"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Visual Bell"
 msgstr "Видимий дзвінок"
 
-#: widgets/EditProfileDialog.cpp:448
+#: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ігнорувати події дзвінка"
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:460
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Типовий профіль для нових сеансів термінала у %1"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgid "Edit Environment"
 msgstr "Змінити середовище"
 
-#: widgets/EditProfileDialog.cpp:515
+#: widgets/EditProfileDialog.cpp:518
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Одна змінна середовища на рядок"
 
-#: widgets/EditProfileDialog.cpp:546
+#: widgets/EditProfileDialog.cpp:549
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4094,18 +4094,18 @@ msgstr[1] " секунди"
 msgstr[2] " секунд"
 msgstr[3] " секунда"
 
-#: widgets/EditProfileDialog.cpp:645
+#: widgets/EditProfileDialog.cpp:648
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Виберіть початковий каталог"
 
-#: widgets/EditProfileDialog.cpp:1169
+#: widgets/EditProfileDialog.cpp:1172
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Не вдалося завантажити схему <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1348
+#: widgets/EditProfileDialog.cpp:1351
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4114,7 +4114,7 @@ msgstr ""
 "Ця схема кольорів використовує прозоре тло, яке, здається, не підтримується "
 "на вашій стільниці"
 
-#: widgets/EditProfileDialog.cpp:1354
+#: widgets/EditProfileDialog.cpp:1357
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4123,7 +4123,7 @@ msgstr ""
 "Konsole було запущено до вмикання стільничних ефектів. Щоб побачити прозоре "
 "тло, вам слід перезапустити Konsole."
 
-#: widgets/EditProfileDialog.cpp:1745
+#: widgets/EditProfileDialog.cpp:1748
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4153,7 +4153,7 @@ msgstr ""
 "буде проігноровано — файл буде відкрито у типовому текстовому\n"
 "редакторі."
 
-#: widgets/EditProfileDialog.cpp:1758
+#: widgets/EditProfileDialog.cpp:1761
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Нетипова команда текстового редактора:"
