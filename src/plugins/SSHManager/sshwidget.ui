@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>448</width>
-    <height>687</height>
+    <width>506</width>
+    <height>831</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -61,257 +61,180 @@
    </item>
    <item>
     <widget class="QWidget" name="sshInfoPane" native="true">
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>52</x>
-        <y>6</y>
-        <width>79</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Identifier</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="name">
-      <property name="geometry">
-       <rect>
-        <x>137</x>
-        <y>6</y>
-        <width>186</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>A name for this ssh entry</string>
-      </property>
-      <property name="placeholderText">
-       <string>The name of this entry on the list</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>6</x>
-        <y>53</y>
-        <width>125</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>SSH Hostname</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="hostname">
-      <property name="geometry">
-       <rect>
-        <x>137</x>
-        <y>53</y>
-        <width>186</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>The hostname of the server</string>
-      </property>
-      <property name="placeholderText">
-       <string>The hostname of the server</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>95</x>
-        <y>100</y>
-        <width>36</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Port</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="port">
-      <property name="geometry">
-       <rect>
-        <x>137</x>
-        <y>100</y>
-        <width>186</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>The port of the server, 22 is the default for ssh connections</string>
-      </property>
-      <property name="text">
-       <string>22</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>62</x>
-        <y>147</y>
-        <width>69</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>SSH Key</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_7">
-      <property name="geometry">
-       <rect>
-        <x>43</x>
-        <y>196</y>
-        <width>88</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Username</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="username">
-      <property name="geometry">
-       <rect>
-        <x>137</x>
-        <y>196</y>
-        <width>186</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>The username for the connection</string>
-      </property>
-      <property name="placeholderText">
-       <string>Your username</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="useSshConfig">
-      <property name="geometry">
-       <rect>
-        <x>137</x>
-        <y>243</y>
-        <width>237</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>If this is set, we don't rely on the SSH key set above, but on the configuration on ~/.ssh/config</string>
-      </property>
-      <property name="text">
-       <string>Use ~/.ssh/config for key</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="folderLabel">
-      <property name="geometry">
-       <rect>
-        <x>76</x>
-        <y>280</y>
-        <width>55</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Folder</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="folder">
-      <property name="geometry">
-       <rect>
-        <x>137</x>
-        <y>280</y>
-        <width>108</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="toolTip">
-       <string>For organizational purposes, this entry will be inside of this folder.</string>
-      </property>
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-      <property name="currentText">
-       <string>Default</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>76</x>
-        <y>327</y>
-        <width>55</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Profile</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="profile">
-      <property name="geometry">
-       <rect>
-        <x>137</x>
-        <y>327</y>
-        <width>108</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="toolTip">
-       <string>The profile to be active when the ssh session starts</string>
-      </property>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>226</width>
-        <height>43</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QLineEdit" name="sshkey">
-         <property name="toolTip">
-          <string>The private key to be used for this connection</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>The private key</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="btnFindSshKey">
-         <property name="text">
-          <string>...</string>
-         </property>
-         <property name="icon">
-          <iconset theme="folder-open">
-           <normaloff>.</normaloff>.</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Identifier</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="name">
+        <property name="toolTip">
+         <string>A name for this ssh entry</string>
+        </property>
+        <property name="placeholderText">
+         <string>The name of this entry on the list</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>SSH Hostname</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="hostname">
+        <property name="toolTip">
+         <string>The hostname of the server</string>
+        </property>
+        <property name="placeholderText">
+         <string>The hostname of the server</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="port">
+        <property name="toolTip">
+         <string>The port of the server, 22 is the default for ssh connections</string>
+        </property>
+        <property name="text">
+         <string>22</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>SSH Key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLineEdit" name="sshkey">
+          <property name="toolTip">
+           <string>The private key to be used for this connection</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>The private key</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="btnFindSshKey">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset theme="folder-open">
+            <normaloff>.</normaloff>.</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="useSshConfig">
+        <property name="toolTip">
+         <string>If this is set, we don't rely on the SSH key set above, but on the configuration on ~/.ssh/config</string>
+        </property>
+        <property name="text">
+         <string>Use ~/.ssh/config for key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Username</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="username">
+        <property name="toolTip">
+         <string>The username for the connection</string>
+        </property>
+        <property name="placeholderText">
+         <string>Your username</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="folderLabel">
+        <property name="text">
+         <string>Folder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QComboBox" name="folder">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>For organizational purposes, this entry will be inside of this folder.</string>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <property name="currentText">
+         <string>Default</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Profile</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QComboBox" name="profile">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>The profile to be active when the ssh session starts</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -396,6 +319,7 @@
    <class>KMessageWidget</class>
    <extends>QFrame</extends>
    <header>kmessagewidget.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>SshTreeView</class>
@@ -411,9 +335,6 @@
   <tabstop>port</tabstop>
   <tabstop>sshkey</tabstop>
   <tabstop>username</tabstop>
-  <tabstop>useSshConfig</tabstop>
-  <tabstop>folder</tabstop>
-  <tabstop>profile</tabstop>
   <tabstop>btnAdd</tabstop>
   <tabstop>btnCancel</tabstop>
   <tabstop>btnEdit</tabstop>
