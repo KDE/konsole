@@ -12,7 +12,6 @@ Icon=utilities-terminal
 
 Name=Run In Konsole
 Name[ar]=شغل في كونسول
-Name[ast]=Executar en Konsole
 Name[az]=Konsole-də başlatmaq
 Name[be]=Запусціць у Konsole
 Name[be@latin]=Zapuscić u Konsole
@@ -67,7 +66,6 @@ Name[zh_TW]=在 Konsole 中執行
 
 Comment=Run within Konsole
 Comment[ar]=شغل في كونسول
-Comment[ast]=Execución dientro de Konsole
 Comment[az]=Əmri Konsole-də icra etmək
 Comment[be]=Запусціць з дапамогай Konsole
 Comment[be@latin]=Zapuscić z dapamohaj Konsole

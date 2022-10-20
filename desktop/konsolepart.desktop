@@ -15,7 +15,6 @@ X-KDE-AuthorizeAction=shell_access
 Name=Terminal Emulator
 Name[af]=Terminaal Emulasie
 Name[ar]=محاكي الطرفية
-Name[ast]=Emulador de terminal
 Name[az]=Terminal emulyatoru
 Name[be]=Эмулятар тэрмінала
 Name[be@latin]=Emuliatar terminala
@@ -107,7 +106,6 @@ Name[zh_TW]=終端機模擬程式
 
 Comment=Command line access
 Comment[ar]=الوصول إلى سطر الأوامر
-Comment[ast]=Accesu a la llinia de comandos
 Comment[az]=Əmrlər sətirinə giriş
 Comment[be]=Доступ да загаднага радка
 Comment[be@latin]=Dostup da zahadnaha radka
