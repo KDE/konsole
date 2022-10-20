@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:50+0000\n"
+"POT-Creation-Date: 2022-10-20 00:56+0000\n"
 "PO-Revision-Date: 2022-10-07 07:25+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "Файл"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:366
+#: plugins/SSHManager/sshwidget.ui:289
 #, kde-format
 msgid "Edit"
 msgstr "Зміни"
@@ -603,7 +603,7 @@ msgstr "Вибрати зображення тла"
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
-#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:305
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:141
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
@@ -844,7 +844,7 @@ msgstr "Схему прив'язок клавіш не можна зберіга
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:376
+#: plugins/SSHManager/sshwidget.ui:299
 #, kde-format
 msgid "Add"
 msgstr "Додати"
@@ -1386,7 +1386,7 @@ msgstr "Група"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:244
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:200
 #, kde-format
 msgid "Default"
 msgstr "Типовий"
@@ -1423,7 +1423,7 @@ msgid "Update"
 msgstr "Оновити"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:386
+#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:309
 #, kde-format
 msgid "Cancel"
 msgstr "Скасувати"
@@ -1594,7 +1594,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
-#: plugins/SSHManager/sshwidget.ui:161
+#: plugins/SSHManager/sshwidget.ui:119
 #, kde-format
 msgid "SSH Key"
 msgstr "Ключ SSH"
@@ -1695,74 +1695,68 @@ msgid "Show entries that don't match the filter"
 msgstr "Показати записи, які не відповідають фільтру"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: plugins/SSHManager/sshwidget.ui:74
+#: plugins/SSHManager/sshwidget.ui:68
 #, kde-format
 msgid "Identifier"
 msgstr "Ідентифікатор"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:87
+#: plugins/SSHManager/sshwidget.ui:75
 #, kde-format
 msgid "A name for this ssh entry"
 msgstr "Назва цього запису SSH"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:90
+#: plugins/SSHManager/sshwidget.ui:78
 #, kde-format
 msgid "The name of this entry on the list"
 msgstr "Назва цього запису у списку"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/SSHManager/sshwidget.ui:103
+#: plugins/SSHManager/sshwidget.ui:85
 #, kde-format
 msgid "SSH Hostname"
 msgstr "Назва вузла SSH"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
-#: plugins/SSHManager/sshwidget.ui:116 plugins/SSHManager/sshwidget.ui:119
+#: plugins/SSHManager/sshwidget.ui:92 plugins/SSHManager/sshwidget.ui:95
 #, kde-format
 msgid "The hostname of the server"
 msgstr "Назва вузла сервера"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/SSHManager/sshwidget.ui:132
+#: plugins/SSHManager/sshwidget.ui:102
 #, kde-format
 msgid "Port"
 msgstr "Порт"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:145
+#: plugins/SSHManager/sshwidget.ui:109
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
 msgstr "Порт сервера, типовим для з'єднань SSH є порт 22"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:148
+#: plugins/SSHManager/sshwidget.ui:112
 #, kde-format
 msgid "22"
 msgstr "22"
 
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:174
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:128
 #, kde-format
-msgid "Username"
-msgstr "Користувач"
+msgid "The private key to be used for this connection"
+msgstr "Закритий ключ, який слід використовувати для цього з'єднання"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:187
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:134
 #, kde-format
-msgid "The username for the connection"
-msgstr "Ім'я користувача для з'єднання"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:190
-#, kde-format
-msgid "Your username"
-msgstr "Ваше ім'я користувача"
+msgid "The private key"
+msgstr "Закритий ключ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:203
+#: plugins/SSHManager/sshwidget.ui:154
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1772,73 +1766,79 @@ msgstr ""
 "а використовуватиме налаштування з ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:206
+#: plugins/SSHManager/sshwidget.ui:157
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "Скористатися для ключа ~/.ssh/config"
 
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: plugins/SSHManager/sshwidget.ui:164
+#, kde-format
+msgid "Username"
+msgstr "Користувач"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:171
+#, kde-format
+msgid "The username for the connection"
+msgstr "Ім'я користувача для з'єднання"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:174
+#, kde-format
+msgid "Your username"
+msgstr "Ваше ім'я користувача"
+
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:219
+#: plugins/SSHManager/sshwidget.ui:181
 #, kde-format
 msgid "Folder"
 msgstr "Тека"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:238
+#: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr "З метою упорядковування цей запис буде розміщено у цій теці."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:257
+#: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "Profile"
 msgstr "Профіль"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:276
+#: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "Профіль, який має бути активним після запуску сеансу SSH"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:292
-#, kde-format
-msgid "The private key to be used for this connection"
-msgstr "Закритий ключ, який слід використовувати для цього з'єднання"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:298
-#, kde-format
-msgid "The private key"
-msgstr "Закритий ключ"
-
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:335
+#: plugins/SSHManager/sshwidget.ui:258
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "Додати новий запис SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:349
+#: plugins/SSHManager/sshwidget.ui:272
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "Вилучити позначений запис SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:363
+#: plugins/SSHManager/sshwidget.ui:286
 #, kde-format
 msgid "Edit selected entry"
 msgstr "Редагувати позначений запис"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:373
+#: plugins/SSHManager/sshwidget.ui:296
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "Додати нові налаштування SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:383
+#: plugins/SSHManager/sshwidget.ui:306
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "Скасувати додавання або редагування"
@@ -3124,7 +3124,7 @@ msgstr "Увімкнути створення мініатюр"
 msgid "Size: %1 x %2"
 msgstr "Розмір: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3133,53 +3133,53 @@ msgstr[1] "Ви справді хочете вставити %1 символи?"
 msgstr[2] "Ви справді хочете вставити %1 символів?"
 msgstr[3] "Ви справді хочете вставити один символ?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2169
+#: terminalDisplay/TerminalDisplay.cpp:2170
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Підтвердження закриття"
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Кінець тексту/Переривання: може перервати роботу поточного процесу"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 "Кінець переданих даних: може призвести до завершення роботи поточного процесу"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Гудок: намагається попередити звуком"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "3-й код керування пристроєм/XOFF: призупиняє виведення даних"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Заміна/Призупинення: може призупинити виконання поточного процесу"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: використовується для керування станом термінала"
 
-#: terminalDisplay/TerminalDisplay.cpp:2209
+#: terminalDisplay/TerminalDisplay.cpp:2210
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Роздільник файлів/Вихід: може перервати роботу поточного процесу"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2237
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3188,31 +3188,31 @@ msgstr ""
 "У тексті, який ви намагаєтеся вставити, містяться приховані керівні символи. "
 "Хочете виконати фільтрування таких символів?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2239
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Підтвердження вставлення"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Вставити &без керівних символів"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Вставити усе"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2243
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Скасувати"
 
-#: terminalDisplay/TerminalDisplay.cpp:2479
+#: terminalDisplay/TerminalDisplay.cpp:2480
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3223,17 +3223,17 @@ msgstr ""
 "Software_flow_control\">призупинено</a> натисканням Ctrl+S. Натисніть <b>Ctrl"
 "+Q</b>, щоб його поновити.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2534
+#: terminalDisplay/TerminalDisplay.cpp:2535
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Термінал відкрито лише для читання."
 
-#: terminalDisplay/TerminalDisplay.cpp:2924
+#: terminalDisplay/TerminalDisplay.cpp:2925
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Змінити &каталог"
 
-#: terminalDisplay/TerminalDisplay.cpp:2957
+#: terminalDisplay/TerminalDisplay.cpp:2958
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Вставити адресу"

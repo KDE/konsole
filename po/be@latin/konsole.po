@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:50+0000\n"
+"POT-Creation-Date: 2022-10-20 00:56+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "Fajl"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:366
+#: plugins/SSHManager/sshwidget.ui:289
 #, kde-format
 msgid "Edit"
 msgstr "Redahavannie"
@@ -607,7 +607,7 @@ msgstr "Abrać fonavuju vyjavu"
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
-#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:305
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:141
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
@@ -850,7 +850,7 @@ msgstr "Nieĺha zachavać schiemu pryviazvannia klaviš z pustym apisanniem."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:376
+#: plugins/SSHManager/sshwidget.ui:299
 #, kde-format
 msgid "Add"
 msgstr "Dadać"
@@ -1398,7 +1398,7 @@ msgstr "Hrupa"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:244
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:200
 #, kde-format
 msgid "Default"
 msgstr "Pradvyznačana"
@@ -1435,7 +1435,7 @@ msgid "Update"
 msgstr "Abnavić"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:386
+#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:309
 #, kde-format
 msgid "Cancel"
 msgstr "Skasavać"
@@ -1605,7 +1605,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
-#: plugins/SSHManager/sshwidget.ui:161
+#: plugins/SSHManager/sshwidget.ui:119
 #, kde-format
 msgid "SSH Key"
 msgstr "Kliuč SSH"
@@ -1709,74 +1709,68 @@ msgid "Show entries that don't match the filter"
 msgstr "Pakazać zapisy, jakija nie adpaviadajuć fiĺtru"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: plugins/SSHManager/sshwidget.ui:74
+#: plugins/SSHManager/sshwidget.ui:68
 #, kde-format
 msgid "Identifier"
 msgstr "Identyfikatar"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:87
+#: plugins/SSHManager/sshwidget.ui:75
 #, kde-format
 msgid "A name for this ssh entry"
 msgstr "Nazva dlia hetaha zapisu ssh"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:90
+#: plugins/SSHManager/sshwidget.ui:78
 #, kde-format
 msgid "The name of this entry on the list"
 msgstr "Nazva ŭ spisie dlia hetaha zapisu ssh"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/SSHManager/sshwidget.ui:103
+#: plugins/SSHManager/sshwidget.ui:85
 #, kde-format
 msgid "SSH Hostname"
 msgstr "Nazva chosta SSH"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
-#: plugins/SSHManager/sshwidget.ui:116 plugins/SSHManager/sshwidget.ui:119
+#: plugins/SSHManager/sshwidget.ui:92 plugins/SSHManager/sshwidget.ui:95
 #, kde-format
 msgid "The hostname of the server"
 msgstr "Nazva chosta sierviera"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/SSHManager/sshwidget.ui:132
+#: plugins/SSHManager/sshwidget.ui:102
 #, kde-format
 msgid "Port"
 msgstr "Port"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:145
+#: plugins/SSHManager/sshwidget.ui:109
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
 msgstr "Port sierviera, pradvyznačanaje značennie dlia ssh-zlučenniaŭ - 22"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:148
+#: plugins/SSHManager/sshwidget.ui:112
 #, kde-format
 msgid "22"
 msgstr "22"
 
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:174
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:128
 #, kde-format
-msgid "Username"
-msgstr "Imia karystaĺnika"
+msgid "The private key to be used for this connection"
+msgstr "Pryvatny kliuč, jaki budzie vykarystoŭvacca dlia hetaha zlučennia"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:187
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:134
 #, kde-format
-msgid "The username for the connection"
-msgstr "Imia karystaĺnika dlia zlučennia"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:190
-#, kde-format
-msgid "Your username"
-msgstr "Vaša imia karystaĺnika"
+msgid "The private key"
+msgstr "Pryvatny kliuč"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:203
+#: plugins/SSHManager/sshwidget.ui:154
 #, fuzzy, kde-format
 #| msgid ""
 #| "If this is set, we dont rely on the SSH key set above, but on the "
@@ -1789,74 +1783,80 @@ msgstr ""
 "vykarystoŭvacca fajl kanfihuracyi z ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:206
+#: plugins/SSHManager/sshwidget.ui:157
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "Vykarystoŭvać dlia kliuča ~/.ssh/config"
 
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: plugins/SSHManager/sshwidget.ui:164
+#, kde-format
+msgid "Username"
+msgstr "Imia karystaĺnika"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:171
+#, kde-format
+msgid "The username for the connection"
+msgstr "Imia karystaĺnika dlia zlučennia"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:174
+#, kde-format
+msgid "Your username"
+msgstr "Vaša imia karystaĺnika"
+
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:219
+#: plugins/SSHManager/sshwidget.ui:181
 #, kde-format
 msgid "Folder"
 msgstr "Kataloh"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:238
+#: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
 "U metach paradkavannia hety zapis budzie znachodzicca ŭnutry hetaha kataloha."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:257
+#: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "Profile"
 msgstr "Profiĺ"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:276
+#: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "Profiĺ, jaki budzie aktyŭny padčas zapusku ssh-sieansa"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:292
-#, kde-format
-msgid "The private key to be used for this connection"
-msgstr "Pryvatny kliuč, jaki budzie vykarystoŭvacca dlia hetaha zlučennia"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:298
-#, kde-format
-msgid "The private key"
-msgstr "Pryvatny kliuč"
-
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:335
+#: plugins/SSHManager/sshwidget.ui:258
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "Dadać novy zapis SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:349
+#: plugins/SSHManager/sshwidget.ui:272
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "Vydalić abrany zapis SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:363
+#: plugins/SSHManager/sshwidget.ui:286
 #, kde-format
 msgid "Edit selected entry"
 msgstr "Redahavać abrany zapis"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:373
+#: plugins/SSHManager/sshwidget.ui:296
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "Dadać novuju kanfihuracyju SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:383
+#: plugins/SSHManager/sshwidget.ui:306
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "Skasavać dadannie abo redahavannie"
@@ -3177,7 +3177,7 @@ msgstr "Ukliučyć hienieravannie minijaciur"
 msgid "Size: %1 x %2"
 msgstr "Pamier: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3186,52 +3186,52 @@ msgstr[1] "Sapraŭdy chočacie ŭstavić %1 simvaly?"
 msgstr[2] "Sapraŭdy chočacie ŭstavić %1 simvalaŭ?"
 msgstr[3] "Sapraŭdy chočacie ŭstavić %1 simvaly?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2169
+#: terminalDisplay/TerminalDisplay.cpp:2170
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Pacvierdzić ustaŭliannie"
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: moža skončyć biahučy praces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission: moža skončyć biahučy praces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell: pasprabuje vydać hukavy sihnal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: prypyniaje vyvad"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: pasprabuje prypynić biahučy praces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: vykarystoŭvajecca dlia kiravannia stanam terminala"
 
-#: terminalDisplay/TerminalDisplay.cpp:2209
+#: terminalDisplay/TerminalDisplay.cpp:2210
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: moža pierarvać biahučy praces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2237
 #, fuzzy, kde-format
 #| msgid ""
 #| "The text youre trying to paste contains hidden control characters, do you "
@@ -3243,31 +3243,31 @@ msgstr ""
 "Tekst, jaki vy sprabujecie ŭstavić, zmiaščaje schavanyja kiroŭnyja simvaly. "
 "Chočacie adfiĺtravać ich?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2239
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Pacvierdzić ustaŭliannie"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Ustavić &biez kiroŭnych simvalaŭ"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Ustavić &usio"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2243
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Skasavać"
 
-#: terminalDisplay/TerminalDisplay.cpp:2479
+#: terminalDisplay/TerminalDisplay.cpp:2480
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3278,17 +3278,17 @@ msgstr ""
 "\">prypynieny</a> naciskanniem Ctrl+S. Kab adnavić, nacisnicie <b>Ctrl+Q</b>."
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2534
+#: terminalDisplay/TerminalDisplay.cpp:2535
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Hety terminal dastupny toĺki dlia čytannia."
 
-#: terminalDisplay/TerminalDisplay.cpp:2924
+#: terminalDisplay/TerminalDisplay.cpp:2925
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Z&mianić kataloh na"
 
-#: terminalDisplay/TerminalDisplay.cpp:2957
+#: terminalDisplay/TerminalDisplay.cpp:2958
 #, kde-format
 msgid "&Paste Location"
 msgstr "Ustavić &razmiaščennie"

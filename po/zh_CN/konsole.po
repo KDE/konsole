@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:50+0000\n"
-"PO-Revision-Date: 2022-10-02 15:49\n"
+"POT-Creation-Date: 2022-10-20 00:56+0000\n"
+"PO-Revision-Date: 2022-10-19 13:22\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -42,7 +42,7 @@ msgstr "文件"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:366
+#: plugins/SSHManager/sshwidget.ui:289
 #, kde-format
 msgid "Edit"
 msgstr "编辑"
@@ -587,7 +587,7 @@ msgstr "选择背景图片"
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
-#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:305
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:141
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
@@ -825,7 +825,7 @@ msgstr "无法用空描述保存按键绑定方案。"
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:376
+#: plugins/SSHManager/sshwidget.ui:299
 #, kde-format
 msgid "Add"
 msgstr "添加"
@@ -1326,11 +1326,9 @@ msgstr "窗体"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "快捷键"
+msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1366,7 +1364,7 @@ msgstr "分组"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:244
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:200
 #, kde-format
 msgid "Default"
 msgstr "默认"
@@ -1403,7 +1401,7 @@ msgid "Update"
 msgstr "更新"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:386
+#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:309
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
@@ -1415,10 +1413,9 @@ msgid "Quick Commands"
 msgstr "快速命令"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "显示快速命令"
+msgstr ""
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1569,7 +1566,7 @@ msgstr "无法在外壳应用程序之外发出 SSH 命令 (例如 bash、zsh、
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
-#: plugins/SSHManager/sshwidget.ui:161
+#: plugins/SSHManager/sshwidget.ui:119
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH 密钥"
@@ -1657,11 +1654,9 @@ msgstr "删除选中条目"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
-msgstr "快捷键"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
 #: plugins/SSHManager/sshwidget.ui:43
@@ -1670,74 +1665,68 @@ msgid "Show entries that don't match the filter"
 msgstr "显示不匹配筛选条件的条目"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: plugins/SSHManager/sshwidget.ui:74
+#: plugins/SSHManager/sshwidget.ui:68
 #, kde-format
 msgid "Identifier"
 msgstr "标识符"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:87
+#: plugins/SSHManager/sshwidget.ui:75
 #, kde-format
 msgid "A name for this ssh entry"
 msgstr "此 ssh 条目的名称"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:90
+#: plugins/SSHManager/sshwidget.ui:78
 #, kde-format
 msgid "The name of this entry on the list"
 msgstr "列表中此条目的名称"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/SSHManager/sshwidget.ui:103
+#: plugins/SSHManager/sshwidget.ui:85
 #, kde-format
 msgid "SSH Hostname"
 msgstr "SSH 主机名"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
-#: plugins/SSHManager/sshwidget.ui:116 plugins/SSHManager/sshwidget.ui:119
+#: plugins/SSHManager/sshwidget.ui:92 plugins/SSHManager/sshwidget.ui:95
 #, kde-format
 msgid "The hostname of the server"
 msgstr "服务器的主机名"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/SSHManager/sshwidget.ui:132
+#: plugins/SSHManager/sshwidget.ui:102
 #, kde-format
 msgid "Port"
 msgstr "端口"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:145
+#: plugins/SSHManager/sshwidget.ui:109
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
 msgstr "服务器端口，22 是 ssh 连接的默认值"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:148
+#: plugins/SSHManager/sshwidget.ui:112
 #, kde-format
 msgid "22"
 msgstr "22"
 
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:174
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:128
 #, kde-format
-msgid "Username"
-msgstr "用户名"
+msgid "The private key to be used for this connection"
+msgstr "连接使用的私钥"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:187
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:134
 #, kde-format
-msgid "The username for the connection"
-msgstr "连接的用户名"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:190
-#, kde-format
-msgid "Your username"
-msgstr "您的用户名"
+msgid "The private key"
+msgstr "私钥"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:203
+#: plugins/SSHManager/sshwidget.ui:154
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1747,73 +1736,79 @@ msgstr ""
 "的配置信息"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:206
+#: plugins/SSHManager/sshwidget.ui:157
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "为密钥使用 ~/.ssh/config"
 
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: plugins/SSHManager/sshwidget.ui:164
+#, kde-format
+msgid "Username"
+msgstr "用户名"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:171
+#, kde-format
+msgid "The username for the connection"
+msgstr "连接的用户名"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:174
+#, kde-format
+msgid "Your username"
+msgstr "您的用户名"
+
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:219
+#: plugins/SSHManager/sshwidget.ui:181
 #, kde-format
 msgid "Folder"
 msgstr "文件夹"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:238
+#: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr "在用于组织时，此条目将位于此文件夹内。"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:257
+#: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "Profile"
 msgstr "配置"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:276
+#: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "ssh 会话开始时激活的配置文件"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:292
-#, kde-format
-msgid "The private key to be used for this connection"
-msgstr "连接使用的私钥"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:298
-#, kde-format
-msgid "The private key"
-msgstr "私钥"
-
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:335
+#: plugins/SSHManager/sshwidget.ui:258
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "新增 SSH 条目"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:349
+#: plugins/SSHManager/sshwidget.ui:272
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "删除选中的 SSH 条目"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:363
+#: plugins/SSHManager/sshwidget.ui:286
 #, kde-format
 msgid "Edit selected entry"
 msgstr "编辑选中的条目"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:373
+#: plugins/SSHManager/sshwidget.ui:296
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "新增 SSH 配置"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:383
+#: plugins/SSHManager/sshwidget.ui:306
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "取消新增或编辑"
@@ -2149,10 +2144,9 @@ msgid "&Select All"
 msgstr "全部选择(&S)"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "选择行(&L)"
+msgstr ""
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3081,89 +3075,89 @@ msgstr "启用缩略图生成"
 msgid "Size: %1 x %2"
 msgstr "大小：%1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "您确定要粘贴 %1 个字符吗？"
 
-#: terminalDisplay/TerminalDisplay.cpp:2169
+#: terminalDisplay/TerminalDisplay.cpp:2170
 #, kde-format
 msgid "Confirm Paste"
 msgstr "确认粘贴"
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "结束文字/中断：可退出当前进程"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "传输结束：可退出当前进程"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "系统提示：尝试发出声音警告"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Backspace"
 msgstr "退格"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "设备控制3/XOFF：暂停输出"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "替代/暂停：可暂停当前进程"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "退出(Esc)：用于操纵终端状态"
 
-#: terminalDisplay/TerminalDisplay.cpp:2209
+#: terminalDisplay/TerminalDisplay.cpp:2210
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "文件分隔符/退出：可中止当前进程"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2237
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "您试图粘贴的文本包含隐藏的控制字符，是否要将其过滤掉？"
 
-#: terminalDisplay/TerminalDisplay.cpp:2239
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "确认粘贴"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "不带控制字符粘贴(&W)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "全部粘贴(&P)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2243
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2479
+#: terminalDisplay/TerminalDisplay.cpp:2480
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3173,17 +3167,17 @@ msgstr ""
 "<qt>已经按下 Ctrl+S，输出正被<a href=\"https://en.wikipedia.org/wiki/"
 "Software_flow_control\">挂起</a>。可以按下 <b>Ctrl+Q</b> 继续。</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2534
+#: terminalDisplay/TerminalDisplay.cpp:2535
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "此终端为只读。"
 
-#: terminalDisplay/TerminalDisplay.cpp:2924
+#: terminalDisplay/TerminalDisplay.cpp:2925
 #, kde-format
 msgid "Change &Directory To"
 msgstr "目录切换到(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2957
+#: terminalDisplay/TerminalDisplay.cpp:2958
 #, kde-format
 msgid "&Paste Location"
 msgstr "粘贴位置(&P)"

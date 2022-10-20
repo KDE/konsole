@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:50+0000\n"
+"POT-Creation-Date: 2022-10-20 00:56+0000\n"
 "PO-Revision-Date: 2022-10-03 16:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-i18n-doc@kde.org>\n"
@@ -39,7 +39,7 @@ msgstr "파일"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:366
+#: plugins/SSHManager/sshwidget.ui:289
 #, kde-format
 msgid "Edit"
 msgstr "편집"
@@ -591,7 +591,7 @@ msgstr "배경 그림 선택"
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
-#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:305
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:141
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
@@ -830,7 +830,7 @@ msgstr "키 바인딩 배열 설명을 비워 둘 수 없습니다."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:376
+#: plugins/SSHManager/sshwidget.ui:299
 #, kde-format
 msgid "Add"
 msgstr "추가"
@@ -1375,7 +1375,7 @@ msgstr "그룹"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:244
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:200
 #, kde-format
 msgid "Default"
 msgstr "기본값"
@@ -1412,7 +1412,7 @@ msgid "Update"
 msgstr "업데이트"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:386
+#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:309
 #, kde-format
 msgid "Cancel"
 msgstr "취소"
@@ -1578,7 +1578,7 @@ msgstr "셸 프로그램(예: bash, zsh, sh) 외부에서 SSH 명령을 전달�
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
-#: plugins/SSHManager/sshwidget.ui:161
+#: plugins/SSHManager/sshwidget.ui:119
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH 키"
@@ -1679,74 +1679,68 @@ msgid "Show entries that don't match the filter"
 msgstr "필터와 일치하지 않는 항목 표시"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: plugins/SSHManager/sshwidget.ui:74
+#: plugins/SSHManager/sshwidget.ui:68
 #, kde-format
 msgid "Identifier"
 msgstr "식별자"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:87
+#: plugins/SSHManager/sshwidget.ui:75
 #, kde-format
 msgid "A name for this ssh entry"
 msgstr "이 SSH 항목의 이름"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:90
+#: plugins/SSHManager/sshwidget.ui:78
 #, kde-format
 msgid "The name of this entry on the list"
 msgstr "이 목록 항목의 이름"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/SSHManager/sshwidget.ui:103
+#: plugins/SSHManager/sshwidget.ui:85
 #, kde-format
 msgid "SSH Hostname"
 msgstr "SSH 호스트 이름"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
-#: plugins/SSHManager/sshwidget.ui:116 plugins/SSHManager/sshwidget.ui:119
+#: plugins/SSHManager/sshwidget.ui:92 plugins/SSHManager/sshwidget.ui:95
 #, kde-format
 msgid "The hostname of the server"
 msgstr "서버의 호스트 이름"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/SSHManager/sshwidget.ui:132
+#: plugins/SSHManager/sshwidget.ui:102
 #, kde-format
 msgid "Port"
 msgstr "포트"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:145
+#: plugins/SSHManager/sshwidget.ui:109
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
 msgstr "서버의 포트 번호, 기본 SSH 포트는 22"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:148
+#: plugins/SSHManager/sshwidget.ui:112
 #, kde-format
 msgid "22"
 msgstr "22"
 
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:174
+#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:128
 #, kde-format
-msgid "Username"
-msgstr "사용자 이름"
+msgid "The private key to be used for this connection"
+msgstr "연결에 사용할 개인 키"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:187
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
+#: plugins/SSHManager/sshwidget.ui:134
 #, kde-format
-msgid "The username for the connection"
-msgstr "연결에 사용할 사용자 이름"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:190
-#, kde-format
-msgid "Your username"
-msgstr "내 사용자 이름"
+msgid "The private key"
+msgstr "개인 키"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:203
+#: plugins/SSHManager/sshwidget.ui:154
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1756,73 +1750,79 @@ msgstr ""
 "따름"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:206
+#: plugins/SSHManager/sshwidget.ui:157
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "~/.ssh/config의 키 정보 사용"
 
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: plugins/SSHManager/sshwidget.ui:164
+#, kde-format
+msgid "Username"
+msgstr "사용자 이름"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:171
+#, kde-format
+msgid "The username for the connection"
+msgstr "연결에 사용할 사용자 이름"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
+#: plugins/SSHManager/sshwidget.ui:174
+#, kde-format
+msgid "Your username"
+msgstr "내 사용자 이름"
+
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:219
+#: plugins/SSHManager/sshwidget.ui:181
 #, kde-format
 msgid "Folder"
 msgstr "폴더"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:238
+#: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr "정리 목적을 위해서 이 항목은 이 폴더 내에 배치됩니다."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:257
+#: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "Profile"
 msgstr "프로필"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:276
+#: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "SSH 세션을 시작할 때 활성화할 프로필"
 
-#. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:292
-#, kde-format
-msgid "The private key to be used for this connection"
-msgstr "연결에 사용할 개인 키"
-
-#. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:298
-#, kde-format
-msgid "The private key"
-msgstr "개인 키"
-
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:335
+#: plugins/SSHManager/sshwidget.ui:258
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "새 SSH 항목 추가"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:349
+#: plugins/SSHManager/sshwidget.ui:272
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "선택한 SSH 항목 삭제"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:363
+#: plugins/SSHManager/sshwidget.ui:286
 #, kde-format
 msgid "Edit selected entry"
 msgstr "선택한 항목 편집"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:373
+#: plugins/SSHManager/sshwidget.ui:296
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "새 SSH 설정 추가"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:383
+#: plugins/SSHManager/sshwidget.ui:306
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "추가나 편집 취소"
@@ -3103,58 +3103,58 @@ msgstr "축소판 생성 활성화"
 msgid "Size: %1 x %2"
 msgstr "크기: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2168
+#: terminalDisplay/TerminalDisplay.cpp:2169
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "%1글자를 붙여 넣으시겠습니까?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2169
+#: terminalDisplay/TerminalDisplay.cpp:2170
 #, kde-format
 msgid "Confirm Paste"
 msgstr "붙여넣기 확인"
 
-#: terminalDisplay/TerminalDisplay.cpp:2202
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "텍스트 끝/인터럽트: 현재 프로세스를 종료할 수도 있음"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "전송 끝: 현재 프로세스를 종료할 수도 있음"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2205
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "벨: 들을 수 있는 경고 전송 시도"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2206
 #, kde-format
 msgid "Backspace"
 msgstr "백스페이스"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2207
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "장치 제어 3(DC3)/XOFF: 출력 일시 정지"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "대체/정지: 현재 프로세스 일시 정지"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "이스케이프: 터미널 상태 변경에 사용"
 
-#: terminalDisplay/TerminalDisplay.cpp:2209
+#: terminalDisplay/TerminalDisplay.cpp:2210
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "파일 구분자/끝내기: 현재 프로세스를 종료할 수도 있음"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2237
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3163,31 +3163,31 @@ msgstr ""
 "붙여넣을 텍스트에 숨겨져 있는 제어 문자가 들어 있습니다. 해당 문자를 제거하시"
 "겠습니까?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2239
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "붙여넣기 확인"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "제어 문자를 제외하고 붙여넣기(&W)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "모두 붙여넣기(&P)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2243
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "취소(&C)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2479
+#: terminalDisplay/TerminalDisplay.cpp:2480
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3198,17 +3198,17 @@ msgstr ""
 "Software_flow_control\">중단되었습니다</a>. <b>Ctrl+Q</b> 키를 눌러서 다시 시"
 "작하십시오.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2534
+#: terminalDisplay/TerminalDisplay.cpp:2535
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "이 터미널은 읽기 전용입니다."
 
-#: terminalDisplay/TerminalDisplay.cpp:2924
+#: terminalDisplay/TerminalDisplay.cpp:2925
 #, kde-format
 msgid "Change &Directory To"
 msgstr "다음으로 디렉터리 변경(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2957
+#: terminalDisplay/TerminalDisplay.cpp:2958
 #, kde-format
 msgid "&Paste Location"
 msgstr "붙여넣을 위치(&P)"
