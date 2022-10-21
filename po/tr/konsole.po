@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:56+0000\n"
-"PO-Revision-Date: 2022-10-07 08:37+0300\n"
+"PO-Revision-Date: 2022-10-20 12:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -232,8 +232,8 @@ msgid ""
 "Command to execute. This option will catch all following arguments, so use "
 "it as the last option."
 msgstr ""
-"Çalıştırılacak komut. Bu seçenek tüm takip eden argümanları yakalar bu "
-"nedenle son seçenek olarak kullanın."
+"Yürütülecek komut. Bu seçenek, tüm izleyen argümanları yakalar, bu nedenle "
+"son seçenek olarak kullanın."
 
 #: Application.cpp:77
 #, kde-format
@@ -4179,7 +4179,7 @@ msgid ""
 "profile"
 msgstr ""
 "Bu profil kullanılarak oluşturulan yeni uçbirim oturumu açıldığında "
-"çalıştırılacak komut"
+"yürütülecek komut"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
 #: widgets/EditProfileGeneralPage.ui:141
@@ -4968,7 +4968,7 @@ msgid ""
 "computer via SSH) is being executed"
 msgstr ""
 "Bir uzak komut (örneğin SSH ile uzak bir makineye bağlanıldığında) "
-"çalıştırıldığında kullanılacak sekme başlığı biçimi"
+"yürütülürken kullanılacak sekme başlığı biçimi"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/RenameTabWidget.ui:60
