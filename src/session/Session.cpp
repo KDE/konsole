@@ -501,12 +501,12 @@ void Session::run()
     addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_SESSION=%1").arg(dbusObject));
 
 #if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+    const auto originalEnvironment = _shellProcess->environment();
     _shellProcess->setProgram(exec);
     _shellProcess->setArguments(arguments);
-    _shellProcess->setEnvironment(_environment);
+    _shellProcess->setEnvironment(originalEnvironment + _environment);
     const auto context = KSandbox::makeHostContext(*_shellProcess);
-    // The Pty class is incredibly janky and will topple over when starting with environment, so unset it again.
-    _shellProcess->setEnvironment({});
+    _shellProcess->setEnvironment(originalEnvironment);
     const auto result = _shellProcess->start(context.program, context.arguments, _environment);
 #else
     int result = _shellProcess->start(exec, arguments, _environment);
