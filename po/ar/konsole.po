@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:56+0000\n"
-"PO-Revision-Date: 2022-10-09 21:31+0400\n"
+"POT-Creation-Date: 2022-10-23 00:47+0000\n"
+"PO-Revision-Date: 2022-10-22 23:00+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -3447,7 +3447,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "حمّل تخطيط الألسن"
 
-#: Vt102Emulation.cpp:2319
+#: Vt102Emulation.cpp:2334
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -5050,7 +5050,7 @@ msgstr "المضيف البعيد (قصير): %h"
 #: widgets/TabTitleFormatButton.cpp:49 widgets/TabTitleFormatButton.cpp:57
 #, kde-format
 msgid "Remote Host (Long): %H"
-msgstr "المضيف البعيد (طويل): %أ"
+msgstr "المضيف البعيد (طويل): %H"
 
 #: widgets/TabTitleFormatButton.cpp:50 widgets/TabTitleFormatButton.cpp:58
 #, c-format, kde-format

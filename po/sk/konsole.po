@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:56+0000\n"
+"POT-Creation-Date: 2022-10-23 00:47+0000\n"
 "PO-Revision-Date: 2022-07-19 10:03+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -3478,7 +3478,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Načítať rozloženie kariet zo súboru"
 
-#: Vt102Emulation.cpp:2319
+#: Vt102Emulation.cpp:2334
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

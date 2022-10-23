@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:56+0000\n"
+"POT-Creation-Date: 2022-10-23 00:47+0000\n"
 "PO-Revision-Date: 2022-09-10 08:21\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
@@ -3463,7 +3463,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Загрузіць макет укладак з файла"
 
-#: Vt102Emulation.cpp:2319
+#: Vt102Emulation.cpp:2334
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
