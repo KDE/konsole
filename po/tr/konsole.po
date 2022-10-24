@@ -4060,7 +4060,7 @@ msgstr "Çevreyi Düzenle"
 #: widgets/EditProfileDialog.cpp:518
 #, kde-format
 msgid "One environment variable per line"
-msgstr "Her satıra bir ortam değişkeni"
+msgstr "Her satıra bir çevre değişkeni"
 
 #: widgets/EditProfileDialog.cpp:549
 #, kde-format
