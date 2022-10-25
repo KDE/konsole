@@ -381,7 +381,40 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item row="5" column="0">
+           <widget class="QCheckBox" name="semanticInputClick">
+               <property name="text">
+                   <string>Mouse click in input line moves cursor</string>
+               </property>
+           </widget>
+       </item>
+       <item row="10" column="0" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="label_8">
+               <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                   </sizepolicy>
+               </property>
+               <property name="text">
+                   <string>Semantic hints:</string>
+               </property>
+               <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+           </widget>
+       </item>
+       <item row="10" column="1">
+           <widget class="QRadioButton" name="semanticHintsNever">
+               <property name="text">
+                   <string comment="Never">Never</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">semanticHints</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="11" column="1">
         <widget class="QRadioButton" name="semanticHintsURL">
          <property name="text">
           <string comment="When showing URL hints">When URL hints show</string>
@@ -391,17 +424,7 @@
          </attribute>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QRadioButton" name="semanticHintsNever">
-         <property name="text">
-          <string comment="Never">Never</string>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">semanticHints</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="2" column="1">
+       <item row="12" column="1">
         <widget class="QRadioButton" name="semanticHintsAlways">
          <property name="text">
           <string comment="Always">Always</string>
@@ -411,30 +434,191 @@
          </attribute>
         </widget>
        </item>
-       <item row="0" column="0" alignment="Qt::AlignRight">
-        <widget class="QLabel" name="label_8">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Semantic hints:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
+       <item row="20" column="0" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="label_20">
+               <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                   </sizepolicy>
+               </property>
+               <property name="text">
+                   <string>Red error bars:</string>
+               </property>
+               <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+           </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QCheckBox" name="semanticInputClick">
-         <property name="text">
-          <string>Mouse click in input line moves cursor</string>
-         </property>
-        </widget>
+       <item row="20" column="1">
+           <widget class="QRadioButton" name="errorBarsNever">
+               <property name="text">
+                   <string comment="Never">Never</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">errorBars</string>
+               </attribute>
+           </widget>
        </item>
-       <item row="6" column="0">
+       <item row="21" column="1">
+           <widget class="QRadioButton" name="errorBarsURL">
+               <property name="text">
+                   <string comment="When showing URL hints">When URL hints show</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">errorBars</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="22" column="1">
+           <widget class="QRadioButton" name="errorBarsAlways">
+               <property name="text">
+                   <string comment="Always">Always</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">errorBars</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="30" column="0" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="label_30">
+               <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                   </sizepolicy>
+               </property>
+               <property name="text">
+                   <string>Red error background:</string>
+               </property>
+               <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+           </widget>
+       </item>
+       <item row="30" column="1">
+           <widget class="QRadioButton" name="errorBackgroundNever">
+               <property name="text">
+                   <string comment="Never">Never</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">errorBackground</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="31" column="1">
+           <widget class="QRadioButton" name="errorBackgroundURL">
+               <property name="text">
+                   <string comment="When showing URL hints">When URL hints show</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">errorBackground</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="32" column="1">
+           <widget class="QRadioButton" name="errorBackgroundAlways">
+               <property name="text">
+                   <string comment="Always">Always</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">errorBackground</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="40" column="0" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="label_40">
+               <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                   </sizepolicy>
+               </property>
+               <property name="text">
+                   <string>Alternating bars:</string>
+               </property>
+               <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+           </widget>
+       </item>
+       <item row="40" column="1">
+           <widget class="QRadioButton" name="alternatingBarsNever">
+               <property name="text">
+                   <string comment="Never">Never</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">alternatingBars</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="41" column="1">
+           <widget class="QRadioButton" name="alternatingBarsURL">
+               <property name="text">
+                   <string comment="When showing URL hints">When URL hints show</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">alternatingBars</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="42" column="1">
+           <widget class="QRadioButton" name="alternatingBarsAlways">
+               <property name="text">
+                   <string comment="Always">Always</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">alternatingBars</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="50" column="0" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="label_50">
+               <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                   </sizepolicy>
+               </property>
+               <property name="text">
+                   <string>Alternating background:</string>
+               </property>
+               <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+           </widget>
+       </item>
+       <item row="50" column="1">
+           <widget class="QRadioButton" name="alternatingBackgroundNever">
+               <property name="text">
+                   <string comment="Never">Never</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">alternatingBackground</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="51" column="1">
+           <widget class="QRadioButton" name="alternatingBackgroundURL">
+               <property name="text">
+                   <string comment="When showing URL hints">When URL hints show</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">alternatingBackground</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="52" column="1">
+           <widget class="QRadioButton" name="alternatingBackgroundAlways">
+               <property name="text">
+                   <string comment="Always">Always</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">alternatingBackground</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="99" column="0">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -488,10 +672,26 @@
   <tabstop>semanticHintsNever</tabstop>
   <tabstop>semanticHintsURL</tabstop>
   <tabstop>semanticHintsAlways</tabstop>
+  <tabstop>errorBarsNever</tabstop>
+  <tabstop>errorBarsURL</tabstop>
+  <tabstop>errorBarsAlways</tabstop>
+  <tabstop>errorBackgroundNever</tabstop>
+  <tabstop>errorBackgroundURL</tabstop>
+  <tabstop>errorBackgroundAlways</tabstop>
+  <tabstop>alternatingBarsNever</tabstop>
+  <tabstop>alternatingBarsURL</tabstop>
+  <tabstop>alternatingBarsAlways</tabstop>
+  <tabstop>alternatingBackgroundNever</tabstop>
+  <tabstop>alternatingBackgroundURL</tabstop>
+  <tabstop>alternatingBackgroundAlways</tabstop>
  </tabstops>
  <resources/>
  <connections/>
  <buttongroups>
   <buttongroup name="semanticHints"/>
+  <buttongroup name="errorBars"/>
+  <buttongroup name="errorBackground"/>
+  <buttongroup name="alternatingBars"/>
+  <buttongroup name="alternatingBackground"/>
  </buttongroups>
 </ui>

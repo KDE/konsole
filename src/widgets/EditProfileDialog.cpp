@@ -495,6 +495,54 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
         },
     };
     setupButtonGroup(semanticHints, profile);
+    const ButtonGroupOptions errorBars = {
+        _generalUi->errorBars, // group
+        Profile::ErrorBars, // profileProperty
+        false, // preview
+        {
+            // buttons
+            {_generalUi->errorBarsNever, Enum::HintsNever},
+            {_generalUi->errorBarsURL, Enum::HintsURL},
+            {_generalUi->errorBarsAlways, Enum::HintsAlways},
+        },
+    };
+    setupButtonGroup(errorBars, profile);
+    const ButtonGroupOptions errorBackground = {
+        _generalUi->errorBackground, // group
+        Profile::ErrorBackground, // profileProperty
+        false, // preview
+        {
+            // buttons
+            {_generalUi->errorBackgroundNever, Enum::HintsNever},
+            {_generalUi->errorBackgroundURL, Enum::HintsURL},
+            {_generalUi->errorBackgroundAlways, Enum::HintsAlways},
+        },
+    };
+    setupButtonGroup(errorBackground, profile);
+    const ButtonGroupOptions alternatingBars = {
+        _generalUi->alternatingBars, // group
+        Profile::AlternatingBars, // profileProperty
+        false, // preview
+        {
+            // buttons
+            {_generalUi->alternatingBarsNever, Enum::HintsNever},
+            {_generalUi->alternatingBarsURL, Enum::HintsURL},
+            {_generalUi->alternatingBarsAlways, Enum::HintsAlways},
+        },
+    };
+    setupButtonGroup(alternatingBars, profile);
+    const ButtonGroupOptions alternatingBackground = {
+        _generalUi->alternatingBackground, // group
+        Profile::AlternatingBackground, // profileProperty
+        false, // preview
+        {
+            // buttons
+            {_generalUi->alternatingBackgroundNever, Enum::HintsNever},
+            {_generalUi->alternatingBackgroundURL, Enum::HintsURL},
+            {_generalUi->alternatingBackgroundAlways, Enum::HintsAlways},
+        },
+    };
+    setupButtonGroup(alternatingBackground, profile);
 }
 
 void EditProfileDialog::showEnvironmentEditor()
