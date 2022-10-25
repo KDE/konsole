@@ -4822,7 +4822,7 @@ msgstr "Llindar per al silenci continuat:"
 #: widgets/EditProfileTabsPage.ui:87
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
-msgstr "El llindar per al silenci continuat a detectar per Konsole"
+msgstr "El llindar per al silenci continuat que ha de detectar Konsole"
 
 #: widgets/HistorySizeWidget.cpp:40
 #, kde-format
@@ -4864,7 +4864,7 @@ msgstr ""
 #: widgets/HistorySizeWidget.ui:60
 #, kde-format
 msgid "Limit the remembered output to a fixed number of lines"
-msgstr "Limita l'eixida a recordar a un nombre fix de línies"
+msgstr "Limita l'eixida que s'ha de recordar a un nombre fix de línies"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
@@ -4876,7 +4876,7 @@ msgstr "Mida fixa:"
 #: widgets/HistorySizeWidget.ui:73
 #, kde-format
 msgid "Number of lines of output to remember"
-msgstr "Nombre de línies d'eixida a recordar"
+msgstr "Nombre de línies d'eixida que s'han de recordar"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:135
