@@ -84,6 +84,24 @@ void TerminalPainter::drawContents(Character *image,
     const Enum::Hints alternatingBars = currentProfile ? static_cast<Enum::Hints>(currentProfile->property<int>(Profile::AlternatingBars)) : Enum::HintsNever;
     const Enum::Hints alternatingBackground =
         currentProfile ? static_cast<Enum::Hints>(currentProfile->property<int>(Profile::AlternatingBackground)) : Enum::HintsNever;
+    const bool showHints = m_parentDisplay->filterChain()->showUrlHint();
+#define hintActive(h) const bool h##Active = ((h == Enum::HintsURL && showHints) || h == Enum::HintsAlways)
+    hintActive(semanticHints);
+    hintActive(lineNumbers);
+    hintActive(errorBars);
+    hintActive(errorBackground);
+    hintActive(alternatingBars);
+    hintActive(alternatingBackground);
+    QColor red;
+    QColor gray;
+    if (m_parentDisplay->terminalColor()->backgroundColor().red() > 128) {
+        // Bright background
+        red = QColor(255, 64, 64);
+        gray = QColor(192, 192, 192);
+    } else {
+        red = QColor(48, 0, 0);
+        gray = QColor(40, 40, 40);
+    }
 
     QVector<uint> univec;
     univec.reserve(m_parentDisplay->usedColumns());
@@ -175,13 +193,10 @@ void TerminalPainter::drawContents(Character *image,
         const QRect textArea(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
         if (!printerFriendly) {
             QColor background = m_parentDisplay->terminalColor()->backgroundColor();
-            if (lineProperty.flags.f.error
-                && ((errorBackground == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || errorBackground == Enum::HintsAlways)) {
-                background = QColor(48, 0, 0);
-            } else if ((lineProperty.counter & 1)
-                       && ((alternatingBackground == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint())
-                           || alternatingBackground == Enum::HintsAlways)) {
-                background = QColor(40, 40, 40);
+            if (lineProperty.flags.f.error && errorBackgroundActive) {
+                background = red;
+            } else if ((lineProperty.counter & 1) && alternatingBackgroundActive) {
+                background = gray;
             }
             drawBelowText(paint,
                           textArea,
@@ -260,26 +275,28 @@ void TerminalPainter::drawContents(Character *image,
 
         paint.setRenderHint(QPainter::Antialiasing, false);
         paint.setWorldTransform(textScale.inverted(), true);
-        if ((lineProperty.flags.f.prompt_start)
-            && ((semanticHints == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || semanticHints == Enum::HintsAlways)) {
+        if (lineProperty.flags.f.prompt_start && semanticHintsActive) {
             QPen pen(m_parentDisplay->terminalColor()->foregroundColor());
             paint.setPen(pen);
             paint.drawLine(leftPadding, textY, m_parentDisplay->contentRect().right(), textY);
         }
-        if ((lineProperty.counter & 1)
-            && ((alternatingBars == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || alternatingBars == Enum::HintsAlways)) {
+        auto opacity = paint.opacity();
+        if ((lineProperty.counter & 1) && alternatingBarsActive) {
             QPen pen(QColor("dark gray"));
             pen.setWidth(2);
             paint.setPen(pen);
-            paint.drawLine(leftPadding, textY, leftPadding, textY + fontHeight);
+            paint.setOpacity(0.5);
+            paint.drawLine(leftPadding + 1, textY + 1, leftPadding + 1, textY + fontHeight - 1);
         }
-        if (lineProperty.flags.f.error && ((errorBars == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || errorBars == Enum::HintsAlways)) {
+        if (lineProperty.flags.f.error && errorBarsActive) {
             QPen pen(QColor("red"));
             pen.setWidth(4);
             paint.setPen(pen);
-            paint.drawLine(leftPadding, textY, leftPadding, textY + fontHeight);
+            paint.setOpacity(0.5);
+            paint.drawLine(leftPadding + 2, textY + 2, leftPadding + 2, textY + fontHeight - 2);
         }
-        if ((lineNumbers == Enum::HintsURL && m_parentDisplay->filterChain()->showUrlHint()) || lineNumbers == Enum::HintsAlways) {
+        paint.setOpacity(opacity);
+        if (lineNumbersActive) {
             QRect rect(m_parentDisplay->contentRect().right() - 4 * fontWidth, textY, m_parentDisplay->contentRect().right(), textY + fontHeight);
             QPen pen(QColor(0xC00000));
             paint.setPen(pen);
