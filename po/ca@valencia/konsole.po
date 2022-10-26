@@ -2242,7 +2242,7 @@ msgstr "Només de lectura"
 #: session/SessionController.cpp:825
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "&Configura o canvia el nom la pestanya..."
+msgstr "&Configura o canvia el nom de la pestanya..."
 
 #: session/SessionController.cpp:831
 #, kde-format
@@ -5178,7 +5178,7 @@ msgstr "&Separa la pestanya"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "&Configura o canvia el nom la pestanya..."
+msgstr "&Configura o canvia el nom de la pestanya..."
 
 #: widgets/ViewContainer.cpp:106
 #, kde-format
