@@ -378,9 +378,30 @@ various enhancements in Konsole.
 and
 <keycombo action="simul">&Ctrl;&Shift;<keycap>PgDown</keycap></keycombo>
 scroll up/down to previous/next command prompt.</para></listitem>
-<listitem><para>Visual hints: a line is displayed above each prompt, prompt colors are less intense,
-and output colors are more intense. This may be configured to never show, always show, or only when URL hints are shown.
+<listitem><para>Visual hints:
+<itemizedlist>
+<listitem><para>
+A line is displayed above each prompt, prompt colors are less intense,
+and output colors are more intense.
 </para></listitem>
+<listitem><para>
+A red bar is displayed to the left of input and output lines of commands that resulted in error
+</para></listitem>
+<listitem><para>
+A red background for input and output lines of commands that resulted in error
+</para></listitem>
+<listitem><para>
+A gray bar is displayed to the left of the input and output lines of every other command.
+</para></listitem>
+<listitem><para>
+A gray background for the input and output lines of every other command.
+</para></listitem>
+</itemizedlist>
+Each of those may be configured to never show, always show, or only when URL hints are shown. The configuration is in the
+<guilabel>Semantic Integration</guilabel> tab of the <guilabel>General</guilabel> page of the profile configuration
+window.
+</para></listitem>
+
 <listitem><para>
 Context menu options
 <guimenuitem>Copy user input</guimenuitem>
