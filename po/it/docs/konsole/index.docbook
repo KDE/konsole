@@ -120,9 +120,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->28/10/2021</date>
+>19/6/2022</date>
 <releaseinfo
->Applications 21.12</releaseinfo>
+>Applications 22.12</releaseinfo>
 
 <abstract
 ><para
@@ -202,6 +202,55 @@
 > per aprirla). </para>
 
 </sect1>
+
+<sect1 id="selection">
+<title
+>Modalità di selezione</title>
+<para
+>&konsole; ha una modalità di selezione da tastiera. In questa modalità è possibile scorrere all'indietro e selezionare il testo senza il mouse.</para>
+
+<para
+>Entrare e uscire da questa modalità utilizzando la scorciatoia da tastiera (<keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>D</keycap
+></keycombo
+> per impostazione predefinita). </para>
+
+<para
+>Spostamento del cursore: frecce, <keycap
+>PagSu</keycap
+>, <keycap
+>PagGiù</keycap
+>, <keycap
+>Home</keycap
+>, <keycap
+>Fine</keycap
+>. </para>
+
+<para
+>Spostare il cursore in stile <application
+>vi</application
+>: h,j,k,l, per spostare un carattere, <keycap
+>Ctrl</keycap
+>+b,f,u,d per pagina su/giù o mezza pagina sottosopra.</para>
+
+<para
+>Selezionare il testo usando <keycap
+>Ctrl</keycap
+> o <keycap
+>Maiusc</keycap
+> con le frecce, oppure usando <keycap
+>V</keycap
+> per iniziare la selezione, spostando il cursore e poi <keycap
+>V</keycap
+> di nuovo per terminare la selezione. <keycombo
+>&Shift;<keycap
+>V</keycap
+></keycombo
+> seleziona righe intere, invece di caratteri. </para>
+
+</sect1>
+
 
 <sect1 id="profiles">
 <title
@@ -571,6 +620,62 @@
 >Se vuoi utilizzare il tasto &Ctrl; per trascinare e rilasciare o disabilitare il menu contestuale per inserire, in modo predefinito, gli &URL; come testo, abilita le opzioni corrispondenti nella scheda <guilabel
 >Mouse</guilabel
 > nella finestra delle impostazioni del profilo. </para>
+
+</sect1>
+
+<sect1 id="semantic-shell-integration">
+<title
+>Integrazione semantica della shell</title>
+
+<para
+>Un programma di shell in esecuzione in Konsole può emettere sequenze di escape che dividono il testo visualizzato in tre tipi: prompt della hell, inserimento utente e risultato del comando. L'uso di queste informazioni semantiche consente vari miglioramenti in Konsole. <itemizedlist>
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PagSu</keycap
+></keycombo
+> e <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PagGiù</keycap
+></keycombo
+> scorrono verso l'alto/basso per il prompt dei comandi precedente/successivo.</para
+></listitem>
+<listitem
+><para
+>Suggerimenti visivi: una linea viene visualizzata sopra ogni prompt, i colori del prompt sono meno intensi e i colori di uscita sono più intensi. Questo può essere configurato per non mostrare, mostrare sempre o solo quando vengono visualizzati i suggerimenti URL. </para
+></listitem>
+<listitem
+><para
+>Opzioni del menu di contesto <guimenuitem
+>Copia inserimento utente</guimenuitem
+> <guimenuitem
+>Copia uscita del comando</guimenuitem
+> <guimenuitem
+>Copia tranne prompt</guimenuitem
+> può essere utilizzato per filtrare la selezione quando viene copiata negli appunti. </para
+></listitem>
+<listitem
+><para
+>Quando la selezione è vuota, l'azione copia negli appunti copia la riga di inserimento attuale, se non è vuota o l'ultima uscita se non è presente alcun inserimento attuale. </para
+></listitem>
+<listitem
+><para
+>Premendo la freccia su/giù quando si modifica un lungo inserimento, posizionerà invece il cursore una linea su/giù inviando il numero appropriato di eventi del tasto sinistra/destra nella shell. Configurabile nelle impostazioni del profilo.</para
+></listitem>
+<listitem
+><para
+>Il clic sull'inserimento di testo posizionerà il cursore nella posizione del clic. Configurabile nelle impostazioni del profilo.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>L'integrazione semantica della shell deve essere impostata nella shell. La pressione di <keycombo
+>&Ctrl;&Alt;<keycap
+>]</keycap
+></keycombo
+> incollerà i comandi necessari necessari in bash. Per altre shell, come fish, zsh, python, ecc., consultare la documentazione di programma pertinente. </para>
 
 </sect1>
 
