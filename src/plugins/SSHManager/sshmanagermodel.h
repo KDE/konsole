@@ -56,6 +56,8 @@ public:
 
     bool hasHost(const QString &hostName) const;
     std::optional<QString> profileForHost(const QString &host) const;
+    void setManageProfile(bool manage);
+    bool getManageProfile();
 
 private:
     QStandardItem *m_sshConfigTopLevelItem = nullptr;
@@ -63,6 +65,8 @@ private:
     Konsole::Session *m_session = nullptr;
 
     QHash<Konsole::Session *, QString> m_sessionToProfileName;
+
+    bool manageProfile = false;
 };
 
 #endif

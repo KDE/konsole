@@ -372,6 +372,8 @@ void SSHManagerTreeWidget::setModel(SSHManagerModel *model)
     d->model = model;
     d->filterModel->setSourceModel(model);
     ui->folder->addItems(d->model->folders());
+    ui->btnManageProfile->setChecked(d->model->getManageProfile());
+    connect(ui->btnManageProfile, &QPushButton::clicked, d->model, &SSHManagerModel::setManageProfile);
 }
 
 void SSHManagerTreeWidget::setCurrentController(Konsole::SessionController *controller)

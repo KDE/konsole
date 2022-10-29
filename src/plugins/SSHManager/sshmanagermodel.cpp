@@ -184,6 +184,10 @@ void SSHManagerModel::setSessionController(Konsole::SessionController *controlle
 
 void SSHManagerModel::triggerProfileChange(const QString &sshHost)
 {
+    if (!manageProfile) {
+        return;
+    }
+
     auto *sm = Konsole::SessionManager::instance();
     QString profileToLoad;
 
@@ -248,6 +252,10 @@ void SSHManagerModel::load()
     auto config = KConfig(QStringLiteral("konsolesshconfig"), KConfig::OpenFlag::SimpleConfig);
     for (const QString &groupName : config.groupList()) {
         KConfigGroup group = config.group(groupName);
+        if (groupName == QStringLiteral("Global plugin config")) {
+            manageProfile = group.readEntry<bool>("manageProfile", false);
+            continue;
+        }
         addTopLevelItem(groupName);
         for (const QString &sessionName : group.groupList()) {
             SSHConfigurationData data;
@@ -271,6 +279,9 @@ void SSHManagerModel::save()
     for (const QString &groupName : config.groupList()) {
         config.deleteGroup(groupName);
     }
+
+    KConfigGroup globalGroup = config.group(QStringLiteral("Global plugin config"));
+    globalGroup.writeEntry("manageProfile", manageProfile);
 
     for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {
         QStandardItem *groupItem = invisibleRootItem()->child(i);
@@ -409,4 +420,14 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
             addChildItem(data, i18n("SSH Config"));
         }
     }
+}
+
+void SSHManagerModel::setManageProfile(bool manage)
+{
+    manageProfile = manage;
+}
+
+bool SSHManagerModel::getManageProfile()
+{
+    return manageProfile;
 }
