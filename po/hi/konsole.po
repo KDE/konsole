@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-23 00:47+0000\n"
+"POT-Creation-Date: 2022-10-30 00:49+0000\n"
 "PO-Revision-Date: 2021-08-21 16:25+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -38,7 +38,7 @@ msgstr "फ़ाइल"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:289
+#: plugins/SSHManager/sshwidget.ui:303
 #, kde-format
 msgid "Edit"
 msgstr "संपादन"
@@ -639,7 +639,7 @@ msgstr "रंग योजना व पृष्ठभूमि"
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
-#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:141
+#: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:155
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
@@ -880,7 +880,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:299
+#: plugins/SSHManager/sshwidget.ui:313
 #, kde-format
 msgid "Add"
 msgstr "जोड़ें"
@@ -1486,7 +1486,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:200
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:214
 #, fuzzy, kde-format
 #| msgid "Set as Default"
 msgid "Default"
@@ -1527,7 +1527,7 @@ msgid "Update"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:309
+#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:323
 #, kde-format
 msgid "Cancel"
 msgstr ""
@@ -1645,11 +1645,11 @@ msgid "%1 is a folder for SSH entries"
 msgstr ""
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:308
-#: plugins/SSHManager/sshmanagermodel.cpp:376
-#: plugins/SSHManager/sshmanagermodel.cpp:409
+#: plugins/SSHManager/sshmanagermodel.cpp:319
+#: plugins/SSHManager/sshmanagermodel.cpp:387
+#: plugins/SSHManager/sshmanagermodel.cpp:420
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "SSH Config"
@@ -1702,7 +1702,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
-#: plugins/SSHManager/sshwidget.ui:119
+#: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr ""
@@ -1732,58 +1732,58 @@ msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "रिमोट कनेक्शन"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
 msgid "Missing Hostname"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
 #, kde-format
 msgid "Missing Name"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:408
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:419
 #, kde-format
 msgid "Missing Folder"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:422
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:424
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:449
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:451
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
 #, fuzzy, kde-format
 #| msgid "Do not close the initial session automatically when it ends."
 msgid "You can't delete an automatically added entry."
 msgstr "जब आरंभिक सत्र समाप्त हो जाता है तो सत्र को स्वचालित बन्द नहीं करें."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:460
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile(s)"
 msgid "Delete selected entry"
@@ -1802,71 +1802,84 @@ msgstr "शॉर्टकट"
 msgid "Show entries that don't match the filter"
 msgstr ""
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
+#: plugins/SSHManager/sshwidget.ui:57
+#, kde-format
+msgid "Change profile on connect/disconnect"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
+#: plugins/SSHManager/sshwidget.ui:60
+#, fuzzy, kde-format
+#| msgid "Manage Profiles"
+msgid "Manage profile"
+msgstr "प्रोफ़ाइल प्रबंधित करें"
+
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: plugins/SSHManager/sshwidget.ui:68
+#: plugins/SSHManager/sshwidget.ui:82
 #, kde-format
 msgid "Identifier"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:75
+#: plugins/SSHManager/sshwidget.ui:89
 #, kde-format
 msgid "A name for this ssh entry"
 msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
-#: plugins/SSHManager/sshwidget.ui:78
+#: plugins/SSHManager/sshwidget.ui:92
 #, kde-format
 msgid "The name of this entry on the list"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: plugins/SSHManager/sshwidget.ui:85
+#: plugins/SSHManager/sshwidget.ui:99
 #, kde-format
 msgid "SSH Hostname"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
-#: plugins/SSHManager/sshwidget.ui:92 plugins/SSHManager/sshwidget.ui:95
+#: plugins/SSHManager/sshwidget.ui:106 plugins/SSHManager/sshwidget.ui:109
 #, fuzzy, kde-format
 #| msgid "Change the shape of the cursor"
 msgid "The hostname of the server"
 msgstr "संकेतक के आकार को बदलें"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: plugins/SSHManager/sshwidget.ui:102
+#: plugins/SSHManager/sshwidget.ui:116
 #, kde-format
 msgid "Port"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:109
+#: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
-#: plugins/SSHManager/sshwidget.ui:112
+#: plugins/SSHManager/sshwidget.ui:126
 #, kde-format
 msgid "22"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:128
+#: plugins/SSHManager/sshwidget.ui:142
 #, kde-format
 msgid "The private key to be used for this connection"
 msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
-#: plugins/SSHManager/sshwidget.ui:134
+#: plugins/SSHManager/sshwidget.ui:148
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "The private key"
 msgstr "टर्मिनल विशेषताएँ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:154
+#: plugins/SSHManager/sshwidget.ui:168
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1874,27 +1887,27 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:157
+#: plugins/SSHManager/sshwidget.ui:171
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:164
+#: plugins/SSHManager/sshwidget.ui:178
 #, fuzzy, kde-format
 #| msgid "User Name"
 msgid "Username"
 msgstr "उपयोक्ता नाम"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:171
+#: plugins/SSHManager/sshwidget.ui:185
 #, fuzzy, kde-format
 #| msgid "New Remote Connection"
 msgid "The username for the connection"
 msgstr "नया रिमोट कनेक्शन"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:174
+#: plugins/SSHManager/sshwidget.ui:188
 #, fuzzy, kde-format
 #| msgctxt "NAME OF TRANSLATORS"
 #| msgid "Your names"
@@ -1902,59 +1915,59 @@ msgid "Your username"
 msgstr "रविशंकर श्रीवास्तव, जी. करूणाकर"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:181
+#: plugins/SSHManager/sshwidget.ui:195
 #, kde-format
 msgid "Folder"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:194
+#: plugins/SSHManager/sshwidget.ui:208
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:207
+#: plugins/SSHManager/sshwidget.ui:221
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgid "Profile"
 msgstr "नया प्रोफ़ाइल"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:220
+#: plugins/SSHManager/sshwidget.ui:234
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:258
+#: plugins/SSHManager/sshwidget.ui:272
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:272
+#: plugins/SSHManager/sshwidget.ui:286
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile(s)"
 msgid "Delete selected SSH entry"
 msgstr "चयनित प्रोफ़ाइल संपादित करें"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:286
+#: plugins/SSHManager/sshwidget.ui:300
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile(s)"
 msgid "Edit selected entry"
 msgstr "चयनित प्रोफ़ाइल संपादित करें"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:296
+#: plugins/SSHManager/sshwidget.ui:310
 #, fuzzy, kde-format
 #| msgid "Remote Connection"
 msgid "Add new SSH Configuration"
 msgstr "रिमोट कनेक्शन"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:306
+#: plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr ""
@@ -5667,12 +5680,6 @@ msgstr "टैब बंद करें (&C)"
 
 #~ msgid "DEC VT420 Terminal"
 #~ msgstr "डीईसी वीटी420 टर्मिनल"
-
-#, fuzzy
-#~| msgid "Manage Profiles"
-#~ msgctxt "@title:window"
-#~ msgid "Manage Profiles"
-#~ msgstr "प्रोफ़ाइल प्रबंधित करें"
 
 #, fuzzy
 #~| msgid "Manage Profiles"
