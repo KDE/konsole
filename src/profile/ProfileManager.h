@@ -231,7 +231,7 @@ private:
     std::vector<ShortcutData> _shortcuts;
 
     // Set to true when setShortcut() is called so that when the ProfileSettings
-    // dialog is accepted the profiles shorcut changes are saved
+    // dialog is accepted the profiles shortcut changes are saved
     bool _profileShortcutsChanged = false;
 
     KSharedConfigPtr m_config;
