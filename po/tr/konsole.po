@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-30 00:49+0000\n"
-"PO-Revision-Date: 2022-10-20 12:20+0300\n"
+"POT-Creation-Date: 2022-10-31 00:49+0000\n"
+"PO-Revision-Date: 2022-10-30 20:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1692,15 +1692,13 @@ msgstr "Süzgeçle eşleşmeyen girdileri göster"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Bağlanırken ve bağlantı kesilirken profili değiştir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage Profiles..."
+#, kde-format
 msgid "Manage profile"
-msgstr "Profilleri Yönet..."
+msgstr "Profili yönet"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -4066,17 +4064,17 @@ msgstr "Zil Olaylarını Yok Say"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1 içindeki yeni uçbirim oturumları için öntanımlı profil"
 
-#: widgets/EditProfileDialog.cpp:517
+#: widgets/EditProfileDialog.cpp:565
 #, kde-format
 msgid "Edit Environment"
 msgstr "Çevreyi Düzenle"
 
-#: widgets/EditProfileDialog.cpp:518
+#: widgets/EditProfileDialog.cpp:566
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Her satıra bir çevre değişkeni"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:597
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4084,18 +4082,18 @@ msgid_plural " seconds"
 msgstr[0] " saniye"
 msgstr[1] " saniye"
 
-#: widgets/EditProfileDialog.cpp:648
+#: widgets/EditProfileDialog.cpp:696
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Başlangıç Dizinini Seç"
 
-#: widgets/EditProfileDialog.cpp:1172
+#: widgets/EditProfileDialog.cpp:1220
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> şeması yüklenemedi."
 
-#: widgets/EditProfileDialog.cpp:1351
+#: widgets/EditProfileDialog.cpp:1399
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4104,7 +4102,7 @@ msgstr ""
 "Bu renk şeması masaüstünüz tarafından desteklenmiyor; görünen saydam arka "
 "plan kullanıyor"
 
-#: widgets/EditProfileDialog.cpp:1357
+#: widgets/EditProfileDialog.cpp:1405
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4113,7 +4111,7 @@ msgstr ""
 "Konsole masaüstü efektleri etkinleştirilmeden önce başlatıldı. Saydam arka "
 "planı görebilmek için Konsole uygulamasını yeniden başlatmalısınız."
 
-#: widgets/EditProfileDialog.cpp:1748
+#: widgets/EditProfileDialog.cpp:1796
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4143,7 +4141,7 @@ msgstr ""
 "yok sayılır ve dosya varsayılan metin\n"
 "düzenleyici tarafından açılır."
 
-#: widgets/EditProfileDialog.cpp:1761
+#: widgets/EditProfileDialog.cpp:1809
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Metin Düzenleyici Özel Komutu"
@@ -4283,38 +4281,82 @@ msgstr "Anlamsal Tümleşim"
 msgid "Up/Down Arrows emulation"
 msgstr "Yukarı/Aşağı okları öykünmesi"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
-msgctxt "When showing URL hints"
-msgid "When URL hints show"
-msgstr "URL ipuçları gösterildiğinde"
+msgid "Mouse click in input line moves cursor"
+msgstr "Girdi satırında fare tıklaması imleci taşır"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileGeneralPage.ui:400
+#, kde-format
+msgid "Semantic hints:"
+msgstr "Anlamsal ipuçları:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
-#: widgets/EditProfileGeneralPage.ui:397
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
+#: widgets/EditProfileGeneralPage.ui:410 widgets/EditProfileGeneralPage.ui:456
+#: widgets/EditProfileGeneralPage.ui:502 widgets/EditProfileGeneralPage.ui:548
+#: widgets/EditProfileGeneralPage.ui:594
 #, kde-format
 msgctxt "Never"
 msgid "Never"
 msgstr "Asla"
 
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
+#: widgets/EditProfileGeneralPage.ui:420 widgets/EditProfileGeneralPage.ui:466
+#: widgets/EditProfileGeneralPage.ui:512 widgets/EditProfileGeneralPage.ui:558
+#: widgets/EditProfileGeneralPage.ui:604
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr "URL ipuçları gösterildiğinde"
+
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
-#: widgets/EditProfileGeneralPage.ui:407
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
+#: widgets/EditProfileGeneralPage.ui:430 widgets/EditProfileGeneralPage.ui:476
+#: widgets/EditProfileGeneralPage.ui:522 widgets/EditProfileGeneralPage.ui:568
+#: widgets/EditProfileGeneralPage.ui:614
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Her zaman"
 
-#. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:423
+#. i18n: ectx: property (text), widget (QLabel, label_20)
+#: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
-msgid "Semantic hints:"
-msgstr "Anlamsal ipuçları:"
+msgid "Red error bars:"
+msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:433
+#. i18n: ectx: property (text), widget (QLabel, label_30)
+#: widgets/EditProfileGeneralPage.ui:492
+#, fuzzy, kde-format
+#| msgid "Blur background"
+msgid "Red error background:"
+msgstr "Arka planı bulanıklaştır"
+
+#. i18n: ectx: property (text), widget (QLabel, label_40)
+#: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
-msgid "Mouse click in input line moves cursor"
-msgstr "Girdi satırında fare tıklaması imleci taşır"
+msgid "Alternating bars:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_50)
+#: widgets/EditProfileGeneralPage.ui:584
+#, fuzzy, kde-format
+#| msgid "Blur background"
+msgid "Alternating background:"
+msgstr "Arka planı bulanıklaştır"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-30 00:49+0000\n"
+"POT-Creation-Date: 2022-10-31 00:49+0000\n"
 "PO-Revision-Date: 2022-10-07 09:14+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -4105,17 +4105,17 @@ msgstr "Ignorar os Eventos da Campainha"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Perfil predefinido para as sessões de terminal novas em %1"
 
-#: widgets/EditProfileDialog.cpp:517
+#: widgets/EditProfileDialog.cpp:565
 #, kde-format
 msgid "Edit Environment"
 msgstr "Editar o Ambiente"
 
-#: widgets/EditProfileDialog.cpp:518
+#: widgets/EditProfileDialog.cpp:566
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Uma variável de ambiente por linha"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:597
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4123,18 +4123,18 @@ msgid_plural " seconds"
 msgstr[0] " segundo"
 msgstr[1] " segundos"
 
-#: widgets/EditProfileDialog.cpp:648
+#: widgets/EditProfileDialog.cpp:696
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Seleccionar a Pasta Inicial"
 
-#: widgets/EditProfileDialog.cpp:1172
+#: widgets/EditProfileDialog.cpp:1220
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Não foi possível carregar o esquema <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1351
+#: widgets/EditProfileDialog.cpp:1399
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4143,7 +4143,7 @@ msgstr ""
 "Este esquema de cores tem um fundo transparente que não parece ser suportado "
 "no seu ambiente"
 
-#: widgets/EditProfileDialog.cpp:1357
+#: widgets/EditProfileDialog.cpp:1405
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4152,7 +4152,7 @@ msgstr ""
 "O Konsole foi iniciado antes de activar os efeitos do ecrã. Terá de "
 "reiniciar o Konsole para ver o fundo transparente."
 
-#: widgets/EditProfileDialog.cpp:1748
+#: widgets/EditProfileDialog.cpp:1796
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4180,7 +4180,7 @@ msgstr ""
 "Se o PATH ou o LINE não estiverem presentes no comando, esta opção\n"
 "será ignorada e o ficheiro será aberto pelo editor de texto predefinido."
 
-#: widgets/EditProfileDialog.cpp:1761
+#: widgets/EditProfileDialog.cpp:1809
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Comando Personalizado do Editor de Texto"
@@ -4321,38 +4321,82 @@ msgstr "Integração Semântica"
 msgid "Up/Down Arrows emulation"
 msgstr "Emulação dos cursores para Cima/Baixo"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
-msgctxt "When showing URL hints"
-msgid "When URL hints show"
-msgstr "No caso de sugestões de URL's mostrar"
+msgid "Mouse click in input line moves cursor"
+msgstr "O botão do rato num campo do texto move o cursor"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileGeneralPage.ui:400
+#, kde-format
+msgid "Semantic hints:"
+msgstr "Sugestões semânticas:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
-#: widgets/EditProfileGeneralPage.ui:397
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
+#: widgets/EditProfileGeneralPage.ui:410 widgets/EditProfileGeneralPage.ui:456
+#: widgets/EditProfileGeneralPage.ui:502 widgets/EditProfileGeneralPage.ui:548
+#: widgets/EditProfileGeneralPage.ui:594
 #, kde-format
 msgctxt "Never"
 msgid "Never"
 msgstr "Nunca"
 
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
+#: widgets/EditProfileGeneralPage.ui:420 widgets/EditProfileGeneralPage.ui:466
+#: widgets/EditProfileGeneralPage.ui:512 widgets/EditProfileGeneralPage.ui:558
+#: widgets/EditProfileGeneralPage.ui:604
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr "No caso de sugestões de URL's mostrar"
+
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
-#: widgets/EditProfileGeneralPage.ui:407
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
+#: widgets/EditProfileGeneralPage.ui:430 widgets/EditProfileGeneralPage.ui:476
+#: widgets/EditProfileGeneralPage.ui:522 widgets/EditProfileGeneralPage.ui:568
+#: widgets/EditProfileGeneralPage.ui:614
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Sempre"
 
-#. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:423
+#. i18n: ectx: property (text), widget (QLabel, label_20)
+#: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
-msgid "Semantic hints:"
-msgstr "Sugestões semânticas:"
+msgid "Red error bars:"
+msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:433
+#. i18n: ectx: property (text), widget (QLabel, label_30)
+#: widgets/EditProfileGeneralPage.ui:492
+#, fuzzy, kde-format
+#| msgid "Blur background"
+msgid "Red error background:"
+msgstr "Borrar o fundo"
+
+#. i18n: ectx: property (text), widget (QLabel, label_40)
+#: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
-msgid "Mouse click in input line moves cursor"
-msgstr "O botão do rato num campo do texto move o cursor"
+msgid "Alternating bars:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_50)
+#: widgets/EditProfileGeneralPage.ui:584
+#, fuzzy, kde-format
+#| msgid "Blur background"
+msgid "Alternating background:"
+msgstr "Borrar o fundo"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
