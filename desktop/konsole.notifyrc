@@ -1146,3 +1146,13 @@ Comment[x-test]=xxA session has exited with non-zero statusxx
 Comment[zh_CN]=会话以非零状态退出
 Comment[zh_TW]=工作階段以不正常狀態（非零值）結束
 Action=None
+
+[Event/ProcessNotification]
+Name=Process Triggered a Notification in a Focused Session
+Comment=Notification emitted by a process in a focused session
+Action=None
+
+[Event/ProcessNotificationHidden]
+Name=Process Triggered a Notification in a Non-Focused Session
+Comment=Notification emitted by a process in a non-focused session
+Action=Popup

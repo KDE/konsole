@@ -20,6 +20,7 @@
 
 // KDE
 #include <KLocalizedString>
+#include <KNotification>
 
 // Konsole
 #include "EscapeSequenceUrlExtractor.h"
@@ -1107,6 +1108,29 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             int c = params[k].toInt();
             colorTable[c] = QColor();
         }
+    }
+    if (attribute == 777) {
+        // Notification
+        auto params = value.split(QLatin1Char(';'));
+        if (params.length() < 1 || params[0] != QLatin1String("notify")) {
+            return;
+        }
+
+        const auto hasFocus = _currentScreen->currentTerminalDisplay()->hasFocus();
+        KNotification *notification = nullptr;
+        if (params.length() >= 3) {
+            notification =
+                KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"), params[1], params[2]);
+        } else {
+            notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"), params[1]);
+        }
+
+        notification->setDefaultAction(i18n("Show session"));
+        connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
+            _currentScreen->currentTerminalDisplay()->notificationClicked(notification->xdgActivationToken());
+        });
+
+        return;
     }
 
     if (value == QLatin1String("?")) {
