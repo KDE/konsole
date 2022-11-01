@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-31 00:49+0000\n"
-"PO-Revision-Date: 2022-10-08 06:19+0200\n"
+"PO-Revision-Date: 2022-10-31 05:02+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -449,13 +449,13 @@ msgstr "ფერი"
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
-msgstr ""
+msgstr "მძაფრი ფერი"
 
 #: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
-msgstr ""
+msgstr "მქრქალი ფერი"
 
 #: colorscheme/ColorSchemeEditor.cpp:136
 #, kde-format
@@ -469,7 +469,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
-msgstr ""
+msgstr "აირჩიეთ ფონის გამოსახულების ფაილი"
 
 #: colorscheme/ColorSchemeEditor.cpp:189
 #, kde-format
@@ -499,13 +499,13 @@ msgstr "ფერის ასარჩევად დააწკაპუნ�
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
-msgstr ""
+msgstr "დააწკაპუნეთ მძაფრი ფერის ასარჩევად"
 
 #: colorscheme/ColorSchemeEditor.cpp:392
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
-msgstr ""
+msgstr "დააწკაპუნეთ მქრქალი ფერის ასარჩევად"
 
 #. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
 #. i18n: ectx: property (text), widget (QLabel, discriptionLabel)
@@ -534,13 +534,13 @@ msgstr ""
 #: colorscheme/ColorSchemeEditor.ui:60
 #, kde-format
 msgid "Blur background"
-msgstr ""
+msgstr "ფონის გაბუნდოვნება"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:69
 #, kde-format
 msgid "Background color transparency:"
-msgstr ""
+msgstr "ფონის ფერის გამჭვირვალობა:"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
@@ -565,7 +565,7 @@ msgstr "ფონის გამოსახულება:"
 #: colorscheme/ColorSchemeEditor.ui:144
 #, kde-format
 msgid "Edit the path of the background image"
-msgstr ""
+msgstr "შეიყვანეთ ფონის გამოსახულების ფაილის ბილიკი"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, wallpaperSelectButton)
 #: colorscheme/ColorSchemeEditor.ui:151
@@ -586,7 +586,7 @@ msgstr "..."
 #: colorscheme/ColorSchemeEditor.ui:165
 #, kde-format
 msgid "Wallpaper scaling:"
-msgstr ""
+msgstr "ფონის სურათის მასშტაბირება:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
@@ -610,13 +610,13 @@ msgstr "ამოჭრა"
 #: colorscheme/ColorSchemeEditor.ui:188
 #, kde-format
 msgid "Adapt"
-msgstr ""
+msgstr "მორგება"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:193
 #, kde-format
 msgid "NoScaling"
-msgstr ""
+msgstr "გადიდებისგარეშე"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
@@ -628,7 +628,7 @@ msgstr "ფონური სურათის გადაბრუნებ�
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "გადაბრუნებისგარეშე"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
@@ -998,7 +998,7 @@ msgstr "Thomas Dreibholz"
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
-msgstr ""
+msgstr "ზოგადი გაუმჯობესებები"
 
 #: main.cpp:371
 #, kde-format
@@ -1011,7 +1011,7 @@ msgstr "Chris Machemer"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
-msgstr ""
+msgstr "შეცდომების გასწორება"
 
 #: main.cpp:372
 #, kde-format
@@ -1131,7 +1131,7 @@ msgstr "Dan Pilone"
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
-msgstr ""
+msgstr "SGI -ზე პორტირება"
 
 #: main.cpp:398
 #, kde-format
@@ -1143,7 +1143,7 @@ msgstr "Kevin Street"
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
-msgstr ""
+msgstr "FreeBSD -ზე პორტირება"
 
 #: main.cpp:399
 #, kde-format
@@ -1173,7 +1173,7 @@ msgstr "Lars Knoll"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
-msgstr ""
+msgstr "მადლობა ბევრ სხვას.\n"
 
 #: MainWindow.cpp:315
 #, kde-format
@@ -1395,12 +1395,12 @@ msgstr "სწრაფი ბრძანებები"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "სწრაფი წვდომის ჩვენება"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "სწრაფი ბრძანებების ჩვენება"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:168
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
@@ -1601,7 +1601,7 @@ msgstr "აკლია საქაღალდე"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:424
 #, kde-format
 msgid "An SSH session must have a profile"
-msgstr ""
+msgstr "SSH სესიას პროფილი აუცილებლად უნდა ჰქონდეს"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
@@ -1611,17 +1611,17 @@ msgstr "ამ საქაღალდის წაშლის შეცდო
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:451
 #, kde-format
 msgid "Delete folder and all of its contents"
-msgstr ""
+msgstr "საქაღალდისა და მისი ქვესაქაღალდეების წაშლა"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "Double click to change the folder name."
-msgstr ""
+msgstr "საქაღალდის სახელის შესაცვლელად ორჯერ დააწკაპუნეთ."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
 #, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr ""
+msgstr "ავტომატურად დამატებული ჩანაწერის წაშლა შეუძლებელია."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
 #, kde-format
@@ -1638,7 +1638,7 @@ msgstr "მალსახმობი"
 #: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
-msgstr ""
+msgstr "ჩანაწერების, რომლებიც ფილტრს არ ემთხვევიან, ჩვენება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:57
@@ -1648,11 +1648,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage Profiles..."
+#, kde-format
 msgid "Manage profile"
-msgstr "პროფილების მართვა..."
+msgstr "პროფილის მართვა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -1781,37 +1779,37 @@ msgstr "ახალი SSH ჩანაწერის დამატება
 #: plugins/SSHManager/sshwidget.ui:286
 #, kde-format
 msgid "Delete selected SSH entry"
-msgstr ""
+msgstr "მონიშნული SSH ჩანაწერის წაშლა"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit selected entry"
-msgstr ""
+msgstr "ამ ერთეულის ჩასწორება"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add new SSH Configuration"
-msgstr ""
+msgstr "ახალი SSH კონფიგურაციის დამატება"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
 #: plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel Add or Edit"
-msgstr ""
+msgstr "დამატების ან ჩასწორების გაუქმება"
 
 #: pluginsystem/PluginManager.cpp:83
 #, kde-format
 msgid "No plugins available"
-msgstr ""
+msgstr "დამატებები ხელმისაწვდომი არაა"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
 #. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
 #: PrintOptions.ui:14 PrintOptions.ui:20
 #, kde-format
 msgid "Output Options"
-msgstr ""
+msgstr "გამოტანის პარამეტრები"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
@@ -1825,7 +1823,7 @@ msgstr ""
 #: PrintOptions.ui:46 settings/konsole.kcfg:169
 #, kde-format
 msgid "&Scale output"
-msgstr ""
+msgstr "გამოტანის &მასშტაბირება"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
 #, kde-format
@@ -1855,7 +1853,7 @@ msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr ""
+msgstr " [მხოლოდ-კითხვადი]"
 
 #: profile/ProfileModel.cpp:84
 #, kde-format
@@ -1867,13 +1865,13 @@ msgstr " [ნაგულისხმები]"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "ჩაშენებული პროფილი ყოველთვის ხელმისაწვდომია"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
-msgstr ""
+msgstr "მალსახმობის შესაცვლელად ორჯერ დააწკაპუნეთ"
 
 #: RenameTabDialog.cpp:25
 #, kde-format
@@ -1883,7 +1881,7 @@ msgstr "ჩანართის თვისებები"
 #: SaveHistoryTask.cpp:68
 #, kde-format
 msgid "Save Output From %1"
-msgstr ""
+msgstr "%1-ის გამოტანის შენახვა"
 
 #: SaveHistoryTask.cpp:80
 #, kde-format
@@ -1960,7 +1958,7 @@ msgstr "თეთრი შავ ფონზე"
 #: schemas.cpp:13
 #, kde-format
 msgid "Default (XFree 4)"
-msgstr ""
+msgstr "ნაგულისხმები (XFree 4)"
 
 #: schemas.cpp:14
 #, kde-format
@@ -1985,7 +1983,7 @@ msgstr ""
 #: session/Session.cpp:373
 #, kde-format
 msgid "Could not find binary: "
-msgstr ""
+msgstr "გამშვები ფაილი ვერ ვიპოვე: "
 
 #: session/Session.cpp:382
 #, kde-format
@@ -2196,7 +2194,7 @@ msgstr ""
 #: session/SessionController.cpp:838
 #, kde-format
 msgid "&Select Tabs..."
-msgstr ""
+msgstr "&აირჩეთ ჩანართები..."
 
 #: session/SessionController.cpp:844
 #, kde-format
@@ -2207,27 +2205,27 @@ msgstr "არაფერი"
 #: session/SessionController.cpp:852
 #, kde-format
 msgid "Copy Input To"
-msgstr ""
+msgstr "შეყვანის კოპირება"
 
 #: session/SessionController.cpp:859
 #, kde-format
 msgid "&ZModem Upload..."
-msgstr ""
+msgstr "&ZModem -ით ატვირთვა..."
 
 #: session/SessionController.cpp:864
 #, kde-format
 msgid "Monitor for &Activity"
-msgstr ""
+msgstr "&აქტივობის მონიტორინგი"
 
 #: session/SessionController.cpp:870
 #, kde-format
 msgid "Monitor for &Silence"
-msgstr ""
+msgstr "&სიჩუმის მონიტორინგი"
 
 #: session/SessionController.cpp:876
 #, kde-format
 msgid "Monitor for Process Finishing"
-msgstr ""
+msgstr "პროცესის დასრულების მონიტორინგი"
 
 #: session/SessionController.cpp:883
 #, kde-format
@@ -2242,7 +2240,7 @@ msgstr "შრიფტის შემცირება"
 #: session/SessionController.cpp:896
 #, kde-format
 msgid "Reset Font Size"
-msgstr ""
+msgstr "ფონტის ზომის საწყის მნიშვნელობაზე დაბრუნება"
 
 #: session/SessionController.cpp:901
 #, kde-format
@@ -2252,42 +2250,42 @@ msgstr "სიგნალის გაგზავნა"
 #: session/SessionController.cpp:905
 #, kde-format
 msgid "&Suspend Task"
-msgstr ""
+msgstr "ამოცანის &შეჩერება"
 
 #: session/SessionController.cpp:910
 #, kde-format
 msgid "&Continue Task"
-msgstr ""
+msgstr "ამოცანის &გაგრძელება"
 
 #: session/SessionController.cpp:915
 #, kde-format
 msgid "&Hangup"
-msgstr ""
+msgstr "&დაკიდება"
 
 #: session/SessionController.cpp:920
 #, kde-format
 msgid "&Interrupt Task"
-msgstr ""
+msgstr "პროცესის &შეწყვეტა"
 
 #: session/SessionController.cpp:925
 #, kde-format
 msgid "&Terminate Task"
-msgstr ""
+msgstr "პროცესის &გაწყვეტა"
 
 #: session/SessionController.cpp:930
 #, kde-format
 msgid "&Kill Task"
-msgstr ""
+msgstr "პროცესის &მოკვლა"
 
 #: session/SessionController.cpp:935
 #, kde-format
 msgid "User Signal &1"
-msgstr ""
+msgstr "მომხმარებლის სიგნალი &1"
 
 #: session/SessionController.cpp:940
 #, kde-format
 msgid "User Signal &2"
-msgstr ""
+msgstr "მომხმარებლის სიგნალი &2"
 
 #: session/SessionController.cpp:957
 #, kde-format
@@ -2551,13 +2549,13 @@ msgstr ""
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Thumbnail Width"
-msgstr ""
+msgstr "მინიატურის სიგანე"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Sets the width of the thumbnail"
-msgstr ""
+msgstr "მინიატურის სიგანის დაყენება"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
@@ -2961,7 +2959,7 @@ msgctxt ""
 "@option:radio File location; <filename>%1</filename>: path to directory "
 "placeholder"
 msgid "System temporary directory (%1)"
-msgstr ""
+msgstr "სისტემური დროებითი საქაღალდე (%1)"
 
 #: settings/TemporaryFilesSettings.cpp:33
 #, kde-format
@@ -2969,7 +2967,7 @@ msgctxt ""
 "@option:radio File location; <filename>%1</filename>: path to directory "
 "placeholder"
 msgid "User cache directory (%1)"
-msgstr ""
+msgstr "ქეშის საქაღალდის დაყენება (%1)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: settings/TemporaryFilesSettings.ui:37
@@ -3733,7 +3731,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:522
 #, kde-format
 msgid "Inactive Terminals:"
-msgstr ""
+msgstr "არააქტიური ტერმინალები:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:532
@@ -3767,7 +3765,7 @@ msgstr " px"
 #: widgets/EditProfileAppearancePage.ui:599
 #, kde-format
 msgid "Margins:"
-msgstr ""
+msgstr "ზღვრები:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileAppearancePage.ui:651
@@ -3943,22 +3941,22 @@ msgstr[1] " მწკრივი"
 #: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Bell"
-msgstr ""
+msgstr "სისტემური ზარი"
 
 #: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "System Notifications"
-msgstr ""
+msgstr "სისტემური შეტყობინებები"
 
 #: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Visual Bell"
-msgstr ""
+msgstr "ვიზუალური ზარი"
 
 #: widgets/EditProfileDialog.cpp:451
 #, kde-format
 msgid "Ignore Bell Events"
-msgstr ""
+msgstr "ზარის მოვლენების იგნორი"
 
 #: widgets/EditProfileDialog.cpp:460
 #, kde-format
@@ -3968,7 +3966,7 @@ msgstr ""
 #: widgets/EditProfileDialog.cpp:565
 #, kde-format
 msgid "Edit Environment"
-msgstr ""
+msgstr "გარემოს ჩასწორება"
 
 #: widgets/EditProfileDialog.cpp:566
 #, kde-format
@@ -4128,7 +4126,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:268
 #, kde-format
 msgid "Initial terminal size:"
-msgstr ""
+msgstr "ტერმინალის საწყისი ზომა:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:343

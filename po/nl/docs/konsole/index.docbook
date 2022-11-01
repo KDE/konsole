@@ -92,7 +92,7 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2022-09-16</date>
+>2022-10-29</date>
 <releaseinfo
 >Applications 22.12</releaseinfo>
 
@@ -615,8 +615,37 @@
 ></listitem>
 <listitem
 ><para
->Visuele tips: een regel wordt boven elke prompt getoond, kleuren van prompt zijn minder intens en uitvoerkleuren zijn intenser. Dit kan geconfigureerd worden tot nooit tonen, altijd tonen of alleen wanneer URL-tips getoond worden. </para
+>Visual hints:</para>
+<itemizedlist>
+<listitem
+><para
+>A line is displayed above each prompt, prompt colors are less intense, and output colors are more intense. </para
 ></listitem>
+<listitem
+><para
+>A red bar is displayed to the left of input and output lines of commands that resulted in error </para
+></listitem>
+<listitem
+><para
+>A red background for input and output lines of commands that resulted in error </para
+></listitem>
+<listitem
+><para
+>A gray bar is displayed to the left of the input and output lines of every other command. </para
+></listitem>
+<listitem
+><para
+>A gray background for the input and output lines of every other command. </para
+></listitem>
+</itemizedlist>
+<para
+>Each of those may be configured to never show, always show, or only when URL hints are shown. The configuration is in the <guilabel
+>Semantic Integration</guilabel
+> tab of the <guilabel
+>General</guilabel
+> page of the profile configuration window. </para
+></listitem>
+
 <listitem
 ><para
 >Opties in contextmenu <guimenuitem
