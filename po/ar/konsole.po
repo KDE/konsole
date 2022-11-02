@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-31 00:49+0000\n"
-"PO-Revision-Date: 2022-10-22 23:00+0400\n"
+"PO-Revision-Date: 2022-11-01 12:13+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1695,15 +1695,13 @@ msgstr "أعرض المدخلات التي لا تطابق المرشح"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "غير التشكيلة عند الوصل/القطع"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "أدر التشكيلات"
+msgstr "أدر التشكيلة"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -3214,9 +3212,8 @@ msgid ""
 "Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
 "b> to resume.</qt>"
 msgstr ""
-"<qt>تم <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
-"\">تعليق</a> المخرجات بواسطة ضغط  Ctrl+S.  اضغط  <b>Ctrl+Q</b> للاستئناف.</"
-"qt>"
+"<qt>المخرجات <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
+"\">علقت</a> بواسطة ضغط  Ctrl+S.  اضغط  <b>Ctrl+Q</b> للاستئنافها.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2535
 #, kde-format
@@ -4339,27 +4336,25 @@ msgstr "دائما"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "أشرطة خطأ حمراء:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "خلفية معماة"
+msgstr "خلفية خطأ حمراء:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "أشرطة متناوبة:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "خلفية معماة"
+msgstr "خلفية متناوبة:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29

@@ -615,29 +615,31 @@
 ></listitem>
 <listitem
 ><para
->Consells visuals: <itemizedlist
-> <listitem
+>Consells visuals:</para>
+<itemizedlist>
+<listitem
 ><para
-> Es mostra una línia per sobre de cada indicador, els colors dels indicadors són menys intensos, i els colors de sortida són més intensos. </para
-></listitem
-> <listitem
+>Es mostra una línia per sobre de cada indicador, els colors dels indicadors són menys intensos, i els colors de sortida són més intensos. </para
+></listitem>
+<listitem
 ><para
-> Es mostra una barra vermella a l'esquerra de les línies d'entrada i sortida de les ordres que han donat un resultat d'error </para
-></listitem
-><listitem
+>Es mostra una barra vermella a l'esquerra de les línies d'entrada i sortida de les ordres que han donat un resultat d'error </para
+></listitem>
+<listitem
 ><para
-> Un fons vermell per a les línies d'entrada i sortida de les ordres han donat un resultat d'error </para
-></listitem
-><listitem
+>Un fons vermell per a les línies d'entrada i sortida de les ordres han donat un resultat d'error </para
+></listitem>
+<listitem
 ><para
 >Es mostra una barra grisa a l'esquerra de les línies d'entrada i sortida de les altres ordres. </para
-></listitem
-> <listitem
+></listitem>
+<listitem
 ><para
-> Un fons gris per a les línies d'entrada i sortida de les altres ordres. </para
-></listitem
-> </itemizedlist
-> Cadascun d'aquests es pot configurar per no mostrar mai, mostrar sempre, o només quan es mostren els consells d'URL. La configuració es troba a la pestanya <guilabel
+>Un fons gris per a les línies d'entrada i sortida de les altres ordres. </para
+></listitem>
+</itemizedlist>
+<para
+>Cadascun d'aquests es pot configurar per no mostrar mai, mostrar sempre, o només quan es mostren els consells d'URL. La configuració es troba a la pestanya <guilabel
 >Integració semàntica</guilabel
 > de la pàgina <guilabel
 >General</guilabel

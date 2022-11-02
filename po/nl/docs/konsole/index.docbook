@@ -615,35 +615,35 @@
 ></listitem>
 <listitem
 ><para
->Visual hints:</para>
+>Visuele tips:</para>
 <itemizedlist>
 <listitem
 ><para
->A line is displayed above each prompt, prompt colors are less intense, and output colors are more intense. </para
+>Een regel wordt boven elke prompt getoond, kleuren van prompt zijn minder intens en uitvoerkleuren zijn intenser. </para
 ></listitem>
 <listitem
 ><para
->A red bar is displayed to the left of input and output lines of commands that resulted in error </para
+>Links wordt een rode balk getoond links van de invoer- en uitvoerregels van commando's die resulteren in een fout </para
 ></listitem>
 <listitem
 ><para
->A red background for input and output lines of commands that resulted in error </para
+>Een rode achtergrond voor invoer- en uitvoerregels van commando's die resulteren in een fout </para
 ></listitem>
 <listitem
 ><para
->A gray bar is displayed to the left of the input and output lines of every other command. </para
+>Links wordt een grijze balk getoond links van de invoer- en uitvoerregels van elk ander commando. </para
 ></listitem>
 <listitem
 ><para
->A gray background for the input and output lines of every other command. </para
+>Een grijze achtergrond voor invoer- en uitvoerregels van elk ander commando. </para
 ></listitem>
 </itemizedlist>
 <para
->Each of those may be configured to never show, always show, or only when URL hints are shown. The configuration is in the <guilabel
->Semantic Integration</guilabel
-> tab of the <guilabel
->General</guilabel
-> page of the profile configuration window. </para
+>Elk hiervan kan geconfigureerd worden om nooit, altijd of alleen getoond te worden wanneer URL tips getoond worden. De configuratie is in het tabblad <guilabel
+>Semantische integratie</guilabel
+> van de pagina <guilabel
+>Algemeen</guilabel
+> van het configuratievenster voor profiel. </para
 ></listitem>
 
 <listitem

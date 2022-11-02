@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-31 00:49+0000\n"
-"PO-Revision-Date: 2022-10-07 18:14+0200\n"
+"PO-Revision-Date: 2022-10-31 08:51+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1701,15 +1701,13 @@ msgstr "Mostra les entrades que no coincidisquen amb el filtre"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Canvia el perfil en connectar i desconnectar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage Profiles..."
+#, kde-format
 msgid "Manage profile"
-msgstr "Gestiona els perfils..."
+msgstr "Gestiona el perfil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -3111,7 +3109,7 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Per a utilitzar esta funcionalitat, activeu <span "
+"<html><head/><body><p>Per a utilitzar esta característica, activeu <span "
 "style=\" font-weight:600;\">Ratolí-&gt;Miscel·lània-&gt;Subratlla </"
 "span><span style=\" font-weight:600;\">fitxers</span> en la configuració del "
 "perfil</p></body></html>"
@@ -4376,27 +4374,25 @@ msgstr "Sempre"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Barres d'error rojes:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Difumina el fons"
+msgstr "Fons d'error roig:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Barres alternatives:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Difumina el fons"
+msgstr "Fons alternatiu:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
@@ -4803,7 +4799,7 @@ msgstr "Posició de la barra de desplaçament:"
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
 msgstr ""
-"Mostra la barra de desplaçament al costat dret de la finestra del terminal"
+"Mostra la barra de desplaçament en el costat dret de la finestra del terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:162
@@ -4817,7 +4813,7 @@ msgstr "Costat dret"
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
 msgstr ""
-"Mostra la barra de desplaçament al costat esquerre de la finestra del "
+"Mostra la barra de desplaçament en el costat esquerre de la finestra del "
 "terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
