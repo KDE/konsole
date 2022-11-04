@@ -111,7 +111,7 @@ msgstr "Barra de Sessões"
 #: AppColorSchemeChooser.cpp:37
 #, kde-format
 msgid "&Window Color Scheme"
-msgstr "Novo &Esquema de Cores"
+msgstr "Esquema de Cores da &Janela"
 
 #: Application.cpp:51
 #, kde-format
