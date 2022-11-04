@@ -160,16 +160,8 @@ bool MainWindow::wasWindowGeometrySaved() const
         return false;
     }
 
-    const QMap<QString, QString> entries = cg.entryMap();
-    for (auto it = entries.cbegin(), itEnd = entries.cend(); it != itEnd; ++it) {
-        const QString configKey = it.key();
-        if (configKey == configFileString(screen(), QStringLiteral("Width")) || configKey == configFileString(screen(), QStringLiteral("Height"))
-            || configKey == configFileString(screen(), QStringLiteral("XPosition")) || configKey == configFileString(screen(), QStringLiteral("YPosition"))) {
-            return true;
-        }
-    }
-
-    return false;
+    return cg.hasKey(configFileString(screen(), QStringLiteral("Width"))) || cg.hasKey(configFileString(screen(), QStringLiteral("Height")))
+        || cg.hasKey(configFileString(screen(), QStringLiteral("XPosition"))) || cg.hasKey(configFileString(screen(), QStringLiteral("YPosition")));
 }
 
 void MainWindow::updateUseTransparency()
