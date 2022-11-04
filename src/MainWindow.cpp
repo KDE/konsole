@@ -12,6 +12,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMouseEvent>
+#include <QScreen>
 #include <QWindow>
 
 // KDE
@@ -122,6 +123,35 @@ MainWindow::MainWindow()
     KCrash::initialize();
 }
 
+// Convenience function to get a space-separated list of all connected screens, copied from KWindowConfig
+static QString allConnectedScreens()
+{
+    QStringList names;
+    const auto screens = QGuiApplication::screens();
+    names.reserve(screens.length());
+    for (auto screen : screens) {
+#ifdef Q_OS_WIN
+        // QScreen::name() returns garbage on Windows; see https://bugreports.qt.io/browse/QTBUG-74317
+        // So we use the screens' serial numbers to identify them instead
+        names << screen->serialNumber();
+#else
+        names << screen->name();
+#endif
+    }
+    return names.join(QLatin1Char(' '));
+}
+
+// Convenience function to get an appropriate config file key under which to
+// save window size, position, or maximization information, copied from KWindowConfig.
+static QString configFileString(const QScreen *screen, const QString &key)
+{
+    // We include resolution data to also save data on a per-resolution basis
+    const QString returnString =
+        QStringLiteral("%1 %2 %3x%4 %5")
+            .arg(allConnectedScreens(), key, QString::number(screen->geometry().width()), QString::number(screen->geometry().height()), screen->name());
+    return returnString;
+}
+
 bool MainWindow::wasWindowGeometrySaved() const
 {
     KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
@@ -133,8 +163,8 @@ bool MainWindow::wasWindowGeometrySaved() const
     const QMap<QString, QString> entries = cg.entryMap();
     for (auto it = entries.cbegin(), itEnd = entries.cend(); it != itEnd; ++it) {
         const QString configKey = it.key();
-        if (configKey.contains(QLatin1String(" Width")) || configKey.contains(QLatin1String(" Height")) || configKey.contains(QLatin1String(" XPosition"))
-            || configKey.contains(QLatin1String(" YPosition"))) {
+        if (configKey == configFileString(screen(), QStringLiteral("Width")) || configKey == configFileString(screen(), QStringLiteral("Height"))
+            || configKey == configFileString(screen(), QStringLiteral("XPosition")) || configKey == configFileString(screen(), QStringLiteral("YPosition"))) {
             return true;
         }
     }
