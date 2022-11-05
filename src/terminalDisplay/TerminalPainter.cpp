@@ -76,6 +76,10 @@ void TerminalPainter::drawContents(Character *image,
                                    CharacterColor const *ulColorTable)
 {
     auto currentProfile = SessionManager::instance()->sessionProfile(m_parentDisplay->session());
+    const bool wordMode = currentProfile ? currentProfile->property<bool>(Profile::WordMode) : false;
+    const bool wordModeAttr = currentProfile ? currentProfile->property<bool>(Profile::WordModeAttr) : true;
+    const bool wordModeAscii = currentProfile ? currentProfile->property<bool>(Profile::WordModeAscii) : true;
+    const bool wordModeBrahmic = currentProfile ? currentProfile->property<bool>(Profile::WordModeBrahmic) : true;
     const bool invertedRendition = currentProfile ? currentProfile->property<bool>(Profile::InvertSelectionColors) : false;
     const Enum::Hints semanticHints = currentProfile ? static_cast<Enum::Hints>(currentProfile->semanticHints()) : Enum::HintsNever;
     const Enum::Hints lineNumbers = currentProfile ? static_cast<Enum::Hints>(currentProfile->lineNumbers()) : Enum::HintsNever;
@@ -214,6 +218,10 @@ void TerminalPainter::drawContents(Character *image,
 
         RenditionFlags oldRendition = -1;
         QColor oldColor = QColor();
+        int lastCharType = 0;
+        QString word_str;
+        int word_x = 0;
+        int word_log_x = 0;
         for (; x <= right; x++) {
             if (x > lastNonSpace) {
                 // What about the cursor?
@@ -230,7 +238,7 @@ void TerminalPainter::drawContents(Character *image,
 
             const Character char_value = image[pos + log_x];
 
-            if (!printerFriendly && char_value.isSpace() && char_value.rendition.f.cursor == 0) {
+            if (!printerFriendly && lastCharType == 0 && char_value.isSpace() && char_value.rendition.f.cursor == 0) {
                 continue;
             }
 
@@ -243,6 +251,44 @@ void TerminalPainter::drawContents(Character *image,
             if (unistr.length() && unistr[0] != QChar(0)) {
                 int textWidth = fontWidth * 1;
                 int textX = leftPadding + fontWidth * x * (doubleWidthLine ? 2 : 1);
+                if (wordMode) {
+                    int charType = 0;
+                    if (wordModeAscii && image[pos + log_x].flags & EF_ASCII_WORD) {
+                        charType = 1;
+                    }
+                    if (wordModeBrahmic && image[pos + log_x].flags & EF_BRAHMIC_WORD) {
+                        charType = 2;
+                    }
+                    if (lastCharType != charType
+                        || (wordModeAttr && lastCharType != 0 && char_value.notSameAttributesText(image[pos + line2log[vis2line[x - 1]]]))) {
+                        if (lastCharType != 0) {
+                            drawTextCharacters(paint,
+                                               QRect(textScale.inverted().map(QPoint(word_x, textY)), QSize(textWidth, textHeight)),
+                                               word_str,
+                                               image[pos + word_log_x],
+                                               m_parentDisplay->terminalColor()->colorTable(),
+                                               invertedRendition,
+                                               lineProperty,
+                                               printerFriendly,
+                                               oldRendition,
+                                               oldColor,
+                                               normalWeight,
+                                               boldWeight);
+                            lastCharType = charType;
+                        }
+                        if (charType != 0) {
+                            // start new
+                            lastCharType = charType;
+                            word_str = QString(unistr);
+                            word_x = textX;
+                            word_log_x = log_x;
+                            continue;
+                        }
+                    } else if (lastCharType != 0) {
+                        word_str += unistr;
+                        continue;
+                    }
+                }
                 const QRect textAreaOneChar(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight));
                 drawTextCharacters(paint,
                                    textAreaOneChar,
@@ -257,6 +303,20 @@ void TerminalPainter::drawContents(Character *image,
                                    normalWeight,
                                    boldWeight);
             }
+        }
+        if (wordMode && lastCharType != 0) {
+            drawTextCharacters(paint,
+                               QRect(textScale.inverted().map(QPoint(word_x, textY)), QSize(textWidth, textHeight)),
+                               word_str,
+                               image[pos + word_log_x],
+                               m_parentDisplay->terminalColor()->colorTable(),
+                               invertedRendition,
+                               lineProperty,
+                               printerFriendly,
+                               oldRendition,
+                               oldColor,
+                               normalWeight,
+                               boldWeight);
         }
         if (!printerFriendly) {
             drawAboveText(paint,
