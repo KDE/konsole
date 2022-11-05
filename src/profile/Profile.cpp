@@ -95,6 +95,10 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {DimWhenInactive, "DimWhenInactive", GENERAL_GROUP, false},
     {InvertSelectionColors, "InvertSelectionColors", GENERAL_GROUP, false},
     {EmojiFont, "EmojiFont", APPEARANCE_GROUP, QFont()},
+    {WordMode, "WordMode", APPEARANCE_GROUP, false},
+    {WordModeAttr, "WordModeAttr", APPEARANCE_GROUP, true},
+    {WordModeAscii, "WordModeAscii", APPEARANCE_GROUP, true},
+    {WordModeBrahmic, "WordModeBrahmic", APPEARANCE_GROUP, true},
 
 // Keyboard
 #ifdef Q_OS_MACOS
