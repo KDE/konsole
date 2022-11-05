@@ -226,6 +226,11 @@ private Q_SLOTS:
 
     void peekPrimaryKeySequenceChanged();
 
+    void toggleWordMode(bool mode);
+    void toggleWordModeAttr(bool mode);
+    void toggleWordModeAscii(bool mode);
+    void toggleWordModeBrahmic(bool mode);
+
 private:
     Q_DISABLE_COPY(EditProfileDialog)
 

@@ -856,6 +856,21 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->bidiLineLTR->setChecked(profile->property<bool>(Profile::BidiLineLTR));
     connect(_appearanceUi->bidiLineLTR, &QPushButton::toggled, this, &EditProfileDialog::togglebidiLineLTR);
     _appearanceUi->bidiLineLTR->setEnabled(profile->bidiRenderingEnabled());
+
+    _appearanceUi->wordMode->setChecked(profile->property<bool>(Profile::WordMode));
+    connect(_appearanceUi->wordMode, &QPushButton::toggled, this, &EditProfileDialog::toggleWordMode);
+    _appearanceUi->wordModeAttr->setEnabled(profile->property<bool>(Profile::WordMode));
+    _appearanceUi->wordModeAscii->setEnabled(profile->property<bool>(Profile::WordMode));
+    _appearanceUi->wordModeBrahmic->setEnabled(profile->property<bool>(Profile::WordMode));
+
+    _appearanceUi->wordModeAttr->setChecked(profile->property<bool>(Profile::WordModeAttr));
+    connect(_appearanceUi->wordModeAttr, &QPushButton::toggled, this, &EditProfileDialog::toggleWordModeAttr);
+
+    _appearanceUi->wordModeAscii->setChecked(profile->property<bool>(Profile::WordModeAscii));
+    connect(_appearanceUi->wordModeAscii, &QPushButton::toggled, this, &EditProfileDialog::toggleWordModeAscii);
+
+    _appearanceUi->wordModeBrahmic->setChecked(profile->property<bool>(Profile::WordModeBrahmic));
+    connect(_appearanceUi->wordModeBrahmic, &QPushButton::toggled, this, &EditProfileDialog::toggleWordModeBrahmic);
 }
 
 void EditProfileDialog::setAntialiasText(bool enable)
@@ -2035,4 +2050,27 @@ void EditProfileDialog::toggleFlowControl(bool enable)
 void EditProfileDialog::peekPrimaryKeySequenceChanged()
 {
     updateTempProfileProperty(Profile::PeekPrimaryKeySequence, _advancedUi->peekPrimaryWidget->keySequence().toString());
+}
+
+void EditProfileDialog::toggleWordMode(bool mode)
+{
+    updateTempProfileProperty(Profile::WordMode, mode);
+    _appearanceUi->wordModeAttr->setEnabled(mode);
+    _appearanceUi->wordModeAscii->setEnabled(mode);
+    _appearanceUi->wordModeBrahmic->setEnabled(mode);
+}
+
+void EditProfileDialog::toggleWordModeAttr(bool mode)
+{
+    updateTempProfileProperty(Profile::WordModeAttr, mode);
+}
+
+void EditProfileDialog::toggleWordModeAscii(bool mode)
+{
+    updateTempProfileProperty(Profile::WordModeAscii, mode);
+}
+
+void EditProfileDialog::toggleWordModeBrahmic(bool mode)
+{
+    updateTempProfileProperty(Profile::WordModeBrahmic, mode);
 }

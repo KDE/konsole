@@ -779,7 +779,71 @@
         <property name="spacing">
          <number>6</number>
         </property>
-        <item row="1" column="0">
+        <item row="31" column="1">
+         <widget class="QCheckBox" name="wordMode">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Enable word mode text rendering</string>
+          </property>
+          <property name="text">
+           <string>Word mode</string>
+          </property>
+         </widget>
+        </item>
+        <item row="32" column="1">
+         <widget class="QCheckBox" name="wordModeAttr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Ignore attribute changes mid-word (otherwise, attribute changes break word when rendering)</string>
+          </property>
+          <property name="text">
+           <string>Use the same attributes for whole word</string>
+          </property>
+         </widget>
+        </item>
+        <item row="33" column="1">
+         <widget class="QCheckBox" name="wordModeAscii">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Render words of ASCII characters together</string>
+          </property>
+          <property name="text">
+           <string>ASCII characters </string>
+          </property>
+         </widget>
+        </item>
+        <item row="34" column="1">
+         <widget class="QCheckBox" name="wordModeBrahmic">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Render words of Brahmic scripts characters together</string>
+          </property>
+          <property name="text">
+           <string>Brahmic scripts characters</string>
+          </property>
+         </widget>
+        </item>
+        <item row="61" column="0">
          <widget class="QLabel" name="label_17">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -795,7 +859,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="61" column="1">
          <widget class="QPushButton" name="emojiFontPreview">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -805,7 +869,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="102" column="1">
          <widget class="QCheckBox" name="enableBidiRenderingButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -821,7 +885,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="103" column="1">
          <widget class="QCheckBox" name="bidiLineLTR">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -837,7 +901,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="104" column="1">
          <widget class="QCheckBox" name="enableBidiTableDirOverrideButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -853,7 +917,7 @@
           </property>
          </widget>
         </item>
-        <item row="10" column="0" colspan="2">
+        <item row="1000" column="0" colspan="2">
          <spacer>
           <property name="orientation">
            <enum>Qt::Vertical</enum>

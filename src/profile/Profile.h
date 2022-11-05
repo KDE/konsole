@@ -390,6 +390,20 @@ public:
         /** When to show alternating background
          */
         AlternatingBackground,
+        /** Render some sequences of characters with a single drawText() call
+         */
+        WordMode,
+        /** Attribute changes breaks words
+         */
+        WordModeAttr,
+        /** Use word mode for ASCII characters
+         * Used for performance and ligatures
+         */
+        WordModeAscii,
+        /** Use word mode for Brahmic scripts
+         * Improves display when the font is not strictly monospace
+         */
+        WordModeBrahmic,
     };
 
     Q_ENUM(Property)
