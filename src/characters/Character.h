@@ -378,6 +378,17 @@ public:
         return hasSameColors(lhs) && hasSameRendition(lhs) && hasSameLineDrawStatus(lhs) && isSameScript(lhs);
     }
 
+    inline CharacterColor textColor() const
+    {
+        return rendition.f.reverse ? backgroundColor : foregroundColor;
+    }
+
+    inline bool notSameAttributesText(Character lhs) const
+    {
+        // Only compare attributes used for drawing text
+        return (lhs.rendition.all & 0x8b5) != (rendition.all & 0x8b5) || lhs.textColor() != textColor();
+    }
+
     inline bool isRightHalfOfDoubleWide() const
     {
         return character == 0;
