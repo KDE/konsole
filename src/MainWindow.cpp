@@ -607,9 +607,6 @@ bool MainWindow::queryClose()
 
     // make sure the window is shown on current desktop and is not minimized
     KWindowSystem::setOnDesktop(winId(), KWindowSystem::currentDesktop());
-    if (isMinimized()) {
-        KWindowSystem::unminimizeWindow(winId());
-    }
     int result;
 
     if (!processesRunning.isEmpty()) {
