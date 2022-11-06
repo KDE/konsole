@@ -260,7 +260,8 @@ void TerminalPainter::drawContents(Character *image,
                         charType = 2;
                     }
                     if (lastCharType != charType
-                        || (wordModeAttr && lastCharType != 0 && char_value.notSameAttributesText(image[pos + line2log[vis2line[x - 1]]]))) {
+                        || (wordModeAttr && lastCharType != 0
+                            && char_value.notSameAttributesText(image[pos + (bidiEnabled ? line2log[vis2line[x - 1]] : x - 1)]))) {
                         if (lastCharType != 0) {
                             drawTextCharacters(paint,
                                                QRect(textScale.inverted().map(QPoint(word_x, textY)), QSize(textWidth, textHeight)),
