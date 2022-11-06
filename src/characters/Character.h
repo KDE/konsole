@@ -109,6 +109,10 @@ const RenditionFlags RE_UNDERLINE_BIT   = (1 << 12);
 const RenditionFlags RE_MASK_UNDER = RE_TRANSPARENT | RE_REVERSE | RE_CURSOR | RE_SELECTED;
 const RenditionFlags RE_MASK_ABOVE = RE_TRANSPARENT | RE_REVERSE | RE_CURSOR | RE_SELECTED | RE_STRIKEOUT | RE_CONCEAL | RE_OVERLINE | RE_UNDERLINE_MASK;
 
+// flags that affect how the text is drawn
+// without RE_REVERSE, since the foreground color is calculated
+const RenditionFlags RE_TEXTDRAWING = RE_BOLD | RE_BLINK | RE_TRANSPARENT | RE_ITALIC | RE_CURSOR | RE_FAINT | RE_SELECTED;
+
 
 const ExtraFlags EF_UNREAL       = 0;
 const ExtraFlags EF_REAL         = (1 << 0);
@@ -386,7 +390,7 @@ public:
     inline bool notSameAttributesText(Character lhs) const
     {
         // Only compare attributes used for drawing text
-        return (lhs.rendition.all & 0x8b5) != (rendition.all & 0x8b5) || lhs.textColor() != textColor();
+        return (lhs.rendition.all & RE_TEXTDRAWING) != (rendition.all & RE_TEXTDRAWING) || lhs.textColor() != textColor();
     }
 
     inline bool isRightHalfOfDoubleWide() const

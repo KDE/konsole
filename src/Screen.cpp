@@ -1250,8 +1250,9 @@ notcombine:
         currentChar.flags |= EF_ASCII_WORD;
     }
     if (c >= 0x900
-        && (c <= 0x109f || (c >= 0x1700 && c <= 0x18af) || (c >= 0x1900 && c <= 0x1aaf) || (c >= 0xa800 && c <= 0xa82f) || (c >= 0xa840 && c <= 0xa95f)
-            || (c >= 0xa980 && c <= 0xaaff) || (c >= 0xabc0 && c <= 0xabff) || (c >= 0x10a00 && c <= 0x10a5f) || (c >= 0x11000 && c <= 0x11fff))) {
+        && (c <= 0x109f || (c >= 0x1700 && c <= 0x18af) || (c >= 0x1900 && c <= 0x1aaf) || (c >= 0x1b00 && c <= 0x1c4f) || (c >= 0xa800 && c <= 0xa82f)
+            || (c >= 0xa840 && c <= 0xa95f) || (c >= 0xa980 && c <= 0xaaff) || (c >= 0xabc0 && c <= 0xabff) || (c >= 0x10a00 && c <= 0x10a5f)
+            || (c >= 0x11000 && c <= 0x11fff))) {
         currentChar.flags |= EF_BRAHMIC_WORD;
     }
 
