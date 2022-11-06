@@ -176,6 +176,17 @@ private:
         Apc,
     } _sosPmApc;
 
+    enum osc {
+        // https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Operating-System-Commands
+        ReportColors = 4,
+        ResetColors = 104,
+        // https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
+        SemanticPrompts = 133,
+        // https://chromium.googlesource.com/apps/libapps/+/master/hterm/doc/ControlSequences.md#OSC
+        Notification = 777,
+        Image = 1337,
+    };
+
     ParserStates _state = Ground;
     bool _ignore = false;
     int _nIntermediate = 0;

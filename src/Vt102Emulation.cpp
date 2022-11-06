@@ -1048,7 +1048,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         return;
     }
 
-    if (attribute == 133) {
+    if (attribute == SemanticPrompts) {
         if (value[0] == QLatin1Char('A') || value[0] == QLatin1Char('N') || value[0] == QLatin1Char('P')) {
             _currentScreen->setReplMode(REPL_PROMPT);
         }
@@ -1080,7 +1080,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             }
         }
     }
-    if (attribute == 4) {
+    if (attribute == ReportColors) {
         // RGB colors
         QStringList params = value.split(QLatin1Char(';'));
         for (int j = 0; j < params.length(); j += 2) {
@@ -1101,7 +1101,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         }
         return;
     }
-    if (attribute == 104) {
+    if (attribute == ResetColors) {
         // RGB colors
         QStringList params = value.split(QLatin1Char(';'));
         for (int k = 0; k < params.length(); k++) {
@@ -1109,7 +1109,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             colorTable[c] = QColor();
         }
     }
-    if (attribute == 777) {
+    if (attribute == Notification) {
         // Notification
         auto params = value.split(QLatin1Char(';'));
         if (params.length() < 1 || params[0] != QLatin1String("notify")) {
@@ -1149,7 +1149,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         }
     }
 
-    if (attribute == 1337) {
+    if (attribute == Image) {
         if (value.startsWith(QLatin1String("ReportCellSize"))) {
             iTermReportCellSize();
             return;
