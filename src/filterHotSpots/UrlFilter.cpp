@@ -94,5 +94,21 @@ UrlFilter::UrlFilter()
 
 QSharedPointer<HotSpot> UrlFilter::newHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts)
 {
-    return QSharedPointer<HotSpot>(new UrlFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts));
+    QStringList texts{};
+
+    // remove final single quote
+    // we want URLs in single quotes like the following to work correctly:
+    // 'https://en.wikipedia.org/wiki/Earth's_rotation'
+    for (QString s : capturedTexts) {
+        QString str{s};
+        if (s.right(1) == QLatin1String("'")) {
+            s.chop(1);
+        }
+        texts << s;
+    }
+    if (capturedTexts[0].right(1) == QLatin1String("'")) {
+        endColumn--;
+    }
+
+    return QSharedPointer<HotSpot>(new UrlFilterHotSpot(startLine, startColumn, endLine, endColumn, texts));
 }
