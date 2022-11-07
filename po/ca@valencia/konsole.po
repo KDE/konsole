@@ -4175,7 +4175,7 @@ msgstr ""
 "que admet l'editor que vulgueu utilitzar; p. ex.:\n"
 "gedit +LÍNIA:COLUMNA CAMÍ:\n"
 "\n"
-"Si CAMÍ o LÍNIA no estan presents en l'ordre, s'ignorarà\n"
+"Si CAMÍ o LÍNIA no estan presents a l'ordre, s'ignorarà\n"
 "esta configuració i el fitxer s'obrirà amb l'editor\n"
 "de text predeterminat."
 

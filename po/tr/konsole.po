@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-06 00:50+0000\n"
-"PO-Revision-Date: 2022-10-31 17:26+0300\n"
+"PO-Revision-Date: 2022-11-06 10:56+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2487,7 +2487,7 @@ msgstr "Etkin ise profil ayarları yok sayılır"
 #: settings/GeneralSettings.ui:84
 #, kde-format
 msgid "Remember window size"
-msgstr "Pencere boyutunu hatırla"
+msgstr "Pencere boyutunu anımsa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
@@ -2508,7 +2508,7 @@ msgstr "Fare işaretçisi üzerine getirildiğinde terminallere odaklan"
 #: settings/GeneralSettings.ui:117 settings/konsole.kcfg:69
 #, kde-format
 msgid "Match using regular expressions"
-msgstr "Düzenli ifade kullanarak eşle"
+msgstr "Düzenli ifade kullanarak eşleştir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
@@ -2541,7 +2541,7 @@ msgstr "Aramanın büyük küçük harf duyarlı olup olmayacağını belirler"
 #: settings/GeneralSettings.ui:178
 #, kde-format
 msgid "Case sensitive"
-msgstr "Harfe duyarlı"
+msgstr "BÜYÜK/küçük harf duyarlı"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
@@ -3722,7 +3722,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:297
 #, kde-format
 msgid "Match current character"
-msgstr "Geçerli karakterle eşleş"
+msgstr "Geçerli karakterle eşleştir"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:313
@@ -4260,7 +4260,7 @@ msgid ""
 "for these entries to work.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Bu girdilerin çalışması için <span style=\" font-style:"
-"italic;\">Ayarlar → Konsole'u Yapılandır → Genel → Pencere boyutunu hatırla</"
+"italic;\">Ayarlar → Konsole'u Yapılandır → Genel → Pencere boyutunu anımsa</"
 "span> devre dışı bırakılmış olmalıdır.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
@@ -4873,7 +4873,7 @@ msgstr "Sabit boyut:"
 #: widgets/HistorySizeWidget.ui:73
 #, kde-format
 msgid "Number of lines of output to remember"
-msgstr "Çıktının hatırlanacak satır sayısı"
+msgstr "Çıktının anımsanacak satır sayısı"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:135
@@ -4965,7 +4965,7 @@ msgstr "Aramanın büyük küçük harf duyarlı olup olmayacağını ayarlar"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
-msgstr "Düzenli ifade eşle"
+msgstr "Düzenli ifadeleri eşleştir"
 
 #: widgets/IncrementalSearchBar.cpp:133
 #, kde-format
