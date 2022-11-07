@@ -188,6 +188,7 @@ void TerminalPainter::drawContents(Character *image,
         //(instead of textArea.topLeft() * painter-scale)
         QString line;
 #define MAX_LINE_WIDTH 1024
+#define vis2log(x) ((bidiEnabled && (x) <= lastNonSpace) ? line2log[vis2line[x]] : (x))
         int log2line[MAX_LINE_WIDTH];
         int line2log[MAX_LINE_WIDTH];
         uint16_t shapemap[MAX_LINE_WIDTH];
@@ -213,6 +214,7 @@ void TerminalPainter::drawContents(Character *image,
                           vis2line,
                           line2log,
                           bidiEnabled,
+                          lastNonSpace,
                           background);
         }
 
@@ -227,14 +229,7 @@ void TerminalPainter::drawContents(Character *image,
                 // What about the cursor?
                 // break;
             }
-            int log_x;
-            int line_x;
-            if (bidiEnabled) {
-                line_x = vis2line[x];
-                log_x = line2log[line_x];
-            } else {
-                log_x = x;
-            }
+            int log_x = vis2log(x);
 
             const Character char_value = image[pos + log_x];
 
@@ -259,9 +254,7 @@ void TerminalPainter::drawContents(Character *image,
                     if (wordModeBrahmic && image[pos + log_x].flags & EF_BRAHMIC_WORD) {
                         charType = 2;
                     }
-                    if (lastCharType != charType
-                        || (wordModeAttr && lastCharType != 0
-                            && char_value.notSameAttributesText(image[pos + (bidiEnabled ? line2log[vis2line[x - 1]] : x - 1)]))) {
+                    if (lastCharType != charType || (wordModeAttr && lastCharType != 0 && char_value.notSameAttributesText(image[pos + vis2log(x - 1)]))) {
                         if (lastCharType != 0) {
                             drawTextCharacters(paint,
                                                QRect(textScale.inverted().map(QPoint(word_x, textY)), QSize(textWidth, textHeight)),
@@ -331,6 +324,7 @@ void TerminalPainter::drawContents(Character *image,
                           vis2line,
                           line2log,
                           bidiEnabled,
+                          lastNonSpace,
                           ulColorTable);
         }
 
@@ -729,6 +723,7 @@ void TerminalPainter::drawBelowText(QPainter &painter,
                                     int *vis2line,
                                     int *line2log,
                                     bool bidiEnabled,
+                                    int lastNonSpace,
                                     QColor background)
 {
     // setup painter
@@ -741,12 +736,7 @@ void TerminalPainter::drawBelowText(QPainter &painter,
     int lastX = 0;
 
     for (int i = 0;; i++) {
-        int x;
-        if (bidiEnabled && i < width) {
-            x = line2log[vis2line[i + startX]];
-        } else {
-            x = i + startX;
-        }
+        int x = vis2log(i + startX);
 
         if (first || i == width || style[x].rendition.all != style[lastX].rendition.all || style[x].foregroundColor != style[lastX].foregroundColor
             || style[x].backgroundColor != style[lastX].backgroundColor) {
@@ -806,6 +796,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                                     int *vis2line,
                                     int *line2log,
                                     bool bidiEnabled,
+                                    int lastNonSpace,
                                     CharacterColor const *ulColorTable)
 {
     bool first = true;
@@ -818,12 +809,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
     int startStrikeOut = -1;
 
     for (int i = 0;; i++) {
-        int x;
-        if (bidiEnabled && i < width) {
-            x = line2log[vis2line[i + startX]];
-        } else {
-            x = i + startX;
-        }
+        int x = vis2log(i + startX);
 
         if (first || i == width || ((style[x].rendition.all ^ style[lastX].rendition.all) & RE_MASK_ABOVE)
             || ((style[x].flags ^ style[lastX].flags) & EF_UNDERLINE_COLOR) || style[x].foregroundColor != style[lastX].foregroundColor

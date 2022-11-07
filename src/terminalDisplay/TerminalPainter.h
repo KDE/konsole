@@ -99,6 +99,7 @@ private:
                        int *vis2line,
                        int *line2log,
                        bool bidiEnabled,
+                       int lastNonSpace,
                        QColor background);
     void drawAboveText(QPainter &painter,
                        const QRect &rect,
@@ -111,6 +112,7 @@ private:
                        int *vis2line,
                        int *line2log,
                        bool bidiEnabled,
+                       int lastNonSpace,
                        CharacterColor const *ulColorTable);
     void drawImagesBelowText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx);
     void drawImagesAboveText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx);
