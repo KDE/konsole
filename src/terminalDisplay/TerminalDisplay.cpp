@@ -3140,9 +3140,10 @@ int TerminalDisplay::bidiMap(Character *screenline,
     int lastNonSpace = 0;
     shaped = false;
     for (i = 0; i < linewidth; i++) {
-        log2line[i] = line.size();
-        line2log[line.size()] = i;
-        notSkipped[line.size() / 64] |= 1ul << (line.size() % 64);
+        int pos = line.size();
+        log2line[i] = pos;
+        line2log[pos] = i;
+        notSkipped[pos / 64] |= 1ul << (pos % 64);
         const Character char_value = screenline[i];
         if (char_value.rendition.f.extended != 0) {
             // sequence of characters
@@ -3191,7 +3192,7 @@ int TerminalDisplay::bidiMap(Character *screenline,
     ubidi_getVisualMap(ubidi, semi_vis2line, &errorCode);
     int p = 0;
     for (int i = 0; i < len; i++) {
-        if ((notSkipped[i / 64] & (1ul << (i % 64))) != 0) {
+        if ((notSkipped[semi_vis2line[i] / 64] & (1ul << (semi_vis2line[i] % 64))) != 0) {
             vis2line[p++] = semi_vis2line[i];
         }
     }
