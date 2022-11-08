@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:49+0000\n"
+"POT-Creation-Date: 2022-11-08 02:27+0000\n"
 "PO-Revision-Date: 2022-10-03 16:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-i18n-doc@kde.org>\n"
@@ -2051,23 +2051,23 @@ msgstr ""
 "'%1'을(를) 찾을 수 없어서 '%2'을(를) 대신 시작합니다. 프로필 설정을 확인하십"
 "시오."
 
-#: session/Session.cpp:516
+#: session/Session.cpp:521
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "프로그램 '%1'을(를) 인자 '%2'을(를) 사용하여 시작할 수 없습니다."
 
-#: session/Session.cpp:661
+#: session/Session.cpp:666
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1'에서 응답 없음(세션 '%2')"
 
-#: session/Session.cpp:665 session/Session.cpp:1825
+#: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #, kde-format
 msgid "Show session"
 msgstr "세션 표시"
 
-#: session/Session.cpp:929
+#: session/Session.cpp:934
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2080,31 +2080,31 @@ msgstr ""
 "드를 내부에서만 사용할 수 있도록 변경할 수 있습니다.<p>이 경고는 Konsole 인스"
 "턴스에서 한 번만 표시됩니다.</p>"
 
-#: session/Session.cpp:965
+#: session/Session.cpp:970
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "완료됨"
 
-#: session/Session.cpp:979 session/Session.cpp:990
+#: session/Session.cpp:984 session/Session.cpp:995
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr ""
 "프로그램 '%1'이(가) 충돌했습니다.|/|프로그램 '%1'$[이가 %1] 충돌했습니다."
 
-#: session/Session.cpp:981
+#: session/Session.cpp:986
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr ""
 "프로그램 '%1'이(가) 상태 %2(으)로 끝났습니다.|/|프로그램 '%1'$[이가 %1] 상태 "
 "%2$[으 %2]로 끝났습니다."
 
-#: session/Session.cpp:1489
+#: session/Session.cpp:1494
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 진행 상황"
 
-#: session/Session.cpp:1821
+#: session/Session.cpp:1826
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1'의 활동(세션 '%2')"
@@ -3547,7 +3547,7 @@ msgstr "흐름 제어"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:817
+#: widgets/EditProfileAppearancePage.ui:881
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3557,7 +3557,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:820
+#: widgets/EditProfileAppearancePage.ui:884
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "양방향 텍스트 렌더링"
@@ -3891,32 +3891,85 @@ msgstr "<html><head/><body><p>복합 텍스트 레이아웃</p></body></html>"
 msgid "Complex Text Layout"
 msgstr "복합 텍스트 레이아웃"
 
-#. i18n: ectx: property (text), widget (QLabel, label_17)
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
+#, fuzzy, kde-format
+#| msgid "Bi-Directional text rendering"
+msgid "Enable word mode text rendering"
+msgstr "양방향 텍스트 렌더링"
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordMode)
+#: widgets/EditProfileAppearancePage.ui:794
+#, kde-format
+msgid "Word mode"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
+#: widgets/EditProfileAppearancePage.ui:807
+#, kde-format
+msgid ""
+"Ignore attribute changes mid-word (otherwise, attribute changes break word "
+"when rendering)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
+#: widgets/EditProfileAppearancePage.ui:810
+#, kde-format
+msgid "Use the same attributes for whole word"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
+#: widgets/EditProfileAppearancePage.ui:823
+#, kde-format
+msgid "Render words of ASCII characters together"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
+#: widgets/EditProfileAppearancePage.ui:826
+#, fuzzy, kde-format
+#| msgid "Word characters:"
+msgid "ASCII characters "
+msgstr "단어 글자:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
+#: widgets/EditProfileAppearancePage.ui:839
+#, kde-format
+msgid "Render words of Brahmic scripts characters together"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
+#: widgets/EditProfileAppearancePage.ui:842
+#, fuzzy, kde-format
+#| msgid "Match current character"
+msgid "Brahmic scripts characters"
+msgstr "현재 글자와 맞추기"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileAppearancePage.ui:855
 #, kde-format
 msgid "Emoji Font:"
 msgstr "이모지 글꼴:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:833
+#: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr "첫 강조 문자로 결정하지 않고 줄은 항상 LTR임"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:836
+#: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
 msgstr "강제 LTR 줄 방향 사용"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:849
+#: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "표 그리기 문자를 강한 LTR로 간주합니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:852
+#: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "표 문자 BiDi 모드 재정의"
@@ -4073,13 +4126,13 @@ msgstr[0] "초"
 msgid "Select Initial Directory"
 msgstr "초기 디렉터리 선택"
 
-#: widgets/EditProfileDialog.cpp:1220
+#: widgets/EditProfileDialog.cpp:1235
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "배열 <resource>%1</resource>을(를) 불러올 수 없습니다."
 
-#: widgets/EditProfileDialog.cpp:1399
+#: widgets/EditProfileDialog.cpp:1414
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4088,7 +4141,7 @@ msgstr ""
 "이 색 배열은 현재 데스크톱 환경에서 지원하지 않는 투명 배경을 사용하고 있습니"
 "다"
 
-#: widgets/EditProfileDialog.cpp:1405
+#: widgets/EditProfileDialog.cpp:1420
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4097,7 +4150,7 @@ msgstr ""
 "데스크톱 효과를 활성화하기 전에 Konsole을 시작했습니다. 투명한 배경을 보려면 "
 "Konsole을 다시 시작해야 합니다."
 
-#: widgets/EditProfileDialog.cpp:1796
+#: widgets/EditProfileDialog.cpp:1811
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4125,7 +4178,7 @@ msgstr ""
 "PATH 또는 LINE이 명령에 없으면, 이 설정을 무시하고 \n"
 "기본 텍스트 편집기로 파일을 엽니다."
 
-#: widgets/EditProfileDialog.cpp:1809
+#: widgets/EditProfileDialog.cpp:1824
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "텍스트 편집기 사용자 정의 명령"

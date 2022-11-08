@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:49+0000\n"
+"POT-Creation-Date: 2022-11-08 02:27+0000\n"
 "PO-Revision-Date: 2022-10-31 20:57+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -2078,23 +2078,23 @@ msgstr ""
 "No fue posible encontrar «%1», iniciando «%2» en su lugar. Revise la "
 "configuración de su perfil."
 
-#: session/Session.cpp:516
+#: session/Session.cpp:521
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "No fue posible iniciar «%1» con los argumentos «%2»."
 
-#: session/Session.cpp:661
+#: session/Session.cpp:666
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silencio en «%1» (sesión «%2»)"
 
-#: session/Session.cpp:665 session/Session.cpp:1825
+#: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #, kde-format
 msgid "Show session"
 msgstr "Mostrar sesión"
 
-#: session/Session.cpp:929
+#: session/Session.cpp:934
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2107,28 +2107,28 @@ msgstr ""
 "métodos solo se usen internamente volviendo a compilar Konsole. <p>Esta "
 "advertencia solo se mostrará una vez para esta instancia de Konsole.</p>"
 
-#: session/Session.cpp:965
+#: session/Session.cpp:970
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finalizado"
 
-#: session/Session.cpp:979 session/Session.cpp:990
+#: session/Session.cpp:984 session/Session.cpp:995
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "El programa «%1» se cerró inesperadamente."
 
-#: session/Session.cpp:981
+#: session/Session.cpp:986
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "El programa «%1» finalizó con el estado %2."
 
-#: session/Session.cpp:1489
+#: session/Session.cpp:1494
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progreso de ZModem"
 
-#: session/Session.cpp:1821
+#: session/Session.cpp:1826
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Actividad en «%1» (sesión «%2»)"
@@ -3589,7 +3589,7 @@ msgstr "Control del flujo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:817
+#: widgets/EditProfileAppearancePage.ui:881
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3600,7 +3600,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:820
+#: widgets/EditProfileAppearancePage.ui:884
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Texto bidireccional"
@@ -3941,14 +3941,67 @@ msgstr "<html><head/><body><p>Disposición de texto compleja</p></body></html>"
 msgid "Complex Text Layout"
 msgstr "Disposición de texto compleja"
 
-#. i18n: ectx: property (text), widget (QLabel, label_17)
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
+#, fuzzy, kde-format
+#| msgid "Bi-Directional text rendering"
+msgid "Enable word mode text rendering"
+msgstr "Texto bidireccional"
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordMode)
+#: widgets/EditProfileAppearancePage.ui:794
+#, kde-format
+msgid "Word mode"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
+#: widgets/EditProfileAppearancePage.ui:807
+#, kde-format
+msgid ""
+"Ignore attribute changes mid-word (otherwise, attribute changes break word "
+"when rendering)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
+#: widgets/EditProfileAppearancePage.ui:810
+#, kde-format
+msgid "Use the same attributes for whole word"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
+#: widgets/EditProfileAppearancePage.ui:823
+#, kde-format
+msgid "Render words of ASCII characters together"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
+#: widgets/EditProfileAppearancePage.ui:826
+#, fuzzy, kde-format
+#| msgid "Word characters:"
+msgid "ASCII characters "
+msgstr "Caracteres de palabra:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
+#: widgets/EditProfileAppearancePage.ui:839
+#, kde-format
+msgid "Render words of Brahmic scripts characters together"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
+#: widgets/EditProfileAppearancePage.ui:842
+#, fuzzy, kde-format
+#| msgid "Match current character"
+msgid "Brahmic scripts characters"
+msgstr "Coincidir con el carácter actual"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileAppearancePage.ui:855
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Tipo de letra para emojis:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:833
+#: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
@@ -3956,19 +4009,19 @@ msgstr ""
 "determinadas por el primer carácter fuerte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:836
+#: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
 msgstr "Forzar dirección de línea de izquierda a derecha"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:849
+#: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Tratar los caracteres de dibujo de tablas como LTR fuertes."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:852
+#: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Sustitución del modo BiDi de los caracteres de tablas"
@@ -4131,13 +4184,13 @@ msgstr[1] " segundos"
 msgid "Select Initial Directory"
 msgstr "Seleccionar directorio inicial"
 
-#: widgets/EditProfileDialog.cpp:1220
+#: widgets/EditProfileDialog.cpp:1235
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "La carga del esquema <resource>%1</resource> ha fallado."
 
-#: widgets/EditProfileDialog.cpp:1399
+#: widgets/EditProfileDialog.cpp:1414
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4146,7 +4199,7 @@ msgstr ""
 "Esta combinación de colores tiene un fondo transparente que no admite su "
 "escritorio."
 
-#: widgets/EditProfileDialog.cpp:1405
+#: widgets/EditProfileDialog.cpp:1420
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4155,7 +4208,7 @@ msgstr ""
 "Konsole se inició antes de activar los efectos de escritorio. Reinicie "
 "Konsole para ver el fondo transparente."
 
-#: widgets/EditProfileDialog.cpp:1796
+#: widgets/EditProfileDialog.cpp:1811
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4184,7 +4237,7 @@ msgstr ""
 "será ignorada y se abrirá el archivo con el editor de texto\n"
 "predeterminado."
 
-#: widgets/EditProfileDialog.cpp:1809
+#: widgets/EditProfileDialog.cpp:1824
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Orden personalizada del editor de texto"

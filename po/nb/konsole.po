@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-30 00:49+0000\n"
+"POT-Creation-Date: 2022-11-06 00:50+0000\n"
 "PO-Revision-Date: 2016-03-25 13:46+0100\n"
 "Last-Translator: Bjørn <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -2038,23 +2038,23 @@ msgstr ""
 "Klarte ikke finne «%1», starter «%2» i stedet. Undersøk profilinnstillingene "
 "dine."
 
-#: session/Session.cpp:516
+#: session/Session.cpp:521
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Klarte ikke starte programmet «%1» med argumenter «%2»."
 
-#: session/Session.cpp:661
+#: session/Session.cpp:666
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr ""
 
-#: session/Session.cpp:665 session/Session.cpp:1825
+#: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #, kde-format
 msgid "Show session"
 msgstr ""
 
-#: session/Session.cpp:929
+#: session/Session.cpp:934
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2063,28 +2063,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:965
+#: session/Session.cpp:970
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Ferdig"
 
-#: session/Session.cpp:979 session/Session.cpp:990
+#: session/Session.cpp:984 session/Session.cpp:995
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programmet «%1» krasjet."
 
-#: session/Session.cpp:981
+#: session/Session.cpp:986
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programmet «%1» avsluttet med status %2."
 
-#: session/Session.cpp:1489
+#: session/Session.cpp:1494
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Framdrift for ZModem"
 
-#: session/Session.cpp:1821
+#: session/Session.cpp:1826
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr ""
@@ -4015,17 +4015,17 @@ msgstr ""
 msgid "Default profile for new terminal sessions in %1"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:517
+#: widgets/EditProfileDialog.cpp:565
 #, kde-format
 msgid "Edit Environment"
 msgstr "Endre miljøvariablene"
 
-#: widgets/EditProfileDialog.cpp:518
+#: widgets/EditProfileDialog.cpp:566
 #, kde-format
 msgid "One environment variable per line"
 msgstr "En miljøvariabel per linje"
 
-#: widgets/EditProfileDialog.cpp:549
+#: widgets/EditProfileDialog.cpp:597
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4033,18 +4033,18 @@ msgid_plural " seconds"
 msgstr[0] " sekund"
 msgstr[1] " sekunder"
 
-#: widgets/EditProfileDialog.cpp:648
+#: widgets/EditProfileDialog.cpp:696
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Velg startmappe"
 
-#: widgets/EditProfileDialog.cpp:1172
+#: widgets/EditProfileDialog.cpp:1220
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1351
+#: widgets/EditProfileDialog.cpp:1399
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4053,7 +4053,7 @@ msgstr ""
 "Dette fargeoppsettet bruker en gjennomsiktig bakgrunn og det ser ikke ut til "
 "at skrivebordet ditt støtter dette"
 
-#: widgets/EditProfileDialog.cpp:1357
+#: widgets/EditProfileDialog.cpp:1405
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4062,7 +4062,7 @@ msgstr ""
 "Konsole ble startet før skrivebordseffekter ble slått på, Du må starte "
 "konsole på nytt for å se gjennomsiktig bakgrunn."
 
-#: widgets/EditProfileDialog.cpp:1748
+#: widgets/EditProfileDialog.cpp:1796
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4079,7 +4079,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1761
+#: widgets/EditProfileDialog.cpp:1809
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
@@ -4212,37 +4212,79 @@ msgstr ""
 msgid "Up/Down Arrows emulation"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
-msgctxt "When showing URL hints"
-msgid "When URL hints show"
+msgid "Mouse click in input line moves cursor"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: widgets/EditProfileGeneralPage.ui:400
+#, kde-format
+msgid "Semantic hints:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
-#: widgets/EditProfileGeneralPage.ui:397
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
+#: widgets/EditProfileGeneralPage.ui:410 widgets/EditProfileGeneralPage.ui:456
+#: widgets/EditProfileGeneralPage.ui:502 widgets/EditProfileGeneralPage.ui:548
+#: widgets/EditProfileGeneralPage.ui:594
 #, kde-format
 msgctxt "Never"
 msgid "Never"
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
+#: widgets/EditProfileGeneralPage.ui:420 widgets/EditProfileGeneralPage.ui:466
+#: widgets/EditProfileGeneralPage.ui:512 widgets/EditProfileGeneralPage.ui:558
+#: widgets/EditProfileGeneralPage.ui:604
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
-#: widgets/EditProfileGeneralPage.ui:407
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
+#: widgets/EditProfileGeneralPage.ui:430 widgets/EditProfileGeneralPage.ui:476
+#: widgets/EditProfileGeneralPage.ui:522 widgets/EditProfileGeneralPage.ui:568
+#: widgets/EditProfileGeneralPage.ui:614
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:423
+#. i18n: ectx: property (text), widget (QLabel, label_20)
+#: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
-msgid "Semantic hints:"
+msgid "Red error bars:"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:433
+#. i18n: ectx: property (text), widget (QLabel, label_30)
+#: widgets/EditProfileGeneralPage.ui:492
 #, kde-format
-msgid "Mouse click in input line moves cursor"
+msgid "Red error background:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_40)
+#: widgets/EditProfileGeneralPage.ui:538
+#, kde-format
+msgid "Alternating bars:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_50)
+#: widgets/EditProfileGeneralPage.ui:584
+#, kde-format
+msgid "Alternating background:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, note)

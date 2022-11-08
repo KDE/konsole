@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:49+0000\n"
-"PO-Revision-Date: 2022-10-31 17:26+0300\n"
+"POT-Creation-Date: 2022-11-08 02:27+0000\n"
+"PO-Revision-Date: 2022-11-06 10:56+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2057,23 +2057,23 @@ msgstr ""
 "'%1' bulunamadı, onun yerine '%2' başlatılıyor.  Lütfen profil ayarlarınızı "
 "denetleyin."
 
-#: session/Session.cpp:516
+#: session/Session.cpp:521
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "'%1' uygulaması '%2' argümanıyla başlatılamadı."
 
-#: session/Session.cpp:661
+#: session/Session.cpp:666
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' içinde Sessizlik (Oturum '%2')"
 
-#: session/Session.cpp:665 session/Session.cpp:1825
+#: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #, kde-format
 msgid "Show session"
 msgstr "Oturumu göster"
 
-#: session/Session.cpp:929
+#: session/Session.cpp:934
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2087,28 +2087,28 @@ msgstr ""
 "değiştirilebilir.<p>Bu uyarı yalnızca bu Konsole örneği için bir kez "
 "gösterilecek.</p>"
 
-#: session/Session.cpp:965
+#: session/Session.cpp:970
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Tamamlandı"
 
-#: session/Session.cpp:979 session/Session.cpp:990
+#: session/Session.cpp:984 session/Session.cpp:995
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' uygulaması çöktü."
 
-#: session/Session.cpp:981
+#: session/Session.cpp:986
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' uygulamasından %2 durumu ile çıkıldı."
 
-#: session/Session.cpp:1489
+#: session/Session.cpp:1494
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem İşlemi"
 
-#: session/Session.cpp:1821
+#: session/Session.cpp:1826
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1' içinde Etkinlik (Oturum '%2')"
@@ -2487,7 +2487,7 @@ msgstr "Etkin ise profil ayarları yok sayılır"
 #: settings/GeneralSettings.ui:84
 #, kde-format
 msgid "Remember window size"
-msgstr "Pencere boyutunu hatırla"
+msgstr "Pencere boyutunu anımsa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
@@ -2508,7 +2508,7 @@ msgstr "Fare işaretçisi üzerine getirildiğinde terminallere odaklan"
 #: settings/GeneralSettings.ui:117 settings/konsole.kcfg:69
 #, kde-format
 msgid "Match using regular expressions"
-msgstr "Düzenli ifade kullanarak eşle"
+msgstr "Düzenli ifade kullanarak eşleştir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
@@ -2541,7 +2541,7 @@ msgstr "Aramanın büyük küçük harf duyarlı olup olmayacağını belirler"
 #: settings/GeneralSettings.ui:178
 #, kde-format
 msgid "Case sensitive"
-msgstr "Harfe duyarlı"
+msgstr "BÜYÜK/küçük harf duyarlı"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
@@ -3550,7 +3550,7 @@ msgstr "Akış Denetimi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:817
+#: widgets/EditProfileAppearancePage.ui:881
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3561,7 +3561,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:820
+#: widgets/EditProfileAppearancePage.ui:884
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Çift yönlü metin dokuma"
@@ -3722,7 +3722,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:297
 #, kde-format
 msgid "Match current character"
-msgstr "Geçerli karakterle eşleş"
+msgstr "Geçerli karakterle eşleştir"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:313
@@ -3898,14 +3898,67 @@ msgstr "<html><head/><body><p>Karmaşık Metin Düzeni</p></body></html>"
 msgid "Complex Text Layout"
 msgstr "Karmaşık Metin Düzeni"
 
-#. i18n: ectx: property (text), widget (QLabel, label_17)
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
+#, fuzzy, kde-format
+#| msgid "Bi-Directional text rendering"
+msgid "Enable word mode text rendering"
+msgstr "Çift yönlü metin dokuma"
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordMode)
+#: widgets/EditProfileAppearancePage.ui:794
+#, kde-format
+msgid "Word mode"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
+#: widgets/EditProfileAppearancePage.ui:807
+#, kde-format
+msgid ""
+"Ignore attribute changes mid-word (otherwise, attribute changes break word "
+"when rendering)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
+#: widgets/EditProfileAppearancePage.ui:810
+#, kde-format
+msgid "Use the same attributes for whole word"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
+#: widgets/EditProfileAppearancePage.ui:823
+#, kde-format
+msgid "Render words of ASCII characters together"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
+#: widgets/EditProfileAppearancePage.ui:826
+#, fuzzy, kde-format
+#| msgid "Word characters:"
+msgid "ASCII characters "
+msgstr "Sözcük karakterleri:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
+#: widgets/EditProfileAppearancePage.ui:839
+#, kde-format
+msgid "Render words of Brahmic scripts characters together"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
+#: widgets/EditProfileAppearancePage.ui:842
+#, fuzzy, kde-format
+#| msgid "Match current character"
+msgid "Brahmic scripts characters"
+msgstr "Geçerli karakterle eşleştir"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: widgets/EditProfileAppearancePage.ui:855
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Emoji Yazıtipi:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:833
+#: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
@@ -3913,19 +3966,19 @@ msgstr ""
 "sağadır"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:836
+#: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
 msgstr "Soldan sağa satır yönü zorla"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:849
+#: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Tablo çizim karakterlerine güçlü soldan sağa düzen olarak davran."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:852
+#: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Tablo karakterleri Çift-Yönlü kipi geçersiz kılma"
@@ -4087,13 +4140,13 @@ msgstr[1] " saniye"
 msgid "Select Initial Directory"
 msgstr "Başlangıç Dizinini Seç"
 
-#: widgets/EditProfileDialog.cpp:1220
+#: widgets/EditProfileDialog.cpp:1235
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> şeması yüklenemedi."
 
-#: widgets/EditProfileDialog.cpp:1399
+#: widgets/EditProfileDialog.cpp:1414
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4102,7 +4155,7 @@ msgstr ""
 "Bu renk şeması masaüstünüz tarafından desteklenmiyor; görünen saydam arka "
 "plan kullanıyor"
 
-#: widgets/EditProfileDialog.cpp:1405
+#: widgets/EditProfileDialog.cpp:1420
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4111,7 +4164,7 @@ msgstr ""
 "Konsole masaüstü efektleri etkinleştirilmeden önce başlatıldı. Saydam arka "
 "planı görebilmek için Konsole uygulamasını yeniden başlatmalısınız."
 
-#: widgets/EditProfileDialog.cpp:1796
+#: widgets/EditProfileDialog.cpp:1811
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4141,7 +4194,7 @@ msgstr ""
 "yok sayılır ve dosya varsayılan metin\n"
 "düzenleyici tarafından açılır."
 
-#: widgets/EditProfileDialog.cpp:1809
+#: widgets/EditProfileDialog.cpp:1824
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Metin Düzenleyici Özel Komutu"
@@ -4260,7 +4313,7 @@ msgid ""
 "for these entries to work.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Bu girdilerin çalışması için <span style=\" font-style:"
-"italic;\">Ayarlar → Konsole'u Yapılandır → Genel → Pencere boyutunu hatırla</"
+"italic;\">Ayarlar → Konsole'u Yapılandır → Genel → Pencere boyutunu anımsa</"
 "span> devre dışı bırakılmış olmalıdır.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
@@ -4873,7 +4926,7 @@ msgstr "Sabit boyut:"
 #: widgets/HistorySizeWidget.ui:73
 #, kde-format
 msgid "Number of lines of output to remember"
-msgstr "Çıktının hatırlanacak satır sayısı"
+msgstr "Çıktının anımsanacak satır sayısı"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:135
@@ -4965,7 +5018,7 @@ msgstr "Aramanın büyük küçük harf duyarlı olup olmayacağını ayarlar"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
-msgstr "Düzenli ifade eşle"
+msgstr "Düzenli ifadeleri eşleştir"
 
 #: widgets/IncrementalSearchBar.cpp:133
 #, kde-format
