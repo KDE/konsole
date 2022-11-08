@@ -68,9 +68,11 @@
     </Menu>
     <ToolBar name="sessionToolbar">
         <text>Session Toolbar</text>
-        <index>0</index>
+        <index>1</index>
+        <Spacer/>
         <Action name="edit_copy" />
         <Action name="edit_paste" />
         <Action name="edit_find" />
+        <Action name="hamburger_menu"/>
     </ToolBar>
 </gui>

@@ -27,8 +27,8 @@
 
 class QAction;
 class KActionMenu;
-class KToggleAction;
 class KHamburgerMenu;
+class KToggleAction;
 
 namespace Konsole
 {

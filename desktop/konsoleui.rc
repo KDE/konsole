@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<gui name="konsole" version="20">
+<gui name="konsole" version="19">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -56,14 +56,9 @@
         </Menu>
     </MenuBar>
     <ToolBar name="mainToolBar">
-        <!-- FIXME: setting session toolbar to index 0 and main toolbar to index 1
-        doesn't seem to put them in the right order; the main toolbar is still first! -->
         <text>Main Toolbar</text>
-        <index>1</index>
-        <!-- FIXME: doesn't seem to appear -->
-        <Spacer/>
+        <index>0</index>
         <Action name="new-tab"/>
         <Action name="split-view"/>
-        <Action name="hamburger_menu"/>
     </ToolBar>
 </gui>

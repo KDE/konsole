@@ -24,6 +24,7 @@
 #include <KIconUtils>
 #include <KLocalizedString>
 #include <KShortcutsDialog>
+#include <KToolBar>
 #include <KWindowEffects>
 
 #include <KMessageBox>
@@ -39,7 +40,6 @@
 
 // Konsole
 #include "BookmarkHandler.h"
-#include "BookmarkMenu.h"
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
 #include "WindowSystemInfo.h"
@@ -63,8 +63,6 @@
 
 #include <konsoledebug.h>
 
-#include <functional>
-
 using namespace Konsole;
 
 MainWindow::MainWindow()
@@ -74,7 +72,6 @@ MainWindow::MainWindow()
     , _toggleMenuBarAction(nullptr)
     , _newTabMenuAction(nullptr)
     , _pluggedController(nullptr)
-    , _hamburgerMenu(nullptr)
 {
     // Set the WA_NativeWindow attribute to force the creation of the QWindow.
     // Without this QWidget::windowHandle() returns 0.
@@ -89,7 +86,8 @@ MainWindow::MainWindow()
     // create view manager
     _viewManager = new ViewManager(this, actionCollection());
     connect(_viewManager, &Konsole::ViewManager::empty, this, &QWidget::close);
-    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this, &Konsole::MainWindow::activeViewChanged);
+    // QueuedConnection so that KHamburgerMenu showed up properly on the first tab
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this, &Konsole::MainWindow::activeViewChanged, Qt::QueuedConnection);
     connect(_viewManager, &Konsole::ViewManager::unplugController, this, &Konsole::MainWindow::disconnectController);
     connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged, bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
     connect(_viewManager, &Konsole::ViewManager::blurSettingChanged, this, &Konsole::MainWindow::setBlur);
@@ -284,6 +282,11 @@ void MainWindow::activeViewChanged(SessionController *controller)
     connect(controller, &Konsole::SessionController::rawTitleChanged, this, &Konsole::MainWindow::updateWindowCaption);
     connect(controller, &Konsole::SessionController::iconChanged, this, &Konsole::MainWindow::updateWindowIcon);
 
+    // to prevent shortcuts conflict
+    if (auto hamburgerMenu = _hamburgerMenu->menu()) {
+        hamburgerMenu->clear();
+    }
+
     controller->setShowMenuAction(_toggleMenuBarAction);
     guiFactory()->addClient(controller);
 
@@ -428,27 +431,14 @@ void MainWindow::setupActions()
     _hamburgerMenu = KStandardAction::hamburgerMenu(nullptr, nullptr, collection);
     _hamburgerMenu->setShowMenuBarAction(_toggleMenuBarAction);
     _hamburgerMenu->setMenuBar(menuBar());
-    connect(_hamburgerMenu, &KHamburgerMenu::aboutToShowMenu, [this]() {
-        updateHamburgerMenu();
-    });
+    connect(_hamburgerMenu, &KHamburgerMenu::aboutToShowMenu, this, &MainWindow::updateHamburgerMenu);
 }
 
 void MainWindow::updateHamburgerMenu()
 {
     KActionCollection *collection = actionCollection();
-    QList<KActionCollection *> allCollections = actionCollection()->allCollections();
+    KActionCollection *controllerCollection = _pluggedController->actionCollection();
 
-    std::function<QAction *(const QString &)> actionByName = [allCollections](const QString &name) {
-        for (auto *ac : allCollections) {
-            auto actions = ac->actions();
-            for (auto *action : actions) {
-                if (action->objectName() == name) {
-                    return action;
-                }
-            }
-        }
-        return static_cast<QAction *>(nullptr);
-    };
     QMenu *menu = _hamburgerMenu->menu();
     if (!menu) {
         menu = new QMenu(widget());
@@ -459,58 +449,56 @@ void MainWindow::updateHamburgerMenu()
 
     menu->addAction(collection->action(QStringLiteral("new-window")));
     menu->addAction(collection->action(QStringLiteral("new-tab")));
-    menu->addAction(actionByName(QStringLiteral("file_save_as")));
+    menu->addAction(controllerCollection->action(QStringLiteral("file_save_as")));
 
     menu->addSeparator();
 
-    menu->addAction(actionByName(QStringLiteral("edit-copy")));
-    menu->addAction(actionByName(QStringLiteral("edit-paste")));
-    menu->addAction(actionByName(QStringLiteral("edit-find")));
+    menu->addAction(controllerCollection->action(QStringLiteral("edit_copy")));
+    menu->addAction(controllerCollection->action(QStringLiteral("edit_paste")));
+    menu->addAction(controllerCollection->action(QStringLiteral("edit_find")));
 
     menu->addSeparator();
 
-    // FIXME: missing
-    menu->addAction(actionByName(QStringLiteral("view-full-screen")));
-    menu->addAction(actionByName(QStringLiteral("view-split")));
-    // FIXME: this causes it to get duplicated and then there's a shortcut conflict
-    menu->addAction(actionByName(QStringLiteral("clear-history-and-reset")));
-    menu->addAction(actionByName(QStringLiteral("enlarge-font")));
-    menu->addAction(actionByName(QStringLiteral("reset-font-size")));
-    menu->addAction(actionByName(QStringLiteral("shrink-font")));
+    menu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::FullScreen))));
+    menu->addAction(collection->action(QStringLiteral("split-view")));
+    menu->addAction(controllerCollection->action(QStringLiteral("clear-history-and-reset")));
+    menu->addAction(controllerCollection->action(QStringLiteral("enlarge-font")));
+    menu->addAction(controllerCollection->action(QStringLiteral("reset-font-size")));
+    menu->addAction(controllerCollection->action(QStringLiteral("shrink-font")));
 
     menu->addSeparator();
 
-    menu->addAction(actionByName(QStringLiteral("edit-current-profile")));
-    menu->addAction(actionByName(QStringLiteral("switch-profile")));
+    menu->addAction(controllerCollection->action(QStringLiteral("edit-current-profile")));
+    menu->addAction(controllerCollection->action(QStringLiteral("switch-profile")));
 
     menu->addSeparator();
 
-    auto monitorMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("visibility")), i18nc("@action:inmenu menu for 'monitor for action' actions", "Monitor"));
-    monitorMenu->addAction(actionByName(QStringLiteral("monitor-silence")));
-    monitorMenu->addAction(actionByName(QStringLiteral("monitor-activity")));
-    monitorMenu->addAction(actionByName(QStringLiteral("monitor-process-finish")));
+    auto monitorMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("visibility")), static_cast<QMenu *>(factory()->container(QStringLiteral("view"), nullptr))->title());
+    monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-silence")));
+    monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-activity")));
+    monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-process-finish")));
     menu->addMenu(monitorMenu);
     _hamburgerMenu->hideActionsOf(monitorMenu);
 
     auto bookmarkMenu = collection->action(QStringLiteral("bookmark"));
-    bookmarkMenu->setIcon(QIcon::fromTheme(QStringLiteral("bookmarks")));
+    bookmarkMenu->setIcon(QIcon::fromTheme(QStringLiteral("bookmarks"))); // Icon will be removed again when the menu bar is enabled.
     menu->addAction(bookmarkMenu);
 
     auto pluginsMenu = static_cast<QMenu *>(factory()->container(QStringLiteral("plugins"), this));
-    pluginsMenu->setIcon(QIcon::fromTheme(QStringLiteral("plugins")));
+    pluginsMenu->setIcon(QIcon::fromTheme(QStringLiteral("plugins"))); // Icon will be removed again when the menu bar is enabled.
     menu->addMenu(pluginsMenu);
 
-    auto configureMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), i18nc("@action:inmenu menu for configure actions", "Configure"));
-    configureMenu->addAction(collection->action(QStringLiteral("edit-current-profile")));
-    configureMenu->addAction(collection->action(QString::fromUtf8(KStandardAction::name(KStandardAction::SwitchApplicationLanguage))));
-    configureMenu->addAction(collection->action(QString::fromUtf8(KStandardAction::name(KStandardAction::KeyBindings))));
-    configureMenu->addAction(collection->action(QString::fromUtf8(KStandardAction::name(KStandardAction::ConfigureToolbars))));
-    configureMenu->addAction(collection->action(QString::fromUtf8(KStandardAction::name(KStandardAction::Preferences))));
-    configureMenu->addAction(collection->action(QStringLiteral("configure-settings")));
-    configureMenu->addAction(collection->action(QStringLiteral("configure-language")));
-    configureMenu->addAction(collection->action(QStringLiteral("configure-shortcuts")));
-    configureMenu->addAction(collection->action(QStringLiteral("configure-notifications")));
+    auto configureMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), static_cast<QMenu *>(factory()->container(QStringLiteral("settings"), nullptr))->title());
+    configureMenu->addAction(toolBarMenuAction());
+    configureMenu->addSeparator();
+    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::SwitchApplicationLanguage))));
+    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::KeyBindings))));
+    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::ConfigureToolbars))));
+    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::ConfigureNotifications))));
+    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::Preferences))));
     _hamburgerMenu->hideActionsOf(configureMenu);
+
+    _hamburgerMenu->hideActionsOf(toolBar());
 }
 
 void MainWindow::viewFullScreen(bool fullScreen)
@@ -529,10 +517,6 @@ void MainWindow::applyMainWindowSettings(const KConfigGroup &config)
     // Override the menubar state from the config file
     if (_windowArgsMenuBarVisible.enabled) {
         menuBar()->setVisible(_windowArgsMenuBarVisible.showMenuBar);
-    } else {
-        // FIXME: only do this on first run; we don't want existing Konsole users
-        // to see any changes to their UI!
-        menuBar()->hide();
     }
 
     _toggleMenuBarAction->setChecked(menuBar()->isVisibleTo(this));
@@ -643,6 +627,9 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     // don't like this happening
     auto newView = _viewManager->createView(session);
     _viewManager->activeContainer()->addView(newView);
+
+    _viewManager->activeViewController()->actionCollection()->addActions(
+        {_hamburgerMenu});
 
     return session;
 }

@@ -4,3 +4,4 @@ add_subdirectory( keyboard-layouts )
 add_subdirectory( layouts )
 
 install( FILES konsole.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})
+install(FILES konsolerc DESTINATION ${KDE_INSTALL_CONFDIR})

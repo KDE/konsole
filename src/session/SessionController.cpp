@@ -1987,13 +1987,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 
         _preventClose = true;
 
-        if (_showMenuAction != nullptr) {
-            if (_showMenuAction->isChecked()) {
-                popup->removeAction(_showMenuAction);
-            } else {
-                popup->insertAction(_switchProfileMenu, _showMenuAction);
-            }
-        }
+        static_cast<KHamburgerMenu *>(actionCollection()->action(QLatin1String(KStandardAction::name(KStandardAction::HamburgerMenu))))->addToMenu(popup);
 
         // they are here.
         // qDebug() << popup->actions().indexOf(contentActions[0]) << popup->actions().indexOf(contentActions[1]) << popup->actions()[3];

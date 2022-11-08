@@ -1,0 +1,9 @@
+Version=5
+
+Id=konsole_globalaccel
+File=khotkeysrc
+Script=konsole_globalaccel
+
+Id=add-hamburgermenu-to-toolbar
+Script=konsole_add_hamburgermenu_to_toolbar.sh
+Script=konsole_show_menubar
