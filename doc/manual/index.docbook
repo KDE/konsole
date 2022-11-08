@@ -427,6 +427,63 @@ For other shells, such as fish, zsh, python, etc. consult the relevant program's
 
 </sect1>
 
+
+<sect1 id="complex-text-rendering">
+<title>Complex Text Layout</title>
+
+<para>
+In the <guilabel>Complex Text Layout</guilabel> page of the <guilabel>Edit Profile</guilabel> dialog, you will find options that control
+the rendering of text.
+</para>
+
+<para>
+<itemizedlist>
+<listitem><para>
+<guilabel>Word mode</guilabel> - in this mode (some) strings are printed to the window at once, instead of character at a time.
+This allows Qt to render text correctly when the shape of a character depends on the characters before or after it. This might result in incorrect position of some characters.
+</para><para>
+Spaces always break strings, so they are always in the correct positions. This ensures that characters are never too far from their correct position.
+</para></listitem>
+
+<listitem><para>
+<guilabel>Use the same attributes for whole word</guilabel> - When this is enabled, words are rendered with the same attributes (text color, bold, italic, etc.) If an attributes changes mid-word, it will only take affect after the end of the word. When this is disabled, a new word starts when attributes change. This results in characters changing shape and position when moving the cursor or selecting text.
+</para></listitem>
+
+<listitem><para>
+<guilabel>ASCII characters</guilabel> -
+Group ASCII characters into words as describe above the most noticeable effect of this option is that enabling this shows programming ligatures
+(for fonts that support them). E.g. the string &lt;= may be displayed as ⩽.
+</para></listitem>
+
+<listitem><para>
+<guilabel>Brahmic scripts characters</guilabel> -
+Group Brahmic characters as described above. Without this option (depending on the font) some words may not be connected as they should. With this enabled Brahmic characters may appear out of position. E.g. the third character in the second line might not appear directly under the third character in the first line.
+</para></listitem>
+
+<listitem><para>
+<guilabel>Emoji Font:</guilabel> -
+This allows specifying the font to use for Unicode Emoji characters. If not set, the default profile font will be used (or some fallback font may be used by the system of the glyphs are missing from this font.
+</para></listitem>
+
+<listitem><para>
+<guilabel>Bi-Directional text rendering</guilabel> -
+Reorder right to left characters so Arabic and Hebrew texts appear correctly.
+</para></listitem>
+
+<listitem><para>
+<guilabel>force LTR line direction</guilabel> -
+Lines are always Left to right. Without this, each line's direction is determined by the first character with strong directionality.
+</para></listitem>
+
+<listitem><para>
+<guilabel>Table characters BiDi mode override</guilabel> -
+Consider graphic table characters as strong LTR characters. This allows table containing RTL characters to display correctly, but might cause incorrect order if those characters are used in RTL texts.
+</para></listitem>
+
+</itemizedlist>
+</para>
+</sect1>
+
 </chapter>
 
 <chapter id="commandreference">
