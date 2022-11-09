@@ -52,7 +52,7 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2022-11-08</date>
+<date>2022-11-09</date>
 <releaseinfo>KDE Gear 22.12</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
@@ -439,19 +439,19 @@ the rendering of text.
 <para>
 <itemizedlist>
 <listitem><para>
-<guilabel>Word mode</guilabel> - in this mode (some) strings are printed to the window at once, instead of character at a time.
+<guilabel>Word mode</guilabel> - in this mode (some) strings are displayed in the screen as a whole, instead of a character at a time.
 This allows Qt to render text correctly when the shape of a character depends on the characters before or after it. This might result in incorrect position of some characters.
 </para><para>
 Spaces always break strings, so they are always in the correct positions. This ensures that characters are never too far from their correct position.
 </para></listitem>
 
 <listitem><para>
-<guilabel>Use the same attributes for whole word</guilabel> - When this is enabled, words are rendered with the same attributes (text color, bold, italic, etc.) If an attributes changes mid-word, it will only take affect after the end of the word. When this is disabled, a new word starts when attributes change. This results in characters changing shape and position when moving the cursor or selecting text.
+<guilabel>Use the same attributes for each whole word</guilabel> - When this is enabled, words are rendered with the same attributes (text color, bold, italic, etc.). If an attribute changes mid-word, it will only take effect after the end of the word. When this is disabled, a new word starts when attributes change. This results in characters changing shape and position when moving the cursor or selecting text.
 </para></listitem>
 
 <listitem><para>
 <guilabel>ASCII characters</guilabel> -
-Group ASCII characters into words as describe above the most noticeable effect of this option is that enabling this shows programming ligatures
+Group ASCII characters into words as described above. The most noticeable effect of this option is that enabling this shows programming ligatures
 (for fonts that support them). E.g. the string &lt;= may be displayed as ⩽.
 </para></listitem>
 
@@ -462,7 +462,7 @@ Group Brahmic characters as described above. Without this option (depending on t
 
 <listitem><para>
 <guilabel>Emoji Font:</guilabel> -
-This allows specifying the font to use for Unicode Emoji characters. If not set, the default profile font will be used (or some fallback font may be used by the system of the glyphs are missing from this font.
+This allows specifying the font to use for Unicode Emoji characters. If not set, the default profile font will be used, or some fallback font may be used by the system if the glyphs are missing from this font.
 </para></listitem>
 
 <listitem><para>
