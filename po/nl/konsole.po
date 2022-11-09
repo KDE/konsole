@@ -21,15 +21,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-08 02:27+0000\n"
-"PO-Revision-Date: 2022-10-31 11:39+0100\n"
+"POT-Creation-Date: 2022-11-09 02:26+0000\n"
+"PO-Revision-Date: 2022-11-08 09:25-0400\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: \n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1282,7 +1282,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Tabbladindeling laden..."
 
-#: MainWindow.cpp:623 MainWindow.cpp:648
+#: MainWindow.cpp:620 MainWindow.cpp:645
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1291,55 +1291,55 @@ msgid_plural ""
 msgstr[0] "Er is een actief proces in dit venster. Wilt u toch afsluiten?"
 msgstr[1] "Er zijn %1 actieve processen in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
+#: MainWindow.cpp:626 MainWindow.cpp:651 MainWindow.cpp:669
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Sluiten bevestigen"
 
-#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
+#: MainWindow.cpp:627 MainWindow.cpp:652 MainWindow.cpp:670
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Venster sluiten"
 
-#: MainWindow.cpp:656 MainWindow.cpp:674
+#: MainWindow.cpp:653 MainWindow.cpp:671
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Huidig &tabblad sluiten"
 
-#: MainWindow.cpp:669
+#: MainWindow.cpp:666
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Er zijn %1 open terminals in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:784 Part.cpp:297
+#: MainWindow.cpp:781 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profielen"
 
-#: MainWindow.cpp:801
+#: MainWindow.cpp:798
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Algemeen"
 
-#: MainWindow.cpp:812
+#: MainWindow.cpp:809
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Tabbladbalk / Splitters"
 
-#: MainWindow.cpp:817
+#: MainWindow.cpp:814
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Tijdelijke bestanden"
 
-#: MainWindow.cpp:822
+#: MainWindow.cpp:819
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -3934,16 +3934,15 @@ msgstr "Complexe tekstindeling"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Weergeven van bi-directionele tekst"
+msgstr "Woord-modus inschakelen in renderen van tekst"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Woord-modus"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3952,38 +3951,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Wijzigingen in attributen midden in een woord negeren (anders wordt woord "
+"afgebroken door wijzigingen van attribuut bij renderen)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Hetzelfde attribuut gebruiken voor het gehele woord"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Woorden van ASCII-tekens samen renderen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Woordtekens:"
+msgstr "ASCII-tekens "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Woorden van Brahmic script-tekens samen renderen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Komt overeen met huidig teken"
+msgstr "Brahmic script-tekens"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855

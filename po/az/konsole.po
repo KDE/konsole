@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-08 02:27+0000\n"
+"POT-Creation-Date: 2022-11-09 02:26+0000\n"
 "PO-Revision-Date: 2022-07-20 11:10+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -1264,7 +1264,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Vərəq qatını fyldan yükləyin"
 
-#: MainWindow.cpp:623 MainWindow.cpp:648
+#: MainWindow.cpp:620 MainWindow.cpp:645
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1275,55 +1275,55 @@ msgstr[0] ""
 msgstr[1] ""
 "Bu pəncərədə %1 əməliyyat icra olunur. Çıxmaq istədiyinizə əminsiniz?"
 
-#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
+#: MainWindow.cpp:626 MainWindow.cpp:651 MainWindow.cpp:669
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Çıxışı təsdiqlə"
 
-#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
+#: MainWindow.cpp:627 MainWindow.cpp:652 MainWindow.cpp:670
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Pəncərəni bağlamaq"
 
-#: MainWindow.cpp:656 MainWindow.cpp:674
+#: MainWindow.cpp:653 MainWindow.cpp:671
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Cari &vərəqi bağlamaq"
 
-#: MainWindow.cpp:669
+#: MainWindow.cpp:666
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Bu pəncərədə %1 aşıq terminal var. Çıxmaq istədiyinizə əminsiniz?"
 
-#: MainWindow.cpp:784 Part.cpp:297
+#: MainWindow.cpp:781 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profillər"
 
-#: MainWindow.cpp:801
+#: MainWindow.cpp:798
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Ümumi"
 
-#: MainWindow.cpp:812
+#: MainWindow.cpp:809
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Vərəq / Bölücülər"
 
-#: MainWindow.cpp:817
+#: MainWindow.cpp:814
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Müvəqqəti fayllar"
 
-#: MainWindow.cpp:822
+#: MainWindow.cpp:819
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

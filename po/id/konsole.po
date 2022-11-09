@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-08 02:27+0000\n"
+"POT-Creation-Date: 2022-11-09 02:26+0000\n"
 "PO-Revision-Date: 2022-09-27 18:12+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -1253,7 +1253,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:623 MainWindow.cpp:648
+#: MainWindow.cpp:620 MainWindow.cpp:645
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1266,56 +1266,56 @@ msgstr[1] ""
 "Ada %1 proses yang berjalan di jendela ini. Apakah kamu masih ingin "
 "memberhentikan?"
 
-#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
+#: MainWindow.cpp:626 MainWindow.cpp:651 MainWindow.cpp:669
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Konfirmasi Tutup"
 
-#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
+#: MainWindow.cpp:627 MainWindow.cpp:652 MainWindow.cpp:670
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Tutup &Jendela"
 
-#: MainWindow.cpp:656 MainWindow.cpp:674
+#: MainWindow.cpp:653 MainWindow.cpp:671
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Tutup &Tab Saat Ini"
 
-#: MainWindow.cpp:669
+#: MainWindow.cpp:666
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Ada %1 terminal terbuka dalam jendela ini. Apakah Anda masih ingin keluar?"
 
-#: MainWindow.cpp:784 Part.cpp:297
+#: MainWindow.cpp:781 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profil"
 
-#: MainWindow.cpp:801
+#: MainWindow.cpp:798
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Umum"
 
-#: MainWindow.cpp:812
+#: MainWindow.cpp:809
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Bilah Tab / Pembelah"
 
-#: MainWindow.cpp:817
+#: MainWindow.cpp:814
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "File Sementara"
 
-#: MainWindow.cpp:822
+#: MainWindow.cpp:819
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

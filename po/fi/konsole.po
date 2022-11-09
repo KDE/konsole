@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-08 02:27+0000\n"
+"POT-Creation-Date: 2022-11-09 02:26+0000\n"
 "PO-Revision-Date: 2022-08-19 13:06+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1286,7 +1286,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Lataa välilehtiasettelu tiedostosta"
 
-#: MainWindow.cpp:623 MainWindow.cpp:648
+#: MainWindow.cpp:620 MainWindow.cpp:645
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1296,55 +1296,55 @@ msgstr[0] "Ikkunassa on prosessi käynnissä. Haluatko silti lopettaa ohjelman?"
 msgstr[1] ""
 "Ikkunassa on %1 prosessia käynnissä. Haluatko silti lopettaa ohjelman?"
 
-#: MainWindow.cpp:629 MainWindow.cpp:654 MainWindow.cpp:672
+#: MainWindow.cpp:626 MainWindow.cpp:651 MainWindow.cpp:669
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Vahvista sulkeminen"
 
-#: MainWindow.cpp:630 MainWindow.cpp:655 MainWindow.cpp:673
+#: MainWindow.cpp:627 MainWindow.cpp:652 MainWindow.cpp:670
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Sulje ikkuna"
 
-#: MainWindow.cpp:656 MainWindow.cpp:674
+#: MainWindow.cpp:653 MainWindow.cpp:671
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Sulje nykyinen &välilehti"
 
-#: MainWindow.cpp:669
+#: MainWindow.cpp:666
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Ikkunassa on auki %1 päätettä. Haluatko silti lopettaa?"
 
-#: MainWindow.cpp:784 Part.cpp:297
+#: MainWindow.cpp:781 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiilit"
 
-#: MainWindow.cpp:801
+#: MainWindow.cpp:798
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Perusasetukset"
 
-#: MainWindow.cpp:812
+#: MainWindow.cpp:809
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Välilehtipalkki / Jakoviivat"
 
-#: MainWindow.cpp:817
+#: MainWindow.cpp:814
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Väliaikaistiedostot"
 
-#: MainWindow.cpp:822
+#: MainWindow.cpp:819
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
