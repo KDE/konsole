@@ -66,6 +66,88 @@ static inline bool isLineCharString(const QString &string)
     return LineBlockCharacters::isLegacyComputingSymbol(ucs4);
 }
 
+QColor alphaBlend(const QColor &foreground, const QColor &background)
+{
+    const auto foregroundAlpha = foreground.alphaF();
+    const auto inverseForegroundAlpha = 1.0 - foregroundAlpha;
+    const auto backgroundAlpha = background.alphaF();
+
+    if (foregroundAlpha == 0.0) {
+        return background;
+    }
+
+    if (backgroundAlpha == 1.0) {
+        return QColor::fromRgb((foregroundAlpha * foreground.red()) + (inverseForegroundAlpha * background.red()),
+                               (foregroundAlpha * foreground.green()) + (inverseForegroundAlpha * background.green()),
+                               (foregroundAlpha * foreground.blue()) + (inverseForegroundAlpha * background.blue()),
+                               0xff);
+    } else {
+        const auto inverseBackgroundAlpha = (backgroundAlpha * inverseForegroundAlpha);
+        const auto finalAlpha = foregroundAlpha + inverseBackgroundAlpha;
+        Q_ASSERT(finalAlpha != 0.0);
+
+        return QColor::fromRgb((foregroundAlpha * foreground.red()) + (inverseBackgroundAlpha * background.red()),
+                               (foregroundAlpha * foreground.green()) + (inverseBackgroundAlpha * background.green()),
+                               (foregroundAlpha * foreground.blue()) + (inverseBackgroundAlpha * background.blue()),
+                               finalAlpha);
+    }
+}
+
+qreal wcag20AdjustColorPart(qreal v)
+{
+    return v <= 0.03928 ? v / 12.92 : qPow((v + 0.055) / 1.055, 2.4);
+}
+
+qreal wcag20RelativeLuminosity(const QColor &of)
+{
+    auto r = of.redF(), g = of.greenF(), b = of.blueF();
+
+    const auto a = wcag20AdjustColorPart;
+
+    auto r2 = a(r), g2 = a(g), b2 = a(b);
+
+    return r2 * 0.2126 + g2 * 0.7152 + b2 * 0.0722;
+}
+
+qreal wcag20Contrast(const QColor &c1, const QColor &c2)
+{
+    const auto l1 = wcag20RelativeLuminosity(c1) + 0.05, l2 = wcag20RelativeLuminosity(c2) + 0.05;
+
+    return (l1 > l2) ? l1 / l2 : l2 / l1;
+}
+
+std::optional<QColor> calculateBackgroundColor(const Character style, const QColor *colorTable)
+{
+    auto c1 = style.backgroundColor.color(colorTable);
+    const auto initialBG = c1;
+
+    c1.setAlphaF(0.8);
+
+    const auto blend1 = alphaBlend(c1, colorTable[DEFAULT_FORE_COLOR]), blend2 = alphaBlend(c1, colorTable[DEFAULT_BACK_COLOR]);
+    const auto fg = style.foregroundColor.color(colorTable);
+
+    const auto contrast1 = wcag20Contrast(fg, blend1), contrast2 = wcag20Contrast(fg, blend2);
+    const auto contrastBG1 = wcag20Contrast(blend1, initialBG), contrastBG2 = wcag20Contrast(blend2, initialBG);
+
+    const auto fgFactor = 5.5; // if text contrast is too low against our calculated bg, then we flip to reverse
+    const auto bgFactor = 1.6; // if bg contrast is too low against default bg, then we flip to reverse
+
+    if ((contrast1 < fgFactor && contrast2 < fgFactor) || (contrastBG1 < bgFactor && contrastBG2 < bgFactor)) {
+        return {};
+    }
+
+    return (contrast1 < contrast2) ? blend1 : blend2;
+}
+
+static void reverseRendition(Character &p)
+{
+    CharacterColor f = p.foregroundColor;
+    CharacterColor b = p.backgroundColor;
+
+    p.foregroundColor = b;
+    p.backgroundColor = f;
+}
+
 void TerminalPainter::drawContents(Character *image,
                                    QPainter &paint,
                                    const QRect &rect,
@@ -133,6 +215,7 @@ void TerminalPainter::drawContents(Character *image,
     const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
     paint.setRenderHint(QPainter::Antialiasing, m_parentDisplay->terminalFont()->antialiasText());
     paint.setLayoutDirection(Qt::LeftToRight);
+    const QColor *colorTable = m_parentDisplay->terminalColor()->colorTable();
 
     for (int y = rect.y(); y <= rect.bottom(); y++) {
         int pos = m_parentDisplay->loc(0, y);
@@ -209,7 +292,7 @@ void TerminalPainter::drawContents(Character *image,
                           rect.x(),
                           rect.width(),
                           fontWidth,
-                          m_parentDisplay->terminalColor()->colorTable(),
+                          colorTable,
                           invertedRendition,
                           vis2line,
                           line2log,
@@ -246,21 +329,47 @@ void TerminalPainter::drawContents(Character *image,
             if (unistr.length() && unistr[0] != QChar(0)) {
                 int textWidth = fontWidth * 1;
                 int textX = leftPadding + fontWidth * x * (doubleWidthLine ? 2 : 1);
+                if (!printerFriendly && char_value.rendition.f.cursor) {
+                    Character style = char_value;
+
+                    if (style.rendition.f.selected) {
+                        if (invertedRendition) {
+                            reverseRendition(style);
+                        }
+                    }
+
+                    QColor foregroundColor = style.foregroundColor.color(colorTable);
+                    QColor backgroundColor = style.backgroundColor.color(colorTable);
+
+                    if (style.rendition.f.selected) {
+                        if (!invertedRendition) {
+                            backgroundColor = calculateBackgroundColor(style, colorTable).value_or(foregroundColor);
+                            if (backgroundColor == foregroundColor) {
+                                foregroundColor = style.backgroundColor.color(colorTable);
+                            }
+                        }
+                    }
+                    drawCursor(paint,
+                               QRect(textScale.inverted().map(QPoint(textX, textY)), QSize(textWidth, textHeight)),
+                               foregroundColor,
+                               backgroundColor,
+                               foregroundColor);
+                }
                 if (wordMode) {
                     int charType = 0;
-                    if (wordModeAscii && image[pos + log_x].flags & EF_ASCII_WORD) {
+                    if (wordModeAscii && char_value.flags & EF_ASCII_WORD) {
                         charType = 1;
                     }
-                    if (wordModeBrahmic && image[pos + log_x].flags & EF_BRAHMIC_WORD) {
+                    if (wordModeBrahmic && char_value.flags & EF_BRAHMIC_WORD) {
                         charType = 2;
                     }
-                    if (lastCharType != charType || (wordModeAttr && lastCharType != 0 && char_value.notSameAttributesText(image[pos + vis2log(x - 1)]))) {
+                    if (lastCharType != charType || (!wordModeAttr && lastCharType != 0 && char_value.notSameAttributesText(image[pos + vis2log(x - 1)]))) {
                         if (lastCharType != 0) {
                             drawTextCharacters(paint,
                                                QRect(textScale.inverted().map(QPoint(word_x, textY)), QSize(textWidth, textHeight)),
                                                word_str,
                                                image[pos + word_log_x],
-                                               m_parentDisplay->terminalColor()->colorTable(),
+                                               colorTable,
                                                invertedRendition,
                                                lineProperty,
                                                printerFriendly,
@@ -288,7 +397,7 @@ void TerminalPainter::drawContents(Character *image,
                                    textAreaOneChar,
                                    unistr,
                                    image[pos + log_x],
-                                   m_parentDisplay->terminalColor()->colorTable(),
+                                   colorTable,
                                    invertedRendition,
                                    lineProperty,
                                    printerFriendly,
@@ -303,7 +412,7 @@ void TerminalPainter::drawContents(Character *image,
                                QRect(textScale.inverted().map(QPoint(word_x, textY)), QSize(textWidth, textHeight)),
                                word_str,
                                image[pos + word_log_x],
-                               m_parentDisplay->terminalColor()->colorTable(),
+                               colorTable,
                                invertedRendition,
                                lineProperty,
                                printerFriendly,
@@ -319,7 +428,7 @@ void TerminalPainter::drawContents(Character *image,
                           rect.x(),
                           rect.width(),
                           fontWidth,
-                          m_parentDisplay->terminalColor()->colorTable(),
+                          colorTable,
                           invertedRendition,
                           vis2line,
                           line2log,
@@ -429,88 +538,6 @@ QRegion TerminalPainter::highlightScrolledLinesRegion(TerminalScrollBar *scrollB
     }
 
     return dirtyRegion;
-}
-
-QColor alphaBlend(const QColor &foreground, const QColor &background)
-{
-    const auto foregroundAlpha = foreground.alphaF();
-    const auto inverseForegroundAlpha = 1.0 - foregroundAlpha;
-    const auto backgroundAlpha = background.alphaF();
-
-    if (foregroundAlpha == 0.0) {
-        return background;
-    }
-
-    if (backgroundAlpha == 1.0) {
-        return QColor::fromRgb((foregroundAlpha * foreground.red()) + (inverseForegroundAlpha * background.red()),
-                               (foregroundAlpha * foreground.green()) + (inverseForegroundAlpha * background.green()),
-                               (foregroundAlpha * foreground.blue()) + (inverseForegroundAlpha * background.blue()),
-                               0xff);
-    } else {
-        const auto inverseBackgroundAlpha = (backgroundAlpha * inverseForegroundAlpha);
-        const auto finalAlpha = foregroundAlpha + inverseBackgroundAlpha;
-        Q_ASSERT(finalAlpha != 0.0);
-
-        return QColor::fromRgb((foregroundAlpha * foreground.red()) + (inverseBackgroundAlpha * background.red()),
-                               (foregroundAlpha * foreground.green()) + (inverseBackgroundAlpha * background.green()),
-                               (foregroundAlpha * foreground.blue()) + (inverseBackgroundAlpha * background.blue()),
-                               finalAlpha);
-    }
-}
-
-qreal wcag20AdjustColorPart(qreal v)
-{
-    return v <= 0.03928 ? v / 12.92 : qPow((v + 0.055) / 1.055, 2.4);
-}
-
-qreal wcag20RelativeLuminosity(const QColor &of)
-{
-    auto r = of.redF(), g = of.greenF(), b = of.blueF();
-
-    const auto a = wcag20AdjustColorPart;
-
-    auto r2 = a(r), g2 = a(g), b2 = a(b);
-
-    return r2 * 0.2126 + g2 * 0.7152 + b2 * 0.0722;
-}
-
-qreal wcag20Contrast(const QColor &c1, const QColor &c2)
-{
-    const auto l1 = wcag20RelativeLuminosity(c1) + 0.05, l2 = wcag20RelativeLuminosity(c2) + 0.05;
-
-    return (l1 > l2) ? l1 / l2 : l2 / l1;
-}
-
-std::optional<QColor> calculateBackgroundColor(const Character style, const QColor *colorTable)
-{
-    auto c1 = style.backgroundColor.color(colorTable);
-    const auto initialBG = c1;
-
-    c1.setAlphaF(0.8);
-
-    const auto blend1 = alphaBlend(c1, colorTable[DEFAULT_FORE_COLOR]), blend2 = alphaBlend(c1, colorTable[DEFAULT_BACK_COLOR]);
-    const auto fg = style.foregroundColor.color(colorTable);
-
-    const auto contrast1 = wcag20Contrast(fg, blend1), contrast2 = wcag20Contrast(fg, blend2);
-    const auto contrastBG1 = wcag20Contrast(blend1, initialBG), contrastBG2 = wcag20Contrast(blend2, initialBG);
-
-    const auto fgFactor = 5.5; // if text contrast is too low against our calculated bg, then we flip to reverse
-    const auto bgFactor = 1.6; // if bg contrast is too low against default bg, then we flip to reverse
-
-    if ((contrast1 < fgFactor && contrast2 < fgFactor) || (contrastBG1 < bgFactor && contrastBG2 < bgFactor)) {
-        return {};
-    }
-
-    return (contrast1 < contrast2) ? blend1 : blend2;
-}
-
-static void reverseRendition(Character &p)
-{
-    CharacterColor f = p.foregroundColor;
-    CharacterColor b = p.backgroundColor;
-
-    p.foregroundColor = b;
-    p.backgroundColor = f;
 }
 
 void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting)
@@ -1021,10 +1048,10 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
                 }
             }
         }
-
         characterColor = foregroundColor;
         if (style.rendition.f.cursor != 0) {
-            drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
+            // Don't draw, only recalculate colors
+            drawCursor(painter, QRect(0, 0, 0, 0), foregroundColor, backgroundColor, characterColor);
         }
         if (m_parentDisplay->filterChain()->showUrlHint()) {
             if ((style.flags & EF_REPL) == EF_REPL_PROMPT) {
