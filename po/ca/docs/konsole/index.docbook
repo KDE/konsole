@@ -92,9 +92,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->29 d'octubre de 2022</date>
+>2022-11-09</date>
 <releaseinfo
->Applications 22.12</releaseinfo>
+>KDE Gear 23.04</releaseinfo>
 
 <abstract
 ><para
@@ -678,6 +678,82 @@
 ></keycombo
 > s'enganxaran les ordres necessàries per al bash. Per a altres intèrprets d'ordres, com ara el fish, zsh, python, etc., consulteu la documentació del programa pertinent. </para>
 
+</sect1>
+
+
+<sect1 id="complex-text-rendering">
+<title
+>Disposició complexa del text</title>
+
+<para
+>A la pàgina <guilabel
+>Disposició complexa del text</guilabel
+> del diàleg <guilabel
+>Edita un perfil</guilabel
+>, trobareu opcions que controlen la representació del text. </para>
+
+<para>
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Word mode</guilabel
+> - in this mode (some) strings are displayed in the screen as a whole, instead of a character at a time. This allows Qt to render text correctly when the shape of a character depends on the characters before or after it. This might result in incorrect position of some characters. </para
+><para
+>Els espais sempre trenquen les cadenes, de manera que sempre estaran en les posicions correctes. Això assegura que els caràcters mai estan massa lluny de la seva posició correcta. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Use the same attributes for each whole word</guilabel
+> - When this is enabled, words are rendered with the same attributes (text color, bold, italic, etc.). If an attribute changes mid-word, it will only take effect after the end of the word. When this is disabled, a new word starts when attributes change. This results in characters changing shape and position when moving the cursor or selecting text. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>ASCII characters</guilabel
+> - Group ASCII characters into words as described above. The most noticeable effect of this option is that enabling this shows programming ligatures (for fonts that support them). E.g. the string &lt;= may be displayed as ⩽. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Caràcters dels alfabets bràmics</guilabel
+>: agrupa els caràcters bràmics com s'ha descrit anteriorment. Sense aquesta opció (depenent del tipus de lletra) algunes paraules poden no estar connectades com haurien. Amb aquesta opció activada, els caràcters bràmics poden aparèixer fora de posició. P. ex. el tercer caràcter de la segona línia podria no aparèixer directament sota el tercer caràcter de la primera línia. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Emoji Font:</guilabel
+> - This allows specifying the font to use for Unicode Emoji characters. If not set, the default profile font will be used, or some fallback font may be used by the system if the glyphs are missing from this font. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Representació de text bidireccional</guilabel
+>: reordena els caràcters d'esquerra a dreta de manera que els textos àrabs i hebreus apareguin correctament. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Força la direcció de línia LTR</guilabel
+>: les línia són sempre d'esquerra a dreta. Sense això, la direcció de cada línia està determinada pel primer caràcter amb direccionalitat forta. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Substitució del mode BiDi de caràcters de taula</guilabel
+>: considera els caràcters gràfics de taula com a caràcters LTR forts. Això permet que les taules que contenen caràcters RTL es mostrin correctament, però podria provocar un ordre incorrecte si aquests caràcters s'empren en textos RTL. </para
+></listitem>
+
+</itemizedlist>
+</para>
 </sect1>
 
 </chapter>

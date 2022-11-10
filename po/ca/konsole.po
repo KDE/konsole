@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:51+0000\n"
-"PO-Revision-Date: 2022-10-31 08:51+0100\n"
+"POT-Creation-Date: 2022-11-10 00:50+0000\n"
+"PO-Revision-Date: 2022-11-09 10:12+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -2079,6 +2079,7 @@ msgstr "Silenci a «%1» (Sessió «%2»)"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
 msgstr "Mostra la sessió"
@@ -3492,7 +3493,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carrega la disposició de les pestanyes"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3935,16 +3936,15 @@ msgstr "Disposició complexa del text"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Representació de text bidireccional"
+msgstr "Activa la representació del text en mode paraula"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Mode paraula"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3953,38 +3953,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignora els canvis d'atributs a mitja paraula (altrament, els canvis "
+"d'atributs trencaran les paraules quan es representin)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Usa els mateixos atributs per a la paraula sencera"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Representa juntes les paraules de caràcters ASCII"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Caràcters de paraula:"
+msgstr "Caràcters ASCII"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Representa juntes les paraules de caràcters dels alfabets bràmics"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Coincideix amb el caràcter actual"
+msgstr "Caràcters dels alfabets bràmics"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855

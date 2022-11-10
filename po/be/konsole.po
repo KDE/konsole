@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:51+0000\n"
+"POT-Creation-Date: 2022-11-10 00:50+0000\n"
 "PO-Revision-Date: 2022-09-10 08:21\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
@@ -2072,6 +2072,7 @@ msgstr "Бяздзейнасць у \"%1\" (сеанс \"%2\")"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
 msgstr "Паказаць сеанс"
@@ -3476,7 +3477,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Загрузіць макет укладак з файла"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

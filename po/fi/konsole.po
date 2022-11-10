@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:51+0000\n"
+"POT-Creation-Date: 2022-11-10 00:50+0000\n"
 "PO-Revision-Date: 2022-08-19 13:06+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2096,6 +2096,7 @@ msgstr "Hiljaisuus päätteessä ”%1” (istunto ”%2”)"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
 msgstr "Näytä istunto"
@@ -3502,7 +3503,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Lataa välilehtiasettelu tiedostosta"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

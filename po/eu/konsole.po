@@ -13,15 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:51+0000\n"
-"PO-Revision-Date: 2022-10-31 05:59+0100\n"
+"POT-Creation-Date: 2022-11-10 00:50+0000\n"
+"PO-Revision-Date: 2022-11-09 06:31+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -2080,6 +2080,7 @@ msgstr "Isiltasuna «%1»(e)an (Saioa «%2»)"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
 msgstr "Erakutsi saioa"
@@ -3483,7 +3484,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zamatu fitxen antolaera"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3925,16 +3926,15 @@ msgstr "Testuaren antolamendu konplexua"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Bi norabideetako testua errendatzea"
+msgstr "Gaitu hitz-moduko testu errendatzea"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Hitz modua"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3943,38 +3943,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ezikusi hitz erdiko atributu aldaketak (bestela, errendatzean, atributu "
+"aldaketek hitza hausten dute)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Erabili atributu berdinak hitz osoan"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Errendatu ASCII karaktereko hitzak elkarrekin"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Hitzetako karaktereak:"
+msgstr "ASCII karaktereak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Errendatu Brahma-gidoietako karaktereak elkarrekin"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Bat etorri uneko karakterearekin"
+msgstr "Brahma-gidoietako karaktereak"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855

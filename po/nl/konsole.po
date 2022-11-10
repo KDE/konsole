@@ -21,15 +21,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:51+0000\n"
-"PO-Revision-Date: 2022-10-31 11:39+0100\n"
+"POT-Creation-Date: 2022-11-10 00:50+0000\n"
+"PO-Revision-Date: 2022-11-09 19:10-0400\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2085,6 +2085,7 @@ msgstr "Stilte in '%1' (sessie '%2')"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
 msgstr "Sessie tonen"
@@ -3490,7 +3491,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Tabbladindeling laden"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3934,16 +3935,15 @@ msgstr "Complexe tekstindeling"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Weergeven van bi-directionele tekst"
+msgstr "Woord-modus inschakelen in renderen van tekst"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Woord-modus"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3952,38 +3952,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Wijzigingen in attributen midden in een woord negeren (anders wordt woord "
+"afgebroken door wijzigingen van attribuut bij renderen)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Hetzelfde attribuut gebruiken voor het gehele woord"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Woorden van ASCII-tekens samen renderen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Woordtekens:"
+msgstr "ASCII-tekens "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Woorden van Brahmic script-tekens samen renderen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Komt overeen met huidig teken"
+msgstr "Brahmic script-tekens"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
