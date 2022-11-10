@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 02:26+0000\n"
+"POT-Creation-Date: 2022-11-10 02:31+0000\n"
 "PO-Revision-Date: 2022-10-13 09:31+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -2087,6 +2087,7 @@ msgstr "Нет активности в «%1» (сеанс «%2»)"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
 msgstr "Показать сеанс"
@@ -3493,7 +3494,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Загрузить макет вкладки из файла"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 02:26+0000\n"
+"POT-Creation-Date: 2022-11-10 02:31+0000\n"
 "PO-Revision-Date: 2022-08-16 18:45+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -2106,6 +2106,7 @@ msgstr "Cisza w „%1” (sesja „%2”)"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
 msgstr "Pokaż sesję"
@@ -3516,7 +3517,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Wczytaj układ kart z pliku"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

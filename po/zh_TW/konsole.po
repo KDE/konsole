@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 02:26+0000\n"
+"POT-Creation-Date: 2022-11-10 02:31+0000\n"
 "PO-Revision-Date: 2022-02-10 10:52+0800\n"
 "Last-Translator: Chaoting Liu <brli@chakralinux.org>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -2088,6 +2088,7 @@ msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, fuzzy, kde-format
 #| msgid "&Close Session"
 msgid "Show session"
@@ -3491,7 +3492,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "從檔案讀取分頁版型"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

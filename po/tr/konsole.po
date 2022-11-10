@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 02:26+0000\n"
-"PO-Revision-Date: 2022-11-06 10:56+0300\n"
+"POT-Creation-Date: 2022-11-10 02:31+0000\n"
+"PO-Revision-Date: 2022-11-09 13:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2069,6 +2069,7 @@ msgstr "'%1' içinde Sessizlik (Oturum '%2')"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
+#: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
 msgstr "Oturumu göster"
@@ -2734,26 +2735,25 @@ msgstr "Sekme genişliklerini genişlet"
 #: settings/konsole.kcfg:175
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr "Geri kaydırma dosyaları için sistem genelindeki dosya konumunu kullan"
+msgstr "Geri sarma dosyaları için sistem genelindeki dosya konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:179
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr ""
-"Geri kaydırma dosyaları için kullanıcı ev tanımlı klasör konumunu kullan"
+msgstr "Geri sarma dosyaları için kullanıcı ev tanımlı klasör konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:183
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr "Geri kaydırma dosyaları için, belirtilen klasör konumunu"
+msgstr "Geri sarma dosyaları için belirtilen klasör konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:187
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr "Geri kaydırma dosyaları için, bu klasörü kullan"
+msgstr "Geri sarma dosyaları için bu klasörü kullan"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
@@ -3462,7 +3462,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Sekme Düzeni Yükle"
 
-#: Vt102Emulation.cpp:2334
+#: Vt102Emulation.cpp:2358
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3900,16 +3900,15 @@ msgstr "Karmaşık Metin Düzeni"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Çift yönlü metin dokuma"
+msgstr "Metin dokuma için sözcük kipini etkinleştir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Sözcük kipi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3918,38 +3917,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Sözcük ortasındayken öznitelik değişimlerini yok say (yoksa öznitelik "
+"değişiklikleri, dokuma sırasında sözcüğü bozar)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Tüm sözcük için aynı öznitelikleri kullan"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "ASCII karakterlerden oluşan sözcükleri birlikte doku"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Sözcük karakterleri:"
+msgstr "ASCII karakterler"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Brahmi yazısı sözcüklerini birlikte doku"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Geçerli karakterle eşleştir"
+msgstr "Brahmi yazısı karakterleri"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
@@ -4007,7 +4006,7 @@ msgstr "Görünüm"
 #: widgets/EditProfileDialog.cpp:133
 #, kde-format
 msgid "Scrolling"
-msgstr "Kaydırma"
+msgstr "Sarma"
 
 #: widgets/EditProfileDialog.cpp:147
 #, kde-format
@@ -4682,14 +4681,14 @@ msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
 "Alternate Screen buffer (e.g. less)"
 msgstr ""
-"Fare kaydırma tekerleği, Alternatif Ekran arabelleğini (ör. less) kullanan "
-"programlarda yukarı/aşağı düğme basımlarını taklit eder"
+"Fare sarma tekerleği, Alternatif Ekran arabelleğini (ör. less) kullanan "
+"programlarda yukarı/aşağı düğme basımlarına öykünür"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:402
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
-msgstr "Alternatif Ekran arabelleği kaydırmayı etkinleştir"
+msgstr "Alternatif Ekran arabelleğini sarmayı etkinleştir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:409
@@ -4761,13 +4760,13 @@ msgstr "Geçmiş:"
 #: widgets/EditProfileScrollingPage.ui:85
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr "Sayfayı Yukarı/Aşağı Kaydır:"
+msgstr "Sayfayı Yukarı/Aşağı Sar:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:101
 #, kde-format
 msgid "Scroll the page the half height of window"
-msgstr "Sayfayı pencerenin yarı yüksekliği kadar kaydır"
+msgstr "Sayfayı pencerenin yarı yüksekliği kadar sar"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:104
@@ -4779,7 +4778,7 @@ msgstr "Yarım ekran yüksekliği"
 #: widgets/EditProfileScrollingPage.ui:114
 #, kde-format
 msgid "Scroll the page the full height of window"
-msgstr "Sayfayı pencerenin tam yüksekliği kadar kaydır"
+msgstr "Sayfayı pencerenin tam yüksekliği kadar sar"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:117
@@ -4791,13 +4790,13 @@ msgstr "Tam ekran yüksekliği"
 #: widgets/EditProfileScrollingPage.ui:149
 #, kde-format
 msgid "Scrollbar position:"
-msgstr "Kaydırma çubuğu konumu:"
+msgstr "Sarma çubuğu konumu:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:159
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
-msgstr "Kaydırma çubuğunu uçbirim penceresinin sağında göster"
+msgstr "Sarma çubuğunu uçbirim penceresinin sağında göster"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:162
@@ -4810,7 +4809,7 @@ msgstr "Sağ taraf"
 #: widgets/EditProfileScrollingPage.ui:172
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
-msgstr "Kaydırma çubuğunu uçbirim penceresinin solunda göster"
+msgstr "Sarma çubuğunu uçbirim penceresinin solunda göster"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:175
@@ -4890,9 +4889,9 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"Bu seçeneği kullanırken, geri kaydırma verileri RAM'e kaydedilecektir. Çok "
-"büyük bir değer seçerseniz sisteminizde boş RAM kalmayabilir ve ciddi "
-"sorunlara neden olabilir."
+"Bu seçeneği kullanırken, geri sarma verisi RAM'e kaydedilecektir. Çok büyük "
+"bir değer seçerseniz sisteminizde boş RAM kalmayabilir ve ciddi sorunlara "
+"neden olabilir."
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
