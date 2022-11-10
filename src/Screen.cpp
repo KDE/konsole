@@ -2083,7 +2083,7 @@ int Screen::copyLineToStream(int line,
 
         // Exclude trailing empty cells from count and don't bother processing them further.
         // See the comment on the similar case for screen lines for an explanation.
-        while (count > 0 && (characterBuffer[start + count - 1].flags & EF_REAL) == 0) {
+        while (count > 0 && (characterBuffer[count - 1].flags & EF_REAL) == 0) {
             count--;
         }
 
@@ -2092,7 +2092,7 @@ int Screen::copyLineToStream(int line,
         } else {
             if (options.testFlag(TrimTrailingWhitespace)) {
                 // ignore trailing white space at the end of the line
-                while (count > 0 && QChar(characterBuffer[start + count - 1].character).isSpace()) {
+                while (count > 0 && QChar(characterBuffer[count - 1].character).isSpace()) {
                     count--;
                 }
             }
