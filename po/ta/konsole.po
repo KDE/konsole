@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-10 00:50+0000\n"
-"PO-Revision-Date: 2022-11-03 21:22+0530\n"
+"PO-Revision-Date: 2022-11-10 20:00+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1055,11 +1055,10 @@ msgid "Alexander Neundorf"
 msgstr "அலெக்ஸாண்டர் நியுன்டார்ப்"
 
 #: main.cpp:375
-#, fuzzy, kde-format
-#| msgid "Bug fixes and improved startup performance"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
-msgstr "வழுத் தீர்வுகளும் மேம்படுத்தப்பட்ட துவக்கத் திறன் வெளிப்பாடும்"
+msgstr "பிழைநீக்கமும் துவக்கத்தை விரைவுபடுத்தியதும்"
 
 #: main.cpp:377
 #, kde-format
@@ -3899,16 +3898,15 @@ msgstr "மேம்பட்ட உரைத்தளவமைப்பு"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "மேம்பட்ட உரைத்தளவமைப்பு"
+msgstr "கூட்டெழுத்துகளின் பகுதிகளை சேர்த்து வரைவதற்கான ஆதரவு"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "சொல் பயன்முறை"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3917,38 +3915,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"சொல்லின் பண்புகள் சொல்லுக்கு நடுவில் மாறினால் பொருட்படுத்தாதே (இல்லையெல், சொல்லின் பண்பு "
+"மாறும்போது அச்சொல் உடைக்கப்படும்)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "முழு சொல்லுக்கு ஒரே பண்புகளைப் பயன்படுத்து"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "ASCII கூட்டெழுத்துகளின் பகுதிகளை சேர்த்து வரையும்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "சொல்லிலுள்ள குறியீடுகள்:"
+msgstr "ASCII கூட்டெழுத்துகள்"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "இந்திய லிபிகளிலுள்ள கூட்டெழுத்துகளின் பகுதிகளை சேர்த்து வரையும்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "தற்போதைய எழுத்தை பொறுத்து"
+msgstr "இந்திய லிபிகளிலுள்ள எழுத்துகள்"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855

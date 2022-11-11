@@ -92,7 +92,7 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2022-11-09</date>
+>9 de novembre de 2022</date>
 <releaseinfo
 >KDE Gear 23.04</releaseinfo>
 
@@ -697,8 +697,8 @@
 <listitem
 ><para
 ><guilabel
->Word mode</guilabel
-> - in this mode (some) strings are displayed in the screen as a whole, instead of a character at a time. This allows Qt to render text correctly when the shape of a character depends on the characters before or after it. This might result in incorrect position of some characters. </para
+>Mode paraula</guilabel
+>: en aquest mode (algunes) cadenes es mostren senceres a la pantalla, en lloc de caràcter a caràcter. Això permet que les Qt representin correctament el text quan la forma d'un caràcter depengui dels caràcters que hi ha abans o després. Això podria provocar una posició incorrecta d'alguns caràcters. </para
 ><para
 >Els espais sempre trenquen les cadenes, de manera que sempre estaran en les posicions correctes. Això assegura que els caràcters mai estan massa lluny de la seva posició correcta. </para
 ></listitem>
@@ -706,15 +706,15 @@
 <listitem
 ><para
 ><guilabel
->Use the same attributes for each whole word</guilabel
-> - When this is enabled, words are rendered with the same attributes (text color, bold, italic, etc.). If an attribute changes mid-word, it will only take effect after the end of the word. When this is disabled, a new word starts when attributes change. This results in characters changing shape and position when moving the cursor or selecting text. </para
+>Usa els mateixos atributs per a cada paraula sencera</guilabel
+>: quan això està activat, les paraules es representen amb els mateixos atributs (color de text, negreta, cursiva, etc.). Si un atribut canvia a mitja paraula, només tindrà efecte després del final de la paraula. Quan està desactivat, comença una paraula nova quan canvien els atributs. Això fa que els caràcters canviïn de forma i posició en moure el cursor o seleccionar el text. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->ASCII characters</guilabel
-> - Group ASCII characters into words as described above. The most noticeable effect of this option is that enabling this shows programming ligatures (for fonts that support them). E.g. the string &lt;= may be displayed as ⩽. </para
+>Caràcters ASCII</guilabel
+>: agrupa els caràcters ASCII en paraules com s'ha descrit anteriorment. L'efecte més notable d'aquesta opció és que l'activació mostra les lligadures de programació (per a tipus de lletra que els permeten). P. ex. la cadena &lt;= es pot mostrar com a ⩽. </para
 ></listitem>
 
 <listitem
@@ -727,8 +727,8 @@
 <listitem
 ><para
 ><guilabel
->Emoji Font:</guilabel
-> - This allows specifying the font to use for Unicode Emoji characters. If not set, the default profile font will be used, or some fallback font may be used by the system if the glyphs are missing from this font. </para
+>Tipus de lletra dels emojis</guilabel
+>: això permet especificar el tipus de lletra a usar per als caràcters Unicode d'emoji. Si no s'estableix, s'usarà el tipus de lletra predeterminat del perfil, o el sistema podria utilitzar algun tipus de lletra alternatiu si manquen els glifs d'aquest tipus de lletra. </para
 ></listitem>
 
 <listitem
