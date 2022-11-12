@@ -1283,7 +1283,7 @@ QUrl Session::getUrl()
         bool ok = false;
 
         // check if foreground process is bookmark-able
-        if (isForegroundProcessActive() && _foregroundProcessInfo->isValid()) {
+        if (isForegroundProcessActive() && updateForegroundProcessInfo() && _foregroundProcessInfo->isValid()) {
             // for remote connections, save the user and host
             // bright ideas to get the directory at the other end are welcome :)
             if (_foregroundProcessInfo->name(&ok) == QLatin1String("ssh") && ok) {
