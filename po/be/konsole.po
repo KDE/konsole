@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-10 00:50+0000\n"
-"PO-Revision-Date: 2022-09-10 08:21\n"
+"PO-Revision-Date: 2022-11-11 08:46\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -1252,20 +1252,16 @@ msgid "Activate Menu"
 msgstr "Актывацыя меню"
 
 #: MainWindow.cpp:377
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Захаваць макет укладак у файл"
+msgstr "Захаваць макет укладак..."
 
 #: MainWindow.cpp:386
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Загрузіць макет укладак з файла"
+msgstr "Загрузіць макет укладак..."
 
 #: MainWindow.cpp:620 MainWindow.cpp:645
 #, kde-format
@@ -1346,11 +1342,9 @@ msgstr "Форма"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Спалучэнне клавіш"
+msgstr "Спалучэнне клавіш:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1435,10 +1429,9 @@ msgid "Quick Commands"
 msgstr "Хуткія загады"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Паказваць хуткія загады"
+msgstr "Хуткі доступ"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1560,12 +1553,12 @@ msgstr "Паказваць кіраўнік SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Паказваць элементы хуткага доступу да дзеянняў SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Запісы SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
@@ -1677,9 +1670,7 @@ msgstr "Выдаліць абраны запіс"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Спалучэнне клавіш"
 
@@ -1693,12 +1684,11 @@ msgstr "Паказаць запісы, якія не адпавядаюць фі
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Змяняць профіль пры падлучэнні/адлучэнні"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
 msgstr "Кіраванне профілямі"
 
@@ -2188,10 +2178,9 @@ msgid "&Select All"
 msgstr "&Абраць усё"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Абраць &радок"
+msgstr "Абраць &рэжым"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3436,12 +3425,10 @@ msgid "Line numbers "
 msgstr "Нумары радкоў "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Захаваць макет укладак у файл"
+msgstr "Захаваць макет укладак"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3470,12 +3457,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Загрузіць макет укладак з файла"
+msgstr "Загрузіць макет укладак"
 
 #: Vt102Emulation.cpp:2358
 #, kde-format
@@ -3917,16 +3902,15 @@ msgstr "Комплекснае кампанаванне тэксту"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Двухкірункавае адлюстраванне тэксту"
+msgstr "Уключыць паслоўны рэжым рэндэрынгу тэксту"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Паслоўны рэжым"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3935,38 +3919,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Не зважаць на змены атрыбутаў у сярэдзіне слова (у адваротным выпадку пры "
+"візуалізацыі словы разбіваюцца)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Выкарыстоўваць аднолькавыя атрыбуты для ўсяго слова"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Выводзіць словы з сімвалаў ASCII разам"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Слоўныя сімвалы:"
+msgstr "Сімвалы ASCII "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Выводзіць словы брахманскага пісьма разам"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Адпаведнасць бягучаму сімвалу"
+msgstr "Сімвалы брахманскага пісьма"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
@@ -4417,27 +4401,25 @@ msgstr "Заўсёды"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Радкі крытычных памылак:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Размыццё фону"
+msgstr "Фон крытычных памылак:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Альтэрнатыўныя радкі:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Размыццё фону"
+msgstr "Фон альтэрнатыўных радкоў:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29

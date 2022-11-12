@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-10 00:50+0000\n"
-"PO-Revision-Date: 2022-10-31 05:02+0100\n"
+"PO-Revision-Date: 2022-11-11 06:49+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2808,7 +2808,7 @@ msgstr "ჩანართებზე დახურვის ღილაკ�
 #: settings/TabBarSettings.ui:162
 #, kde-format
 msgid "&On each tab"
-msgstr ""
+msgstr "&თითოეულ ჩანართზე"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:172
@@ -3197,25 +3197,25 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
-msgstr ""
+msgstr "ხედის გაფართოება"
 
 #: ViewManager.cpp:173
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
-msgstr ""
+msgstr "ხედის შემცირება"
 
 #: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
-msgstr ""
+msgstr "მიმდინარე &ხედის მოხსნა"
 
 #: ViewManager.cpp:195
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr ""
+msgstr "მიმდინარე &ჩანართის მოხსნა"
 
 #: ViewManager.cpp:200
 #, kde-format
