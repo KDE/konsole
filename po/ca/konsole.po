@@ -3974,12 +3974,14 @@ msgstr "Representa juntes les paraules de caràcters ASCII"
 msgid "ASCII characters "
 msgstr "Caràcters ASCII"
 
+# skip-rule: kct-script
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "Representa juntes les paraules de caràcters dels alfabets bràmics"
 
+# skip-rule: kct-script
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
 #, kde-format
