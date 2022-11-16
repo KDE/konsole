@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-10 00:50+0000\n"
+"POT-Creation-Date: 2022-11-16 00:50+0000\n"
 "PO-Revision-Date: 2022-11-09 20:37+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -1239,61 +1239,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Remerciements aux nombreux autres contributeurs.\n"
 
-#: MainWindow.cpp:315
+#: MainWindow.cpp:337
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nouvel onglet"
 
-#: MainWindow.cpp:325
+#: MainWindow.cpp:347
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Cloner l'onglet"
 
-#: MainWindow.cpp:332
+#: MainWindow.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nouvelle &fenêtre"
 
-#: MainWindow.cpp:339
+#: MainWindow.cpp:361
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Fermer la fenêtre"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Signets"
 
-#: MainWindow.cpp:365
+#: MainWindow.cpp:387
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gérer les profils..."
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:393
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activer le menu"
 
-#: MainWindow.cpp:377
+#: MainWindow.cpp:399
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Enregistrer une disposition d'onglets..."
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Charger une disposition d'onglets..."
 
-#: MainWindow.cpp:620 MainWindow.cpp:645
+#: MainWindow.cpp:642 MainWindow.cpp:667
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1306,56 +1306,56 @@ msgstr[1] ""
 "%1 processus sont en cours d'exécution dans cette fenêtre. Voulez-vous "
 "vraiment quitter ?"
 
-#: MainWindow.cpp:626 MainWindow.cpp:651 MainWindow.cpp:669
+#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmer la fermeture"
 
-#: MainWindow.cpp:627 MainWindow.cpp:652 MainWindow.cpp:670
+#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Fermer la &fenêtre"
 
-#: MainWindow.cpp:653 MainWindow.cpp:671
+#: MainWindow.cpp:675 MainWindow.cpp:693
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Fermer l'ongle&t actuel"
 
-#: MainWindow.cpp:666
+#: MainWindow.cpp:688
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Cette fenêtre contient %1 terminaux ouverts. Voulez-vous vraiment quitter ?"
 
-#: MainWindow.cpp:781 Part.cpp:297
+#: MainWindow.cpp:803 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profils"
 
-#: MainWindow.cpp:798
+#: MainWindow.cpp:820
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Général"
 
-#: MainWindow.cpp:809
+#: MainWindow.cpp:831
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barre d'onglets / Séparateurs"
 
-#: MainWindow.cpp:814
+#: MainWindow.cpp:836
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Fichiers temporaires"
 
-#: MainWindow.cpp:819
+#: MainWindow.cpp:841
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

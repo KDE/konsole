@@ -120,9 +120,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->19/6/2022</date>
+>9/1/2022</date>
 <releaseinfo
->Applications 22.12</releaseinfo>
+>KDE Gear 23.04</releaseinfo>
 
 <abstract
 ><para
@@ -643,8 +643,37 @@
 ></listitem>
 <listitem
 ><para
->Suggerimenti visivi: una linea viene visualizzata sopra ogni prompt, i colori del prompt sono meno intensi e i colori di uscita sono più intensi. Questo può essere configurato per non mostrare, mostrare sempre o solo quando vengono visualizzati i suggerimenti URL. </para
+>Suggerimenti visivi:</para>
+<itemizedlist>
+<listitem
+><para
+>Viene visualizzata una linea sopra ogni prompt, i colori dei prompt sono meno intensi e i colori di output sono più intensi. </para
 ></listitem>
+<listitem
+><para
+>Viene visualizzata una barra rossa a sinistra delle righe di input e output dei comandi che hanno generato un errore </para
+></listitem>
+<listitem
+><para
+>Uno sfondo rosso per le righe di input e output dei comandi che hanno generato un errore </para
+></listitem>
+<listitem
+><para
+>Viene visualizzata una barra grigia a sinistra delle righe di input e output di ogni altro comando. </para
+></listitem>
+<listitem
+><para
+>Uno sfondo grigio per le righe di input e output di ogni altro comando. </para
+></listitem>
+</itemizedlist>
+<para
+>Ognuno di questi può essere configurato per non mostrare mai, mostrare sempre o solo quando sono mostrati i suggerimenti degli URL. La configurazione si trova nella scheda <guilabel
+>Integrazione semantica</guilabel
+> della pagina <guilabel
+>Generale</guilabel
+> della finestra di configurazione del profilo. </para
+></listitem>
+
 <listitem
 ><para
 >Opzioni del menu di contesto <guimenuitem
@@ -677,6 +706,82 @@
 ></keycombo
 > incollerà i comandi necessari necessari in bash. Per altre shell, come fish, zsh, python, ecc., consultare la documentazione di programma pertinente. </para>
 
+</sect1>
+
+
+<sect1 id="complex-text-rendering">
+<title
+>Disposizione complessa del testo</title>
+
+<para
+>Nella pagina <guilabel
+>Disposizione complessa del testo</guilabel
+> della finestra <guilabel
+>Modifica profilo</guilabel
+>, troverai le opzioni che controllano il rendering del testo. </para>
+
+<para>
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Modalità parola</guilabel
+> - in questa modalità (alcune) le stringhe sono visualizzate sullo schermo nel suo insieme, invece di un carattere alla volta. Ciò consente a Qt di eseguire il rendering del testo correttamente quando la forma di un carattere dipende dai caratteri precedenti o successivi. Ciò potrebbe comportare una posizione errata di alcuni caratteri. </para
+><para
+>Gli spazi interrompono sempre le stringhe, quindi sono sempre nelle posizioni corrette. Ciò garantisce che i caratteri non siano mai troppo lontani dalla loro posizione corretta. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Usa gli stessi attributi per ogni parola intera</guilabel
+> - Quando è abilitato, le parole vengono visualizzate con gli stessi attributi (colore del testo, grassetto, corsivo, ecc.). Se un attributo cambia a metà parola, avrà effetto solo dopo la fine della parola. Quando questo è disabilitato, una nuova parola inizia quando gli attributi cambiano. Ciò comporta che i caratteri cambino forma e posizione quando si sposta il cursore o si seleziona il testo. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Caratteri ASCII</guilabel
+> - Raggruppa i caratteri ASCII in parole come descritto sopra. L'effetto più evidente di questa opzione è che l'abilitazione mostra le legature di programmazione (per i caratteri che le supportano). Ad esempio. la stringa &lt;= può essere visualizzata come ⩽. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Caratteri dell'alfabeto brahmi</guilabel
+> - Raggruppa i caratteri brahmi come descritto sopra. Senza questa opzione (a seconda del carattere) alcune parole potrebbero non essere collegate come dovrebbero. Con questa opzione abilitato i caratteri brahmi possono apparire fuori posizione. Per esempio. il terzo carattere nella seconda riga potrebbe non apparire direttamente sotto il terzo carattere nella prima riga. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Carattere Emoji:</guilabel
+> - Ciò consente di specificare il carattere da utilizzare per i caratteri Emoji Unicode. Se non viene impostato, sarà utilizzato il carattere del profilo predefinito oppure il sistema potrebbe utilizzare alcuni caratteri di riserva se i glifi non sono presenti in questo carattere. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Rendering del testo bidirezionale</guilabel
+> - Riordina da destra a sinistracaratteri in modo che i testi arabi ed ebraici siano visualizzati correttamente. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Forza la direzione LTR della riga</guilabel
+> - Le righe sono sempre da sinistra a destra. Senza questo, la direzione di ogni riga è determinata dal primo carattere con una forte direzionalità. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Caratteri di tabella sovrascrittura modalità BiDi</guilabel
+> - Considera i caratteri di tabella grafica come caratteri LTR forti. Ciò consente la visualizzazione corretta della tabella contenente i caratteri RTL, ma potrebbe causare un ordine errato se tali caratteri sono utilizzati nei testi RTL. </para
+></listitem>
+
+</itemizedlist>
+</para>
 </sect1>
 
 </chapter>
@@ -754,7 +859,7 @@
 >Apre una nuova scheda con il profilo predefinito.</action>
 <note
 ><para
->Il primo profilo nel sottomenu sarà sempre «Predefinito» che è ilprofilo integrato. Tutti gli altri profili saranno elencati di seguito che inordine alfabetico. Il profilo predefinito specificato dall'utente sarà in grassetto. </para
+>Il primo profilo nel sottomenu sarà sempre «Predefinito» che è il profilo integrato. Tutti gli altri profili saranno elencati di seguito che in ordine alfabetico. Il profilo predefinito specificato dall'utente sarà in grassetto. </para
 ></note>
 </para
 ></listitem
