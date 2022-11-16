@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-10 02:31+0000\n"
+"POT-Creation-Date: 2022-11-16 02:54+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -1238,49 +1238,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "इतर अनेकांचे आभार.\n"
 
-#: MainWindow.cpp:315
+#: MainWindow.cpp:337
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "नवीन टॅब (&N)"
 
-#: MainWindow.cpp:325
+#: MainWindow.cpp:347
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "टॅब प्रतिकृत करा (&C)"
 
-#: MainWindow.cpp:332
+#: MainWindow.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "नवीन चौकट (&W)"
 
-#: MainWindow.cpp:339
+#: MainWindow.cpp:361
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "चौकट बंद करा"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "ओळखचिन्ह (&B)"
 
-#: MainWindow.cpp:365
+#: MainWindow.cpp:387
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "रूपरेषा व्यवस्थापीत करा..."
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:393
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "सक्रिय मेन्यू"
 
-#: MainWindow.cpp:377
+#: MainWindow.cpp:399
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -1288,13 +1288,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "टॅब डावीकडे हलवा"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:620 MainWindow.cpp:645
+#: MainWindow.cpp:642 MainWindow.cpp:667
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1307,25 +1307,25 @@ msgid_plural ""
 msgstr[0] "या चौकटीत %1 उघडा टॅब आहे, तुम्हाला नक्की बाहेर पडायचे आहे का?"
 msgstr[1] "या चौकटीत %1 उघडे टॅब आहेत, तुम्हाला नक्की बाहेर पडायचे आहे का?"
 
-#: MainWindow.cpp:626 MainWindow.cpp:651 MainWindow.cpp:669
+#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "बंद करण्याची खात्री करा"
 
-#: MainWindow.cpp:627 MainWindow.cpp:652 MainWindow.cpp:670
+#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "चौकट बंद करा (&W)"
 
-#: MainWindow.cpp:653 MainWindow.cpp:671
+#: MainWindow.cpp:675 MainWindow.cpp:693
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "वर्तमान टॅब बंद करा (&T)"
 
-#: MainWindow.cpp:666
+#: MainWindow.cpp:688
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1335,7 +1335,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "या चौकटीत %1 उघडा टॅब आहे, तुम्हाला नक्की बाहेर पडायचे आहे का?"
 
-#: MainWindow.cpp:781 Part.cpp:297
+#: MainWindow.cpp:803 Part.cpp:297
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1343,25 +1343,25 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "नवीन रूपरेषा"
 
-#: MainWindow.cpp:798
+#: MainWindow.cpp:820
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "सामान्य"
 
-#: MainWindow.cpp:809
+#: MainWindow.cpp:831
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:814
+#: MainWindow.cpp:836
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:819
+#: MainWindow.cpp:841
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

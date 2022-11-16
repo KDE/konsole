@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-10 02:31+0000\n"
-"PO-Revision-Date: 2022-10-08 01:12+0200\n"
+"POT-Creation-Date: 2022-11-16 02:54+0000\n"
+"PO-Revision-Date: 2022-11-09 18:12+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1215,61 +1215,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Grazie a molti altri.\n"
 
-#: MainWindow.cpp:315
+#: MainWindow.cpp:337
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nuova scheda"
 
-#: MainWindow.cpp:325
+#: MainWindow.cpp:347
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Clona scheda"
 
-#: MainWindow.cpp:332
+#: MainWindow.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nuova &finestra"
 
-#: MainWindow.cpp:339
+#: MainWindow.cpp:361
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Chiudi finestra"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Segnali&bri"
 
-#: MainWindow.cpp:365
+#: MainWindow.cpp:387
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gestisci profili..."
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:393
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Attiva menu"
 
-#: MainWindow.cpp:377
+#: MainWindow.cpp:399
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Salva la disposizione delle schede..."
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carica la disposizione delle schede..."
 
-#: MainWindow.cpp:620 MainWindow.cpp:645
+#: MainWindow.cpp:642 MainWindow.cpp:667
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1280,55 +1280,55 @@ msgstr[0] ""
 msgstr[1] ""
 "Ci sono %1 processi in esecuzione in questa finestra. Vuoi uscire comunque?"
 
-#: MainWindow.cpp:626 MainWindow.cpp:651 MainWindow.cpp:669
+#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Conferma chiusura"
 
-#: MainWindow.cpp:627 MainWindow.cpp:652 MainWindow.cpp:670
+#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Chiudi &finestra"
 
-#: MainWindow.cpp:653 MainWindow.cpp:671
+#: MainWindow.cpp:675 MainWindow.cpp:693
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Chiudi la &scheda attuale"
 
-#: MainWindow.cpp:666
+#: MainWindow.cpp:688
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Ci sono %1 terminali aperti in questa finestra. Vuoi ancora uscire?"
 
-#: MainWindow.cpp:781 Part.cpp:297
+#: MainWindow.cpp:803 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profili"
 
-#: MainWindow.cpp:798
+#: MainWindow.cpp:820
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Generale"
 
-#: MainWindow.cpp:809
+#: MainWindow.cpp:831
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra delle schede / Divisori"
 
-#: MainWindow.cpp:814
+#: MainWindow.cpp:836
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "File temporanei"
 
-#: MainWindow.cpp:819
+#: MainWindow.cpp:841
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1696,15 +1696,13 @@ msgstr "Mostra le voci che non corrispondono al filtro"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Cambia profilo su connessione/disconnessione"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Gestisci profili"
+msgstr "Gestisci il profilo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -3936,16 +3934,15 @@ msgstr "Disposizione di testo complesso"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Resa del testo bidirezionale"
+msgstr "Resa del testo in modalità parola"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Modalità parola"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3954,38 +3951,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignora le modifiche agli attributi a metà parola (altrimenti, le modifiche "
+"agli attributi interrompono la parola durante il rendering)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Usa gli stessi attributi per l'intera parola"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Rendi insieme le parole di caratteri ASCII"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Caratteri delle parole:"
+msgstr "Caratteri ASCII "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Rendi insieme le parole di caratteri dell'alfabeto brahmi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Verifica il carattere attuale"
+msgstr "Caratteri dell'alfabeto brahmi"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
@@ -4216,7 +4213,7 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
-"Il formato è ad es. «eidtorExec PERCORSO:RIGA:COLONNA»\n"
+"Il formato è ad es. «editorExec PERCORSO:RIGA:COLONNA»\n"
 "\n"
 "PERCORSO sarà sostituito dal percorso del file di testo\n"
 "RIGA sarà sostituito dal numero di riga\n"
@@ -4425,27 +4422,25 @@ msgstr "Sempre"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Barre di errore rosse:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Sfondo sfocato"
+msgstr "Sfondo di errore rosso:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Barre alternate:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Sfondo sfocato"
+msgstr "Sfondo alternato:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-10 02:31+0000\n"
+"POT-Creation-Date: 2022-11-16 02:54+0000\n"
 "PO-Revision-Date: 2022-11-12 17:27+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -1175,61 +1175,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "მადლობა ბევრ სხვას.\n"
 
-#: MainWindow.cpp:315
+#: MainWindow.cpp:337
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&ახალი ჩანართი"
 
-#: MainWindow.cpp:325
+#: MainWindow.cpp:347
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "ჩანართის &კლონირება"
 
-#: MainWindow.cpp:332
+#: MainWindow.cpp:354
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&ახალი ფანჯარა"
 
-#: MainWindow.cpp:339
+#: MainWindow.cpp:361
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "ფანჯრის დახურვა"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&სანიშნეები"
 
-#: MainWindow.cpp:365
+#: MainWindow.cpp:387
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "პროფილების მართვა..."
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:393
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "მენიუს აქტივაცია"
 
-#: MainWindow.cpp:377
+#: MainWindow.cpp:399
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "ჩანართების განლაგების შენახვა…"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "ჩანართების განლაგების ჩატვირთვა…"
 
-#: MainWindow.cpp:620 MainWindow.cpp:645
+#: MainWindow.cpp:642 MainWindow.cpp:667
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1238,55 +1238,55 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: MainWindow.cpp:626 MainWindow.cpp:651 MainWindow.cpp:669
+#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "დახურვის დასტური"
 
-#: MainWindow.cpp:627 MainWindow.cpp:652 MainWindow.cpp:670
+#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&ფანრჯის დახურვა"
 
-#: MainWindow.cpp:653 MainWindow.cpp:671
+#: MainWindow.cpp:675 MainWindow.cpp:693
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "მიმდინარე &ჩანართის დახურვა"
 
-#: MainWindow.cpp:666
+#: MainWindow.cpp:688
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 
-#: MainWindow.cpp:781 Part.cpp:297
+#: MainWindow.cpp:803 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "პროფილები"
 
-#: MainWindow.cpp:798
+#: MainWindow.cpp:820
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ზოგადი"
 
-#: MainWindow.cpp:809
+#: MainWindow.cpp:831
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:814
+#: MainWindow.cpp:836
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:819
+#: MainWindow.cpp:841
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
