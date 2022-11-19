@@ -165,7 +165,7 @@ void QuickCommandsWidget::saveCommand()
     if (priv->model->addChildItem(data(), ui->group->currentText()))
         viewMode();
     else
-        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("A duplicate item exists"));
+        KMessageBox::error(this, i18n("A duplicate item exists"));
 }
 
 void QuickCommandsWidget::updateCommand()
@@ -176,7 +176,7 @@ void QuickCommandsWidget::updateCommand()
     if (priv->model->editChildItem(data(), sourceIdx, ui->group->currentText()))
         viewMode();
     else
-        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("A duplicate item exists"));
+        KMessageBox::error(this, i18n("A duplicate item exists"));
 }
 
 void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
@@ -287,11 +287,11 @@ void QuickCommandsWidget::setCurrentController(Konsole::SessionController *contr
 bool QuickCommandsWidget::valid()
 {
     if (ui->name->text().isEmpty() || ui->name->text().trimmed().isEmpty()) {
-        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("Title can not be empty or blank"));
+        KMessageBox::error(this, i18n("Title can not be empty or blank"));
         return false;
     }
     if (ui->command->toPlainText().isEmpty()) {
-        KMessageBox::messageBox(this, KMessageBox::DialogType::Error, i18n("Command can not be empty"));
+        KMessageBox::error(this, i18n("Command can not be empty"));
         return false;
     }
     return true;
