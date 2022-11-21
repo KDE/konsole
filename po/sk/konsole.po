@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 02:54+0000\n"
-"PO-Revision-Date: 2022-07-19 10:03+0200\n"
+"PO-Revision-Date: 2022-11-20 16:00+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.07.80\n"
+"X-Generator: Lokalize 22.11.80\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -114,11 +114,10 @@ msgid "json layoutfile to be loaded to use for new Konsole instance"
 msgstr "Súbor json s rozložením, ktoré sa použije pre novú inštanciu Konsole"
 
 #: Application.cpp:53
-#, fuzzy, kde-format
-#| msgid "Create a new profile based on the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Vytvoriť nový profil založený na vybranom profile"
+msgstr "Použitie vstavaného profilu namiesto predvoleného profilu"
 
 #: Application.cpp:54
 #, kde-format
@@ -655,23 +654,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Horizontálna kotva:"
+msgstr "Horizontálne"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "Vertikálna kotva:"
+msgstr "Vertikálne"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Obe"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -1255,20 +1252,16 @@ msgid "Activate Menu"
 msgstr "Aktivovať ponuku"
 
 #: MainWindow.cpp:399
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Uložiť rozloženie kariet do súboru"
+msgstr "Uložiť rozloženie kariet..."
 
 #: MainWindow.cpp:408
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Načítať rozloženie kariet zo súboru"
+msgstr "Načítať rozloženie kariet..."
 
 #: MainWindow.cpp:642 MainWindow.cpp:667
 #, kde-format
@@ -1348,11 +1341,9 @@ msgstr "Formulár"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Skratka"
+msgstr "Skratka:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1437,10 +1428,9 @@ msgid "Quick Commands"
 msgstr "Rýchle príkazy"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Zobraziť rýchle príkazy"
+msgstr "Zobraziť rýchly prístup"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1530,8 +1520,7 @@ msgid "SSH Config"
 msgstr "SSH Nastavenia"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "Predvolené"
@@ -1689,9 +1678,7 @@ msgstr "Odstrániť vybranú položku"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Skratka"
 
@@ -1709,11 +1696,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Spravovať profily"
+msgstr "Spravovať profil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2200,10 +2185,9 @@ msgid "&Select All"
 msgstr "Vybrať &všetko"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Vybrať riadok"
+msgstr "Režim výberu"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3270,12 +3254,10 @@ msgid "Split View Top/Bottom"
 msgstr "Rozdeliť pohľad horizontálne"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Rozdeliť pohľad horizontálne"
+msgstr "Automaticky rozdeliť pohľad"
 
 #: ViewManager.cpp:139
 #, kde-format
@@ -3434,10 +3416,9 @@ msgid "Switch to Tab %1"
 msgstr "Prepnúť na kartu %1"
 
 #: ViewManager.cpp:527
-#, fuzzy, kde-format
-#| msgid "Semantic hints:"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Sémantické nápovedy:"
+msgstr "Sémantická nápoveda "
 
 #: ViewManager.cpp:543
 #, kde-format
@@ -3445,38 +3426,29 @@ msgid "Line numbers "
 msgstr ""
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Uložiť rozloženie kariet do súboru"
+msgstr "Uložiť rozloženie kariet"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
-#, fuzzy, kde-format
-#| msgid "Konsole View Layout (*.json)"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr "Rozloženie pohľadu Konsole (*.json)"
+msgstr "Rozloženie pohľadov Konsole (*.json)"
 
 #: ViewManager.cpp:1089
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"+Nastal problém pri ukladaní výstupu.\n"
+"Nastal problém pri ukladaní rozloženia.\n"
 "%1"
 
 #: ViewManager.cpp:1150
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when loading the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
@@ -3486,12 +3458,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Načítať rozloženie kariet zo súboru"
+msgstr "Načítať rozloženie kariet"
 
 #: Vt102Emulation.cpp:2358
 #, kde-format
