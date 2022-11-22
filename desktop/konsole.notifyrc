@@ -1149,6 +1149,7 @@ Action=None
 
 [Event/ProcessNotification]
 Name=Process Triggered a Notification in a Focused Session
+Name[ar]=عالج الإشعار المطلق في جلسة مركزة
 Name[bg]=Процес, задействал известие във фокусирана сесия
 Name[ca]=El procés ha activat una notificació en una sessió amb focus
 Name[ca@valencia]=El procés ha activat una notificació en una sessió amb focus
@@ -1165,6 +1166,7 @@ Name[tr]=Süreç, Odaklanan Bir Oturumda Bir Bildirim Tetikledi
 Name[uk]=Процесом ініційовано сповіщення у фокусованому сеансі
 Name[x-test]=xxProcess Triggered a Notification in a Focused Sessionxx
 Comment=Notification emitted by a process in a focused session
+Comment[ar]=أطلق الإشعار بواسطة عملية في جلسة مركزة
 Comment[bg]=Известие, изпратено от процес във фокусирана сесия
 Comment[ca]=Notificació emesa per un procés en una sessió amb focus
 Comment[ca@valencia]=Notificació emesa per un procés en una sessió amb focus
@@ -1184,6 +1186,7 @@ Action=None
 
 [Event/ProcessNotificationHidden]
 Name=Process Triggered a Notification in a Non-Focused Session
+Name[ar]=عالج الإشعار المطلق في جلسة غير مركزة
 Name[bg]=Процес, задействал известие в не-фокусирана сесия
 Name[ca]=El procés ha activat una notificació en una sessió sense focus
 Name[ca@valencia]=El procés ha activat una notificació en una sessió sense focus
@@ -1200,6 +1203,7 @@ Name[tr]=Süreç, Odaklanılmamış Bir Oturumda Bir Bildirim Tetikledi
 Name[uk]=Процесом ініційовано сповіщення у нефокусованому сеансі
 Name[x-test]=xxProcess Triggered a Notification in a Non-Focused Sessionxx
 Comment=Notification emitted by a process in a non-focused session
+Comment[ar]=أطلق الإشعار بواسطة عملية في جلسة غير مركزة
 Comment[bg]=Известие, изпратено от процес в не-фокусирана сесия
 Comment[ca]=Notificació emesa per un procés en una sessió sense focus
 Comment[ca@valencia]=Notificació emesa per un procés en una sessió sense focus
