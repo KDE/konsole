@@ -116,7 +116,7 @@
         <choice name="Top" />
         <choice name="Bottom" />
       </choices>
-      <default>Bottom</default>
+      <default>Top</default>
     </entry>
     <entry name="TabBarStyleSheet" type="String">
       <label>Control the visual style of the tab bar</label>
