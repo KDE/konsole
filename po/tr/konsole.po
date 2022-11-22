@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:50+0000\n"
-"PO-Revision-Date: 2022-11-14 14:21+0300\n"
+"PO-Revision-Date: 2022-11-21 22:46+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -105,7 +105,7 @@ msgstr "Oturum Araç Çubuğu"
 #: AppColorSchemeChooser.cpp:37
 #, kde-format
 msgid "&Window Color Scheme"
-msgstr "Yeni Renk Şeması"
+msgstr "&Pencere Renk Şeması"
 
 #: Application.cpp:51
 #, kde-format
