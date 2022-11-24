@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:50+0000\n"
-"PO-Revision-Date: 2022-11-15 13:13+0100\n"
+"PO-Revision-Date: 2022-11-23 06:30+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -82,7 +82,7 @@ msgstr "ხელსაწყოთა მთავარი ზოლი"
 #: ../desktop/partui.rc:14
 #, kde-format
 msgid "S&crollback"
-msgstr ""
+msgstr "&აქაჩვა"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:70
@@ -652,7 +652,7 @@ msgstr "ორივე"
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr ""
+msgstr "ჰორიზონტალური მიმაგრება:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
@@ -664,7 +664,7 @@ msgstr "მარცხენა"
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr ""
+msgstr "ვერტიკალური მიმაგრება:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
@@ -4860,7 +4860,7 @@ msgstr "დიდი და პატარა ასოების გან�
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
-msgstr ""
+msgstr "დიდი და პატარა ასოების განსხვავება"
 
 #: widgets/IncrementalSearchBar.cpp:129
 #, kde-format
@@ -4872,7 +4872,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
-msgstr ""
+msgstr "ყველა დამთხვევის გამოკვეთა"
 
 #: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
@@ -4884,7 +4884,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
-msgstr ""
+msgstr "უკან ძებნა"
 
 #: widgets/IncrementalSearchBar.cpp:140
 #, kde-format

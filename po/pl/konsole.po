@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:50+0000\n"
-"PO-Revision-Date: 2022-08-16 18:45+0200\n"
+"PO-Revision-Date: 2022-11-23 20:08+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -47,7 +47,7 @@ msgstr ""
 ">\n"
 ">\n"
 ">\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.08.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -668,42 +668,39 @@ msgstr "Bez skalowania"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Skalowanie tapety:"
+msgstr "Odbicie tapety:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Bez odbicia"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Zakotwiczenie w poziomie"
+msgstr "W poziomie"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "Zakotwiczenie w pionie"
+msgstr "W pionie"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "W obu"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr "Zakotwiczenie w poziomie"
+msgstr "Zakotwiczenie w poziomie:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
@@ -715,13 +712,13 @@ msgstr "Do lewej"
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr "Zakotwiczenie w pionie"
+msgstr "Zakotwiczenie w pionie:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
 #, kde-format
 msgid "Top"
-msgstr "Góra"
+msgstr "Do góry"
 
 #: colorscheme/ColorSchemeViewDelegate.cpp:50
 #, kde-format
@@ -1282,20 +1279,16 @@ msgid "Activate Menu"
 msgstr "Otwórz menu"
 
 #: MainWindow.cpp:399
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Zapisz układ kart do pliku"
+msgstr "Zapisz układ kart..."
 
 #: MainWindow.cpp:408
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Wczytaj układ kart z pliku"
+msgstr "Wczytaj układ kart..."
 
 #: MainWindow.cpp:642 MainWindow.cpp:667
 #, kde-format
@@ -1303,21 +1296,21 @@ msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
-msgstr[0] "W tym oknie uruchomiony jest proces. Czy nadal chcesz wyjść?"
-msgstr[1] "W tym oknie uruchomione są %1 procesy. Czy nadal chcesz wyjść?"
-msgstr[2] "W tym oknie uruchomionych jest %1 procesów. Czy nadal chcesz wyjść?"
+msgstr[0] "W tym oknie uruchomiony jest proces. Czy zamknąć mimo tego?"
+msgstr[1] "W tym oknie uruchomione są %1 procesy. Czy zamknąć mimo tego?"
+msgstr[2] "W tym oknie uruchomionych jest %1 procesów. Czy zamknąć mimo tego?"
 
 #: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
-msgstr "Potwierdź zamknięcie"
+msgstr "Potwierdzenie zamknięcia"
 
 #: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
-msgstr "Zamknij okno"
+msgstr "Zamknij &okno"
 
 #: MainWindow.cpp:675 MainWindow.cpp:693
 #, kde-format
@@ -1376,11 +1369,9 @@ msgstr "Formularz"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Skrót"
+msgstr "Skrót:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1465,10 +1456,9 @@ msgid "Quick Commands"
 msgstr "Szybkie polecenia"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Pokaż szybkie polecenia"
+msgstr "Pokaż szybki dostęp"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1592,12 +1582,12 @@ msgstr "Pokaż zarządzanie SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Pokaż Szybki Dostęp dla Działań SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Wpisy SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
@@ -1711,9 +1701,7 @@ msgstr "Usuń zaznaczony wpis"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Skrót"
 
@@ -1727,15 +1715,13 @@ msgstr "Pokaż wpisy, które nie pasują do filtra"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Zmień profil na podłączony/rozłączony"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Zarządzanie profilami"
+msgstr "Zarządzaj profilem"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2222,10 +2208,9 @@ msgid "&Select All"
 msgstr "Zaznacz w&szystko"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Zaznacz &wiersz"
+msgstr "Zaznacz &tryb"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3300,12 +3285,10 @@ msgid "Split View Top/Bottom"
 msgstr "Podziel widok na górny/dolny"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Podziel widok na górny/dolny"
+msgstr "Sam podziel widok"
 
 #: ViewManager.cpp:139
 #, kde-format
@@ -3443,13 +3426,13 @@ msgstr "Ustaw obsługę semantyczną (bash)"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Przełącz wyświetlanie wskazówek semantycznych"
 
 #: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Przełącz wyświetlanie numerów wierszy"
 
 #: ViewManager.cpp:304
 #, kde-format
@@ -3464,24 +3447,20 @@ msgid "Switch to Tab %1"
 msgstr "Przełącz na kartę %1"
 
 #: ViewManager.cpp:527
-#, fuzzy, kde-format
-#| msgid "Semantic hints:"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Wskazówki semantyczne:"
+msgstr "Wskazówki semantyczne "
 
 #: ViewManager.cpp:543
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "Podana liczba wierszy: "
+msgstr "Numery wierszy "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Zapisz układ kart do pliku"
+msgstr "Zapisz układ kart"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3510,12 +3489,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Wczytaj układ kart z pliku"
+msgstr "Wczytaj układ kart"
 
 #: Vt102Emulation.cpp:2358
 #, kde-format
@@ -3939,32 +3916,31 @@ msgstr "Przyciemnij"
 #: widgets/EditProfileAppearancePage.ui:719
 #, kde-format
 msgid "Display Vertical line at column:"
-msgstr "Wyświetl pionową linię w kolumnie:"
+msgstr "Wyświetl pionową linię na kolumnie:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Złożony układ tekstu</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Złożony układ tekstu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Wyświetlanie dwukierunkowego tekstu"
+msgstr "Włącz wyświetlanie tekstu w trybie słów"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Tryb słowa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3973,69 +3949,70 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Pomiń zmiany właściwości w środku słowa (w przeciwnym przypadku, zmiany "
+"właściwości łamią słowo podczas wyświetlania)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Użyj tych samych właściwości dla całego słowa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Wyświetlaj słowa z zestawu znaków ASCII razem"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Znaki należące do słów:"
+msgstr "Znaki ASCII"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Wyświetlaj słowa z zestawu znaków Brahmicznych razem"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Dostosuj do bieżącego znaku"
+msgstr "Znaki z zestawu Brahmicznego"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Czcionka:"
+msgstr "Czcionka Emoji:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Wiersze są zawsze od-lewej-do-prawej, a nie określone przez pierwszy silny "
+"znak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "wymuś kierunek wiersza LTR"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Traktuj znaki rysowane z tabeli jako silne od lewej-do-prawej."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Tryb zastępowania znaków z tabeli BiDi"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4440,27 +4417,25 @@ msgstr "Zawsze"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Słupki czerwonego błędu:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Rozmyj tło"
+msgstr "Tło czerwonego błędu:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Naprzemienne paski:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Rozmyj tło"
+msgstr "Naprzemienne tło:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
