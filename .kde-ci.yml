@@ -11,7 +11,7 @@ Dependencies:
     'frameworks/kcalendarcore': '@stable'
     'frameworks/kcoreaddons': '@stable'
     'frameworks/kdbusaddons': '@stable'
-    'frameworks/bookmarks': '@stable'
+    'frameworks/kbookmarks': '@stable'
     'frameworks/kconfigwidgets': '@stable'
     'frameworks/kcrash': '@stable'
     'frameworks/kglobalaccel': '@stable'
