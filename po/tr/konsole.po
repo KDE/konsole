@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:50+0000\n"
-"PO-Revision-Date: 2022-11-24 17:09+0300\n"
+"PO-Revision-Date: 2022-11-28 19:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2132,7 +2132,7 @@ msgstr "Konsol belirtilen yer iminin nasıl açılacağını bilmiyor: "
 #: session/SessionController.cpp:523
 #, kde-format
 msgid "Search for '%1' with"
-msgstr "'%1' ifadesini şununla ara"
+msgstr "'%1' İfadesini Şununla Ara"
 
 #: session/SessionController.cpp:539
 #, kde-format

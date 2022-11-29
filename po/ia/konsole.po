@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 00:50+0000\n"
-"PO-Revision-Date: 2022-11-03 15:35+0100\n"
+"PO-Revision-Date: 2022-11-28 16:16+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -3459,12 +3459,10 @@ msgid "Line numbers "
 msgstr "Numeros de linea"
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Slveguarda disposition de scheda a file"
+msgstr "Salveguarda disposition de scheda"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
