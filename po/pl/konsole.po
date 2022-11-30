@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:50+0000\n"
+"POT-Creation-Date: 2022-11-30 00:51+0000\n"
 "PO-Revision-Date: 2022-11-23 20:08+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1236,61 +1236,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Podziękowania dla wielu innych.\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:345
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nowa karta"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:355
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Powiel kartę"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:362
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nowe &okno"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:369
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Zamknij okno"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:374
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Zakładki"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:402
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Zarządzaj profilami..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Otwórz menu"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:414
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Zapisz układ kart..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:423
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Wczytaj układ kart..."
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:733 MainWindow.cpp:758
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1300,56 +1300,56 @@ msgstr[0] "W tym oknie uruchomiony jest proces. Czy zamknąć mimo tego?"
 msgstr[1] "W tym oknie uruchomione są %1 procesy. Czy zamknąć mimo tego?"
 msgstr[2] "W tym oknie uruchomionych jest %1 procesów. Czy zamknąć mimo tego?"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:739 MainWindow.cpp:764 MainWindow.cpp:782
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Potwierdzenie zamknięcia"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:740 MainWindow.cpp:765 MainWindow.cpp:783
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Zamknij &okno"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:766 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Zamknij bieżącą kar&tę"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:779
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Liczba otwartych terminali w tym oknie to %1. Czy zamknąć to okno mimo tego?"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:894 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profile"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Ogólne"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Pasek kart / rozdzielacze"
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:927
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Pliki tymczasowe"
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:932
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2435,12 +2435,12 @@ msgstr "Zniszcz program"
 msgid "Open Current Folder With"
 msgstr "Otwórz bieżący katalog w"
 
-#: session/SessionController.cpp:2045
+#: session/SessionController.cpp:2039
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Zapisz pobranie ZModem do..."
 
-#: session/SessionController.cpp:2055
+#: session/SessionController.cpp:2049
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2451,14 +2451,14 @@ msgstr ""
 "oprogramowania wspierającego ten protokół.</p><p>Należy zainstalować pakiet "
 "„rzsz” lub „lrzsz”.</p> "
 
-#: session/SessionController.cpp:2065
+#: session/SessionController.cpp:2059
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>W bieżącej sesji już trwa przesyłanie plików przy użyciu ZModem.</p>"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2069
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2467,7 +2467,7 @@ msgstr ""
 "<p>W systemie nie odnaleziono oprogramowania wspierającego protokół ZModem.</"
 "p><p>Należy zainstalować pakiet „rzsz” lub „lrzsz”.</p>"
 
-#: session/SessionController.cpp:2080
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Wybierz pliki do wysłania przez ZModem"

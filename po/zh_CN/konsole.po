@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:50+0000\n"
+"POT-Creation-Date: 2022-11-30 00:51+0000\n"
 "PO-Revision-Date: 2022-11-19 14:48\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1196,61 +1196,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "非常感谢其他很多的朋友。\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:345
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "新建标签页(&N)"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:355
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "克隆标签页(&C)"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:362
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "新建窗口(&W)"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:369
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "关闭窗口"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:374
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "书签(&B)"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:402
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "管理配置方案..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "激活菜单"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:414
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:423
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:733 MainWindow.cpp:758
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1258,55 +1258,55 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "此窗口中有 %1 个正在运行的进程，您确定要退出吗？"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:739 MainWindow.cpp:764 MainWindow.cpp:782
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "确认关闭"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:740 MainWindow.cpp:765 MainWindow.cpp:783
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "关闭窗口(&W)"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:766 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "关闭当前标签页(&T)"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:779
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "此窗口中有 %1 个打开的终端，您确定要退出吗？"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:894 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "配置方案"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "常规"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "标签栏/分割器"
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:927
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "临时文件"
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:932
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2379,12 +2379,12 @@ msgstr "杀死程序"
 msgid "Open Current Folder With"
 msgstr "打开当前文件夹方式"
 
-#: session/SessionController.cpp:2045
+#: session/SessionController.cpp:2039
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "保存 ZModem 下载数据到..."
 
-#: session/SessionController.cpp:2055
+#: session/SessionController.cpp:2049
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2394,13 +2394,13 @@ msgstr ""
 "<p>检测到一个 ZModem 文件传输尝试，但是在此系统上找不到合适的 ZModem 软件。</"
 "p><p>您大概需要安装“rzsz”或“lrzsz”软件包。</p>"
 
-#: session/SessionController.cpp:2065
+#: session/SessionController.cpp:2059
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>当前会话已经有一个 ZModem 文件传输在进行中。</p>"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2069
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2409,7 +2409,7 @@ msgstr ""
 "<p>在此系统上找不到合适的 ZModem 软件。</p><p>您大概需要安装“rzsz”或“lrzsz”软"
 "件包。</p>"
 
-#: session/SessionController.cpp:2080
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "选择要通过 ZModem 上传的文件"

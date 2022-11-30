@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:50+0000\n"
+"POT-Creation-Date: 2022-11-30 00:51+0000\n"
 "PO-Revision-Date: 2022-11-09 19:10-0400\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -1228,61 +1228,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Met dank aan vele anderen.\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:345
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nieuw tabblad"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:355
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "Tabblad &klonen"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:362
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nieu&w venster"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:369
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Venster sluiten"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:374
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Bladwij&zers"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:402
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profielen beheren..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menu activeren"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:414
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Tabbladindeling opslaan..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:423
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Tabbladindeling laden..."
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:733 MainWindow.cpp:758
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1291,55 +1291,55 @@ msgid_plural ""
 msgstr[0] "Er is een actief proces in dit venster. Wilt u toch afsluiten?"
 msgstr[1] "Er zijn %1 actieve processen in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:739 MainWindow.cpp:764 MainWindow.cpp:782
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Sluiten bevestigen"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:740 MainWindow.cpp:765 MainWindow.cpp:783
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Venster sluiten"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:766 MainWindow.cpp:784
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Huidig &tabblad sluiten"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:779
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Er zijn %1 open terminals in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:894 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profielen"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Algemeen"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Tabbladbalk / Splitters"
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:927
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Tijdelijke bestanden"
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:932
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2431,12 +2431,12 @@ msgstr "Programma afbreken"
 msgid "Open Current Folder With"
 msgstr "De huidige map openen met"
 
-#: session/SessionController.cpp:2045
+#: session/SessionController.cpp:2039
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "ZModem-download opslaan naar..."
 
-#: session/SessionController.cpp:2055
+#: session/SessionController.cpp:2049
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2447,14 +2447,14 @@ msgstr ""
 "echter er is geen geschikte ZModem-software gevonden op dit systeem.</p><p>U "
 "zou het 'rzsz' of 'lrzsz' pakket kunnen installeren.</p>"
 
-#: session/SessionController.cpp:2065
+#: session/SessionController.cpp:2059
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>De huidige sessie heeft reeds een ZModem-bestandsoverdracht gaande.</p>"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2069
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2463,7 +2463,7 @@ msgstr ""
 "<p>Er is geen geschikte ZModem-software gevonden op dit systeem.</p><p>U zou "
 "het 'rzsz' of 'lrzsz' pakket kunnen installeren.</p>"
 
-#: session/SessionController.cpp:2080
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Bestanden voor uploaden met ZModem selecteren"
