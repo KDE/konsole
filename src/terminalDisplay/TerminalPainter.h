@@ -84,6 +84,7 @@ private:
     // draws a string of line graphics
     void drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character attributes);
 
+    void updateCursorTextColor(const QColor &backgroundColor, QColor &characterColor);
     // draws the cursor character
     void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor);
 

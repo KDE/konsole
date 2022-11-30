@@ -563,6 +563,19 @@ void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const
     }
 }
 
+void TerminalPainter::updateCursorTextColor(const QColor &backgroundColor, QColor &characterColor)
+{
+    if (m_parentDisplay->cursorShape() == Enum::BlockCursor) {
+        if (m_parentDisplay->hasFocus()) {
+            // invert the color used to draw the text to ensure that the character at
+            // the cursor position is readable
+            QColor cursorTextColor = m_parentDisplay->terminalColor()->cursorTextColor();
+
+            characterColor = cursorTextColor.isValid() ? cursorTextColor : backgroundColor;
+        }
+    }
+}
+
 void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor)
 {
     if (m_parentDisplay->cursorBlinking()) {
@@ -590,11 +603,7 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
         if (m_parentDisplay->hasFocus()) {
             painter.fillRect(cursorRect, cursorColor);
 
-            // invert the color used to draw the text to ensure that the character at
-            // the cursor position is readable
-            QColor cursorTextColor = m_parentDisplay->terminalColor()->cursorTextColor();
-
-            characterColor = cursorTextColor.isValid() ? cursorTextColor : backgroundColor;
+            updateCursorTextColor(backgroundColor, characterColor);
         } else {
             // draw the cursor outline, adjusting the area so that
             // it is drawn entirely inside cursorRect
@@ -1050,8 +1059,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
         }
         characterColor = foregroundColor;
         if (style.rendition.f.cursor != 0) {
-            // Don't draw, only recalculate colors
-            drawCursor(painter, QRect(0, 0, 0, 0), foregroundColor, backgroundColor, characterColor);
+            updateCursorTextColor(backgroundColor, characterColor);
         }
         if (m_parentDisplay->filterChain()->showUrlHint()) {
             if ((style.flags & EF_REPL) == EF_REPL_PROMPT) {
