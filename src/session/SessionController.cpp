@@ -1987,7 +1987,10 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 
         _preventClose = true;
 
-        static_cast<KHamburgerMenu *>(actionCollection()->action(QLatin1String(KStandardAction::name(KStandardAction::HamburgerMenu))))->addToMenu(popup);
+        auto hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(QLatin1String(KStandardAction::name(KStandardAction::HamburgerMenu))));
+        if (hamburger) {
+            hamburger->addToMenu(popup);
+        }
 
         // they are here.
         // qDebug() << popup->actions().indexOf(contentActions[0]) << popup->actions().indexOf(contentActions[1]) << popup->actions()[3];
