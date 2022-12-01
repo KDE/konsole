@@ -7,6 +7,9 @@
 // Own
 #include "ColorSchemeEditor.h"
 
+#include "../config-konsole.h"
+#include "WindowSystemInfo.h"
+
 // Qt
 #include <QColorDialog>
 #include <QCompleter>
@@ -23,7 +26,6 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KWindowSystem>
 
 // Konsole
 #include "../characters/CharacterColor.h"
@@ -129,7 +131,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     _ui->transparencyWarningWidget->setCloseButtonVisible(false);
     _ui->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
 
-    if (KWindowSystem::compositingActive()) {
+    if (WindowSystemInfo::compositingActive()) {
         _ui->transparencyWarningWidget->setVisible(false);
     } else {
         _ui->transparencyWarningWidget->setText(i18nc("@info:status",

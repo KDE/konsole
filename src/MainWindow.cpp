@@ -173,7 +173,7 @@ void MainWindow::updateUseTransparency()
         return;
     }
 
-    bool useTranslucency = KWindowSystem::compositingActive();
+    bool useTranslucency = WindowSystemInfo::compositingActive();
 
     setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
     setAttribute(Qt::WA_NoSystemBackground, false);

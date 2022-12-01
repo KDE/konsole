@@ -1411,7 +1411,7 @@ void EditProfileDialog::updateTransparencyWarning()
 
         if (!needTransparency) {
             _appearanceUi->transparencyWarningWidget->setHidden(true);
-        } else if (!KWindowSystem::compositingActive()) {
+        } else if (!WindowSystemInfo::compositingActive()) {
             _appearanceUi->transparencyWarningWidget->setText(
                 i18n("This color scheme uses a transparent background"
                      " which does not appear to be supported on your"

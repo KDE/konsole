@@ -9,11 +9,12 @@
 #include "ColorSchemeViewDelegate.h"
 
 // Konsole
+#include "../config-konsole.h"
 #include "ColorScheme.h"
+#include "WindowSystemInfo.h"
 
 // KDE
 #include <KLocalizedString>
-#include <KWindowSystem>
 
 // Qt
 #include <QApplication>
@@ -59,9 +60,7 @@ void ColorSchemeViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
 
     QRect previewRect(x + 4, y + 4, sampleTextWidth + 8, option.rect.height() - 8);
 
-    bool transparencyAvailable = KWindowSystem::compositingActive();
-
-    if (transparencyAvailable) {
+    if (WindowSystemInfo::compositingActive()) {
         painter->save();
         QColor color = scheme->backgroundColor();
         color.setAlphaF(scheme->opacity());
