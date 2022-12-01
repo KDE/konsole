@@ -8,7 +8,9 @@
 #include "ColorSchemeEditor.h"
 
 // Qt
+#include <QColorDialog>
 #include <QCompleter>
+#include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFileSystemModel>
@@ -16,14 +18,12 @@
 #include <QIcon>
 #include <QImageReader>
 #include <QMetaEnum>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 // KDE
 #include <KLocalizedString>
 #include <KWindowSystem>
-#include <QColorDialog>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
 
 // Konsole
 #include "../characters/CharacterColor.h"
