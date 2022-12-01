@@ -58,6 +58,12 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
     QTest::newRow("grave_before") << "`https://foo.bar`"
                                   << "https://foo.bar" << true;
 
+    QTest::newRow("equals_before") << "foo=https://foo.bar"
+                                   << "https://foo.bar" << true;
+
+    QTest::newRow("url_inside_angle_brackets") << "<https://google.com>"
+                                               << "https://google.com" << true;
+
     QTest::newRow("file_scheme") << "file:///some/file"
                                  << "file:///some/file" << true;
 
