@@ -13,7 +13,6 @@
 
 #include <KPluginFactory>
 #include <KWindowEffects>
-#include <KWindowSystem>
 
 #include <kservice_version.h>
 #include <kwindowsystem_version.h>
@@ -23,29 +22,19 @@
 #include <KService>
 #endif
 
-// see below notes
-//#include "../../../WindowSystemInfo.h"
-
 demo_konsolepart::demo_konsolepart()
     : KMainWindow()
     , _mainWindow(nullptr)
     , _terminalPart(nullptr)
     , _terminal(nullptr)
 {
-    const bool useTranslucency = KWindowSystem::compositingActive();
-
     // Set the WA_NativeWindow attribute to force the creation of the QWindow.
     // Without this QWidget::windowHandle() returns 0.
     // See https://phabricator.kde.org/D23108
     setAttribute(Qt::WA_NativeWindow);
 
-    setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
+    setAttribute(Qt::WA_TranslucentBackground, true);
     setAttribute(Qt::WA_NoSystemBackground, false);
-
-    // This is used in EditProfileDialog to show the warnings about
-    // transparency issues - needs refactoring as the above
-    // include does not work
-    //    WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
 
     // Create terminal part and embed in into the main window
     _terminalPart = createPart();
