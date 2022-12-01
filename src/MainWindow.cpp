@@ -27,6 +27,13 @@
 #include <KToolBar>
 #include <KWindowEffects>
 
+#include <kwindowsystem_version.h>
+#if HAVE_X11
+#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
+#include <KX11Extras>
+#endif
+#endif
+
 #include <KMessageBox>
 #include <KNotifyConfigWidget>
 #include <KStandardAction>
@@ -36,7 +43,6 @@
 
 #include <kio_version.h>
 #include <kwidgetsaddons_version.h>
-#include <kwindowsystem_version.h>
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -183,7 +189,18 @@ void MainWindow::updateUseTransparency()
 void MainWindow::activationRequest(const QString &xdgActivationToken)
 {
     KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
+
+#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
+    if (KWindowSystem::isPlatformX11()) {
+#if HAVE_X11
+        KX11Extras::forceActiveWindow(winId());
+#endif
+    } else {
+        KWindowSystem::activateWindow(windowHandle());
+    }
+#else
     KWindowSystem::forceActiveWindow(winId());
+#endif
 }
 
 void MainWindow::rememberMenuAccelerators()
@@ -718,8 +735,14 @@ bool MainWindow::queryClose()
     // NOTE: Some, if not all, of the below KWindowSystem calls are only
     //       implemented under x11 (KDE4.8 kdelibs/kdeui/windowmanagement).
 
+#if HAVE_X11
     // make sure the window is shown on current desktop and is not minimized
+#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
+    KX11Extras::setOnDesktop(winId(), KX11Extras::currentDesktop());
+#else
     KWindowSystem::setOnDesktop(winId(), KWindowSystem::currentDesktop());
+#endif
+#endif
     int result;
 
     if (!processesRunning.isEmpty()) {
@@ -1025,18 +1048,35 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
 
         // The window is visible and the setting changed
     } else if (windowFlags().testFlag(Qt::FramelessWindowHint) != frameless) {
-        const auto oldGeometry = saveGeometry();
-        // This happens for every Konsole window. It depends on
-        // the fact that every window is processed in single thread
-        const auto oldActiveWindow = KWindowSystem::activeWindow();
+        if (KWindowSystem::isPlatformX11()) {
+#if HAVE_X11
+            const auto oldGeometry = saveGeometry();
+            // This happens for every Konsole window. It depends on
+            // the fact that every window is processed in single thread
+#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
+            const auto oldActiveWindow = KX11Extras::activeWindow();
+#else
+            const auto oldActiveWindow = KWindowSystem::activeWindow();
+#endif
 
-        setWindowFlags(newFlags);
+            setWindowFlags(newFlags);
 
-        // The setWindowFlags() has hidden the window. Show it again
-        // with previous geometry
-        restoreGeometry(oldGeometry);
-        setVisible(true);
-        KWindowSystem::activateWindow(oldActiveWindow);
+            // The setWindowFlags() has hidden the window. Show it again
+            // with previous geometry
+            restoreGeometry(oldGeometry);
+            setVisible(true);
+#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
+            KX11Extras::activateWindow(oldActiveWindow);
+#else
+            KWindowSystem::activateWindow(oldActiveWindow);
+#endif
+#endif
+        } else {
+            // Restoring geometry ourselves doesn't work on Wayland
+            setWindowFlags(newFlags);
+            // The setWindowFlags() has hidden the window. Show it again
+            setVisible(true);
+        }
     }
 }
 

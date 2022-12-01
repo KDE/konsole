@@ -34,6 +34,6 @@ bool WindowSystemInfo::compositingActive()
     return true;
 #endif
 #else
-    return KWindowSystem::compositingActive()
+    return KWindowSystem::compositingActive();
 #endif
 }
