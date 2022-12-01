@@ -1610,8 +1610,6 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent *ev)
 
         _screenWindow->setSelectionStart(bgnSel.x(), bgnSel.y(), false);
         _screenWindow->setSelectionEnd(endSel.x(), endSel.y(), _trimTrailingSpaces);
-
-        copyToX11Selection();
     }
 
     _possibleTripleClick = true;
@@ -1985,11 +1983,11 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent *ev)
         _screenWindow->screen()->selectReplContigious(charColumn, charLine + _screenWindow->currentLine());
         copyToX11Selection();
     } else {
-        selectLine(QPoint(charColumn, charLine), _tripleClickMode == Enum::SelectWholeLine);
+        selectLine(QPoint(charColumn, charLine), _tripleClickMode == Enum::SelectWholeLine, true);
     }
 }
 
-void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
+void TerminalDisplay::selectLine(QPoint pos, bool entireLine, bool fromTripleClick)
 {
     _iPntSel = pos;
 
@@ -2011,7 +2009,9 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
     _iPntSel = findLineEnd(_iPntSel);
     _screenWindow->setSelectionEnd(_iPntSel.x(), _iPntSel.y(), _trimTrailingSpaces);
 
-    copyToX11Selection();
+    if (!fromTripleClick) {
+        copyToX11Selection();
+    }
 
     _iPntSel.ry() += _scrollBar->value();
 }

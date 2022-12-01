@@ -580,7 +580,7 @@ protected:
     void clearImage();
 
     void mouseTripleClickEvent(QMouseEvent *ev);
-    void selectLine(QPoint pos, bool entireLine);
+    void selectLine(QPoint pos, bool entireLine, bool fromTripleClick = false);
 
     // reimplemented
     void inputMethodEvent(QInputMethodEvent *event) override;
