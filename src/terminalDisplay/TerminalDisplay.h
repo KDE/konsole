@@ -494,7 +494,8 @@ Q_SIGNALS:
 
     /**
      * A mouse event occurred.
-     * @param button The mouse button (0 for left button, 1 for middle button, 2 for right button, 3 for release)
+     * @param button The mouse button (0 for left button, 1 for middle button, 2 for right button, 3 for release,
+     *                                 4 for Shift, 8 for Alt, 16 for Meta, 64 for wheel up, 65 for wheel down)
      * @param column The character column where the event occurred
      * @param line The character row where the event occurred
      * @param eventType The type of event.  0 for a mouse press / release or 1 for mouse motion
