@@ -2060,7 +2060,7 @@ void Vt102Emulation::reportAnswerBack()
 
 /*!
     `cx',`cy' are 1-based.
-    `cb' indicates the button pressed or released (0-2) or scroll event (4-5).
+    `cb' indicates the button pressed or released (0-2) or scroll event (64-65) plus key modifiers (Alt=8, Control=16).
 
     eventType represents the kind of mouse action that occurred:
         0 = Mouse button press
@@ -2135,20 +2135,16 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
         return;
     }
 
-    if (cb == 3 && getMode(MODE_Mouse1002)) {
+    // Don't send move with no button pressed if button-motion requested
+    if ((cb & 3) == 3 && getMode(MODE_Mouse1002)) {
         return;
     }
 
     // With the exception of the 1006 mode, button release is encoded in cb.
     // Note that if multiple extensions are enabled, the 1006 is used, so it's okay to check for only that.
     if (eventType == 2 && !getMode(MODE_Mouse1006)) {
-        cb = 3;
-    }
-
-    // normal buttons are passed as 0x20 + button,
-    // mouse wheel (buttons 4,5) as 0x5c + button
-    if (cb >= 4) {
-        cb += 0x3c;
+        cb &= ~3;
+        cb |= 3;
     }
 
     // Mouse motion handling
