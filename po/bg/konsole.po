@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-30 00:51+0000\n"
+"POT-Creation-Date: 2022-12-03 00:50+0000\n"
 "PO-Revision-Date: 2022-11-11 22:16+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -2885,17 +2885,17 @@ msgstr "Никога"
 msgid "Position:"
 msgstr "Позиция:"
 
-#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:116
-#, kde-format
-msgid "Be&low terminal area"
-msgstr "Под зоната за терминали"
-
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:126
+#: settings/TabBarSettings.ui:116
 #, kde-format
 msgid "Above terminal area"
 msgstr "Над зоната за терминали"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
+#: settings/TabBarSettings.ui:126
+#, kde-format
+msgid "Be&low terminal area"
+msgstr "Под зоната за терминали"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:152

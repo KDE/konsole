@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-30 00:51+0000\n"
+"POT-Creation-Date: 2022-12-03 00:50+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -2958,19 +2958,19 @@ msgstr ""
 msgid "Position:"
 msgstr "वर्णन :"
 
-#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:116
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
-msgid "Be&low terminal area"
-msgstr "टर्मिनल क्षेत्राच्या खालच्या बाजूस"
-
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:126
+#: settings/TabBarSettings.ui:116
 #, fuzzy, kde-format
 #| msgid "Above Terminal Area"
 msgid "Above terminal area"
 msgstr "टर्मिनल क्षेत्राच्या वरच्या बाजूस"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
+#: settings/TabBarSettings.ui:126
+#, fuzzy, kde-format
+#| msgid "Below Terminal Area"
+msgid "Be&low terminal area"
+msgstr "टर्मिनल क्षेत्राच्या खालच्या बाजूस"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:152

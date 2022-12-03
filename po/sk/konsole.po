@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-30 00:51+0000\n"
+"POT-Creation-Date: 2022-12-03 00:50+0000\n"
 "PO-Revision-Date: 2022-07-19 10:03+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -2876,17 +2876,17 @@ msgstr "Nikdy"
 msgid "Position:"
 msgstr "Umiestnenie:"
 
-#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:116
-#, kde-format
-msgid "Be&low terminal area"
-msgstr "Pod oblasťou terminálu"
-
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:126
+#: settings/TabBarSettings.ui:116
 #, kde-format
 msgid "Above terminal area"
 msgstr "Nad oblasťou terminálu"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
+#: settings/TabBarSettings.ui:126
+#, kde-format
+msgid "Be&low terminal area"
+msgstr "Pod oblasťou terminálu"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:152

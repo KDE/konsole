@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-30 00:51+0000\n"
+"POT-Creation-Date: 2022-12-03 00:50+0000\n"
 "PO-Revision-Date: 2022-11-12 19:31+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -2866,17 +2866,17 @@ msgstr "&Nikoli"
 msgid "Position:"
 msgstr "Pozicija:"
 
-#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:116
-#, kde-format
-msgid "Be&low terminal area"
-msgstr "Pod območjem terminala"
-
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:126
+#: settings/TabBarSettings.ui:116
 #, kde-format
 msgid "Above terminal area"
 msgstr "Nad območjem terminala"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
+#: settings/TabBarSettings.ui:126
+#, kde-format
+msgid "Be&low terminal area"
+msgstr "Pod območjem terminala"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:152

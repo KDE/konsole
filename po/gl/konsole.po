@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-30 00:51+0000\n"
+"POT-Creation-Date: 2022-12-03 00:50+0000\n"
 "PO-Revision-Date: 2020-01-12 13:00+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -2972,17 +2972,17 @@ msgstr "&Nunca"
 msgid "Position:"
 msgstr "Posición:"
 
-#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:116
-#, kde-format
-msgid "Be&low terminal area"
-msgstr "Bai&xo a zona de terminais"
-
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:126
+#: settings/TabBarSettings.ui:116
 #, kde-format
 msgid "Above terminal area"
 msgstr "Sobre a zona de terminais"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Bottom)
+#: settings/TabBarSettings.ui:126
+#, kde-format
+msgid "Be&low terminal area"
+msgstr "Bai&xo a zona de terminais"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:152
