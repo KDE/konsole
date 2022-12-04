@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-03 00:50+0000\n"
-"PO-Revision-Date: 2022-11-28 19:25+0300\n"
+"PO-Revision-Date: 2022-12-03 19:56+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2536,7 +2536,7 @@ msgstr "Tüm eşleşmeleri vurgula"
 #: settings/GeneralSettings.ui:175 settings/konsole.kcfg:65
 #, kde-format
 msgid "Sets whether the search is case sensitive"
-msgstr "Aramanın büyük küçük harf duyarlı olup olmayacağını belirler"
+msgstr "Aramanın BÜYÜK/küçük harf duyarlı olup olmayacağını ayarlar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #: settings/GeneralSettings.ui:178
@@ -2650,7 +2650,7 @@ msgstr "Bir küçük görsel görüntülemek için Ctrl kullan"
 #: settings/konsole.kcfg:64
 #, kde-format
 msgid "Search is case sensitive"
-msgstr "Arama büyük küçük harf duyarlı"
+msgstr "Arama BÜYÜK/küçük harf duyarlı"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
 #: settings/konsole.kcfg:73
@@ -5005,13 +5005,13 @@ msgstr "Arama çubuğunu kapat"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
-msgstr "Büyük/küçük harf duyarlı"
+msgstr "BÜYÜK/küçük harf duyarlı"
 
 #: widgets/IncrementalSearchBar.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
-msgstr "Aramanın büyük küçük harf duyarlı olup olmayacağını ayarlar"
+msgstr "Aramanın BÜYÜK/küçük harf duyarlı olup olmayacağını ayarlar"
 
 #: widgets/IncrementalSearchBar.cpp:129
 #, kde-format
