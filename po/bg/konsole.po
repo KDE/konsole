@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:50+0000\n"
-"PO-Revision-Date: 2022-11-11 22:16+0100\n"
+"POT-Creation-Date: 2022-12-05 00:50+0000\n"
+"PO-Revision-Date: 2022-12-05 00:07+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
-"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
+"Language-Team: \n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1391,7 +1391,7 @@ msgstr "Група"
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:214
 #, kde-format
 msgid "Default"
-msgstr "По подразбиране"
+msgstr "Стандартни"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
@@ -1530,7 +1530,7 @@ msgstr "Настройване на SSH"
 #, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "По подразбиране"
+msgstr "Стандартни"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
@@ -2422,12 +2422,12 @@ msgstr "Прекратяване на програмата"
 msgid "Open Current Folder With"
 msgstr "Отваряне на текущата папка с"
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2042
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Запазване на ZModem изтегляния в..."
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2052
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2438,14 +2438,14 @@ msgstr ""
 "не е намерен подходящ софтуер на ZModem. </p> <p> Може да искате да "
 "инсталирате пакета 'rzsz' или 'lrzsz'. </p>"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Текущата сесия вече има стартиран процес за обмен на файл (ZModem).</p>"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2072
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2454,7 +2454,7 @@ msgstr ""
 "<p> В тази система не бе намерен подходящ софтуер ZModem. </p> <p> Може да "
 "пожелаете да инсталирате пакета 'rzsz' или 'lrzsz'. </p>"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Избор на файлове за качване на ZModem"
@@ -2846,7 +2846,7 @@ msgstr "Задава избрания профил да бъде използв�
 #: settings/ProfileSettings.ui:81
 #, kde-format
 msgid "&Set as Default"
-msgstr "Задаване по подразбиране"
+msgstr "&Задаване по подразбиране"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:36
@@ -2859,7 +2859,7 @@ msgstr "Изглед"
 #: settings/TabBarSettings.ui:50
 #, kde-format
 msgid "Show:"
-msgstr "Видимост:"
+msgstr "Показване:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
 #: settings/TabBarSettings.ui:60

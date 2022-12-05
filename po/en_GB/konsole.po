@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:50+0000\n"
+"POT-Creation-Date: 2022-12-05 00:50+0000\n"
 "PO-Revision-Date: 2022-09-10 10:57+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -2412,12 +2412,12 @@ msgstr "Kill Program"
 msgid "Open Current Folder With"
 msgstr "Open Current Folder With"
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2042
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Save ZModem Download to..."
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2052
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2428,14 +2428,14 @@ msgstr ""
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2072
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2444,7 +2444,7 @@ msgstr ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Select Files for ZModem Upload"

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:50+0000\n"
+"POT-Creation-Date: 2022-12-05 00:50+0000\n"
 "PO-Revision-Date: 2017-05-24 07:33-0400\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -2469,12 +2469,12 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2042
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "שמור הורדת ZModem אל..."
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2052
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2484,13 +2484,13 @@ msgstr ""
 "<p> זוהה ניסיון העברה של קובץ בעזרת ZModem, אך לא נמצא יישום מתאים עבור "
 "ZModem במערכת.</p><p> עליך להתקין את חבילה rzsz או lrzsz. </p>"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p> ההפעלה הנוכחית כבר מכילה העברה של קובץ בעזרת ZModem. </p>"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2072
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2499,7 +2499,7 @@ msgstr ""
 "<p> לא נמצא יישום מתאים עבור ZModem במערכת.</p><p> עליך להתקין את חבילה rzsz "
 "או lrzsz. </p>"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "בחר קבצים לעלות בעזת ZModem"

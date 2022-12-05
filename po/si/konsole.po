@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:50+0000\n"
+"POT-Creation-Date: 2022-12-05 00:50+0000\n"
 "PO-Revision-Date: 2011-08-14 00:07+0530\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: Sinhala <danishka@gmail.com>\n"
@@ -2590,13 +2590,13 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2039
+#: session/SessionController.cpp:2042
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "ZModem බාගත සුරකින්න..."
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2052
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2606,13 +2606,13 @@ msgstr ""
 "<p>ZModem ගොනු හුවමාරුවක් හඳුනා ගැණිනි, නමුත් සුදුසු ZModem මෘදුකාංගයක් මෙම පද්ධතිය මත හමු "
 "නොවිනි.</p><p>ඔබට 'rzsz' හෝ 'lrzsz' පැකේජය ස්ථාපනයට ඇවැසිද?</p>"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>වත්මන් වාරය සතුව දැනටමත් ZModem ගොනු හුවමාරුවක් පවතී.</p>"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2072
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2621,7 +2621,7 @@ msgstr ""
 "<p>මෙම පද්ධතිය මත සුදුසු ZModem මෘදුකාංගයක් හමු නොවිනි</p><p>ඔබට 'rzsz' හෝ 'lrzsz' "
 "පැකේජය ස්ථාපනයට ඇවැසිද?</p>"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem අපගත කිරීමට ගොනු තෝරන්න"
