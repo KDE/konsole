@@ -730,6 +730,7 @@ private:
     Enum::TripleClickModeEnum _tripleClickMode = Enum::SelectWholeLine;
     bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and deleted
     // after QApplication::doubleClickInterval() delay
+    bool _needCopyToX11Selection = false; // set in mouseReleaseEvent after mouseDoubleClickEvent
 
     QLabel *_resizeWidget = nullptr;
     QTimer *_resizeTimer = nullptr;

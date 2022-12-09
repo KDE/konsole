@@ -1118,6 +1118,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
     }
 
     if (_possibleTripleClick && (ev->button() == Qt::LeftButton)) {
+        _needCopyToX11Selection = false;
         mouseTripleClickEvent(ev);
         return;
     }
@@ -1476,7 +1477,16 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
             _screenWindow->clearSelection();
         } else {
             if (_actSel > 1) {
-                copyToX11Selection();
+                if (_possibleTripleClick) {
+                    _needCopyToX11Selection = true;
+                    QTimer::singleShot(QApplication::doubleClickInterval(), this, [this]() {
+                        if (_needCopyToX11Selection) {
+                            copyToX11Selection();
+                        }
+                    });
+                } else {
+                    copyToX11Selection();
+                }
             }
 
             _actSel = 0;
