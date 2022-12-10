@@ -27,6 +27,7 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <QSettings>
+#include <KCrash>
 
 #include "MainWindow.h"
 #include "terminalDisplay/TerminalDisplay.h"
@@ -48,6 +49,7 @@ SSHManagerPlugin::SSHManagerPlugin(QObject *object, const QVariantList &args)
     d->showQuickAccess = new QAction();
 
     setName(QStringLiteral("SshManager"));
+    KCrash::initialize();
 }
 
 SSHManagerPlugin::~SSHManagerPlugin()
