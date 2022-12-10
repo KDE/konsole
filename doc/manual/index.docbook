@@ -52,7 +52,7 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2022-11-09</date>
+<date>2022-12-10</date>
 <releaseinfo>KDE Gear 23.04</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
@@ -405,8 +405,8 @@ window.
 
 <listitem><para>
 Context menu options
-<guimenuitem>Copy user input</guimenuitem>
-<guimenuitem>Copy command output</guimenuitem>
+<guimenuitem>Copy user input</guimenuitem>,
+<guimenuitem>Copy command output</guimenuitem>, and
 <guimenuitem>Copy except prompt</guimenuitem>
 may be used to filter selection when it is copied to the clipboard.
 </para></listitem>
@@ -416,6 +416,7 @@ or the last output if there is no current input.
 <listitem><para>Pressing Up/Down arrow when editing a long input, will instead place the cursor one line up/down by
 sending the appropriate number of Left/Right key events to the shell. Configurable in the profile settings.</para></listitem>
 <listitem><para>Clicking the mouse on text input will place the cursor in the clicked location. Configurable in the profile settings.</para></listitem>
+<listitem><para>Pressing the &Ctrl; key while triple clicking the mouse on the output of a command, selects the whole output of that command.</para></listitem>
 </itemizedlist>
 </para>
 
