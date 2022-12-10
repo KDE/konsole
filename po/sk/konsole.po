@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 02:54+0000\n"
-"PO-Revision-Date: 2022-11-20 16:00+0100\n"
+"PO-Revision-Date: 2022-12-09 20:56+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.11.80\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -1449,12 +1449,9 @@ msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "There are %1 open terminals in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "V tomto okne je %1 otvorených terminálov. Stále chcete skončiť?"
+msgstr "V skripte sú nejaké chyby, naozaj ho chcete spustiť?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
@@ -1513,8 +1510,7 @@ msgid "Warnings (*)"
 msgstr "Upozornenia (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "SSH Config"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "SSH Nastavenia"
@@ -3423,7 +3419,7 @@ msgstr "Sémantická nápoveda "
 #: ViewManager.cpp:543
 #, kde-format
 msgid "Line numbers "
-msgstr ""
+msgstr "Čísla riadkov "
 
 #: ViewManager.cpp:1074
 #, kde-format
@@ -4332,7 +4328,7 @@ msgstr "Sémantická integrácia"
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Emulácia kláves Hore/Dole"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
