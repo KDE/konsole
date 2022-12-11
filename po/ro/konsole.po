@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-05 00:50+0000\n"
+"POT-Creation-Date: 2022-12-11 00:51+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1557,27 +1557,27 @@ msgstr "Configurări SSH"
 msgid "Host: %1"
 msgstr "Gazdă: %1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:63
+#: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
 msgid "SSH Manager"
 msgstr "Gestionar SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:93
+#: plugins/SSHManager/sshmanagerplugin.cpp:95
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "Arată gestionarul SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:112
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:150
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:178
+#: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
@@ -1585,13 +1585,13 @@ msgstr ""
 "Denumirea procesului nu a putut fi obținută, se consideră că nu putem cere o "
 "conexiune"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:178
-#: plugins/SSHManager/sshmanagerplugin.cpp:190
+#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Eroare la emiterea comenzii SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:190
+#: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

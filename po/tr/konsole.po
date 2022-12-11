@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-05 00:50+0000\n"
-"PO-Revision-Date: 2022-12-03 19:56+0300\n"
+"POT-Creation-Date: 2022-12-11 00:51+0000\n"
+"PO-Revision-Date: 2022-12-10 18:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -273,7 +273,7 @@ msgstr "%1"
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Foreground"
-msgstr "Önplan"
+msgstr "Ön Plan"
 
 #: colorscheme/ColorScheme.cpp:132
 #, kde-format
@@ -1549,39 +1549,39 @@ msgstr "SSH Yapılandırması"
 msgid "Host: %1"
 msgstr "Yerel Makine: %1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:63
+#: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
 msgid "SSH Manager"
 msgstr "SSH Yöneticisi"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:93
+#: plugins/SSHManager/sshmanagerplugin.cpp:95
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "SSH Yöneticisini Göster"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:112
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "SSH Eylemleri için Hızlı Erişim'i Göster"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:150
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
 msgstr "SSH Girdileri"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:178
+#: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "Süreç adı alınamadı, bir bağlantı isteği yapamayacağımızı varsayın"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:178
-#: plugins/SSHManager/sshmanagerplugin.cpp:190
+#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "SSH Komutu verilirken hata"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:190
+#: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
@@ -3564,7 +3564,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:884
 #, kde-format
 msgid "Bi-Directional text rendering"
-msgstr "Çift yönlü metin dokuma"
+msgstr "Çift yönlü metin sunumu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:258
@@ -3902,7 +3902,7 @@ msgstr "Karmaşık Metin Düzeni"
 #: widgets/EditProfileAppearancePage.ui:791
 #, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Metin dokuma için sözcük kipini etkinleştir"
+msgstr "Sözcük kipi metin sunumunu etkinleştir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
@@ -3918,7 +3918,7 @@ msgid ""
 "when rendering)"
 msgstr ""
 "Sözcük ortasındayken öznitelik değişimlerini yok say (yoksa öznitelik "
-"değişiklikleri, dokuma sırasında sözcüğü bozar)"
+"değişiklikleri, sunum sırasında sözcüğü bozar)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
@@ -3930,7 +3930,7 @@ msgstr "Tüm sözcük için aynı öznitelikleri kullan"
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr "ASCII karakterlerden oluşan sözcükleri birlikte doku"
+msgstr "ASCII karakterlerden oluşan sözcükleri birlikte sun"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
@@ -3942,7 +3942,7 @@ msgstr "ASCII karakterler "
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr "Brahmi yazısı sözcüklerini birlikte doku"
+msgstr "Brahmi yazısı sözcüklerini birlikte sun"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842

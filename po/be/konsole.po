@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-05 00:50+0000\n"
+"POT-Creation-Date: 2022-12-11 00:51+0000\n"
 "PO-Revision-Date: 2022-11-11 08:46\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
@@ -1540,39 +1540,39 @@ msgstr "Канфігурацыя SSH"
 msgid "Host: %1"
 msgstr "Хост: %1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:63
+#: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
 msgid "SSH Manager"
 msgstr "Кіраўнік SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:93
+#: plugins/SSHManager/sshmanagerplugin.cpp:95
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "Паказваць кіраўнік SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:112
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Паказваць элементы хуткага доступу да дзеянняў SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:150
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
 msgstr "Запісы SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:178
+#: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "Не ўдалося атрымаць назву працэсу. Магчыма, нельга запытаць злучэнне"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:178
-#: plugins/SSHManager/sshmanagerplugin.cpp:190
+#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Падчас выканання загаду SSH адбылася памылка"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:190
+#: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

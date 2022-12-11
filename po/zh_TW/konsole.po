@@ -5,7 +5,7 @@
 # Roy Hiu-yeung Chan (voidoo) <voidoo@xychen.org>, 2002.
 # Kenduest Lee <kenduest@i18n.linux.org.tw>, 2002.
 # Franklin Weng <franklin@mail.everfocus.com.tw>, 2011, 2012, 2013, 2014, 2015, 2017.
-# Jeff Huang <s8321414@gmail.com>, 2016, 2017, 2018.
+# Jeff Huang <s8321414@gmail.com>, 2016, 2017, 2018, 2022.
 # pan93412 <pan93412@gmail.com>, 2018, 2019, 2020.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2006, 2007, 2008, 2009, 2010.
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
@@ -14,16 +14,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-05 00:50+0000\n"
-"PO-Revision-Date: 2022-02-10 10:52+0800\n"
-"Last-Translator: Chaoting Liu <brli@chakralinux.org>\n"
-"Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2022-12-11 00:51+0000\n"
+"PO-Revision-Date: 2022-12-10 10:31+0800\n"
+"Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
+"Language-Team: Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -115,11 +115,10 @@ msgid "json layoutfile to be loaded to use for new Konsole instance"
 msgstr "新的 Konsole 實體使用的 json 格式版型設定檔"
 
 #: Application.cpp:53
-#, fuzzy, kde-format
-#| msgid "Create a new profile based on the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "根據選擇的設定檔來建立新的設定檔"
+msgstr "使用內建的設定檔而非預設設定檔"
 
 #: Application.cpp:54
 #, kde-format
@@ -634,36 +633,33 @@ msgstr "不縮放"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "背景桌布調整："
+msgstr "桌布翻轉："
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "不要翻轉"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "水平錨定："
+msgstr "水平"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "垂直錨定："
+msgstr "垂直"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "兩邊都要"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -922,7 +918,7 @@ msgstr "原始作者"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
-msgstr ""
+msgstr "Ahmad Samir"
 
 #: main.cpp:343 main.cpp:346 main.cpp:349 main.cpp:352
 #, kde-format
@@ -934,25 +930,25 @@ msgstr "主力重構、除蟲，與主力改善"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
-msgstr ""
+msgstr "Carlos Alves"
 
 #: main.cpp:348
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
-msgstr ""
+msgstr "Tomaz Canabrava"
 
 #: main.cpp:351
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
-msgstr ""
+msgstr "Gustavo Carneiro"
 
 #: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
-msgstr ""
+msgstr "Edwin Pujols"
 
 #: main.cpp:355 main.cpp:358 main.cpp:360 main.cpp:365 main.cpp:367
 #: main.cpp:368 main.cpp:369
@@ -965,19 +961,19 @@ msgstr "錯誤修正與一般改進"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
-msgstr ""
+msgstr "Martin T. H. Sandsmark"
 
 #: main.cpp:360
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
-msgstr ""
+msgstr "Nate Graham"
 
 #: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
-msgstr ""
+msgstr "Mariusz Glebocki"
 
 #: main.cpp:362
 #, kde-format
@@ -989,7 +985,7 @@ msgstr "錯誤修正與主力改進"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
-msgstr ""
+msgstr "Thomas Surrel"
 
 #: main.cpp:367
 #, kde-format
@@ -1245,20 +1241,16 @@ msgid "Activate Menu"
 msgstr "啟動選單"
 
 #: MainWindow.cpp:414
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "儲存分頁版型至檔案"
+msgstr "儲存分頁佈局……"
 
 #: MainWindow.cpp:423
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "從檔案讀取分頁版型"
+msgstr "載入分頁佈局……"
 
 #: MainWindow.cpp:733 MainWindow.cpp:758
 #, kde-format
@@ -1336,11 +1328,9 @@ msgstr "來自"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "捷徑"
+msgstr "快捷鍵……"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1390,17 +1380,15 @@ msgstr "指令"
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:347
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "警告："
+msgstr "警告"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "執行"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:258
@@ -1427,10 +1415,9 @@ msgid "Quick Commands"
 msgstr "快捷指令"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "顯示快捷指令"
+msgstr "顯示快速存取"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1446,51 +1433,43 @@ msgstr "存在重複項目"
 #: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
-msgstr ""
+msgstr "請在嘗試執行此指令稿前修復所有警告"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "There are %1 open terminals in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "此視窗中目前有 %1 個開啟的終端機。您確定要離開嗎？"
+msgstr "指令稿有一些錯誤，您確定要執行它嗎？"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "殼層錯誤"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "執行"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:244
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the group %1,\n"
-#| " with multiple configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
-"您即將移除分頁群組 %1 ，\n"
+"您將要刪除分頁群組 %1 ，\n"
 "內含多個設定檔，確定移除？"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:245
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
-#, fuzzy, kde-format
-#| msgid "You are about to remove %1, are you sure?"
+#, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr "您即將移除 %1 ，確定嗎？"
+msgstr "您將要刪除 %1 ，確定嗎？"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:254
-#, fuzzy, kde-format
-#| msgid "Remove Quick Commands Configurations"
+#, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr "移除快捷指令設定"
+msgstr "移除快速指令設定"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
@@ -1503,33 +1482,28 @@ msgid "Command can not be empty"
 msgstr "指令不能是空的"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:314
-#, fuzzy, kde-format
-#| msgid "Rename Tab"
+#, kde-format
 msgid "Rename"
-msgstr "重新命名分頁"
+msgstr "重新命名"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:349
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings (*)"
-msgstr "警告："
+msgstr "警告 (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "SSH Config"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "SSH 設定"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "預設"
@@ -1554,39 +1528,39 @@ msgstr "SSH 設定"
 msgid "Host: %1"
 msgstr "本地端主機：%1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:63
+#: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
 msgid "SSH Manager"
 msgstr "SSH 管理員"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:93
+#: plugins/SSHManager/sshmanagerplugin.cpp:95
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "顯示 SSH 管理員"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:112
+#: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "顯示 SSH 動作的快速存取"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:150
+#: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH 條目"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:178
+#: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "無法取得程序名稱，可能因為是無法連線"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:178
-#: plugins/SSHManager/sshmanagerplugin.cpp:190
+#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "下達 SSH 命令時出錯"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:190
+#: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
@@ -1603,31 +1577,27 @@ msgstr "SSH 金鑰"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "不要變更"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the folder %1,\n"
-#| " with multiple SSH Configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
-"您即將移除 %1 資料夾，\n"
-"其中還有多個 SSH 設定值，確認移除？"
+"您將要刪除 %1 資料夾，\n"
+"其中有多個 SSH 設定值，確認刪除？"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:243
-#, fuzzy, kde-format
-#| msgid "Remove SSH Configurations"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr "移除 SSH 設定值"
+msgstr "刪除 SSH 設定"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
@@ -1660,16 +1630,14 @@ msgid "An SSH session must have a profile"
 msgstr "所有 SSH 工作階段都必須指定設定值"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
-#, fuzzy, kde-format
-#| msgid "Cannot remove this folder"
+#, kde-format
 msgid "Cannot delete this folder"
-msgstr "無法移除本資料夾"
+msgstr "無法刪除本資料夾"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:451
-#, fuzzy, kde-format
-#| msgid "Remove folder and all of its contents"
+#, kde-format
 msgid "Delete folder and all of its contents"
-msgstr "移除資料夾及其內的所以檔案"
+msgstr "刪除資料夾及所有其內容"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
@@ -1677,24 +1645,20 @@ msgid "Double click to change the folder name."
 msgstr "按兩下以重新命名資料夾"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#, fuzzy, kde-format
-#| msgid "You can't remove an automatically added entry."
+#, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "無法移除自動加入的設定檔"
+msgstr "您無法刪除自動加入的條目。"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#, fuzzy, kde-format
-#| msgid "Remove selected entry"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "移除選取的 SSH 設定檔"
+msgstr "刪除選定條目"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
-msgstr "捷徑"
+msgstr "快捷鍵"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
 #: plugins/SSHManager/sshwidget.ui:43
@@ -1706,15 +1670,13 @@ msgstr "顯示不符合篩選器的設定檔"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "變更連線/斷線時的設定檔"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage Profiles..."
+#, kde-format
 msgid "Manage profile"
-msgstr "管理設定檔..."
+msgstr "管理設定檔"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -1842,10 +1804,9 @@ msgstr "新增 SSH 設定檔"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:286
-#, fuzzy, kde-format
-#| msgid "Remove selected SSH entry"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "移除選取的 SSH 設定檔"
+msgstr "刪除選定的 SSH 條目"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:300
@@ -1914,29 +1875,24 @@ msgid "Shortcut"
 msgstr "捷徑"
 
 #: profile/ProfileModel.cpp:80
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox added to the name of the Default/fallback profile, to "
-#| "point out it's read-only/hardcoded"
-#| msgid " [Read-only]"
+#, kde-format
 msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr "[唯讀]"
+msgstr " [唯讀]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "預設"
+msgstr " [預設]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "內建設定檔一律可用"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2089,10 +2045,9 @@ msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1128
-#, fuzzy, kde-format
-#| msgid "&Close Session"
+#, kde-format
 msgid "Show session"
-msgstr "關閉工作階段(&C)"
+msgstr "顯示工作階段"
 
 #: session/Session.cpp:934
 #, kde-format
@@ -2175,19 +2130,17 @@ msgstr "複製"
 #: session/SessionController.cpp:678
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "複製除了提示字元以外的內容"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
-msgstr "複製輸入"
+msgstr "複製使用者輸入"
 
 #: session/SessionController.cpp:690
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "複製輸入"
+msgstr "複製命令輸入"
 
 #: session/SessionController.cpp:705
 #, kde-format
@@ -2205,10 +2158,9 @@ msgid "&Select All"
 msgstr "全部選取(&S)"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "選擇行(&L)"
+msgstr "選取模式(&M)"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -2398,12 +2350,10 @@ msgid "Confirm Close"
 msgstr "確認關閉"
 
 #: session/SessionController.cpp:1092
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "關閉分頁"
+msgstr "關閉程式"
 
 #: session/SessionController.cpp:1119
 #, kde-format
@@ -2423,7 +2373,7 @@ msgstr "程式 %1 正在此工作階段中執行。您確定要將它強制關�
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "砍除程式"
 
 #: session/SessionController.cpp:1975
 #, kde-format
@@ -3269,12 +3219,10 @@ msgid "Split View Top/Bottom"
 msgstr "上下分割檢視"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "上下分割檢視"
+msgstr "自動分割檢視"
 
 #: ViewManager.cpp:139
 #, kde-format
@@ -3406,25 +3354,25 @@ msgstr "將分頁左移"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "設定語意整合 (bash)"
 
 #: ViewManager.cpp:291
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "切換語意提示顯示"
 
 #: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "切換行數顯示"
 
 #: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "所有檢視區域大小相等"
 
 #: ViewManager.cpp:314
 #, kde-format
@@ -3433,64 +3381,52 @@ msgid "Switch to Tab %1"
 msgstr "切換到分頁 %1"
 
 #: ViewManager.cpp:527
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic hints "
-msgstr "文字交互"
+msgstr "語意提示"
 
 #: ViewManager.cpp:543
 #, kde-format
 msgid "Line numbers "
-msgstr ""
+msgstr "行數"
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "儲存分頁版型至檔案"
+msgstr "儲存分頁佈局"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
-#, fuzzy, kde-format
-#| msgid "Konsole View Layout (*.json)"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr "Konsole 版面設定 (*.json)"
+msgstr "Konsole 檢視佈局 (*.json)"
 
 #: ViewManager.cpp:1089
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"儲存版面時發生問題。\n"
+"儲存佈局時發生問題。\n"
 "%1"
 
 #: ViewManager.cpp:1150
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when loading the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"讀取版面時發生問題。\n"
+"載入佈局時發生問題。\n"
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "從檔案讀取分頁版型"
+msgstr "載入分頁佈局"
 
 #: Vt102Emulation.cpp:2358
 #, kde-format
@@ -3913,26 +3849,25 @@ msgstr "在此欄位上標注垂直線"
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>複合文字佈局</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "複合文字佈局"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "雙向文字繪製"
+msgstr "啟用字詞模式文字繪製"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "字詞模式"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3940,70 +3875,67 @@ msgstr ""
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
-msgstr ""
+msgstr "忽略中間詞的屬性變化（否則屬性變更會在繪製時斷字）"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "對整個字詞使用相同的屬性"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "一起繪製 ASCII 字元的字詞"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "單字字元："
+msgstr "ASCII 字元"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "一起繪製印度系文字字元的字詞"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "符合目前字元"
+msgstr "印度系文字字元"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "字型："
+msgstr "表情符號字型："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
-msgstr ""
+msgstr "線條一律為左到右，而非由第一個強調字元決定"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "強制左到右線條方向"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "將表格繪製字元視為強左到右。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "表格字元 BiDi 模式覆寫"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4212,10 +4144,9 @@ msgstr "文字編輯器自訂命令"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:39
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgid "General Settings"
-msgstr "設定"
+msgstr "一般設定"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:63
@@ -4334,28 +4265,27 @@ msgstr "終端機響鈴模式："
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:374
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic Integration"
-msgstr "文字交互"
+msgstr "語意整合"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "上/下方向鍵模擬"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "滑鼠點擊輸入行移動游標"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "語意提示："
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4365,12 +4295,10 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:410 widgets/EditProfileGeneralPage.ui:456
 #: widgets/EditProfileGeneralPage.ui:502 widgets/EditProfileGeneralPage.ui:548
 #: widgets/EditProfileGeneralPage.ui:594
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgctxt "Never"
 msgid "Never"
-msgstr "永不(&N)"
+msgstr "永不"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
@@ -4383,7 +4311,7 @@ msgstr "永不(&N)"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "當 URL 提示顯示時"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4393,38 +4321,34 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:430 widgets/EditProfileGeneralPage.ui:476
 #: widgets/EditProfileGeneralPage.ui:522 widgets/EditProfileGeneralPage.ui:568
 #: widgets/EditProfileGeneralPage.ui:614
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "Always"
-msgstr "永遠(&Y)"
+msgstr "永遠"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "紅色錯誤列："
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "模糊背景"
+msgstr "紅色錯誤背景："
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "交錯列："
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "模糊背景"
+msgstr "交錯背景："
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
@@ -4731,7 +4655,7 @@ msgstr "當滑鼠停在十六進位色碼上時，游標旁會顯示對應的顏
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "游標停於其上時預覽顏色"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
@@ -4891,14 +4815,7 @@ msgstr ""
 "能會耗盡剩餘的 RAM 並可能造成嚴重的問題。"
 
 #: widgets/HistorySizeWidget.cpp:69
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "When using this option, the scrollback data will be written unencrypted "
-#| "to temporary files. Those temporary files will be deleted automatically "
-#| "when Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → "
-#| "Configure Konsole → File Location</emphasis> to select the location of "
-#| "the temporary files."
+#, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "When using this option, the scrollback data will be written unencrypted to "
@@ -4907,8 +4824,8 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"使用此選項的話，回捲資料會以不加密的方式寫入暫存檔中。這些暫存檔會在Konsole "
-"正常關閉時被刪除。<nl/>使用<emphasis>「設定」→「設定 Konsole」→「檔案位置」</"
+"使用此選項的話，回捲資料會以不加密的方式寫入暫存檔中。這些暫存檔會在 Konsole "
+"正常關閉時被刪除。<nl/>使用<emphasis>「設定」→「設定 Konsole」→「暫存檔」</"
 "emphasis>來選擇暫存檔的位置。"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
