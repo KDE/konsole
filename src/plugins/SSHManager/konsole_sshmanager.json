@@ -36,6 +36,7 @@
         "Name[tr]": "SSH Yöneticisi",
         "Name[uk]": "Керування SSH",
         "Name[x-test]": "xxSSH Managerxx",
-        "Name[zh_CN]": "SSH 管理器"
+        "Name[zh_CN]": "SSH 管理器",
+        "Name[zh_TW]": "SSH 管理程式"
     }
 }
