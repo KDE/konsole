@@ -1622,7 +1622,7 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
     auto scrollFullPage = profile->property<int>(Profile::ScrollFullPage);
 
     _scrollingUi->scrollHalfPage->setChecked(Enum::ScrollPageHalf == scrollFullPage);
-    connect(_scrollingUi->scrollHalfPage, &QPushButton::clicked, this, &EditProfileDialog::scrollFullPage);
+    connect(_scrollingUi->scrollHalfPage, &QPushButton::clicked, this, &EditProfileDialog::scrollHalfPage);
 
     _scrollingUi->scrollFullPage->setChecked(Enum::ScrollPageFull == scrollFullPage);
     connect(_scrollingUi->scrollFullPage, &QPushButton::clicked, this, &EditProfileDialog::scrollFullPage);
