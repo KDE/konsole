@@ -122,9 +122,9 @@ key End         +AppCuKeys+KeyPad : "\EOF"
 key Home        -AppCuKeys+KeyPad : "\E[H"
 key End         -AppCuKeys+KeyPad : "\E[F"
 
-key Insert      +KeyPad  : "\E[2~"
-key Delete      +KeyPad  : "\E[3~"
-key PgUp -Shift+KeyPad  : "\E[5~"
+key Insert        +KeyPad  : "\E[2~"
+key Delete        +KeyPad  : "\E[3~"
+key PgUp    -Shift+KeyPad  : "\E[5~"
 key PgDown  -Shift+KeyPad  : "\E[6~"
 
 # the key labelled 5 on the Keypad, is Qt::Key_Clear (a very intuitive
@@ -148,9 +148,9 @@ key Delete      -AnyMod  : "\E[3~"
 key Insert      +AnyMod  : "\E[2;*~"
 key Delete      +AnyMod  : "\E[3;*~"
 
-key PgUp -Shift-AnyMod  : "\E[5~"
+key PgUp    -Shift-AnyMod  : "\E[5~"
 key PgDown  -Shift-AnyMod  : "\E[6~"
-key PgUp -Shift+AnyMod  : "\E[5;*~"
+key PgUp    -Shift+AnyMod  : "\E[5;*~"
 key PgDown  -Shift+AnyMod  : "\E[6;*~"
 
 # Function keys
@@ -187,13 +187,13 @@ key Space +Control : "\x00"
 # Some keys are used by konsole to cause operations.
 # The scroll* operations refer to the history buffer.
 
-key Up    +Shift-AppScreen  : scrollLineUp
-key PgUp +Shift-Ctrl-AppScreen  : scrollPageUp
-key Home  +Shift-AppScreen  : scrollUpToTop
-key Down  +Shift-AppScreen  : scrollLineDown
-key PgDown  +Shift-Ctrl-AppScreen  : scrollPageDown
-key End   +Shift-AppScreen  : scrollDownToBottom
-key PgUp +Shift+Ctrl-AppScreen  : scrollPromptUp
-key PgDown  +Shift+Ctrl-AppScreen  : scrollPromptDown
+key Up           +Shift-AppScreen  : scrollLineUp
+key PgUp    -Ctrl+Shift-AppScreen  : scrollPageUp
+key PgUp    +Ctrl+Shift-AppScreen  : scrollPromptUp
+key Home         +Shift-AppScreen  : scrollUpToTop
+key Down         +Shift-AppScreen  : scrollLineDown
+key PgDown  -Ctrl+Shift-AppScreen  : scrollPageDown
+key PgDown  +Ctrl+Shift-AppScreen  : scrollPromptDown
+key End          +Shift-AppScreen  : scrollDownToBottom
 
 
