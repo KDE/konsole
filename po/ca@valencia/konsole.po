@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-11 00:51+0000\n"
+"POT-Creation-Date: 2022-12-13 01:01+0000\n"
 "PO-Revision-Date: 2022-11-09 10:12+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -3156,59 +3156,59 @@ msgstr "Activa la generació de les miniatures"
 msgid "Size: %1 x %2"
 msgstr "Mida: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2169
+#: terminalDisplay/TerminalDisplay.cpp:2190
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Segur que voleu apegar %1 caràcter?"
 msgstr[1] "Segur que voleu apegar %1 caràcters?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2170
+#: terminalDisplay/TerminalDisplay.cpp:2191
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirmació d'apegat"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2224
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Final de text/Interrupció: pot eixir del procés actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2225
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Final de transmissió: pot eixir del procés actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2226
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Timbre: intentarà emetre un avís audible"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2227
 #, kde-format
 msgid "Backspace"
 msgstr "Retrocés"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2228
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Control tres del dispositiu/XOFF: suspén l'eixida"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2229
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitució/Suspensió: pot suspendre el procés actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2209
+#: terminalDisplay/TerminalDisplay.cpp:2230
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escapada: utilitzat per a manipular l'estat del terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2210
+#: terminalDisplay/TerminalDisplay.cpp:2231
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Separador de fitxer/Eixida: pot interrompre el procés actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2258
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3217,31 +3217,31 @@ msgstr ""
 "El text que s'intenta apegar conté caràcters de control ocults. Els voleu "
 "filtrar?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2261
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirmació d'apegat"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2262
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Apega &sense els caràcters de control"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2263
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "A&pega-ho tot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2243
+#: terminalDisplay/TerminalDisplay.cpp:2264
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "C&ancel·la"
 
-#: terminalDisplay/TerminalDisplay.cpp:2480
+#: terminalDisplay/TerminalDisplay.cpp:2501
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3252,17 +3252,17 @@ msgstr ""
 "Software_flow_control\">suspés</a> en prémer Ctrl+S. Premeu <b>Ctrl+Q</b> "
 "per a continuar.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2535
+#: terminalDisplay/TerminalDisplay.cpp:2556
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Este terminal només és de lectura."
 
-#: terminalDisplay/TerminalDisplay.cpp:2925
+#: terminalDisplay/TerminalDisplay.cpp:2946
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Canvia el &directori a"
 
-#: terminalDisplay/TerminalDisplay.cpp:2958
+#: terminalDisplay/TerminalDisplay.cpp:2979
 #, kde-format
 msgid "&Paste Location"
 msgstr "A&pega la ubicació"
@@ -3495,7 +3495,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carrega la disposició de les pestanyes"
 
-#: Vt102Emulation.cpp:2358
+#: Vt102Emulation.cpp:2354
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

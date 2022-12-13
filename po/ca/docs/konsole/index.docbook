@@ -92,7 +92,7 @@
 >&FDLNotice;</legalnotice>
 
 <date
->9 de novembre de 2022</date>
+>10 de desembre de 2022</date>
 <releaseinfo
 >KDE Gear 23.04</releaseinfo>
 
@@ -650,9 +650,9 @@
 ><para
 >Les opcions del menú contextual <guimenuitem
 >Copia l'entrada de l'usuari</guimenuitem
-> <guimenuitem
+>, <guimenuitem
 >Copia la sortida de l'ordre</guimenuitem
-> <guimenuitem
+> i <guimenuitem
 >Copia excepte l'indicador</guimenuitem
 > es poden utilitzar per a filtrar la selecció quan es copia al porta-retalls. </para
 ></listitem>
@@ -667,6 +667,10 @@
 <listitem
 ><para
 >En fer clic amb el ratolí sobre l'entrada de text, el cursor se situarà a la ubicació on s'ha fet clic. Es pot configurar a la configuració del perfil.</para
+></listitem>
+<listitem
+><para
+>En prémer la tecla &Ctrl; mentre es fa un triple clic del ratolí a la sortida d'una ordre, se selecciona la sortida sencera d'aquesta ordre.</para
 ></listitem>
 </itemizedlist>
 </para>
