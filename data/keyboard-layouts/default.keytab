@@ -150,6 +150,9 @@ key PgDown  -Shift-AnyMod  : "\E[6~"
 key PgUp    -Shift+AnyMod  : "\E[5;*~"
 key PgDown  -Shift+AnyMod  : "\E[6;*~"
 
+key PgUp    +Shift+AppScreen  : "\E[5;*~"
+key PgDown  +Shift+AppScreen  : "\E[6;*~"
+
 # Function keys
 key F1  -AnyMod  : "\EOP"
 key F2  -AnyMod  : "\EOQ"
