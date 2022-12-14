@@ -84,6 +84,16 @@ key Down  +Shift+AppScreen             : "\E[1;*B"
 key Left  +Shift+AppScreen             : "\E[1;*D"
 key Right +Shift+AppScreen             : "\E[1;*C"
 
+key Up    +Shift+Alt-AppScreen         : "\E[1;*A"
+key Down  +Shift+Alt-AppScreen         : "\E[1;*B"
+key Left  +Shift+Alt-AppScreen         : "\E[1;*D"
+key Right +Shift+Alt-AppScreen         : "\E[1;*C"
+
+key Up    +Shift+Ctrl-AppScreen        : "\E[1;*A"
+key Down  +Shift+Ctrl-AppScreen        : "\E[1;*B"
+key Left  +Shift+Ctrl-AppScreen        : "\E[1;*D"
+key Right +Shift+Ctrl-AppScreen        : "\E[1;*C"
+
 # Keypad keys with NumLock ON
 # (see https://web.archive.org/web/20070807181942/http://www.nw.com/nw/WWW/products/wizcon/vt100.html
 #    https://vt100.net/docs/vt100-ug/chapter3.html)
@@ -190,13 +200,13 @@ key Space +Control : "\x00"
 # Some keys are used by konsole to cause operations.
 # The scroll* operations refer to the history buffer.
 
-key Up           +Shift-AppScreen  : scrollLineUp
-key PgUp    -Ctrl+Shift-AppScreen  : scrollPageUp
-key PgUp    +Ctrl+Shift-AppScreen  : scrollPromptUp
-key Home         +Shift-AppScreen  : scrollUpToTop
-key Down         +Shift-AppScreen  : scrollLineDown
-key PgDown  -Ctrl+Shift-AppScreen  : scrollPageDown
-key PgDown  +Ctrl+Shift-AppScreen  : scrollPromptDown
-key End          +Shift-AppScreen  : scrollDownToBottom
+key Up      -Alt-Ctrl+Shift-AppScreen  : scrollLineUp
+key PgUp        -Ctrl+Shift-AppScreen  : scrollPageUp
+key PgUp        +Ctrl+Shift-AppScreen  : scrollPromptUp
+key Home             +Shift-AppScreen  : scrollUpToTop
+key Down    -Alt-Ctrl+Shift-AppScreen  : scrollLineDown
+key PgDown      -Ctrl+Shift-AppScreen  : scrollPageDown
+key PgDown      +Ctrl+Shift-AppScreen  : scrollPromptDown
+key End              +Shift-AppScreen  : scrollDownToBottom
 
 
