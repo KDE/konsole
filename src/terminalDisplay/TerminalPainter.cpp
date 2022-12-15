@@ -315,6 +315,7 @@ void TerminalPainter::drawContents(Character *image,
             int log_x = vis2log(x);
 
             const Character char_value = image[pos + log_x];
+            const bool doubleWidth = image[qMin(pos + log_x + 1, imageSize - 1)].isRightHalfOfDoubleWide();
 
             if (!printerFriendly && lastCharType == 0 && char_value.isSpace() && char_value.rendition.f.cursor == 0) {
                 continue;
@@ -327,7 +328,7 @@ void TerminalPainter::drawContents(Character *image,
 
             // paint text fragment
             if (unistr.length() && unistr[0] != QChar(0)) {
-                int textWidth = fontWidth * 1;
+                int textWidth = fontWidth * (doubleWidth ? 2 : 1);
                 int textX = leftPadding + fontWidth * x * (doubleWidthLine ? 2 : 1);
                 if (!printerFriendly && char_value.rendition.f.cursor) {
                     Character style = char_value;
