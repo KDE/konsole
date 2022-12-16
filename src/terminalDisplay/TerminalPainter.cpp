@@ -312,10 +312,11 @@ void TerminalPainter::drawContents(Character *image,
                 // What about the cursor?
                 // break;
             }
-            int log_x = vis2log(x);
+            const int log_x = vis2log(x);
+            const int log_next = vis2log(x + 1); // to know if this character is resolved as RTL, e.g. emojis in RTL context
 
             const Character char_value = image[pos + log_x];
-            const bool doubleWidth = image[qMin(pos + log_x + 1, imageSize - 1)].isRightHalfOfDoubleWide();
+            const bool doubleWidth = image[qMin(pos + log_x + 1, imageSize - 1)].isRightHalfOfDoubleWide(); // East_Asian_Width wide character
 
             if (!printerFriendly && lastCharType == 0 && char_value.isSpace() && char_value.rendition.f.cursor == 0) {
                 continue;
@@ -330,6 +331,10 @@ void TerminalPainter::drawContents(Character *image,
             if (unistr.length() && unistr[0] != QChar(0)) {
                 int textWidth = fontWidth * (doubleWidth ? 2 : 1);
                 int textX = leftPadding + fontWidth * x * (doubleWidthLine ? 2 : 1);
+                // East_Asian_Width wide character behaving as RTL, e.g. wide emoji inside RTL context
+                if (doubleWidth && log_next < log_x) {
+                    textX -= fontWidth * (doubleWidthLine ? 2 : 1);
+                }
                 if (!printerFriendly && char_value.rendition.f.cursor) {
                     Character style = char_value;
 
