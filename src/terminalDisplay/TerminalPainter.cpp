@@ -213,11 +213,11 @@ void TerminalPainter::drawContents(Character *image,
     const QFont::Weight normalWeight = static_cast<QFont::Weight>(m_parentDisplay->font().weight()); // Qt6: cast can go away
     auto it = std::upper_bound(std::begin(FontWeights), std::end(FontWeights), normalWeight);
     const QFont::Weight boldWeight = it != std::end(FontWeights) ? *it : QFont::Black;
-    paint.setRenderHint(QPainter::Antialiasing, m_parentDisplay->terminalFont()->antialiasText());
     paint.setLayoutDirection(Qt::LeftToRight);
     const QColor *colorTable = m_parentDisplay->terminalColor()->colorTable();
 
     for (int y = rect.y(); y <= rect.bottom(); y++) {
+        paint.setRenderHint(QPainter::Antialiasing, m_parentDisplay->terminalFont()->antialiasText());
         int pos = m_parentDisplay->loc(0, y);
         if (pos > imageSize) {
             break;
