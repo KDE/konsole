@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-13 01:01+0000\n"
+"POT-Creation-Date: 2022-12-19 00:50+0000\n"
 "PO-Revision-Date: 2022-07-19 10:03+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -3139,7 +3139,7 @@ msgstr "Povoliť vytváranie náhľadov"
 msgid "Size: %1 x %2"
 msgstr "Veľkosť: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2190
+#: terminalDisplay/TerminalDisplay.cpp:2200
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3147,52 +3147,52 @@ msgstr[0] "Určite chcete vložiť %1 znak?"
 msgstr[1] "Určite chcete vložiť %1 znaky?"
 msgstr[2] "Určite chcete vložiť %1 znakov?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2191
+#: terminalDisplay/TerminalDisplay.cpp:2201
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Potvrdiť vloženie"
 
-#: terminalDisplay/TerminalDisplay.cpp:2224
+#: terminalDisplay/TerminalDisplay.cpp:2234
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Koniec textu/Prerušiť: Môže prerušiť aktuálny proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2225
+#: terminalDisplay/TerminalDisplay.cpp:2235
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Koniec prenosu: Môže ukončiť aktuálny proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2226
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Zvonček: Skúsi vyslať zvukové varovanie"
 
-#: terminalDisplay/TerminalDisplay.cpp:2227
+#: terminalDisplay/TerminalDisplay.cpp:2237
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2228
+#: terminalDisplay/TerminalDisplay.cpp:2238
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: pozastaví výstup"
 
-#: terminalDisplay/TerminalDisplay.cpp:2229
+#: terminalDisplay/TerminalDisplay.cpp:2239
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Nahradiť/Uspať: môže pozastaviť aktuálny proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2230
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: používa sa na manipuláciu stavu terminálu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Oddeľovač súborov/Ukončiť: Môže prerušiť aktuálny proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2258
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3201,31 +3201,31 @@ msgstr ""
 "Text, ktorý sa pokúšate vložiť obsahuje netlačiteľné znaky, chcete ich "
 "odfiltrovať?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2261
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Potvrdiť vloženie"
 
-#: terminalDisplay/TerminalDisplay.cpp:2262
+#: terminalDisplay/TerminalDisplay.cpp:2272
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Prilepiť bez netlačiteľných znakov"
 
-#: terminalDisplay/TerminalDisplay.cpp:2263
+#: terminalDisplay/TerminalDisplay.cpp:2273
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Vložiť všetko"
 
-#: terminalDisplay/TerminalDisplay.cpp:2264
+#: terminalDisplay/TerminalDisplay.cpp:2274
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Zrušiť"
 
-#: terminalDisplay/TerminalDisplay.cpp:2501
+#: terminalDisplay/TerminalDisplay.cpp:2511
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3236,17 +3236,17 @@ msgstr ""
 "\">pozastavený</a> stlačením Ctrl+S. Stlačte <b>Ctrl+Q</b> pre pokračovanie."
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2566
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Tento terminál je iba na čítanie."
 
-#: terminalDisplay/TerminalDisplay.cpp:2946
+#: terminalDisplay/TerminalDisplay.cpp:2956
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Zmeniť adresár na"
 
-#: terminalDisplay/TerminalDisplay.cpp:2979
+#: terminalDisplay/TerminalDisplay.cpp:2989
 #, kde-format
 msgid "&Paste Location"
 msgstr "Vložiť umiestnenie"

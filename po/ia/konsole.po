@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-13 01:01+0000\n"
-"PO-Revision-Date: 2022-11-28 16:16+0100\n"
+"POT-Creation-Date: 2022-12-19 00:50+0000\n"
+"PO-Revision-Date: 2022-12-18 22:52+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1346,9 +1346,7 @@ msgstr "Formulario"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
 msgstr "Via breve:"
 
@@ -1454,7 +1452,7 @@ msgstr "Un elemento duplicate existe"
 #: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
-msgstr ""
+msgstr "Pro favor corrige omne le avisos ante essayar a executar iste script"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, kde-format
@@ -1464,7 +1462,7 @@ msgstr "Il ha alcun errores sur lescript, tu vermente vole executar lo?"
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Errores de Shell"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
@@ -1684,9 +1682,7 @@ msgstr "Dele entrata selectionate"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Via Breve"
 
@@ -1926,7 +1922,7 @@ msgstr " [Default]"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "Probilo interne (built-in) es sempre disponibile"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2168,7 +2164,7 @@ msgstr "Copia"
 #: session/SessionController.cpp:678
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Copia excepte prompts"
 
 #: session/SessionController.cpp:684
 #, kde-format
@@ -3153,59 +3149,59 @@ msgstr "Habilita generation de miniaturas"
 msgid "Size: %1 x %2"
 msgstr "Dimension: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2190
+#: terminalDisplay/TerminalDisplay.cpp:2200
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Tu es secur que tu vole collar %1 character?"
 msgstr[1] "Tu es secur que tu vole collar %1 characteres?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2191
+#: terminalDisplay/TerminalDisplay.cpp:2201
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirma Collar"
 
-#: terminalDisplay/TerminalDisplay.cpp:2224
+#: terminalDisplay/TerminalDisplay.cpp:2234
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fin de Texto/Interrumper: pote exir le processo currente"
 
-#: terminalDisplay/TerminalDisplay.cpp:2225
+#: terminalDisplay/TerminalDisplay.cpp:2235
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fin de Transmission: pote exir le processo currente"
 
-#: terminalDisplay/TerminalDisplay.cpp:2226
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Campana: essayara emitter un aviso audibile"
 
-#: terminalDisplay/TerminalDisplay.cpp:2227
+#: terminalDisplay/TerminalDisplay.cpp:2237
 #, kde-format
 msgid "Backspace"
 msgstr "RetroSpatio"
 
-#: terminalDisplay/TerminalDisplay.cpp:2228
+#: terminalDisplay/TerminalDisplay.cpp:2238
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Dispositivo Controlo Tres/XOFF: suspende exito"
 
-#: terminalDisplay/TerminalDisplay.cpp:2229
+#: terminalDisplay/TerminalDisplay.cpp:2239
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitue/Suspende: pote suspender processo currente"
 
-#: terminalDisplay/TerminalDisplay.cpp:2230
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escappar: usate per manipular stato de terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Separator de file/Quit: pote abortar le processo currente"
 
-#: terminalDisplay/TerminalDisplay.cpp:2258
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3214,31 +3210,31 @@ msgstr ""
 "Le texto que tu es essayante a collar contine chracteres de controlo celate, "
 "Tu vole excluder los?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2261
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirma Collar"
 
-#: terminalDisplay/TerminalDisplay.cpp:2262
+#: terminalDisplay/TerminalDisplay.cpp:2272
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Colla &sin controlar characteres"
 
-#: terminalDisplay/TerminalDisplay.cpp:2263
+#: terminalDisplay/TerminalDisplay.cpp:2273
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Colla &Toto"
 
-#: terminalDisplay/TerminalDisplay.cpp:2264
+#: terminalDisplay/TerminalDisplay.cpp:2274
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Cancella"
 
-#: terminalDisplay/TerminalDisplay.cpp:2501
+#: terminalDisplay/TerminalDisplay.cpp:2511
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3249,17 +3245,17 @@ msgstr ""
 "\">suspendite</a>per premer Ctrl+S. Tu pulsa <b>Ctrl+Q</b>pro resumer lo.</"
 "qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2566
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Iste terminal es de sol lectura."
 
-#: terminalDisplay/TerminalDisplay.cpp:2946
+#: terminalDisplay/TerminalDisplay.cpp:2956
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Modifica un &Directorio in"
 
-#: terminalDisplay/TerminalDisplay.cpp:2979
+#: terminalDisplay/TerminalDisplay.cpp:2989
 #, kde-format
 msgid "&Paste Location"
 msgstr "Colla &Location"
@@ -3420,7 +3416,7 @@ msgstr "Move scheda a sinistra"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Integration semntic de configuration (bash)"
 
 #: ViewManager.cpp:291
 #, kde-format
@@ -3438,7 +3434,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Grandor equal a omne vistas"
 
 #: ViewManager.cpp:314
 #, kde-format
@@ -3450,7 +3446,7 @@ msgstr "Passa  a scheda %1"
 #, fuzzy, kde-format
 #| msgid "Semantic Integration"
 msgid "Semantic hints "
-msgstr "Intergration Semantic"
+msgstr "Suggerentias semantic:"
 
 #: ViewManager.cpp:543
 #, fuzzy, kde-format
@@ -4369,19 +4365,19 @@ msgstr "Intergration Semantic"
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Emulation de flechas in alto/a basso"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Click de mus in linea de ingresso move cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Suggerentias semantic:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4407,7 +4403,7 @@ msgstr "Jammais"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Quando URL monstra suggerentias"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4777,7 +4773,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Colores de vista peliminar sur planar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
