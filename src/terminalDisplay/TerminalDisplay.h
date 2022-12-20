@@ -41,6 +41,7 @@ class QTimerEvent;
 class QScrollEvent;
 class QScrollPrepareEvent;
 class KMessageWidget;
+class QMimeData;
 
 struct UBiDi;
 
@@ -430,7 +431,7 @@ public Q_SLOTS:
     void updateImage();
 
     /** Copies the selected text to the X11 Selection. */
-    void copyToX11Selection();
+    void copyToX11Selection(bool useSavedText = false);
 
     /** Copies the selected text to the system clipboard. */
     void copyToClipboard(Screen::DecodingOptions options = Screen::PlainText);
@@ -733,6 +734,7 @@ private:
     bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and deleted
     // after QApplication::doubleClickInterval() delay
     bool _needCopyToX11Selection = false; // set in mouseReleaseEvent after mouseDoubleClickEvent
+    QMimeData *_savedMimeData;
 
     QLabel *_resizeWidget = nullptr;
     QTimer *_resizeTimer = nullptr;

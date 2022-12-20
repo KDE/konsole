@@ -1487,11 +1487,20 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
             if (_actSel > 1) {
                 if (_possibleTripleClick) {
                     _needCopyToX11Selection = true;
-                    QTimer::singleShot(QApplication::doubleClickInterval(), this, [this]() {
-                        if (_needCopyToX11Selection) {
-                            copyToX11Selection();
+                    const QString &text = _screenWindow->selectedText(currentDecodingOptions());
+                    if (!text.isEmpty()) {
+                        _savedMimeData = new QMimeData;
+                        _savedMimeData->setText(text);
+                        if (_copyTextAsHTML) {
+                            _savedMimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
                         }
-                    });
+                        QTimer::singleShot(QApplication::doubleClickInterval(), this, [this]() {
+                            if (_needCopyToX11Selection) {
+                                copyToX11Selection(true);
+                            }
+                            _savedMimeData = nullptr;
+                        });
+                    }
                 } else {
                     copyToX11Selection();
                 }
@@ -2340,22 +2349,27 @@ void TerminalDisplay::setCopyTextAsHTML(bool enabled)
     _copyTextAsHTML = enabled;
 }
 
-void TerminalDisplay::copyToX11Selection()
+void TerminalDisplay::copyToX11Selection(bool useSavedText)
 {
     if (_screenWindow.isNull()) {
         return;
     }
 
-    const QString &text = _screenWindow->selectedText(currentDecodingOptions());
-    if (text.isEmpty()) {
-        return;
-    }
+    QMimeData *mimeData;
+    if (useSavedText) {
+        mimeData = _savedMimeData;
+    } else {
+        const QString &text = _screenWindow->selectedText(currentDecodingOptions());
+        if (text.isEmpty()) {
+            return;
+        }
 
-    auto mimeData = new QMimeData;
-    mimeData->setText(text);
+        mimeData = new QMimeData;
+        mimeData->setText(text);
 
-    if (_copyTextAsHTML) {
-        mimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
+        if (_copyTextAsHTML) {
+            mimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
+        }
     }
 
     if (QApplication::clipboard()->supportsSelection()) {
@@ -2744,8 +2758,10 @@ void TerminalDisplay::keyPressEvent(QKeyEvent *event)
 #endif
 
     if (!_readOnly) {
-        _actSel = 0; // Key stroke implies a screen update, so TerminalDisplay won't
-                     // know where the current selection is.
+        if (!_possibleTripleClick) {
+            _actSel = 0; // Key stroke implies a screen update, so TerminalDisplay won't
+                         // know where the current selection is.
+        }
 
         if (_allowBlinkingCursor) {
             _blinkCursorTimer->start();
