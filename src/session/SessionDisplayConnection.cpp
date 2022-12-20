@@ -15,9 +15,9 @@ namespace Konsole
 {
 SessionDisplayConnection::SessionDisplayConnection(Session *session, TerminalDisplay *view, QObject *parent)
     : QObject(parent)
+    , _session(session)
+    , _view(view)
 {
-    _session = session;
-    _view = view;
 }
 
 QPointer<Session> SessionDisplayConnection::session()

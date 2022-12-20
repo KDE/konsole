@@ -15,9 +15,9 @@
 using namespace Konsole;
 
 EscapeSequenceUrlFilter::EscapeSequenceUrlFilter(Session *session, TerminalDisplay *window)
+    : _session(session)
+    , _window(window)
 {
-    _session = session;
-    _window = window;
 }
 
 void EscapeSequenceUrlFilter::process()

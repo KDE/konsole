@@ -13,14 +13,13 @@
 using Konsole::ShellCommand;
 
 ShellCommand::ShellCommand(const QString &aCommand)
+    : _arguments(KShell::splitArgs(aCommand))
 {
-    _arguments = KShell::splitArgs(aCommand);
 }
 
 ShellCommand::ShellCommand(const QString &aCommand, const QStringList &aArguments)
+    : _arguments(aArguments)
 {
-    _arguments = aArguments;
-
     if (!_arguments.isEmpty()) {
         _arguments[0] = aCommand;
     }
