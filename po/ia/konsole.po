@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 02:54+0000\n"
-"PO-Revision-Date: 2022-12-14 16:40+0100\n"
+"PO-Revision-Date: 2022-12-19 12:21+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -647,7 +647,7 @@ msgstr "Flip de Tapete de papiro:"
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "NoFlip (Nulle Tornear)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
@@ -1447,6 +1447,7 @@ msgstr "Un elemento duplicate existe"
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
+"Pro favor tu corrige omne le avisos ante essayar a executar iste script"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, kde-format
@@ -1456,7 +1457,7 @@ msgstr "Il ha alcun errores sur lescript, tu vermente vole executar lo?"
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Errores de shell"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
@@ -1554,12 +1555,12 @@ msgstr "Monstra gerente de SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Monstra Rapide Accesso per actiones de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Entratas de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
@@ -1599,7 +1600,7 @@ msgstr "Dele"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Non modifica"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
@@ -1689,7 +1690,7 @@ msgstr "Monstra entratas que non ha correspondentia con le filtro"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Modifica profilo sur connecte/disconnecte"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
@@ -1913,7 +1914,7 @@ msgstr " [Default]"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "Profilo contruite internemente es sempre disponibile"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2155,7 +2156,7 @@ msgstr "Copia"
 #: session/SessionController.cpp:678
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Copia excepte prompts"
 
 #: session/SessionController.cpp:684
 #, kde-format
@@ -3404,25 +3405,25 @@ msgstr "Move scheda a sinistra"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Configura integration semantic (bash)"
 
 #: ViewManager.cpp:291
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Commuta monstrator de suggestiones semantic"
 
 #: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Commuta monstrator de numeros de linea"
 
 #: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Grandor equal per omne vistas"
 
 #: ViewManager.cpp:314
 #, kde-format
@@ -3433,7 +3434,7 @@ msgstr "Passa  a scheda %1"
 #: ViewManager.cpp:527
 #, kde-format
 msgid "Semantic hints "
-msgstr "Suggerentias Semantic"
+msgstr "Suggestiones Semantic"
 
 #: ViewManager.cpp:543
 #, kde-format
@@ -3492,7 +3493,7 @@ msgstr ""
 #: widgets/EditProfileAdvancedPage.ui:37
 #, kde-format
 msgid "Key combination to show URL hints:"
-msgstr "Combination de clave pro monstrar suggerentias de URL:"
+msgstr "Combination de clave pro monstrar suggestiones de URL:"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:69
@@ -3533,7 +3534,7 @@ msgstr "Miscellanea:"
 #: widgets/EditProfileAdvancedPage.ui:182
 #, kde-format
 msgid "Number URL hints in reverse, starting from the bottom"
-msgstr "Suggerentias de URL e numero invertite, initiante ab le fin"
+msgstr "Suggestiones de URL e numero invertite, initiante ab le fin"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:185
@@ -3908,13 +3909,13 @@ msgstr "Monstra linea vertical a columna:"
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Disposition de Texto Complexe</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Disposition de Texto Complexe"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
@@ -3935,18 +3936,20 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignora attributo cambia parola-medie(alteremente, attributo cambia parola "
+"rupte quando render)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Usale mesme attributo per parola integre"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Rende parolas de characteres ASCII conjunctemente"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
@@ -3958,7 +3961,7 @@ msgstr "Characteres ASCII"
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Rende parolas de characheres de scripts Brahmic conjunctemente"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
@@ -3977,24 +3980,25 @@ msgstr "Font de Emoji:"
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Lineas es sempre LTR, plus tosto que determinate per le prime character forte"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "fortia direction de linea LTR"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Tracta characteres de designar de tabula como LTR forte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Modo BiDI de characteres de tabula supplanta"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4345,19 +4349,19 @@ msgstr "Intergration Semantic"
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Emulation de fletcha in alto/a basso"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Click de mus in linea de ingresso move cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr "Suggerentias Semantic:"
+msgstr "Suggestiones Semantic"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4383,7 +4387,7 @@ msgstr "Jammais"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Quando suggestiones de URL se monstra"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4402,7 +4406,7 @@ msgstr "Sempre"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Barras de error rubie:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
@@ -4414,7 +4418,7 @@ msgstr "Fundo de error rubie:"
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Barrar alternante:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
@@ -4751,7 +4755,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Previsualisa Colores quando passa supra "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
