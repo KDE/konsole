@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-19 00:50+0000\n"
-"PO-Revision-Date: 2022-12-18 22:52+0100\n"
+"PO-Revision-Date: 2022-12-19 12:35+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -639,16 +639,15 @@ msgstr "Non Scalar"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Scalar de Tapete de papiro:"
+msgstr "Flip (tornear) de Tapete de papiro:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "NoFlip (Nulle Tornear)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
@@ -1253,20 +1252,16 @@ msgid "Activate Menu"
 msgstr "Activa menu"
 
 #: MainWindow.cpp:414
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Slveguarda disposition de scheda a file"
+msgstr "Salveguarda disposition de scheda..."
 
 #: MainWindow.cpp:423
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Carga disposition de scheda ex file"
+msgstr "Carga disposition de scheda..."
 
 #: MainWindow.cpp:733 MainWindow.cpp:758
 #, kde-format
@@ -1433,10 +1428,9 @@ msgid "Quick Commands"
 msgstr "Commandos rapide"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Monstra Commandos Rapide"
+msgstr "Monstra Accesso Rapide"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1522,8 +1516,7 @@ msgid "SSH Config"
 msgstr "Configura SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "Predefinite"
@@ -1561,12 +1554,12 @@ msgstr "Monstra gerente de SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Monstra Rapide Accesso per actiones de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Entratas de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
@@ -1606,7 +1599,7 @@ msgstr "Dele"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Non modifica"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
@@ -1696,15 +1689,13 @@ msgstr "Monstra entratas que non ha correspondentia con le filtro"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Modifica profilo sur connecte/disconnecte"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Gere profilos"
+msgstr "Gere profilo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2192,10 +2183,9 @@ msgid "&Select All"
 msgstr "&Selectiona omne"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Selectiona &Linea"
+msgstr "Selectiona &Modo"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3279,12 +3269,10 @@ msgid "Split View Top/Bottom"
 msgstr "Scinde  le vista a Culmine/Basso"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Scinde  le vista a Culmine/Basso"
+msgstr "Scinde  le vista automaticamente"
 
 #: ViewManager.cpp:139
 #, kde-format
@@ -3422,13 +3410,13 @@ msgstr "Integration semntic de configuration (bash)"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Commuta monstrator de suggestiones semantic"
 
 #: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Commuta monstrator de numeros de linea"
 
 #: ViewManager.cpp:304
 #, kde-format
@@ -3443,14 +3431,12 @@ msgid "Switch to Tab %1"
 msgstr "Passa  a scheda %1"
 
 #: ViewManager.cpp:527
-#, fuzzy, kde-format
-#| msgid "Semantic Integration"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Suggerentias semantic:"
+msgstr "Suggestiones Semantic"
 
 #: ViewManager.cpp:543
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
 msgstr "Numeros de linea"
 
@@ -3487,12 +3473,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Carga disposition de scheda ex file"
+msgstr "Carga disposition de scheda"
 
 #: Vt102Emulation.cpp:2354
 #, kde-format
@@ -3508,7 +3492,7 @@ msgstr ""
 #: widgets/EditProfileAdvancedPage.ui:37
 #, kde-format
 msgid "Key combination to show URL hints:"
-msgstr "Combination de clave pro monstrar suggerentias de URL:"
+msgstr "Combination de clave pro monstrar suggestiones de URL:"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:69
@@ -3549,7 +3533,7 @@ msgstr "Miscellanea:"
 #: widgets/EditProfileAdvancedPage.ui:182
 #, kde-format
 msgid "Number URL hints in reverse, starting from the bottom"
-msgstr "Suggerentias de URL e numero invertite, initiante ab le fin"
+msgstr "Suggestiones de URL e numero invertite, initiante ab le fin"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:185
@@ -3924,26 +3908,25 @@ msgstr "Monstra linea vertical a columna:"
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Disposition de Texto Complexe</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Disposition de Texto Complexe"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Habilita rendering de texto Bi-Directional"
+msgstr "Habilita rendering de texto de modo de parola"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Modo de parola"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3952,69 +3935,69 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignora attributo cambia parola-medie(alteremente, attributo cambia parola "
+"rupte quando render)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Usale mesme attributo per parola integre"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Rende parolas de characteres ASCII conjunctemente"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Characteres de parola:"
+msgstr "Characteres ASCII"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Rende parolas de characheres de scripts Brahmic conjunctemente"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Accopula le character currente"
+msgstr "Characteres de scriptos Brahmic"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Font:"
+msgstr "Font de Emoji:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Lineas es sempre LTR, plus tosto que determinate per le prime character forte"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "fortia direction de linea LTR"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Tracta characteres de designar de tabula como LTR forte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Modo BiDI de characteres de tabula supplanta"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4377,7 +4360,7 @@ msgstr "Click de mus in linea de ingresso move cursor"
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr "Suggerentias semantic:"
+msgstr "Suggestiones Semantic"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4403,7 +4386,7 @@ msgstr "Jammais"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr "Quando URL monstra suggerentias"
+msgstr "Quando suggestiones de URL se monstra"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4422,27 +4405,25 @@ msgstr "Sempre"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Barras de error rubie:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Fundo de disfocalisar"
+msgstr "Fundo de error rubie:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Barrar alternante:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Fundo de disfocalisar"
+msgstr "Fundo alternante:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
