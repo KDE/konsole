@@ -217,7 +217,6 @@ void TerminalPainter::drawContents(Character *image,
     const QColor *colorTable = m_parentDisplay->terminalColor()->colorTable();
 
     for (int y = rect.y(); y <= rect.bottom(); y++) {
-        paint.setRenderHint(QPainter::Antialiasing, m_parentDisplay->terminalFont()->antialiasText());
         int pos = m_parentDisplay->loc(0, y);
         if (pos > imageSize) {
             break;
@@ -443,7 +442,6 @@ void TerminalPainter::drawContents(Character *image,
                           ulColorTable);
         }
 
-        paint.setRenderHint(QPainter::Antialiasing, false);
         paint.setWorldTransform(textScale.inverted(), true);
         if (lineProperty.flags.f.prompt_start && semanticHintsActive) {
             QPen pen(m_parentDisplay->terminalColor()->foregroundColor());
@@ -726,12 +724,15 @@ void TerminalPainter::drawCharacters(QPainter &painter,
 
 void TerminalPainter::drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character attributes)
 {
+    painter.setRenderHint(QPainter::Antialiasing, display->terminalFont()->antialiasText());
+
     const bool useBoldPen = (attributes.rendition.f.bold) != 0 && display->terminalFont()->boldIntense();
     QRect cellRect = {x, y, display->terminalFont()->fontWidth(), display->terminalFont()->fontHeight()};
     QVector<uint> ucs4str = str.toUcs4();
     for (int i = 0; i < ucs4str.length(); i++) {
         LineBlockCharacters::draw(painter, cellRect.translated(i * display->terminalFont()->fontWidth(), 0), ucs4str[i], useBoldPen);
     }
+    painter.setRenderHint(QPainter::Antialiasing, false);
 }
 
 void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image)
