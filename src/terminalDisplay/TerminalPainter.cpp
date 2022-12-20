@@ -725,6 +725,10 @@ void TerminalPainter::drawCharacters(QPainter &painter,
 
 void TerminalPainter::drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character attributes)
 {
+    // only turn on anti-aliasing during this short time for the "text"
+    // for the normal text we have TextAntialiasing on demand on
+    // otherwise we have rendering artifacts
+    // set https://bugreports.qt.io/browse/QTBUG-66036
     painter.setRenderHint(QPainter::Antialiasing, display->terminalFont()->antialiasText());
 
     const bool useBoldPen = (attributes.rendition.f.bold) != 0 && display->terminalFont()->boldIntense();
