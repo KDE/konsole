@@ -164,6 +164,10 @@ if (KF5DocTools_FOUND)
     kdoctools_install( po )
 endif()
 
+if (ECM_VERSION VERSION_GREATER_EQUAL 5.101.0)
+  install(FILES completions/konsole.zsh RENAME _konsole DESTINATION ${KDE_INSTALL_ZSHAUTOCOMPLETEDIR})
+endif()
+
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 # add clang-format target for all our real source files
