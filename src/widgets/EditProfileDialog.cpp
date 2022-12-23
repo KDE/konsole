@@ -211,6 +211,8 @@ void EditProfileDialog::save()
 
     if (isNewProfile) {
         ProfileManager::instance()->addProfile(_profile);
+        // The profile exists now, no longer treat it as initial creation
+        _profileState = EditProfileDialog::ExistingProfile;
     }
 
     bool defaultChanged = _isDefault != _generalUi->setAsDefaultButton->isChecked();
