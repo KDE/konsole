@@ -864,6 +864,12 @@ void TerminalDisplay::focusOutEvent(QFocusEvent *)
     // suppress further text blinking
     _blinkTextTimer->stop();
     Q_ASSERT(!_textBlinking);
+
+    // If waiting for a triple click - losing focus cancels that
+    if (_needCopyToX11Selection) {
+        copyToX11Selection(true);
+        _needCopyToX11Selection = false;
+    }
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent *)
