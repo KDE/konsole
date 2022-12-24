@@ -1486,9 +1486,9 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
         } else {
             if (_actSel > 1) {
                 if (_possibleTripleClick) {
-                    _needCopyToX11Selection = true;
                     const QString &text = _screenWindow->selectedText(currentDecodingOptions());
                     if (!text.isEmpty()) {
+                        _needCopyToX11Selection = true;
                         _savedMimeData = new QMimeData;
                         _savedMimeData->setText(text);
                         if (_copyTextAsHTML) {
@@ -1497,6 +1497,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
                         QTimer::singleShot(QApplication::doubleClickInterval(), this, [this]() {
                             if (_needCopyToX11Selection) {
                                 copyToX11Selection(true);
+                                _needCopyToX11Selection = false;
                             }
                             _savedMimeData = nullptr;
                         });
@@ -1572,6 +1573,11 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent *ev)
     if (!usesMouseTracking() || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
         const bool appendEnter = (ev->modifiers() & Qt::ControlModifier) != 0u;
 
+        if (_needCopyToX11Selection) {
+            // Currently waiting for a triple click, but a middle click cancels that.
+            copyToX11Selection(true);
+            _needCopyToX11Selection = false;
+        }
         if (_middleClickPasteMode == Enum::PasteFromX11Selection) {
             pasteFromX11Selection(appendEnter);
         } else if (_middleClickPasteMode == Enum::PasteFromClipboard) {
