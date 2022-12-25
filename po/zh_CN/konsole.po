@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-16 02:54+0000\n"
-"PO-Revision-Date: 2022-12-13 12:24\n"
+"PO-Revision-Date: 2022-12-24 11:44\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -1242,13 +1242,13 @@ msgstr "激活菜单"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr ""
+msgstr "保存标签页布局..."
 
 #: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr ""
+msgstr "加载标签页布局..."
 
 #: MainWindow.cpp:642 MainWindow.cpp:667
 #, kde-format
@@ -1544,7 +1544,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH 条目"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
@@ -3389,7 +3389,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr ""
+msgstr "保存标签页布局"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3421,7 +3421,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "加载标签页布局"
 
 #: Vt102Emulation.cpp:2358
 #, kde-format
@@ -3844,13 +3844,13 @@ msgstr "显示竖线于列："
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>复杂文本布局</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "复杂文本布局"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
@@ -3888,7 +3888,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:826
 #, kde-format
 msgid "ASCII characters "
-msgstr ""
+msgstr "ASCII 字符 "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
@@ -3906,19 +3906,19 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:855
 #, kde-format
 msgid "Emoji Font:"
-msgstr ""
+msgstr "表情 (emoji) 字体："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
-msgstr ""
+msgstr "文字总是从左向右，忽略相关控制字符。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "强制从左向右"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
