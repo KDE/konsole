@@ -92,7 +92,7 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2022-11-08</date>
+>2022-11-09</date>
 <releaseinfo
 >KDE Gear 22.12</releaseinfo>
 
@@ -683,73 +683,73 @@
 
 <sect1 id="complex-text-rendering">
 <title
->Complex Text Layout</title>
+>Complexe tekstindeling</title>
 
 <para
->In the <guilabel
->Complex Text Layout</guilabel
-> page of the <guilabel
->Edit Profile</guilabel
-> dialog, you will find options that control the rendering of text. </para>
+>In de pagina <guilabel
+>Complexe indeling van tekst</guilabel
+> van de dialoog <guilabel
+>Profiel bewerken</guilabel
+>, vindt u opties die het renderen van tekst besturen. </para>
 
 <para>
 <itemizedlist>
 <listitem
 ><para
 ><guilabel
->Word mode</guilabel
-> - in this mode (some) strings are printed to the window at once, instead of character at a time. This allows Qt to render text correctly when the shape of a character depends on the characters before or after it. This might result in incorrect position of some characters. </para
+>Woord-modus</guilabel
+> - in deze modus worden (sommige) tekenreeksen op het scherm als geheel getoond, in plaats van één teken tegelijk. Dit biedt Qt om tekst juist te renderen wanneer de vorm van een teken afhangt van de tekens ervoor en erachter. Dit kan resulteren in onjuiste positionering van sommige tekens. </para
 ><para
->Spaces always break strings, so they are always in the correct positions. This ensures that characters are never too far from their correct position. </para
+>Spaties breken tekenreeksen altijd, dus zijn zij altijd op de juiste posities. Dit verzekert dat tekens nooit te ver van hun juiste positie zijn. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->Use the same attributes for whole word</guilabel
-> - When this is enabled, words are rendered with the same attributes (text color, bold, italic, etc.) If an attributes changes mid-word, it will only take affect after the end of the word. When this is disabled, a new word starts when attributes change. This results in characters changing shape and position when moving the cursor or selecting text. </para
+>Dezelfde attributen voor elk geheel woord gebruiken</guilabel
+> - Wanneer dit is ingeschakeld worden woorden gerenderd met dezelfde attributen (tekstkleur, vet, cursief, etc.). Als een attribuut midden in een woord wijzigt, zal het alleen effect hebben na het eind van het woord. Wanneer dit is uitgeschakeld, zal een nieuw woord starten wanneer attributen wijzigen. Dit resulteert in tekens die vorm en positie wijzigen bij verplaatsen van de cursor of tekst selecteren. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->ASCII characters</guilabel
-> - Group ASCII characters into words as describe above the most noticeable effect of this option is that enabling this shows programming ligatures (for fonts that support them). E.g. the string &lt;= may be displayed as ⩽. </para
+>ASCII-tekens</guilabel
+> - ASCII-tekens in woorden groeperen zoals bovenstaand beschreven. Het opmerkelijkste effect van deze optie is dat dit inschakelen programmeringsligaturen toont (voor lettertypen die dat ondersteunen). Bijv. de tekenreeks &lt;= kan getoond worden als ⩽. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->Brahmic scripts characters</guilabel
-> - Group Brahmic characters as described above. Without this option (depending on the font) some words may not be connected as they should. With this enabled Brahmic characters may appear out of position. E.g. the third character in the second line might not appear directly under the third character in the first line. </para
+>Brahmic schrift-tekens</guilabel
+> - Brahmic tekens zoals bovenstaand beschreven. Zonder deze optie (afhankelijk van het lettertype) kunnen sommige woorden niet verbonden worden zoals dat zou moeten. Met dit ingeschakeld kunnen Brahmic tekens niet op de  juiste positie verschijnen. Bijv. het derde teken in de tweede regel zou niet direct onder het derde teken in de eerste regel kunnen verschijnen. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->Emoji Font:</guilabel
-> - This allows specifying the font to use for Unicode Emoji characters. If not set, the default profile font will be used (or some fallback font may be used by the system of the glyphs are missing from this font. </para
+>Emoji lettertype:</guilabel
+> - dit biedt het specificeren van het lettertype voor gebruik van Unicode Emoji tekens. Indien niet ingesteld, zal het lettertype van het standaard profiel gebruikt worden of een terugval lettertype ka gebruikt worden door het systeem als de glyphs ontbreken in dit lettertype. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->Bi-Directional text rendering</guilabel
-> - Reorder right to left characters so Arabic and Hebrew texts appear correctly. </para
+>Bi-directionele tekst renderen</guilabel
+> - Wijzig volgorde van tekens rechts naar links zodat tekst in Arabisch en Hebreeuws juist verschijnt. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->force LTR line direction</guilabel
-> - Lines are always Left to right. Without this, each line's direction is determined by the first character with strong directionality. </para
+>Dwing LTR regelrichting af</guilabel
+> - Regels worden altijd Links naar rechts. Zonder dit wordt elke richting van de  regel bepaald door het eerste teken met sterke richtingsbepaling. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->Table characters BiDi mode override</guilabel
-> - Consider graphic table characters as strong LTR characters. This allows table containing RTL characters to display correctly, but might cause incorrect order if those characters are used in RTL texts. </para
+>Modus Tabeltekens BiDi mode hebben voorrang</guilabel
+> - Grafische tabeltekens als sterke LTR tekens beschouwen. Dit biedt een tabel met RTL-tekens on juist getoond te worden, maar kunnen een onjuiste volgorde geven als die tekens in RTL teksten gebruikt worden. </para
 ></listitem>
 
 </itemizedlist>
@@ -2523,7 +2523,7 @@ Various search improvements
 
 <chapter id="command-line-options">
 <title
->Commandoregel-opties</title>
+>Opdrachtregel-opties</title>
 
 <para
 >Als u &konsole; vanaf de commandoregel opstart, kunt u bepaalde opties opgeven om het gedrag ervan te wijzigen.</para>
