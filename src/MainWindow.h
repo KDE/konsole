@@ -25,7 +25,6 @@
 
 #include <vector>
 
-class QAction;
 class KActionMenu;
 class KHamburgerMenu;
 class KToggleAction;
