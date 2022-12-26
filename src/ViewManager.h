@@ -318,7 +318,10 @@ private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
     void splitTopBottom();
-    void splitAuto();
+    void splitAuto(bool fromNextTab = false);
+    void splitLeftRightNextTab();
+    void splitTopBottomNextTab();
+    void splitAutoNextTab();
     void expandActiveContainer();
     void shrinkActiveContainer();
     void equalSizeAllContainers();
@@ -416,7 +419,7 @@ private:
     // takes a view from a view container owned by a different manager and places it in
     // newContainer owned by this manager
     void takeView(ViewManager *otherManager, TabbedViewContainer *otherContainer, TabbedViewContainer *newContainer, TerminalDisplay *view);
-    void splitView(Qt::Orientation orientation);
+    void splitView(Qt::Orientation orientation, bool fromNextTab = false);
 
     // creates a new container which can hold terminal displays
     TabbedViewContainer *createContainer();

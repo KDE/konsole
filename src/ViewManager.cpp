@@ -135,6 +135,35 @@ void ViewManager::setupActions()
     splitViewActions->addSeparator();
 
     action = new QAction(this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
+    action->setText(i18nc("@action:inmenu", "Split View Left/Right from next tab"));
+    connect(action, &QAction::triggered, this, &ViewManager::splitLeftRightNextTab);
+    collection->addAction(QStringLiteral("split-view-left-right-next-tab"), action);
+    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_ParenLeft));
+    splitViewActions->addAction(action);
+    _multiTabOnlyActions << action;
+
+    action = new QAction(this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
+    action->setText(i18nc("@action:inmenu", "Split View Top/Bottom from next tab"));
+    connect(action, &QAction::triggered, this, &ViewManager::splitTopBottomNextTab);
+    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_ParenRight));
+    collection->addAction(QStringLiteral("split-view-top-bottom-next-tab"), action);
+    splitViewActions->addAction(action);
+    _multiTabOnlyActions << action;
+
+    action = new QAction(this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-auto")));
+    action->setText(i18nc("@action:inmenu", "Split View Automatically from next tab"));
+    connect(action, &QAction::triggered, this, &ViewManager::splitAutoNextTab);
+    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_Asterisk));
+    collection->addAction(QStringLiteral("split-view-auto-next-tab"), action);
+    splitViewActions->addAction(action);
+    _multiTabOnlyActions << action;
+
+    splitViewActions->addSeparator();
+
+    action = new QAction(this);
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
     action->setText(i18nc("@action:inmenu", "Load a new tab with layout 2x2 terminals"));
     connect(action, &QAction::triggered, this, [this]() {
@@ -679,7 +708,7 @@ void ViewManager::splitTopBottom()
     splitView(Qt::Vertical);
 }
 
-void ViewManager::splitAuto()
+void ViewManager::splitAuto(bool fromNextTab)
 {
     Qt::Orientation orientation;
     auto activeTerminalDisplay = _viewContainer->activeViewSplitter()->activeTerminalDisplay();
@@ -688,24 +717,50 @@ void ViewManager::splitAuto()
     } else {
         orientation = Qt::Vertical;
     }
-    splitView(orientation);
+    splitView(orientation, fromNextTab);
 }
 
-void ViewManager::splitView(Qt::Orientation orientation)
+void ViewManager::splitLeftRightNextTab()
 {
-    int currentSessionId = currentSession();
-    // At least one display/session exists if we are splitting
-    Q_ASSERT(currentSessionId >= 0);
+    splitView(Qt::Horizontal, true);
+}
 
-    Session *activeSession = SessionManager::instance()->idToSession(currentSessionId);
-    Q_ASSERT(activeSession);
+void ViewManager::splitTopBottomNextTab()
+{
+    splitView(Qt::Vertical, true);
+}
 
-    auto profile = SessionManager::instance()->sessionProfile(activeSession);
+void ViewManager::splitAutoNextTab()
+{
+    splitAuto(true);
+}
 
-    const QString directory = profile->startInCurrentSessionDir() ? activeSession->currentWorkingDirectory() : QString();
-    auto *session = createSession(profile, directory);
+void ViewManager::splitView(Qt::Orientation orientation, bool fromNextTab)
+{
+    TerminalDisplay *terminalDisplay;
+    if (fromNextTab) {
+        int tabId = _viewContainer->indexOf(_viewContainer->activeViewSplitter());
+        auto nextTab = _viewContainer->viewSplitterAt(tabId + 1);
 
-    auto terminalDisplay = createView(session);
+        if (!nextTab) {
+            return;
+        }
+        terminalDisplay = nextTab->activeTerminalDisplay();
+    } else {
+        int currentSessionId = currentSession();
+        // At least one display/session exists if we are splitting
+        Q_ASSERT(currentSessionId >= 0);
+
+        Session *activeSession = SessionManager::instance()->idToSession(currentSessionId);
+        Q_ASSERT(activeSession);
+
+        auto profile = SessionManager::instance()->sessionProfile(activeSession);
+
+        const QString directory = profile->startInCurrentSessionDir() ? activeSession->currentWorkingDirectory() : QString();
+        auto *session = createSession(profile, directory);
+
+        terminalDisplay = createView(session);
+    }
 
     _viewContainer->splitView(terminalDisplay, orientation);
 
@@ -915,6 +970,8 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
     enableAction(QStringLiteral("last-used-tab-reverse"));
     enableAction(QStringLiteral("split-view-left-right"));
     enableAction(QStringLiteral("split-view-top-bottom"));
+    enableAction(QStringLiteral("split-view-left-right-next-tab"));
+    enableAction(QStringLiteral("split-view-top-bottom-next-tab"));
     enableAction(QStringLiteral("rename-session"));
     enableAction(QStringLiteral("move-view-left"));
     enableAction(QStringLiteral("move-view-right"));
