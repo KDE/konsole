@@ -798,6 +798,13 @@ void SessionController::setupCommonActions()
 #endif
             &Konsole::SessionController::changeCodec);
 
+    connect(_codecAction, &KCodecAction::defaultItemTriggered, this, [this] {
+        Profile::Ptr profile = SessionManager::instance()->sessionProfile(session());
+        QByteArray name = profile->defaultEncoding().toUtf8();
+
+        changeCodec(QTextCodec::codecForName(name));
+    });
+
     // Mouse tracking enabled
     action = collection->addAction(QStringLiteral("allow-mouse-tracking"), this);
     connect(action, &QAction::toggled, this, [this, action]() {
