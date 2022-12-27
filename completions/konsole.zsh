@@ -54,7 +54,6 @@ function _konsole_profile_properties() {
 
 case "$service" in
   (konsoleprofile)
-    # XXX: this doesn't really work as a sequence.  any ideas?
     _arguments \
       '1:properties:_konsole_profile_properties'
     ;;
