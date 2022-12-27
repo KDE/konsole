@@ -1875,6 +1875,10 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
 #endif
             &Konsole::EditProfileDialog::setDefaultCodec);
 
+    connect(codecAction, &KCodecAction::defaultItemTriggered, this, [this] {
+        setDefaultCodec(QTextCodec::codecForLocale());
+    });
+
     _advancedUi->selectEncodingButton->setText(profile->defaultEncoding());
 
     _advancedUi->peekPrimaryWidget->setKeySequence(profile->peekPrimaryKeySequence());
