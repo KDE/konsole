@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-19 00:50+0000\n"
+"POT-Creation-Date: 2022-12-28 00:53+0000\n"
 "PO-Revision-Date: 2022-08-19 13:06+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1900,7 +1900,7 @@ msgstr "Tulostin&ystävällinen tila (musta teksti, ei taustaa)"
 msgid "&Scale output"
 msgstr "&Sovita tuloste"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
 #, kde-format
 msgid "Default profile"
 msgstr "Oletusprofiili"
@@ -4070,7 +4070,7 @@ msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Lisäasetukset"
 
-#: widgets/EditProfileDialog.cpp:281
+#: widgets/EditProfileDialog.cpp:283
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4082,36 +4082,36 @@ msgstr ""
 "filename>.<nl/>Muuta joko tiedoston käyttöoikeuksia tai aseta toinen nimi "
 "tallentaaksesi asetukset uuteen profiiliin."
 
-#: widgets/EditProfileDialog.cpp:298
+#: widgets/EditProfileDialog.cpp:300
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "Profiilin nimi oli tyhjä: tallentaaksesi asetukset aseta nimi."
 
-#: widgets/EditProfileDialog.cpp:306
+#: widgets/EditProfileDialog.cpp:308
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Profiili nimeltä ”%1” on jo olemassa."
 
-#: widgets/EditProfileDialog.cpp:341
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Muokataan profiilia: %2"
 msgstr[1] "Muokataan %1 profiilia: %2"
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:347
 #, kde-format
 msgid "Create New Profile"
 msgstr "Luo uusi profiili"
 
-#: widgets/EditProfileDialog.cpp:348
+#: widgets/EditProfileDialog.cpp:350
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Muokkaa profiilia ”%1”"
 
-#: widgets/EditProfileDialog.cpp:439
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4121,7 +4121,7 @@ msgid_plural " columns"
 msgstr[0] " sarake"
 msgstr[1] " saraketta"
 
-#: widgets/EditProfileDialog.cpp:441
+#: widgets/EditProfileDialog.cpp:443
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4131,42 +4131,42 @@ msgid_plural " rows"
 msgstr[0] " rivi"
 msgstr[1] " riviä"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Bell"
 msgstr "Järjestelmän äänimerkki"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Notifications"
 msgstr "Järjestelmäilmoitukset"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Visual Bell"
 msgstr "Visuaalinen äänimerkki"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ohita äänimerkkitapahtumat"
 
-#: widgets/EditProfileDialog.cpp:460
+#: widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Uusien pääteistuntojen oletusprofiili – %1"
 
-#: widgets/EditProfileDialog.cpp:565
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Edit Environment"
 msgstr "Ympäristömuuttujat"
 
-#: widgets/EditProfileDialog.cpp:566
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Yksi ympäristömuuttuja per rivi"
 
-#: widgets/EditProfileDialog.cpp:597
+#: widgets/EditProfileDialog.cpp:599
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4174,18 +4174,18 @@ msgid_plural " seconds"
 msgstr[0] " sekunti"
 msgstr[1] " sekuntia"
 
-#: widgets/EditProfileDialog.cpp:696
+#: widgets/EditProfileDialog.cpp:698
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Valitse oletussijainti"
 
-#: widgets/EditProfileDialog.cpp:1235
+#: widgets/EditProfileDialog.cpp:1237
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Teeman <resource>%1</resource> lataus epäonnistui."
 
-#: widgets/EditProfileDialog.cpp:1414
+#: widgets/EditProfileDialog.cpp:1416
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4193,7 +4193,7 @@ msgid ""
 msgstr ""
 "Väriteema käyttää läpinäkyvää taustaa, mitä laitteistosi ei näy tukevan"
 
-#: widgets/EditProfileDialog.cpp:1420
+#: widgets/EditProfileDialog.cpp:1422
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4202,7 +4202,7 @@ msgstr ""
 "Konsole käynnistyi ennen työpöytätehosteiden käyttöönottoa. Näet läpinäkyvän "
 "taustan käynnistettyäsi Konsolen uudelleen."
 
-#: widgets/EditProfileDialog.cpp:1811
+#: widgets/EditProfileDialog.cpp:1813
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4230,7 +4230,7 @@ msgstr ""
 "Ellei SIJAINTIa tai RIVIä anneta, asetus ohitetaan, ja\n"
 "tiedosto avataan oletustekstimuokkaimeen."
 
-#: widgets/EditProfileDialog.cpp:1824
+#: widgets/EditProfileDialog.cpp:1826
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Mukautettu tekstinmuokkauskomento"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-19 00:50+0000\n"
+"POT-Creation-Date: 2022-12-28 00:53+0000\n"
 "PO-Revision-Date: 2022-12-10 10:31+0800\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.slat.org>\n"
@@ -1852,7 +1852,7 @@ msgstr "便於列印模式 (黑色文字，不列印背景)(&F)"
 msgid "&Scale output"
 msgstr "調整輸出(&S)"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
 #, kde-format
 msgid "Default profile"
 msgstr "預設設定檔"
@@ -3984,7 +3984,7 @@ msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "進階"
 
-#: widgets/EditProfileDialog.cpp:281
+#: widgets/EditProfileDialog.cpp:283
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -3995,35 +3995,35 @@ msgstr ""
 "權限不足，無法儲存設定至： <filename>%1</filename>。<nl/>修改該檔案的權限或者"
 "使用不同的名稱來另存新設定檔。"
 
-#: widgets/EditProfileDialog.cpp:298
+#: widgets/EditProfileDialog.cpp:300
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "設定檔名稱不能留白，請指定名稱以利儲存。"
 
-#: widgets/EditProfileDialog.cpp:306
+#: widgets/EditProfileDialog.cpp:308
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "名為「%1」的設定檔已存在。"
 
-#: widgets/EditProfileDialog.cpp:341
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "編輯 %1 個設定檔：%2"
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:347
 #, kde-format
 msgid "Create New Profile"
 msgstr "新增設定檔"
 
-#: widgets/EditProfileDialog.cpp:348
+#: widgets/EditProfileDialog.cpp:350
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "編輯設定檔 %1"
 
-#: widgets/EditProfileDialog.cpp:439
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4032,7 +4032,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] " 欄"
 
-#: widgets/EditProfileDialog.cpp:441
+#: widgets/EditProfileDialog.cpp:443
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4041,67 +4041,67 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] " 行"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Bell"
 msgstr "系統響鈴"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Notifications"
 msgstr "系統通知"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Visual Bell"
 msgstr "視覺響鈴"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "忽略響鈴事件"
 
-#: widgets/EditProfileDialog.cpp:460
+#: widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "作為新終端機工作階段 %1  的預設設定檔"
 
-#: widgets/EditProfileDialog.cpp:565
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Edit Environment"
 msgstr "編輯環境變數"
 
-#: widgets/EditProfileDialog.cpp:566
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "One environment variable per line"
 msgstr "每一個環境變數佔一行"
 
-#: widgets/EditProfileDialog.cpp:597
+#: widgets/EditProfileDialog.cpp:599
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] " 秒"
 
-#: widgets/EditProfileDialog.cpp:696
+#: widgets/EditProfileDialog.cpp:698
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "選擇起始目錄"
 
-#: widgets/EditProfileDialog.cpp:1235
+#: widgets/EditProfileDialog.cpp:1237
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "框架 <resource>%1</resource> 無法載入。"
 
-#: widgets/EditProfileDialog.cpp:1414
+#: widgets/EditProfileDialog.cpp:1416
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "此配色中含有透明背景，您的桌面似乎不支援。"
 
-#: widgets/EditProfileDialog.cpp:1420
+#: widgets/EditProfileDialog.cpp:1422
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4110,7 +4110,7 @@ msgstr ""
 "在啟用桌面效果前 Konsole 就已經開啟，您需要重新啟動 Konsole 才能看到透明背"
 "景。"
 
-#: widgets/EditProfileDialog.cpp:1811
+#: widgets/EditProfileDialog.cpp:1813
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4137,7 +4137,7 @@ msgstr ""
 "指令未包含「路徑」或「行」的情況，將自動忽略本設定\n"
 "並以預設的文字編輯器開啟。"
 
-#: widgets/EditProfileDialog.cpp:1824
+#: widgets/EditProfileDialog.cpp:1826
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "文字編輯器自訂命令"

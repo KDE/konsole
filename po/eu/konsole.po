@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-19 00:50+0000\n"
+"POT-Creation-Date: 2022-12-28 00:53+0000\n"
 "PO-Revision-Date: 2022-11-09 06:31+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -1882,7 +1882,7 @@ msgstr "Inprimatzeko modu adiskidetsua (testu beltza, atzealderik gabe)"
 msgid "&Scale output"
 msgstr "E&skalatu irteera"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
 #, kde-format
 msgid "Default profile"
 msgstr "Profil lehenetsia"
@@ -4053,7 +4053,7 @@ msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Aurreratua"
 
-#: widgets/EditProfileDialog.cpp:281
+#: widgets/EditProfileDialog.cpp:283
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4065,7 +4065,7 @@ msgstr ""
 "ez.<nl/>Aldatu fitxategi horren baimenak edo ipini beste izen bat ezarpenak "
 "profil berri batean gordetzeko."
 
-#: widgets/EditProfileDialog.cpp:298
+#: widgets/EditProfileDialog.cpp:300
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
@@ -4073,30 +4073,30 @@ msgstr ""
 "Profilaren izena hutsik zegoen; mesedez, ezarri izen bat ezarpenak gorde "
 "ahal izateko."
 
-#: widgets/EditProfileDialog.cpp:306
+#: widgets/EditProfileDialog.cpp:308
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Lehendik ere badago «%1» izeneko profil bat."
 
-#: widgets/EditProfileDialog.cpp:341
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Profila editatzea: %2"
 msgstr[1] "%1 profil editatzen: %2"
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:347
 #, kde-format
 msgid "Create New Profile"
 msgstr "Sortu profil berria"
 
-#: widgets/EditProfileDialog.cpp:348
+#: widgets/EditProfileDialog.cpp:350
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Editatu \"%1\" profila"
 
-#: widgets/EditProfileDialog.cpp:439
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4106,7 +4106,7 @@ msgid_plural " columns"
 msgstr[0] " zutabe"
 msgstr[1] " zutabe"
 
-#: widgets/EditProfileDialog.cpp:441
+#: widgets/EditProfileDialog.cpp:443
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4116,42 +4116,42 @@ msgid_plural " rows"
 msgstr[0] " errenkada"
 msgstr[1] " errenkada"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Bell"
 msgstr "Sistemako txirrina"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistemaren jakinarazpenak"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Visual Bell"
 msgstr "Irudizko txirrina"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ezikusi txirrin gertaerak"
 
-#: widgets/EditProfileDialog.cpp:460
+#: widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1(e)ko terminal saio berrientzako profil lehenetsia"
 
-#: widgets/EditProfileDialog.cpp:565
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Edit Environment"
 msgstr "Editatu ingurunea"
 
-#: widgets/EditProfileDialog.cpp:566
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Inguruneko aldagai bat lerroko"
 
-#: widgets/EditProfileDialog.cpp:597
+#: widgets/EditProfileDialog.cpp:599
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4159,18 +4159,18 @@ msgid_plural " seconds"
 msgstr[0] " segundo"
 msgstr[1] " segundo"
 
-#: widgets/EditProfileDialog.cpp:696
+#: widgets/EditProfileDialog.cpp:698
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Hautatu hasierako direktorioa"
 
-#: widgets/EditProfileDialog.cpp:1235
+#: widgets/EditProfileDialog.cpp:1237
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> antolaera zamatzea huts egin du."
 
-#: widgets/EditProfileDialog.cpp:1414
+#: widgets/EditProfileDialog.cpp:1416
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4179,7 +4179,7 @@ msgstr ""
 "Kolore-antolaera honek atzealde gardena erabiltzen du eta ez dirudi zure "
 "mahaigainak onartzen duenik"
 
-#: widgets/EditProfileDialog.cpp:1420
+#: widgets/EditProfileDialog.cpp:1422
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4188,7 +4188,7 @@ msgstr ""
 "Konsole, mahaigaineko efektuak gaitu aurretik abiarazi da. Konsole "
 "berrabiatu behar duzu atzealde gardena ikusteko."
 
-#: widgets/EditProfileDialog.cpp:1811
+#: widgets/EditProfileDialog.cpp:1813
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4217,7 +4217,7 @@ msgstr ""
 "ezikusi egingo zaio eta fitxategia testu-editore lehenetsiarekin\n"
 "irekiko da."
 
-#: widgets/EditProfileDialog.cpp:1824
+#: widgets/EditProfileDialog.cpp:1826
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Testu-editore norberak finkatutako komandoa"

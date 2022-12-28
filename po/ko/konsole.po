@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-19 00:50+0000\n"
+"POT-Creation-Date: 2022-12-28 00:53+0000\n"
 "PO-Revision-Date: 2022-10-03 16:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-i18n-doc@kde.org>\n"
@@ -1867,7 +1867,7 @@ msgstr "프린터 친화 모드 (검은 텍스트, 배경색 없음)(&F)"
 msgid "&Scale output"
 msgstr "출력 크기 조정(&S)"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
 #, kde-format
 msgid "Default profile"
 msgstr "기본 프로필"
@@ -4022,7 +4022,7 @@ msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "고급"
 
-#: widgets/EditProfileDialog.cpp:281
+#: widgets/EditProfileDialog.cpp:283
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4034,35 +4034,35 @@ msgstr ""
 "파일의 권한을 바꾸거나, 프로필 이름을 변경해 새로운 프로필 설정 파일에 저장하"
 "십시오."
 
-#: widgets/EditProfileDialog.cpp:298
+#: widgets/EditProfileDialog.cpp:300
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "프로필 이름이 비어 있습니다. 설정을 저장할 이름을 설정하십시오."
 
-#: widgets/EditProfileDialog.cpp:306
+#: widgets/EditProfileDialog.cpp:308
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "이름이 \"%1\"인 프로필이 이미 존재합니다."
 
-#: widgets/EditProfileDialog.cpp:341
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "프로필 %1개 편집: %2"
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:347
 #, kde-format
 msgid "Create New Profile"
 msgstr "새 프로필 만들기"
 
-#: widgets/EditProfileDialog.cpp:348
+#: widgets/EditProfileDialog.cpp:350
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" 프로필 편집"
 
-#: widgets/EditProfileDialog.cpp:439
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4071,7 +4071,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] "열"
 
-#: widgets/EditProfileDialog.cpp:441
+#: widgets/EditProfileDialog.cpp:443
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4080,60 +4080,60 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] "행"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Bell"
 msgstr "시스템 벨"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Notifications"
 msgstr "시스템 알림:"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Visual Bell"
 msgstr "벨 시각화"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "벨 이벤트 무시"
 
-#: widgets/EditProfileDialog.cpp:460
+#: widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1의 새 터미널 세션의 기본 프로필"
 
-#: widgets/EditProfileDialog.cpp:565
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Edit Environment"
 msgstr "환경 편집"
 
-#: widgets/EditProfileDialog.cpp:566
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "One environment variable per line"
 msgstr "한 줄에 환경 변수 하나씩"
 
-#: widgets/EditProfileDialog.cpp:597
+#: widgets/EditProfileDialog.cpp:599
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] "초"
 
-#: widgets/EditProfileDialog.cpp:696
+#: widgets/EditProfileDialog.cpp:698
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "초기 디렉터리 선택"
 
-#: widgets/EditProfileDialog.cpp:1235
+#: widgets/EditProfileDialog.cpp:1237
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "배열 <resource>%1</resource>을(를) 불러올 수 없습니다."
 
-#: widgets/EditProfileDialog.cpp:1414
+#: widgets/EditProfileDialog.cpp:1416
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4142,7 +4142,7 @@ msgstr ""
 "이 색 배열은 현재 데스크톱 환경에서 지원하지 않는 투명 배경을 사용하고 있습니"
 "다"
 
-#: widgets/EditProfileDialog.cpp:1420
+#: widgets/EditProfileDialog.cpp:1422
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4151,7 +4151,7 @@ msgstr ""
 "데스크톱 효과를 활성화하기 전에 Konsole을 시작했습니다. 투명한 배경을 보려면 "
 "Konsole을 다시 시작해야 합니다."
 
-#: widgets/EditProfileDialog.cpp:1811
+#: widgets/EditProfileDialog.cpp:1813
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4179,7 +4179,7 @@ msgstr ""
 "PATH 또는 LINE이 명령에 없으면, 이 설정을 무시하고 \n"
 "기본 텍스트 편집기로 파일을 엽니다."
 
-#: widgets/EditProfileDialog.cpp:1824
+#: widgets/EditProfileDialog.cpp:1826
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "텍스트 편집기 사용자 정의 명령"
