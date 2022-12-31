@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 02:54+0000\n"
+"POT-Creation-Date: 2022-12-31 02:46+0000\n"
 "PO-Revision-Date: 2022-12-20 09:46-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -1891,7 +1891,7 @@ msgstr "Modo de &impressão amigável (texto preto, sem fundo)"
 msgid "&Scale output"
 msgstr "E&scala de saída"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
 #, kde-format
 msgid "Default profile"
 msgstr "Perfil padrão"
@@ -3154,59 +3154,59 @@ msgstr "Ativar a geração de miniaturas"
 msgid "Size: %1 x %2"
 msgstr "Tamanho: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2169
+#: terminalDisplay/TerminalDisplay.cpp:2190
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Deseja realmente colar %1 caractere?"
 msgstr[1] "Deseja realmente colar %1 caracteres?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2170
+#: terminalDisplay/TerminalDisplay.cpp:2191
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirmar colagem"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2224
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fim do texto/Interrupção: Pode sair do processo atual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2225
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fim da transmissão: Pode sair do processo atual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2226
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Campainha: Tentará emitir um aviso sonoro"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2227
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2228
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Controle de dispositivo Three/XOFF: Suspende o resultado"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2229
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substituição/Suspensão: Pode suspender o processo atual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2209
+#: terminalDisplay/TerminalDisplay.cpp:2230
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: Usado para manipular o estado do terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2210
+#: terminalDisplay/TerminalDisplay.cpp:2231
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Separador de arquivos/Sair: Pode interromper o processo atual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2258
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3215,31 +3215,31 @@ msgstr ""
 "O texto que você está tentando colar contém caracteres de controle ocultos. "
 "Deseja filtrá-los?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2261
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirmar colagem"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2262
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Colar &sem os caracteres de controle"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2263
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Co&lar tudo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2243
+#: terminalDisplay/TerminalDisplay.cpp:2264
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Cancelar"
 
-#: terminalDisplay/TerminalDisplay.cpp:2480
+#: terminalDisplay/TerminalDisplay.cpp:2501
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3250,17 +3250,17 @@ msgstr ""
 "\">suspensa</a> ao pressionar Ctrl+S. Pressione <b>Ctrl+Q</b> para continuar."
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2535
+#: terminalDisplay/TerminalDisplay.cpp:2556
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Este terminal é somente leitura."
 
-#: terminalDisplay/TerminalDisplay.cpp:2925
+#: terminalDisplay/TerminalDisplay.cpp:2946
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Alterar a &pasta para"
 
-#: terminalDisplay/TerminalDisplay.cpp:2958
+#: terminalDisplay/TerminalDisplay.cpp:2979
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Colar localização"
@@ -3501,7 +3501,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carregar layout de abas do arquivo"
 
-#: Vt102Emulation.cpp:2358
+#: Vt102Emulation.cpp:2354
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4071,7 +4071,7 @@ msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Avançado"
 
-#: widgets/EditProfileDialog.cpp:281
+#: widgets/EditProfileDialog.cpp:283
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4083,7 +4083,7 @@ msgstr ""
 "filename>.<nl/>Ou modifique as permissões do arquivo ou defina um nome "
 "diferente para salvar as configurações em um novo perfil."
 
-#: widgets/EditProfileDialog.cpp:298
+#: widgets/EditProfileDialog.cpp:300
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
@@ -4091,30 +4091,30 @@ msgstr ""
 "O nome do perfil estava vazio; defina um nome para poder salvar as "
 "configurações."
 
-#: widgets/EditProfileDialog.cpp:306
+#: widgets/EditProfileDialog.cpp:308
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Um perfil com o nome \"%1\" já existe."
 
-#: widgets/EditProfileDialog.cpp:341
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Editando o perfil: %2"
 msgstr[1] "Editando %1 perfis: %2"
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:347
 #, kde-format
 msgid "Create New Profile"
 msgstr "Criar novo perfil"
 
-#: widgets/EditProfileDialog.cpp:348
+#: widgets/EditProfileDialog.cpp:350
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Editar o perfil \"%1\""
 
-#: widgets/EditProfileDialog.cpp:439
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4124,7 +4124,7 @@ msgid_plural " columns"
 msgstr[0] " coluna"
 msgstr[1] " colunas"
 
-#: widgets/EditProfileDialog.cpp:441
+#: widgets/EditProfileDialog.cpp:443
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4134,42 +4134,42 @@ msgid_plural " rows"
 msgstr[0] " linha"
 msgstr[1] " linhas"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Bell"
 msgstr "Campainha do sistema"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Notifications"
 msgstr "Notificações do sistema"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Visual Bell"
 msgstr "Campainha visual"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignorar eventos de campainha"
 
-#: widgets/EditProfileDialog.cpp:460
+#: widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Perfil padrão para as novas sessões do terminal em %1"
 
-#: widgets/EditProfileDialog.cpp:565
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Edit Environment"
 msgstr "Editar ambiente"
 
-#: widgets/EditProfileDialog.cpp:566
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Uma variável de ambiente por linha"
 
-#: widgets/EditProfileDialog.cpp:597
+#: widgets/EditProfileDialog.cpp:599
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4177,18 +4177,18 @@ msgid_plural " seconds"
 msgstr[0] " segundo"
 msgstr[1] " segundos"
 
-#: widgets/EditProfileDialog.cpp:696
+#: widgets/EditProfileDialog.cpp:698
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Selecione a pasta inicial"
 
-#: widgets/EditProfileDialog.cpp:1235
+#: widgets/EditProfileDialog.cpp:1237
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Falha ao carregar o esquema <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1414
+#: widgets/EditProfileDialog.cpp:1416
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4197,7 +4197,7 @@ msgstr ""
 "Este esquema de cores usa um fundo transparente, que parece não ser "
 "suportado pelo seu ambiente de trabalho"
 
-#: widgets/EditProfileDialog.cpp:1420
+#: widgets/EditProfileDialog.cpp:1422
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4206,7 +4206,7 @@ msgstr ""
 "O Konsole foi iniciado antes dos efeitos da área de trabalho serem ativados. "
 "Você precisa reiniciar o Konsole para ver o fundo transparente."
 
-#: widgets/EditProfileDialog.cpp:1811
+#: widgets/EditProfileDialog.cpp:1813
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4235,7 +4235,7 @@ msgstr ""
 "esta configuração será ignorada e o arquivo será aberto pelo editor\n"
 "de texto padrão."
 
-#: widgets/EditProfileDialog.cpp:1824
+#: widgets/EditProfileDialog.cpp:1826
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Comando personalizado do editor de texto"

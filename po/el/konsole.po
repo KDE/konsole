@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 02:54+0000\n"
+"POT-Creation-Date: 2022-12-31 02:46+0000\n"
 "PO-Revision-Date: 2021-11-06 10:52+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1938,7 +1938,7 @@ msgstr "Λειτουργία φιλική προς εκτύπωση (μαύρο 
 msgid "&Scale output"
 msgstr "&Κλιμάκωση εξόδου"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:462
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
 #, kde-format
 msgid "Default profile"
 msgstr "Προκαθορισμένο προφίλ"
@@ -3218,59 +3218,59 @@ msgstr "Ενεργοποίηση παραγωγής επισκοπήσεων"
 msgid "Size: %1 x %2"
 msgstr "Μέγεθος: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2169
+#: terminalDisplay/TerminalDisplay.cpp:2190
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Είστε βέβαιοι ότι θέλετε να επικολλήσετε %1 χαρακτήρα;"
 msgstr[1] "Είστε βέβαιοι ότι θέλετε να επικολλήσετε %1 χαρακτήρες;"
 
-#: terminalDisplay/TerminalDisplay.cpp:2170
+#: terminalDisplay/TerminalDisplay.cpp:2191
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Επιβεβαίωση επικόλλησης"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2224
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "^Τέλος κειμένου/διακοπή: έξοδος της τρέχουσας διεργασίας"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2225
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Τέλος μετάδοσης: έξοδος της τρέχουσας διεργασίας"
 
-#: terminalDisplay/TerminalDisplay.cpp:2205
+#: terminalDisplay/TerminalDisplay.cpp:2226
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Κουδούνι: θα επιχειρηθεί η εκπομπή ακουστικής προειδοποίησης"
 
-#: terminalDisplay/TerminalDisplay.cpp:2206
+#: terminalDisplay/TerminalDisplay.cpp:2227
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2207
+#: terminalDisplay/TerminalDisplay.cpp:2228
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "DC3/XOFF: αναστέλλει την έξοδο"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2229
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Αντικατάσταση/Αναστολή: διακόπτει την τρέχουσα διεργασία"
 
-#: terminalDisplay/TerminalDisplay.cpp:2209
+#: terminalDisplay/TerminalDisplay.cpp:2230
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Διαφυγή: για το χειρισμό της κατάστασης του τερματικού"
 
-#: terminalDisplay/TerminalDisplay.cpp:2210
+#: terminalDisplay/TerminalDisplay.cpp:2231
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Διαχωριστικό αρχείου/Έξοδος: ακυρώνει την `τρέχουσα διεργασία"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2258
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3279,31 +3279,31 @@ msgstr ""
 "Το κείμενο που προσπαθείτε να επικολλήσετε περιέχει κρυμμένους χαρακτήρες "
 "ελέγχου, θέλετε να τους φιλτράρετε;"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2261
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Επιβεβαίωση επικόλλησης"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2262
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Επικόλληση χωρί&ς χαρακτήρες ελέγχου"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2263
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Ε&πικόλληση όλων"
 
-#: terminalDisplay/TerminalDisplay.cpp:2243
+#: terminalDisplay/TerminalDisplay.cpp:2264
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Α&κύρωση"
 
-#: terminalDisplay/TerminalDisplay.cpp:2480
+#: terminalDisplay/TerminalDisplay.cpp:2501
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3314,17 +3314,17 @@ msgstr ""
 "Software_flow_control\">ανασταλεί</a> με το πάτημα του Ctrl+S. Πατήστε "
 "<b>Ctrl+Q</b> για να την επαναφέρετε.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2535
+#: terminalDisplay/TerminalDisplay.cpp:2556
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Αυτό το τερματικό είναι για ανάγνωση-μόνο."
 
-#: terminalDisplay/TerminalDisplay.cpp:2925
+#: terminalDisplay/TerminalDisplay.cpp:2946
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Αλλαγή &καταλόγου σε"
 
-#: terminalDisplay/TerminalDisplay.cpp:2958
+#: terminalDisplay/TerminalDisplay.cpp:2979
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Επικόλληση τοποθεσίας"
@@ -3572,7 +3572,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Φόρτωση περιγράμματος καρτελών από αρχείο"
 
-#: Vt102Emulation.cpp:2358
+#: Vt102Emulation.cpp:2354
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4148,7 +4148,7 @@ msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
-#: widgets/EditProfileDialog.cpp:281
+#: widgets/EditProfileDialog.cpp:283
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4160,7 +4160,7 @@ msgstr ""
 "<nl/>Ή αλλάξτε τα δικαιώματα του αρχείου ή αποθηκεύσετε τις ρυθμίσεις σε νέο "
 "προφίλ με άλλο όνομα."
 
-#: widgets/EditProfileDialog.cpp:298
+#: widgets/EditProfileDialog.cpp:300
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
@@ -4168,30 +4168,30 @@ msgstr ""
 "Το όνομα του προφίλ ήταν κενό: δώστε ένα όνομα για να μπορείτε να "
 "αποθηκεύσετε τις ρυθμίσεις."
 
-#: widgets/EditProfileDialog.cpp:306
+#: widgets/EditProfileDialog.cpp:308
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Υπάρχει ήδη ένα προφίλ με το όνομα «%1»."
 
-#: widgets/EditProfileDialog.cpp:341
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Επεξεργασία του προφίλ: %2"
 msgstr[1] "Επεξεργασία %1 προφίλ: %2"
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:347
 #, kde-format
 msgid "Create New Profile"
 msgstr "Δημιουργία νέου προφίλ"
 
-#: widgets/EditProfileDialog.cpp:348
+#: widgets/EditProfileDialog.cpp:350
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Επεξεργασία του προφίλ \"%1\""
 
-#: widgets/EditProfileDialog.cpp:439
+#: widgets/EditProfileDialog.cpp:441
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4201,7 +4201,7 @@ msgid_plural " columns"
 msgstr[0] " στήλη"
 msgstr[1] " στήλες"
 
-#: widgets/EditProfileDialog.cpp:441
+#: widgets/EditProfileDialog.cpp:443
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4211,42 +4211,42 @@ msgid_plural " rows"
 msgstr[0] " γραμμή"
 msgstr[1] " γραμμές"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Bell"
 msgstr "Κουδούνι συστήματος"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Notifications"
 msgstr "Ειδοποιήσεις συστήματος"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Visual Bell"
 msgstr "Οπτικό κουδούνι"
 
-#: widgets/EditProfileDialog.cpp:451
+#: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Να αγνοούνται τα γεγονότα από το κουδούνι"
 
-#: widgets/EditProfileDialog.cpp:460
+#: widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Προκαθορισμένο προφίλ για τις νέες συνεδρίες τερματικού στο %1"
 
-#: widgets/EditProfileDialog.cpp:565
+#: widgets/EditProfileDialog.cpp:567
 #, kde-format
 msgid "Edit Environment"
 msgstr "Επεξεργασία περιβάλλοντος"
 
-#: widgets/EditProfileDialog.cpp:566
+#: widgets/EditProfileDialog.cpp:568
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Μια μεταβλητή περιβάλλοντος ανά γραμμή"
 
-#: widgets/EditProfileDialog.cpp:597
+#: widgets/EditProfileDialog.cpp:599
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4254,18 +4254,18 @@ msgid_plural " seconds"
 msgstr[0] " δευτερόλεπτο"
 msgstr[1] " δευτερόλεπτα"
 
-#: widgets/EditProfileDialog.cpp:696
+#: widgets/EditProfileDialog.cpp:698
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Επιλέξτε αρχικό κατάλογο"
 
-#: widgets/EditProfileDialog.cpp:1235
+#: widgets/EditProfileDialog.cpp:1237
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Αποτυχία φόρτωσης του θέματος <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1414
+#: widgets/EditProfileDialog.cpp:1416
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4274,7 +4274,7 @@ msgstr ""
 "Αυτό το θέμα χρωμάτων έχει ένα διαφανές φόντο, το οποίο δε φαίνεται να "
 "υποστηρίζεται από το σύστημά σας."
 
-#: widgets/EditProfileDialog.cpp:1420
+#: widgets/EditProfileDialog.cpp:1422
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4283,7 +4283,7 @@ msgstr ""
 "Το Konsole ξεκίνησε πριν την ενεργοποίηση των εφέ επιφάνειας εργασίας. "
 "Πρέπει να επανεκκινήσετε το Konsole για να δείτε διαφανές φόντο."
 
-#: widgets/EditProfileDialog.cpp:1811
+#: widgets/EditProfileDialog.cpp:1813
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4312,7 +4312,7 @@ msgstr ""
 "θα αγνοηθεί και το αρχείο θα ανοίξει με τον προκαθορισμένο\n"
 "κειμενογράφο."
 
-#: widgets/EditProfileDialog.cpp:1824
+#: widgets/EditProfileDialog.cpp:1826
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Προσαρμοσμένη εντολή κειμενογράφου"
