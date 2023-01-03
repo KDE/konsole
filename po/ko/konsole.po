@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-28 00:53+0000\n"
+"POT-Creation-Date: 2023-01-03 00:52+0000\n"
 "PO-Revision-Date: 2022-10-03 16:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-i18n-doc@kde.org>\n"
@@ -2226,160 +2226,160 @@ msgstr "프로필 전환"
 msgid "Set &Encoding"
 msgstr "인코딩 설정(&E)"
 
-#: session/SessionController.cpp:806
+#: session/SessionController.cpp:813
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "마우스 추적 허용"
 
-#: session/SessionController.cpp:814
+#: session/SessionController.cpp:821
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "읽기 전용"
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "탭 설정 및 이름 바꾸기(&C)..."
 
-#: session/SessionController.cpp:831
+#: session/SessionController.cpp:838
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "현재 창의 모든 탭(&A)"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:845
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "선택한 탭(&S)..."
 
-#: session/SessionController.cpp:844
+#: session/SessionController.cpp:851
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "없음(&N)"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:859
 #, kde-format
 msgid "Copy Input To"
 msgstr "입력을 다음으로 복사하기"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:866
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "ZModem 업로드(&Z)..."
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:871
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "활동 상태 지켜보기(&A)"
 
-#: session/SessionController.cpp:870
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "응답 없는 상태 지켜보기(&S)"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:883
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "프로세스 완료 지켜보기"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "Enlarge Font"
 msgstr "글꼴 크기 확대"
 
-#: session/SessionController.cpp:891
+#: session/SessionController.cpp:898
 #, kde-format
 msgid "Shrink Font"
 msgstr "글꼴 크기 축소"
 
-#: session/SessionController.cpp:896
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Reset Font Size"
 msgstr "글꼴 크기 초기화"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Send Signal"
 msgstr "시그널 보내기"
 
-#: session/SessionController.cpp:905
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "&Suspend Task"
 msgstr "작업 중단(&S)"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:917
 #, kde-format
 msgid "&Continue Task"
 msgstr "작업 계속(&C)"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "&Hangup"
 msgstr "행업(&H)"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "작업 인터럽트(&I)"
 
-#: session/SessionController.cpp:925
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "&Terminate Task"
 msgstr "작업 종료(&T)"
 
-#: session/SessionController.cpp:930
+#: session/SessionController.cpp:937
 #, kde-format
 msgid "&Kill Task"
 msgstr "작업 죽이기(&K)"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "User Signal &1"
 msgstr "사용자 시그널 1(&1)"
 
-#: session/SessionController.cpp:940
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "User Signal &2"
 msgstr "사용자 시그널 2(&2)"
 
-#: session/SessionController.cpp:957
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "Create New Profile..."
 msgstr "새 프로필 만들기..."
 
-#: session/SessionController.cpp:959
+#: session/SessionController.cpp:966
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "현재 프로필 편집..."
 
-#: session/SessionController.cpp:1076
+#: session/SessionController.cpp:1083
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "이 세션에서 프로그램이 실행 중입니다. 종료하시겠습니까?"
 
-#: session/SessionController.cpp:1080
+#: session/SessionController.cpp:1087
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "이 세션에서 프로그램 '%1'이(가) 실행 중입니다. 닫으시겠습니까?"
 
-#: session/SessionController.cpp:1091 session/SessionController.cpp:1134
+#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
 #, kde-format
 msgid "Confirm Close"
 msgstr "닫기 확인"
 
-#: session/SessionController.cpp:1092
+#: session/SessionController.cpp:1099
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "프로그램 닫기"
 
-#: session/SessionController.cpp:1119
+#: session/SessionController.cpp:1126
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2387,7 +2387,7 @@ msgid ""
 msgstr ""
 "이 세션에서 실행 중인 프로그램이 죽지 않습니다. 강제로 종료하시겠습니까?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1130
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2396,23 +2396,23 @@ msgstr ""
 "이 세션에서 실행 중인 프로그램 '%1'이(가) 죽지 않습니다. 강제로 종료하시겠습"
 "니까?"
 
-#: session/SessionController.cpp:1135
+#: session/SessionController.cpp:1142
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "프로그램 죽이기"
 
-#: session/SessionController.cpp:1975
+#: session/SessionController.cpp:1982
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "다음으로 현재 폴더 열기"
 
-#: session/SessionController.cpp:2042
+#: session/SessionController.cpp:2049
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "다른 이름으로 ZModem 다운로드 저장..."
 
-#: session/SessionController.cpp:2052
+#: session/SessionController.cpp:2059
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2423,13 +2423,13 @@ msgstr ""
 "웨어를 찾을 수 없습니다.</p><p>'rzsz' 또는 'lrzsz' 패키지를 설치해 보십시오."
 "</p>"
 
-#: session/SessionController.cpp:2062
+#: session/SessionController.cpp:2069
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>현재 세션에서 ZModem 파일 전송이 진행 중입니다.</p>"
 
-#: session/SessionController.cpp:2072
+#: session/SessionController.cpp:2079
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2438,7 +2438,7 @@ msgstr ""
 "<p>시스템에서 ZModem 소프트웨어를 찾을 수 없습니다.</p><p>'rzsz' 또는 "
 "'lrzsz' 패키지를 설치해 보십시오.</p>"
 
-#: session/SessionController.cpp:2077
+#: session/SessionController.cpp:2084
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem으로 업로드할 파일 선택"

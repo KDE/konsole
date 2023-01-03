@@ -120,7 +120,7 @@
 >&FDLNotice;</legalnotice>
 
 <date
->9/1/2022</date>
+>10/12/2022</date>
 <releaseinfo
 >KDE Gear 23.04</releaseinfo>
 
@@ -679,7 +679,7 @@
 >Opzioni del menu di contesto <guimenuitem
 >Copia inserimento utente</guimenuitem
 > <guimenuitem
->Copia uscita del comando</guimenuitem
+>Copia risultato del comando</guimenuitem
 > <guimenuitem
 >Copia tranne prompt</guimenuitem
 > può essere utilizzato per filtrare la selezione quando viene copiata negli appunti. </para
@@ -695,6 +695,10 @@
 <listitem
 ><para
 >Il clic sull'inserimento di testo posizionerà il cursore nella posizione del clic. Configurabile nelle impostazioni del profilo.</para
+></listitem>
+<listitem
+><para
+>La pressione del tasto &Ctrl; mentre fai un triplo clic con il mouse sul risultato di un comando, seleziona l'intero risultato di quel comando.</para
 ></listitem>
 </itemizedlist>
 </para>
