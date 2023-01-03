@@ -865,11 +865,8 @@ void TerminalDisplay::focusOutEvent(QFocusEvent *)
     _blinkTextTimer->stop();
     Q_ASSERT(!_textBlinking);
 
-    // If waiting for a triple click - losing focus cancels that
-    if (_needCopyToX11Selection) {
-        copyToX11Selection(true);
-        _needCopyToX11Selection = false;
-    }
+    // If waiting for a triple click - losing focus cancels that (do the pending copy)
+    copyToX11Selection(true);
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent *)
@@ -1132,7 +1129,6 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
     }
 
     if (_possibleTripleClick && (ev->button() == Qt::LeftButton)) {
-        _needCopyToX11Selection = false;
         mouseTripleClickEvent(ev);
         return;
     }
@@ -1198,7 +1194,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
                 extendSelection(ev->pos());
             } else if ((!usesMouseTracking() && !((ev->modifiers() & Qt::ShiftModifier)))
                        || (usesMouseTracking() && ((ev->modifiers() & Qt::ShiftModifier) != 0u))) {
-                _screenWindow->clearSelection();
+                clearSelection();
 
                 pos.ry() += _scrollBar->value();
                 _iPntSel = _pntSel = pos;
@@ -1291,7 +1287,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
             || ev->y() < _dragInfo.start.y() - distance) {
             // we've left the drag square, we can start a real drag operation now
 
-            _screenWindow->clearSelection();
+            clearSelection();
             doDrag();
         }
         return;
@@ -1488,25 +1484,16 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
     if (ev->button() == Qt::LeftButton) {
         if (_dragInfo.state == diPending) {
             // We had a drag event pending but never confirmed.  Kill selection
-            _screenWindow->clearSelection();
+            clearSelection();
         } else {
             if (_actSel > 1) {
                 if (_possibleTripleClick) {
-                    const QString &text = _screenWindow->selectedText(currentDecodingOptions());
+                    const QString text = _screenWindow->selectedText(currentDecodingOptions());
                     if (!text.isEmpty()) {
-                        _needCopyToX11Selection = true;
-                        _savedMimeData = new QMimeData;
-                        _savedMimeData->setText(text);
+                        _doubleClickSelectedText = text;
                         if (_copyTextAsHTML) {
-                            _savedMimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
+                            _doubleClickSelectedHtml = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
                         }
-                        QTimer::singleShot(QApplication::doubleClickInterval(), this, [this]() {
-                            if (_needCopyToX11Selection) {
-                                copyToX11Selection(true);
-                                _needCopyToX11Selection = false;
-                            }
-                            _savedMimeData = nullptr;
-                        });
                     }
                 } else {
                     copyToX11Selection();
@@ -1579,11 +1566,9 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent *ev)
     if (!usesMouseTracking() || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
         const bool appendEnter = (ev->modifiers() & Qt::ControlModifier) != 0u;
 
-        if (_needCopyToX11Selection) {
-            // Currently waiting for a triple click, but a middle click cancels that.
-            copyToX11Selection(true);
-            _needCopyToX11Selection = false;
-        }
+        // If currently waiting for a triple click, a middle click cancels that - copy now
+        copyToX11Selection(true);
+
         if (_middleClickPasteMode == Enum::PasteFromX11Selection) {
             pasteFromX11Selection(appendEnter);
         } else if (_middleClickPasteMode == Enum::PasteFromClipboard) {
@@ -1632,7 +1617,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent *ev)
         return;
     }
 
-    _screenWindow->clearSelection();
+    clearSelection();
     _iPntSel = pos;
     _iPntSel.ry() += _scrollBar->value();
 
@@ -1655,6 +1640,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent *ev)
 
     QTimer::singleShot(QApplication::doubleClickInterval(), this, [this]() {
         _possibleTripleClick = false;
+        copyToX11Selection(true); // this will do nothing if another copy happened in the meantime
     });
 }
 
@@ -2030,7 +2016,7 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine, bool fromTripleCli
 {
     _iPntSel = pos;
 
-    _screenWindow->clearSelection();
+    clearSelection();
 
     _lineSelectionMode = true;
     _wordSelectionMode = false;
@@ -2367,21 +2353,32 @@ void TerminalDisplay::copyToX11Selection(bool useSavedText)
         return;
     }
 
-    QMimeData *mimeData;
+    QString text;
+    QString html;
     if (useSavedText) {
-        mimeData = _savedMimeData;
+        text = _doubleClickSelectedText;
+        html = _doubleClickSelectedHtml;
     } else {
-        const QString &text = _screenWindow->selectedText(currentDecodingOptions());
-        if (text.isEmpty()) {
-            return;
+        text = _screenWindow->selectedText(currentDecodingOptions());
+        if (!text.isEmpty() && _copyTextAsHTML) {
+            html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
         }
+    }
 
-        mimeData = new QMimeData;
-        mimeData->setText(text);
+    if (text.isEmpty()) {
+        return;
+    }
 
-        if (_copyTextAsHTML) {
-            mimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
-        }
+    // Copying the double-click selection *does* double click select + copy.
+    // Copying another selection *cancels* double-click select + copy.
+    // In both cases, no double-click copy is pending anymore.
+    _doubleClickSelectedText.clear();
+    _doubleClickSelectedHtml.clear();
+
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setText(text);
+    if (!html.isEmpty()) {
+        mimeData->setHtml(html);
     }
 
     if (QApplication::clipboard()->supportsSelection()) {
@@ -2597,7 +2594,7 @@ void TerminalDisplay::updateReadOnlyState(bool readonly)
 
 #define SELECT_BY_MODIFIERS                                                                                                                                    \
     if (startSelect) {                                                                                                                                         \
-        _screenWindow->clearSelection();                                                                                                                       \
+        clearSelection();                                                                                                                                      \
         _actSel = 2;                                                                                                                                           \
         screen->selSetSelectionStart(false);                                                                                                                   \
         _selModeByModifiers = true;                                                                                                                            \
@@ -2669,7 +2666,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent *event)
             break;
         case Qt::Key_V:
             if (_actSel == 0 || _selModeByModifiers) {
-                _screenWindow->clearSelection();
+                clearSelection();
                 _actSel = 2;
                 _lineSelectionMode = event->text() == QStringLiteral("V");
                 screen->selSetSelectionStart(_lineSelectionMode);
@@ -3250,4 +3247,11 @@ int TerminalDisplay::bidiMap(Character *screenline,
         }
     }
     return _bidiLineLTR ? lastNonSpace : linewidth - 1;
+}
+
+void TerminalDisplay::clearSelection()
+{
+    _screenWindow->clearSelection();
+    _doubleClickSelectedText.clear();
+    _doubleClickSelectedHtml.clear();
 }

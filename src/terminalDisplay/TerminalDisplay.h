@@ -657,6 +657,9 @@ private:
      */
     void setCenterContents(bool enable);
 
+    // Clear _screenWindow selection and also pending double click selection
+    void clearSelection();
+
     // the window onto the terminal screen which this display
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
@@ -731,10 +734,11 @@ private:
     bool _dropUrlsAsText = false; // always paste URLs as text without showing copy/move menu
 
     Enum::TripleClickModeEnum _tripleClickMode = Enum::SelectWholeLine;
-    bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and deleted
-    // after QApplication::doubleClickInterval() delay
-    bool _needCopyToX11Selection = false; // set in mouseReleaseEvent after mouseDoubleClickEvent
-    QMimeData *_savedMimeData;
+    bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and cleared
+                                       // after QApplication::doubleClickInterval() delay
+    QString _doubleClickSelectedText; // selected text whose copying may be cancelled by further events; copying
+    QString _doubleClickSelectedHtml; // is delayed to prevent a triple-click from generating > 1 entries in the
+                                      // clipboard history (a triple click is a double click at first ;)
 
     QLabel *_resizeWidget = nullptr;
     QTimer *_resizeTimer = nullptr;
