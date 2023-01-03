@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-31 02:46+0000\n"
+"POT-Creation-Date: 2023-01-03 04:17+0000\n"
 "PO-Revision-Date: 2022-11-08 10:41+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2240,135 +2240,135 @@ msgstr "Canvia el perfil"
 msgid "Set &Encoding"
 msgstr "Estableix la &codificació"
 
-#: session/SessionController.cpp:806
+#: session/SessionController.cpp:813
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Permet el seguiment del ratolí"
 
-#: session/SessionController.cpp:814
+#: session/SessionController.cpp:821
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Només de lectura"
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Configura o reanomena la pestanya..."
 
-#: session/SessionController.cpp:831
+#: session/SessionController.cpp:838
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Totes les pest&anyes en la finestra actual"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:845
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "Pestanyes &seleccionades..."
 
-#: session/SessionController.cpp:844
+#: session/SessionController.cpp:851
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Cap"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:859
 #, kde-format
 msgid "Copy Input To"
 msgstr "Copia l'entrada a"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:866
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Envia per &ZModem..."
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:871
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Vigila l'&activitat"
 
-#: session/SessionController.cpp:870
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Vigila el &silenci"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:883
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Vigila la finalització del procés"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Augmenta el tipus de lletra"
 
-#: session/SessionController.cpp:891
+#: session/SessionController.cpp:898
 #, kde-format
 msgid "Shrink Font"
 msgstr "Minva el tipus de lletra"
 
-#: session/SessionController.cpp:896
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Reinicia la mida del tipus de lletra"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Send Signal"
 msgstr "Envia un senyal"
 
-#: session/SessionController.cpp:905
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Suspèn la tasca"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:917
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Continua la tasca"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "&Hangup"
 msgstr "&Penja"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Interromp la tasca"
 
-#: session/SessionController.cpp:925
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Finalitza la tasca"
 
-#: session/SessionController.cpp:930
+#: session/SessionController.cpp:937
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Mata la tasca"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "User Signal &1"
 msgstr "Senyal d'usuari &1"
 
-#: session/SessionController.cpp:940
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "User Signal &2"
 msgstr "Senyal d'usuari &2"
 
-#: session/SessionController.cpp:957
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Crea un perfil nou..."
 
-#: session/SessionController.cpp:959
+#: session/SessionController.cpp:966
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Edita el perfil actual..."
 
-#: session/SessionController.cpp:1076
+#: session/SessionController.cpp:1083
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2377,7 +2377,7 @@ msgstr ""
 "Actualment, hi ha un programa executant-se en aquesta sessió. Esteu segur "
 "que voleu sortir?"
 
-#: session/SessionController.cpp:1080
+#: session/SessionController.cpp:1087
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2386,18 +2386,18 @@ msgstr ""
 "Actualment, s'està executant el programa «%1» en aquesta sessió. Esteu segur "
 "que voleu tancar-la?"
 
-#: session/SessionController.cpp:1091 session/SessionController.cpp:1134
+#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
 #, kde-format
 msgid "Confirm Close"
 msgstr "Confirmació del tancament"
 
-#: session/SessionController.cpp:1092
+#: session/SessionController.cpp:1099
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Tanca el programa"
 
-#: session/SessionController.cpp:1119
+#: session/SessionController.cpp:1126
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2406,7 +2406,7 @@ msgstr ""
 "En aquesta sessió hi ha un programa que no es mor. Esteu segur que el voleu "
 "matar forçadament?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1130
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2415,23 +2415,23 @@ msgstr ""
 "En aquesta sessió hi ha el programa «%1» que no es mor. Esteu segur que el "
 "voleu matar forçadament?"
 
-#: session/SessionController.cpp:1135
+#: session/SessionController.cpp:1142
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Mata el programa"
 
-#: session/SessionController.cpp:1975
+#: session/SessionController.cpp:1982
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Obre la carpeta actual amb"
 
-#: session/SessionController.cpp:2045
+#: session/SessionController.cpp:2052
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Desa la baixada de ZModem a..."
 
-#: session/SessionController.cpp:2055
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2442,14 +2442,14 @@ msgstr ""
 "s'ha trobat cap programari adequat per al ZModem en aquest sistema.</"
 "p><p>Potser hauríeu d'instal·lar el paquet «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2065
+#: session/SessionController.cpp:2072
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>La sessió actual ja té una transferència de fitxer en curs del ZModem.</p>"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2082
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2458,7 +2458,7 @@ msgstr ""
 "<p>No s'ha trobat cap programari adequat al ZModem en aquest sistema.</"
 "p><p>Potser hauríeu d'instal·lar el paquet «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2080
+#: session/SessionController.cpp:2087
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Selecció de fitxers per a l'enviament per ZModem"
