@@ -3,22 +3,22 @@
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020.
 # Lukáš Tinkl <ltinkl@redhat.com>, 2010, 2012.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
-# Vit Pelcak <vpelcak@suse.cz>, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-03 00:52+0000\n"
-"PO-Revision-Date: 2021-11-01 18:42+0100\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2023-01-03 17:04+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 "X-Language: cs_CZ\n"
 "X-Source-Language: en_US\n"
 
@@ -92,7 +92,7 @@ msgstr "Rolování"
 #: ../desktop/sessionui.rc:70
 #, kde-format
 msgid "Session Toolbar"
-msgstr ""
+msgstr "Nástrojový panel sezení"
 
 #: AppColorSchemeChooser.cpp:37
 #, kde-format
@@ -115,7 +115,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr ""
+msgstr "Použít zabudovaný profil namísto výchozího"
 
 #: Application.cpp:54
 #, kde-format
@@ -463,7 +463,7 @@ msgstr "Intenzivní barva"
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
-msgstr ""
+msgstr "Tlumená barva"
 
 #: colorscheme/ColorSchemeEditor.cpp:136
 #, kde-format
@@ -538,7 +538,7 @@ msgstr ""
 #: colorscheme/ColorSchemeEditor.ui:53
 #, kde-format
 msgid "Randomly adjust colors for each session"
-msgstr ""
+msgstr "Náhodně uprav barvy pro každé sezení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
 #: colorscheme/ColorSchemeEditor.ui:60
@@ -550,7 +550,7 @@ msgstr "Rozmazat pozadí"
 #: colorscheme/ColorSchemeEditor.ui:69
 #, kde-format
 msgid "Background color transparency:"
-msgstr ""
+msgstr "Průhlednost barvy pozadí:"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
@@ -563,7 +563,7 @@ msgstr "Procent"
 #: colorscheme/ColorSchemeEditor.ui:103
 #, kde-format
 msgid "Wallpaper transparency:"
-msgstr ""
+msgstr "Průhlednost tapety:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -596,7 +596,7 @@ msgstr "..."
 #: colorscheme/ColorSchemeEditor.ui:165
 #, kde-format
 msgid "Wallpaper scaling:"
-msgstr ""
+msgstr "Měřítko tapety:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
@@ -626,19 +626,19 @@ msgstr ""
 #: colorscheme/ColorSchemeEditor.ui:193
 #, kde-format
 msgid "NoScaling"
-msgstr ""
+msgstr "Neměnit velikost"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
 #, kde-format
 msgid "Wallpaper flip:"
-msgstr ""
+msgstr "Otočení tapety:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Nepřevracet"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
@@ -662,7 +662,7 @@ msgstr "Oboje"
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr ""
+msgstr "Vodorovná kotva:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
@@ -674,7 +674,7 @@ msgstr "Vlevo"
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr ""
+msgstr "Svislá kotva:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
@@ -1237,13 +1237,13 @@ msgstr "Aktivovat nabídku"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr ""
+msgstr "Uložit rozložení karet..."
 
 #: MainWindow.cpp:423
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr ""
+msgstr "Načíst rozložení karet..."
 
 #: MainWindow.cpp:733 MainWindow.cpp:758
 #, kde-format
@@ -1295,7 +1295,7 @@ msgstr "Obecné"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr ""
+msgstr "Pruh karet / oddělovače"
 
 #: MainWindow.cpp:927
 #, kde-format
@@ -1412,12 +1412,12 @@ msgstr ""
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "Zobrazit rychlý přístup"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "Zobrazit rychlé příkazy"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:168
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
@@ -1487,24 +1487,24 @@ msgstr "Smazat"
 #: plugins/QuickCommands/quickcommandswidget.cpp:349
 #, kde-format
 msgid "Warnings (*)"
-msgstr ""
+msgstr "Varování (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
 #, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
-msgstr ""
+msgstr "Nastavení SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
 #, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr ""
+msgstr "Výchozí"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
 msgid "%1 is a folder for SSH entries"
-msgstr ""
+msgstr "%1 je složka pro položky SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:319
@@ -1514,7 +1514,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "SSH Config"
-msgstr ""
+msgstr "Nastavení SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
@@ -1534,12 +1534,12 @@ msgstr "Zobrazit správce SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Zobrazit rychlý přístup pro činnosti SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Položky SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
@@ -1575,7 +1575,7 @@ msgstr "Smazat"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Neměnit"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
@@ -1665,11 +1665,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage Profiles..."
+#, kde-format
 msgid "Manage profile"
-msgstr "Spravovat profily..."
+msgstr "Spravovat profil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -1792,19 +1790,19 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:272
 #, kde-format
 msgid "Add a new SSH Entry"
-msgstr ""
+msgstr "Přidat novou položku SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:286
 #, kde-format
 msgid "Delete selected SSH entry"
-msgstr ""
+msgstr "Odstranit vybranou položku SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit selected entry"
-msgstr ""
+msgstr "Upravit vybranou položku"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:310
@@ -1816,7 +1814,7 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel Add or Edit"
-msgstr ""
+msgstr "Zrušit přidání nebo úpravy"
 
 #: pluginsystem/PluginManager.cpp:83
 #, kde-format
@@ -1873,19 +1871,19 @@ msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr ""
+msgstr " [Pouze čtení]"
 
 #: profile/ProfileModel.cpp:84
 #, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr ""
+msgstr " [Výchozí]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "Zabudovaný profil je vždy dostupný"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2042,7 +2040,7 @@ msgstr "Ticho v '%1' (sezení '%2')"
 #: Vt102Emulation.cpp:1128
 #, kde-format
 msgid "Show session"
-msgstr ""
+msgstr "Zastavit sezení"
 
 #: session/Session.cpp:934
 #, kde-format
@@ -2198,7 +2196,7 @@ msgstr "Nastavit &kódování"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
-msgstr ""
+msgstr "Povolit sledování myši"
 
 #: session/SessionController.cpp:821
 #, kde-format
@@ -2374,7 +2372,7 @@ msgstr ""
 #: session/SessionController.cpp:1982
 #, kde-format
 msgid "Open Current Folder With"
-msgstr ""
+msgstr "Otevřít současnou složku pomocí"
 
 #: session/SessionController.cpp:2049
 #, kde-format
@@ -3213,7 +3211,7 @@ msgstr "Rozdělit pohled nahoře/dole"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr ""
+msgstr "Automaticky rozdělit pohled"
 
 #: ViewManager.cpp:139
 #, kde-format
@@ -3345,13 +3343,13 @@ msgstr "Posunout kartu doleva"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Nastavit sémantickou integraci (bash)"
 
 #: ViewManager.cpp:291
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Zapnout zobrazení sémantické nápovědy"
 
 #: ViewManager.cpp:297
 #, kde-format
@@ -3363,7 +3361,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Stejná velikost pro všechny pohledy"
 
 #: ViewManager.cpp:314
 #, kde-format
@@ -3374,18 +3372,18 @@ msgstr "Přepnout na kartu %1"
 #: ViewManager.cpp:527
 #, kde-format
 msgid "Semantic hints "
-msgstr ""
+msgstr "Sémantická nápověda"
 
 #: ViewManager.cpp:543
 #, kde-format
 msgid "Line numbers "
-msgstr ""
+msgstr "Čísla řádek"
 
 #: ViewManager.cpp:1074
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr ""
+msgstr "Uložit rozložení karet"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3622,7 +3620,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:188
 #, kde-format
 msgid "Use line characters contained in font"
-msgstr ""
+msgstr "Použít znaky řádky obsažené v písmu"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:196
@@ -3848,20 +3846,19 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Komplexní rozložení textu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Obousměrné vykreslování textu"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Režim slov"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3875,7 +3872,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Použít stejné atributy pro celé slovo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
@@ -3885,10 +3882,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Znaky slova:"
+msgstr "Znaky ASCII"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
@@ -3898,16 +3894,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Odpovídat současnému znaku"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
 #, kde-format
 msgid "Emoji Font:"
-msgstr ""
+msgstr "Písmo emotikonu:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
@@ -3919,7 +3914,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "Vynutit směr zleva doprava"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
@@ -4256,31 +4251,31 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:356
 #, kde-format
 msgid "Terminal bell mode:"
-msgstr ""
+msgstr "Režim zvonku terminálu:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:374
 #, kde-format
 msgid "Semantic Integration"
-msgstr ""
+msgstr "Sémantická informace"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Emulace šipek nahoru/dolů"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Kliknutí myši ve vstupním řádku posune kurzorem"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Sémantická nápověda"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4293,7 +4288,7 @@ msgstr ""
 #, kde-format
 msgctxt "Never"
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
@@ -4306,7 +4301,7 @@ msgstr ""
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Při zobrazení nápovědy URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4319,7 +4314,7 @@ msgstr ""
 #, kde-format
 msgctxt "Always"
 msgid "Always"
-msgstr ""
+msgstr "Vždy"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:446
@@ -4329,10 +4324,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Rozmazat pozadí"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
@@ -4342,10 +4336,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Rozmazat pozadí"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
@@ -4564,7 +4557,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:332
 #, kde-format
 msgid "Open files/links by direct click"
-msgstr ""
+msgstr "Otevřít soubory/odkazy po přímém kliknutí"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:343
@@ -4580,12 +4573,15 @@ msgid ""
 "to be shown as another URL or hidden.<br>Make sure you understand the "
 "implications before turning this on."
 msgstr ""
+"<b>VAROVÁNÍ</b>: Tot má dopad na bezpečnost jelikož umožní zobrazení "
+"škodlivých URL jako jiné URL nebo skryté.<br>Před zapnutím se ujistěte, že "
+"rozumíte důsledkům takového rozhodnutí."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileMousePage.ui:368
 #, kde-format
 msgid "Allowed link formats: "
-msgstr ""
+msgstr "Povolené formáty odkazu: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
 #: widgets/EditProfileMousePage.ui:378
@@ -4657,7 +4653,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Zobrazit náhled barvy při přejetí myší"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
@@ -4671,7 +4667,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:455
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
-msgstr ""
+msgstr "Povolit aplikaci terminálu používat kliknutí a přetažení"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:43
@@ -4758,19 +4754,19 @@ msgstr "Zvýraznění:"
 #: widgets/EditProfileScrollingPage.ui:227
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr ""
+msgstr "Zvýraznit nové řádky v pohledu"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:240
 #, kde-format
 msgid "Reflow Lines:"
-msgstr ""
+msgstr "Překreslit řádky:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Reflow lines when terminal resizes"
-msgstr ""
+msgstr "Překreslit řádky při změně velikosti terminálu"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5144,7 +5140,7 @@ msgstr "&Vytrhnout kartu"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr ""
+msgstr "Nas&tavit nebo přejmenovat kartu..."
 
 #: widgets/ViewContainer.cpp:106
 #, kde-format

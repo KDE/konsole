@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-03 00:52+0000\n"
-"PO-Revision-Date: 2023-01-02 06:54+0100\n"
+"PO-Revision-Date: 2023-01-03 08:27+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -157,25 +157,25 @@ msgstr "ცალკე პროცესად გაშვება"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr ""
+msgstr "მენიუს ზოლის ჩვენება. გადაიფარება ნაგულისხმები მნიშვნელობა"
 
 #: Application.cpp:65
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr ""
+msgstr "მენიუს ზოლის დამალვა. გადაიფარება ნაგულისხმები მნიშვნელობა"
 
 #: Application.cpp:66
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr ""
+msgstr "ჩანართის ზოლის ჩვენება. გადაიფარება ნაგულისხმები მნიშვნელობა"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr ""
+msgstr "ჩანართის ზოლის დამალვა. გადაიფარება ნაგულისხმები მნიშვნელობა"
 
 #: Application.cpp:68
 #, kde-format
