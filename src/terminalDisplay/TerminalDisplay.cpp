@@ -209,6 +209,9 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     // so the layout is forced to Left-To-Right
     setLayoutDirection(Qt::LeftToRight);
 
+    // Auto uppercase and predictive text doesn't make sense for terminal.
+    setInputMethodHints(Qt::ImhNoAutoUppercase | Qt::ImhNoPredictiveText);
+
     _contentRect = QRect(_margin, _margin, 1, 1);
 
     // create scroll bar for scrolling output up and down
@@ -2445,28 +2448,11 @@ QVariant TerminalDisplay::inputMethodQuery(Qt::InputMethodQuery query) const
         return imageToWidget(QRect(cursorPos.x(), cursorPos.y(), 1, 1));
     case Qt::ImFont:
         return font();
-    case Qt::ImCursorPosition:
-        // return the cursor position within the current line
-        return cursorPos.x();
-    case Qt::ImSurroundingText: {
-        // return the text from the current line
-        QString lineText;
-        QTextStream stream(&lineText);
-        PlainTextDecoder decoder;
-        decoder.begin(&stream);
-        if (isCursorOnDisplay()) {
-            decoder.decodeLine(&_image[loc(0, cursorPos.y())], _usedColumns, LineProperty());
-        }
-        decoder.end();
-        return lineText;
-    }
-    case Qt::ImCurrentSelection:
-        return QString();
     default:
         break;
     }
 
-    return QVariant();
+    return QWidget::inputMethodQuery(query);
 }
 
 QRect TerminalDisplay::preeditRect() const
