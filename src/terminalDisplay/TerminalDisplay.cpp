@@ -2384,6 +2384,9 @@ void TerminalDisplay::pasteFromClipboard(bool appendEnter)
 {
     QString text;
     const QMimeData *mimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
+    if (mimeData == nullptr) {
+        return;
+    }
 
     // When pasting urls of local files:
     // - remove the scheme part, "file://"
