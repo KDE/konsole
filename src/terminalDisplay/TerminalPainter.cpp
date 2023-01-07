@@ -1069,7 +1069,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
             }
         }
         characterColor = foregroundColor;
-        if (style.rendition.f.cursor != 0) {
+        if (style.rendition.f.cursor != 0 && !m_parentDisplay->cursorBlinking()) {
             updateCursorTextColor(backgroundColor, characterColor);
         }
         if (m_parentDisplay->filterChain()->showUrlHint()) {
