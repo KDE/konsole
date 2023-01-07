@@ -1,287 +1,461 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
  "dtd/kdedbx45.dtd" [
-<!ENTITY % English "INCLUDE">
+<!ENTITY % German "INCLUDE">
 <!ENTITY % addindex "IGNORE">
-<!ENTITY Ahmad.Samir '<personname><firstname>Ahmad</firstname><surname>Samir</surname></personname>'>
-<!ENTITY Ahmad.Samir.mail '<email>a.samirh78@gmail.com</email>'>
+<!ENTITY Ahmad.Samir '<personname
+><firstname
+>Ahmad</firstname
+><surname
+>Samir</surname
+></personname
+>'>
+<!ENTITY Ahmad.Samir.mail '<email
+>a.samirh78@gmail.com</email
+>'>
 ]>
 
 <book id="konsole" lang="&language;">
 
 <bookinfo>
-<title>The &konsole; Handbook</title>
+<title
+>Das Handbuch zu &konsole;</title>
 <authorgroup>
-<author>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
-<author>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
-<author>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
+<author
+>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author
+>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
 
-<othercredit role="developer">
-&Robert.Knight; &Robert.Knight.mail;
-</othercredit>
+<othercredit role="developer"
+>&Robert.Knight; &Robert.Knight.mail; </othercredit>
 
-<othercredit role="developer">
-&Kurt.Hindenburg; &Kurt.Hindenburg.mail;
-</othercredit>
+<othercredit role="developer"
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail; </othercredit>
 
-<othercredit role="developer">
-&Waldo.Bastian; &Waldo.Bastian.mail;
-</othercredit>
+<othercredit role="developer"
+>&Waldo.Bastian; &Waldo.Bastian.mail; </othercredit>
 
-<othercredit role="reviewer">
-&Mike.McBride; &Mike.McBride.mail;
-</othercredit>
+<othercredit role="reviewer"
+>&Mike.McBride; &Mike.McBride.mail; </othercredit>
 
-<!-- TRANS:ROLES_OF_TRANSLATORS -->
+<othercredit role="translator"
+><firstname
+>Thomas</firstname
+><surname
+>Reitelbach</surname
+><affiliation
+><address
+><email
+>tr@erdfunkstelle.de</email
+></address
+></affiliation
+><contrib
+>Deutsche Übersetzung</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Stefan</firstname
+><surname
+>Doll</surname
+><affiliation
+><address
+><email
+>sdoll4@yahoo.com</email
+></address
+></affiliation
+><contrib
+>Deutsche Übersetzung</contrib
+></othercredit
+> 
 
 </authorgroup>
 
 <copyright>
-<year>2000</year><year>2001</year><year>2002</year>
-<holder>&Jonathan.Singer;</holder>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>&Jonathan.Singer;</holder>
 </copyright>
 <copyright>
-    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year><year>2017</year><year>2018</year><year>2020</year><year>2021</year>
-<holder>&Kurt.Hindenburg;</holder>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year
+><year
+>2018</year
+><year
+>2020</year>
+<holder
+>&Kurt.Hindenburg;</holder>
 </copyright>
 
 <copyright>
-    <year>2018</year>
-<holder>&Ahmad.Samir;</holder>
+    <year
+>2018</year>
+<holder
+>&Ahmad.Samir;</holder>
 </copyright>
 
-<legalnotice>&FDLNotice;</legalnotice>
+<legalnotice
+>&FDLNotice;</legalnotice>
 
-<date>2022-12-10</date>
-<releaseinfo>KDE Gear 23.04</releaseinfo>
+<date
+>2021-04-25</date>
+<releaseinfo
+>Anwendungen 21.08</releaseinfo>
 
-<abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
+<abstract
+><para
+>&konsole; ist der Terminal-Emulator für &kde;.</para
+></abstract>
 
 <keywordset>
-<keyword>KDE</keyword>
-<keyword>konsole</keyword>
-<keyword>kdebase</keyword>
-<keyword>command</keyword>
-<keyword>line</keyword>
-<keyword>terminal</keyword>
-<keyword>cli</keyword>
+<keyword
+>KDE</keyword>
+<keyword
+>konsole</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>command</keyword>
+<keyword
+>line</keyword>
+<keyword
+>terminal</keyword>
+<keyword
+>cli</keyword>
 </keywordset>
 
 </bookinfo>
 <chapter id="introduction">
-<title>Introduction</title>
+<title
+>Einführung</title>
 
 <sect1 id="terminal">
-<title>What is a terminal?</title>
+<title
+>Was ist ein Terminal?</title>
 
-<para>&konsole; is an X terminal
-emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.
-</para>
+<para
+>&konsole; ist ein X-Terminal-Emulator, oftmals auch einfach nur als Terminal oder Shell bezeichnet. Es emuliert die Befehlszeile in einem Textfenster. </para>
 
-<para>&konsole; typically runs a command shell, an application that executes commands that you type.
-The shell the &konsole; runs depends on your account settings.
-Consult your operating system documentation to know what the shell is, how to configure it and how to use it.
-</para>
+<para
+>&konsole; führt normalerweise eine Befehlsshell aus, das ist ein Programm, das die von Ihnen eingegebenen Befehle ausführt. Die von &konsole; ausgeführte Shell ist in Ihren Benutzereinstellungen festgelegt. Lesen Sie in der Dokumentation zu Ihrem Betriebssystem nach, welche Shell verwendet wird, wie sie eingerichtet und benutzt werden kann. </para>
 </sect1>
 
 <sect1 id="scrollback">
-<title>Scrollback</title>
+<title
+>Verlaufsspeicher</title>
 
-<para>&konsole; uses the notion of scrollback
-to allow users to view previously displayed output.
-By default, scrollback is on
-and set to save 1000 lines of
-output in addition to what is currently displayed on the screen.
-</para>
-<para>As lines of text scroll off the top of the screen, they can be reviewed
-by moving the scroll bar upwards, scrolling with a mouse wheel or through
-the use of the
-<keycombo action="simul">&Shift;<keycap>Page Up</keycap></keycombo> (to move
-back),
-<keycombo action="simul">&Shift;<keycap>Page Down</keycap></keycombo> (to move forward),
-<keycombo action="simul">&Shift;<keycap>Up Arrow</keycap></keycombo> (to move up a line) and
-<keycombo action="simul">&Shift;<keycap>Down Arrow</keycap></keycombo> (to move down a line) keys.
-</para>
-<para>The amount of scrolling using <keycombo action="simul">&Shift;<keycap>Page Up/Down</keycap></keycombo>
-can be switched between half and full page in the <guilabel>Scrolling</guilabel> tab of the profile configuration
-window (use <menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit Current Profile...</guimenuitem></menuchoice>
-to open this window).
-</para>
-
-</sect1>
-
-<sect1 id="selection">
-<title>Selection Mode</title>
-<para>&konsole; has a selection by keyboard mode. In this mode it is possible to move around the scrollback and select text
-without the mouse.</para>
-
-<para>
-Enter and leave this mode by using the keyboard shortcut (<keycombo action="simul">&Ctrl;&Shift;<keycap>D</keycap></keycombo> by default).
-</para>
-
-<para>
-Moving the cursor: Arrows, <keycap>PageUp</keycap>, <keycap>PageDown</keycap>, <keycap>Home</keycap>, <keycap>End</keycap>.
-</para>
-
-<para>Moving the cursor <application>vi</application> style: h,j,k,l, to move one character, <keycap>Ctrl</keycap>+b,f,u,d for page up/down or half page up/down.</para>
-
-<para>
-Select text by using <keycap>Ctrl</keycap> or <keycap>Shift</keycap> with arrows, or by using <keycap>V</keycap> to start selection, moving the cursor and then <keycap>V</keycap> again to end selection.
-<keycombo>&Shift;<keycap>V</keycap></keycombo> selects whole lines, instead of characters.
-</para>
+<para
+>&konsole; verwendet einen sogenannten Verlaufsspeicher, damit man bereits durchgelaufene Terminal-Ausgaben durchsehen kann. Der Verlaufsspeicher ist in der Voreinstellung aktiviert und speichert maximal 1000 Zeilen (zusätzlich zu dem Text, der aktuell im Terminal-Fenster zu sehen ist). </para>
+<para
+>Text, der nicht mehr im Konsole-Fenster dargestellt wird, lässt sich mit Hilfe der Bildlaufleiste wieder sichtbar machen Die Bildlaufleiste lässt sich mit dem Mauszeiger, dem Mausrad und auch über Tastenkombinationen <keycombo action="simul"
+>&Shift;<keycap
+>Bild auf</keycap
+></keycombo
+> (nach oben), <keycombo action="simul"
+>&Shift;<keycap
+>Bild ab</keycap
+></keycombo
+> (nach unten), <keycombo action="simul"
+>&Shift;<keycap
+>Pfeil hoch</keycap
+></keycombo
+> (eine Zeile nach oben) und <keycombo action="simul"
+>&Shift;<keycap
+>Pfeil runter</keycap
+></keycombo
+> (eine Zeile nach unten) bewegen. </para>
+<para
+>Als Schrittweite beim Blättern mit den Tasten <keycombo action="simul"
+>&Shift;<keycap
+>Bild auf/Bild ab</keycap
+></keycombo
+> kann eine halbe oder eine ganze Seite auf der Karteikarte <guilabel
+>Bildlaufleiste</guilabel
+> im Einrichtungsdialog des Profils ausgewählt werden. Diesen Dialog öffnen Sie mit <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Aktuelles Profil bearbeiten ...</guimenuitem
+></menuchoice
+>. </para>
 
 </sect1>
-
 
 <sect1 id="profiles">
-<title>Profiles</title>
-<para>Profiles allow the user to quickly and easily automate the running
-of common commands.  Examples could include:
-
-<itemizedlist>
-<listitem><para>ssh into another machine</para></listitem>
-<listitem><para>starting an irc session</para></listitem>
-<listitem><para>use tail to watch a file</para></listitem>
+<title
+>Profile</title>
+<para
+>Profile ermöglichen das schnelle und automatische Ausführen häufiger Befehle. Hier einige Beispiele: <itemizedlist>
+<listitem
+><para
+>SSH auf einen Fremdrechner</para
+></listitem>
+<listitem
+><para
+>Starten einer IRC-Sitzung</para
+></listitem>
+<listitem
+><para
+>Eine Datei mittels ‚tail‘ überwachen</para
+></listitem>
 </itemizedlist>
 
 </para>
 
-<para>All new and changed profiles are saved in the user's local home folder in <filename>$<envar>XDG_DATA_HOME</envar>/konsole</filename>.</para>
+<para
+>Alle neuen und geänderten Profile werden im persönlichen Ordner des Benutzers in <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+> gespeichert.</para>
 
-<para>
-Procedure to create a new profile:
-<orderedlist>
-<listitem><para>Click on the menu entry <menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage Profiles...</guimenuitem>
-</menuchoice></para></listitem>
+<para
+>Vorgehensweise zum Erzeugen eines neuen Profils: <orderedlist>
+<listitem
+><para
+>Klicken Sie auf <menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Profile verwalten ...</guimenuitem
+></menuchoice
+></para
+></listitem>
 
-<listitem><para>Switch to the <guibutton>Profiles</guibutton> page.</para></listitem>
+<listitem
+><para
+>Gehen Sie zur Seite <guibutton
+>Profile</guibutton
+>.</para
+></listitem>
 
-<listitem><para>Click on the button <guibutton>New Profile...</guibutton>.</para></listitem>
+<listitem
+><para
+>Klicken Sie auf den Knopf <guibutton
+>Neues Profil ...</guibutton
+>.</para
+></listitem>
 
-<listitem><para>Fill in the first entry with a name.  This is the
-name that will show in the menu, and will be the default label instead
-of <guilabel>Shell</guilabel> when you start a session of this type.
-</para></listitem>
+<listitem
+><para
+>Geben Sie in das erste Eingabefeld einen Namen ein. Dieser Name wird später im Menü angezeigt und die Voreinstellung für die Bezeichnung anstelle von <guilabel
+>Befehlsfenster</guilabel
+> sein, wenn Sie eine Sitzung dieses Typs öffnen. </para
+></listitem>
 
-<listitem><para>Enter a command just as you normally would if you opened a new
-shell and were going to issue that command.  For our first example above, you
-might type <userinput><command>ssh</command> <replaceable>administration</replaceable></userinput>.</para></listitem>
+<listitem
+><para
+>Geben Sie nun einen Befehl fein, so als würden Sie diesen in einer Sitzung eingeben. Bei unserem Beispiel lautet die Eingabe: <userinput
+><command
+>ssh</command
+> <replaceable
+>administration</replaceable
+></userinput
+>.</para
+></listitem>
 
-<listitem><para>On the other tabs of the dialog, configure this session's appearance.
-You can configure a different font, color scheme, $<envar>TERM</envar> type and many
-other settings for each session.</para></listitem>
+<listitem
+><para
+>In den anderen Karteikarten können Sie das Erscheinungsbild der Sitzung anpassen. Sie können eine andere Schrift, ein anderes Farbschema, eine andere Belegung von $<envar
+>TERM</envar
+> und viele andere Einstellungen für jede Sitzung festlegen.</para
+></listitem>
 
-<listitem><para>Press the <guibutton>OK</guibutton> button. The new session
-is now available in the <guilabel>Manage Profiles...</guilabel> dialog.
-</para></listitem>
+<listitem
+><para
+>Drücken Sie auf <guibutton
+>OK</guibutton
+>. Die neue Sitzung befindet sich nun in der Sitzungs-Liste im Dialog <guilabel
+>Profile verwalten</guilabel
+>. </para
+></listitem>
 
 </orderedlist>
 </para>
+
+<para
+>Alle Profile, bei denen die Einstellung <guilabel
+>Im Menü anzeigen </guilabel
+> aktiviert ist, werden im Menü <menuchoice
+><guimenu
+>Datei</guimenu
+><guisubmenu
+>Neues Unterfenster</guisubmenu
+></menuchoice
+> als Einträge in einem Untermenü aufgeführt. Ist nur das Standardprofil aktiviert, wird kein Untermenü angezeigt. </para>
 
 </sect1>
 
 <sect1 id="mousebuttons">
 
-<title>Mouse Buttons</title>
+<title
+>Maustasten</title>
 
-<para>This section details the use of the mouse buttons for the common
-right handed mouse button order.
-For the left handed mouse button order, swap left and right in the text below.
-</para>
+<para
+>Dieser Abschnitt behandelt die Verwendung der Maustasten für die übliche Rechtshändlerbelegung. Wenn Sie eine Tastenbelegung für Linkshänder benutzten, tauschen Sie im folgenden Text Rechts und Links aus. </para>
 
 <variablelist>
 
 <varlistentry>
-<term><mousebutton>Left</mousebutton></term>
+<term
+><mousebutton
+>Linke Taste</mousebutton
+></term>
 
-<listitem><para> All &LMB; clicks will be sent to a mouse-aware
-application running in &konsole;.
-If an application will react on mouse clicks, &konsole;
-indicates this by showing an arrow cursor. If not, an I-beam (bar)
-cursor is shown.</para>
+<listitem
+><para
+>Ein Klick der &LMBn; wird an die Anwendung, die in der Sitzung läuft, weitergeleitet. &konsole; benutzt einen Pfeil als Mauszeiger, wenn das Anwendungsprogramm über eine Mausunterstützung verfügt. Anderenfalls wird ein senkrechter Balken (ein Textzeiger) dargestellt.</para>
 
-<para>Holding the &LMB; down and
-dragging the mouse over the screen with a mouse-unaware application
-running will mark a region of the text. While dragging the mouse, the marked
-text is displayed in reversed color for visual feedback. Select <guimenuitem>Copy</guimenuitem>
-from the <guimenu>Edit</guimenu> menu to copy the marked text to the clipboard for further use
-within &konsole; or another application. The selected text can also be
-dragged and dropped into compatible applications. Hold the &Ctrl; key and
-drag the selected text to the desired location.</para>
+<para
+>Das Bewegen der Maus bei gedrückter &LMBr; (=Ziehen) in einer Anwendung ohne Mausunterstützung markiert einen Textabschnitt. Der ausgewählte Text wird dabei invertiert dargestellt. Mit der Funktion <guimenuitem
+>Kopieren</guimenuitem
+> im Menü <guimenu
+>Bearbeiten</guimenu
+> kann der markierte Text in die Zwischenablage kopiert und dann in &konsole; oder einer anderen Anwendung verwendet werden. Es ist außerdem möglich den Text direkt in ein anderes Anwendungsprogramm zu ziehen. Dazu muss der Text zunächst markiert werden. Anschließend wird der markierte Text angeklickt und bei gedrückter Maustaste in das andere Programm gezogen. Halten Sie die &Ctrl;-Taste gedrückt und ziehen Sie den ausgewählten Text zum Ziel.</para>
 
-<para>Normally, new-line characters are inserted at the end of each
-line selected. This is best for cut and paste of source code, or the output
-of a particular command. For ordinary text, the line breaks are often
-not important. One might prefer, however, for the text to be a stream
-of characters that will be automatically re-formatted when pasted into
-another application. To select in text-stream mode, hold down the
-&Ctrl; key while selecting normally.</para>
+<para
+>Normalerweise werden Zeilenumbrüche des markierten Textes mit kopiert. Das ist sinnvoll bei Quelltexten (von Programmiersprachen) oder der Ausgabe bestimmter Befehle, aber für gewöhnlichen Text wäre eine Auswahl ohne Zeilenumbrüche günstiger. Eine solche Auswahl lässt sich durch gleichzeitiges Drücken der &Ctrl;-Taste während des Markiervorgangs erzeugen.</para>
 
-<para>Pressing the &Ctrl; and &Alt; keys along with the &LMB;
-will select text in columns.
-</para>
+<para
+>Das Betätigen der &LMBn; bei gleichzeitigem Gedrückthalten der Tasten &Ctrl; und &Alt; markiert eine Textspalte (Blockauswahl). </para>
 
-<para>Double-click with the &LMB; to select a word;
-triple-click to select an entire line.</para>
+<para
+>Ein Doppelklick mit der &LMBn; markiert ein Wort – ein Dreifachklick markiert eine ganze Zeile.</para>
 
-<para>If the upper or lower edge of the text area is touched while
-marking, &konsole; scrolls up or down, eventually exposing text within
-the history buffer. The scrolling stops when the mouse stops
-moving.</para>
+<para
+>Wird beim Markieren der Mauszeiger auf den oberen oder unteren Rand des Textfelds bewegt, ergibt sich ein Effekt wie beim Bewegen der Bildlaufleiste. &konsole; zeigt dann Text weiter oben, bzw. weiter unten, im Verlaufsspeicher an. Dieses Rollen durch den Verlaufsspeicher endet, sobald die Mausbewegung beendet wird.</para>
 
-<para>After the mouse is released, &konsole; attempts to keep the text
-in the clipboard visible by holding the marked area reversed. The
-marked area reverts back to normal as soon as the contents of the
-clipboard change, the text within the marked area is altered or the
-&LMB; is clicked.</para>
+<para
+>Wird die Maustaste losgelassen, bleibt der ausgewählte Textabschnitt markiert (=invertierte Darstellung). Die Markierung wird aufgehoben, sobald die Zwischenablage verändert wird, eine Änderung des markierten Textes erfolgt oder die &LMB; betätigt wird.</para>
 
-<para>To mark text in a mouse-aware application (Midnight Commander, for example)
-the &Shift; key has to be pressed when clicking.</para>
+<para
+>Bei Anwendungsprogrammen mit Mausunterstützung (zum Beispiel Midnight Commander) muss zusätzlich die &Shift;-Taste betätigt werden, um Text auszuwählen.</para>
 
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><mousebutton>Middle</mousebutton></term>
+<term
+><mousebutton
+>Mittlere Taste</mousebutton
+></term>
 
-<listitem><para>Pressing the &MMB;
-pastes text currently in the clipboard. Holding down the &Ctrl; key as you
-press the &MMB; pastes the text and appends a new-line. That is convenient
-for executing pasted command quickly, but it can be dangerous so use it
-with caution.
-</para>
+<listitem
+><para
+>Ein Klick mit der &MMBn; fügt Text aus der Zwischenablage ein. Drücken Sie dabei die &Ctrl;-Taste, wird der Text eingefügt und ein Zeilenumbruch angehängt. Dieses Verhalten ist bei der schnellen Ausführung von eingefügten Befehlen nützlich, birgt aber ein gewisses Risiko und sollte daher mit Vorsicht eingesetzt werden. </para>
 
-<note><para>If you have a mouse with only two buttons, pressing both
-the &LMB; and &RMB; together emulates the &MMB; of a three button mouse.</para></note>
+<note
+><para
+>Ist lediglich eine Maus mit zwei Tasten vorhanden, kann die &MMB; durch gleichzeitiges Betätigen der &RMBn; und &LMBn; emuliert werden.</para
+></note>
 
-<para>If you have a <mousebutton>wheel</mousebutton> as the middle button,
-rolling it in a mouse-unaware program will move &konsole;'s scrollbar.</para>
+<para
+>Wenn Sie über ein <mousebutton
+>Mausrad</mousebutton
+> als mittlere Taste verfügen, führt das Bewegen des Mausrades in Anwendungen, die nicht über eine Mausunterstützung verfügen, zum Blättern der Bildlaufleiste von &konsole;.</para>
 
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><mousebutton>Right</mousebutton></term>
+<term
+><mousebutton
+>Rechte Taste</mousebutton
+></term>
 <listitem>
-<para>These items appear in the menu when the &RMB;
-    is pressed:</para>
+<para
+>Diese Einträge werden bei einem Klick mit der &RMBn; im Menü angezeigt:</para>
 <itemizedlist>
-<listitem><para><guimenuitem>Copy</guimenuitem></para></listitem>
-<listitem><para><guimenuitem>Paste</guimenuitem></para></listitem>
-<listitem><para>With a text selection a submenu <guisubmenu>Search for</guisubmenu> with a list of the preferred Web Shortcuts and an option to configure web shortcuts.</para></listitem>
-<listitem><para><guimenuitem>Open File Manager</guimenuitem></para></listitem>
-<listitem><para><guimenuitem>Set Encoding</guimenuitem></para></listitem>
-<listitem><para><guimenuitem>Clear Scrollback</guimenuitem></para></listitem>
-<listitem><para><guimenuitem>Adjust Scrollback...</guimenuitem></para></listitem>
-<listitem><para><guimenuitem>Show Menu Bar</guimenuitem>, only when the menubar is hidden</para></listitem>
-<listitem><para><guimenuitem>Switch Profile</guimenuitem></para></listitem>
-<listitem><para><guimenuitem>Edit Current Profile...</guimenuitem></para></listitem>
-<listitem><para><guimenuitem>Close Tab</guimenuitem></para></listitem>
+<listitem
+><para
+><guimenuitem
+>Kopieren</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Einfügen</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>Mit einer Textauswahl erscheint ein Untermenü <guisubmenu
+>Nach ... suchen</guisubmenu
+> mit einer Liste der bevorzugten Web-Kürzel und einer Option zur Einrichtung von Web-Kürzeln.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>In Dateiverwaltung öffnen</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Kodierung festlegen</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Verlaufsspeicher leeren</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Verlaufsspeicher anpassen ...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Menüleiste anzeigen</guimenuitem
+>, nur wenn die Menüleiste ausgeblendet ist</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Profil wechseln</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Aktuelles Profil bearbeiten ...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Unterfenster schließen</guimenuitem
+></para
+></listitem>
 </itemizedlist>
 
-<para>In a mouse aware application, press the &Shift; key along with the
-&RMB; to get the popup menu.
-</para>
+<para
+>In einer Anwendung mit Mausunterstützung erhalten Sie das Kontextmenü durch Klicken mit der &RMB; bei gedrückter &Shift;-Taste. </para>
 
 </listitem>
 </varlistentry>
@@ -290,307 +464,341 @@ rolling it in a mouse-unaware program will move &konsole;'s scrollbar.</para>
 </sect1>
 
 <sect1 id="drag-and-drop">
-<title>Drag and Drop</title>
-<para>If you drop a file, folder or &URL; on a &konsole; window, a context
-menu appears with these actions:
-</para>
+<title
+>Ziehen und Ablegen</title>
+<para
+>Wenn Sie eine Datei, einen Ordner oder eine &URL; in ein &konsole;-Fenster ziehen und dort ablegen, erscheint ein Kontextmenü mit folgenden Aktionen: </para>
 <screenshot>
-<screeninfo>Drag and Drop Context Menu</screeninfo>
+<screeninfo
+>Kontextmenü für Ziehen und Ablegen</screeninfo>
 <mediaobject>
 <imageobject>
-<imagedata fileref="draganddrop-contextmenu.png" format="PNG" />
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
 </imageobject>
 <textobject>
-<phrase>Drag and Drop Context Menu</phrase>
+<phrase
+>Kontextmenü für Ziehen und Ablegen</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
 <variablelist>
 <varlistentry>
-<term><menuchoice>
-<shortcut>&Shift;</shortcut><guimenuitem>Move Here</guimenuitem> </menuchoice>
-</term> <listitem>
-<para>Move the dropped item into the current folder. This item only appears in
-the context menu, if you have the rights to delete the dropped file or folder.
-</para></listitem>
+<term
+><menuchoice
+><shortcut
+>&Shift;</shortcut
+><guimenuitem
+>Hierher verschieben</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Verschiebt das abgelegte Element in den aktuellen Ordner. Diese Aktion erscheint nur dann im Kontextmenü, wenn Sie die Berechtigung haben, das abgelegte Element an der ursprünglichen Stelle zu löschen. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut>&Ctrl;</shortcut><guimenuitem>Copy Here</guimenuitem> </menuchoice>
-</term> <listitem>
-<para>Copy the dropped item into the current folder.</para></listitem>
+<term
+><menuchoice
+><shortcut
+>&Ctrl;</shortcut
+><guimenuitem
+>Hierher kopieren</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Kopiert das abgelegte Element in den aktuellen Ordner.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo>&Ctrl;&Shift;</keycombo></shortcut><guimenuitem>Link Here</guimenuitem> </menuchoice>
-</term> <listitem>
-<para>Insert a symbolic link to the dropped item.</para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;</keycombo
+></shortcut
+><guimenuitem
+>Hierher verknüpfen</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Erstellt eine symbolische Verknüpfung zum abgelegten Element.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<guimenuitem>Paste Location</guimenuitem> </menuchoice>
-</term> <listitem>
-<para>Insert the full file path of the dropped item at the cursor.</para></listitem>
+<term
+><menuchoice>
+<guimenuitem
+>Speicherort einfügen</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Fügt den vollständigen Dateipfad zum abgelegten Element am Cursor ein.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<guimenuitem>Change Directory To</guimenuitem> </menuchoice>
-</term> <listitem>
-<para>If a folder is dropped, this action appears in the context menu and allows you to
-change the working folder of the &konsole; session.</para></listitem>
+<term
+><menuchoice>
+<guimenuitem
+>Ordner wechseln zu</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Wird ein Ordner abgelegt, erscheint diese Aktion im Kontextmenü und wechselt den Arbeitsordner der &konsole;-Sitzung zum abgelegten Ordner.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut>&Esc;</shortcut><guimenuitem>Cancel</guimenuitem> </menuchoice>
-</term> <listitem>
-<para>Break the drag and drop action.</para></listitem>
+<term
+><menuchoice
+><shortcut
+>&Esc;</shortcut
+><guimenuitem
+>Abbrechen</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Bricht das Ziehen und Ablegen ab.</para
+></listitem>
 </varlistentry>
 
 </variablelist>
 
-<para>If you press the shortcuts before releasing the &LMB; during drag and drop, no context menu appears and
-the actions will be executed immediately.
-</para>
+<para
+>Wenn Sie die Kurzbefehle dieser Aktionen vor dem Loslassen der &LMBn; drücken, erscheint kein Kontextmenü und die Aktionen werden sofort ausgeführt. </para>
 
-<para>If you want to use the &Ctrl; key for drag and drop or disable the context
-menu to insert &URL;s as text by default, enable the corresponding options
-on the <guilabel>Mouse</guilabel> tab in the profile settings dialog.
-</para>
+<para
+>Möchten Sie die &Ctrl;-Taste für Ziehen und Ablegen verwenden oder das Kontextmenü deaktivieren und als Standard &URL;s als Text einfügen, aktivieren Sie diese Einstellungen auf der Karteikarte <guilabel
+>Maus</guilabel
+> im Einstellungsdialog für Profile. </para>
 
-</sect1>
-
-<sect1 id="semantic-shell-integration">
-<title>Semantic Shell Integration</title>
-
-<para>A shell program running in Konsole may emit escape sequences that partition the text
-displayed into three types: shell prompt, user input and command output. Using this semantic information enables
-various enhancements in Konsole.
-
-<itemizedlist>
-<listitem><para>
-<keycombo action="simul">&Ctrl;&Shift;<keycap>PgUp</keycap></keycombo>
-and
-<keycombo action="simul">&Ctrl;&Shift;<keycap>PgDown</keycap></keycombo>
-scroll up/down to previous/next command prompt.</para></listitem>
-<listitem><para>Visual hints:</para>
-<itemizedlist>
-<listitem><para>
-A line is displayed above each prompt, prompt colors are less intense,
-and output colors are more intense.
-</para></listitem>
-<listitem><para>
-A red bar is displayed to the left of input and output lines of commands that resulted in error
-</para></listitem>
-<listitem><para>
-A red background for input and output lines of commands that resulted in error
-</para></listitem>
-<listitem><para>
-A gray bar is displayed to the left of the input and output lines of every other command.
-</para></listitem>
-<listitem><para>
-A gray background for the input and output lines of every other command.
-</para></listitem>
-</itemizedlist>
-<para>
-Each of those may be configured to never show, always show, or only when URL hints are shown. The configuration is in the
-<guilabel>Semantic Integration</guilabel> tab of the <guilabel>General</guilabel> page of the profile configuration
-window.
-</para></listitem>
-
-<listitem><para>
-Context menu options
-<guimenuitem>Copy user input</guimenuitem>,
-<guimenuitem>Copy command output</guimenuitem>, and
-<guimenuitem>Copy except prompt</guimenuitem>
-may be used to filter selection when it is copied to the clipboard.
-</para></listitem>
-<listitem><para>When selection is empty, copy to clipboard action copies the current input line if it is not empty,
-or the last output if there is no current input.
-</para></listitem>
-<listitem><para>Pressing Up/Down arrow when editing a long input, will instead place the cursor one line up/down by
-sending the appropriate number of Left/Right key events to the shell. Configurable in the profile settings.</para></listitem>
-<listitem><para>Clicking the mouse on text input will place the cursor in the clicked location. Configurable in the profile settings.</para></listitem>
-<listitem><para>Pressing the &Ctrl; key while triple clicking the mouse on the output of a command, selects the whole output of that command.</para></listitem>
-</itemizedlist>
-</para>
-
-<para>
-Semantic shell integration needs to be setup in the shell.
-Pressing <keycombo>&Ctrl;&Alt;<keycap>]</keycap></keycombo> will paste the necessary commands needed in bash.
-For other shells, such as fish, zsh, python, etc. consult the relevant program's documentation.
-</para>
-
-</sect1>
-
-
-<sect1 id="complex-text-rendering">
-<title>Complex Text Layout</title>
-
-<para>
-In the <guilabel>Complex Text Layout</guilabel> page of the <guilabel>Edit Profile</guilabel> dialog, you will find options that control
-the rendering of text.
-</para>
-
-<para>
-<itemizedlist>
-<listitem><para>
-<guilabel>Word mode</guilabel> - in this mode (some) strings are displayed in the screen as a whole, instead of a character at a time.
-This allows Qt to render text correctly when the shape of a character depends on the characters before or after it. This might result in incorrect position of some characters.
-</para><para>
-Spaces always break strings, so they are always in the correct positions. This ensures that characters are never too far from their correct position.
-</para></listitem>
-
-<listitem><para>
-<guilabel>Use the same attributes for each whole word</guilabel> - When this is enabled, words are rendered with the same attributes (text color, bold, italic, etc.). If an attribute changes mid-word, it will only take effect after the end of the word. When this is disabled, a new word starts when attributes change. This results in characters changing shape and position when moving the cursor or selecting text.
-</para></listitem>
-
-<listitem><para>
-<guilabel>ASCII characters</guilabel> -
-Group ASCII characters into words as described above. The most noticeable effect of this option is that enabling this shows programming ligatures
-(for fonts that support them). E.g. the string &lt;= may be displayed as ⩽.
-</para></listitem>
-
-<listitem><para>
-<guilabel>Brahmic scripts characters</guilabel> -
-Group Brahmic characters as described above. Without this option (depending on the font) some words may not be connected as they should. With this enabled Brahmic characters may appear out of position. E.g. the third character in the second line might not appear directly under the third character in the first line.
-</para></listitem>
-
-<listitem><para>
-<guilabel>Emoji Font:</guilabel> -
-This allows specifying the font to use for Unicode Emoji characters. If not set, the default profile font will be used, or some fallback font may be used by the system if the glyphs are missing from this font.
-</para></listitem>
-
-<listitem><para>
-<guilabel>Bi-Directional text rendering</guilabel> -
-Reorder right to left characters so Arabic and Hebrew texts appear correctly.
-</para></listitem>
-
-<listitem><para>
-<guilabel>force LTR line direction</guilabel> -
-Lines are always Left to right. Without this, each line's direction is determined by the first character with strong directionality.
-</para></listitem>
-
-<listitem><para>
-<guilabel>Table characters BiDi mode override</guilabel> -
-Consider graphic table characters as strong LTR characters. This allows table containing RTL characters to display correctly, but might cause incorrect order if those characters are used in RTL texts.
-</para></listitem>
-
-</itemizedlist>
-</para>
 </sect1>
 
 </chapter>
 
 <chapter id="commandreference">
-<title>Command Reference</title>
+<title
+>Befehlsreferenz</title>
 
 <sect1 id="menubar">
-<title>The Menubar</title>
+<title
+>Die Menüleiste</title>
 
-<para>The menubar is at the top of the &konsole; window.
-If the menubar is hidden,
-<guimenuitem>Show Menu Bar</guimenuitem> can be reached by
-<mousebutton>right</mousebutton> clicking in the window
-(as long as no full screen application is running in that
-window such as vi, minicom, etc.).  The default shortcut
-is listed after each menu item.
-</para>
-<para>Alternatively you can use the shortcut
-<keycombo action="simul">&Ctrl;&Shift;<keycap>M</keycap></keycombo>
-to show or hide the menubar.
-</para>
+<para
+>Die Menüleiste befindet sich am oberen Rand des &konsole;-Fensters. Wenn die Menüleiste ausgeblendet ist, können Sie sie wieder anzeigen lassen, indem Sie das Kontextmenü mit der &RMBn; aufrufen und den Eintrag <guimenuitem
+>Menüleiste anzeigen</guimenuitem
+> auswählen. Hinter jedem Menüeintrag steht der entsprechende Kurzbefehl. </para>
+<para
+>Außerdem können Sie den Kurzbefehl <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+> benutzen, um die Menüleiste ein- oder auszublenden. </para>
 <sect2 id="file-menu">
-<title>File Menu</title>
+<title
+>Das Menü Datei</title>
 
 <variablelist>
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>N</keycap></keycombo></shortcut>
-<guimenu>File</guimenu><guimenuitem>New Window</guimenuitem>
-</menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Neues Fenster</guimenuitem
+> </menuchoice>
 </term>
-<listitem><para><action>Opens a new separate &konsole; window with the default profile</action>
-</para></listitem></varlistentry>
+<listitem
+><para
+><action
+>Öffnet ein neues &konsole;-Fenster mit dem Standardprofil.</action>
+</para
+></listitem
+></varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>T</keycap></keycombo></shortcut>
-<guimenu>File</guimenu><guimenuitem>New Tab</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Neues Unterfenster</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Opens a new tab with the default profile</action>
-<note><para>
-The first profile in the submenu will always be "Default" which is the
-built-in profile.
-All other profiles will be listed below that in alphabetical order.
-The user specified default profile will be in bold type.
-</para></note>
-</para></listitem></varlistentry>
+<listitem
+><para
+><action
+>Öffnet ein neues Unterfenster mit dem Standardprofil.</action>
+<note
+><para
+>&konsole; hat ein Standardprofil. Alle vom Benutzer hinzugefügten Profile erhalten einen eigenen Eintrag im Untermenü. Wenn nur das Standardprofil angezeigt werden soll, gibt es kein Untermenü. </para
+></note>
+</para
+></listitem
+></varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<guimenu>File</guimenu>
-<guimenuitem>Clone Tab</guimenuitem></menuchoice>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Unterfenster duplizieren</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Attempts to clone the current tab in a new tab</action>
-</para></listitem>
+<listitem
+><para
+><action
+>Öffnet ein neues Unterfenster mit dem gleichen Inhalt wie das aktuelle Unterfenster.</action>
+</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap></keycombo></shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Save Output As...</guimenuitem></menuchoice></term>
-<listitem><para><action>Saves the current scrollback as a text or html
- file</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Ausgabe speichern als ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Speichert den aktuellen Verlaufsspeicher in einer Text- oder &HTML;-Datei.</action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>P</keycap></keycombo></shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Print Screen ...</guimenuitem></menuchoice></term>
-<listitem><para><action>Print the current screen.</action> By default the output is scaled to fit the size of the paper
-being printed on with black text color and no background. In the print dialog these options can be changed on the
-<guilabel>Output Options</guilabel> tab.</para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Bildschirm drucken ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Druckt den aktuellen Bildschirm.</action
+> In der Voreinstellung wird die Ausgabe passend zur Papiergröße skaliert und der Text in schwarzer Farbe ohne Hintergrund gedruckt. Diese Einstellungen können im Druckdialog auf der Karteikarte <guilabel
+>Optionen für die Ausgabe</guilabel
+> geändert werden.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>File</guimenu>
-<guimenuitem>Open File Manager</guimenuitem></menuchoice>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>In Dateiverwaltung öffnen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Opens &kde;'s file manager
-at the current directory</action>.  By default, that is
-<ulink url="help:/dolphin/index.html">&dolphin;</ulink>.
-</para></listitem>
+<listitem
+><para
+><action
+>Öffnet die Dateiverwaltung von &kde;</action
+> mit dem aktuellen Arbeitsordner der Terminalsitzung. Die voreingestellte Anwendung dafür ist <ulink url="help:/dolphin/index.html"
+>&dolphin;</ulink
+>. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>W</keycap></keycombo></shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Close Session</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Unterfenster schließen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Closes the current session</action>
-</para></listitem>
+<listitem
+><para
+><action
+>Schließt das aktive Unterfenster.</action>
+</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>Q</keycap></keycombo></shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Close Window</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Fenster schließen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Quits &konsole;</action></para>
-<note><para>&konsole; will display a confirmation dialog if there is more than one
-session open or if there are certain programs running in any session.
-These dialogs can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
-</para>
+<listitem
+><para
+><action
+>Beendet &konsole;.</action
+></para>
+<note
+><para
+>&konsole; zeigt eine Bestätigungsdialog an, wenn mehrere Unterfenster geöffnet sind. Falls Sie diesen Dialog deaktivieren möchten, so markieren Sie die Option <guibutton
+>Diese Nachfrage nicht mehr anzeigen</guibutton
+>. </para>
+<para
+>Möchten Sie den Bestätigungsdialog wieder anzeigen, löschen Sie den Eintrag <screen
+>[Notification Messages]
+CloseAllTabs=true</screen
+> in <filename
+>$<envar
+>XDG_CONFIG_HOME</envar
+>/konsolerc</filename
+>. </para>
 </note>
 </listitem>
 </varlistentry>
@@ -600,141 +808,309 @@ These dialogs can be disabled by clicking on the <guibutton>Do not ask again</gu
 </sect2>
 
 <sect2 id="edit-menu">
-<title>Edit Menu</title>
+<title
+>Das Menü Bearbeiten</title>
 <variablelist>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>C</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu>
-<guimenuitem>Copy</guimenuitem></menuchoice></term>
-<listitem><para><action>Copies the selected text to the clipboard</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Kopieren</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Kopiert den ausgewählten Text in die Zwischenablage.</action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo
- action="simul">&Ctrl;&Shift;<keycap>V</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guimenuitem>Paste</guimenuitem></menuchoice></term>
-<listitem><para><action>Pastes text from the clipboard at the cursor
-location</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>V</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guimenuitem
+>Einfügen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Fügt Text aus der Zwischenablage an der Cursor-Position ein.</action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<guimenu>Edit</guimenu><guimenuitem>Select All</guimenuitem></menuchoice></term>
-<listitem><para><action>Selects all</action> the text in current window
-</para></listitem>
+<term
+><menuchoice
+><guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Alles auswählen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Wählt</action
+> den gesamten Text im aktuellen Fenstern aus. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<guimenu>Edit</guimenu><guisubmenu>Copy Input To</guisubmenu><guimenuitem>All Tabs in Current Window</guimenuitem></menuchoice></term>
-<listitem><para><action>Allows input from the current session to be sent simultaneously to all sessions in current window</action>
+<term
+><menuchoice
+><guimenu
+>Bearbeiten</guimenu
+><guisubmenu
+>Eingabe kopieren nach</guisubmenu
+> <guimenuitem
+>Alle Unterfenster im aktuellen Fenster</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Eingaben, die in der aktuellen Sitzung gemacht werden, werden gleichzeitig auch an alle Unterfenster im aktuellen Fenster gesendet.</action>
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo
- action="simul">&Ctrl;&Shift;<keycap>.</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guisubmenu>Copy Input To</guisubmenu><guimenuitem>Select Tabs...</guimenuitem></menuchoice></term>
-<listitem><para><action>Allows input from the current session to be sent simultaneously to sessions picked by user</action>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guisubmenu
+>Eingabe kopieren nach</guisubmenu
+> <guimenuitem
+>Unterfenster auswählen ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Eingaben, die in der aktuellen Sitzung gemacht werden, werden gleichzeitig auch an alle ausgewählten Unterfenster gesendet.</action>
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo
- action="simul">&Ctrl;&Shift;<keycap>/</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guisubmenu>Copy Input To</guisubmenu><guimenuitem>None</guimenuitem></menuchoice></term>
-<listitem><para><action>Stop sending input from current session into other sessions</action>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guimenu
+>Eingabe kopieren nach</guimenu
+> <guimenuitem
+>Keine</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Eingabedaten aus der aktuellen Sitzung werden nicht an andere Sitzungen gesendet.</action>
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Edit</guimenu>
-<guisubmenu>Send Signal</guisubmenu></menuchoice></term>
-<listitem><para><action>Send the specified signal to the shell
-process, or other process, that was launched when the new session was
-started</action>.</para><para>Currently available signals are:</para>
+<term
+><menuchoice
+><guimenu
+>Bearbeiten</guimenu
+> <guisubmenu
+>Signal senden</guisubmenu
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Sendet das ausgewählte Signal an das aktuelle Befehlsfenster bzw. die Anwendung, die mit der neuen Sitzung gestartet wurde.</action
+></para
+><para
+>Derzeit stehen folgende Signale zur Verfügung:</para>
 
 <informaltable>
 <tgroup cols="2">
 <tbody>
 <row>
-<entry><errorcode>STOP</errorcode></entry>
-<entry>to stop process</entry>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>Um einen Prozess anzuhalten</entry>
 </row>
 <row>
-<entry><errorcode>CONT</errorcode></entry>
-<entry>continue if stopped</entry>
+<entry
+><errorcode
+>CONT</errorcode
+></entry>
+<entry
+>(=Continue) Um einen angehaltenen Prozess wieder zu starten</entry>
 </row>
 <row>
-<entry><errorcode>HUP</errorcode></entry>
-<entry>hangup detected on controlling terminal, or death of controlling
-process</entry>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>(=Hangup) Signalisiert dem Prozess, dass der Mutterprozess beendet wurde</entry>
 </row>
 <row>
-<entry><errorcode>INT</errorcode></entry>
-<entry>interrupt from keyboard</entry>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>Signalisiert einen Interrupt von der Tastatur</entry>
 </row>
 <row>
-<entry><errorcode>TERM</errorcode></entry>
-<entry>termination signal</entry>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>Sendet das Signal Beenden und ermöglicht dem Prozess das ordnungsgemäße Herunterfahren</entry>
 </row>
 <row>
-<entry><errorcode>KILL</errorcode></entry>
-<entry>kill signal</entry>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>Erzwingt die Prozessbeendigung</entry>
 </row>
 <row>
-<entry><errorcode>USR1</errorcode></entry>
-<entry>user signal 1</entry>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>benutzerdefiniertes Signal 1</entry>
 </row>
 <row>
-<entry><errorcode>USR2</errorcode></entry>
-<entry>user signal 2</entry>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>benutzerdefiniertes Signal 2</entry>
 </row>
 </tbody>
 </tgroup>
 </informaltable>
 
-<para>Refer to your system manual pages for further details by giving the
-command <userinput><command>man</command> <option>7
-signal</option></userinput>.</para></listitem>
+<para
+>Weitere Details sind in den entsprechenden Manual-Seiten verfügbar. Diese lassen sich mit <userinput
+><command
+>man</command
+> <option
+>7 signal</option
+></userinput
+> anzeigen.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo
- action="simul">&Ctrl;&Alt;<keycap>S</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guimenuitem>Configure Tab Settings...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens a dialog box allowing you to change
-the name format, the remote tab title format and the color of the current tab</action>
-(<link linkend="configure-tab-settings-dialog">more info</link>)
-</para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guimenuitem
+>Aktuelle Unterfenster-Einstellungen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+>Öffnet ein Dialogfenster, in dem das Namensformat, das Titelformat entfernter Unterfenster und die Farbe des aktuellen Unterfensters geändert werden kann. Weitere Informationen dazu finden Sie im Kapitel <link linkend="configure-tab-settings-dialog"
+>Unterfenster-Einstellungen</link
+>. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo
- action="simul">&Ctrl;&Alt;<keycap>U</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guimenuitem>ZModem Upload...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens up a dialog to select a file to be uploaded if the required software is installed</action>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>ZModem-Upload ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet einen Dialog zur Auswahl einer Datei, die hochgeladen werden soll, wenn die erforderliche Software installiert ist.</action>
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>F</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guimenuitem>Find...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens a search bar at the bottom of &konsole;'s window
-</action></para>
-<para>This allows for case sensitive, forward or backwards, and regular expressions searches.</para>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Suchen ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet die Suchleiste unten im Fenster von &konsole;. </action
+></para>
+<para
+>Damit können Sie unter Beachtung von Groß- und Kleinschreibung, vorwärts, rückwärts und mit regulären Ausdrücken suchen.</para>
 </listitem>
 </varlistentry>
 <!--FIXME 4.12
@@ -762,21 +1138,51 @@ Various search improvements
  Button text is swapped according to reverse search switch
 -->
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo><keycap>F3</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guimenuitem>Find
-Next</guimenuitem></menuchoice></term>
-<listitem><para><action>Moves to the next search instance
-</action>. If the search bar has the focus, you can use the shortcut &Enter; as well.</para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guimenuitem
+>Weitersuchen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geht zur nächsten Fundstelle des Suchmusters</action
+>. Hat das Suchfeld den Fokus, können Sie auch den Kurzbefehl &Enter; benutzen.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Shift;<keycap>F3</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guimenuitem>Find
-Previous</guimenuitem></menuchoice></term>
-<listitem><para><action>Moves to the previous search instance
-</action>. If the search bar has the focus, you can use the shortcut <keycombo action="simul">&Shift;&Enter;</keycombo> as well.</para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Shift;<keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guimenuitem
+>Frühere suchen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geht zur vorherigen Fundstelle des Suchmusters</action
+>. Hat das Suchfeld den Fokus, können Sie auch den Kurzbefehl <keycombo action="simul"
+>&Shift;&Enter;</keycombo
+> benutzen.</para
+></listitem>
 </varlistentry>
 
 
@@ -784,251 +1190,613 @@ Previous</guimenuitem></menuchoice></term>
 </sect2>
 
 <sect2 id="view-menu">
-<title>View Menu</title>
+<title
+>Das Menü Ansicht</title>
 <variablelist>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;<keycap>(</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Split
-View Left/Right</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Ansicht teilen</guisubmenu
+><guimenuitem
+>Ansicht Links/Rechts teilen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Splits all the tabs into left and right views</action>
-</para><para>
-Any output on one view is duplicated in the other view.
-</para></listitem>
+<listitem
+><para
+><action
+>Teilt die Unterfenster in eine linke und rechte Ansicht.</action>
+</para
+><para
+>Alle Ausgaben in der einen Ansicht sind auch in der anderen Ansicht zu sehen. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;<keycap>)</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Split
-View Top/Bottom</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Ansicht teilen</guisubmenu
+><guimenuitem
+>Ansicht Oben/Unten teilen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Splits all the tabs into top and bottom views</action>
-</para><para>
-Any output on one view is duplicated in the other view.
-</para></listitem>
+<listitem
+><para
+><action
+>Teilt die Unterfenster in eine obere und untere Ansicht.</action>
+</para
+><para
+>Alle Ausgaben in der einen Ansicht sind auch in der anderen Ansicht zu sehen. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>]</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Expand View</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>X</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Ansicht teilen</guisubmenu
+><guimenuitem
+>Aktive Ansicht schließen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Makes the current view larger</action>
-</para></listitem>
+<listitem
+><para
+><action
+>Schließt die aktive Ansicht.</action>
+</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>[</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Shrink View</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Ansicht teilen</guisubmenu
+><guimenuitem
+>Andere Ansichten schließen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Makes the current view smaller</action>
-</para></listitem>
+<listitem
+><para
+><action
+>Schließt alle anderen, nicht aktiven Ansichten.</action>
+</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>E</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Toggle maximize current view</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Ansicht teilen</guisubmenu
+><guimenuitem
+>Ansicht vergrößern</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Toggles the current view between current size and the maximize size</action>
-</para></listitem>
+<listitem
+><para
+><action
+>Vergrößert den Bereich für die aktive Ansicht (wodurch die anderen Ansichten verkleinert werden).</action>
+</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>\</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Equal size to all views</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Ansicht teilen</guisubmenu
+><guimenuitem
+>Ansicht verkleinern</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Sets the same size for all views</action>
-</para></listitem>
+<listitem
+><para
+><action
+>Verkleinert den Bereich für die aktive Ansicht (wodurch die anderen Ansichten vergrößert werden).</action>
+</para
+></listitem>
 </varlistentry>
 
+
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>L</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Detach Current Tab</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Aktuelles Unterfenster verselbständigen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Opens the current tab in a
-separate window</action>
-</para><para>
-Quitting the previous &konsole; window will not
-affect the newly created window.
-</para></listitem>
+<listitem
+><para
+><action
+>Öffnet das aktuelle Unterfenster in einem neuen, eigenständigen Fenster.</action>
+</para
+><para
+>Das Beenden des vorherigen &konsole;-Fensters wird die neue, nun eigenständige Sitzung nicht beeinträchtigen (sie wird nicht geschlossen). </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>H</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Detach Current View</guimenuitem></menuchoice>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Aktuelle Ansicht verselbständigen</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Opens the current split view in a
-separate window</action>
-</para></listitem>
+<listitem
+><para
+><action
+>Öffnet das aktuelle geteilte Ansicht in einem neuen, eigenständigen Fenster.</action>
+</para
+></listitem>
 </varlistentry>
 
-<varlistentry id="save-layout">
-<term><menuchoice>
-<guimenu>View</guimenu><guimenuitem>Save tab layout to file</guimenuitem></menuchoice>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Unterfenster-Layout in Datei speichern</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Allows you to save the tab layout of the current view in a specialized
-&konsole; layout file which can then be loaded to restore one of your favorite layouts.</action>
-</para></listitem>
+<listitem
+><para
+><action
+>Ermöglicht das Speichern des Layouts von Unterfenstern der aktuellen Ansicht in einer besonderen &konsole;-Layoutdatei, die dann wieder benutzt werden kann, um ein Layout zu laden. </action>
+</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<guimenu>View</guimenu><guimenuitem>Load tab layout from file</guimenuitem></menuchoice>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Unterfenster-Layout aus Datei laden</guimenuitem
+></menuchoice>
 </term>
-<listitem><para><action>Allows you to load one of your favorite view layouts from the layout file that
-            has been saved using the <menuchoice><guimenu>View</guimenu><guimenuitem>Save tab layout to file</guimenuitem></menuchoice>
-menu item earlier.</action> The default layouts (2x2, 2x1, and 1x2) can be loaded via toolbar.
-</para></listitem>
+<listitem
+><para
+><action
+>Ermöglicht das Laden eines Ansichts-Layouts aus einer Layoutdatei, die mit dem Menüeintrag <menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Unterfenster-Layout in Datei speichern</guimenuitem
+></menuchoice
+> vorher gespeichert wurde.</action
+>. Die Standardlayouts (2x2, 2x1, and 1x2) können über die Werkzeugleiste geladen werden. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>I</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Monitor for
-Silence</guimenuitem></menuchoice></term>
-<listitem><para><action>Toggles the monitoring of the current tab for
-lack of activity</action>
-</para><para>
-By default, after 10 seconds of inactivity, an info icon will appear on
-the session's tab.
-The type of alerts can be changed through
-<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Notifications</guimenuitem><guimenuitem>Silence in monitored session</guimenuitem></menuchoice>.
-</para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>I</keycap
+></keycombo
+></shortcut
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Auf Inaktivität überwachen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Schaltet die Überwachung des aktuellen Unterfensters auf Inaktivität ein und aus.</action>
+</para
+><para
+>In der Voreinstellung wird nach 10 Sekunden ohne Aktivität ein Symbol auf dem Karteireiter des Unterfensters angezeigt. Der Art des Alarms können Sie mit <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Benachrichtigungen festlegen ...</guimenuitem
+><guimenuitem
+>Keine Aktivität in überwachter Sitzung</guimenuitem
+></menuchoice
+> einstellen. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>A</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Monitor for
-Activity</guimenuitem></menuchoice></term>
-<listitem><para><action>Toggles the monitoring of the current tab for
-activity</action>
-</para><para>
-Upon any activity, an info icon will appear on the session's tab.
-The type of alerts can be changed through
-<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Notifications</guimenuitem><guimenuitem>Activity in monitored session</guimenuitem></menuchoice>.
-</para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Auf Aktivität überwachen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Schaltet die Überwachung des aktuellen Unterfensters auf Aktivität ein und aus.</action>
+</para
+><para
+>In der Voreinstellung wird bei Aktivität ein Symbol auf dem Karteireiter des Unterfensters angezeigt. Der Art des Alarms können Sie mit <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Benachrichtigungen festlegen ...</guimenuitem
+><guimenuitem
+>Aktivität in überwachter Sitzung</guimenuitem
+></menuchoice
+> einstellen. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<guimenu>View</guimenu><guimenuitem>Monitor for
-Process Finishing</guimenuitem></menuchoice></term>
-<listitem><para><action>Toggles the monitoring of the current tab for
-the process finishing</action>.
-</para><para>
-If checked, upon finishing the current process, &konsole; will show a notification <guilabel>The process '<replaceable>name of the process</replaceable>' has finished running in session '<replaceable>name of the session</replaceable>'</guilabel>.
-</para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Auf Prozessende überwachen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+>Schaltet die Überwachung des aktuellen Unterfensters auf das Beenden von Prozessen ein und aus. </para
+><para
+>Ist diese Einstellung aktiviert, wird beim Beenden eines Prozesse die Benachrichtigung <guilabel
+>Der Prozess <replaceable
+>Prozessname</replaceable
+> in der Sitzung <replaceable
+>Sitzungsname</replaceable
+> wurde beendet</guilabel
+> angezeigt. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<guimenu>View</guimenu><guimenuitem>Read-only</guimenuitem></menuchoice></term>
-<listitem><para><action>Toggles the session to be read-only: no input is accepted,
-drag and drop is disabled.
-</action></para></listitem>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Nur lesen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Die Sitzung ist nur lesbar, es ist keine Eingabe möglich, auch Ziehen und Ablegen ist abgeschaltet. </action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;<keycap>+</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Enlarge Font</guimenuitem></menuchoice></term>
-<listitem><para><action>Increases the text font size</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Schrift vergrößern</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Vergrößert die angezeigte Schrift.</action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;<keycap>0</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Reset Font Size</guimenuitem></menuchoice></term>
-<listitem><para><action>Reset the text font size to the profile default</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>0</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Schriftgröße zurücksetzen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Setzt die Schriftgröße auf die Voreinstellung des Profils zurück.</action
+></para
+></listitem>
 </varlistentry>
 
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;<keycap>-</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Shrink Font</guimenuitem></menuchoice></term>
-<listitem><para><action>Decreases the text font size</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Schrift verkleinern</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Verkleinert die angezeigte Schrift.</action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>View</guimenu>
-<guimenuitem>Set Encoding</guimenuitem></menuchoice></term>
-<listitem><para><action>Sets the character encoding</action></para></listitem>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Kodierung festlegen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Stellt die Zeichenkodierung ein.</action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>View</guimenu><guimenuitem>Clear Scrollback</guimenuitem></menuchoice></term>
-<listitem><para><action>Clears the text in the scrollback</action></para>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Verlaufsspeicher leeren</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Leert den Bildschirminhalt des aktuellen Unterfensters.</action
+></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>K</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Clear
-Scrollback and Reset</guimenuitem></menuchoice></term>
-<listitem><para><action>Clears the text in the current tab and scrollback
-and resets the terminal</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>K</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Verlaufsspeicher leeren und zurücksetzen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Leert den Verlaufsspeicher für das aktuelle Unterfenster und setzt das Terminal zurück.</action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycap>F11</keycap></shortcut>
-<guimenu>View</guimenu><guimenuitem>Full Screen Mode</guimenuitem></menuchoice></term>
-<listitem><para><action>Toggles &konsole; filling the entire screen</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F11</keycap
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Vollbildmodus</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Schaltet den Vollbildmodus für &konsole; an bzw. wieder aus.</action
+></para
+></listitem>
 </varlistentry>
 
 </variablelist>
 </sect2>
 
 <sect2 id="bookmarks-menu">
-<title>Bookmarks Menu</title>
+<title
+>Das Menü Lesezeichen</title>
 
 <variablelist>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>B</keycap></keycombo></shortcut>
-<guimenu>Bookmarks</guimenu><guimenuitem>Add Bookmark</guimenuitem></menuchoice></term>
-<listitem><para><action>Adds the current location</action></para></listitem>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Lesezeichen</guimenu
+> <guimenuitem
+>Lesezeichen hinzufügen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Fügt den aktuellen Pfad als Lesezeichen ein.</action
+></para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>Bookmark Tabs as Folder...</guimenuitem></menuchoice></term>
-<listitem><para><action>Adds all tabs to a bookmark folder</action>
-</para><para>
-A dialog will open for the bookmark folder name.
-</para></listitem>
+<term
+><menuchoice
+><guimenu
+>Lesezeichen</guimenu
+><guimenuitem
+>Unterfenster als Lesezeichenordner ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Fügt alle geöffneten Unterfenster als Lesezeichenorder ein.</action>
+</para
+><para
+>Den Namen für den neuen Lesezeichenordner geben Sie in einem Dialog ein. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>New Bookmark Folder...</guimenuitem></menuchoice></term>
-<listitem><para><action>Adds a new folder to the bookmark list</action>
-</para><para>
-A dialog will open for the bookmark folder name.
-</para></listitem>
+<term
+><menuchoice
+><guimenu
+>Lesezeichen</guimenu
+><guimenuitem
+>Neuer Lesezeichenordner ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Erzeugt einen neuen Ordner in der Lesezeichen-Liste.</action>
+</para
+><para
+>Den Namen für den neuen Lesezeichenordner geben Sie in einem Dialog ein. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>Edit Bookmarks</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens the bookmark editor</action></para>
-<note><para>The keditbookmarks program must be installed for this menu item to appear.</para>
-<para>You can use the bookmark editor to manually add URLs.
-Currently, &konsole; accepts the following:
-<itemizedlist mark="opencircle">
-<listitem><para>ssh://user@host:port</para></listitem>
-<listitem><para>telnet://user@host:port</para></listitem>
+<term
+><menuchoice
+><guimenu
+>Lesezeichen</guimenu
+> <guimenuitem
+>Lesezeichen bearbeiten</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet den Lesezeichen-Editor.</action
+></para>
+<note
+><para
+>Das Programm keditbookmarks muss installiert sein, damit dieser Menüeintrag angezeigt wird.</para>
+<para
+>Sie können den Lesezeichen-Editor verwenden, um manuell URLs einzutragen. Die folgenden werden von &konsole; unterstützt: <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://user@host:port</para
+></listitem>
+<listitem
+><para
+>telnet://user@host:port</para
+></listitem>
 </itemizedlist>
-</para></note>
+</para
+></note>
 
 </listitem>
 </varlistentry>
@@ -1036,117 +1804,216 @@ Currently, &konsole; accepts the following:
 </variablelist>
 </sect2>
 
-<sect2 id="plugins-menu">
-<title>Plugins Menu</title>
-
-<para>Any installed plugins will be listed or
-"No plugins available"
-</para>
-
-</sect2>
-
-
 <sect2 id="settings-menu">
-<title>Settings Menu</title>
+<title
+>Das Menü Einstellungen</title>
 <variablelist>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit
-Current Profile...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens a dialog to configure current profile</action>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Aktuelles Profil bearbeiten ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet einen Dialog zur Einstellung des aktuellen Profils.</action>
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Switch Profile
-</guimenuitem></menuchoice></term>
-<listitem><para><action>Switch current profile to a listed profile</action>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Profil wechseln</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Wechselt das aktuelle Profile zu einem Profil aus der Liste.</action>
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage
-Profiles...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens an editor for managing profiles</action>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Profile verwalten ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet einen Dialog zur Verwaltung von Profilen.</action>
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Window
-Color Scheme</guimenuitem></menuchoice></term>
-<listitem><para><action>Change &konsole;'s &GUI; to the specified scheme</action>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Menüleiste anzeigen</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Zeigt die Menüleiste an bzw. blendet sie aus.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Angezeigte Werkzeugleisten</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>-</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Statusleiste anzeigen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Zeigt die Statusleiste an bzw. blendet sie aus.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Sprache einrichten ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet einen Dialog zur Einstellung der Sprache für diese Anwendung.</action>
 </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
-<shortcut><keycombo
- action="simul">&Ctrl;&Shift;<keycap>M</keycap></keycombo></shortcut>
-<guimenu>Settings</guimenu><guimenuitem>Show
-Menu Bar</guimenuitem></menuchoice></term>
-<listitem><para><action>Toggles the menubar being visible</action></para></listitem>
-</varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Tastaturkurzbefehle festlegen ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet einen Dialog zur Einstellung der Kurzbefehle</action
+>. Weitere Informationen zur Einrichtung von Kurzbefehlen finden Sie in den <ulink url="help:/fundamentals/shortcuts.html"
+>&kde;-Grundlagen</ulink
+>.</para>
 
-<varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Toolbars Shown</guimenuitem></menuchoice></term>
-<listitem><para><action>Allows visibility toggling of the &konsole; toolbars</action></para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Show Statusbar</guimenuitem></menuchoice></term>
-<listitem><para><action>Toggles the statusbar being visible</action></para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Language...
-</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens window to choose an interface translation of &konsole;.</action>
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Keyboard
-Shortcuts...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens the keyboard shortcut editor.</action> More on shortcuts configuration
-can be found in the <ulink url="help:/fundamentals/shortcuts.html">&kde; Fundamentals</ulink>.</para>
-
-<para>Additionally &konsole; has a few special shortcuts with no corresponding menu item:</para>
+<para
+>Zusätzlich hat &konsole; einige Kurzbefehle ohne zugehörige Menüeinträge:</para>
 
 <informaltable>
 <tgroup cols="2">
 <thead>
 <row>
-<entry>Shortcut</entry>
-<entry>Description</entry>
+<entry
+>Kurzbefehl</entry>
+<entry
+>Beschreibung</entry>
 </row>
 </thead>
 <tbody>
 <row>
-<entry><keycombo action="simul">&Shift;<keysym>Right</keysym></keycombo></entry>
-<entry>Next Tab</entry>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Pfeil rechts</keysym
+></keycombo
+></entry>
+<entry
+>Nächstes Unterfenster</entry>
 </row>
 <row>
-<entry><keycombo action="simul">&Shift;<keysym>Left</keysym></keycombo></entry>
-<entry>Previous Tab</entry>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Pfeil links</keysym
+></keycombo
+></entry>
+<entry
+>Vorheriges Unterfenster</entry>
 </row>
 <row>
-<entry><keycombo action="simul">&Ctrl;&Alt;<keysym>Left</keysym></keycombo></entry>
-<entry>Move Tab Left</entry>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Pfeil links</keysym
+></keycombo
+></entry>
+<entry
+>Unterfenster nach links verschieben</entry>
 </row>
 <row>
-<entry><keycombo action="simul">&Ctrl;&Alt;<keysym>Right</keysym></keycombo></entry>
-<entry>Move Tab Right</entry>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Pfeil rechts</keysym
+></keycombo
+></entry>
+<entry
+>Unterfenster nach rechts verschieben</entry>
 </row>
 <row>
-<entry><keycombo action="simul">&Ctrl;&Shift;<keysym>Ins</keysym></keycombo></entry>
-<entry>Paste Selection</entry>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>Einfg</keysym
+></keycombo
+></entry>
+<entry
+>Auswahl einfügen</entry>
 </row>
 </tbody>
 </tgroup>
@@ -1156,70 +2023,140 @@ can be found in the <ulink url="help:/fundamentals/shortcuts.html">&kde; Fundame
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-Toolbars...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens <ulink url="help:/fundamentals/config.html#toolbars-items">the toolbar configuration window</ulink></action></para>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Werkzeugleisten einrichten ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet den <ulink url="help:/fundamentals/config.html#toolbars-items"
+>Einrichtungsdialog für die Werkzeugleiste</ulink
+></action
+></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-Notifications...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens the notifications editor</action></para>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Benachrichtigungen festlegen ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet einen Dialog zur Bearbeitung von Benachrichtigungen.</action
+></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-&konsole;...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens the &konsole; settings editor</action></para>
-<para>
-    This dialog has options influencing the appearance and behaviour of the &konsole; window.
-</para>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>&konsole; einrichten ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet einen Dialog zur Einrichtung von &konsole;.</action
+></para>
+<para
+>In diesem Dialog finden Sie Einstellungen zum Erscheinungsbild und Verhalten für das &konsole;-Fenster. </para>
 <itemizedlist>
     <listitem>
-        <para>
-            The <guilabel>General</guilabel> page allows configuring the menubar visibility,
-            remembering the &konsole; window size, running all &konsole; windows in a single process,
-            enabling menu accelerators, showing window title on the titlebar, removing window titlebar and frame, and focusing terminals when the mouse pointer is moved over them.
-            It is also possible to configure the search case sensitivity, usage of the regular expression,
-            highlighting all matches, and the search direction (<guilabel>Search backwards</guilabel> is the default).
-            The <guilabel>General</guilabel> page is also the place where you can <guibutton>Enable all "Don't Ask Again" messages</guibutton>
-            again if they were switched off before.
-        </para>
+        <para
+>Auf der Seite <guilabel
+>Allgemein</guilabel
+> können Sie die Anzeige der Menüleiste, das Speichern der Fenstergröße, die Ausführung aller &konsole;-Fenster in einem Prozess, die Kurzbefehle in Menüeinträgen, die Anzeige der Fenstertitel in der Titelleiste, die Anzeige von Titelleiste und Rahmen und das Fokusverhalten des Terminals beim Überfahren mit dem Mauszeiger festlegen. Im Abschnitt <guilabel
+>Suchen</guilabel
+> legen Sie fest, ob Groß/Kleinschreibung beachtet wird, ob reguläre Ausdrücke verwendet werden, ob Treffer hervorgehoben werden und wie die Richtung der Suche mit <guilabel
+>Rückwärts suchen</guilabel
+> als Standard verläuft. Außerdem können Sie die Anzeige der Meldungen wieder aktivieren, die Sie vorher im Dialog <guilabel
+>Diese Nachfrage nicht mehr anzeigen</guilabel
+> ausgeschaltet haben </para>
     </listitem>
     <listitem>
-        <para>
-            The <guilabel>Profiles</guilabel> page is meant for creating and handling <link linkend="profiles">profiles</link>.
-        </para>
+        <para
+>Auf der Seite <guilabel
+>Profile</guilabel
+> können <link linkend="profiles"
+>Profile</link
+> erstellt und bearbeitet werden. </para>
     </listitem>
     <listitem>
-        <para>
-            Using the <guilabel>Tab Bar/Splitters</guilabel> page you can configure the visibility and
-            placement of tab bar, define tabs behavior and fine-tune the tab buttons options. It is possible to configure if you want to
-            <guilabel>Show 'New Tab' button</guilabel> and <guilabel>Expand individual tab widths to full window</guilabel>
-            or configure <guilabel>Use user-defined stylesheet</guilabel>. The <guilabel>Behavior</guilabel> tab can
-            be used to define the place for the new tabs (<guilabel>At the end</guilabel> or <guilabel>After current tab</guilabel>)
-            and closing of tabs with a &MMB; click.
-        </para>
-        <para>
-            It is also possible to configure visibility of the split headers (<guilabel>When needed</guilabel> (default), <guilabel>Always</guilabel>, or <guilabel>Never</guilabel>) and define the drag handle size for splits (<guilabel>Small</guilabel> (default), <guilabel>Medium</guilabel>, or <guilabel>Large</guilabel>) using the <guilabel>Splits</guilabel> tab of this configuration page.
-        </para>
+        <para
+>Auf der Seite <guilabel
+>Unterfensterleiste / Geteilte Ansicht</guilabel
+> können Sie die Anzeige und Anordnung der Unterfensterleiste, das Verhalten von Unterfenstern und die Anzeige von Knöpfen auf der Unterfensterleiste einstellen. Sie können <guilabel
+>Knöpfe „Neues Unterfenster“ anzeigen</guilabel
+> und <guilabel
+>Breite einzelner Unterfenster auf die volle Fensterbreite erweitern</guilabel
+> oder <guilabel
+>Benutzerdefinierte Stilvorlage verwenden</guilabel
+> auswählen. Auf der Karteikarte <guilabel
+>Verhalten</guilabel
+>kann die Anordnung neuer Unterfenster (<guilabel
+>Am Ende</guilabel
+> oder <guilabel
+>Nach dem aktuelles Unterfenster</guilabel
+>) und das Schließen von Unterfenstern durch Klicken mit der &MMBn; eingestellt werden. </para>
+        <para
+>Sie können auch die Anzeige von Titelzeilen (<guilabel
+>Wenn nötig</guilabel
+> (Standard), <guilabel
+>Immer</guilabel
+> oder <guilabel
+>Niemals</guilabel
+>) einstellen und auf der Karteikarte  <guilabel
+>Geteilte Ansicht</guilabel
+> die Größe der Teilung (<guilabel
+>Klein</guilabel
+> (Standard), <guilabel
+>Mittel</guilabel
+> oder <guilabel
+>Groß</guilabel
+>) festlegen. </para>
     </listitem>
     <listitem>
-        <para>
-            The <guilabel>Temporary Files</guilabel> page is used to define the <link linkend="scrollback">scrollback</link> file location.
-        </para>
+        <para
+>Auf der Seite <guilabel
+>Temporäre Dateien</guilabel
+> kann der Speicherort der <link linkend="scrollback"
+>Verlaufsdatei</link
+> eingestellt werden. </para>
     </listitem>
     <listitem>
-        <para>
-            The <guilabel>Thumbnails</guilabel> page can be used to define the thumbnail size and activation options
-            (you can choose the activation control key from &Shift;, &Alt;, and &Ctrl;).
-        </para>
+        <para
+>Auf der Seite <guilabel
+>Vorschaubilder</guilabel
+> können Sie die Größe der Vorschaubilder und Aktivierungseinstellungen (Tasten &Shift;, &Alt;, and &Ctrl;) festlegen. </para>
         <note>
-            <para>
-                To use the thumbnails feature showing image thumbnails in popups when hovering image items with the mouse pointer, you should enable file underlining for your current profile: <menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit Current Profile...</guimenuitem><guimenuitem>Mouse</guimenuitem><guimenuitem>Miscellaneous</guimenuitem><guimenuitem>Underline files</guimenuitem></menuchoice>.
-            </para>
+            <para
+>Um diese Funktion zur Anzeige von Vorschaubildern in Aufklappfenstern heim Überfahren von Bildereinträgen mit dem Mauszeiger zu verwenden, müssen Sie das Unterstreichen von Dateinamen im aktuellen Profil einschalten:  <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Aktuelles Profil bearbeiten ...</guimenuitem
+><guimenuitem
+>Maus</guimenuitem
+><guimenuitem
+>Verschiedenes</guimenuitem
+><guimenuitem
+>Dateien unterstreichen</guimenuitem
+></menuchoice
+>. </para>
         </note>
     </listitem>
 </itemizedlist>
@@ -1230,79 +2167,139 @@ Notifications...</guimenuitem></menuchoice></term>
 </sect2>
 
 <sect2 id="help-menu">
-<title>Help Menu</title>
-<para>&konsole; has the some of the common &kde; <guimenu>Help</guimenu>
-menu items, for more information read the section about the <ulink url="help:/fundamentals/menus.html#menus-help">Help Menu</ulink>
-of the &kde; Fundamentals.
-</para><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+<title
+>Das Menü Hilfe</title>
+<para
+>&konsole; benutzt einige der bekannten &kde;-Einträge im Menü <guimenu
+>Hilfe</guimenu
+>, weitere Informationen dazu finden Sie im Abschnitt über das Menü <ulink url="help:/fundamentals/menus.html#menus-help"
+>Hilfe</ulink
+> der &kde;-Grundlagen. </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
 </sect2>
 
 </sect1>
 
 <sect1 id="console-dialogs">
-<title>&konsole; Dialogs</title>
+<title
+>&konsole;s Dialoge</title>
 
 <sect2 id="configure-tab-settings-dialog">
-<title>Configure Tab Settings Dialog</title>
+<title
+>Dialog Unterfenster-Einstellungen</title>
 
-<para>The name format, the remote tab title format, and the color of the current tab can be changed from this dialog.
-The dialog can be displayed via the menu, the shortcut <keycombo
- action="simul">&Ctrl;&Alt;<keycap>S</keycap></keycombo> or by
-double-clicking on the tab in the tab bar.
-These changes are temporary and can be made permanent by editing the current profile.
-</para>
+<para
+>In diesem Dialog kann das Namensformat, das Titelformat entfernter Unterfenster und die Farbe des aktuellen Unterfensters geändert werden. Dieser Dialog kann über das Menü, den Kurzbefehl <keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+> oder durch Doppelklicken auf den Karteireiter des Unterfensters geöffnet werden. Diese Änderungen sind nur temporär. Werden die Einstellungen der Unterfenster im aktuellen Profil geändert, so bleiben diese dauerhaft erhalten. </para>
 
-<para>
-&konsole; will substitute these tokens for local tabs:
-</para>
+<para
+>&konsole; ersetzt in lokalen Unterfenstern folgende Zeichen durch Werte: </para>
 <itemizedlist mark="opencircle">
-<listitem><para>%n : program name</para></listitem>
-<listitem><para>%d : current directory (short)</para></listitem>
-<listitem><para>%D : current directory (long)</para></listitem>
-<listitem><para>%h : local host (short)</para></listitem>
-<listitem><para>%u : user name</para></listitem>
-<listitem><para>%B : user's Bourne prompt sigil ($ = normal user, # = superuser)</para></listitem>
-<listitem><para>%w : window title set by shell</para></listitem>
-<listitem><para>%# : session number</para></listitem>
+<listitem
+><para
+>%n : Programmname</para
+></listitem>
+<listitem
+><para
+>%d : Aktueller Ordner (Kurzform)</para
+></listitem>
+<listitem
+><para
+>%D : Aktueller Ordner (Langform)</para
+></listitem>
+<listitem
+><para
+>%h : Lokaler Rechner (Kurzform)</para
+></listitem>
+<listitem
+><para
+>%u : Benutzername</para
+></listitem>
+<listitem
+><para
+>%B: Benutzerzeichen der Bourne-Eingabeaufforderung ($ = Normaler Benutzer, # = Systemverwalter)</para
+></listitem>
+<listitem
+><para
+>%w : Durch Shell gesetzter Fenstertitel</para
+></listitem>
+<listitem
+><para
+>%# : Sitzungsnummer</para
+></listitem>
 </itemizedlist>
 
-<para>
-&konsole; will substitute these tokens for remote tabs:
-<itemizedlist mark="opencircle">
-    <listitem><para>%c : current program</para></listitem>
-    <listitem><para>%h : remote host (short)</para></listitem>
-    <listitem><para>%H : remote host (long)</para></listitem>
-    <listitem><para>%u : user name</para></listitem>
-    <listitem><para>%U : user name@ (if given)</para></listitem>
-    <listitem><para>%w : window title set by shell</para></listitem>
-    <listitem><para>%# : session number</para></listitem>
+<para
+>&konsole; ersetzt folgende Zeichen für Unterfenster auf entfernten Rechnern: <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c : Aktuelles Programm</para
+></listitem>
+    <listitem
+><para
+>%h : Entfernter Rechner (Kurzform)</para
+></listitem>
+    <listitem
+><para
+>%H : Entfernter Rechner (Langform)</para
+></listitem>
+    <listitem
+><para
+>%u : Benutzername</para
+></listitem>
+    <listitem
+><para
+>%U : Benutzername@, wenn angegeben</para
+></listitem>
+    <listitem
+><para
+>%w : Durch Shell gesetzter Fenstertitel</para
+></listitem>
+    <listitem
+><para
+>%# : Sitzungsnummer</para
+></listitem>
 </itemizedlist>
 
 </para>
-<para>
-Examples:
-<itemizedlist mark="opencircle">
+<para
+>Beispiele: <itemizedlist mark="opencircle">
 
-<listitem><para>
-<userinput>%d : %n</userinput>
- with /usr/src as current directory and running
-<application>bash</application> will display
-<guibutton>src : bash</guibutton>
-</para></listitem>
+<listitem
+><para
+><userinput
+>%d : %n</userinput
+> mit /usr/src als aktuellem Arbeitsordner und dem laufenden Programm <application
+>bash</application
+> im ersten Unterfenster wird als <guibutton
+>src : bash</guibutton
+> angezeigt. </para
+></listitem>
 
-<listitem><para>
-<userinput>%D : %n</userinput>
- with /usr/src as current directory and running
-<application>top</application> will display
-<guibutton>/usr/src : top</guibutton>
-</para></listitem>
+<listitem
+><para
+><userinput
+>%D : %n</userinput
+> mit /usr/src als aktuellem Arbeitsordner und dem laufenden Programm <application
+>top</application
+> im ersten Unterfenster wird als <guibutton
+>/usr/src : top</guibutton
+> angezeigt. </para
+></listitem>
 
-<listitem><para>
-<userinput>%w (%#)</userinput>
- with ~ as current directory and running
-<application>vim</application> in the first tab will display
-<guibutton>[No Name] (~) - VIM(1)</guibutton>
-</para></listitem>
+<listitem
+><para
+><userinput
+>%w (%#)</userinput
+> mit ~ als aktuellem Arbeitsordner und den laufenden Programm <application
+>vim</application
+> im ersten Unterfenster wird als <guibutton
+>[Kein Name] ~ - vim(1)</guibutton
+> angezeigt. </para
+></listitem>
 
 </itemizedlist>
 
@@ -1311,37 +2308,22 @@ Examples:
 </sect2>
 
 <sect2 id="copy-input-dialog">
-<title>Copy Input Dialog</title>
+<title
+>Der Dialog „Eingabe kopieren“</title>
 
-<para>The text entered in one tab can simultaneously be sent to other tabs.
-This dialog allows you to select which tabs will get that input.
-The current tab will be greyed out.
-<!--
-<screenshot>
-<screeninfo>A picture of the copy input dialog</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="copyinputdialog.png" format="PNG" />
-</imageobject>
-<textobject>
-<phrase>A picture of the copy input dialog</phrase>
-</textobject>
-</mediaobject>
-</screenshot>
--->
-
-</para>
+<para
+>Der in einem Unterfenster eingegebene Text kann gleichzeitig an andere Unterfenster gesendet werden. In diesem Dialog wird eingestellt, welche Unterfenster die Eingabe erhalten. Das aktuelle Unterfenster kann nicht ausgewählt werden und wird in grauer Farbe angezeigt. </para>
 
 </sect2>
 
 <sect2 id="scrollback-options-dialog">
-<title>Adjust Scrollback Dialog</title>
+<title
+>Der Dialog „Verlauf anpassen“</title>
 
-<para>The
-<link linkend="scrollback">scrollback</link>
-options for the history size can be changed in this dialog.  Any changes are
-for the current tab only and will not be saved to the profile.
-</para>
+<para
+>In diesem Dialog kann die Größe des <link linkend="scrollback"
+>Verlaufspeichers</link
+> geändert werden. Alle Änderungen betreffen nur das aktuelle Unterfenster und werden nicht im Profil gespeichert. </para>
 
 </sect2>
 
@@ -1350,338 +2332,624 @@ for the current tab only and will not be saved to the profile.
 </chapter>
 
 <chapter id="command-line-options">
-<title>Command-line Options</title>
+<title
+>Befehlszeilenoptionen</title>
 
-<para>When &konsole; is started from the command line, various options
-can be specified to modify its behavior.</para>
+<para
+>Wird &konsole; von der Befehlszeile gestartet, lässt sich das Verhalten des Programms über verschiedene Optionen beeinflussen.</para>
 
 <variablelist>
 <varlistentry>
-<term><option>--help</option></term>
-<listitem><para><action>List various options</action>.</para></listitem>
+<term
+><option
+>--help</option
+></term>
+<listitem
+><para
+><action
+>Zeigt eine Liste der verfügbaren Parameter an</action
+>.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--profile</option> <parameter>file</parameter></term>
-<listitem><para><action>Start &konsole;</action> using the specified profile
-instead of the default profile.</para></listitem>
+<term
+><option
+>--profile</option
+> <parameter
+>Datei</parameter
+></term>
+<listitem
+><para
+><action
+>Startet &konsole;</action
+> mit dem angegebenen Profil anstatt des Standardprofils.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--layout</option> <parameter>file</parameter></term>
-<listitem><para><action>Start &konsole;</action> using a <link linkend="save-layout">saved &JSON; layout file</link>.</para></listitem>
+<term
+><option
+>--fallback-profile</option
+></term>
+<listitem
+><para
+>Internes Standardausweichprofil verwenden. Diese Option ist eine Kurzform von <option
+>--profile</option
+> <parameter
+>FALLBACK/</parameter
+>.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--builtin-profile</option></term>
-<listitem><para>Use the built-in profile instead of the current default profile.</para></listitem>
+<term
+><option
+>--workdir</option
+> <parameter
+>Startordner</parameter
+></term>
+<listitem
+><para
+><action
+>Startet</action
+> im Arbeitsordner <parameter
+>Startordner</parameter
+>.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--workdir</option> <parameter>dir</parameter></term>
-<listitem><para><action>Open with</action>
-<parameter>dir</parameter> as the initial working directory.</para></listitem>
+<term
+><option
+>--hold, --noclose</option
+></term>
+<listitem
+><para
+>Die erste Sitzung <action
+>nicht automatisch schließen</action
+>, nachdem sie beendet wurde. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--hold, --noclose</option></term>
-<listitem><para><action>Do not close</action> the initial session automatically when it ends.
-</para></listitem>
+<term
+><option
+>--new-tab</option
+></term>
+<listitem
+><para
+>Unterfenster in vorhandenem Fenster anstelle eines neuen Fensters öffnen. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--new-tab</option></term>
-<listitem><para><action>Create a new tab</action> in an existing window rather than creating a new window.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--tabs-from-file </option><parameter>file</parameter></term>
-<listitem><para><action>Create tabs</action> as specified in the given tabs configuration file.
-</para>
-<note><para>The file has one tab per line in the following format:</para>
-<para>Each line specifies a tab to open using up to 4 fields specifying how it is to open.
-Fields are delimited with <userinput>;;</userinput> and a field name must have a <userinput>:</userinput> appended.
-Empty lines or lines with <userinput>#</userinput> at the beginning are ignored, so you can use line beginning with
-<userinput>#</userinput> to add comments.
-</para>
+<term
+><option
+>--tabs-from-file</option
+> <parameter
+>Datei</parameter
+></term>
+<listitem
+><para
+><action
+>Erstellt Unterfenster</action
+> gemäß der angegebenen Einrichtungsdatei für Unterfenster. </para>
+<note
+><para
+>Die Datei enthält für jedes Unterfenster eine Zeile im folgenden Format:</para>
+<para
+>Jede Zeile definiert ein zu öffnendes Unterfenster mit vier Einträgen, die festlegen, wie das Unterfenster geöffnet wird. Die Einträge werden durch <userinput
+>;;</userinput
+> getrennt, ein Feldbezeichner muss mit einem <userinput
+>:</userinput
+> abgeschlossen werden. Leere Zeilen oder Zeilen mit <userinput
+>#</userinput
+> am Anfang werden ignoriert. Daher können Sie <userinput
+>#</userinput
+> am Zeilenanfang benutzen, um Kommentare hinzuzufügen. </para>
 
 <simplelist>
-<member><userinput>title:</userinput> a name for this tab, tab default if blank or not specified</member>
-<member><userinput>workdir:</userinput> working directory, <filename class="directory"> ~</filename> if blank or not specified</member>
-<member><userinput>profile:</userinput> a &konsole; profile to use, the default if blank or not specified</member>
-<member><userinput>command:</userinput> a command to run</member>
+<member
+><userinput
+>title:</userinput
+> ein Name für diese Unterfenster. Es wird der Standard verwendet, wenn diese Option keinen Wert hat oder fehlt.</member>
+<member
+><userinput
+>workdir:</userinput
+> Arbeitsordner, <filename class="directory"
+> ~</filename
+> wird verwendet, wenn kein Arbeitsordner angegeben wurde oder diese Option fehlt.</member>
+<member
+><userinput
+>profile:</userinput
+> ein &konsole;-Profil, das benutzt werden soll. Es wird das Standardprofil verwendet, wenn diese Option keinen Wert hat oder nicht angegeben wurde.</member>
+<member
+><userinput
+>command:</userinput
+> ein auszuführender Befehl.</member>
 </simplelist>
-<para>Each line should contain at least one of <userinput>command</userinput> or <userinput>profile</userinput> field.
-</para>
-<para>Example: <userinput>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput></para>
+<para
+>Jede Zeile muss mindestens ein Feld <userinput
+>command</userinput
+> oder <userinput
+>profile</userinput
+> enthalten. </para>
+<para
+>Beispiel: <userinput
+>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput
+></para>
 </note>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--background-mode</option></term>
-<listitem><para><action>Start &konsole;</action> in the background and bring to the front when <keycombo action="simul">&Ctrl;&Shift;<keycap>F12</keycap></keycombo> (by default) is pressed.
-</para></listitem>
+<term
+><option
+>--background-mode</option
+></term>
+<listitem
+><para
+><action
+>&konsole; im Hintergrund starten</action
+> und hervorholen, wenn <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F12</keycap
+></keycombo
+> (Standard) gedrückt wird. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--separate</option></term>
-<term><option>--nofork</option></term>
-<listitem><para><action>Run</action> the new instance of &konsole; in a separate process.
-</para></listitem>
+<term
+><option
+>--separate</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+><action
+>Führt</action
+> eine neue Instanz von &konsole; in einem getrennten Prozess aus. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--show-menubar</option></term>
-<listitem><para><action>Show</action> the menubar, overriding the default behavior.
-</para></listitem>
+<term
+><option
+>--show-menubar</option
+></term>
+<listitem
+><para
+><action
+>Zeigt</action
+> die Menüleiste an und überschreibt das Standardverhalten. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--hide-menubar</option></term>
-<listitem><para><action>Hide</action> the menubar, overriding the default behavior.
-</para></listitem>
+<term
+><option
+>--hide-menubar</option
+></term>
+<listitem
+><para
+><action
+>Blendet</action
+> die Menüleiste aus und überschreibt das Standardverhalten. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--show-tabbar</option></term>
-<listitem><para><action>Show</action> the tabbar, overriding the default behavior.
-</para></listitem>
+<term
+><option
+>--show-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Zeigt</action
+> die Unterfensterleiste an und überschreibt das Standardverhalten. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--hide-tabbar</option></term>
-<listitem><para><action>Hide</action> the tabbar, overriding the default behavior.
-</para></listitem>
+<term
+><option
+>--hide-tabbar</option
+></term>
+<listitem
+><para
+><action
+>Blendet</action
+> die Unterfensterleiste aus und überschreibt das Standardverhalten. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--fullscreen</option></term>
-<listitem><para><action>Start &konsole; in fullscreen mode</action>.</para></listitem>
+<term
+><option
+>--fullscreen</option
+></term>
+<listitem
+><para
+><action
+>Startet &konsole; im Vollbildmodus</action
+>.</para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--notransparency</option></term>
-<listitem><para><action>Disable</action> transparent backgrounds, even if the system supports them.
-</para></listitem>
+<term
+><option
+>--notransparency</option
+></term>
+<listitem
+><para
+><action
+>Keinen transparenten Hintergrund verwenden</action
+>, auch wenn dies vom System unterstützt wird. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--list-profiles</option></term>
-<listitem><para><action>List</action> all available profiles.
-</para></listitem>
+<term
+><option
+>--list-profiles</option
+></term>
+<listitem
+><para
+><action
+>Listet</action
+> alle verfügbaren Profile auf. </para
+></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--list-profile-properties</option></term>
+<term
+><option
+>--list-profile-properties</option
+></term>
 <listitem>
-<para><action>List</action> all possible properties with name and type. See option <option>-p</option>.
-</para>
-<para>
-For more information, please visit
-<ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html">&konsole; API Reference</ulink>.
-<!--FIXME update url to kf5 when available on api.kde.org-->
-</para>
+<para
+><action
+>Zeigt</action
+> eine Liste mit allen möglichen Profileigenschaften mit Name und Typ an. Siehe auch die Option <option
+>-p</option
+>. </para>
+<para
+>Weitere Informationen finden Sie in der <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
+>API-Referenz zu &konsole;</ulink
+>. </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>-p</option> <parameter>property=value</parameter></term>
-<listitem><para><action>Change</action> the value of a profile property.</para>
+<term
+><option
+>-p</option
+> <parameter
+>property=Wert</parameter
+></term>
+<listitem
+><para
+>Den Wert einer Profil-Eigenschaft ändern.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>-e</option> <parameter>command</parameter></term>
-<listitem><para><action>Execute</action>
-<parameter>command</parameter> instead of the normal shell.</para>
-<note><para>This option will catch all following arguments passed to &konsole;, and execute it as <parameter>command</parameter>. So this option should always be used as the last option.</para></note>
+<term
+><option
+>-e</option
+> <parameter
+>Befehl</parameter
+></term>
+<listitem
+><para
+><action
+>Führt</action
+> <parameter
+>Befehl</parameter
+> aus anstelle der normalen Befehlszeile.</para>
+<note
+><para
+>Diese Option übernimmt alle folgenden an &konsole; übergebenen Parameter und führt sie mit dem <parameter
+>Befehl</parameter
+> aus. Daher sollte diese Option immer zuletzt angegeben werden.</para
+></note>
 </listitem>
 </varlistentry>
 
 </variablelist>
 
-<para>&konsole; also accepts generic &Qt; and &kf5-full; options, see man pages qt5options and kf5options.</para>
+<para
+>&konsole; versteht auch allgemeine &Qt;- und &kf5-full;-Parameter, lesen Sie dazu die Benutzerhandbücher qt5options und kf5options.</para>
 
 </chapter>
 
 <chapter id="scripting">
-<title>Scripting &konsole;</title>
+<title
+>Skripte für &konsole;</title>
 
-<para>&konsole; does support numerous methods that can be used with &DBus;.
-</para>
-<para>There are two ways to use the &DBus; interface: &Qt;'s &GUI;
-<application>qdbusviewer</application>
-and the command line
-<application>qdbus</application>.
-</para>
+<para
+>&konsole; unterstützt zahlreiche Methoden, die mit &DBus; benutzt werden können. </para>
+<para
+>Es gibt zwei Möglichkeiten die &DBus;-Schnittstelle zu verwenden: &Qt;s &GUI;-Programm <application
+>qdbusviewer</application
+> und auf der Befehlszeile <application
+>qdbus</application
+>. </para>
 
-<para>
-Examples:
-<itemizedlist mark='opencircle'>
+<para
+>Beispiele: <itemizedlist mark='opencircle'>
 
-<listitem><para>
-<prompt>&percnt;</prompt>
-<command>qdbus</command>
-will display all services available.
-</para></listitem>
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> zeigt alle verfügbaren Dienste an. </para
+></listitem>
 
-<listitem><para>
-<prompt>&percnt;</prompt>
-<command>qdbus</command>
-<option>org.kde.konsole</option>
-will display the &DBus; interface for &konsole;.
-</para></listitem>
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole </option
+> zeigt die &DBus;-Schnittstelle für &konsole;. </para
+></listitem>
 
-<listitem><para>
-<prompt>&percnt;</prompt>
-<command>qdbus</command>
-<option>org.kde.konsole /Windows/1</option>
-will display methods for controlling window 1.
-</para>
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+> zeigt die Methoden für das Fenster 1. </para>
 </listitem>
 
-<listitem><para>
-<prompt>&percnt;</prompt>
-<command>qdbus</command>
-<option>org.kde.konsole $KONSOLE_DBUS_WINDOW</option>
-will display methods for controlling the current window.
-</para></listitem>
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+> zeigt die Methoden für die Steuerung des aktuellen Fensters. </para
+></listitem>
 
-<listitem><para>
-<prompt>&percnt;</prompt>
-<command>qdbus</command>
-<option>org.kde.konsole /Sessions/1</option>
-will display methods for controlling session 1.
-</para></listitem>
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+> zeigt die Methoden für die Sitzung 1. </para
+></listitem>
 
-<listitem><para>
-<prompt>&percnt;</prompt>
-<command>qdbus</command>
-<option>org.kde.konsole $KONSOLE_DBUS_SESSION</option>
-will display methods for controlling the current session.
-</para></listitem>
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+> zeigt die Methoden für die aktuelle Sitzung. </para
+></listitem>
 
-<listitem><para>
-<prompt>&percnt;</prompt>
-<command>qdbus</command>
-<option>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option>
-will display methods for controlling the current &konsole;'s session.
-</para></listitem>
-
-</itemizedlist>
-</para>
-
-<para>
-If any of the above commands outputs:
-Service 'org.kde.konsole' does not exist, change
-<option>org.kde.konsole</option> to one of the following:
-
-<itemizedlist>
-
-<listitem><para>
-<option>org.kde.konsole-`pidof -s konsole`</option>
-(will select first pid)
-</para></listitem>
-<listitem><para>
-<option>$KONSOLE_DBUS_SERVICE</option>
-(this can be used from the current &konsole;)
-</para></listitem>
-<listitem><para>
-<option>select one from the output of 'qdbus | grep konsole'</option>
-</para></listitem>
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+> zeigt die Methoden für die Steuerung der aktuellen &konsole;-Sitzung. </para
+></listitem>
 
 </itemizedlist>
 </para>
 
-<para>
-For more information, please visit
-<ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction">&DBus; tutorial</ulink>.
+<para
+>Erhalten Sie bei den oben genannten Befehlen die Fehlermeldung „Service 'org.kde.konsole' does not exist“, benutzen Sie statt <option
+>org.kde.konsole</option
+> einen der folgenden Werte: <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (Wählt die erste PID aus) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (dies kann von der aktuellen &konsole; aus benutzt werden.) </para
+></listitem>
+<listitem
+><para>
+<option
+>Wählen Sie eine Instanz der Ausgabe von „qdbus | grep konsole“</option>
+</para
+></listitem>
+
+</itemizedlist>
 </para>
+
+<para
+>Weiterführende Informationen finden Sie auf der Webseite <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>&DBus;-Anleitung</ulink
+>. </para>
 
 </chapter>
 
 <chapter id="key-bindings">
-<title>Terminal Key Bindings</title>
+<title
+>Terminal-Tastenzuordnungen</title>
 
 <sect1>
-<title>How &konsole; Uses Key Bindings</title>
+<title
+>Wie &konsole; Tastenzuordnungen verwendet</title>
 
 <sect2 id="intro">
-<title>Introduction</title>
-<para>&konsole; uses *.keytab files to translate key combinations into control characters and escape sequences that are sent to the shell or to interactive programs (typically programs that use the Alternate Screen buffer, &eg; <application>vim</application>, <application>less</application>, <application>screen</application>) running in the shell.</para>
+<title
+>Einführung</title>
+<para
+>&konsole; benutzt <filename  class="extension"
+>*.keytab</filename
+>-Dateien, um Tastenkombinationen in Steuerzeichen und Escape-Sequenzen zu übersetzen. die an die Shell oder interaktive Programme gesendet werden. Diese Programme wie &eg; <application
+>vim</application
+>, <application
+>less</application
+> oder <application
+>screen</application
+>, die in der Shell ausgeführt werden, benutzen typischerweise den alternativen Bildschirmpuffer.</para>
 
-<para>Users can customize the key bindings settings in &konsole; using the Key Bindings Editor. A key combination can be configured to send a specific control or escape sequence to the terminal.</para>
+<para
+>Benutzer können die Tastenzuordnungen in &konsole; mit einem Editor anpassen. Eine Tastenkombination kann so eingestellt werden, dass sie eine bestimmte Steuer- oder Escape-Sequenz an das Terminal sendet.</para>
 
-<para>You can open the Key Bindings Editor from the menu entry <menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit Current Profile</guimenuitem></menuchoice>, and going to the <guilabel>Keyboard</guilabel> tab. Listed there are the Key Bindings schemas that come by default with &konsole;.</para>
+<para
+>Sie finden den Editor für Tastenzuordnungen im Menüeintrag <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Aktuelles Profil bearbeiten</guimenuitem
+></menuchoice
+> auf der Karteikarte <guilabel
+>Tastatur</guilabel
+>. Hier werden die Standard-Tastaturschemata von &konsole; aufgeführt.</para>
 </sect2>
 
 <sect2 id="table-fields">
-<title>Key Combinations and Modes</title>
+<title
+>Tastenkombinationen und Modi</title>
 
-<para>Key combinations follow the pattern:
-<programlisting>Key (+|-) Modes</programlisting>
+<para
+>Tastenkombinationen haben folgendes Format: <programlisting
+>Taste (+|-) Modi</programlisting>
 </para>
 
-<para>for example:
-<programlisting>
-Up+Shift+AppScreen
+<para
+>Zum Beispiel: <programlisting
+>Up+Shift+AppScreen
 Down+Shift-AppScreen
 Space+Ctrl
 </programlisting>
 </para>
 
-<para>Key names are defined in the qnamespace.h header file, with the <quote>Qt::Key_</quote> prefix removed, for a list of key names check the <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum">Qt::Key enumeration in the &Qt; documentation</ulink>.</para>
+<para
+>Namen der Tasten sind in der Datei <filename
+>qnamespace.h</filename
+> definiert, dabei wird das Präfix <quote
+>Qt::Key_</quote
+> entfernt. Eine Liste dieser Tastennamen finden Sie in der &Qt;-Dokumentation auf der Seite <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum"
+>Qt::Key enumeration</ulink
+>.</para>
 
-<para>A <quote>+</quote> preceding a Mode name means that mode is <emphasis>set</emphasis>; for a modifier key, that means it's pressed, whereas for all other modes it means that particular mode is in effect (&ie; active). For example <quote>+Ctrl</quote> means the key combination will work only if the &Ctrl; key is pressed.</para>
+<para
+>Ein <quote
+>+</quote
+> vor dem Namen des Modus bedeutet, dass er <emphasis
+>aktiv</emphasis
+> ist. Eine Modifizierer-Taste muss für diesen Zustand gedrückt sein, während in allen andern Modi dieser bestimmte Modus aktiv sein muss.. <quote
+>+Ctrl</quote
+> bedeutet zum Beispiel, dass die Tastenkombination nur dann funktioniert, wenn auch die Taste &Ctrl; gedrückt ist.</para>
 
-<para>A <quote>-</quote> preceding a Mode name means that mode is <emphasis>reset</emphasis>; basically this is the opposite of putting <quote>+</quote> before a Mode name, so for a modifier key that means the key isn't pressed, whereas for all other modes it means that particular mode is inactive. For example <quote>-Ctrl</quote> means the key combination will work only if the &Ctrl; key is <emphasis>not</emphasis> pressed.</para>
+<para
+>Ein <quote
+>-</quote
+> vor dem Namen des Modus bedeutet, dass er <emphasis
+>nicht</emphasis
+> aktiv ist. Das hat den umgekehrten Effekt wie ein <quote
+>+</quote
+> vor dem Namen des Modus. Bei einer Modifizierer-Taste bedeutet das. dass die Taste nicht gedrückt ist, während in allen anderen Modi dieser bestimmte Modus nicht aktiviert ist. <quote
+>-Ctrl</quote
+> bedeutet zum Beispiel, dass die Tastenkombinationennur funktioniert, wenn die Taste &Ctrl; <emphasis
+>nicht</emphasis
+> gedrückt ist.</para>
 
 <note>
-<para>If a Mode name isn't present in a key combination, its state is ignored.</para>
+<para
+>Fehlt der Name eines Modus in einer Tastenkombination, wird der Status des Modus ignoriert.</para>
 </note>
 
-<para>The supported Key Bindings modes are listed below:</para>
+<para
+>Die unterstützten Modi für Tastenzuordnungen sind im folgenden aufgeführt:</para>
 
 <variablelist>
 
 <varlistentry>
-<term>Alt, Ctrl, Shift</term>
+<term
+>Alt, Ctrl, Shift</term>
 <listitem>
-<para>One or more of these Modes can be used in a key combination, if any of them is set, the key combination uses that modifier key, respectively; and vice versa if it's reset</para>
+<para
+>Mehr als einer dieser Modi kann in einer Tastenkombination verwendet werden. Ist einer dieser Modi aktiv, verwendet die Tastenkombination die Modifizierer-Taste und umgekehrt</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>AnyModifier</term>
+<term
+>AnyModifier</term>
 <listitem>
-<para>If this mode is set, the key combination uses any modifier key (any of the previous three modifier keys); and vice versa if it's reset</para>
+<para
+>Ist dieser Modus aktiv, benutzt die Tastenkombination jede Modifizierer-Taste wie die drei vorher genannten Modifizierer-Tasten und umgekehrt, wenn der Modus nicht aktiv ist.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Ansi</term>
+<term
+>Ansi</term>
 <listitem>
-<para>If this mode is set, &konsole; will send ANSI escape and control sequences</para>
-<para>If this mode is reset &konsole; will send VT52 escape and control sequences</para>
+<para
+>Ist dieser Modus aktiv, dann sendet &konsole; ANSI-Escape- und Steuerzeichen</para>
+<para
+>Ist dieser Modus nicht aktiv, dann sendet  &konsole; VT52-Escape- und Steuerzeichen</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>AppScreen</term>
+<term
+>AppScreen</term>
 <listitem>
-<para>If this mode is set, the key combination will only affect interactive programs that use the Alternate Screen buffer</para>
-<para>If this mode is reset the key combination will only affect the terminal when it's using the Normal Screen buffer</para>
+<para
+>Ist dieser Modus aktiv, beeinflusst die Tastenkombination nur interaktive Programme, die den alternativen Bildschirmpuffer verwenden</para>
+<para
+>Ist dieser Modus nicht aktiv, beeinflusst die Tastenkombination nur das Terminal, wenn der normale Bildschirmpuffer verwendet wird</para>
 
 <note>
-<para>&konsole; makes use of two screen buffers:</para>
+<para
+>&konsole; verwendet zwei Bildschirmpuffer:</para>
 <itemizedlist>
 <listitem>
-<para>The Normal Screen buffer (default): allows you to scroll back to view previous lines of output, this is the default buffer you usually use to execute commands... &etc;</para>
+<para
+>Der normale Bildschirmpuffer als Voreinstellung: Erlaubt das Blättern zurück im Verlauf, um vorherige Zeilen der Ausgabe anzuzeigen. Dies ist der Standardpuffer, den Sie normalerweise bei der Ausführung von Befehlen benutzen</para>
 </listitem>
 <listitem>
-<para>The Alternate Screen buffer: the terminal switches to this buffer when you run an interactive program (&eg; <application>less</application>, <application>vim</application>, <application>screen</application>, <application>tmux</application>... &etc;)</para>
+<para
+>Der alternative Bildschirmpuffer: Das Terminal wechselt zu diesem Puffer, wenn Sie interaktive Programme wie &eg; <application
+>less</application
+>, <application
+>vim</application
+>, <application
+>screen</application
+>, <application
+>tmux</application
+> &etc; ausführen</para>
 </listitem>
 </itemizedlist>
 </note>
@@ -1690,79 +2958,187 @@ Space+Ctrl
 </varlistentry>
 
 <varlistentry>
-<term>KeyPad</term>
+<term
+>KeyPad</term>
 <listitem>
-<para>If this mode is set, the key combination uses a key on the Keypad (Number Pad). This mode is useful to distinguish between keys on the keyboard and keys on the Keypad. For example when Num Lock is <emphasis>on</emphasis> you can configure two separate key combinations, one using the key labelled <quote>1</quote> on the keyboard (usually under the <keycap>F1</keycap> key) and the other using the key labelled <quote>1</quote> on the Keypad. The same concept applies when Num Lock is <emphasis>off</emphasis> for the End, Home, Cursor Keys ...etc on the Keypad</para>
+<para
+>Ist dieser Modus aktiv, benutzt diese Tastenkombination eine Taste auf der Zahlentastatur. In diesem Modus kann zwischen Tasten auf der normalen Tastatur  und Tasten auf der Zahlentastatur unterschieden werden. Wenn zum Beispiel die Zahlen-Feststelltaste <emphasis
+>eingeschaltet</emphasis
+> ist, können Sie zwei getrennte Tastenkombinationen einstellen, eine mit der Taste <quote
+>1</quote
+> auf der Tastatur, normalerweise unter der Taste <keycap
+>F1</keycap
+> und eine andere mit der Taste <quote
+>1</quote
+> auf der Zahlentastatur. Wenn die Zahlen-Feststelltaste <emphasis
+>ausgeschaltet</emphasis
+> ist, funktioniert das auch für die Tasten Ende, Pos 1 sowie die Cursor-Tasten &etc; auf der Tastatur.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>AppCursorKeys</term>
+<term
+>AppCursorKeys</term>
 <listitem>
-<para>This mode implements the VT100 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM">Cursor Keys Mode (DECCKM)</ulink>. It controls the escape sequences each Cursor Key (<keycap>Up</keycap>, <keycap>Down</keycap>, <keycap>Right</keycap>, <keycap>Left</keycap>) sends, depending on whether this mode is set or reset</para>
-<para>By default &konsole; follows the XTerm behavior of treating the <keycap>Home</keycap> and <keycap>End</keycap> keys as cursor keys with respect to DECCKM</para>
+<para
+>Dieser Modus implementiert den VT100-Modus <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
+>Cursor-Tasten (DECCKM)</ulink
+>. Dies kontrolliert die Escape-Sequenzen, die  jede Cursor-Taste wie <keycap
+>Up</keycap
+>, <keycap
+>Down</keycap
+>, <keycap
+>Right</keycap
+>, <keycap
+>Left</keycap
+> sendet, abhängig ob dieser Modus aktiv oder nicht aktiv ist</para>
+<para
+>In der Voreinstellung verhält sich &konsole; wie XTerm bei der Behandlung der Tasten <keycap
+>Home</keycap
+> and <keycap
+>End</keycap
+> als Cursor-Tasten unter Beachtung von DECCKM</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>AppKeyPad</term>
+<term
+>AppKeyPad</term>
 <listitem>
-<para>If this mode is set, the key combination will only work when the Keypad is in Application Mode (DECKPAM)</para>
-<para>If this mode is reset, the key combination will only work when the Keypad is in Numeric Mode (DECKPNM)</para>
+<para
+>Ist dieser Modus aktiv, funktionieren die Tastenkombination nur, wenn die Tastatur im Programm-Modus (DECKPAM) ist</para>
+<para
+>Ist dieser Modus aktiv, funktionieren die Tastenkombination nur, wenn die Tastatur im numerischen Modus (DECKPNM) ist</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>NewLine</term>
+<term
+>NewLine</term>
 <listitem>
-<para>If this mode is set, the <keycap>Return</keycap> (Enter) key on the keyboard will send both Carriage Return "\r" and New Line "\n" control characters</para>
-<para>If this mode is reset, the <keycap>Return</keycap> key will send only a Carriage Return "\r"</para>
-<para>The same applies to the <keycap>Enter</keycap> key on the Keypad</para>
-<para>This mode emulates the <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM">LNM - Line Feed/New Line Mode</ulink></para>
+<para
+>Ist dieser Modus aktiv, dann sendet die Taste <keycap
+>Return</keycap
+> (Enter = Eingabe) auf der Tastatur sowohl die Steuerzeichen für den Wagenrücklauf „\r“ und auch das Steuerzeichen „\n“ für eine neue Zeile</para>
+<para
+>Ist dieser Modus nicht aktiv, dann sendet die Taste <keycap
+>Return</keycap
+> nur das Zeichen für den Wagenrücklauf „\r“</para>
+<para
+>Das gleiche trifft für die Taste &Enter; auf der Tastatur zu</para>
+<para
+>Dieser Modus emuliert den <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
+>LNM - Line Feed/New Line Modus</ulink
+></para>
 </listitem>
 </varlistentry>
 
 </variablelist>
 
-<para>Note that each combination of Key and Modes (set/reset) must be unique. For example, consider the following two rules:</para>
+<para
+>Jede Kombination von Tasten und Modi (aktiv/nicht aktiv) muss eindeutig sein. Betrachten Sie zum Beispiel folgende zwei Regeln:</para>
 
 <itemizedlist>
-<listitem><para>A+Shift : <quote>A</quote></para></listitem>
-<listitem><para>a       : <quote>a</quote></para></listitem>
+<listitem
+><para
+>A+Shift : <quote
+>A</quote
+></para
+></listitem>
+<listitem
+><para
+>a : <quote
+>a</quote
+></para
+></listitem>
 </itemizedlist>
-<para>&konsole; will <emphasis>not</emphasis> accept the small letter <quote>a</quote> rule, you have to add a <quote>-Shift</quote> to that rule to make it work.</para>
+<para
+>&konsole; akzeptiert die Regel für den Kleinbuchstaben  <quote
+>a</quote
+> <emphasis
+>nicht</emphasis
+>, Sie müssen <quote
+>-Shift</quote
+> zu dieser Regel hinzufügen, damit sie funktioniert.</para>
 </sect2>
 
 <sect2 id="output-field">
-<title>The Output Field</title>
+<title
+>Das Feld Ausgabe</title>
 
-<para>In the Output field you can add the escape sequences or control characters that you want &konsole; to send to the terminal when the associated key combination is pressed.</para>
+<para
+>Im Ausgabe-Feld können Sie Escape-Sequenzen oder Steuerzeichen hinzufügen, die &konsole; an das Terminal sendet, wenn die zugehörige Tastenkombination gedrückt wird.</para>
 
-<para>You can also use any of the following keywords, each of which has a special meaning in &konsole;:</para>
+<para
+>Außerdem können Sie jedes der folgenden Schlüsselwörter benutzen, jedes hat eine besondere Bedeutung in &konsole;:</para>
 
 <itemizedlist>
-<listitem><para>scrollUpLine       : scroll up one line in the shell history scrollback buffer</para></listitem>
-<listitem><para>scrollUpPage       : scroll up one page in the shell history scrollback buffer</para></listitem>
-<listitem><para>scrollDownLine     : scroll down one line in the shell history scrollback buffer</para></listitem>
-<listitem><para>scrollDownPage     : scroll down one page in the shell history scrollback buffer</para></listitem>
-<listitem><para>scrollUpToTop      : scroll up to the begining of the shell history scrollback buffer</para></listitem>
-<listitem><para>scrollDownToBottom : scroll down to the end of the shell history scrollback buffer</para></listitem>
+<listitem
+><para
+>scrollUpLine: Geht eine Zeile nach oben im Verlaufspeicher der Shell</para
+></listitem>
+<listitem
+><para
+>scrollUpPage: Geht eine Seite nach oben im Verlaufspeicher der Shell</para
+></listitem>
+<listitem
+><para
+>scrollDownLine: Geht eine Zeile nach unten im Verlaufspeicher der Shell</para
+></listitem>
+<listitem
+><para
+>scrollDownPage: Geht eine Seite nach unten im Verlaufspeicher der Shell</para
+></listitem>
+<listitem
+><para
+>scrollUpToTop: Geht zum Anfang des Verlaufspeichers der Shell</para
+></listitem>
+<listitem
+><para
+>scrollDownToBottom: Geht zum Ende des Verlaufspeichers der Shell</para
+></listitem>
 </itemizedlist>
 
-<para>You can also use strings with C-string syntax; you may use the following escapes sequences:</para>
+<para
+>Sie könne auch Zeichenfolgen mit der C-Syntax benutzen. Daher können Sie folgende Escape-Sequenzen verwenden:</para>
 
 <itemizedlist>
-<listitem><para>\E   : Escape</para></listitem>
-<listitem><para>\\   : Backslash</para></listitem>
-<listitem><para>\"   : Double quote</para></listitem>
-<listitem><para>\t   : Tab</para></listitem>
-<listitem><para>\r   : Carriage Return</para></listitem>
-<listitem><para>\n   : New line</para></listitem>
-<listitem><para>\b   : Backspace</para></listitem>
+<listitem
+><para
+>\E : Escape</para
+></listitem>
+<listitem
+><para
+>\\ : Backslash (Rückwärtsschrägstrich)</para
+></listitem>
+<listitem
+><para
+>\" : Doppeltes Anführungszeichen</para
+></listitem>
+<listitem
+><para
+>\t: Tabulator</para
+></listitem>
+<listitem
+><para
+>\r: Wagenrücklauf</para
+></listitem>
+<listitem
+><para
+>\n: Neue Zeile</para
+></listitem>
+<listitem
+><para
+>\b: Rücktaste</para
+></listitem>
 <listitem>
-<para>\xHH : where HH are two hex digits</para>
+<para
+>\xHH : Dabei sind HH zwei hexadezimale  Ziffern</para>
 <tip>
-<para>This can be used to send &ASCII; control characters, &eg; <quote>\x00</quote> which is the NUL character</para>
+<para
+>Damit können Sie &ASCII;-Steuerzeichen wie &eg; <quote
+>\x00</quote
+> = Zeichen NUL senden</para>
 </tip>
 </listitem>
 </itemizedlist>
@@ -1770,30 +3146,53 @@ Space+Ctrl
 </sect2>
 
 <sect2 id="other-factors">
-<title>Other System Resources</title>
-<para>There are other system resources that can affect terminal Key Bindings:</para>
+<title
+>Andere System-Ressourcen</title>
+<para
+>Es gibt noch weitere System-Ressourcen, die die Tastenzuordnungen im Terminal beeinflussen können:</para>
 <itemizedlist>
 <listitem>
-<para>Consult the <ulink url="man:terminfo(5)">terminfo</ulink> or <ulink url="man:termcap(5)">termcap</ulink> database for the expected escape sequences and control characters that each key combination is supposed to send.</para>
+<para
+>In den Datenbanken <ulink url="man:terminfo(5)"
+>terminfo</ulink
+> or <ulink url="man:termcap(5)"
+>termcap</ulink
+> finden Sie die erwarteten Escape-Sequenzen und Steuerzeichen, die jede Tastenkombination senden sollte.</para>
 </listitem>
 <listitem>
-<para>It is likely that your system has other keyboard databases which have to be in sync too, (&eg; <ulink url="man:bash(1)">/etc/inputrc and readline</ulink> for the <application>BASH shell</application>) as they affect the operations (interactions) bound to key combinations.</para>
+<para
+>Wahrscheinlich gibt es auf Ihren System andere Tastatur-Datenbanken, die auch abgeglichen werden müssen, wie &eg;<ulink url="man:bash(1)"
+>/etc/inputrc und readline</ulink
+> für die <application
+>Bash</application
+>-Shell, da sie die Interaktionen von Tastenkombinationen beeinflussen.</para>
 </listitem>
 </itemizedlist>
 </sect2>
 
 <sect2 id="further-reading">
-<title>Further Reading</title>
-<para>For more information on escape sequences and control characters, check the following documentation:</para>
+<title
+>Weiterführende Lektüre</title>
+<para
+>Weitere Informationen zu Escape-Sequenzen und Steuerzeichen finden Sie in den folgenden Dokumentationen:</para>
 <itemizedlist>
 <listitem>
-<para><ulink url="https://www.vt100.net/docs/vt100-ug/">The VT100 user guide</ulink></para>
+<para
+><ulink url="https://www.vt100.net/docs/vt100-ug/"
+>Das Benutzerhandbuch zu VT100</ulink
+></para>
 </listitem>
 <listitem>
-<para><ulink url="https://vt100.net/docs/vt102-ug/">The VT102 user guide</ulink></para>
+<para
+><ulink url="https://vt100.net/docs/vt102-ug/"
+>Das Benutzerhandbuch zu VT102</ulink
+></para>
 </listitem>
 <listitem>
-<para>The comprehensive and indispensable <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html">XTerm Control Sequences</ulink> documentation</para>
+<para
+>Die umfassende und unverzichtbare Dokumentation <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html"
+>XTerm Control Sequences</ulink
+></para>
 </listitem>
 </itemizedlist>
 </sect2>
@@ -1802,67 +3201,72 @@ Space+Ctrl
 </chapter>
 
 <chapter id="tabbarstylsheet">
-<title>Using Style Sheet for the Tab Bar</title>
-<para>
-The default style sheet for the tab bar sets the minimum and maximum tab
-widths.  The user can create a <filename role="extension">.css</filename> file and have &konsole; use that as the
-style sheet for the tab bar.  In the <filename role="extension">.css</filename> file, the widget to use is
-<userinput>QTabBar::tab</userinput>.
-</para>
-<para>
-For more information, consider reading
-<ulink url="https://doc.qt.io/qt-5/stylesheet.html">&Qt; Style Sheets</ulink>
-</para>
+<title
+>Stilvorlagen für die Unterfensterleiste</title>
+<para
+>Die Standard-Stilvorlage für die Unterfensterleiste legt die minimale und die maximale Breite für die Unterfenster fest. Sie können eigene <filename role="extension"
+>.css</filename
+>-Dateien erstellen und sie als Stilvorlage für die Unterfensterleiste in &konsole; verwenden. In der <filename role="extension"
+>.css</filename
+>-Datei muss das Element <userinput
+>QTabBar::tab</userinput
+> verwendet werden. </para>
+<para
+>Weitere Informationen finden Sie auf der <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
+>&Qt;-Projektseite für Stilvorlagen</ulink
+>. </para>
 
-<para>
-Examples:
-
-</para>
+<para
+>Beispiele: </para>
 
 <para>
 <itemizedlist mark='opencircle'>
 
-<listitem><para>
-Change the selected tab's background to a light gray
-<programlisting>
-QTabBar::tab:selected {
+<listitem
+><para
+>Ändern der Hintergrundfarbe des ausgewählten Unterfensters zu hellgrau <programlisting
+>QTabBar::tab:selected {
     background: #999999
 }
 </programlisting>
-</para></listitem>
+</para
+></listitem>
 
 
-<listitem><para>
-Change the selected tab's text to red
-<programlisting>
-QTabBar::tab:selected {
+<listitem
+><para
+>Ändern der Textfarbe des ausgewählten Unterfensters zu rot <programlisting
+>QTabBar::tab:selected {
     color: red
 }
 </programlisting>
-</para></listitem>
+</para
+></listitem>
 
-<listitem><para>
-All tabs will be at least 200 pixels in width
-<programlisting>
-QTabBar::tab {
+<listitem
+><para
+>Eine Mindestbreite von 200 Pixeln für alle Unterfenster <programlisting
+>QTabBar::tab {
     min-width: 200px
 }
 </programlisting>
-</para></listitem>
+</para
+></listitem>
 
-<listitem><para>
-Only the selected tab will be at least 200 pixels in width
-<programlisting>
-QTabBar::tab::selected {
+<listitem
+><para
+>Eine Mindestbreite von 200 Pixeln nur für das ausgewählte Unterfenster <programlisting
+>QTabBar::tab::selected {
     min-width: 200px
 }
 </programlisting>
-</para></listitem>
+</para
+></listitem>
 
-<listitem><para>
-Any of these can be combined in one file
-<programlisting>
-QTabBar::tab::selected {
+<listitem
+><para
+>Alle diese Anweisungen können zusammen in einer Datei angewendet werden <programlisting
+>QTabBar::tab::selected {
     background: #999999;
     color: red;
     min-width: 200px;
@@ -1871,7 +3275,8 @@ QTabBar::tab {
     min-width: 100px
 }
 </programlisting>
-</para></listitem>
+</para
+></listitem>
 
 
 </itemizedlist>
@@ -1880,58 +3285,104 @@ QTabBar::tab {
 </chapter>
 
 <chapter id="faqtips">
-<title>Did You Know?, Common Issues and More</title>
+<title
+>Fragen, bekannte Probleme und Mehr</title>
 
 <sect1 id="didyouknow">
-<title>Did You Know?</title>
+<title
+>Wussten Sie schon?</title>
 <para>
 <itemizedlist mark='opencircle'>
 
-<listitem><para>
-Pressing &Ctrl; while selecting text will cause lines breaks to be converted to spaces when pasted.
-</para></listitem>
+<listitem
+><para
+>Drücken Sie &Ctrl;-Taste bei der Auswahl von Text, dann werden beim Einfügen Zeilenumbrüche durch Leerzeichen ersetzt. </para
+></listitem>
 
-<listitem><para>
-Pressing the <keycombo action="simul">&Ctrl;&Alt;</keycombo> keys while selecting text will select columns.
-</para></listitem>
+<listitem
+><para
+>Drücken der Tasten <keycombo action="simul"
+>&Ctrl;&Alt;</keycombo
+> bei der Textauswahl mit der &LMBn; markiert eine Textspalte (Blockauswahl). </para
+></listitem>
 
-<listitem><para>
-The <keycombo action="simul">&Ctrl;<mousebutton>Wheel</mousebutton></keycombo> combination will zoom text size, like in konqueror and firefox.
-</para></listitem>
+<listitem
+><para
+>Die Kombination <keycombo action="simul"
+>&Ctrl;<mousebutton
+>Mausrad</mousebutton
+></keycombo
+> ändert die Schriftgröße wie in &konqueror; oder Firefox. </para
+></listitem>
 
-<listitem><para>
-When a program evaluates either mouse button, pressing the &Shift; key will allow the popup menu to appear.
-</para></listitem>
+<listitem
+><para
+>Wenn ein Programm beide Maustasten auswertet, erscheint beim Drücken der &Shift;taste ein Kontextmenü. </para
+></listitem>
 
-<listitem><para>
-The <keycombo action="simul">&Ctrl;&Shift;<keycap>F10</keycap></keycombo> shortcut will activate the menu.
-</para></listitem>
+<listitem
+><para
+>Der Kurzbefehl <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F10</keycap
+></keycombo
+> aktiviert das Menü. </para
+></listitem>
 
-<listitem><para>
-The <keycombo action="simul">&Shift;<keycap>Insert</keycap></keycombo> keys will insert the clipboard.
-</para></listitem>
+<listitem
+><para
+>Der Kurzbefehl <keycombo action="simul"
+>&Shift;<keycap
+>Einfg</keycap
+></keycombo
+> fügt den Inhalt der Zwischenablage ein. </para
+></listitem>
 
-<listitem><para>
-Double-clicking will select a whole word. Continuing to hold the mouse button and moving the mouse will extend the selection.
-</para></listitem>
+<listitem
+><para
+>Doppelklicken wählt ein ganzes Wort aus. Halten Sie die Maustaste gedrückt und bewegen den Mauszeiger, dann wird die Auswahl erweitert. </para
+></listitem>
 
-<listitem><para>
-Triple-clicking will select a whole line. Continuing to hold the mouse button and moving the mouse will extend the selection.
-</para></listitem>
+<listitem
+><para
+>Dreimal klicken wählt die gesamte Zeile  aus. Halten Sie die Maustaste gedrückt und bewegen den Mauszeiger, dann wird die Auswahl erweitert. </para
+></listitem>
 
-<listitem><para>
-There is a hidden feature for the "%d" formatter in tab title. You can tell &konsole; to abbreviate a directory name into its first character. For example, "/path/to/konsole/src" can be abbreviated into "konsole/s". If you want to enable and control this hidden feature, open <filename>konsolerc</filename>
-in <userinput><command>qtpaths</command> <option>--paths GenericConfigLocation</option></userinput> and add following lines:</para>
+<listitem
+><para
+>Für die Beschriftung eines Karteireiters gibt es eine versteckte Funktion für das Format „%d“. Sie können vorgeben, dass &konsole; den Namen eines Ordners bei der Anzeige bis zum ersten Buchstaben abkürzt. „Pfad/zu/konsole/src“ kann zum Beispiel als „konsole/s“ abgekürzt werden. Um diese versteckte Funktion zu verwenden, öffnen Sie die Datei <filename
+>konsolerc</filename
+>in <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> und fügen Sie die folgenden Zeilen ein:</para>
 
-<para><programlisting>
-[ProcessInfo]
+<para
+><programlisting
+>[ProcessInfo]
 CommonDirNames=name1,name2,name3...
 </programlisting>
 
-<note><para>If you are using <application>Yakuake</application>, you need to edit <filename>yakuakerc</filename>
-in <userinput><command>qtpaths</command> <option>--paths GenericConfigLocation</option></userinput> instead.</para></note>
+<note
+><para
+>Benutzen Sie <application
+>Yakuake</application
+>, dann müssen Sie diese Zeilen in <filename
+>yakuakerc</filename
+> in <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> einfügen.</para
+></note>
 
-</para></listitem>
+</para
+></listitem>
 
 </itemizedlist>
 </para>
@@ -1939,55 +3390,72 @@ in <userinput><command>qtpaths</command> <option>--paths GenericConfigLocation</
 </sect1>
 
 <sect1 id="commonissues">
-<title>Common Issues</title>
+<title
+>Bekannte Probleme</title>
 <itemizedlist>
 
 <listitem>
-<para>Some fonts might be unavailable for usage in &konsole;, although they are available in other applications. That doesn't mean there is a bug in &konsole;. &konsole; requires monospaced fonts to provide the best visual result, so it asks &Qt; to only list monospaced fonts.</para>
+<para
+>Einige Schriftarten können in &konsole; nicht ausgewählt werden, obwohl sie in anderen Anwendungen verfügbar sind. Das ist kein Fehler in &konsole;. &konsole; benutzt nichtproportionale Schriften mit fester Zeichenbreite, damit die Anzeige am besten lesbar ist. Daher werden nur die in &Qt; verfügbaren Schriften mit fester Breite zur Auswahl angeboten.</para>
 
-<para>Starting with version 16.08 (August 2016), &konsole; can be configured to allow selecting any font with the caveat that the display may not be correct.</para>
+<para
+>Seit Version 16.08 (August 2016) erlaubt &konsole;, beliebige Schriften auszuwählen, auch wenn diese nicht korrekt dargestellt werden.</para>
 </listitem>
 
-<listitem><para>
-Since KDE4 all the tabs use the same process ID. This has the side-effect that if one tab's process has issues, all the other tabs may experience issues as well.
-</para>
-<para>
-This is most noticeable when a command that connects to an external device or system (ssh, nfs) has issues.
-</para></listitem>
+<listitem
+><para
+>Seit KDE 4 benutzen alle Unterfenster den gleichen Prozess. Das führt dazu, dass alle anderen Unterfenster eventuell betroffen sind, wenn es Probleme mit dem Prozess in einem Unterfenster gibt. </para>
+<para
+>Dies tritt häufig bei Befehlen auf, die bei der Verbindung zu externen Geräten oder Systemen (ssh, nfs) nicht fehlerfrei funktionieren. </para
+></listitem>
 
-<listitem><para>
-&konsole; treats arguments after the <option>-e</option> option as one command and runs it directly, instead  of parsing it and possibly dividing it into sub-commands for execution. This is different from xterm.
-</para>
+<listitem
+><para
+>&konsole; behandelt Argumente nach der Option <option
+>-e</option
+> als einen Befehl und führt ihn direkt aus, anstatt ihn einzulesen und in einzelne Befehle zu zerlegen, die dann ausgeführt werden. Dieses Verhalten unterscheidet sich vom Programm xterm. </para>
 
 <para>
     <itemizedlist mark='opencircle'>
 
-    <listitem><para>
-<command>konsole -e "command1 ; command2"</command> does not work
-    </para></listitem>
+    <listitem
+><para
+><command
+>konsole -e "command1 ; command2"</command
+> funktioniert nicht </para
+></listitem>
 
-    <listitem><para>
-<command>konsole -e $SHELL -c "command1 ; command2"</command> works
-    </para></listitem>
+    <listitem
+><para
+><command
+>konsole -e $SHELL -c "command1 ; command2"</command
+> funktioniert </para
+></listitem>
 
     </itemizedlist>
 </para>
 </listitem>
 
-<listitem><para>
-&konsole; doesn't provide convenience for running login shell, because developers don't like the idea of running login shell in a terminal emulator.
-</para>
-<para>
-Of course, users still can run login shell in &konsole; if they really need to. Edit the profile in use and modify its command to the form of starting a login shell explicitly, such as "<command>bash -l</command>" and "<command>zsh -l</command>".
-</para>
+<listitem
+><para
+>&konsole; hat keine Funktion, um als Anmeldungsshell ausgeführt zu werden, da den Entwicklern diese Funktion nicht gefällt. </para>
+<para
+>Natürlich können Benutzer eine Anmeldungsshell in &konsole; trotzdem bei Bedarf starten. Bearbeiten Sie das verwendete Profil und ändern Sie den beim Start einer Sitzung ausgeführten Befehl, so dass eine Anmeldungsshell gestartet wird, wie zum Beispiel „<command
+>bash -l</command
+>“ oder „<command
+>zsh -l</command
+>“. </para>
 </listitem>
 
-<listitem><para>
-The <option>--new-tab</option> option sometimes behaves strangely. It may create new window, or it may create new tab in another existing &konsole; window instead of the current &konsole; window.
-</para>
-<para>
-Those behaviors feel strange, but they are not necessarily bugs. The <option>--new-tab</option> option tries to reuse existing &konsole; windows, but not all &konsole; windows are reusable. All &konsole; windows opened through &krunner; are reusable, while most &konsole; windows opened from command line are not.
-</para>
+<listitem
+><para
+>Die Option <option
+>--new-tab</option
+> verhält sich manchmal merkwürdig. Damit wird manchmal ein neues Fenster oder ein neues Unterfenster in einem anderen &konsole;-Fenster statt in dem aktuellen &konsole;-Fenster erzeugt. </para>
+<para
+>Dies Verhalten erscheint merkwürdig, ist aber nicht zwingend ein Fehler. Die Option <option
+>--new-tab</option
+> versucht vorhandene &konsole;-Fenster wiederzuverwenden, das ist aber nicht bei allen &konsole;-Fenster möglich. Alle durch &krunner; geöffneten &konsole;-Fenster können wiederverwendet werden, im Gegensatz zu den meisten &konsole;-Fenstern, die von der Befehlszeile aus geöffnet wurden. </para>
 </listitem>
 
 </itemizedlist>
@@ -1997,44 +3465,75 @@ Those behaviors feel strange, but they are not necessarily bugs. The <option>--n
 </chapter>
 
 <chapter id="credits">
-<title>Credits and Copyright</title>
+<title
+>Mitwirkende und Copyright</title>
 
-<para>&konsole; is currently maintained by &Kurt.Hindenburg;  &Kurt.Hindenburg.mail;</para>
+<para
+>&konsole; wird zurzeit von &Kurt.Hindenburg; &Kurt.Hindenburg.mail; betreut.</para>
 
-<para>Previous &konsole; maintainers include: &Robert.Knight; &Robert.Knight.mail; and &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+<para
+>Zuvor wurde &konsole; betreut von &Robert.Knight; &Robert.Knight.mail; und &Waldo.Bastian; &Waldo.Bastian.mail;</para>
 
-<para>The application &konsole; Copyright &copy; 1997-2008
-&Lars.Doelle; &Lars.Doelle.mail;</para>
+<para
+>Die Anwendung &konsole; Copyright &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
 
-<para>This document was originally written by &Jonathan.Singer;
-&Jonathan.Singer.mail;</para>
+<para
+>Dieses Dokument wurde erstellt von &Jonathan.Singer;&Jonathan.Singer.mail;</para>
 
-<para>This document was updated for &kde; 4.x by
-&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+<para
+>Dieses Dokument wurde für &kde; 4.x von &Kurt.Hindenburg; &Kurt.Hindenburg.mail; aktualisiert.</para>
 
-<para>This document was updated for &kde; 3.4 by
-&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+<para
+>Dieses Dokument wurde für &kde; 3.4 von &Kurt.Hindenburg; &Kurt.Hindenburg.mail; aktualisiert.</para>
 
-<para>Originally converted to DocBook <acronym>SGML</acronym> by
-&Mike.McBride; and &Lauri.Watts;</para>
+<para
+>Konvertiert zu DocBook <acronym
+>SGML</acronym
+> von &Mike.McBride; und &Lauri.Watts;</para>
 
-<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
-
-&underFDL;
-&underGPL;
-</chapter>
+<para
+>Deutsche Übersetzung von Stefan Doll <email
+>stefan@laugenweck.de</email
+></para
+> &underFDL; &underGPL; </chapter>
 
 <appendix id="links">
-<title>Links</title>
+<title
+>Verknüpfungen</title>
 
-<para>For more information please visit these websites:</para>
+<para
+>Weiterführende Informationen finden Sie auf diesen Webseiten:</para>
 <itemizedlist>
-<listitem><para><ulink url="https://userbase.kde.org/Konsole">&konsole;'s homepage on &kde;'s UserBase</ulink>&nbsp;</para></listitem>
-<listitem><para><ulink url="https://konsole.kde.org/">&konsole;'s homepage</ulink></para></listitem>
-<listitem><para><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel">&konsole;'s mailing list</ulink></para></listitem>
-<listitem><para><ulink url="https://freebsd.kde.org/">&kde; on
-FreeBSD</ulink></para></listitem>
-<listitem><para><ulink url="https://solaris.kde.org/">&kde; on &Solaris;</ulink></para></listitem>
+<listitem
+><para
+><ulink url="https://userbase.kde.org/Konsole"
+>&konsole;s Webseite auf &kde;s UserBase</ulink
+>&nbsp;</para
+></listitem>
+<listitem
+><para
+><ulink url="https://konsole.kde.org/"
+>&konsole;s Webseite</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel"
+>&konsole;s Mailingliste</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://freebsd.kde.org/"
+>&kde; auf FreeBSD</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://solaris.kde.org/"
+>&kde; auf &Solaris;</ulink
+></para
+></listitem>
 </itemizedlist>
 
 </appendix>
