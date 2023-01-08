@@ -786,6 +786,7 @@ void SessionController::setupCommonActions()
     collection->addAction(QStringLiteral("set-encoding"), _codecAction);
     _codecAction->setCurrentCodec(QString::fromUtf8(session()->codec()));
     connect(session(), &Konsole::Session::sessionCodecChanged, this, &Konsole::SessionController::updateCodecAction);
+#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 103, 0)
     connect(_codecAction,
 #if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
             QOverload<QTextCodec *>::of(&KCodecAction::codecTriggered),
@@ -795,6 +796,11 @@ void SessionController::setupCommonActions()
             this,
 #endif
             &Konsole::SessionController::changeCodec);
+#else
+    connect(_codecAction, &KCodecAction::codecNameTriggered, this, [this](const QByteArray &codecName) {
+        changeCodec(QTextCodec::codecForName(codecName));
+    });
+#endif
 
     connect(_codecAction, &KCodecAction::defaultItemTriggered, this, [this] {
         Profile::Ptr profile = SessionManager::instance()->sessionProfile(session());
@@ -977,7 +983,7 @@ void SessionController::prepareSwitchProfileMenu()
 }
 void SessionController::updateCodecAction(QTextCodec *codec)
 {
-    _codecAction->setCurrentCodec(codec);
+    _codecAction->setCurrentCodec(QString::fromUtf8(codec->name()));
 }
 
 void SessionController::changeCodec(QTextCodec *codec)
