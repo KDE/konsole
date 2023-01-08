@@ -10,7 +10,7 @@
 # Spiros Georgaras <sngeorgaras@otenet.gr>, 2008.
 # Dimitrios Glentadakis <dglent@gmail.com>, 2011, 2012.
 # Antonis Geralis <capoiosct@gmail.com>, 2011, 2012.
-# Stelios <sstavra@gmail.com>, 2012, 2016, 2017, 2018, 2019, 2020, 2021.
+# Stelios <sstavra@gmail.com>, 2012, 2016, 2017, 2018, 2019, 2020, 2021, 2023.
 # Bouklis Panos <panos@echidna-band.com>, 2012.
 # Dimitris Kardarakos <dimkard@gmail.com>, 2014, 2015, 2016.
 msgid ""
@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-03 04:17+0000\n"
-"PO-Revision-Date: 2021-11-06 10:52+0200\n"
+"PO-Revision-Date: 2023-01-07 21:31+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -119,11 +119,10 @@ msgstr ""
 "Το json layoutfile που θα φορτωθεί για χρήση με τη νέα διεργασία Konsole"
 
 #: Application.cpp:53
-#, fuzzy, kde-format
-#| msgid "Create a new profile based on the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Δημιουργία ενός νέου προφίλ με βάση το επιλεγμένο προφίλ"
+msgstr "Χρήση του ενσωματωμένου προφίλ αντί του προκαθορισμένου"
 
 #: Application.cpp:54
 #, kde-format
@@ -247,6 +246,8 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
+"Εξαναγκασμός επαναχρησιμοποίησης της υπαρκτής διεργασίας ακόμη και αν "
+"καταστρέφει τη λειτουργικότητα π.χ. --new-tab. Για αποσφαλμάτωση κυρίως."
 
 #: Application.cpp:84
 #, kde-format
@@ -570,10 +571,9 @@ msgstr "Θαμπό φόντο"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:69
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Background color transparency:"
-msgstr "Διαφάνεια φόντου:"
+msgstr "Διαφάνεια χρώματος φόντου:"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
@@ -584,10 +584,9 @@ msgstr "Επί τοις εκατό"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:103
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Wallpaper transparency:"
-msgstr "Διαφάνεια φόντου:"
+msgstr "Διαφάνεια ταπετσαρίας:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -618,98 +617,93 @@ msgstr "..."
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
 #: colorscheme/ColorSchemeEditor.ui:165
-#, fuzzy, kde-format
-#| msgid "Wallpaper:"
+#, kde-format
 msgid "Wallpaper scaling:"
-msgstr "Ταπετσαρία:"
+msgstr "Κλιμάκωση ταπετσαρίας:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
 #, kde-format
 msgid "Tile"
-msgstr ""
+msgstr "Πλακάκι"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:178
 #, kde-format
 msgid "Stretch"
-msgstr ""
+msgstr "Επιμήκυνση"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:183
 #, kde-format
 msgid "Crop"
-msgstr ""
+msgstr "Περικοπή"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:188
 #, kde-format
 msgid "Adapt"
-msgstr ""
+msgstr "Προσαρμογή"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:193
-#, fuzzy, kde-format
-#| msgid "Scrolling"
+#, kde-format
 msgid "NoScaling"
-msgstr "Κύλιση"
+msgstr "Χωρίςκλιμάκωση"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Ταπετσαρία:"
+msgstr "Αναστροφή ταπετσαρίας:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Χωρίςαναστροφή"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
 #, kde-format
 msgid "Horizontal"
-msgstr ""
+msgstr "Οριζόντια"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
 #, kde-format
 msgid "Vertical"
-msgstr ""
+msgstr "Κατακόρυφα"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Και τα δύο"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr ""
+msgstr "Οριζόντια αγκύρωση:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgid "Left"
-msgstr "Αριστερή πλευρά"
+msgstr "Αριστερά"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr ""
+msgstr "Κατακόρυφη αγκύρωση:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
 #, kde-format
 msgid "Top"
-msgstr ""
+msgstr "Κορυφή"
 
 #: colorscheme/ColorSchemeViewDelegate.cpp:50
 #, kde-format
@@ -901,12 +895,10 @@ msgid "Terminal emulator"
 msgstr "Εξομοιωτής τερματικού"
 
 #: main.cpp:159
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 1997-2021, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr "(c) 1997-2021, Οι προγραμματιστές του Konsole"
+msgstr "(c) 1997-2022, Οι προγραμματιστές του Konsole"
 
 #: main.cpp:333
 #, kde-format
@@ -1271,20 +1263,16 @@ msgid "Activate Menu"
 msgstr "Ενεργοποίηση του μενού"
 
 #: MainWindow.cpp:399
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Αποθήκευση περιγράμματος καρτελών σε αρχείο"
+msgstr "Αποθήκευση διάταξης καρτελών..."
 
 #: MainWindow.cpp:408
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Φόρτωση περιγράμματος καρτελών από αρχείο"
+msgstr "Φόρτωση διάταξης καρτελών..."
 
 #: MainWindow.cpp:642 MainWindow.cpp:667
 #, kde-format
@@ -1365,11 +1353,9 @@ msgstr "Φόρμα"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Συντόμευση"
+msgstr "Συντόμευση:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1387,9 +1373,7 @@ msgstr "Αντιστροφή"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
-#, fuzzy, kde-format
-#| msgctxt "@item:intable The session title"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "Τίτλος"
 
@@ -1397,13 +1381,13 @@ msgstr "Τίτλος"
 #: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
-msgstr ""
+msgstr "Υπόδειξη"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
 #: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
-msgstr ""
+msgstr "Ομάδα"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
@@ -1414,38 +1398,34 @@ msgstr "Προκαθορισμένο"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Command"
-msgstr "Εντολή:"
+msgstr "Εντολή"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:347
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "Προειδοποίηση: "
+msgstr "Προειδοποιήσεις"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "Εκτέλεση"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:258
-#, fuzzy, kde-format
-#| msgid "Save File"
+#, kde-format
 msgid "Save"
-msgstr "Αποθήκευση αρχείου"
+msgstr "Αποθήκευση"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:269
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Ενημέρωση"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
 #: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:323
@@ -1455,130 +1435,112 @@ msgstr "Ακύρωση"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:45
 #: plugins/QuickCommands/quickcommandsplugin.cpp:112
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Quick Commands"
-msgstr "Εντολή:"
+msgstr "Γρήγορες εντολές"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "Εμφάνιση γρήγορης πρόσβασης"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "Εμφάνιση γρήγορων εντολών"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:168
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
 #, kde-format
 msgid "A duplicate item exists"
-msgstr ""
+msgstr "Υπάρχει ένα διπλότυπο αντικείμενο"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
+"Διορθώστε όλες τις προειδοποιήσεις πριν επιχειρήσετε να εκτελέσετε αυτή το "
+"σενάριο"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "There are %1 open terminals in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr ""
-"Υπάρχουν %1 ανοιχτά τερματικά σε αυτό το παράθυρο. Σίγουρα θέλετε να "
-"κλείσετε;"
+"Υπάρχουν κάποια σφάλματα σε αυτό το σενάριο, θέλετε πράγματι να το "
+"εκτελέσετε;"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Σφάλματα φλοιού"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "Εκτέλεση"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:244
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the folder %1,\n"
-#| " with multiple SSH Configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
-"Πρόκειται να διαγράψετε τον φάκελο %1,\n"
-" με πολλές SSH διαμορφώσεις, είστε βέβαιοι;"
+"Πρόκειται να διαγράψετε την ομάδα %1,\n"
+" με πολλές διαμορφώσεις, είστε βέβαιοι;"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:245
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the folder %1,\n"
-#| " with multiple SSH Configurations, are you sure?"
+#, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr ""
-"Πρόκειται να διαγράψετε τον φάκελο %1,\n"
-" με πολλές SSH διαμορφώσεις, είστε βέβαιοι;"
+msgstr "Πρόκειται να διαγράψετε το %1, είστε βέβαιοι;"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:254
-#, fuzzy, kde-format
-#| msgid "Remove SSH Configurations"
+#, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr "Διαγραφή διαμορφώσεων SSH"
+msgstr "Διαγραφή διαμορφώσεων γρήγορων εντολών"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
-msgstr ""
+msgstr "Ο τίτλος δεν γίνεται να είναι κενός"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:294
-#, fuzzy, kde-format
-#| msgid "Command to execute"
+#, kde-format
 msgid "Command can not be empty"
-msgstr "Εντολή προς εκτέλεση"
+msgstr "Η εντολή δεν γίνεται να είναι κενή"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:314
-#, fuzzy, kde-format
-#| msgid "Rename Tab"
+#, kde-format
 msgid "Rename"
-msgstr "Μετονομασία καρτέλας"
+msgstr "Μετονομασία"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:349
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings (*)"
-msgstr "Προειδοποίηση: "
+msgstr "Προειδοποιήσεις (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Configure"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
-msgstr "Διαμόρφωση"
+msgstr "SSH Διαμόρφωση"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "Προκαθορισμένο"
+msgstr "Προκαθορισμένη"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
 msgid "%1 is a folder for SSH entries"
-msgstr ""
+msgstr "Το %1 είναι φάκελος για SSH εγγραφές"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:319
@@ -1586,17 +1548,14 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:420
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Configure"
+#, kde-format
 msgid "SSH Config"
-msgstr "Διαμόρφωση"
+msgstr "SSH Διαμόρφωση"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgid "Host: %1"
-msgstr "Υπολογιστής:"
+msgstr "Υπολογιστής: %1"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:63
 #, kde-format
@@ -1611,30 +1570,34 @@ msgstr "Εμφάνιση διαχειριστή SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Εμφάνιση γρήγορης πρόσβασης για ενέργειες SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH εγγραφές"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
+"Αδυναμία ανάκτησης του ονόματος της διεργασίας, άρα δεν μπορούμε να "
+"αιτηθούμε σύνδεση"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #: plugins/SSHManager/sshmanagerplugin.cpp:190
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr ""
+msgstr "Σφάλμα έκδοσης SSH εντολής"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:190
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
+"Αδυναμία έκδοσης SSH εντολής εκτός της εφαρμογής του φλοιού (πχ bash, zsh, "
+"sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
@@ -1647,18 +1610,15 @@ msgstr "SSH κλειδί"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Να μην γίνει αλλαγή"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the folder %1,\n"
-#| " with multiple SSH Configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
@@ -1667,8 +1627,7 @@ msgstr ""
 " με πολλές SSH διαμορφώσεις, είστε βέβαιοι;"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:243
-#, fuzzy, kde-format
-#| msgid "Remove SSH Configurations"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Διαγραφή διαμορφώσεων SSH"
@@ -1707,12 +1666,12 @@ msgstr "Μια συνεδρία ssh πρέπει να έχει προφίλ"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Cannot delete this folder"
-msgstr ""
+msgstr "Αδυναμία διαγραφής αυτού του φακέλου"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:451
 #, kde-format
 msgid "Delete folder and all of its contents"
-msgstr ""
+msgstr "Να διαγραφεί ο φάκελος και ό,τι περιέχει"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
@@ -1720,23 +1679,18 @@ msgid "Double click to change the folder name."
 msgstr "Με διπλό κλικ αλλάζετε το όνομα του φακέλου."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Do not close the initial session automatically when it ends."
+#, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "Να μην κλείνει αυτόματα η αρχική συνεδρία όταν ολοκληρωθεί."
+msgstr "Δεν μπορείτε να διαγράψετε μια αυτόματη προσθήκη εγγραφής."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "Επεξεργασία των επιλεγμένων προφίλ"
+msgstr "Διαγραφή της επιλεγμένης εγγραφής"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
@@ -1744,19 +1698,17 @@ msgstr "Συντόμευση"
 #: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
-msgstr ""
+msgstr "Να εμφανίζονται εγγραφές που δεν ταιριάζουν στο φίλτρο"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Αλλαγή προφίλ σε σύνδεση/αποσύνδεση"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
 msgstr "Διαχείριση προφίλ"
 
@@ -1768,10 +1720,9 @@ msgstr "Αναγνωριστικό"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:89
-#, fuzzy, kde-format
-#| msgid "The name of this entry on the list"
+#, kde-format
 msgid "A name for this ssh entry"
-msgstr "Το όνομα αυτής της καταχώρησης στη λίστα"
+msgstr "Ένα όνομα για αυτήν την ssh εγγραφή"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:92
@@ -1802,7 +1753,7 @@ msgstr "Θύρα"
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr ""
+msgstr "Η θύρα του εξυπηρετητή, 22 είναι η προκαθορισμένη για ssh συνδέσεις"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
@@ -1814,7 +1765,7 @@ msgstr "22"
 #: plugins/SSHManager/sshwidget.ui:142
 #, kde-format
 msgid "The private key to be used for this connection"
-msgstr ""
+msgstr "Το ιδιωτικό κλειδί για αυτήν τη σύνδεση"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:148
@@ -1829,12 +1780,14 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
+"Αν αυτό ρυθμιστεί, δεν βασιζόμαστε στο παραπάνω σύνολο SSH κλειδιών, αλλά "
+"στη διαμόρφωση του ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:171
 #, kde-format
 msgid "Use ~/.ssh/config for key"
-msgstr "Χρήση του ~/.ssh/config για το κλειδί"
+msgstr "Να γίνεται χρήση του ~/.ssh/config για το κλειδί"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: plugins/SSHManager/sshwidget.ui:178
@@ -1844,16 +1797,15 @@ msgstr "Όνομα χρήστη"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:185
-#, fuzzy, kde-format
-#| msgid "New Remote Connection"
+#, kde-format
 msgid "The username for the connection"
-msgstr "Νέα απομακρυσμένη σύνδεση"
+msgstr "Το όνομα χρήστη για τη σύνδεση"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:188
 #, kde-format
 msgid "Your username"
-msgstr "το όνομα χρήστη"
+msgstr "Το όνομα χρήστη"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
 #: plugins/SSHManager/sshwidget.ui:195
@@ -1866,6 +1818,7 @@ msgstr "Φάκελος"
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
+"Για διαχειριστικούς σκοπούς, αυτή η εγγραφή θα βρίσκεται μέσα στον φάκελο."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: plugins/SSHManager/sshwidget.ui:221
@@ -1877,40 +1830,37 @@ msgstr "Προφίλ"
 #: plugins/SSHManager/sshwidget.ui:234
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
-msgstr ""
+msgstr "Το προφίλ που θα είναι ενεργό όταν ξεκινήσει η ssh συνεδρία"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
 #: plugins/SSHManager/sshwidget.ui:272
 #, kde-format
 msgid "Add a new SSH Entry"
-msgstr ""
+msgstr "Προσθήκη νέας SSH εγγραφής"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:286
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "Επεξεργασία των επιλεγμένων προφίλ"
+msgstr "Διαγραφή της επιλεγμένης SSH εγγραφής"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:300
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Edit selected entry"
-msgstr "Επεξεργασία των επιλεγμένων προφίλ"
+msgstr "Επεξεργασία της επιλεγμένης εγγραφής"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:310
-#, fuzzy, kde-format
-#| msgid "Remove SSH Configurations"
+#, kde-format
 msgid "Add new SSH Configuration"
-msgstr "Διαγραφή διαμορφώσεων SSH"
+msgstr "Προσθήκη νέας SSH διαμόρφωσης"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
 #: plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel Add or Edit"
-msgstr ""
+msgstr "Ακύρωση προσθήκης ή επεξεργασίας"
 
 #: pluginsystem/PluginManager.cpp:83
 #, kde-format
@@ -1961,11 +1911,7 @@ msgid "Shortcut"
 msgstr "Συντόμευση"
 
 #: profile/ProfileModel.cpp:80
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox added to the name of the Default/fallback profile, to "
-#| "point out it's read-only/hardcoded"
-#| msgid " [Read-only]"
+#, kde-format
 msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
@@ -1973,17 +1919,16 @@ msgid " [Read-only]"
 msgstr " [Ανάγνωση-μόνο]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "Προκαθορισμένο"
+msgstr "[Προκαθορισμένο]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "Το ενσωματωμένο προφίλ είναι πάντα διαθέσιμο"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2138,10 +2083,9 @@ msgstr "Σιγή στην '%1' (Συνεδρία '%2')"
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1128
-#, fuzzy, kde-format
-#| msgid "&Close Session"
+#, kde-format
 msgid "Show session"
-msgstr "&Κλείσιμο συνεδρίας"
+msgstr "Εμφάνιση συνεδρίας"
 
 #: session/Session.cpp:934
 #, kde-format
@@ -2227,19 +2171,17 @@ msgstr "Αντιγραφή"
 #: session/SessionController.cpp:678
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Αντιγραφή εκτός των συμβόλων αναμονής"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
-msgstr "Αντιγραφή εισόδου"
+msgstr "Αντιγραφή δεδομένων εισόδου χρήστη"
 
 #: session/SessionController.cpp:690
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "Αντιγραφή εισόδου"
+msgstr "Αντιγραφή εξόδου εντολής"
 
 #: session/SessionController.cpp:705
 #, kde-format
@@ -2257,10 +2199,9 @@ msgid "&Select All"
 msgstr "&Επιλογή όλων"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Επιλογή &γραμμής"
+msgstr "Επιλογή &λειτουργίας"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -2306,7 +2247,7 @@ msgstr "Ορισμός &κωδικοποίησης"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
-msgstr ""
+msgstr "Να επιτρέπεται η ιχνηλάτηση του ποντικιού"
 
 #: session/SessionController.cpp:821
 #, kde-format
@@ -2454,12 +2395,10 @@ msgid "Confirm Close"
 msgstr "Επιβεβαίωση κλεισίματος"
 
 #: session/SessionController.cpp:1099
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "Κλείσιμο καρτέλας"
+msgstr "Κλείσιμο προγράμματος"
 
 #: session/SessionController.cpp:1126
 #, kde-format
@@ -2483,12 +2422,12 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Διακοπή προγράμματος"
 
 #: session/SessionController.cpp:1982
 #, kde-format
 msgid "Open Current Folder With"
-msgstr ""
+msgstr "Άνοιγμα τρέχοντος φακέλου με"
 
 #: session/SessionController.cpp:2052
 #, kde-format
@@ -3348,30 +3287,28 @@ msgid "Split View Top/Bottom"
 msgstr "Διαχωρισμός προβολής πάνω/κάτω"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Διαχωρισμός προβολής πάνω/κάτω"
+msgstr "Αυτόματος διαχωρισμός προβολής"
 
 #: ViewManager.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr "Φόρτωση νέας καρτέλας με περίγραμμα 2x2 τερματικά"
+msgstr "Φόρτωση νέας καρτέλας με διάταξη 2x2 τερματικά"
 
 #: ViewManager.cpp:148
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr "Φόρτωση νέας καρτέλας με περίγραμμα 2x1 τερματικά"
+msgstr "Φόρτωση νέας καρτέλας με διάταξη 2x1 τερματικά"
 
 #: ViewManager.cpp:157
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr "Φόρτωση νέας καρτέλας με περίγραμμα 1x2 τερματικά"
+msgstr "Φόρτωση νέας καρτέλας με διάταξη 1x2 τερματικά"
 
 #: ViewManager.cpp:165
 #, kde-format
@@ -3485,25 +3422,25 @@ msgstr "Μετακίνηση καρτέλας αριστερά"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Ρύθμιση σημασιολογικής ολοκλήρωσης (bash)"
 
 #: ViewManager.cpp:291
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Εναλλαγή εμφάνισης συμβουλών σημασιολογίας"
 
 #: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Εναλλαγή εμφάνισης αρίθμησης γραμμών"
 
 #: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Ισομεγέθεις προβολές"
 
 #: ViewManager.cpp:314
 #, kde-format
@@ -3512,65 +3449,52 @@ msgid "Switch to Tab %1"
 msgstr "Εναλλαγή στην καρτέλα %1"
 
 #: ViewManager.cpp:527
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Αλληλεπίδραση κειμένου"
+msgstr "Συμβουλές σημασιολογίας"
 
 #: ViewManager.cpp:543
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "Σταθερός αριθμός γραμμών: "
+msgstr "Αρίθμηση γραμμών "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Αποθήκευση περιγράμματος καρτελών σε αρχείο"
+msgstr "Αποθήκευση διάταξης καρτελών"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
-#, fuzzy, kde-format
-#| msgid "Konsole View Layout (*.json)"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr "Περίγραμμα προβολής κονσόλας (*.json)"
+msgstr "Διάταξη προβολής κονσόλας (*.json)"
 
 #: ViewManager.cpp:1089
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"Παρουσιάστηκε πρόβλημα κατά την αποθήκευση του περιγράμματος.\n"
+"Παρουσιάστηκε πρόβλημα κατά την αποθήκευση της διάταξης.\n"
 "%1"
 
 #: ViewManager.cpp:1150
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when loading the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"Παρουσιάστηκε πρόβλημα κατά τη φόρτωση του περιγράμματος.\n"
+"Παρουσιάστηκε πρόβλημα κατά τη φόρτωση της διάταξης.\n"
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Φόρτωση περιγράμματος καρτελών από αρχείο"
+msgstr "Φόρτωση διάταξης καρτελών"
 
 #: Vt102Emulation.cpp:2354
 #, kde-format
@@ -4009,26 +3933,25 @@ msgstr "Εμφάνιση κατακόρυφης γραμμής στη στήλη
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Σύνθετη διάταξη κειμένου</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Σύνθετη διάταξη κειμένου"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Αποτύπωση διπλής κατεύθυνσης"
+msgstr "Ενεργοποίηση αποτύπωσης κειμένου με λειτουργία λέξεων"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Λειτουργία λέξεων"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -4037,69 +3960,70 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Να αγνοούνται οι αλλαγές ιδιοτήτων στη μέση της λέξης (διαφορετικά η "
+"αποτύπωση αλλαγών στις ιδιότητες καταστρέφει τη λέξη)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Χρήση των ίδιων ιδιοτήτων για όλη τη λέξη"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Να αποτυπώνονται μαζί οι λέξεις με ASCII χαρακτήρες"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Χαρακτήρες λέξης:"
+msgstr "ASCII χαρακτήρες "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Να αποτυπώνονται μαζί οι λέξεις με χαρακτήρες Βραχμικής γραφής"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Ταίριασμα με τον τρέχοντα χαρακτήρα"
+msgstr "Χαρακτήρες Βραχμικής γραφής"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Γραμματοσειρά:"
+msgstr "Γραμματοσειρά εμότζι:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Οι γραμμές είναι πάντα από αριστερά (LTR) αντί να το αποφασίζει αυτό ο "
+"πρώτος έντονος χαρακτήρας."
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "υποχρεωτική κατεύθυνση γραμμών από αριστερά (LTR)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Να γίνεται μεταχείριση των χαρακτήρων σχεδίασης πίνακα ως έντονων LTR."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Αντικατάσταση λειτουργίας BiDi χαρακτήρων πίνακα"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4319,10 +4243,9 @@ msgstr "Προσαρμοσμένη εντολή κειμενογράφου"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:39
-#, fuzzy, kde-format
-#| msgid "Current Tab Settings"
+#, kde-format
 msgid "General Settings"
-msgstr "Τρέχουσες ρυθμίσεις καρτελών"
+msgstr "Γενικές ρυθμίσεις"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:63
@@ -4445,28 +4368,28 @@ msgstr "Λειτουργία κουδουνιού τερματικού:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:374
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic Integration"
-msgstr "Αλληλεπίδραση κειμένου"
+msgstr "Σημασιολογική ολοκλήρωση"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Εξομοίωση βελών πάνω/κάτω"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr ""
+"Το κλικ με το ποντίκι σε γραμμή εισαγωγής κειμένου μετακινεί τον δρομέα"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Συμβουλές σημασιολογίας:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4476,9 +4399,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:410 widgets/EditProfileGeneralPage.ui:456
 #: widgets/EditProfileGeneralPage.ui:502 widgets/EditProfileGeneralPage.ui:548
 #: widgets/EditProfileGeneralPage.ui:594
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgctxt "Never"
 msgid "Never"
 msgstr "Ποτέ"
@@ -4494,7 +4415,7 @@ msgstr "Ποτέ"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Εμφάνιση συμβουλών URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4504,9 +4425,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:430 widgets/EditProfileGeneralPage.ui:476
 #: widgets/EditProfileGeneralPage.ui:522 widgets/EditProfileGeneralPage.ui:568
 #: widgets/EditProfileGeneralPage.ui:614
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Πάντα"
@@ -4515,27 +4434,25 @@ msgstr "Πάντα"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Κόκκινες γραμμές σφαλμάτων:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Θαμπό φόντο"
+msgstr "Κόκκινο φόντο σφαλμάτων:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Εναλλαγή γραμμών:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Θαμπό φόντο"
+msgstr "Εναλλαγή φόντου:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
@@ -4872,7 +4789,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Προεπισκόπηση χρωμάτων στην αιώρηση"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
@@ -4881,12 +4798,14 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
+"Κάποιες εφαρμογές του τερματικού υποστηρίζουν τη χρήση ποντικιού στην "
+"προκαθορισμένη λειτουργία. Αυτό αλλάζει (on/off) και ενώ εκτελούνται."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:455
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
-msgstr ""
+msgstr "Να επιτρέπεται στα τερματικά ο χειρισμός των κλικ και των ελκύσεων"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:43
@@ -5035,14 +4954,7 @@ msgstr ""
 "ξεμείνει από ελεύθερη μνήμη και τότε θα προκληθούν σοβαρά προβλήματα σε αυτό."
 
 #: widgets/HistorySizeWidget.cpp:69
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "When using this option, the scrollback data will be written unencrypted "
-#| "to temporary files. Those temporary files will be deleted automatically "
-#| "when Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → "
-#| "Configure Konsole → File Location</emphasis> to select the location of "
-#| "the temporary files."
+#, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "When using this option, the scrollback data will be written unencrypted to "
@@ -5054,8 +4966,8 @@ msgstr ""
 "Όταν γίνεται χρήση αυτής της επιλογής, τα δεδομένα προς τα πίσω κύλισης θα "
 "εγγραφούν χωρίς κρυπτογράφηση σε προσωρινά αρχεία. Αυτά τα προσωρινά αρχεία "
 "θα διαγραφούν αυτόματα όταν η κονσόλα κλείνει κανονικά.<nl/>Χρησιμοποιήστε "
-"<emphasis>Ρυθμίσεις → Διαμόρφωση Konsole → Θέση αρχείων</emphasis> για να "
-"επιλέξετε τη θέση των προσωρινών αρχείων."
+"<emphasis>Ρυθμίσεις → Διαμόρφωση Konsole → Προσωρινά αρχεία</emphasis> για "
+"να επιλέξετε τη θέση των προσωρινών αρχείων."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
