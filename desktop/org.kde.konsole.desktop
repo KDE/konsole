@@ -19,6 +19,7 @@ Keywords[be@latin]=terminal;kansoĺ;scenar;zapuscić;vykanać;zahad;zahadny rado
 Keywords[bg]=терминал,конзола,скрипт,изпълнение,команда,команден ред
 Keywords[ca]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres
 Keywords[ca@valencia]=terminal;consola;script;executar;ordre;línia d'ordres;línia ordres;cli;bash;sh;shell;zsh;cmd;indicador d'ordres
+Keywords[el]=τερματικό;κονσόλα;σενάριο;εκτελείται;εκτέλεση;εντολή;γραμμή-εντολών;commandline;cli;bash;sh;shell;zsh;cmd;σύμβολο αναμονής για εντολή
 Keywords[en_GB]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt
 Keywords[es]=terminal;consola;script;guion;guión;lanzar;ejecutar;comando;orden;línea de órdenes;línea de comandos;cli;bash;sh;shell;intérprete;zsh;cmd;introducción de órdenes
 Keywords[eu]=terminala;kontsola;gidoia;ibili;exekutatu;komandoa;komando-lerroa;cli;bash;sh;shell;oskola;zsh;cmd;komando-gonbita
