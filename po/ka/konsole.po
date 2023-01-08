@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-03 00:52+0000\n"
-"PO-Revision-Date: 2023-01-03 08:27+0100\n"
+"PO-Revision-Date: 2023-01-07 07:52+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3964,8 +3964,8 @@ msgstr ""
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "პროფილის ჩასწორება: %2"
+msgstr[1] "%1 პროფილის ჩასწორება: %2"
 
 #: widgets/EditProfileDialog.cpp:347
 #, kde-format
@@ -3975,7 +3975,7 @@ msgstr "ახალი პროფილის შექმნა"
 #: widgets/EditProfileDialog.cpp:350
 #, kde-format
 msgid "Edit Profile \"%1\""
-msgstr ""
+msgstr "პროფილის ჩასწორება (\"%1\")"
 
 #: widgets/EditProfileDialog.cpp:441
 #, kde-format
