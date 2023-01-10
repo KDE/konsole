@@ -336,6 +336,7 @@ void TerminalPainter::drawContents(Character *image,
                 }
                 if (!printerFriendly && char_value.rendition.f.cursor) {
                     Character style = char_value;
+                    m_parentDisplay->setVisualCursorPosition(x);
 
                     if (style.rendition.f.selected) {
                         if (invertedRendition) {

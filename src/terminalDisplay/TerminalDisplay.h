@@ -420,6 +420,8 @@ public:
     // Clear mouse selection, but not keyboard selection
     void clearMouseSelection();
 
+    void setVisualCursorPosition(int x);
+
 public Q_SLOTS:
     /**
      * Causes the terminal display to fetch the latest character image from the associated
@@ -804,6 +806,7 @@ private:
     bool _semanticInputClick;
 
     UBiDi *ubidi = nullptr;
+    QPoint _visualCursorPosition = {0, 0};
 
     int _selModeModifiers;
     bool _selModeByModifiers; // Selection started by Shift+Arrow
