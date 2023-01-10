@@ -752,6 +752,11 @@ QPoint TerminalDisplay::cursorPosition() const
     }
 }
 
+void TerminalDisplay::setVisualCursorPosition(int x)
+{
+    _visualCursorPosition = {x, cursorPosition().y()};
+}
+
 bool TerminalDisplay::isCursorOnDisplay() const
 {
     return cursorPosition().x() < _columns && cursorPosition().y() < _lines;
@@ -900,7 +905,7 @@ void TerminalDisplay::updateCursor()
     Q_ASSERT(cursorLocation < _imageSize);
 
     int charWidth = _image[cursorLocation].width();
-    QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(charWidth, 1)));
+    QRect cursorRect = imageToWidget(QRect(_visualCursorPosition, QSize(charWidth, 1)));
     update(cursorRect);
 }
 
