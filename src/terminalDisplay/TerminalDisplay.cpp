@@ -3216,5 +3216,5 @@ int TerminalDisplay::bidiMap(Character *screenline,
             vis2line[p++] = semi_vis2line[i];
         }
     }
-    return lastNonSpace;
+    return _bidiLineLTR ? lastNonSpace : linewidth - 1;
 }
