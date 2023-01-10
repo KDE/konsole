@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 04:17+0000\n"
+"POT-Creation-Date: 2023-01-10 02:45+0000\n"
 "PO-Revision-Date: 2022-07-20 11:10+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -3238,7 +3238,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&İmtina etmək"
 
-#: terminalDisplay/TerminalDisplay.cpp:2501
+#: terminalDisplay/TerminalDisplay.cpp:2504
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3249,17 +3249,17 @@ msgstr ""
 "Software_flow_control\">dayandırıldı</a> Davam etmək üçün <b>Ctrl+Q</b> "
 "yığmaq.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2559
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Bu terminal yalnız oxumaq üçün açıqdır."
 
-#: terminalDisplay/TerminalDisplay.cpp:2946
+#: terminalDisplay/TerminalDisplay.cpp:2949
 #, kde-format
 msgid "Change &Directory To"
 msgstr "İş qovluğunu &əvəzləmək"
 
-#: terminalDisplay/TerminalDisplay.cpp:2979
+#: terminalDisplay/TerminalDisplay.cpp:2982
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Ünvanı daxil etmək"

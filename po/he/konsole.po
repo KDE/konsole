@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 04:17+0000\n"
+"POT-Creation-Date: 2023-01-10 02:45+0000\n"
 "PO-Revision-Date: 2017-05-24 07:33-0400\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -3296,7 +3296,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2501
+#: terminalDisplay/TerminalDisplay.cpp:2504
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/"
@@ -3313,17 +3313,17 @@ msgstr ""
 "להמשיך את הפלט. לחץ <a href=\"#close\">כאן</a>\n"
 " כדי לסגירת ההודעה</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2559
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2946
+#: terminalDisplay/TerminalDisplay.cpp:2949
 #, kde-format
 msgid "Change &Directory To"
 msgstr "החלף &ספרייה אל:"
 
-#: terminalDisplay/TerminalDisplay.cpp:2979
+#: terminalDisplay/TerminalDisplay.cpp:2982
 #, kde-format
 msgid "&Paste Location"
 msgstr "&הדבק מיקום"

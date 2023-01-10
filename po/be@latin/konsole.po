@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 04:17+0000\n"
+"POT-Creation-Date: 2023-01-10 02:45+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -3281,7 +3281,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Skasavać"
 
-#: terminalDisplay/TerminalDisplay.cpp:2501
+#: terminalDisplay/TerminalDisplay.cpp:2504
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3292,17 +3292,17 @@ msgstr ""
 "\">prypynieny</a> naciskanniem Ctrl+S. Kab adnavić, nacisnicie <b>Ctrl+Q</b>."
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2559
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Hety terminal dastupny toĺki dlia čytannia."
 
-#: terminalDisplay/TerminalDisplay.cpp:2946
+#: terminalDisplay/TerminalDisplay.cpp:2949
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Z&mianić kataloh na"
 
-#: terminalDisplay/TerminalDisplay.cpp:2979
+#: terminalDisplay/TerminalDisplay.cpp:2982
 #, kde-format
 msgid "&Paste Location"
 msgstr "Ustavić &razmiaščennie"
