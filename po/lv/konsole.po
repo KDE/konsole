@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:52+0000\n"
+"POT-Creation-Date: 2023-01-10 00:59+0000\n"
 "PO-Revision-Date: 2012-07-02 13:00+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -3414,7 +3414,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2511
+#: terminalDisplay/TerminalDisplay.cpp:2514
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3428,17 +3428,17 @@ msgstr ""
 "\">apturēta</a>, nospiežot Ctrl+S. Nospiediet <b>Ctrl+Q</b>, lai atsāktu "
 "izvadi.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2566
+#: terminalDisplay/TerminalDisplay.cpp:2569
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2956
+#: terminalDisplay/TerminalDisplay.cpp:2959
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Mainīt &mapi uz"
 
-#: terminalDisplay/TerminalDisplay.cpp:2989
+#: terminalDisplay/TerminalDisplay.cpp:2992
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Ielīmēt vietu"

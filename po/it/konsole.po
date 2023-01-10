@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:52+0000\n"
+"POT-Creation-Date: 2023-01-10 00:59+0000\n"
 "PO-Revision-Date: 2022-12-18 09:15+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -3235,7 +3235,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Annulla"
 
-#: terminalDisplay/TerminalDisplay.cpp:2511
+#: terminalDisplay/TerminalDisplay.cpp:2514
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3246,17 +3246,17 @@ msgstr ""
 "Software_flow_control\">sospeso</a> premendo Ctrl+S. Premi <b>Ctrl+Q</b> per "
 "riprendere.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2566
+#: terminalDisplay/TerminalDisplay.cpp:2569
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Il terminale è in sola lettura."
 
-#: terminalDisplay/TerminalDisplay.cpp:2956
+#: terminalDisplay/TerminalDisplay.cpp:2959
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Cambia la cartella a"
 
-#: terminalDisplay/TerminalDisplay.cpp:2989
+#: terminalDisplay/TerminalDisplay.cpp:2992
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Incolla posizione"

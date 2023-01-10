@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:52+0000\n"
+"POT-Creation-Date: 2023-01-10 00:59+0000\n"
 "PO-Revision-Date: 2010-12-17 20:05+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -3395,7 +3395,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2511
+#: terminalDisplay/TerminalDisplay.cpp:2514
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3408,17 +3408,17 @@ msgstr ""
 "<qt>การแสดงผลทางหน้าจอถูก <a href=\"http://en.wikipedia.org/wiki/XON\">หยุดไว้</"
 "a> โดยการกด Ctrl+S  ให้กด <b>Ctrl+Q</b> เพื่อทำงานต่อ</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2566
+#: terminalDisplay/TerminalDisplay.cpp:2569
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2956
+#: terminalDisplay/TerminalDisplay.cpp:2959
 #, kde-format
 msgid "Change &Directory To"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2989
+#: terminalDisplay/TerminalDisplay.cpp:2992
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
