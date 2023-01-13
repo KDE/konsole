@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:52+0000\n"
+"POT-Creation-Date: 2023-01-10 00:59+0000\n"
 "PO-Revision-Date: 2022-08-20 11:09+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -3208,7 +3208,7 @@ msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Avbryt"
 
-#: terminalDisplay/TerminalDisplay.cpp:2511
+#: terminalDisplay/TerminalDisplay.cpp:2514
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3219,17 +3219,17 @@ msgstr ""
 "Software_flow_control\">lagde i bakgrunnen</a> med tastetrykket «Ctrl + S». "
 "Trykk «<b>Ctrl + Q</b>» for å halda fram.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2566
+#: terminalDisplay/TerminalDisplay.cpp:2569
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Denne terminalen er skriveverna."
 
-#: terminalDisplay/TerminalDisplay.cpp:2956
+#: terminalDisplay/TerminalDisplay.cpp:2959
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Byt &mappe til"
 
-#: terminalDisplay/TerminalDisplay.cpp:2989
+#: terminalDisplay/TerminalDisplay.cpp:2992
 #, kde-format
 msgid "&Paste Location"
 msgstr "L&im inn adresse"
