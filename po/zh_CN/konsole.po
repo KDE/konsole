@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 02:45+0000\n"
-"PO-Revision-Date: 2023-01-12 10:34\n"
+"PO-Revision-Date: 2023-01-15 15:27\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -1415,7 +1415,7 @@ msgstr "快速命令"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "显示快速访问"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1539,7 +1539,7 @@ msgstr "显示 SSH 管理器"
 #: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "显示 SSH 操作快速访问"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
@@ -1668,13 +1668,13 @@ msgstr "显示不匹配筛选条件的条目"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "连接/断开时更改配置文件"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
 #, kde-format
 msgid "Manage profile"
-msgstr ""
+msgstr "管理配置文件"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2159,7 +2159,7 @@ msgstr "全部选择(&S)"
 #: session/SessionController.cpp:722
 #, kde-format
 msgid "Select &Mode"
-msgstr ""
+msgstr "选择模式 (&M)"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3355,13 +3355,13 @@ msgstr "设置语义集成 (bash)"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "语义提示显示开关"
 
 #: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "行号显示开关"
 
 #: ViewManager.cpp:304
 #, kde-format
@@ -3378,12 +3378,12 @@ msgstr "切换到标签 %1"
 #: ViewManager.cpp:527
 #, kde-format
 msgid "Semantic hints "
-msgstr ""
+msgstr "语义提示"
 
 #: ViewManager.cpp:543
 #, kde-format
 msgid "Line numbers "
-msgstr ""
+msgstr "行号 "
 
 #: ViewManager.cpp:1074
 #, kde-format
@@ -3924,13 +3924,13 @@ msgstr "强制从左向右"
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "将表格绘制字符视为强从左向右。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "表格字符双向模式覆盖"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4322,25 +4322,25 @@ msgstr "总是"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "红色错误栏："
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
 #, kde-format
 msgid "Red error background:"
-msgstr ""
+msgstr "红色错误背景色："
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "交替颜色栏："
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
 #, kde-format
 msgid "Alternating background:"
-msgstr ""
+msgstr "交替背景色："
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
