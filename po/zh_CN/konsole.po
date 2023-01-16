@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 00:59+0000\n"
+"POT-Creation-Date: 2023-01-16 01:01+0000\n"
 "PO-Revision-Date: 2023-01-12 10:30\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -3083,94 +3083,94 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "启用缩略图生成"
 
-#: terminalDisplay/TerminalDisplay.cpp:653
+#: terminalDisplay/TerminalDisplay.cpp:656
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "大小：%1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2200
+#: terminalDisplay/TerminalDisplay.cpp:2203
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "您确定要粘贴 %1 个字符吗？"
 
-#: terminalDisplay/TerminalDisplay.cpp:2201
+#: terminalDisplay/TerminalDisplay.cpp:2204
 #, kde-format
 msgid "Confirm Paste"
 msgstr "确认粘贴"
 
-#: terminalDisplay/TerminalDisplay.cpp:2234
+#: terminalDisplay/TerminalDisplay.cpp:2237
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "结束文字/中断：可退出当前进程"
 
-#: terminalDisplay/TerminalDisplay.cpp:2235
+#: terminalDisplay/TerminalDisplay.cpp:2238
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "传输结束：可退出当前进程"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2239
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "系统提示：尝试发出声音警告"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2240
 #, kde-format
 msgid "Backspace"
 msgstr "退格"
 
-#: terminalDisplay/TerminalDisplay.cpp:2238
+#: terminalDisplay/TerminalDisplay.cpp:2241
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "设备控制3/XOFF：暂停输出"
 
-#: terminalDisplay/TerminalDisplay.cpp:2239
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "替代/暂停：可暂停当前进程"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2243
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "退出(Esc)：用于操纵终端状态"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2244
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "文件分隔符/退出：可中止当前进程"
 
-#: terminalDisplay/TerminalDisplay.cpp:2268
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "您试图粘贴的文本包含隐藏的控制字符，是否要将其过滤掉？"
 
-#: terminalDisplay/TerminalDisplay.cpp:2271
+#: terminalDisplay/TerminalDisplay.cpp:2274
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "确认粘贴"
 
-#: terminalDisplay/TerminalDisplay.cpp:2272
+#: terminalDisplay/TerminalDisplay.cpp:2275
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "不带控制字符粘贴(&W)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2273
+#: terminalDisplay/TerminalDisplay.cpp:2276
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "全部粘贴(&P)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2274
+#: terminalDisplay/TerminalDisplay.cpp:2277
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2514
+#: terminalDisplay/TerminalDisplay.cpp:2500
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3180,17 +3180,17 @@ msgstr ""
 "<qt>已经按下 Ctrl+S，输出正被<a href=\"https://en.wikipedia.org/wiki/"
 "Software_flow_control\">挂起</a>。可以按下 <b>Ctrl+Q</b> 继续。</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2569
+#: terminalDisplay/TerminalDisplay.cpp:2555
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "此终端为只读。"
 
-#: terminalDisplay/TerminalDisplay.cpp:2959
+#: terminalDisplay/TerminalDisplay.cpp:2945
 #, kde-format
 msgid "Change &Directory To"
 msgstr "目录切换到(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2992
+#: terminalDisplay/TerminalDisplay.cpp:2978
 #, kde-format
 msgid "&Paste Location"
 msgstr "粘贴位置(&P)"
