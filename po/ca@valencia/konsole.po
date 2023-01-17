@@ -513,7 +513,7 @@ msgstr "Esquema de color nou"
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
-msgstr "Edició de l'esquema de color"
+msgstr "Editeu l'esquema de color"
 
 #: colorscheme/ColorSchemeEditor.cpp:382
 #, kde-format
@@ -1525,7 +1525,7 @@ msgstr "Avisos (*)"
 #, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
-msgstr "Configuració del SSH"
+msgstr "Configureu SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
 #, kde-format
@@ -1546,7 +1546,7 @@ msgstr "%1 és una carpeta d'entrades SSH"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "SSH Config"
-msgstr "Configuració del SSH"
+msgstr "Configureu SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
@@ -3421,7 +3421,7 @@ msgstr "Mou la pestanya a l'esquerra"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr "Configuració de la integració semàntica (bash)"
+msgstr "Configureu la integració semàntica (bash)"
 
 #: ViewManager.cpp:291
 #, kde-format
@@ -4111,7 +4111,7 @@ msgstr "Crea un perfil nou"
 #: widgets/EditProfileDialog.cpp:350
 #, kde-format
 msgid "Edit Profile \"%1\""
-msgstr "Edició del perfil «%1»"
+msgstr "Editeu el perfil «%1»"
 
 #: widgets/EditProfileDialog.cpp:441
 #, kde-format
