@@ -738,6 +738,7 @@ void ViewManager::splitAutoNextTab()
 void ViewManager::splitView(Qt::Orientation orientation, bool fromNextTab)
 {
     TerminalDisplay *terminalDisplay;
+    TerminalDisplay *focused;
     if (fromNextTab) {
         int tabId = _viewContainer->indexOf(_viewContainer->activeViewSplitter());
         auto nextTab = _viewContainer->viewSplitterAt(tabId + 1);
@@ -746,6 +747,7 @@ void ViewManager::splitView(Qt::Orientation orientation, bool fromNextTab)
             return;
         }
         terminalDisplay = nextTab->activeTerminalDisplay();
+        focused = _viewContainer->activeViewSplitter()->activeTerminalDisplay();
     } else {
         int currentSessionId = currentSession();
         // At least one display/session exists if we are splitting
@@ -759,15 +761,15 @@ void ViewManager::splitView(Qt::Orientation orientation, bool fromNextTab)
         const QString directory = profile->startInCurrentSessionDir() ? activeSession->currentWorkingDirectory() : QString();
         auto *session = createSession(profile, directory);
 
-        terminalDisplay = createView(session);
+        focused = terminalDisplay = createView(session);
     }
 
     _viewContainer->splitView(terminalDisplay, orientation);
 
     toggleActionsBasedOnState();
 
-    // focus the new container
-    terminalDisplay->setFocus();
+    // focus the new container if created, else keep the currently focused view
+    focused->setFocus();
 }
 
 void ViewManager::expandActiveContainer()
