@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-16 01:01+0000\n"
-"PO-Revision-Date: 2023-01-03 17:04+0100\n"
+"PO-Revision-Date: 2023-01-17 13:26+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 "X-Language: cs_CZ\n"
 "X-Source-Language: en_US\n"
 
@@ -620,7 +620,7 @@ msgstr "Oříznout"
 #: colorscheme/ColorSchemeEditor.ui:188
 #, kde-format
 msgid "Adapt"
-msgstr ""
+msgstr "Uzpůsobit"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:193
@@ -869,7 +869,7 @@ msgstr "Emulátor terminálu"
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr ""
+msgstr "(c) 1997-2022, Vývojáři Konsole"
 
 #: main.cpp:333
 #, kde-format
@@ -1407,7 +1407,7 @@ msgstr "Zrušit"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:112
 #, kde-format
 msgid "Quick Commands"
-msgstr ""
+msgstr "Rychlé příkazy"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
@@ -1423,17 +1423,17 @@ msgstr "Zobrazit rychlé příkazy"
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
 #, kde-format
 msgid "A duplicate item exists"
-msgstr ""
+msgstr "Existuje duplicitní položka"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
-msgstr ""
+msgstr "Prosím opravte varování před spuštěním tohoto skriptu"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr ""
+msgstr "Skript obsahuje chyby. Opravdu jej chcete spustit?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
@@ -1457,22 +1457,22 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr ""
+msgstr "Chystáte se smazat %1. Jste si jisti?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:254
 #, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr ""
+msgstr "Smazat nastavení rychlých příkazů"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
-msgstr ""
+msgstr "Název nemůže být prázdný"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:294
 #, kde-format
 msgid "Command can not be empty"
-msgstr ""
+msgstr "Příkaz nesmí být prázdný"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:314
 #, kde-format
@@ -1551,7 +1551,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr ""
+msgstr "Chyba při vykonávání příkazu SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:192
 #, kde-format
@@ -1588,7 +1588,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr ""
+msgstr "Smazat nastavení SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
@@ -1623,12 +1623,12 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Cannot delete this folder"
-msgstr ""
+msgstr "Tuto složku nelze smazat"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:451
 #, kde-format
 msgid "Delete folder and all of its contents"
-msgstr ""
+msgstr "Smazat složku a všechen její obsah"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
@@ -1643,7 +1643,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
 #, kde-format
 msgid "Delete selected entry"
-msgstr ""
+msgstr "Smazat vybraný záznam"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
@@ -1808,7 +1808,7 @@ msgstr "Upravit vybranou položku"
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add new SSH Configuration"
-msgstr ""
+msgstr "Přidat nové nastavení SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
 #: plugins/SSHManager/sshwidget.ui:320
@@ -2150,7 +2150,7 @@ msgstr "Vybr&at vše"
 #: session/SessionController.cpp:722
 #, kde-format
 msgid "Select &Mode"
-msgstr ""
+msgstr "Vyberte režim"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -2343,7 +2343,7 @@ msgstr "Potvrdit uzavření"
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr ""
+msgstr "Zavřít program"
 
 #: session/SessionController.cpp:1126
 #, kde-format
@@ -2367,7 +2367,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Zabít program"
 
 #: session/SessionController.cpp:1982
 #, kde-format
@@ -3398,6 +3398,8 @@ msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
+"Nastal problém při ukládání rozvržení.\n"
+"%1"
 
 #: ViewManager.cpp:1150
 #, kde-format
@@ -3406,12 +3408,14 @@ msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
+"Nastal problém při načítání rozvržení.\n"
+"%1"
 
 #: ViewManager.cpp:1161
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "Načíst rozložení karet"
 
 #: Vt102Emulation.cpp:2354
 #, kde-format
@@ -4332,13 +4336,13 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Měnící se pruhy:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
 #, kde-format
 msgid "Alternating background:"
-msgstr ""
+msgstr "Měnící se pozadí:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
