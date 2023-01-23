@@ -139,7 +139,6 @@ void ViewManager::setupActions()
     action->setText(i18nc("@action:inmenu", "Split View Left/Right from next tab"));
     connect(action, &QAction::triggered, this, &ViewManager::splitLeftRightNextTab);
     collection->addAction(QStringLiteral("split-view-left-right-next-tab"), action);
-    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_ParenLeft));
     splitViewActions->addAction(action);
     _multiTabOnlyActions << action;
 
@@ -147,7 +146,6 @@ void ViewManager::setupActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
     action->setText(i18nc("@action:inmenu", "Split View Top/Bottom from next tab"));
     connect(action, &QAction::triggered, this, &ViewManager::splitTopBottomNextTab);
-    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_ParenRight));
     collection->addAction(QStringLiteral("split-view-top-bottom-next-tab"), action);
     splitViewActions->addAction(action);
     _multiTabOnlyActions << action;
@@ -156,7 +154,6 @@ void ViewManager::setupActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-auto")));
     action->setText(i18nc("@action:inmenu", "Split View Automatically from next tab"));
     connect(action, &QAction::triggered, this, &ViewManager::splitAutoNextTab);
-    collection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_Asterisk));
     collection->addAction(QStringLiteral("split-view-auto-next-tab"), action);
     splitViewActions->addAction(action);
     _multiTabOnlyActions << action;
