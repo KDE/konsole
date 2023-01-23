@@ -736,6 +736,7 @@ private:
     Enum::TripleClickModeEnum _tripleClickMode = Enum::SelectWholeLine;
     bool _possibleTripleClick = false; // is set in mouseDoubleClickEvent and cleared
                                        // after QApplication::doubleClickInterval() delay
+    QPoint _tripleClickPos; // The position where a potential triple click was started
     QString _doubleClickSelectedText; // selected text whose copying may be cancelled by further events; copying
     QString _doubleClickSelectedHtml; // is delayed to prevent a triple-click from generating > 1 entries in the
                                       // clipboard history (a triple click is a double click at first ;)

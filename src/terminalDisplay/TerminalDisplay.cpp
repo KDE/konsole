@@ -1237,6 +1237,10 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
         setFocus();
     }
 
+    if (_possibleTripleClick && QPoint::dotProduct(ev->pos() - _tripleClickPos, ev->pos() - _tripleClickPos) > 400) {
+        _possibleTripleClick = false;
+        copyToX11Selection(true);
+    }
     auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !usesMouseTracking());
 
     processFilters();
@@ -1637,6 +1641,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent *ev)
     }
 
     _possibleTripleClick = true;
+    _tripleClickPos = ev->pos();
 
     QTimer::singleShot(QApplication::doubleClickInterval(), this, [this]() {
         _possibleTripleClick = false;
