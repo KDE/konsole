@@ -876,6 +876,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 
     _appearanceUi->wordModeBrahmic->setChecked(profile->property<bool>(Profile::WordModeBrahmic));
     connect(_appearanceUi->wordModeBrahmic, &QPushButton::toggled, this, &EditProfileDialog::toggleWordModeBrahmic);
+
+    _appearanceUi->ignoreWcWidth->setChecked(profile->property<bool>(Profile::IgnoreWcWidth));
+    connect(_appearanceUi->ignoreWcWidth, &QPushButton::toggled, this, &EditProfileDialog::toggleIgnoreWcWidth);
 }
 
 void EditProfileDialog::setAntialiasText(bool enable)
@@ -2082,4 +2085,9 @@ void EditProfileDialog::toggleWordModeAscii(bool mode)
 void EditProfileDialog::toggleWordModeBrahmic(bool mode)
 {
     updateTempProfileProperty(Profile::WordModeBrahmic, mode);
+}
+
+void EditProfileDialog::toggleIgnoreWcWidth(bool ignore)
+{
+    updateTempProfileProperty(Profile::IgnoreWcWidth, ignore);
 }

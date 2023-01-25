@@ -272,11 +272,13 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
     if (apply.shouldApply(Profile::SilenceSeconds)) {
         session->setMonitorSilenceSeconds(profile->silenceSeconds());
     }
-    if (apply.shouldApply(Profile::AllowEscapedLinks) || apply.shouldApply(Profile::ReflowLines)) {
+    if (apply.shouldApply(Profile::AllowEscapedLinks) || apply.shouldApply(Profile::ReflowLines) || apply.shouldApply(Profile::IgnoreWcWidth)) {
         const bool shouldEnableUrlExtractor = profile->allowEscapedLinks();
         const bool enableReflowLines = profile->property<bool>(Profile::ReflowLines);
+        const bool ignoreWcWidth = profile->property<bool>(Profile::IgnoreWcWidth);
         for (TerminalDisplay *view : session->views()) {
             view->screenWindow()->screen()->setReflowLines(enableReflowLines);
+            view->screenWindow()->screen()->setIgnoreWcWidth(ignoreWcWidth);
             view->screenWindow()->screen()->setEnableUrlExtractor(shouldEnableUrlExtractor);
             if (shouldEnableUrlExtractor) {
                 view->screenWindow()->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());

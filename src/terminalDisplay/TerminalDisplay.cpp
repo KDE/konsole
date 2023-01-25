@@ -149,6 +149,7 @@ void TerminalDisplay::setScreenWindow(ScreenWindow *window)
 
         auto profile = SessionManager::instance()->sessionProfile(_sessionController->session());
         _screenWindow->screen()->setReflowLines(profile->property<bool>(Profile::ReflowLines));
+        _screenWindow->screen()->setIgnoreWcWidth(profile->property<bool>(Profile::IgnoreWcWidth));
 
         if (_screenWindow->screen()->urlExtractor()) {
             _screenWindow->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());

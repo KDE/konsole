@@ -485,6 +485,12 @@ Lines are always Left to right. Without this, each line's direction is determine
 Consider graphic table characters as strong LTR characters. This allows table containing RTL characters to display correctly, but might cause incorrect order if those characters are used in RTL texts.
 </para></listitem>
 
+<listitem><para>
+<guilabel>Override wcwidth</guilabel> -
+Problematic characters follow Unicode standard, rather than glibc's wcwidth(). Currently only soft hyphen (Unicode 0x00AD) which has wcwidth of 1 and Unicode width of 0 is affected by this option. Generally, this option should be disabled when mainly using those characters on the command line, and enabled when they are only displayed.
+</para></listitem>
+
+
 </itemizedlist>
 </para>
 </sect1>

@@ -703,6 +703,7 @@ public:
     {
         return _hasGraphics;
     }
+    void setIgnoreWcWidth(bool ignore);
 
 private:
     // copies a line of text from the screen or history into a stream using a
@@ -899,6 +900,9 @@ private:
     std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>> _graphicsPlacements;
     void scrollPlacements(int n, qint64 below = INT64_MAX, qint64 above = INT64_MAX);
     bool _hasGraphics;
+
+    //
+    bool _ignoreWcWidth;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Screen::DecodingOptions)

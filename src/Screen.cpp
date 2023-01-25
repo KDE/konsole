@@ -91,6 +91,7 @@ Screen::Screen(int lines, int columns)
     , _lastPos(-1)
     , _lastDrawnChar(0)
     , _escapeSequenceUrlExtractor(nullptr)
+    , _ignoreWcWidth(false)
 {
     std::fill(_lineProperties.begin(), _lineProperties.end(), LineProperty());
 
@@ -549,6 +550,11 @@ bool Screen::isResize()
 void Screen::setReflowLines(bool enable)
 {
     _enableReflowLines = enable;
+}
+
+void Screen::setIgnoreWcWidth(bool ignore)
+{
+    _ignoreWcWidth = ignore;
 }
 
 /* Note that if you use these debugging functions, it will
@@ -1074,10 +1080,10 @@ void Screen::displayCharacter(uint c)
     if (w < 0) {
         // Non-printable character
         return;
-    } else if (category == QChar::Mark_SpacingCombining || w == 0 || Character::emoji(c) || c == 0x20E3) {
+    } else if (category == QChar::Mark_SpacingCombining || w == 0 || Character::emoji(c) || c == 0x20E3 || (_ignoreWcWidth && c == 0x00AD)) {
         bool emoji = Character::emoji(c);
         if (category != QChar::Mark_SpacingCombining && category != QChar::Mark_NonSpacing && category != QChar::Letter_Other && category != QChar::Other_Format
-            && !emoji && c != 0x20E3) {
+            && !emoji && c != 0x20E3 && c != 0x00AD) {
             return;
         }
         // Find previous "real character" to try to combine with

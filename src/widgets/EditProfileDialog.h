@@ -231,6 +231,7 @@ private Q_SLOTS:
     void toggleWordModeAttr(bool mode);
     void toggleWordModeAscii(bool mode);
     void toggleWordModeBrahmic(bool mode);
+    void toggleIgnoreWcWidth(bool ignore);
 
 private:
     Q_DISABLE_COPY(EditProfileDialog)
