@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 02:45+0000\n"
+"POT-Creation-Date: 2023-01-27 02:43+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -3153,7 +3153,7 @@ msgstr "Activează generarea miniaturilor"
 msgid "Size: %1 x %2"
 msgstr "Dimensiune: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2190
+#: terminalDisplay/TerminalDisplay.cpp:2195
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3161,83 +3161,83 @@ msgstr[0] "Sigur lipiți %1 caracter?"
 msgstr[1] "Sigur lipiți %1 caractere?"
 msgstr[2] "Sigur lipiți %1 de caractere?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2191
+#: terminalDisplay/TerminalDisplay.cpp:2196
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirmă lipirea"
 
-#: terminalDisplay/TerminalDisplay.cpp:2224
+#: terminalDisplay/TerminalDisplay.cpp:2229
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2225
+#: terminalDisplay/TerminalDisplay.cpp:2230
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2226
+#: terminalDisplay/TerminalDisplay.cpp:2231
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Clopoțel: se va încerca emiterea unei avertizări sonore"
 
-#: terminalDisplay/TerminalDisplay.cpp:2227
+#: terminalDisplay/TerminalDisplay.cpp:2232
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2228
+#: terminalDisplay/TerminalDisplay.cpp:2233
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2229
+#: terminalDisplay/TerminalDisplay.cpp:2234
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2230
+#: terminalDisplay/TerminalDisplay.cpp:2235
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: folosit pentru manipularea stării terminalului"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2258
+#: terminalDisplay/TerminalDisplay.cpp:2263
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2261
+#: terminalDisplay/TerminalDisplay.cpp:2266
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirmă lipirea"
 
-#: terminalDisplay/TerminalDisplay.cpp:2262
+#: terminalDisplay/TerminalDisplay.cpp:2267
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Lipește &fără caractere de control"
 
-#: terminalDisplay/TerminalDisplay.cpp:2263
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Li&pește tot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2264
+#: terminalDisplay/TerminalDisplay.cpp:2269
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Renunță"
 
-#: terminalDisplay/TerminalDisplay.cpp:2504
+#: terminalDisplay/TerminalDisplay.cpp:2509
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3248,17 +3248,17 @@ msgstr ""
 "Software_flow_control\">suspendată</a> prin apăsarea Ctrl+S. Apăsați <b>Ctrl"
 "+Q</b> pentru a relua.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2559
+#: terminalDisplay/TerminalDisplay.cpp:2564
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Acest terminal e numai pentru citire."
 
-#: terminalDisplay/TerminalDisplay.cpp:2949
+#: terminalDisplay/TerminalDisplay.cpp:2954
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Schimbă &dosarul la"
 
-#: terminalDisplay/TerminalDisplay.cpp:2982
+#: terminalDisplay/TerminalDisplay.cpp:2987
 #, kde-format
 msgid "&Paste Location"
 msgstr "Li&pește amplasarea"
