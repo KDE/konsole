@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-16 01:01+0000\n"
+"POT-Creation-Date: 2023-01-27 01:02+0000\n"
 "PO-Revision-Date: 2022-12-18 09:15+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -3150,59 +3150,59 @@ msgstr "Abilita la generazione delle miniature"
 msgid "Size: %1 x %2"
 msgstr "Dimensione: %1×%2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2203
+#: terminalDisplay/TerminalDisplay.cpp:2208
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Sei sicuro di voler incollare un carattere?"
 msgstr[1] "Sei sicuro di voler incollare %1 caratteri?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2204
+#: terminalDisplay/TerminalDisplay.cpp:2209
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Conferma incollatura"
 
-#: terminalDisplay/TerminalDisplay.cpp:2237
+#: terminalDisplay/TerminalDisplay.cpp:2242
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fine del testo/Interruzione: potrebbe interrompere il processo attuale"
 
-#: terminalDisplay/TerminalDisplay.cpp:2238
+#: terminalDisplay/TerminalDisplay.cpp:2243
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fine della trasmissione: potrebbe uscire dal processo attuale"
 
-#: terminalDisplay/TerminalDisplay.cpp:2239
+#: terminalDisplay/TerminalDisplay.cpp:2244
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Campana: proverà a emettere un avviso udibile"
 
-#: terminalDisplay/TerminalDisplay.cpp:2240
+#: terminalDisplay/TerminalDisplay.cpp:2245
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2241
+#: terminalDisplay/TerminalDisplay.cpp:2246
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: sospende l'uscita"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2247
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Sostituisci/sospendi: potrebbe sospendere il processo attuale"
 
-#: terminalDisplay/TerminalDisplay.cpp:2243
+#: terminalDisplay/TerminalDisplay.cpp:2248
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: utilizzato per manipolare lo stato del terminale"
 
-#: terminalDisplay/TerminalDisplay.cpp:2244
+#: terminalDisplay/TerminalDisplay.cpp:2249
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Separatore file/Uscita: potrebbe interrompere il processo attuale"
 
-#: terminalDisplay/TerminalDisplay.cpp:2271
+#: terminalDisplay/TerminalDisplay.cpp:2276
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3211,31 +3211,31 @@ msgstr ""
 "Il testo che stai provando a incollare contiene caratteri di controllo "
 "nascosti, vuoi filtrarli?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2274
+#: terminalDisplay/TerminalDisplay.cpp:2279
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Conferma incollatura"
 
-#: terminalDisplay/TerminalDisplay.cpp:2275
+#: terminalDisplay/TerminalDisplay.cpp:2280
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Incolla sen&za caratteri di controllo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2276
+#: terminalDisplay/TerminalDisplay.cpp:2281
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Incolla tutto"
 
-#: terminalDisplay/TerminalDisplay.cpp:2277
+#: terminalDisplay/TerminalDisplay.cpp:2282
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Annulla"
 
-#: terminalDisplay/TerminalDisplay.cpp:2500
+#: terminalDisplay/TerminalDisplay.cpp:2505
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3246,17 +3246,17 @@ msgstr ""
 "Software_flow_control\">sospeso</a> premendo Ctrl+S. Premi <b>Ctrl+Q</b> per "
 "riprendere.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2555
+#: terminalDisplay/TerminalDisplay.cpp:2560
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Il terminale è in sola lettura."
 
-#: terminalDisplay/TerminalDisplay.cpp:2945
+#: terminalDisplay/TerminalDisplay.cpp:2950
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Cambia la cartella a"
 
-#: terminalDisplay/TerminalDisplay.cpp:2978
+#: terminalDisplay/TerminalDisplay.cpp:2983
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Incolla posizione"
