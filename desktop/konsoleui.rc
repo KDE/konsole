@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<gui name="konsole" version="19">
+<gui name="konsole" version="20">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
