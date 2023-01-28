@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 01:02+0000\n"
+"POT-Creation-Date: 2023-01-28 01:01+0000\n"
 "PO-Revision-Date: 2022-11-10 20:00+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -56,25 +56,25 @@ msgid "Split View"
 msgstr "பிரிந்த காட்சிமுறை"
 
 #. i18n: ectx: Menu (settings)
-#: ../desktop/konsoleui.rc:39
+#: ../desktop/konsoleui.rc:41
 #, kde-format
 msgid "Settings"
 msgstr "அமைப்புகள்"
 
 #. i18n: ectx: Menu (plugins)
-#: ../desktop/konsoleui.rc:52
+#: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
 msgstr "செருகுநிரல்கள்"
 
 #. i18n: ectx: Menu (help)
-#: ../desktop/konsoleui.rc:55
+#: ../desktop/konsoleui.rc:57
 #, kde-format
 msgid "Help"
 msgstr "உதவி"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: ../desktop/konsoleui.rc:59
+#: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
 msgstr "பிரதான கருவிப்பட்டை"
@@ -3257,184 +3257,208 @@ msgid "Split View Automatically"
 msgstr "காட்சியை தானாக பிரி"
 
 #: ViewManager.cpp:139
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Left/Right"
+msgctxt "@action:inmenu"
+msgid "Split View Left/Right from next tab"
+msgstr "காட்சியை இடது/வலது என பிரி"
+
+#: ViewManager.cpp:147
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Top/Bottom"
+msgctxt "@action:inmenu"
+msgid "Split View Top/Bottom from next tab"
+msgstr "காட்சியை மேல்/கீழ் என பிரி"
+
+#: ViewManager.cpp:155
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Automatically"
+msgctxt "@action:inmenu"
+msgid "Split View Automatically from next tab"
+msgstr "காட்சியை தானாக பிரி"
+
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "2x2 முனையங்களை கொண்ட புதிய கீற்றை திற"
 
-#: ViewManager.cpp:148
+#: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "2x1 முனையங்களை கொண்ட புதிய கீற்றை திற"
 
-#: ViewManager.cpp:157
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "1x2 முனையங்களை கொண்ட புதிய கீற்றை திற"
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:191
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "காட்சிப்பகுதியை பெரிதாக்கு"
 
-#: ViewManager.cpp:173
+#: ViewManager.cpp:199
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "காட்சிப்பகுதியை சுருக்கு"
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "&தற்போதைய காட்சிப்பகுதியை பிரித்தெடு"
 
-#: ViewManager.cpp:195
+#: ViewManager.cpp:221
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "தற்போதைய &கீற்றை பிரித்தெடு"
 
-#: ViewManager.cpp:200
+#: ViewManager.cpp:226
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "அடுத்த கீற்று"
 
-#: ViewManager.cpp:208
+#: ViewManager.cpp:234
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "முந்தைய கீற்று"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:242
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "மேலுள்ள முனையத்தை குவியப்படுத்து"
 
-#: ViewManager.cpp:223
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "கீழுள்ள முனையத்தை குவியப்படுத்து"
 
-#: ViewManager.cpp:230
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "இடதிலுள்ள முனையத்தை குவியப்படுத்து"
 
-#: ViewManager.cpp:236
+#: ViewManager.cpp:262
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "வலதிலுள்ள முனையத்தை குவியப்படுத்து"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:268
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "கடைசி கீற்றுக்கு தாவு"
 
-#: ViewManager.cpp:247
+#: ViewManager.cpp:273
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "கடைசியாக பயன்படுத்திய கீற்றுகள்"
 
-#: ViewManager.cpp:252
+#: ViewManager.cpp:278
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "இரண்டு கீற்றுகளுக்கிடையே தாவு"
 
-#: ViewManager.cpp:257
+#: ViewManager.cpp:283
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "கடைசியாக பயன்படுத்திய கீற்றுகள் (தற்போதையதை நோக்கி)"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:288
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "தற்போதைய காட்சிப்பகுதியின் அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "தற்போதைய காட்சிப்பகுதியின் அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
 
-#: ViewManager.cpp:271
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "கீற்றை வலது பக்கமாக நகர்த்து"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "கீற்றை இடது பக்கமாக நகர்த்து"
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "பொருளறி அம்சங்களை அமை (bash)"
 
-#: ViewManager.cpp:291
+#: ViewManager.cpp:317
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "பொருளறி கருவித்துப்புகளை நிலைமாற்று"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "வரியெண்கள் காட்டப்படுவதை நிலைமாற்று"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:330
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "அனைத்து காட்சிப்பகுதிகளையும் ஒரே அளவாக்கு"
 
-#: ViewManager.cpp:314
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "%1-ஆம் கீற்றுக்கு தாவு"
 
-#: ViewManager.cpp:527
+#: ViewManager.cpp:553
 #, kde-format
 msgid "Semantic hints "
 msgstr "பொருளறித் துப்புகள் "
 
-#: ViewManager.cpp:543
+#: ViewManager.cpp:569
 #, kde-format
 msgid "Line numbers "
 msgstr "வரியேண்கள்"
 
-#: ViewManager.cpp:1074
+#: ViewManager.cpp:1130
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "கீற்றுகளின் தளவமைப்பை சேமித்தல்"
 
-#: ViewManager.cpp:1076 ViewManager.cpp:1163
+#: ViewManager.cpp:1132 ViewManager.cpp:1219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "கான்சோல் காட்சிப்பகுதி தளவமைப்பு (*.json)"
 
-#: ViewManager.cpp:1089
+#: ViewManager.cpp:1145
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3444,7 +3468,7 @@ msgstr ""
 "தளவமைப்பை சேமிப்பதில் சிக்கல் ஏற்பட்டது.\n"
 "%1"
 
-#: ViewManager.cpp:1150
+#: ViewManager.cpp:1206
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3454,7 +3478,7 @@ msgstr ""
 "தளவமைப்பை ஏற்றுவதில் சிக்கல் ஏற்பட்டது.\n"
 "%1"
 
-#: ViewManager.cpp:1161
+#: ViewManager.cpp:1217
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

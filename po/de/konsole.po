@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 01:02+0000\n"
+"POT-Creation-Date: 2023-01-28 01:01+0000\n"
 "PO-Revision-Date: 2022-10-08 15:08+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -59,25 +59,25 @@ msgid "Split View"
 msgstr "Ansicht teilen"
 
 #. i18n: ectx: Menu (settings)
-#: ../desktop/konsoleui.rc:39
+#: ../desktop/konsoleui.rc:41
 #, kde-format
 msgid "Settings"
 msgstr "Einstellungen"
 
 #. i18n: ectx: Menu (plugins)
-#: ../desktop/konsoleui.rc:52
+#: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
 msgstr "Module"
 
 #. i18n: ectx: Menu (help)
-#: ../desktop/konsoleui.rc:55
+#: ../desktop/konsoleui.rc:57
 #, kde-format
 msgid "Help"
 msgstr "Hilfe"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: ../desktop/konsoleui.rc:59
+#: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Haupt-Werkzeugleiste"
@@ -3301,172 +3301,196 @@ msgid "Split View Automatically"
 msgstr "Ansicht automatisch teilen"
 
 #: ViewManager.cpp:139
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Left/Right"
+msgctxt "@action:inmenu"
+msgid "Split View Left/Right from next tab"
+msgstr "Ansicht Links/Rechts teilen"
+
+#: ViewManager.cpp:147
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Top/Bottom"
+msgctxt "@action:inmenu"
+msgid "Split View Top/Bottom from next tab"
+msgstr "Ansicht Oben/Unten teilen"
+
+#: ViewManager.cpp:155
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Automatically"
+msgctxt "@action:inmenu"
+msgid "Split View Automatically from next tab"
+msgstr "Ansicht automatisch teilen"
+
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Neues Unterfenster mit 2x2 Terminals laden"
 
-#: ViewManager.cpp:148
+#: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Neues Unterfenster mit 2x1 Terminals laden"
 
-#: ViewManager.cpp:157
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Neues Unterfenster mit 1x2 Terminals laden"
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:191
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Ansicht vergrößern"
 
-#: ViewManager.cpp:173
+#: ViewManager.cpp:199
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Ansicht verkleinern"
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "A&ktuelle Ansicht verselbständigen"
 
-#: ViewManager.cpp:195
+#: ViewManager.cpp:221
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "A&ktuelles Unterfenster verselbständigen"
 
-#: ViewManager.cpp:200
+#: ViewManager.cpp:226
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Nächstes Unterfenster"
 
-#: ViewManager.cpp:208
+#: ViewManager.cpp:234
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Vorheriges Unterfenster"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:242
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Terminal oben aktivieren"
 
-#: ViewManager.cpp:223
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Terminal unten aktivieren"
 
-#: ViewManager.cpp:230
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Linkes Terminal aktivieren"
 
-#: ViewManager.cpp:236
+#: ViewManager.cpp:262
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Rechtes Terminal aktivieren"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:268
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Zum letzten Unterfenster wechseln"
 
-#: ViewManager.cpp:247
+#: ViewManager.cpp:273
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Zuletzt verwendete Unterfenster"
 
-#: ViewManager.cpp:252
+#: ViewManager.cpp:278
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Umschalten zwischen zwei Unterfenstern"
 
-#: ViewManager.cpp:257
+#: ViewManager.cpp:283
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Zuletzt verwendete Unterfenster (rückwärts)"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:288
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Maximieren der aktuellen Ansicht umschalten"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Maximieren der aktuellen Ansicht umschalten"
 
-#: ViewManager.cpp:271
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Unterfenster nach rechts verschieben"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Unterfenster nach links verschieben"
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Semantische Integration einrichten (bash)"
 
-#: ViewManager.cpp:291
+#: ViewManager.cpp:317
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Anzeige von semantischen Hinweise ein-/ausschalten"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Anzeige von Zeilennummern ein-/ausschalten"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:330
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Gleiche Größe bei allen Ansichten einstellen"
 
-#: ViewManager.cpp:314
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Zu Unterfenster „%1“ wechseln"
 
-#: ViewManager.cpp:527
+#: ViewManager.cpp:553
 #, kde-format
 msgid "Semantic hints "
 msgstr "Semantische Hinweise "
 
-#: ViewManager.cpp:543
+#: ViewManager.cpp:569
 #, kde-format
 msgid "Line numbers "
 msgstr "Zeilennummern "
 
-#: ViewManager.cpp:1074
+#: ViewManager.cpp:1130
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3474,13 +3498,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Unterfenster-Layout in Datei speichern"
 
-#: ViewManager.cpp:1076 ViewManager.cpp:1163
+#: ViewManager.cpp:1132 ViewManager.cpp:1219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole-Ansichtslayout (*.json)"
 
-#: ViewManager.cpp:1089
+#: ViewManager.cpp:1145
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3490,7 +3514,7 @@ msgstr ""
 "Beim Speichern des Layouts ist ein Fehler aufgetreten.\n"
 "%1"
 
-#: ViewManager.cpp:1150
+#: ViewManager.cpp:1206
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3500,7 +3524,7 @@ msgstr ""
 "Beim Laden des Layouts ist ein Fehler aufgetreten.\n"
 "%1"
 
-#: ViewManager.cpp:1161
+#: ViewManager.cpp:1217
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"

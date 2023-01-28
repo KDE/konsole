@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 01:02+0000\n"
-"PO-Revision-Date: 2023-01-07 07:52+0100\n"
+"POT-Creation-Date: 2023-01-28 01:01+0000\n"
+"PO-Revision-Date: 2023-01-27 08:08+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -55,25 +55,25 @@ msgid "Split View"
 msgstr "ხედის გაყოფა"
 
 #. i18n: ectx: Menu (settings)
-#: ../desktop/konsoleui.rc:39
+#: ../desktop/konsoleui.rc:41
 #, kde-format
 msgid "Settings"
 msgstr "მორგება"
 
 #. i18n: ectx: Menu (plugins)
-#: ../desktop/konsoleui.rc:52
+#: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
 msgstr "დამატებები"
 
 #. i18n: ectx: Menu (help)
-#: ../desktop/konsoleui.rc:55
+#: ../desktop/konsoleui.rc:57
 #, kde-format
 msgid "Help"
 msgstr "დახმარება"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: ../desktop/konsoleui.rc:59
+#: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
 msgstr "ხელსაწყოთა მთავარი ზოლი"
@@ -3180,184 +3180,208 @@ msgid "Split View Automatically"
 msgstr "ხედის ავტომატური დაყოფა"
 
 #: ViewManager.cpp:139
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Left/Right"
+msgctxt "@action:inmenu"
+msgid "Split View Left/Right from next tab"
+msgstr "ხედის მარჯვენა/მარცხენაზე გაყოფა"
+
+#: ViewManager.cpp:147
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Top/Bottom"
+msgctxt "@action:inmenu"
+msgid "Split View Top/Bottom from next tab"
+msgstr "ხედის ზედა/ქვედაზე გაყოფა"
+
+#: ViewManager.cpp:155
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Automatically"
+msgctxt "@action:inmenu"
+msgid "Split View Automatically from next tab"
+msgstr "ხედის ავტომატური დაყოფა"
+
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:148
+#: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr ""
 
-#: ViewManager.cpp:157
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:191
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "ხედის გაფართოება"
 
-#: ViewManager.cpp:173
+#: ViewManager.cpp:199
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "ხედის შემცირება"
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "მიმდინარე &ხედის მოხსნა"
 
-#: ViewManager.cpp:195
+#: ViewManager.cpp:221
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "მიმდინარე &ჩანართის მოხსნა"
 
-#: ViewManager.cpp:200
+#: ViewManager.cpp:226
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "შემდეგი ჩანართი"
 
-#: ViewManager.cpp:208
+#: ViewManager.cpp:234
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "წინა ჩანართი"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:242
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "ფოკუსი ზედა ტერმინალზე"
 
-#: ViewManager.cpp:223
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "ფოკუსი ქვედა ტერმინალზე"
 
-#: ViewManager.cpp:230
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "ფოკუსი მარცხენა ტერმინალზე"
 
-#: ViewManager.cpp:236
+#: ViewManager.cpp:262
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "ფოკუსი მარჯვენა ტერმინალზე"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:268
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "ბოლო ჩანართზე გადართვა"
 
-#: ViewManager.cpp:247
+#: ViewManager.cpp:273
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "ბოლოს გამოყენებული ჩანართები"
 
-#: ViewManager.cpp:252
+#: ViewManager.cpp:278
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "ორ ჩანართს შორის გადართვა"
 
-#: ViewManager.cpp:257
+#: ViewManager.cpp:283
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "ბოლოს გამოყენებული ჩანართები (უკუღმა)"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:288
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "მიმდინარე ხედის  გაზრდის გადართვა"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "მიმდინარე ხედის  გაზრდის გადართვა"
 
-#: ViewManager.cpp:271
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "ჩანართის მარჯვნივ გადატანა"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "ჩანართის მარცხნივ გადატანა"
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:291
+#: ViewManager.cpp:317
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:330
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "ყველა ხედის ტოლი ზომა"
 
-#: ViewManager.cpp:314
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "%1-ე ჩანართზე გადართვა"
 
-#: ViewManager.cpp:527
+#: ViewManager.cpp:553
 #, kde-format
 msgid "Semantic hints "
 msgstr ""
 
-#: ViewManager.cpp:543
+#: ViewManager.cpp:569
 #, kde-format
 msgid "Line numbers "
 msgstr "ხაზის ნომრები "
 
-#: ViewManager.cpp:1074
+#: ViewManager.cpp:1130
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "ჩანართების განლაგების შენახვა"
 
-#: ViewManager.cpp:1076 ViewManager.cpp:1163
+#: ViewManager.cpp:1132 ViewManager.cpp:1219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole -ის ხედის განლაგება (*.json)"
 
-#: ViewManager.cpp:1089
+#: ViewManager.cpp:1145
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3367,7 +3391,7 @@ msgstr ""
 "შეცდომა განლაგების შენახვისას.\n"
 "%1"
 
-#: ViewManager.cpp:1150
+#: ViewManager.cpp:1206
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3377,7 +3401,7 @@ msgstr ""
 "შეცდომა განლაგების ჩატვირთვისას.\n"
 "%1"
 
-#: ViewManager.cpp:1161
+#: ViewManager.cpp:1217
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -4824,7 +4848,7 @@ msgstr "შემდეგი"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
-msgstr ""
+msgstr "მიმდინარე ძებნის ფრაზის შემდეგი დამთხვევის მოძებნა"
 
 #: widgets/IncrementalSearchBar.cpp:90
 #, kde-format
@@ -4836,7 +4860,7 @@ msgstr "წინა"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
-msgstr ""
+msgstr "მიმდინარე ძებნის ფრაზის წინა დამთხვევის მოძებნა"
 
 #: widgets/IncrementalSearchBar.cpp:107
 #, kde-format

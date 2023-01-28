@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 01:02+0000\n"
+"POT-Creation-Date: 2023-01-28 01:01+0000\n"
 "PO-Revision-Date: 2022-11-09 22:30+0000\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -74,25 +74,25 @@ msgid "Split View"
 msgstr "Dividir a Área"
 
 #. i18n: ectx: Menu (settings)
-#: ../desktop/konsoleui.rc:39
+#: ../desktop/konsoleui.rc:41
 #, kde-format
 msgid "Settings"
 msgstr "Configuração"
 
 #. i18n: ectx: Menu (plugins)
-#: ../desktop/konsoleui.rc:52
+#: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
 msgstr "'Plugins'"
 
 #. i18n: ectx: Menu (help)
-#: ../desktop/konsoleui.rc:55
+#: ../desktop/konsoleui.rc:57
 #, kde-format
 msgid "Help"
 msgstr "Ajuda"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: ../desktop/konsoleui.rc:59
+#: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barra Principal"
@@ -3296,184 +3296,208 @@ msgid "Split View Automatically"
 msgstr "Dividir a Área Automaticamente"
 
 #: ViewManager.cpp:139
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Left/Right"
+msgctxt "@action:inmenu"
+msgid "Split View Left/Right from next tab"
+msgstr "Dividir a Área em Esquerda/Direita"
+
+#: ViewManager.cpp:147
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Top/Bottom"
+msgctxt "@action:inmenu"
+msgid "Split View Top/Bottom from next tab"
+msgstr "Dividir a Área em Cima/Baixo"
+
+#: ViewManager.cpp:155
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Automatically"
+msgctxt "@action:inmenu"
+msgid "Split View Automatically from next tab"
+msgstr "Dividir a Área Automaticamente"
+
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Carregar uma nova página com a disposição de 2x2 terminais"
 
-#: ViewManager.cpp:148
+#: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Carregar uma nova página com a disposição de 2x1 terminais"
 
-#: ViewManager.cpp:157
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Carregar uma nova página com a disposição de 1x2 terminais"
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:191
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Expandir a Área"
 
-#: ViewManager.cpp:173
+#: ViewManager.cpp:199
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Encolher a Área"
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:209
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Dissociar a Á&rea Actual"
 
-#: ViewManager.cpp:195
+#: ViewManager.cpp:221
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Dissociar a Página Ac&tual"
 
-#: ViewManager.cpp:200
+#: ViewManager.cpp:226
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Página Seguinte"
 
-#: ViewManager.cpp:208
+#: ViewManager.cpp:234
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Página Anterior"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:242
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Focar o Terminal Acima"
 
-#: ViewManager.cpp:223
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Focar o Terminal Abaixo"
 
-#: ViewManager.cpp:230
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Focar o Terminal à Esquerda"
 
-#: ViewManager.cpp:236
+#: ViewManager.cpp:262
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Focar o Terminal à Direita"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:268
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Mudar para a Última Página"
 
-#: ViewManager.cpp:247
+#: ViewManager.cpp:273
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Últimas Páginas Usadas"
 
-#: ViewManager.cpp:252
+#: ViewManager.cpp:278
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Alternar entre as Duas Páginas"
 
-#: ViewManager.cpp:257
+#: ViewManager.cpp:283
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Últimas Páginas Usadas (Inverso)"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:288
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Comutar a maximização da área actual"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Comutar a maximização da área actual"
 
-#: ViewManager.cpp:271
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Mover a página para a direita"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Mover a página para a esquerda"
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Configurar a integração semântica (bash)"
 
-#: ViewManager.cpp:291
+#: ViewManager.cpp:317
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Comutar a apresentação de sugestões semânticas"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Comutar a apresentação dos números de linhas"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:330
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Tamanho igual em todas as áreas"
 
-#: ViewManager.cpp:314
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Mudar para a Página %1"
 
-#: ViewManager.cpp:527
+#: ViewManager.cpp:553
 #, kde-format
 msgid "Semantic hints "
 msgstr "Sugestões semânticas "
 
-#: ViewManager.cpp:543
+#: ViewManager.cpp:569
 #, kde-format
 msgid "Line numbers "
 msgstr "Números de linha "
 
-#: ViewManager.cpp:1074
+#: ViewManager.cpp:1130
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Gravar a Disposição de Páginas"
 
-#: ViewManager.cpp:1076 ViewManager.cpp:1163
+#: ViewManager.cpp:1132 ViewManager.cpp:1219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Disposição de Janelas do Konsole (*.json)"
 
-#: ViewManager.cpp:1089
+#: ViewManager.cpp:1145
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3483,7 +3507,7 @@ msgstr ""
 "Ocorreu um problema ao gravar a disposição.\n"
 "%1"
 
-#: ViewManager.cpp:1150
+#: ViewManager.cpp:1206
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3493,7 +3517,7 @@ msgstr ""
 "Ocorreu um problema ao carregar a disposição.\n"
 "%1"
 
-#: ViewManager.cpp:1161
+#: ViewManager.cpp:1217
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

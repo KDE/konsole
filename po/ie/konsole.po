@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 01:02+0000\n"
+"POT-Creation-Date: 2023-01-28 01:01+0000\n"
 "PO-Revision-Date: 2022-10-28 16:51+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <kde-i18n-doc@kde.org>\n"
@@ -55,25 +55,25 @@ msgid "Split View"
 msgstr "Fender li vise"
 
 #. i18n: ectx: Menu (settings)
-#: ../desktop/konsoleui.rc:39
+#: ../desktop/konsoleui.rc:41
 #, kde-format
 msgid "Settings"
 msgstr "Parametres"
 
 #. i18n: ectx: Menu (plugins)
-#: ../desktop/konsoleui.rc:52
+#: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
 msgstr "Plugines"
 
 #. i18n: ectx: Menu (help)
-#: ../desktop/konsoleui.rc:55
+#: ../desktop/konsoleui.rc:57
 #, kde-format
 msgid "Help"
 msgstr "Auxilie"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: ../desktop/konsoleui.rc:59
+#: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Panel de instrumentarium"
@@ -3179,184 +3179,208 @@ msgid "Split View Automatically"
 msgstr "Fender li vise automaticmen"
 
 #: ViewManager.cpp:139
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Left/Right"
+msgctxt "@action:inmenu"
+msgid "Split View Left/Right from next tab"
+msgstr "Fender li vise verticalmen"
+
+#: ViewManager.cpp:147
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Top/Bottom"
+msgctxt "@action:inmenu"
+msgid "Split View Top/Bottom from next tab"
+msgstr "Fender li vise horisontalmen"
+
+#: ViewManager.cpp:155
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Automatically"
+msgctxt "@action:inmenu"
+msgid "Split View Automatically from next tab"
+msgstr "Fender li vise automaticmen"
+
+#: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:148
+#: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr ""
 
-#: ViewManager.cpp:157
+#: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:191
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "_Expander"
 
-#: ViewManager.cpp:173
+#: ViewManager.cpp:199
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Contraer li URL"
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:209
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "S&eparar li carte"
 
-#: ViewManager.cpp:195
+#: ViewManager.cpp:221
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "S&eparar li actual carte"
 
-#: ViewManager.cpp:200
+#: ViewManager.cpp:226
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Sequent carte"
 
-#: ViewManager.cpp:208
+#: ViewManager.cpp:234
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Precedent carte"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:242
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Foco"
 
-#: ViewManager.cpp:223
+#: ViewManager.cpp:249
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "&Inferiori"
 
-#: ViewManager.cpp:230
+#: ViewManager.cpp:256
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Terminal"
 
-#: ViewManager.cpp:236
+#: ViewManager.cpp:262
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Terminal"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:268
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Ear al ultim activ carte"
 
-#: ViewManager.cpp:247
+#: ViewManager.cpp:273
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "_Usat"
 
-#: ViewManager.cpp:252
+#: ViewManager.cpp:278
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Periode inter du dates"
 
-#: ViewManager.cpp:257
+#: ViewManager.cpp:283
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Li ultim usat mode"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:288
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Maximisar horizontalmen"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:289
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Maximisar horizontalmen"
 
-#: ViewManager.cpp:271
+#: ViewManager.cpp:297
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Mover un carte a dextri"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:304
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Mover un carte a levul"
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Configurar integration de  semantica (bash)"
 
-#: ViewManager.cpp:291
+#: ViewManager.cpp:317
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Celar o revelar celat files in li actual fenestre"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:323
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Monstrar _numerós de lineas"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:330
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Omni paccages, secun grandore"
 
-#: ViewManager.cpp:314
+#: ViewManager.cpp:340
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Ear a carte 1"
 
-#: ViewManager.cpp:527
+#: ViewManager.cpp:553
 #, fuzzy, kde-format
 msgid "Semantic hints "
 msgstr "Semantic anotationes"
 
-#: ViewManager.cpp:543
+#: ViewManager.cpp:569
 #, kde-format
 msgid "Line numbers "
 msgstr "Numerós de lineas"
 
-#: ViewManager.cpp:1074
+#: ViewManager.cpp:1130
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "_Arangeament"
 
-#: ViewManager.cpp:1076 ViewManager.cpp:1163
+#: ViewManager.cpp:1132 ViewManager.cpp:1219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1089
+#: ViewManager.cpp:1145
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3364,7 +3388,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1150
+#: ViewManager.cpp:1206
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3372,7 +3396,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1161
+#: ViewManager.cpp:1217
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
