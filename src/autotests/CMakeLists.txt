@@ -2,7 +2,7 @@ include(ECMAddTests)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate)
+set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate konsolecharacters)
 
 # ATM issue with non-termination due to message dialog
 if(QT_MAJOR_VERSION EQUAL "5")

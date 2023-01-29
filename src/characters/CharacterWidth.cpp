@@ -20,7 +20,6 @@
 //
 
 #include "CharacterWidth.h"
-#include "konsolecharacters_export.h"
 
 struct Range {
     uint first, last;
@@ -131,7 +130,7 @@ static constexpr const RangeLut RANGE_LUT_LIST[] = {
 static constexpr const int RANGE_LUT_LIST_SIZE = 4;
 /* clang-format on */
 
-int KONSOLECHARACTERS_EXPORT characterWidth(uint ucs4)
+int characterWidth(uint ucs4)
 {
     if (Q_LIKELY(ucs4 < sizeof(DIRECT_LUT))) {
         return DIRECT_LUT[ucs4];

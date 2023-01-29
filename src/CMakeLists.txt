@@ -76,7 +76,6 @@ endif()
 # so we can start to detangle the codebase.
 set(konsoleprivate_core_SRCS
     ShellCommand.cpp
-    WindowSystemInfo.cpp
 )
 
 ecm_qt_declare_logging_category(
@@ -91,8 +90,7 @@ ecm_qt_declare_logging_category(
 add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
 # Needed to link this static lib to shared libs
 set_target_properties(konsoleprivate_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(konsoleprivate_core ${konsole_LIBS})
-target_link_libraries(konsoleprivate_core ICU::uc ICU::i18n)
+target_link_libraries(konsoleprivate_core KF5::CoreAddons)
 
 set(konsolehelpers_SRCS
     LabelsAligner.cpp
@@ -128,12 +126,8 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         KeyBindingEditor.cpp
                         LabelsAligner.cpp
                         NullProcessInfo.cpp
-                        NullProcessInfo.cpp
-                        PrintOptions.cpp
                         PrintOptions.cpp
                         ProcessInfo.cpp
-                        ProcessInfo.cpp
-                        Pty.cpp
                         Pty.cpp
                         RenameTabDialog.cpp
                         SSHProcessInfo.cpp
@@ -173,13 +167,9 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         history/compact/CompactHistoryScroll.cpp
                         history/compact/CompactHistoryType.cpp
                         widgets/DetachableTabBar.cpp
-                        widgets/DetachableTabBar.cpp
                         widgets/EditProfileDialog.cpp
                         widgets/HistorySizeWidget.cpp
-                        widgets/HistorySizeWidget.cpp
                         widgets/IncrementalSearchBar.cpp
-                        widgets/IncrementalSearchBar.cpp
-                        widgets/RenameTabWidget.cpp
                         widgets/RenameTabWidget.cpp
                         widgets/TabTitleFormatButton.cpp
 
@@ -249,6 +239,8 @@ target_link_libraries(konsoleprivate
     KF5::NewStuffWidgets
     ${konsole_LIBS}
     ZLIB::ZLIB
+    ICU::uc
+    ICU::i18n
 )
 
 set_target_properties(konsoleprivate PROPERTIES

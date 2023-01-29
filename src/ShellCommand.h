@@ -10,9 +10,6 @@
 // Qt
 #include <QStringList>
 
-// Konsole
-#include "konsoleprivate_export.h"
-
 namespace Konsole
 {
 /**
@@ -36,7 +33,7 @@ namespace Konsole
  *      </li>
  * </ul>
  */
-class KONSOLEPRIVATE_EXPORT ShellCommand
+class ShellCommand
 {
 public:
     /**
