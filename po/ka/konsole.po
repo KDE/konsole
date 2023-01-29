@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-28 01:01+0000\n"
-"PO-Revision-Date: 2023-01-27 08:08+0100\n"
+"PO-Revision-Date: 2023-01-28 10:03+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2733,7 +2733,7 @@ msgstr "&ჩასწორება..."
 #: settings/ProfileSettings.ui:65
 #, kde-format
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "მონიშნული პროფილის წაშლა"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:68
@@ -2794,13 +2794,13 @@ msgstr "მდებარეობა:"
 #: settings/TabBarSettings.ui:116
 #, kde-format
 msgid "Above terminal area"
-msgstr ""
+msgstr "ტერმინალის ზემოდან"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
 #: settings/TabBarSettings.ui:126
 #, kde-format
 msgid "Be&low terminal area"
-msgstr ""
+msgstr "&ტერმინალის ქვემოდან"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:152
@@ -3118,13 +3118,13 @@ msgstr "ჩასმის დადასტურება"
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
-msgstr ""
+msgstr "&სპეციალური სიმბოლოების გარეშე ჩასმა"
 
 #: terminalDisplay/TerminalDisplay.cpp:2281
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
-msgstr ""
+msgstr "&ყველაფრის ჩასმა"
 
 #: terminalDisplay/TerminalDisplay.cpp:2282
 #, kde-format
@@ -3180,28 +3180,22 @@ msgid "Split View Automatically"
 msgstr "ხედის ავტომატური დაყოფა"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "ხედის მარჯვენა/მარცხენაზე გაყოფა"
+msgstr "შემდეგი ჩანართიდან ხედის მარჯვენა/მარცხენაზე გაყოფა"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "ხედის ზედა/ქვედაზე გაყოფა"
+msgstr "შემდეგი ჩანართიდან ხედის ზედა/ქვედაზე გაყოფა"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Automatically"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "ხედის ავტომატური დაყოფა"
+msgstr "შემდეგი ჩანართიდან ხედის ავტომატური დაყოფა"
 
 #: ViewManager.cpp:165
 #, kde-format

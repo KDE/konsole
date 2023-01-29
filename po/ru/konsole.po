@@ -10,14 +10,14 @@
 # Alexander Potashev <aspotashev@gmail.com>, 2009, 2010, 2011, 2014, 2015, 2016, 2017, 2019.
 # Yuri Efremov <yur.arh@gmail.com>, 2012, 2013.
 # Alexander Lakhin <exclusion@gmail.com>, 2013, 2014.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2019, 2020, 2021, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2019, 2020, 2021, 2022, 2023.
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-28 01:01+0000\n"
-"PO-Revision-Date: 2022-11-13 16:25+0300\n"
+"PO-Revision-Date: 2023-01-28 22:12+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -1449,14 +1449,14 @@ msgid "Quick Commands"
 msgstr "Быстрые команды"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Показывать быстрые команды"
+msgstr "Быстрый доступ"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
-msgstr "Показывать быстрые команды"
+msgstr "Быстрые команды"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:168
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
@@ -1565,12 +1565,12 @@ msgstr "Хост: %1"
 #: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
 msgid "SSH Manager"
-msgstr "Менеджер SSH"
+msgstr "Диспетчер SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:95
 #, kde-format
 msgid "Show SSH Manager"
-msgstr "Показать менеджер SSH"
+msgstr "Диспетчер SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
@@ -1580,7 +1580,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Записи SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
@@ -1708,15 +1708,13 @@ msgstr "Показать записи, не соответствующие за�
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Изменять профиль при подключении и отключении"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Управление профилями"
+msgstr "Управление профилем"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -3285,32 +3283,28 @@ msgid "Split View Top/Bottom"
 msgstr "Разделить окно по горизонтали"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Разделить окно по горизонтали"
+msgstr "Разделить окно автоматически"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Разделить окно по вертикали"
+msgstr "Разделить окно следующей вкладки по вертикали"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Разделить окно по горизонтали"
+msgstr "Разделить окно следующей вкладки по горизонтали"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Разделить окно по горизонтали"
+msgstr "Разделить окно следующей вкладки автоматически"
 
 #: ViewManager.cpp:165
 #, kde-format
@@ -3448,13 +3442,13 @@ msgstr "Настроить семантическую интеграцию (bash
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Показывать семантических подсказки"
 
 #: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Показывать номеров строк"
 
 #: ViewManager.cpp:330
 #, kde-format
@@ -3469,29 +3463,29 @@ msgid "Switch to Tab %1"
 msgstr "Переключиться на вкладку %1"
 
 #: ViewManager.cpp:553
-#, fuzzy, kde-format
+#, kde-format
 msgid "Semantic hints "
-msgstr "Семантические подсказки:"
+msgstr "Семантические подсказки "
 
 #: ViewManager.cpp:569
-#, fuzzy, kde-format
+#, kde-format
 msgid "Line numbers "
-msgstr "Количество сохраняемых строк: "
+msgstr "Номера строк"
 
 #: ViewManager.cpp:1130
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Сохранить макет вкладки в файл"
+msgstr "Сохранение макета вкладки"
 
 #: ViewManager.cpp:1132 ViewManager.cpp:1219
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Макет окна Konsole (*.json)"
 
 #: ViewManager.cpp:1145
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
@@ -3501,7 +3495,7 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1206
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
@@ -3511,10 +3505,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1217
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Загрузить макет вкладки из файла"
+msgstr "Загрузка макета вкладки"
 
 #: Vt102Emulation.cpp:2354
 #, kde-format
