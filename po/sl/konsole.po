@@ -9,7 +9,7 @@
 # Jure Repinc <jlp@holodeck1.com>, 2006, 2007, 2008, 2009, 2010, 2011, 2013.
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2007, 2011.
 # Andrej Mernik <andrejm@ubuntu.si>, 2012, 2013, 2014, 2015, 2016, 2017, 2018.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2019, 2020, 2021, 2022.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2019, 2020, 2021, 2022, 2023.
 # Matija Šuklje <matija@suklje.name>, 2021.
 # Martin Srebotnjak <miles@filmsi.net>, 2022.
 msgid ""
@@ -17,17 +17,17 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-28 01:01+0000\n"
-"PO-Revision-Date: 2022-11-12 19:31+0100\n"
+"PO-Revision-Date: 2023-01-30 09:04+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3266,28 +3266,22 @@ msgid "Split View Automatically"
 msgstr "Samodejno razdeli pogled"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Razdeli pogled levo/desno"
+msgstr "Razdeli pogled levo/desno iz naslednjega zavihka"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Razdeli pogled zgoraj/spodaj"
+msgstr "Razdeli pogled zgoraj/spodaj iz naslednjega zavihka"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Automatically"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Samodejno razdeli pogled"
+msgstr "Samodejno razdeli pogled iz naslednjega zavihka"
 
 #: ViewManager.cpp:165
 #, kde-format
