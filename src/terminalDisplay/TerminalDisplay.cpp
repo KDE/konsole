@@ -1125,6 +1125,11 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
         return;
     }
 
+    if (_needCopyToX11Selection && (ev->button() != Qt::LeftButton)) {
+        copyToX11Selection();
+        _needCopyToX11Selection = false;
+    }
+
     if (_possibleTripleClick && (ev->button() == Qt::LeftButton)) {
         _needCopyToX11Selection = false;
         mouseTripleClickEvent(ev);
