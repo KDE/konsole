@@ -3,13 +3,13 @@
 #
 # Vasee Vaseeharan <vasee@ieee.org>, 2004, 2008.
 # ஆமாச்சு <amachu@ubuntu.com>, 2008.
-# Kishore G <kishore96@gmail.com>, 2021, 2022.
+# Kishore G <kishore96@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-28 01:01+0000\n"
-"PO-Revision-Date: 2022-11-10 20:00+0530\n"
+"PO-Revision-Date: 2023-01-31 19:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3257,28 +3257,22 @@ msgid "Split View Automatically"
 msgstr "காட்சியை தானாக பிரி"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "காட்சியை இடது/வலது என பிரி"
+msgstr "அடுத்த கீற்றிலிருந்து காட்சியை இடது/வலது என பிரி"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "காட்சியை மேல்/கீழ் என பிரி"
+msgstr "அடுத்த கீற்றிலிருந்து காட்சியை மேல்/கீழ் என பிரி"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Automatically"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "காட்சியை தானாக பிரி"
+msgstr "அடுத்த கீற்றிலிருந்து காட்சியை தானாக பிரி"
 
 #: ViewManager.cpp:165
 #, kde-format
