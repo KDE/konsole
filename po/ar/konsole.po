@@ -8,7 +8,7 @@
 # محمد سعد  Mohamed SAAD <metehyi@free.fr>, 2006.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
 # zayed <zayed.alsaidi@gmail.com>, 2008.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010, 2021, 2022.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010, 2021, 2022, 2023.
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2012, 2014.
 # Safa Alfulaij <safaalfulaij@hotmail.con>, 2013.
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-28 01:01+0000\n"
-"PO-Revision-Date: 2022-11-21 20:31+0400\n"
+"PO-Revision-Date: 2023-02-02 11:57+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -3256,28 +3256,22 @@ msgid "Split View Automatically"
 msgstr "افصل العرض آلياً"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "افصل العرض يمين/يسار"
+msgstr "افصل العرض يمين/يسار من اللسان التالي"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "افصل العرض فوق/تحت"
+msgstr "افصل العرض فوق/تحت من اللسان التالي"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Automatically"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "افصل العرض آلياً"
+msgstr "افصل العرض آلياً من اللسان التالي"
 
 #: ViewManager.cpp:165
 #, kde-format
