@@ -4,20 +4,20 @@
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2010, 2011, 2013.
 # Kiril Vladimirov <kiril@vladimiroff.org>, 2021.
-# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+# Mincho Kondarev <mkondarev@yahoo.de>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-28 01:01+0000\n"
-"PO-Revision-Date: 2022-12-05 00:07+0100\n"
+"PO-Revision-Date: 2023-02-02 16:10+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
-"Language-Team: \n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -3269,13 +3269,13 @@ msgstr "Разделяне на изгледа"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
-msgstr "Разделяне на сесията вертикално"
+msgstr "Разделяне на изгледа вертикално"
 
 #: ViewManager.cpp:121
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
-msgstr "Разделяне на сесията хоризонтално"
+msgstr "Разделяне на изгледа хоризонтално"
 
 #: ViewManager.cpp:129
 #, kde-format
@@ -3284,28 +3284,22 @@ msgid "Split View Automatically"
 msgstr "Автоматично разделяне на изгледа"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Разделяне на сесията вертикално"
+msgstr "Разделяне на изгледа вертикално от следващия раздел"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Разделяне на сесията хоризонтално"
+msgstr "Разделяне на изгледа хоризонтално от следващия раздел"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Automatically"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Автоматично разделяне на изгледа"
+msgstr "Автоматично разделяне на изгледа от следващия раздел"
 
 #: ViewManager.cpp:165
 #, kde-format
