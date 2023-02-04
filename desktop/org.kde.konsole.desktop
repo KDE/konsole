@@ -27,6 +27,7 @@ Keywords[fi]=pääte;konsoli;skripti;komentojono;aja;suorita;komento;komentorivi
 Keywords[fr]=terminal ; console ; script ; lancer ; exécuter ;commande ; commande en ligne ; cli ; bash ; sh ; shell ; zsh ; invite de commandes
 Keywords[ia]=terminal;console;script;run;executa;commando;linea-de-commando;lineadecommando;cli;bash;sh;shell;zsh;cmd;command prompt
 Keywords[id]=terminal;konsol;skrip;jalan;jalankan;perintah;baris perintah;baris-perintah;cli;bash;sh;shell;zsh;cmd;prompt perintah
+Keywords[is]=skjáhermir;hermir;skrifta;keyra;ræsa;skipun;skipana-lína;skipanalína;skl;bash;sh;shell;zsh;cmd;skel
 Keywords[it]=terminale;console;script;esegui;comando;riga di comando;cli;bash;sh;shell;zsh;cmd;prompt dei comandi
 Keywords[ka]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt
 Keywords[ko]=terminal;console;script;run;execute;command;command-line;commandline;cli;bash;sh;shell;zsh;cmd;command prompt;터미널;콘솔;스크립트;실행;명령;명령줄;명령행;명령 프롬프트;
