@@ -1237,7 +1237,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
         setFocus();
     }
 
-    if (_possibleTripleClick && QPoint::dotProduct(ev->pos() - _tripleClickPos, ev->pos() - _tripleClickPos) > 400) {
+    if (_possibleTripleClick && (ev->pos() - _tripleClickPos).manhattanLength() > 20) {
         _possibleTripleClick = false;
         copyToX11Selection(true);
     }
