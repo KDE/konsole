@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 02:43+0000\n"
-"PO-Revision-Date: 2023-01-15 15:27\n"
+"PO-Revision-Date: 2023-02-07 11:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -3856,13 +3856,13 @@ msgstr "复杂文本布局"
 #: widgets/EditProfileAppearancePage.ui:791
 #, kde-format
 msgid "Enable word mode text rendering"
-msgstr ""
+msgstr "启用单词模式文本呈现"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "单词模式"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3870,19 +3870,19 @@ msgstr ""
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
-msgstr ""
+msgstr "忽略单词中间的属性更改 (否则，呈现时属性更改会中断单词)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "整个单词使用相同的属性"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "渲染 ASCII 字符的单词"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
@@ -3894,13 +3894,13 @@ msgstr "ASCII 字符 "
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "渲染 Brahmic 脚本的单词"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr ""
+msgstr "Brahmic 脚本字符"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
