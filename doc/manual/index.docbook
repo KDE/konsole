@@ -52,7 +52,7 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2022-12-10</date>
+<date>2023-02-10</date>
 <releaseinfo>KDE Gear 23.04</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
@@ -117,6 +117,10 @@ without the mouse.</para>
 
 <para>
 Enter and leave this mode by using the keyboard shortcut (<keycombo action="simul">&Ctrl;&Shift;<keycap>D</keycap></keycombo> by default).
+</para>
+
+<para>
+<keycap>Esc</keycap> also leaves the keyboard selection mode.
 </para>
 
 <para>

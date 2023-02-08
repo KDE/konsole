@@ -2631,6 +2631,9 @@ void TerminalDisplay::keyPressEvent(QKeyEvent *event)
             }
         }
         switch (event->key()) {
+        case Qt::Key_Escape:
+            sessionController()->setSelectMode(false);
+            break;
         case Qt::Key_Left:
         case Qt::Key_H:
             SELECT_BY_MODIFIERS;

@@ -452,14 +452,12 @@ void SessionController::setupPrimaryScreenSpecificActions(bool use)
     QAction *clearAction = collection->action(QStringLiteral("clear-history"));
     QAction *resetAction = collection->action(QStringLiteral("clear-history-and-reset"));
     QAction *selectAllAction = collection->action(QStringLiteral("select-all"));
-    QAction *selectModeAction = collection->action(QStringLiteral("select-mode"));
     QAction *selectLineAction = collection->action(QStringLiteral("select-line"));
 
     // these actions are meaningful only when primary screen is used.
     clearAction->setEnabled(use);
     resetAction->setEnabled(use);
     selectAllAction->setEnabled(use);
-    selectModeAction->setEnabled(use);
     selectLineAction->setEnabled(use);
 }
 
@@ -1241,11 +1239,17 @@ void SessionController::selectAll()
 void SessionController::selectMode()
 {
     if (!session().isNull()) {
-        QAction *readonlyAction = actionCollection()->action(QStringLiteral("view-readonly"));
         bool Mode = session()->getSelectMode();
-        session()->setSelectMode(!Mode);
-        readonlyAction->setEnabled(Mode);
-        view()->setSelectMode(!Mode);
+        setSelectMode(!Mode);
+    }
+}
+void SessionController::setSelectMode(bool mode)
+{
+    if (!session().isNull()) {
+        QAction *readonlyAction = actionCollection()->action(QStringLiteral("view-readonly"));
+        session()->setSelectMode(mode);
+        readonlyAction->setEnabled(!mode);
+        view()->setSelectMode(mode);
     }
 }
 

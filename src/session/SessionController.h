@@ -144,6 +144,9 @@ public:
     bool isReadOnly() const;
     bool isCopyInputActive() const;
 
+    /* Set/reset selection mode */
+    void setSelectMode(bool mode);
+
 Q_SIGNALS:
     /**
      * Emitted when the view associated with the controller is focused.
