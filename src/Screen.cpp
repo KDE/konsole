@@ -2065,7 +2065,8 @@ int Screen::copyLineToStream(int line,
     // determine if the line is in the history buffer or the screen image
     if (line < _history->getLines()) {
         // ensure that start position is before end of line
-        start = qBound(0, start, lineLength - 1);
+        // lineLength can be 0 aswell
+        start = lineLength <= 0 ? 0 : qBound(0, start, lineLength - 1);
 
         // retrieve line from history buffer
         if (count == -1) {
