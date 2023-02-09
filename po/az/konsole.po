@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-28 01:01+0000\n"
+"POT-Creation-Date: 2023-02-09 01:06+0000\n"
 "PO-Revision-Date: 2022-07-20 11:10+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -3148,64 +3148,64 @@ msgstr "Eskizlər yaradılmasını aktiv edin"
 msgid "Size: %1 x %2"
 msgstr "Ölçü: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2208
+#: terminalDisplay/TerminalDisplay.cpp:2220
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "%1 simvolu daxil etmək istədiyinizə əminsiniz?"
 msgstr[1] "%1 simvolu daxil etmək istədiyinizə əminsiniz?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2209
+#: terminalDisplay/TerminalDisplay.cpp:2221
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Daxil etməni təsdiq etmək"
 
-#: terminalDisplay/TerminalDisplay.cpp:2242
+#: terminalDisplay/TerminalDisplay.cpp:2254
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 "End Of Text/Interrupt simvolu (^C): cari prosesdən çıxmağa səbəb ola bilər"
 
-#: terminalDisplay/TerminalDisplay.cpp:2243
+#: terminalDisplay/TerminalDisplay.cpp:2255
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 "End Of Transmission simvolu (^D): cari prosesdən çıxmağa səbəb ola bilər"
 
-#: terminalDisplay/TerminalDisplay.cpp:2244
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell simvolu (^G ): Səs siqnalı verməyə çalışacaqdır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2245
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace aimvolu (^G ): soldakı simvolun silinməsi"
 
-#: terminalDisplay/TerminalDisplay.cpp:2246
+#: terminalDisplay/TerminalDisplay.cpp:2258
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF simvolu (^S): çıxarışı dayandırır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2247
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 "Substitute/Suspend simvolu (^Z): cari prosesin dayanmasına səbəb ola bilər"
 
-#: terminalDisplay/TerminalDisplay.cpp:2248
+#: terminalDisplay/TerminalDisplay.cpp:2260
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 "Escape simvolu (^[):terminalın vəziyyətinin idarə edilməsi üçün istifadə "
 "edilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2249
+#: terminalDisplay/TerminalDisplay.cpp:2261
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Separator/Quit simvolu: cari əməliyyatın icrasını dayandıra bilər"
 
-#: terminalDisplay/TerminalDisplay.cpp:2276
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3214,31 +3214,31 @@ msgstr ""
 "Daxil etmək istədiyiniz mətndə gizli idarəetmə simvolları var, onları "
 "süzgəcdən keçirmək istəyirsiniz?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2279
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Daxil etməni təsdiq etmək"
 
-#: terminalDisplay/TerminalDisplay.cpp:2280
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "İdarəetmə simvolları olmadan daxil etmək"
 
-#: terminalDisplay/TerminalDisplay.cpp:2281
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Dəyişdirmədən daxil etmək"
 
-#: terminalDisplay/TerminalDisplay.cpp:2282
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&İmtina etmək"
 
-#: terminalDisplay/TerminalDisplay.cpp:2505
+#: terminalDisplay/TerminalDisplay.cpp:2533
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3249,17 +3249,17 @@ msgstr ""
 "Software_flow_control\">dayandırıldı</a> Davam etmək üçün <b>Ctrl+Q</b> "
 "yığmaq.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2560
+#: terminalDisplay/TerminalDisplay.cpp:2588
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Bu terminal yalnız oxumaq üçün açıqdır."
 
-#: terminalDisplay/TerminalDisplay.cpp:2950
+#: terminalDisplay/TerminalDisplay.cpp:2980
 #, kde-format
 msgid "Change &Directory To"
 msgstr "İş qovluğunu &əvəzləmək"
 
-#: terminalDisplay/TerminalDisplay.cpp:2983
+#: terminalDisplay/TerminalDisplay.cpp:3013
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Ünvanı daxil etmək"
