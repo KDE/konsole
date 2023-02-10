@@ -400,7 +400,7 @@ public:
 
     bool getReadOnly() const
     {
-        return _readOnly;
+        return _readOnly || _selectMode;
     }
 
     // Get mapping between visual and logical positions in line
@@ -783,6 +783,7 @@ private:
 
     // Needed to know whether the mode really changed between update calls
     bool _readOnly = false;
+    bool _selectMode = false;
 
     bool _dimWhenInactive = false;
     int _dimValue;

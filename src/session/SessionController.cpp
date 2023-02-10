@@ -1246,9 +1246,7 @@ void SessionController::selectMode()
 void SessionController::setSelectMode(bool mode)
 {
     if (!session().isNull()) {
-        QAction *readonlyAction = actionCollection()->action(QStringLiteral("view-readonly"));
         session()->setSelectMode(mode);
-        readonlyAction->setEnabled(!mode);
         view()->setSelectMode(mode);
     }
 }

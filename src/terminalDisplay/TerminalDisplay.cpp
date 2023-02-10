@@ -2563,8 +2563,8 @@ KMessageWidget *TerminalDisplay::createMessageWidget(const QString &text)
 
 void TerminalDisplay::setSelectMode(bool mode)
 {
-    _readOnly = mode;
     Screen *screen = screenWindow()->screen();
+    _selectMode = mode;
     if (mode) {
         screen->initSelCursor();
         screen->clearSelection();
