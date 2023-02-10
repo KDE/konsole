@@ -1,6 +1,5 @@
 #! /bin/sh
 rm -f schemas.cpp
-#(cd ../desktop && $PREPARETIPS > ../src/tips.cpp)
 for i in ../data/color-schemes/*.colorscheme; do
 grep "^Description=" $i | sed -e 's#^Description=\(.*\)$#i18n(\"\1\")#' >> schemas.cpp
 done
