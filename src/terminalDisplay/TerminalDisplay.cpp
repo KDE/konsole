@@ -84,6 +84,8 @@
 #include "unicode/ushape.h"
 #include "unicode/utypes.h"
 
+#define MAX_LINE_WIDTH 1024
+
 using namespace Konsole;
 
 inline int TerminalDisplay::loc(int x, int y) const
@@ -1028,8 +1030,9 @@ void TerminalDisplay::calcGeometry()
 
     int fontWidth = _terminalFont->fontWidth();
 
-    // ensure that display is always at least one column wide
-    _columns = qMax(1, _contentRect.width() / fontWidth);
+    // ensure that display is always at least one column wide,
+    // and clamp it to MAX_LINE_WIDTH-1 wide to prevent text shaping buffer overflows
+    _columns = qBound(1, _contentRect.width() / fontWidth, MAX_LINE_WIDTH - 1);
     _usedColumns = qMin(_usedColumns, _columns);
 
     // ensure that display is always at least one line high
@@ -1526,7 +1529,6 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint &widgetPoint,
 
     // Visual column to logical
     if (_bidiEnabled && column < _usedColumns) {
-#define MAX_LINE_WIDTH 1024
         int log2line[MAX_LINE_WIDTH];
         int line2log[MAX_LINE_WIDTH];
         uint16_t shapemap[MAX_LINE_WIDTH];
@@ -3198,7 +3200,7 @@ int TerminalDisplay::bidiMap(Character *screenline,
         u_shapeArabic(reinterpret_cast<const UChar *>(line.utf16()),
                       line.length(),
                       shaped_line,
-                      1024,
+                      MAX_LINE_WIDTH,
                       U_SHAPE_AGGREGATE_TASHKEEL_NOOP | U_SHAPE_LENGTH_FIXED_SPACES_NEAR | U_SHAPE_LETTERS_SHAPE,
                       &errorCode);
         for (int i = 0; i < line.length(); i++) {
