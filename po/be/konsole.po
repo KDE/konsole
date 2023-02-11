@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-09 01:06+0000\n"
-"PO-Revision-Date: 2022-11-11 08:46\n"
+"PO-Revision-Date: 2023-02-09 08:31\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -3259,28 +3259,22 @@ msgid "Split View Automatically"
 msgstr "Падзяліць аўтаматычна"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Падзяліць па вертыкалі"
+msgstr "Падзяліць па вертыкалі з наступнай укладкі"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Падзяліць па гарызанталі"
+msgstr "Падзяліць па гарызанталі з наступнай укладкі"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Automatically"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Падзяліць аўтаматычна"
+msgstr "Падзяліць аўтаматычна з наступнай укладкі"
 
 #: ViewManager.cpp:165
 #, kde-format
