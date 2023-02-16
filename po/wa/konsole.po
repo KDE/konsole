@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-09 01:06+0000\n"
+"POT-Creation-Date: 2023-02-16 01:03+0000\n"
 "PO-Revision-Date: 2010-01-22 15:02+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -495,34 +495,34 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "Djeu d' coleurs sins no"
 
-#: colorscheme/ColorSchemeEditor.cpp:109
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, fuzzy, kde-format
 #| msgid "Name"
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "No"
 
-#: colorscheme/ColorSchemeEditor.cpp:109
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, fuzzy, kde-format
 #| msgid "Color"
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "Coleur"
 
-#: colorscheme/ColorSchemeEditor.cpp:110
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:113
 #, fuzzy, kde-format
 #| msgid "Linux Colors"
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "Coleurs Linux"
 
-#: colorscheme/ColorSchemeEditor.cpp:136
+#: colorscheme/ColorSchemeEditor.cpp:138
 #, fuzzy, kde-format
 #| msgid ""
 #| "The background transparency setting will not be used because your desktop "
@@ -535,45 +535,45 @@ msgstr ""
 "L' apontiaedje pol fond k' on voet houte ni serè nén eployî la ki vosse "
 "sicribanne ni sopoite nén les purneas k' on voet houte."
 
-#: colorscheme/ColorSchemeEditor.cpp:187
+#: colorscheme/ColorSchemeEditor.cpp:189
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:191
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:333
+#: colorscheme/ColorSchemeEditor.cpp:335
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "Novea djeu d' coleurs"
 
-#: colorscheme/ColorSchemeEditor.cpp:336
+#: colorscheme/ColorSchemeEditor.cpp:338
 #, fuzzy, kde-format
 #| msgid "Edit Color Scheme"
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "Candjî djeu d' coleurs"
 
-#: colorscheme/ColorSchemeEditor.cpp:382
+#: colorscheme/ColorSchemeEditor.cpp:384
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:387
+#: colorscheme/ColorSchemeEditor.cpp:389
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:392
+#: colorscheme/ColorSchemeEditor.cpp:394
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -753,7 +753,7 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:50
+#: colorscheme/ColorSchemeViewDelegate.cpp:51
 #, kde-format
 msgid "AaZz09..."
 msgstr ""
@@ -1314,68 +1314,68 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Gråces a co bén ds ôtes.\n"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:362
 #, fuzzy, kde-format
 #| msgid "New &Tab"
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Novele &linwete"
 
-#: MainWindow.cpp:355
+#: MainWindow.cpp:372
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Clôre linwete"
 
-#: MainWindow.cpp:362
+#: MainWindow.cpp:379
 #, fuzzy, kde-format
 #| msgid "New &Window"
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Novea &purnea"
 
-#: MainWindow.cpp:369
+#: MainWindow.cpp:386
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:374
+#: MainWindow.cpp:391
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Rimåkes"
 
-#: MainWindow.cpp:402
+#: MainWindow.cpp:419
 #, fuzzy, kde-format
 #| msgid "Manage Profiles"
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Manaedjî les profils"
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:425
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr ""
 
-#: MainWindow.cpp:414
+#: MainWindow.cpp:431
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Potchî al vuwe di hintche"
 
-#: MainWindow.cpp:423
+#: MainWindow.cpp:440
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:733 MainWindow.cpp:758
+#: MainWindow.cpp:756 MainWindow.cpp:781
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1386,28 +1386,28 @@ msgid_plural ""
 msgstr[0] "Vos avoz sacwantès linwetes e ç' purnea ci, voloz cwiter podbon?"
 msgstr[1] "Vos avoz sacwantès linwetes e ç' purnea ci, voloz cwiter podbon?"
 
-#: MainWindow.cpp:739 MainWindow.cpp:764 MainWindow.cpp:782
+#: MainWindow.cpp:762 MainWindow.cpp:787 MainWindow.cpp:805
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Racertiner cloyaedje"
 
-#: MainWindow.cpp:740 MainWindow.cpp:765 MainWindow.cpp:783
+#: MainWindow.cpp:763 MainWindow.cpp:788 MainWindow.cpp:806
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:766 MainWindow.cpp:784
+#: MainWindow.cpp:789 MainWindow.cpp:807
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Clôre li linwete do moumint"
 
-#: MainWindow.cpp:779
+#: MainWindow.cpp:802
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1415,33 +1415,33 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Vos avoz sacwantès linwetes e ç' purnea ci, voloz cwiter podbon?"
 
-#: MainWindow.cpp:894 Part.cpp:297
+#: MainWindow.cpp:917 Part.cpp:297
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Novea profil"
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:934
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Djenerå"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:945
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:927
+#: MainWindow.cpp:950
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:932
+#: MainWindow.cpp:955
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

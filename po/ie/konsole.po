@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-09 01:06+0000\n"
+"POT-Creation-Date: 2023-02-16 01:03+0000\n"
 "PO-Revision-Date: 2022-10-28 16:51+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <kde-i18n-doc@kde.org>\n"
@@ -433,31 +433,31 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "Schema de colores sin nómine"
 
-#: colorscheme/ColorSchemeEditor.cpp:109
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "Nómine"
 
-#: colorscheme/ColorSchemeEditor.cpp:109
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "Color"
 
-#: colorscheme/ColorSchemeEditor.cpp:110
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr "Intens color"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:113
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "Pallid color"
 
-#: colorscheme/ColorSchemeEditor.cpp:136
+#: colorscheme/ColorSchemeEditor.cpp:138
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -465,43 +465,43 @@ msgid ""
 "does not appear to support transparent windows."
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:187
+#: colorscheme/ColorSchemeEditor.cpp:189
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "Selecte un file del image de funde"
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:191
 #, fuzzy, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "Omni images suportat"
 
-#: colorscheme/ColorSchemeEditor.cpp:333
+#: colorscheme/ColorSchemeEditor.cpp:335
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "Nov schema"
 
-#: colorscheme/ColorSchemeEditor.cpp:336
+#: colorscheme/ColorSchemeEditor.cpp:338
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "S_chema de colores"
 
-#: colorscheme/ColorSchemeEditor.cpp:382
+#: colorscheme/ColorSchemeEditor.cpp:384
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr "Selecter li color del indicator del hor"
 
-#: colorscheme/ColorSchemeEditor.cpp:387
+#: colorscheme/ColorSchemeEditor.cpp:389
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr "Color 1 (intens)"
 
-#: colorscheme/ColorSchemeEditor.cpp:392
+#: colorscheme/ColorSchemeEditor.cpp:394
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -672,7 +672,7 @@ msgstr "Vertical"
 msgid "Top"
 msgstr "Alt"
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:50
+#: colorscheme/ColorSchemeViewDelegate.cpp:51
 #, kde-format
 msgid "AaZz09..."
 msgstr "AaZz09..."
@@ -1175,61 +1175,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Mersí a mult altris.\n"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:362
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nov carte"
 
-#: MainWindow.cpp:355
+#: MainWindow.cpp:372
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Clonar li carte"
 
-#: MainWindow.cpp:362
+#: MainWindow.cpp:379
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nov &fenestre"
 
-#: MainWindow.cpp:369
+#: MainWindow.cpp:386
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Cluder li fenestre"
 
-#: MainWindow.cpp:374
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Marca-págines"
 
-#: MainWindow.cpp:402
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gerentie de profiles..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:425
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activar li menú"
 
-#: MainWindow.cpp:414
+#: MainWindow.cpp:431
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "_Arangeament"
 
-#: MainWindow.cpp:423
+#: MainWindow.cpp:440
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carga"
 
-#: MainWindow.cpp:733 MainWindow.cpp:758
+#: MainWindow.cpp:756 MainWindow.cpp:781
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1238,55 +1238,55 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: MainWindow.cpp:739 MainWindow.cpp:764 MainWindow.cpp:782
+#: MainWindow.cpp:762 MainWindow.cpp:787 MainWindow.cpp:805
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmar clusion"
 
-#: MainWindow.cpp:740 MainWindow.cpp:765 MainWindow.cpp:783
+#: MainWindow.cpp:763 MainWindow.cpp:788 MainWindow.cpp:806
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Cluder li &fenestre"
 
-#: MainWindow.cpp:766 MainWindow.cpp:784
+#: MainWindow.cpp:789 MainWindow.cpp:807
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Cluder li ac&tual carte"
 
-#: MainWindow.cpp:779
+#: MainWindow.cpp:802
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hay %1 apertet terminales in ti fenestre. Surtir sin egard?"
 
-#: MainWindow.cpp:894 Part.cpp:297
+#: MainWindow.cpp:917 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiles"
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:934
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:945
 #, fuzzy, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Separators"
 
-#: MainWindow.cpp:927
+#: MainWindow.cpp:950
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Temporari files"
 
-#: MainWindow.cpp:932
+#: MainWindow.cpp:955
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

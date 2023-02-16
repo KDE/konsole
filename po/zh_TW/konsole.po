@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-09 01:06+0000\n"
+"POT-Creation-Date: 2023-02-16 01:03+0000\n"
 "PO-Revision-Date: 2022-12-10 10:31+0800\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.slat.org>\n"
@@ -443,31 +443,31 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "未命名配色"
 
-#: colorscheme/ColorSchemeEditor.cpp:109
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "名稱"
 
-#: colorscheme/ColorSchemeEditor.cpp:109
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "顏色"
 
-#: colorscheme/ColorSchemeEditor.cpp:110
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr "緊密顏色"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:113
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "暗淡顏色"
 
-#: colorscheme/ColorSchemeEditor.cpp:136
+#: colorscheme/ColorSchemeEditor.cpp:138
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -475,43 +475,43 @@ msgid ""
 "does not appear to support transparent windows."
 msgstr "因為您的桌面不支援透明視窗，所以背景透明設定將不會被使用。"
 
-#: colorscheme/ColorSchemeEditor.cpp:187
+#: colorscheme/ColorSchemeEditor.cpp:189
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "選擇桌布影像檔"
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:191
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "支援的影像"
 
-#: colorscheme/ColorSchemeEditor.cpp:333
+#: colorscheme/ColorSchemeEditor.cpp:335
 #, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "新增配色"
 
-#: colorscheme/ColorSchemeEditor.cpp:336
+#: colorscheme/ColorSchemeEditor.cpp:338
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "編輯配色"
 
-#: colorscheme/ColorSchemeEditor.cpp:382
+#: colorscheme/ColorSchemeEditor.cpp:384
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr "點擊以選擇顏色"
 
-#: colorscheme/ColorSchemeEditor.cpp:387
+#: colorscheme/ColorSchemeEditor.cpp:389
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr "點擊以選擇緊密顏色"
 
-#: colorscheme/ColorSchemeEditor.cpp:392
+#: colorscheme/ColorSchemeEditor.cpp:394
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -685,7 +685,7 @@ msgstr "垂直錨定："
 msgid "Top"
 msgstr "頂端"
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:50
+#: colorscheme/ColorSchemeViewDelegate.cpp:51
 #, kde-format
 msgid "AaZz09..."
 msgstr "AaZz09..."
@@ -1198,61 +1198,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "感謝其他許多人。\n"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:362
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "新增分頁(&N)"
 
-#: MainWindow.cpp:355
+#: MainWindow.cpp:372
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "複製分頁(&C)"
 
-#: MainWindow.cpp:362
+#: MainWindow.cpp:379
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "新增視窗(&W)"
 
-#: MainWindow.cpp:369
+#: MainWindow.cpp:386
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "關閉視窗"
 
-#: MainWindow.cpp:374
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "書籤(&B)"
 
-#: MainWindow.cpp:402
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "管理設定檔..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:425
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "啟動選單"
 
-#: MainWindow.cpp:414
+#: MainWindow.cpp:431
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "儲存分頁佈局……"
 
-#: MainWindow.cpp:423
+#: MainWindow.cpp:440
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "載入分頁佈局……"
 
-#: MainWindow.cpp:733 MainWindow.cpp:758
+#: MainWindow.cpp:756 MainWindow.cpp:781
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1260,55 +1260,55 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "此視窗中目前有 %1 個行程執行中。您確定要離開嗎？"
 
-#: MainWindow.cpp:739 MainWindow.cpp:764 MainWindow.cpp:782
+#: MainWindow.cpp:762 MainWindow.cpp:787 MainWindow.cpp:805
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "確認關閉"
 
-#: MainWindow.cpp:740 MainWindow.cpp:765 MainWindow.cpp:783
+#: MainWindow.cpp:763 MainWindow.cpp:788 MainWindow.cpp:806
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "關閉視窗(&W)"
 
-#: MainWindow.cpp:766 MainWindow.cpp:784
+#: MainWindow.cpp:789 MainWindow.cpp:807
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "關閉目前的分頁(&T)"
 
-#: MainWindow.cpp:779
+#: MainWindow.cpp:802
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "此視窗中目前有 %1 個開啟的終端機。您確定要離開嗎？"
 
-#: MainWindow.cpp:894 Part.cpp:297
+#: MainWindow.cpp:917 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "設定檔"
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:934
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "一般"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:945
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "分頁列/界線"
 
-#: MainWindow.cpp:927
+#: MainWindow.cpp:950
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "暫存檔"
 
-#: MainWindow.cpp:932
+#: MainWindow.cpp:955
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

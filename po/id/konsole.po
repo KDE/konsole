@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-09 01:06+0000\n"
+"POT-Creation-Date: 2023-02-16 01:03+0000\n"
 "PO-Revision-Date: 2022-09-27 18:12+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -446,31 +446,31 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "Skema Warna Tak Bernama"
 
-#: colorscheme/ColorSchemeEditor.cpp:109
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "Nama"
 
-#: colorscheme/ColorSchemeEditor.cpp:109
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "Warna"
 
-#: colorscheme/ColorSchemeEditor.cpp:110
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr "Warna intens"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:113
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "Warna redup"
 
-#: colorscheme/ColorSchemeEditor.cpp:136
+#: colorscheme/ColorSchemeEditor.cpp:138
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -480,43 +480,43 @@ msgstr ""
 "Setelan transparansi latar belakang tidak akan digunakan karena desktop anda "
 "kelihatannya tidak mendukung jendela transparan."
 
-#: colorscheme/ColorSchemeEditor.cpp:187
+#: colorscheme/ColorSchemeEditor.cpp:189
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "Pilih file citra wallpaper"
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:191
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "Citra yang Didukung"
 
-#: colorscheme/ColorSchemeEditor.cpp:333
+#: colorscheme/ColorSchemeEditor.cpp:335
 #, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "Skema Warna Baru"
 
-#: colorscheme/ColorSchemeEditor.cpp:336
+#: colorscheme/ColorSchemeEditor.cpp:338
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "Edit Skema Warna"
 
-#: colorscheme/ColorSchemeEditor.cpp:382
+#: colorscheme/ColorSchemeEditor.cpp:384
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr "Klik untuk pilih warna"
 
-#: colorscheme/ColorSchemeEditor.cpp:387
+#: colorscheme/ColorSchemeEditor.cpp:389
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr "Kilik untuk pilih warna intens"
 
-#: colorscheme/ColorSchemeEditor.cpp:392
+#: colorscheme/ColorSchemeEditor.cpp:394
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -688,7 +688,7 @@ msgstr ""
 msgid "Top"
 msgstr "Atas"
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:50
+#: colorscheme/ColorSchemeViewDelegate.cpp:51
 #, kde-format
 msgid "AaZz09..."
 msgstr "AaZz09..."
@@ -1197,49 +1197,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Terima kasih kepada yang lainnya.\n"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:362
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Tab &Baru"
 
-#: MainWindow.cpp:355
+#: MainWindow.cpp:372
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klona Tab"
 
-#: MainWindow.cpp:362
+#: MainWindow.cpp:379
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Jendela Baru"
 
-#: MainWindow.cpp:369
+#: MainWindow.cpp:386
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Tutup Jendela"
 
-#: MainWindow.cpp:374
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Markah"
 
-#: MainWindow.cpp:402
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Atur Profil..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:425
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktifkan Menu"
 
-#: MainWindow.cpp:414
+#: MainWindow.cpp:431
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -1247,13 +1247,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Simpan tata letak tab ke file"
 
-#: MainWindow.cpp:423
+#: MainWindow.cpp:440
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:733 MainWindow.cpp:758
+#: MainWindow.cpp:756 MainWindow.cpp:781
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1266,56 +1266,56 @@ msgstr[1] ""
 "Ada %1 proses yang berjalan di jendela ini. Apakah kamu masih ingin "
 "memberhentikan?"
 
-#: MainWindow.cpp:739 MainWindow.cpp:764 MainWindow.cpp:782
+#: MainWindow.cpp:762 MainWindow.cpp:787 MainWindow.cpp:805
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Konfirmasi Tutup"
 
-#: MainWindow.cpp:740 MainWindow.cpp:765 MainWindow.cpp:783
+#: MainWindow.cpp:763 MainWindow.cpp:788 MainWindow.cpp:806
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Tutup &Jendela"
 
-#: MainWindow.cpp:766 MainWindow.cpp:784
+#: MainWindow.cpp:789 MainWindow.cpp:807
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Tutup &Tab Saat Ini"
 
-#: MainWindow.cpp:779
+#: MainWindow.cpp:802
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Ada %1 terminal terbuka dalam jendela ini. Apakah Anda masih ingin keluar?"
 
-#: MainWindow.cpp:894 Part.cpp:297
+#: MainWindow.cpp:917 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profil"
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:934
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Umum"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:945
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Bilah Tab / Pembelah"
 
-#: MainWindow.cpp:927
+#: MainWindow.cpp:950
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "File Sementara"
 
-#: MainWindow.cpp:932
+#: MainWindow.cpp:955
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
