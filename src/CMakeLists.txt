@@ -21,9 +21,11 @@ configure_file(config-konsole.h.cmake
 
 ### Tests
 if(BUILD_TESTING)
-  find_package(Qt${QT_MAJOR_VERSION}Test ${QT_MIN_VERSION} CONFIG REQUIRED)
-  add_subdirectory(autotests)
-  add_subdirectory(tests)
+    if (NOT WIN32)
+        find_package(Qt${QT_MAJOR_VERSION}Test ${QT_MIN_VERSION} CONFIG REQUIRED)
+        add_subdirectory(autotests)
+        add_subdirectory(tests)
+    endif()
 endif()
 
 ### Security concerns about sendText and runCommand dbus methods being public
@@ -59,12 +61,17 @@ set(konsole_LIBS
     KF5::IconThemes
     KF5::Bookmarks
     KF5::I18n
-    KF5::Pty
     KF5::KIOWidgets
     KF5::DBusAddons
-    KF5::GlobalAccel
     KF5::NewStuff
 )
+
+if (NOT WIN32)
+    list(APPEND konsole_LIBS
+        KF5::Pty
+        KF5::GlobalAccel
+    )
+endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     #kinfo_getfile() is in libutil

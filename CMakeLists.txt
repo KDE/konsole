@@ -77,7 +77,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     ConfigWidgets
     CoreAddons
     Crash
-    GlobalAccel
     GuiAddons
     DBusAddons
     I18n
@@ -88,13 +87,19 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     Notifications
     NotifyConfig
     Parts
-    Pty
     Service
     TextWidgets
     WidgetsAddons
     WindowSystem
     XmlGui
 )
+
+if (NOT WIN32)
+    find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
+        GlobalAccel
+        Pty
+    )
+endif()
 
 find_package(KF5DocTools ${KF5_MIN_VERSION})
 set_package_properties(KF5DocTools PROPERTIES DESCRIPTION
@@ -139,7 +144,11 @@ option(ENABLE_PLUGIN_QUICKCOMMANDS "Build the Quick Commands plugin" ON)
 add_subdirectory( src )
 add_subdirectory( data )
 add_subdirectory( desktop )
+
+if (NOT WIN32)
 add_subdirectory( kconf_update )
+endif()
+
 if (KF5DocTools_FOUND)
     add_subdirectory( doc/manual )
 endif()
