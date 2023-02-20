@@ -15,6 +15,7 @@
 #include <QDialog>
 
 // Konsole
+#include "konsoleprivate_export.h"
 #include "session/Session.h"
 #include "session/SessionListModel.h"
 #include "session/SessionManager.h"
@@ -34,7 +35,7 @@ class CheckableSessionModel;
  * set using setMasterSession().  After the dialog has been executed,
  * the set of chosen sessions can be retrieved using chosenSessions()
  */
-class CopyInputDialog : public QDialog
+class KONSOLEPRIVATE_EXPORT CopyInputDialog : public QDialog
 {
     Q_OBJECT
 

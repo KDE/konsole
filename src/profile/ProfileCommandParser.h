@@ -11,7 +11,6 @@
 
 // Konsole
 #include "Profile.h"
-#include "konsoleprofile_export.h"
 
 class QVariant;
 template<typename, typename>
@@ -36,7 +35,7 @@ namespace Konsole
  *   Icon=konsole;Directory=/home/bob
  * @endcode
  */
-class KONSOLEPROFILE_EXPORT ProfileCommandParser
+class KONSOLEPRIVATE_EXPORT ProfileCommandParser
 {
 public:
     /**

@@ -44,7 +44,7 @@ namespace Konsole
  *  }
  * @endcode
  */
-class KONSOLEPRIVATE_EXPORT KeyboardTranslatorReader
+class KeyboardTranslatorReader
 {
 public:
     /** Constructs a new reader which parses the given @p source */

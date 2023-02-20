@@ -19,7 +19,7 @@ namespace Konsole
 class TerminalDisplay;
 
 /** A filter chain which processes character images from terminal displays */
-class TerminalImageFilterChain : public FilterChain
+class KONSOLEPRIVATE_EXPORT TerminalImageFilterChain : public FilterChain
 {
 public:
     explicit TerminalImageFilterChain(TerminalDisplay *terminalDisplay);

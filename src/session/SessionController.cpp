@@ -8,7 +8,6 @@
 // Own
 #include "SessionController.h"
 
-#include "konsoledebug.h"
 #include "profile/ProfileManager.h"
 #include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalFonts.h"
@@ -68,6 +67,7 @@
 #include "SaveHistoryTask.h"
 #include "ScreenWindow.h"
 #include "SearchHistoryTask.h"
+#include "konsoledebug.h"
 
 #include "filterHotSpots/ColorFilter.h"
 #include "filterHotSpots/EscapeSequenceUrlFilter.h"

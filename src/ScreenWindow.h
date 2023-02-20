@@ -15,6 +15,7 @@
 // Konsole
 #include "../characters/Character.h"
 #include "Screen.h"
+#include "konsoleprivate_export.h"
 
 namespace Konsole
 {
@@ -35,7 +36,7 @@ namespace Konsole
  * be called.  This in turn will update the window's position and emit the outputChanged() signal
  * if necessary.
  */
-class ScreenWindow : public QObject
+class KONSOLEPRIVATE_EXPORT ScreenWindow : public QObject
 {
     Q_OBJECT
 

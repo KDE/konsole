@@ -49,6 +49,16 @@ qt_add_dbus_adaptor(windowadaptors_SRCS
                     ViewManager.h
                     Konsole::ViewManager)
 
+# qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
+# Generate dbus .xml files; do not store .xml in source folder
+qt_generate_dbus_interface(session/Session.h org.kde.konsole.Session.xml OPTIONS -m)
+
+qt_add_dbus_adaptor(
+    sessionadaptors_SRCS
+    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
+    session/Session.h
+    Konsole::Session
+)
 
 set(konsole_LIBS
     KF5::XmlGui
@@ -114,8 +124,6 @@ target_link_libraries(konsolehelpers
 
 add_subdirectory(colorscheme)
 add_subdirectory(keyboardtranslator)
-add_subdirectory(profile)
-add_subdirectory(session)
 add_subdirectory(characters)
 add_subdirectory(decoders)
 add_subdirectory(plugins)
@@ -191,6 +199,25 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         terminalDisplay/TerminalFonts.cpp
                         terminalDisplay/TerminalBell.cpp
 
+                        profile/Profile.cpp
+                        profile/ProfileCommandParser.cpp
+                        profile/ProfileGroup.cpp
+                        profile/ProfileList.cpp
+                        profile/ProfileReader.cpp
+                        profile/ProfileWriter.cpp
+                        profile/ProfileManager.cpp
+                        profile/ProfileModel.cpp
+
+                        ${sessionadaptors_SRCS}
+                        session/Session.cpp
+                        session/SessionController.cpp
+                        session/SessionDisplayConnection.cpp
+                        session/SessionGroup.cpp
+                        session/SessionListModel.cpp
+                        session/SessionManager.cpp
+                        session/SessionTask.cpp
+                        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
+
                         widgets/TerminalDisplayAccessible.cpp
                         widgets/TerminalHeaderBar.cpp
                         widgets/ViewContainer.cpp
@@ -239,8 +266,6 @@ target_link_libraries(konsoleprivate
     konsolecolorscheme
     keyboardtranslator
     konsolehelpers
-    konsolesession
-    konsoleprofile
     konsolecharacters
     konsoledecoders
     KF5::NewStuffWidgets

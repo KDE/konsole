@@ -23,7 +23,7 @@ class TerminalDisplay;
  * for the Vt102Emulation or at least the data structure that holds the information
  * so we can create the hotspots.
  */
-class EscapeSequenceUrlFilter : public Filter
+class KONSOLEPRIVATE_EXPORT EscapeSequenceUrlFilter : public Filter
 {
 public:
     EscapeSequenceUrlFilter(Session *session, TerminalDisplay *display);

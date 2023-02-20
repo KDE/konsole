@@ -13,6 +13,7 @@
 
 // Konsole
 #include "Enumeration.h"
+#include "konsoleprivate_export.h"
 
 namespace Ui
 {
@@ -21,7 +22,7 @@ class HistorySizeDialog;
 
 namespace Konsole
 {
-class HistorySizeDialog : public QDialog
+class KONSOLEPRIVATE_EXPORT HistorySizeDialog : public QDialog
 {
     Q_OBJECT
 

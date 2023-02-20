@@ -11,6 +11,7 @@
 
 // Qt
 #include <QHash>
+#include <QLoggingCategory>
 #include <QProcess>
 #include <QSize>
 #include <QStringList>
@@ -21,7 +22,7 @@
 // Konsole
 #include "Shortcut_p.h"
 #include "config-konsole.h"
-#include "konsolesession_export.h"
+#include "konsoleprivate_export.h"
 
 class QColor;
 class QTextCodec;
@@ -49,7 +50,7 @@ class HistoryType;
  * or send input to the program in the terminal in the form of keypresses and mouse
  * activity.
  */
-class KONSOLESESSION_EXPORT Session : public QObject
+class KONSOLEPRIVATE_EXPORT Session : public QObject
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Session")

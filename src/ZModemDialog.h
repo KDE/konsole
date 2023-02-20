@@ -9,11 +9,13 @@
 
 #include <QDialog>
 
+#include "konsoleprivate_export.h"
+
 class KTextEdit;
 class QDialogButtonBox;
 namespace Konsole
 {
-class ZModemDialog : public QDialog
+class KONSOLEPRIVATE_EXPORT ZModemDialog : public QDialog
 {
     Q_OBJECT
 

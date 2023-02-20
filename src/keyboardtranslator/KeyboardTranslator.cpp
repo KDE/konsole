@@ -9,8 +9,6 @@
 // Own
 #include "KeyboardTranslator.h"
 
-#include "../konsoledebug.h"
-
 // System
 #include <cctype>
 #include <cstdio>
@@ -20,6 +18,8 @@
 
 // KDE
 #include <KLocalizedString>
+
+Q_LOGGING_CATEGORY(KonsoleKeyTrDebug, "org.kde.konsole.keytranslator", QtDebugMsg)
 
 using namespace Konsole;
 

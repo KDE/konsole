@@ -31,7 +31,7 @@ class TerminalDisplay;
 /**
  * Hotspot type created by FileFilter instances.
  */
-class FileFilterHotSpot : public RegExpFilterHotSpot
+class KONSOLEPRIVATE_EXPORT FileFilterHotSpot : public RegExpFilterHotSpot
 {
     Q_OBJECT
 public:

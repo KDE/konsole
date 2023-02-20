@@ -13,9 +13,6 @@
 // Konsole characters
 #include <Character.h>
 
-// Konsole decoders
-#include "konsoledecoders_export.h"
-
 class QTextStream;
 
 namespace Konsole
@@ -29,7 +26,7 @@ namespace Konsole
  * Derived classes may produce either plain text with no other color or appearance information, or
  * they may produce text which incorporates these additional properties.
  */
-class KONSOLEDECODERS_EXPORT TerminalCharacterDecoder
+class TerminalCharacterDecoder
 {
 public:
     virtual ~TerminalCharacterDecoder()

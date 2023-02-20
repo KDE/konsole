@@ -6,7 +6,7 @@ add_library(konsoledecoders
 )
 
 set_target_properties(konsoledecoders PROPERTIES POSITION_INDEPENDENT_CODE ON)
-generate_export_header(konsoledecoders BASE_NAME konsoledecoders)
+# generate_export_header(konsoledecoders BASE_NAME konsoledecoders)
 target_include_directories(konsoledecoders
     PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
     INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})

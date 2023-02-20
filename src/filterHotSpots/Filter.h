@@ -20,6 +20,7 @@
 
 // Konsole
 #include "../characters/Character.h"
+#include "konsoleprivate_export.h"
 
 class QAction;
 class QMenu;
@@ -48,7 +49,7 @@ class HotSpot;
  * When processing the text they should create instances of Filter::HotSpot subclasses for sections of interest
  * and add them to the filter's list of hotspots using addHotSpot()
  */
-class Filter
+class KONSOLEPRIVATE_EXPORT Filter
 {
 public:
     /** Constructs a new filter. */

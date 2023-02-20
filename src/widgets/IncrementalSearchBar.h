@@ -11,6 +11,8 @@
 #include <QBitArray>
 #include <QWidget>
 
+#include "konsoleprivate_export.h"
+
 class QAction;
 class QTimer;
 class QLineEdit;
@@ -39,7 +41,7 @@ namespace Konsole
  * as a regular expression.
  * The matchRegExpToggled() signal is emitted when this is changed.
  */
-class IncrementalSearchBar : public QWidget
+class KONSOLEPRIVATE_EXPORT IncrementalSearchBar : public QWidget
 {
     Q_OBJECT
 

@@ -11,7 +11,7 @@
 
 namespace Konsole
 {
-class ColorFilter : public RegExpFilter
+class KONSOLEPRIVATE_EXPORT ColorFilter : public RegExpFilter
 {
 public:
     ColorFilter();

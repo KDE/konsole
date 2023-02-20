@@ -11,13 +11,14 @@
 
 #include <QWidget>
 
+#include "konsoleprivate_export.h"
 #include "profile/Profile.h"
 
 class QFont;
 
 namespace Konsole
 {
-class TerminalFont
+class KONSOLEPRIVATE_EXPORT TerminalFont
 {
 public:
     explicit TerminalFont(QWidget *parent = nullptr);

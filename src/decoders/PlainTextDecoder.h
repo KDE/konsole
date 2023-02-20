@@ -20,7 +20,7 @@ namespace Konsole
  * A terminal character decoder which produces plain text, ignoring colors and other appearance-related
  * properties of the original characters.
  */
-class KONSOLEDECODERS_EXPORT PlainTextDecoder : public TerminalCharacterDecoder
+class PlainTextDecoder : public TerminalCharacterDecoder
 {
 public:
     PlainTextDecoder();

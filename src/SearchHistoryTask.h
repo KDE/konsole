@@ -14,6 +14,7 @@
 
 #include "Enumeration.h"
 #include "ScreenWindow.h"
+#include "konsoleprivate_export.h"
 #include "session/Session.h"
 #include "session/SessionTask.h"
 
@@ -34,7 +35,7 @@ namespace Konsole
  * TODO - Implementation requirements:
  *          May provide progress feedback to the user when searching very large output logs.
  */
-class SearchHistoryTask : public SessionTask
+class KONSOLEPRIVATE_EXPORT SearchHistoryTask : public SessionTask
 {
     Q_OBJECT
 

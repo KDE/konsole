@@ -18,7 +18,7 @@ namespace Konsole
 /**
  * A terminal character decoder which produces pretty HTML markup
  */
-class KONSOLEDECODERS_EXPORT HTMLDecoder : public TerminalCharacterDecoder
+class HTMLDecoder : public TerminalCharacterDecoder
 {
 public:
     /**

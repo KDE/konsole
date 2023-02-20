@@ -9,8 +9,6 @@
 // Own
 #include "SessionManager.h"
 
-#include "konsoledebug.h"
-
 // Qt
 #include <QStringList>
 #include <QTextCodec>
@@ -25,6 +23,7 @@
 #include "EscapeSequenceUrlExtractor.h"
 #include "Screen.h"
 #include "ShouldApplyProperty.h"
+#include "konsoledebug.h"
 
 #include "history/HistoryTypeFile.h"
 #include "history/HistoryTypeNone.h"

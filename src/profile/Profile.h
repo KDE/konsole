@@ -17,11 +17,10 @@
 #include <QStringList>
 #include <QVariant>
 
+#include "konsoleprivate_export.h"
+
 #include <map>
 #include <vector>
-
-// Konsole
-#include "konsoleprofile_export.h"
 
 namespace Konsole
 {
@@ -45,7 +44,7 @@ class ProfileGroup;
  * Profiles can be loaded from disk using ProfileReader instances
  * and saved to disk using ProfileWriter instances.
  */
-class KONSOLEPROFILE_EXPORT Profile : public QSharedData
+class KONSOLEPRIVATE_EXPORT Profile : public QSharedData
 {
     Q_GADGET
 

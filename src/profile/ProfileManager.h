@@ -12,6 +12,7 @@
 // Qt
 #include <QKeySequence>
 #include <QList>
+#include <QLoggingCategory>
 #include <QStringList>
 
 #include <KSharedConfig>
@@ -21,13 +22,15 @@
 // Konsole
 #include "Profile.h"
 
+Q_DECLARE_LOGGING_CATEGORY(KonsoleProfileDebug)
+
 namespace Konsole
 {
 /**
  * Manages profiles which specify various settings for terminal sessions
  * and their displays.
  */
-class KONSOLEPROFILE_EXPORT ProfileManager : public QObject
+class KONSOLEPRIVATE_EXPORT ProfileManager : public QObject
 {
     Q_OBJECT
 

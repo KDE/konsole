@@ -14,7 +14,7 @@ namespace Konsole
 /**
  * Lightweight class which provides additional information about SSH processes.
  */
-class SSHProcessInfo
+class KONSOLEPRIVATE_EXPORT SSHProcessInfo
 {
 public:
     /**

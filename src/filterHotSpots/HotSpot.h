@@ -10,6 +10,7 @@
 
 #include <QObject>
 
+#include "konsoleprivate_export.h"
 #include <QList>
 #include <QRect>
 #include <QRegion>
@@ -36,7 +37,7 @@ class TerminalDisplay;
  * Hotspots may have more than one action, in which case the list of actions can be obtained using the
  * actions() method.  These actions may then be displayed in a popup menu or toolbar for example.
  */
-class HotSpot : public QObject
+class KONSOLEPRIVATE_EXPORT HotSpot : public QObject
 {
     // krazy suggest using Q_OBJECT here but moc can not handle
     // nested classes

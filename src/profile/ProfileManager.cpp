@@ -10,8 +10,6 @@
 #include "ProfileManager.h"
 #include "PopStackOnExit.h"
 
-#include "konsoledebug.h"
-
 // Qt
 #include <QDir>
 #include <QFileInfo>
@@ -29,6 +27,8 @@
 #include "ProfileModel.h"
 #include "ProfileReader.h"
 #include "ProfileWriter.h"
+
+Q_LOGGING_CATEGORY(KonsoleProfileDebug, "org.kde.konsole.profile", QtDebugMsg)
 
 using namespace Konsole;
 
@@ -143,7 +143,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString &shortPath)
     PopStackOnExit<QString> popGuardOnExit(recursionGuard);
 
     if (recursionGuard.contains(path)) {
-        qCDebug(KonsoleDebug) << "Ignoring attempt to load profile recursively from" << path;
+        qCDebug(KonsoleProfileDebug) << "Ignoring attempt to load profile recursively from" << path;
         return _builtinProfile;
     }
     recursionGuard.push(path);
@@ -163,10 +163,10 @@ Profile::Ptr ProfileManager::loadProfile(const QString &shortPath)
     }
 
     if (!result) {
-        qCDebug(KonsoleDebug) << "Could not load profile from " << path;
+        qCDebug(KonsoleProfileDebug) << "Could not load profile from " << path;
         return Profile::Ptr();
     } else if (newProfile->name().isEmpty()) {
-        qCWarning(KonsoleDebug) << path << " does not have a valid name, ignoring.";
+        qCWarning(KonsoleProfileDebug) << path << " does not have a valid name, ignoring.";
         return Profile::Ptr();
     } else {
         addProfile(newProfile);
@@ -352,7 +352,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
         // try to delete the config file
         if (profile->isPropertySet(Profile::Path) && QFile::exists(profile->path())) {
             if (!QFile::remove(profile->path())) {
-                qCDebug(KonsoleDebug) << "Could not delete profile: " << profile->path() << "The file is most likely in a directory which is read-only.";
+                qCDebug(KonsoleProfileDebug) << "Could not delete profile: " << profile->path() << "The file is most likely in a directory which is read-only.";
 
                 return false;
             }

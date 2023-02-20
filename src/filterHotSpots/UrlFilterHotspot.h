@@ -19,7 +19,7 @@ namespace Konsole
  * Hotspot type created by UrlFilter instances.  The activate() method opens a web browser
  * at the given URL when called.
  */
-class UrlFilterHotSpot : public RegExpFilterHotSpot
+class KONSOLEPRIVATE_EXPORT UrlFilterHotSpot : public RegExpFilterHotSpot
 {
 public:
     UrlFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts);

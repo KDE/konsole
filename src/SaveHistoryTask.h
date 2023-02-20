@@ -8,6 +8,7 @@
 #ifndef SAVEHISTORYTASK_H
 #define SAVEHISTORYTASK_H
 
+#include "konsoleprivate_export.h"
 #include "session/SessionTask.h"
 
 #include <kio/job.h>
@@ -20,7 +21,7 @@ class TerminalCharacterDecoder;
  * A task which prompts for a URL for each session and saves that session's output
  * to the given URL
  */
-class SaveHistoryTask : public SessionTask
+class KONSOLEPRIVATE_EXPORT SaveHistoryTask : public SessionTask
 {
     Q_OBJECT
 

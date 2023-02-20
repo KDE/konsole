@@ -13,8 +13,6 @@
 #include "KeyboardTranslatorReader.h"
 #include "KeyboardTranslatorWriter.h"
 
-#include "../konsoledebug.h"
-
 // Qt
 #include <QDir>
 #include <QFile>
@@ -48,7 +46,7 @@ void KeyboardTranslatorManager::addTranslator(KeyboardTranslator *translator)
     _translators.insert(translator->name(), translator);
 
     if (!saveTranslator(translator)) {
-        qCDebug(KonsoleDebug) << "Unable to save translator" << translator->name() << "to disk.";
+        qCDebug(KonsoleKeyTrDebug) << "Unable to save translator" << translator->name() << "to disk.";
     }
 }
 
@@ -62,7 +60,7 @@ bool KeyboardTranslatorManager::deleteTranslator(const QString &name)
         _translators.remove(name);
         return true;
     }
-    qCDebug(KonsoleDebug) << "Failed to remove translator - " << path;
+    qCDebug(KonsoleKeyTrDebug) << "Failed to remove translator - " << path;
     return false;
 }
 
@@ -126,7 +124,7 @@ const KeyboardTranslator *KeyboardTranslatorManager::findTranslator(const QStrin
     if (translator != nullptr) {
         _translators[name] = translator;
     } else if (!name.isEmpty()) {
-        qCDebug(KonsoleDebug) << "Unable to load translator" << name;
+        qCDebug(KonsoleKeyTrDebug) << "Unable to load translator" << name;
     }
 
     return translator;
@@ -142,7 +140,7 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator *transla
 
     QFile destination(path);
     if (!destination.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qCDebug(KonsoleDebug) << "Unable to save keyboard translation:" << destination.errorString();
+        qCDebug(KonsoleKeyTrDebug) << "Unable to save keyboard translation:" << destination.errorString();
         return false;
     }
 

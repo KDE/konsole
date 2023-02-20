@@ -10,15 +10,15 @@
 // Qt
 #include <QObject>
 #include <QPointer>
-// Konsole
-#include "konsolesession_export.h"
+
+#include "konsoleprivate_export.h"
 
 namespace Konsole
 {
 class Session;
 class TerminalDisplay;
 
-class KONSOLESESSION_EXPORT SessionDisplayConnection : public QObject
+class KONSOLEPRIVATE_EXPORT SessionDisplayConnection : public QObject
 {
     Q_OBJECT
 public:

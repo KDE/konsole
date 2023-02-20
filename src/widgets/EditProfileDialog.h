@@ -18,6 +18,7 @@
 #include "colorscheme/ColorScheme.h"
 #include "colorscheme/ColorSchemeEditor.h"
 #include "colorscheme/ColorSchemeViewDelegate.h"
+#include "konsoleprivate_export.h"
 
 #include "profile/Profile.h"
 #include "profile/ProfileGroup.h"

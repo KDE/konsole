@@ -24,6 +24,7 @@
 #include "Session.h"
 #include "SessionDisplayConnection.h"
 #include "ViewProperties.h"
+#include "konsoleprivate_export.h"
 
 class QAction;
 class QTextCodec;
@@ -65,7 +66,7 @@ class HotSpot;
  * which contains the view to plug the controller's actions into the menu when
  * the view is focused.
  */
-class KONSOLESESSION_EXPORT SessionController : public ViewProperties, public KXMLGUIClient
+class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties, public KXMLGUIClient
 {
     Q_OBJECT
 

@@ -16,7 +16,7 @@ class KConfig;
 namespace Konsole
 {
 /** Interface for all classes which can load profile settings from a file. */
-class KONSOLEPROFILE_EXPORT ProfileReader
+class KONSOLEPRIVATE_EXPORT ProfileReader
 {
 public:
     ProfileReader();

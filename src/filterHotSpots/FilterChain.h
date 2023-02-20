@@ -14,6 +14,7 @@
 #include <QString>
 
 #include "HotSpot.h"
+#include "konsoleprivate_export.h"
 
 class QLeaveEvent;
 class QPainter;
@@ -41,7 +42,7 @@ class TerminalDisplay;
  * The hotSpots() method return all of the hotspots in the text and on
  * a given line respectively.
  */
-class FilterChain
+class KONSOLEPRIVATE_EXPORT FilterChain
 {
 public:
     explicit FilterChain(TerminalDisplay *terminalDisplay);

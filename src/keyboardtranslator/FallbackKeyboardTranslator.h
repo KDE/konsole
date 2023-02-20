@@ -14,7 +14,7 @@
 
 namespace Konsole
 {
-class KONSOLEPRIVATE_EXPORT FallbackKeyboardTranslator : public KeyboardTranslator
+class FallbackKeyboardTranslator : public KeyboardTranslator
 {
 public:
     FallbackKeyboardTranslator();

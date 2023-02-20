@@ -8,8 +8,6 @@
 
 #include "KeyboardTranslatorReader.h"
 
-#include "../konsoledebug.h"
-
 // Qt
 #include <QBuffer>
 #include <QKeySequence>
@@ -82,7 +80,7 @@ void KeyboardTranslatorReader::readNext()
             } else if (tokens[2].type == Token::Command) {
                 // identify command
                 if (!parseAsCommand(tokens[2].text, command)) {
-                    qCDebug(KonsoleDebug) << "Key" << tokens[1].text << ", Command" << tokens[2].text << "not understood. ";
+                    qCDebug(KonsoleKeyTrDebug) << "Key" << tokens[1].text << ", Command" << tokens[2].text << "not understood. ";
                 }
             }
 
@@ -180,7 +178,7 @@ bool KeyboardTranslatorReader::decodeSequence(const QString &text,
             } else if (parseAsKeyCode(buffer, itemKeyCode)) {
                 keyCode = itemKeyCode;
             } else {
-                qCDebug(KonsoleDebug) << "Unable to parse key binding item:" << buffer;
+                qCDebug(KonsoleKeyTrDebug) << "Unable to parse key binding item:" << buffer;
             }
 
             buffer.clear();
@@ -254,7 +252,7 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString &item, int &keyCode)
 #endif
 
         if (sequence.count() > 1) {
-            qCDebug(KonsoleDebug) << "Unhandled key codes in sequence: " << item;
+            qCDebug(KonsoleKeyTrDebug) << "Unhandled key codes in sequence: " << item;
         }
     } else {
         return false;
@@ -364,7 +362,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
 
     QRegularExpressionMatch keyMatch(key.match(text));
     if (!keyMatch.hasMatch()) {
-        qCDebug(KonsoleDebug) << "Line in keyboard translator file could not be parsed:" << text;
+        qCDebug(KonsoleKeyTrDebug) << "Line in keyboard translator file could not be parsed:" << text;
         return list;
     }
 

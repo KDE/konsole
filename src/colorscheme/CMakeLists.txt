@@ -29,7 +29,7 @@ add_library(konsolecolorscheme
 # Needed to link this static lib to shared libs
 set_target_properties(konsolecolorscheme PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-generate_export_header(konsolecolorscheme BASE_NAME konsolecolorscheme)
+# generate_export_header(konsolecolorscheme BASE_NAME konsolecolorscheme)
 target_include_directories(konsolecolorscheme
     PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
     INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})

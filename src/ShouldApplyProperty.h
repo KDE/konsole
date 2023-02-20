@@ -9,12 +9,13 @@
 #ifndef SHOULDAPPLYPROPERTY_H
 #define SHOULDAPPLYPROPERTY_H
 
+#include "konsoleprivate_export.h"
 #include "profile/Profile.h"
 
 namespace Konsole
 {
 /** Utility class to simplify code in SessionManager::applyProfile(). */
-class ShouldApplyProperty
+class KONSOLEPRIVATE_EXPORT ShouldApplyProperty
 {
 public:
     ShouldApplyProperty(const Profile::Ptr &profile, bool modifiedOnly);

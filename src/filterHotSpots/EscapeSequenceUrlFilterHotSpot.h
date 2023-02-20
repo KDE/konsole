@@ -12,7 +12,7 @@
 
 namespace Konsole
 {
-class EscapeSequenceUrlHotSpot : public HotSpot
+class KONSOLEPRIVATE_EXPORT EscapeSequenceUrlHotSpot : public HotSpot
 {
 public:
     EscapeSequenceUrlHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QString &text, const QString &url);

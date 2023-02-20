@@ -10,6 +10,8 @@
 
 #include <QObject>
 
+#include "konsoleprivate_export.h"
+
 namespace Konsole
 {
 class Screen;
@@ -34,7 +36,7 @@ struct ExtractedUrl {
 /* Stored in Screen, but used in V10Emulation to
  * store extracted URL's. Perhaps this should be a Model?
  */
-class EscapeSequenceUrlExtractor : public QObject
+class KONSOLEPRIVATE_EXPORT EscapeSequenceUrlExtractor : public QObject
 {
     Q_OBJECT
 

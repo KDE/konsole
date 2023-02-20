@@ -11,15 +11,15 @@
 
 // Qt
 #include <QList>
+#include <QLoggingCategory>
 #include <QMetaType>
 #include <QMultiHash>
 #include <QString>
 
-// Konsole
-#include "../konsoleprivate_export.h"
-
 class QIODevice;
 class QTextStream;
+
+Q_DECLARE_LOGGING_CATEGORY(KonsoleKeyTrDebug)
 
 namespace Konsole
 {
@@ -36,7 +36,7 @@ namespace Konsole
  * (Shift,Ctrl,Alt,Meta etc.) and state flags which indicate the state
  * which the terminal must be in for the key sequence to apply.
  */
-class KONSOLEPRIVATE_EXPORT KeyboardTranslator
+class KeyboardTranslator
 {
 public:
     /**
