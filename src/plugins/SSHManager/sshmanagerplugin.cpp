@@ -142,8 +142,8 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
 
         if (actions.isEmpty()) // no ssh config found, must give feedback to the user about that
         {
-            const QString feedbackMessage = QStringLiteral("Please enable the plugin on Plugins -> SSH Manager");
-            const QString feedbackTitle = QStringLiteral("Plugins - SSH Manager");
+            const QString feedbackMessage = i18n("No saved SSH config found. You can add one on Plugins -> SSH Manager");
+            const QString feedbackTitle = i18n("Plugins - SSH Manager");
             KMessageBox::error(terminalDisplay->topLevelWidget(), feedbackMessage, feedbackTitle);
             return;
         }

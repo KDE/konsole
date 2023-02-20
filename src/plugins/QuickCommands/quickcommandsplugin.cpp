@@ -102,8 +102,8 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
 
         if (actions.isEmpty()) // no quick commands found, must give feedback to the user about that
         {
-            const QString feedbackMessage = QStringLiteral("Please enable the plugin on Plugins -> Quick Commands");
-            const QString feedbackTitle = QStringLiteral("Plugins - Quick Commands");
+            const QString feedbackMessage = i18n("No quick commands found. You can add one on Plugins -> Quick Commands");
+            const QString feedbackTitle = i18n("Plugins - Quick Commands");
             KMessageBox::error(terminalDisplay->topLevelWidget(), feedbackMessage, feedbackTitle);
             return;
         }
