@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['@all']
+- 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Linux/Qt5', 'FreeBSD/Qt5', 'Windows/Qt5', 'Windows/Qt6']
   'require':
     'frameworks/extra-cmake-modules': '@stable'
     'frameworks/kconfig': '@stable'
@@ -14,20 +14,23 @@ Dependencies:
     'frameworks/kbookmarks': '@stable'
     'frameworks/kconfigwidgets': '@stable'
     'frameworks/kcrash': '@stable'
-    'frameworks/kglobalaccel': '@stable'
     'frameworks/kguiaddons': '@stable'
     'frameworks/kiconthemes': '@stable'
     'frameworks/kio': '@stable'
     'frameworks/knewstuff': '@stable'
     'frameworks/knotifyconfig': '@stable'
     'frameworks/kparts': '@stable'
-    'frameworks/kpty': '@stable'
     'frameworks/kservice': '@stable'
     'frameworks/ktextwidgets': '@stable'
     'frameworks/kwidgetsaddons': '@stable'
     'frameworks/kwindowsystem': '@stable'
     'frameworks/kxmlgui': '@stable'
     'frameworks/kdoctools': '@stable'
+
+- 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Linux/Qt5', 'FreeBSD/Qt5']
+  'require':
+    'frameworks/kpty': '@stable'
+    'frameworks/kglobalaccel': '@stable'
 
 Options:
     require-passing-tests-on: [ 'Linux', 'FreeBSD' ]
