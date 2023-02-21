@@ -42,7 +42,7 @@ class ColorSchemeEditor : public QDialog
 
 public:
     /** Constructs a new color scheme editor with the specified parent. */
-    explicit ColorSchemeEditor(QWidget *parent = nullptr);
+    explicit ColorSchemeEditor(bool supportsTransparentWindows, QWidget *parent = nullptr);
     ~ColorSchemeEditor() override;
 
     /** Initializes the dialog with the properties of the specified color scheme. */

@@ -36,6 +36,5 @@ target_include_directories(konsolecolorscheme
 
 target_link_libraries(
     konsolecolorscheme
-    konsoleprivate_core
     ${konsole_LIBS}
 )

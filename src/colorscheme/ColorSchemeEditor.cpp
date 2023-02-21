@@ -8,7 +8,6 @@
 #include "ColorSchemeEditor.h"
 
 #include "../config-konsole.h"
-#include "WindowSystemInfo.h"
 
 // Qt
 #include <QColorDialog>
@@ -43,7 +42,7 @@ const int COLOR_COLUMN = 1; // column 1 : actual colors
 const int INTENSE_COLOR_COLUMN = 2; // column 2 : intense colors
 const int FAINT_COLOR_COLUMN = 3; // column 2 : faint colors
 
-ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
+ColorSchemeEditor::ColorSchemeEditor(bool supportsTransparentWindows, QWidget *parent)
     : QDialog(parent)
     , _isNewScheme(false)
     , _ui(nullptr)
@@ -131,7 +130,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent)
     _ui->transparencyWarningWidget->setCloseButtonVisible(false);
     _ui->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
 
-    if (WindowSystemInfo::compositingActive()) {
+    if (supportsTransparentWindows) {
         _ui->transparencyWarningWidget->setVisible(false);
     } else {
         _ui->transparencyWarningWidget->setText(i18nc("@info:status",

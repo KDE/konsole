@@ -10,6 +10,8 @@
 
 #include <QAbstractItemDelegate>
 
+#include <functional>
+
 namespace Konsole
 {
 /**
@@ -20,11 +22,14 @@ class ColorSchemeViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 
 public:
-    explicit ColorSchemeViewDelegate(QObject *parent = nullptr);
+    explicit ColorSchemeViewDelegate(std::function<bool()> compositingActiveHelper, QObject *parent = nullptr);
 
     // reimplemented
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+
+private:
+    std::function<bool()> m_compositingActive;
 };
 
 }

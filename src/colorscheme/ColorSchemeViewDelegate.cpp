@@ -11,7 +11,6 @@
 // Konsole
 #include "../config-konsole.h"
 #include "ColorScheme.h"
-#include "WindowSystemInfo.h"
 
 // KDE
 #include <KLocalizedString>
@@ -22,9 +21,11 @@
 
 using namespace Konsole;
 
-ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject *parent)
+ColorSchemeViewDelegate::ColorSchemeViewDelegate(std::function<bool()> compositingActiveHelper, QObject *parent)
     : QAbstractItemDelegate(parent)
+    , m_compositingActive(std::move(compositingActiveHelper))
 {
+    Q_ASSERT(m_compositingActive);
 }
 
 void ColorSchemeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -60,7 +61,7 @@ void ColorSchemeViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
 
     QRect previewRect(x + 4, y + 4, sampleTextWidth + 8, option.rect.height() - 8);
 
-    if (WindowSystemInfo::compositingActive()) {
+    if (m_compositingActive()) {
         painter->save();
         QColor color = scheme->backgroundColor();
         color.setAlphaF(scheme->opacity());

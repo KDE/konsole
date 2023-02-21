@@ -704,7 +704,10 @@ void EditProfileDialog::selectInitialDir()
 
 void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 {
-    auto delegate = new ColorSchemeViewDelegate(this);
+    auto compositingActiveHelper = [] {
+        return WindowSystemInfo::compositingActive();
+    };
+    auto delegate = new ColorSchemeViewDelegate(compositingActiveHelper, this);
     _appearanceUi->colorSchemeList->setItemDelegate(delegate);
 
     _appearanceUi->transparencyWarningWidget->setVisible(false);
@@ -1294,7 +1297,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
     if (_colorDialog != nullptr) {
         closeColorSchemeEditor();
     }
-    _colorDialog = new ColorSchemeEditor(this);
+    _colorDialog = new ColorSchemeEditor(WindowSystemInfo::compositingActive(), this);
 
     connect(_colorDialog, &Konsole::ColorSchemeEditor::colorSchemeSaveRequested, this, &Konsole::EditProfileDialog::saveColorScheme);
     _colorDialog->setup(colors, isNewScheme);
