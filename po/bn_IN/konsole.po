@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2008-12-29 15:34+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <fedora-trans-bn_IN@redhat.com>\n"
@@ -1543,6 +1543,17 @@ msgstr "কমান্ড:"
 msgid "Show Quick Access"
 msgstr ""
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Command:"
+msgid "Plugins - Quick Commands"
+msgstr "কমান্ড:"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1675,6 +1686,17 @@ msgstr "মেনু বার প্রদর্শন করা হবে"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Show Menu Bar"
+msgid "Plugins - SSH Manager"
+msgstr "মেনু বার প্রদর্শন করা হবে"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2023-01-31 19:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1426,6 +1426,17 @@ msgstr "விரை கட்டளைகள்"
 msgid "Show Quick Access"
 msgstr "விரை அணுகலைக் காட்டு"
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Quick Commands"
+msgid "Plugins - Quick Commands"
+msgstr "விரை கட்டளைகள்"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1549,6 +1560,16 @@ msgstr "SSH மேலாளியை காட்டு"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "SSH செயல்களை விரைவாக அணுக உதவு"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+msgid "Plugins - SSH Manager"
+msgstr "பட்டியல் &பட்டியை மறை"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5297,10 +5318,6 @@ msgstr "கீற்றை மூடு"
 #~| msgid "Show menu bar in new windows"
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "சாளரங்களில் மெனு பட்டியை காட்டுக"
-
-#, fuzzy
-#~ msgid "Hide SSH Manager"
-#~ msgstr "பட்டியல் &பட்டியை மறை"
 
 #, fuzzy
 #~ msgctxt "@label:textbox Name of the current default profile"

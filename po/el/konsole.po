@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2023-01-07 21:31+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1444,6 +1444,17 @@ msgstr "Γρήγορες εντολές"
 msgid "Show Quick Access"
 msgstr "Εμφάνιση γρήγορης πρόσβασης"
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Quick Commands"
+msgid "Plugins - Quick Commands"
+msgstr "Γρήγορες εντολές"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1571,6 +1582,17 @@ msgstr "Εμφάνιση διαχειριστή SSH"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Εμφάνιση γρήγορης πρόσβασης για ενέργειες SSH"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Open File Manager"
+msgid "Plugins - SSH Manager"
+msgstr "Άνοιγμα του διαχειριστή αρχείων"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5373,11 +5395,6 @@ msgstr "Κλείσιμο καρτέλας"
 
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "Εμφάνιση γραμμής μενού εξ' ορισμού σε κάθε παράθυρο του Konsole"
-
-#, fuzzy
-#~| msgid "Open File Manager"
-#~ msgid "Hide SSH Manager"
-#~ msgstr "Άνοιγμα του διαχειριστή αρχείων"
 
 #~ msgid ""
 #~ "<p>Each profile must have a name before it can be saved into disk.</p>"

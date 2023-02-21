@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2012-12-20 16:07+0700\n"
 "Last-Translator: sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros>\n"
@@ -1509,6 +1509,17 @@ msgstr "ពាក្យ​បញ្ជា ៖"
 msgid "Show Quick Access"
 msgstr ""
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Command:"
+msgid "Plugins - Quick Commands"
+msgstr "ពាក្យ​បញ្ជា ៖"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1642,6 +1653,17 @@ msgstr "បង្ហាញ​របារ​​ម៉ឺនុយ​​ជា​
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Open File Manager"
+msgid "Plugins - SSH Manager"
+msgstr "បើក​កម្មវិធី​គ្រប់គ្រង​ឯកសារ"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5535,11 +5557,6 @@ msgstr "បិទ​ផ្ទាំង​"
 
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "បង្ហាញ​របារ​​ម៉ឺនុយ​​ជា​លំនាំដើម​នៅ​ក្នុង​បង្អួច​ Konsole នីមួយ"
-
-#, fuzzy
-#~| msgid "Open File Manager"
-#~ msgid "Hide SSH Manager"
-#~ msgstr "បើក​កម្មវិធី​គ្រប់គ្រង​ឯកសារ"
 
 #~ msgid ""
 #~ "<p>Each profile must have a name before it can be saved into disk.</p>"

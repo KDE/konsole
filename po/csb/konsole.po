@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2009-12-17 00:21+0100\n"
 "Last-Translator: Mark Kwidzińśczi <mark@linuxcsb.org>\n"
 "Language-Team: Kaszëbsczi <i18n-csb@linuxcsb.org>\n"
@@ -1551,6 +1551,17 @@ msgstr "Pòlét:"
 msgid "Show Quick Access"
 msgstr ""
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Command:"
+msgid "Plugins - Quick Commands"
+msgstr "Pòlét:"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1683,6 +1694,17 @@ msgstr "Wëskrzëni listew menu"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Open File Manager"
+msgid "Plugins - SSH Manager"
+msgstr "Òtemkni menadżerã lopków"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5599,11 +5621,6 @@ msgstr "&Zamkni kôrtã"
 #~| msgid "Show menu bar in new windows"
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "Wëskrzëni listew menu w nowim òknie"
-
-#, fuzzy
-#~| msgid "Open File Manager"
-#~ msgid "Hide SSH Manager"
-#~ msgstr "Òtemkni menadżerã lopków"
 
 #, fuzzy
 #~| msgid "Set as Default"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2011-07-18 11:49+0200\n"
 "Last-Translator: Marko Dimjašević <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -1574,6 +1574,17 @@ msgstr "Naredba:"
 msgid "Show Quick Access"
 msgstr ""
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Command:"
+msgid "Plugins - Quick Commands"
+msgstr "Naredba:"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1707,6 +1718,17 @@ msgstr "Prikaži traku s izbornikom"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Open File Manager"
+msgid "Plugins - SSH Manager"
+msgstr "Otvori u upravitelju datotekama"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5644,11 +5666,6 @@ msgstr "&Zatvori karticu"
 #~| msgid "Show menu bar in new windows"
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "Prikaži traku izbornika u novom prozoru"
-
-#, fuzzy
-#~| msgid "Open File Manager"
-#~ msgid "Hide SSH Manager"
-#~ msgstr "Otvori u upravitelju datotekama"
 
 #, fuzzy
 #~ msgctxt "@label:textbox Name of the current default profile"

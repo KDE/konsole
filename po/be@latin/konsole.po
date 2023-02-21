@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -1452,6 +1452,17 @@ msgstr "Chutkija zahady"
 msgid "Show Quick Access"
 msgstr "Pakazvać chutkija zahady"
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Quick Commands"
+msgid "Plugins - Quick Commands"
+msgstr "Chutkija zahady"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1573,6 +1584,17 @@ msgstr "Pakazvać kiraŭnik SSH"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Hide Menu Bar"
+msgid "Plugins - SSH Manager"
+msgstr "Schavać radok mieniu"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5423,11 +5445,6 @@ msgstr "Zakryć ukladku"
 #~| msgid "Show menu bar in new windows"
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "Pakazvać radok mieniu ŭ novych voknach"
-
-#, fuzzy
-#~| msgid "Hide Menu Bar"
-#~ msgid "Hide SSH Manager"
-#~ msgstr "Schavać radok mieniu"
 
 #, fuzzy
 #~| msgid "Default"

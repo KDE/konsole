@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2019-01-27 15:02-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -1452,6 +1452,17 @@ msgstr "ਕਮਾਂਡ:"
 msgid "Show Quick Access"
 msgstr ""
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Command:"
+msgid "Plugins - Quick Commands"
+msgstr "ਕਮਾਂਡ:"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1589,6 +1600,17 @@ msgstr "ਮੇਨੂ ਪੱਟੀ ਵੇਖਾਓ"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Open File Manager"
+msgid "Plugins - SSH Manager"
+msgstr "ਫਾਇਲ ਮੈਨੇਜਰ ਖੋਲ੍ਹੋ"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5445,11 +5467,6 @@ msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
 
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "ਹਰ ਕੇਨਸੋਲ ਵਿੱਚ ਮੇਨੂ-ਪੱਟੀ ਡਿਫਾਲਟ ਵੇਖਾਉ ਹੀ।"
-
-#, fuzzy
-#~| msgid "Open File Manager"
-#~ msgid "Hide SSH Manager"
-#~ msgstr "ਫਾਇਲ ਮੈਨੇਜਰ ਖੋਲ੍ਹੋ"
 
 #, fuzzy
 #~| msgctxt "Name of the default/builtin profile"

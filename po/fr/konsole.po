@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2023-01-29 11:04+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -1468,6 +1468,17 @@ msgstr "Commandes rapides"
 msgid "Show Quick Access"
 msgstr "Afficher un accès rapide"
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Quick Commands"
+msgid "Plugins - Quick Commands"
+msgstr "Commandes rapides"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1594,6 +1605,17 @@ msgstr "Afficher le gestionnaire de clés SSH"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Afficher un accès rapide pour les actions « SSH »"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Hide SSH Manager"
+msgid "Plugins - SSH Manager"
+msgstr "Masquer le gestionnaire de clés SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5410,9 +5432,6 @@ msgstr "Fermer l'onglet"
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr ""
 #~ "Afficher la barre des menus par défaut dans chaque fenêtre de Konsole"
-
-#~ msgid "Hide SSH Manager"
-#~ msgstr "Masquer le gestionnaire de clés SSH"
 
 #~ msgid ""
 #~ "<p>Each profile must have a name before it can be saved into disk.</p>"

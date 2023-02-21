@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:03+0000\n"
+"POT-Creation-Date: 2023-02-21 01:03+0000\n"
 "PO-Revision-Date: 2023-02-04 08:46+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1460,6 +1460,17 @@ msgstr "Szybkie polecenia"
 msgid "Show Quick Access"
 msgstr "Pokaż szybki dostęp"
 
+#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#, kde-format
+msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
+msgstr ""
+
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#, fuzzy, kde-format
+#| msgid "Quick Commands"
+msgid "Plugins - Quick Commands"
+msgstr "Szybkie polecenia"
+
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
@@ -1583,6 +1594,17 @@ msgstr "Pokaż zarządzanie SSH"
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Pokaż Szybki Dostęp dla Działań SSH"
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#, kde-format
+msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#, fuzzy, kde-format
+#| msgid "Hide SSH Manager"
+msgid "Plugins - SSH Manager"
+msgstr "Ukryj zarządzanie SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -5342,10 +5364,6 @@ msgstr "Zamknij kartę"
 
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "Pokaż pasek pasek menu w każdym oknie Konsoli"
-
-#~| msgid "Open File Manager"
-#~ msgid "Hide SSH Manager"
-#~ msgstr "Ukryj zarządzanie SSH"
 
 #~ msgid ""
 #~ "<p>Each profile must have a name before it can be saved into disk.</p>"
