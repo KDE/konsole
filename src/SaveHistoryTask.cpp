@@ -22,6 +22,8 @@
 
 #include "../decoders/HTMLDecoder.h"
 #include "../decoders/PlainTextDecoder.h"
+#include "colorscheme/ColorScheme.h"
+#include "colorscheme/ColorSchemeManager.h"
 
 namespace Konsole
 {
@@ -110,7 +112,16 @@ void SaveHistoryTask::execute()
         if (((dialog->selectedNameFilter()).contains(QLatin1String("html"), Qt::CaseInsensitive))
             || ((dialog->selectedFiles()).at(0).endsWith(QLatin1String("html"), Qt::CaseInsensitive))) {
             Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
-            jobInfo.decoder = new HTMLDecoder(profile->colorScheme(), profile->font());
+            const auto schemeName = profile->colorScheme();
+            const auto scheme = ColorSchemeManager::instance()->findColorScheme(schemeName);
+            QColor colorTable[TABLE_COLORS];
+            if (scheme) {
+                scheme->getColorTable(colorTable);
+            } else {
+                std::copy_n(ColorScheme::defaultTable, TABLE_COLORS, colorTable);
+            }
+
+            jobInfo.decoder = new HTMLDecoder(colorTable, profile->font());
         } else {
             jobInfo.decoder = new PlainTextDecoder();
         }

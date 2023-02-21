@@ -11,6 +11,7 @@
 // Konsole
 #include "../decoders/HTMLDecoder.h"
 #include "../decoders/PlainTextDecoder.h"
+#include "colorscheme/ColorScheme.h"
 
 // Qt
 #include <QTextStream>
@@ -101,7 +102,7 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
     QFETCH(QVector<RenditionFlags>, renditions);
     QFETCH(QString, result);
 
-    TerminalCharacterDecoder *decoder = new HTMLDecoder();
+    TerminalCharacterDecoder *decoder = new HTMLDecoder(ColorScheme::defaultTable);
     auto testCharacters = new Character[text.size()];
     convertToCharacter(testCharacters, text, renditions);
     QString outputString;

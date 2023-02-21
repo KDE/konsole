@@ -12,4 +12,4 @@ target_include_directories(konsoledecoders
     INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # TODO: remove the konsolecolorscheme dependencies
-target_link_libraries(konsoledecoders konsolecharacters konsolecolorscheme)
+target_link_libraries(konsoledecoders konsolecharacters)

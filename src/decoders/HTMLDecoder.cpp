@@ -7,9 +7,6 @@
 // Own
 #include "HTMLDecoder.h"
 
-// Konsole colorScheme
-#include <ColorSchemeManager.h>
-
 // Konsole characters
 #include <ExtendedCharTable.h>
 
@@ -18,9 +15,8 @@
 
 using namespace Konsole;
 
-HTMLDecoder::HTMLDecoder(const QString &colorSchemeName, const QFont &profileFont)
+HTMLDecoder::HTMLDecoder(const QColor *colorTable, const QFont &profileFont)
     : _output(nullptr)
-    , _colorSchemeName(colorSchemeName)
     , _profileFont(profileFont)
     , _innerSpanOpen(false)
     , _lastRendition(DEFAULT_RENDITION)
@@ -28,23 +24,8 @@ HTMLDecoder::HTMLDecoder(const QString &colorSchemeName, const QFont &profileFon
     , _lastBackColor(CharacterColor())
     , _validProfile(false)
 {
-    std::shared_ptr<const ColorScheme> colorScheme = nullptr;
-
-    if (!colorSchemeName.isEmpty()) {
-        colorScheme = ColorSchemeManager::instance()->findColorScheme(colorSchemeName);
-
-        if (colorScheme == nullptr) {
-            colorScheme = ColorSchemeManager::instance()->defaultColorScheme();
-        }
-
-        _validProfile = true;
-    }
-
-    if (colorScheme != nullptr) {
-        colorScheme->getColorTable(_colorTable);
-    } else {
-        std::copy_n(ColorScheme::defaultTable, TABLE_COLORS, _colorTable);
-    }
+    Q_ASSERT(colorTable);
+    std::copy_n(colorTable, TABLE_COLORS, _colorTable);
 }
 
 void HTMLDecoder::begin(QTextStream *output)

@@ -1962,7 +1962,7 @@ QString Screen::text(int startIndex, int endIndex, const DecodingOptions options
     QString result;
     QTextStream stream(&result, QIODevice::ReadWrite);
 
-    HTMLDecoder htmlDecoder;
+    HTMLDecoder htmlDecoder(ColorScheme::defaultTable);
     PlainTextDecoder plainTextDecoder;
 
     TerminalCharacterDecoder *decoder;
