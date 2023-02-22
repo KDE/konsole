@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-21 01:03+0000\n"
+"POT-Creation-Date: 2023-02-22 01:02+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -3292,12 +3292,12 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:656
+#: terminalDisplay/TerminalDisplay.cpp:658
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Méid: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2220
+#: terminalDisplay/TerminalDisplay.cpp:2222
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3307,66 +3307,66 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2221
+#: terminalDisplay/TerminalDisplay.cpp:2223
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Deimhnigh Greamú"
 
-#: terminalDisplay/TerminalDisplay.cpp:2254
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2255
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2256
+#: terminalDisplay/TerminalDisplay.cpp:2258
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2257
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2258
+#: terminalDisplay/TerminalDisplay.cpp:2260
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2261
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2262
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2261
+#: terminalDisplay/TerminalDisplay.cpp:2263
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, fuzzy, kde-format
 #| msgid "Confirm Paste"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Deimhnigh Greamú"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
@@ -3375,20 +3375,20 @@ msgstr ""
 "Socraigh go bhfuil dath an chúrsóra comhoiriúnach do dhath an charachtair "
 "reatha"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Greamaigh Roghnúchán"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2533
+#: terminalDisplay/TerminalDisplay.cpp:2535
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3401,17 +3401,17 @@ msgstr ""
 "<qt>Cuireadh an t-aschur <a href=\"http://en.wikipedia.org/wiki/Flow_control"
 "\">ar fionraí</a> le Ctrl+S.  Brúigh <b>Ctrl+Q</b> chun tosú arís.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2588
+#: terminalDisplay/TerminalDisplay.cpp:2590
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2980
+#: terminalDisplay/TerminalDisplay.cpp:2982
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Athraigh an Chomha&dlann Go"
 
-#: terminalDisplay/TerminalDisplay.cpp:3013
+#: terminalDisplay/TerminalDisplay.cpp:3015
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Greamaigh Suíomh"
