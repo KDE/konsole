@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-22 01:02+0000\n"
-"PO-Revision-Date: 2023-01-29 11:04+0100\n"
+"PO-Revision-Date: 2023-02-22 10:39+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -1472,12 +1472,13 @@ msgstr "Afficher un accès rapide"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Aucune commande rapide trouvée. Vous pouvez en ajouter une avec le menu "
+"Modules externes / Commandes rapides."
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Commandes rapides"
+msgstr "Modules externes - Commandes rapides"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1610,12 +1611,13 @@ msgstr "Afficher un accès rapide pour les actions « SSH »"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Aucune configuration « SSH » enregistrée n'a été trouvée. Vous pouvez en "
+"ajouter une avec le menu Modules externes / Gestionnaire « SSH »."
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Hide SSH Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Masquer le gestionnaire de clés SSH"
+msgstr "Modules externes - Gestionnaire « SSH »"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
