@@ -50,7 +50,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="horizontalLayout_1">
      <item>
       <widget class="QCheckBox" name="btnManageProfile">
        <property name="toolTip">
