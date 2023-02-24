@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 01:02+0000\n"
+"POT-Creation-Date: 2023-02-24 01:02+0000\n"
 "PO-Revision-Date: 2019-10-08 19:40+0900\n"
 "Last-Translator: Tomohiro Hyakutake <tomhioo@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -99,7 +99,7 @@ msgid "S&crollback"
 msgstr "スクロールバック(&L)"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:70
+#: ../desktop/sessionui.rc:71
 #, fuzzy, kde-format
 #| msgid "Session Number: %#"
 msgid "Session Toolbar"
@@ -471,31 +471,31 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "名前のない色スキーム"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "名前"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "色"
 
-#: colorscheme/ColorSchemeEditor.cpp:112
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr "目立つ色"
 
-#: colorscheme/ColorSchemeEditor.cpp:113
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "目立たない色"
 
-#: colorscheme/ColorSchemeEditor.cpp:138
+#: colorscheme/ColorSchemeEditor.cpp:137
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -505,7 +505,7 @@ msgstr ""
 "あなたのデスクトップは透明のウィンドウをサポートしていないようなので、背景の"
 "透明度の設定は適用されません。"
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:188
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Select wallpaper image file"
@@ -513,7 +513,7 @@ msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "壁紙にする画像ファイルを選択"
 
-#: colorscheme/ColorSchemeEditor.cpp:191
+#: colorscheme/ColorSchemeEditor.cpp:190
 #, fuzzy, kde-format
 #| msgctxt "Filter in file open dialog"
 #| msgid "Supported Images"
@@ -521,33 +521,33 @@ msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "サポートされた画像"
 
-#: colorscheme/ColorSchemeEditor.cpp:335
+#: colorscheme/ColorSchemeEditor.cpp:334
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "新しい色スキーム"
 
-#: colorscheme/ColorSchemeEditor.cpp:338
+#: colorscheme/ColorSchemeEditor.cpp:337
 #, fuzzy, kde-format
 #| msgid "Edit Color Scheme"
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "色スキームを編集"
 
-#: colorscheme/ColorSchemeEditor.cpp:384
+#: colorscheme/ColorSchemeEditor.cpp:383
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr "クリックで色を選択"
 
-#: colorscheme/ColorSchemeEditor.cpp:389
+#: colorscheme/ColorSchemeEditor.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr "クリックして目立つ色を選択"
 
-#: colorscheme/ColorSchemeEditor.cpp:394
+#: colorscheme/ColorSchemeEditor.cpp:393
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -725,7 +725,7 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:51
+#: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
 msgstr ""
@@ -2029,17 +2029,17 @@ msgstr "ダブルクリックでショートカットを変更"
 msgid "Tab Properties"
 msgstr ""
 
-#: SaveHistoryTask.cpp:68
+#: SaveHistoryTask.cpp:70
 #, kde-format
 msgid "Save Output From %1"
 msgstr "%1 の出力を保存"
 
-#: SaveHistoryTask.cpp:80
+#: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 は無効な URL です。出力を保存できませんでした。"
 
-#: SaveHistoryTask.cpp:161
+#: SaveHistoryTask.cpp:172
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2229,235 +2229,235 @@ msgstr ""
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole はこのブックマークの開き方が分かりません: "
 
-#: session/SessionController.cpp:523
+#: session/SessionController.cpp:521
 #, kde-format
 msgid "Search for '%1' with"
 msgstr ""
 
-#: session/SessionController.cpp:539
+#: session/SessionController.cpp:537
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr ""
 
-#: session/SessionController.cpp:653
+#: session/SessionController.cpp:651
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "&Close Session"
 msgstr "Konsole"
 
 # ACCELERATOR added by translator
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:658
 #, kde-format
 msgid "Open File Manager"
 msgstr "ファイルマネージャを開く(&O)"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:670
 #, kde-format
 msgid "Copy"
 msgstr ""
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
 msgstr ""
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:682
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy user input"
 msgstr "入力をコピー"
 
-#: session/SessionController.cpp:690
+#: session/SessionController.cpp:688
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy command output"
 msgstr "入力をコピー"
 
-#: session/SessionController.cpp:705
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "選択を貼り付け"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr ""
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:716
 #, kde-format
 msgid "&Select All"
 msgstr "すべて選択(&S)"
 
-#: session/SessionController.cpp:722
+#: session/SessionController.cpp:720
 #, fuzzy, kde-format
 #| msgid "Select Text"
 msgid "Select &Mode"
 msgstr "テキストの選択"
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:725
 #, fuzzy, kde-format
 #| msgid "Select Text"
 msgid "Select &Line"
 msgstr "テキストの選択"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Save Output &As..."
 msgstr "名前を付けて出力を保存(&A)..."
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr "画面を印刷(&P)..."
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "スクロールバックの調整..."
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "スクロールバックをクリア"
 
 # ACCELERATOR added by translator
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "スクロールバックをクリア＆リセット(&R)"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Switch Profile"
 msgstr "プロファイルの切り替え"
 
-#: session/SessionController.cpp:786
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Set &Encoding"
 msgstr "エンコーディングを設定(&E)"
 
-#: session/SessionController.cpp:813
+#: session/SessionController.cpp:811
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr ""
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:819
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr ""
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Configure or Rename Tab..."
 msgstr "タブ名を変更(&R)..."
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:836
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "現在のウィンドウのすべてのタブ(&A)"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:843
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "タブを選択(&S)..."
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:849
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "なし(&N)"
 
 # ACCELERATOR added by translator
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:857
 #, kde-format
 msgid "Copy Input To"
 msgstr "入力をコピー(&I)"
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:864
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "ZModem アップロード(&Z)..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "活動を監視(&A)"
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "休止を監視(&S)"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:881
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "活動を監視(&A)"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "Enlarge Font"
 msgstr "フォントサイズを大きく"
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Shrink Font"
 msgstr "フォントサイズを小さく"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Reset Font Size"
 msgstr ""
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Send Signal"
 msgstr "シグナルを送信"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "&Suspend Task"
 msgstr "停止(&S)"
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "&Continue Task"
 msgstr "現在のタブを閉じる(&C)"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Hangup"
 msgstr "ハングアップ(&H)"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "割り込み(&I)"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Terminate Task"
 msgstr "終了(&T)"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Kill Task"
 msgstr "殺す(&K)"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "User Signal &1"
 msgstr "ユーザシグナル &1"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &2"
 msgstr "ユーザシグナル &2"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:962
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -2465,38 +2465,38 @@ msgid "Create New Profile..."
 msgstr "新しいプロファイル"
 
 # ACCELERATOR added by translator
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "現在のプロファイルを編集(&E)..."
 
-#: session/SessionController.cpp:1083
+#: session/SessionController.cpp:1081
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "このセッションで実行中のプログラムがあります。本当に閉じますか？"
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1085
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "プログラム %1 がこのセッションで実行中です。本当に閉じますか？"
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
+#: session/SessionController.cpp:1096 session/SessionController.cpp:1139
 #, kde-format
 msgid "Confirm Close"
 msgstr "終了の確認"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1097
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "現在のタブを閉じる(&C)"
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1124
 #, fuzzy, kde-format
 #| msgid ""
 #| "A program is currently running in this session.  Are you sure you want to "
@@ -2506,7 +2506,7 @@ msgid ""
 "by force?"
 msgstr "このセッションで実行中のプログラムがあります。本当に閉じますか？"
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1128
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is currently running in this session.  Are you sure you "
@@ -2516,23 +2516,23 @@ msgid ""
 "kill it by force?"
 msgstr "プログラム %1 がこのセッションで実行中です。本当に閉じますか？"
 
-#: session/SessionController.cpp:1142
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1982
+#: session/SessionController.cpp:1984
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2051
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "ZModem ダウンロードを保存..."
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2061
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2543,14 +2543,14 @@ msgstr ""
 "ステム上に見つかりませんでした。</p><p>rzsz か lrzsz パッケージをインストール"
 "してください。</p>"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2071
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>現在のセッションには実行中の ZModem ファイル転送が既にあります。</p>"
 
-#: session/SessionController.cpp:2079
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2559,7 +2559,7 @@ msgstr ""
 "<p>適切な ZModem ソフトウェアがシステム上に見つかりませんでした。</p><p>rzsz "
 "か lrzsz パッケージをインストールしてください。</p>"
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2086
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem でアップロードするファイルを選択"
@@ -3368,12 +3368,12 @@ msgstr ""
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2982
+#: terminalDisplay/TerminalDisplay.cpp:2985
 #, kde-format
 msgid "Change &Directory To"
 msgstr "ディレクトリを変更(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:3015
+#: terminalDisplay/TerminalDisplay.cpp:3018
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
@@ -3653,7 +3653,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2354
+#: Vt102Emulation.cpp:2348
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4358,13 +4358,13 @@ msgstr[1] " 秒"
 msgid "Select Initial Directory"
 msgstr "開始ディレクトリを選択"
 
-#: widgets/EditProfileDialog.cpp:1237
+#: widgets/EditProfileDialog.cpp:1240
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1416
+#: widgets/EditProfileDialog.cpp:1419
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4373,7 +4373,7 @@ msgstr ""
 "この色スキームには、あなたのデスクトップがサポートしていないと思われる透明の"
 "背景が含まれています"
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1425
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4382,7 +4382,7 @@ msgstr ""
 "デスクトップエフェクトが有効になる前に Konsole が起動されました。透明化を有効"
 "にする場合は Konsole を再起動してください。"
 
-#: widgets/EditProfileDialog.cpp:1813
+#: widgets/EditProfileDialog.cpp:1816
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4399,7 +4399,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1826
+#: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

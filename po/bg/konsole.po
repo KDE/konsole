@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 01:02+0000\n"
+"POT-Creation-Date: 2023-02-24 01:02+0000\n"
 "PO-Revision-Date: 2023-02-02 16:10+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -90,7 +90,7 @@ msgid "S&crollback"
 msgstr "Пре&въртане"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:70
+#: ../desktop/sessionui.rc:71
 #, kde-format
 msgid "Session Toolbar"
 msgstr "Лента с инструменти на сесия"
@@ -455,31 +455,31 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "Неименувана цветова схема"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "Име"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "Цвят"
 
-#: colorscheme/ColorSchemeEditor.cpp:112
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr "Наситен цвят"
 
-#: colorscheme/ColorSchemeEditor.cpp:113
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "Блед цвят"
 
-#: colorscheme/ColorSchemeEditor.cpp:138
+#: colorscheme/ColorSchemeEditor.cpp:137
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -489,43 +489,43 @@ msgstr ""
 "Фоновата прозрачност няма да бъде използвана, защото изглежда работният плот "
 "не поддържа прозрачни прозорци."
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:188
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "Избиране на файл за тапет"
 
-#: colorscheme/ColorSchemeEditor.cpp:191
+#: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "Поддържани изображения"
 
-#: colorscheme/ColorSchemeEditor.cpp:335
+#: colorscheme/ColorSchemeEditor.cpp:334
 #, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "Нова цветова схема"
 
-#: colorscheme/ColorSchemeEditor.cpp:338
+#: colorscheme/ColorSchemeEditor.cpp:337
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "Редактиране на цветова схема"
 
-#: colorscheme/ColorSchemeEditor.cpp:384
+#: colorscheme/ColorSchemeEditor.cpp:383
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr "Щракнете за избиране на цвят"
 
-#: colorscheme/ColorSchemeEditor.cpp:389
+#: colorscheme/ColorSchemeEditor.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr "Щракнете за избиране на наситен цвят"
 
-#: colorscheme/ColorSchemeEditor.cpp:394
+#: colorscheme/ColorSchemeEditor.cpp:393
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -701,7 +701,7 @@ msgstr "Вертикално фиксиране:"
 msgid "Top"
 msgstr "Горе"
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:51
+#: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
 msgstr "AaZz09..."
@@ -1957,17 +1957,17 @@ msgstr "Щракнете двукратно, за да промените пря
 msgid "Tab Properties"
 msgstr "Свойства на раздел"
 
-#: SaveHistoryTask.cpp:68
+#: SaveHistoryTask.cpp:70
 #, kde-format
 msgid "Save Output From %1"
 msgstr "Запис на изхода от %1"
 
-#: SaveHistoryTask.cpp:80
+#: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 е невалиден URL адрес, изходът не можа да бъде запазен."
 
-#: SaveHistoryTask.cpp:161
+#: SaveHistoryTask.cpp:172
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2158,235 +2158,235 @@ msgstr "Процесът \"%1\"приключи в сесията \"%2\""
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole не знае как да отвори отметката: "
 
-#: session/SessionController.cpp:523
+#: session/SessionController.cpp:521
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Търсене за \"%1\" с"
 
-#: session/SessionController.cpp:539
+#: session/SessionController.cpp:537
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Настройки на уеб-препратки..."
 
-#: session/SessionController.cpp:653
+#: session/SessionController.cpp:651
 #, kde-format
 msgid "&Close Session"
 msgstr "Затваряне на &сесия"
 
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:658
 #, kde-format
 msgid "Open File Manager"
 msgstr "Зареждане на файлов мениджър"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:670
 #, kde-format
 msgid "Copy"
 msgstr "Копиране"
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Копиране без промпта"
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:682
 #, kde-format
 msgid "Copy user input"
 msgstr "Копиране на потребителското въвеждане"
 
-#: session/SessionController.cpp:690
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy command output"
 msgstr "Копиране на резултата на командата"
 
-#: session/SessionController.cpp:705
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "Поставяне на маркираното"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr "Търсене в Интернет"
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:716
 #, kde-format
 msgid "&Select All"
 msgstr "&Избиране на всичко"
 
-#: session/SessionController.cpp:722
+#: session/SessionController.cpp:720
 #, kde-format
 msgid "Select &Mode"
 msgstr "Избор на &режим"
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:725
 #, kde-format
 msgid "Select &Line"
 msgstr "Избери &ред"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Запис на &изхода като..."
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Печатане на екрана..."
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Настройки на превъртането..."
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Изчистване на превъртането"
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Изчистване на превъртането и презареждане"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Switch Profile"
 msgstr "Превключване на профил"
 
-#: session/SessionController.cpp:786
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Set &Encoding"
 msgstr "&Кодова таблица"
 
-#: session/SessionController.cpp:813
+#: session/SessionController.cpp:811
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Позволява проследяване на мишката"
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:819
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Само за четене"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "Настройване или преименуване на раздел..."
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:836
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Всички раздели в текущия прозорец"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:843
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Избиране на раздели..."
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:849
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Без"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:857
 #, kde-format
 msgid "Copy Input To"
 msgstr "Копиране на входа към"
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:864
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Качване на &файл (ZModem)..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Монитор на &активността"
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Монитор на &пасивността"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:881
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Монитор за приключване на процес"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Увеличаване на шрифта"
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Shrink Font"
 msgstr "Намаляване на шрифта"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Възстановяване размера на шрифта"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Send Signal"
 msgstr "Изпращане на сигнал"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Спиране на задачата"
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Продължаване на задачата"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Hangup"
 msgstr "&Затваряне"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Прекъсване на задача"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Прекратяване на задачата"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Прекратяване на задача"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "User Signal &1"
 msgstr "Потребителски сигнал &1"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &2"
 msgstr "Потребителски сигнал &2"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:962
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Създаване на нов профил..."
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Редактиране на текущия профил..."
 
-#: session/SessionController.cpp:1083
+#: session/SessionController.cpp:1081
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2395,7 +2395,7 @@ msgstr ""
 "В момента се изпълнява програма в тази сесия. Наистина ли искате да я "
 "затворите?"
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1085
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2404,18 +2404,18 @@ msgstr ""
 "В момента се изпълнява програма '%1' в тази сесия. Наистина ли искате да я "
 "затворите?"
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
+#: session/SessionController.cpp:1096 session/SessionController.cpp:1139
 #, kde-format
 msgid "Confirm Close"
 msgstr "Потвърждаване на затварянето"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1097
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Затваряне на програмата"
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1124
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2424,7 +2424,7 @@ msgstr ""
 "Програма в тази сесия няма да прекрати. Наистина ли искате да я прекъснете "
 "принудително?"
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1128
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2433,23 +2433,23 @@ msgstr ""
 "Програмата  '%1'в тази сесия няма да прекрати. Наистина ли искате да я "
 "прекъснете принудително?"
 
-#: session/SessionController.cpp:1142
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Прекратяване на програмата"
 
-#: session/SessionController.cpp:1982
+#: session/SessionController.cpp:1984
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Отваряне на текущата папка с"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2051
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Запазване на ZModem изтегляния в..."
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2061
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2460,14 +2460,14 @@ msgstr ""
 "не е намерен подходящ софтуер на ZModem. </p> <p> Може да искате да "
 "инсталирате пакета 'rzsz' или 'lrzsz'. </p>"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2071
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Текущата сесия вече има стартиран процес за обмен на файл (ZModem).</p>"
 
-#: session/SessionController.cpp:2079
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2476,7 +2476,7 @@ msgstr ""
 "<p> В тази система не бе намерен подходящ софтуер ZModem. </p> <p> Може да "
 "пожелаете да инсталирате пакета 'rzsz' или 'lrzsz'. </p>"
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2086
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Избор на файлове за качване на ZModem"
@@ -3271,12 +3271,12 @@ msgstr ""
 msgid "This terminal is read-only."
 msgstr "Този ​​терминал е само за четене."
 
-#: terminalDisplay/TerminalDisplay.cpp:2982
+#: terminalDisplay/TerminalDisplay.cpp:2985
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Смяна на &директорията на"
 
-#: terminalDisplay/TerminalDisplay.cpp:3015
+#: terminalDisplay/TerminalDisplay.cpp:3018
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Поставяне на местоположение"
@@ -3527,7 +3527,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Зареждане подредбата на разделите"
 
-#: Vt102Emulation.cpp:2354
+#: Vt102Emulation.cpp:2348
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4208,13 +4208,13 @@ msgstr[1] " секунди"
 msgid "Select Initial Directory"
 msgstr "Избор на начална директория"
 
-#: widgets/EditProfileDialog.cpp:1237
+#: widgets/EditProfileDialog.cpp:1240
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Схемата <resource> %1 </resource> не успя да се зареди."
 
-#: widgets/EditProfileDialog.cpp:1416
+#: widgets/EditProfileDialog.cpp:1419
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4223,7 +4223,7 @@ msgstr ""
 "Тази цветова схема използва прозрачен фон, който изглежда не се поддържа на "
 "вашия работен плот"
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1425
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4232,7 +4232,7 @@ msgstr ""
 "Konsole беше стартиран преди да бъдат активирани ефектите на работния плот. "
 "Трябва да рестартирате Konsole, за да видите прозрачен фон."
 
-#: widgets/EditProfileDialog.cpp:1813
+#: widgets/EditProfileDialog.cpp:1816
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4261,7 +4261,7 @@ msgstr ""
 "ще бъде игнорирана и файлът ще бъде отворен от текстовия редактор \n"
 "по подразбиране."
 
-#: widgets/EditProfileDialog.cpp:1826
+#: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Потребителска команда на текстовия редактор"

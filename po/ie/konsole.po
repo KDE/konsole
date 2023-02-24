@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 01:02+0000\n"
+"POT-Creation-Date: 2023-02-24 01:02+0000\n"
 "PO-Revision-Date: 2022-10-28 16:51+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <kde-i18n-doc@kde.org>\n"
@@ -85,7 +85,7 @@ msgid "S&crollback"
 msgstr "B&uffre"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:70
+#: ../desktop/sessionui.rc:71
 #, kde-format
 msgid "Session Toolbar"
 msgstr "Panel de session"
@@ -433,31 +433,31 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "Schema de colores sin nómine"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "Nómine"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "Color"
 
-#: colorscheme/ColorSchemeEditor.cpp:112
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr "Intens color"
 
-#: colorscheme/ColorSchemeEditor.cpp:113
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "Pallid color"
 
-#: colorscheme/ColorSchemeEditor.cpp:138
+#: colorscheme/ColorSchemeEditor.cpp:137
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -465,43 +465,43 @@ msgid ""
 "does not appear to support transparent windows."
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:188
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "Selecte un file del image de funde"
 
-#: colorscheme/ColorSchemeEditor.cpp:191
+#: colorscheme/ColorSchemeEditor.cpp:190
 #, fuzzy, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "Omni images suportat"
 
-#: colorscheme/ColorSchemeEditor.cpp:335
+#: colorscheme/ColorSchemeEditor.cpp:334
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "Nov schema"
 
-#: colorscheme/ColorSchemeEditor.cpp:338
+#: colorscheme/ColorSchemeEditor.cpp:337
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "S_chema de colores"
 
-#: colorscheme/ColorSchemeEditor.cpp:384
+#: colorscheme/ColorSchemeEditor.cpp:383
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr "Selecter li color del indicator del hor"
 
-#: colorscheme/ColorSchemeEditor.cpp:389
+#: colorscheme/ColorSchemeEditor.cpp:388
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr "Color 1 (intens)"
 
-#: colorscheme/ColorSchemeEditor.cpp:394
+#: colorscheme/ColorSchemeEditor.cpp:393
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -672,7 +672,7 @@ msgstr "Vertical"
 msgid "Top"
 msgstr "Alt"
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:51
+#: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
 msgstr "AaZz09..."
@@ -1902,17 +1902,17 @@ msgstr "_Duplic clic por activar elementes"
 msgid "Tab Properties"
 msgstr "Proprietás del carte"
 
-#: SaveHistoryTask.cpp:68
+#: SaveHistoryTask.cpp:70
 #, kde-format
 msgid "Save Output From %1"
 msgstr "Gardar li production de %1"
 
-#: SaveHistoryTask.cpp:80
+#: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr ""
 
-#: SaveHistoryTask.cpp:161
+#: SaveHistoryTask.cpp:172
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2095,290 +2095,290 @@ msgstr ""
 msgid "Konsole does not know how to open the bookmark: "
 msgstr ""
 
-#: session/SessionController.cpp:523
+#: session/SessionController.cpp:521
 #, fuzzy, kde-format
 msgid "Search for '%1' with"
 msgstr "Serchar por «%1» med"
 
-#: session/SessionController.cpp:539
+#: session/SessionController.cpp:537
 #, fuzzy, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Configurar abreviationes de web..."
 
-#: session/SessionController.cpp:653
+#: session/SessionController.cpp:651
 #, kde-format
 msgid "&Close Session"
 msgstr "&Cluder li session"
 
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:658
 #, kde-format
 msgid "Open File Manager"
 msgstr "Aperter li gerente de files"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:670
 #, kde-format
 msgid "Copy"
 msgstr "Copiar"
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:676
 #, fuzzy, kde-format
 msgid "Copy except prompts"
 msgstr "omni except blocat"
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:682
 #, fuzzy, kde-format
 msgid "Copy user input"
 msgstr "Copiar _intrada:"
 
-#: session/SessionController.cpp:690
+#: session/SessionController.cpp:688
 #, fuzzy, kde-format
 msgid "Copy command output"
 msgstr "Production de comande"
 
-#: session/SessionController.cpp:705
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "Collar li selection"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr "Sercha web"
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:716
 #, kde-format
 msgid "&Select All"
 msgstr "&Selecter omnicos"
 
-#: session/SessionController.cpp:722
+#: session/SessionController.cpp:720
 #, kde-format
 msgid "Select &Mode"
 msgstr "&Mode de section"
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:725
 #, kde-format
 msgid "Select &Line"
 msgstr "Selecter li &linea"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Gardar li production &quam..."
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Printar li ecran..."
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:738
 #, fuzzy, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Vacuar li buffre"
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Vacuar li buffre"
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:746
 #, fuzzy, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Vacuar li buffre"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Switch Profile"
 msgstr "Cambiar li profil"
 
-#: session/SessionController.cpp:786
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Assignar co&dification"
 
-#: session/SessionController.cpp:813
+#: session/SessionController.cpp:811
 #, fuzzy, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Permisser:"
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:819
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Solmen letion"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Configurar o renominar li carte..."
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:836
 #, fuzzy, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Cluder omni cartes?"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:843
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Selecter cartes..."
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:849
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Null"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:857
 #, fuzzy, kde-format
 msgid "Copy Input To"
 msgstr "Copiar _intrada:"
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:864
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Carga med &ZModem..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Controlar &activitá"
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Co&ntrolar li ínactivitá"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:881
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Controlar li fin de processus"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Agrandar li fonde"
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Shrink Font"
 msgstr "Diminuer li fonde"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:901
 #, fuzzy, kde-format
 msgid "Reset Font Size"
 msgstr "Dimension de fonde:"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Send Signal"
 msgstr "Inviar un signale"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:910
 #, fuzzy, kde-format
 msgid "&Suspend Task"
 msgstr "Tache"
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:915
 #, fuzzy, kde-format
 msgid "&Continue Task"
 msgstr "Tache: {}"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Hangup"
 msgstr ""
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Interrupter li tache"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Finir li tache"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Terminar li tache"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "User Signal &1"
 msgstr "Signale de usator &1"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &2"
 msgstr "Signale de usator &2"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:962
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Crear un nov profil..."
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, fuzzy, kde-format
 msgid "Edit Current Profile..."
 msgstr "Modificar li selectet profil"
 
-#: session/SessionController.cpp:1083
+#: session/SessionController.cpp:1081
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1085
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
+#: session/SessionController.cpp:1096 session/SessionController.cpp:1139
 #, kde-format
 msgid "Confirm Close"
 msgstr "Confirmar clusion"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1097
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Cluder li programma"
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1124
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1128
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1142
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Terminar li programma"
 
-#: session/SessionController.cpp:1982
+#: session/SessionController.cpp:1984
 #, fuzzy, kde-format
 msgid "Open Current Folder With"
 msgstr "Aperter li actual fólder in nov fenestre"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2051
 #, fuzzy, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Progresse de ZModem"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2061
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2386,20 +2386,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2071
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2079
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2086
 #, fuzzy, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Ne successat cargar li files"
@@ -3166,12 +3166,12 @@ msgstr ""
 msgid "This terminal is read-only."
 msgstr " [solmen letion]"
 
-#: terminalDisplay/TerminalDisplay.cpp:2982
+#: terminalDisplay/TerminalDisplay.cpp:2985
 #, fuzzy, kde-format
 msgid "Change &Directory To"
 msgstr "Ear al superiori fólder"
 
-#: terminalDisplay/TerminalDisplay.cpp:3015
+#: terminalDisplay/TerminalDisplay.cpp:3018
 #, kde-format
 msgid "&Paste Location"
 msgstr "Coll&ar li localisation"
@@ -3424,7 +3424,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carga"
 
-#: Vt102Emulation.cpp:2354
+#: Vt102Emulation.cpp:2348
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4087,27 +4087,27 @@ msgstr[1] " secondes"
 msgid "Select Initial Directory"
 msgstr "Inicial fólder:"
 
-#: widgets/EditProfileDialog.cpp:1237
+#: widgets/EditProfileDialog.cpp:1240
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Ne successat cargar li schema <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1416
+#: widgets/EditProfileDialog.cpp:1419
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1425
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1813
+#: widgets/EditProfileDialog.cpp:1816
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4124,7 +4124,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1826
+#: widgets/EditProfileDialog.cpp:1829
 #, fuzzy, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Redactor de textus"

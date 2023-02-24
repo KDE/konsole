@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 01:02+0000\n"
+"POT-Creation-Date: 2023-02-24 01:02+0000\n"
 "PO-Revision-Date: 2009-01-16 22:16+0530\n"
 "Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <en@li.org>\n"
@@ -85,7 +85,7 @@ msgid "S&crollback"
 msgstr "(&c) స్క్రోల్‌బ్యాక్"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:70
+#: ../desktop/sessionui.rc:71
 #, fuzzy, kde-format
 #| msgid "Session number"
 msgid "Session Toolbar"
@@ -483,34 +483,34 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "పేరు-లేని రంగు స్కీము"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, fuzzy, kde-format
 #| msgid "Name"
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "పేరు"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, fuzzy, kde-format
 #| msgid "Color"
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "రంగు"
 
-#: colorscheme/ColorSchemeEditor.cpp:112
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:113
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, fuzzy, kde-format
 #| msgid "Linux Colors"
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "లినక్స్ రంగులు"
 
-#: colorscheme/ColorSchemeEditor.cpp:138
+#: colorscheme/ColorSchemeEditor.cpp:137
 #, fuzzy, kde-format
 #| msgid ""
 #| "The background transparency setting will not be used because your desktop "
@@ -523,45 +523,45 @@ msgstr ""
 "బ్యాక్‌గ్రౌండు పారదర్శత అమరిక వుపయోగించబడదు యెందుచేతనంటే మీ డెస్కుటాపు పారదర్శ విండోల మద్దతును "
 "కలిగివున్నట్లు లేదు."
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:188
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:191
+#: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:335
+#: colorscheme/ColorSchemeEditor.cpp:334
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "కొత్త రంగు స్కీము"
 
-#: colorscheme/ColorSchemeEditor.cpp:338
+#: colorscheme/ColorSchemeEditor.cpp:337
 #, fuzzy, kde-format
 #| msgid "Edit Color Scheme"
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "రంగు స్కీమును సరికూర్చు"
 
-#: colorscheme/ColorSchemeEditor.cpp:384
+#: colorscheme/ColorSchemeEditor.cpp:383
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:389
+#: colorscheme/ColorSchemeEditor.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:394
+#: colorscheme/ColorSchemeEditor.cpp:393
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -741,7 +741,7 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:51
+#: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
 msgstr ""
@@ -2089,17 +2089,17 @@ msgstr ""
 msgid "Tab Properties"
 msgstr ""
 
-#: SaveHistoryTask.cpp:68
+#: SaveHistoryTask.cpp:70
 #, kde-format
 msgid "Save Output From %1"
 msgstr "%1నుండి అవుట్పుట్‌ను భద్రపరచుము"
 
-#: SaveHistoryTask.cpp:80
+#: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 చెల్లని URL, అవుట్పుట్ భద్రపరచబడలేదు."
 
-#: SaveHistoryTask.cpp:161
+#: SaveHistoryTask.cpp:172
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2292,265 +2292,265 @@ msgstr ""
 msgid "Konsole does not know how to open the bookmark: "
 msgstr ""
 
-#: session/SessionController.cpp:523
+#: session/SessionController.cpp:521
 #, kde-format
 msgid "Search for '%1' with"
 msgstr ""
 
-#: session/SessionController.cpp:539
+#: session/SessionController.cpp:537
 #, fuzzy, kde-format
 #| msgid "Manage Profiles..."
 msgid "Configure Web Shortcuts..."
 msgstr "ప్రొఫైల్సును నిర్వహించుము..."
 
-#: session/SessionController.cpp:653
+#: session/SessionController.cpp:651
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "&Close Session"
 msgstr "కాన్సోల్"
 
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:658
 #, kde-format
 msgid "Open File Manager"
 msgstr ""
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:670
 #, fuzzy, kde-format
 #| msgid "&Copy"
 msgid "Copy"
 msgstr "(&C) నకలు"
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
 msgstr ""
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:682
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy user input"
 msgstr "ఇన్పుట్ నకలుతీయి"
 
-#: session/SessionController.cpp:690
+#: session/SessionController.cpp:688
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy command output"
 msgstr "ఇన్పుట్ నకలుతీయి"
 
-#: session/SessionController.cpp:705
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "ఎంచుకొన్న దానిని అతికించు"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr ""
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:716
 #, fuzzy, kde-format
 #| msgid "Select All"
 msgid "&Select All"
 msgstr "అన్నిటిని ఎంపికచేయుము"
 
-#: session/SessionController.cpp:722
+#: session/SessionController.cpp:720
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "Select &Mode"
 msgstr "ఎంచుకొ"
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:725
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "Select &Line"
 msgstr "ఎంచుకొ"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:728
 #, fuzzy, kde-format
 #| msgid "Save Output..."
 msgid "Save Output &As..."
 msgstr "అవుట్పుట్ భద్రపరచుము..."
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr ""
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:738
 #, fuzzy, kde-format
 #| msgid "Manage Profiles..."
 msgid "Adjust Scrollback..."
 msgstr "ప్రొఫైల్సును నిర్వహించుము..."
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "స్క్రాల్‌బ్యాక్‌ను శుభ్రముచేయి"
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:746
 #, fuzzy, kde-format
 #| msgid "Clear Scrollback && Reset"
 msgid "Clear Scrollback and Reset"
 msgstr "స్క్రాల్‌బ్యాక్‌ను శుభ్రముచేయి && తిరిగివుంచుము"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:755
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Switch Profile"
 msgstr "ప్రొఫైల్ సరికూర్చు"
 
-#: session/SessionController.cpp:786
+#: session/SessionController.cpp:784
 #, fuzzy, kde-format
 #| msgid "Encoding"
 msgid "Set &Encoding"
 msgstr "ఎన్కోడింగ్"
 
-#: session/SessionController.cpp:813
+#: session/SessionController.cpp:811
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr ""
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:819
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr ""
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Configure or Rename Tab..."
 msgstr "(&R) టాబ్‌కు మరలాపేరు..."
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:836
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr ""
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:843
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Select Tabs..."
 msgstr "(&R) టాబ్‌కు మరలాపేరు..."
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:849
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr ""
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:857
 #, fuzzy, kde-format
 #| msgid "Copy Input To..."
 msgid "Copy Input To"
 msgstr "ఇన్పుట్ యిచటకు నకలుతీయి..."
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:864
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr ""
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "(&A) క్రియాశీలత కొరకు మానిటర్"
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "(&S) నిశ్శబ్ధము కొరకు మానిటర్"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:881
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "(&A) క్రియాశీలత కొరకు మానిటర్"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "Enlarge Font"
 msgstr ""
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:896
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Shrink View"
 msgid "Shrink Font"
 msgstr "వీక్షణం కుదించుము"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:901
 #, fuzzy, kde-format
 #| msgid "Increase Text Size"
 msgid "Reset Font Size"
 msgstr "వచన పరిమాణం పెంచు"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Send Signal"
 msgstr ""
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "&Suspend Task"
 msgstr ""
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:915
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgid "&Continue Task"
 msgstr "(&C) టాబ్ ను మూసివెయి"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Hangup"
 msgstr ""
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Interrupt Task"
 msgstr ""
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:930
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "&Terminate Task"
 msgstr "టెర్మినల్ సౌలభ్యాలు"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Kill Task"
 msgstr ""
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "User Signal &1"
 msgstr ""
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &2"
 msgstr ""
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:962
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile..."
 msgstr "కొత్త ప్రొఫైల్..."
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "ప్రస్తుత ప్రొఫైలును సరికూర్చు..."
 
-#: session/SessionController.cpp:1083
+#: session/SessionController.cpp:1081
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "ఈ సెషన్‌నందు వొక పోగ్రామ్ యిప్పటికే నుడుస్తోంది.  మీరు దానిని ఖచ్చితంగా మూసివేద్దామని అనుకొంటున్నారా?"
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1085
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2558,19 +2558,19 @@ msgid ""
 msgstr ""
 "పొగ్రామ్ '%1' ప్రస్తుతం ఈ సెషన్‌నందు నడుస్తోంది.  మీరు ఖచ్చితంగా దీనిని మూసివేద్దామని అనుకొంటున్నారా?"
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
+#: session/SessionController.cpp:1096 session/SessionController.cpp:1139
 #, kde-format
 msgid "Confirm Close"
 msgstr "ముసివేత నిర్ధారించు"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1097
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "(&C) టాబ్ ను మూసివెయి"
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1124
 #, fuzzy, kde-format
 #| msgid ""
 #| "A program is currently running in this session.  Are you sure you want to "
@@ -2580,7 +2580,7 @@ msgid ""
 "by force?"
 msgstr "ఈ సెషన్‌నందు వొక పోగ్రామ్ యిప్పటికే నుడుస్తోంది.  మీరు దానిని ఖచ్చితంగా మూసివేద్దామని అనుకొంటున్నారా?"
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1128
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is currently running in this session.  Are you sure you "
@@ -2591,23 +2591,23 @@ msgid ""
 msgstr ""
 "పొగ్రామ్ '%1' ప్రస్తుతం ఈ సెషన్‌నందు నడుస్తోంది.  మీరు ఖచ్చితంగా దీనిని మూసివేద్దామని అనుకొంటున్నారా?"
 
-#: session/SessionController.cpp:1142
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1982
+#: session/SessionController.cpp:1984
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2051
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr ""
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2061
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2615,20 +2615,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2071
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2079
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2086
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr ""
@@ -3443,12 +3443,12 @@ msgstr ""
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2982
+#: terminalDisplay/TerminalDisplay.cpp:2985
 #, kde-format
 msgid "Change &Directory To"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3015
+#: terminalDisplay/TerminalDisplay.cpp:3018
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
@@ -3728,7 +3728,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2354
+#: Vt102Emulation.cpp:2348
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4432,27 +4432,27 @@ msgstr[4] ""
 msgid "Select Initial Directory"
 msgstr "ప్రాధమిక డెరెక్టరీను ఎంపికచేయుము"
 
-#: widgets/EditProfileDialog.cpp:1237
+#: widgets/EditProfileDialog.cpp:1240
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1416
+#: widgets/EditProfileDialog.cpp:1419
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "ఈ రంగు స్కీము మీ డెస్కుటాపు మద్దతీయనటువంటి పారదర్శ బ్యాక్‌గ్రౌండును వుపయోగిస్తోంది"
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1425
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1813
+#: widgets/EditProfileDialog.cpp:1816
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4469,7 +4469,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1826
+#: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

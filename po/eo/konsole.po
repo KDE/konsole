@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 01:02+0000\n"
+"POT-Creation-Date: 2023-02-24 01:02+0000\n"
 "PO-Revision-Date: 2023-02-06 08:46+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -96,7 +96,7 @@ msgid "S&crollback"
 msgstr "Retro&rulumo"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:70
+#: ../desktop/sessionui.rc:71
 #, kde-format
 msgid "Session Toolbar"
 msgstr "Sesia Ilobreto"
@@ -454,31 +454,31 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "Sennoma koloraro"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "Nomo"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "Koloro"
 
-#: colorscheme/ColorSchemeEditor.cpp:112
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr "Intensa koloro"
 
-#: colorscheme/ColorSchemeEditor.cpp:113
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "Malforta koloro"
 
-#: colorscheme/ColorSchemeEditor.cpp:138
+#: colorscheme/ColorSchemeEditor.cpp:137
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -488,43 +488,43 @@ msgstr ""
 "La agordo por fona travidebleco ne estos uzota ĉar via labortablo ŝajne ne "
 "subtenas travideblajn fenestrojn."
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:188
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "Elekti bildan bilddosieron"
 
-#: colorscheme/ColorSchemeEditor.cpp:191
+#: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "Subtenataj Bildoj"
 
-#: colorscheme/ColorSchemeEditor.cpp:335
+#: colorscheme/ColorSchemeEditor.cpp:334
 #, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "Nova koloraro"
 
-#: colorscheme/ColorSchemeEditor.cpp:338
+#: colorscheme/ColorSchemeEditor.cpp:337
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "Redakti koloraron"
 
-#: colorscheme/ColorSchemeEditor.cpp:384
+#: colorscheme/ColorSchemeEditor.cpp:383
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr "Klaku por elekti koloron"
 
-#: colorscheme/ColorSchemeEditor.cpp:389
+#: colorscheme/ColorSchemeEditor.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr "Klaku por elekti intensan koloron"
 
-#: colorscheme/ColorSchemeEditor.cpp:394
+#: colorscheme/ColorSchemeEditor.cpp:393
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -699,7 +699,7 @@ msgstr "Vertikala Ankro:"
 msgid "Top"
 msgstr "Supre"
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:51
+#: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
 msgstr "AaZz09..."
@@ -1947,17 +1947,17 @@ msgstr "Duoble alklaku por ŝanĝi ŝparvojon"
 msgid "Tab Properties"
 msgstr "Tabeto Propraĵoj"
 
-#: SaveHistoryTask.cpp:68
+#: SaveHistoryTask.cpp:70
 #, kde-format
 msgid "Save Output From %1"
 msgstr "Konservi eligon el %1"
 
-#: SaveHistoryTask.cpp:80
+#: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 ne estas valida adreso, ne povis konservi la eligon."
 
-#: SaveHistoryTask.cpp:161
+#: SaveHistoryTask.cpp:172
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2147,235 +2147,235 @@ msgstr "La procezo '%1' finiĝis en la seanco '%2'"
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole ne scias kiel malfermi la legosignon:"
 
-#: session/SessionController.cpp:523
+#: session/SessionController.cpp:521
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Serĉi '%1' per"
 
-#: session/SessionController.cpp:539
+#: session/SessionController.cpp:537
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Agordi Retajn Ŝparvojojn..."
 
-#: session/SessionController.cpp:653
+#: session/SessionController.cpp:651
 #, kde-format
 msgid "&Close Session"
 msgstr "&Fermi Seancon"
 
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:658
 #, kde-format
 msgid "Open File Manager"
 msgstr "Malfermi Dosieran Administranton"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:670
 #, kde-format
 msgid "Copy"
 msgstr "Kopii"
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Kopii krom invitoj"
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:682
 #, kde-format
 msgid "Copy user input"
 msgstr "Kopii uzanta enigo"
 
-#: session/SessionController.cpp:690
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy command output"
 msgstr "Kopii komanda eligo"
 
-#: session/SessionController.cpp:705
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "Enmeti elekton"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr "TTT-serĉo"
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:716
 #, kde-format
 msgid "&Select All"
 msgstr "&Selekti ĉiujn"
 
-#: session/SessionController.cpp:722
+#: session/SessionController.cpp:720
 #, kde-format
 msgid "Select &Mode"
 msgstr "Elekti Reĝi&mon"
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:725
 #, kde-format
 msgid "Select &Line"
 msgstr "Elekti &Linion"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Konservi elig&aĵon kiel..."
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Presi Ekranon..."
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Alĝustigi Srollback..."
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Forviŝi rulumhistorion"
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Klara Scrollback kaj Restarigi"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Switch Profile"
 msgstr "Ŝanĝi Profilon"
 
-#: session/SessionController.cpp:786
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Set &Encoding"
 msgstr "M&eti Kodigon"
 
-#: session/SessionController.cpp:813
+#: session/SessionController.cpp:811
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Permesi musan spuradon"
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:819
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Nurlegebla"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Agordi aŭ Alinomi Langeton..."
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:836
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Ĉiuj L&angetoj en Aktuala Fenestro"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:843
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Selekti Langetojn..."
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:849
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Neniu"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:857
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopii Enigo Al"
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:864
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModema Alŝuto..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Monitoro por &Aktiveco"
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Monitoro por &Silento"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:881
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Monitoro por Proceza Finado"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Pligrandigi tiparon"
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Shrink Font"
 msgstr "Ŝrumpi Tiparo"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Restarigi Tiparo Grandeco"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Send Signal"
 msgstr "Sendi Signalon"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Suspendi Taskon"
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Daŭrigi Taskon"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Hangup"
 msgstr "&Haltigi"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Interrompi Taskon"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Terminate Task"
 msgstr "Finigi &Taskon"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Kill Task"
 msgstr "Mortigi Tas&kon"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "User Signal &1"
 msgstr "Uzanta Signalo &1"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &2"
 msgstr "Uzanta Signalo &2"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:962
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Krei novan profilon..."
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Modifi nunan profilon..."
 
-#: session/SessionController.cpp:1083
+#: session/SessionController.cpp:1081
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2384,7 +2384,7 @@ msgstr ""
 "Vi havas plurajn langetojn en ĉi tiu fenestro, ĉu vi certas ke vi volas "
 "finiĝi?"
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1085
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2393,18 +2393,18 @@ msgstr ""
 "La programo '%1' nuntempe funkcias en ĉi tiu seanco. Ĉu vi certas, ke vi "
 "volas fermi ĝin?"
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
+#: session/SessionController.cpp:1096 session/SessionController.cpp:1139
 #, kde-format
 msgid "Confirm Close"
 msgstr "Konfirmi fermon"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1097
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Fermi Programon"
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1124
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2413,7 +2413,7 @@ msgstr ""
 "Programo en ĉi tiu seanco ne mortus. Ĉu vi certas, ke vi volas mortigi ĝin "
 "perforte?"
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1128
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2422,23 +2422,23 @@ msgstr ""
 "La programo '%1' en ĉi tiu seanco ne mortus. Ĉu vi certas, ke vi volas "
 "mortigi ĝin perforte?"
 
-#: session/SessionController.cpp:1142
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Mortigi Programon"
 
-#: session/SessionController.cpp:1982
+#: session/SessionController.cpp:1984
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Malfermi Nunan Dosierujon Kun"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2051
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Konservi ZModem Elŝutu al..."
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2061
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2449,13 +2449,13 @@ msgstr ""
 "taŭga ZModem-programaro estis trovita en ĉi tiu sistemo.</p><p>Vi eble volu "
 "instali la pakaĵon 'rzsz' aŭ 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2071
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>La nuna seanco jam havas ZModem-dosiertransdonon en progreso.</p>"
 
-#: session/SessionController.cpp:2079
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2464,7 +2464,7 @@ msgstr ""
 "<p>Neniu taŭga ZModem-programaro estis trovita en ĉi tiu sistemo.</p><p>Vi "
 "eble volu instali la pakaĵon 'rzsz' aŭ 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2086
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Elekti Dosieroj por ZModem Alŝuto"
@@ -3247,12 +3247,12 @@ msgstr ""
 msgid "This terminal is read-only."
 msgstr "Ĉi tiu terminalo estas nurlegebla."
 
-#: terminalDisplay/TerminalDisplay.cpp:2982
+#: terminalDisplay/TerminalDisplay.cpp:2985
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Ŝanĝi &Dosierujon Al"
 
-#: terminalDisplay/TerminalDisplay.cpp:3015
+#: terminalDisplay/TerminalDisplay.cpp:3018
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Alglui Lokon"
@@ -3503,7 +3503,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Ŝargi Tab Aranĝo"
 
-#: Vt102Emulation.cpp:2354
+#: Vt102Emulation.cpp:2348
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4178,13 +4178,13 @@ msgstr[1] ""
 msgid "Select Initial Directory"
 msgstr "Elekti komencan dosierujon"
 
-#: widgets/EditProfileDialog.cpp:1237
+#: widgets/EditProfileDialog.cpp:1240
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Skemo <resource>%1</resource> malsukcesis ŝargi."
 
-#: widgets/EditProfileDialog.cpp:1416
+#: widgets/EditProfileDialog.cpp:1419
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4192,7 +4192,7 @@ msgid ""
 msgstr ""
 "Ĉi tiu koloraro uzas travideblan fonon kiun ŝajne via labortablo ne subtenas."
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1425
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4201,7 +4201,7 @@ msgstr ""
 "Konsole estis komencita antaŭ ol labortablaj efikoj estis ebligitaj. Vi "
 "devas rekomenci Konsole por vidi travideblan fonon."
 
-#: widgets/EditProfileDialog.cpp:1813
+#: widgets/EditProfileDialog.cpp:1816
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4230,7 +4230,7 @@ msgstr ""
 "estos ignorita kaj la dosiero estos malfermita per la defaŭlta tekst-\n"
 "redaktilo."
 
-#: widgets/EditProfileDialog.cpp:1826
+#: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Tekstredaktilo Propra Komando"

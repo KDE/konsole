@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 01:02+0000\n"
+"POT-Creation-Date: 2023-02-24 01:02+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -95,7 +95,7 @@ msgid "S&crollback"
 msgstr "Peidio â dangos bar sgrolio"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:70
+#: ../desktop/sessionui.rc:71
 #, fuzzy, kde-format
 #| msgid "Session"
 msgid "Session Toolbar"
@@ -469,7 +469,7 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, fuzzy, kde-format
 #| msgctxt "NAME OF TRANSLATORS"
 #| msgid "Your names"
@@ -477,27 +477,27 @@ msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "KGyfieithu - meddalwedd rhydd yn Gymraeg"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, fuzzy, kde-format
 #| msgid "VIM Colors"
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "Lliwiau VIM"
 
-#: colorscheme/ColorSchemeEditor.cpp:112
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:113
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, fuzzy, kde-format
 #| msgid "Linux Colors"
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "Lliwiau Linux"
 
-#: colorscheme/ColorSchemeEditor.cpp:138
+#: colorscheme/ColorSchemeEditor.cpp:137
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -505,43 +505,43 @@ msgid ""
 "does not appear to support transparent windows."
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:188
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:191
+#: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:335
+#: colorscheme/ColorSchemeEditor.cpp:334
 #, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:338
+#: colorscheme/ColorSchemeEditor.cpp:337
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "Rhestru'r mathau o sesiynau sydd ar gael."
 
-#: colorscheme/ColorSchemeEditor.cpp:384
+#: colorscheme/ColorSchemeEditor.cpp:383
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:389
+#: colorscheme/ColorSchemeEditor.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr ""
 
-#: colorscheme/ColorSchemeEditor.cpp:394
+#: colorscheme/ColorSchemeEditor.cpp:393
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -721,7 +721,7 @@ msgstr ""
 msgid "Top"
 msgstr "&Pen"
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:51
+#: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
 msgstr ""
@@ -1984,17 +1984,17 @@ msgstr ""
 msgid "Tab Properties"
 msgstr ""
 
-#: SaveHistoryTask.cpp:68
+#: SaveHistoryTask.cpp:70
 #, fuzzy, kde-format
 msgid "Save Output From %1"
 msgstr "Cadw Hanes"
 
-#: SaveHistoryTask.cpp:80
+#: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr ""
 
-#: SaveHistoryTask.cpp:161
+#: SaveHistoryTask.cpp:172
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2192,309 +2192,309 @@ msgstr ""
 msgid "Konsole does not know how to open the bookmark: "
 msgstr ""
 
-#: session/SessionController.cpp:523
+#: session/SessionController.cpp:521
 #, fuzzy, kde-format
 #| msgid "Search string '%1' not found."
 msgid "Search for '%1' with"
 msgstr "Ni ganfuwyd y llinyn chwilio '%1'."
 
-#: session/SessionController.cpp:539
+#: session/SessionController.cpp:537
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr ""
 
-#: session/SessionController.cpp:653
+#: session/SessionController.cpp:651
 #, fuzzy, kde-format
 msgid "&Close Session"
 msgstr "Ca&u Sesiwn"
 
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:658
 #, kde-format
 msgid "Open File Manager"
 msgstr ""
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:670
 #, fuzzy, kde-format
 msgid "Copy"
 msgstr "&Pen"
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
 msgstr ""
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:682
 #, kde-format
 msgid "Copy user input"
 msgstr ""
 
-#: session/SessionController.cpp:690
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy command output"
 msgstr ""
 
-#: session/SessionController.cpp:705
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "Gludo'r Dewisiad"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr ""
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:716
 #, fuzzy, kde-format
 #| msgid "Se&lect..."
 msgid "&Select All"
 msgstr "De&wis..."
 
-#: session/SessionController.cpp:722
+#: session/SessionController.cpp:720
 #, fuzzy, kde-format
 #| msgid "Se&lect..."
 msgid "Select &Mode"
 msgstr "De&wis..."
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:725
 #, fuzzy, kde-format
 #| msgid "Se&lect..."
 msgid "Select &Line"
 msgstr "De&wis..."
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:728
 #, fuzzy, kde-format
 msgid "Save Output &As..."
 msgstr "Cadw Hanes"
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Argraffu'r Sgrîn..."
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:738
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Adjust Scrollback..."
 msgstr "Cadw &Proffil Sesiwn..."
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:742
 #, fuzzy, kde-format
 #| msgid "Do not display scrollbar"
 msgid "Clear Scrollback"
 msgstr "Peidio â dangos bar sgrolio"
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:746
 #, fuzzy, kde-format
 #| msgid "Clear &History"
 msgid "Clear Scrollback and Reset"
 msgstr "Clirio'r &Hanes"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:755
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Switch Profile"
 msgstr "Cadw &Proffil Sesiwn..."
 
-#: session/SessionController.cpp:786
+#: session/SessionController.cpp:784
 #, fuzzy, kde-format
 #| msgid "&Encoding"
 msgid "Set &Encoding"
 msgstr "A&mgodiad"
 
-#: session/SessionController.cpp:813
+#: session/SessionController.cpp:811
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr ""
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:819
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr ""
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, fuzzy, kde-format
 #| msgid "&Terminate Task"
 msgid "&Configure or Rename Tab..."
 msgstr "&Terfynu Tasg"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:836
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr ""
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:843
 #, fuzzy, kde-format
 #| msgid "&Terminate Task"
 msgid "&Select Tabs..."
 msgstr "&Terfynu Tasg"
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:849
 #, fuzzy, kde-format
 #| msgid "N&one"
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Dim"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:857
 #, kde-format
 msgid "Copy Input To"
 msgstr ""
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:864
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Fyny-lwytho â &ZModem..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Archwilio am &Weithgarwch"
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Archwilio am &Dawelwch"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:881
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "Archwilio am &Weithgarwch"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Cynyddu Maint yr Wynebfath"
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:896
 #, fuzzy, kde-format
 #| msgid "&Shrink Font"
 msgid "Shrink Font"
 msgstr "&Lleihau Wynebfath"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Reset Font Size"
 msgstr ""
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:906
 #, fuzzy, kde-format
 #| msgid "&Send Signal"
 msgid "Send Signal"
 msgstr "Anfon &Arwydd"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Seibio Tasg"
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "&Continue Task"
 msgstr "Ail&ddechrau Tasg"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Hangup"
 msgstr "&Rhoi Pen ar Dasg"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Ymyrru Tasg"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:930
 #, fuzzy, kde-format
 #| msgid "&Terminate Task"
 msgid "&Terminate Task"
 msgstr "&Terfynu Tasg"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Lladd Tasg"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "User Signal &1"
 msgstr "Arwydd Defnyddiwr &1"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &2"
 msgstr "Arwydd Defnyddiwr &2"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:962
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Create New Profile..."
 msgstr "Cadw &Proffil Sesiwn..."
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Edit Current Profile..."
 msgstr "Cadw &Proffil Sesiwn..."
 
-#: session/SessionController.cpp:1083
+#: session/SessionController.cpp:1081
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1085
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
+#: session/SessionController.cpp:1096 session/SessionController.cpp:1139
 #, kde-format
 msgid "Confirm Close"
 msgstr ""
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1097
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Ca&u Sesiwn"
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1124
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1128
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1142
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1982
+#: session/SessionController.cpp:1984
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2051
 #, fuzzy, kde-format
 #| msgid "&ZModem Upload..."
 msgid "Save ZModem Download to..."
 msgstr "Fyny-lwytho â &ZModem..."
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2061
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2509,7 +2509,7 @@ msgstr ""
 "ZModem addas ar y cysawd.\n"
 "<p>Efallai hoffech osod y pecyn 'rzsz' neu'r un 'lrzsz'.\n"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2071
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2518,7 +2518,7 @@ msgid ""
 msgstr ""
 "<p>Mae trosglwyddiad ffeil ZModem ar waith yn barod yn y sesiwn cyfredol."
 
-#: session/SessionController.cpp:2079
+#: session/SessionController.cpp:2081
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2530,7 +2530,7 @@ msgstr ""
 "<p>Ni ganfuwyd meddalwedd ZModem addas ar y cysawd.\n"
 "<p>Efallai hoffech osod y pecyn 'rzsz' neu'r un 'lrzsz'.\n"
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2086
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"
@@ -3317,12 +3317,12 @@ msgstr ""
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2982
+#: terminalDisplay/TerminalDisplay.cpp:2985
 #, fuzzy, kde-format
 msgid "Change &Directory To"
 msgstr "Newid cyfeiriadur gwaith y konsole yn 'gyf'"
 
-#: terminalDisplay/TerminalDisplay.cpp:3015
+#: terminalDisplay/TerminalDisplay.cpp:3018
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
@@ -3588,7 +3588,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2354
+#: Vt102Emulation.cpp:2348
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4273,27 +4273,27 @@ msgstr[1] ""
 msgid "Select Initial Directory"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1237
+#: widgets/EditProfileDialog.cpp:1240
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1416
+#: widgets/EditProfileDialog.cpp:1419
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1425
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1813
+#: widgets/EditProfileDialog.cpp:1816
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4310,7 +4310,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1826
+#: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

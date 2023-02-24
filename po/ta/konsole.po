@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-22 01:02+0000\n"
+"POT-Creation-Date: 2023-02-24 01:02+0000\n"
 "PO-Revision-Date: 2023-01-31 19:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -86,7 +86,7 @@ msgid "S&crollback"
 msgstr "&முந்தைய உரையை காட்டுவது"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:70
+#: ../desktop/sessionui.rc:71
 #, kde-format
 msgid "Session Toolbar"
 msgstr "அமர்வு கருவிப்பட்டை"
@@ -442,31 +442,31 @@ msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "பெயரில்லா நிறத்திட்டம்"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
 msgstr "பெயர்"
 
-#: colorscheme/ColorSchemeEditor.cpp:111
+#: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
 msgstr "நிறம்"
 
-#: colorscheme/ColorSchemeEditor.cpp:112
+#: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
 msgstr "பகட்டான நிறங்கள்"
 
-#: colorscheme/ColorSchemeEditor.cpp:113
+#: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
 msgstr "மங்கலான நிறங்கள்"
 
-#: colorscheme/ColorSchemeEditor.cpp:138
+#: colorscheme/ColorSchemeEditor.cpp:137
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -476,43 +476,43 @@ msgstr ""
 "ஒளிபுகும் சாளரங்களை உங்கள் பணிமேடை ஆதரிப்பதுபோல் தெரியாத‍தால், பின்புலத்தின் "
 "ஒளிபுகுமைக்கான விருப்பத்தேர்வு பொருட்படுத்தப்படாது."
 
-#: colorscheme/ColorSchemeEditor.cpp:189
+#: colorscheme/ColorSchemeEditor.cpp:188
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "பின்புல படத்தை தேர்ந்தெடுத்தல்"
 
-#: colorscheme/ColorSchemeEditor.cpp:191
+#: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "ஆதரிக்கப்படும் படங்கள்"
 
-#: colorscheme/ColorSchemeEditor.cpp:335
+#: colorscheme/ColorSchemeEditor.cpp:334
 #, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "புதிய நிறத்திட்டம்"
 
-#: colorscheme/ColorSchemeEditor.cpp:338
+#: colorscheme/ColorSchemeEditor.cpp:337
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "நிறத்திட்டத்தை திருத்துவது"
 
-#: colorscheme/ColorSchemeEditor.cpp:384
+#: colorscheme/ColorSchemeEditor.cpp:383
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
 msgstr "நிறத்தை தேர்ந்தெடுக்க கிளிக் செய்யுங்கள்"
 
-#: colorscheme/ColorSchemeEditor.cpp:389
+#: colorscheme/ColorSchemeEditor.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
 msgstr "பகட்டான நிறத்தை தேர்ந்தெடுக்க கிளிக் செய்யுங்கள்"
 
-#: colorscheme/ColorSchemeEditor.cpp:394
+#: colorscheme/ColorSchemeEditor.cpp:393
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
@@ -683,7 +683,7 @@ msgstr "நெடுக்கான பற்றுக்கோடு:"
 msgid "Top"
 msgstr "மேலே"
 
-#: colorscheme/ColorSchemeViewDelegate.cpp:51
+#: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
 msgstr "AaZz09..."
@@ -1938,17 +1938,17 @@ msgstr "சுருக்குவழியை மாற்ற இரட்ட�
 msgid "Tab Properties"
 msgstr "கீற்றுப் பண்புகள்"
 
-#: SaveHistoryTask.cpp:68
+#: SaveHistoryTask.cpp:70
 #, kde-format
 msgid "Save Output From %1"
 msgstr "%1 என்பதிலிருந்து வெளியீட்டை சேமி"
 
-#: SaveHistoryTask.cpp:80
+#: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "முறையற்ற முகவரியாய் %1 உள்ளதால், வெளியீட்டை சேமிக்க முடியவில்லை."
 
-#: SaveHistoryTask.cpp:161
+#: SaveHistoryTask.cpp:172
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2135,235 +2135,235 @@ msgstr "'%2' என்ற அமர்வில் '%1' என்ற பணி �
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "இந்நினைவுக்குறியை எப்படி திறப்பதென கான்சோலுக்கு தெரியவில்லை: "
 
-#: session/SessionController.cpp:523
+#: session/SessionController.cpp:521
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "'%1' என்பதை இதைக்கொண்டு தேடு"
 
-#: session/SessionController.cpp:539
+#: session/SessionController.cpp:537
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "இணைய சுருக்குவழிகளை அமை..."
 
-#: session/SessionController.cpp:653
+#: session/SessionController.cpp:651
 #, kde-format
 msgid "&Close Session"
 msgstr "&அமர்வை மூடு"
 
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:658
 #, kde-format
 msgid "Open File Manager"
 msgstr "கோப்பு உலாவியை திற"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:670
 #, kde-format
 msgid "Copy"
 msgstr "நகலெடு"
 
-#: session/SessionController.cpp:678
+#: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
 msgstr "prompt-ஐத் தவிர அனைத்தையும் நகலெடு"
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:682
 #, kde-format
 msgid "Copy user input"
 msgstr "பயனரின் உள்ளீட்டை நகலெடு"
 
-#: session/SessionController.cpp:690
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy command output"
 msgstr "கட்டளையின் வெளியீட்டை நகலெடு"
 
-#: session/SessionController.cpp:705
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "தேர்வை ஒட்டு"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr "இணையத்தேடல்"
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:716
 #, kde-format
 msgid "&Select All"
 msgstr "&அனைத்தையும் தேர்ந்தெடு"
 
-#: session/SessionController.cpp:722
+#: session/SessionController.cpp:720
 #, kde-format
 msgid "Select &Mode"
 msgstr "&தேர்வுப் பயன்முறை"
 
-#: session/SessionController.cpp:727
+#: session/SessionController.cpp:725
 #, kde-format
 msgid "Select &Line"
 msgstr "&வரியை தேர்ந்தெடு"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Save Output &As..."
 msgstr "வெளியீட்டை &இவ்வாறு சேமி…"
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&திரையை அச்சிடு…"
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "முந்தைய உரை காட்டப்படுவதை மாற்று..."
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "முந்தைய உரையை நீக்கு"
 
-#: session/SessionController.cpp:748
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "முந்தைய உரையை நீக்கி முனையத்தை மீட்டமை"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Switch Profile"
 msgstr "பயன்முறையை மாற்று"
 
-#: session/SessionController.cpp:786
+#: session/SessionController.cpp:784
 #, kde-format
 msgid "Set &Encoding"
 msgstr "எழுத்துருவாக்கத்தை &அமை"
 
-#: session/SessionController.cpp:813
+#: session/SessionController.cpp:811
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "சுட்டியின் இருப்பிடத்தை நிரல்கள் அறியவிடு"
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:819
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "படித்தல் மட்டும்"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&கீற்றை அமை அல்லது அதற்கு மறுபெயரிடு…"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:836
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&தற்போதைய சாளரத்திலுள்ள அனைத்து கீற்றுகளும்"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:843
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&கீற்றுகளை தேர்ந்தெடு…"
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:849
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&ஏதுமில்லை"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:857
 #, kde-format
 msgid "Copy Input To"
 msgstr "உள்ளீட்டை நகலெடுக்க வேண்டிய இடம்"
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:864
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem பதிவேற்றம்..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "&செயல்பாட்டிற்காக கண்காணி"
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&அமைதிக்காக கண்காணி"
 
-#: session/SessionController.cpp:883
+#: session/SessionController.cpp:881
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "&பணி முடிவடைவதற்காக கண்காணி"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "Enlarge Font"
 msgstr "எழுத்துருவை பெரிதாக்கு"
 
-#: session/SessionController.cpp:898
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Shrink Font"
 msgstr "எழுத்துருவை சிறிதாக்கு"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Reset Font Size"
 msgstr "எழுத்துருவின் அளவை மீட்டமை"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Send Signal"
 msgstr "சமிக்ஞை அனுப்பு"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&பணியை இடைநிறுத்து"
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "&Continue Task"
 msgstr "&பணியைத் தொடர்"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Hangup"
 msgstr "&தொடர்பைத் துண்டி"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&பணியில் குறுக்கிடு"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&பணியை முடி"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Kill Task"
 msgstr "&பணியை கட்டாயமாக முடி"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "User Signal &1"
 msgstr "பயனர் சமிக்ஞை &1"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &2"
 msgstr "பயனர் சமிக்ஞை &2"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:962
 #, kde-format
 msgid "Create New Profile..."
 msgstr "புதிய பயன்முறையை உருவாக்கு…"
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "தற்போதைய பயன்முறையை திருத்து…"
 
-#: session/SessionController.cpp:1083
+#: session/SessionController.cpp:1081
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2371,7 +2371,7 @@ msgid ""
 msgstr ""
 "இவ்வமர்வில் ஓர் நிரல் இயங்கிக் கொண்டிருக்கிறது. உறுதியாக அதை மூட விரும்புகிறீர்களா?"
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1085
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2379,18 +2379,18 @@ msgid ""
 msgstr ""
 "இவ்வமர்வில் '%1' என்ற நிரல் இயங்கிக் கொண்டிருக்கிறது. உறுதியாக அதை மூட விரும்புகிறீர்களா?"
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1141
+#: session/SessionController.cpp:1096 session/SessionController.cpp:1139
 #, kde-format
 msgid "Confirm Close"
 msgstr "மூடுவதை உறுதிசெய்யுங்கள்"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1097
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "நிரலை மூடு"
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1124
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2398,7 +2398,7 @@ msgid ""
 msgstr ""
 "இவ்வமர்விலுள்ள ஓர் நிரல் வெளியேற மறுக்கிறது. அதை கட்டாயப்படுத்தி முடிவடைய வைக்கலாமா?"
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1128
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2407,23 +2407,23 @@ msgstr ""
 "இவ்வமர்விலுள்ள '%1' என்ற நிரல் வெளியேற மறுக்கிறது. அதை கட்டாயப்படுத்தி முடிவடைய "
 "வைக்கலாமா?"
 
-#: session/SessionController.cpp:1142
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "நிரலை கட்டாயப்படுத்தி மூடு"
 
-#: session/SessionController.cpp:1982
+#: session/SessionController.cpp:1984
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "தற்போதைய அடைவை இதனால் திற"
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2051
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "&ZModem பதிவிறக்கத்தை இங்கு சேமி…"
 
-#: session/SessionController.cpp:2059
+#: session/SessionController.cpp:2061
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2438,7 +2438,7 @@ msgstr ""
 "மென்பொருள் அமைப்பில் இல்லை.\n"
 "<p> 'rzsz' அல்லது 'lrzsz' தொகுப்பை வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2069
+#: session/SessionController.cpp:2071
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2446,7 +2446,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<பி>நடப்பு அமர்வில் ஏற்கனவே உள்ள Z மோடம் கோப்பு இடமாற்றம் நடைமுறையில் உள்ளது."
 
-#: session/SessionController.cpp:2079
+#: session/SessionController.cpp:2081
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2458,7 +2458,7 @@ msgstr ""
 "<p>பொருத்தமான Z மோடம் மென்பொருள் அமைப்பு கிடைக்கவில்லை.\n"
 " <p>'rzsz' அல்லது 'lrzsz '  தொகுப்பு வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2086
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"
@@ -3243,12 +3243,12 @@ msgstr ""
 msgid "This terminal is read-only."
 msgstr "இம்முனையம் படிக்க மட்டும் கூடியது."
 
-#: terminalDisplay/TerminalDisplay.cpp:2982
+#: terminalDisplay/TerminalDisplay.cpp:2985
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&இந்த அடைவிற்கு மாறு"
 
-#: terminalDisplay/TerminalDisplay.cpp:3015
+#: terminalDisplay/TerminalDisplay.cpp:3018
 #, kde-format
 msgid "&Paste Location"
 msgstr "&இருப்பிடத்தை ஒட்டு"
@@ -3499,7 +3499,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "கீற்றுகளின் தளவமைப்பை ஏற்றுல்"
 
-#: Vt102Emulation.cpp:2354
+#: Vt102Emulation.cpp:2348
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4175,13 +4175,13 @@ msgstr[1] " நொடிகள்"
 msgid "Select Initial Directory"
 msgstr "முதலடைவை தேர்வு செய்வது"
 
-#: widgets/EditProfileDialog.cpp:1237
+#: widgets/EditProfileDialog.cpp:1240
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> என்ற திட்டத்தை ஏற்ற முடியவில்லை."
 
-#: widgets/EditProfileDialog.cpp:1416
+#: widgets/EditProfileDialog.cpp:1419
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4190,7 +4190,7 @@ msgstr ""
 "இந்நிறத்திட்டம் ஒளிபுகும் பின்பலத்தை பயன்படுத்துகிறது. அதை உங்கள் பணிமேடை ஆதரிப்பதுபோல் "
 "தெரியவில்லை."
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1425
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4199,7 +4199,7 @@ msgstr ""
 "பணிமேடை அசைவூட்டங்கள் இயக்கப்படுமுன் கான்சோல் துவக்கப்பட்டது. ஒளிபுகும் பின்புலத்தைப் பார்க்க "
 "நீங்கள் கான்சோலை மீள்துவக்க வேண்டும்."
 
-#: widgets/EditProfileDialog.cpp:1813
+#: widgets/EditProfileDialog.cpp:1816
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4226,7 +4226,7 @@ msgstr ""
 "PATH அல்லது LINE இக்கட்டளையில் இல்லாத பட்சத்தில், இத்தேர்வு பொருட்படுத்தப்படாது; "
 "இயல்பிருப்பு உரைத்திருத்தியிலேயே உரைக்கோப்பு திறக்கப்படும்."
 
-#: widgets/EditProfileDialog.cpp:1826
+#: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "உரைத்திருத்திக்கான தனிப்பயன் கட்டளை"
