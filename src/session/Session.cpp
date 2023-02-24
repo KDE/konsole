@@ -156,7 +156,9 @@ void Session::openTeletype(int fd, bool runShell)
 #ifndef Q_OS_WIN
     connect(_shellProcess, QOverload<int, QProcess::ExitStatus>::of(&Konsole::Pty::finished), this, &Konsole::Session::done);
 #else
-    // FIXME: Windows!
+    connect(_shellProcess, &Konsole::Pty::finished, this, [this] {
+        done({}, {});
+    });
 #endif
 
     // emulator size
@@ -210,7 +212,7 @@ void Session::setDarkBackground(bool darkBackground)
 bool Session::isRunning() const
 {
 #ifdef Q_OS_WIN
-    return false;
+    return (_shellProcess != nullptr) && _shellProcess->isRunning();
 #else
     return (_shellProcess != nullptr) && (_shellProcess->state() == QProcess::Running);
 #endif
@@ -541,17 +543,12 @@ void Session::run()
 #endif
 
 #else // Q_OS_WIN
-    // FIXME
-    int result = -1;
+    int result = _shellProcess->start(exec, arguments, _initialWorkingDir.isEmpty() ? QDir::currentPath() : _initialWorkingDir, _environment);
 #endif
 
     if (result < 0) {
         terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(QLatin1String(" "))));
-#ifndef Q_OS_WIN
         terminalWarning(_shellProcess->errorString());
-#else
-        // FIXME windows
-#endif
         return;
     }
 
@@ -909,7 +906,7 @@ void Session::close()
 bool Session::closeInNormalWay()
 {
 #ifdef Q_OS_WIN
-    // FIXME windows impl here
+    _shellProcess->closePty();
     return true;
 #else
     _autoClose = true;
@@ -945,8 +942,8 @@ bool Session::closeInForceWay()
     _closePerUserRequest = true;
 
 #ifdef Q_OS_WIN
-    // FIXME windows impl here
-    return false;
+    _shellProcess->kill();
+    return true;
 #else
     if (kill(SIGKILL)) {
         return true;
@@ -1017,7 +1014,8 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
     // This slot should be triggered only one time
     disconnect(_shellProcess, QOverload<int, QProcess::ExitStatus>::of(&Konsole::Pty::finished), this, &Konsole::Session::done);
 #else
-    // FIXME Windows
+    disconnect(_shellProcess, &Konsole::Pty::finished, this, nullptr);
+    return;
 #endif
 
     if (!_autoClose) {
@@ -1654,11 +1652,7 @@ void Session::setPreferredSize(const QSize &size)
 
 int Session::processId() const
 {
-#ifndef Q_OS_WIN
     return _shellProcess->processId();
-#else
-    return 0;
-#endif
 }
 
 void Session::setTitle(int role, const QString &title)

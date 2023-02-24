@@ -11,6 +11,7 @@
 #include "Profile.h"
 
 // Qt
+#include <QDir>
 #include <QFileInfo>
 #include <QTextCodec>
 
@@ -179,6 +180,35 @@ static const QString BUILTIN_MAGIC_PATH = QStringLiteral("FALLBACK/");
 // Note: regular profiles created in earlier versions of Konsole may have this name too.
 static const char BUILTIN_UNTRANSLATED_NAME_CHAR[] = "Built-in";
 
+#ifdef Q_OS_WIN
+static QString checkFile(const QStringList &dirList, const QString &filePath)
+{
+    for (const QString &root : dirList) {
+        QFileInfo info(root, filePath);
+        if (info.exists()) {
+            return QDir::toNativeSeparators(info.filePath());
+        }
+    }
+    return QString();
+}
+
+static QString GetWindowPowerShell()
+{
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    QStringList dirList;
+    dirList << env.value(QStringLiteral("windir"), QStringLiteral("C:\\Windows"));
+    return checkFile(dirList, QStringLiteral("System32\\WindowsPowerShell\\v1.0\\powershell.exe"));
+}
+
+static QString GetWindowsShell()
+{
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    QString windir = env.value(QStringLiteral("windir"), QStringLiteral("C:\\Windows"));
+    QFileInfo info(windir, QStringLiteral("System32\\cmd.exe"));
+    return QDir::toNativeSeparators(info.filePath());
+}
+#endif
+
 static QString defaultShell()
 {
 #ifndef Q_OS_WIN
@@ -206,9 +236,12 @@ static QString defaultShell()
 #else
     return QString::fromUtf8(qgetenv("SHELL"));
 #endif
+
 #else // Q_OS_WIN
-    // TODO Windows
-    return QString();
+    auto shell = GetWindowsShell();
+    return shell;
+    // FIXME: Powershell doesn't work
+    // auto shell = GetWindowPowerShell();
 #endif // Q_OS_WIN
 }
 

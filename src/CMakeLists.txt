@@ -128,6 +128,9 @@ add_subdirectory(keyboardtranslator)
 add_subdirectory(characters)
 add_subdirectory(decoders)
 add_subdirectory(plugins)
+if (WIN32)
+    set(ptyqt_srcs ptyqt/iptyprocess.cpp ptyqt/conptyprocess.cpp)
+endif()
 
 set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         AppColorSchemeChooser.cpp
@@ -208,6 +211,8 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         profile/ProfileWriter.cpp
                         profile/ProfileManager.cpp
                         profile/ProfileModel.cpp
+
+                        ${ptyqt_srcs} # windows conpty backend
 
                         ${sessionadaptors_SRCS}
                         session/Session.cpp

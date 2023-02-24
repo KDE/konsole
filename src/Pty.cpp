@@ -345,8 +345,9 @@ void Pty::setupChildProcess()
 
 #else
 
+#include "ptyqt/conptyprocess.h"
+
 // Windows backend
-// FIXME: implementation needed
 
 using Konsole::Pty;
 
@@ -360,6 +361,12 @@ Pty::Pty(int masterFd, QObject *aParent)
 {
     Q_UNUSED(masterFd)
 
+    m_proc = new ConPtyProcess();
+    if (!m_proc->isAvailable()) {
+        delete m_proc;
+        m_proc = nullptr;
+    }
+
     _windowColumns = 0;
     _windowLines = 0;
     _windowWidth = 0;
@@ -369,29 +376,38 @@ Pty::Pty(int masterFd, QObject *aParent)
     _utf8 = true;
 
     setEraseChar(_eraseChar);
-    setFlowControlEnabled(_xonXoff);
-    setUtf8Mode(_utf8);
-
-    setWindowSize(_windowColumns, _windowLines, _windowWidth, _windowHeight);
 }
 
 Pty::~Pty() = default;
 
-void Pty::sendData(const QByteArray & /*data*/)
+void Pty::sendData(const QByteArray &data)
 {
+    if (m_proc) {
+        m_proc->write(data.constData(), data.length());
+    }
 }
 
 void Pty::dataReceived()
 {
+    if (m_proc) {
+        auto data = m_proc->readAll();
+        Q_EMIT receivedData(data.constData(), data.length());
+    }
 }
 
-void Pty::setWindowSize(int, int, int, int)
+void Pty::setWindowSize(int lines, int cols, int, int)
 {
+    if (m_proc && isRunning())
+        m_proc->resize(cols, lines);
 }
 
 QSize Pty::windowSize() const
 {
-    return {_windowColumns, _windowLines};
+    if (!m_proc) {
+        return {};
+    }
+    auto s = m_proc->size();
+    return QSize(s.first, s.second);
 }
 
 QSize Pty::pixelSize() const
@@ -431,9 +447,20 @@ void Pty::addEnvironmentVariables(const QStringList & /*environmentVariables*/)
 {
 }
 
-int Pty::start(const QString & /*programName*/, const QStringList & /*programArguments*/, const QStringList & /*environmentList*/)
+int Pty::start(const QString &program, const QStringList &arguments, const QString &workingDir, const QStringList &environment)
 {
-    return -1;
+    if (!m_proc || !m_proc->isAvailable()) {
+        return -1;
+    }
+    bool res = m_proc->startProcess(program, arguments, workingDir, environment, 80, 24);
+    if (!res) {
+        return -1;
+    } else {
+        auto n = m_proc->notifier();
+        connect(n, &QIODevice::readyRead, this, &Pty::dataReceived);
+        connect(m_proc, &IPtyProcess::exited, this, &Pty::finished);
+    }
+    return 0;
 }
 
 void Pty::setWriteable(bool)
@@ -442,6 +469,9 @@ void Pty::setWriteable(bool)
 
 void Pty::closePty()
 {
+    if (m_proc) {
+        m_proc->kill();
+    }
 }
 
 int Pty::foregroundProcessGroup() const

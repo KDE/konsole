@@ -18,8 +18,9 @@
 // KDE
 #include <KPtyProcess>
 #else
-// FIXME windows stuff here
 #include <QObject>
+
+#include "ptyqt/iptyprocess.h"
 #endif
 
 namespace Konsole
@@ -69,6 +70,7 @@ public:
 
     ~Pty() override;
 
+#ifndef Q_OS_WIN
     /**
      * Starts the terminal process.
      *
@@ -82,6 +84,22 @@ public:
      * should include an assignment for the TERM environment variable.
      */
     int start(const QString &program, const QStringList &arguments, const QStringList &environment);
+#else
+    /**
+     * Starts the terminal process.
+     *
+     * Returns 0 if the process was started successfully or non-zero
+     * otherwise.
+     *
+     * @param program Path to the program to start
+     * @param arguments Arguments to pass to the program being started
+     * @param workingDir initial working directory
+     * @param environment A list of key=value pairs which will be added
+     * to the environment for the new process.  At the very least this
+     * should include an assignment for the TERM environment variable.
+     */
+    int start(const QString &program, const QStringList &arguments, const QString &workingDir, const QStringList &environment);
+#endif
 
     /** Control whether the pty device is writeable by group members. */
     void setWriteable(bool writeable);
@@ -137,6 +155,38 @@ public:
      */
     void closePty();
 
+#ifdef Q_OS_WIN
+    int processId() const
+    {
+        if (m_proc && m_proc->isAvailable()) {
+            return m_proc->pid();
+        }
+        return 0;
+    }
+
+    bool isRunning() const
+    {
+        return processId() > 0;
+    }
+
+    QString errorString() const
+    {
+        if (m_proc) {
+            return m_proc->lastError();
+        }
+        return QStringLiteral("Conhost failed to start");
+    }
+
+    void kill()
+    {
+        if (m_proc) {
+            m_proc->kill();
+        }
+    }
+
+    Q_SIGNAL void finished();
+#endif
+
 public Q_SLOTS:
     /**
      * Put the pty into UTF-8 mode on systems which support it.
@@ -188,6 +238,9 @@ private:
     char _eraseChar;
     bool _xonXoff;
     bool _utf8;
+#ifdef Q_OS_WIN
+    IPtyProcess *m_proc = nullptr;
+#endif
 };
 }
 
