@@ -915,6 +915,7 @@ void SessionController::setupExtraActions()
     action->setText(i18n("Reset Font Size"));
     collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_0);
 
+#ifndef Q_OS_WIN
     // Send signal
     auto *sendSignalActions = collection->add<KSelectAction>(QStringLiteral("send-signal"));
     sendSignalActions->setText(i18n("Send Signal"));
@@ -959,6 +960,7 @@ void SessionController::setupExtraActions()
     action->setText(i18n("User Signal &2") + QStringLiteral(" (USR2)"));
     action->setData(SIGUSR2);
     sendSignalActions->addAction(action);
+#endif
 }
 
 void SessionController::switchProfile(const Profile::Ptr &profile)

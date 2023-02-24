@@ -10,7 +10,6 @@
 
 // Standard
 #include <cstdio>
-#include <unistd.h>
 
 // Qt
 #include <QBuffer>

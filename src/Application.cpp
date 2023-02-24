@@ -18,7 +18,9 @@
 
 // KDE
 #include <KActionCollection>
+#ifndef Q_OS_WIN
 #include <KGlobalAccel>
+#endif
 #include <KLocalizedString>
 
 // Konsole
@@ -505,13 +507,14 @@ void Application::startBackgroundMode(MainWindow *window)
         return;
     }
 
+#ifndef Q_OS_WIN
     KActionCollection *collection = window->actionCollection();
     QAction *action = collection->addAction(QStringLiteral("toggle-background-window"));
     action->setObjectName(QStringLiteral("Konsole Background Mode"));
     action->setText(i18nc("@item", "Toggle Background Window"));
     KGlobalAccel::self()->setGlobalShortcut(action, QKeySequence(Konsole::ACCEL | Qt::Key_F12));
     connect(action, &QAction::triggered, this, &Application::toggleBackgroundInstance);
-
+#endif
     _backgroundInstance = window;
 }
 

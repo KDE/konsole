@@ -7,6 +7,7 @@
 // Own
 #include "UnixProcessInfo.h"
 
+#ifndef Q_OS_WIN
 // Unix
 #include <arpa/inet.h>
 #include <cerrno>
@@ -83,3 +84,5 @@ void UnixProcessInfo::readUserName()
     }
     delete[] getpwBuffer;
 }
+
+#endif // Q_OS_WIN

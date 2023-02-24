@@ -11,11 +11,16 @@
 // Qt
 #include <QSize>
 
-// KDE
-#include <KPtyProcess>
-
 // Konsole
 #include "konsoleprivate_export.h"
+
+#ifndef Q_OS_WIN
+// KDE
+#include <KPtyProcess>
+#else
+// FIXME windows stuff here
+#include <QObject>
+#endif
 
 namespace Konsole
 {
@@ -32,7 +37,15 @@ namespace Konsole
  * To start the terminal process, call the start() method
  * with the program name and appropriate arguments.
  */
-class KONSOLEPRIVATE_EXPORT Pty : public KPtyProcess
+#ifdef Q_OS_WIN
+#define _k_override_
+#define ParentClass QObject
+#else
+#define _k_override_ override
+#define ParentClass KPtyProcess
+#endif
+
+class KONSOLEPRIVATE_EXPORT Pty : public ParentClass
 {
     Q_OBJECT
 
@@ -151,9 +164,11 @@ Q_SIGNALS:
 protected:
     // TODO: remove this; the method is removed from QProcess in Qt6
     // instead use setChildProcessModifier() in the constructor
+#ifndef Q_OS_WIN
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    void setupChildProcess() override;
-#endif
+    void setupChildProcess() _k_override_;
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#endif // Q_OS_WIN
 
 private Q_SLOTS:
     // called when data is received from the terminal process
@@ -175,5 +190,7 @@ private:
     bool _utf8;
 };
 }
+
+#undef ParentClass
 
 #endif // PTY_H

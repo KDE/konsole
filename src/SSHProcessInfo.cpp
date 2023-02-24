@@ -8,6 +8,7 @@
 #include "SSHProcessInfo.h"
 
 // Unix
+#ifndef Q_OS_WIN
 #include <arpa/inet.h>
 #include <cerrno>
 #include <netinet/in.h>
@@ -15,6 +16,7 @@
 #include <sys/param.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#endif // Q_OS_WIN
 
 // Qt
 #include <QDebug>
@@ -177,6 +179,9 @@ QString SSHProcessInfo::format(const QString &input) const
         output.replace(QLatin1String("%U"), _user + QLatin1Char('@'));
     }
 
+#ifdef Q_OS_WIN
+    // TODO
+#else
     // test whether host is an ip address
     // in which case 'short host' and 'full host'
     // markers in the input string are replaced with
@@ -196,6 +201,6 @@ QString SSHProcessInfo::format(const QString &input) const
     }
     output.replace(QLatin1String("%H"), fullHost);
     output.replace(QLatin1String("%c"), _command);
-
+#endif
     return output;
 }

@@ -9,14 +9,16 @@
 
 #include "konsoledebug.h"
 
+// Qt
+#include <QStringList>
+#include <qplatformdefs.h>
+
+#ifndef Q_OS_WIN
+
 // System
 #include <csignal>
 #include <sys/ioctl.h> //ioctl() and TIOCSWINSZ
 #include <termios.h>
-
-// Qt
-#include <QStringList>
-#include <qplatformdefs.h>
 
 // KDE
 #include <KPtyDevice>
@@ -339,4 +341,112 @@ void Pty::setupChildProcess()
         sigaction(signal, &action, nullptr);
     }
 }
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+
+#else
+
+// Windows backend
+// FIXME: implementation needed
+
+using Konsole::Pty;
+
+Pty::Pty(QObject *aParent)
+    : Pty(-1, aParent)
+{
+}
+
+Pty::Pty(int masterFd, QObject *aParent)
+    : QObject(aParent)
+{
+    Q_UNUSED(masterFd)
+
+    _windowColumns = 0;
+    _windowLines = 0;
+    _windowWidth = 0;
+    _windowHeight = 0;
+    _eraseChar = 0;
+    _xonXoff = true;
+    _utf8 = true;
+
+    setEraseChar(_eraseChar);
+    setFlowControlEnabled(_xonXoff);
+    setUtf8Mode(_utf8);
+
+    setWindowSize(_windowColumns, _windowLines, _windowWidth, _windowHeight);
+}
+
+Pty::~Pty() = default;
+
+void Pty::sendData(const QByteArray & /*data*/)
+{
+}
+
+void Pty::dataReceived()
+{
+}
+
+void Pty::setWindowSize(int, int, int, int)
+{
+}
+
+QSize Pty::windowSize() const
+{
+    return {_windowColumns, _windowLines};
+}
+
+QSize Pty::pixelSize() const
+{
+    return QSize();
+}
+
+void Pty::setFlowControlEnabled(bool enable)
+{
+    _xonXoff = enable;
+}
+
+bool Pty::flowControlEnabled() const
+{
+    return false;
+}
+
+void Pty::setUtf8Mode(bool)
+{
+}
+
+void Pty::setEraseChar(char eChar)
+{
+    _eraseChar = eChar;
+}
+
+char Pty::eraseChar() const
+{
+    return _eraseChar;
+}
+
+void Pty::setInitialWorkingDirectory(const QString & /*dir*/)
+{
+}
+
+void Pty::addEnvironmentVariables(const QStringList & /*environmentVariables*/)
+{
+}
+
+int Pty::start(const QString & /*programName*/, const QStringList & /*programArguments*/, const QStringList & /*environmentList*/)
+{
+    return -1;
+}
+
+void Pty::setWriteable(bool)
+{
+}
+
+void Pty::closePty()
+{
+}
+
+int Pty::foregroundProcessGroup() const
+{
+    return 0;
+}
+
 #endif

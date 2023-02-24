@@ -48,7 +48,8 @@ void KonsolePrintManager::printRequest(pPrintContent pContent, QWidget *parent)
 
     dialog->setOptionTabs({options});
     dialog->setWindowTitle(i18n("Print Shell"));
-    QObject::connect(dialog, QOverload<>::of(&QPrintDialog::accepted), options, &Konsole::PrintOptions::saveSettings);
+    // Make MSVC happy by using ultra verbose static_cast :(
+    QObject::connect(dialog, static_cast<void (QPrintDialog::*)()>(&QPrintDialog::accepted), options, &Konsole::PrintOptions::saveSettings);
     if (dialog->exec() != QDialog::Accepted) {
         return;
     }

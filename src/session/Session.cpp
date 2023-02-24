@@ -13,7 +13,10 @@
 // Standard
 #include <csignal>
 #include <cstdlib>
+
+#ifndef Q_OS_WIN
 #include <unistd.h>
+#endif
 
 // Qt
 #include <QApplication>
@@ -28,8 +31,12 @@
 #include <KLocalizedString>
 #include <KNotification>
 #include <KProcess>
+
+#ifndef Q_OS_WIN
 #include <KPtyDevice>
+#endif
 #include <KShell>
+
 #include <kcoreaddons_version.h>
 
 // Konsole
@@ -52,6 +59,7 @@
 #include "terminalDisplay/TerminalFonts.h"
 #include "terminalDisplay/TerminalScrollBar.h"
 
+#ifndef Q_OS_WIN
 // Linux
 #if HAVE_GETPWUID
 #include <pwd.h>
@@ -61,6 +69,7 @@
 #if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
 #include <KSandbox>
 #endif
+#endif // Q_OS_WIN
 
 using namespace Konsole;
 
@@ -144,7 +153,11 @@ void Session::openTeletype(int fd, bool runShell)
     connect(_emulation, &Konsole::Emulation::useUtf8Request, _shellProcess, &Konsole::Pty::setUtf8Mode);
 
     // get notified when the pty process is finished
+#ifndef Q_OS_WIN
     connect(_shellProcess, QOverload<int, QProcess::ExitStatus>::of(&Konsole::Pty::finished), this, &Konsole::Session::done);
+#else
+    // FIXME: Windows!
+#endif
 
     // emulator size
     connect(_emulation, &Konsole::Emulation::imageSizeChanged, this, &Konsole::Session::updateWindowSize);
@@ -196,7 +209,11 @@ void Session::setDarkBackground(bool darkBackground)
 
 bool Session::isRunning() const
 {
+#ifdef Q_OS_WIN
+    return false;
+#else
     return (_shellProcess != nullptr) && (_shellProcess->state() == QProcess::Running);
+#endif
 }
 
 bool Session::hasFocus() const
@@ -481,11 +498,16 @@ void Session::run()
 
     _shellProcess->setFlowControlEnabled(_flowControlEnabled);
     _shellProcess->setEraseChar(_emulation->eraseChar());
+#ifndef Q_OS_WIN
     _shellProcess->setUseUtmp(_addToUtmp);
+#endif
+
+#ifndef Q_OS_WIN
 #if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     if (KSandbox::isFlatpak()) {
         _shellProcess->pty()->setCTtyEnabled(false); // not possibly inside sandbox
     }
+#endif
 #endif
 
     // this is not strictly accurate use of the COLORFGBG variable.  This does not
@@ -505,6 +527,7 @@ void Session::run()
     const QString dbusObject = QStringLiteral("/Sessions/%1").arg(QString::number(_sessionId));
     addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_SESSION=%1").arg(dbusObject));
 
+#ifndef Q_OS_WIN
 #if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     const auto originalEnvironment = _shellProcess->environment();
     _shellProcess->setProgram(exec);
@@ -517,9 +540,18 @@ void Session::run()
     int result = _shellProcess->start(exec, arguments, _environment);
 #endif
 
+#else // Q_OS_WIN
+    // FIXME
+    int result = -1;
+#endif
+
     if (result < 0) {
         terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(QLatin1String(" "))));
+#ifndef Q_OS_WIN
         terminalWarning(_shellProcess->errorString());
+#else
+        // FIXME windows
+#endif
         return;
     }
 
@@ -800,6 +832,7 @@ void Session::refresh()
 
 void Session::sendSignal(int signal)
 {
+#ifndef Q_OS_WIN
     const ProcessInfo *process = getProcessInfo();
     bool ok = false;
     int pid;
@@ -810,6 +843,9 @@ void Session::sendSignal(int signal)
     } else {
         qWarning() << "foreground process id not set, unable to send signal " << signal;
     }
+#else
+    // FIXME: Can we do this on windows?
+#endif
 }
 
 void Session::reportColor(SessionAttributes r, const QColor &c, uint terminator)
@@ -839,6 +875,7 @@ void Session::reportBackgroundColor(const QColor &c, uint terminator)
 
 bool Session::kill(int signal)
 {
+#ifndef Q_OS_WIN
     if (processId() <= 0) {
         return false;
     }
@@ -850,6 +887,9 @@ bool Session::kill(int signal)
     } else {
         return false;
     }
+#else
+    return false;
+#endif
 }
 
 void Session::close()
@@ -868,6 +908,10 @@ void Session::close()
 
 bool Session::closeInNormalWay()
 {
+#ifdef Q_OS_WIN
+    // FIXME windows impl here
+    return true;
+#else
     _autoClose = true;
     _closePerUserRequest = true;
 
@@ -892,6 +936,7 @@ bool Session::closeInNormalWay()
     qWarning() << "Process " << processId() << " did not die with SIGHUP";
     _shellProcess->closePty();
     return (_shellProcess->waitForFinished(1000));
+#endif
 }
 
 bool Session::closeInForceWay()
@@ -899,12 +944,17 @@ bool Session::closeInForceWay()
     _autoClose = true;
     _closePerUserRequest = true;
 
+#ifdef Q_OS_WIN
+    // FIXME windows impl here
+    return false;
+#else
     if (kill(SIGKILL)) {
         return true;
     } else {
         qWarning() << "Process " << processId() << " did not die with SIGKILL";
         return false;
     }
+#endif
 }
 
 void Session::sendTextToTerminal(const QString &text, const QChar &eol) const
@@ -963,8 +1013,12 @@ void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
 
 void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
+#ifndef Q_OS_WIN
     // This slot should be triggered only one time
     disconnect(_shellProcess, QOverload<int, QProcess::ExitStatus>::of(&Konsole::Pty::finished), this, &Konsole::Session::done);
+#else
+    // FIXME Windows
+#endif
 
     if (!_autoClose) {
         _userTitle = i18nc("@info:shell This session is done", "Finished");
@@ -1600,7 +1654,11 @@ void Session::setPreferredSize(const QSize &size)
 
 int Session::processId() const
 {
+#ifndef Q_OS_WIN
     return _shellProcess->processId();
+#else
+    return 0;
+#endif
 }
 
 void Session::setTitle(int role, const QString &title)

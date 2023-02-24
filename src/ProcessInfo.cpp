@@ -14,6 +14,7 @@
 #include "UnixProcessInfo.h"
 
 // Unix
+#ifndef Q_OS_WIN
 #include <arpa/inet.h>
 #include <cerrno>
 #include <netinet/in.h>
@@ -21,6 +22,7 @@
 #include <sys/param.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#endif
 
 // Qt
 #include <QDir>

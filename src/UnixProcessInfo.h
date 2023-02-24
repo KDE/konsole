@@ -11,6 +11,7 @@
 
 namespace Konsole
 {
+#ifndef Q_OS_WIN
 /**
  * Implementation of ProcessInfo for Unix platforms which uses
  * the /proc filesystem
@@ -48,7 +49,7 @@ private:
      */
     virtual bool readArguments(int pid) = 0;
 };
-
+#endif
 }
 
 #endif

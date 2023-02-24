@@ -14,7 +14,9 @@
 
 // System
 #include <cerrno>
+#ifndef Q_OS_WIN
 #include <unistd.h>
+#endif
 
 // Qt
 #include <QDir>
@@ -91,7 +93,11 @@ HistoryFile::HistoryFile()
             // and writing. This guarantees the file won't remain
             // in filesystem after process termination, even when
             // there was a crash.
+#ifndef Q_OS_WIN
             unlink(QFile::encodeName(_tmpFile.fileName()).constData());
+#else
+            // TODO Windows
+#endif
         }
     }
 }

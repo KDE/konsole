@@ -24,11 +24,13 @@
 #include "ProfileGroup.h"
 #include "config-konsole.h"
 
+#ifndef Q_OS_WIN
 #ifdef HAVE_GETPWUID
 #include <pwd.h>
 #include <sys/types.h>
 #include <unistd.h>
-#endif
+#endif // HAVE_GETPWUID
+#endif // Q_OS_WIN
 
 #if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
 #include <KSandbox>
@@ -179,6 +181,7 @@ static const char BUILTIN_UNTRANSLATED_NAME_CHAR[] = "Built-in";
 
 static QString defaultShell()
 {
+#ifndef Q_OS_WIN
 #if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     if (!KSandbox::isFlatpak()) {
         return QString::fromUtf8(qgetenv("SHELL"));
@@ -203,6 +206,10 @@ static QString defaultShell()
 #else
     return QString::fromUtf8(qgetenv("SHELL"));
 #endif
+#else // Q_OS_WIN
+    // TODO Windows
+    return QString();
+#endif // Q_OS_WIN
 }
 
 void Profile::fillTableWithDefaultNames()
