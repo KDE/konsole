@@ -10,7 +10,7 @@
 
 #include <QObject>
 
-#include "konsole_export.h"
+#include "konsoleapp_export.h"
 #include <memory>
 
 namespace Konsole
@@ -20,7 +20,7 @@ class MainWindow;
 
 struct PluginManagerPrivate;
 
-class KONSOLE_EXPORT PluginManager : public QObject
+class KONSOLEAPP_EXPORT PluginManager : public QObject
 {
     Q_OBJECT
 public:

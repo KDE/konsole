@@ -17,13 +17,13 @@
 
 #include <memory>
 
-#include "konsole_export.h"
+#include "konsoleapp_export.h"
 
 namespace Konsole
 {
 class MainWindow;
 
-class KONSOLE_EXPORT IKonsolePlugin : public QObject
+class KONSOLEAPP_EXPORT IKonsolePlugin : public QObject
 {
     Q_OBJECT
 public:

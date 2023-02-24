@@ -21,7 +21,7 @@
 
 #include "pluginsystem/IKonsolePlugin.h"
 
-#include "konsole_export.h"
+#include "konsoleapp_export.h"
 
 #include <vector>
 
@@ -49,7 +49,7 @@ class BookmarkHandler;
  *
  * Do not construct new main windows directly, use Application's newMainWindow() method.
  */
-class KONSOLE_EXPORT MainWindow : public KXmlGuiWindow
+class KONSOLEAPP_EXPORT MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 

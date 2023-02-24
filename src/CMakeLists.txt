@@ -297,6 +297,8 @@ add_library(konsoleapp SHARED Application.cpp
    delegates/ProfileShortcutDelegate.cpp
 )
 
+generate_export_header(konsoleapp BASE_NAME konsoleapp)
+
 target_link_libraries(konsoleapp
   konsoleprivate
   KF5::XmlGui

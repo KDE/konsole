@@ -11,7 +11,7 @@
 #include <QCommandLineParser>
 
 // Konsole
-#include "konsole_export.h"
+#include "konsoleapp_export.h"
 #include "pluginsystem/PluginManager.h"
 #include "profile/Profile.h"
 #include "terminalDisplay/TerminalDisplay.h"
@@ -35,7 +35,7 @@ class Profile;
  * The factory used to create new terminal sessions can be retrieved using
  * the sessionManager() accessor.
  */
-class KONSOLE_EXPORT Application : public QObject
+class KONSOLEAPP_EXPORT Application : public QObject
 {
     Q_OBJECT
 

@@ -19,7 +19,7 @@
 #include <KPageDialog>
 
 // Konsole
-#include "konsoleprivate_export.h"
+#include "konsoleapp_export.h"
 
 class QWidget;
 class KConfigDialogManager;
@@ -32,7 +32,7 @@ class ConfigDialogButtonGroupManager;
 // all pages in QScrollArea. KConfigDialog, when fixed, should
 // be source compatible with this class, so simple class replace
 // should suffice.
-class KONSOLEPRIVATE_EXPORT ConfigurationDialog : public KPageDialog
+class KONSOLEAPP_EXPORT ConfigurationDialog : public KPageDialog
 {
     Q_OBJECT
 
