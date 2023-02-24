@@ -151,13 +151,39 @@ static QString allConnectedScreens()
 }
 
 // Convenience function to get an appropriate config file key under which to
-// save window size, position, or maximization information, copied from KWindowConfig.
-static QString configFileString(const QScreen *screen, const QString &key)
+// save window size, position, or maximization information.
+// Copied from KWindowConfig before https://invent.kde.org/frameworks/kconfig/-/merge_requests/184
+// changed the key format. TODO: use the public function in KWindowConfig for
+// this once it exists.
+static QString configFileStringV1(const QScreen *screen, const QString &key)
 {
     // We include resolution data to also save data on a per-resolution basis
     const QString returnString =
         QStringLiteral("%1 %2 %3x%4 %5")
             .arg(allConnectedScreens(), key, QString::number(screen->geometry().width()), QString::number(screen->geometry().height()), screen->name());
+    return returnString;
+}
+
+// Convenience function to get an appropriate config file key under which to
+// save window size, position, or maximization information.
+// Copied from KWindowConfig as of https://invent.kde.org/frameworks/kconfig/-/merge_requests/184
+// TODO: use the public function in KWindowConfig for this once it exists.
+static QString configFileStringV2(const QScreen *screen, const QString &key)
+{
+    Q_UNUSED(screen);
+    QString returnString;
+    const int numberOfScreens = QGuiApplication::screens().length();
+
+    if (numberOfScreens == 1) {
+        // For single-screen setups, we save data on a per-resolution basis.
+        const QRect screenGeometry = QGuiApplication::primaryScreen()->geometry();
+        returnString = QStringLiteral("%1x%2 screen: %3").arg(QString::number(screenGeometry.width()), QString::number(screenGeometry.height()), key);
+    } else {
+        // For multi-screen setups, we save data based on the number of screens.
+        // Distinguishing individual screens based on their names is unreliable
+        // due to name strings being inherently volatile.
+        returnString = QStringLiteral("%1 screens: %2").arg(QString::number(numberOfScreens), key);
+    }
     return returnString;
 }
 
@@ -169,8 +195,10 @@ bool MainWindow::wasWindowGeometrySaved() const
         return false;
     }
 
-    return cg.hasKey(configFileString(screen(), QStringLiteral("Width"))) || cg.hasKey(configFileString(screen(), QStringLiteral("Height")))
-        || cg.hasKey(configFileString(screen(), QStringLiteral("XPosition"))) || cg.hasKey(configFileString(screen(), QStringLiteral("YPosition")));
+    return cg.hasKey(configFileStringV2(screen(), QStringLiteral("Width"))) || cg.hasKey(configFileStringV2(screen(), QStringLiteral("Height")))
+        || cg.hasKey(configFileStringV2(screen(), QStringLiteral("XPosition"))) || cg.hasKey(configFileStringV2(screen(), QStringLiteral("YPosition")))
+        || cg.hasKey(configFileStringV1(screen(), QStringLiteral("Width"))) || cg.hasKey(configFileStringV1(screen(), QStringLiteral("Height")))
+        || cg.hasKey(configFileStringV1(screen(), QStringLiteral("XPosition"))) || cg.hasKey(configFileStringV1(screen(), QStringLiteral("YPosition")));
 }
 
 void MainWindow::updateUseTransparency()
