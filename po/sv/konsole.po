@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 02:43+0000\n"
+"POT-Creation-Date: 2023-02-24 02:52+0000\n"
 "PO-Revision-Date: 2022-10-01 11:08+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -3132,64 +3132,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Aktivera generering av miniatyrbilder"
 
-#: terminalDisplay/TerminalDisplay.cpp:653
+#: terminalDisplay/TerminalDisplay.cpp:655
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Storlek: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2195
+#: terminalDisplay/TerminalDisplay.cpp:2197
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Är du säker på att du vill klistra in %1 tecken?"
 msgstr[1] "Är du säker på att du vill klistra in %1 tecken?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2196
+#: terminalDisplay/TerminalDisplay.cpp:2198
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Bekräfta klistra in"
 
-#: terminalDisplay/TerminalDisplay.cpp:2229
+#: terminalDisplay/TerminalDisplay.cpp:2231
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End of text, avbrott: Kan avbryta aktuell process"
 
-#: terminalDisplay/TerminalDisplay.cpp:2230
+#: terminalDisplay/TerminalDisplay.cpp:2232
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End of transmission: Kan avsluta aktuell process"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2233
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell: Försöker avge en hörbar varning"
 
-#: terminalDisplay/TerminalDisplay.cpp:2232
+#: terminalDisplay/TerminalDisplay.cpp:2234
 #, kde-format
 msgid "Backspace"
 msgstr "Baksteg"
 
-#: terminalDisplay/TerminalDisplay.cpp:2233
+#: terminalDisplay/TerminalDisplay.cpp:2235
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: stoppar utmatning tillfälligt"
 
-#: terminalDisplay/TerminalDisplay.cpp:2234
+#: terminalDisplay/TerminalDisplay.cpp:2236
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: Stoppar aktuell process"
 
-#: terminalDisplay/TerminalDisplay.cpp:2235
+#: terminalDisplay/TerminalDisplay.cpp:2237
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: Används för att hantera terminaltillståndet"
 
-#: terminalDisplay/TerminalDisplay.cpp:2236
+#: terminalDisplay/TerminalDisplay.cpp:2238
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: Kan avbryta aktuell process"
 
-#: terminalDisplay/TerminalDisplay.cpp:2263
+#: terminalDisplay/TerminalDisplay.cpp:2265
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3198,31 +3198,31 @@ msgstr ""
 "Texten du försöker klistra in innehåller dolda kontrolltecken. Vill du "
 "filtrera bort dem?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2266
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Bekräfta klistra in"
 
-#: terminalDisplay/TerminalDisplay.cpp:2267
+#: terminalDisplay/TerminalDisplay.cpp:2269
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Klistra in &utan kontrolltecken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2268
+#: terminalDisplay/TerminalDisplay.cpp:2270
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "K&listra in markering"
 
-#: terminalDisplay/TerminalDisplay.cpp:2269
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Av&bryt"
 
-#: terminalDisplay/TerminalDisplay.cpp:2509
+#: terminalDisplay/TerminalDisplay.cpp:2511
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3233,17 +3233,17 @@ msgstr ""
 "Software_flow_control\">stoppats</a> genom att trycka på Ctrl+S. Tryck på "
 "<b>Ctrl+Q</b> för att återuppta den.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2564
+#: terminalDisplay/TerminalDisplay.cpp:2566
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Terminalen är skrivskyddad."
 
-#: terminalDisplay/TerminalDisplay.cpp:2954
+#: terminalDisplay/TerminalDisplay.cpp:2956
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&Byt katalog till"
 
-#: terminalDisplay/TerminalDisplay.cpp:2987
+#: terminalDisplay/TerminalDisplay.cpp:2989
 #, kde-format
 msgid "&Paste Location"
 msgstr "K&listra in plats"
