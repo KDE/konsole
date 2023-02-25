@@ -786,7 +786,7 @@ void SessionController::setupCommonActions()
     collection->addAction(QStringLiteral("set-encoding"), _codecAction);
     _codecAction->setCurrentCodec(QString::fromUtf8(session()->codec()));
     connect(session(), &Konsole::Session::sessionCodecChanged, this, &Konsole::SessionController::updateCodecAction);
-#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 103, 0)
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 103, 0)
     connect(_codecAction,
 #if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
             QOverload<QTextCodec *>::of(&KCodecAction::codecTriggered),
