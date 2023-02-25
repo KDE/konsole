@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-24 02:52+0000\n"
-"PO-Revision-Date: 2023-02-15 11:07\n"
+"PO-Revision-Date: 2023-02-24 12:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -3856,7 +3856,7 @@ msgstr "复杂文本布局"
 #: widgets/EditProfileAppearancePage.ui:791
 #, kde-format
 msgid "Enable word mode text rendering"
-msgstr "启用单词模式文本呈现"
+msgstr "启用单词模式文本渲染方式"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
@@ -3870,43 +3870,43 @@ msgstr "单词模式"
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
-msgstr "忽略单词中间的属性更改 (否则，呈现时属性更改会中断单词)"
+msgstr "忽略单词中间的属性更改 (否则，渲染时遇到属性更改会中断单词)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr "整个单词使用相同的属性"
+msgstr "对整个单词使用相同的属性"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr "渲染 ASCII 字符的单词"
+msgstr "将 ASCII 字符的单词合并渲染"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
 #, kde-format
 msgid "ASCII characters "
-msgstr "ASCII 字符 "
+msgstr "ASCII 字符"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr "渲染 Brahmic 脚本的单词"
+msgstr "将婆罗米系文字字符合并渲染"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Brahmic 脚本字符"
+msgstr "婆罗米系文字字符"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
 #, kde-format
 msgid "Emoji Font:"
-msgstr "表情 (emoji) 字体："
+msgstr "表情符号字体："
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
