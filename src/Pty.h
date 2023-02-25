@@ -9,6 +9,7 @@
 #define PTY_H
 
 // Qt
+#include <QProcess>
 #include <QSize>
 
 // Konsole
@@ -177,14 +178,23 @@ public:
         return QStringLiteral("Conhost failed to start");
     }
 
-    void kill()
+    bool kill()
     {
         if (m_proc) {
-            m_proc->kill();
+            return m_proc->kill();
         }
+        return false;
     }
 
-    Q_SIGNAL void finished();
+    int exitCode() const
+    {
+        if (m_proc) {
+            return m_proc->exitCode();
+        }
+        return -1;
+    }
+
+    Q_SIGNAL void finished(int exitCode, QProcess::ExitStatus);
 #endif
 
 public Q_SLOTS:
@@ -239,7 +249,7 @@ private:
     bool _xonXoff;
     bool _utf8;
 #ifdef Q_OS_WIN
-    IPtyProcess *m_proc = nullptr;
+    std::unique_ptr<IPtyProcess> m_proc;
 #endif
 };
 }

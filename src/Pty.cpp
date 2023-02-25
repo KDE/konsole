@@ -343,11 +343,9 @@ void Pty::setupChildProcess()
 }
 #endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 
-#else
+#else // Windows backend
 
 #include "ptyqt/conptyprocess.h"
-
-// Windows backend
 
 using Konsole::Pty;
 
@@ -361,10 +359,9 @@ Pty::Pty(int masterFd, QObject *aParent)
 {
     Q_UNUSED(masterFd)
 
-    m_proc = new ConPtyProcess();
+    m_proc = std::make_unique<ConPtyProcess>();
     if (!m_proc->isAvailable()) {
-        delete m_proc;
-        m_proc = nullptr;
+        m_proc.reset();
     }
 
     _windowColumns = 0;
@@ -458,7 +455,9 @@ int Pty::start(const QString &program, const QStringList &arguments, const QStri
     } else {
         auto n = m_proc->notifier();
         connect(n, &QIODevice::readyRead, this, &Pty::dataReceived);
-        connect(m_proc, &IPtyProcess::exited, this, &Pty::finished);
+        connect(n, &QIODevice::aboutToClose, this, [this] {
+            Q_EMIT finished(exitCode(), QProcess::NormalExit);
+        });
     }
     return 0;
 }

@@ -156,9 +156,7 @@ void Session::openTeletype(int fd, bool runShell)
 #ifndef Q_OS_WIN
     connect(_shellProcess, QOverload<int, QProcess::ExitStatus>::of(&Konsole::Pty::finished), this, &Konsole::Session::done);
 #else
-    connect(_shellProcess, &Konsole::Pty::finished, this, [this] {
-        done({}, {});
-    });
+    connect(_shellProcess, &Konsole::Pty::finished, this, &Konsole::Session::done);
 #endif
 
     // emulator size
@@ -942,8 +940,7 @@ bool Session::closeInForceWay()
     _closePerUserRequest = true;
 
 #ifdef Q_OS_WIN
-    _shellProcess->kill();
-    return true;
+    return _shellProcess->kill();
 #else
     if (kill(SIGKILL)) {
         return true;
@@ -1014,8 +1011,7 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
     // This slot should be triggered only one time
     disconnect(_shellProcess, QOverload<int, QProcess::ExitStatus>::of(&Konsole::Pty::finished), this, &Konsole::Session::done);
 #else
-    disconnect(_shellProcess, &Konsole::Pty::finished, this, nullptr);
-    return;
+    disconnect(_shellProcess, &Konsole::Pty::finished, this, &Konsole::Session::done);
 #endif
 
     if (!_autoClose) {
