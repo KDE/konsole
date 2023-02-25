@@ -92,7 +92,7 @@
 >&FDLNotice;</legalnotice>
 
 <date
->10 de desembre de 2022</date>
+>10 de febrer de 2023</date>
 <releaseinfo
 >KDE Gear 23.04</releaseinfo>
 
@@ -187,6 +187,11 @@
 >D</keycap
 ></keycombo
 >). </para>
+
+<para
+><keycap
+>Esc</keycap
+> també surt del mode de selecció per teclat. </para>
 
 <para
 >Moure el cursor: Fletxes, <keycap
@@ -755,6 +760,14 @@
 >Substitució del mode BiDi de caràcters de taula</guilabel
 >: considera els caràcters gràfics de taula com a caràcters LTR forts. Això permet que les taules que contenen caràcters RTL es mostrin correctament, però podria provocar un ordre incorrecte si aquests caràcters s'empren en textos RTL. </para
 ></listitem>
+
+<listitem
+><para
+><guilabel
+>Substitució de «wcwidth»</guilabel
+> - Els caràcters problemàtics segueixen l'estàndard Unicode, en lloc de «wcwidth()» de la «glibc». Actualment només el guionet suau (Unicode 0x00AD) que té una amplada «wcwidth» d'1 i Unicode de 0 es veu afectat per aquesta opció. Generalment, aquesta opció s'ha d'inhabilitar quan s'utilitzen principalment aquests caràcters a la línia d'ordres, i habilitar quan només es mostren. </para
+></listitem>
+
 
 </itemizedlist>
 </para>
