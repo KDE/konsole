@@ -797,8 +797,8 @@ void SessionController::setupCommonActions()
 #endif
             &Konsole::SessionController::changeCodec);
 #else
-    connect(_codecAction, &KCodecAction::codecNameTriggered, this, [this](const QByteArray &codecName) {
-        changeCodec(QTextCodec::codecForName(codecName));
+    connect(_codecAction, &KCodecAction::codecNameTriggered, this, [this](const QString &codecName) {
+        changeCodec(QTextCodec::codecForName(codecName.toUtf8()));
     });
 #endif
 

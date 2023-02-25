@@ -1882,8 +1882,8 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
 #endif
             &Konsole::EditProfileDialog::setDefaultCodec);
 #else
-    connect(codecAction, &KCodecAction::codecNameTriggered, this, [this](const QByteArray &codecName) {
-        setDefaultCodec(QTextCodec::codecForName(codecName));
+    connect(codecAction, &KCodecAction::codecNameTriggered, this, [this](const QString &codecName) {
+        setDefaultCodec(QTextCodec::codecForName(codecName.toUtf8()));
     });
 #endif
 
