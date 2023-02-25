@@ -201,7 +201,10 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
         QStringList environment = profile->environment();
         environment << QStringLiteral("PROFILEHOME=%1").arg(profile->defaultWorkingDirectory());
         environment << QStringLiteral("KONSOLE_VERSION=%1").arg(numericVersion);
-
+#ifdef Q_OS_WIN
+        // Needed on windows otherwise powershell will refuse to start
+        environment += QProcess::systemEnvironment();
+#endif
         session->setEnvironment(environment);
     }
 

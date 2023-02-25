@@ -238,10 +238,11 @@ static QString defaultShell()
 #endif
 
 #else // Q_OS_WIN
-    auto shell = GetWindowsShell();
+    auto shell = GetWindowPowerShell();
+    if (shell.isEmpty()) {
+        shell = GetWindowsShell();
+    }
     return shell;
-    // FIXME: Powershell doesn't work
-    // auto shell = GetWindowPowerShell();
 #endif // Q_OS_WIN
 }
 
