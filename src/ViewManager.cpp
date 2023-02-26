@@ -845,6 +845,8 @@ void ViewManager::removeController(SessionController *controller)
     if (_pluggedController == controller) {
         _pluggedController.clear();
     }
+    // disconnect now!! important as a focus change may happen in between and we will end up using a deleted controller
+    disconnect(controller, &Konsole::SessionController::viewFocused, this, &Konsole::ViewManager::controllerChanged);
     controller->deleteLater();
 }
 
