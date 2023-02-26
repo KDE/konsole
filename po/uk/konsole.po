@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 01:04+0000\n"
-"PO-Revision-Date: 2023-02-21 07:59+0200\n"
+"POT-Creation-Date: 2023-02-26 01:02+0000\n"
+"PO-Revision-Date: 2023-02-25 09:06+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1215,61 +1215,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Подяка багатьом іншим.\n"
 
-#: MainWindow.cpp:362
+#: MainWindow.cpp:390
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Н&ова вкладка"
 
-#: MainWindow.cpp:372
+#: MainWindow.cpp:400
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Клонувати вкладку"
 
-#: MainWindow.cpp:379
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Нове ві&кно"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:414
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Закрити вікно"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Закладки"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:447
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Керування профілями…"
 
-#: MainWindow.cpp:425
+#: MainWindow.cpp:453
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Задіяти меню"
 
-#: MainWindow.cpp:431
+#: MainWindow.cpp:459
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Зберегти компонування вкладок…"
 
-#: MainWindow.cpp:440
+#: MainWindow.cpp:468
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Завантажити компонування вкладок…"
 
-#: MainWindow.cpp:756 MainWindow.cpp:781
+#: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1280,55 +1280,55 @@ msgstr[1] "У цьому вікні працюють %1 процеси. Ви с�
 msgstr[2] "У цьому вікні працюють %1 процесів. Ви справді хочете його закрити?"
 msgstr[3] "У цьому вікні працює процес. Ви справді хочете його закрити?"
 
-#: MainWindow.cpp:762 MainWindow.cpp:787 MainWindow.cpp:805
+#: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Підтвердження закриття"
 
-#: MainWindow.cpp:763 MainWindow.cpp:788 MainWindow.cpp:806
+#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Закрити в&ікно"
 
-#: MainWindow.cpp:789 MainWindow.cpp:807
+#: MainWindow.cpp:817 MainWindow.cpp:835
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Закрити поточну в&кладку"
 
-#: MainWindow.cpp:802
+#: MainWindow.cpp:830
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "У цьому вікні відкрито %1 терміналів. Ви справді хочете його закрити?"
 
-#: MainWindow.cpp:917 Part.cpp:297
+#: MainWindow.cpp:945 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Профілі"
 
-#: MainWindow.cpp:934
+#: MainWindow.cpp:962
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Загальне"
 
-#: MainWindow.cpp:945
+#: MainWindow.cpp:973
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Вкладки/Поділ на панелі"
 
-#: MainWindow.cpp:950
+#: MainWindow.cpp:978
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Тимчасові файли"
 
-#: MainWindow.cpp:955
+#: MainWindow.cpp:983
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -4042,17 +4042,15 @@ msgstr "Перевизначення режиму табличних симво�
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Вставити &без керівних символів"
+msgstr "Ігнорувати wcwidth проблемних символів"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Перевизначити wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format

@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 01:04+0000\n"
-"PO-Revision-Date: 2023-02-21 22:49+0300\n"
+"POT-Creation-Date: 2023-02-26 01:02+0000\n"
+"PO-Revision-Date: 2023-02-25 11:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1216,61 +1216,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Diğer kişilere teşekkürler.\n"
 
-#: MainWindow.cpp:362
+#: MainWindow.cpp:390
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Yeni Sekme"
 
-#: MainWindow.cpp:372
+#: MainWindow.cpp:400
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Sekmeyi Çoğalt"
 
-#: MainWindow.cpp:379
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Yeni Pencere"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:414
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Pencereyi Kapat"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Y&er İmleri"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:447
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profilleri Yönet..."
 
-#: MainWindow.cpp:425
+#: MainWindow.cpp:453
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menüyü Etkinleştir"
 
-#: MainWindow.cpp:431
+#: MainWindow.cpp:459
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Sekme Düzenini Kaydet..."
 
-#: MainWindow.cpp:440
+#: MainWindow.cpp:468
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Sekme Düzeni Yükle..."
 
-#: MainWindow.cpp:756 MainWindow.cpp:781
+#: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1281,55 +1281,55 @@ msgstr[0] ""
 msgstr[1] ""
 "Bu pencerede çalışan %1 süreç var. Çıkmak istediğinize emin misiniz?"
 
-#: MainWindow.cpp:762 MainWindow.cpp:787 MainWindow.cpp:805
+#: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Kapatmayı Doğrula"
 
-#: MainWindow.cpp:763 MainWindow.cpp:788 MainWindow.cpp:806
+#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Pencereyi Kapat"
 
-#: MainWindow.cpp:789 MainWindow.cpp:807
+#: MainWindow.cpp:817 MainWindow.cpp:835
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "G&eçerli Sekmeyi Kapat"
 
-#: MainWindow.cpp:802
+#: MainWindow.cpp:830
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Bu pencerede %1 açık uçbirim var. Çıkmak istediğinizden emin misiniz?"
 
-#: MainWindow.cpp:917 Part.cpp:297
+#: MainWindow.cpp:945 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiller"
 
-#: MainWindow.cpp:934
+#: MainWindow.cpp:962
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Genel"
 
-#: MainWindow.cpp:945
+#: MainWindow.cpp:973
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Sekme Çubuğu / Ayırıcılar"
 
-#: MainWindow.cpp:950
+#: MainWindow.cpp:978
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Geçici Dosyalar"
 
-#: MainWindow.cpp:955
+#: MainWindow.cpp:983
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -4026,17 +4026,15 @@ msgstr "Tablo karakterleri Çift-Yönlü kipi geçersiz kılma"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Denetim karakterleri olmadan &yapıştır"
+msgstr "Sorunlu karakterlerin wcwidth'ini yok say"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "wcwidth\"i geçersiz kıl"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format

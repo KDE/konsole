@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 01:04+0000\n"
+"POT-Creation-Date: 2023-02-26 01:02+0000\n"
 "PO-Revision-Date: 2014-02-12 22:52+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -1249,49 +1249,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Hvala i mnogim drugima\n"
 
-#: MainWindow.cpp:362
+#: MainWindow.cpp:390
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Nova &kartica"
 
-#: MainWindow.cpp:372
+#: MainWindow.cpp:400
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klon kartica"
 
-#: MainWindow.cpp:379
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Novi prozor"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:414
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Zatvori prozor"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Zabilješke"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:447
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Upravljaj profilima..."
 
-#: MainWindow.cpp:425
+#: MainWindow.cpp:453
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Uključi izbornik"
 
-#: MainWindow.cpp:431
+#: MainWindow.cpp:459
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -1299,13 +1299,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Pomakni karticu ulijevo"
 
-#: MainWindow.cpp:440
+#: MainWindow.cpp:468
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:756 MainWindow.cpp:781
+#: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1315,25 +1315,25 @@ msgstr[0] "Ima %1 proces pokrenut u prozoru. Da li zaista želite izaći?"
 msgstr[1] "Imaju %1 procesa otvorena u prozoru. Da li zaista želite izaći?"
 msgstr[2] "Ima %1 procesa pokrenutih u prozoru. Da li zaista želite izaći?"
 
-#: MainWindow.cpp:762 MainWindow.cpp:787 MainWindow.cpp:805
+#: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Potvrdite zatvaranje"
 
-#: MainWindow.cpp:763 MainWindow.cpp:788 MainWindow.cpp:806
+#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Zatvori &prozor"
 
-#: MainWindow.cpp:789 MainWindow.cpp:807
+#: MainWindow.cpp:817 MainWindow.cpp:835
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Zatvori trenutnu &karticu"
 
-#: MainWindow.cpp:802
+#: MainWindow.cpp:830
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1343,7 +1343,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Ima %1 kartica otvorena u prozoru. Da li zaista želite izaći?"
 
-#: MainWindow.cpp:917 Part.cpp:297
+#: MainWindow.cpp:945 Part.cpp:297
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1351,25 +1351,25 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Novi profil"
 
-#: MainWindow.cpp:934
+#: MainWindow.cpp:962
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Glavno"
 
-#: MainWindow.cpp:945
+#: MainWindow.cpp:973
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:950
+#: MainWindow.cpp:978
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:955
+#: MainWindow.cpp:983
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

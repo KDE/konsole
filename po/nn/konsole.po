@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 01:02+0000\n"
+"POT-Creation-Date: 2023-02-25 01:04+0000\n"
 "PO-Revision-Date: 2022-08-20 11:09+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -2245,135 +2245,135 @@ msgstr "Byt profil"
 msgid "Set &Encoding"
 msgstr "Vel &teiknkoding"
 
-#: session/SessionController.cpp:811
+#: session/SessionController.cpp:817
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Tillat sporing av musa"
 
-#: session/SessionController.cpp:819
+#: session/SessionController.cpp:825
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Skriveverna"
 
-#: session/SessionController.cpp:830
+#: session/SessionController.cpp:836
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Tilpass eller endra namn på fane …"
 
-#: session/SessionController.cpp:836
+#: session/SessionController.cpp:842
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Alle fanene i det gjeldande vindauget"
 
-#: session/SessionController.cpp:843
+#: session/SessionController.cpp:849
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Vel faner …"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:855
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Ingen"
 
-#: session/SessionController.cpp:857
+#: session/SessionController.cpp:863
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopier inndata til"
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:870
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem-opplasting …"
 
-#: session/SessionController.cpp:869
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Overvak for &aktivitet"
 
-#: session/SessionController.cpp:875
+#: session/SessionController.cpp:881
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Overvak for &stille"
 
-#: session/SessionController.cpp:881
+#: session/SessionController.cpp:887
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Overvak for prosessfullføring"
 
-#: session/SessionController.cpp:888
+#: session/SessionController.cpp:894
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Større skrift"
 
-#: session/SessionController.cpp:896
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "Shrink Font"
 msgstr "Mindre skrift"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:907
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Tilbakestill skriftstorleik"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "Send Signal"
 msgstr "Send signal"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Set oppgåve i pause"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:921
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Hald fram oppgåve"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "&Hangup"
 msgstr "&Legg på"
 
-#: session/SessionController.cpp:925
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Avbryt oppgåve"
 
-#: session/SessionController.cpp:930
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Avslutt oppgåve"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Drep oppgåve"
 
-#: session/SessionController.cpp:940
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "User Signal &1"
 msgstr "Brukarsignal &1"
 
-#: session/SessionController.cpp:945
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "User Signal &2"
 msgstr "Brukarsignal &2"
 
-#: session/SessionController.cpp:962
+#: session/SessionController.cpp:968
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Lag ny profil …"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Endra gjeldande profil …"
 
-#: session/SessionController.cpp:1081
+#: session/SessionController.cpp:1087
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2381,7 +2381,7 @@ msgid ""
 msgstr ""
 "Det køyrer eit program i denne økta. Er du sikker på at du vil lukka ho?"
 
-#: session/SessionController.cpp:1085
+#: session/SessionController.cpp:1091
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2389,18 +2389,18 @@ msgid ""
 msgstr ""
 "Programmet «%1» køyrer i denne økta. Er du sikker på at du vil lukka ho?"
 
-#: session/SessionController.cpp:1096 session/SessionController.cpp:1139
+#: session/SessionController.cpp:1102 session/SessionController.cpp:1145
 #, kde-format
 msgid "Confirm Close"
 msgstr "Stadfest lukking"
 
-#: session/SessionController.cpp:1097
+#: session/SessionController.cpp:1103
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Lukk programmet"
 
-#: session/SessionController.cpp:1124
+#: session/SessionController.cpp:1130
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2409,7 +2409,7 @@ msgstr ""
 "Eit program i denne økta ville ikkje døy. Er du sikker på at du vil drepa "
 "det med makt?"
 
-#: session/SessionController.cpp:1128
+#: session/SessionController.cpp:1134
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2418,23 +2418,23 @@ msgstr ""
 "Programmet «%1» i denne økta ville ikkje døy. Er du sikker på at du vil "
 "drepa det med makt?"
 
-#: session/SessionController.cpp:1140
+#: session/SessionController.cpp:1146
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Tvangsavslutt programmet"
 
-#: session/SessionController.cpp:1984
+#: session/SessionController.cpp:1990
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Opna gjeldande mappe med"
 
-#: session/SessionController.cpp:2051
+#: session/SessionController.cpp:2057
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Lagra ZModem-nedlasting til …"
 
-#: session/SessionController.cpp:2061
+#: session/SessionController.cpp:2067
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2445,13 +2445,13 @@ msgstr ""
 "passande ZModem-programvare på systemet.</p><p>Du kan prøva å installera "
 "pakkane «rzsz» eller «lrzsz».</p>"
 
-#: session/SessionController.cpp:2071
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Økta har alt ei ZModem-filoverføring på gang.</p>"
 
-#: session/SessionController.cpp:2081
+#: session/SessionController.cpp:2087
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2460,7 +2460,7 @@ msgstr ""
 "<p>Fann ikkje noka passande ZModem-programvare på systemet.</p><p>Du kan "
 "prøva å installera pakkane «rzsz» eller «lrzsz».</p>"
 
-#: session/SessionController.cpp:2086
+#: session/SessionController.cpp:2092
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Vel filer til ZModem-opplasting"
@@ -3137,65 +3137,65 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Slå på generering av miniatyrbilete"
 
-#: terminalDisplay/TerminalDisplay.cpp:658
+#: terminalDisplay/TerminalDisplay.cpp:659
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Storleik: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2222
+#: terminalDisplay/TerminalDisplay.cpp:2223
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Er du sikker på at du vil lima inn %1 teikn?"
 msgstr[1] "Er du sikker på at du vil lima inn %1 teikn?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2223
+#: terminalDisplay/TerminalDisplay.cpp:2224
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Stadfest innliming"
 
-#: terminalDisplay/TerminalDisplay.cpp:2256
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Tekstslutt/avbryt: Kan avslutta gjelande prosess"
 
-#: terminalDisplay/TerminalDisplay.cpp:2257
+#: terminalDisplay/TerminalDisplay.cpp:2258
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Sendeslutt: Kan avslutta gjeldande prosess"
 
-#: terminalDisplay/TerminalDisplay.cpp:2258
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bjølle: Vil prøva å gje eit lydsignal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2260
 #, kde-format
 msgid "Backspace"
 msgstr "Rettetast"
 
 # https://en.wikipedia.org/wiki/C0_and_C1_control_codes
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2261
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Eningskontroll tre / XOFF: Slå av utdata"
 
-#: terminalDisplay/TerminalDisplay.cpp:2261
+#: terminalDisplay/TerminalDisplay.cpp:2262
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Utbyting / pause: Kan setja gjeldande prosess i pause"
 
-#: terminalDisplay/TerminalDisplay.cpp:2262
+#: terminalDisplay/TerminalDisplay.cpp:2263
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: Brukt for å endra tilstanden til terminalen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2263
+#: terminalDisplay/TerminalDisplay.cpp:2264
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Filskiljeteikn/avbryt: Kan avbryta gjeldande prosess"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3204,31 +3204,31 @@ msgstr ""
 "Teksten du prøver å lima inn, inneheld usynlege kontrollteikn. Vil du "
 "filtrera dei vekk?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Stadfest innliming"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Lim inn &utan kontrollteikn"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Lim inn alt"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Avbryt"
 
-#: terminalDisplay/TerminalDisplay.cpp:2535
+#: terminalDisplay/TerminalDisplay.cpp:2536
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3239,17 +3239,17 @@ msgstr ""
 "Software_flow_control\">lagde i bakgrunnen</a> med tastetrykket «Ctrl + S». "
 "Trykk «<b>Ctrl + Q</b>» for å halda fram.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2590
+#: terminalDisplay/TerminalDisplay.cpp:2591
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Denne terminalen er skriveverna."
 
-#: terminalDisplay/TerminalDisplay.cpp:2985
+#: terminalDisplay/TerminalDisplay.cpp:2986
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Byt &mappe til"
 
-#: terminalDisplay/TerminalDisplay.cpp:3018
+#: terminalDisplay/TerminalDisplay.cpp:3019
 #, kde-format
 msgid "&Paste Location"
 msgstr "L&im inn adresse"
@@ -4018,6 +4018,18 @@ msgstr ""
 msgid "Table characters BiDi mode override"
 msgstr ""
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
+#: widgets/EditProfileAppearancePage.ui:929
+#, kde-format
+msgid "Ignore wcwidth of problematic characters"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
+#: widgets/EditProfileAppearancePage.ui:932
+#, kde-format
+msgid "Override wcwidth"
+msgstr ""
+
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
 msgid "Edit Profile"
@@ -4175,13 +4187,13 @@ msgstr[1] " sekund"
 msgid "Select Initial Directory"
 msgstr "Vel startmappe"
 
-#: widgets/EditProfileDialog.cpp:1240
+#: widgets/EditProfileDialog.cpp:1243
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Klarte ikkje lasta oppsettet <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1419
+#: widgets/EditProfileDialog.cpp:1422
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4190,7 +4202,7 @@ msgstr ""
 "Dette fargeoppsettet brukar ein gjennomsiktig bakgrunn og det ser ikkje ut "
 "til at skrivebordet ditt støttar dette."
 
-#: widgets/EditProfileDialog.cpp:1425
+#: widgets/EditProfileDialog.cpp:1428
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4199,7 +4211,7 @@ msgstr ""
 "Konsole vart starta før skrivebordseffektane. Start Konsole på nytt for å ta "
 "i bruk gjennomsiktig bakgrunn."
 
-#: widgets/EditProfileDialog.cpp:1816
+#: widgets/EditProfileDialog.cpp:1819
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4227,7 +4239,7 @@ msgstr ""
 "Viss PATH eller LINE manglar i kommandoen, vert denne innstillinga ikkje "
 "brukt, og fila vert opna i standard skriveprogram."
 
-#: widgets/EditProfileDialog.cpp:1829
+#: widgets/EditProfileDialog.cpp:1832
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Tilpassa kommando for skriveprogram"
