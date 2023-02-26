@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 02:52+0000\n"
+"POT-Creation-Date: 2023-02-26 02:55+0000\n"
 "PO-Revision-Date: 2022-11-08 09:25-0400\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -1228,61 +1228,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Met dank aan vele anderen.\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nieuw tabblad"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:375
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "Tabblad &klonen"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:382
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nieu&w venster"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:389
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Venster sluiten"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:394
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Bladwij&zers"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profielen beheren..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:421
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menu activeren"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Tabbladindeling opslaan..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:436
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Tabbladindeling laden..."
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:670 MainWindow.cpp:695
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1291,55 +1291,55 @@ msgid_plural ""
 msgstr[0] "Er is een actief proces in dit venster. Wilt u toch afsluiten?"
 msgstr[1] "Er zijn %1 actieve processen in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:676 MainWindow.cpp:701 MainWindow.cpp:719
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Sluiten bevestigen"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:677 MainWindow.cpp:702 MainWindow.cpp:720
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Venster sluiten"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:703 MainWindow.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Huidig &tabblad sluiten"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:716
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Er zijn %1 open terminals in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:831 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profielen"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:848
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Algemeen"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:859
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Tabbladbalk / Splitters"
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:864
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Tijdelijke bestanden"
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:869
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

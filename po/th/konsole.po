@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 02:52+0000\n"
+"POT-Creation-Date: 2023-02-26 02:55+0000\n"
 "PO-Revision-Date: 2010-12-17 20:05+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -1289,42 +1289,42 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "ขอขอบคุณอีกหลาย ๆ ท่าน\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:365
 #, fuzzy, kde-format
 #| msgid "&New Tab"
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "เปิดแ&ท็บใหม่"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:375
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&ปิดแท็บ"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:382
 #, fuzzy, kde-format
 #| msgid "New &Window"
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "เปิด&หน้าต่างใหม่"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:389
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "คอนโซล-K"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:394
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&ที่คั่นหน้า"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:415
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Manage Profiles"
@@ -1332,26 +1332,26 @@ msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "จัดการโพรไฟล์"
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:421
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr ""
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:427
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "ย้ายมุมมองไปทางซ้าย"
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:436
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:670 MainWindow.cpp:695
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1361,28 +1361,28 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "คุณมีแท็บหลายแท็บในหน้าต่างนี้ คุณแน่ใจหรือว่าคุณต้องการออกจากโปรแกรม?"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:676 MainWindow.cpp:701 MainWindow.cpp:719
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "ยืนยันการปิด"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:677 MainWindow.cpp:702 MainWindow.cpp:720
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "คอนโซล-K"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:703 MainWindow.cpp:721
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "ปิดแท็บปัจจุบัน"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:716
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1390,7 +1390,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "คุณมีแท็บหลายแท็บในหน้าต่างนี้ คุณแน่ใจหรือว่าคุณต้องการออกจากโปรแกรม?"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:831 Part.cpp:297
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1398,7 +1398,7 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "สร้างโพรไฟล์ใหม่"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:848
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Generic, common options"
 #| msgid "General"
@@ -1406,19 +1406,19 @@ msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ทั่วไป"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:859
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:864
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:869
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

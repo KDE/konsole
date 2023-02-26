@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 02:52+0000\n"
+"POT-Creation-Date: 2023-02-26 02:55+0000\n"
 "PO-Revision-Date: 2023-01-07 21:31+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1220,61 +1220,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Ένα ευχαριστώ σε πολλούς άλλους.\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Νέα καρτέλα"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:375
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Αντίγραφο καρτέλας"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:382
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Νέο &παράθυρο"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:389
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Κλείσιμο παραθύρου"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:394
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Σελιδοδείκτες"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Διαχείριση προφίλ..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:421
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Ενεργοποίηση του μενού"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Αποθήκευση διάταξης καρτελών..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:436
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Φόρτωση διάταξης καρτελών..."
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:670 MainWindow.cpp:695
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1283,25 +1283,25 @@ msgid_plural ""
 msgstr[0] "Εκτελείται μια διεργασία σε αυτό το παράθυρο. Θα το κλείσετε;"
 msgstr[1] "Εκτελούνται %1 διεργασίες σε αυτό το παράθυρο. Θα το κλείσετε;"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:676 MainWindow.cpp:701 MainWindow.cpp:719
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Επιβεβαίωση κλεισίματος"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:677 MainWindow.cpp:702 MainWindow.cpp:720
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Κλείσιμο &παραθύρου"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:703 MainWindow.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Κλείσιμο τρέχουσας καρ&τέλας"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:716
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
@@ -1309,31 +1309,31 @@ msgstr ""
 "Υπάρχουν %1 ανοιχτά τερματικά σε αυτό το παράθυρο. Σίγουρα θέλετε να "
 "κλείσετε;"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:831 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Προφίλ"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:848
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Γενικά"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:859
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Γραμμή καρτελών / Διαχωριστές"
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:864
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Προσωρινά αρχεία"
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:869
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

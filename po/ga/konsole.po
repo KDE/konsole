@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 02:52+0000\n"
+"POT-Creation-Date: 2023-02-26 02:55+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -1249,49 +1249,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Agus buíochas le go leor daoine eile.\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Cluaisín &Nua"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:375
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Cóipeáil Cluaisín"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:382
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Fuinneog Nua"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:389
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Dún an Fhuinneog"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:394
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Lea&bharmharcanna"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Bainistigh Próifílí..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:421
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Gníomhachtaigh Roghchlár"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:427
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -1299,13 +1299,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Bog an Cluaisín Faoi Chlé"
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:436
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:670 MainWindow.cpp:695
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1331,25 +1331,25 @@ msgstr[4] ""
 "Tá %1 cluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
 "dteastaíonn uait scor?"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:676 MainWindow.cpp:701 MainWindow.cpp:719
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Deimhnigh Dúnadh"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:677 MainWindow.cpp:702 MainWindow.cpp:720
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Dún an &Fhuinneog"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:703 MainWindow.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Dún an &Cluaisín Reatha"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:716
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1361,7 +1361,7 @@ msgstr ""
 "Tá %1 chluaisín oscailte agat san fhuinneog seo; an bhfuil tú cinnte go "
 "dteastaíonn uait scor?"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:831 Part.cpp:297
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1369,25 +1369,25 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Próifíl Nua"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:848
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Ginearálta"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:859
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:864
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:869
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

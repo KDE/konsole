@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 02:52+0000\n"
+"POT-Creation-Date: 2023-02-26 02:55+0000\n"
 "PO-Revision-Date: 2023-02-21 22:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1216,61 +1216,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Diğer kişilere teşekkürler.\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Yeni Sekme"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:375
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Sekmeyi Çoğalt"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:382
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Yeni Pencere"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:389
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Pencereyi Kapat"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:394
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Y&er İmleri"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profilleri Yönet..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:421
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menüyü Etkinleştir"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Sekme Düzenini Kaydet..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:436
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Sekme Düzeni Yükle..."
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:670 MainWindow.cpp:695
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1281,55 +1281,55 @@ msgstr[0] ""
 msgstr[1] ""
 "Bu pencerede çalışan %1 süreç var. Çıkmak istediğinize emin misiniz?"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:676 MainWindow.cpp:701 MainWindow.cpp:719
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Kapatmayı Doğrula"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:677 MainWindow.cpp:702 MainWindow.cpp:720
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Pencereyi Kapat"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:703 MainWindow.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "G&eçerli Sekmeyi Kapat"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:716
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Bu pencerede %1 açık uçbirim var. Çıkmak istediğinizden emin misiniz?"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:831 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiller"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:848
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Genel"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:859
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Sekme Çubuğu / Ayırıcılar"
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:864
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Geçici Dosyalar"
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:869
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

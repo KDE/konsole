@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 02:52+0000\n"
+"POT-Creation-Date: 2023-02-26 02:55+0000\n"
 "PO-Revision-Date: 2022-12-19 12:21+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -1209,61 +1209,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Gratias a multe alteres.\n"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:365
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nove scheda"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:375
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Cona scheda"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:382
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nove &Fenestra"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:389
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Claude Fenestra"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:394
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Marcatores de li&bro"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gere profilos..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:421
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activa menu"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Salveguarda disposition de scheda..."
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:436
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carga disposition de scheda..."
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:670 MainWindow.cpp:695
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1273,55 +1273,55 @@ msgstr[0] ""
 "Il ha un processo executante in iste fenestra. Ancora tu vole quitar?"
 msgstr[1] "Tu ha %1 schedas in le fenestra, tu es secur que tu vole quitar?"
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:676 MainWindow.cpp:701 MainWindow.cpp:719
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirma Clausura"
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:677 MainWindow.cpp:702 MainWindow.cpp:720
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Claude &Fenestra"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:703 MainWindow.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Claude &Scheda Currente"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:716
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Il ha %1 terminales aperite in iste fenestra. Ancora tu vole quitar?"
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:831 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profilos"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:848
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:859
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de Scheda / Splitters"
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:864
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Files temporanee"
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:869
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

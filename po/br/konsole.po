@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole-1.1\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 02:52+0000\n"
+"POT-Creation-Date: 2023-02-26 02:55+0000\n"
 "PO-Revision-Date: 2004-01-18 20:39+0100\n"
 "Last-Translator: Jañ-Mai Drapier <jdrapier@club-internet.fr>\n"
 "Language-Team: Brezhoneg <Suav.Icb@wanadoo.fr>\n"
@@ -1243,69 +1243,69 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr ""
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:365
 #, fuzzy, kde-format
 #| msgid "New &Tab"
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Beve&nnig nevez"
 
-#: MainWindow.cpp:347
+#: MainWindow.cpp:375
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Serriñ ar vevennig"
 
-#: MainWindow.cpp:354
+#: MainWindow.cpp:382
 #, fuzzy, kde-format
 #| msgid "New &Window"
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Prenestr Nevez"
 
-#: MainWindow.cpp:361
+#: MainWindow.cpp:389
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:394
 #, fuzzy, kde-format
 #| msgid "Bookmarks"
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Sinedoù"
 
-#: MainWindow.cpp:387
+#: MainWindow.cpp:415
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Enrollañ &profil an dalc'hoù ..."
 
-#: MainWindow.cpp:393
+#: MainWindow.cpp:421
 #, fuzzy, kde-format
 #| msgid "Activate Menu"
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Bevaat ar meuziad"
 
-#: MainWindow.cpp:399
+#: MainWindow.cpp:427
 #, fuzzy, kde-format
 #| msgid "&Move Session Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "&Dilec'hiañ an dalc'h d'a-gleiz"
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:436
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:642 MainWindow.cpp:667
+#: MainWindow.cpp:670 MainWindow.cpp:695
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1314,60 +1314,60 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: MainWindow.cpp:648 MainWindow.cpp:673 MainWindow.cpp:691
+#: MainWindow.cpp:676 MainWindow.cpp:701 MainWindow.cpp:719
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr ""
 
-#: MainWindow.cpp:649 MainWindow.cpp:674 MainWindow.cpp:692
+#: MainWindow.cpp:677 MainWindow.cpp:702 MainWindow.cpp:720
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:675 MainWindow.cpp:693
+#: MainWindow.cpp:703 MainWindow.cpp:721
 #, fuzzy, kde-format
 #| msgid "Close the current session"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Serriñ an dalc'h red"
 
-#: MainWindow.cpp:688
+#: MainWindow.cpp:716
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 
-#: MainWindow.cpp:803 Part.cpp:297
+#: MainWindow.cpp:831 Part.cpp:297
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profil nevez"
 
-#: MainWindow.cpp:820
+#: MainWindow.cpp:848
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Pennañ"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:859
 #, fuzzy, kde-format
 #| msgid "Tab &Options"
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "&Dibarzhoù ar vevennig"
 
-#: MainWindow.cpp:836
+#: MainWindow.cpp:864
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:841
+#: MainWindow.cpp:869
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
