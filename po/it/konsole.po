@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-26 01:02+0000\n"
-"PO-Revision-Date: 2023-02-24 18:46+0100\n"
+"POT-Creation-Date: 2023-02-27 01:04+0000\n"
+"PO-Revision-Date: 2023-02-25 13:33+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -2099,7 +2099,7 @@ msgstr "Silenzio in «%1» (sessione «%2»)"
 
 #: session/Session.cpp:670 session/Session.cpp:1830
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
-#: Vt102Emulation.cpp:1128
+#: Vt102Emulation.cpp:1130
 #, kde-format
 msgid "Show session"
 msgstr "Mostra la sessione"
@@ -3531,7 +3531,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carica la disposizione delle schede"
 
-#: Vt102Emulation.cpp:2348
+#: Vt102Emulation.cpp:2384
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4061,17 +4061,15 @@ msgstr "Ignora la modalità BiDi dei caratteri delle tabelle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Incolla sen&za caratteri di controllo"
+msgstr "Ignora wcwidth dei caratteri problematici"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Sovrascrivi wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format

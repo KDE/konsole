@@ -1,7 +1,7 @@
 # Translation of konsole to Norwegian Nynorsk
 #
 # Gaute Hvoslef Kvalnes <gaute@verdsveven.com>, 1999, 2000, 2002, 2003, 2004, 2005.
-# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005, 2007, 2008, 2011, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2005, 2007, 2008, 2011, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Håvard Korsvoll <korsvoll@skulelinux.no>, 2008.
 # Eirik U. Birkeland <eirbir@gmail.com>, 2008, 2009, 2010.
 # Olav Selseng Vestreim <o.vest@operamail.com>, 2015.
@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 01:04+0000\n"
-"PO-Revision-Date: 2022-08-20 11:09+0200\n"
+"POT-Creation-Date: 2023-02-26 01:02+0000\n"
+"PO-Revision-Date: 2023-02-26 13:57+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -645,31 +645,31 @@ msgstr "Inga skalering"
 #: colorscheme/ColorSchemeEditor.ui:205
 #, kde-format
 msgid "Wallpaper flip:"
-msgstr ""
+msgstr "Spegelvending av bakgrunnsbilete:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Ikkje spegelvend"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
 #, kde-format
 msgid "Horizontal"
-msgstr ""
+msgstr "Vassrett"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
 #, kde-format
 msgid "Vertical"
-msgstr ""
+msgstr "Loddrett"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Begge"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -1210,61 +1210,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Takk òg til mange andre.\n"
 
-#: MainWindow.cpp:362
+#: MainWindow.cpp:390
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Ny fane"
 
-#: MainWindow.cpp:372
+#: MainWindow.cpp:400
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klon fane"
 
-#: MainWindow.cpp:379
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nytt &vindauge"
 
-#: MainWindow.cpp:386
+#: MainWindow.cpp:414
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Lukk vindauget"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Bokmerke"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:447
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Handter profilar …"
 
-#: MainWindow.cpp:425
+#: MainWindow.cpp:453
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Opna meny"
 
-#: MainWindow.cpp:431
+#: MainWindow.cpp:459
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr ""
+msgstr "Lagra faneutforming …"
 
-#: MainWindow.cpp:440
+#: MainWindow.cpp:468
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr ""
+msgstr "Opna faneutforming …"
 
-#: MainWindow.cpp:756 MainWindow.cpp:781
+#: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1273,55 +1273,55 @@ msgid_plural ""
 msgstr[0] "Ein prosess køyrer i dette vindauget. Vil du likevel avslutta?"
 msgstr[1] "%1 prosessar køyrer i dette vindauget. Vil du likevel avslutta?"
 
-#: MainWindow.cpp:762 MainWindow.cpp:787 MainWindow.cpp:805
+#: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Stadfest lukking"
 
-#: MainWindow.cpp:763 MainWindow.cpp:788 MainWindow.cpp:806
+#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Lukk &vindauget"
 
-#: MainWindow.cpp:789 MainWindow.cpp:807
+#: MainWindow.cpp:817 MainWindow.cpp:835
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Lukk gjeldande &fane"
 
-#: MainWindow.cpp:802
+#: MainWindow.cpp:830
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Det er %1 opne terminalar i vindauget. Vil du likevel avslutta?"
 
-#: MainWindow.cpp:917 Part.cpp:297
+#: MainWindow.cpp:945 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profilar"
 
-#: MainWindow.cpp:934
+#: MainWindow.cpp:962
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Generelt"
 
-#: MainWindow.cpp:945
+#: MainWindow.cpp:973
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Fanelinje/oppdelarar"
 
-#: MainWindow.cpp:950
+#: MainWindow.cpp:978
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Mellombelse filer"
 
-#: MainWindow.cpp:955
+#: MainWindow.cpp:983
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1343,7 +1343,7 @@ msgstr "Skjema"
 #: plugins/QuickCommands/qcwidget.ui:22
 #, kde-format
 msgid "Shortcut:"
-msgstr ""
+msgstr "Snøggtast:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1432,17 +1432,19 @@ msgstr "Snøggkommandoar"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "Vis snøggtilgang"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Fann ingen snøggkommandoar. Du kan leggja til nye under «Programtillegg → "
+"Vis snøggkommandoar»."
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "Plugins - Quick Commands"
-msgstr ""
+msgstr "Programtillegg – snøggkommandoar"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1566,22 +1568,24 @@ msgstr "Vis SSH-handsamar"
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Vis snøggtilgang til SSH-handlingar"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Fann ikkje noko lagra SSH-oppsett. Du kan leggja til eit under "
+"«Programtillegg → Vis SSH-handsamar»."
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "Plugins - SSH Manager"
-msgstr ""
+msgstr "Programtillegg – SSH-handsamar"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH-oppføringar"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
@@ -1697,7 +1701,7 @@ msgstr "Slett den valde oppføringa"
 #: plugins/SSHManager/sshwidget.ui:19
 #, kde-format
 msgid "Shortcut"
-msgstr ""
+msgstr "Snøggtast"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
 #: plugins/SSHManager/sshwidget.ui:43
@@ -1709,13 +1713,13 @@ msgstr "Vis oppføringar som ikkje passar filteret"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Byt profil ved til-/fråkopling"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
 #, kde-format
 msgid "Manage profile"
-msgstr ""
+msgstr "Handsam profil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2203,7 +2207,7 @@ msgstr "&Merk alt"
 #: session/SessionController.cpp:720
 #, kde-format
 msgid "Select &Mode"
-msgstr ""
+msgstr "&Merkjemodus"
 
 #: session/SessionController.cpp:725
 #, kde-format
@@ -3276,25 +3280,25 @@ msgstr "Del visinga oppe/nede"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr ""
+msgstr "Del visinga automatisk"
 
 #: ViewManager.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr ""
+msgstr "Del visinga venstre/høgre frå neste fane"
 
 #: ViewManager.cpp:147
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr ""
+msgstr "Del visinga oppe/nede frå neste fane"
 
 #: ViewManager.cpp:155
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr ""
+msgstr "Del visinga automatisk frå neste fane"
 
 #: ViewManager.cpp:165
 #, kde-format
@@ -3426,19 +3430,19 @@ msgstr "Flytt fane til venstre"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Set opp semantisk integrering (bash)"
 
 #: ViewManager.cpp:317
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Slå på/av vising av semantiske hint"
 
 #: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Slå av/på vising av linjenummer"
 
 #: ViewManager.cpp:330
 #, kde-format
@@ -3455,18 +3459,18 @@ msgstr "Byt til fane %1"
 #: ViewManager.cpp:553
 #, kde-format
 msgid "Semantic hints "
-msgstr ""
+msgstr "Semantiske hint"
 
 #: ViewManager.cpp:569
 #, kde-format
 msgid "Line numbers "
-msgstr ""
+msgstr "Linjenummer"
 
 #: ViewManager.cpp:1130
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr ""
+msgstr "Lagra faneutforming"
 
 #: ViewManager.cpp:1132 ViewManager.cpp:1219
 #, kde-format
@@ -3498,7 +3502,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "Opna faneutforming"
 
 #: Vt102Emulation.cpp:2348
 #, kde-format
@@ -3930,25 +3934,25 @@ msgstr "Vis loddrett linje ved kolonne:"
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Kompleks tekstutforming</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Kompleks tekstutforming"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
 #, kde-format
 msgid "Enable word mode text rendering"
-msgstr ""
+msgstr "Bruk ordmodus ved tekstvising"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Ordmodus"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3957,78 +3961,82 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignorer attributt­endringar inni ord (elles vil attributt dela opp ord ved "
+"vising)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Bruk same attributt for heile ordet"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Vis ord med ASCII-teikn saman"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
 #, kde-format
 msgid "ASCII characters "
-msgstr ""
+msgstr "ASCII-teikn"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Vis ord skrivne med indiske alfabet saman"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr ""
+msgstr "Teikn frå indiske alfabet"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
 #, kde-format
 msgid "Emoji Font:"
-msgstr ""
+msgstr "Emoji-skrift:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Linjer går alltid frå venstre til høgre, i staden for å ha retning fastsett "
+"av første sterke teikn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "Tving venstre-til-høgre-retning"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Handter tabellteikningsteikn som sterk venstre-til-høgre-markør."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Overstyr skriveretning for tabellteikn"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr ""
+msgstr "Ignorer wcwidth til problematiske teikn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Overstyr wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4383,7 +4391,7 @@ msgstr "Emulering av opp-/ned-piler"
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Museklikk på skrivelinja flyttar skrivemerket"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
@@ -4415,7 +4423,7 @@ msgstr "Aldri"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Når URL-hint vert viste"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4434,25 +4442,25 @@ msgstr "Alltid"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Raude feilstolpar:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
 #, kde-format
 msgid "Red error background:"
-msgstr ""
+msgstr "Raud feilbakgrunn:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Vekslande stolpar:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
 #, kde-format
 msgid "Alternating background:"
-msgstr ""
+msgstr "Vekslande bakgrunn:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
