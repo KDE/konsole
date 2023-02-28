@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:04+0000\n"
-"PO-Revision-Date: 2023-02-02 11:57+0400\n"
+"PO-Revision-Date: 2023-02-27 19:17+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1447,13 +1447,12 @@ msgstr "أظهر الوصول السريع"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
-msgstr ""
+msgstr "لم يعثر على أوامر سريعة. يمكنك إضافة واحدة من ملحقات -> أوامر سريعة"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "الأوامر السريعة"
+msgstr "ملحقات - الأوامر السريعة"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1582,13 +1581,12 @@ msgstr "أظهر الوصول السريع لإجراءات SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
-msgstr ""
+msgstr "لم يعثر على ملف SSH محفوظ. يمكنك أن تضيف واحدة من ملحقات -> مدير SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "افتح مدير الملفات"
+msgstr "محلقات - مدير SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -4016,17 +4014,15 @@ msgstr "تجاوز وضع أحرف الجدول ثنائي الاتجاه"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "ألصق &بدون أحرف التحكم"
+msgstr "تجاهل wcwidth للمحارف المُشكِلة"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "تجاوز wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format

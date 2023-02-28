@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:04+0000\n"
-"PO-Revision-Date: 2023-01-29 20:00+0100\n"
+"PO-Revision-Date: 2023-02-27 22:11+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -1445,12 +1445,12 @@ msgstr "Erakutsi sarbide azkarrak"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Ez da komando azkarrik aurkitu. Bat gehitzeko, Pluginak -> Komando azkarrak"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Komando azkarrak"
+msgstr "Pluginak - Komando azkarrak"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1580,12 +1580,13 @@ msgstr "Erakutsi SSH ekintzetarako sarbide azkarra"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Ez da gordetako SSH konfiguraziorik aurkitu. Bat gehitzeko, Pluginak -> SSH "
+"Kudeatzailea"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Ireki fitxategi-kudeatzailea"
+msgstr "Pluginak - SSH Kudeatzailea"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -4048,17 +4049,15 @@ msgstr "Tauletako karaktereen BiDi modua gainidaztea"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Itsatsi aginterako karaktererik &gabe"
+msgstr "Ezikusi karaktere arazotsuen «wcwidth»"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Gainidatzi «wcwidth»"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
