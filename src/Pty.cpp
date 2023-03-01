@@ -455,6 +455,9 @@ int Pty::start(const QString &program, const QStringList &arguments, const QStri
     } else {
         auto n = m_proc->notifier();
         connect(n, &QIODevice::readyRead, this, &Pty::dataReceived);
+        connect(m_proc.get(), &IPtyProcess::exited, this, [this] {
+            Q_EMIT finished(exitCode(), QProcess::NormalExit);
+        });
         connect(n, &QIODevice::aboutToClose, this, [this] {
             Q_EMIT finished(exitCode(), QProcess::NormalExit);
         });
