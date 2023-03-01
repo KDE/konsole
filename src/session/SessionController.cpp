@@ -1913,6 +1913,10 @@ void SessionController::sessionAttributeChanged()
         title = session()->title(Session::NameRole);
     }
 
+#ifdef Q_OS_WIN
+    title = session()->userTitle();
+#endif
+
     setTitle(title);
     setColor(session()->color());
     Q_EMIT rawTitleChanged();
