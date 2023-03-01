@@ -541,7 +541,10 @@ void Session::run()
 #endif
 
 #else // Q_OS_WIN
-    int result = _shellProcess->start(exec, arguments, _initialWorkingDir.isEmpty() ? QDir::currentPath() : _initialWorkingDir, _environment);
+    const auto size = _emulation->imageSize();
+    const int lines = size.height();
+    const int cols = size.width();
+    int result = _shellProcess->start(exec, arguments, _initialWorkingDir.isEmpty() ? QDir::currentPath() : _initialWorkingDir, _environment, cols, lines);
 #endif
 
     if (result < 0) {

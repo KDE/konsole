@@ -99,7 +99,7 @@ public:
      * to the environment for the new process.  At the very least this
      * should include an assignment for the TERM environment variable.
      */
-    int start(const QString &program, const QStringList &arguments, const QString &workingDir, const QStringList &environment);
+    int start(const QString &program, const QStringList &arguments, const QString &workingDir, const QStringList &environment, int cols, int lines);
 #endif
 
     /** Control whether the pty device is writeable by group members. */

@@ -392,10 +392,10 @@ void Pty::dataReceived()
     }
 }
 
-void Pty::setWindowSize(int lines, int cols, int, int)
+void Pty::setWindowSize(int columns, int lines, int, int)
 {
     if (m_proc && isRunning())
-        m_proc->resize(cols, lines);
+        m_proc->resize(columns, lines);
 }
 
 QSize Pty::windowSize() const
@@ -444,12 +444,12 @@ void Pty::addEnvironmentVariables(const QStringList & /*environmentVariables*/)
 {
 }
 
-int Pty::start(const QString &program, const QStringList &arguments, const QString &workingDir, const QStringList &environment)
+int Pty::start(const QString &program, const QStringList &arguments, const QString &workingDir, const QStringList &environment, int cols, int lines)
 {
     if (!m_proc || !m_proc->isAvailable()) {
         return -1;
     }
-    bool res = m_proc->startProcess(program, arguments, workingDir, environment, 80, 24);
+    bool res = m_proc->startProcess(program, arguments, workingDir, environment, cols, lines);
     if (!res) {
         return -1;
     } else {
