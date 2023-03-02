@@ -1,7 +1,7 @@
 # Translation of konsole.po to Korean.
 # Copyright (C) 2001, 2002, 2007-2008 Free Software Foundation, Inc.
 # Sae-keun Kim <segni@susekorea.net>, 2001.
-# Shinjo Park <kde@peremen.name>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Minori Hiraoka <minori@mnetwork.co.kr>, 2018.
 # JungHee Lee <daemul72@gmail.com>, 2021.
 #
@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-26 02:55+0000\n"
-"PO-Revision-Date: 2022-10-03 16:00+0200\n"
+"PO-Revision-Date: 2023-02-28 23:27+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
-"Language-Team: Korean <kde-i18n-doc@kde.org>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +95,7 @@ msgstr "세션 도구 모음"
 #: AppColorSchemeChooser.cpp:37
 #, kde-format
 msgid "&Window Color Scheme"
-msgstr "창 색 배열(&W)"
+msgstr "창 색 구성표(&W)"
 
 #: Application.cpp:51
 #, kde-format
@@ -441,7 +441,7 @@ msgstr "색상 8(어두움)"
 #, kde-format
 msgctxt "@item"
 msgid "Un-named Color Scheme"
-msgstr "이름 없는 색 배열"
+msgstr "이름 없는 색 구성표"
 
 #: colorscheme/ColorSchemeEditor.cpp:109
 #, kde-format
@@ -493,13 +493,13 @@ msgstr "지원하는 그림"
 #, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
-msgstr "새 색 배열"
+msgstr "새 색 구성표"
 
 #: colorscheme/ColorSchemeEditor.cpp:336
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
-msgstr "색 배열 편집"
+msgstr "색 구성표 편집"
 
 #: colorscheme/ColorSchemeEditor.cpp:382
 #, kde-format
@@ -535,8 +535,8 @@ msgid ""
 "settings.\n"
 "To see any effect, set colors with saturation value greater than 0."
 msgstr ""
-"기본 배경색과 글자색의 색조와 채도를 무작위적으로 조정합니다. 일부 색 배열은 "
-"다른 형태의 무작위적 조정을 사용할 수도 있습니다.\n"
+"기본 배경색과 글자색의 색조와 채도를 무작위적으로 조정합니다. 일부 색 구성표"
+"은 다른 형태의 무작위적 조정을 사용할 수도 있습니다.\n"
 "효과를 보려면 채도 값이 1 이상인 색으로 설정하십시오."
 
 #. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
@@ -1244,20 +1244,16 @@ msgid "Activate Menu"
 msgstr "메뉴 활성화"
 
 #: MainWindow.cpp:427
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "파일에 탭 레이아웃 저장하기"
+msgstr "탭 레이아웃 저장..."
 
 #: MainWindow.cpp:436
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "파일에서 탭 레이아웃 불러오기"
+msgstr "탭 레이아웃 불러오기..."
 
 #: MainWindow.cpp:670 MainWindow.cpp:695
 #, kde-format
@@ -1335,11 +1331,9 @@ msgstr "폼"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "단축키"
+msgstr "단축키:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1424,10 +1418,9 @@ msgid "Quick Commands"
 msgstr "빠른 명령"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "빠른 명령 표시"
+msgstr "빠른 접근 표시"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1551,12 +1544,12 @@ msgstr "SSH 관리자 표시"
 #: plugins/SSHManager/sshmanagerplugin.cpp:112
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "SSH 동작 빠른 접근 표시"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:150
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH 항목"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:178
 #, kde-format
@@ -1666,9 +1659,7 @@ msgstr "선택한 항목 삭제"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "단축키"
 
@@ -1682,13 +1673,11 @@ msgstr "필터와 일치하지 않는 항목 표시"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "연결/연결 해제 시 프로필 변경"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
 msgstr "프로필 관리"
 
@@ -2181,10 +2170,9 @@ msgid "&Select All"
 msgstr "모두 선택(&S)"
 
 #: session/SessionController.cpp:722
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "줄 선택(&L)"
+msgstr "선택 모드(&M)"
 
 #: session/SessionController.cpp:727
 #, kde-format
@@ -3419,12 +3407,10 @@ msgid "Line numbers "
 msgstr "줄 번호 "
 
 #: ViewManager.cpp:1074
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "파일에 탭 레이아웃 저장하기"
+msgstr "탭 레이아웃 저장"
 
 #: ViewManager.cpp:1076 ViewManager.cpp:1163
 #, kde-format
@@ -3453,12 +3439,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "파일에서 탭 레이아웃 불러오기"
+msgstr "탭 레이아웃 불러오기"
 
 #: Vt102Emulation.cpp:2354
 #, kde-format
@@ -3579,13 +3563,13 @@ msgstr "주 화면을 엿보는 단축키:"
 #: widgets/EditProfileAppearancePage.ui:33
 #, kde-format
 msgid "Color scheme && font"
-msgstr "색 배열과 배경"
+msgstr "색 구성표와 배경"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:66
 #, kde-format
 msgid "Create a new color scheme based upon the selected scheme"
-msgstr "현재 선택한 색 배열에서 새 색 배열 만들기"
+msgstr "현재 선택한 색 구성표에서 새 색 구성표 만들기"
 
 #. i18n: ectx: property (text), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:69
@@ -3598,7 +3582,7 @@ msgstr "새로 만들기..."
 #: widgets/EditProfileAppearancePage.ui:76
 #, kde-format
 msgid "Edit the selected color scheme"
-msgstr "선택한 색 배열을 편집합니다"
+msgstr "선택한 색 구성표를 편집합니다"
 
 #. i18n: ectx: property (text), widget (QPushButton, editKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, environmentEditButton)
@@ -3615,13 +3599,13 @@ msgstr "편집..."
 #: widgets/EditProfileAppearancePage.ui:86
 #, kde-format
 msgid "Delete the selected color scheme"
-msgstr "선택한 색 배열을 삭제합니다"
+msgstr "선택한 색 구성표를 삭제합니다"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:96
 #, kde-format
 msgid "Reset the selected color scheme settings to the default values"
-msgstr "선택한 색 배열을 기본값으로 되돌립니다"
+msgstr "선택한 색 구성표를 기본값으로 되돌립니다"
 
 #. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
@@ -3894,16 +3878,15 @@ msgstr "복합 텍스트 레이아웃"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "양방향 텍스트 렌더링"
+msgstr "단어 모드 텍스트 렌더링 활성화"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "단어 모드"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -3912,38 +3895,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"단어 중간에서 속성 변경 무시(선택하지 않으면 렌더링 중 속성 변경 시 단어 경계"
+"를 자름)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "전체 단어에 같은 속성 사용"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "ASCII 글자 단어를 같이 렌더"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "단어 글자:"
+msgstr "ASCII 글자"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "브라흐미 문자 글자 단어를 같이 렌더"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "현재 글자와 맞추기"
+msgstr "브라흐미 문자 글자"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
@@ -4139,8 +4122,8 @@ msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
-"이 색 배열은 현재 데스크톱 환경에서 지원하지 않는 투명 배경을 사용하고 있습니"
-"다"
+"이 색 구성표는 현재 데스크톱 환경에서 지원하지 않는 투명 배경을 사용하고 있습"
+"니다"
 
 #: widgets/EditProfileDialog.cpp:1422
 #, kde-format
@@ -4370,27 +4353,25 @@ msgstr "항상"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "빨간 오류 표시줄:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "배경 흐리게 하기"
+msgstr "빨간 오류 배경:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "전환되는 표시줄:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "배경 흐리게 하기"
+msgstr "전환되는 배경:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
