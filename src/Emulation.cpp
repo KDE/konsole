@@ -153,7 +153,11 @@ void Emulation::setCodec(const QTextCodec *codec)
 
         Q_EMIT useUtf8Request(utf8());
     } else {
+#if defined(Q_OS_WIN)
+        setCodec(Utf8Codec);
+#else
         setCodec(LocaleCodec);
+#endif
     }
 }
 

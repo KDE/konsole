@@ -124,7 +124,11 @@ void Vt102Emulation::reset(bool softReset, bool preservePrompt)
     if (currentCodec != nullptr) {
         setCodec(currentCodec);
     } else {
+#if defined(Q_OS_WIN)
+        setCodec(Utf8Codec);
+#else
         setCodec(LocaleCodec);
+#endif
     }
 
     Q_EMIT resetCursorStyleRequest();

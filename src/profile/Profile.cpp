@@ -39,6 +39,12 @@
 
 using namespace Konsole;
 
+#if defined(Q_OS_WIN)
+#define DEFAULT_ENCODING QStringLiteral("utf8")
+#else
+#define DEFAULT_ENCODING QString()
+#endif
+
 // mappings between property enum values and names
 //
 // multiple names are defined for some property values,
@@ -165,7 +171,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {ColorFilterEnabled, "ColorFilterEnabled", INTERACTION_GROUP, true},
 
     // Encoding
-    {DefaultEncoding, "DefaultEncoding", ENCODING_GROUP, QString()},
+    {DefaultEncoding, "DefaultEncoding", ENCODING_GROUP, DEFAULT_ENCODING},
 };
 
 QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;
@@ -271,7 +277,11 @@ void Profile::useBuiltin()
     // See Pty.cpp on why Arguments is populated
     setProperty(Arguments, QStringList{defaultShell()});
     setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
+#if defined(Q_OS_WIN)
+    setProperty(DefaultEncoding, QLatin1String(QTextCodec::codecForName("utf8")->name()));
+#else
     setProperty(DefaultEncoding, QLatin1String(QTextCodec::codecForLocale()->name()));
+#endif
     // Built-in profile should not be shown in menus
     setHidden(true);
 }
