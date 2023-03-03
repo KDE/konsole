@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:04+0000\n"
+"POT-Creation-Date: 2023-03-03 00:51+0000\n"
 "PO-Revision-Date: 2022-12-20 09:46-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -3504,7 +3504,7 @@ msgstr "Integração semântica"
 msgid "Line numbers "
 msgstr ""
 
-#: ViewManager.cpp:1130
+#: ViewManager.cpp:1132
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3512,14 +3512,14 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Salvar layout de abas em arquivo"
 
-#: ViewManager.cpp:1132 ViewManager.cpp:1219
+#: ViewManager.cpp:1134 ViewManager.cpp:1221
 #, fuzzy, kde-format
 #| msgid "Konsole View Layout (*.json)"
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Layout de visualização do Konsole (*.json)"
 
-#: ViewManager.cpp:1145
+#: ViewManager.cpp:1147
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3529,7 +3529,7 @@ msgstr ""
 "Ocorreu um problema ao salvar o layout.\n"
 "%1"
 
-#: ViewManager.cpp:1206
+#: ViewManager.cpp:1208
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3539,7 +3539,7 @@ msgstr ""
 "Ocorreu um problema ao carregar o layout.\n"
 "%1"
 
-#: ViewManager.cpp:1217
+#: ViewManager.cpp:1219
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"

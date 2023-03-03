@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole stable\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:04+0000\n"
+"POT-Creation-Date: 2023-03-03 00:51+0000\n"
 "PO-Revision-Date: 2005-11-29 11:30+0200\n"
 "Last-Translator: Frikkie Thirion <frikkie.thirion@deneloptronics.co.za>\n"
 "Language-Team: AFRIKAANS <translate-discuss-af@lists.sourceforge.net>\n"
@@ -3568,20 +3568,20 @@ msgstr "Woord Verbinders"
 msgid "Line numbers "
 msgstr "Nommer van lyne: "
 
-#: ViewManager.cpp:1130
+#: ViewManager.cpp:1132
 #, fuzzy, kde-format
 #| msgid "&Move Session Left"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Beweeg Sessie Links"
 
-#: ViewManager.cpp:1132 ViewManager.cpp:1219
+#: ViewManager.cpp:1134 ViewManager.cpp:1221
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1145
+#: ViewManager.cpp:1147
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3589,7 +3589,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1206
+#: ViewManager.cpp:1208
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3597,7 +3597,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1217
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

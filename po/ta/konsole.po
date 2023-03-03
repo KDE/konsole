@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:04+0000\n"
+"POT-Creation-Date: 2023-03-03 00:51+0000\n"
 "PO-Revision-Date: 2023-01-31 19:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -3461,19 +3461,19 @@ msgstr "பொருளறித் துப்புகள் "
 msgid "Line numbers "
 msgstr "வரியேண்கள்"
 
-#: ViewManager.cpp:1130
+#: ViewManager.cpp:1132
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "கீற்றுகளின் தளவமைப்பை சேமித்தல்"
 
-#: ViewManager.cpp:1132 ViewManager.cpp:1219
+#: ViewManager.cpp:1134 ViewManager.cpp:1221
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "கான்சோல் காட்சிப்பகுதி தளவமைப்பு (*.json)"
 
-#: ViewManager.cpp:1145
+#: ViewManager.cpp:1147
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3483,7 +3483,7 @@ msgstr ""
 "தளவமைப்பை சேமிப்பதில் சிக்கல் ஏற்பட்டது.\n"
 "%1"
 
-#: ViewManager.cpp:1206
+#: ViewManager.cpp:1208
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3493,7 +3493,7 @@ msgstr ""
 "தளவமைப்பை ஏற்றுவதில் சிக்கல் ஏற்பட்டது.\n"
 "%1"
 
-#: ViewManager.cpp:1217
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

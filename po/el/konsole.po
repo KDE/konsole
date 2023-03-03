@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:04+0000\n"
+"POT-Creation-Date: 2023-03-03 00:51+0000\n"
 "PO-Revision-Date: 2023-01-07 21:31+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -3504,19 +3504,19 @@ msgstr "Συμβουλές σημασιολογίας"
 msgid "Line numbers "
 msgstr "Αρίθμηση γραμμών "
 
-#: ViewManager.cpp:1130
+#: ViewManager.cpp:1132
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Αποθήκευση διάταξης καρτελών"
 
-#: ViewManager.cpp:1132 ViewManager.cpp:1219
+#: ViewManager.cpp:1134 ViewManager.cpp:1221
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Διάταξη προβολής κονσόλας (*.json)"
 
-#: ViewManager.cpp:1145
+#: ViewManager.cpp:1147
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3526,7 +3526,7 @@ msgstr ""
 "Παρουσιάστηκε πρόβλημα κατά την αποθήκευση της διάταξης.\n"
 "%1"
 
-#: ViewManager.cpp:1206
+#: ViewManager.cpp:1208
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3536,7 +3536,7 @@ msgstr ""
 "Παρουσιάστηκε πρόβλημα κατά τη φόρτωση της διάταξης.\n"
 "%1"
 
-#: ViewManager.cpp:1217
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:04+0000\n"
+"POT-Creation-Date: 2023-03-03 00:51+0000\n"
 "PO-Revision-Date: 2023-02-25 13:33+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -3493,19 +3493,19 @@ msgstr "Suggerimenti semantici "
 msgid "Line numbers "
 msgstr "Numeri di riga "
 
-#: ViewManager.cpp:1130
+#: ViewManager.cpp:1132
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Salva la disposizione delle schede"
 
-#: ViewManager.cpp:1132 ViewManager.cpp:1219
+#: ViewManager.cpp:1134 ViewManager.cpp:1221
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Disposizione della vista di Konsole (*.json)"
 
-#: ViewManager.cpp:1145
+#: ViewManager.cpp:1147
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3515,7 +3515,7 @@ msgstr ""
 "Si è verificato un problema durante il salvataggio della disposizione.\n"
 "%1"
 
-#: ViewManager.cpp:1206
+#: ViewManager.cpp:1208
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3525,7 +3525,7 @@ msgstr ""
 "Si è verificato un problema durante il caricamento della disposizione.\n"
 "%1"
 
-#: ViewManager.cpp:1217
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

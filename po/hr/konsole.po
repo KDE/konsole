@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:04+0000\n"
+"POT-Creation-Date: 2023-03-03 00:51+0000\n"
 "PO-Revision-Date: 2011-07-18 11:49+0200\n"
 "Last-Translator: Marko Dimjašević <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -3724,20 +3724,20 @@ msgstr "Interakcija mišem"
 msgid "Line numbers "
 msgstr "Stalan broj redaka:"
 
-#: ViewManager.cpp:1130
+#: ViewManager.cpp:1132
 #, fuzzy, kde-format
 #| msgid "Move Tab Left"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Karticu pomakni ulijevo"
 
-#: ViewManager.cpp:1132 ViewManager.cpp:1219
+#: ViewManager.cpp:1134 ViewManager.cpp:1221
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1145
+#: ViewManager.cpp:1147
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3750,7 +3750,7 @@ msgstr ""
 "Pojavio se problem prilikom snimanja ispisa.\n"
 "%1"
 
-#: ViewManager.cpp:1206
+#: ViewManager.cpp:1208
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3763,7 +3763,7 @@ msgstr ""
 "Pojavio se problem prilikom snimanja ispisa.\n"
 "%1"
 
-#: ViewManager.cpp:1217
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
