@@ -810,6 +810,7 @@ private:
     bool _enableReflowLines;
 
     std::vector<LineProperty> _lineProperties;
+    LineProperty linePropertiesAt(unsigned int line);
 
     // history buffer ---------------
     std::unique_ptr<HistoryScroll> _history;

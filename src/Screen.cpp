@@ -638,14 +638,14 @@ void Screen::resizeImage(int new_lines, int new_columns)
             auto sessionController = _currentTerminalDisplay->sessionController();
             auto terminal = sessionController->session()->foregroundProcessName();
             if (terminal == QLatin1String("zsh")) {
-                while (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection).flags.f.prompt_start) == 0) {
+                while (cursorLine + cursorLineCorrection > 0 && (linePropertiesAt(cursorLine + cursorLineCorrection).flags.f.prompt_start) == 0) {
                     --cursorLineCorrection;
                 }
-                if (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection).flags.f.prompt_start) != 0) {
+                if (cursorLine + cursorLineCorrection > 0 && (linePropertiesAt(cursorLine + cursorLineCorrection).flags.f.prompt_start) != 0) {
                     _lineProperties[cursorLine + cursorLineCorrection - 1].flags.f.wrapped = 0;
                 } else {
                     cursorLineCorrection = 0;
-                    while (cursorLine + cursorLineCorrection > 0 && (_lineProperties.at(cursorLine + cursorLineCorrection - 1).flags.f.wrapped) != 0) {
+                    while (cursorLine + cursorLineCorrection > 0 && (linePropertiesAt(cursorLine + cursorLineCorrection - 1).flags.f.wrapped) != 0) {
                         --cursorLineCorrection;
                     }
                 }
@@ -2217,14 +2217,13 @@ void Screen::fastAddHistLine()
 {
     const bool removeLine = _history->getLines() == _history->getMaxLines();
     _history->addCellsVector(_screenLines.at(0));
-    _history->addLine(_lineProperties.at(0));
+    _history->addLine(linePropertiesAt(0));
 
     // If _history size > max history size it will drop a line from _history.
     // We need to verify if we need to remove a URL.
     if (removeLine && _escapeSequenceUrlExtractor) {
         _escapeSequenceUrlExtractor->historyLinesRemoved(1);
     }
-
     // Rotate left + clear the last line
     std::rotate(_screenLines.begin(), _screenLines.begin() + 1, _screenLines.end());
     auto last = _screenLines.back();
@@ -2341,6 +2340,14 @@ void Screen::setLineProperty(quint16 property, bool enable)
     } else {
         _lineProperties[_cuY].flags.all &= ~property;
     }
+}
+
+LineProperty Screen::linePropertiesAt(unsigned int line)
+{
+    if (line < _lineProperties.size()) {
+        return _lineProperties.at(line);
+    }
+    return LineProperty();
 }
 
 void Screen::setReplMode(int mode)
