@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-03 00:51+0000\n"
-"PO-Revision-Date: 2023-02-04 08:46+0100\n"
+"PO-Revision-Date: 2023-03-04 08:56+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -47,7 +47,7 @@ msgstr ""
 ">\n"
 ">\n"
 ">\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -1464,12 +1464,13 @@ msgstr "Pokaż szybki dostęp"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Nie znaleziono żadnego szybkiego polecenia. Możesz doda takie we Wtyczki -> "
+"Szybkie polecenia"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Szybkie polecenia"
+msgstr "Wtyczki - Szybkie polecenia"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1599,12 +1600,13 @@ msgstr "Pokaż Szybki Dostęp dla Działań SSH"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Nie znaleziono żadnych ustawień SSH. Możesz doda takie we Wtyczki -> "
+"Zarządzanie SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Hide SSH Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Ukryj zarządzanie SSH"
+msgstr "Wtyczki - Zarządzanie SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -4056,17 +4058,15 @@ msgstr "Tryb zastępowania znaków z tabeli BiDi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "&Wklej bez znaków sterujących"
+msgstr "Pomiń wcwidth przy kłopotliwych znakach"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Zastąp wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format

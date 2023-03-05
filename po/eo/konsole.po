@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-03 00:51+0000\n"
-"PO-Revision-Date: 2023-02-06 08:46+0100\n"
+"PO-Revision-Date: 2023-03-04 08:26+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1443,10 +1443,9 @@ msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Rapidaj Komandoj"
+msgstr "Kromprogramoj - Rapidaj Komandoj"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1578,10 +1577,9 @@ msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "SSH Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "SSH-Manaĝero"
+msgstr "Kromprogramoj - SSH-Manaĝero"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -4023,11 +4021,9 @@ msgstr "Tabelsignoj BiDi reĝimo anstataŭas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Alglui &sen stirsignoj"
+msgstr "Ignori wcwidth de problemecaj signoj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
@@ -4069,7 +4065,7 @@ msgstr "Klavaro"
 #: widgets/EditProfileDialog.cpp:148
 #, kde-format
 msgid "Key bindings"
-msgstr "Ŝlosilbindadoj"
+msgstr "Klavkombinoj"
 
 #: widgets/EditProfileDialog.cpp:159
 #, kde-format

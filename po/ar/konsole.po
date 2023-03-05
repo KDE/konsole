@@ -914,7 +914,7 @@ msgstr "Robert Knight"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
-msgstr "المدير السابق، نُقِلَت إلى كدي 4."
+msgstr "المدير السابق، نُقِلَت إلى كِيدِي 4."
 
 #: main.cpp:341
 #, kde-format
