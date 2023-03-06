@@ -820,6 +820,8 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     connect(session, &Konsole::Session::selectionChanged, controller, &Konsole::SessionController::selectionChanged);
     connect(view, &Konsole::TerminalDisplay::destroyed, controller, &Konsole::SessionController::deleteLater);
     connect(controller, &Konsole::SessionController::viewDragAndDropped, this, &Konsole::ViewManager::forgetController);
+    connect(controller, &Konsole::SessionController::requestSplitViewLeftRight, this, &Konsole::ViewManager::splitLeftRight);
+    connect(controller, &Konsole::SessionController::requestSplitViewTopBotton, this, &Konsole::ViewManager::splitTopBottom);
 
     // if this is the first controller created then set it as the active controller
     if (_pluggedController.isNull()) {

@@ -157,6 +157,13 @@ Q_SIGNALS:
 
     void rawTitleChanged();
 
+    /*
+     * Emitted when the user requests to split the view from the context menu.
+     */
+
+    void requestSplitViewLeftRight();
+    void requestSplitViewTopBotton();
+
     /**
      * Emitted when the current working directory of the session associated with
      * the controller is changed.

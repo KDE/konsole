@@ -672,6 +672,14 @@ void SessionController::setupCommonActions()
     action->setVisible(false);
     connect(action, &QAction::triggered, this, &SessionController::copy);
 
+    action = collection->addAction(QStringLiteral("split-view-left-right"));
+    action->setText(i18n("Split View Left-Right"));
+    connect(action, &QAction::triggered, this, &SessionController::requestSplitViewLeftRight);
+
+    action = collection->addAction(QStringLiteral("split-view-top-bottom"));
+    action->setText(i18n("Split View Top-Bottom"));
+    connect(action, &QAction::triggered, this, &SessionController::requestSplitViewTopBotton);
+
     action = collection->addAction(QStringLiteral("edit_copy_contextmenu_in_out"));
     action->setText(i18n("Copy except prompts"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
