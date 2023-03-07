@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-03 00:51+0000\n"
+"POT-Creation-Date: 2023-03-07 00:50+0000\n"
 "PO-Revision-Date: 2007-06-24 15:01+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -52,7 +52,7 @@ msgid "View"
 msgstr "Xem kế"
 
 #. i18n: ectx: Menu (view-split)
-#: ../desktop/konsoleui.rc:20
+#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:60
 #, fuzzy, kde-format
 #| msgid "Shrink View"
 msgid "Split View"
@@ -90,7 +90,7 @@ msgid "S&crollback"
 msgstr "Không cuộn ngược"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:71
+#: ../desktop/sessionui.rc:76
 #, fuzzy, kde-format
 #| msgid "Name"
 msgid "Session Toolbar"
@@ -2282,284 +2282,296 @@ msgid "Copy"
 msgstr "&Chép"
 
 #: session/SessionController.cpp:676
+#, fuzzy, kde-format
+#| msgid "Split View Left/Right"
+msgid "Split View Left-Right"
+msgstr "Chia ô xem trái/phải"
+
+#: session/SessionController.cpp:680
+#, fuzzy, kde-format
+#| msgid "Split View Top/Bottom"
+msgid "Split View Top-Bottom"
+msgstr "Chia ô xem trên/xuống"
+
+#: session/SessionController.cpp:684
 #, kde-format
 msgid "Copy except prompts"
 msgstr ""
 
-#: session/SessionController.cpp:682
+#: session/SessionController.cpp:690
 #, fuzzy, kde-format
 #| msgid "Input"
 msgid "Copy user input"
 msgstr "Kết nhập"
 
-#: session/SessionController.cpp:688
+#: session/SessionController.cpp:696
 #, fuzzy, kde-format
 #| msgid "Input"
 msgid "Copy command output"
 msgstr "Kết nhập"
 
-#: session/SessionController.cpp:703
+#: session/SessionController.cpp:711
 #, kde-format
 msgid "Paste Selection"
 msgstr ""
 
-#: session/SessionController.cpp:710
+#: session/SessionController.cpp:718
 #, kde-format
 msgid "Web Search"
 msgstr ""
 
-#: session/SessionController.cpp:716
+#: session/SessionController.cpp:724
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "&Select All"
 msgstr "Chọn"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:728
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "Select &Mode"
 msgstr "Chọn"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:733
 #, fuzzy, kde-format
 #| msgid "Select"
 msgid "Select &Line"
 msgstr "Chọn"
 
-#: session/SessionController.cpp:728
+#: session/SessionController.cpp:736
 #, fuzzy, kde-format
 #| msgid "Save Output..."
 msgid "Save Output &As..."
 msgstr "Lưu kết xuất..."
 
-#: session/SessionController.cpp:734
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "&Print Screen..."
 msgstr ""
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:746
 #, fuzzy, kde-format
 #| msgid "Manage Profiles..."
 msgid "Adjust Scrollback..."
 msgstr "Quản lí hồ sơ..."
 
-#: session/SessionController.cpp:742
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Xoá vùng cuộn ngược"
 
-#: session/SessionController.cpp:746
+#: session/SessionController.cpp:754
 #, fuzzy, kde-format
 #| msgid "Clear Scrollback && Reset"
 msgid "Clear Scrollback and Reset"
 msgstr "Xoá vùng cuộn ngược và đặt lại"
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:763
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Switch Profile"
 msgstr "Sửa hồ sơ"
 
-#: session/SessionController.cpp:784
+#: session/SessionController.cpp:792
 #, fuzzy, kde-format
 #| msgid "Encoding"
 msgid "Set &Encoding"
 msgstr "Bảng mã"
 
-#: session/SessionController.cpp:817
+#: session/SessionController.cpp:825
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr ""
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:833
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr ""
 
-#: session/SessionController.cpp:836
+#: session/SessionController.cpp:844
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Configure or Rename Tab..."
 msgstr "Tha&y tên thẻ..."
 
-#: session/SessionController.cpp:842
+#: session/SessionController.cpp:850
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr ""
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:857
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Select Tabs..."
 msgstr "Tha&y tên thẻ..."
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:863
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr ""
 
-#: session/SessionController.cpp:863
+#: session/SessionController.cpp:871
 #, fuzzy, kde-format
 #| msgid "Input"
 msgid "Copy Input To"
 msgstr "Kết nhập"
 
-#: session/SessionController.cpp:870
+#: session/SessionController.cpp:878
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr ""
 
-#: session/SessionController.cpp:875
+#: session/SessionController.cpp:883
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Theo dõi các &hoạt động"
 
-#: session/SessionController.cpp:881
+#: session/SessionController.cpp:889
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Theo dõi sự &nghỉ"
 
-#: session/SessionController.cpp:887
+#: session/SessionController.cpp:895
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "Theo dõi các &hoạt động"
 
-#: session/SessionController.cpp:894
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "Enlarge Font"
 msgstr ""
 
-#: session/SessionController.cpp:902
+#: session/SessionController.cpp:910
 #, fuzzy, kde-format
 #| msgid "Shrink View"
 msgid "Shrink Font"
 msgstr "Thu nhỏ ô xem"
 
-#: session/SessionController.cpp:907
+#: session/SessionController.cpp:915
 #, fuzzy, kde-format
 #| msgid "Increase Text Size"
 msgid "Reset Font Size"
 msgstr "Tăng cỡ văn bản"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Send Signal"
 msgstr ""
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:924
 #, kde-format
 msgid "&Suspend Task"
 msgstr ""
 
-#: session/SessionController.cpp:921
+#: session/SessionController.cpp:929
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgid "&Continue Task"
 msgstr "Đón&g thẻ"
 
-#: session/SessionController.cpp:926
+#: session/SessionController.cpp:934
 #, kde-format
 msgid "&Hangup"
 msgstr ""
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "&Interrupt Task"
 msgstr ""
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:944
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "&Terminate Task"
 msgstr "Tính năng thiết bị cuối"
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:949
 #, kde-format
 msgid "&Kill Task"
 msgstr ""
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:954
 #, kde-format
 msgid "User Signal &1"
 msgstr ""
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:959
 #, kde-format
 msgid "User Signal &2"
 msgstr ""
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:976
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile..."
 msgstr "Hồ sơ mới..."
 
-#: session/SessionController.cpp:970
+#: session/SessionController.cpp:978
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Sửa hồ sơ hiện thời..."
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1095
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1091
+#: session/SessionController.cpp:1099
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1102 session/SessionController.cpp:1145
+#: session/SessionController.cpp:1110 session/SessionController.cpp:1153
 #, kde-format
 msgid "Confirm Close"
 msgstr ""
 
-#: session/SessionController.cpp:1103
+#: session/SessionController.cpp:1111
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Đón&g thẻ"
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1138
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1134
+#: session/SessionController.cpp:1142
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1146
+#: session/SessionController.cpp:1154
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1990
+#: session/SessionController.cpp:1998
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2057
+#: session/SessionController.cpp:2065
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr ""
 
-#: session/SessionController.cpp:2067
+#: session/SessionController.cpp:2075
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2567,20 +2579,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2077
+#: session/SessionController.cpp:2085
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2087
+#: session/SessionController.cpp:2095
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2092
+#: session/SessionController.cpp:2100
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr ""
@@ -3623,20 +3635,20 @@ msgstr "Tuỳ chọn tương tác"
 msgid "Line numbers "
 msgstr ""
 
-#: ViewManager.cpp:1132
+#: ViewManager.cpp:1134
 #, fuzzy, kde-format
 #| msgid "Move Here"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Chuyển vào đây"
 
-#: ViewManager.cpp:1134 ViewManager.cpp:1221
+#: ViewManager.cpp:1136 ViewManager.cpp:1223
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1147
+#: ViewManager.cpp:1149
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3649,7 +3661,7 @@ msgstr ""
 "Gặp lỗi khi lưu kết xuất.\n"
 "%1"
 
-#: ViewManager.cpp:1208
+#: ViewManager.cpp:1210
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3662,7 +3674,7 @@ msgstr ""
 "Gặp lỗi khi lưu kết xuất.\n"
 "%1"
 
-#: ViewManager.cpp:1219
+#: ViewManager.cpp:1221
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
