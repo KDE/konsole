@@ -1,3 +1,7 @@
+/*
+    SPDX-FileCopyrightText: 2019 Vitaly Petrov <v31337@gmail.com>
+    SPDX-License-Identifier: MIT
+*/
 #ifndef CONPTYPROCESS_H
 #define CONPTYPROCESS_H
 

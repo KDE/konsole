@@ -1,3 +1,7 @@
+/*
+    SPDX-FileCopyrightText: 2019 Vitaly Petrov <v31337@gmail.com>
+    SPDX-License-Identifier: MIT
+*/
 #include "conptyprocess.h"
 #include <QCoreApplication>
 #include <QDebug>
