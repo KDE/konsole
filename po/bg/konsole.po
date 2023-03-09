@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-07 00:50+0000\n"
-"PO-Revision-Date: 2023-02-25 15:16+0100\n"
+"PO-Revision-Date: 2023-03-08 21:26+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -2186,16 +2186,12 @@ msgid "Copy"
 msgstr "Копиране"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Разделяне на изгледа вертикално"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Разделяне на изгледа хоризонтално"
 

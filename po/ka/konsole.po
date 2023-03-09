@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-07 00:50+0000\n"
-"PO-Revision-Date: 2023-02-26 03:13+0100\n"
+"PO-Revision-Date: 2023-03-08 10:01+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1284,7 +1284,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
-msgstr ""
+msgstr "დროებითი ფაილები"
 
 #: MainWindow.cpp:983
 #, kde-format
@@ -1450,17 +1450,17 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr ""
+msgstr "დარწმუნებული ბრძანდებით, რომ გნებავთ წაშალოთ %1?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:254
 #, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr ""
+msgstr "სწრაფი ბრძანების კონფიგურაციების წაშლა"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
-msgstr ""
+msgstr "სათაური ცარიელი ვერ იქნება"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:294
 #, kde-format
@@ -1497,7 +1497,7 @@ msgstr "ნაგულისხმები"
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
 msgid "%1 is a folder for SSH entries"
-msgstr ""
+msgstr "%1 საქაღალდეა SSH-ის ჩანაწერებისთვის"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:319
@@ -1527,7 +1527,7 @@ msgstr "SSH-ის მმართველის ჩვენება"
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "SSH ქმედებებისთვის სწრაფი წვდომის ჩვენება"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
@@ -2116,16 +2116,12 @@ msgid "Copy"
 msgstr "კოპირება"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "ხედის მარჯვენა/მარცხენაზე გაყოფა"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "ხედის ზედა/ქვედაზე გაყოფა"
 
@@ -2142,7 +2138,7 @@ msgstr "მომხმარებლის შეყვანილის კ�
 #: session/SessionController.cpp:696
 #, kde-format
 msgid "Copy command output"
-msgstr ""
+msgstr "ბრძანების გამოტანის კოპირება"
 
 #: session/SessionController.cpp:711
 #, kde-format
@@ -2182,7 +2178,7 @@ msgstr "&ეკრანის დაბეჭდვა..."
 #: session/SessionController.cpp:746
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr ""
+msgstr "გადახვევის მორგება..."
 
 #: session/SessionController.cpp:750
 #, kde-format
@@ -4265,13 +4261,13 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:356
 #, kde-format
 msgid "Terminal bell mode:"
-msgstr ""
+msgstr "ტერმინალის ზარის რეჟიმი:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:374
 #, kde-format
 msgid "Semantic Integration"
-msgstr ""
+msgstr "სემანტიკური ინტეგრაცია"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:380
@@ -4340,7 +4336,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:492
 #, kde-format
 msgid "Red error background:"
-msgstr ""
+msgstr "შეცდომის წითელი ფონი:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
@@ -4416,7 +4412,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:50
 #, kde-format
 msgid "Word characters:"
-msgstr ""
+msgstr "სიტყვის სიმბოლოები:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileMousePage.ui:91
@@ -4711,7 +4707,7 @@ msgstr ""
 #: widgets/EditProfileScrollingPage.ui:149
 #, kde-format
 msgid "Scrollbar position:"
-msgstr ""
+msgstr "ჩოჩიას მდებარეობა:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:159
@@ -4906,7 +4902,7 @@ msgstr "მიმდინარე ძებნის ფრაზის წი
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
-msgstr ""
+msgstr "პარამეტრების მენიუს ჩვენება"
 
 #: widgets/IncrementalSearchBar.cpp:114
 #, kde-format
@@ -4930,7 +4926,7 @@ msgstr "დიდი და პატარა ასოების გან�
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
-msgstr ""
+msgstr "რეგულარული გამოსახულების დამთხვევა"
 
 #: widgets/IncrementalSearchBar.cpp:133
 #, kde-format
@@ -4991,7 +4987,7 @@ msgstr ""
 #: widgets/RenameTabWidget.ui:60
 #, kde-format
 msgid "Remote tab title format:"
-msgstr ""
+msgstr "დაშორებული ჩანართის სათაურის ფორმატი:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
@@ -5003,7 +4999,7 @@ msgstr "ჩანართის სათაურის ფორმატი:
 #: widgets/RenameTabWidget.ui:98
 #, kde-format
 msgid "Normal tab title format"
-msgstr ""
+msgstr "ნორმალური ჩანართის სათაურის ფორმატი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
@@ -5057,17 +5053,17 @@ msgstr ""
 #: widgets/TabTitleFormatButton.cpp:47 widgets/TabTitleFormatButton.cpp:55
 #, kde-format
 msgid "User Name@ (if given): %U"
-msgstr ""
+msgstr "მომხმარებლის სახელი@ (თუ მითითებულია): %U"
 
 #: widgets/TabTitleFormatButton.cpp:48 widgets/TabTitleFormatButton.cpp:56
 #, kde-format
 msgid "Remote Host (Short): %h"
-msgstr ""
+msgstr "დაშორებული ჰოსტი (მოკლე): %h"
 
 #: widgets/TabTitleFormatButton.cpp:49 widgets/TabTitleFormatButton.cpp:57
 #, kde-format
 msgid "Remote Host (Long): %H"
-msgstr ""
+msgstr "დაშორებული ჰოსტი (გრძელი): %H"
 
 #: widgets/TabTitleFormatButton.cpp:50 widgets/TabTitleFormatButton.cpp:58
 #, c-format, kde-format
@@ -5083,13 +5079,13 @@ msgstr "ჩამატება"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert title format"
-msgstr ""
+msgstr "შეიყვანეთ სათაურის ფორმატი"
 
 #: widgets/TabTitleFormatButton.cpp:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert remote title format"
-msgstr ""
+msgstr "შეიყვანეთ დაშორებული სათაურის ფორმატი"
 
 #: widgets/TerminalHeaderBar.cpp:80 widgets/TerminalHeaderBar.cpp:188
 #, kde-format
