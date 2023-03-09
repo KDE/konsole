@@ -6,7 +6,7 @@
 
 // To time the creation and total launch time (i. e. until window is
 // visible/responsive):
-//#define PROFILE_STARTUP
+// #define PROFILE_STARTUP
 
 // Own
 #include "Application.h"
@@ -153,7 +153,16 @@ int main(int argc, char *argv[])
     }
 
     auto app = new QApplication(argc, argv);
+    /**
+     * For Windows: use Breeze if available
+     * Of all tested styles that works the best for us
+     * NOTE: Taken from Kate
+     */
+#if defined(Q_OS_WIN)
+    QApplication::setStyle(QStringLiteral("breeze"));
+#else
     app->setStyle(new MenuStyle());
+#endif
 
     migrateRenamedConfigKeys();
 
