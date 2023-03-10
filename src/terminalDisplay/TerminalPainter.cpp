@@ -1148,7 +1148,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
         }
         painter.drawText(rect.x(), y, text);
         if (0 && text.toUcs4().length() >= 1) {
-            fprintf(stderr, " %i  ", text.toUcs4().length());
+            fprintf(stderr, " %lli  ", (qint64)text.toUcs4().length());
             for (int i = 0; i < text.toUcs4().length(); i++) {
                 fprintf(stderr, " %04x  ", text.toUcs4()[i]);
             }
