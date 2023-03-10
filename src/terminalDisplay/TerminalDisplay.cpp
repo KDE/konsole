@@ -2688,14 +2688,14 @@ void TerminalDisplay::keyPressEvent(QKeyEvent *event)
             break;
         case Qt::Key_PageUp:
             SELECT_BY_MODIFIERS;
-            y = screen->selCursorUp(-_scrollBar->scrollFullPage());
+            y = screen->selCursorUp(_scrollBar->scrollFullPage() ? -1 : 0);
             if (histLines + y < screenWindow()->currentLine()) {
                 scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine());
             }
             break;
         case Qt::Key_PageDown:
             SELECT_BY_MODIFIERS;
-            y = screen->selCursorDown(-_scrollBar->scrollFullPage());
+            y = screen->selCursorDown(_scrollBar->scrollFullPage() ? -1 : 0);
             if (histLines + y >= screenWindow()->currentLine() + screen->getLines()) {
                 scrollScreenWindow(ScreenWindow::RelativeScrollMode::ScrollLines, histLines + y - screenWindow()->currentLine() - screen->getLines() + 1);
             }
