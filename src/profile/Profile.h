@@ -917,24 +917,22 @@ inline bool Profile::canInheritProperty(Property p)
 template<class T>
 inline T Profile::property(Property p) const
 {
-    auto getVariant = [this, p]() {
-        auto it = _propertyValues.find(p);
-        if (it != _propertyValues.end()) {
-            return it->second;
-        } else if (_parent && canInheritProperty(p)) {
-            return _parent->property<QVariant>(p);
-        } else {
-            return QVariant();
-        }
-    };
-
-    if constexpr (std::is_same_v<T, QVariant>) {
-        return getVariant();
-    }
-
-    const QVariant variant = getVariant();
-    return variant.value<T>();
+    return property<QVariant>(p).value<T>();
 }
+
+template<>
+inline QVariant Profile::property(Property p) const
+{
+    auto it = _propertyValues.find(p);
+    if (it != _propertyValues.end()) {
+        return it->second;
+    } else if (_parent && canInheritProperty(p)) {
+        return _parent->property<QVariant>(p);
+    } else {
+        return QVariant();
+    }
+}
+
 }
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

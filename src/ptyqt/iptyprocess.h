@@ -6,11 +6,8 @@
 #define IPTYPROCESS_H
 
 #include <QDebug>
-#include <QIODevice>
-#include <QObject>
 #include <QString>
 #include <QStringList>
-#include <QTimer>
 
 #define CONPTY_MINIMAL_WINDOWS_VERSION 18309
 
