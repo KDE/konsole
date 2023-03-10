@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 00:50+0000\n"
+"POT-Creation-Date: 2023-03-10 00:51+0000\n"
 "PO-Revision-Date: 2023-02-27 19:17+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -108,37 +108,37 @@ msgstr "شريط أدوات الجلسة"
 msgid "&Window Color Scheme"
 msgstr "&نسق ألوان جديد"
 
-#: Application.cpp:51
+#: Application.cpp:53
 #, kde-format
 msgctxt "@info:shell"
 msgid "Name of profile to use for new Konsole instance"
 msgstr "اسم تشكيلة  لتستخدمها نسخة كونسول الجديدة"
 
-#: Application.cpp:52
+#: Application.cpp:54
 #, kde-format
 msgctxt "@info:shell"
 msgid "json layoutfile to be loaded to use for new Konsole instance"
 msgstr "ملف json layoutfile ليتم تحميله لاستخدامه لنسخة كونسول جديدة"
 
-#: Application.cpp:53
+#: Application.cpp:55
 #, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
 msgstr "استخدم التشكيلة المضمنة عوضا عن التشكيلة المبدئية"
 
-#: Application.cpp:54
+#: Application.cpp:56
 #, kde-format
 msgctxt "@info:shell"
 msgid "Set the initial working directory of the new tab or window to 'dir'"
 msgstr "ضع دليل عمل مبدئي للسان الجديد أو النافذة إلى 'dir'"
 
-#: Application.cpp:55
+#: Application.cpp:57
 #, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
 msgstr "لا تغلق الجلسة الابتدائية آلية عندما تنتهي."
 
-#: Application.cpp:59
+#: Application.cpp:61
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -148,13 +148,13 @@ msgstr ""
 "أنشئ لسان جديد في النافذة الموجودة بدلا عن إنشاء نافذة جديدة (يجب تفعيل 'شغّل "
 "كل نوافذ كونسول على عملية واحدة')"
 
-#: Application.cpp:60
+#: Application.cpp:62
 #, kde-format
 msgctxt "@info:shell"
 msgid "Create tabs as specified in given tabs configuration file"
 msgstr "أنشئ ألسنة كما هو محدد في ملف ضبط الألسنة المعطى"
 
-#: Application.cpp:62
+#: Application.cpp:64
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -164,67 +164,67 @@ msgstr ""
 "ابدأ كونسول في الخلفية و أحضره إلى الأمام عن ضغط مفتاح Ctrl+Shift+F12 "
 "(مبدئيا)"
 
-#: Application.cpp:63
+#: Application.cpp:65
 #, kde-format
 msgctxt "@info:shell"
 msgid "Run in a separate process"
 msgstr "نفِّذ في عملية منفصلة"
 
-#: Application.cpp:64
+#: Application.cpp:66
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
 msgstr "أظهر شريط القوائم، متجاوزًا الإعداد الافتراضي"
 
-#: Application.cpp:65
+#: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
 msgstr "أخفِ شريط القوائم، متجاوزًا الإعداد الافتراضي"
 
-#: Application.cpp:66
+#: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
 msgstr "أظهر شريط الألسنة، متجاوزًا الإعداد الافتراضي"
 
-#: Application.cpp:67
+#: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
 msgstr "أخفِ شريط الألسنة، متجاوزًا الإعداد الافتراضي"
 
-#: Application.cpp:68
+#: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
 msgstr "ابدأ كونسول في وضع ملء الشاشة"
 
-#: Application.cpp:69
+#: Application.cpp:71
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr "عطل الخلفية الشفافة ، حتى ولو كان النظام يدعمها."
 
-#: Application.cpp:70
+#: Application.cpp:72
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
 msgstr "قائمة التشكيلات المتوفرة"
 
-#: Application.cpp:71
+#: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
 msgstr "اعرض لائحة بكل أسماء خصائص الأوضاع وأنواعها (لتستخدم مع p-)"
 
-#: Application.cpp:72
+#: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "غير قيمة خاصية تشكلية."
 
-#: Application.cpp:74
+#: Application.cpp:76
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -234,7 +234,7 @@ msgstr ""
 "الأمر للتنفيذ. سيلتقط هذا الخيار كل المعامِلات اللاحقة، لذا استخدمه كخيار "
 "أخير."
 
-#: Application.cpp:77
+#: Application.cpp:79
 #, kde-format
 msgctxt "@info:shell"
 msgid ""
@@ -244,13 +244,13 @@ msgstr ""
 "فرض إعادة استخدام المثيل الحالي حتى إذا ضيعت الوظائف، على سبيل المثال.‏--new-"
 "tab. في الغالب من أجل التنقيح. "
 
-#: Application.cpp:84
+#: Application.cpp:86
 #, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "المعاملات الممررة إلى أمر"
 
-#: Application.cpp:511
+#: Application.cpp:514
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -874,225 +874,225 @@ msgstr "المدخلات:"
 msgid "Output:"
 msgstr "الناتج:"
 
-#: main.cpp:155
+#: main.cpp:174
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "كونسول"
 
-#: main.cpp:157
+#: main.cpp:176
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "محاكي الطرفية"
 
-#: main.cpp:159
+#: main.cpp:178
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr "(c) 1997-2022, مطوري كونسول"
 
-#: main.cpp:333
+#: main.cpp:352
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "Kurt Hindenburg"
 
-#: main.cpp:335
+#: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "المشرف العام، إصلاح علل وتحسينات عامة"
 
-#: main.cpp:338
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "Robert Knight"
 
-#: main.cpp:339
+#: main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr "المدير السابق، نُقِلَت إلى كِيدِي 4."
 
-#: main.cpp:341
+#: main.cpp:360
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "Lars Doelle"
 
-#: main.cpp:341
+#: main.cpp:360
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "المؤلّف الأصلي"
 
-#: main.cpp:342
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr "Ahmad Samir"
 
-#: main.cpp:343 main.cpp:346 main.cpp:349 main.cpp:352
+#: main.cpp:362 main.cpp:365 main.cpp:368 main.cpp:371
 #, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "إعادة هيكلة كبرى وإصلاحات أخطاء وتحسينات كبيرة "
 
-#: main.cpp:345
+#: main.cpp:364
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr "Carlos Alves"
 
-#: main.cpp:348
+#: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: main.cpp:351
+#: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr "Gustavo Carneiro"
 
-#: main.cpp:354
+#: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr "Edwin Pujols"
 
-#: main.cpp:355 main.cpp:358 main.cpp:360 main.cpp:365 main.cpp:367
-#: main.cpp:368 main.cpp:369
+#: main.cpp:374 main.cpp:377 main.cpp:379 main.cpp:384 main.cpp:386
+#: main.cpp:387 main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "إصلاح علل وتحسينات عامة"
 
-#: main.cpp:357
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr "Martin T. H. Sandsmark"
 
-#: main.cpp:360
+#: main.cpp:379
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr "Nate Graham"
 
-#: main.cpp:361
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr "Mariusz Glebocki"
 
-#: main.cpp:362
+#: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "إصلاح علل وتحسينات كبيرة"
 
-#: main.cpp:364
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "Thomas Surrel"
 
-#: main.cpp:367
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "Jekyll Wu"
 
-#: main.cpp:368
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "Waldo Bastian"
 
-#: main.cpp:369
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "Stephan Binner"
 
-#: main.cpp:370
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:370
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "تحسينات عامة"
 
-#: main.cpp:371
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "Chris Machemer"
 
-#: main.cpp:371 main.cpp:372 main.cpp:399 main.cpp:400 main.cpp:401
-#: main.cpp:402
+#: main.cpp:390 main.cpp:391 main.cpp:418 main.cpp:419 main.cpp:420
+#: main.cpp:421
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "إصلاح العلل"
 
-#: main.cpp:372
+#: main.cpp:391
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr "Francesco Cecconi"
 
-#: main.cpp:373
+#: main.cpp:392
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "Stephan Kulow"
 
-#: main.cpp:373
+#: main.cpp:392
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "دعم سولاريس والتاريخ"
 
-#: main.cpp:374
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "Alexander Neundorf"
 
-#: main.cpp:375
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "إصلاح علل و تحسين أداء البدء"
 
-#: main.cpp:377
+#: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "Peter Silva"
 
-#: main.cpp:377
+#: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "تحسينات التأشير"
 
-#: main.cpp:378
+#: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "Lotzi Boloni"
 
-#: main.cpp:380
+#: main.cpp:399
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1102,13 +1102,13 @@ msgstr ""
 "كونسول المدمج\n"
 "أسماء شريط الأدوات و الجلسات"
 
-#: main.cpp:383
+#: main.cpp:402
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:385
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1118,25 +1118,25 @@ msgstr ""
 "كونسول المدمج\n"
 "تحسينات عامة"
 
-#: main.cpp:388
+#: main.cpp:407
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "Antonio Larrosa"
 
-#: main.cpp:388
+#: main.cpp:407
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "تأثيرات مرئية"
 
-#: main.cpp:389
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "Matthias Ettrich"
 
-#: main.cpp:391
+#: main.cpp:410
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1146,67 +1146,67 @@ msgstr ""
 "شفرة من مشروع kvt\n"
 "تحسينات عامة"
 
-#: main.cpp:394
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "Warwick Allison"
 
-#: main.cpp:395
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "تحسينات في المخططات و إنتقاء النص"
 
-#: main.cpp:397
+#: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "Dan Pilone"
 
-#: main.cpp:397
+#: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "النقل إلى SGI"
 
-#: main.cpp:398
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "Kevin Street"
 
-#: main.cpp:398
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "النقل إلى FreeBSD"
 
-#: main.cpp:399
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "Sven Fischer"
 
-#: main.cpp:400
+#: main.cpp:419
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "Dale M. Flaven"
 
-#: main.cpp:401
+#: main.cpp:420
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "Martin Jones"
 
-#: main.cpp:402
+#: main.cpp:421
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "Lars Knoll"
 
-#: main.cpp:403
+#: main.cpp:422
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
@@ -2050,28 +2050,28 @@ msgstr "ماك اوس"
 msgid "Solaris console"
 msgstr "لوحة تحكم سولاريز"
 
-#: session/Session.cpp:88
+#: session/Session.cpp:97
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "جرس في  '%1' ( الجلسة '%2')"
 
-#: session/Session.cpp:373
+#: session/Session.cpp:390
 #, kde-format
 msgid "Could not find binary: "
 msgstr "لا يمكن إيجاد الملف التنفيذي:"
 
-#: session/Session.cpp:382
+#: session/Session.cpp:399
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "تحذير:"
 
-#: session/Session.cpp:457
+#: session/Session.cpp:474
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "لا يمكن إيجاد محارة تفاعلية ليبدأ بها."
 
-#: session/Session.cpp:463 session/Session.cpp:465
+#: session/Session.cpp:480 session/Session.cpp:482
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2080,24 +2080,24 @@ msgstr ""
 "لا يمكن إيجاد  '%1', سيبدأ بـ '%2' عوضا عن ذلك. رجاءا تأكد من إعدادات "
 "التشكيلة."
 
-#: session/Session.cpp:521
+#: session/Session.cpp:551
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "لا يمكن بدء البرنامج  '%1' بالمعاملات '%2'."
 
-#: session/Session.cpp:666
+#: session/Session.cpp:696
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "سكوت في '%1' (الجلسة '%2')"
 
-#: session/Session.cpp:670 session/Session.cpp:1830
+#: session/Session.cpp:700 session/Session.cpp:1881
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
-#: Vt102Emulation.cpp:1130
+#: Vt102Emulation.cpp:1133
 #, kde-format
 msgid "Show session"
 msgstr "اعرض الجلسة"
 
-#: session/Session.cpp:934
+#: session/Session.cpp:981
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2110,28 +2110,28 @@ msgstr ""
 "الاستخدام الداخلي فقط عن طريق إعادة تجميع كونسول. <p> سيظهر هذا التحذير مرة "
 "واحدة فقط لمثيل كونسول هذا. </p>"
 
-#: session/Session.cpp:970
+#: session/Session.cpp:1021
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "انتهى"
 
-#: session/Session.cpp:984 session/Session.cpp:995
+#: session/Session.cpp:1035 session/Session.cpp:1046
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "انهار البرنامج '%1' ."
 
-#: session/Session.cpp:986
+#: session/Session.cpp:1037
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "البرنامج '%1' خرج بالحالة %2."
 
-#: session/Session.cpp:1494
+#: session/Session.cpp:1545
 #, kde-format
 msgid "ZModem Progress"
 msgstr "تقدّم ZModem"
 
-#: session/Session.cpp:1826
+#: session/Session.cpp:1877
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "نشاط في '%1' (الجلسة '%2')"
@@ -2338,117 +2338,117 @@ msgstr "قلص الخط"
 msgid "Reset Font Size"
 msgstr "صفّر حجم الخط"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:921
 #, kde-format
 msgid "Send Signal"
 msgstr "أرسل إشارة"
 
-#: session/SessionController.cpp:924
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&علّق المهمة"
 
-#: session/SessionController.cpp:929
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Continue Task"
 msgstr "&تابع المهمة"
 
-#: session/SessionController.cpp:934
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Hangup"
 msgstr "ا&فصل"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "قا&طع المهمة"
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "&Terminate Task"
 msgstr "أ&نهِ المهمة"
 
-#: session/SessionController.cpp:949
+#: session/SessionController.cpp:950
 #, kde-format
 msgid "&Kill Task"
 msgstr "ا&قتل المهمة"
 
-#: session/SessionController.cpp:954
+#: session/SessionController.cpp:955
 #, kde-format
 msgid "User Signal &1"
 msgstr "إشارة المستخدم &1"
 
-#: session/SessionController.cpp:959
+#: session/SessionController.cpp:960
 #, kde-format
 msgid "User Signal &2"
 msgstr "إشارة المستخدم &2"
 
-#: session/SessionController.cpp:976
+#: session/SessionController.cpp:978
 #, kde-format
 msgid "Create New Profile..."
 msgstr "أنشئ تشكيلة جديدة..."
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:980
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "حرّر التشكيلة الحالية..."
 
-#: session/SessionController.cpp:1095
+#: session/SessionController.cpp:1097
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "يوجد برنامج يعمل الآن في هذه الجلسة. هل أنت متأكد أنك تريد إغلاقها؟"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1101
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "البرنامج '%1' يعمل حاليا في هذه الجلسة. أمتأكد أنك تريد إغلاقها؟"
 
-#: session/SessionController.cpp:1110 session/SessionController.cpp:1153
+#: session/SessionController.cpp:1112 session/SessionController.cpp:1155
 #, kde-format
 msgid "Confirm Close"
 msgstr "أكد الغلق"
 
-#: session/SessionController.cpp:1111
+#: session/SessionController.cpp:1113
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "أغلق البرنامج"
 
-#: session/SessionController.cpp:1138
+#: session/SessionController.cpp:1140
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "يوجد برنامج في هذه الجلسة لن يموت. هل أنت متأكد أنك تريد قتلها بالقوة؟"
 
-#: session/SessionController.cpp:1142
+#: session/SessionController.cpp:1144
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "البرنامج '%1' لن يموت في هذه الجلسة. أمتأكد أنك تريد إغلاقها؟"
 
-#: session/SessionController.cpp:1154
+#: session/SessionController.cpp:1156
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "اقتل البرنامج"
 
-#: session/SessionController.cpp:1998
+#: session/SessionController.cpp:2004
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "افتح المجلد الحالي بـ"
 
-#: session/SessionController.cpp:2065
+#: session/SessionController.cpp:2071
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "احفظ تحميل ZModem إلى ..."
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2458,13 +2458,13 @@ msgstr ""
 "<p>اكتشفت محالة لنقل ملف  ZModem ؛ ولكن لا يوجد برنامج ZModem مناسب في "
 "النظام.</p><p>قد ترغب في تثبيت حزمة  'rzsz' أو 'lrzsz' .</p>"
 
-#: session/SessionController.cpp:2085
+#: session/SessionController.cpp:2091
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>الجلسة الحالية تحوي على عملية نقل ملف ZModem بالفعل.</p>"
 
-#: session/SessionController.cpp:2095
+#: session/SessionController.cpp:2101
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2473,7 +2473,7 @@ msgstr ""
 "<p>لا يوجد برنامج ZModem مناسب في النظام.</p><p>قد ترغب في تثبيت حزمة  "
 "'rzsz' أو 'lrzsz' .</p>"
 
-#: session/SessionController.cpp:2100
+#: session/SessionController.cpp:2106
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "اختر ملفات لرفع  ZModem"
@@ -3511,7 +3511,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "حمّل تخطيط الألسن"
 
-#: Vt102Emulation.cpp:2384
+#: Vt102Emulation.cpp:2387
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
