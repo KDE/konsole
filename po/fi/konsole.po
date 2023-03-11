@@ -15,13 +15,13 @@
 # Tommi Nieminen <translator@legisign.org>, 2009, 2010, 2011.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2010, 2011, 2012, 2013, 2014, 2015, 2016.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012.
-# Tommi Nieminen <translator@legisign.org>, 2010, 2012, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Tommi Nieminen <translator@legisign.org>, 2010, 2012, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-10 00:51+0000\n"
-"PO-Revision-Date: 2022-08-19 13:06+0300\n"
+"PO-Revision-Date: 2023-03-05 18:25+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:22:03+0000\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -656,36 +656,33 @@ msgstr "Ei skaalausta"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Taustakuvan skaalaus:"
+msgstr "Taustakuvan kierto:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Ei kiertoa"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Vaaka-ankkuri:"
+msgstr "Vaaka"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "Pystyankkuri:"
+msgstr "Pysty"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Kumpikin"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -1271,20 +1268,16 @@ msgid "Activate Menu"
 msgstr "Aktivoi valikko"
 
 #: MainWindow.cpp:459
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Siirrä välilehtiasettelu tiedostoon"
+msgstr "Tallenna välilehtiasettelu…"
 
 #: MainWindow.cpp:468
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Lataa välilehtiasettelu tiedostosta"
+msgstr "Lataa välilehtiasettelu…"
 
 #: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
@@ -1365,11 +1358,9 @@ msgstr "Lomake"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Pikanäppäin"
+msgstr "Pikanäppäin:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1454,21 +1445,21 @@ msgid "Quick Commands"
 msgstr "Pikakomennot"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Näytä pikakomennot"
+msgstr "Näytä pikasaanti"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Pikakomentoja ei löytynyt. Niitä voi lisätä kohdassa Liitännäiset → "
+"Pikakomennot"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Pikakomennot"
+msgstr "Liitännäiset – Pikakomennot"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1592,23 +1583,24 @@ msgstr "Näytä SSH-hallinta"
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Näytä SSH-toimintojen pikasaanti"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Tallennettuja SSH-määrityksiä ei löytynyt. Niitä voi lisätä kohdasta "
+"Liitännäiset → SSH-hallinta"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Avaa tiedostonhallinta"
+msgstr "Liitännäiset – SSH-hallinta"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH-kohteet"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:180
 #, kde-format
@@ -1721,9 +1713,7 @@ msgstr "Poista valittu kohde"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
@@ -1737,15 +1727,13 @@ msgstr "Näytä kohteet, jotka eivät täsmää suodattimeen"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Vaihda profiilia yhdistettäessä tai katkaistaessa yhteys"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Profiilinhallinta"
+msgstr "Hallitse profiilia"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2248,10 +2236,9 @@ msgid "&Select All"
 msgstr "V&alitse kaikki"
 
 #: session/SessionController.cpp:728
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Valitse &rivi"
+msgstr "&Valintatila"
 
 #: session/SessionController.cpp:733
 #, kde-format
@@ -3322,36 +3309,28 @@ msgid "Split View Top/Bottom"
 msgstr "Jaa näkymä vaakasuunnassa"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Jaa näkymä vaakasuunnassa"
+msgstr "Jaa näkymä automaattisesti"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Jaa näkymä pystysuunnassa"
+msgstr "Jaa näkymä vasempaan ja oikeaan osaan seuraavalta välilehdeltä"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Jaa näkymä vaakasuunnassa"
+msgstr "Jaa näkymä ylä- ja alaosaan seuraavalta välilehdeltä"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Jaa näkymä vaakasuunnassa"
+msgstr "Jaa näkymä automaattisesti seuraavalta välilehdeltä"
 
 #: ViewManager.cpp:165
 #, kde-format
@@ -3489,13 +3468,13 @@ msgstr "Aseta semanttinen integrointi (Bash)"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Näytä tai piilota semanttiset vihjeet"
 
 #: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Näytä tai piilota rivinumerointi"
 
 #: ViewManager.cpp:330
 #, kde-format
@@ -3510,24 +3489,20 @@ msgid "Switch to Tab %1"
 msgstr "Siirry välilehdelle %1"
 
 #: ViewManager.cpp:553
-#, fuzzy, kde-format
-#| msgid "Semantic hints:"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Semanttiset vihjeet:"
+msgstr "Semanttiset vihjeet"
 
 #: ViewManager.cpp:569
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "Kiinteä rivimäärä:"
+msgstr "Rivinumerointi"
 
 #: ViewManager.cpp:1134
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Siirrä välilehtiasettelu tiedostoon"
+msgstr "Tallenna välilehtiasettelu"
 
 #: ViewManager.cpp:1136 ViewManager.cpp:1223
 #, kde-format
@@ -3556,12 +3531,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1221
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Lataa välilehtiasettelu tiedostosta"
+msgstr "Lataa välilehtiasettelu"
 
 #: Vt102Emulation.cpp:2387
 #, kde-format
@@ -3991,26 +3964,25 @@ msgstr "Näytä pystyviiva sarakkeessa:"
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Monimutkaisen tekstin asettelu</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Monimutkaisen tekstin asettelu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Käytä kaksisuuntaisen tekstin hahmonnus"
+msgstr "Käytä sanatilan tekstinhahmonnusta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Sanatila"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -4019,83 +3991,83 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Sivuuta määritemuutokset keskellä sanaa (muuten määritemuutokset katkaisevat "
+"sanan hahmonnettaessa)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Käytä samoja määritteitä koko sanaan"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Hahmonna ASCII-merkkejä sisältävät sanat yhdessä"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Sanamerkit:"
+msgstr "ASCII-merkit"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Hahmonna intialaisia kirjoitusmerkkejä sisältävät sanat yhdessä"
 
+# Periaatteessa oikein, koska kaikki Intiassa käytetyt kirjoitusjärjestelmät (pl. latinalainen ja arabialainen) ovat ”brahmiinisia”
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "vastaa nykyistä merkkiä"
+msgstr "Intialaisten kirjoitusjärjestelmien merkit"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Fontti:"
+msgstr "Emojifontti:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Rivit ovat aina vasemmalta oikealle sen sijaan, että ensimmäinen vahva "
+"merkki määrittäisi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "pakota rivisuunta vasemmalta oikealle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Pidä taulukonpiirtomerkkejä vahvoina vasemmalta oikealle -merkkeinä."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Taulukkomerkkien molempisuuntaisohitus"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Liitä &ohjausmerkeittä"
+msgstr "Sivuuta ongelmamerkkien wc-leveys"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Sivuuta wc-leveys"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4495,27 +4467,25 @@ msgstr "Aina"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Punaiset virhepalkit:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Sumenna tausta"
+msgstr "Punainen virhetausta:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Vuorottelevat palkit:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Sumenna tausta"
+msgstr "Vuorotteleva tausta:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
