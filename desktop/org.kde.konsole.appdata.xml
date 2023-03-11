@@ -16,7 +16,6 @@
   <name xml:lang="de">Konsole</name>
   <name xml:lang="el">Konsole</name>
   <name xml:lang="en-GB">Konsole</name>
-  <name xml:lang="eo">Konzolo</name>
   <name xml:lang="es">Konsole</name>
   <name xml:lang="et">Konsool</name>
   <name xml:lang="eu">Konsole</name>
@@ -27,7 +26,6 @@
   <name xml:lang="ia">Konsole</name>
   <name xml:lang="id">Konsole</name>
   <name xml:lang="ie">Konsole</name>
-  <name xml:lang="is">Konsole</name>
   <name xml:lang="it">Konsole</name>
   <name xml:lang="ka">Konsole</name>
   <name xml:lang="ko">Konsole</name>
@@ -68,7 +66,6 @@
   <summary xml:lang="de">Terminal</summary>
   <summary xml:lang="el">Τερματικό</summary>
   <summary xml:lang="en-GB">Terminal</summary>
-  <summary xml:lang="eo">Terminalo</summary>
   <summary xml:lang="es">Terminal</summary>
   <summary xml:lang="et">Terminal</summary>
   <summary xml:lang="eu">Terminala</summary>
@@ -79,7 +76,6 @@
   <summary xml:lang="ia">Terminal</summary>
   <summary xml:lang="id">Terminal</summary>
   <summary xml:lang="ie">Terminal</summary>
-  <summary xml:lang="is">Skjáhermir</summary>
   <summary xml:lang="it">Terminale</summary>
   <summary xml:lang="ka">ტერმინალი</summary>
   <summary xml:lang="ko">터미널</summary>
@@ -120,7 +116,6 @@
     <p xml:lang="de">Konsole ist ein Terminal zum Ausführen einer Befehls-Shell. Es stellt eine Befehlszeile-Schnittstelle zur direkten Steuerung Ihres Rechner zur Verfügung.</p>
     <p xml:lang="el">Το Konsole είναι ένα τερματικό για την εκτέλεση ενός σεναρίου φλοιού. Παρέχει ένα περιβάλλον χρήστη για να ελέγχετε απευθείας τον υπολογιστή σας.</p>
     <p xml:lang="en-GB">Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
-    <p xml:lang="eo">Konsole estas terminalo por ruli komandan ŝelon. Ĝi provizas komandlinian interfacon por rekte stiri vian komputilon.</p>
     <p xml:lang="es">Konsole es un emulador de terminal que ejecuta un intérprete de órdenes. Proporciona una interfaz de línea de órdenes para controlar directamente su equipo.</p>
     <p xml:lang="et">Konsool on terminal käsurea kasutamise võimaldamiseks, mis lubab vahetult arvuti tegevust juhtida.</p>
     <p xml:lang="eu">Konsole komando «shell» bat exekutatzeko terminal bat da. Zure ordenagailua era zuzenean kontrolatzeko komando lerroko interfaze bat hornitzen du.</p>
@@ -131,7 +126,6 @@
     <p xml:lang="ia">Konsole es un terminal pro executar un shell de commando.  Illo provide un interfacie de linea de commando pro controlar directemente tu computator.</p>
     <p xml:lang="id">Konsole adalah sebuah terminal untuk menjalankan shell perintah. Ini menyediakan antarmuka baris perintah untuk secara langsung mengendalikan komputer Anda.</p>
     <p xml:lang="ie">Konsole es un terminal quel lansa un shell de comandes. It provide un interfacie del linea de comandes por controlar vor computator directmen.</p>
-    <p xml:lang="is">Konsole er skjáhermir til að keyra skeljaskipanir. Það gefur skipanalínuviðmót til að stýra tölvum beint.</p>
     <p xml:lang="it">Konsole è un terminale per eseguire una shell di comandi. Fornisce un'interfaccia a riga di comando per controllare direttamente il tuo computer.</p>
     <p xml:lang="ka">Konsole წარმადგენს ტერმინალს ბრძანების სტრიქონის გარსის გასაშვებად. ის მოგაწოდებთ ბრძანების სტრიქონის ინტერფეისს, რომლითაც შეგიძლიათ თქვენი კომპიუტერი პირდაპირ აკონტროლოთ.</p>
     <p xml:lang="ko">Konsole은 흔히 터미널, 혹은 셸이라고 불리는 X 터미널 에뮬레이터입니다. 텍스트 창에서 컴퓨터를 직접 재현하는 명령행 인터페이스를 재현합니다.</p>
@@ -165,7 +159,6 @@
     <p xml:lang="de">Funktionen:</p>
     <p xml:lang="el">Χαρακτηριστικά:</p>
     <p xml:lang="en-GB">Features:</p>
-    <p xml:lang="eo">Trajtoj:</p>
     <p xml:lang="es">Funcionalidades:</p>
     <p xml:lang="et">Omadused:</p>
     <p xml:lang="eu">Eginbideak:</p>
@@ -176,7 +169,6 @@
     <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="id">Fitur:</p>
     <p xml:lang="ie">Caracteristicas:</p>
-    <p xml:lang="is">Eiginleikar:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ka">თვისებები:</p>
     <p xml:lang="ko">기능:</p>
@@ -218,7 +210,6 @@
       <li xml:lang="de">Unterfenster</li>
       <li xml:lang="el">Καρτέλες</li>
       <li xml:lang="en-GB">Tabs</li>
-      <li xml:lang="eo">Langetoj</li>
       <li xml:lang="es">Pestañas</li>
       <li xml:lang="et">Kaardid</li>
       <li xml:lang="eu">Fitxak</li>
@@ -229,7 +220,6 @@
       <li xml:lang="ia">Schedas</li>
       <li xml:lang="id">Tab</li>
       <li xml:lang="ie">Cartes</li>
-      <li xml:lang="is">Flipar</li>
       <li xml:lang="it">Schede</li>
       <li xml:lang="ka">დაფები</li>
       <li xml:lang="ko">탭</li>
@@ -269,7 +259,6 @@
       <li xml:lang="de">Mehrere Profile</li>
       <li xml:lang="el">Πολλαπλά προφίλ</li>
       <li xml:lang="en-GB">Multiple profiles</li>
-      <li xml:lang="eo">Multoblaj profiloj</li>
       <li xml:lang="es">Perfiles múltiples</li>
       <li xml:lang="et">Mitme profiili võimalus</li>
       <li xml:lang="eu">Askotariko profilak</li>
@@ -280,7 +269,6 @@
       <li xml:lang="ia">Profilos multiple</li>
       <li xml:lang="id">Beberapa profil</li>
       <li xml:lang="ie">Multiplic profiles</li>
-      <li xml:lang="is">Mörg notendasnið</li>
       <li xml:lang="it">Profili multipli</li>
       <li xml:lang="ka">სხვადასხვა პროფაილები</li>
       <li xml:lang="ko">다중 프로필</li>
@@ -320,7 +308,6 @@
       <li xml:lang="de">Überwachung auf Aktivität und Inaktivität</li>
       <li xml:lang="el">Παρακολούθηση κατάστασης αδράνειας και δραστηριοτήτων</li>
       <li xml:lang="en-GB">Silence and Activity monitoring</li>
-      <li xml:lang="eo">Monitorado de Silento kaj Agado</li>
       <li xml:lang="es">Supervisión de silencios y actividad</li>
       <li xml:lang="et">Vaikuse ja aktiivsuse jälgimine</li>
       <li xml:lang="eu">Isilaldi eta jardueren gainbegiratzea</li>
@@ -331,7 +318,6 @@
       <li xml:lang="ia">Controlante silentio e activitate </li>
       <li xml:lang="id">Pemantauan Diam dan Aktivitas</li>
       <li xml:lang="ie">Control de activitá e ínaction</li>
-      <li xml:lang="is">Vöktun á þögn og virkni</li>
       <li xml:lang="it">Monitoraggio del silenzio e dell'attività</li>
       <li xml:lang="ka">სიჩუმისა და აქტივობის მონიტორინგი</li>
       <li xml:lang="ko">침묵 및 활동 모니터링</li>
@@ -370,7 +356,6 @@
       <li xml:lang="de">Lesezeichen-Unterstützung</li>
       <li xml:lang="el">υποστήριξη σελιδοδεικτών</li>
       <li xml:lang="en-GB">Bookmark support</li>
-      <li xml:lang="eo">Legomarksubteno</li>
       <li xml:lang="es">Uso de marcadores</li>
       <li xml:lang="et">Järjehoidjate toetus</li>
       <li xml:lang="eu">Laster-markak onartzen ditu</li>
@@ -381,7 +366,6 @@
       <li xml:lang="ia">Supporto de marcator de libro</li>
       <li xml:lang="id">Dukungan markah</li>
       <li xml:lang="ie">Supporte de marca-págines</li>
-      <li xml:lang="is">Stuðningur við bókamerki</li>
       <li xml:lang="it">Supporto dei segnalibri</li>
       <li xml:lang="ka">სანიშნეების მხარდაჭერა</li>
       <li xml:lang="ko">책갈피 지원</li>
@@ -420,7 +404,6 @@
       <li xml:lang="de">Suchen</li>
       <li xml:lang="el">Αναζήτηση</li>
       <li xml:lang="en-GB">Searching</li>
-      <li xml:lang="eo">Serĉante</li>
       <li xml:lang="es">Búsqueda</li>
       <li xml:lang="et">Otsimine</li>
       <li xml:lang="eu">Bilatzea</li>
@@ -431,7 +414,6 @@
       <li xml:lang="ia">Cercante</li>
       <li xml:lang="id">Pencarian</li>
       <li xml:lang="ie">Sercha</li>
-      <li xml:lang="is">Leit</li>
       <li xml:lang="it">Ricerca</li>
       <li xml:lang="ka">ძებნა</li>
       <li xml:lang="ko">찾기</li>
@@ -471,7 +453,6 @@
       <li xml:lang="de">Speicherung der Ausgabe</li>
       <li xml:lang="el">Αποθήκευση αποτελέσματος</li>
       <li xml:lang="en-GB">Saving output</li>
-      <li xml:lang="eo">Konservante eligon</li>
       <li xml:lang="es">Guardar la salida</li>
       <li xml:lang="et">Väljundi salvestamine</li>
       <li xml:lang="eu">Irteera gordetzea</li>
@@ -482,7 +463,6 @@
       <li xml:lang="ia">Salveguardante exito</li>
       <li xml:lang="id">Penyimpanan keluaran</li>
       <li xml:lang="ie">Gardation de production</li>
-      <li xml:lang="is">Vista frálag</li>
       <li xml:lang="it">Salvataggio del risultato</li>
       <li xml:lang="ka">გამოტანის შენახვა</li>
       <li xml:lang="ko">출력 저장</li>
@@ -522,7 +502,7 @@
       <caption>Konsole being used as a terminal emulator</caption>
       <caption xml:lang="ar">يستخدم كونسول كمحاكي طرفيّة.</caption>
       <caption xml:lang="az">Konsole terminal emulyatoru olaraq istifadə olunur</caption>
-      <caption xml:lang="be">Konsole выкарыстоўваецца як эмулятар тэрмінала</caption>
+      <caption xml:lang="be">Konsole выкарыстоўваецца як эмулятара тэрмінала</caption>
       <caption xml:lang="bg">Konsole - терминален емулатор</caption>
       <caption xml:lang="ca">El Konsole s'usa com a emulador de terminal</caption>
       <caption xml:lang="ca-valencia">Konsole s'utilitza com a emulador de terminal</caption>
@@ -531,7 +511,6 @@
       <caption xml:lang="de">Konsole wird als Terminal-Emulator verwendet</caption>
       <caption xml:lang="el">Το Konsole χρησιμεύει ως εξομοιωτής τερματικού</caption>
       <caption xml:lang="en-GB">Konsole being used as a terminal emulator</caption>
-      <caption xml:lang="eo">Konsole en uzo kiel terminal-emulilo</caption>
       <caption xml:lang="es">Konsole usado como un emulador de terminal</caption>
       <caption xml:lang="et">Konsooli kasutamine terminaliemulaatorina</caption>
       <caption xml:lang="eu">Konsole terminal emulatzaile gisa erabilia</caption>
@@ -542,7 +521,6 @@
       <caption xml:lang="ia">Konsole es usate como un emulator de terminal</caption>
       <caption xml:lang="id">Konsole yang digunakan sebagai emulator terminal</caption>
       <caption xml:lang="ie">Konsole es usat quam un emulator de terminal</caption>
-      <caption xml:lang="is">Konsole notað sem skjáhermir</caption>
       <caption xml:lang="it">Konsole utilizzata come un emulatore di terminale</caption>
       <caption xml:lang="ka">Konsole გამოიყენება, როგორც ტერმინალის ემულატორი</caption>
       <caption xml:lang="ko">터미널 에뮬레이터로 사용 중인 Konsole</caption>
