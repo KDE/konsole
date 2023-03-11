@@ -11,7 +11,6 @@
         "Name[de]": "SSH-Verwaltung",
         "Name[el]": "Διαχειριστής SSH",
         "Name[en_GB]": "SSH Manager",
-        "Name[eo]": "SSH-Mastrumilo",
         "Name[es]": "Gestor de SSH",
         "Name[eu]": "SSH kudeatzailea",
         "Name[fi]": "SSH-hallinta",
@@ -20,7 +19,6 @@
         "Name[ia]": "Gerente de SSH",
         "Name[id]": "Pengelola SSH",
         "Name[ie]": "Gerente de SSH",
-        "Name[is]": "SSH-stjóri",
         "Name[it]": "Gestore SSH",
         "Name[ka]": "SSH-ის მმართველი",
         "Name[ko]": "SSH 관리자",
@@ -38,7 +36,6 @@
         "Name[tr]": "SSH Yöneticisi",
         "Name[uk]": "Керування SSH",
         "Name[x-test]": "xxSSH Managerxx",
-        "Name[zh_CN]": "SSH 管理器",
-        "Name[zh_TW]": "SSH 管理程式"
+        "Name[zh_CN]": "SSH 管理器"
     }
 }
