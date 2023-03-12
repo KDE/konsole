@@ -86,8 +86,11 @@ void PtyTest::testRunProgram()
     const int result = pty.start(program, arguments, environments);
 
     QCOMPARE(result, 0);
-
-    QCOMPARE(pty.foregroundProcessGroup(), pty.processId());
+    auto fpg = pty.foregroundProcessGroup();
+    auto pid = pty.processId();
+    // Try using variables in the QCOMPARE due to random failures on CI
+    QCOMPARE(fpg, pid);
+    pty.close();
 }
 
 QTEST_GUILESS_MAIN(PtyTest)

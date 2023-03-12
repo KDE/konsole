@@ -17,6 +17,7 @@
 
 // System
 #include <csignal>
+#include <errno.h>
 #include <sys/ioctl.h> //ioctl() and TIOCSWINSZ
 #include <termios.h>
 
@@ -318,8 +319,12 @@ int Pty::foregroundProcessGroup() const
 
         if (foregroundPid != -1) {
             return foregroundPid;
+        } else {
+            qCWarning(KonsoleDebug, "Failed to get foreground process group id for %d: %s", master_fd, strerror(errno));
+            return 0;
         }
     }
+    qWarning(KonsoleDebug, "foregroundProcessGroup master_fd < 0");
 
     return 0;
 }
