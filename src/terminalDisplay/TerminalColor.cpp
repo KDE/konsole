@@ -84,6 +84,12 @@ QRgb TerminalColor::blendColor() const
     return m_blendColor;
 }
 
+void TerminalColor::setCursorColor(const QColor &color)
+{
+    m_cursorColor = color;
+    onColorsChanged();
+}
+
 void TerminalColor::setBackgroundColor(const QColor &color)
 {
     m_colorTable[DEFAULT_BACK_COLOR] = color;
