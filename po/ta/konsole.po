@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-10 00:51+0000\n"
-"PO-Revision-Date: 2023-01-31 19:56+0530\n"
+"PO-Revision-Date: 2023-03-12 16:39+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1430,12 +1430,12 @@ msgstr "விரை அணுகலைக் காட்டு"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"விரை கட்டளை ஏதுமில்லை. செருகுநிரல்கள் → விரை கட்டளைகள் என்பதற்கு சென்று ஒன்றைச் சேர்க்கலாம்"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "விரை கட்டளைகள்"
+msgstr "செருகுநிரல்கள் - விரை கட்டளைகள்"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1565,11 +1565,13 @@ msgstr "SSH செயல்களை விரைவாக அணுக உத�
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"சேமித்துள்ள SSH அமைப்பேதையும் கண்டுபிடிக்க முடியவில்லை. செருகுநிரல்கள் → SSH மேலாளி "
+"என்பதில் ஒன்றைச் சேர்க்கலாம்"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "பட்டியல் &பட்டியை மறை"
+msgstr "செருகுநிரல்கள் - SSH மேலாளி"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -2161,16 +2163,12 @@ msgid "Copy"
 msgstr "நகலெடு"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "காட்சியை இடது/வலது என பிரி"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "காட்சியை மேல்/கீழ் என பிரி"
 
@@ -4033,17 +4031,15 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "&கட்டுப்பாடு குறிகளை நீக்கி ஒட்டு"
+msgstr "பிரச்சனை உண்டாக்கும் எழுத்துகளின் wcwidth-ஐ பொருட்படுத்தாதே"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "wcwidth-ஐ மேலெழுது"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
