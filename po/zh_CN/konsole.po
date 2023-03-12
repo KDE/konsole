@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-10 00:51+0000\n"
-"PO-Revision-Date: 2023-02-24 12:43\n"
+"PO-Revision-Date: 2023-03-11 04:54\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/konsole/konsole.pot\n"
-"X-Crowdin-File-ID: 5253\n"
+"X-Crowdin-File: /kf5-stable/messages/konsole/konsole.pot\n"
+"X-Crowdin-File-ID: 4087\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1420,12 +1420,13 @@ msgstr "显示快速访问"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
-msgstr "找不到快速命令。您可以通过菜单栏的：插件 -> 快速命令 添加一个"
+msgstr ""
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Quick Commands"
 msgid "Plugins - Quick Commands"
-msgstr "插件 - 快速命令"
+msgstr "快速命令"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1555,12 +1556,12 @@ msgstr "显示 SSH 操作快速访问"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
-"没有找到已保存的 SSH 配置。您可以通过菜单栏的：插件 -> SSH 管理器 添加一个"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "SSH Manager"
 msgid "Plugins - SSH Manager"
-msgstr "插件 - SSH 管理器"
+msgstr "SSH 管理器"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -3255,22 +3256,28 @@ msgid "Split View Automatically"
 msgstr "自动分割视图"
 
 #: ViewManager.cpp:139
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Left/Right"
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "向右拆分选项卡"
+msgstr "左右拆分视图"
 
 #: ViewManager.cpp:147
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Top/Bottom"
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "向下拆分选项卡"
+msgstr "上下拆分视图"
 
 #: ViewManager.cpp:155
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Split View Automatically"
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "自动拆分选项卡"
+msgstr "自动分割视图"
 
 #: ViewManager.cpp:165
 #, kde-format
