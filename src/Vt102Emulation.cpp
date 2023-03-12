@@ -25,6 +25,7 @@
 // Konsole
 #include "EscapeSequenceUrlExtractor.h"
 #include "session/SessionController.h"
+#include "session/SessionManager.h"
 #include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
@@ -1146,12 +1147,76 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
     }
 
     if (attribute == Session::ProfileChange) {
-        if (value.startsWith(QLatin1String("CursorShape="))) {
-            const auto numStr = QStringView(value).right(1);
-            const Enum::CursorShapeEnum shape = static_cast<Enum::CursorShapeEnum>(numStr.toInt());
-            Q_EMIT setCursorStyleRequest(shape);
+        bool styleChanged = false;
+        bool isBlinking = false;
+        Enum::CursorShapeEnum shape = Enum::BlockCursor;
+        QColor customColor;
+
+        if (TerminalDisplay *currentView = _currentScreen->currentTerminalDisplay()) {
+            if (SessionController *sessionController = currentView->sessionController()) {
+                Session *session = sessionController->session();
+                SessionManager *manager = SessionManager::instance();
+                Profile::Ptr currentProfile = manager->sessionProfile(session);
+                shape = currentProfile->cursorShape();
+                isBlinking = currentProfile->blinkingCursorEnabled();
+                customColor = currentProfile->customCursorColor();
+            }
+        }
+
+        const QLatin1String cursorShapeStr("CursorShape=");
+        const QLatin1String blinkingCursorStr("BlinkingCursorEnabled=");
+        const QLatin1String customCursorColorStr("CustomCursorColor=");
+
+        QString newValue;
+        #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        const auto items = QStringView(value).split(QLatin1Char(';'));
+        #else
+        const auto items = value.splitRef(QLatin1Char(';'));
+        #endif
+        for (const auto &item: items) {
+            if (item.startsWith(cursorShapeStr)) {
+                const int s = item.at(cursorShapeStr.size()).digitValue();
+                shape = static_cast<Enum::CursorShapeEnum>(s != -1 ? s : 0);
+                styleChanged = true;
+
+            } else if (item.startsWith(blinkingCursorStr)) {
+                const auto str = item.mid(blinkingCursorStr.size());
+                if (str.compare(QString::fromLatin1("true"), Qt::CaseInsensitive) == 0) {
+                    isBlinking = true;
+                    styleChanged = true;
+                } else if (str.compare(QString::fromLatin1("false"), Qt::CaseInsensitive) == 0) {
+                    isBlinking = false;
+                    styleChanged = true;
+                } else {
+                    bool ok = false;
+                    bool newIsBlinking = str.toInt(&ok);
+                    if (ok) {
+                        isBlinking = newIsBlinking;
+                        styleChanged = true;
+                    }
+                }
+
+            } else if (item.startsWith(customCursorColorStr)) {
+                const auto colorStr = item.mid(customCursorColorStr.size());
+                customColor = QColor(colorStr);
+                styleChanged = true;
+
+            } else {
+                if (!newValue.isEmpty())
+                    newValue.append(QChar::fromLatin1(';'));
+                newValue.append(item);
+            }
+        }
+
+        if (styleChanged) {
+            Q_EMIT setCursorStyleRequest(shape, isBlinking, customColor);
+        }
+
+        if (newValue.isEmpty()) {
             return;
         }
+
+        value = newValue;
     }
 
     if (attribute == Image) {

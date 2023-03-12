@@ -50,6 +50,8 @@ public:
         return m_cursorColor;
     }
 
+    void setCursorColor(const QColor &color);
+
     QColor cursorTextColor() const
     {
         return m_cursorTextColor;

@@ -17,7 +17,9 @@
 #include <QStringList>
 #include <QVariant>
 
+// Konsole
 #include "konsoleprivate_export.h"
+#include "Enumeration.h"
 
 #include <map>
 #include <vector>
@@ -699,6 +701,12 @@ public:
     bool flowControlEnabled() const
     {
         return property<bool>(Profile::FlowControlEnabled);
+    }
+
+    /** Convenience method for property<int>(Profile::CursorShape) */
+    Enum::CursorShapeEnum cursorShape() const
+    {
+        return static_cast<Enum::CursorShapeEnum>(property<int>(Profile::CursorShape));
     }
 
     /** Convenience method for property<bool>(Profile::UseCustomCursorColor) */

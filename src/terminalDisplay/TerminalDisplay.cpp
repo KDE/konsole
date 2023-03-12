@@ -368,11 +368,15 @@ void TerminalDisplay::setKeyboardCursorShape(Enum::CursorShapeEnum shape)
     _cursorShape = shape;
 }
 
-void TerminalDisplay::setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking)
+void TerminalDisplay::setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking, const QColor &customColor)
 {
     setKeyboardCursorShape(shape);
 
     setBlinkingCursorEnabled(isBlinking);
+
+    if (customColor.isValid()) {
+        _terminalColor->setCursorColor(customColor);
+    }
 
     // when the cursor shape and blinking state are changed via the
     // Set Cursor Style (DECSCUSR) escape sequences in vim, and if the
