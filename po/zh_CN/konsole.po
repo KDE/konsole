@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-10 00:51+0000\n"
-"PO-Revision-Date: 2023-02-24 12:43\n"
+"PO-Revision-Date: 2023-03-11 04:52\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2148,16 +2148,12 @@ msgid "Copy"
 msgstr "复制"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "左右拆分视图"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "上下拆分视图"
 
@@ -3987,17 +3983,15 @@ msgstr "表格字符双向模式覆盖"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "不带控制字符粘贴(&W)"
+msgstr "忽略有问题字符的 wcwidth"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "覆盖 wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
