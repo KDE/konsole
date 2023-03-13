@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-10 00:51+0000\n"
+"POT-Creation-Date: 2023-03-13 00:52+0000\n"
 "PO-Revision-Date: 2023-02-27 22:11+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -2103,7 +2103,7 @@ msgstr "Isiltasuna «%1»(e)an (Saioa «%2»)"
 
 #: session/Session.cpp:700 session/Session.cpp:1881
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
-#: Vt102Emulation.cpp:1133
+#: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "Erakutsi saioa"
@@ -3177,64 +3177,64 @@ msgstr "Ktrl"
 msgid "Enable thumbnails generation"
 msgstr "Gaitu koadro txikiak sortzea"
 
-#: terminalDisplay/TerminalDisplay.cpp:659
+#: terminalDisplay/TerminalDisplay.cpp:663
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Neurria: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2223
+#: terminalDisplay/TerminalDisplay.cpp:2227
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Ziur zaude karaktere %1 itsatsi nahi duzula?"
 msgstr[1] "Ziur zaude %1 karaktere itsatsi nahi dituzula?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2224
+#: terminalDisplay/TerminalDisplay.cpp:2228
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Berretsi itsastea"
 
-#: terminalDisplay/TerminalDisplay.cpp:2257
+#: terminalDisplay/TerminalDisplay.cpp:2261
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Testuaren amaiera/Eten: uneko prozesua itxi lezake"
 
-#: terminalDisplay/TerminalDisplay.cpp:2258
+#: terminalDisplay/TerminalDisplay.cpp:2262
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Transmisioaren amaiera: uneko prozesua itxi lezake"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2263
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Txirrina: Abisu entzungarri bat igortzen saiatuko da"
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2264
 #, kde-format
 msgid "Backspace"
 msgstr "Atzera-tekla"
 
-#: terminalDisplay/TerminalDisplay.cpp:2261
+#: terminalDisplay/TerminalDisplay.cpp:2265
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Gailu agintea 3 (DC3)/XOFF: irteerakoa esekitzen du"
 
-#: terminalDisplay/TerminalDisplay.cpp:2262
+#: terminalDisplay/TerminalDisplay.cpp:2266
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Ordeztu/Eseki: uneko prozesua eseki lezake"
 
-#: terminalDisplay/TerminalDisplay.cpp:2263
+#: terminalDisplay/TerminalDisplay.cpp:2267
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Ihes egin: terminalaren egoerak manipulatzeko erabilia"
 
-#: terminalDisplay/TerminalDisplay.cpp:2264
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Fitxategi banatzailea/Irten: uneko prozesua galaraz dezake"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3243,31 +3243,31 @@ msgstr ""
 "Itsatsi nahian zabiltzan testuak ezkutuko aginterako karaktereak ditu, haiek "
 "iragazi nahi dituzu?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2298
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Berretsi itsastea"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Itsatsi aginterako karaktererik &gabe"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Itsatsi dena"
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2301
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Utzi"
 
-#: terminalDisplay/TerminalDisplay.cpp:2536
+#: terminalDisplay/TerminalDisplay.cpp:2540
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3278,17 +3278,17 @@ msgstr ""
 "\">eten egin da</a> Ktrl+S sakatzeagatik. Sakatu <b>Ktrl+Q</b> berrekiteko.</"
 "qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2591
+#: terminalDisplay/TerminalDisplay.cpp:2595
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Terminal hau soilik-irakurtzeko da."
 
-#: terminalDisplay/TerminalDisplay.cpp:2986
+#: terminalDisplay/TerminalDisplay.cpp:2990
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Aldatu &Direktorioa hona"
 
-#: terminalDisplay/TerminalDisplay.cpp:3019
+#: terminalDisplay/TerminalDisplay.cpp:3023
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Itsatsi kokalekua"
@@ -3539,7 +3539,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zamatu fitxen antolaera"
 
-#: Vt102Emulation.cpp:2387
+#: Vt102Emulation.cpp:2452
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
