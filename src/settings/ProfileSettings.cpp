@@ -31,6 +31,9 @@ ProfileSettings::ProfileSettings(QWidget *parent)
     profileListView->setModel(ProfileModel::instance());
     profileListView->setItemDelegateForColumn(ProfileModel::SHORTCUT, new ShortcutItemDelegate(this));
     profileListView->setSelectionMode(QAbstractItemView::SingleSelection);
+    connect(ProfileModel::instance(), &QAbstractItemModel::modelReset, this, [this] {
+        setAsDefaultButton->setEnabled(currentProfile() != nullptr);
+    });
 
     // double clicking the profile name opens the profile edit dialog
     connect(profileListView, &QAbstractItemView::doubleClicked, this, &Konsole::ProfileSettings::doubleClicked);
@@ -121,6 +124,9 @@ void ProfileSettings::deleteSelected()
 
 void ProfileSettings::setSelectedAsDefault()
 {
+    if (!currentProfile()) {
+        return;
+    }
     ProfileManager::instance()->setDefaultProfile(currentProfile());
     // do not allow the new default session type to be removed
     deleteProfileButton->setEnabled(false);
