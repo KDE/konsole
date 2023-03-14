@@ -123,7 +123,9 @@ bool ConPtyProcess::startProcess(const QString &shellPath,
     auto envV = vectorFromString(env);
     LPWSTR envArg = envV.empty() ? nullptr : envV.data();
 
-    auto cmdArg = m_shellPath.toStdWString();
+    QStringList exeAndArgs = arguments;
+    exeAndArgs.prepend(m_shellPath);
+    auto cmdArg = exeAndArgs.join(QLatin1String(" ")).toStdWString();
 
     HRESULT hr{E_UNEXPECTED};
 
