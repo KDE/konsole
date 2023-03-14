@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 03:09+0000\n"
-"PO-Revision-Date: 2023-03-07 09:11+0100\n"
+"PO-Revision-Date: 2023-03-13 10:25+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3752,7 +3752,7 @@ msgstr "Dibuixa colors intensos en el tipus de lletra negreta"
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
 "Usa el tipus de lletra seleccionat per als caràcters de línia en lloc del "
-"codi incorporat"
+"codi integrat"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
