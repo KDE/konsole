@@ -418,6 +418,29 @@ QString Session::shellSessionId() const
     return friendlyUuid;
 }
 
+static QStringList postProcessArgs(const QStringList &args)
+{
+#ifndef Q_OS_WIN
+    if (!KSandbox::isFlatpak()) {
+        return args;
+    }
+    QStringList arguments;
+    // last arg is the program
+    arguments = args;
+    QString program = arguments.back();
+    arguments.pop_back();
+    // Needs to be explicitly specified, KSandbox::makeHostContext
+    // ignores any variables set in the system environment so this
+    // never gets set.
+    arguments.push_back(QStringLiteral("--env=TERM=xterm-256color"));
+    arguments.push_back(program);
+    return arguments;
+#else
+    qCritical() << "Should never get called on windows";
+    return {};
+#endif
+}
+
 void Session::run()
 {
     // FIXME: run() is called twice in some instances
@@ -534,8 +557,9 @@ void Session::run()
     _shellProcess->setArguments(arguments);
     _shellProcess->setEnvironment(originalEnvironment + _environment);
     const auto context = KSandbox::makeHostContext(*_shellProcess);
+    arguments = postProcessArgs(context.arguments);
     _shellProcess->setEnvironment(originalEnvironment);
-    const auto result = _shellProcess->start(context.program, context.arguments, _environment);
+    const auto result = _shellProcess->start(context.program, arguments, _environment);
 #else
     int result = _shellProcess->start(exec, arguments, _environment);
 #endif
