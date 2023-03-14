@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:52+0000\n"
-"PO-Revision-Date: 2023-03-04 08:26+0100\n"
+"PO-Revision-Date: 2023-03-13 20:21+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1274,8 +1274,9 @@ msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
-msgstr[0] ""
+msgstr[0] "Estas procezo rulanta en ĉi fenestro. Ĉu vi tamen volas rezigni?"
 msgstr[1] ""
+"Estas %1 procezoj rulantaj en tiu ĉi fenestro. Ĉu vi tamen volas rezigni?"
 
 #: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
 #, kde-format
@@ -1430,7 +1431,7 @@ msgstr "Nuligi"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:112
 #, kde-format
 msgid "Quick Commands"
-msgstr "Rapidaj Komandoj"
+msgstr "Fulmokomandoj"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
@@ -1441,16 +1442,18 @@ msgstr "Montri Rapidan Aliron"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Neniuj fulmkomandoj trovitaj. Vi povas aldoni tian per Kromaĵoj -> "
+"Fulmokomandoj"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Kromprogramoj - Rapidaj Komandoj"
+msgstr "Kromprogramoj - Fulmokomandoj"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
-msgstr "Montri Rapidajn Komandojn"
+msgstr "Montri Fulmkomandojn"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:168
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
@@ -1559,12 +1562,12 @@ msgstr "Gastiganto: %1"
 #: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
 msgid "SSH Manager"
-msgstr "SSH-Manaĝero"
+msgstr "SSH-Administrilo"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:95
 #, kde-format
 msgid "Show SSH Manager"
-msgstr "Montri SSH-Administranton"
+msgstr "Montri SSH-Administrilon"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
@@ -1575,11 +1578,13 @@ msgstr "Montri Rapidan Aliron por SSH-Agoj"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Trovis neniun konservitan SSH-agordon. Vi povas aldoni tian per Kromaĵoj -> "
+"SSH-Administrilo"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Kromprogramoj - SSH-Manaĝero"
+msgstr "Kromprogramoj - SSH-Administrilo"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -2171,18 +2176,14 @@ msgid "Copy"
 msgstr "Kopii"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "Dividi rigardon vertikale"
+msgstr "Dividi Perspektivon Maldekstre-Dekstre"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Dividi rigardon horizontale"
+msgstr "Dividi Perspektivon Supre-Malsupre"
 
 #: session/SessionController.cpp:684
 #, kde-format
@@ -3163,13 +3164,13 @@ msgstr "Grando: %1 x %2"
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ĉu vi certas ke vi volas alglui %1 signon?"
+msgstr[1] "Ĉu vi certas ke vi volas alglui %1 signojn?"
 
 #: terminalDisplay/TerminalDisplay.cpp:2228
 #, kde-format
 msgid "Confirm Paste"
-msgstr "Konfirmi Paston"
+msgstr "Konfirmi Algluon"
 
 #: terminalDisplay/TerminalDisplay.cpp:2261
 #, kde-format
@@ -4121,8 +4122,8 @@ msgstr "Profilo kun la nomo \"%1\" jam ekzistas."
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Redaktante profilon: %2"
+msgstr[1] "Redaktante %1 profilojn: %2"
 
 #: widgets/EditProfileDialog.cpp:347
 #, kde-format
@@ -4141,8 +4142,8 @@ msgctxt ""
 "separate it from the number value."
 msgid " column"
 msgid_plural " columns"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " kolumno"
+msgstr[1] " kolumnoj"
 
 #: widgets/EditProfileDialog.cpp:443
 #, kde-format
@@ -4151,8 +4152,8 @@ msgctxt ""
 "separate it from the number value."
 msgid " row"
 msgid_plural " rows"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " vico"
+msgstr[1] " vicoj"
 
 #: widgets/EditProfileDialog.cpp:453
 #, kde-format
@@ -4194,8 +4195,8 @@ msgstr "Unu mediovariablo per linio"
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " sekundo"
+msgstr[1] " sekundoj"
 
 #: widgets/EditProfileDialog.cpp:698
 #, kde-format
@@ -4939,8 +4940,8 @@ msgstr "La sojlo por kontinua silento detektata de Konsole"
 msgctxt "@label:textbox Unit of scrollback"
 msgid " line"
 msgid_plural " lines"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " linio"
+msgstr[1] " linioj"
 
 #: widgets/HistorySizeWidget.cpp:57
 #, kde-format
