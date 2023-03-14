@@ -378,6 +378,22 @@ QString Session::checkProgram(const QString &program)
         return QString();
     }
 
+#ifndef Q_OS_WIN
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+    if (KSandbox::isFlatpak()) {
+        QProcess proc;
+        // run "test -x exec" on the host to see if the shell is executable
+        proc.setProgram(QStringLiteral("test"));
+        proc.setArguments(QStringList{QStringLiteral("-x"), exec});
+        KSandbox::startHostProcess(proc, QProcess::ReadOnly);
+        if (proc.waitForStarted() && proc.waitForFinished(-1)) {
+            return proc.exitCode() == 0 ? exec : QString();
+        }
+        return {};
+    }
+#endif
+#endif // Q_OS_WIN
+
     QFileInfo info(exec);
     if (info.isAbsolute() && info.exists() && info.isExecutable()) {
         return exec;
