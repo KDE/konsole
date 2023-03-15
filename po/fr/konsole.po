@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:52+0000\n"
+"POT-Creation-Date: 2023-03-15 00:49+0000\n"
 "PO-Revision-Date: 2023-03-08 14:32+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -2108,12 +2108,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Avertissement : "
 
-#: session/Session.cpp:474
+#: session/Session.cpp:497
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Impossible de trouver un terminal interactif à exécuter."
 
-#: session/Session.cpp:480 session/Session.cpp:482
+#: session/Session.cpp:503 session/Session.cpp:505
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2122,24 +2122,24 @@ msgstr ""
 "Impossible de trouver « %1 », démarrage de « %2 » à la place. Veuillez "
 "vérifier la configuration de votre profil."
 
-#: session/Session.cpp:551
+#: session/Session.cpp:575
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Impossible de démarrer le programme « %1 » avec les arguments « %2 »."
 
-#: session/Session.cpp:696
+#: session/Session.cpp:720
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silence de « %1 » (Session « %2 »)"
 
-#: session/Session.cpp:700 session/Session.cpp:1881
+#: session/Session.cpp:724 session/Session.cpp:1905
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "Afficher une session"
 
-#: session/Session.cpp:981
+#: session/Session.cpp:1005
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2153,28 +2153,28 @@ msgstr ""
 "usage interne seulement en recompilant Konsole. <p>Cet avertissement ne sera "
 "affiché qu'une seule fois pour cette instance de Konsole.</p>"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1045
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Terminé"
 
-#: session/Session.cpp:1035 session/Session.cpp:1046
+#: session/Session.cpp:1059 session/Session.cpp:1070
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Le programme « %1 » s'est terminée d'une manière inattendue."
 
-#: session/Session.cpp:1037
+#: session/Session.cpp:1061
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Le programme « %1 » s'est terminé avec l'état « %2 »."
 
-#: session/Session.cpp:1545
+#: session/Session.cpp:1569
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progression de « ZMODEM »"
 
-#: session/Session.cpp:1877
+#: session/Session.cpp:1901
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activité de « %1 » (Session « %2 »)"

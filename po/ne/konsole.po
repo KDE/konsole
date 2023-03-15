@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:52+0000\n"
+"POT-Creation-Date: 2023-03-15 00:49+0000\n"
 "PO-Revision-Date: 2007-11-01 15:12+0545\n"
 "Last-Translator: Shyam Krishna Bal <shyamkrishna_bal@yahoo.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -2208,30 +2208,30 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr ""
 
-#: session/Session.cpp:474
+#: session/Session.cpp:497
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:480 session/Session.cpp:482
+#: session/Session.cpp:503 session/Session.cpp:505
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:551
+#: session/Session.cpp:575
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:696
+#: session/Session.cpp:720
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' सत्रमा मौन"
 
-#: session/Session.cpp:700 session/Session.cpp:1881
+#: session/Session.cpp:724 session/Session.cpp:1905
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, fuzzy, kde-format
@@ -2239,7 +2239,7 @@ msgstr "'%1' सत्रमा मौन"
 msgid "Show session"
 msgstr "कन्सोल"
 
-#: session/Session.cpp:981
+#: session/Session.cpp:1005
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2248,31 +2248,31 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1045
 #, fuzzy, kde-format
 #| msgid "<Finished>"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "<Finished>"
 
-#: session/Session.cpp:1035 session/Session.cpp:1046
+#: session/Session.cpp:1059 session/Session.cpp:1070
 #, fuzzy, kde-format
 #| msgid "Session '%1' exited unexpectedly."
 msgid "Program '%1' crashed."
 msgstr "'%1' सत्र अनपेक्षित रूपमा अन्त्य भयो ।"
 
-#: session/Session.cpp:1037
+#: session/Session.cpp:1061
 #, fuzzy, kde-format
 #| msgid "Session '%1' exited with status %2."
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' सत्र %2 वस्तुस्थितिसँगै अन्त्य भयो ।"
 
-#: session/Session.cpp:1545
+#: session/Session.cpp:1569
 #, kde-format
 msgid "ZModem Progress"
 msgstr "जेट मोडेम प्रगति"
 
-#: session/Session.cpp:1877
+#: session/Session.cpp:1901
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

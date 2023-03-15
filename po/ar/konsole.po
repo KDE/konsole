@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:52+0000\n"
+"POT-Creation-Date: 2023-03-15 00:49+0000\n"
 "PO-Revision-Date: 2023-02-27 19:17+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -2066,12 +2066,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "تحذير:"
 
-#: session/Session.cpp:474
+#: session/Session.cpp:497
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "لا يمكن إيجاد محارة تفاعلية ليبدأ بها."
 
-#: session/Session.cpp:480 session/Session.cpp:482
+#: session/Session.cpp:503 session/Session.cpp:505
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2080,24 +2080,24 @@ msgstr ""
 "لا يمكن إيجاد  '%1', سيبدأ بـ '%2' عوضا عن ذلك. رجاءا تأكد من إعدادات "
 "التشكيلة."
 
-#: session/Session.cpp:551
+#: session/Session.cpp:575
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "لا يمكن بدء البرنامج  '%1' بالمعاملات '%2'."
 
-#: session/Session.cpp:696
+#: session/Session.cpp:720
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "سكوت في '%1' (الجلسة '%2')"
 
-#: session/Session.cpp:700 session/Session.cpp:1881
+#: session/Session.cpp:724 session/Session.cpp:1905
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "اعرض الجلسة"
 
-#: session/Session.cpp:981
+#: session/Session.cpp:1005
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2110,28 +2110,28 @@ msgstr ""
 "الاستخدام الداخلي فقط عن طريق إعادة تجميع كونسول. <p> سيظهر هذا التحذير مرة "
 "واحدة فقط لمثيل كونسول هذا. </p>"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1045
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "انتهى"
 
-#: session/Session.cpp:1035 session/Session.cpp:1046
+#: session/Session.cpp:1059 session/Session.cpp:1070
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "انهار البرنامج '%1' ."
 
-#: session/Session.cpp:1037
+#: session/Session.cpp:1061
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "البرنامج '%1' خرج بالحالة %2."
 
-#: session/Session.cpp:1545
+#: session/Session.cpp:1569
 #, kde-format
 msgid "ZModem Progress"
 msgstr "تقدّم ZModem"
 
-#: session/Session.cpp:1877
+#: session/Session.cpp:1901
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "نشاط في '%1' (الجلسة '%2')"
