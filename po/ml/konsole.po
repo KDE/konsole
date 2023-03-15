@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole trunk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 03:09+0000\n"
+"POT-Creation-Date: 2023-03-15 02:49+0000\n"
 "PO-Revision-Date: 2020-02-05 14:49+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -2053,12 +2053,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "മുന്നറിയിപ്പു്:"
 
-#: session/Session.cpp:474
+#: session/Session.cpp:497
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "പരസ്പരവിനിമയത്തിനു് കഴിവുള്ളൊരു ഷെല്‍ തുടങ്ങാന്‍ സാധിച്ചില്ല."
 
-#: session/Session.cpp:480 session/Session.cpp:482
+#: session/Session.cpp:503 session/Session.cpp:505
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2067,25 +2067,25 @@ msgstr ""
 "'%1' കണ്ടുപിടിയ്ക്കാന്‍ സാധിച്ചില്ല, ഇതിനുപകരം '%2' തുടങ്ങുന്നു. നിങ്ങളുടെ പ്രൊഫൈലിന്റെ "
 "സജ്ജീകരണം പരിശോധിയ്ക്കുക."
 
-#: session/Session.cpp:551
+#: session/Session.cpp:575
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "'%2' ഐച്ഛികങ്ങളുപയോഗിച്ചു് '%1' എന്ന പ്രോഗ്രാം തുടങ്ങാന്‍ സാധിച്ചില്ല."
 
-#: session/Session.cpp:696
+#: session/Session.cpp:720
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' സെഷനില്‍ നിശബ്ദത"
 
-#: session/Session.cpp:700 session/Session.cpp:1881
+#: session/Session.cpp:724 session/Session.cpp:1905
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, fuzzy, kde-format
 msgid "Show session"
 msgstr "കണ്‍സോള്‍"
 
-#: session/Session.cpp:981
+#: session/Session.cpp:1005
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2094,28 +2094,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1045
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "പൂര്‍ണ്ണമായി"
 
-#: session/Session.cpp:1035 session/Session.cpp:1046
+#: session/Session.cpp:1059 session/Session.cpp:1070
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' എന്ന പ്രോഗ്രാം തകര്‍ന്നു."
 
-#: session/Session.cpp:1037
+#: session/Session.cpp:1061
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "%2 എന്ന വിലയോടെ '%1' എന്ന പ്രോഗ്രാം പുറത്തു വന്നു."
 
-#: session/Session.cpp:1545
+#: session/Session.cpp:1569
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ഇസഡ്‌മോഡത്തിന്റെ പുരോഗതി"
 
-#: session/Session.cpp:1877
+#: session/Session.cpp:1901
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

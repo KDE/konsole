@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 03:09+0000\n"
+"POT-Creation-Date: 2023-03-15 02:49+0000\n"
 "PO-Revision-Date: 2022-01-25 10:17+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2113,12 +2113,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Figyelmeztetés: "
 
-#: session/Session.cpp:474
+#: session/Session.cpp:497
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nem található indítható terminálprogram."
 
-#: session/Session.cpp:480 session/Session.cpp:482
+#: session/Session.cpp:503 session/Session.cpp:505
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2127,17 +2127,17 @@ msgstr ""
 "„%1” nem található, „%2” indul el helyette. Ellenőrizze a profil "
 "beállításait."
 
-#: session/Session.cpp:551
+#: session/Session.cpp:575
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nem sikerült elindítani: „%1” (argumentumok: „%2”)."
 
-#: session/Session.cpp:696
+#: session/Session.cpp:720
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Üresjárat - „%1” („%2” munkamenet)"
 
-#: session/Session.cpp:700 session/Session.cpp:1881
+#: session/Session.cpp:724 session/Session.cpp:1905
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, fuzzy, kde-format
@@ -2145,7 +2145,7 @@ msgstr "Üresjárat - „%1” („%2” munkamenet)"
 msgid "Show session"
 msgstr "&Munkamenet bezárása"
 
-#: session/Session.cpp:981
+#: session/Session.cpp:1005
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2159,28 +2159,28 @@ msgstr ""
 "módosíthatók. <p>Ez figyelmeztetés csak egyszer jelenik meg ebben a Konsole "
 "példányban.</p>"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1045
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Befejezve"
 
-#: session/Session.cpp:1035 session/Session.cpp:1046
+#: session/Session.cpp:1059 session/Session.cpp:1070
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "A(z) „%1” program összeomlott."
 
-#: session/Session.cpp:1037
+#: session/Session.cpp:1061
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "A(z) „%1” program %2 állapotkóddal fejeződött be."
 
-#: session/Session.cpp:1545
+#: session/Session.cpp:1569
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-állapot"
 
-#: session/Session.cpp:1877
+#: session/Session.cpp:1901
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitás - „%1” („%2” munkamenet)"

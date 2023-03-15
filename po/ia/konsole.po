@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 03:09+0000\n"
-"PO-Revision-Date: 2023-02-24 23:26+0100\n"
+"POT-Creation-Date: 2023-03-15 02:49+0000\n"
+"PO-Revision-Date: 2023-03-14 22:17+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2065,12 +2065,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Aviso: "
 
-#: session/Session.cpp:474
+#: session/Session.cpp:497
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Il non pote trovar un shell interactive de initiar."
 
-#: session/Session.cpp:480 session/Session.cpp:482
+#: session/Session.cpp:503 session/Session.cpp:505
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2079,24 +2079,24 @@ msgstr ""
 "Il non pote trovar '%1', in vice il initiava '%2'. Pro favor tu verifica tu "
 "preferentias de profilo."
 
-#: session/Session.cpp:551
+#: session/Session.cpp:575
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Il non pote initiar programma '%1' con argumentos '%2'."
 
-#: session/Session.cpp:696
+#: session/Session.cpp:720
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silentio in '%1' (Session '%2')"
 
-#: session/Session.cpp:700 session/Session.cpp:1881
+#: session/Session.cpp:724 session/Session.cpp:1905
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "Monstra Session"
 
-#: session/Session.cpp:981
+#: session/Session.cpp:1005
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2110,28 +2110,28 @@ msgstr ""
 "Konsole <p> Iste aviso essera monstrate solmente un vice per iste instantia "
 "de Konsole.</p>"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1045
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Terminate"
 
-#: session/Session.cpp:1035 session/Session.cpp:1046
+#: session/Session.cpp:1059 session/Session.cpp:1070
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programma '%1' ruinava."
 
-#: session/Session.cpp:1037
+#: session/Session.cpp:1061
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programma '%1' habeva exite con status %2."
 
-#: session/Session.cpp:1545
+#: session/Session.cpp:1569
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progresso de ZModem"
 
-#: session/Session.cpp:1877
+#: session/Session.cpp:1901
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitate in  '%1' (Session '%2')"
@@ -2177,16 +2177,12 @@ msgid "Copy"
 msgstr "Copia"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Scinde vista a Sinistra/Dextera"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Scinde  le vista a Culmine/Basso"
 
@@ -4057,17 +4053,15 @@ msgstr "Modo BiDI de characteres de tabula supplanta"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Colla &sin controlar characteres"
+msgstr "Ignora wcwidth de characteres problematic"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Ultrapassa wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format

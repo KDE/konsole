@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 03:09+0000\n"
+"POT-Creation-Date: 2023-03-15 02:49+0000\n"
 "PO-Revision-Date: 2014-02-12 22:52+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -2145,12 +2145,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Upozorenje: "
 
-#: session/Session.cpp:474
+#: session/Session.cpp:497
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nije moguće pronaći interaktivnu školjku za početak."
 
-#: session/Session.cpp:480 session/Session.cpp:482
+#: session/Session.cpp:503 session/Session.cpp:505
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2159,18 +2159,18 @@ msgstr ""
 "Nije moguće pronaći '%1', umjesto toga se pokreće '%2'. Molim vas da "
 "provjerite postavke vašeg profila."
 
-#: session/Session.cpp:551
+#: session/Session.cpp:575
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nije moguće pokrenuti program '%1' s argumentima '%2'."
 
-#: session/Session.cpp:696
+#: session/Session.cpp:720
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina na sesiji '%1'"
 
-#: session/Session.cpp:700 session/Session.cpp:1881
+#: session/Session.cpp:724 session/Session.cpp:1905
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, fuzzy, kde-format
@@ -2178,7 +2178,7 @@ msgstr "Tišina na sesiji '%1'"
 msgid "Show session"
 msgstr "&Zatvori sesiju"
 
-#: session/Session.cpp:981
+#: session/Session.cpp:1005
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2187,28 +2187,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1045
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Završeno"
 
-#: session/Session.cpp:1035 session/Session.cpp:1046
+#: session/Session.cpp:1059 session/Session.cpp:1070
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Program '%1' se srušio."
 
-#: session/Session.cpp:1037
+#: session/Session.cpp:1061
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Program '%1' završio je sa statusom %2."
 
-#: session/Session.cpp:1545
+#: session/Session.cpp:1569
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem napredak"
 
-#: session/Session.cpp:1877
+#: session/Session.cpp:1901
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
