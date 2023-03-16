@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 00:49+0000\n"
+"POT-Creation-Date: 2023-03-16 01:03+0000\n"
 "PO-Revision-Date: 2023-03-10 07:35+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -2054,23 +2054,23 @@ msgstr "Konzola Solarisa"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Zvonec v '%1' (Seja '%2')"
 
-#: session/Session.cpp:390
+#: session/Session.cpp:406
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Ni bilo mogoče najti programa: "
 
-#: session/Session.cpp:399
+#: session/Session.cpp:415
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Opozorilo: "
 
-#: session/Session.cpp:497
+#: session/Session.cpp:513
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Ni bilo mogoče najti interaktivne lupine, ki bi jo lahko zagnali."
 
-#: session/Session.cpp:503 session/Session.cpp:505
+#: session/Session.cpp:519 session/Session.cpp:521
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2079,24 +2079,24 @@ msgstr ""
 "Ni bilo mogoče najti '%1', namesto tega zaganjam '%2'. Preverite nastavitve "
 "profila."
 
-#: session/Session.cpp:575
+#: session/Session.cpp:591
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Ni bilo mogoče zagnati programa '%1' z argumenti '%2'."
 
-#: session/Session.cpp:720
+#: session/Session.cpp:736
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina v '%1' (Seja '%2')"
 
-#: session/Session.cpp:724 session/Session.cpp:1905
+#: session/Session.cpp:740 session/Session.cpp:1921
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "Prikaži sejo"
 
-#: session/Session.cpp:1005
+#: session/Session.cpp:1021
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2109,28 +2109,28 @@ msgstr ""
 "prevodom programa Konsole pretvorite v zasebne. <p>To opozorilo bo v tem "
 "primerku Konsole pokazano le enkrat.</p>"
 
-#: session/Session.cpp:1045
+#: session/Session.cpp:1061
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Zaključeno"
 
-#: session/Session.cpp:1059 session/Session.cpp:1070
+#: session/Session.cpp:1075 session/Session.cpp:1086
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Program '%1' se je sesul."
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1077
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Program '%1' je končal s stanjem %2."
 
-#: session/Session.cpp:1569
+#: session/Session.cpp:1585
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Napredek ZModema"
 
-#: session/Session.cpp:1901
+#: session/Session.cpp:1917
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Dejavnost v '%1' (Seja '%2')"
