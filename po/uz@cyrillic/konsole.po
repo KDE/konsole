@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:49+0000\n"
+"POT-Creation-Date: 2023-03-16 02:50+0000\n"
 "PO-Revision-Date: 2008-06-04 01:01+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -2114,41 +2114,41 @@ msgstr "Solaris терминали"
 msgid "Bell in '%1' (Session '%2')"
 msgstr ""
 
-#: session/Session.cpp:390
+#: session/Session.cpp:406
 #, fuzzy, kde-format
 #| msgid "Could not save history."
 msgid "Could not find binary: "
 msgstr "Тарихни сақлаб бўлмади."
 
-#: session/Session.cpp:399
+#: session/Session.cpp:415
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr ""
 
-#: session/Session.cpp:497
+#: session/Session.cpp:513
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:503 session/Session.cpp:505
+#: session/Session.cpp:519 session/Session.cpp:521
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:575
+#: session/Session.cpp:591
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:720
+#: session/Session.cpp:736
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr ""
 
-#: session/Session.cpp:724 session/Session.cpp:1905
+#: session/Session.cpp:740 session/Session.cpp:1921
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, fuzzy, kde-format
@@ -2156,7 +2156,7 @@ msgstr ""
 msgid "Show session"
 msgstr "Янги сеанс"
 
-#: session/Session.cpp:1005
+#: session/Session.cpp:1021
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2165,30 +2165,30 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1045
+#: session/Session.cpp:1061
 #, fuzzy, kde-format
 #| msgid "Finished"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Тугади"
 
-#: session/Session.cpp:1059 session/Session.cpp:1070
+#: session/Session.cpp:1075 session/Session.cpp:1086
 #, fuzzy, kde-format
 #| msgid "Session '%1' exited unexpectedly."
 msgid "Program '%1' crashed."
 msgstr "Сеанс \"%1\" кутилмаганда тугади."
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1077
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' дастури %2 ҳолати билан тугади."
 
-#: session/Session.cpp:1569
+#: session/Session.cpp:1585
 #, kde-format
 msgid "ZModem Progress"
 msgstr ""
 
-#: session/Session.cpp:1901
+#: session/Session.cpp:1917
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr ""

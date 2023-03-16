@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:49+0000\n"
+"POT-Creation-Date: 2023-03-16 02:50+0000\n"
 "PO-Revision-Date: 2020-01-12 13:00+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -2134,23 +2134,23 @@ msgstr "Consola de Solaris"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Badalada na sesión «%1»"
 
-#: session/Session.cpp:390
+#: session/Session.cpp:406
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Non se puido atopar o binario: "
 
-#: session/Session.cpp:399
+#: session/Session.cpp:415
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Aviso: "
 
-#: session/Session.cpp:497
+#: session/Session.cpp:513
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Non se puido atopar un intérprete de ordes interactivo para iniciar."
 
-#: session/Session.cpp:503 session/Session.cpp:505
+#: session/Session.cpp:519 session/Session.cpp:521
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2159,18 +2159,18 @@ msgstr ""
 "Non se puido atopar «%1», no canto iniciarase «%2». Comprobe a configuración "
 "do perfil."
 
-#: session/Session.cpp:575
+#: session/Session.cpp:591
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Non se puido iniciar o programa «%1» cos argumentos «%2»."
 
-#: session/Session.cpp:720
+#: session/Session.cpp:736
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silencio na sesión «%1»"
 
-#: session/Session.cpp:724 session/Session.cpp:1905
+#: session/Session.cpp:740 session/Session.cpp:1921
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, fuzzy, kde-format
@@ -2179,7 +2179,7 @@ msgid "Show session"
 msgstr "Pechar a &sesión"
 
 # skip-rule: PT-2010-dual_command
-#: session/Session.cpp:1005
+#: session/Session.cpp:1021
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2193,28 +2193,28 @@ msgstr ""
 "cambiar os métodos para que só poidan usarse internamente. <p>Este aviso só "
 "se mostrará unha vez para esta instancia de Konsole.</p>"
 
-#: session/Session.cpp:1045
+#: session/Session.cpp:1061
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Rematado"
 
-#: session/Session.cpp:1059 session/Session.cpp:1070
+#: session/Session.cpp:1075 session/Session.cpp:1086
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "O programa «%1» quebrou."
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1077
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "O programa «%1» saíu co estado %2."
 
-#: session/Session.cpp:1569
+#: session/Session.cpp:1585
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progreso do ZModem"
 
-#: session/Session.cpp:1901
+#: session/Session.cpp:1917
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
