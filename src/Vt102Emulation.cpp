@@ -413,9 +413,10 @@ void Vt102Emulation::initTokenizer()
 /* clang-format on */
 
 #define CNTL(c) ((c) - '@')
+/* Not used ATM
 const int ESC = 27;
 const int DEL = 127;
-const int SP = 32;
+const int SP = 32; */
 
 // process an incoming unicode character
 //
