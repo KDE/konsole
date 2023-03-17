@@ -848,7 +848,6 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                                     CharacterColor const *ulColorTable)
 {
     bool first = true;
-    QRect constRect(0, 0, 0, 0);
     QColor backgroundColor;
     QColor foregroundColor;
     int lastX = 0;
