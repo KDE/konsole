@@ -437,9 +437,11 @@ QString Session::shellSessionId() const
 static QStringList postProcessArgs(const QStringList &args)
 {
 #ifndef Q_OS_WIN
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     if (!KSandbox::isFlatpak()) {
         return args;
     }
+#endif
     QStringList arguments;
     // last arg is the program
     arguments = args;
