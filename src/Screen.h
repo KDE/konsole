@@ -363,7 +363,7 @@ public:
     CharacterColor const *ulColorTable() const
     {
         return _ulColors;
-    };
+    }
 
     /** Returns the column which the cursor is positioned at. */
     int getCursorX() const;

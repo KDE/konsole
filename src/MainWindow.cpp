@@ -170,7 +170,7 @@ static QString configFileStringV1(const QScreen *screen, const QString &key)
 // TODO: use the public function in KWindowConfig for this once it exists.
 static QString configFileStringV2(const QScreen *screen, const QString &key)
 {
-    Q_UNUSED(screen);
+    Q_UNUSED(screen)
     QString returnString;
     const int numberOfScreens = QGuiApplication::screens().length();
 

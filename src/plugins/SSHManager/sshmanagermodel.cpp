@@ -235,7 +235,6 @@ void SSHManagerModel::triggerProfileChange(const QString &sshHost)
     auto findIt = std::find_if(std::begin(profiles), std::end(profiles), [&profileToLoad](const Konsole::Profile::Ptr &pr) {
         if (pr) {
             return pr->name() == profileToLoad;
-            ;
         }
         return false;
     });

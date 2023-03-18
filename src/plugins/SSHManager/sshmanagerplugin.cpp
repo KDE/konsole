@@ -90,7 +90,7 @@ void SSHManagerPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindo
 
 QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow *mainWindow) const
 {
-    Q_UNUSED(mainWindow);
+    Q_UNUSED(mainWindow)
 
     QAction *toggleVisibilityAction = new QAction(i18n("Show SSH Manager"), mainWindow);
     toggleVisibilityAction->setCheckable(true);

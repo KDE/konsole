@@ -41,9 +41,9 @@ public:
 
     virtual QList<QAction *> menuBarActions(Konsole::MainWindow *mainWindow) const
     {
-        Q_UNUSED(mainWindow);
+        Q_UNUSED(mainWindow)
         return {};
-    };
+    }
 
 protected:
     void setName(const QString &pluginName);

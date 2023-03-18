@@ -359,7 +359,7 @@ public:
             return true;
         }
         return currentScript == script;
-    };
+    }
 
     inline bool hasSameColors(Character lhs) const
     {
@@ -369,13 +369,13 @@ public:
     inline bool hasSameRendition(Character lhs) const
     {
         return (lhs.rendition.all & ~RE_EXTENDED_CHAR) == (rendition.all & ~RE_EXTENDED_CHAR) && lhs.flags == flags;
-    };
+    }
 
     inline bool hasSameLineDrawStatus(Character lhs) const
     {
         const bool lineDraw = LineBlockCharacters::canDraw(character);
         return LineBlockCharacters::canDraw(lhs.character) == lineDraw;
-    };
+    }
 
     inline bool hasSameAttributes(Character lhs) const
     {
