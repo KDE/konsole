@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:50+0000\n"
+"POT-Creation-Date: 2023-03-18 03:12+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -2145,12 +2145,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Dėmesio: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nepavyko rasti ir paleisti interaktyvaus apvalkalo."
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2158,18 +2158,18 @@ msgid ""
 msgstr ""
 "Nepavyko rasti „%1“, todėl paleidžiama „%2“. Patikrinkite profilio parinktis."
 
-#: session/Session.cpp:591
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nepavyko paleisti programos „%1“ su parametrais „%2“."
 
-#: session/Session.cpp:736
+#: session/Session.cpp:738
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Jokios veiklos sesijoje „%1“"
 
-#: session/Session.cpp:740 session/Session.cpp:1921
+#: session/Session.cpp:742 session/Session.cpp:1923
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, fuzzy, kde-format
@@ -2177,7 +2177,7 @@ msgstr "Jokios veiklos sesijoje „%1“"
 msgid "Show session"
 msgstr "Uždaryti langą"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1023
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2186,28 +2186,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1063
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Baigta"
 
-#: session/Session.cpp:1075 session/Session.cpp:1086
+#: session/Session.cpp:1077 session/Session.cpp:1088
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programa „%1“ nulūžo."
 
-#: session/Session.cpp:1077
+#: session/Session.cpp:1079
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programa „%1“ baigė darbą ir pranešė kodą „%2“."
 
-#: session/Session.cpp:1585
+#: session/Session.cpp:1587
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem eiga"
 
-#: session/Session.cpp:1917
+#: session/Session.cpp:1919
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

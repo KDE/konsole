@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:50+0000\n"
+"POT-Creation-Date: 2023-03-18 03:12+0000\n"
 "PO-Revision-Date: 2023-03-09 13:35+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2067,12 +2067,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Uyarı: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Başlatılacak etkileşimli kabuk bulunamadı."
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2081,24 +2081,24 @@ msgstr ""
 "'%1' bulunamadı, onun yerine '%2' başlatılıyor.  Lütfen profil ayarlarınızı "
 "denetleyin."
 
-#: session/Session.cpp:591
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "'%1' uygulaması '%2' argümanıyla başlatılamadı."
 
-#: session/Session.cpp:736
+#: session/Session.cpp:738
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' içinde Sessizlik (Oturum '%2')"
 
-#: session/Session.cpp:740 session/Session.cpp:1921
+#: session/Session.cpp:742 session/Session.cpp:1923
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "Oturumu göster"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1023
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2112,28 +2112,28 @@ msgstr ""
 "değiştirilebilir.<p>Bu uyarı yalnızca bu Konsole örneği için bir kez "
 "gösterilecek.</p>"
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1063
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Tamamlandı"
 
-#: session/Session.cpp:1075 session/Session.cpp:1086
+#: session/Session.cpp:1077 session/Session.cpp:1088
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' uygulaması çöktü."
 
-#: session/Session.cpp:1077
+#: session/Session.cpp:1079
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' uygulamasından %2 durumu ile çıkıldı."
 
-#: session/Session.cpp:1585
+#: session/Session.cpp:1587
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem İşlemi"
 
-#: session/Session.cpp:1917
+#: session/Session.cpp:1919
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1' içinde Etkinlik (Oturum '%2')"

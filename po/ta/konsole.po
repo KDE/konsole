@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:50+0000\n"
+"POT-Creation-Date: 2023-03-18 03:12+0000\n"
 "PO-Revision-Date: 2023-03-12 16:39+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -2055,13 +2055,13 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "எச்சரிக்கை: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 "துவக்க வேண்டிய மனிதப்பயன்பாட்டிற்கான (interactive) முனையத்தை கண்டுபிடிக்க முடியவில்லை."
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2070,24 +2070,24 @@ msgstr ""
 "'%1' கண்டுபிடிக்கப்படவில்லை; மாற்றாக '%2' துவக்கப்படுகிறது.  உங்கள் பயனர் கணக்கின் "
 "அமைப்புகளை சரிபாருங்கள்."
 
-#: session/Session.cpp:591
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "'%1' நிரலை '%2' என்ற தருமதிப்புகளுடன் துவக்க முடியவில்லை."
 
-#: session/Session.cpp:736
+#: session/Session.cpp:738
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' என்பதில் அமைதி (அமர்வு '%2')"
 
-#: session/Session.cpp:740 session/Session.cpp:1921
+#: session/Session.cpp:742 session/Session.cpp:1923
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "அமர்வைக் காட்டு"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1023
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2096,28 +2096,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1063
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "நிறைவடைந்தது"
 
-#: session/Session.cpp:1075 session/Session.cpp:1086
+#: session/Session.cpp:1077 session/Session.cpp:1088
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' நிரல் முறிவடைந்தது."
 
-#: session/Session.cpp:1077
+#: session/Session.cpp:1079
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' நிரல், %2 என்ற நிலையுடன் வெளிவந்தது."
 
-#: session/Session.cpp:1585
+#: session/Session.cpp:1587
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem முன்னேற்றம்"
 
-#: session/Session.cpp:1917
+#: session/Session.cpp:1919
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1' என்பதில் செயல்பாடு (அமர்வு '%2')"

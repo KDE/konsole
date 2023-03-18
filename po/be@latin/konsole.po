@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:50+0000\n"
+"POT-Creation-Date: 2023-03-18 03:12+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -2095,12 +2095,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Uvaha: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nie ŭdalosia znajsci interaktyŭnuju abalonku dlia zapusku."
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, fuzzy, kde-format
 #| msgid ""
 #| "Could not find %1, starting %2 instead.  Please check your profile "
@@ -2112,26 +2112,26 @@ msgstr ""
 "Nie ŭdalosia znajsci \"%1\", zamiest hetaha zapuskajecca \"%2\". Praviercie "
 "nalady profiliu."
 
-#: session/Session.cpp:591
+#: session/Session.cpp:593
 #, fuzzy, kde-format
 #| msgid "Could not start program %1 with arguments %2."
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nie ŭdalosia zapuscić \"%1\" z arhumientami \"%2\"."
 
-#: session/Session.cpp:736
+#: session/Session.cpp:738
 #, fuzzy, kde-format
 #| msgid "Silence in %1 (Session %2)"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Biazdziejnasć u \"%1\" (sieans \"%2\")"
 
-#: session/Session.cpp:740 session/Session.cpp:1921
+#: session/Session.cpp:742 session/Session.cpp:1923
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "Pakazać sieans"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1023
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2145,30 +2145,30 @@ msgstr ""
 "kampiliavannia Konsole.  <p>Hetaje papiaredžannie budzie pakazvacca dlia "
 "hetaha asobnika Konsole toĺki adzin raz.</p>"
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1063
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Zavieršana"
 
-#: session/Session.cpp:1075 session/Session.cpp:1086
+#: session/Session.cpp:1077 session/Session.cpp:1088
 #, fuzzy, kde-format
 #| msgid "Program %1 crashed."
 msgid "Program '%1' crashed."
 msgstr "Prahrama \"%1\" avaryjna zaviaršyla praces."
 
-#: session/Session.cpp:1077
+#: session/Session.cpp:1079
 #, fuzzy, kde-format
 #| msgid "Program %1 exited with status %2."
 msgid "Program '%1' exited with status %2."
 msgstr "Prahrama \"%1\" zakrylasia sa statusam %2."
 
-#: session/Session.cpp:1585
+#: session/Session.cpp:1587
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Chod vykanannia pracesaŭ ZModem"
 
-#: session/Session.cpp:1917
+#: session/Session.cpp:1919
 #, fuzzy, kde-format
 #| msgid "Activity in %1 (Session %2)"
 msgid "Activity in '%1' (Session '%2')"

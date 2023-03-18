@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:50+0000\n"
+"POT-Creation-Date: 2023-03-18 03:12+0000\n"
 "PO-Revision-Date: 2023-03-05 18:25+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2080,12 +2080,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Varoitus: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Ei löytynyt vuorovaikutteista komentotulkkia, jota käynnistää."
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2094,24 +2094,24 @@ msgstr ""
 "Ohjelmaa ”%1” ei löytynyt, käynnistetään ”%2” sen sijasta. Tarkasta "
 "profiilisi asetukset."
 
-#: session/Session.cpp:591
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Ohjelmaa ”%1” ei voitu käynnistää parametrein ”%2”."
 
-#: session/Session.cpp:736
+#: session/Session.cpp:738
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Hiljaisuus päätteessä ”%1” (istunto ”%2”)"
 
-#: session/Session.cpp:740 session/Session.cpp:1921
+#: session/Session.cpp:742 session/Session.cpp:1923
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "Näytä istunto"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1023
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2124,29 +2124,29 @@ msgstr ""
 "käytettäviksi vain koostamalla Konsole uudelleen. <p>Tämä varoitus näytetään "
 "vain kerran tälle Konsolen instanssille.</p>"
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1063
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Valmis"
 
 # ei-ASCII-lainausmerkit eivät näkyneet oikein
-#: session/Session.cpp:1075 session/Session.cpp:1086
+#: session/Session.cpp:1077 session/Session.cpp:1088
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Ohjelma ”%1” kaatui."
 
-#: session/Session.cpp:1077
+#: session/Session.cpp:1079
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Ohjelma ”%1” päättyi paluuarvoon %2."
 
-#: session/Session.cpp:1585
+#: session/Session.cpp:1587
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-tiedonsiirron edistyminen"
 
-#: session/Session.cpp:1917
+#: session/Session.cpp:1919
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktiivisuutta päätteessä ”%1” (istunto ”%2”)"

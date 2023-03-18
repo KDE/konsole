@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:50+0000\n"
+"POT-Creation-Date: 2023-03-18 03:12+0000\n"
 "PO-Revision-Date: 2023-03-07 19:58+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -2073,12 +2073,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Попередження: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Не вдалося знайти для запуску інтерактивної оболонки."
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2087,24 +2087,24 @@ msgstr ""
 "Не вдалося знайти «%1», замість неї запущено «%2». Будь ласка, перевірте "
 "параметри вашого профілю."
 
-#: session/Session.cpp:591
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Не вдалося запустити програму «%1» з параметрами «%2»."
 
-#: session/Session.cpp:736
+#: session/Session.cpp:738
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Тиша у «%1» (сеанс «%2»)"
 
-#: session/Session.cpp:740 session/Session.cpp:1921
+#: session/Session.cpp:742 session/Session.cpp:1923
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1134
 #, kde-format
 msgid "Show session"
 msgstr "Показати сеанс"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1023
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2118,28 +2118,28 @@ msgstr ""
 "використання (internal) перезбиранням Konsole. <p>Для цього екземпляра "
 "Konsole це попередження буде показано лише одного разу.</p>"
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1063
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Завершено"
 
-#: session/Session.cpp:1075 session/Session.cpp:1086
+#: session/Session.cpp:1077 session/Session.cpp:1088
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Програма «%1» завершила роботу у аварійному режимі."
 
-#: session/Session.cpp:1077
+#: session/Session.cpp:1079
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Програма «%1» завершилась зі станом %2."
 
-#: session/Session.cpp:1585
+#: session/Session.cpp:1587
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Поступ ZModem"
 
-#: session/Session.cpp:1917
+#: session/Session.cpp:1919
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Діяльність у «%1» (сеанс «%2»)"
