@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 01:03+0000\n"
+"POT-Creation-Date: 2023-03-18 01:02+0000\n"
 "PO-Revision-Date: 2023-02-28 23:27+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2046,12 +2046,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "경고: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "시작할 인터랙티브 셸을 찾을 수 없습니다."
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2060,24 +2060,24 @@ msgstr ""
 "'%1'을(를) 찾을 수 없어서 '%2'을(를) 대신 시작합니다. 프로필 설정을 확인하십"
 "시오."
 
-#: session/Session.cpp:591
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "프로그램 '%1'을(를) 인자 '%2'을(를) 사용하여 시작할 수 없습니다."
 
-#: session/Session.cpp:736
+#: session/Session.cpp:738
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1'에서 응답 없음(세션 '%2')"
 
-#: session/Session.cpp:740 session/Session.cpp:1921
+#: session/Session.cpp:742 session/Session.cpp:1923
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
-#: Vt102Emulation.cpp:1134
+#: Vt102Emulation.cpp:1135
 #, kde-format
 msgid "Show session"
 msgstr "세션 표시"
 
-#: session/Session.cpp:1021
+#: session/Session.cpp:1023
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2090,31 +2090,31 @@ msgstr ""
 "드를 내부에서만 사용할 수 있도록 변경할 수 있습니다.<p>이 경고는 Konsole 인스"
 "턴스에서 한 번만 표시됩니다.</p>"
 
-#: session/Session.cpp:1061
+#: session/Session.cpp:1063
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "완료됨"
 
-#: session/Session.cpp:1075 session/Session.cpp:1086
+#: session/Session.cpp:1077 session/Session.cpp:1088
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr ""
 "프로그램 '%1'이(가) 충돌했습니다.|/|프로그램 '%1'$[이가 %1] 충돌했습니다."
 
-#: session/Session.cpp:1077
+#: session/Session.cpp:1079
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr ""
 "프로그램 '%1'이(가) 상태 %2(으)로 끝났습니다.|/|프로그램 '%1'$[이가 %1] 상태 "
 "%2$[으 %2]로 끝났습니다."
 
-#: session/Session.cpp:1585
+#: session/Session.cpp:1587
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 진행 상황"
 
-#: session/Session.cpp:1917
+#: session/Session.cpp:1919
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1'의 활동(세션 '%2')"
@@ -3496,7 +3496,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "탭 레이아웃 불러오기"
 
-#: Vt102Emulation.cpp:2452
+#: Vt102Emulation.cpp:2453
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
