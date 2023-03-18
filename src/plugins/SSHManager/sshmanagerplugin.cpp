@@ -173,6 +173,7 @@ void SSHManagerPlugin::requestConnection(QSortFilterProxyModel *filterModel,
         return;
     }
 
+#ifndef Q_OS_WIN
     Konsole::ProcessInfo *info = controller->session()->getProcessInfo();
     bool ok = false;
     QString processName = info->name(&ok);
@@ -192,6 +193,9 @@ void SSHManagerPlugin::requestConnection(QSortFilterProxyModel *filterModel,
         KMessageBox::error(nullptr, i18n("Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"), i18n("Error issuing SSH Command"));
         return;
     }
+#else
+    // FIXME: Can we do this on windows?
+#endif
 
     auto item = model->itemFromIndex(sourceIdx);
     auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
