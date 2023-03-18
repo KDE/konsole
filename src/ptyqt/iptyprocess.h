@@ -42,7 +42,7 @@ public:
     virtual qint64 write(const char *data, int size) = 0;
     virtual bool isAvailable() = 0;
     virtual void moveToThread(QThread *targetThread) = 0;
-    virtual int processList() const = 0; // 0 - unsupport, 1 - no process , 2 - run process
+    virtual int processList() const = 0; // 0 - unsupported, 1 - no process , 2 - run process
     qint64 pid()
     {
         return m_pid;
