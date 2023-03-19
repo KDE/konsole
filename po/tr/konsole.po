@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 01:02+0000\n"
+"POT-Creation-Date: 2023-03-19 00:50+0000\n"
 "PO-Revision-Date: 2023-03-09 13:35+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1547,9 +1547,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1, SSH girdileri için bi klasördür"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:319
-#: plugins/SSHManager/sshmanagermodel.cpp:387
-#: plugins/SSHManager/sshmanagermodel.cpp:420
+#: plugins/SSHManager/sshmanagermodel.cpp:318
+#: plugins/SSHManager/sshmanagermodel.cpp:386
+#: plugins/SSHManager/sshmanagermodel.cpp:419
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
@@ -1593,19 +1593,19 @@ msgstr "Eklentiler - SSH Yöneticisi"
 msgid "SSH Entries"
 msgstr "SSH Girdileri"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "Süreç adı alınamadı, bir bağlantı isteği yapamayacağımızı varsayın"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "SSH Komutu verilirken hata"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

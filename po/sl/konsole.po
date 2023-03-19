@@ -16,16 +16,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 01:02+0000\n"
-"PO-Revision-Date: 2023-03-16 12:17+0100\n"
+"POT-Creation-Date: 2023-03-19 00:50+0000\n"
+"PO-Revision-Date: 2023-03-18 07:56+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Poedit 3.2.2\n"
 
@@ -1543,9 +1543,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1 je mapa za vnose SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:319
-#: plugins/SSHManager/sshmanagermodel.cpp:387
-#: plugins/SSHManager/sshmanagermodel.cpp:420
+#: plugins/SSHManager/sshmanagermodel.cpp:318
+#: plugins/SSHManager/sshmanagermodel.cpp:386
+#: plugins/SSHManager/sshmanagermodel.cpp:419
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
@@ -1588,7 +1588,7 @@ msgstr "Vtičniki - Upravljalnik SSH"
 msgid "SSH Entries"
 msgstr "Vnosi SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
@@ -1596,13 +1596,13 @@ msgstr ""
 "Ni bilo mogoče pridobiti ime procesa, predpostavljamo, da ne moremo "
 "zahtevati povezave"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Napaka pri izdaji ukaza SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

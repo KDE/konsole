@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 01:02+0000\n"
+"POT-Creation-Date: 2023-03-19 00:50+0000\n"
 "PO-Revision-Date: 2023-03-11 04:52\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1522,9 +1522,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1 是 SSH 条目的文件夹"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:319
-#: plugins/SSHManager/sshmanagermodel.cpp:387
-#: plugins/SSHManager/sshmanagermodel.cpp:420
+#: plugins/SSHManager/sshmanagermodel.cpp:318
+#: plugins/SSHManager/sshmanagermodel.cpp:386
+#: plugins/SSHManager/sshmanagermodel.cpp:419
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
@@ -1567,19 +1567,19 @@ msgstr "插件 - SSH 管理器"
 msgid "SSH Entries"
 msgstr "SSH 条目"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "无法获取进程名称，假定无法请求连接"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "发出 SSH 命令时出错"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

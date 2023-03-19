@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 01:02+0000\n"
+"POT-Creation-Date: 2023-03-19 00:50+0000\n"
 "PO-Revision-Date: 2007-11-01 15:12+0545\n"
 "Last-Translator: Shyam Krishna Bal <shyamkrishna_bal@yahoo.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -1669,9 +1669,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr ""
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:319
-#: plugins/SSHManager/sshmanagermodel.cpp:387
-#: plugins/SSHManager/sshmanagermodel.cpp:420
+#: plugins/SSHManager/sshmanagermodel.cpp:318
+#: plugins/SSHManager/sshmanagermodel.cpp:386
+#: plugins/SSHManager/sshmanagermodel.cpp:419
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
@@ -1716,19 +1716,19 @@ msgstr "मेनुपट्टी लुकाउनुहोस्"
 msgid "SSH Entries"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
