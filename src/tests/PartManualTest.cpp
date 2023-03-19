@@ -67,7 +67,7 @@ void PartManualTest::testShortcutOverride()
     _shortcutTriggered = false;
     _override = false;
     _overrideCalled = false;
-    QVERIFY(connect(terminalPart, SIGNAL(overrideShortcut(QKeyEvent *, bool &)), this, SLOT(overrideShortcut(QKeyEvent *, bool &))));
+    QVERIFY(connect(terminalPart, SIGNAL(overrideShortcut(QKeyEvent*,bool&)), this, SLOT(overrideShortcut(QKeyEvent*,bool&))));
 
     // QTest::keyClick(terminalPart->widget(),Qt::Key_S,Qt::ControlModifier);
     _shortcutEventLoop = new QEventLoop();

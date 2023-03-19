@@ -93,7 +93,7 @@ KParts::ReadOnlyPart *demo_konsolepart::createPart()
 
 void demo_konsolepart::manageProfiles()
 {
-    QMetaObject::invokeMethod(_terminalPart, "showManageProfilesDialog", Qt::QueuedConnection, Q_ARG(QWidget *, QApplication::activeWindow()));
+    QMetaObject::invokeMethod(_terminalPart, "showManageProfilesDialog", Qt::QueuedConnection, Q_ARG(QWidget*, QApplication::activeWindow()));
 }
 
 void demo_konsolepart::quit()
