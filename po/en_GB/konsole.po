@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 03:12+0000\n"
+"POT-Creation-Date: 2023-03-19 02:45+0000\n"
 "PO-Revision-Date: 2023-03-10 17:30+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -1575,20 +1575,20 @@ msgstr "Plugins - SSH Manager"
 msgid "SSH Entries"
 msgstr "SSH Entries"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
 "Could not get the process name, assume that we can't request a connection"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Error issuing SSH Command"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"

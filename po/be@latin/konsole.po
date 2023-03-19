@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 03:12+0000\n"
+"POT-Creation-Date: 2023-03-19 02:45+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -1601,7 +1601,7 @@ msgstr "Schavać radok mieniu"
 msgid "SSH Entries"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, fuzzy, kde-format
 #| msgid ""
 #| "Could not get the process name, assume that we cant request a connection"
@@ -1609,13 +1609,13 @@ msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "Nie ŭdalosia atrymać nazvu pracesu. Mahčyma, nieĺha zapytać zlučennie"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:180
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Padčas vykanannia zahadu SSH adbylasia pamylka"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:192
+#: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, fuzzy, kde-format
 #| msgid ""
 #| "Cant issue SSH command outside the shell application (eg, bash, zsh, sh)"
