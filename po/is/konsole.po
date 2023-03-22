@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-19 00:50+0000\n"
-"PO-Revision-Date: 2023-02-14 07:47+0000\n"
+"PO-Revision-Date: 2023-03-21 14:28+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -1442,12 +1442,13 @@ msgstr "Sýna flýtiaðgang"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Engar flýtiskipanir fundust. Þú getur bætt slíku við í Viðbætur -> "
+"Flýtiskipanir"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Flýtiskipanir"
+msgstr "Viðbætur - Flýtiskipanir"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1578,12 +1579,13 @@ msgstr "Sýna flýtiaðgang fyrir SSH-aðgerðir"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Engar vistaðar SSH-uppsetningar fundust. Þú getur bætt slíku við í Viðbætur -"
+"> SSH-stýring"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Opna skráastjóra"
+msgstr "Viðbætur - SSH-stýring"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -2179,18 +2181,14 @@ msgid "Copy"
 msgstr "Afrita"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "Kljúfa skeljaglugga lóðrétt"
+msgstr "Kljúfa sýn lóðrétt"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Kljúfa skeljaglugga lárétt"
+msgstr "Kljúfa sýn lárétt"
 
 #: session/SessionController.cpp:684
 #, kde-format
@@ -4046,17 +4044,15 @@ msgstr "Töflustafir hnekkja tvíátta sniði"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Lí&ma án stýristafa"
+msgstr "Hunsa wcwidth á vandræðastöfum"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Gefa öðru en wcwidth vægi"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
