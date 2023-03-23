@@ -2470,7 +2470,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
-msgstr "<p>Núverandi seta er nú þegar með ZModem-skráaflutning í gangi."
+msgstr "<p>Núverandi seta er nú þegar með ZModem-skráaflutning í gangi.</p>"
 
 #: session/SessionController.cpp:2101
 #, kde-format
