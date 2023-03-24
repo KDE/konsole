@@ -60,8 +60,10 @@ Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &)
         action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
     }
 
-    // Enable translucency support.
-    _viewManager->widget()->setAttribute(Qt::WA_TranslucentBackground, true);
+    // Enable translucency support if supported by the app.
+    if (_viewManager->widget()->window() && _viewManager->widget()->window()->testAttribute(Qt::WA_TranslucentBackground)) {
+        _viewManager->widget()->setAttribute(Qt::WA_TranslucentBackground, true);
+    }
 
     // create basic session
     createSession();
