@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-19 00:50+0000\n"
+"POT-Creation-Date: 2023-03-25 00:49+0000\n"
 "PO-Revision-Date: 2019-10-08 19:40+0900\n"
 "Last-Translator: Tomohiro Hyakutake <tomhioo@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -1338,7 +1338,7 @@ msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "このウィンドウで %1 個のターミナルを開いています。それでも終了しますか？"
 
-#: MainWindow.cpp:945 Part.cpp:297
+#: MainWindow.cpp:945 Part.cpp:299
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
@@ -1368,7 +1368,7 @@ msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr ""
 
-#: Part.cpp:300
+#: Part.cpp:302
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -3276,94 +3276,94 @@ msgstr "メニューのアクセラレータを有効化"
 msgid "Size: %1 x %2"
 msgstr "サイズ: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2227
+#: terminalDisplay/TerminalDisplay.cpp:2231
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2228
+#: terminalDisplay/TerminalDisplay.cpp:2232
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "Confirm Paste"
 msgstr "終了の確認"
 
-#: terminalDisplay/TerminalDisplay.cpp:2261
+#: terminalDisplay/TerminalDisplay.cpp:2265
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2262
+#: terminalDisplay/TerminalDisplay.cpp:2266
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2263
+#: terminalDisplay/TerminalDisplay.cpp:2267
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2264
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2265
+#: terminalDisplay/TerminalDisplay.cpp:2269
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2266
+#: terminalDisplay/TerminalDisplay.cpp:2270
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2267
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2268
+#: terminalDisplay/TerminalDisplay.cpp:2272
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2302
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "終了の確認"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2303
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "カーソルの色を現在の文字に合わせる"
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2304
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "選択を貼り付け"
 
-#: terminalDisplay/TerminalDisplay.cpp:2301
+#: terminalDisplay/TerminalDisplay.cpp:2305
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2540
+#: terminalDisplay/TerminalDisplay.cpp:2544
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3377,17 +3377,17 @@ msgstr ""
 "\">停止 (XOFF)</a> されました。再開するには <b>Ctrl+Q</b> を押してください。"
 "</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2595
+#: terminalDisplay/TerminalDisplay.cpp:2599
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2990
+#: terminalDisplay/TerminalDisplay.cpp:2994
 #, kde-format
 msgid "Change &Directory To"
 msgstr "ディレクトリを変更(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:3023
+#: terminalDisplay/TerminalDisplay.cpp:3027
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
