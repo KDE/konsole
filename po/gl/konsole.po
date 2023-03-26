@@ -9,7 +9,7 @@
 # Marce Villarino <mvillarino@kde-espana.es>, 2009, 2011, 2012, 2013, 2014.
 # Miguel Branco <mgl.branco@gmail.com>, 2013.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020, 2023.
 #
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en http://trasno.gpul.org
@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-25 00:49+0000\n"
-"PO-Revision-Date: 2020-01-12 13:00+0100\n"
+"PO-Revision-Date: 2023-03-25 14:45+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.08.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -81,7 +81,7 @@ msgstr "Configuración"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "Complementos"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -93,7 +93,7 @@ msgstr "Axuda"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Barra de ferramentas principal"
 
 #. i18n: ectx: Menu (history)
 #: ../desktop/partui.rc:14
@@ -103,17 +103,14 @@ msgstr "&Historial"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:76
-#, fuzzy, kde-format
-#| msgid "Session Number: %#"
+#, kde-format
 msgid "Session Toolbar"
-msgstr "Número da sesión: %#"
+msgstr "Barra de ferramentas de sesións"
 
 #: AppColorSchemeChooser.cpp:37
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "New Color Scheme"
+#, kde-format
 msgid "&Window Color Scheme"
-msgstr "Novo esquema de cores"
+msgstr "Esquema de cores de &xanela"
 
 #: Application.cpp:53
 #, kde-format
@@ -122,19 +119,17 @@ msgid "Name of profile to use for new Konsole instance"
 msgstr "Nome do perfil que se vai usar para a nova instancia de Konsole"
 
 #: Application.cpp:54
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Name of profile to use for new Konsole instance"
+#, kde-format
 msgctxt "@info:shell"
 msgid "json layoutfile to be loaded to use for new Konsole instance"
-msgstr "Nome do perfil que se vai usar para a nova instancia de Konsole"
+msgstr ""
+"Ficheiro JSON de disposición para cargar e usar na nova instancia de Konsole"
 
 #: Application.cpp:55
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Crea un novo perfil baseado no escollido"
+msgstr "Usar o perfil incluído en vez do perfil predeterminado"
 
 #: Application.cpp:56
 #, kde-format
@@ -151,17 +146,14 @@ msgid "Do not close the initial session automatically when it ends."
 msgstr "Non pechar automaticamente a sesión inicial cando remate."
 
 #: Application.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid ""
-#| "Create a new tab in an existing window rather than creating a new window"
+#, kde-format
 msgctxt "@info:shell"
 msgid ""
 "Create a new tab in an existing window rather than creating a new window "
 "('Run all Konsole windows in a single process' must be enabled)"
 msgstr ""
 "Crear un novo separador nunha xanela existente en vez de crear unha nova "
-"xanela"
+"xanela (debe activarse «Executar as xanelas de Konsole nun mesmo proceso»)"
 
 #: Application.cpp:62
 #, kde-format
@@ -262,6 +254,8 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
+"Forzar reutilizar a instancia existente aínda que rompa funcionalidades, p. "
+"ex. --new-tab. Existe principalmente para depurar problemas."
 
 #: Application.cpp:86
 #, kde-format
@@ -585,10 +579,9 @@ msgstr "Desenfocar o fondo"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:69
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Background color transparency:"
-msgstr "Transparencia do fondo:"
+msgstr "Transparencia da cor de fondo:"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
@@ -599,8 +592,7 @@ msgstr "Porcentaxe"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:103
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Wallpaper transparency:"
 msgstr "Transparencia do fondo:"
 
@@ -635,95 +627,91 @@ msgstr "…"
 #: colorscheme/ColorSchemeEditor.ui:165
 #, kde-format
 msgid "Wallpaper scaling:"
-msgstr ""
+msgstr "Escalabilidade do fondo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
 #, kde-format
 msgid "Tile"
-msgstr ""
+msgstr "Teselado"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:178
 #, kde-format
 msgid "Stretch"
-msgstr ""
+msgstr "Estiramento"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:183
 #, kde-format
 msgid "Crop"
-msgstr ""
+msgstr "Corte"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:188
 #, kde-format
 msgid "Adapt"
-msgstr ""
+msgstr "Adaptación"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:193
-#, fuzzy, kde-format
-#| msgid "Scrolling"
+#, kde-format
 msgid "NoScaling"
-msgstr "Desprazamento"
+msgstr "Nula"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Transparencia do fondo:"
+msgstr "Inversión do fondo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Nula"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
 #, kde-format
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
 #, kde-format
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Ambas"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr ""
+msgstr "Áncora horizontal:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgid "Left"
-msgstr "Parte esquerda"
+msgstr "Esquerda"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr ""
+msgstr "Áncora vertical:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
 #, kde-format
 msgid "Top"
-msgstr ""
+msgstr "Superior"
 
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
@@ -760,22 +748,24 @@ msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
+"Non se puido abrir o ficheiro co editor de texto indicado na configuración "
+"do perfil;\n"
+"abrirase co editor predeterminado do sistema."
 
 #: filterHotSpots/FileFilterHotspot.cpp:183
-#, fuzzy, kde-format
-#| msgid "Copy options:"
+#, kde-format
 msgid "Copy Location"
-msgstr "Opcións de copia:"
+msgstr "Copiar a localización"
 
 #: filterHotSpots/FileFilterHotspot.cpp:210
 #, kde-format
 msgid "open with"
-msgstr ""
+msgstr "abrir con"
 
 #: filterHotSpots/FileFilterHotspot.cpp:308
 #, kde-format
 msgid "Generating Thumbnail"
-msgstr ""
+msgstr "Xerando a miniatura"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:90
 #, kde-format
@@ -914,12 +904,10 @@ msgid "Terminal emulator"
 msgstr "Emulador de terminal"
 
 #: main.cpp:178
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "(c) 1997-2019, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr "© 1997-2019 Desenvolvedores de Konsole"
+msgstr "(c) 1997-2022 O grupo de desenvolvemento de Konsole"
 
 #: main.cpp:352
 #, kde-format
@@ -961,39 +949,37 @@ msgstr "Autor orixinal"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
-msgstr ""
+msgstr "Ahmad Samir"
 
 #: main.cpp:362 main.cpp:365 main.cpp:368 main.cpp:371
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "General maintainer, bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
-msgstr "Mantedor xeral, correccións de fallos e melloras"
+msgstr "Redeseño significativo, corrección de erros e melloras importantes"
 
 #: main.cpp:364
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
-msgstr ""
+msgstr "Carlos Alves"
 
 #: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
-msgstr ""
+msgstr "Tomaz Canabrava"
 
 #: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
-msgstr ""
+msgstr "Gustavo Carneiro"
 
 #: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
-msgstr ""
+msgstr "Edwin Pujols"
 
 #: main.cpp:374 main.cpp:377 main.cpp:379 main.cpp:384 main.cpp:386
 #: main.cpp:387 main.cpp:388
@@ -1006,35 +992,31 @@ msgstr "Correccións de fallos e melloras"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
-msgstr ""
+msgstr "Martin T. H. Sandsmark"
 
 #: main.cpp:379
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
-msgstr ""
+msgstr "Nate Graham"
 
 #: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
-msgstr ""
+msgstr "Mariusz Glebocki"
 
 #: main.cpp:381
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
-msgstr "Correccións de fallos e melloras"
+msgstr "Corrección de erros e melloras importantes"
 
 #: main.cpp:383
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Thomas Dreibholz"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
-msgstr "Thomas Dreibholz"
+msgstr "Thomas Surrel"
 
 #: main.cpp:386
 #, kde-format
@@ -1290,18 +1272,16 @@ msgid "Activate Menu"
 msgstr "Activar o menú"
 
 #: MainWindow.cpp:459
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move tab to the left"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Mover o separador á esquerda"
+msgstr "Gardar a disposición de separadores…"
 
 #: MainWindow.cpp:468
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr ""
+msgstr "Cargar unha disposición de separadores…"
 
 #: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
@@ -1352,7 +1332,7 @@ msgstr "Xeral"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr ""
+msgstr "Barra de separadores"
 
 #: MainWindow.cpp:978
 #, kde-format
@@ -1364,7 +1344,7 @@ msgstr "Ficheiros temporais"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
-msgstr ""
+msgstr "Miniaturas"
 
 #: Part.cpp:302
 #, kde-format
@@ -1376,37 +1356,31 @@ msgstr "Información da parte"
 #: plugins/QuickCommands/qcwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Formulario"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Atallo"
+msgstr "Atallo:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Filter"
+#, kde-format
 msgid "Filter..."
-msgstr "Retirar"
+msgstr "Filtrar…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
 #: plugins/QuickCommands/qcwidget.ui:59 plugins/SSHManager/sshwidget.ui:46
 #, kde-format
 msgid "Invert"
-msgstr ""
+msgstr "Inverter"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
-#, fuzzy, kde-format
-#| msgctxt "@item:intable The session title"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "Título"
 
@@ -1414,123 +1388,112 @@ msgstr "Título"
 #: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
-msgstr ""
+msgstr "Consello"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
 #: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:214
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgid "Default"
 msgstr "Predeterminado"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Command"
-msgstr "Orde:"
+msgstr "Orde"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:347
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "Aviso: "
+msgstr "Avisos"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "Executar"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:258
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgid "Save"
-msgstr "Abrir un ficheiro"
+msgstr "Gardar"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:269
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Actualizar"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
 #: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:323
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Cancel"
+#, kde-format
 msgid "Cancel"
-msgstr "&Cancelar"
+msgstr "Cancelar"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:45
 #: plugins/QuickCommands/quickcommandsplugin.cpp:112
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Quick Commands"
-msgstr "Orde:"
+msgstr "Ordes rápidas"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "Mostrar o acceso rápido"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Non se atoparon ordes rápidas. Pode engadir unha desde «Complementos → Ordes "
+"rápidas»"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Orde:"
+msgstr "Complementos - Ordes rápidas"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "Mostrar as ordes rápidas"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:168
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
 #, kde-format
 msgid "A duplicate item exists"
-msgstr ""
+msgstr "Existe un elemento duplicado"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:185
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
-msgstr ""
+msgstr "Corrixa os avisos antes de intentar executar este script"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:213
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "There are %1 open terminals in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "Hai %1 terminais abertos nesta xanela. Quere saír aínda así?"
+msgstr "Hai erros no script, seguro que quere executalo?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Erros do intérprete"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "Executar"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:244
 #, kde-format
@@ -1538,66 +1501,61 @@ msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
+"Esta a piques de eliminar o grupo %1,\n"
+" con varias configuracións, seguro que quere proceder?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:245
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr ""
+msgstr "Está a piques de eliminar %1, seguro que quere proceder?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:254
 #, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr ""
+msgstr "Eliminar as configuracións de ordes rápidas"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:290
 #, kde-format
 msgid "Title can not be empty or blank"
-msgstr ""
+msgstr "O título non pode estar baleiro"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:294
 #, kde-format
 msgid "Command can not be empty"
-msgstr ""
+msgstr "A orde non pode estar baleira"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:314
-#, fuzzy, kde-format
-#| msgid "Rename Tab"
+#, kde-format
 msgid "Rename"
-msgstr "Renomear o separador"
+msgstr "Cambiar de nome"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:349
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings (*)"
-msgstr "Aviso: "
+msgstr "Avisos (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Configure"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
-msgstr "Configurar"
+msgstr "Configuración de SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "Predeterminado"
+msgstr "Predeterminada"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
 msgid "%1 is a folder for SSH entries"
-msgstr ""
+msgstr "%1 é un cartafol para entradas de SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:318
@@ -1605,85 +1563,86 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:419
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Configure"
+#, kde-format
 msgid "SSH Config"
-msgstr "Configurar"
+msgstr "Configuración de SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Local Host: %h"
+#, kde-format
 msgid "Host: %1"
-msgstr "Máquina local: %h"
+msgstr "Servidor: %1"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
 msgid "SSH Manager"
-msgstr ""
+msgstr "Xestor de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:95
-#, fuzzy, kde-format
-#| msgid "Show menubar"
+#, kde-format
 msgid "Show SSH Manager"
-msgstr "Mostrar a barra de menú"
+msgstr "Mostrar o xestor de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Mostrar o acceso rápido para accións de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Non se atopou ningunha configuración de SSH gardada. Pode engadir unha desde "
+"«Complementos → Xestor de SSH»"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Abrir o xestor de ficheiros"
+msgstr "Complementos - Xestor de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "Entradas de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
+"Non se puido obter o nome do proceso, asúmese que non podemos solicitar unha "
+"conexión"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr ""
+msgstr "Erro ao dar unha orde de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:193
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
+"Non se pode dar unha orde de SSH fóra da aplicación de intérprete (p. ex. "
+"bash, zsh, sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
-msgstr ""
+msgstr "Chave de SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:118
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Non cambiar"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
@@ -1691,78 +1650,75 @@ msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
+"Esta a piques de eliminar o cartafol %1,\n"
+" con varias configuracións de SSH, seguro que quere proceder?"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:243
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr ""
+msgstr "Eliminar as configuracións de SSH"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
 msgid "Missing Hostname"
-msgstr ""
+msgstr "Falta o servidor"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
 #, kde-format
 msgid "Missing Name"
-msgstr ""
+msgstr "Falta o nome"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:408
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
+"Se activou usar a configuración de SSH, non indique unha chave de SSH ou un "
+"nome de persoa usuaria."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
 #, kde-format
 msgid "At least Username or SSHKey must be set"
-msgstr ""
+msgstr "Debe definir polo menos Username ou SSHKey"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:419
 #, kde-format
 msgid "Missing Folder"
-msgstr ""
+msgstr "Falta un cartafol"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:424
 #, kde-format
 msgid "An SSH session must have a profile"
-msgstr ""
+msgstr "Unha sesión de SSH debe ter un perfil"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Cannot delete this folder"
-msgstr ""
+msgstr "Non se pode eliminar este cartafol"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:451
 #, kde-format
 msgid "Delete folder and all of its contents"
-msgstr ""
+msgstr "Eliminar o cartafol e todo o seu contido"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Double click to change shortcut"
+#, kde-format
 msgid "Double click to change the folder name."
-msgstr "Faga dobre clic para cambiar un atallo do teclado"
+msgstr "Faga clic duplo para cambiar o nome do cartafol."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#, fuzzy, kde-format
-#| msgctxt "@info:shell"
-#| msgid "Do not close the initial session automatically when it ends."
+#, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "Non pechar automaticamente a sesión inicial cando remate."
+msgstr "Non pode eliminar unha entrada engadida automaticamente."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:462
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "Edita os perfís escollidos"
+msgstr "Eliminar a entrada seleccionada"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Atallo"
 
@@ -1770,86 +1726,80 @@ msgstr "Atallo"
 #: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
-msgstr ""
+msgstr "Mostrar as entradas que non coinciden co filtro"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Cambiar o perfil ao conectar ou desconectar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Xestionar os perfís"
+msgstr "Xestionar o perfil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
 #, kde-format
 msgid "Identifier"
-msgstr ""
+msgstr "Identificador"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:89
-#, fuzzy, kde-format
-#| msgid "The number of pixels between two lines"
+#, kde-format
 msgid "A name for this ssh entry"
-msgstr "O número de píxeles entre dúas liñas"
+msgstr "Un nome para esta entrada de SSH"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:92
-#, fuzzy, kde-format
-#| msgid "The number of pixels between two lines"
+#, kde-format
 msgid "The name of this entry on the list"
-msgstr "O número de píxeles entre dúas liñas"
+msgstr "O nome desta entrada na lista"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/SSHManager/sshwidget.ui:99
 #, kde-format
 msgid "SSH Hostname"
-msgstr ""
+msgstr "Servidor de SSH"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
 #: plugins/SSHManager/sshwidget.ui:106 plugins/SSHManager/sshwidget.ui:109
-#, fuzzy, kde-format
-#| msgid "Change the shape of the cursor"
+#, kde-format
 msgid "The hostname of the server"
-msgstr "Cambiar a forma do cursor"
+msgstr "O enderezo do servidor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: plugins/SSHManager/sshwidget.ui:116
 #, kde-format
 msgid "Port"
-msgstr ""
+msgstr "Porto"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr ""
+msgstr "O porto do servidor, 22 é o predeterminado para conexións de SSH"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
 #, kde-format
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:142
 #, kde-format
 msgid "The private key to be used for this connection"
-msgstr ""
+msgstr "A chave privada para usar nesta conexión"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:148
-#, fuzzy, kde-format
-#| msgid "&Terminate Task"
+#, kde-format
 msgid "The private key"
-msgstr "&Terminar esta tarefa"
+msgstr "A chave privada"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:168
@@ -1858,98 +1808,92 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
+"Se usa isto, non se usará a chave de SSH de enriba, senón aquela configurada "
+"en ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:171
 #, kde-format
 msgid "Use ~/.ssh/config for key"
-msgstr ""
+msgstr "Usar ~/.ssh/config para a chave"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: plugins/SSHManager/sshwidget.ui:178
-#, fuzzy, kde-format
-#| msgid "User Name: %u"
+#, kde-format
 msgid "Username"
-msgstr "Nome de usuario: %u"
+msgstr "Usuaria"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:185
 #, kde-format
 msgid "The username for the connection"
-msgstr ""
+msgstr "O nome de persoa usuaria da conexión"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:188
-#, fuzzy, kde-format
-#| msgctxt "NAME OF TRANSLATORS"
-#| msgid "Your names"
+#, kde-format
 msgid "Your username"
-msgstr ""
-"Jesús Bravo Álvarez, Xabi G. Feal, Marce Villarino, Miguel Branco, Xosé, "
-"Adrián Chaves Fernández"
+msgstr "O seu nome de persoa usuaria"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
 #: plugins/SSHManager/sshwidget.ui:195
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Cartafol"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
 #: plugins/SSHManager/sshwidget.ui:208
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
+"Para manter unha organización, esta entrada estará dentro deste cartafol."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: plugins/SSHManager/sshwidget.ui:221
-#, fuzzy, kde-format
-#| msgctxt "@title Preferences page name"
-#| msgid "Profiles"
+#, kde-format
 msgid "Profile"
-msgstr "Perfís"
+msgstr "Perfil"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
 #: plugins/SSHManager/sshwidget.ui:234
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
-msgstr ""
+msgstr "O perfil que estará activo cando se inicie a sesión de SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
 #: plugins/SSHManager/sshwidget.ui:272
 #, kde-format
 msgid "Add a new SSH Entry"
-msgstr ""
+msgstr "Engadir unha nova entrada de SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:286
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "Edita os perfís escollidos"
+msgstr "Eliminar a entrada de SSH seleccionada"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:300
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Edit selected entry"
-msgstr "Edita os perfís escollidos"
+msgstr "Editar a entrada seleccionada"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add new SSH Configuration"
-msgstr ""
+msgstr "Engadir unha nova configuración de SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
 #: plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel Add or Edit"
-msgstr ""
+msgstr "Cancelar engadir ou editar"
 
 #: pluginsystem/PluginManager.cpp:83
 #, kde-format
 msgid "No plugins available"
-msgstr ""
+msgstr "Non hai complementos dispoñíbeis"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
 #. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
@@ -1970,7 +1914,7 @@ msgstr "Modo de versión para &imprimir (texto negro, sen fondo)"
 #: PrintOptions.ui:46 settings/konsole.kcfg:169
 #, kde-format
 msgid "&Scale output"
-msgstr "&Escala de saída"
+msgstr "&Escalar a saída"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
 #, kde-format
@@ -1995,28 +1939,24 @@ msgid "Shortcut"
 msgstr "Atallo"
 
 #: profile/ProfileModel.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr "Só lectura"
+msgstr " [só lectura]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "Predeterminado"
+msgstr " [predeterminado]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "O perfil incluído está sempre dispoñíbel"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2027,7 +1967,7 @@ msgstr "Faga dobre clic para cambiar un atallo do teclado"
 #: RenameTabDialog.cpp:25
 #, kde-format
 msgid "Tab Properties"
-msgstr ""
+msgstr "Propiedades do separador"
 
 #: SaveHistoryTask.cpp:70
 #, kde-format
@@ -2121,7 +2061,7 @@ msgstr "Consola de Linux"
 #: schemas.cpp:15
 #, kde-format
 msgid "macOS"
-msgstr ""
+msgstr "macOS"
 
 #: schemas.cpp:16
 #, kde-format
@@ -2129,10 +2069,9 @@ msgid "Solaris console"
 msgstr "Consola de Solaris"
 
 #: session/Session.cpp:97
-#, fuzzy, kde-format
-#| msgid "Bell in session '%1'"
+#, kde-format
 msgid "Bell in '%1' (Session '%2')"
-msgstr "Badalada na sesión «%1»"
+msgstr "Badalada en «%1» (sesión «%2»)"
 
 #: session/Session.cpp:406
 #, kde-format
@@ -2165,18 +2104,16 @@ msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Non se puido iniciar o programa «%1» cos argumentos «%2»."
 
 #: session/Session.cpp:738
-#, fuzzy, kde-format
-#| msgid "Silence in session '%1'"
+#, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "Silencio na sesión «%1»"
+msgstr "Silencio en «%1» (sesión «%2»)"
 
 #: session/Session.cpp:742 session/Session.cpp:1923
 #: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
 #: Vt102Emulation.cpp:1135
-#, fuzzy, kde-format
-#| msgid "&Close Session"
+#, kde-format
 msgid "Show session"
-msgstr "Pechar a &sesión"
+msgstr "Mostrar a sesión"
 
 # skip-rule: PT-2010-dual_command
 #: session/Session.cpp:1023
@@ -2215,10 +2152,9 @@ msgid "ZModem Progress"
 msgstr "Progreso do ZModem"
 
 #: session/Session.cpp:1919
-#, fuzzy, kde-format
-#| msgid "Activity in session '%1'"
+#, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "Actividade na sesión «%1»"
+msgstr "Actividade en «%1» (sesión «%2»)"
 
 #: session/SessionController.cpp:147
 #, kde-format
@@ -2228,7 +2164,7 @@ msgstr "Konsole"
 #: session/SessionController.cpp:360
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
-msgstr ""
+msgstr "O proceso «%1» rematou a execución na sesión «%2»"
 
 #: session/SessionController.cpp:442
 #, kde-format
@@ -2258,38 +2194,32 @@ msgstr "Abrir o xestor de ficheiros"
 #: session/SessionController.cpp:670
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Dividir a vista entre esquerda e dereita"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Dividir a vista en horizontal"
 
 #: session/SessionController.cpp:684
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Copiar sen os signos de entrada"
 
 #: session/SessionController.cpp:690
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
-msgstr "Copiar a entrada"
+msgstr "Copiar a entrada de usuaria"
 
 #: session/SessionController.cpp:696
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "Copiar a entrada"
+msgstr "Copiar a saída da orde"
 
 #: session/SessionController.cpp:711
 #, kde-format
@@ -2307,10 +2237,9 @@ msgid "&Select All"
 msgstr "Escoller &todo"
 
 #: session/SessionController.cpp:728
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Escoller unha &liña"
+msgstr "Seleccionar un &modo"
 
 #: session/SessionController.cpp:733
 #, kde-format
@@ -2356,7 +2285,7 @@ msgstr "Estabelecer a &codificación"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
-msgstr ""
+msgstr "Permitir seguir o rato"
 
 #: session/SessionController.cpp:833
 #, kde-format
@@ -2365,10 +2294,9 @@ msgid "Read-only"
 msgstr "Só lectura"
 
 #: session/SessionController.cpp:844
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "Cambia&r o nome do separador…"
+msgstr "&Configurar ou cambiar de nome o separador…"
 
 #: session/SessionController.cpp:850
 #, kde-format
@@ -2407,10 +2335,9 @@ msgid "Monitor for &Silence"
 msgstr "Monitorizar o &silencio"
 
 #: session/SessionController.cpp:895
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "Monitorizar a &actividade"
+msgstr "Monitorizar a finalización do proceso"
 
 #: session/SessionController.cpp:902
 #, kde-format
@@ -2473,11 +2400,9 @@ msgid "User Signal &2"
 msgstr "Sinal de usuario &2"
 
 #: session/SessionController.cpp:978
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgid "Create New Profile..."
-msgstr "Novo perfil"
+msgstr "Crear un novo perfil…"
 
 #: session/SessionController.cpp:980
 #, kde-format
@@ -2505,12 +2430,10 @@ msgid "Confirm Close"
 msgstr "Confirmar o peche"
 
 #: session/SessionController.cpp:1113
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "Pechar o separador"
+msgstr "Pechar o programa"
 
 #: session/SessionController.cpp:1140
 #, kde-format
@@ -2533,12 +2456,12 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Matar o programa"
 
 #: session/SessionController.cpp:2004
 #, kde-format
 msgid "Open Current Folder With"
-msgstr ""
+msgstr "Abrir o cartafol actual con"
 
 #: session/SessionController.cpp:2071
 #, kde-format
@@ -2633,7 +2556,7 @@ msgstr "Mostrar o título da xanela na barra de títulos"
 #: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
+msgstr "Enfocar os terminais cando o rato se mova sobre eles."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
@@ -2654,7 +2577,7 @@ msgstr "Ao iniciar Konsole, reusar cando sexa posíbel un proceso existente"
 #: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
-msgstr "Executar todas as xanelas de Konsole nun mesmo proceso"
+msgstr "Executar as xanelas de Konsole nun mesmo proceso"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:146
@@ -2752,34 +2675,34 @@ msgstr "O tamaño da xanela gardarase tal e como estivera ao saír Konsole"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Thumbnail Width"
-msgstr ""
+msgstr "Anchura da miniatura"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Sets the width of the thumbnail"
-msgstr ""
+msgstr "Estabelece a anchura da miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47 settings/konsole.kcfg:48
 #, kde-format
 msgid "Use Shift to display a thumbnail"
-msgstr ""
+msgstr "User Maiús para mostrar unha miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Alt to display a thumbnail"
-msgstr ""
+msgstr "Usar Alt para mostrar unha miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
-msgstr ""
+msgstr "Usar Ctrl para mostrar unha miniatura"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/konsole.kcfg:64
@@ -2808,10 +2731,9 @@ msgstr "Controlar a visibilidade da barra de separadores"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
 #: settings/konsole.kcfg:94
-#, fuzzy, kde-format
-#| msgid "Control the visibility of the whole tab bar"
+#, kde-format
 msgid "Control the size of the handle between panels"
-msgstr "Controlar a visibilidade da barra de separadores"
+msgstr "Controlar o tamaño da asa entre paneis"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
 #: settings/konsole.kcfg:114
@@ -2917,10 +2839,9 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:39
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgid "Create a new profile based on the selected profile"
-msgstr "Crea un novo perfil baseado no escollido"
+msgstr "Crear un novo perfil baseado no perfil seleccionado"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:42
@@ -2930,13 +2851,12 @@ msgstr "&Novo…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:52
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
 msgstr ""
-"Estabelecer o perfil escollido como o predeterminado para as novas sesións "
-"de terminal"
+"Editar o perfil seleccionado (este botón desactívase nos perfís de só "
+"lectura)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:55
@@ -2946,10 +2866,9 @@ msgstr "&Editar…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:65
-#, fuzzy, kde-format
-#| msgid "Delete the selected profile(s)"
+#, kde-format
 msgid "Delete the selected profile"
-msgstr "Elimina os perfís escollidos"
+msgstr "Eliminar o perfil seleccionado"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:68
@@ -3118,68 +3037,63 @@ msgstr "Pechar os separadores co clic central"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
 #: settings/TabBarSettings.ui:377
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgid "Splits"
-msgstr "Dividir a vista"
+msgstr "Divide"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/TabBarSettings.ui:383
-#, fuzzy, kde-format
-#| msgid "Show menubar"
+#, kde-format
 msgid "Show Header:"
-msgstr "Mostrar a barra de menú"
+msgstr "Mostrar a cabeceira:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:390
-#, fuzzy, kde-format
-#| msgid "When needed"
+#, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "Cando se necesite"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
 #: settings/TabBarSettings.ui:400
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
-msgstr "&Nunca"
+msgstr "Nunca"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "Drag Handle Size:"
-msgstr ""
+msgstr "Tamaño da asa para arrastrar:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
 #: settings/TabBarSettings.ui:436
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
 #: settings/TabBarSettings.ui:446
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
-msgstr ""
+msgstr "Mediano"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
 #: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
-msgstr ""
+msgstr "Grande"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
 #: settings/TabBarSettings.ui:479
-#, fuzzy, kde-format
-#| msgid "Alwa&ys"
+#, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
-msgstr "&Sempre"
+msgstr "Sempre"
 
 #: settings/TemporaryFilesSettings.cpp:31
 #, kde-format
@@ -3214,15 +3128,13 @@ msgstr "Personalizado:"
 #: settings/ThumbnailsSettings.ui:17
 #, kde-format
 msgid "Size:"
-msgstr ""
+msgstr "Tamaño:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
 #: settings/ThumbnailsSettings.ui:24
-#, fuzzy, kde-format
-#| msgctxt "(pixels) visual size unit"
-#| msgid " px"
+#, kde-format
 msgid "px"
-msgstr " px"
+msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
@@ -3232,51 +3144,46 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Para usar esta funcionalidade, active <span style=\" "
+"font-weight:600;\">Rato-&gt;Diversos-&gt;Subliñar </span><span style=\" font-"
+"weight:600;\">os ficheiros</span> na configuración do seu perfil</p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
-#, fuzzy, kde-format
-#| msgctxt "@item"
-#| msgid "Activate Menu"
+#, kde-format
 msgid "Activation:"
-msgstr "Activar o menú"
+msgstr "Activación:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: settings/ThumbnailsSettings.ui:63
 #, kde-format
 msgid "Mouse hover plus"
-msgstr ""
+msgstr "Cubrir co rato e"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
 #: settings/ThumbnailsSettings.ui:70
-#, fuzzy, kde-format
-#| msgctxt "key on keyboard"
-#| msgid "Shift"
+#, kde-format
 msgid "Shift"
 msgstr "Maiús"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
 #: settings/ThumbnailsSettings.ui:77
-#, fuzzy, kde-format
-#| msgctxt "key on keyboard"
-#| msgid "Alt"
+#, kde-format
 msgid "Alt"
 msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
 #: settings/ThumbnailsSettings.ui:84
-#, fuzzy, kde-format
-#| msgctxt "key on keyboard"
-#| msgid "Ctrl"
+#, kde-format
 msgid "Ctrl"
 msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
-#, fuzzy, kde-format
-#| msgid "Enable menu accelerators"
+#, kde-format
 msgid "Enable thumbnails generation"
-msgstr "Activar os aceleradores de menú"
+msgstr "Activar a xeración de miniaturas"
 
 #: terminalDisplay/TerminalDisplay.cpp:663
 #, kde-format
@@ -3395,8 +3302,7 @@ msgid "&Paste Location"
 msgstr "&Pegar a localización"
 
 #: ViewManager.cpp:106
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Dividir a vista"
@@ -3414,54 +3320,46 @@ msgid "Split View Top/Bottom"
 msgstr "Dividir a vista en horizontal"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Dividir a vista en horizontal"
+msgstr "Dividir a vista automaticamente"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Dividir a vista entre esquerda e dereita"
+msgstr "Dividir a vista entre esquerda e dereita desde o seguinte separador"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Dividir a vista en horizontal"
+msgstr "Dividir a vista en horizontal desde o seguinte separador"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Dividir a vista en horizontal"
+msgstr "Dividir a vista automaticamente desde o seguinte separador"
 
 #: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr ""
+msgstr "Cargar un novo separador con terminais de disposición 2×2"
 
 #: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr ""
+msgstr "Cargar un novo separador con terminais de disposición 2×1"
 
 #: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr ""
+msgstr "Cargar un novo separador con terminais de disposición 1×2"
 
 #: ViewManager.cpp:191
 #, kde-format
@@ -3548,20 +3446,16 @@ msgid "Last Used Tabs (Reverse)"
 msgstr "Últimos separadores usados (inverso)"
 
 #: ViewManager.cpp:288
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Maximize current Terminal"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
-msgstr "Maximizar o terminal actual"
+msgstr "Conmutar maximizar a vista actual"
 
 #: ViewManager.cpp:289
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Maximize current Terminal"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
-msgstr "Maximizar o terminal actual"
+msgstr "Conmutar maximizar a vista actual"
 
 #: ViewManager.cpp:297
 #, kde-format
@@ -3579,25 +3473,25 @@ msgstr "Mover o separador á esquerda"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Preparar a integración semántica (bash)"
 
 #: ViewManager.cpp:317
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Conmutar a visualización de consellos semánticos"
 
 #: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Conmutar a visualización de números de liña"
 
 #: ViewManager.cpp:330
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Mesmo tamaño para todas as vistas"
 
 #: ViewManager.cpp:340
 #, kde-format
@@ -3606,61 +3500,52 @@ msgid "Switch to Tab %1"
 msgstr "Ir ao separador %1"
 
 #: ViewManager.cpp:553
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Interacción de texto"
+msgstr "Consellos semánticos"
 
 #: ViewManager.cpp:569
 #, kde-format
 msgid "Line numbers "
-msgstr ""
+msgstr "Números de liña"
 
 #: ViewManager.cpp:1134
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move tab to the left"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Mover o separador á esquerda"
+msgstr "Gardar a disposición de separadores"
 
 #: ViewManager.cpp:1136 ViewManager.cpp:1223
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr ""
+msgstr "Disposición de vista de Konsole (*.json)"
 
 #: ViewManager.cpp:1149
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"Ocorreu un problema ao gardar a saída.\n"
+"Ocorreu un problema ao gardar a disposición.\n"
 "%1"
 
 #: ViewManager.cpp:1210
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"Ocorreu un problema ao gardar a saída.\n"
+"Ocorreu un problema ao cargar a disposición.\n"
 "%1"
 
 #: ViewManager.cpp:1221
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "Cargar unha disposición de separadores"
 
 #: Vt102Emulation.cpp:2453
 #, kde-format
@@ -3777,7 +3662,7 @@ msgstr "Codificación de caracteres predeterminada:"
 #: widgets/EditProfileAdvancedPage.ui:278
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
-msgstr ""
+msgstr "Atallo para ollar a pantalla principal:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:33
@@ -3936,17 +3821,15 @@ msgstr "Usar unha cor fixa, personalizada, para o cursor"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:316
-#, fuzzy, kde-format
-#| msgid "Custom cursor color:"
+#, kde-format
 msgid "Custom cursor color"
-msgstr "Cor personalizada do cursor:"
+msgstr "Cor personalizada do cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
 #: widgets/EditProfileAppearancePage.ui:347
-#, fuzzy, kde-format
-#| msgid "Cursor"
+#, kde-format
 msgid "Cursor:"
-msgstr "Cursor"
+msgstr "Cursor:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:360
@@ -3958,14 +3841,13 @@ msgstr "Escolla a cor usada para debuxar o cursor"
 #: widgets/EditProfileAppearancePage.ui:380
 #, kde-format
 msgid "Text:"
-msgstr ""
+msgstr "Texto:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:393
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
-msgstr "Escolla a cor usada para debuxar o cursor"
+msgstr "Escolla a cor usada para debuxar o carácter baixo o cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileAppearancePage.ui:418
@@ -3993,7 +3875,7 @@ msgstr "Activado"
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
-msgstr "Varios"
+msgstr "Diversos"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAppearancePage.ui:471
@@ -4022,20 +3904,19 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:488
 #, kde-format
 msgid "Always invert the colors of selected text"
-msgstr ""
+msgstr "Inverter sempre as cores do texto seleccionado"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
 #: widgets/EditProfileAppearancePage.ui:497
 #, kde-format
 msgid "Darkening strength:"
-msgstr ""
+msgstr "Intensidade ao escurecer:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:522
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Inactive Terminals:"
-msgstr "Tamaño inicial do terminal:"
+msgstr "Terminais inactivos:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:532
@@ -4087,38 +3968,37 @@ msgstr "Indicar se a xanela está activa reducindo a intensidade das cores"
 #: widgets/EditProfileAppearancePage.ui:677
 #, kde-format
 msgid "Darken"
-msgstr ""
+msgstr "Escurecer"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:719
 #, kde-format
 msgid "Display Vertical line at column:"
-msgstr ""
+msgstr "Mostrar unha liña vertical na columna:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Disposición de texto complexa</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Disposición de texto complexa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Escritura bidireccional dos textos"
+msgstr "Activar o debuxado de texto en modo palabra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Modo palabra"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -4127,83 +4007,84 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignorar os cambios de atributos en medo de palabras (senón, os cambios de "
+"atributo rompen as palabras ao debuxar)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Usar os mesmos atributos para toda a palabra"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Debuxar as palabras de caracteres ASCII xuntas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Caracteres de palabra:"
+msgstr "Caracteres ASCII"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Debuxar as palabras de caracteres de alfabetos bráhmicos xuntas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Coincidir co carácter actual"
+msgstr "Caracteres de alfabetos bráhmicos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Fonte:"
+msgstr "Tipo de letra de emoticonas:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"As liñas van sempre de esquerda a dereita, en vez de depender do primeiro "
+"carácter forte"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "forzar a dirección de liña de esquerda a dereita"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
+"Tratar o debuxo de caracteres de táboas coa mesma forza que os de esquerda a "
+"dereita."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Substitución do modo BiDi dos caracteres de táboas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Pegar &sen caracteres de control"
+msgstr "Ignorar o wcwidth de caracteres problemáticos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Substituír o wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4253,35 +4134,29 @@ msgid "Advanced"
 msgstr "Avanzado"
 
 #: widgets/EditProfileDialog.cpp:283
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<p>Konsole does not have permission to save this profile to:<br /> "
-#| "\"%1\"</p><p>To be able to save settings you can either change the "
-#| "permissions of the profile configuration file or change the profile name "
-#| "to save the settings to a new profile.</p>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Insufficient permissions to save settings to: <filename>%1</filename>.<nl/"
 ">Either change the permissions of that file or set a different name to save "
 "the settings to a new profile."
 msgstr ""
-"<p>Konsole non ten permiso para gardar o perfil en:<br /> «%1»</p> <p>Para "
-"poder gardar a configuración pode ou cambiar os permisos do ficheiro de "
-"configuración do perfil ou cambiar o nome do perfil para gardar a "
-"configuración nun novo perfil.</p>"
+"Permisos insuficientes para cargar a configuración en: <filename>%1</"
+"filename>.<nl/>Cambie os permisos dese ficheiro ou escolla un nome distinto "
+"para gardar a configuración nun novo perfil."
 
 #: widgets/EditProfileDialog.cpp:300
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
+"O nome de perfil estaba baleiro; defina un nome para gardar a configuración."
 
 #: widgets/EditProfileDialog.cpp:308
-#, fuzzy, kde-format
-#| msgid "<p>A profile with this name already exists.</p>"
+#, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
-msgstr "<p>Xa existe un perfil con ese nome.</p>"
+msgstr "Xa existe un perfil chamado «%1»."
 
 #: widgets/EditProfileDialog.cpp:343
 #, kde-format
@@ -4291,11 +4166,9 @@ msgstr[0] "Estase a editar o perfil: %2"
 msgstr[1] "Estanse a editar %1 perfís: %2"
 
 #: widgets/EditProfileDialog.cpp:347
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgid "Create New Profile"
-msgstr "Novo perfil"
+msgstr "Crear un perfil novo"
 
 #: widgets/EditProfileDialog.cpp:350
 #, kde-format
@@ -4303,61 +4176,49 @@ msgid "Edit Profile \"%1\""
 msgstr "Editar o perfil «%1»"
 
 #: widgets/EditProfileDialog.cpp:441
-#, fuzzy, kde-format
-#| msgctxt "Suffix of the number of columns (N columns)"
-#| msgid " column"
-#| msgid_plural " columns"
+#, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
 "separate it from the number value."
 msgid " column"
 msgid_plural " columns"
-msgstr[0] " columna"
-msgstr[1] "Columnas"
+msgstr[0] "columna"
+msgstr[1] "columnas"
 
 #: widgets/EditProfileDialog.cpp:443
-#, fuzzy, kde-format
-#| msgctxt "Suffix of the number of rows (N rows)"
-#| msgid " row"
-#| msgid_plural " rows"
+#, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
 "separate it from the number value."
 msgid " row"
 msgid_plural " rows"
-msgstr[0] " fila"
-msgstr[1] " filas"
+msgstr[0] "fila"
+msgstr[1] "filas"
 
 #: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "System Bell"
-msgstr ""
+msgstr "Badalada do sistema"
 
 #: widgets/EditProfileDialog.cpp:453
-#, fuzzy, kde-format
-#| msgid "Notifications:"
+#, kde-format
 msgid "System Notifications"
-msgstr "Notificacións:"
+msgstr "Notificacións do sistema"
 
 #: widgets/EditProfileDialog.cpp:453
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Visual effects"
+#, kde-format
 msgid "Visual Bell"
-msgstr "Efectos visuais"
+msgstr "Badalada visual"
 
 #: widgets/EditProfileDialog.cpp:453
 #, kde-format
 msgid "Ignore Bell Events"
-msgstr ""
+msgstr "Ignorar as badaladas"
 
 #: widgets/EditProfileDialog.cpp:462
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr ""
-"Estabelecer o perfil escollido como o predeterminado para as novas sesións "
-"de terminal"
+msgstr "Perfil predeterminado para novas sesións de terminal en %1"
 
 #: widgets/EditProfileDialog.cpp:567
 #, kde-format
@@ -4422,18 +4283,29 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
+"O formato é, por exemplo, «editorExec PATH:LINE:COLUMN».\n"
+"\n"
+"PATH    será a ruta do ficheiro de texto\n"
+"LINE    será o número de liña\n"
+"COLUMN  (opcional) será o número de columna\n"
+"Nota: terá que substituír «PATH:LINE:COLUMN» pola sintaxe real\n"
+"que permite o seu editor; por exemplo:\n"
+"gedit +LINE:COLUMN PATH\n"
+"\n"
+"Se PATH ou LINE non existen na orde, esta opción\n"
+"ignorarase e o ficheiro abrirase no editor de texto\n"
+"predeterminado."
 
 #: widgets/EditProfileDialog.cpp:1832
 #, kde-format
 msgid "Text Editor Custom Command"
-msgstr ""
+msgstr "Orde personalizada de editor de texto"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:39
-#, fuzzy, kde-format
-#| msgid "Default Search Settings"
+#, kde-format
 msgid "General Settings"
-msgstr "Configuración predeterminada de busca"
+msgstr "Configuración xeral"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:63
@@ -4456,8 +4328,7 @@ msgstr "Nome do perfil"
 
 #. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
 #: widgets/EditProfileGeneralPage.ui:91
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default Profile"
 msgstr "Perfil predeterminado"
 
@@ -4549,36 +4420,33 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:356
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Terminal emulator"
+#, kde-format
 msgid "Terminal bell mode:"
-msgstr "Emulador de terminal"
+msgstr "Modo de badalada de terminal:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:374
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic Integration"
-msgstr "Interacción de texto"
+msgstr "Integración semántica"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Emulación de frechas de arriba e abaixo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Un clic do rato na liña de entrada move o cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Consellos semánticos:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4588,11 +4456,10 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:410 widgets/EditProfileGeneralPage.ui:456
 #: widgets/EditProfileGeneralPage.ui:502 widgets/EditProfileGeneralPage.ui:548
 #: widgets/EditProfileGeneralPage.ui:594
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "Never"
 msgid "Never"
-msgstr "&Nunca"
+msgstr "Nunca"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
@@ -4605,7 +4472,7 @@ msgstr "&Nunca"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Ao mostrar os consellos de URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4615,37 +4482,34 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:430 widgets/EditProfileGeneralPage.ui:476
 #: widgets/EditProfileGeneralPage.ui:522 widgets/EditProfileGeneralPage.ui:568
 #: widgets/EditProfileGeneralPage.ui:614
-#, fuzzy, kde-format
-#| msgid "Alwa&ys"
+#, kde-format
 msgctxt "Always"
 msgid "Always"
-msgstr "&Sempre"
+msgstr "Sempre"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Barras de erro vermello:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Desenfocar o fondo"
+msgstr "Fondo de erro vermello:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Barras alternantes:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Desenfocar o fondo"
+msgstr "Fondo alternante:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
@@ -4850,7 +4714,7 @@ msgstr "Subliñar os ficheiros"
 #: widgets/EditProfileMousePage.ui:285
 #, kde-format
 msgid "Text Editor Command: "
-msgstr ""
+msgstr "Orde de editor de texto: "
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
@@ -4859,6 +4723,8 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
 msgstr ""
+"Editor de texto para usar ao abrir URL de ficheiros de texto nunha liña e "
+"columna indicadas."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:329
@@ -4872,16 +4738,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:332
-#, fuzzy, kde-format
-#| msgid "Open by direct click"
+#, kde-format
 msgid "Open files/links by direct click"
-msgstr "Abrir directamente ao premer."
+msgstr "Abrir ficheiros e ligazóns mediante clic directo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:343
 #, kde-format
 msgid "Allow escape sequences for links"
-msgstr ""
+msgstr "Permitir secuencias de escape en ligazóns"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
 #: widgets/EditProfileMousePage.ui:350
@@ -4891,19 +4756,21 @@ msgid ""
 "to be shown as another URL or hidden.<br>Make sure you understand the "
 "implications before turning this on."
 msgstr ""
+"<b>AVISO</b>: Isto ten implicacións de seguridade, dado que permite mostrar "
+"URL maliciosas suplantando outras URL ou agochadas.<br>Asegúrese de que "
+"entende as implicacións antes de activar isto."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileMousePage.ui:368
-#, fuzzy, kde-format
-#| msgid "Allow blinking text"
+#, kde-format
 msgid "Allowed link formats: "
-msgstr "Permitir textos chiscar"
+msgstr "Formatos de ligazón permitidos: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
 #: widgets/EditProfileMousePage.ui:378
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
-msgstr ""
+msgstr "Os formatos de posíbeis ligazóns, como http://, https:// e file://"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:389
@@ -4971,12 +4838,14 @@ msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
 msgstr ""
+"Ao colocar o rato sobre unha cor hexadecimal mostrarase nun cadro ao carón "
+"do punteiro do rato"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Mostrar as cores ao cubrilas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
@@ -4985,12 +4854,15 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
+"Algunhas aplicacións de terminal son compatíbeis con cursores, o que lles "
+"permite obtelo de maneira predeterminada. Tamén se pode conmutar durante a "
+"execución."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:455
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
-msgstr ""
+msgstr "Permitir ás aplicacións de terminal manexar clics e arrastres"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:43
@@ -5071,25 +4943,25 @@ msgstr "Agochada"
 #: widgets/EditProfileScrollingPage.ui:217
 #, kde-format
 msgid "Highlighting:"
-msgstr ""
+msgstr "Realzado:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
 #: widgets/EditProfileScrollingPage.ui:227
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr ""
+msgstr "Realizar as liñas que entran na vista"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:240
 #, kde-format
 msgid "Reflow Lines:"
-msgstr ""
+msgstr "Cambiar o fluxo das liñas:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Reflow lines when terminal resizes"
-msgstr ""
+msgstr "Cambiar o fluxo das liñas ao cambiar o tamaño do terminal"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5136,14 +5008,7 @@ msgstr ""
 "graves problemas no mesmo."
 
 #: widgets/HistorySizeWidget.cpp:69
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "When using this option, the scrollback data will be written unencrypted "
-#| "to temporary files. Those temporary files will be deleted automatically "
-#| "when Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → "
-#| "Configure Konsole → File Location</emphasis> to select the location of "
-#| "the temporary files."
+#, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "When using this option, the scrollback data will be written unencrypted to "
@@ -5155,7 +5020,7 @@ msgstr ""
 "Cando se marque esta opción os datos do historial almacenaranse sen cifrar "
 "en ficheiros temporais. Eses ficheiros temporais elimínanse automaticamente "
 "cando se pecha Konsole de xeito normal.<nl/>Use <emphasis>Configuración → "
-"Configurar Konsole → Situación dos ficheiros</emphasis> para seleccionar a "
+"Configurar Konsole → Ficheiros temporais</emphasis> para seleccionar a "
 "situación dos ficheiros temporais."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
@@ -5310,12 +5175,10 @@ msgid "Print Shell"
 msgstr "Imprimir o intérprete de ordes"
 
 #: widgets/RenameTabWidget.cpp:37
-#, fuzzy, kde-format
-#| msgctxt "Do not show a close button"
-#| msgid "None"
+#, kde-format
 msgctxt "@label:listbox No color selected"
 msgid "None"
-msgstr "Nada"
+msgstr "Ningunha"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, remoteTabTitleEdit)
 #: widgets/RenameTabWidget.ui:41
@@ -5347,11 +5210,9 @@ msgstr "Formato normal do título dos separadores"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgid "Tab Color:"
-msgstr "Cor:"
+msgstr "Cor do separador:"
 
 #: widgets/TabTitleFormatButton.cpp:22 widgets/TabTitleFormatButton.cpp:31
 #, c-format, kde-format
@@ -5440,11 +5301,10 @@ msgid "Maximize terminal"
 msgstr "Maximizar o terminal"
 
 #: widgets/TerminalHeaderBar.cpp:91
-#, fuzzy, kde-format
-#| msgid "Above terminal area"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Move terminal to new tab"
-msgstr "Sobre a zona de terminais"
+msgstr "Mover o terminal a un novo separador¡"
 
 #: widgets/TerminalHeaderBar.cpp:101
 #, kde-format
@@ -5453,27 +5313,22 @@ msgid "Close terminal"
 msgstr "Pechar o terminal"
 
 #: widgets/TerminalHeaderBar.cpp:186
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Restore other terminals"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Restore terminal"
-msgstr "Restaurar outros terminais"
+msgstr "Restaurar o terminal"
 
 #: widgets/ViewContainer.cpp:57
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
-msgstr "En cada separad&or"
+msgstr "Abrir un novo separador"
 
 #: widgets/ViewContainer.cpp:62
-#, fuzzy, kde-format
-#| msgctxt "@info:whatsthis"
-#| msgid "Close the active tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
-msgstr "Pechar a lapela activa"
+msgstr "Pechar este separador"
 
 #: widgets/ViewContainer.cpp:95
 #, kde-format
@@ -5482,11 +5337,10 @@ msgid "&Detach Tab"
 msgstr "&Desprender o separador"
 
 #: widgets/ViewContainer.cpp:101
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "Cambia&r o nome do separador…"
+msgstr "&Configurar ou cambiar de nome o separador…"
 
 #: widgets/ViewContainer.cpp:106
 #, kde-format
