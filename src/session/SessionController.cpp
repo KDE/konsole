@@ -567,7 +567,7 @@ void SessionController::handleWebShortcutAction(QAction *action)
 
 void SessionController::configureWebShortcuts()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     auto job = new KIO::CommandLauncherJob(QStringLiteral("kcmshell5"), {QStringLiteral("webshortcuts")});
 #else
     auto job = new KIO::CommandLauncherJob(QStringLiteral("kcmshell6"), {QStringLiteral("webshortcuts")});
