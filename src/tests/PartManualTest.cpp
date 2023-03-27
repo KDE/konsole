@@ -20,8 +20,8 @@
 // KDE
 #include <KMainWindow>
 #include <KPluginFactory>
+#include <QTest>
 #include <kservice_version.h>
-#include <qtest.h>
 
 #if KSERVICE_VERSION < QT_VERSION_CHECK(5, 86, 0)
 #include <KPluginLoader>

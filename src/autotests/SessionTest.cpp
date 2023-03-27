@@ -7,7 +7,7 @@
 // Own
 #include "SessionTest.h"
 
-#include "qtest.h"
+#include <QTest>
 
 // Konsole
 #include "../Emulation.h"

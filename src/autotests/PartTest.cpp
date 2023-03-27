@@ -17,7 +17,7 @@
 #include <KPluginFactory>
 #include <KPtyDevice>
 #include <KPtyProcess>
-#include <qtest.h>
+#include <QTest>
 
 #include <kcoreaddons_version.h>
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)

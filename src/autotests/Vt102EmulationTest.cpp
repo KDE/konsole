@@ -7,7 +7,7 @@
 // Own
 #include "Vt102EmulationTest.h"
 
-#include "qtest.h"
+#include <QTest>
 
 // The below is to verify the old #defines match the new constexprs
 // Just copy/paste for now from Vt102Emulation.cpp

@@ -10,7 +10,7 @@
 // Qt
 
 // KDE
-#include <qtest.h>
+#include <QTest>
 
 using namespace Konsole;
 

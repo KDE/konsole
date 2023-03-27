@@ -21,7 +21,7 @@
 #include <KPluginLoader>
 #endif
 
-#include <qtest.h>
+#include <QTest>
 
 using namespace Konsole;
 

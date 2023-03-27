@@ -8,7 +8,7 @@
 #include "BookMarkTest.h"
 
 // Qt
-#include <qtest.h>
+#include <QTest>
 
 // KDE
 #include <KBookmarkManager>

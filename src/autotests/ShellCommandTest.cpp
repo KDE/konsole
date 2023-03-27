@@ -12,7 +12,7 @@
 #include <QStringList>
 
 // KDE
-#include <qtest.h>
+#include <QTest>
 
 using namespace Konsole;
 

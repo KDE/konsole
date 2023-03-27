@@ -12,8 +12,8 @@
 #include <QStringList>
 
 // KDE
+#include <QTest>
 #include <kcoreaddons_version.h>
-#include <qtest.h>
 
 using namespace Konsole;
 

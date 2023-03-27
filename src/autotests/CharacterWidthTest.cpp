@@ -8,7 +8,7 @@
 #include "CharacterWidthTest.h"
 
 // KDE
-#include <qtest.h>
+#include <QTest>
 
 #include "../characters/Character.h"
 #include "konsoleprivate_export.h"

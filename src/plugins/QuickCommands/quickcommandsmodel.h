@@ -5,7 +5,7 @@
 #ifndef QUICKCOMMANDSMODEL_H
 #define QUICKCOMMANDSMODEL_H
 
-#include <qstandarditemmodel.h>
+#include <QStandardItemModel>
 
 class QuickCommandData;
 
