@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 00:52+0000\n"
-"PO-Revision-Date: 2023-03-05 18:25+0200\n"
+"PO-Revision-Date: 2023-03-14 22:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -2192,18 +2192,14 @@ msgid "Copy"
 msgstr "Kopioi"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "Jaa näkymä pystysuunnassa"
+msgstr "Jaa näkymä vasempaan ja oikeaan osaan"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Jaa näkymä vaakasuunnassa"
+msgstr "Jaa näkymä ylä- ja alaosaan"
 
 #: session/SessionController.cpp:688
 #, kde-format
