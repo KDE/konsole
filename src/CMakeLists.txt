@@ -28,6 +28,7 @@ if(BUILD_TESTING)
     endif()
 endif()
 
+
 ### Security concerns about sendText and runCommand dbus methods being public
 option(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS "Konsole: remove sendText and runCommand dbus methods" OFF)
 
@@ -374,4 +375,20 @@ target_link_libraries(konsolepart
     konsoleprivate
 )
 install(TARGETS konsolepart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
+
+# Add cmake-options -DBUILD_COVERAGE=ON -DCOVERAGE_GENERATE_HTML=ON
+if(COVERAGE_GENERATE_HTML)
+  # find required tools - no error checking
+  find_program(LCOV lcov REQUIRED)
+  find_program(GENHTML genhtml REQUIRED)
+
+  add_custom_target(coverage
+    # runs tests to get .gcda files
+    COMMAND ctest --progress
+    # generate data
+    COMMAND ${LCOV} --directory . --capture --output-file coverage.info
+    # generate report
+    COMMAND ${GENHTML} --ignore-errors source --demangle-cpp -o coverage coverage.info
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+endif()
 
