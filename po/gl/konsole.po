@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-25 02:45+0000\n"
-"PO-Revision-Date: 2023-03-25 14:45+0100\n"
+"PO-Revision-Date: 2023-04-06 22:18+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -561,7 +561,7 @@ msgid ""
 msgstr ""
 "Os valores de ton e saturación das cores predeterminadas de primeiro plano e "
 "de fondo son aleatorios de maneira predeterminada. Algúns esquemas de cores "
-"poderían usar opcións distintas de aleatoriedade.\n"
+"poderían usar opcións distintas de azar.\n"
 "Para observar calquera efecto, defina cores cun valor de saturación superior "
 "a 0."
 
@@ -2036,12 +2036,12 @@ msgstr "Vermello sobre negro"
 #: schemas.cpp:10
 #, kde-format
 msgid "Solarized"
-msgstr "Solarizado"
+msgstr "Solarización"
 
 #: schemas.cpp:11
 #, kde-format
 msgid "Solarized Light"
-msgstr "Luz solarizada"
+msgstr "Luz de solarización"
 
 #: schemas.cpp:12
 #, kde-format
@@ -3560,7 +3560,7 @@ msgstr ""
 #: widgets/EditProfileAdvancedPage.ui:37
 #, kde-format
 msgid "Key combination to show URL hints:"
-msgstr "Combinacións de teclas para mostrar consellos de URLs:"
+msgstr "Combinacións de teclas para mostrar consellos de URL:"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:69
@@ -4032,13 +4032,13 @@ msgstr "Caracteres ASCII"
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr "Debuxar as palabras de caracteres de alfabetos bráhmicos xuntas"
+msgstr "Debuxar as palabras de caracteres de alfabetos índicos xuntas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Caracteres de alfabetos bráhmicos"
+msgstr "Caracteres de alfabetos índicos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
