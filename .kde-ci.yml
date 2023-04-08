@@ -8,7 +8,6 @@ Dependencies:
     'frameworks/kconfig': '@stable'
     'frameworks/knotifications': '@stable'
     'frameworks/ki18n': '@stable'
-    'frameworks/kcalendarcore': '@stable'
     'frameworks/kcoreaddons': '@stable'
     'frameworks/kdbusaddons': '@stable'
     'frameworks/kbookmarks': '@stable'
