@@ -92,9 +92,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2023-02-10</date>
+>2022-11-09</date>
 <releaseinfo
->KDE Gear 23.04</releaseinfo>
+>KDE Gear 22.12</releaseinfo>
 
 <abstract
 ><para
@@ -187,11 +187,6 @@
 >D</keycap
 ></keycombo
 >). </para>
-
-<para
-><keycap
->Esc</keycap
-> verlaat ook de modus selectie van toetsenbord. </para>
 
 <para
 >Verplaatsen van de cursor: pijlen, <keycap
@@ -653,13 +648,13 @@
 
 <listitem
 ><para
->Opties in contextmenu <guimenuitem
->Gebruikersinvoer kopiëren</guimenuitem
->, <guimenuitem
->Commando-uitvoer</guimenuitem
-> en <guimenuitem
->Kopiëren behalve prompt</guimenuitem
-> kan gebruikt worden om de selectie te filteren wanneer het gekopieerd wordt naar het klembord. </para
+>Context menu options <guimenuitem
+>Copy user input</guimenuitem
+> <guimenuitem
+>Copy command output</guimenuitem
+> <guimenuitem
+>Copy except prompt</guimenuitem
+> may be used to filter selection when it is copied to the clipboard. </para
 ></listitem>
 <listitem
 ><para
@@ -672,10 +667,6 @@
 <listitem
 ><para
 >De muis op tekstinvoer klikken zal de cursor plaatsen in de geklikte locatie. Te configureren in de profielinstellingen.</para
-></listitem>
-<listitem
-><para
->Indrukken van de toets &Ctrl; tijdens drie muisklikken op de uitvoer van een commando, selecteert de gehele uitvoer van dat commando.</para
 ></listitem>
 </itemizedlist>
 </para>
@@ -760,14 +751,6 @@
 >Modus Tabeltekens BiDi mode hebben voorrang</guilabel
 > - Grafische tabeltekens als sterke LTR tekens beschouwen. Dit biedt een tabel met RTL-tekens on juist getoond te worden, maar kunnen een onjuiste volgorde geven als die tekens in RTL teksten gebruikt worden. </para
 ></listitem>
-
-<listitem
-><para
-><guilabel
->Negeer wcwidth</guilabel
-> - problematische tekens volgen de Unicode standaard, in plaats van wcwidth() van glibc. Op dit moment wordt alleen het zachte streepje (Unicode 0x00AD) die wcwidth heeft van 1 en Unicode breedte van 0 beïnvloed door deze optie. In het algemeen zou deze optie uitgeschakeld moeten zijn wanneer die tekens hoofdzakelijk op de opdrachtregel worden gebruikt en ingeschakeld wanneer ze alleen getoond worden. </para
-></listitem>
-
 
 </itemizedlist>
 </para>
