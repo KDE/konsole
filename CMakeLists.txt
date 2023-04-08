@@ -16,12 +16,12 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 # Match KDE Frameworks update Apr 2021
 set (QT_MIN_VERSION "5.15.0")
 
-set (KF5_MIN_VERSION "5.71.0")
+set (KF_MIN_VERSION "5.71.0")
 
 # Release script will create bugzilla versions
 project(konsole VERSION ${RELEASE_SERVICE_VERSION})
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -51,14 +51,8 @@ if(ECM_GLOBAL_FIND_VERSION VERSION_LESS "5.82.0")
     endif()
 endif()
 
-if(QT_MAJOR_VERSION EQUAL "6")
-    # ECMDeprecationSettings is in ECM since 5.91, this assumes if you're building
-    # with Qt6, you have latest ECM anyway
-    include(ECMDeprecationSettings)
-    ecm_set_disabled_deprecation_versions(
-        QT 5.15.2
-        KF 5.93.0
-    )
+if(QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat ${QT_MIN_VERSION} CONFIG REQUIRED)
 endif()
 
 ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
@@ -72,7 +66,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Widgets
 )
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED
     Bookmarks
     Config
     ConfigWidgets
@@ -84,7 +78,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     IconThemes
     KIO
     NewStuff
-    NewStuffCore
     Notifications
     NotifyConfig
     Parts
@@ -96,14 +89,14 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
 )
 
 if (NOT WIN32)
-    find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
+    find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED
         GlobalAccel
         Pty
     )
 endif()
 
-find_package(KF5DocTools ${KF5_MIN_VERSION})
-set_package_properties(KF5DocTools PROPERTIES DESCRIPTION
+find_package(KF${QT_MAJOR_VERSION}DocTools ${KF_MIN_VERSION})
+set_package_properties(KF${QT_MAJOR_VERSION}DocTools PROPERTIES DESCRIPTION
     "Tools to generate documentation"
     TYPE OPTIONAL
 )
@@ -150,7 +143,7 @@ if (NOT WIN32)
 add_subdirectory( kconf_update )
 endif()
 
-if (KF5DocTools_FOUND)
+if (KF${QT_MAJOR_VERSION}DocTools_FOUND)
     add_subdirectory( doc/manual )
 endif()
 
@@ -170,7 +163,7 @@ ecm_qt_install_logging_categories(
 )
 
 ki18n_install( po )
-if (KF5DocTools_FOUND)
+if (KF${QT_MAJOR_VERSION}DocTools_FOUND)
     kdoctools_install( po )
 endif()
 

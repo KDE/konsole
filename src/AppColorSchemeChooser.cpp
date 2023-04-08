@@ -15,6 +15,9 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+#include <KColorSchemeMenu>
+#endif
 
 AppColorSchemeChooser::AppColorSchemeChooser(QObject *parent)
     : QAction(parent)
@@ -29,7 +32,11 @@ AppColorSchemeChooser::AppColorSchemeChooser(QObject *parent)
     manager->activateScheme(manager->indexForScheme(scheme));
 #else
     manager->setAutosaveChanges(true);
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    KActionMenu *selectionMenu = KColorSchemeMenu::createMenu(manager, this);
+#else
     KActionMenu *selectionMenu = manager->createSchemeSelectionMenu(this);
+#endif
 #endif
 
     setMenu(selectionMenu->menu());

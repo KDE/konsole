@@ -45,7 +45,11 @@ class Part : public KParts::ReadOnlyPart, public TerminalInterface
 #endif
 public:
     /** Constructs a new Konsole part with the specified parent. */
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    explicit Part(QObject *parent, const QVariantList &);
+#else
     explicit Part(QWidget *parentWidget, QObject *parent, const QVariantList &);
+#endif
     ~Part() override;
 
     /** Reimplemented from TerminalInterface. */

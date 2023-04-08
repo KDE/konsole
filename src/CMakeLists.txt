@@ -9,7 +9,7 @@ else()
   set(HAVE_OS_DRAGONFLYBSD 0)
 endif()
 
-IF(NOT (${KF5_VERSION} VERSION_LESS "5.60.0"))
+IF(NOT (${KF${QT_MAJOR_VERSION}_VERSION} VERSION_LESS "5.60.0"))
     set(USE_TERMINALINTERFACEV2 1)
 endif()
 
@@ -62,26 +62,26 @@ qt_add_dbus_adaptor(
 )
 
 set(konsole_LIBS
-    KF5::XmlGui
+    KF${QT_MAJOR_VERSION}::XmlGui
     Qt::Multimedia
     Qt::PrintSupport
     Qt::Xml
-    KF5::Notifications
-    KF5::WindowSystem
-    KF5::TextWidgets
-    KF5::GuiAddons
-    KF5::IconThemes
-    KF5::Bookmarks
-    KF5::I18n
-    KF5::KIOWidgets
-    KF5::DBusAddons
-    KF5::NewStuff
+    KF${QT_MAJOR_VERSION}::Notifications
+    KF${QT_MAJOR_VERSION}::WindowSystem
+    KF${QT_MAJOR_VERSION}::TextWidgets
+    KF${QT_MAJOR_VERSION}::GuiAddons
+    KF${QT_MAJOR_VERSION}::IconThemes
+    KF${QT_MAJOR_VERSION}::Bookmarks
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::KIOWidgets
+    KF${QT_MAJOR_VERSION}::DBusAddons
+    KF${QT_MAJOR_VERSION}::NewStuffCore
 )
 
 if (NOT WIN32)
     list(APPEND konsole_LIBS
-        KF5::Pty
-        KF5::GlobalAccel
+        KF${QT_MAJOR_VERSION}::Pty
+        KF${QT_MAJOR_VERSION}::GlobalAccel
     )
 endif()
 
@@ -109,7 +109,7 @@ ecm_qt_declare_logging_category(
 add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
 # Needed to link this static lib to shared libs
 set_target_properties(konsoleprivate_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(konsoleprivate_core KF5::CoreAddons)
+target_link_libraries(konsoleprivate_core KF${QT_MAJOR_VERSION}::CoreAddons)
 
 set(konsolehelpers_SRCS
     LabelsAligner.cpp
@@ -275,12 +275,20 @@ target_link_libraries(konsoleprivate
     konsolehelpers
     konsolecharacters
     konsoledecoders
-    KF5::NewStuffWidgets
+    KF${QT_MAJOR_VERSION}::NewStuffCore
+    KF${QT_MAJOR_VERSION}::NewStuffWidgets
     ${konsole_LIBS}
     ZLIB::ZLIB
     ICU::uc
     ICU::i18n
 )
+
+if(QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(konsoleprivate
+        PUBLIC
+        Qt6::Core5Compat
+    )
+endif()
 
 set_target_properties(konsoleprivate PROPERTIES
     VERSION ${KONSOLEPRIVATE_VERSION}
@@ -309,13 +317,13 @@ target_compile_definitions(konsoleapp PRIVATE -DRELEASE_SERVICE_VERSION="${RELEA
 
 target_link_libraries(konsoleapp
   konsoleprivate
-  KF5::XmlGui
-  KF5::WindowSystem
-  KF5::Bookmarks
-  KF5::I18n
-  KF5::KIOWidgets
-  KF5::NotifyConfig
-  KF5::Crash
+  KF${QT_MAJOR_VERSION}::XmlGui
+  KF${QT_MAJOR_VERSION}::WindowSystem
+  KF${QT_MAJOR_VERSION}::Bookmarks
+  KF${QT_MAJOR_VERSION}::I18n
+  KF${QT_MAJOR_VERSION}::KIOWidgets
+  KF${QT_MAJOR_VERSION}::NotifyConfig
+  KF${QT_MAJOR_VERSION}::Crash
 )
 
 set_target_properties(konsoleapp PROPERTIES
@@ -336,13 +344,13 @@ add_executable(konsole ${konsole_SRCS} ${ICONS_SOURCES})
 target_link_libraries(konsole
   konsoleprivate
   konsoleapp
-  KF5::XmlGui
-  KF5::WindowSystem
-  KF5::Bookmarks
-  KF5::I18n
-  KF5::KIOWidgets
-  KF5::NotifyConfig
-  KF5::Crash
+  KF${QT_MAJOR_VERSION}::XmlGui
+  KF${QT_MAJOR_VERSION}::WindowSystem
+  KF${QT_MAJOR_VERSION}::Bookmarks
+  KF${QT_MAJOR_VERSION}::I18n
+  KF${QT_MAJOR_VERSION}::KIOWidgets
+  KF${QT_MAJOR_VERSION}::NotifyConfig
+  KF${QT_MAJOR_VERSION}::Crash
 )
 
 if(APPLE)
@@ -369,14 +377,17 @@ set(konsolepart_PART_SRCS Part.cpp
 
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 generate_export_header(konsolepart BASE_NAME konsole)
-kcoreaddons_desktop_to_json(konsolepart ../desktop/konsolepart.desktop)
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 target_link_libraries(konsolepart
-    KF5::Parts
-    KF5::XmlGui
+    KF${QT_MAJOR_VERSION}::Parts
+    KF${QT_MAJOR_VERSION}::XmlGui
     konsoleprivate
 )
-install(TARGETS konsolepart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
+if(QT_MAJOR_VERSION STREQUAL "6")
+    install(TARGETS konsolepart DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)
+else()
+    install(TARGETS konsolepart DESTINATION ${KDE_INSTALL_PLUGINDIR})
+endif()
 
 # Add cmake-options -DBUILD_COVERAGE=ON -DCOVERAGE_GENERATE_HTML=ON
 if(COVERAGE_GENERATE_HTML)

@@ -8,9 +8,14 @@
 #ifndef EDITPROFILEDIALOG_H
 #define EDITPROFILEDIALOG_H
 
+#include <QtGlobal>
 // KDE
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+#include <KNSCore/Entry>
+#else
 #include <KNS3/Entry>
 #include <KNSCore/EntryInternal>
+#endif
 #include <KPageDialog>
 #include <knewstuff_version.h>
 
@@ -157,7 +162,11 @@ private Q_SLOTS:
     void togglebidiLineLTR(bool);
 
 #if KNEWSTUFF_VERSION >= QT_VERSION_CHECK(5, 91, 0)
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    void gotNewColorSchemes(const QList<KNSCore::Entry> &changedEntries);
+#else
     void gotNewColorSchemes(const QList<KNSCore::EntryInternal> &changedEntries);
+#endif
 #else
     void gotNewColorSchemes(const KNS3::Entry::List &changedEntries);
 #endif

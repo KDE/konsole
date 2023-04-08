@@ -38,7 +38,11 @@ using namespace Konsole;
 
 K_PLUGIN_FACTORY_WITH_JSON(KonsolePartFactory, "konsolepart.json", registerPlugin<Konsole::Part>();)
 
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+Part::Part(QObject *parent, const QVariantList &)
+#else
 Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &)
+#endif
     : KParts::ReadOnlyPart(parent)
     , _viewManager(nullptr)
     , _pluggedController(nullptr)
@@ -51,7 +55,11 @@ Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &)
     connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::Part::terminalExited);
     connect(_viewManager, &Konsole::ViewManager::newViewRequest, this, &Konsole::Part::newTab);
 
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    _viewManager->widget()->setParent(widget());
+#else
     _viewManager->widget()->setParent(parentWidget);
+#endif
 
     setWidget(_viewManager->widget());
     actionCollection()->addAssociatedWidget(_viewManager->widget());

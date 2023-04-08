@@ -813,8 +813,13 @@ void SessionController::setupCommonActions()
 #endif
             &Konsole::SessionController::changeCodec);
 #else
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    connect(_codecAction, &KCodecAction::codecNameTriggered, this, [this](const QByteArray &codecName) {
+        changeCodec(QTextCodec::codecForName(codecName));
+#else
     connect(_codecAction, &KCodecAction::codecNameTriggered, this, [this](const QString &codecName) {
         changeCodec(QTextCodec::codecForName(codecName.toUtf8()));
+#endif
     });
 #endif
 
@@ -880,7 +885,11 @@ void SessionController::setupExtraActions()
     copyInputActions->addAction(copyInputToAllTabsAction);
     copyInputActions->addAction(copyInputToSelectedTabsAction);
     copyInputActions->addAction(copyInputToNoneAction);
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    connect(copyInputActions, &KSelectAction::actionTriggered, this, &Konsole::SessionController::copyInputActionsTriggered);
+#else
     connect(copyInputActions, QOverload<QAction *>::of(&KSelectAction::triggered), this, &Konsole::SessionController::copyInputActionsTriggered);
+#endif
 
     action = collection->addAction(QStringLiteral("zmodem-upload"), this, &SessionController::zmodemUpload);
     action->setText(i18n("&ZModem Upload..."));
@@ -939,7 +948,11 @@ void SessionController::setupExtraActions()
     // Send signal
     auto *sendSignalActions = collection->add<KSelectAction>(QStringLiteral("send-signal"));
     sendSignalActions->setText(i18n("Send Signal"));
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    connect(sendSignalActions, &KSelectAction::actionTriggered, this, &Konsole::SessionController::sendSignal);
+#else
     connect(sendSignalActions, QOverload<QAction *>::of(&KSelectAction::triggered), this, &Konsole::SessionController::sendSignal);
+#endif
 
     action = collection->addAction(QStringLiteral("sigstop-signal"));
     action->setText(i18n("&Suspend Task") + QStringLiteral(" (STOP)"));

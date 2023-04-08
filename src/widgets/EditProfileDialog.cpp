@@ -51,7 +51,11 @@
 #include "WindowSystemInfo.h"
 #include "profile/ProfileManager.h"
 
-using namespace Konsole;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#define KNSCore KNS3
+#endif
+
+    using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget *parent)
     : KPageDialog(parent)
@@ -844,8 +848,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     auto *getNewButton = new KNSWidgets::Button(this);
     connect(getNewButton, &KNSWidgets::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
 #else
-    auto *getNewButton = new KNS3::Button(this);
-    connect(getNewButton, &KNS3::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
+    auto *getNewButton = new KNSCore::Button(this);
+    connect(getNewButton, &KNSCore::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
 #endif
     getNewButton->setText(QStringLiteral("Get New..."));
     getNewButton->setConfigFile(QStringLiteral("konsole.knsrc"));
@@ -1223,15 +1227,21 @@ void EditProfileDialog::removeColorScheme()
 }
 
 #if KNEWSTUFF_VERSION >= QT_VERSION_CHECK(5, 91, 0)
-void EditProfileDialog::gotNewColorSchemes(const QList<KNSCore::EntryInternal> &changedEntries)
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+void EditProfileDialog::gotNewColorSchemes(const QList<KNSCore::Entry> &changedEntries)
 #else
-void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntries)
+#undef KNSCore
+void EditProfileDialog::gotNewColorSchemes(const QList<KNSCore::EntryInternal> &changedEntries)
+#define KNSCore KNS3
+#endif
+#else
+void EditProfileDialog::gotNewColorSchemes(const KNSCore::Entry::List &changedEntries)
 #endif
 {
     int failures = 0;
     for (auto &entry : qAsConst(changedEntries)) {
         switch (entry.status()) {
-        case KNS3::Entry::Installed:
+        case KNSCore::Entry::Installed:
             for (const QString &file : entry.installedFiles()) {
                 if (ColorSchemeManager::instance()->loadColorScheme(file)) {
                     continue;
@@ -1245,7 +1255,7 @@ void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntri
                 QTimer::singleShot(8000, _appearanceUi->colorSchemeMessageWidget, &KMessageWidget::animatedHide);
             }
             break;
-        case KNS3::Entry::Deleted:
+        case KNSCore::Entry::Deleted:
             for (const auto &file : entry.uninstalledFiles()) {
                 if (ColorSchemeManager::instance()->unloadColorScheme(file)) {
                     continue;
@@ -1255,11 +1265,11 @@ void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntri
                 // it either wasn't loaded or was invalid to begin with.
             }
             break;
-        case KNS3::Entry::Invalid:
-        case KNS3::Entry::Installing:
-        case KNS3::Entry::Downloadable:
-        case KNS3::Entry::Updateable:
-        case KNS3::Entry::Updating:
+        case KNSCore::Entry::Invalid:
+        case KNSCore::Entry::Installing:
+        case KNSCore::Entry::Downloadable:
+        case KNSCore::Entry::Updateable:
+        case KNSCore::Entry::Updating:
             // Not interesting.
             break;
         }
@@ -1882,8 +1892,13 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
 #endif
             &Konsole::EditProfileDialog::setDefaultCodec);
 #else
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    connect(codecAction, &KCodecAction::codecNameTriggered, this, [this](const QByteArray &codecName) {
+        setDefaultCodec(QTextCodec::codecForName(codecName));
+#else
     connect(codecAction, &KCodecAction::codecNameTriggered, this, [this](const QString &codecName) {
         setDefaultCodec(QTextCodec::codecForName(codecName.toUtf8()));
+#endif
     });
 #endif
 
