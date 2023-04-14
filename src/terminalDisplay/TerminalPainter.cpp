@@ -786,6 +786,12 @@ void TerminalPainter::drawBelowText(QPainter &painter,
     for (int i = 0;; i++) {
         int x = vis2log(i + startX);
 
+        if (!first && i < width && style[x].isRightHalfOfDoubleWide() && !style[x].rendition.f.selected && style[lastX].rendition.f.selected) {
+            // Should not change style while rendering, but this is the most reasonable way to ensure that a double
+            // width character is not drawn with only the left half selected
+            style[x].rendition.f.selected = true;
+        }
+
         if (first || i == width || style[x].rendition.all != style[lastX].rendition.all || style[x].foregroundColor != style[lastX].foregroundColor
             || style[x].backgroundColor != style[lastX].backgroundColor) {
             if (first) {
