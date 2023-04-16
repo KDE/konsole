@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-25 02:45+0000\n"
-"PO-Revision-Date: 2023-02-19 17:54+0300\n"
+"PO-Revision-Date: 2023-04-15 18:36+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -1457,12 +1457,13 @@ msgstr "Быстрый доступ"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Быстрые команды не найдены. Вы можете добавить их в пункте меню Модули -> "
+"Быстрые команды."
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Быстрые команды"
+msgstr "Модули - Быстрые команды"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1586,17 +1587,19 @@ msgstr "Диспетчер SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Показать меню быстрого доступа к действиям SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Не найдено ни одной сохранённой конфигурации SSH. Добавить конфигурации Вы "
+"можете добавить их в пункте меню Модули -> Диспетчер SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Открыть диспетчер файлов"
+msgstr "Модули - Диспетчер SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -2192,16 +2195,12 @@ msgid "Copy"
 msgstr "Копировать"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Разделить окно по вертикали"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Разделить окно по горизонтали"
 
@@ -4011,19 +4010,19 @@ msgstr "Использовать единые аттрибуты для всег
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Группировать символы ASCII в слова"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
 #, kde-format
 msgid "ASCII characters "
-msgstr "Сиволы ASCII "
+msgstr "Символы ASCII "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Группировать символы индийского письма в слова"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
@@ -4062,21 +4061,19 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Табличные символы переопределения режима BiDi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "&Удалить скрытые символы и вставить"
+msgstr "Игнорировать свойство wcwidth некоторых символов"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Переопределить wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4491,22 +4488,22 @@ msgstr "Всегда"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:446
-#, kde-format
+#, fuzzy, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Красные полосы ошибок:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
 #, fuzzy, kde-format
 #| msgid "Blur background"
 msgid "Red error background:"
-msgstr "Размытие фона"
+msgstr "Красный фон ошибок:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
-#, kde-format
+#, fuzzy, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Чередовать полосы"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
