@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 00:52+0000\n"
-"PO-Revision-Date: 2023-04-15 18:36+0300\n"
+"PO-Revision-Date: 2023-04-17 10:13+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -3476,7 +3476,7 @@ msgstr "Настроить семантическую интеграцию (bash
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr "Показывать семантических подсказки"
+msgstr "Показывать семантические подсказки"
 
 #: ViewManager.cpp:323
 #, kde-format
@@ -4488,29 +4488,27 @@ msgstr "Всегда"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:446
-#, fuzzy, kde-format
+#, kde-format
 msgid "Red error bars:"
-msgstr "Красные полосы ошибок:"
+msgstr "Отмечать строки с ошибками красным:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Красный фон ошибок:"
+msgstr "Выделять ошибки красным цветом фона:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
-#, fuzzy, kde-format
+#, kde-format
 msgid "Alternating bars:"
-msgstr "Чередовать полосы"
+msgstr "Отмечать строки ввода и вывод:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Размытие фона"
+msgstr "Выделять ввод и вывод изменением цвета фона:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
