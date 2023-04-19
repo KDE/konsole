@@ -3,7 +3,7 @@
 # Thomas Reitelbach <tr@erdfunkstelle.de>, 2005, 2006, 2007, 2008, 2009.
 # Burkhard Lück <lueck@hube-lueck.de>, 2008, 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
 # Johannes Obermayr <johannesobermayr@gmx.de>, 2010.
-# Frederik Schwarzer <schwarzer@kde.org>, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2020, 2021, 2022.
+# Frederik Schwarzer <schwarzer@kde.org>, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2020, 2021, 2022, 2023.
 # Panagiotis Papadopoulos <pano_90@gmx.net>, 2011.
 # Frank Steinmetzger <Warp_7@gmx.de>, 2016.
 # Alois Spitzbart <spitz234@hotmail.com>, 2022.
@@ -12,15 +12,15 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 00:52+0000\n"
-"PO-Revision-Date: 2022-10-08 15:08+0200\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2023-04-18 22:49+0200\n"
+"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.0\n"
+"X-Generator: Lokalize 22.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1262,20 +1262,16 @@ msgid "Activate Menu"
 msgstr "Menü aktivieren"
 
 #: MainWindow.cpp:459
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Unterfenster-Layout in Datei speichern"
+msgstr "Unterfenster-Layout speichern ..."
 
 #: MainWindow.cpp:468
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Unterfenster-Layout aus Datei laden"
+msgstr "Unterfenster-Layout laden ..."
 
 #: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
@@ -1360,11 +1356,9 @@ msgstr "Formular"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Kurzbefehl"
+msgstr "Kurzbefehl:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1595,15 +1589,14 @@ msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Hide Menu Bar"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Menüleiste ausblenden"
+msgstr "Module - SSH-Verwaltung"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH-Einträge"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
@@ -1737,11 +1730,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Profile verwalten"
+msgstr "Profil verwalten"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2199,16 +2190,12 @@ msgid "Copy"
 msgstr "Kopieren"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Ansicht Links/Rechts teilen"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Ansicht Oben/Unten teilen"
 
@@ -2243,10 +2230,9 @@ msgid "&Select All"
 msgstr "Alles au&swählen"
 
 #: session/SessionController.cpp:732
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Zei&le auswählen"
+msgstr "Auswahl&modus"
 
 #: session/SessionController.cpp:737
 #, kde-format
@@ -3527,12 +3513,10 @@ msgid "Line numbers "
 msgstr "Zeilennummern "
 
 #: ViewManager.cpp:1134
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Unterfenster-Layout in Datei speichern"
+msgstr "Unterfenster-Layout speichern"
 
 #: ViewManager.cpp:1136 ViewManager.cpp:1223
 #, kde-format
@@ -3561,12 +3545,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1221
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Unterfenster-Layout aus Datei laden"
+msgstr "Unterfenster-Layout laden"
 
 #: Vt102Emulation.cpp:2453
 #, kde-format
@@ -4042,10 +4024,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Wortzeichen:"
+msgstr "ASCII-Zeichen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839

@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 00:52+0000\n"
-"PO-Revision-Date: 2023-03-24 16:45+0300\n"
+"PO-Revision-Date: 2023-04-18 05:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -161,8 +161,8 @@ msgid ""
 "Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
 "(by default) is pressed"
 msgstr ""
-"Konsole uygulamasını arka planda başlat ve Ctrl+Shift+F12 (öntanımlı) "
-"düğmelerine basılınca ön plana getir"
+"Konsole uygulamasını arka planda başlat ve Kontrol+Üst Karakter+F12 "
+"(öntanımlı) düğmelerine basılınca ön plana getir"
 
 #: Application.cpp:65
 #, kde-format
@@ -2299,7 +2299,7 @@ msgstr "&Hiçbiri"
 #: session/SessionController.cpp:875
 #, kde-format
 msgid "Copy Input To"
-msgstr "Girdiyi Buraya Kopyala"
+msgstr "Girdiyi Şuraya Kopyala"
 
 #: session/SessionController.cpp:882
 #, kde-format
@@ -2536,7 +2536,7 @@ msgstr "Başlık çubuğunda pencere başlığını göster"
 #: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "Fare işaretçisi üzerine getirildiğinde terminallere odaklan"
+msgstr "Fare işaretçisi üzerine getirildiğinde uçbirimlere odaklan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
@@ -2633,7 +2633,8 @@ msgstr "Başlık çubuğunda kaçış ile belirlenen pencere başlık setini gö
 #: settings/konsole.kcfg:23
 #, kde-format
 msgid "Allow users to access top menu through Alt+Key combination"
-msgstr "Kullanıcıların Alt+Düğme bileşeni ile üst menüye erişmelerine izin ver"
+msgstr ""
+"Kullanıcıların Seçenek+Düğme bileşeni ile üst menüye erişmelerine izin ver"
 
 #. i18n: ectx: label, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:27
@@ -2664,21 +2665,21 @@ msgstr "Küçük resmin genişliğini ayarlar"
 #: settings/konsole.kcfg:47 settings/konsole.kcfg:48
 #, kde-format
 msgid "Use Shift to display a thumbnail"
-msgstr "Bir küçük görsel görüntülemek için Shift kullan"
+msgstr "Bir küçük görsel görüntülemek için Üst Karakter düğmesini kullan"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Alt to display a thumbnail"
-msgstr "Bir küçük görsel görüntülemek için Alt kullan"
+msgstr "Bir küçük görsel görüntülemek için Seçenek düğmesini kullan"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
-msgstr "Bir küçük görsel görüntülemek için Ctrl kullan"
+msgstr "Bir küçük görsel görüntülemek için Kontrol düğmesini kullan"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/konsole.kcfg:64
@@ -2825,7 +2826,7 @@ msgstr "&Yeni..."
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
 msgstr ""
-"Seçili profili düzenle (bu düğme salt okunur profiller için devre dışıdır)"
+"Seçili profili düzenle (bu düğme saltokunur profiller için devre dışıdır)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:55
@@ -3032,7 +3033,7 @@ msgstr "Asla"
 #: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "Drag Handle Size:"
-msgstr "Sürükleme Tutamaç Boyutu:"
+msgstr "Sürükleme Tutacı Boyutu:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
 #: settings/TabBarSettings.ui:436
@@ -3101,7 +3102,7 @@ msgstr "Boyut:"
 #: settings/ThumbnailsSettings.ui:24
 #, kde-format
 msgid "px"
-msgstr "pks"
+msgstr " pks"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
@@ -3132,19 +3133,19 @@ msgstr "Fare ile üzerine gelindiğinde +"
 #: settings/ThumbnailsSettings.ui:70
 #, kde-format
 msgid "Shift"
-msgstr "Shift"
+msgstr "Üst Karakter"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
 #: settings/ThumbnailsSettings.ui:77
 #, kde-format
 msgid "Alt"
-msgstr "Alt"
+msgstr "Seçenek"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
 #: settings/ThumbnailsSettings.ui:84
 #, kde-format
 msgid "Ctrl"
-msgstr "Ctrl"
+msgstr "Kontrol"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
@@ -3202,7 +3203,7 @@ msgstr "Yerine Koy/Askıya Al: Geçerli süreci askıya alabilir"
 #: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
-msgstr "Escape: terminal durumunu değiştirmek için kullanılır"
+msgstr "Vazgeç: Uçbirim durumunu değiştirmek için kullanılır"
 
 #: terminalDisplay/TerminalDisplay.cpp:2272
 #, kde-format
@@ -3249,9 +3250,9 @@ msgid ""
 "Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
 "b> to resume.</qt>"
 msgstr ""
-"<qt>Çıktı, Çtrl+S'e basılarak <a href=\"https://en.wikipedia.org/wiki/"
-"Software_flow_control\">askıya alındı</a>. Sürdürmek için <b>Ctrl+Q</b>'ya "
-"basın.</qt>"
+"<qt>Çıktı, Kontrol+S'e basılarak <a href=\"https://en.wikipedia.org/wiki/"
+"Software_flow_control\">askıya alındı</a>. Sürdürmek için <b>Kontrol+Q</"
+"b>'ya basın.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2599
 #, kde-format
@@ -3534,21 +3535,21 @@ msgstr "URL ipuçlarını göstermek için düğme kombinasyonu:"
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
-msgstr "Shift"
+msgstr "Üst Karakter"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
 #: widgets/EditProfileAdvancedPage.ui:88
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Ctrl"
-msgstr "Ctrl"
+msgstr "Kontrol"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
 #: widgets/EditProfileAdvancedPage.ui:107
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Alt"
-msgstr "Alt"
+msgstr "Seçenek"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
 #: widgets/EditProfileAdvancedPage.ui:126
@@ -3592,7 +3593,7 @@ msgstr "Yanıp sönen metinlere izin ver"
 #: widgets/EditProfileAdvancedPage.ui:214
 #, kde-format
 msgid "Allow the output to be suspended by pressing Ctrl+S"
-msgstr "Ctrl+S düğmelerine basıldığında çıktıyı askıya almaya izin ver"
+msgstr "Kontrol+S düğmelerine basıldığında çıktıyı askıya almaya izin ver"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
 #: widgets/EditProfileAdvancedPage.ui:217
@@ -4730,13 +4731,14 @@ msgstr "Olası bağlantıların biçimleri, http://, https:// ve file:// gibi"
 #: widgets/EditProfileMousePage.ui:389
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
-msgstr "Seçilen metin, sürüklenmek için Ctrl düğmesi ve tıklama gerektirecek."
+msgstr ""
+"Seçili metin, sürüklenmek için Kontrol düğmesi ve tıklama gerektirecek."
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:392
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
-msgstr "Sürükle/bırak için Ctrl düğmesi gerektir"
+msgstr "Sürükle/bırak için Kontrol düğmesini gerektir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:399
@@ -4774,13 +4776,15 @@ msgstr "Dosya URL'leri için sürükle bırak menüsünü devre dışı bırak"
 #: widgets/EditProfileMousePage.ui:419
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
-msgstr "Ctrl+tekerlek çevirme işlemi metin boyutunu büyütecek/küçültecek."
+msgstr ""
+"Kontrol+sarma tekerleğini çevirme işlemi metin boyutunu büyütecek/küçültecek."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:422
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
-msgstr "Ctrl+tekerlek çevirmesinin metin boyutunu yaklaştırmasına izin ver"
+msgstr ""
+"Kontrol+sarma tekerleği çevirmesinin metin boyutunu yaklaştırmasına izin ver"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:429
