@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-25 02:45+0000\n"
-"PO-Revision-Date: 2023-04-18 22:49+0200\n"
+"PO-Revision-Date: 2023-04-20 19:46+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -1453,10 +1453,9 @@ msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Schnellbefehle"
+msgstr "Module - Schnellbefehle"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
