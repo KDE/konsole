@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 00:52+0000\n"
-"PO-Revision-Date: 2023-02-28 23:27+0100\n"
+"PO-Revision-Date: 2023-04-22 00:38+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2160,16 +2160,12 @@ msgid "Copy"
 msgstr "복사"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "왼쪽/오른쪽으로 보기 나누기"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "위/아래로 보기 나누기"
 
@@ -4012,17 +4008,15 @@ msgstr "표 문자 BiDi 모드 재정의"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "제어 문자를 제외하고 붙여넣기(&W)"
+msgstr "문제가 되는 글자의 wcwidth 무시"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "wcwidth 재정의"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
