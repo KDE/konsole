@@ -527,6 +527,7 @@ QRegion TerminalPainter::highlightScrolledLinesRegion(TerminalScrollBar *scrollB
                               nb_lines * m_parentDisplay->terminalFont()->fontHeight());
         new_highlight.setTop(std::max(new_highlight.top(), m_parentDisplay->contentRect().top()));
         new_highlight.setBottom(std::min(new_highlight.bottom(), m_parentDisplay->contentRect().bottom()));
+        new_highlight = highdpi_adjust_rect(new_highlight);
         if (!new_highlight.isValid()) {
             new_highlight = QRect(0, 0, 0, 0);
         }

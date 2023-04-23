@@ -591,7 +591,7 @@ void TerminalDisplay::updateImage()
                                     _terminalFont->fontWidth() * columnsToUpdate,
                                     _terminalFont->fontHeight());
 
-            dirtyRegion |= dirtyRect;
+            dirtyRegion |= highdpi_adjust_rect(dirtyRect);
         }
 
         // replace the line of characters in the old _image with the
@@ -603,18 +603,18 @@ void TerminalDisplay::updateImage()
     // if the new _image is smaller than the previous _image, then ensure that the area
     // outside the new _image is cleared
     if (linesToUpdate < _usedLines) {
-        dirtyRegion |= QRect(_contentRect.left() + tLx,
-                             _contentRect.top() + tLy + _terminalFont->fontHeight() * linesToUpdate,
-                             _terminalFont->fontWidth() * _columns,
-                             _terminalFont->fontHeight() * (_usedLines - linesToUpdate));
+        dirtyRegion |= highdpi_adjust_rect(QRect(_contentRect.left() + tLx,
+                                                 _contentRect.top() + tLy + _terminalFont->fontHeight() * linesToUpdate,
+                                                 _terminalFont->fontWidth() * _columns,
+                                                 _terminalFont->fontHeight() * (_usedLines - linesToUpdate)));
     }
     _usedLines = linesToUpdate;
 
     if (columnsToUpdate < _usedColumns) {
-        dirtyRegion |= QRect(_contentRect.left() + tLx + columnsToUpdate * _terminalFont->fontWidth(),
-                             _contentRect.top() + tLy,
-                             _terminalFont->fontWidth() * (_usedColumns - columnsToUpdate),
-                             _terminalFont->fontHeight() * _lines);
+        dirtyRegion |= highdpi_adjust_rect(QRect(_contentRect.left() + tLx + columnsToUpdate * _terminalFont->fontWidth(),
+                                                 _contentRect.top() + tLy,
+                                                 _terminalFont->fontWidth() * (_usedColumns - columnsToUpdate),
+                                                 _terminalFont->fontHeight() * _lines));
     }
     _usedColumns = columnsToUpdate;
 
@@ -624,10 +624,11 @@ void TerminalDisplay::updateImage()
         // De-highlight previous result region
         dirtyRegion |= _searchResultRect;
         // Highlight new result region
-        dirtyRegion |= QRect(0,
-                             _contentRect.top() + (_screenWindow->currentResultLine() - _screenWindow->currentLine()) * _terminalFont->fontHeight(),
-                             _columns * _terminalFont->fontWidth(),
-                             _terminalFont->fontHeight());
+        dirtyRegion |=
+            highdpi_adjust_rect(QRect(0,
+                                      _contentRect.top() + (_screenWindow->currentResultLine() - _screenWindow->currentLine()) * _terminalFont->fontHeight(),
+                                      _columns * _terminalFont->fontWidth(),
+                                      _terminalFont->fontHeight()));
     }
 
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
@@ -678,6 +679,12 @@ void TerminalDisplay::showNotification(QString text)
             _resizeTimer->setInterval(SIZE_HINT_DURATION);
             _resizeTimer->setSingleShot(true);
             connect(_resizeTimer, &QTimer::timeout, _resizeWidget, &QLabel::hide);
+
+            // When using fractional scaling in Qt5, portions of the terminal display are not invalidated
+            // properly. This ensures the widget is entirely redrawn to avoid leaving horitzontal lines.
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+            connect(_resizeTimer, &QTimer::timeout, this, qOverload<>(&TerminalDisplay::update));
+#endif
         }
         _resizeWidget->setText(text);
         _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().boundingRect(text).width() + 16);
@@ -726,6 +733,7 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
                                   contentRect().top() + (screenWindow()->currentResultLine() - screenWindow()->currentLine()) * _terminalFont->fontHeight(),
                                   columns() * terminalFont()->fontWidth(),
                                   _terminalFont->fontHeight());
+        _searchResultRect = highdpi_adjust_rect(_searchResultRect);
         _terminalPainter->drawCurrentResultRect(paint, _searchResultRect);
     }
 
