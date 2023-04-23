@@ -820,6 +820,25 @@ private:
             }
             setPid(pid);
         }
+
+        // Get user id - this will allow using username
+        struct proc_bsdshortinfo bsdinfo;
+        int ret;
+        bool ok = false;
+        const int fpid = foregroundPid(&ok);
+        if (ok) {
+            ret = proc_pidinfo(fpid, PROC_PIDT_SHORTBSDINFO, 0,
+                               &bsdinfo, sizeof(bsdinfo));
+            if (ret == sizeof(bsdinfo)) {
+                setUserId(bsdinfo.pbsi_uid);
+            }
+            // This will cause constant opening of /etc/passwd
+            if (userNameRequired()) {
+                readUserName();
+                setUserNameRequired(false);
+            }
+        }
+
         return true;
     }
 
