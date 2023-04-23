@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the konsole package.
 #
-# Xəyyam Qocayev <xxmn77@gmail.com>, 2020, 2021, 2022.
+# Xəyyam Qocayev <xxmn77@gmail.com>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-27 00:52+0000\n"
-"PO-Revision-Date: 2022-07-20 11:10+0400\n"
+"PO-Revision-Date: 2023-04-22 12:49+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -636,36 +636,33 @@ msgstr "Miqyaslamadan"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Divar kağızı miqyası:"
+msgstr "Divar kağızını çevir:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Çevirmə"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Üfüqi birləşmə:"
+msgstr "Üfüqi"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "Şaquli birləşdmə:"
+msgstr "Şaquli"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Hər ikisi"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -1249,20 +1246,16 @@ msgid "Activate Menu"
 msgstr "Menyunu açamaq"
 
 #: MainWindow.cpp:459
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Vərəq qatını faylda saxlayın"
+msgstr "Vərəq tərtibatını saxla..."
 
 #: MainWindow.cpp:468
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Vərəq qatını fyldan yükləyin"
+msgstr "Vərəq tərtibatını yüklə..."
 
 #: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
@@ -1343,11 +1336,9 @@ msgstr "Form"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Qısayol"
+msgstr "Qısayol:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1432,21 +1423,21 @@ msgid "Quick Commands"
 msgstr "Sürətli əmrlər"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Sürətli əmrləri göstərmək"
+msgstr "Sürətli girişləri göstərmək"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Sürətli əmrlər tapılmadı. Onlardan birini Plaqinlər -> Sürətli əmrlər "
+"menyusunda əlavə edə bilərsiniz"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Sürətli əmrlər"
+msgstr "Plaqin - Sürətli əmrlər"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1527,15 +1518,13 @@ msgid "Warnings (*)"
 msgstr "Xəbərdarlıqlar (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "SSH Config"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "SSH tənzimləməsi"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "İlkin"
@@ -1573,23 +1562,24 @@ msgstr "SSH menecerini göstərmək"
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "SSH əməli üçün sürətli girişi göstərmək"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Saxlanılmış SSH tənzimləməsi yoxdur. Onlardan birini Plaqinlər -> SSH "
+"meneceri menyusunda əlavə edə bilərsiniz"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Hide SSH Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "SSH menecerini gizlətmək"
+msgstr "Plaqinlər - SSH meneceri"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH girişləri"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
@@ -1704,9 +1694,7 @@ msgstr "Seçilmiş girişi silin"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Qısayol"
 
@@ -1720,15 +1708,13 @@ msgstr "Süzgəcə uyğun olmayan girişləri göstərmək"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Qoşulduqda/ayrıldıqda profili göstərmək"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage Profiles..."
+#, kde-format
 msgid "Manage profile"
-msgstr "Profillər meneceri..."
+msgstr "Profil meneceri"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2185,18 +2171,14 @@ msgid "Copy"
 msgstr "Kopyalamaq"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "Pəncərəni şaquli bölmək"
+msgstr "Görünüşü soldan-sağa böl"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Pəncərəni üfüqi bölmək"
+msgstr "Görünüşü aşağıdan-yuxarıya böl"
 
 #: session/SessionController.cpp:688
 #, kde-format
@@ -2229,10 +2211,9 @@ msgid "&Select All"
 msgstr "&Hamısını seçmək"
 
 #: session/SessionController.cpp:732
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "S&ətiri seçmək"
+msgstr "Seçim reji&mi"
 
 #: session/SessionController.cpp:737
 #, kde-format
@@ -3319,36 +3300,28 @@ msgid "Split View Top/Bottom"
 msgstr "Pəncərəni üfüqi bölmək"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Pəncərəni üfüqi bölmək"
+msgstr "Görünüşü avtomatik bölmək"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Pəncərəni şaquli bölmək"
+msgstr "Bölünmüş görünüş: Növbəti vərəqdən sonra sol/sağ"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Pəncərəni üfüqi bölmək"
+msgstr "Bölünmüş görünüş: Növbəti vərəqdən yuxarı/aşağı"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Pəncərəni üfüqi bölmək"
+msgstr "Bölünmüş görünüş: Növbəti vərəqdən avtomatik"
 
 #: ViewManager.cpp:165
 #, kde-format
@@ -3486,13 +3459,13 @@ msgstr "Semantik inteqrasiyanı (bash) təyin edin"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Semantik ipuclarının göstərilməsi"
 
 #: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Sətir nömrələrinin göstərilməsi"
 
 #: ViewManager.cpp:330
 #, kde-format
@@ -3507,64 +3480,52 @@ msgid "Switch to Tab %1"
 msgstr "%1 vərəqinə keçid"
 
 #: ViewManager.cpp:553
-#, fuzzy, kde-format
-#| msgid "Semantic hints:"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Semantik ipucları:"
+msgstr "Semantik ipucları "
 
 #: ViewManager.cpp:569
 #, kde-format
 msgid "Line numbers "
-msgstr ""
+msgstr "Sətir nömrələri "
 
 #: ViewManager.cpp:1134
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Vərəq qatını faylda saxlayın"
+msgstr "Vərəq tərtibatını saxla"
 
 #: ViewManager.cpp:1136 ViewManager.cpp:1223
-#, fuzzy, kde-format
-#| msgid "Konsole View Layout (*.json)"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr "Konsole görünüşü qatı (*.json)"
+msgstr "Konsole görünüşü tərtibatı (*.json)"
 
 #: ViewManager.cpp:1149
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"Qatın saxlanılması zamanı xəta baş verdi.\n"
+"Tərtibatın saxlanılması zamanı xəta baş verdi.\n"
 "%1"
 
 #: ViewManager.cpp:1210
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when loading the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"Qatın yüklənməsi zamanı xəta baş verdi.\n"
+"Tərtibatın yüklənməsi zamanı xəta baş verdi.\n"
 "%1"
 
 #: ViewManager.cpp:1221
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Vərəq qatını fyldan yükləyin"
+msgstr "Vərəq tərtibatını yüklə"
 
 #: Vt102Emulation.cpp:2453
 #, kde-format
@@ -3995,26 +3956,25 @@ msgstr "Sütunda şaquli xətlər göstərilsin:"
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Kompleks mətn düzülüşü</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Kompleks mətn tərtibatı"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Sağdan sola yazmağı dəstəkləmək"
+msgstr "Mətn düzümü üçün söz rejimindən istifadə et"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Söz rejimi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -4023,83 +3983,82 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Sözlər arasındakı atributların dəyişikliklərini nəzərə almamaq (əks halda "
+"atribut dəyişiklikləri göstərilmə zamanı sözləri bölür)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Bütün söz üçün eyni atribut istifadə etmək"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Sözləri ASCII simvoallar ilə birlikdə göstərmək"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Sözdəki simvollar:"
+msgstr "ASCII simvollar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Sözləri hind yazısı simvolları ilə birlikdə göstərmək"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Cari simvola oxşar"
+msgstr "Hind yazısı simvolları"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Şrift:"
+msgstr "Emoji şrifti:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Əgər ilk simvol düzülüşü müəyyən etməyibsə sətirlər həmişə soldan sağa "
+"düzülsün"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "Sətirlərin düzülüşünü məcburi soldan sağa təyin etmək"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Cədvəlin çəkilməsi simvollarını soldan sağa yazı nümunəsi kimi işləmək"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:916
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Cədvəl simvolları BiDi rejimini yenidən müəyyən edir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "İdarəetmə simvolları olmadan daxil etmək"
+msgstr "Bəzi simvolların wcwidth xüsusiyyətini nəzərə almamaq"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "wcwidth xüsusiyyətini ləğv etmək"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
@@ -4502,27 +4461,25 @@ msgstr "Həmişə"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Xətalı sətirləri qırmızı ilə işarələmək:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Yayğın arxa plan"
+msgstr "Xətaları qırmızı fonla işarələmək:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Alternativ zolaqlar:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Yayğın arxa plan"
+msgstr "Alternativ arxa fon:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
