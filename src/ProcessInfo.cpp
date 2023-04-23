@@ -844,8 +844,45 @@ private:
 
     bool readArguments(int pid) override
     {
-        Q_UNUSED(pid)
-        return false;
+        int managementInfoBase[3];
+        size_t size;
+        std::string procargs;
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROCARGS2;
+        managementInfoBase[2] = pid;
+
+        // It is not clear on why this fails for some commands
+        if (sysctl(managementInfoBase, 3, nullptr, &size, nullptr, 0) == -1) {
+            qWarning()<<"OS_MACOS: unable to obtain argument size for "<<pid;
+            return false;
+        }
+
+        // Some macosx versions need extra space
+        const size_t argmax = size + 32;
+        procargs.resize(argmax);
+
+        if (sysctl(managementInfoBase, 3, &procargs[0], &size, nullptr, 0) == -1) {
+            qWarning()<<"OS_MACOS: unable to obtain arguments for "<<pid;
+            return false;
+        } else {
+            auto args = QString::fromStdString(procargs);
+            auto parts = args.split(QLatin1Char('\u0000'), Qt::SkipEmptyParts);
+            ushort argc = QChar(parts[0][0]).unicode();
+
+            if (argc == 1) { // just command, no args
+                addArgument(parts[1]); // this is the full path + command
+            } else {    // args, skip over full path + command
+                /* The output is not obvious for some commands:
+                   For example: 'man 3 sysctl' shows arg=4
+                    1: /bin/bash; 2: /bin/sh; 3: /usr/bin/man; 4: 3; 5: sysctl
+                */
+                for (int i = 2; i <= argc+1; i++) {
+                    addArgument(parts[i]);
+                }
+            }
+            return true;
+        }
     }
 };
 
