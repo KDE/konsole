@@ -899,16 +899,12 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                     if (ulColorTable != nullptr && (style[lastX].flags & EF_UNDERLINE_COLOR) != 0) {
                         pen.setColor(ulColorTable[((style[lastX].flags & EF_UNDERLINE_COLOR)) / EF_UNDERLINE_COLOR_1 - 1].color(colorTable));
                     }
-                    int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->underlinePos()
-                        + m_parentDisplay->terminalFont()->lineWidth() + m_parentDisplay->terminalFont()->lineSpacing() / 2;
                     int lw = m_parentDisplay->terminalFont()->lineWidth();
+                    qreal y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->underlinePos()
+                        + m_parentDisplay->terminalFont()->lineSpacing() / 2;
                     if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
                         y = rect.bottom() - 1;
                         lw = 1;
-                    } else {
-                        if (lw + lw + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->underlinePos() > rect.height()) {
-                            lw = rect.height() - m_parentDisplay->terminalFont()->fontAscent() - m_parentDisplay->terminalFont()->underlinePos() - lw;
-                        }
                     }
                     pen.setWidth(lw);
                     if (underline == RE_UNDERLINE_DOT) {
@@ -921,7 +917,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         pen.setDashPattern(dashes);
                     }
                     painter.setPen(pen);
-                    painter.drawLine(rect.x() + fontWidth * startUnderline, y, rect.x() + fontWidth * i - 1, y);
+                    painter.drawLine(QLineF(rect.x() + fontWidth * startUnderline, y, rect.x() + fontWidth * i - 1, y));
                     if (underline == RE_UNDERLINE_DOUBLE) {
                         painter.drawLine(rect.x() + fontWidth * startUnderline, y - 2, rect.x() + fontWidth * i - 1, y - 2);
                     }
