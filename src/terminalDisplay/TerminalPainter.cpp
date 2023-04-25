@@ -883,7 +883,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                 }
                 if ((i == width || style[x].rendition.f.overline == 0) && startOverline >= 0) {
                     QPen pen(foregroundColor);
-                    int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent();
+                    int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->lineSpacing() / 2;
                     pen.setWidth(m_parentDisplay->terminalFont()->lineWidth());
                     painter.setPen(pen);
                     painter.drawLine(rect.x() + fontWidth * startOverline,
@@ -900,7 +900,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         pen.setColor(ulColorTable[((style[lastX].flags & EF_UNDERLINE_COLOR)) / EF_UNDERLINE_COLOR_1 - 1].color(colorTable));
                     }
                     int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->underlinePos()
-                        + m_parentDisplay->terminalFont()->lineWidth();
+                        + m_parentDisplay->terminalFont()->lineWidth() + m_parentDisplay->terminalFont()->lineSpacing() / 2;
                     int lw = m_parentDisplay->terminalFont()->lineWidth();
                     if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
                         y = rect.bottom() - 1;
