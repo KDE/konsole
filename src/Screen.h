@@ -842,6 +842,7 @@ private:
     int _savedModes[MODES_SCREEN];
     int _replMode;
     bool _hasRepl;
+    bool _replHadOutput;
     std::pair<int, int> _replModeStart;
     std::pair<int, int> _replModeEnd;
     std::pair<int, int> _replLastOutputStart;

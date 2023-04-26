@@ -1300,3 +1300,13 @@ Comment[x-test]=xxNotification emitted by a process in a non-focused sessionxx
 Comment[zh_CN]=通知由一个位于非焦点会话中的进程发出
 Comment[zh_TW]=未取得焦點的工作階段中處理程序發出的通知
 Action=Popup
+
+[Event/PromptHidden]
+Name=Shell prompt triggered a notification in a non-focused session
+Comment=Shell prompt triggered a notification in a non-focused session
+Action=Popup
+
+[Event/Prompt]
+Name=Shell prompt triggered a notification
+Comment=Shell prompt triggered a notification
+Action=Popup

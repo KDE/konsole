@@ -79,6 +79,7 @@ Screen::Screen(int lines, int columns)
     , _bottomMargin(0)
     , _replMode(REPL_None)
     , _hasRepl(false)
+    , _replHadOutput(false)
     , _replLastOutputStart(std::pair(-1, -1))
     , _tabStops(QBitArray())
     , _selBegin(0)
@@ -2373,12 +2374,24 @@ void Screen::setReplMode(int mode)
         } else if (_replMode == REPL_PROMPT) {
             _lineProperties[_cuY].counter = ++commandCounter;
         }
+        if (mode == REPL_PROMPT) {
+            if (_replHadOutput) {
+                _currentTerminalDisplay->sessionController()->notifyPrompt();
+                _replHadOutput = false;
+            }
+        }
+        if (mode == REPL_OUTPUT) {
+            _replHadOutput = true;
+        }
         _replMode = mode;
         _replModeStart = std::make_pair(_cuY, _cuX);
         _replModeEnd = std::make_pair(_cuY, _cuX);
     }
     if (mode != REPL_None) {
-        _hasRepl = true;
+        if (!_hasRepl) {
+            _hasRepl = true;
+            _currentTerminalDisplay->sessionController()->setVisible(QStringLiteral("monitor-prompt"), true);
+        }
         Q_EMIT _currentTerminalDisplay->screenWindow()->selectionChanged(); // Enable copy action
         setLineProperty(LINE_PROMPT_START << (mode - REPL_PROMPT), true);
     }

@@ -52,8 +52,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2023-02-10</date>
-<releaseinfo>KDE Gear 23.04</releaseinfo>
+<date>2023-04-25</date>
+<releaseinfo>KDE Gear 23.08</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -896,6 +896,18 @@ separate window</action>
 <listitem><para><action>Allows you to load one of your favorite view layouts from the layout file that
             has been saved using the <menuchoice><guimenu>View</guimenu><guimenuitem>Save tab layout to file</guimenuitem></menuchoice>
 menu item earlier.</action> The default layouts (2x2, 2x1, and 1x2) can be loaded via toolbar.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>R</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Monitor for
+Prompt</guimenuitem></menuchoice></term>
+<listitem><para><action>Toggles the monitoring of the current tab for
+a shell prompt.</action>
+</para><para>
+When a shell prompt is displayed, &konsole; will show a notification. This option is shown only when semantic integration is enabled in the shell.
 </para></listitem>
 </varlistentry>
 

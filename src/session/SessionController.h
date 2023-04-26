@@ -147,6 +147,11 @@ public:
     /* Set/reset selection mode */
     void setSelectMode(bool mode);
 
+    /* Send notification when a shell prompt is displayed */
+    void notifyPrompt();
+
+    void setVisible(QString name, bool visible);
+
 Q_SIGNALS:
     /**
      * Emitted when the view associated with the controller is focused.
@@ -260,6 +265,7 @@ private Q_SLOTS:
     void showHistoryOptions();
     void clearHistory();
     void clearHistoryAndReset();
+    void monitorPrompt(bool monitor);
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
     void monitorProcessFinish(bool monitor);

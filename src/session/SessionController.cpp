@@ -884,7 +884,14 @@ void SessionController::setupExtraActions()
     collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_U);
 
     // Monitor
-    KToggleAction *toggleAction = new KToggleAction(i18n("Monitor for &Activity"), this);
+    KToggleAction *toggleAction = new KToggleAction(i18n("Monitor for &Prompt"), this);
+    collection->setDefaultShortcut(toggleAction, Konsole::ACCEL | Qt::Key_R);
+    action = collection->addAction(QStringLiteral("monitor-prompt"), toggleAction);
+    connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorPrompt);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn")));
+    action->setVisible(false);
+
+    toggleAction = new KToggleAction(i18n("Monitor for &Activity"), this);
     collection->setDefaultShortcut(toggleAction, Konsole::ACCEL | Qt::Key_A);
     action = collection->addAction(QStringLiteral("monitor-activity"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorActivity);
@@ -1825,6 +1832,24 @@ void SessionController::resetFontSize()
     view()->terminalFont()->resetFontSize();
 }
 
+void SessionController::notifyPrompt()
+{
+    if (session()->isMonitorPrompt()) {
+        KNotification *notification = KNotification::event(session()->hasFocus() ? QStringLiteral("Prompt") : QStringLiteral("PromptHidden"),
+                                                           i18n("The shell prompt is displayed in session '%1'", session()->nameTitle()),
+                                                           QPixmap(),
+                                                           view(),
+                                                           KNotification::CloseWhenWidgetActivated);
+        notification->setDefaultAction(i18n("Show session"));
+        connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
+            view()->notificationClicked(notification->xdgActivationToken());
+        });
+    }
+}
+void SessionController::monitorPrompt(bool monitor)
+{
+    session()->setMonitorPrompt(monitor);
+}
 void SessionController::monitorActivity(bool monitor)
 {
     session()->setMonitorActivity(monitor);
@@ -2131,4 +2156,9 @@ QString SessionController::userTitle() const
 bool SessionController::isValid() const
 {
     return _sessionDisplayConnection->isValid();
+}
+
+void SessionController::setVisible(QString name, bool visible)
+{
+    actionCollection()->action(name)->setVisible(visible);
 }

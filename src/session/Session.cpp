@@ -1457,6 +1457,10 @@ QString Session::program() const
     return _program;
 }
 
+bool Session::isMonitorPrompt() const
+{
+    return _monitorPrompt;
+}
 bool Session::isMonitorActivity() const
 {
     return _monitorActivity;
@@ -1464,6 +1468,14 @@ bool Session::isMonitorActivity() const
 bool Session::isMonitorSilence() const
 {
     return _monitorSilence;
+}
+
+void Session::setMonitorPrompt(bool monitor)
+{
+    if (_monitorPrompt == monitor) {
+        return;
+    }
+    _monitorPrompt = monitor;
 }
 
 void Session::setMonitorActivity(bool monitor)

@@ -495,6 +495,17 @@ public Q_SLOTS:
     void setSessionAttribute(int what, const QString &caption);
 
     /**
+     * Enables monitoring for a shell prompt in the session.
+     * This will cause notifySessionState() to be emitted
+     * with the NOTIFYACTIVITY state flag when a prompt is shown
+     * (requires semantic shell suport).
+     */
+    Q_SCRIPTABLE void setMonitorPrompt(bool);
+
+    /** Returns true if monitoring for prompt is enabled. */
+    Q_SCRIPTABLE bool isMonitorPrompt() const;
+
+    /**
      * Enables monitoring for activity in the session.
      * This will cause notifySessionState() to be emitted
      * with the NOTIFYACTIVITY state flag when output is
@@ -819,6 +830,7 @@ private:
     QList<TerminalDisplay *> _views;
 
     // monitor activity & silence
+    bool _monitorPrompt = false;
     bool _monitorActivity = false;
     bool _monitorSilence = false;
     bool _notifiedActivity = false;
