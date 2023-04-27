@@ -56,7 +56,9 @@ void PluginManager::loadAllPlugins()
         d->plugins.push_back(plugin);
     }
 #else
-    QVector<KPluginMetaData> pluginMetaData = KPluginMetaData::findPlugins(QStringLiteral("konsoleplugins"));
+    QVector<KPluginMetaData> pluginMetaData = KPluginMetaData::findPlugins(QStringLiteral("konsoleplugins"), [](const KPluginMetaData &data) {
+        return data.version() == QLatin1String(RELEASE_SERVICE_VERSION);
+    });
     for (const auto &metaData : pluginMetaData) {
         const KPluginFactory::Result result = KPluginFactory::instantiatePlugin<IKonsolePlugin>(metaData);
         if (!result) {
