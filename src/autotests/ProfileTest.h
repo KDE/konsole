@@ -24,6 +24,7 @@ private Q_SLOTS:
     void testProfileNameSorting();
     void testBuiltinProfile();
     void testLoadProfileNamedAsBuiltin();
+    void testInvalidParentProfile();
 };
 
 }

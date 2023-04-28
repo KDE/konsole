@@ -304,4 +304,26 @@ void ProfileTest::testLoadProfileNamedAsBuiltin()
     QCOMPARE(parentProfilePath, builtin->path());
 }
 
+void ProfileTest::testInvalidParentProfile()
+{
+    auto *manager = ProfileManager::instance();
+
+    QString profileStr = QStringLiteral(
+        "[General]\n"
+        "Name=TestInvalidParentProfile\n"
+        "Parent=/this/doesnt/exist/X.profile/\n");
+
+    QTemporaryFile file(QStringLiteral("konsole.XXXXXX.profile"));
+    QVERIFY(file.open());
+    QTextStream(&file) << profileStr;
+
+    auto profile = manager->loadProfile(file.fileName());
+    QVERIFY(profile);
+    QCOMPARE(profile->property<QString>(Profile::Name), QStringLiteral("TestInvalidParentProfile"));
+
+    Profile::Ptr parent = profile->parent();
+    QVERIFY(parent);
+    QCOMPARE(parent->property<QString>(Profile::Name), QStringLiteral("Built-in"));
+}
+
 QTEST_GUILESS_MAIN(ProfileTest)
