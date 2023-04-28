@@ -901,6 +901,13 @@ menu item earlier.</action> The default layouts (2x2, 2x1, and 1x2) can be loade
 
 <varlistentry>
 <term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>One-shot monitors</guimenuitem></menuchoice></term>
+<listitem><para><action>The following monitors only notify once, and are then disabled.  </action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>R</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Monitor for
 Prompt</guimenuitem></menuchoice></term>

@@ -134,6 +134,7 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
     , _isSearchBarEnabled(false)
     , _searchBar(viewParam->searchBar())
     , _monitorProcessFinish(false)
+    , _monitorOnce(false)
     , _escapedUrlFilter(nullptr)
 {
     Q_ASSERT(sessionParam);
@@ -365,6 +366,9 @@ void SessionController::snapshot()
             connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
                 view()->notificationClicked(notification->xdgActivationToken());
             });
+            if (_monitorOnce) {
+                actionCollection()->action(QStringLiteral("monitor-process-finish"))->setChecked(false);
+            }
         }
         _previousForegroundProcessName = isForegroundProcessActive ? session()->foregroundProcessName() : QString();
     }
@@ -884,7 +888,12 @@ void SessionController::setupExtraActions()
     collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_U);
 
     // Monitor
-    KToggleAction *toggleAction = new KToggleAction(i18n("Monitor for &Prompt"), this);
+    KToggleAction *toggleAction = new KToggleAction(i18n("One-shot monitors"), this);
+    action = collection->addAction(QStringLiteral("monitor-once"), toggleAction);
+    connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorOnce);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn")));
+
+    toggleAction = new KToggleAction(i18n("Monitor for &Prompt"), this);
     collection->setDefaultShortcut(toggleAction, Konsole::ACCEL | Qt::Key_R);
     action = collection->addAction(QStringLiteral("monitor-prompt"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorPrompt);
@@ -1844,7 +1853,14 @@ void SessionController::notifyPrompt()
         connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
             view()->notificationClicked(notification->xdgActivationToken());
         });
+        if (_monitorOnce) {
+            actionCollection()->action(QStringLiteral("monitor-prompt"))->setChecked(false);
+        }
     }
+}
+void SessionController::monitorOnce(bool once)
+{
+    _monitorOnce = once;
 }
 void SessionController::monitorPrompt(bool monitor)
 {

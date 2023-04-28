@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<gui name="session" version="34">
+<gui name="session" version="35">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -28,6 +28,7 @@
             <Action name="edit_find_prev" group="session-edit-operations"/>
         </Menu>
         <Menu name="view">
+            <Action name="monitor-once" group="session-view-operations"/>
             <Action name="monitor-prompt" group="session-view-operations"/>
             <Action name="monitor-silence" group="session-view-operations"/>
             <Action name="monitor-activity" group="session-view-operations"/>

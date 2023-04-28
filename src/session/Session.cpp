@@ -26,6 +26,7 @@
 #include <QKeyEvent>
 
 // KDE
+#include <KActionCollection>
 #include <KConfigGroup>
 #include <KIO/DesktopExecParser>
 #include <KLocalizedString>
@@ -44,6 +45,7 @@
 
 #include "Pty.h"
 #include "SSHProcessInfo.h"
+#include "SessionController.h"
 #include "SessionManager.h"
 #include "ShellCommand.h"
 #include "Vt102Emulation.h"
@@ -743,6 +745,9 @@ void Session::silenceTimerDone()
     connect(notification, &KNotification::defaultActivated, this, [view, notification]() {
         view->notificationClicked(notification->xdgActivationToken());
     });
+    if (view->sessionController()->isMonitorOnce()) {
+        view->sessionController()->actionCollection()->action(QStringLiteral("monitor-silence"))->setChecked(false);
+    }
     setPendingNotification(Notification::Silence);
 }
 
@@ -1936,6 +1941,9 @@ void Session::handleActivity()
         connect(notification, &KNotification::defaultActivated, this, [view, notification]() {
             view->notificationClicked(notification->xdgActivationToken());
         });
+        if (view->sessionController()->isMonitorOnce()) {
+            view->sessionController()->actionCollection()->action(QStringLiteral("monitor-activity"))->setChecked(false);
+        }
 
         // mask activity notification for a while to avoid flooding
         _notifiedActivity = true;

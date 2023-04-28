@@ -152,6 +152,11 @@ public:
 
     void setVisible(QString name, bool visible);
 
+    bool isMonitorOnce() const
+    {
+        return _monitorOnce;
+    };
+
 Q_SIGNALS:
     /**
      * Emitted when the view associated with the controller is focused.
@@ -265,6 +270,7 @@ private Q_SLOTS:
     void showHistoryOptions();
     void clearHistory();
     void clearHistoryAndReset();
+    void monitorOnce(bool once);
     void monitorPrompt(bool monitor);
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
@@ -390,6 +396,7 @@ private:
 
     QString _previousForegroundProcessName;
     bool _monitorProcessFinish;
+    bool _monitorOnce;
     EscapeSequenceUrlFilter *_escapedUrlFilter;
 
     std::unique_ptr<KXMLGUIBuilder> _clientBuilder;
