@@ -984,6 +984,9 @@ void TerminalDisplay::updateImageSize()
     _resizing = (oldLines != _lines) || (oldColumns != _columns);
 
     if (_resizing) {
+        _iPntSel = QPoint(-1, -1);
+        _pntSel = QPoint(-1, -1);
+        _tripleSelBegin = QPoint(-1, -1);
         showResizeNotification();
         Q_EMIT changedContentSizeSignal(_contentRect.height(), _contentRect.width()); // expose resizeEvent
     }
