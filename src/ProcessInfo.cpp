@@ -27,6 +27,7 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
+#include <QtGlobal>
 #include <QHostInfo>
 #include <QStringList>
 #include <QTextStream>
@@ -868,18 +869,38 @@ private:
         } else {
             auto args = QString::fromStdString(procargs);
             auto parts = args.split(QLatin1Char('\u0000'), Qt::SkipEmptyParts);
-            ushort argc = QChar(parts[0][0]).unicode();
-
-            if (argc == 1) { // just command, no args
+            // Do a lot of data checks
+            if (parts.isEmpty()) {
+                return false;
+            }
+            /*  0: argc as \u####
+                1: full command path
+                2: command (no path)
+                3: first argument
+                4+: next arguments
+                argc+: a lot of other data including ENV
+            */
+            auto argcs = parts[0]; // first string argc
+            if (argcs.isEmpty()) {
+                return false;
+            }
+            auto argc = (int)QChar(argcs[0]).unicode();
+            if (argc < 1) { // trash
+                return false;
+            } else if (argc == 1) { // just command, no args
                 addArgument(parts[1]); // this is the full path + command
-            } else {    // args, skip over full path + command
-                /* The output is not obvious for some commands:
-                   For example: 'man 3 sysctl' shows arg=4
-                    1: /bin/bash; 2: /bin/sh; 3: /usr/bin/man; 4: 3; 5: sysctl
-                */
-                for (int i = 2; i <= argc+1; i++) {
-                    addArgument(parts[i]);
-                }
+                return true;
+            }
+
+            // Check argc + 2(argc/full cmd) is not larger then parts size
+            argc = qMin(argc + 2, parts.size());
+
+            /* The output is not obvious for some commands:
+               For example: 'man 3 sysctl' shows arg=4
+               0: \u0004; 1: /bin/bash; 2: /bin/sh; 3: /usr/bin/man; 4: 3; 5: sysctl
+             */
+            for (int i = 2; i < argc; i++) {
+                addArgument(parts[i]);
             }
             return true;
         }
