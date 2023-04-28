@@ -159,7 +159,12 @@ Profile::Ptr ProfileManager::loadProfile(const QString &shortPath)
 
     if (!parentProfilePath.isEmpty()) {
         Profile::Ptr parentProfile = loadProfile(parentProfilePath);
-        newProfile->setParent(parentProfile);
+        // To avoid crashes make sure to NOT set an invalid parent
+        if (parentProfile == nullptr) {
+            qCDebug(KonsoleProfileDebug) << "Profile " << newProfile->name() << " has an invalid parent " << parentProfilePath;
+        } else {
+            newProfile->setParent(parentProfile);
+        }
     }
 
     if (!result) {
