@@ -49,7 +49,7 @@ FontDialog::FontDialog(QWidget *parent, bool emoji, const QFont font)
             /* clang-format off */
             QStringLiteral(" 🏴🤘🚬🌍🌎🌏🥆💣🗡🔫⚗️⚛️☢️☣️🌿🎱🏧💉💊🕴️📡🤻🦑🇦🇶👩‍🔬🪤🚱✊🏿🔬🧬🏴‍☠️🤽\n"
                            "0123456789\n"
-                           "👆🏻 👆🏼 👆🏽 👆🏾 👆🏿     👨‍❤️‍👨 👨‍❤️‍💋‍👨 👩‍👩‍👧‍👧 👩🏻‍🤝‍👨🏿 👨‍👨‍👧‍👦\n"
+                           "👆🏻 👆🏼 👆🏽 👆🏾 👆🏿     👨‍❤️‍👨 👨‍❤️‍💋‍👨 👩‍👩‍👧‍👧 👩🏻‍🤝‍👨🏿 👨‍👨‍👧‍👦 \U0001F468\u200D\u2764\uFE0F\u200D\U0001F468  \U0001F468\u200D\u2764\u200D\U0001F468\n"
                            "🇧🇲 🇨🇭 🇨🇿 🇪🇺 🇬🇱 🇲🇬 🇲🇹 🇸🇿 🇿🇲"));
         /* clang-format on */
     } else {
