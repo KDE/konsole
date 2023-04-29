@@ -1132,8 +1132,22 @@ void Screen::displayCharacter(uint c)
             }
         }
         if (c == 0xFE0F) {
-            // Emoji presentation - should not be included
             currentChar.flags |= EF_EMOJI_REPRESENTATION;
+            if (charToCombineWithX == _cuX - 1) {
+                // If width was 1, change to two.
+                if (_screenLines[_cuY].size() < _cuX + 1) {
+                    _screenLines[_cuY].resize(_cuX + 1);
+                }
+                Character &ch = _screenLines[_cuY][_cuX];
+                ch.setRightHalfOfDoubleWide();
+                ch.foregroundColor = _effectiveForeground;
+                ch.backgroundColor = _effectiveBackground;
+                ch.rendition = _effectiveRendition;
+                ch.flags = setRepl(EF_UNREAL, _replMode);
+                _cuX += 1;
+            }
+            // Emoji presentation should not be included
+            // (maybe a bug in Qt? including this code point in sequences breaks emoji-zwj-sequences.txt)
             return;
         }
         if (c == 0x200D) {
