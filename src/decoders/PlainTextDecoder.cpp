@@ -130,8 +130,12 @@ void PlainTextDecoder::decodeLine(const Character *const characters, int count, 
             // lost in some situation. One typical example is copying the result
             // of `dialog --infobox "qwe" 10 10` .
             if ((characters[i].flags & EF_REAL) != 0 || i <= realCharacterGuard) {
-                characterBuffer.append(characters[i].character);
-                i += qMax(1, Character::stringWidth(&characters[i].character, 1));
+                if (characters[i].isRightHalfOfDoubleWide()) {
+                    i += 1;
+                } else {
+                    characterBuffer.append(characters[i].character);
+                    i += qMax(1, Character::stringWidth(&characters[i].character, 1));
+                }
             } else {
                 ++i; // should we 'break' directly here?
             }
