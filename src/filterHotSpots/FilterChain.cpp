@@ -334,8 +334,8 @@ void FilterChain::paint(TerminalDisplay *td, QPainter &painter)
                 // with some having tails dangling below)
                 const int baseline = r.bottom() - metrics.descent();
                 // find the position of the underline below that
-                const int underlinePos = baseline + metrics.underlinePos();
-                painter.drawLine(r.left(), underlinePos, r.right(), underlinePos);
+                const qreal underlinePos = baseline + metrics.underlinePos();
+                painter.drawLine(QLineF(r.left(), underlinePos, r.right(), underlinePos));
 
                 // Marker hotspots simply have a transparent rectangular shape
                 // drawn on top of them

@@ -40,9 +40,9 @@ public:
     int fontWidth() const;
     int fontAscent() const;
     int lineWidth() const;
-    int underlinePos() const;
+    qreal underlinePos() const;
     int strikeOutPos() const;
-    int overlinePos() const;
+    qreal overlinePos() const;
     bool boldIntense() const;
     bool antialiasText() const;
     bool useFontLineCharacters() const;
@@ -60,9 +60,9 @@ private:
     int m_fontWidth = 1;
     int m_fontAscent = 1;
     int m_lineWidth = 1;
-    int m_underlinePos = 1;
+    qreal m_underlinePos = 1;
     int m_strikeOutPos = 1;
-    int m_overlinePos = 1;
+    qreal m_overlinePos = 1;
     bool m_boldIntense = false;
     bool m_antialiasText = true;
     bool m_useFontLineCharacters = false;

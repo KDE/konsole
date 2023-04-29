@@ -210,7 +210,7 @@ int TerminalFont::lineWidth() const
     return m_lineWidth;
 }
 
-int TerminalFont::underlinePos() const
+qreal TerminalFont::underlinePos() const
 {
     return m_underlinePos;
 }
@@ -220,7 +220,7 @@ int TerminalFont::strikeOutPos() const
     return m_strikeOutPos;
 }
 
-int TerminalFont::overlinePos() const
+qreal TerminalFont::overlinePos() const
 {
     return m_overlinePos;
 }
@@ -255,9 +255,9 @@ void TerminalFont::fontChange(const QFont &)
 
     m_fontAscent = fm.ascent();
     m_lineWidth = fm.lineWidth();
-    m_underlinePos = fm.underlinePos();
+    m_underlinePos = qMin(static_cast<qreal>(fm.underlinePos()), fm.descent() - m_lineWidth / static_cast<qreal>(2));
     m_strikeOutPos = fm.strikeOutPos();
-    m_overlinePos = fm.overlinePos();
+    m_overlinePos = qMin(static_cast<qreal>(fm.overlinePos()), fm.ascent() - m_lineWidth / static_cast<qreal>(2));
 
     qobject_cast<TerminalDisplay *>(m_parent)->propagateSize();
 }

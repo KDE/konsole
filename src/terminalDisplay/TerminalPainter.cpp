@@ -884,13 +884,11 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                 }
                 if ((i == width || style[x].rendition.f.overline == 0) && startOverline >= 0) {
                     QPen pen(foregroundColor);
-                    int y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->lineSpacing() / 2;
+                    qreal y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() - m_parentDisplay->terminalFont()->overlinePos()
+                        + m_parentDisplay->terminalFont()->lineSpacing() / static_cast<qreal>(2);
                     pen.setWidth(m_parentDisplay->terminalFont()->lineWidth());
                     painter.setPen(pen);
-                    painter.drawLine(rect.x() + fontWidth * startOverline,
-                                     y - m_parentDisplay->terminalFont()->overlinePos(),
-                                     rect.x() + fontWidth * i - 1,
-                                     y - m_parentDisplay->terminalFont()->overlinePos());
+                    painter.drawLine(QLineF(rect.x() + fontWidth * startOverline, y, rect.x() + fontWidth * i - 1, y));
                     startOverline = -1;
                 }
                 int underline = style[lastX].rendition.f.underline;
@@ -902,7 +900,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                     }
                     int lw = m_parentDisplay->terminalFont()->lineWidth();
                     qreal y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->underlinePos()
-                        + m_parentDisplay->terminalFont()->lineSpacing() / 2;
+                        + m_parentDisplay->terminalFont()->lineSpacing() / static_cast<qreal>(2);
                     if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
                         y = rect.bottom() - 1;
                         lw = 1;
@@ -923,7 +921,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         painter.drawLine(rect.x() + fontWidth * startUnderline, y - 2, rect.x() + fontWidth * i - 1, y - 2);
                     }
                     if (underline == RE_UNDERLINE_CURL) {
-                        painter.drawLine(rect.x() + fontWidth * startUnderline + 2, y - 1, rect.x() + fontWidth * i - 1, y - 1);
+                        painter.drawLine(QLineF(rect.x() + fontWidth * startUnderline + 2, y - 1, rect.x() + fontWidth * i - 1, y - 1));
                     }
 
                     startUnderline = -1;
