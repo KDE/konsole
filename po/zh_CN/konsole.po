@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-25 02:45+0000\n"
-"PO-Revision-Date: 2023-04-16 12:33\n"
+"PO-Revision-Date: 2023-04-29 08:36\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -51,7 +51,7 @@ msgstr "编辑"
 #: ../desktop/konsoleui.rc:19
 #, kde-format
 msgid "View"
-msgstr "查看"
+msgstr "视图"
 
 #. i18n: ectx: Menu (view-split)
 #: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:60
