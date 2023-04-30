@@ -987,6 +987,7 @@ void TerminalDisplay::updateImageSize()
 
     if (!_screenWindow.isNull()) {
         _screenWindow->setWindowLines(_lines);
+        _sessionController->setSelectMode(false);
     }
 
     _resizing = (oldLines != _lines) || (oldColumns != _columns);
