@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 00:52+0000\n"
+"POT-Creation-Date: 2023-05-02 00:51+0000\n"
 "PO-Revision-Date: 2023-04-17 10:13+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -1920,7 +1920,7 @@ msgstr "&Масштабировать вывод"
 msgid "Default profile"
 msgstr "Профиль по умолчанию"
 
-#: profile/ProfileManager.cpp:265
+#: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "У Konsole нет прав доступа для записи этого профиля в «%1»."
@@ -3180,7 +3180,7 @@ msgstr "Создавать миниатюры"
 msgid "Size: %1 x %2"
 msgstr "Размер: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2234
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3189,57 +3189,57 @@ msgstr[1] "Действительно вставить %1 символа?"
 msgstr[2] "Действительно вставить %1 символов?"
 msgstr[3] "Действительно вставить %1 символ?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2232
+#: terminalDisplay/TerminalDisplay.cpp:2235
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Подтверждение вставки"
 
-#: terminalDisplay/TerminalDisplay.cpp:2265
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 "Символ End-Of-Text / Interrupt (^C): Может вызвать выход из текущего процесса"
 
-#: terminalDisplay/TerminalDisplay.cpp:2266
+#: terminalDisplay/TerminalDisplay.cpp:2269
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 "Символ End-Of-Transmission (^D) End of transmission: Может вызвать выход из "
 "текущего процесса"
 
-#: terminalDisplay/TerminalDisplay.cpp:2267
+#: terminalDisplay/TerminalDisplay.cpp:2270
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Символ Bell (^G ): Воспроизведение звукового сигнала"
 
-#: terminalDisplay/TerminalDisplay.cpp:2268
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgid "Backspace"
 msgstr "Символ Backspace (^H): Удаление символа слева"
 
-#: terminalDisplay/TerminalDisplay.cpp:2269
+#: terminalDisplay/TerminalDisplay.cpp:2272
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Символ Device Control Three / XOFF (^S): Приостановка вывода"
 
-#: terminalDisplay/TerminalDisplay.cpp:2270
+#: terminalDisplay/TerminalDisplay.cpp:2273
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 "Символ Substitute / Suspend (^Z): Может вызвать приостановку текущего "
 "процесса"
 
-#: terminalDisplay/TerminalDisplay.cpp:2271
+#: terminalDisplay/TerminalDisplay.cpp:2274
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Символ Escape (^[): Используется для управления состоянием терминала"
 
-#: terminalDisplay/TerminalDisplay.cpp:2272
+#: terminalDisplay/TerminalDisplay.cpp:2275
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Символ Separator / Quit: Может прервать выполнение текущего процесса"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2302
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3248,31 +3248,31 @@ msgstr ""
 "Вставляемый текст содержит скрытые управляющие символы. Удалить управляющие "
 "символы из вставляемого текста?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2302
+#: terminalDisplay/TerminalDisplay.cpp:2305
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Подтверждение вставки"
 
-#: terminalDisplay/TerminalDisplay.cpp:2303
+#: terminalDisplay/TerminalDisplay.cpp:2306
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&Удалить скрытые символы и вставить"
 
-#: terminalDisplay/TerminalDisplay.cpp:2304
+#: terminalDisplay/TerminalDisplay.cpp:2307
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Вставить без изменения"
 
-#: terminalDisplay/TerminalDisplay.cpp:2305
+#: terminalDisplay/TerminalDisplay.cpp:2308
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "О&тменить вставку"
 
-#: terminalDisplay/TerminalDisplay.cpp:2544
+#: terminalDisplay/TerminalDisplay.cpp:2547
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3283,17 +3283,17 @@ msgstr ""
 "\">приостановлен</a> по нажатию Ctrl+S. Нажмите <b>Ctrl+Q</b> для "
 "продолжения вывода.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2599
+#: terminalDisplay/TerminalDisplay.cpp:2602
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Этот терминал открыт только для чтения."
 
-#: terminalDisplay/TerminalDisplay.cpp:2994
+#: terminalDisplay/TerminalDisplay.cpp:2997
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Сменить рабочий каталог на"
 
-#: terminalDisplay/TerminalDisplay.cpp:3027
+#: terminalDisplay/TerminalDisplay.cpp:3030
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Вставить адрес"
