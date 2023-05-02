@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-25 02:45+0000\n"
+"POT-Creation-Date: 2023-05-02 02:54+0000\n"
 "PO-Revision-Date: 2012-07-02 13:00+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -3362,7 +3362,7 @@ msgstr "Aktivēt izvēļņu paātrinātājus"
 msgid "Size: %1 x %2"
 msgstr "Izmērs: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2234
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3370,87 +3370,87 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2232
+#: terminalDisplay/TerminalDisplay.cpp:2235
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "Confirm Paste"
 msgstr "Apstiprināt aizvēršanu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2265
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2266
+#: terminalDisplay/TerminalDisplay.cpp:2269
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2267
+#: terminalDisplay/TerminalDisplay.cpp:2270
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2268
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2269
+#: terminalDisplay/TerminalDisplay.cpp:2272
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2270
+#: terminalDisplay/TerminalDisplay.cpp:2273
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2271
+#: terminalDisplay/TerminalDisplay.cpp:2274
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2272
+#: terminalDisplay/TerminalDisplay.cpp:2275
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2302
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2302
+#: terminalDisplay/TerminalDisplay.cpp:2305
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Apstiprināt aizvēršanu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2303
+#: terminalDisplay/TerminalDisplay.cpp:2306
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Iestatīt, lai kursora krāsa būtu tāda kā pašreizējam simbolam."
 
-#: terminalDisplay/TerminalDisplay.cpp:2304
+#: terminalDisplay/TerminalDisplay.cpp:2307
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Ielīmēt izvēlēto"
 
-#: terminalDisplay/TerminalDisplay.cpp:2305
+#: terminalDisplay/TerminalDisplay.cpp:2308
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2544
+#: terminalDisplay/TerminalDisplay.cpp:2547
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3464,17 +3464,17 @@ msgstr ""
 "\">apturēta</a>, nospiežot Ctrl+S. Nospiediet <b>Ctrl+Q</b>, lai atsāktu "
 "izvadi.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2599
+#: terminalDisplay/TerminalDisplay.cpp:2602
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2994
+#: terminalDisplay/TerminalDisplay.cpp:2997
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Mainīt &mapi uz"
 
-#: terminalDisplay/TerminalDisplay.cpp:3027
+#: terminalDisplay/TerminalDisplay.cpp:3030
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Ielīmēt vietu"

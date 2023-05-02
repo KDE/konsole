@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-25 02:45+0000\n"
+"POT-Creation-Date: 2023-05-02 02:54+0000\n"
 "PO-Revision-Date: 2012-12-20 16:07+0700\n"
 "Last-Translator: sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros>\n"
@@ -3301,93 +3301,93 @@ msgstr "បើក​ការ​បង្កើន​ល្បឿន​ម៉ឺ
 msgid "Size: %1 x %2"
 msgstr "ទំហំ ៖ %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2234
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2232
+#: terminalDisplay/TerminalDisplay.cpp:2235
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "Confirm Paste"
 msgstr "បិទ​ការ​អះអាង"
 
-#: terminalDisplay/TerminalDisplay.cpp:2265
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2266
+#: terminalDisplay/TerminalDisplay.cpp:2269
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2267
+#: terminalDisplay/TerminalDisplay.cpp:2270
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2268
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2269
+#: terminalDisplay/TerminalDisplay.cpp:2272
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2270
+#: terminalDisplay/TerminalDisplay.cpp:2273
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2271
+#: terminalDisplay/TerminalDisplay.cpp:2274
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2272
+#: terminalDisplay/TerminalDisplay.cpp:2275
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2302
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2302
+#: terminalDisplay/TerminalDisplay.cpp:2305
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "បិទ​ការ​អះអាង"
 
-#: terminalDisplay/TerminalDisplay.cpp:2303
+#: terminalDisplay/TerminalDisplay.cpp:2306
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "កំណត់​ទស្សន៍ទ្រនិច​ដើម្បី​ផ្គូផ្គង​តួ​អក្សរ​បច្ចុប្បន្ន"
 
-#: terminalDisplay/TerminalDisplay.cpp:2304
+#: terminalDisplay/TerminalDisplay.cpp:2307
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "បិទភ្ជាប់​ជម្រើស"
 
-#: terminalDisplay/TerminalDisplay.cpp:2305
+#: terminalDisplay/TerminalDisplay.cpp:2308
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2544
+#: terminalDisplay/TerminalDisplay.cpp:2547
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3400,17 +3400,17 @@ msgstr ""
 "<qt>លទ្ធផលត្រូវ​បានផ្អាក <a href=\"http://en.wikipedia.org/wiki/XON\">ផ្អាក​</a> ដោយ​"
 "ចុច​បញ្ជា(Crtl)​+S ។ ចុច​<b>បញ្ជា​(Ctrl)+Q</b> ដើម្បី​ធ្វើ​បន្ត​​ ។</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2599
+#: terminalDisplay/TerminalDisplay.cpp:2602
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2994
+#: terminalDisplay/TerminalDisplay.cpp:2997
 #, kde-format
 msgid "Change &Directory To"
 msgstr "ផ្លាស់ប្ដូរ​ថត​ទៅកាន់"
 
-#: terminalDisplay/TerminalDisplay.cpp:3027
+#: terminalDisplay/TerminalDisplay.cpp:3030
 #, kde-format
 msgid "&Paste Location"
 msgstr "បិទភ្ជាប់​ទីតាំង"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-25 02:45+0000\n"
+"POT-Creation-Date: 2023-05-02 02:54+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -3236,59 +3236,59 @@ msgstr "Menüü kiirklahvide lubamine"
 msgid "Size: %1 x %2"
 msgstr "Suurus: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2231
+#: terminalDisplay/TerminalDisplay.cpp:2234
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Kas tõesti asetada %1 märk?"
 msgstr[1] "Kas tõesti asetada %1 märki?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2232
+#: terminalDisplay/TerminalDisplay.cpp:2235
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Asetamise kinnitus"
 
-#: terminalDisplay/TerminalDisplay.cpp:2265
+#: terminalDisplay/TerminalDisplay.cpp:2268
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Teksti lõpp/katkestus: võib lõpetada aktiivse protsessi töö"
 
-#: terminalDisplay/TerminalDisplay.cpp:2266
+#: terminalDisplay/TerminalDisplay.cpp:2269
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Ülekande lõpp: võib väljuda aktiivsest protsessist"
 
-#: terminalDisplay/TerminalDisplay.cpp:2267
+#: terminalDisplay/TerminalDisplay.cpp:2270
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Kell: püüab anda kuuldava hoiatuse"
 
-#: terminalDisplay/TerminalDisplay.cpp:2268
+#: terminalDisplay/TerminalDisplay.cpp:2271
 #, kde-format
 msgid "Backspace"
 msgstr "Kustutusklahv (Backspace)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2269
+#: terminalDisplay/TerminalDisplay.cpp:2272
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Seadme juhtimine kolm/XOFF: väljundi peatamine"
 
-#: terminalDisplay/TerminalDisplay.cpp:2270
+#: terminalDisplay/TerminalDisplay.cpp:2273
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Asendamine/peatamine: võib peatada aktiivse protsessi"
 
-#: terminalDisplay/TerminalDisplay.cpp:2271
+#: terminalDisplay/TerminalDisplay.cpp:2274
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: kasutatakse terminali oleku manipuleerimiseks"
 
-#: terminalDisplay/TerminalDisplay.cpp:2272
+#: terminalDisplay/TerminalDisplay.cpp:2275
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Failieraldaja/Väljumine: võib lõpetada aktiivse protsessi töö"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2302
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3297,31 +3297,31 @@ msgstr ""
 "Tekst, mida üritad asetada, sisaldab peidetud juhtmärke. Kas filtreerida "
 "need välja?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2302
+#: terminalDisplay/TerminalDisplay.cpp:2305
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Asetamise kinnitus"
 
-#: terminalDisplay/TerminalDisplay.cpp:2303
+#: terminalDisplay/TerminalDisplay.cpp:2306
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Aseta &ilma juhtmärkideta"
 
-#: terminalDisplay/TerminalDisplay.cpp:2304
+#: terminalDisplay/TerminalDisplay.cpp:2307
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Aseta kõik"
 
-#: terminalDisplay/TerminalDisplay.cpp:2305
+#: terminalDisplay/TerminalDisplay.cpp:2308
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Loo&bu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2544
+#: terminalDisplay/TerminalDisplay.cpp:2547
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3332,17 +3332,17 @@ msgstr ""
 "\">peatatud</a> kiirklahviga Ctrl+S. Taasalustamiseks vajuta <b>Ctrl+Q</b>.</"
 "qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2599
+#: terminalDisplay/TerminalDisplay.cpp:2602
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "See terminal on kirjutuskaitstud."
 
-#: terminalDisplay/TerminalDisplay.cpp:2994
+#: terminalDisplay/TerminalDisplay.cpp:2997
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Muu&da kataloogiks"
 
-#: terminalDisplay/TerminalDisplay.cpp:3027
+#: terminalDisplay/TerminalDisplay.cpp:3030
 #, kde-format
 msgid "&Paste Location"
 msgstr "Aseta asuko&ht"
