@@ -305,8 +305,6 @@ add_library(konsoleapp SHARED Application.cpp
 
 generate_export_header(konsoleapp BASE_NAME konsoleapp)
 
-target_compile_definitions(konsoleapp PRIVATE -DRELEASE_SERVICE_VERSION="${RELEASE_SERVICE_VERSION}")
-
 target_link_libraries(konsoleapp
   konsoleprivate
   KF5::XmlGui
