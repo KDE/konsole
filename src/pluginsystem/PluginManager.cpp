@@ -9,6 +9,7 @@
 
 #include "IKonsolePlugin.h"
 #include "MainWindow.h"
+#include "konsoledebug.h"
 
 #include "kcoreaddons_version.h"
 #include <KLocalizedString>
@@ -57,7 +58,17 @@ void PluginManager::loadAllPlugins()
     }
 #else
     QVector<KPluginMetaData> pluginMetaData = KPluginMetaData::findPlugins(QStringLiteral("konsoleplugins"), [](const KPluginMetaData &data) {
-        return data.version() == QLatin1String(RELEASE_SERVICE_VERSION);
+        // Compare RELEASE_SERVICE_VERSION MAJOR and MINOR only: XX.YY
+        auto plugin_version = QString(data.version()).left(5);
+        auto release_version = QLatin1String(RELEASE_SERVICE_VERSION).left(5);
+        if (plugin_version == release_version) {
+            qWarning() << plugin_version << " == " << release_version;
+            return true;
+        } else {
+            qCWarning(KonsoleDebug) << "Ignoring" << data.name() << "plugin version (" << plugin_version << ") doesn't match release version ("
+                                    << release_version << ")";
+            return false;
+        }
     });
     for (const auto &metaData : pluginMetaData) {
         const KPluginFactory::Result result = KPluginFactory::instantiatePlugin<IKonsolePlugin>(metaData);
