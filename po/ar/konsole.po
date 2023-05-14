@@ -284,49 +284,49 @@ msgstr "الخلفية"
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 1"
-msgstr "اللون ١"
+msgstr "اللون 1"
 
 #: colorscheme/ColorScheme.cpp:134
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 2"
-msgstr "اللون ٢"
+msgstr "اللون 2"
 
 #: colorscheme/ColorScheme.cpp:135
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 3"
-msgstr "اللون ٣"
+msgstr "اللون 3"
 
 #: colorscheme/ColorScheme.cpp:136
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 4"
-msgstr "اللون ٤"
+msgstr "اللون 4"
 
 #: colorscheme/ColorScheme.cpp:137
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 5"
-msgstr "اللون ٥"
+msgstr "اللون 5"
 
 #: colorscheme/ColorScheme.cpp:138
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 6"
-msgstr "اللون ٦"
+msgstr "اللون 6"
 
 #: colorscheme/ColorScheme.cpp:139
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 7"
-msgstr "اللون ٧"
+msgstr "اللون 7"
 
 #: colorscheme/ColorScheme.cpp:140
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 8"
-msgstr "اللون ٨"
+msgstr "اللون 8"
 
 #: colorscheme/ColorScheme.cpp:141
 #, kde-format
@@ -344,49 +344,49 @@ msgstr "الخلفية (مكثف)"
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 1 (Intense)"
-msgstr "اللون ١ (مكثف)"
+msgstr "اللون 1 (مكثف)"
 
 #: colorscheme/ColorScheme.cpp:144
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 2 (Intense)"
-msgstr "اللون ٢ (مكثف)"
+msgstr "اللون 2 (مكثف)"
 
 #: colorscheme/ColorScheme.cpp:145
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 3 (Intense)"
-msgstr "اللون ٣ (مكثف)"
+msgstr "اللون 3 (مكثف)"
 
 #: colorscheme/ColorScheme.cpp:146
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 4 (Intense)"
-msgstr "اللون ٤ (مكثف)"
+msgstr "اللون 4 (مكثف)"
 
 #: colorscheme/ColorScheme.cpp:147
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 5 (Intense)"
-msgstr "اللون ٥ (مكثف)"
+msgstr "اللون 5 (مكثف)"
 
 #: colorscheme/ColorScheme.cpp:148
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 6 (Intense)"
-msgstr "اللون ٦ (مكثف)"
+msgstr "اللون 6 (مكثف)"
 
 #: colorscheme/ColorScheme.cpp:149
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 7 (Intense)"
-msgstr "اللون ٧ (مكثف)"
+msgstr "اللون 7 (مكثف)"
 
 #: colorscheme/ColorScheme.cpp:150
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 8 (Intense)"
-msgstr "اللون ٨ (مكثف)"
+msgstr "اللون 8 (مكثف)"
 
 #: colorscheme/ColorScheme.cpp:151
 #, kde-format
@@ -404,49 +404,49 @@ msgstr "الخلفية (باهتة)"
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 1 (Faint)"
-msgstr "اللون ١ (باهت)"
+msgstr "اللون 1 (باهت)"
 
 #: colorscheme/ColorScheme.cpp:154
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 2 (Faint)"
-msgstr "اللون ٢ (باهت)"
+msgstr "اللون 2 (باهت)"
 
 #: colorscheme/ColorScheme.cpp:155
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 3 (Faint)"
-msgstr "اللون ٣ (باهت)"
+msgstr "اللون 3 (باهت)"
 
 #: colorscheme/ColorScheme.cpp:156
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 4 (Faint)"
-msgstr "اللون ٤ (باهت)"
+msgstr "اللون 4 (باهت)"
 
 #: colorscheme/ColorScheme.cpp:157
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 5 (Faint)"
-msgstr "اللون ٥ (باهت)"
+msgstr "اللون 5 (باهت)"
 
 #: colorscheme/ColorScheme.cpp:158
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 6 (Faint)"
-msgstr "اللون ٦ (باهت)"
+msgstr "اللون 6 (باهت)"
 
 #: colorscheme/ColorScheme.cpp:159
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 7 (Faint)"
-msgstr "اللون ٧ (باهت)"
+msgstr "اللون 7 (باهت)"
 
 #: colorscheme/ColorScheme.cpp:160
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 8 (Faint)"
-msgstr "اللون ٨ (باهت)"
+msgstr "اللون 8 (باهت)"
 
 #: colorscheme/ColorScheme.cpp:463
 #, kde-format
@@ -548,7 +548,7 @@ msgid ""
 msgstr ""
 "تختار قيم تدرج اللون والتشبع للألوان الافتراضية للمقدمة والخلفية بشكل "
 "عشوائي. قد تستخدم بعض تشكيلات الألوان إعدادات عشوائية. \n"
-"لمشاهدة أي تأثير ، اضبط الألوان بقيمة تشبع أكبر من ٠ ."
+"لمشاهدة أي تأثير ، اضبط الألوان بقيمة تشبع أكبر من 0 ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
 #: colorscheme/ColorSchemeEditor.ui:53
@@ -1764,7 +1764,7 @@ msgstr "المنفذ"
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr "منفذ الخادوم، ٢٢ هو المنفذ المبدئي لاتصالات ssh"
+msgstr "منفذ الخادوم، 22 هو المنفذ المبدئي لاتصالات ssh"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
@@ -3307,19 +3307,19 @@ msgstr "افصل العرض آلياً من اللسان التالي"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr "حمّل لسان جديد بتخطيط طرفيات ٢×٢"
+msgstr "حمّل لسان جديد بتخطيط طرفيات 2×2"
 
 #: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr "حمّل لسان جديد بتخطيط طرفيات ٢×١"
+msgstr "حمّل لسان جديد بتخطيط طرفيات 2×1"
 
 #: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr "حمّل لسان جديد بتخطيط طرفيات 1×٢"
+msgstr "حمّل لسان جديد بتخطيط طرفيات 1×2"
 
 #: ViewManager.cpp:191
 #, kde-format
