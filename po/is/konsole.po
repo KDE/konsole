@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 00:50+0000\n"
+"POT-Creation-Date: 2023-05-15 00:49+0000\n"
 "PO-Revision-Date: 2023-03-21 14:28+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -62,7 +62,7 @@ msgid "View"
 msgstr "Skoða"
 
 #. i18n: ectx: Menu (view-split)
-#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:60
+#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:62
 #, kde-format
 msgid "Split View"
 msgstr "Kljúfa glugga"
@@ -98,7 +98,7 @@ msgid "S&crollback"
 msgstr "A&fturrakning"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:76
+#: ../desktop/sessionui.rc:78
 #, kde-format
 msgid "Session Toolbar"
 msgstr "Tækjastika setu"
@@ -2053,28 +2053,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Solaris-skjáhermir"
 
-#: session/Session.cpp:97
+#: session/Session.cpp:99
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Bjalla í '%1' (seta '%2')"
 
-#: session/Session.cpp:406
+#: session/Session.cpp:408
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Fann ekki tvíundarskrá: "
 
-#: session/Session.cpp:415
+#: session/Session.cpp:417
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Aðvörun: "
 
-#: session/Session.cpp:515
+#: session/Session.cpp:517
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Fann ekki gagnvirka skel til að ræsa."
 
-#: session/Session.cpp:521 session/Session.cpp:523
+#: session/Session.cpp:523 session/Session.cpp:525
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2083,24 +2083,24 @@ msgstr ""
 "Fann ekki '%1', ræsi '%2' í staðinn.  Þú ættir að athuga stillingar "
 "prófílsins þíns."
 
-#: session/Session.cpp:593
+#: session/Session.cpp:595
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Tókst ekki að ræsa forritið '%1' með viðföngum '%2'."
 
-#: session/Session.cpp:738
+#: session/Session.cpp:740
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Þögn í '%1' (seta '%2')"
 
-#: session/Session.cpp:742 session/Session.cpp:1923
-#: session/SessionController.cpp:364 terminalDisplay/TerminalBell.cpp:43
-#: Vt102Emulation.cpp:1135
+#: session/Session.cpp:744 session/Session.cpp:1940
+#: session/SessionController.cpp:365 session/SessionController.cpp:1852
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1135
 #, kde-format
 msgid "Show session"
 msgstr "Sýna setu"
 
-#: session/Session.cpp:1023
+#: session/Session.cpp:1028
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2114,286 +2114,297 @@ msgstr ""
 "notaðar í innri vinnslu með því að vistþýða Konsole aftur. <p>Þessi viðvörun "
 "verður aðeins birt einu sinni fyrir þetta tilvik af Konsole.</p>"
 
-#: session/Session.cpp:1063
+#: session/Session.cpp:1068
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Lokið"
 
-#: session/Session.cpp:1077 session/Session.cpp:1088
+#: session/Session.cpp:1082 session/Session.cpp:1093
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Forritið '%1' hrundi."
 
-#: session/Session.cpp:1079
+#: session/Session.cpp:1084
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Forritið '%1' hætti með stöðuna %2."
 
-#: session/Session.cpp:1587
+#: session/Session.cpp:1604
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Framvinda ZModem"
 
-#: session/Session.cpp:1919
+#: session/Session.cpp:1936
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Virkni í '%1' (seta '%2')"
 
-#: session/SessionController.cpp:147
+#: session/SessionController.cpp:148
 #, kde-format
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:360
+#: session/SessionController.cpp:361
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Vinnslan '%1' lauk keyrslu í setunni '%2'"
 
-#: session/SessionController.cpp:442
+#: session/SessionController.cpp:446
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole veit ekki hvernig á að opna bókamerkið: "
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:525
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Leita að '%1' með"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:541
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Grunnstilla vefflýtilykla..."
 
-#: session/SessionController.cpp:655
+#: session/SessionController.cpp:659
 #, kde-format
 msgid "&Close Session"
 msgstr "&Loka setu"
 
-#: session/SessionController.cpp:662
+#: session/SessionController.cpp:666
 #, kde-format
 msgid "Open File Manager"
 msgstr "Opna skráastjóra"
 
-#: session/SessionController.cpp:674
+#: session/SessionController.cpp:678
 #, kde-format
 msgid "Copy"
 msgstr "Afrita"
 
-#: session/SessionController.cpp:680
+#: session/SessionController.cpp:684
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Kljúfa sýn lóðrétt"
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Kljúfa sýn lárétt"
 
-#: session/SessionController.cpp:688
+#: session/SessionController.cpp:692
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Afrita að kvaðningum undanskildum"
 
-#: session/SessionController.cpp:694
+#: session/SessionController.cpp:698
 #, kde-format
 msgid "Copy user input"
 msgstr "Afrita inntak notanda"
 
-#: session/SessionController.cpp:700
+#: session/SessionController.cpp:704
 #, kde-format
 msgid "Copy command output"
 msgstr "Afrita úttak skipunar"
 
-#: session/SessionController.cpp:715
+#: session/SessionController.cpp:719
 #, kde-format
 msgid "Paste Selection"
 msgstr "Líma val"
 
-#: session/SessionController.cpp:722
+#: session/SessionController.cpp:726
 #, kde-format
 msgid "Web Search"
 msgstr "Vefleit"
 
-#: session/SessionController.cpp:728
+#: session/SessionController.cpp:732
 #, kde-format
 msgid "&Select All"
 msgstr "&Velja allt"
 
-#: session/SessionController.cpp:732
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Select &Mode"
 msgstr "Velja &snið"
 
-#: session/SessionController.cpp:737
+#: session/SessionController.cpp:741
 #, kde-format
 msgid "Select &Line"
 msgstr "Velja &línu"
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:744
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Vista útt&ak sem..."
 
-#: session/SessionController.cpp:746
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Prenta skjá..."
 
-#: session/SessionController.cpp:750
+#: session/SessionController.cpp:754
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Stilla afturrakningu..."
 
-#: session/SessionController.cpp:754
+#: session/SessionController.cpp:758
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Hreinsa afturrakningu"
 
-#: session/SessionController.cpp:758
+#: session/SessionController.cpp:762
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Hreinsa afturrakningu og endurstilla"
 
-#: session/SessionController.cpp:767
+#: session/SessionController.cpp:771
 #, kde-format
 msgid "Switch Profile"
 msgstr "Skipta um prófíl"
 
-#: session/SessionController.cpp:796
+#: session/SessionController.cpp:800
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Velja stafa&töflu"
 
-#: session/SessionController.cpp:829
+#: session/SessionController.cpp:833
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Leyfa músarrakningu"
 
-#: session/SessionController.cpp:837
+#: session/SessionController.cpp:841
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Skrifvarið"
 
-#: session/SessionController.cpp:848
+#: session/SessionController.cpp:852
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Grunnstilla eða endurnefna flipa..."
 
-#: session/SessionController.cpp:854
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Alla flipa í núverandi glugga"
 
-#: session/SessionController.cpp:861
+#: session/SessionController.cpp:865
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Velja flipa..."
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:871
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "E&ngan"
 
-#: session/SessionController.cpp:875
+#: session/SessionController.cpp:879
 #, kde-format
 msgid "Copy Input To"
 msgstr "Afrita inntak í"
 
-#: session/SessionController.cpp:882
+#: session/SessionController.cpp:886
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem-upphleðsla..."
 
-#: session/SessionController.cpp:887
+#: session/SessionController.cpp:891
+#, kde-format
+msgid "One-shot monitors"
+msgstr ""
+
+#: session/SessionController.cpp:896
+#, fuzzy, kde-format
+#| msgid "Monitor for &Activity"
+msgid "Monitor for &Prompt"
+msgstr "Fylgj&ast með virkni"
+
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Fylgj&ast með virkni"
 
-#: session/SessionController.cpp:893
+#: session/SessionController.cpp:909
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&Vakta þögn"
 
-#: session/SessionController.cpp:899
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Leita eftir &vinnslu sem er að ljúka"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Stækka letur"
 
-#: session/SessionController.cpp:914
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "Shrink Font"
 msgstr "Minnka letur"
 
-#: session/SessionController.cpp:919
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Endurstilla leturstærð"
 
-#: session/SessionController.cpp:925
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "Send Signal"
 msgstr "Senda merki"
 
-#: session/SessionController.cpp:929
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Setja verk í bið"
 
-#: session/SessionController.cpp:934
+#: session/SessionController.cpp:950
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Halda verki áfram"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:955
 #, kde-format
 msgid "&Hangup"
 msgstr "&Leggja á"
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:960
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Rjúfa verk"
 
-#: session/SessionController.cpp:949
+#: session/SessionController.cpp:965
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Ljúka verki"
 
-#: session/SessionController.cpp:954
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Drepa verk"
 
-#: session/SessionController.cpp:959
+#: session/SessionController.cpp:975
 #, kde-format
 msgid "User Signal &1"
 msgstr "Notandamerki &1"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:980
 #, kde-format
 msgid "User Signal &2"
 msgstr "Notandamerki &2"
 
-#: session/SessionController.cpp:982
+#: session/SessionController.cpp:998
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Búa til nýjan prófíl..."
 
-#: session/SessionController.cpp:984
+#: session/SessionController.cpp:1000
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Breyta núverandi prófíl..."
 
-#: session/SessionController.cpp:1101
+#: session/SessionController.cpp:1117
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2401,7 +2412,7 @@ msgid ""
 msgstr ""
 "Forrit er í gangi í þessari setu. Ertu viss um að þú viljir loka henni?"
 
-#: session/SessionController.cpp:1105
+#: session/SessionController.cpp:1121
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2410,18 +2421,18 @@ msgstr ""
 "Forritið '%1' er í gangi í þessari setu.  Ertu viss um að þú viljir loka "
 "henni?"
 
-#: session/SessionController.cpp:1116 session/SessionController.cpp:1159
+#: session/SessionController.cpp:1132 session/SessionController.cpp:1175
 #, kde-format
 msgid "Confirm Close"
 msgstr "Staðfesta lokun"
 
-#: session/SessionController.cpp:1117
+#: session/SessionController.cpp:1133
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Loka forriti"
 
-#: session/SessionController.cpp:1144
+#: session/SessionController.cpp:1160
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2430,7 +2441,7 @@ msgstr ""
 "Forrit í þessari lotu neitar að deyja. Ertu viss um að þú viljir drepa það "
 "með valdi?"
 
-#: session/SessionController.cpp:1148
+#: session/SessionController.cpp:1164
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2439,23 +2450,28 @@ msgstr ""
 "Forritið '%1' í þessari lotu neitar að deyja. Ertu viss um að þú viljir "
 "drepa það með valdi?"
 
-#: session/SessionController.cpp:1160
+#: session/SessionController.cpp:1176
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Drepa forrit"
 
-#: session/SessionController.cpp:2008
+#: session/SessionController.cpp:1848
+#, kde-format
+msgid "The shell prompt is displayed in session '%1'"
+msgstr ""
+
+#: session/SessionController.cpp:2049
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Opna núverandi möppu með"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2116
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Vista ZModem-niðurhal í..."
 
-#: session/SessionController.cpp:2085
+#: session/SessionController.cpp:2126
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2466,13 +2482,13 @@ msgstr ""
 "forrit fannst í tölvunni.</p><p>Þú vilt kannski setja upp pakkann 'rzsz' eða "
 "'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2095
+#: session/SessionController.cpp:2136
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Núverandi seta er nú þegar með ZModem-skráaflutning í gangi.</p>"
 
-#: session/SessionController.cpp:2105
+#: session/SessionController.cpp:2146
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2481,7 +2497,7 @@ msgstr ""
 "<p>Ekkert viðeigandi ZModem-forrit fannst í tölvunni.</p><p>Þú vilt kannski "
 "setja upp pakkann 'rzsz' eða 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2110
+#: session/SessionController.cpp:2151
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Velja skrár fyrir ZModem-upphleðslu"
