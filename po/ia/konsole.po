@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 00:49+0000\n"
-"PO-Revision-Date: 2023-03-14 23:32+0100\n"
+"POT-Creation-Date: 2023-05-16 00:50+0000\n"
+"PO-Revision-Date: 2023-05-15 18:31+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1871,7 +1871,7 @@ msgstr "Adde nove configurationes de SSH"
 msgid "Cancel Add or Edit"
 msgstr "Cancella Adde o Edita"
 
-#: pluginsystem/PluginManager.cpp:83
+#: pluginsystem/PluginManager.cpp:96
 #, kde-format
 msgid "No plugins available"
 msgstr "Necun Plugins disponibile"
@@ -2307,13 +2307,12 @@ msgstr "&ZModem incargante ..."
 #: session/SessionController.cpp:891
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Monitores de un singule vice (One-Shot)"
 
 #: session/SessionController.cpp:896
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitor pro &Activitate"
+msgstr "Monitor pro facer le &Prompt"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -2456,7 +2455,7 @@ msgstr "Terminaq (Kill) programma"
 #: session/SessionController.cpp:1848
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Le prompt de shell es monstrate in session '%1'"
 
 #: session/SessionController.cpp:2049
 #, kde-format

@@ -21,15 +21,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 00:49+0000\n"
-"PO-Revision-Date: 2023-03-07 11:29+0100\n"
+"POT-Creation-Date: 2023-05-16 00:50+0000\n"
+"PO-Revision-Date: 2023-05-15 12:33+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1889,7 +1889,7 @@ msgstr "Nieuwe SSH-configuratie toevoegen"
 msgid "Cancel Add or Edit"
 msgstr "Annuleer voeg toe of bewerk"
 
-#: pluginsystem/PluginManager.cpp:83
+#: pluginsystem/PluginManager.cpp:96
 #, kde-format
 msgid "No plugins available"
 msgstr "Geen plug-ins beschikbaar"
@@ -2325,13 +2325,12 @@ msgstr "&ZModem-upload..."
 #: session/SessionController.cpp:891
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Eenmalige speurders"
 
 #: session/SessionController.cpp:896
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Speuren naar &activiteit"
+msgstr "Speuren naar &prompt"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -2474,7 +2473,7 @@ msgstr "Programma afbreken"
 #: session/SessionController.cpp:1848
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "De shell-prompt wordt getoond in sessie '%1'"
 
 #: session/SessionController.cpp:2049
 #, kde-format

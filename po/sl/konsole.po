@@ -16,16 +16,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 00:49+0000\n"
-"PO-Revision-Date: 2023-03-19 06:39+0100\n"
+"POT-Creation-Date: 2023-05-16 00:50+0000\n"
+"PO-Revision-Date: 2023-05-15 09:04+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Poedit 3.2.2\n"
 
@@ -1871,7 +1871,7 @@ msgstr "Dodaj novo sestavo SSH"
 msgid "Cancel Add or Edit"
 msgstr "Prekliči dodajanje ali urejanje"
 
-#: pluginsystem/PluginManager.cpp:83
+#: pluginsystem/PluginManager.cpp:96
 #, kde-format
 msgid "No plugins available"
 msgstr "Ni na voljo nobenega vtičnika"
@@ -2306,13 +2306,12 @@ msgstr "Pošiljanje prek &ZModema..."
 #: session/SessionController.cpp:891
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Enkratni nadzorniki"
 
 #: session/SessionController.cpp:896
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Spremljaj dej&avnost"
+msgstr "Spremljaj &Poziv"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -2455,7 +2454,7 @@ msgstr "Ubij program"
 #: session/SessionController.cpp:1848
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Shellov poziv je prikazan v seji '%1'"
 
 #: session/SessionController.cpp:2049
 #, kde-format

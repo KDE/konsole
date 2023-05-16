@@ -92,9 +92,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->10 de febrer de 2023</date>
+>25 d'abril de 2023</date>
 <releaseinfo
->KDE Gear 23.04</releaseinfo>
+>KDE Gear 23.08</releaseinfo>
 
 <abstract
 ><para
@@ -1618,6 +1618,48 @@ Various search improvements
 ></menuchoice
 >.</action
 > Les disposicions predeterminades (2x2, 2x1 i 1x2) es poden carregar a través de la barra d'eines. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Monitors d'una única vegada</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Els monitors següents només notifiquen una única vegada, i després es desactiven. </action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Monitor per a l'indicador</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Alterna la vigilància de la pestanya actual per un indicador de l'intèrpret d'ordres.</action>
+</para
+><para
+>Quan es mostri un indicador d'intèrpret d'ordres, el &konsole; mostrarà una notificació. Aquesta opció només es mostra quan la integració semàntica està habilitada a l'intèrpret d'ordres. </para
 ></listitem>
 </varlistentry>
 

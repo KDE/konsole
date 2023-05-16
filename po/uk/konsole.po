@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 00:49+0000\n"
-"PO-Revision-Date: 2023-03-07 19:58+0200\n"
+"POT-Creation-Date: 2023-05-16 00:50+0000\n"
+"PO-Revision-Date: 2023-05-15 15:06+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1879,7 +1879,7 @@ msgstr "Додати нові налаштування SSH"
 msgid "Cancel Add or Edit"
 msgstr "Скасувати додавання або редагування"
 
-#: pluginsystem/PluginManager.cpp:83
+#: pluginsystem/PluginManager.cpp:96
 #, kde-format
 msgid "No plugins available"
 msgstr "Немає доступних додатків"
@@ -2315,13 +2315,12 @@ msgstr "В&ивантаження ZModem…"
 #: session/SessionController.cpp:891
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Одноразові спостереження"
 
 #: session/SessionController.cpp:896
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Слідкувати за &діяльністю"
+msgstr "Спостерігати за &запитом"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -2460,7 +2459,7 @@ msgstr "Завершити роботу програми"
 #: session/SessionController.cpp:1848
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "У командній оболонці показано запит у сеансі «%1»"
 
 #: session/SessionController.cpp:2049
 #, kde-format

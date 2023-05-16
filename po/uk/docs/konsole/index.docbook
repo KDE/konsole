@@ -106,9 +106,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->10 лютого 2023 року</date>
+>25 квітня 2023 року</date>
 <releaseinfo
->KDE Gear 23.04</releaseinfo>
+>KDE Gear 23.08</releaseinfo>
 
 <abstract
 ><para
@@ -1632,6 +1632,48 @@ Various search improvements
 ></menuchoice
 >.</action
 > Типові компонування (2x2, 2x1 і 1x2) можна завантажити за допомогою панелі інструментів. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Одноразові спостереження</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вказані нижче засоби спостереження надсилатимуть сповіщення лише один раз, а потім вимикаються. </action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+><guimenuitem
+>Спостерігати за запитом</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Вмикає або вимикає спостереження за запитами командної оболонки.</action>
+</para
+><para
+>Коли оболонка надсилатиме запит щодо реакції користувача, &konsole; показуватиме сповіщення. Цей пункт буде показано, лише якщо у командній оболонці буде увімкнено семантичну інтеграцію. </para
 ></listitem>
 </varlistentry>
 

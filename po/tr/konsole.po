@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 00:49+0000\n"
-"PO-Revision-Date: 2023-04-18 05:31+0300\n"
+"POT-Creation-Date: 2023-05-16 00:50+0000\n"
+"PO-Revision-Date: 2023-05-15 21:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1873,7 +1873,7 @@ msgstr "Yeni SSH yapılandırması ekle"
 msgid "Cancel Add or Edit"
 msgstr "Eklemeyi İptal Et veya Düzenle"
 
-#: pluginsystem/PluginManager.cpp:83
+#: pluginsystem/PluginManager.cpp:96
 #, kde-format
 msgid "No plugins available"
 msgstr "Kullanılabilir eklenti yok"
@@ -2309,13 +2309,12 @@ msgstr "&ZModem Dosya Gönderimi..."
 #: session/SessionController.cpp:891
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Tek Kerelik Monitörler"
 
 #: session/SessionController.cpp:896
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Etkinlikleri İ&zle"
+msgstr "&İstem Monitörü"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -2453,7 +2452,7 @@ msgstr "Programı Öldür"
 #: session/SessionController.cpp:1848
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Kabuk istemi, '%1' oturumunda görüntülenir"
 
 #: session/SessionController.cpp:2049
 #, kde-format
