@@ -1303,8 +1303,10 @@ Action=Popup
 
 [Event/PromptHidden]
 Name=Shell prompt triggered a notification in a non-focused session
+Name[bg]=Обвивката е задействала известие в не-фокусирана сесия
 Name[ca]=Un indicador de l'intèrpret d'ordres ha activat una notificació en una sessió sense focus
 Name[ca@valencia]=Un indicatiu de l'intèrpret d'ordres ha activat una notificació en una sessió sense focus
+Name[gl]=Unha petición á persoa usuaria disparou unha notificación nunha sesión desenfocada
 Name[ia]=Prompt de shell discatenava un notification in un session non focalisate
 Name[nl]=Shell-prompt startte een melding in een sessie zonder focus
 Name[pt]=A linha de comandos da consola desencadeou uma notificação numa sessão em segundo plano
@@ -1313,8 +1315,10 @@ Name[tr]=Kabuk istemi, odaklanılmamış bir oturumda bir bildirim tetikledi
 Name[uk]=Запит оболонки ініціював сповіщення у нефокусованому сеансі
 Name[x-test]=xxShell prompt triggered a notification in a non-focused sessionxx
 Comment=Shell prompt triggered a notification in a non-focused session
+Comment[bg]=Обвивката е задействала известие в не-фокусирана сесия
 Comment[ca]=Un indicador de l'intèrpret d'ordres ha activat una notificació en una sessió sense focus
 Comment[ca@valencia]=Un indicatiu de l'intèrpret d'ordres ha activat una notificació en una sessió sense focus
+Comment[gl]=Unha petición á persoa usuaria disparou unha notificación nunha sesión desenfocada.
 Comment[ia]=Prompt de shell discatenava un notification in un session non focalisate
 Comment[nl]=Shell-prompt startte een melding in een sessie zonder focus
 Comment[pt]=A linha de comandos da consola desencadeou uma notificação numa sessão em segundo plano
@@ -1326,8 +1330,10 @@ Action=Popup
 
 [Event/Prompt]
 Name=Shell prompt triggered a notification
+Name[bg]=Обвивката е задействала известие
 Name[ca]=Un indicador de l'intèrpret d'ordres ha activat una notificació
 Name[ca@valencia]=Un indicatiu de l'intèrpret d'ordres ha activat una notificació
+Name[gl]=Unha petición á persoa usuaria disparou unha notificación
 Name[ia]=Prompt de shell discatenava un notification
 Name[nl]=Shell-prompt startte een melding
 Name[pt]=A linha de comandos da consola desencadeou uma notificação
@@ -1336,8 +1342,10 @@ Name[tr]=Kabuk istemi bir bildirim tetikledi
 Name[uk]=Запит оболонки ініціював сповіщення
 Name[x-test]=xxShell prompt triggered a notificationxx
 Comment=Shell prompt triggered a notification
+Comment[bg]=Обвивката е задействала известие
 Comment[ca]=Un indicador de l'intèrpret d'ordres ha activat una notificació
 Comment[ca@valencia]=Un indicatiu de l'intèrpret d'ordres ha activat una notificació
+Comment[gl]=Unha petición á persoa usuaria disparou unha notificación.
 Comment[ia]=Prompt de shell discatenava un notification
 Comment[nl]=Shell-prompt startte een melding
 Comment[pt]=A linha de comandos da consola desencadeou uma notificação
