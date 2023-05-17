@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-16 00:50+0000\n"
-"PO-Revision-Date: 2023-03-08 10:01+0100\n"
+"POT-Creation-Date: 2023-05-17 00:49+0000\n"
+"PO-Revision-Date: 2023-05-16 05:30+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2035,7 +2035,7 @@ msgstr "ჩაჩუმება '%1'-ში (სესია '%2')"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
 #: session/SessionController.cpp:365 session/SessionController.cpp:1852
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1135
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
 msgstr "სესიის ჩვენება"
@@ -2249,10 +2249,9 @@ msgid "One-shot monitors"
 msgstr ""
 
 #: session/SessionController.cpp:896
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "&აქტივობის მონიტორინგი"
+msgstr "&გარსის მონიტორინგი"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -3447,7 +3446,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "ჩანართების განლაგების ჩატვირთვა"
 
-#: Vt102Emulation.cpp:2453
+#: Vt102Emulation.cpp:2464
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

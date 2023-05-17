@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-16 00:50+0000\n"
+"POT-Creation-Date: 2023-05-17 00:49+0000\n"
 "PO-Revision-Date: 2023-04-07 10:09+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -2091,7 +2091,7 @@ msgstr "Silento en '%1' (Seanco '%2')"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
 #: session/SessionController.cpp:365 session/SessionController.cpp:1852
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1135
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
 msgstr "Montri seancon"
@@ -3532,7 +3532,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Ŝargi Tab Aranĝo"
 
-#: Vt102Emulation.cpp:2453
+#: Vt102Emulation.cpp:2464
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-16 00:50+0000\n"
-"PO-Revision-Date: 2023-04-06 22:18+0200\n"
+"POT-Creation-Date: 2023-05-17 00:49+0000\n"
+"PO-Revision-Date: 2023-05-16 06:40+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2110,7 +2110,7 @@ msgstr "Silencio en «%1» (sesión «%2»)"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
 #: session/SessionController.cpp:365 session/SessionController.cpp:1852
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1135
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
 msgstr "Mostrar a sesión"
@@ -2327,13 +2327,12 @@ msgstr "Envío de &ZModem…"
 #: session/SessionController.cpp:891
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Vixiantes dun só disparo"
 
 #: session/SessionController.cpp:896
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitorizar a &actividade"
+msgstr "Vixiar &peticións"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -2472,7 +2471,7 @@ msgstr "Matar o programa"
 #: session/SessionController.cpp:1848
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "A petición da interface móstrase na sesión «%1»"
 
 #: session/SessionController.cpp:2049
 #, kde-format
@@ -3563,7 +3562,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Cargar unha disposición de separadores"
 
-#: Vt102Emulation.cpp:2453
+#: Vt102Emulation.cpp:2464
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
