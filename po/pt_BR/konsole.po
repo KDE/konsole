@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-02 02:54+0000\n"
+"POT-Creation-Date: 2023-05-18 02:34+0000\n"
 "PO-Revision-Date: 2022-12-20 09:46-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -1918,7 +1918,7 @@ msgstr "E&scala de saída"
 msgid "Default profile"
 msgstr "Perfil padrão"
 
-#: profile/ProfileManager.cpp:265
+#: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "Konsole não tem permissão para salvar este perfil em %1"

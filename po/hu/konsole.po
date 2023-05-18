@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-02 02:54+0000\n"
+"POT-Creation-Date: 2023-05-18 02:34+0000\n"
 "PO-Revision-Date: 2022-01-25 10:17+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1945,7 +1945,7 @@ msgstr "Kimenet &méretezése"
 msgid "Default profile"
 msgstr "Alapértelmezett profil"
 
-#: profile/ProfileManager.cpp:265
+#: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "A Konsole-nak nincs jogosultsága a profil mentéséhez ide: %1"

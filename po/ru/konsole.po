@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-02 02:54+0000\n"
+"POT-Creation-Date: 2023-05-18 02:34+0000\n"
 "PO-Revision-Date: 2023-04-17 10:13+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -1920,7 +1920,7 @@ msgstr "&Масштабировать вывод"
 msgid "Default profile"
 msgstr "Профиль по умолчанию"
 
-#: profile/ProfileManager.cpp:265
+#: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "У Konsole нет прав доступа для записи этого профиля в «%1»."

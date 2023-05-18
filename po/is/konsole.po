@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-02 02:54+0000\n"
+"POT-Creation-Date: 2023-05-18 02:34+0000\n"
 "PO-Revision-Date: 2023-02-14 07:47+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -1904,7 +1904,7 @@ msgstr "&Kvarða úttak"
 msgid "Default profile"
 msgstr "Sjálfgefinn prófíll"
 
-#: profile/ProfileManager.cpp:265
+#: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "Konsole hefur ekki heimild til að vista þennan prófíl á %1"

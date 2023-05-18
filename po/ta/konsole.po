@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-02 02:54+0000\n"
+"POT-Creation-Date: 2023-05-18 02:34+0000\n"
 "PO-Revision-Date: 2023-03-12 16:39+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1892,7 +1892,7 @@ msgstr "&வெளியீட்டின் அளவை மாற்று"
 msgid "Default profile"
 msgstr "இயல்பிருப்பு பயன்முறை"
 
-#: profile/ProfileManager.cpp:265
+#: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "%1 என்ற இடத்திற்கு இப்பயன்முறையை சேமிக்க கான்சோலுக்கு அனுமதி இல்லை"
