@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-15 00:49+0000\n"
+"POT-Creation-Date: 2023-05-17 00:49+0000\n"
 "PO-Revision-Date: 2023-03-11 15:05+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -1870,7 +1870,7 @@ msgstr "Legg til nytt SSH-oppsett"
 msgid "Cancel Add or Edit"
 msgstr "Avbryt tillegg/redigering"
 
-#: pluginsystem/PluginManager.cpp:83
+#: pluginsystem/PluginManager.cpp:96
 #, kde-format
 msgid "No plugins available"
 msgstr "Det finst ingen tilgjengelege programtillegg"
@@ -2090,7 +2090,7 @@ msgstr "Stilt i «%1» (økt «%2»)"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
 #: session/SessionController.cpp:365 session/SessionController.cpp:1852
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1135
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
 msgstr "Vis økt"
@@ -3529,7 +3529,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Opna faneutforming"
 
-#: Vt102Emulation.cpp:2453
+#: Vt102Emulation.cpp:2464
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

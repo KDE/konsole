@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-17 00:49+0000\n"
-"PO-Revision-Date: 2023-04-07 10:09+0100\n"
+"PO-Revision-Date: 2023-05-17 11:58+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -99,7 +99,7 @@ msgstr "Retro&rulumo"
 #: ../desktop/sessionui.rc:78
 #, kde-format
 msgid "Session Toolbar"
-msgstr "Sesia Ilobreto"
+msgstr "Seanca Ilobreto"
 
 #: AppColorSchemeChooser.cpp:37
 #, kde-format
@@ -1413,7 +1413,7 @@ msgstr "Kuri"
 #: plugins/QuickCommands/qcwidget.ui:258
 #, kde-format
 msgid "Save"
-msgstr "Savi"
+msgstr "Konservi"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:269
@@ -1757,13 +1757,13 @@ msgstr "La gastiga nomo de la servilo"
 #: plugins/SSHManager/sshwidget.ui:116
 #, kde-format
 msgid "Port"
-msgstr "Haveno"
+msgstr "Pordo"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr "La haveno de la servilo, 22 estas la defaŭlta por ssh-konektoj"
+msgstr "La pordo de la servilo, 22 estas la defaŭlta por ssh-konektoj"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
@@ -2118,7 +2118,7 @@ msgstr "Finita"
 #: session/Session.cpp:1082 session/Session.cpp:1093
 #, kde-format
 msgid "Program '%1' crashed."
-msgstr "Programo '%1' kraŝis."
+msgstr "Programo '%1' paneis."
 
 #: session/Session.cpp:1084
 #, kde-format
@@ -2306,13 +2306,12 @@ msgstr "&ZModema Alŝuto..."
 #: session/SessionController.cpp:891
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Unufojaj monitoroj"
 
 #: session/SessionController.cpp:896
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitoro por &Aktiveco"
+msgstr "Monitoro por Ŝel&invitilo"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -3715,7 +3714,7 @@ msgstr "Tiparo:"
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr "Elektu..."
+msgstr "Elekti..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:171
@@ -5203,7 +5202,7 @@ msgstr "Fenestra Titolo Agordita de Ŝelo: %w"
 #: widgets/TabTitleFormatButton.cpp:52 widgets/TabTitleFormatButton.cpp:60
 #, kde-format
 msgid "Session Number: %#"
-msgstr "Sesia Nombro: % #"
+msgstr "Seanca Nombro: % #"
 
 #: widgets/TabTitleFormatButton.cpp:27 widgets/TabTitleFormatButton.cpp:36
 #: widgets/TabTitleFormatButton.cpp:46 widgets/TabTitleFormatButton.cpp:54
