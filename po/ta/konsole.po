@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-17 00:49+0000\n"
-"PO-Revision-Date: 2023-03-12 16:39+0530\n"
+"PO-Revision-Date: 2023-05-21 15:03+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2293,13 +2293,13 @@ msgstr "&ZModem பதிவேற்றம்..."
 #: session/SessionController.cpp:891
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "ஒருமுறை மட்டும் தூண்டப்படக்கூடிய கண்காணிகள்"
 
 #: session/SessionController.cpp:896
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
-msgstr "&செயல்பாட்டிற்காக கண்காணி"
+msgstr "&உள்ளீடு தேவைப்படுவதற்காக கண்காணி"
 
 #: session/SessionController.cpp:903
 #, kde-format
