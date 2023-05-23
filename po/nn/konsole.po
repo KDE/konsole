@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-02 02:54+0000\n"
+"POT-Creation-Date: 2023-05-18 02:34+0000\n"
 "PO-Revision-Date: 2023-03-11 15:05+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -1901,7 +1901,7 @@ msgstr "&Skaler utdata"
 msgid "Default profile"
 msgstr "Standardprofil"
 
-#: profile/ProfileManager.cpp:265
+#: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "Konsole har ikkje løyve til å lagra profilen til %1"
