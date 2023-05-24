@@ -498,7 +498,7 @@ public Q_SLOTS:
      * Enables monitoring for a shell prompt in the session.
      * This will cause notifySessionState() to be emitted
      * with the NOTIFYACTIVITY state flag when a prompt is shown
-     * (requires semantic shell suport).
+     * (requires semantic shell support).
      */
     Q_SCRIPTABLE void setMonitorPrompt(bool);
 
