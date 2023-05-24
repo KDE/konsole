@@ -62,7 +62,6 @@ void PluginManager::loadAllPlugins()
         auto plugin_version = QString(data.version()).left(5);
         auto release_version = QLatin1String(RELEASE_SERVICE_VERSION).left(5);
         if (plugin_version == release_version) {
-            qWarning() << plugin_version << " == " << release_version;
             return true;
         } else {
             qCWarning(KonsoleDebug) << "Ignoring" << data.name() << "plugin version (" << plugin_version << ") doesn't match release version ("
