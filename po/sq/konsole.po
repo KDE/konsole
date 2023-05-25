@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdebase\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-17 00:49+0000\n"
+"POT-Creation-Date: 2023-05-25 00:49+0000\n"
 "PO-Revision-Date: 2021-03-31 16:13-0400\n"
 "Last-Translator: Agron Selimaj <as9902613@gmail.com>\n"
 "Language-Team: kdeshqip\n"
@@ -1881,7 +1881,7 @@ msgstr ""
 msgid "Cancel Add or Edit"
 msgstr ""
 
-#: pluginsystem/PluginManager.cpp:96
+#: pluginsystem/PluginManager.cpp:95
 #, kde-format
 msgid "No plugins available"
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-17 00:49+0000\n"
+"POT-Creation-Date: 2023-05-25 00:49+0000\n"
 "PO-Revision-Date: 2023-04-22 12:49+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -1865,7 +1865,7 @@ msgstr "Yeni SSH tənzimləməsi əlavə edin"
 msgid "Cancel Add or Edit"
 msgstr "Əlavə və ya Düzəliş etməkdən imtina edin"
 
-#: pluginsystem/PluginManager.cpp:96
+#: pluginsystem/PluginManager.cpp:95
 #, kde-format
 msgid "No plugins available"
 msgstr "Qoşmalar əlçatan deyil"

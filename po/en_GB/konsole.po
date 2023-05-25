@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-17 00:49+0000\n"
+"POT-Creation-Date: 2023-05-25 00:49+0000\n"
 "PO-Revision-Date: 2023-05-21 14:57+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -1856,7 +1856,7 @@ msgstr "Add new SSH Configuration"
 msgid "Cancel Add or Edit"
 msgstr "Cancel Add or Edit"
 
-#: pluginsystem/PluginManager.cpp:96
+#: pluginsystem/PluginManager.cpp:95
 #, kde-format
 msgid "No plugins available"
 msgstr "No plugins available"
