@@ -120,9 +120,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->10/2/2023</date>
+>25/4/2023</date>
 <releaseinfo
->KDE Gear 23.04</releaseinfo>
+>KDE Gear 23.08</releaseinfo>
 
 <abstract
 ><para
@@ -1650,6 +1650,48 @@ Various search improvements
 ></menuchoice
 >.</action
 > Le disposizioni predefinite (2x2, 2x1 e 1x2) possono essere caricare tramite la barra degli strumenti. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+><guimenuitem
+>Monitor istantanei</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>I seguenti controlli notificano solo una volta e vengono quindi disabilitati. </action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualizza</guimenu
+><guimenuitem
+>Controlla il prompt</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Commuta il controllo della scheda attuale per un prompt della shell.</action>
+</para
+><para
+>Quando viene visualizzato un prompt della shell, &konsole; mostrerà una notifica. Questa opzione viene mostrata solo quando l'integrazione semantica è abilitata nella shell. </para
 ></listitem>
 </varlistentry>
 
