@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-17 00:49+0000\n"
+"POT-Creation-Date: 2023-05-25 00:49+0000\n"
 "PO-Revision-Date: 2023-03-11 15:05+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -1870,7 +1870,7 @@ msgstr "Legg til nytt SSH-oppsett"
 msgid "Cancel Add or Edit"
 msgstr "Avbryt tillegg/redigering"
 
-#: pluginsystem/PluginManager.cpp:96
+#: pluginsystem/PluginManager.cpp:95
 #, kde-format
 msgid "No plugins available"
 msgstr "Det finst ingen tilgjengelege programtillegg"
