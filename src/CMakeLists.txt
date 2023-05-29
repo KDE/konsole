@@ -287,6 +287,8 @@ if(QT_MAJOR_VERSION STREQUAL "6")
     target_link_libraries(konsoleprivate
         PUBLIC
         Qt6::Core5Compat
+        PRIVATE
+        KF6::IconWidgets
     )
 endif()
 
