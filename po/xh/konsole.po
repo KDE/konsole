@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-25 00:49+0000\n"
+"POT-Creation-Date: 2023-05-30 00:49+0000\n"
 "PO-Revision-Date: 2002-11-04 09:23SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -100,7 +100,7 @@ msgstr "Sukubonisa ibar yokurola"
 msgid "Session Toolbar"
 msgstr "Intlanganiso"
 
-#: AppColorSchemeChooser.cpp:37
+#: AppColorSchemeChooser.cpp:44
 #, fuzzy, kde-format
 msgid "&Window Color Scheme"
 msgstr "Qala ngemboniselo yabucala yeentlanganiso"
@@ -1324,7 +1324,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 
-#: MainWindow.cpp:945 Part.cpp:299
+#: MainWindow.cpp:945 Part.cpp:307
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgctxt "@title Preferences page name"
@@ -1355,7 +1355,7 @@ msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr ""
 
-#: Part.cpp:302
+#: Part.cpp:310
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -1926,7 +1926,7 @@ msgstr ""
 msgid "&Scale output"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:468
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Default profile"
@@ -2125,7 +2125,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Tshintsha Kwisiqendu 1"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
-#: session/SessionController.cpp:365 session/SessionController.cpp:1852
+#: session/SessionController.cpp:365 session/SessionController.cpp:1865
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
 #| msgid "New Session"
@@ -2303,213 +2303,213 @@ msgstr "Gcina Intlanganiso &Yemboniselo yabucala..."
 msgid "Set &Encoding"
 msgstr ""
 
-#: session/SessionController.cpp:833
+#: session/SessionController.cpp:838
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr ""
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:846
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr ""
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:857
 #, fuzzy, kde-format
 #| msgid "&Terminate Task"
 msgid "&Configure or Rename Tab..."
 msgstr "&Yenza isiphelo Somsebenzi"
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:863
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr ""
 
-#: session/SessionController.cpp:865
+#: session/SessionController.cpp:870
 #, fuzzy, kde-format
 #| msgid "&Terminate Task"
 msgid "&Select Tabs..."
 msgstr "&Yenza isiphelo Somsebenzi"
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:876
 #, fuzzy, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Akukho nanye"
 
-#: session/SessionController.cpp:879
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "Copy Input To"
 msgstr ""
 
-#: session/SessionController.cpp:886
+#: session/SessionController.cpp:895
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr ""
 
-#: session/SessionController.cpp:891
+#: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
 msgstr ""
 
-#: session/SessionController.cpp:896
+#: session/SessionController.cpp:905
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "Umphathi wo &Mdlalo"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Umphathi wo &Mdlalo"
 
-#: session/SessionController.cpp:909
+#: session/SessionController.cpp:918
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Umphathi wo &Kuthula"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:924
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "Umphathi wo &Mdlalo"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:931
 #, fuzzy, kde-format
 msgid "Enlarge Font"
 msgstr "Ubukhulu bamagama Obukhulu"
 
-#: session/SessionController.cpp:930
+#: session/SessionController.cpp:939
 #, fuzzy, kde-format
 msgid "Shrink Font"
 msgstr "Umgca Omncincane"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "Reset Font Size"
 msgstr ""
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:950
 #, fuzzy, kde-format
 #| msgid "&Send Signal"
 msgid "Send Signal"
 msgstr "&Thumela Uphawu"
 
-#: session/SessionController.cpp:945
+#: session/SessionController.cpp:958
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Gxotha Umsebenzi"
 
-#: session/SessionController.cpp:950
+#: session/SessionController.cpp:963
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Qhubeka Nomsebenzi"
 
-#: session/SessionController.cpp:955
+#: session/SessionController.cpp:968
 #, kde-format
 msgid "&Hangup"
 msgstr "&Xhoma"
 
-#: session/SessionController.cpp:960
+#: session/SessionController.cpp:973
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Phazamisa Umsebenzi"
 
-#: session/SessionController.cpp:965
+#: session/SessionController.cpp:978
 #, fuzzy, kde-format
 #| msgid "&Terminate Task"
 msgid "&Terminate Task"
 msgstr "&Yenza isiphelo Somsebenzi"
 
-#: session/SessionController.cpp:970
+#: session/SessionController.cpp:983
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Bulala Umsebenzi"
 
-#: session/SessionController.cpp:975
+#: session/SessionController.cpp:988
 #, kde-format
 msgid "User Signal &1"
 msgstr "Umsebenzisi Wophawu &1"
 
-#: session/SessionController.cpp:980
+#: session/SessionController.cpp:993
 #, kde-format
 msgid "User Signal &2"
 msgstr "Umsebenzisi Wophawu &2"
 
-#: session/SessionController.cpp:998
+#: session/SessionController.cpp:1011
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Create New Profile..."
 msgstr "Gcina Intlanganiso &Yemboniselo yabucala..."
 
-#: session/SessionController.cpp:1000
+#: session/SessionController.cpp:1013
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Edit Current Profile..."
 msgstr "Gcina Intlanganiso &Yemboniselo yabucala..."
 
-#: session/SessionController.cpp:1117
+#: session/SessionController.cpp:1130
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1121
+#: session/SessionController.cpp:1134
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1132 session/SessionController.cpp:1175
+#: session/SessionController.cpp:1145 session/SessionController.cpp:1188
 #, kde-format
 msgid "Confirm Close"
 msgstr ""
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1146
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "&Vala Intlanganiso"
 
-#: session/SessionController.cpp:1160
+#: session/SessionController.cpp:1173
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1177
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1176
+#: session/SessionController.cpp:1189
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1848
+#: session/SessionController.cpp:1861
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2116
+#: session/SessionController.cpp:2129
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr ""
 
-#: session/SessionController.cpp:2126
+#: session/SessionController.cpp:2139
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2517,20 +2517,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2136
+#: session/SessionController.cpp:2149
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2146
+#: session/SessionController.cpp:2159
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2164
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr ""
@@ -4100,57 +4100,57 @@ msgstr ""
 msgid "Override wcwidth"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:62
+#: widgets/EditProfileDialog.cpp:66
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Edit Profile"
 msgstr "Gcina Intlanganiso &Yemboniselo yabucala..."
 
-#: widgets/EditProfileDialog.cpp:89
+#: widgets/EditProfileDialog.cpp:93
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:100
+#: widgets/EditProfileDialog.cpp:104
 #, kde-format
 msgid "Tabs"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:117
+#: widgets/EditProfileDialog.cpp:121
 #, kde-format
 msgid "Appearance"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:133
+#: widgets/EditProfileDialog.cpp:137
 #, fuzzy, kde-format
 #| msgid "Sc&rollbar"
 msgid "Scrolling"
 msgstr "&Ibar yorolelo"
 
-#: widgets/EditProfileDialog.cpp:147
+#: widgets/EditProfileDialog.cpp:151
 #, fuzzy, kde-format
 #| msgid "&Keyboard"
 msgid "Keyboard"
 msgstr "&Ibhodi yezitshixo"
 
-#: widgets/EditProfileDialog.cpp:148
+#: widgets/EditProfileDialog.cpp:152
 #, fuzzy, kde-format
 msgid "Key bindings"
 msgstr "Uqwalaselo Lobungakanani"
 
-#: widgets/EditProfileDialog.cpp:159
+#: widgets/EditProfileDialog.cpp:163
 #, kde-format
 msgid "Mouse"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:175
+#: widgets/EditProfileDialog.cpp:179
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:283
+#: widgets/EditProfileDialog.cpp:287
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4159,13 +4159,13 @@ msgid ""
 "the settings to a new profile."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:300
+#: widgets/EditProfileDialog.cpp:304
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:308
+#: widgets/EditProfileDialog.cpp:312
 #, fuzzy, kde-format
 #| msgid ""
 #| "A file with this name already exists.\n"
@@ -4176,7 +4176,7 @@ msgstr ""
 "Ifayile eneligama sele ikhona\n"
 "Ufuna ukuyibhala ngaphezulu?"
 
-#: widgets/EditProfileDialog.cpp:343
+#: widgets/EditProfileDialog.cpp:347
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Editing profile: %2"
@@ -4184,19 +4184,19 @@ msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Gcina Intlanganiso &Yemboniselo yabucala..."
 msgstr[1] "Gcina Intlanganiso &Yemboniselo yabucala..."
 
-#: widgets/EditProfileDialog.cpp:347
+#: widgets/EditProfileDialog.cpp:351
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Create New Profile"
 msgstr "Gcina Intlanganiso &Yemboniselo yabucala..."
 
-#: widgets/EditProfileDialog.cpp:350
+#: widgets/EditProfileDialog.cpp:354
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Edit Profile \"%1\""
 msgstr "Gcina Intlanganiso &Yemboniselo yabucala..."
 
-#: widgets/EditProfileDialog.cpp:441
+#: widgets/EditProfileDialog.cpp:445
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4206,7 +4206,7 @@ msgid_plural " columns"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:443
+#: widgets/EditProfileDialog.cpp:447
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4216,43 +4216,43 @@ msgid_plural " rows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:453
+#: widgets/EditProfileDialog.cpp:457
 #, fuzzy, kde-format
 msgid "System Bell"
 msgstr "Imibala Yendlela yokwenza"
 
-#: widgets/EditProfileDialog.cpp:453
+#: widgets/EditProfileDialog.cpp:457
 #, fuzzy, kde-format
 msgid "System Notifications"
 msgstr "&Isaziso Sendlela"
 
-#: widgets/EditProfileDialog.cpp:453
+#: widgets/EditProfileDialog.cpp:457
 #, fuzzy, kde-format
 #| msgid "&Visible Bell"
 msgid "Visual Bell"
 msgstr "&Intsimbi Ebonakalayo"
 
-#: widgets/EditProfileDialog.cpp:453
+#: widgets/EditProfileDialog.cpp:457
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:466
 #, fuzzy, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Qala ngemboniselo yabucala yeentlanganiso"
 
-#: widgets/EditProfileDialog.cpp:567
+#: widgets/EditProfileDialog.cpp:571
 #, kde-format
 msgid "Edit Environment"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:568
+#: widgets/EditProfileDialog.cpp:572
 #, kde-format
 msgid "One environment variable per line"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:599
+#: widgets/EditProfileDialog.cpp:603
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4260,32 +4260,32 @@ msgid_plural " seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:698
+#: widgets/EditProfileDialog.cpp:702
 #, kde-format
 msgid "Select Initial Directory"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1243
+#: widgets/EditProfileDialog.cpp:1253
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1432
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1428
+#: widgets/EditProfileDialog.cpp:1438
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1819
+#: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4302,7 +4302,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1832
+#: widgets/EditProfileDialog.cpp:1842
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-25 00:49+0000\n"
+"POT-Creation-Date: 2023-05-30 00:49+0000\n"
 "PO-Revision-Date: 2023-03-08 14:13+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -94,7 +94,7 @@ msgstr "Rolování"
 msgid "Session Toolbar"
 msgstr "Nástrojový panel sezení"
 
-#: AppColorSchemeChooser.cpp:37
+#: AppColorSchemeChooser.cpp:44
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "Barevné sc&héma okna"
@@ -1279,7 +1279,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "V tomto okně je otevřeno %1 terminálů. Opravdu si přejete skončit?"
 
-#: MainWindow.cpp:945 Part.cpp:299
+#: MainWindow.cpp:945 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
@@ -1309,7 +1309,7 @@ msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Náhledy"
 
-#: Part.cpp:302
+#: Part.cpp:310
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -1862,7 +1862,7 @@ msgstr "Tis&kový režim (černý text, žádné pozadí)"
 msgid "&Scale output"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:464
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:468
 #, kde-format
 msgid "Default profile"
 msgstr "Výchozí profil"
@@ -2056,7 +2056,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Ticho v '%1' (sezení '%2')"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
-#: session/SessionController.cpp:365 session/SessionController.cpp:1852
+#: session/SessionController.cpp:365 session/SessionController.cpp:1865
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
@@ -2222,171 +2222,171 @@ msgstr "Přepnout profil"
 msgid "Set &Encoding"
 msgstr "Nastavit &kódování"
 
-#: session/SessionController.cpp:833
+#: session/SessionController.cpp:838
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Povolit sledování myši"
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:846
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Pouze čtení"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:857
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr ""
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:863
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Všechny k&arty v aktuálním okně"
 
-#: session/SessionController.cpp:865
+#: session/SessionController.cpp:870
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "Vybrat ka&rty..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:876
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "Žád&né"
 
-#: session/SessionController.cpp:879
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopírovat vstup do"
 
-#: session/SessionController.cpp:886
+#: session/SessionController.cpp:895
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Odesílání skrze &ZModem..."
 
-#: session/SessionController.cpp:891
+#: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
 msgstr ""
 
-#: session/SessionController.cpp:896
+#: session/SessionController.cpp:905
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "Monitorovat &aktivitu"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Monitorovat &aktivitu"
 
-#: session/SessionController.cpp:909
+#: session/SessionController.cpp:918
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Monitorovat tic&ho"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:924
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Monitorování dokončení procesů"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Zvětšit písmo"
 
-#: session/SessionController.cpp:930
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "Shrink Font"
 msgstr "Zmenšit písmo"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Resetovat velikost písma"
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:950
 #, kde-format
 msgid "Send Signal"
 msgstr "Poslat signál"
 
-#: session/SessionController.cpp:945
+#: session/SessionController.cpp:958
 #, kde-format
 msgid "&Suspend Task"
 msgstr "Poza&stavit úlohu"
 
-#: session/SessionController.cpp:950
+#: session/SessionController.cpp:963
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Pokračovat úlohu"
 
-#: session/SessionController.cpp:955
+#: session/SessionController.cpp:968
 #, kde-format
 msgid "&Hangup"
 msgstr "Z&avěsit"
 
-#: session/SessionController.cpp:960
+#: session/SessionController.cpp:973
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "Přeruš&it úlohu"
 
-#: session/SessionController.cpp:965
+#: session/SessionController.cpp:978
 #, kde-format
 msgid "&Terminate Task"
 msgstr "Přeruši&t úlohu"
 
-#: session/SessionController.cpp:970
+#: session/SessionController.cpp:983
 #, kde-format
 msgid "&Kill Task"
 msgstr "Zabí&t úlohu"
 
-#: session/SessionController.cpp:975
+#: session/SessionController.cpp:988
 #, kde-format
 msgid "User Signal &1"
 msgstr "Uživatelský signál &1"
 
-#: session/SessionController.cpp:980
+#: session/SessionController.cpp:993
 #, kde-format
 msgid "User Signal &2"
 msgstr "Uživatelský signál &2"
 
-#: session/SessionController.cpp:998
+#: session/SessionController.cpp:1011
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Vytvořit nový profil..."
 
-#: session/SessionController.cpp:1000
+#: session/SessionController.cpp:1013
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Upravit současný profil..."
 
-#: session/SessionController.cpp:1117
+#: session/SessionController.cpp:1130
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "V tomto sezení právě běží nějaký program, opravdu si přejete skončit?"
 
-#: session/SessionController.cpp:1121
+#: session/SessionController.cpp:1134
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "V tomto sezení právě běží program '%1', opravdu si přejete skončit?"
 
-#: session/SessionController.cpp:1132 session/SessionController.cpp:1175
+#: session/SessionController.cpp:1145 session/SessionController.cpp:1188
 #, kde-format
 msgid "Confirm Close"
 msgstr "Potvrdit uzavření"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1146
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Zavřít program"
 
-#: session/SessionController.cpp:1160
+#: session/SessionController.cpp:1173
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2395,7 +2395,7 @@ msgstr ""
 "V tomto sezení zůstal viset nějaký program. Opravdu si přejete vynutit jeho "
 "ukončení?"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1177
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2404,28 +2404,28 @@ msgstr ""
 "V tomto sezení zůstal viset program '%1'. Opravdu si přejete vynutit jeho "
 "ukončení?"
 
-#: session/SessionController.cpp:1176
+#: session/SessionController.cpp:1189
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Zabít program"
 
-#: session/SessionController.cpp:1848
+#: session/SessionController.cpp:1861
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2049
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Otevřít současnou složku pomocí"
 
-#: session/SessionController.cpp:2116
+#: session/SessionController.cpp:2129
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Uložit stahování ZModem do ..."
 
-#: session/SessionController.cpp:2126
+#: session/SessionController.cpp:2139
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2436,13 +2436,13 @@ msgstr ""
 "použitelný ZModem software.</p><p>Asi si přejete nainstalovat balíček "
 "'rzsz', nebo 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2136
+#: session/SessionController.cpp:2149
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>V současném sezení již probíhá ZModem přenos.</p>"
 
-#: session/SessionController.cpp:2146
+#: session/SessionController.cpp:2159
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2451,7 +2451,7 @@ msgstr ""
 "<p>V systému  nenalezen použitelný ZModem software.</p><p>Asi si přejete "
 "nainstalovat balíček 'rzsz', nebo 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2164
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Vyberte soubory pro odesílání ZModem"
@@ -4008,54 +4008,54 @@ msgstr "Ignorovat wcwidth problematických znaků"
 msgid "Override wcwidth"
 msgstr "Předefinovat wcwidth"
 
-#: widgets/EditProfileDialog.cpp:62
+#: widgets/EditProfileDialog.cpp:66
 #, kde-format
 msgid "Edit Profile"
 msgstr "Upravit profil"
 
-#: widgets/EditProfileDialog.cpp:89
+#: widgets/EditProfileDialog.cpp:93
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Obecné"
 
-#: widgets/EditProfileDialog.cpp:100
+#: widgets/EditProfileDialog.cpp:104
 #, kde-format
 msgid "Tabs"
 msgstr "Karty"
 
-#: widgets/EditProfileDialog.cpp:117
+#: widgets/EditProfileDialog.cpp:121
 #, kde-format
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: widgets/EditProfileDialog.cpp:133
+#: widgets/EditProfileDialog.cpp:137
 #, kde-format
 msgid "Scrolling"
 msgstr "Rolování"
 
-#: widgets/EditProfileDialog.cpp:147
+#: widgets/EditProfileDialog.cpp:151
 #, kde-format
 msgid "Keyboard"
 msgstr "Klávesnice"
 
-#: widgets/EditProfileDialog.cpp:148
+#: widgets/EditProfileDialog.cpp:152
 #, kde-format
 msgid "Key bindings"
 msgstr "Klávesové zkratky"
 
-#: widgets/EditProfileDialog.cpp:159
+#: widgets/EditProfileDialog.cpp:163
 #, kde-format
 msgid "Mouse"
 msgstr "Myš"
 
-#: widgets/EditProfileDialog.cpp:175
+#: widgets/EditProfileDialog.cpp:179
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Pokročilé"
 
-#: widgets/EditProfileDialog.cpp:283
+#: widgets/EditProfileDialog.cpp:287
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4064,19 +4064,19 @@ msgid ""
 "the settings to a new profile."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:300
+#: widgets/EditProfileDialog.cpp:304
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:308
+#: widgets/EditProfileDialog.cpp:312
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:343
+#: widgets/EditProfileDialog.cpp:347
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4084,17 +4084,17 @@ msgstr[0] "Upravuji profil: %2"
 msgstr[1] "Upravuji %1 profily: %2"
 msgstr[2] "Upravuji %1 profilů: %2"
 
-#: widgets/EditProfileDialog.cpp:347
+#: widgets/EditProfileDialog.cpp:351
 #, kde-format
 msgid "Create New Profile"
 msgstr "Vytvořit nový profil"
 
-#: widgets/EditProfileDialog.cpp:350
+#: widgets/EditProfileDialog.cpp:354
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Upravit profil \"%1\""
 
-#: widgets/EditProfileDialog.cpp:441
+#: widgets/EditProfileDialog.cpp:445
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4105,7 +4105,7 @@ msgstr[0] " sloupec"
 msgstr[1] " sloupce"
 msgstr[2] " sloupců"
 
-#: widgets/EditProfileDialog.cpp:443
+#: widgets/EditProfileDialog.cpp:447
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4116,42 +4116,42 @@ msgstr[0] " řada"
 msgstr[1] " řady"
 msgstr[2] " řad"
 
-#: widgets/EditProfileDialog.cpp:453
+#: widgets/EditProfileDialog.cpp:457
 #, kde-format
 msgid "System Bell"
 msgstr "Systémový zvonek"
 
-#: widgets/EditProfileDialog.cpp:453
+#: widgets/EditProfileDialog.cpp:457
 #, kde-format
 msgid "System Notifications"
 msgstr "Systémová hlášení"
 
-#: widgets/EditProfileDialog.cpp:453
+#: widgets/EditProfileDialog.cpp:457
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizuální zvonek"
 
-#: widgets/EditProfileDialog.cpp:453
+#: widgets/EditProfileDialog.cpp:457
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:466
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Výchozí profil pro nová sezení terminálu v %1"
 
-#: widgets/EditProfileDialog.cpp:567
+#: widgets/EditProfileDialog.cpp:571
 #, kde-format
 msgid "Edit Environment"
 msgstr "Upravit prostředí"
 
-#: widgets/EditProfileDialog.cpp:568
+#: widgets/EditProfileDialog.cpp:572
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Jedna proměnná prostředí na řádek"
 
-#: widgets/EditProfileDialog.cpp:599
+#: widgets/EditProfileDialog.cpp:603
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4160,18 +4160,18 @@ msgstr[0] " sekunda"
 msgstr[1] " sekundy"
 msgstr[2] " sekund"
 
-#: widgets/EditProfileDialog.cpp:698
+#: widgets/EditProfileDialog.cpp:702
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Zvolit počáteční adresář"
 
-#: widgets/EditProfileDialog.cpp:1243
+#: widgets/EditProfileDialog.cpp:1253
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Načítání schématu <resource>%1</resource> selhalo."
 
-#: widgets/EditProfileDialog.cpp:1422
+#: widgets/EditProfileDialog.cpp:1432
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4179,7 +4179,7 @@ msgid ""
 msgstr ""
 "Toto schéma používá průhledné pozadí, což vaše plocha zřejmě nepodporuje"
 
-#: widgets/EditProfileDialog.cpp:1428
+#: widgets/EditProfileDialog.cpp:1438
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4188,7 +4188,7 @@ msgstr ""
 "Konsole byla spuštěna před zapnutím efektů plochy. Pro zobrazení průhledného "
 "pozadí je třeba aplikaci restartovat."
 
-#: widgets/EditProfileDialog.cpp:1819
+#: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4205,7 +4205,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1832
+#: widgets/EditProfileDialog.cpp:1842
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
