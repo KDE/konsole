@@ -21,7 +21,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 "X-Generator: Lokalize 19.08.1\n"
@@ -1309,9 +1309,7 @@ msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
-msgstr[0] ""
-"このウインドウで動作しているプロセスがあります。それでも終了しますか？"
-msgstr[1] "このウィンドウで %1 個のタブを開いています。それでも終了しますか？"
+msgstr[0] "このウィンドウで %1 個のタブを開いています。それでも終了しますか？"
 
 #: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
 #, kde-format
@@ -3281,7 +3279,6 @@ msgstr "サイズ: %1 x %2"
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
-msgstr[1] ""
 
 #: terminalDisplay/TerminalDisplay.cpp:2235
 #, fuzzy, kde-format
@@ -4296,8 +4293,7 @@ msgstr ""
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
-msgstr[0] "プロファイルを編集: %2"
-msgstr[1] "%1 個のプロファイルを編集: %2"
+msgstr[0] "%1 個のプロファイルを編集: %2"
 
 #: widgets/EditProfileDialog.cpp:347
 #, fuzzy, kde-format
@@ -4320,7 +4316,6 @@ msgctxt ""
 msgid " column"
 msgid_plural " columns"
 msgstr[0] "文字数"
-msgstr[1] "文字数"
 
 #: widgets/EditProfileDialog.cpp:443
 #, kde-format
@@ -4330,7 +4325,6 @@ msgctxt ""
 msgid " row"
 msgid_plural " rows"
 msgstr[0] ""
-msgstr[1] ""
 
 #: widgets/EditProfileDialog.cpp:453
 #, kde-format
@@ -4378,7 +4372,6 @@ msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] " 秒"
-msgstr[1] " 秒"
 
 #: widgets/EditProfileDialog.cpp:698
 #, kde-format
@@ -5147,7 +5140,6 @@ msgctxt "@label:textbox Unit of scrollback"
 msgid " line"
 msgid_plural " lines"
 msgstr[0] "行"
-msgstr[1] "行"
 
 #: widgets/HistorySizeWidget.cpp:57
 #, fuzzy, kde-format
