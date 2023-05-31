@@ -2266,6 +2266,7 @@ void Screen::addHistLine()
         if (newHistLines <= oldHistLines) {
             _droppedLines += oldHistLines - newHistLines + 1;
 
+            _currentTerminalDisplay->removeLines(oldHistLines - newHistLines + 1);
             // We removed some lines, we need to verify if we need to remove a URL.
             if (_escapeSequenceUrlExtractor) {
                 _escapeSequenceUrlExtractor->historyLinesRemoved(oldHistLines - newHistLines + 1);
@@ -2326,6 +2327,7 @@ void Screen::setScroll(const HistoryType &t, bool copyPreviousScroll)
         // As 't' can be '_history' pointer, move it to a temporary smart pointer
         // making _history = nullptr
         auto oldHistory = std::move(_history);
+        _currentTerminalDisplay->removeLines(oldHistory->getLines());
         t.scroll(_history);
     }
     _graphicsPlacements.clear();

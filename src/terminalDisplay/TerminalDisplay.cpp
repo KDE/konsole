@@ -2040,6 +2040,13 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent *ev)
     }
 }
 
+void TerminalDisplay::removeLines(int lines)
+{
+    _iPntSel.ry() -= lines;
+    _pntSel.ry() -= lines;
+    _tripleSelBegin.ry() -= lines;
+}
+
 void TerminalDisplay::selectLine(QPoint pos, bool entireLine, bool fromTripleClick)
 {
     _iPntSel = pos;

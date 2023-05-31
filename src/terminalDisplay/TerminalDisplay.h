@@ -441,6 +441,7 @@ public:
     //
     // Clear mouse selection, but not keyboard selection
     void clearMouseSelection();
+    void removeLines(int lines);
 
     void setVisualCursorPosition(int x);
 
