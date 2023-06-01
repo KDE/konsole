@@ -2201,7 +2201,7 @@ msgstr "Dividix la vista superior-inferior"
 #: session/SessionController.cpp:684
 #, kde-format
 msgid "Copy except prompts"
-msgstr "Copia excepte els indicadors"
+msgstr "Copia excepte els indicatius"
 
 #: session/SessionController.cpp:690
 #, kde-format
@@ -5266,7 +5266,7 @@ msgstr "Màquina local: %h"
 #: widgets/TabTitleFormatButton.cpp:29 widgets/TabTitleFormatButton.cpp:38
 #, kde-format
 msgid "User's Bourne prompt sigil: %B"
-msgstr "Secretisme de l'indicador de Bourne de l'usuari: %B"
+msgstr "Secretisme de l'indicatiu de Bourne de l'usuari: %B"
 
 #: widgets/TabTitleFormatButton.cpp:47 widgets/TabTitleFormatButton.cpp:55
 #, kde-format
