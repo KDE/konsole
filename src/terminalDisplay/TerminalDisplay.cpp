@@ -514,11 +514,6 @@ void TerminalDisplay::updateImage()
     auto dirtyMask = new char[columnsToUpdate + 2];
     QRegion dirtyRegion;
 
-    // debugging variable, this records the number of lines that are found to
-    // be 'dirty' ( ie. have changed from the old _image to the new _image ) and
-    // which therefore need to be repainted
-    int dirtyLineCount = 0;
-
     for (y = 0; y < linesToUpdate; ++y) {
         const Character *currentLine = &_image[y * _columns];
         const Character *const newLine = &newimg[y * columns];
@@ -582,8 +577,6 @@ void TerminalDisplay::updateImage()
         // if the characters on the line are different in the old and the new _image
         // then this line must be repainted.
         if (updateLine) {
-            dirtyLineCount++;
-
             // add the area occupied by this line to the region which needs to be
             // repainted
             QRect dirtyRect = QRect(_contentRect.left() + tLx,
