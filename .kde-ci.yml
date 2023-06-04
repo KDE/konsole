@@ -32,7 +32,6 @@ Dependencies:
     'frameworks/kconfig': '@latest-kf6'
     'frameworks/knotifications': '@latest-kf6'
     'frameworks/ki18n': '@latest-kf6'
-    'frameworks/kcalendarcore': '@latest-kf6'
     'frameworks/kcoreaddons': '@latest-kf6'
     'frameworks/kdbusaddons': '@latest-kf6'
     'frameworks/kbookmarks': '@latest-kf6'
