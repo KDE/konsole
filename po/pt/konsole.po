@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-02 00:50+0000\n"
+"POT-Creation-Date: 2023-06-05 00:49+0000\n"
 "PO-Revision-Date: 2023-05-15 10:35+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -3204,64 +3204,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Activar a geração das miniaturas"
 
-#: terminalDisplay/TerminalDisplay.cpp:664
+#: terminalDisplay/TerminalDisplay.cpp:657
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Tamanho: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2250
+#: terminalDisplay/TerminalDisplay.cpp:2243
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Tem a certeza que deseja colar %1 carácter?"
 msgstr[1] "Tem a certeza que deseja colar %1 caracteres?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2244
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirmar a Colagem"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2277
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fim do Texto/Interrupção: Poderá interromper o processo actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2278
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fim da Transmissão: Pode sair do processo actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2279
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Campainha: Tentará emitir um aviso audível"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2280
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2281
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Controlo de Dispositivo Three/XOFF: suspende o resultado"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2282
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substituição/Suspensão: poderá suspender o processo em execução"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2283
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: usado para manipular o estado do terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Separador de Ficheiros/Sair: poderá interromper o processo actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2311
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3270,31 +3270,31 @@ msgstr ""
 "O texto que está a tentar colar contém caracteres de controlo invisíveis; "
 "deseja filtrá-los?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirmar a Colagem"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2315
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Colar &sem os caracteres de controlo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2316
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Co&lar tudo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Cancelar"
 
-#: terminalDisplay/TerminalDisplay.cpp:2563
+#: terminalDisplay/TerminalDisplay.cpp:2556
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3305,17 +3305,17 @@ msgstr ""
 "Software_flow_control\">suspenso</a> ao carregar em Ctrl+S.  Carregue em "
 "<b>Ctrl+Q</b> para continuar.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2618
+#: terminalDisplay/TerminalDisplay.cpp:2611
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Este terminal está apenas para leitura."
 
-#: terminalDisplay/TerminalDisplay.cpp:3013
+#: terminalDisplay/TerminalDisplay.cpp:3006
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Mu&dar a Pasta Para"
 
-#: terminalDisplay/TerminalDisplay.cpp:3046
+#: terminalDisplay/TerminalDisplay.cpp:3039
 #, kde-format
 msgid "&Paste Location"
 msgstr "Co&lar a Localização"
