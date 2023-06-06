@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-05 00:49+0000\n"
-"PO-Revision-Date: 2023-05-16 06:40+0200\n"
+"PO-Revision-Date: 2023-06-05 14:52+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -907,7 +907,7 @@ msgstr "Emulador de terminal"
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr "(c) 1997-2022 O grupo de desenvolvemento de Konsole"
+msgstr "© 1997-2022 O grupo de desenvolvemento de Konsole"
 
 #: main.cpp:352
 #, kde-format
