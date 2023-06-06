@@ -76,8 +76,8 @@ void SSHManagerPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindo
         mainWindow->newTab();
     });
 
-    connect(managerWidget, &SSHManagerTreeWidget::quickAccessShortcutChanged, this, [this](QKeySequence s) {
-        d->showQuickAccess->setShortcut(s);
+    connect(managerWidget, &SSHManagerTreeWidget::quickAccessShortcutChanged, this, [this, mainWindow](QKeySequence s) {
+        mainWindow->actionCollection()->setDefaultShortcut(d->showQuickAccess, s);
 
         QString sequenceText = s.toString();
         QSettings settings;
@@ -94,7 +94,7 @@ QList<QAction *> SSHManagerPlugin::menuBarActions(Konsole::MainWindow *mainWindo
 
     QAction *toggleVisibilityAction = new QAction(i18n("Show SSH Manager"), mainWindow);
     toggleVisibilityAction->setCheckable(true);
-    toggleVisibilityAction->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_F2));
+    mainWindow->actionCollection()->setDefaultShortcut(toggleVisibilityAction, QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_F2));
     connect(toggleVisibilityAction, &QAction::triggered, d->dockForWindow[mainWindow], &QDockWidget::setVisible);
     connect(d->dockForWindow[mainWindow], &QDockWidget::visibilityChanged, toggleVisibilityAction, &QAction::setChecked);
 
@@ -122,7 +122,7 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
     const QString entry = settings.value(QStringLiteral("ssh_shortcut"), defText).toString();
     const QKeySequence shortcutEntry(entry);
 
-    d->showQuickAccess->setShortcut(shortcutEntry);
+    mainWindow->actionCollection()->setDefaultShortcut(d->showQuickAccess, shortcutEntry);
     terminalDisplay->addAction(d->showQuickAccess);
 
     connect(d->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controller] {

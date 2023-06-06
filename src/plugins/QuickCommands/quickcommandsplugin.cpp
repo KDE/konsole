@@ -49,8 +49,8 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
     qcDockWidget->setAllowedAreas(Qt::DockWidgetArea::LeftDockWidgetArea | Qt::DockWidgetArea::RightDockWidgetArea);
 
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, qcDockWidget);
-    connect(qcWidget, &QuickCommandsWidget::quickAccessShortcutChanged, this, [this](QKeySequence s) {
-        priv->showQuickAccess->setShortcut(s);
+    connect(qcWidget, &QuickCommandsWidget::quickAccessShortcutChanged, this, [this, mainWindow](QKeySequence s) {
+        mainWindow->actionCollection()->setDefaultShortcut(priv->showQuickAccess, s);
 
         QString sequenceText = s.toString();
         QSettings settings;
@@ -78,7 +78,7 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
     const QString entry = settings.value(QStringLiteral("shortcut"), defText).toString();
     const QKeySequence shortcutEntry(entry);
 
-    priv->showQuickAccess->setShortcut(shortcutEntry);
+    mainWindow->actionCollection()->setDefaultShortcut(priv->showQuickAccess, shortcutEntry);
 
     controller->view()->addAction(priv->showQuickAccess);
 
@@ -123,7 +123,7 @@ QList<QAction *> QuickCommandsPlugin::menuBarActions(Konsole::MainWindow *mainWi
 {
     QAction *toggleVisibilityAction = new QAction(i18n("Show Quick Commands"), mainWindow);
     toggleVisibilityAction->setCheckable(true);
-    toggleVisibilityAction->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_F1));
+    mainWindow->actionCollection()->setDefaultShortcut(toggleVisibilityAction, QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_F1));
     connect(toggleVisibilityAction, &QAction::triggered, priv->dockForWindow[mainWindow], &QDockWidget::setVisible);
     connect(priv->dockForWindow[mainWindow], &QDockWidget::visibilityChanged, toggleVisibilityAction, &QAction::setChecked);
 
