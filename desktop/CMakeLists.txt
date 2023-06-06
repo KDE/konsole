@@ -7,8 +7,8 @@ install( FILES org.kde.konsole.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR
 install( FILES org.kde.konsole.desktop DESTINATION ${KDE_INSTALL_DATADIR}/kglobalaccel)
 
 if(ECM_VERSION VERSION_GREATER_EQUAL "5.89.0")
-    install(FILES terminalemulator.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPESDIR})
     if(QT_MAJOR_VERSION STREQUAL "5")
+        install(FILES terminalemulator.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPESDIR})
         install(FILES konsolepart.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR})
     endif()
     install(FILES konsole.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})
