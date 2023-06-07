@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-05 00:49+0000\n"
-"PO-Revision-Date: 2023-03-08 14:13+0100\n"
+"PO-Revision-Date: 2023-06-05 12:02+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 "X-Language: cs_CZ\n"
 "X-Source-Language: en_US\n"
 
@@ -1762,7 +1762,7 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:171
 #, kde-format
 msgid "Use ~/.ssh/config for key"
-msgstr ""
+msgstr "Použít pro klíč ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: plugins/SSHManager/sshwidget.ui:178
@@ -2155,12 +2155,12 @@ msgstr ""
 #: session/SessionController.cpp:698
 #, kde-format
 msgid "Copy user input"
-msgstr ""
+msgstr "Kopírovat uživatelský vstup"
 
 #: session/SessionController.cpp:704
 #, kde-format
 msgid "Copy command output"
-msgstr ""
+msgstr "Kopírovat výstup příkazu"
 
 #: session/SessionController.cpp:719
 #, kde-format
@@ -2237,7 +2237,7 @@ msgstr "Pouze čtení"
 #: session/SessionController.cpp:857
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr ""
+msgstr "Nas&tavit nebo přejmenovat kartu..."
 
 #: session/SessionController.cpp:863
 #, kde-format
@@ -2271,10 +2271,9 @@ msgid "One-shot monitors"
 msgstr ""
 
 #: session/SessionController.cpp:905
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitorovat &aktivitu"
+msgstr ""
 
 #: session/SessionController.cpp:912
 #, kde-format
@@ -3281,19 +3280,19 @@ msgstr "Automaticky rozdělit pohled z následující karty"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr ""
+msgstr "Otevřít novou kartu s rozvržením terminálů 2x2"
 
 #: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr ""
+msgstr "Otevřít novou kartu s rozvržením terminálů 2x1"
 
 #: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr ""
+msgstr "Otevřít novou kartu s rozvržením terminálů 1x2"
 
 #: ViewManager.cpp:191
 #, kde-format
@@ -4613,7 +4612,7 @@ msgstr "Podtrhávat názvy souborů"
 #: widgets/EditProfileMousePage.ui:285
 #, kde-format
 msgid "Text Editor Command: "
-msgstr ""
+msgstr "Editor textu:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
@@ -4653,7 +4652,7 @@ msgid ""
 "to be shown as another URL or hidden.<br>Make sure you understand the "
 "implications before turning this on."
 msgstr ""
-"<b>VAROVÁNÍ</b>: Tot má dopad na bezpečnost jelikož umožní zobrazení "
+"<b>VAROVÁNÍ</b>: Toto má dopad na bezpečnost jelikož umožní zobrazení "
 "škodlivých URL jako jiné URL nebo skryté.<br>Před zapnutím se ujistěte, že "
 "rozumíte důsledkům takového rozhodnutí."
 
