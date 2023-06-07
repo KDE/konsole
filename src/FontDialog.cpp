@@ -52,6 +52,8 @@ FontDialog::FontDialog(QWidget *parent, bool emoji, const QFont font)
                            "👆🏻 👆🏼 👆🏽 👆🏾 👆🏿     👨‍❤️‍👨 👨‍❤️‍💋‍👨 👩‍👩‍👧‍👧 👩🏻‍🤝‍👨🏿 👨‍👨‍👧‍👦\n"
                            "🇧🇲 🇨🇭 🇨🇿 🇪🇺 🇬🇱 🇲🇬 🇲🇹 🇸🇿 🇿🇲"));
         /* clang-format on */
+        _showAllFonts->hide();
+        _showAllFontsWarningButton->hide();
     } else {
         _fontChooser->setSampleText(
             QStringLiteral("0OQ 1Il!| 5S 8B rnm :; ,. \"'` ~-= ({[<>]})\n"
