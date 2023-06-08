@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-03 02:40+0000\n"
-"PO-Revision-Date: 2023-04-18 05:31+0300\n"
+"PO-Revision-Date: 2023-06-07 13:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2294,7 +2294,7 @@ msgstr "Sekmeleri &Seç..."
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
-msgstr "&Hiçbiri"
+msgstr "&Yok"
 
 #: session/SessionController.cpp:871
 #, kde-format
@@ -2319,7 +2319,7 @@ msgstr "Sessiz&likleri İzle"
 #: session/SessionController.cpp:895
 #, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "Süreç Sonlandırma için İzleyici"
+msgstr "Süreç Sonlandırma İzleyicisi"
 
 #: session/SessionController.cpp:902
 #, kde-format
@@ -2510,7 +2510,7 @@ msgstr "Ara:"
 #: settings/GeneralSettings.ui:68 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
-msgstr "Menü hızlandırıcılarını etkinleştir"
+msgstr "Menü ivmelendiricilerini etkinleştir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
 #: settings/GeneralSettings.ui:81
@@ -2621,7 +2621,7 @@ msgstr "Aramanın aşağıdan başlayıp başlamayacağını ayarlar"
 #: settings/GeneralSettings.ui:270 settings/konsole.kcfg:78
 #, kde-format
 msgid "Search backwards"
-msgstr "Geri ara"
+msgstr "Geriye doğru ara"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2930,7 +2930,7 @@ msgstr "&Sekme çubuğunda"
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr "&Hiçbirinde"
+msgstr "&Yok"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
@@ -2956,7 +2956,7 @@ msgstr "Ayrı sekme genişliklerini tam pencereye genişlet"
 #: settings/TabBarSettings.ui:232
 #, kde-format
 msgid "Use user-defined stylesheet:"
-msgstr "Kullanıcı tanımlı stil tablosu kullan:"
+msgstr "Kullanıcı tanımlı biçem sayfası kullan:"
 
 #. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_scrollbackUseSpecifiedLocationDirectory)
 #. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
@@ -2970,7 +2970,7 @@ msgstr "text/css"
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
-msgstr "(hiçbiri)"
+msgstr "(yok)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
 #: settings/TabBarSettings.ui:284
@@ -3001,7 +3001,7 @@ msgstr "&Geçerli sekmeden sonra"
 #: settings/TabBarSettings.ui:354
 #, kde-format
 msgid "Close tab on middle-click"
-msgstr "Orta tıklamayla sekmeyi kapat"
+msgstr "Orta tık ile sekmeyi kapat"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
 #: settings/TabBarSettings.ui:377
@@ -4565,7 +4565,7 @@ msgstr "Fare konumundan satırın sonuna kadar"
 #: widgets/EditProfileMousePage.ui:137
 #, kde-format
 msgid "Middle-click pastes:"
-msgstr "Orta tıklama şunu yapıştırır:"
+msgstr "Orta tık şunu yapıştırır:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:147
@@ -5019,7 +5019,7 @@ msgstr "Önceki çıktıyı anımsama"
 #, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "None"
-msgstr "Hiç"
+msgstr "Yok"
 
 #: widgets/IncrementalSearchBar.cpp:54
 #, kde-format
@@ -5132,7 +5132,7 @@ msgstr "Kabuğu Yazdır"
 #, kde-format
 msgctxt "@label:listbox No color selected"
 msgid "None"
-msgstr "Hiçbiri"
+msgstr "Yok"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, remoteTabTitleEdit)
 #: widgets/RenameTabWidget.ui:41
