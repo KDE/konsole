@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Command line access",
         "Description[ar]": "الوصول إلى سطر الأوامر",
+        "Description[az]": "Əmr sətrinə giriş",
         "Description[bg]": "Достъп до команден ред",
         "Description[ca@valencia]": "Accés a la línia d'ordres",
         "Description[ca]": "Accés a la línia d'ordres",
@@ -23,6 +24,7 @@
         "Icon": "utilities-terminal",
         "Name": "Terminal Emulator",
         "Name[ar]": "محاكي الطرفية",
+        "Name[az]": "Terminal emulyatoru",
         "Name[bg]": "Терминален емулатор",
         "Name[ca@valencia]": "Emulador de terminal",
         "Name[ca]": "Emulador de terminal",
