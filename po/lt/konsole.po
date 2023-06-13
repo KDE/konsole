@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 02:40+0000\n"
+"POT-Creation-Date: 2023-06-13 02:44+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -814,7 +814,7 @@ msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "Rodyti visus šriftus"
 
-#: FontDialog.cpp:70
+#: FontDialog.cpp:72
 #, kde-format
 msgctxt "@info:status"
 msgid ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 02:40+0000\n"
+"POT-Creation-Date: 2023-06-13 02:44+0000\n"
 "PO-Revision-Date: 2023-05-14 10:58+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -788,7 +788,7 @@ msgid "Show all fonts"
 msgstr "Mostra tots els tipus de lletra"
 
 # skip-rule: barb-igual
-#: FontDialog.cpp:70
+#: FontDialog.cpp:72
 #, kde-format
 msgctxt "@info:status"
 msgid ""
