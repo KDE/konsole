@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-05 00:49+0000\n"
+"POT-Creation-Date: 2023-06-13 00:51+0000\n"
 "PO-Revision-Date: 2023-03-11 15:05+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -781,7 +781,7 @@ msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "Vis alle skrifter"
 
-#: FontDialog.cpp:70
+#: FontDialog.cpp:72
 #, kde-format
 msgctxt "@info:status"
 msgid ""
