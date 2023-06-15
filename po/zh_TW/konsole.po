@@ -10,20 +10,21 @@
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2006, 2007, 2008, 2009, 2010.
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
 # Chaoting Liu <brli@chakralinux.org>, 2021.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-13 02:44+0000\n"
-"PO-Revision-Date: 2022-12-10 10:31+0800\n"
-"Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.slat.org>\n"
+"PO-Revision-Date: 2023-06-15 05:02+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -59,7 +60,7 @@ msgstr "檢視"
 #: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:60
 #, kde-format
 msgid "Split View"
-msgstr "分離檢視"
+msgstr "分割檢視"
 
 #. i18n: ectx: Menu (settings)
 #: ../desktop/konsoleui.rc:41
@@ -1422,13 +1423,12 @@ msgstr "顯示快速存取"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
-msgstr ""
+msgstr "沒有找到快捷指令。您可以在擴充元件 → 快捷指令裡新增一個"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "快捷指令"
+msgstr "擴充元件 - 快捷指令"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1557,13 +1557,12 @@ msgstr "顯示 SSH 動作的快速存取"
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
-msgstr ""
+msgstr "沒有找到已儲存的 SSH 設定。您可以在擴充元件 → SSH 管理器裡新增一個"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "開啟檔案管理員"
+msgstr "擴充元件 - SSH 管理器"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
@@ -2150,16 +2149,12 @@ msgid "Copy"
 msgstr "複製"
 
 #: session/SessionController.cpp:676
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "左右分割檢視"
 
 #: session/SessionController.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "上下分割檢視"
 
@@ -3240,7 +3235,7 @@ msgstr "貼上位置(&P)"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
-msgstr "分離檢視"
+msgstr "分割檢視"
 
 #: ViewManager.cpp:113
 #, kde-format
@@ -3261,28 +3256,22 @@ msgid "Split View Automatically"
 msgstr "自動分割檢視"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "左右分割檢視"
+msgstr "從下一個分頁左右分割檢視"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "上下分割檢視"
+msgstr "從下一個分頁上下分割檢視"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Automatically"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "自動分割檢視"
+msgstr "從下一個分頁自動分割檢視"
 
 #: ViewManager.cpp:165
 #, kde-format
@@ -3999,17 +3988,15 @@ msgstr "表格字元 BiDi 模式覆寫"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "去除控制字元後貼上(&W)"
+msgstr "忽略易造成問題的字元的 wcwidth"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "覆寫 wcwidth"
 
 #: widgets/EditProfileDialog.cpp:62
 #, kde-format
