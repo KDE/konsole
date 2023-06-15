@@ -92,9 +92,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2023-02-10</date>
+>2023-04-25</date>
 <releaseinfo
->KDE Gear 23.04</releaseinfo>
+>KDE Gear 23.08</releaseinfo>
 
 <abstract
 ><para
@@ -1618,6 +1618,48 @@ Various search improvements
 ></menuchoice
 >.</action
 > De standaard indelingen (2x2, 2x1 en 1x2) kunnen geladen worden via de werkbalk. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Eenmalige speurders</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>De volgende monitoren melden slechts één keer en zijn daarna uitgeschakeld. </action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Monitor voor prompt</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Schakelt het speuren naar een shell-prompt in het huidige tabblad om.</action>
+</para
+><para
+>Wanneer een shell-prompt getoond wordt zal &konsole; een melding tonen. Deze optie wordt alleen getoond wanneer semantische integratie in de shell is ingeschakeld. </para
 ></listitem>
 </varlistentry>
 
