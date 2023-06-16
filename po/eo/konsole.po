@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-13 00:51+0000\n"
-"PO-Revision-Date: 2023-05-25 20:33+0100\n"
+"PO-Revision-Date: 2023-06-15 21:48+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -3790,7 +3790,7 @@ msgstr "Kongruigi la kursoron kun la koloro de la signo kiu estas sub ĝi."
 #: widgets/EditProfileAppearancePage.ui:297
 #, kde-format
 msgid "Match current character"
-msgstr "Kongrui nunan karakteron"
+msgstr "Kongrui nunan signon"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:313
@@ -4016,7 +4016,7 @@ msgstr "Kunigi vortojn de brahmaj skribaj signoj"
 #: widgets/EditProfileAppearancePage.ui:842
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Brahmaj skribaj karakteroj"
+msgstr "Brahmaj skriptosignoj"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
@@ -4028,8 +4028,7 @@ msgstr "Emoji-Tiparo:"
 #: widgets/EditProfileAppearancePage.ui:897
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
-msgstr ""
-"Linioj ĉiam estas LTR, prefere ol determinitaj per unua forta karaktero"
+msgstr "Linioj ĉiam estas LTR, prefere ol determinitaj per unua forta signo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:900
