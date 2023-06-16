@@ -1554,6 +1554,7 @@ void SessionController::searchBarEvent()
         _searchBar->focusLineEdit();
     } else {
         searchHistory(true);
+        searchTextChanged(_searchBar->searchText());
         _isSearchBarEnabled = true;
     }
 }
@@ -1644,11 +1645,12 @@ void SessionController::setFindNextPrevEnabled(bool enabled)
     _findNextAction->setEnabled(enabled);
     _findPreviousAction->setEnabled(enabled);
 }
+
 void SessionController::searchTextChanged(const QString &text)
 {
     Q_ASSERT(view()->screenWindow());
 
-    if (_searchText == text) {
+    if (_searchText == text && _isSearchBarEnabled) {
         return;
     }
 
