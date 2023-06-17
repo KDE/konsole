@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-17 00:52+0000\n"
 "PO-Revision-Date: 2023-05-22 14:00\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2063,7 +2063,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' 中的沉默 (Session '%2')"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
-#: session/SessionController.cpp:365 session/SessionController.cpp:1865
+#: session/SessionController.cpp:365 session/SessionController.cpp:1867
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
@@ -2415,22 +2415,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "杀死程序"
 
-#: session/SessionController.cpp:1861
+#: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2062
+#: session/SessionController.cpp:2064
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "打开当前文件夹方式"
 
-#: session/SessionController.cpp:2129
+#: session/SessionController.cpp:2131
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "保存 ZModem 下载数据到..."
 
-#: session/SessionController.cpp:2139
+#: session/SessionController.cpp:2141
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2440,13 +2440,13 @@ msgstr ""
 "<p>检测到一个 ZModem 文件传输尝试，但是在此系统上找不到合适的 ZModem 软件。</"
 "p><p>您大概需要安装“rzsz”或“lrzsz”软件包。</p>"
 
-#: session/SessionController.cpp:2149
+#: session/SessionController.cpp:2151
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>当前会话已经有一个 ZModem 文件传输在进行中。</p>"
 
-#: session/SessionController.cpp:2159
+#: session/SessionController.cpp:2161
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2455,7 +2455,7 @@ msgstr ""
 "<p>在此系统上找不到合适的 ZModem 软件。</p><p>您大概需要安装“rzsz”或“lrzsz”软"
 "件包。</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2166
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "选择要通过 ZModem 上传的文件"

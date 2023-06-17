@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-17 00:52+0000\n"
 "PO-Revision-Date: 2023-04-22 00:38+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2071,7 +2071,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1'에서 응답 없음(세션 '%2')"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
-#: session/SessionController.cpp:365 session/SessionController.cpp:1865
+#: session/SessionController.cpp:365 session/SessionController.cpp:1867
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
@@ -2431,22 +2431,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "프로그램 죽이기"
 
-#: session/SessionController.cpp:1861
+#: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2062
+#: session/SessionController.cpp:2064
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "다음으로 현재 폴더 열기"
 
-#: session/SessionController.cpp:2129
+#: session/SessionController.cpp:2131
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "다른 이름으로 ZModem 다운로드 저장..."
 
-#: session/SessionController.cpp:2139
+#: session/SessionController.cpp:2141
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2457,13 +2457,13 @@ msgstr ""
 "웨어를 찾을 수 없습니다.</p><p>'rzsz' 또는 'lrzsz' 패키지를 설치해 보십시오."
 "</p>"
 
-#: session/SessionController.cpp:2149
+#: session/SessionController.cpp:2151
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>현재 세션에서 ZModem 파일 전송이 진행 중입니다.</p>"
 
-#: session/SessionController.cpp:2159
+#: session/SessionController.cpp:2161
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2472,7 +2472,7 @@ msgstr ""
 "<p>시스템에서 ZModem 소프트웨어를 찾을 수 없습니다.</p><p>'rzsz' 또는 "
 "'lrzsz' 패키지를 설치해 보십시오.</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2166
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem으로 업로드할 파일 선택"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 00:51+0000\n"
+"POT-Creation-Date: 2023-06-17 00:52+0000\n"
 "PO-Revision-Date: 2023-05-29 22:11+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -2084,7 +2084,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "\"%1\" zamanı susdurun (Sessiya \"%2\")"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
-#: session/SessionController.cpp:365 session/SessionController.cpp:1865
+#: session/SessionController.cpp:365 session/SessionController.cpp:1867
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
@@ -2444,22 +2444,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Proqramı tam dayandırın"
 
-#: session/SessionController.cpp:1861
+#: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Üz qabığı (shell) surğusu \"%1\" sesiyasında göstərilir"
 
-#: session/SessionController.cpp:2062
+#: session/SessionController.cpp:2064
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Cari qovluğu bununla açın:"
 
-#: session/SessionController.cpp:2129
+#: session/SessionController.cpp:2131
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "ZModem ilə alınan faylı burada saxlamaq..."
 
-#: session/SessionController.cpp:2139
+#: session/SessionController.cpp:2141
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2470,14 +2470,14 @@ msgstr ""
 "uyğun ZModem tətbiqi tapılmadı.</p><p>İstəsəniz \"rzsz\" və ya \"lrzsz\" "
 "paketlərini quraşdıra bilərsiniz.</p>"
 
-#: session/SessionController.cpp:2149
+#: session/SessionController.cpp:2151
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Bu sesiyada artıq Zmodem vasitəsi ilə fayl göndərişi əməliyyatı gedir.</p>"
 
-#: session/SessionController.cpp:2159
+#: session/SessionController.cpp:2161
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2486,7 +2486,7 @@ msgstr ""
 "<p>Bu sistemdə uyğun ZModem tətbiqi tapılmadı.</p><p>İstəsəniz \"rzsz\" və "
 "ya \"lrzsz\" paketlərini quraşdıra bilərsiniz.</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2166
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem ilə göndərmək üçün faylları seçin"
