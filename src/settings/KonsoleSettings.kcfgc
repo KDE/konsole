@@ -7,4 +7,5 @@ ItemAccessors=true
 Mutators=true
 GlobalEnums=true
 SetUserTexts=true
-Visibility=Q_DECL_EXPORT
+Visibility=KONSOLEPRIVATE_EXPORT
+IncludeFiles=\"konsoleprivate_export.h\"
