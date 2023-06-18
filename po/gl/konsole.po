@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-17 00:52+0000\n"
-"PO-Revision-Date: 2023-06-05 14:52+0200\n"
+"PO-Revision-Date: 2023-06-17 16:30+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4282,6 +4282,7 @@ msgstr ""
 "Konsole iniciouse antes de se activaren os efectos de escritorio. Precisas "
 "reiniciar Konsole para verlle transparente o fondo."
 
+# skip-rule: PT-2011-dual_edit
 #: widgets/EditProfileDialog.cpp:1829
 #, kde-format
 msgid ""

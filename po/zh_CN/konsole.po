@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-17 00:52+0000\n"
-"PO-Revision-Date: 2023-05-22 14:00\n"
+"PO-Revision-Date: 2023-06-17 04:11\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2278,12 +2278,12 @@ msgstr "&ZModem 上传..."
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "单次显示器"
 
 #: session/SessionController.cpp:905
 #, kde-format
 msgid "Monitor for &Prompt"
-msgstr ""
+msgstr "提示显示的监视器(&P)"
 
 #: session/SessionController.cpp:912
 #, kde-format
@@ -2418,7 +2418,7 @@ msgstr "杀死程序"
 #: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "外壳程序的提示显示在会话“%1”"
 
 #: session/SessionController.cpp:2064
 #, kde-format
