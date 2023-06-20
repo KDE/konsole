@@ -183,7 +183,7 @@ msgstr "Executar nun proceso á parte"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "Mostrar a barra do menú, substituíndo a configuración predeterminada"
+msgstr "Amosar a barra do menú, substituíndo a configuración predeterminada"
 
 #: Application.cpp:67
 #, kde-format
@@ -195,8 +195,7 @@ msgstr "Agochar a barra do menú, substituíndo a configuración predeterminada"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr ""
-"Mostrar a barra de lapelas, substituíndo a configuración predeterminada"
+msgstr "Amosar a barra de lapelas, substituíndo a configuración predeterminada"
 
 #: Application.cpp:69
 #, kde-format
@@ -228,8 +227,8 @@ msgstr "Listar os perfís dispoñíbeis"
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
 msgstr ""
-"Mostrar todos os nomes das propiedades do perfil e o seu tipo (para usar con "
-"-p)"
+"Amosar todos os nomes das propiedades do perfil e o seu tipo (para usar con -"
+"p)"
 
 #: Application.cpp:74
 #, kde-format
@@ -797,7 +796,7 @@ msgstr "Seleccionar o tipo de letra"
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
-msgstr "Mostrar todos os tipos de letra"
+msgstr "Amosar todos os tipos de letra"
 
 #: FontDialog.cpp:72
 #, kde-format
@@ -1449,7 +1448,7 @@ msgstr "Ordes rápidas"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
 msgid "Show Quick Access"
-msgstr "Mostrar o acceso rápido"
+msgstr "Amosar o acceso rápido"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
@@ -1466,7 +1465,7 @@ msgstr "Complementos - Ordes rápidas"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
-msgstr "Mostrar as ordes rápidas"
+msgstr "Amosar as ordes rápidas"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:168
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
@@ -1580,12 +1579,12 @@ msgstr "Xestor de SSH"
 #: plugins/SSHManager/sshmanagerplugin.cpp:95
 #, kde-format
 msgid "Show SSH Manager"
-msgstr "Mostrar o xestor de SSH"
+msgstr "Amosar o xestor de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr "Mostrar o acceso rápido para accións de SSH"
+msgstr "Amosar o acceso rápido para accións de SSH"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
@@ -1726,7 +1725,7 @@ msgstr "Atallo"
 #: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
-msgstr "Mostrar as entradas que non coinciden co filtro"
+msgstr "Amosar as entradas que non coinciden co filtro"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:57
@@ -2113,7 +2112,7 @@ msgstr "Silencio en «%1» (sesión «%2»)"
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
-msgstr "Mostrar a sesión"
+msgstr "Amosar a sesión"
 
 # skip-rule: PT-2010-dual_command
 #: session/Session.cpp:1028
@@ -2126,9 +2125,9 @@ msgid ""
 msgstr ""
 "Acaban de usarse os métodos de D-Bus «sendText» (enviar un texto) e "
 "«runCommand» (executar unha orde). Permitir que estes métodos sexan públicos "
-"supón un posíbel problema de seguranza. É posíbel reconstruír Konsole para "
+"supón un posíbel problema de seguridade. É posíbel reconstruír Konsole para "
 "cambiar os métodos para que só poidan usarse internamente. <p>Este aviso só "
-"se mostrará unha vez para esta instancia de Konsole.</p>"
+"se amosará unha vez para esta instancia de Konsole.</p>"
 
 #: session/Session.cpp:1068
 #, kde-format
@@ -2279,7 +2278,7 @@ msgstr "Cambiar de perfil"
 #: session/SessionController.cpp:800
 #, kde-format
 msgid "Set &Encoding"
-msgstr "Estabelecer a &codificación"
+msgstr "Definir a &codificación"
 
 #: session/SessionController.cpp:838
 #, kde-format
@@ -2471,7 +2470,7 @@ msgstr "Matar o programa"
 #: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr "A petición da interface móstrase na sesión «%1»"
+msgstr "A petición da interface amósase na sesión «%1»"
 
 #: session/SessionController.cpp:2064
 #, kde-format
@@ -2564,7 +2563,7 @@ msgstr "Lembrar o tamaño da xanela"
 #: settings/GeneralSettings.ui:97 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
-msgstr "Mostrar o título da xanela na barra de títulos"
+msgstr "Amosar o título da xanela na barra de títulos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
@@ -2636,7 +2635,7 @@ msgstr "Notificacións:"
 #: settings/GeneralSettings.ui:236
 #, kde-format
 msgid "All dialogs will be shown again"
-msgstr "Volveranse mostrar todos os diálogos"
+msgstr "Volveranse amosar todos os diálogos"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:239
@@ -2649,7 +2648,7 @@ msgstr "Activar todas as mensaxes de «Non volver preguntar»"
 #: settings/GeneralSettings.ui:267 settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether search should start from the bottom"
-msgstr "Estabelece se a busca debe comezar desde o final"
+msgstr "Define se a busca debe comezar desde o final"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
@@ -2663,7 +2662,7 @@ msgstr "Busca cara atrás"
 #, kde-format
 msgid "Show window title set by escape sequence on the titlebar"
 msgstr ""
-"Mostrar o título da xanela definido pola secuencia de escape na barra de "
+"Amosar o título da xanela definido pola secuencia de escape na barra de "
 "títulos"
 
 #. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
@@ -2696,28 +2695,28 @@ msgstr "Anchura da miniatura"
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Sets the width of the thumbnail"
-msgstr "Estabelece a anchura da miniatura"
+msgstr "Define a anchura da miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47 settings/konsole.kcfg:48
 #, kde-format
 msgid "Use Shift to display a thumbnail"
-msgstr "User Maiús para mostrar unha miniatura"
+msgstr "User Maiús para amosar unha miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Alt to display a thumbnail"
-msgstr "Usar Alt para mostrar unha miniatura"
+msgstr "Usar Alt para amosar unha miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
-msgstr "Usar Ctrl para mostrar unha miniatura"
+msgstr "Usar Ctrl para amosar unha miniatura"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/konsole.kcfg:64
@@ -2847,7 +2846,7 @@ msgid ""
 msgstr ""
 "<html><head/><body> <p>As aplicación que usan KonsolePart comparten os "
 "perfís.</p> <p>Non comparten con Konsole nin outras aplicacións: <ul> <li>o "
-"perfil predeterminado</li> <li>mostrar no menú</li> <li>atallos</li> </ul> </"
+"perfil predeterminado</li> <li>amosar no menú</li> <li>atallos</li> </ul> </"
 "p> <p>Pode abrir un <a href=\"https://bugs.kde.org/enter_bug.cgi?"
 "format=guided&product=konsole&component=kpart\">informe do fallo sobre "
 "Konsole</a> se quere para cambiar este comportamento.</body></html>"
@@ -2896,8 +2895,8 @@ msgstr "&Retirar"
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
 msgstr ""
-"Estabelecer o perfil escollido como o predeterminado para as novas sesións "
-"de terminal"
+"Definir o perfil escollido como o predeterminado para as novas sesións de "
+"terminal"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:81
@@ -2916,7 +2915,7 @@ msgstr "Aparencia"
 #: settings/TabBarSettings.ui:50
 #, kde-format
 msgid "Show:"
-msgstr "Mostrar:"
+msgstr "Amosar:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
 #: settings/TabBarSettings.ui:60
@@ -2958,7 +2957,7 @@ msgstr "Bai&xo a zona de terminais"
 #: settings/TabBarSettings.ui:152
 #, kde-format
 msgid "Show Close Tab button:"
-msgstr "Mostrar o botón de pechar o separador:"
+msgstr "Amosar o botón de pechar o separador:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:162
@@ -2991,7 +2990,7 @@ msgstr "Diversos:"
 #: settings/TabBarSettings.ui:218
 #, kde-format
 msgid "Show 'New Tab' button"
-msgstr "Mostrar o botón de «Novo separador»"
+msgstr "Amosar o botón de «Novo separador»"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
 #: settings/TabBarSettings.ui:225
@@ -3060,7 +3059,7 @@ msgstr "Divide"
 #: settings/TabBarSettings.ui:383
 #, kde-format
 msgid "Show Header:"
-msgstr "Mostrar a cabeceira:"
+msgstr "Amosar a cabeceira:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:390
@@ -3575,7 +3574,7 @@ msgstr ""
 #: widgets/EditProfileAdvancedPage.ui:37
 #, kde-format
 msgid "Key combination to show URL hints:"
-msgstr "Combinacións de teclas para mostrar consellos de URL:"
+msgstr "Combinacións de teclas para amosar consellos de URL:"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:69
@@ -3905,15 +3904,15 @@ msgid ""
 "Show terminal size in columns and lines in the center of window after "
 "resizing"
 msgstr ""
-"Mostrar o tamaño do terminal en columnas e liñas no centro da xanela antes "
-"de o redimensionar"
+"Amosar o tamaño do terminal en columnas e liñas no centro da xanela antes de "
+"o redimensionar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:481
 #, kde-format
 msgid "Show hint for terminal size after resizing"
 msgstr ""
-"Mostrar unha indicación do tamaño do terminal despois de o redimensionar"
+"Amosar unha indicación do tamaño do terminal despois de o redimensionar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
 #: widgets/EditProfileAppearancePage.ui:488
@@ -3989,7 +3988,7 @@ msgstr "Escurecer"
 #: widgets/EditProfileAppearancePage.ui:719
 #, kde-format
 msgid "Display Vertical line at column:"
-msgstr "Mostrar unha liña vertical na columna:"
+msgstr "Amosar unha liña vertical na columna:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:764
@@ -4327,7 +4326,7 @@ msgstr "Configuración xeral"
 #: widgets/EditProfileGeneralPage.ui:63
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
-msgstr "Escolla a icona mostrada nos separadores das sesións con este perfil"
+msgstr "Escolla a icona amosada nos separadores das sesións con este perfil"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:81
@@ -4488,7 +4487,7 @@ msgstr "Nunca"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr "Ao mostrar os consellos de URL"
+msgstr "Ao amosar os consellos de URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4772,7 +4771,7 @@ msgid ""
 "to be shown as another URL or hidden.<br>Make sure you understand the "
 "implications before turning this on."
 msgstr ""
-"<b>AVISO</b>: Isto ten implicacións de seguridade, dado que permite mostrar "
+"<b>AVISO</b>: Isto ten implicacións de seguridade, dado que permite amosar "
 "URL maliciosas suplantando outras URL ou agochadas.<br>Asegúrese de que "
 "entende as implicacións antes de activar isto."
 
@@ -4854,14 +4853,14 @@ msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
 msgstr ""
-"Ao colocar o rato sobre unha cor hexadecimal mostrarase nun cadro ao carón "
-"do punteiro do rato"
+"Ao colocar o rato sobre unha cor hexadecimal amosarase nun cadro ao carón do "
+"punteiro do rato"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr "Mostrar as cores ao cubrilas"
+msgstr "Amosar as cores ao cubrilas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
@@ -4926,7 +4925,7 @@ msgstr "Posición da barra de desprazamento:"
 #: widgets/EditProfileScrollingPage.ui:159
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
-msgstr "Mostrar a barra de desprazamento á dereita da xanela da terminal"
+msgstr "Amosar a barra de desprazamento á dereita da xanela da terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:162
@@ -4939,7 +4938,7 @@ msgstr "Parte dereita"
 #: widgets/EditProfileScrollingPage.ui:172
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
-msgstr "Mostrar a barra de desprazamento á esquerda da xanela da terminal"
+msgstr "Amosar a barra de desprazamento á esquerda da xanela da terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:175
@@ -5123,7 +5122,7 @@ msgstr "Atopar a aparición anterior da frase buscada"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
-msgstr "Mostrar o menú de opcións"
+msgstr "Amosar o menú de opcións"
 
 #: widgets/IncrementalSearchBar.cpp:114
 #, kde-format
@@ -5171,7 +5170,7 @@ msgstr "Busca cara atrás"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
-msgstr "Estabelece se a busca debe comezar desde o final"
+msgstr "Define se a busca debe comezar desde o final"
 
 #: widgets/IncrementalSearchBar.cpp:170
 #, kde-format
