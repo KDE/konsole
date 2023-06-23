@@ -29,7 +29,7 @@ https://mail.kde.org/mailman/listinfo/konsole-devel.
 ## Quick Links
 - [KDE Release Schedule](https://community.kde.org/Schedules)
 - [Official Homepage](https://konsole.kde.org)
-- [Builds](https://build.kde.org/job/Applications/job/konsole)
-- [Forums](http://forum.kde.org/viewforum.php?f=227)
+- [Builds](https://invent.kde.org/utilities/konsole/-/pipelines)
+- [Forums](https://discuss.kde.org)
 - [Konsole Bug Reports per Component](https://bugs.kde.org/describecomponents.cgi?product=konsole)
 
