@@ -1481,7 +1481,7 @@ msgstr "Corrixa os avisos antes de intentar executar este script"
 #: plugins/QuickCommands/quickcommandswidget.cpp:213
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "Hai erros no script, seguro que quere executalo?"
+msgstr "Hai erros no guión, seguro que quere executalo?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:214
 #, kde-format
@@ -1527,7 +1527,7 @@ msgstr "A orde non pode estar baleira"
 #: plugins/QuickCommands/quickcommandswidget.cpp:314
 #, kde-format
 msgid "Rename"
-msgstr "Cambiar de nome"
+msgstr "Renomear"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:318
 #, kde-format
@@ -2295,7 +2295,7 @@ msgstr "Só lectura"
 #: session/SessionController.cpp:844
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "&Configurar ou cambiar de nome o separador…"
+msgstr "&Configurar ou renomear o separador…"
 
 #: session/SessionController.cpp:850
 #, kde-format
@@ -5340,7 +5340,7 @@ msgstr "&Desprender o separador"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "&Configurar ou cambiar de nome o separador…"
+msgstr "&Configurar ou renomear o separador…"
 
 #: widgets/ViewContainer.cpp:106
 #, kde-format
