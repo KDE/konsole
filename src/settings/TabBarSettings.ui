@@ -254,9 +254,6 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="filter">
-            <string>text/css</string>
-           </property>
            <property name="placeholderText">
             <string comment="@item:intext Optional file path is empty">(none)</string>
            </property>
