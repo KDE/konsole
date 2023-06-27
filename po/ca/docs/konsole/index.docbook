@@ -844,7 +844,7 @@
 >Obre una pestanya nova amb el perfil predeterminat.</action>
 <note
 ><para
->El primer perfil en el submenú sempre serà «Predeterminat», el qual és el perfil incorporat. Tots els altres perfils es llisten a continuació en ordre alfabètic. El perfil predeterminat especificat per l'usuari estarà en negreta. </para
+>El primer perfil en el submenú sempre serà «Predeterminat», el qual és el perfil integrat. Tots els altres perfils es llisten a continuació en ordre alfabètic. El perfil predeterminat especificat per l'usuari estarà en negreta. </para
 ></note>
 </para
 ></listitem
