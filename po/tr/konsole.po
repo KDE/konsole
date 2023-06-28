@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-17 00:52+0000\n"
-"PO-Revision-Date: 2023-06-07 13:06+0300\n"
+"PO-Revision-Date: 2023-06-27 12:08+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1890,7 +1890,7 @@ msgstr "Çıktı Seçenekleri"
 #: PrintOptions.ui:39 settings/konsole.kcfg:165
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
-msgstr "Yazıcı &dostu kipi (siyah metin, arka plan yok)"
+msgstr "Yazıcı &dostu kip (siyah metin, arka plan yok)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
@@ -2221,7 +2221,7 @@ msgstr "&Tümünü Seç"
 #: session/SessionController.cpp:736
 #, kde-format
 msgid "Select &Mode"
-msgstr "&Kip Seç"
+msgstr "Seçim &Kipi"
 
 #: session/SessionController.cpp:741
 #, kde-format
@@ -2785,25 +2785,25 @@ msgstr "Sekme genişliklerini genişlet"
 #: settings/konsole.kcfg:175
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr "Geri sarma dosyaları için sistem genelindeki dosya konumunu kullan"
+msgstr "Geçmiş dosyaları için sistem genelindeki dosya konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:179
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr "Geri sarma dosyaları için kullanıcı ev tanımlı klasör konumunu kullan"
+msgstr "Geçmiş dosyaları için kullanıcı ev tanımlı klasör konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:183
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr "Geri sarma dosyaları için belirtilen klasör konumunu kullan"
+msgstr "Geçmiş dosyaları için belirtilen klasör konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:187
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr "Geri sarma dosyaları için bu klasörü kullan"
+msgstr "Geçmiş dosyaları için bu klasörü kullan"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
@@ -4972,9 +4972,9 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"Bu seçeneği kullanırken, geri sarma verisi RAM'e kaydedilecektir. Çok büyük "
-"bir değer seçerseniz sisteminizde boş RAM kalmayabilir ve ciddi sorunlara "
-"neden olabilir."
+"Bu seçeneği kullanırken, geçmiş verisi RAM'e kaydedilecektir. Çok büyük bir "
+"değer seçerseniz sisteminizde boş RAM kalmayabilir ve ciddi sorunlara neden "
+"olabilir."
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -4986,11 +4986,11 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"Bu seçenek kullanılırken geçmiş verileri geçici dosyalara şifrelenmemiş "
-"olarak yazılır. Bu geçici dosyalar Konsol normal olarak kapatıldığında "
-"otomatik olarak silinir.<nl/>Geçici dosyaların konumunu seçmek için "
-"<emphasis>Ayarlar → Konsol Uygulamasını Yapılandır → Geçici Dosyalar</"
-"emphasis> bağlantısını izleyin."
+"Bu seçenek kullanılırken geçmiş verisi geçici dosyalara şifrelenmemiş olarak "
+"yazılır. Bu geçici dosyalar Konsol normal olarak kapatıldığında otomatik "
+"olarak silinir.<nl/>Geçici dosyaların konumunu seçmek için <emphasis>Ayarlar "
+"→ Konsol Uygulamasını Yapılandır → Geçici Dosyalar</emphasis> bağlantısını "
+"izleyin."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
