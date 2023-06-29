@@ -1173,3 +1173,5 @@ bool MainWindow::focusNextPrevChild(bool v)
 
     return QMainWindow::focusNextPrevChild(v);
 }
+
+#include "moc_MainWindow.cpp"

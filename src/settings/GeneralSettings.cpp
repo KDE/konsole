@@ -25,3 +25,5 @@ void GeneralSettings::slotEnableAllMessages()
 {
     KMessageBox::enableAllMessages();
 }
+
+#include "moc_GeneralSettings.cpp"

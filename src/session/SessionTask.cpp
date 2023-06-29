@@ -35,3 +35,5 @@ QList<QPointer<Session>> SessionTask::sessions() const
 }
 
 }
+
+#include "moc_SessionTask.cpp"

@@ -392,3 +392,5 @@ Session *SessionManager::idToSession(int id)
     qCDebug(KonsoleDebug) << "Failed to find session for ID" << id;
     return nullptr;
 }
+
+#include "moc_SessionManager.cpp"

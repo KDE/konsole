@@ -5,3 +5,5 @@
 #include "iptyprocess.h"
 
 IPtyProcess::~IPtyProcess() = default;
+
+#include "moc_iptyprocess.cpp"

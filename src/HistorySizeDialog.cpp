@@ -76,3 +76,5 @@ QSize HistorySizeDialog::sizeHint() const
 {
     return {_ui->tempWarningWidget->sizeHint().width(), 0};
 }
+
+#include "moc_HistorySizeDialog.cpp"

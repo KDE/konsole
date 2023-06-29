@@ -237,3 +237,5 @@ void TerminalScrollBar::updatePalette(const QPalette &pal)
 }
 
 } // namespace Konsole
+
+#include "moc_TerminalScrollBar.cpp"

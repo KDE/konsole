@@ -340,3 +340,5 @@ void DBusTest::testWindows()
 }
 
 QTEST_MAIN(DBusTest)
+
+#include "moc_DBusTest.cpp"

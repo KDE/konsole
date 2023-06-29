@@ -130,4 +130,5 @@ QList<QAction *> QuickCommandsPlugin::menuBarActions(Konsole::MainWindow *mainWi
     return {toggleVisibilityAction};
 }
 
+#include "moc_quickcommandsplugin.cpp"
 #include "quickcommandsplugin.moc"

@@ -31,3 +31,5 @@ void PrintOptions::saveSettings()
     configGroup.writeEntry("PrinterFriendly", printerFriendly->isChecked());
     configGroup.writeEntry("ScaleOutput", scaleOutput->isChecked());
 }
+
+#include "moc_PrintOptions.cpp"

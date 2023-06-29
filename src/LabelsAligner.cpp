@@ -111,3 +111,5 @@ int LabelsAligner::getLeftMargin(const QGridLayout *layout)
     }
     return left;
 }
+
+#include "moc_LabelsAligner.cpp"

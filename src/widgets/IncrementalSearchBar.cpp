@@ -291,3 +291,5 @@ void IncrementalSearchBar::setOptions()
     _highlightMatches->setChecked(KonsoleSettings::searchHighlightMatches());
     _reverseSearch->setChecked(KonsoleSettings::searchReverseSearch());
 }
+
+#include "moc_IncrementalSearchBar.cpp"

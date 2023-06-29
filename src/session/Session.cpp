@@ -1997,3 +1997,5 @@ QColor Session::color() const
 {
     return _tabColor;
 }
+
+#include "moc_Session.cpp"

@@ -254,3 +254,5 @@ KParts::Part *TerminalInterfaceTest::createPart()
 }
 
 QTEST_MAIN(TerminalInterfaceTest)
+
+#include "moc_TerminalInterfaceTest.cpp"

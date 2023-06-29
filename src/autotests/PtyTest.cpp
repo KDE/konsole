@@ -94,3 +94,5 @@ void PtyTest::testRunProgram()
 }
 
 QTEST_GUILESS_MAIN(PtyTest)
+
+#include "moc_PtyTest.cpp"

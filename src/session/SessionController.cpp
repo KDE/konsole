@@ -2193,3 +2193,5 @@ void SessionController::setVisible(QString name, bool visible)
 {
     actionCollection()->action(name)->setVisible(visible);
 }
+
+#include "moc_SessionController.cpp"

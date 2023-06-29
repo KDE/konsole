@@ -16,3 +16,5 @@ PartInfoSettings::PartInfoSettings(QWidget *parent)
 }
 
 PartInfoSettings::~PartInfoSettings() = default;
+
+#include "moc_PartInfo.cpp"

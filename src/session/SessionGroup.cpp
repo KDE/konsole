@@ -89,3 +89,5 @@ void SessionGroup::forwardData(const QByteArray &data)
 }
 
 } // namespace konsole
+
+#include "moc_SessionGroup.cpp"

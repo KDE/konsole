@@ -36,3 +36,5 @@ void FilterModel::setInvertFilter(bool invert)
     m_invertFilter = invert;
     invalidateFilter();
 }
+
+#include "moc_filtermodel.cpp"

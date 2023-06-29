@@ -314,3 +314,5 @@ QSize KeyBindingEditor::sizeHint() const
 
     return {};
 }
+
+#include "moc_KeyBindingEditor.cpp"

@@ -206,3 +206,5 @@ int ConfigDialogButtonGroupManager::buttonToEnumValue(const QAbstractButton *but
     _buttonValues[button] = value;
     return value;
 }
+
+#include "moc_ConfigDialogButtonGroupManager.cpp"

@@ -163,3 +163,5 @@ ViewProperties *BookmarkHandler::activeView() const
 {
     return _activeView;
 }
+
+#include "moc_BookmarkHandler.cpp"

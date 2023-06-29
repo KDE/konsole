@@ -13,3 +13,5 @@ ThumbnailsSettings::ThumbnailsSettings(QWidget *aParent)
 {
     setupUi(this);
 }
+
+#include "moc_ThumbnailsSettings.cpp"

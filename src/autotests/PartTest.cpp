@@ -158,3 +158,5 @@ KParts::Part *PartTest::createPart()
 }
 
 QTEST_MAIN(PartTest)
+
+#include "moc_PartTest.cpp"

@@ -106,3 +106,5 @@ std::vector<IKonsolePlugin *> PluginManager::plugins() const
 }
 
 }
+
+#include "moc_PluginManager.cpp"

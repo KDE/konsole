@@ -110,3 +110,5 @@ void Konsole::EscapeSequenceUrlExtractor::toggleUrlInput()
 }
 
 }
+
+#include "moc_EscapeSequenceUrlExtractor.cpp"

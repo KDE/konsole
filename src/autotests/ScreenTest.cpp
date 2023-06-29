@@ -192,3 +192,5 @@ void ScreenTest::testCursorPosition()
 }
 
 QTEST_GUILESS_MAIN(ScreenTest)
+
+#include "moc_ScreenTest.cpp"

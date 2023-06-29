@@ -105,3 +105,5 @@ QColor ViewProperties::color() const
 {
     return _color;
 }
+
+#include "moc_ViewProperties.cpp"

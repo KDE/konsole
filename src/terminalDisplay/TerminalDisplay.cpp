@@ -3286,3 +3286,5 @@ void TerminalDisplay::clearSelection()
     _doubleClickSelectedText.clear();
     _doubleClickSelectedHtml.clear();
 }
+
+#include "moc_TerminalDisplay.cpp"

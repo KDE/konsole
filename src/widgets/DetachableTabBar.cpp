@@ -177,3 +177,5 @@ void DetachableTabBar::paintEvent(QPaintEvent *event)
 }
 
 }
+
+#include "moc_DetachableTabBar.cpp"

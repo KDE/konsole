@@ -327,3 +327,5 @@ void ProfileTest::testInvalidParentProfile()
 }
 
 QTEST_GUILESS_MAIN(ProfileTest)
+
+#include "moc_ProfileTest.cpp"

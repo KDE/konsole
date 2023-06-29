@@ -106,3 +106,5 @@ void ShellCommandTest::testEmptyCommand()
 }
 
 QTEST_GUILESS_MAIN(ShellCommandTest)
+
+#include "moc_ShellCommandTest.cpp"

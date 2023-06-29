@@ -136,3 +136,5 @@ int HistorySizeWidget::preferredLabelHeight()
 
     return _ui->fixedSizeHistoryWrapper->sizeHint().height();
 }
+
+#include "moc_HistorySizeWidget.cpp"

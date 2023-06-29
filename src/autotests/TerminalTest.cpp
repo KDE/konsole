@@ -66,3 +66,5 @@ void TerminalTest::testSize()
 }
 
 QTEST_MAIN(TerminalTest)
+
+#include "moc_TerminalTest.cpp"

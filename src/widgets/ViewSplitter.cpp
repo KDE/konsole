@@ -562,3 +562,5 @@ void Konsole::ViewSplitterHandle::mouseDoubleClickEvent(QMouseEvent *ev)
     mouseReleaseEventCounter = 0;
     QSplitterHandle::mouseDoubleClickEvent(ev);
 }
+
+#include "moc_ViewSplitter.cpp"

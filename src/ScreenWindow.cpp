@@ -351,3 +351,5 @@ void ScreenWindow::notifyOutputChanged()
 
     Q_EMIT outputChanged();
 }
+
+#include "moc_ScreenWindow.cpp"

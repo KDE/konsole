@@ -487,3 +487,5 @@ int Pty::foregroundProcessGroup() const
 }
 
 #endif
+
+#include "moc_Pty.cpp"

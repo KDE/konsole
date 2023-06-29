@@ -549,3 +549,5 @@ void Application::slotActivateRequested(QStringList args, const QString & /*work
 
     newInstance();
 }
+
+#include "moc_Application.cpp"

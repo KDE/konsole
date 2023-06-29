@@ -84,3 +84,5 @@ QColor RenameTabDialog::color() const
 {
     return _ui->renameTabWidget->color();
 }
+
+#include "moc_RenameTabDialog.cpp"

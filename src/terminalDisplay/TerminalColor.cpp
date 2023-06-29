@@ -141,3 +141,5 @@ void TerminalColor::swapFGBGColors()
 }
 
 }
+
+#include "moc_TerminalColor.cpp"

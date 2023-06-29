@@ -187,3 +187,5 @@ void SaveHistoryTask::jobResult(KJob *job)
 }
 
 }
+
+#include "moc_SaveHistoryTask.cpp"

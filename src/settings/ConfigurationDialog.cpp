@@ -141,3 +141,5 @@ void Konsole::ConfigurationDialog::showEvent(QShowEvent *event)
     }
     KPageDialog::showEvent(event);
 }
+
+#include "moc_ConfigurationDialog.cpp"

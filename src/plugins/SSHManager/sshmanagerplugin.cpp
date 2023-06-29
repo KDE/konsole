@@ -225,4 +225,5 @@ void SSHManagerPlugin::requestConnection(QSortFilterProxyModel *filterModel,
     }
 }
 
+#include "moc_sshmanagerplugin.cpp"
 #include "sshmanagerplugin.moc"

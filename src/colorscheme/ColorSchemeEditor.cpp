@@ -424,3 +424,5 @@ void ColorSchemeEditor::enableWallpaperSettings(bool enable)
     _ui->wallpaperScalingType->setEnabled(enable);
     _ui->wallpaperFlipType->setEnabled(enable);
 }
+
+#include "moc_ColorSchemeEditor.cpp"

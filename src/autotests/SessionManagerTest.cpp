@@ -26,3 +26,5 @@ void SessionManagerTest::cleanup()
 }
 
 QTEST_MAIN_CORE(SessionManagerTest)
+
+#include "moc_SessionManagerTest.cpp"

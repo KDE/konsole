@@ -459,3 +459,5 @@ QString Profile::textEditorCmd() const
 
     return editorCmd;
 }
+
+#include "moc_Profile.cpp"

@@ -328,3 +328,5 @@ int ConPtyProcess::processList() const
 {
     return 0;
 }
+
+#include "moc_conptyprocess.cpp"

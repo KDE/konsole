@@ -72,3 +72,5 @@ bool AutoScrollHandler::eventFilter(QObject *watched, QEvent *event)
 
     return false;
 }
+
+#include "moc_AutoScrollHandler.cpp"

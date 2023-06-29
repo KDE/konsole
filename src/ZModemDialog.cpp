@@ -83,3 +83,5 @@ void ZModemDialog::delayedDestruct()
 
     deleteLater();
 }
+
+#include "moc_ZModemDialog.cpp"

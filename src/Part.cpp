@@ -402,3 +402,4 @@ void Part::notificationChanged(Session::Notification notification, bool enabled)
 }
 
 #include "Part.moc"
+#include "moc_Part.cpp"

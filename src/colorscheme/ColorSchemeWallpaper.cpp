@@ -156,3 +156,5 @@ QImage ColorSchemeWallpaper::FlipImage(const QImage image, const ColorSchemeWall
         return image;
     }
 }
+
+#include "moc_ColorSchemeWallpaper.cpp"

@@ -51,6 +51,11 @@
 #include "WindowSystemInfo.h"
 #include "profile/ProfileManager.h"
 
+// Include moc file here before the #define KNSCore KNS3
+// as moc generates the code without knowing about that define
+// TODO KF6-only: move to usual place at end of file
+#include "moc_EditProfileDialog.cpp"
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #define KNSCore KNS3
 #endif

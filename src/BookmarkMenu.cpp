@@ -62,3 +62,5 @@ void BookmarkMenu::maybeAddBookmark()
 
     slotAddBookmark();
 }
+
+#include "moc_BookmarkMenu.cpp"

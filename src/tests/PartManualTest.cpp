@@ -127,3 +127,5 @@ KParts::Part *PartManualTest::createPart()
 }
 
 QTEST_MAIN(PartManualTest)
+
+#include "moc_PartManualTest.cpp"

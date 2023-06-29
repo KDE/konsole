@@ -357,3 +357,5 @@ void FileFilterHotSpot::startDrag()
     drag->setMimeData(mimeData);
     drag->exec(Qt::CopyAction);
 }
+
+#include "moc_FileFilterHotspot.cpp"

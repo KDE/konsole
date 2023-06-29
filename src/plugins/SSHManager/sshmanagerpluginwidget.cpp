@@ -485,3 +485,5 @@ void SSHManagerTreeWidget::showEvent(QShowEvent *)
         d->isSetup = true;
     }
 }
+
+#include "moc_sshmanagerpluginwidget.cpp"

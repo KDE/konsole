@@ -121,3 +121,5 @@ void HotSpotFilterTest::testUrlFilterRegex()
         QCOMPARE(match.capturedView(0), expectedUrl);
     }
 }
+
+#include "moc_HotSpotFilterTest.cpp"

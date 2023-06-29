@@ -125,3 +125,5 @@ void CopyInputDialog::setRowChecked(int row, bool checked)
     QModelIndex index = model->index(row, _model->checkColumn());
     model->setData(index, static_cast<int>(checked ? Qt::Checked : Qt::Unchecked), Qt::CheckStateRole);
 }
+
+#include "moc_CopyInputDialog.cpp"

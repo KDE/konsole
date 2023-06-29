@@ -492,3 +492,9 @@ QKeySequence ProfileManager::shortcut(Profile::Ptr profile) const
 
     return it != _shortcuts.cend() ? it->keySeq : QKeySequence{};
 }
+
+// ProfileTest is sourcing profile/ProfileManager.cpp to accees helper methods
+// automoc though does not support/detect that scenario,
+// so only generates the moc file in the autogen include folder for the normal source build, but not for the test
+// TODO: move internal methods into separate sources and bundle that into the test, or statically export methods
+// #include "moc_ProfileManager.cpp"

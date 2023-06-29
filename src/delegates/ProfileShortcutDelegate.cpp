@@ -113,3 +113,5 @@ void StyledBackgroundPainter::drawBackground(QPainter *painter, const QStyleOpti
 
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
 }
+
+#include "moc_ProfileShortcutDelegate.cpp"

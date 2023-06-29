@@ -3207,3 +3207,5 @@ int Vt102Emulation::getFreeGraphicsImageId()
         i++;
     }
 }
+
+#include "moc_Vt102Emulation.cpp"

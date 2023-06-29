@@ -201,3 +201,5 @@ void ProfileModel::update(QExplicitlySharedDataPointer<Profile> profile)
     // Resort as the profile name could have changed
     populate();
 }
+
+#include "moc_ProfileModel.cpp"

@@ -718,3 +718,5 @@ void TabbedViewContainer::moveToNewTab(TerminalDisplay *display)
     activeViewSplitter()->clearMaximized();
     addView(display);
 }
+
+#include "moc_ViewContainer.cpp"

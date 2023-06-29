@@ -30,3 +30,5 @@ TabBarSettings::TabBarSettings(QWidget *parent)
 }
 
 TabBarSettings::~TabBarSettings() = default;
+
+#include "moc_TabBarSettings.cpp"

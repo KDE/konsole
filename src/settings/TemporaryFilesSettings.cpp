@@ -34,3 +34,5 @@ TemporaryFilesSettings::TemporaryFilesSettings(QWidget *aParent)
 
     kcfg_scrollbackUseSpecifiedLocationDirectory->setMode(KFile::Directory);
 }
+
+#include "moc_TemporaryFilesSettings.cpp"

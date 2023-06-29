@@ -430,3 +430,5 @@ bool SSHManagerModel::getManageProfile()
 {
     return manageProfile;
 }
+
+#include "moc_sshmanagermodel.cpp"

@@ -136,3 +136,5 @@ void QuickCommandsModel::updateItem(QStandardItem *item, const QuickCommandData 
     else
         item->setToolTip(data.tooltip);
 }
+
+#include "moc_quickcommandsmodel.cpp"

@@ -67,3 +67,5 @@ void TerminalBell::setBellMode(Enum::BellModeEnum mode)
 }
 
 }
+
+#include "moc_TerminalBell.cpp"

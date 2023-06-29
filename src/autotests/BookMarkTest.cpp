@@ -72,3 +72,5 @@ void BookMarkTest::testBookMarkURLs()
 */
 
 QTEST_GUILESS_MAIN(BookMarkTest)
+
+#include "moc_BookMarkTest.cpp"

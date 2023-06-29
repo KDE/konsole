@@ -36,3 +36,5 @@ bool SessionDisplayConnection::isValid() const
 }
 
 } // namespace Konsole
+
+#include "moc_SessionDisplayConnection.cpp"

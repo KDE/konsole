@@ -43,3 +43,5 @@ void SessionTest::testEmulation()
 }
 
 QTEST_MAIN(SessionTest)
+
+#include "moc_SessionTest.cpp"

@@ -357,3 +357,5 @@ void QuickCommandsWidget::showEvent(QShowEvent *)
         priv->isSetup = true;
     }
 }
+
+#include "moc_quickcommandswidget.cpp"

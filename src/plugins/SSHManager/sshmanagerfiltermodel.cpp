@@ -34,3 +34,5 @@ void SSHManagerFilterModel::setInvertFilter(bool invert)
     m_invertFilter = invert;
     invalidateFilter();
 }
+
+#include "moc_sshmanagerfiltermodel.cpp"

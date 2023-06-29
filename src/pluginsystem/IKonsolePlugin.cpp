@@ -48,3 +48,5 @@ void IKonsolePlugin::removeMainWindow(Konsole::MainWindow *mainWindow)
 }
 
 }
+
+#include "moc_IKonsolePlugin.cpp"

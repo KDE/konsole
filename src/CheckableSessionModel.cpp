@@ -93,3 +93,5 @@ void CheckableSessionModel::sessionRemoved(Session *session)
     _checkedSessions.remove(session);
     _fixedSessions.remove(session);
 }
+
+#include "moc_CheckableSessionModel.cpp"

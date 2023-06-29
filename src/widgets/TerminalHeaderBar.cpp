@@ -296,3 +296,5 @@ void TerminalHeaderBar::applyVisibilitySettings()
 }
 
 }
+
+#include "moc_TerminalHeaderBar.cpp"

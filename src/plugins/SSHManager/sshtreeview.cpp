@@ -23,3 +23,5 @@ void SshTreeView::mouseReleaseEvent(QMouseEvent *ev)
         Q_EMIT mouseButtonClicked(ev->button(), idxAt);
     }
 }
+
+#include "moc_sshtreeview.cpp"

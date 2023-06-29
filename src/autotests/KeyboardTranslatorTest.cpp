@@ -183,3 +183,5 @@ void KeyboardTranslatorTest::testHexKeys()
 }
 
 QTEST_GUILESS_MAIN(KeyboardTranslatorTest)
+
+#include "moc_KeyboardTranslatorTest.cpp"

@@ -107,3 +107,5 @@ void RenameTabWidget::insertRemoteTabTitleText(const QString &text)
     _ui->remoteTabTitleEdit->insert(text);
     focusRemoteTabTitleText();
 }
+
+#include "moc_RenameTabWidget.cpp"

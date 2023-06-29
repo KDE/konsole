@@ -11,3 +11,5 @@
 #include <cstdint>
 
 QTEST_GUILESS_MAIN(Konsole::CharacterTest)
+
+#include "moc_CharacterTest.cpp"

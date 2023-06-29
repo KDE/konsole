@@ -179,3 +179,5 @@ QList<QAction *> ProfileList::actions()
 
     return actionsList;
 }
+
+#include "moc_ProfileList.cpp"

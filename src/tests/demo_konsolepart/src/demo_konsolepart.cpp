@@ -100,3 +100,5 @@ void demo_konsolepart::quit()
 {
     close();
 }
+
+#include "moc_demo_konsolepart.cpp"

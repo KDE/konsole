@@ -55,3 +55,5 @@ void CompositeWidgetFocusWatcher::registerWidgetAndChildren(QWidget *widget)
         }
     }
 }
+
+#include "moc_CompositeWidgetFocusWatcher.cpp"

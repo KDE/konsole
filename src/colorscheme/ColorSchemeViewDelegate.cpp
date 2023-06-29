@@ -95,3 +95,5 @@ QSize ColorSchemeViewDelegate::sizeHint(const QStyleOptionViewItem &option, cons
     // temporary
     return {width, heightForWidth};
 }
+
+#include "moc_ColorSchemeViewDelegate.cpp"

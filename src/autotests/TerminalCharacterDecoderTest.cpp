@@ -116,3 +116,5 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
 }
 
 QTEST_GUILESS_MAIN(TerminalCharacterDecoderTest)
+
+#include "moc_TerminalCharacterDecoderTest.cpp"

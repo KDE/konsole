@@ -195,3 +195,5 @@ void CharacterColorTest::testColor256()
 }
 
 QTEST_GUILESS_MAIN(CharacterColorTest)
+
+#include "moc_CharacterColorTest.cpp"

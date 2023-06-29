@@ -433,3 +433,5 @@ void Vt102EmulationTest::testTokenFunctions()
 }
 
 QTEST_GUILESS_MAIN(Vt102EmulationTest)
+
+#include "moc_Vt102EmulationTest.cpp"

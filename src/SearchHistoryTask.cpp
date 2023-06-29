@@ -212,3 +212,5 @@ QRegularExpression SearchHistoryTask::regExp() const
 }
 
 }
+
+#include "moc_SearchHistoryTask.cpp"

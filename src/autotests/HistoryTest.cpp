@@ -219,3 +219,5 @@ void HistoryTest::testHistoryTypeChange()
 }
 
 QTEST_MAIN(HistoryTest)
+
+#include "moc_HistoryTest.cpp"

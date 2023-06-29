@@ -98,3 +98,5 @@ void FontDialog::setFont(const QFont &font)
 {
     _fontChooser->setFont(font, !_showAllFonts->isChecked() && !_emoji);
 }
+
+#include "moc_FontDialog.cpp"

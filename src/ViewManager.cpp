@@ -1454,3 +1454,5 @@ void ViewManager::unregisterTerminal(TerminalDisplay *terminal)
     disconnect(terminal, &TerminalDisplay::requestToggleExpansion, nullptr, nullptr);
     disconnect(terminal, &TerminalDisplay::requestMoveToNewTab, nullptr, nullptr);
 }
+
+#include "moc_ViewManager.cpp"

@@ -181,3 +181,5 @@ Profile::Ptr ProfileSettings::currentProfile() const
 
     return selection->selectedIndexes().at(ProfileModel::PROFILE).data(ProfileModel::ProfilePtrRole).value<Profile::Ptr>();
 }
+
+#include "moc_ProfileSettings.cpp"
