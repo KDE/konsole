@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 02:44+0000\n"
+"POT-Creation-Date: 2023-07-01 02:38+0000\n"
 "PO-Revision-Date: 2023-06-15 05:02+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -2898,7 +2898,7 @@ msgstr "無"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:344
+#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:341
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
@@ -2922,106 +2922,99 @@ msgstr "將個別分頁寬度擴展到整個視窗"
 msgid "Use user-defined stylesheet:"
 msgstr "使用使用者自訂的樣式表："
 
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_scrollbackUseSpecifiedLocationDirectory)
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:258 settings/TemporaryFilesSettings.ui:53
-#, kde-format
-msgid "text/css"
-msgstr "text/css"
-
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:261
+#: settings/TabBarSettings.ui:258
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "（無）"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:284
+#: settings/TabBarSettings.ui:281
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "行為"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:298
+#: settings/TabBarSettings.ui:295
 #, kde-format
 msgid "Put new tabs:"
 msgstr "放入新分頁："
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:308
+#: settings/TabBarSettings.ui:305
 #, kde-format
 msgid "At &the end"
 msgstr "放在結尾(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:318
+#: settings/TabBarSettings.ui:315
 #, kde-format
 msgid "After current &tab"
 msgstr "在目前分頁之後(&T)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:354
+#: settings/TabBarSettings.ui:351
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "按中鍵關閉分頁"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:377
+#: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "Splits"
 msgstr "分離檢視"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:383
+#: settings/TabBarSettings.ui:380
 #, kde-format
 msgid "Show Header:"
 msgstr "顯示標頭："
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:390
+#: settings/TabBarSettings.ui:387
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "需要時"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:400
+#: settings/TabBarSettings.ui:397
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "永不(&N)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:426
+#: settings/TabBarSettings.ui:423
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "拖曳感應區大小："
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:436
+#: settings/TabBarSettings.ui:433
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "小"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:446
+#: settings/TabBarSettings.ui:443
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "中"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:453
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "大"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:479
+#: settings/TabBarSettings.ui:476
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -3050,7 +3043,7 @@ msgid "Scrollback file location:"
 msgstr "捲回（顯示歷史）檔案位置："
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
-#: settings/TemporaryFilesSettings.ui:79
+#: settings/TemporaryFilesSettings.ui:76
 #, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"
@@ -5211,6 +5204,9 @@ msgstr "設定或重新命名分頁(&C)…"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "關閉分頁"
+
+#~ msgid "text/css"
+#~ msgstr "text/css"
 
 #, fuzzy
 #~| msgid "Save File"
