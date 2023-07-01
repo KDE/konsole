@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 00:52+0000\n"
+"POT-Creation-Date: 2023-07-01 00:51+0000\n"
 "PO-Revision-Date: 2023-02-09 08:31\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
@@ -2950,7 +2950,7 @@ msgstr "Няма"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:344
+#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:341
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
@@ -2974,106 +2974,99 @@ msgstr "Павялічваць шырыню асобных укладак да �
 msgid "Use user-defined stylesheet:"
 msgstr "Выкарыстоўваць табліцу стыляў, вызначаную карыстальнікам:"
 
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_scrollbackUseSpecifiedLocationDirectory)
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:258 settings/TemporaryFilesSettings.ui:53
-#, kde-format
-msgid "text/css"
-msgstr "тэкст/css"
-
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:261
+#: settings/TabBarSettings.ui:258
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(няма)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:284
+#: settings/TabBarSettings.ui:281
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "Паводзіны"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:298
+#: settings/TabBarSettings.ui:295
 #, kde-format
 msgid "Put new tabs:"
 msgstr "Устаўлянне новых ўкладак:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:308
+#: settings/TabBarSettings.ui:305
 #, kde-format
 msgid "At &the end"
 msgstr "У &канцы"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:318
+#: settings/TabBarSettings.ui:315
 #, kde-format
 msgid "After current &tab"
 msgstr "Пасля &бягучай укладкі"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:354
+#: settings/TabBarSettings.ui:351
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "Закрываць укладку націсканнем сярэдняй кнопкі мышы"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:377
+#: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "Splits"
 msgstr "Падзел"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:383
+#: settings/TabBarSettings.ui:380
 #, kde-format
 msgid "Show Header:"
 msgstr "Паказваць загаловак:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:390
+#: settings/TabBarSettings.ui:387
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "Калі патрэбна"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:400
+#: settings/TabBarSettings.ui:397
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "Ніколі"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:426
+#: settings/TabBarSettings.ui:423
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "Памер ручкі перацягвання:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:436
+#: settings/TabBarSettings.ui:433
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Маленькі"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:446
+#: settings/TabBarSettings.ui:443
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "Сярэдні"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:453
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Вялікі"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:479
+#: settings/TabBarSettings.ui:476
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -3102,7 +3095,7 @@ msgid "Scrollback file location:"
 msgstr "Размяшчэнне файлаў журнала вываду:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
-#: settings/TemporaryFilesSettings.ui:79
+#: settings/TemporaryFilesSettings.ui:76
 #, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"
@@ -5337,6 +5330,9 @@ msgstr "&Наладжванне або змена назвы ўкладкі..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Закрыць укладку"
+
+#~ msgid "text/css"
+#~ msgstr "тэкст/css"
 
 #~ msgctxt "@title:window"
 #~ msgid "Save File"
