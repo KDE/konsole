@@ -207,6 +207,9 @@ public:
     {
         if (rendition.f.extended) {
             return false;
+            // QChar(uint) asserts this.
+        } else if (character > 0xffff) {
+            return false;
         } else {
             return QChar(character).isSpace();
         }
