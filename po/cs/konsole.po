@@ -5204,6 +5204,3 @@ msgstr "Nas&tavit nebo přejmenovat kartu..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Zavřít kartu"
-
-#~ msgid "text/css"
-#~ msgstr "text/css"
