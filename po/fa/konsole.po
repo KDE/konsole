@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.2\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1383,6 +1383,7 @@ msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "شما در این پنجره چند صفحک دارید، آیا مطمئنید که می‌خواهید خارج شوید؟"
+msgstr[1] ""
 
 #: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
 #, kde-format
@@ -3346,6 +3347,7 @@ msgstr "اندازه: %1 x %2‌"
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
+msgstr[1] ""
 
 #: terminalDisplay/TerminalDisplay.cpp:2244
 #, kde-format
@@ -4341,6 +4343,7 @@ msgstr ""
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "ویرایش Profile »%1«"
+msgstr[1] ""
 
 #: widgets/EditProfileDialog.cpp:351
 #, fuzzy, kde-format
@@ -4361,6 +4364,7 @@ msgctxt ""
 msgid " column"
 msgid_plural " columns"
 msgstr[0] ""
+msgstr[1] ""
 
 #: widgets/EditProfileDialog.cpp:447
 #, kde-format
@@ -4370,6 +4374,7 @@ msgctxt ""
 msgid " row"
 msgid_plural " rows"
 msgstr[0] ""
+msgstr[1] ""
 
 #: widgets/EditProfileDialog.cpp:457
 #, kde-format
@@ -4415,6 +4420,7 @@ msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] ""
+msgstr[1] ""
 
 #: widgets/EditProfileDialog.cpp:702
 #, kde-format
@@ -5153,6 +5159,7 @@ msgctxt "@label:textbox Unit of scrollback"
 msgid " line"
 msgid_plural " lines"
 msgstr[0] "خطوط"
+msgstr[1] ""
 
 #: widgets/HistorySizeWidget.cpp:57
 #, kde-format
