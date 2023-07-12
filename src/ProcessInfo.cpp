@@ -419,7 +419,7 @@ private:
             int field = 0;
             int pos = 0;
 
-            while (pos < data.count()) {
+            while (pos < data.length()) {
                 QChar c = data[pos];
 
                 if (c == QLatin1Char('(')) {

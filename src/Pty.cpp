@@ -98,7 +98,7 @@ void Pty::dataReceived()
         return;
     }
 
-    Q_EMIT receivedData(data.constData(), data.count());
+    Q_EMIT receivedData(data.constData(), data.length());
 }
 
 void Pty::setWindowSize(int columns, int lines, int width, int height)

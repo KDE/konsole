@@ -209,7 +209,7 @@ void SSHManagerModel::triggerProfileChange(const QString &sshHost)
 
         // We just loaded the localhost again, after a probable different profile.
         // mark the profile to load as the one we stored previously.
-        else if (m_sessionToProfileName[m_session].count()) {
+        else if (m_sessionToProfileName[m_session].length()) {
             profileToLoad = m_sessionToProfileName[m_session];
             m_sessionToProfileName.remove(m_session);
         }
@@ -409,7 +409,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
     }
 
     // the last possible read
-    if (data.host.count()) {
+    if (data.host.length()) {
         if (!hasHost(data.host)) {
             if (data.name.isEmpty()) {
                 data.name = data.host.trimmed();

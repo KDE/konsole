@@ -31,7 +31,7 @@ QString ShellCommand::fullCommand() const
     for (int i = 0; i < quotedArgs.count(); i++) {
         QString arg = quotedArgs.at(i);
         bool hasSpace = false;
-        for (int j = 0; j < arg.count(); j++) {
+        for (int j = 0; j < arg.length(); j++) {
             if (arg[j].isSpace()) {
                 hasSpace = true;
             }

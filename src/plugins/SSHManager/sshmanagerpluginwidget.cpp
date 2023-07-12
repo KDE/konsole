@@ -403,7 +403,7 @@ std::pair<bool, QString> SSHManagerTreeWidget::checkFields() const
 
     if (ui->useSshConfig->checkState() == Qt::Checked) {
         // If ui->username is not enabled then this was an autopopulated entry and we should not complain
-        if (ui->username->isEnabled() && (ui->sshkey->text().count() || ui->username->text().count())) {
+        if (ui->username->isEnabled() && (ui->sshkey->text().length() || ui->username->text().length())) {
             error = true;
             errorString += li + i18n("If Use Ssh Config is set, do not specify sshkey or username.") + il;
         }

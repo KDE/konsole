@@ -146,10 +146,10 @@ bool KeyboardTranslatorReader::decodeSequence(const QString &text,
     KeyboardTranslator::States tempFlags = flags;
     KeyboardTranslator::States tempFlagMask = flagMask;
 
-    for (int i = 0; i < text.count(); i++) {
+    for (int i = 0; i < text.length(); i++) {
         const QChar &ch = text[i];
         const bool isFirstLetter = (i == 0);
-        const bool isLastLetter = (i == text.count() - 1);
+        const bool isLastLetter = (i == text.length() - 1);
         bool endOfItem = true;
         if (ch.isLetterOrNumber()) {
             endOfItem = false;

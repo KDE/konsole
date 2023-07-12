@@ -83,7 +83,7 @@ QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards, Qt::Keyb
 {
     QByteArray result(text(expandWildCards, keyboardModifiers));
 
-    for (int i = 0; i < result.count(); i++) {
+    for (int i = 0; i < result.length(); i++) {
         const char ch = result[i];
         char replacement = 0;
 
@@ -130,7 +130,7 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray &text) const
 {
     QByteArray result(text);
 
-    for (int i = 0; i < result.count() - 1; i++) {
+    for (int i = 0; i < result.length() - 1; i++) {
         auto ch = result[i];
         if (ch == '\\') {
             char replacement[2] = {0, 0};
@@ -162,10 +162,10 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray &text) const
                 // with the corresponding character value
                 char hexDigits[3] = {0};
 
-                if ((i < result.count() - 2) && (isxdigit(result[i + 2]) != 0)) {
+                if ((i < result.length() - 2) && (isxdigit(result[i + 2]) != 0)) {
                     hexDigits[0] = result[i + 2];
                 }
-                if ((i < result.count() - 3) && (isxdigit(result[i + 3]) != 0)) {
+                if ((i < result.length() - 3) && (isxdigit(result[i + 3]) != 0)) {
                     hexDigits[1] = result[i + 3];
                 }
 
