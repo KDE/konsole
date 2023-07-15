@@ -2759,7 +2759,7 @@ bool Vt102Emulation::getMode(int m)
 char Vt102Emulation::eraseChar() const
 {
     KeyboardTranslator::Entry entry = _keyTranslator->findEntry(Qt::Key_Backspace, Qt::NoModifier, KeyboardTranslator::NoState);
-    if (entry.text().length() > 0) {
+    if (!entry.text().isEmpty()) {
         return entry.text().at(0);
     } else {
         return '\b';
