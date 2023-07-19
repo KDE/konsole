@@ -155,8 +155,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset theme="folder-open">
-            <normaloff>.</normaloff>.</iconset>
+           <iconset theme="folder-open"/>
           </property>
          </widget>
         </item>
@@ -275,8 +274,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="list-add">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="list-add"/>
        </property>
       </widget>
      </item>
@@ -289,8 +287,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="edit-delete">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="edit-delete"/>
        </property>
       </widget>
      </item>

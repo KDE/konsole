@@ -236,8 +236,7 @@
         <string>Run</string>
        </property>
        <property name="icon">
-        <iconset theme="system-run">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="system-run"/>
        </property>
       </widget>
      </item>
@@ -247,8 +246,7 @@
         <string>Add</string>
        </property>
        <property name="icon">
-        <iconset theme="list-add">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="list-add"/>
        </property>
       </widget>
      </item>
@@ -258,8 +256,7 @@
         <string>Save</string>
        </property>
        <property name="icon">
-        <iconset theme="document-save">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="document-save"/>
        </property>
       </widget>
      </item>
@@ -269,8 +266,7 @@
         <string>Update</string>
        </property>
        <property name="icon">
-        <iconset theme="view-refresh">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="view-refresh"/>
        </property>
       </widget>
      </item>
@@ -280,8 +276,7 @@
         <string>Cancel</string>
        </property>
        <property name="icon">
-        <iconset theme="dialog-cancel">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="dialog-cancel"/>
        </property>
       </widget>
      </item>

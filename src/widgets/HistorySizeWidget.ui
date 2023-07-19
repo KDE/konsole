@@ -83,8 +83,7 @@
           <item>
            <widget class="QToolButton" name="fixedSizeHistoryWarningButton">
             <property name="icon">
-             <iconset theme="emblem-warning">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="emblem-warning"/>
             </property>
             <property name="autoRaise">
              <bool>true</bool>
@@ -142,8 +141,7 @@
           <item alignment="Qt::AlignVCenter">
            <widget class="QToolButton" name="unlimitedHistoryWarningButton">
             <property name="icon">
-             <iconset theme="emblem-warning">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="emblem-warning"/>
             </property>
             <property name="autoRaise">
              <bool>true</bool>
