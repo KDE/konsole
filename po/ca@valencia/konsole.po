@@ -5366,6 +5366,3 @@ msgstr "&Configura o canvia el nom de la pestanya..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Tanca la pestanya"
-
-#~ msgid "text/css"
-#~ msgstr "text/css"
