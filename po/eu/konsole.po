@@ -13,15 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-04-11 00:23+0200\n"
+"POT-Creation-Date: 2023-07-21 00:53+0000\n"
+"PO-Revision-Date: 2023-07-20 08:58+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -47,7 +47,7 @@ msgstr "Fitxategia"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:303
+#: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
 msgstr "Editatu"
@@ -845,8 +845,8 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
-#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:313
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
 msgstr "Gehitu"
@@ -1388,7 +1388,7 @@ msgstr "Taldea"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:214
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
 #, kde-format
 msgid "Default"
 msgstr "Lehenetsia"
@@ -1413,19 +1413,19 @@ msgid "Run"
 msgstr "Ibili"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
-#: plugins/QuickCommands/qcwidget.ui:258
+#: plugins/QuickCommands/qcwidget.ui:256
 #, kde-format
 msgid "Save"
 msgstr "Gorde"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
-#: plugins/QuickCommands/qcwidget.ui:269
+#: plugins/QuickCommands/qcwidget.ui:266
 #, kde-format
 msgid "Update"
 msgstr "Eguneratu"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:323
+#: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel"
 msgstr "Utzi"
@@ -1789,7 +1789,7 @@ msgid "The private key"
 msgstr "Gako pribatua"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:168
+#: plugins/SSHManager/sshwidget.ui:167
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1799,25 +1799,25 @@ msgstr ""
 "config» barruko konfigurazioa baizik"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:171
+#: plugins/SSHManager/sshwidget.ui:170
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "Erabili «~/.ssh/config» gako gisa"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:178
+#: plugins/SSHManager/sshwidget.ui:177
 #, kde-format
 msgid "Username"
 msgstr "Erabiltzaile-izena"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:185
+#: plugins/SSHManager/sshwidget.ui:184
 #, kde-format
 msgid "The username for the connection"
 msgstr "Konexiorako erabiltzaile-izena"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:188
+#: plugins/SSHManager/sshwidget.ui:187
 #, kde-format
 msgid "Your username"
 msgstr ""
@@ -1825,56 +1825,56 @@ msgstr ""
 "Salvador Azurmendi"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:195
+#: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "Folder"
 msgstr "Karpeta"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:208
+#: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
 "Antolakuntza helburuetarako, sarrera hau karpeta honen barruan egongo da."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:221
+#: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "Profile"
 msgstr "Profila"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:234
+#: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "ssh saioa hasten denean aktibo egon behar duen profila"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:272
+#: plugins/SSHManager/sshwidget.ui:271
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "Gehitu SSH sarrera berri bat"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:286
+#: plugins/SSHManager/sshwidget.ui:284
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "Ezabatu hautatutako SSH sarrera"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:300
+#: plugins/SSHManager/sshwidget.ui:297
 #, kde-format
 msgid "Edit selected entry"
 msgstr "Editatu hautatutako sarrera"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:310
+#: plugins/SSHManager/sshwidget.ui:307
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "Gehitu SSH konfigurazio berria"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:320
+#: plugins/SSHManager/sshwidget.ui:317
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "Utzi Gehitzea edo Editatzea"
@@ -2319,13 +2319,12 @@ msgstr "&ZModem igoera..."
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Erabilera bakarreko begiraleak"
 
 #: session/SessionController.cpp:905
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Gainbegiratu &jarduerak"
+msgstr "Gainbegiratu &gonbita"
 
 #: session/SessionController.cpp:912
 #, kde-format
@@ -2464,7 +2463,7 @@ msgstr "Akabatu programa"
 #: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Oskoleko gonbita '%1' saioan azaltzen da"
 
 #: session/SessionController.cpp:2064
 #, kde-format
@@ -5029,26 +5028,26 @@ msgid "Number of lines of output to remember"
 msgstr "Irteeraren lerro kopurua gogoratzeko"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
-#: widgets/HistorySizeWidget.ui:135
+#: widgets/HistorySizeWidget.ui:134
 #, kde-format
 msgid "Remember all output produced by the terminal"
 msgstr "Gogoratu terminalak sortutako irteera guztiak"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
-#: widgets/HistorySizeWidget.ui:138
+#: widgets/HistorySizeWidget.ui:137
 #, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "Unlimited"
 msgstr "Mugagabea"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
-#: widgets/HistorySizeWidget.ui:174
+#: widgets/HistorySizeWidget.ui:172
 #, kde-format
 msgid "Do not remember previous output"
 msgstr "Ez gogoratu aurreko irteera"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
-#: widgets/HistorySizeWidget.ui:177
+#: widgets/HistorySizeWidget.ui:175
 #, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "None"

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-01 00:51+0000\n"
+"POT-Creation-Date: 2023-07-21 00:53+0000\n"
 "PO-Revision-Date: 2023-01-07 21:31+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -47,7 +47,7 @@ msgstr "Αρχείο"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:303
+#: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
 msgstr "Επεξεργασία"
@@ -848,8 +848,8 @@ msgstr "Αδυναμία αποθήκευσης θέματος συνδυασμ�
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
-#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:313
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
 msgstr "Προσθήκη"
@@ -1391,7 +1391,7 @@ msgstr "Ομάδα"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:214
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
 #, kde-format
 msgid "Default"
 msgstr "Προκαθορισμένο"
@@ -1416,19 +1416,19 @@ msgid "Run"
 msgstr "Εκτέλεση"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
-#: plugins/QuickCommands/qcwidget.ui:258
+#: plugins/QuickCommands/qcwidget.ui:256
 #, kde-format
 msgid "Save"
 msgstr "Αποθήκευση"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
-#: plugins/QuickCommands/qcwidget.ui:269
+#: plugins/QuickCommands/qcwidget.ui:266
 #, kde-format
 msgid "Update"
 msgstr "Ενημέρωση"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:323
+#: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -1796,7 +1796,7 @@ msgid "The private key"
 msgstr "Το ιδιωτικό κλειδί"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:168
+#: plugins/SSHManager/sshwidget.ui:167
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1806,80 +1806,80 @@ msgstr ""
 "στη διαμόρφωση του ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:171
+#: plugins/SSHManager/sshwidget.ui:170
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "Να γίνεται χρήση του ~/.ssh/config για το κλειδί"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:178
+#: plugins/SSHManager/sshwidget.ui:177
 #, kde-format
 msgid "Username"
 msgstr "Όνομα χρήστη"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:185
+#: plugins/SSHManager/sshwidget.ui:184
 #, kde-format
 msgid "The username for the connection"
 msgstr "Το όνομα χρήστη για τη σύνδεση"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:188
+#: plugins/SSHManager/sshwidget.ui:187
 #, kde-format
 msgid "Your username"
 msgstr "Το όνομα χρήστη"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:195
+#: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "Folder"
 msgstr "Φάκελος"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:208
+#: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
 "Για διαχειριστικούς σκοπούς, αυτή η εγγραφή θα βρίσκεται μέσα στον φάκελο."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:221
+#: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "Profile"
 msgstr "Προφίλ"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:234
+#: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "Το προφίλ που θα είναι ενεργό όταν ξεκινήσει η ssh συνεδρία"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:272
+#: plugins/SSHManager/sshwidget.ui:271
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "Προσθήκη νέας SSH εγγραφής"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:286
+#: plugins/SSHManager/sshwidget.ui:284
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "Διαγραφή της επιλεγμένης SSH εγγραφής"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:300
+#: plugins/SSHManager/sshwidget.ui:297
 #, kde-format
 msgid "Edit selected entry"
 msgstr "Επεξεργασία της επιλεγμένης εγγραφής"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:310
+#: plugins/SSHManager/sshwidget.ui:307
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "Προσθήκη νέας SSH διαμόρφωσης"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:320
+#: plugins/SSHManager/sshwidget.ui:317
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "Ακύρωση προσθήκης ή επεξεργασίας"
@@ -5071,26 +5071,26 @@ msgid "Number of lines of output to remember"
 msgstr "Αριθμός γραμμών της εξόδου που θα απομνημονεύεται"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
-#: widgets/HistorySizeWidget.ui:135
+#: widgets/HistorySizeWidget.ui:134
 #, kde-format
 msgid "Remember all output produced by the terminal"
 msgstr "Απομνημόνευση ολόκληρης της εξόδου του τερματικού"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
-#: widgets/HistorySizeWidget.ui:138
+#: widgets/HistorySizeWidget.ui:137
 #, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "Unlimited"
 msgstr "Απεριόριστα"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
-#: widgets/HistorySizeWidget.ui:174
+#: widgets/HistorySizeWidget.ui:172
 #, kde-format
 msgid "Do not remember previous output"
 msgstr "Μη απομνημόνευση προηγούμενης εξόδου"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
-#: widgets/HistorySizeWidget.ui:177
+#: widgets/HistorySizeWidget.ui:175
 #, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "None"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-01 00:51+0000\n"
+"POT-Creation-Date: 2023-07-21 00:53+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "Fajl"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:303
+#: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
 msgstr "Redahavannie"
@@ -849,8 +849,8 @@ msgstr "Nieĺha zachavać schiemu pryviazvannia klaviš z pustym apisanniem."
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
-#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:313
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
 msgstr "Dadać"
@@ -1398,7 +1398,7 @@ msgstr "Hrupa"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:214
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
 #, kde-format
 msgid "Default"
 msgstr "Pradvyznačana"
@@ -1423,19 +1423,19 @@ msgid "Run"
 msgstr "Zapuscić"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
-#: plugins/QuickCommands/qcwidget.ui:258
+#: plugins/QuickCommands/qcwidget.ui:256
 #, kde-format
 msgid "Save"
 msgstr "Zachavać"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
-#: plugins/QuickCommands/qcwidget.ui:269
+#: plugins/QuickCommands/qcwidget.ui:266
 #, kde-format
 msgid "Update"
 msgstr "Abnavić"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:323
+#: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel"
 msgstr "Skasavać"
@@ -1805,7 +1805,7 @@ msgid "The private key"
 msgstr "Pryvatny kliuč"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:168
+#: plugins/SSHManager/sshwidget.ui:167
 #, fuzzy, kde-format
 #| msgid ""
 #| "If this is set, we dont rely on the SSH key set above, but on the "
@@ -1818,80 +1818,80 @@ msgstr ""
 "vykarystoŭvacca fajl kanfihuracyi z ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:171
+#: plugins/SSHManager/sshwidget.ui:170
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "Vykarystoŭvać dlia kliuča ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:178
+#: plugins/SSHManager/sshwidget.ui:177
 #, kde-format
 msgid "Username"
 msgstr "Imia karystaĺnika"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:185
+#: plugins/SSHManager/sshwidget.ui:184
 #, kde-format
 msgid "The username for the connection"
 msgstr "Imia karystaĺnika dlia zlučennia"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:188
+#: plugins/SSHManager/sshwidget.ui:187
 #, kde-format
 msgid "Your username"
 msgstr "Vaša imia karystaĺnika"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:195
+#: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "Folder"
 msgstr "Kataloh"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:208
+#: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr ""
 "U metach paradkavannia hety zapis budzie znachodzicca ŭnutry hetaha kataloha."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:221
+#: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "Profile"
 msgstr "Profiĺ"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:234
+#: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "Profiĺ, jaki budzie aktyŭny padčas zapusku ssh-sieansa"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:272
+#: plugins/SSHManager/sshwidget.ui:271
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "Dadać novy zapis SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:286
+#: plugins/SSHManager/sshwidget.ui:284
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "Vydalić abrany zapis SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:300
+#: plugins/SSHManager/sshwidget.ui:297
 #, kde-format
 msgid "Edit selected entry"
 msgstr "Redahavać abrany zapis"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:310
+#: plugins/SSHManager/sshwidget.ui:307
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "Dadać novuju kanfihuracyju SSH"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:320
+#: plugins/SSHManager/sshwidget.ui:317
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "Skasavać dadannie abo redahavannie"
@@ -5128,26 +5128,26 @@ msgid "Number of lines of output to remember"
 msgstr "Koĺkasć radkoŭ žurnala vyvadu"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
-#: widgets/HistorySizeWidget.ui:135
+#: widgets/HistorySizeWidget.ui:134
 #, kde-format
 msgid "Remember all output produced by the terminal"
 msgstr "Zapaminać uvieś vyvad terminala"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
-#: widgets/HistorySizeWidget.ui:138
+#: widgets/HistorySizeWidget.ui:137
 #, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "Unlimited"
 msgstr "Nie abmiežavana"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
-#: widgets/HistorySizeWidget.ui:174
+#: widgets/HistorySizeWidget.ui:172
 #, kde-format
 msgid "Do not remember previous output"
 msgstr "Nie zapaminać papiaredni vyvad"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
-#: widgets/HistorySizeWidget.ui:177
+#: widgets/HistorySizeWidget.ui:175
 #, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "None"

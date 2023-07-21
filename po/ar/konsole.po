@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-01 00:51+0000\n"
+"POT-Creation-Date: 2023-07-21 00:53+0000\n"
 "PO-Revision-Date: 2023-05-17 20:01+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -50,7 +50,7 @@ msgstr "ملف"
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:310
-#: plugins/SSHManager/sshwidget.ui:303
+#: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
 msgstr "حرر"
@@ -840,8 +840,8 @@ msgstr "لا يمكن حفظ تشكيلة روابط المفاتيح مع وص�
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
-#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:247
-#: plugins/SSHManager/sshwidget.ui:313
+#: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
 msgstr "أضف"
@@ -1391,7 +1391,7 @@ msgstr "المجموعة"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
-#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:214
+#: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
 #, kde-format
 msgid "Default"
 msgstr "المبدئي"
@@ -1416,19 +1416,19 @@ msgid "Run"
 msgstr "شغّل"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
-#: plugins/QuickCommands/qcwidget.ui:258
+#: plugins/QuickCommands/qcwidget.ui:256
 #, kde-format
 msgid "Save"
 msgstr "احفظ"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
-#: plugins/QuickCommands/qcwidget.ui:269
+#: plugins/QuickCommands/qcwidget.ui:266
 #, kde-format
 msgid "Update"
 msgstr "حدّث"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
-#: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:323
+#: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel"
 msgstr "ألغِ"
@@ -1785,7 +1785,7 @@ msgid "The private key"
 msgstr "المفتاح الخاص"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:168
+#: plugins/SSHManager/sshwidget.ui:167
 #, kde-format
 msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
@@ -1795,79 +1795,79 @@ msgstr ""
 "الضبط الموجود في ‎~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
-#: plugins/SSHManager/sshwidget.ui:171
+#: plugins/SSHManager/sshwidget.ui:170
 #, kde-format
 msgid "Use ~/.ssh/config for key"
 msgstr "استخدم ~/.ssh/config للمفتاح"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: plugins/SSHManager/sshwidget.ui:178
+#: plugins/SSHManager/sshwidget.ui:177
 #, kde-format
 msgid "Username"
 msgstr "اسم المستخدم"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:185
+#: plugins/SSHManager/sshwidget.ui:184
 #, kde-format
 msgid "The username for the connection"
 msgstr "اسم المستخدم للاتصال"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
-#: plugins/SSHManager/sshwidget.ui:188
+#: plugins/SSHManager/sshwidget.ui:187
 #, kde-format
 msgid "Your username"
 msgstr "اسم المستخدم الخاص بك"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
-#: plugins/SSHManager/sshwidget.ui:195
+#: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "Folder"
 msgstr "المجلد"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
-#: plugins/SSHManager/sshwidget.ui:208
+#: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
 msgstr "من أجل التنظيم ستكون هذه المدخلة بداخل هذا المجلد."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: plugins/SSHManager/sshwidget.ui:221
+#: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "Profile"
 msgstr "التشكيلة"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
-#: plugins/SSHManager/sshwidget.ui:234
+#: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
 msgstr "التشكيلة التي ستنشط عندما تبدأ جلسة ssh"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
-#: plugins/SSHManager/sshwidget.ui:272
+#: plugins/SSHManager/sshwidget.ui:271
 #, kde-format
 msgid "Add a new SSH Entry"
 msgstr "أضف مدخلة SSH جديدة"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
-#: plugins/SSHManager/sshwidget.ui:286
+#: plugins/SSHManager/sshwidget.ui:284
 #, kde-format
 msgid "Delete selected SSH entry"
 msgstr "احذف مدخلة SSH المحددة"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
-#: plugins/SSHManager/sshwidget.ui:300
+#: plugins/SSHManager/sshwidget.ui:297
 #, kde-format
 msgid "Edit selected entry"
 msgstr "حرر المدخلة المحددة"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
-#: plugins/SSHManager/sshwidget.ui:310
+#: plugins/SSHManager/sshwidget.ui:307
 #, kde-format
 msgid "Add new SSH Configuration"
 msgstr "أضف إعدادات  SSH جديدة"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
-#: plugins/SSHManager/sshwidget.ui:320
+#: plugins/SSHManager/sshwidget.ui:317
 #, kde-format
 msgid "Cancel Add or Edit"
 msgstr "ألغ الإضافة أو التحرير"
@@ -4996,26 +4996,26 @@ msgid "Number of lines of output to remember"
 msgstr "عدد الأسطر التي سيتم تذكرها من المخرجات"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
-#: widgets/HistorySizeWidget.ui:135
+#: widgets/HistorySizeWidget.ui:134
 #, kde-format
 msgid "Remember all output produced by the terminal"
 msgstr "تذكر كل المخرجات الصادرة من الطرفية"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
-#: widgets/HistorySizeWidget.ui:138
+#: widgets/HistorySizeWidget.ui:137
 #, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "Unlimited"
 msgstr "غير محدود"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
-#: widgets/HistorySizeWidget.ui:174
+#: widgets/HistorySizeWidget.ui:172
 #, kde-format
 msgid "Do not remember previous output"
 msgstr "لا تتذكّر المخرجات السابقة"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
-#: widgets/HistorySizeWidget.ui:177
+#: widgets/HistorySizeWidget.ui:175
 #, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "None"
