@@ -19,6 +19,8 @@
 
 // Konsole
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalFonts.h"
+#include "terminalDisplay/TerminalScrollBar.h"
 #include "widgets/ViewContainer.h"
 
 using Konsole::TerminalDisplay;
@@ -252,7 +254,13 @@ TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
 void ViewSplitter::toggleMaximizeCurrentTerminal()
 {
     m_terminalMaximized = !m_terminalMaximized;
-    handleMinimizeMaximize(m_terminalMaximized);
+    handleMinimizeMaximize(m_terminalMaximized, false);
+}
+
+void ViewSplitter::toggleZoomMaximizeCurrentTerminal()
+{
+    m_terminalMaximized = !m_terminalMaximized;
+    handleMinimizeMaximize(m_terminalMaximized, true);
 }
 
 namespace
@@ -292,12 +300,41 @@ bool ViewSplitter::hideRecurse(TerminalDisplay *currentTerminalDisplay)
     return allHidden;
 }
 
-void ViewSplitter::handleMinimizeMaximize(bool maximize)
+void ViewSplitter::handleMinimizeMaximize(bool maximize, bool zoom)
 {
     auto topLevelSplitter = getToplevelSplitter();
     auto currentTerminalDisplay = topLevelSplitter->activeTerminalDisplay();
     currentTerminalDisplay->setExpandedMode(maximize);
+
+    auto currentTerminalFont = currentTerminalDisplay->terminalFont()->getVTFont();
+
     if (maximize) {
+        if (zoom) {
+            fontSizeBeforeMaximization = currentTerminalFont.pointSizeF();
+            auto headerBar = currentTerminalDisplay->headerBar();
+            auto headerBarHeight = headerBar->isVisible() ? headerBar->height() : 0;
+            auto scrollBar = currentTerminalDisplay->scrollBar();
+            auto scrollBarWidth = scrollBar->scrollBarPosition() != Enum::ScrollBarHidden ? scrollBar->width() : 0;
+
+            // This is very inexact, which is fine, because the aspect ratio of
+            // both the scaled font and the terminal can differ anyway.
+            auto scaleFactor = std::min(
+                (topLevelSplitter->width() - scrollBarWidth)
+                / (currentTerminalDisplay->width() - scrollBarWidth),
+
+                (topLevelSplitter->height() - headerBarHeight)
+                / (currentTerminalDisplay->height() - headerBarHeight)
+            );
+            auto newSize = int(fontSizeBeforeMaximization * scaleFactor * 0.97);
+
+            if (newSize > fontSizeBeforeMaximization) {
+                currentTerminalFont.setPointSizeF(newSize);
+                currentTerminalDisplay->terminalFont()->setVTFont(currentTerminalFont);
+            }
+        } else {
+            fontSizeBeforeMaximization = 0;
+        }
+
         for (int i = 0, end = topLevelSplitter->count(); i < end; i++) {
             auto widgetAt = topLevelSplitter->widget(i);
             if (auto *maybeSplitter = qobject_cast<ViewSplitter *>(widgetAt)) {
@@ -310,6 +347,15 @@ void ViewSplitter::handleMinimizeMaximize(bool maximize)
             }
         }
     } else {
+        // When restoring to un-maximzed state, it doesn't matter if this is done through
+        // toggleMaximizeCurrentTerminal or toggleZoomMaximizeCurrentTerminal.
+        // Only the method which was used to maximize, determines if the font size needs
+        // to be restored.
+        if (fontSizeBeforeMaximization) {
+            currentTerminalFont.setPointSizeF(fontSizeBeforeMaximization);
+            currentTerminalDisplay->terminalFont()->setVTFont(currentTerminalFont);
+        }
+
         restoreAll(topLevelSplitter->findChildren<TerminalDisplay *>(), topLevelSplitter->findChildren<ViewSplitter *>());
     }
 }

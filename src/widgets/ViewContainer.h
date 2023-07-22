@@ -128,6 +128,7 @@ public:
     void moveTabToWindow(int index, QWidget *window);
 
     void toggleMaximizeCurrentTerminal();
+    void toggleZoomMaximizeCurrentTerminal();
     /* return the widget(int index) casted to TerminalDisplay*
      *
      * The only thing that this class holds are TerminalDisplays, so

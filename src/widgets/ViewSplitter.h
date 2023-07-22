@@ -104,6 +104,11 @@ public:
      */
     void toggleMaximizeCurrentTerminal();
 
+    /** Makes the current TerminalDisplay expanded to 100% of the view, while
+     * scaling the font size
+     */
+    void toggleZoomMaximizeCurrentTerminal();
+
     /**
      * Can be called on any ViewSplitter to find the top level splitter and ensure
      * the active display isn't maximized. Do nothing if it's not maximized.
@@ -166,10 +171,11 @@ private:
     bool hideRecurse(TerminalDisplay *currentTerminalDisplay);
 
     /** other classes should use clearmMaximized() */
-    void handleMinimizeMaximize(bool maximize);
+    void handleMinimizeMaximize(bool maximize, bool zoom);
 
     void updateSizes();
     bool m_terminalMaximized = false;
+    qreal fontSizeBeforeMaximization = 0;
     bool m_blockPropagatedDeletion = false;
 
     static bool m_drawTopLevelHandler;

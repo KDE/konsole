@@ -294,6 +294,15 @@ void ViewManager::setupActions()
     _multiSplitterOnlyActions << action;
     _viewContainer->addAction(action);
 
+    action = new QAction(i18nc("@action Shortcut entry", "Toggle zoom-maximize current view"), this);
+    action->setText(i18nc("@action:inmenu", "Toggle zoom-maximize current view"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
+    collection->addAction(QStringLiteral("toggle-zoom-current-view"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_Z);
+    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::toggleZoomMaximizeCurrentTerminal);
+    _multiSplitterOnlyActions << action;
+    _viewContainer->addAction(action);
+
     action = new QAction(i18nc("@action Shortcut entry", "Move tab to the right"), this);
     collection->addAction(QStringLiteral("move-tab-to-right"), action);
     collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_Right);

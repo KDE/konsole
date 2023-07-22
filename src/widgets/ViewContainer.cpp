@@ -691,6 +691,16 @@ void TabbedViewContainer::toggleMaximizeCurrentTerminal()
     activeViewSplitter()->toggleMaximizeCurrentTerminal();
 }
 
+
+void TabbedViewContainer::toggleZoomMaximizeCurrentTerminal()
+{
+    if (auto *terminal = qobject_cast<TerminalDisplay *>(sender())) {
+        terminal->setFocus(Qt::FocusReason::OtherFocusReason);
+    }
+
+    activeViewSplitter()->toggleZoomMaximizeCurrentTerminal();
+}
+
 void TabbedViewContainer::moveTabLeft()
 {
     if (currentIndex() == 0) {
