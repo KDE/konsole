@@ -102,6 +102,8 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {TabColor, "TabColor", APPEARANCE_GROUP, QColor(QColor::Invalid)},
     {DimValue, "DimmValue", APPEARANCE_GROUP, 128},
     {DimWhenInactive, "DimWhenInactive", GENERAL_GROUP, false},
+    {BorderWhenActive, "BorderWhenActive", APPEARANCE_GROUP, false},
+    {FocusBorderColor, "FocusBorderColor", APPEARANCE_GROUP, QColor(Qt::gray)},
     {InvertSelectionColors, "InvertSelectionColors", GENERAL_GROUP, false},
     {EmojiFont, "EmojiFont", APPEARANCE_GROUP, QFont()},
     {WordMode, "WordMode", APPEARANCE_GROUP, true},

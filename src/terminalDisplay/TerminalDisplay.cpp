@@ -736,6 +736,13 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
     _terminalPainter->drawInputMethodPreeditString(paint, preeditRect(), _inputMethodData, _image);
     paintFilters(paint);
 
+    const bool drawBorder = _borderWhenActive && hasFocus();
+    if (drawBorder) {
+        paint.setPen(_focusBorderColor);
+        const auto y = _headerBar->isVisible() ? _headerBar->height() : 0;
+        paint.drawRect(0, y, width() - 1, height() - y - 1);
+    }
+
     const bool drawDimmed = _dimWhenInactive && !hasFocus();
     if (drawDimmed) {
         const QColor dimColor(0, 0, 0, _dimValue);
@@ -3120,6 +3127,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     // show hint about terminal size after resizing
     _showTerminalSizeHint = profile->showTerminalSizeHint();
     _dimWhenInactive = profile->dimWhenInactive();
+    _borderWhenActive = profile->borderWhenActive();
 
     // terminal features
     setBlinkingCursorEnabled(profile->blinkingCursorEnabled());
@@ -3165,6 +3173,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _displayVerticalLineAtChar = profile->verticalLineAtChar();
     _scrollBar->setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
     _dimValue = profile->dimValue();
+    _focusBorderColor = profile->focusBorderColor();
 
     _filterChain->setUrlHintsModifiers(Qt::KeyboardModifiers(profile->property<int>(Profile::UrlHintsModifiers)));
     _filterChain->setReverseUrlHints(profile->property<bool>(Profile::ReverseUrlHints));

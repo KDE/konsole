@@ -810,6 +810,9 @@ private:
     bool _dimWhenInactive = false;
     int _dimValue;
 
+    bool _borderWhenActive = false;
+    QColor _focusBorderColor;
+
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar = nullptr;
     TerminalHeaderBar *_headerBar = nullptr;

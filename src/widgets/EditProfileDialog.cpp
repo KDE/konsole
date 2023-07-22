@@ -638,6 +638,16 @@ void EditProfileDialog::setDimValue(int value)
     updateTempProfileProperty(Profile::DimValue, value);
 }
 
+void EditProfileDialog::setBorderWhenActive(bool value)
+{
+    updateTempProfileProperty(Profile::BorderWhenActive, value);
+}
+
+void EditProfileDialog::setFocusBorderColor(const QColor &color)
+{
+    updateTempProfileProperty(Profile::FocusBorderColor, color);
+}
+
 void EditProfileDialog::tabTitleFormatChanged(const QString &format)
 {
     updateTempProfileProperty(Profile::LocalTabTitleFormat, format);
@@ -651,6 +661,11 @@ void EditProfileDialog::remoteTabTitleFormatChanged(const QString &format)
 void EditProfileDialog::tabColorChanged(const QColor &color)
 {
     updateTempProfileProperty(Profile::TabColor, color);
+}
+
+void EditProfileDialog::focusBorderColorChanged(const QColor &color)
+{
+    updateTempProfileProperty(Profile::FocusBorderColor, color);
 }
 
 void EditProfileDialog::silenceSecondsChanged(int seconds)
@@ -837,6 +852,14 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->dimValue->setEnabled(profile->dimWhenInactive());
     _appearanceUi->dimLabel->setEnabled(profile->dimWhenInactive());
     connect(_appearanceUi->dimValue, &QSlider::valueChanged, this, &Konsole::EditProfileDialog::setDimValue);
+
+    _appearanceUi->borderWhenActiveCheckbox->setChecked(profile->borderWhenActive());
+    connect(_appearanceUi->borderWhenActiveCheckbox, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::setBorderWhenActive);
+
+    _appearanceUi->focusBorderColor->setColor(profile->focusBorderColor());
+    _appearanceUi->focusBorderColor->setEnabled(profile->borderWhenActive());
+    _appearanceUi->borderLabel->setEnabled(profile->borderWhenActive());
+    connect(_appearanceUi->focusBorderColor, &KColorButton::changed, this, &Konsole::EditProfileDialog::focusBorderColorChanged);
 
     _appearanceUi->invertSelectionColorsCheckbox->setChecked(profile->property<bool>(Profile::InvertSelectionColors));
     connect(_appearanceUi->invertSelectionColorsCheckbox, &QCheckBox::toggled, this, [this](bool checked) {

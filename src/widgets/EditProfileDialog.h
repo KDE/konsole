@@ -136,6 +136,8 @@ private Q_SLOTS:
     void showTerminalSizeHint(bool);
     void setDimWhenInactive(bool);
     void setDimValue(int value);
+    void setBorderWhenActive(bool);
+    void setFocusBorderColor(const QColor &color);
     void showEnvironmentEditor();
 
     // appearance page
@@ -148,6 +150,8 @@ private Q_SLOTS:
     void removeColorScheme();
     void setVerticalLine(bool);
     void setVerticalLineColumn(int);
+    //void focusBorderColor();
+    void focusBorderColorChanged(const QColor &color);
     void toggleBlinkingCursor(bool);
     void setCursorShape(int);
     void autoCursorColor();

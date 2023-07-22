@@ -396,7 +396,7 @@
            </item>
           </layout>
          </item>
-         <item row="7" column="1">
+         <item row="8" column="1">
           <spacer>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -482,7 +482,7 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="0" colspan="2">
+         <item row="9" column="0" colspan="2">
           <widget class="QCheckBox" name="invertSelectionColorsCheckbox">
            <property name="text">
             <string>Always invert the colors of selected text</string>
@@ -516,10 +516,66 @@
            </item>
           </layout>
          </item>
+         <item row="8" column="1" colspan="2">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="borderLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+               <string comment="Border color options">Color:</string>
+             </property>
+             <property name="buddy">
+              <cstring>focusBorderColor</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KColorButton" name="focusBorderColor">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Select the color used to draw the border</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_10">
            <property name="text">
             <string>Inactive Terminals:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>Active Terminals:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -678,7 +734,17 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="1">
+         <item row="7" column="1" colspan="2">
+          <widget class="QCheckBox" name="borderWhenActiveCheckbox">
+           <property name="toolTip">
+            <string>Indicate whether the window is active by drawing a border</string>
+           </property>
+           <property name="text">
+            <string>Border</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
             <spacer name="horizontalSpacer">
@@ -1024,6 +1090,18 @@
      <y>270</y>
     </hint>
    </hints>
+  </connection>
+  <connection>
+   <sender>borderWhenActiveCheckbox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>borderLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+  </connection>
+  <connection>
+   <sender>borderWhenActiveCheckbox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>focusBorderColor</receiver>
+   <slot>setEnabled(bool)</slot>
   </connection>
  </connections>
  <buttongroups>

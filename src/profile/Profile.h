@@ -112,6 +112,9 @@ public:
         /** (bool) If the background color should change to indicate if the window is active
          */
         DimWhenInactive,
+        /** (bool) If a border should be drawn to indicate if the window is active
+         */
+        BorderWhenActive,
         /**
          * (bool) Whether to always invert the colors for text selection.
          */
@@ -335,6 +338,8 @@ public:
         TabColor,
         /** (int) Value of the Dimm Effect */
         DimValue,
+        /** (QColor) Color for focus border */
+        FocusBorderColor,
         /** (bool) Allow Escape sequence for Links.
          * this allows applications to use links in the form of
          * printf '\e]8;;https://www.example.org\e\\example text\e]8;;\e\\\n'
@@ -617,6 +622,17 @@ public:
     int dimValue() const
     {
         return property<int>(Profile::DimValue);
+    }
+
+    /** Convenience method for property<bool>(Profile::BorderWhenActive) */
+    bool borderWhenActive() const
+    {
+        return property<bool>(Profile::BorderWhenActive);
+    }
+
+    QColor focusBorderColor() const
+    {
+        return property<QColor>(Profile::FocusBorderColor);
     }
 
     /** Convenience method for property<QFont>(Profile::Font) */
