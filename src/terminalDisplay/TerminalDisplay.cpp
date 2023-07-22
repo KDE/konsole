@@ -739,8 +739,10 @@ void TerminalDisplay::paintEvent(QPaintEvent *pe)
     const bool drawBorder = _borderWhenActive && hasFocus();
     if (drawBorder) {
         paint.setPen(_focusBorderColor);
+        const auto x = _scrollBar->scrollBarPosition() == Enum::ScrollBarLeft ? _scrollBar->width() : 0;
+        const auto sb = _scrollBar->scrollBarPosition() != Enum::ScrollBarHidden ? _scrollBar->width() : 0;
         const auto y = _headerBar->isVisible() ? _headerBar->height() : 0;
-        paint.drawRect(0, y, width() - 1, height() - y - 1);
+        paint.drawRect(x, y, width() - sb - 1, height() - y - 1);
     }
 
     const bool drawDimmed = _dimWhenInactive && !hasFocus();
