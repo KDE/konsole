@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-21 00:53+0000\n"
-"PO-Revision-Date: 2023-04-22 00:38+0200\n"
+"PO-Revision-Date: 2023-07-23 21:01+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -738,7 +738,7 @@ msgstr "다음으로 열기"
 #: filterHotSpots/FileFilterHotspot.cpp:308
 #, kde-format
 msgid "Generating Thumbnail"
-msgstr "축소판 생성 중"
+msgstr "섬네일 생성 중"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:90
 #, kde-format
@@ -1315,7 +1315,7 @@ msgstr "임시 파일"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
-msgstr "축소판"
+msgstr "섬네일"
 
 #: Part.cpp:310
 #, kde-format
@@ -1587,7 +1587,7 @@ msgstr "SSH 명령을 전달하는 중 오류 발생"
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
-msgstr "셸 프로그램(예: bash, zsh, sh) 외부에서 SSH 명령을 전달할 수 없음"
+msgstr "셸 앱(예: bash, zsh, sh) 외부에서 SSH 명령을 전달할 수 없음"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
@@ -2290,13 +2290,12 @@ msgstr "ZModem 업로드(&Z)..."
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "한 번 실행되는 모니터"
 
 #: session/SessionController.cpp:905
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "활동 상태 지켜보기(&A)"
+msgstr "프롬프트 지켜보기(&P)"
 
 #: session/SessionController.cpp:912
 #, kde-format
@@ -2434,7 +2433,7 @@ msgstr "프로그램 죽이기"
 #: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "세션 '%1'에서 셸 프롬프트가 표시됨"
 
 #: session/SessionController.cpp:2064
 #, kde-format
@@ -2533,7 +2532,7 @@ msgstr "제목 표시줄에 창 제목 표시"
 #: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "마우스 포인터가 위에 있을 때 터미널에 초점 맞추기"
+msgstr "마우스 포인터가 위에 있을 때 터미널에 포커스 맞추기"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
@@ -2648,34 +2647,34 @@ msgstr "Konsole을 끝낼 때 창 크기를 저장합니다"
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Thumbnail Width"
-msgstr "축소판 너비"
+msgstr "섬네일 너비"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Sets the width of the thumbnail"
-msgstr "축소판 너비 설정"
+msgstr "섬네일 너비 설정"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47 settings/konsole.kcfg:48
 #, kde-format
 msgid "Use Shift to display a thumbnail"
-msgstr "Shift 키를 눌러서 축소판 표시"
+msgstr "Shift 키를 눌러서 섬네일 표시"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Alt to display a thumbnail"
-msgstr "Alt 키를 눌러서 축소판 표시"
+msgstr "Alt 키를 눌러서 섬네일 표시"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
-msgstr "Ctrl 키를 눌러서 축소판 표시"
+msgstr "Ctrl 키를 눌러서 섬네일 표시"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/konsole.kcfg:64
@@ -2797,12 +2796,12 @@ msgid ""
 "format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
 "a change to how these are handled.</body></html>"
 msgstr ""
-"<html><head/><body><p>KonsolePart를 사용하는 프로그램은 프로필을 공유합니다."
-"</p><p>다음 설정은 Konsole 및 다른 프로그램과 공유하지 않습니다:<ul><li>기본 "
-"프로필</li><li>메뉴에 표시</li><li>단축키</li></ul></p><p>변경 사항을 처리하"
-"는 방법에 대한 의견이 있으시면 Konsole을 열어서 <a href=\"https://bugs.kde."
-"org/enter_bug.cgi?format=guided&product=konsole&component=kpart\">버그를 보고"
-"</a>해 주십시오.</body></html>"
+"<html><head/><body><p>KonsolePart를 사용하는 앱은 프로필을 공유합니다.</p><p>"
+"다음 설정은 Konsole 및 다른 앱과 공유하지 않습니다:<ul><li>기본 프로필</"
+"li><li>메뉴에 표시</li><li>단축키</li></ul></p><p>변경 사항을 처리하는 방법"
+"에 대한 의견이 있으시면 Konsole을 열어서 <a href=\"https://bugs.kde.org/"
+"enter_bug.cgi?format=guided&product=konsole&component=kpart\">버그를 보고</a>"
+"해 주십시오.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:39
@@ -3138,7 +3137,7 @@ msgstr "Ctrl"
 #: settings/ThumbnailsSettings.ui:93
 #, kde-format
 msgid "Enable thumbnails generation"
-msgstr "축소판 생성 활성화"
+msgstr "섬네일 생성 활성화"
 
 #: terminalDisplay/TerminalDisplay.cpp:657
 #, kde-format
@@ -3355,25 +3354,25 @@ msgstr "이전 탭"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
-msgstr "위쪽 터미널에 초점"
+msgstr "위쪽 터미널에 포커스"
 
 #: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
-msgstr "아래쪽 터미널에 초점"
+msgstr "아래쪽 터미널에 포커스"
 
 #: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
-msgstr "왼쪽 터미널에 초점"
+msgstr "왼쪽 터미널에 포커스"
 
 #: ViewManager.cpp:262
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
-msgstr "오른쪽 터미널에 초점"
+msgstr "오른쪽 터미널에 포커스"
 
 #: ViewManager.cpp:268
 #, kde-format
@@ -4765,14 +4764,14 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
-"일부 터미널 프로그램은 마우스를 지원하며, 기본값으로 활성화되어 있습니다. 실"
-"행 중에 이 옵션을 변경할 수도 있습니다."
+"일부 터미널 앱은 마우스를 지원하며, 기본값으로 활성화되어 있습니다. 실행 중"
+"에 이 옵션을 변경할 수도 있습니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:455
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
-msgstr "터미널 프로그램에서 클릭과 드래그 처리 활성화"
+msgstr "터미널 앱에서 클릭과 드래그 처리 활성화"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:43
