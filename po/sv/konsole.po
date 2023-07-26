@@ -6,14 +6,14 @@
 # Per Lindström <pelinstr@algonet.se>, 2000.
 # Mattias Newzella <newzella@linux.nu>, 2000, 2001, 2002,2003, 2004.
 # Stefan Asserhäll <stefan.asserhall@bredband.net>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
-# Stefan Asserhall <stefan.asserhall@bredband.net>, 2005, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2005, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2022-10-01 11:08+0200\n"
+"PO-Revision-Date: 2023-07-25 21:29+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -1348,11 +1348,9 @@ msgstr "Formulär"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Genväg"
+msgstr "Genväg:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1437,21 +1435,21 @@ msgid "Quick Commands"
 msgstr "Snabbkommandon"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Visa snabbkommandon"
+msgstr "Visa snabbåtkomst"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Inga snabbkommandon hittades. Det går att lägga till ett med Insticksprogram "
+"- Snabbkommandon."
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Snabbkommandon"
+msgstr "Insticksprogram - Snabbkommandon"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
@@ -1575,23 +1573,24 @@ msgstr "Visa SSH-hanterare"
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Visa snabbåtkomst för SSH-åtgärder"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:145
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Ingen sparad SSH-inställning hittades. Det går att lägga till en med "
+"Insticksprogram -> SSH-hanterare."
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
-#, fuzzy, kde-format
-#| msgid "Hide SSH Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Dölj SSH-hanterare"
+msgstr "Insticksprogram - SSH-hanterare"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:152
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH-poster"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #, kde-format
@@ -1704,9 +1703,7 @@ msgstr "Ta bort vald post"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Genväg"
 
@@ -1720,15 +1717,13 @@ msgstr "Visa poster som inte motsvarar filtret"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Ändra profil vid anslutning eller nedkoppling"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Hantera profiler"
+msgstr "Hantera profil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -2184,23 +2179,19 @@ msgid "Copy"
 msgstr "Kopiera"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "Dela vyn vänster/höger"
+msgstr "Dela vyn vänster-höger"
 
 #: session/SessionController.cpp:688
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Dela vyn topp/botten"
+msgstr "Dela vyn topp-botten"
 
 #: session/SessionController.cpp:692
 #, kde-format
 msgid "Copy except prompts"
-msgstr "Kopiera utan prompter"
+msgstr "Kopiera utan prompt"
 
 #: session/SessionController.cpp:698
 #, kde-format
@@ -2228,10 +2219,9 @@ msgid "&Select All"
 msgstr "&Markera alla"
 
 #: session/SessionController.cpp:736
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Markera &rad"
+msgstr "Välj &läge"
 
 #: session/SessionController.cpp:741
 #, kde-format
@@ -2319,13 +2309,12 @@ msgstr "Uppladdning med &Zmodem..."
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Engångsskärmar"
 
 #: session/SessionController.cpp:905
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Övervakare av &aktivitet"
+msgstr "Övervakare av &prompt"
 
 #: session/SessionController.cpp:912
 #, kde-format
@@ -2468,7 +2457,7 @@ msgstr "Döda program"
 #: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Skalprompten visas i session '%1'"
 
 #: session/SessionController.cpp:2064
 #, kde-format
@@ -3318,28 +3307,22 @@ msgid "Split View Automatically"
 msgstr "Dela vyn automatiskt"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Dela vyn vänster/höger"
+msgstr "Dela vyn vänster-höger från nästa flik"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Dela vyn topp/botten"
+msgstr "Dela vyn topp-botten från nästa flik"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Automatically"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Dela vyn automatiskt"
+msgstr "Dela vyn automatiskt från nästa flik"
 
 #: ViewManager.cpp:165
 #, kde-format
@@ -3984,16 +3967,15 @@ msgstr "Komplex textlayout"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Bidirektionell textåtergivning"
+msgstr "Aktivera textåtergivning med ordläge"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Ordläge"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -4002,38 +3984,38 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignorera attributändringar mitt i ord (annars delar attributändringar ord "
+"när de återges)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:810
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Använd samma attribut för hela ord"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:823
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Återge ord med ASCII-tecken tillsammans"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:826
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Ordtecken:"
+msgstr "ASCII-tecken"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:839
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Återge ord med indiska skrifttecken tillsammans"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:842
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Motsvara nuvarande tecken"
+msgstr "Indiska skrifttecken"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
@@ -4069,17 +4051,15 @@ msgstr "Överskrid bidirektionellt läge för tabelltecken"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:929
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Klistra in &utan kontrolltecken"
+msgstr "Ignorera bredd för problematiska breda tecken"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:932
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Överskrid bredd för breda tecken"
 
 #: widgets/EditProfileDialog.cpp:66
 #, kde-format
@@ -4484,27 +4464,25 @@ msgstr "Alltid"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Röda felstaplar:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Gör bakgrund suddig"
+msgstr "Röd felbakgrund:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Alternerande staplar:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Gör bakgrund suddig"
+msgstr "Alternerande bakgrund:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
