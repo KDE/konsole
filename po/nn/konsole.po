@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-03-11 15:05+0100\n"
+"PO-Revision-Date: 2023-07-27 21:57+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -2187,7 +2187,7 @@ msgstr "Del visinga oppe/nede"
 #: session/SessionController.cpp:692
 #, kde-format
 msgid "Copy except prompts"
-msgstr "Koper unntakstekst"
+msgstr "Kopier utanom innkommando"
 
 #: session/SessionController.cpp:698
 #, kde-format
@@ -2302,15 +2302,17 @@ msgstr "Kopier inndata til"
 msgid "&ZModem Upload..."
 msgstr "&ZModem-opplasting …"
 
+# Overvak berre éin gong (til første gong aktivitet e.l. skjer).
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Éingangsovervaking"
 
+# Gjev varsling når kommandolinja vert tilgjengeleg for inntasting att. Menyvalet vert vist på «Vis»-menyen.
 #: session/SessionController.cpp:905
 #, kde-format
 msgid "Monitor for &Prompt"
-msgstr ""
+msgstr "Overvak for ledig &kommandolinje"
 
 #: session/SessionController.cpp:912
 #, kde-format
@@ -2325,7 +2327,7 @@ msgstr "Overvak for &stille"
 #: session/SessionController.cpp:924
 #, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "Overvak for prosessfullføring"
+msgstr "Overvak for &prosessfullføring"
 
 #: session/SessionController.cpp:931
 #, kde-format
@@ -2448,10 +2450,11 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Tvangsavslutt programmet"
 
+# Jf. «Monitor for &Prompt»-teksten.
 #: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Ledig kommandolinje vert vist i økta «%1»"
 
 #: session/SessionController.cpp:2064
 #, kde-format
