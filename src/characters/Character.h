@@ -208,7 +208,7 @@ public:
         if (rendition.f.extended) {
             return false;
         } else {
-            return QChar(character).isSpace();
+            return QChar::isSpace(character);
         }
     }
 
