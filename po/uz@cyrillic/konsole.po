@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-21 00:53+0000\n"
+"POT-Creation-Date: 2023-07-29 00:48+0000\n"
 "PO-Revision-Date: 2008-06-04 01:01+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -1952,7 +1952,7 @@ msgstr "&Принтер учун қулай усул (кора матн, орқ�
 msgid "&Scale output"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:468
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
 #, fuzzy, kde-format
 #| msgid "Delete Profile"
 msgid "Default profile"
@@ -4180,58 +4180,58 @@ msgstr ""
 msgid "Override wcwidth"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:66
+#: widgets/EditProfileDialog.cpp:71
 #, kde-format
 msgid "Edit Profile"
 msgstr "Профилни таҳрирлаш"
 
-#: widgets/EditProfileDialog.cpp:93
+#: widgets/EditProfileDialog.cpp:98
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Умумий"
 
-#: widgets/EditProfileDialog.cpp:104
+#: widgets/EditProfileDialog.cpp:109
 #, kde-format
 msgid "Tabs"
 msgstr "Таблар"
 
-#: widgets/EditProfileDialog.cpp:121
+#: widgets/EditProfileDialog.cpp:126
 #, kde-format
 msgid "Appearance"
 msgstr "Кўриниши"
 
-#: widgets/EditProfileDialog.cpp:137
+#: widgets/EditProfileDialog.cpp:142
 #, kde-format
 msgid "Scrolling"
 msgstr "Варақлаш"
 
-#: widgets/EditProfileDialog.cpp:151
+#: widgets/EditProfileDialog.cpp:156
 #, fuzzy, kde-format
 #| msgid "&Keyboard"
 msgid "Keyboard"
 msgstr "&Тугматаг"
 
-#: widgets/EditProfileDialog.cpp:152
+#: widgets/EditProfileDialog.cpp:157
 #, fuzzy, kde-format
 #| msgid "&Encoding"
 msgid "Key bindings"
 msgstr "&Кодлаш усули"
 
-#: widgets/EditProfileDialog.cpp:163
+#: widgets/EditProfileDialog.cpp:168
 #, kde-format
 msgid "Mouse"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:179
+#: widgets/EditProfileDialog.cpp:184
 #, fuzzy, kde-format
 #| msgid "Advanced"
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Қўшимча"
 
-#: widgets/EditProfileDialog.cpp:287
+#: widgets/EditProfileDialog.cpp:292
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4240,13 +4240,13 @@ msgid ""
 "the settings to a new profile."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:304
+#: widgets/EditProfileDialog.cpp:309
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:312
+#: widgets/EditProfileDialog.cpp:317
 #, fuzzy, kde-format
 #| msgid ""
 #| "A file with this name already exists.\n"
@@ -4257,25 +4257,25 @@ msgstr ""
 "Бундай номли файл аллақачон мавжуд.\n"
 "Уни алмаштиришни истайсизми?"
 
-#: widgets/EditProfileDialog.cpp:347
+#: widgets/EditProfileDialog.cpp:352
 #, fuzzy, kde-format
 #| msgid "Edit Profile \"%1\""
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "\"%1\" профилини таҳрирлаш"
 
-#: widgets/EditProfileDialog.cpp:351
+#: widgets/EditProfileDialog.cpp:356
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile"
 msgstr "Янги профил..."
 
-#: widgets/EditProfileDialog.cpp:354
+#: widgets/EditProfileDialog.cpp:359
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" профилини таҳрирлаш"
 
-#: widgets/EditProfileDialog.cpp:445
+#: widgets/EditProfileDialog.cpp:450
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4284,7 +4284,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] ""
 
-#: widgets/EditProfileDialog.cpp:447
+#: widgets/EditProfileDialog.cpp:452
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4293,78 +4293,78 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] ""
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:462
 #, fuzzy, kde-format
 #| msgid "System &Bell"
 msgid "System Bell"
 msgstr "&Тизим товуш сигнали"
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:462
 #, fuzzy, kde-format
 #| msgid "System &Notification"
 msgid "System Notifications"
 msgstr "Тизимнинг &хабарномаси"
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:462
 #, fuzzy, kde-format
 #| msgid "&Visible Bell"
 msgid "Visual Bell"
 msgstr "&Кўринадиган сигнал"
 
-#: widgets/EditProfileDialog.cpp:457
+#: widgets/EditProfileDialog.cpp:462
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:466
+#: widgets/EditProfileDialog.cpp:471
 #, fuzzy, kde-format
 #| msgid "List the available profiles"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Мавжуд профилларнинг рўйхатини кўрсатиш"
 
-#: widgets/EditProfileDialog.cpp:571
+#: widgets/EditProfileDialog.cpp:576
 #, kde-format
 msgid "Edit Environment"
 msgstr "Муҳитни таҳрирлаш"
 
-#: widgets/EditProfileDialog.cpp:572
+#: widgets/EditProfileDialog.cpp:577
 #, kde-format
 msgid "One environment variable per line"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:603
+#: widgets/EditProfileDialog.cpp:608
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] ""
 
-#: widgets/EditProfileDialog.cpp:702
+#: widgets/EditProfileDialog.cpp:707
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Бошланғич директорияни танлаш"
 
-#: widgets/EditProfileDialog.cpp:1253
+#: widgets/EditProfileDialog.cpp:1258
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1432
+#: widgets/EditProfileDialog.cpp:1437
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1438
+#: widgets/EditProfileDialog.cpp:1443
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1829
+#: widgets/EditProfileDialog.cpp:1834
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4381,7 +4381,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1842
+#: widgets/EditProfileDialog.cpp:1847
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
