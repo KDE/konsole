@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-07-27 21:57+0200\n"
+"PO-Revision-Date: 2023-07-27 22:27+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -1295,7 +1295,7 @@ msgstr "Lukk gjeldande &fane"
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
-msgstr "Det er %1 opne terminalar i vindauget. Vil du likevel avslutta?"
+msgstr "Du har %1 opne terminalar i vindauget. Vil du likevel avslutta?"
 
 #: MainWindow.cpp:945 Part.cpp:307
 #, kde-format
