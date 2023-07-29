@@ -10,6 +10,7 @@ target_link_libraries(demo_konsolepart
     KF${QT_MAJOR_VERSION}::I18n
     KF${QT_MAJOR_VERSION}::Parts
     KF${QT_MAJOR_VERSION}::Pty
+    KF${QT_MAJOR_VERSION}::Service
     Qt::Widgets
     KF${QT_MAJOR_VERSION}::XmlGui
     KF${QT_MAJOR_VERSION}::WindowSystem
