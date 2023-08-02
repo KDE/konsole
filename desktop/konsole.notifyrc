@@ -280,7 +280,7 @@ Comment[uk]=Звучить гудок у нефокусованому сеанс
 Comment[x-test]=xxBell emitted within a non-focused sessionxx
 Comment[zh_CN]=未取得焦点的会话中发出的系统提示
 Comment[zh_TW]=未取得焦點的工作階段中的響鈴行為
-Sound=Oxygen-Sys-App-Message.ogg
+Sound=bell-window-system
 Action=Popup
 
 [Event/ActivityHidden]
