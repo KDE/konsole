@@ -324,7 +324,7 @@ void ScreenWindow::updateCurrentLine()
     if (_currentLine > 0) {
         _currentLine -= _screen->getOldTotalLines() - lineCount();
     }
-    _currentLine = qBound(0, _currentLine, lineCount() - windowLines());
+    _currentLine = currentLine();
 }
 
 void ScreenWindow::notifyOutputChanged()
