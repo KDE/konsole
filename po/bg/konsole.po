@@ -5354,6 +5354,3 @@ msgstr "&Конфигуриране или преименуване на раз�
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Затваряне на раздел"
-
-#~ msgid "text/css"
-#~ msgstr "text/css"
