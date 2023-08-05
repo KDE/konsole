@@ -290,6 +290,7 @@ if(QT_MAJOR_VERSION STREQUAL "6")
         Qt6::Core5Compat
         PRIVATE
         KF6::IconWidgets
+        KF6::BookmarksWidgets
     )
 endif()
 
