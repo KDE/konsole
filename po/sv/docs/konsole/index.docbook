@@ -106,9 +106,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2021-10-28</date>
+>2023-04-25</date>
 <releaseinfo
->Program 21.12</releaseinfo>
+>KDE Gear 21.08</releaseinfo>
 
 <abstract
 ><para
@@ -188,6 +188,60 @@
 > för att visa fönstret). </para>
 
 </sect1>
+
+<sect1 id="selection">
+<title
+>Markeringsläge</title>
+<para
+>Terminal har ett läge för markering med tangentbord. Med läget är det möjligt att flytta omkring i historiken och markera text utan musen.</para>
+
+<para
+>Starta och lämna läget genom att använda snabbtangenten (normalt <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>D</keycap
+></keycombo
+>). </para>
+
+<para
+><keycap
+>Esc</keycap
+> lämnar också tangentbordetsmarkeringsläget. </para>
+
+<para
+>Flytta omkring markören: Pilar, <keycap
+>PageUp</keycap
+>, <keycap
+>PageDown</keycap
+>, <keycap
+>Home</keycap
+>, <keycap
+>End</keycap
+>. </para>
+
+<para
+>Flytta markören med <application
+>vi</application
+>-stil: h,j,k,l, för att flytta ett tecken, <keycap
+>Ctrl</keycap
+>+b,f,u,d för sida up/ner eller halv sida upp/ner.</para>
+
+<para
+>Markera text genom att använda <keycap
+>Ctrl</keycap
+> eller <keycap
+>Skift</keycap
+> med pilar, eller genom att använda <keycap
+>V</keycap
+> för att påbörja en markering, flytta markören och sedan <keycap
+>V</keycap
+> igen för att avsluta markeringen. <keycombo
+>&Shift;<keycap
+>V</keycap
+></keycombo
+> markerar hela rader, istället för tecken. </para>
+
+</sect1>
+
 
 <sect1 id="profiles">
 <title
@@ -578,6 +632,179 @@
 >Mus</guilabel
 > i dialogrutan för profilinställningar. </para>
 
+</sect1>
+
+<sect1 id="semantic-shell-integration">
+<title
+>Semantisk skalintegrering</title>
+
+<para
+>Ett skalprogram som körs i Terminal kan skicka escape-sekvenser som delar upp texten som visas i tre typer: skalprompt, användarinmatning och kommandoutmatning. Användning av den semantiska informationen möjliggör diverse förbättringar i Terminal. <itemizedlist>
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgUp</keycap
+></keycombo
+> och <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgDown</keycap
+></keycombo
+> rullar upp/ner till föregående/nästa kommandoprompt.</para
+></listitem>
+<listitem
+><para
+>Visuella ledtrådar:</para>
+<itemizedlist>
+<listitem
+><para
+>En linje visas ovanför varje prompt, promptfärger är mindre intensiva och utmatningsfärger är mer intensiva. </para
+></listitem>
+<listitem
+><para
+>En röd markering visas till vänster om inmatnings- och utmatningsrader för kommandon som orsakade fel </para
+></listitem>
+<listitem
+><para
+>Röd bakgrund för inmatnings- och utmatningsrader för kommandon som orsakade fel </para
+></listitem>
+<listitem
+><para
+>En grå markering visas till vänster om inmatnings- och utmatningsrader för alla andra kommandon. </para
+></listitem>
+<listitem
+><para
+>Grå bakgrund för inmatnings- och utmatningsrader för alla andra kommandon. </para
+></listitem>
+</itemizedlist>
+<para
+>Var och en av dem kan ställas in så att de aldrig visas, alltid visas eller bara visas när webbadresstips visas. Inställningen finns under fliken <guilabel 
+>Semantisk integration</guilabel 
+> på sidan <guilabel 
+>Allmänt</guilabel 
+> i profilinställningarna. </para
+></listitem>
+
+<listitem
+><para
+>Sammanhangsberoende menyalternativ <guimenuitem
+>Kopiera användarinmatning</guimenuitem
+>, <guimenuitem
+>Kopiera kommandoutmatning</guimenuitem
+> och <guimenuitem
+>Kopiera utan prompt</guimenuitem
+> kan användas för att filtrera markeringen när den kopieras till klippbordet. </para
+></listitem>
+<listitem
+><para
+>När markeringen är tom, kopierar åtgärden kopiera till klippbord den nuvarande inmatningsraden om den inte är tom, eller den senaste utmatningen om det inte finns någon nuvarande inmatning. </para
+></listitem>
+<listitem
+><para
+>Att trycka på uppåt- eller neråt-pilen när en lång inmatning redigeras, placeras istället markören en rad upp eller ner genom att skicka lämpligt antal vänster- eller höger-tangenthändelser till skalet. Inställningsbar i profilinställningarna.</para
+></listitem>
+<listitem
+><para
+>Att klicka musen på textinmatning placerar markören på den klickade platsen. Inställningsbar i profilinställningarna.</para
+></listitem>
+<listitem
+><para
+>Att trycka på &Ctrl; medan musen trippelklickas på utmatningen från ett kommando, markerar det kommandots hela utmatning.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Semantisk skalintegrering måste ställas in i skalet. Att trycka på <keycombo
+>&Ctrl;&Alt;<keycap
+>]</keycap
+></keycombo
+> klistrar in nödvändiga kommandon som behövs i bash. För andra skal, såsom fish, zsh, python, etc. konsultera det relevanta programmets dokumentation. </para>
+
+</sect1>
+
+
+<sect1 id="complex-text-rendering">
+<title
+>Komplex textlayout</title>
+
+<para
+>På sidan <guilabel
+>Komplex textlayout</guilabel
+> i dialogrutan <guilabel
+>Redigera profil</guilabel
+>, hittar du alternativ som styr återgivningen av text. </para>
+
+<para>
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Ordläge</guilabel
+>: I detta läge visas (vissa) strängar på skärmen i helhet, istället för ett tecken åt gången. Det gör att Qt kan återge text korrekt när formen på ett tecken beror föregående eller efterföljande tecken. Det kan resultera i felaktig placering av vissa tecken. </para
+><para
+>Mellanslag bryter alltid strängar, så de är alltid på rätt position. Det säkerställer att tecken aldrig är alltför långt bort från sina riktiga positioner. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Använd samma attribut för hela ord</guilabel
+>:När det är aktiverat återges ord med samma attribut (textfärg, fetstil, kursiv, etc.). Om ett attribut ändras mitt i ordet kommer det bara att träda i kraft efter slutet av ordet. När det är inaktiverat börjar ett nytt ord när attributen ändras. Det resulterar i att tecken ändrar form och position när du flyttar markören eller markerar text. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>ASCII-tecken</guilabel
+>: Gruppera ASCII-tecken i ord enligt beskrivningen ovan. Den mest märkbara effekten av alternativet är att om du aktiverar det visas programmeringsligaturer (för typsnitt som stöder dem). T.ex. kan strängen &lt;= visas som ⩽. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Indiska skrifttecken</guilabel
+>: Gruppera indiska tecken enligt beskrivningen ovan. Utan alternativet (beroende på typsnitt) kanske vissa ord inte är kopplade som de ska. Med det aktiverat kan indiska tecken verka vara på fel plats. T.ex. visas kanske inte det tredje tecknet på den andra raden direkt under det tredje tecknet på den första raden. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Emoji-teckensnitt:</guilabel
+>: Det gör det möjligt att ange typsnittet som ska användas för Unicode Emoji-tecken. Om det inte är valt kommer teckensnittet i standardprofilen att användas, eller så kan något reservteckensnitt användas av systemet om glyferna saknas i teckensnittet. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Bidirektionell textåtergivning</guilabel
+>: Ordna om höger till vänster-tecken så att arabisk och hebreisk text visas korrekt. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Tvinga vänster till höger riktning</guilabel
+>: Rader är alltid vänster till höger. Utan det bestäms varje rads riktning av det första tecknet med stark riktning. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Överskrid bidirektionellt läge för tabelltecken</guilabel
+>: Anser grafiska tabelltecken som starka vänster till höger-tecken. Det gör att tabeller som innehåller höger till vänster-tecken visas korrekt, men kan orsaka felaktig ordning om tecknen används i höger till vänster-texter. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Överskrid bredd för breda tecken</guilabel
+>: Problematiska tecken följer Unicode-standarden, snarare än glibcs wcwidth(). För närvarande är det bara mjukt bindestreck (Unicode 0x00AD) som har wcwidth 1 och Unicode-bredd 0 som påverkas av alternativet. I allmänhet bör alternativet inaktiveras när tecknen huvudsakligen används på kommandoraden, och aktiveras när de bara visas. </para
+></listitem>
+
+
+</itemizedlist>
+</para>
 </sect1>
 
 </chapter>
@@ -1427,6 +1654,48 @@ Various search improvements
 ></menuchoice
 >.</action
 > Standardlayouterna (2 x 2, 2 x 1 och 1 x 2) kan läsas in via verktygsraden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Engångsövervakare</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Följande övervakare underrättar bara en gång, och inaktiveras sedan. </action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Övervakare av prompt</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ändrar övervakning av aktuell flik för skalprompt.</action>
+</para
+><para
+>När en skalprompt visas, ger Terminal en underrättelse. Alternativet visas endast när semantisk integration är aktiverad i skalet. </para
 ></listitem>
 </varlistentry>
 

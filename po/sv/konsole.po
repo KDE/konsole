@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-07-25 21:29+0200\n"
+"PO-Revision-Date: 2023-08-06 11:21+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -2309,7 +2309,7 @@ msgstr "Uppladdning med &Zmodem..."
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
-msgstr "Engångsskärmar"
+msgstr "Engångsövervakare"
 
 #: session/SessionController.cpp:905
 #, kde-format
