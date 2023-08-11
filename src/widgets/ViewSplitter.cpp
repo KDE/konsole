@@ -146,6 +146,15 @@ void ViewSplitter::childEvent(QChildEvent *event)
                 auto *parent_splitter = qobject_cast<ViewSplitter *>(parent());
                 if (parent_splitter) {
                     parent_splitter->m_blockPropagatedDeletion = true;
+
+                    // Force recalculation of sizes to take into account recent
+                    // setVisible(true) calls due to a clearMaximize() upon
+                    // sessionFinished. Without the refresh() call, the size of
+                    // a previously hidden splitter could still be 0. The
+                    // documentation of refresh() says "You should not need to
+                    // call this function", but it seems we do.
+                    parent_splitter->refresh();
+
                     const auto sizes = parent_splitter->sizes();
                     auto *wdg = widget(0);
                     const int oldContainerIndex = parent_splitter->indexOf(this);
