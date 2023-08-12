@@ -415,27 +415,27 @@ private:
             QTextStream stream(&processInfo);
             const QString &data = stream.readAll();
 
-            int stack = 0;
             int field = 0;
             int pos = 0;
 
             while (pos < data.length()) {
                 QChar c = data[pos];
 
-                if (c == QLatin1Char('(')) {
-                    stack++;
-                } else if (c == QLatin1Char(')')) {
-                    stack--;
-                } else if (stack == 0 && c == QLatin1Char(' ')) {
+                if (c == QLatin1Char(' ')) {
                     field++;
                 } else {
                     switch (field) {
                     case PARENT_PID_FIELD:
                         parentPidString.append(c);
                         break;
-                    case PROCESS_NAME_FIELD:
-                        processNameString.append(c);
+                    case PROCESS_NAME_FIELD: {
+                        pos++;
+                        const int NAME_MAX_LEN = 16;
+                        const int nameEndIdx = data.lastIndexOf(QStringLiteral(")"), pos + NAME_MAX_LEN);
+                        processNameString = data.mid(pos, nameEndIdx - pos);
+                        pos = nameEndIdx;
                         break;
+                    }
                     case GROUP_PROCESS_FIELD:
                         foregroundPidString.append(c);
                         break;
