@@ -15,6 +15,8 @@
 // Konsole
 #include "konsoleprivate_export.h"
 
+class KActionCollection;
+
 /* Hackish hack to mitigate a broken behavior of KBookmarkMenu.
  * slotAddBookmark accepts duplicates and it's fragile code,
  * that thing really deserves a rewrite.
