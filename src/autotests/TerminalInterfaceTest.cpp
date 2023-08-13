@@ -21,6 +21,11 @@
 #include <KPluginLoader>
 #endif
 
+// Others
+#if defined(Q_OS_LINUX)
+#include <unistd.h>
+#endif
+
 #include <QTest>
 
 using namespace Konsole;
@@ -123,7 +128,29 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     // terminalProcessId() is the user's default shell
     // FIXME: find a way to verify this
-    // int terminalProcessId  = terminal->terminalProcessId();
+    int terminalProcessId = terminal->terminalProcessId();
+#if defined(Q_OS_LINUX)
+    const int uid = getuid();
+    QFile passwdFile(QStringLiteral("/etc/passwd"));
+    QString defaultExePath;
+
+    passwdFile.open(QIODevice::ReadOnly);
+
+    do {
+        const QString userData(passwdFile.readLine());
+        const QStringList dataFields(userData.split(QLatin1Char(':')));
+        if (dataFields.at(2).toInt() == uid) {
+            defaultExePath = dataFields.at(6);
+        }
+    } while (defaultExePath.isEmpty());
+
+    passwdFile.close();
+
+    QFile procExeTarget(QString("/proc/%1/exe").arg(terminalProcessId));
+    if (procExeTarget.exists()) {
+        QCOMPARE(procExeTarget.symLinkTarget(), defaultExePath.trimmed());
+    }
+#endif
 
     // Let's try using QSignalSpy
     // https://community.kde.org/Guidelines_and_HOWTOs/UnitTests
