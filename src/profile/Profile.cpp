@@ -181,11 +181,6 @@ QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;
 // For backward compatibility with existing profiles, it should never change.
 static const QString BUILTIN_MAGIC_PATH = QStringLiteral("FALLBACK/");
 
-// UntranslatedName property of the built-in profile, as a char array.
-//
-// Note: regular profiles created in earlier versions of Konsole may have this name too.
-static const char BUILTIN_UNTRANSLATED_NAME_CHAR[] = "Built-in";
-
 #ifdef Q_OS_WIN
 static QString checkFile(const QStringList &dirList, const QString &filePath)
 {
@@ -270,8 +265,8 @@ void Profile::useBuiltin()
     for (const PropertyInfo &propInfo : DefaultProperties) {
         setProperty(propInfo.property, propInfo.defaultValue);
     }
-    setProperty(Name, i18nc("Name of the built-in profile", BUILTIN_UNTRANSLATED_NAME_CHAR));
-    setProperty(UntranslatedName, QString::fromLatin1(BUILTIN_UNTRANSLATED_NAME_CHAR));
+    setProperty(Name, i18nc("Name of the built-in profile", "Built-in"));
+    setProperty(UntranslatedName, QStringLiteral("Built-in"));
     setProperty(Path, BUILTIN_MAGIC_PATH);
     setProperty(Command, defaultShell());
     // See Pty.cpp on why Arguments is populated
