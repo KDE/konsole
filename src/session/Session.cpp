@@ -736,11 +736,17 @@ void Session::silenceTimerDone()
         view = _views.first();
     }
 
-    KNotification *notification = KNotification::event(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"),
-                                                       i18n("Silence in '%1' (Session '%2')", _displayTitle, _nameTitle),
-                                                       QPixmap(),
-                                                       view,
-                                                       KNotification::CloseWhenWidgetActivated);
+#if QT_VERSION_MAJOR == 5
+    KNotification *notification =
+        new KNotification(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"), KNotification::CloseWhenWidgetActivated);
+    notification->setWidget(view);
+#else
+    KNotification *notification =
+        new KNotification(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"), KNotification::CloseWhenWindowActivated);
+    notification->setWindow(view->windowHandle());
+#endif
+
+    notification->setText(i18n("Silence in '%1' (Session '%2')", _displayTitle, _nameTitle));
     notification->setDefaultAction(i18n("Show session"));
     connect(notification, &KNotification::defaultActivated, this, [view, notification]() {
         view->notificationClicked(notification->xdgActivationToken());
@@ -1085,7 +1091,15 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
         }
 
         // FIXME: See comments in Session::silenceTimerDone()
-        KNotification::event(QStringLiteral("Finished"), message, QPixmap(), QApplication::activeWindow(), KNotification::CloseWhenWidgetActivated);
+#if QT_VERSION_MAJOR == 5
+        KNotification *notification = new KNotification(QStringLiteral("Finished"), KNotification::CloseWhenWidgetActivated);
+        notification->setWidget(QApplication::activeWindow());
+#else
+        KNotification *notification = new KNotification(QStringLiteral("Finished"), KNotification::CloseWhenWindowActivated);
+        notification->setWindow(QApplication::activeWindow()->windowHandle());
+#endif
+        notification->setText(message);
+        notification->sendEvent();
     }
 
     if (exitStatus != QProcess::NormalExit) {
@@ -1932,15 +1946,22 @@ void Session::handleActivity()
     }
 
     if (_monitorActivity && !_notifiedActivity) {
-        KNotification *notification = KNotification::event(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"),
-                                                           i18n("Activity in '%1' (Session '%2')", _displayTitle, _nameTitle),
-                                                           QPixmap(),
-                                                           view,
-                                                           KNotification::CloseWhenWidgetActivated);
+#if QT_VERSION_MAJOR == 5
+        KNotification *notification =
+            new KNotification(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"), KNotification::CloseWhenWidgetActivated);
+        notification->setWidget(view);
+#else
+        KNotification *notification =
+            new KNotification(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"), KNotification::CloseWhenWindowActivated);
+        notification->setWindow(view->windowHandle());
+#endif
+        notification->setText(i18n("Activity in '%1' (Session '%2')", _displayTitle, _nameTitle));
         notification->setDefaultAction(i18n("Show session"));
         connect(notification, &KNotification::defaultActivated, this, [view, notification]() {
             view->notificationClicked(notification->xdgActivationToken());
         });
+        notification->sendEvent();
+
         if (view->sessionController()->isMonitorOnce()) {
             view->sessionController()->actionCollection()->action(QStringLiteral("monitor-activity"))->setChecked(false);
         }

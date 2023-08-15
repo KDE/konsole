@@ -356,16 +356,21 @@ void SessionController::snapshot()
     if (_monitorProcessFinish) {
         bool isForegroundProcessActive = session()->isForegroundProcessActive();
         if (!_previousForegroundProcessName.isNull() && !isForegroundProcessActive) {
-            KNotification *notification =
-                KNotification::event(session()->hasFocus() ? QStringLiteral("ProcessFinished") : QStringLiteral("ProcessFinishedHidden"),
-                                     i18n("The process '%1' has finished running in session '%2'", _previousForegroundProcessName, session()->nameTitle()),
-                                     QPixmap(),
-                                     view(),
-                                     KNotification::CloseWhenWidgetActivated);
+#if QT_VERSION_MAJOR == 5
+            KNotification *notification = new KNotification(session()->hasFocus() ? QStringLiteral("ProcessFinished") : QStringLiteral("ProcessFinishedHidden"),
+                                                            KNotification::CloseWhenWidgetActivated);
+            notification->setWidget(view());
+#else
+            KNotification *notification = new KNotification(session()->hasFocus() ? QStringLiteral("ProcessFinished") : QStringLiteral("ProcessFinishedHidden"),
+                                                            KNotification::CloseWhenWindowActivated);
+            notification->setWindow(view()->windowHandle());
+#endif
+            notification->setText(i18n("The process '%1' has finished running in session '%2'", _previousForegroundProcessName, session()->nameTitle()));
             notification->setDefaultAction(i18n("Show session"));
             connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
                 view()->notificationClicked(notification->xdgActivationToken());
             });
+            notification->sendEvent();
             if (_monitorOnce) {
                 actionCollection()->action(QStringLiteral("monitor-process-finish"))->setChecked(false);
             }
@@ -1859,15 +1864,22 @@ void SessionController::resetFontSize()
 void SessionController::notifyPrompt()
 {
     if (session()->isMonitorPrompt()) {
-        KNotification *notification = KNotification::event(session()->hasFocus() ? QStringLiteral("Prompt") : QStringLiteral("PromptHidden"),
-                                                           i18n("The shell prompt is displayed in session '%1'", session()->nameTitle()),
-                                                           QPixmap(),
-                                                           view(),
-                                                           KNotification::CloseWhenWidgetActivated);
+#if QT_VERSION_MAJOR == 5
+        KNotification *notification =
+            new KNotification(session()->hasFocus() ? QStringLiteral("Prompt") : QStringLiteral("PromptHidden"), KNotification::CloseWhenWidgetActivated);
+        notification->setWidget(view());
+#else
+        KNotification *notification =
+            new KNotification(session()->hasFocus() ? QStringLiteral("Prompt") : QStringLiteral("PromptHidden"), KNotification::CloseWhenWindowActivated);
+        notification->setWindow(view()->windowHandle());
+#endif
+
+        notification->setText(i18n("The shell prompt is displayed in session '%1'", session()->nameTitle()));
         notification->setDefaultAction(i18n("Show session"));
         connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
             view()->notificationClicked(notification->xdgActivationToken());
         });
+        notification->sendEvent();
         if (_monitorOnce) {
             actionCollection()->action(QStringLiteral("monitor-prompt"))->setChecked(false);
         }
