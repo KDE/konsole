@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-29 00:48+0000\n"
+"POT-Creation-Date: 2023-08-16 00:48+0000\n"
 "PO-Revision-Date: 2009-09-13 16:45+0100\n"
 "Last-Translator: Berend Ytsma <berendy@gmail.com>\n"
 "Language-Team: Frysk <kde-i18n-fry@kde.org>\n"
@@ -261,14 +261,14 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "Eftergrûn (yntins)"
 
-#: BookmarkHandler.cpp:108
+#: BookmarkHandler.cpp:112
 #, fuzzy, kde-format
 #| msgid "%1 on %2"
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%1 op %2"
 
-#: BookmarkHandler.cpp:110
+#: BookmarkHandler.cpp:114
 #, fuzzy, kde-format
 #| msgid "%1"
 msgctxt "@item:inmenu The host the user is connected to via ssh"
