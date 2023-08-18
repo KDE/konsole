@@ -24,6 +24,10 @@
 // Others
 #if defined(Q_OS_LINUX)
 #include <unistd.h>
+#elif defined(Q_OS_OPENBSD)
+#include <kvm.h>
+#include <sys/param.h>
+#include <sys/sysctl.h>
 #endif
 
 #include <QTest>
@@ -198,9 +202,31 @@ void TerminalInterfaceTest::testTerminalInterface()
     QString command = QStringLiteral("top");
     terminal->sendInput(command + QLatin1Char('\n'));
     stateSpy.wait(2500);
-    // FIXME: find a good way to validate process id of 'top'
     foregroundProcessId = terminal->foregroundProcessId();
     QVERIFY(foregroundProcessId != -1);
+
+// Check that pid indeed belongs to a process running 'top'
+#if defined(Q_OS_LINUX)
+    QFile procInfo(QStringLiteral("/proc/%1/stat").arg(foregroundProcessId));
+    QVERIFY(procInfo.open(QIODevice::ReadOnly));
+    const QString data(procInfo.readAll());
+    const int nameStartIdx = data.indexOf(QLatin1Char('(')) + 1;
+    const QString name(data.mid(nameStartIdx, data.lastIndexOf(QLatin1Char(')')) - nameStartIdx));
+    QCOMPARE(name, command);
+#elif defined(Q_OS_SOLARIS)
+    QFile procExeTarget(QStringLiteral("/proc/%1/execname").arg(foregroundProcessId));
+    QVERIFY(procExeTarget.open(QIODevice::ReadOnly));
+    QCOMPARE(QStringLiteral(procExeTarget.readAll()), command);
+#elif defined(Q_OS_OPENBSD)
+    kvm_t *kd = kvm_openfiles(NULL, NULL, NULL, O_RD_ONLY, NULL);
+    int count;
+    auto kProcStruct = ::kvm_getprocs(kd, KERN_PROC_PID, foregroundProcessId, &count);
+    QCOMPARE(count, 1);
+    QCOMPARE(QStringLiteral(kProcStruct->p_comm), command);
+    kvm_close(kd);
+#endif
+
+    // check that Terminal::foregroundProcessName outputs name of correct command
     foregroundProcessName = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, command);
 
