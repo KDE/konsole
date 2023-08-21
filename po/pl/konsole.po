@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-03-25 09:39+0100\n"
+"PO-Revision-Date: 2023-08-20 10:43+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -47,7 +47,7 @@ msgstr ""
 ">\n"
 ">\n"
 ">\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -2332,13 +2332,12 @@ msgstr "Wyślij przez &ZModem..."
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Monitory jednorazowe"
 
 #: session/SessionController.cpp:905
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Wyczuw&aj ruch"
+msgstr "Wyczuwaj za&pytania"
 
 #: session/SessionController.cpp:912
 #, kde-format
@@ -2478,7 +2477,7 @@ msgstr "Zniszcz program"
 #: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Zapytanie powłoki jest wyświetlane w posiedzeniu '%1'"
 
 #: session/SessionController.cpp:2064
 #, kde-format
