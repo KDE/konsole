@@ -724,8 +724,8 @@ void Session::silenceTimerDone()
     notification->setWindow(view->windowHandle());
 
     notification->setText(i18n("Silence in '%1' (Session '%2')", _displayTitle, _nameTitle));
-    notification->setDefaultAction(i18n("Show session"));
-    connect(notification, &KNotification::defaultActivated, this, [view, notification]() {
+    auto action = notification->addDefaultAction(i18n("Show session"));
+    connect(action, &KNotificationAction::activated, this, [view, notification]() {
         view->notificationClicked(notification->xdgActivationToken());
     });
     if (view->sessionController()->isMonitorOnce()) {
@@ -1925,8 +1925,8 @@ void Session::handleActivity()
             new KNotification(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"), KNotification::CloseWhenWindowActivated);
         notification->setWindow(view->windowHandle());
         notification->setText(i18n("Activity in '%1' (Session '%2')", _displayTitle, _nameTitle));
-        notification->setDefaultAction(i18n("Show session"));
-        connect(notification, &KNotification::defaultActivated, this, [view, notification]() {
+        auto action = notification->addDefaultAction(i18n("Show session"));
+        connect(action, &KNotificationAction::activated, this, [view, notification]() {
             view->notificationClicked(notification->xdgActivationToken());
         });
         notification->sendEvent();

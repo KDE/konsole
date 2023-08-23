@@ -351,8 +351,8 @@ void SessionController::snapshot()
                                                             KNotification::CloseWhenWindowActivated);
             notification->setWindow(view()->windowHandle());
             notification->setText(i18n("The process '%1' has finished running in session '%2'", _previousForegroundProcessName, session()->nameTitle()));
-            notification->setDefaultAction(i18n("Show session"));
-            connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
+            auto action = notification->addDefaultAction(i18n("Show session"));
+            connect(action, &KNotificationAction::activated, this, [this, notification] {
                 view()->notificationClicked(notification->xdgActivationToken());
             });
             notification->sendEvent();
@@ -1798,8 +1798,8 @@ void SessionController::notifyPrompt()
         notification->setWindow(view()->windowHandle());
 
         notification->setText(i18n("The shell prompt is displayed in session '%1'", session()->nameTitle()));
-        notification->setDefaultAction(i18n("Show session"));
-        connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
+        auto action = notification->addDefaultAction(i18n("Show session"));
+        connect(action, &KNotificationAction::activated, this, [this, notification] {
             view()->notificationClicked(notification->xdgActivationToken());
         });
         notification->sendEvent();

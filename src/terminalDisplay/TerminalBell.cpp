@@ -40,8 +40,8 @@ void TerminalBell::bell(TerminalDisplay *terminalDisplay, const QString &message
         //     that use this code via KPart rely on these names for notifications.
         KNotification *notification =
             KNotification::event(terminalHasFocus ? QStringLiteral("BellVisible") : QStringLiteral("BellInvisible"), message, QPixmap());
-        notification->setDefaultAction(i18n("Show session"));
-        connect(notification, &KNotification::defaultActivated, this, [notification, terminalDisplay]() {
+        auto action = notification->addDefaultAction(i18n("Show session"));
+        connect(action, &KNotificationAction::activated, this, [notification, terminalDisplay]() {
             terminalDisplay->notificationClicked(notification->xdgActivationToken());
         });
     } break;

@@ -1143,8 +1143,8 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"), params[1]);
         }
 
-        notification->setDefaultAction(i18n("Show session"));
-        connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
+        auto action = notification->addDefaultAction(i18n("Show session"));
+        connect(action, &KNotificationAction::activated, this, [this, notification]() {
             _currentScreen->currentTerminalDisplay()->notificationClicked(notification->xdgActivationToken());
         });
 
