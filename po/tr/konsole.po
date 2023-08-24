@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-19 00:48+0000\n"
-"PO-Revision-Date: 2023-08-02 00:50+0300\n"
+"PO-Revision-Date: 2023-08-24 00:28+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1559,7 +1559,7 @@ msgstr "SSH Yapılandırması"
 #: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
 msgid "Host: %1"
-msgstr "Yerel Makine: %1"
+msgstr "Ana makine: %1"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
@@ -4677,7 +4677,7 @@ msgstr "Dosyaların altını çiz"
 #: widgets/EditProfileMousePage.ui:285
 #, kde-format
 msgid "Text Editor Command: "
-msgstr "Metin Düzenleyicisi Komutu:"
+msgstr "Metin düzenleyicisi komutu:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
@@ -5179,40 +5179,40 @@ msgstr "Sekme rengi:"
 #: widgets/TabTitleFormatButton.cpp:22 widgets/TabTitleFormatButton.cpp:31
 #, c-format, kde-format
 msgid "Program Name: %n"
-msgstr "Uygulama Adı: %n"
+msgstr "Uygulama adı: %n"
 
 #: widgets/TabTitleFormatButton.cpp:23 widgets/TabTitleFormatButton.cpp:32
 #, c-format, kde-format
 msgid "Current Directory (Short): %d"
-msgstr "Geçerli Dizin (Kısa): %d"
+msgstr "Geçerli dizin (kısa): %d"
 
 #: widgets/TabTitleFormatButton.cpp:24 widgets/TabTitleFormatButton.cpp:33
 #, kde-format
 msgid "Current Directory (Long): %D"
-msgstr "Geçerli Dizin (Uzun): %D"
+msgstr "Geçerli dizin (uzun): %D"
 
 #: widgets/TabTitleFormatButton.cpp:25 widgets/TabTitleFormatButton.cpp:34
 #: widgets/TabTitleFormatButton.cpp:51 widgets/TabTitleFormatButton.cpp:59
 #, kde-format
 msgid "Window Title Set by Shell: %w"
-msgstr "Kabuk Tarafından Ayarlanmış Pencere Başlığı: %w"
+msgstr "Kabuk tarafından ayarlanmış pencere başlığı: %w"
 
 #: widgets/TabTitleFormatButton.cpp:26 widgets/TabTitleFormatButton.cpp:35
 #: widgets/TabTitleFormatButton.cpp:52 widgets/TabTitleFormatButton.cpp:60
 #, kde-format
 msgid "Session Number: %#"
-msgstr "Oturum Numarası: %#"
+msgstr "Oturum numarası: %#"
 
 #: widgets/TabTitleFormatButton.cpp:27 widgets/TabTitleFormatButton.cpp:36
 #: widgets/TabTitleFormatButton.cpp:46 widgets/TabTitleFormatButton.cpp:54
 #, c-format, kde-format
 msgid "User Name: %u"
-msgstr "Kullanıcı Adı: %u"
+msgstr "Kullanıcı adı: %u"
 
 #: widgets/TabTitleFormatButton.cpp:28 widgets/TabTitleFormatButton.cpp:37
 #, kde-format
 msgid "Local Host: %h"
-msgstr "Yerel Makine: %h"
+msgstr "Yerel makine: %h"
 
 #: widgets/TabTitleFormatButton.cpp:29 widgets/TabTitleFormatButton.cpp:38
 #, kde-format
@@ -5222,17 +5222,17 @@ msgstr "Kullanıcının Bourne istemi mührü: %B"
 #: widgets/TabTitleFormatButton.cpp:47 widgets/TabTitleFormatButton.cpp:55
 #, kde-format
 msgid "User Name@ (if given): %U"
-msgstr "Kullanıcı Adı@ (belirtilmişse): %U"
+msgstr "Kullanıcı adı@ (belirtilmişse): %U"
 
 #: widgets/TabTitleFormatButton.cpp:48 widgets/TabTitleFormatButton.cpp:56
 #, kde-format
 msgid "Remote Host (Short): %h"
-msgstr "Uzak Makine (Kısa): %h"
+msgstr "Uzak makine (kısa): %h"
 
 #: widgets/TabTitleFormatButton.cpp:49 widgets/TabTitleFormatButton.cpp:57
 #, kde-format
 msgid "Remote Host (Long): %H"
-msgstr "Uzak Makine (Uzun): %H"
+msgstr "Uzak makine (uzun): %H"
 
 #: widgets/TabTitleFormatButton.cpp:50 widgets/TabTitleFormatButton.cpp:58
 #, c-format, kde-format
