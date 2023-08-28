@@ -80,6 +80,16 @@
       <default>true</default>
     </entry>
   </group>
+  <group name="MemorySettings">
+    <entry name="EnableMemoryMonitoring" type="Bool">
+      <label>Control whether creation of child cgroups are created tabs</label>
+      <default>false</default>
+    </entry>
+    <entry name="MemoryLimitValue" type="Int">
+      <label>Determines the memory consumption level above which throttling will start</label>
+      <default>192</default>
+    </entry>
+  </group>
   <group name="SplitView">
     <entry name="SplitViewVisibility" type="Enum">
       <label>Control the visibility of the whole tab bar</label>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MemorySettings</class>
+ <widget class="QWidget" name="MemorySettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>347</width>
+    <height>347</height>
+   </rect>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="kcfg_EnableMemoryMonitoring">
+     <property name="text">
+      <string>Enable memory monitoring:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Changes will take effect upon restart. If enabled, sustained memory consumption by Konsole
+exceeding the specified value will cause systemd-oomd to eliminate the tab(s)
+containing the memory-intensive process(es). Note: enabling
+might cause greater slowdowns during high memory consumption and specifying
+excessively low values might still cause Konsole to be killed.</string> 
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Memory limit:</string>
+     </property>
+    </widget> 
+   </item>
+   <item row="2" column="1">
+    <widget class="QSpinBox" name="kcfg_MemoryLimitValue">
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>999999</number>
+     </property>
+     <property name="suffix">
+      <string> MB</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

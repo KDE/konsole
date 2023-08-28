@@ -321,12 +321,106 @@ void ProcessInfo::setFileError(QFile::FileError error)
 }
 
 #if defined(Q_OS_LINUX)
+#include <QDBusArgument>
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
+#include <QDBusMessage>
+#include <QDBusMetaType>
+#include <QMap>
+#include <QThread>
+#include <QVariant>
+
+#include "KonsoleSettings.h"
+
+typedef QPair<QString, QDBusVariant> VariantPair;
+typedef QList<VariantPair> VariantList;
+typedef QList<QPair<QString, VariantList>> EmptyArray;
+
+Q_DECLARE_METATYPE(VariantPair);
+Q_DECLARE_METATYPE(VariantList);
+Q_DECLARE_METATYPE(EmptyArray);
+
+// EmptyArray is a custom type used for the last argument of org.freedesktop.systemd1.Manager.StartTransientUnit
+
+QDBusArgument &operator<<(QDBusArgument &argument, const VariantPair pair)
+{
+    argument.beginStructure();
+    argument << pair.first;
+    argument << pair.second;
+    argument.endStructure();
+
+    return argument;
+}
+
+const QDBusArgument &operator>>(const QDBusArgument &argument, VariantPair &pair)
+{
+    argument.beginStructure();
+    argument >> pair.first;
+    QVariant value;
+    argument >> value;
+    pair.second = qvariant_cast<QDBusVariant>(value);
+    argument.endStructure();
+
+    return argument;
+}
+
+QDBusArgument &operator<<(QDBusArgument &argument, const QPair<QString, VariantList> pair)
+{
+    argument.beginStructure();
+    argument << pair.first;
+    argument << pair.second;
+    argument.endStructure();
+
+    return argument;
+}
+
+const QDBusArgument &operator>>(const QDBusArgument &argument, QPair<QString, VariantList> &pair)
+{
+    argument.beginStructure();
+    argument >> pair.first;
+    VariantList variantList;
+    argument >> variantList;
+    pair.second = variantList;
+    argument.endStructure();
+
+    return argument;
+}
+
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
-    explicit LinuxProcessInfo(int pid)
+    explicit LinuxProcessInfo(int pid, int sessionPid)
         : UnixProcessInfo(pid)
     {
+        if (pid == 0 || _cGroupCreationFailed) {
+            return;
+        }
+
+        if (_createdAppCGroupPath.isEmpty() && !_cGroupCreationFailed) {
+            _cGroupCreationFailed = KonsoleSettings::enableMemoryMonitoring() && !initCGroupHierachy(pid);
+            return;
+        }
+
+        const bool isForegroundProcess = sessionPid != -1;
+
+        if (!isForegroundProcess) {
+            _cGroupCreationFailed = !createCGroup(QStringLiteral("tab(%1).scope").arg(pid), pid);
+        } else {
+            _cGroupCreationFailed = !moveToCGroup(getProcCGroup(sessionPid), pid);
+        }
+    }
+
+    static bool setUnitMemLimit(const int newMemHigh)
+    {
+        QFile memHighFile(_createdAppCGroupPath + QDir::separator() + QStringLiteral("memory.high"));
+
+        if (_cGroupCreationFailed || !memHighFile.open(QIODevice::WriteOnly)) {
+            return false;
+        }
+
+        memHighFile.write(QStringLiteral("%1M").arg(newMemHigh).toLocal8Bit());
+
+        return true;
     }
 
 protected:
@@ -495,7 +589,136 @@ private:
 
         return true;
     }
+
+    QDBusMessage callSmdDBus(const QString &objectPath, const QString &interfaceName, const QString &methodName, const QList<QVariant> &args)
+    {
+        const QString service(QStringLiteral("org.freedesktop.systemd1"));
+        const QString interface(service + QLatin1Char('.') + interfaceName);
+        auto methodCall = QDBusMessage::createMethodCall(service, objectPath, interface, methodName);
+        methodCall.setArguments(args);
+
+        return QDBusConnection::sessionBus().call(methodCall);
+    }
+
+    bool initCGroupHierachy(int pid)
+    {
+        qDBusRegisterMetaType<VariantPair>();
+        qDBusRegisterMetaType<VariantList>();
+        qDBusRegisterMetaType<QPair<QString, VariantList>>();
+        qDBusRegisterMetaType<EmptyArray>();
+
+        const QString managerObjPath(QStringLiteral("/org/freedesktop/systemd1"));
+        const QString appUnitName(QStringLiteral("transientKonsole.scope"));
+
+        // check if systemd dbus services exist
+        if (!QDBusConnection::sessionBus().interface()->isServiceRegistered("org.freedesktop.systemd1")) {
+            return false;
+        }
+
+        // get current application cgroup path
+        const QString oldAppCGroupPath(getProcCGroup(getpid()));
+
+        // create application unit
+        VariantList properties;
+        const QList<uint> mainPid({static_cast<quint32>(getpid())});
+
+        properties.append(VariantPair({QStringLiteral("Delegate"), QDBusVariant(QVariant::fromValue(true))}));
+        properties.append(VariantPair({QStringLiteral("ManagedOOMMemoryPressure"), QDBusVariant(QVariant::fromValue(QStringLiteral("kill")))}));
+        properties.append(VariantPair({QStringLiteral("PIDs"), QDBusVariant(QVariant::fromValue(mainPid))}));
+
+        if (!createSystemdUnit(appUnitName, properties)) {
+            return false;
+        }
+
+        // get created app cgroup path
+        while (getProcCGroup(getpid()) == oldAppCGroupPath) {
+            QThread::msleep(100); // wait for new unit to be created
+        }
+
+        _createdAppCGroupPath = getProcCGroup(getpid());
+
+        // create sub cgroups
+        if (!createCGroup(QStringLiteral("main.scope"), getpid()) || !createCGroup(QStringLiteral("tab(%1).scope").arg(pid), pid)) {
+            return false;
+        }
+
+        // enable all controllers
+        QFile appCGroupContsFile(_createdAppCGroupPath + QStringLiteral("/cgroup.controllers"));
+        QFile appCGroupSTContsFile(_createdAppCGroupPath + QStringLiteral("/cgroup.subtree_control"));
+
+        if (!appCGroupContsFile.open(QIODevice::ReadOnly) || !appCGroupSTContsFile.open(QIODevice::WriteOnly)) {
+            setFileError(static_cast<QFile::FileError>(appCGroupContsFile.error() | appCGroupSTContsFile.error()));
+            return false;
+        }
+
+        const QStringList conts(QString(appCGroupContsFile.readAll()).split(' '));
+        QString contsToEnable;
+
+        for (auto cont : conts) {
+            contsToEnable += QLatin1Char('+') + cont.simplified();
+            if (!conts.endsWith(cont)) {
+                contsToEnable += QLatin1Char(' ');
+            }
+        }
+
+        appCGroupSTContsFile.write(contsToEnable.toLocal8Bit());
+
+        return setUnitMemLimit(KonsoleSettings::memoryLimitValue());
+    }
+
+    QString getProcCGroup(const int pid)
+    {
+        const QString cGroupFilePath(QStringLiteral("/proc/%1/cgroup").arg(pid));
+        QFile cGroupFile(cGroupFilePath);
+
+        if (!cGroupFile.open(QIODevice::ReadOnly)) {
+            setFileError(cGroupFile.error());
+            return QString();
+        }
+
+        const QString data(cGroupFile.readAll());
+
+        const QString cGroupPath(data.mid(data.lastIndexOf(QLatin1Char(':')) + 1));
+
+        return (QStringLiteral("/sys/fs/cgroup") + cGroupPath).trimmed();
+    }
+
+    bool createSystemdUnit(const QString &name, const VariantList &propList)
+    {
+        const QList<QVariant> args({name, QStringLiteral("fail"), QVariant::fromValue(propList), QVariant::fromValue(EmptyArray())});
+
+        return callSmdDBus("/org/freedesktop/systemd1", "Manager", "StartTransientUnit", args).type() != QDBusMessage::ErrorMessage;
+    }
+
+    bool createCGroup(const QString &name, int initialPid)
+    {
+        const QString newCGroupPath(_createdAppCGroupPath + QLatin1Char('/') + name);
+
+        QDir::root().mkpath(newCGroupPath);
+
+        return moveToCGroup(newCGroupPath, initialPid);
+    }
+
+    bool moveToCGroup(const QString &cGroupPath, int pid)
+    {
+        QFile cGroupProcs(cGroupPath + QStringLiteral("/cgroup.procs"));
+
+        if (!cGroupProcs.open(QIODevice::WriteOnly)) {
+            setFileError(cGroupProcs.error());
+            return false;
+        }
+
+        cGroupProcs.write(QStringLiteral("%1").arg(pid).toLocal8Bit());
+
+        return true;
+    }
+
+    static QString _createdAppCGroupPath;
+    static bool _cGroupCreationFailed;
 };
+
+QString LinuxProcessInfo::_createdAppCGroupPath = QString();
+bool LinuxProcessInfo::_cGroupCreationFailed = false;
 
 #elif defined(Q_OS_FREEBSD)
 class FreeBSDProcessInfo : public UnixProcessInfo
@@ -979,11 +1202,11 @@ private:
 };
 #endif
 
-ProcessInfo *ProcessInfo::newInstance(int pid)
+ProcessInfo *ProcessInfo::newInstance(int pid, int sessionPid)
 {
     ProcessInfo *info;
 #if defined(Q_OS_LINUX)
-    info = new LinuxProcessInfo(pid);
+    info = new LinuxProcessInfo(pid, sessionPid);
 #elif defined(Q_OS_SOLARIS)
     info = new SolarisProcessInfo(pid);
 #elif defined(Q_OS_MACOS)

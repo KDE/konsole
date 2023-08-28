@@ -1211,7 +1211,7 @@ bool Session::updateForegroundProcessInfo()
     const int foregroundPid = _shellProcess->foregroundProcessGroup();
     if (foregroundPid != _foregroundPid) {
         delete _foregroundProcessInfo;
-        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid);
+        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid, processId());
         _foregroundPid = foregroundPid;
     }
 

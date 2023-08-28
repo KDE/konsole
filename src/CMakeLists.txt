@@ -243,6 +243,7 @@ ki18n_wrap_ui(konsoleprivate_SRCS
     PrintOptions.ui       # Temporary to build session static library
     RenameTabDialog.ui
     settings/GeneralSettings.ui
+    settings/MemorySettings.ui
     settings/PartInfo.ui
     settings/ProfileSettings.ui
     settings/TabBarSettings.ui
@@ -305,6 +306,7 @@ add_library(konsoleapp SHARED Application.cpp
    settings/ConfigDialogButtonGroupManager.cpp
    settings/TemporaryFilesSettings.cpp
    settings/GeneralSettings.cpp
+   settings/MemorySettings.cpp
    settings/ProfileSettings.cpp
    settings/TabBarSettings.cpp
    settings/ThumbnailsSettings.cpp

@@ -66,8 +66,10 @@ public:
      * the current platform which provides information about a given process.
      *
      * @param pid The pid of the process to examine
+     * @param sessionPid -1 if examined process is session process,
+     *		else will be pid of session process of the tab housing examined process
      */
-    static ProcessInfo *newInstance(int pid);
+    static ProcessInfo *newInstance(int pid, int sessionPid = -1);
 
     virtual ~ProcessInfo()
     {

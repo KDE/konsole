@@ -59,6 +59,7 @@
 
 #include "settings/ConfigurationDialog.h"
 #include "settings/GeneralSettings.h"
+#include "settings/MemorySettings.h"
 #include "settings/ProfileSettings.h"
 #include "settings/TabBarSettings.h"
 #include "settings/TemporaryFilesSettings.h"
@@ -969,6 +970,12 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
     profilePage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-theme")));
     confDialog->addPage(profilePage, true);
     connect(confDialog, &QDialog::accepted, profileSettings, &ProfileSettings::slotAccepted);
+
+#if defined(Q_OS_LINUX)
+    const QString memoryPageName = i18nc("@title Preferences page name", "Memory");
+    auto memoryPage = new KPageWidgetItem(new MemorySettings(confDialog), memoryPageName);
+    confDialog->addPage(memoryPage, true);
+#endif
 
     const QString tabBarPageName = i18nc("@title Preferences page name", "Tab Bar / Splitters");
     auto tabBarPage = new KPageWidgetItem(new TabBarSettings(confDialog), tabBarPageName);
