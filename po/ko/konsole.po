@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-19 00:48+0000\n"
+"POT-Creation-Date: 2023-08-29 00:48+0000\n"
 "PO-Revision-Date: 2023-07-23 21:01+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1201,61 +1201,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "이 외의 많은 사람들에게 감사드립니다.\n"
 
-#: MainWindow.cpp:390
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "새 탭(&N)"
 
-#: MainWindow.cpp:400
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "탭 복제(&C)"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "새 창(&W)"
 
-#: MainWindow.cpp:414
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "창 닫기"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:420
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "책갈피(&B)"
 
-#: MainWindow.cpp:447
+#: MainWindow.cpp:448
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "프로필 관리..."
 
-#: MainWindow.cpp:453
+#: MainWindow.cpp:454
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "메뉴 활성화"
 
-#: MainWindow.cpp:459
+#: MainWindow.cpp:460
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "탭 레이아웃 저장..."
 
-#: MainWindow.cpp:468
+#: MainWindow.cpp:469
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "탭 레이아웃 불러오기..."
 
-#: MainWindow.cpp:784 MainWindow.cpp:809
+#: MainWindow.cpp:785 MainWindow.cpp:810
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1263,55 +1263,61 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "현재 창에 프로세스 %1개가 실행 중입니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
+#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "닫기 확인"
 
-#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
+#: MainWindow.cpp:792 MainWindow.cpp:817 MainWindow.cpp:835
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "창 닫기(&W)"
 
-#: MainWindow.cpp:817 MainWindow.cpp:835
+#: MainWindow.cpp:818 MainWindow.cpp:836
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "현재 탭 닫기(&T)"
 
-#: MainWindow.cpp:830
+#: MainWindow.cpp:831
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "현재 창에 터미널 %1개가 열려 있습니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:945 Part.cpp:307
+#: MainWindow.cpp:946 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "프로필"
 
-#: MainWindow.cpp:962
+#: MainWindow.cpp:963
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "일반"
 
-#: MainWindow.cpp:973
+#: MainWindow.cpp:975
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Memory"
+msgstr ""
+
+#: MainWindow.cpp:980
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "탭 표시줄/구분자"
 
-#: MainWindow.cpp:978
+#: MainWindow.cpp:985
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "임시 파일"
 
-#: MainWindow.cpp:983
+#: MainWindow.cpp:990
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1864,14 +1870,14 @@ msgstr "출력 옵션"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:165
+#: PrintOptions.ui:39 settings/konsole.kcfg:175
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "프린터 친화 모드 (검은 텍스트, 배경색 없음)(&F)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:169
+#: PrintOptions.ui:46 settings/konsole.kcfg:179
 #, kde-format
 msgid "&Scale output"
 msgstr "출력 크기 조정(&S)"
@@ -2694,96 +2700,141 @@ msgstr "모든 검색 결과 강조"
 msgid "Sets whether matching text should be highlighted"
 msgstr "일치하는 텍스트가 강조될 지 설정합니다"
 
+#. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
+#: settings/konsole.kcfg:85
+#, kde-format
+msgid "Control whether creation of child cgroups are created tabs"
+msgstr ""
+
+#. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
+#: settings/konsole.kcfg:89
+#, kde-format
+msgid ""
+"Determines the memory consumption level above which throttling will start"
+msgstr ""
+
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:85 settings/konsole.kcfg:105
+#: settings/konsole.kcfg:95 settings/konsole.kcfg:115
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "전체 탭 표시줄 표시 여부 결정"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:94
+#: settings/konsole.kcfg:104
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "패널 사이의 손잡이 크기 조정"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:114
+#: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "탭 표시줄 위치 결정"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:122
+#: settings/konsole.kcfg:132
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "탭 표시줄 시각 스타일 결정"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:126
+#: settings/konsole.kcfg:136
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "탭 표시줄에 사용자 정의 .css 파일 사용"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:130
+#: settings/konsole.kcfg:140
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "탭 표시줄 스타일에 사용할 .css 파일"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "열린 탭을 가운데 단추로 클릭했을 때 닫기 허용"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:138
+#: settings/konsole.kcfg:148
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "탭 표시줄의 '새 탭' 단추 표시 설정"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:142
+#: settings/konsole.kcfg:152
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "\"탭 닫기\" 단추를 표시할 위치 설정"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:151
+#: settings/konsole.kcfg:161
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "새 탭의 위치 결정"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:159
+#: settings/konsole.kcfg:169
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "탭 너비 확장"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:175
+#: settings/konsole.kcfg:185
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "스크롤백 파일에 시스템 전역 위치 사용"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:179
+#: settings/konsole.kcfg:189
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "스크롤백 파일에 사용자 정의 위치 사용"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:183
+#: settings/konsole.kcfg:193
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "스크롤백 파일에 지정한 폴더 위치 사용"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:187
+#: settings/konsole.kcfg:197
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "스크롤백 파일에 다음 폴더 사용"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
+#: settings/MemorySettings.ui:17
+#, fuzzy, kde-format
+#| msgid "Tab Monitoring"
+msgid "Enable memory monitoring:"
+msgstr "탭 모니터링"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/MemorySettings.ui:28
+#, kde-format
+msgid ""
+"Changes will take effect upon restart. If enabled, sustained memory "
+"consumption by Konsole\n"
+"exceeding the specified value will cause systemd-oomd to eliminate the "
+"tab(s)\n"
+"containing the memory-intensive process(es). Note: enabling\n"
+"might cause greater slowdowns during high memory consumption and specifying\n"
+"excessively low values might still cause Konsole to be killed."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/MemorySettings.ui:41
+#, kde-format
+msgid "Memory limit:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
+#: settings/MemorySettings.ui:54
+#, kde-format
+msgid " MB"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29

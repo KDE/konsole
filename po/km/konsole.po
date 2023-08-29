@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-19 00:48+0000\n"
+"POT-Creation-Date: 2023-08-29 00:48+0000\n"
 "PO-Revision-Date: 2012-12-20 16:07+0700\n"
 "Last-Translator: sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros>\n"
@@ -1261,49 +1261,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "សូម​អរគុណ​ចំពោះ​អ្នក​ផ្សេង​ទៀត​ជាច្រើន ។\n"
 
-#: MainWindow.cpp:390
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "ផ្ទាំង​​ថ្មី"
 
-#: MainWindow.cpp:400
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "ក្លូន​ផ្ទាំង"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "បង្អួច​ថ្មី"
 
-#: MainWindow.cpp:414
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "បិទ​បង្អួច"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:420
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "ចំណាំ"
 
-#: MainWindow.cpp:447
+#: MainWindow.cpp:448
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "គ្រប់គ្រង​ទម្រង់..."
 
-#: MainWindow.cpp:453
+#: MainWindow.cpp:454
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "ធ្វើ​ឲ្យ​ម៉ឺនុយ​សកម្ម​"
 
-#: MainWindow.cpp:459
+#: MainWindow.cpp:460
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -1311,13 +1311,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "ផ្លាស់​ទី​ផ្ទាំង​​ទៅ​ឆ្វេង"
 
-#: MainWindow.cpp:468
+#: MainWindow.cpp:469
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:784 MainWindow.cpp:809
+#: MainWindow.cpp:785 MainWindow.cpp:810
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1329,13 +1329,13 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "មាន​ផ្ទាំង %1 បើក​នៅ​ក្នុង​បង្អួច​នេះ ។ តើ​អ្នក​នៅតែ​ចង់​បោះបង់​ឬ ?"
 
-#: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
+#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "បិទ​ការ​អះអាង"
 
-#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
+#: MainWindow.cpp:792 MainWindow.cpp:817 MainWindow.cpp:835
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Close Window"
@@ -1343,7 +1343,7 @@ msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "បិទ​បង្អួច"
 
-#: MainWindow.cpp:817 MainWindow.cpp:835
+#: MainWindow.cpp:818 MainWindow.cpp:836
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Close Current Tab"
@@ -1351,7 +1351,7 @@ msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "បិទ​ផ្ទាំង​បច្ចុប្បន្ន"
 
-#: MainWindow.cpp:830
+#: MainWindow.cpp:831
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 tab open in this window. Do you still want to quit?"
@@ -1361,7 +1361,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "មាន​ផ្ទាំង %1 បើក​នៅ​ក្នុង​បង្អួច​នេះ ។ តើ​អ្នក​នៅតែ​ចង់​បោះបង់​ឬ ?"
 
-#: MainWindow.cpp:945 Part.cpp:307
+#: MainWindow.cpp:946 Part.cpp:307
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1369,25 +1369,31 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "ទម្រង់​ថ្មី​"
 
-#: MainWindow.cpp:962
+#: MainWindow.cpp:963
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ទូទៅ"
 
-#: MainWindow.cpp:973
+#: MainWindow.cpp:975
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Memory"
+msgstr ""
+
+#: MainWindow.cpp:980
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:978
+#: MainWindow.cpp:985
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:983
+#: MainWindow.cpp:990
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1977,14 +1983,14 @@ msgstr "ជម្រើស​លទ្ធផល"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:165
+#: PrintOptions.ui:39 settings/konsole.kcfg:175
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "បោះពុម្ព របៀប​ងាយស្រួល (អត្ថបទ​ខ្មៅ គ្មាន​ផ្ទៃ​ខាងក្រោយ)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:169
+#: PrintOptions.ui:46 settings/konsole.kcfg:179
 #, kde-format
 msgid "&Scale output"
 msgstr "លទ្ធផល​មាត្រដ្ឋាន"
@@ -2831,98 +2837,143 @@ msgstr "បន្លិច​​ផ្គូផ្គង​ទាំងអស់
 msgid "Sets whether matching text should be highlighted"
 msgstr "កំណត់​ថា​តើ​អត្ថបទ​ដែល​ផ្គូផ្គង​គួរ​ត្រូវ​បាន​បន្លិច"
 
+#. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
+#: settings/konsole.kcfg:85
+#, kde-format
+msgid "Control whether creation of child cgroups are created tabs"
+msgstr ""
+
+#. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
+#: settings/konsole.kcfg:89
+#, kde-format
+msgid ""
+"Determines the memory consumption level above which throttling will start"
+msgstr ""
+
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:85 settings/konsole.kcfg:105
+#: settings/konsole.kcfg:95 settings/konsole.kcfg:115
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "ពិនិត្យមើល​ភាព​ដែល​អាច​មើល​ឃើញ​​នៃ​របារ​ផ្ទាំង​ទាំងមូល"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:94
+#: settings/konsole.kcfg:104
 #, fuzzy, kde-format
 #| msgid "Control the visibility of the whole tab bar"
 msgid "Control the size of the handle between panels"
 msgstr "ពិនិត្យមើល​ភាព​ដែល​អាច​មើល​ឃើញ​​នៃ​របារ​ផ្ទាំង​ទាំងមូល"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:114
+#: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "ពិនិត្យមើល​ទីតាំង​នៃ​​របារ​ផ្ទាំង"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:122
+#: settings/konsole.kcfg:132
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "ពិនិត្យមើល​រចនាប័ទ្ម​ដែល​អាច​មើល​ឃើញ​នៃ​របារ​ផ្ទាំង"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:126
+#: settings/konsole.kcfg:136
 #, fuzzy, kde-format
 #| msgid "Use a custom, fixed color for the cursor"
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "ប្រើ​ពណ៌​ថេរ​ផ្ទាល់ខ្លួន​សម្រាប់​ទស្សន៍ទ្រនិច"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:130
+#: settings/konsole.kcfg:140
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr ""
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:138
+#: settings/konsole.kcfg:148
 #, fuzzy, kde-format
 #| msgid "Control the visibility of quick buttons on the tab bar"
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "ពិនិត្យមើល​ភាព​ដែល​អាច​មើល​ឃើញ​នៃ​ប៊ូតុង​រហ័ស​នៅ​លើ​របារ​ផ្ទាំង"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:142
+#: settings/konsole.kcfg:152
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:151
+#: settings/konsole.kcfg:161
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "ពិនិត្យ​មើល​ទីតាំង​ដែល​បាន​ដាក់​ផ្ទាំង​ថ្មី"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:159
+#: settings/konsole.kcfg:169
 #, kde-format
 msgid "Expand the tab widths"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:175
+#: settings/konsole.kcfg:185
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:179
+#: settings/konsole.kcfg:189
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:183
+#: settings/konsole.kcfg:193
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:187
+#: settings/konsole.kcfg:197
 #, kde-format
 msgid "For scrollback files, use this folder"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
+#: settings/MemorySettings.ui:17
+#, fuzzy, kde-format
+#| msgid "Tab Monitoring"
+msgid "Enable memory monitoring:"
+msgstr "ផ្ទាំង​ត្រួតពិនិត្យ"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/MemorySettings.ui:28
+#, kde-format
+msgid ""
+"Changes will take effect upon restart. If enabled, sustained memory "
+"consumption by Konsole\n"
+"exceeding the specified value will cause systemd-oomd to eliminate the "
+"tab(s)\n"
+"containing the memory-intensive process(es). Note: enabling\n"
+"might cause greater slowdowns during high memory consumption and specifying\n"
+"excessively low values might still cause Konsole to be killed."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/MemorySettings.ui:41
+#, kde-format
+msgid "Memory limit:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
+#: settings/MemorySettings.ui:54
+#, kde-format
+msgid " MB"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)

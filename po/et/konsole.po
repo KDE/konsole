@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-19 00:48+0000\n"
+"POT-Creation-Date: 2023-08-29 00:48+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -1222,49 +1222,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Tänu ka kõigile teistele.\n"
 
-#: MainWindow.cpp:390
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Uus kaart"
 
-#: MainWindow.cpp:400
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klooni kaart"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Uus &aken"
 
-#: MainWindow.cpp:414
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Sulge aken"
 
-#: MainWindow.cpp:419
+#: MainWindow.cpp:420
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Järjehoidjad"
 
-#: MainWindow.cpp:447
+#: MainWindow.cpp:448
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profiilide haldamine..."
 
-#: MainWindow.cpp:453
+#: MainWindow.cpp:454
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktiveeri menüü"
 
-#: MainWindow.cpp:459
+#: MainWindow.cpp:460
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move tab to the left"
@@ -1272,13 +1272,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Kaardi liigutamine vasakule"
 
-#: MainWindow.cpp:468
+#: MainWindow.cpp:469
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:784 MainWindow.cpp:809
+#: MainWindow.cpp:785 MainWindow.cpp:810
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1287,55 +1287,61 @@ msgid_plural ""
 msgstr[0] "Selles aknas töötab üks protsess. Kas tõesti väljuda?"
 msgstr[1] "Selles aknas töötab %1 protsessi. Kas tõesti väljuda?"
 
-#: MainWindow.cpp:790 MainWindow.cpp:815 MainWindow.cpp:833
+#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Sulgemise kinnitus"
 
-#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
+#: MainWindow.cpp:792 MainWindow.cpp:817 MainWindow.cpp:835
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Sulge ake&n"
 
-#: MainWindow.cpp:817 MainWindow.cpp:835
+#: MainWindow.cpp:818 MainWindow.cpp:836
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Sulge ak&tiivne kaart"
 
-#: MainWindow.cpp:830
+#: MainWindow.cpp:831
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Selles aknas on avatud %1 terminali. Kas tõesti soovid väljuda?"
 
-#: MainWindow.cpp:945 Part.cpp:307
+#: MainWindow.cpp:946 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiilid"
 
-#: MainWindow.cpp:962
+#: MainWindow.cpp:963
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Üldine"
 
-#: MainWindow.cpp:973
+#: MainWindow.cpp:975
+#, kde-format
+msgctxt "@title Preferences page name"
+msgid "Memory"
+msgstr ""
+
+#: MainWindow.cpp:980
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Kaardiriba ja poolitamine"
 
-#: MainWindow.cpp:978
+#: MainWindow.cpp:985
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Ajutised failid"
 
-#: MainWindow.cpp:983
+#: MainWindow.cpp:990
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1939,14 +1945,14 @@ msgstr "Väljundi valikud"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:165
+#: PrintOptions.ui:39 settings/konsole.kcfg:175
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Printerisõ&bralik režiim (must tekst, taustata)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:169
+#: PrintOptions.ui:46 settings/konsole.kcfg:179
 #, kde-format
 msgid "&Scale output"
 msgstr "Väljundi &skaleerimine"
@@ -2789,96 +2795,141 @@ msgstr "Kõigi vastete esiletõstmine"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Siin saab määrata, kas leitud tekst tõstetakse esile"
 
+#. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
+#: settings/konsole.kcfg:85
+#, kde-format
+msgid "Control whether creation of child cgroups are created tabs"
+msgstr ""
+
+#. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
+#: settings/konsole.kcfg:89
+#, kde-format
+msgid ""
+"Determines the memory consumption level above which throttling will start"
+msgstr ""
+
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:85 settings/konsole.kcfg:105
+#: settings/konsole.kcfg:95 settings/konsole.kcfg:115
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "Kogu kaardiriba nähtavuse kontrollimine"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:94
+#: settings/konsole.kcfg:104
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "Paneelide vahele jäetava pideme suuruse määramine"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:114
+#: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "Kaardiriba asukoha kontrollimine"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:122
+#: settings/konsole.kcfg:132
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "Kaardiriba visuaalse stiili kontrollimine"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:126
+#: settings/konsole.kcfg:136
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "Kasutaja määratud .css-faili kasutamine kaardiribal"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:130
+#: settings/konsole.kcfg:140
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr ".css-fail kaardiriba stiili määramiseks"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:144
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "Keskklõpsuga avatud kaardil suleb selle"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:138
+#: settings/konsole.kcfg:148
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "Kaardiriba \"uue kaardi\" nupu näitamine või peitmine"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:142
+#: settings/konsole.kcfg:152
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "Nupu \"Sulge kaart\" näitamine või peitmine"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:151
+#: settings/konsole.kcfg:161
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Määramine, kuhu asetada uus kaart"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:159
+#: settings/konsole.kcfg:169
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "Kaartide laiuse suurendamine"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:175
+#: settings/konsole.kcfg:185
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "Ajaloofailid salvestatakse süsteemsesse kataloogi"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:179
+#: settings/konsole.kcfg:189
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "Ajaloofailid salvestatakse kasutaja määratud kataloogi"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:183
+#: settings/konsole.kcfg:193
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "Ajaloofailid salvestatakse määratud kataloogi"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:187
+#: settings/konsole.kcfg:197
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Ajaloofailid salvestatakse sellesse kataloogi"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
+#: settings/MemorySettings.ui:17
+#, fuzzy, kde-format
+#| msgid "Tab Monitoring"
+msgid "Enable memory monitoring:"
+msgstr "Kaartide jälgimine"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/MemorySettings.ui:28
+#, kde-format
+msgid ""
+"Changes will take effect upon restart. If enabled, sustained memory "
+"consumption by Konsole\n"
+"exceeding the specified value will cause systemd-oomd to eliminate the "
+"tab(s)\n"
+"containing the memory-intensive process(es). Note: enabling\n"
+"might cause greater slowdowns during high memory consumption and specifying\n"
+"excessively low values might still cause Konsole to be killed."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: settings/MemorySettings.ui:41
+#, kde-format
+msgid "Memory limit:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
+#: settings/MemorySettings.ui:54
+#, kde-format
+msgid " MB"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
