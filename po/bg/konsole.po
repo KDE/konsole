@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-29 00:48+0000\n"
-"PO-Revision-Date: 2023-05-16 22:40+0200\n"
+"PO-Revision-Date: 2023-08-29 15:25+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1322,7 +1322,7 @@ msgstr "Общи"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Памет"
 
 #: MainWindow.cpp:980
 #, kde-format
@@ -2740,6 +2740,7 @@ msgstr "Задава дали съвпадащият текст да се мар
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
 msgstr ""
+"Контролиране дали създаването на дъщерни cgroups са отворили нови раздели"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -2747,6 +2748,8 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Определя нивото на потребление на памет, над което ще започне ограничаване "
+"на потреблението."
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2848,10 +2851,9 @@ msgstr "За файлове с история на командите изпол
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Мониториране на раздел"
+msgstr "Активиране на мониториране на паметта:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2865,18 +2867,26 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Промените ще влязат в сила при рестартиране. Ако е активирано, при "
+"надвишаване посочената стойност на използваната памет  от Konsole\n"
+" systemd-oomd да премахне разделите\n"
+"съдържащи процеси, които отнемат памет. Забележка: включването на тази "
+"опция\n"
+"може да доведе до по-голямо забавяне на работата по време на висока "
+"консумация на памет, а задаването на\n"
+"на твърде ниски стойности може да доведе до спиране на работата на Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Лмит на паметта:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29

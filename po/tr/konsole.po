@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-29 00:48+0000\n"
-"PO-Revision-Date: 2023-08-24 00:28+0300\n"
+"PO-Revision-Date: 2023-08-29 05:41+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1321,7 +1321,7 @@ msgstr "Genel"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Bellek"
 
 #: MainWindow.cpp:980
 #, kde-format
@@ -2724,14 +2724,14 @@ msgstr "Eşleşen metnin vurgulanıp vurgulanmayacağını ayarlar"
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
-msgstr ""
+msgstr "Alt cgroup'ların oluşturulmasının sekme açıp açmayacağını denetle"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "Kısma işleminin başlayacağı bellek tüketimi düzeyini belirler"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2826,10 +2826,9 @@ msgstr "Geçmiş dosyaları için bu klasörü kullan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Sekme İzlemesi"
+msgstr "Bellek izlemeyi etkinleştir:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2843,18 +2842,27 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Değişiklikler yeniden başlatıldığında etkili olur. Etkinleştirilirse "
+"Konsole'nin belirtilen\n"
+" değeri aşan sürekli bellek tüketimi, systemd-oomd'un bellek yoğun "
+"işlem(ler)i içeren\n"
+" sekme(ler)i ortadan kaldırmasına neden olur. Not: Etkinleştirme, yüksek "
+"bellek tüketimi\n"
+" sırasında daha büyük yavaşlamalara neden olabilir ve aşırı düşük değerlerin "
+"belirtilmesi\n"
+"yine de Konsole'nin sonlandırılmasına neden olabilir."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Bellek sınırı:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29

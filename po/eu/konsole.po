@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-29 00:48+0000\n"
-"PO-Revision-Date: 2023-07-20 08:58+0200\n"
+"PO-Revision-Date: 2023-08-29 08:31+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -895,7 +895,7 @@ msgstr "Terminal emulatzailea"
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr "(c) 1997-2022, Konsole-ren garatzaileak"
+msgstr "(c) 1997-2022, «Konsole»ren garatzaileak"
 
 #: main.cpp:352
 #, kde-format
@@ -1322,7 +1322,7 @@ msgstr "Orokorra"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Memoria"
 
 #: MainWindow.cpp:980
 #, kde-format
@@ -2736,9 +2736,9 @@ msgstr "Bat datorren testua nabarmendu behar den ezartzen du"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, kde-format
+#, fuzzy, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
-msgstr ""
+msgstr "ume «cgroup»en sorrera fitxa gisa sortzen diren kontrolatzen du"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -2746,6 +2746,8 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Zein memoria kontsumo mailatik gora memoria erregulazioa abiatuko den "
+"zehazten du"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2845,10 +2847,9 @@ msgstr "«Historikoan atzera» fitxategientzako, erabili karpeta hau"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Fitxak gainbegiratzea"
+msgstr "Gaitu memoria gainbegiratzea:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2862,18 +2863,25 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Aldaketek, berriz abiatzen denean izango dute eragina. Gaituta badago, "
+"zehaztutako balioa gainditzen\n"
+"duen «Konsole»ren memoria kontsumo iraunkorrak, «systemd-oomd»ek memoria-"
+"intentsiboko\n"
+"prozesua(k) ditu(zt)en fitxa(k) deuseztatzea eragingo du. Oharra: gaitzeak,\n"
+"moteltze handiagoak eragin litzake memoria kontsumo handia ematen denean\n"
+"eta balio txikiegiak zehazteak, oraindik, «Konsole» akabatzea eragin lezake."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Memoria muga:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-29 00:48+0000\n"
-"PO-Revision-Date: 2023-05-15 15:06+0300\n"
+"PO-Revision-Date: 2023-08-29 09:24+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1320,7 +1320,7 @@ msgstr "Загальне"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Пам'ять"
 
 #: MainWindow.cpp:980
 #, kde-format
@@ -2737,13 +2737,14 @@ msgstr "Чи підсвічувати знайдений текст"
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
 msgstr ""
+"Керує тим, чи призводить створення дочірніх c-груп до створення вкладок"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "Визначає рівень споживання пам'яті до вмикання обмежень"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2838,10 +2839,9 @@ msgstr "Для файлів буфера гортання використову
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Спостереження за вкладками"
+msgstr "Увімкнути спостереження за пам'яттю:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2855,18 +2855,26 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Зміни набудуть чинності після перезапуску. Якщо увімкнено, тривале "
+"перевищення встановленого для споживання пам'яті Konsole\n"
+"значення призведе до знищення за допомогою systemd-oomd вкладок,\n"
+"у яких працюють процеси із інтенсивним споживанням пам'яті. Зауваження: "
+"вмикання\n"
+"може призвести до значеного сповільнення роботи при високому споживанні "
+"пам'яті, а визначення\n"
+"надто малих значень може призвести до завершення усього процесу Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Обмеження пам'яті:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " МБ"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
