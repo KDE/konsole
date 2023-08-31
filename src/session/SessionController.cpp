@@ -2191,5 +2191,11 @@ bool SessionController::isValid() const
 
 void SessionController::setVisible(QString name, bool visible)
 {
+    /* For certain user profiles, testTerminalInterface crashes
+        in QAction::setVisible() without this check.
+    */
+    if (!actionCollection()->action(name)) {
+        return;
+    }
     actionCollection()->action(name)->setVisible(visible);
 }
