@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 00:48+0000\n"
+"POT-Creation-Date: 2023-08-31 00:49+0000\n"
 "PO-Revision-Date: 2009-12-17 00:21+0100\n"
 "Last-Translator: Mark Kwidzińśczi <mark@linuxcsb.org>\n"
 "Language-Team: Kaszëbsczi <i18n-csb@linuxcsb.org>\n"
@@ -2033,6 +2033,12 @@ msgstr ""
 #: PrintOptions.ui:46 settings/konsole.kcfg:179
 #, kde-format
 msgid "&Scale output"
+msgstr ""
+
+#: profile/Profile.cpp:268
+#, kde-format
+msgctxt "Name of the built-in profile"
+msgid "Built-in"
 msgstr ""
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473

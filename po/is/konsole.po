@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 00:48+0000\n"
+"POT-Creation-Date: 2023-08-31 00:49+0000\n"
 "PO-Revision-Date: 2023-03-21 14:28+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -1906,6 +1906,12 @@ msgstr "Prent&vænt snið (svartur texti, enginn bakgrunnur)"
 #, kde-format
 msgid "&Scale output"
 msgstr "&Kvarða úttak"
+
+#: profile/Profile.cpp:268
+#, kde-format
+msgctxt "Name of the built-in profile"
+msgid "Built-in"
+msgstr ""
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
 #, kde-format

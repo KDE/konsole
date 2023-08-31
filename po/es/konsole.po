@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 00:48+0000\n"
-"PO-Revision-Date: 2023-05-19 11:04+0200\n"
+"POT-Creation-Date: 2023-08-31 00:49+0000\n"
+"PO-Revision-Date: 2023-08-30 11:35+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -32,7 +32,7 @@ msgstr ""
 "com>\n"
 "com>\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1335,7 +1335,7 @@ msgstr "General"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Memoria"
 
 #: MainWindow.cpp:980
 #, kde-format
@@ -1925,6 +1925,12 @@ msgstr "&Modo amigable de la impresora (texto en negro, sin fondo)"
 #, kde-format
 msgid "&Scale output"
 msgstr "E&scalar la salida"
+
+#: profile/Profile.cpp:268
+#, kde-format
+msgctxt "Name of the built-in profile"
+msgid "Built-in"
+msgstr ""
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
 #, kde-format
@@ -2752,7 +2758,7 @@ msgstr "Define si se debe resaltar el texto coincidente"
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
-msgstr ""
+msgstr "Controlar si la creación de «cgroups» secundarios son pestañas creadas"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -2760,6 +2766,8 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Determina el nivel de consumo de memoria máximo para iniciar el escalado de "
+"frecuencia dinámico"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2861,10 +2869,9 @@ msgstr "Para los archivos de historial de desplazamiento, usar esta carpeta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Monitorización de pestañas"
+msgstr "Activar monitorización de memoria:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2878,18 +2885,26 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Los cambios tendrán efecto tras reiniciar. Si se activa, el consumo de "
+"memoria sostenido en Konsole\n"
+"que exceda del valor indicado hará que «systemd-oomd» elimine las pestañas "
+"que contengan\n"
+"procesos que usan memoria de forma intensiva. Nota: Su activación puede "
+"provocar severas\n"
+"ralentizaciones durante un consumo elevado de memoria, mientras que "
+"especificar valores excesivamente bajos puede hacer que Konsole falle."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Límite de memoria:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29

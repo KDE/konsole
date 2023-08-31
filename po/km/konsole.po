@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 00:48+0000\n"
+"POT-Creation-Date: 2023-08-31 00:49+0000\n"
 "PO-Revision-Date: 2012-12-20 16:07+0700\n"
 "Last-Translator: sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros>\n"
@@ -1994,6 +1994,12 @@ msgstr "បោះពុម្ព របៀប​ងាយស្រួល (អត
 #, kde-format
 msgid "&Scale output"
 msgstr "លទ្ធផល​មាត្រដ្ឋាន"
+
+#: profile/Profile.cpp:268
+#, kde-format
+msgctxt "Name of the built-in profile"
+msgid "Built-in"
+msgstr ""
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
 #, kde-format

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 00:48+0000\n"
+"POT-Creation-Date: 2023-08-31 00:49+0000\n"
 "PO-Revision-Date: 2023-08-20 10:43+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1927,6 +1927,12 @@ msgstr "Tryb &przyjazny drukarce (czarny tekst, brak tła)"
 #, kde-format
 msgid "&Scale output"
 msgstr "Prze&skaluj wyjście"
+
+#: profile/Profile.cpp:268
+#, kde-format
+msgctxt "Name of the built-in profile"
+msgid "Built-in"
+msgstr ""
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
 #, kde-format

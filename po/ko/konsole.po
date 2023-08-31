@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 00:48+0000\n"
+"POT-Creation-Date: 2023-08-31 00:49+0000\n"
 "PO-Revision-Date: 2023-07-23 21:01+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1881,6 +1881,12 @@ msgstr "프린터 친화 모드 (검은 텍스트, 배경색 없음)(&F)"
 #, kde-format
 msgid "&Scale output"
 msgstr "출력 크기 조정(&S)"
+
+#: profile/Profile.cpp:268
+#, kde-format
+msgctxt "Name of the built-in profile"
+msgid "Built-in"
+msgstr ""
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
 #, kde-format
