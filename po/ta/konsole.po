@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-31 00:49+0000\n"
+"POT-Creation-Date: 2023-09-01 00:49+0000\n"
 "PO-Revision-Date: 2023-05-21 15:03+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1893,7 +1893,7 @@ msgstr "&அச்சடிப்பதற்குரிய பயன்மு�
 msgid "&Scale output"
 msgstr "&வெளியீட்டின் அளவை மாற்று"
 
-#: profile/Profile.cpp:268
+#: profile/Profile.cpp:270
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -3221,59 +3221,59 @@ msgstr "சிறுபட உருவாக்கத்தை இயக்க�
 msgid "Size: %1 x %2"
 msgstr "அளவு: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2243
+#: terminalDisplay/TerminalDisplay.cpp:2252
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "%1 எழுத்தை உறுதியாக ஒட்ட வேண்டுமா?"
 msgstr[1] "%1 எழுத்துகளை உறுதியாக ஒட்ட வேண்டுமா?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2244
+#: terminalDisplay/TerminalDisplay.cpp:2253
 #, kde-format
 msgid "Confirm Paste"
 msgstr "ஒட்டுவதை உறுதிசெய்யுங்கள்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2277
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: தற்போதைய பணியை வெளியேற செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2278
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission: தற்போதைய பணியை வெளியேற செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2279
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "மணி: கேட்க‍க்கூடிய எச்சரிக்கையை எழுப்ப முயற்சிக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2280
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2281
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: வெளியீட்டை முடக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2282
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: தற்போதைய பணியை இடைநிறுத்தலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2283
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: முனையத்தின் நிலையை மாற்றியமைக்கும்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: தற்போதைய பணியை ரத்து செய்யலாம்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2311
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3281,31 +3281,31 @@ msgid ""
 msgstr ""
 "நீங்கள் ஒட்ட முயற்சிக்கும் உரை, மறைந்த கட்டுப்பாடு குறிகளைக் கொண்டது. அவற்றை நீக்க வேண்டுமா?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "ஒட்டுவதை உறுதிசெய்யுங்கள்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&கட்டுப்பாடு குறிகளை நீக்கி ஒட்டு"
 
-#: terminalDisplay/TerminalDisplay.cpp:2316
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&அப்படியே ஒட்டு"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&ரத்து செய்"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2565
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3316,17 +3316,17 @@ msgstr ""
 "wiki/Software_flow_control\">இடைநிறுத்தப்பட்டுள்ளது</a>. வெளியீடு தொடர <b>Ctrl+Q</"
 "b> என்பதை அழுத்துங்கள்.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2611
+#: terminalDisplay/TerminalDisplay.cpp:2620
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "இம்முனையம் படிக்க மட்டும் கூடியது."
 
-#: terminalDisplay/TerminalDisplay.cpp:3006
+#: terminalDisplay/TerminalDisplay.cpp:3015
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&இந்த அடைவிற்கு மாறு"
 
-#: terminalDisplay/TerminalDisplay.cpp:3039
+#: terminalDisplay/TerminalDisplay.cpp:3048
 #, kde-format
 msgid "&Paste Location"
 msgstr "&இருப்பிடத்தை ஒட்டு"
@@ -3666,7 +3666,7 @@ msgstr "வெளியீட்டுக் கட்டுப்பாடு"
 # Current English string is misleading. See https://invent.kde.org/utilities/konsole/-/merge_requests/544
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:881
+#: widgets/EditProfileAppearancePage.ui:947
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3677,7 +3677,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:884
+#: widgets/EditProfileAppearancePage.ui:950
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "மேம்பட்ட உரைத்தளவமைப்பு"
@@ -3890,7 +3890,7 @@ msgstr "இடஞ்சுட்டி தொடர்ச்சியாக ம�
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
 #: widgets/EditProfileAppearancePage.ui:437
-#: widgets/EditProfileAppearancePage.ui:664
+#: widgets/EditProfileAppearancePage.ui:720
 #, kde-format
 msgid "Enabled"
 msgstr "இயக்கு"
@@ -3937,96 +3937,132 @@ msgstr "தேர்ந்தெடுக்கப்பட்டுள்ள �
 msgid "Darkening strength:"
 msgstr "கருமையாக்கும் அளவு:"
 
+#. i18n: ectx: property (text), widget (QLabel, borderLabel)
+#: widgets/EditProfileAppearancePage.ui:530
+#, fuzzy, kde-format
+#| msgctxt "Cursor color options"
+#| msgid "Color:"
+msgctxt "Border color options"
+msgid "Color:"
+msgstr "நிறம்:"
+
+#. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
+#: widgets/EditProfileAppearancePage.ui:546
+#, fuzzy, kde-format
+#| msgid "Select the color used to draw the cursor"
+msgid "Select the color used to draw the border"
+msgstr "இடஞ்சுட்டியை வரைய பயன்படுத்த வேண்டிய நிறத்தை தேர்ந்தெடுங்கள்"
+
 #. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:522
+#: widgets/EditProfileAppearancePage.ui:568
 #, kde-format
 msgid "Inactive Terminals:"
 msgstr "செயலிலில்லாத முனையங்கள்"
 
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: widgets/EditProfileAppearancePage.ui:578
+#, fuzzy, kde-format
+#| msgid "Inactive Terminals:"
+msgid "Active Terminals:"
+msgstr "செயலிலில்லாத முனையங்கள்"
+
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:532
+#: widgets/EditProfileAppearancePage.ui:588
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
 msgstr "முனையத்தின் உள்ளடக்கம்"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:544
+#: widgets/EditProfileAppearancePage.ui:600
 #, kde-format
 msgid "Line spacing:"
 msgstr "வரி இடைவெளி:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:562
+#: widgets/EditProfileAppearancePage.ui:618
 #, kde-format
 msgid "The number of pixels between two lines"
 msgstr "இரண்டு வரிகளுக்கிடையே உள்ள இடைவெளி, பிக்செல்களில்"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#: widgets/EditProfileAppearancePage.ui:565
-#: widgets/EditProfileAppearancePage.ui:617
+#: widgets/EditProfileAppearancePage.ui:621
+#: widgets/EditProfileAppearancePage.ui:673
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
 msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:599
+#: widgets/EditProfileAppearancePage.ui:655
 #, kde-format
 msgid "Margins:"
 msgstr "விளிம்புகள்:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:651
+#: widgets/EditProfileAppearancePage.ui:707
 #, kde-format
 msgid "Align to center:"
 msgstr "நடுப்பகுதிக்கு சீரமை:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:674
+#: widgets/EditProfileAppearancePage.ui:730
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
 msgstr "நிறங்களை கருமையாக்கி, சாளரம் செயலிலுள்ளதா என்பதை குறிக்கும்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:677
+#: widgets/EditProfileAppearancePage.ui:733
 #, kde-format
 msgid "Darken"
 msgstr "கருமையாக்கு"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:740
+#, fuzzy, kde-format
+#| msgid "Indicate whether the window is active by dimming the colors"
+msgid "Indicate whether the window is active by drawing a border"
+msgstr "நிறங்களை கருமையாக்கி, சாளரம் செயலிலுள்ளதா என்பதை குறிக்கும்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:743
+#, kde-format
+msgid "Border"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:719
+#: widgets/EditProfileAppearancePage.ui:785
 #, kde-format
 msgid "Display Vertical line at column:"
 msgstr "இந்நெடுவரிசையில் செங்குத்தான கோட்டை காட்டு:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:764
+#: widgets/EditProfileAppearancePage.ui:830
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr "<html><head/><body><p>மேம்பட்ட உரைத்தளவமைப்பு</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:767
+#: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "Complex Text Layout"
 msgstr "மேம்பட்ட உரைத்தளவமைப்பு"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:791
+#: widgets/EditProfileAppearancePage.ui:857
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "கூட்டெழுத்துகளின் பகுதிகளை சேர்த்து வரைவதற்கான ஆதரவு"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:794
+#: widgets/EditProfileAppearancePage.ui:860
 #, kde-format
 msgid "Word mode"
 msgstr "சொல் பயன்முறை"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:807
+#: widgets/EditProfileAppearancePage.ui:873
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4036,73 +4072,73 @@ msgstr ""
 "மாறும்போது அச்சொல் உடைக்கப்படும்)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:810
+#: widgets/EditProfileAppearancePage.ui:876
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "முழு சொல்லுக்கு ஒரே பண்புகளைப் பயன்படுத்து"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:823
+#: widgets/EditProfileAppearancePage.ui:889
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "ASCII கூட்டெழுத்துகளின் பகுதிகளை சேர்த்து வரையும்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:826
+#: widgets/EditProfileAppearancePage.ui:892
 #, kde-format
 msgid "ASCII characters "
 msgstr "ASCII கூட்டெழுத்துகள்"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:839
+#: widgets/EditProfileAppearancePage.ui:905
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "இந்திய லிபிகளிலுள்ள கூட்டெழுத்துகளின் பகுதிகளை சேர்த்து வரையும்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:842
+#: widgets/EditProfileAppearancePage.ui:908
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "இந்திய லிபிகளிலுள்ள எழுத்துகள்"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:855
+#: widgets/EditProfileAppearancePage.ui:921
 #, kde-format
 msgid "Emoji Font:"
 msgstr "முகவடிகளுக்கான எழுத்துரு:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:897
+#: widgets/EditProfileAppearancePage.ui:963
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr "முதல் எழுத்தைப் பொறுத்து இல்லாமல், வரிகள் எப்போதும் இடதிலிருந்து வலதாக காட்டப்படும்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:900
+#: widgets/EditProfileAppearancePage.ui:966
 #, kde-format
 msgid "force LTR line direction"
 msgstr "வலதிலிருந்து இடதாக எழுதுவதை எப்போதும் கட்டாயப்படுத்து"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:913
+#: widgets/EditProfileAppearancePage.ui:979
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:916
+#: widgets/EditProfileAppearancePage.ui:982
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:929
+#: widgets/EditProfileAppearancePage.ui:995
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "பிரச்சனை உண்டாக்கும் எழுத்துகளின் wcwidth-ஐ பொருட்படுத்தாதே"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:932
+#: widgets/EditProfileAppearancePage.ui:998
 #, kde-format
 msgid "Override wcwidth"
 msgstr "wcwidth-ஐ மேலெழுது"
@@ -4260,18 +4296,18 @@ msgid_plural " seconds"
 msgstr[0] " நொடி"
 msgstr[1] " நொடிகள்"
 
-#: widgets/EditProfileDialog.cpp:707
+#: widgets/EditProfileDialog.cpp:722
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "முதலடைவை தேர்வு செய்வது"
 
-#: widgets/EditProfileDialog.cpp:1258
+#: widgets/EditProfileDialog.cpp:1281
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> என்ற திட்டத்தை ஏற்ற முடியவில்லை."
 
-#: widgets/EditProfileDialog.cpp:1437
+#: widgets/EditProfileDialog.cpp:1460
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4280,7 +4316,7 @@ msgstr ""
 "இந்நிறத்திட்டம் ஒளிபுகும் பின்பலத்தை பயன்படுத்துகிறது. அதை உங்கள் பணிமேடை ஆதரிப்பதுபோல் "
 "தெரியவில்லை."
 
-#: widgets/EditProfileDialog.cpp:1443
+#: widgets/EditProfileDialog.cpp:1466
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4289,7 +4325,7 @@ msgstr ""
 "பணிமேடை அசைவூட்டங்கள் இயக்கப்படுமுன் கான்சோல் துவக்கப்பட்டது. ஒளிபுகும் பின்புலத்தைப் பார்க்க "
 "நீங்கள் கான்சோலை மீள்துவக்க வேண்டும்."
 
-#: widgets/EditProfileDialog.cpp:1834
+#: widgets/EditProfileDialog.cpp:1857
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4316,7 +4352,7 @@ msgstr ""
 "PATH அல்லது LINE இக்கட்டளையில் இல்லாத பட்சத்தில், இத்தேர்வு பொருட்படுத்தப்படாது; "
 "இயல்பிருப்பு உரைத்திருத்தியிலேயே உரைக்கோப்பு திறக்கப்படும்."
 
-#: widgets/EditProfileDialog.cpp:1847
+#: widgets/EditProfileDialog.cpp:1870
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "உரைத்திருத்திக்கான தனிப்பயன் கட்டளை"

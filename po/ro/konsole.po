@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-31 00:49+0000\n"
+"POT-Creation-Date: 2023-09-01 00:49+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1928,7 +1928,7 @@ msgstr "Regim prietenos cu imprimanta (text negru, &fără fundal)"
 msgid "&Scale output"
 msgstr "&Scalează ieșirea"
 
-#: profile/Profile.cpp:268
+#: profile/Profile.cpp:270
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -3255,7 +3255,7 @@ msgstr "Activează generarea miniaturilor"
 msgid "Size: %1 x %2"
 msgstr "Dimensiune: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2243
+#: terminalDisplay/TerminalDisplay.cpp:2252
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3263,83 +3263,83 @@ msgstr[0] "Sigur lipiți %1 caracter?"
 msgstr[1] "Sigur lipiți %1 caractere?"
 msgstr[2] "Sigur lipiți %1 de caractere?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2244
+#: terminalDisplay/TerminalDisplay.cpp:2253
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirmă lipirea"
 
-#: terminalDisplay/TerminalDisplay.cpp:2277
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2278
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2279
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Clopoțel: se va încerca emiterea unei avertizări sonore"
 
-#: terminalDisplay/TerminalDisplay.cpp:2280
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2281
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2282
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2283
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: folosit pentru manipularea stării terminalului"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2311
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirmă lipirea"
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Lipește &fără caractere de control"
 
-#: terminalDisplay/TerminalDisplay.cpp:2316
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Li&pește tot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Renunță"
 
-#: terminalDisplay/TerminalDisplay.cpp:2556
+#: terminalDisplay/TerminalDisplay.cpp:2565
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3350,17 +3350,17 @@ msgstr ""
 "Software_flow_control\">suspendată</a> prin apăsarea Ctrl+S. Apăsați <b>Ctrl"
 "+Q</b> pentru a relua.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2611
+#: terminalDisplay/TerminalDisplay.cpp:2620
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Acest terminal e numai pentru citire."
 
-#: terminalDisplay/TerminalDisplay.cpp:3006
+#: terminalDisplay/TerminalDisplay.cpp:3015
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Schimbă &dosarul la"
 
-#: terminalDisplay/TerminalDisplay.cpp:3039
+#: terminalDisplay/TerminalDisplay.cpp:3048
 #, kde-format
 msgid "&Paste Location"
 msgstr "Li&pește amplasarea"
@@ -3721,7 +3721,7 @@ msgstr "Controlul fluxului"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:881
+#: widgets/EditProfileAppearancePage.ui:947
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3732,7 +3732,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:884
+#: widgets/EditProfileAppearancePage.ui:950
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Randare bidirecțională a textului"
@@ -3947,7 +3947,7 @@ msgstr "Fă cursorul să clipească regulat"
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
 #: widgets/EditProfileAppearancePage.ui:437
-#: widgets/EditProfileAppearancePage.ui:664
+#: widgets/EditProfileAppearancePage.ui:720
 #, kde-format
 msgid "Enabled"
 msgstr "Activat"
@@ -3994,97 +3994,133 @@ msgstr "Inversează culorile textului ales întotdeauna"
 msgid "Darkening strength:"
 msgstr "Intensitate întunecare:"
 
+#. i18n: ectx: property (text), widget (QLabel, borderLabel)
+#: widgets/EditProfileAppearancePage.ui:530
+#, fuzzy, kde-format
+#| msgctxt "Cursor color options"
+#| msgid "Color:"
+msgctxt "Border color options"
+msgid "Color:"
+msgstr "Culoare:"
+
+#. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
+#: widgets/EditProfileAppearancePage.ui:546
+#, fuzzy, kde-format
+#| msgid "Select the color used to draw the cursor"
+msgid "Select the color used to draw the border"
+msgstr "Alegeți culoarea folosită pentru a desena cursorul"
+
 #. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:522
+#: widgets/EditProfileAppearancePage.ui:568
 #, kde-format
 msgid "Inactive Terminals:"
 msgstr "Terminale inactive:"
 
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: widgets/EditProfileAppearancePage.ui:578
+#, fuzzy, kde-format
+#| msgid "Inactive Terminals:"
+msgid "Active Terminals:"
+msgstr "Terminale inactive:"
+
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:532
+#: widgets/EditProfileAppearancePage.ui:588
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
 msgstr "Conținut terminal"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:544
+#: widgets/EditProfileAppearancePage.ui:600
 #, kde-format
 msgid "Line spacing:"
 msgstr "Spațiere linii:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:562
+#: widgets/EditProfileAppearancePage.ui:618
 #, kde-format
 msgid "The number of pixels between two lines"
 msgstr "Numărul de pixeli dintre două linii"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#: widgets/EditProfileAppearancePage.ui:565
-#: widgets/EditProfileAppearancePage.ui:617
+#: widgets/EditProfileAppearancePage.ui:621
+#: widgets/EditProfileAppearancePage.ui:673
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
 msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:599
+#: widgets/EditProfileAppearancePage.ui:655
 #, kde-format
 msgid "Margins:"
 msgstr "Margini:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:651
+#: widgets/EditProfileAppearancePage.ui:707
 #, kde-format
 msgid "Align to center:"
 msgstr "Aliniază la centru:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:674
+#: widgets/EditProfileAppearancePage.ui:730
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
 msgstr "Indică dacă fereastra e activă prin estomparea culorilor"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:677
+#: widgets/EditProfileAppearancePage.ui:733
 #, kde-format
 msgid "Darken"
 msgstr "Întunecă"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:740
+#, fuzzy, kde-format
+#| msgid "Indicate whether the window is active by dimming the colors"
+msgid "Indicate whether the window is active by drawing a border"
+msgstr "Indică dacă fereastra e activă prin estomparea culorilor"
+
+#. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
+#: widgets/EditProfileAppearancePage.ui:743
+#, kde-format
+msgid "Border"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:719
+#: widgets/EditProfileAppearancePage.ui:785
 #, kde-format
 msgid "Display Vertical line at column:"
 msgstr "Afișează linie verticală la coloana:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:764
+#: widgets/EditProfileAppearancePage.ui:830
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:767
+#: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "Complex Text Layout"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:791
+#: widgets/EditProfileAppearancePage.ui:857
 #, fuzzy, kde-format
 #| msgid "Bi-Directional text rendering"
 msgid "Enable word mode text rendering"
 msgstr "Randare bidirecțională a textului"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:794
+#: widgets/EditProfileAppearancePage.ui:860
 #, kde-format
 msgid "Word mode"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:807
+#: widgets/EditProfileAppearancePage.ui:873
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4092,70 +4128,70 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:810
+#: widgets/EditProfileAppearancePage.ui:876
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:823
+#: widgets/EditProfileAppearancePage.ui:889
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:826
+#: widgets/EditProfileAppearancePage.ui:892
 #, fuzzy, kde-format
 #| msgid "Word characters:"
 msgid "ASCII characters "
 msgstr "Caractere de cuvânt:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:839
+#: widgets/EditProfileAppearancePage.ui:905
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:842
+#: widgets/EditProfileAppearancePage.ui:908
 #, fuzzy, kde-format
 #| msgid "Match current character"
 msgid "Brahmic scripts characters"
 msgstr "Potrivește la caracterul actual"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:855
+#: widgets/EditProfileAppearancePage.ui:921
 #, fuzzy, kde-format
 #| msgid "Font:"
 msgid "Emoji Font:"
 msgstr "Font:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:897
+#: widgets/EditProfileAppearancePage.ui:963
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:900
+#: widgets/EditProfileAppearancePage.ui:966
 #, kde-format
 msgid "force LTR line direction"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:913
+#: widgets/EditProfileAppearancePage.ui:979
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:916
+#: widgets/EditProfileAppearancePage.ui:982
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:929
+#: widgets/EditProfileAppearancePage.ui:995
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Paste &without control characters"
@@ -4163,7 +4199,7 @@ msgid "Ignore wcwidth of problematic characters"
 msgstr "Lipește &fără caractere de control"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:932
+#: widgets/EditProfileAppearancePage.ui:998
 #, kde-format
 msgid "Override wcwidth"
 msgstr ""
@@ -4322,18 +4358,18 @@ msgstr[0] " secundă"
 msgstr[1] " secunde"
 msgstr[2] " de secunde"
 
-#: widgets/EditProfileDialog.cpp:707
+#: widgets/EditProfileDialog.cpp:722
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Alegeți dosarul inițial"
 
-#: widgets/EditProfileDialog.cpp:1258
+#: widgets/EditProfileDialog.cpp:1281
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Încărcarea schemei <resource>%1</resource> a eșuat."
 
-#: widgets/EditProfileDialog.cpp:1437
+#: widgets/EditProfileDialog.cpp:1460
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4342,7 +4378,7 @@ msgstr ""
 "Această schemă de culori utilizează fundal transparent, care nu pare să fie "
 "susținut de calculatorul dumneavoastră"
 
-#: widgets/EditProfileDialog.cpp:1443
+#: widgets/EditProfileDialog.cpp:1466
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4351,7 +4387,7 @@ msgstr ""
 "Konsola a fost pornită înainte de activarea efectelor de birou. Trebuie să "
 "reporniți Konsola pentru a vedea fundalul transparent."
 
-#: widgets/EditProfileDialog.cpp:1834
+#: widgets/EditProfileDialog.cpp:1857
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4368,7 +4404,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1847
+#: widgets/EditProfileDialog.cpp:1870
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Comandă personalizată pentru redactor de text"
