@@ -321,6 +321,45 @@ bool EditProfileDialog::isProfileNameValid()
         return false;
     }
 
+    if (!_tempProfile->name().isEmpty()) {
+        static const QString illegalCharacters(QStringLiteral("#%&{}/\\\"<>*?$!':@`+=|"));
+        static const QString colorTagOpen(QStringLiteral("<font color=\"red\">"));
+        static const QString colorTagClose(QStringLiteral("</font>"));
+        const QString name(_tempProfile->name());
+        bool hasIllegal = false;
+        bool unclosedTag = false;
+        QString highlightedName;
+
+        for (int i = 0; i < name.size(); ++i) {
+            const auto currChar = name.at(i);
+
+            if (illegalCharacters.contains(currChar)) {
+                if (!unclosedTag) {
+                    highlightedName += colorTagOpen;
+                }
+                hasIllegal = true;
+                unclosedTag = true;
+            } else if (unclosedTag) {
+                unclosedTag = false;
+                highlightedName += colorTagClose;
+            }
+
+            highlightedName += currChar;
+
+            if (i + 1 == name.size() && unclosedTag) {
+                highlightedName += colorTagClose;
+            }
+        }
+
+        if (hasIllegal) {
+            setMessageGeneralPage(i18nc("@info", "The highlighted characters are invalid in profile names: %1.", highlightedName));
+            // Revert the name in the dialog
+            _generalUi->profileNameEdit->setText(_profile->name());
+            selectProfileName();
+            return false;
+        }
+    }
+
     // Valid name
     return true;
 }
