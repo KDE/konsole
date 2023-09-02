@@ -123,7 +123,7 @@
     <p xml:lang="eo">Konsole estas terminalo por ruli komandan ŝelon. Ĝi provizas komandlinian interfacon por rekte stiri vian komputilon.</p>
     <p xml:lang="es">Konsole es un emulador de terminal que ejecuta un intérprete de órdenes. Proporciona una interfaz de línea de órdenes para controlar directamente su equipo.</p>
     <p xml:lang="et">Konsool on terminal käsurea kasutamise võimaldamiseks, mis lubab vahetult arvuti tegevust juhtida.</p>
-    <p xml:lang="eu">Konsole komando «shell» bat exekutatzeko terminal bat da. Zure ordenagailua era zuzenean kontrolatzeko komando lerroko interfaze bat hornitzen du.</p>
+    <p xml:lang="eu">«Konsole», komandoetarako oskol bat exekutatzeko terminal bat da. Zure ordenagailua zuzenean kontrolatzeko komando-lerroko interfaze bat ematen du.</p>
     <p xml:lang="fi">Konsole on pääte komentotulkkia varten. Se tarjoaa komentorivikäyttöliittymän tietokoneen hallitsemiseksi.</p>
     <p xml:lang="fr">Konsole est un terminal pour lancer une invite de commande. Il fournit une interface de ligne de commande pour contrôler directement votre ordinateur.</p>
     <p xml:lang="gl">Konsole é un terminal para executar un intérprete de ordes. Fornece unha interface de liña de ordes para controlar directamente o computador.</p>
@@ -168,7 +168,7 @@
     <p xml:lang="eo">Trajtoj:</p>
     <p xml:lang="es">Funcionalidades:</p>
     <p xml:lang="et">Omadused:</p>
-    <p xml:lang="eu">Eginbideak:</p>
+    <p xml:lang="eu">Ezaugarriak:</p>
     <p xml:lang="fi">Ominaisuuksia:</p>
     <p xml:lang="fr">Fonctionnalités :</p>
     <p xml:lang="gl">Funcionalidades:</p>
@@ -323,7 +323,7 @@
       <li xml:lang="eo">Monitorado de Silento kaj Agado</li>
       <li xml:lang="es">Supervisión de silencios y actividad</li>
       <li xml:lang="et">Vaikuse ja aktiivsuse jälgimine</li>
-      <li xml:lang="eu">Isilaldi eta jardueren gainbegiratzea</li>
+      <li xml:lang="eu">Isilaldiak eta jarduerak gainbegiratzea</li>
       <li xml:lang="fi">Hiljaisuuden ja aktiivisuuden tarkkailu</li>
       <li xml:lang="fr">Détection d'activité et de non activité</li>
       <li xml:lang="gl">Monitorización de actividade e inactividade.</li>
@@ -373,7 +373,7 @@
       <li xml:lang="eo">Legomarksubteno</li>
       <li xml:lang="es">Uso de marcadores</li>
       <li xml:lang="et">Järjehoidjate toetus</li>
-      <li xml:lang="eu">Laster-markak onartzen ditu</li>
+      <li xml:lang="eu">Laster-marka euskarria</li>
       <li xml:lang="fi">Kirjanmerkkituki</li>
       <li xml:lang="fr">Prise en charge des signets</li>
       <li xml:lang="gl">Funcionalidade de marcadores.</li>
@@ -423,7 +423,7 @@
       <li xml:lang="eo">Serĉante</li>
       <li xml:lang="es">Búsqueda</li>
       <li xml:lang="et">Otsimine</li>
-      <li xml:lang="eu">Bilatzea</li>
+      <li xml:lang="eu">Bilaketa</li>
       <li xml:lang="fi">Haku</li>
       <li xml:lang="fr">Recherche</li>
       <li xml:lang="gl">Busca.</li>
