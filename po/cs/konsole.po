@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-01 00:49+0000\n"
+"POT-Creation-Date: 2023-09-02 00:50+0000\n"
 "PO-Revision-Date: 2023-06-05 12:02+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -1874,7 +1874,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
 #, kde-format
 msgid "Default profile"
 msgstr "Výchozí profil"
@@ -2791,10 +2791,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Sledování karet"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2819,7 +2818,7 @@ msgstr ""
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
@@ -3891,19 +3890,16 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
-msgstr "Barva:"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Vyberte barvu, jakou bude vykreslen kurzor"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -3913,11 +3909,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Focus Above Terminal"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Přepnout nad terminál"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -3973,16 +3967,15 @@ msgstr "Ztmavit"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Ukazuje, zda je okno aktivní ztlumením barev"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Okraj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4162,7 +4155,13 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:352
+#: widgets/EditProfileDialog.cpp:355
+#, kde-format
+msgctxt "@info"
+msgid "The highlighted characters are invalid in profile names: %1."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:391
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4170,17 +4169,17 @@ msgstr[0] "Upravuji profil: %2"
 msgstr[1] "Upravuji %1 profily: %2"
 msgstr[2] "Upravuji %1 profilů: %2"
 
-#: widgets/EditProfileDialog.cpp:356
+#: widgets/EditProfileDialog.cpp:395
 #, kde-format
 msgid "Create New Profile"
 msgstr "Vytvořit nový profil"
 
-#: widgets/EditProfileDialog.cpp:359
+#: widgets/EditProfileDialog.cpp:398
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Upravit profil \"%1\""
 
-#: widgets/EditProfileDialog.cpp:450
+#: widgets/EditProfileDialog.cpp:489
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4191,7 +4190,7 @@ msgstr[0] " sloupec"
 msgstr[1] " sloupce"
 msgstr[2] " sloupců"
 
-#: widgets/EditProfileDialog.cpp:452
+#: widgets/EditProfileDialog.cpp:491
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4202,42 +4201,42 @@ msgstr[0] " řada"
 msgstr[1] " řady"
 msgstr[2] " řad"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Bell"
 msgstr "Systémový zvonek"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Notifications"
 msgstr "Systémová hlášení"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizuální zvonek"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:471
+#: widgets/EditProfileDialog.cpp:510
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Výchozí profil pro nová sezení terminálu v %1"
 
-#: widgets/EditProfileDialog.cpp:576
+#: widgets/EditProfileDialog.cpp:615
 #, kde-format
 msgid "Edit Environment"
 msgstr "Upravit prostředí"
 
-#: widgets/EditProfileDialog.cpp:577
+#: widgets/EditProfileDialog.cpp:616
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Jedna proměnná prostředí na řádek"
 
-#: widgets/EditProfileDialog.cpp:608
+#: widgets/EditProfileDialog.cpp:647
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4246,18 +4245,18 @@ msgstr[0] " sekunda"
 msgstr[1] " sekundy"
 msgstr[2] " sekund"
 
-#: widgets/EditProfileDialog.cpp:722
+#: widgets/EditProfileDialog.cpp:761
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Zvolit počáteční adresář"
 
-#: widgets/EditProfileDialog.cpp:1281
+#: widgets/EditProfileDialog.cpp:1320
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Načítání schématu <resource>%1</resource> selhalo."
 
-#: widgets/EditProfileDialog.cpp:1460
+#: widgets/EditProfileDialog.cpp:1499
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4265,7 +4264,7 @@ msgid ""
 msgstr ""
 "Toto schéma používá průhledné pozadí, což vaše plocha zřejmě nepodporuje"
 
-#: widgets/EditProfileDialog.cpp:1466
+#: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4274,7 +4273,7 @@ msgstr ""
 "Konsole byla spuštěna před zapnutím efektů plochy. Pro zobrazení průhledného "
 "pozadí je třeba aplikaci restartovat."
 
-#: widgets/EditProfileDialog.cpp:1857
+#: widgets/EditProfileDialog.cpp:1896
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4291,7 +4290,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1870
+#: widgets/EditProfileDialog.cpp:1909
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

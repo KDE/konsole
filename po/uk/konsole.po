@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-01 00:49+0000\n"
-"PO-Revision-Date: 2023-08-31 08:44+0300\n"
+"POT-Creation-Date: 2023-09-02 00:50+0000\n"
+"PO-Revision-Date: 2023-09-01 09:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1917,7 +1917,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Вбудований"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
 #, kde-format
 msgid "Default profile"
 msgstr "Типовий профіль"
@@ -3966,19 +3966,16 @@ msgstr "Потужність затемнення:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Колір:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Виберіть колір курсора"
+msgstr "Виберіть колір для малювання рамки"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -3988,10 +3985,9 @@ msgstr "Неактивні термінали:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Неактивні термінали:"
+msgstr "Активні термінали:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4047,16 +4043,15 @@ msgstr "Затемнення"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Позначати неактивне вікно притлумленням кольорів"
+msgstr "Вказувати, чи є вікно активним, шляхом малювання рамки"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Рамка"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4244,7 +4239,13 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Профіль із назвою «%1» вже існує."
 
-#: widgets/EditProfileDialog.cpp:352
+#: widgets/EditProfileDialog.cpp:355
+#, kde-format
+msgctxt "@info"
+msgid "The highlighted characters are invalid in profile names: %1."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:391
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4253,17 +4254,17 @@ msgstr[1] "Редагування %1 профілів: %2"
 msgstr[2] "Редагування %1 профілів: %2"
 msgstr[3] "Редагування профілю: %2"
 
-#: widgets/EditProfileDialog.cpp:356
+#: widgets/EditProfileDialog.cpp:395
 #, kde-format
 msgid "Create New Profile"
 msgstr "Створення профілю"
 
-#: widgets/EditProfileDialog.cpp:359
+#: widgets/EditProfileDialog.cpp:398
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Змінити профіль «%1»"
 
-#: widgets/EditProfileDialog.cpp:450
+#: widgets/EditProfileDialog.cpp:489
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4275,7 +4276,7 @@ msgstr[1] " стовпчики"
 msgstr[2] " стовпчиків"
 msgstr[3] " стовпчик"
 
-#: widgets/EditProfileDialog.cpp:452
+#: widgets/EditProfileDialog.cpp:491
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4287,42 +4288,42 @@ msgstr[1] " рядки"
 msgstr[2] " рядків"
 msgstr[3] " рядок"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Bell"
 msgstr "Системний дзвінок"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Notifications"
 msgstr "Системні сповіщення"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Visual Bell"
 msgstr "Видимий дзвінок"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ігнорувати події дзвінка"
 
-#: widgets/EditProfileDialog.cpp:471
+#: widgets/EditProfileDialog.cpp:510
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Типовий профіль для нових сеансів термінала у %1"
 
-#: widgets/EditProfileDialog.cpp:576
+#: widgets/EditProfileDialog.cpp:615
 #, kde-format
 msgid "Edit Environment"
 msgstr "Змінити середовище"
 
-#: widgets/EditProfileDialog.cpp:577
+#: widgets/EditProfileDialog.cpp:616
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Одна змінна середовища на рядок"
 
-#: widgets/EditProfileDialog.cpp:608
+#: widgets/EditProfileDialog.cpp:647
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4332,18 +4333,18 @@ msgstr[1] " секунди"
 msgstr[2] " секунд"
 msgstr[3] " секунда"
 
-#: widgets/EditProfileDialog.cpp:722
+#: widgets/EditProfileDialog.cpp:761
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Виберіть початковий каталог"
 
-#: widgets/EditProfileDialog.cpp:1281
+#: widgets/EditProfileDialog.cpp:1320
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Не вдалося завантажити схему <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1460
+#: widgets/EditProfileDialog.cpp:1499
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4352,7 +4353,7 @@ msgstr ""
 "Ця схема кольорів використовує прозоре тло, яке, здається, не підтримується "
 "на вашій стільниці"
 
-#: widgets/EditProfileDialog.cpp:1466
+#: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4361,7 +4362,7 @@ msgstr ""
 "Konsole було запущено до вмикання стільничних ефектів. Щоб побачити прозоре "
 "тло, вам слід перезапустити Konsole."
 
-#: widgets/EditProfileDialog.cpp:1857
+#: widgets/EditProfileDialog.cpp:1896
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4391,7 +4392,7 @@ msgstr ""
 "буде проігноровано — файл буде відкрито у типовому текстовому\n"
 "редакторі."
 
-#: widgets/EditProfileDialog.cpp:1870
+#: widgets/EditProfileDialog.cpp:1909
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Нетипова команда текстового редактора:"

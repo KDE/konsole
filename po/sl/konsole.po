@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-01 00:49+0000\n"
-"PO-Revision-Date: 2023-08-31 05:46+0200\n"
+"POT-Creation-Date: 2023-09-02 00:50+0000\n"
+"PO-Revision-Date: 2023-09-01 06:03+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -1909,7 +1909,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Vgrajeno"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
 #, kde-format
 msgid "Default profile"
 msgstr "Privzeti profil"
@@ -3950,19 +3950,16 @@ msgstr "Moč temnenja:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Barva:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Izberite barvo ki se naj uporabi za izris kazalke"
+msgstr "Izberite barvo za izris meje"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -3972,10 +3969,9 @@ msgstr "Nedejavni terminali:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Nedejavni terminali:"
+msgstr "Dejavni terminali:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4031,16 +4027,15 @@ msgstr "Potemni"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Z zatemnitvijo barv označi, ali je okno aktivno"
+msgstr "Označi dejavno okno aktivno z risanjem meje"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Meja"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4226,7 +4221,13 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Profil z imenom \"%1\" že obstaja."
 
-#: widgets/EditProfileDialog.cpp:352
+#: widgets/EditProfileDialog.cpp:355
+#, kde-format
+msgctxt "@info"
+msgid "The highlighted characters are invalid in profile names: %1."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:391
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4235,17 +4236,17 @@ msgstr[1] "Urejanje %1 profilov: %2"
 msgstr[2] "Urejanje %1 profilov: %2"
 msgstr[3] "Urejanje %1 profilov: %2"
 
-#: widgets/EditProfileDialog.cpp:356
+#: widgets/EditProfileDialog.cpp:395
 #, kde-format
 msgid "Create New Profile"
 msgstr "Ustvari nov profil"
 
-#: widgets/EditProfileDialog.cpp:359
+#: widgets/EditProfileDialog.cpp:398
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Uredi profil \"%1\""
 
-#: widgets/EditProfileDialog.cpp:450
+#: widgets/EditProfileDialog.cpp:489
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4257,7 +4258,7 @@ msgstr[1] " stolpca"
 msgstr[2] " stolpci"
 msgstr[3] " stolpcev"
 
-#: widgets/EditProfileDialog.cpp:452
+#: widgets/EditProfileDialog.cpp:491
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4269,42 +4270,42 @@ msgstr[1] " vrstici"
 msgstr[2] " vrstice"
 msgstr[3] " vrstic"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Bell"
 msgstr "Sistemski zvonec"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Notifications"
 msgstr "Obvestila sistema"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vidni zvonec"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Prezri dogodke zvonca"
 
-#: widgets/EditProfileDialog.cpp:471
+#: widgets/EditProfileDialog.cpp:510
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Privzeti profil za nove terminalske seje v %1"
 
-#: widgets/EditProfileDialog.cpp:576
+#: widgets/EditProfileDialog.cpp:615
 #, kde-format
 msgid "Edit Environment"
 msgstr "Uredi okolje"
 
-#: widgets/EditProfileDialog.cpp:577
+#: widgets/EditProfileDialog.cpp:616
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Ena okoljska spremenljivka na vrstico"
 
-#: widgets/EditProfileDialog.cpp:608
+#: widgets/EditProfileDialog.cpp:647
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4314,18 +4315,18 @@ msgstr[1] " sekundi"
 msgstr[2] " sekunde"
 msgstr[3] " sekund"
 
-#: widgets/EditProfileDialog.cpp:722
+#: widgets/EditProfileDialog.cpp:761
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Izberi začetno mapo"
 
-#: widgets/EditProfileDialog.cpp:1281
+#: widgets/EditProfileDialog.cpp:1320
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Shema <resource>%1</resource> se ni uspela naložiti."
 
-#: widgets/EditProfileDialog.cpp:1460
+#: widgets/EditProfileDialog.cpp:1499
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4333,7 +4334,7 @@ msgid ""
 msgstr ""
 "Ta barvna shema uporablja prozorno ozadje, kar na tem sistemu ni podprto"
 
-#: widgets/EditProfileDialog.cpp:1466
+#: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4342,7 +4343,7 @@ msgstr ""
 "Program Konsole je bil začet preden so bili omogočeni učinki namizja. Da bi "
 "lahko videli prozorno ozadje, ga morate znova zagnati."
 
-#: widgets/EditProfileDialog.cpp:1857
+#: widgets/EditProfileDialog.cpp:1896
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4370,7 +4371,7 @@ msgstr ""
 "Če v ukazu manjkata PATH ali LINE, bo ta nastavitev\n"
 "prezrta, datoteko pa bo odprl privzeti urejevalnik besedil."
 
-#: widgets/EditProfileDialog.cpp:1870
+#: widgets/EditProfileDialog.cpp:1909
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Ukaz urejevalnika besedil po meri"

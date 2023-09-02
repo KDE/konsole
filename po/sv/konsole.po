@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-01 00:49+0000\n"
-"PO-Revision-Date: 2023-08-31 20:36+0200\n"
+"POT-Creation-Date: 2023-09-02 00:50+0000\n"
+"PO-Revision-Date: 2023-09-01 06:56+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -1912,7 +1912,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Inbyggd"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
 #, kde-format
 msgid "Default profile"
 msgstr "Standardprofil"
@@ -3955,19 +3955,16 @@ msgstr "Mörknadsstyrka:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Färg:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Välj färg som används för att rita markören"
+msgstr "Välj färg som används för att rita kanten"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -3977,10 +3974,9 @@ msgstr "Inaktiva terminaler:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Inaktiva terminaler:"
+msgstr "Aktiva terminaler:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4036,16 +4032,15 @@ msgstr "Gör mörkare"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indikera om fönstret är aktivt genom att dämpa färgerna"
+msgstr "Indikera om fönstret är aktivt genom att rita en kant"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Kant"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4233,24 +4228,30 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "En profil med namnet \"%1\" finns redan."
 
-#: widgets/EditProfileDialog.cpp:352
+#: widgets/EditProfileDialog.cpp:355
+#, kde-format
+msgctxt "@info"
+msgid "The highlighted characters are invalid in profile names: %1."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:391
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Redigera profil: %2"
 msgstr[1] "Redigera %1 profiler: %2"
 
-#: widgets/EditProfileDialog.cpp:356
+#: widgets/EditProfileDialog.cpp:395
 #, kde-format
 msgid "Create New Profile"
 msgstr "Skapa ny profil"
 
-#: widgets/EditProfileDialog.cpp:359
+#: widgets/EditProfileDialog.cpp:398
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Redigera profilen \"%1\""
 
-#: widgets/EditProfileDialog.cpp:450
+#: widgets/EditProfileDialog.cpp:489
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4260,7 +4261,7 @@ msgid_plural " columns"
 msgstr[0] " kolumn"
 msgstr[1] " kolumner"
 
-#: widgets/EditProfileDialog.cpp:452
+#: widgets/EditProfileDialog.cpp:491
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4270,42 +4271,42 @@ msgid_plural " rows"
 msgstr[0] " rad"
 msgstr[1] " rader"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Bell"
 msgstr "Systemlarmklocka"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Notifications"
 msgstr "Systemunderrättelser"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Visual Bell"
 msgstr "Visuellt alarm"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignorera alarmhändelser"
 
-#: widgets/EditProfileDialog.cpp:471
+#: widgets/EditProfileDialog.cpp:510
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Standardprofil för nya terminalsessioner i %1"
 
-#: widgets/EditProfileDialog.cpp:576
+#: widgets/EditProfileDialog.cpp:615
 #, kde-format
 msgid "Edit Environment"
 msgstr "Redigera miljö"
 
-#: widgets/EditProfileDialog.cpp:577
+#: widgets/EditProfileDialog.cpp:616
 #, kde-format
 msgid "One environment variable per line"
 msgstr "En miljövariabel per rad"
 
-#: widgets/EditProfileDialog.cpp:608
+#: widgets/EditProfileDialog.cpp:647
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4313,18 +4314,18 @@ msgid_plural " seconds"
 msgstr[0] " sekund"
 msgstr[1] " sekunder"
 
-#: widgets/EditProfileDialog.cpp:722
+#: widgets/EditProfileDialog.cpp:761
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Välj startkatalog"
 
-#: widgets/EditProfileDialog.cpp:1281
+#: widgets/EditProfileDialog.cpp:1320
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Misslyckades ladda schemat <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1460
+#: widgets/EditProfileDialog.cpp:1499
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4333,7 +4334,7 @@ msgstr ""
 "Färgschemat använder en genomskinlig bakgrund som inte verkar stödjas av "
 "skrivbordet."
 
-#: widgets/EditProfileDialog.cpp:1466
+#: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4342,7 +4343,7 @@ msgstr ""
 "Terminalen startades innan skrivbordseffekter aktiverats. Du måste starta om "
 "terminalen för att se genomskinlig bakgrund."
 
-#: widgets/EditProfileDialog.cpp:1857
+#: widgets/EditProfileDialog.cpp:1896
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4371,7 +4372,7 @@ msgstr ""
 "ignoreras inställningen och filen öppnas med den\n"
 "förvalda texteditorn."
 
-#: widgets/EditProfileDialog.cpp:1870
+#: widgets/EditProfileDialog.cpp:1909
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Eget texteditorkommando"

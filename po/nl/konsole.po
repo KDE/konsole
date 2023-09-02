@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-01 00:49+0000\n"
+"POT-Creation-Date: 2023-09-02 00:50+0000\n"
 "PO-Revision-Date: 2023-08-29 18:22+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -1927,7 +1927,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:473
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
 #, kde-format
 msgid "Default profile"
 msgstr "Standaard profiel"
@@ -4260,24 +4260,30 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Een profiel met de naam \"%1\" bestaat al."
 
-#: widgets/EditProfileDialog.cpp:352
+#: widgets/EditProfileDialog.cpp:355
+#, kde-format
+msgctxt "@info"
+msgid "The highlighted characters are invalid in profile names: %1."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:391
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Bewerken van profiel: %2"
 msgstr[1] "Bewerken van %1 profielen: %2"
 
-#: widgets/EditProfileDialog.cpp:356
+#: widgets/EditProfileDialog.cpp:395
 #, kde-format
 msgid "Create New Profile"
 msgstr "Nieuw profiel aanmaken"
 
-#: widgets/EditProfileDialog.cpp:359
+#: widgets/EditProfileDialog.cpp:398
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Profiel \"%1\" bewerken"
 
-#: widgets/EditProfileDialog.cpp:450
+#: widgets/EditProfileDialog.cpp:489
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4287,7 +4293,7 @@ msgid_plural " columns"
 msgstr[0] "Kolom"
 msgstr[1] " kolommen"
 
-#: widgets/EditProfileDialog.cpp:452
+#: widgets/EditProfileDialog.cpp:491
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4297,42 +4303,42 @@ msgid_plural " rows"
 msgstr[0] " rij"
 msgstr[1] " rijen"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Bell"
 msgstr "Systeembel"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "System Notifications"
 msgstr "Systeemberichten"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Visual Bell"
 msgstr "Zichtbare bel"
 
-#: widgets/EditProfileDialog.cpp:462
+#: widgets/EditProfileDialog.cpp:501
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Bel-gebeurtenissen negeren"
 
-#: widgets/EditProfileDialog.cpp:471
+#: widgets/EditProfileDialog.cpp:510
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Standaard profiel voor nieuwe terminalsessies in %1"
 
-#: widgets/EditProfileDialog.cpp:576
+#: widgets/EditProfileDialog.cpp:615
 #, kde-format
 msgid "Edit Environment"
 msgstr "Omgeving bewerken"
 
-#: widgets/EditProfileDialog.cpp:577
+#: widgets/EditProfileDialog.cpp:616
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Eén omgevingsvariabele per regel"
 
-#: widgets/EditProfileDialog.cpp:608
+#: widgets/EditProfileDialog.cpp:647
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4340,18 +4346,18 @@ msgid_plural " seconds"
 msgstr[0] " seconde"
 msgstr[1] " seconden"
 
-#: widgets/EditProfileDialog.cpp:722
+#: widgets/EditProfileDialog.cpp:761
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Beginmap selecteren"
 
-#: widgets/EditProfileDialog.cpp:1281
+#: widgets/EditProfileDialog.cpp:1320
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Laden van schema <resource>%1</resource> is mislukt."
 
-#: widgets/EditProfileDialog.cpp:1460
+#: widgets/EditProfileDialog.cpp:1499
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4360,7 +4366,7 @@ msgstr ""
 "Dit kleurenschema heeft een transparante achtergrond, maar dit wordt niet "
 "door uw bureaublad ondersteund"
 
-#: widgets/EditProfileDialog.cpp:1466
+#: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4369,7 +4375,7 @@ msgstr ""
 "Konsole is opgestart alvorens bureaubladeffecten waren ingeschakeld. U dient "
 "konsole opnieuw te starten om een transparante achtergrond te zien."
 
-#: widgets/EditProfileDialog.cpp:1857
+#: widgets/EditProfileDialog.cpp:1896
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4398,7 +4404,7 @@ msgstr ""
 "genegeerd worden en zal het bestand geopend worden door de standaard\n"
 "tekstbewerker."
 
-#: widgets/EditProfileDialog.cpp:1870
+#: widgets/EditProfileDialog.cpp:1909
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Aangepaste opdracht aan tekstbewerker"
