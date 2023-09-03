@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-02 00:50+0000\n"
-"PO-Revision-Date: 2023-09-01 12:31+0300\n"
+"PO-Revision-Date: 2023-09-02 23:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -887,7 +887,7 @@ msgstr "Konsole"
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
-msgstr "Uçbirim öykünücü"
+msgstr "Uçbirim öykünücüsü"
 
 #: main.cpp:178
 #, kde-format
@@ -4227,7 +4227,7 @@ msgstr "\"%1\" adında bir profil halihazırda var."
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Profil adlarında vurgulanan karakterler geçersiz: %1."
 
 #: widgets/EditProfileDialog.cpp:391
 #, kde-format

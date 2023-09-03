@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-02 00:50+0000\n"
-"PO-Revision-Date: 2023-09-01 12:04+0200\n"
+"PO-Revision-Date: 2023-09-02 20:10+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -4272,7 +4272,7 @@ msgstr "Ya existe un perfil con el nombre «%1»."
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Los caracteres resaltados no son válidos en los nombres de perfil: %1."
 
 #: widgets/EditProfileDialog.cpp:391
 #, kde-format

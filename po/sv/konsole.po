@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-02 00:50+0000\n"
-"PO-Revision-Date: 2023-09-01 06:56+0200\n"
+"PO-Revision-Date: 2023-09-02 08:56+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -4232,7 +4232,7 @@ msgstr "En profil med namnet \"%1\" finns redan."
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "De markerade tecknen är ogiltiga i profilnamn: %1."
 
 #: widgets/EditProfileDialog.cpp:391
 #, kde-format
