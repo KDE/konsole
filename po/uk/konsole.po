@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-02 00:50+0000\n"
-"PO-Revision-Date: 2023-09-01 09:29+0300\n"
+"PO-Revision-Date: 2023-09-02 09:28+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -4243,7 +4243,7 @@ msgstr "Профіль із назвою «%1» вже існує."
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Підсвічені символи є некоректними для назв профілів: %1."
 
 #: widgets/EditProfileDialog.cpp:391
 #, kde-format
