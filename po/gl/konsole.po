@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-06-24 13:22+0200\n"
+"PO-Revision-Date: 2023-09-03 14:10+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -183,28 +183,27 @@ msgstr "Executar nun proceso á parte"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "Amosar a barra do menú, sobredefinindo a configuración predeterminada"
+msgstr "Amosar a barra de menú, sobredefinindo a configuración predeterminada"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr "Agochar a barra do menú, sobredefinindo a configuración predeterminada"
+msgstr "Agochar a barra de menú, sobredefinindo a configuración predeterminada"
 
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
 msgstr ""
-"Amosar a barra de separadores, sobredefinindo a configuración predeterminada."
+"Amosar a barra de lapelas, sobredefinindo a configuración predeterminada."
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
 msgstr ""
-"Agochar a barra de separadores, sobredefinindo a configuración "
-"predeterminada."
+"Agochar a barra de lapelas, sobredefinindo a configuración predeterminada."
 
 #: Application.cpp:70
 #, kde-format
@@ -1333,7 +1332,7 @@ msgstr "Xeral"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr "Barra de separadores"
+msgstr "Barra de lapelas / Divisores"
 
 #: MainWindow.cpp:978
 #, kde-format
@@ -2743,7 +2742,7 @@ msgstr "Define se os textos atopados deben realzarse."
 #: settings/konsole.kcfg:85 settings/konsole.kcfg:105
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
-msgstr "Controlar a visibilidade da barra de separadores"
+msgstr "Controlar a visibilidade da barra de lapelas"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
 #: settings/konsole.kcfg:94
@@ -2755,27 +2754,26 @@ msgstr "Controlar o tamaño da asa entre paneis"
 #: settings/konsole.kcfg:114
 #, kde-format
 msgid "Control the position of the tab bar"
-msgstr "Controlar a posición da barra de separadores"
+msgstr "Controlar a posición da barra de lapelas"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:122
 #, kde-format
 msgid "Control the visual style of the tab bar"
-msgstr "Controlar o estilo visual da barra de separadores"
+msgstr "Controlar o estilo visual da barra de lapelas"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:126
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr ""
-"Usar un ficheiro de CSS definido pola persoa usuaria para a barra de "
-"separadores."
+"Usar un ficheiro de CSS definido pola persoa usuaria para a barra de lapelas."
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
 #: settings/konsole.kcfg:130
 #, kde-format
 msgid "The .css file to use for the tab bar style"
-msgstr "O ficheiro de CSS que usar para o estilo da barra de separadores"
+msgstr "O ficheiro de CSS que usar para o estilo da barra de lapelas"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
 #: settings/konsole.kcfg:134
@@ -2787,8 +2785,7 @@ msgstr "Permitir clic central nos separadores abertos para pechalos"
 #: settings/konsole.kcfg:138
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr ""
-"Controlar a visibilidade d botón de «Novo separador» na barra de separadores"
+msgstr "Controlar a visibilidade d botón de «Nova lapela» na barra de lapelas"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:142
@@ -2972,7 +2969,7 @@ msgstr "En cada separad&or"
 #: settings/TabBarSettings.ui:172
 #, kde-format
 msgid "On &the tab bar"
-msgstr "Na barra de &separadores"
+msgstr "Na barra de &lapelas"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:182
@@ -3250,7 +3247,7 @@ msgstr "Escape: úsase para manipular o estado do terminal"
 #: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
-msgstr "Divisoria de ficheiros ou saír: podería interromper o proceso actual"
+msgstr "Separador de ficheiros ou saír: podería interromper o proceso actual"
 
 #: terminalDisplay/TerminalDisplay.cpp:2311
 #, kde-format
