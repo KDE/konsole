@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-02 00:50+0000\n"
-"PO-Revision-Date: 2023-08-29 15:25+0200\n"
+"PO-Revision-Date: 2023-09-06 09:32+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -1916,7 +1916,7 @@ msgstr "&Scale output"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Вградено"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
 #, kde-format
@@ -3978,19 +3978,16 @@ msgstr "Сила на потъмняване:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Цвят:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Изберете цвета, използван за изчертаване на курсора"
+msgstr "Изберете цвета, използван за изчертаване на рамката"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -4000,10 +3997,9 @@ msgstr "Неактивни терминали:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Неактивни терминали:"
+msgstr "Активни терминали:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4059,16 +4055,15 @@ msgstr "Потъмняване"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Посочете дали прозорецът е активен чрез затъмняване на цветовете"
+msgstr "Посочване на активен прозорец чрез очертаване с рамка"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Рамка"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4261,7 +4256,7 @@ msgstr "Профил с име \"%1\" вече съществува."
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Подчертаните символи са невалидни в имената на профилите: %1."
 
 #: widgets/EditProfileDialog.cpp:391
 #, kde-format

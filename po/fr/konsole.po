@@ -11,7 +11,7 @@
 # Nicolas Ternisien <nicolas.ternisien@gmail.com>, 2005, 2007, 2008, 2010.
 # Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2008.
 # Anne-Marie Mahfouf <annemarie.mahfouf@free.fr>, 2009, 2012.
-# xavier <xavier.besnard@neuf.fr>, 2012, 2013, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2012, 2013, 2020, 2021, 2022, 2023 xavier <xavier.besnard@neuf.fr>
 # Sebastien Renard <renard@kde.org>, 2013, 2014, 2015.
 # Vincent Pinon <vpinon@kde.org>, 2017.
 # Peter Potrowl <peter.potrowl@gmail.com>, 2017, 2018, 2019.
@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-02 00:50+0000\n"
-"PO-Revision-Date: 2023-05-17 18:09+0200\n"
+"PO-Revision-Date: 2023-09-05 17:14+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -1348,7 +1348,7 @@ msgstr "Général"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Mémoire"
 
 #: MainWindow.cpp:980
 #, kde-format
@@ -1948,7 +1948,7 @@ msgstr "Mettre à l'échelle la &sortie"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Intégré"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
 #, kde-format
@@ -2791,6 +2791,8 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Détermine le niveau de consommation de mémoire au-dessus duquel la "
+"limitation commencera"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2888,10 +2890,9 @@ msgstr "Pour les fichiers d'historique, utiliser ce dossier"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Surveillance des onglets"
+msgstr "Activer la surveuillance de la mémoire :"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2905,18 +2906,28 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Les modifications prendront effet au redémarrage. Si cette option est "
+"activée, la consommation de mémoire prise en\n"
+" compte par Konsole dépassant la valeur spécifiée conduira le module "
+"« systemd-oomd » a fermé les onglets\n"
+"contenant le ou les processus(s) nécessitant beaucoup de mémoire. Remarque : "
+"activation de cette option\n"
+"peut provoquer des ralentissements plus importants lors d’une consommation "
+"de mémoire élevée et la définition\n"
+" de valeurs excessivement basses pourraient ensuite provoquer la fermeture "
+"de Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Limite de mémoire :"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " Mo"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
@@ -4010,19 +4021,16 @@ msgstr "Niveau d'assombrissement :"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Couleur : "
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Sélectionner la couleur utilisée pour dessiner le curseur"
+msgstr "Sélectionner la couleur utilisée pour dessiner la bordure"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -4032,10 +4040,9 @@ msgstr "Terminaux inactifs :"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Terminaux inactifs :"
+msgstr "Terminaux actifs :"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4091,16 +4098,15 @@ msgstr "Assombrir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indiquer si la fenêtre est active en atténuant les couleurs"
+msgstr "Indiquer si la fenêtre est active en dessinant une bordure"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Bordure"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4297,6 +4303,8 @@ msgstr "Un profil avec ce même nom « %1 » existe déjà."
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
+"Les caractères mis en évidence sont non valables dans les noms de profils : "
+"%1."
 
 #: widgets/EditProfileDialog.cpp:391
 #, kde-format
