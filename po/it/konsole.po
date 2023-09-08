@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-02 00:50+0000\n"
-"PO-Revision-Date: 2023-08-31 17:06+0200\n"
+"PO-Revision-Date: 2023-09-02 21:39+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -3984,19 +3984,16 @@ msgstr "Intensità oscuramento:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Colore:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Seleziona il colore usato per disegnare il cursore"
+msgstr "Seleziona il colore utilizzato per disegnare il bordo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -4006,10 +4003,9 @@ msgstr "Terminali inattivi:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Terminali inattivi:"
+msgstr "Terminali attivi:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4065,16 +4061,15 @@ msgstr "Scurisci"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indica se la finestra è attiva oscurando i colori"
+msgstr "Indica se la finestra è attiva disegnando un bordo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Bordo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4267,7 +4262,7 @@ msgstr "Un profilo con il nome «%1» esiste già."
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "I caratteri evidenziati non sono validi nei nomi di profile: %1."
 
 #: widgets/EditProfileDialog.cpp:391
 #, kde-format
