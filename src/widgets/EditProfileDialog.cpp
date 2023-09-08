@@ -51,6 +51,11 @@
 #include "WindowSystemInfo.h"
 #include "profile/ProfileManager.h"
 
+// Others
+#if defined(Q_OS_LINUX) | defined(Q_OS_FREEBSD) | defined(Q_OS_OPENBSD) | defined(Q_OS_SOLARIS) | defined(Q_OS_MACOS)
+#include <unistd.h>
+#endif
+
 // Include moc file here before the #define KNSCore KNS3
 // as moc generates the code without knowing about that define
 // TODO KF6-only: move to usual place at end of file
@@ -315,6 +320,29 @@ bool EditProfileDialog::isProfileNameValid()
 
     if (!_tempProfile->name().isEmpty() && otherExistingProfileNames.contains(_tempProfile->name())) {
         setMessageGeneralPage(i18nc("@info", "A profile with the name \"%1\" already exists.", _generalUi->profileNameEdit->text()));
+        // Revert the name in the dialog
+        _generalUi->profileNameEdit->setText(_profile->name());
+        selectProfileName();
+        return false;
+    }
+
+    const QString profileStoragePath(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QDir::separator() + QStringLiteral("konsole"));
+    int nameLenMax = 256;
+
+#if defined(Q_OS_LINUX) | defined(Q_OS_OPENBSD) | defined(Q_OS_FREEBSD) | defined(Q_OS_MACOS) | defined(Q_OS_SOLARIS)
+    const int maxPath = pathconf(profileStoragePath.toLocal8Bit().constData(), _PC_PATH_MAX);
+    const int nameLenMaxPath = maxPath - _profile->path().lastIndexOf(QLatin1Char('/')) + 1;
+    const int nameLenMaxName = pathconf(profileStoragePath.toLocal8Bit().constData(), _PC_NAME_MAX);
+    nameLenMax = qMin(nameLenMaxPath, nameLenMaxName);
+#elif defined(Q_OS_WIN)
+    const int maxPath = QString(qgetenv("MAX_PATH")).toInt();
+    nameLenMax = maxPath - _profile->path().lastIndexOf(QLatin1Char('/')) + 1;
+#endif
+
+    nameLenMax -= QStringLiteral(".profile").size();
+
+    if (_tempProfile->name().size() > nameLenMax) {
+        setMessageGeneralPage(i18nc("@info", "Profile name exceeded maximum allowed length (%1).", nameLenMax));
         // Revert the name in the dialog
         _generalUi->profileNameEdit->setText(_profile->name());
         selectProfileName();
