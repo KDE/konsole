@@ -38,6 +38,7 @@
 #include <KNotifyConfigWidget>
 #include <KStandardAction>
 #include <KStandardGuiItem>
+#include <KWindowConfig>
 #include <KWindowSystem>
 #include <KXMLGUIFactory>
 
@@ -151,6 +152,7 @@ static QString allConnectedScreens()
     return names.join(QLatin1Char(' '));
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 // Convenience function to get an appropriate config file key under which to
 // save window size, position, or maximization information.
 // Copied from KWindowConfig before https://invent.kde.org/frameworks/kconfig/-/merge_requests/184
@@ -187,6 +189,7 @@ static QString configFileStringV2(const QScreen *screen, const QString &key)
     }
     return returnString;
 }
+#endif
 
 bool MainWindow::wasWindowGeometrySaved() const
 {
@@ -196,10 +199,14 @@ bool MainWindow::wasWindowGeometrySaved() const
         return false;
     }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     return cg.hasKey(configFileStringV2(screen(), QStringLiteral("Width"))) || cg.hasKey(configFileStringV2(screen(), QStringLiteral("Height")))
         || cg.hasKey(configFileStringV2(screen(), QStringLiteral("XPosition"))) || cg.hasKey(configFileStringV2(screen(), QStringLiteral("YPosition")))
         || cg.hasKey(configFileStringV1(screen(), QStringLiteral("Width"))) || cg.hasKey(configFileStringV1(screen(), QStringLiteral("Height")))
         || cg.hasKey(configFileStringV1(screen(), QStringLiteral("XPosition"))) || cg.hasKey(configFileStringV1(screen(), QStringLiteral("YPosition")));
+#else
+    return KWindowConfig::hasSavedWindowSize(cg) || KWindowConfig::hasSavedWindowPosition(cg);
+#endif
 }
 
 void MainWindow::updateUseTransparency()
