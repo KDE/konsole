@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-05-15 10:02+0200\n"
+"PO-Revision-Date: 2023-09-01 11:16+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -245,7 +245,7 @@ msgid ""
 "--new-tab. Mostly for debugging."
 msgstr ""
 "Força la reutilització de la instància existent, encara que trenqui "
-"funcionalitats, p. ex. «--new-tab». Principalment per a depuració."
+"funcionalitats, p. ex., «--new-tab». Principalment per a depuració."
 
 #: Application.cpp:86
 #, kde-format
@@ -3932,7 +3932,7 @@ msgstr "Terminals inactius:"
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
-msgstr "Continguts del terminal"
+msgstr "Contingut del terminal"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
 #: widgets/EditProfileAppearancePage.ui:544
@@ -4293,7 +4293,7 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
-"El format és p. ex. «editorExec CAMÍ:LÍNIA:COLUMNA»\n"
+"El format és p. ex., «editorExec CAMÍ:LÍNIA:COLUMNA»\n"
 "\n"
 "CAMÍ se substituirà pel camí cap al fitxer de text\n"
 "LÍNIA se substituirà pel número de línia\n"
@@ -4807,7 +4807,7 @@ msgid ""
 msgstr ""
 "La roda de desplaçament del ratolí emularà la pulsació de les tecles amunt/"
 "avall en programes que utilitzen la memòria intermèdia alternativa de "
-"pantalla (p. ex. «less»)"
+"pantalla (p. ex., «less»)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:402
@@ -5206,7 +5206,7 @@ msgid ""
 "computer via SSH) is being executed"
 msgstr ""
 "Format del títol de la pestanya que s'utilitza en executar ordres remotes "
-"(p. ex. en connexions a un altre ordinador via SSH)"
+"(p. ex., en connexions a un altre ordinador via SSH)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/RenameTabWidget.ui:60
