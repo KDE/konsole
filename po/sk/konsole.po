@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-02 00:50+0000\n"
+"POT-Creation-Date: 2023-09-09 00:49+0000\n"
 "PO-Revision-Date: 2022-07-19 10:03+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -1925,7 +1925,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Default profile"
 msgstr "Štandardný profil"
@@ -4188,54 +4188,54 @@ msgstr "Prilepiť bez netlačiteľných znakov"
 msgid "Override wcwidth"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:71
+#: widgets/EditProfileDialog.cpp:76
 #, kde-format
 msgid "Edit Profile"
 msgstr "Upraviť profil"
 
-#: widgets/EditProfileDialog.cpp:98
+#: widgets/EditProfileDialog.cpp:103
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Všeobecné"
 
-#: widgets/EditProfileDialog.cpp:109
+#: widgets/EditProfileDialog.cpp:114
 #, kde-format
 msgid "Tabs"
 msgstr "Karty"
 
-#: widgets/EditProfileDialog.cpp:126
+#: widgets/EditProfileDialog.cpp:131
 #, kde-format
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: widgets/EditProfileDialog.cpp:142
+#: widgets/EditProfileDialog.cpp:147
 #, kde-format
 msgid "Scrolling"
 msgstr "Rolovanie"
 
-#: widgets/EditProfileDialog.cpp:156
+#: widgets/EditProfileDialog.cpp:161
 #, kde-format
 msgid "Keyboard"
 msgstr "Klávesnica"
 
-#: widgets/EditProfileDialog.cpp:157
+#: widgets/EditProfileDialog.cpp:162
 #, kde-format
 msgid "Key bindings"
 msgstr "Klávesové skratky"
 
-#: widgets/EditProfileDialog.cpp:168
+#: widgets/EditProfileDialog.cpp:173
 #, kde-format
 msgid "Mouse"
 msgstr "Myš"
 
-#: widgets/EditProfileDialog.cpp:184
+#: widgets/EditProfileDialog.cpp:189
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Pokročilé"
 
-#: widgets/EditProfileDialog.cpp:292
+#: widgets/EditProfileDialog.cpp:297
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4247,7 +4247,7 @@ msgstr ""
 "> Zmeňte povolenia tohto súboru alebo nastavte iný názov, aby sa nastavenia "
 "uložili do nového profilu."
 
-#: widgets/EditProfileDialog.cpp:309
+#: widgets/EditProfileDialog.cpp:314
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
@@ -4255,19 +4255,25 @@ msgstr ""
 "Názov profilu bol prázdny; prosím nastavte názov aby ste mohli uložiť "
 "nastavenia"
 
-#: widgets/EditProfileDialog.cpp:317
+#: widgets/EditProfileDialog.cpp:322
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Profil s názvom „%1“ už existuje."
 
-#: widgets/EditProfileDialog.cpp:355
+#: widgets/EditProfileDialog.cpp:345
+#, kde-format
+msgctxt "@info"
+msgid "Profile name exceeded maximum allowed length (%1)."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:391
+#: widgets/EditProfileDialog.cpp:419
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4275,17 +4281,17 @@ msgstr[0] "Úprava profilu: %2"
 msgstr[1] "Úprava %1 profilov: %2"
 msgstr[2] "Úprava %1 profilov: %2"
 
-#: widgets/EditProfileDialog.cpp:395
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Create New Profile"
 msgstr "Vytvoriť nový profil"
 
-#: widgets/EditProfileDialog.cpp:398
+#: widgets/EditProfileDialog.cpp:426
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Upraviť profil \"%1\""
 
-#: widgets/EditProfileDialog.cpp:489
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4296,7 +4302,7 @@ msgstr[0] "stĺpec"
 msgstr[1] "stĺpce"
 msgstr[2] "stĺpcov"
 
-#: widgets/EditProfileDialog.cpp:491
+#: widgets/EditProfileDialog.cpp:519
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4307,43 +4313,43 @@ msgstr[0] "riadok"
 msgstr[1] "riadky"
 msgstr[2] "riadkov"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Bell"
 msgstr "Systémový zvonček"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Notifications"
 msgstr "Systémové upozornenia"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizuálny k zvonček"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignorovať udalosti zvončeka"
 
-#: widgets/EditProfileDialog.cpp:510
+#: widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr ""
 "Nastaviť vybraný profil ako štandardný pre nové terminálové sedenia v %1"
 
-#: widgets/EditProfileDialog.cpp:615
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "Edit Environment"
 msgstr "Upraviť prostredie"
 
-#: widgets/EditProfileDialog.cpp:616
+#: widgets/EditProfileDialog.cpp:644
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Jedna premenná prostredia na riadok"
 
-#: widgets/EditProfileDialog.cpp:647
+#: widgets/EditProfileDialog.cpp:675
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4352,18 +4358,18 @@ msgstr[0] " sekunda"
 msgstr[1] " sekundy"
 msgstr[2] " sekúnd"
 
-#: widgets/EditProfileDialog.cpp:761
+#: widgets/EditProfileDialog.cpp:789
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Vyberte počiatočný adresár"
 
-#: widgets/EditProfileDialog.cpp:1320
+#: widgets/EditProfileDialog.cpp:1348
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Schému <resource>%1</resource> sa nepodarilo načítať."
 
-#: widgets/EditProfileDialog.cpp:1499
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4372,7 +4378,7 @@ msgstr ""
 "Táto farebná schéma používa priehľadné pozadie, ktoré vaša plocha zrejme "
 "nepodporuje."
 
-#: widgets/EditProfileDialog.cpp:1505
+#: widgets/EditProfileDialog.cpp:1533
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4381,7 +4387,7 @@ msgstr ""
 "Konsole bola spustená pred povolením efektov plochy. Musíte reštatovať "
 "Konsole, aby ste videli transparentné pozadie."
 
-#: widgets/EditProfileDialog.cpp:1896
+#: widgets/EditProfileDialog.cpp:1924
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4410,7 +4416,7 @@ msgstr ""
 "bude ignorované a súbor bude otvorený predvoleným textovým\n"
 "editorom."
 
-#: widgets/EditProfileDialog.cpp:1909
+#: widgets/EditProfileDialog.cpp:1937
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Vlastný príkaz textového editora"

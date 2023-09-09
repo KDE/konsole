@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-02 00:50+0000\n"
-"PO-Revision-Date: 2023-08-29 12:57+0200\n"
+"POT-Creation-Date: 2023-09-09 00:49+0000\n"
+"PO-Revision-Date: 2023-09-02 11:37+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -1919,9 +1919,9 @@ msgstr "E&scala de l'eixida"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Integrat"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Default profile"
 msgstr "Perfil predeterminat"
@@ -3989,19 +3989,16 @@ msgstr "Intensitat de l'enfosquit:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Color:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Seleccioneu el color utilitzat per a dibuixar el cursor"
+msgstr "Seleccioneu el color utilitzat per a dibuixar la vora"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -4011,17 +4008,16 @@ msgstr "Terminals inactius:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Terminals inactius:"
+msgstr "Terminals actius:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
-msgstr "Continguts del terminal"
+msgstr "Contingut del terminal"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
 #: widgets/EditProfileAppearancePage.ui:600
@@ -4070,16 +4066,15 @@ msgstr "Enfosquit"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indica si la finestra està activa enfosquint els colors"
+msgstr "Indica si la finestra està activa dibuixant-hi una vora"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Vora"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4197,54 +4192,54 @@ msgstr "Ignora la «wcwidth» dels caràcters problemàtics"
 msgid "Override wcwidth"
 msgstr "Substitució de «wcwidth»"
 
-#: widgets/EditProfileDialog.cpp:71
+#: widgets/EditProfileDialog.cpp:76
 #, kde-format
 msgid "Edit Profile"
 msgstr "Edita un perfil"
 
-#: widgets/EditProfileDialog.cpp:98
+#: widgets/EditProfileDialog.cpp:103
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "General"
 
-#: widgets/EditProfileDialog.cpp:109
+#: widgets/EditProfileDialog.cpp:114
 #, kde-format
 msgid "Tabs"
 msgstr "Pestanyes"
 
-#: widgets/EditProfileDialog.cpp:126
+#: widgets/EditProfileDialog.cpp:131
 #, kde-format
 msgid "Appearance"
 msgstr "Aparença"
 
-#: widgets/EditProfileDialog.cpp:142
+#: widgets/EditProfileDialog.cpp:147
 #, kde-format
 msgid "Scrolling"
 msgstr "Barra de desplaçament"
 
-#: widgets/EditProfileDialog.cpp:156
+#: widgets/EditProfileDialog.cpp:161
 #, kde-format
 msgid "Keyboard"
 msgstr "Teclat"
 
-#: widgets/EditProfileDialog.cpp:157
+#: widgets/EditProfileDialog.cpp:162
 #, kde-format
 msgid "Key bindings"
 msgstr "Lligams de tecla"
 
-#: widgets/EditProfileDialog.cpp:168
+#: widgets/EditProfileDialog.cpp:173
 #, kde-format
 msgid "Mouse"
 msgstr "Ratolí"
 
-#: widgets/EditProfileDialog.cpp:184
+#: widgets/EditProfileDialog.cpp:189
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Avançat"
 
-#: widgets/EditProfileDialog.cpp:292
+#: widgets/EditProfileDialog.cpp:297
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4256,7 +4251,7 @@ msgstr ""
 "filename>.<nl/>Canvieu els permisos d'este fitxer o establiu un nom diferent "
 "per a guardar la configuració a un perfil nou."
 
-#: widgets/EditProfileDialog.cpp:309
+#: widgets/EditProfileDialog.cpp:314
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
@@ -4264,36 +4259,42 @@ msgstr ""
 "El nom del perfil està buit. Establiu un nom per a poder guardar la "
 "configuració."
 
-#: widgets/EditProfileDialog.cpp:317
+#: widgets/EditProfileDialog.cpp:322
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Ja existix un perfil amb el nom «%1»."
 
-#: widgets/EditProfileDialog.cpp:355
+#: widgets/EditProfileDialog.cpp:345
+#, kde-format
+msgctxt "@info"
+msgid "Profile name exceeded maximum allowed length (%1)."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Els caràcters ressaltats no són vàlids en els noms dels perfils: %1."
 
-#: widgets/EditProfileDialog.cpp:391
+#: widgets/EditProfileDialog.cpp:419
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "S'està editant el perfil: %2"
 msgstr[1] "S'està editant %1 perfils: %2"
 
-#: widgets/EditProfileDialog.cpp:395
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Create New Profile"
 msgstr "Crea un perfil nou"
 
-#: widgets/EditProfileDialog.cpp:398
+#: widgets/EditProfileDialog.cpp:426
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Editeu el perfil «%1»"
 
-#: widgets/EditProfileDialog.cpp:489
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4303,7 +4304,7 @@ msgid_plural " columns"
 msgstr[0] " columna"
 msgstr[1] " columnes"
 
-#: widgets/EditProfileDialog.cpp:491
+#: widgets/EditProfileDialog.cpp:519
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4313,42 +4314,42 @@ msgid_plural " rows"
 msgstr[0] " fila"
 msgstr[1] " files"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Bell"
 msgstr "Timbre del sistema"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Notifications"
 msgstr "Notificacions del sistema"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Visual Bell"
 msgstr "Timbre visual"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignora els esdeveniments de timbre"
 
-#: widgets/EditProfileDialog.cpp:510
+#: widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Perfil predeterminat per a les noves sessions de terminal a %1"
 
-#: widgets/EditProfileDialog.cpp:615
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "Edit Environment"
 msgstr "Edita l'entorn"
 
-#: widgets/EditProfileDialog.cpp:616
+#: widgets/EditProfileDialog.cpp:644
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Una variable d'entorn per línia"
 
-#: widgets/EditProfileDialog.cpp:647
+#: widgets/EditProfileDialog.cpp:675
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4356,18 +4357,18 @@ msgid_plural " seconds"
 msgstr[0] " segon"
 msgstr[1] " segons"
 
-#: widgets/EditProfileDialog.cpp:761
+#: widgets/EditProfileDialog.cpp:789
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Seleccioneu el directori inicial"
 
-#: widgets/EditProfileDialog.cpp:1320
+#: widgets/EditProfileDialog.cpp:1348
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "No s'ha pogut carregar l'esquema <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1499
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4376,7 +4377,7 @@ msgstr ""
 "Este esquema de color té un fons transparent que pareix que no està admés en "
 "este escriptori"
 
-#: widgets/EditProfileDialog.cpp:1505
+#: widgets/EditProfileDialog.cpp:1533
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4385,7 +4386,7 @@ msgstr ""
 "Konsole es va iniciar abans d'activar els efectes de l'escriptori. Cal "
 "tornar a iniciar Konsole per a veure el fons transparent."
 
-#: widgets/EditProfileDialog.cpp:1896
+#: widgets/EditProfileDialog.cpp:1924
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4414,7 +4415,7 @@ msgstr ""
 "esta configuració i el fitxer s'obrirà amb l'editor\n"
 "de text predeterminat."
 
-#: widgets/EditProfileDialog.cpp:1909
+#: widgets/EditProfileDialog.cpp:1937
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Ordre personalitzada de l'editor de text"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-02 00:50+0000\n"
+"POT-Creation-Date: 2023-09-09 00:49+0000\n"
 "PO-Revision-Date: 2023-09-02 09:14+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -1909,7 +1909,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Enkonstruita"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:512
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Default profile"
 msgstr "Defaŭlta profilo"
@@ -4146,54 +4146,54 @@ msgstr "Ignori wcwidth de problemecaj signoj"
 msgid "Override wcwidth"
 msgstr "Superregi wcwidth"
 
-#: widgets/EditProfileDialog.cpp:71
+#: widgets/EditProfileDialog.cpp:76
 #, kde-format
 msgid "Edit Profile"
 msgstr "Redakti profilon"
 
-#: widgets/EditProfileDialog.cpp:98
+#: widgets/EditProfileDialog.cpp:103
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Ĝenerala"
 
-#: widgets/EditProfileDialog.cpp:109
+#: widgets/EditProfileDialog.cpp:114
 #, kde-format
 msgid "Tabs"
 msgstr "Langetoj"
 
-#: widgets/EditProfileDialog.cpp:126
+#: widgets/EditProfileDialog.cpp:131
 #, kde-format
 msgid "Appearance"
 msgstr "Aspekto"
 
-#: widgets/EditProfileDialog.cpp:142
+#: widgets/EditProfileDialog.cpp:147
 #, kde-format
 msgid "Scrolling"
 msgstr "Rulumado"
 
-#: widgets/EditProfileDialog.cpp:156
+#: widgets/EditProfileDialog.cpp:161
 #, kde-format
 msgid "Keyboard"
 msgstr "Klavaro"
 
-#: widgets/EditProfileDialog.cpp:157
+#: widgets/EditProfileDialog.cpp:162
 #, kde-format
 msgid "Key bindings"
 msgstr "Klavkombinoj"
 
-#: widgets/EditProfileDialog.cpp:168
+#: widgets/EditProfileDialog.cpp:173
 #, kde-format
 msgid "Mouse"
 msgstr "Muso"
 
-#: widgets/EditProfileDialog.cpp:184
+#: widgets/EditProfileDialog.cpp:189
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Altnivela"
 
-#: widgets/EditProfileDialog.cpp:292
+#: widgets/EditProfileDialog.cpp:297
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4205,43 +4205,49 @@ msgstr ""
 "ŝanĝu la permesojn de tiu dosiero aŭ agordu alian nomon por konservi la "
 "agordojn al nova profilo."
 
-#: widgets/EditProfileDialog.cpp:309
+#: widgets/EditProfileDialog.cpp:314
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 "Profila Nomo estis malplena; bonvolu meti nomon por povi konservi agordojn."
 
-#: widgets/EditProfileDialog.cpp:317
+#: widgets/EditProfileDialog.cpp:322
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Profilo kun la nomo \"%1\" jam ekzistas."
 
-#: widgets/EditProfileDialog.cpp:355
+#: widgets/EditProfileDialog.cpp:345
+#, kde-format
+msgctxt "@info"
+msgid "Profile name exceeded maximum allowed length (%1)."
+msgstr ""
+
+#: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "La elstarigitaj signoj estas nevalidaj en profilnomoj: %1."
 
-#: widgets/EditProfileDialog.cpp:391
+#: widgets/EditProfileDialog.cpp:419
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Redaktante profilon: %2"
 msgstr[1] "Redaktante %1 profilojn: %2"
 
-#: widgets/EditProfileDialog.cpp:395
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Create New Profile"
 msgstr "Krei Novan Profilon"
 
-#: widgets/EditProfileDialog.cpp:398
+#: widgets/EditProfileDialog.cpp:426
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Redakti profilon \"%1\""
 
-#: widgets/EditProfileDialog.cpp:489
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4251,7 +4257,7 @@ msgid_plural " columns"
 msgstr[0] " kolumno"
 msgstr[1] " kolumnoj"
 
-#: widgets/EditProfileDialog.cpp:491
+#: widgets/EditProfileDialog.cpp:519
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4261,42 +4267,42 @@ msgid_plural " rows"
 msgstr[0] " vico"
 msgstr[1] " vicoj"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Bell"
 msgstr "Sistempepo"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistema Sciigoj"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vida Sonorilo"
 
-#: widgets/EditProfileDialog.cpp:501
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignori Sonorilajn Events"
 
-#: widgets/EditProfileDialog.cpp:510
+#: widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Defaŭlta profilo por novaj finaj seancoj en %1"
 
-#: widgets/EditProfileDialog.cpp:615
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "Edit Environment"
 msgstr "Redakti ĉirkaŭaĵon"
 
-#: widgets/EditProfileDialog.cpp:616
+#: widgets/EditProfileDialog.cpp:644
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Unu mediovariablo per linio"
 
-#: widgets/EditProfileDialog.cpp:647
+#: widgets/EditProfileDialog.cpp:675
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4304,18 +4310,18 @@ msgid_plural " seconds"
 msgstr[0] " sekundo"
 msgstr[1] " sekundoj"
 
-#: widgets/EditProfileDialog.cpp:761
+#: widgets/EditProfileDialog.cpp:789
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Elekti komencan dosierujon"
 
-#: widgets/EditProfileDialog.cpp:1320
+#: widgets/EditProfileDialog.cpp:1348
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Skemo <resource>%1</resource> malsukcesis ŝargi."
 
-#: widgets/EditProfileDialog.cpp:1499
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4323,7 +4329,7 @@ msgid ""
 msgstr ""
 "Ĉi tiu koloraro uzas travideblan fonon kiun ŝajne via labortablo ne subtenas."
 
-#: widgets/EditProfileDialog.cpp:1505
+#: widgets/EditProfileDialog.cpp:1533
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4332,7 +4338,7 @@ msgstr ""
 "Konsole estis komencita antaŭ ol labortablaj efikoj estis ebligitaj. Vi "
 "devas rekomenci Konsole por vidi travideblan fonon."
 
-#: widgets/EditProfileDialog.cpp:1896
+#: widgets/EditProfileDialog.cpp:1924
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4361,7 +4367,7 @@ msgstr ""
 "estos ignorita kaj la dosiero estos malfermita per la defaŭlta tekst-\n"
 "redaktilo."
 
-#: widgets/EditProfileDialog.cpp:1909
+#: widgets/EditProfileDialog.cpp:1937
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Tekstredaktilo Propra Komando"
