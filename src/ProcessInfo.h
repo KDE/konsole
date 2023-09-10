@@ -211,6 +211,13 @@ protected:
     virtual void readProcessInfo(int pid) = 0;
 
     /**
+     * Only reads and updates the name of the process
+     * @param pid process ID to use
+     * @return true on success
+     */
+    virtual bool readProcessName(int pid) = 0;
+
+    /**
      * Determine the current directory of the process.
      * @param pid process ID to use
      * @return true on success

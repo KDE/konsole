@@ -29,6 +29,7 @@ public:
 
 protected:
     void readProcessInfo(int pid) override;
+    bool readProcessName(int pid) override;
     bool readCurrentDir(int pid) override;
     void readUserName(void) override;
 };

@@ -17,6 +17,11 @@ void NullProcessInfo::readProcessInfo(int /*pid*/)
 {
 }
 
+bool NullProcessInfo::readProcessName(int /*pid*/)
+{
+    return false;
+}
+
 bool NullProcessInfo::readCurrentDir(int /*pid*/)
 {
     return false;

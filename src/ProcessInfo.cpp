@@ -37,7 +37,12 @@
 #include <KSharedConfig>
 #include <KUser>
 
+#if defined(Q_OS_LINUX) || defined(Q_OS_SOLARIS)
+#include <memory>
+#endif
+
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_MACOS)
+#include <QSharedPointer>
 #include <sys/sysctl.h>
 #endif
 
@@ -94,6 +99,7 @@ void ProcessInfo::setError(Error error)
 void ProcessInfo::update()
 {
     readCurrentDir(_pid);
+    readProcessName(_pid);
 }
 
 QString ProcessInfo::validCurrentDir() const
@@ -321,12 +327,15 @@ void ProcessInfo::setFileError(QFile::FileError error)
 }
 
 #if defined(Q_OS_LINUX)
+#include <QByteArray>
 #include <QDBusArgument>
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusMessage>
 #include <QDBusMetaType>
+#include <QFile>
 #include <QMap>
+#include <QString>
 #include <QThread>
 #include <QVariant>
 
@@ -442,6 +451,28 @@ protected:
         return true;
     }
 
+    bool readProcessName(int pid) override
+    {
+        Q_UNUSED(pid);
+
+        if (!_infoFile || _infoFile->error() != 0 || !_infoFile->reset()) {
+            return false;
+        }
+
+        const QString data = QString::fromUtf8(_infoFile->readLine());
+
+        if (data.isEmpty()) {
+            setName(data);
+            return false;
+        }
+
+        const int nameStartIdx = data.indexOf(QLatin1Char('(')) + 1;
+        const int nameLength = data.indexOf(QLatin1Char(')')) - nameStartIdx;
+
+        setName(data.mid(nameStartIdx, nameLength));
+        return true;
+    }
+
 private:
     bool readProcInfo(int pid) override
     {
@@ -504,9 +535,10 @@ private:
         //
         // FIELD FIELD (FIELD WITH SPACES) FIELD FIELD
         //
-        QFile processInfo(QStringLiteral("/proc/%1/stat").arg(pid));
-        if (processInfo.open(QIODevice::ReadOnly)) {
-            QTextStream stream(&processInfo);
+        _infoFile = std::make_unique<QFile>(new QFile());
+        _infoFile->setFileName(QStringLiteral("/proc/%1/stat").arg(pid));
+        if (_infoFile->open(QIODevice::ReadOnly)) {
+            QTextStream stream(_infoFile.get());
             const QString &data = stream.readAll();
 
             int field = 0;
@@ -539,7 +571,7 @@ private:
                 pos++;
             }
         } else {
-            setFileError(processInfo.error());
+            setFileError(_infoFile->error());
             return false;
         }
 
@@ -715,6 +747,7 @@ private:
 
     static QString _createdAppCGroupPath;
     static bool _cGroupCreationFailed;
+    std::unique_ptr<QFile> _infoFile;
 };
 
 QString LinuxProcessInfo::_createdAppCGroupPath = QString();
@@ -733,8 +766,8 @@ protected:
     bool readCurrentDir(int pid) override
     {
 #if HAVE_OS_DRAGONFLYBSD
-        char buf[PATH_MAX];
         int managementInfoBase[4];
+        char buf[PATH_MAX];
         size_t len;
 
         managementInfoBase[0] = CTL_KERN;
@@ -774,26 +807,43 @@ protected:
 #endif
     }
 
+    bool readProcessName(int pid) override
+    {
+        int managementInfoBase[4];
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_ARGS;
+        managementInfoBase[3] = pid;
+
+        auto kInfoProc = getProcInfoStruct(managementInfoBase, 4);
+
+        if (kInfoProc == nullptr) {
+            return false;
+        }
+
+#if HAVE_OS_DRAGONFLYBSD
+        setName(QString::fromUtf8(kInfoProc->kp_comm));
+#else
+        setName(QString::fromUtf8(kInfoProc->ki_comm));
+#endif
+
+        return true;
+    }
+
 private:
     bool readProcInfo(int pid) override
     {
         int managementInfoBase[4];
-        size_t mibLength;
-        struct kinfo_proc *kInfoProc;
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
-        managementInfoBase[2] = KERN_PROC_PID;
+        managementInfoBase[2] = KERN_PROC_ARGS;
         managementInfoBase[3] = pid;
 
-        if (sysctl(managementInfoBase, 4, NULL, &mibLength, NULL, 0) == -1) {
-            return false;
-        }
+        auto kInfoProc = getProcInfoStruct(managementInfoBase, 4);
 
-        kInfoProc = new struct kinfo_proc[mibLength];
-
-        if (sysctl(managementInfoBase, 4, kInfoProc, &mibLength, NULL, 0) == -1) {
-            delete[] kInfoProc;
+        if (kInfoProc == nullptr) {
             return false;
         }
 
@@ -813,14 +863,13 @@ private:
 
         readUserName();
 
-        delete[] kInfoProc;
         return true;
     }
 
     bool readArguments(int pid) override
     {
-        char args[ARG_MAX];
         int managementInfoBase[4];
+        char args[ARG_MAX];
         size_t len;
 
         managementInfoBase[0] = CTL_KERN;
@@ -875,12 +924,9 @@ protected:
         return true;
     }
 
-private:
-    bool readProcInfo(int pid) override
+    bool readProcessName(int pid) override
     {
         int managementInfoBase[6];
-        size_t mibLength;
-        struct kinfo_proc *kInfoProc;
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
@@ -889,16 +935,32 @@ private:
         managementInfoBase[4] = sizeof(struct kinfo_proc);
         managementInfoBase[5] = 1;
 
-        if (::sysctl(managementInfoBase, 6, NULL, &mibLength, NULL, 0) == -1) {
-            qWarning() << "first sysctl() call failed with code" << errno;
+        auto kInfoProc = getProcInfoStruct(managementInfoBase, 6);
+
+        if (kInfoProc == nullptr) {
             return false;
         }
 
-        kInfoProc = (struct kinfo_proc *)malloc(mibLength);
+        setName(QString::fromUtf8(kInfoProc->p_comm));
 
-        if (::sysctl(managementInfoBase, 6, kInfoProc, &mibLength, NULL, 0) == -1) {
-            qWarning() << "second sysctl() call failed with code" << errno;
-            free(kInfoProc);
+        return true;
+    }
+
+private:
+    bool readProcInfo(int pid) override
+    {
+        int managementInfoBase[6];
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_PID;
+        managementInfoBase[3] = pid;
+        managementInfoBase[4] = sizeof(struct kinfo_proc);
+        managementInfoBase[5] = 1;
+
+        auto kInfoProc = getProcInfoStruct(managementInfoBase, 6);
+
+        if (kInfoProc == nullptr) {
             return false;
         }
 
@@ -909,7 +971,6 @@ private:
         setUserId(kInfoProc->p_uid);
         setUserName(QString::fromUtf8(kInfoProc->p_login));
 
-        free(kInfoProc);
         return true;
     }
 
@@ -984,66 +1045,70 @@ protected:
         return false;
     }
 
-private:
-    bool readProcInfo(int pid) override
+    bool readProcessName(int pid) override
     {
         int managementInfoBase[4];
-        size_t mibLength;
-        struct kinfo_proc *kInfoProc;
-        QT_STATBUF statInfo;
 
-        // Find the tty device of 'pid' (Example: /dev/ttys001)
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
         managementInfoBase[2] = KERN_PROC_PID;
         managementInfoBase[3] = pid;
 
-        if (sysctl(managementInfoBase, 4, nullptr, &mibLength, nullptr, 0) == -1) {
-            return false;
-        } else {
-            kInfoProc = new struct kinfo_proc[mibLength];
-            if (sysctl(managementInfoBase, 4, kInfoProc, &mibLength, nullptr, 0) == -1) {
-                delete[] kInfoProc;
-                return false;
-            } else {
-                const QString deviceNumber = QString::fromUtf8(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
-                const QString fullDeviceName = QStringLiteral("/dev/") + deviceNumber.rightJustified(3, QLatin1Char('0'));
+        auto kInfoProc = getProcInfoStruct(managementInfoBase, 4);
 
-                setParentPid(kInfoProc->kp_eproc.e_ppid);
-                setForegroundPid(kInfoProc->kp_eproc.e_pgid);
-
-                delete[] kInfoProc;
-
-                const QByteArray deviceName = fullDeviceName.toLatin1();
-                const char *ttyName = deviceName.data();
-
-                if (QT_STAT(ttyName, &statInfo) != 0) {
-                    return false;
-                }
-
-                // Find all processes attached to ttyName
-                managementInfoBase[0] = CTL_KERN;
-                managementInfoBase[1] = KERN_PROC;
-                managementInfoBase[2] = KERN_PROC_TTY;
-                managementInfoBase[3] = statInfo.st_rdev;
-
-                mibLength = 0;
-                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), nullptr, &mibLength, nullptr, 0) == -1) {
-                    return false;
-                }
-
-                kInfoProc = new struct kinfo_proc[mibLength];
-                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), kInfoProc, &mibLength, nullptr, 0) == -1) {
-                    return false;
-                }
-
-                // The foreground program is the first one
-                setName(QString::fromUtf8(kInfoProc->kp_proc.p_comm));
-
-                delete[] kInfoProc;
-            }
-            setPid(pid);
+        if (kInfoProc != nullptr) {
+            setName(QString::fromUtf8(kInfoProc->kp_proc.p_comm));
+            return true;
         }
+
+        return false;
+    }
+
+private:
+    bool readProcInfo(int pid) override
+    {
+        QT_STATBUF statInfo;
+        int managementInfoBase[4];
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_PID;
+        managementInfoBase[3] = pid;
+
+        // Find the tty device of 'pid' (Example: /dev/ttys001)
+        auto kInfoProc = getProcInfoStruct(managementInfoBase, 4);
+
+        if (kInfoProc == nullptr) {
+            return false;
+        }
+
+        const QString deviceNumber = QString::fromUtf8(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
+        const QString fullDeviceName = QStringLiteral("/dev/") + deviceNumber.rightJustified(3, QLatin1Char('0'));
+
+        setParentPid(kInfoProc->kp_eproc.e_ppid);
+        setForegroundPid(kInfoProc->kp_eproc.e_pgid);
+
+        const QByteArray deviceName = fullDeviceName.toLatin1();
+        const char *ttyName = deviceName.data();
+
+        if (QT_STAT(ttyName, &statInfo) != 0) {
+            return false;
+        }
+
+        managementInfoBase[2] = KERN_PROC_TTY;
+        managementInfoBase[3] = statInfo.st_rdev;
+
+        // Find all processes attached to ttyName
+        kInfoProc = getProcInfoStruct(managementInfoBase, 4);
+
+        if (kInfoProc == nullptr) {
+            return false;
+        }
+
+        // The foreground program is the first one
+        setName(QString::fromUtf8(kInfoProc->kp_proc.p_comm));
+
+        setPid(pid);
 
         // Get user id - this will allow using username
         struct proc_bsdshortinfo bsdinfo;
@@ -1172,6 +1237,16 @@ protected:
         }
     }
 
+    bool readProcessName(int /*pid*/) override
+    {
+        if (execNameFile->isOpen()) {
+            const QString data(execNameFile->readAll());
+            setName(execNameFile->readAll().constData());
+            return true;
+        }
+        return false;
+    }
+
 private:
     bool readProcInfo(int pid) override
     {
@@ -1191,6 +1266,11 @@ private:
             info.pr_psargs[PRARGSZ - 1] = 0;
             addArgument(info.pr_psargs);
         }
+
+        _execNameFile = std::make_unique(new QFile());
+        _execNameFile->setFileName(QString("/proc/%1/execname").arg(pid));
+        _execNameFile->open(QIODevice::ReadOnly);
+
         return true;
     }
 
@@ -1199,6 +1279,8 @@ private:
         // Handled in readProcInfo()
         return false;
     }
+
+    std::unique_ptr<QFile> _execNameFile;
 };
 #endif
 

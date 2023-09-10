@@ -19,6 +19,12 @@
 
 // Qt
 #include <QDebug>
+#include <QtGlobal>
+
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPEN_BSD) || defined(Q_OS_MACOS)
+#include <QSharedPointer>
+#include <sys/sysctl.h>
+#endif
 
 using namespace Konsole;
 
@@ -84,5 +90,26 @@ void UnixProcessInfo::readUserName()
     }
     delete[] getpwBuffer;
 }
+
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPEN_BSD) || defined(Q_OS_MACOS)
+QSharedPointer<struct kinfo_proc> UnixProcessInfo::getProcInfoStruct(int *managementInfoBase, int mibCount)
+{
+    size_t structLength;
+
+    if (::sysctl(managementInfoBase, mibCount, NULL, &structLength, NULL, 0) == -1) {
+        qWarning() << "first sysctl() call failed with code " << errno;
+        return nullptr;
+    }
+
+    QSharedPointer<struct kinfo_proc> kInfoProc(new struct kinfo_proc[structLength]);
+
+    if (::sysctl(managementInfoBase, mibCount, kInfoProc.get(), &structLength, NULL, 0) == -1) {
+        qWarning() << "second sysctl() call failed with code " << errno;
+        return nullptr;
+    }
+
+    return kInfoProc;
+}
+#endif
 
 #endif // Q_OS_WIN

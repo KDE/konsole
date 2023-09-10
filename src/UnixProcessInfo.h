@@ -9,6 +9,13 @@
 
 #include "ProcessInfo.h"
 
+#if defined(Q_OS_MACOS) || defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
+#include <QSharedPointer>
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPEN_BSD)
+#include <sys/user.h>
+#endif
+#endif
+
 namespace Konsole
 {
 #ifndef Q_OS_WIN
@@ -33,6 +40,16 @@ protected:
     void readProcessInfo(int pid) override;
 
     void readUserName(void) override;
+
+#if defined(Q_OS_MACOS) || defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
+    /**
+     * Allocates an array of struct kinfo_proc and calls sysctl internally to fill it up
+     * @param managementInfoBase management information base to pass to sysctl
+     * @param mibCount number of elements in managementInfoBase, also passed as argument to sysctl
+     * @return smart pointer to struct kinfo_proc[] and returns nullptr on failure
+     */
+    QSharedPointer<struct kinfo_proc> getProcInfoStruct(int *managementInfoBase, int mibCount);
+#endif
 
 private:
     /**
