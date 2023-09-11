@@ -3,13 +3,13 @@
 #
 # Vasee Vaseeharan <vasee@ieee.org>, 2004, 2008.
 # ஆமாச்சு <amachu@ubuntu.com>, 2008.
-# Kishore G <kishore96@gmail.com>, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2021, 2022, 2023 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-05-21 15:03+0530\n"
+"PO-Revision-Date: 2023-09-10 18:01+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1301,7 +1301,7 @@ msgstr "பயன்முறைகள்"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
-msgstr "பொது"
+msgstr "பொதுவானவை"
 
 #: MainWindow.cpp:973
 #, kde-format
@@ -2296,10 +2296,9 @@ msgid "One-shot monitors"
 msgstr "ஒருமுறை மட்டும் தூண்டப்படக்கூடிய கண்காணிகள்"
 
 #: session/SessionController.cpp:905
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "&உள்ளீடு தேவைப்படுவதற்காக கண்காணி"
+msgstr "&தூண்டிக்காக கண்காணி"
 
 #: session/SessionController.cpp:912
 #, kde-format
@@ -2439,7 +2438,7 @@ msgstr "நிரலை கட்டாயப்படுத்தி மூட�
 #: session/SessionController.cpp:1863
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "'%1' அமர்வில் தூண்டி காட்டப்படுகிறது"
 
 #: session/SessionController.cpp:2064
 #, kde-format
@@ -3884,7 +3883,7 @@ msgstr "கருமையாக்கும் அளவு:"
 #: widgets/EditProfileAppearancePage.ui:522
 #, kde-format
 msgid "Inactive Terminals:"
-msgstr "செயலிலில்லாத முனையங்கள்"
+msgstr "செயலிலில்லாத முனையங்கள்:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:532
