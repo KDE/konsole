@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-09 00:49+0000\n"
-"PO-Revision-Date: 2023-09-02 21:39+0200\n"
+"PO-Revision-Date: 2023-09-09 13:15+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -4262,7 +4262,7 @@ msgstr "Un profilo con il nome «%1» esiste già."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Il nome del profilo supera la lunghezza massima consentita (%1)."
 
 #: widgets/EditProfileDialog.cpp:383
 #, kde-format

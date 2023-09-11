@@ -3,13 +3,13 @@
 #
 # Vasee Vaseeharan <vasee@ieee.org>, 2004, 2008.
 # ஆமாச்சு <amachu@ubuntu.com>, 2008.
-# Kishore G <kishore96@gmail.com>, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2021, 2022, 2023 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-09 00:49+0000\n"
-"PO-Revision-Date: 2023-05-21 15:03+0530\n"
+"PO-Revision-Date: 2023-09-10 18:03+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1301,13 +1301,13 @@ msgstr "பயன்முறைகள்"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
-msgstr "பொது"
+msgstr "பொதுவானவை"
 
 #: MainWindow.cpp:975
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "நினைவகம்"
 
 #: MainWindow.cpp:980
 #, kde-format
@@ -1897,7 +1897,7 @@ msgstr "&வெளியீட்டின் அளவை மாற்று"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "உள்ளமைந்த‍து"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
@@ -2308,10 +2308,9 @@ msgid "One-shot monitors"
 msgstr "ஒருமுறை மட்டும் தூண்டப்படக்கூடிய கண்காணிகள்"
 
 #: session/SessionController.cpp:910
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "&உள்ளீடு தேவைப்படுவதற்காக கண்காணி"
+msgstr "&தூண்டிக்காக கண்காணி"
 
 #: session/SessionController.cpp:917
 #, kde-format
@@ -2451,7 +2450,7 @@ msgstr "நிரலை கட்டாயப்படுத்தி மூட�
 #: session/SessionController.cpp:1877
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "'%1' அமர்வில் தூண்டி காட்டப்படுகிறது"
 
 #: session/SessionController.cpp:2076
 #, kde-format
@@ -2829,10 +2828,9 @@ msgstr "முந்தைய உரையை சேமிப்பதற்க�
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "கீற்றுகளை கண்காணிப்பது"
+msgstr "நினைவக பயன்பாட்டை கண்காணி:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2846,18 +2844,24 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"மீள்துவக்கியபின் மாற்றங்கள் செயல்படும். இது இயக்கப்பட்டிருக்கும்போது குறிப்பிட்ட வரம்புக்கு\n"
+"மேல் கான்சோல் நினைவைப் பயன்படுத்தினால், அதிக நினைவப் பயன்படுத்தும் கீற்றுகளை systemd-"
+"oomd\n"
+"கட்டாயமாக மூடும். குறிப்பு: இதை இயக்குவது,\n"
+"அதிக நினைவைப் பயன்படுத்தும்போது கணினியின் வேகத்தை பாதிக்கலாம்.\n"
+"மாறாக, வரம்பை மிக‍க்குறைவாக அமைத்தால் கான்சோலே கட்டாயமாக நிறுத்தப்படலாம்."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "நினைவக வரம்பு"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
@@ -3939,32 +3943,28 @@ msgstr "கருமையாக்கும் அளவு:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "நிறம்:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "இடஞ்சுட்டியை வரைய பயன்படுத்த வேண்டிய நிறத்தை தேர்ந்தெடுங்கள்"
+msgstr "விளிம்பை வரைய பயன்படுத்த வேண்டிய நிறத்தை தேர்ந்தெடுங்கள்"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
 #, kde-format
 msgid "Inactive Terminals:"
-msgstr "செயலிலில்லாத முனையங்கள்"
+msgstr "செயலிலில்லாத முனையங்கள்:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "செயலிலில்லாத முனையங்கள்"
+msgstr "செயலிலுள்ள முனையங்கள்:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4020,16 +4020,15 @@ msgstr "கருமையாக்கு"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "நிறங்களை கருமையாக்கி, சாளரம் செயலிலுள்ளதா என்பதை குறிக்கும்"
+msgstr "சாளரம் செயலிலுள்ளதா என்பதை விளிம்பை வரைவதன் மூலம் குறி"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "விளிம்பு"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4220,13 +4219,14 @@ msgstr "\"%1\" என்ற பெயரில் ஏற்கனவேயொர
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "பயன்முறையின் பெயர் அதிகபட்ச நீளத்தைக் கடந்த‍து (%1)."
 
 #: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
+"முன்னிலைப்படுத்தப்பட்டுள்ள எழுத்துகளை பயன்முறைகளின் பெயர்களில் பயன்படுத்த முடியாது: %1."
 
 #: widgets/EditProfileDialog.cpp:419
 #, kde-format
