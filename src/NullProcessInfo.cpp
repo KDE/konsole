@@ -27,6 +27,11 @@ bool NullProcessInfo::readCurrentDir(int /*pid*/)
     return false;
 }
 
+bool NullProcessInfo::readArguments(int /*pid*/)
+{
+    return false;
+}
+
 void NullProcessInfo::readUserName()
 {
 }

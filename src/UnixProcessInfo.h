@@ -42,6 +42,8 @@ protected:
 
     void readUserName(void) override;
 
+    bool readArguments(int pid) override;
+
 #if defined(Q_OS_MACOS) || defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
     /**
      * Allocates an array of struct kinfo_proc and calls sysctl internally to fill it up
@@ -59,13 +61,6 @@ private:
      * @return true on success
      */
     virtual bool readProcInfo(int pid) = 0;
-
-    /**
-     * Determine what arguments were passed to the process. Sets _arguments.
-     * @param pid process ID to use
-     * @return true on success
-     */
-    virtual bool readArguments(int pid) = 0;
 };
 #endif
 }

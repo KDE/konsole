@@ -98,8 +98,16 @@ void ProcessInfo::setError(Error error)
 
 void ProcessInfo::update()
 {
+    bool ok;
+    const QString oldName(name(&ok));
+
     readCurrentDir(_pid);
     readProcessName(_pid);
+
+    if (ok && oldName != name(&ok) && ok) {
+        clearArguments();
+        readArguments(_pid);
+    }
 }
 
 QString ProcessInfo::validCurrentDir() const
@@ -595,31 +603,6 @@ private:
         setPid(pid);
 
         return ok;
-    }
-
-    bool readArguments(int pid) override
-    {
-        // read command-line arguments file found at /proc/<pid>/cmdline
-        // the expected format is a list of strings delimited by null characters,
-        // and ending in a double null character pair.
-
-        QFile argumentsFile(QStringLiteral("/proc/%1/cmdline").arg(pid));
-        if (argumentsFile.open(QIODevice::ReadOnly)) {
-            QTextStream stream(&argumentsFile);
-            const QString &data = stream.readAll();
-
-            const QStringList &argList = data.split(QLatin1Char('\0'));
-
-            for (const QString &entry : argList) {
-                if (!entry.isEmpty()) {
-                    addArgument(entry);
-                }
-            }
-        } else {
-            setFileError(argumentsFile.error());
-        }
-
-        return true;
     }
 
     QDBusMessage callSmdDBus(const QString &objectPath, const QString &interfaceName, const QString &methodName, const QList<QVariant> &args)
@@ -1272,12 +1255,6 @@ private:
         _execNameFile->open(QIODevice::ReadOnly);
 
         return true;
-    }
-
-    bool readArguments(int /*pid*/) override
-    {
-        // Handled in readProcInfo()
-        return false;
     }
 
     std::unique_ptr<QFile> _execNameFile;

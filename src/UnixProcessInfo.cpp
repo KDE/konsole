@@ -91,6 +91,32 @@ void UnixProcessInfo::readUserName()
     delete[] getpwBuffer;
 }
 
+bool UnixProcessInfo::readArguments(int pid)
+{
+    // used for LinuxProcessInfo and SolarisProcessInfo
+    // read command-line arguments file found at /proc/<pid>/cmdline
+    // the expected format is a list of strings delimited by null characters,
+    // and ending in a double null character pair.
+
+    QFile argumentsFile(QStringLiteral("/proc/%1/cmdline").arg(pid));
+    if (argumentsFile.open(QIODevice::ReadOnly)) {
+        QTextStream stream(&argumentsFile);
+        const QString &data = stream.readAll();
+
+        const QStringList &argList = data.split(QLatin1Char('\0'));
+
+        for (const QString &entry : argList) {
+            if (!entry.isEmpty()) {
+                addArgument(entry);
+            }
+        }
+    } else {
+        setFileError(argumentsFile.error());
+    }
+
+    return true;
+}
+
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPEN_BSD) || defined(Q_OS_MACOS)
 QSharedPointer<struct kinfo_proc> UnixProcessInfo::getProcInfoStruct(int *managementInfoBase, int mibCount)
 {

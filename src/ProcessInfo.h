@@ -224,6 +224,14 @@ protected:
      */
     virtual bool readCurrentDir(int pid) = 0;
 
+    /**
+     * Determine what arguments were passed to the process.
+     * Sets _arguments.
+     * @param pid process ID to use
+     * @return true on success
+     */
+    virtual bool readArguments(int pid) = 0;
+
     /* Read the user name */
     virtual void readUserName(void) = 0;
 

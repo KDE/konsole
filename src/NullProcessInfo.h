@@ -31,6 +31,7 @@ protected:
     void readProcessInfo(int pid) override;
     bool readProcessName(int pid) override;
     bool readCurrentDir(int pid) override;
+    bool readArguments(int pid) override;
     void readUserName(void) override;
 };
 
