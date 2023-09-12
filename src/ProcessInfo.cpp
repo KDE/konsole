@@ -467,7 +467,7 @@ protected:
         }
 
         const int nameStartIdx = data.indexOf(QLatin1Char('(')) + 1;
-        const int nameLength = data.indexOf(QLatin1Char(')')) - nameStartIdx;
+        const int nameLength = data.lastIndexOf(QLatin1Char(')')) - nameStartIdx;
 
         setName(data.mid(nameStartIdx, nameLength));
         return true;
