@@ -30,6 +30,7 @@
         "Description[uk]": "Доступ до командного рядка",
         "Description[x-test]": "xxCommand line accessxx",
         "Description[zh_CN]": "命令行访问",
+        "Description[zh_TW]": "指令列",
         "Icon": "utilities-terminal",
         "Name": "Terminal Emulator",
         "Name[ar]": "محاكي الطرفية",
@@ -61,6 +62,7 @@
         "Name[uk]": "Емулятор термінала",
         "Name[x-test]": "xxTerminal Emulatorxx",
         "Name[zh_CN]": "终端模拟器",
+        "Name[zh_TW]": "終端機模擬器",
         "ServiceTypes": [
             "KParts/ReadOnlyPart",
             "Browser/View",
