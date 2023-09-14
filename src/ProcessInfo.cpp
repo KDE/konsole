@@ -98,16 +98,14 @@ void ProcessInfo::setError(Error error)
 
 void ProcessInfo::update()
 {
-    bool ok;
-    const QString oldName(name(&ok));
-
     readCurrentDir(_pid);
     readProcessName(_pid);
+}
 
-    if (ok && oldName != name(&ok) && ok) {
-        clearArguments();
-        readArguments(_pid);
-    }
+void ProcessInfo::refreshArguments()
+{
+    clearArguments();
+    readArguments(_pid);
 }
 
 QString ProcessInfo::validCurrentDir() const

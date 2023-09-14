@@ -81,6 +81,11 @@ public:
      */
     void update();
 
+    /**
+     * Reads the most recent arguments passed to the process.
+     */
+    void refreshArguments();
+
     /** Returns true if the process state was read successfully. */
     bool isValid() const;
     /**

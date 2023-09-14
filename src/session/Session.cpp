@@ -1241,6 +1241,7 @@ QString Session::getDynamicTitle()
     // format tab titles using process info
     bool ok = false;
     if (process->name(&ok) == QLatin1String("ssh") && ok) {
+        process->refreshArguments();
         sshProcess = std::make_unique<SSHProcessInfo>(*process);
     }
 
