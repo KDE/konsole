@@ -1,13 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the konsole package.
 #
-# Xəyyam Qocayev <xxmn77@gmail.com>, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2023 X əyyam
+# SPDX-FileCopyrightText: 2023 Kheyyam <xxmn77@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-09 00:49+0000\n"
-"PO-Revision-Date: 2023-05-29 22:11+0400\n"
+"PO-Revision-Date: 2023-09-15 16:56+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1308,7 +1309,7 @@ msgstr "Ümumi"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Yaddaş"
 
 #: MainWindow.cpp:980
 #, kde-format
@@ -1901,7 +1902,7 @@ msgstr "Çıxarışı &miqyaslamaq"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Daxilə quraşdırırlmış"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
@@ -2230,7 +2231,7 @@ msgstr "Seçim reji&mi"
 #: session/SessionController.cpp:746
 #, kde-format
 msgid "Select &Line"
-msgstr "S&ətiri seçmək"
+msgstr "S&ətiri seçin"
 
 #: session/SessionController.cpp:749
 #, kde-format
@@ -2728,6 +2729,8 @@ msgstr "Oxşar mətnin vurğulanmalı olub olmadığını təyin edir"
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
 msgstr ""
+"Alt qrupların yaradılan zaman vərəqlərin yaradılıb yaradılmamasına nəzarət "
+"edin"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -2735,6 +2738,8 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Yaddaşın istifadəsinin tənzimləməyə başlandığı səviyyədən yuxarı səviyyəni "
+"müəyyən edir"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2836,10 +2841,9 @@ msgstr "Çıxarış jurnalının saxlanması üçün bu qovluqdan istifadə etm�
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Vərəqə nəzarət"
+msgstr "Yaddaşın izlənməsini aktiv edin"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2853,18 +2857,27 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Dəyişikliklər yenidən başladıqda qüvvəyə minəcək. Əgər aktiv edilərsə, "
+"Konsole tərəfindən verilmiş\n"
+"dəyəri aşan davamlı yaddaş istifadəsi systemd-oomd tərəfindən yaddaşı "
+"intensiv\n"
+"istifadə edən proses(lər)dən ibarət vərəqlərin bağlanmasına gətirib "
+"çıxaracaq.\n"
+"Qeyd: aktivləşdirmə yüksək yaddaş istifadəsi zamanı ciddi yavaşlamaya səbəb "
+"ola bilər, və həddindən artıq aşağı dəyərin göstərilməsi yenə də Konsolenin "
+"bağlanmasına gətib çıxara bilər."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Yaddaş həddi:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
@@ -3955,19 +3968,16 @@ msgstr "Qaralma səviyyəsi:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
-msgstr "Rəngi:"
+msgstr "Rəng:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Kursorun rəngini seçmək"
+msgstr "Sərhəddi çəkmək üçün istifadə olunan rəngi seçin"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -3977,10 +3987,9 @@ msgstr "Qeyri-aktiv terminallar:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Qeyri-aktiv terminallar:"
+msgstr "Aktiv terminallar:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4036,16 +4045,15 @@ msgstr "Qaralma"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Rənglərin tutqunlaşması pəncərənin qeyr-aktiv olduğunu göstərir"
+msgstr "Sərhəd çəkilərkən pəncərənin aktiv olub-olmamasını göstərir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Sərhəd"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4236,13 +4244,13 @@ msgstr "\"%1\" adlı profil artıq mövcuddur."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Profil adı ən çox icazə verilən uzunluğu (%1) aşdı."
 
 #: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Vurğulanan simvollar profil adı üçün düzgün deyil: %1."
 
 #: widgets/EditProfileDialog.cpp:419
 #, kde-format
