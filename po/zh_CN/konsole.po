@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-09 00:49+0000\n"
-"PO-Revision-Date: 2023-09-02 02:57\n"
+"PO-Revision-Date: 2023-09-16 10:08\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -4167,13 +4167,13 @@ msgstr "同名的配置方案“%1”已存在。"
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "配置文件名超过允许的最大长度 (%1)。"
 
 #: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "高亮显示的字符在配置文件名中无效：%1。"
 
 #: widgets/EditProfileDialog.cpp:419
 #, kde-format
@@ -4918,7 +4918,7 @@ msgstr "隐藏"
 #: widgets/EditProfileScrollingPage.ui:217
 #, kde-format
 msgid "Highlighting:"
-msgstr "加亮："
+msgstr "高亮："
 
 #. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
 #: widgets/EditProfileScrollingPage.ui:227
