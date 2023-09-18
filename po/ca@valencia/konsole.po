@@ -160,8 +160,8 @@ msgid ""
 "Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
 "(by default) is pressed"
 msgstr ""
-"Inicia Konsole en segon pla i fes-lo vindre a davant si es prem Ctrl+Maj+F12 "
-"(de manera predeterminada)"
+"Inicia Konsole en segon pla i fes-lo vindre a davant si es prem «Ctrl+Maj"
+"+F12» (de manera predeterminada)"
 
 #: Application.cpp:65
 #, kde-format
@@ -2707,14 +2707,14 @@ msgstr "Utilitzeu Majúscules per a mostrar una miniatura"
 #: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Alt to display a thumbnail"
-msgstr "Utilitzeu Alt per a mostrar una miniatura"
+msgstr "Utilitzeu «Alt» per a mostrar una miniatura"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
-msgstr "Utilitzeu Ctrl per a mostrar una miniatura"
+msgstr "Utilitzeu «Ctrl» per a mostrar una miniatura"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/konsole.kcfg:64
@@ -3291,7 +3291,7 @@ msgid ""
 "b> to resume.</qt>"
 msgstr ""
 "<qt>L'eixida s'ha <a href=\"https://en.wikipedia.org/wiki/"
-"Software_flow_control\">suspés</a> en prémer Ctrl+S. Premeu <b>Ctrl+Q</b> "
+"Software_flow_control\">suspés</a> en prémer «Ctrl+S». Premeu <b>Ctrl+Q</b> "
 "per a continuar.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2611
@@ -4796,7 +4796,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:392
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
-msgstr "Requerix la tecla Ctrl per a arrossegar i deixar"
+msgstr "Requerix la tecla «Ctrl» per a arrossegar i deixar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:399
