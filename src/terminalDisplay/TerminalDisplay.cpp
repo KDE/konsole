@@ -679,12 +679,6 @@ void TerminalDisplay::showNotification(QString text)
             _resizeTimer->setInterval(SIZE_HINT_DURATION);
             _resizeTimer->setSingleShot(true);
             connect(_resizeTimer, &QTimer::timeout, _resizeWidget, &QLabel::hide);
-
-            // When using fractional scaling in Qt5, portions of the terminal display are not invalidated
-            // properly. This ensures the widget is entirely redrawn to avoid leaving horitzontal lines.
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            connect(_resizeTimer, &QTimer::timeout, this, qOverload<>(&TerminalDisplay::update));
-#endif
         }
         _resizeWidget->setText(text);
         _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().boundingRect(text).width() + 16);
@@ -2319,11 +2313,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
 
     if (!unsafeCharacters.isEmpty()) {
         int result =
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
             KMessageBox::warningTwoActionsCancelList(window(),
-#else
-            KMessageBox::warningYesNoCancelList(window(),
-#endif
                                                      i18n("The text you're trying to paste contains hidden control characters, "
                                                           "do you want to filter them out?"),
                                                      unsafeCharacters,
@@ -2335,11 +2325,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         switch (result) {
         case KMessageBox::Cancel:
             return;
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         case KMessageBox::PrimaryAction: {
-#else
-        case KMessageBox::Yes: {
-#endif
             QString sanitized;
             for (const QChar &c : text) {
                 if (!isUnsafe(c)) {
@@ -2348,11 +2334,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
             }
             text = sanitized;
         }
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         case KMessageBox::SecondaryAction:
-#else
-        case KMessageBox::No:
-#endif
             break;
         default:
             break;

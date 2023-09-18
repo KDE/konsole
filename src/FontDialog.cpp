@@ -28,7 +28,6 @@ FontDialog::FontDialog(QWidget *parent, bool emoji, const QFont font)
 
     KFontChooser::DisplayFlag onlyFixed = _emoji ? KFontChooser::FixedFontsOnly : KFontChooser::FixedFontsOnly;
 
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
     _fontChooser = new KFontChooser(onlyFixed, this);
     if (_emoji) {
         QStringList list = KFontChooser::createFontList(0).filter(QStringLiteral("emoji"), Qt::CaseInsensitive);
@@ -36,9 +35,6 @@ FontDialog::FontDialog(QWidget *parent, bool emoji, const QFont font)
         _fontChooser->setFontListItems(KFontChooser::createFontList(0).filter(QStringLiteral("emoji"), Qt::CaseInsensitive));
         _fontChooser->setFont(font);
     }
-#else
-    _fontChooser = new KFontChooser(this, onlyFixed);
-#endif
 
     _showAllFonts = new QCheckBox(i18nc("@action:button", "Show all fonts"), this);
     _showAllFontsWarningButton = new QToolButton(this);

@@ -27,10 +27,10 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
-#include <QtGlobal>
 #include <QHostInfo>
 #include <QStringList>
 #include <QTextStream>
+#include <QtGlobal>
 
 // KDE
 #include <KConfigGroup>
@@ -624,7 +624,7 @@ private:
         const QString appUnitName(QStringLiteral("transientKonsole.scope"));
 
         // check if systemd dbus services exist
-        if (!QDBusConnection::sessionBus().interface()->isServiceRegistered("org.freedesktop.systemd1")) {
+        if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(QStringLiteral("org.freedesktop.systemd1"))) {
             return false;
         }
 
@@ -664,7 +664,7 @@ private:
             return false;
         }
 
-        const QStringList conts(QString(appCGroupContsFile.readAll()).split(' '));
+        const QStringList conts(QString::fromUtf8(appCGroupContsFile.readAll()).split(QLatin1Char(' ')));
         QString contsToEnable;
 
         for (auto cont : conts) {
@@ -689,18 +689,19 @@ private:
             return QString();
         }
 
-        const QString data(cGroupFile.readAll());
+        const QString data = QString::fromUtf8(cGroupFile.readAll());
 
         const QString cGroupPath(data.mid(data.lastIndexOf(QLatin1Char(':')) + 1));
 
-        return (QStringLiteral("/sys/fs/cgroup") + cGroupPath).trimmed();
+        return QString(QStringLiteral("/sys/fs/cgroup") + cGroupPath).trimmed();
     }
 
     bool createSystemdUnit(const QString &name, const VariantList &propList)
     {
         const QList<QVariant> args({name, QStringLiteral("fail"), QVariant::fromValue(propList), QVariant::fromValue(EmptyArray())});
 
-        return callSmdDBus("/org/freedesktop/systemd1", "Manager", "StartTransientUnit", args).type() != QDBusMessage::ErrorMessage;
+        return callSmdDBus(QStringLiteral("/org/freedesktop/systemd1"), QStringLiteral("Manager"), QStringLiteral("StartTransientUnit"), args).type()
+            != QDBusMessage::ErrorMessage;
     }
 
     bool createCGroup(const QString &name, int initialPid)
@@ -1097,8 +1098,7 @@ private:
         bool ok = false;
         const int fpid = foregroundPid(&ok);
         if (ok) {
-            ret = proc_pidinfo(fpid, PROC_PIDT_SHORTBSDINFO, 0,
-                               &bsdinfo, sizeof(bsdinfo));
+            ret = proc_pidinfo(fpid, PROC_PIDT_SHORTBSDINFO, 0, &bsdinfo, sizeof(bsdinfo));
             if (ret == sizeof(bsdinfo)) {
                 setUserId(bsdinfo.pbsi_uid);
             }
@@ -1124,7 +1124,7 @@ private:
 
         // It is not clear on why this fails for some commands
         if (sysctl(managementInfoBase, 3, nullptr, &size, nullptr, 0) == -1) {
-            qWarning()<<"OS_MACOS: unable to obtain argument size for "<<pid;
+            qWarning() << "OS_MACOS: unable to obtain argument size for " << pid;
             return false;
         }
 
@@ -1133,7 +1133,7 @@ private:
         procargs.resize(argmax);
 
         if (sysctl(managementInfoBase, 3, &procargs[0], &size, nullptr, 0) == -1) {
-            qWarning()<<"OS_MACOS: unable to obtain arguments for "<<pid;
+            qWarning() << "OS_MACOS: unable to obtain arguments for " << pid;
             return false;
         } else {
             auto args = QString::fromStdString(procargs);

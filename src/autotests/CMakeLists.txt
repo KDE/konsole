@@ -30,7 +30,7 @@ endif(BUILD_SHARED_LIBS)
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     ecm_add_test(
         PartTest.cpp
-        LINK_LIBRARIES KF${QT_MAJOR_VERSION}::XmlGui KF${QT_MAJOR_VERSION}::Parts KF${QT_MAJOR_VERSION}::Pty ${KONSOLE_TEST_LIBS}
+        LINK_LIBRARIES KF6::XmlGui KF6::Parts KF6::Pty ${KONSOLE_TEST_LIBS}
     )
 endif()
 
@@ -49,12 +49,12 @@ ecm_add_tests(
     Vt102EmulationTest.cpp
     LINK_LIBRARIES ${KONSOLE_TEST_LIBS}
 )
-target_link_libraries(PtyTest KF${QT_MAJOR_VERSION}::Pty ${KONSOLE_TEST_LIBS})
+target_link_libraries(PtyTest KF6::Pty ${KONSOLE_TEST_LIBS})
 
 ecm_add_tests(
     HistoryTest.cpp
     SessionTest.cpp
     TerminalInterfaceTest.cpp
     TerminalTest.cpp
-    LINK_LIBRARIES ${KONSOLE_TEST_LIBS} KF${QT_MAJOR_VERSION}::Parts
+    LINK_LIBRARIES ${KONSOLE_TEST_LIBS} KF6::Parts
 )

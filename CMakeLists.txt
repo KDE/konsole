@@ -13,15 +13,15 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 # See comments in https://invent.kde.org/utilities/konsole/-/commit/9d8e47298c81fc1e47c998eda1b6e980589274eb
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-# Match KDE Frameworks update Apr 2021
-set (QT_MIN_VERSION "5.15.0")
-
-set (KF_MIN_VERSION "5.71.0")
+set(QT_MIN_VERSION "6.5.0")
+set(KF5_DEP_VERSION "5.240.0")
+set(QT_MAJOR_VERSION "6")
+set(KF_MAJOR_VERSION "6")
 
 # Release script will create bugzilla versions
 project(konsole VERSION ${RELEASE_SERVICE_VERSION})
 
-find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF5_DEP_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -44,28 +44,19 @@ include(CheckIncludeFiles)
 # Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
 include(ECMEnableSanitizers)
 
-if(ECM_GLOBAL_FIND_VERSION VERSION_LESS "5.82.0")
-    if(NOT QT_MAJOR_VERSION)
-        set(QT_MAJOR_VERSION "5")
-    endif()
-endif()
-
-if(QT_MAJOR_VERSION STREQUAL "6")
-    find_package(Qt6Core5Compat ${QT_MIN_VERSION} CONFIG REQUIRED)
-endif()
-
 ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
     SOVERSION 1
 )
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     DBus
     Multimedia
     PrintSupport
     Widgets
+    Core5Compat
 )
 
-find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED
+find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
     Bookmarks
     Config
     ConfigWidgets
@@ -88,14 +79,14 @@ find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED
 )
 
 if (NOT WIN32)
-    find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED
+    find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
         GlobalAccel
         Pty
     )
 endif()
 
-find_package(KF${QT_MAJOR_VERSION}DocTools ${KF_MIN_VERSION})
-set_package_properties(KF${QT_MAJOR_VERSION}DocTools PROPERTIES DESCRIPTION
+find_package(KF6DocTools ${KF5_DEP_VERSION})
+set_package_properties(KF6DocTools PROPERTIES DESCRIPTION
     "Tools to generate documentation"
     TYPE OPTIONAL
 )
@@ -142,7 +133,7 @@ if (NOT WIN32)
 add_subdirectory( kconf_update )
 endif()
 
-if (KF${QT_MAJOR_VERSION}DocTools_FOUND)
+if (KF6DocTools_FOUND)
     add_subdirectory( doc/manual )
 endif()
 
@@ -162,7 +153,7 @@ ecm_qt_install_logging_categories(
 )
 
 ki18n_install( po )
-if (KF${QT_MAJOR_VERSION}DocTools_FOUND)
+if (KF6DocTools_FOUND)
     kdoctools_install( po )
 endif()
 

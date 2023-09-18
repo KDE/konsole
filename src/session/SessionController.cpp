@@ -44,20 +44,11 @@
 
 #include <KIO/CommandLauncherJob>
 
-#include <kio_version.h>
-#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
 #include <KIO/JobUiDelegateFactory>
-#else
-#include <KIO/JobUiDelegate>
-#endif
 #include <KIO/OpenFileManagerWindowJob>
 #include <KIO/OpenUrlJob>
 
 #include <KFileItemListProperties>
-
-#include <kconfigwidgets_version.h>
-#include <kio_version.h>
-#include <kwidgetsaddons_version.h>
 
 // Konsole
 #include "CopyInputDialog.h"
@@ -565,22 +556,14 @@ void SessionController::handleWebShortcutAction(QAction *action)
         const QUrl url = filterData.uri();
 
         auto *job = new KIO::OpenUrlJob(url);
-#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
         job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-#else
-        job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-#endif
         job->start();
     }
 }
 
 void SessionController::configureWebShortcuts()
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    auto job = new KIO::CommandLauncherJob(QStringLiteral("kcmshell5"), {QStringLiteral("webshortcuts")});
-#else
     auto job = new KIO::CommandLauncherJob(QStringLiteral("kcmshell6"), {QStringLiteral("webshortcuts")});
-#endif
     job->start();
 }
 
@@ -776,11 +759,7 @@ void SessionController::setupCommonActions()
     _switchProfileMenu = new KActionMenu(QIcon::fromTheme(QStringLiteral("exchange-positions")), i18n("Switch Profile"), this);
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
     connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
     _switchProfileMenu->setPopupMode(QToolButton::MenuButtonPopup);
-#else
-    _switchProfileMenu->setDelayed(false);
-#endif
 
     // History
     _findAction = KStandardAction::find(this, &SessionController::searchBarEvent, collection);
@@ -807,26 +786,10 @@ void SessionController::setupCommonActions()
     collection->addAction(QStringLiteral("set-encoding"), _codecAction);
     _codecAction->setCurrentCodec(QString::fromUtf8(session()->codec()));
     connect(session(), &Konsole::Session::sessionCodecChanged, this, &Konsole::SessionController::updateCodecAction);
-#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 103, 0)
-    connect(_codecAction,
-#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
-            QOverload<QTextCodec *>::of(&KCodecAction::codecTriggered),
-            this,
-#else
-            QOverload<QTextCodec *>::of(&KCodecAction::triggered),
-            this,
-#endif
-            &Konsole::SessionController::changeCodec);
-#else
-#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+
     connect(_codecAction, &KCodecAction::codecNameTriggered, this, [this](const QByteArray &codecName) {
         changeCodec(QTextCodec::codecForName(codecName));
-#else
-    connect(_codecAction, &KCodecAction::codecNameTriggered, this, [this](const QString &codecName) {
-        changeCodec(QTextCodec::codecForName(codecName.toUtf8()));
-#endif
     });
-#endif
 
     connect(_codecAction, &KCodecAction::defaultItemTriggered, this, [this] {
         Profile::Ptr profile = SessionManager::instance()->sessionProfile(session());
@@ -890,11 +853,7 @@ void SessionController::setupExtraActions()
     copyInputActions->addAction(copyInputToAllTabsAction);
     copyInputActions->addAction(copyInputToSelectedTabsAction);
     copyInputActions->addAction(copyInputToNoneAction);
-#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
     connect(copyInputActions, &KSelectAction::actionTriggered, this, &Konsole::SessionController::copyInputActionsTriggered);
-#else
-    connect(copyInputActions, QOverload<QAction *>::of(&KSelectAction::triggered), this, &Konsole::SessionController::copyInputActionsTriggered);
-#endif
 
     action = collection->addAction(QStringLiteral("zmodem-upload"), this, &SessionController::zmodemUpload);
     action->setText(i18n("&ZModem Upload..."));
@@ -953,11 +912,7 @@ void SessionController::setupExtraActions()
     // Send signal
     auto *sendSignalActions = collection->add<KSelectAction>(QStringLiteral("send-signal"));
     sendSignalActions->setText(i18n("Send Signal"));
-#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
     connect(sendSignalActions, &KSelectAction::actionTriggered, this, &Konsole::SessionController::sendSignal);
-#else
-    connect(sendSignalActions, QOverload<QAction *>::of(&KSelectAction::triggered), this, &Konsole::SessionController::sendSignal);
-#endif
 
     action = collection->addAction(QStringLiteral("sigstop-signal"));
     action->setText(i18n("&Suspend Task") + QStringLiteral(" (STOP)"));
@@ -1141,21 +1096,13 @@ bool SessionController::confirmClose() const
                 title);
         }
 
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         int result = KMessageBox::warningTwoActions(view()->window(),
-#else
-        int result = KMessageBox::warningYesNo(view()->window(),
-#endif
                                                     question,
                                                     i18n("Confirm Close"),
                                                     KGuiItem(i18nc("@action:button", "Close Program"), QStringLiteral("application-exit")),
                                                     KStandardGuiItem::cancel(),
                                                     QStringLiteral("CloseSingleTab"));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         return result == KMessageBox::PrimaryAction;
-#else
-        return result == KMessageBox::Yes;
-#endif
     }
     return true;
 }
@@ -1184,20 +1131,12 @@ bool SessionController::confirmForceClose() const
                 title);
         }
 
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         int result = KMessageBox::warningTwoActions(view()->window(),
-#else
-        int result = KMessageBox::warningYesNo(view()->window(),
-#endif
                                                     question,
                                                     i18n("Confirm Close"),
                                                     KGuiItem(i18nc("@action:button", "Kill Program"), QStringLiteral("application-exit")),
                                                     KStandardGuiItem::cancel());
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         return result == KMessageBox::PrimaryAction;
-#else
-        return result == KMessageBox::Yes;
-#endif
     }
     return true;
 }
@@ -1249,11 +1188,7 @@ void SessionController::openBrowser()
     } else {
         const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
         auto *job = new KIO::OpenUrlJob(currentUrl);
-#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
         job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-#else
-        job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-#endif
         job->start();
     }
 }
@@ -2044,13 +1979,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         QScopedPointer<KFileItemActions> ac(new KFileItemActions());
         ac->setItemListProperties(props);
 
-#if KIO_VERSION >= QT_VERSION_CHECK(5, 82, 0)
         ac->insertOpenWithActionsTo(popup->actions().value(4, nullptr), popup, QStringList{qApp->desktopFileName()});
-#elif KIO_VERSION >= QT_VERSION_CHECK(5, 78, 0)
-        ac->insertOpenWithActionsTo(popup->actions().value(4, nullptr), popup, QString());
-#else
-        ac->addOpenWithActionsTo(popup);
-#endif
 
         auto newActions = popup->actions();
         for (auto *elm : old) {

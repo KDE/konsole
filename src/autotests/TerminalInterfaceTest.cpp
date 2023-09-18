@@ -17,9 +17,6 @@
 // KDE
 #include <KPluginFactory>
 #include <kcoreaddons_version.h>
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)
-#include <KPluginLoader>
-#endif
 
 // Others
 #if defined(Q_OS_LINUX)
@@ -98,10 +95,8 @@ void TerminalInterfaceTest::testTerminalInterfaceNoShell()
 void TerminalInterfaceTest::testTerminalInterface()
 {
     // Maybe https://bugreports.qt.io/browse/QTBUG-82351 ???
-#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
     QSKIP("Skipping on CI suse_tumbelweed_qt64", SkipSingle);
     return;
-#endif
 
     QString currentDirectory;
 
@@ -281,7 +276,6 @@ void TerminalInterfaceTest::testTerminalInterfaceV2()
 
 KParts::Part *TerminalInterfaceTest::createPart()
 {
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
     const KPluginMetaData metaData(QStringLiteral("konsolepart"));
     Q_ASSERT(metaData.isValid());
 
@@ -289,21 +283,6 @@ KParts::Part *TerminalInterfaceTest::createPart()
     Q_ASSERT(result);
 
     return result.plugin;
-#else
-    auto konsolePartPlugin = KPluginLoader::findPlugin(QStringLiteral("konsolepart"));
-    if (konsolePartPlugin.isNull()) {
-        return nullptr;
-    }
-
-    KPluginFactory *factory = KPluginLoader(konsolePartPlugin).factory();
-    if (factory == nullptr) { // not found
-        return nullptr;
-    }
-
-    auto *terminalPart = factory->create<KParts::Part>(this);
-
-    return terminalPart;
-#endif
 }
 
 QTEST_MAIN(TerminalInterfaceTest)

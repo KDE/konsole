@@ -13,7 +13,6 @@
 
 // KDE
 #include <QTest>
-#include <kcoreaddons_version.h>
 
 using namespace Konsole;
 
@@ -55,10 +54,8 @@ void PtyTest::testUseUtmp()
 void PtyTest::testWindowSize()
 {
     // Maybe https://bugreports.qt.io/browse/QTBUG-82351 ???
-#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
     QSKIP("Skipping on CI suse_tumbelweed_qt64", SkipSingle);
     return;
-#endif
 
     Pty pty;
     QSize input(80, 40);
@@ -73,10 +70,8 @@ void PtyTest::testWindowSize()
 void PtyTest::testRunProgram()
 {
     // Maybe https://bugreports.qt.io/browse/QTBUG-82351 ???
-#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
     QSKIP("Skipping on CI suse_tumbelweed_qt64", SkipSingle);
     return;
-#endif
 
     Pty pty;
     QString program = QStringLiteral("sh");

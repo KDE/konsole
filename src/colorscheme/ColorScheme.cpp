@@ -30,10 +30,6 @@
 #include <QElapsedTimer>
 #endif
 
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
-#undef I18N_NOOP2
-#define I18N_NOOP2 kli18nc
-#endif
 namespace
 {
 const int FGCOLOR_INDEX = 0;
@@ -123,41 +119,37 @@ const char *const ColorScheme::colorNames[TABLE_COLORS] = {
     "Color7Faint",
 };
 
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
 const KLazyLocalizedString ColorScheme::translatedColorNames[TABLE_COLORS] = {
-#else
-const char *const ColorScheme::translatedColorNames[TABLE_COLORS] = {
-#endif
-    I18N_NOOP2("@item:intable palette", "Foreground"),
-    I18N_NOOP2("@item:intable palette", "Background"),
-    I18N_NOOP2("@item:intable palette", "Color 1"),
-    I18N_NOOP2("@item:intable palette", "Color 2"),
-    I18N_NOOP2("@item:intable palette", "Color 3"),
-    I18N_NOOP2("@item:intable palette", "Color 4"),
-    I18N_NOOP2("@item:intable palette", "Color 5"),
-    I18N_NOOP2("@item:intable palette", "Color 6"),
-    I18N_NOOP2("@item:intable palette", "Color 7"),
-    I18N_NOOP2("@item:intable palette", "Color 8"),
-    I18N_NOOP2("@item:intable palette", "Foreground (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Background (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 1 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 2 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 3 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 4 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 5 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 6 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 7 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 8 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Foreground (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Background (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Color 1 (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Color 2 (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Color 3 (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Color 4 (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Color 5 (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Color 6 (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Color 7 (Faint)"),
-    I18N_NOOP2("@item:intable palette", "Color 8 (Faint)"),
+    kli18nc("@item:intable palette", "Foreground"),
+    kli18nc("@item:intable palette", "Background"),
+    kli18nc("@item:intable palette", "Color 1"),
+    kli18nc("@item:intable palette", "Color 2"),
+    kli18nc("@item:intable palette", "Color 3"),
+    kli18nc("@item:intable palette", "Color 4"),
+    kli18nc("@item:intable palette", "Color 5"),
+    kli18nc("@item:intable palette", "Color 6"),
+    kli18nc("@item:intable palette", "Color 7"),
+    kli18nc("@item:intable palette", "Color 8"),
+    kli18nc("@item:intable palette", "Foreground (Intense)"),
+    kli18nc("@item:intable palette", "Background (Intense)"),
+    kli18nc("@item:intable palette", "Color 1 (Intense)"),
+    kli18nc("@item:intable palette", "Color 2 (Intense)"),
+    kli18nc("@item:intable palette", "Color 3 (Intense)"),
+    kli18nc("@item:intable palette", "Color 4 (Intense)"),
+    kli18nc("@item:intable palette", "Color 5 (Intense)"),
+    kli18nc("@item:intable palette", "Color 6 (Intense)"),
+    kli18nc("@item:intable palette", "Color 7 (Intense)"),
+    kli18nc("@item:intable palette", "Color 8 (Intense)"),
+    kli18nc("@item:intable palette", "Foreground (Faint)"),
+    kli18nc("@item:intable palette", "Background (Faint)"),
+    kli18nc("@item:intable palette", "Color 1 (Faint)"),
+    kli18nc("@item:intable palette", "Color 2 (Faint)"),
+    kli18nc("@item:intable palette", "Color 3 (Faint)"),
+    kli18nc("@item:intable palette", "Color 4 (Faint)"),
+    kli18nc("@item:intable palette", "Color 5 (Faint)"),
+    kli18nc("@item:intable palette", "Color 6 (Faint)"),
+    kli18nc("@item:intable palette", "Color 7 (Faint)"),
+    kli18nc("@item:intable palette", "Color 8 (Faint)"),
 };
 
 QString ColorScheme::colorNameForIndex(int index)
@@ -170,11 +162,7 @@ QString ColorScheme::colorNameForIndex(int index)
 QString ColorScheme::translatedColorNameForIndex(int index)
 {
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
     return translatedColorNames[index].toString();
-#else
-    return i18nc("@item:intable palette", translatedColorNames[index]);
-#endif
 }
 
 ColorScheme::ColorScheme()

@@ -9,10 +9,6 @@ else()
   set(HAVE_OS_DRAGONFLYBSD 0)
 endif()
 
-IF(NOT (${KF${QT_MAJOR_VERSION}_VERSION} VERSION_LESS "5.60.0"))
-    set(USE_TERMINALINTERFACEV2 1)
-endif()
-
 include(CheckIncludeFiles)
 include(ECMAddAppIcon)
 
@@ -22,7 +18,7 @@ configure_file(config-konsole.h.cmake
 ### Tests
 if(BUILD_TESTING)
     if (NOT WIN32)
-        find_package(Qt${QT_MAJOR_VERSION}Test ${QT_MIN_VERSION} CONFIG REQUIRED)
+        find_package(Qt6Test ${QT_MIN_VERSION} CONFIG REQUIRED)
         add_subdirectory(autotests)
         add_subdirectory(tests)
     endif()
@@ -62,26 +58,26 @@ qt_add_dbus_adaptor(
 )
 
 set(konsole_LIBS
-    KF${QT_MAJOR_VERSION}::XmlGui
+    KF6::XmlGui
     Qt::Multimedia
     Qt::PrintSupport
     Qt::Xml
-    KF${QT_MAJOR_VERSION}::Notifications
-    KF${QT_MAJOR_VERSION}::WindowSystem
-    KF${QT_MAJOR_VERSION}::TextWidgets
-    KF${QT_MAJOR_VERSION}::GuiAddons
-    KF${QT_MAJOR_VERSION}::IconThemes
-    KF${QT_MAJOR_VERSION}::Bookmarks
-    KF${QT_MAJOR_VERSION}::I18n
-    KF${QT_MAJOR_VERSION}::KIOWidgets
-    KF${QT_MAJOR_VERSION}::DBusAddons
-    KF${QT_MAJOR_VERSION}::NewStuffCore
+    KF6::Notifications
+    KF6::WindowSystem
+    KF6::TextWidgets
+    KF6::GuiAddons
+    KF6::IconThemes
+    KF6::Bookmarks
+    KF6::I18n
+    KF6::KIOWidgets
+    KF6::DBusAddons
+    KF6::NewStuffCore
 )
 
 if (NOT WIN32)
     list(APPEND konsole_LIBS
-        KF${QT_MAJOR_VERSION}::Pty
-        KF${QT_MAJOR_VERSION}::GlobalAccel
+        KF6::Pty
+        KF6::GlobalAccel
     )
 endif()
 
@@ -109,7 +105,7 @@ ecm_qt_declare_logging_category(
 add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
 # Needed to link this static lib to shared libs
 set_target_properties(konsoleprivate_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(konsoleprivate_core KF${QT_MAJOR_VERSION}::CoreAddons)
+target_link_libraries(konsoleprivate_core KF6::CoreAddons)
 
 set(konsolehelpers_SRCS
     LabelsAligner.cpp
@@ -134,7 +130,6 @@ if (WIN32)
 endif()
 
 set(konsoleprivate_SRCS ${windowadaptors_SRCS}
-                        AppColorSchemeChooser.cpp
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
                         CheckableSessionModel.cpp
@@ -276,23 +271,21 @@ target_link_libraries(konsoleprivate
     konsolehelpers
     konsolecharacters
     konsoledecoders
-    KF${QT_MAJOR_VERSION}::NewStuffCore
-    KF${QT_MAJOR_VERSION}::NewStuffWidgets
+    KF6::NewStuffCore
+    KF6::NewStuffWidgets
     ${konsole_LIBS}
     ZLIB::ZLIB
     ICU::uc
     ICU::i18n
 )
 
-if(QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(konsoleprivate
-        PUBLIC
-        Qt6::Core5Compat
-        PRIVATE
-        KF6::IconWidgets
-        KF6::BookmarksWidgets
-    )
-endif()
+target_link_libraries(konsoleprivate
+    PUBLIC
+    Qt6::Core5Compat
+    PRIVATE
+    KF6::IconWidgets
+    KF6::BookmarksWidgets
+)
 
 set_target_properties(konsoleprivate PROPERTIES
     VERSION ${KONSOLEPRIVATE_VERSION}
@@ -322,13 +315,13 @@ target_compile_definitions(konsoleapp PRIVATE -DRELEASE_SERVICE_VERSION="${RELEA
 
 target_link_libraries(konsoleapp
   konsoleprivate
-  KF${QT_MAJOR_VERSION}::XmlGui
-  KF${QT_MAJOR_VERSION}::WindowSystem
-  KF${QT_MAJOR_VERSION}::Bookmarks
-  KF${QT_MAJOR_VERSION}::I18n
-  KF${QT_MAJOR_VERSION}::KIOWidgets
-  KF${QT_MAJOR_VERSION}::NotifyConfig
-  KF${QT_MAJOR_VERSION}::Crash
+  KF6::XmlGui
+  KF6::WindowSystem
+  KF6::Bookmarks
+  KF6::I18n
+  KF6::KIOWidgets
+  KF6::NotifyConfig
+  KF6::Crash
 )
 
 set_target_properties(konsoleapp PROPERTIES
@@ -349,13 +342,13 @@ add_executable(konsole ${konsole_SRCS} ${ICONS_SOURCES})
 target_link_libraries(konsole
   konsoleprivate
   konsoleapp
-  KF${QT_MAJOR_VERSION}::XmlGui
-  KF${QT_MAJOR_VERSION}::WindowSystem
-  KF${QT_MAJOR_VERSION}::Bookmarks
-  KF${QT_MAJOR_VERSION}::I18n
-  KF${QT_MAJOR_VERSION}::KIOWidgets
-  KF${QT_MAJOR_VERSION}::NotifyConfig
-  KF${QT_MAJOR_VERSION}::Crash
+  KF6::XmlGui
+  KF6::WindowSystem
+  KF6::Bookmarks
+  KF6::I18n
+  KF6::KIOWidgets
+  KF6::NotifyConfig
+  KF6::Crash
 )
 
 if(APPLE)
@@ -384,15 +377,12 @@ add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 generate_export_header(konsolepart BASE_NAME konsole)
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 target_link_libraries(konsolepart
-    KF${QT_MAJOR_VERSION}::Parts
-    KF${QT_MAJOR_VERSION}::XmlGui
+    KF6::Parts
+    KF6::XmlGui
     konsoleprivate
 )
-if(QT_MAJOR_VERSION STREQUAL "6")
-    install(TARGETS konsolepart DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)
-else()
-    install(TARGETS konsolepart DESTINATION ${KDE_INSTALL_PLUGINDIR})
-endif()
+
+install(TARGETS konsolepart DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/parts)
 
 # Add cmake-options -DBUILD_COVERAGE=ON -DCOVERAGE_GENERATE_HTML=ON
 if(COVERAGE_GENERATE_HTML)

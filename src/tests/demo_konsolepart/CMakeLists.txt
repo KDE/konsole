@@ -13,10 +13,10 @@ include(ECMInstallIcons)
 include(FeatureSummary)
 
 set(QT_MIN_VERSION "5.4.0")
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 
 set(REQUIRED_KF_VERSION "5.18.0")
-find_package(KF${QT_MAJOR_VERSION} ${REQUIRED_KF_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${REQUIRED_KF_VERSION} REQUIRED COMPONENTS
     CoreAddons
     I18n
 )

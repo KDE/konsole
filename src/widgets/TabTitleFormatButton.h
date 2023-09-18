@@ -12,10 +12,8 @@
 #include <QPushButton>
 
 // KDE
-#include <ki18n_version.h>
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
 #include <KLazyLocalizedString>
-#endif
+#include <ki18n_version.h>
 
 // Konsole
 #include "session/Session.h"
@@ -44,11 +42,7 @@ private:
 
     struct Element {
         QString element;
-#if KI18N_VERSION >= QT_VERSION_CHECK(5, 89, 0)
         KLazyLocalizedString description;
-#else
-        const char *description;
-#endif
     };
     static const Element _localElements[];
     static const int _localElementCount;

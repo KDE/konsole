@@ -17,11 +17,6 @@
 #include <kservice_version.h>
 #include <kwindowsystem_version.h>
 
-#if KSERVICE_VERSION < QT_VERSION_CHECK(5, 86, 0)
-#include <KPluginLoader>
-#include <KService>
-#endif
-
 demo_konsolepart::demo_konsolepart()
     : KMainWindow()
     , _mainWindow(nullptr)
@@ -57,11 +52,7 @@ demo_konsolepart::demo_konsolepart()
     bool blurEnabled;
     QMetaObject::invokeMethod(_terminalPart, "isBlurEnabled", Qt::DirectConnection, Q_RETURN_ARG(bool, blurEnabled));
     qWarning() << "blur enabled: " << blurEnabled;
-#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5, 82, 0)
-    KWindowEffects::enableBlurBehind(winId(), blurEnabled);
-#else
     KWindowEffects::enableBlurBehind(windowHandle(), blurEnabled);
-#endif
 }
 
 demo_konsolepart::~demo_konsolepart()
@@ -73,27 +64,17 @@ demo_konsolepart::~demo_konsolepart()
 
 KParts::ReadOnlyPart *demo_konsolepart::createPart()
 {
-#if KSERVICE_VERSION < QT_VERSION_CHECK(5, 86, 0)
-    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
-    Q_ASSERT(service);
-    KPluginFactory *factory = KPluginLoader(service->library()).factory();
-    Q_ASSERT(factory);
-
-    auto *terminalPart = factory->create<KParts::ReadOnlyPart>(this);
-    return terminalPart;
-#else
     const KPluginFactory::Result<KParts::ReadOnlyPart> result =
         KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(KPluginMetaData(QStringLiteral("konsolepart")), this);
 
     Q_ASSERT(result);
 
     return result.plugin;
-#endif
 }
 
 void demo_konsolepart::manageProfiles()
 {
-    QMetaObject::invokeMethod(_terminalPart, "showManageProfilesDialog", Qt::QueuedConnection, Q_ARG(QWidget*, QApplication::activeWindow()));
+    QMetaObject::invokeMethod(_terminalPart, "showManageProfilesDialog", Qt::QueuedConnection, Q_ARG(QWidget *, QApplication::activeWindow()));
 }
 
 void demo_konsolepart::quit()

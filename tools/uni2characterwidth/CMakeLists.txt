@@ -7,10 +7,10 @@
 ###   See `uni2characterwidth --help` for usage information
 if(KONSOLE_BUILD_UNI2CHARACTERWIDTH)
 
-    find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
+    find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
         Core
     )
-    find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED
+    find_package(KF6 ${KF_MIN_VERSION} REQUIRED
         KIO
     )
 
@@ -24,7 +24,7 @@ if(KONSOLE_BUILD_UNI2CHARACTERWIDTH)
     add_executable(uni2characterwidth ${uni2characterwidth_SRC})
     target_link_libraries(uni2characterwidth
         Qt::Core
-        KF${QT_MAJOR_VERSION}::KIOCore
+        KF6::KIOCore
     )
 
 endif()

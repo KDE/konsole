@@ -28,10 +28,6 @@
 #include <KAboutData>
 #include <KCrash>
 #include <KLocalizedString>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <Kdelibs4ConfigMigrator>
-#include <Kdelibs4Migration>
-#endif
 #include <kconfigwidgets_version.h>
 #include <kdbusservice.h>
 
@@ -108,12 +104,10 @@ static void migrateRenamedConfigKeys()
         // With 5.93 KColorSchemeManager from KConfigWidgets, handles the loading
         // and saving of the widget color scheme, and uses "ColorScheme" as the
         // entry name, so clean-up here
-#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 93, 0)
         KConfigGroup cg(konsoleConfig, "UiSettings");
         const QString schemeName = cg.readEntry("WindowColorScheme");
         cg.deleteEntry("WindowColorScheme");
         cg.writeEntry("ColorScheme", schemeName);
-#endif
 
         verGroup.writeEntry("ConfigVersion", CurrentConfigVersion);
         konsoleConfig->sync();
@@ -128,11 +122,6 @@ int main(int argc, char *argv[])
 #ifdef PROFILE_STARTUP
     QElapsedTimer timer;
     timer.start();
-#endif
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    // enable high dpi support
-    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
 #endif
 
     /**
@@ -210,34 +199,7 @@ int main(int argc, char *argv[])
     KDBusService dbusService(startupOption | KDBusService::NoExitOnFailure);
 
     needToDeleteQApplication = false;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    Kdelibs4ConfigMigrator migrate(QStringLiteral("konsole"));
-    migrate.setConfigFiles({QStringLiteral("konsolerc"), QStringLiteral("konsole.notifyrc")});
-    migrate.setUiFiles({QStringLiteral("sessionui.rc"), QStringLiteral("partui.rc"), QStringLiteral("konsoleui.rc")});
 
-    if (migrate.migrate()) {
-        Kdelibs4Migration dataMigrator;
-        const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("konsole"));
-        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole/");
-        QString targetFilePath;
-
-        QDir sourceDir(sourceBasePath);
-        QDir targetDir(targetBasePath);
-
-        if (sourceDir.exists()) {
-            if (!targetDir.exists()) {
-                QDir().mkpath(targetBasePath);
-            }
-            const QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-            for (const QString &fileName : fileNames) {
-                targetFilePath = targetBasePath + fileName;
-                if (!QFile::exists(targetFilePath)) {
-                    QFile::copy(sourceBasePath + fileName, targetFilePath);
-                }
-            }
-        }
-    }
-#endif
     // If we reach this location, there was no existing copy of Konsole
     // running, so create a new instance.
     Application konsoleApp(parser, customCommand);

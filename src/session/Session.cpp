@@ -68,9 +68,7 @@
 #include <sys/types.h>
 #endif
 
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
 #include <KSandbox>
-#endif
 #endif // Q_OS_WIN
 
 using namespace Konsole;
@@ -381,7 +379,6 @@ QString Session::checkProgram(const QString &program)
     }
 
 #ifndef Q_OS_WIN
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     if (KSandbox::isFlatpak()) {
         QProcess proc;
         // run "test -x exec" on the host to see if the shell is executable
@@ -393,7 +390,6 @@ QString Session::checkProgram(const QString &program)
         }
         return {};
     }
-#endif
 #endif // Q_OS_WIN
 
     QFileInfo info(exec);
@@ -439,11 +435,9 @@ QString Session::shellSessionId() const
 static QStringList postProcessArgs(const QStringList &args)
 {
 #ifndef Q_OS_WIN
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     if (!KSandbox::isFlatpak()) {
         return args;
     }
-#endif
     QStringList arguments;
     // last arg is the program
     arguments = args;
@@ -486,7 +480,6 @@ void Session::run()
     auto pw = getpwuid(getuid());
     // pw: Do not pass the returned pointer to free.
     if (pw != nullptr) {
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
         if (KSandbox::isFlatpak()) {
             QProcess proc;
             proc.setProgram(QStringLiteral("getent"));
@@ -498,9 +491,6 @@ void Session::run()
         } else {
             programs.insert(1, QString::fromLocal8Bit(pw->pw_shell));
         }
-#else
-        programs.insert(1, QString::fromLocal8Bit(pw->pw_shell));
-#endif
     }
 #endif
 
@@ -546,11 +536,9 @@ void Session::run()
 #endif
 
 #ifndef Q_OS_WIN
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     if (KSandbox::isFlatpak()) {
         _shellProcess->pty()->setCTtyEnabled(false); // not possibly inside sandbox
     }
-#endif
 #endif
 
     // this is not strictly accurate use of the COLORFGBG variable.  This does not
@@ -571,7 +559,6 @@ void Session::run()
     addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_SESSION=%1").arg(dbusObject));
 
 #ifndef Q_OS_WIN
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     const auto originalEnvironment = _shellProcess->environment();
     _shellProcess->setProgram(exec);
     _shellProcess->setArguments(arguments);
@@ -580,10 +567,6 @@ void Session::run()
     arguments = postProcessArgs(context.arguments);
     _shellProcess->setEnvironment(originalEnvironment);
     const auto result = _shellProcess->start(context.program, arguments, _environment);
-#else
-    int result = _shellProcess->start(exec, arguments, _environment);
-#endif
-
 #else // Q_OS_WIN
     const auto size = _emulation->imageSize();
     const int lines = size.height();

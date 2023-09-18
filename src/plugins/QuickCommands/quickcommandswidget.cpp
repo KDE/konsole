@@ -146,7 +146,6 @@ void QuickCommandsWidget::indexSelected(const QModelIndex &idx)
 
         runShellCheck();
     }
-
 }
 
 void QuickCommandsWidget::editMode()
@@ -205,21 +204,13 @@ void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
 void QuickCommandsWidget::runCommand()
 {
     if (!ui->warning->toPlainText().isEmpty()) {
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         auto choice = KMessageBox::questionTwoActions(this,
-#else
-        auto choice = KMessageBox::questionYesNo(this,
-#endif
                                                       i18n("There are some errors on the script, do you really want to run it?"),
                                                       i18n("Shell Errors"),
                                                       KGuiItem(i18nc("@action:button", "Run"), QStringLiteral("system-run")),
                                                       KStandardGuiItem::cancel(),
                                                       QStringLiteral("quick-commands-question"));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         if (choice == KMessageBox::SecondaryAction) {
-#else
-        if (choice == KMessageBox::No) {
-#endif
             return;
         }
     }
@@ -245,20 +236,8 @@ void QuickCommandsWidget::triggerDelete()
         : i18n("You are about to delete %1, are you sure?", text);
 
     int result =
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
-        KMessageBox::warningTwoActions(this,
-#else
-        KMessageBox::warningYesNo(this,
-#endif
-                                       dialogMessage,
-                                       i18n("Delete Quick Commands Configurations"),
-                                       KStandardGuiItem::del(),
-                                       KStandardGuiItem::cancel());
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        KMessageBox::warningTwoActions(this, dialogMessage, i18n("Delete Quick Commands Configurations"), KStandardGuiItem::del(), KStandardGuiItem::cancel());
     if (result != KMessageBox::PrimaryAction)
-#else
-    if (result != KMessageBox::Yes)
-#endif
         return;
 
     const auto sourceIdx = priv->filterModel->mapToSource(idx);

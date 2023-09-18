@@ -245,12 +245,7 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString &item, int &keyCode)
 {
     const QKeySequence sequence = QKeySequence::fromString(item);
     if (!sequence.isEmpty()) {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         keyCode = sequence[0].toCombined();
-#else
-        keyCode = sequence[0];
-#endif
-
         if (sequence.count() > 1) {
             qCDebug(KonsoleKeyTrDebug) << "Unhandled key codes in sequence: " << item;
         }

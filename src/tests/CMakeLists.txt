@@ -8,6 +8,6 @@ set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate)
 
 add_executable(PartManualTest PartManualTest.cpp)
 ecm_mark_as_test(PartManualTest)
-target_link_libraries(PartManualTest KF${QT_MAJOR_VERSION}::XmlGui KF${QT_MAJOR_VERSION}::Parts KF${QT_MAJOR_VERSION}::Pty
+target_link_libraries(PartManualTest KF6::XmlGui KF6::Parts KF6::Pty
                      ${KONSOLE_TEST_LIBS})
 

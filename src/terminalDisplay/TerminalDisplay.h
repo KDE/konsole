@@ -68,17 +68,10 @@ class Profile;
  * As Qt6 may not be affected by this issue, the adjustment is not added in that
  * case. Hopefully the compiler ignores this function in that case.
  */
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-inline QRect highdpi_adjust_rect(const QRect &rect)
-{
-    return rect.adjusted(-1, -1, 1, 1);
-}
-#else
 inline QRect highdpi_adjust_rect(const QRect &rect)
 {
     return rect;
 }
-#endif
 
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity

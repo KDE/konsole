@@ -600,7 +600,7 @@ void Vt102Emulation::osc_end(const uint cc)
     // do not.
     if (tokenBuffer[0] == XTERM_EXTENDED::URL_LINK) {
         // printf '\e]8;;https://example.com\e\\This is a link\e]8;;\e\\\n'
-        emit toggleUrlExtractionRequest();
+        Q_EMIT toggleUrlExtractionRequest();
     }
 
     processSessionAttributeRequest(tokenBufferPos, cc);
@@ -881,7 +881,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                 case DcsPassthrough:
                     if (cc <= 0x7E || cc >= 0xA0) { // 0x18, 0x1A, 0x1B already taken care of
                         put(cc);
-                    // 0x9C already taken care of.
+                        // 0x9C already taken care of.
                     } else if (cc == 0x7F) {
                         // ignore
                     }
@@ -1039,9 +1039,9 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
 
     if (tokenBuffer[i] != ';') {
         // No arguments
-        switch(attribute) {
+        switch (attribute) {
         case 104: // 104 without any argument means clear entire color table
-            for (int i=0; i<256; i++) {
+            for (int i = 0; i < 256; i++) {
                 colorTable[i] = QColor();
             }
             break;
@@ -1180,12 +1180,8 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         const QLatin1String customCursorColorStr("CustomCursorColor=");
 
         QString newValue;
-        #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         const auto items = QStringView(value).split(QLatin1Char(';'));
-        #else
-        const auto items = value.splitRef(QLatin1Char(';'));
-        #endif
-        for (const auto &item: items) {
+        for (const auto &item : items) {
             if (item.startsWith(cursorShapeStr)) {
                 const int s = item.at(cursorShapeStr.size()).digitValue();
                 shape = static_cast<Enum::CursorShapeEnum>(s != -1 ? s : 0);
@@ -1296,14 +1292,8 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             QBuffer *buffer = new QBuffer(player);
             buffer->setData(tokenData);
             buffer->open(QIODevice::ReadOnly);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            delete (QIODevice *)(player->mediaStream());
-            player->setMedia(QMediaContent(), buffer);
-
-#else
             delete (QIODevice *)(player->sourceDevice());
             player->setSourceDevice(buffer);
-#endif
             player->play();
             return;
         }
@@ -1335,11 +1325,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
 void Vt102Emulation::deletePlayer(QMediaPlayer::MediaStatus mediaStatus)
 {
     if (mediaStatus == QMediaPlayer::EndOfMedia || mediaStatus == QMediaPlayer::InvalidMedia) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        QIODevice *buffer = (QIODevice *)(player->mediaStream());
-#else
         QIODevice *buffer = (QIODevice *)(player->sourceDevice());
-#endif
         buffer->deleteLater();
         player->deleteLater();
         player = nullptr;

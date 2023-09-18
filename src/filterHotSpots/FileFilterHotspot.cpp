@@ -25,12 +25,7 @@
 #include <KIO/OpenUrlJob>
 
 #include <KFileItemListProperties>
-#include <kio_version.h>
-#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
 #include <KIO/JobUiDelegateFactory>
-#else
-#include <KIO/JobUiDelegate>
-#endif
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KShell>
@@ -132,11 +127,7 @@ void FileFilterHotSpot::activate(QObject *)
 void FileFilterHotSpot::openWithSysDefaultApp(const QString &filePath) const
 {
     auto *job = new KIO::OpenUrlJob(QUrl::fromLocalFile(filePath));
-#if KIO_VERSION >= QT_VERSION_CHECK(5, 98, 0)
     job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-#else
-    job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-#endif
     job->setRunExecutables(false); // Always open scripts, shell/python/perl... etc, as text
     job->start();
 }
@@ -199,26 +190,9 @@ QList<QAction *> FileFilterHotSpot::setupMenu(QMenu *menu)
     const KFileItemListProperties itemProperties(itemList);
     _menuActions->setParent(this);
     _menuActions->setItemListProperties(itemProperties);
-#if KIO_VERSION < QT_VERSION_CHECK(5, 82, 0)
-    _menuActions->addOpenWithActionsTo(menu);
 
-    // Here we added the actions to the last part of the menu, but we need to move them up.
-    // TODO: As soon as addOpenWithActionsTo accepts a index, change this.
-    // https://bugs.kde.org/show_bug.cgi?id=423765
-    QAction *firstAction = menu->actions().at(0);
-    for (auto *action : menu->actions()) {
-        if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
-            menu->removeAction(action);
-            menu->insertAction(firstAction, action);
-        }
-    }
-    auto *separator = new QAction(this);
-    separator->setSeparator(true);
-    menu->insertAction(firstAction, separator);
-#else
     const QList<QAction *> actionList = menu->actions();
     _menuActions->insertOpenWithActionsTo(!actionList.isEmpty() ? actionList.at(0) : nullptr, menu, QStringList());
-#endif
 
     QList<QAction *> addedActions = menu->actions();
     // addedActions will only contain the open-with actions

@@ -6,7 +6,6 @@
 
 // Own
 #include "MainWindow.h"
-#include "AppColorSchemeChooser.h"
 
 // Qt
 #include <QMenu>
@@ -19,31 +18,26 @@
 #include <KAcceleratorManager>
 #include <KActionCollection>
 #include <KActionMenu>
+#include <KColorSchemeManager>
+#include <KColorSchemeMenu>
 #include <KCrash>
 #include <KHamburgerMenu>
 #include <KIconUtils>
 #include <KLocalizedString>
-#include <KShortcutsDialog>
-#include <KToolBar>
-#include <KWindowEffects>
-
-#include <kwindowsystem_version.h>
-#if HAVE_X11
-#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
-#include <KX11Extras>
-#endif
-#endif
-
 #include <KMessageBox>
 #include <KNotifyConfigWidget>
+#include <KShortcutsDialog>
 #include <KStandardAction>
 #include <KStandardGuiItem>
+#include <KToolBar>
 #include <KWindowConfig>
+#include <KWindowEffects>
 #include <KWindowSystem>
 #include <KXMLGUIFactory>
 
-#include <kio_version.h>
-#include <kwidgetsaddons_version.h>
+#if HAVE_X11
+#include <KX11Extras>
+#endif
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -226,7 +220,6 @@ void MainWindow::activationRequest(const QString &xdgActivationToken)
 {
     KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
 
-#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
     if (KWindowSystem::isPlatformX11()) {
 #if HAVE_X11
         KX11Extras::forceActiveWindow(winId());
@@ -234,9 +227,6 @@ void MainWindow::activationRequest(const QString &xdgActivationToken)
     } else {
         KWindowSystem::activateWindow(windowHandle());
     }
-#else
-    KWindowSystem::forceActiveWindow(winId());
-#endif
 }
 
 void MainWindow::rememberMenuAccelerators()
@@ -441,7 +431,14 @@ void MainWindow::setupActions()
     });
 
     // Set up themes
-    actionCollection()->addAction(QStringLiteral("window-colorscheme-menu"), new AppColorSchemeChooser(actionCollection()));
+    auto *manager = new KColorSchemeManager(actionCollection());
+    manager->setAutosaveChanges(true);
+    KActionMenu *selectionMenu = KColorSchemeMenu::createMenu(manager, this);
+    auto winColorSchemeMenu = new QAction(this);
+    winColorSchemeMenu->setMenu(selectionMenu->menu());
+    winColorSchemeMenu->menu()->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-color")));
+    winColorSchemeMenu->menu()->setTitle(i18n("&Window Color Scheme"));
+    actionCollection()->addAction(QStringLiteral("window-colorscheme-menu"), winColorSchemeMenu);
 
     // Full Screen
     menuAction = KStandardAction::fullScreen(this, &MainWindow::viewFullScreen, this, collection);
@@ -530,7 +527,8 @@ void MainWindow::updateHamburgerMenu()
 
     menu->addSeparator();
 
-    auto monitorMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("visibility")), static_cast<QMenu *>(factory()->container(QStringLiteral("view"), nullptr))->title());
+    auto monitorMenu =
+        menu->addMenu(QIcon::fromTheme(QStringLiteral("visibility")), static_cast<QMenu *>(factory()->container(QStringLiteral("view"), nullptr))->title());
     monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-silence")));
     monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-activity")));
     monitorMenu->addAction(controllerCollection->action(QStringLiteral("monitor-process-finish")));
@@ -545,7 +543,8 @@ void MainWindow::updateHamburgerMenu()
     pluginsMenu->setIcon(QIcon::fromTheme(QStringLiteral("plugins"))); // Icon will be removed again when the menu bar is enabled.
     menu->addMenu(pluginsMenu);
 
-    auto configureMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), static_cast<QMenu *>(factory()->container(QStringLiteral("settings"), nullptr))->title());
+    auto configureMenu =
+        menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), static_cast<QMenu *>(factory()->container(QStringLiteral("settings"), nullptr))->title());
     configureMenu->addAction(toolBarMenuAction());
     configureMenu->addSeparator();
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -693,8 +692,7 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     auto newView = _viewManager->createView(session);
     _viewManager->activeContainer()->addView(newView);
 
-    _viewManager->activeViewController()->actionCollection()->addActions(
-        {_hamburgerMenu});
+    _viewManager->activeViewController()->actionCollection()->addActions({_hamburgerMenu});
 
     return session;
 }
@@ -785,21 +783,13 @@ bool MainWindow::queryClose()
 
 #if HAVE_X11
     // make sure the window is shown on current desktop and is not minimized
-#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
     KX11Extras::setOnDesktop(winId(), KX11Extras::currentDesktop());
-#else
-    KWindowSystem::setOnDesktop(winId(), KWindowSystem::currentDesktop());
-#endif
 #endif
     int result;
 
     if (!processesRunning.isEmpty()) {
         if (openTabs == 1) {
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
             result = KMessageBox::warningTwoActionsList(this,
-#else
-            result = KMessageBox::warningYesNoList(this,
-#endif
                                                         i18ncp("@info",
                                                                "There is a process running in this window. "
                                                                "Do you still want to quit?",
@@ -813,18 +803,10 @@ bool MainWindow::queryClose()
                                                         // don't ask again name is wrong but I can't update.
                                                         // this is not about tabs anymore. it's about empty tabs *or* splits.
                                                         QStringLiteral("CloseAllTabs"));
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
             if (result == KMessageBox::SecondaryAction) // SecondaryAction is equal to cancel closing
-#else
-            if (result == KMessageBox::No) // No is equal to cancel closing
-#endif
                 result = KMessageBox::Cancel;
         } else {
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
             result = KMessageBox::warningTwoActionsCancelList(this,
-#else
-            result = KMessageBox::warningYesNoCancelList(this,
-#endif
                                                               i18ncp("@info",
                                                                      "There is a process running in this window. "
                                                                      "Do you still want to quit?",
@@ -841,11 +823,7 @@ bool MainWindow::queryClose()
                                                               QStringLiteral("CloseAllTabs"));
         }
     } else {
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         result = KMessageBox::warningTwoActionsCancel(this,
-#else
-        result = KMessageBox::warningYesNoCancel(this,
-#endif
                                                       i18nc("@info",
                                                             "There are %1 open terminals in this window. "
                                                             "Do you still want to quit?",
@@ -860,17 +838,9 @@ bool MainWindow::queryClose()
     }
 
     switch (result) {
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     case KMessageBox::PrimaryAction:
-#else
-    case KMessageBox::Yes:
-#endif
         return true;
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     case KMessageBox::SecondaryAction:
-#else
-    case KMessageBox::No:
-#endif
         if ((!_pluggedController.isNull()) && (!_pluggedController->session().isNull())) {
             if (!(_pluggedController->session()->closeInNormalWay())) {
                 if (_pluggedController->confirmForceClose()) {
@@ -1074,15 +1044,11 @@ void MainWindow::setBlur(bool blur)
     _blurEnabled = blur;
 
     if (!_pluggedController->isKonsolePart()) {
-#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5, 82, 0)
-        KWindowEffects::enableBlurBehind(winId(), blur);
-#else
         if (QWindow *window = windowHandle()) {
             KWindowEffects::enableBlurBehind(window, blur);
         } else {
             qCWarning(KonsoleDebug) << "Blur effect couldn't be enabled.";
         }
-#endif
     }
 }
 
@@ -1107,11 +1073,7 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
             const auto oldGeometry = saveGeometry();
             // This happens for every Konsole window. It depends on
             // the fact that every window is processed in single thread
-#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
             const auto oldActiveWindow = KX11Extras::activeWindow();
-#else
-            const auto oldActiveWindow = KWindowSystem::activeWindow();
-#endif
 
             setWindowFlags(newFlags);
 
@@ -1119,11 +1081,7 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
             // with previous geometry
             restoreGeometry(oldGeometry);
             setVisible(true);
-#if KWINDOWSYSTEM_VERSION >= QT_VERSION_CHECK(5, 101, 0)
             KX11Extras::activateWindow(oldActiveWindow);
-#else
-            KWindowSystem::activateWindow(oldActiveWindow);
-#endif
 #endif
         } else {
             // Restoring geometry ourselves doesn't work on Wayland

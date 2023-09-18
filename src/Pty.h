@@ -40,10 +40,8 @@ namespace Konsole
  * with the program name and appropriate arguments.
  */
 #ifdef Q_OS_WIN
-#define _k_override_
 #define ParentClass QObject
 #else
-#define _k_override_ override
 #define ParentClass KPtyProcess
 #endif
 
@@ -220,15 +218,6 @@ Q_SIGNALS:
      * @param length Length of @p buffer
      */
     void receivedData(const char *buffer, int length);
-
-protected:
-    // TODO: remove this; the method is removed from QProcess in Qt6
-    // instead use setChildProcessModifier() in the constructor
-#ifndef Q_OS_WIN
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    void setupChildProcess() _k_override_;
-#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#endif // Q_OS_WIN
 
 private Q_SLOTS:
     // called when data is received from the terminal process

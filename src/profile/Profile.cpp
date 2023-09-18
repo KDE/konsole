@@ -18,7 +18,6 @@
 // KDE
 #include <KLocalizedString>
 #include <QFontDatabase>
-#include <kcoreaddons_version.h>
 
 // Konsole
 #include "Enumeration.h"
@@ -33,9 +32,7 @@
 #endif // HAVE_GETPWUID
 #endif // Q_OS_WIN
 
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
 #include <KSandbox>
-#endif
 
 using namespace Konsole;
 
@@ -215,7 +212,6 @@ static QString GetWindowsShell()
 static QString defaultShell()
 {
 #ifndef Q_OS_WIN
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     if (!KSandbox::isFlatpak()) {
         return QString::fromUtf8(qgetenv("SHELL"));
     }
@@ -235,10 +231,7 @@ static QString defaultShell()
         }
     }
     return {};
-#endif
-#else
-    return QString::fromUtf8(qgetenv("SHELL"));
-#endif
+#endif // HAVE_GETPWUID
 
 #else // Q_OS_WIN
     auto shell = GetWindowPowerShell();

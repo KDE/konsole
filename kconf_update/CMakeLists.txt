@@ -3,9 +3,9 @@ add_executable(konsole_globalaccel
 )
 
 target_link_libraries(konsole_globalaccel PRIVATE
-    KF${QT_MAJOR_VERSION}::ConfigCore
-    KF${QT_MAJOR_VERSION}::GlobalAccel
-    KF${QT_MAJOR_VERSION}::Service
+    KF6::ConfigCore
+    KF6::GlobalAccel
+    KF6::Service
 )
 
 
@@ -15,8 +15,8 @@ qt_add_resources(konsole_show_menubar_SRCS ../desktop/konsole.qrc)
 add_executable(konsole_show_menubar ${konsole_show_menubar_SRCS})
 
 target_link_libraries(konsole_show_menubar
-    KF${QT_MAJOR_VERSION}::XmlGui
-    KF${QT_MAJOR_VERSION}::CoreAddons
+    KF6::XmlGui
+    KF6::CoreAddons
 )
 
 
