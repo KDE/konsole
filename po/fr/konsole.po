@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-09 00:49+0000\n"
-"PO-Revision-Date: 2023-09-10 15:37+0200\n"
+"PO-Revision-Date: 2023-09-16 19:11+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.0\n"
+"X-Generator: Lokalize 23.08.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -2320,7 +2320,7 @@ msgstr "Définir l'&encodage"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
-msgstr "Permettre le suivi de la souris."
+msgstr "Permettre le suivi de la souris"
 
 #: session/SessionController.cpp:851
 #, kde-format
@@ -3248,10 +3248,10 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Pour utiliser cette fonctionnalité, veuillez activer "
-"les <span style=\" font-weight:600;\">fichiers Souris-&gt;Divers-&gt;Sous-"
-"ligne </span><span style=\" font-weight:600;\"></span> dans les paramètres "
-"de votre profil</p></body></html>"
+"\"<html><head/><body>\"\"<p>Pour utiliser cette fonctionnalité, veuillez "
+"activer l'option <spanstyle=\" font-weight:600;\">Souris-&gt;Divers-&gt;"
+"Souligner les </span><spanstyle=\" font-weight:600;\">fichiers</span> dans "
+"les paramètres de votreprofil</p>\"\"</body></html>\""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3891,7 +3891,7 @@ msgstr "Bloc"
 #, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
-msgstr "Rayon I"
+msgstr "Barre verticale"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
 #: widgets/EditProfileAppearancePage.ui:246
@@ -4178,7 +4178,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:908
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Caractères brahmaniques de script"
+msgstr "Caractères brahmi de script"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:921
@@ -4901,7 +4901,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:332
 #, kde-format
 msgid "Open files/links by direct click"
-msgstr "Ouvrir des fichiers et des liens directement avec un clic."
+msgstr "Ouvrir des fichiers et des liens directement avec un clic"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:343
@@ -5030,7 +5030,7 @@ msgstr ""
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr ""
 "Permettre aux applications de terminaux de gérer les clics et les glisser "
-"avec la souris."
+"avec la souris"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:43
