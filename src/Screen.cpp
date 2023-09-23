@@ -809,10 +809,18 @@ void Screen::copyFromHistory(Character *dest, int startLine, int count) const
 
         // invert selected text
         if (_selBegin != -1) {
+            bool prevSelected = false;
             for (int column = 0; column < lastColumn; ++column) {
-                if (isSelected(column, line)) {
-                    dest[destLineOffset + column].rendition.f.selected = 1;
+                const bool selected = isSelected(column, line);
+                if (selected) {
+                    // Make sure to not mark as selected the right half of a CJK character if the left half isn't selected
+                    if (column == 0 || prevSelected || !dest[destLineOffset + column].isRightHalfOfDoubleWide())
+                        dest[destLineOffset + column].rendition.f.selected = 1;
+                    // Make sure to mark as selected the right half of a CJK character if the left half is selected
+                    if (column + 1 < lastColumn && dest[destLineOffset + column + 1].isRightHalfOfDoubleWide())
+                        dest[destLineOffset + column + 1].rendition.f.selected = 1;
                 }
+                prevSelected = selected;
             }
         }
     }
@@ -841,10 +849,18 @@ void Screen::copyFromScreen(Character *dest, int startLine, int count) const
         }
 
         if (_selBegin != -1) {
+            bool prevSelected = false;
             for (int column = 0; column < lastColumn; ++column) {
-                if (isSelected(column, line + historyLines)) {
-                    dest[destLineOffset + column].rendition.f.selected = 1;
+                const bool selected = isSelected(column, line + historyLines);
+                if (selected) {
+                    // Make sure to not mark as selected the right half of a CJK character if the left half isn't selected
+                    if (column == 0 || prevSelected || !dest[destLineOffset + column].isRightHalfOfDoubleWide())
+                        dest[destLineOffset + column].rendition.f.selected = 1;
+                    // Make sure to mark as selected the right half of a CJK character if the left half is selected
+                    if (column + 1 < lastColumn && dest[destLineOffset + column + 1].isRightHalfOfDoubleWide())
+                        dest[destLineOffset + column + 1].rendition.f.selected = 1;
                 }
+                prevSelected = selected;
             }
         }
     }
@@ -1790,6 +1806,7 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
         _selBottomRight = loc(qMax(topColumn, bottomColumn), bottomRow);
         return;
     }
+
     // Extend the selection to the rightmost column if beyond the last character in the line
     const int bottomRow = _selBottomRight / _columns;
     const int bottomColumn = _selBottomRight % _columns;
