@@ -22,6 +22,7 @@ private Q_SLOTS:
     void testLargeScreenCopyEmptyLine();
     void testLargeScreenCopyLongLine();
     void testBlockSelection();
+    void testCJKBlockSelection();
     void testCursorPosition();
 
 private:
