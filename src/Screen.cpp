@@ -2184,6 +2184,10 @@ int Screen::copyLineToStream(int line,
         currentLineProperties = _lineProperties[screenLine];
     }
 
+    // If the last character is wide, account for it
+    if (Character::width(characterBuffer[count - 1].character) == 2)
+        count++;
+
     if (appendNewLine) {
         // When users ask not to preserve the linebreaks, they usually mean:
         // `treat LINEBREAK as SPACE, thus joining multiple _lines into
