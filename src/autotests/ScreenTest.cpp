@@ -67,6 +67,58 @@ void ScreenTest::testBlockSelection()
     QCOMPARE(screen.selectedText(Screen::PlainText), QStringLiteral("abcd ijkl"));
 }
 
+void ScreenTest::testCJKBlockSelection()
+{
+    Screen screen(largeScreenLines, largeScreenColumns);
+
+    const QString reallyBigTextForReflow = QStringLiteral(
+        // Precomposed Hangul (NFC, each syllable block is a codepoint)
+        "챠트 피면 술컵"
+        "01234567890123"
+        " 도 유효작    "
+        "01234567890123"
+        // Decomposed Hangul (NFD, syllables are made of several jamos)
+        "챠트 피면 술컵"
+        "01234567890123"
+        " 도 유효작    "
+        // Iroha (a pangrammic Japanese poem)
+        "いろはにほへと"
+        "01234567890123"
+        " ちりぬるを   "
+        "01234567890123"
+        "わかよたれそ  "
+        "01234567890123"
+        " つねならむ   "
+        "01234567890123"
+        "うゐのおくやま"
+        "01234567890123"
+        " けふこえて   "
+        "01234567890123"
+        "あさきゆめみし"
+        "01234567890123"
+        "ゑひもせす");
+
+    for (const QChar &c : reallyBigTextForReflow) {
+        screen.displayCharacter(c.unicode());
+    }
+
+    // this breaks the text so it looks like above
+    screen.setReflowLines(true);
+
+    // reflow does not reflows cursor line, so let's move it a bit down.
+    screen.cursorDown(1);
+    screen.resizeImage(32, 14);
+
+    // True here means block selection.
+    screen.setSelectionStart(2, 0, true);
+    screen.setSelectionEnd(6, 15, false);
+
+    // Do a block selection and compare the result to a known good result
+    QCOMPARE(screen.selectedText(Screen::PlainText),
+             QStringLiteral("\uD2B8 \uD53C 23456  \uC720\uD6A8 23456 \u1110\u1173 \u1111\u1175 23456  \u110B\u1172\u1112\u116D \u308D\u306F\u306B 23456 "
+                            "\u308A\u306C 23456 \u304B\u3088\u305F 23456 \u306D\u306A 23456 \u3090\u306E\u304A"));
+}
+
 void ScreenTest::testLargeScreenCopyEmptyLine()
 {
     const QString putToScreen;
