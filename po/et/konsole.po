@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-09 00:49+0000\n"
+"POT-Creation-Date: 2023-09-27 00:45+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -1222,49 +1222,49 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Tänu ka kõigile teistele.\n"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:398
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Uus kaart"
 
-#: MainWindow.cpp:401
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klooni kaart"
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Uus &aken"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:422
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Sulge aken"
 
-#: MainWindow.cpp:420
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Järjehoidjad"
 
-#: MainWindow.cpp:448
+#: MainWindow.cpp:455
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profiilide haldamine..."
 
-#: MainWindow.cpp:454
+#: MainWindow.cpp:461
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktiveeri menüü"
 
-#: MainWindow.cpp:460
+#: MainWindow.cpp:467
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move tab to the left"
@@ -1272,13 +1272,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Kaardi liigutamine vasakule"
 
-#: MainWindow.cpp:469
+#: MainWindow.cpp:476
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:785 MainWindow.cpp:810
+#: MainWindow.cpp:792 MainWindow.cpp:817
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1287,61 +1287,61 @@ msgid_plural ""
 msgstr[0] "Selles aknas töötab üks protsess. Kas tõesti väljuda?"
 msgstr[1] "Selles aknas töötab %1 protsessi. Kas tõesti väljuda?"
 
-#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
+#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Sulgemise kinnitus"
 
-#: MainWindow.cpp:792 MainWindow.cpp:817 MainWindow.cpp:835
+#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Sulge ake&n"
 
-#: MainWindow.cpp:818 MainWindow.cpp:836
+#: MainWindow.cpp:825 MainWindow.cpp:843
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Sulge ak&tiivne kaart"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:838
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Selles aknas on avatud %1 terminali. Kas tõesti soovid väljuda?"
 
-#: MainWindow.cpp:946 Part.cpp:307
+#: MainWindow.cpp:953 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiilid"
 
-#: MainWindow.cpp:963
+#: MainWindow.cpp:970
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Üldine"
 
-#: MainWindow.cpp:975
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:980
+#: MainWindow.cpp:987
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Kaardiriba ja poolitamine"
 
-#: MainWindow.cpp:985
+#: MainWindow.cpp:992
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Ajutised failid"
 
-#: MainWindow.cpp:990
+#: MainWindow.cpp:997
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

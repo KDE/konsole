@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-09 00:49+0000\n"
+"POT-Creation-Date: 2023-09-27 00:45+0000\n"
 "PO-Revision-Date: 2023-09-09 10:15+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1219,61 +1219,61 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Gràcies a molts altres.\n"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:398
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Pestanya &nova"
 
-#: MainWindow.cpp:401
+#: MainWindow.cpp:408
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Clona la pestanya"
 
-#: MainWindow.cpp:408
+#: MainWindow.cpp:415
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Finestra nova"
 
-#: MainWindow.cpp:415
+#: MainWindow.cpp:422
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Tanca la finestra"
 
-#: MainWindow.cpp:420
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Adreces d'interès"
 
-#: MainWindow.cpp:448
+#: MainWindow.cpp:455
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gestiona els perfils..."
 
-#: MainWindow.cpp:454
+#: MainWindow.cpp:461
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activa el menú"
 
-#: MainWindow.cpp:460
+#: MainWindow.cpp:467
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Desa la disposició de les pestanyes..."
 
-#: MainWindow.cpp:469
+#: MainWindow.cpp:476
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carrega la disposició de les pestanyes..."
 
-#: MainWindow.cpp:785 MainWindow.cpp:810
+#: MainWindow.cpp:792 MainWindow.cpp:817
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1284,61 +1284,61 @@ msgstr[0] ""
 msgstr[1] ""
 "Hi ha %1 processos executant-se en aquesta finestra. Encara voleu sortir?"
 
-#: MainWindow.cpp:791 MainWindow.cpp:816 MainWindow.cpp:834
+#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmació del tancament"
 
-#: MainWindow.cpp:792 MainWindow.cpp:817 MainWindow.cpp:835
+#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Tanca la &finestra"
 
-#: MainWindow.cpp:818 MainWindow.cpp:836
+#: MainWindow.cpp:825 MainWindow.cpp:843
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Tanca la &pestanya actual"
 
-#: MainWindow.cpp:831
+#: MainWindow.cpp:838
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hi ha %1 terminals oberts en aquesta finestra. Encara voleu sortir?"
 
-#: MainWindow.cpp:946 Part.cpp:307
+#: MainWindow.cpp:953 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfils"
 
-#: MainWindow.cpp:963
+#: MainWindow.cpp:970
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:975
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memòria"
 
-#: MainWindow.cpp:980
+#: MainWindow.cpp:987
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de pestanyes / Divisors"
 
-#: MainWindow.cpp:985
+#: MainWindow.cpp:992
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Fitxers temporals"
 
-#: MainWindow.cpp:990
+#: MainWindow.cpp:997
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
