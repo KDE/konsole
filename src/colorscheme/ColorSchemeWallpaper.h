@@ -13,6 +13,7 @@
 
 // Qt
 #include <QMetaType>
+#include <QMovie>
 #include <QPointF>
 #include <QSharedData>
 
@@ -74,16 +75,23 @@ public:
 
     FlipType flipType() const;
 
+    bool isAnimated() const;
+
+    int getFrameDelay() const;
+
 private:
     Q_GADGET
     Q_DISABLE_COPY(ColorSchemeWallpaper)
 
     QString _path;
     std::unique_ptr<QPixmap> _picture;
+    std::unique_ptr<QMovie> _movie;
     FillStyle _style;
     QPointF _anchor;
     qreal _opacity;
     FlipType _flipType;
+    bool _isAnimated;
+    int _frameDelay;
 
     QRectF ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect);
     Qt::AspectRatioMode RatioMode();

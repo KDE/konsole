@@ -145,6 +145,13 @@ void TerminalDisplay::setScreenWindow(ScreenWindow *window)
         connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, this, []() {
             QGuiApplication::inputMethod()->update(Qt::ImCursorRectangle);
         });
+        if (_wallpaper->isAnimated()) {
+            QTimer *frameTimer = new QTimer(this);
+            connect(frameTimer, &QTimer::timeout, this, [this]() -> void {
+                update();
+            });
+            frameTimer->start(_wallpaper->getFrameDelay());
+        }
         _screenWindow->setWindowLines(_lines);
 
         auto profile = SessionManager::instance()->sessionProfile(_sessionController->session());

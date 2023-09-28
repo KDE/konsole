@@ -13,6 +13,9 @@
 #include "ColorScheme.h"
 
 // Qt
+#include <QImage>
+#include <QImageReader>
+#include <QMovie>
 #include <QPainter>
 
 using namespace Konsole;
@@ -24,10 +27,13 @@ ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path,
                                            const ColorSchemeWallpaper::FlipType flipType)
     : _path(path)
     , _picture(nullptr)
+    , _movie(nullptr)
     , _style(style)
     , _anchor(anchor)
     , _opacity(opacity)
     , _flipType(flipType)
+    , _isAnimated(false)
+    , _frameDelay(17) // Approx. 60FPS
 {
     float x = _anchor.x(), y = _anchor.y();
 
@@ -43,15 +49,47 @@ void ColorSchemeWallpaper::load()
         return;
     }
 
-    // Create and load original pixmap
-    if (_picture == nullptr) {
-        _picture = std::make_unique<QPixmap>();
-    }
+    QImageReader reader(_path);
+    _isAnimated = reader.supportsAnimation();
+    if (_isAnimated) {
+        if (_movie == nullptr) {
+            _movie = std::make_unique<QMovie>();
+        }
 
-    if (_picture->isNull()) {
-        const QImage image(_path);
-        const QImage transformed = FlipImage(image, _flipType);
-        _picture->convertFromImage(transformed);
+        if (!_movie->isValid()) {
+            _movie->setFileName(_path);
+            _movie->start();
+        }
+
+        // Initialize _picture in load, to avoid null checking for both _picture and _movie in draw.
+        if (_picture == nullptr) {
+            _picture = std::make_unique<QPixmap>();
+        }
+
+        if (_picture->isNull()) {
+            const QImage image = _movie->currentImage();
+            const QImage transformed = FlipImage(image, _flipType);
+            _picture->convertFromImage(transformed);
+        }
+    } else {
+        // Cleanup animated image
+        if (_movie != nullptr) {
+            if (_movie->isValid()) {
+                _movie->stop();
+            }
+            _movie.reset();
+        }
+
+        // Create and load original pixmap
+        if (_picture == nullptr) {
+            _picture = std::make_unique<QPixmap>();
+        }
+
+        if (_picture->isNull()) {
+            const QImage image(_path);
+            const QImage transformed = FlipImage(image, _flipType);
+            _picture->convertFromImage(transformed);
+        }
     }
 }
 
@@ -72,6 +110,22 @@ bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect rect, qreal bgCol
     painter.fillRect(rect, backgroundColor);
     painter.setOpacity(_opacity);
 
+    if (_isAnimated) {
+        if (_movie->state() == QMovie::NotRunning) {
+            _movie->start();
+        }
+        if (_picture != nullptr) {
+            _picture.reset();
+        }
+        if (_picture == nullptr) {
+            _picture = std::make_unique<QPixmap>();
+        }
+        if (_picture->isNull()) {
+            QImage currentImage = _movie->currentImage();
+            const QImage transformed = FlipImage(currentImage, _flipType);
+            _picture->convertFromImage(transformed);
+        }
+    }
     if (_style == Tile) {
         painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
     } else {
@@ -155,6 +209,16 @@ QImage ColorSchemeWallpaper::FlipImage(const QImage image, const ColorSchemeWall
     default:
         return image;
     }
+}
+
+bool ColorSchemeWallpaper::isAnimated() const
+{
+    return _isAnimated;
+}
+
+int ColorSchemeWallpaper::getFrameDelay() const
+{
+    return _frameDelay;
 }
 
 #include "moc_ColorSchemeWallpaper.cpp"
