@@ -1096,7 +1096,9 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
         notification->setWidget(QApplication::activeWindow());
 #else
         KNotification *notification = new KNotification(QStringLiteral("Finished"), KNotification::CloseWhenWindowActivated);
-        notification->setWindow(QApplication::activeWindow()->windowHandle());
+        if (QApplication::activeWindow()) {
+            notification->setWindow(QApplication::activeWindow()->windowHandle());
+        }
 #endif
         notification->setText(message);
         notification->sendEvent();
