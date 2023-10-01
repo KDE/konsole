@@ -748,8 +748,8 @@ msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
-"Non se puido abrir o ficheiro co editor de texto indicado na configuración "
-"do perfil;\n"
+"Non foi posíbel abrir o ficheiro co editor de texto indicado na "
+"configuración do perfil;\n"
 "abrirase co editor predeterminado do sistema."
 
 #: filterHotSpots/FileFilterHotspot.cpp:183
@@ -1615,8 +1615,8 @@ msgstr "Entradas de SSH"
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
-"Non se puido obter o nome do proceso, asúmese que non podemos solicitar unha "
-"conexión"
+"Non foi posíbel obter o nome do proceso, asúmese que non podemos solicitar "
+"unha conexión"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #: plugins/SSHManager/sshmanagerplugin.cpp:193
@@ -1629,7 +1629,7 @@ msgstr "Erro ao dar unha orde de SSH"
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
-"Non se pode dar unha orde de SSH fóra da aplicación de intérprete (p. ex. "
+"Non é posíbel dar unha orde de SSH fóra da aplicación de intérprete (p. ex. "
 "bash, zsh, sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -1700,7 +1700,7 @@ msgstr "Unha sesión de SSH debe ter un perfil"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Cannot delete this folder"
-msgstr "Non se pode eliminar este cartafol"
+msgstr "Non é posíbel eliminar este cartafol"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:451
 #, kde-format
@@ -2088,7 +2088,7 @@ msgstr "Badalada en «%1» (sesión «%2»)"
 #: session/Session.cpp:408
 #, kde-format
 msgid "Could not find binary: "
-msgstr "Non se puido atopar o binario: "
+msgstr "Non foi posíbel atopar o binario: "
 
 #: session/Session.cpp:417
 #, kde-format
@@ -2099,7 +2099,8 @@ msgstr "Aviso: "
 #: session/Session.cpp:517
 #, kde-format
 msgid "Could not find an interactive shell to start."
-msgstr "Non se puido atopar un intérprete de ordes interactivo para iniciar."
+msgstr ""
+"Non foi posíbel atopar un intérprete de ordes interactivo para iniciar."
 
 #: session/Session.cpp:523 session/Session.cpp:525
 #, kde-format
@@ -2107,13 +2108,13 @@ msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
-"Non se puido atopar «%1», no canto iniciarase «%2». Comprobe a configuración "
-"do perfil."
+"Non foi posíbel atopar «%1», no canto iniciarase «%2». Comprobe a "
+"configuración do perfil."
 
 #: session/Session.cpp:595
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
-msgstr "Non se puido iniciar o programa «%1» cos argumentos «%2»."
+msgstr "Non foi posíbel iniciar o programa «%1» cos argumentos «%2»."
 
 #: session/Session.cpp:749
 #, kde-format
@@ -4275,7 +4276,7 @@ msgstr ""
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
-msgstr[0] "Estase a editar o perfil: %2"
+msgstr[0] "Editando o perfil: %2"
 msgstr[1] "Estanse a editar %1 perfís: %2"
 
 #: widgets/EditProfileDialog.cpp:423
