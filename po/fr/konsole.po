@@ -3181,9 +3181,9 @@ msgid ""
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
 "\"<html><head/><body>\"\"<p>Pour utiliser cette fonctionnalité, veuillez "
-"activer l'option <spanstyle=\" font-weight:600;\">Souris-&gt;Divers-&gt;"
-"Souligner les </span><spanstyle=\" font-weight:600;\">fichiers</span> dans "
-"les paramètres de votreprofil</p>\"\"</body></html>\""
+"activer l'option <span style=\" font-weight:600;\">Souris-&gt;Divers-&gt;"
+"Souligner les </span><span style=\" font-weight:600;\">fichiers</span> dans "
+"les paramètres de votre profil</p>\"\"</body></html>\""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
