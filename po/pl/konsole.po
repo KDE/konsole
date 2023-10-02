@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-27 00:45+0000\n"
-"PO-Revision-Date: 2023-08-20 10:43+0200\n"
+"PO-Revision-Date: 2023-10-01 09:09+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -47,7 +47,7 @@ msgstr ""
 ">\n"
 ">\n"
 ">\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -1341,7 +1341,7 @@ msgstr "Ogólne"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Pamięć"
 
 #: MainWindow.cpp:987
 #, kde-format
@@ -1932,7 +1932,7 @@ msgstr "Prze&skaluj wyjście"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Wbudowany"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
@@ -2757,7 +2757,7 @@ msgstr "Określa, czy znaleziony tekst ma być zaznaczony"
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
-msgstr ""
+msgstr "Określa, czy tworzenie podrzędnych cgroup tworzy karty"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -2765,6 +2765,8 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Określa poziom wykorzystania pamięci powyżej, którego rozpocznie się "
+"ograniczanie"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2860,10 +2862,9 @@ msgstr "Użyj tego katalogu dla plików przewijania wstecz"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Czuwanie nad kartami"
+msgstr "Włącz monitorowanie pamięci:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2877,18 +2878,25 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Zmiany odniosą skutek po ponownym uruchomieniu. Po włączeniu, przeciągające "
+"się wykorzystanie pamięci przez Konsole\n"
+"wykraczające poza określoną wartość spowoduje, że systemd-oomd zamknie "
+"karty\n"
+"zawierające działania pamięciożerne. Pamiętaj: włączenie\n"
+"może wywołać większe spowolnienia podczas pamięciożernych zadań, a\n"
+"określenie szczególnie niskich wartości może spowodować zakończenie Konsoli."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Pamięć graniczna:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
@@ -3973,19 +3981,16 @@ msgstr "Siła przyciemnienia:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Barwa:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Wybierz barwę używaną do rysowania kursora"
+msgstr "Wybierz barwę używaną do rysowania obramowania"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -3995,10 +4000,9 @@ msgstr "Nieużywane terminale:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Nieużywane terminale:"
+msgstr "Używane terminale:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4054,16 +4058,15 @@ msgstr "Przyciemnij"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Wskaż czy okno jest przywołane, przygaszając barwy"
+msgstr "Wskaż, czy okno jest używane, rysując wokół niego obramowanie"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Obramowanie"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4253,13 +4256,13 @@ msgstr "Profil o nazwie \"%1\" już istnieje."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Nazwa profilu przekroczyła dopuszczalną długość (%1)."
 
 #: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Podświetlone znaki są nieprawidłowe w nazwie profilu: %1."
 
 #: widgets/EditProfileDialog.cpp:419
 #, kde-format
