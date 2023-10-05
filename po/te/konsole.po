@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2009-01-16 22:16+0530\n"
 "Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <en@li.org>\n"
@@ -2244,7 +2244,7 @@ msgstr "ప్రోగ్రామ్ '%1'ను ఆర్గుమెంట్
 msgid "Silence in '%1' (Session '%2')"
 msgstr "%1 సెషన్ లో నిశబ్దం"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2268,7 +2268,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "ముగిసింది"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "ప్రోగ్రామ్ '%1' క్రాష్ అయినది."
@@ -2278,12 +2278,12 @@ msgstr "ప్రోగ్రామ్ '%1' క్రాష్ అయినద�
 msgid "Program '%1' exited with status %2."
 msgstr "ప్రోగ్రామ్ '%1' స్థితి %2తో నిష్క్రమించినది."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem పురోగతి"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

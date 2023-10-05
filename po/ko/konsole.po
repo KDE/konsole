@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2023-07-23 21:01+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2082,7 +2082,7 @@ msgstr "프로그램 '%1'을(를) 인자 '%2'을(를) 사용하여 시작할 수
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1'에서 응답 없음(세션 '%2')"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2108,7 +2108,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "완료됨"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr ""
@@ -2121,12 +2121,12 @@ msgstr ""
 "프로그램 '%1'이(가) 상태 %2(으)로 끝났습니다.|/|프로그램 '%1'$[이가 %1] 상태 "
 "%2$[으 %2]로 끝났습니다."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 진행 상황"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1'의 활동(세션 '%2')"

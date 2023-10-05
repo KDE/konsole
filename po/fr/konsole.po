@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2023-09-16 19:11+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -2144,7 +2144,7 @@ msgstr "Impossible de démarrer le programme « %1 » avec les arguments « %
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silence de « %1 » (Session « %2 »)"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2171,7 +2171,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Terminé"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Le programme « %1 » s'est terminée d'une manière inattendue."
@@ -2181,12 +2181,12 @@ msgstr "Le programme « %1 » s'est terminée d'une manière inattendue."
 msgid "Program '%1' exited with status %2."
 msgstr "Le programme « %1 » s'est terminé avec l'état « %2 »."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progression de « ZMODEM »"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activité de « %1 » (Session « %2 »)"

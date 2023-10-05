@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2019-01-27 15:02-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -2154,7 +2154,7 @@ msgstr "ਪਰੋਗਰਾਮ '%1' ਆਰਗੂਮੈਂਟ '%2' ਨਾਲ ਚ�
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ਸ਼ੈਸ਼ਨ '%1' ਵਿੱਚ ਖਾਮੋਸ਼ੀ"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2177,7 +2177,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "ਸਮਾਪਤ"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "ਪਰੋਗਰਾਮ '%1' ਕਰੈਸ਼ ਹੋ ਗਿਆ।"
@@ -2187,12 +2187,12 @@ msgstr "ਪਰੋਗਰਾਮ '%1' ਕਰੈਸ਼ ਹੋ ਗਿਆ।"
 msgid "Program '%1' exited with status %2."
 msgstr "ਪਰੋਗਰਾਮ '%1' ਹਾਲਤ %2 ਵਿੱਚ ਬੰਦ ਹੋ ਗਿਆ ਹੈ।"
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem ਤਰੱਕੀ"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

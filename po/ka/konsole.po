@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2023-09-02 04:49+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -2049,7 +2049,7 @@ msgstr "ვერ გავუშვი პროგრამა '%1' არგ�
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ჩაჩუმება '%1'-ში (სესია '%2')"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2071,7 +2071,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "დასრულებულია"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "პროგრამა %1 ავარიულად დასრულდა."
@@ -2081,12 +2081,12 @@ msgstr "პროგრამა %1 ავარიულად დასრუ�
 msgid "Program '%1' exited with status %2."
 msgstr "პროგრამა %1 ავარიულად დასრულდა, კოდით %2."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem -ის მიმდინარეობა"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "აქტივობა '%1'-ში (სესია '%2')"

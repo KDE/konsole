@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole trunk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2020-02-05 14:49+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -2090,7 +2090,7 @@ msgstr "'%2' ഐച്ഛികങ്ങളുപയോഗിച്ചു് '%1
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' സെഷനില്‍ നിശബ്ദത"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2112,7 +2112,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "പൂര്‍ണ്ണമായി"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' എന്ന പ്രോഗ്രാം തകര്‍ന്നു."
@@ -2122,12 +2122,12 @@ msgstr "'%1' എന്ന പ്രോഗ്രാം തകര്‍ന്ന�
 msgid "Program '%1' exited with status %2."
 msgstr "%2 എന്ന വിലയോടെ '%1' എന്ന പ്രോഗ്രാം പുറത്തു വന്നു."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ഇസഡ്‌മോഡത്തിന്റെ പുരോഗതി"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

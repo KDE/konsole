@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2023-09-09 10:29+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -2101,7 +2101,7 @@ msgstr "Ne eblis lanĉi programon '%1' kun argumentoj '%2'."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silento en '%1' (Seanco '%2')"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2127,7 +2127,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finita"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programo '%1' paneis."
@@ -2137,12 +2137,12 @@ msgstr "Programo '%1' paneis."
 msgid "Program '%1' exited with status %2."
 msgstr "Programo '%1' finiĝis kun stato %2."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progreso de ZModem"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Agado en '%1' (Seanco '%2')"

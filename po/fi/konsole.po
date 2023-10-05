@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2023-06-02 20:06+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2116,7 +2116,7 @@ msgstr "Ohjelmaa ”%1” ei voitu käynnistää parametrein ”%2”."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Hiljaisuus päätteessä ”%1” (istunto ”%2”)"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2143,7 +2143,7 @@ msgid "Finished"
 msgstr "Valmis"
 
 # ei-ASCII-lainausmerkit eivät näkyneet oikein
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Ohjelma ”%1” kaatui."
@@ -2153,12 +2153,12 @@ msgstr "Ohjelma ”%1” kaatui."
 msgid "Program '%1' exited with status %2."
 msgstr "Ohjelma ”%1” päättyi paluuarvoon %2."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-tiedonsiirron edistyminen"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktiivisuutta päätteessä ”%1” (istunto ”%2”)"

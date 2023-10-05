@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -2126,7 +2126,7 @@ msgstr "Nu s-a putut porni programul „%1” cu argumentele „%2”."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Liniște în „%1” (sesiunea „%2”)"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2154,7 +2154,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Terminat"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programul „%1” a eșuat."
@@ -2164,12 +2164,12 @@ msgstr "Programul „%1” a eșuat."
 msgid "Program '%1' exited with status %2."
 msgstr "Programul '%1' a ieșit cu codul de eroare %2."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progres ZModem"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitate în „%1” (sesiunea „%2”)"

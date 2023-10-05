@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2009-12-17 00:21+0100\n"
 "Last-Translator: Mark Kwidzińśczi <mark@linuxcsb.org>\n"
 "Language-Team: Kaszëbsczi <i18n-csb@linuxcsb.org>\n"
@@ -2242,7 +2242,7 @@ msgstr "NIé mòże zrëszëc programë '%1', z argùmentã '%2'."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Cëchòsc w sesëji '%1'"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2266,7 +2266,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Skùńczony"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programa '%1' niespòdzajno zakùńczëła dzejanié."
@@ -2276,12 +2276,12 @@ msgstr "Programa '%1' niespòdzajno zakùńczëła dzejanié."
 msgid "Program '%1' exited with status %2."
 msgstr "Programa '%1' zakùńcza dzejanié w stónie %2."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Pòstãp transmisëji ZModem"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

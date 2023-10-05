@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-27 00:45+0000\n"
+"POT-Creation-Date: 2023-10-05 00:45+0000\n"
 "PO-Revision-Date: 2011-10-05 00:26+0330\n"
 "Last-Translator: Mohamad Reza Mirdamadi <mohi@ubuntu.ir>\n"
 "Language-Team: Farsi (Persian) <>\n"
@@ -2239,7 +2239,7 @@ msgstr ""
 msgid "Silence in '%1' (Session '%2')"
 msgstr "سکوت در نشست »%1«"
 
-#: session/Session.cpp:750 session/Session.cpp:1959
+#: session/Session.cpp:750 session/Session.cpp:1961
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2262,7 +2262,7 @@ msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "یافتن:"
 
-#: session/Session.cpp:1088 session/Session.cpp:1107
+#: session/Session.cpp:1088 session/Session.cpp:1109
 #, fuzzy, kde-format
 msgid "Program '%1' crashed."
 msgstr "نشست »%1« به طور غیرمنتظره‌ای خارج شد."
@@ -2272,12 +2272,12 @@ msgstr "نشست »%1« به طور غیرمنتظره‌ای خارج شد."
 msgid "Program '%1' exited with status %2."
 msgstr "نشست »%1« با وضعیت %2 خارج شد."
 
-#: session/Session.cpp:1618
+#: session/Session.cpp:1620
 #, kde-format
 msgid "ZModem Progress"
 msgstr "پیشرفت ZModem"
 
-#: session/Session.cpp:1958
+#: session/Session.cpp:1960
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
