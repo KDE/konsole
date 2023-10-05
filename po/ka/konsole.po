@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-05-16 05:30+0200\n"
+"PO-Revision-Date: 2023-10-04 18:57+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3\n"
+"X-Generator: Poedit 3.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1611,7 +1611,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:413
 #, kde-format
 msgid "At least Username or SSHKey must be set"
-msgstr ""
+msgstr "საჭიროა მომხმარებლის სახელის ან SSH გასაღების მითითბა"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:419
 #, kde-format
@@ -1664,7 +1664,7 @@ msgstr "ჩანაწერების, რომლებიც ფილტ
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "პროფილის შეცვლა მიერთება/გათიშვისას"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
@@ -1713,7 +1713,7 @@ msgstr "პორტი"
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr ""
+msgstr "სერვერის 22-ე პორტი. ნაგულისხმევი ssh მიერთებებისთვის"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
@@ -1725,7 +1725,7 @@ msgstr "22"
 #: plugins/SSHManager/sshwidget.ui:142
 #, kde-format
 msgid "The private key to be used for this connection"
-msgstr ""
+msgstr "ამ მიერთებისთვის გამოყენებული პირადი გასაღები"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:148
@@ -1787,7 +1787,7 @@ msgstr "პროფილი"
 #: plugins/SSHManager/sshwidget.ui:234
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
-msgstr ""
+msgstr "გასააქტიურებელი პროფილი, როცა SSH სესია გაეშვება"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
 #: plugins/SSHManager/sshwidget.ui:272
@@ -1914,6 +1914,8 @@ msgid ""
 "A problem occurred when saving the output.\n"
 "%1"
 msgstr ""
+"პრობლემა გამოტანის შენახვისას.\n"
+"%1"
 
 #: schemas.cpp:1
 #, kde-format
@@ -1943,7 +1945,7 @@ msgstr "ნაივი"
 #: schemas.cpp:6
 #, kde-format
 msgid "Dark Pastels"
-msgstr ""
+msgstr "მუქი პასტელები"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2014,7 +2016,7 @@ msgstr "გაფრთხილება: "
 #: session/Session.cpp:517
 #, kde-format
 msgid "Could not find an interactive shell to start."
-msgstr ""
+msgstr "გასაშვებად ინტერაქტიული გარსი ვერ ვიპოვე."
 
 #: session/Session.cpp:523 session/Session.cpp:525
 #, kde-format
@@ -2022,11 +2024,13 @@ msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
+"'%1' ვერ ვიპოვე. სამაგიეროდ '%2' გაეშვება.  შეამოწმეთ თქვენი პროფილის "
+"პარამეტრები."
 
 #: session/Session.cpp:595
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
-msgstr ""
+msgstr "ვერ გავუშვი პროგრამა '%1' არგუმენტებით '%2'."
 
 #: session/Session.cpp:740
 #, kde-format
@@ -2426,7 +2430,7 @@ msgstr ""
 #: session/SessionController.cpp:2166
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr ""
+msgstr "აირჩიეთ ფაილები ZModem-ით ასატვირთად"
 
 #: session/SessionListModel.cpp:89
 #, kde-format
@@ -2484,7 +2488,7 @@ msgstr "ფანჯრის სათაურის სათაურის 
 #: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
+msgstr "ფოკუსი ტერმინალებზე, როცა თაგუნას კურსორს ზედ გადაატარებთ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
@@ -2505,7 +2509,7 @@ msgstr ""
 #: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
-msgstr ""
+msgstr "ყველა Konsole-ის ფანჯრის ერთ პროცესში გაშვება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:146
@@ -3394,7 +3398,7 @@ msgstr "%1-ე ჩანართზე გადართვა"
 #: ViewManager.cpp:553
 #, kde-format
 msgid "Semantic hints "
-msgstr ""
+msgstr "სემანტიკური მინიშნებები "
 
 #: ViewManager.cpp:569
 #, kde-format
@@ -3860,13 +3864,13 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:764
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>კომპლექსური ტექსტის განლაგება</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:767
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "კომპლექსური ტექსტის განლაგება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:791
@@ -4293,7 +4297,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "სემანტიკური მინიშნებები:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4338,7 +4342,7 @@ msgstr "ყოველთვის"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "წითელი შეცდომის ზოლები:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
@@ -4350,13 +4354,13 @@ msgstr "შეცდომის წითელი ფონი:"
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "ცვალებადი ზოლები:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
 #, kde-format
 msgid "Alternating background:"
-msgstr ""
+msgstr "ცვალებადი ფონი:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:29
