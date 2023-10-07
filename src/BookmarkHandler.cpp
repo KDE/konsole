@@ -47,7 +47,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
 #if QT_VERSION_MAJOR < 6
     KBookmarkManager *manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
 #else
-    KBookmarkManager *manager = KBookmarkManager::managerForFile(_file);
+    KBookmarkManager *manager = new KBookmarkManager(_file, this);
 #endif
     manager->setUpdate(true);
 

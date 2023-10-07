@@ -26,7 +26,7 @@ void BookMarkTest::testBookMarkURLs_data()
 #if QT_VERSION_MAJOR < 6
     auto bookmarkManager = KBookmarkManager::managerForFile(testData, QStringLiteral("KonsoleTest"));
 #else
-    auto bookmarkManager = KBookmarkManager::managerForFile(testData);
+    auto bookmarkManager = std::make_unique<KBookmarkManager>(testData);
 #endif
     auto groupUrlList = bookmarkManager->root().groupUrlList();
 
