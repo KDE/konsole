@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 00:45+0000\n"
+"POT-Creation-Date: 2023-10-07 00:44+0000\n"
 "PO-Revision-Date: 2023-09-09 10:29+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -3225,64 +3225,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Ebligi la generadon de bildetoj"
 
-#: terminalDisplay/TerminalDisplay.cpp:657
+#: terminalDisplay/TerminalDisplay.cpp:664
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Grando: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2252
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Ĉu vi certas ke vi volas alglui %1 signon?"
 msgstr[1] "Ĉu vi certas ke vi volas alglui %1 signojn?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2253
+#: terminalDisplay/TerminalDisplay.cpp:2260
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Konfirmi Algluon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fino de Teksto/Interrompo: povas eliri la nunan procezon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fino de Transdono: povas eliri la nunan procezon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Sonorilo: provos elsendi aŭdeblan averton"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: suspendas eliron"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2298
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Anstataŭaĵo/Suspendi: povas suspendi la nunan procezon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Fuĝo: uzata por manipuli fina staton"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Dosiera Disigilo/Ĉu: povas ĉesigi la nunan procezon"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3291,31 +3291,31 @@ msgstr ""
 "La teksto, kiun vi provas alglui, enhavas kaŝitajn stirsignojn, ĉu vi volas "
 "filtri ilin?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2330
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Konfirmi Paston"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2331
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Alglui &sen stirsignoj"
 
-#: terminalDisplay/TerminalDisplay.cpp:2325
+#: terminalDisplay/TerminalDisplay.cpp:2332
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Alglui ĉion"
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2333
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Nuligi"
 
-#: terminalDisplay/TerminalDisplay.cpp:2565
+#: terminalDisplay/TerminalDisplay.cpp:2572
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3325,17 +3325,17 @@ msgstr ""
 "<qt>Eligo estis <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
 "\">interrompita</a> premante Ctrl+S. Premu <b>Ctrl+Q</b> por rekomenci.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2620
+#: terminalDisplay/TerminalDisplay.cpp:2627
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ĉi tiu terminalo estas nurlegebla."
 
-#: terminalDisplay/TerminalDisplay.cpp:3015
+#: terminalDisplay/TerminalDisplay.cpp:3022
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Ŝanĝi &Dosierujon Al"
 
-#: terminalDisplay/TerminalDisplay.cpp:3048
+#: terminalDisplay/TerminalDisplay.cpp:3055
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Alglui Lokon"
