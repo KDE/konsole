@@ -302,7 +302,11 @@ KFileItem FileFilterHotSpot::fileItem() const
 void FileFilterHotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
     HotSpot::mouseEnterEvent(td, ev);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    requestThumbnail(ev->modifiers(), ev->globalPos());
+#else
     requestThumbnail(ev->modifiers(), ev->globalPosition().toPoint());
+#endif
 }
 
 void FileFilterHotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)

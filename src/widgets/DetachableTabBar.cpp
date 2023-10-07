@@ -58,7 +58,11 @@ void DetachableTabBar::mousePressEvent(QMouseEvent *event)
 void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
 {
     QTabBar::mouseMoveEvent(event);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    auto widgetAtPos = qApp->topLevelAt(event->globalPos);
+#else
     auto widgetAtPos = qApp->topLevelAt(event->globalPosition().toPoint());
+#endif
     if (widgetAtPos != nullptr) {
         if (window() == widgetAtPos->window()) {
             if (dragType != DragType::NONE) {
@@ -111,7 +115,11 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
         return;
     }
 
-    auto widgetAtPos = qApp->topLevelAt(event->globalPosition().toPoint());
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    const auto widgetAtPos = qApp->topLevelAt(event->globalPos);
+#else
+    const auto widgetAtPos = qApp->topLevelAt(event->globalPosition().toPoint());
+#endif
     if (widgetAtPos == nullptr) {
         if (count() != 1) {
             Q_EMIT detachTab(currentIndex());

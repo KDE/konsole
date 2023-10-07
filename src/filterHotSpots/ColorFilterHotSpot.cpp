@@ -30,7 +30,12 @@ ColorFilterHotSpot::ColorFilterHotSpot(int startLine, int startColumn, int endLi
 void ColorFilterHotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
     HotSpot::mouseEnterEvent(td, ev);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    _toolPos = ev->globalPos();
+#else
     _toolPos = ev->globalPosition().toPoint();
+#endif
+
     _canGenerateTooltip = true;
 
     QTimer::singleShot(100, this, [&] {
