@@ -30,8 +30,6 @@ Q_SIGNALS:
 
 private:
     void registerWidgetAndChildren(QWidget *widget);
-
-    QWidget *_compositeWidget;
 };
 
 } // namespace Konsole
