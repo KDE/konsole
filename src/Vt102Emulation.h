@@ -129,7 +129,7 @@ private:
     int tokenBufferPos;
 
 protected:
-    uint tokenBuffer[MAX_TOKEN_LENGTH]; // FIXME: overflow?
+    char32_t tokenBuffer[MAX_TOKEN_LENGTH]; // FIXME: overflow?
 
 private:
 #define MAXARGS 16

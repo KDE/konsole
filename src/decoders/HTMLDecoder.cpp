@@ -124,7 +124,7 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
         if (spaceCount < 2) {
             if ((characters[i].rendition.all & RE_EXTENDED_CHAR) != 0) {
                 ushort extendedCharLength = 0;
-                const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
+                const char32_t *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
                 if (chars != nullptr) {
                     text.append(QString::fromUcs4(chars, extendedCharLength));
                 }

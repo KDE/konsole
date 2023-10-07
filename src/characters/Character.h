@@ -168,7 +168,7 @@ public:
      * look up the unicode character sequence in the ExtendedCharTable used to
      * create the sequence.
      */
-    uint character;
+    char32_t character;
 
     /** A combination of RENDITION flags which specify options for drawing the character. */
     RenditionFlagsC rendition;
@@ -315,7 +315,7 @@ public:
         return characterWidth(ucs4);
     }
 
-    static int stringWidth(const uint *ucs4Str, int len)
+    static int stringWidth(const char32_t *ucs4Str, int len)
     {
         int w = 0;
         Hangul::SyllablePos hangulSyllablePos = Hangul::NotInSyllable;
@@ -335,15 +335,20 @@ public:
 
     inline static int stringWidth(const QString &str)
     {
-        QVector<uint> ucs4Str = str.toUcs4();
-        return stringWidth(ucs4Str.constData(), ucs4Str.length());
+        // Qt is deprecating the use of `uint` in some places for `char32_t`,
+        // but the ucs4 representation of QString is still `uint`. Those are
+        // mostly the same thing, so we can access via a reinterpret_cast.
+        // internally, Qt also uses char32_t for ucs4.
+        const auto ucs4Str = str.toUcs4();
+        const auto data = reinterpret_cast<const char32_t *>(str.constData());
+        return stringWidth(data, ucs4Str.length());
     }
 
     inline uint baseCodePoint() const
     {
         if (rendition.f.extended) {
             ushort extendedCharLength = 0;
-            const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(character, extendedCharLength);
+            const char32_t *chars = ExtendedCharTable::instance.lookupExtendedChar(character, extendedCharLength);
             // FIXME: Coverity-Dereferencing chars, which is known to be nullptr
             return chars[0];
         }

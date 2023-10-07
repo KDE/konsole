@@ -2753,7 +2753,7 @@ char Vt102Emulation::eraseChar() const
 }
 
 // return contents of the scan buffer
-static QString hexdump2(uint *s, int len)
+static QString hexdump2(char32_t *s, int len)
 {
     int i;
     char dump[128];
@@ -3075,7 +3075,7 @@ bool Vt102Emulation::processSixel(uint cc)
     default:
         break;
     }
-    uint *s = tokenBuffer;
+    char32_t *s = tokenBuffer;
     const int p = tokenBufferPos;
 
     if (!m_SixelStarted && (sixel() || s[0] == '!' || s[0] == '#')) {

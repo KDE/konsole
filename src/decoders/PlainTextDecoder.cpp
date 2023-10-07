@@ -103,16 +103,16 @@ void PlainTextDecoder::decodeLine(const Character *const characters, int count, 
         }
     }
 
-    // note:  we build up a QVector<uint> and send it to the text stream transformed into a QString
-    // rather than writing into the text stream a character at a time because it is more efficient.
-    //(since QTextStream always deals with QStrings internally anyway)
-    QVector<uint> characterBuffer;
+    // note:  we build up a QVector<char32_t> and send it to the text stream transformed into a //
+    // QString rather than writing into the text stream a character at a time because it is more
+    // efficient (since QTextStream always deals with QStrings internally anyway)
+    QVector<char32_t> characterBuffer;
     characterBuffer.reserve(count);
 
     for (int i = start; i < outputCount;) {
         if (characters[i].rendition.f.extended != 0) {
             ushort extendedCharLength = 0;
-            const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
+            const char32_t *chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
             if (chars != nullptr) {
                 for (uint nchar = 0; nchar < extendedCharLength; nchar++) {
                     characterBuffer.append(chars[nchar]);
