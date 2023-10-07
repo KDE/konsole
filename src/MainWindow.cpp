@@ -128,6 +128,7 @@ MainWindow::MainWindow()
     KCrash::initialize();
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 // Convenience function to get a space-separated list of all connected screens, copied from KWindowConfig
 static QString allConnectedScreens()
 {
@@ -146,7 +147,6 @@ static QString allConnectedScreens()
     return names.join(QLatin1Char(' '));
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 // Convenience function to get an appropriate config file key under which to
 // save window size, position, or maximization information.
 // Copied from KWindowConfig before https://invent.kde.org/frameworks/kconfig/-/merge_requests/184
