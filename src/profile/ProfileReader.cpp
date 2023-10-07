@@ -62,7 +62,11 @@ void ProfileReader::readProperties(const KConfig &config, Profile::Ptr profile)
         const QString name(QLatin1String(info.name));
 
         if (group.hasKey(name)) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+            profile->setProperty(info.property, group.readEntry(name, QVariant(info.defaultValue.type())));
+#else
             profile->setProperty(info.property, group.readEntry(name, QVariant(info.defaultValue.metaType())));
+#endif
         }
     }
 }
