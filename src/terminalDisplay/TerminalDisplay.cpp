@@ -1314,8 +1314,14 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
         // if the mouse has moved sufficiently, we will confirm
 
         const int distance = QApplication::startDragDistance();
-        if (ev->x() > _dragInfo.start.x() + distance || ev->x() < _dragInfo.start.x() - distance || ev->y() > _dragInfo.start.y() + distance
-            || ev->y() < _dragInfo.start.y() - distance) {
+
+        // Qt deprecated the ev->x() call, now we need to use ev->position(), but that uses floats instead
+        // of integers. We need to check if a rounding is correct or if we will need a better
+        // algorithm for it.
+        const int evX = std::round(ev->position().x());
+        const int evY = std::round(ev->position().y());
+        if (evX > _dragInfo.start.x() + distance || evX < _dragInfo.start.x() - distance || evY > _dragInfo.start.y() + distance
+            || evY < _dragInfo.start.y() - distance) {
             // we've left the drag square, we can start a real drag operation now
 
             clearSelection();
