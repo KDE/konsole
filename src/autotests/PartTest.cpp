@@ -91,7 +91,7 @@ void PartTest::testFd(bool runShell)
 
     // start a pty process
     KPtyProcess ptyProcess;
-    QStringList pingArgs = {QStringLiteral("-c"), QStringLiteral("3"), QStringLiteral("localhost")};
+    QStringList pingArgs = {QStringLiteral("-c"), QStringLiteral("1"), QStringLiteral("localhost")};
     ptyProcess.setProgram(pingExe, pingArgs);
     ptyProcess.setPtyChannels(KPtyProcess::AllChannels);
     ptyProcess.start();
