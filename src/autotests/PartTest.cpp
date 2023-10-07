@@ -91,7 +91,8 @@ void PartTest::testFd(bool runShell)
 
     // start a pty process
     KPtyProcess ptyProcess;
-    ptyProcess.setProgram(pingExe, QStringList() << QStringLiteral("localhost"));
+    QStringList pingArgs = {QStringLiteral("-c"), QStringLiteral("3"), QStringLiteral("localhost")};
+    ptyProcess.setProgram(pingExe, pingArgs);
     ptyProcess.setPtyChannels(KPtyProcess::AllChannels);
     ptyProcess.start();
     QVERIFY(ptyProcess.waitForStarted());
@@ -117,11 +118,11 @@ void PartTest::testFd(bool runShell)
 
     QPointer<QDialog> dialog = new QDialog();
     auto layout = new QVBoxLayout(dialog.data());
-    auto explanation = runShell ? QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")
-                                : QStringLiteral("Output of 'ping localhost' should appear standalone below for 5 seconds");
+    auto explanation = runShell ? QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 3 seconds")
+                                : QStringLiteral("Output of 'ping localhost' should appear standalone below for 3 seconds");
     layout->addWidget(new QLabel(explanation));
     layout->addWidget(terminalPart->widget());
-    QTimer::singleShot(5000, dialog.data(), &QDialog::close);
+    QTimer::singleShot(9000, dialog.data(), &QDialog::close);
     dialog.data()->exec();
 
     delete terminalPart;
