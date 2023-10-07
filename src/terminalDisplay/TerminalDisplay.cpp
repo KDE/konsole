@@ -1318,8 +1318,13 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
         // Qt deprecated the ev->x() call, now we need to use ev->position(), but that uses floats instead
         // of integers. We need to check if a rounding is correct or if we will need a better
         // algorithm for it.
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        const int evX = ev->x();
+        const int evY = ev->y();
+#else
         const int evX = std::round(ev->position().x());
         const int evY = std::round(ev->position().y());
+#endif
         if (evX > _dragInfo.start.x() + distance || evX < _dragInfo.start.x() - distance || evY > _dragInfo.start.y() + distance
             || evY < _dragInfo.start.y() - distance) {
             // we've left the drag square, we can start a real drag operation now
