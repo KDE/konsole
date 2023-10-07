@@ -2568,7 +2568,7 @@ msgstr "Mostra el títol de la finestra en la barra de títol"
 #: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "Dona focus als terminals quan el ratolí es moga sobre ells"
+msgstr "Dona focus als terminals quan el ratolí es moga sobre seu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
@@ -2668,8 +2668,8 @@ msgstr ""
 #, kde-format
 msgid "Allow users to access top menu through Alt+Key combination"
 msgstr ""
-"Permet als usuaris accedir al menú superior a través de la combinació Alt"
-"+Tecla"
+"Permet als usuaris accedir al menú superior a través de la combinació «Alt"
+"+Tecla»"
 
 #. i18n: ectx: label, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:27
