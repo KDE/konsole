@@ -11,15 +11,12 @@
 
 using namespace Konsole;
 
-ExtendedCharTable::ExtendedCharTable()
-    : _extendedCharTable(QHash<uint, uint *>())
-{
-}
+ExtendedCharTable::ExtendedCharTable() = default;
 
 ExtendedCharTable::~ExtendedCharTable()
 {
     // free all allocated character buffers
-    QHashIterator<uint, uint *> iter(_extendedCharTable);
+    QHashIterator<uint, char32_t *> iter(_extendedCharTable);
     while (iter.hasNext()) {
         iter.next();
         delete[] iter.value();
@@ -29,7 +26,7 @@ ExtendedCharTable::~ExtendedCharTable()
 // global instance
 ExtendedCharTable ExtendedCharTable::instance;
 
-uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort length, const pExtendedChars extendedChars)
+char32_t ExtendedCharTable::createExtendedChar(const char32_t *unicodePoints, ushort length, const pExtendedChars extendedChars)
 {
     // look for this sequence of points in the table
     uint hash = extendedCharHash(unicodePoints, length);
@@ -54,8 +51,8 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
                 // This is slow but should happen very rarely
                 QSet<uint> usedExtendedChars = extendedChars();
 
-                QHash<uint, uint *>::iterator it = _extendedCharTable.begin();
-                QHash<uint, uint *>::iterator itEnd = _extendedCharTable.end();
+                QHash<uint, char32_t *>::iterator it = _extendedCharTable.begin();
+                QHash<uint, char32_t *>::iterator itEnd = _extendedCharTable.end();
                 while (it != itEnd) {
                     if (usedExtendedChars.contains(it.key())) {
                         ++it;
@@ -72,7 +69,7 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
 
     // add the new sequence to the table and
     // return that index
-    auto buffer = new uint[length + 1];
+    auto buffer = new char32_t[length + 1];
     buffer[0] = length;
     std::copy_n(unicodePoints, length, &buffer[1]);
 
@@ -81,12 +78,12 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
     return hash;
 }
 
-uint *ExtendedCharTable::lookupExtendedChar(uint hash, ushort &length) const
+char32_t *ExtendedCharTable::lookupExtendedChar(uint hash, ushort &length) const
 {
     // look up index in table and if found, set the length
     // argument and return a pointer to the character sequence
 
-    uint *buffer = _extendedCharTable[hash];
+    char32_t *buffer = _extendedCharTable[hash];
     if (buffer != nullptr) {
         length = ushort(buffer[0]);
         return buffer + 1;
@@ -95,7 +92,7 @@ uint *ExtendedCharTable::lookupExtendedChar(uint hash, ushort &length) const
     return nullptr;
 }
 
-uint ExtendedCharTable::extendedCharHash(const uint *unicodePoints, ushort length) const
+uint ExtendedCharTable::extendedCharHash(const char32_t *unicodePoints, ushort length) const
 {
     uint hash = 0;
     for (ushort i = 0; i < length; i++) {
@@ -104,9 +101,9 @@ uint ExtendedCharTable::extendedCharHash(const uint *unicodePoints, ushort lengt
     return hash;
 }
 
-bool ExtendedCharTable::extendedCharMatch(uint hash, const uint *unicodePoints, ushort length) const
+bool ExtendedCharTable::extendedCharMatch(uint hash, const char32_t *unicodePoints, ushort length) const
 {
-    uint *entry = _extendedCharTable[hash];
+    char32_t *entry = _extendedCharTable[hash];
 
     // compare given length with stored sequence length ( given as the first ushort in the
     // stored buffer )

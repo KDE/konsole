@@ -138,7 +138,7 @@ bool Hangul::combinesWith(Character prevChar, uint c)
         updateHangulSyllablePos(syllablePos, prev);
     } else {
         ushort extendedCharLength;
-        const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(prevChar.character, extendedCharLength);
+        const char32_t *oldChars = ExtendedCharTable::instance.lookupExtendedChar(prevChar.character, extendedCharLength);
         if (oldChars == nullptr) {
             return false;
         } else {

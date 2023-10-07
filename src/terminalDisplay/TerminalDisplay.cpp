@@ -2114,7 +2114,7 @@ QChar TerminalDisplay::charClass(const Character &ch) const
 {
     if (ch.rendition.f.extended != 0) {
         ushort extendedCharLength = 0;
-        const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
+        const char32_t *chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
         if ((chars != nullptr) && extendedCharLength > 0) {
             const QString s = QString::fromUcs4(chars, extendedCharLength);
             if (_wordCharacters.contains(s, Qt::CaseInsensitive)) {
@@ -3229,7 +3229,7 @@ int TerminalDisplay::bidiMap(Character *screenline,
         if (char_value.rendition.f.extended != 0) {
             // sequence of characters
             ushort extendedCharLength = 0;
-            const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(char_value.character, extendedCharLength);
+            const char32_t *chars = ExtendedCharTable::instance.lookupExtendedChar(char_value.character, extendedCharLength);
             if (chars != nullptr) {
                 Q_ASSERT(extendedCharLength > 1);
                 line += QString::fromUcs4(chars, extendedCharLength);

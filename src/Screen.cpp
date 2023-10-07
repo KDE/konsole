@@ -1178,10 +1178,10 @@ void Screen::displayCharacter(uint c)
 
         if (c >= 0x1f3fb && c <= 0x1f3ff) {
             // Emoji modifier Fitzpatrick - changes skin color
-            uint currentUcs4 = currentChar.character;
+            char32_t currentUcs4 = currentChar.character;
             if (currentChar.rendition.f.extended == 1) {
                 ushort extendedCharLength;
-                const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
+                const char32_t *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
                 currentUcs4 = oldChars[extendedCharLength - 1];
             }
             if (currentUcs4 < 0x261d || (currentUcs4 > 0x270d && currentUcs4 < 0x1efff) || currentUcs4 > 0x1faff) {
@@ -1199,7 +1199,7 @@ void Screen::displayCharacter(uint c)
                 goto notcombine;
             }
             ushort extendedCharLength;
-            const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
+            const char32_t *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
             if (oldChars[extendedCharLength - 1] != 0x200d) {
                 goto notcombine;
             }
@@ -1211,7 +1211,7 @@ void Screen::displayCharacter(uint c)
         }
 
         if (currentChar.rendition.f.extended == 0) {
-            const uint chars[2] = {currentChar.character, c};
+            const char32_t chars[2] = {currentChar.character, c};
             currentChar.rendition.f.extended = 1;
             auto extChars = [this]() {
                 return usedExtendedChars();
@@ -1232,12 +1232,12 @@ void Screen::displayCharacter(uint c)
             }
         } else {
             ushort extendedCharLength;
-            const uint *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
+            const char32_t *oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
             Q_ASSERT(extendedCharLength > 1);
             Q_ASSERT(oldChars);
             if (((oldChars) != nullptr) && extendedCharLength < 10) {
                 Q_ASSERT(extendedCharLength < 65535); // redundant due to above check
-                auto chars = std::make_unique<uint[]>(extendedCharLength + 1);
+                auto chars = std::make_unique<char32_t[]>(extendedCharLength + 1);
                 std::copy_n(oldChars, extendedCharLength, chars.get());
                 chars[extendedCharLength] = c;
                 auto extChars = [this]() {

@@ -18,7 +18,7 @@ namespace Konsole
 /**
  * A table which stores sequences of unicode characters, referenced
  * by hash keys.  The hash key itself is the same size as a unicode
- * character ( uint ) so that it can occupy the same space in
+ * character ( char32_t ) so that it can occupy the same space in
  * a structure.
  */
 class ExtendedCharTable
@@ -41,7 +41,7 @@ public:
      * @param unicodePoints An array of unicode character points
      * @param length Length of @p unicodePoints
      */
-    uint createExtendedChar(const uint *unicodePoints, ushort length, const pExtendedChars extendedChars);
+    char32_t createExtendedChar(const char32_t *unicodePoints, ushort length, const pExtendedChars extendedChars);
     /**
      * Looks up and returns a pointer to a sequence of unicode characters
      * which was added to the table using createExtendedChar().
@@ -52,21 +52,21 @@ public:
      *
      * @return A unicode character sequence of size @p length.
      */
-    uint *lookupExtendedChar(uint hash, ushort &length) const;
+    char32_t *lookupExtendedChar(uint hash, ushort &length) const;
 
     /** The global ExtendedCharTable instance. */
     static ExtendedCharTable instance;
 
 private:
     // calculates the hash key of a sequence of unicode points of size 'length'
-    uint extendedCharHash(const uint *unicodePoints, ushort length) const;
+    uint extendedCharHash(const char32_t *unicodePoints, ushort length) const;
     // tests whether the entry in the table specified by 'hash' matches the
     // character sequence 'unicodePoints' of size 'length'
-    bool extendedCharMatch(uint hash, const uint *unicodePoints, ushort length) const;
+    bool extendedCharMatch(uint hash, const char32_t *unicodePoints, ushort length) const;
     // internal, maps hash keys to character sequence buffers.  The first uint
     // in each value is the length of the buffer, followed by the uints in the buffer
     // themselves.
-    QHash<uint, uint *> _extendedCharTable;
+    QHash<uint, char32_t *> _extendedCharTable;
 };
 
 }
