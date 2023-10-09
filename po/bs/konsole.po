@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
 "PO-Revision-Date: 2014-02-12 22:52+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -2182,7 +2182,7 @@ msgstr "Nije moguće pokrenuti program '%1' s argumentima '%2'."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina na sesiji '%1'"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2215,12 +2215,12 @@ msgstr "Program '%1' se srušio."
 msgid "Program '%1' exited with status %2."
 msgstr "Program '%1' završio je sa statusom %2."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem napredak"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

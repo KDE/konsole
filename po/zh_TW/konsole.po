@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
 "PO-Revision-Date: 2023-09-12 02:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -2075,7 +2075,7 @@ msgstr "無法啟動程式 %1，參數為 %2。"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2110,12 +2110,12 @@ msgstr "程式 %1 當掉了。"
 msgid "Program '%1' exited with status %2."
 msgstr "程式 %1 以 %2 狀態結束。"
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 進度"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "分頁 %1 目前活躍中（於工作階段 %2）"

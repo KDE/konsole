@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
 "PO-Revision-Date: 2023-03-21 14:28+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -2105,7 +2105,7 @@ msgstr "Tókst ekki að ræsa forritið '%1' með viðföngum '%2'."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Þögn í '%1' (seta '%2')"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2142,12 +2142,12 @@ msgstr "Forritið '%1' hrundi."
 msgid "Program '%1' exited with status %2."
 msgstr "Forritið '%1' hætti með stöðuna %2."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Framvinda ZModem"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Virkni í '%1' (seta '%2')"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
-"PO-Revision-Date: 2023-07-23 21:01+0200\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"PO-Revision-Date: 2023-10-08 23:31+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -1303,7 +1303,7 @@ msgstr "일반"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "메모리"
 
 #: MainWindow.cpp:987
 #, kde-format
@@ -1886,7 +1886,7 @@ msgstr "출력 크기 조정(&S)"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "내장"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
@@ -2082,7 +2082,7 @@ msgstr "프로그램 '%1'을(를) 인자 '%2'을(를) 사용하여 시작할 수
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1'에서 응답 없음(세션 '%2')"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2121,12 +2121,12 @@ msgstr ""
 "프로그램 '%1'이(가) 상태 %2(으)로 끝났습니다.|/|프로그램 '%1'$[이가 %1] 상태 "
 "%2$[으 %2]로 끝났습니다."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 진행 상황"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1'의 활동(세션 '%2')"
@@ -2710,14 +2710,14 @@ msgstr "일치하는 텍스트가 강조될 지 설정합니다"
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
-msgstr ""
+msgstr "자식 cgroup을 생성할 때 탭을 생성할지 여부 설정"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "스로틀링을 시작할 메모리 사용량 설정"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2812,10 +2812,9 @@ msgstr "스크롤백 파일에 다음 폴더 사용"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "탭 모니터링"
+msgstr "메모리 모니터링 활성화:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2829,18 +2828,23 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"변경 사항은 다시 시작한 후에 적용됩니다. 이 옵션을 사용하면 Konsole에서\n"
+"메모리 사용량이 지정한 값을 초과할 때 systemd-oomd에 메모리를 많이 사용하는\n"
+"프로세스를 강제 종료하도록 지시합니다. 메모: 이 옵션을 활성화하면\n"
+"큰 용량의 메모리를 사용할 때 더 느려질 수도 있으며 너무 낮은 값을 지정하면\n"
+"Konsole이 예상하지 못하게 종료될 수도 있습니다."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "메모리 제한:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:29
@@ -3915,19 +3919,16 @@ msgstr "어둡게 하기 강도:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "색상:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "커서를 그릴 색상을 선택하십시오"
+msgstr "경계선을 그릴 색상을 선택하십시오"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -3937,10 +3938,9 @@ msgstr "비활성 터미널:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "비활성 터미널:"
+msgstr "활성 터미널:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -3996,16 +3996,15 @@ msgstr "어둡게"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "창 활성화 여부를 색을 어둡게 하여 나타내기"
+msgstr "창 활성화 여부를 색을 경계선을 그려서 나타내기"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "경계선"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4194,13 +4193,13 @@ msgstr "이름이 \"%1\"인 프로필이 이미 존재합니다."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "프로필 이름이 최대 허용된 길이를 초과합니다(%1)."
 
 #: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "프로필 이름에 강조된 글자를 사용할 수 없습니다: %1"
 
 #: widgets/EditProfileDialog.cpp:419
 #, kde-format

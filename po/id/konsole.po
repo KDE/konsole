@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
 "PO-Revision-Date: 2022-09-27 18:12+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -2098,7 +2098,7 @@ msgstr "Tak dapat menjalankan program '%1' dengan argumen '%2'."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Diam di '%1' (Sesi '%2')"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2131,12 +2131,12 @@ msgstr "Program '%1' mogok."
 msgid "Program '%1' exited with status %2."
 msgstr "Program '%1' keluar dengan status %2."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progres ZModem"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitas di '%1' (Sesi '%2')"

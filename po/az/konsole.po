@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
 "PO-Revision-Date: 2023-09-15 16:56+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -2096,7 +2096,7 @@ msgstr "\"%1\" proqramı \"%2\" arqumenti ilə başladıla bilmədi."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "\"%1\" zamanı susdurun (Sessiya \"%2\")"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2133,12 +2133,12 @@ msgstr "\"%1\" proqramında qəza baş verdi"
 msgid "Program '%1' exited with status %2."
 msgstr "\"%1\" proqramı %2 vəziyyətində. bağlandı."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem əməliyyatı"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "\"%1\" zamanı fəaliyyət (Sessiya \"%2\")"

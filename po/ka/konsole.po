@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
-"PO-Revision-Date: 2023-09-02 04:49+0200\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"PO-Revision-Date: 2023-10-08 05:47+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2028,7 +2028,7 @@ msgstr "გაფრთხილება: "
 #: session/Session.cpp:517
 #, kde-format
 msgid "Could not find an interactive shell to start."
-msgstr "გასაშვებად ინტერაქტიული გარსი ვერ ვიპოვე"
+msgstr "გასაშვებად ინტერაქტიული გარსი ვერ ვიპოვე."
 
 #: session/Session.cpp:523 session/Session.cpp:525
 #, kde-format
@@ -2042,14 +2042,14 @@ msgstr ""
 #: session/Session.cpp:595
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
-msgstr "ვერ გავუშვი პროგრამა '%1' არგუმენტებით '%2'"
+msgstr "ვერ გავუშვი პროგრამა '%1' არგუმენტებით '%2'."
 
 #: session/Session.cpp:749
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ჩაჩუმება '%1'-ში (სესია '%2')"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2081,12 +2081,12 @@ msgstr "პროგრამა %1 ავარიულად დასრუ�
 msgid "Program '%1' exited with status %2."
 msgstr "პროგრამა %1 ავარიულად დასრულდა, კოდით %2."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem -ის მიმდინარეობა"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "აქტივობა '%1'-ში (სესია '%2')"
@@ -2498,9 +2498,9 @@ msgstr "ფანჯრის სათაურის სათაურის 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
-#, kde-format
+#, fuzzy, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
+msgstr "ფოკუსი ტერმინალებზე, როცა თაგუნას კურსორს ზედ გადაატარებთ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
@@ -3454,7 +3454,7 @@ msgstr "%1-ე ჩანართზე გადართვა"
 #: ViewManager.cpp:553
 #, kde-format
 msgid "Semantic hints "
-msgstr "სემანტიკური მინიშნებები"
+msgstr "სემანტიკური მინიშნებები "
 
 #: ViewManager.cpp:569
 #, kde-format

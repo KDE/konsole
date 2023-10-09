@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
 "PO-Revision-Date: 2023-04-29 12:15+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -2113,7 +2113,7 @@ msgstr "Das Programm „%1“ mit den Argumenten „%2“ kann nicht gestartet w
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Keine Aktivität in „%1“ (Sitzung „%2“)"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2150,12 +2150,12 @@ msgstr "Das Programm „%1“ ist abgestürzt."
 msgid "Program '%1' exited with status %2."
 msgstr "Das Programm „%1“ wurde mit Status %2 beendet."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-Fortschritt"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivität in „%1“ (Sitzung „%2“)"

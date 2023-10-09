@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -2203,7 +2203,7 @@ msgstr "Níorbh fhéidir ríomhchlár '%1' a thosú le hargóintí '%2'."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tost i seisiún '%1'"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, fuzzy, kde-format
@@ -2236,12 +2236,12 @@ msgstr "Thuairteáil ríomhchlár '%1'."
 msgid "Program '%1' exited with status %2."
 msgstr "Críochnaíodh clár '%1' le stádas %2."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Dul chun cinn ZModem"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

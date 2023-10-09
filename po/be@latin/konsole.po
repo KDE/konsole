@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-07 00:44+0000\n"
+"POT-Creation-Date: 2023-10-09 00:44+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -2136,7 +2136,7 @@ msgstr "Nie ŭdalosia zapuscić \"%1\" z arhumientami \"%2\"."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Biazdziejnasć u \"%1\" (sieans \"%2\")"
 
-#: session/Session.cpp:750 session/Session.cpp:1961
+#: session/Session.cpp:750 session/Session.cpp:1962
 #: session/SessionController.cpp:369 session/SessionController.cpp:1878
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
@@ -2175,12 +2175,12 @@ msgstr "Prahrama \"%1\" avaryjna zaviaršyla praces."
 msgid "Program '%1' exited with status %2."
 msgstr "Prahrama \"%1\" zakrylasia sa statusam %2."
 
-#: session/Session.cpp:1620
+#: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Chod vykanannia pracesaŭ ZModem"
 
-#: session/Session.cpp:1960
+#: session/Session.cpp:1961
 #, fuzzy, kde-format
 #| msgid "Activity in %1 (Session %2)"
 msgid "Activity in '%1' (Session '%2')"
