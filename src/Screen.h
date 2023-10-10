@@ -820,8 +820,8 @@ private:
     int _cuY;
 
     // select mode cursor location
-    int _selCuX;
-    int _selCuY;
+    int _selCuX{};
+    int _selCuY{};
 
     // cursor color and rendition info
     CharacterColor _currentForeground;
