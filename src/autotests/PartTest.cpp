@@ -125,7 +125,6 @@ void PartTest::testFd(bool runShell)
     QTimer::singleShot(9000, dialog.data(), &QDialog::close);
     dialog.data()->exec();
 
-    delete terminalPart;
     delete dialog.data();
     ptyProcess.kill();
     ptyProcess.waitForFinished(1000);
