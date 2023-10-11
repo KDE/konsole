@@ -40,6 +40,7 @@ ecm_add_tests(
     CharacterTest.cpp
     CharacterWidthTest.cpp
     HotSpotFilterTest.cpp
+    ProcessInfoTest.cpp
     ProfileTest.cpp
     PtyTest.cpp
     ScreenTest.cpp
