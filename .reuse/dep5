@@ -3,6 +3,17 @@ Upstream-Name: konsole
 Upstream-Contact: Kurt Hindenburg <khindenburg@kde.org>
 Source: https://invent.kde.org/utilities/konsole
 
+Files: README.md data/keyboard-layouts/README-KeyTab data/keyboard-layouts/README-KeyTab-original
+Copyright: None
+License: CC0-1.0
+
+Files: data/keyboard-layouts/* data/layouts/* data/color-schemes/* data/konsole.knsrc data/konsolerc
+Copyright: None
+License: CC0-1.0
+
+Files: tests/README.md tests/README.xterm
+Copyright: None
+License: CC0-1.0
 
 Files: .gitignore .git-blame-ignore-revs .krazy .editorconfig
 Copyright: None
