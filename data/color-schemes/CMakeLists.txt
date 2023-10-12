@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2007 Robert Knight <robertknight@gmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 # Note some color schemes are deliberately not installed
 # at present
 

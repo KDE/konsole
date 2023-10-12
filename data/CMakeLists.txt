@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2007 Robert Knight <robertknight@gmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
 
 add_subdirectory( color-schemes )
 add_subdirectory( keyboard-layouts )
