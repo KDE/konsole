@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: Tomaz Canabrava
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 # cmake-options : -DCMAKE_DISABLE_FIND_PACKAGE_LibKonq=TRUE or FALSE; default is FALSE
 
 add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")

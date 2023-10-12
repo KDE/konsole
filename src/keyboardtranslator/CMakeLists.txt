@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Tomaz Canabrava <tcanabrava@kde.org>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 add_library(keyboardtranslator
     STATIC
     FallbackKeyboardTranslator.cpp

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2020 Gustavo Carneiro <gcarneiroa@hotmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
 
 set(konsolecharacters_SRCS
     CharacterWidth.cpp

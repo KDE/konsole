@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2023 Waqar Ahmed <waqar.17a@gmail.com>
+#                         2014 Kurt Hindenburg <kurt.hindenburg@gmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 include(ECMAddTests)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
