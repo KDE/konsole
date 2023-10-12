@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2013 Kurt Hindenburg <kurt.hindenburg@gmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 add_subdirectory(demo_konsolepart)
 
 include(ECMMarkAsTest)

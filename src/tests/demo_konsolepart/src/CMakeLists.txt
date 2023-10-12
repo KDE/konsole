@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2017 Kurt Hindenburg <kurt.hindenburg@gmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 set(demo_konsolepart_SRCS
     main.cpp
     demo_konsolepart.cpp

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2018 Mariusz Glebocki <mglb@arccos-1.net>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 ### uni2characterwidth
 ###
 ###   Converts Unicode Character Database files into character width lookup
