@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2021 Tomaz Canabrava <tcanabrava@kde.org>
+#
+# SPDX-License-Identifier: BSD-2-Clause
 
 ki18n_wrap_ui(EXTRA_SSHPLUGIN_SRCS sshwidget.ui)
 

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2022 Tomaz Canabrava <tcanabrava@kde.org>
+#
+# SPDX-License-Identifier: BSD-2-Clause
 
 ki18n_wrap_ui(EXTRA_QUICKCOMMANDSPLUGIN_SRCS qcwidget.ui)
 
