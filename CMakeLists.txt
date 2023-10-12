@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2014 <kurt.hindenburg@gmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 # Konsole project
 
 # KDE Application Version, managed by release script

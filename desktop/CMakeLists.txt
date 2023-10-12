@@ -1,4 +1,6 @@
-
+# SPDX-FileCopyrightText: 2017 Ahmad Samir <a.samirh78@gmail.com>
+#
+# SPDX-License-Identifier: BSD-2-Clause
 
 ########### install files ###############
 

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Tobias Fella <fella@posteo.de>
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
 add_executable(konsole_globalaccel
     konsole_globalaccel.cpp
 )
