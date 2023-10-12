@@ -22,3 +22,7 @@ License: CC0-1.0
 Files: desktop/konsole.qrc
 Copyright: None
 License: CC0-1.0
+
+Files: po/*
+Copyright: KDE Translation Contributors <kde-i18n-doc@kde.org> (see each file for details)
+License: GPL-2.0-or-later
