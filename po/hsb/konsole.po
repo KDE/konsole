@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"POT-Creation-Date: 2023-10-14 00:45+0000\n"
 "PO-Revision-Date: 2021-10-15 10:45+0200\n"
 "Last-Translator: Prof. Dr. Eduard Werner <e.werner@rz.uni-leipzig.de>\n"
 "Language-Team: Upper Sorbian\n"
@@ -3484,57 +3484,69 @@ msgstr ""
 #: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr ""
+
+#: ViewManager.cpp:298
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Toggle zoom-maximize current view"
+msgstr ""
+
+#: ViewManager.cpp:306
+#, kde-format
+msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Jězdnik naprawo přesunyć"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Jězdnik nalěwo přesunyć"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:323
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:330
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr ""
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:349
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Dźi k jězdnikej %1"
 
-#: ViewManager.cpp:553
+#: ViewManager.cpp:562
 #, kde-format
 msgid "Semantic hints "
 msgstr ""
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:578
 #, fuzzy, kde-format
 #| msgid "&Number of lines: "
 msgid "Line numbers "
 msgstr "&Kelko linkow:"
 
-#: ViewManager.cpp:1134
+#: ViewManager.cpp:1143
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3542,13 +3554,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Layout jězdnikow do dataje zawěsćić"
 
-#: ViewManager.cpp:1136 ViewManager.cpp:1223
+#: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1149
+#: ViewManager.cpp:1158
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3556,7 +3568,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1210
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3564,7 +3576,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1221
+#: ViewManager.cpp:1230
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"

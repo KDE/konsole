@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"POT-Creation-Date: 2023-10-14 00:45+0000\n"
 "PO-Revision-Date: 2023-09-10 18:03+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -3492,70 +3492,86 @@ msgid "Toggle maximize current view"
 msgstr "தற்போதைய காட்சிப்பகுதியின் அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
 
 #: ViewManager.cpp:297
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Toggle maximize current view"
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "தற்போதைய காட்சிப்பகுதியின் அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
+
+#: ViewManager.cpp:298
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Toggle maximize current view"
+msgctxt "@action:inmenu"
+msgid "Toggle zoom-maximize current view"
+msgstr "தற்போதைய காட்சிப்பகுதியின் அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
+
+#: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "கீற்றை வலது பக்கமாக நகர்த்து"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "கீற்றை இடது பக்கமாக நகர்த்து"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "பொருளறி அம்சங்களை அமை (bash)"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "பொருளறி கருவித்துப்புகளை நிலைமாற்று"
 
-#: ViewManager.cpp:323
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "வரியெண்கள் காட்டப்படுவதை நிலைமாற்று"
 
-#: ViewManager.cpp:330
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "அனைத்து காட்சிப்பகுதிகளையும் ஒரே அளவாக்கு"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:349
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "%1-ஆம் கீற்றுக்கு தாவு"
 
-#: ViewManager.cpp:553
+#: ViewManager.cpp:562
 #, kde-format
 msgid "Semantic hints "
 msgstr "பொருளறித் துப்புகள் "
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:578
 #, kde-format
 msgid "Line numbers "
 msgstr "வரியேண்கள்"
 
-#: ViewManager.cpp:1134
+#: ViewManager.cpp:1143
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "கீற்றுகளின் தளவமைப்பை சேமித்தல்"
 
-#: ViewManager.cpp:1136 ViewManager.cpp:1223
+#: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "கான்சோல் காட்சிப்பகுதி தளவமைப்பு (*.json)"
 
-#: ViewManager.cpp:1149
+#: ViewManager.cpp:1158
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3565,7 +3581,7 @@ msgstr ""
 "தளவமைப்பை சேமிப்பதில் சிக்கல் ஏற்பட்டது.\n"
 "%1"
 
-#: ViewManager.cpp:1210
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3575,7 +3591,7 @@ msgstr ""
 "தளவமைப்பை ஏற்றுவதில் சிக்கல் ஏற்பட்டது.\n"
 "%1"
 
-#: ViewManager.cpp:1221
+#: ViewManager.cpp:1230
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

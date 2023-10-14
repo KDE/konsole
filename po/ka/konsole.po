@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"POT-Creation-Date: 2023-10-14 00:45+0000\n"
 "PO-Revision-Date: 2023-10-08 05:47+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -3410,70 +3410,86 @@ msgid "Toggle maximize current view"
 msgstr "მიმდინარე ხედის  გაზრდის გადართვა"
 
 #: ViewManager.cpp:297
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Toggle maximize current view"
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "მიმდინარე ხედის  გაზრდის გადართვა"
+
+#: ViewManager.cpp:298
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Toggle maximize current view"
+msgctxt "@action:inmenu"
+msgid "Toggle zoom-maximize current view"
+msgstr "მიმდინარე ხედის  გაზრდის გადართვა"
+
+#: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "ჩანართის მარჯვნივ გადატანა"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "ჩანართის მარცხნივ გადატანა"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:323
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:330
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "ყველა ხედის ტოლი ზომა"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:349
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "%1-ე ჩანართზე გადართვა"
 
-#: ViewManager.cpp:553
+#: ViewManager.cpp:562
 #, kde-format
 msgid "Semantic hints "
 msgstr "სემანტიკური მინიშნებები "
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:578
 #, kde-format
 msgid "Line numbers "
 msgstr "ხაზის ნომრები "
 
-#: ViewManager.cpp:1134
+#: ViewManager.cpp:1143
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "ჩანართების განლაგების შენახვა"
 
-#: ViewManager.cpp:1136 ViewManager.cpp:1223
+#: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole -ის ხედის განლაგება (*.json)"
 
-#: ViewManager.cpp:1149
+#: ViewManager.cpp:1158
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3483,7 +3499,7 @@ msgstr ""
 "შეცდომა განლაგების შენახვისას.\n"
 "%1"
 
-#: ViewManager.cpp:1210
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3493,7 +3509,7 @@ msgstr ""
 "შეცდომა განლაგების ჩატვირთვისას.\n"
 "%1"
 
-#: ViewManager.cpp:1221
+#: ViewManager.cpp:1230
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

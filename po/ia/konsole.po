@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"POT-Creation-Date: 2023-10-14 00:45+0000\n"
 "PO-Revision-Date: 2023-09-14 23:55+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -3505,70 +3505,86 @@ msgid "Toggle maximize current view"
 msgstr "Commuta maximisar vista currente"
 
 #: ViewManager.cpp:297
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Toggle maximize current view"
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "Commuta maximisa vista currente"
+
+#: ViewManager.cpp:298
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Toggle maximize current view"
+msgctxt "@action:inmenu"
+msgid "Toggle zoom-maximize current view"
+msgstr "Commuta maximisar vista currente"
+
+#: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Move scheda a dextera"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Move scheda a sinistra"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Integration semntic de configuration (bash)"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Commuta monstrator de suggestiones semantic"
 
-#: ViewManager.cpp:323
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Commuta monstrator de numeros de linea"
 
-#: ViewManager.cpp:330
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Grandor equal a omne vistas"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:349
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Passa  a scheda %1"
 
-#: ViewManager.cpp:553
+#: ViewManager.cpp:562
 #, kde-format
 msgid "Semantic hints "
 msgstr "Suggestiones Semantic"
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:578
 #, kde-format
 msgid "Line numbers "
 msgstr "Numeros de linea"
 
-#: ViewManager.cpp:1134
+#: ViewManager.cpp:1143
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Salveguarda disposition de scheda"
 
-#: ViewManager.cpp:1136 ViewManager.cpp:1223
+#: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole View Layout (*.json)"
 
-#: ViewManager.cpp:1149
+#: ViewManager.cpp:1158
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3578,7 +3594,7 @@ msgstr ""
 "Un problema occurreva durante que il salveguardava le disposition (Layout).\n"
 "%1"
 
-#: ViewManager.cpp:1210
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3588,7 +3604,7 @@ msgstr ""
 "Un problema occurreva durante que il cargava le disposition (Layout).\n"
 "%1"
 
-#: ViewManager.cpp:1221
+#: ViewManager.cpp:1230
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

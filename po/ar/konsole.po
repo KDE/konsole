@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"POT-Creation-Date: 2023-10-14 00:45+0000\n"
 "PO-Revision-Date: 2023-05-17 20:01+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -3483,70 +3483,86 @@ msgid "Toggle maximize current view"
 msgstr "بدّل تكبير العرض الحالي"
 
 #: ViewManager.cpp:297
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Toggle maximize current view"
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "بدّل تكبير العرض الحالي"
+
+#: ViewManager.cpp:298
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Toggle maximize current view"
+msgctxt "@action:inmenu"
+msgid "Toggle zoom-maximize current view"
+msgstr "بدّل تكبير العرض الحالي"
+
+#: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "حرك اللسان لليمين"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "حرك اللسان لليسار"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "ضبط التكامل الدلالي (باش)"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "بدّل بين إظهار التلميحات الدلالية"
 
-#: ViewManager.cpp:323
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "بدّل بين عرض أرقام الأسطر"
 
-#: ViewManager.cpp:330
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "حجم متساوي لجميع العروض"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:349
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "انتقل إلى اللسان %1"
 
-#: ViewManager.cpp:553
+#: ViewManager.cpp:562
 #, kde-format
 msgid "Semantic hints "
 msgstr "التلميحات الدلالية "
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:578
 #, kde-format
 msgid "Line numbers "
 msgstr "أرقام الأسطر "
 
-#: ViewManager.cpp:1134
+#: ViewManager.cpp:1143
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "احفظ تخطيط الألسنة"
 
-#: ViewManager.cpp:1136 ViewManager.cpp:1223
+#: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "تخطيط عرض كونسول (*.json)"
 
-#: ViewManager.cpp:1149
+#: ViewManager.cpp:1158
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3556,7 +3572,7 @@ msgstr ""
 "حصلت مشكلة أثناء حفظ التخطيط.\n"
 "%1"
 
-#: ViewManager.cpp:1210
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3566,7 +3582,7 @@ msgstr ""
 "حصلت مشكلة أثناء تحميل التخطيط.\n"
 "%1"
 
-#: ViewManager.cpp:1221
+#: ViewManager.cpp:1230
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

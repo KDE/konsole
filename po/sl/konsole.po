@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"POT-Creation-Date: 2023-10-14 00:45+0000\n"
 "PO-Revision-Date: 2023-09-09 07:03+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -3500,70 +3500,86 @@ msgid "Toggle maximize current view"
 msgstr "Preklopi v maksimalni trenutni pogled"
 
 #: ViewManager.cpp:297
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Toggle maximize current view"
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "Preklopi v maksimalni trenutni pogled"
+
+#: ViewManager.cpp:298
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Toggle maximize current view"
+msgctxt "@action:inmenu"
+msgid "Toggle zoom-maximize current view"
+msgstr "Preklopi v maksimalni trenutni pogled"
+
+#: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Premakni zavihek na desno"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Premakni zavihek na levo"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Nastavi semantićno integracijo (bash)"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Preklopi prikaz semantičnih namigov"
 
-#: ViewManager.cpp:323
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Preklopi prikaz številk vrstic"
 
-#: ViewManager.cpp:330
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Enaka velikost za vse poglede"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:349
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Preklopi na zavihek %1"
 
-#: ViewManager.cpp:553
+#: ViewManager.cpp:562
 #, kde-format
 msgid "Semantic hints "
 msgstr "Semantični namigi "
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:578
 #, kde-format
 msgid "Line numbers "
 msgstr "Številke vrstic "
 
-#: ViewManager.cpp:1134
+#: ViewManager.cpp:1143
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Shrani razporeditev zavihka"
 
-#: ViewManager.cpp:1136 ViewManager.cpp:1223
+#: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole View Layout (*.json)"
 
-#: ViewManager.cpp:1149
+#: ViewManager.cpp:1158
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3573,7 +3589,7 @@ msgstr ""
 "Med shranjevanjem postavitve je prišlo do težave.\n"
 "%1"
 
-#: ViewManager.cpp:1210
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3583,7 +3599,7 @@ msgstr ""
 "Med nalaganjem postavitve je prišlo do težave.\n"
 "%1"
 
-#: ViewManager.cpp:1221
+#: ViewManager.cpp:1230
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

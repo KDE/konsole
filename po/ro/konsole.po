@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"POT-Creation-Date: 2023-10-14 00:45+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -3530,60 +3530,76 @@ msgid "Toggle maximize current view"
 msgstr "Comută maximizarea vizualizării actuale"
 
 #: ViewManager.cpp:297
+#, fuzzy, kde-format
+#| msgctxt "@action Shortcut entry"
+#| msgid "Toggle maximize current view"
+msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "Comută maximizarea vizualizării actuale"
+
+#: ViewManager.cpp:298
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "Toggle maximize current view"
+msgctxt "@action:inmenu"
+msgid "Toggle zoom-maximize current view"
+msgstr "Comută maximizarea vizualizării actuale"
+
+#: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Mută fila la dreapta"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Mută fila la stânga"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:323
+#: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:330
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr ""
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:349
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Schimbă la fila %1"
 
-#: ViewManager.cpp:553
+#: ViewManager.cpp:562
 #, fuzzy, kde-format
 #| msgid "Text interaction"
 msgid "Semantic hints "
 msgstr "Interacțiune cu textul"
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:578
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line numbers "
 msgstr "Număr constant de linii: "
 
-#: ViewManager.cpp:1134
+#: ViewManager.cpp:1143
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3591,14 +3607,14 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Salvează aranjamentul filelor în fișier"
 
-#: ViewManager.cpp:1136 ViewManager.cpp:1223
+#: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, fuzzy, kde-format
 #| msgid "Konsole View Layout (*.json)"
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Aranjament de vizualizări Konsolă (*.json)"
 
-#: ViewManager.cpp:1149
+#: ViewManager.cpp:1158
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the Layout.\n"
@@ -3611,7 +3627,7 @@ msgstr ""
 "A intervenit o problemă la salvarea aranjamentului.\n"
 "%1"
 
-#: ViewManager.cpp:1210
+#: ViewManager.cpp:1219
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when loading the Layout.\n"
@@ -3624,7 +3640,7 @@ msgstr ""
 "A intervenit o problemă la încărcarea aranjamentului.\n"
 "%1"
 
-#: ViewManager.cpp:1221
+#: ViewManager.cpp:1230
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"

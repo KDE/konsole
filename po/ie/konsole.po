@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:44+0000\n"
+"POT-Creation-Date: 2023-10-14 00:45+0000\n"
 "PO-Revision-Date: 2022-10-28 16:51+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <kde-i18n-doc@kde.org>\n"
@@ -3421,68 +3421,80 @@ msgstr "Maximisar horizontalmen"
 #: ViewManager.cpp:297
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
+msgid "Toggle zoom-maximize current view"
+msgstr "Maximisar horizontalmen"
+
+#: ViewManager.cpp:298
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "Toggle zoom-maximize current view"
+msgstr "Maximisar horizontalmen"
+
+#: ViewManager.cpp:306
+#, fuzzy, kde-format
+msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Mover un carte a dextri"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:313
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Mover un carte a levul"
 
-#: ViewManager.cpp:311
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Configurar integration de  semantica (bash)"
 
-#: ViewManager.cpp:317
+#: ViewManager.cpp:326
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Celar o revelar celat files in li actual fenestre"
 
-#: ViewManager.cpp:323
+#: ViewManager.cpp:332
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Monstrar _numerós de lineas"
 
-#: ViewManager.cpp:330
+#: ViewManager.cpp:339
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Omni paccages, secun grandore"
 
-#: ViewManager.cpp:340
+#: ViewManager.cpp:349
 #, fuzzy, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Ear a carte 1"
 
-#: ViewManager.cpp:553
+#: ViewManager.cpp:562
 #, fuzzy, kde-format
 msgid "Semantic hints "
 msgstr "Semantic anotationes"
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:578
 #, kde-format
 msgid "Line numbers "
 msgstr "Numerós de lineas"
 
-#: ViewManager.cpp:1134
+#: ViewManager.cpp:1143
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "_Arangeament"
 
-#: ViewManager.cpp:1136 ViewManager.cpp:1223
+#: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1149
+#: ViewManager.cpp:1158
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3490,7 +3502,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1210
+#: ViewManager.cpp:1219
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3498,7 +3510,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1221
+#: ViewManager.cpp:1230
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
