@@ -167,6 +167,7 @@ private Q_SLOTS:
     void profileListChanged(const QList<QAction *> &sessionActions);
     void configureNotifications();
     void setBlur(bool blur);
+    void setTranslucentBackgroundEnabled(bool enabled);
 
     void updateWindowIcon();
     void updateWindowCaption();
@@ -223,6 +224,7 @@ private:
     std::vector<IKonsolePlugin *> _plugins;
     QList<QAction *> _pluginsActions;
     bool _blurEnabled = false;
+    bool _translucentBackgroundEnabled = false;
     bool _firstShowEvent = true;
 
     struct {

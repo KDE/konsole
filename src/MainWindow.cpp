@@ -92,6 +92,7 @@ MainWindow::MainWindow()
     connect(_viewManager, &Konsole::ViewManager::unplugController, this, &Konsole::MainWindow::disconnectController);
     connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged, bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
     connect(_viewManager, &Konsole::ViewManager::blurSettingChanged, this, &Konsole::MainWindow::setBlur);
+    connect(_viewManager, &Konsole::ViewManager::translucentBackgroundSettingChanged, this, &Konsole::MainWindow::setTranslucentBackgroundEnabled);
 
     connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this, &Konsole::MainWindow::updateWindowIcon);
     connect(_viewManager, &Konsole::ViewManager::newViewWithProfileRequest, this, &Konsole::MainWindow::newFromProfile);
@@ -155,6 +156,10 @@ void MainWindow::updateUseTransparency()
     setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
     setAttribute(Qt::WA_NoSystemBackground, false);
     WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0)
+    windowHandle()->setOpaque(!_translucentBackgroundEnabled);
+#endif
 }
 
 void MainWindow::activationRequest(const QString &xdgActivationToken)
@@ -992,6 +997,14 @@ void MainWindow::setBlur(bool blur)
         } else {
             qCWarning(KonsoleDebug) << "Blur effect couldn't be enabled.";
         }
+    }
+}
+
+void MainWindow::setTranslucentBackgroundEnabled(bool enabled)
+{
+    if (enabled != _translucentBackgroundEnabled) {
+        _translucentBackgroundEnabled = enabled;
+        updateUseTransparency();
     }
 }
 

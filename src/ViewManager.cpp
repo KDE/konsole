@@ -1091,6 +1091,7 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr &
     view->applyProfile(profile);
     Q_EMIT updateWindowIcon();
     Q_EMIT blurSettingChanged(view->colorScheme()->blur());
+    Q_EMIT translucentBackgroundSettingChanged(view->colorScheme()->opacity() != 1.0);
 }
 
 void ViewManager::updateViewsForSession(Session *session)
