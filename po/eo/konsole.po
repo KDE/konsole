@@ -3497,20 +3497,16 @@ msgid "Toggle maximize current view"
 msgstr "Ŝaltigi maksimumigi la nunan vidon"
 
 #: ViewManager.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Ŝaltigi maksimumigi la nunan vidon"
+msgstr "Baskuligi zom-maksimumigi aktualan vidon"
 
 #: ViewManager.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Ŝaltigi maksimumigi la nunan vidon"
+msgstr "Baskuligi zom-maksimumigi nunan vidon"
 
 #: ViewManager.cpp:306
 #, kde-format

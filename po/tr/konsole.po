@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-14 00:45+0000\n"
-"PO-Revision-Date: 2023-09-09 13:02+0300\n"
+"PO-Revision-Date: 2023-10-14 05:41+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -255,7 +255,7 @@ msgstr "Komuta verilen argümanlar"
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
-msgstr "Arka Plan Penceresini Aç/Kapat"
+msgstr "Arka Plan Penceresine Geçiş Yap"
 
 #: BookmarkHandler.cpp:112
 #, kde-format
@@ -681,7 +681,7 @@ msgstr "Her İkisi"
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr "Yatay Çapa:"
+msgstr "Yatay çapa:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
@@ -693,7 +693,7 @@ msgstr "Sol"
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr "Dikey Çapa:"
+msgstr "Dikey çapa:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
@@ -1262,13 +1262,13 @@ msgstr "Menüyü Etkinleştir"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Sekme Düzenini Kaydet..."
+msgstr "Sekme Yerleşimini Kaydet..."
 
 #: MainWindow.cpp:476
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Sekme Düzeni Yükle..."
+msgstr "Sekme Yerleşimi Yükle..."
 
 #: MainWindow.cpp:792 MainWindow.cpp:817
 #, kde-format
@@ -1957,7 +1957,7 @@ msgstr "Gömülü gelen profil her zaman kullanılabilir"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
-msgstr "Kısayolu değiştirmek için çift tıklayın"
+msgstr "Kısayolu değiştirmek için çift tıkla"
 
 #: RenameTabDialog.cpp:25
 #, kde-format
@@ -2203,17 +2203,17 @@ msgstr "Görünümü Üst-Alt Olarak Böl"
 #: session/SessionController.cpp:697
 #, kde-format
 msgid "Copy except prompts"
-msgstr "İstemler dışındakileri kopyala"
+msgstr "İstemler Dışındakileri Kopyala"
 
 #: session/SessionController.cpp:703
 #, kde-format
 msgid "Copy user input"
-msgstr "Kullanıcı girdisini kopyala"
+msgstr "Kullanıcı Girdisini Kopyala"
 
 #: session/SessionController.cpp:709
 #, kde-format
 msgid "Copy command output"
-msgstr "Komut çıktısını kopyala"
+msgstr "Komut Çıktısını Kopyala"
 
 #: session/SessionController.cpp:724
 #, kde-format
@@ -3086,7 +3086,7 @@ msgstr "Bölmeler"
 #: settings/TabBarSettings.ui:380
 #, kde-format
 msgid "Show Header:"
-msgstr "Üstbilgiyi Göster:"
+msgstr "Üstbilgiyi göster:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:387
@@ -3106,7 +3106,7 @@ msgstr "Asla"
 #: settings/TabBarSettings.ui:423
 #, kde-format
 msgid "Drag Handle Size:"
-msgstr "Sürükleme Tutacı Boyutu:"
+msgstr "Sürükleme tutacı boyutu:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
 #: settings/TabBarSettings.ui:433
@@ -3246,12 +3246,12 @@ msgstr "Yapıştırmayı Doğrula"
 #: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
-msgstr "Metnin Sonu/Kesinti: Geçerli süreçten çıkabilir"
+msgstr "Metnin sonu/Kesinti: Geçerli süreçten çıkabilir"
 
 #: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
-msgstr "İletimin Sonu: Geçerli süreçten çıkılabilir"
+msgstr "İletimin sonu: Geçerli süreçten çıkılabilir"
 
 #: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
@@ -3271,7 +3271,7 @@ msgstr "Aygıt Denetimi Üç/XOFF: Çıktıyı askıya alır"
 #: terminalDisplay/TerminalDisplay.cpp:2298
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
-msgstr "Yerine Koy/Askıya Al: Geçerli süreci askıya alabilir"
+msgstr "Yerine koy/Askıya al: Geçerli süreci askıya alabilir"
 
 #: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
@@ -3281,7 +3281,7 @@ msgstr "Vazgeç: Uçbirim durumunu değiştirmek için kullanılır"
 #: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
-msgstr "Dosya Ayırıcı/Çık: Geçerli süreci iptal edebilir"
+msgstr "Dosya ayırıcısı/Çık: Geçerli süreci iptal edebilir"
 
 #: terminalDisplay/TerminalDisplay.cpp:2327
 #, kde-format
@@ -3490,59 +3490,55 @@ msgstr "Son Kullanılan Sekmeler (Ters)"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
-msgstr "Geçerli Görünümü Büyütmeyi Aç/Kapat"
+msgstr "Geçerli Görünümü Büyüt"
 
 #: ViewManager.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
-msgstr "Geçerli Görünümü Büyütmeyi Aç/Kapat"
+msgstr "Geçerli Görünümü Büyüt"
 
 #: ViewManager.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Geçerli Görünümü Büyütmeyi Aç/Kapat"
+msgstr "Geçerli Görünümü Yakınlaştır/Büyüt"
 
 #: ViewManager.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Geçerli Görünümü Büyütmeyi Aç/Kapat"
+msgstr "Geçerli Görünümü Yakınlaştır/Büyüt"
 
 #: ViewManager.cpp:306
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
-msgstr "Sekmeyi sağa taşı"
+msgstr "Sekmeyi Sağa Taşı"
 
 #: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
-msgstr "Sekmeyi sola taşı"
+msgstr "Sekmeyi Sola Taşı"
 
 #: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr "Anlamsal tümleşimi ayarla (bash)"
+msgstr "Anlamsal Tümleşimi Ayarla (bash)"
 
 #: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr "Anlamsal ipuçları görünümünü aç/kapat"
+msgstr "Anlamsal İpuçları Görünümünü Aç/Kapat"
 
 #: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr "Satır numaraları görünümün aç/kapat"
+msgstr "Satır Numaraları Görünümünü Aç/Kapat"
 
 #: ViewManager.cpp:339
 #, kde-format
@@ -3554,7 +3550,7 @@ msgstr "Tüm Görünümlere Eşit Boyut"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
-msgstr "%1 Sekmesine Seç"
+msgstr "%1. Sekmeye Seç"
 
 #: ViewManager.cpp:562
 #, kde-format
@@ -3570,13 +3566,13 @@ msgstr "Satır numaraları"
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Sekme Düzenini Kaydet..."
+msgstr "Sekme Yerleşimini Kaydet..."
 
 #: ViewManager.cpp:1145 ViewManager.cpp:1232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr "Konsole Görünüm Düzeni (*.json)"
+msgstr "Konsole Görünüm Yerleşimi (*.json)"
 
 #: ViewManager.cpp:1158
 #, kde-format
@@ -3602,7 +3598,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Sekme Düzeni Yükle"
+msgstr "Sekme Yerleşimi Yükle"
 
 #: Vt102Emulation.cpp:2464
 #, kde-format
@@ -3981,7 +3977,7 @@ msgstr "Kenarlığı çizmek için kullanılacak rengi seç"
 #: widgets/EditProfileAppearancePage.ui:568
 #, kde-format
 msgid "Inactive Terminals:"
-msgstr "Etkin Olmayan Uçbirimler:"
+msgstr "Etkin olmayan uçbirimler:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
@@ -4063,13 +4059,13 @@ msgstr "Dikey çizgiyi sütunda görüntüle:"
 #: widgets/EditProfileAppearancePage.ui:830
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr "<html><head/><body><p>Karmaşık Metin Düzeni</p></body></html>"
+msgstr "<html><head/><body><p>Karmaşık Metin Yerleşimi</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "Complex Text Layout"
-msgstr "Karmaşık Metin Düzeni"
+msgstr "Karmaşık Metin Yerleşimi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:857
@@ -4127,7 +4123,7 @@ msgstr "Brahmi yazısı karakterleri"
 #: widgets/EditProfileAppearancePage.ui:921
 #, kde-format
 msgid "Emoji Font:"
-msgstr "Emoji Yazıtipi:"
+msgstr "Emoji yazıtipi:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:963
@@ -4942,7 +4938,7 @@ msgid ""
 "default. It can be toggled on/off while running as well."
 msgstr ""
 "Kimi uçbirim uygulamalarında fare desteği vardır, bu seçenek bunu öntanımlı "
-"olarak alabilmelerine izin verir. Çalışma sırasında açıp/kapatılabilir."
+"olarak alabilmelerine izin verir. Çalışma sırasında açılabilir/kapatılabilir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:455
@@ -4960,7 +4956,7 @@ msgstr "Geçmiş:"
 #: widgets/EditProfileScrollingPage.ui:85
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr "Sayfayı Yukarı/Aşağı Sar:"
+msgstr "Sayfayı yukarı/aşağı sar:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:101
@@ -5041,7 +5037,7 @@ msgstr "Görünüme gelen çizgileri vurgulayın"
 #: widgets/EditProfileScrollingPage.ui:240
 #, kde-format
 msgid "Reflow Lines:"
-msgstr "Satırları Yenile:"
+msgstr "Satırları yenile:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:250
