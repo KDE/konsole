@@ -228,6 +228,7 @@ Q_SIGNALS:
     void updateWindowIcon();
 
     void blurSettingChanged(bool);
+    void translucentBackgroundSettingChanged(bool);
 
     /** Requests creation of a new view with the default profile. */
     void newViewRequest();
