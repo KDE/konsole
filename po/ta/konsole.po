@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-14 00:45+0000\n"
-"PO-Revision-Date: 2023-09-10 18:03+0530\n"
+"PO-Revision-Date: 2023-10-15 13:59+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2726,14 +2726,14 @@ msgstr "பொருந்தும் உரை முன்னிலைப்�
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
-msgstr ""
+msgstr "கீற்றுகளை தனித்தனி cgroup-களாக உருவாக்க வேண்டுமா"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "எவ்வளவு நினைவுக்கு மேல் பயன்படுத்தினால் அதை வரம்புப்படுத்த வேண்டும்."
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -3200,19 +3200,19 @@ msgstr "இதை அழுத்தி சுட்டியை மேல்வ
 #: settings/ThumbnailsSettings.ui:70
 #, kde-format
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
 #: settings/ThumbnailsSettings.ui:77
 #, kde-format
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
 #: settings/ThumbnailsSettings.ui:84
 #, kde-format
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
