@@ -1,5 +1,8 @@
 Developer Documentation for Konsole
 
+NOTE: this document is from 2007; a lot has changed.  Please ask on the
+    Konsole mailing list if you need any guidance.
+
 Authors:        Robert Knight < robertknight@gmail.com >
 Last Updated:   7th May 2007
 Summary:        Introduction to Konsole developer documentation
@@ -44,16 +47,16 @@ template would be appreciated.
 
 3.  Documentation layout
 
-    design/           - Documentation about the design of Konsole, and templates 
+DELETED    design/           - Documentation about the design of Konsole, and templates 
                         for developer documentation.
-    design/historic   - Documentation which was prepared during the KDE 4.0x development
+DELETED    design/historic   - Documentation which was prepared during the KDE 4.0x development
                         cycle but which is no longer relevant.
     
-    research/         - Results of research into user's experiences with Konsole
+DELETED    research/         - Results of research into user's experiences with Konsole
 
-    user-interface/   - Documentation concerning design and analysis of the user interface.
+DELETED    user-interface/   - Documentation concerning design and analysis of the user interface.
 
-    old-documents/  - An assortment of documentation which was created during earlier
+DELETED    old-documents/  - An assortment of documentation which was created during earlier
                       releases of Konsole.  There is useful information here, particularly
                       about the type of terminal which Konsole emulates, but it is not
                       organised.
