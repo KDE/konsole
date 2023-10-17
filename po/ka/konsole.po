@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-14 00:45+0000\n"
-"PO-Revision-Date: 2023-10-08 05:47+0200\n"
+"PO-Revision-Date: 2023-10-16 06:09+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2498,7 +2498,7 @@ msgstr "ფანჯრის სათაურის სათაურის 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
-#, fuzzy, kde-format
+#, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
 msgstr "ფოკუსი ტერმინალებზე, როცა თაგუნას კურსორს ზედ გადაატარებთ"
 
@@ -3410,20 +3410,16 @@ msgid "Toggle maximize current view"
 msgstr "მიმდინარე ხედის  გაზრდის გადართვა"
 
 #: ViewManager.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "მიმდინარე ხედის  გაზრდის გადართვა"
+msgstr "მიმდინარე ხედის გაზრდის-გადიდების გადართვა"
 
 #: ViewManager.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "მიმდინარე ხედის  გაზრდის გადართვა"
+msgstr "მიმდინარე ხედის გაზრდის-გადიდების გადართვა"
 
 #: ViewManager.cpp:306
 #, kde-format
