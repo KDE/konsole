@@ -3440,20 +3440,16 @@ msgid "Toggle maximize current view"
 msgstr "Přepnout maximalizaci současného pohledu"
 
 #: ViewManager.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Přepnout maximalizaci současného pohledu"
+msgstr ""
 
 #: ViewManager.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Přepnout maximalizaci současného pohledu"
+msgstr ""
 
 #: ViewManager.cpp:306
 #, kde-format

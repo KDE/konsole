@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-14 00:45+0000\n"
-"PO-Revision-Date: 2023-10-14 22:50+0200\n"
+"PO-Revision-Date: 2023-10-17 13:07+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -3563,20 +3563,16 @@ msgid "Toggle maximize current view"
 msgstr "Maximiser / Réduire la vue actuelle"
 
 #: ViewManager.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Maximiser / Réduire la vue actuelle"
+msgstr "Basculer ou non la vue courante en taille maximale"
 
 #: ViewManager.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Maximiser / Réduire la vue actuelle"
+msgstr "Basculer ou non la vue courante en taille maximale"
 
 #: ViewManager.cpp:306
 #, kde-format
