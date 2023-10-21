@@ -2,6 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
 # Adem Alp Yıldız <ademalp@kde.org.tr>, 2005.
 # Bekir SONAT <cortexbs@yahoo.com>, 2005.
 # Görkem Çetin <gorkem@kde.org>, 2003-2004.
@@ -12,13 +13,13 @@
 # obsoleteman <tulliana@gmail.com>, 2007-2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017, 2020, 2021, 2022.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014, 2015.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# Emir SARI <emir_sari@icloud.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-14 00:45+0000\n"
-"PO-Revision-Date: 2023-10-14 05:41+0300\n"
+"PO-Revision-Date: 2023-10-20 22:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -136,7 +137,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
-msgstr "Başlatılan oturumu bittiğinde otomatik olarak kapatma."
+msgstr "İlk oturum sona erdiğinde otomatik olarak kapatmayın."
 
 #: Application.cpp:61
 #, kde-format
@@ -168,7 +169,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Run in a separate process"
-msgstr "Ayrı bir süreç olarak çalıştır"
+msgstr "Ayrı bir süreçte çalıştır"
 
 #: Application.cpp:66
 #, kde-format
@@ -536,7 +537,7 @@ msgstr "Soluk rengi seçmek için tıklayın"
 #: colorscheme/ColorSchemeEditor.ui:31 KeyBindingEditor.ui:31
 #, kde-format
 msgid "Description:"
-msgstr "Tanım:"
+msgstr "Açıklama:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, randomizedBackgroundCheck)
 #: colorscheme/ColorSchemeEditor.ui:50
@@ -547,17 +548,17 @@ msgid ""
 "settings.\n"
 "To see any effect, set colors with saturation value greater than 0."
 msgstr ""
-"Varsayılan ön plan ve arka plan renklerinin ton ve doygunluk değerleri "
-"varsayılan olarak rastgele seçilir. Bazı renk şemaları farklı "
+"Öntanımlı ön plan ve arka plan renklerinin ton ve doygunluk değerleri "
+"öntanımlı olarak rastgele seçilir. Bazı renk şemaları farklı "
 "rastgeleleştirme ayarları kullanabilir.\n"
-"Herhangi bir efekti görmek için, doygunluk değeri 0'dan büyük olan renkleri "
-"ayarlayın."
+"Herhangi bir efekti görmek için renkleri doygunluk değeri 0'dan büyük olacak "
+"şekilde ayarlayın."
 
 #. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
 #: colorscheme/ColorSchemeEditor.ui:53
 #, kde-format
 msgid "Randomly adjust colors for each session"
-msgstr "Her oturum için renkleri rastgele ayarlayın"
+msgstr "Her bir oturum için renkleri rastgele ayarla"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
 #: colorscheme/ColorSchemeEditor.ui:60
@@ -1345,7 +1346,7 @@ msgstr "Küçük Görseller"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
-msgstr "Bölüm Bilgisi"
+msgstr "Kısım Bilgisi"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, QuickCommandsWidget)
 #: plugins/QuickCommands/qcwidget.ui:14
@@ -2143,7 +2144,7 @@ msgstr "'%1' uygulamasından %2 durumu ile çıkıldı."
 #: session/Session.cpp:1621
 #, kde-format
 msgid "ZModem Progress"
-msgstr "ZModem İşlemi"
+msgstr "ZModem İlerlemesi"
 
 #: session/Session.cpp:1961
 #, kde-format
@@ -2193,12 +2194,12 @@ msgstr "Kopyala"
 #: session/SessionController.cpp:689
 #, kde-format
 msgid "Split View Left-Right"
-msgstr "Görünümü Sol-Sağ Olarak Böl"
+msgstr "Görünümü Sol-Sağ Şeklinde Böl"
 
 #: session/SessionController.cpp:693
 #, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Görünümü Üst-Alt Olarak Böl"
+msgstr "Görünümü Üst-Alt Şeklinde Böl"
 
 #: session/SessionController.cpp:697
 #, kde-format
@@ -2253,7 +2254,7 @@ msgstr "&Ekranı Yazdır..."
 #: session/SessionController.cpp:759
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "Geçmişi Yapılandır..."
+msgstr "Geçmişi Ayarla..."
 
 #: session/SessionController.cpp:763
 #, kde-format
@@ -2300,7 +2301,7 @@ msgstr "Geçerli Penceredeki &Tüm Sekmeler"
 #: session/SessionController.cpp:875
 #, kde-format
 msgid "&Select Tabs..."
-msgstr "Sekmeleri &Seç..."
+msgstr "Sekmeler &Seç..."
 
 #: session/SessionController.cpp:881
 #, kde-format
@@ -2316,7 +2317,7 @@ msgstr "Girdiyi Şuraya Kopyala"
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "&ZModem Upload..."
-msgstr "&ZModem Dosya Gönderimi..."
+msgstr "&ZModem ile Dosya Gönderimi..."
 
 #: session/SessionController.cpp:905
 #, kde-format
@@ -2326,22 +2327,22 @@ msgstr "Tek Kerelik Monitörler"
 #: session/SessionController.cpp:910
 #, kde-format
 msgid "Monitor for &Prompt"
-msgstr "&İstem Monitörü"
+msgstr "&İstemi İzle"
 
 #: session/SessionController.cpp:917
 #, kde-format
 msgid "Monitor for &Activity"
-msgstr "Etkinlikleri İ&zle"
+msgstr "&Etkinliği İzle"
 
 #: session/SessionController.cpp:923
 #, kde-format
 msgid "Monitor for &Silence"
-msgstr "Sessiz&likleri İzle"
+msgstr "&Sessizliği İzle"
 
 #: session/SessionController.cpp:929
 #, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "Süreç Sonlandırma İzleyicisi"
+msgstr "Süreç Sonlanmasını İzle"
 
 #: session/SessionController.cpp:936
 #, kde-format
@@ -2474,7 +2475,7 @@ msgstr "Geçerli Klasörü Şununla Aç"
 #: session/SessionController.cpp:2143
 #, kde-format
 msgid "Save ZModem Download to..."
-msgstr "ZModem Dosyasını kaydet..."
+msgstr "ZModem İndirmesini Şuraya Kaydet..."
 
 #: session/SessionController.cpp:2153
 #, kde-format
@@ -2483,7 +2484,7 @@ msgid ""
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 msgstr ""
-"<p>Bir ZModem dosya aktarım isteği algılandı ancak uygun ZModem yazılımı "
+"<p>Bir ZModem dosya aktarım isteği algılandı; ancak uygun ZModem yazılımı "
 "bulunamadı.</p><p>'rzsz' veya 'lrzsz' paketini kurmak isteyebilirsiniz.</p>"
 
 #: session/SessionController.cpp:2163
@@ -2505,7 +2506,7 @@ msgstr ""
 #: session/SessionController.cpp:2178
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr "ZModem üzerinden gönderilecek dosyaları seçin"
+msgstr "ZModem Gönderimi için Dosyalar Seç"
 
 #: session/SessionListModel.cpp:89
 #, kde-format
@@ -2848,15 +2849,15 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
-"Değişiklikler yeniden başlatıldığında etkili olur. Etkinleştirilirse "
-"Konsole'nin belirtilen\n"
-" değeri aşan sürekli bellek tüketimi, systemd-oomd'un bellek yoğun "
-"işlem(ler)i içeren\n"
-" sekme(ler)i ortadan kaldırmasına neden olur. Not: Etkinleştirme, yüksek "
-"bellek tüketimi\n"
-" sırasında daha büyük yavaşlamalara neden olabilir ve aşırı düşük değerlerin "
-"belirtilmesi\n"
-"yine de Konsole'nin sonlandırılmasına neden olabilir."
+"Değişiklikler yeniden başlatıldığında etkili olacaktır. Etkinleştirilirse "
+"Konsole'nin\n"
+"belirtilen değeri aşan sürekli bellek tüketimi, systemd-oomd'un bellek yoğun "
+"işlemleri\n"
+"içeren sekmeleri ortadan kaldırmasına neden olur. Not: Etkinleştirme, yüksek "
+"bellek\n"
+"tüketimi sırasında daha büyük yavaşlamalara neden olabilir ve aşırı düşük "
+"değerlerin\n"
+"belirtilmesi yine de Konsole'nin sonlandırılmasına neden olabilir."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -3030,7 +3031,7 @@ msgstr "'Yeni Sekme' düğmesini göster"
 #: settings/TabBarSettings.ui:225
 #, kde-format
 msgid "Expand individual tab widths to full window"
-msgstr "Ayrı sekme genişliklerini tam pencereye genişlet"
+msgstr "Bireysel sekme genişliklerini tam pencereye genişlet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:232
@@ -3062,7 +3063,7 @@ msgstr "Yeni sekmeleri şuraya koy:"
 #: settings/TabBarSettings.ui:305
 #, kde-format
 msgid "At &the end"
-msgstr "&Sonunda"
+msgstr "&Sona"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
 #: settings/TabBarSettings.ui:315
@@ -3093,7 +3094,7 @@ msgstr "Üstbilgiyi göster:"
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
-msgstr "Gereksinim duyulduğunda"
+msgstr "Gerektiğinde"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
 #: settings/TabBarSettings.ui:397
@@ -3185,10 +3186,10 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
-"<html><head/><body> <p> Bu özelliği kullanmak için profil ayarları içinde "
-"<span style = \"font-weight: 600;\">Fare-&gt; Çeşitli-&gt; Altı çizili</"
-"span> <span style = \"etkinleştirin profil ayarlarınızdaki font-weight: 600; "
-"\"> dosyalar </span> etkinleştirin</p> </body> </html>"
+"<html><head/><body><p>Bu özelliği kullanmak için profil ayarlarınızda <span "
+"style=\" font-weight:600;\">Fare-&gt;Diğer-&gt;Dosyaların altını </"
+"span><span style=\" font-weight:600;\">çiz</span> özelliğini etkinleştirin</"
+"p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3346,7 +3347,7 @@ msgstr "Konumu &Yapıştır"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
-msgstr "Bölünmüş Görünüm"
+msgstr "Görünümü Böl"
 
 #: ViewManager.cpp:113
 #, kde-format
@@ -3406,7 +3407,7 @@ msgstr "1x2 Uçbirimli Yeni Bir Sekme Yükle"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
-msgstr "Görünümü Büyüt"
+msgstr "Görünümü Genişlet"
 
 #: ViewManager.cpp:199
 #, kde-format
@@ -3418,13 +3419,13 @@ msgstr "Görünümü Küçült"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
-msgstr "&Geçerli Görünümü Ayır"
+msgstr "Geçerli &Görünümü Ayır"
 
 #: ViewManager.cpp:221
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr "Geçerli S&ekmeyi Ayır"
+msgstr "Geçerli &Sekmeyi Ayır"
 
 #: ViewManager.cpp:226
 #, kde-format
@@ -3490,13 +3491,13 @@ msgstr "Son Kullanılan Sekmeler (Ters)"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
-msgstr "Geçerli Görünümü Büyüt"
+msgstr "Geçerli Görünümü Büyüt/Küçült"
 
 #: ViewManager.cpp:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
-msgstr "Geçerli Görünümü Büyüt"
+msgstr "Geçerli Görünümü Büyüt/Küçült"
 
 #: ViewManager.cpp:297
 #, kde-format
@@ -4149,7 +4150,7 @@ msgstr "Tablo çizim karakterlerine güçlü soldan sağa düzen olarak davran."
 #: widgets/EditProfileAppearancePage.ui:982
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr "Tablo karakterleri Çift-Yönlü kipi geçersiz kılma"
+msgstr "Tablo karakterlerinde çift yönlü kipi geçersiz kıl"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:995
@@ -4161,7 +4162,7 @@ msgstr "Sorunlu karakterlerin wcwidth'ini yok say"
 #: widgets/EditProfileAppearancePage.ui:998
 #, kde-format
 msgid "Override wcwidth"
-msgstr "wcwidth\"i geçersiz kıl"
+msgstr "wcwidth'i geçersiz kıl"
 
 #: widgets/EditProfileDialog.cpp:76
 #, kde-format
@@ -4769,8 +4770,8 @@ msgid ""
 "Text recognized as a link or an email address will be underlined when "
 "hovered by the mouse pointer."
 msgstr ""
-"Bir bağlantı veya e-posta adresi olarak tanınan metin, fare ile üzerine "
-"gelindiğinde altı çizilecek."
+"Bağlantı veya e-posta adresi olarak tanınan metnin fare işaretçisi üzerine "
+"geldiğinde altı çizilecektir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:266
@@ -4785,7 +4786,8 @@ msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
 "pointer."
 msgstr ""
-"Bir dosya olarak tanınan metin, fare ile üzerine gelindiğinde altı çizilecek."
+"Dosya olarak tanınan metnin fare işaretçisi üzerine geldiğinde altı "
+"çizilecektir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:276
@@ -5416,7 +5418,7 @@ msgstr "Bu sekmeyi kapat"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
-msgstr "&Sekmeyi Ayır"
+msgstr "Sekmeyi &Ayır"
 
 #: widgets/ViewContainer.cpp:101
 #, kde-format
@@ -5429,6 +5431,3 @@ msgstr "Sekmeyi Yapılandır veya &Yeniden Adlandır..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Sekmeyi Kapat"
-
-#~ msgid "text/css"
-#~ msgstr "text/css"
