@@ -1,0 +1,3848 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+ "dtd/kdedbx45.dtd" [
+<!ENTITY % Turkish "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+<!ENTITY Ahmad.Samir '<personname
+><firstname
+>Ahmad</firstname
+><surname
+>Samir</surname
+></personname
+>'>
+<!ENTITY Ahmad.Samir.mail '<email
+>a.samirh78@gmail.com</email
+>'>
+]>
+
+<book id="konsole" lang="&language;">
+
+<bookinfo>
+<title
+>&konsole; El Kitabı</title>
+<authorgroup>
+<author
+>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author
+>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
+
+<othercredit role="developer"
+>&Robert.Knight; &Robert.Knight.mail; </othercredit>
+
+<othercredit role="developer"
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail; </othercredit>
+
+<othercredit role="developer"
+>&Waldo.Bastian; &Waldo.Bastian.mail; </othercredit>
+
+<othercredit role="reviewer"
+>&Mike.McBride; &Mike.McBride.mail; </othercredit>
+
+<othercredit role="translator"
+><firstname
+>Kaan</firstname
+><surname
+>Özdinçer</surname
+><affiliation
+><address
+><email
+>kaanozdincer@gmail.com</email
+></address
+></affiliation
+><contrib
+>Çeviri</contrib
+></othercredit
+> <othercredit role="translator"
+><firstname
+>Emir</firstname
+><surname
+>SARI</surname
+><affiliation
+><address
+><email
+>emir_sari@icloud.com</email
+></address
+></affiliation
+><contrib
+>Çeviri</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>&Jonathan.Singer;</holder>
+</copyright>
+<copyright>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year
+><year
+>2018</year
+><year
+>2020</year
+><year
+>2021</year>
+<holder
+>&Kurt.Hindenburg;</holder>
+</copyright>
+
+<copyright>
+    <year
+>2018</year>
+<holder
+>&Ahmad.Samir;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2023-04-25</date>
+<releaseinfo
+>KDE Gear 23.08</releaseinfo>
+
+<abstract
+><para
+>&konsole;, &kde;'nin uçbirim öykünücüsüdür.</para
+></abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>konsole</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>komut</keyword>
+<keyword
+>satır</keyword>
+<keyword
+>uçbirim</keyword>
+<keyword
+>cli</keyword>
+</keywordset>
+
+</bookinfo>
+<chapter id="introduction">
+<title
+>Giriş</title>
+
+<sect1 id="terminal">
+<title
+>Uçbirim nedir?</title>
+
+<para
+>&konsole;, genellikle uçbirim veya kabuk olarak adlandırılan bir X uçbirim öykünücüsüdür. Yalnızca metin penceresindeki bir komut satırı arayüzünü öykünür. </para>
+
+<para
+>&konsole;, tipik olarak yazdığınız komutları yürüten bir uygulama olan bir komut kabuğu çalıştırır. &konsole;'nin çalıştığı kabuk hesap ayarlarınıza bağlıdır. Kabuk nedir, nasıl yapılandırılır ve nasıl kullanılır öğrenmek için işletim sistemi belgelerinize bakın. </para>
+</sect1>
+
+<sect1 id="scrollback">
+<title
+>Geçmiş</title>
+
+<para
+>&konsole;, kullanıcıların daha önce görüntülenen çıktıyı görüntülemesine olanak sağlamak için geçmiş kavramını kullanır. Öntanımlı olarak geri sarma açıktır ve ekranda görüntülenene ek olarak 1000 satırlık çıktıyı kaydedecek şekilde ayarlanmıştır. </para>
+<para
+>Metin satırları ekranın yukarısından sarıldıkça; sarma çubuğunu yukarı taşıyarak, fare tekerleği kullanılarak veya <keycombo action="simul"
+>&Shift;<keycap
+>Sayfa Yukarı</keycap
+></keycombo
+> (geri gitmek için), <keycombo action="simul"
+>&Shift;<keycap
+>Sayfa Aşağı</keycap
+></keycombo
+> (ileri gitmek için), <keycombo action="simul"
+>&Shift;<keycap
+>Yukarı Ok</keycap
+></keycombo
+> (bir satır yukarı gitmek için) ve <keycombo action="simul"
+>&Shift;<keycap
+>Aşağı Ok</keycap
+></keycombo
+> (bir satır aşağı gitmek için) düğmeleriyle gözden geçirilebilirler. </para>
+<para
+><keycombo action="simul"
+>&Shift;<keycap
+>Sayfa Yukarı/Aşağı</keycap
+></keycombo
+> kısayolu ile yapılacak sarma miktarı, profil yapılandırma penceresinin <guilabel
+>Sarma</guilabel
+> sekmesinde tam veya yarım sayfa olarak ayarlanabilir (Bu pencereyi açmak için <menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Geçerli Profili Düzenle...</guimenuitem
+></menuchoice
+> yolunu kullanın). </para>
+
+</sect1>
+
+<sect1 id="selection">
+<title
+>Seçim Kipi</title>
+<para
+>&konsole;'de bir klavyeyle seçim kipi vardır. Bu kipte, geçmişte serbestçe dolanılabilir ve fare olmadan metin seçilebilir.</para>
+
+<para
+>Bu kipe giriş yapıp çıkmak için klavye kısayolunu kullanın (öntanımlı olarak <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>D</keycap
+></keycombo
+>). </para>
+
+<para
+><keycap
+>Vazgeç</keycap
+> düğmesi de klavyeyle seçim kipinden çıkar. </para>
+
+<para
+>İmleci hareket ettirmek: Oklar, <keycap
+>Sayfa Yukarı</keycap
+>, <keycap
+>Sayfa Aşağı</keycap
+>, <keycap
+>Baş</keycap
+>, <keycap
+>Son</keycap
+>. </para>
+
+<para
+>İmleci <application
+>vi</application
+> biçeminde hareket ettirmek: Bir karakter gitmek için h,j,k,l; sayfa yukarı/aşağı veya yarım sayfa yukarı/aşağı için <keycap
+>Kontrol</keycap
+>+b,f,u,d.</para>
+
+<para
+>Ok düğmeleriyle birlikte <keycap
+>Kontrol</keycap
+> veya <keycap
+>Üst Karakter</keycap
+> kullanarak metin seçin veya seçimi başlatmak için <keycap
+>V</keycap
+> düğmesine basın; imleci hareket ettirin ve seçimi sonlandırmak için yeniden <keycap
+>V</keycap
+>'ye basın. <keycombo
+>&Shift;<keycap
+>V</keycap
+></keycombo
+> kısayolu, karakterler yerine tüm satırı seçer. </para>
+
+</sect1>
+
+
+<sect1 id="profiles">
+<title
+>Profiller</title>
+<para
+>Profiller, kullanıcının yaygın kullanılan komutları hızlı ve kolay bir biçimde otomatikleştirilmesini sağlar. Örnekler: <itemizedlist>
+<listitem
+><para
+>başka makineye ssh yapmak</para
+></listitem>
+<listitem
+><para
+>irc oturumu başlatmak</para
+></listitem>
+<listitem
+><para
+>bir dosyayı izlemek için tail kullanmak</para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para
+>Tüm yeni ve değiştirilen profiller kullanıcının <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+> yerel ana klasörüne kaydedilir.</para>
+
+<para
+>Yeni bir profil oluşturma yöntemi: <orderedlist>
+<listitem
+><para
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Profilleri Yönet...</guimenuitem
+></menuchoice
+> menü girdisine tıklayın.</para
+></listitem>
+
+<listitem
+><para
+><guibutton
+>Profiller</guibutton
+> sayfasına geçin.</para
+></listitem>
+
+<listitem
+><para
+><guibutton
+>Yeni Profil...</guibutton
+> düğmesine tıklayın.</para
+></listitem>
+
+<listitem
+><para
+>İlk girişi bir adla doldurun. Bu, menüde görünecek addır ve bu tür bir oturum başlattığınızda <guilabel
+>Kabuk</guilabel
+> yerine öntanımlı etiket olacaktır. </para
+></listitem>
+
+<listitem
+><para
+>Normalde nasıl bir kabuk açıp komut giriyorsanız burada da aynısını yapın. Yukarıdaki ilk örneğimiz için <userinput
+><command
+>ssh</command
+><replaceable
+>administration</replaceable
+></userinput
+> yazabilirsiniz.</para
+></listitem>
+
+<listitem
+><para
+>İletişim kutusunun diğer sekmelerinde bu oturumun görünüşünü yapılandırın. Her oturum için farklı bir yazıtipi, renk şeması, $<envar
+>TERM</envar
+> türü ve diğer birçok ayarı yapılandırabilirsiniz.</para
+></listitem>
+
+<listitem
+><para
+><guibutton
+>Tamam</guibutton
+> düğmesine basın. Yeni oturum artık <guilabel
+>Profilleri Yönet...</guilabel
+> iletişim kutusunda görünecektir. </para
+></listitem>
+
+</orderedlist>
+</para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title
+>Fare Düğmeleri</title>
+
+<para
+>Bu bölümde, sağ elle kullanılan fare düğmesi sırası için fare düğmelerinin kullanımı ayrıntılarıyla anlatılmaktadır. Sol elle kullanılan fare düğmesi sırası için aşağıdaki metinde sol ve sağı değiştirin. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><mousebutton
+>Sol</mousebutton
+></term>
+
+<listitem
+><para
+>Tüm &LMB; tıklamaları, &konsole;'da çalışan fare uyumlu bir uygulamaya gönderilir. Bir uygulama, fare tıklamasına tepki gösteriyorsa &konsole; bunu bir ok imleci ile gösterir. Değilse bir çubuk imleci gösterilir.</para>
+
+<para
+>Farenin farkında olmayan bir uygulama çalışırken &LMB; ile basılı tutmak ve fareyi ekran üzerinde sürüklemek metnin bir bölümünü işaretleyecektir. Fareyi sürüklerken, işaretlenen metin görsel geri bildirim için ters renkte görüntülenir. İşaretli metni &konsole; içinde daha sonra kullanmak üzere panoya kopyalamak veya başka bir uygulamaya göndermek için <guimenu
+>Düzen</guimenu
+> menüsünden <guimenuitem
+>Kopyala</guimenuitem
+> seçeneğini seçin. Seçili metin uyumlu uygulamalara da sürüklenip bırakılabilir. &Ctrl; düğmesini basılı tutun ve seçili metni istediğiniz konuma sürükleyin.</para>
+
+<para
+>Normalde yenisatır karakterleri her seçili satırın sonuna eklenir. Bu, kaynak kodunu kesip yapıştırmak veya belirli bir komutun çıktısı için en iyisidir. Sıradan metinlerde satır sonları çoğu zaman önemli değildir. Ancak metnin başka bir uygulamaya yapıştırıldığında otomatik olarak yeniden biçimlendirilecek bir karakter akışı olması tercih edilebilir. Metin akışı kipinde seçim yapmak için normal bir biçimde seçerken &Ctrl; düğmesini basılı tutun.</para>
+
+<para
+>&Ctrl; ve &Alt; düğmelerine &LMB; ile birlikte basmak, metni sütunlar halinde seçer. </para>
+
+<para
+>Bir sözcüğü seçmek için &LMB; ile çift tıklayın; bir satırın tamamını seçmek için üç kez tıklayın.</para>
+
+<para
+>İmleme sırasında metin alanının üst veya alt kenarına dokunulursa &konsole; yukarı veya aşağı sarar ve geçmiş arabelleğindeki metin görünmeyi sürdürür. Fare hareket etmeyi bıraktığında sarma da durur.</para>
+
+<para
+>Fare serbest bırakıldıktan sonra &konsole;, imli alanı ters tutarak panodaki metni görünür tutmaya çalışır. Pano içeriği değiştiğinde, imli alandaki metin değiştirildiğinde veya &LMB; ile tıklandığında imli alan normale döner.</para>
+
+<para
+>Fare uyumlu bir uygulamada (örneğin Midnight Commander) metni imlemek için tıklarken &Shift; düğmesine basılması gerekir.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Orta</mousebutton
+></term>
+
+<listitem
+><para
+>&MMB; ile tıklamak, panodaki geçerli metni yapıştırır. &MMB; ile tıklarken &Ctrl; düğmesine basmak metni yapıştırır ve yeni bir satır ekler. Bu, yapıştırılan komutu hızlı bir şekilde yürütmek için uygundur; ancak tehlikeli olabilir, bu nedenle dikkatli kullanın. </para>
+
+<note
+><para
+>Yalnızca iki düğmeli bir fareniz varsa hem &LMB; hem de &RMB; ile tıklamak, üç düğmeli bir farede &MMB; ile basılmış gibi davranır.</para
+></note>
+
+<para
+>Orta düğme olarak bir <mousebutton
+>tekerlek</mousebutton
+> varsa farenin farkında olmadığı bir programda onu yuvarlamak &konsole; sarma çubuğunu hareket ettirecektir.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Sağ</mousebutton
+></term>
+<listitem>
+<para
+>&RMB; ile tıklandığında menüde aşağıdaki ögeler görünür:</para>
+<itemizedlist>
+<listitem
+><para
+><guimenuitem
+>Kopyala</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Yapıştır</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>Metin seçimiyle, tercih edilen web kısayollarının listesini ve web kısayollarını yapılandırma seçeneğini içeren bir <guisubmenu
+>Arama</guisubmenu
+> alt menüsü bulunur.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Dosya Yöneticisini Aç</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Kodlamayı Ayarla</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Geçmişi Temizle</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Geçmişi Ayarla...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Menü Çubuğunu Göster</guimenuitem
+>, yalnızca menü çubuğu gizli olduğunda görünür.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Profil Değiştir</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Geçerli Profili Düzenle...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Sekmeyi Kapat</guimenuitem
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>Fare uyumlu bir uygulamada, açılır menüyü açmak için &RMB; ile birlikte &Shift; düğmesine basın. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="drag-and-drop">
+<title
+>Sürükle ve Bırak</title>
+<para
+>&konsole; penceresine bir dosya, klasör veya &URL; bırakırsanız aşağıdaki eylemleri içeren bir bağlam menüsü görünür: </para>
+<screenshot>
+<screeninfo
+>Sürükle ve Bırak Bağlam Menüsü</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Sürükle ve Bırak Bağlam Menüsü</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Shift;</shortcut
+><guimenuitem
+>Buraya Taşı</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Bırakılan ögeyi geçerli klasöre taşıyın. Bu öge yalnızca, bırakılan dosya veya klasörü silme hakkına sahipseniz bağlam menüsünde görünür. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Ctrl;</shortcut
+><guimenuitem
+>Buraya Kopyala</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Bırakılan ögeyi geçerli klasöre kopyalayın.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;</keycombo
+></shortcut
+><guimenuitem
+>Buraya Bağlantıla</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Bırakılan ögeye sembolik bir bağlantı ekleyin.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Konumu Yapıştır</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>İmlece bırakılan ögenin tam dosya yolunu ekleyin.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Dizini Şuna Değiştir</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Bir klasör bırakılırsa bu eylem bağlam menüsünde görünür ve &konsole; oturumunun çalışma klasörünü değiştirmenize olanak tanır.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Esc;</shortcut
+><guimenuitem
+>İptal</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Sürükle ve bırak eylemini yarıda kesin.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Sürükle ve bırak işlemi sırasında &LMB;'ni bırakmadan önce kısayollara basarsanız herhangi bir bağlam menüsü görünmez ve eylemler hemen yürütülür. </para>
+
+<para
+>&URL;'leri öntanımlı olarak metin olarak eklemek üzere sürükleyip bırakmak için &Ctrl; düğmesini kullanmak veya bağlam menüsünü devre dışı bırakmak istiyorsanız profil ayarları iletişim kutusundaki <guilabel
+>Fare</guilabel
+> sekmesinde ilgili seçenekleri etkinleştirin. </para>
+
+</sect1>
+
+<sect1 id="semantic-shell-integration">
+<title
+>Anlamsal Kabuk Tümleşimi</title>
+
+<para
+>Konsole'da çalışan bir kabuk programı, görüntülenen metni üç türe bölen kaçış dizileri yayabilir: Kabuk istemi, kullanıcı girişi ve komut çıkışı. Bu anlamsal bilginin kullanılması Konsole'da çeşitli geliştirmelere olanak sağlar. <itemizedlist>
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Sayfa Yukarı</keycap
+></keycombo
+> ve <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Sayfa Aşağı</keycap
+></keycombo
+>, önceki/sonraki komut istemine sarar.</para
+></listitem>
+<listitem
+><para
+>Görsel ipuçları:</para>
+<itemizedlist>
+<listitem
+><para
+>Her istemin üzerinde bir çizgi görüntülenir, istem renkleri daha az yoğundur ve çıktı renkleri daha yoğundur. </para
+></listitem>
+<listitem
+><para
+>Hatayla sonuçlanan komutların girdi ve çıktı satırlarının solunda kırmızı bir çubuk görüntülenir. </para
+></listitem>
+<listitem
+><para
+>Hatayla sonuçlanan komutların girdi ve çıktı satırları için kırmızı bir arka plan bulunur. </para
+></listitem>
+<listitem
+><para
+>Diğer tüm komutların girdi ve çıktı satırlarının solunda gri bir çubuk görüntülenir. </para
+></listitem>
+<listitem
+><para
+>Diğer tüm komutların girdi ve çıktı satırları için gri bir arka plan bulunur. </para
+></listitem>
+</itemizedlist>
+<para
+>Bunların her biri; hiçbir zaman gösterilmemesi, her zaman gösterilmesi veya yalnızca URL ipuçları gösterildiğinde gösterilmesi için yapılandırılabilir. Yapılandırma, profil yapılandırma penceresinin <guilabel
+>Genel</guilabel
+> sayfasındaki <guilabel
+>Anlamsal Tümleşim</guilabel
+> sekmesinde bulunur. </para
+></listitem>
+
+<listitem
+><para
+><guimenuitem
+>Kullanıcı Girdisini Kopyala</guimenuitem
+>, <guimenuitem
+>Komut Çıktısını Kopyala</guimenuitem
+> ve <guimenuitem
+>İstemler Dışındakileri Kopyala</guimenuitem
+> bağlam menüsü seçenekleri, panoya kopyalandığında seçimi süzmek için kullanılabilir. </para
+></listitem>
+<listitem
+><para
+>Seçim boş olduğunda panoya kopyala eylemi, boş değilse geçerli girdi satırını veya geçerli girdi yoksa son çıktıyı kopyalar. </para
+></listitem>
+<listitem
+><para
+>Uzun bir girdiyi düzenlerken Yukarı/Aşağı ok düğmelerine basmak, kabuğa uygun sayıda Sol/Sağ düğme olayı göndererek imleci bir satır yukarı/aşağı yerleştirir. Profil ayarlarında yapılandırılabilir.</para
+></listitem>
+<listitem
+><para
+>Fareyle metin girdisine tıklamak, imleci tıklanan konuma yerleştirecektir. Profil ayarlarında yapılandırılabilir.</para
+></listitem>
+<listitem
+><para
+>Bir komutun çıktısı üzerinde fareyi üç kez tıklatırken &Ctrl; düğmesine basmak, o komutun tüm çıktısını seçer.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Anlamsal kabuk tümleşiminin kabukta ayarlanması gerekir. <keycombo
+>&Ctrl;&Alt;<keycap
+>]</keycap
+></keycombo
+> kısayolunu kullanmak, bash için gereken gerekli komutları kopyalar. fish, zsh, python vb. kabuklar için ilgili programın belgelendirmesine başvurun. </para>
+
+</sect1>
+
+
+<sect1 id="complex-text-rendering">
+<title
+>Karmaşık Metin Yerleşimi</title>
+
+<para
+><guilabel
+>Profili Düzenle</guilabel
+> iletişim kutusunun <guilabel
+>Karmaşık Metin Yerleşimi</guilabel
+> sayfasında, metin sunumunu denetleyen seçenekleri bulacaksınız. </para>
+
+<para>
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Sözcük kipi</guilabel
+> - Bu kipte (bazı) diziler ekranda tek tek karakter yerine bir bütün olarak görüntülenir. Bu, bir karakterin şekli kendisinden önceki veya sonraki karakterlere bağlı olduğunda Qt'un metni doğru şekilde oluşturmasını sağlar. Bu, bazı karakterlerin yanlış konumlandırılmasına neden olabilir. </para
+><para
+>Boşluklar her zaman dizileri bozar, dolayısıyla her zaman doğru konumlarda olurlar. Bu, karakterlerin hiçbir zaman doğru konumlarından çok fazla uzaklaşmamasını sağlar. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Tüm sözcük için aynı öznitelikleri kullan</guilabel
+> - Bu etkinleştirildiğinde, sözcükler aynı niteliklerle (metin rengi, kalın, yatık vb.) oluşturulur. Bir öznitelik kelimenin ortasında değişirse bu durum; ancak sözcüğün sonundan sonra geçerli olur. Bu devre dışı bırakıldığında, öznitelikler değiştiğinde yeni bir sözcük başlar. Bu, imleci hareket ettirirken veya metni seçerken karakterlerin şekil ve konumunu değiştirmesine neden olur. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>ASCII karakterler</guilabel
+> - ASCII karakterlerini yukarıda açıklandığı gibi sözcükler halinde gruplayın. Bu seçeneğin en göze çarpan etkisi, bunun etkinleştirilmesinin programlama bitişik harflerini (bunları destekleyen yazı tipleri için) göstermesidir. Örneğin. &lt;= dizesi ⩽ olarak görüntülenebilir. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Brahmi yazısı karakterleri</guilabel
+> - Brahmi karakterlerini yukarıda açıklandığı gibi gruplandırın. Bu seçenek olmadan (yazıtipine bağlı olarak) bazı sözcükler olması gerektiği gibi bağlanmayabilir. Bu etkinleştirildiğinde Brahmi karakterleri konumlarının dışında görünebilir. Örneğin, ikinci satırdaki üçüncü karakter doğrudan birinci satırdaki üçüncü karakterin altında görünmeyebilir. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Emoji yazısı:</guilabel
+> - Bu, Unicode Emoji karakterleri için kullanılacak yazıtipinin belirlenmesine olanak tanır. Ayarlanmazsa öntanımlı profil yazıtipi kullanılır veya bu yazıtipinde glifler eksikse sistem tarafından bazı yedek yazıtipleri kullanılabilir. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Çift yönlü metin sunumu</guilabel
+> - Arapça ve İbranice metinlerin doğru görünmesi için sağdan sola karakterleri yeniden sıralayın. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Soldan sağa satır yönü zorla</guilabel
+> - Satırlar her zaman soldan sağadır. Bu olmadan her satırın yönü, güçlü yönlülüğe sahip ilk karakter tarafından belirlenir. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Tablo karakterlerinde çift yönlü kipi geçersiz kıl</guilabel
+> - Grafik tablo karakterlerini güçlü soldan sağa karakterleri olarak düşünün. Bu, sağdan sola karakterlerini içeren tablonun doğru şekilde görüntülenmesine olanak tanır; ancak bu karakterler sağdan sola metinlerinde kullanılırsa sıralamanın yanlış olmasına neden olabilir. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>wcwidth'i geçersiz kıl</guilabel
+> - Sorunlu karakterler glibc'nin wcwidth() yöntemi yerine Unicode standardını izler. Şu anda yalnızca wc genişliği 1 ve Unicode genişliği 0 olan yumuşak kısa çizgi (Unicode 0x00AD) bu seçenekten etkilenmektedir. Genel olarak bu seçenek, esas olarak komut satırında bu karakterler kullanıldığında devre dışı bırakılmalı ve yalnızca görüntülendiklerinde etkinleştirilmelidir. </para
+></listitem>
+
+
+</itemizedlist>
+</para>
+</sect1>
+
+</chapter>
+
+<chapter id="commandreference">
+<title
+>Komut Başvurusu</title>
+
+<sect1 id="menubar">
+<title
+>Menü Çubuğu</title>
+
+<para
+>Menü çubuğu, &konsole; penceresinin en üstündedir. Menü çubuğu gizliyse <guimenuitem
+>Menü Çubuğunu Göster</guimenuitem
+> ögesine pencerede <mousebutton
+>sağ</mousebutton
+> tıklayarak ulaşılabilir (o pencerede vi, minicom vb. gibi tam ekran bir uygulama çalışmadığı sürece). Öntanımlı kısayol her menü ögesinin ardından listelenir. </para>
+<para
+>Alternatif olarak, menü çubuğunu göstermek veya gizlemek için <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+> kısayolunu da kullanabilirsiniz. </para>
+<sect2 id="file-menu">
+<title
+>Dosya Menüsü</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Yeni Pencere</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Öntanımlı profili kullanan yeni bir &konsole; penceresi açar</action>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Dosya</guimenu
+><guimenuitem
+>Yeni Sekme</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Öntanımlı profili kullanan yeni bir sekme açar</action>
+<note
+><para
+>Alt menüdeki ilk profil her zaman yerleşik profil olan "Öntanımlı" olacaktır. Diğer tüm profiller aşağıda abecesel sıraya göre listelenecektir. Kullanıcı tarafından belirlenen öntanımlı profil kalınyazı tipinde gösterilir. </para
+></note>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+> <guimenuitem
+>Sekmeyi Çoğalt</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli sekmeyi yeni bir sekmede klonlamaya çalışır</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Dosya</guimenu
+> <guimenuitem
+>Çıktıyı Farklı Kaydet...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli geçmişi metin veya HTML dosyası olarak kaydeder</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Dosya</guimenu
+> <guimenuitem
+>Ekranı Yazdır ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli ekranı yazdırın.</action
+> Öntanımlı olarak çıktı, üzerine yazdırılan kağıdın boyutuna uyacak şekilde siyah metin rengiyle ve arka plan olmadan ölçeklendirilir. Yazdırma iletişim kutusunda bu seçenekler <guilabel
+>Çıktı Seçenekleri</guilabel
+> sekmesinde değiştirilebilir.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Dosya</guimenu
+> <guimenuitem
+>Dosya Yöneticisini Aç</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli dizinde &kde; dosya yöneticisini açar</action
+>. Öntanımlı olarak bu <ulink url="help:/dolphin/index.html"
+>&dolphin;</ulink
+>'dir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Dosya</guimenu
+> <guimenuitem
+>Oturumu Kapat</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli oturumu kapatır</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Dosya</guimenu
+> <guimenuitem
+>Pencereyi Kapat</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>&konsole;'dan çıkar</action
+></para>
+<note
+><para
+>Birden fazla oturum açıksa veya herhangi bir oturumda belirli programlar çalışıyorsa &konsole; bir onay iletişim kutusu görüntüler. Bu iletişim kutuları, <guibutton
+>Bir daha sorma</guibutton
+> onay kutusu tıklanarak devre dışı bırakılabilir. </para>
+</note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Düzen Menüsü</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+> <guimenuitem
+>Kopyala</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Seçili metni panoya kopyalar</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>V</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>Yapıştır</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Panodaki metni imleç konumuna yapıştırır</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Düzen</guimenu
+><guimenuitem
+>Tümünü Seç</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+>Geçerli penceredeki tüm <action
+>metni seçer</action
+> </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Düzen</guimenu
+><guisubmenu
+>Girdiyi Şuraya Kopyala</guisubmenu
+><guimenuitem
+>Geçerli Penceredeki Tüm Sekmeler</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli oturumdaki girdinin geçerli penceredeki tüm oturumlara aynı anda gönderilmesine izin verir</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+><guisubmenu
+>Girdiyi Şuraya Kopyala</guisubmenu
+><guimenuitem
+>Sekmeler Seç...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli oturumdaki girdilerin, kullanıcı tarafından seçilen oturumlara aynı anda gönderilmesine olanak tanır</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+><guisubmenu
+>Girdiyi Şuraya Kopyala</guisubmenu
+><guimenuitem
+>Yok</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli oturumdan diğer oturumlara girdi göndermeyi durdur</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Düzen</guimenu
+> <guisubmenu
+>Sinyal Gönder</guisubmenu
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Belirtilen sinyali, yeni oturum başlatıldığında başlatılan kabuk işlemine veya başka bir işleme gönderin</action
+>.</para
+><para
+>Şu anda kullanılabilir sinyaller:</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>süreci durdurmak için</entry>
+</row>
+<row>
+<entry
+><errorcode
+>CONT</errorcode
+></entry>
+<entry
+>durmuşsa sürmesi için</entry>
+</row>
+<row>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>denetleyen uçbirimde kapanma veya denetleyen sürecin ölümü durumunda</entry>
+</row>
+<row>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>klavyeden yarıda kesme</entry>
+</row>
+<row>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>sonlandırma sinyali</entry>
+</row>
+<row>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>öldürme sinyali</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>kullanıcı sinyali 1</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>kullanıcı sinyali 2</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para
+>Ayrıntılı bilgi için <userinput
+><command
+>man</command
+> <option
+>7 signal</option
+></userinput
+> komutuyla sistem kılavuz sayfalarına göz atın.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>Sekme Ayarlarını Yapılandır...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli sekmenin ad biçimini, uzak sekme başlık biçimini ve rengini değiştirmenize olanak tanıyan bir iletişim kutusu açar</action
+> (<link linkend="configure-tab-settings-dialog"
+>daha fazla bilgi</link
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>ZModem ile Dosya Gönderimi...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Gerekli yazılımın kurulu olması durumunda karşıya yüklenecek dosyayı seçmek için bir iletişim kutusu açar</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>Bul...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>&konsole; penceresinin alt kısmında bir arama çubuğu açar </action
+></para>
+<para
+>Bu, BÜYÜK/küçük harfe duyarlı, ileri veya geri aramalara ve düzenli ifadelerle arama yapılmasına olanak tanır.</para>
+</listitem>
+</varlistentry>
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch
+-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>Sonrakini Bul</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Sonraki arama örneğine geçer</action
+>. Arama çubuğu odaktaysa &Enter; kısayolunu da kullanabilirsiniz.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Shift;<keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Düzen</guimenu
+><guimenuitem
+>Sonrakini Bul</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Önceki arama örneğine geçer</action
+>. Arama çubuğu odaktaysa <keycombo action="simul"
+>&Shift;&Enter;</keycombo
+> kısayolunu da kullanabilirsiniz.</para
+></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Görünüm Menüsü</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guisubmenu
+>Görünümü Böl</guisubmenu
+><guimenuitem
+>Görünümü Sol/Sağ Şeklinde Böl</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Tüm sekmeleri sol ve sağ görünümlere böler</action>
+</para
+><para
+>Bir görünümdeki herhangi bir çıktı diğer görünüme kopyalanır. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guisubmenu
+>Görünümü Böl</guisubmenu
+><guimenuitem
+>Görünümü Üst/Alt Şeklinde Böl</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Tüm sekmeleri üst ve alt görünümlere ayırır</action>
+</para
+><para
+>Bir görünümdeki herhangi bir çıktı diğer görünüme kopyalanır. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guisubmenu
+>Görünümü Böl</guisubmenu
+><guimenuitem
+>Görünümü Genişlet</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli görünümü daha büyük hale getirir</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guisubmenu
+>Görünümü Böl</guisubmenu
+><guimenuitem
+>Görünümü Küçült</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli görünümü daha küçük hale getirir</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guisubmenu
+>Görünümü Böl</guisubmenu
+><guimenuitem
+>Geçerli Görünümü Büyüt/Küçült</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli görünümü geçerli boyut ile olası en büyük boyut arasında değiştirir</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>\</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guisubmenu
+>Görünümü Böl</guisubmenu
+><guimenuitem
+>Tüm Görünümlere Eşit Boyut</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Tüm görünümleri aynı boyuta ayarlar</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Geçerli Sekmeyi Ayır</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli sekmeyi ayrı bir pencerede açar</action>
+</para
+><para
+>Önceki &konsole; penceresinden çıkmak, yeni oluşturulan pencereyi etkilemeyecektir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Geçerli Görünümü Ayır</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli bölünmüş görünümü ayrı bir pencerede açar</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry id="save-layout">
+<term
+><menuchoice
+><guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Sekme Yerleşimini Dosyaya Kaydet</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Geçerli görünümün sekme yerleşimini, daha sonra sık kullanılan yerleşimlerinizden birini geri yüklemek için yüklenebilecek özel bir &konsole; yerleşim dosyasına kaydetmenizi sağlar.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Dosyadan Sekme Yerleşimi Yükle</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+>Daha önceki <action
+><menuchoice
+><guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Sekme Yerleşimini Dosyaya Kaydet</guimenuitem
+></menuchoice
+> kullanılarak kaydedilen yerleşim dosyasından sık kullanılan görünüm yerleşimlerinizden birini yüklemenize olanak tanır.</action
+> Öntanımlı yerleşimler (2 x 2, 2 x 1 ve 1 x 2) araç çubuğu aracılığıyla yüklenebilir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Tek Kerelik Monitörler</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Aşağıdaki monitörler yalnızca bir kez bildirimde bulunur ve ardından devre dışı bırakılır. </action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>İstemi İzle</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Bir kabuk istemi için geçerli sekmenin izlenmesini açar/kapatır.</action>
+</para
+><para
+>Bir kabuk istemi görüntülendiğinde &konsole; bir bildirim gösterir. Bu seçenek yalnızca kabukta anlamsal tümleşim etkinse gösterilir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Sessizliği İzle</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Etkinlik eksikliği durumu için geçerli sekmenin izlenmesini açar/kapatır</action>
+</para
+><para
+>Öntanımlı olarak, 10 saniye boyunca herhangi bir işlem yapılmadığında oturumun sekmesinde bir bilgi simgesi görünür. Uyarıların türü <menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Bildirimleri Yapılandır</guimenuitem
+><guimenuitem
+>İzlenen oturumda sessizlik</guimenuitem
+></menuchoice
+> aracılığıyla değiştirilebilir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Etkinliği İzle</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Etkinlik için geçerli sekmenin izlenmesini açar/kapatır</action>
+</para
+><para
+>Herhangi bir etkinliğin ardından oturumun sekmesinde bir bilgi simgesi görünür. Uyarıların türü <menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Bildirimleri Yapılandır</guimenuitem
+><guimenuitem
+>İzlenen oturumdaki etkinlik</guimenuitem
+></menuchoice
+> aracılığıyla değiştirilebilir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Süreç Sonlanmasını İzle</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Süreç tamamlanması için geçerli sekmenin izlenmesini açar/kapatır</action
+>. </para
+><para
+>İşaretlenirse geçerli sürecin tamamlanmasının ardından &konsole; <guilabel
+>'<replaceable
+>A</replaceable
+>' süreci, '<replaceable
+>B</replaceable
+> oturumundaki çalışmayı bitirdi</guilabel
+> biçiminde bir bildirim gösterir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Saltokunur</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Oturumu saltokunur olarak değiştirir: Hiçbir girdi kabul edilmez, sürükle ve bırak devre dışı bırakılır. </action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Yazıtipini Büyüt</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Metnin yazıtipi boyutunu artırır</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>0</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Yazıtipi Boyutunu Sıfırla</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Metnin yazıtipi boyutunu profil öntanımlısına sıfırlar</action
+></para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Yazıtipini Küçült</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Metnin yazıtipi boyutunu azaltır</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Görünüm</guimenu
+> <guimenuitem
+>Kodlamayı Ayarla</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Karakter kodlamasını ayarlar</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Geçmişi Temizle</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçmişteki metni temizler</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>K</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Geçmişi Temizle ve Sıfırla</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli sekmedeki ve geçmişteki metni temizler ve uçbirimi sıfırlar</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F11</keycap
+></shortcut
+> <guimenu
+>Görünüm</guimenu
+><guimenuitem
+>Tam Ekran Kipi</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>&konsole;'nin tüm ekranı kaplamasını açar/kapatır</action
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Yer İmleri Menüsü</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Yer İmleri</guimenu
+><guimenuitem
+>Yer İmi Ekle</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli konumu ekler</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Yer İmleri</guimenu
+><guimenuitem
+>Sekmeleri Klasör Olarak Yer İmlerine Ekle...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Tüm sekmeleri bir yer imleri klasörüne ekler</action>
+</para
+><para
+>Yer imi klasörü adı için bir iletişim kutusu açılacaktır. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Yer İmleri</guimenu
+><guimenuitem
+>Yeni Yer İmi Klasörü...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Yer imleri listesine yeni bir klasör ekler</action>
+</para
+><para
+>Yer imi klasörü adı için bir iletişim kutusu açılacaktır. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Yer İmleri</guimenu
+><guimenuitem
+>Yer İmlerini Düzenle</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Yer imi düzenleyicisini açar</action
+></para>
+<note
+><para
+>Bu menü ögesinin görünebilmesi için keditbookmarks programının kurulu olması gerekir.</para>
+<para
+>URL'leri elle eklemek için yer imi düzenleyicisini kullanabilirsiniz. Şu anda &konsole;, aşağıdakileri kabul eder: <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://kullanıcı@makine:kapı</para
+></listitem>
+<listitem
+><para
+>telnet://kullanıcı@makine:kapı</para
+></listitem>
+</itemizedlist>
+</para
+></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="plugins-menu">
+<title
+>Eklentiler Menüsü</title>
+
+<para
+>Kurulu eklentiler listelenir; kurulu eklenti yoksa "Kullanılabilir eklenti yok" yazar </para>
+
+</sect2>
+
+
+<sect2 id="settings-menu">
+<title
+>Ayarlar Menüsü</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Geçerli Profili Düzenle...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli profili yapılandırmak için bir iletişim kutusu açar</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Profil Değiştir</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Geçerli profili listedeki bir profille değiştirir</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Profilleri Yönet...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Profilleri yönetmek için bir düzenleyici açar</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Pencere Renk Şeması</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>&konsole; grafik kullanıcı arayüzünü belirtilen şemaya değiştirir</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Menü Çubuğunu Göster</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Menü çubuğunun görünürlüğünü açar/kapatır</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Gösterilen Araç Çubukları</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>&konsole; araç çubuklarının görünürlüğünü açar/kapatır</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Durum Çubuğunu Göster</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Durum çubuğunun görünürlüğünü açar/kapatır</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Dili Yapılandır... </guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>&konsole;'nin arayüz çevirisini seçmek için bir pencere açar.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Klavye Kısayollarını Yapılandır...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Klavye kısayol düzenleyicisini açar.</action
+> Kısayol yapılandırmasıyla ilgili daha fazla bilgiyi <ulink url="help:/fundamentals/shortcuts.html"
+>&kde; Temelleri</ulink
+> bölümünde bulabilirsiniz.</para>
+
+<para
+>Ek olarak &konsole;, karşılığı olmayan menü ögeleri için birkaç özel kısayola sahiptir:</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Kısayol</entry>
+<entry
+>Açıklama</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Sağ</keysym
+></keycombo
+></entry>
+<entry
+>Sonraki Sekme</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Sol</keysym
+></keycombo
+></entry>
+<entry
+>Önceki Sekme</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Sol</keysym
+></keycombo
+></entry>
+<entry
+>Sekmeyi Sola Taşı</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Sağ</keysym
+></keycombo
+></entry>
+<entry
+>Sekmeyi Sağa Taşı</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>Ekle</keysym
+></keycombo
+></entry>
+<entry
+>Seçimi Yapıştır</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Araç Çubuklarını Yapılandır...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+><ulink url="help:/fundamentals/config.html#toolbars-items"
+>Araç çubuğu yapılandırma</ulink
+> penceresini açar</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Bildirimleri Yapılandır...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Bildirim düzenleyicisini açar</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>&konsole; Uygulamasını Yapılandır...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>&konsole; ayarları düzenleyicisini açar</action
+></para>
+<para
+>Bu iletişim kutusunda, &konsole; görünüşünü ve davranışını etkileyen seçenekler bulunur. </para>
+<itemizedlist>
+    <listitem>
+        <para
+><guilabel
+>General</guilabel
+> sayfası; menü bar görünürlüğünü, &konsole; penceresi boyutunu anımsamayı, tüm &konsole; pencerelerini tek bir süreçte çalıştırmayı, menü ivmelendiricileri etkinleştirmeyi, başlık çubuğunda pencere başlığını göstermeyi, pencere çerçevesini ve başlık çubuğunu kaldırmayı ve fare işaretçisi üzerilerine geldiğinde uçbirimlere odaklanmayı denetleyen ayarları içerir. Ayrıca harf biçimi duyarlılığını, düzenli ifade kullanımını, tüm eşleşmeleri vurgulamayı ve arama yönünü (<guilabel
+>Geriye doğru ara</guilabel
+> öntanımlıdır) de yapılandırabilirsiniz. <guilabel
+>General</guilabel
+> sayfası, ayrıca daha önce kapatılmışlarsa <guibutton
+>Tüm "Bir Daha Sorma" İletilerini Etkinleştir</guibutton
+>'ebileceğiniz yerdir. </para>
+    </listitem>
+    <listitem>
+        <para
+><guilabel
+>Profiller</guilabel
+> sayfası, <link linkend="profiles"
+>profiller</link
+> oluşturmak ve onları yönetmek içindir. </para>
+    </listitem>
+    <listitem>
+        <para
+><guilabel
+>Sekme Çubuğu/Ayırıcılar</guilabel
+> sayfasını kullanarak, sekme çubuğunun görünürlüğünü ve konumunu, sekme davranışlarını ve sekme düğmelerinin ince ayarlarını yapılandırabilirsiniz. <guilabel
+>'Yeni Sekme' düğmesini göster</guilabel
+> ve <guilabel
+>Bireysel sekme genişliklerini tam pencereye genişlet</guilabel
+> arasında seçim yapabilir veya <guilabel
+>Kullanıcı tanımlı biçem sayfası kullan</guilabel
+> yapılandırmasını yapabilirsiniz. <guilabel
+>Davranış</guilabel
+> sekmesinde yeni sekmelerin konumunu (<guilabel
+>Sona</guilabel
+> veya <guilabel
+>Geçerli sekmeden sonra</guilabel
+>) ve &MMB; ile tıklayarak sekme kapatmayı da ayarlamak olanaklıdır. </para>
+        <para
+>Bölünmüş başlıkların görünürlüğünü (<guilabel
+>Gerektiğinde</guilabel
+> (öntanımlı), <guilabel
+>Her zaman</guilabel
+> veya <guilabel
+>Asla</guilabel
+>) ve bölünmüş görünümlerin sürükleme tutacı boyutunu (<guilabel
+>Küçük</guilabel
+> (öntanımlı), <guilabel
+>Orta</guilabel
+> veya <guilabel
+>Büyük</guilabel
+>) bu yapılandırma sayfasının <guilabel
+>Bölmeler</guilabel
+> sekmesinden yapılandırmak olanaklıdır. </para>
+    </listitem>
+    <listitem>
+        <para
+><guilabel
+>Geçici Dosyalar</guilabel
+> sayfası, <link linkend="scrollback"
+>geçmiş</link
+> dosyası konumunu tanımlamak için kullanılır. </para>
+    </listitem>
+    <listitem>
+        <para
+><guilabel
+>Küçük Görseller</guilabel
+> sayfası, küçük görsel boyutunu ve etkinleştirme seçeneklerini tanımlamak için kullanılabilir (etkinleştirme denetimi düğmesini &Shift;, &Alt; ve &Ctrl; arasından seçebilirsiniz). </para>
+        <note>
+            <para
+>Fare işaretçisiyle ögelerinin üzerine gelindiğinde açılır pencerelerde görsellerin küçük hallerini gösteren küçük görseller özelliğini kullanmak için geçerli profilinizde dosyanın altını çizmeyi etkinleştirmelisiniz: <menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Geçerli Profili Düzenle...</guimenuitem
+><guimenuitem
+>Fare</guimenuitem
+><guimenuitem
+>Diğer</guimenuitem
+><guimenuitem
+>Dosyaların altını çiz</guimenuitem
+></menuchoice
+>. </para>
+        </note>
+    </listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title
+>Yardım Menüsü</title>
+<para
+>&konsole;, ortak &kde; <guimenu
+>Yardım</guimenu
+> menüsü ögelerine sahiptir; daha fazla bilgi için &kde; Temelleri'nin <ulink url="help:/fundamentals/menus.html#menus-help"
+>Yardım Menüsü</ulink
+> bölümüne bakın. </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+</sect2>
+
+</sect1>
+
+<sect1 id="console-dialogs">
+<title
+>&konsole; İletişim Kutuları</title>
+
+<sect2 id="configure-tab-settings-dialog">
+<title
+>Sekme Ayarlarını Yapılandır İletişim Kutusu</title>
+
+<para
+>Geçerli sekmenin ad biçimi, uzak sekme başlığı biçimi ve geçerli sekmenin rengi bu iletişim kutusundan değiştirilebilir. İletişim kutusu; menüden, <keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+> kısayolundan veya sekme çubuğunda sekmenin üzerine çift tıklayarak görüntülenebilir. Bu değişiklikler geçicidir ve geçerli profili düzenleyerek kalıcı yapılabilir. </para>
+
+<para
+>&konsole;, yerel sekmelerde bu jetonlardan yararlanacak: </para>
+<itemizedlist mark="opencircle">
+<listitem
+><para
+>%n : Program adı</para
+></listitem>
+<listitem
+><para
+>%d : Geçerli dizin (kısa)</para
+></listitem>
+<listitem
+><para
+>%D : Geçerli dizin (uzun)</para
+></listitem>
+<listitem
+><para
+>%h : Yerel makine (kısa)</para
+></listitem>
+<listitem
+><para
+>%u : Kullanıcı adı</para
+></listitem>
+<listitem
+><para
+>%B : Kullanıcının Bourne istem başlığı ($ = normal kullanıcı, # = süper kullanıcı)</para
+></listitem>
+<listitem
+><para
+>%w : Kabuk tarafından ayarlanan pencere başlığı</para
+></listitem>
+<listitem
+><para
+>%# : Oturum numarası</para
+></listitem>
+</itemizedlist>
+
+<para
+>&konsole;, uzak sekmelerde bu jetonlardan yararlanacak: <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c : Geçerli program</para
+></listitem>
+    <listitem
+><para
+>%h : Uzak makine (kısa)</para
+></listitem>
+    <listitem
+><para
+>%H : Uzak makine (uzun)</para
+></listitem>
+    <listitem
+><para
+>%u : Kullanıcı adı</para
+></listitem>
+    <listitem
+><para
+>%U : Kullanıcı adı@ (verilmişse)</para
+></listitem>
+    <listitem
+><para
+>%w : Kabuk tarafından ayarlanan pencere başlığı</para
+></listitem>
+    <listitem
+><para
+>%# : Oturum numarası</para
+></listitem>
+</itemizedlist>
+
+</para>
+<para
+>Örnekler: <itemizedlist mark="opencircle">
+
+<listitem
+><para
+>/usr/src geçerli dizininde çalışan <application
+>bash</application
+> programı, <userinput
+>%d : %n</userinput
+> ayarıyla <guibutton
+>src : bash</guibutton
+> görüntüler </para
+></listitem>
+
+<listitem
+><para
+>/usr/src geçerli dizininde çalışan <application
+>top</application
+> programı, <userinput
+>%D : %n</userinput
+> ayarıyla <guibutton
+>/usr/src : top</guibutton
+> görüntüler </para
+></listitem>
+
+<listitem
+><para
+>~ geçerli dizininde çalışan <application
+>vim</application
+> programı, <userinput
+>%w (%#)</userinput
+> ayarıyla <guibutton
+>[No Name] (~) - VIM(1)</guibutton
+> görüntüler </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect2>
+
+<sect2 id="copy-input-dialog">
+<title
+>Girdiyi Kopyala İletişim Kutusu</title>
+
+<para
+>Bir sekmeye girilen metin aynı anda diğer sekmelere de gönderilebilir. Bu iletişim kutusu, söz konusu girdiyi hangi sekmelerin alacağını seçmenizi sağlar. Geçerli sekme gri renkte görünecektir. </para>
+
+</sect2>
+
+<sect2 id="scrollback-options-dialog">
+<title
+>Geçmişi Ayarla İletişim Kutusu</title>
+
+<para
+><link linkend="scrollback"
+>Geçmiş boyutuna ilişkin</link
+> seçenekler bu iletişim kutusunda değiştirilebilir. Değişiklikler yalnızca geçerli sekme içindir ve profile kaydedilmez. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title
+>Komut Satırı Seçenekleri</title>
+
+<para
+>&konsole; komut satırından başlatıldığında davranışını değiştirmek için çeşitli seçenekler belirtilebilir.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--help</option
+></term>
+<listitem
+><para
+><action
+>Çeşitli seçenekleri listele</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--profile</option
+> <parameter
+>dosya</parameter
+></term>
+<listitem
+><para
+>Öntanımlı profil yerine belirtilen profili kullanarak <action
+>&konsole;'u başlat</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--layout</option
+> <parameter
+>dosya</parameter
+></term>
+<listitem
+><para
+>Bir <link linkend="save-layout"
+>kaydedilen &JSON; yerleşim dosyası</link
+> kullanarak <action
+>&konsole;'u başlat</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--builtin-profile</option
+></term>
+<listitem
+><para
+>Geçerli öntanımlı profil yerine yerleşik profili kullan.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--workdir</option
+> <parameter
+>dizin</parameter
+></term>
+<listitem
+><para
+>Başlangıç çalışma dizini olarak <parameter
+>bu dizin</parameter
+> <action
+>ile birlikte aç</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hold, --noclose</option
+></term>
+<listitem
+><para
+>Başlatılan oturumu bittiğinde kendiliğinden <action
+>kapatma</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--new-tab</option
+></term>
+<listitem
+><para
+>Yeni bir pencere yerine var olan pencerede <action
+>yeni bir sekme oluştur</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--tabs-from-file </option
+><parameter
+>dosya</parameter
+></term>
+<listitem
+><para
+>Sekmeleri, sekme yapılandırma dosyasında belirtildiği gibi <action
+>oluştur</action
+>. </para>
+<note
+><para
+>Dosyanın aşağıdaki biçimde her satırda bir sekmesi vardır:</para>
+<para
+>Her satır, nasıl açılacağını belirten en fazla 4 alan kullanılarak açılacak bir sekmeyi belirtir. Sekmeler <userinput
+>;;</userinput
+> ile ayrılır ve bir alan adında <userinput
+>:</userinput
+> iliştirilmiş olmalıdır. Başında <userinput
+>#</userinput
+> olan satırlar veya boş satırlar yok sayılır; böylece yorum eklemek için <userinput
+>#</userinput
+> ile başlayan satırlar kullanabilirsiniz. </para>
+
+<simplelist>
+<member
+><userinput
+>title:</userinput
+> Bu sekme için bir ad, boşsa veya belirtilmemişse öntanımlı sekme</member>
+<member
+><userinput
+>workdir:</userinput
+> Çalışma dizini, boşsa veya belirtilmemişse <filename class="directory"
+> ~</filename
+> kullanılır</member>
+<member
+><userinput
+>profile:</userinput
+> Kullanılacak olan &konsole; profili, boşsa veya belirtilmemişse öntanımlı profil kullanılır</member>
+<member
+><userinput
+>command:</userinput
+> Çalıştırılacak komut</member>
+</simplelist>
+<para
+>Her satırda <userinput
+>command</userinput
+> veya <userinput
+>profile</userinput
+> alanlarından en az biri bulunmalıdır. </para>
+<para
+>Örnek: <userinput
+>title: %n;; command: /usr/bin/top ;; profile: Kabuk</userinput
+></para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--background-mode</option
+></term>
+<listitem
+><para
+><action
+>&konsole;'u arka planda başlat</action
+> ve <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F12</keycap
+></keycombo
+> düğmelerine basıldığında (öntanımlı) ön plana getir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--separate</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+>&konsole;'un yeni bir örneğini ayrı bir süreçte <action
+>çalıştır</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-menubar</option
+></term>
+<listitem
+><para
+>Öntanımlı ayarı geçersiz kılarak menü çubuğunu <action
+>göster</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-menubar</option
+></term>
+<listitem
+><para
+>Öntanımlı ayarı geçersiz kılarak menü çubuğunu <action
+>gizle</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--show-tabbar</option
+></term>
+<listitem
+><para
+>Öntanımlı ayarı geçersiz kılarak sekme çubuğunu <action
+>göster</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--hide-tabbar</option
+></term>
+<listitem
+><para
+>Öntanımlı ayarı geçersiz kılarak sekme çubuğunu <action
+>gizle</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--fullscreen</option
+></term>
+<listitem
+><para
+><action
+>&konsole;'u tam ekran kipinde başlat</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--notransparency</option
+></term>
+<listitem
+><para
+>Sistem desteklese bile saydam arka planları <action
+>kapat</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profiles</option
+></term>
+<listitem
+><para
+>Tüm kullanılabilir profilleri <action
+>listele</action
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--list-profile-properties</option
+></term>
+<listitem>
+<para
+>Tüm kullanılabilir özellikleri, adı ve türü ile <action
+>listele</action
+>. <option
+>-p</option
+> seçeneğine göz atın. </para>
+<para
+>Daha fazla bilgi için lütfen <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
+>&konsole; API Başvurusu</ulink
+>'nu ziyaret edin. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-p</option
+> <parameter
+>property=değer</parameter
+></term>
+<listitem
+><para
+>Bir profil özelliğinin değerini <action
+>değiştir</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>komut</parameter
+></term>
+<listitem
+><para
+>Normal kabuk yerine <parameter
+>komut</parameter
+> <action
+>yürüt</action
+>.</para>
+<note
+><para
+>Bu seçenek, &konsole;'a aktarılan tüm değişkenleri yakalar ve <parameter
+>komut</parameter
+> olarak yürütür. Bu nedenle, bu seçenek her zaman son seçenek olarak kullanılmalıdır.</para
+></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>&konsole; aynı zamanda genel &Qt; ve &kf5-full; seçeneklerini kabul eder; ek bilgi için qt5options ve kf5options kılavuz sayfalarına göz atın.</para>
+
+</chapter>
+
+<chapter id="scripting">
+<title
+>&konsole; ile betik yazımı</title>
+
+<para
+>&konsole;, &DBus; ile kullanılabilecek birçok yöntemi destekler. </para>
+<para
+>&DBus; arayüzünü kullanmanın iki yolu vardır: &Qt;'nin grafiksel <application
+>qdbusviewer</application
+> uygulaması ve <application
+>qdbus</application
+> komut satırı uygulaması. </para>
+
+<para
+>Örnekler: <itemizedlist mark='opencircle'>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+>, tüm kullanılabilir hizmetleri görüntüler. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole</option
+>, &konsole; &DBus; arayüzünü görüntüler. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+>, pencere 1'i denetlemek için kullanılacak yöntemleri görüntüler. </para>
+</listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+>, geçerli pencereyi denetlemek için kullanılacak yöntemleri görüntüler. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+>, oturum 1'i denetlemek için kullanılacak yöntemleri görüntüler. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+>, geçerli oturumu denetlemek için kullanılacak yöntemleri görüntüler. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+>, geçerli &konsole; oturumunu denetlemek için kullanılacak yöntemleri görüntüler. </para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Yukarıdaki komutlardan biri "Service 'org.kde.konsole' does not exist" çıktısını verirse <option
+>org.kde.konsole</option
+> seçeneğini şunlardan birine değiştirin: <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (ilk pid'i seçer) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (bu, geçerli &konsole;'dan kullanılabilir) </para
+></listitem>
+<listitem
+><para>
+<option
+>'qdbus | grep konsole' çıktılarından birini seçin</option>
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Daha fazla bilgi için lütfen <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>&DBus; öğreticisi</ulink
+>'ni ziyaret edin. </para>
+
+</chapter>
+
+<chapter id="key-bindings">
+<title
+>Uçbirim Düğme Bağıntıları</title>
+
+<sect1>
+<title
+>&konsole; Düğme Bağıntılarını Nasıl Kullanır</title>
+
+<sect2 id="intro">
+<title
+>Giriş</title>
+<para
+>&konsole;, düğme kombinasyonlarını kabuğa veya kabukta çalışan etkileşimli programlara (genelde alternatif ekran arabelleğini kullanan programlar; örneğin, <application
+>vim</application
+>, <application
+>less</application
+>, <application
+>screen</application
+>) gönderilen denetim karakterlerine ve kaçış dizilerine dönüştürmek için *.keytab dosyalarını kullanır.</para>
+
+<para
+>Kullanıcılar, düğme bağıntısı düzenleyicisini kullanarak &konsole;'deki düğme bağıntısı ayarlarını özelleştirebilir. Uçbirime belirli bir denetim veya kaçış dizisi göndermek için bir düğme kombinasyonu yapılandırılabilir.</para>
+
+<para
+>Düğme Bağıntıları Düzenleyicisi'ni <menuchoice
+><guimenu
+>Ayarlar</guimenu
+><guimenuitem
+>Geçerli Profili Düzenle</guimenuitem
+></menuchoice
+> menü girdisine gidip <guilabel
+>Klavye</guilabel
+> sekmesinden açabilirsiniz. Listede, &konsole; ile birlikte gelen düğme bağıntıları listelenir.</para>
+</sect2>
+
+<sect2 id="table-fields">
+<title
+>Düğme Kombinasyonları ve Kipleri</title>
+
+<para
+>Düğme kombinasyonları şu örüntüyü takip ederler: <programlisting
+>Düğme (+|-) Kipler</programlisting>
+</para>
+
+<para
+>örneğin: <programlisting
+>Yukarı+Üst Karakter+AppScreen
+Aşağı+Üst Karakter-AppScreen
+Boşluk+Kontrol
+</programlisting>
+</para>
+
+<para
+>Düğme adları, qnamespace.h üstbilgi dosyasında <quote
+>Qt::Key_</quote
+> öneki kaldırılmış olarak tanımlıdır; düğme adlarının bir listesi için <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum"
+>Qt::Key enumeration in the &Qt;</ulink
+> belgelendirmesine bakın.</para>
+
+<para
+>Bir kipten önce gelen bir <quote
+>+</quote
+>, kipin <emphasis
+>ayarlı</emphasis
+> olduğunu belirtir; bir değiştirici düğme için bu, onun basılı olduğu, diğer kipler içinse belirli bir kipin etkin olduğu anlamına gelir. Örneğin, <quote
+>+Kontrol</quote
+>, düğme kombinasyonunun yalnızca &Ctrl; düğmesi basılıysa geçerli olacağını belirtir.</para>
+
+<para
+>Bir kipten önce gelen bir <quote
+>-</quote
+>, kipin <emphasis
+>sıfırlandığı</emphasis
+> anlamına gelir; bu, bir kipten önce <quote
+>+</quote
+> koymanın tam tersidir; bir değiştirici düğme için bu düğmenin basılı olmadığı, diğer tüm kipleriçinse o belirli kipin etkin olmadığı anlamına gelir. Örneğin, <quote
+>-Kontrol</quote
+>, düğme kombinasyonunun yalnızca &Ctrl; düğmesi <emphasis
+>basılı değilken</emphasis
+> geçerli olacağını belirtir.</para>
+
+<note>
+<para
+>Bir düğme kombinasyonunda bir kip adı yoksa onun durumu yok sayılır.</para>
+</note>
+
+<para
+>Desteklenen düğme bağıntısı kipleri aşağıda listelenmiştir:</para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Seçenek, Kontrol, Üst Karakter</term>
+<listitem>
+<para
+>Bu kiplerden bir veya daha fazlası bir düğme kombinasyonunda kullanılabilir; bunlardan herhangi biri ayarlanmışsa düğme kombinasyonu sırasıyla bu değiştirici düğmeyi kullanır; sıfırlanırsa tam tersi olur</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AnyModifier</term>
+<listitem>
+<para
+>Bu kip ayarlanırsa düğme kombinasyonu herhangi bir değiştirici düğmeyi (önceki üç değiştirici düğmeden herhangi biri) kullanır; sıfırlanırsa tam tersi olur</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>ANSI</term>
+<listitem>
+<para
+>Bu kip ayarlanırsa &konsole; ANSI kaçış ve denetim dizileri gönderir</para>
+<para
+>Bu kip sıfırlanırsa &konsole;, VT52 kaçış ve denetim dizileri gönderir</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppScreen</term>
+<listitem>
+<para
+>Bu kip ayarlanırsa düğme kombinasyonu yalnızca Alternatif Ekran arabelleğini kullanan etkileşimli programları etkiler</para>
+<para
+>Bu kip sıfırlanırsa düğme kombinasyonu yalnızca Normal Ekran arabelleğini kullanırken uçbirimi etkiler</para>
+
+<note>
+<para
+>&konsole; iki ekran arabelleğinden yararlanır:</para>
+<itemizedlist>
+<listitem>
+<para
+>Normal Ekran arabelleği (öntanımlı): Önceki çıktı satırlarını görüntülemek için geçmişi görmenize olanak tanır; bu, genellikle komutları yürütmek için kullandığınız öntanımlı arabellektir.</para>
+</listitem>
+<listitem>
+<para
+>Alternatif Ekran arabelleği: Etkileşimli bir program çalıştırdığınızda uçbirim bu arabelleğe geçer (&eg; <application
+>less</application
+>, <application
+>vim</application
+>, <application
+>screen</application
+>, <application
+>tmux</application
+>... &etc;)</para>
+</listitem>
+</itemizedlist>
+</note>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KeyPad</term>
+<listitem>
+<para
+>Bu kip ayarlıysa düğme kombinasyonu, numara düğmeleri takımındaki bir düğmeyi kullanır. Bu kip, klavyedeki normal harfler ve numara takımlar arasındaki ayrımı belirlemek için yararlıdır. Örneğin, Sayı Kilidi <emphasis
+>açıksa</emphasis
+> iki ayrı düğme kombinasyonu yapılandırabilirsiniz; biri klavyede <quote
+>1</quote
+> ile etiketli düğmeyi (genellikle <keycap
+>F1</keycap
+> düğmesinin altındadır), diğeri de numara düğmeleri takımındaki <quote
+>1</quote
+> düğmesini kullanır. Aynı konsept, Sayı Kilidi <emphasis
+>kapalıyken</emphasis
+> de Son, Baş, İmleç Düğmeleri için de geçerlidir.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppCursorKeys</term>
+<listitem>
+<para
+>Bu kip VT100 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
+>İmleç Düğmeleri Kipi (DECCKM)</ulink
+>'ni gerçekler. Bu, bu kipin ayarlı veya sıfırlanan durumuna istinaden, her bir imleç düğmesinin (<keycap
+>Yukarı</keycap
+>, <keycap
+>Aşağı</keycap
+>, <keycap
+>Sağ</keycap
+>, <keycap
+>Sol</keycap
+>) gönderdiği kaçış dizilerini denetler.</para>
+<para
+>Öntanımlı olarak &konsole;, DECCKM ile ilgili olarak <keycap
+>Baş</keycap
+> ve <keycap
+>Son</keycap
+> düğmeleri için XTerm davranışını takip eder.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppKeyPad</term>
+<listitem>
+<para
+>Bu kip ayarlıysa düğme kombinasyonu, yalnızca numara düğmeleri takımı Uygulama Kipi'ndeyse (DECKPAM) çalışacaktır.</para>
+<para
+>Bu kip ayarlıysa düğme kombinasyonu yalnızca numara düğmeleri takımı Sayısal Kip'te ise (DECKPNM) çalışacaktır.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>NewLine</term>
+<listitem>
+<para
+>Bu kip ayarlıysa klavyedeki <keycap
+>Dönüş</keycap
+> (Giriş) düğmesi hem Satırbaşı "\r" hem de Yenisatır "\n" denetim karakterlerini gönderecektir.</para>
+<para
+>Bu kip ayarlıysa <keycap
+>Dönüş</keycap
+> düğmesi yalnızca bir Satırbaşı "\r" gönderecektir.</para>
+<para
+>Aynısı numara düğmeleri takımındaki <keycap
+>Giriş</keycap
+> düğmesi için de geçerlidir.</para>
+<para
+>Bu kip <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
+>LNM - Satır Besleme/Yeni Satır Kipi</ulink
+>'ne öykünür.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Düğmelerin ve Kiplerin her bir kombinasyonunun (ayarlama/sıfırlama) benzersiz olması gerektiğini unutmayın. Örneğin, aşağıdaki iki kuralı göz önünde bulundurun:</para>
+
+<itemizedlist>
+<listitem
+><para
+>A+Üst Karakter : <quote
+>A</quote
+></para
+></listitem>
+<listitem
+><para
+>a : <quote
+>a</quote
+></para
+></listitem>
+</itemizedlist>
+<para
+>&konsole; küçük <quote
+>a</quote
+> kuralını kabul etmeyecektir, bunu çalıştırmak için bu kurala bir <quote
+>-Üst Karakter</quote
+> eklemeniz gerekmektedir.</para>
+</sect2>
+
+<sect2 id="output-field">
+<title
+>Çıktı Alanı</title>
+
+<para
+>Çıktı alanında ilgili düğme kombinasyonuna basıldığında &konsole;'nin uçbirimee göndermesini istediğiniz kaçış dizilerini veya denetim karakterlerini ekleyebilirsiniz.</para>
+
+<para
+>Ayrıca &konsole;'de her biri özel bir anlama sahip olan aşağıdaki anahtar sözcüklerden herhangi birini de kullanabilirsiniz:</para>
+
+<itemizedlist>
+<listitem
+><para
+>scrollUpLine : Kabuk geçmişi arabelleğinde bir satır yukarı sar</para
+></listitem>
+<listitem
+><para
+>scrollUpPage : Kabuk geçmişi arabelleğinde bir sayfa yukarı sar</para
+></listitem>
+<listitem
+><para
+>scrollDownLine : Kabuk geçmişi arabelleğinde bir satır aşağı sar</para
+></listitem>
+<listitem
+><para
+>scrollDownPage : Kabuk geçmişi arabelleğinde bir sayfa aşağı sar</para
+></listitem>
+<listitem
+><para
+>scrollUpToTop : Kabuk geçmişi arabelleğinin en üstüne sar</para
+></listitem>
+<listitem
+><para
+>scrollDownToBottom : Kabuk geçmişi arabelleğinin en altına sar</para
+></listitem>
+</itemizedlist>
+
+<para
+>Ayrıca C-string sözdizimi ile de diziler kullanabilirsiniz; aşağıdaki kaçış dizileri kullanılabilirdir:</para>
+
+<itemizedlist>
+<listitem
+><para
+>\E : Vazgeç</para
+></listitem>
+<listitem
+><para
+>\\ : Ters eğik çizgi</para
+></listitem>
+<listitem
+><para
+>\" : Çift tırnak</para
+></listitem>
+<listitem
+><para
+>\t : Sekme</para
+></listitem>
+<listitem
+><para
+>\r : Satırbaşı</para
+></listitem>
+<listitem
+><para
+>\n : Yenisatır</para
+></listitem>
+<listitem
+><para
+>\b : Geri sil</para
+></listitem>
+<listitem>
+<para
+>\xHH : HH iki adet onaltılık basamaktır</para>
+<tip>
+<para
+>Bu, &ASCII; denetim karakterleri göndermek için kullanılabilir; örneğin, <quote
+>\x00</quote
+>, NUL karakteridir.</para>
+</tip>
+</listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="other-factors">
+<title
+>Diğer Sistem Özkaynakları</title>
+<para
+>Uçbirim düğme bağıntılarını etkileyebilecek başka sistem özkaynakları da vardır:</para>
+<itemizedlist>
+<listitem>
+<para
+>Her bir düğme kombinasyonunun göndermesi gereken kaçış dizileri ve denetim karakterleri hakkında bilgi almak için <ulink url="man:terminfo(5)"
+>terminfo</ulink
+> veya <ulink url="man:termcap(5)"
+>termcap</ulink
+> veritabanına başvurun.</para>
+</listitem>
+<listitem>
+<para
+>Büyük olasılıkla sisteminizde eşzamanlı olması gereken başka klavye veritabanları da olmalıdır (&eg; <application
+>BASH</application
+> kabuğu için <ulink url="man:bash(1)"
+>/etc/inputrc ve readline</ulink
+>); çünkü bunlar düğme kombinasyonlarına bağlı olan işlemleri (etkileşimleri) de etkilerler.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="further-reading">
+<title
+>Ek Okuma</title>
+<para
+>Kaçış dizileri ve denetim karakterleri üzerine daha fazla bilgi için aşağıdaki belgelendirmeye göz atın:</para>
+<itemizedlist>
+<listitem>
+<para
+><ulink url="https://www.vt100.net/docs/vt100-ug/"
+>VT100 kullanıcı kılavuzu</ulink
+></para>
+</listitem>
+<listitem>
+<para
+><ulink url="https://vt100.net/docs/vt102-ug/"
+>VT102 kullanıcı kılavuzu</ulink
+></para>
+</listitem>
+<listitem>
+<para
+>Kapsamlı ve eşsiz <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html"
+>XTerm Denetim Dizileri</ulink
+> belgelendirmesi</para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title
+>Sekme Çubuğu için Biçem Sayfası Kullanımı</title>
+<para
+>Sekme çubuğunun öntanımlı biçem sayfası, en küçük ve büyük sekme genişliklerini ayarlar. Kullanıcı bir <filename role="extension"
+>.css</filename
+> dosyası oluşturabilir ve &konsole; bunu sekme çubuğu için biçem sayfası olarak kullanır. <filename role="extension"
+>.css</filename
+> dosyasında onu kullanacak araç takımı <userinput
+>QTabBar::tab</userinput
+>'dır. </para>
+<para
+>Daha fazla bilgi için <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
+>&Qt; Biçem Sayfaları</ulink
+> belgelendirmesini okuyun. </para>
+
+<para
+>Örnekler: </para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Seçili sekmenin arka planını açık gri olarak değiştir <programlisting
+>QTabBar::tab:selected {
+    background: #999999
+}
+</programlisting>
+</para
+></listitem>
+
+
+<listitem
+><para
+>Seçili sekmenin metnini kırmızıya çevir <programlisting
+>QTabBar::tab:selected {
+    color: red
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Tüm sekmeler en az 200 piksel genişliğinde olsun <programlisting
+>QTabBar::tab {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Yalnızca seçili sekme en az 200 piksel genişliğinde olsun <programlisting
+>QTabBar::tab::selected {
+    min-width: 200px
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Bunların tümü bir dosyada birleştirilebilir <programlisting
+>QTabBar::tab::selected {
+    background: #999999;
+    color: red;
+    min-width: 200px;
+}
+QTabBar::tab {
+    min-width: 100px
+}
+</programlisting>
+</para
+></listitem>
+
+
+</itemizedlist>
+</para>
+
+</chapter>
+
+<chapter id="faqtips">
+<title
+>Biliyor Muydunuz? Genel Sorunlar ve Daha Fazlası</title>
+
+<sect1 id="didyouknow">
+<title
+>Biliyor Muydunuz?</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Metin seçerken &Ctrl; düğmesine basmak, satır sonlarının yapıştırıldığında boşluklara dönüştürülmesine neden olacaktır. </para
+></listitem>
+
+<listitem
+><para
+>Metin seçerken <keycombo action="simul"
+>&Ctrl;&Alt;</keycombo
+> düğmelerine basmak sütunları seçer. </para
+></listitem>
+
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;<mousebutton
+>Fare Tekerleği</mousebutton
+></keycombo
+> kombinasyonu, aynı Konqueror ve Firefox'ta olduğu gibi metin boyutunu yakınlaştırır. </para
+></listitem>
+
+<listitem
+><para
+>Bir program fare düğmelerinden herhangi birini değerlendirdiğinde, &Shift; düğmesine basmak açılır menünün görünmesini sağlayacaktır. </para
+></listitem>
+
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F10</keycap
+></keycombo
+> kısayolu menüyü etkinleştirir. </para
+></listitem>
+
+<listitem
+><para
+><keycombo action="simul"
+>&Shift;<keycap
+>Ekle</keycap
+></keycombo
+> düğmeleri pano içeriğini ekler. </para
+></listitem>
+
+<listitem
+><para
+>Çift tıklamak sözcüğün tümünü seçer. Fare düğmesini basılı tutmayı sürdürüp fareyi hareket ettirmek, seçimi genişletir. </para
+></listitem>
+
+<listitem
+><para
+>Üç tıklama tüm satırı seçer. Fare düğmesini basılı tutmayı sürdürüp fareyi hareket ettirmek seçimi genişletir. </para
+></listitem>
+
+<listitem
+><para
+>Sekme başlığındaki "%d" biçimlendiricisinde gizli bir özellik vardır. &konsole;'a bir dizin adını onun ilk karakterine kısaltmasını söyleyebilirsiniz. Örneğin, "/konsole/ikilisi/yolu", "konsole/i" olarak kısaltılabilir. Bu gizli özelliği etkinleştirmek ve denetlemek isterseniz <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> içindeki <filename
+>konsolerc</filename
+> dosyasını açın ve aşağıdaki satırları ekleyin:</para>
+
+<para
+><programlisting
+>[ProcessInfo]
+CommonDirNames=ad1,ad2,ad3...
+</programlisting>
+
+<note
+><para
+><application
+>Yakuake</application
+> kullanıyorsanız <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> içindeki <filename
+>yakuakerc</filename
+> dosyasını düzenlemeniz gerekir.</para
+></note>
+
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="commonissues">
+<title
+>Genel Sorunlar</title>
+<itemizedlist>
+
+<listitem>
+<para
+>Bazı yazıtipleri, diğer uygulamalarda kullanılabilir olmasına rağmen &konsole;'de kullanılamayabilir. Bu, &konsole;'de bir hata olduğu anlamına gelmez. &konsole;, en iyi görsel sonucu sağlamak eş aralıklı yazıtiplerini gerektirir, bu nedenle &Qt;'den yalnızca eş aralıklı yazıtiplerini listelemesini ister.</para>
+
+<para
+>16.08 sürümünden (Ağustos 2016) itibaren &konsole;, ekranın doğru görüntülenemeyebileceği uyarısıyla herhangi bir yazıtipinin seçilmesine izin verecek biçimde yapılandırılabilir.</para>
+</listitem>
+
+<listitem
+><para
+>KDE4'ten bu yana tüm sekmeler aynı süreç kimliğini kullanır. Bunun, bir sekmenin işleminde sorun olması durumunda diğer tüm sekmelerde de sorun yaşanması gibi bir yan etkisi vardır. </para>
+<para
+>Bu en çok, dış bir aygıta veya sisteme (ssh, nfs) bağlanan bir komutta sorunlar olduğunda fark edilir. </para
+></listitem>
+
+<listitem
+><para
+>&konsole;, <option
+>-e</option
+> seçeneğinden sonraki argümanları bir komut olarak ele alır ve onları yürütme amaçlı ayrıştırma ve olası bölme yerine doğrudan çalıştırır. Bu, xterm'den farklıdır. </para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem
+><para
+><command
+>konsole -e "komut1 ; komut2"</command
+> çalışmaz </para
+></listitem>
+
+    <listitem
+><para
+><command
+>konsole -e $SHELL -c "komut1 ; komut2"</command
+> çalışır </para
+></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
+<listitem
+><para
+>&konsole;, oturum açma kabuğunu çalıştırma konusunda kolaylık sağlamaz; çünkü geliştiricileri oturum açma kabuğunu bir uçbirim öykünücüsünde çalıştırma fikrinden hoşlanmıyor. </para>
+<para
+>Tabii ki kullanıcılar çok gerekirse oturum açma kabuğunu &konsole;'da çalıştırabilirler. Kullanımdaki profili düzenleyin ve komutunu bir oturum açma kabuğunu açıkça çağıracak biçimde değiştirin; örneğin, "<command
+>bash -l</command
+>" ve "<command
+>zsh -l</command
+>". </para>
+</listitem>
+
+<listitem
+><para
+><option
+>--new-tab</option
+> seçeneği bazen garipçe davranabilir. Yeni bir pencere oluşturabilir veya geçerli pencere yerine var olan başka bir &konsole; penceresinde yeni bir sekme oluşturabilir. </para>
+<para
+>Bu davranışlar garip gelebilir; ancak bunlara pek hata da denemez. <option
+>--new-tab</option
+> seçeneği var olan &konsole; pencerelerini yeniden kullanmaya çalışır; ancak tüm &konsole; pencereleri yeniden kullanılabilir değildir. &krunner; üzerinden açılan &konsole; pencerelerini yeniden kullanmak olanaklıdır; komut satırından açılan çoğu &konsole; penceresi değil. </para>
+</listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title
+>Emeği Geçenler ve Telif Hakkı</title>
+
+<para
+>&konsole; bakımı şu anda &Kurt.Hindenburg; &Kurt.Hindenburg.mail; tarafından yapılmaktadır.</para>
+
+<para
+>Önceki &konsole; bakımcıları: &Robert.Knight; &Robert.Knight.mail; ve &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+
+<para
+>&konsole; uygulaması telif hakkı &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
+
+<para
+>Bu belge ilk olarak &Jonathan.Singer; &Jonathan.Singer.mail; tarafından yazılmıştır.</para>
+
+<para
+>Bu belge &kde; 4.x için &Kurt.Hindenburg; &Kurt.Hindenburg.mail; tarafından güncellenmiştir.</para>
+
+<para
+>Bu belge &kde; 3.4 için &Kurt.Hindenburg; &Kurt.Hindenburg.mail; tarafından güncellenmiştir.</para>
+
+<para
+>DocBook <acronym
+>SGML</acronym
+> dönüşümü &Mike.McBride; ve &Lauri.Watts; tarafından yapıldı.</para>
+
+<para
+>Çeviri: Kaan Özdinçer<email
+>kaanozdincer@gmail.com</email
+></para
+><para
+>Çeviri: Emir SARI<email
+>emir_sari@icloud.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="links">
+<title
+>Bağlantılar</title>
+
+<para
+>Daha fazla bilgi için lütfen bu web sitelerini ziyaret edin:</para>
+<itemizedlist>
+<listitem
+><para
+><ulink url="https://userbase.kde.org/Konsole"
+>&kde; Kullanıcı Tabanı'ndaki &konsole; ana sayfası</ulink
+>&nbsp;</para
+></listitem>
+<listitem
+><para
+><ulink url="https://konsole.kde.org/"
+>&konsole; ana sayfası</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel"
+>&konsole; posta listesi</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://freebsd.kde.org/"
+>FreeBSD üzerinde &kde;</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://solaris.kde.org/"
+>&Solaris; üzerinde &kde;</ulink
+></para
+></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+
