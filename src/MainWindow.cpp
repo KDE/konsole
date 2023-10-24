@@ -512,7 +512,11 @@ void MainWindow::updateHamburgerMenu()
 
     menu->addSeparator();
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     menu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::FullScreen))));
+#else
+    menu->addAction(collection->action(KStandardAction::name(KStandardAction::FullScreen)));
+#endif
     menu->addAction(collection->action(QStringLiteral("split-view")));
     menu->addAction(controllerCollection->action(QStringLiteral("clear-history-and-reset")));
     menu->addAction(controllerCollection->action(QStringLiteral("enlarge-font")));
@@ -544,11 +548,19 @@ void MainWindow::updateHamburgerMenu()
     auto configureMenu = menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), static_cast<QMenu *>(factory()->container(QStringLiteral("settings"), nullptr))->title());
     configureMenu->addAction(toolBarMenuAction());
     configureMenu->addSeparator();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::SwitchApplicationLanguage))));
     configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::KeyBindings))));
     configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::ConfigureToolbars))));
     configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::ConfigureNotifications))));
     configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::Preferences))));
+#else
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::SwitchApplicationLanguage)));
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::KeyBindings)));
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureToolbars)));
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureNotifications)));
+    configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::Preferences)));
+#endif
     _hamburgerMenu->hideActionsOf(configureMenu);
 
     _hamburgerMenu->hideActionsOf(toolBar());

@@ -2088,7 +2088,11 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 
         _preventClose = true;
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         auto hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(QLatin1String(KStandardAction::name(KStandardAction::HamburgerMenu))));
+#else
+        auto hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(KStandardAction::name(KStandardAction::HamburgerMenu)));
+#endif
         if (hamburger) {
             hamburger->addToMenu(popup);
         }
