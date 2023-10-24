@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -1302,7 +1302,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1313,25 +1313,25 @@ msgstr[1] "Yra veikiantys %1 procesai šiame lange. Ar tikrai norite išeiti?"
 msgstr[2] "Yra veikiančių %1 procesų šiame lange. Ar tikrai norite išeiti?"
 msgstr[3] "Yra veikiantis %1 procesas šiame lange. Ar tikrai norite išeiti?"
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Patvirtinti uždarymą"
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Užverti &langą"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Užverti dabartinę kortelę"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid ""
@@ -1342,37 +1342,37 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Yra veikiantis procesas šiame lange. Ar tikrai norite išeiti?"
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiliai"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Bendri"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2561,13 +2561,13 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "Įrašyti ZModem atsisiuntimą į..."
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2578,13 +2578,13 @@ msgstr ""
 "ZModem programinės įrangos šioje sistemoje.</p><p>Galite įdiegti paketą "
 "„rzsz“ arba „lrzsz“.</p>"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Šioje sesijoje jau vykdomas ZModem failo perkėlimas.</p>"
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2593,7 +2593,7 @@ msgstr ""
 "<p>Šioje sistemoje nepavyko rasti tinkamos ZModem programos.</p><p>Tokią "
 "programą galite įgyti įdiegdami paketą „rzsz“ arba „lrzsz“.</p>"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Pažymėkite failus išsiuntimui su ZModem"

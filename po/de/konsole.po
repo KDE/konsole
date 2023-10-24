@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
 "PO-Revision-Date: 2023-04-29 12:15+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -1273,7 +1273,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Unterfenster-Layout laden ..."
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1286,25 +1286,25 @@ msgstr[1] ""
 "In diesem Fenster werden noch %1 Prozesse ausgeführt. Möchten Sie dennoch "
 "beenden?"
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Schließen bestätigen"
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Fenster schließen"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "A&ktuelles Unterfenster schließen"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
@@ -1312,37 +1312,37 @@ msgstr ""
 "In diesem Fenster gibt es noch %1 geöffnete Terminals. Möchten Sie dennoch "
 "beenden?"
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profile"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Allgemein"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Unterfensterleiste / Geteilte Ansicht"
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Temporäre Dateien"
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2487,12 +2487,12 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr "Aktuellen Ordner öffnen mit"
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "ZModem-Download speichern unter ..."
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2503,13 +2503,13 @@ msgstr ""
 "System keine ZModem-Software gefunden werden.</p><p>Sie sollten versuchen, "
 "die Software „rzsz“ oder „lrzsz“ zu installieren.</p>"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>In der aktuellen Sitzung läuft bereits eine ZModem-Übertragung.</p>"
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2518,7 +2518,7 @@ msgstr ""
 "<p>Auf Ihrem System kann keine passende ZModem-Software gefunden werden.</"
 "p><p>Versuchen Sie, „rzsz“ oder „lrzsz“ zu installieren.</p>"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Wählen Sie Dateien für den ZModem-Upload"

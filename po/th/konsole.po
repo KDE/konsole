@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
 "PO-Revision-Date: 2010-12-17 20:05+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -1351,7 +1351,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1361,28 +1361,28 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "คุณมีแท็บหลายแท็บในหน้าต่างนี้ คุณแน่ใจหรือว่าคุณต้องการออกจากโปรแกรม?"
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "ยืนยันการปิด"
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "คอนโซล-K"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "ปิดแท็บปัจจุบัน"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1390,7 +1390,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "คุณมีแท็บหลายแท็บในหน้าต่างนี้ คุณแน่ใจหรือว่าคุณต้องการออกจากโปรแกรม?"
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1398,7 +1398,7 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "สร้างโพรไฟล์ใหม่"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Generic, common options"
 #| msgid "General"
@@ -1406,25 +1406,25 @@ msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ทั่วไป"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2626,13 +2626,13 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "บันทึกการดาวน์โหลดจาก ZModem ไปยัง..."
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2642,13 +2642,13 @@ msgstr ""
 "<p>ตรวจพบการพยายามส่งถ่ายแฟ้มผ่าน ZModem แต่ไม่พบโปรแกรม ZModem ที่เหมาะสมในระบบนี้</"
 "p><p>คุณควรจะทำการติดตั้งแพกเกจ 'rzsz' หรือ 'lrzsz' ก่อน</p>"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>มีการส่งถ่ายแฟ้มผ่านทาง ZModem ในวาระปัจจุบันอยู่แล้ว</p>"
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2657,7 +2657,7 @@ msgstr ""
 "<p>ไม่พบโปรแกรม ZModem ที่เหมาะสมในระบบนี้</p><p>คุณควรจะทำการติดตั้งแพกเกจ 'rzsz' "
 "หรือ 'lrzsz' ก่อน</p>"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "เลือกแฟ้มสำหรับอัปโหลดผ่าน ZModem"

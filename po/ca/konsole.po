@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
 "PO-Revision-Date: 2023-10-14 10:30+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1273,7 +1273,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carrega la disposició de les pestanyes..."
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1284,61 +1284,61 @@ msgstr[0] ""
 msgstr[1] ""
 "Hi ha %1 processos executant-se en aquesta finestra. Encara voleu sortir?"
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmació del tancament"
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Tanca la &finestra"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Tanca la &pestanya actual"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hi ha %1 terminals oberts en aquesta finestra. Encara voleu sortir?"
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfils"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memòria"
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de pestanyes / Divisors"
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Fitxers temporals"
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2487,12 +2487,12 @@ msgstr "L'indicador de l'intèrpret d'ordres es mostra a la sessió «%1»"
 msgid "Open Current Folder With"
 msgstr "Obre la carpeta actual amb"
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Desa la baixada de ZModem a..."
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2503,14 +2503,14 @@ msgstr ""
 "s'ha trobat cap programari adequat per al ZModem en aquest sistema.</"
 "p><p>Potser hauríeu d'instal·lar el paquet «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>La sessió actual ja té una transferència de fitxer en curs del ZModem.</p>"
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2519,7 +2519,7 @@ msgstr ""
 "<p>No s'ha trobat cap programari adequat al ZModem en aquest sistema.</"
 "p><p>Potser hauríeu d'instal·lar el paquet «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Selecció de fitxers per a l'enviament per ZModem"

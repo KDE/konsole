@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
 "PO-Revision-Date: 2022-07-19 10:03+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -1270,7 +1270,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Načítať rozloženie kariet zo súboru"
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1280,61 +1280,61 @@ msgstr[0] "V tomto okne beží proces. Stále chcete skončiť?"
 msgstr[1] "V tomto okne bežia %1 procesy. Stále chcete skončiť?"
 msgstr[2] "V tomto okne beží %1 procesov. Stále chcete skončiť?"
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Potvrdiť zatvorenie"
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Zavrieť okno"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Zatvoriť aktuálnu kartu"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "V tomto okne je %1 otvorených terminálov. Stále chcete skončiť?"
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profily"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Všeobecné"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Panel kariet / Oddeľovače"
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Dočasné súbory"
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2487,12 +2487,12 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr "Otvoriť aktuálny priečinok s"
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Uložiť ZModem sťahovanie do..."
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2503,13 +2503,13 @@ msgstr ""
 "žiadny vhodný ZModem softvér.</p><p>Asi bude potrebné nainštalovať balíček "
 "'rzsz' alebo 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Aktuálne sedenie už má spustený ZModem prenos súborov.</p>"
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2518,7 +2518,7 @@ msgstr ""
 "<p>V systéme nebol nájdený žiadny vhodný ZModem softvér.</p><p>Asi bude "
 "potrebné nainštalovať balíček 'rzsz' alebo 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Vyberte súbory pre ZModem odoslanie"

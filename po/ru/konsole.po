@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
 "PO-Revision-Date: 2023-04-17 10:13+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -1283,7 +1283,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Загрузить макет вкладки…"
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1294,61 +1294,61 @@ msgstr[1] "В этом окне работают %1 процесса, вы де�
 msgstr[2] "В этом окне работают %1 процессов, вы действительно хотите выйти?"
 msgstr[3] "В этом окне работает %1 процесс, вы действительно хотите выйти?"
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Подтверждение выхода"
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Закрыть о&кно"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Закрыть текущую &вкладку"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "В этом окне открыто несколько терминалов (%1). Действительно выйти?"
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Профили"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Общие"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Панель вкладок / Разделение окна"
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Временные файлы"
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2485,12 +2485,12 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr "Открыть текущую папку с помощью"
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Сохранить получаемый по ZModem файл в…"
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2501,14 +2501,14 @@ msgstr ""
 "программ для работы с этим протоколом.</p><p>Вы можете установить пакет "
 "«rzsz» или «lrzsz».</p>"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>В данном сеансе уже выполняется передача файла по протоколу ZModem.</p>"
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2517,7 +2517,7 @@ msgstr ""
 "<p>Не найдено программ для работы с протоколом ZModem.</p><p>Вы можете "
 "установить пакет «rzsz» или «lrzsz».</p>"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Выберите файлы для передачи по ZModem"

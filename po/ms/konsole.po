@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
 "PO-Revision-Date: 2006-05-07 16:35+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -1297,7 +1297,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1306,65 +1306,65 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr ""
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, fuzzy, kde-format
 #| msgid "Close the current session"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Tutup sesi semasa"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Sim&pan &Profil Sesi"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr ""
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, fuzzy, kde-format
 #| msgid "Tab &Options"
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "&Opsyen Tab"
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2537,13 +2537,13 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, fuzzy, kde-format
 #| msgid "&ZModem Upload..."
 msgid "Save ZModem Download to..."
 msgstr "Muat naik &ZModem ..."
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2558,7 +2558,7 @@ msgstr ""
 "yang sesuai ditemui dalam sistem.\n"
 "<p>Anda mungkin ingin memasang pakej 'rzsz' atau 'lrzsz'.\n"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2566,7 +2566,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p> Sesi semasa sudah ada fail ZModem yang sedang dipindahkan."
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2578,7 +2578,7 @@ msgstr ""
 "<p>Tiada perisian ZModem yang sesuai ditemui dalam sistem.\n"
 "<p>Anda ingin pasang pakej 'rzsz' atau 'lrzsz'.\n"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"

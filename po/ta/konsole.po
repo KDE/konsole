@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
 "PO-Revision-Date: 2023-10-15 13:59+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1258,7 +1258,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "கீற்றுகளின் தளவமைப்பை ஏற்று..."
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1267,61 +1267,61 @@ msgid_plural ""
 msgstr[0] "இச்சாளரத்தில் ஓர் நிரல் இயங்கிக்கொண்டிருக்கிறது. உறுதியாக வெளியேற வேண்டுமா?"
 msgstr[1] "இச்சாளரத்தில் %1 நிரல்கள் இயங்கிக்கொண்டிருக்கின்றன. உறுதியாக வெளியேற வேண்டுமா?"
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "வெளியேறுவதை உறுதிப்படுத்தல்"
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&சாளரத்தை மூடு"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "&தற்போதைய கீற்றை மூடு"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "இச்சாளரத்தில் %1 முனையங்கள் திறந்துள்ளன. உறுதியாக வேளியேற வேண்டுமா?"
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "பயன்முறைகள்"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "பொதுவானவை"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "நினைவகம்"
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "கீற்றுப்பட்டை / பிரிப்பான்கள்"
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "தற்காலிக கோப்புகள்"
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2457,12 +2457,12 @@ msgstr "'%1' அமர்வில் தூண்டி காட்டப்�
 msgid "Open Current Folder With"
 msgstr "தற்போதைய அடைவை இதனால் திற"
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "&ZModem பதிவிறக்கத்தை இங்கு சேமி…"
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2477,7 +2477,7 @@ msgstr ""
 "மென்பொருள் அமைப்பில் இல்லை.\n"
 "<p> 'rzsz' அல்லது 'lrzsz' தொகுப்பை வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2485,7 +2485,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<பி>நடப்பு அமர்வில் ஏற்கனவே உள்ள Z மோடம் கோப்பு இடமாற்றம் நடைமுறையில் உள்ளது."
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2497,7 +2497,7 @@ msgstr ""
 "<p>பொருத்தமான Z மோடம் மென்பொருள் அமைப்பு கிடைக்கவில்லை.\n"
 " <p>'rzsz' அல்லது 'lrzsz '  தொகுப்பு வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"

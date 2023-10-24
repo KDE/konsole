@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 00:45+0000\n"
-"PO-Revision-Date: 2023-09-09 13:15+0200\n"
+"POT-Creation-Date: 2023-10-24 00:44+0000\n"
+"PO-Revision-Date: 2023-10-15 05:03+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1270,7 +1270,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carica la disposizione delle schede..."
 
-#: MainWindow.cpp:792 MainWindow.cpp:817
+#: MainWindow.cpp:804 MainWindow.cpp:829
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1281,61 +1281,61 @@ msgstr[0] ""
 msgstr[1] ""
 "Ci sono %1 processi in esecuzione in questa finestra. Vuoi uscire comunque?"
 
-#: MainWindow.cpp:798 MainWindow.cpp:823 MainWindow.cpp:841
+#: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Conferma chiusura"
 
-#: MainWindow.cpp:799 MainWindow.cpp:824 MainWindow.cpp:842
+#: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Chiudi &finestra"
 
-#: MainWindow.cpp:825 MainWindow.cpp:843
+#: MainWindow.cpp:837 MainWindow.cpp:855
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Chiudi la &scheda attuale"
 
-#: MainWindow.cpp:838
+#: MainWindow.cpp:850
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Ci sono %1 terminali aperti in questa finestra. Vuoi ancora uscire?"
 
-#: MainWindow.cpp:953 Part.cpp:307
+#: MainWindow.cpp:965 Part.cpp:307
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profili"
 
-#: MainWindow.cpp:970
+#: MainWindow.cpp:982
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Generale"
 
-#: MainWindow.cpp:982
+#: MainWindow.cpp:994
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memoria"
 
-#: MainWindow.cpp:987
+#: MainWindow.cpp:999
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra delle schede / Divisori"
 
-#: MainWindow.cpp:992
+#: MainWindow.cpp:1004
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "File temporanei"
 
-#: MainWindow.cpp:997
+#: MainWindow.cpp:1009
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2482,12 +2482,12 @@ msgstr "Il prompt della shell viene visualizzato nella sessione '%1'"
 msgid "Open Current Folder With"
 msgstr "Apri la cartella attuale con"
 
-#: session/SessionController.cpp:2143
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Salva scaricamento con &ZModem a..."
 
-#: session/SessionController.cpp:2153
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2498,14 +2498,14 @@ msgstr ""
 "sistema non è stato trovato il software ZModem necessario.</p><p>Dovresti "
 "installare i pacchetti «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2163
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>La sessione attuale ha già un trasferimento di file ZModem in corso.</p>"
 
-#: session/SessionController.cpp:2173
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2514,7 +2514,7 @@ msgstr ""
 "<p>Non è stato trovato il software ZModem necessario sul sistema.</"
 "p><p>Dovresti installare i pacchetti «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2178
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Seleziona i file per l'invio con ZModem"
@@ -3526,20 +3526,16 @@ msgid "Toggle maximize current view"
 msgstr "Massimizza la vista attuale"
 
 #: ViewManager.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Massimizza la vista attuale"
+msgstr "Commuta lo zoom e massimizza la vista corrente"
 
 #: ViewManager.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Massimizza la vista attuale"
+msgstr "Commuta lo zoom e massimizza la vista corrente"
 
 #: ViewManager.cpp:306
 #, kde-format
