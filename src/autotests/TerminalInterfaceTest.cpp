@@ -136,7 +136,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     passwdFile.open(QIODevice::ReadOnly);
 
     do {
-        const QString userData(passwdFile.readLine());
+        const QString userData(QString::fromUtf8(passwdFile.readLine()));
         const QStringList dataFields(userData.split(QLatin1Char(':')));
         if (dataFields.at(2).toInt() == uid) {
             defaultExePath = dataFields.at(6);
@@ -145,7 +145,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     passwdFile.close();
 
-    QFile procExeTarget(QString("/proc/%1/exe").arg(terminalProcessId));
+    QFile procExeTarget(QStringLiteral("/proc/%1/exe").arg(terminalProcessId));
     if (procExeTarget.exists()) {
         QCOMPARE(procExeTarget.symLinkTarget(), defaultExePath.trimmed());
     }
@@ -204,7 +204,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 #if defined(Q_OS_LINUX)
     QFile procInfo(QStringLiteral("/proc/%1/stat").arg(foregroundProcessId));
     QVERIFY(procInfo.open(QIODevice::ReadOnly));
-    const QString data(procInfo.readAll());
+    const QString data(QString::fromUtf8(procInfo.readAll()));
     const int nameStartIdx = data.indexOf(QLatin1Char('(')) + 1;
     const QString name(data.mid(nameStartIdx, data.lastIndexOf(QLatin1Char(')')) - nameStartIdx));
     QCOMPARE(name, command);
