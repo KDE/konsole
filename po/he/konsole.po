@@ -22,25 +22,25 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 00:44+0000\n"
-"PO-Revision-Date: 2017-05-24 07:33-0400\n"
-"Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "דרור לוין, מארק קרפיבנר"
+msgstr "דרור לוין, מארק קרפיבנר,צוות תרגום KDE ישראל"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "spatz@012.net.il,mark125@gmail.com"
+msgstr "spatz@012.net.il,mark125@gmail.com,kde-l10n-he@kde.org"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -78,7 +78,7 @@ msgstr "הגדרות"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "תוספים"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -90,13 +90,13 @@ msgstr "עזרה"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "סרגל כלים ראשי"
 
 #. i18n: ectx: Menu (history)
 #: ../desktop/partui.rc:14
 #, kde-format
 msgid "S&crollback"
-msgstr "&גלילה"
+msgstr "היסטוריה נ&גללת"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:78
@@ -116,7 +116,7 @@ msgstr "ערכת צבעים חדשה"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Name of profile to use for new Konsole instance"
-msgstr "שם הפרופיל לשימוש עבור מופע חדש של Konsole"
+msgstr "שם הפרופיל לשימוש במופע חדש של Konsole"
 
 #: Application.cpp:54
 #, fuzzy, kde-format
@@ -137,13 +137,13 @@ msgstr "צור פרופיל חדש המבוסס על הפרופיל הנבחר"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Set the initial working directory of the new tab or window to 'dir'"
-msgstr "קבע את ספריית העבודה הראשונית של לשונית חדשה או חלון חדש אל \"ספרייה\""
+msgstr "הגדרת תיקיית העבודה הראשונית של הלשונית או החלון החדשים ל־‚dir’"
 
 #: Application.cpp:57
 #, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
-msgstr "אל תסגור את ההפעלה הראשונית באופן אוטומטי כאשר היא נסגרת."
+msgstr "לא לסגור את ההפעלה הראשונית אוטומטית עם סגירתה."
 
 #: Application.cpp:61
 #, fuzzy, kde-format
@@ -160,7 +160,7 @@ msgstr "צור כרטיסייה חדשה בחלון קיים במקום ליצו
 #, kde-format
 msgctxt "@info:shell"
 msgid "Create tabs as specified in given tabs configuration file"
-msgstr "צור כרטיסיות כפי שניתן בקובץ ההגדרות של הכרטיסיות"
+msgstr "יצירת לשוניות כפי שצוין בקובץ הגדרות הלשוניות שסופק"
 
 #: Application.cpp:64
 #, kde-format
@@ -169,67 +169,67 @@ msgid ""
 "Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
 "(by default) is pressed"
 msgstr ""
-"התחל את Konsole הרקע והבא לקדמה כאשר  Ctrl+Shift+F12 (בברירת מחדל) נלחץ"
+"להפעיל את Konsole ברקע ולהביא לחזית בלחיצה על Ctrl+Shift+F12 (כברירת מחדל)"
 
 #: Application.cpp:65
 #, kde-format
 msgctxt "@info:shell"
 msgid "Run in a separate process"
-msgstr "הפעל בתהליך נפרד"
+msgstr "הרצה בתהליך נפרד"
 
 #: Application.cpp:66
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "הצג את התפריט, התעלם מברירת המחדל"
+msgstr "הצגת התפריט, התעלמות מברירת המחדל"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr "הסתר את התפריט, התעלם מברירת המחדל"
+msgstr "הסתרת התפריט, התעלמות מברירת המחדל"
 
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr "הצג את סרגל הכלים, ללא קשר לברירת המחדל"
+msgstr "הצגת סרגל הכלים, התעלמות מברירת המחדל"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr "הסתר את סרגל הכלים, ללא קשר לברירת המחדל"
+msgstr "הסתרת סרגל הכלים, התעלמות מברירת המחדל"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
-msgstr "התחל את konsole במסך מלא"
+msgstr "הפעלת Konsole במסך מלא"
 
 #: Application.cpp:71
 #, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
-msgstr "מבטל את השימוש ברקעים שקופים, גם אם המערכת תומכת בהם."
+msgstr "משבית את השימוש ברקעים שקופים, גם אם המערכת תומכת בהם."
 
 #: Application.cpp:72
 #, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
-msgstr "הצג הפרופילים זמינים"
+msgstr "הצגת הפרופילים הזמינים"
 
 #: Application.cpp:73
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
-msgstr "הצג את כל שמות הפרופילים והסוגים שלהם (לשימוש עם ‎-p)"
+msgstr "הצגת כל שמות הפרופילים והסוגים שלהם (לשימוש עם ‎-p)"
 
 #: Application.cpp:74
 #, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
-msgstr "שנה את ערך המאפיין של הפרופיל."
+msgstr "שינוי ערך מאפיין של פרופיל."
 
 #: Application.cpp:76
 #, kde-format
@@ -238,8 +238,8 @@ msgid ""
 "Command to execute. This option will catch all following arguments, so use "
 "it as the last option."
 msgstr ""
-"הפקודה להפעלה. אפשרות זה תתפוס את כל האגומנטים, אז השתמש בה בתור אפשרות "
-"ראשונה."
+"פקודה להפעלה. אפשרות זו תלכוד את כל הארגומנטים, כך שכדאי להשתמש בה בתור "
+"המוצא האחרון."
 
 #: Application.cpp:79
 #, kde-format
@@ -339,67 +339,67 @@ msgstr "צבע 8"
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Foreground (Intense)"
-msgstr "קדמה (חזק)"
+msgstr "חזית (עז)"
 
 #: colorscheme/ColorScheme.cpp:142
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Background (Intense)"
-msgstr "רקע (חזק)"
+msgstr "רקע (עז)"
 
 #: colorscheme/ColorScheme.cpp:143
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 1 (Intense)"
-msgstr "צבע 1 (חזק)"
+msgstr "צבע 1 (עז)"
 
 #: colorscheme/ColorScheme.cpp:144
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 2 (Intense)"
-msgstr "צבע 2 (חזק)"
+msgstr "צבע 2 (עז)"
 
 #: colorscheme/ColorScheme.cpp:145
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 3 (Intense)"
-msgstr "צבע 3 (חזק)"
+msgstr "צבע 3 (עז)"
 
 #: colorscheme/ColorScheme.cpp:146
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 4 (Intense)"
-msgstr "צבע 4 (חזק)"
+msgstr "צבע 4 (עז)"
 
 #: colorscheme/ColorScheme.cpp:147
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 5 (Intense)"
-msgstr "צבע 5 (חזק)"
+msgstr "צבע 5 (עז)"
 
 #: colorscheme/ColorScheme.cpp:148
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 6 (Intense)"
-msgstr "צבע 6 (חזק)"
+msgstr "צבע 6 (עז)"
 
 #: colorscheme/ColorScheme.cpp:149
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 7 (Intense)"
-msgstr "צבע 7 (חזק)"
+msgstr "צבע 7 (עז)"
 
 #: colorscheme/ColorScheme.cpp:150
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Color 8 (Intense)"
-msgstr "צבע 8 (חזק)"
+msgstr "צבע 8 (עז)"
 
 #: colorscheme/ColorScheme.cpp:151
 #, kde-format
 msgctxt "@item:intable palette"
 msgid "Foreground (Faint)"
-msgstr "קדמה (חלש)"
+msgstr "חזית (חלש)"
 
 #: colorscheme/ColorScheme.cpp:152
 #, kde-format
@@ -477,7 +477,7 @@ msgstr "צבע"
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
-msgstr "צבע חזק"
+msgstr "צבע עז"
 
 #: colorscheme/ColorSchemeEditor.cpp:112
 #, kde-format
@@ -499,7 +499,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
-msgstr "בחר קובץ תמונת רקע"
+msgstr "בחירת קובץ תמונת רקע"
 
 #: colorscheme/ColorSchemeEditor.cpp:190
 #, fuzzy, kde-format
@@ -519,25 +519,25 @@ msgstr "ערכת צבעים חדשה"
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
-msgstr "ערוך ערכת צבעים"
+msgstr "עריכת ערכת צבעים"
 
 #: colorscheme/ColorSchemeEditor.cpp:383
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose color"
-msgstr "לחץ כדי לבחור צבע"
+msgstr "ללחוץ לבחירת צבע"
 
 #: colorscheme/ColorSchemeEditor.cpp:388
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
-msgstr "לחץ כדי לבחור צבע חזק"
+msgstr "ללחוץ כדי לבחור צבע עז"
 
 #: colorscheme/ColorSchemeEditor.cpp:393
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
-msgstr "לחץ כדי לבחור צבע חלש"
+msgstr "ללחוץ כדי לבחור צבע חלש"
 
 #. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
 #. i18n: ectx: property (text), widget (QLabel, discriptionLabel)
@@ -601,13 +601,13 @@ msgstr "תמונת רקע:"
 #: colorscheme/ColorSchemeEditor.ui:144
 #, kde-format
 msgid "Edit the path of the background image"
-msgstr "ערוך את הנתיב של תמונת הרקע"
+msgstr "עריכת נתיב תמונת הרקע"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, wallpaperSelectButton)
 #: colorscheme/ColorSchemeEditor.ui:151
 #, kde-format
 msgid "Choose the background image"
-msgstr "בחר את תמונת הרקע"
+msgstr "בחירת תמונת רקע"
 
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
@@ -616,7 +616,7 @@ msgstr "בחר את תמונת הרקע"
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
 #: colorscheme/ColorSchemeEditor.ui:165
@@ -719,7 +719,7 @@ msgstr "AaZz09..."
 #: CopyInputDialog.cpp:30
 #, kde-format
 msgid "Copy Input"
-msgstr "העתק קלט"
+msgstr "העתקת קלט"
 
 #. i18n: ectx: property (text), widget (QLabel, filterLabel)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -732,13 +732,13 @@ msgstr "מסנן:"
 #: CopyInputDialog.ui:46
 #, kde-format
 msgid "Select All"
-msgstr "בחר הכל"
+msgstr "בחירה בהכול"
 
 #. i18n: ectx: property (text), widget (QPushButton, deselectAllButton)
 #: CopyInputDialog.ui:53
 #, kde-format
 msgid "Deselect All"
-msgstr "בטל בחירה"
+msgstr "ביטול בחירה"
 
 #: filterHotSpots/FileFilterHotspot.cpp:169
 #, kde-format
@@ -766,22 +766,22 @@ msgstr ""
 #: filterHotSpots/UrlFilterHotspot.cpp:90
 #, kde-format
 msgid "Open Link"
-msgstr "פתח קישור"
+msgstr "פתיחת קישור"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:92
 #, kde-format
 msgid "Copy Link Address"
-msgstr "העתק כתובת הקישור"
+msgstr "העתקת כתובת קישור"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:95
 #, kde-format
 msgid "Send Email To..."
-msgstr "שלח דוא\"ל אל ..."
+msgstr "שליחת דוא״ל אל…"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
 msgid "Copy Email Address"
-msgstr "העתק כתובת דוא\"ל"
+msgstr "העתקת כתובת דוא״ל"
 
 #: FontDialog.cpp:27
 #, fuzzy, kde-format
@@ -810,13 +810,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
-msgstr "התאם גלילה"
+msgstr "כיוון היסטוריית גלילה"
 
 #: HistorySizeDialog.cpp:47
 #, kde-format
 msgctxt "@info:status"
 msgid "Any adjustments are only temporary to this session."
-msgstr "כל התאמה היא זמנית להפעלה זו."
+msgstr "כל הכיוונים הם זמניים להפעלה זו."
 
 #: KeyBindingEditor.cpp:54
 #, kde-format
@@ -842,7 +842,7 @@ msgstr "רשימת מיפוי תווים חדשה"
 #: KeyBindingEditor.cpp:223
 #, kde-format
 msgid "Edit Key Binding List"
-msgstr "ערוך את רשימת מיפוי התווים"
+msgstr "עריכת רשימת צירופי מקשים"
 
 #: KeyBindingEditor.cpp:286
 #, kde-format
@@ -855,7 +855,7 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
-msgstr "הוסף"
+msgstr "הוספה"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, removeKeyBindingsButton)
@@ -864,7 +864,7 @@ msgstr "הוסף"
 #: widgets/EditProfileKeyboardPage.ui:95
 #, kde-format
 msgid "Remove"
-msgstr "הסר"
+msgstr "הסרה"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: KeyBindingEditor.ui:94
@@ -907,19 +907,19 @@ msgstr "מפתחי Konsole ‏‎(c) 1997-2015"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
-msgstr "Kurt Hindenburg"
+msgstr "קרט הינדנבורג"
 
 #: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
-msgstr "מתחזק ראשי, תיקוני באגים ושיפורים כללים"
+msgstr "מתחזק ראשי, תיקוני תקלות ושיפורים כללים"
 
 #: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
-msgstr "Robert Knight"
+msgstr "רוברט נייט"
 
 #: main.cpp:358
 #, kde-format
@@ -931,7 +931,7 @@ msgstr "מתחזק קודם, הסבה אל KDE4"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
-msgstr "Lars Doelle"
+msgstr "לארס דואל"
 
 #: main.cpp:360
 #, kde-format
@@ -982,7 +982,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
-msgstr "תיקוני באגים ושיפורים כלליים"
+msgstr "תיקוני תקלות ושיפורים כלליים"
 
 #: main.cpp:376
 #, kde-format
@@ -1022,25 +1022,25 @@ msgstr "Thomas Dreibholz"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
-msgstr "Jekyll Wu"
+msgstr "ג׳קיל וו"
 
 #: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
-msgstr "Waldo Bastian"
+msgstr "ולדו בסטיאן"
 
 #: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
-msgstr "Stephan Binner"
+msgstr "סטפן בינר"
 
 #: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
-msgstr "Thomas Dreibholz"
+msgstr "תומס דרייבהולץ"
 
 #: main.cpp:389
 #, kde-format
@@ -1059,7 +1059,7 @@ msgstr "Chris Machemer"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
-msgstr "תיקוני באגים"
+msgstr "תיקוני תקלות"
 
 #: main.cpp:391
 #, kde-format
@@ -1083,19 +1083,19 @@ msgstr "תמיכה בסולאריס והיסטוריה"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
-msgstr "Alexander Neundorf"
+msgstr "אלכסנדר נוינדורף"
 
 #: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
-msgstr "תיקוני באגים ושיפור בביצועי ההפעלה הראשונית"
+msgstr "תיקוני תקלות ושיפור בביצועי ההפעלה"
 
 #: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
-msgstr "Peter Silva"
+msgstr "פיטר סילבה"
 
 #: main.cpp:396
 #, kde-format
@@ -1107,7 +1107,7 @@ msgstr "שיפורים בסימניות"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
-msgstr "Lotzi Boloni"
+msgstr "לוצי בולוני"
 
 #: main.cpp:399
 #, kde-format
@@ -1123,7 +1123,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
-msgstr "David Faure"
+msgstr "דיויד פור"
 
 #: main.cpp:404
 #, kde-format
@@ -1139,7 +1139,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
-msgstr "Antonio Larrosa"
+msgstr "אנטוניו לרוסה"
 
 #: main.cpp:407
 #, kde-format
@@ -1151,7 +1151,7 @@ msgstr "אפקטים חזותיים"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
-msgstr "Matthias Ettrich"
+msgstr "מתיאס אטריק"
 
 #: main.cpp:410
 #, kde-format
@@ -1160,50 +1160,50 @@ msgid ""
 "Code from the kvt project\n"
 "General improvements"
 msgstr ""
-"לקח קוד מפרוייקט kvt\n"
+"לקח קוד מפרויקט kvt\n"
 "שיפורים כלליים"
 
 #: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
-msgstr "Warwick Allison"
+msgstr "וורוויק אליסון"
 
 #: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
-msgstr "שיפורי תבניות ובחירת טקסט"
+msgstr "שיפורי ערכות צבע ובחירת טקסט"
 
 #: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
-msgstr "Dan Pilone"
+msgstr "דן פיילון"
 
 #: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
-msgstr "הסבה אל SGI"
+msgstr "הסבה ל־SGI"
 
 #: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
-msgstr "Kevin Street"
+msgstr "קווין סטריט"
 
 #: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
-msgstr "הסבה אל FreeBSD"
+msgstr "הסבה ל־FreeBSD"
 
 #: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
-msgstr "Sven Fischer"
+msgstr "סוון פישר"
 
 #: main.cpp:419
 #, kde-format
@@ -1215,7 +1215,7 @@ msgstr "Dale M. Flaven"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
-msgstr "Martin Jones"
+msgstr "מרטין ג׳ונס"
 
 #: main.cpp:421
 #, kde-format
@@ -1239,7 +1239,7 @@ msgstr "&לשונית חדשה"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
-msgstr "&שכפל לשונית"
+msgstr "&שכפול לשונית"
 
 #: MainWindow.cpp:415
 #, kde-format
@@ -1251,7 +1251,7 @@ msgstr "&חלון חדש"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
-msgstr "סגור חלון"
+msgstr "סגירת חלון"
 
 #: MainWindow.cpp:427
 #, kde-format
@@ -1263,13 +1263,13 @@ msgstr "&סימניות"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
-msgstr "נהל פרופילים..."
+msgstr "ניהול פרופילים…"
 
 #: MainWindow.cpp:461
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
-msgstr "הפעל תפריט"
+msgstr "הפעלת תפריט"
 
 #: MainWindow.cpp:467
 #, fuzzy, kde-format
@@ -1291,26 +1291,26 @@ msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
-msgstr[0] "יש לך תהליך רץ בחלון זה. האם ברצונך לצאת בכל זאת?"
-msgstr[1] "יש לך %1 תהליכים רצים בחלון זה. האם ברצונך לצאת בכל זאת?"
+msgstr[0] "יש תהליך רץ בחלון זה. לצאת בכל זאת?"
+msgstr[1] "יש %1 תהליכים רצים בחלון זה. לצאת בכל זאת?"
 
 #: MainWindow.cpp:810 MainWindow.cpp:835 MainWindow.cpp:853
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
-msgstr "אשר יציאה"
+msgstr "אישור יציאה"
 
 #: MainWindow.cpp:811 MainWindow.cpp:836 MainWindow.cpp:854
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
-msgstr "סגור חלון"
+msgstr "סגירת החלון"
 
 #: MainWindow.cpp:837 MainWindow.cpp:855
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
-msgstr "סגור את ה&לשונית הנוכחית"
+msgstr "סגירת ה&לשונית הנוכחית"
 
 #: MainWindow.cpp:850
 #, fuzzy, kde-format
@@ -1940,7 +1940,7 @@ msgstr "אפשרויות פלט"
 #: PrintOptions.ui:39 settings/konsole.kcfg:175
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
-msgstr "הדפסה &ידידותית (טקסט שחור, ללא רקע)"
+msgstr "הדפסה י&דידותית (טקסט שחור, ללא רקע)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
@@ -2007,7 +2007,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
-msgstr "לחיצה כפולה לשנות את הקיצור"
+msgstr "לחיצה כפולה כדי לשנות את הקיצור"
 
 #: RenameTabDialog.cpp:25
 #, kde-format
@@ -2017,12 +2017,12 @@ msgstr ""
 #: SaveHistoryTask.cpp:70
 #, kde-format
 msgid "Save Output From %1"
-msgstr "שמור את הפלט של %1"
+msgstr "שמירת הפלט של %1"
 
 #: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
-msgstr "הכתובת %1 היא לא תקינה, אין אפשרות לשמור את הפלט."
+msgstr "הכתובת %1 שגויה, אי אפשר לשמור את הפלט."
 
 #: SaveHistoryTask.cpp:172
 #, kde-format
@@ -2030,7 +2030,7 @@ msgid ""
 "A problem occurred when saving the output.\n"
 "%1"
 msgstr ""
-"אירעה שגיאה בעית שמירת הפלט.\n"
+"אירעה שגיאה בשמירת הפלט.\n"
 "%1"
 
 #: schemas.cpp:1
@@ -2081,12 +2081,12 @@ msgstr "אדום על גבי שחור"
 #: schemas.cpp:10
 #, kde-format
 msgid "Solarized"
-msgstr "סולאריים"
+msgstr "זורח"
 
 #: schemas.cpp:11
 #, kde-format
 msgid "Solarized Light"
-msgstr "סולארי בהיר"
+msgstr "זורח בהיר"
 
 #: schemas.cpp:12
 #, kde-format
@@ -2122,7 +2122,7 @@ msgstr "פעמון במשימה \"%1\""
 #: session/Session.cpp:408
 #, kde-format
 msgid "Could not find binary: "
-msgstr "אין אפשרות למצוא את קובץ ההפעלה: "
+msgstr "אי אפשר למצוא את קובץ ההפעלה: "
 
 #: session/Session.cpp:417
 #, kde-format
@@ -2133,7 +2133,7 @@ msgstr "אזהרה: "
 #: session/Session.cpp:517
 #, kde-format
 msgid "Could not find an interactive shell to start."
-msgstr "אין אפשרות למצוא מעטפת אינטראקטיבית להפעלה."
+msgstr "אי אפשר למצוא מעטפת אינטראקטיבית להפעלה."
 
 #: session/Session.cpp:523 session/Session.cpp:525
 #, kde-format
@@ -2141,13 +2141,12 @@ msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
-"אין אפשרות למצוא את \"%1\", מפעיל את \"%2\" במקום. אנא בדוק את הגדרות "
-"הפרופיל שלך."
+"אי אפשר למצוא את ‚%1’,‏ ‚%2’ מופעל במקום. נא לבדוק את הגדרות הפרופיל שלך."
 
 #: session/Session.cpp:595
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
-msgstr "אין אפשרות להפעיל את התכנית \"%1\" עם הארגונמטים \"‎\"%2."
+msgstr "אי אפשר להפעיל את התוכנית ‚%1’ עם הארגונמטים ‚%2’."
 
 #: session/Session.cpp:749
 #, fuzzy, kde-format
@@ -2181,12 +2180,12 @@ msgstr "הסתיים"
 #: session/Session.cpp:1088 session/Session.cpp:1109
 #, kde-format
 msgid "Program '%1' crashed."
-msgstr "התוכנית \"%1\" קרסה."
+msgstr "התוכנית ‚%1’ קרסה."
 
 #: session/Session.cpp:1090
 #, kde-format
 msgid "Program '%1' exited with status %2."
-msgstr "משימה \"%1\" הסתיימה עם מצב %2."
+msgstr "התוכנית ‚%1’ נסגרה עם מצב %2."
 
 #: session/Session.cpp:1621
 #, kde-format
@@ -2212,27 +2211,27 @@ msgstr ""
 #: session/SessionController.cpp:451
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
-msgstr "היישום לא יודע איך לפתוח את הסימנייה: "
+msgstr "Konsole לא יודע איך לפתוח את הסימנייה: "
 
 #: session/SessionController.cpp:530
 #, kde-format
 msgid "Search for '%1' with"
-msgstr "מחפש עבור \"%1\" בעזרת"
+msgstr "חיפוש אחר ‚%1’ בעזרת"
 
 #: session/SessionController.cpp:546
 #, kde-format
 msgid "Configure Web Shortcuts..."
-msgstr "הגדרת קיצורי רשת..."
+msgstr "הגדרת קיצורי רשת…"
 
 #: session/SessionController.cpp:664
 #, kde-format
 msgid "&Close Session"
-msgstr "&סגור הפעלה"
+msgstr "&סגירת הפעלה"
 
 #: session/SessionController.cpp:671
 #, kde-format
 msgid "Open File Manager"
-msgstr "פתח את מנהל הקבצים"
+msgstr "פתיחת מנהל הקבצים"
 
 #: session/SessionController.cpp:683
 #, kde-format
@@ -2273,17 +2272,17 @@ msgstr "העתק קלט"
 #: session/SessionController.cpp:724
 #, kde-format
 msgid "Paste Selection"
-msgstr "הדבק בחירה"
+msgstr "הדבקת בחירה"
 
 #: session/SessionController.cpp:731
 #, kde-format
 msgid "Web Search"
-msgstr "חפש ברשת"
+msgstr "חיפוש ברשת"
 
 #: session/SessionController.cpp:737
 #, kde-format
 msgid "&Select All"
-msgstr "בחר ה&כל"
+msgstr "בחירה בה&כול"
 
 #: session/SessionController.cpp:741
 #, fuzzy, kde-format
@@ -2294,42 +2293,42 @@ msgstr "בחר שורה"
 #: session/SessionController.cpp:746
 #, kde-format
 msgid "Select &Line"
-msgstr "בחר שורה"
+msgstr "בחירה ב&שורה"
 
 #: session/SessionController.cpp:749
 #, kde-format
 msgid "Save Output &As..."
-msgstr "שמור את הפלט &בתור..."
+msgstr "שמירת הפלט &בתור…"
 
 #: session/SessionController.cpp:755
 #, kde-format
 msgid "&Print Screen..."
-msgstr "&הדפסת מסך..."
+msgstr "ה&דפסת מסך…"
 
 #: session/SessionController.cpp:759
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "התאם גלילה..."
+msgstr "כיוון היסטוריית גלילה…"
 
 #: session/SessionController.cpp:763
 #, kde-format
 msgid "Clear Scrollback"
-msgstr "נקה גלילה"
+msgstr "פינוי היסטוריית גלילה"
 
 #: session/SessionController.cpp:767
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "נקה גלילה ואפס"
+msgstr "פינוי היסטוריית הגלילה ואיפוס"
 
 #: session/SessionController.cpp:776
 #, kde-format
 msgid "Switch Profile"
-msgstr "החלף פרופיל"
+msgstr "החלפת פרופיל"
 
 #: session/SessionController.cpp:805
 #, kde-format
 msgid "Set &Encoding"
-msgstr "קבע &קידוד"
+msgstr "הגדרת &קידוד"
 
 #: session/SessionController.cpp:843
 #, kde-format
@@ -2352,12 +2351,12 @@ msgstr "&שנה שם של כרטיסייה..."
 #: session/SessionController.cpp:868
 #, kde-format
 msgid "&All Tabs in Current Window"
-msgstr "&כל הכרטיסיות בחלון הנוכחי"
+msgstr "&כל הלשוניות בחלון הנוכחי"
 
 #: session/SessionController.cpp:875
 #, kde-format
 msgid "&Select Tabs..."
-msgstr "&בחר כרטיסיות..."
+msgstr "&בחירת לשוניות…"
 
 #: session/SessionController.cpp:881
 #, kde-format
@@ -2368,12 +2367,12 @@ msgstr "&כלום"
 #: session/SessionController.cpp:889
 #, kde-format
 msgid "Copy Input To"
-msgstr "העתק קלט אל"
+msgstr "העתקת קלט אל"
 
 #: session/SessionController.cpp:900
 #, kde-format
 msgid "&ZModem Upload..."
-msgstr "ה&עלאת ZModem..."
+msgstr "ה&עלאת ZModem…"
 
 #: session/SessionController.cpp:905
 #, kde-format
@@ -2389,12 +2388,12 @@ msgstr "&עקוב אחר פעילות"
 #: session/SessionController.cpp:917
 #, kde-format
 msgid "Monitor for &Activity"
-msgstr "&עקוב אחר פעילות"
+msgstr "מ&עקב אחר פעילות"
 
 #: session/SessionController.cpp:923
 #, kde-format
 msgid "Monitor for &Silence"
-msgstr "עקוב אחר &חוסר פעילות"
+msgstr "מעקב אחר &חוסר פעילות"
 
 #: session/SessionController.cpp:929
 #, fuzzy, kde-format
@@ -2405,12 +2404,12 @@ msgstr "&עקוב אחר פעילות"
 #: session/SessionController.cpp:936
 #, kde-format
 msgid "Enlarge Font"
-msgstr "הגדל גופנים"
+msgstr "הגדלת כתב"
 
 #: session/SessionController.cpp:944
 #, kde-format
 msgid "Shrink Font"
-msgstr "הקטן גופן"
+msgstr "הקטנת כתב"
 
 #: session/SessionController.cpp:949
 #, kde-format
@@ -2420,47 +2419,47 @@ msgstr ""
 #: session/SessionController.cpp:955
 #, kde-format
 msgid "Send Signal"
-msgstr "שלח אות"
+msgstr "שליחת אות"
 
 #: session/SessionController.cpp:963
 #, kde-format
 msgid "&Suspend Task"
-msgstr "&השהה משימה"
+msgstr "ה&שהיית משימה"
 
 #: session/SessionController.cpp:968
 #, kde-format
 msgid "&Continue Task"
-msgstr "&המשך משימה"
+msgstr "ה&משך משימה"
 
 #: session/SessionController.cpp:973
 #, kde-format
 msgid "&Hangup"
-msgstr "&נתק"
+msgstr "&ניתוק"
 
 #: session/SessionController.cpp:978
 #, kde-format
 msgid "&Interrupt Task"
-msgstr "&עצור משימה"
+msgstr "&עצירת משימה"
 
 #: session/SessionController.cpp:983
 #, kde-format
 msgid "&Terminate Task"
-msgstr "&סיים משימה"
+msgstr "&סיום משימה"
 
 #: session/SessionController.cpp:988
 #, kde-format
 msgid "&Kill Task"
-msgstr "&חסל משימה"
+msgstr "&חיסול משימה"
 
 #: session/SessionController.cpp:993
 #, kde-format
 msgid "User Signal &1"
-msgstr "שלח איתית משתמש &1"
+msgstr "איתות משתמש &1"
 
 #: session/SessionController.cpp:998
 #, kde-format
 msgid "User Signal &2"
-msgstr "שלח איתית משתמש &2"
+msgstr "איתות משתמש &2"
 
 #: session/SessionController.cpp:1016
 #, fuzzy, kde-format
@@ -2472,26 +2471,26 @@ msgstr "פרופיל חדש"
 #: session/SessionController.cpp:1018
 #, kde-format
 msgid "Edit Current Profile..."
-msgstr "ערוך פרופיל נוכחי..."
+msgstr "עריכת פרופיל נוכחי…"
 
 #: session/SessionController.cpp:1135
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
-msgstr "תכנית פועלת בהפעלה זו. האם אתה בטוח שברצונך לסגור אותה?"
+msgstr "יש תוכנית שרצה בהפעלה הזאת. לסגור אותה?"
 
 #: session/SessionController.cpp:1139
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
-msgstr "התכנית \"%1\" מופעל כרגע בהפעלה זו. האם אתה בטוח שברצונך לסגור אותה?"
+msgstr "התוכנית ‚%1’ רצה בהפעלה הזאת. לסגור אותה?"
 
 #: session/SessionController.cpp:1150 session/SessionController.cpp:1193
 #, kde-format
 msgid "Confirm Close"
-msgstr "אשר יציאה"
+msgstr "אישור יציאה"
 
 #: session/SessionController.cpp:1151
 #, fuzzy, kde-format
@@ -2505,17 +2504,14 @@ msgstr "&סגור לשונית"
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
-msgstr ""
-"אין אפשרות לחסל תוכנית בהפעלה זו. האם אתה בטוח כי אתה רוצה לחסל אותה בכוח?"
+msgstr "התוכנית שרצה בהפעלה הזאת לא נסגרת. לחסל אותה בכוח?"
 
 #: session/SessionController.cpp:1182
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
-msgstr ""
-"אין אפשרות לחסל התוכנית \"%1\" בהפעלה זו. האם אתה בטוח כי אתה רוצה לחסל אותה "
-"בכוח?"
+msgstr "התוכנית ‚%1’ שרצה בהפעלה הזאת לא נסגרת. לחסל אותה בכוח?"
 
 #: session/SessionController.cpp:1194
 #, kde-format
@@ -2536,7 +2532,7 @@ msgstr ""
 #: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
-msgstr "שמור הורדת ZModem אל..."
+msgstr "שמירת הורדת ZModem אל…"
 
 #: session/SessionController.cpp:2157
 #, kde-format
@@ -2566,7 +2562,7 @@ msgstr ""
 #: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr "בחר קבצים לעלות בעזת ZModem"
+msgstr "בחירת קבצים להעלאת ZModem"
 
 #: session/SessionListModel.cpp:89
 #, kde-format
@@ -2600,7 +2596,7 @@ msgstr "חפש ברשת"
 #: settings/GeneralSettings.ui:68 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
-msgstr "אפשר קיצורי תפריטים"
+msgstr "הפעלת מקשי האצה בתפריטים"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
 #: settings/GeneralSettings.ui:81
@@ -2997,7 +2993,7 @@ msgstr "קבע את הפרופיל הנבחר בתור פרופיל ברירת �
 #: settings/ProfileSettings.ui:81
 #, kde-format
 msgid "&Set as Default"
-msgstr "&קבע כברירת מחדל"
+msgstr "ה&גדרה כברירת מחדל"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:36
@@ -3316,13 +3312,13 @@ msgstr "גודל: %1 על %2"
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
-msgstr[0] "האם אתה בטוח שברצונך להדביק את התו %1?"
-msgstr[1] "האם אתה בטוח שברצונך להדביק %1 התוים?"
+msgstr[0] "להדביק תו %1?"
+msgstr[1] "להדביק %1 תווים?"
 
 #: terminalDisplay/TerminalDisplay.cpp:2260
 #, kde-format
 msgid "Confirm Paste"
-msgstr "אשר הדבקה"
+msgstr "אישור הדבקה"
 
 #: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
@@ -3423,12 +3419,12 @@ msgstr ""
 #: terminalDisplay/TerminalDisplay.cpp:3022
 #, kde-format
 msgid "Change &Directory To"
-msgstr "החלף &ספרייה אל:"
+msgstr "מעבר ל&תיקייה"
 
 #: terminalDisplay/TerminalDisplay.cpp:3055
 #, kde-format
 msgid "&Paste Location"
-msgstr "&הדבק מיקום"
+msgstr "ה&דבקת מיקום"
 
 #: ViewManager.cpp:106
 #, fuzzy, kde-format
@@ -3441,13 +3437,13 @@ msgstr "תצוגה מפוצלת"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
-msgstr "פצל תצוגה ימינה/שמאלה"
+msgstr "פיצול תצוגה ימינה/שמאלה"
 
 #: ViewManager.cpp:121
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
-msgstr "פצל תצוגה מעלה/מטה"
+msgstr "פיצול תצוגה מעלה/מטה"
 
 #: ViewManager.cpp:129
 #, fuzzy, kde-format
@@ -3503,13 +3499,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
-msgstr "הרחב תצוגה"
+msgstr "הרחבת תצוגה"
 
 #: ViewManager.cpp:199
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
-msgstr "הקטן תצוגה"
+msgstr "צמצום תצוגה"
 
 #: ViewManager.cpp:209
 #, fuzzy, kde-format
@@ -3531,13 +3527,13 @@ msgstr "נתק את הכרטיסייה הנוכחית"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
-msgstr "כרטיסייה הבאה"
+msgstr "הלשונית הבאה"
 
 #: ViewManager.cpp:234
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
-msgstr "כרטיסייה קודמת"
+msgstr "הלשונית הקודמת"
 
 #: ViewManager.cpp:242
 #, fuzzy, kde-format
@@ -3569,7 +3565,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
-msgstr "עבור ללשונית האחרונה"
+msgstr "מעבר ללשונית האחרונה"
 
 #: ViewManager.cpp:273
 #, kde-format
@@ -3657,7 +3653,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
-msgstr "עבור לכרטיסייה %1"
+msgstr "מעבר ללשונית %1"
 
 #: ViewManager.cpp:562
 #, kde-format
@@ -3824,7 +3820,7 @@ msgstr "הפעל תצוגת טקסט דו־כיוונית"
 #: widgets/EditProfileAdvancedPage.ui:258
 #, kde-format
 msgid "Default character encoding:"
-msgstr "דיקוק ברירת מחדל:"
+msgstr "קידוד ברירת מחדל:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:278
@@ -3850,13 +3846,13 @@ msgstr "צור ערכת נושא חדשה מבוססת על הנוכחית"
 #, kde-format
 msgctxt "@action:button Create an alternate color scheme"
 msgid "New..."
-msgstr "חדשה..."
+msgstr "חדשה…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:76
 #, kde-format
 msgid "Edit the selected color scheme"
-msgstr "ערוך את ערכת הנושא הנבחרת"
+msgstr "עריכת ערכת העיצוב הנבחרת"
 
 #. i18n: ectx: property (text), widget (QPushButton, editKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, environmentEditButton)
@@ -3867,13 +3863,13 @@ msgstr "ערוך את ערכת הנושא הנבחרת"
 #: widgets/EditProfileMousePage.ui:310
 #, kde-format
 msgid "Edit..."
-msgstr "ערוך..."
+msgstr "עריכה…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:86
 #, kde-format
 msgid "Delete the selected color scheme"
-msgstr "מחק את ערכת הנושא הנבחרת"
+msgstr "מחיקת ערכת העיצוב הנבחרת"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:96
@@ -3916,7 +3912,7 @@ msgstr "החלקת גופנים"
 #: widgets/EditProfileAppearancePage.ui:178
 #, kde-format
 msgid "Draw intense colors in bold font"
-msgstr "צבע בצבעים חזקים בגופן מודגש"
+msgstr "צביעת גופנים מודגשים בצבעים עזים"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:185
@@ -4456,25 +4452,25 @@ msgstr "קבע את הפרופיל הנבחר בתור פרופיל ברירת �
 #: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "Edit Environment"
-msgstr "ערוך את הסביבה"
+msgstr "עריכת הסביבה"
 
 #: widgets/EditProfileDialog.cpp:644
 #, kde-format
 msgid "One environment variable per line"
-msgstr "משתנה סביבה אחד לשורה"
+msgstr "משתנה סביבה אחד בשורה"
 
 #: widgets/EditProfileDialog.cpp:675
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
-msgstr[0] " שניה"
+msgstr[0] " שנייה"
 msgstr[1] " שניות"
 
 #: widgets/EditProfileDialog.cpp:789
 #, kde-format
 msgid "Select Initial Directory"
-msgstr "בחר ספרייה התחלתית"
+msgstr "בחירת ספרייה התחלתית"
 
 #: widgets/EditProfileDialog.cpp:1348
 #, kde-kuit-format
@@ -5049,7 +5045,7 @@ msgstr "בטל תפריט גרירה ושחרור עבור קבצים וכתוב
 #: widgets/EditProfileMousePage.ui:419
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
-msgstr "לחיצה על Control+גלגלת של העכבר תגדיל תקטין את גודל הטקסט"
+msgstr "לחיצה על Control+גלגלת העכבר תגדיל/תקטין את הכתב."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:422
@@ -5467,7 +5463,7 @@ msgstr "צבע"
 #: widgets/TabTitleFormatButton.cpp:22 widgets/TabTitleFormatButton.cpp:31
 #, c-format, kde-format
 msgid "Program Name: %n"
-msgstr "שם התכנית: ‎%n"
+msgstr "שם התוכנית: ‎%n"
 
 #: widgets/TabTitleFormatButton.cpp:23 widgets/TabTitleFormatButton.cpp:32
 #, c-format, kde-format
@@ -5595,7 +5591,7 @@ msgstr "סגור את כרטיסייה הפעילה"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
-msgstr "&נתק כרטיסייה"
+msgstr "&ניתוק לשונית"
 
 #: widgets/ViewContainer.cpp:101
 #, fuzzy, kde-format

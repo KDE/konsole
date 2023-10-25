@@ -5010,7 +5010,7 @@ msgstr "Historial:"
 #: widgets/EditProfileScrollingPage.ui:85
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr "Desplaçament amunt/avall de pàgina:"
+msgstr "Desplaçament cap amunt/avall de pàgina:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:101
