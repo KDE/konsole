@@ -23,6 +23,7 @@
   <name xml:lang="fi">Konsole</name>
   <name xml:lang="fr">Konsole</name>
   <name xml:lang="gl">Konsole</name>
+  <name xml:lang="he">Konsole</name>
   <name xml:lang="hu">Konsole</name>
   <name xml:lang="ia">Konsole</name>
   <name xml:lang="id">Konsole</name>
@@ -75,6 +76,7 @@
   <summary xml:lang="fi">Pääteikkuna</summary>
   <summary xml:lang="fr">Terminal</summary>
   <summary xml:lang="gl">Terminal</summary>
+  <summary xml:lang="he">מסוף</summary>
   <summary xml:lang="hu">Terminál</summary>
   <summary xml:lang="ia">Terminal</summary>
   <summary xml:lang="id">Terminal</summary>
@@ -127,6 +129,7 @@
     <p xml:lang="fi">Konsole on pääte komentotulkkia varten. Se tarjoaa komentorivikäyttöliittymän tietokoneen hallitsemiseksi.</p>
     <p xml:lang="fr">Konsole est un terminal pour lancer une invite de commande. Il fournit une interface de ligne de commande pour contrôler directement votre ordinateur.</p>
     <p xml:lang="gl">Konsole é un terminal para executar un intérprete de ordes. Fornece unha interface de liña de ordes para controlar directamente o computador.</p>
+    <p xml:lang="he">Konsole הוא מסוף להרצת מעטפת פקודות. הוא מספק מנשק שורת פקודה לשליטה ישירה במחשב שלך.</p>
     <p xml:lang="hu">A Konsole egy terminál parancsértelmezők futtatásához. Parancssosor felületet biztosít a számítógépe közvetlen irányításához.</p>
     <p xml:lang="ia">Konsole es un terminal pro executar un shell de commando.  Illo provide un interfacie de linea de commando pro controlar directemente tu computator.</p>
     <p xml:lang="id">Konsole adalah sebuah terminal untuk menjalankan shell perintah. Ini menyediakan antarmuka baris perintah untuk secara langsung mengendalikan komputer Anda.</p>
@@ -172,6 +175,7 @@
     <p xml:lang="fi">Ominaisuuksia:</p>
     <p xml:lang="fr">Fonctionnalités :</p>
     <p xml:lang="gl">Funcionalidades:</p>
+    <p xml:lang="he">יכולות:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="id">Fitur:</p>
@@ -225,6 +229,7 @@
       <li xml:lang="fi">Välilehdet</li>
       <li xml:lang="fr">Onglets</li>
       <li xml:lang="gl">Separadores</li>
+      <li xml:lang="he">לשוניות</li>
       <li xml:lang="hu">Lapok</li>
       <li xml:lang="ia">Schedas</li>
       <li xml:lang="id">Tab</li>
@@ -276,6 +281,7 @@
       <li xml:lang="fi">Useat profiilit</li>
       <li xml:lang="fr">Profils multiples</li>
       <li xml:lang="gl">Varios perfís.</li>
+      <li xml:lang="he">ריבוי פרופילים</li>
       <li xml:lang="hu">Több profil használatának lehetősége</li>
       <li xml:lang="ia">Profilos multiple</li>
       <li xml:lang="id">Beberapa profil</li>
@@ -327,6 +333,7 @@
       <li xml:lang="fi">Hiljaisuuden ja aktiivisuuden tarkkailu</li>
       <li xml:lang="fr">Détection d'activité et de non activité</li>
       <li xml:lang="gl">Monitorización de actividade e inactividade.</li>
+      <li xml:lang="he">מעקב אחר שקט ופעילות</li>
       <li xml:lang="hu">Üresjárat- és aktivitásmonitorozás</li>
       <li xml:lang="ia">Controlante silentio e activitate </li>
       <li xml:lang="id">Pemantauan Diam dan Aktivitas</li>
@@ -377,6 +384,7 @@
       <li xml:lang="fi">Kirjanmerkkituki</li>
       <li xml:lang="fr">Prise en charge des signets</li>
       <li xml:lang="gl">Funcionalidade de marcadores.</li>
+      <li xml:lang="he">תמיכה בסימניות</li>
       <li xml:lang="hu">Könyvjelzők támogatása</li>
       <li xml:lang="ia">Supporto de marcator de libro</li>
       <li xml:lang="id">Dukungan markah</li>
@@ -427,6 +435,7 @@
       <li xml:lang="fi">Haku</li>
       <li xml:lang="fr">Recherche</li>
       <li xml:lang="gl">Busca.</li>
+      <li xml:lang="he">חיפוש</li>
       <li xml:lang="hu">Keresés</li>
       <li xml:lang="ia">Cercante</li>
       <li xml:lang="id">Pencarian</li>
@@ -478,6 +487,7 @@
       <li xml:lang="fi">Tulosteen tallennus</li>
       <li xml:lang="fr">Enregistrement de la sortie</li>
       <li xml:lang="gl">Posibilidade de gardar a saída.</li>
+      <li xml:lang="he">שמירת פלט</li>
       <li xml:lang="hu">Kimenet mentése</li>
       <li xml:lang="ia">Salveguardante exito</li>
       <li xml:lang="id">Penyimpanan keluaran</li>
@@ -538,6 +548,7 @@
       <caption xml:lang="fi">Pääte-emulaattorina käytetään Konsolea.</caption>
       <caption xml:lang="fr">Konsole est un émulateur de terminal</caption>
       <caption xml:lang="gl">Konsole usado como emulador de terminal.</caption>
+      <caption xml:lang="he">Konsole משמש כמדמה המסוף</caption>
       <caption xml:lang="hu">A Konsole használata terminálemulárként</caption>
       <caption xml:lang="ia">Konsole es usate como un emulator de terminal</caption>
       <caption xml:lang="id">Konsole yang digunakan sebagai emulator terminal</caption>
