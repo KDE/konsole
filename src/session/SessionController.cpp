@@ -347,15 +347,9 @@ void SessionController::snapshot()
     if (_monitorProcessFinish) {
         bool isForegroundProcessActive = session()->isForegroundProcessActive();
         if (!_previousForegroundProcessName.isNull() && !isForegroundProcessActive) {
-#if QT_VERSION_MAJOR == 5
-            KNotification *notification = new KNotification(session()->hasFocus() ? QStringLiteral("ProcessFinished") : QStringLiteral("ProcessFinishedHidden"),
-                                                            KNotification::CloseWhenWidgetActivated);
-            notification->setWidget(view());
-#else
             KNotification *notification = new KNotification(session()->hasFocus() ? QStringLiteral("ProcessFinished") : QStringLiteral("ProcessFinishedHidden"),
                                                             KNotification::CloseWhenWindowActivated);
             notification->setWindow(view()->windowHandle());
-#endif
             notification->setText(i18n("The process '%1' has finished running in session '%2'", _previousForegroundProcessName, session()->nameTitle()));
             notification->setDefaultAction(i18n("Show session"));
             connect(notification, &KNotification::defaultActivated, this, [this, notification]() {
@@ -1799,15 +1793,9 @@ void SessionController::resetFontSize()
 void SessionController::notifyPrompt()
 {
     if (session()->isMonitorPrompt()) {
-#if QT_VERSION_MAJOR == 5
-        KNotification *notification =
-            new KNotification(session()->hasFocus() ? QStringLiteral("Prompt") : QStringLiteral("PromptHidden"), KNotification::CloseWhenWidgetActivated);
-        notification->setWidget(view());
-#else
         KNotification *notification =
             new KNotification(session()->hasFocus() ? QStringLiteral("Prompt") : QStringLiteral("PromptHidden"), KNotification::CloseWhenWindowActivated);
         notification->setWindow(view()->windowHandle());
-#endif
 
         notification->setText(i18n("The shell prompt is displayed in session '%1'", session()->nameTitle()));
         notification->setDefaultAction(i18n("Show session"));
@@ -2017,11 +2005,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 
         _preventClose = true;
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        auto hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(QLatin1String(KStandardAction::name(KStandardAction::HamburgerMenu))));
-#else
         auto hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(KStandardAction::name(KStandardAction::HamburgerMenu)));
-#endif
         if (hamburger) {
             hamburger->addToMenu(popup);
         }

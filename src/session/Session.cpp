@@ -719,15 +719,9 @@ void Session::silenceTimerDone()
         view = _views.first();
     }
 
-#if QT_VERSION_MAJOR == 5
-    KNotification *notification =
-        new KNotification(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"), KNotification::CloseWhenWidgetActivated);
-    notification->setWidget(view);
-#else
     KNotification *notification =
         new KNotification(hasFocus() ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"), KNotification::CloseWhenWindowActivated);
     notification->setWindow(view->windowHandle());
-#endif
 
     notification->setText(i18n("Silence in '%1' (Session '%2')", _displayTitle, _nameTitle));
     notification->setDefaultAction(i18n("Show session"));
@@ -1074,15 +1068,10 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
         }
 
         // FIXME: See comments in Session::silenceTimerDone()
-#if QT_VERSION_MAJOR == 5
-        KNotification *notification = new KNotification(QStringLiteral("Finished"), KNotification::CloseWhenWidgetActivated);
-        notification->setWidget(QApplication::activeWindow());
-#else
         KNotification *notification = new KNotification(QStringLiteral("Finished"), KNotification::CloseWhenWindowActivated);
         if (QApplication::activeWindow()) {
             notification->setWindow(QApplication::activeWindow()->windowHandle());
         }
-#endif
         notification->setText(message);
         notification->sendEvent();
     }
@@ -1932,15 +1921,9 @@ void Session::handleActivity()
     }
 
     if (_monitorActivity && !_notifiedActivity) {
-#if QT_VERSION_MAJOR == 5
-        KNotification *notification =
-            new KNotification(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"), KNotification::CloseWhenWidgetActivated);
-        notification->setWidget(view);
-#else
         KNotification *notification =
             new KNotification(hasFocus() ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"), KNotification::CloseWhenWindowActivated);
         notification->setWindow(view->windowHandle());
-#endif
         notification->setText(i18n("Activity in '%1' (Session '%2')", _displayTitle, _nameTitle));
         notification->setDefaultAction(i18n("Show session"));
         connect(notification, &KNotification::defaultActivated, this, [view, notification]() {

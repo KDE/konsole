@@ -44,11 +44,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
         _file += QStringLiteral("/bookmarks.xml");
     }
 
-#if QT_VERSION_MAJOR < 6
-    KBookmarkManager *manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
-#else
     KBookmarkManager *manager = new KBookmarkManager(_file, this);
-#endif
     manager->setUpdate(true);
 
     // This constructor is only called with toplevel as true; regardless the

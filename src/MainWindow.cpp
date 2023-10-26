@@ -146,45 +146,6 @@ static QString allConnectedScreens()
     return names.join(QLatin1Char(' '));
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-// Convenience function to get an appropriate config file key under which to
-// save window size, position, or maximization information.
-// Copied from KWindowConfig before https://invent.kde.org/frameworks/kconfig/-/merge_requests/184
-// changed the key format. TODO: use the public function in KWindowConfig for
-// this once it exists.
-static QString configFileStringV1(const QScreen *screen, const QString &key)
-{
-    // We include resolution data to also save data on a per-resolution basis
-    const QString returnString =
-        QStringLiteral("%1 %2 %3x%4 %5")
-            .arg(allConnectedScreens(), key, QString::number(screen->geometry().width()), QString::number(screen->geometry().height()), screen->name());
-    return returnString;
-}
-
-// Convenience function to get an appropriate config file key under which to
-// save window size, position, or maximization information.
-// Copied from KWindowConfig as of https://invent.kde.org/frameworks/kconfig/-/merge_requests/184
-// TODO: use the public function in KWindowConfig for this once it exists.
-static QString configFileStringV2(const QScreen *screen, const QString &key)
-{
-    Q_UNUSED(screen)
-    QString returnString;
-    const int numberOfScreens = QGuiApplication::screens().length();
-
-    if (numberOfScreens == 1) {
-        // For single-screen setups, we save data on a per-resolution basis.
-        const QRect screenGeometry = QGuiApplication::primaryScreen()->geometry();
-        returnString = QStringLiteral("%1x%2 screen: %3").arg(QString::number(screenGeometry.width()), QString::number(screenGeometry.height()), key);
-    } else {
-        // For multi-screen setups, we save data based on the number of screens.
-        // Distinguishing individual screens based on their names is unreliable
-        // due to name strings being inherently volatile.
-        returnString = QStringLiteral("%1 screens: %2").arg(QString::number(numberOfScreens), key);
-    }
-    return returnString;
-}
-#endif
-
 bool MainWindow::wasWindowGeometrySaved() const
 {
     KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
@@ -193,14 +154,7 @@ bool MainWindow::wasWindowGeometrySaved() const
         return false;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    return cg.hasKey(configFileStringV2(screen(), QStringLiteral("Width"))) || cg.hasKey(configFileStringV2(screen(), QStringLiteral("Height")))
-        || cg.hasKey(configFileStringV2(screen(), QStringLiteral("XPosition"))) || cg.hasKey(configFileStringV2(screen(), QStringLiteral("YPosition")))
-        || cg.hasKey(configFileStringV1(screen(), QStringLiteral("Width"))) || cg.hasKey(configFileStringV1(screen(), QStringLiteral("Height")))
-        || cg.hasKey(configFileStringV1(screen(), QStringLiteral("XPosition"))) || cg.hasKey(configFileStringV1(screen(), QStringLiteral("YPosition")));
-#else
     return KWindowConfig::hasSavedWindowSize(cg) || KWindowConfig::hasSavedWindowPosition(cg);
-#endif
 }
 
 void MainWindow::updateUseTransparency()
@@ -509,11 +463,7 @@ void MainWindow::updateHamburgerMenu()
 
     menu->addSeparator();
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    menu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::FullScreen))));
-#else
     menu->addAction(collection->action(KStandardAction::name(KStandardAction::FullScreen)));
-#endif
     menu->addAction(collection->action(QStringLiteral("split-view")));
     menu->addAction(controllerCollection->action(QStringLiteral("clear-history-and-reset")));
     menu->addAction(controllerCollection->action(QStringLiteral("enlarge-font")));
@@ -547,19 +497,11 @@ void MainWindow::updateHamburgerMenu()
         menu->addMenu(QIcon::fromTheme(QStringLiteral("configure")), static_cast<QMenu *>(factory()->container(QStringLiteral("settings"), nullptr))->title());
     configureMenu->addAction(toolBarMenuAction());
     configureMenu->addSeparator();
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::SwitchApplicationLanguage))));
-    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::KeyBindings))));
-    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::ConfigureToolbars))));
-    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::ConfigureNotifications))));
-    configureMenu->addAction(collection->action(QLatin1String(KStandardAction::name(KStandardAction::Preferences))));
-#else
     configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::SwitchApplicationLanguage)));
     configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::KeyBindings)));
     configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureToolbars)));
     configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::ConfigureNotifications)));
     configureMenu->addAction(collection->action(KStandardAction::name(KStandardAction::Preferences)));
-#endif
     _hamburgerMenu->hideActionsOf(configureMenu);
 
     _hamburgerMenu->hideActionsOf(toolBar());

@@ -23,11 +23,7 @@ using namespace Konsole;
 void BookMarkTest::testBookMarkURLs_data()
 {
     auto testData = QFINDTESTDATA(QStringLiteral("data/bookmarks.xml"));
-#if QT_VERSION_MAJOR < 6
-    auto bookmarkManager = KBookmarkManager::managerForFile(testData, QStringLiteral("KonsoleTest"));
-#else
     auto bookmarkManager = std::make_unique<KBookmarkManager>(testData);
-#endif
     auto groupUrlList = bookmarkManager->root().groupUrlList();
 
     // text explaining test, correct test result
