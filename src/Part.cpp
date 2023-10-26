@@ -177,7 +177,6 @@ QString Part::currentWorkingDirectory() const
     return activeSession()->currentWorkingDirectory();
 }
 
-#if USE_TERMINALINTERFACEV2
 QVariant Part::profileProperty(const QString &profileProperty) const
 {
     const auto metaEnum = QMetaEnum::fromType<Profile::Property>();
@@ -218,7 +217,6 @@ bool Part::setCurrentProfile(const QString &profileName)
     SessionManager::instance()->setSessionProfile(activeSession(), profile);
     return currentProfileName() == profileName;
 }
-#endif
 
 void Part::createSession(const QString &profileName, const QString &directory)
 {

@@ -248,7 +248,6 @@ void TerminalInterfaceTest::testTerminalInterface()
 
 void TerminalInterfaceTest::testTerminalInterfaceV2()
 {
-#if USE_TERMINALINTERFACEV2
     // Use the built-in profile for testing
     Profile::Ptr testProfile = ProfileManager::instance()->builtinProfile();
 
@@ -257,7 +256,7 @@ void TerminalInterfaceTest::testTerminalInterfaceV2()
         QFAIL("konsolepart not found.");
     }
 
-    TerminalInterfaceV2 *terminal = qobject_cast<TerminalInterfaceV2 *>(_terminalPart);
+    TerminalInterface *terminal = qobject_cast<TerminalInterface *>(_terminalPart);
 
     QVERIFY(terminal);
     QVERIFY(terminal->setCurrentProfile(testProfile->name()));
@@ -269,9 +268,6 @@ void TerminalInterfaceTest::testTerminalInterfaceV2()
     QCOMPARE(terminal->profileProperty(QStringLiteral("ShowTerminalSizeHint")), testProfile->showTerminalSizeHint());
     QCOMPARE(terminal->profileProperty(QStringLiteral("Environment")), testProfile->environment());
     QCOMPARE(terminal->profileProperty(QStringLiteral("BellMode")), testProfile->property<QVariant>(Profile::Property::BellMode));
-#else
-    QSKIP("TerminalInterfaceV2 not enabled", SkipSingle);
-#endif
 }
 
 KParts::Part *TerminalInterfaceTest::createPart()

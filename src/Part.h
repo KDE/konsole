@@ -31,18 +31,10 @@ class ViewProperties;
  * A re-usable terminal emulator component using the KParts framework which can
  * be used to embed terminal emulators into other applications.
  */
-#if USE_TERMINALINTERFACEV2
-class Part : public KParts::ReadOnlyPart, public TerminalInterfaceV2
-{
-    Q_OBJECT
-    Q_INTERFACES(TerminalInterface TerminalInterfaceV2)
-#else
-class TerminalInterfaceV2;
 class Part : public KParts::ReadOnlyPart, public TerminalInterface
 {
     Q_OBJECT
     Q_INTERFACES(TerminalInterface)
-#endif
 public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QObject *parent, const QVariantList &);
@@ -67,7 +59,6 @@ public:
     /** Reimplemented from TerminalInterface. */
     QString currentWorkingDirectory() const override;
 
-#if USE_TERMINALINTERFACEV2
     /** Reimplemented from TerminalInterfaceV2 */
     QStringList availableProfiles() const override;
 
@@ -79,7 +70,6 @@ public:
 
     /** Reimplemented from TerminalInterfaceV2 */
     QVariant profileProperty(const QString &profileProperty) const override;
-#endif
 
 public Q_SLOTS:
     /**

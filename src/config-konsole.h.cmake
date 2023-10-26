@@ -11,8 +11,6 @@
 /* If defined, can checksum rectangular areas of the screen */
 #cmakedefine01 ENABLE_DECRQCRA
 
-#cmakedefine01 USE_TERMINALINTERFACEV2
-
 #cmakedefine01 HAVE_GETPWUID
 
 /* Defined if system has the malloc_trim function, which is a GNU extension */
