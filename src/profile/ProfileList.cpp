@@ -133,7 +133,7 @@ void ProfileList::addShortcutAction(const Profile::Ptr &profile)
 
     updateAction(action, profile);
 
-    for (QWidget *widget : qAsConst(_registeredWidgets)) {
+    for (QWidget *widget : std::as_const(_registeredWidgets)) {
         widget->addAction(action);
     }
     Q_EMIT actionsChanged(actions());
@@ -147,7 +147,7 @@ void ProfileList::removeShortcutAction(const Profile::Ptr &profile)
 
     if (action != nullptr) {
         _group->removeAction(action);
-        for (QWidget *widget : qAsConst(_registeredWidgets)) {
+        for (QWidget *widget : std::as_const(_registeredWidgets)) {
             widget->removeAction(action);
         }
         Q_EMIT actionsChanged(actions());

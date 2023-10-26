@@ -87,7 +87,7 @@ void Emulation::checkSelectedText()
 
 Emulation::~Emulation()
 {
-    for (ScreenWindow *window : qAsConst(_windows)) {
+    for (ScreenWindow *window : std::as_const(_windows)) {
         delete window;
     }
 
@@ -118,7 +118,7 @@ void Emulation::setScreenInternal(int index)
     _currentScreen = _screen[index & 1];
     if (_currentScreen != oldScreen) {
         // tell all windows onto this emulation to switch to the newly active screen
-        for (ScreenWindow *window : qAsConst(_windows)) {
+        for (ScreenWindow *window : std::as_const(_windows)) {
             window->setScreen(_currentScreen);
         }
 

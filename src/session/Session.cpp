@@ -757,14 +757,14 @@ void Session::updateFlowControlState(bool suspended)
 {
     if (suspended) {
         if (flowControlEnabled()) {
-            for (TerminalDisplay *display : qAsConst(_views)) {
+            for (TerminalDisplay *display : std::as_const(_views)) {
                 if (display->flowControlWarningEnabled()) {
                     display->outputSuspended(true);
                 }
             }
         }
     } else {
-        for (TerminalDisplay *display : qAsConst(_views)) {
+        for (TerminalDisplay *display : std::as_const(_views)) {
             display->outputSuspended(false);
         }
     }
@@ -812,7 +812,7 @@ void Session::updateTerminalSize()
     const int VIEW_COLUMNS_THRESHOLD = 2;
 
     // select largest number of lines and columns that will fit in all visible views
-    for (TerminalDisplay *view : qAsConst(_views)) {
+    for (TerminalDisplay *view : std::as_const(_views)) {
         if (!view->isHidden() && view->lines() >= VIEW_LINES_THRESHOLD && view->columns() >= VIEW_COLUMNS_THRESHOLD) {
             minLines = (minLines == -1) ? view->lines() : qMin(minLines, view->lines());
             minColumns = (minColumns == -1) ? view->columns() : qMin(minColumns, view->columns());

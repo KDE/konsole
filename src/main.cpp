@@ -262,7 +262,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
 #if HAVE_X11
     qtProblematicOptions << QStringLiteral("--display") << QStringLiteral("--visual");
 #endif
-    for (const QString &option : qAsConst(qtProblematicOptions)) {
+    for (const QString &option : std::as_const(qtProblematicOptions)) {
         if (arguments.contains(option)) {
             return true;
         }
@@ -275,7 +275,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     kdeProblematicOptions << QStringLiteral("--waitforwm");
 #endif
 
-    for (const QString &option : qAsConst(kdeProblematicOptions)) {
+    for (const QString &option : std::as_const(kdeProblematicOptions)) {
         if (arguments.contains(option)) {
             return true;
         }

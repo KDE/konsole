@@ -1311,7 +1311,7 @@ void EditProfileDialog::removeColorScheme()
 void EditProfileDialog::gotNewColorSchemes(const QList<KNSCore::Entry> &changedEntries)
 {
     int failures = 0;
-    for (auto &entry : qAsConst(changedEntries)) {
+    for (auto &entry : std::as_const(changedEntries)) {
         switch (entry.status()) {
         case KNSCore::Entry::Installed:
             for (const QString &file : entry.installedFiles()) {

@@ -52,7 +52,7 @@ SessionManager::~SessionManager()
         qCDebug(KonsoleDebug) << "Konsole SessionManager destroyed with" << _sessions.count() << "session(s) still alive";
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
-        for (Session *session : qAsConst(_sessions)) {
+        for (Session *session : std::as_const(_sessions)) {
             disconnect(session, nullptr, this, nullptr);
         }
     }
@@ -72,7 +72,7 @@ bool SessionManager::isClosingAllSessions() const
 void SessionManager::closeAllSessions()
 {
     _isClosingAllSessions = true;
-    for (Session *session : qAsConst(_sessions)) {
+    for (Session *session : std::as_const(_sessions)) {
         session->close();
     }
     _sessions.clear();
@@ -131,7 +131,7 @@ void SessionManager::sessionTerminated(Session *session)
 
 void SessionManager::applyProfile(const Profile::Ptr &profile, bool modifiedPropertiesOnly)
 {
-    for (Session *session : qAsConst(_sessions)) {
+    for (Session *session : std::as_const(_sessions)) {
         if (_sessionProfiles[session] == profile) {
             applyProfile(session, profile, modifiedPropertiesOnly);
         }
@@ -342,7 +342,7 @@ void SessionManager::saveSessions(KConfig *config)
     int n = 1;
     _restoreMapping.clear();
 
-    for (Session *session : qAsConst(_sessions)) {
+    for (Session *session : std::as_const(_sessions)) {
         QString name = QLatin1String("Session") + QString::number(n);
         KConfigGroup group(config, name);
 
@@ -383,7 +383,7 @@ void SessionManager::restoreSessions(KConfig *config)
 
 Session *SessionManager::idToSession(int id)
 {
-    for (Session *session : qAsConst(_sessions)) {
+    for (Session *session : std::as_const(_sessions)) {
         if (session->sessionId() == id) {
             return session;
         }

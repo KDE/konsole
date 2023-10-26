@@ -36,7 +36,7 @@ void LabelsAligner::setReferenceWidget(QWidget *refWidget)
 
 void LabelsAligner::updateLayouts()
 {
-    for (const auto *layout : qAsConst(_layouts)) {
+    for (const auto *layout : std::as_const(_layouts)) {
         QWidget *widget = layout->parentWidget();
         Q_ASSERT(widget);
         do {
@@ -59,7 +59,7 @@ void LabelsAligner::align()
     }
 
     int maxRight = 0;
-    for (const auto *layout : qAsConst(_layouts)) {
+    for (const auto *layout : std::as_const(_layouts)) {
         int left = getLeftMargin(layout);
         for (int row = 0; row < layout->rowCount(); ++row) {
             QLayoutItem *layoutItem = layout->itemAtPosition(row, LABELS_COLUMN);
@@ -84,7 +84,7 @@ void LabelsAligner::align()
         }
     }
 
-    for (auto *l : qAsConst(_layouts)) {
+    for (auto *l : std::as_const(_layouts)) {
         int left = getLeftMargin(l);
         l->setColumnMinimumWidth(LABELS_COLUMN, maxRight - left);
     }

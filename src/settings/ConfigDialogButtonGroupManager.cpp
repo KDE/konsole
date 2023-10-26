@@ -54,7 +54,7 @@ void ConfigDialogButtonGroupManager::add(const QButtonGroup *obj)
 
 bool ConfigDialogButtonGroupManager::hasChanged() const
 {
-    for (const QButtonGroup *group : qAsConst(_groups)) {
+    for (const QButtonGroup *group : std::as_const(_groups)) {
         if (group->checkedButton() == nullptr) {
             continue;
         }
@@ -81,7 +81,7 @@ void ConfigDialogButtonGroupManager::updateWidgets()
     bool prevSignalsBlocked = signalsBlocked();
     bool changed = false;
     blockSignals(true);
-    for (const QButtonGroup *group : qAsConst(_groups)) {
+    for (const QButtonGroup *group : std::as_const(_groups)) {
         auto *enumItem = groupToConfigItemEnum(group);
         if (enumItem == nullptr) {
             continue;
@@ -118,7 +118,7 @@ void ConfigDialogButtonGroupManager::updateWidgetsDefault()
 void ConfigDialogButtonGroupManager::updateSettings()
 {
     bool updateConfig = false;
-    for (const QButtonGroup *group : qAsConst(_groups)) {
+    for (const QButtonGroup *group : std::as_const(_groups)) {
         auto *enumItem = groupToConfigItemEnum(group);
         if (enumItem == nullptr) {
             continue;

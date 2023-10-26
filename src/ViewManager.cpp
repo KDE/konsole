@@ -373,14 +373,14 @@ void ViewManager::setupActions()
 void ViewManager::toggleActionsBasedOnState()
 {
     const int count = _viewContainer->count();
-    for (QAction *tabOnlyAction : qAsConst(_multiTabOnlyActions)) {
+    for (QAction *tabOnlyAction : std::as_const(_multiTabOnlyActions)) {
         tabOnlyAction->setEnabled(count > 1);
     }
 
     if ((_viewContainer != nullptr) && (_viewContainer->activeViewSplitter() != nullptr)) {
         const int splitCount = _viewContainer->activeViewSplitter()->getToplevelSplitter()->findChildren<TerminalDisplay *>().count();
 
-        for (QAction *action : qAsConst(_multiSplitterOnlyActions)) {
+        for (QAction *action : std::as_const(_multiSplitterOnlyActions)) {
             action->setEnabled(splitCount > 1);
         }
     }

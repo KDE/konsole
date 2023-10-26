@@ -638,7 +638,7 @@ mergedRangesFromWidths(const QVector<CharacterWidth> &widths, const QVector<Char
         }
     }
 
-    for (const auto &range : qAsConst(ranges)) {
+    for (const auto &range : std::as_const(ranges)) {
         if (range.width.isValid() && range.width != widthsSortOrder.last())
             mergedRanges[range.width].append({range.cp.first, range.cp.last});
     }
@@ -772,7 +772,7 @@ bool compactRanges(QTextStream &out, const QVector<CharacterProperties> &props, 
     const auto mergedRanges = mergedRangesFromWidths(widths, widthsSortOrder);
 
     out << QStringLiteral("# generated with: ") << args.value(QStringLiteral("cmdline")) << QStringLiteral("\n");
-    for (const int width : qAsConst(widthsSortOrder)) {
+    for (const int width : std::as_const(widthsSortOrder)) {
         const auto currentMergedRangesIt = mergedRanges.find(width);
         if (currentMergedRangesIt == mergedRanges.end() || currentMergedRangesIt.value().isEmpty())
             continue;

@@ -118,7 +118,7 @@ void KeyBindingEditor::removeSelectedEntry()
         }
     }
 
-    for (QTableWidgetItem *item : qAsConst(uniqueList)) {
+    for (QTableWidgetItem *item : std::as_const(uniqueList)) {
         // get the first item in the row which has the entry
 
         KeyboardTranslator::Entry existing = item->data(Qt::UserRole).value<KeyboardTranslator::Entry>();

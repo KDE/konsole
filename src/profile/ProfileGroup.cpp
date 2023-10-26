@@ -61,7 +61,7 @@ void ProfileGroup::setProperty(Property p, const QVariant &value)
     }
 
     Profile::setProperty(p, value);
-    for (const Profile::Ptr &profile : qAsConst(_profiles)) {
+    for (const Profile::Ptr &profile : std::as_const(_profiles)) {
         profile->setProperty(p, value);
     }
 }
