@@ -326,7 +326,8 @@ bool EditProfileDialog::isProfileNameValid()
     const int nameLenMaxName = pathconf(profileStoragePath.toLocal8Bit().constData(), _PC_NAME_MAX);
     nameLenMax = qMin(nameLenMaxPath, nameLenMaxName);
 #elif defined(Q_OS_WIN)
-    const int maxPath = qEnvironmentVariable("MAX_PATH").toInt();
+    // If MAX_PATH not found, use default (260 - 1)
+    const int maxPath = qMax(259, qEnvironmentVariable("MAX_PATH").toInt());
     nameLenMax = maxPath - _profile->path().lastIndexOf(QLatin1Char('/')) + 1;
 #endif
 
