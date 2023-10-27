@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-26 01:47+0000\n"
+"POT-Creation-Date: 2023-10-27 01:42+0000\n"
 "PO-Revision-Date: 2023-09-09 10:29+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -1268,7 +1268,7 @@ msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Estas %1 malfermitaj terminaloj en ĉi tiu fenestro. Ĉu vi ankoraŭ volas ĉesi?"
 
-#: MainWindow.cpp:935 Part.cpp:299
+#: MainWindow.cpp:935 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
@@ -1304,7 +1304,7 @@ msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Bildetojn"
 
-#: Part.cpp:302
+#: Part.cpp:300
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"

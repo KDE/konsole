@@ -1,24 +1,25 @@
 # Translation of konsole.po to Catalan
 # Copyright (C) 1998-2023 This_file_is_part_of_KDE
 #
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Josep M. Ferrer <txemaq@gmail.com>
 # Sebastià Pla i Sanz <sps@sastia.com>, 1998, 1999, 2000, 2001, 2002, 2004, 2005, 2006.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2003, 2011, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Albert Astals Cid <aacid@kde.org>, 2003, 2004, 2005.
-# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Josep M. Ferrer <txemaq@gmail.com>
 # Miquel Oliete i Baliarda <ktalanet@yahoo.es>, 2007.
+# Josep M. Ferrer <txemaq@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-26 01:47+0000\n"
-"PO-Revision-Date: 2023-10-14 10:30+0200\n"
+"POT-Creation-Date: 2023-10-27 01:42+0000\n"
+"PO-Revision-Date: 2023-10-26 12:39+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -739,13 +740,13 @@ msgstr "Copia l'adreça de correu"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select font"
-msgstr "Selecció del tipus de lletra"
+msgstr "Selecció de la lletra"
 
 #: FontDialog.cpp:39
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
-msgstr "Mostra tots els tipus de lletra"
+msgstr "Mostra totes les lletres"
 
 # skip-rule: barb-igual
 #: FontDialog.cpp:68
@@ -757,9 +758,9 @@ msgid ""
 "This should not be necessary except in rare cases."
 msgstr ""
 "Per la seva pròpia natura, un programa de terminal requereix caràcters de "
-"tipus de lletra que siguin d'igual amplada (monoespai). Qualsevol tipus de "
-"lletra no monoespai pot provocar problemes de visualització. Això no hauria "
-"de ser necessari excepte en casos rars."
+"lletra que siguin d'igual amplada (monoespai). Qualsevol lletra no monoespai "
+"pot provocar problemes de visualització. Això no hauria de ser necessari "
+"excepte en casos rars."
 
 #: HistorySizeDialog.cpp:26
 #, kde-format
@@ -1273,7 +1274,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hi ha %1 terminals oberts en aquesta finestra. Encara voleu sortir?"
 
-#: MainWindow.cpp:935 Part.cpp:299
+#: MainWindow.cpp:935 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
@@ -1309,7 +1310,7 @@ msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Miniatures"
 
-#: Part.cpp:302
+#: Part.cpp:300
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -2322,17 +2323,17 @@ msgstr "Vigila la finalització del procés"
 #: session/SessionController.cpp:895
 #, kde-format
 msgid "Enlarge Font"
-msgstr "Augmenta el tipus de lletra"
+msgstr "Augmenta la lletra"
 
 #: session/SessionController.cpp:903
 #, kde-format
 msgid "Shrink Font"
-msgstr "Minva el tipus de lletra"
+msgstr "Minva la lletra"
 
 #: session/SessionController.cpp:908
 #, kde-format
 msgid "Reset Font Size"
-msgstr "Reinicia la mida del tipus de lletra"
+msgstr "Reinicia la mida de la lletra"
 
 #: session/SessionController.cpp:914
 #, kde-format
@@ -2545,7 +2546,7 @@ msgstr "Mostra el títol de la finestra a la barra de títol"
 #: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr "Dona focus als terminals quan el ratolí es mogui sobre ells"
+msgstr "Dona focus als terminals quan el punter del ratolí es mogui sobre ells"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
@@ -3718,7 +3719,7 @@ msgstr "Drecera per a mirar la pantalla primària:"
 #: widgets/EditProfileAppearancePage.ui:33
 #, kde-format
 msgid "Color scheme && font"
-msgstr "Esquema de color i tipus de lletra"
+msgstr "Esquema de color i lletra"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:66
@@ -3776,7 +3777,7 @@ msgstr "Predeterminats"
 #: widgets/EditProfileAppearancePage.ui:132
 #, kde-format
 msgid "Font:"
-msgstr "Tipus de lletra:"
+msgstr "Lletra:"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
 #: widgets/EditProfileAppearancePage.ui:164
@@ -3789,27 +3790,27 @@ msgstr "Trieu..."
 #: widgets/EditProfileAppearancePage.ui:171
 #, kde-format
 msgid "Smooth fonts"
-msgstr "Tipus de lletra suavitzats"
+msgstr "Lletres suavitzades"
 
 #. i18n: ectx: property (text), widget (QCheckBox, boldIntenseButton)
 #: widgets/EditProfileAppearancePage.ui:178
 #, kde-format
 msgid "Draw intense colors in bold font"
-msgstr "Dibuixa colors intensos en el tipus de lletra negreta"
+msgstr "Dibuixa colors intensos en la lletra negreta"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:185
 #, kde-format
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
-"Usa el tipus de lletra seleccionat per als caràcters de línia en lloc del "
-"codi integrat"
+"Usa la lletra seleccionada per als caràcters de línia en lloc del codi "
+"integrat"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
 #, kde-format
 msgid "Use line characters contained in font"
-msgstr "Usa els caràcters de línia continguts en el tipus de lletra"
+msgstr "Usa els caràcters de línia continguts en la lletra"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:196
@@ -4126,7 +4127,7 @@ msgstr "Caràcters dels alfabets bràmics"
 #: widgets/EditProfileAppearancePage.ui:921
 #, kde-format
 msgid "Emoji Font:"
-msgstr "Tipus de lletra dels emojis:"
+msgstr "Lletra dels emojis:"
 
 # Nota del traductor: "strong" és terminologia BiDi (algorisme bidireccional de renderització de lletres). Possible traducció: «fort»
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
@@ -4781,7 +4782,7 @@ msgid ""
 "hovered by the mouse pointer."
 msgstr ""
 "El text reconegut com un enllaç o una adreça de correu se subratllarà quan "
-"es passi per damunt el cursor del ratolí."
+"es passi per damunt el punter del ratolí."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:266
@@ -4797,7 +4798,7 @@ msgid ""
 "pointer."
 msgstr ""
 "El text reconegut com un fitxer se subratllarà quan es passi per damunt el "
-"cursor del ratolí."
+"punter del ratolí."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:276
@@ -4935,7 +4936,7 @@ msgid ""
 "a frame next to the mouse pointer"
 msgstr ""
 "En situar el ratolí a sobre d'un color hexadecimal color, es mostrarà en un "
-"marc al costat de l'apuntador del ratolí"
+"marc al costat del punter del ratolí"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:432

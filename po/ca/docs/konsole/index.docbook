@@ -304,7 +304,7 @@
 
 <listitem
 ><para
->Sobre les altres pestanyes del diàleg, configureu l'aparença d'aquesta sessió. Podeu configurar diferents tipus de lletra, un esquema de color, tipus de $<envar
+>Sobre les altres pestanyes del diàleg, configureu l'aparença d'aquesta sessió. Podeu configurar una lletra diferent, un esquema de color, tipus de $<envar
 >TERM</envar
 > i moltes altres opcions per a cada sessió.</para
 ></listitem>
@@ -723,21 +723,21 @@
 ><para
 ><guilabel
 >Caràcters ASCII</guilabel
->: agrupa els caràcters ASCII en paraules com s'ha descrit anteriorment. L'efecte més notable d'aquesta opció és que l'activació mostra les lligadures de programació (per a tipus de lletra que els permeten). P. ex. la cadena &lt;= es pot mostrar com a ⩽. </para
+>: agrupa els caràcters ASCII en paraules com s'ha descrit anteriorment. L'efecte més notable d'aquesta opció és que l'activació mostra les lligadures de programació (per a les lletres que les permeten). P. ex. la cadena &lt;= es pot mostrar com a ⩽. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
 >Caràcters dels alfabets bràmics</guilabel
->: agrupa els caràcters bràmics com s'ha descrit anteriorment. Sense aquesta opció (depenent del tipus de lletra) algunes paraules poden no estar connectades com haurien. Amb aquesta opció activada, els caràcters bràmics poden aparèixer fora de posició. P. ex. el tercer caràcter de la segona línia podria no aparèixer directament sota el tercer caràcter de la primera línia. </para
+>: agrupa els caràcters bràmics com s'ha descrit anteriorment. Sense aquesta opció (depenent de la lletra) algunes paraules poden no estar connectades com haurien. Amb aquesta opció activada, els caràcters bràmics poden aparèixer fora de posició. P. ex. el tercer caràcter de la segona línia podria no aparèixer directament sota el tercer caràcter de la primera línia. </para
 ></listitem>
 
 <listitem
 ><para
 ><guilabel
->Tipus de lletra dels emojis</guilabel
->: això permet especificar el tipus de lletra a usar per als caràcters Unicode d'emoji. Si no s'estableix, s'usarà el tipus de lletra predeterminat del perfil, o el sistema podria utilitzar algun tipus de lletra alternatiu si manquen els glifs d'aquest tipus de lletra. </para
+>Lletra dels emojis</guilabel
+>: això permet especificar la lletra a usar per als caràcters Unicode d'emoji. Si no s'estableix, s'usarà la lletra predeterminada del perfil, o el sistema podria utilitzar alguna lletra alternativa si manquen els glifs d'aquesta lletra. </para
 ></listitem>
 
 <listitem
@@ -1783,13 +1783,13 @@ Various search improvements
 > <guimenu
 >Visualitza</guimenu
 ><guimenuitem
->Augmenta el tipus de lletra</guimenuitem
+>Augmenta la lletra</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Augmenta la mida del tipus de lletra del text.</action
+>Augmenta la mida de la lletra del text.</action
 ></para
 ></listitem>
 </varlistentry>
@@ -1806,13 +1806,13 @@ Various search improvements
 > <guimenu
 >Visualitza</guimenu
 ><guimenuitem
->Reinicia la mida del tipus de lletra</guimenuitem
+>Reinicia la mida de la lletra</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Reinicia la mida del tipus de lletra del text al valor del perfil predeterminat.</action
+>Reinicia la mida de la lletra del text al valor del perfil predeterminat.</action
 ></para
 ></listitem>
 </varlistentry>
@@ -1830,13 +1830,13 @@ Various search improvements
 > <guimenu
 >Visualitza</guimenu
 ><guimenuitem
->Minva el tipus de lletra</guimenuitem
+>Minva la lletra</guimenuitem
 ></menuchoice
 ></term>
 <listitem
 ><para
 ><action
->Minva la mida del tipus de lletra del text.</action
+>Minva la mida de la lletra del text.</action
 ></para
 ></listitem>
 </varlistentry>
@@ -3372,9 +3372,7 @@ Space+Ctrl
 >\xHH : on HH són dos dígits hexadecimals</para>
 <tip>
 <para
->Això es pot utilitzar per a enviar caràcters de control &ASCII;, &pex;, <quote
->\x00</quote
-> és el caràcter NUL</para>
+>Això es pot utilitzar per a enviar caràcters de control &ASCII;, &pex;, «\x00» és el caràcter NUL</para>
 </tip>
 </listitem>
 </itemizedlist>
@@ -3632,10 +3630,10 @@ CommonDirNames=nom1,nom2,nom3...
 
 <listitem>
 <para
->Alguns tipus de lletra no estan disponibles per a utilitzar-los en el &konsole;, encara que estiguin disponibles en altres aplicacions. Això no vol dir que hi hagi un error al &konsole;. El &konsole; requereix tipus de lletra mono-espaiades per a oferir el millor resultat visual, de manera que sols demana a les &Qt; la llista de tipus de lletra mono-espaiades.</para>
+>Algunes lletres no estan disponibles per a utilitzar-les en el &konsole;, encara que estiguin disponibles en altres aplicacions. Això no vol dir que hi hagi un error al &konsole;. El &konsole; requereix lletres mono-espaiades per a oferir el millor resultat visual, de manera que sols demana a les &Qt; la llista de lletres mono-espaiades.</para>
 
 <para
->A partir de la versió 16.08 (agost de 2016), el &konsole; es pot configurar per a permetre seleccionar qualsevol tipus de lletra amb l'advertiment que la visualització pot no ser correcta.</para>
+>A partir de la versió 16.08 (agost de 2016), el &konsole; es pot configurar per a permetre seleccionar qualsevol lletra amb l'advertiment que la visualització pot no ser correcta.</para>
 </listitem>
 
 <listitem

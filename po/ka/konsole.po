@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-26 01:47+0000\n"
-"PO-Revision-Date: 2023-10-16 06:09+0200\n"
+"POT-Creation-Date: 2023-10-27 01:42+0000\n"
+"PO-Revision-Date: 2023-10-26 18:53+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -94,31 +94,32 @@ msgstr "ხელსაწყოთა ზოლი"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Name of profile to use for new Konsole instance"
-msgstr ""
+msgstr "პროფილის სახელი ახალი Konsole-ის გაშვებული ასლებისთვის"
 
 #: Application.cpp:54
 #, kde-format
 msgctxt "@info:shell"
 msgid "json layoutfile to be loaded to use for new Konsole instance"
-msgstr ""
+msgstr "json განლაგების ფაილი ახალი Konsole-ის გაშვებული ასლებისთვის"
 
 #: Application.cpp:55
 #, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr ""
+msgstr "ნაგულისხმევის მაგიერ ჩაშენებული პროფილის გამოყენება"
 
 #: Application.cpp:56
 #, kde-format
 msgctxt "@info:shell"
 msgid "Set the initial working directory of the new tab or window to 'dir'"
 msgstr ""
+"ახალი ჩანართის ან ფანჯრის საწყისი სამუშაო საქაღალდის მითითებულზე დაყენება"
 
 #: Application.cpp:57
 #, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
-msgstr ""
+msgstr "საწყისი სესია, მისი დასრულებისას, ავტომატურად არ დაიხურება."
 
 #: Application.cpp:61
 #, kde-format
@@ -127,12 +128,14 @@ msgid ""
 "Create a new tab in an existing window rather than creating a new window "
 "('Run all Konsole windows in a single process' must be enabled)"
 msgstr ""
+"შექმენით ახალი ჩანართი არსებულ ფანჯარაში ახალი ფანჯრის შექმნის მაგიერ "
+"('ყველა Konsole-ის ფანჯრის ერთ პროცესად გაშვება' ჩართული უნდა იყოს)"
 
 #: Application.cpp:62
 #, kde-format
 msgctxt "@info:shell"
 msgid "Create tabs as specified in given tabs configuration file"
-msgstr ""
+msgstr "ჩანართების შექმნა ჩანართების კონფიგურაციის ფაილის მიხედვით"
 
 #: Application.cpp:64
 #, kde-format
@@ -141,6 +144,8 @@ msgid ""
 "Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
 "(by default) is pressed"
 msgstr ""
+"Konsole გაეშვება ფონად და წინ, მხოლოდ, Ctrl+Shift+F12 ღილაკების კომბინაციით "
+"გამოვა"
 
 #: Application.cpp:65
 #, kde-format
@@ -183,6 +188,7 @@ msgstr "Konsole-ის მთელ ეკრანზე გაშვება"
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
 msgstr ""
+"გამჭვრივალე ფონის გამორთვა მაშინაც კი, თუ სისტემას მისი მხარდაჭერა გააჩნია."
 
 #: Application.cpp:72
 #, kde-format
@@ -195,6 +201,8 @@ msgstr "ხელმისაწვდომი პროფილების �
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
 msgstr ""
+"ყველა პროფილის თვისების სახელისა და მათი ტიპების სია (-p-სთან ერთად "
+"გამოსაყენებლად)"
 
 #: Application.cpp:74
 #, kde-format
@@ -209,6 +217,8 @@ msgid ""
 "Command to execute. This option will catch all following arguments, so use "
 "it as the last option."
 msgstr ""
+"შესასრულებელი ბრძანება. ეს პარამეტრი ჩაიჭერს ყველა შემდეგ არგუმენტს, ასე "
+"რომ, ის ბოლო პარამეტრად გამოიყენეთ."
 
 #: Application.cpp:79
 #, kde-format
@@ -217,6 +227,8 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
+"არსებული გაშვებული ასლის ნაძალადევი გამოყენება მაშინაც კი, როცა ის "
+"ფუნქციონალს არღვევს. მაგ. --new-tab. ძირითადად, გამართვისთვის."
 
 #: Application.cpp:86
 #, kde-format
@@ -429,6 +441,8 @@ msgid ""
 "The background transparency setting will not be used because your desktop "
 "does not appear to support transparent windows."
 msgstr ""
+"ფონის გამჭვირვალობის პარამეტრი არ გამოიყენება, რადგან თქვენს სამუშაო "
+"მაგიდას, როგორც ჩანს, გამჭვირვალე ფანჯრების მხარდაჭერა არ გააჩნია."
 
 #: colorscheme/ColorSchemeEditor.cpp:188
 #, kde-format
@@ -672,6 +686,8 @@ msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
+"პროფილის პარამეტრებში მითითებული ტექსტური რედაქტორით ფაილი ვერ გავხსენი.\n"
+"ის სისტემური ნაგულისხმევი რედაქტორით გაიხსნება."
 
 #: filterHotSpots/FileFilterHotspot.cpp:174
 #, kde-format
@@ -723,6 +739,10 @@ msgid ""
 "equal width (monospace). Any non monospaced font may cause display issues. "
 "This should not be necessary except in rare cases."
 msgstr ""
+"თავისი ბუნების გამო ტერმინალის პროგრამას ესაჭიროება ფონტის სიმბოლოები, "
+"რომლებსაც ფიქსირებული სიგანე (monospace) გააჩნიათ. ფონტი, რომლის სიგანეც "
+"ფიქსირებული არაა, პრობლემებს გამიწვევს. ეს არ უნდა დაგჭირდეთ, იშვიათი "
+"შემთხვევების გარდა."
 
 #: HistorySizeDialog.cpp:26
 #, kde-format
@@ -734,7 +754,7 @@ msgstr "გადახვევის მორგება"
 #, kde-format
 msgctxt "@info:status"
 msgid "Any adjustments are only temporary to this session."
-msgstr ""
+msgstr "შეტანილი ცვლილებები დროებითია ამ სესიისთვის."
 
 #: KeyBindingEditor.cpp:54
 #, kde-format
@@ -755,17 +775,17 @@ msgstr "გამოტანა"
 #: KeyBindingEditor.cpp:219 KeyBindingEditor.cpp:220
 #, kde-format
 msgid "New Key Binding List"
-msgstr ""
+msgstr "ახალი ღილაკების მიბმის სია"
 
 #: KeyBindingEditor.cpp:223
 #, kde-format
 msgid "Edit Key Binding List"
-msgstr ""
+msgstr "ღილაკების მიბმის სიის ჩასწორება"
 
 #: KeyBindingEditor.cpp:286
 #, kde-format
 msgid "A key bindings scheme cannot be saved with an empty description."
-msgstr ""
+msgstr "ღილაკების მიბმის სქემის შენახვა ცარიელი აღწერით შეუძლებელია."
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
@@ -831,7 +851,7 @@ msgstr "Kurt Hindenburg"
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
-msgstr ""
+msgstr "მთავარი პროგრამისტი, შეცდომების გასწორება, ზოგადი განვითარება"
 
 #: main.cpp:319
 #, kde-format
@@ -843,7 +863,7 @@ msgstr "Robert Knight"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
-msgstr ""
+msgstr "გადატანა KDE4 -ზე. პროექტის წინა ლიდერი"
 
 #: main.cpp:322
 #, kde-format
@@ -867,7 +887,7 @@ msgstr "Ahmad Samir"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
-msgstr ""
+msgstr "კოდის გადაწერა, შეცდომების გასწორება და ფუნქციონალის დამატება"
 
 #: main.cpp:326
 #, kde-format
@@ -898,7 +918,7 @@ msgstr "Edwin Pujols"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
-msgstr ""
+msgstr "შეცდომების გასწორება, ზოგადი განვითარება"
 
 #: main.cpp:338
 #, kde-format
@@ -922,7 +942,7 @@ msgstr "Mariusz Glebocki"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
-msgstr ""
+msgstr "შეცდომების გასწორება და ფუნქციონალის დამატება"
 
 #: main.cpp:345
 #, kde-format
@@ -989,7 +1009,7 @@ msgstr "Stephan Kulow"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
-msgstr ""
+msgstr "Solaris -ის მხარდაჭერა და ისტორია"
 
 #: main.cpp:355
 #, kde-format
@@ -1001,7 +1021,7 @@ msgstr "Alexander Neundorf"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
-msgstr ""
+msgstr "შეცდომების გასწორება და გაშვების წარმადობა"
 
 #: main.cpp:358
 #, kde-format
@@ -1013,7 +1033,7 @@ msgstr "Peter Silva"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
-msgstr ""
+msgstr "მონიშვნის გაუმჯობესებები"
 
 #: main.cpp:359
 #, kde-format
@@ -1028,6 +1048,8 @@ msgid ""
 "Embedded Konsole\n"
 "Toolbar and session names"
 msgstr ""
+"ჩაშენებული Konsole-ის\n"
+"ხელსაწყოების პანელი და სესიის სახელები"
 
 #: main.cpp:364
 #, kde-format
@@ -1042,6 +1064,8 @@ msgid ""
 "Embedded Konsole\n"
 "General improvements"
 msgstr ""
+"ჩაშენებული Konsole-ის\n"
+"ზოგადი გაუმჯობესებები"
 
 #: main.cpp:369
 #, kde-format
@@ -1068,6 +1092,8 @@ msgid ""
 "Code from the kvt project\n"
 "General improvements"
 msgstr ""
+"კოდი kvt პროექტიდან\n"
+"ზოგადი გაუმჯობესებები"
 
 #: main.cpp:375
 #, kde-format
@@ -1079,7 +1105,7 @@ msgstr "Warwick Allison"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
-msgstr ""
+msgstr "სქემა და ტექსტის მონიშვნის გაუმჯობესებები"
 
 #: main.cpp:378
 #, kde-format
@@ -1200,8 +1226,8 @@ msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ამ ფანჯარაში პროცესია ჯერ კიდევ გაშვებული. მაინც გნებავთ გასვლა?"
+msgstr[1] "ამ ფანჯარაში %1 ღია ტერმინალია. მაინც გნებავთ გასვლა?"
 
 #: MainWindow.cpp:800 MainWindow.cpp:817 MainWindow.cpp:831
 #, kde-format
@@ -1225,9 +1251,9 @@ msgstr "მიმდინარე &ჩანართის დახურვ
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
-msgstr ""
+msgstr "ამ ფანჯარაში %1 ღია ტერმინალია. მაინც გნებავთ გასვლა?"
 
-#: MainWindow.cpp:935 Part.cpp:299
+#: MainWindow.cpp:935 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
@@ -1249,7 +1275,7 @@ msgstr "მეხსიერება"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr ""
+msgstr "ჩანართების ზოლი / გამყოფები"
 
 #: MainWindow.cpp:974
 #, kde-format
@@ -1263,11 +1289,11 @@ msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "ესკიზები"
 
-#: Part.cpp:302
+#: Part.cpp:300
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
-msgstr ""
+msgstr "ნაწილის ინფორმაცია"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, QuickCommandsWidget)
 #: plugins/QuickCommands/qcwidget.ui:14
@@ -1372,6 +1398,8 @@ msgstr "სწრაფი წვდომის ჩვენება"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"სწრაფ ბრძანებები ვერ ვიპოვე. ისინი შეგიძლიათ დაამატოთ მენიუდან დამატებები -> "
+"სწრაფი ბრძანებები"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
@@ -1392,12 +1420,12 @@ msgstr "არსებობს დუბლირებული ჩანა�
 #: plugins/QuickCommands/quickcommandswidget.cpp:184
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
-msgstr ""
+msgstr "სანამ სკრიპტის გაშვებას სცდით, ყველა გაფრთხილება გაასწორეთ"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:208
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr ""
+msgstr "სკრიპტში აღმოჩენილია შეცდომები. მართლა გნებავთ, გაუშვათ ის?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:209
 #, kde-format
@@ -1416,6 +1444,8 @@ msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
+"აპირებთ წაშალოთ ჯგუფი %1,\n"
+"ერთზე მეტი კონფიგურაციით. დარწმუნებული ბრძანდებით?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:236
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
@@ -1504,6 +1534,8 @@ msgstr "SSH ქმედებებისთვის სწრაფი წვ
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"შენახული SSH კონფიგურაცია ვერ ვიპოვე. მისი დამატება შეგიძლიათ მენიუდან "
+"დამატებები -> SSH-ის მართვა"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
@@ -1519,7 +1551,7 @@ msgstr "SSH ჩანაწერები"
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
-msgstr ""
+msgstr "პროცესის სახელი ვერ მივიღე. ვთვლი, რომ მიერთებას ვერ მოვითხოვთ"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:181
 #: plugins/SSHManager/sshmanagerplugin.cpp:193
@@ -1532,6 +1564,8 @@ msgstr "შეცდომა SSH ბრძანების გაშვებ
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
+"SSH ბრძანების გაშვება გარსის აპლიკაციის (bash, zsh, sh) გარეთ გაშვება "
+"შეუძლებელია"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
@@ -1557,6 +1591,8 @@ msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
+"აპირებთ წაშალოთ საქაღალდემ %1,\n"
+"ერთზე მეტი SSH კონფიგურაციით. დარწმუნებული ბრძანდებით?"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
 #, kde-format
@@ -1578,6 +1614,8 @@ msgstr "აკლია სახელი"
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
+"თუ SSH-ის კონფიგურაცია დაყენებულია, ssh გასაღებს ან მომხმარებლის სახელს ნუ "
+"მიუთითებთ."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:405
 #, kde-format
@@ -1711,6 +1749,8 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
+"თუ ეს დაყენებულია, ჩვენ არ ზემოთ დაყენებულ SSH გასაღებს კი არ ვეყრდნობით, "
+"არამედ ფაილს ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:170
@@ -1746,7 +1786,7 @@ msgstr "საქაღალდე"
 #: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
-msgstr ""
+msgstr "ორგანიზაციისთვის, ეს ელემენტი ამ საქაღალდეში იქნება."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: plugins/SSHManager/sshwidget.ui:220
@@ -1807,7 +1847,7 @@ msgstr "გამოტანის პარამეტრები"
 #: PrintOptions.ui:39 settings/konsole.kcfg:175
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
-msgstr ""
+msgstr "&პრინტერის რეჟიმი (შავი ტექსტი, ფონის გარეშე)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
@@ -1830,7 +1870,7 @@ msgstr "ნაგულისხმები პროფილი"
 #: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
-msgstr ""
+msgstr "Konsole-ს არ აქვს წვდომა, პროფილი %1-ში შეინახოს"
 
 #: profile/ProfileModel.cpp:55
 #, kde-format
@@ -1883,7 +1923,7 @@ msgstr "%1-ის გამოტანის შენახვა"
 #: SaveHistoryTask.cpp:82
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
-msgstr ""
+msgstr "%1 არასწორი ბმულია. გამოტანას ვერ შევინახავ."
 
 #: SaveHistoryTask.cpp:172
 #, kde-format
@@ -2064,12 +2104,12 @@ msgstr "Konsole"
 #: session/SessionController.cpp:359
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
-msgstr ""
+msgstr "პროცესის, '%1', შესრულება დასრულდა სესიაში '%2'"
 
 #: session/SessionController.cpp:442
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
-msgstr ""
+msgstr "Konsole-მა არ იცის, როგორ გახსნას სანიშნე: "
 
 #: session/SessionController.cpp:521
 #, kde-format
@@ -2109,7 +2149,7 @@ msgstr "ხედის ზედა/ქვედაზე გაყოფა"
 #: session/SessionController.cpp:680
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "ყველაფრის კოპირება მოთხოვნის სტრიქონის გარდა"
 
 #: session/SessionController.cpp:686
 #, kde-format
@@ -2169,7 +2209,7 @@ msgstr "საუბრის გაწმენდა"
 #: session/SessionController.cpp:750
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr ""
+msgstr "გადახვევის გასუფთავება და ჩამოყრა"
 
 #: session/SessionController.cpp:759
 #, kde-format
@@ -2227,7 +2267,7 @@ msgstr "&ZModem -ით ატვირთვა..."
 #: session/SessionController.cpp:864
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "ერთჯერადი მონიტორები"
 
 #: session/SessionController.cpp:869
 #, kde-format
@@ -2354,6 +2394,8 @@ msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
+"ამ ესესიაში გაშვებული პროგრამა ცოცხალი თავით არ კვდება.   გნებავთ, ძალით "
+"მოკლათ ის?"
 
 #: session/SessionController.cpp:1129
 #, kde-format
@@ -2361,6 +2403,8 @@ msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
+"ამ ესესიაში გაშვებული პროგრამა '%1' ცოცხალი თავით არ კვდება.   გნებავთ, "
+"ძალით მოკლათ ის?"
 
 #: session/SessionController.cpp:1137
 #, kde-format
@@ -2371,7 +2415,7 @@ msgstr "პროგრამის მოკვლა"
 #: session/SessionController.cpp:1812
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "გარსის შეტყობინება ნაჩვენებია სესიაში '%1'"
 
 #: session/SessionController.cpp:2005
 #, kde-format
@@ -2381,7 +2425,7 @@ msgstr "მიმდინარე საქაღალდის პროგ�
 #: session/SessionController.cpp:2076
 #, kde-format
 msgid "Save ZModem Download to..."
-msgstr ""
+msgstr "ZModem-ით გადმოწერილის შენახვა ფაილში..."
 
 #: session/SessionController.cpp:2086
 #, kde-format
@@ -2395,7 +2439,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
-msgstr ""
+msgstr "<p>მიმდინარე სესიაში ZModem-ით ფაილის გადაცემა უკვე მიმდინარეობს.</p>"
 
 #: session/SessionController.cpp:2106
 #, kde-format
@@ -2480,6 +2524,7 @@ msgstr "რეგულარული გამოსახულებებ�
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr ""
+"Konsole-ს გაშვებისას არსებული გაშვებული ასლის გამოყენება, თუ ეს შესაძლებელია"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
@@ -2543,7 +2588,7 @@ msgstr "ყველა \"აღარ მკითხო\" შეტყობ�
 #: settings/GeneralSettings.ui:267 settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether search should start from the bottom"
-msgstr ""
+msgstr "უნდა დაიწყოს თუ არა ძებნა ბოლოდან"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
@@ -2556,25 +2601,25 @@ msgstr "უკან ძებნა"
 #: settings/konsole.kcfg:18
 #, kde-format
 msgid "Show window title set by escape sequence on the titlebar"
-msgstr ""
+msgstr "სპეციალური სიმბოლოებით დახატული ფანჯრის სათაურის ჩვენება"
 
 #. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
 #: settings/konsole.kcfg:23
 #, kde-format
 msgid "Allow users to access top menu through Alt+Key combination"
-msgstr ""
+msgstr "მომხმარებლებისთვის ზედა მენუსთან წვდომის მიცემა Alt+K ღილაკებით"
 
 #. i18n: ectx: label, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:27
 #, kde-format
 msgid "Use current window size on next startup"
-msgstr ""
+msgstr "შემდეგი გაშვებისას მიმდინარე ფანჯრის ზომის გამოყენება"
 
 #. i18n: ectx: tooltip, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:28
 #, kde-format
 msgid "The window size will be saved upon exiting Konsole"
-msgstr ""
+msgstr "Konsole-დან გასვლისას ფანჯრის ზომის შენახვა"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:42
@@ -2625,13 +2670,13 @@ msgstr "ძებნის დამთხვევების გამოკ�
 #: settings/konsole.kcfg:74
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
-msgstr ""
+msgstr "აყენებს, უნდა გამოიკვეთოს თუ არა ნაპოვნი ტექსტი"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
-msgstr ""
+msgstr "აკონტროლებს, არის თუ არა შვილი cgroup-ები შექმნილი, როგორც ჩანართები"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -2639,61 +2684,63 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"ადგენს მეხსიერების რაოდენობას, რომლის შემდეგაც მისი გამოყენების შეზღუდვას "
+"დავიწყებთ"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
 #: settings/konsole.kcfg:95 settings/konsole.kcfg:115
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
-msgstr ""
+msgstr "მთლიანი ჩანართების პანელის ხილვადობის მართვა"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
 #: settings/konsole.kcfg:104
 #, kde-format
 msgid "Control the size of the handle between panels"
-msgstr ""
+msgstr "პანელებს შორის ადგილის ზომა"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
 #: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the position of the tab bar"
-msgstr ""
+msgstr "ჩანართების ზოლის მდებარეობა"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:132
 #, kde-format
 msgid "Control the visual style of the tab bar"
-msgstr ""
+msgstr "ჩანართების ზოლის სტილი"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:136
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
-msgstr ""
+msgstr "მომხმარებლის .css ფაილი ჩანართის ზოლისთვის"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
 #: settings/konsole.kcfg:140
 #, kde-format
 msgid "The .css file to use for the tab bar style"
-msgstr ""
+msgstr "ჩანართების ზოლის სტილის .css ფაილი"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
 #: settings/konsole.kcfg:144
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
-msgstr ""
+msgstr "ღია ჩანართების დასახურად მათზე შუა-წკაპის დაშვება"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
 #: settings/konsole.kcfg:148
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr ""
+msgstr "მართავს ჩანართების პანელზე 'ახალი ჩანართის' ღილაკის მდებარეობას"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:152
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
-msgstr ""
+msgstr "მართვა, სად გამოჩნდება ღილაკი \"ჩანართის დახურვა\""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
 #: settings/konsole.kcfg:161
@@ -2711,25 +2758,26 @@ msgstr "ჩანართის სიგანის გაფართოე�
 #: settings/konsole.kcfg:185
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr ""
+msgstr "გადახვევის ფაილებისთვის სისტემური საქაღალდის გამოყენება"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:189
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
+"გადახვევის ფაილებისთვის მომხმარებლის მიერ მითითებული საქაღალდის გამოყენება"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:193
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr ""
+msgstr "გადახვევის ფაილებისთვის მითითებული საქაღალდის გამოყენება"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:197
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr ""
+msgstr "გადახვევის ფაილებისთვის ამ საქაღალდის გამოყენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -2778,7 +2826,7 @@ msgstr ""
 #: settings/ProfileSettings.ui:39
 #, kde-format
 msgid "Create a new profile based on the selected profile"
-msgstr ""
+msgstr "ახალი პროფილის შექმნა არჩეული პროფილით"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:42
@@ -2792,6 +2840,8 @@ msgstr "&ახალი..."
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
 msgstr ""
+"არჩეული პროფილის ჩასწორება (ეს ღილაკი გამორთულია მხოლოდ-კითხვადი "
+"პროფილებისთვის)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:55
@@ -2816,6 +2866,7 @@ msgstr "&წაშლა"
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
 msgstr ""
+"მონიშნული პროფილის დაყენება ნაგულისხმევად ახალი ტერმინალის სესიებისთვის"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:81
@@ -2915,7 +2966,7 @@ msgstr "'ახალი ჩანართის' ღილაკის ჩვ�
 #: settings/TabBarSettings.ui:225
 #, kde-format
 msgid "Expand individual tab widths to full window"
-msgstr ""
+msgstr "ინდივიდუალური ჩანართის სიგანეების სრულ ფანჯარაზე გაწელვა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:232
@@ -2991,7 +3042,7 @@ msgstr "არასდროს"
 #: settings/TabBarSettings.ui:423
 #, kde-format
 msgid "Drag Handle Size:"
-msgstr ""
+msgstr "ჩოჩიის ზომა:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
 #: settings/TabBarSettings.ui:433
@@ -3041,7 +3092,7 @@ msgstr "ქეშის საქაღალდის დაყენება 
 #: settings/TemporaryFilesSettings.ui:37
 #, kde-format
 msgid "Scrollback file location:"
-msgstr ""
+msgstr "გადახვევის ფაილის მდებარეობა:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
 #: settings/TemporaryFilesSettings.ui:76
@@ -3070,6 +3121,10 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
+"<html><head/><body><p>იმისთვის, რომ ეს ფუნქცია გამოიყენოთ, ჩართეთ <span "
+"style=\" font-weight:600;\">თაგუნა-&gt;სხვადასხვა-&gt;ხაზგასმა </span><span "
+"style=\" font-weight:600;\">ფაილებში</span> თქვენს პროფილის პარამეტრებში</"
+"p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3116,8 +3171,8 @@ msgstr "ზომა: %1 x %2"
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "დარწმუნებული ბრძანდებით, რომ გნებავთ, ჩასვათ %1 სიმბოლო?"
+msgstr[1] "დარწმუნებული ბრძანდებით, რომ გნებავთ, ჩასვათ %1 სიმბოლო?"
 
 #: terminalDisplay/TerminalDisplay.cpp:2254
 #, kde-format
@@ -3127,17 +3182,17 @@ msgstr "ჩასმის დადასტურება"
 #: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
-msgstr ""
+msgstr "ტექსტის დასასრული/შეწყვეტა: შეგიძლიათ, მიმდინარე პროცესიდან გახვიდეთ"
 
 #: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
-msgstr ""
+msgstr "გადაცემის დასასრული. შეგიძლიათ, მიმდინარე პროცესიდან გახვიდეთ"
 
 #: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
-msgstr ""
+msgstr "ზარი: ვცდი, გასაგონი ხმა გამოვცე"
 
 #: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
@@ -3147,22 +3202,22 @@ msgstr "Backspace"
 #: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
-msgstr ""
+msgstr "Device Control Three/XOFF: გამოტანის შეჩერება"
 
 #: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
-msgstr ""
+msgstr "ჩანაცვლება/შეჩერება: შეიძლება შეაჩეროს მიმდინარე პროცესი"
 
 #: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
-msgstr ""
+msgstr "სიმბოლო Escape (^[): გამოიყენება ტერმინალის მდგომარეობის შესაცვლელად"
 
 #: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
-msgstr ""
+msgstr "ფაილის გამყოფი/გასვლა: შეუძლია მიმდინარე პროცესის დასრულება"
 
 #: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
@@ -3170,6 +3225,8 @@ msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
+"ტექსტი, რომლის ჩასმაც ცდილობთ, უჩინარ საკონტროლო სიმბოლოებს შეიცავს. "
+"გნებავთ, ამოვიღო ისინი?"
 
 #: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
@@ -3202,6 +3259,8 @@ msgid ""
 "Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
 "b> to resume.</qt>"
 msgstr ""
+"<qt>გამოტანა <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
+"\">შეჩერებულია</a> Ctrl+S-ით. გასაგრძელებლად დააწექით <b>Ctrl+Q</b>.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2609
 #, kde-format
@@ -3264,19 +3323,19 @@ msgstr "შემდეგი ჩანართიდან ხედის ა
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr ""
+msgstr "ახალი ჩანართის ჩატვირთვა 2x2 განლაგების ტერმინალებით"
 
 #: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr ""
+msgstr "ახალი ჩანართის ჩატვირთვა 2x1 განლაგების ტერმინალებით"
 
 #: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr ""
+msgstr "ახალი ჩანართის ჩატვირთვა 1x2 განლაგების ტერმინალებით"
 
 #: ViewManager.cpp:191
 #, kde-format
@@ -3402,19 +3461,19 @@ msgstr "ჩანართის მარცხნივ გადატან�
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "სემანტიკური ინტეგრაციის მორგება (bash)"
 
 #: ViewManager.cpp:326
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "სემანტიკური მინიშნებების ჩვენების გადართვა"
 
 #: ViewManager.cpp:332
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "ხაზის ნომრის ჩვენების გადართვა"
 
 #: ViewManager.cpp:339
 #, kde-format
@@ -3482,12 +3541,15 @@ msgid ""
 "No keyboard translator available.  The information needed to convert key "
 "presses into characters to send to the terminal is missing."
 msgstr ""
+"კლავიატურის მთარგმნელი ხელმისაწვდომი არაა.  ინფორმაცია, რომელიც საჭიროა "
+"ღილაკის დაწოლების სიმბოლოებში გადასაყვანად, რომ ტერმინალს გავუგზავნო, ვერ "
+"ვიპოვე."
 
 #. i18n: ectx: property (text), widget (QLabel, urlHintsLabel)
 #: widgets/EditProfileAdvancedPage.ui:37
 #, kde-format
 msgid "Key combination to show URL hints:"
-msgstr ""
+msgstr "ღილაკების მიმდევრობა ბმულის მინიშნებების საჩვენებლად:"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:69
@@ -3528,19 +3590,19 @@ msgstr "სხვადასხვა:"
 #: widgets/EditProfileAdvancedPage.ui:182
 #, kde-format
 msgid "Number URL hints in reverse, starting from the bottom"
-msgstr ""
+msgstr "ბმულების პირიქით დანომრვა, ქვემოდან დაწყებული"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:185
 #, kde-format
 msgid "Reverse URL hint numbering"
-msgstr ""
+msgstr "ბმულების დანომრვის შებრუნება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingTextButton)
 #: widgets/EditProfileAdvancedPage.ui:198
 #, kde-format
 msgid "Allow terminal programs to create blinking sections of text"
-msgstr ""
+msgstr "ტერმინალის პროგრამისთვის მოციმციმე ტექსტის შექმნის ნების დართვა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingTextButton)
 #: widgets/EditProfileAdvancedPage.ui:201
@@ -3552,7 +3614,7 @@ msgstr "მოციმციმე ტექტის დაშვება"
 #: widgets/EditProfileAdvancedPage.ui:214
 #, kde-format
 msgid "Allow the output to be suspended by pressing Ctrl+S"
-msgstr ""
+msgstr "Ctrl+S-ით გამოტანის შეჩერების აშვება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
 #: widgets/EditProfileAdvancedPage.ui:217
@@ -3568,13 +3630,15 @@ msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
 "Hebrew only)"
 msgstr ""
+"ტერმინალზე ორმხირივ ჩვენების ჩართვა (სწორია მხოლოდ არაბულისთვის, "
+"სპარსულისთვის და ივრითისთვის)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:234
 #: widgets/EditProfileAppearancePage.ui:950
 #, kde-format
 msgid "Bi-Directional text rendering"
-msgstr ""
+msgstr "ორმხრივი ტექსტის რენდერი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:258
@@ -3586,7 +3650,7 @@ msgstr "ნაგულისხმები სიმბოლოების �
 #: widgets/EditProfileAdvancedPage.ui:278
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
-msgstr ""
+msgstr "მალსახმობი ძირითად ეკრანზე შესაჭვრეტად:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:33
@@ -3598,7 +3662,7 @@ msgstr "ფერის სქემა და ფონტი"
 #: widgets/EditProfileAppearancePage.ui:66
 #, kde-format
 msgid "Create a new color scheme based upon the selected scheme"
-msgstr ""
+msgstr "ახალი ფერის სქემის შექმნა მონიშნულ სქემაზე დაყრდნობით"
 
 #. i18n: ectx: property (text), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:69
@@ -3611,7 +3675,7 @@ msgstr "ახალი..."
 #: widgets/EditProfileAppearancePage.ui:76
 #, kde-format
 msgid "Edit the selected color scheme"
-msgstr ""
+msgstr "არჩეული ფერის სქემის ჩასწორება"
 
 #. i18n: ectx: property (text), widget (QPushButton, editKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, environmentEditButton)
@@ -3628,13 +3692,14 @@ msgstr "ჩასწორება…"
 #: widgets/EditProfileAppearancePage.ui:86
 #, kde-format
 msgid "Delete the selected color scheme"
-msgstr ""
+msgstr "არჩეული ფერის სქემის წაშლა"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:96
 #, kde-format
 msgid "Reset the selected color scheme settings to the default values"
 msgstr ""
+"მონიშნული ფერის სქემის პარამეტრების ნაგულისხმევ მნიშვნელობებზე დაბრუნება"
 
 #. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
@@ -3667,19 +3732,20 @@ msgstr "ფონტების მოგლუვება"
 #: widgets/EditProfileAppearancePage.ui:178
 #, kde-format
 msgid "Draw intense colors in bold font"
-msgstr ""
+msgstr "სქელი ფონტისთვის კაშკაშა ფერების გამოყენება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:185
 #, kde-format
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
+"ხაზის სიმბოლოებისთვის ჩაშენებული კოდის მაგიერ არჩეული ფონტის გამოყენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
 #, kde-format
 msgid "Use line characters contained in font"
-msgstr ""
+msgstr "ხაზის სიმბოლოების გამოყენება, რომელსაც არჩეული ფონტი შეიცავს"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:196
@@ -3725,7 +3791,7 @@ msgstr "ფერი:"
 #: widgets/EditProfileAppearancePage.ui:294
 #, kde-format
 msgid "Set the cursor to match the color of the character underneath it."
-msgstr ""
+msgstr "კურსორის ფერი დაემთხვევა სიმბოლოს ფერს, რომელიც მის ქვეშაა."
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:297
@@ -3737,7 +3803,7 @@ msgstr "მიმდინარე სიმბოლოს დამთხვ�
 #: widgets/EditProfileAppearancePage.ui:313
 #, kde-format
 msgid "Use a custom, fixed color for the cursor"
-msgstr ""
+msgstr "კურსორისთვის მითითებული, ფიქსირებული ფერის გამოყენება"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:316
@@ -3767,7 +3833,7 @@ msgstr "ტექსტი:"
 #: widgets/EditProfileAppearancePage.ui:393
 #, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
-msgstr ""
+msgstr "აირჩიეთ ფერი, რომლითაც დაიხატება სიმბოლო, რომელიც კურსორის ქვეშაა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileAppearancePage.ui:418
@@ -3810,18 +3876,20 @@ msgid ""
 "Show terminal size in columns and lines in the center of window after "
 "resizing"
 msgstr ""
+"ზომის შეცვლის შემდეგ ტერმინალის ზომის სვეტებისა და მწკრივების ჩვენება "
+"ფანჯრის ცენტრში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:481
 #, kde-format
 msgid "Show hint for terminal size after resizing"
-msgstr ""
+msgstr "ზომის შეცვლის შემდეგ ტერმინალის ზომის მინიშნების ჩვენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
 #: widgets/EditProfileAppearancePage.ui:488
 #, kde-format
 msgid "Always invert the colors of selected text"
-msgstr ""
+msgstr "მონიშნული ტექსტის ფერების ინვერსია"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
 #: widgets/EditProfileAppearancePage.ui:497
@@ -3871,7 +3939,7 @@ msgstr "ხაზებს შუა მანძილი:"
 #: widgets/EditProfileAppearancePage.ui:618
 #, kde-format
 msgid "The number of pixels between two lines"
-msgstr ""
+msgstr "პიქსელების რიცხვი ხაზებს შორის"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
@@ -3898,7 +3966,7 @@ msgstr "ცენტრზე სწორება:"
 #: widgets/EditProfileAppearancePage.ui:730
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
-msgstr ""
+msgstr "მითითება, რომ ფანჯარა აქტიურია, ფერების მინავლებით"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:733
@@ -3910,7 +3978,7 @@ msgstr "გამუქება"
 #: widgets/EditProfileAppearancePage.ui:740
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr ""
+msgstr "მითითება, რომ ფანჯარა აქტიურია, საზღვრების დახატვით"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
@@ -3922,7 +3990,7 @@ msgstr "საზღვარი"
 #: widgets/EditProfileAppearancePage.ui:785
 #, kde-format
 msgid "Display Vertical line at column:"
-msgstr ""
+msgstr "ვერტიკალური ხაზის ჩვენება სვეტთან:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:830
@@ -3940,7 +4008,7 @@ msgstr "კომპლექსური ტექსტის განლა�
 #: widgets/EditProfileAppearancePage.ui:857
 #, kde-format
 msgid "Enable word mode text rendering"
-msgstr ""
+msgstr "ტექსტის რენდერის სიტყვის რეჟიმის ჩართვა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:860
@@ -3955,18 +4023,20 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"სიტყვის შუაში ატრიბუტების ცვლილების იგნორი (სხვაგვარად, ატრიბუტის "
+"ცვლილებებმა, შეიძლება, რენდერისას სიტყვა გაწყვიტოს)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:876
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "იგივე ატრიბუტების გამოყენება მთელი სიტყვისთვის"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:889
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "ASCII სიმბოლოების სიტყვების ერთად რენდერი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:892
@@ -3978,13 +4048,13 @@ msgstr "ASCII სიმბოლოები "
 #: widgets/EditProfileAppearancePage.ui:905
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "ინდური ანბანის სიმბოლოების სიტყვების ერთად რენდერი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:908
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr ""
+msgstr "ინდური ანბანის სიმბოლოები"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:921
@@ -3996,25 +4066,25 @@ msgstr "ემოჯის ფონტი:"
 #: widgets/EditProfileAppearancePage.ui:963
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
-msgstr ""
+msgstr "ხაზები ყოველთვის LTR-ა, პირველი დიდი სიმბოლოთი დადგენის მაგიერ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:966
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "ნაძალადევი LTR ხაზის მიმართულება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:979
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "ცხრილის დახატვის სიმბოლოების ძლიერ LTR-ად აღქმა."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:982
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "ცხრილის სიმბოლოების ორმხრივი რეჟიმის გადაფარვა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:995
@@ -4026,7 +4096,7 @@ msgstr "Wcwidth-ის გამოტოვება პრობლემუ�
 #: widgets/EditProfileAppearancePage.ui:998
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Wcwidth-ის გადაფარვა"
 
 #: widgets/EditProfileDialog.cpp:67
 #, kde-format
@@ -4083,30 +4153,34 @@ msgid ""
 ">Either change the permissions of that file or set a different name to save "
 "the settings to a new profile."
 msgstr ""
+"არასაკმარისი წვდომები პარამეტრების შესანახად ფაილში: <filename>%1</filename>."
+"<nl/>ან შეცვალეთ ფაილის წვდომები, ან მიუთითეთ სხვა სახელი, პარამეტრების ახალ "
+"პროფილში შესანახად."
 
 #: widgets/EditProfileDialog.cpp:305
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
+"პროფილის სახელი ცარიელია. დააყენეთ სახელი რათა პარამეტრების შენახვა შეძლოთ."
 
 #: widgets/EditProfileDialog.cpp:313
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
-msgstr ""
+msgstr "პროფილი სახელით '%1' უკვე არსებობს."
 
 #: widgets/EditProfileDialog.cpp:336
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "პროფილის სახელის სიგრძე დაშვებულს (%1) აჭარბებს."
 
 #: widgets/EditProfileDialog.cpp:374
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "გამოკვეთილი სიმბოლოები არასწორია პროფილის სახელებისთვის: %1."
 
 #: widgets/EditProfileDialog.cpp:410
 #, kde-format
@@ -4168,7 +4242,7 @@ msgstr "ზარის მოვლენების იგნორი"
 #: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr ""
+msgstr "ნაგულისხმევი ახალი ტერმინალის სესიისთვის %1-ში"
 
 #: widgets/EditProfileDialog.cpp:634
 #, kde-format
@@ -4178,7 +4252,7 @@ msgstr "გარემოს ჩასწორება"
 #: widgets/EditProfileDialog.cpp:635
 #, kde-format
 msgid "One environment variable per line"
-msgstr ""
+msgstr "ერთი გარემოს ცვლადი ერთ ხაზზე"
 
 #: widgets/EditProfileDialog.cpp:666
 #, kde-format
@@ -4197,7 +4271,7 @@ msgstr "აირჩეთ საწყისი საქაღალდე"
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
-msgstr ""
+msgstr "სქემის <resource>%1</resource> ჩატვირთვა ჩავარდა."
 
 #: widgets/EditProfileDialog.cpp:1504
 #, kde-format
@@ -4205,6 +4279,8 @@ msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
+"ეს ფერების სქემა იყენებს გამჭვირვალე ფონს, რომელიც, როგორც ჩანს, თქვენს "
+"სამუშაო მაგიდაზე მხარდაჭერილი არაა"
 
 #: widgets/EditProfileDialog.cpp:1510
 #, kde-format
@@ -4212,6 +4288,8 @@ msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
+"Konsole მანამდე გაეშვა, სანამ სამუშაო მაგიდის ეფექტები ჩაირთვებოდა. "
+"გამჭვირვალე ფონისთვის Konsole თავიდან უნდა გაუშვათ."
 
 #: widgets/EditProfileDialog.cpp:1901
 #, kde-format
@@ -4233,7 +4311,7 @@ msgstr ""
 #: widgets/EditProfileDialog.cpp:1914
 #, kde-format
 msgid "Text Editor Custom Command"
-msgstr ""
+msgstr "ტექსტური რედაქტორის მითითებული ბრძანება"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:39
@@ -4246,12 +4324,14 @@ msgstr "ზოგადი პარამეტრები"
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
 msgstr ""
+"აირჩიეთ ხატულა, რომელიც გამოყენებული იქნება ჩანართებზე, რომლებიც ამ პროფილს "
+"იყენებენ"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:81
 #, kde-format
 msgid "A descriptive name for the profile"
-msgstr ""
+msgstr "გასაგები სახელი პროფილისთვის"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:84
@@ -4279,6 +4359,8 @@ msgid ""
 "The command to execute when new terminal sessions are created using this "
 "profile"
 msgstr ""
+"ბრძანების შესრულება, როცა ამ პროფილის გამოყენებით ახალი ტერმინალის სესიები "
+"იქმნება"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
 #: widgets/EditProfileGeneralPage.ui:141
@@ -4298,6 +4380,8 @@ msgstr "საწყისი საქაღალდე:"
 msgid ""
 "The initial working directory for new terminal sessions using this profile"
 msgstr ""
+"საწყისი სამუშაო საქაღალდე ახალი ტერმინალის სესიებისთვის, რომლებიც ამ პროფილს "
+"იყენებენ"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:173
@@ -4309,13 +4393,13 @@ msgstr "/home/username"
 #: widgets/EditProfileGeneralPage.ui:180
 #, kde-format
 msgid "Choose the initial directory"
-msgstr ""
+msgstr "აირჩიეთ საწისი საქაღალდე"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
 #: widgets/EditProfileGeneralPage.ui:190
 #, kde-format
 msgid "Start in same directory as current session"
-msgstr ""
+msgstr "გაშვება მიმდინარე სესიის საქაღალდეში"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:203
@@ -4327,7 +4411,7 @@ msgstr "გარემო:"
 #: widgets/EditProfileGeneralPage.ui:221
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
-msgstr ""
+msgstr "გარემოს ცვლადებისა და ასოცირებული მნიშვნელობების სიის ჩასწორება"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:268
@@ -4344,6 +4428,9 @@ msgid ""
 "Configure Konsole → General → Remember window size</span> must be disabled "
 "for these entries to work.</p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-style:italic;\">მორგება → Konsole-"
+"ის მორგება → ზოგადი → ფანჯრის ზომის დამახსოვრება</span> გათიშული უნდა იყოს, "
+"რომ ამ ელემენტებმა იმუშაონ.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:356
@@ -4361,13 +4448,13 @@ msgstr "სემანტიკური ინტეგრაცია"
 #: widgets/EditProfileGeneralPage.ui:380
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "ზემოთ/ქვემოთ ისრების ემულაცია"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "თაგუნას წკაპი შეყვანის ხაზში კურსორს გადაიტანს"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
@@ -4399,7 +4486,7 @@ msgstr "არასდროს"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "ბმულების აქტივაცია"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4453,7 +4540,7 @@ msgstr ""
 #: widgets/EditProfileKeyboardPage.ui:72
 #, kde-format
 msgid "Create a new key bindings scheme based upon the selected bindings"
-msgstr ""
+msgstr "ახალი ღილაკების მიბმის სქემის შექმნა არჩეული მიბმებით"
 
 #. i18n: ectx: property (text), widget (QPushButton, newKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:75
@@ -4466,25 +4553,25 @@ msgstr "ახალი..."
 #: widgets/EditProfileKeyboardPage.ui:82
 #, kde-format
 msgid "Edit the selected key bindings scheme"
-msgstr ""
+msgstr "მონიშნული ღილაკების მიბმის სქემის ჩასწორება"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:92
 #, kde-format
 msgid "Delete the selected key bindings scheme"
-msgstr ""
+msgstr "მონიშნული ღილაკების მიბმის სქემის წაშლა"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:102
 #, kde-format
 msgid "Reset the selected key bindings scheme to its default values"
-msgstr ""
+msgstr "მონიშნული ღილაკების მიბმის სქემის ნაგულისხმევ მნიშვნელობებზე დაბრუნება"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: widgets/EditProfileMousePage.ui:33
 #, kde-format
 msgid "Text interaction"
-msgstr ""
+msgstr "ტექსტური ურთიერთქმედება"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, label_11)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
@@ -4495,6 +4582,8 @@ msgid ""
 "Characters which are considered part of a word when double-clicking to "
 "select whole words in the terminal."
 msgstr ""
+"სიმბოლოები, რომლებიც აღქმული იქნება, როგორც სიტყვის ნაწილი, როცა ზედ ორჯერ "
+"დააწკაპუნებთ, მთელი სიტყვის მოსანიშნად."
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileMousePage.ui:50
@@ -4518,7 +4607,7 @@ msgstr "მთლიანი ხაზი"
 #: widgets/EditProfileMousePage.ui:111
 #, kde-format
 msgid "From mouse position to the end of line"
-msgstr ""
+msgstr "თაგუნას მდებარეობიდან ხაზის ბოლომდე"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:137
@@ -4548,7 +4637,7 @@ msgstr "კოპირების პარამეტრები:"
 #: widgets/EditProfileMousePage.ui:193
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
-msgstr ""
+msgstr "მონიშნული ტექსტის ავტომატური კოპირება ბუფერში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:196
@@ -4560,7 +4649,7 @@ msgstr "კოპირება მონიშვნისას"
 #: widgets/EditProfileMousePage.ui:203
 #, kde-format
 msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
-msgstr ""
+msgstr "ტექსტის კოპირება HTML-ს სახით (ფორმატირებით, ფონტით, ფერებით და ა.შ.)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
 #: widgets/EditProfileMousePage.ui:206
@@ -4573,24 +4662,26 @@ msgstr "დააკოპირეთ ტექსტი როგორც HTM
 #, kde-format
 msgid "Trim leading spaces in selected text, useful in some instances"
 msgstr ""
+"მონიშნული ტექსტის თავში არსებული გამოტოვებების წაკვეთა. ხანდახან სასარგებლოა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
 #: widgets/EditProfileMousePage.ui:216
 #, kde-format
 msgid "Trim leading spaces"
-msgstr ""
+msgstr "თავში მიწერილი გამოტოვებების წაშლა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:223
 #, kde-format
 msgid "Trim trailing spaces in selected text, useful in some instances"
 msgstr ""
+"მონიშნული ტექსტის ბოლოში არსებული გამოტოვებების წაკვეთა. ხანდახან სასარგებლოა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:226
 #, kde-format
 msgid "Trim trailing spaces"
-msgstr ""
+msgstr "ბოლოში მიწერილი გამოტოვებების წაშლა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:263
@@ -4599,6 +4690,8 @@ msgid ""
 "Text recognized as a link or an email address will be underlined when "
 "hovered by the mouse pointer."
 msgstr ""
+"ტექსტი, რომელიც აღიქმება, როგორც ბმული ან ელფოსტის მისამართი ხაზგასმული "
+"იქნება, როცა თაგუნას კურსორს გადაატარებთ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:266
@@ -4613,6 +4706,8 @@ msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
 "pointer."
 msgstr ""
+"ტექსტი, რომელსაც მივხვდებით, რომ ფაილია, ხაზგასმული იქნება, როცა თაგუნას "
+"კურსორს გადაატარებთ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:276
@@ -4633,6 +4728,8 @@ msgstr "ტექსტური რედაქტორის ბრძან�
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
 msgstr ""
+"ტექსტური რედაქტორი მითითებულ ხაზზე/სვეტზე მდებარე ტექსტური ფაილის ბმულის "
+"გახსნისას."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:329
@@ -4641,18 +4738,20 @@ msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
 "mouse click."
 msgstr ""
+"ტექსტი, რომელსაც მივხვდებით, რომ ფაილი, ბმული ან ელფოსტის მისამართია, "
+"გაიხსნება, როცა ზედ დააწკაპუნებთ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:332
 #, kde-format
 msgid "Open files/links by direct click"
-msgstr ""
+msgstr "ფაილების/ბმულების გახსნა ზედ დაწკაპუნებით"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:343
 #, kde-format
 msgid "Allow escape sequences for links"
-msgstr ""
+msgstr "ბმულებში განსაკუთრებული სიმბოლოების დაშვება"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
 #: widgets/EditProfileMousePage.ui:350
@@ -4673,19 +4772,19 @@ msgstr "ბმულის დაშვებული ფორმატებ�
 #: widgets/EditProfileMousePage.ui:378
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
-msgstr ""
+msgstr "შესაძლო ბმულების ფორმატები. მაგ: http://, https:// და file://"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:389
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
-msgstr ""
+msgstr "მონიშნული ტექსტის გადასათრევად Ctrl ღილაკდაჭერილზე დაწკაპუნება საჭირო."
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:392
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
-msgstr ""
+msgstr "გადათრევა-დაგდებისთვის Ctrl ღილაკის დაჭერის მოთხოვნა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:399
@@ -4699,7 +4798,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:402
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
-msgstr ""
+msgstr "შიდა ეკრანის ბუფერის გადახვევის ჩართვა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:409
@@ -4708,24 +4807,26 @@ msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
 "link actions."
 msgstr ""
+"დაგდებული ფაილებისა და ბმულების, როგორც ტექსტად, ჩასმა, მათი გადატანის, "
+"კოპირების და ბმულის შექმნის ქმედებების შეთავაზების გარეშე."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:412
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
-msgstr ""
+msgstr "ფაილებისა და ბმულების გადათრევა/დაგდების გათიშვა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:419
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
-msgstr ""
+msgstr "Ctrl-ზე დაჭერით და თაგუნას ბორბლის ტექსტის ზომის გადიდება/შემცირება."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:422
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
-msgstr ""
+msgstr "ტექსტის ზომის შესაცვლელად Ctrl+თაგუნარსბორბლის გამოყენები დაშვება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:429
@@ -4734,12 +4835,14 @@ msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
 msgstr ""
+"როცა თაგუნას ფერის თექვსმეტობით მნიშვნელობაზე გააჩერებთ, ფერი თაგუნას "
+"კურსორთან ჩარჩოში გამოჩნდება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "ფერის მინიატურა თაგუნას გადატარებისას"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
@@ -4748,48 +4851,52 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
+"ზოგიერთ ტერმინალის აპლიკაციას თაგუნას მხარდაჭერა გააჩნია. ეს მათ საშუალებას "
+"აძლევთ, ის ნაგულისხმევად მიიღონ. მისი ჩართვა/გამორთვა მუშაობის დროსაც "
+"შეგიძლიათ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:455
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr ""
+"ტერმინალის აპლიკაციებისთვის წკაპების და გადათრევის დანახვის უფლების მიცემა"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:43
 #, kde-format
 msgid "Scrollback:"
-msgstr ""
+msgstr "გადახვევა:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:85
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr ""
+msgstr "აწევა/ჩამოწევა:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:101
 #, kde-format
 msgid "Scroll the page the half height of window"
-msgstr ""
+msgstr "გვერდის გადახვევა ფანჯრის ნახევარი ზომით"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:104
 #, kde-format
 msgid "Half screen height"
-msgstr ""
+msgstr "ეკრანის სიმაღლის ნახევარი"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:114
 #, kde-format
 msgid "Scroll the page the full height of window"
-msgstr ""
+msgstr "გვერდის გადახვევა ფანჯრის ზომით"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:117
 #, kde-format
 msgid "Full screen height"
-msgstr ""
+msgstr "ეკრანის სრული სიმაღლე"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:149
@@ -4801,7 +4908,7 @@ msgstr "ჩოჩიას მდებარეობა:"
 #: widgets/EditProfileScrollingPage.ui:159
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
-msgstr ""
+msgstr "ჩოჩიის ტერმინალის ფანჯრის მარჯვენა მხარეს ჩვენება"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:162
@@ -4814,7 +4921,7 @@ msgstr "მარჯვენა მხარე"
 #: widgets/EditProfileScrollingPage.ui:172
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
-msgstr ""
+msgstr "ჩოჩიის ტერმინალის ფანჯრის მარცხენა მხარეს ჩვენება"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:175
@@ -4840,19 +4947,19 @@ msgstr "გამოკვეთა:"
 #: widgets/EditProfileScrollingPage.ui:227
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr ""
+msgstr "ხედში მოქცეული ხაზების გამოკვეთა"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:240
 #, kde-format
 msgid "Reflow Lines:"
-msgstr ""
+msgstr "ხაზების თავიდან ფორმატი:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Reflow lines when terminal resizes"
-msgstr ""
+msgstr "ხაზების თავიდან დახატვა ტერმინალის ზომის ცვლილების შემდეგ"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -4864,19 +4971,19 @@ msgstr "ჩანართის სახელები"
 #: widgets/EditProfileTabsPage.ui:62
 #, kde-format
 msgid "Tab Monitoring"
-msgstr ""
+msgstr "ჩანართის მონიტორინგი"
 
 #. i18n: ectx: property (text), widget (QLabel, silenceSecondsLabel)
 #: widgets/EditProfileTabsPage.ui:74
 #, kde-format
 msgid "Threshold for continuous silence:"
-msgstr ""
+msgstr "ზღვარი უწყვეტი სიჩუმისთვის:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
 #: widgets/EditProfileTabsPage.ui:87
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
-msgstr ""
+msgstr "ზღვარი უწყვეტი სიჩუმისთვის:, რომელსაც Konsole ამოიცნობს"
 
 #: widgets/HistorySizeWidget.cpp:40
 #, kde-format
@@ -4894,6 +5001,9 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
+"ამ პარამეტრის გამოყენებისას გადახვევის მონაცემები RAM-ში შეინახება. თუ "
+"აირჩევთ უზარმაზარ მნიშვნელობას, შეიძლება სისტემას მეხსიერება გამოელიოს და "
+"სტაბილურობის პრობლემები შეგექმნათ."
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -4905,12 +5015,16 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
+"ამ პარამეტრის გამოყენებისას გადახვევის მონაცემები დაუშიფრავ დროებით ფაილებში "
+"ჩაიწერება. ეს დროებითი ფაილები წაიშლება, როცა Konsole-ს ნორმალურად ახურავთ."
+"<nl/>დროებითი ფაილების შესანახი საქაღალდის დასაყენებლად გამოიყენეთ "
+"<emphasis>მორგება → Konsole-ის მორგება → დროებითი ფაილები</emphasis>."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
 #, kde-format
 msgid "Limit the remembered output to a fixed number of lines"
-msgstr ""
+msgstr "დამახსოვრებული გამოტანილი ინფორმაციის ხაზების რაოდენობის შეზღუდვა"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
@@ -4922,13 +5036,13 @@ msgstr "ფიქსირებული ზომა:"
 #: widgets/HistorySizeWidget.ui:73
 #, kde-format
 msgid "Number of lines of output to remember"
-msgstr ""
+msgstr "დასამახსოვრებელი გამოტანის ხაზების რაოდენობა"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:134
 #, kde-format
 msgid "Remember all output produced by the terminal"
-msgstr ""
+msgstr "ტერმინალის გამოტანის სრულად დამახსოვრება"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
@@ -4941,7 +5055,7 @@ msgstr "შეუზღუდავი"
 #: widgets/HistorySizeWidget.ui:172
 #, kde-format
 msgid "Do not remember previous output"
-msgstr ""
+msgstr "წინა გამოტანა დამახსოვრებული არ იქნება"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
@@ -4960,7 +5074,7 @@ msgstr "მოძებნა…"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
-msgstr ""
+msgstr "შეიყვანეთ საძებნი სტრიქონი"
 
 #: widgets/IncrementalSearchBar.cpp:75
 #, kde-format
@@ -5026,7 +5140,7 @@ msgstr "ყველა დამთხვევის გამოკვეთ�
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
-msgstr ""
+msgstr "აყენებს, უნდა გამოიკვეთოს თუ არა ნაპოვნი ტექსტი"
 
 #: widgets/IncrementalSearchBar.cpp:133
 #, kde-format
@@ -5038,24 +5152,24 @@ msgstr "უკან ძებნა"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
-msgstr ""
+msgstr "უნდა დაიწყოს თუ არა ძებნა ბოლოდან"
 
 #: widgets/IncrementalSearchBar.cpp:165
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
-msgstr ""
+msgstr "მიმდინარე საძებნი სტრიქონის ბოლოდან ძებნა"
 
 #: widgets/IncrementalSearchBar.cpp:170
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
-msgstr ""
+msgstr "მიმდინარე საძებნი სტრიქონი თავიდან ძებნა"
 
 #: widgets/KonsolePrintManager.cpp:50
 #, kde-format
 msgid "Print Shell"
-msgstr ""
+msgstr "გარსის დაბეჭდვა"
 
 #: widgets/RenameTabWidget.cpp:37
 #, kde-format
@@ -5070,6 +5184,8 @@ msgid ""
 "Tab title format used when a remote command (e.g. connection to another "
 "computer via SSH) is being executed"
 msgstr ""
+"დაშორებული ბრძანების (მაგ: SSH მიერთება) შესრულებისას გამოყენებული ჩანართის "
+"სათაურის ფორმატი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/RenameTabWidget.ui:60
@@ -5111,7 +5227,7 @@ msgstr "მიმდინარე საქაღალდე (გრძელ
 
 #: widgets/TabTitleFormatButton.cpp:24 widgets/TabTitleFormatButton.cpp:39
 msgid "Window Title Set by Shell: %w"
-msgstr ""
+msgstr "გარსის მიერ დაყენებული ფანჯრის სათაური: %w"
 
 #: widgets/TabTitleFormatButton.cpp:25 widgets/TabTitleFormatButton.cpp:40
 msgid "Session Number: %#"
@@ -5128,7 +5244,7 @@ msgstr "ლოკალური ჰოსტი: %h"
 
 #: widgets/TabTitleFormatButton.cpp:28
 msgid "User's Bourne prompt sigil: %B"
-msgstr ""
+msgstr "მომხმარებლის გარსის სტატუსის სიმბოლო: %B"
 
 #: widgets/TabTitleFormatButton.cpp:35
 msgid "User Name@ (if given): %U"

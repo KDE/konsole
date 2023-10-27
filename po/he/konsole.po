@@ -17,20 +17,22 @@
 # tahmar1900 <tahmar1900@gmail.com>, 2008.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2023 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-26 01:47+0000\n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2023-10-27 01:42+0000\n"
+"PO-Revision-Date: 2023-10-26 09:58+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.3.2\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1250,13 +1252,15 @@ msgid "Load Tab Layout..."
 msgstr ""
 
 #: MainWindow.cpp:794 MainWindow.cpp:811
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "יש תהליך רץ בחלון זה. לצאת בכל זאת?"
 msgstr[1] "יש %1 תהליכים רצים בחלון זה. לצאת בכל זאת?"
+msgstr[2] ""
+msgstr[3] ""
 
 #: MainWindow.cpp:800 MainWindow.cpp:817 MainWindow.cpp:831
 #, kde-format
@@ -1282,7 +1286,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "יש לך תהליך רץ בחלון זה. האם ברצונך לצאת בכל זאת?"
 
-#: MainWindow.cpp:935 Part.cpp:299
+#: MainWindow.cpp:935 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
@@ -1318,7 +1322,7 @@ msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr ""
 
-#: Part.cpp:302
+#: Part.cpp:300
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -3264,11 +3268,13 @@ msgid "Size: %1 x %2"
 msgstr "גודל: %1 על %2"
 
 #: terminalDisplay/TerminalDisplay.cpp:2253
-#, kde-format
+#, fuzzy, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "להדביק תו %1?"
 msgstr[1] "להדביק %1 תווים?"
+msgstr[2] ""
+msgstr[3] ""
 
 #: terminalDisplay/TerminalDisplay.cpp:2254
 #, kde-format
@@ -3845,10 +3851,9 @@ msgstr "ברירת מחדל"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: widgets/EditProfileAppearancePage.ui:132
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgid "Font:"
-msgstr "גופן"
+msgstr "גופן:"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
 #: widgets/EditProfileAppearancePage.ui:164
@@ -3922,12 +3927,10 @@ msgstr "קו תחתי"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileAppearancePage.ui:278
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
-msgstr "צבע"
+msgstr "צבע:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:294
@@ -3957,10 +3960,9 @@ msgstr "צבע מותאם אישית עבור הסמן:"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
 #: widgets/EditProfileAppearancePage.ui:347
-#, fuzzy, kde-format
-#| msgid "Cursor"
+#, kde-format
 msgid "Cursor:"
-msgstr "סמן"
+msgstr "סמן:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:360
@@ -3983,10 +3985,9 @@ msgstr "בחר את הצבע שיש להשתמש בו כדי לצייר את ה�
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileAppearancePage.ui:418
-#, fuzzy, kde-format
-#| msgid "Blinking cursor"
+#, kde-format
 msgid "Blinking:"
-msgstr "סמן מהבהב"
+msgstr "הבהוב:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:434
@@ -4005,18 +4006,16 @@ msgstr ""
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
 #: widgets/EditProfileAppearancePage.ui:460 widgets/EditProfileMousePage.ui:249
-#, fuzzy, kde-format
-#| msgid "Miscellaneous"
+#, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
 msgstr "שונות"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAppearancePage.ui:471
-#, fuzzy, kde-format
-#| msgid "Window"
+#, kde-format
 msgid "Window:"
-msgstr "חלון"
+msgstr "חלון:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:478
@@ -4046,12 +4045,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
-msgstr "צבע"
+msgstr "צבע:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
@@ -4062,17 +4059,15 @@ msgstr "בחר את הצבע שיש להשתמש בו כדי לצייר את ה�
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
-#, fuzzy, kde-format
-#| msgid "Terminal Size"
+#, kde-format
 msgid "Inactive Terminals:"
-msgstr "גודל מסוף"
+msgstr "מסופים לא פעילים:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Terminal Size"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "גודל מסוף"
+msgstr "מסופים פעילים:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4084,10 +4079,9 @@ msgstr "מאפייני המסוף"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
 #: widgets/EditProfileAppearancePage.ui:600
-#, fuzzy, kde-format
-#| msgid "Line Spacing:"
+#, kde-format
 msgid "Line spacing:"
-msgstr "מִרווח בין שורות:"
+msgstr "ריווח בין שורות:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
 #: widgets/EditProfileAppearancePage.ui:618
@@ -4212,10 +4206,9 @@ msgstr "קבע את צבע הסמן שיתאים לתו הנוכחי"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:921
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "גופן"
+msgstr "גופן אמוג׳י:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:963
@@ -4336,11 +4329,13 @@ msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
 #: widgets/EditProfileDialog.cpp:410
-#, kde-format
+#, fuzzy, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "ערוך את הפרופיל \"%2\""
 msgstr[1] "עורך %1 פרופילים: %2"
+msgstr[2] ""
+msgstr[3] ""
 
 #: widgets/EditProfileDialog.cpp:414
 #, fuzzy, kde-format
@@ -4364,6 +4359,8 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] "עמודות"
 msgstr[1] "עמודות"
+msgstr[2] ""
+msgstr[3] ""
 
 #: widgets/EditProfileDialog.cpp:510
 #, kde-format
@@ -4374,6 +4371,8 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: widgets/EditProfileDialog.cpp:520
 #, kde-format
@@ -4415,12 +4414,14 @@ msgid "One environment variable per line"
 msgstr "משתנה סביבה אחד בשורה"
 
 #: widgets/EditProfileDialog.cpp:666
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] " שנייה"
 msgstr[1] " שניות"
+msgstr[2] ""
+msgstr[3] ""
 
 #: widgets/EditProfileDialog.cpp:780
 #, kde-format
@@ -4491,11 +4492,10 @@ msgstr "שם תיאורי עבור הפרופיל"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:84
-#, fuzzy, kde-format
-#| msgid "Profile name:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Profile name"
-msgstr "שם הפרופיל:"
+msgstr "שם הפרופיל"
 
 #. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
 #: widgets/EditProfileGeneralPage.ui:91
@@ -5176,6 +5176,8 @@ msgid " line"
 msgid_plural " lines"
 msgstr[0] "שורה אחת"
 msgstr[1] " שורות"
+msgstr[2] ""
+msgstr[3] ""
 
 #: widgets/HistorySizeWidget.cpp:57
 #, fuzzy, kde-format

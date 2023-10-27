@@ -2,12 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 g.sora <g.sora@tiscali.it>
+# giovanni <g.sora@tiscali.it>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-26 01:47+0000\n"
-"PO-Revision-Date: 2023-10-16 13:59+0200\n"
+"POT-Creation-Date: 2023-10-27 01:42+0000\n"
+"PO-Revision-Date: 2023-10-26 10:28+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1262,7 +1263,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Il ha %1 terminales aperite in iste fenestra. Ancora tu vole quitar?"
 
-#: MainWindow.cpp:935 Part.cpp:299
+#: MainWindow.cpp:935 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
@@ -1298,7 +1299,7 @@ msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Miniaturas"
 
-#: Part.cpp:302
+#: Part.cpp:300
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -2826,6 +2827,13 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Modificationes habera effecto  quando on restarta. Si habilitate, consumo\n"
+"de memoria sustenite per Konsole excedente le valor specificate causara\n"
+"que systemd-doom eliminara le scheda(s) continente le processo(s) con \n"
+"requestas de memoria intensive.\n"
+"Nota: habilitar pote causar relantamentos plus grande durante le consumo\n"
+"de memoria elevate e specificar valores excessivemente basse pote anque\n"
+"causar que Konsole es occidite. "
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -4213,13 +4221,13 @@ msgstr "Un profilo con iste nomine \"%1\" ja existe."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Nomine de profilo excedeva le longitude maxime permittite (%1)"
 
 #: widgets/EditProfileDialog.cpp:374
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Le characteres evigentiate es invalide innomines de profilo: %1."
 
 #: widgets/EditProfileDialog.cpp:410
 #, kde-format
