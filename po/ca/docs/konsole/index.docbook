@@ -209,7 +209,7 @@
 >vi</application
 >: h,j,k,l per a moure's un caràcter, <keycap
 >Ctrl</keycap
->+b,f,u,d per retrocedir/avançar una pàgina o retrocedir/avançar mitja pàgina.</para>
+>+b,f,u,d per a retrocedir/avançar una pàgina o retrocedir/avançar mitja pàgina.</para>
 
 <para
 >Seleccioneu el text emprant <keycap
@@ -220,7 +220,7 @@
 >V</keycap
 > per a iniciar la selecció, moure el cursor i després <keycap
 >V</keycap
-> una altra vegada per acabar la selecció. <keycombo
+> una altra vegada per a acabar la selecció. <keycombo
 >&Maj;<keycap
 >V</keycap
 ></keycombo
@@ -304,7 +304,7 @@
 
 <listitem
 ><para
->Sobre les altres pestanyes del diàleg, configureu l'aparença d'aquesta sessió. Podeu configurar una lletra diferent, un esquema de color, tipus de $<envar
+>Sobre les altres pestanyes del diàleg, configureu l'aparença d'aquesta sessió. Podeu configurar diferents tipus de lletra, un esquema de color, tipus de $<envar
 >TERM</envar
 > i moltes altres opcions per a cada sessió.</para
 ></listitem>
@@ -751,7 +751,7 @@
 ><para
 ><guilabel
 >Força la direcció de línia LTR</guilabel
->: les línia són sempre d'esquerra a dreta. Sense això, la direcció de cada línia està determinada pel primer caràcter amb direccionalitat forta. </para
+>: les línies són sempre d'esquerra a dreta. Sense això, la direcció de cada línia és determinada pel primer caràcter amb direccionalitat forta. </para
 ></listitem>
 
 <listitem
@@ -3153,7 +3153,7 @@ Space+Ctrl
 >AnyModifier</term>
 <listitem>
 <para
->Si aquest mode és estableix, la combinació de tecles utilitzarà qualsevol tecla modificadora (qualsevol de les tres tecles modificadores anteriors); i viceversa si es reinicia</para>
+>Si s'estableix aquest mode, la combinació de tecles utilitzarà qualsevol tecla modificadora (qualsevol de les tres tecles modificadores anteriors); i viceversa si es reinicia</para>
 </listitem>
 </varlistentry>
 
@@ -3162,9 +3162,9 @@ Space+Ctrl
 >Ansi</term>
 <listitem>
 <para
->Si aquest mode és estableix, el &konsole; enviarà seqüències d'escapament i de control ANSI</para>
+>Si s'estableix aquest mode, el &konsole; enviarà seqüències d'escapament i de control ANSI</para>
 <para
->Si es reinicia amb aquest mode, el &konsole; enviarà seqüències d'escapament i de control VT52</para>
+>Si aquest mode es reinicia, el &konsole; enviarà seqüències d'escapament i de control VT52</para>
 </listitem>
 </varlistentry>
 
@@ -3173,9 +3173,9 @@ Space+Ctrl
 >AppScreen</term>
 <listitem>
 <para
->Si aquest mode és estableix, la combinació de tecles només afectarà els programes interactius que utilitzen la memòria intermèdia d'una pantalla alternativa</para>
+>Si s'estableix aquest mode, la combinació de tecles només afectarà els programes interactius que utilitzen la memòria intermèdia d'una pantalla alternativa</para>
 <para
->Si es reinicia amb aquest mode, la combinació de tecles només afectarà la terminal quan s'utilitzi la memòria intermèdia d'una pantalla normal</para>
+>Si es reinicia aquest mode, la combinació de tecles només afectarà la terminal quan s'utilitzi la memòria intermèdia d'una pantalla normal</para>
 
 <note>
 <para
@@ -3208,7 +3208,7 @@ Space+Ctrl
 >KeyPad</term>
 <listitem>
 <para
->Si aquest mode és estableix, la combinació de tecles utilitzarà una tecla en el teclat numèric. Aquest mode és útil per a distingir entre les tecles del teclat i les tecles del teclat numèric. Per exemple, quan Bloq Núm està <emphasis
+>Si s'estableix aquest mode, la combinació de tecles utilitzarà una tecla en el teclat numèric. Aquest mode és útil per a distingir entre les tecles del teclat i les tecles del teclat numèric. Per exemple, quan Bloq Núm està <emphasis
 >actiu</emphasis
 >, podeu configurar dues combinacions de tecles separades, una amb la tecla «1» del teclat (normalment sota la tecla <keycap
 >F1</keycap
@@ -3248,9 +3248,9 @@ Space+Ctrl
 >AppKeyPad</term>
 <listitem>
 <para
->Si aquest mode és estableix, la combinació de tecles només funcionarà quan el teclat numèric es trobi en el mode d'aplicació (DECKPAM)</para>
+>Si s'estableix aquest mode, la combinació de tecles només funcionarà quan el teclat numèric es trobi en el mode d'aplicació (DECKPAM)</para>
 <para
->Si aquest mode és reinicia, la combinació de tecles només funcionarà quan el teclat numèric es trobi en el mode numèric (DECKPNM)</para>
+>Si es reinicia aquest mode, la combinació de tecles només funcionarà quan el teclat numèric es trobi en el mode numèric (DECKPNM)</para>
 </listitem>
 </varlistentry>
 
@@ -3259,11 +3259,11 @@ Space+Ctrl
 >NewLine</term>
 <listitem>
 <para
->Si aquest mode és estableix, la tecla <keycap
+>Si s'estableix aquest mode, la tecla <keycap
 >Retorn</keycap
 > del teclat numèric enviarà tant el retorn de carro «\r» com els caràcters de control de línia nova «\n»</para>
 <para
->Si aquest mode és reinicia, la tecla <keycap
+>Si es reinicia aquest mode, la tecla <keycap
 >Retorn</keycap
 > només enviarà un retorn de carro «\r»</para>
 <para

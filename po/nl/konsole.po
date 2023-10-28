@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-27 01:42+0000\n"
+"POT-Creation-Date: 2023-10-28 01:46+0000\n"
 "PO-Revision-Date: 2023-10-14 10:26+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -263,13 +263,13 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "Achtergrond van venster omschakelen"
 
-#: BookmarkHandler.cpp:112
+#: BookmarkHandler.cpp:108
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%1 op %2"
 
-#: BookmarkHandler.cpp:114
+#: BookmarkHandler.cpp:110
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
@@ -1188,66 +1188,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Met dank aan vele anderen.\n"
 
-#: MainWindow.cpp:388
+#: MainWindow.cpp:342
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nieuw tabblad"
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "Tabblad &klonen"
 
-#: MainWindow.cpp:405
+#: MainWindow.cpp:359
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nieu&w venster"
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Venster sluiten"
 
-#: MainWindow.cpp:417
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Bladwij&zers"
 
-#: MainWindow.cpp:440
+#: MainWindow.cpp:394
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "Kleurenschema van &venster"
 
-#: MainWindow.cpp:452
+#: MainWindow.cpp:406
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profielen beheren..."
 
-#: MainWindow.cpp:458
+#: MainWindow.cpp:412
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menu activeren"
 
-#: MainWindow.cpp:464
+#: MainWindow.cpp:418
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Tabbladindeling opslaan..."
 
-#: MainWindow.cpp:473
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Tabbladindeling laden..."
 
-#: MainWindow.cpp:794 MainWindow.cpp:811
+#: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1256,61 +1256,61 @@ msgid_plural ""
 msgstr[0] "Er is een actief proces in dit venster. Wilt u toch afsluiten?"
 msgstr[1] "Er zijn %1 actieve processen in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:800 MainWindow.cpp:817 MainWindow.cpp:831
+#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Sluiten bevestigen"
 
-#: MainWindow.cpp:801 MainWindow.cpp:818 MainWindow.cpp:832
+#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Venster sluiten"
 
-#: MainWindow.cpp:819 MainWindow.cpp:833
+#: MainWindow.cpp:761 MainWindow.cpp:775
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Huidig &tabblad sluiten"
 
-#: MainWindow.cpp:828
+#: MainWindow.cpp:770
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Er zijn %1 open terminals in dit venster. Wilt u toch afsluiten?"
 
-#: MainWindow.cpp:935 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profielen"
 
-#: MainWindow.cpp:952
+#: MainWindow.cpp:894
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Algemeen"
 
-#: MainWindow.cpp:964
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Geheugen"
 
-#: MainWindow.cpp:969
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Tabbladbalk / Splitters"
 
-#: MainWindow.cpp:974
+#: MainWindow.cpp:916
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Tijdelijke bestanden"
 
-#: MainWindow.cpp:979
+#: MainWindow.cpp:921
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1892,7 +1892,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Ingebouwd"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:531
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
 msgid "Default profile"
 msgstr "Standaard profiel"
@@ -2079,19 +2079,19 @@ msgstr ""
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Kon het programma '%1' niet starten met de argumenten '%2'."
 
-#: session/Session.cpp:732
+#: session/Session.cpp:726
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Stilte in '%1' (sessie '%2')"
 
-#: session/Session.cpp:733 session/Session.cpp:1945
-#: session/SessionController.cpp:360 session/SessionController.cpp:1813
+#: session/Session.cpp:727 session/Session.cpp:1928
+#: session/SessionController.cpp:354 session/SessionController.cpp:1801
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
 msgstr "Sessie tonen"
 
-#: session/Session.cpp:1017
+#: session/Session.cpp:1011
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2105,28 +2105,28 @@ msgstr ""
 "Konsole opnieuw te compileren. <p>Deze waarschuwing zal eenmaal getoond "
 "worden voor dit exemplaar van Konsole.</p>"
 
-#: session/Session.cpp:1057
+#: session/Session.cpp:1051
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Voltooid"
 
-#: session/Session.cpp:1071 session/Session.cpp:1092
+#: session/Session.cpp:1065 session/Session.cpp:1081
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programma '%1' is onverwacht beëindigd."
 
-#: session/Session.cpp:1073
+#: session/Session.cpp:1067
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programma '%1' is gestopt met status %2."
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1593
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-voortgang"
 
-#: session/Session.cpp:1944
+#: session/Session.cpp:1927
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activiteit in '%1' (sessie '%2')"
@@ -2136,265 +2136,265 @@ msgstr "Activiteit in '%1' (sessie '%2')"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:359
+#: session/SessionController.cpp:353
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Het proces '%1' is geëindigd actief in sessie '%2'"
 
-#: session/SessionController.cpp:442
+#: session/SessionController.cpp:436
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole weet niet hoe de bladwijzer te openen: "
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:515
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Naar '%1' zoeken met"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:531
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Websnelkoppelingen instellen..."
 
-#: session/SessionController.cpp:647
+#: session/SessionController.cpp:641
 #, kde-format
 msgid "&Close Session"
 msgstr "&Sessie sluiten"
 
-#: session/SessionController.cpp:654
+#: session/SessionController.cpp:648
 #, kde-format
 msgid "Open File Manager"
 msgstr "Bestandsbeheer openen"
 
-#: session/SessionController.cpp:666
+#: session/SessionController.cpp:660
 #, kde-format
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:666
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Beeld verticaal opsplitsen"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:670
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Beeld horizontaal opsplitsen"
 
-#: session/SessionController.cpp:680
+#: session/SessionController.cpp:674
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Kopiëren behalve prompts"
 
-#: session/SessionController.cpp:686
+#: session/SessionController.cpp:680
 #, kde-format
 msgid "Copy user input"
 msgstr "Invoer van gebruiker kopiëren"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:686
 #, kde-format
 msgid "Copy command output"
 msgstr "Uitvoer van commando kopiëren"
 
-#: session/SessionController.cpp:707
+#: session/SessionController.cpp:701
 #, kde-format
 msgid "Paste Selection"
 msgstr "Selectie plakken"
 
-#: session/SessionController.cpp:714
+#: session/SessionController.cpp:708
 #, kde-format
 msgid "Web Search"
 msgstr "Web-zoeken"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:714
 #, kde-format
 msgid "&Select All"
 msgstr "Alles &selecteren"
 
-#: session/SessionController.cpp:724
+#: session/SessionController.cpp:718
 #, kde-format
 msgid "Select &Mode"
 msgstr "&Modus selecteren"
 
-#: session/SessionController.cpp:729
+#: session/SessionController.cpp:723
 #, kde-format
 msgid "Select &Line"
 msgstr "Rege&l selecteren"
 
-#: session/SessionController.cpp:732
+#: session/SessionController.cpp:726
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Uitvoer opslaan &als..."
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:732
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Scherm afdrukken..."
 
-#: session/SessionController.cpp:742
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Terugschuiven aanpassen..."
 
-#: session/SessionController.cpp:746
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Geschiedenis opschonen"
 
-#: session/SessionController.cpp:750
+#: session/SessionController.cpp:744
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Geschiedenis opschonen en resetten"
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:753
 #, kde-format
 msgid "Switch Profile"
 msgstr "Profiel omschakelen"
 
-#: session/SessionController.cpp:784
+#: session/SessionController.cpp:778
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Cod&ering instellen"
 
-#: session/SessionController.cpp:806
+#: session/SessionController.cpp:800
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Muis volgen bieden"
 
-#: session/SessionController.cpp:814
+#: session/SessionController.cpp:808
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Alleen-lezen"
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:819
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "Tabblad &configureren of hernoemen..."
 
-#: session/SessionController.cpp:831
+#: session/SessionController.cpp:825
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Alle tabbladen in het huidige venster"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "Tabbladen &selecteren..."
 
-#: session/SessionController.cpp:844
+#: session/SessionController.cpp:838
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "Gee&n"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:846
 #, kde-format
 msgid "Copy Input To"
 msgstr "Invoer kopiëren naar"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:853
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem-upload..."
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "One-shot monitors"
 msgstr "Eenmalige speurders"
 
-#: session/SessionController.cpp:869
+#: session/SessionController.cpp:863
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Speuren naar &prompt"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:870
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Speuren naar &activiteit"
 
-#: session/SessionController.cpp:882
+#: session/SessionController.cpp:876
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Speuren naar &stilte"
 
-#: session/SessionController.cpp:888
+#: session/SessionController.cpp:882
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Monitor voor beëindiging van processen"
 
-#: session/SessionController.cpp:895
+#: session/SessionController.cpp:889
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Lettertekens vergroten"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "Shrink Font"
 msgstr "Lettertekens verkleinen"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Tekengrootte resetten"
 
-#: session/SessionController.cpp:914
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Send Signal"
 msgstr "Signaal sturen"
 
-#: session/SessionController.cpp:918
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "&Suspend Task"
 msgstr "Taak onder&breken"
 
-#: session/SessionController.cpp:923
+#: session/SessionController.cpp:917
 #, kde-format
 msgid "&Continue Task"
 msgstr "Met taak &doorgaan"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "&Hangup"
 msgstr "Op&hangen"
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "Taak &onderbreken"
 
-#: session/SessionController.cpp:938
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Taak afsluiten"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:937
 #, kde-format
 msgid "&Kill Task"
 msgstr "Taak &afbreken"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "User Signal &1"
 msgstr "Gebruikersignaal &1"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "User Signal &2"
 msgstr "Gebruikersignaal &2"
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:965
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Nieuw profiel aanmaken..."
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:967
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Huidig profiel bewerken..."
 
-#: session/SessionController.cpp:1090
+#: session/SessionController.cpp:1084
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2403,7 +2403,7 @@ msgstr ""
 "Er draait momenteel een programma in deze sessie. Wilt u de sessie toch "
 "sluiten?"
 
-#: session/SessionController.cpp:1094
+#: session/SessionController.cpp:1088
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2412,18 +2412,18 @@ msgstr ""
 "Het programma '%1' draait momenteel in deze sessie. Wilt u de sessie toch "
 "sluiten?"
 
-#: session/SessionController.cpp:1101 session/SessionController.cpp:1136
+#: session/SessionController.cpp:1095 session/SessionController.cpp:1130
 #, kde-format
 msgid "Confirm Close"
 msgstr "Sluiten bevestigen"
 
-#: session/SessionController.cpp:1102
+#: session/SessionController.cpp:1096
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Programma sluiten"
 
-#: session/SessionController.cpp:1125
+#: session/SessionController.cpp:1119
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2432,7 +2432,7 @@ msgstr ""
 "Een programma in deze sessie wil zich niet afsluiten. Wilt u de sessie "
 "geforceerd sluiten?"
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2441,28 +2441,28 @@ msgstr ""
 "Het programma '%1' in deze sessie wil zich niet afsluiten. Wilt u de sessie "
 "geforceerd sluiten?"
 
-#: session/SessionController.cpp:1137
+#: session/SessionController.cpp:1131
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Programma afbreken"
 
-#: session/SessionController.cpp:1812
+#: session/SessionController.cpp:1800
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "De shell-prompt wordt getoond in sessie '%1'"
 
-#: session/SessionController.cpp:2005
+#: session/SessionController.cpp:1993
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "De huidige map openen met"
 
-#: session/SessionController.cpp:2076
+#: session/SessionController.cpp:2060
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "ZModem-download opslaan naar..."
 
-#: session/SessionController.cpp:2086
+#: session/SessionController.cpp:2070
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2473,14 +2473,14 @@ msgstr ""
 "echter er is geen geschikte ZModem-software gevonden op dit systeem.</p><p>U "
 "zou het 'rzsz' of 'lrzsz' pakket kunnen installeren.</p>"
 
-#: session/SessionController.cpp:2096
+#: session/SessionController.cpp:2080
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>De huidige sessie heeft reeds een ZModem-bestandsoverdracht gaande.</p>"
 
-#: session/SessionController.cpp:2106
+#: session/SessionController.cpp:2090
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2489,7 +2489,7 @@ msgstr ""
 "<p>Er is geen geschikte ZModem-software gevonden op dit systeem.</p><p>U zou "
 "het 'rzsz' of 'lrzsz' pakket kunnen installeren.</p>"
 
-#: session/SessionController.cpp:2111
+#: session/SessionController.cpp:2095
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Bestanden voor uploaden met ZModem selecteren"
@@ -4232,36 +4232,36 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Een profiel met de naam \"%1\" bestaat al."
 
-#: widgets/EditProfileDialog.cpp:336
+#: widgets/EditProfileDialog.cpp:337
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "Profielnaam is langer dan de maximaal toegestane lengte (%1)."
 
-#: widgets/EditProfileDialog.cpp:374
+#: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "De geaccentueerde tekens zijn ongeldig in profielnamen: %1."
 
-#: widgets/EditProfileDialog.cpp:410
+#: widgets/EditProfileDialog.cpp:411
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Bewerken van profiel: %2"
 msgstr[1] "Bewerken van %1 profielen: %2"
 
-#: widgets/EditProfileDialog.cpp:414
+#: widgets/EditProfileDialog.cpp:415
 #, kde-format
 msgid "Create New Profile"
 msgstr "Nieuw profiel aanmaken"
 
-#: widgets/EditProfileDialog.cpp:417
+#: widgets/EditProfileDialog.cpp:418
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Profiel \"%1\" bewerken"
 
-#: widgets/EditProfileDialog.cpp:508
+#: widgets/EditProfileDialog.cpp:509
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4271,7 +4271,7 @@ msgid_plural " columns"
 msgstr[0] "Kolom"
 msgstr[1] " kolommen"
 
-#: widgets/EditProfileDialog.cpp:510
+#: widgets/EditProfileDialog.cpp:511
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4281,42 +4281,42 @@ msgid_plural " rows"
 msgstr[0] " rij"
 msgstr[1] " rijen"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "System Bell"
 msgstr "Systeembel"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "System Notifications"
 msgstr "Systeemberichten"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "Visual Bell"
 msgstr "Zichtbare bel"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Bel-gebeurtenissen negeren"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:530
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Standaard profiel voor nieuwe terminalsessies in %1"
 
-#: widgets/EditProfileDialog.cpp:634
+#: widgets/EditProfileDialog.cpp:635
 #, kde-format
 msgid "Edit Environment"
 msgstr "Omgeving bewerken"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:636
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Eén omgevingsvariabele per regel"
 
-#: widgets/EditProfileDialog.cpp:666
+#: widgets/EditProfileDialog.cpp:667
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4324,18 +4324,18 @@ msgid_plural " seconds"
 msgstr[0] " seconde"
 msgstr[1] " seconden"
 
-#: widgets/EditProfileDialog.cpp:780
+#: widgets/EditProfileDialog.cpp:781
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Beginmap selecteren"
 
-#: widgets/EditProfileDialog.cpp:1325
+#: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Laden van schema <resource>%1</resource> is mislukt."
 
-#: widgets/EditProfileDialog.cpp:1504
+#: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4344,7 +4344,7 @@ msgstr ""
 "Dit kleurenschema heeft een transparante achtergrond, maar dit wordt niet "
 "door uw bureaublad ondersteund"
 
-#: widgets/EditProfileDialog.cpp:1510
+#: widgets/EditProfileDialog.cpp:1511
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4353,7 +4353,7 @@ msgstr ""
 "Konsole is opgestart alvorens bureaubladeffecten waren ingeschakeld. U dient "
 "konsole opnieuw te starten om een transparante achtergrond te zien."
 
-#: widgets/EditProfileDialog.cpp:1901
+#: widgets/EditProfileDialog.cpp:1902
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4382,7 +4382,7 @@ msgstr ""
 "genegeerd worden en zal het bestand geopend worden door de standaard\n"
 "tekstbewerker."
 
-#: widgets/EditProfileDialog.cpp:1914
+#: widgets/EditProfileDialog.cpp:1915
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Aangepaste opdracht aan tekstbewerker"

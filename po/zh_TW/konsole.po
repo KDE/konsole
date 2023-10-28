@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-27 01:42+0000\n"
+"POT-Creation-Date: 2023-10-28 01:46+0000\n"
 "PO-Revision-Date: 2023-09-12 02:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -241,13 +241,13 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "切換背景視窗"
 
-#: BookmarkHandler.cpp:112
+#: BookmarkHandler.cpp:108
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%1 於 %2"
 
-#: BookmarkHandler.cpp:114
+#: BookmarkHandler.cpp:110
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
@@ -1159,66 +1159,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "感謝其他許多人。\n"
 
-#: MainWindow.cpp:388
+#: MainWindow.cpp:342
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "新增分頁(&N)"
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "複製分頁(&C)"
 
-#: MainWindow.cpp:405
+#: MainWindow.cpp:359
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "新增視窗(&W)"
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "關閉視窗"
 
-#: MainWindow.cpp:417
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "書籤(&B)"
 
-#: MainWindow.cpp:440
+#: MainWindow.cpp:394
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "視窗配色 (&W)"
 
-#: MainWindow.cpp:452
+#: MainWindow.cpp:406
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "管理設定檔..."
 
-#: MainWindow.cpp:458
+#: MainWindow.cpp:412
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "啟動選單"
 
-#: MainWindow.cpp:464
+#: MainWindow.cpp:418
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "儲存分頁佈局……"
 
-#: MainWindow.cpp:473
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "載入分頁佈局……"
 
-#: MainWindow.cpp:794 MainWindow.cpp:811
+#: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1226,61 +1226,61 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "此視窗中目前有 %1 個行程執行中。您確定要離開嗎？"
 
-#: MainWindow.cpp:800 MainWindow.cpp:817 MainWindow.cpp:831
+#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "確認關閉"
 
-#: MainWindow.cpp:801 MainWindow.cpp:818 MainWindow.cpp:832
+#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "關閉視窗(&W)"
 
-#: MainWindow.cpp:819 MainWindow.cpp:833
+#: MainWindow.cpp:761 MainWindow.cpp:775
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "關閉目前的分頁(&T)"
 
-#: MainWindow.cpp:828
+#: MainWindow.cpp:770
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "此視窗中目前有 %1 個開啟的終端機。您確定要離開嗎？"
 
-#: MainWindow.cpp:935 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "設定檔"
 
-#: MainWindow.cpp:952
+#: MainWindow.cpp:894
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "一般"
 
-#: MainWindow.cpp:964
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "記憶體"
 
-#: MainWindow.cpp:969
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "分頁列/界線"
 
-#: MainWindow.cpp:974
+#: MainWindow.cpp:916
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "暫存檔"
 
-#: MainWindow.cpp:979
+#: MainWindow.cpp:921
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1850,7 +1850,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "內建"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:531
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
 msgid "Default profile"
 msgstr "預設設定檔"
@@ -2035,19 +2035,19 @@ msgstr "找不到 %1，改啟動 %2。請檢查您的設定檔。"
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "無法啟動程式 %1，參數為 %2。"
 
-#: session/Session.cpp:732
+#: session/Session.cpp:726
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 
-#: session/Session.cpp:733 session/Session.cpp:1945
-#: session/SessionController.cpp:360 session/SessionController.cpp:1813
+#: session/Session.cpp:727 session/Session.cpp:1928
+#: session/SessionController.cpp:354 session/SessionController.cpp:1801
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
 msgstr "顯示工作階段"
 
-#: session/Session.cpp:1017
+#: session/Session.cpp:1011
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2059,28 +2059,28 @@ msgstr ""
 "要的話，這些方法只能由重新編譯 Konsole 來變更為內部使用。<p>這個警告將只會在"
 "這個Konsole 實體中顯示一次。</p>"
 
-#: session/Session.cpp:1057
+#: session/Session.cpp:1051
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "已完成"
 
-#: session/Session.cpp:1071 session/Session.cpp:1092
+#: session/Session.cpp:1065 session/Session.cpp:1081
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "程式 %1 當掉了。"
 
-#: session/Session.cpp:1073
+#: session/Session.cpp:1067
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "程式 %1 以 %2 狀態結束。"
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1593
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 進度"
 
-#: session/Session.cpp:1944
+#: session/Session.cpp:1927
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "分頁 %1 目前活躍中（於工作階段 %2）"
@@ -2090,326 +2090,326 @@ msgstr "分頁 %1 目前活躍中（於工作階段 %2）"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:359
+#: session/SessionController.cpp:353
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "程序 %1 已在工作階段 %2 中完成執行"
 
-#: session/SessionController.cpp:442
+#: session/SessionController.cpp:436
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole 不知道如何開啟此書籤："
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:515
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "搜尋 %1 於"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:531
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "設定網頁捷徑..."
 
-#: session/SessionController.cpp:647
+#: session/SessionController.cpp:641
 #, kde-format
 msgid "&Close Session"
 msgstr "關閉工作階段(&C)"
 
-#: session/SessionController.cpp:654
+#: session/SessionController.cpp:648
 #, kde-format
 msgid "Open File Manager"
 msgstr "開啟檔案管理員"
 
-#: session/SessionController.cpp:666
+#: session/SessionController.cpp:660
 #, kde-format
 msgid "Copy"
 msgstr "複製"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:666
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "左右分割檢視"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:670
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "上下分割檢視"
 
-#: session/SessionController.cpp:680
+#: session/SessionController.cpp:674
 #, kde-format
 msgid "Copy except prompts"
 msgstr "複製除了提示字元以外的內容"
 
-#: session/SessionController.cpp:686
+#: session/SessionController.cpp:680
 #, kde-format
 msgid "Copy user input"
 msgstr "複製使用者輸入"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:686
 #, kde-format
 msgid "Copy command output"
 msgstr "複製命令輸入"
 
-#: session/SessionController.cpp:707
+#: session/SessionController.cpp:701
 #, kde-format
 msgid "Paste Selection"
 msgstr "貼上選擇區"
 
-#: session/SessionController.cpp:714
+#: session/SessionController.cpp:708
 #, kde-format
 msgid "Web Search"
 msgstr "網頁搜尋"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:714
 #, kde-format
 msgid "&Select All"
 msgstr "全部選取(&S)"
 
-#: session/SessionController.cpp:724
+#: session/SessionController.cpp:718
 #, kde-format
 msgid "Select &Mode"
 msgstr "選取模式(&M)"
 
-#: session/SessionController.cpp:729
+#: session/SessionController.cpp:723
 #, kde-format
 msgid "Select &Line"
 msgstr "選擇行(&L)"
 
-#: session/SessionController.cpp:732
+#: session/SessionController.cpp:726
 #, kde-format
 msgid "Save Output &As..."
 msgstr "儲存輸出為(&A)..."
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:732
 #, kde-format
 msgid "&Print Screen..."
 msgstr "列印螢幕(&P)..."
 
-#: session/SessionController.cpp:742
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "調整捲軸..."
 
-#: session/SessionController.cpp:746
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "清除歷史內容"
 
-#: session/SessionController.cpp:750
+#: session/SessionController.cpp:744
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "清除歷史內容並重置"
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:753
 #, kde-format
 msgid "Switch Profile"
 msgstr "切換設定檔"
 
-#: session/SessionController.cpp:784
+#: session/SessionController.cpp:778
 #, kde-format
 msgid "Set &Encoding"
 msgstr "設定編碼(&E)..."
 
-#: session/SessionController.cpp:806
+#: session/SessionController.cpp:800
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "允許追蹤滑鼠"
 
-#: session/SessionController.cpp:814
+#: session/SessionController.cpp:808
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "唯讀"
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:819
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "重新命名分頁(&C)..."
 
-#: session/SessionController.cpp:831
+#: session/SessionController.cpp:825
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "目前視窗中的所有分頁"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "選取分頁(&S)..."
 
-#: session/SessionController.cpp:844
+#: session/SessionController.cpp:838
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "無(&N)"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:846
 #, kde-format
 msgid "Copy Input To"
 msgstr "複製輸入到"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:853
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "ZModem 上傳(&Z)..."
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "One-shot monitors"
 msgstr ""
 
-#: session/SessionController.cpp:869
+#: session/SessionController.cpp:863
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "監視有回應視窗(&A)"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:870
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "監視有回應視窗(&A)"
 
-#: session/SessionController.cpp:882
+#: session/SessionController.cpp:876
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "監視靜默的分頁(&S)"
 
-#: session/SessionController.cpp:888
+#: session/SessionController.cpp:882
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "監視完成中的程序"
 
-#: session/SessionController.cpp:895
+#: session/SessionController.cpp:889
 #, kde-format
 msgid "Enlarge Font"
 msgstr "增大字型"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "Shrink Font"
 msgstr "縮小字型"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "Reset Font Size"
 msgstr "重設字型大小"
 
-#: session/SessionController.cpp:914
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Send Signal"
 msgstr "送出信號"
 
-#: session/SessionController.cpp:918
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "&Suspend Task"
 msgstr "暫停工作(&S)"
 
-#: session/SessionController.cpp:923
+#: session/SessionController.cpp:917
 #, kde-format
 msgid "&Continue Task"
 msgstr "繼續工作(&C)"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "&Hangup"
 msgstr "掛斷(&H)"
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "中斷工作(&I)"
 
-#: session/SessionController.cpp:938
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "&Terminate Task"
 msgstr "結束工作(&T)"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:937
 #, kde-format
 msgid "&Kill Task"
 msgstr "砍掉工作(&K)"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "User Signal &1"
 msgstr "使用者信號 1(&1)"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "User Signal &2"
 msgstr "使用者信號 2(&2)"
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:965
 #, kde-format
 msgid "Create New Profile..."
 msgstr "新增設定檔"
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:967
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "編輯目前的設定檔..."
 
-#: session/SessionController.cpp:1090
+#: session/SessionController.cpp:1084
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "有程式正在此工作階段中執行。您確定要將它關閉嗎？"
 
-#: session/SessionController.cpp:1094
+#: session/SessionController.cpp:1088
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "程式 %1 正在此工作階段中執行。您確定要將它關閉嗎？"
 
-#: session/SessionController.cpp:1101 session/SessionController.cpp:1136
+#: session/SessionController.cpp:1095 session/SessionController.cpp:1130
 #, kde-format
 msgid "Confirm Close"
 msgstr "確認關閉"
 
-#: session/SessionController.cpp:1102
+#: session/SessionController.cpp:1096
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "關閉程式"
 
-#: session/SessionController.cpp:1125
+#: session/SessionController.cpp:1119
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "有程式正在此工作階段中執行。您確定要將它強制關閉嗎？"
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "程式 %1 正在此工作階段中執行。您確定要將它強制關閉嗎？"
 
-#: session/SessionController.cpp:1137
+#: session/SessionController.cpp:1131
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "砍除程式"
 
-#: session/SessionController.cpp:1812
+#: session/SessionController.cpp:1800
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2005
+#: session/SessionController.cpp:1993
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "以…開啟目前資料夾"
 
-#: session/SessionController.cpp:2076
+#: session/SessionController.cpp:2060
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "儲存 ZModem 下載檔到..."
 
-#: session/SessionController.cpp:2086
+#: session/SessionController.cpp:2070
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2419,13 +2419,13 @@ msgstr ""
 "<p>偵測到要使用 ZModem 做檔案傳輸，但是此系統上找不到適合的 ZModem 軟體。</"
 "p><p>您可能需要安裝 rzsz 或 lrzsz 等軟體包。</p>"
 
-#: session/SessionController.cpp:2096
+#: session/SessionController.cpp:2080
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>目前的工作階段已經有一個 ZModem 檔案傳輸在進行中。</p>"
 
-#: session/SessionController.cpp:2106
+#: session/SessionController.cpp:2090
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2434,7 +2434,7 @@ msgstr ""
 "<p>此系統上找不到適合的 ZModem 軟體。</p><p>您可能需要安裝 rzsz 或 lrzsz 等軟"
 "體包。</p>"
 
-#: session/SessionController.cpp:2111
+#: session/SessionController.cpp:2095
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "選擇要用 ZModem 上傳的檔案"
@@ -4145,35 +4145,35 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "名為「%1」的設定檔已存在。"
 
-#: widgets/EditProfileDialog.cpp:336
+#: widgets/EditProfileDialog.cpp:337
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "設定檔名稱超過了最大長度 (%1)。"
 
-#: widgets/EditProfileDialog.cpp:374
+#: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "以下突顯的字元無法用於設定檔名稱中：%1。"
 
-#: widgets/EditProfileDialog.cpp:410
+#: widgets/EditProfileDialog.cpp:411
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "編輯 %1 個設定檔：%2"
 
-#: widgets/EditProfileDialog.cpp:414
+#: widgets/EditProfileDialog.cpp:415
 #, kde-format
 msgid "Create New Profile"
 msgstr "新增設定檔"
 
-#: widgets/EditProfileDialog.cpp:417
+#: widgets/EditProfileDialog.cpp:418
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "編輯設定檔 %1"
 
-#: widgets/EditProfileDialog.cpp:508
+#: widgets/EditProfileDialog.cpp:509
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4182,7 +4182,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] " 欄"
 
-#: widgets/EditProfileDialog.cpp:510
+#: widgets/EditProfileDialog.cpp:511
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4191,67 +4191,67 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] " 行"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "System Bell"
 msgstr "系統響鈴"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "System Notifications"
 msgstr "系統通知"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "Visual Bell"
 msgstr "視覺響鈴"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "忽略響鈴事件"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:530
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "作為新終端機工作階段 %1  的預設設定檔"
 
-#: widgets/EditProfileDialog.cpp:634
+#: widgets/EditProfileDialog.cpp:635
 #, kde-format
 msgid "Edit Environment"
 msgstr "編輯環境變數"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:636
 #, kde-format
 msgid "One environment variable per line"
 msgstr "每一個環境變數佔一行"
 
-#: widgets/EditProfileDialog.cpp:666
+#: widgets/EditProfileDialog.cpp:667
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] " 秒"
 
-#: widgets/EditProfileDialog.cpp:780
+#: widgets/EditProfileDialog.cpp:781
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "選擇起始目錄"
 
-#: widgets/EditProfileDialog.cpp:1325
+#: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "框架 <resource>%1</resource> 無法載入。"
 
-#: widgets/EditProfileDialog.cpp:1504
+#: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "此配色中含有透明背景，您的桌面似乎不支援。"
 
-#: widgets/EditProfileDialog.cpp:1510
+#: widgets/EditProfileDialog.cpp:1511
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4260,7 +4260,7 @@ msgstr ""
 "在啟用桌面效果前 Konsole 就已經開啟，您需要重新啟動 Konsole 才能看到透明背"
 "景。"
 
-#: widgets/EditProfileDialog.cpp:1901
+#: widgets/EditProfileDialog.cpp:1902
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4287,7 +4287,7 @@ msgstr ""
 "指令未包含「路徑」或「行」的情況，將自動忽略本設定\n"
 "並以預設的文字編輯器開啟。"
 
-#: widgets/EditProfileDialog.cpp:1914
+#: widgets/EditProfileDialog.cpp:1915
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "文字編輯器自訂命令"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-27 01:42+0000\n"
+"POT-Creation-Date: 2023-10-28 01:46+0000\n"
 "PO-Revision-Date: 2023-10-15 09:55+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -252,13 +252,13 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "Txandakatu atzealdeko leihoa"
 
-#: BookmarkHandler.cpp:112
+#: BookmarkHandler.cpp:108
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%1 hemen: %2"
 
-#: BookmarkHandler.cpp:114
+#: BookmarkHandler.cpp:110
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
@@ -1179,66 +1179,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Eskerrik asko beste askori ere.\n"
 
-#: MainWindow.cpp:388
+#: MainWindow.cpp:342
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Fitxa berria"
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Bikoiztu fitxa"
 
-#: MainWindow.cpp:405
+#: MainWindow.cpp:359
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Leiho berria"
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:366
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Itxi leihoa"
 
-#: MainWindow.cpp:417
+#: MainWindow.cpp:371
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Laster-&markak"
 
-#: MainWindow.cpp:440
+#: MainWindow.cpp:394
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Leihoaren kolore-antolaera"
 
-#: MainWindow.cpp:452
+#: MainWindow.cpp:406
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Kudeatu profilak..."
 
-#: MainWindow.cpp:458
+#: MainWindow.cpp:412
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktibatu menua"
 
-#: MainWindow.cpp:464
+#: MainWindow.cpp:418
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Gorde fitxen antolaera..."
 
-#: MainWindow.cpp:473
+#: MainWindow.cpp:427
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Zamatu fitxen antolaera..."
 
-#: MainWindow.cpp:794 MainWindow.cpp:811
+#: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1247,61 +1247,61 @@ msgid_plural ""
 msgstr[0] "Prozesu bat martxan dago leiho honetan. Hala ere irten nahi duzu?"
 msgstr[1] "%1 prozesu daude martxan leiho honetan. Hala ere irten nahi duzu?"
 
-#: MainWindow.cpp:800 MainWindow.cpp:817 MainWindow.cpp:831
+#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Berretsi ixtea"
 
-#: MainWindow.cpp:801 MainWindow.cpp:818 MainWindow.cpp:832
+#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Itxi &leihoa"
 
-#: MainWindow.cpp:819 MainWindow.cpp:833
+#: MainWindow.cpp:761 MainWindow.cpp:775
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Itxi uneko &fitxa"
 
-#: MainWindow.cpp:828
+#: MainWindow.cpp:770
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Leiho honetan %1 terminal irekita daude. Hala ere irten nahi duzu?"
 
-#: MainWindow.cpp:935 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profilak"
 
-#: MainWindow.cpp:952
+#: MainWindow.cpp:894
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Orokorra"
 
-#: MainWindow.cpp:964
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memoria"
 
-#: MainWindow.cpp:969
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Fitxa-barra / Banatzaileak"
 
-#: MainWindow.cpp:974
+#: MainWindow.cpp:916
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Aldi baterako fitxategiak"
 
-#: MainWindow.cpp:979
+#: MainWindow.cpp:921
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1882,7 +1882,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Barneratua"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:531
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
 msgid "Default profile"
 msgstr "Profil lehenetsia"
@@ -2073,19 +2073,19 @@ msgstr ""
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Ezin izan da '%1' programa '%2' argumentuekin abiarazi."
 
-#: session/Session.cpp:732
+#: session/Session.cpp:726
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Isiltasuna «%1»(e)an (Saioa «%2»)"
 
-#: session/Session.cpp:733 session/Session.cpp:1945
-#: session/SessionController.cpp:360 session/SessionController.cpp:1813
+#: session/Session.cpp:727 session/Session.cpp:1928
+#: session/SessionController.cpp:354 session/SessionController.cpp:1801
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
 msgstr "Erakutsi saioa"
 
-#: session/Session.cpp:1017
+#: session/Session.cpp:1011
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2099,28 +2099,28 @@ msgstr ""
 "Konsole bir-konpilatuta. <p>Abisua behin baino ez da erakutsiko Konsoleren "
 "instantzia honentzat.</p>"
 
-#: session/Session.cpp:1057
+#: session/Session.cpp:1051
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Amaituta"
 
-#: session/Session.cpp:1071 session/Session.cpp:1092
+#: session/Session.cpp:1065 session/Session.cpp:1081
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' programa kraskatu egin da"
 
-#: session/Session.cpp:1073
+#: session/Session.cpp:1067
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' programa %2 egoerarekin amaituta."
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1593
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-aren aurrerapena"
 
-#: session/Session.cpp:1944
+#: session/Session.cpp:1927
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "«%1»(e)ko jarduera («%2» saioa)"
@@ -2130,290 +2130,290 @@ msgstr "«%1»(e)ko jarduera («%2» saioa)"
 msgid "Konsole"
 msgstr "Kontsola"
 
-#: session/SessionController.cpp:359
+#: session/SessionController.cpp:353
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "«%1» prozesuaren exekuzioa amaitu da «%2» saioan"
 
-#: session/SessionController.cpp:442
+#: session/SessionController.cpp:436
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole-k ez daki laster-marka nola ireki:"
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:515
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Bilatu '%1' honekin"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:531
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Konfiguratu web-lasterbideak..."
 
-#: session/SessionController.cpp:647
+#: session/SessionController.cpp:641
 #, kde-format
 msgid "&Close Session"
 msgstr "&Itxi saioa"
 
-#: session/SessionController.cpp:654
+#: session/SessionController.cpp:648
 #, kde-format
 msgid "Open File Manager"
 msgstr "Ireki fitxategi-kudeatzailea"
 
-#: session/SessionController.cpp:666
+#: session/SessionController.cpp:660
 #, kde-format
 msgid "Copy"
 msgstr "Kopiatu"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:666
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Zatitu ikuspegia ezker-eskuin"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:670
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Zatitu ikuspegia goian-behean"
 
-#: session/SessionController.cpp:680
+#: session/SessionController.cpp:674
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Kopiatu gonbita salbu"
 
-#: session/SessionController.cpp:686
+#: session/SessionController.cpp:680
 #, kde-format
 msgid "Copy user input"
 msgstr "Kopiatu erabiltzailearen sarrerakoa"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:686
 #, kde-format
 msgid "Copy command output"
 msgstr "Kopiatu komandoaren irteerakoa"
 
-#: session/SessionController.cpp:707
+#: session/SessionController.cpp:701
 #, kde-format
 msgid "Paste Selection"
 msgstr "Itsatsi hautapena"
 
-#: session/SessionController.cpp:714
+#: session/SessionController.cpp:708
 #, kde-format
 msgid "Web Search"
 msgstr "Web bilaketa"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:714
 #, kde-format
 msgid "&Select All"
 msgstr "&Hautatu guztia"
 
-#: session/SessionController.cpp:724
+#: session/SessionController.cpp:718
 #, kde-format
 msgid "Select &Mode"
 msgstr "Hautatu &modua"
 
-#: session/SessionController.cpp:729
+#: session/SessionController.cpp:723
 #, kde-format
 msgid "Select &Line"
 msgstr "Hautatu &lerroa"
 
-#: session/SessionController.cpp:732
+#: session/SessionController.cpp:726
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Gorde irteera &honela..."
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:732
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Pantaila inprimatu..."
 
-#: session/SessionController.cpp:742
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Doitu «Historikoan atzera»..."
 
-#: session/SessionController.cpp:746
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Garbitu «Historikoan atzera»"
 
-#: session/SessionController.cpp:750
+#: session/SessionController.cpp:744
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Garbitu «Historikoan atzera» eta berrezarri"
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:753
 #, kde-format
 msgid "Switch Profile"
 msgstr "Aldatu profila"
 
-#: session/SessionController.cpp:784
+#: session/SessionController.cpp:778
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Ezarri &kodeketa"
 
-#: session/SessionController.cpp:806
+#: session/SessionController.cpp:800
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "Baimendu saguaren jarraipena"
 
-#: session/SessionController.cpp:814
+#: session/SessionController.cpp:808
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "Irakurtzeko soilik"
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:819
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "Fitxa &konfiguratu edo berrizendatu..."
 
-#: session/SessionController.cpp:831
+#: session/SessionController.cpp:825
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Uneko leihoko fitxa &guztiak"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Hautatu fitxak..."
 
-#: session/SessionController.cpp:844
+#: session/SessionController.cpp:838
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Bat ere ez"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:846
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopiatu sarrera hemen"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:853
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem igoera..."
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "One-shot monitors"
 msgstr "Erabilera bakarreko begiraleak"
 
-#: session/SessionController.cpp:869
+#: session/SessionController.cpp:863
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Gainbegiratu &gonbita"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:870
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Gainbegiratu &jarduerak"
 
-#: session/SessionController.cpp:882
+#: session/SessionController.cpp:876
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Gainbegiratu &isiltasuna"
 
-#: session/SessionController.cpp:888
+#: session/SessionController.cpp:882
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Gainbegiratu prozesuen amaitzea"
 
-#: session/SessionController.cpp:895
+#: session/SessionController.cpp:889
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Handitu letra-tipoa"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "Shrink Font"
 msgstr "Txikitu letra-tipoa"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Berrezarri letra-tipoaren neurria"
 
-#: session/SessionController.cpp:914
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Send Signal"
 msgstr "Bidali seinalea"
 
-#: session/SessionController.cpp:918
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "&Suspend Task"
 msgstr "E&seki ataza"
 
-#: session/SessionController.cpp:923
+#: session/SessionController.cpp:917
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Jarraitu atazarekin"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "&Hangup"
 msgstr "Ese&ki"
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Eten ataza"
 
-#: session/SessionController.cpp:938
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Amaitu ataza"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:937
 #, kde-format
 msgid "&Kill Task"
 msgstr "A&kabatu ataza"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "User Signal &1"
 msgstr "Erabiltzailearen seinalea &1"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "User Signal &2"
 msgstr "Erabiltzailearen seinalea &2"
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:965
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Sortu profil berria..."
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:967
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Editatu uneko profila..."
 
-#: session/SessionController.cpp:1090
+#: session/SessionController.cpp:1084
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "Programa bat exekutatzen ari da saioan. Ziur zaude itxi nahi duzula?"
 
-#: session/SessionController.cpp:1094
+#: session/SessionController.cpp:1088
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "'%1' programa exekutatzen ari da saioan. Ziur zaude itxi nahi duzula?"
 
-#: session/SessionController.cpp:1101 session/SessionController.cpp:1136
+#: session/SessionController.cpp:1095 session/SessionController.cpp:1130
 #, kde-format
 msgid "Confirm Close"
 msgstr "Berretsi itxiera"
 
-#: session/SessionController.cpp:1102
+#: session/SessionController.cpp:1096
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Itxi programa"
 
-#: session/SessionController.cpp:1125
+#: session/SessionController.cpp:1119
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2422,7 +2422,7 @@ msgstr ""
 "Saio honetako programa bat ez da hiltzen. Ziur zaude indarrez akabatu nahi "
 "duzula?"
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2431,28 +2431,28 @@ msgstr ""
 "Saio honetako '%1' programa ez da hiltzen. Ziur zaude indarrez akabatu nahi "
 "duzula?"
 
-#: session/SessionController.cpp:1137
+#: session/SessionController.cpp:1131
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Akabatu programa"
 
-#: session/SessionController.cpp:1812
+#: session/SessionController.cpp:1800
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Oskoleko gonbita '%1' saioan azaltzen da"
 
-#: session/SessionController.cpp:2005
+#: session/SessionController.cpp:1993
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Ireki uneko karpeta honekin,"
 
-#: session/SessionController.cpp:2076
+#: session/SessionController.cpp:2060
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Gorde ZModem-ek jaitsitakoa hemen..."
 
-#: session/SessionController.cpp:2086
+#: session/SessionController.cpp:2070
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2463,7 +2463,7 @@ msgstr ""
 "ZModem software egokia aurkitu sistema honetan.</p><p>Agian 'rzsz' edo "
 "'lrzsz' paketea instalatzea nahi duzu.</p>"
 
-#: session/SessionController.cpp:2096
+#: session/SessionController.cpp:2080
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2471,7 +2471,7 @@ msgstr ""
 "<p>Uneko saioak dagoeneko ZModem fitxategi-transferentzia bat martxan dauka."
 "</p>"
 
-#: session/SessionController.cpp:2106
+#: session/SessionController.cpp:2090
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2480,7 +2480,7 @@ msgstr ""
 "<p>Ez da ZModem software egokia aurkitu sistema honetan.</p><p>Agian 'rzsz' "
 "edo 'lrzsz' paketea instalatzea nahi duzu.</p>"
 
-#: session/SessionController.cpp:2111
+#: session/SessionController.cpp:2095
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Hautatu fitxategiak ZModem-ekin igotzeko"
@@ -4223,36 +4223,36 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Lehendik ere badago «%1» izeneko profil bat."
 
-#: widgets/EditProfileDialog.cpp:336
+#: widgets/EditProfileDialog.cpp:337
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "Profilaren izenak baimendutako gehienezko luzera gainditu du (%1)."
 
-#: widgets/EditProfileDialog.cpp:374
+#: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "Nabarmendutako karaktereek ez dute balio profil-izenetan: %1."
 
-#: widgets/EditProfileDialog.cpp:410
+#: widgets/EditProfileDialog.cpp:411
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Profila editatzea: %2"
 msgstr[1] "%1 profil editatzen: %2"
 
-#: widgets/EditProfileDialog.cpp:414
+#: widgets/EditProfileDialog.cpp:415
 #, kde-format
 msgid "Create New Profile"
 msgstr "Sortu profil berria"
 
-#: widgets/EditProfileDialog.cpp:417
+#: widgets/EditProfileDialog.cpp:418
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Editatu \"%1\" profila"
 
-#: widgets/EditProfileDialog.cpp:508
+#: widgets/EditProfileDialog.cpp:509
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4262,7 +4262,7 @@ msgid_plural " columns"
 msgstr[0] " zutabe"
 msgstr[1] " zutabe"
 
-#: widgets/EditProfileDialog.cpp:510
+#: widgets/EditProfileDialog.cpp:511
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4272,42 +4272,42 @@ msgid_plural " rows"
 msgstr[0] " errenkada"
 msgstr[1] " errenkada"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "System Bell"
 msgstr "Sistemako txirrina"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistemaren jakinarazpenak"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "Visual Bell"
 msgstr "Irudizko txirrina"
 
-#: widgets/EditProfileDialog.cpp:520
+#: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ezikusi txirrin gertaerak"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:530
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1(e)ko terminal saio berrientzako profil lehenetsia"
 
-#: widgets/EditProfileDialog.cpp:634
+#: widgets/EditProfileDialog.cpp:635
 #, kde-format
 msgid "Edit Environment"
 msgstr "Editatu ingurunea"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:636
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Inguruneko aldagai bat lerroko"
 
-#: widgets/EditProfileDialog.cpp:666
+#: widgets/EditProfileDialog.cpp:667
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4315,18 +4315,18 @@ msgid_plural " seconds"
 msgstr[0] " segundo"
 msgstr[1] " segundo"
 
-#: widgets/EditProfileDialog.cpp:780
+#: widgets/EditProfileDialog.cpp:781
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Hautatu hasierako direktorioa"
 
-#: widgets/EditProfileDialog.cpp:1325
+#: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> antolaera zamatzea huts egin du."
 
-#: widgets/EditProfileDialog.cpp:1504
+#: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4335,7 +4335,7 @@ msgstr ""
 "Kolore-antolaera honek atzealde gardena erabiltzen du eta ez dirudi zure "
 "mahaigainak onartzen duenik"
 
-#: widgets/EditProfileDialog.cpp:1510
+#: widgets/EditProfileDialog.cpp:1511
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4344,7 +4344,7 @@ msgstr ""
 "Konsole, mahaigaineko efektuak gaitu aurretik abiarazi da. Konsole "
 "berrabiatu behar duzu atzealde gardena ikusteko."
 
-#: widgets/EditProfileDialog.cpp:1901
+#: widgets/EditProfileDialog.cpp:1902
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4373,7 +4373,7 @@ msgstr ""
 "ezikusi egingo zaio eta fitxategia testu-editore lehenetsiarekin\n"
 "irekiko da."
 
-#: widgets/EditProfileDialog.cpp:1914
+#: widgets/EditProfileDialog.cpp:1915
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Testu-editore norberak finkatutako komandoa"
