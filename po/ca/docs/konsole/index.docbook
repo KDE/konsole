@@ -304,7 +304,7 @@
 
 <listitem
 ><para
->Sobre les altres pestanyes del diàleg, configureu l'aparença d'aquesta sessió. Podeu configurar diferents tipus de lletra, un esquema de color, tipus de $<envar
+>Sobre les altres pestanyes del diàleg, configureu l'aparença d'aquesta sessió. Podeu configurar lletres, un esquema de color, tipus de $<envar
 >TERM</envar
 > i moltes altres opcions per a cada sessió.</para
 ></listitem>

@@ -5284,6 +5284,3 @@ msgstr "Nas&tavit nebo přejmenovat kartu..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Zavřít kartu"
-
-#~ msgid "open with"
-#~ msgstr "otevřít pomocí"
