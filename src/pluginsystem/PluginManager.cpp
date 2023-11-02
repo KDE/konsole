@@ -59,8 +59,6 @@ void PluginManager::loadAllPlugins()
 
 void PluginManager::registerMainWindow(Konsole::MainWindow *window)
 {
-    window->unplugActionList(QStringLiteral("plugin-submenu"));
-
     QList<QAction *> internalPluginSubmenus;
     for (auto *plugin : d->plugins) {
         plugin->addMainWindow(window);
@@ -74,7 +72,7 @@ void PluginManager::registerMainWindow(Konsole::MainWindow *window)
         internalPluginSubmenus.append(emptyMenuAct);
     }
 
-    window->plugActionList(QStringLiteral("plugin-submenu"), internalPluginSubmenus);
+    window->setPluginsActions(internalPluginSubmenus);
 }
 
 std::vector<IKonsolePlugin *> PluginManager::plugins() const

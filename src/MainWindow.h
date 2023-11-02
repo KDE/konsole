@@ -110,6 +110,11 @@ public:
      */
     void newTab();
 
+    /**
+     * @brief set list actions for menu "Plugins"
+     */
+    void setPluginsActions(const QList<QAction *> &actions);
+
 Q_SIGNALS:
 
     /**
@@ -143,6 +148,9 @@ protected:
 
     // reimplemented from QWidget
     bool focusNextPrevChild(bool next) override;
+
+protected Q_SLOTS:
+    void saveNewToolbarConfig() override;
 
 private Q_SLOTS:
     void cloneTab();
@@ -213,6 +221,7 @@ private:
 
     QPointer<SessionController> _pluggedController;
     std::vector<IKonsolePlugin *> _plugins;
+    QList<QAction *> _pluginsActions;
     bool _blurEnabled = false;
     bool _firstShowEvent = true;
 

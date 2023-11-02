@@ -579,6 +579,13 @@ void MainWindow::newTab()
     createSession(defaultProfile, activeSessionDir());
 }
 
+void MainWindow::setPluginsActions(const QList<QAction *> &actions)
+{
+    _pluginsActions = actions;
+    unplugActionList(QStringLiteral("plugin-submenu"));
+    plugActionList(QStringLiteral("plugin-submenu"), _pluginsActions);
+}
+
 void MainWindow::addPlugin(IKonsolePlugin *plugin)
 {
     Q_ASSERT(std::find(_plugins.cbegin(), _plugins.cend(), plugin) == _plugins.cend());
@@ -1080,6 +1087,14 @@ bool MainWindow::focusNextPrevChild(bool v)
     }
 
     return QMainWindow::focusNextPrevChild(v);
+}
+
+void MainWindow::saveNewToolbarConfig()
+{
+    KXmlGuiWindow::saveNewToolbarConfig();
+
+    unplugActionList(QStringLiteral("plugin-submenu"));
+    plugActionList(QStringLiteral("plugin-submenu"), _pluginsActions);
 }
 
 #include "moc_MainWindow.cpp"
