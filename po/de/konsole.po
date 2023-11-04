@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-28 01:46+0000\n"
+"POT-Creation-Date: 2023-11-04 16:53+0000\n"
 "PO-Revision-Date: 2023-04-29 12:15+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -1179,66 +1179,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Der Dank geht noch an viele weitere!\n"
 
-#: MainWindow.cpp:342
+#: MainWindow.cpp:324
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Neues Unterfenster"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:334
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Unterfenster duplizieren"
 
-#: MainWindow.cpp:359
+#: MainWindow.cpp:341
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Neues &Fenster"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:348
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Fenster schließen"
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:353
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Lesezeichen"
 
-#: MainWindow.cpp:394
+#: MainWindow.cpp:376
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Fenster-Farbschema"
 
-#: MainWindow.cpp:406
+#: MainWindow.cpp:388
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Profile verwalten ..."
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:394
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Menü aktivieren"
 
-#: MainWindow.cpp:418
+#: MainWindow.cpp:400
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Unterfenster-Layout speichern ..."
 
-#: MainWindow.cpp:427
+#: MainWindow.cpp:409
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Unterfenster-Layout laden ..."
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:718 MainWindow.cpp:735
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1251,25 +1251,25 @@ msgstr[1] ""
 "In diesem Fenster werden noch %1 Prozesse ausgeführt. Möchten Sie dennoch "
 "beenden?"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:724 MainWindow.cpp:741 MainWindow.cpp:755
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Schließen bestätigen"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:725 MainWindow.cpp:742 MainWindow.cpp:756
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Fenster schließen"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:743 MainWindow.cpp:757
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "A&ktuelles Unterfenster schließen"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:752
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
@@ -1277,37 +1277,37 @@ msgstr ""
 "In diesem Fenster gibt es noch %1 geöffnete Terminals. Möchten Sie dennoch "
 "beenden?"
 
-#: MainWindow.cpp:877 Part.cpp:297
+#: MainWindow.cpp:859 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profile"
 
-#: MainWindow.cpp:894
+#: MainWindow.cpp:876
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Allgemein"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:888
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:893
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Unterfensterleiste / Geteilte Ansicht"
 
-#: MainWindow.cpp:916
+#: MainWindow.cpp:898
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Temporäre Dateien"
 
-#: MainWindow.cpp:921
+#: MainWindow.cpp:903
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -5413,31 +5413,31 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Terminal wiederherstellen"
 
-#: widgets/ViewContainer.cpp:57
+#: widgets/ViewContainer.cpp:56
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Neues Unterfenster öffnen"
 
-#: widgets/ViewContainer.cpp:62
+#: widgets/ViewContainer.cpp:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Dieses Unterfenster schließen"
 
-#: widgets/ViewContainer.cpp:95
+#: widgets/ViewContainer.cpp:94
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "Unterfenster &verselbständigen"
 
-#: widgets/ViewContainer.cpp:101
+#: widgets/ViewContainer.cpp:100
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "Unterfenster einrichten oder &umbenennen ..."
 
-#: widgets/ViewContainer.cpp:106
+#: widgets/ViewContainer.cpp:105
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"

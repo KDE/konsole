@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-28 01:46+0000\n"
+"POT-Creation-Date: 2023-11-04 16:53+0000\n"
 "PO-Revision-Date: 2011-10-05 00:26+0330\n"
 "Last-Translator: Mohamad Reza Mirdamadi <mohi@ubuntu.ir>\n"
 "Language-Team: Farsi (Persian) <>\n"
@@ -1302,74 +1302,74 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "با تشکر از بسیاری دیگر.\n"
 
-#: MainWindow.cpp:342
+#: MainWindow.cpp:324
 #, fuzzy, kde-format
 #| msgid "New &Tab"
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&تب جدید‌"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:334
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&بستن تب‌"
 
-#: MainWindow.cpp:359
+#: MainWindow.cpp:341
 #, fuzzy, kde-format
 #| msgid "New &Window"
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&پنجره جدید‌"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:348
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:353
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&چوب الفها‌"
 
-#: MainWindow.cpp:394
+#: MainWindow.cpp:376
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "طرحواره رنگ جدید"
 
-#: MainWindow.cpp:406
+#: MainWindow.cpp:388
 #, fuzzy, kde-format
 #| msgid "Manage Profiles"
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "مدیریت Profileها"
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:394
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr ""
 
-#: MainWindow.cpp:418
+#: MainWindow.cpp:400
 #, fuzzy, kde-format
 #| msgid "Move View Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "حرکت نما به چپ"
 
-#: MainWindow.cpp:427
+#: MainWindow.cpp:409
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:718 MainWindow.cpp:735
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1380,26 +1380,26 @@ msgid_plural ""
 msgstr[0] "شما در این پنجره چند صفحک دارید، آیا مطمئنید که می‌خواهید خارج شوید؟"
 msgstr[1] ""
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:724 MainWindow.cpp:741 MainWindow.cpp:755
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr ""
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:725 MainWindow.cpp:742 MainWindow.cpp:756
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:743 MainWindow.cpp:757
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "&بستن تب‌"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:752
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1407,40 +1407,40 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "شما در این پنجره چند صفحک دارید، آیا مطمئنید که می‌خواهید خارج شوید؟"
 
-#: MainWindow.cpp:877 Part.cpp:297
+#: MainWindow.cpp:859 Part.cpp:297
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profile جدید"
 
-#: MainWindow.cpp:894
+#: MainWindow.cpp:876
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "عمومی"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:888
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:893
 #, fuzzy, kde-format
 #| msgid "Tab Bar Options"
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "گزینه‌های میله تب"
 
-#: MainWindow.cpp:916
+#: MainWindow.cpp:898
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:921
+#: MainWindow.cpp:903
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -5606,35 +5606,35 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "&بستن تب‌"
 
-#: widgets/ViewContainer.cpp:57
+#: widgets/ViewContainer.cpp:56
 #, fuzzy, kde-format
 #| msgid "&Detach View"
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "&جداسازی نما‌"
 
-#: widgets/ViewContainer.cpp:62
+#: widgets/ViewContainer.cpp:61
 #, fuzzy, kde-format
 #| msgid "Close the search bar"
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "بستن میله جستجو"
 
-#: widgets/ViewContainer.cpp:95
+#: widgets/ViewContainer.cpp:94
 #, fuzzy, kde-format
 #| msgid "&Detach View"
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "&جداسازی نما‌"
 
-#: widgets/ViewContainer.cpp:101
+#: widgets/ViewContainer.cpp:100
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "&تغییر نام تب..."
 
-#: widgets/ViewContainer.cpp:106
+#: widgets/ViewContainer.cpp:105
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"

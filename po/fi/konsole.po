@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-28 01:46+0000\n"
+"POT-Creation-Date: 2023-11-04 16:53+0000\n"
 "PO-Revision-Date: 2023-06-02 20:06+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1185,66 +1185,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Kiitokset monille muille.\n"
 
-#: MainWindow.cpp:342
+#: MainWindow.cpp:324
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Uusi &välilehti"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:334
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "M&onista välilehti"
 
-#: MainWindow.cpp:359
+#: MainWindow.cpp:341
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Uusi &ikkuna"
 
-#: MainWindow.cpp:366
+#: MainWindow.cpp:348
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Sulje ikkuna"
 
-#: MainWindow.cpp:371
+#: MainWindow.cpp:353
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Kirjanmerkit"
 
-#: MainWindow.cpp:394
+#: MainWindow.cpp:376
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Ikkunan väriteema"
 
-#: MainWindow.cpp:406
+#: MainWindow.cpp:388
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Hallitse profiileja…"
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:394
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktivoi valikko"
 
-#: MainWindow.cpp:418
+#: MainWindow.cpp:400
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Tallenna välilehtiasettelu…"
 
-#: MainWindow.cpp:427
+#: MainWindow.cpp:409
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Lataa välilehtiasettelu…"
 
-#: MainWindow.cpp:736 MainWindow.cpp:753
+#: MainWindow.cpp:718 MainWindow.cpp:735
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1254,61 +1254,61 @@ msgstr[0] "Ikkunassa on prosessi käynnissä. Haluatko silti lopettaa ohjelman?"
 msgstr[1] ""
 "Ikkunassa on %1 prosessia käynnissä. Haluatko silti lopettaa ohjelman?"
 
-#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
+#: MainWindow.cpp:724 MainWindow.cpp:741 MainWindow.cpp:755
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Vahvista sulkeminen"
 
-#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
+#: MainWindow.cpp:725 MainWindow.cpp:742 MainWindow.cpp:756
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "&Sulje ikkuna"
 
-#: MainWindow.cpp:761 MainWindow.cpp:775
+#: MainWindow.cpp:743 MainWindow.cpp:757
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Sulje nykyinen &välilehti"
 
-#: MainWindow.cpp:770
+#: MainWindow.cpp:752
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Ikkunassa on auki %1 päätettä. Haluatko silti lopettaa?"
 
-#: MainWindow.cpp:877 Part.cpp:297
+#: MainWindow.cpp:859 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiilit"
 
-#: MainWindow.cpp:894
+#: MainWindow.cpp:876
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Perusasetukset"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:888
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:893
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Välilehtipalkki / Jakoviivat"
 
-#: MainWindow.cpp:916
+#: MainWindow.cpp:898
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Väliaikaistiedostot"
 
-#: MainWindow.cpp:921
+#: MainWindow.cpp:903
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -5367,31 +5367,31 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Palauta pääte"
 
-#: widgets/ViewContainer.cpp:57
+#: widgets/ViewContainer.cpp:56
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Avaa uuteen välilehteen"
 
-#: widgets/ViewContainer.cpp:62
+#: widgets/ViewContainer.cpp:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Sulje tämä välilehti"
 
-#: widgets/ViewContainer.cpp:95
+#: widgets/ViewContainer.cpp:94
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "&Irrota välilehti"
 
-#: widgets/ViewContainer.cpp:101
+#: widgets/ViewContainer.cpp:100
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "&Muuta välilehden asetuksia tai nimeä…"
 
-#: widgets/ViewContainer.cpp:106
+#: widgets/ViewContainer.cpp:105
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
