@@ -335,13 +335,8 @@ public:
 
     inline static int stringWidth(const QString &str)
     {
-        // Qt is deprecating the use of `uint` in some places for `char32_t`,
-        // but the ucs4 representation of QString is still `uint`. Those are
-        // mostly the same thing, so we can access via a reinterpret_cast.
-        // internally, Qt also uses char32_t for ucs4.
-        const auto ucs4Str = str.toUcs4();
-        const auto data = reinterpret_cast<const char32_t *>(str.constData());
-        return stringWidth(data, ucs4Str.length());
+        const auto ucs4Str = str.toStdU32String();
+        return stringWidth(ucs4Str.data(), ucs4Str.size());
     }
 
     inline uint baseCodePoint() const
