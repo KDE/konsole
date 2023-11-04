@@ -249,9 +249,9 @@ public:
     static bool emojiPresentation(uint ucs4)
     {
         if (ucs4 >= emojiPresentation1Start && ucs4 <= emojiPresentation1End) {
-            return (emojiPresentation1Bits[(ucs4 - emojiPresentation1Start) / 64] & (1l << ((ucs4 - emojiPresentation1Start) % 64))) != 0;
+            return (emojiPresentation1Bits[(ucs4 - emojiPresentation1Start) / 64] & (uint64_t(1) << ((ucs4 - emojiPresentation1Start) % 64))) != 0;
         } else if (ucs4 >= emojiPresentation2Start && ucs4 <= emojiPresentation2End) {
-            return (emojiPresentation2Bits[(ucs4 - emojiPresentation2Start) / 64] & (1l << ((ucs4 - emojiPresentation2Start) % 64))) != 0;
+            return (emojiPresentation2Bits[(ucs4 - emojiPresentation2Start) / 64] & (uint64_t(1) << ((ucs4 - emojiPresentation2Start) % 64))) != 0;
         }
         return false;
     }
@@ -288,9 +288,9 @@ public:
     static bool emoji(uint ucs4)
     {
         if (ucs4 >= emoji1Start && ucs4 <= emoji1End) {
-            return (emoji1Bits[(ucs4 - emoji1Start) / 64] & (1l << ((ucs4 - emoji1Start) % 64))) != 0;
+            return (emoji1Bits[(ucs4 - emoji1Start) / 64] & (uint64_t(1) << ((ucs4 - emoji1Start) % 64))) != 0;
         } else if (ucs4 >= emoji2Start && ucs4 <= emoji2End) {
-            return (emoji2Bits[(ucs4 - emoji2Start) / 64] & (1l << ((ucs4 - emoji2Start) % 64))) != 0;
+            return (emoji2Bits[(ucs4 - emoji2Start) / 64] & (uint64_t(1) << ((ucs4 - emoji2Start) % 64))) != 0;
         }
         return false;
     }
