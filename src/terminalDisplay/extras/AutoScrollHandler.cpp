@@ -27,6 +27,7 @@ void AutoScrollHandler::timerEvent(QTimerEvent *event)
     auto *terminalDisplay = static_cast<TerminalDisplay *>(parent());
     QMouseEvent mouseEvent(QEvent::MouseMove,
                            widget()->mapFromGlobal(QCursor::pos()),
+                           QCursor::pos(),
                            Qt::NoButton,
                            Qt::LeftButton,
                            terminalDisplay->usesMouseTracking() ? Qt::ShiftModifier : Qt::NoModifier);

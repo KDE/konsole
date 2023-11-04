@@ -1602,7 +1602,7 @@ void Session::zmodemReadAndSendBlock()
     _zmodemProc->setReadChannel(QProcess::StandardOutput);
     QByteArray data = _zmodemProc->read(ZMODEM_BUFFER_SIZE);
 
-    while (data.count() != 0) {
+    while (!data.isEmpty()) {
         _shellProcess->sendData(data);
         data = _zmodemProc->read(ZMODEM_BUFFER_SIZE);
     }

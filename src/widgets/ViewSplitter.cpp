@@ -401,7 +401,7 @@ void Konsole::ViewSplitter::dragEnterEvent(QDragEnterEvent *ev)
 
 void Konsole::ViewSplitter::dragMoveEvent(QDragMoveEvent *ev)
 {
-    auto currentWidget = childAt(ev->pos());
+    auto currentWidget = childAt(ev->position().toPoint());
     if (auto terminal = qobject_cast<TerminalDisplay *>(currentWidget)) {
         if ((currentDragTarget != nullptr) && currentDragTarget != terminal) {
             currentDragTarget->hideDragTarget();
@@ -410,7 +410,7 @@ void Konsole::ViewSplitter::dragMoveEvent(QDragMoveEvent *ev)
             return;
         }
         currentDragTarget = terminal;
-        auto localPos = currentDragTarget->mapFromParent(ev->pos());
+        auto localPos = currentDragTarget->mapFromParent(ev->position().toPoint());
         currentDragTarget->showDragTarget(localPos);
     }
 }

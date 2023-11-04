@@ -1314,8 +1314,8 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent *ev)
         // if the mouse has moved sufficiently, we will confirm
 
         const int distance = QApplication::startDragDistance();
-        if (ev->x() > _dragInfo.start.x() + distance || ev->x() < _dragInfo.start.x() - distance || ev->y() > _dragInfo.start.y() + distance
-            || ev->y() < _dragInfo.start.y() - distance) {
+        if (ev->position().x() > _dragInfo.start.x() + distance || ev->position().x() < _dragInfo.start.x() - distance
+            || ev->position().y() > _dragInfo.start.y() + distance || ev->position().y() < _dragInfo.start.y() - distance) {
             // we've left the drag square, we can start a real drag operation now
 
             clearSelection();
