@@ -41,7 +41,6 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     , _newTabButton(new QToolButton(this))
     , _closeTabButton(new QToolButton(this))
     , _contextMenuTabIndex(-1)
-    , _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet)
     , _newTabBehavior(PutNewTabAtTheEnd)
 {
     setAcceptDrops(true);

@@ -245,7 +245,6 @@ private:
     QToolButton *_newTabButton;
     QToolButton *_closeTabButton;
     int _contextMenuTabIndex;
-    ViewManager::NavigationVisibility _navigationVisibility;
     NewTabBehavior _newTabBehavior;
 };
 

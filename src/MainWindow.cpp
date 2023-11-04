@@ -128,24 +128,6 @@ MainWindow::MainWindow()
     KCrash::initialize();
 }
 
-// Convenience function to get a space-separated list of all connected screens, copied from KWindowConfig
-static QString allConnectedScreens()
-{
-    QStringList names;
-    const auto screens = QGuiApplication::screens();
-    names.reserve(screens.length());
-    for (auto screen : screens) {
-#ifdef Q_OS_WIN
-        // QScreen::name() returns garbage on Windows; see https://bugreports.qt.io/browse/QTBUG-74317
-        // So we use the screens' serial numbers to identify them instead
-        names << screen->serialNumber();
-#else
-        names << screen->name();
-#endif
-    }
-    return names.join(QLatin1Char(' '));
-}
-
 bool MainWindow::wasWindowGeometrySaved() const
 {
     KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));

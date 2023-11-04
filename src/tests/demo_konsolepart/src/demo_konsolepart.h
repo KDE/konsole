@@ -30,7 +30,6 @@ private:
 
     KParts::ReadOnlyPart *createPart();
 
-    KMainWindow *_mainWindow;
     KParts::ReadOnlyPart *_terminalPart;
     TerminalInterface *_terminal;
 };

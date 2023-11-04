@@ -19,7 +19,6 @@
 
 demo_konsolepart::demo_konsolepart()
     : KMainWindow()
-    , _mainWindow(nullptr)
     , _terminalPart(nullptr)
     , _terminal(nullptr)
 {
