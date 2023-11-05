@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Command line access",
         "Description[ar]": "الوصول إلى سطر الأوامر",
+        "Description[ast]": "Accesu a la llinia de comandos",
         "Description[az]": "Əmr sətrinə giriş",
         "Description[bg]": "Достъп до команден ред",
         "Description[ca@valencia]": "Accés a la línia d'ordres",
