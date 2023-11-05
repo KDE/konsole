@@ -658,9 +658,11 @@ void Screen::resizeImage(int new_lines, int new_columns)
         while (currentPos < (cursorLine + cursorLineCorrection) && currentPos < (int)_screenLines.size() - 1) {
             // Join wrapped line in current position
             if ((_lineProperties.at(currentPos).flags.f.wrapped) != 0) {
+                auto starts = _lineProperties.at(currentPos).getStarts();
                 _screenLines[currentPos].append(_screenLines.at(currentPos + 1));
                 _screenLines.erase(_screenLines.begin() + currentPos + 1);
                 _lineProperties.erase(_lineProperties.begin() + currentPos);
+                _lineProperties.at(currentPos).setStarts(starts);
                 --cursorLine;
                 scrollPlacements(1, currentPos);
                 continue;
@@ -677,7 +679,9 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 && !(_lineProperties.at(currentPos).flags.f.doubleheight_bottom | _lineProperties.at(currentPos).flags.f.doubleheight_top)) {
                 auto values = _screenLines.at(currentPos).mid(new_columns);
                 _screenLines[currentPos].resize(new_columns);
-                _lineProperties.insert(_lineProperties.begin() + currentPos + 1, _lineProperties.at(currentPos));
+                LineProperty newLineProperty = _lineProperties.at(currentPos);
+                newLineProperty.resetStarts();
+                _lineProperties.insert(_lineProperties.begin() + currentPos + 1, newLineProperty);
                 _screenLines.insert(_screenLines.begin() + currentPos + 1, std::move(values));
                 _lineProperties[currentPos].flags.f.wrapped = 1;
                 ++cursorLine;

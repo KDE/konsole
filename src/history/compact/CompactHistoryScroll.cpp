@@ -176,6 +176,7 @@ int CompactHistoryScroll::reflowLines(const int columns, std::map<int, int> *del
             startLine += columns;
             lineProperty.flags.f.wrapped = 1;
             setNewLine(newLineData, startLine + _indexBias, lineProperty);
+            lineProperty.resetStarts();
             newPos++;
         }
         lineProperty.flags.f.wrapped = 0;

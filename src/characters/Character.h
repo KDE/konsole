@@ -18,6 +18,16 @@
 // Qt
 #include <QVector>
 
+/* clang-format off */
+const int LINE_WRAPPED              = (1 << 0);
+const int LINE_DOUBLEWIDTH          = (1 << 1);
+const int LINE_DOUBLEHEIGHT_TOP     = (1 << 2);
+const int LINE_DOUBLEHEIGHT_BOTTOM  = (1 << 3);
+const int LINE_PROMPT_START         = (1 << 4);
+const int LINE_INPUT_START          = (1 << 5);
+const int LINE_OUTPUT_START         = (1 << 6);
+/* clang-format on */
+
 namespace Konsole
 {
 #pragma pack(1)
@@ -50,6 +60,18 @@ public:
     {
         return (flags.all != rhs.flags.all);
     }
+    void resetStarts()
+    {
+        flags.all &= ~(LINE_PROMPT_START | LINE_INPUT_START | LINE_OUTPUT_START);
+    }
+    quint16 getStarts() const
+    {
+        return flags.all & (LINE_PROMPT_START | LINE_INPUT_START | LINE_OUTPUT_START);
+    }
+    void setStarts(quint16 starts)
+    {
+        flags.all = (flags.all & ~(LINE_PROMPT_START | LINE_INPUT_START | LINE_OUTPUT_START)) | starts;
+    }
 };
 
 typedef union {
@@ -76,14 +98,6 @@ typedef quint16 RenditionFlags;
 typedef quint16 ExtraFlags;
 
 /* clang-format off */
-const int LINE_WRAPPED              = (1 << 0);
-const int LINE_DOUBLEWIDTH          = (1 << 1);
-const int LINE_DOUBLEHEIGHT_TOP     = (1 << 2);
-const int LINE_DOUBLEHEIGHT_BOTTOM  = (1 << 3);
-const int LINE_PROMPT_START         = (1 << 4);
-const int LINE_INPUT_START          = (1 << 5);
-const int LINE_OUTPUT_START         = (1 << 6);
-
 const RenditionFlags DEFAULT_RENDITION  = 0;
 const RenditionFlags RE_BOLD            = (1 << 0);
 const RenditionFlags RE_BLINK           = (1 << 1);

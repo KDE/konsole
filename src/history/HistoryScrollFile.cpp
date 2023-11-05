@@ -145,6 +145,7 @@ int Konsole::HistoryScrollFile::reflowLines(const int columns, std::map<int, int
             startLine += (qint64)columns * sizeof(Character);
             lineProperty.flags.f.wrapped = 1;
             setNewLine(newLine, startLine, lineProperty);
+            lineProperty.resetStarts();
             reflowFile->add(reinterpret_cast<const char *>(&newLine), sizeof(reflowData));
         }
         lineProperty.flags.f.wrapped = 0;
