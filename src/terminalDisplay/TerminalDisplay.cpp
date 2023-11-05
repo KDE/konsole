@@ -3214,6 +3214,10 @@ int TerminalDisplay::bidiMap(Character *screenline,
     int i;
     int lastNonSpace = 0;
     shaped = false;
+
+    // use one string to assign into to avoid temporary allocations
+    QString convertBuffer;
+
     for (i = 0; i < linewidth; i++) {
         int pos = line.size();
         log2line[i] = pos;
@@ -3223,14 +3227,15 @@ int TerminalDisplay::bidiMap(Character *screenline,
         if (char_value.rendition.f.extended != 0) {
             // sequence of characters
             ushort extendedCharLength = 0;
-            const char32_t *chars = ExtendedCharTable::instance.lookupExtendedChar(char_value.character, extendedCharLength);
-            if (chars != nullptr) {
+            if (const char32_t *chars = ExtendedCharTable::instance.lookupExtendedChar(char_value.character, extendedCharLength)) {
                 Q_ASSERT(extendedCharLength > 1);
-                line += QString::fromUcs4(chars, extendedCharLength);
+                convertBuffer.assign(chars, chars + extendedCharLength);
+                line.append(convertBuffer);
             }
             lastNonSpace = i;
         } else {
-            line += QString::fromUcs4(&char_value.character, 1);
+            convertBuffer.assign(&char_value.character, &char_value.character + 1);
+            line.append(convertBuffer);
             if (!line[line.size() - 1].isSpace()) {
                 lastNonSpace = i;
             }
