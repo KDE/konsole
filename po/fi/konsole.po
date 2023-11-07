@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 16:53+0000\n"
-"PO-Revision-Date: 2023-06-02 20:06+0300\n"
+"PO-Revision-Date: 2023-09-26 17:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:22:03+0000\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1294,7 +1294,7 @@ msgstr "Perusasetukset"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Muisti"
 
 #: MainWindow.cpp:893
 #, kde-format
@@ -1885,7 +1885,7 @@ msgstr "&Sovita tuloste"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Sisään rakennettu"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
@@ -2712,14 +2712,14 @@ msgstr "Asettaa, korostetaan haun osumat"
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether creation of child cgroups are created tabs"
-msgstr ""
+msgstr "Asettaa, tarkoittaako lapsi-cgroupien luonti luotuja välilehtiä"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "Määrittää muistinkulutustason, josta rajoittaminen alkaa"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2814,10 +2814,9 @@ msgstr "Käytä rivihistoriatiedostoille tätä kansiota"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Välilehden valvonta"
+msgstr "Käytä muistinvalvontaa:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2831,18 +2830,27 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Muutokset tulevat voimaan uudelleenkäynnistettäessä. Jos käytössä, Konsolen "
+"jatkuva arvon\n"
+"ylittävä muistinkäyttö saa systemd-oomd:n lopettamaan muistia kuluttavia "
+"prosesseja\n"
+"suorittavat välilehdet. Huom! Asetuksen käyttö voi aiheuttaa hidastumista, "
+"kun muistia\n"
+"käytetään paljon, ja liian pienen arvon asettaminen voi johtaa siihen, että "
+"Konsole\n"
+"lopetetaan."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Muistirajoitus:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " Mt"
 
 # *** TARKISTA: luetelman toinen kohta on merkitykseltään hämärä, voi olla päinvastoinkin ”valikon näkyminen” tai jotain ihan muuta
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -3939,19 +3947,16 @@ msgstr "Tummennusvoimakkuus:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:530
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Väri:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:546
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Valitse kohdistimen piirtoväri"
+msgstr "Valitse reunaviivan piirtoväri"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:568
@@ -3961,10 +3966,9 @@ msgstr "Passiiviset päätteet:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:578
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Passiiviset päätteet:"
+msgstr "Aktiiviset päätteet:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:588
@@ -4022,16 +4026,15 @@ msgstr "Tummenna"
 # HUOM: Värejä himmennetään *passiiviselta* ikkunalta!
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:740
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Osoita ikkunan passiivisuus värejä himmentämällä"
+msgstr "Osoita ikkunan aktiivisuus piirtämällä reunaviiva"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Reunaviiva"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:785
@@ -4223,13 +4226,13 @@ msgstr "Profiili nimeltä ”%1” on jo olemassa."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Profiilin nimi on yli sallitun enimmäispituuden (%1)."
 
 #: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Korostetut merkit profiilinimissä ovat virheellisiä: %1."
 
 #: widgets/EditProfileDialog.cpp:411
 #, kde-format
