@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     QCoreApplication app(argc, argv);
 
     KConfig khotkeysrc(QStringLiteral("khotkeysrc"), KConfig::SimpleConfig);
-    const int dataCount = KConfigGroup(&khotkeysrc, "Data").readEntry("DataCount", 0);
+    const int dataCount = KConfigGroup(&khotkeysrc, QStringLiteral("Data")).readEntry("DataCount", 0);
     std::optional<int> kmenueditIndex = std::nullopt;
     KConfigGroup kmenueditGroup;
     for (int i = 1; i <= dataCount; ++i) {

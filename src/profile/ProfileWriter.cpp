@@ -44,7 +44,7 @@ void ProfileWriter::writeProperties(KConfig &config, const Profile::Ptr &profile
     for (const Profile::PropertyInfo &info : Profile::DefaultProperties) {
         if (info.group != nullptr) {
             if (groupName == nullptr || qstrcmp(groupName, info.group) != 0) {
-                group = config.group(info.group);
+                group = config.group(QLatin1String(info.group));
                 groupName = info.group;
             }
 
@@ -63,7 +63,7 @@ bool ProfileWriter::writeProfile(const QString &path, const Profile::Ptr &profil
         return false;
     }
 
-    KConfigGroup general = config.group(GENERAL_GROUP);
+    KConfigGroup general = config.group(QLatin1String(GENERAL_GROUP));
 
     // Parent profile if set, when loading the profile in future, the parent
     // must be loaded as well if it exists.

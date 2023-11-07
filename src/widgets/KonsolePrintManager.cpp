@@ -57,7 +57,7 @@ void KonsolePrintManager::printRequest(pPrintContent pContent, QWidget *parent)
     QPainter painter;
     painter.begin(&printer);
 
-    KConfigGroup configGroup(KSharedConfig::openConfig(), "PrintOptions");
+    KConfigGroup configGroup(KSharedConfig::openConfig(), QStringLiteral("PrintOptions"));
 
     if (configGroup.readEntry("ScaleOutput", true)) {
         QRect page_rect = printer.pageLayout().paintRectPixels(printer.resolution());

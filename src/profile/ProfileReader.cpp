@@ -55,7 +55,7 @@ void ProfileReader::readProperties(const KConfig &config, Profile::Ptr profile)
             continue;
         }
         if (groupName == nullptr || qstrcmp(groupName, info.group) != 0) {
-            group = config.group(info.group);
+            group = config.group(QLatin1String(info.group));
             groupName = info.group;
         }
 
@@ -75,7 +75,7 @@ bool ProfileReader::readProfile(const QString &path, Profile::Ptr profile, QStri
 
     KConfig config(path, KConfig::NoGlobals);
 
-    KConfigGroup general = config.group(GENERAL_GROUP);
+    KConfigGroup general = config.group(QLatin1String(GENERAL_GROUP));
     if (general.hasKey("Parent")) {
         parentProfile = general.readEntry("Parent");
     }
@@ -89,8 +89,8 @@ bool ProfileReader::readProfile(const QString &path, Profile::Ptr profile, QStri
 
     // Check if the user earlier had set the URL hints option, and in that case set the default
     // URL hints modifier to the earlier default.
-    if (config.hasGroup(FEATURES_GROUP)) {
-        KConfigGroup features = config.group(FEATURES_GROUP);
+    if (config.hasGroup(QLatin1String(FEATURES_GROUP))) {
+        KConfigGroup features = config.group(QLatin1String(FEATURES_GROUP));
         if (features.hasKey(URLHINTS_KEY)) {
             bool enable = features.readEntry(URLHINTS_KEY, false);
             if (enable && !features.hasKey(URLHINTSMODIFIERS_KEY)) {

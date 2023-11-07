@@ -24,8 +24,8 @@ int main (int argc, char *argv[])
 
     static const char menuBarKey[] = "MenuBar";
     // SimpleConfig so that system-wide default won't interfere and hasKey() indicates user defined setting
-    if (auto cg = KSharedConfig::openConfig(QStringLiteral("konsolerc"), KConfig::OpenFlag::SimpleConfig)->group("MainWindow"); !cg.hasKey(menuBarKey) &&
-            mainWindow.menuBar()->isHidden() && mainWindow.toolBar(QStringLiteral("sessionToolbar"))->isHidden()) {
+    if (auto cg = KSharedConfig::openConfig(QStringLiteral("konsolerc"), KConfig::OpenFlag::SimpleConfig)->group(QStringLiteral("MainWindow"));
+        !cg.hasKey(menuBarKey) && mainWindow.menuBar()->isHidden() && mainWindow.toolBar(QStringLiteral("sessionToolbar"))->isHidden()) {
         cg.writeEntry(menuBarKey, "Enabled");
     }
 }

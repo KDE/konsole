@@ -49,7 +49,7 @@ void SaveHistoryTask::execute()
     dialog->setMimeTypeFilters(mimeTypes);
 
     KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig();
-    auto group = konsoleConfig->group("SaveHistory Settings");
+    auto group = konsoleConfig->group(QStringLiteral("SaveHistory Settings"));
 
     if (_saveDialogRecentURL.isEmpty()) {
         const auto list = group.readPathEntry("Recent URLs", QStringList());

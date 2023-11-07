@@ -47,12 +47,12 @@ HistoryFile::HistoryFile()
             // Check if "kpart"rc has "FileLocation" group; AFAIK
             // only possible if user manually added it. If not
             // found, use konsole's config.
-            if (!appConfig->hasGroup("FileLocation")) {
+            if (!appConfig->hasGroup(QStringLiteral("FileLocation"))) {
                 appConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
             }
         }
 
-        KConfigGroup configGroup = appConfig->group("FileLocation");
+        KConfigGroup configGroup = appConfig->group(QStringLiteral("FileLocation"));
         if (configGroup.readEntry("scrollbackUseCacheLocation", false)) {
             fileLocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
         } else if (configGroup.readEntry("scrollbackUseSpecifiedLocation", false)) {

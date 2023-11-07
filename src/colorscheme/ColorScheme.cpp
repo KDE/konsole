@@ -446,7 +446,7 @@ void ColorScheme::read(const KConfig &config)
     t.start();
 #endif
 
-    KConfigGroup configGroup = config.group("General");
+    KConfigGroup configGroup = config.group(QStringLiteral("General"));
 
     const QString schemeDescription = configGroup.readEntry("Description", i18nc("@item", "Un-named Color Scheme"));
 
@@ -512,7 +512,7 @@ void ColorScheme::readColorEntry(const KConfig &config, int index)
 
 void ColorScheme::write(KConfig &config) const
 {
-    KConfigGroup configGroup = config.group("General");
+    KConfigGroup configGroup = config.group(QStringLiteral("General"));
 
     configGroup.writeEntry("Description", _description);
     configGroup.writeEntry("Opacity", _opacity);

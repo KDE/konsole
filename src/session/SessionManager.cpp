@@ -352,7 +352,7 @@ void SessionManager::saveSessions(KConfig *config)
         n++;
     }
 
-    KConfigGroup group(config, "Number");
+    KConfigGroup group(config, QStringLiteral("Number"));
     group.writeEntry("NumberOfSessions", _sessions.count());
 }
 
@@ -363,7 +363,7 @@ int SessionManager::getRestoreId(Session *session)
 
 void SessionManager::restoreSessions(KConfig *config)
 {
-    KConfigGroup group(config, "Number");
+    KConfigGroup group(config, QStringLiteral("Number"));
     const int sessions = group.readEntry("NumberOfSessions", 0);
 
     // Any sessions saved?

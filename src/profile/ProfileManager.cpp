@@ -59,14 +59,14 @@ ProfileManager::ProfileManager()
     // lookup the default profile specified in <App>rc
     // For stand-alone Konsole, m_config is just "konsolerc"
     // For konsolepart, m_config might be "yakuakerc", "dolphinrc", "katerc"...
-    KConfigGroup group = m_config->group("Desktop Entry");
+    KConfigGroup group = m_config->group(QStringLiteral("Desktop Entry"));
     QString defaultProfileFileName = group.readEntry("DefaultProfile", "");
 
     // if the hosting application of konsolepart does not specify its own
     // default profile, use the default profile of stand-alone Konsole.
     if (defaultProfileFileName.isEmpty()) {
         KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
-        group = konsoleConfig->group("Desktop Entry");
+        group = konsoleConfig->group(QStringLiteral("Desktop Entry"));
         defaultProfileFileName = group.readEntry("DefaultProfile", "");
     }
 
@@ -411,14 +411,14 @@ void ProfileManager::saveDefaultProfile()
         path = writer.getPath(_defaultProfile);
     }
 
-    KConfigGroup group = m_config->group("Desktop Entry");
+    KConfigGroup group = m_config->group(QStringLiteral("Desktop Entry"));
     group.writeEntry("DefaultProfile", QUrl::fromLocalFile(path).fileName());
     m_config->sync();
 }
 
 void ProfileManager::loadShortcuts()
 {
-    KConfigGroup shortcutGroup = m_config->group("Profile Shortcuts");
+    KConfigGroup shortcutGroup = m_config->group(QStringLiteral("Profile Shortcuts"));
 
     const QLatin1String suffix(".profile");
     auto findByName = [this, suffix](const QString &name) {
@@ -444,8 +444,8 @@ void ProfileManager::saveShortcuts()
     if (_profileShortcutsChanged) {
         _profileShortcutsChanged = false;
 
-        KConfigGroup shortcutGroup = m_config->group("Profile Shortcuts");
-        shortcutGroup.deleteGroup();
+        KConfigGroup shortcutGroup = m_config->group(QStringLiteral("Profile Shortcuts"));
+        shortcutGroup.deleteGroup(QLatin1String());
 
         for (const auto &[profile, keySeq] : _shortcuts) {
             shortcutGroup.writeEntry(keySeq.toString(), profile->name());

@@ -502,7 +502,7 @@ void SessionController::updateWebSearchMenu()
 
     // Is 'Enable Web shortcuts' checked in System Settings?
     KSharedConfigPtr kuriikwsConfig = KSharedConfig::openConfig(QStringLiteral("kuriikwsfilterrc"));
-    if (!kuriikwsConfig->group("General").readEntry("EnableWebShortcuts", true)) {
+    if (!kuriikwsConfig->group(QStringLiteral("General")).readEntry("EnableWebShortcuts", true)) {
         return;
     }
 

@@ -135,7 +135,7 @@ QStringList ProcessInfo::commonDirNames()
 
     if (forTheFirstTime) {
         const KSharedConfigPtr &config = KSharedConfig::openConfig();
-        const KConfigGroup &configGroup = config->group("ProcessInfo");
+        const KConfigGroup &configGroup = config->group(QStringLiteral("ProcessInfo"));
         // Need to make a local copy so the begin() and end() point to the same QList
         _commonDirNames = configGroup.readEntry("CommonDirNames", QStringList());
         _commonDirNames.removeDuplicates();
