@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 16:53+0000\n"
-"PO-Revision-Date: 2023-11-05 01:36+0100\n"
+"PO-Revision-Date: 2023-11-07 21:27+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -401,13 +401,13 @@ msgstr ""
 #, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
-msgstr ""
+msgstr "Color"
 
 #: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
@@ -1138,7 +1138,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
-msgstr ""
+msgstr "Llingüeta &nueva"
 
 #: MainWindow.cpp:334
 #, kde-format
@@ -1150,7 +1150,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
-msgstr ""
+msgstr "&Ventana nueva"
 
 #: MainWindow.cpp:348
 #, kde-format
@@ -1162,7 +1162,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
-msgstr ""
+msgstr "&Marcadores"
 
 #: MainWindow.cpp:376
 #, kde-format
@@ -1236,13 +1236,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
-msgstr ""
+msgstr "Xeneral"
 
 #: MainWindow.cpp:888
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Memoria"
 
 #: MainWindow.cpp:893
 #, kde-format
@@ -1254,13 +1254,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
-msgstr ""
+msgstr "Ficheros temporales"
 
 #: MainWindow.cpp:903
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
-msgstr ""
+msgstr "Miniatures"
 
 #: Part.cpp:300
 #, kde-format
@@ -1689,7 +1689,7 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:126
 #, kde-format
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:142
@@ -2478,7 +2478,7 @@ msgstr ""
 #: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
-msgstr ""
+msgstr "Executar toles ventanes de Konsole nun procesu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:146
@@ -3079,19 +3079,19 @@ msgstr ""
 #: settings/ThumbnailsSettings.ui:70
 #, kde-format
 msgid "Shift"
-msgstr ""
+msgstr "Mayús"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
 #: settings/ThumbnailsSettings.ui:77
 #, kde-format
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
 #: settings/ThumbnailsSettings.ui:84
 #, kde-format
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
@@ -3102,7 +3102,7 @@ msgstr ""
 #: terminalDisplay/TerminalDisplay.cpp:664
 #, kde-format
 msgid "Size: %1 x %2"
-msgstr ""
+msgstr "Tamañu: %1 x %2"
 
 #: terminalDisplay/TerminalDisplay.cpp:2253
 #, kde-format
@@ -3482,21 +3482,21 @@ msgstr ""
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
-msgstr ""
+msgstr "Mayús"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
 #: widgets/EditProfileAdvancedPage.ui:88
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
 #: widgets/EditProfileAdvancedPage.ui:107
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
 #: widgets/EditProfileAdvancedPage.ui:126
@@ -4025,7 +4025,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
-msgstr ""
+msgstr "Xeneral"
 
 #: widgets/EditProfileDialog.cpp:105
 #, kde-format
@@ -4045,7 +4045,7 @@ msgstr ""
 #: widgets/EditProfileDialog.cpp:152
 #, kde-format
 msgid "Keyboard"
-msgstr ""
+msgstr "Tecláu"
 
 #: widgets/EditProfileDialog.cpp:153
 #, kde-format
@@ -4272,7 +4272,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:141
 #, kde-format
 msgid "/bin/sh"
-msgstr ""
+msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:154
@@ -4309,7 +4309,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:203
 #, kde-format
 msgid "Environment:"
-msgstr ""
+msgstr "Entornu:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
 #: widgets/EditProfileGeneralPage.ui:221
