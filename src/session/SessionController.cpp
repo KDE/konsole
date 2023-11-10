@@ -663,10 +663,12 @@ void SessionController::setupCommonActions()
     connect(action, &QAction::triggered, this, &SessionController::copy);
 
     action = collection->addAction(QStringLiteral("split-view-left-right"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
     action->setText(i18n("Split View Left-Right"));
     connect(action, &QAction::triggered, this, &SessionController::requestSplitViewLeftRight);
 
     action = collection->addAction(QStringLiteral("split-view-top-bottom"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
     action->setText(i18n("Split View Top-Bottom"));
     connect(action, &QAction::triggered, this, &SessionController::requestSplitViewTopBotton);
 
