@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 16:53+0000\n"
-"PO-Revision-Date: 2023-09-12 02:25+0900\n"
+"PO-Revision-Date: 2023-11-10 22:51+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2256,13 +2256,12 @@ msgstr "ZModem 上傳(&Z)..."
 #: session/SessionController.cpp:858
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "單次監控"
 
 #: session/SessionController.cpp:863
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "監視有回應視窗(&A)"
+msgstr "監視提示字元(&P)"
 
 #: session/SessionController.cpp:870
 #, kde-format
@@ -2397,7 +2396,7 @@ msgstr "砍除程式"
 #: session/SessionController.cpp:1800
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "shell 提示字元會顯示在工作階段「%1」"
 
 #: session/SessionController.cpp:1993
 #, kde-format
@@ -2665,10 +2664,10 @@ msgstr ""
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "決定記憶體用量超過多少時要開始限制用量"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2779,6 +2778,11 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"變更將在重新啟動後生效。若啟用，Konsole 持續使用超過指定量的記憶體時將會使 "
+"systemd-oomd \n"
+"強制中止包含使用大量記憶體的程序的分頁。\n"
+"請注意：啟用這個選項可能會在記憶體用量大的時候造成更嚴重的效能下降，\n"
+"並且若是指定的數值太低 Konsole 本身可能還是會被強制中止。"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -3418,20 +3422,16 @@ msgid "Toggle maximize current view"
 msgstr "切換最大化目前檢視"
 
 #: ViewManager.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "切換最大化目前檢視"
+msgstr "切換縮放最大化目前檢視"
 
 #: ViewManager.cpp:298
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "切換最大化目前檢視"
+msgstr "切換縮放最大化目前檢視"
 
 #: ViewManager.cpp:306
 #, kde-format
