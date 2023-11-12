@@ -31,6 +31,9 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
+     <property name="documentMode">
+      <bool>true</bool>
+     </property>
      <widget class="QWidget" name="appearanceTab">
       <attribute name="title">
        <string comment="@title:tab Tab bar settings">Appearance</string>
