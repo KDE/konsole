@@ -815,7 +815,7 @@ private:
     bool _drawOverlay = false;
     Qt::Edge _overlayEdge;
 
-    bool _hasCompositeFocus;
+    bool _hasCompositeFocus = false;
     bool _displayVerticalLine = false;
     int _displayVerticalLineAtChar = 80;
 
