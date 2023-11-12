@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 16:53+0000\n"
-"PO-Revision-Date: 2023-10-20 22:39+0300\n"
+"PO-Revision-Date: 2023-11-11 23:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -132,7 +132,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
-msgstr "İlk oturum sona erdiğinde otomatik olarak kapatmayın."
+msgstr "İlk oturum sona erdiğinde kendiliğinden kapatmayın."
 
 #: Application.cpp:61
 #, kde-format
@@ -1665,7 +1665,7 @@ msgstr "Klasör adını değiştirmek için çift tıklayın."
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
 #, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "Otomatik olarak eklenmiş bir girdiyi silemezsiniz."
+msgstr "Kendiliğinden eklenmiş bir girdiyi silemezsiniz."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
 #, kde-format
@@ -4683,7 +4683,7 @@ msgstr "Kopyalama seçenekleri:"
 #: widgets/EditProfileMousePage.ui:193
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
-msgstr "Seçilen metni otomatik olarak panoya kopyala"
+msgstr "Seçilen metni kendiliğinden panoya kopyala"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:196
