@@ -379,7 +379,7 @@
 > seçeneğini seçin. Seçili metin uyumlu uygulamalara da sürüklenip bırakılabilir. &Ctrl; düğmesini basılı tutun ve seçili metni istediğiniz konuma sürükleyin.</para>
 
 <para
->Normalde yenisatır karakterleri her seçili satırın sonuna eklenir. Bu, kaynak kodunu kesip yapıştırmak veya belirli bir komutun çıktısı için en iyisidir. Sıradan metinlerde satır sonları çoğu zaman önemli değildir. Ancak metnin başka bir uygulamaya yapıştırıldığında otomatik olarak yeniden biçimlendirilecek bir karakter akışı olması tercih edilebilir. Metin akışı kipinde seçim yapmak için normal bir biçimde seçerken &Ctrl; düğmesini basılı tutun.</para>
+>Normalde yenisatır karakterleri her seçili satırın sonuna eklenir. Bu, kaynak kodunu kesip yapıştırmak veya belirli bir komutun çıktısı için en iyisidir. Sıradan metinlerde satır sonları çoğu zaman önemli değildir. Ancak metnin başka bir uygulamaya yapıştırıldığında kendiliğinden yeniden biçimlendirilecek bir karakter akışı olması tercih edilebilir. Metin akışı kipinde seçim yapmak için normal bir biçimde seçerken &Ctrl; düğmesini basılı tutun.</para>
 
 <para
 >&Ctrl; ve &Alt; düğmelerine &LMB; ile birlikte basmak, metni sütunlar halinde seçer. </para>
