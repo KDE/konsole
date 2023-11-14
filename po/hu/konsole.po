@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 16:53+0000\n"
+"POT-Creation-Date: 2023-11-14 01:40+0000\n"
 "PO-Revision-Date: 2022-01-25 10:17+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2549,7 +2549,7 @@ msgid "Configure"
 msgstr "Beállítás"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:55
+#: settings/GeneralSettings.ui:43
 #, kde-format
 msgctxt "@item:intext Search options"
 msgid "Search:"
@@ -2557,47 +2557,47 @@ msgstr "Keresés:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:68 settings/konsole.kcfg:22
+#: settings/GeneralSettings.ui:56 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
 msgstr "Menügyorsítók bekapcsolása"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:81
+#: settings/GeneralSettings.ui:69
 #, kde-format
 msgid "If enabled, profile settings will be ignored"
 msgstr "Ha engedélyezve van, a profilbeállítások mellőzve lesznek"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:84
+#: settings/GeneralSettings.ui:72
 #, kde-format
 msgid "Remember window size"
 msgstr "Ablakméret megjegyzése"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:97 settings/konsole.kcfg:17
+#: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
 msgstr "Ablakcím megjelenítése a címsávban"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
+#: settings/GeneralSettings.ui:92 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
 msgstr "Terminálok fókuszálása, amikor az egérmutató felettük mozog"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:117 settings/konsole.kcfg:69
+#: settings/GeneralSettings.ui:105 settings/konsole.kcfg:69
 #, kde-format
 msgid "Match using regular expressions"
 msgstr "Reguláris kifejezések használata"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:130 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:118 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr ""
@@ -2605,71 +2605,71 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:121 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "Összes Konsole ablak futtatása egy folyamatban"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:146
+#: settings/GeneralSettings.ui:134
 #, kde-format
 msgid "Highlight all matches"
 msgstr "Összes találat kiemelése"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:175 settings/konsole.kcfg:65
+#: settings/GeneralSettings.ui:163 settings/konsole.kcfg:65
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "Beállítja, hogy a keresés kis- és nagybetűérzékeny legyen-e"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:178
+#: settings/GeneralSettings.ui:166
 #, kde-format
 msgid "Case sensitive"
 msgstr "Nagybetűk megkülönböztetése"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:185 settings/konsole.kcfg:9
+#: settings/GeneralSettings.ui:173 settings/konsole.kcfg:9
 #, kde-format
 msgid "Remove window titlebar and frame"
 msgstr "Címsor és keret elrejtése"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:208
+#: settings/GeneralSettings.ui:196
 #, kde-format
 msgid "Process and window:"
 msgstr "Folyamat és ablak:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:218
+#: settings/GeneralSettings.ui:206
 #, kde-format
 msgid "Notifications:"
 msgstr "Értesítések:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:236
+#: settings/GeneralSettings.ui:224
 #, kde-format
 msgid "All dialogs will be shown again"
 msgstr "Minden párbeszédablak újból megjelenik"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:239
+#: settings/GeneralSettings.ui:227
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
 msgstr "„Ne kérdezze többet” üzenetek engedélyezése"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:267 settings/konsole.kcfg:79
+#: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Beállítja, hogy a keresés lentről induljon-e"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:270 settings/konsole.kcfg:78
+#: settings/GeneralSettings.ui:258 settings/konsole.kcfg:78
 #, kde-format
 msgid "Search backwards"
 msgstr "Keresés visszafelé"
@@ -2908,19 +2908,19 @@ msgstr ""
 "kezelésén.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:39
+#: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "Új profil létrehozása a kijelölt profil alapján"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:42
+#: settings/ProfileSettings.ui:57
 #, kde-format
 msgid "&New..."
 msgstr "Ú&j…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:52
+#: settings/ProfileSettings.ui:67
 #, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
@@ -2929,104 +2929,104 @@ msgstr ""
 "profiloknál)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:55
+#: settings/ProfileSettings.ui:70
 #, kde-format
 msgid "&Edit..."
 msgstr "Sz&erkesztés…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:65
+#: settings/ProfileSettings.ui:80
 #, kde-format
 msgid "Delete the selected profile"
 msgstr "A kijelölt profil törlése"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:68
+#: settings/ProfileSettings.ui:83
 #, kde-format
 msgid "&Remove"
 msgstr "&Eltávolítás"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:78
+#: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
 msgstr "A kijelölt profil alapértelmezetté tétele új terminálablakoknál"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:81
+#: settings/ProfileSettings.ui:96
 #, kde-format
 msgid "&Set as Default"
 msgstr "Beállítá&s alapértelmezésnek"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
-#: settings/TabBarSettings.ui:36
+#: settings/TabBarSettings.ui:39
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Appearance"
 msgstr "Megjelenés"
 
 #. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
-#: settings/TabBarSettings.ui:50
+#: settings/TabBarSettings.ui:53
 #, kde-format
 msgid "Show:"
 msgstr "Megjelenítés:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
-#: settings/TabBarSettings.ui:60
+#: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
 msgstr "Ha szükséges"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
-#: settings/TabBarSettings.ui:70
+#: settings/TabBarSettings.ui:73
 #, kde-format
 msgid "Alwa&ys"
 msgstr "Mindi&g"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
-#: settings/TabBarSettings.ui:80
+#: settings/TabBarSettings.ui:83
 #, kde-format
 msgid "&Never"
 msgstr "&Soha"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
-#: settings/TabBarSettings.ui:106
+#: settings/TabBarSettings.ui:109
 #, kde-format
 msgid "Position:"
 msgstr "Pozíció:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:116
+#: settings/TabBarSettings.ui:119
 #, kde-format
 msgid "Above terminal area"
 msgstr "A terminálablakok felett"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:126
+#: settings/TabBarSettings.ui:129
 #, kde-format
 msgid "Be&low terminal area"
 msgstr "A terminálablakok a&latt"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
-#: settings/TabBarSettings.ui:152
+#: settings/TabBarSettings.ui:155
 #, kde-format
 msgid "Show Close Tab button:"
 msgstr "Lap bezárása gomb:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
-#: settings/TabBarSettings.ui:162
+#: settings/TabBarSettings.ui:165
 #, kde-format
 msgid "&On each tab"
 msgstr "&Minden lapon"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
-#: settings/TabBarSettings.ui:172
+#: settings/TabBarSettings.ui:175
 #, kde-format
 msgid "On &the tab bar"
 msgstr "A la&psávon"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
-#: settings/TabBarSettings.ui:182
+#: settings/TabBarSettings.ui:185
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
@@ -3034,123 +3034,123 @@ msgstr "Nincs"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:341
+#: settings/TabBarSettings.ui:211 settings/TabBarSettings.ui:344
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr "Egyéb:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:218
+#: settings/TabBarSettings.ui:221
 #, kde-format
 msgid "Show 'New Tab' button"
 msgstr "„Új lap” gomb megjelenítése"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:225
+#: settings/TabBarSettings.ui:228
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr "Fülek kiterjesztése a teljes ablakra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:232
+#: settings/TabBarSettings.ui:235
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr "Egyedi stíluslap használata:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:258
+#: settings/TabBarSettings.ui:261
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(nincs)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:281
+#: settings/TabBarSettings.ui:284
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "Működés"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:295
+#: settings/TabBarSettings.ui:298
 #, kde-format
 msgid "Put new tabs:"
 msgstr "Új lapok helye:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:305
+#: settings/TabBarSettings.ui:308
 #, kde-format
 msgid "At &the end"
 msgstr "A &végén"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:315
+#: settings/TabBarSettings.ui:318
 #, kde-format
 msgid "After current &tab"
 msgstr "Az aktuális &lap után"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:351
+#: settings/TabBarSettings.ui:354
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "Lapok bezárása középső gombbal kattintva"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:374
+#: settings/TabBarSettings.ui:377
 #, kde-format
 msgid "Splits"
 msgstr "Felosztások"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:380
+#: settings/TabBarSettings.ui:383
 #, kde-format
 msgid "Show Header:"
 msgstr "Fejléc megjelenítése:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:387
+#: settings/TabBarSettings.ui:390
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "Ha szükséges"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:397
+#: settings/TabBarSettings.ui:400
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "Soha"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:423
+#: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "Fogó mérete:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:433
+#: settings/TabBarSettings.ui:436
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Kicsi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:443
+#: settings/TabBarSettings.ui:446
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "Közepes"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:453
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Nagy"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:476
+#: settings/TabBarSettings.ui:479
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -3173,13 +3173,13 @@ msgid "User cache directory (%1)"
 msgstr "Felhasználói gyorsítótár mappa (%1)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: settings/TemporaryFilesSettings.ui:37
+#: settings/TemporaryFilesSettings.ui:25
 #, kde-format
 msgid "Scrollback file location:"
 msgstr "Pufferfájl helye:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
-#: settings/TemporaryFilesSettings.ui:76
+#: settings/TemporaryFilesSettings.ui:64
 #, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"

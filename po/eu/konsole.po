@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 16:53+0000\n"
+"POT-Creation-Date: 2023-11-14 01:40+0000\n"
 "PO-Revision-Date: 2023-10-15 09:55+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -2504,7 +2504,7 @@ msgid "Configure"
 msgstr "Konfiguratu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:55
+#: settings/GeneralSettings.ui:43
 #, kde-format
 msgctxt "@item:intext Search options"
 msgid "Search:"
@@ -2512,118 +2512,118 @@ msgstr "Bilatu:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:68 settings/konsole.kcfg:22
+#: settings/GeneralSettings.ui:56 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
 msgstr "Gaitu menu azeleratzaileak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:81
+#: settings/GeneralSettings.ui:69
 #, kde-format
 msgid "If enabled, profile settings will be ignored"
 msgstr "Gaituta badago, profilaren ezarpenei ez zaie jaramon egingo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:84
+#: settings/GeneralSettings.ui:72
 #, kde-format
 msgid "Remember window size"
 msgstr "Gogoratu leihoaren neurria"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:97 settings/konsole.kcfg:17
+#: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
 msgstr "Erakutsi leihoaren titulua titulu-barran"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
+#: settings/GeneralSettings.ui:92 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
 msgstr "Arreta terminalei saguaren erakuslea haien gainean ipintzean"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:117 settings/konsole.kcfg:69
+#: settings/GeneralSettings.ui:105 settings/konsole.kcfg:69
 #, kde-format
 msgid "Match using regular expressions"
 msgstr "Bat-etortzeak adierazpen erregularrak erabiliz"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:130 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:118 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr "Konsole abiaraztean berrerabili dagoen prozesua ahal denean"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:121 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "Ibili Konsoleren leiho guztiak prozesu bakarrean"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:146
+#: settings/GeneralSettings.ui:134
 #, kde-format
 msgid "Highlight all matches"
 msgstr "Nabarmendu bat-etortze guztiak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:175 settings/konsole.kcfg:65
+#: settings/GeneralSettings.ui:163 settings/konsole.kcfg:65
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "Bilaketak maius./minus. bereiziko dituen ezartzen du"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:178
+#: settings/GeneralSettings.ui:166
 #, kde-format
 msgid "Case sensitive"
 msgstr "Bereizi maius./minus."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:185 settings/konsole.kcfg:9
+#: settings/GeneralSettings.ui:173 settings/konsole.kcfg:9
 #, kde-format
 msgid "Remove window titlebar and frame"
 msgstr "Kendu leihoaren titulu-barra eta markoa"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:208
+#: settings/GeneralSettings.ui:196
 #, kde-format
 msgid "Process and window:"
 msgstr "Prozesua eta leihoa:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:218
+#: settings/GeneralSettings.ui:206
 #, kde-format
 msgid "Notifications:"
 msgstr "Jakinarazpenak:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:236
+#: settings/GeneralSettings.ui:224
 #, kde-format
 msgid "All dialogs will be shown again"
 msgstr "Elkarrizketa-koadro guztiak berriz erakutsiko dira"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:239
+#: settings/GeneralSettings.ui:227
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
 msgstr "Gaitu \"Ez berriz galdetu\" mezu guztiak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:267 settings/konsole.kcfg:79
+#: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Bilaketa behetik hasi beharko litzatekeen ezartzen du"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:270 settings/konsole.kcfg:78
+#: settings/GeneralSettings.ui:258 settings/konsole.kcfg:78
 #, kde-format
 msgid "Search backwards"
 msgstr "Bilatu atzerantz"
@@ -2874,19 +2874,19 @@ msgstr ""
 "kudeatzeko eran aldaketa bat nahi baduzu.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:39
+#: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "Sortu profil berria bat hautatuko profilean oinarrituta"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:42
+#: settings/ProfileSettings.ui:57
 #, kde-format
 msgid "&New..."
 msgstr "&Berria..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:52
+#: settings/ProfileSettings.ui:67
 #, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
@@ -2895,104 +2895,104 @@ msgstr ""
 "profiletan)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:55
+#: settings/ProfileSettings.ui:70
 #, kde-format
 msgid "&Edit..."
 msgstr "&Editatu..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:65
+#: settings/ProfileSettings.ui:80
 #, kde-format
 msgid "Delete the selected profile"
 msgstr "Ezabatu hautatutako profila"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:68
+#: settings/ProfileSettings.ui:83
 #, kde-format
 msgid "&Remove"
 msgstr "&Kendu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:78
+#: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
 msgstr "Ezarri hautatutako profila lehenetsi gisa terminal saio berrientzat"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:81
+#: settings/ProfileSettings.ui:96
 #, kde-format
 msgid "&Set as Default"
 msgstr "&Ezarri lehenetsi gisa"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
-#: settings/TabBarSettings.ui:36
+#: settings/TabBarSettings.ui:39
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Appearance"
 msgstr "Itxura"
 
 #. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
-#: settings/TabBarSettings.ui:50
+#: settings/TabBarSettings.ui:53
 #, kde-format
 msgid "Show:"
 msgstr "Erakutsi:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
-#: settings/TabBarSettings.ui:60
+#: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
 msgstr "Behar denean"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
-#: settings/TabBarSettings.ui:70
+#: settings/TabBarSettings.ui:73
 #, kde-format
 msgid "Alwa&ys"
 msgstr "Bet&i"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
-#: settings/TabBarSettings.ui:80
+#: settings/TabBarSettings.ui:83
 #, kde-format
 msgid "&Never"
 msgstr "&Inoiz ez"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
-#: settings/TabBarSettings.ui:106
+#: settings/TabBarSettings.ui:109
 #, kde-format
 msgid "Position:"
 msgstr "Kokapena:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:116
+#: settings/TabBarSettings.ui:119
 #, kde-format
 msgid "Above terminal area"
 msgstr "Terminal eremuaren gainetik"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:126
+#: settings/TabBarSettings.ui:129
 #, kde-format
 msgid "Be&low terminal area"
 msgstr "Terminal eremuaren az&pian"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
-#: settings/TabBarSettings.ui:152
+#: settings/TabBarSettings.ui:155
 #, kde-format
 msgid "Show Close Tab button:"
 msgstr "Erakutsi «Itxi fitxa» botoia:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
-#: settings/TabBarSettings.ui:162
+#: settings/TabBarSettings.ui:165
 #, kde-format
 msgid "&On each tab"
 msgstr "Fitxa bak&oitzean"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
-#: settings/TabBarSettings.ui:172
+#: settings/TabBarSettings.ui:175
 #, kde-format
 msgid "On &the tab bar"
 msgstr "Fitxa-&barran"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
-#: settings/TabBarSettings.ui:182
+#: settings/TabBarSettings.ui:185
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
@@ -3000,123 +3000,123 @@ msgstr "Bat ere ez"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:341
+#: settings/TabBarSettings.ui:211 settings/TabBarSettings.ui:344
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr "Hainbat:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:218
+#: settings/TabBarSettings.ui:221
 #, kde-format
 msgid "Show 'New Tab' button"
 msgstr "Erakutsi 'fitxa berria' botoia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:225
+#: settings/TabBarSettings.ui:228
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr "Zabaldu banakako fitxen zabalera leiho osora"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:232
+#: settings/TabBarSettings.ui:235
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr "Erabili erabiltzaileak finkatutako estilo-orria:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:258
+#: settings/TabBarSettings.ui:261
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(bat ere ez)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:281
+#: settings/TabBarSettings.ui:284
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "Jokabidea"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:295
+#: settings/TabBarSettings.ui:298
 #, kde-format
 msgid "Put new tabs:"
 msgstr "Ipini fitxa berriak:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:305
+#: settings/TabBarSettings.ui:308
 #, kde-format
 msgid "At &the end"
 msgstr "Amaie&ran"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:315
+#: settings/TabBarSettings.ui:318
 #, kde-format
 msgid "After current &tab"
 msgstr "Uneko fi&txaren ondoren"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:351
+#: settings/TabBarSettings.ui:354
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "Itxi fitxa erdiko klikarekin"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:374
+#: settings/TabBarSettings.ui:377
 #, kde-format
 msgid "Splits"
 msgstr "Zatiak"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:380
+#: settings/TabBarSettings.ui:383
 #, kde-format
 msgid "Show Header:"
 msgstr "Erakutsi goiburua:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:387
+#: settings/TabBarSettings.ui:390
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "Beharrezkoa denean"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:397
+#: settings/TabBarSettings.ui:400
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "Inoiz ez"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:423
+#: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "Arrasterako heldulekuaren neurria:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:433
+#: settings/TabBarSettings.ui:436
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Txikia"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:443
+#: settings/TabBarSettings.ui:446
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "Ertaina"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:453
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Handia"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:476
+#: settings/TabBarSettings.ui:479
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -3139,13 +3139,13 @@ msgid "User cache directory (%1)"
 msgstr "Erabiltzailearen cache direktorioa (%1)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: settings/TemporaryFilesSettings.ui:37
+#: settings/TemporaryFilesSettings.ui:25
 #, kde-format
 msgid "Scrollback file location:"
 msgstr "«Historikoan atzera» fitxategiaren kokalekua:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
-#: settings/TemporaryFilesSettings.ui:76
+#: settings/TemporaryFilesSettings.ui:64
 #, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"

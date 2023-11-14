@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 16:53+0000\n"
+"POT-Creation-Date: 2023-11-14 01:40+0000\n"
 "PO-Revision-Date: 2023-05-15 10:35+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -2516,7 +2516,7 @@ msgid "Configure"
 msgstr "Configurar"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/GeneralSettings.ui:55
+#: settings/GeneralSettings.ui:43
 #, kde-format
 msgctxt "@item:intext Search options"
 msgid "Search:"
@@ -2524,118 +2524,118 @@ msgstr "Procurar:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:68 settings/konsole.kcfg:22
+#: settings/GeneralSettings.ui:56 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
 msgstr "Activar os aceleradores do menu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:81
+#: settings/GeneralSettings.ui:69
 #, kde-format
 msgid "If enabled, profile settings will be ignored"
 msgstr "Se estiver activo, a configuração do perfil será ignorada"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
-#: settings/GeneralSettings.ui:84
+#: settings/GeneralSettings.ui:72
 #, kde-format
 msgid "Remember window size"
 msgstr "Recordar o tamanho da janela"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:97 settings/konsole.kcfg:17
+#: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
 msgstr "Mostrar o título da janela na barra de título"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:104 settings/konsole.kcfg:13
+#: settings/GeneralSettings.ui:92 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
 msgstr "Colocar os terminais em primeiro plano à passagem do cursor sobre eles"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
-#: settings/GeneralSettings.ui:117 settings/konsole.kcfg:69
+#: settings/GeneralSettings.ui:105 settings/konsole.kcfg:69
 #, kde-format
 msgid "Match using regular expressions"
 msgstr "Corresponder a uma expressão regular"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:130 settings/konsole.kcfg:33
+#: settings/GeneralSettings.ui:118 settings/konsole.kcfg:33
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr "Ao lançar o Konsole, reutilizar o processo existente se possível"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:133 settings/konsole.kcfg:32
+#: settings/GeneralSettings.ui:121 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
 msgstr "Executar todas as janelas do Konsole num único processo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
-#: settings/GeneralSettings.ui:146
+#: settings/GeneralSettings.ui:134
 #, kde-format
 msgid "Highlight all matches"
 msgstr "Realçar todas as ocorrências"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
-#: settings/GeneralSettings.ui:175 settings/konsole.kcfg:65
+#: settings/GeneralSettings.ui:163 settings/konsole.kcfg:65
 #, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "Define se a pesquisa faz distinção entre maiúsculas e minúsculas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
-#: settings/GeneralSettings.ui:178
+#: settings/GeneralSettings.ui:166
 #, kde-format
 msgid "Case sensitive"
 msgstr "Distinguir capitalização"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
-#: settings/GeneralSettings.ui:185 settings/konsole.kcfg:9
+#: settings/GeneralSettings.ui:173 settings/konsole.kcfg:9
 #, kde-format
 msgid "Remove window titlebar and frame"
 msgstr "Remover a barra de título e moldura da janela"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/GeneralSettings.ui:208
+#: settings/GeneralSettings.ui:196
 #, kde-format
 msgid "Process and window:"
 msgstr "Processo e janela:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: settings/GeneralSettings.ui:218
+#: settings/GeneralSettings.ui:206
 #, kde-format
 msgid "Notifications:"
 msgstr "Notificações:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:236
+#: settings/GeneralSettings.ui:224
 #, kde-format
 msgid "All dialogs will be shown again"
 msgstr "Todas as janelas serão apresentadas de novo"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
-#: settings/GeneralSettings.ui:239
+#: settings/GeneralSettings.ui:227
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
 msgstr "Activar todas as mensagens \"Não Perguntar de Novo\""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:267 settings/konsole.kcfg:79
+#: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether search should start from the bottom"
 msgstr "Define se a pesquisa deve começar a partir do fundo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
-#: settings/GeneralSettings.ui:270 settings/konsole.kcfg:78
+#: settings/GeneralSettings.ui:258 settings/konsole.kcfg:78
 #, kde-format
 msgid "Search backwards"
 msgstr "Procurar para trás"
@@ -2878,19 +2878,19 @@ msgstr ""
 "erros</a> se desejar uma alteração à forma como são tratados.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:39
+#: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "Cria um novo perfil com base no perfil seleccionado"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:42
+#: settings/ProfileSettings.ui:57
 #, kde-format
 msgid "&New..."
 msgstr "&Novo..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:52
+#: settings/ProfileSettings.ui:67
 #, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
@@ -2899,25 +2899,25 @@ msgstr ""
 "para leitura)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:55
+#: settings/ProfileSettings.ui:70
 #, kde-format
 msgid "&Edit..."
 msgstr "&Editar..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:65
+#: settings/ProfileSettings.ui:80
 #, kde-format
 msgid "Delete the selected profile"
 msgstr "Apaga o perfil seleccionado"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:68
+#: settings/ProfileSettings.ui:83
 #, kde-format
 msgid "&Remove"
 msgstr "&Remover"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:78
+#: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
 msgstr ""
@@ -2925,80 +2925,80 @@ msgstr ""
 "novas"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:81
+#: settings/ProfileSettings.ui:96
 #, kde-format
 msgid "&Set as Default"
 msgstr "E&scolher por Omissão"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
-#: settings/TabBarSettings.ui:36
+#: settings/TabBarSettings.ui:39
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Appearance"
 msgstr "Aparência"
 
 #. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
-#: settings/TabBarSettings.ui:50
+#: settings/TabBarSettings.ui:53
 #, kde-format
 msgid "Show:"
 msgstr "Mostrar:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
-#: settings/TabBarSettings.ui:60
+#: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
 msgstr "Quando necessário"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
-#: settings/TabBarSettings.ui:70
+#: settings/TabBarSettings.ui:73
 #, kde-format
 msgid "Alwa&ys"
 msgstr "&Sempre"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
-#: settings/TabBarSettings.ui:80
+#: settings/TabBarSettings.ui:83
 #, kde-format
 msgid "&Never"
 msgstr "&Nunca"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
-#: settings/TabBarSettings.ui:106
+#: settings/TabBarSettings.ui:109
 #, kde-format
 msgid "Position:"
 msgstr "Posição:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
-#: settings/TabBarSettings.ui:116
+#: settings/TabBarSettings.ui:119
 #, kde-format
 msgid "Above terminal area"
 msgstr "Acima da área dos Terminais"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
-#: settings/TabBarSettings.ui:126
+#: settings/TabBarSettings.ui:129
 #, kde-format
 msgid "Be&low terminal area"
 msgstr "De&baixo da área dos terminais"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
-#: settings/TabBarSettings.ui:152
+#: settings/TabBarSettings.ui:155
 #, kde-format
 msgid "Show Close Tab button:"
 msgstr "Mostrar o botão para 'Fechar a Página':"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
-#: settings/TabBarSettings.ui:162
+#: settings/TabBarSettings.ui:165
 #, kde-format
 msgid "&On each tab"
 msgstr "Em &cada página"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
-#: settings/TabBarSettings.ui:172
+#: settings/TabBarSettings.ui:175
 #, kde-format
 msgid "On &the tab bar"
 msgstr "Na barra de &páginas"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
-#: settings/TabBarSettings.ui:182
+#: settings/TabBarSettings.ui:185
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
@@ -3006,123 +3006,123 @@ msgstr "Nenhum"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:208 settings/TabBarSettings.ui:341
+#: settings/TabBarSettings.ui:211 settings/TabBarSettings.ui:344
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr "Diversos:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:218
+#: settings/TabBarSettings.ui:221
 #, kde-format
 msgid "Show 'New Tab' button"
 msgstr "Mostrar o botão de 'Nova Página'"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:225
+#: settings/TabBarSettings.ui:228
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr "Expandir as larguras das páginas individuais a toda a janela"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:232
+#: settings/TabBarSettings.ui:235
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr "Usar uma 'stylesheet' definida pelo utilizador:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:258
+#: settings/TabBarSettings.ui:261
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(nenhum)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:281
+#: settings/TabBarSettings.ui:284
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "Comportamento"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:295
+#: settings/TabBarSettings.ui:298
 #, kde-format
 msgid "Put new tabs:"
 msgstr "Colocar as páginas novas:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:305
+#: settings/TabBarSettings.ui:308
 #, kde-format
 msgid "At &the end"
 msgstr "No &fim"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:315
+#: settings/TabBarSettings.ui:318
 #, kde-format
 msgid "After current &tab"
 msgstr "Após a página act&ual"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:351
+#: settings/TabBarSettings.ui:354
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "Fechar a página com o botão do meio"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:374
+#: settings/TabBarSettings.ui:377
 #, kde-format
 msgid "Splits"
 msgstr "Divisórias"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:380
+#: settings/TabBarSettings.ui:383
 #, kde-format
 msgid "Show Header:"
 msgstr "Mostrar o Cabeçalho:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:387
+#: settings/TabBarSettings.ui:390
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "Quando necessário"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:397
+#: settings/TabBarSettings.ui:400
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "Nunca"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:423
+#: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "Tamanho da Pega de Arrastamento:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:433
+#: settings/TabBarSettings.ui:436
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Pequena"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:443
+#: settings/TabBarSettings.ui:446
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "Média"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:453
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Grande"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:476
+#: settings/TabBarSettings.ui:479
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -3145,13 +3145,13 @@ msgid "User cache directory (%1)"
 msgstr "Pasta de 'cache' do utilizador (%1)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: settings/TemporaryFilesSettings.ui:37
+#: settings/TemporaryFilesSettings.ui:25
 #, kde-format
 msgid "Scrollback file location:"
 msgstr "Localização dos ficheiros de posicionamento:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
-#: settings/TemporaryFilesSettings.ui:76
+#: settings/TemporaryFilesSettings.ui:64
 #, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"
