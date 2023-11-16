@@ -1755,14 +1755,14 @@ msgstr "El nom d'esta entrada en la llista"
 #: plugins/SSHManager/sshwidget.ui:99
 #, kde-format
 msgid "SSH Hostname"
-msgstr "Nom de l'ordinador SSH"
+msgstr "Nom de l'amfitrió SSH"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
 #: plugins/SSHManager/sshwidget.ui:106 plugins/SSHManager/sshwidget.ui:109
 #, kde-format
 msgid "The hostname of the server"
-msgstr "El nom d'ordinador del servidor"
+msgstr "El nom d'amfitrió del servidor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: plugins/SSHManager/sshwidget.ui:116
@@ -1802,8 +1802,8 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
-"Si açò està informat, no es té en compte la clau SSH definida més amunt, "
-"sinó en la configuració a ~/.ssh/config"
+"Si està informat, no es tindrà en compte la clau SSH establida més amunt, "
+"sinó en la configuració en ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:171
@@ -2548,7 +2548,7 @@ msgstr "Activa els acceleradors del menú"
 #: settings/GeneralSettings.ui:81
 #, kde-format
 msgid "If enabled, profile settings will be ignored"
-msgstr "Si està activada, s'ignorarà la configuració del perfil"
+msgstr "Si se selecciona, s'ignorarà la configuració del perfil"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
 #: settings/GeneralSettings.ui:84
@@ -3754,7 +3754,7 @@ msgstr "Tipus de lletra suavitzats"
 #: widgets/EditProfileAppearancePage.ui:178
 #, kde-format
 msgid "Draw intense colors in bold font"
-msgstr "Dibuixa colors intensos en el tipus de lletra negreta"
+msgstr "Dibuixa colors intensos en el tipus de lletra en negreta"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:185
@@ -5269,7 +5269,7 @@ msgstr "Nom d'usuari: %u"
 #: widgets/TabTitleFormatButton.cpp:28 widgets/TabTitleFormatButton.cpp:37
 #, kde-format
 msgid "Local Host: %h"
-msgstr "Màquina local: %h"
+msgstr "Amfitrió local: %h"
 
 #: widgets/TabTitleFormatButton.cpp:29 widgets/TabTitleFormatButton.cpp:38
 #, kde-format
@@ -5284,12 +5284,12 @@ msgstr "Nom d'usuari@ (si s'ha indicat): %U"
 #: widgets/TabTitleFormatButton.cpp:48 widgets/TabTitleFormatButton.cpp:56
 #, kde-format
 msgid "Remote Host (Short): %h"
-msgstr "Màquina remota (curt): %h"
+msgstr "Amfitrió remot (curt): %h"
 
 #: widgets/TabTitleFormatButton.cpp:49 widgets/TabTitleFormatButton.cpp:57
 #, kde-format
 msgid "Remote Host (Long): %H"
-msgstr "Màquina remota (llarg): %H"
+msgstr "Amfitrió remot (llarg): %H"
 
 #: widgets/TabTitleFormatButton.cpp:50 widgets/TabTitleFormatButton.cpp:58
 #, c-format, kde-format
