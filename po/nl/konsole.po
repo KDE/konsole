@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-14 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-10-14 10:26+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -2719,8 +2719,9 @@ msgstr "Bepaalt of overeenkomende tekst moet worden geaccentueerd"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, kde-format
-msgid "Control whether creation of child cgroups are created tabs"
+#, fuzzy, kde-format
+#| msgid "Control whether creation of child cgroups are created tabs"
+msgid "Control whether child cgroups are created for individual tabs"
 msgstr "Controleer of aanmaken van kind-cgroups aangemaakte tabbladen zijn"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)

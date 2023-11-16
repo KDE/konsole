@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-14 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-10-26 12:39+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1726,14 +1726,14 @@ msgstr "El nom d'esta entrada en la llista"
 #: plugins/SSHManager/sshwidget.ui:99
 #, kde-format
 msgid "SSH Hostname"
-msgstr "Nom de l'ordinador SSH"
+msgstr "Nom de l'amfitrió SSH"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
 #: plugins/SSHManager/sshwidget.ui:106 plugins/SSHManager/sshwidget.ui:109
 #, kde-format
 msgid "The hostname of the server"
-msgstr "El nom d'ordinador del servidor"
+msgstr "El nom d'amfitrió del servidor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: plugins/SSHManager/sshwidget.ui:116
@@ -2713,8 +2713,9 @@ msgstr "Establix quan s'hauria de ressaltar el text coincident"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, kde-format
-msgid "Control whether creation of child cgroups are created tabs"
+#, fuzzy, kde-format
+#| msgid "Control whether creation of child cgroups are created tabs"
+msgid "Control whether child cgroups are created for individual tabs"
 msgstr "Controla si les pestanyes creades es creen en «cgroups» fills"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
@@ -5348,7 +5349,7 @@ msgstr "Nom d'usuari: %u"
 
 #: widgets/TabTitleFormatButton.cpp:27
 msgid "Local Host: %h"
-msgstr "Màquina local: %h"
+msgstr "Amfitrió local: %h"
 
 #: widgets/TabTitleFormatButton.cpp:28
 msgid "User's Bourne prompt sigil: %B"
@@ -5360,11 +5361,11 @@ msgstr "Nom d'usuari@ (si s'ha indicat): %U"
 
 #: widgets/TabTitleFormatButton.cpp:36
 msgid "Remote Host (Short): %h"
-msgstr "Màquina remota (curt): %h"
+msgstr "Amfitrió remot (curt): %h"
 
 #: widgets/TabTitleFormatButton.cpp:37
 msgid "Remote Host (Long): %H"
-msgstr "Màquina remota (llarg): %H"
+msgstr "Amfitrió remot (llarg): %H"
 
 #: widgets/TabTitleFormatButton.cpp:38
 #, c-format

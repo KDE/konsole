@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-14 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-11-11 07:20\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2657,8 +2657,9 @@ msgstr "设置匹配的文本是否被高亮显示"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, kde-format
-msgid "Control whether creation of child cgroups are created tabs"
+#, fuzzy, kde-format
+#| msgid "Control whether creation of child cgroups are created tabs"
+msgid "Control whether child cgroups are created for individual tabs"
 msgstr "控制子 cgroups 的创建是否创建标签页"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)

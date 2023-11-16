@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-14 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-10-26 12:39+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2713,8 +2713,9 @@ msgstr "Estableix quan s'hauria de ressaltar el text coincident"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, kde-format
-msgid "Control whether creation of child cgroups are created tabs"
+#, fuzzy, kde-format
+#| msgid "Control whether creation of child cgroups are created tabs"
+msgid "Control whether child cgroups are created for individual tabs"
 msgstr "Controla si les pestanyes creades es creen en «cgroups» fills"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
