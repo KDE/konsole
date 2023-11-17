@@ -11,7 +11,6 @@
 
 // Konsole
 #include "../Screen.h"
-#include "../characters/ExtendedCharTable.h"
 #include "../characters/LineBlockCharacters.h"
 #include "../filterHotSpots/FilterChain.h"
 #include "../session/SessionManager.h"

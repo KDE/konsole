@@ -58,7 +58,6 @@
 #include "profile/ProfileManager.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
-#include "terminalDisplay/TerminalFonts.h"
 #include "terminalDisplay/TerminalScrollBar.h"
 
 #ifndef Q_OS_WIN

@@ -33,7 +33,6 @@
 #include "profile/ProfileManager.h"
 
 #include "Session.h"
-#include "SessionController.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"

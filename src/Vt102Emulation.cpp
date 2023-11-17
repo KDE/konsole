@@ -26,7 +26,6 @@
 #include "EscapeSequenceUrlExtractor.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
-#include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
 

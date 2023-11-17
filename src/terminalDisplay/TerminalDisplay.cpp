@@ -49,10 +49,6 @@
 #include "extras/AutoScrollHandler.h"
 #include "extras/CompositeWidgetFocusWatcher.h"
 
-#include "filterHotSpots/EscapeSequenceUrlFilter.h"
-#include "filterHotSpots/EscapeSequenceUrlFilterHotSpot.h"
-#include "filterHotSpots/FileFilterHotspot.h"
-#include "filterHotSpots/Filter.h"
 #include "filterHotSpots/HotSpot.h"
 #include "filterHotSpots/TerminalImageFilterChain.h"
 
@@ -66,7 +62,6 @@
 #include "Screen.h"
 #include "ViewManager.h" // for colorSchemeForProfile. // TODO: Rewrite this.
 #include "WindowSystemInfo.h"
-#include "konsoledebug.h"
 #include "profile/Profile.h"
 #include "session/Session.h"
 #include "session/SessionController.h"
@@ -78,7 +73,6 @@
 #include "TerminalPainter.h"
 #include "TerminalScrollBar.h"
 
-#include "unicode/localpointer.h"
 #include "unicode/ubidi.h"
 #include "unicode/uchar.h"
 #include "unicode/ushape.h"

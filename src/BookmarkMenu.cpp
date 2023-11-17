@@ -8,7 +8,6 @@
 
 // Own
 #include "BookmarkMenu.h"
-#include "Shortcut_p.h"
 
 // KDE
 #include <KActionCollection>

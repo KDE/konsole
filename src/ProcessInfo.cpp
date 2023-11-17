@@ -10,7 +10,6 @@
 // Own
 #include "NullProcessInfo.h"
 #include "ProcessInfo.h"
-#include "SSHProcessInfo.h"
 #include "UnixProcessInfo.h"
 
 // Unix

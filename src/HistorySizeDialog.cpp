@@ -9,7 +9,6 @@
 #include "HistorySizeDialog.h"
 
 // Konsole
-#include "Shortcut_p.h"
 #include "ui_HistorySizeDialog.h"
 
 #include <KLocalizedString>
