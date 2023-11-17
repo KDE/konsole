@@ -886,7 +886,6 @@ private:
     QSize _preferredSize;
 
     bool _readOnly = false;
-    static int lastSessionId;
 
     bool _isPrimaryScreen = true;
 

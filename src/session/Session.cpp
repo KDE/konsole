@@ -72,7 +72,6 @@
 
 using namespace Konsole;
 
-int Session::lastSessionId = 0;
 static bool show_disallow_certain_dbus_methods_message = true;
 
 static const int ZMODEM_BUFFER_SIZE = 1048576; // 1 Mb
@@ -84,7 +83,15 @@ Session::Session(QObject *parent)
 
     // prepare DBus communication
     new SessionAdaptor(this);
-    _sessionId = ++lastSessionId;
+
+    int maxSessionId = 0;
+    auto allSessions = SessionManager::instance()->sessions();
+    for (const auto &session : allSessions) {
+        if (session->sessionId() > maxSessionId) {
+            maxSessionId = session->sessionId();
+        }
+    }
+    _sessionId = maxSessionId + 1;
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/") + QString::number(_sessionId), this);
 
     // create emulation backend
