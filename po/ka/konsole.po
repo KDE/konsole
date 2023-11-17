@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-16 01:46+0000\n"
-"PO-Revision-Date: 2023-10-27 08:50+0200\n"
+"PO-Revision-Date: 2023-11-17 01:14+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2688,10 +2688,10 @@ msgstr "აყენებს, უნდა გამოიკვეთოს �
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, fuzzy, kde-format
-#| msgid "Control whether creation of child cgroups are created tabs"
+#, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr "აკონტროლებს, არის თუ არა შვილი cgroup-ები შექმნილი, როგორც ჩანართები"
+msgstr ""
+"აკონტროლებს, არის თუ არა შვილი cgroup-ები შექმნილი თითოეული ჩანართებისთვის"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89

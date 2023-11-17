@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-16 01:46+0000\n"
-"PO-Revision-Date: 2023-10-26 10:28+0200\n"
+"PO-Revision-Date: 2023-11-16 11:19+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -2703,10 +2703,9 @@ msgstr "Il fixa si le texto correspondente debe esser evidentiate"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, fuzzy, kde-format
-#| msgid "Control whether creation of child cgroups are created tabs"
+#, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr "Controla si creation de cgroups de filio ed shedas create"
+msgstr "Controla si cgroups de filio ws create per schedas individual"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89

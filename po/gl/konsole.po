@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-16 01:46+0000\n"
-"PO-Revision-Date: 2023-10-14 09:46+0200\n"
+"PO-Revision-Date: 2023-11-16 18:44+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -2721,10 +2721,9 @@ msgstr "Define se os textos atopados deben realzarse."
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, fuzzy, kde-format
-#| msgid "Control whether creation of child cgroups are created tabs"
+#, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr "Controlar se a creación de grupos-c aniñados son as lapelas creadas."
+msgstr "Controlar se se crean grupos-c aniñados para as lapelas individuais."
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89

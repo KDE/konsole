@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-16 01:46+0000\n"
-"PO-Revision-Date: 2023-11-12 16:39+0100\n"
+"PO-Revision-Date: 2023-11-16 07:39+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -2694,10 +2694,9 @@ msgstr "Difinas ĉu teksto kiu kongruas devus esti emfazita"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, fuzzy, kde-format
-#| msgid "Control whether creation of child cgroups are created tabs"
+#, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr "Regi ĉu kreado de infanaj cgrupoj estas kreitaj langetoj"
+msgstr "Regi ĉu infanaj cgroups estas kreitaj por individuaj langetoj"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -5374,6 +5373,3 @@ msgstr "&Agordi aŭ Alinomi langeton..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Fermi langeton"
-
-#~ msgid "open with"
-#~ msgstr "malfermi kun"
