@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2023-11-20 02:00+0000\n"
 "PO-Revision-Date: 2023-11-16 18:37+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -769,13 +769,13 @@ msgstr ""
 "breedte hebben (monospace). Elk niet-monospace lettertype kan problemen bij "
 "weergeven veroorzaken. Dit zou niet nodig zijn behalve in zeldzame gevallen."
 
-#: HistorySizeDialog.cpp:26
+#: HistorySizeDialog.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
 msgstr "Terugschuiven aanpassen"
 
-#: HistorySizeDialog.cpp:47
+#: HistorySizeDialog.cpp:46
 #, kde-format
 msgctxt "@info:status"
 msgid "Any adjustments are only temporary to this session."
@@ -2044,28 +2044,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Solaris-console"
 
-#: session/Session.cpp:97
+#: session/Session.cpp:96
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Signaal in '%1' (sessie '%2')"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:403
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Kon dit programma niet vinden: "
 
-#: session/Session.cpp:413
+#: session/Session.cpp:412
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Waarschuwing: "
 
-#: session/Session.cpp:507
+#: session/Session.cpp:506
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Kon geen interactieve shell om te starten vinden."
 
-#: session/Session.cpp:513 session/Session.cpp:515
+#: session/Session.cpp:512 session/Session.cpp:514
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2074,24 +2074,24 @@ msgstr ""
 "Kon '%1' niet vinden. In plaats daarvan wordt '%2' gestart.  Controleer uw "
 "profielinstellingen."
 
-#: session/Session.cpp:578
+#: session/Session.cpp:577
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Kon het programma '%1' niet starten met de argumenten '%2'."
 
-#: session/Session.cpp:726
+#: session/Session.cpp:725
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Stilte in '%1' (sessie '%2')"
 
-#: session/Session.cpp:727 session/Session.cpp:1928
+#: session/Session.cpp:726 session/Session.cpp:1927
 #: session/SessionController.cpp:354 session/SessionController.cpp:1801
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
 msgstr "Sessie tonen"
 
-#: session/Session.cpp:1011
+#: session/Session.cpp:1010
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2105,28 +2105,28 @@ msgstr ""
 "Konsole opnieuw te compileren. <p>Deze waarschuwing zal eenmaal getoond "
 "worden voor dit exemplaar van Konsole.</p>"
 
-#: session/Session.cpp:1051
+#: session/Session.cpp:1050
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Voltooid"
 
-#: session/Session.cpp:1065 session/Session.cpp:1081
+#: session/Session.cpp:1064 session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programma '%1' is onverwacht beëindigd."
 
-#: session/Session.cpp:1067
+#: session/Session.cpp:1066
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programma '%1' is gestopt met status %2."
 
-#: session/Session.cpp:1593
+#: session/Session.cpp:1592
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-voortgang"
 
-#: session/Session.cpp:1927
+#: session/Session.cpp:1926
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activiteit in '%1' (sessie '%2')"
@@ -3221,64 +3221,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Generatie van miniaturen inschakelen"
 
-#: terminalDisplay/TerminalDisplay.cpp:664
+#: terminalDisplay/TerminalDisplay.cpp:658
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Grootte: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2253
+#: terminalDisplay/TerminalDisplay.cpp:2247
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Wilt u %1 teken plakken?"
 msgstr[1] "Wilt u %1 tekens plakken?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2254
+#: terminalDisplay/TerminalDisplay.cpp:2248
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Plakken bevestigen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2281
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Einde tekst/Interrupt: kan het huidige proces afsluiten"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2282
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Einde van overdracht: kan het huidige proces afsluiten"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2283
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bel: zal proberen een hoorbare waarschuwing uit te sturen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Apparaatbesturing drie/XOFF: uitvoer onderbreken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitueren/onderbreken: kan het huidige proces onderbreken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: gebruikt om status van terminal te manipuleren"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Bestandsscheiding/afsluiten: kan het huidige proces afbreken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2311
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3287,31 +3287,31 @@ msgstr ""
 "De tekst die u probeert te plakken bevat verborgen besturingstekens, wilt u "
 "ze uitfilteren?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Plakken bevestigen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2315
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Plakken &zonder besturingstekens"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2316
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Alles &plakken"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Annuleren"
 
-#: terminalDisplay/TerminalDisplay.cpp:2554
+#: terminalDisplay/TerminalDisplay.cpp:2548
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3322,17 +3322,17 @@ msgstr ""
 "\">onderbroken</a> door het drukken op Ctrl+S. Druk op <b>Ctrl+Q</b> om te "
 "hervatten.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2609
+#: terminalDisplay/TerminalDisplay.cpp:2603
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Deze terminal is alleen-lezen."
 
-#: terminalDisplay/TerminalDisplay.cpp:3004
+#: terminalDisplay/TerminalDisplay.cpp:2998
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&Map wijzigen naar"
 
-#: terminalDisplay/TerminalDisplay.cpp:3037
+#: terminalDisplay/TerminalDisplay.cpp:3031
 #, kde-format
 msgid "&Paste Location"
 msgstr "Locatie &plakken"
@@ -3595,7 +3595,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Tabbladindeling laden"
 
-#: Vt102Emulation.cpp:2450
+#: Vt102Emulation.cpp:2449
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

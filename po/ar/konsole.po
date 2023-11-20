@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2023-11-20 02:00+0000\n"
 "PO-Revision-Date: 2023-05-17 20:01+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -755,13 +755,13 @@ msgstr ""
 "قد يتسبب أي خط غير أحادي المسافة في حدوث مشكلات في العرض.لا ينبغي أن يكون "
 "هذا ضروريًا إلا في حالات نادرة."
 
-#: HistorySizeDialog.cpp:26
+#: HistorySizeDialog.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
 msgstr "اضبط التمرير للخلف"
 
-#: HistorySizeDialog.cpp:47
+#: HistorySizeDialog.cpp:46
 #, kde-format
 msgctxt "@info:status"
 msgid "Any adjustments are only temporary to this session."
@@ -2027,28 +2027,28 @@ msgstr "ماك اوس"
 msgid "Solaris console"
 msgstr "لوحة تحكم سولاريز"
 
-#: session/Session.cpp:97
+#: session/Session.cpp:96
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "جرس في  '%1' ( الجلسة '%2')"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:403
 #, kde-format
 msgid "Could not find binary: "
 msgstr "لا يمكن إيجاد الملف التنفيذي:"
 
-#: session/Session.cpp:413
+#: session/Session.cpp:412
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "تحذير:"
 
-#: session/Session.cpp:507
+#: session/Session.cpp:506
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "لا يمكن إيجاد محارة تفاعلية ليبدأ بها."
 
-#: session/Session.cpp:513 session/Session.cpp:515
+#: session/Session.cpp:512 session/Session.cpp:514
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2057,24 +2057,24 @@ msgstr ""
 "لا يمكن إيجاد  '%1', سيبدأ بـ '%2' عوضا عن ذلك. رجاءا تأكد من إعدادات "
 "التشكيلة."
 
-#: session/Session.cpp:578
+#: session/Session.cpp:577
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "لا يمكن بدء البرنامج  '%1' بالمعاملات '%2'."
 
-#: session/Session.cpp:726
+#: session/Session.cpp:725
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "سكوت في '%1' (الجلسة '%2')"
 
-#: session/Session.cpp:727 session/Session.cpp:1928
+#: session/Session.cpp:726 session/Session.cpp:1927
 #: session/SessionController.cpp:354 session/SessionController.cpp:1801
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
 msgstr "اعرض الجلسة"
 
-#: session/Session.cpp:1011
+#: session/Session.cpp:1010
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2087,28 +2087,28 @@ msgstr ""
 "الاستخدام الداخلي فقط عن طريق إعادة تجميع كونسول. <p> سيظهر هذا التحذير مرة "
 "واحدة فقط لمثيل كونسول هذا. </p>"
 
-#: session/Session.cpp:1051
+#: session/Session.cpp:1050
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "انتهى"
 
-#: session/Session.cpp:1065 session/Session.cpp:1081
+#: session/Session.cpp:1064 session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "انهار البرنامج '%1' ."
 
-#: session/Session.cpp:1067
+#: session/Session.cpp:1066
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "البرنامج '%1' خرج بالحالة %2."
 
-#: session/Session.cpp:1593
+#: session/Session.cpp:1592
 #, kde-format
 msgid "ZModem Progress"
 msgstr "تقدّم ZModem"
 
-#: session/Session.cpp:1927
+#: session/Session.cpp:1926
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "نشاط في '%1' (الجلسة '%2')"
@@ -3174,12 +3174,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "مكّن توليد المصغرات"
 
-#: terminalDisplay/TerminalDisplay.cpp:664
+#: terminalDisplay/TerminalDisplay.cpp:658
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "القياس: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2253
+#: terminalDisplay/TerminalDisplay.cpp:2247
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3190,83 +3190,83 @@ msgstr[3] "هل أنت متأكد من لصق %1 محارف؟"
 msgstr[4] "هل أنت متأكد من لصق %1 محرفًا؟"
 msgstr[5] "هل أنت متأكد من لصق %1 محرف؟"
 
-#: terminalDisplay/TerminalDisplay.cpp:2254
+#: terminalDisplay/TerminalDisplay.cpp:2248
 #, kde-format
 msgid "Confirm Paste"
 msgstr "تأكيد اللصق"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2281
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "نهاية النص/المقاطعة: قد تخرج من العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2282
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "نهاية النقل: قد تخرج من العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2283
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "الجرس: سيحاول إصدار تحذير صوتي"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "Backspace"
 msgstr "مسافة للخلف"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "التحكم بالجهاز الثالثة/XOFF: يعلق الخرج"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "بديل/ معلق: قد يوقف العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "الهروب: يستخدم للتلاعب بالحالة الطرفية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "فاصل/ إنهاء الملف: قد يحبط العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2311
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "يحتوي النص الذي تحاول لصقه على أحرف تحكم مخفية، هل تريد تصفيتها؟ "
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "تأكيد اللصق"
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2315
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "ألصق &بدون أحرف التحكم"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2316
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "ألصق &كل شيء"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "أل&غِ"
 
-#: terminalDisplay/TerminalDisplay.cpp:2554
+#: terminalDisplay/TerminalDisplay.cpp:2548
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3276,17 +3276,17 @@ msgstr ""
 "<qt>المخرجات <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
 "\">علقت</a> بواسطة ضغط  Ctrl+S.  اضغط  <b>Ctrl+Q</b> للاستئنافها.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2609
+#: terminalDisplay/TerminalDisplay.cpp:2603
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "الطرفية للقراءة فقط"
 
-#: terminalDisplay/TerminalDisplay.cpp:3004
+#: terminalDisplay/TerminalDisplay.cpp:2998
 #, kde-format
 msgid "Change &Directory To"
 msgstr "غيّر ال&دليل إلى"
 
-#: terminalDisplay/TerminalDisplay.cpp:3037
+#: terminalDisplay/TerminalDisplay.cpp:3031
 #, kde-format
 msgid "&Paste Location"
 msgstr "أ&لصق المكان"
@@ -3553,7 +3553,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "حمّل تخطيط الألسن"
 
-#: Vt102Emulation.cpp:2450
+#: Vt102Emulation.cpp:2449
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

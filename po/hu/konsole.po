@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2023-11-20 02:00+0000\n"
 "PO-Revision-Date: 2022-01-25 10:17+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -758,13 +758,13 @@ msgstr ""
 "szélességűbetűtípus megjelenítési problémákat okozhat. Erre csak ritka "
 "esetekben lehet szükség."
 
-#: HistorySizeDialog.cpp:26
+#: HistorySizeDialog.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
 msgstr "Pufferelés beállítása"
 
-#: HistorySizeDialog.cpp:47
+#: HistorySizeDialog.cpp:46
 #, kde-format
 msgctxt "@info:status"
 msgid "Any adjustments are only temporary to this session."
@@ -2074,28 +2074,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Solaris konzol"
 
-#: session/Session.cpp:97
+#: session/Session.cpp:96
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Csengő - „%1” („%2” munkamenet)"
 
-#: session/Session.cpp:404
+#: session/Session.cpp:403
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Nem található ez a program: "
 
-#: session/Session.cpp:413
+#: session/Session.cpp:412
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Figyelmeztetés: "
 
-#: session/Session.cpp:507
+#: session/Session.cpp:506
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nem található indítható terminálprogram."
 
-#: session/Session.cpp:513 session/Session.cpp:515
+#: session/Session.cpp:512 session/Session.cpp:514
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2104,25 +2104,25 @@ msgstr ""
 "„%1” nem található, „%2” indul el helyette. Ellenőrizze a profil "
 "beállításait."
 
-#: session/Session.cpp:578
+#: session/Session.cpp:577
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nem sikerült elindítani: „%1” (argumentumok: „%2”)."
 
-#: session/Session.cpp:726
+#: session/Session.cpp:725
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Üresjárat - „%1” („%2” munkamenet)"
 
-#: session/Session.cpp:727 session/Session.cpp:1928
+#: session/Session.cpp:726 session/Session.cpp:1927
 #: session/SessionController.cpp:354 session/SessionController.cpp:1801
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
 #| msgid "&Close Session"
 msgid "Show session"
 msgstr "&Munkamenet bezárása"
 
-#: session/Session.cpp:1011
+#: session/Session.cpp:1010
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2136,28 +2136,28 @@ msgstr ""
 "módosíthatók. <p>Ez figyelmeztetés csak egyszer jelenik meg ebben a Konsole "
 "példányban.</p>"
 
-#: session/Session.cpp:1051
+#: session/Session.cpp:1050
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Befejezve"
 
-#: session/Session.cpp:1065 session/Session.cpp:1081
+#: session/Session.cpp:1064 session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "A(z) „%1” program összeomlott."
 
-#: session/Session.cpp:1067
+#: session/Session.cpp:1066
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "A(z) „%1” program %2 állapotkóddal fejeződött be."
 
-#: session/Session.cpp:1593
+#: session/Session.cpp:1592
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-állapot"
 
-#: session/Session.cpp:1927
+#: session/Session.cpp:1926
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitás - „%1” („%2” munkamenet)"
@@ -3246,64 +3246,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Bélyegkép-generálás bekapcsolása"
 
-#: terminalDisplay/TerminalDisplay.cpp:664
+#: terminalDisplay/TerminalDisplay.cpp:658
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Méret: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2253
+#: terminalDisplay/TerminalDisplay.cpp:2247
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Biztosan be szeretne illeszteni %1 karaktert?"
 msgstr[1] "Biztosan be szeretne illeszteni %1 karaktert?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2254
+#: terminalDisplay/TerminalDisplay.cpp:2248
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Beillesztés megerősítése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2281
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Megszakítás: kiléphet az aktuális folyamatból"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2282
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End of Transmission: kiléphet az aktuális folyamatból"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2283
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Csengő: megkísérel kiadni egy hallható figyelmeztetést"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: felfüggeszti a kimenetet"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: felfüggeszheti az aktuális folyamatot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: a terminál állapotának manipulálására szolgál"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: megszakíthatja az aktuális folyamatot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2311
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3312,31 +3312,31 @@ msgstr ""
 "A beilleszteni kívánt szöveg rejtett vezérlőkaraktereket tartalmaz, szeretné "
 "kiszűrni azokat?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Beillesztés megerősítése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2315
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Beillesztés vezérlőkarakteren &nélkül"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2316
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Minden &beillesztése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Mégsem"
 
-#: terminalDisplay/TerminalDisplay.cpp:2554
+#: terminalDisplay/TerminalDisplay.cpp:2548
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3347,17 +3347,17 @@ msgstr ""
 "\">fel lett függesztve</a> a Ctrl+S megnyomásával. A folytatáshoz nyomja meg "
 "a <b>Ctrl+Q</b>-t.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2609
+#: terminalDisplay/TerminalDisplay.cpp:2603
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ez a terminál csak."
 
-#: terminalDisplay/TerminalDisplay.cpp:3004
+#: terminalDisplay/TerminalDisplay.cpp:2998
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Mappa váltá&sa erre"
 
-#: terminalDisplay/TerminalDisplay.cpp:3037
+#: terminalDisplay/TerminalDisplay.cpp:3031
 #, kde-format
 msgid "&Paste Location"
 msgstr "Hely bei&llesztése"
@@ -3645,7 +3645,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Lapelrendezés betöltése fájlból"
 
-#: Vt102Emulation.cpp:2450
+#: Vt102Emulation.cpp:2449
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
