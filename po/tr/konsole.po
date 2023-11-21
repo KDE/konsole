@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 00:51+0000\n"
-"PO-Revision-Date: 2023-11-14 19:47+0300\n"
+"PO-Revision-Date: 2023-11-20 12:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2334,12 +2334,12 @@ msgstr "Süreç Sonlandırma İzleyicisi"
 #: session/SessionController.cpp:931
 #, kde-format
 msgid "Enlarge Font"
-msgstr "Yazıtipini Büyüt"
+msgstr "Yazıtipi Boyutunu Büyüt"
 
 #: session/SessionController.cpp:939
 #, kde-format
 msgid "Shrink Font"
-msgstr "Yazıtipini Küçült"
+msgstr "Yazıtipi Boyutunu Küçült"
 
 #: session/SessionController.cpp:944
 #, kde-format
@@ -3718,13 +3718,13 @@ msgstr "Düz yazıtipleri"
 #: widgets/EditProfileAppearancePage.ui:178
 #, kde-format
 msgid "Draw intense colors in bold font"
-msgstr "Keskin renkleri koyu yazıtipiyle çiz"
+msgstr "Yoğun renkleri koyu yazıtipiyle çiz"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:185
 #, kde-format
 msgid "Use the selected font for line characters instead of the builtin code"
-msgstr "Dahili kod yerine satır karakterleri için seçili yazıtipini kullan"
+msgstr "Yerleşik kod yerine satır karakterleri için seçili yazıtipini kullan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
