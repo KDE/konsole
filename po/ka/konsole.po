@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-20 02:00+0000\n"
+"POT-Creation-Date: 2023-11-22 01:37+0000\n"
 "PO-Revision-Date: 2023-11-17 01:14+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -2059,7 +2059,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "ჩაჩუმება '%1'-ში (სესია '%2')"
 
 #: session/Session.cpp:726 session/Session.cpp:1927
-#: session/SessionController.cpp:354 session/SessionController.cpp:1801
+#: session/SessionController.cpp:354 session/SessionController.cpp:1803
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
@@ -2145,230 +2145,230 @@ msgstr "ფაილების მმართველის გახსნ�
 msgid "Copy"
 msgstr "კოპირება"
 
-#: session/SessionController.cpp:666
+#: session/SessionController.cpp:667
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "ხედის მარჯვენა/მარცხენაზე გაყოფა"
 
-#: session/SessionController.cpp:670
+#: session/SessionController.cpp:672
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "ხედის ზედა/ქვედაზე გაყოფა"
 
-#: session/SessionController.cpp:674
+#: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
 msgstr "ყველაფრის კოპირება მოთხოვნის სტრიქონის გარდა"
 
-#: session/SessionController.cpp:680
+#: session/SessionController.cpp:682
 #, kde-format
 msgid "Copy user input"
 msgstr "მომხმარებლის შეყვანილის კოპირება"
 
-#: session/SessionController.cpp:686
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy command output"
 msgstr "ბრძანების გამოტანის კოპირება"
 
-#: session/SessionController.cpp:701
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "მონიშნულის ჩასმა"
 
-#: session/SessionController.cpp:708
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr "ვებში ძებნა"
 
-#: session/SessionController.cpp:714
+#: session/SessionController.cpp:716
 #, kde-format
 msgid "&Select All"
 msgstr "&ყველას არჩევა"
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:720
 #, kde-format
 msgid "Select &Mode"
 msgstr "აირჩიეთ &რეჟიმი"
 
-#: session/SessionController.cpp:723
+#: session/SessionController.cpp:725
 #, kde-format
 msgid "Select &Line"
 msgstr "მონიშნეთ &ხაზი"
 
-#: session/SessionController.cpp:726
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Save Output &As..."
 msgstr "ტესტის გამონატანის შენახვა, &როგორც..."
 
-#: session/SessionController.cpp:732
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&ეკრანის დაბეჭდვა..."
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "გადახვევის მორგება..."
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "საუბრის გაწმენდა"
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "გადახვევის გასუფთავება და ჩამოყრა"
 
-#: session/SessionController.cpp:753
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Switch Profile"
 msgstr "პროფილის გადართვა"
 
-#: session/SessionController.cpp:778
+#: session/SessionController.cpp:780
 #, kde-format
 msgid "Set &Encoding"
 msgstr "&კოდირების დაყენება"
 
-#: session/SessionController.cpp:800
+#: session/SessionController.cpp:802
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "თაგუნას თვალყურის დევნების დაშება"
 
-#: session/SessionController.cpp:808
+#: session/SessionController.cpp:810
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "მხოლოდ წაკითხვა"
 
-#: session/SessionController.cpp:819
+#: session/SessionController.cpp:821
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&ამ ჩანართის გამართვა ან სახელის გადარქმევა..."
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:827
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&ყველა ჩანართი მიმდინარე ფანჯარაში"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:834
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&აირჩეთ ჩანართები..."
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:840
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "არაფერი"
 
-#: session/SessionController.cpp:846
+#: session/SessionController.cpp:848
 #, kde-format
 msgid "Copy Input To"
 msgstr "შეყვანის კოპირება"
 
-#: session/SessionController.cpp:853
+#: session/SessionController.cpp:855
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem -ით ატვირთვა..."
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:860
 #, kde-format
 msgid "One-shot monitors"
 msgstr "ერთჯერადი მონიტორები"
 
-#: session/SessionController.cpp:863
+#: session/SessionController.cpp:865
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "&გარსის მონიტორინგი"
 
-#: session/SessionController.cpp:870
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "&აქტივობის მონიტორინგი"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:878
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&სიჩუმის მონიტორინგი"
 
-#: session/SessionController.cpp:882
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "პროცესის დასრულების მონიტორინგი"
 
-#: session/SessionController.cpp:889
+#: session/SessionController.cpp:891
 #, kde-format
 msgid "Enlarge Font"
 msgstr "შრიფტის გაზრდა"
 
-#: session/SessionController.cpp:897
+#: session/SessionController.cpp:899
 #, kde-format
 msgid "Shrink Font"
 msgstr "შრიფტის შემცირება"
 
-#: session/SessionController.cpp:902
+#: session/SessionController.cpp:904
 #, kde-format
 msgid "Reset Font Size"
 msgstr "ფონტის ზომის საწყის მნიშვნელობაზე დაბრუნება"
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "Send Signal"
 msgstr "სიგნალის გაგზავნა"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "&Suspend Task"
 msgstr "ამოცანის &შეჩერება"
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:919
 #, kde-format
 msgid "&Continue Task"
 msgstr "ამოცანის &გაგრძელება"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:924
 #, kde-format
 msgid "&Hangup"
 msgstr "&დაკიდება"
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:929
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "პროცესის &შეწყვეტა"
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:934
 #, kde-format
 msgid "&Terminate Task"
 msgstr "პროცესის &გაწყვეტა"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "&Kill Task"
 msgstr "პროცესის &მოკვლა"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "User Signal &1"
 msgstr "მომხმარებლის სიგნალი &1"
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:949
 #, kde-format
 msgid "User Signal &2"
 msgstr "მომხმარებლის სიგნალი &2"
 
-#: session/SessionController.cpp:965
+#: session/SessionController.cpp:967
 #, kde-format
 msgid "Create New Profile..."
 msgstr "ახალი  პროფილის შექმნა..."
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:969
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "მიმდინარე პროფილის რედაქტირება..."
 
-#: session/SessionController.cpp:1084
+#: session/SessionController.cpp:1086
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2377,7 +2377,7 @@ msgstr ""
 "ამ სესიაში ამჟამად პროცესია გაშვებული. დარწმუნებული ბრძანდებით, რომ გნებავთ, "
 "დახუროთ ის?"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1090
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2386,18 +2386,18 @@ msgstr ""
 "ამ სესიაში ამჟამად პროცესი \"%1\"-ია გაშვებული. დარწმუნებული ბრძანდებით, რომ "
 "გნებავთ, დახუროთ ის?"
 
-#: session/SessionController.cpp:1095 session/SessionController.cpp:1130
+#: session/SessionController.cpp:1097 session/SessionController.cpp:1132
 #, kde-format
 msgid "Confirm Close"
 msgstr "დახურვის დასტური"
 
-#: session/SessionController.cpp:1096
+#: session/SessionController.cpp:1098
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "პროგრამის დახურვა"
 
-#: session/SessionController.cpp:1119
+#: session/SessionController.cpp:1121
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2406,7 +2406,7 @@ msgstr ""
 "ამ ესესიაში გაშვებული პროგრამა ცოცხალი თავით არ კვდება.   გნებავთ, ძალით "
 "მოკლათ ის?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1125
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2415,28 +2415,28 @@ msgstr ""
 "ამ ესესიაში გაშვებული პროგრამა '%1' ცოცხალი თავით არ კვდება.   გნებავთ, "
 "ძალით მოკლათ ის?"
 
-#: session/SessionController.cpp:1131
+#: session/SessionController.cpp:1133
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "პროგრამის მოკვლა"
 
-#: session/SessionController.cpp:1800
+#: session/SessionController.cpp:1802
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "გარსის შეტყობინება ნაჩვენებია სესიაში '%1'"
 
-#: session/SessionController.cpp:1993
+#: session/SessionController.cpp:1995
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "მიმდინარე საქაღალდის პროგრამით გახსნა"
 
-#: session/SessionController.cpp:2060
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "ZModem-ით გადმოწერილის შენახვა ფაილში..."
 
-#: session/SessionController.cpp:2070
+#: session/SessionController.cpp:2072
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2447,13 +2447,13 @@ msgstr ""
 "შესაბამისი ZModem-ის პროგრამები ვერ ვიპოვე.</p></p>შეიძლება, 'rzsz' ან "
 "'lrzsz' პაკეტების დაყენებამ გიშველოთ.</p>"
 
-#: session/SessionController.cpp:2080
+#: session/SessionController.cpp:2082
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>მიმდინარე სესიაში ZModem-ით ფაილის გადაცემა უკვე მიმდინარეობს.</p>"
 
-#: session/SessionController.cpp:2090
+#: session/SessionController.cpp:2092
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2462,7 +2462,7 @@ msgstr ""
 "<p>ამ სისტემაში შესაბამისი ZModem-ის პროგრამები ვერ ვიპოვე.</p></p>შეიძლება, "
 "'rzsz' ან 'lrzsz' პაკეტების დაყენებამ გიშველოთ.</p>"
 
-#: session/SessionController.cpp:2095
+#: session/SessionController.cpp:2097
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "აირჩიეთ ფაილები ZModem-ით ასატვირთად"

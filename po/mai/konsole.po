@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-20 02:00+0000\n"
+"POT-Creation-Date: 2023-11-22 01:37+0000\n"
 "PO-Revision-Date: 2010-09-24 21:50+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -2238,7 +2238,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' सत्र मे शांति"
 
 #: session/Session.cpp:726 session/Session.cpp:1927
-#: session/SessionController.cpp:354 session/SessionController.cpp:1801
+#: session/SessionController.cpp:354 session/SessionController.cpp:1803
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
 #| msgid "Konsole"
@@ -2323,259 +2323,259 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: session/SessionController.cpp:666
+#: session/SessionController.cpp:667
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
 msgid "Split View Left-Right"
 msgstr "विभाजित दृश्य बम्माँ/दहिन्ना"
 
-#: session/SessionController.cpp:670
+#: session/SessionController.cpp:672
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
 msgid "Split View Top-Bottom"
 msgstr "विभाजित दृश्य शीर्ष/तल"
 
-#: session/SessionController.cpp:674
+#: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
 msgstr ""
 
-#: session/SessionController.cpp:680
+#: session/SessionController.cpp:682
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy user input"
 msgstr "इनपुट नकल करू"
 
-#: session/SessionController.cpp:686
+#: session/SessionController.cpp:688
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy command output"
 msgstr "इनपुट नकल करू"
 
-#: session/SessionController.cpp:701
+#: session/SessionController.cpp:703
 #, kde-format
 msgid "Paste Selection"
 msgstr "चयन साटू"
 
-#: session/SessionController.cpp:708
+#: session/SessionController.cpp:710
 #, kde-format
 msgid "Web Search"
 msgstr ""
 
-#: session/SessionController.cpp:714
+#: session/SessionController.cpp:716
 #, fuzzy, kde-format
 #| msgid "Select All"
 msgid "&Select All"
 msgstr "सभ चुनू"
 
-#: session/SessionController.cpp:718
+#: session/SessionController.cpp:720
 #, fuzzy, kde-format
 #| msgctxt "@action:button Pick an encoding"
 #| msgid "Select"
 msgid "Select &Mode"
 msgstr "चुनू"
 
-#: session/SessionController.cpp:723
+#: session/SessionController.cpp:725
 #, fuzzy, kde-format
 #| msgctxt "@action:button Pick an encoding"
 #| msgid "Select"
 msgid "Select &Line"
 msgstr "चुनू"
 
-#: session/SessionController.cpp:726
+#: session/SessionController.cpp:728
 #, fuzzy, kde-format
 #| msgid "Save Output..."
 msgid "Save Output &As..."
 msgstr "आउटपुट सहेजू..."
 
-#: session/SessionController.cpp:732
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
 msgstr ""
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:738
 #, fuzzy, kde-format
 #| msgid "Manage Profiles..."
 msgid "Adjust Scrollback..."
 msgstr "प्रोफाइल प्रबंधित करू..."
 
-#: session/SessionController.cpp:740
+#: session/SessionController.cpp:742
 #, fuzzy, kde-format
 #| msgid "Scrollback"
 msgid "Clear Scrollback"
 msgstr "स्क्रालबैक साफ करू"
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:746
 #, fuzzy, kde-format
 #| msgid "Clear Scrollback && Reset"
 msgid "Clear Scrollback and Reset"
 msgstr "स्क्रालबैक साफ करू आ रीसेट करू"
 
-#: session/SessionController.cpp:753
+#: session/SessionController.cpp:755
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Switch Profile"
 msgstr "प्रोफाइल संपादित करू"
 
-#: session/SessionController.cpp:778
+#: session/SessionController.cpp:780
 #, fuzzy, kde-format
 #| msgid "Encoding"
 msgid "Set &Encoding"
 msgstr "एनकोडिंग नियत करू (&E)"
 
-#: session/SessionController.cpp:800
+#: session/SessionController.cpp:802
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr ""
 
-#: session/SessionController.cpp:808
+#: session/SessionController.cpp:810
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr ""
 
-#: session/SessionController.cpp:819
+#: session/SessionController.cpp:821
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Configure or Rename Tab..."
 msgstr "टैब क' नाम बदलू... (&R)"
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:827
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr ""
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:834
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Select Tabs..."
 msgstr "टैब क' नाम बदलू... (&R)"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:840
 #, fuzzy, kde-format
 #| msgid "&None"
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "किछु नहि (&N)"
 
-#: session/SessionController.cpp:846
+#: session/SessionController.cpp:848
 #, fuzzy, kde-format
 #| msgid "Copy Input To..."
 msgid "Copy Input To"
 msgstr "इनपुट एतय नकल करू..."
 
-#: session/SessionController.cpp:853
+#: session/SessionController.cpp:855
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr ""
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:860
 #, kde-format
 msgid "One-shot monitors"
 msgstr ""
 
-#: session/SessionController.cpp:863
+#: session/SessionController.cpp:865
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "क्रिया क' लेल मानीटर करू (&A)"
 
-#: session/SessionController.cpp:870
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "क्रिया क' लेल मानीटर करू (&A)"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:878
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "शान्ति क' लेल मानीटर करू (&S)"
 
-#: session/SessionController.cpp:882
+#: session/SessionController.cpp:884
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "क्रिया क' लेल मानीटर करू (&A)"
 
-#: session/SessionController.cpp:889
+#: session/SessionController.cpp:891
 #, kde-format
 msgid "Enlarge Font"
 msgstr "फौन्ट पैघ करू"
 
-#: session/SessionController.cpp:897
+#: session/SessionController.cpp:899
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Shrink View"
 msgid "Shrink Font"
 msgstr "फौन्ट छोट करू"
 
-#: session/SessionController.cpp:902
+#: session/SessionController.cpp:904
 #, kde-format
 msgid "Reset Font Size"
 msgstr ""
 
-#: session/SessionController.cpp:908
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "Send Signal"
 msgstr ""
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "&Suspend Task"
 msgstr ""
 
-#: session/SessionController.cpp:917
+#: session/SessionController.cpp:919
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgid "&Continue Task"
 msgstr "टैब बन्न करू (&C)"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:924
 #, kde-format
 msgid "&Hangup"
 msgstr ""
 
-#: session/SessionController.cpp:927
+#: session/SessionController.cpp:929
 #, kde-format
 msgid "&Interrupt Task"
 msgstr ""
 
-#: session/SessionController.cpp:932
+#: session/SessionController.cpp:934
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "&Terminate Task"
 msgstr "टर्मिनल विशेषतासभ"
 
-#: session/SessionController.cpp:937
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "&Kill Task"
 msgstr ""
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "User Signal &1"
 msgstr ""
 
-#: session/SessionController.cpp:947
+#: session/SessionController.cpp:949
 #, kde-format
 msgid "User Signal &2"
 msgstr ""
 
-#: session/SessionController.cpp:965
+#: session/SessionController.cpp:967
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile..."
 msgstr "नवीन प्रोफाइल..."
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:969
 #, fuzzy, kde-format
 #| msgid "Manage Profiles..."
 msgid "Edit Current Profile..."
 msgstr "प्रोफाइल प्रबंधित करू..."
 
-#: session/SessionController.cpp:1084
+#: session/SessionController.cpp:1086
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2584,7 +2584,7 @@ msgstr ""
 "एकटा प्रोग्राम अखन एहि सत्र मे चलि रहल अछि. की अहाँ सुनिश्चित छी जे अहाँ एकरा बन्द "
 "कएनाइ चाहैत छी?"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1090
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2593,19 +2593,19 @@ msgstr ""
 "प्रोग्राम '%1' अखन एहि सत्र मे चलि रहल अछि. की अहाँ सुनिश्चित छी जे अहाँ एकरा बन्न "
 "कएनाइ चाहैत छी?"
 
-#: session/SessionController.cpp:1095 session/SessionController.cpp:1130
+#: session/SessionController.cpp:1097 session/SessionController.cpp:1132
 #, kde-format
 msgid "Confirm Close"
 msgstr "बन्न करबाक पुष्टि करू"
 
-#: session/SessionController.cpp:1096
+#: session/SessionController.cpp:1098
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "टैब बन्न करू (&C)"
 
-#: session/SessionController.cpp:1119
+#: session/SessionController.cpp:1121
 #, fuzzy, kde-format
 #| msgid ""
 #| "A program is currently running in this session.  Are you sure you want to "
@@ -2617,7 +2617,7 @@ msgstr ""
 "एकटा प्रोग्राम अखन एहि सत्र मे चलि रहल अछि. की अहाँ सुनिश्चित छी जे अहाँ एकरा बन्द "
 "कएनाइ चाहैत छी?"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1125
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is currently running in this session.  Are you sure you "
@@ -2629,28 +2629,28 @@ msgstr ""
 "प्रोग्राम '%1' अखन एहि सत्र मे चलि रहल अछि. की अहाँ सुनिश्चित छी जे अहाँ एकरा बन्न "
 "कएनाइ चाहैत छी?"
 
-#: session/SessionController.cpp:1131
+#: session/SessionController.cpp:1133
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1800
+#: session/SessionController.cpp:1802
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:1993
+#: session/SessionController.cpp:1995
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2060
+#: session/SessionController.cpp:2062
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr ""
 
-#: session/SessionController.cpp:2070
+#: session/SessionController.cpp:2072
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2658,20 +2658,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2080
+#: session/SessionController.cpp:2082
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2090
+#: session/SessionController.cpp:2092
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2095
+#: session/SessionController.cpp:2097
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr ""
