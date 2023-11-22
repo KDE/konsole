@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-01 00:51+0000\n"
+"POT-Creation-Date: 2023-11-22 02:26+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -2155,7 +2155,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "ئەڭگىمە «%1» نىڭدا  جىمجىتلىق"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
-#: session/SessionController.cpp:365 session/SessionController.cpp:1867
+#: session/SessionController.cpp:365 session/SessionController.cpp:1869
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
@@ -2237,245 +2237,245 @@ msgstr "ھۆججەت باشقۇرغۇچنى ئاچ"
 msgid "Copy"
 msgstr ""
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:685
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
 msgid "Split View Left-Right"
 msgstr "كۆرۈنۈشنى پارچىلاش سول/ئوڭ"
 
-#: session/SessionController.cpp:688
+#: session/SessionController.cpp:690
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
 msgid "Split View Top-Bottom"
 msgstr "كۆرۈنۈشنى پارچىلاش ئۇستى/ئاستى"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:694
 #, kde-format
 msgid "Copy except prompts"
 msgstr ""
 
-#: session/SessionController.cpp:698
+#: session/SessionController.cpp:700
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy user input"
 msgstr "كىرىشنى كۆچۈر"
 
-#: session/SessionController.cpp:704
+#: session/SessionController.cpp:706
 #, fuzzy, kde-format
 #| msgid "Copy Input"
 msgid "Copy command output"
 msgstr "كىرىشنى كۆچۈر"
 
-#: session/SessionController.cpp:719
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "Paste Selection"
 msgstr "تاللانغاننى چاپلا"
 
-#: session/SessionController.cpp:726
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Web Search"
 msgstr ""
 
-#: session/SessionController.cpp:732
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Select All"
 msgstr "ھەممىنى تاللا(&S)"
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:738
 #, fuzzy, kde-format
 #| msgctxt "@action:button Pick an encoding"
 #| msgid "Select"
 msgid "Select &Mode"
 msgstr "تاللا"
 
-#: session/SessionController.cpp:741
+#: session/SessionController.cpp:743
 #, fuzzy, kde-format
 #| msgctxt "@action:button Pick an encoding"
 #| msgid "Select"
 msgid "Select &Line"
 msgstr "تاللا"
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Save Output &As..."
 msgstr "نەتىجىنى باشقا ئاتتا ساقلا"
 
-#: session/SessionController.cpp:750
+#: session/SessionController.cpp:752
 #, kde-format
 msgid "&Print Screen..."
 msgstr ""
 
-#: session/SessionController.cpp:754
+#: session/SessionController.cpp:756
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr ""
 
-#: session/SessionController.cpp:758
+#: session/SessionController.cpp:760
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Scrollback نى تازىلاش"
 
-#: session/SessionController.cpp:762
+#: session/SessionController.cpp:764
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Scrollback نى تازىلايدۇ ۋە ئەسلىگە قايتۇرىدۇ"
 
-#: session/SessionController.cpp:771
+#: session/SessionController.cpp:773
 #, kde-format
 msgid "Switch Profile"
 msgstr ""
 
-#: session/SessionController.cpp:800
+#: session/SessionController.cpp:802
 #, kde-format
 msgid "Set &Encoding"
 msgstr "كود تەڭشەك(&E)"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:840
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr ""
 
-#: session/SessionController.cpp:846
+#: session/SessionController.cpp:848
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr ""
 
-#: session/SessionController.cpp:857
+#: session/SessionController.cpp:859
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Configure or Rename Tab..."
 msgstr "بەتكۈچ ئاتىنى ئۆزگەرت(&R)"
 
-#: session/SessionController.cpp:863
+#: session/SessionController.cpp:865
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "نۆۋەتتىكى كۆزنەكتىكى بارلىق بەتكۈچ(&A)"
 
-#: session/SessionController.cpp:870
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "بەتكۈچلەرنى تاللا(&S)…"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:878
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "يوق(&N)"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:886
 #, kde-format
 msgid "Copy Input To"
 msgstr "كىرىشنى كۆچۈر"
 
-#: session/SessionController.cpp:895
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "ZModem يۈكلەش(&Z)…"
 
-#: session/SessionController.cpp:900
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "One-shot monitors"
 msgstr ""
 
-#: session/SessionController.cpp:905
+#: session/SessionController.cpp:907
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "پائالىيەتنى كۆزەت(&A)"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "پائالىيەتنى كۆزەت(&A)"
 
-#: session/SessionController.cpp:918
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "جىمجىتلىقنى كۆزەت(&S)"
 
-#: session/SessionController.cpp:924
+#: session/SessionController.cpp:926
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "پائالىيەتنى كۆزەت(&A)"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:933
 #, kde-format
 msgid "Enlarge Font"
 msgstr "خەت نۇسخا چوڭايت"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "Shrink Font"
 msgstr "خەت نۇسخا كىچىكلەت"
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "Reset Font Size"
 msgstr ""
 
-#: session/SessionController.cpp:950
+#: session/SessionController.cpp:952
 #, kde-format
 msgid "Send Signal"
 msgstr "سىگنال ئەۋەت"
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:960
 #, kde-format
 msgid "&Suspend Task"
 msgstr ""
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:965
 #, kde-format
 msgid "&Continue Task"
 msgstr ""
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "&Hangup"
 msgstr ""
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:975
 #, kde-format
 msgid "&Interrupt Task"
 msgstr ""
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:980
 #, kde-format
 msgid "&Terminate Task"
 msgstr ""
 
-#: session/SessionController.cpp:983
+#: session/SessionController.cpp:985
 #, kde-format
 msgid "&Kill Task"
 msgstr ""
 
-#: session/SessionController.cpp:988
+#: session/SessionController.cpp:990
 #, kde-format
 msgid "User Signal &1"
 msgstr ""
 
-#: session/SessionController.cpp:993
+#: session/SessionController.cpp:995
 #, kde-format
 msgid "User Signal &2"
 msgstr ""
 
-#: session/SessionController.cpp:1011
+#: session/SessionController.cpp:1013
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
 msgid "Create New Profile..."
 msgstr "يېڭى سەپلىمە ھۆججەت"
 
-#: session/SessionController.cpp:1013
+#: session/SessionController.cpp:1015
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr ""
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1132
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2483,7 +2483,7 @@ msgid ""
 msgstr ""
 "نۆۋەتتىكى ئەڭگىمە ئىچىدە بىر پروگرامما ئىجرا بولۇۋاتىدۇ. ئۇنى ياپقۇڭىز بارمۇ؟"
 
-#: session/SessionController.cpp:1134
+#: session/SessionController.cpp:1136
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2491,55 +2491,55 @@ msgid ""
 msgstr ""
 "نۆۋەتتىكى ئەڭگىمە ئىچىدە پروگرامما«%1» ئىجرا بولۇۋاتىدۇ. ئۇنى ياپقۇڭىز بارمۇ؟"
 
-#: session/SessionController.cpp:1145 session/SessionController.cpp:1188
+#: session/SessionController.cpp:1147 session/SessionController.cpp:1190
 #, kde-format
 msgid "Confirm Close"
 msgstr "يېپىشنى جەزملە"
 
-#: session/SessionController.cpp:1146
+#: session/SessionController.cpp:1148
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "بەتكۈچنى ياپ(&C)"
 
-#: session/SessionController.cpp:1173
+#: session/SessionController.cpp:1175
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1177
+#: session/SessionController.cpp:1179
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1189
+#: session/SessionController.cpp:1191
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1863
+#: session/SessionController.cpp:1865
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2064
+#: session/SessionController.cpp:2066
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2131
+#: session/SessionController.cpp:2133
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "ZModem دا چۈشۈرگەننى ساقلا…"
 
-#: session/SessionController.cpp:2141
+#: session/SessionController.cpp:2143
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2550,14 +2550,14 @@ msgstr ""
 "ZModem يۇمشاق دېتالى يوق ئىكەن.</p><p>'rzsz' ياكى 'lrzsz' بوغچىسىنى "
 "قاچىلىسىڭىز بولارمىكىن.</p>"
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2153
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>نۆۋەتتىكى ئەڭگىمەدە ZModem ھۆججەت يوللاش مەشغۇلاتى ئېلىپ بېرىلىۋاتىدۇ.</p>"
 
-#: session/SessionController.cpp:2161
+#: session/SessionController.cpp:2163
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2566,7 +2566,7 @@ msgstr ""
 "<p>سىستېمىدا مۇۋاپىق ZModem يۇمشاق دېتالى يوق ئىكەن.</p><p>'rzsz' ياكى "
 "'lrzsz' بوغچىسىنى قاچىلىسىڭىز بولارمىكىن.</p>"
 
-#: session/SessionController.cpp:2166
+#: session/SessionController.cpp:2168
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem دا يۈكلەيدىغان ھۆججەتلەرنى تاللا"

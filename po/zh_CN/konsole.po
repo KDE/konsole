@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-01 00:51+0000\n"
+"POT-Creation-Date: 2023-11-22 02:26+0000\n"
 "PO-Revision-Date: 2023-11-19 03:43\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -2063,7 +2063,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' 中的沉默 (Session '%2')"
 
 #: session/Session.cpp:744 session/Session.cpp:1940
-#: session/SessionController.cpp:365 session/SessionController.cpp:1867
+#: session/SessionController.cpp:365 session/SessionController.cpp:1869
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
 #, kde-format
 msgid "Show session"
@@ -2147,290 +2147,290 @@ msgstr "打开文件管理器"
 msgid "Copy"
 msgstr "复制"
 
-#: session/SessionController.cpp:684
+#: session/SessionController.cpp:685
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "左右拆分视图"
 
-#: session/SessionController.cpp:688
+#: session/SessionController.cpp:690
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "上下拆分视图"
 
-#: session/SessionController.cpp:692
+#: session/SessionController.cpp:694
 #, kde-format
 msgid "Copy except prompts"
 msgstr "复制 - 不包含提示"
 
-#: session/SessionController.cpp:698
+#: session/SessionController.cpp:700
 #, kde-format
 msgid "Copy user input"
 msgstr "复制用户输入"
 
-#: session/SessionController.cpp:704
+#: session/SessionController.cpp:706
 #, kde-format
 msgid "Copy command output"
 msgstr "复制命令输出"
 
-#: session/SessionController.cpp:719
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "Paste Selection"
 msgstr "粘贴选中范围"
 
-#: session/SessionController.cpp:726
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Web Search"
 msgstr "网页搜索"
 
-#: session/SessionController.cpp:732
+#: session/SessionController.cpp:734
 #, kde-format
 msgid "&Select All"
 msgstr "全部选择(&S)"
 
-#: session/SessionController.cpp:736
+#: session/SessionController.cpp:738
 #, kde-format
 msgid "Select &Mode"
 msgstr "选择模式 (&M)"
 
-#: session/SessionController.cpp:741
+#: session/SessionController.cpp:743
 #, kde-format
 msgid "Select &Line"
 msgstr "选择行(&L)"
 
-#: session/SessionController.cpp:744
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Save Output &As..."
 msgstr "输出保存为(&A)..."
 
-#: session/SessionController.cpp:750
+#: session/SessionController.cpp:752
 #, kde-format
 msgid "&Print Screen..."
 msgstr "截屏(&P)..."
 
-#: session/SessionController.cpp:754
+#: session/SessionController.cpp:756
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "调整回滚..."
 
-#: session/SessionController.cpp:758
+#: session/SessionController.cpp:760
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "清除回滚"
 
-#: session/SessionController.cpp:762
+#: session/SessionController.cpp:764
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "清除回滚并重置"
 
-#: session/SessionController.cpp:771
+#: session/SessionController.cpp:773
 #, kde-format
 msgid "Switch Profile"
 msgstr "切换配置方案"
 
-#: session/SessionController.cpp:800
+#: session/SessionController.cpp:802
 #, kde-format
 msgid "Set &Encoding"
 msgstr "设定编码(&E)"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:840
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
 msgstr "允许鼠标跟踪"
 
-#: session/SessionController.cpp:846
+#: session/SessionController.cpp:848
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
 msgstr "只读"
 
-#: session/SessionController.cpp:857
+#: session/SessionController.cpp:859
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "配置或重命名标签页...(&C)"
 
-#: session/SessionController.cpp:863
+#: session/SessionController.cpp:865
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "当前窗口内的全部标签(&A)"
 
-#: session/SessionController.cpp:870
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "选择标签(&S)..."
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:878
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "无(&N)"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:886
 #, kde-format
 msgid "Copy Input To"
 msgstr "输入复制到"
 
-#: session/SessionController.cpp:895
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem 上传..."
 
-#: session/SessionController.cpp:900
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "One-shot monitors"
 msgstr "单次显示器"
 
-#: session/SessionController.cpp:905
+#: session/SessionController.cpp:907
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "提示显示的监视器(&P)"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "活动状态监视器(&A)"
 
-#: session/SessionController.cpp:918
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "静止状态监视器(&S)"
 
-#: session/SessionController.cpp:924
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "监视进程完成"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:933
 #, kde-format
 msgid "Enlarge Font"
 msgstr "放大字体"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "Shrink Font"
 msgstr "缩小字体"
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "Reset Font Size"
 msgstr "重置字体大小"
 
-#: session/SessionController.cpp:950
+#: session/SessionController.cpp:952
 #, kde-format
 msgid "Send Signal"
 msgstr "发送信号"
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:960
 #, kde-format
 msgid "&Suspend Task"
 msgstr "暂停任务(&S)"
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:965
 #, kde-format
 msgid "&Continue Task"
 msgstr "继续任务(&C)"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "&Hangup"
 msgstr "挂起(&H)"
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:975
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "中断任务(&I)"
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:980
 #, kde-format
 msgid "&Terminate Task"
 msgstr "终止任务(&T)"
 
-#: session/SessionController.cpp:983
+#: session/SessionController.cpp:985
 #, kde-format
 msgid "&Kill Task"
 msgstr "杀死任务(&K)"
 
-#: session/SessionController.cpp:988
+#: session/SessionController.cpp:990
 #, kde-format
 msgid "User Signal &1"
 msgstr "用户信号 &1"
 
-#: session/SessionController.cpp:993
+#: session/SessionController.cpp:995
 #, kde-format
 msgid "User Signal &2"
 msgstr "用户信号 &2"
 
-#: session/SessionController.cpp:1011
+#: session/SessionController.cpp:1013
 #, kde-format
 msgid "Create New Profile..."
 msgstr "新建配置方案..."
 
-#: session/SessionController.cpp:1013
+#: session/SessionController.cpp:1015
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "编辑当前方案..."
 
-#: session/SessionController.cpp:1130
+#: session/SessionController.cpp:1132
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "当前会话内已有一个程序在运行，您确定要关闭它吗？"
 
-#: session/SessionController.cpp:1134
+#: session/SessionController.cpp:1136
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "当前会话内已有程序“%1”在运行，您确定要关闭它吗？"
 
-#: session/SessionController.cpp:1145 session/SessionController.cpp:1188
+#: session/SessionController.cpp:1147 session/SessionController.cpp:1190
 #, kde-format
 msgid "Confirm Close"
 msgstr "确认关闭"
 
-#: session/SessionController.cpp:1146
+#: session/SessionController.cpp:1148
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "关闭程序"
 
-#: session/SessionController.cpp:1173
+#: session/SessionController.cpp:1175
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "当前会话内有一个程序在不会退出，您确定要强制杀死它吗？"
 
-#: session/SessionController.cpp:1177
+#: session/SessionController.cpp:1179
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "当前会话内的程序“%1”不会退出，您想要强制杀死它吗？"
 
-#: session/SessionController.cpp:1189
+#: session/SessionController.cpp:1191
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "杀死程序"
 
-#: session/SessionController.cpp:1863
+#: session/SessionController.cpp:1865
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "外壳程序的提示显示在会话“%1”"
 
-#: session/SessionController.cpp:2064
+#: session/SessionController.cpp:2066
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "打开当前文件夹方式"
 
-#: session/SessionController.cpp:2131
+#: session/SessionController.cpp:2133
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "保存 ZModem 下载数据到..."
 
-#: session/SessionController.cpp:2141
+#: session/SessionController.cpp:2143
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2440,13 +2440,13 @@ msgstr ""
 "<p>检测到一个 ZModem 文件传输尝试，但是在此系统上找不到合适的 ZModem 软件。</"
 "p><p>您大概需要安装“rzsz”或“lrzsz”软件包。</p>"
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2153
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>当前会话已经有一个 ZModem 文件传输在进行中。</p>"
 
-#: session/SessionController.cpp:2161
+#: session/SessionController.cpp:2163
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2455,7 +2455,7 @@ msgstr ""
 "<p>在此系统上找不到合适的 ZModem 软件。</p><p>您大概需要安装“rzsz”或“lrzsz”软"
 "件包。</p>"
 
-#: session/SessionController.cpp:2166
+#: session/SessionController.cpp:2168
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "选择要通过 ZModem 上传的文件"
