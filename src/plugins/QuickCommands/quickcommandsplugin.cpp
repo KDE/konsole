@@ -37,6 +37,24 @@ QuickCommandsPlugin::QuickCommandsPlugin(QObject *object, const QVariantList &ar
 
 QuickCommandsPlugin::~QuickCommandsPlugin() = default;
 
+namespace
+{
+void setPluginSettingVisibility(bool visible)
+{
+    QSettings settings;
+    settings.beginGroup(QStringLiteral("plugins"));
+    settings.beginGroup(QStringLiteral("quickcommands"));
+    settings.setValue("visible", visible);
+}
+
+bool getPluginSettingVisibility()
+{
+    QSettings settings;
+    settings.beginGroup(QStringLiteral("plugins"));
+    settings.beginGroup(QStringLiteral("quickcommands"));
+    return settings.value("visible", true).toBool();
+}
+}
 void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWindow)
 {
     auto *qcDockWidget = new QDockWidget(mainWindow);
@@ -45,10 +63,11 @@ void QuickCommandsPlugin::createWidgetsForMainWindow(Konsole::MainWindow *mainWi
     qcDockWidget->setWindowTitle(i18n("Quick Commands"));
     qcDockWidget->setWidget(qcWidget);
     qcDockWidget->setObjectName(QStringLiteral("QuickCommandsDock"));
-    qcDockWidget->setVisible(false);
     qcDockWidget->setAllowedAreas(Qt::DockWidgetArea::LeftDockWidgetArea | Qt::DockWidgetArea::RightDockWidgetArea);
 
     mainWindow->addDockWidget(Qt::LeftDockWidgetArea, qcDockWidget);
+    qcDockWidget->setVisible(getPluginSettingVisibility());
+
     connect(qcWidget, &QuickCommandsWidget::quickAccessShortcutChanged, this, [this, mainWindow](QKeySequence s) {
         mainWindow->actionCollection()->setDefaultShortcut(priv->showQuickAccess, s);
 
@@ -123,9 +142,17 @@ QList<QAction *> QuickCommandsPlugin::menuBarActions(Konsole::MainWindow *mainWi
 {
     QAction *toggleVisibilityAction = new QAction(i18n("Show Quick Commands"), mainWindow);
     toggleVisibilityAction->setCheckable(true);
+
     mainWindow->actionCollection()->setDefaultShortcut(toggleVisibilityAction, QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_F1));
-    connect(toggleVisibilityAction, &QAction::triggered, priv->dockForWindow[mainWindow], &QDockWidget::setVisible);
-    connect(priv->dockForWindow[mainWindow], &QDockWidget::visibilityChanged, toggleVisibilityAction, &QAction::setChecked);
+    connect(toggleVisibilityAction, &QAction::triggered, this, [toggleVisibilityAction, this, mainWindow] {
+        priv->dockForWindow[mainWindow]->setVisible(toggleVisibilityAction->isChecked());
+        setPluginSettingVisibility(toggleVisibilityAction->isChecked());
+    });
+
+    connect(priv->dockForWindow[mainWindow], &QDockWidget::visibilityChanged, [toggleVisibilityAction, this, mainWindow] {
+        toggleVisibilityAction->setChecked(priv->dockForWindow[mainWindow]->isVisible());
+        setPluginSettingVisibility(toggleVisibilityAction->isChecked());
+    });
 
     return {toggleVisibilityAction};
 }
