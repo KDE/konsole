@@ -42,7 +42,7 @@ QuickCommandsWidget::QuickCommandsWidget(QWidget *parent)
 
     priv->hasShellCheck = !QStandardPaths::findExecutable(QStringLiteral("shellcheck")).isEmpty();
     if (!priv->hasShellCheck) {
-        ui->warning->setPlainText(QStringLiteral("Missing executable shellcheck"));
+        ui->warning->setPlainText(QStringLiteral("Missing executable 'shellcheck', please install"));
     }
     priv->shellCheckTimer.setSingleShot(true);
 
@@ -203,6 +203,14 @@ void QuickCommandsWidget::invokeCommand(const QModelIndex &idx)
 
 void QuickCommandsWidget::runCommand()
 {
+    if (!priv->hasShellCheck) {
+        // check again
+        priv->hasShellCheck = !QStandardPaths::findExecutable(QStringLiteral("shellcheck")).isEmpty();
+        if (priv->hasShellCheck) {
+            ui->warning->clear();
+        }
+    }
+
     if (!ui->warning->toPlainText().isEmpty()) {
         auto choice = KMessageBox::questionTwoActions(this,
                                                       i18n("There are some errors on the script, do you really want to run it?"),
