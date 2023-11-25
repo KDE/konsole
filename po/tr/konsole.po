@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-22 02:26+0000\n"
-"PO-Revision-Date: 2023-11-20 12:45+0300\n"
+"PO-Revision-Date: 2023-11-24 13:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3323,19 +3323,19 @@ msgstr "Sonraki Sekmeden Görünümü Kendiliğinden Böl"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr "2x2 Uçbirimli Yeni Bir Sekme Yükle"
+msgstr "2 x 2 Uçbirimli Yeni Bir Sekme Yükle"
 
 #: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr "2x1 Uçbirimli Yeni Bir Sekme Yükle"
+msgstr "2 x 1 Uçbirimli Yeni Bir Sekme Yükle"
 
 #: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr "1x2 Uçbirimli Yeni Bir Sekme Yükle"
+msgstr "1 x 2 Uçbirimli Yeni Bir Sekme Yükle"
 
 #: ViewManager.cpp:191
 #, kde-format
