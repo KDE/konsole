@@ -288,8 +288,7 @@ target_link_libraries(konsoleprivate
 )
 
 set_target_properties(konsoleprivate PROPERTIES
-    VERSION ${KONSOLEPRIVATE_VERSION}
-    SOVERSION ${KONSOLEPRIVATE_SOVERSION}
+    VERSION ${RELEASE_SERVICE_VERSION}
 )
 
 install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
@@ -325,8 +324,7 @@ target_link_libraries(konsoleapp
 )
 
 set_target_properties(konsoleapp PROPERTIES
-    VERSION ${KONSOLEPRIVATE_VERSION}
-    SOVERSION ${KONSOLEPRIVATE_SOVERSION}
+    VERSION ${RELEASE_SERVICE_VERSION}
 )
 
 install(TARGETS konsoleapp ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)

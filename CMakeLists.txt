@@ -43,9 +43,6 @@ include(CheckIncludeFiles)
 # Allows passing e.g. -DECM_ENABLE_SANITIZERS='address;undefined' to cmake.
 include(ECMEnableSanitizers)
 
-ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
-    SOVERSION 1
-)
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     DBus
