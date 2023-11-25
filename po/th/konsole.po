@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-22 01:37+0000\n"
+"POT-Creation-Date: 2023-11-25 01:36+0000\n"
 "PO-Revision-Date: 2010-12-17 20:05+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -37,7 +37,7 @@ msgstr "แฟ้ม"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:289
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:297
 #: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
@@ -1336,7 +1336,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:718 MainWindow.cpp:735
+#: MainWindow.cpp:725 MainWindow.cpp:742
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1346,28 +1346,28 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "คุณมีแท็บหลายแท็บในหน้าต่างนี้ คุณแน่ใจหรือว่าคุณต้องการออกจากโปรแกรม?"
 
-#: MainWindow.cpp:724 MainWindow.cpp:741 MainWindow.cpp:755
+#: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "ยืนยันการปิด"
 
-#: MainWindow.cpp:725 MainWindow.cpp:742 MainWindow.cpp:756
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "คอนโซล-K"
 
-#: MainWindow.cpp:743 MainWindow.cpp:757
+#: MainWindow.cpp:750 MainWindow.cpp:764
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "ปิดแท็บปัจจุบัน"
 
-#: MainWindow.cpp:752
+#: MainWindow.cpp:759
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1375,7 +1375,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "คุณมีแท็บหลายแท็บในหน้าต่างนี้ คุณแน่ใจหรือว่าคุณต้องการออกจากโปรแกรม?"
 
-#: MainWindow.cpp:859 Part.cpp:297
+#: MainWindow.cpp:866 Part.cpp:297
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1383,7 +1383,7 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "สร้างโพรไฟล์ใหม่"
 
-#: MainWindow.cpp:876
+#: MainWindow.cpp:883
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Generic, common options"
 #| msgid "General"
@@ -1391,25 +1391,25 @@ msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ทั่วไป"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:893
+#: MainWindow.cpp:900
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:898
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:910
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1486,7 +1486,7 @@ msgstr "คำสั่ง:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:326
+#: plugins/QuickCommands/quickcommandswidget.cpp:334
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1557,66 +1557,66 @@ msgstr ""
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "คุณมีแท็บหลายแท็บในหน้าต่างนี้ คุณแน่ใจหรือว่าคุณต้องการออกจากโปรแกรม?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgid "Shell Errors"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:210
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:243
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:236
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:239
+#: plugins/QuickCommands/quickcommandswidget.cpp:247
 #, fuzzy, kde-format
 #| msgid "Remote Connection"
 msgid "Delete Quick Commands Configurations"
 msgstr "เชื่อมต่อทางไกล"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:269
+#: plugins/QuickCommands/quickcommandswidget.cpp:277
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:273
+#: plugins/QuickCommands/quickcommandswidget.cpp:281
 #, fuzzy, kde-format
 #| msgid "Command to execute"
 msgid "Command can not be empty"
 msgstr "คำสั่งที่จะเรียกใช้"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:293
+#: plugins/QuickCommands/quickcommandswidget.cpp:301
 #, fuzzy, kde-format
 #| msgid "Rename Tab"
 msgid "Rename"
 msgstr "เปลี่ยนชื่อแท็บ"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:297
+#: plugins/QuickCommands/quickcommandswidget.cpp:305
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:328
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1984,7 +1984,7 @@ msgstr "เชื่อมต่อทางไกล"
 msgid "Cancel Add or Edit"
 msgstr ""
 
-#: pluginsystem/PluginManager.cpp:72
+#: pluginsystem/PluginManager.cpp:70
 #, fuzzy, kde-format
 #| msgid "No profiles available"
 msgid "No plugins available"
@@ -2178,29 +2178,29 @@ msgstr ""
 msgid "Solaris console"
 msgstr "เทอร์มินัลคอนโซลโซลาริส"
 
-#: session/Session.cpp:96
+#: session/Session.cpp:103
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "มีออดเตือนในวาระ '%1'"
 
-#: session/Session.cpp:403
+#: session/Session.cpp:410
 #, kde-format
 msgid "Could not find binary: "
 msgstr "ไม่สามารถค้นหาแฟ้มไบนารีได้: "
 
-#: session/Session.cpp:412
+#: session/Session.cpp:419
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "แจ้งเตือน: "
 
-#: session/Session.cpp:506
+#: session/Session.cpp:513
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "ไม่สามารถค้นหาเชลล์ที่จะสั่งทำงานได้"
 
-#: session/Session.cpp:512 session/Session.cpp:514
+#: session/Session.cpp:519 session/Session.cpp:521
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2208,18 +2208,18 @@ msgid ""
 msgstr ""
 "ไม่สามารถค้นหา '%1' ได้, กำลังเริ่ม '%2' เพื่อใช้งานแทน  โปรดตรวจสอบการตั้งค่าโพรไฟล์ของคุณ"
 
-#: session/Session.cpp:577
+#: session/Session.cpp:584
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "ไม่สามารถเริ่มการทำงานโปรแกรม '%1' ด้วยอาร์กิวเมนต์ '%2' ได้"
 
-#: session/Session.cpp:725
+#: session/Session.cpp:732
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ไม่มีกิจกรรมใด ๆ เกิดขึ้นในวาระ '%1'"
 
-#: session/Session.cpp:726 session/Session.cpp:1927
+#: session/Session.cpp:733 session/Session.cpp:1934
 #: session/SessionController.cpp:354 session/SessionController.cpp:1803
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2227,7 +2227,7 @@ msgstr "ไม่มีกิจกรรมใด ๆ เกิดขึ้น�
 msgid "Show session"
 msgstr "คอนโซล-K"
 
-#: session/Session.cpp:1010
+#: session/Session.cpp:1017
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2236,28 +2236,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1050
+#: session/Session.cpp:1057
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "เสร็จสิ้น"
 
-#: session/Session.cpp:1064 session/Session.cpp:1080
+#: session/Session.cpp:1071 session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "โปรแกรม '%1' ทำงานข้ดข้อง"
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1073
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "โปรแกรม '%1' ออกจากการทำงานด้วยสถานะ %2"
 
-#: session/Session.cpp:1592
+#: session/Session.cpp:1599
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ความคืบหน้าของ ZModem"
 
-#: session/Session.cpp:1926
+#: session/Session.cpp:1933
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

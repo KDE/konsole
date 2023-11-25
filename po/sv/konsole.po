@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-22 01:37+0000\n"
+"POT-Creation-Date: 2023-11-25 01:36+0000\n"
 "PO-Revision-Date: 2023-10-14 19:51+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "Arkiv"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:289
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:297
 #: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
@@ -1231,7 +1231,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Läs in fliklayout..."
 
-#: MainWindow.cpp:718 MainWindow.cpp:735
+#: MainWindow.cpp:725 MainWindow.cpp:742
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1244,62 +1244,62 @@ msgstr[1] ""
 "Det finns %1 processer som kör i det här fönstret. Är du säker på att du "
 "vill avsluta?"
 
-#: MainWindow.cpp:724 MainWindow.cpp:741 MainWindow.cpp:755
+#: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Bekräfta stängning"
 
-#: MainWindow.cpp:725 MainWindow.cpp:742 MainWindow.cpp:756
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Stäng &fönster"
 
-#: MainWindow.cpp:743 MainWindow.cpp:757
+#: MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Stäng ak&tuell flik"
 
-#: MainWindow.cpp:752
+#: MainWindow.cpp:759
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Det finns %1 öppna terminaler i det här fönstret. Vill du ändå avsluta?"
 
-#: MainWindow.cpp:859 Part.cpp:297
+#: MainWindow.cpp:866 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiler"
 
-#: MainWindow.cpp:876
+#: MainWindow.cpp:883
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Allmänt"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Minne"
 
-#: MainWindow.cpp:893
+#: MainWindow.cpp:900
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Flikrad och avdelare"
 
-#: MainWindow.cpp:898
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Tillfälliga filer"
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:910
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1370,7 +1370,7 @@ msgstr "Kommando"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:326
+#: plugins/QuickCommands/quickcommandswidget.cpp:334
 #, kde-format
 msgid "Warnings"
 msgstr "Varningar"
@@ -1438,23 +1438,23 @@ msgstr "Det finns ett duplicerat objekt"
 msgid "Please fix all the warnings before trying to run this script"
 msgstr "Rätta alla varningar innan du försöker köra skriptet"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "Det finns några fel med skriptet, vill du verkligen köra det?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgid "Shell Errors"
 msgstr "Skalfel"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:210
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Kör"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:243
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1463,38 +1463,38 @@ msgstr ""
 "Du ska just ta bort gruppen %1,\n"
 " med flera inställningar. Är du säker?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:236
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Du ska just ta bort %1. Är du säker?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:239
+#: plugins/QuickCommands/quickcommandswidget.cpp:247
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Ta bort inställningar av snabbkommandon"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:269
+#: plugins/QuickCommands/quickcommandswidget.cpp:277
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "Rubriken kan inte vara tom eller bara blanktecken"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:273
+#: plugins/QuickCommands/quickcommandswidget.cpp:281
 #, kde-format
 msgid "Command can not be empty"
 msgstr "Kommandot kan inte vara tomt"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:293
+#: plugins/QuickCommands/quickcommandswidget.cpp:301
 #, kde-format
 msgid "Rename"
 msgstr "Byt namn"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:297
+#: plugins/QuickCommands/quickcommandswidget.cpp:305
 #, kde-format
 msgid "Delete"
 msgstr "Ta bort"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:328
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Varningar (*)"
@@ -1845,7 +1845,7 @@ msgstr "Lägg till ny SSH-inställningar"
 msgid "Cancel Add or Edit"
 msgstr "Avbryt tillägg eller redigering"
 
-#: pluginsystem/PluginManager.cpp:72
+#: pluginsystem/PluginManager.cpp:70
 #, kde-format
 msgid "No plugins available"
 msgstr "Inga insticksprogram tillgängliga"
@@ -2029,28 +2029,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Solaris-konsoll"
 
-#: session/Session.cpp:96
+#: session/Session.cpp:103
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Ljudsignal i '%1' (session '%2')"
 
-#: session/Session.cpp:403
+#: session/Session.cpp:410
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Kunde inte hitta binärfil: "
 
-#: session/Session.cpp:412
+#: session/Session.cpp:419
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Varning: "
 
-#: session/Session.cpp:506
+#: session/Session.cpp:513
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Kunde inte hitta ett interaktivt skal att starta."
 
-#: session/Session.cpp:512 session/Session.cpp:514
+#: session/Session.cpp:519 session/Session.cpp:521
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2059,24 +2059,24 @@ msgstr ""
 "Kunde inte hitta '%1'. Startar '%2' istället. Kontrollera dina "
 "profilinställningar."
 
-#: session/Session.cpp:577
+#: session/Session.cpp:584
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Kunde inte starta programmet '%1' med argumenten '%2'."
 
-#: session/Session.cpp:725
+#: session/Session.cpp:732
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tystnad i '%1' (session '%2')"
 
-#: session/Session.cpp:726 session/Session.cpp:1927
+#: session/Session.cpp:733 session/Session.cpp:1934
 #: session/SessionController.cpp:354 session/SessionController.cpp:1803
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
 msgstr "Visa session"
 
-#: session/Session.cpp:1010
+#: session/Session.cpp:1017
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2089,28 +2089,28 @@ msgstr ""
 "metoderna ändras till bara intern användning genom att kompilera om Terminal."
 "<p>Varningen visas bara en gång för den här instansen av Terminal.</p>"
 
-#: session/Session.cpp:1050
+#: session/Session.cpp:1057
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Avslutad"
 
-#: session/Session.cpp:1064 session/Session.cpp:1080
+#: session/Session.cpp:1071 session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programmet '%1' kraschade."
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1073
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programmet '%1' avslutades med status %2."
 
-#: session/Session.cpp:1592
+#: session/Session.cpp:1599
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Z-modemförlopp"
 
-#: session/Session.cpp:1926
+#: session/Session.cpp:1933
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitet i '%1' (session '%2')"

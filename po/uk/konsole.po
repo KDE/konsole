@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-22 01:37+0000\n"
+"POT-Creation-Date: 2023-11-25 01:36+0000\n"
 "PO-Revision-Date: 2023-11-16 18:49+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -42,7 +42,7 @@ msgstr "Файл"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:289
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:297
 #: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
@@ -1234,7 +1234,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Завантажити компонування вкладок…"
 
-#: MainWindow.cpp:718 MainWindow.cpp:735
+#: MainWindow.cpp:725 MainWindow.cpp:742
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1245,61 +1245,61 @@ msgstr[1] "У цьому вікні працюють %1 процеси. Ви с�
 msgstr[2] "У цьому вікні працюють %1 процесів. Ви справді хочете його закрити?"
 msgstr[3] "У цьому вікні працює процес. Ви справді хочете його закрити?"
 
-#: MainWindow.cpp:724 MainWindow.cpp:741 MainWindow.cpp:755
+#: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Підтвердження закриття"
 
-#: MainWindow.cpp:725 MainWindow.cpp:742 MainWindow.cpp:756
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Закрити в&ікно"
 
-#: MainWindow.cpp:743 MainWindow.cpp:757
+#: MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Закрити поточну в&кладку"
 
-#: MainWindow.cpp:752
+#: MainWindow.cpp:759
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "У цьому вікні відкрито %1 терміналів. Ви справді хочете його закрити?"
 
-#: MainWindow.cpp:859 Part.cpp:297
+#: MainWindow.cpp:866 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Профілі"
 
-#: MainWindow.cpp:876
+#: MainWindow.cpp:883
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Загальне"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Пам'ять"
 
-#: MainWindow.cpp:893
+#: MainWindow.cpp:900
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Вкладки/Поділ на панелі"
 
-#: MainWindow.cpp:898
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Тимчасові файли"
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:910
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1370,7 +1370,7 @@ msgstr "Команда"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:326
+#: plugins/QuickCommands/quickcommandswidget.cpp:334
 #, kde-format
 msgid "Warnings"
 msgstr "Попередження"
@@ -1440,23 +1440,23 @@ msgstr ""
 "Будь ласка, виправте усі попередження, перш ніж намагатися виконати цей "
 "скрипт"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "У скрипті є помилки. Ви справді хочете виконати його?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgid "Shell Errors"
 msgstr "Помилки оболонки"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:210
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Запустити"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:243
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1465,38 +1465,38 @@ msgstr ""
 "Ви наказали програмі вилучити групу %1,\n"
 " де зберігається декілька наборів налаштувань. Ви справді цього хочете?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:236
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Ви наказали програмі вилучити %1. Ви справді цього хочете?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:239
+#: plugins/QuickCommands/quickcommandswidget.cpp:247
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Вилучити налаштування швидких команд"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:269
+#: plugins/QuickCommands/quickcommandswidget.cpp:277
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "Заголовок не може бути порожнім"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:273
+#: plugins/QuickCommands/quickcommandswidget.cpp:281
 #, kde-format
 msgid "Command can not be empty"
 msgstr "Команда не може бути порожньою"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:293
+#: plugins/QuickCommands/quickcommandswidget.cpp:301
 #, kde-format
 msgid "Rename"
 msgstr "Перейменувати"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:297
+#: plugins/QuickCommands/quickcommandswidget.cpp:305
 #, kde-format
 msgid "Delete"
 msgstr "Вилучити"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:328
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Попередження (*)"
@@ -1850,7 +1850,7 @@ msgstr "Додати нові налаштування SSH"
 msgid "Cancel Add or Edit"
 msgstr "Скасувати додавання або редагування"
 
-#: pluginsystem/PluginManager.cpp:72
+#: pluginsystem/PluginManager.cpp:70
 #, kde-format
 msgid "No plugins available"
 msgstr "Немає доступних додатків"
@@ -2034,28 +2034,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Консоль Solaris"
 
-#: session/Session.cpp:96
+#: session/Session.cpp:103
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Дзвінок у сеансі «%1» (сеанс «%2»)"
 
-#: session/Session.cpp:403
+#: session/Session.cpp:410
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Не вдалося знайти файл програми: "
 
-#: session/Session.cpp:412
+#: session/Session.cpp:419
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Попередження: "
 
-#: session/Session.cpp:506
+#: session/Session.cpp:513
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Не вдалося знайти для запуску інтерактивної оболонки."
 
-#: session/Session.cpp:512 session/Session.cpp:514
+#: session/Session.cpp:519 session/Session.cpp:521
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2064,24 +2064,24 @@ msgstr ""
 "Не вдалося знайти «%1», замість неї запущено «%2». Будь ласка, перевірте "
 "параметри вашого профілю."
 
-#: session/Session.cpp:577
+#: session/Session.cpp:584
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Не вдалося запустити програму «%1» з параметрами «%2»."
 
-#: session/Session.cpp:725
+#: session/Session.cpp:732
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Тиша у «%1» (сеанс «%2»)"
 
-#: session/Session.cpp:726 session/Session.cpp:1927
+#: session/Session.cpp:733 session/Session.cpp:1934
 #: session/SessionController.cpp:354 session/SessionController.cpp:1803
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
 msgstr "Показати сеанс"
 
-#: session/Session.cpp:1010
+#: session/Session.cpp:1017
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2095,28 +2095,28 @@ msgstr ""
 "використання (internal) перезбиранням Konsole. <p>Для цього екземпляра "
 "Konsole це попередження буде показано лише одного разу.</p>"
 
-#: session/Session.cpp:1050
+#: session/Session.cpp:1057
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Завершено"
 
-#: session/Session.cpp:1064 session/Session.cpp:1080
+#: session/Session.cpp:1071 session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Програма «%1» завершила роботу у аварійному режимі."
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1073
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Програма «%1» завершилась зі станом %2."
 
-#: session/Session.cpp:1592
+#: session/Session.cpp:1599
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Поступ ZModem"
 
-#: session/Session.cpp:1926
+#: session/Session.cpp:1933
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Діяльність у «%1» (сеанс «%2»)"

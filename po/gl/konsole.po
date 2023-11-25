@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-22 01:37+0000\n"
+"POT-Creation-Date: 2023-11-25 01:36+0000\n"
 "PO-Revision-Date: 2023-11-16 18:44+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -53,7 +53,7 @@ msgstr "Ficheiro"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:289
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:297
 #: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
@@ -1250,7 +1250,7 @@ msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Cargar unha disposición de lapelas…"
 
-#: MainWindow.cpp:718 MainWindow.cpp:735
+#: MainWindow.cpp:725 MainWindow.cpp:742
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1259,61 +1259,61 @@ msgid_plural ""
 msgstr[0] "Hai un proceso a executarse nesta xanela. Quere saír aínda así?"
 msgstr[1] "Hai %1 procesos a executarse nesta xanela. Quere saír aínda así?"
 
-#: MainWindow.cpp:724 MainWindow.cpp:741 MainWindow.cpp:755
+#: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmar o peche"
 
-#: MainWindow.cpp:725 MainWindow.cpp:742 MainWindow.cpp:756
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Pechar a &xanela"
 
-#: MainWindow.cpp:743 MainWindow.cpp:757
+#: MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Pechar a &lapela actual"
 
-#: MainWindow.cpp:752
+#: MainWindow.cpp:759
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hai %1 terminais abertos nesta xanela. Quere saír aínda así?"
 
-#: MainWindow.cpp:859 Part.cpp:297
+#: MainWindow.cpp:866 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfís"
 
-#: MainWindow.cpp:876
+#: MainWindow.cpp:883
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Xeral"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memoria"
 
-#: MainWindow.cpp:893
+#: MainWindow.cpp:900
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de lapelas / Divisores"
 
-#: MainWindow.cpp:898
+#: MainWindow.cpp:905
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Ficheiros temporais"
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:910
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -1384,7 +1384,7 @@ msgstr "Orde"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:326
+#: plugins/QuickCommands/quickcommandswidget.cpp:334
 #, kde-format
 msgid "Warnings"
 msgstr "Avisos"
@@ -1452,23 +1452,23 @@ msgstr "Existe un elemento duplicado"
 msgid "Please fix all the warnings before trying to run this script"
 msgstr "Corrixa os avisos antes de intentar executar este guión."
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:208
+#: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "Hai erros no guión, seguro que quere executalo?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:209
+#: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgid "Shell Errors"
 msgstr "Erros do intérprete de ordes"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:210
+#: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Executar"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:235
+#: plugins/QuickCommands/quickcommandswidget.cpp:243
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1477,38 +1477,38 @@ msgstr ""
 "Esta a piques de eliminar o grupo %1,\n"
 " con varias configuracións, seguro que quere proceder?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:236
+#: plugins/QuickCommands/quickcommandswidget.cpp:244
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Está a piques de eliminar %1, seguro que quere proceder?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:239
+#: plugins/QuickCommands/quickcommandswidget.cpp:247
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Eliminar as configuracións de ordes rápidas"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:269
+#: plugins/QuickCommands/quickcommandswidget.cpp:277
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "O título non pode estar baleiro"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:273
+#: plugins/QuickCommands/quickcommandswidget.cpp:281
 #, kde-format
 msgid "Command can not be empty"
 msgstr "A orde non pode estar baleira"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:293
+#: plugins/QuickCommands/quickcommandswidget.cpp:301
 #, kde-format
 msgid "Rename"
 msgstr "Renomear"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:297
+#: plugins/QuickCommands/quickcommandswidget.cpp:305
 #, kde-format
 msgid "Delete"
 msgstr "Eliminar"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:328
+#: plugins/QuickCommands/quickcommandswidget.cpp:336
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Avisos (*)"
@@ -1865,7 +1865,7 @@ msgstr "Engadir unha nova configuración de SSH."
 msgid "Cancel Add or Edit"
 msgstr "Cancelar engadir ou editar."
 
-#: pluginsystem/PluginManager.cpp:72
+#: pluginsystem/PluginManager.cpp:70
 #, kde-format
 msgid "No plugins available"
 msgstr "Non hai complementos dispoñíbeis"
@@ -2049,29 +2049,29 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Consola de Solaris"
 
-#: session/Session.cpp:96
+#: session/Session.cpp:103
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Badalada en «%1» (sesión «%2»)"
 
-#: session/Session.cpp:403
+#: session/Session.cpp:410
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Non foi posíbel atopar o binario: "
 
-#: session/Session.cpp:412
+#: session/Session.cpp:419
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Aviso: "
 
-#: session/Session.cpp:506
+#: session/Session.cpp:513
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 "Non foi posíbel atopar un intérprete de ordes interactivo para iniciar."
 
-#: session/Session.cpp:512 session/Session.cpp:514
+#: session/Session.cpp:519 session/Session.cpp:521
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2080,17 +2080,17 @@ msgstr ""
 "Non foi posíbel atopar «%1», no canto iniciarase «%2». Comprobe a "
 "configuración do perfil."
 
-#: session/Session.cpp:577
+#: session/Session.cpp:584
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Non foi posíbel iniciar o programa «%1» cos argumentos «%2»."
 
-#: session/Session.cpp:725
+#: session/Session.cpp:732
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silencio en «%1» (sesión «%2»)"
 
-#: session/Session.cpp:726 session/Session.cpp:1927
+#: session/Session.cpp:733 session/Session.cpp:1934
 #: session/SessionController.cpp:354 session/SessionController.cpp:1803
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
@@ -2098,7 +2098,7 @@ msgid "Show session"
 msgstr "Amosar a sesión"
 
 # skip-rule: trasno-file-a_reverse, trasno-command_reverse
-#: session/Session.cpp:1010
+#: session/Session.cpp:1017
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2112,28 +2112,28 @@ msgstr ""
 "cambiar os métodos para que só poidan usarse internamente. <p>Este aviso só "
 "se amosará unha vez para esta instancia de Konsole.</p>"
 
-#: session/Session.cpp:1050
+#: session/Session.cpp:1057
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Rematado"
 
-#: session/Session.cpp:1064 session/Session.cpp:1080
+#: session/Session.cpp:1071 session/Session.cpp:1087
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "O programa «%1» quebrou."
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1073
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "O programa «%1» saíu co estado %2."
 
-#: session/Session.cpp:1592
+#: session/Session.cpp:1599
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progreso do ZModem"
 
-#: session/Session.cpp:1926
+#: session/Session.cpp:1933
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Actividade en «%1» (sesión «%2»)"
