@@ -894,6 +894,7 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
 #if defined(Q_OS_LINUX)
     const QString memoryPageName = i18nc("@title Preferences page name", "Memory");
     auto memoryPage = new KPageWidgetItem(new MemorySettings(confDialog), memoryPageName);
+    memoryPage->setIcon(QIcon::fromTheme(QStringLiteral("memory")));
     confDialog->addPage(memoryPage, true);
 #endif
 
