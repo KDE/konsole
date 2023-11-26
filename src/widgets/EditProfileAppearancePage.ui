@@ -28,6 +28,9 @@
      <property name="currentIndex">
       <number>9</number>
      </property>
+     <property name="documentMode">
+      <bool>true</bool>
+     </property>
      <widget class="QWidget" name="colorSchemeTab">
       <attribute name="title">
        <string>Color scheme &amp;&amp; font</string>

@@ -42,6 +42,9 @@
        <property name="title">
         <string>Tab Titles</string>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
        <layout class="QVBoxLayout">
         <item>
          <widget class="Konsole::RenameTabWidget" name="renameTabWidget" native="true">
@@ -60,6 +63,9 @@
       <widget class="QGroupBox" name="tabMonitoringGroup">
        <property name="title">
         <string>Tab Monitoring</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
        <layout class="QGridLayout">
         <item row="0" column="0" alignment="Qt::AlignRight">

@@ -34,6 +34,9 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
+     <property name="documentMode">
+      <bool>true</bool>
+     </property>
      <widget class="QWidget" name="general">
       <attribute name="title">
        <string>General Settings</string>
