@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-25 01:36+0000\n"
+"POT-Creation-Date: 2023-11-27 01:39+0000\n"
 "PO-Revision-Date: 2023-01-07 21:31+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -575,7 +575,7 @@ msgstr "Επιλέξτε την εικόνα ταπετσαρίας"
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, btnFindSshKey)
 #: colorscheme/ColorSchemeEditor.ui:154 plugins/SSHManager/sshwidget.ui:155
-#: widgets/EditProfileGeneralPage.ui:183
+#: widgets/EditProfileGeneralPage.ui:186
 #, kde-format
 msgid "..."
 msgstr "..."
@@ -817,8 +817,8 @@ msgstr "Προσθήκη"
 #. i18n: ectx: property (text), widget (QPushButton, removeEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, removeKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, removeColorSchemeButton)
-#: KeyBindingEditor.ui:72 widgets/EditProfileAppearancePage.ui:89
-#: widgets/EditProfileKeyboardPage.ui:95
+#: KeyBindingEditor.ui:72 widgets/EditProfileAppearancePage.ui:92
+#: widgets/EditProfileKeyboardPage.ui:83
 #, kde-format
 msgid "Remove"
 msgstr "Αφαίρεση"
@@ -3614,61 +3614,61 @@ msgstr ""
 "στο τερματικό δεν υπάρχουν."
 
 #. i18n: ectx: property (text), widget (QLabel, urlHintsLabel)
-#: widgets/EditProfileAdvancedPage.ui:37
+#: widgets/EditProfileAdvancedPage.ui:19
 #, kde-format
 msgid "Key combination to show URL hints:"
 msgstr "Συνδυασμός πλήκτρων για την εμφάνιση URL υποδείξεων:"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
-#: widgets/EditProfileAdvancedPage.ui:69
+#: widgets/EditProfileAdvancedPage.ui:51
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
 msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
-#: widgets/EditProfileAdvancedPage.ui:88
+#: widgets/EditProfileAdvancedPage.ui:70
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Ctrl"
 msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
-#: widgets/EditProfileAdvancedPage.ui:107
+#: widgets/EditProfileAdvancedPage.ui:89
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Alt"
 msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
-#: widgets/EditProfileAdvancedPage.ui:126
+#: widgets/EditProfileAdvancedPage.ui:108
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Meta"
 msgstr "Meta"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileAdvancedPage.ui:172
+#: widgets/EditProfileAdvancedPage.ui:154
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous:"
 msgstr "Διάφορα:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
-#: widgets/EditProfileAdvancedPage.ui:182
+#: widgets/EditProfileAdvancedPage.ui:164
 #, kde-format
 msgid "Number URL hints in reverse, starting from the bottom"
 msgstr ""
 "Απαριθμεί τις υποδείξεις σε URL με αντίστροφη σειρά, ξεκινώντας από το τέλος"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
-#: widgets/EditProfileAdvancedPage.ui:185
+#: widgets/EditProfileAdvancedPage.ui:167
 #, kde-format
 msgid "Reverse URL hint numbering"
 msgstr "Αντίστροφη απαρίθμηση υποδείξεων σε URL"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingTextButton)
-#: widgets/EditProfileAdvancedPage.ui:198
+#: widgets/EditProfileAdvancedPage.ui:180
 #, kde-format
 msgid "Allow terminal programs to create blinking sections of text"
 msgstr ""
@@ -3676,26 +3676,26 @@ msgstr ""
 "αναβοσβήνει"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingTextButton)
-#: widgets/EditProfileAdvancedPage.ui:201
+#: widgets/EditProfileAdvancedPage.ui:183
 #, kde-format
 msgid "Allow blinking text"
 msgstr "Να επιτρέπεται κείμενο με αναβόσβημα"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableFlowControlButton)
-#: widgets/EditProfileAdvancedPage.ui:214
+#: widgets/EditProfileAdvancedPage.ui:196
 #, kde-format
 msgid "Allow the output to be suspended by pressing Ctrl+S"
 msgstr "Να επιτρέπεται η αναστολή της εξόδου με το Ctrl+S"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
-#: widgets/EditProfileAdvancedPage.ui:217
+#: widgets/EditProfileAdvancedPage.ui:199
 #, kde-format
 msgid "Flow control"
 msgstr "Έλεγχος ροής"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAdvancedPage.ui:231
-#: widgets/EditProfileAppearancePage.ui:947
+#: widgets/EditProfileAdvancedPage.ui:213
+#: widgets/EditProfileAppearancePage.ui:950
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3705,45 +3705,45 @@ msgstr ""
 "Φαρσί, ή Εβραϊκά μόνο)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAdvancedPage.ui:234
-#: widgets/EditProfileAppearancePage.ui:950
+#: widgets/EditProfileAdvancedPage.ui:216
+#: widgets/EditProfileAppearancePage.ui:953
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Αποτύπωση διπλής κατεύθυνσης"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
-#: widgets/EditProfileAdvancedPage.ui:258
+#: widgets/EditProfileAdvancedPage.ui:240
 #, kde-format
 msgid "Default character encoding:"
 msgstr "Προκαθορισμένη κωδικοποίηση χαρακτήρων:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
-#: widgets/EditProfileAdvancedPage.ui:278
+#: widgets/EditProfileAdvancedPage.ui:260
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
 msgstr "Συντόμευση για γρήγορη ματιά στην κύρια οθόνη:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
-#: widgets/EditProfileAppearancePage.ui:33
+#: widgets/EditProfileAppearancePage.ui:36
 #, kde-format
 msgid "Color scheme && font"
 msgstr "Θέμα χρώματος && γραμματοσειράς"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
-#: widgets/EditProfileAppearancePage.ui:66
+#: widgets/EditProfileAppearancePage.ui:69
 #, kde-format
 msgid "Create a new color scheme based upon the selected scheme"
 msgstr "Δημιουργία ενός νέου θέματος χρωμάτων με βάση το επιλεγμένο θέμα"
 
 #. i18n: ectx: property (text), widget (QPushButton, newColorSchemeButton)
-#: widgets/EditProfileAppearancePage.ui:69
+#: widgets/EditProfileAppearancePage.ui:72
 #, kde-format
 msgctxt "@action:button Create an alternate color scheme"
 msgid "New..."
 msgstr "Νέο..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
-#: widgets/EditProfileAppearancePage.ui:76
+#: widgets/EditProfileAppearancePage.ui:79
 #, kde-format
 msgid "Edit the selected color scheme"
 msgstr "Επεξεργασία του επιλεγμένου θέματος χρωμάτων"
@@ -3752,21 +3752,21 @@ msgstr "Επεξεργασία του επιλεγμένου θέματος χρ
 #. i18n: ectx: property (text), widget (QPushButton, environmentEditButton)
 #. i18n: ectx: property (text), widget (QPushButton, textEditorCustomBtn)
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
-#: widgets/EditProfileAppearancePage.ui:79
-#: widgets/EditProfileGeneralPage.ui:224 widgets/EditProfileKeyboardPage.ui:85
-#: widgets/EditProfileMousePage.ui:310
+#: widgets/EditProfileAppearancePage.ui:82
+#: widgets/EditProfileGeneralPage.ui:227 widgets/EditProfileKeyboardPage.ui:73
+#: widgets/EditProfileMousePage.ui:313
 #, kde-format
 msgid "Edit..."
 msgstr "Επεξεργασία..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
-#: widgets/EditProfileAppearancePage.ui:86
+#: widgets/EditProfileAppearancePage.ui:89
 #, kde-format
 msgid "Delete the selected color scheme"
 msgstr "Διαγραφή του επιλεγμένου θέματος χρωμάτων"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
-#: widgets/EditProfileAppearancePage.ui:96
+#: widgets/EditProfileAppearancePage.ui:99
 #, kde-format
 msgid "Reset the selected color scheme settings to the default values"
 msgstr ""
@@ -3775,39 +3775,39 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
-#: widgets/EditProfileAppearancePage.ui:99
-#: widgets/EditProfileKeyboardPage.ui:105
+#: widgets/EditProfileAppearancePage.ui:102
+#: widgets/EditProfileKeyboardPage.ui:93
 #, kde-format
 msgid "Defaults"
 msgstr "Προκαθορισμένα"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
-#: widgets/EditProfileAppearancePage.ui:132
+#: widgets/EditProfileAppearancePage.ui:135
 #, kde-format
 msgid "Font:"
 msgstr "Γραμματοσειρά:"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
-#: widgets/EditProfileAppearancePage.ui:164
+#: widgets/EditProfileAppearancePage.ui:167
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
 msgstr "Επιλογή..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
-#: widgets/EditProfileAppearancePage.ui:171
+#: widgets/EditProfileAppearancePage.ui:174
 #, kde-format
 msgid "Smooth fonts"
 msgstr "Ομαλές γραμματοσειρές"
 
 #. i18n: ectx: property (text), widget (QCheckBox, boldIntenseButton)
-#: widgets/EditProfileAppearancePage.ui:178
+#: widgets/EditProfileAppearancePage.ui:181
 #, kde-format
 msgid "Draw intense colors in bold font"
 msgstr "Σχεδίαση έντονων χρωμάτων σε έντονη γραμματοσειρά"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
-#: widgets/EditProfileAppearancePage.ui:185
+#: widgets/EditProfileAppearancePage.ui:188
 #, kde-format
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
@@ -3815,95 +3815,95 @@ msgstr ""
 "ενσωματωμένου κώδικα"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
-#: widgets/EditProfileAppearancePage.ui:188
+#: widgets/EditProfileAppearancePage.ui:191
 #, kde-format
 msgid "Use line characters contained in font"
 msgstr "Χρήση χαρακτήρων γραμμής που περιέχει η γραμματοσειρά"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
-#: widgets/EditProfileAppearancePage.ui:196
+#: widgets/EditProfileAppearancePage.ui:199
 #, kde-format
 msgid "Cursor"
 msgstr "Δρομέας"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileAppearancePage.ui:216
+#: widgets/EditProfileAppearancePage.ui:219
 #, kde-format
 msgid "Shape:"
 msgstr "Σχήμα:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
-#: widgets/EditProfileAppearancePage.ui:226
+#: widgets/EditProfileAppearancePage.ui:229
 #, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
 msgstr "Μπλοκ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
-#: widgets/EditProfileAppearancePage.ui:236
+#: widgets/EditProfileAppearancePage.ui:239
 #, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
 msgstr "I-Beam"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
-#: widgets/EditProfileAppearancePage.ui:246
+#: widgets/EditProfileAppearancePage.ui:249
 #, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
 msgstr "Υπογράμμιση"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: widgets/EditProfileAppearancePage.ui:278
+#: widgets/EditProfileAppearancePage.ui:281
 #, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
 msgstr "Χρώμα:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:294
+#: widgets/EditProfileAppearancePage.ui:297
 #, kde-format
 msgid "Set the cursor to match the color of the character underneath it."
 msgstr "Ορισμός του δρομέα στο χρώμα του από κάτω χαρακτήρα του."
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:297
+#: widgets/EditProfileAppearancePage.ui:300
 #, kde-format
 msgid "Match current character"
 msgstr "Ταίριασμα με τον τρέχοντα χαρακτήρα"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:313
+#: widgets/EditProfileAppearancePage.ui:316
 #, kde-format
 msgid "Use a custom, fixed color for the cursor"
 msgstr "Χρήση ενός προσαρμοσμένου, σταθερού χρώματος για το δρομέα"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:316
+#: widgets/EditProfileAppearancePage.ui:319
 #, kde-format
 msgid "Custom cursor color"
 msgstr "Προσαρμοσμένο χρώμα δρομέα"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
-#: widgets/EditProfileAppearancePage.ui:347
+#: widgets/EditProfileAppearancePage.ui:350
 #, kde-format
 msgid "Cursor:"
 msgstr "Δρομέας:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:360
+#: widgets/EditProfileAppearancePage.ui:363
 #, kde-format
 msgid "Select the color used to draw the cursor"
 msgstr "Επιλέξτε το χρώμα που θα χρησιμοποιηθεί για τη σχεδίαση του δρομέα"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
-#: widgets/EditProfileAppearancePage.ui:380
+#: widgets/EditProfileAppearancePage.ui:383
 #, kde-format
 msgid "Text:"
 msgstr "Κείμενο:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:393
+#: widgets/EditProfileAppearancePage.ui:396
 #, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
 msgstr ""
@@ -3911,41 +3911,41 @@ msgstr ""
 "θέση του δρομέα"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileAppearancePage.ui:418
+#: widgets/EditProfileAppearancePage.ui:421
 #, kde-format
 msgid "Blinking:"
 msgstr "Αναβόσβημα:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
-#: widgets/EditProfileAppearancePage.ui:434
+#: widgets/EditProfileAppearancePage.ui:437
 #, kde-format
 msgid "Make the cursor blink regularly"
 msgstr "Αναβόσβημα του δρομέα τακτικά"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
-#: widgets/EditProfileAppearancePage.ui:437
-#: widgets/EditProfileAppearancePage.ui:720
+#: widgets/EditProfileAppearancePage.ui:440
+#: widgets/EditProfileAppearancePage.ui:723
 #, kde-format
 msgid "Enabled"
 msgstr "Ενεργό"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:460 widgets/EditProfileMousePage.ui:249
+#: widgets/EditProfileAppearancePage.ui:463 widgets/EditProfileMousePage.ui:252
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
 msgstr "Διάφορα"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileAppearancePage.ui:471
+#: widgets/EditProfileAppearancePage.ui:474
 #, kde-format
 msgid "Window:"
 msgstr "Παράθυρο:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:478
+#: widgets/EditProfileAppearancePage.ui:481
 #, kde-format
 msgid ""
 "Show terminal size in columns and lines in the center of window after "
@@ -3955,25 +3955,25 @@ msgstr ""
 "παραθύρου μετά την αλλαγή μεγέθους"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:481
+#: widgets/EditProfileAppearancePage.ui:484
 #, kde-format
 msgid "Show hint for terminal size after resizing"
 msgstr "Εμφάνιση υπόδειξης για το μέγεθος τερματικού μετά την αλλαγή μεγέθους"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
-#: widgets/EditProfileAppearancePage.ui:488
+#: widgets/EditProfileAppearancePage.ui:491
 #, kde-format
 msgid "Always invert the colors of selected text"
 msgstr "Πάντα να αντιστρέφονται τα χρώματα του επιλεγμένου κειμένου"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
-#: widgets/EditProfileAppearancePage.ui:497
+#: widgets/EditProfileAppearancePage.ui:500
 #, kde-format
 msgid "Darkening strength:"
 msgstr "Ένταση προς το σκούρο:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
-#: widgets/EditProfileAppearancePage.ui:530
+#: widgets/EditProfileAppearancePage.ui:533
 #, fuzzy, kde-format
 #| msgctxt "Cursor color options"
 #| msgid "Color:"
@@ -3982,122 +3982,122 @@ msgid "Color:"
 msgstr "Χρώμα:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
-#: widgets/EditProfileAppearancePage.ui:546
+#: widgets/EditProfileAppearancePage.ui:549
 #, fuzzy, kde-format
 #| msgid "Select the color used to draw the cursor"
 msgid "Select the color used to draw the border"
 msgstr "Επιλέξτε το χρώμα που θα χρησιμοποιηθεί για τη σχεδίαση του δρομέα"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:568
+#: widgets/EditProfileAppearancePage.ui:571
 #, kde-format
 msgid "Inactive Terminals:"
 msgstr "Αδρανή τερματικά:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileAppearancePage.ui:578
+#: widgets/EditProfileAppearancePage.ui:581
 #, fuzzy, kde-format
 #| msgid "Inactive Terminals:"
 msgid "Active Terminals:"
 msgstr "Αδρανή τερματικά:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:588
+#: widgets/EditProfileAppearancePage.ui:591
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
 msgstr "Περιεχόμενα τερματικού"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:600
+#: widgets/EditProfileAppearancePage.ui:603
 #, kde-format
 msgid "Line spacing:"
 msgstr "Διάστιχο γραμμής:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:618
+#: widgets/EditProfileAppearancePage.ui:621
 #, kde-format
 msgid "The number of pixels between two lines"
 msgstr "Ο αριθμός των εικονοστοιχείων μεταξύ δύο γραμμών"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#: widgets/EditProfileAppearancePage.ui:621
-#: widgets/EditProfileAppearancePage.ui:673
+#: widgets/EditProfileAppearancePage.ui:624
+#: widgets/EditProfileAppearancePage.ui:676
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
 msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:655
+#: widgets/EditProfileAppearancePage.ui:658
 #, kde-format
 msgid "Margins:"
 msgstr "Περιθώρια:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:707
+#: widgets/EditProfileAppearancePage.ui:710
 #, kde-format
 msgid "Align to center:"
 msgstr "Στοίχιση στο κέντρο:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:730
+#: widgets/EditProfileAppearancePage.ui:733
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
 msgstr "Ένδειξη (αν)ενεργού παραθύρου με μείωση της χρωματικής έντασης"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:733
+#: widgets/EditProfileAppearancePage.ui:736
 #, kde-format
 msgid "Darken"
 msgstr "Πιο σκούρο"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:740
+#: widgets/EditProfileAppearancePage.ui:743
 #, fuzzy, kde-format
 #| msgid "Indicate whether the window is active by dimming the colors"
 msgid "Indicate whether the window is active by drawing a border"
 msgstr "Ένδειξη (αν)ενεργού παραθύρου με μείωση της χρωματικής έντασης"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:743
+#: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Border"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:785
+#: widgets/EditProfileAppearancePage.ui:788
 #, kde-format
 msgid "Display Vertical line at column:"
 msgstr "Εμφάνιση κατακόρυφης γραμμής στη στήλη:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:830
+#: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr "<html><head/><body><p>Σύνθετη διάταξη κειμένου</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:833
+#: widgets/EditProfileAppearancePage.ui:836
 #, kde-format
 msgid "Complex Text Layout"
 msgstr "Σύνθετη διάταξη κειμένου"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:857
+#: widgets/EditProfileAppearancePage.ui:860
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "Ενεργοποίηση αποτύπωσης κειμένου με λειτουργία λέξεων"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:860
+#: widgets/EditProfileAppearancePage.ui:863
 #, kde-format
 msgid "Word mode"
 msgstr "Λειτουργία λέξεων"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:873
+#: widgets/EditProfileAppearancePage.ui:876
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4107,43 +4107,43 @@ msgstr ""
 "αποτύπωση αλλαγών στις ιδιότητες καταστρέφει τη λέξη)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:876
+#: widgets/EditProfileAppearancePage.ui:879
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "Χρήση των ίδιων ιδιοτήτων για όλη τη λέξη"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:889
+#: widgets/EditProfileAppearancePage.ui:892
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "Να αποτυπώνονται μαζί οι λέξεις με ASCII χαρακτήρες"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:892
+#: widgets/EditProfileAppearancePage.ui:895
 #, kde-format
 msgid "ASCII characters "
 msgstr "ASCII χαρακτήρες "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:905
+#: widgets/EditProfileAppearancePage.ui:908
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "Να αποτυπώνονται μαζί οι λέξεις με χαρακτήρες Βραχμικής γραφής"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:908
+#: widgets/EditProfileAppearancePage.ui:911
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "Χαρακτήρες Βραχμικής γραφής"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:921
+#: widgets/EditProfileAppearancePage.ui:924
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Γραμματοσειρά εμότζι:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:963
+#: widgets/EditProfileAppearancePage.ui:966
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
@@ -4151,25 +4151,25 @@ msgstr ""
 "πρώτος έντονος χαρακτήρας."
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:966
+#: widgets/EditProfileAppearancePage.ui:969
 #, kde-format
 msgid "force LTR line direction"
 msgstr "υποχρεωτική κατεύθυνση γραμμών από αριστερά (LTR)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:979
+#: widgets/EditProfileAppearancePage.ui:982
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Να γίνεται μεταχείριση των χαρακτήρων σχεδίασης πίνακα ως έντονων LTR."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:982
+#: widgets/EditProfileAppearancePage.ui:985
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Αντικατάσταση λειτουργίας BiDi χαρακτήρων πίνακα"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:995
+#: widgets/EditProfileAppearancePage.ui:998
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Paste &without control characters"
@@ -4177,7 +4177,7 @@ msgid "Ignore wcwidth of problematic characters"
 msgstr "Επικόλληση χωρί&ς χαρακτήρες ελέγχου"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:998
+#: widgets/EditProfileAppearancePage.ui:1001
 #, kde-format
 msgid "Override wcwidth"
 msgstr ""
@@ -4411,44 +4411,44 @@ msgid "Text Editor Custom Command"
 msgstr "Προσαρμοσμένη εντολή κειμενογράφου"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
-#: widgets/EditProfileGeneralPage.ui:39
+#: widgets/EditProfileGeneralPage.ui:42
 #, kde-format
 msgid "General Settings"
 msgstr "Γενικές ρυθμίσεις"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
-#: widgets/EditProfileGeneralPage.ui:63
+#: widgets/EditProfileGeneralPage.ui:66
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
 msgstr "Επιλέξτε το εμφανιζόμενο εικονίδιο στις καρτέλες αυτού του προφίλ"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
-#: widgets/EditProfileGeneralPage.ui:81
+#: widgets/EditProfileGeneralPage.ui:84
 #, kde-format
 msgid "A descriptive name for the profile"
 msgstr "Ένα περιγραφικό όνομα για το προφίλ"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
-#: widgets/EditProfileGeneralPage.ui:84
+#: widgets/EditProfileGeneralPage.ui:87
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Profile name"
 msgstr "Όνομα προφίλ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
-#: widgets/EditProfileGeneralPage.ui:91
+#: widgets/EditProfileGeneralPage.ui:94
 #, kde-format
 msgid "Default Profile"
 msgstr "Προκαθορισμένο προφίλ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: widgets/EditProfileGeneralPage.ui:122
+#: widgets/EditProfileGeneralPage.ui:125
 #, kde-format
 msgid "Command:"
 msgstr "Εντολή:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, commandEdit)
-#: widgets/EditProfileGeneralPage.ui:135
+#: widgets/EditProfileGeneralPage.ui:138
 #, kde-format
 msgid ""
 "The command to execute when new terminal sessions are created using this "
@@ -4458,19 +4458,19 @@ msgstr ""
 "αυτό το προφίλ"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
-#: widgets/EditProfileGeneralPage.ui:141
+#: widgets/EditProfileGeneralPage.ui:144
 #, kde-format
 msgid "/bin/sh"
 msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
-#: widgets/EditProfileGeneralPage.ui:154
+#: widgets/EditProfileGeneralPage.ui:157
 #, kde-format
 msgid "Initial directory:"
 msgstr "Αρχικός κατάλογος:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
-#: widgets/EditProfileGeneralPage.ui:167
+#: widgets/EditProfileGeneralPage.ui:170
 #, kde-format
 msgid ""
 "The initial working directory for new terminal sessions using this profile"
@@ -4479,44 +4479,44 @@ msgstr ""
 "προφίλ"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
-#: widgets/EditProfileGeneralPage.ui:173
+#: widgets/EditProfileGeneralPage.ui:176
 #, kde-format
 msgid "/home/username"
 msgstr "/home/username"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, dirSelectButton)
-#: widgets/EditProfileGeneralPage.ui:180
+#: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "Choose the initial directory"
 msgstr "Επιλέξτε τον αρχικό κατάλογο"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
-#: widgets/EditProfileGeneralPage.ui:190
+#: widgets/EditProfileGeneralPage.ui:193
 #, kde-format
 msgid "Start in same directory as current session"
 msgstr "Έναρξη στον ίδιο κατάλογο με την τρέχουσα συνεδρία"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileGeneralPage.ui:203
+#: widgets/EditProfileGeneralPage.ui:206
 #, kde-format
 msgid "Environment:"
 msgstr "Περιβάλλον:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, environmentEditButton)
-#: widgets/EditProfileGeneralPage.ui:221
+#: widgets/EditProfileGeneralPage.ui:224
 #, kde-format
 msgid "Edit the list of environment variables and associated values"
 msgstr ""
 "Επεξεργασία λίστας των μεταβλητών περιβάλλοντος και των σχετιζόμενων τιμών"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileGeneralPage.ui:268
+#: widgets/EditProfileGeneralPage.ui:271
 #, kde-format
 msgid "Initial terminal size:"
 msgstr "Αρχικό μέγεθος τερματικού:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
-#: widgets/EditProfileGeneralPage.ui:343
+#: widgets/EditProfileGeneralPage.ui:346
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -4530,32 +4530,32 @@ msgstr ""
 "body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
-#: widgets/EditProfileGeneralPage.ui:356
+#: widgets/EditProfileGeneralPage.ui:359
 #, kde-format
 msgid "Terminal bell mode:"
 msgstr "Λειτουργία κουδουνιού τερματικού:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
-#: widgets/EditProfileGeneralPage.ui:374
+#: widgets/EditProfileGeneralPage.ui:377
 #, kde-format
 msgid "Semantic Integration"
 msgstr "Σημασιολογική ολοκλήρωση"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
-#: widgets/EditProfileGeneralPage.ui:380
+#: widgets/EditProfileGeneralPage.ui:383
 #, kde-format
 msgid "Up/Down Arrows emulation"
 msgstr "Εξομοίωση βελών πάνω/κάτω"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
-#: widgets/EditProfileGeneralPage.ui:387
+#: widgets/EditProfileGeneralPage.ui:390
 #, kde-format
 msgid "Mouse click in input line moves cursor"
 msgstr ""
 "Το κλικ με το ποντίκι σε γραμμή εισαγωγής κειμένου μετακινεί τον δρομέα"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileGeneralPage.ui:400
+#: widgets/EditProfileGeneralPage.ui:403
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Συμβουλές σημασιολογίας:"
@@ -4565,9 +4565,9 @@ msgstr "Συμβουλές σημασιολογίας:"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:410 widgets/EditProfileGeneralPage.ui:456
-#: widgets/EditProfileGeneralPage.ui:502 widgets/EditProfileGeneralPage.ui:548
-#: widgets/EditProfileGeneralPage.ui:594
+#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
+#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
+#: widgets/EditProfileGeneralPage.ui:597
 #, kde-format
 msgctxt "Never"
 msgid "Never"
@@ -4578,9 +4578,9 @@ msgstr "Ποτέ"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:420 widgets/EditProfileGeneralPage.ui:466
-#: widgets/EditProfileGeneralPage.ui:512 widgets/EditProfileGeneralPage.ui:558
-#: widgets/EditProfileGeneralPage.ui:604
+#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
+#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
+#: widgets/EditProfileGeneralPage.ui:607
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
@@ -4591,40 +4591,40 @@ msgstr "Εμφάνιση συμβουλών URL"
 #. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:430 widgets/EditProfileGeneralPage.ui:476
-#: widgets/EditProfileGeneralPage.ui:522 widgets/EditProfileGeneralPage.ui:568
-#: widgets/EditProfileGeneralPage.ui:614
+#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
+#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
+#: widgets/EditProfileGeneralPage.ui:617
 #, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Πάντα"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
-#: widgets/EditProfileGeneralPage.ui:446
+#: widgets/EditProfileGeneralPage.ui:449
 #, kde-format
 msgid "Red error bars:"
 msgstr "Κόκκινες γραμμές σφαλμάτων:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
-#: widgets/EditProfileGeneralPage.ui:492
+#: widgets/EditProfileGeneralPage.ui:495
 #, kde-format
 msgid "Red error background:"
 msgstr "Κόκκινο φόντο σφαλμάτων:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
-#: widgets/EditProfileGeneralPage.ui:538
+#: widgets/EditProfileGeneralPage.ui:541
 #, kde-format
 msgid "Alternating bars:"
 msgstr "Εναλλαγή γραμμών:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
-#: widgets/EditProfileGeneralPage.ui:584
+#: widgets/EditProfileGeneralPage.ui:587
 #, kde-format
 msgid "Alternating background:"
 msgstr "Εναλλαγή φόντου:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
-#: widgets/EditProfileKeyboardPage.ui:29
+#: widgets/EditProfileKeyboardPage.ui:17
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -4639,7 +4639,7 @@ msgstr ""
 "συνδυασμών πλήκτρων, κοιτάξτε στο εγχειρίδιο της Κονσόλας."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
-#: widgets/EditProfileKeyboardPage.ui:72
+#: widgets/EditProfileKeyboardPage.ui:60
 #, kde-format
 msgid "Create a new key bindings scheme based upon the selected bindings"
 msgstr ""
@@ -4647,26 +4647,26 @@ msgstr ""
 "συνδυασμούς"
 
 #. i18n: ectx: property (text), widget (QPushButton, newKeyBindingsButton)
-#: widgets/EditProfileKeyboardPage.ui:75
+#: widgets/EditProfileKeyboardPage.ui:63
 #, kde-format
 msgctxt "@action:button Create an alternate key binding"
 msgid "New..."
 msgstr "Νέο..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
-#: widgets/EditProfileKeyboardPage.ui:82
+#: widgets/EditProfileKeyboardPage.ui:70
 #, kde-format
 msgid "Edit the selected key bindings scheme"
 msgstr "Επεξεργασία του επιλεγμένου θέματος συνδυασμών πλήκτρων"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeKeyBindingsButton)
-#: widgets/EditProfileKeyboardPage.ui:92
+#: widgets/EditProfileKeyboardPage.ui:80
 #, kde-format
 msgid "Delete the selected key bindings scheme"
 msgstr "Διαγραφή του επιλεγμένου θέματος συνδυασμών πλήκτρων"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetKeyBindingsButton)
-#: widgets/EditProfileKeyboardPage.ui:102
+#: widgets/EditProfileKeyboardPage.ui:90
 #, kde-format
 msgid "Reset the selected key bindings scheme to its default values"
 msgstr ""
@@ -4674,14 +4674,14 @@ msgstr ""
 "τιμές"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: widgets/EditProfileMousePage.ui:33
+#: widgets/EditProfileMousePage.ui:36
 #, kde-format
 msgid "Text interaction"
 msgstr "Αλληλεπίδραση κειμένου"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, label_11)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
-#: widgets/EditProfileMousePage.ui:47 widgets/EditProfileMousePage.ui:68
+#: widgets/EditProfileMousePage.ui:50 widgets/EditProfileMousePage.ui:71
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -4692,80 +4692,80 @@ msgstr ""
 "επιλογή ολόκληρων λέξεων στο τερματικό."
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileMousePage.ui:50
+#: widgets/EditProfileMousePage.ui:53
 #, kde-format
 msgid "Word characters:"
 msgstr "Χαρακτήρες λέξης:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileMousePage.ui:91
+#: widgets/EditProfileMousePage.ui:94
 #, kde-format
 msgid "Triple-click selects:"
 msgstr "Τριπλό κλικ επιλέγει:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
-#: widgets/EditProfileMousePage.ui:101
+#: widgets/EditProfileMousePage.ui:104
 #, kde-format
 msgid "The whole line"
 msgstr "Όλη τη γραμμή"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
-#: widgets/EditProfileMousePage.ui:111
+#: widgets/EditProfileMousePage.ui:114
 #, kde-format
 msgid "From mouse position to the end of line"
 msgstr "Από τη θέση του ποντικιού στο τέλος της γραμμής"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
-#: widgets/EditProfileMousePage.ui:137
+#: widgets/EditProfileMousePage.ui:140
 #, kde-format
 msgid "Middle-click pastes:"
 msgstr "Μεσαίο κλικ κάνει επικόλληση:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromClipboardButton)
-#: widgets/EditProfileMousePage.ui:147
+#: widgets/EditProfileMousePage.ui:150
 #, kde-format
 msgid "From clipboard"
 msgstr "Από το πρόχειρο"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
-#: widgets/EditProfileMousePage.ui:157
+#: widgets/EditProfileMousePage.ui:160
 #, kde-format
 msgid "From selection"
 msgstr "Από επιλογή"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileMousePage.ui:183
+#: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Copy options:"
 msgstr "Επιλογές αντιγραφής:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
-#: widgets/EditProfileMousePage.ui:193
+#: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
 msgstr "Αυτόματη αντιγραφή του επιλεγμένου κειμένου στο πρόχειρο"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
-#: widgets/EditProfileMousePage.ui:196
+#: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgid "Copy on select"
 msgstr "Αντιγραφή κατά την επιλογή"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
-#: widgets/EditProfileMousePage.ui:203
+#: widgets/EditProfileMousePage.ui:206
 #, kde-format
 msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
 msgstr ""
 "Αντιγραφή κειμένου ως HTML (με διαμόρφωση, γραμματοσειρές, χρώματα, ... κλπ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
-#: widgets/EditProfileMousePage.ui:206
+#: widgets/EditProfileMousePage.ui:209
 #, kde-format
 msgid "Copy text as HTML"
 msgstr "Αντιγραφή κειμένου ως HTML"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimLeadingSpacesButton)
-#: widgets/EditProfileMousePage.ui:213
+#: widgets/EditProfileMousePage.ui:216
 #, kde-format
 msgid "Trim leading spaces in selected text, useful in some instances"
 msgstr ""
@@ -4773,13 +4773,13 @@ msgstr ""
 "περιπτώσεις"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
-#: widgets/EditProfileMousePage.ui:216
+#: widgets/EditProfileMousePage.ui:219
 #, kde-format
 msgid "Trim leading spaces"
 msgstr "Αποκοπή αρχικών διαστημάτων"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
-#: widgets/EditProfileMousePage.ui:223
+#: widgets/EditProfileMousePage.ui:226
 #, kde-format
 msgid "Trim trailing spaces in selected text, useful in some instances"
 msgstr ""
@@ -4787,13 +4787,13 @@ msgstr ""
 "μερικές περιπτώσεις"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
-#: widgets/EditProfileMousePage.ui:226
+#: widgets/EditProfileMousePage.ui:229
 #, kde-format
 msgid "Trim trailing spaces"
 msgstr "Αποκοπή τελικών διαστημάτων"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
-#: widgets/EditProfileMousePage.ui:263
+#: widgets/EditProfileMousePage.ui:266
 #, kde-format
 msgid ""
 "Text recognized as a link or an email address will be underlined when "
@@ -4803,13 +4803,13 @@ msgstr ""
 "υπογραμμίζεται κατά το πέρασμα του ποντικιού."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
-#: widgets/EditProfileMousePage.ui:266
+#: widgets/EditProfileMousePage.ui:269
 #, kde-format
 msgid "Underline links"
 msgstr "Υπογράμμιση δεσμών"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
-#: widgets/EditProfileMousePage.ui:273
+#: widgets/EditProfileMousePage.ui:276
 #, kde-format
 msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
@@ -4819,20 +4819,20 @@ msgstr ""
 "ποντικιού."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
-#: widgets/EditProfileMousePage.ui:276
+#: widgets/EditProfileMousePage.ui:279
 #, kde-format
 msgid "Underline files"
 msgstr "Υπογράμμιση αρχείων"
 
 #. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
-#: widgets/EditProfileMousePage.ui:285
+#: widgets/EditProfileMousePage.ui:288
 #, kde-format
 msgid "Text Editor Command: "
 msgstr "Εντολή κειμενογράφου: "
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
-#: widgets/EditProfileMousePage.ui:291 widgets/EditProfileMousePage.ui:303
+#: widgets/EditProfileMousePage.ui:294 widgets/EditProfileMousePage.ui:306
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
@@ -4841,7 +4841,7 @@ msgstr ""
 "κειμένου σε μια δεδομένη γραμμή/στήλη."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:329
+#: widgets/EditProfileMousePage.ui:332
 #, kde-format
 msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
@@ -4851,19 +4851,19 @@ msgstr ""
 "αλληλογραφίας μπορεί να ανοιχθεί με απευθείας κλικ του ποντικιού."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:332
+#: widgets/EditProfileMousePage.ui:335
 #, kde-format
 msgid "Open files/links by direct click"
 msgstr "Άνοιγμα αρχείων/δεσμών με απευθείας κλικ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
-#: widgets/EditProfileMousePage.ui:343
+#: widgets/EditProfileMousePage.ui:346
 #, kde-format
 msgid "Allow escape sequences for links"
 msgstr "Να επιτρέπονται ακολουθίες διαφυγής για δεσμούς"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
-#: widgets/EditProfileMousePage.ui:350
+#: widgets/EditProfileMousePage.ui:353
 #, kde-format
 msgid ""
 "<b>WARNING</b>: This has security implications as it allows malicious URLs "
@@ -4875,32 +4875,32 @@ msgstr ""
 "<br>Βεβαιωθείτε ότι κατανοείτε τις συνέπειες πριν το ενεργοποιήσετε αυτό."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileMousePage.ui:368
+#: widgets/EditProfileMousePage.ui:371
 #, kde-format
 msgid "Allowed link formats: "
 msgstr "Επιτρεπόμενοι τύποι δεσμών: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
-#: widgets/EditProfileMousePage.ui:378
+#: widgets/EditProfileMousePage.ui:381
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
 msgstr "Οι τύποι πιθανών δεσμών, όπως http://, https:// και file://"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:389
+#: widgets/EditProfileMousePage.ui:392
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
 msgstr ""
 "Το επιλεγμένο κείμενο απαιτεί το πλήκτρο Control και κλικ για να το σύρετε."
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:392
+#: widgets/EditProfileMousePage.ui:395
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
 msgstr "Απαιτείται το πλήκτρο Ctrl για μετακίνηση και τοποθέτηση"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:399
+#: widgets/EditProfileMousePage.ui:402
 #, kde-format
 msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
@@ -4910,13 +4910,13 @@ msgstr ""
 "χρησιμοποιούν την εναλλακτική μνήμη οθόνης (π.χ. less)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:402
+#: widgets/EditProfileMousePage.ui:405
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
 msgstr "Ενεργοποίηση κύλισης εναλλακτικής μνήμης οθόνης"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:409
+#: widgets/EditProfileMousePage.ui:412
 #, kde-format
 msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
@@ -4926,26 +4926,26 @@ msgstr ""
 "χωρίς τη δυνατότητα ενεργειών μετακίνησης, αντιγραφής και σύνδεσης."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:412
+#: widgets/EditProfileMousePage.ui:415
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
 msgstr "Απενεργοποίηση μενού μετακίνησης και τοποθέτησης για αρχεία && URL"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:419
+#: widgets/EditProfileMousePage.ui:422
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
 msgstr "Πατώντας Ctrl+scrollwheel θα αυξομειωθεί το μέγεθος του κειμένου."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:422
+#: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
 msgstr ""
 "Να επιτρέπεται με το Ctrl+scrollwheel η αλλαγή εστιακής απόστασης στο κείμενο"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:429
+#: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
@@ -4955,13 +4955,13 @@ msgstr ""
 "χρώμα θα εμφανίζεται σε ένα πλαίσιο δίπλα στον δείκτη του ποντικιού"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:432
+#: widgets/EditProfileMousePage.ui:435
 #, kde-format
 msgid "Preview Colors on hover"
 msgstr "Προεπισκόπηση χρωμάτων στην αιώρηση"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:452
+#: widgets/EditProfileMousePage.ui:455
 #, kde-format
 msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
@@ -4971,69 +4971,69 @@ msgstr ""
 "προκαθορισμένη λειτουργία. Αυτό αλλάζει (on/off) και ενώ εκτελούνται."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:455
+#: widgets/EditProfileMousePage.ui:458
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr "Να επιτρέπεται στα τερματικά ο χειρισμός των κλικ και των ελκύσεων"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
-#: widgets/EditProfileScrollingPage.ui:43
+#: widgets/EditProfileScrollingPage.ui:25
 #, kde-format
 msgid "Scrollback:"
 msgstr "Κύλιση:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileScrollingPage.ui:85
+#: widgets/EditProfileScrollingPage.ui:67
 #, kde-format
 msgid "Scroll Page Up/Down:"
 msgstr "Κύλιση σελίδας πάνω/κάτω:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:101
+#: widgets/EditProfileScrollingPage.ui:83
 #, kde-format
 msgid "Scroll the page the half height of window"
 msgstr "Κύλιση σελίδας στο μισό ύψος του παραθύρου"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:104
+#: widgets/EditProfileScrollingPage.ui:86
 #, kde-format
 msgid "Half screen height"
 msgstr "Ύψος μισής οθόνης"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:114
+#: widgets/EditProfileScrollingPage.ui:96
 #, kde-format
 msgid "Scroll the page the full height of window"
 msgstr "Κύλιση σελίδας στο πλήρες ύψος του παραθύρου"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:117
+#: widgets/EditProfileScrollingPage.ui:99
 #, kde-format
 msgid "Full screen height"
 msgstr "Ύφος πλήρους οθόνης"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
-#: widgets/EditProfileScrollingPage.ui:149
+#: widgets/EditProfileScrollingPage.ui:131
 #, kde-format
 msgid "Scrollbar position:"
 msgstr "Θέση γραμμής κύλισης:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:159
+#: widgets/EditProfileScrollingPage.ui:141
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
 msgstr ""
 "Εμφάνιση της γραμμής κύλισης στη δεξιά πλευρά του παραθύρου του τερματικού"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:162
+#: widgets/EditProfileScrollingPage.ui:144
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Right side"
 msgstr "Δεξιά πλευρά"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:172
+#: widgets/EditProfileScrollingPage.ui:154
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
 msgstr ""
@@ -5041,39 +5041,39 @@ msgstr ""
 "τερματικού"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:175
+#: widgets/EditProfileScrollingPage.ui:157
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "Left side"
 msgstr "Αριστερή πλευρά"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
-#: widgets/EditProfileScrollingPage.ui:185
+#: widgets/EditProfileScrollingPage.ui:167
 #, kde-format
 msgctxt "@option:radio Hide the scroll bar"
 msgid "Hidden"
 msgstr "Κρυφό"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileScrollingPage.ui:217
+#: widgets/EditProfileScrollingPage.ui:199
 #, kde-format
 msgid "Highlighting:"
 msgstr "Τονισμός:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
-#: widgets/EditProfileScrollingPage.ui:227
+#: widgets/EditProfileScrollingPage.ui:209
 #, kde-format
 msgid "Highlight the lines coming into view"
 msgstr "Να τονίζονται οι γραμμές καθώς προβάλλονται"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
-#: widgets/EditProfileScrollingPage.ui:240
+#: widgets/EditProfileScrollingPage.ui:222
 #, kde-format
 msgid "Reflow Lines:"
 msgstr "Επαναρροή γραμμών:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
-#: widgets/EditProfileScrollingPage.ui:250
+#: widgets/EditProfileScrollingPage.ui:232
 #, kde-format
 msgid "Reflow lines when terminal resizes"
 msgstr "Να γίνεται επαναρροή γραμμών όταν το τερματικό αλλάζει μέγεθος"
@@ -5085,19 +5085,19 @@ msgid "Tab Titles"
 msgstr "Τίτλοι καρτελών"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabMonitoringGroup)
-#: widgets/EditProfileTabsPage.ui:62
+#: widgets/EditProfileTabsPage.ui:65
 #, kde-format
 msgid "Tab Monitoring"
 msgstr "Παρακολούθηση καρτελών"
 
 #. i18n: ectx: property (text), widget (QLabel, silenceSecondsLabel)
-#: widgets/EditProfileTabsPage.ui:74
+#: widgets/EditProfileTabsPage.ui:80
 #, kde-format
 msgid "Threshold for continuous silence:"
 msgstr "Κατώφλι για συνεχή σιγή:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
-#: widgets/EditProfileTabsPage.ui:87
+#: widgets/EditProfileTabsPage.ui:93
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr "Το κατώφλι της συνεχής σιγής που θα ανιχνεύεται από το Konsole"
