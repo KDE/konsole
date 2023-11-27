@@ -94,18 +94,18 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     auto detachAction = _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-detach")), i18nc("@action:inmenu", "&Detach Tab"), this, [this] {
         Q_EMIT detachTab(_contextMenuTabIndex);
     });
-    detachAction->setObjectName(QStringLiteral("tab-detach"));
+    detachAction->setObjectName(QLatin1StringView("tab-detach"));
 
     auto editAction =
         _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")), i18nc("@action:inmenu", "&Configure or Rename Tab..."), this, [this] {
             renameTab(_contextMenuTabIndex);
         });
-    editAction->setObjectName(QStringLiteral("edit-rename"));
+    editAction->setObjectName(QLatin1StringView("edit-rename"));
 
     auto closeAction = _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-close")), i18nc("@action:inmenu", "Close Tab"), this, [this] {
         closeTerminalTab(_contextMenuTabIndex);
     });
-    closeAction->setObjectName(QStringLiteral("tab-close"));
+    closeAction->setObjectName(QLatin1StringView("tab-close"));
 
     auto profileMenu = new QMenu(this);
     auto profileList = new ProfileList(false, profileMenu);

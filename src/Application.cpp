@@ -510,7 +510,7 @@ void Application::startBackgroundMode(MainWindow *window)
 #ifndef Q_OS_WIN
     KActionCollection *collection = window->actionCollection();
     QAction *action = collection->addAction(QStringLiteral("toggle-background-window"));
-    action->setObjectName(QStringLiteral("Konsole Background Mode"));
+    action->setObjectName(QLatin1StringView("Konsole Background Mode"));
     action->setText(i18nc("@item", "Toggle Background Window"));
     KGlobalAccel::self()->setGlobalShortcut(action, QKeySequence(Konsole::ACCEL | Qt::Key_F12));
     connect(action, &QAction::triggered, this, &Application::toggleBackgroundInstance);

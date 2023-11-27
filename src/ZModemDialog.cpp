@@ -20,7 +20,7 @@ ZModemDialog::ZModemDialog(QWidget *aParent, bool modal, const QString &caption)
     , _textEdit(nullptr)
     , mButtonBox(nullptr)
 {
-    setObjectName(QStringLiteral("zmodem_progress"));
+    setObjectName(QLatin1StringView("zmodem_progress"));
     setModal(modal);
     setWindowTitle(caption);
 

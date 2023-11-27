@@ -34,7 +34,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     , _activeView(nullptr)
     , _views(QList<ViewProperties *>())
 {
-    setObjectName(QStringLiteral("BookmarkHandler"));
+    setObjectName(QLatin1StringView("BookmarkHandler"));
 
     _file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/bookmarks.xml"));
 

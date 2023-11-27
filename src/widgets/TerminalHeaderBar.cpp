@@ -99,7 +99,7 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_closeBtn = new QToolButton(this);
     m_closeBtn->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
     m_closeBtn->setToolTip(i18nc("@info:tooltip", "Close terminal"));
-    m_closeBtn->setObjectName(QStringLiteral("close-terminal-button"));
+    m_closeBtn->setObjectName(QLatin1StringView("close-terminal-button"));
     m_closeBtn->setAutoRaise(true);
 
     m_boxLayout->addWidget(m_closeBtn);
