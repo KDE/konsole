@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 01:39+0000\n"
+"POT-Creation-Date: 2023-11-28 01:37+0000\n"
 "PO-Revision-Date: 2009-01-06 02:14+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
@@ -1384,19 +1384,19 @@ msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:900
+#: MainWindow.cpp:901
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:905
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:910
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2980,7 +2980,7 @@ msgid " MB"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/PartInfo.ui:29
+#: settings/PartInfo.ui:17
 #, kde-format
 msgid ""
 "<html><head/><body><p>Applications that use KonsolePart share profiles.</"

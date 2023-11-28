@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 01:39+0000\n"
+"POT-Creation-Date: 2023-11-28 01:37+0000\n"
 "PO-Revision-Date: 2023-09-26 17:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1296,19 +1296,19 @@ msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Muisti"
 
-#: MainWindow.cpp:900
+#: MainWindow.cpp:901
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Välilehtipalkki / Jakoviivat"
 
-#: MainWindow.cpp:905
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Väliaikaistiedostot"
 
-#: MainWindow.cpp:910
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2855,7 +2855,7 @@ msgstr " Mt"
 
 # *** TARKISTA: luetelman toinen kohta on merkitykseltään hämärä, voi olla päinvastoinkin ”valikon näkyminen” tai jotain ihan muuta
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/PartInfo.ui:29
+#: settings/PartInfo.ui:17
 #, kde-format
 msgid ""
 "<html><head/><body><p>Applications that use KonsolePart share profiles.</"
