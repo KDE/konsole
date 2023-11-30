@@ -136,6 +136,8 @@ public:
      */
     ViewSplitter *viewSplitterAt(int index);
 
+    ViewSplitter *findSplitter(int id);
+
     /**
      * Returns the number of split views (i.e. TerminalDisplay widgets)
      * in this tab; if there are no split views, 1 is returned.

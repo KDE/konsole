@@ -84,6 +84,10 @@ public:
      */
     void addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation, AddBehavior behavior = AddBehavior::AddAfter);
 
+    void addTerminalDisplay(TerminalDisplay *terminalDisplay, int index = -1);
+
+    void addSplitter(ViewSplitter *splitter, int index = -1);
+
     /** Returns the child ViewSplitter widget which currently has the focus */
     ViewSplitter *activeSplitter();
 
@@ -121,6 +125,10 @@ public:
     /** returns the splitter that has no splitter as a parent. */
     ViewSplitter *getToplevelSplitter();
 
+    ViewSplitter *getChildSplitter(int id);
+
+    QString getChildWidgetsLayout();
+
     /**
      * Changes the size of the specified @p container by a given @p percentage.
      * @p percentage may be positive ( in which case the size of the container
@@ -150,6 +158,11 @@ public:
     QPoint mapToTopLevel(const QPoint &p);
     QPoint mapFromTopLevel(const QPoint &p);
 
+    int id() const
+    {
+        return _id;
+    }
+
 protected:
     void dragEnterEvent(QDragEnterEvent *ev) override;
     void dragMoveEvent(QDragMoveEvent *ev) override;
@@ -178,8 +191,11 @@ private:
     qreal fontSizeBeforeMaximization = 0;
     bool m_blockPropagatedDeletion = false;
 
+    int _id;
+
     static bool m_drawTopLevelHandler;
     static Qt::Orientation m_topLevelHandlerDrawnOrientation;
+    static int lastSplitterId;
 };
 }
 #endif // VIEWSPLITTER_H

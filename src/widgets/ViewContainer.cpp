@@ -135,6 +135,21 @@ ViewSplitter *TabbedViewContainer::viewSplitterAt(int index)
     return qobject_cast<ViewSplitter *>(widget(index));
 }
 
+ViewSplitter *TabbedViewContainer::findSplitter(int id)
+{
+    for (int i = 0; i < count(); ++i) {
+        auto toplevelSplitter = viewSplitterAt(i);
+
+        if (toplevelSplitter->id() == id)
+            return toplevelSplitter;
+
+        if (auto result = toplevelSplitter->getChildSplitter(id))
+            return result;
+    }
+
+    return nullptr;
+}
+
 int TabbedViewContainer::currentTabViewCount()
 {
     if (auto *splitter = activeViewSplitter()) {

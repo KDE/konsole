@@ -19,6 +19,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
+#include <QDBusArgument>
+#include <QDBusMetaType>
+
 // KDE
 #include <KActionCollection>
 #include <KActionMenu>
@@ -46,6 +49,8 @@ using namespace Konsole;
 
 int ViewManager::lastManagerId = 0;
 
+Q_DECLARE_METATYPE(QList<double>);
+
 ViewManager::ViewManager(QObject *parent, KActionCollection *collection)
     : QObject(parent)
     , _viewContainer(nullptr)
@@ -57,6 +62,8 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection)
     , _managerId(0)
     , _terminalDisplayHistoryIndex(-1)
 {
+    qDBusRegisterMetaType<QList<double>>();
+
     _viewContainer = createContainer();
     // setup actions which are related to the views
     setupActions();
@@ -895,6 +902,25 @@ void ViewManager::attachView(TerminalDisplay *terminal, Session *session)
     _terminalDisplayHistory.append(terminal);
 }
 
+TerminalDisplay *ViewManager::findTerminalDisplay(int viewId)
+{
+    for (auto i = _sessionMap.keyBegin(); i != _sessionMap.keyEnd(); ++i) {
+        TerminalDisplay *view = *i;
+        if (view->id() == viewId)
+            return view;
+    }
+
+    return nullptr;
+}
+
+void ViewManager::setCurrentView(TerminalDisplay *view)
+{
+    auto parentSplitter = qobject_cast<ViewSplitter *>(view->parentWidget());
+    _viewContainer->setCurrentWidget(parentSplitter->getToplevelSplitter());
+    view->setFocus();
+    setCurrentSession(_sessionMap[view]->sessionId());
+}
+
 TerminalDisplay *ViewManager::createView(Session *session)
 {
     // notify this view manager when the session finishes so that its view
@@ -1413,6 +1439,213 @@ void ViewManager::setTabWidthToText(bool setTabWidthToText)
 {
     _viewContainer->tabBar()->setExpanding(!setTabWidthToText);
     _viewContainer->tabBar()->update();
+}
+
+QStringList ViewManager::viewHierarchy()
+{
+    QStringList list;
+
+    for (int i = 0; i < _viewContainer->count(); ++i) {
+        list.append(_viewContainer->viewSplitterAt(i)->getChildWidgetsLayout());
+    }
+
+    return list;
+}
+
+QList<double> ViewManager::getSplitProportions(int splitterId)
+{
+    auto splitter = _viewContainer->findSplitter(splitterId);
+    if (splitter == nullptr)
+        return QList<double>();
+
+    int totalSize = 0;
+    QList<double> percentages;
+
+    for (auto size : splitter->sizes()) {
+        totalSize += size;
+    }
+
+    if (totalSize == 0)
+        return QList<double>();
+
+    for (auto size : splitter->sizes()) {
+        percentages.append((size / static_cast<double>(totalSize)) * 100);
+    }
+
+    return percentages;
+}
+
+bool ViewManager::createSplit(int viewId, bool horizontalSplit)
+{
+    if (auto view = findTerminalDisplay(viewId)) {
+        setCurrentView(view);
+        splitView(horizontalSplit ? Qt::Horizontal : Qt::Vertical, false);
+        return true;
+    }
+
+    return false;
+}
+
+bool ViewManager::createSplitWithExisting(int targetSplitterId, QStringList widgetInfos, int idx, bool horizontalSplit)
+{
+    auto targetSplitter = _viewContainer->findSplitter(targetSplitterId);
+    if (targetSplitter == nullptr || idx < 0)
+        return false;
+
+    QVector<QWidget *> linearLayout;
+    QList<int> forbiddenSplitters, forbiddenViews;
+
+    // specify that top level splitters should not be used as children for created splittter
+    for (int i = 0; i < _viewContainer->count(); ++i) {
+        forbiddenSplitters.append(_viewContainer->viewSplitterAt(i)->id());
+    }
+
+    // specify that parent splitters of the splitter with targetSplitterId id should not be used
+    // as children for created splitter
+    for (auto splitter = targetSplitter; splitter != targetSplitter->getToplevelSplitter(); splitter = qobject_cast<ViewSplitter *>(splitter->parentWidget())) {
+        forbiddenSplitters.append(splitter->id());
+    }
+
+    // to make positioning clearer by avoiding situtations where
+    // e.g. splitter to be created is at index x of targetSplitter
+    // and some direct children of targetSplitter are used as
+    // children of created splitter, causing the final position
+    // of created splitter to may not be at x
+    for (int i = 0; i < targetSplitter->count(); ++i) {
+        auto w = targetSplitter->widget(i);
+
+        if (auto s = qobject_cast<ViewSplitter *>(w))
+            forbiddenSplitters.append(s->id());
+        else
+            forbiddenViews.append(qobject_cast<TerminalDisplay *>(w)->id());
+    }
+
+    for (auto &info : widgetInfos) {
+        auto typeAndId = info.split(QLatin1Char('-'));
+        if (typeAndId.size() != 2)
+            return false;
+
+        int id = typeAndId[1].toInt();
+        QChar type = typeAndId[0][0];
+
+        if (type == QLatin1Char('s') && !forbiddenSplitters.removeOne(id)) {
+            if (auto s = _viewContainer->findSplitter(id)) {
+                linearLayout.append(s);
+                continue;
+            }
+        } else if (type == QLatin1Char('v') && !forbiddenViews.removeOne(id)) {
+            if (auto v = findTerminalDisplay(id)) {
+                linearLayout.append(v);
+                continue;
+            }
+        }
+
+        return false;
+    }
+
+    if (linearLayout.count() == 1) {
+        if (auto onlyChildSplitter = qobject_cast<ViewSplitter *>(linearLayout[0])) {
+            targetSplitter->addSplitter(onlyChildSplitter, idx);
+        } else {
+            auto onlyChildView = qobject_cast<TerminalDisplay *>(linearLayout[0]);
+            targetSplitter->addTerminalDisplay(onlyChildView, idx);
+        }
+    } else {
+        ViewSplitter *createdSplitter = new ViewSplitter();
+        createdSplitter->setOrientation(horizontalSplit ? Qt::Horizontal : Qt::Vertical);
+
+        for (auto widget : linearLayout) {
+            if (auto s = qobject_cast<ViewSplitter *>(widget))
+                createdSplitter->addSplitter(s);
+            else
+                createdSplitter->addTerminalDisplay(qobject_cast<TerminalDisplay *>(widget));
+        }
+
+        targetSplitter->addSplitter(createdSplitter, idx);
+    }
+
+    setCurrentView(targetSplitter->activeTerminalDisplay());
+    return true;
+}
+
+bool ViewManager::setCurrentView(int viewId)
+{
+    if (auto view = findTerminalDisplay(viewId)) {
+        setCurrentView(view);
+        return true;
+    }
+
+    return false;
+}
+
+bool ViewManager::resizeSplits(int splitterId, QList<double> percentages)
+{
+    auto splitter = _viewContainer->findSplitter(splitterId);
+    int totalP = 0;
+
+    for (auto p : percentages) {
+        if (p < 1)
+            return false;
+
+        totalP += p;
+    }
+
+    // make sure that the sum of percentages is very close
+    // to but not exceeding 100. above 99% but less than 100 %
+    // seems like good constraint
+    if (splitter == nullptr || percentages.count() != splitter->sizes().count() || totalP > 100 || totalP < 99)
+        return false;
+
+    int sum = 0;
+    QList<int> newSizes;
+
+    for (int size : splitter->sizes()) {
+        sum += size;
+    }
+
+    for (int i = 0; i < percentages.count(); ++i) {
+        newSizes.append(static_cast<int>(sum * percentages.at(i)));
+    }
+
+    splitter->setSizes(newSizes);
+    setCurrentView(splitter->activeTerminalDisplay());
+    return true;
+}
+
+bool ViewManager::moveSplitter(int splitterId, int targetSplitterId, int idx)
+{
+    auto splitter = _viewContainer->findSplitter(splitterId);
+    auto targetSplitter = _viewContainer->findSplitter(targetSplitterId);
+
+    if (splitter == nullptr || targetSplitter == nullptr || idx < 0)
+        return false;
+
+    for (auto s = targetSplitter; s != s->getToplevelSplitter(); s = qobject_cast<ViewSplitter *>(s->parentWidget())) {
+        if (s == splitter)
+            return false;
+    }
+
+    for (int i = 0; i < _viewContainer->count(); ++i) {
+        if (splitter == _viewContainer->viewSplitterAt(i))
+            return false;
+    }
+
+    targetSplitter->addSplitter(splitter, idx);
+    setCurrentView(splitter->activeTerminalDisplay());
+    return true;
+}
+
+bool ViewManager::moveView(int viewId, int targetSplitterId, int idx)
+{
+    auto view = findTerminalDisplay(viewId);
+    auto targetSplitter = _viewContainer->findSplitter(targetSplitterId);
+
+    if (view == nullptr || targetSplitter == nullptr || idx < 0)
+        return false;
+
+    targetSplitter->addTerminalDisplay(view, idx);
+    setCurrentView(view);
+    return true;
 }
 
 void ViewManager::setNavigationVisibility(NavigationVisibility navigationVisibility)

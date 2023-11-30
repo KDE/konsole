@@ -28,6 +28,7 @@ using Konsole::ViewSplitter;
 
 bool ViewSplitter::m_drawTopLevelHandler;
 Qt::Orientation ViewSplitter::m_topLevelHandlerDrawnOrientation;
+int ViewSplitter::lastSplitterId = -1;
 
 // TODO: Connect the TerminalDisplay destroyed signal here.
 
@@ -50,6 +51,7 @@ int calculateHandleWidth(int settingsEnum)
 
 ViewSplitter::ViewSplitter(QWidget *parent)
     : QSplitter(parent)
+    , _id(++lastSplitterId)
 {
     setAcceptDrops(true);
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, [this] {
@@ -130,6 +132,57 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
         splitter->setSizes(sizes);
         newSplitter->updateSizes();
     }
+}
+
+void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, int index)
+{
+    auto toplevelSplitter = getToplevelSplitter();
+
+    if (index == -1)
+        index = count();
+
+    if (toplevelSplitter->count() == 2 && toplevelSplitter == qobject_cast<ViewSplitter *>(parent()) && toplevelSplitter->indexOf(terminalDisplay) != -1) {
+        QVector<QWidget *> childWidgets;
+
+        for (int i = 0; i < count(); ++i) {
+            childWidgets.append(widget(i));
+        }
+
+        childWidgets.insert(index, terminalDisplay);
+
+        for (auto child : childWidgets) {
+            toplevelSplitter->addWidget(child);
+        }
+    } else {
+        insertWidget(index, terminalDisplay);
+    }
+
+    updateSizes();
+}
+
+void ViewSplitter::addSplitter(ViewSplitter *splitter, int index)
+{
+    if (index == -1)
+        index = count();
+
+    m_blockPropagatedDeletion = true;
+
+    if (splitter->orientation() == orientation()) {
+        QVector<QWidget *> children;
+
+        for (int i = 0; i < splitter->count(); ++i) {
+            children.append(splitter->widget(i));
+        }
+
+        for (int i = 0; i < children.count(); ++i) {
+            insertWidget(index + i, children[i]);
+        }
+    } else {
+        insertWidget(index, splitter);
+    }
+
+    m_blockPropagatedDeletion = false;
+    updateSizes();
 }
 
 void ViewSplitter::childEvent(QChildEvent *event)
@@ -376,6 +429,39 @@ ViewSplitter *ViewSplitter::getToplevelSplitter()
         current = qobject_cast<ViewSplitter *>(current->parentWidget());
     }
     return current;
+}
+
+ViewSplitter *ViewSplitter::getChildSplitter(int id)
+{
+    for (auto childSplitter : findChildren<ViewSplitter *>()) {
+        if (childSplitter->id() == id)
+            return childSplitter;
+    }
+
+    return nullptr;
+}
+
+QString ViewSplitter::getChildWidgetsLayout()
+{
+    QString layoutString;
+
+    for (int i = 0; i < count(); ++i) {
+        if (auto v = qobject_cast<TerminalDisplay *>(widget(i)))
+            layoutString += QString::number(v->id());
+        else if (auto s = qobject_cast<ViewSplitter *>(widget(i)))
+            layoutString += s->getChildWidgetsLayout();
+
+        layoutString += QLatin1Char('|');
+    }
+
+    layoutString.removeLast();
+
+    if (orientation() == Qt::Orientation::Horizontal)
+        layoutString = QLatin1Char('[') + layoutString + QLatin1Char(']');
+    else
+        layoutString = QLatin1Char('{') + layoutString + QLatin1Char('}');
+
+    return QStringLiteral("(%1)").arg(id()) + layoutString;
 }
 
 namespace

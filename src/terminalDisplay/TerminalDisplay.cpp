@@ -197,6 +197,8 @@ QAccessibleInterface *accessibleInterfaceFactory(const QString &key, QObject *ob
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+int TerminalDisplay::lastViewId = -1;
+
 TerminalDisplay::TerminalDisplay(QWidget *parent)
     : QWidget(parent)
     , _verticalLayout(new QVBoxLayout(this))
@@ -208,6 +210,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     , _searchBar(new IncrementalSearchBar(this))
     , _headerBar(new TerminalHeaderBar(this))
     , _terminalFont(std::make_unique<TerminalFont>(this))
+    , _id(++lastViewId)
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right

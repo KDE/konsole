@@ -314,6 +314,58 @@ public Q_SLOTS:
     Q_SCRIPTABLE void loadLayoutFile();
     Q_SCRIPTABLE void loadLayout(QString File);
 
+    /** DBus slot that returns a description of the layout hierarchy
+     * in each tab.
+     *
+     * A ViewSplitter is described by its id enclosed in round brackets,
+     * followed by square (horizontal split) or curly (vertical split)
+     * brackets. Format: (%id)[...] OR (%id){...}
+     *
+     * A TerminalDisplay is simply described by its id.
+     *
+     * The child widgets of a ViewSplitter are described in the square or
+     * curly brackets using their ids and are separated by '|'. The
+     * order which they are described in is top to bottom for vertical
+     * split or left to right for horizontal split.
+     */
+    Q_SCRIPTABLE QStringList viewHierarchy();
+
+    /** DBus slot that returns the sizes of the direct child widgets as
+     * percentages of the size of the ViewSplitter in the form of a
+     * list. Will return an empty list if a splitter with id splitterId
+     * cannot be found.
+     */
+    Q_SCRIPTABLE QList<double> getSplitProportions(int splitterId);
+
+    /** DBus slot that splits an existing view in the current tab **/
+    Q_SCRIPTABLE bool createSplit(int viewId, bool horizontalSplit);
+
+    /** DBus slot that creates a splitter containing a series of
+     * existing widgets and inserts it at an index in an existing splitter.
+     *
+     * Each element in widgetInfos is QString of format "x-y", describing
+     * each moved widget. Regarding the to-be-created splitter, the first
+     * QString will represent the leftmost widget (horizontal split)
+     * or the topmost widget (vertical split). x is either 's'
+     * for a ViewSplitter or 'v' for a TerminalDisplay. y is the id of
+     * the widget.
+     */
+    Q_SCRIPTABLE bool createSplitWithExisting(int targetSplitterId, QStringList widgetInfos, int idx, bool horizontalSplit);
+
+    /** DBus slot that focuses a view. **/
+    Q_SCRIPTABLE bool setCurrentView(int viewId);
+
+    /** DBus slot that allows setting of the relative sizes of widgets
+     * in a splitter by specifying their percentages.
+     */
+    Q_SCRIPTABLE bool resizeSplits(int splitterId, QList<double> percentages);
+
+    /** DBus slot that moves a splitter to a different position under a specified splitter**/
+    Q_SCRIPTABLE bool moveSplitter(int splitterId, int targetSplitterId, int idx);
+
+    /** DBus slot that move a view to a different position under a specified splitter**/
+    Q_SCRIPTABLE bool moveView(int viewId, int targetSplitterId, int idx);
+
 private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
@@ -411,6 +463,10 @@ private Q_SLOTS:
 
 private:
     Q_DISABLE_COPY(ViewManager)
+
+    TerminalDisplay *findTerminalDisplay(int viewId);
+
+    void setCurrentView(TerminalDisplay *view);
 
     void createView(Session *session, TabbedViewContainer *container, int index);
 

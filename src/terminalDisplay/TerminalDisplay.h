@@ -212,6 +212,11 @@ public:
         return _usedColumns;
     }
 
+    int id() const
+    {
+        return _id;
+    }
+
     void setSize(int columns, int lines);
     void propagateSize();
 
@@ -836,6 +841,10 @@ private:
 
     int _selModeModifiers;
     bool _selModeByModifiers; // Selection started by Shift+Arrow
+
+    int _id;
+
+    static int lastViewId;
 };
 
 }
