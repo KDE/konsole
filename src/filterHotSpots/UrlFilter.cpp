@@ -96,19 +96,25 @@ QSharedPointer<HotSpot> UrlFilter::newHotSpot(int startLine, int startColumn, in
 {
     QStringList texts{};
 
-    // remove final single quote
-    // we want URLs in single quotes like the following to work correctly:
+    // remove final invalid characters
+    // we want URLs in single quotes like the followings to work correctly:
     // 'https://en.wikipedia.org/wiki/Earth's_rotation'
-    for (QString s : capturedTexts) {
-        QString str{s};
-        if (s.right(1) == QLatin1String("'")) {
-            s.chop(1);
+    // https://example.com.
+    static const QRegularExpression invalidCharRegex(LS1("[',.:;]+$"));
+
+    // capturedTexts[0] is the full match, the rest are the capture groups
+    QString str0 = capturedTexts[0];
+    QRegularExpressionMatch match = invalidCharRegex.match(str0);
+
+    if (match.hasMatch()) {
+        int invalidCharLength0 = match.captured(0).length();
+        str0.chop(invalidCharLength0);
+        endColumn = endColumn - invalidCharLength0;
+        if (endColumn < 0) {
+            endColumn = 0;
         }
-        texts << s;
     }
-    if (capturedTexts[0].right(1) == QLatin1String("'")) {
-        endColumn--;
-    }
+    texts << str0;
 
     return QSharedPointer<HotSpot>(new UrlFilterHotSpot(startLine, startColumn, endLine, endColumn, texts));
 }
