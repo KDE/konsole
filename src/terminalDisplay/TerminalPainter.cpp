@@ -547,8 +547,8 @@ QRegion TerminalPainter::highlightScrolledLinesRegion(TerminalScrollBar *scrollB
 
 void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting)
 {
-    if (useOpacitySetting && !m_parentDisplay->wallpaper()->isNull()
-        && m_parentDisplay->wallpaper()->draw(painter, rect, m_parentDisplay->terminalColor()->opacity(), backgroundColor)) {
+    if (!m_parentDisplay->wallpaper()->isNull()
+        && m_parentDisplay->wallpaper()->draw(painter, rect, useOpacitySetting ? m_parentDisplay->terminalColor()->opacity() : 1.0, backgroundColor)) {
     } else if (qAlpha(m_parentDisplay->terminalColor()->blendColor()) < 0xff && useOpacitySetting) {
 #if defined(Q_OS_MACOS)
         // TODO: On MacOS, using CompositionMode doesn't work. Altering the
