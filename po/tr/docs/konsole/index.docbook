@@ -872,7 +872,7 @@
 >Öntanımlı profili kullanan yeni bir sekme açar</action>
 <note
 ><para
->Alt menüdeki ilk profil her zaman yerleşik profil olan "Öntanımlı" olacaktır. Diğer tüm profiller aşağıda abecesel sıraya göre listelenecektir. Kullanıcı tarafından belirlenen öntanımlı profil kalınyazı tipinde gösterilir. </para
+>Alt menüdeki ilk profil her zaman yerleşik profil olan "Öntanımlı" olacaktır. Diğer tüm profiller aşağıda abecesel sıraya göre listelenecektir. Kullanıcı tarafından belirlenen öntanımlı profil kalın yazıtipinde gösterilir. </para
 ></note>
 </para
 ></listitem
@@ -1811,7 +1811,7 @@ Various search improvements
 > <guimenu
 >Görünüm</guimenu
 ><guimenuitem
->Yazıtipini Büyüt</guimenuitem
+>Yazıtipi Boyutunu Büyüt</guimenuitem
 ></menuchoice
 ></term>
 <listitem
@@ -1858,7 +1858,7 @@ Various search improvements
 > <guimenu
 >Görünüm</guimenu
 ><guimenuitem
->Yazıtipini Küçült</guimenuitem
+>Yazıtipi Boyutunu Küçült</guimenuitem
 ></menuchoice
 ></term>
 <listitem
