@@ -151,7 +151,7 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
         QVector<KCommandBar::ActionGroup> groups;
         groups.push_back(KCommandBar::ActionGroup{i18n("SSH Entries"), actions});
         bar.setActions(groups);
-        bar.exec();
+        bar.show();
     });
 
     if (mainWindow) {
