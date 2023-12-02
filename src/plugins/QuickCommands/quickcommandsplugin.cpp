@@ -111,7 +111,7 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
         QVector<KCommandBar::ActionGroup> groups;
         groups.push_back(KCommandBar::ActionGroup{i18n("Quick Commands"), actions});
         bar.setActions(groups);
-        bar.exec();
+        bar.show();
     });
 
     if (mainWindow) {
