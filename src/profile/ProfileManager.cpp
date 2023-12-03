@@ -253,7 +253,7 @@ QString ProfileManager::generateUniqueName() const
     int nameSuffix = 1;
     QString uniqueProfileName;
     do {
-        uniqueProfileName = QStringLiteral("Profile ") + QString::number(nameSuffix);
+        uniqueProfileName = i18nc("New profile name, %1 is a number", "Profile %1", QString::number(nameSuffix));
         ++nameSuffix;
     } while (existingProfileNames.contains(uniqueProfileName));
 
