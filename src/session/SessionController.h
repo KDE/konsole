@@ -35,6 +35,7 @@ class QUrl;
 class KCodecAction;
 class QAction;
 class KActionMenu;
+class KSelectAction;
 
 namespace Konsole
 {
@@ -157,6 +158,13 @@ public:
         return _monitorOnce;
     };
 
+    const SessionGroup *copyToGroup() const
+    {
+        return _copyToGroup;
+    }
+
+    KSelectAction *copyInputActions();
+
 Q_SIGNALS:
     /**
      * Emitted when the view associated with the controller is focused.
@@ -240,6 +248,10 @@ public Q_SLOTS:
     /** Close the incremental search */
     void searchClosed(); // called when the user clicks on the
 
+    void copyInputToAllTabs();
+    void copyInputToSelectedTabs(QList<Session *> *sessions = nullptr);
+    void copyInputToNone();
+
 private Q_SLOTS:
     // menu item handlers
     void openBrowser();
@@ -253,9 +265,6 @@ private Q_SLOTS:
     void selectLine();
     void pasteFromX11Selection(); // shortcut only
     void copyInputActionsTriggered(QAction *action);
-    void copyInputToAllTabs();
-    void copyInputToSelectedTabs();
-    void copyInputToNone();
     void editCurrentProfile();
     void changeCodec(QTextCodec *codec);
     void enableSearchBar(bool showSearchBar);
@@ -360,6 +369,7 @@ private:
     ColorFilter *_colorFilter;
 
     QAction *_copyInputToAllTabsAction;
+    KSelectAction *_copyInputActions;
 
     QAction *_findAction;
     QAction *_findNextAction;

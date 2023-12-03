@@ -32,6 +32,7 @@
 #include <KLocalizedString>
 #include <KNotification>
 #include <KProcess>
+#include <KSelectAction>
 
 #ifndef Q_OS_WIN
 #include <KPtyDevice>
@@ -46,6 +47,7 @@
 #include "Pty.h"
 #include "SSHProcessInfo.h"
 #include "SessionController.h"
+#include "SessionGroup.h"
 #include "SessionManager.h"
 #include "ShellCommand.h"
 #include "Vt102Emulation.h"
@@ -1807,6 +1809,79 @@ void Session::setProfile(const QString &profileName)
     }
 }
 
+bool Session::copyInputToAllSessions()
+{
+    if (auto c = controller()) {
+        c->copyInputActions()->setCurrentItem(SessionController::CopyInputToAllTabsMode);
+        c->copyInputToAllTabs();
+        return true;
+    }
+
+    return false;
+}
+
+bool Session::copyInputToSessions(QList<int> sessionIds)
+{
+    if (auto c = controller()) {
+        auto sessions = new QList<Session *>();
+        c->copyInputActions()->setCurrentItem(SessionController::CopyInputToSelectedTabsMode);
+
+        for (auto sessionId : sessionIds) {
+            if (auto session = SessionManager::instance()->idToSession(sessionId))
+                sessions->append(session);
+            else
+                return false;
+        }
+
+        c->copyInputToSelectedTabs(sessions);
+        return true;
+    }
+
+    return false;
+}
+
+bool Session::copyInputToNone()
+{
+    if (auto c = controller()) {
+        c->copyInputActions()->setCurrentItem(SessionController::CopyInputToNoneMode);
+        c->copyInputToNone();
+        return true;
+    } else
+        return false;
+}
+
+QList<int> Session::copyingSessions()
+{
+    if (auto c = controller()) {
+        if (auto copyToGroup = c->copyToGroup()) {
+            QList<int> sessionIds;
+
+            for (auto session : copyToGroup->sessions()) {
+                sessionIds.append(session->sessionId());
+            }
+
+            sessionIds.removeAll(sessionId());
+            return sessionIds;
+        }
+    }
+
+    return QList<int>();
+}
+
+QList<int> Session::feederSessions()
+{
+    QList<int> feeders;
+
+    for (auto session : SessionManager::instance()->sessions()) {
+        if (session->copyingSessions().contains(sessionId()) && !feeders.contains(session->sessionId())) {
+            feeders.append(session->sessionId());
+        }
+    }
+
+    feeders.removeAll(sessionId());
+    return feeders;
+}
+
 int Session::foregroundProcessId()
 {
     int pid;
@@ -1992,6 +2067,14 @@ void Session::setColor(const QColor &color)
 QColor Session::color() const
 {
     return _tabColor;
+}
+
+SessionController *Session::controller()
+{
+    if (!_views.isEmpty())
+        return _views.first()->sessionController();
+
+    return nullptr;
 }
 
 #include "moc_Session.cpp"

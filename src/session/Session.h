@@ -38,6 +38,7 @@ class ProcessInfo;
 class TerminalDisplay;
 class ZModemDialog;
 class HistoryType;
+class SessionController;
 
 /**
  * Represents a terminal session consisting of a pseudo-teletype and a terminal emulation.
@@ -661,6 +662,35 @@ public Q_SLOTS:
      */
     Q_SCRIPTABLE QString profile();
 
+    /**
+     * Sets that input should be copied to all sessions in current window.
+     * Returns false if fail.
+     */
+    Q_SCRIPTABLE bool copyInputToAllSessions();
+
+    /**
+     * Sets that input should be copied to sessions whose ids are described in the list.
+     * Returns false if fail.
+     */
+    Q_SCRIPTABLE bool copyInputToSessions(QList<int> sessions);
+
+    /**
+     * Sets that input should not be copied to any other sessions.
+     * Returns false if fail.
+     */
+    Q_SCRIPTABLE bool copyInputToNone();
+
+    /**
+     * Returns a list of ids of sessions which copy inputs from this session.
+     * Returns empty list if fail.
+     */
+    Q_SCRIPTABLE QList<int> copyingSessions();
+
+    /**
+     * Returns a list of ids of sessions which this sessions copies inputs from.
+     */
+    Q_SCRIPTABLE QList<int> feederSessions();
+
 Q_SIGNALS:
 
     /** Emitted when the terminal process starts. */
@@ -819,6 +849,7 @@ private:
     void updateSessionProcessInfo();
     bool updateForegroundProcessInfo();
     void updateWorkingDirectory();
+    SessionController *controller();
 
     QString validDirectory(const QString &dir) const;
 

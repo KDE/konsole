@@ -850,6 +850,7 @@ void SessionController::setupExtraActions()
     copyInputActions->addAction(copyInputToSelectedTabsAction);
     copyInputActions->addAction(copyInputToNoneAction);
     connect(copyInputActions, &KSelectAction::actionTriggered, this, &Konsole::SessionController::copyInputActionsTriggered);
+    _copyInputActions = copyInputActions;
 
     action = collection->addAction(QStringLiteral("zmodem-upload"), this, &SessionController::zmodemUpload);
     action->setText(i18n("&ZModem Upload..."));
@@ -1314,7 +1315,7 @@ void SessionController::copyInputToAllTabs()
     Q_EMIT copyInputChanged(this);
 }
 
-void SessionController::copyInputToSelectedTabs()
+void SessionController::copyInputToSelectedTabs(QList<Session *> *sessions)
 {
     if (_copyToGroup == nullptr) {
         _copyToGroup = new SessionGroup(this);
@@ -1323,22 +1324,12 @@ void SessionController::copyInputToSelectedTabs()
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
     }
 
-    auto *dialog = new CopyInputDialog(view());
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->setModal(true);
-    dialog->setMasterSession(session());
-
     const QList<Session *> sessionsList = _copyToGroup->sessions();
     QSet<Session *> currentGroup(sessionsList.begin(), sessionsList.end());
 
     currentGroup.remove(session());
 
-    dialog->setChosenSessions(currentGroup);
-
-    connect(dialog, &QDialog::accepted, this, [=]() {
-        QSet<Session *> newGroup = dialog->chosenSessions();
-        newGroup.remove(session());
-
+    auto update = [this](QSet<Session *> newGroup, QSet<Session *> currentGroup) {
         const QSet<Session *> completeGroup = newGroup | currentGroup;
         for (Session *session : completeGroup) {
             if (newGroup.contains(session) && !currentGroup.contains(session)) {
@@ -1352,9 +1343,27 @@ void SessionController::copyInputToSelectedTabs()
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
         snapshot();
         Q_EMIT copyInputChanged(this);
-    });
+    };
 
-    dialog->show();
+    if (sessions != nullptr) {
+        QSet<Session *> newGroup(sessions->begin(), sessions->end());
+        newGroup.remove(session());
+        update(newGroup, currentGroup);
+    } else {
+        auto *dialog = new CopyInputDialog(view());
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+        dialog->setModal(true);
+        dialog->setMasterSession(session());
+        dialog->setChosenSessions(currentGroup);
+
+        connect(dialog, &QDialog::accepted, this, [=]() {
+            QSet<Session *> newGroup = dialog->chosenSessions();
+            newGroup.remove(session());
+            update(newGroup, currentGroup);
+        });
+
+        dialog->show();
+    }
 }
 
 void SessionController::copyInputToNone()
@@ -2129,6 +2138,11 @@ void SessionController::setVisible(QString name, bool visible)
         return;
     }
     actionCollection()->action(name)->setVisible(visible);
+}
+
+KSelectAction *SessionController::copyInputActions()
+{
+    return _copyInputActions;
 }
 
 #include "moc_SessionController.cpp"
