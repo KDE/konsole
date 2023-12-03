@@ -24,10 +24,11 @@
 
 #include <KActionCollection>
 #include <KCommandBar>
+#include <KCrash>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <QSettings>
-#include <KCrash>
+#include <kcommandbar.h>
 
 #include "MainWindow.h"
 #include "terminalDisplay/TerminalDisplay.h"
@@ -126,7 +127,7 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
     terminalDisplay->addAction(d->showQuickAccess);
 
     connect(d->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controller] {
-        KCommandBar bar(terminalDisplay->topLevelWidget());
+        auto bar = new KCommandBar(terminalDisplay->topLevelWidget());
         QList<QAction *> actions;
         for (int i = 0; i < d->model.rowCount(); i++) {
             QModelIndex folder = d->model.index(i, 0);
@@ -150,8 +151,8 @@ void SSHManagerPlugin::activeViewChanged(Konsole::SessionController *controller,
 
         QVector<KCommandBar::ActionGroup> groups;
         groups.push_back(KCommandBar::ActionGroup{i18n("SSH Entries"), actions});
-        bar.setActions(groups);
-        bar.show();
+        bar->setActions(groups);
+        bar->show();
     });
 
     if (mainWindow) {

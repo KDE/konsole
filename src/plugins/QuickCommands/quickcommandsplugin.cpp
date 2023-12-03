@@ -17,6 +17,7 @@
 #include <KMessageBox>
 
 #include <QDockWidget>
+#include <kcommandbar.h>
 
 K_PLUGIN_CLASS_WITH_JSON(QuickCommandsPlugin, "konsole_quickcommands.json")
 
@@ -84,7 +85,7 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
 
     Konsole::TerminalDisplay *terminalDisplay = controller->view();
     connect(priv->showQuickAccess, &QAction::triggered, this, [this, terminalDisplay, controller] {
-        KCommandBar bar(terminalDisplay->topLevelWidget());
+        auto bar = new KCommandBar(terminalDisplay->topLevelWidget());
         QList<QAction *> actions;
         for (int i = 0; i < priv->model.rowCount(); i++) {
             QModelIndex folder = priv->model.index(i, 0);
@@ -110,8 +111,8 @@ void QuickCommandsPlugin::activeViewChanged(Konsole::SessionController *controll
 
         QVector<KCommandBar::ActionGroup> groups;
         groups.push_back(KCommandBar::ActionGroup{i18n("Quick Commands"), actions});
-        bar.setActions(groups);
-        bar.show();
+        bar->setActions(groups);
+        bar->show();
     });
 
     if (mainWindow) {
