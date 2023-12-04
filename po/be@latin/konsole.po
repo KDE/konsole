@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-28 01:37+0000\n"
+"POT-Creation-Date: 2023-12-04 01:39+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -1411,30 +1411,30 @@ msgstr "Abnavić"
 msgid "Cancel"
 msgstr "Skasavać"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:45
-#: plugins/QuickCommands/quickcommandsplugin.cpp:112
+#: plugins/QuickCommands/quickcommandsplugin.cpp:46
+#: plugins/QuickCommands/quickcommandsplugin.cpp:113
 #, kde-format
 msgid "Quick Commands"
 msgstr "Chutkija zahady"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:70
+#: plugins/QuickCommands/quickcommandsplugin.cpp:71
 #, fuzzy, kde-format
 #| msgid "Show Quick Commands"
 msgid "Show Quick Access"
 msgstr "Pakazvać chutkija zahady"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:107
 #, fuzzy, kde-format
 #| msgid "Quick Commands"
 msgid "Plugins - Quick Commands"
 msgstr "Chutkija zahady"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Pakazvać chutkija zahady"
@@ -1541,38 +1541,38 @@ msgstr "Kanfihuracyja SSH"
 msgid "Host: %1"
 msgstr "Chost: %1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:65
+#: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
 msgstr "Kiraŭnik SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:95
+#: plugins/SSHManager/sshmanagerplugin.cpp:96
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "Pakazvać kiraŭnik SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:114
+#: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:147
 #, fuzzy, kde-format
 #| msgid "Hide Menu Bar"
 msgid "Plugins - SSH Manager"
 msgstr "Schavać radok mieniu"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:152
+#: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, fuzzy, kde-format
 #| msgid ""
 #| "Could not get the process name, assume that we cant request a connection"
@@ -1580,13 +1580,13 @@ msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "Nie ŭdalosia atrymać nazvu pracesu. Mahčyma, nieĺha zapytać zlučennie"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Padčas vykanannia zahadu SSH adbylasia pamylka"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, fuzzy, kde-format
 #| msgid ""
 #| "Cant issue SSH command outside the shell application (eg, bash, zsh, sh)"
@@ -1903,6 +1903,13 @@ msgstr ""
 #, kde-format
 msgid "Default profile"
 msgstr "Pradvyznačany profiĺ"
+
+#: profile/ProfileManager.cpp:256
+#, fuzzy, kde-format
+#| msgid "Edit Profile \"%1\""
+msgctxt "New profile name, %1 is a number"
+msgid "Profile %1"
+msgstr "Zmianić profiĺ \"%1\""
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -5575,12 +5582,6 @@ msgstr "Zakryć ukladku"
 #~| msgid "New Color Scheme"
 #~ msgid "Color from theme"
 #~ msgstr "Novaja schiema kolieraŭ"
-
-#, fuzzy
-#~| msgid "Edit Profile \"%1\""
-#~ msgctxt "The default name of a profile"
-#~ msgid "Profile #%1"
-#~ msgstr "Zmianić profiĺ \"%1\""
 
 #, fuzzy
 #~| msgid "Show in Menu"

@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-28 01:37+0000\n"
+"POT-Creation-Date: 2023-12-04 01:39+0000\n"
 "PO-Revision-Date: 2023-11-16 13:56+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -1397,28 +1397,28 @@ msgstr "עדכון"
 msgid "Cancel"
 msgstr "ביטול"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:45
-#: plugins/QuickCommands/quickcommandsplugin.cpp:112
+#: plugins/QuickCommands/quickcommandsplugin.cpp:46
+#: plugins/QuickCommands/quickcommandsplugin.cpp:113
 #, kde-format
 msgid "Quick Commands"
 msgstr "פקודות מהירות"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:70
+#: plugins/QuickCommands/quickcommandsplugin.cpp:71
 #, kde-format
 msgid "Show Quick Access"
 msgstr "הצגת גישה מהירה"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr "לא נמצאו פקודות מהירות. ניתן להוסיף תחת תוספים -> פקודות מהירות"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:107
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "תוספים - פקודות מהירות"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "הצגת פקודות מהירות"
@@ -1527,49 +1527,49 @@ msgstr "הגדרות SSH"
 msgid "Host: %1"
 msgstr "מארח: ‎‎%1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:65
+#: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
 msgstr "מנהל SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:95
+#: plugins/SSHManager/sshmanagerplugin.cpp:96
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "הצגת מנהל SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:114
+#: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "הצגת גישה מהירה לפעולות SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr "לא נמצאו הגדרות SSH שמורות. אפשר להוסיף כאלה תחת תוספים -> מנהל SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:147
 #, kde-format
 msgid "Plugins - SSH Manager"
 msgstr "תוספים - מנהל SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:152
+#: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
 msgstr "רשומות SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "לא ניתן לאתר את קובץ התהליך, אפשר להניח שאי אפשר לבקש חיבור"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "שגיאה בהרצת פקודת SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
@@ -1872,6 +1872,14 @@ msgstr "מובנה"
 #, kde-format
 msgid "Default profile"
 msgstr "פרופיל ברירת־המחדל"
+
+#: profile/ProfileManager.cpp:256
+#, fuzzy, kde-format
+#| msgctxt "The default name of a profile"
+#| msgid "Profile #%1"
+msgctxt "New profile name, %1 is a number"
+msgid "Profile %1"
+msgstr "פרופיל #%1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -5411,10 +5419,6 @@ msgstr "סגירת לשונית"
 #~| msgid "New Color Scheme"
 #~ msgid "Color from theme"
 #~ msgstr "ערכת צבעים חדשה"
-
-#~ msgctxt "The default name of a profile"
-#~ msgid "Profile #%1"
-#~ msgstr "פרופיל #%1"
 
 #, fuzzy
 #~| msgctxt "@title:column Display profile in file menu"

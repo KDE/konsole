@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-28 01:37+0000\n"
+"POT-Creation-Date: 2023-12-04 01:39+0000\n"
 "PO-Revision-Date: 2023-11-17 10:16+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -1428,30 +1428,30 @@ msgstr "Mise à jour"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:45
-#: plugins/QuickCommands/quickcommandsplugin.cpp:112
+#: plugins/QuickCommands/quickcommandsplugin.cpp:46
+#: plugins/QuickCommands/quickcommandsplugin.cpp:113
 #, kde-format
 msgid "Quick Commands"
 msgstr "Commandes rapides"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:70
+#: plugins/QuickCommands/quickcommandsplugin.cpp:71
 #, kde-format
 msgid "Show Quick Access"
 msgstr "Afficher un accès rapide"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 "Aucune commande rapide trouvée. Vous pouvez en ajouter une avec le menu "
 "Modules externes / Commandes rapides."
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:107
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "Modules externes - Commandes rapides"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Afficher les commandes rapides"
@@ -1563,39 +1563,39 @@ msgstr "Configuration « SSH »"
 msgid "Host: %1"
 msgstr "Hôte : %1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:65
+#: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
 msgstr "Gestionnaire de clés SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:95
+#: plugins/SSHManager/sshmanagerplugin.cpp:96
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "Afficher le gestionnaire de clés SSH"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:114
+#: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Afficher un accès rapide pour les actions « SSH »"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 "Aucune configuration « SSH » enregistrée n'a été trouvée. Vous pouvez en "
 "ajouter une avec le menu Modules externes / Gestionnaire « SSH »."
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:147
 #, kde-format
 msgid "Plugins - SSH Manager"
 msgstr "Modules externes - Gestionnaire « SSH »"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:152
+#: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
 msgstr "Entrées « SSH »"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
@@ -1603,13 +1603,13 @@ msgstr ""
 "Impossible d'obtenir le nom du processus, signifiant qu'il est impossible de "
 "demander une connexion."
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Erreur après lancement d'une commande « SSH »"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
@@ -1919,6 +1919,14 @@ msgstr "Intégré"
 #, kde-format
 msgid "Default profile"
 msgstr "Profil par défaut"
+
+#: profile/ProfileManager.cpp:256
+#, fuzzy, kde-format
+#| msgctxt "The default name of a profile"
+#| msgid "Profile #%1"
+msgctxt "New profile name, %1 is a number"
+msgid "Profile %1"
+msgstr "Profil #%1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -5599,10 +5607,6 @@ msgstr "Fermer l'onglet"
 
 #~ msgid "Color from theme"
 #~ msgstr "Couleur du thème"
-
-#~ msgctxt "The default name of a profile"
-#~ msgid "Profile #%1"
-#~ msgstr "Profil #%1"
 
 #~ msgid "&Current Tab Settings..."
 #~ msgstr "Paramètres de l'onglet &courant"

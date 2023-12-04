@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole stable\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-28 01:37+0000\n"
+"POT-Creation-Date: 2023-12-04 01:39+0000\n"
 "PO-Revision-Date: 2005-11-29 11:30+0200\n"
 "Last-Translator: Frikkie Thirion <frikkie.thirion@deneloptronics.co.za>\n"
 "Language-Team: AFRIKAANS <translate-discuss-af@lists.sourceforge.net>\n"
@@ -1449,28 +1449,28 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:45
-#: plugins/QuickCommands/quickcommandsplugin.cpp:112
+#: plugins/QuickCommands/quickcommandsplugin.cpp:46
+#: plugins/QuickCommands/quickcommandsplugin.cpp:113
 #, kde-format
 msgid "Quick Commands"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:70
+#: plugins/QuickCommands/quickcommandsplugin.cpp:71
 #, kde-format
 msgid "Show Quick Access"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:107
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
 msgid "Show Quick Commands"
 msgstr ""
@@ -1580,49 +1580,49 @@ msgstr ""
 msgid "Host: %1"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:65
+#: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:95
+#: plugins/SSHManager/sshmanagerplugin.cpp:96
 #, fuzzy, kde-format
 msgid "Show SSH Manager"
 msgstr "Wegsteek Kieslysbalk"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:114
+#: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:147
 #, fuzzy, kde-format
 msgid "Plugins - SSH Manager"
 msgstr "Wegsteek Kieslysbalk"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:152
+#: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
@@ -1934,6 +1934,13 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgid "Default profile"
+msgstr "Stoor Sessies Profiel..."
+
+#: profile/ProfileManager.cpp:256
+#, fuzzy, kde-format
+#| msgid "Save Sessions &Profile..."
+msgctxt "New profile name, %1 is a number"
+msgid "Profile %1"
 msgstr "Stoor Sessies Profiel..."
 
 #: profile/ProfileManager.cpp:270
@@ -5563,12 +5570,6 @@ msgstr "Maak toe huidige sessie"
 #~| msgid "List available session profiles"
 #~ msgid "Color from theme"
 #~ msgstr "Lys beskikbare sessie profiel"
-
-#, fuzzy
-#~| msgid "Save Sessions &Profile..."
-#~ msgctxt "The default name of a profile"
-#~ msgid "Profile #%1"
-#~ msgstr "Stoor Sessies Profiel..."
 
 #, fuzzy
 #~ msgctxt ""

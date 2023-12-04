@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-28 01:37+0000\n"
+"POT-Creation-Date: 2023-12-04 01:39+0000\n"
 "PO-Revision-Date: 2023-09-26 17:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1409,30 +1409,30 @@ msgstr "Päivitä"
 msgid "Cancel"
 msgstr "Peru"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:45
-#: plugins/QuickCommands/quickcommandsplugin.cpp:112
+#: plugins/QuickCommands/quickcommandsplugin.cpp:46
+#: plugins/QuickCommands/quickcommandsplugin.cpp:113
 #, kde-format
 msgid "Quick Commands"
 msgstr "Pikakomennot"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:70
+#: plugins/QuickCommands/quickcommandsplugin.cpp:71
 #, kde-format
 msgid "Show Quick Access"
 msgstr "Näytä pikasaanti"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:105
+#: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 "Pikakomentoja ei löytynyt. Niitä voi lisätä kohdassa Liitännäiset → "
 "Pikakomennot"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:106
+#: plugins/QuickCommands/quickcommandsplugin.cpp:107
 #, kde-format
 msgid "Plugins - Quick Commands"
 msgstr "Liitännäiset – Pikakomennot"
 
-#: plugins/QuickCommands/quickcommandsplugin.cpp:124
+#: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
 msgid "Show Quick Commands"
 msgstr "Näytä pikakomennot"
@@ -1541,51 +1541,51 @@ msgstr "SSH-asetukset"
 msgid "Host: %1"
 msgstr "Palvelin: %1"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:65
+#: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
 msgstr "SSH-hallinta"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:95
+#: plugins/SSHManager/sshmanagerplugin.cpp:96
 #, kde-format
 msgid "Show SSH Manager"
 msgstr "Näytä SSH-hallinta"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:114
+#: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
 msgstr "Näytä SSH-toimintojen pikasaanti"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:145
+#: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
 "Tallennettuja SSH-määrityksiä ei löytynyt. Niitä voi lisätä kohdasta "
 "Liitännäiset → SSH-hallinta"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:146
+#: plugins/SSHManager/sshmanagerplugin.cpp:147
 #, kde-format
 msgid "Plugins - SSH Manager"
 msgstr "Liitännäiset – SSH-hallinta"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:152
+#: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
 msgstr "SSH-kohteet"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr "Prosessin nimeä ei saatu: oletettavasti yhteyttä ei voi pyytää"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:181
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:182
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
 msgstr "Virhe suoritettaessa SSH-komentoa"
 
-#: plugins/SSHManager/sshmanagerplugin.cpp:193
+#: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
@@ -1891,6 +1891,14 @@ msgstr "Sisään rakennettu"
 #, kde-format
 msgid "Default profile"
 msgstr "Oletusprofiili"
+
+#: profile/ProfileManager.cpp:256
+#, fuzzy, kde-format
+#| msgctxt "The default name of a profile"
+#| msgid "Profile #%1"
+msgctxt "New profile name, %1 is a number"
+msgid "Profile %1"
+msgstr "Profiili #%1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -5506,10 +5514,6 @@ msgstr "Sulje välilehti"
 
 #~ msgid "Color from theme"
 #~ msgstr "Väri teemasta"
-
-#~ msgctxt "The default name of a profile"
-#~ msgid "Profile #%1"
-#~ msgstr "Profiili #%1"
 
 #~ msgid "&Current Tab Settings..."
 #~ msgstr "N&ykyisen välilehden asetukset…"
