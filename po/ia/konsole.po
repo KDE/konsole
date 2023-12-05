@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 01:39+0000\n"
-"PO-Revision-Date: 2023-11-16 11:19+0100\n"
+"PO-Revision-Date: 2023-12-04 10:58+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -1881,12 +1881,10 @@ msgid "Default profile"
 msgstr "Profilo predefinite"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Profilo #%1"
+msgstr "Profilo %1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format

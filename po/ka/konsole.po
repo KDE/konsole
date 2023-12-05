@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 01:39+0000\n"
-"PO-Revision-Date: 2023-11-17 01:14+0100\n"
+"PO-Revision-Date: 2023-12-04 06:14+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1872,11 +1872,10 @@ msgid "Default profile"
 msgstr "ნაგულისხმები პროფილი"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgid "Profile"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "პროფილი"
+msgstr "პროფილი %1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
