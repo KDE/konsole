@@ -1,4 +1,5 @@
 # Translation of konsole into Japanese.
+# SPDX-FileCopyrightText: 2023 Ryuichi Yamada <ryuichi_ya220@outlook.jp>
 # This file is distributed under the same license as the kdebase package.
 # Ryuichi Kakuda <ryuk@user.script.nu>, 2004.
 # Kurose Shushi <md81@bird.email.ne.jp>, 2004.
@@ -7,15 +8,15 @@
 # Jumpei Ogawa <phanective@gmail.com>, 2010.
 # Jumpei Ogawa (phanect) <phanective@gmail.com>, 2010, 2012.
 # Fuminobu Takeyama <ftake@geeko.jp>, 2016, 2017.
-# Fumiaki Okushi <fumiaki.okushi@gmail.com>, 2005, 2007, 2008, 2013, 2015, 2016, 2017.
 # Tomohiro Hyakutake <tomhioo@outlook.jp>, 2019.
+# Fumiaki Okushi <fumiaki.okushi@gmail.com>, 2005, 2007, 2008, 2013, 2015, 2016, 2017, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-22 02:26+0000\n"
-"PO-Revision-Date: 2019-10-08 19:40+0900\n"
-"Last-Translator: Tomohiro Hyakutake <tomhioo@outlook.jp>\n"
+"PO-Revision-Date: 2023-12-03 23:07-0800\n"
+"Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -24,21 +25,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 19.08.1\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 "Taiki Komoda,Noboru Sinohara,Ryuichi Kakuda,Kurose Shushi,Fumiaki Okushi,"
-"Shinichi Tsunoda,Yukiko Bando"
+"Shinichi Tsunoda,Yukiko Bando,Ryuichi Yamada"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "kom@kde.gr.jp,shinobo@leo.bekkoame.ne.jp,ryuk@user.script.nu,md81@bird.email."
-"ne.jp,fumiaki.okushi@gmail.com,tsuno@ngy.1st.ne.jp,ybando@k6.dion.ne.jp"
+"ne.jp,fumiaki.okushi@gmail.com,tsuno@ngy.1st.ne.jp,ybando@k6.dion.ne.jp,"
+"ryuichi_ya220@outlook.jp"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -77,7 +79,7 @@ msgstr "設定"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "プラグイン"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -89,7 +91,7 @@ msgstr "ヘルプ"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "メインツールバー"
 
 # ACCELERATOR changed by translator
 #. i18n: ectx: Menu (history)
@@ -100,16 +102,14 @@ msgstr "スクロールバック(&L)"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:78
-#, fuzzy, kde-format
-#| msgid "Session Number: %#"
+#, kde-format
 msgid "Session Toolbar"
-msgstr "セッション番号: %#"
+msgstr "セッションツールバー"
 
 #: AppColorSchemeChooser.cpp:44
-#, fuzzy, kde-format
-#| msgid "New Color Scheme"
+#, kde-format
 msgid "&Window Color Scheme"
-msgstr "新しい色スキーム"
+msgstr "ウィンドウの色スキーム(&W)"
 
 # CommandLineOptions
 #: Application.cpp:53
@@ -164,8 +164,7 @@ msgstr ""
 "新しいウィンドウを開くのではなく、既存のウィンドウに新しいタブを作成する"
 
 #: Application.cpp:62
-#, fuzzy, kde-format
-#| msgid "Create tabs as specified in given tabs configuration file"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Create tabs as specified in given tabs configuration file"
 msgstr "タブ設定ファイルに指定されているとおりに新しいタブを作成"
@@ -179,11 +178,10 @@ msgid ""
 msgstr "Konsole をバックグラウンドで起動し、F12 を押したときに前面に表示"
 
 #: Application.cpp:65
-#, fuzzy, kde-format
-#| msgid "Run in a separate process"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Run in a separate process"
-msgstr "違うプロセスで動作"
+msgstr "別のプロセスで実行"
 
 #: Application.cpp:66
 #, kde-format
@@ -465,8 +463,7 @@ msgid "Color 8 (Faint)"
 msgstr "色 8 (目立たない色)"
 
 #: colorscheme/ColorScheme.cpp:463
-#, fuzzy, kde-format
-#| msgid "Un-named Color Scheme"
+#, kde-format
 msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "名前のない色スキーム"
@@ -506,31 +503,25 @@ msgstr ""
 "透明度の設定は適用されません。"
 
 #: colorscheme/ColorSchemeEditor.cpp:188
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Select wallpaper image file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "壁紙にする画像ファイルを選択"
 
 #: colorscheme/ColorSchemeEditor.cpp:190
-#, fuzzy, kde-format
-#| msgctxt "Filter in file open dialog"
-#| msgid "Supported Images"
+#, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
 msgstr "サポートされた画像"
 
 #: colorscheme/ColorSchemeEditor.cpp:334
-#, fuzzy, kde-format
-#| msgid "New Color Scheme"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "新しい色スキーム"
 
 #: colorscheme/ColorSchemeEditor.cpp:337
-#, fuzzy, kde-format
-#| msgid "Edit Color Scheme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "色スキームを編集"
@@ -578,18 +569,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
 #: colorscheme/ColorSchemeEditor.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@item:intable palette"
-#| msgid "Background"
+#, kde-format
 msgid "Blur background"
-msgstr "背景色"
+msgstr "背景をぼかす"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:69
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Background color transparency:"
-msgstr "背景の透明度:"
+msgstr "背景色の透明度:"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
@@ -600,10 +588,9 @@ msgstr "パーセント"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:103
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Wallpaper transparency:"
-msgstr "背景の透明度:"
+msgstr "壁紙の透明度:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -763,10 +750,9 @@ msgstr ""
 
 # ACCELERATOR added by translator
 #: filterHotSpots/FileFilterHotspot.cpp:183
-#, fuzzy, kde-format
-#| msgid "Copy Input To"
+#, kde-format
 msgid "Copy Location"
-msgstr "入力をコピー(&I)"
+msgstr "場所をコピー"
 
 #: filterHotSpots/FileFilterHotspot.cpp:210
 #, kde-format
@@ -776,7 +762,7 @@ msgstr ""
 #: filterHotSpots/FileFilterHotspot.cpp:308
 #, kde-format
 msgid "Generating Thumbnail"
-msgstr ""
+msgstr "サムネイルを生成中"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:90
 #, kde-format
@@ -799,18 +785,16 @@ msgid "Copy Email Address"
 msgstr "メールアドレスをコピー"
 
 #: FontDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "Select Font..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Select font"
-msgstr "フォントを選択..."
+msgstr "フォントを選択"
 
 #: FontDialog.cpp:43
-#, fuzzy, kde-format
-#| msgid "Show All Fonts"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
-msgstr "すべてのフォントを表示する"
+msgstr "すべてのフォントを表示"
 
 #: FontDialog.cpp:72
 #, kde-format
@@ -914,11 +898,10 @@ msgid "Terminal emulator"
 msgstr "ターミナルエミュレータ"
 
 #: main.cpp:178
-#, fuzzy, kde-format
-#| msgid "(c) 1997-2017, The Konsole Developers"
+#, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr "(c) 1997-2017, The Konsole Developers"
+msgstr "(c) 1997-2022, The Konsole Developers"
 
 #: main.cpp:352
 #, kde-format
@@ -960,39 +943,37 @@ msgstr "オリジナルの作者"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
-msgstr ""
+msgstr "Ahmad Samir"
 
 #: main.cpp:362 main.cpp:365 main.cpp:368 main.cpp:371
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "General maintainer, bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
-msgstr "全般的なメンテナー、バグ修正と全般的な改良"
+msgstr "大規模なリファクタリング、バグ修正と全般的な改良"
 
 #: main.cpp:364
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
-msgstr ""
+msgstr "Carlos Alves"
 
 #: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
-msgstr ""
+msgstr "Tomaz Canabrava"
 
 #: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
-msgstr ""
+msgstr "Gustavo Carneiro"
 
 #: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
-msgstr ""
+msgstr "Edwin Pujols"
 
 #: main.cpp:374 main.cpp:377 main.cpp:379 main.cpp:384 main.cpp:386
 #: main.cpp:387 main.cpp:388
@@ -1005,35 +986,31 @@ msgstr "バグ修正と全般的な改良"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
-msgstr ""
+msgstr "Martin T. H. Sandsmark"
 
 #: main.cpp:379
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
-msgstr ""
+msgstr "Nate Graham"
 
 #: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
-msgstr ""
+msgstr "Mariusz Glebocki"
 
 #: main.cpp:381
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
-msgstr "バグ修正と全般的な改良"
+msgstr "バグ修正と大幅な改良"
 
 #: main.cpp:383
-#, fuzzy, kde-format
-#| msgctxt "@info:credit"
-#| msgid "Thomas Dreibholz"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
-msgstr "Thomas Dreibholz"
+msgstr "Thomas Surrel"
 
 #: main.cpp:386
 #, kde-format
@@ -1290,18 +1267,16 @@ msgid "Activate Menu"
 msgstr "メニューをアクティブにする"
 
 #: MainWindow.cpp:459
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "タブを左に移動"
+msgstr "タブのレイアウトを保存..."
 
 #: MainWindow.cpp:468
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr ""
+msgstr "タブのレイアウトを読み込む..."
 
 #: MainWindow.cpp:784 MainWindow.cpp:809
 #, kde-format
@@ -1352,7 +1327,7 @@ msgstr "一般"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr ""
+msgstr "タブバー/スプリッター"
 
 #: MainWindow.cpp:978
 #, kde-format
@@ -1364,7 +1339,7 @@ msgstr "一時ファイル"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
-msgstr ""
+msgstr "サムネイル"
 
 #: Part.cpp:310
 #, kde-format
@@ -1380,19 +1355,16 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "ショートカット"
+msgstr "ショートカット:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
-#, fuzzy, kde-format
-#| msgid "Filter:"
+#, kde-format
 msgid "Filter..."
-msgstr "フィルタ:"
+msgstr "フィルタ..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
@@ -1403,9 +1375,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
-#, fuzzy, kde-format
-#| msgctxt "@item:intable The session title"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "タイトル"
 
@@ -1424,27 +1394,22 @@ msgstr ""
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:214
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgid "Default"
 msgstr "標準"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Command"
-msgstr "コマンド:"
+msgstr "コマンド"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:347
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "警告: "
+msgstr "警告"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
@@ -1455,10 +1420,9 @@ msgstr ""
 # ACCELERATOR added by translator
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:258
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgid "Save"
-msgstr "ファイルを開く"
+msgstr "保存"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:269
@@ -1470,19 +1434,18 @@ msgstr ""
 #: plugins/QuickCommands/qcwidget.ui:280 plugins/SSHManager/sshwidget.ui:323
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:45
 #: plugins/QuickCommands/quickcommandsplugin.cpp:112
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Quick Commands"
-msgstr "コマンド:"
+msgstr "クイックコマンド"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:70
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "クイックアクセスを表示"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:105
 #, kde-format
@@ -1498,7 +1461,7 @@ msgstr "コマンド:"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:124
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "クイックコマンドを表示"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:168
 #: plugins/QuickCommands/quickcommandswidget.cpp:179
@@ -1585,9 +1548,7 @@ msgid "SSH Config"
 msgstr "終了の確認"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "標準"
@@ -1603,27 +1564,24 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:419
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgid "SSH Config"
-msgstr "終了の確認"
+msgstr "SSH 設定"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Local Host: %h"
+#, kde-format
 msgid "Host: %1"
-msgstr "ローカルホスト: %h"
+msgstr "ホスト: %1"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:65
 #, kde-format
 msgid "SSH Manager"
-msgstr ""
+msgstr "SSH マネージャ"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:95
-#, fuzzy, kde-format
-#| msgid "Show menubar"
+#, kde-format
 msgid "Show SSH Manager"
-msgstr "メニューバーを表示"
+msgstr "SSH マネージャを表示"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:114
 #, kde-format
@@ -1675,7 +1633,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
@@ -1693,7 +1651,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr ""
+msgstr "SSH 設定を削除"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
@@ -1756,9 +1714,7 @@ msgstr "選択した色スキームを編集します"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "ショートカット"
 
@@ -1774,14 +1730,11 @@ msgstr ""
 msgid "Change profile on connect/disconnect"
 msgstr ""
 
-# ACCELERATOR added by translator
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage Profiles..."
+#, kde-format
 msgid "Manage profile"
-msgstr "プロファイルの管理..."
+msgstr "プロファイルを管理"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -1863,10 +1816,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: plugins/SSHManager/sshwidget.ui:178
-#, fuzzy, kde-format
-#| msgid "User Name: %u"
+#, kde-format
 msgid "Username"
-msgstr "ユーザ名: %u"
+msgstr "ユーザ名"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:185
@@ -1898,9 +1850,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: plugins/SSHManager/sshwidget.ui:221
-#, fuzzy, kde-format
-#| msgctxt "@title Preferences page name"
-#| msgid "Profiles"
+#, kde-format
 msgid "Profile"
 msgstr "プロファイル"
 
@@ -1945,7 +1895,7 @@ msgstr ""
 #: pluginsystem/PluginManager.cpp:95
 #, kde-format
 msgid "No plugins available"
-msgstr ""
+msgstr "利用可能なプラグインはありません"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
 #. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
@@ -1979,17 +1929,13 @@ msgid "Konsole does not have permission to save this profile to %1"
 msgstr ""
 
 #: profile/ProfileModel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for color names"
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Profile name"
 msgid "Name"
 msgstr "名前"
 
 #: profile/ProfileModel.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgctxt "@title:column Profile keyboard shortcut"
 msgid "Shortcut"
 msgstr "ショートカット"
@@ -2000,15 +1946,13 @@ msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr ""
+msgstr " [読み取り専用]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgctxt "Name of the default/builtin profile"
-#| msgid "Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "標準"
+msgstr " [標準]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
@@ -2119,7 +2063,7 @@ msgstr "linux コンソール"
 #: schemas.cpp:15
 #, kde-format
 msgid "macOS"
-msgstr ""
+msgstr "macOS"
 
 #: schemas.cpp:16
 #, kde-format
@@ -2171,10 +2115,9 @@ msgstr "セッション '%1' が休止"
 #: session/Session.cpp:744 session/Session.cpp:1940
 #: session/SessionController.cpp:365 session/SessionController.cpp:1869
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1146
-#, fuzzy, kde-format
-#| msgid "Konsole"
+#, kde-format
 msgid "Show session"
-msgstr "Konsole"
+msgstr "セッションを表示"
 
 #: session/Session.cpp:1028
 #, kde-format
@@ -2238,10 +2181,9 @@ msgid "Configure Web Shortcuts..."
 msgstr ""
 
 #: session/SessionController.cpp:659
-#, fuzzy, kde-format
-#| msgid "Konsole"
+#, kde-format
 msgid "&Close Session"
-msgstr "Konsole"
+msgstr "セッションを閉じる(&C)"
 
 # ACCELERATOR added by translator
 #: session/SessionController.cpp:666
@@ -2252,19 +2194,15 @@ msgstr "ファイルマネージャを開く(&O)"
 #: session/SessionController.cpp:678
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "コピー"
 
 #: session/SessionController.cpp:685
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "ビューを左右に分割"
 
 #: session/SessionController.cpp:690
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "ビューを上下に分割"
 
@@ -2352,13 +2290,13 @@ msgstr "エンコーディングを設定(&E)"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow mouse tracking"
-msgstr ""
+msgstr "マウストラッキングを許可"
 
 #: session/SessionController.cpp:848
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-only"
-msgstr ""
+msgstr "読み取り専用"
 
 #: session/SessionController.cpp:859
 #, fuzzy, kde-format
@@ -2430,10 +2368,11 @@ msgstr "フォントサイズを大きく"
 msgid "Shrink Font"
 msgstr "フォントサイズを小さく"
 
+# ACCELERATOR added by translator
 #: session/SessionController.cpp:946
 #, kde-format
 msgid "Reset Font Size"
-msgstr ""
+msgstr "フォントサイズをリセット"
 
 #: session/SessionController.cpp:952
 #, kde-format
@@ -2481,11 +2420,9 @@ msgid "User Signal &2"
 msgstr "ユーザシグナル &2"
 
 #: session/SessionController.cpp:1013
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgid "Create New Profile..."
-msgstr "新しいプロファイル"
+msgstr "新しいプロファイルを作成..."
 
 # ACCELERATOR added by translator
 #: session/SessionController.cpp:1015
@@ -2513,11 +2450,10 @@ msgid "Confirm Close"
 msgstr "終了の確認"
 
 #: session/SessionController.cpp:1148
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "現在のタブを閉じる(&C)"
+msgstr "プログラムを閉じる"
 
 #: session/SessionController.cpp:1175
 #, fuzzy, kde-format
@@ -2593,8 +2529,7 @@ msgid "Select Files for ZModem Upload"
 msgstr "ZModem でアップロードするファイルを選択"
 
 #: session/SessionListModel.cpp:89
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@item:intable The session index"
 msgid "Number"
 msgstr "番号"
@@ -2606,11 +2541,10 @@ msgid "Title"
 msgstr "タイトル"
 
 #: settings/ConfigurationDialog.cpp:31
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgctxt "@title:window"
 msgid "Configure"
-msgstr "終了の確認"
+msgstr "設定"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:55
@@ -2682,9 +2616,7 @@ msgstr "一致したものすべてを強調表示"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/GeneralSettings.ui:175 settings/konsole.kcfg:65
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Sets whether the search is case sensitive"
+#, kde-format
 msgid "Sets whether the search is case sensitive"
 msgstr "大文字と小文字を区別して検索するかどうかを設定します"
 
@@ -2926,48 +2858,42 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:39
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "選択したプロファイルに基づいて新しいプロファイルを作成します"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:42
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "&New..."
-msgstr "新規..."
+msgstr "新規(&N)..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:52
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
 msgstr ""
-"選択したプロファイルを新しいターミナルセッションのデフォルトとして設定します"
+"選択したプロファイルを編集します (このボタンは読み取り専用プロファイルでは無"
+"効化されます)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:55
-#, fuzzy, kde-format
-#| msgid "Edit..."
+#, kde-format
 msgid "&Edit..."
-msgstr "編集..."
+msgstr "編集(&E)..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:65
-#, fuzzy, kde-format
-#| msgid "Delete the selected profile(s)"
+#, kde-format
 msgid "Delete the selected profile"
 msgstr "選択したプロファイルを削除します"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:68
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "&Remove"
-msgstr "削除"
+msgstr "削除(&R)"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:78
@@ -2984,8 +2910,7 @@ msgstr "デフォルトにする(&S)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:36
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Appearance"
 msgstr "外観"
@@ -3006,7 +2931,7 @@ msgstr "必要な時に表示"
 #: settings/TabBarSettings.ui:70
 #, kde-format
 msgid "Alwa&ys"
-msgstr ""
+msgstr "常に表示(&Y)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
 #: settings/TabBarSettings.ui:80
@@ -3040,11 +2965,9 @@ msgstr "タブを閉じるボタンの表示:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:162
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgid "&On each tab"
-msgstr "タブを切り離す(&D)"
+msgstr "それぞれのタブに表示(&O)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:172
@@ -3094,8 +3017,7 @@ msgstr "(なし)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
 #: settings/TabBarSettings.ui:281
-#, fuzzy, kde-format
-#| msgid "Behavior"
+#, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "挙動"
@@ -3127,33 +3049,29 @@ msgstr "中クリックでタブを閉じる"
 # ACCELERATOR added by translatro
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
 #: settings/TabBarSettings.ui:374
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgid "Splits"
-msgstr "ビューを分割(&V)"
+msgstr "ビュー分割"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/TabBarSettings.ui:380
-#, fuzzy, kde-format
-#| msgid "Show menubar"
+#, kde-format
 msgid "Show Header:"
-msgstr "メニューバーを表示"
+msgstr "ヘッダを表示:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:387
-#, fuzzy, kde-format
-#| msgid "When needed"
+#, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "必要な時に表示"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
 #: settings/TabBarSettings.ui:397
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
-msgstr "表示しない(&N)"
+msgstr "表示しない"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/TabBarSettings.ui:423
@@ -3166,28 +3084,28 @@ msgstr ""
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
 #: settings/TabBarSettings.ui:443
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
 #: settings/TabBarSettings.ui:453
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
-msgstr ""
+msgstr "大"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
 #: settings/TabBarSettings.ui:476
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
-msgstr ""
+msgstr "常に表示"
 
 #: settings/TemporaryFilesSettings.cpp:31
 #, kde-format
@@ -3222,13 +3140,13 @@ msgstr "カスタム:"
 #: settings/ThumbnailsSettings.ui:17
 #, kde-format
 msgid "Size:"
-msgstr ""
+msgstr "サイズ:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
 #: settings/ThumbnailsSettings.ui:24
 #, kde-format
 msgid "px"
-msgstr ""
+msgstr "ピクセル"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
@@ -3269,7 +3187,7 @@ msgstr "Alt"
 #: settings/ThumbnailsSettings.ui:84
 #, kde-format
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
@@ -3357,11 +3275,10 @@ msgid "Paste &without control characters"
 msgstr "カーソルの色を現在の文字に合わせる"
 
 #: terminalDisplay/TerminalDisplay.cpp:2316
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
-msgstr "選択を貼り付け"
+msgstr "すべて貼り付け(&P)"
 
 #: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
@@ -3394,18 +3311,15 @@ msgid "Change &Directory To"
 msgstr "ディレクトリを変更(&D)"
 
 #: terminalDisplay/TerminalDisplay.cpp:3039
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgid "&Paste Location"
-msgstr "選択を貼り付け"
+msgstr "場所を貼り付け(&P)"
 
-# ACCELERATOR added by translatro
 #: ViewManager.cpp:106
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
-msgstr "ビューを分割(&V)"
+msgstr "ビューを分割"
 
 #: ViewManager.cpp:113
 #, kde-format
@@ -3420,54 +3334,46 @@ msgid "Split View Top/Bottom"
 msgstr "ビューを上下に分割"
 
 #: ViewManager.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "ビューを上下に分割"
+msgstr "ビューを分割 (自動)"
 
 #: ViewManager.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "ビューを左右に分割"
+msgstr "ビューを次のタブと左右に分割"
 
 #: ViewManager.cpp:147
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "ビューを上下に分割"
+msgstr "ビューを次のタブと上下に分割"
 
 #: ViewManager.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "ビューを上下に分割"
+msgstr "ビューを次のタブと分割 (自動)"
 
 #: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr ""
+msgstr "2x2 レイアウトの新しいタブを読み込む"
 
 #: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr ""
+msgstr "2x1 レイアウトの新しいタブを読み込む"
 
 #: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr ""
+msgstr "1x2 レイアウトの新しいタブを読み込む"
 
 #: ViewManager.cpp:191
 #, kde-format
@@ -3482,20 +3388,16 @@ msgid "Shrink View"
 msgstr "ビューを狭める"
 
 #: ViewManager.cpp:209
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "D&etach Current Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
-msgstr "現在のタブを分離(&E)"
+msgstr "現在のビューを分離(&V)"
 
 #: ViewManager.cpp:221
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "D&etach Current Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr "現在のタブを分離(&E)"
+msgstr "現在のタブを分離(&T)"
 
 #: ViewManager.cpp:226
 #, kde-format
@@ -3655,23 +3557,20 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1210
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"出力を保存するときに問題が発生しました。\n"
+"レイアウトの読み込み中に問題が発生しました。\n"
 "%1"
 
 #: ViewManager.cpp:1221
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "タブのレイアウトを読み込む"
 
 #: Vt102Emulation.cpp:2464
 #, kde-format
@@ -3690,8 +3589,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:69
-#, fuzzy, kde-format
-#| msgid "Shift"
+#, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
 msgstr "Shift"
@@ -3705,16 +3603,14 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
 #: widgets/EditProfileAdvancedPage.ui:107
-#, fuzzy, kde-format
-#| msgid "Alt"
+#, kde-format
 msgctxt "key on keyboard"
 msgid "Alt"
 msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
 #: widgets/EditProfileAdvancedPage.ui:126
-#, fuzzy, kde-format
-#| msgid "Meta"
+#, kde-format
 msgctxt "key on keyboard"
 msgid "Meta"
 msgstr "Meta"
@@ -3796,10 +3692,9 @@ msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:33
-#, fuzzy, kde-format
-#| msgid "Color Scheme && Background"
+#, kde-format
 msgid "Color scheme && font"
-msgstr "色スキームと背景"
+msgstr "色スキームとフォント"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:66
@@ -3856,17 +3751,16 @@ msgstr "標準"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: widgets/EditProfileAppearancePage.ui:132
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgid "Font:"
-msgstr "フォント"
+msgstr "フォント:"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
 #: widgets/EditProfileAppearancePage.ui:164
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr ""
+msgstr "選択..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:171
@@ -3906,39 +3800,31 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
 #: widgets/EditProfileAppearancePage.ui:226
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor"
-#| msgid "Block"
+#, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
 msgstr "ブロック"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
 #: widgets/EditProfileAppearancePage.ui:236
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor, similar to a capital I"
-#| msgid "I-Beam"
+#, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
 msgstr "I-ビーム"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
 #: widgets/EditProfileAppearancePage.ui:246
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor"
-#| msgid "Underline"
+#, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
 msgstr "下線"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileAppearancePage.ui:278
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
-msgstr "色"
+msgstr "色:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:294
@@ -4011,7 +3897,7 @@ msgstr "カーソルを規則的に点滅"
 #: widgets/EditProfileAppearancePage.ui:664
 #, kde-format
 msgid "Enabled"
-msgstr ""
+msgstr "有効"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
@@ -4023,10 +3909,9 @@ msgstr "その他"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAppearancePage.ui:471
-#, fuzzy, kde-format
-#| msgid "Window"
+#, kde-format
 msgid "Window:"
-msgstr "ウィンドウ"
+msgstr "ウィンドウ:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:478
@@ -4187,10 +4072,9 @@ msgstr "カーソルの色を現在の文字に合わせる"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:855
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "フォント"
+msgstr "絵文字フォント:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:897
@@ -4305,11 +4189,9 @@ msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "%1 個のプロファイルを編集: %2"
 
 #: widgets/EditProfileDialog.cpp:351
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgid "Create New Profile"
-msgstr "新しいプロファイル"
+msgstr "新しいプロファイルを作成"
 
 #: widgets/EditProfileDialog.cpp:354
 #, kde-format
@@ -5012,10 +4894,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:43
-#, fuzzy, kde-format
-#| msgid "Scrollback"
+#, kde-format
 msgid "Scrollback:"
-msgstr "スクロールバック"
+msgstr "スクロールバック:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:85
@@ -5138,7 +5019,7 @@ msgstr "静観している時間:"
 #: widgets/EditProfileTabsPage.ui:87
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
-msgstr "静観している時間のしきい値は konsole で検出"
+msgstr "静観している時間のしきい値は Konsole で検出"
 
 #: widgets/HistorySizeWidget.cpp:40
 #, fuzzy, kde-format
@@ -5215,11 +5096,10 @@ msgstr "ターミナルが表示した出力のすべてを記憶"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:138
-#, fuzzy, kde-format
-#| msgid "Unlimited scrollback"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "Unlimited"
-msgstr "制限なしのスクロールバック"
+msgstr "無制限"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:174
@@ -5235,12 +5115,10 @@ msgid "None"
 msgstr "なし"
 
 #: widgets/IncrementalSearchBar.cpp:54
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Find:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "検索:"
+msgstr "検索..."
 
 #: widgets/IncrementalSearchBar.cpp:56
 #, kde-format
@@ -5490,33 +5368,28 @@ msgid "Move terminal to new tab"
 msgstr "ターミナルの上"
 
 #: widgets/TerminalHeaderBar.cpp:101
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close terminal"
-msgstr "ターミナルの上"
+msgstr "ターミナルを閉じる"
 
 #: widgets/TerminalHeaderBar.cpp:186
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Restore terminal"
-msgstr "ターミナルの上"
+msgstr "ターミナルを復元"
 
 #: widgets/ViewContainer.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
-msgstr "タブを切り離す(&D)"
+msgstr "新しいタブを開く"
 
 #: widgets/ViewContainer.cpp:62
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
-msgstr "現在のタブを閉じる(&C)"
+msgstr "現在のタブを閉じる"
 
 #: widgets/ViewContainer.cpp:95
 #, kde-format
@@ -5525,15 +5398,13 @@ msgid "&Detach Tab"
 msgstr "タブを切り離す(&D)"
 
 #: widgets/ViewContainer.cpp:101
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "タブ名を変更(&R)..."
+msgstr "タブを設定/名前変更(&C)..."
 
 #: widgets/ViewContainer.cpp:106
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
-msgstr "現在のタブを閉じる(&C)"
+msgstr "タブを閉じる"
