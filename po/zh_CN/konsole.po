@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 01:39+0000\n"
-"PO-Revision-Date: 2023-11-25 02:26\n"
+"PO-Revision-Date: 2023-12-09 09:25\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -99,7 +99,7 @@ msgstr "会话工具栏"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Name of profile to use for new Konsole instance"
-msgstr "在新的 Konsole 实例中使用的配置方案名称"
+msgstr "用于新的 Konsole 实例中的配置方案名称"
 
 #: Application.cpp:54
 #, kde-format
@@ -111,13 +111,13 @@ msgstr "要加载到新 Konsole 实例的 json 布局文件"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "使用内置配置文件而不是默认配置文件"
+msgstr "使用内置配置方案而不是默认配置方案"
 
 #: Application.cpp:56
 #, kde-format
 msgctxt "@info:shell"
 msgid "Set the initial working directory of the new tab or window to 'dir'"
-msgstr "将新标签或窗口的初试工作目录设定为“dir”"
+msgstr "设置新标签页或者窗口的初始工作目录为“dir”"
 
 #: Application.cpp:57
 #, kde-format
@@ -139,7 +139,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Create tabs as specified in given tabs configuration file"
-msgstr "根据给定的标签配置文件新建标签"
+msgstr "根据给定的标签页配置文件新建标签页"
 
 #: Application.cpp:64
 #, kde-format
@@ -172,13 +172,13 @@ msgstr "隐藏菜单栏，覆盖默认设置"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr "显示标签栏，覆盖默认设置"
+msgstr "显示标签页栏，覆盖默认设置"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr "隐藏标签栏，覆盖默认设置"
+msgstr "隐藏标签页栏，覆盖默认设置"
 
 #: Application.cpp:70
 #, kde-format
@@ -202,7 +202,7 @@ msgstr "列出可用的配置方案"
 #, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
-msgstr "列出所有配置方案属性名称和它们的值(使用  -p)"
+msgstr "列出配置方案的所有属性名称和它们的值 (用于配合 -p 参数使用)"
 
 #: Application.cpp:74
 #, kde-format
@@ -683,7 +683,7 @@ msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
-"文件无法用配置文件中指定的文本编辑器打开；\n"
+"文件无法用配置方案中指定的文本编辑器打开；\n"
 "将使用系统默认编辑器打开。"
 
 #: filterHotSpots/FileFilterHotspot.cpp:174
@@ -1269,7 +1269,7 @@ msgstr "内存"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr "标签栏/分割器"
+msgstr "标签页栏 / 拆分线"
 
 #: MainWindow.cpp:906
 #, kde-format
@@ -1617,7 +1617,7 @@ msgstr "缺少文件夹"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:416
 #, kde-format
 msgid "An SSH session must have a profile"
-msgstr "SSH 会话必须具备配置文件"
+msgstr "SSH 会话必须具备配置方案"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:440
 #, kde-format
@@ -1660,13 +1660,13 @@ msgstr "显示不匹配过滤条件的条目"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr "连接/断开时更改配置文件"
+msgstr "连接/断开时更改配置方案"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
 #, kde-format
 msgid "Manage profile"
-msgstr "管理配置文件"
+msgstr "管理配置方案"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -1779,13 +1779,13 @@ msgstr "在用于组织时，此条目将位于此文件夹内。"
 #: plugins/SSHManager/sshwidget.ui:220
 #, kde-format
 msgid "Profile"
-msgstr "配置"
+msgstr "配置方案"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, profile)
 #: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
-msgstr "ssh 会话开始时激活的配置文件"
+msgstr "SSH 会话开始时要激活的配置方案"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
 #: plugins/SSHManager/sshwidget.ui:271
@@ -1855,16 +1855,15 @@ msgid "Default profile"
 msgstr "默认配置方案"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgid "Profile"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "配置"
+msgstr "配置方案 %1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
-msgstr "Konsole 没有写入配置文件到 %1 的权限"
+msgstr "Konsole 没有写入配置方案到 %1 的权限"
 
 #: profile/ProfileModel.cpp:55
 #, kde-format
@@ -1896,7 +1895,7 @@ msgstr " [默认]"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr "内置配置文件总是可用"
+msgstr "内置配置方案总是可用"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2034,7 +2033,7 @@ msgstr "找不到可启动的交互式 shell。"
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
-msgstr "找不到“%1”，已启动“%2”代替。请检查配置方案。"
+msgstr "找不到“%1”，已使用“%2”替代启动。请检查配置方案的设置。"
 
 #: session/Session.cpp:584
 #, kde-format
@@ -2044,7 +2043,7 @@ msgstr "无法以参数“%2”启动程序“%1”。"
 #: session/Session.cpp:732
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "'%1' 中的沉默 (Session '%2')"
+msgstr "“%1“中的静止 (会话”%2“)"
 
 #: session/Session.cpp:733 session/Session.cpp:1934
 #: session/SessionController.cpp:354 session/SessionController.cpp:1803
@@ -2089,7 +2088,7 @@ msgstr "ZModem 进度"
 #: session/Session.cpp:1933
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "'%1' 中的活动 (会话 '%2')"
+msgstr "“%1“中的活动 (会话”%2“)"
 
 #: session/SessionController.cpp:139
 #, kde-format
@@ -2134,12 +2133,12 @@ msgstr "复制"
 #: session/SessionController.cpp:667
 #, kde-format
 msgid "Split View Left-Right"
-msgstr "左右拆分视图"
+msgstr "拆分视图 (左右)"
 
 #: session/SessionController.cpp:672
 #, kde-format
 msgid "Split View Top-Bottom"
-msgstr "上下拆分视图"
+msgstr "拆分视图 (上下)"
 
 #: session/SessionController.cpp:676
 #, kde-format
@@ -2231,17 +2230,17 @@ msgstr "只读"
 #: session/SessionController.cpp:821
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "配置或重命名标签页...(&C)"
+msgstr "配置或者重命名标签页(&C)..."
 
 #: session/SessionController.cpp:827
 #, kde-format
 msgid "&All Tabs in Current Window"
-msgstr "当前窗口内的全部标签(&A)"
+msgstr "当前窗口中的全部标签页(&A)"
 
 #: session/SessionController.cpp:834
 #, kde-format
 msgid "&Select Tabs..."
-msgstr "选择标签(&S)..."
+msgstr "选择标签页(&S)..."
 
 #: session/SessionController.cpp:840
 #, kde-format
@@ -2262,27 +2261,27 @@ msgstr "&ZModem 上传..."
 #: session/SessionController.cpp:860
 #, kde-format
 msgid "One-shot monitors"
-msgstr "单次显示器"
+msgstr "单次监视器"
 
 #: session/SessionController.cpp:865
 #, kde-format
 msgid "Monitor for &Prompt"
-msgstr "提示显示的监视器(&P)"
+msgstr "提示监视器(&P)"
 
 #: session/SessionController.cpp:872
 #, kde-format
 msgid "Monitor for &Activity"
-msgstr "活动状态监视器(&A)"
+msgstr "活动监视器(&A)"
 
 #: session/SessionController.cpp:878
 #, kde-format
 msgid "Monitor for &Silence"
-msgstr "静止状态监视器(&S)"
+msgstr "静止监视器(&S)"
 
 #: session/SessionController.cpp:884
 #, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "监视进程完成"
+msgstr "进程结束监视器"
 
 #: session/SessionController.cpp:891
 #, kde-format
@@ -2422,7 +2421,7 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 "<p>检测到一个 ZModem 文件传输尝试，但是在此系统上找不到合适的 ZModem 软件。</"
-"p><p>您大概需要安装“rzsz”或“lrzsz”软件包。</p>"
+"p><p>您可能需要安装“rzsz”或“lrzsz”软件包。</p>"
 
 #: session/SessionController.cpp:2082
 #, kde-format
@@ -2436,7 +2435,7 @@ msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
-"<p>在此系统上找不到合适的 ZModem 软件。</p><p>您大概需要安装“rzsz”或“lrzsz”软"
+"<p>在此系统上找不到合适的 ZModem 软件。</p><p>您可能需要安装“rzsz”或“lrzsz”软"
 "件包。</p>"
 
 #: session/SessionController.cpp:2097
@@ -2480,7 +2479,7 @@ msgstr "启用菜单快捷键"
 #: settings/GeneralSettings.ui:69
 #, kde-format
 msgid "If enabled, profile settings will be ignored"
-msgstr "如果启用，将忽略配置中的设置"
+msgstr "如果启用，配置方案中的设置将被忽略"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
 #: settings/GeneralSettings.ui:72
@@ -2680,7 +2679,7 @@ msgstr "指定内存消耗级别上限，超过此上限则开始限流。"
 #: settings/konsole.kcfg:95 settings/konsole.kcfg:115
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
-msgstr "控制整个标签栏的可见性"
+msgstr "控制整个标签页栏的显示/隐藏状态"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
 #: settings/konsole.kcfg:104
@@ -2692,25 +2691,25 @@ msgstr "控制面板之间拖拽柄的大小"
 #: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the position of the tab bar"
-msgstr "控制标签栏的位置"
+msgstr "控制标签页栏的位置"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:132
 #, kde-format
 msgid "Control the visual style of the tab bar"
-msgstr "控制标签栏的外观"
+msgstr "控制标签页栏的视觉风格"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:136
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
-msgstr "标签栏使用用户自定义的 .css 文件"
+msgstr "标签页栏使用用户自定义的 .css 文件"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
 #: settings/konsole.kcfg:140
 #, kde-format
 msgid "The .css file to use for the tab bar style"
-msgstr "标签栏使用的 .css 文件"
+msgstr "标签页栏的视觉风格使用的 .css 文件"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
 #: settings/konsole.kcfg:144
@@ -2722,7 +2721,7 @@ msgstr "允许中键点击关闭已打开的标签页"
 #: settings/konsole.kcfg:148
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr "控制标签页栏上“新建标签页”按钮的可见性"
+msgstr "控制标签页栏上“新建标签页”按钮的显示/隐藏状态"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:152
@@ -2770,7 +2769,7 @@ msgstr "回滚文件使用此文件夹"
 #: settings/MemorySettings.ui:17
 #, kde-format
 msgid "Enable memory monitoring:"
-msgstr "启用内存监测："
+msgstr "启用内存监视："
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2813,17 +2812,18 @@ msgid ""
 "format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
 "a change to how these are handled.</body></html>"
 msgstr ""
-"<html><head/><body><p>使用 KonsolePart 的应用会共享配置文件。</p><p>它们不会"
-"和 Konsole 及其他程序共享：<ul><li>默认配置文件</li><li>在菜单中显示</li><li>"
-"快捷键</li></ul></p><p>如果您希望改变这些处理方式，请随时为 Konsole <a href="
-"\"https://bugs.kde.org/enter_bug.cgi?"
-"format=guided&product=konsole&component=kpart\">报告 Bug</a>。</body></html>"
+"<html><head/><body><p>使用 KonsolePart 的应用之间会共享配置方案。</p><p>它们"
+"不与 Konsole 及其他应用程序共享以下内容：<ul><li>默认配置方案</li><li>菜单的"
+"显示项目</li><li>快捷键</li></ul></p><p>如果您希望改变这些处理方式，请向 "
+"Konsole 项目<a href=\"https://bugs.kde.org/enter_bug.cgi?"
+"format=guided&product=konsole&component=kpart\">提交一个程序缺陷报告</a>。</"
+"body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "Create a new profile based on the selected profile"
-msgstr "基于选中配置方案创建新配置方案"
+msgstr "新建配置方案 (基于选中的配置方案)"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:57
@@ -2836,7 +2836,7 @@ msgstr "新建(&N)..."
 #, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
-msgstr "编辑选中的配置方案 (只读配置文件的此按钮为禁用状态)"
+msgstr "编辑选中的配置方案 (此按钮在只读配置方案中被禁用)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:70
@@ -2986,7 +2986,7 @@ msgstr "行为"
 #: settings/TabBarSettings.ui:298
 #, kde-format
 msgid "Put new tabs:"
-msgstr "放入新标签页："
+msgstr "放置新标签页："
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
 #: settings/TabBarSettings.ui:308
@@ -2998,13 +2998,13 @@ msgstr "在末端(&T)"
 #: settings/TabBarSettings.ui:318
 #, kde-format
 msgid "After current &tab"
-msgstr "在当前标签页后(&T)"
+msgstr "在当前标签页后面(&T)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
 #: settings/TabBarSettings.ui:354
 #, kde-format
 msgid "Close tab on middle-click"
-msgstr "中键关闭标签页"
+msgstr "中键点击关闭标签页"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
 #: settings/TabBarSettings.ui:377
@@ -3115,7 +3115,7 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
-"<html><head/><body><p>要使用此特性，请在您的配置文件设置中启用<span style=\" "
+"<html><head/><body><p>要使用此特性，请在配置方案的设置中启用<span style=\" "
 "font-weight:600;\">鼠标-&gt;杂项-&gt;下划线</span><span style=\" font-"
 "weight:600;\">文件</span></p></body></html>"
 
@@ -3277,55 +3277,55 @@ msgstr "拆分视图"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
-msgstr "左右拆分视图"
+msgstr "拆分视图 (左右)"
 
 #: ViewManager.cpp:121
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
-msgstr "上下拆分视图"
+msgstr "拆分视图 (上下)"
 
 #: ViewManager.cpp:129
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "自动分割视图"
+msgstr "拆分视图 (自动)"
 
 #: ViewManager.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "向右拆分选项卡"
+msgstr "拆分视图 (与下一个标签页)(左右)"
 
 #: ViewManager.cpp:147
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "向下拆分选项卡"
+msgstr "拆分视图 (与下一个标签页)(上下)"
 
 #: ViewManager.cpp:155
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "自动拆分选项卡"
+msgstr "拆分视图 (与下一个标签页)(自动)"
 
 #: ViewManager.cpp:165
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr "用 2x2 终端布局加载新标签"
+msgstr "加载新标签页 (使用 2x2 终端布局)"
 
 #: ViewManager.cpp:174
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr "用 2x1 终端布局加载新标签"
+msgstr "加载新标签页 (使用 2x1 终端布局)"
 
 #: ViewManager.cpp:183
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr "用 1x2 终端布局加载新标签"
+msgstr "加载新标签页 (使用 1x2 终端布局)"
 
 #: ViewManager.cpp:191
 #, kde-format
@@ -3343,25 +3343,25 @@ msgstr "卷起标签"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
-msgstr "漂移当前视图(&V)"
+msgstr "分离当前视图(&V)"
 
 #: ViewManager.cpp:221
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr "漂移当前标签页(&T)"
+msgstr "分离当前标签页(&T)"
 
 #: ViewManager.cpp:226
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
-msgstr "下一个标签"
+msgstr "下一个标签页"
 
 #: ViewManager.cpp:234
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
-msgstr "上一个标签"
+msgstr "上一个标签页"
 
 #: ViewManager.cpp:242
 #, kde-format
@@ -3391,13 +3391,13 @@ msgstr "聚焦右侧终端"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
-msgstr "切换到最后一个标签"
+msgstr "切换到最后一个标签页"
 
 #: ViewManager.cpp:273
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
-msgstr "上次使用的标签页"
+msgstr "最近使用的标签页"
 
 #: ViewManager.cpp:278
 #, kde-format
@@ -3409,7 +3409,7 @@ msgstr "在两个标签页之间切换"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
-msgstr "上次使用的标签页 (反向)"
+msgstr "最近使用的标签页 (反向)"
 
 #: ViewManager.cpp:288
 #, kde-format
@@ -3439,13 +3439,13 @@ msgstr "切换缩放-最大化当前视图"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
-msgstr "将标签页移至右侧"
+msgstr "移动标签页至右侧"
 
 #: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
-msgstr "将标签页移至左侧"
+msgstr "移动标签页至左侧"
 
 #: ViewManager.cpp:320
 #, kde-format
@@ -3475,7 +3475,7 @@ msgstr "与所有视图相同的大小"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
-msgstr "切换到标签 %1"
+msgstr "切换到标签页 %1"
 
 #: ViewManager.cpp:562
 #, kde-format
@@ -4133,7 +4133,7 @@ msgid ""
 "the settings to a new profile."
 msgstr ""
 "保存设置到此位置时权限不足：<filename>%1</filename>。<nl/>请修改该文件的权"
-"限，或更换配置文件名称以将配置文件保存到新的文件。"
+"限，或更换配置方案文件名称以将配置方案保存到新的文件。"
 
 #: widgets/EditProfileDialog.cpp:305
 #, kde-format
@@ -4151,13 +4151,13 @@ msgstr "同名的配置方案“%1”已存在。"
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr "配置文件名超过允许的最大长度 (%1)。"
+msgstr "配置方案文件名超过了所允许的最大长度 (%1)。"
 
 #: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr "高亮显示的字符在配置文件名中无效：%1。"
+msgstr "高亮显示的字符在配置方案文件名中无效：%1。"
 
 #: widgets/EditProfileDialog.cpp:411
 #, kde-format
@@ -4216,7 +4216,7 @@ msgstr "忽略系统提示事件"
 #: widgets/EditProfileDialog.cpp:530
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr "%1 中新终端会话的默认配置"
+msgstr "%1 中的新建终端会话的默认方案"
 
 #: widgets/EditProfileDialog.cpp:635
 #, kde-format
@@ -4276,13 +4276,13 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
-"格式例如 'editorExec PATH:LINE:COLUMN'\n"
+"格式示例“editorExec PATH:LINE:COLUMN”\n"
 "\n"
 "PATH 会被文本文件的路径替换\n"
 "LINE 会被行号替换\n"
 "COLUMN（可选）会被列号替换\n"
-"注意：你需要将 'PATH:LINE:COLUMN' 替换为你想使用的编辑器实际支持的语法格式，"
-"例如：\n"
+"注意：你需要将“PATH:LINE:COLUMN”替换为你想使用的编辑器实际支持的语法格式，例"
+"如：\n"
 "gedit +LINE:COLUMN PATH\n"
 "\n"
 "如果 PATH 或者 LINE 任何一个没有出现在命令行中，那么这个设定会被直接忽略，文"
@@ -4303,26 +4303,26 @@ msgstr "常规设置"
 #: widgets/EditProfileGeneralPage.ui:66
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
-msgstr "选择在使用这个配置方案的标签页上显示的图标"
+msgstr "选择在使用此配置方案的标签页上显示的图标"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:84
 #, kde-format
 msgid "A descriptive name for the profile"
-msgstr "配置方案的描述名称"
+msgstr "配置方案的描述性名称"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:87
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Profile name"
-msgstr "配置文件名称"
+msgstr "配置方案名称"
 
 #. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
 #: widgets/EditProfileGeneralPage.ui:94
 #, kde-format
 msgid "Default Profile"
-msgstr "默认配置"
+msgstr "默认方案"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileGeneralPage.ui:125
@@ -4336,7 +4336,7 @@ msgstr "命令："
 msgid ""
 "The command to execute when new terminal sessions are created using this "
 "profile"
-msgstr "当使用这个配置方案创建新的终端会话时要执行的命令"
+msgstr "当使用此配置方案创建新的终端会话时要执行的命令"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
 #: widgets/EditProfileGeneralPage.ui:144
@@ -4355,7 +4355,7 @@ msgstr "初始目录："
 #, kde-format
 msgid ""
 "The initial working directory for new terminal sessions using this profile"
-msgstr "使用这个配置方案的新的终端会话的初始工作目录"
+msgstr "使用此配置方案的新的终端会话的初始工作目录"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:176
@@ -4938,13 +4938,13 @@ msgstr "标签页监视"
 #: widgets/EditProfileTabsPage.ui:80
 #, kde-format
 msgid "Threshold for continuous silence:"
-msgstr "连续沉默的时间阈值："
+msgstr "连续静止的时间阈值："
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, silenceSecondsSpinner)
 #: widgets/EditProfileTabsPage.ui:93
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
-msgstr "Konsole 检测连续沉默的时间阈值"
+msgstr "Konsole 检测到连续静止的时间阈值"
 
 #: widgets/HistorySizeWidget.cpp:40
 #, kde-format
@@ -5141,27 +5141,25 @@ msgstr "无"
 msgid ""
 "Tab title format used when a remote command (e.g. connection to another "
 "computer via SSH) is being executed"
-msgstr ""
-"当一个远程命令(例如通过 SSH 连接到另一台计算机)正在被运行的时候所使用的标签标"
-"题格式"
+msgstr "远程命令执行时 (例如通过 SSH 连接到另一台计算机) 的标签页标题格式"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/RenameTabWidget.ui:60
 #, kde-format
 msgid "Remote tab title format:"
-msgstr "远程标签标题格式："
+msgstr "远程标签页标题格式："
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
 #, kde-format
 msgid "Tab title format:"
-msgstr "标签标题格式："
+msgstr "标签页标题格式："
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
 #, kde-format
 msgid "Normal tab title format"
-msgstr "普通标签标题格式"
+msgstr "正常标签页标题格式"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
@@ -5278,13 +5276,13 @@ msgstr "关闭此标签页"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
-msgstr "漂移标签(&D)"
+msgstr "分离标签页(&D)"
 
 #: widgets/ViewContainer.cpp:100
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "配置或重命名标签...(&C)"
+msgstr "配置或者重命名标签页(&C)..."
 
 #: widgets/ViewContainer.cpp:105
 #, kde-format
