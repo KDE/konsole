@@ -208,7 +208,7 @@
     <p xml:lang="tr">Özellikler:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
-    <p xml:lang="zh-CN">功能：</p>
+    <p xml:lang="zh-CN">功能特性：</p>
     <p xml:lang="zh-TW">功能：</p>
     <ul>
       <li>Tabs</li>
@@ -262,7 +262,7 @@
       <li xml:lang="tr">Sekmeler</li>
       <li xml:lang="uk">Вкладки.</li>
       <li xml:lang="x-test">xxTabsxx</li>
-      <li xml:lang="zh-CN">标签</li>
+      <li xml:lang="zh-CN">标签页</li>
       <li xml:lang="zh-TW">分頁</li>
       <li>Multiple profiles</li>
       <li xml:lang="ar">مختلف التّشكيلات</li>
@@ -314,7 +314,7 @@
       <li xml:lang="tr">Çoklu profiller</li>
       <li xml:lang="uk">Підтримка роботи з декількома профілями.</li>
       <li xml:lang="x-test">xxMultiple profilesxx</li>
-      <li xml:lang="zh-CN">多配置文件</li>
+      <li xml:lang="zh-CN">多个配置文件</li>
       <li xml:lang="zh-TW">多重設定檔</li>
       <li>Silence and Activity monitoring</li>
       <li xml:lang="ar">مراقبة السّكوت والنّشاط</li>
@@ -365,7 +365,7 @@
       <li xml:lang="tr">Sessizlik ve Etkinlik izleme</li>
       <li xml:lang="uk">Спостереження за бездіяльністю та діями.</li>
       <li xml:lang="x-test">xxSilence and Activity monitoringxx</li>
-      <li xml:lang="zh-CN">沉默和活动监视</li>
+      <li xml:lang="zh-CN">静止和活动监视</li>
       <li xml:lang="zh-TW">靜音與活動監控</li>
       <li>Bookmark support</li>
       <li xml:lang="ar">دعم العلامات</li>
