@@ -5,21 +5,21 @@
 # Jozef Riha <jose1711@gmail.com>, 2006.
 # Michal Sulek <misurel@gmail.com>, 2009, 2010, 2011.
 # Richard Frič <Richard.Fric@kdemail.net>, 2012.
-# Roman Paholík <wizzardsk@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2021, 2022.
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2021, 2022, 2023 Roman Paholík <wizzardsk@gmail.com>
 # Matej Mrenica <matejm98mthw@gmail.com>, 2018, 2019, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 01:39+0000\n"
-"PO-Revision-Date: 2022-07-19 10:03+0200\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-12-12 19:29+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.07.80\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -623,20 +623,20 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "Horizontal Anchor:"
 msgid "Horizontal"
-msgstr "Horizontálna kotva:"
+msgstr "Horizontálne"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
 #, fuzzy, kde-format
 #| msgid "Vertical Anchor:"
 msgid "Vertical"
-msgstr "Vertikálna kotva:"
+msgstr "Vertikálne"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
-#, kde-format
+#, fuzzy, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Obe"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -1285,7 +1285,7 @@ msgstr "Všeobecné"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Pamäť"
 
 #: MainWindow.cpp:901
 #, kde-format
@@ -1319,11 +1319,9 @@ msgstr "Formulár"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Skratka"
+msgstr "Skratka:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1505,8 +1503,7 @@ msgid "Warnings (*)"
 msgstr "Upozornenia (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "SSH Config"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "SSH Nastavenia"
@@ -1888,7 +1885,7 @@ msgstr "Škálovať výstup"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Zabudované"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
@@ -1901,7 +1898,7 @@ msgstr "Štandardný profil"
 #| msgid "Profile #%1"
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Profil #%1"
+msgstr "+Profily"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -2842,15 +2839,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
-#, kde-format
+#, fuzzy, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Limit pamäte:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3555,9 +3552,9 @@ msgid "Semantic hints "
 msgstr "Sémantické nápovedy:"
 
 #: ViewManager.cpp:578
-#, kde-format
+#, fuzzy, kde-format
 msgid "Line numbers "
-msgstr ""
+msgstr "Čísla riadkov"
 
 #: ViewManager.cpp:1143
 #, fuzzy, kde-format
@@ -3969,9 +3966,7 @@ msgstr "Sila stmavnutia:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:533
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Farba:"
@@ -4057,9 +4052,9 @@ msgstr "Indikovať či je okno aktívne stlmením farieb"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:746
-#, kde-format
+#, fuzzy, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Hranica"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:788

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 01:39+0000\n"
-"PO-Revision-Date: 2023-11-29 17:50+0900\n"
+"PO-Revision-Date: 2023-12-12 18:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1856,12 +1856,10 @@ msgid "Default profile"
 msgstr "預設設定檔"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "設定檔 #%1"
+msgstr "設定檔 %1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -2672,7 +2670,7 @@ msgstr "控制是否要為個別分頁建立子 cgroup"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr "決定記憶體用量超過多少時要開始限制用量"
