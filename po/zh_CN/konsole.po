@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-22 02:26+0000\n"
-"PO-Revision-Date: 2023-12-09 09:29\n"
+"PO-Revision-Date: 2023-12-17 11:32\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -3263,19 +3263,19 @@ msgstr "拆分视图 (自动)"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "拆分视图 (与下一个标签页)(左右)"
+msgstr "拆分视图 (与下一个标签页) (左右)"
 
 #: ViewManager.cpp:147
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "拆分视图 (与下一个标签页)(上下)"
+msgstr "拆分视图 (与下一个标签页) (上下)"
 
 #: ViewManager.cpp:155
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "拆分视图 (与下一个标签页)(自动)"
+msgstr "拆分视图 (与下一个标签页) (自动)"
 
 #: ViewManager.cpp:165
 #, kde-format
