@@ -21,7 +21,6 @@ class KONSOLEPRIVATE_EXPORT UrlFilter : public RegExpFilter
 public:
     UrlFilter();
 
-protected:
     QSharedPointer<HotSpot> newHotSpot(int beginRow, int beginColumn, int endRow, int endColumn, const QStringList &list) override;
 
 public:

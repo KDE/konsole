@@ -249,6 +249,18 @@ xmpp:ogoffart@kde.org
 'https://en.wikipedia.org/wiki/Earths_rotation'
 "https://en.wikipedia.org/wiki/Earth's_rotation"
 
+https://example.com'
+https://example.com,
+https://example.com.
+https://example.com/:
+https://example.com;
+
+https://example.com..
+.https://example.com.
+'https://example.com',
+"https://example.com",
+'https://en.wikipedia.org/wiki/Earth's_rotation',
+
 # testing edge cases - if 80 columns
 http://www.website.com/directory/relative.html?query=test&name=harry http://www.website.com/directory/relative.html?query=test&name=harryhttp://www.website.com/directory/relative.html?query=test&name=harry
 --------------

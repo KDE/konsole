@@ -5,6 +5,7 @@
 */
 
 #include "HotSpotFilterTest.h"
+#include "filterHotSpots/HotSpot.h"
 #include <QTest>
 
 QTEST_GUILESS_MAIN(HotSpotFilterTest)
@@ -95,6 +96,8 @@ void HotSpotFilterTest::testUrlFilterRegex_data()
 
     QTest::newRow("query_with_question_marks") << "ldap://[2001:db8::7]/c=GB?objectClass?one"
                                                << "ldap://[2001:db8::7]/c=GB?objectClass?one" << true;
+    QTest::newRow("two_fragments") << "https://example.com#1#2"
+                                   << "https://example.com#1" << true;
 
     QTest::newRow("path_with_parens") << "https://en.wikipedia.org/wiki/C_(programming_language)"
                                       << "https://en.wikipedia.org/wiki/C_(programming_language)" << true;
@@ -119,6 +122,80 @@ void HotSpotFilterTest::testUrlFilterRegex()
     QCOMPARE(match.hasMatch(), matchResult);
     if (matchResult) {
         QCOMPARE(match.capturedView(0), expectedUrl);
+    }
+}
+
+void HotSpotFilterTest::testUrlFilter_data()
+{
+    QTest::addColumn<QString>("url");
+    QTest::addColumn<QString>("expectedUrl");
+    QTest::addColumn<bool>("matchResult");
+
+    // If no invalid character is found at the end, the resultUrl should equal the FullUrlRegExp match.
+    QTest::newRow("url_simple") << " https://api.kde.org"
+                                << "https://api.kde.org" << true;
+    QTest::newRow("url_with_port") << "\nhttps://api.kde.org:2098"
+                                   << "https://api.kde.org:2098" << true;
+    QTest::newRow("empty_query") << "http://example.com/?"
+                                 << "http://example.com/?" << true;
+    QTest::newRow("empty_fragment") << "http://example.com/#"
+                                    << "http://example.com/#" << true;
+    QTest::newRow("url_all_bells") << " https://user:pass@api.kde.org:2098/path/to/somewhere?somequery=foo#fragment"
+                                   << "https://user:pass@api.kde.org:2098/path/to/somewhere?somequery=foo#fragment" << true;
+
+    // with an invalid character at the end
+    QTest::newRow("url_with_single_quote_end") << "https://example.com'"
+                                               << "https://example.com" << true;
+    QTest::newRow("url_with_comma_end") << "https://example.com,"
+                                        << "https://example.com" << true;
+    QTest::newRow("url_with_dot_end") << "https://example.com."
+                                      << "https://example.com" << true;
+    QTest::newRow("url_with_colon_end") << "https://example.com/:"
+                                        << "https://example.com/" << true;
+    QTest::newRow("url_with_semicolon_end") << "https://example.com;"
+                                            << "https://example.com" << true;
+
+    // complex cases
+    QTest::newRow("url_with_double_dot_end") << "https://example.com.."
+                                             << "https://example.com" << true;
+    QTest::newRow("url_with_dot_start_and_end") << ".https://example.com."
+                                                << "https://example.com" << true;
+    QTest::newRow("url_with_single_quote_comma_end") << "'https://example.com',"
+                                                     << "https://example.com" << true;
+    QTest::newRow("url_with_double_quote_comma_end") << "\"https://example.com\","
+                                                     << "https://example.com" << true;
+    QTest::newRow("url_with_single_quote_inside") << "'https://en.wikipedia.org/wiki/Earth's_rotation',"
+                                                  << "https://en.wikipedia.org/wiki/Earth's_rotation" << true;
+}
+
+void HotSpotFilterTest::testUrlFilter()
+{
+    QFETCH(QString, url);
+    QFETCH(QString, expectedUrl);
+    QFETCH(bool, matchResult);
+
+    const QRegularExpression &regex = Konsole::UrlFilter::FullUrlRegExp;
+    const QRegularExpressionMatch match = regex.match(url);
+    // qDebug() << match;
+
+    QCOMPARE(match.hasMatch(), matchResult);
+    if (matchResult) {
+        auto capturedText = match.capturedTexts()[0];
+
+        // The capturedText is placed at the location from (0, 0) to (0, length).
+        // After processing, the resulting position is extracted to obtain resultUrl.
+        int startLine = 0;
+        int startColumn = 0;
+        int endLine = 0;
+        int endColumn = capturedText.length();
+
+        QSharedPointer<Konsole::HotSpot> hotSpot = Konsole::UrlFilter().newHotSpot(startLine, startColumn, endLine, endColumn, match.capturedTexts());
+
+        int resultStartColumn = hotSpot->startColumn();
+        int resultEndColumn = hotSpot->endColumn();
+
+        QString resultUrl = capturedText.mid(resultStartColumn, resultEndColumn - resultStartColumn);
+        QCOMPARE(resultUrl, expectedUrl);
     }
 }
 

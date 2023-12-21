@@ -16,6 +16,9 @@ class HotSpotFilterTest : public QObject
 private Q_SLOTS:
     void testUrlFilterRegex_data();
     void testUrlFilterRegex();
+
+    void testUrlFilter_data();
+    void testUrlFilter();
 };
 
 #endif // HOTSPOTFILTERTEST_H
