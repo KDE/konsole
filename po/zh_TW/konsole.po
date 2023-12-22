@@ -1,6 +1,7 @@
 # translation of konsole.po to Chinese Traditional
 # Copyright (C) 2001-2002, 2006, 2007, 2008 Free Software Foundation, Inc.
 #
+# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
 # Jouston Huang (Huang, Jiun-Jeng) <jouston@housediy.com>, 2001.
 # Roy Hiu-yeung Chan (voidoo) <voidoo@xychen.org>, 2002.
 # Kenduest Lee <kenduest@i18n.linux.org.tw>, 2002.
@@ -10,13 +11,13 @@
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2006, 2007, 2008, 2009, 2010.
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
 # Chaoting Liu <brli@chakralinux.org>, 2021.
-# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 01:39+0000\n"
-"PO-Revision-Date: 2023-12-12 18:43+0900\n"
+"PO-Revision-Date: 2023-12-22 04:46+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.01.80\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1192,7 +1193,7 @@ msgstr "書籤(&B)"
 #: MainWindow.cpp:376
 #, kde-format
 msgid "&Window Color Scheme"
-msgstr "視窗配色 (&W)"
+msgstr "視窗配色(&W)"
 
 #: MainWindow.cpp:388
 #, kde-format
@@ -3347,13 +3348,13 @@ msgstr "縮回樹狀檢視"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
-msgstr "分離目前檢視(&V)"
+msgstr "在獨立視窗顯示目前檢視(&V)"
 
 #: ViewManager.cpp:221
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr "分離目前分頁(&T)"
+msgstr "在獨立視窗顯示目前分頁(&T)"
 
 #: ViewManager.cpp:226
 #, kde-format
@@ -5282,7 +5283,7 @@ msgstr "關閉本分頁"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
-msgstr "分離分頁(&D)"
+msgstr "在獨立視窗顯示分頁(&D)"
 
 #: widgets/ViewContainer.cpp:100
 #, kde-format
