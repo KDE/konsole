@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-04 01:39+0000\n"
-"PO-Revision-Date: 2023-11-07 21:27+0100\n"
+"PO-Revision-Date: 2023-12-14 22:03+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
-"Language-Team: \n"
+"Language-Team: Assamese <alministradores@softastur.org>\n"
 "Language: ast\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1435,7 +1435,7 @@ msgstr ""
 #: plugins/QuickCommands/quickcommandswidget.cpp:281
 #, kde-format
 msgid "Command can not be empty"
-msgstr ""
+msgstr "El comandu nun pue tar baleru"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:301
 #, kde-format
@@ -1482,7 +1482,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
 msgid "Host: %1"
-msgstr ""
+msgstr "Agospiador: %1"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
@@ -1701,7 +1701,7 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:148
 #, kde-format
 msgid "The private key"
-msgstr ""
+msgstr "La clave privada"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:167
@@ -1900,7 +1900,7 @@ msgstr ""
 #: schemas.cpp:1
 #, kde-format
 msgid "Black on Light Yellow"
-msgstr ""
+msgstr "Azul sobre mariello claro"
 
 #: schemas.cpp:2
 #, kde-format
@@ -1910,12 +1910,12 @@ msgstr ""
 #: schemas.cpp:3
 #, kde-format
 msgid "Black on White"
-msgstr ""
+msgstr "Prietu sobre blancu"
 
 #: schemas.cpp:4
 #, kde-format
 msgid "Blue on Black"
-msgstr ""
+msgstr "Azul sobre prietu"
 
 #: schemas.cpp:5
 #, kde-format
@@ -1930,17 +1930,17 @@ msgstr ""
 #: schemas.cpp:7
 #, kde-format
 msgid "Green on Black"
-msgstr ""
+msgstr "Verde sobre prietu"
 
 #: schemas.cpp:8
 #, kde-format
 msgid "Linux Colors"
-msgstr ""
+msgstr "Colores de Linux"
 
 #: schemas.cpp:9
 #, kde-format
 msgid "Red on Black"
-msgstr ""
+msgstr "Coloráu sobre prietu"
 
 #: schemas.cpp:10
 #, kde-format
@@ -1955,7 +1955,7 @@ msgstr ""
 #: schemas.cpp:12
 #, kde-format
 msgid "White on Black"
-msgstr ""
+msgstr "Blancu sobre prietu"
 
 #: schemas.cpp:13
 #, kde-format
@@ -1970,7 +1970,7 @@ msgstr ""
 #: schemas.cpp:15
 #, kde-format
 msgid "macOS"
-msgstr ""
+msgstr "macOS"
 
 #: schemas.cpp:16
 #, kde-format
