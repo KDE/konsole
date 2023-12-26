@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 01:39+0000\n"
+"POT-Creation-Date: 2023-12-26 01:35+0000\n"
 "PO-Revision-Date: 2023-05-17 20:01+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -3181,12 +3181,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "مكّن توليد المصغرات"
 
-#: terminalDisplay/TerminalDisplay.cpp:658
+#: terminalDisplay/TerminalDisplay.cpp:661
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "القياس: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2247
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3197,83 +3197,83 @@ msgstr[3] "هل أنت متأكد من لصق %1 محارف؟"
 msgstr[4] "هل أنت متأكد من لصق %1 محرفًا؟"
 msgstr[5] "هل أنت متأكد من لصق %1 محرف؟"
 
-#: terminalDisplay/TerminalDisplay.cpp:2248
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
 msgstr "تأكيد اللصق"
 
-#: terminalDisplay/TerminalDisplay.cpp:2281
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "نهاية النص/المقاطعة: قد تخرج من العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2282
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "نهاية النقل: قد تخرج من العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2283
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "الجرس: سيحاول إصدار تحذير صوتي"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
 msgstr "مسافة للخلف"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "التحكم بالجهاز الثالثة/XOFF: يعلق الخرج"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "بديل/ معلق: قد يوقف العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "الهروب: يستخدم للتلاعب بالحالة الطرفية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "فاصل/ إنهاء الملف: قد يحبط العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2311
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "يحتوي النص الذي تحاول لصقه على أحرف تحكم مخفية، هل تريد تصفيتها؟ "
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "تأكيد اللصق"
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "ألصق &بدون أحرف التحكم"
 
-#: terminalDisplay/TerminalDisplay.cpp:2316
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "ألصق &كل شيء"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "أل&غِ"
 
-#: terminalDisplay/TerminalDisplay.cpp:2548
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3283,178 +3283,178 @@ msgstr ""
 "<qt>المخرجات <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
 "\">علقت</a> بواسطة ضغط  Ctrl+S.  اضغط  <b>Ctrl+Q</b> للاستئنافها.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2603
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "الطرفية للقراءة فقط"
 
-#: terminalDisplay/TerminalDisplay.cpp:2998
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr "غيّر ال&دليل إلى"
 
-#: terminalDisplay/TerminalDisplay.cpp:3031
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
 msgstr "أ&لصق المكان"
 
-#: ViewManager.cpp:106
+#: ViewManager.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "افصل العرض"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "افصل العرض يمين/يسار"
 
-#: ViewManager.cpp:121
+#: ViewManager.cpp:128
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "افصل العرض فوق/تحت"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "افصل العرض آلياً"
 
-#: ViewManager.cpp:139
+#: ViewManager.cpp:146
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "افصل العرض يمين/يسار من اللسان التالي"
 
-#: ViewManager.cpp:147
+#: ViewManager.cpp:154
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "افصل العرض فوق/تحت من اللسان التالي"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "افصل العرض آلياً من اللسان التالي"
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:172
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "حمّل لسان جديد بتخطيط طرفيات 2×2"
 
-#: ViewManager.cpp:174
+#: ViewManager.cpp:181
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "حمّل لسان جديد بتخطيط طرفيات 2×1"
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:190
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "حمّل لسان جديد بتخطيط طرفيات 1×2"
 
-#: ViewManager.cpp:191
+#: ViewManager.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "عرض موسع"
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "عرض مقلص"
 
-#: ViewManager.cpp:209
+#: ViewManager.cpp:216
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "افصل ال&عرض الحالي"
 
-#: ViewManager.cpp:221
+#: ViewManager.cpp:228
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "ا&فصل اللسان الحالي"
 
-#: ViewManager.cpp:226
+#: ViewManager.cpp:233
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "لسان جديد"
 
-#: ViewManager.cpp:234
+#: ViewManager.cpp:241
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "اللسان السابق"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "ركز أعلى الطرفية"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "ركز أسفل الطرفية"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "ركز يسار الطرفية"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:269
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "ركز يمين الطرفية"
 
-#: ViewManager.cpp:268
+#: ViewManager.cpp:275
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "انتقل إلى آخر لسان"
 
-#: ViewManager.cpp:273
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "آخر لسان مستعمل"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:285
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "بدّل بين لسانيين"
 
-#: ViewManager.cpp:283
+#: ViewManager.cpp:290
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "آخر لسان مستعمل (معكوس)"
 
-#: ViewManager.cpp:288
+#: ViewManager.cpp:295
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "بدّل تكبير العرض الحالي"
 
-#: ViewManager.cpp:289
+#: ViewManager.cpp:296
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "بدّل تكبير العرض الحالي"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:304
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Toggle maximize current view"
@@ -3462,7 +3462,7 @@ msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "بدّل تكبير العرض الحالي"
 
-#: ViewManager.cpp:298
+#: ViewManager.cpp:305
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Toggle maximize current view"
@@ -3470,71 +3470,71 @@ msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "بدّل تكبير العرض الحالي"
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "حرك اللسان لليمين"
 
-#: ViewManager.cpp:313
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "حرك اللسان لليسار"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "ضبط التكامل الدلالي (باش)"
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:333
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "بدّل بين إظهار التلميحات الدلالية"
 
-#: ViewManager.cpp:332
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "بدّل بين عرض أرقام الأسطر"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "حجم متساوي لجميع العروض"
 
-#: ViewManager.cpp:349
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "انتقل إلى اللسان %1"
 
-#: ViewManager.cpp:562
+#: ViewManager.cpp:569
 #, kde-format
 msgid "Semantic hints "
 msgstr "التلميحات الدلالية "
 
-#: ViewManager.cpp:578
+#: ViewManager.cpp:585
 #, kde-format
 msgid "Line numbers "
 msgstr "أرقام الأسطر "
 
-#: ViewManager.cpp:1143
+#: ViewManager.cpp:1169
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "احفظ تخطيط الألسنة"
 
-#: ViewManager.cpp:1145 ViewManager.cpp:1232
+#: ViewManager.cpp:1171 ViewManager.cpp:1258
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "تخطيط عرض كونسول (*.json)"
 
-#: ViewManager.cpp:1158
+#: ViewManager.cpp:1184
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3544,7 +3544,7 @@ msgstr ""
 "حصلت مشكلة أثناء حفظ التخطيط.\n"
 "%1"
 
-#: ViewManager.cpp:1219
+#: ViewManager.cpp:1245
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3554,7 +3554,7 @@ msgstr ""
 "حصلت مشكلة أثناء تحميل التخطيط.\n"
 "%1"
 
-#: ViewManager.cpp:1230
+#: ViewManager.cpp:1256
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

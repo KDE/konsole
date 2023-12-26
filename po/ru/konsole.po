@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 01:39+0000\n"
+"POT-Creation-Date: 2023-12-26 01:35+0000\n"
 "PO-Revision-Date: 2023-04-17 10:13+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -3214,12 +3214,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Создавать миниатюры"
 
-#: terminalDisplay/TerminalDisplay.cpp:658
+#: terminalDisplay/TerminalDisplay.cpp:661
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Размер: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2247
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3228,57 +3228,57 @@ msgstr[1] "Действительно вставить %1 символа?"
 msgstr[2] "Действительно вставить %1 символов?"
 msgstr[3] "Действительно вставить %1 символ?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2248
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Подтверждение вставки"
 
-#: terminalDisplay/TerminalDisplay.cpp:2281
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 "Символ End-Of-Text / Interrupt (^C): Может вызвать выход из текущего процесса"
 
-#: terminalDisplay/TerminalDisplay.cpp:2282
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 "Символ End-Of-Transmission (^D) End of transmission: Может вызвать выход из "
 "текущего процесса"
 
-#: terminalDisplay/TerminalDisplay.cpp:2283
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Символ Bell (^G ): Воспроизведение звукового сигнала"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
 msgstr "Символ Backspace (^H): Удаление символа слева"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Символ Device Control Three / XOFF (^S): Приостановка вывода"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 "Символ Substitute / Suspend (^Z): Может вызвать приостановку текущего "
 "процесса"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Символ Escape (^[): Используется для управления состоянием терминала"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Символ Separator / Quit: Может прервать выполнение текущего процесса"
 
-#: terminalDisplay/TerminalDisplay.cpp:2311
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3287,31 +3287,31 @@ msgstr ""
 "Вставляемый текст содержит скрытые управляющие символы. Удалить управляющие "
 "символы из вставляемого текста?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Подтверждение вставки"
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&Удалить скрытые символы и вставить"
 
-#: terminalDisplay/TerminalDisplay.cpp:2316
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Вставить без изменения"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "О&тменить вставку"
 
-#: terminalDisplay/TerminalDisplay.cpp:2548
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3322,178 +3322,178 @@ msgstr ""
 "\">приостановлен</a> по нажатию Ctrl+S. Нажмите <b>Ctrl+Q</b> для "
 "продолжения вывода.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2603
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Этот терминал открыт только для чтения."
 
-#: terminalDisplay/TerminalDisplay.cpp:2998
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Сменить рабочий каталог на"
 
-#: terminalDisplay/TerminalDisplay.cpp:3031
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Вставить адрес"
 
-#: ViewManager.cpp:106
+#: ViewManager.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Разделить окно"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Разделить окно по вертикали"
 
-#: ViewManager.cpp:121
+#: ViewManager.cpp:128
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Разделить окно по горизонтали"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Разделить окно автоматически"
 
-#: ViewManager.cpp:139
+#: ViewManager.cpp:146
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Разделить окно следующей вкладки по вертикали"
 
-#: ViewManager.cpp:147
+#: ViewManager.cpp:154
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Разделить окно следующей вкладки по горизонтали"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Разделить окно следующей вкладки автоматически"
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:172
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Новая вкладка с макетом 2×2"
 
-#: ViewManager.cpp:174
+#: ViewManager.cpp:181
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Новая вкладка с макетом 2×1"
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:190
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Новая вкладка с макетом 1×2"
 
-#: ViewManager.cpp:191
+#: ViewManager.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Увеличить размер панели"
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Уменьшить размер панели"
 
-#: ViewManager.cpp:209
+#: ViewManager.cpp:216
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Отделить текущий &вид"
 
-#: ViewManager.cpp:221
+#: ViewManager.cpp:228
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Отделить текущую в&кладку"
 
-#: ViewManager.cpp:226
+#: ViewManager.cpp:233
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Следующая вкладка"
 
-#: ViewManager.cpp:234
+#: ViewManager.cpp:241
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Предыдущая вкладка"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Активировать верхний терминал"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Активировать нижний терминал"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Активировать левый терминал"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:269
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Активировать правый терминал"
 
-#: ViewManager.cpp:268
+#: ViewManager.cpp:275
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Переключиться последнюю на вкладку"
 
-#: ViewManager.cpp:273
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Последние вкладки"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:285
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Переключиться между двумя вкладками"
 
-#: ViewManager.cpp:283
+#: ViewManager.cpp:290
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Последние вкладки (в обратном порядке)"
 
-#: ViewManager.cpp:288
+#: ViewManager.cpp:295
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Развернуть текущее представление"
 
-#: ViewManager.cpp:289
+#: ViewManager.cpp:296
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Развернуть текущее представление"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:304
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Toggle maximize current view"
@@ -3501,7 +3501,7 @@ msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Развернуть текущее представление"
 
-#: ViewManager.cpp:298
+#: ViewManager.cpp:305
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Toggle maximize current view"
@@ -3509,71 +3509,71 @@ msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Развернуть текущее представление"
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Переместить вкладку вправо"
 
-#: ViewManager.cpp:313
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Переместить вкладку влево"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Настроить семантическую интеграцию (bash)"
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:333
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Показывать семантические подсказки"
 
-#: ViewManager.cpp:332
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Показывать номеров строк"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Одинаковый размер во всех представлениях"
 
-#: ViewManager.cpp:349
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Переключиться на вкладку %1"
 
-#: ViewManager.cpp:562
+#: ViewManager.cpp:569
 #, kde-format
 msgid "Semantic hints "
 msgstr "Семантические подсказки "
 
-#: ViewManager.cpp:578
+#: ViewManager.cpp:585
 #, kde-format
 msgid "Line numbers "
 msgstr "Номера строк"
 
-#: ViewManager.cpp:1143
+#: ViewManager.cpp:1169
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Сохранение макета вкладки"
 
-#: ViewManager.cpp:1145 ViewManager.cpp:1232
+#: ViewManager.cpp:1171 ViewManager.cpp:1258
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Макет окна Konsole (*.json)"
 
-#: ViewManager.cpp:1158
+#: ViewManager.cpp:1184
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3583,7 +3583,7 @@ msgstr ""
 "Ошибка сохранения макета.\n"
 "%1"
 
-#: ViewManager.cpp:1219
+#: ViewManager.cpp:1245
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3593,7 +3593,7 @@ msgstr ""
 "Ошибка загрузки макета.\n"
 "%1"
 
-#: ViewManager.cpp:1230
+#: ViewManager.cpp:1256
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

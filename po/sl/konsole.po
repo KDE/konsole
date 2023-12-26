@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 01:39+0000\n"
+"POT-Creation-Date: 2023-12-26 01:35+0000\n"
 "PO-Revision-Date: 2023-12-04 21:12+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -3196,12 +3196,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Omogoči tvorbo predoglednih sličic"
 
-#: terminalDisplay/TerminalDisplay.cpp:658
+#: terminalDisplay/TerminalDisplay.cpp:661
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Velikost: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2247
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3210,52 +3210,52 @@ msgstr[1] "Ali res želite prilepiti %1 znaka?"
 msgstr[2] "Ali res želite prilepiti %1 znake?"
 msgstr[3] "Ali res želite prilepiti %1 znakov?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2248
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Potrditev lepljenja"
 
-#: terminalDisplay/TerminalDisplay.cpp:2281
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2282
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission:  lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2283
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell: bo poskusil oddati zvočno opozorilo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: začasno prekini izhod"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: lahko začasno ustavi trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: se uporablja za spremembo stanja terminala"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit:  lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2311
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3264,31 +3264,31 @@ msgstr ""
 "Besedilo, ki ga želite prilepiti vsebuje nekatere skrite kontrolne znake. "
 "Ali želite te znake odfiltrirati?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Potrdi lepljenje"
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Prilepi brez kontrolnih znakov"
 
-#: terminalDisplay/TerminalDisplay.cpp:2316
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Prilepi vse"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Prekliči"
 
-#: terminalDisplay/TerminalDisplay.cpp:2548
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3299,254 +3299,254 @@ msgstr ""
 "Software_flow_control\">suspendiran</a> s pritiskom Ctrl+S.  Pritisnite "
 "<b>Ctrl+Q</b>za nadaljevanje.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2603
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ta terminal je samo za branje."
 
-#: terminalDisplay/TerminalDisplay.cpp:2998
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Spremeni mapo v"
 
-#: terminalDisplay/TerminalDisplay.cpp:3031
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Prilepi naslov"
 
-#: ViewManager.cpp:106
+#: ViewManager.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Razdeljen pogled"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Razdeli pogled levo/desno"
 
-#: ViewManager.cpp:121
+#: ViewManager.cpp:128
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Razdeli pogled zgoraj/spodaj"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Samodejno razdeli pogled"
 
-#: ViewManager.cpp:139
+#: ViewManager.cpp:146
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Razdeli pogled levo/desno iz naslednjega zavihka"
 
-#: ViewManager.cpp:147
+#: ViewManager.cpp:154
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Razdeli pogled zgoraj/spodaj iz naslednjega zavihka"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Samodejno razdeli pogled iz naslednjega zavihka"
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:172
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Naloži nov zavihek s postavitvijo 2x2 terminalov"
 
-#: ViewManager.cpp:174
+#: ViewManager.cpp:181
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Naloži nov zavihek s postavitvijo 2x1 terminalov"
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:190
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Naloži nov zavihek s postavitvijo 1x2 terminala"
 
-#: ViewManager.cpp:191
+#: ViewManager.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Razširi pogled"
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Skrči pogled"
 
-#: ViewManager.cpp:209
+#: ViewManager.cpp:216
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Odpni trenutni pogled"
 
-#: ViewManager.cpp:221
+#: ViewManager.cpp:228
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Odpni trenutni zavihek"
 
-#: ViewManager.cpp:226
+#: ViewManager.cpp:233
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Naslednji zavihek"
 
-#: ViewManager.cpp:234
+#: ViewManager.cpp:241
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Predhodni zavihek"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Deluje na območjem terminala"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Deluj pod območjem terminala"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Deluj na levem terminalu"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:269
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Deluj na desnem terminalu"
 
-#: ViewManager.cpp:268
+#: ViewManager.cpp:275
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Preklopi na zadnji zavihek"
 
-#: ViewManager.cpp:273
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Zadnje uporabljeni zavihki"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:285
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Preklapljaj med dvema zavihkoma"
 
-#: ViewManager.cpp:283
+#: ViewManager.cpp:290
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Zadnje uporabljeni zavihki (Obratno)"
 
-#: ViewManager.cpp:288
+#: ViewManager.cpp:295
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Preklopi v maksimalni trenutni pogled"
 
-#: ViewManager.cpp:289
+#: ViewManager.cpp:296
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Preklopi v maksimalni trenutni pogled"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Preklopi v razpeti trenutni pogled"
 
-#: ViewManager.cpp:298
+#: ViewManager.cpp:305
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Preklopi v razpeti trenutni pogled"
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Premakni zavihek na desno"
 
-#: ViewManager.cpp:313
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Premakni zavihek na levo"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Nastavi semantićno integracijo (bash)"
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:333
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Preklopi prikaz semantičnih namigov"
 
-#: ViewManager.cpp:332
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Preklopi prikaz številk vrstic"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Enaka velikost za vse poglede"
 
-#: ViewManager.cpp:349
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Preklopi na zavihek %1"
 
-#: ViewManager.cpp:562
+#: ViewManager.cpp:569
 #, kde-format
 msgid "Semantic hints "
 msgstr "Semantični namigi "
 
-#: ViewManager.cpp:578
+#: ViewManager.cpp:585
 #, kde-format
 msgid "Line numbers "
 msgstr "Številke vrstic "
 
-#: ViewManager.cpp:1143
+#: ViewManager.cpp:1169
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Shrani razporeditev zavihka"
 
-#: ViewManager.cpp:1145 ViewManager.cpp:1232
+#: ViewManager.cpp:1171 ViewManager.cpp:1258
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole View Layout (*.json)"
 
-#: ViewManager.cpp:1158
+#: ViewManager.cpp:1184
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3556,7 +3556,7 @@ msgstr ""
 "Med shranjevanjem postavitve je prišlo do težave.\n"
 "%1"
 
-#: ViewManager.cpp:1219
+#: ViewManager.cpp:1245
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3566,7 +3566,7 @@ msgstr ""
 "Med nalaganjem postavitve je prišlo do težave.\n"
 "%1"
 
-#: ViewManager.cpp:1230
+#: ViewManager.cpp:1256
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 01:39+0000\n"
+"POT-Creation-Date: 2023-12-26 01:35+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -3270,64 +3270,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Menüü kiirklahvide lubamine"
 
-#: terminalDisplay/TerminalDisplay.cpp:658
+#: terminalDisplay/TerminalDisplay.cpp:661
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Suurus: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2247
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Kas tõesti asetada %1 märk?"
 msgstr[1] "Kas tõesti asetada %1 märki?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2248
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Asetamise kinnitus"
 
-#: terminalDisplay/TerminalDisplay.cpp:2281
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Teksti lõpp/katkestus: võib lõpetada aktiivse protsessi töö"
 
-#: terminalDisplay/TerminalDisplay.cpp:2282
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Ülekande lõpp: võib väljuda aktiivsest protsessist"
 
-#: terminalDisplay/TerminalDisplay.cpp:2283
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Kell: püüab anda kuuldava hoiatuse"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
 msgstr "Kustutusklahv (Backspace)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Seadme juhtimine kolm/XOFF: väljundi peatamine"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Asendamine/peatamine: võib peatada aktiivse protsessi"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: kasutatakse terminali oleku manipuleerimiseks"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Failieraldaja/Väljumine: võib lõpetada aktiivse protsessi töö"
 
-#: terminalDisplay/TerminalDisplay.cpp:2311
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3336,31 +3336,31 @@ msgstr ""
 "Tekst, mida üritad asetada, sisaldab peidetud juhtmärke. Kas filtreerida "
 "need välja?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Asetamise kinnitus"
 
-#: terminalDisplay/TerminalDisplay.cpp:2315
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Aseta &ilma juhtmärkideta"
 
-#: terminalDisplay/TerminalDisplay.cpp:2316
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Aseta kõik"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Loo&bu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2548
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3371,41 +3371,41 @@ msgstr ""
 "\">peatatud</a> kiirklahviga Ctrl+S. Taasalustamiseks vajuta <b>Ctrl+Q</b>.</"
 "qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2603
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "See terminal on kirjutuskaitstud."
 
-#: terminalDisplay/TerminalDisplay.cpp:2998
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Muu&da kataloogiks"
 
-#: terminalDisplay/TerminalDisplay.cpp:3031
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
 msgstr "Aseta asuko&ht"
 
-#: ViewManager.cpp:106
+#: ViewManager.cpp:113
 #, fuzzy, kde-format
 #| msgid "Split View"
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Vaate poolitamine"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Poolita vaade vertikaalselt"
 
-#: ViewManager.cpp:121
+#: ViewManager.cpp:128
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Poolita vaade horisontaalselt"
 
-#: ViewManager.cpp:129
+#: ViewManager.cpp:136
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3413,7 +3413,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Poolita vaade horisontaalselt"
 
-#: ViewManager.cpp:139
+#: ViewManager.cpp:146
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
@@ -3421,7 +3421,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Poolita vaade vertikaalselt"
 
-#: ViewManager.cpp:147
+#: ViewManager.cpp:154
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3429,7 +3429,7 @@ msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Poolita vaade horisontaalselt"
 
-#: ViewManager.cpp:155
+#: ViewManager.cpp:162
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
@@ -3437,121 +3437,121 @@ msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Poolita vaade horisontaalselt"
 
-#: ViewManager.cpp:165
+#: ViewManager.cpp:172
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:174
+#: ViewManager.cpp:181
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr ""
 
-#: ViewManager.cpp:183
+#: ViewManager.cpp:190
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:191
+#: ViewManager.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Laienda vaadet"
 
-#: ViewManager.cpp:199
+#: ViewManager.cpp:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Vähenda vaadet"
 
-#: ViewManager.cpp:209
+#: ViewManager.cpp:216
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Haagi aktiivne vaade lahti"
 
-#: ViewManager.cpp:221
+#: ViewManager.cpp:228
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Haagi aktiivne kaart lahti"
 
-#: ViewManager.cpp:226
+#: ViewManager.cpp:233
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Järgmine kaart"
 
-#: ViewManager.cpp:234
+#: ViewManager.cpp:241
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Eelmine kaart"
 
-#: ViewManager.cpp:242
+#: ViewManager.cpp:249
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Fookus ülemisel terminalil"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Fookus alumisel terminalil"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Fookus vasakpoolsel terminalil"
 
-#: ViewManager.cpp:262
+#: ViewManager.cpp:269
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Fookus parempoolsel terminalil"
 
-#: ViewManager.cpp:268
+#: ViewManager.cpp:275
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Lülitumine viimasele kaardile"
 
-#: ViewManager.cpp:273
+#: ViewManager.cpp:280
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Viimati kasutatud kaardid"
 
-#: ViewManager.cpp:278
+#: ViewManager.cpp:285
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Lülitumine kahe kaardi vahel"
 
-#: ViewManager.cpp:283
+#: ViewManager.cpp:290
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Viimati kasutatud kaardid (teistpidi)"
 
-#: ViewManager.cpp:288
+#: ViewManager.cpp:295
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Aktiivse vaate maksimeerimise lülitamine"
 
-#: ViewManager.cpp:289
+#: ViewManager.cpp:296
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Lülita aktiivse vaate maksimeerimist"
 
-#: ViewManager.cpp:297
+#: ViewManager.cpp:304
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Toggle maximize current view"
@@ -3559,7 +3559,7 @@ msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Aktiivse vaate maksimeerimise lülitamine"
 
-#: ViewManager.cpp:298
+#: ViewManager.cpp:305
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Toggle maximize current view"
@@ -3567,61 +3567,61 @@ msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Lülita aktiivse vaate maksimeerimist"
 
-#: ViewManager.cpp:306
+#: ViewManager.cpp:313
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Kaardi liigutamine paremale"
 
-#: ViewManager.cpp:313
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Kaardi liigutamine vasakule"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:326
+#: ViewManager.cpp:333
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:332
+#: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr ""
 
-#: ViewManager.cpp:349
+#: ViewManager.cpp:356
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Lülitumine kaardile %1"
 
-#: ViewManager.cpp:562
+#: ViewManager.cpp:569
 #, fuzzy, kde-format
 #| msgid "Text interaction"
 msgid "Semantic hints "
 msgstr "Teksti käitlemine"
 
-#: ViewManager.cpp:578
+#: ViewManager.cpp:585
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line numbers "
 msgstr "Ridade arv: "
 
-#: ViewManager.cpp:1143
+#: ViewManager.cpp:1169
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move tab to the left"
@@ -3629,13 +3629,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Kaardi liigutamine vasakule"
 
-#: ViewManager.cpp:1145 ViewManager.cpp:1232
+#: ViewManager.cpp:1171 ViewManager.cpp:1258
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1158
+#: ViewManager.cpp:1184
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3648,7 +3648,7 @@ msgstr ""
 "Väljundi salvestamisel tekkis probleem.\n"
 "%1"
 
-#: ViewManager.cpp:1219
+#: ViewManager.cpp:1245
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3661,7 +3661,7 @@ msgstr ""
 "Väljundi salvestamisel tekkis probleem.\n"
 "%1"
 
-#: ViewManager.cpp:1230
+#: ViewManager.cpp:1256
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
