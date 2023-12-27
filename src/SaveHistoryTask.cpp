@@ -13,6 +13,7 @@
 
 #include <KConfig>
 #include <KConfigGroup>
+#include <KIO/TransferJob>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KSharedConfig>
