@@ -38,7 +38,7 @@ ConfigurationDialog::ConfigurationDialog(QWidget *parent, KCoreConfigSkeleton *c
 
     _manager = new KConfigDialogManager(this, config);
 
-    connect(_manager, QOverload<>::of(&KConfigDialogManager::settingsChanged), this, &ConfigurationDialog::settingsChangedSlot);
+    connect(_manager, &KConfigDialogManager::settingsChanged, this, &ConfigurationDialog::settingsChangedSlot);
 
     connect(_manager, &KConfigDialogManager::widgetModified, this, &ConfigurationDialog::updateButtons);
 

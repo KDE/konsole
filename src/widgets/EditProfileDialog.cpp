@@ -545,10 +545,10 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     connect(_generalUi->semanticUpDown, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::semanticUpDown);
     connect(_generalUi->semanticInputClick, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::semanticInputClick);
 
-    connect(_generalUi->terminalColumnsEntry, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
-    connect(_generalUi->terminalRowsEntry, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
+    connect(_generalUi->terminalColumnsEntry, &QSpinBox::valueChanged, this, &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
+    connect(_generalUi->terminalRowsEntry, &QSpinBox::valueChanged, this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
 
-    connect(_generalUi->terminalBellCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](const int index) {
+    connect(_generalUi->terminalBellCombo, &QComboBox::currentIndexChanged, this, [this](const int index) {
         updateTempProfileProperty(Profile::BellMode, index);
     });
 
@@ -669,7 +669,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr &profile)
     int silenceCheckBoxWidth = maxSpinBoxWidth(_generalUi->terminalColumnsEntry, suffix);
     _tabsUi->silenceSecondsSpinner->setFixedWidth(silenceCheckBoxWidth);
 
-    connect(_tabsUi->silenceSecondsSpinner, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::silenceSecondsChanged);
+    connect(_tabsUi->silenceSecondsSpinner, &QSpinBox::valueChanged, this, &Konsole::EditProfileDialog::silenceSecondsChanged);
 }
 
 void EditProfileDialog::terminalColumnsEntryChanged(int value)
@@ -893,10 +893,10 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     setupButtonGroup(cursorShapeOptions, profile);
 
     _appearanceUi->marginsSpinner->setValue(profile->terminalMargin());
-    connect(_appearanceUi->marginsSpinner, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalMarginChanged);
+    connect(_appearanceUi->marginsSpinner, &QSpinBox::valueChanged, this, &Konsole::EditProfileDialog::terminalMarginChanged);
 
     _appearanceUi->lineSpacingSpinner->setValue(profile->lineSpacing());
-    connect(_appearanceUi->lineSpacingSpinner, QOverload<int>::of(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::lineSpacingChanged);
+    connect(_appearanceUi->lineSpacingSpinner, &QSpinBox::valueChanged, this, &Konsole::EditProfileDialog::lineSpacingChanged);
 
     _appearanceUi->alignToCenterButton->setChecked(profile->terminalCenter());
     connect(_appearanceUi->alignToCenterButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::setTerminalCenter);
@@ -929,7 +929,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     connect(_appearanceUi->displayVerticalLine, &QCheckBox::toggled, this, &EditProfileDialog::setVerticalLine);
 
     _appearanceUi->displayVerticalLineAtColumn->setValue(profile->verticalLineAtChar());
-    connect(_appearanceUi->displayVerticalLineAtColumn, QOverload<int>::of(&QSpinBox::valueChanged), this, &EditProfileDialog::setVerticalLineColumn);
+    connect(_appearanceUi->displayVerticalLineAtColumn, &QSpinBox::valueChanged, this, &EditProfileDialog::setVerticalLineColumn);
 
     auto *getNewButton = new KNSWidgets::Button(this);
     connect(getNewButton, &KNSWidgets::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
@@ -1676,7 +1676,7 @@ void EditProfileDialog::setupButtonGroup(const ButtonGroupOptions &options, cons
         activeButton = options.buttons[0].button;
     }
     activeButton->setChecked(true);
-    connect(options.group, QOverload<int>::of(&QButtonGroup::idClicked), this, [this, options](int value) {
+    connect(options.group, &QButtonGroup::idClicked, this, [this, options](int value) {
         if (options.preview) {
             preview(options.profileProperty, value);
         }
@@ -1890,7 +1890,7 @@ void EditProfileDialog::setTextEditorCombo(const Profile::Ptr &profile)
     const auto currentEditor = profile->property<int>(Profile::TextEditorCmd);
     editorCombo->setCurrentIndex(currentEditor);
 
-    connect(editorCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](const int index) {
+    connect(editorCombo, &QComboBox::currentIndexChanged, this, [this](const int index) {
         updateTempProfileProperty(Profile::TextEditorCmd, index);
         _mouseUi->textEditorCustomBtn->setEnabled(index == Enum::CustomTextEditor);
     });

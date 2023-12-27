@@ -96,11 +96,11 @@ ColorSchemeEditor::ColorSchemeEditor(bool supportsTransparentWindows, QWidget *p
     connect(_ui->wallpaperSelectButton, &QToolButton::clicked, this, &Konsole::ColorSchemeEditor::selectWallpaper);
     connect(_ui->wallpaperPath, &QLineEdit::textChanged, this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
 
-    connect(_ui->wallpaperScalingType, (void(QComboBox::*)(int)) & QComboBox::currentIndexChanged, this, &Konsole::ColorSchemeEditor::scalingTypeChanged);
+    connect(_ui->wallpaperScalingType, &QComboBox::currentIndexChanged, this, &Konsole::ColorSchemeEditor::scalingTypeChanged);
     connect(_ui->wallpaperHorizontalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::horizontalAnchorChanged);
     connect(_ui->wallpaperVerticalAnchorSlider, &QSlider::valueChanged, this, &Konsole::ColorSchemeEditor::verticalAnchorChanged);
 
-    connect(_ui->wallpaperFlipType, (void(QComboBox::*)(int)) & QComboBox::currentIndexChanged, this, &Konsole::ColorSchemeEditor::flipTypeChanged);
+    connect(_ui->wallpaperFlipType, &QComboBox::currentIndexChanged, this, &Konsole::ColorSchemeEditor::flipTypeChanged);
 
     // color table
     _ui->colorTable->setColumnCount(4);

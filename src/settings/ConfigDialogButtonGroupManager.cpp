@@ -44,11 +44,7 @@ void ConfigDialogButtonGroupManager::addChildren(const QObject *parentObj)
 void ConfigDialogButtonGroupManager::add(const QButtonGroup *obj)
 {
     Q_ASSERT(obj->exclusive());
-    connect(obj,
-            QOverload<QAbstractButton *, bool>::of(&QButtonGroup::buttonToggled),
-            this,
-            &ConfigDialogButtonGroupManager::setButtonState,
-            Qt::UniqueConnection);
+    connect(obj, &QButtonGroup::buttonToggled, this, &ConfigDialogButtonGroupManager::setButtonState, Qt::UniqueConnection);
     _groups.append(obj);
 }
 

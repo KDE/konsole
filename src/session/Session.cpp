@@ -160,7 +160,7 @@ void Session::openTeletype(int fd, bool runShell)
 
     // get notified when the pty process is finished
 #ifndef Q_OS_WIN
-    connect(_shellProcess, QOverload<int, QProcess::ExitStatus>::of(&Konsole::Pty::finished), this, &Konsole::Session::done);
+    connect(_shellProcess, &Konsole::Pty::finished, this, &Konsole::Session::done);
 #else
     connect(_shellProcess, &Konsole::Pty::finished, this, &Konsole::Session::done);
 #endif
@@ -1048,7 +1048,7 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
 #ifndef Q_OS_WIN
     // This slot should be triggered only one time
-    disconnect(_shellProcess, QOverload<int, QProcess::ExitStatus>::of(&Konsole::Pty::finished), this, &Konsole::Session::done);
+    disconnect(_shellProcess, &Konsole::Pty::finished, this, &Konsole::Session::done);
 #else
     disconnect(_shellProcess, &Konsole::Pty::finished, this, &Konsole::Session::done);
 #endif
@@ -1589,7 +1589,7 @@ void Session::startZModem(const QString &zmodem, const QString &dir, const QStri
 
     connect(_zmodemProc, &KProcess::readyReadStandardOutput, this, &Konsole::Session::zmodemReadAndSendBlock);
     connect(_zmodemProc, &KProcess::readyReadStandardError, this, &Konsole::Session::zmodemReadStatus);
-    connect(_zmodemProc, QOverload<int, QProcess::ExitStatus>::of(&KProcess::finished), this, &Konsole::Session::zmodemFinished);
+    connect(_zmodemProc, &KProcess::finished, this, &Konsole::Session::zmodemFinished);
 
     _zmodemProc->start();
 
