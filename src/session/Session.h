@@ -672,6 +672,11 @@ public Q_SLOTS:
      * Sets that input should be copied to sessions whose ids are described in the list.
      * Returns false if fail.
      */
+    /* NOTE: not all ways of calling dbus can handle "ai" QList<int>
+        Does not work AFAIK: qdbus6, qdbusviewer6, busctl
+        Works: dbus-send, gdbus
+        See examples in ViewManager.h
+    */
     Q_SCRIPTABLE bool copyInputToSessions(QList<int> sessions);
 
     /**

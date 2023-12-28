@@ -358,6 +358,13 @@ public Q_SLOTS:
     /** DBus slot that allows setting of the relative sizes of widgets
      * in a splitter by specifying their percentages.
      */
+    /* NOTE: not all ways of calling dbus can handle "ad" QList<double>
+        Does not work AFAIK: qdbus6, qdbusviewer6, busctl
+        Works: dbus-send, gdbus
+         Example:
+            dbus-send --session --print-reply=literal --type=method_call --dest=org.kde.konsole-16710 /Windows/1   org.kde.konsole.Window.resizeSplits int32:0 array:double:40.0,60.0
+            gdbus call --session --dest org.kde.konsole-16710  --object-path /Windows/1 --method org.kde.konsole.Window.resizeSplits 0 "[10.5, 89.5]"
+    */
     Q_SCRIPTABLE bool resizeSplits(int splitterId, QList<double> percentages);
 
     /** DBus slot that moves a splitter to a different position under a specified splitter**/
