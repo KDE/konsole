@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 01:35+0000\n"
+"POT-Creation-Date: 2023-12-28 01:35+0000\n"
 "PO-Revision-Date: 2011-07-18 11:49+0200\n"
 "Last-Translator: Marko Dimjašević <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -2131,17 +2131,17 @@ msgstr ""
 msgid "Tab Properties"
 msgstr ""
 
-#: SaveHistoryTask.cpp:70
+#: SaveHistoryTask.cpp:71
 #, kde-format
 msgid "Save Output From %1"
 msgstr "Spremi ispis iz %1"
 
-#: SaveHistoryTask.cpp:82
+#: SaveHistoryTask.cpp:83
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 nije valjan URL, ispis ne može biti spremljen."
 
-#: SaveHistoryTask.cpp:172
+#: SaveHistoryTask.cpp:173
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2232,29 +2232,29 @@ msgstr ""
 msgid "Solaris console"
 msgstr "Solaris-konzola"
 
-#: session/Session.cpp:103
+#: session/Session.cpp:105
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Zvono u sjednici '%1'"
 
-#: session/Session.cpp:410
+#: session/Session.cpp:412
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Nije bilo moguće naći binarno:"
 
-#: session/Session.cpp:419
+#: session/Session.cpp:421
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Upozorenje: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nije bilo moguće naći"
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2263,26 +2263,26 @@ msgstr ""
 "Nije bilo moguće naći '%1', umjesto toga se pokreće '%2'. Molim vas da "
 "provjerite postavke vašeg profila."
 
-#: session/Session.cpp:584
+#: session/Session.cpp:586
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nije bilo moguće pokrenuti program '%1' s argumentima '%2'."
 
-#: session/Session.cpp:732
+#: session/Session.cpp:734
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina u sjednici '%1'"
 
-#: session/Session.cpp:733 session/Session.cpp:1934
-#: session/SessionController.cpp:354 session/SessionController.cpp:1803
+#: session/Session.cpp:735 session/Session.cpp:2009
+#: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
 #| msgid "New Session"
 msgid "Show session"
 msgstr "Nova sesija"
 
-#: session/Session.cpp:1017
+#: session/Session.cpp:1019
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2291,28 +2291,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1057
+#: session/Session.cpp:1059
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Završeno"
 
-#: session/Session.cpp:1071 session/Session.cpp:1087
+#: session/Session.cpp:1073 session/Session.cpp:1089
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Program '%1' se srušio."
 
-#: session/Session.cpp:1073
+#: session/Session.cpp:1075
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Program '%1' završio je sa statusom %2."
 
-#: session/Session.cpp:1599
+#: session/Session.cpp:1601
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Napredak ZModem"
 
-#: session/Session.cpp:1933
+#: session/Session.cpp:2008
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -2499,113 +2499,113 @@ msgstr "&Nijedan"
 msgid "Copy Input To"
 msgstr "Kopiraj unos na"
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:856
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModemsko slanje…"
 
-#: session/SessionController.cpp:860
+#: session/SessionController.cpp:861
 #, kde-format
 msgid "One-shot monitors"
 msgstr ""
 
-#: session/SessionController.cpp:865
+#: session/SessionController.cpp:866
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "Pazi na &aktivnosti"
 
-#: session/SessionController.cpp:872
+#: session/SessionController.cpp:873
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Pazi na &aktivnosti"
 
-#: session/SessionController.cpp:878
+#: session/SessionController.cpp:879
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Pazi na &tišinu"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:885
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "Pazi na &aktivnosti"
 
-#: session/SessionController.cpp:891
+#: session/SessionController.cpp:892
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Uvećaj pismo"
 
-#: session/SessionController.cpp:899
+#: session/SessionController.cpp:900
 #, kde-format
 msgid "Shrink Font"
 msgstr "Smanji pismo"
 
-#: session/SessionController.cpp:904
+#: session/SessionController.cpp:905
 #, fuzzy, kde-format
 #| msgid "Increase Text Size"
 msgid "Reset Font Size"
 msgstr "Povećaj veličinu teksta"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:911
 #, fuzzy, kde-format
 #| msgid "&Send Signal"
 msgid "Send Signal"
 msgstr "Pošalji &signal"
 
-#: session/SessionController.cpp:914
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Odgodi zadatak"
 
-#: session/SessionController.cpp:919
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Nastavi zadatak"
 
-#: session/SessionController.cpp:924
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Hangup"
 msgstr "&Objesi"
 
-#: session/SessionController.cpp:929
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Prekini zadatak"
 
-#: session/SessionController.cpp:934
+#: session/SessionController.cpp:935
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "&Terminate Task"
 msgstr "Mogućnosti terminala"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Ubij zadatak"
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &1"
 msgstr "Korisnikov signal &1"
 
-#: session/SessionController.cpp:949
+#: session/SessionController.cpp:950
 #, kde-format
 msgid "User Signal &2"
 msgstr "Korisnikov signal &2"
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:968
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile..."
 msgstr "Novi profil…"
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Uredi trenutni profil …"
 
-#: session/SessionController.cpp:1086
+#: session/SessionController.cpp:1087
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2614,7 +2614,7 @@ msgstr ""
 "Trenutno se izvršava pogram u ovoj sjednici. Jeste li sigurni da je želite "
 "zatvoriti?"
 
-#: session/SessionController.cpp:1090
+#: session/SessionController.cpp:1091
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2623,19 +2623,19 @@ msgstr ""
 "Program '%1' trenutno se izvršava u ovoj sjednici. Jeste li sigurni da ga "
 "želite zatvoriti?"
 
-#: session/SessionController.cpp:1097 session/SessionController.cpp:1132
+#: session/SessionController.cpp:1098 session/SessionController.cpp:1133
 #, kde-format
 msgid "Confirm Close"
 msgstr "Potvrdite zatvaranje"
 
-#: session/SessionController.cpp:1098
+#: session/SessionController.cpp:1099
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "&Zatvori karticu"
 
-#: session/SessionController.cpp:1121
+#: session/SessionController.cpp:1122
 #, fuzzy, kde-format
 #| msgid ""
 #| "A program is currently running in this session.  Are you sure you want to "
@@ -2647,7 +2647,7 @@ msgstr ""
 "Trenutno se izvršava pogram u ovoj sjednici. Jeste li sigurni da je želite "
 "zatvoriti?"
 
-#: session/SessionController.cpp:1125
+#: session/SessionController.cpp:1126
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is currently running in this session.  Are you sure you "
@@ -2659,29 +2659,29 @@ msgstr ""
 "Program '%1' trenutno se izvršava u ovoj sjednici. Jeste li sigurni da ga "
 "želite zatvoriti?"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1134
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1802
+#: session/SessionController.cpp:1811
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:1995
+#: session/SessionController.cpp:2004
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2062
+#: session/SessionController.cpp:2071
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "Spremi ZModemsko preuzimanje u…"
 
-#: session/SessionController.cpp:2072
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2692,13 +2692,13 @@ msgstr ""
 "računalu nije pronađen prikladni ZModem softver.</p><p>Možda biste trebali "
 "instalirati pakete 'rzsz' ili 'lrzsz'</p>"
 
-#: session/SessionController.cpp:2082
+#: session/SessionController.cpp:2091
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Trenutna sjednica već ima ZModem prijenos datoteka u tijeku.</p>"
 
-#: session/SessionController.cpp:2092
+#: session/SessionController.cpp:2101
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2707,7 +2707,7 @@ msgstr ""
 "<p>Na vašem sustavu nije pronađen prikladni ZModem softver.</p><p>Možda "
 "biste trebali instalirati pakete 'rzsz' ili 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2097
+#: session/SessionController.cpp:2106
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Odaberite datoteke za ZModem Otpremu"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 01:35+0000\n"
+"POT-Creation-Date: 2023-12-28 01:35+0000\n"
 "PO-Revision-Date: 2010-12-17 20:05+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -2084,17 +2084,17 @@ msgstr ""
 msgid "Tab Properties"
 msgstr ""
 
-#: SaveHistoryTask.cpp:70
+#: SaveHistoryTask.cpp:71
 #, kde-format
 msgid "Save Output From %1"
 msgstr "บันทึกการแสดงผลหน้าจอจาก %1"
 
-#: SaveHistoryTask.cpp:82
+#: SaveHistoryTask.cpp:83
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 ไม่ใช่ที่อยู่ URL ที่ถูกต้อง ไม่สามารถบันทึกการแสดงผลหน้าจอได้"
 
-#: SaveHistoryTask.cpp:172
+#: SaveHistoryTask.cpp:173
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2185,29 +2185,29 @@ msgstr ""
 msgid "Solaris console"
 msgstr "เทอร์มินัลคอนโซลโซลาริส"
 
-#: session/Session.cpp:103
+#: session/Session.cpp:105
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "มีออดเตือนในวาระ '%1'"
 
-#: session/Session.cpp:410
+#: session/Session.cpp:412
 #, kde-format
 msgid "Could not find binary: "
 msgstr "ไม่สามารถค้นหาแฟ้มไบนารีได้: "
 
-#: session/Session.cpp:419
+#: session/Session.cpp:421
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "แจ้งเตือน: "
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "ไม่สามารถค้นหาเชลล์ที่จะสั่งทำงานได้"
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2215,26 +2215,26 @@ msgid ""
 msgstr ""
 "ไม่สามารถค้นหา '%1' ได้, กำลังเริ่ม '%2' เพื่อใช้งานแทน  โปรดตรวจสอบการตั้งค่าโพรไฟล์ของคุณ"
 
-#: session/Session.cpp:584
+#: session/Session.cpp:586
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "ไม่สามารถเริ่มการทำงานโปรแกรม '%1' ด้วยอาร์กิวเมนต์ '%2' ได้"
 
-#: session/Session.cpp:732
+#: session/Session.cpp:734
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ไม่มีกิจกรรมใด ๆ เกิดขึ้นในวาระ '%1'"
 
-#: session/Session.cpp:733 session/Session.cpp:1934
-#: session/SessionController.cpp:354 session/SessionController.cpp:1803
+#: session/Session.cpp:735 session/Session.cpp:2009
+#: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Show session"
 msgstr "คอนโซล-K"
 
-#: session/Session.cpp:1017
+#: session/Session.cpp:1019
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2243,28 +2243,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1057
+#: session/Session.cpp:1059
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "เสร็จสิ้น"
 
-#: session/Session.cpp:1071 session/Session.cpp:1087
+#: session/Session.cpp:1073 session/Session.cpp:1089
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "โปรแกรม '%1' ทำงานข้ดข้อง"
 
-#: session/Session.cpp:1073
+#: session/Session.cpp:1075
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "โปรแกรม '%1' ออกจากการทำงานด้วยสถานะ %2"
 
-#: session/Session.cpp:1599
+#: session/Session.cpp:1601
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ความคืบหน้าของ ZModem"
 
-#: session/Session.cpp:1933
+#: session/Session.cpp:2008
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -2450,139 +2450,139 @@ msgstr "&ไม่มี"
 msgid "Copy Input To"
 msgstr "คัดลอกข้อมูลเข้า ไปยัง"
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:856
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "อัปโหลดผ่าน &ZModem..."
 
-#: session/SessionController.cpp:860
+#: session/SessionController.cpp:861
 #, kde-format
 msgid "One-shot monitors"
 msgstr ""
 
-#: session/SessionController.cpp:865
+#: session/SessionController.cpp:866
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "เฝ้าดู&กิจกรรมต่าง ๆ"
 
-#: session/SessionController.cpp:872
+#: session/SessionController.cpp:873
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "เฝ้าดู&กิจกรรมต่าง ๆ"
 
-#: session/SessionController.cpp:878
+#: session/SessionController.cpp:879
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "เฝ้าดูการไ&ม่มีกิจกรรม"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:885
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "เฝ้าดู&กิจกรรมต่าง ๆ"
 
-#: session/SessionController.cpp:891
+#: session/SessionController.cpp:892
 #, kde-format
 msgid "Enlarge Font"
 msgstr "เพิ่มขนาดตัวอักษร"
 
-#: session/SessionController.cpp:899
+#: session/SessionController.cpp:900
 #, kde-format
 msgid "Shrink Font"
 msgstr "ลดขนาดตัวอักษร"
 
-#: session/SessionController.cpp:904
+#: session/SessionController.cpp:905
 #, fuzzy, kde-format
 #| msgid "Increase Text Size"
 msgid "Reset Font Size"
 msgstr "เพิ่มขนาดอักษร"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:911
 #, kde-format
 msgid "Send Signal"
 msgstr ""
 
-#: session/SessionController.cpp:914
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "&Suspend Task"
 msgstr ""
 
-#: session/SessionController.cpp:919
+#: session/SessionController.cpp:920
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgid "&Continue Task"
 msgstr "&ปิดแท็บ"
 
-#: session/SessionController.cpp:924
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Hangup"
 msgstr ""
 
-#: session/SessionController.cpp:929
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Interrupt Task"
 msgstr ""
 
-#: session/SessionController.cpp:934
+#: session/SessionController.cpp:935
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "&Terminate Task"
 msgstr "คุณลักษณะของเทอร์มินัล"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "&Kill Task"
 msgstr ""
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &1"
 msgstr ""
 
-#: session/SessionController.cpp:949
+#: session/SessionController.cpp:950
 #, kde-format
 msgid "User Signal &2"
 msgstr ""
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:968
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile..."
 msgstr "สร้างโพรไฟล์ใหม่..."
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "แก้ไขโพรไฟล์ปัจจุบัน"
 
-#: session/SessionController.cpp:1086
+#: session/SessionController.cpp:1087
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "มีโปรแกรมกำลังทำงานอยู่ในวาระการใช้งานนี้ คุณแน่ใจหรือว่าต้องการจะปิดมันจริง ๆ ?"
 
-#: session/SessionController.cpp:1090
+#: session/SessionController.cpp:1091
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "โปรแกรม '%1' กำลังทำงานอยู่ในวาระการใช้งานนี้ คุณแน่ใจหรือว่าต้องการจะปิดมันจริง ๆ ?"
 
-#: session/SessionController.cpp:1097 session/SessionController.cpp:1132
+#: session/SessionController.cpp:1098 session/SessionController.cpp:1133
 #, kde-format
 msgid "Confirm Close"
 msgstr "ยืนยันการปิด"
 
-#: session/SessionController.cpp:1098
+#: session/SessionController.cpp:1099
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "&ปิดแท็บ"
 
-#: session/SessionController.cpp:1121
+#: session/SessionController.cpp:1122
 #, fuzzy, kde-format
 #| msgid ""
 #| "A program is currently running in this session.  Are you sure you want to "
@@ -2592,7 +2592,7 @@ msgid ""
 "by force?"
 msgstr "มีโปรแกรมกำลังทำงานอยู่ในวาระการใช้งานนี้ คุณแน่ใจหรือว่าต้องการจะปิดมันจริง ๆ ?"
 
-#: session/SessionController.cpp:1125
+#: session/SessionController.cpp:1126
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is currently running in this session.  Are you sure you "
@@ -2602,29 +2602,29 @@ msgid ""
 "kill it by force?"
 msgstr "โปรแกรม '%1' กำลังทำงานอยู่ในวาระการใช้งานนี้ คุณแน่ใจหรือว่าต้องการจะปิดมันจริง ๆ ?"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1134
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1802
+#: session/SessionController.cpp:1811
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:1995
+#: session/SessionController.cpp:2004
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2062
+#: session/SessionController.cpp:2071
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "บันทึกการดาวน์โหลดจาก ZModem ไปยัง..."
 
-#: session/SessionController.cpp:2072
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2634,13 +2634,13 @@ msgstr ""
 "<p>ตรวจพบการพยายามส่งถ่ายแฟ้มผ่าน ZModem แต่ไม่พบโปรแกรม ZModem ที่เหมาะสมในระบบนี้</"
 "p><p>คุณควรจะทำการติดตั้งแพกเกจ 'rzsz' หรือ 'lrzsz' ก่อน</p>"
 
-#: session/SessionController.cpp:2082
+#: session/SessionController.cpp:2091
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>มีการส่งถ่ายแฟ้มผ่านทาง ZModem ในวาระปัจจุบันอยู่แล้ว</p>"
 
-#: session/SessionController.cpp:2092
+#: session/SessionController.cpp:2101
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2649,7 +2649,7 @@ msgstr ""
 "<p>ไม่พบโปรแกรม ZModem ที่เหมาะสมในระบบนี้</p><p>คุณควรจะทำการติดตั้งแพกเกจ 'rzsz' "
 "หรือ 'lrzsz' ก่อน</p>"
 
-#: session/SessionController.cpp:2097
+#: session/SessionController.cpp:2106
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "เลือกแฟ้มสำหรับอัปโหลดผ่าน ZModem"

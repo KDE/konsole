@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 01:35+0000\n"
+"POT-Creation-Date: 2023-12-28 01:35+0000\n"
 "PO-Revision-Date: 2023-05-17 20:01+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -1935,17 +1935,17 @@ msgstr "انقر مزدوجًا لتغيير الاختصار"
 msgid "Tab Properties"
 msgstr "خصائص اللسان"
 
-#: SaveHistoryTask.cpp:70
+#: SaveHistoryTask.cpp:71
 #, kde-format
 msgid "Save Output From %1"
 msgstr "احفظ مخرجات من %1"
 
-#: SaveHistoryTask.cpp:82
+#: SaveHistoryTask.cpp:83
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "العنوان %1 غير صالح ، لا يمكن حفظ المخرجات."
 
-#: SaveHistoryTask.cpp:172
+#: SaveHistoryTask.cpp:173
 #, kde-format
 msgid ""
 "A problem occurred when saving the output.\n"
@@ -2034,28 +2034,28 @@ msgstr "ماك اوس"
 msgid "Solaris console"
 msgstr "لوحة تحكم سولاريز"
 
-#: session/Session.cpp:103
+#: session/Session.cpp:105
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "جرس في  '%1' ( الجلسة '%2')"
 
-#: session/Session.cpp:410
+#: session/Session.cpp:412
 #, kde-format
 msgid "Could not find binary: "
 msgstr "لا يمكن إيجاد الملف التنفيذي:"
 
-#: session/Session.cpp:419
+#: session/Session.cpp:421
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "تحذير:"
 
-#: session/Session.cpp:513
+#: session/Session.cpp:515
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "لا يمكن إيجاد محارة تفاعلية ليبدأ بها."
 
-#: session/Session.cpp:519 session/Session.cpp:521
+#: session/Session.cpp:521 session/Session.cpp:523
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2064,24 +2064,24 @@ msgstr ""
 "لا يمكن إيجاد  '%1', سيبدأ بـ '%2' عوضا عن ذلك. رجاءا تأكد من إعدادات "
 "التشكيلة."
 
-#: session/Session.cpp:584
+#: session/Session.cpp:586
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "لا يمكن بدء البرنامج  '%1' بالمعاملات '%2'."
 
-#: session/Session.cpp:732
+#: session/Session.cpp:734
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "سكوت في '%1' (الجلسة '%2')"
 
-#: session/Session.cpp:733 session/Session.cpp:1934
-#: session/SessionController.cpp:354 session/SessionController.cpp:1803
+#: session/Session.cpp:735 session/Session.cpp:2009
+#: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
 msgstr "اعرض الجلسة"
 
-#: session/Session.cpp:1017
+#: session/Session.cpp:1019
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2094,28 +2094,28 @@ msgstr ""
 "الاستخدام الداخلي فقط عن طريق إعادة تجميع كونسول. <p> سيظهر هذا التحذير مرة "
 "واحدة فقط لمثيل كونسول هذا. </p>"
 
-#: session/Session.cpp:1057
+#: session/Session.cpp:1059
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "انتهى"
 
-#: session/Session.cpp:1071 session/Session.cpp:1087
+#: session/Session.cpp:1073 session/Session.cpp:1089
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "انهار البرنامج '%1' ."
 
-#: session/Session.cpp:1073
+#: session/Session.cpp:1075
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "البرنامج '%1' خرج بالحالة %2."
 
-#: session/Session.cpp:1599
+#: session/Session.cpp:1601
 #, kde-format
 msgid "ZModem Progress"
 msgstr "تقدّم ZModem"
 
-#: session/Session.cpp:1933
+#: session/Session.cpp:2008
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "نشاط في '%1' (الجلسة '%2')"
@@ -2283,167 +2283,167 @@ msgstr "&لا شيء"
 msgid "Copy Input To"
 msgstr "انسخ المدخلات إلى "
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:856
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&رفع ZModem ..."
 
-#: session/SessionController.cpp:860
+#: session/SessionController.cpp:861
 #, kde-format
 msgid "One-shot monitors"
 msgstr "شاشات طلقة واحدة"
 
-#: session/SessionController.cpp:865
+#: session/SessionController.cpp:866
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "الشاشة لل&محث"
 
-#: session/SessionController.cpp:872
+#: session/SessionController.cpp:873
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "راقب الن&شاط"
 
-#: session/SessionController.cpp:878
+#: session/SessionController.cpp:879
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "مراقبة الس&كون"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:885
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "راقب لانتهاء العملية"
 
-#: session/SessionController.cpp:891
+#: session/SessionController.cpp:892
 #, kde-format
 msgid "Enlarge Font"
 msgstr "كبّر الخط"
 
-#: session/SessionController.cpp:899
+#: session/SessionController.cpp:900
 #, kde-format
 msgid "Shrink Font"
 msgstr "قلص الخط"
 
-#: session/SessionController.cpp:904
+#: session/SessionController.cpp:905
 #, kde-format
 msgid "Reset Font Size"
 msgstr "صفّر حجم الخط"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:911
 #, kde-format
 msgid "Send Signal"
 msgstr "أرسل إشارة"
 
-#: session/SessionController.cpp:914
+#: session/SessionController.cpp:915
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&علّق المهمة"
 
-#: session/SessionController.cpp:919
+#: session/SessionController.cpp:920
 #, kde-format
 msgid "&Continue Task"
 msgstr "&تابع المهمة"
 
-#: session/SessionController.cpp:924
+#: session/SessionController.cpp:925
 #, kde-format
 msgid "&Hangup"
 msgstr "ا&فصل"
 
-#: session/SessionController.cpp:929
+#: session/SessionController.cpp:930
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "قا&طع المهمة"
 
-#: session/SessionController.cpp:934
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "&Terminate Task"
 msgstr "أ&نهِ المهمة"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "&Kill Task"
 msgstr "ا&قتل المهمة"
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:945
 #, kde-format
 msgid "User Signal &1"
 msgstr "إشارة المستخدم &1"
 
-#: session/SessionController.cpp:949
+#: session/SessionController.cpp:950
 #, kde-format
 msgid "User Signal &2"
 msgstr "إشارة المستخدم &2"
 
-#: session/SessionController.cpp:967
+#: session/SessionController.cpp:968
 #, kde-format
 msgid "Create New Profile..."
 msgstr "أنشئ تشكيلة جديدة..."
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:970
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "حرّر التشكيلة الحالية..."
 
-#: session/SessionController.cpp:1086
+#: session/SessionController.cpp:1087
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "يوجد برنامج يعمل الآن في هذه الجلسة. هل أنت متأكد أنك تريد إغلاقها؟"
 
-#: session/SessionController.cpp:1090
+#: session/SessionController.cpp:1091
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "البرنامج '%1' يعمل حاليا في هذه الجلسة. أمتأكد أنك تريد إغلاقها؟"
 
-#: session/SessionController.cpp:1097 session/SessionController.cpp:1132
+#: session/SessionController.cpp:1098 session/SessionController.cpp:1133
 #, kde-format
 msgid "Confirm Close"
 msgstr "أكد الغلق"
 
-#: session/SessionController.cpp:1098
+#: session/SessionController.cpp:1099
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "أغلق البرنامج"
 
-#: session/SessionController.cpp:1121
+#: session/SessionController.cpp:1122
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "يوجد برنامج في هذه الجلسة لن يموت. هل أنت متأكد أنك تريد قتلها بالقوة؟"
 
-#: session/SessionController.cpp:1125
+#: session/SessionController.cpp:1126
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "البرنامج '%1' لن يموت في هذه الجلسة. أمتأكد أنك تريد إغلاقها؟"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1134
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "اقتل البرنامج"
 
-#: session/SessionController.cpp:1802
+#: session/SessionController.cpp:1811
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "محث الصدفة معروض في الجلسة '%1'"
 
-#: session/SessionController.cpp:1995
+#: session/SessionController.cpp:2004
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "افتح المجلد الحالي بـ"
 
-#: session/SessionController.cpp:2062
+#: session/SessionController.cpp:2071
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "احفظ تحميل ZModem إلى ..."
 
-#: session/SessionController.cpp:2072
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2453,13 +2453,13 @@ msgstr ""
 "<p>اكتشفت محالة لنقل ملف  ZModem ؛ ولكن لا يوجد برنامج ZModem مناسب في "
 "النظام.</p><p>قد ترغب في تثبيت حزمة  'rzsz' أو 'lrzsz' .</p>"
 
-#: session/SessionController.cpp:2082
+#: session/SessionController.cpp:2091
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>الجلسة الحالية تحوي على عملية نقل ملف ZModem بالفعل.</p>"
 
-#: session/SessionController.cpp:2092
+#: session/SessionController.cpp:2101
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2468,7 +2468,7 @@ msgstr ""
 "<p>لا يوجد برنامج ZModem مناسب في النظام.</p><p>قد ترغب في تثبيت حزمة  "
 "'rzsz' أو 'lrzsz' .</p>"
 
-#: session/SessionController.cpp:2097
+#: session/SessionController.cpp:2106
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "اختر ملفات لرفع  ZModem"
