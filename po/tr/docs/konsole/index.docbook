@@ -261,7 +261,7 @@
 <title
 >Profiller</title>
 <para
->Profiller, kullanıcının yaygın kullanılan komutları hızlı ve kolay bir biçimde otomatikleştirilmesini sağlar. Örnekler: <itemizedlist>
+>Profiller, kullanıcının yaygın kullanılan komutları tez ve kolay bir biçimde otomatikleştirilmesini sağlar. Örnekler: <itemizedlist>
 <listitem
 ><para
 >başka makineye ssh yapmak</para
@@ -407,7 +407,7 @@
 
 <listitem
 ><para
->&MMB; ile tıklamak, panodaki geçerli metni yapıştırır. &MMB; ile tıklarken &Ctrl; düğmesine basmak metni yapıştırır ve yeni bir satır ekler. Bu, yapıştırılan komutu hızlı bir şekilde yürütmek için uygundur; ancak tehlikeli olabilir, bu nedenle dikkatli kullanın. </para>
+>&MMB; ile tıklamak, panodaki geçerli metni yapıştırır. &MMB; ile tıklarken &Ctrl; düğmesine basmak metni yapıştırır ve yeni bir satır ekler. Bu, yapıştırılan komutu tez yürütmek için uygundur; ancak tehlikeli olabilir, bu nedenle dikkatli kullanın. </para>
 
 <note
 ><para
@@ -3156,7 +3156,7 @@ Boşluk+Kontrol
 >+</quote
 >, kipin <emphasis
 >ayarlı</emphasis
-> olduğunu belirtir; bir değiştirici düğme için bu, onun basılı olduğu, diğer kipler içinse belirli bir kipin etkin olduğu anlamına gelir. Örneğin, <quote
+> olduğunu belirtir; bir niteleyici düğme için bu, onun basılı olduğu, diğer kipler içinse belirli bir kipin etkin olduğu anlamına gelir. Örneğin, <quote
 >+Kontrol</quote
 >, düğme kombinasyonunun yalnızca &Ctrl; düğmesi basılıysa geçerli olacağını belirtir.</para>
 
@@ -3167,7 +3167,7 @@ Boşluk+Kontrol
 >sıfırlandığı</emphasis
 > anlamına gelir; bu, bir kipten önce <quote
 >+</quote
-> koymanın tam tersidir; bir değiştirici düğme için bu düğmenin basılı olmadığı, diğer tüm kipleriçinse o belirli kipin etkin olmadığı anlamına gelir. Örneğin, <quote
+> koymanın tam tersidir; bir niteleyici düğme için bu düğmenin basılı olmadığı, diğer tüm kipler içinse o belirli kipin etkin olmadığı anlamına gelir. Örneğin, <quote
 >-Kontrol</quote
 >, düğme kombinasyonunun yalnızca &Ctrl; düğmesi <emphasis
 >basılı değilken</emphasis
@@ -3188,7 +3188,7 @@ Boşluk+Kontrol
 >Seçenek, Kontrol, Üst Karakter</term>
 <listitem>
 <para
->Bu kiplerden bir veya daha fazlası bir düğme kombinasyonunda kullanılabilir; bunlardan herhangi biri ayarlanmışsa düğme kombinasyonu sırasıyla bu değiştirici düğmeyi kullanır; sıfırlanırsa tam tersi olur</para>
+>Bu kiplerden bir veya daha fazlası bir düğme kombinasyonunda kullanılabilir; bunlardan herhangi biri ayarlanmışsa düğme kombinasyonu sırasıyla bu niteleyici düğmeyi kullanır; sıfırlanırsa tam tersi olur</para>
 </listitem>
 </varlistentry>
 
@@ -3197,7 +3197,7 @@ Boşluk+Kontrol
 >AnyModifier</term>
 <listitem>
 <para
->Bu kip ayarlanırsa düğme kombinasyonu herhangi bir değiştirici düğmeyi (önceki üç değiştirici düğmeden herhangi biri) kullanır; sıfırlanırsa tam tersi olur</para>
+>Bu kip ayarlanırsa düğme kombinasyonu herhangi bir niteleyici düğmeyi (önceki üç niteleyici düğmeden herhangi biri) kullanır; sıfırlanırsa tam tersi olur</para>
 </listitem>
 </varlistentry>
 
