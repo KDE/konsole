@@ -45,7 +45,6 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     }
 
     KBookmarkManager *manager = new KBookmarkManager(_file, this);
-    manager->setUpdate(true);
 
     // This constructor is only called with toplevel as true; regardless the
     // fourth argument can not be nullptr as it will crash in BookmarkMenu
