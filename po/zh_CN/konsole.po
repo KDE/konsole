@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:35+0000\n"
+"POT-Creation-Date: 2024-01-04 01:36+0000\n"
 "PO-Revision-Date: 2023-12-30 13:38\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -239,13 +239,13 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "切换背景窗口"
 
-#: BookmarkHandler.cpp:108
+#: BookmarkHandler.cpp:107
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%2 上 的 %1"
 
-#: BookmarkHandler.cpp:110
+#: BookmarkHandler.cpp:109
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"

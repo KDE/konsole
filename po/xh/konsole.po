@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:35+0000\n"
+"POT-Creation-Date: 2024-01-04 01:36+0000\n"
 "PO-Revision-Date: 2002-11-04 09:23SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -242,7 +242,7 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "ebonisa ngaphaya"
 
-#: BookmarkHandler.cpp:108
+#: BookmarkHandler.cpp:107
 #, fuzzy, kde-format
 #| msgctxt "abbreviation of number"
 #| msgid "%1 No. %2"
@@ -250,7 +250,7 @@ msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%1 No. %2"
 
-#: BookmarkHandler.cpp:110
+#: BookmarkHandler.cpp:109
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"

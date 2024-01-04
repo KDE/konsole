@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:35+0000\n"
+"POT-Creation-Date: 2024-01-04 01:36+0000\n"
 "PO-Revision-Date: 2023-12-05 08:03+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -264,13 +264,13 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "Conmutar a xanela do fondo"
 
-#: BookmarkHandler.cpp:108
+#: BookmarkHandler.cpp:107
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%1 en %2"
 
-#: BookmarkHandler.cpp:110
+#: BookmarkHandler.cpp:109
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"

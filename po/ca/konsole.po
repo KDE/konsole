@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:35+0000\n"
+"POT-Creation-Date: 2024-01-04 01:36+0000\n"
 "PO-Revision-Date: 2023-12-04 12:45+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -252,13 +252,13 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "Commutació de la finestra de fons"
 
-#: BookmarkHandler.cpp:108
+#: BookmarkHandler.cpp:107
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%1 a %2"
 
-#: BookmarkHandler.cpp:110
+#: BookmarkHandler.cpp:109
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"

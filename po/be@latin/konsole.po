@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:35+0000\n"
+"POT-Creation-Date: 2024-01-04 01:36+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -252,7 +252,7 @@ msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "Pierakliučennie fonavaha akna"
 
-#: BookmarkHandler.cpp:108
+#: BookmarkHandler.cpp:107
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu The users name and host they are connected to via ssh"
 #| msgid "%1 on %2"
@@ -260,7 +260,7 @@ msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
 msgstr "%1 na %2"
 
-#: BookmarkHandler.cpp:110
+#: BookmarkHandler.cpp:109
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
