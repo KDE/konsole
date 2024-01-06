@@ -10,14 +10,14 @@
 # Alexander Potashev <aspotashev@gmail.com>, 2009, 2010, 2011, 2014, 2015, 2016, 2017, 2019.
 # Yuri Efremov <yur.arh@gmail.com>, 2012, 2013.
 # Alexander Lakhin <exclusion@gmail.com>, 2013, 2014.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2019, 2020, 2021, 2022, 2023.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-04 01:36+0000\n"
-"PO-Revision-Date: 2023-04-17 10:13+0300\n"
+"PO-Revision-Date: 2024-01-05 22:01+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -1299,7 +1299,7 @@ msgstr "Общие"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Память"
 
 #: MainWindow.cpp:901
 #, kde-format
@@ -1890,7 +1890,7 @@ msgstr "&Масштабировать вывод"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Встроенный"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
@@ -1898,9 +1898,7 @@ msgid "Default profile"
 msgstr "Профиль по умолчанию"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "Профиль %1"
@@ -2310,13 +2308,12 @@ msgstr "&Передать по ZModem…"
 #: session/SessionController.cpp:861
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Одноразовые мониторы"
 
 #: session/SessionController.cpp:866
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Монитор &активности"
+msgstr "Монитор &запроса"
 
 #: session/SessionController.cpp:873
 #, kde-format
@@ -2451,7 +2448,7 @@ msgstr "Завершить выполнение"
 #: session/SessionController.cpp:1811
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Запрос оболочки показан в сеансе «%1»"
 
 #: session/SessionController.cpp:2004
 #, kde-format
@@ -2826,10 +2823,9 @@ msgstr "Использовать указанный каталог для хра
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Отслеживание активности вкладок"
+msgstr "Отслеживать использование памяти:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2843,18 +2839,25 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Изменения вступят в силу после перезапуска. Если этот параметр включён, "
+"постоянное использование памяти терминалом Konsole, превышающее указанное "
+"значение, приведёт к тому, что служба systemd-oomd завершит работу вкладок, "
+"содержащих процессы, интенсивно использующие память. Обратите внимание, что "
+"включение параметра может привести к замедлению работы при значительном "
+"использовании памяти, а указание слишком низких значений все равно может "
+"привести к завершению работы Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Ограничение памяти:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " МБ"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3959,19 +3962,16 @@ msgstr "Интенсивность затемнения:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:533
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Цвет:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:549
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Выбор цвета курсора"
+msgstr "Выбор цвета рамки"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:571
@@ -3981,10 +3981,9 @@ msgstr "Неактивные терминалы:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:581
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Неактивные терминалы:"
+msgstr "Активные терминалы:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:591
@@ -4040,16 +4039,15 @@ msgstr "Затемнять"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Затемнение цветов в неактивных окнах"
+msgstr "Выделение активного окна цветной рамкой"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Рамка"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:788
@@ -4244,13 +4242,13 @@ msgstr "Профиль с названием «%1» уже существует.
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Название профиля превышает максимально допустимую длину (%1)."
 
 #: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Название профиля содержит недопустимые символы (выделены): %1."
 
 #: widgets/EditProfileDialog.cpp:411
 #, kde-format
