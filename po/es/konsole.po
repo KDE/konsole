@@ -11,7 +11,7 @@
 # Pablo de Vicente <pablo.devicente@gmail.com>, 2006.
 # Pablo Pita Leira <pablo.pita@kdemail.net>, 2007.
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2007.
-# SPDX-FileCopyrightText: 2009, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 # Cristina Yenyxe González García <the.blue.valkyrie@gmail.com>, 2010, 2011, 2012, 2013.
 # Javier Vinal <fjvinal@gmail.com>, 2011.
 # arklad, 2011.
@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-04 01:36+0000\n"
-"PO-Revision-Date: 2023-12-05 02:09+0100\n"
+"PO-Revision-Date: 2024-01-11 02:07+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -32,7 +32,7 @@ msgstr ""
 "com>\n"
 "com>\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1336,7 +1336,7 @@ msgstr "Formulario"
 #: plugins/QuickCommands/qcwidget.ui:22
 #, kde-format
 msgid "Shortcut:"
-msgstr "Acceso rápido:"
+msgstr "Atajo de teclado:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1695,7 +1695,7 @@ msgstr "Borrar la entrada seleccionada"
 #: plugins/SSHManager/sshwidget.ui:19
 #, kde-format
 msgid "Shortcut"
-msgstr "Acceso rápido"
+msgstr "Atajo de teclado"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
 #: plugins/SSHManager/sshwidget.ui:43
@@ -1923,7 +1923,7 @@ msgstr "Nombre"
 #, kde-format
 msgctxt "@title:column Profile keyboard shortcut"
 msgid "Shortcut"
-msgstr "Acceso rápido"
+msgstr "Atajo de teclado"
 
 #: profile/ProfileModel.cpp:80
 #, kde-format
@@ -1949,7 +1949,7 @@ msgstr "El perfil integrado siempre está disponible"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
-msgstr "Doble clic para cambiar el acceso rápido"
+msgstr "Doble clic para cambiar el atajo de teclado"
 
 #: RenameTabDialog.cpp:25
 #, kde-format
@@ -2164,7 +2164,7 @@ msgstr "Buscar «%1» con"
 #: session/SessionController.cpp:531
 #, kde-format
 msgid "Configure Web Shortcuts..."
-msgstr "Configurar accesos rápidos de la Web..."
+msgstr "Configurar los atajos web..."
 
 #: session/SessionController.cpp:641
 #, kde-format
@@ -2890,8 +2890,8 @@ msgid ""
 msgstr ""
 "<html><head/><body><p>Aplicaciones que usan los perfiles compartidos de "
 "KonsolePart share.</p><p>No comparten con Konsole ni con otras aplicaciones:"
-"<ul><li>perfil predeterminado</li><li>mostrar en el menú</li><li>accesos "
-"rápidos</li></ul></p><p>Abra un <a href=\"https://bugs.kde.org/enter_bug.cgi?"
+"<ul><li>perfil predeterminado</li><li>mostrar en el menú</li><li>atajos de "
+"teclado</li></ul></p><p>Abra un <a href=\"https://bugs.kde.org/enter_bug.cgi?"
 "format=guided&product=konsole&component=kpart\">informe de fallos</a> sobre "
 "Konsole si desea modificar cómo se maneja esto.</body></html>"
 
@@ -3725,7 +3725,7 @@ msgstr "Codificación personalizada:"
 #: widgets/EditProfileAdvancedPage.ui:260
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
-msgstr "Acceso rápido para ojear la pantalla principal:"
+msgstr "Atajo de teclado para echar un vistazo a la pantalla principal:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
