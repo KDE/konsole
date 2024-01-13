@@ -52,6 +52,7 @@
 #include "ShellCommand.h"
 #include "Vt102Emulation.h"
 #include "ZModemDialog.h"
+#include "decoders/PlainTextDecoder.h"
 #include "history/HistoryTypeFile.h"
 #include "history/HistoryTypeNone.h"
 #include "history/compact/CompactHistoryType.h"
@@ -1880,6 +1881,68 @@ QList<int> Session::feederSessions()
 
     feeders.removeAll(sessionId());
     return feeders;
+}
+
+QString Session::getAllDisplayedText(bool removeTrailingEmptyLines)
+{
+    return getAllDisplayedTextList(removeTrailingEmptyLines).join(QLatin1Char('\n'));
+}
+
+QStringList Session::getAllDisplayedTextList(bool removeTrailingEmptyLines)
+{
+    auto screenWindow = _views.at(0)->screenWindow();
+    if (removeTrailingEmptyLines) {
+        auto lineproperties = screenWindow->getLineProperties();
+        int lastNonemptyLine = screenWindow->windowLines();
+
+        for (int i = lineproperties.size() - 1; i >= 0; --i) {
+            if (lineproperties[i].length > 0) {
+                lastNonemptyLine = i;
+                break;
+            }
+        }
+
+        return getDisplayedTextList(0, lastNonemptyLine);
+    } else {
+        return getDisplayedTextList(0, screenWindow->windowLines() - 1);
+    }
+}
+
+QString Session::getDisplayedText(int startLineOffset, int endLineOffset)
+{
+    return getDisplayedTextList(startLineOffset, endLineOffset).join(QLatin1Char('\n'));
+}
+
+QStringList Session::getDisplayedTextList(int startLineOffset, int endLineOffset)
+{
+    auto screenWindow = _views.at(0)->screenWindow();
+
+    if (startLineOffset < 0 || endLineOffset >= screenWindow->windowLines() || startLineOffset > endLineOffset) {
+        return QStringList();
+    }
+
+    QStringList list;
+    QTextStream stream;
+    PlainTextDecoder decoder;
+    int screenTopLineIndex = screenWindow->currentLine();
+    int startLine = startLineOffset + screenTopLineIndex;
+    int endLine = endLineOffset + screenTopLineIndex;
+
+    for (int currLine = startLine; currLine <= endLine; ++currLine) {
+        QString lineContent;
+        stream.setString(&lineContent, QIODevice::ReadWrite);
+        decoder.begin(&stream);
+        screenWindow->screen()->writeLinesToStream(&decoder, currLine, currLine);
+        decoder.end();
+
+        if (lineContent.back() == QLatin1Char('\n')) {
+            lineContent.removeLast();
+        }
+
+        list.append(lineContent);
+    }
+
+    return list;
 }
 
 int Session::foregroundProcessId()
