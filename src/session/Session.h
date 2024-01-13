@@ -696,6 +696,35 @@ public Q_SLOTS:
      */
     Q_SCRIPTABLE QList<int> feederSessions();
 
+    /**
+     * Convenience method for retrieving all displayed text in a single string.
+     */
+    Q_SCRIPTABLE QString getAllDisplayedText(bool removeTrailingEmptyLines = true);
+
+    /**
+     * DBus slot for retrieving text displayed.
+     *
+     * Returns a QList of sequential QStrings where each QString represents
+     * the text on a single line.
+     */
+    Q_SCRIPTABLE QStringList getAllDisplayedTextList(bool removeTrailingEmptyLines = true);
+
+    /**
+     * Convenience method for retrieving a single string containing displayed
+     * text from specified range.
+     */
+    Q_SCRIPTABLE QString getDisplayedText(int startLineOffset, int endLineOffset);
+
+    /**
+     * DBus slot for retrieving displayed text in a specified range of lines.
+     * startLineOffset represents the line offset (relative to the line at the
+     * top of the screen) of the line to be first retrieved.
+     *
+     * E.g. Retrieving only the line at the top of the screen is done by
+     * getDisplayedTextList(0, 0)
+     */
+    Q_SCRIPTABLE QStringList getDisplayedTextList(int startLineOffset, int endLineOffset);
+
 Q_SIGNALS:
 
     /** Emitted when the terminal process starts. */
