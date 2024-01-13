@@ -2064,6 +2064,9 @@ void SessionController::zmodemDownload()
 {
     QString zmodem = QStandardPaths::findExecutable(QStringLiteral("rz"));
     if (zmodem.isEmpty()) {
+        zmodem = QStandardPaths::findExecutable(QStringLiteral("lrzsz-rz"));
+    }
+    if (zmodem.isEmpty()) {
         zmodem = QStandardPaths::findExecutable(QStringLiteral("lrz"));
     }
     if (!zmodem.isEmpty()) {
@@ -2093,6 +2096,9 @@ void SessionController::zmodemUpload()
     }
 
     QString zmodem = QStandardPaths::findExecutable(QStringLiteral("sz"));
+    if (zmodem.isEmpty()) {
+        zmodem = QStandardPaths::findExecutable(QStringLiteral("lrzsz-sz"));
+    }
     if (zmodem.isEmpty()) {
         zmodem = QStandardPaths::findExecutable(QStringLiteral("lsz"));
     }
