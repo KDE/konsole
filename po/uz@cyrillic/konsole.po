@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:36+0000\n"
+"POT-Creation-Date: 2024-01-14 00:39+0000\n"
 "PO-Revision-Date: 2008-06-04 01:01+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -2115,46 +2115,46 @@ msgstr ""
 msgid "Solaris console"
 msgstr "Solaris терминали"
 
-#: session/Session.cpp:105
+#: session/Session.cpp:106
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr ""
 
-#: session/Session.cpp:412
+#: session/Session.cpp:413
 #, fuzzy, kde-format
 #| msgid "Could not save history."
 msgid "Could not find binary: "
 msgstr "Тарихни сақлаб бўлмади."
 
-#: session/Session.cpp:421
+#: session/Session.cpp:422
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr ""
 
-#: session/Session.cpp:515
+#: session/Session.cpp:516
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:521 session/Session.cpp:523
+#: session/Session.cpp:522 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:586
+#: session/Session.cpp:587
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:734
+#: session/Session.cpp:735
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr ""
 
-#: session/Session.cpp:735 session/Session.cpp:2009
+#: session/Session.cpp:736 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2162,7 +2162,7 @@ msgstr ""
 msgid "Show session"
 msgstr "Янги сеанс"
 
-#: session/Session.cpp:1019
+#: session/Session.cpp:1020
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2171,30 +2171,30 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1059
+#: session/Session.cpp:1060
 #, fuzzy, kde-format
 #| msgid "Finished"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Тугади"
 
-#: session/Session.cpp:1073 session/Session.cpp:1089
+#: session/Session.cpp:1074 session/Session.cpp:1090
 #, fuzzy, kde-format
 #| msgid "Session '%1' exited unexpectedly."
 msgid "Program '%1' crashed."
 msgstr "Сеанс \"%1\" кутилмаганда тугади."
 
-#: session/Session.cpp:1075
+#: session/Session.cpp:1076
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' дастури %2 ҳолати билан тугади."
 
-#: session/Session.cpp:1601
+#: session/Session.cpp:1602
 #, kde-format
 msgid "ZModem Progress"
 msgstr ""
 
-#: session/Session.cpp:2008
+#: session/Session.cpp:2071
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr ""
@@ -2540,13 +2540,13 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2071
+#: session/SessionController.cpp:2074
 #, fuzzy, kde-format
 #| msgid "&ZModem Upload..."
 msgid "Save ZModem Download to..."
 msgstr "ZModem ё&зиб қўйиш"
 
-#: session/SessionController.cpp:2081
+#: session/SessionController.cpp:2084
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2561,7 +2561,7 @@ msgstr ""
 "топилмади.\n"
 "<p>\"rzsz\" ёки \"lrzsz\" дастурини ўрнатишингиз керак.\n"
 
-#: session/SessionController.cpp:2091
+#: session/SessionController.cpp:2094
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2569,7 +2569,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Жорий сеансда ZModem файл узатиши аллақачон давом этаяпти."
 
-#: session/SessionController.cpp:2101
+#: session/SessionController.cpp:2107
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2581,7 +2581,7 @@ msgstr ""
 "<p>Тизимда керак бўлган ZModem дастури топилмади.\n"
 "<p>\"rzsz\" ёки \"lrzsz\" дастурини ўрнатишингиз керак.\n"
 
-#: session/SessionController.cpp:2106
+#: session/SessionController.cpp:2112
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"

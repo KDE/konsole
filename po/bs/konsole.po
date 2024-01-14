@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:36+0000\n"
+"POT-Creation-Date: 2024-01-14 00:39+0000\n"
 "PO-Revision-Date: 2014-02-12 22:52+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -2122,29 +2122,29 @@ msgstr ""
 msgid "Solaris console"
 msgstr "Solaris konzola"
 
-#: session/Session.cpp:105
+#: session/Session.cpp:106
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Zvono u sesiji '%1'"
 
-#: session/Session.cpp:412
+#: session/Session.cpp:413
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Nije moguće naći binarni program: "
 
-#: session/Session.cpp:421
+#: session/Session.cpp:422
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Upozorenje: "
 
-#: session/Session.cpp:515
+#: session/Session.cpp:516
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nije moguće pronaći interaktivnu školjku za početak."
 
-#: session/Session.cpp:521 session/Session.cpp:523
+#: session/Session.cpp:522 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2153,18 +2153,18 @@ msgstr ""
 "Nije moguće pronaći '%1', umjesto toga se pokreće '%2'. Molim vas da "
 "provjerite postavke vašeg profila."
 
-#: session/Session.cpp:586
+#: session/Session.cpp:587
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nije moguće pokrenuti program '%1' s argumentima '%2'."
 
-#: session/Session.cpp:734
+#: session/Session.cpp:735
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina na sesiji '%1'"
 
-#: session/Session.cpp:735 session/Session.cpp:2009
+#: session/Session.cpp:736 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2172,7 +2172,7 @@ msgstr "Tišina na sesiji '%1'"
 msgid "Show session"
 msgstr "&Zatvori sesiju"
 
-#: session/Session.cpp:1019
+#: session/Session.cpp:1020
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2181,28 +2181,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1059
+#: session/Session.cpp:1060
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Završeno"
 
-#: session/Session.cpp:1073 session/Session.cpp:1089
+#: session/Session.cpp:1074 session/Session.cpp:1090
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Program '%1' se srušio."
 
-#: session/Session.cpp:1075
+#: session/Session.cpp:1076
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Program '%1' završio je sa statusom %2."
 
-#: session/Session.cpp:1601
+#: session/Session.cpp:1602
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem napredak"
 
-#: session/Session.cpp:2008
+#: session/Session.cpp:2071
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -2549,13 +2549,13 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2071
+#: session/SessionController.cpp:2074
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "Sačuvaj ZModem preuzimanje u..."
 
-#: session/SessionController.cpp:2081
+#: session/SessionController.cpp:2084
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2566,13 +2566,13 @@ msgstr ""
 "računaru nije pronađen odgovarajući ZModem softver.</p><p>Da li želite "
 "instalirati pakete 'rzsz' ili 'lrzsz'</p>"
 
-#: session/SessionController.cpp:2091
+#: session/SessionController.cpp:2094
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Trenutna sesija već ima ZModem prenos datoteka u toku.</p>"
 
-#: session/SessionController.cpp:2101
+#: session/SessionController.cpp:2107
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2581,7 +2581,7 @@ msgstr ""
 "<p>Na vašem računaru nije pronađen odgovarajući ZModem softver.</p><p>Možda "
 "želite instalirati pakete 'rzsz' ili 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2106
+#: session/SessionController.cpp:2112
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Označite datoteke za ZModen upload"

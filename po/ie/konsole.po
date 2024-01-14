@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:36+0000\n"
+"POT-Creation-Date: 2024-01-14 00:39+0000\n"
 "PO-Revision-Date: 2022-10-28 16:51+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <kde-i18n-doc@kde.org>\n"
@@ -1983,52 +1983,52 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Console Solaris"
 
-#: session/Session.cpp:105
+#: session/Session.cpp:106
 #, fuzzy, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "%1 %2"
 
-#: session/Session.cpp:412
+#: session/Session.cpp:413
 #, fuzzy, kde-format
 msgid "Could not find binary: "
 msgstr "Ne successat trovar li plugin %1"
 
-#: session/Session.cpp:421
+#: session/Session.cpp:422
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Avise: "
 
-#: session/Session.cpp:515
+#: session/Session.cpp:516
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:521 session/Session.cpp:523
+#: session/Session.cpp:522 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:586
+#: session/Session.cpp:587
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:734
+#: session/Session.cpp:735
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Ínactivitá in «%1» (Session «%2»)"
 
-#: session/Session.cpp:735 session/Session.cpp:2009
+#: session/Session.cpp:736 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
 msgstr "Monstrar li session"
 
-#: session/Session.cpp:1019
+#: session/Session.cpp:1020
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2037,29 +2037,29 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1059
+#: session/Session.cpp:1060
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Completat"
 
-#: session/Session.cpp:1073 session/Session.cpp:1089
+#: session/Session.cpp:1074 session/Session.cpp:1090
 #, fuzzy, kde-format
 msgid "Program '%1' crashed."
 msgstr "Li programma «%1» manca permissiones de execution."
 
-#: session/Session.cpp:1075
+#: session/Session.cpp:1076
 #, fuzzy, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr ""
 "Li programma «%1» esset trovat in %2 ma it manca permissiones de execution."
 
-#: session/Session.cpp:1601
+#: session/Session.cpp:1602
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progresse de ZModem"
 
-#: session/Session.cpp:2008
+#: session/Session.cpp:2071
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitá in «%1» (Session «%2»)"
@@ -2387,12 +2387,12 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr "Aperter li actual fólder in nov fenestre"
 
-#: session/SessionController.cpp:2071
+#: session/SessionController.cpp:2074
 #, fuzzy, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Progresse de ZModem"
 
-#: session/SessionController.cpp:2081
+#: session/SessionController.cpp:2084
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2400,20 +2400,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2091
+#: session/SessionController.cpp:2094
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2101
+#: session/SessionController.cpp:2107
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2106
+#: session/SessionController.cpp:2112
 #, fuzzy, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Ne successat cargar li files"

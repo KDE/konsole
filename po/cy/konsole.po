@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:36+0000\n"
+"POT-Creation-Date: 2024-01-14 00:39+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -2094,48 +2094,48 @@ msgstr ""
 msgid "Solaris console"
 msgstr "terfynell linux"
 
-#: session/Session.cpp:105
+#: session/Session.cpp:106
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Cloch yn sesiwn '%1'"
 
-#: session/Session.cpp:412
+#: session/Session.cpp:413
 #, fuzzy, kde-format
 #| msgid "Could not save history."
 msgid "Could not find binary: "
 msgstr "Methwyd cadw'r hanes."
 
-#: session/Session.cpp:421
+#: session/Session.cpp:422
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr ""
 
-#: session/Session.cpp:515
+#: session/Session.cpp:516
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:521 session/Session.cpp:523
+#: session/Session.cpp:522 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:586
+#: session/Session.cpp:587
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:734
+#: session/Session.cpp:735
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tawelwch yn sesiwn '%1'"
 
-#: session/Session.cpp:735 session/Session.cpp:2009
+#: session/Session.cpp:736 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2143,7 +2143,7 @@ msgstr "Tawelwch yn sesiwn '%1'"
 msgid "Show session"
 msgstr "Sesiwn Newydd"
 
-#: session/Session.cpp:1019
+#: session/Session.cpp:1020
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2152,31 +2152,31 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1059
+#: session/Session.cpp:1060
 #, fuzzy, kde-format
 #| msgid "<Finished>"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "<Wedi Gorffen>"
 
-#: session/Session.cpp:1073 session/Session.cpp:1089
+#: session/Session.cpp:1074 session/Session.cpp:1090
 #, fuzzy, kde-format
 #| msgid "Session '%1' exited unexpectedly."
 msgid "Program '%1' crashed."
 msgstr "Terfynodd sesiwn '%1' yn annisgwyl."
 
-#: session/Session.cpp:1075
+#: session/Session.cpp:1076
 #, fuzzy, kde-format
 #| msgid "Session '%1' exited with status %2."
 msgid "Program '%1' exited with status %2."
 msgstr "Terfynodd sesiwn '%1' â chyflwr %2."
 
-#: session/Session.cpp:1601
+#: session/Session.cpp:1602
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Cynnydd ZModem"
 
-#: session/Session.cpp:2008
+#: session/Session.cpp:2071
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -2521,13 +2521,13 @@ msgstr ""
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2071
+#: session/SessionController.cpp:2074
 #, fuzzy, kde-format
 #| msgid "&ZModem Upload..."
 msgid "Save ZModem Download to..."
 msgstr "Fyny-lwytho â &ZModem..."
 
-#: session/SessionController.cpp:2081
+#: session/SessionController.cpp:2084
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2542,7 +2542,7 @@ msgstr ""
 "ZModem addas ar y cysawd.\n"
 "<p>Efallai hoffech osod y pecyn 'rzsz' neu'r un 'lrzsz'.\n"
 
-#: session/SessionController.cpp:2091
+#: session/SessionController.cpp:2094
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2551,7 +2551,7 @@ msgid ""
 msgstr ""
 "<p>Mae trosglwyddiad ffeil ZModem ar waith yn barod yn y sesiwn cyfredol."
 
-#: session/SessionController.cpp:2101
+#: session/SessionController.cpp:2107
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2563,7 +2563,7 @@ msgstr ""
 "<p>Ni ganfuwyd meddalwedd ZModem addas ar y cysawd.\n"
 "<p>Efallai hoffech osod y pecyn 'rzsz' neu'r un 'lrzsz'.\n"
 
-#: session/SessionController.cpp:2106
+#: session/SessionController.cpp:2112
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"

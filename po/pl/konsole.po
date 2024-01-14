@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:36+0000\n"
+"POT-Creation-Date: 2024-01-14 00:39+0000\n"
 "PO-Revision-Date: 2023-12-23 11:36+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -2057,28 +2057,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Konsola Solarisa"
 
-#: session/Session.cpp:105
+#: session/Session.cpp:106
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Dzwonek w „%1” (sesja „%2”)"
 
-#: session/Session.cpp:412
+#: session/Session.cpp:413
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Nie można znaleźć pliku binarnego: "
 
-#: session/Session.cpp:421
+#: session/Session.cpp:422
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Ostrzeżenie: "
 
-#: session/Session.cpp:515
+#: session/Session.cpp:516
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nie można znaleźć interaktywnej powłoki do uruchomienia."
 
-#: session/Session.cpp:521 session/Session.cpp:523
+#: session/Session.cpp:522 session/Session.cpp:524
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2087,24 +2087,24 @@ msgstr ""
 "Nie można znaleźć „%1”, uruchamianie „%2”. Proszę sprawdzić ustawienia "
 "profilu."
 
-#: session/Session.cpp:586
+#: session/Session.cpp:587
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nie można uruchomić programu „%1” z parametrami „%2”."
 
-#: session/Session.cpp:734
+#: session/Session.cpp:735
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Cisza w „%1” (sesja „%2”)"
 
-#: session/Session.cpp:735 session/Session.cpp:2009
+#: session/Session.cpp:736 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
 msgstr "Pokaż sesję"
 
-#: session/Session.cpp:1019
+#: session/Session.cpp:1020
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2118,28 +2118,28 @@ msgstr ""
 "wewnętrzny użytek poprzez rekompilację Konsoli. <p>To ostrzeżenie zostanie "
 "wyświetlone tylko raz dla tego wystąpienia Konsoli.</p>"
 
-#: session/Session.cpp:1059
+#: session/Session.cpp:1060
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Zakończono"
 
-#: session/Session.cpp:1073 session/Session.cpp:1089
+#: session/Session.cpp:1074 session/Session.cpp:1090
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Program „%1” nieoczekiwanie zakończył działanie."
 
-#: session/Session.cpp:1075
+#: session/Session.cpp:1076
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Program „%1” zakończył działanie. Kod powrotu: %2."
 
-#: session/Session.cpp:1601
+#: session/Session.cpp:1602
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Postęp transmisji ZModem"
 
-#: session/Session.cpp:2008
+#: session/Session.cpp:2071
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Ruch w „%1” (sesja „%2”)"
@@ -2467,12 +2467,12 @@ msgstr "Zapytanie powłoki jest wyświetlane w posiedzeniu '%1'"
 msgid "Open Current Folder With"
 msgstr "Otwórz bieżący katalog w"
 
-#: session/SessionController.cpp:2071
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Zapisz pobranie ZModem do..."
 
-#: session/SessionController.cpp:2081
+#: session/SessionController.cpp:2084
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2483,14 +2483,14 @@ msgstr ""
 "oprogramowania wspierającego ten protokół.</p><p>Należy zainstalować pakiet "
 "„rzsz” lub „lrzsz”.</p> "
 
-#: session/SessionController.cpp:2091
+#: session/SessionController.cpp:2094
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>W bieżącej sesji już trwa przesyłanie plików przy użyciu ZModem.</p>"
 
-#: session/SessionController.cpp:2101
+#: session/SessionController.cpp:2107
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2499,7 +2499,7 @@ msgstr ""
 "<p>W systemie nie odnaleziono oprogramowania wspierającego protokół ZModem.</"
 "p><p>Należy zainstalować pakiet „rzsz” lub „lrzsz”.</p>"
 
-#: session/SessionController.cpp:2106
+#: session/SessionController.cpp:2112
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Wybierz pliki do wysłania przez ZModem"
