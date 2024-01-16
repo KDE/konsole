@@ -15,30 +15,35 @@
 # Aracele Torres <aracele@kde.org>, 2017.
 # Camila Moura <camila.moura@kde.org>, 2017.
 # Thiago Masato Costa Sueto <herzenschein@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2024 Geraldo Simiao <geraldosimiao@fedoraproject.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-22 02:26+0000\n"
-"PO-Revision-Date: 2023-06-07 10:25-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2024-01-15 23:04-0300\n"
+"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Diniz Bortolotto, André Marcelo Alvarenga, Luiz Fernando Ranghetti"
+msgstr ""
+"Diniz Bortolotto, André Marcelo Alvarenga, Luiz Fernando Ranghetti, Geraldo "
+"Simião"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "diniz.bortolotto@gmail.com, alvarenga@kde.org, elchevive@opensuse.org"
+msgstr ""
+"diniz.bortolotto@gmail.com, alvarenga@kde.org, elchevive@opensuse.org, "
+"geraldosimiao@fedoraproject.org"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -2319,7 +2324,7 @@ msgstr "Enviar por &ZModem..."
 #: session/SessionController.cpp:902
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Monitores únicos"
 
 #: session/SessionController.cpp:907
 #, fuzzy, kde-format
@@ -2468,7 +2473,7 @@ msgstr "Matar programa"
 #: session/SessionController.cpp:1865
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "O prompt do shell é exibido na sessão '%1'"
 
 #: session/SessionController.cpp:2066
 #, kde-format
@@ -3480,13 +3485,13 @@ msgstr "Configurar a integração semântica (bash)"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Alternar exibição de dicas semânticas"
 
 #: ViewManager.cpp:323
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Alternar exibição de números de linha"
 
 #: ViewManager.cpp:330
 #, kde-format
@@ -3999,7 +4004,7 @@ msgstr "Renderização de texto bidirecional"
 #: widgets/EditProfileAppearancePage.ui:794
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Modo palavra"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:807
@@ -4056,7 +4061,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:900
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "forçar direção da linha LTR"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:913
@@ -4438,13 +4443,13 @@ msgstr "Emulação de teclas para cima/baixo"
 #: widgets/EditProfileGeneralPage.ui:387
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Clique do mouse na linha de entrada move o cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:400
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Dicas semânticas:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4470,7 +4475,7 @@ msgstr "Nunca"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Quando as dicas de URL são exibidas"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4489,7 +4494,7 @@ msgstr "Sempre"
 #: widgets/EditProfileGeneralPage.ui:446
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Barras de erro vermelhas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:492
@@ -4502,7 +4507,7 @@ msgstr "Borrar o plano de fundo"
 #: widgets/EditProfileGeneralPage.ui:538
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Barras alternadas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:584
@@ -4840,7 +4845,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:432
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Visualizar cores ao passar o mouse"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:452
@@ -5065,7 +5070,7 @@ msgstr "Nenhum"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "Procurar..."
+msgstr "Localizar..."
 
 #: widgets/IncrementalSearchBar.cpp:56
 #, kde-format
