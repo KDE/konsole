@@ -3,14 +3,14 @@
 # Amanpreet Singh Alam <amanpreetalam@yahoo.com>, 2005.
 # Amanpreet Singh Brar <aalam@redhat.com>, 2005.
 # AP S Alam <aalam@users.sf.net>, 2007.
-# SPDX-FileCopyrightText: 2007, 2009, 2010, 2011, 2012, 2018, 2019, 2023 A S Alam <aalam@users.sf.net>
+# SPDX-FileCopyrightText: 2007, 2009, 2010, 2011, 2012, 2018, 2019, 2023, 2024 A S Alam <aalam@users.sf.net>
 # ASB <aalam@users.sf.net>, 2007, 2013, 2014, 2015, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-14 00:39+0000\n"
-"PO-Revision-Date: 2023-12-22 20:59-0600\n"
+"PO-Revision-Date: 2024-01-19 07:50-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
@@ -23,7 +23,7 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ਅ.ਸ.ਆਲਮ. ੨੦੦੪-੨੦੨੩"
+msgstr "ਅ.ਸ.ਆਲਮ. ੨੦੦੪-੨੦੨੪"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -66,7 +66,7 @@ msgstr "ਸੈਟਿੰਗਾਂ"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "ਪਲੱਗਇਨਾਂ"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -78,7 +78,7 @@ msgstr "ਮਦਦ"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "ਮੁੱਖ ਟੂਲਬਾਰ"
 
 #. i18n: ectx: Menu (history)
 #: ../desktop/partui.rc:14
@@ -1195,7 +1195,7 @@ msgstr "ਵਿੰਡੋ ਰੰਗ ਸਕੀਮ(&W)"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
-msgstr "....ਪਰੋਫਾਇਲ ਪਰਬੰਧ"
+msgstr "....ਪਰੋਫਾਇਲ ਇੰਤਜ਼ਾਮ"
 
 #: MainWindow.cpp:394
 #, kde-format
@@ -1204,12 +1204,10 @@ msgid "Activate Menu"
 msgstr "ਮੇਨੂ ਐਕਟੀਵੇਟ ਕਰੋ"
 
 #: MainWindow.cpp:400
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "ਟੈਬ ਖੱਬੇ ਭੇਜੋ"
+msgstr "ਟੈਬ ਖਾਕੇ ਨੂੰ ਸੰਭਾਲੋ..."
 
 #: MainWindow.cpp:409
 #, kde-format
@@ -1449,12 +1447,14 @@ msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
+"ਤੁਸੀਂ ਕਈ ਸੰਰਚਨਾ ਵਾਲੇ ਗਰੁੱਪ %1 ਨੂੰ ਹਟਾਉਣ\n"
+"ਲਈ ਤਿਆਰ ਹੈ, ਜਾਰੀ ਰੱਖਣਾ ਚਾਹੋਗੇ?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:244
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr ""
+msgstr "ਤੁਸੀਂ %1 ਨੂੰ ਹਟਾਉਣਾ ਜਾ ਰਹੇ ਹੋ, ਕੀ ਤੁਸੀਂ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:247
 #, fuzzy, kde-format
@@ -1503,7 +1503,7 @@ msgstr "ਡਿਫਾਲਟ"
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
 msgid "%1 is a folder for SSH entries"
-msgstr ""
+msgstr "SSH ਐੰਟਰੀਆਂ ਲਈ %1 ਫੋਲਡਰ ਹੈ"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:318
@@ -1533,12 +1533,12 @@ msgstr "SSH ਮੈਨੇਜਰ ਵੇਖਾਓ"
 #: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "SSH ਕਾਰਵਾਈ ਲਈ ਫੌਰੀ ਪਹੁੰਚ ਵੇਖਾਓ"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
-msgstr ""
+msgstr "ਕੋਈ ਵੀ ਸੰਭਾਲੀ ਹੋਈ SSH ਸੰਰਚਨਾ ਨਹੀਂ ਹੈ। ਤੁਸੀਂ ਪਲੱਗਇਨਾਂ -> SSH ਮੈਨੇਜਰ ਰਾਹੀਂ ਜੋੜ ਸਕਦੇ ਹੋ"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:147
 #, kde-format
@@ -1592,6 +1592,8 @@ msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
+"ਤੁਸੀਂ ਕਈ SSH ਸੰਰਚਨਾ ਵਾਲਾ %1 ਫੋਲਡਰ ਹਟਾਉਣ\n"
+"ਲਈ ਤਿਆਰ ਹੈ, ਜਾਰੀ ਰੱਖਣਾ ਚਾਹੋਗੇ?"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
 #, kde-format
@@ -1602,7 +1604,7 @@ msgstr "SSH ਸੰਰਚਨਾ ਨੂੰ ਹਟਾਓ"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
 msgid "Missing Hostname"
-msgstr ""
+msgstr "ਹੋਸਟ-ਨਾਂ ਮੌਜੂਦ ਨਹੀਂ ਹੈ"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
 #, kde-format
@@ -1617,7 +1619,7 @@ msgstr ""
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:405
 #, kde-format
 msgid "At least Username or SSHKey must be set"
-msgstr ""
+msgstr "ਘੱਟੋ-ਘੱਟ ਵਰਤੋਂਕਾਰ-ਨਾਂ ਜਾਂ SSHKey ਸੈ਼ਟ ਕਰਨੀ ਜ਼ਰੂਰੀ ਹੈ"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
 #, kde-format
@@ -1627,24 +1629,22 @@ msgstr "ਫੋਲਡਰ ਗੁੰਮ ਹੈ"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:416
 #, kde-format
 msgid "An SSH session must have a profile"
-msgstr ""
+msgstr "SSH ਸ਼ੈਸ਼ਨ ਲਈ ਪਰੋਫਾਇਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:440
 #, kde-format
 msgid "Cannot delete this folder"
-msgstr ""
+msgstr "ਇਸ ਫੋਲਡਰ ਨੂੰ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ ਹੈ"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:443
 #, kde-format
 msgid "Delete folder and all of its contents"
-msgstr ""
+msgstr "ਫੋਲਡਰ ਅਤੇ ਇਸ ਦੀ ਸਾਰੀ ਸਮੱਗਰੀ ਨੂੰ ਹਟਾਓ"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:447
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Double click to change shortcut"
+#, kde-format
 msgid "Double click to change the folder name."
-msgstr "ਸ਼ਾਰਟਕੱਟ ਬਦਲਣ ਲਈ ਦੋ ਵਾਰ ਕਲਿੱਕ ਕਰੋ"
+msgstr "ਫੋਲਡਰ ਦੇ ਨਾਂ ਨੂੰ ਬਦਲਣ ਲਈ ਦੋ ਵਾਰ ਕਲਿੱਕ ਕਰੋ।"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
 #, fuzzy, kde-format
@@ -1654,10 +1654,9 @@ msgid "You can't delete an automatically added entry."
 msgstr "ਜਦੋਂ ਬੰਦ ਹੋਵੇ ਤਾਂ ਸ਼ੁਰੂਆਤੀ ਸ਼ੈਸ਼ਨ ਆਟੋਮੈਟਿਕ ਹੀ ਬੰਦ ਨਾ ਕਰੋ।"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਸੋਧੋ"
+msgstr "ਚੁਣੀ ਐੰਟਰੀ ਨੂੰ ਹਟਾਓ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
@@ -1691,10 +1690,9 @@ msgstr "ਪਛਾਣਕਰਤਾ"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:89
-#, fuzzy, kde-format
-#| msgid "The number of pixels between two lines"
+#, kde-format
 msgid "A name for this ssh entry"
-msgstr "ਦੋ ਲਾਈਨਾਂ ਦੇ ਵਿਚਾਲੇ ਪਿਕਸਲਾਂ ਦੀ ਗਿਣਤੀ"
+msgstr "ਇਸ ssh ਐਂਟਰੀ ਲਈ ਨਾਂ"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:92
@@ -1726,7 +1724,7 @@ msgstr "ਪੋਰਟ"
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr ""
+msgstr "ਸਰਵਰ ਦੀ ਪੋਰਟ, 22 SSH ਕਨੈਕਸ਼ਨਾਂ ਲਈ ਮੂਲ ਰੂਪ ਵਿੱਚ ਹੁੰਦੀ ਹੈ"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
@@ -1810,17 +1808,15 @@ msgstr "ਇੱਕ ਨਵੀਂ SSH ਐਂਟਰੀ ਜੋੜੋ"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:284
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਸੋਧੋ"
+msgstr "ਚੁਣੀ SSH ਐੰਟਰੀ ਨੂੰ ਹਟਾਓ"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:297
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Edit selected entry"
-msgstr "ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਸੋਧੋ"
+msgstr "ਚੁਣੀ ਐੰਟਰੀ ਨੂੰ ਸੋਧੋ"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:307
@@ -2145,18 +2141,14 @@ msgid "Copy"
 msgstr "ਕਾਪੀ ਕਰੋ"
 
 #: session/SessionController.cpp:667
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "ਝਲਕ ਖੱਬੇ/ਸੱਜੇ ਵੰਡੋ"
+msgstr "ਝਲਕ ਨੂੰ ਖੱਬੇ-ਸੱਜੇ ਵਿੱਚ ਵੰਡੋ"
 
 #: session/SessionController.cpp:672
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "ਝਲਕ ਉੱਤੇ/ਹੇਠਾਂ ਵੰਡੋ"
+msgstr "ਝਲਕ ਨੂੰ ਉੱਤੇ-ਹੇਠਾਂ ਵਿੱਚ ਵੰਡੋ"
 
 #: session/SessionController.cpp:676
 #, kde-format
@@ -2297,10 +2289,9 @@ msgid "Monitor for &Silence"
 msgstr "ਖਾਮੋਸ਼ੀ ਲਈ ਨਿਗਰਾਨੀ(&S)"
 
 #: session/SessionController.cpp:885
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "ਕਾਰਵਾਈ ਲਈ ਨਿਗਰਾਨੀ(&A)"
+msgstr "ਕਾਰਵਾਈ ਪੂਰੀ ਹੋਣ ਲਈ ਨਿਗਰਾਨੀ"
 
 #: session/SessionController.cpp:892
 #, kde-format
@@ -2325,12 +2316,12 @@ msgstr "ਸਿਗਨਲ ਭੇਜੋ"
 #: session/SessionController.cpp:915
 #, kde-format
 msgid "&Suspend Task"
-msgstr "ਕੰਮ ਸਸਪੈਂਡ(&S)"
+msgstr "ਟਾਸਕ ਨੂੰ ਸਸਪੈਂਡ(&S)"
 
 #: session/SessionController.cpp:920
 #, kde-format
 msgid "&Continue Task"
-msgstr "ਕੰਮ ਜਾਰੀ ਰੱਖੋ(&C)"
+msgstr "ਟਾਸਕ ਨੂੰ ਜਾਰੀ ਰੱਖੋ(&C)"
 
 #: session/SessionController.cpp:925
 #, kde-format
@@ -2340,7 +2331,7 @@ msgstr "ਹੈਗਅੱਪ(&H)"
 #: session/SessionController.cpp:930
 #, kde-format
 msgid "&Interrupt Task"
-msgstr "ਟਾਸਕ ਰੋਕੋ(&I)"
+msgstr "ਟਾਸਕ ਨੂੰ ਰੋਕੋ(&I)"
 
 #: session/SessionController.cpp:935
 #, kde-format
@@ -2350,7 +2341,7 @@ msgstr "ਕੰਮ ਖਤਮ ਕਰੋ(&T)"
 #: session/SessionController.cpp:940
 #, kde-format
 msgid "&Kill Task"
-msgstr "ਕੰਮ ਧੱਕੇ ਨਾਲ ਖਤਮ(&K)"
+msgstr "ਟਾਸਕ ਨੂੰ ਖਤਮ ਕਰੋ(&K)"
 
 #: session/SessionController.cpp:945
 #, kde-format
@@ -2411,13 +2402,14 @@ msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"ਪਰੋਗਰਾਮ '%1' ਹੁਣ ਇਸ ਸ਼ੈਸ਼ਨ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਧੱਕੇ ਨਾਲ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+"ਪਰੋਗਰਾਮ '%1' ਹੁਣ ਇਸ ਸ਼ੈਸ਼ਨ ਵਿੱਚ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਧੱਕੇ ਨਾਲ ਖਤਮ (kill) ਕਰਨਾ ਚਾਹੁੰਦੇ "
+"ਹੋ?"
 
 #: session/SessionController.cpp:1134
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "ਪਰੋਗਰਾਮ ਖਤਮ (kill) ਕਰੋ"
 
 #: session/SessionController.cpp:1811
 #, kde-format
@@ -2427,7 +2419,7 @@ msgstr ""
 #: session/SessionController.cpp:2004
 #, kde-format
 msgid "Open Current Folder With"
-msgstr ""
+msgstr "ਮੌਜੂਦਾ ਫੋਲਡਰ ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ"
 
 #: session/SessionController.cpp:2074
 #, kde-format
@@ -2502,7 +2494,7 @@ msgstr ""
 #: settings/GeneralSettings.ui:72
 #, kde-format
 msgid "Remember window size"
-msgstr ""
+msgstr "ਵਿੰਡੋ ਦੇ ਆਕਾਰ ਨੂੰ ਯਾਦ ਰੱਖੋ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
@@ -2516,7 +2508,7 @@ msgstr "ਟਾਈਟਲ-ਪੱਟੀ ਵਿੱਚ ਵਿੰਡੋ ਟਾਈਟ�
 #: settings/GeneralSettings.ui:92 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
+msgstr "ਜਦੋਂ ਮਾਊਸ ਪੁਆਇੰਟਰ ਟਰਮੀਨਲ ਉੱਤੇ ਆਵੇ ਤਾਂ ਉਸ ਨੂੰ ਫੋਕਸ ਕਰੋ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
@@ -2543,9 +2535,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:134
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Highlight all matches"
+#, kde-format
 msgid "Highlight all matches"
 msgstr "ਸਭ ਮਿਲਦੇ ਹਾਈਲਾਈਟ ਕਰੋ"
 
@@ -2573,7 +2563,7 @@ msgstr ""
 #: settings/GeneralSettings.ui:196
 #, kde-format
 msgid "Process and window:"
-msgstr ""
+msgstr "ਕਾਰਵਾਈ ਅਤੇ ਵਿੰਡੋ:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:206
@@ -2796,10 +2786,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "ਟੈਬ ਨਿਗਰਾਨੀ"
+msgstr "ਮੈਮੋਰੀ ਦੀ ਨਿਗਰਾਨੀ ਸਮਰੱਥ ਕਰੋ:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2818,13 +2807,13 @@ msgstr ""
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "ਮੈਮੋਰੀ ਦੀ ਹੱਦ:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -2840,10 +2829,9 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:54
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgid "Create a new profile based on the selected profile"
-msgstr "ਚੁਣੇ ਪਰੋਫਾਇਲ ਨਾਲ ਇੱਕ ਨਵਾਂ ਪਰੋਫਾਇਲ ਬਣਾਓ"
+msgstr "ਚੁਣੇ ਪਰੋਫਾਇਲ ਉੱਤੇ ਅਧਾਰਿਤ ਨਵਾਂ ਪਰੋਫਾਇਲ ਬਣਾਓ"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:57
@@ -2936,15 +2924,13 @@ msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਉੱਤੇ"
 #: settings/TabBarSettings.ui:129
 #, kde-format
 msgid "Be&low terminal area"
-msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਹੇਠਾਂ"
+msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਹੇਠਾਂ(&l)"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:155
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Tab"
+#, kde-format
 msgid "Show Close Tab button:"
-msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
+msgstr "ਟੈਬ ਬੰਦ ਕਰੋ ਬਟਨ ਨੂੰ ਵੇਖੋ:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:165
@@ -2954,11 +2940,9 @@ msgstr "ਹਰੇਕ ਟੈਬ ਉੱਤੇ(&O)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgid "On &the tab bar"
-msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(&D)"
+msgstr "ਟੈਬ ਪੱਟੀ ਉੱਤੇ(&t)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:185
@@ -2977,10 +2961,9 @@ msgstr "ਫੁਟਕਲ:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
 #: settings/TabBarSettings.ui:221
-#, fuzzy, kde-format
-#| msgid "Show 'New Tab' and 'Close Tab' buttons"
+#, kde-format
 msgid "Show 'New Tab' button"
-msgstr "'ਨਵੀਂ ਟੈਬ' ਅਤੇ 'ਟੈਬ ਬੰਦ ਕਰੋ' ਬਟਨ ਵੇਖੋ"
+msgstr "'ਨਵੀਂ ਟੈਬ' ਬਟਨ ਵੇਖੋ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
 #: settings/TabBarSettings.ui:228
@@ -3011,11 +2994,9 @@ msgstr "ਰਵੱਈਆ"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
 #: settings/TabBarSettings.ui:298
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Create new tab"
+#, kde-format
 msgid "Put new tabs:"
-msgstr "ਨਵੀਂ ਟੈਬ ਬਣਾਉ"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
 #: settings/TabBarSettings.ui:308
@@ -3261,11 +3242,10 @@ msgid "Paste &without control characters"
 msgstr "ਮੌਜੂਦਾ ਅੱਖਰ ਨਾਲ ਰਲਦਾ ਕਰਸਰ ਰੰਗ ਸੈੱਟ ਕਰੋ"
 
 #: terminalDisplay/TerminalDisplay.cpp:2319
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
-msgstr "ਚੋਣ ਚੇਪੋ"
+msgstr "ਹਰ ਚੀਜ਼ ਨੂੰ ਚੇਪੋ(&P)"
 
 #: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
@@ -3318,12 +3298,10 @@ msgid "Split View Top/Bottom"
 msgstr "ਝਲਕ ਉੱਤੇ/ਹੇਠਾਂ ਵੰਡੋ"
 
 #: ViewManager.cpp:136
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "ਝਲਕ ਉੱਤੇ/ਹੇਠਾਂ ਵੰਡੋ"
+msgstr "ਝਲਕ ਨੂੰ ਆਪਣੇ-ਆਪ ਹੀ ਵੰਡੋ"
 
 #: ViewManager.cpp:146
 #, fuzzy, kde-format
@@ -3380,20 +3358,16 @@ msgid "Shrink View"
 msgstr "ਝਲਕ ਸੁੰਘੜੋ"
 
 #: ViewManager.cpp:216
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "D&etach Current Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
-msgstr "ਮੌਜੂਦਾ ਟੈਬ ਵੱਖ ਕਰੋ(&e)"
+msgstr "ਮੌਜੂਦਾ ਝਲਕ ਨੂੰ ਵੱਖ ਕਰੋ(&V)"
 
 #: ViewManager.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "D&etach Current Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr "ਮੌਜੂਦਾ ਟੈਬ ਵੱਖ ਕਰੋ(&e)"
+msgstr "ਮੌਜੂਦਾ ਟੈਬ ਨੂੰ ਵੱਖ ਕਰੋ(&T)"
 
 #: ViewManager.cpp:233
 #, kde-format
@@ -3408,18 +3382,16 @@ msgid "Previous Tab"
 msgstr "ਟੈਗ ਪਿੱਛੇ"
 
 #: ViewManager.cpp:249
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
-msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਉੱਤੇ"
+msgstr "ਉੱਤੇ ਟਰਮੀਨਲ ਉੱਤੇ ਫੋਕਸ"
 
 #: ViewManager.cpp:256
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
-msgstr "ਟਰਮੀਨਲ ਖੇਤਰ ਹੇਠਾਂ"
+msgstr "ਹੇਠਲੇ ਟਰਮੀਨਲ ਉੱਤੇ ਫੋਕਸ"
 
 #: ViewManager.cpp:263
 #, kde-format
@@ -3482,20 +3454,16 @@ msgid "Toggle zoom-maximize current view"
 msgstr ""
 
 #: ViewManager.cpp:313
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Right"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
-msgstr "ਟੈਬ ਸੱਜੇ ਭੇਜੋ"
+msgstr "ਟੈਬ ਨੂੰ ਸੱਜੇ ਭੇਜੋ"
 
 #: ViewManager.cpp:320
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
-msgstr "ਟੈਬ ਖੱਬੇ ਭੇਜੋ"
+msgstr "ਟੈਬ ਨੂੰ ਖੱਬੇ ਭੇਜੋ"
 
 #: ViewManager.cpp:327
 #, kde-format
@@ -3534,56 +3502,47 @@ msgid "Semantic hints "
 msgstr "ਲਿਖਤ ਦਖ਼ਲ"
 
 #: ViewManager.cpp:585
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "ਲਾਇਨਾਂ ਦੀ ਸਥਿਰ ਗਿਣਤੀ: "
+msgstr "ਲਾਈਨ ਦੇ ਨੰਬਰ"
 
 #: ViewManager.cpp:1169
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "ਟੈਬ ਖੱਬੇ ਭੇਜੋ"
+msgstr "ਟੈਬ ਖਾਕੇ ਨੂੰ ਸੰਭਾਲੋ"
 
 #: ViewManager.cpp:1171 ViewManager.cpp:1258
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr ""
+msgstr "ਕਨਸੋਲ ਵੇਖਣ ਖਾਕਾ (*.json)"
 
 #: ViewManager.cpp:1184
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"ਆਉਟਪੁੱਟ ਸੰਭਾਲਣ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।\n"
+"ਖਾਕੇ ਨੂੰ ਸੰਭਾਲਣ ਦੌਰਾਨ ਸਮੱਸਿਆ ਆਈ ਹੈ।\n"
 "%1"
 
 #: ViewManager.cpp:1245
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"ਆਉਟਪੁੱਟ ਸੰਭਾਲਣ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।\n"
+"ਖਾਕੇ ਨੂੰ ਲੋਡ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ ਆਈ ਹੈ।\n"
 "%1"
 
 #: ViewManager.cpp:1256
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "ਟੈਬ ਖਾਕੇ ਨੂੰ ਲੋਡ ਕਰੋ"
 
 #: Vt102Emulation.cpp:2449
 #, kde-format
@@ -3684,10 +3643,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:216
 #: widgets/EditProfileAppearancePage.ui:953
-#, fuzzy, kde-format
-#| msgid "Enable Bi-Directional text rendering"
+#, kde-format
 msgid "Bi-Directional text rendering"
-msgstr "ਦੋ-ਦਿਸ਼ਾਵੀਂ ਟੈਕਸਟ ਰੈਂਡਰਿੰਗ ਚਾਲੂ"
+msgstr "ਦੋ-ਦਿਸ਼ਾਵੀਂ ਲਿਖਤ ਦੀ ਰੈਂਡਰਿੰਗ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:240
@@ -3857,10 +3815,9 @@ msgstr "ਕਰਸਰ ਲਈ ਇੱਕ ਪਸੰਦੀਦਾ, ਪੱਕਾ ਰੰ
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:319
-#, fuzzy, kde-format
-#| msgid "Custom cursor color:"
+#, kde-format
 msgid "Custom cursor color"
-msgstr "ਪਸੰਦੀਦਾ ਕਰਸਰ ਰੰਗ:"
+msgstr "ਪਸੰਦੀਦਾ ਕਰਸਰ ਰੰਗ"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
 #: widgets/EditProfileAppearancePage.ui:350
@@ -3963,10 +3920,9 @@ msgstr "ਕਰਸਰ ਬਣਾਉਣ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਰੰ�
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:571
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Inactive Terminals:"
-msgstr "ਸ਼ੁਰੂਆਤ ਟਰਮੀਨਲ ਆਕਾਰ:"
+msgstr "ਨਾ-ਸਰਗਰਮ ਟਰਮੀਨਲ:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:581
@@ -4439,10 +4395,9 @@ msgstr "ਸ਼ੁਰੂਆਤੀ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
 #: widgets/EditProfileGeneralPage.ui:193
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current tab"
+#, kde-format
 msgid "Start in same directory as current session"
-msgstr "ਜਿੱਥੇ ਟੈਬ ਹੈ, ਉਹੀ ਡਾਇਰੈਕਟਰੀ ਖੋਲ੍ਹੋ"
+msgstr "ਮੌਜੂਦਾ ਸ਼ੈਸ਼ਨ ਵਾਲੀ ਡਾਇਰੈਕਟਰੀ ਵਿੱਚ ਹੀ ਸ਼ੁਰੂ ਕਰੋ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:206
@@ -4474,11 +4429,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Terminal emulator"
+#, kde-format
 msgid "Terminal bell mode:"
-msgstr "ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ"
+msgstr "ਟਰਮੀਨਲ ਘੰਟੀ ਮੋਡ:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
@@ -4548,20 +4501,19 @@ msgstr "ਹਮੇਸ਼ਾ"
 #: widgets/EditProfileGeneralPage.ui:449
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "ਲਾਲ ਗਲਤੀ ਪੱਟੀਆਂ:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:495
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "ਧੁੰਦਲੀ ਬੈਕਗਰਾਊਂਡ"
+msgstr "ਲਾਲ ਗਲਤੀ ਬੈਕਗਰਾਊਂਡ:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:541
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "ਬਦਲਵੀਆਂ ਪੱਟੀਆਂ:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:587
@@ -4618,7 +4570,7 @@ msgstr "ਚੁਣੀ ਰੰਗ ਸਕੀਮ ਹਟਾਓ"
 #: widgets/EditProfileMousePage.ui:36
 #, kde-format
 msgid "Text interaction"
-msgstr "ਲਿਖਤ ਦਖ਼ਲ"
+msgstr "ਲਿਖਤ ਤਾਲਮੇਲ"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, label_11)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
@@ -4678,7 +4630,7 @@ msgstr "ਚੋਣ ਤੋਂ"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Copy options:"
-msgstr "ਕਾਪੀ ਕਰਨ ਚੋਣਾਂ:"
+msgstr "ਕਾਪੀ ਕਰਨ ਦੀਆਂ ਚੋਣਾਂ:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:196
@@ -4712,10 +4664,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
 #: widgets/EditProfileMousePage.ui:219
-#, fuzzy, kde-format
-#| msgid "Trim trailing spaces"
+#, kde-format
 msgid "Trim leading spaces"
-msgstr "ਪਿਛਲੀ ਖਾਲੀ ਥਾਂ ਹਟਾਓ"
+msgstr "ਅਗਲੀ ਖਾਲੀ ਥਾਂ ਨੂੰ ਹਟਾਓ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:226
@@ -4914,10 +4865,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, fuzzy, kde-format
-#| msgid "Half Page Height"
+#, kde-format
 msgid "Half screen height"
-msgstr "ਅੱਧੀ ਪੇਜ਼ ਉਚਾਈ"
+msgstr "ਅੱਧੀ ਸਕਰੀਨ ਦੀ ਉਚਾਈ"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -4927,17 +4877,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, fuzzy, kde-format
-#| msgid "Full Page Height"
+#, kde-format
 msgid "Full screen height"
-msgstr "ਪੂਰੀ ਪੇਜ਼ ਉਚਾਈ"
+msgstr "ਪੂਰੀ ਸਕਰੀਨ ਦੀ ਉਚਾਈ"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
-#, fuzzy, kde-format
-#| msgid "Tab bar position:"
+#, kde-format
 msgid "Scrollbar position:"
-msgstr "ਟੈਬ ਪੱਟੀ ਸਥਿਤੀ:"
+msgstr "ਸਕਰੋਲ ਪੱਟੀ ਸਥਿਤੀ:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:141
@@ -5096,7 +5044,7 @@ msgstr "ਕੋਈ ਨਹੀਂ"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "ਖੋਜੋ..."
+msgstr "ਲੱਭੋ..."
 
 #: widgets/IncrementalSearchBar.cpp:51
 #, kde-format
@@ -5239,11 +5187,9 @@ msgstr "ਆਮ ਟੈਬ ਟਾਈਟਲ ਫਾਰਮੈਟ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgid "Tab Color:"
-msgstr "ਰੰਗ"
+msgstr "ਟੈਬ ਦਾ ਰੰਗ:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
