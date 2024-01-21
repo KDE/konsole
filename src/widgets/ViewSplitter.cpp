@@ -216,8 +216,7 @@ void ViewSplitter::childEvent(QChildEvent *event)
                     parent_splitter->replaceWidget(oldContainerIndex, wdg);
                     parent_splitter->m_blockPropagatedDeletion = false;
                     parent_splitter->setSizes(sizes);
-                    wdg->setFocus();
-                    deleteLater();
+                    connect(this, &ViewSplitter::destroyed, wdg, qOverload<>(&QWidget::setFocus));
                 }
             }
         }
