@@ -138,7 +138,7 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
                 } else if (ch == QLatin1Char('&')) {
                     text.append(QLatin1String("&amp;"));
                 } else {
-                    text.append(ch);
+                    text.append(QString::fromUcs4(&characters[i].character, 1));
                 }
             }
         } else {
