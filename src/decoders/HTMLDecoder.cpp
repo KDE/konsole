@@ -130,12 +130,12 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
                 }
             } else {
                 // escape HTML tag characters and just display others as they are
-                const QChar ch(characters[i].character);
-                if (ch == QLatin1Char('<')) {
+                const char32_t ch = characters[i].character;
+                if (ch == U'<') {
                     text.append(QLatin1String("&lt;"));
-                } else if (ch == QLatin1Char('>')) {
+                } else if (ch == U'>') {
                     text.append(QLatin1String("&gt;"));
-                } else if (ch == QLatin1Char('&')) {
+                } else if (ch == U'&') {
                     text.append(QLatin1String("&amp;"));
                 } else {
                     text.append(QString::fromUcs4(&characters[i].character, 1));
