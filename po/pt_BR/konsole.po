@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-14 00:39+0000\n"
-"PO-Revision-Date: 2024-01-15 23:04-0300\n"
+"PO-Revision-Date: 2024-01-22 10:32-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -121,11 +121,10 @@ msgstr ""
 "Arquivo de layout JSON a ser carregado para usar na nova instância do Konsole"
 
 #: Application.cpp:55
-#, fuzzy, kde-format
-#| msgid "Create a new profile based on the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Criar um novo perfil baseado no perfil selecionado"
+msgstr "Usar o perfil interno no lugar do perfil padrão"
 
 #: Application.cpp:56
 #, kde-format
@@ -1898,12 +1897,10 @@ msgid "Default profile"
 msgstr "Perfil padrão"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Perfil #%1"
+msgstr "Perfil %1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -1940,7 +1937,7 @@ msgstr "[padrão]"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr "O perfil embutido está sempre disponível"
+msgstr "O perfil interno está sempre disponível"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
