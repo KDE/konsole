@@ -799,7 +799,8 @@ void SessionController::setupCommonActions()
     connect(action, &QAction::toggled, this, [this, action]() {
         toggleAllowMouseTracking(action);
     });
-    action->setText(i18nc("@item:inmenu Allows terminal applications to request mouse tracking", "Allow mouse tracking"));
+    action->setText(i18nc("@item:inmenu Allows terminal applications to request mouse tracking", "Allow Mouse Tracking"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("input-mouse-symbolic")));
     action->setCheckable(true);
 
     // Read-only
@@ -807,7 +808,7 @@ void SessionController::setupCommonActions()
     connect(action, &QAction::toggled, this, [this, action]() {
         toggleReadOnly(action);
     });
-    action->setText(i18nc("@item:inmenu A read only (locked) session", "Read-only"));
+    action->setText(i18nc("@item:inmenu A read only (locked) session", "Read-Only"));
     action->setCheckable(true);
     updateReadOnlyActionStates();
 }
@@ -858,7 +859,7 @@ void SessionController::setupExtraActions()
     collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_U);
 
     // Monitor
-    KToggleAction *toggleAction = new KToggleAction(i18n("One-shot monitors"), this);
+    KToggleAction *toggleAction = new KToggleAction(i18n("One-Shot Monitors"), this);
     action = collection->addAction(QStringLiteral("monitor-once"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorOnce);
     action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn")));
