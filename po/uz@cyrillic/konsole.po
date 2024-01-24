@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-14 00:39+0000\n"
+"POT-Creation-Date: 2024-01-24 00:39+0000\n"
 "PO-Revision-Date: 2008-06-04 01:01+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -2155,7 +2155,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr ""
 
 #: session/Session.cpp:736 session/Session.cpp:2072
-#: session/SessionController.cpp:354 session/SessionController.cpp:1812
+#: session/SessionController.cpp:354 session/SessionController.cpp:1813
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
 #| msgid "New Session"
@@ -2340,213 +2340,213 @@ msgstr "&Кодлаш усули"
 #: session/SessionController.cpp:802
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
-msgid "Allow mouse tracking"
+msgid "Allow Mouse Tracking"
 msgstr ""
 
-#: session/SessionController.cpp:810
+#: session/SessionController.cpp:811
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
-msgid "Read-only"
+msgid "Read-Only"
 msgstr ""
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:822
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Configure or Rename Tab..."
 msgstr "Табнинг &номини ўзгартириш..."
 
-#: session/SessionController.cpp:827
+#: session/SessionController.cpp:828
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr ""
 
-#: session/SessionController.cpp:834
+#: session/SessionController.cpp:835
 #, fuzzy, kde-format
 #| msgid "Select &Tab Color..."
 msgid "&Select Tabs..."
 msgstr "Табнинг &рангини танлаш"
 
-#: session/SessionController.cpp:840
+#: session/SessionController.cpp:841
 #, fuzzy, kde-format
 #| msgid "N&one"
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Йўқ"
 
-#: session/SessionController.cpp:848
+#: session/SessionController.cpp:849
 #, kde-format
 msgid "Copy Input To"
 msgstr ""
 
-#: session/SessionController.cpp:856
+#: session/SessionController.cpp:857
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "ZModem ё&зиб қўйиш"
 
-#: session/SessionController.cpp:861
+#: session/SessionController.cpp:862
 #, kde-format
-msgid "One-shot monitors"
+msgid "One-Shot Monitors"
 msgstr ""
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:867
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr ""
 
-#: session/SessionController.cpp:873
+#: session/SessionController.cpp:874
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr ""
 
-#: session/SessionController.cpp:879
+#: session/SessionController.cpp:880
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr ""
 
-#: session/SessionController.cpp:885
+#: session/SessionController.cpp:886
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr ""
 
-#: session/SessionController.cpp:892
+#: session/SessionController.cpp:893
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Шрифтни катталаштириш"
 
-#: session/SessionController.cpp:900
+#: session/SessionController.cpp:901
 #, fuzzy, kde-format
 #| msgid "&Shrink Font"
 msgid "Shrink Font"
 msgstr "Шрифтни &кичиклаштириш"
 
-#: session/SessionController.cpp:905
+#: session/SessionController.cpp:906
 #, fuzzy, kde-format
 #| msgid "Increase Text Size"
 msgid "Reset Font Size"
 msgstr "Шрифтни катталаштириш"
 
-#: session/SessionController.cpp:911
+#: session/SessionController.cpp:912
 #, fuzzy, kde-format
 #| msgid "&Send Signal"
 msgid "Send Signal"
 msgstr "&Сигнал жўнатиш"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "&Suspend Task"
 msgstr ""
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:921
 #, kde-format
 msgid "&Continue Task"
 msgstr "Вазифани &давом этиш"
 
-#: session/SessionController.cpp:925
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "&Hangup"
 msgstr "Вазифани қ&айтадан юклаш"
 
-#: session/SessionController.cpp:930
+#: session/SessionController.cpp:931
 #, fuzzy, kde-format
 #| msgid "&Continue Task"
 msgid "&Interrupt Task"
 msgstr "Вазифани &давом этиш"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:936
 #, fuzzy, kde-format
 #| msgid "&Close Terminal Emulator"
 msgid "&Terminate Task"
 msgstr "Терминал э&муляторни ёпиш"
 
-#: session/SessionController.cpp:940
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "&Kill Task"
 msgstr ""
 
-#: session/SessionController.cpp:945
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "User Signal &1"
 msgstr "Фойдаланувчининг сигнали &1"
 
-#: session/SessionController.cpp:950
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "User Signal &2"
 msgstr "Фойдаланувчининг сигнали &2"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:969
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile..."
 msgstr "Янги профил..."
 
-#: session/SessionController.cpp:970
+#: session/SessionController.cpp:971
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Жорий профилни таҳрирлаш..."
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1088
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1091
+#: session/SessionController.cpp:1092
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1133
+#: session/SessionController.cpp:1099 session/SessionController.cpp:1134
 #, kde-format
 msgid "Confirm Close"
 msgstr "Ёпишни тасдиқлаш"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1100
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Табни &ёпиш"
 
-#: session/SessionController.cpp:1122
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1127
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 
-#: session/SessionController.cpp:1134
+#: session/SessionController.cpp:1135
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1811
+#: session/SessionController.cpp:1812
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2004
+#: session/SessionController.cpp:2005
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2075
 #, fuzzy, kde-format
 #| msgid "&ZModem Upload..."
 msgid "Save ZModem Download to..."
 msgstr "ZModem ё&зиб қўйиш"
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2085
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2561,7 +2561,7 @@ msgstr ""
 "топилмади.\n"
 "<p>\"rzsz\" ёки \"lrzsz\" дастурини ўрнатишингиз керак.\n"
 
-#: session/SessionController.cpp:2094
+#: session/SessionController.cpp:2095
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2569,7 +2569,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Жорий сеансда ZModem файл узатиши аллақачон давом этаяпти."
 
-#: session/SessionController.cpp:2107
+#: session/SessionController.cpp:2108
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2581,7 +2581,7 @@ msgstr ""
 "<p>Тизимда керак бўлган ZModem дастури топилмади.\n"
 "<p>\"rzsz\" ёки \"lrzsz\" дастурини ўрнатишингиз керак.\n"
 
-#: session/SessionController.cpp:2112
+#: session/SessionController.cpp:2113
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"

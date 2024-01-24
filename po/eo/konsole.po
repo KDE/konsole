@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-14 00:39+0000\n"
+"POT-Creation-Date: 2024-01-24 00:39+0000\n"
 "PO-Revision-Date: 2024-01-04 17:19+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -2073,7 +2073,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Silento en '%1' (Seanco '%2')"
 
 #: session/Session.cpp:736 session/Session.cpp:2072
-#: session/SessionController.cpp:354 session/SessionController.cpp:1812
+#: session/SessionController.cpp:354 session/SessionController.cpp:1813
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
 msgid "Show session"
@@ -2244,144 +2244,150 @@ msgid "Set &Encoding"
 msgstr "M&eti Kodigon"
 
 #: session/SessionController.cpp:802
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@item:inmenu Allows terminal applications to request mouse tracking"
+#| msgid "Allow mouse tracking"
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
-msgid "Allow mouse tracking"
+msgid "Allow Mouse Tracking"
 msgstr "Permesi musan spuradon"
 
-#: session/SessionController.cpp:810
-#, kde-format
+#: session/SessionController.cpp:811
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu A read only (locked) session"
+#| msgid "Read-only"
 msgctxt "@item:inmenu A read only (locked) session"
-msgid "Read-only"
+msgid "Read-Only"
 msgstr "Nurlegebla"
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:822
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Agordi aŭ Alinomi Langeton..."
 
-#: session/SessionController.cpp:827
+#: session/SessionController.cpp:828
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Ĉiuj L&angetoj en Aktuala Fenestro"
 
-#: session/SessionController.cpp:834
+#: session/SessionController.cpp:835
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Selekti Langetojn..."
 
-#: session/SessionController.cpp:840
+#: session/SessionController.cpp:841
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Neniu"
 
-#: session/SessionController.cpp:848
+#: session/SessionController.cpp:849
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopii Enigo Al"
 
-#: session/SessionController.cpp:856
+#: session/SessionController.cpp:857
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModema Alŝuto..."
 
-#: session/SessionController.cpp:861
-#, kde-format
-msgid "One-shot monitors"
+#: session/SessionController.cpp:862
+#, fuzzy, kde-format
+#| msgid "One-shot monitors"
+msgid "One-Shot Monitors"
 msgstr "Unufojaj monitoroj"
 
-#: session/SessionController.cpp:866
+#: session/SessionController.cpp:867
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Monitoro por Ŝel&invitilo"
 
-#: session/SessionController.cpp:873
+#: session/SessionController.cpp:874
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Monitoro por &Aktiveco"
 
-#: session/SessionController.cpp:879
+#: session/SessionController.cpp:880
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Monitoro por &Silento"
 
-#: session/SessionController.cpp:885
+#: session/SessionController.cpp:886
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Monitoro por Proceza Finado"
 
-#: session/SessionController.cpp:892
+#: session/SessionController.cpp:893
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Pligrandigi tiparon"
 
-#: session/SessionController.cpp:900
+#: session/SessionController.cpp:901
 #, kde-format
 msgid "Shrink Font"
 msgstr "Ŝrumpi Tiparo"
 
-#: session/SessionController.cpp:905
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Restarigi Tiparo Grandeco"
 
-#: session/SessionController.cpp:911
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "Send Signal"
 msgstr "Sendi Signalon"
 
-#: session/SessionController.cpp:915
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Suspendi Taskon"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:921
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Daŭrigi Taskon"
 
-#: session/SessionController.cpp:925
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "&Hangup"
 msgstr "&Haltigi"
 
-#: session/SessionController.cpp:930
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Interrompi Taskon"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "&Terminate Task"
 msgstr "Finigi &Taskon"
 
-#: session/SessionController.cpp:940
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "&Kill Task"
 msgstr "Mortigi Tas&kon"
 
-#: session/SessionController.cpp:945
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "User Signal &1"
 msgstr "Uzanta Signalo &1"
 
-#: session/SessionController.cpp:950
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "User Signal &2"
 msgstr "Uzanta Signalo &2"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:969
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Krei novan profilon..."
 
-#: session/SessionController.cpp:970
+#: session/SessionController.cpp:971
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Modifi nunan profilon..."
 
-#: session/SessionController.cpp:1087
+#: session/SessionController.cpp:1088
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2390,7 +2396,7 @@ msgstr ""
 "Vi havas plurajn langetojn en ĉi tiu fenestro, ĉu vi certas ke vi volas "
 "finiĝi?"
 
-#: session/SessionController.cpp:1091
+#: session/SessionController.cpp:1092
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2399,18 +2405,18 @@ msgstr ""
 "La programo '%1' nuntempe funkcias en ĉi tiu seanco. Ĉu vi certas, ke vi "
 "volas fermi ĝin?"
 
-#: session/SessionController.cpp:1098 session/SessionController.cpp:1133
+#: session/SessionController.cpp:1099 session/SessionController.cpp:1134
 #, kde-format
 msgid "Confirm Close"
 msgstr "Konfirmi fermon"
 
-#: session/SessionController.cpp:1099
+#: session/SessionController.cpp:1100
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Fermi Programon"
 
-#: session/SessionController.cpp:1122
+#: session/SessionController.cpp:1123
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2419,7 +2425,7 @@ msgstr ""
 "Programo en ĉi tiu seanco ne mortus. Ĉu vi certas, ke vi volas mortigi ĝin "
 "perforte?"
 
-#: session/SessionController.cpp:1126
+#: session/SessionController.cpp:1127
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2428,28 +2434,28 @@ msgstr ""
 "La programo '%1' en ĉi tiu seanco ne mortus. Ĉu vi certas, ke vi volas "
 "mortigi ĝin perforte?"
 
-#: session/SessionController.cpp:1134
+#: session/SessionController.cpp:1135
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Mortigi Programon"
 
-#: session/SessionController.cpp:1811
+#: session/SessionController.cpp:1812
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "La ŝelinvito estas montrata en seanco '%1'"
 
-#: session/SessionController.cpp:2004
+#: session/SessionController.cpp:2005
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Malfermi Nunan Dosierujon Kun"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2075
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Konservi ZModem Elŝutu al..."
 
-#: session/SessionController.cpp:2084
+#: session/SessionController.cpp:2085
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2460,13 +2466,13 @@ msgstr ""
 "taŭga ZModem-programaro estis trovita en ĉi tiu sistemo.</p><p>Vi eble volu "
 "instali la pakaĵon 'rzsz' aŭ 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2094
+#: session/SessionController.cpp:2095
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>La nuna seanco jam havas ZModem-dosiertransdonon en progreso.</p>"
 
-#: session/SessionController.cpp:2107
+#: session/SessionController.cpp:2108
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2475,7 +2481,7 @@ msgstr ""
 "<p>Neniu taŭga ZModem-programaro estis trovita en ĉi tiu sistemo.</p><p>Vi "
 "eble volu instali la pakaĵon 'rzsz' aŭ 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2112
+#: session/SessionController.cpp:2113
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Elekti Dosieroj por ZModem Alŝuto"
