@@ -2268,17 +2268,12 @@ msgstr "&Establecer la codificación"
 
 #: session/SessionController.cpp:802
 #, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Permitir el seguimiento del ratón"
 
 #: session/SessionController.cpp:811
 #, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Solo lectura"
@@ -2316,7 +2311,6 @@ msgstr "Envío &ZModem..."
 
 #: session/SessionController.cpp:862
 #, kde-format
-#| msgid "One-shot monitors"
 msgid "One-Shot Monitors"
 msgstr "Monitores de un solo uso"
 
@@ -5913,4 +5907,3 @@ msgstr "Cerrar pestaña"
 
 #~ msgid "Save window size and position on exit"
 #~ msgstr "Guardar el tamaño y posición de las ventanas al salir"
-
