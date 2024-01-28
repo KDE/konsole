@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2024-01-04 17:19+0100\n"
+"PO-Revision-Date: 2024-01-28 11:08+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -2244,18 +2244,14 @@ msgid "Set &Encoding"
 msgstr "M&eti Kodigon"
 
 #: session/SessionController.cpp:802
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
-msgstr "Permesi musan spuradon"
+msgstr "Permesi Musan Spuradon"
 
 #: session/SessionController.cpp:811
 #, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#| msgid "Read-Only"
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Nurlegebla"
@@ -2292,10 +2288,9 @@ msgid "&ZModem Upload..."
 msgstr "&ZModema Alŝuto..."
 
 #: session/SessionController.cpp:862
-#, fuzzy, kde-format
-#| msgid "One-shot monitors"
+#, kde-format
 msgid "One-Shot Monitors"
-msgstr "Unufojaj monitoroj"
+msgstr "Unufojaj Monitoroj"
 
 #: session/SessionController.cpp:867
 #, kde-format
