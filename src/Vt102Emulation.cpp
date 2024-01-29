@@ -2180,13 +2180,20 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
     }
 
     if (eventType == 3) {
+        // (cx, cy) are 1-based indices following the convention of the
+        // terminal control sequences for mouse reports.  We want to convert
+        // them to 0-based indices to make it consistent with our internal
+        // representation.
+        int px = cx - 1;
+        int py = cy - 1;
+
         // We know we are in input mode
         TerminalDisplay *currentView = _currentScreen->currentTerminalDisplay();
         bool isReadOnly = false;
         if (currentView != nullptr) {
             isReadOnly = currentView->getReadOnly();
         }
-        auto point = std::make_pair(cy, cx);
+        auto point = std::make_pair(py, px);
         if (!isReadOnly && _currentScreen->replModeStart() <= point && point <= _currentScreen->replModeEnd()) {
             KeyboardTranslator::States states = KeyboardTranslator::NoState;
 
@@ -2205,23 +2212,23 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
             }
             KeyboardTranslator::Entry LRKeys[2] = {_keyTranslator->findEntry(Qt::Key_Left, Qt::NoModifier, states),
                                                    _keyTranslator->findEntry(Qt::Key_Right, Qt::NoModifier, states)};
-            QVector<LineProperty> lineProperties = _currentScreen->getLineProperties(cy + _currentScreen->getHistLines(), cy + _currentScreen->getHistLines());
-            cx = qMin(cx, (int)lineProperties[0].length);
+            QVector<LineProperty> lineProperties = _currentScreen->getLineProperties(py + _currentScreen->getHistLines(), py + _currentScreen->getHistLines());
+            px = qMin(px, (int)lineProperties[0].length);
             int cuX = _currentScreen->getCursorX();
             int cuY = _currentScreen->getCursorY();
             QByteArray textToSend;
-            if (cuY != cy) {
-                for (int i = abs(cy - cuY); i > 0; i--) {
-                    emulateUpDown(cy < cuY, LRKeys[cy > cuY], textToSend, i == 1 ? cx : -1);
-                    textToSend += LRKeys[cy > cuY].text();
+            if (cuY != py) {
+                for (int i = abs(py - cuY); i > 0; i--) {
+                    emulateUpDown(py < cuY, LRKeys[py > cuY], textToSend, i == 1 ? px : -1);
+                    textToSend += LRKeys[py > cuY].text();
                 }
             } else {
-                if (cuX < cx) {
-                    for (int i = 0; i < cx - cuX; i++) {
+                if (cuX < px) {
+                    for (int i = 0; i < px - cuX; i++) {
                         textToSend += LRKeys[1].text();
                     }
                 } else {
-                    for (int i = 0; i < cuX - cx; i++) {
+                    for (int i = 0; i < cuX - px; i++) {
                         textToSend += LRKeys[0].text();
                     }
                 }
