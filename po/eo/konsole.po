@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2024-01-28 11:08+0100\n"
+"PO-Revision-Date: 2024-01-28 09:08+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -2250,11 +2250,10 @@ msgid "Allow Mouse Tracking"
 msgstr "Permesi Musan Spuradon"
 
 #: session/SessionController.cpp:811
-#, fuzzy, kde-format
-#| msgid "Read-Only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
-msgstr "Nurlegebla"
+msgstr "Nur-Legebla"
 
 #: session/SessionController.cpp:822
 #, kde-format
