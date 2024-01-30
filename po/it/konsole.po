@@ -1,5 +1,5 @@
 # translation of konsole.po to Italian
-# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Vincenzo Reale <smart2128vr@gmail.com>
 # Andrea Rizzi <rizzi@kde.org>, 2003, 2004, 2005.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2004, 2005, 2007, 2008, 2009, 2010, 2011.
 # Pino Toscano <toscano.pino@tiscali.it>, 2006.
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2023-12-05 06:21+0100\n"
+"PO-Revision-Date: 2024-01-25 11:15+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2253,18 +2253,13 @@ msgid "Set &Encoding"
 msgstr "Imposta &codifica"
 
 #: session/SessionController.cpp:802
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
-msgstr "Consenti l'inseguimento del mouse"
+msgstr "Consenti il tracciamento del mouse"
 
 #: session/SessionController.cpp:811
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Sola lettura"
@@ -2301,8 +2296,7 @@ msgid "&ZModem Upload..."
 msgstr "Invia con &ZModem..."
 
 #: session/SessionController.cpp:862
-#, fuzzy, kde-format
-#| msgid "One-shot monitors"
+#, kde-format
 msgid "One-Shot Monitors"
 msgstr "Controlli istantanei"
 
