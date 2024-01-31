@@ -15,13 +15,13 @@
 # Tommi Nieminen <translator@legisign.org>, 2009, 2010, 2011.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2010, 2011, 2012, 2013, 2014, 2015, 2016.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012.
-# Tommi Nieminen <translator@legisign.org>, 2010, 2012, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2010, 2012, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2023-09-26 17:52+0300\n"
+"PO-Revision-Date: 2024-01-29 21:47+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -113,13 +113,14 @@ msgstr "Istuntotyökalurivi"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Name of profile to use for new Konsole instance"
-msgstr "Uuden Konsole-instanssin profiilin nimi"
+msgstr "Uudelle Konsole-ilmentymälle käytettävä profiilin nimi"
 
 #: Application.cpp:54
 #, kde-format
 msgctxt "@info:shell"
 msgid "json layoutfile to be loaded to use for new Konsole instance"
-msgstr "JSON-asettelutiedosto uudessa Konsole-instanssissa käytettäväksi"
+msgstr ""
+"Uudessa Konsole-ilmentymässä käytettäväksi ladattava JSON-asettelutiedosto"
 
 #: Application.cpp:55
 #, kde-format
@@ -244,7 +245,7 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
-"Pakota käyttämään nykyistä instanssia uudelleen, vaikka se särkisi jotakin, "
+"Pakota käyttämään nykyistä ilmentymää uudelleen, vaikka se särkisi jotakin, "
 "esim. --new-tab. Lähinnä virheenpaikannukseen."
 
 #: Application.cpp:86
@@ -2107,7 +2108,7 @@ msgstr ""
 "Äsken käytettiin D-Bus-metodeja sendText/runCommand. Julkisina nämä metodit "
 "aiheuttavat turvallisuusriskin. Ne voi muuttaa ainoastaan sisäisesti "
 "käytettäviksi vain koostamalla Konsole uudelleen. <p>Tämä varoitus näytetään "
-"vain kerran tälle Konsolen instanssille.</p>"
+"vain kerran tälle Konsolen ilmentymälle.</p>"
 
 #: session/Session.cpp:1060
 #, kde-format
