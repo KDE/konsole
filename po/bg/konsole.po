@@ -4,13 +4,13 @@
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2010, 2011, 2013.
 # Kiril Vladimirov <kiril@vladimiroff.org>, 2021.
-# SPDX-FileCopyrightText: 2022, 2023 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2023-12-11 11:37+0100\n"
+"PO-Revision-Date: 2024-02-03 15:36+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -2254,18 +2254,13 @@ msgid "Set &Encoding"
 msgstr "&Кодова таблица"
 
 #: session/SessionController.cpp:802
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Позволява проследяване на мишката"
 
 #: session/SessionController.cpp:811
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Само за четене"
@@ -2302,8 +2297,7 @@ msgid "&ZModem Upload..."
 msgstr "Качване на &файл (ZModem)..."
 
 #: session/SessionController.cpp:862
-#, fuzzy, kde-format
-#| msgid "One-shot monitors"
+#, kde-format
 msgid "One-Shot Monitors"
 msgstr "One-shot монитори"
 
