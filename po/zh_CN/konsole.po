@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2024-01-21 14:12\n"
+"PO-Revision-Date: 2024-02-05 11:37\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2216,18 +2216,13 @@ msgid "Set &Encoding"
 msgstr "设定编码(&E)"
 
 #: session/SessionController.cpp:802
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "允许鼠标跟踪"
 
 #: session/SessionController.cpp:811
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "只读"
@@ -2264,8 +2259,7 @@ msgid "&ZModem Upload..."
 msgstr "&ZModem 上传..."
 
 #: session/SessionController.cpp:862
-#, fuzzy, kde-format
-#| msgid "One-shot monitors"
+#, kde-format
 msgid "One-Shot Monitors"
 msgstr "单次监视器"
 
