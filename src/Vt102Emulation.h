@@ -183,6 +183,7 @@ private:
         // https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Operating-System-Commands
         ReportColors = 4,
         Clipboard = 52,
+        KittyNotification = 99,
         ResetColors = 104,
         // https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
         SemanticPrompts = 133,
@@ -273,6 +274,28 @@ private:
 
         bool mode[MODE_total];
     };
+
+    static constexpr int NotificationActionNone = 0;
+    static constexpr int NotificationActionReport = 1;
+    static constexpr int NotificationActionFocus = 2;
+
+    enum class KittyNotificationOption {
+        None,
+        Always,
+        Unfocused,
+        Invisible,
+    };
+
+    struct KittyNotificationState {
+        qint64 serial;
+        QString body;
+        QString title;
+        KittyNotificationOption option = KittyNotificationOption::Always;
+        int action = NotificationActionNone;
+    };
+
+    qint64 _kittyNotificationSerial = 0;
+    QMap<QString, KittyNotificationState> _kittyNotifications;
 
     TerminalState _currentModes;
     TerminalState _savedModes;

@@ -1029,6 +1029,12 @@ void Vt102Emulation::processChecksumRequest([[maybe_unused]] int crargc, int cra
     sendString(tmp);
 }
 
+static bool isIdentifier(QString const &value)
+{
+    static const QRegularExpression IDENTIFIER_RE = QRegularExpression(QStringLiteral("^[-a-zA-Z0-9_+.]*$"));
+    return IDENTIFIER_RE.match(value).hasMatch();
+}
+
 void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const uint terminator)
 {
     // Describes the window or terminal session attribute to change
@@ -1188,6 +1194,179 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             if (selection) {
                 QApplication::clipboard()->clear(QClipboard::Selection);
             }
+        }
+
+        return;
+    }
+
+    // See https://sw.kovidgoyal.net/kitty/desktop-notifications/
+    // Example: "\x1b]99;i=1:d=0;TITLE\x1b\\\x1b]99;i=1:d=1:p=body;BODY\x1b\\"
+    if (attribute == KittyNotification) {
+        int pos = value.indexOf(QLatin1Char(';'));
+        if (pos == -1)
+            return;
+        QString notificationId = QString::fromLatin1("0");
+        int complete = 1;
+        int encoding = 0;
+        enum PayloadType {
+            Unknown,
+            Title,
+            Body,
+        } payloadType = PayloadType::Title;
+        QString payload = value.mid(pos + 1);
+        QStringList params = value.mid(0, pos).split(u':');
+        KittyNotificationOption option = KittyNotificationOption::None;
+        int addedActions = NotificationActionNone;
+        int removedActions = NotificationActionNone;
+
+        for (QString param: params) {
+            if (param.startsWith(QString::fromLatin1("i="))) {
+                // Notification ID:
+                QString payloadValue = param.mid(2);
+                if (isIdentifier(payloadValue))
+                    notificationId = payloadValue;
+            } else if (param.startsWith(QString::fromLatin1("d="))) {
+                // Whether the notification is complete:
+                bool parseOk;
+                int parsedComplete = param.mid(2).toInt(&parseOk);
+                if (parseOk && parsedComplete >=0 && parsedComplete < 2)
+                    complete = parsedComplete;
+            } else if (param.startsWith(QString::fromLatin1("e="))) {
+                // Escape (whether the paylaod is Base64 encoded):
+                bool parseOk;
+                int parsedEncoding = param.mid(2).toInt(&parseOk);
+                if (parseOk && parsedEncoding >=0 && parsedEncoding < 2)
+                    encoding = parsedEncoding;
+            } else if (param.startsWith(QString::fromLatin1("a="))) {
+                // Parse a comma-separated of actions with optional "-" (eg. "-focus,report"):
+                QString payloadValue = param.mid(2);
+                QStringList tokens = payloadValue.split(u',');
+                for (QString token : tokens) {
+                    int tokenValue = NotificationActionNone;
+                    bool removed = false;
+                    if (token.startsWith(QString::fromLatin1("-"))) {
+                        removed = true;
+                        token = token.mid(1);
+                    }
+                    if (token == QString::fromLatin1("report")) {
+                        tokenValue = NotificationActionReport;
+                    } else if (token == QString::fromLatin1("focus")) {
+                        tokenValue = NotificationActionFocus;
+                    }
+                    if (removed) {
+                        removedActions |= tokenValue;
+                    } else {
+                        addedActions |= tokenValue;
+                    }
+                }
+            } else if (param.startsWith(QString::fromLatin1("p="))) {
+                // Whether the payload is the notification title or body:
+                QString payloadValue = param.mid(2);
+                if (payloadValue == QString::fromLatin1("title")) {
+                    payloadType = PayloadType::Title;
+                } else if (payloadValue == QString::fromLatin1("body")) {
+                    payloadType = PayloadType::Body;
+                } else {
+                    payloadType = PayloadType::Unknown;
+                }
+            } else if (param.startsWith(QString::fromLatin1("o="))) {
+                QString payloadValue = param.mid(2);
+                if (payloadValue == QString::fromLatin1("always")) {
+                    option = KittyNotificationOption::Always;
+                } else if (payloadValue == QString::fromLatin1("unfocused")) {
+                    option = KittyNotificationOption::Unfocused;
+                } else if (payloadValue == QString::fromLatin1("invisible")) {
+                    option = KittyNotificationOption::Invisible;
+                }
+            }
+        }
+
+        KittyNotificationState* notificationState = nullptr;
+        KittyNotificationState notificationValue;
+        auto notificationIterator = _kittyNotifications.find(notificationId);
+        if (notificationIterator != _kittyNotifications.end()) {
+            notificationState = &*notificationIterator;
+        } else if (complete) {
+            notificationState = &notificationValue;
+        } else {
+            notificationState = &_kittyNotifications[notificationId];
+            notificationState->serial = _kittyNotificationSerial++;
+        }
+
+        if (option != KittyNotificationOption::None) {
+            notificationState->option = option;
+        }
+        notificationState->action = (notificationState->action | addedActions) & (~removedActions);
+
+        if (encoding == 1) {
+            payload = QString::fromUtf8(QByteArray::fromBase64(payload.toUtf8()));
+        }
+        constexpr qsizetype max_notification_size = 1024;
+        switch (payloadType) {
+            case Unknown:
+                break;
+            case Title:
+                notificationState->title += payload.left(max_notification_size - notificationState->title.size());
+                break;
+            case Body:
+                notificationState->body += payload.left(max_notification_size - notificationState->body.size());
+                break;
+        }
+
+        if (complete) {
+            const auto hasFocus = _currentScreen->currentTerminalDisplay()->hasFocus();
+
+            bool enabled;
+            switch (notificationState->option) {
+            default:
+            case KittyNotificationOption::None:
+            case KittyNotificationOption::Always:
+                    enabled = true;
+                    break;
+            case KittyNotificationOption::Unfocused:
+                    enabled = !hasFocus;
+                    break;
+            case KittyNotificationOption::Invisible:
+                    // We might want to check if the tab is active, the window visible, etc.
+                    enabled = !hasFocus;
+                    break;
+            }
+
+            if (enabled) {
+                    KNotification *notification;
+                    if (!notificationState->body.isEmpty()) {
+                    notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"),
+                                                        notificationState->title,
+                                                        notificationState->body);
+                    } else {
+                    notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"),
+                                                        notificationState->title);
+                    }
+                    auto action = notification->addDefaultAction(i18n("Show session"));
+
+                    int notificationAction = notificationState->action;
+                    if (notificationAction != 0) {
+                    connect(action, &KNotificationAction::activated, this, [this, notification, notificationAction, notificationId]() {
+                        if (notificationAction & NotificationActionReport) {
+                            sendString((QStringLiteral("\033]99;i=") + notificationId + QStringLiteral(";\033\\")).toLatin1());
+                        }
+                        if (notificationAction & NotificationActionFocus) {
+                            _currentScreen->currentTerminalDisplay()->notificationClicked(notification->xdgActivationToken());
+                        }
+                    });
+                    }
+            }
+
+            _kittyNotifications.remove(notificationId);
+        }
+
+        if (_kittyNotifications.size() >= 10) {
+            auto toRemote = std::min_element(
+                _kittyNotifications.begin(), _kittyNotifications.end(),
+                [](KittyNotificationState const& first, KittyNotificationState const& second) {
+                    return first.serial < second.serial;
+                });
+            _kittyNotifications.erase(toRemote);
         }
 
         return;
