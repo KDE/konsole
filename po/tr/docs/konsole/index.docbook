@@ -633,7 +633,7 @@
 >Anlamsal Kabuk Tümleşimi</title>
 
 <para
->Konsole'da çalışan bir kabuk programı, görüntülenen metni üç türe bölen kaçış dizileri yayabilir: Kabuk istemi, kullanıcı girişi ve komut çıkışı. Bu anlamsal bilginin kullanılması Konsole'da çeşitli geliştirmelere olanak sağlar. <itemizedlist>
+>Konsole’da çalışan bir kabuk programı, görüntülenen metni üç türe bölen kaçış dizileri yayabilir: Kabuk istemi, kullanıcı girişi ve komut çıkışı. Bu anlamsal bilginin kullanılması Konsole’da çeşitli geliştirmelere olanak sağlar. <itemizedlist>
 <listitem
 ><para
 ><keycombo action="simul"
@@ -735,7 +735,7 @@
 ><para
 ><guilabel
 >Sözcük kipi</guilabel
-> - Bu kipte (bazı) diziler ekranda tek tek karakter yerine bir bütün olarak görüntülenir. Bu, bir karakterin şekli kendisinden önceki veya sonraki karakterlere bağlı olduğunda Qt'un metni doğru şekilde oluşturmasını sağlar. Bu, bazı karakterlerin yanlış konumlandırılmasına neden olabilir. </para
+> - Bu kipte (bazı) diziler ekranda tek tek karakter yerine bir bütün olarak görüntülenir. Bu, bir karakterin şekli kendisinden önceki veya sonraki karakterlere bağlı olduğunda Qt’un metni doğru şekilde oluşturmasını sağlar. Bu, bazı karakterlerin yanlış konumlandırılmasına neden olabilir. </para
 ><para
 >Boşluklar her zaman dizileri bozar, dolayısıyla her zaman doğru konumlarda olurlar. Bu, karakterlerin hiçbir zaman doğru konumlarından çok fazla uzaklaşmamasını sağlar. </para
 ></listitem>
@@ -792,8 +792,8 @@
 <listitem
 ><para
 ><guilabel
->wcwidth'i geçersiz kıl</guilabel
-> - Sorunlu karakterler glibc'nin wcwidth() yöntemi yerine Unicode standardını izler. Şu anda yalnızca wc genişliği 1 ve Unicode genişliği 0 olan yumuşak kısa çizgi (Unicode 0x00AD) bu seçenekten etkilenmektedir. Genel olarak bu seçenek, esas olarak komut satırında bu karakterler kullanıldığında devre dışı bırakılmalı ve yalnızca görüntülendiklerinde etkinleştirilmelidir. </para
+>wcwidth’i geçersiz kıl</guilabel
+> - Sorunlu karakterler glibc’nin wcwidth() yöntemi yerine Unicode standardını izler. Şu anda yalnızca wc genişliği 1 ve Unicode genişliği 0 olan yumuşak kısa çizgi (Unicode 0x00AD) bu seçenekten etkilenmektedir. Genel olarak bu seçenek, esas olarak komut satırında bu karakterler kullanıldığında devre dışı bırakılmalı ve yalnızca görüntülendiklerinde etkinleştirilmelidir. </para
 ></listitem>
 
 
@@ -2035,7 +2035,7 @@ Various search improvements
 ><para
 >Bu menü ögesinin görünebilmesi için keditbookmarks programının kurulu olması gerekir.</para>
 <para
->URL'leri elle eklemek için yer imi düzenleyicisini kullanabilirsiniz. Şu anda &konsole;, aşağıdakileri kabul eder: <itemizedlist mark="opencircle">
+>URL’leri elle eklemek için yer imi düzenleyicisini kullanabilirsiniz. Şu anda &konsole;, aşağıdakileri kabul eder: <itemizedlist mark="opencircle">
 <listitem
 ><para
 >ssh://kullanıcı@makine:kapı</para
@@ -2449,7 +2449,7 @@ Various search improvements
 <para
 >&konsole;, ortak &kde; <guimenu
 >Yardım</guimenu
-> menüsü ögelerine sahiptir; daha fazla bilgi için &kde; Temelleri'nin <ulink url="help:/fundamentals/menus.html#menus-help"
+> menüsü ögelerine sahiptir; daha fazla bilgi için &kde; Temelleri’nin <ulink url="help:/fundamentals/menus.html#menus-help"
 >Yardım Menüsü</ulink
 > bölümüne bakın. </para
 ><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
@@ -3008,7 +3008,7 @@ Various search improvements
 >qdbus</command
 > <option
 >org.kde.konsole /Windows/1</option
->, pencere 1'i denetlemek için kullanılacak yöntemleri görüntüler. </para>
+>, pencere 1’i denetlemek için kullanılacak yöntemleri görüntüler. </para>
 </listitem>
 
 <listitem
@@ -3030,7 +3030,7 @@ Various search improvements
 >qdbus</command
 > <option
 >org.kde.konsole /Sessions/1</option
->, oturum 1'i denetlemek için kullanılacak yöntemleri görüntüler. </para
+>, oturum 1’i denetlemek için kullanılacak yöntemleri görüntüler. </para
 ></listitem>
 
 <listitem
@@ -3067,7 +3067,7 @@ Various search improvements
 ><para
 ><option
 >org.kde.konsole-`pidof -s konsole`</option
-> (ilk pid'i seçer) </para
+> (ilk pid’i seçer) </para
 ></listitem>
 <listitem
 ><para
@@ -3116,7 +3116,7 @@ Various search improvements
 >Kullanıcılar, düğme bağıntısı düzenleyicisini kullanarak &konsole;'deki düğme bağıntısı ayarlarını özelleştirebilir. Uçbirime belirli bir denetim veya kaçış dizisi göndermek için bir düğme kombinasyonu yapılandırılabilir.</para>
 
 <para
->Düğme Bağıntıları Düzenleyicisi'ni <menuchoice
+>Düğme Bağıntıları Düzenleyicisi’ni <menuchoice
 ><guimenu
 >Ayarlar</guimenu
 ><guimenuitem
@@ -3296,9 +3296,9 @@ Boşluk+Kontrol
 >AppKeyPad</term>
 <listitem>
 <para
->Bu kip ayarlıysa düğme kombinasyonu, yalnızca numara düğmeleri takımı Uygulama Kipi'ndeyse (DECKPAM) çalışacaktır.</para>
+>Bu kip ayarlıysa düğme kombinasyonu, yalnızca numara düğmeleri takımı Uygulama Kipi’ndeyse (DECKPAM) çalışacaktır.</para>
 <para
->Bu kip ayarlıysa düğme kombinasyonu yalnızca numara düğmeleri takımı Sayısal Kip'te ise (DECKPNM) çalışacaktır.</para>
+>Bu kip ayarlıysa düğme kombinasyonu yalnızca numara düğmeleri takımı Sayısal Kip’te ise (DECKPNM) çalışacaktır.</para>
 </listitem>
 </varlistentry>
 
@@ -3602,7 +3602,7 @@ QTabBar::tab {
 >&Ctrl;<mousebutton
 >Fare Tekerleği</mousebutton
 ></keycombo
-> kombinasyonu, aynı Konqueror ve Firefox'ta olduğu gibi metin boyutunu yakınlaştırır. </para
+> kombinasyonu, aynı Konqueror ve Firefox’ta olduğu gibi metin boyutunu yakınlaştırır. </para
 ></listitem>
 
 <listitem
@@ -3694,7 +3694,7 @@ CommonDirNames=ad1,ad2,ad3...
 
 <listitem
 ><para
->KDE4'ten bu yana tüm sekmeler aynı süreç kimliğini kullanır. Bunun, bir sekmenin işleminde sorun olması durumunda diğer tüm sekmelerde de sorun yaşanması gibi bir yan etkisi vardır. </para>
+>KDE4’ten bu yana tüm sekmeler aynı süreç kimliğini kullanır. Bunun, bir sekmenin işleminde sorun olması durumunda diğer tüm sekmelerde de sorun yaşanması gibi bir yan etkisi vardır. </para>
 <para
 >Bu en çok, dış bir aygıta veya sisteme (ssh, nfs) bağlanan bir komutta sorunlar olduğunda fark edilir. </para
 ></listitem>
@@ -3703,7 +3703,7 @@ CommonDirNames=ad1,ad2,ad3...
 ><para
 >&konsole;, <option
 >-e</option
-> seçeneğinden sonraki argümanları bir komut olarak ele alır ve onları yürütme amaçlı ayrıştırma ve olası bölme yerine doğrudan çalıştırır. Bu, xterm'den farklıdır. </para>
+> seçeneğinden sonraki argümanları bir komut olarak ele alır ve onları yürütme amaçlı ayrıştırma ve olası bölme yerine doğrudan çalıştırır. Bu, xterm’den farklıdır. </para>
 
 <para>
     <itemizedlist mark='opencircle'>
@@ -3801,7 +3801,7 @@ CommonDirNames=ad1,ad2,ad3...
 <listitem
 ><para
 ><ulink url="https://userbase.kde.org/Konsole"
->&kde; Kullanıcı Tabanı'ndaki &konsole; ana sayfası</ulink
+>&kde; Kullanıcı Tabanı’ndaki &konsole; ana sayfası</ulink
 >&nbsp;</para
 ></listitem>
 <listitem

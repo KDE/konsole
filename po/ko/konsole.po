@@ -1,7 +1,7 @@
 # Translation of konsole.po to Korean.
 # Copyright (C) 2001, 2002, 2007-2008 Free Software Foundation, Inc.
 # Sae-keun Kim <segni@susekorea.net>, 2001.
-# Shinjo Park <kde@peremen.name>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Shinjo Park <kde@peremen.name>
 # Minori Hiraoka <minori@mnetwork.co.kr>, 2018.
 # JungHee Lee <daemul72@gmail.com>, 2021.
 #
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2023-10-08 23:31+0200\n"
+"PO-Revision-Date: 2024-02-09 23:54+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1859,12 +1859,10 @@ msgid "Default profile"
 msgstr "기본 프로필"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "프로필 #%1"
+msgstr "프로필 %1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -2230,18 +2228,13 @@ msgid "Set &Encoding"
 msgstr "인코딩 설정(&E)"
 
 #: session/SessionController.cpp:802
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "마우스 추적 허용"
 
 #: session/SessionController.cpp:811
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "읽기 전용"
@@ -2278,8 +2271,7 @@ msgid "&ZModem Upload..."
 msgstr "ZModem 업로드(&Z)..."
 
 #: session/SessionController.cpp:862
-#, fuzzy, kde-format
-#| msgid "One-shot monitors"
+#, kde-format
 msgid "One-Shot Monitors"
 msgstr "한 번 실행되는 모니터"
 
@@ -2687,10 +2679,9 @@ msgstr "일치하는 텍스트가 강조될 지 설정합니다"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, fuzzy, kde-format
-#| msgid "Control whether creation of child cgroups are created tabs"
+#, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr "자식 cgroup을 생성할 때 탭을 생성할지 여부 설정"
+msgstr "개별 탭별로 자식 cgroup 생성 여부 설정"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -3452,17 +3443,13 @@ msgid "Toggle maximize current view"
 msgstr "현재 보기 최소화 전환"
 
 #: ViewManager.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "현재 보기 최대화 전환"
 
 #: ViewManager.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "현재 보기 최소화 전환"
