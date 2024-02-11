@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2024-01-20 20:03+0400\n"
+"PO-Revision-Date: 2024-02-10 18:03+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -2245,18 +2245,13 @@ msgid "Set &Encoding"
 msgstr "عيّن ال&تشفير"
 
 #: session/SessionController.cpp:802
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "مكّن تتبع الفأرة"
 
 #: session/SessionController.cpp:811
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "للقراءة فقط"
@@ -2293,8 +2288,7 @@ msgid "&ZModem Upload..."
 msgstr "&رفع ZModem ..."
 
 #: session/SessionController.cpp:862
-#, fuzzy, kde-format
-#| msgid "One-shot monitors"
+#, kde-format
 msgid "One-Shot Monitors"
 msgstr "شاشات طلقة واحدة"
 
@@ -2701,13 +2695,15 @@ msgstr "اختر إذا ما كنت تريد إبراز النص المتطاب�
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
+"التحكم فيما إذا كان سينشئ مجموعات التحكم الفرعية cgroups لعلامات التبويب "
+"الفردية"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "يحدد مستوى استهلاك الذاكرة الذي سيبدأ الاختناق بعده"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2818,6 +2814,14 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"ستصبح التغييرات سارية المفعول عند إعادة التشغيل. في حالة التمكين، سيؤدي "
+"استهلاك الذاكرة\n"
+" المستمر بواسطة كونسول الذي يتجاوز القيمة المحددة إلى قيام systemd-oomd "
+"بإزالة اللسان (الألسنة) \n"
+"التي تحتوي على العملية (العمليات) كثيفة الاستهلاك للذاكرة. ملاحظة: قد يؤدي "
+"التمكين إلى حدوث تباطؤ\n"
+" أكبر أثناء الاستهلاك العالي للذاكرة، وقد يؤدي تحديد قيم منخفضة للغاية\n"
+" إلى إيقاف تشغيل وحدة التحكم."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -4193,13 +4197,13 @@ msgstr "يوجد تشكيلة باسم \"%1\" بالفعل."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "اسم التشكيلة تجاوزت الحد الأقصى المسموح (%1)."
 
 #: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "المحارف المبرزة غير صالحة في اسم التشكيلات: %1."
 
 #: widgets/EditProfileDialog.cpp:411
 #, kde-format
