@@ -36,11 +36,11 @@ void TerminalFont::applyProfile(const Profile::Ptr &profile)
     m_lineSpacing = uint(profile->lineSpacing());
     setVTFont(profile->font());
     extraFonts[0] = profile->emojiFont();
-    if (extraFonts[0] == QFont()) {
+    if (extraFonts[0].family().isEmpty()) {
         extraFonts[0] = QFont(QStringLiteral("Noto Color Emoji"));
         // extraFonts[0] = QFont(QStringLiteral("Apple Color Emoji"));
         // extraFonts[0] = QFont(QStringLiteral("Emoji One"));
-        if (extraFonts[0] == QFont()) {
+        if (extraFonts[0].family().isEmpty()) {
             extraFonts.remove(0);
         }
     }
