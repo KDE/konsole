@@ -3,13 +3,13 @@
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2011, 2012, 2014, 2015.
 # Balázs Úr <urbalazs@gmail.com>, 2012, 2013, 2014.
 # Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017.
-# Kristof Kiszel <ulysses@fsf.hu>, 2021, 2022.
+# SPDX-FileCopyrightText: 2021, 2022, 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-15 02:26+0000\n"
-"PO-Revision-Date: 2022-01-25 10:17+0100\n"
+"PO-Revision-Date: 2024-02-15 21:26+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,18 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.07.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Kiszel Kristóf,Lengyel Marcell,Szántó Tamás,Úr Balázs"
+msgstr "Kiszel Kristóf,Úr Balázs"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-"ulysses@fsf.hu,miketkf@yahoo.com,tszanto@interware.hu,urbalazs@gmail.com"
+msgstr "ulysses@fsf.hu,urbalazs@fsf.hu"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -105,11 +104,10 @@ msgid "json layoutfile to be loaded to use for new Konsole instance"
 msgstr "Az új Konsole példányokhoz betöltendő JSON elrendezésfájl"
 
 #: Application.cpp:55
-#, fuzzy, kde-format
-#| msgid "Create a new profile based on the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Új profil létrehozása a kijelölt profil alapján"
+msgstr "A beépített profil használata az alapértelmezett profil helyett"
 
 #: Application.cpp:56
 #, kde-format
@@ -609,36 +607,33 @@ msgstr "Nincs skálázás"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Háttérkép-méretezés:"
+msgstr "Háttérkép tükrözése:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Nincs"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Vízszintes horgony:"
+msgstr "Vízszintesen"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
-msgstr "Függőleges horgony:"
+msgstr "Függőlegesen"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Mindkettő"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -1223,20 +1218,16 @@ msgid "Activate Menu"
 msgstr "Menü aktiválása"
 
 #: MainWindow.cpp:400
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Lapelrendezés mentése fájlba"
+msgstr "Lapelrendezés mentése…"
 
 #: MainWindow.cpp:409
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Lapelrendezés betöltése fájlból"
+msgstr "Lapelrendezés betöltése…"
 
 #: MainWindow.cpp:725 MainWindow.cpp:742
 #, kde-format
@@ -1288,7 +1279,7 @@ msgstr "Általános"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Memória"
 
 #: MainWindow.cpp:901
 #, kde-format
@@ -1322,11 +1313,9 @@ msgstr "Űrlap"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Gyorsbillentyű"
+msgstr "Gyorsbillentyű:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
@@ -1344,9 +1333,7 @@ msgstr "Invertálás"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
-#, fuzzy, kde-format
-#| msgctxt "@item:intable The session title"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "Cím"
 
@@ -1354,13 +1341,13 @@ msgstr "Cím"
 #: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
-msgstr ""
+msgstr "Buboréksúgó"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
 #: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
-msgstr ""
+msgstr "Csoport"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
@@ -1371,38 +1358,34 @@ msgstr "Alapértelmezett"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Command"
-msgstr "Parancs:"
+msgstr "Parancs"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:334
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "Figyelmeztetés: "
+msgstr "Figyelmeztetések"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "Futtatás"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:256
-#, fuzzy, kde-format
-#| msgid "Save File"
+#, kde-format
 msgid "Save"
-msgstr "Fájl mentése"
+msgstr "Mentés"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Frissítés"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
 #: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
@@ -1412,126 +1395,114 @@ msgstr "Mégsem"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
 #: plugins/QuickCommands/quickcommandsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Quick Commands"
-msgstr "Parancs:"
+msgstr "Gyorsparancsok"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:71
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "Gyorselérés megjelenítése"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Nem találhatók gyorsparancsok. A Bővítmények -> Gyorsparancsok menüpontban "
+"adhat hozzá"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:107
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Parancs:"
+msgstr "Bővítmények - Gyorsparancsok"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "Gyorsparancsok megjelenítése"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:167
 #: plugins/QuickCommands/quickcommandswidget.cpp:178
 #, kde-format
 msgid "A duplicate item exists"
-msgstr ""
+msgstr "Duplikált elem létezik"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:184
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
+"Kérjük, javítson minden figyelmeztetést, mielőtt futtatni próbálja ezt a "
+"parancsfájlt"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:216
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "There are %1 open terminals in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "Ebben az ablakban %1 nyitott terminál van. Biztosan ki szeretne lépni?"
+msgstr "Hibák találhatók a parancsfájlban, biztosan szeretné futtatni?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Parancsértelmező hibák"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "Futtatás"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the folder %1,\n"
-#| " with multiple SSH Configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
-"A(z) %1 mappa törlésére készül,\n"
-" több SSH konfigurációval, biztos benne?"
+"A(z) %1 csoport törlésére készül,\n"
+" több konfigurációval, biztos benne?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:244
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
-#, fuzzy, kde-format
-#| msgid "You are about to remove %1, are you sure?"
+#, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "A(z) %1 törlésére készül, biztos benne?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:247
-#, fuzzy, kde-format
-#| msgid "Remove SSH Configurations"
+#, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr "SSH konfigurációk törlése"
+msgstr "Gyorsparancsok beállításanak törlése"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:277
 #, kde-format
 msgid "Title can not be empty or blank"
-msgstr ""
+msgstr "A cím nem lehet üres"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:281
-#, fuzzy, kde-format
-#| msgid "Command to execute"
+#, kde-format
 msgid "Command can not be empty"
-msgstr "Végrehajtandó parancs"
+msgstr "A parancs nem lehet üres"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:301
-#, fuzzy, kde-format
-#| msgid "Rename Tab"
+#, kde-format
 msgid "Rename"
-msgstr "Lap átnevezése"
+msgstr "Átnevezés"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:305
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:336
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings (*)"
-msgstr "Figyelmeztetés: "
+msgstr "Figyelmeztetések (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "SSH Config"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
 msgstr "SSH konfiguráció"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "Alapértelmezett"
@@ -1559,33 +1530,34 @@ msgstr "Gépnév: %1"
 #: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
-msgstr "SSH kezelő"
+msgstr "SSH-kezelő"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:96
 #, kde-format
 msgid "Show SSH Manager"
-msgstr "SSH kezelő megjelenítése"
+msgstr "SSH-kezelő megjelenítése"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Gyorselérés megjelenítése az SSH műveletekhez"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Nem található mentett SSH konfiguráció. A Bővítmények -> SSH-kezelő "
+"menüpontban adhat hozzá"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:147
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Fájlkezelő megnyitása"
+msgstr "Bővítmények - SSH-kezelő"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH bejegyzések"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
@@ -1620,18 +1592,15 @@ msgstr "SSH kulcs"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Ne módosítsa"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are about to remove the folder %1,\n"
-#| " with multiple SSH Configurations, are you sure?"
+#, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
@@ -1640,8 +1609,7 @@ msgstr ""
 " több SSH konfigurációval, biztos benne?"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
-#, fuzzy, kde-format
-#| msgid "Remove SSH Configurations"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH konfigurációk törlése"
@@ -1679,14 +1647,12 @@ msgid "An SSH session must have a profile"
 msgstr "Egy SSH munkamenetnek rendelkeznie kell egy profillal"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:440
-#, fuzzy, kde-format
-#| msgid "Cannot remove this folder"
+#, kde-format
 msgid "Cannot delete this folder"
 msgstr "Nem lehet törölni ezt a mappát"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:443
-#, fuzzy, kde-format
-#| msgid "Remove folder and all of its contents"
+#, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Mappa és teljes tartalmának törlése"
 
@@ -1696,22 +1662,18 @@ msgid "Double click to change the folder name."
 msgstr "Kattintson duplán a mappa nevének módosításához."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
-#, fuzzy, kde-format
-#| msgid "You can't remove an automatically added entry."
+#, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "Nem távolíthat el egy automatikusan felvett bejegyzést."
+msgstr "Nem törölhet egy automatikusan felvett bejegyzést."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
-#, fuzzy, kde-format
-#| msgid "Remove selected entry"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "Kijelölt bejegyzés eltávolítása"
+msgstr "Kijelölt bejegyzés törlése"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
@@ -1725,15 +1687,13 @@ msgstr "A szűrőre nem illeszkedő bejegyzések megjelenítése"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Profilváltás csatlakozáskor/kapcsolat bontásakor"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Profilok kezelése"
+msgstr "Profil kezelése"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -1862,10 +1822,9 @@ msgstr "Új SSH bejegyzés hozzáadása"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:284
-#, fuzzy, kde-format
-#| msgid "Remove selected SSH entry"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "Kijelölt SSH bejegyzés eltávolítása"
+msgstr "Kijelölt SSH bejegyzés törlése"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:297
@@ -1915,7 +1874,7 @@ msgstr "Kimenet &méretezése"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Beépített"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
@@ -1923,12 +1882,10 @@ msgid "Default profile"
 msgstr "Alapértelmezett profil"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Profil #%1"
+msgstr "%1. profil"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -1948,11 +1905,7 @@ msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
 #: profile/ProfileModel.cpp:80
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox added to the name of the Default/fallback profile, to "
-#| "point out it's read-only/hardcoded"
-#| msgid " [Read-only]"
+#, kde-format
 msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
@@ -1960,17 +1913,16 @@ msgid " [Read-only]"
 msgstr " [Csak olvasható]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "Alapértelmezett"
+msgstr " [Alapértelmezett]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "A beépített profil mindig elérhető"
 
 #: profile/ProfileModel.cpp:111
 #, kde-format
@@ -2125,10 +2077,9 @@ msgstr "Üresjárat - „%1” („%2” munkamenet)"
 #: session/Session.cpp:736 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
-#, fuzzy, kde-format
-#| msgid "&Close Session"
+#, kde-format
 msgid "Show session"
-msgstr "&Munkamenet bezárása"
+msgstr "Munkamenet megjelenítése"
 
 #: session/Session.cpp:1020
 #, kde-format
@@ -2211,35 +2162,29 @@ msgid "Copy"
 msgstr "Másolás"
 
 #: session/SessionController.cpp:667
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Nézetfelezés (bal-jobb)"
 
 #: session/SessionController.cpp:672
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Nézetfelezés (felül-alul)"
 
 #: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Másolás a prompt nélkül"
 
 #: session/SessionController.cpp:682
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
-msgstr "Bemenet másolása"
+msgstr "Felhasználói bemenet másolása"
 
 #: session/SessionController.cpp:688
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "Bemenet másolása"
+msgstr "Parancskimenet másolása"
 
 #: session/SessionController.cpp:703
 #, kde-format
@@ -2257,10 +2202,9 @@ msgid "&Select All"
 msgstr "Minden kijelölé&se"
 
 #: session/SessionController.cpp:720
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
-msgstr "&Sor kijelölése"
+msgstr "&Mód kijelölése"
 
 #: session/SessionController.cpp:725
 #, kde-format
@@ -2348,13 +2292,12 @@ msgstr "&ZModem feltöltés…"
 #: session/SessionController.cpp:861
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Egyszer használatos jelzők"
 
 #: session/SessionController.cpp:866
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "&Aktivitásjelző"
+msgstr "&Promptjelző"
 
 #: session/SessionController.cpp:873
 #, kde-format
@@ -2461,12 +2404,10 @@ msgid "Confirm Close"
 msgstr "Bezárás megerősítése"
 
 #: session/SessionController.cpp:1099
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "Lap bezárása"
+msgstr "Program bezárása"
 
 #: session/SessionController.cpp:1122
 #, kde-format
@@ -2489,12 +2430,12 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Program kilövése"
 
 #: session/SessionController.cpp:1811
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "A parancsértelmező promptja a(z) „%1” munkamenetben jelenik meg"
 
 #: session/SessionController.cpp:2004
 #, kde-format
@@ -2765,6 +2706,7 @@ msgstr "Beállítja, hogy ki legyenek-e emelve a találati szövegek"
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
+"Annak vezérlése, hogy az egyes lapokhoz létrejöjjenek-e gyermek cgroupok"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -2772,6 +2714,8 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Meghatározza azt a memóriafogyasztási szintet, ami fölött a szabályozás "
+"megkezdődik"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2866,10 +2810,9 @@ msgstr "Ezen mappa használata a fájlok puffereléséhez"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Lapfigyelés"
+msgstr "Memóriafigyelés bekapcsolása:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2883,18 +2826,26 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"A változtatások újraindításkor lépnek életbe. Ha be van kapcsolva, a Konsole-"
+"nak a megadott\n"
+"értéket túllépő tartós memóriafogyasztása hatására a systemd-oomd "
+"eltávolítja a \n"
+"memóriaintenzív folyamatokat tartalmazó lapokat. Megjegyzés: a bekapcsolás\n"
+"jelentős lassulást okozhat magas memóriafogyasztás során, túl alacsony "
+"értékek\n"
+"megadása pedig a Konsole kilövését is okozhatja."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Memóriakorlát:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3380,45 +3331,37 @@ msgstr "Nézetfelezés"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
-msgstr "Nézetfelezés (bal-jobb)"
+msgstr "Nézetfelezés függőlegesen"
 
 #: ViewManager.cpp:128
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
-msgstr "Nézetfelezés (felül-alul)"
+msgstr "Nézetfelezés vízszintesen"
 
 #: ViewManager.cpp:136
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Nézetfelezés (felül-alul)"
+msgstr "Automatikus nézetfelezés"
 
 #: ViewManager.cpp:146
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Nézetfelezés (bal-jobb)"
+msgstr "Nézetfelezés függőlegesen a következő laptól"
 
 #: ViewManager.cpp:154
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Nézetfelezés (felül-alul)"
+msgstr "Nézetfelezés vízszintesen a következő laptól"
 
 #: ViewManager.cpp:162
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Nézetfelezés (felül-alul)"
+msgstr "Automatikus nézetfelezés a következő laptól"
 
 #: ViewManager.cpp:172
 #, kde-format
@@ -3535,20 +3478,16 @@ msgid "Toggle maximize current view"
 msgstr "Aktuális nézet maximalizálása be-ki"
 
 #: ViewManager.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Aktuális nézet maximalizálása be-ki"
+msgstr "Aktuális nézet nagyítása-maximalizálása be-ki"
 
 #: ViewManager.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Aktuális nézet maximalizálása be-ki"
+msgstr "Aktuális nézet nagyítása-maximalizálása be-ki"
 
 #: ViewManager.cpp:313
 #, kde-format
@@ -3566,25 +3505,25 @@ msgstr "Lap mozgatása balra"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Szemantikai integráció telepítése (bash)"
 
 #: ViewManager.cpp:333
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Szemantikai tippek megjelenítése be-ki"
 
 #: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Sorszámok megjelenítése be-ki"
 
 #: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Egyenlő méret minden nézetben"
 
 #: ViewManager.cpp:356
 #, kde-format
@@ -3593,37 +3532,29 @@ msgid "Switch to Tab %1"
 msgstr "Váltás erre a lapra: %1"
 
 #: ViewManager.cpp:569
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Szövegkezelés"
+msgstr "Szemantikai tippek "
 
 #: ViewManager.cpp:585
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "Adott számú sor: "
+msgstr "Sorszámok"
 
 #: ViewManager.cpp:1169
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Lapelrendezés mentése fájlba"
+msgstr "Lapelrendezés mentése"
 
 #: ViewManager.cpp:1171 ViewManager.cpp:1258
-#, fuzzy, kde-format
-#| msgid "Konsole View Layout (*.json)"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole nézetelrendezés (*.json)"
 
 #: ViewManager.cpp:1184
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
@@ -3633,10 +3564,7 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1245
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when loading the Layout.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
@@ -3646,12 +3574,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1256
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Lapelrendezés betöltése fájlból"
+msgstr "Lapelrendezés betöltése"
 
 #: Vt102Emulation.cpp:2449
 #, kde-format
@@ -4017,19 +3943,16 @@ msgstr "Sötétítés erőssége:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:533
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Szín:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:549
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "A kurzor kirajzolásához használt szín"
+msgstr "A szegély kirajzolásához használt szín"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:571
@@ -4039,10 +3962,9 @@ msgstr "Inaktív terminálok:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:581
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Inaktív terminálok:"
+msgstr "Aktív terminálok:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:591
@@ -4098,16 +4020,15 @@ msgstr "Sötétítés"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "A színek elhalványításával jelzi, hogy az ablak aktív-e"
+msgstr "Keret rajzolásával jelzi, hogy az ablak aktív-e"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Szegély"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:788
@@ -4119,26 +4040,25 @@ msgstr "Függőleges vonal ebben az oszlopban:"
 #: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Komplex szövegelrendezés</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:836
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Komplex szövegelrendezés"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:860
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Kétirányú szövegmegjelenítés"
+msgstr "Szó módú szövegmegjelenítés bekapcsolása"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:863
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Szó mód"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:876
@@ -4147,83 +4067,82 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Attribútumváltozások figyelmen kívül hagyása a szó közepén (különben az "
+"attribútumváltozások megtörik a szót rendereléskor)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:879
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Ugyanazon attribútumok használata a teljes szóra"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:892
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "ASCII karakterekből álló szavak együttes megjelenítése"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:895
-#, fuzzy, kde-format
-#| msgid "Word characters:"
+#, kde-format
 msgid "ASCII characters "
-msgstr "Szókarakterek:"
+msgstr "ASCII karakterek"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:908
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Bráhmi írásrendszerek karaktereiből álló szavak együttes megjelenítése"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:911
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Egyeztetés az aktuális karakterrel"
+msgstr "Bráhmi írásrendszerek karakterei"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:924
-#, fuzzy, kde-format
-#| msgid "Font:"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Betűkészlet:"
+msgstr "Emodzsi-betűkészlet:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:966
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"A sorok mindig LTR irányúak, nem pedig az első erős karakter által "
+"meghatározottak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:969
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "LTR sorirány kényszerítése"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:982
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Táblázatrajzoló karakterek kezelése erős LTR-ként."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:985
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "A táblázatkarakterfek felülírják a kétirányú módot"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:998
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Beillesztés vezérlőkarakteren &nélkül"
+msgstr "A problémás karakterek szélességének figyelmen kívül hagyása"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1001
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Wcwidth felülírása"
 
 #: widgets/EditProfileDialog.cpp:67
 #, kde-format
@@ -4300,13 +4219,13 @@ msgstr "Már létezik „%1” nevű profil."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "A profilnév hossza meghaladja a megengedett maximumot (%1)."
 
 #: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "A kiemelt karakterek nem használhatók profilnevekben: %1."
 
 #: widgets/EditProfileDialog.cpp:411
 #, kde-format
@@ -4451,10 +4370,9 @@ msgstr "Szövegszerkesztő egyéni parancs"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:42
-#, fuzzy, kde-format
-#| msgid "Default Search Settings"
+#, kde-format
 msgid "General Settings"
-msgstr "Alapértelmezett keresési beállítások"
+msgstr "Általános beállítások"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:66
@@ -4573,28 +4491,27 @@ msgstr "Terminálcsengő mód:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
-#, fuzzy, kde-format
-#| msgid "Text interaction"
+#, kde-format
 msgid "Semantic Integration"
-msgstr "Szövegkezelés"
+msgstr "Szemantikai integráció"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:383
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Fel/le nyilak emulációja"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:390
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr " Az egérkattintás a beviteli sorban mozgatja a kurzort"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:403
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Szemantikai tippek:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4604,9 +4521,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
 #: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
 #: widgets/EditProfileGeneralPage.ui:597
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgctxt "Never"
 msgid "Never"
 msgstr "Soha"
@@ -4622,7 +4537,7 @@ msgstr "Soha"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "URL-tippek megjelenítésekor"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4632,9 +4547,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
 #: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
 #: widgets/EditProfileGeneralPage.ui:617
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "Always"
 msgstr "Mindig"
@@ -4643,27 +4556,25 @@ msgstr "Mindig"
 #: widgets/EditProfileGeneralPage.ui:449
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Vörös hibasávok:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:495
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Háttér elmosása"
+msgstr "Vörös hibaháttér:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:541
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Váltakozó sávok:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:587
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Háttér elmosása"
+msgstr "Váltakozó háttér:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:17
@@ -4994,7 +4905,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:435
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Színek előnézete rámutatáskor"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:455
@@ -5157,14 +5068,7 @@ msgstr ""
 "komoly problémákat okozhat."
 
 #: widgets/HistorySizeWidget.cpp:69
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "When using this option, the scrollback data will be written unencrypted "
-#| "to temporary files. Those temporary files will be deleted automatically "
-#| "when Konsole is closed in a normal manner.<nl/>Use <emphasis>Settings → "
-#| "Configure Konsole → File Location</emphasis> to select the location of "
-#| "the temporary files."
+#, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "When using this option, the scrollback data will be written unencrypted to "
@@ -5176,7 +5080,7 @@ msgstr ""
 "Ha ezt a beállítást használja, a visszagörgetési adatok egy titkosítatlan "
 "átmeneti fájlba kerülnek. Ezek az átmeneti fájlok automatikusan törlődnek, "
 "ha a Konsole normálisan lett bezárva.<nl/>Adja meg az átmeneti fájlok helyét "
-"a <emphasis>Beállítások → A Konsole beállítása → Fájl</emphasis> helye "
+"a <emphasis>Beállítások → Konsole beállítása → Átmeneti fájlok</emphasis> "
 "ablakban."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
