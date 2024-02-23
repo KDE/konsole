@@ -7,6 +7,10 @@
 ###   See `uni2characterwidth --help` for usage information
 if(KONSOLE_BUILD_UNI2CHARACTERWIDTH)
 
+# NOTE: this doesn't build with Qt6 even using compat and there are
+#       some other errors that will need fixed.  For now if this
+#       needs to be used, build it on a Qt5 system.
+
     find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
         Core
     )
