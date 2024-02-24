@@ -25,7 +25,7 @@ void EscapeSequenceUrlExtractor::beginUrlInput()
     _reading = true;
 }
 
-void EscapeSequenceUrlExtractor::appendUrlText_impl(QChar c)
+void EscapeSequenceUrlExtractor::appendUrlText_impl(uint c)
 {
     if (_currentUrl.text.isEmpty()) {
         // We need to  on getCursorX because we want the position of the
@@ -33,7 +33,7 @@ void EscapeSequenceUrlExtractor::appendUrlText_impl(QChar c)
         const int realCcolumn = _screen->getCursorY() + _screen->getHistLines();
         _currentUrl.begin = Coordinate{realCcolumn, _screen->getCursorX() - 1};
     }
-    _currentUrl.text += c;
+    _currentUrl.text += QString::fromUcs4(&c, 1);
 }
 
 void EscapeSequenceUrlExtractor::setUrl(const QString &url)

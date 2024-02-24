@@ -67,7 +67,7 @@ private:
     /* Pointer to the Screen, that actually holds the text data. */
     Screen *_screen = nullptr;
 
-    void appendUrlText_impl(QChar c);
+    void appendUrlText_impl(uint c);
 
 public:
     /* This needs to have access to the Session
@@ -99,7 +99,7 @@ public:
 
     /* The URL is parsed at once, but not the text. We received
      * one character per time until we hit the end byte. */
-    void appendUrlText(QChar c)
+    void appendUrlText(uint c)
     {
         if (!reading()) {
             return;

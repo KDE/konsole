@@ -670,7 +670,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
             // Ignore whitespaces at the end of the line
             int lineSize = _screenLines.at(currentPos).size();
-            while (lineSize > 0 && QChar(_screenLines.at(currentPos).at(lineSize - 1).character).isSpace()) {
+            while (lineSize > 0 && QChar::isSpace(_screenLines.at(currentPos).at(lineSize - 1).character)) {
                 --lineSize;
             }
 
@@ -1326,7 +1326,7 @@ notcombine:
     }
 
     if (_escapeSequenceUrlExtractor) {
-        _escapeSequenceUrlExtractor->appendUrlText(QChar(c));
+        _escapeSequenceUrlExtractor->appendUrlText(c);
     }
 }
 
@@ -1824,7 +1824,7 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
         _history->getCells(bottomRow, 0, histLineLen, histLine.data());
 
         for (int j = bottomColumn; j < histLineLen; j++) {
-            if ((histLine.at(j).flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar(histLine.at(j).character).isSpace())) {
+            if ((histLine.at(j).flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar::isSpace(histLine.at(j).character))) {
                 beyondLastColumn = false;
             }
         }
@@ -1857,7 +1857,7 @@ void Screen::setSelectionEnd(const int x, const int y, const bool trimTrailingWh
         const int length = _screenLines.at(line).count();
 
         for (int k = bottomColumn; k < lastColumn && k < length; k++) {
-            if ((data[k].flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar(data[k].character).isSpace())) {
+            if ((data[k].flags & EF_REAL) != 0 && (!trimTrailingWhitespace || !QChar::isSpace(data[k].character))) {
                 beyondLastColumn = false;
             }
         }
@@ -2135,7 +2135,7 @@ int Screen::copyLineToStream(int line,
         } else {
             if (options.testFlag(TrimTrailingWhitespace)) {
                 // ignore trailing white space at the end of the line
-                while (count > 0 && QChar(characterBuffer[count - 1].character).isSpace()) {
+                while (count > 0 && QChar::isSpace(characterBuffer[count - 1].character)) {
                     count--;
                 }
             }
@@ -2169,7 +2169,7 @@ int Screen::copyLineToStream(int line,
         // Don't remove end spaces in lines that wrap
         if (options.testFlag(TrimTrailingWhitespace) && ((_lineProperties.at(screenLine).flags.f.wrapped) == 0)) {
             // ignore trailing white space at the end of the line
-            while (length > 0 && QChar(data[length - 1].character).isSpace()) {
+            while (length > 0 && QChar::isSpace(data[length - 1].character)) {
                 length--;
             }
         }
