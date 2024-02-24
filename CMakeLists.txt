@@ -74,10 +74,15 @@ find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
     XmlGui
 )
 
+if (NOT WIN32)
+    find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
+        Pty
+    )
+endif()
+
 if (NOT WIN32 AND NOT APPLE)
     find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
         GlobalAccel
-        Pty
     )
 endif()
 
