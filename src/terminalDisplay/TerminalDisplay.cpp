@@ -1847,7 +1847,7 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
     int y = imgLine + firstVisibleLine;
     int imgLoc = loc(x, imgLine);
     QVector<LineProperty> lineProperties = _lineProperties;
-    const QChar selClass = charClass(image[imgLoc]);
+    const uint selClass = charClass(image[imgLoc]);
     const int imageSize = regSize * _columns;
 
     while (true) {
@@ -1936,7 +1936,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     Screen *screen = _screenWindow->screen();
     Character *image = _image;
     Character *tmp_image = nullptr;
-    const QChar selClass = charClass(image[j]);
+    const uint selClass = charClass(image[j]);
     const int imageSize = regSize * _columns;
 
     while (true) {
@@ -1982,7 +1982,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
 out:
     y -= curLine;
     // In word selection mode don't select @ (64) if at end of word.
-    if ((image[j].rendition.f.extended == 0) && (QChar(image[j].character) == QLatin1Char('@')) && (y > pnt.y() || x > pnt.x())) {
+    if ((image[j].rendition.f.extended == 0) && (image[j].character == '@') && (y > pnt.y() || x > pnt.x())) {
         if (x > 0) {
             x--;
         } else {
@@ -2107,7 +2107,7 @@ bool TerminalDisplay::focusNextPrevChild(bool next)
     }
 }
 
-QChar TerminalDisplay::charClass(const Character &ch) const
+uint TerminalDisplay::charClass(const Character &ch) const
 {
     if (ch.rendition.f.extended != 0) {
         ushort extendedCharLength = 0;
@@ -2115,26 +2115,25 @@ QChar TerminalDisplay::charClass(const Character &ch) const
         if ((chars != nullptr) && extendedCharLength > 0) {
             const QString s = QString::fromUcs4(chars, extendedCharLength);
             if (_wordCharacters.contains(s, Qt::CaseInsensitive)) {
-                return QLatin1Char('a');
+                return 'a';
             }
             bool letterOrNumber = false;
             for (int i = 0; !letterOrNumber && i < s.size(); ++i) {
                 letterOrNumber = s.at(i).isLetterOrNumber();
             }
-            return letterOrNumber ? QLatin1Char('a') : s.at(0);
+            return letterOrNumber ? 'a' : chars[0];
         }
-        return QChar{0};
+        return 0;
     } else {
-        const QChar qch(ch.character);
-        if (qch.isSpace()) {
-            return QLatin1Char(' ');
+        if (QChar::isSpace(ch.character)) {
+            return ' ';
         }
 
-        if (qch.isLetterOrNumber() || _wordCharacters.contains(qch, Qt::CaseInsensitive)) {
-            return QLatin1Char('a');
+        if (QChar::isLetterOrNumber(ch.character) || _wordCharacters.contains(QString::fromUcs4(&ch.character, 1), Qt::CaseInsensitive)) {
+            return 'a';
         }
 
-        return qch;
+        return ch.character;
     }
 }
 
