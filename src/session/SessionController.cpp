@@ -767,8 +767,8 @@ void SessionController::setupCommonActions()
     _findPreviousAction->setEnabled(false);
 
 #ifdef Q_OS_MACOS
-    collection->setDefaultShortcut(_findAction, Qt::CTRL | Qt::Key_F);
-    collection->setDefaultShortcut(_findNextAction, Qt::CTRL | Qt::Key_G);
+    collection->setDefaultShortcut(_findAction, QKeySequence(Qt::CTRL | Qt::Key_F));
+    collection->setDefaultShortcut(_findNextAction, QKeySequence(Qt::CTRL | Qt::Key_G));
     collection->setDefaultShortcut(_findPreviousAction, Qt::CTRL | Qt::SHIFT | Qt::Key_G);
 #else
     collection->setDefaultShortcut(_findAction, Qt::CTRL | Qt::SHIFT | Qt::Key_F);
