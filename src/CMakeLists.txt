@@ -74,7 +74,7 @@ set(konsole_LIBS
     KF6::NewStuffCore
 )
 
-if (NOT WIN32)
+if (NOT WIN32 AND NOT APPLE)
     list(APPEND konsole_LIBS
         KF6::Pty
         KF6::GlobalAccel

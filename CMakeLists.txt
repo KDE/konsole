@@ -74,7 +74,7 @@ find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
     XmlGui
 )
 
-if (NOT WIN32)
+if (NOT WIN32 AND NOT APPLE)
     find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
         GlobalAccel
         Pty
@@ -125,8 +125,8 @@ add_subdirectory( src )
 add_subdirectory( data )
 add_subdirectory( desktop )
 
-if (NOT WIN32)
-add_subdirectory( kconf_update )
+if (NOT WIN32 AND NOT APPLE)
+    add_subdirectory( kconf_update )
 endif()
 
 if (KF6DocTools_FOUND)
