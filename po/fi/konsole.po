@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-15 02:26+0000\n"
-"PO-Revision-Date: 2024-01-29 21:47+0200\n"
+"PO-Revision-Date: 2024-02-14 18:48+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -1894,12 +1894,10 @@ msgid "Default profile"
 msgstr "Oletusprofiili"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Profiili #%1"
+msgstr "Profiili %1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -2719,10 +2717,9 @@ msgstr "Asettaa, korostetaan haun osumat"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
-#, fuzzy, kde-format
-#| msgid "Control whether creation of child cgroups are created tabs"
+#, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr "Asettaa, tarkoittaako lapsi-cgroupien luonti luotuja välilehtiä"
+msgstr "Asettaa, luodaanko lapsi-cgroupit yksittäisille välilehdille"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -3491,20 +3488,16 @@ msgid "Toggle maximize current view"
 msgstr "Suurenna/palauta nykyinen näkymä"
 
 #: ViewManager.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Suurenna/palauta nykyinen näkymä"
+msgstr "Suurenna tai palauta nykyinen näkymä"
 
 #: ViewManager.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Suurenna/palauta nykyinen näkymä"
+msgstr "Suurenna tai palauta nykyinen näkymä"
 
 #: ViewManager.cpp:313
 #, kde-format
