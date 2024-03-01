@@ -6,31 +6,33 @@
 # Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
 # Einars Sprugis <einars8@gmail.com>, 2012.
 # Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2012.
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2012-07-02 13:00+0300\n"
-"Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
+"PO-Revision-Date: 2024-02-28 16:31+0200\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Māris Nartišs, Viesturs Zariņš"
+msgstr "Māris Nartišs, Viesturs Zariņš, Toms Trasūns"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "maris.kde@gmail.com, viesturs.zarins@mii.lu.lv"
+msgstr ""
+"maris.kde@gmail.com, viesturs.zarins@mii.lu.lv, toms.trasuns@posteo.net"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -68,7 +70,7 @@ msgstr "Iestatījumi"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "Spraudņi"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -80,167 +82,144 @@ msgstr "Palīdzība"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Galvenā rīkjosla"
 
 #. i18n: ectx: Menu (history)
 #: ../desktop/partui.rc:14
 #, kde-format
 msgid "S&crollback"
-msgstr "A&tpakaļrite"
+msgstr "Ri&tināšanas atmiņa"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:78
-#, fuzzy, kde-format
-#| msgid "Session Number: %#"
+#, kde-format
 msgid "Session Toolbar"
-msgstr "Sesijas numurs: %#"
+msgstr "Sesijas rīkjosla"
 
 #: Application.cpp:53
-#, fuzzy, kde-format
-#| msgid "Name of profile to use for new Konsole instance"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Name of profile to use for new Konsole instance"
-msgstr "Profila nosaukums, ko izmantot jaunajai Konsole instancei"
+msgstr "Profila nosaukums, ko izmantot jaunai „Konsole“ instancei"
 
 #: Application.cpp:54
-#, fuzzy, kde-format
-#| msgid "Name of profile to use for new Konsole instance"
+#, kde-format
 msgctxt "@info:shell"
 msgid "json layoutfile to be loaded to use for new Konsole instance"
-msgstr "Profila nosaukums, ko izmantot jaunajai Konsole instancei"
+msgstr "JSON izkārtojuma datne, ko izmantot jaunai „Konsole“ instancei"
 
 #: Application.cpp:55
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Izveidot jaunu profilu, par pamatu ņemot izvēlēto profilu"
+msgstr "Izmantot iebūvēto profilu noklusējuma profila vietā"
 
 #: Application.cpp:56
-#, fuzzy, kde-format
-#| msgid "Set the initial working directory of the new tab or window to 'dir'"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Set the initial working directory of the new tab or window to 'dir'"
-msgstr "Mainīt sākotnējo darba mapi jaunajai cilnei vai logam uz “dir”"
+msgstr "Kā sākuma darba mapi jaunai cilnei vai logam iestatīt „dir“"
 
 #: Application.cpp:57
-#, fuzzy, kde-format
-#| msgid "Do not close the initial session automatically when it ends."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
-msgstr "Neveikt automātisku sākotnējās sesijas aizvēršanu, kad tā beigusies."
+msgstr "Sākuma sesiju automātiski neaizvērt, kad tā beidzas."
 
 #: Application.cpp:61
-#, fuzzy, kde-format
-#| msgid ""
-#| "Create a new tab in an existing window rather than creating a new window"
+#, kde-format
 msgctxt "@info:shell"
 msgid ""
 "Create a new tab in an existing window rather than creating a new window "
 "('Run all Konsole windows in a single process' must be enabled)"
-msgstr "Izveidot jaunu cilni esošā logā, nevis veidot jaunu logu"
+msgstr ""
+"Izveidot jaunu cilni pastāvošajā logā, bet ne atvērt jaunu logu (jābūt "
+"ieslēgtam „Palaist visus „Konsole“ logus vienā procesā“)"
 
 #: Application.cpp:62
-#, fuzzy, kde-format
-#| msgid "Create tabs as specified in given tabs configuration file"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Create tabs as specified in given tabs configuration file"
-msgstr "Izveidot cilnes, kā norādīts dotajā ciļņu konfigurācijas datnē"
+msgstr "Izveidot cilnes, kā tas ir noteikts dotajā ciļņu konfigurācijas datnē"
 
 #: Application.cpp:64
-#, fuzzy, kde-format
-#| msgid ""
-#| "Start Konsole in the background and bring to the front when Ctrl+Shift"
-#| "+F12 (by default) is pressed"
+#, kde-format
 msgctxt "@info:shell"
 msgid ""
 "Start Konsole in the background and bring to the front when Ctrl+Shift+F12 "
 "(by default) is pressed"
 msgstr ""
-"Palaist Konsole fonā un pacelt priekšplānā pēc Ctrl+Shift+F12 nospiešanas "
-"(pēc noklusējuma)"
+"Palaist „Konsole“ fonā un pacelt priekšplānā pēc „Ctrl+Shift"
+"+F12“ (noklusējuma kombinācija) nospiešanas"
 
 #: Application.cpp:65
 #, kde-format
 msgctxt "@info:shell"
 msgid "Run in a separate process"
-msgstr ""
+msgstr "Palaist atsevišķā procesā"
 
 #: Application.cpp:66
-#, fuzzy, kde-format
-#| msgid "Show the menubar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
 msgstr "Rādīt izvēļņu joslu, pārrakstot noklusējuma iestatījumus"
 
 #: Application.cpp:67
-#, fuzzy, kde-format
-#| msgid "Hide the menubar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
 msgstr "Slēpt izvēļņu joslu, pārrakstot noklusējuma iestatījumus"
 
 #: Application.cpp:68
-#, fuzzy, kde-format
-#| msgid "Show the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr "Rādīt tabulu joslu, pārrakstot noklusējuma iestatījumus"
+msgstr "Rādīt ciļņu joslu, pārrakstot noklusējuma iestatījumus"
 
 #: Application.cpp:69
-#, fuzzy, kde-format
-#| msgid "Hide the tabbar, overriding the default setting"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr "Slēpt tabulu joslu, pārrakstot noklusējuma iestatījumus"
+msgstr "Slēpt ciļņu joslu, pārrakstot noklusējuma iestatījumus"
 
 #: Application.cpp:70
 #, kde-format
 msgctxt "@info:shell"
 msgid "Start Konsole in fullscreen mode"
-msgstr ""
+msgstr "Palaist „Konsole“ pilnekrāna režīmā"
 
 #: Application.cpp:71
-#, fuzzy, kde-format
-#| msgid "Disable transparent backgrounds, even if the system supports them."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Disable transparent backgrounds, even if the system supports them."
-msgstr "Atsēgt caurpīdīgu fonu, pat ja sistēma tādu atbalsta."
+msgstr "Izslēgt caurspīdīgus fonus pat tad, ja sistēma tos atbalsta."
 
 #: Application.cpp:72
-#, fuzzy, kde-format
-#| msgid "List the available profiles"
+#, kde-format
 msgctxt "@info:shell"
 msgid "List the available profiles"
-msgstr "Parādīt pieejamo profilu sarakstu"
+msgstr "Uzskaitīt pieejamos profilus"
 
 #: Application.cpp:73
-#, fuzzy, kde-format
-#| msgid ""
-#| "List all the profile properties names and their type (for use with -p)"
+#, kde-format
 msgctxt "@info:shell"
 msgid "List all the profile properties names and their type (for use with -p)"
-msgstr ""
-"Parādīt visus profila īpašību nosaukumus un to tipus (izmantošanai ar -p)"
+msgstr "Uzskaitīt profila īpašību nosaukumus un to tipu (lietošanai ar „-p“)"
 
 #: Application.cpp:74
-#, fuzzy, kde-format
-#| msgid "Change the value of a profile property."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Change the value of a profile property."
 msgstr "Mainīt profila īpašības vērtību."
 
 #: Application.cpp:76
-#, fuzzy, kde-format
-#| msgid ""
-#| "Command to execute. This option will catch all following arguments, so "
-#| "use it as the last option."
+#, kde-format
 msgctxt "@info:shell"
 msgid ""
 "Command to execute. This option will catch all following arguments, so use "
 "it as the last option."
 msgstr ""
-"Komanda, ko izpildīt. Šī opcija noķers visus sekojošos parametrus, tāpēc "
+"Izpildāmā komanda. Šī opcijas ievēros visus sekojošos parametrus, tāpēc "
 "lietojiet kā pēdējo opciju."
 
 #: Application.cpp:79
@@ -250,17 +229,17 @@ msgid ""
 "Force re-using the existing instance even if it breaks functionality, e. g. "
 "--new-tab. Mostly for debugging."
 msgstr ""
+"Piespiest atkārtoti izmantot eksistējošu instanci pat tad, ja tas salauž "
+"funkcionalitāti, piemēram, „--new-tab“. Parasti izmantojam atkļūdošanai."
 
 #: Application.cpp:86
-#, fuzzy, kde-format
-#| msgid "Arguments passed to command"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
-msgstr "Komandai padotie parametri"
+msgstr "Komandai padodamie parametri"
 
 #: Application.cpp:514
-#, fuzzy, kde-format
-#| msgid "Toggle Background Window"
+#, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
 msgstr "Pārslēgt fona logu"
@@ -269,7 +248,7 @@ msgstr "Pārslēgt fona logu"
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
-msgstr "%1 uz %2"
+msgstr "%1 uz „%2“"
 
 #: BookmarkHandler.cpp:109
 #, kde-format
@@ -378,88 +357,57 @@ msgid "Color 8 (Intense)"
 msgstr "8. krāsa (spilgta)"
 
 #: colorscheme/ColorScheme.cpp:143
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Foreground (Intense)"
 msgctxt "@item:intable palette"
 msgid "Foreground (Faint)"
-msgstr "Priekšplāns (spilgts)"
+msgstr "Priekšplāns (blāvs)"
 
 #: colorscheme/ColorScheme.cpp:144
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Background (Intense)"
 msgctxt "@item:intable palette"
 msgid "Background (Faint)"
-msgstr "Fons (spilgts)"
+msgstr "Fons (blāvs)"
 
 #: colorscheme/ColorScheme.cpp:145
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 1 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 1 (Faint)"
-msgstr "1. krāsa (spilgta)"
+msgstr "1. krāsa (blāva)"
 
 #: colorscheme/ColorScheme.cpp:146
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 2 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 2 (Faint)"
-msgstr "2. krāsa (spilgta)"
+msgstr "2. krāsa (blāva)"
 
 #: colorscheme/ColorScheme.cpp:147
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 3 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 3 (Faint)"
-msgstr "3. krāsa (spilgta)"
+msgstr "3. krāsa (blāva)"
 
 #: colorscheme/ColorScheme.cpp:148
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 4 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 4 (Faint)"
-msgstr "4. krāsa (spilgta)"
+msgstr "4. krāsa (blāva)"
 
 #: colorscheme/ColorScheme.cpp:149
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 5 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 5 (Faint)"
-msgstr "5. krāsa (spilgta)"
+msgstr "5. krāsa (blāva)"
 
 #: colorscheme/ColorScheme.cpp:150
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 6 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 6 (Faint)"
-msgstr "6. krāsa (spilgta)"
+msgstr "6. krāsa (blāva)"
 
 #: colorscheme/ColorScheme.cpp:151
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 7 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 7 (Faint)"
-msgstr "7. krāsa (spilgta)"
+msgstr "7. krāsa (blāva)"
 
 #: colorscheme/ColorScheme.cpp:152
-#, fuzzy
-#| msgctxt "@item:intable palette"
-#| msgid "Color 8 (Intense)"
 msgctxt "@item:intable palette"
 msgid "Color 8 (Faint)"
-msgstr "8. krāsa (spilgta)"
+msgstr "8. krāsa (blāva)"
 
 #: colorscheme/ColorScheme.cpp:451
-#, fuzzy, kde-format
-#| msgid "Un-named Color Scheme"
+#, kde-format
 msgctxt "@item"
 msgid "Un-named Color Scheme"
 msgstr "Krāsu shēma bez nosaukuma"
@@ -480,14 +428,13 @@ msgstr "Krāsa"
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
-msgstr ""
+msgstr "Spilgtā krāsa"
 
 #: colorscheme/ColorSchemeEditor.cpp:112
-#, fuzzy, kde-format
-#| msgid "Linux Colors"
+#, kde-format
 msgctxt "@label:listbox Column header text for the actual faint colors"
 msgid "Faint color"
-msgstr "Linux krāsas"
+msgstr "Blāvā krāsa"
 
 #: colorscheme/ColorSchemeEditor.cpp:137
 #, kde-format
@@ -496,13 +443,11 @@ msgid ""
 "The background transparency setting will not be used because your desktop "
 "does not appear to support transparent windows."
 msgstr ""
-"Neizmantos fona caurspīdīguma iestatījumu, jo dators neuztur caurspīdīgus "
+"Neizmantos fona caurspīdīguma iestatījumu, jo dators neatbalsta caurspīdīgus "
 "logus."
 
 #: colorscheme/ColorSchemeEditor.cpp:188
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Select wallpaper image file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
 msgstr "Izvēlieties tapetes attēla datni"
@@ -511,18 +456,16 @@ msgstr "Izvēlieties tapetes attēla datni"
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
-msgstr ""
+msgstr "Atbalstītie attēli"
 
 #: colorscheme/ColorSchemeEditor.cpp:334
-#, fuzzy, kde-format
-#| msgid "New Color Scheme"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "Jauna krāsu shēma"
 
 #: colorscheme/ColorSchemeEditor.cpp:337
-#, fuzzy, kde-format
-#| msgid "Edit Color Scheme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Color Scheme"
 msgstr "Rediģēt krāsu shēmu"
@@ -534,20 +477,16 @@ msgid "Click to choose color"
 msgstr "Spiediet, lai izvēlētos krāsu"
 
 #: colorscheme/ColorSchemeEditor.cpp:388
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Click to choose color"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose intense color"
-msgstr "Spiediet, lai izvēlētos krāsu"
+msgstr "Spiediet, lai izvēlētos intensīvo krāsu"
 
 #: colorscheme/ColorSchemeEditor.cpp:393
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Click to choose color"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose Faint color"
-msgstr "Spiediet, lai izvēlētos krāsu"
+msgstr "Spiediet, lai izvēlētos blāvo krāsu"
 
 #. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
 #. i18n: ectx: property (text), widget (QLabel, discriptionLabel)
@@ -565,27 +504,29 @@ msgid ""
 "settings.\n"
 "To see any effect, set colors with saturation value greater than 0."
 msgstr ""
+"Noklusētās priekšplāna un fona nokrāsas un piesātinājuma vērtības pēc "
+"noklusējuma ir nejaušas. Dažas krāsu shēmas var izvēlēties atšķirīgu "
+"nejaušības iestatījumus.\n"
+"Lai redzētu jebkādu efektu iestatiet krāsas ar piesātinājuma vērtībām virs "
+"nulles."
 
 #. i18n: ectx: property (text), widget (QCheckBox, randomizedBackgroundCheck)
 #: colorscheme/ColorSchemeEditor.ui:53
 #, kde-format
 msgid "Randomly adjust colors for each session"
-msgstr ""
+msgstr "Katras sesijas krāsas iestatīt pēc nejaušības principa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
 #: colorscheme/ColorSchemeEditor.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@item:intable palette"
-#| msgid "Background"
+#, kde-format
 msgid "Blur background"
-msgstr "Fons"
+msgstr "Izpludināt fonu"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:69
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Background color transparency:"
-msgstr "Fona caurspīdīgums:"
+msgstr "Fona krāsas caurspīdīgums:"
 
 #. i18n: ectx: property (text), widget (QLabel, transparencyPercentLabel)
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyPercentLabel)
@@ -596,10 +537,9 @@ msgstr "Procenti"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:103
-#, fuzzy, kde-format
-#| msgid "Background transparency:"
+#, kde-format
 msgid "Wallpaper transparency:"
-msgstr "Fona caurspīdīgums:"
+msgstr "Tapetes caurspīdīgums:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -630,102 +570,98 @@ msgstr "..."
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
 #: colorscheme/ColorSchemeEditor.ui:165
-#, fuzzy, kde-format
-#| msgid "Wallpaper:"
+#, kde-format
 msgid "Wallpaper scaling:"
-msgstr "Ekrāntapete:"
+msgstr "Tapetes mērogs:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
 #, kde-format
 msgid "Tile"
-msgstr ""
+msgstr "Flīzēt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:178
 #, kde-format
 msgid "Stretch"
-msgstr ""
+msgstr "Izstiept"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:183
 #, kde-format
 msgid "Crop"
-msgstr ""
+msgstr "Apgriezt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:188
 #, kde-format
 msgid "Adapt"
-msgstr ""
+msgstr "Pielāgot"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:193
-#, fuzzy, kde-format
-#| msgid "Scrolling"
+#, kde-format
 msgid "NoScaling"
-msgstr "Ritināšana"
+msgstr "Bez mērogošanas"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Ekrāntapete:"
+msgstr "Tapetes apmešana:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Bez apmešanas"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
 #, kde-format
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontāli"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
 #, kde-format
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikāli"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Abos virzienos"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
 #, kde-format
 msgid "Horizontal Anchor:"
-msgstr ""
+msgstr "Horizontālais enkurs:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:266
-#, fuzzy, kde-format
-#| msgid "Text size:"
+#, kde-format
 msgid "Left"
-msgstr "Teksta izmērs:"
+msgstr "Pa kreisi"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:277
 #, kde-format
 msgid "Vertical Anchor:"
-msgstr ""
+msgstr "Vertikālais enkurs:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
 #, kde-format
 msgid "Top"
-msgstr ""
+msgstr "Pie augša"
 
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
-msgstr ""
+msgstr "AaZz09..."
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -743,13 +679,13 @@ msgstr "Filtrs:"
 #: CopyInputDialog.ui:46
 #, kde-format
 msgid "Select All"
-msgstr "Izvēlēties visu"
+msgstr "Atlasīt visu"
 
 #. i18n: ectx: property (text), widget (QPushButton, deselectAllButton)
 #: CopyInputDialog.ui:53
 #, kde-format
 msgid "Deselect All"
-msgstr "Neizvēlēties neko"
+msgstr "Neatlasīt neko"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -757,17 +693,19 @@ msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
+"Nevarēja atvērt datni ar profila iestatījumos norādīto noklusējuma teksta "
+"redaktoru.\n"
+"„Konsole“ to atvērs ar sistēmas noklusēto teksta redaktoru."
 
 #: filterHotSpots/FileFilterHotspot.cpp:174
-#, fuzzy, kde-format
-#| msgid "Copy Input To"
+#, kde-format
 msgid "Copy Location"
-msgstr "Kopēt ievadi uz"
+msgstr "Kopēt vietu"
 
 #: filterHotSpots/FileFilterHotspot.cpp:282
 #, kde-format
 msgid "Generating Thumbnail"
-msgstr ""
+msgstr "Veido sīktēlu"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:90
 #, kde-format
@@ -790,18 +728,16 @@ msgid "Copy Email Address"
 msgstr "Kopēt e-pasta adresi"
 
 #: FontDialog.cpp:27
-#, fuzzy, kde-format
-#| msgid "Select Font..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Select font"
-msgstr "Izvēlēties fontu..."
+msgstr "Atlasīt fontu"
 
 #: FontDialog.cpp:39
-#, fuzzy, kde-format
-#| msgid "Smooth fonts"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
-msgstr "Gludi fonti"
+msgstr "Parādīt visus fontus"
 
 #: FontDialog.cpp:68
 #, kde-format
@@ -811,24 +747,28 @@ msgid ""
 "equal width (monospace). Any non monospaced font may cause display issues. "
 "This should not be necessary except in rare cases."
 msgstr ""
+"Jau pēc noklusējuma termināļa programmai ir nepieciešami fonti ar vienādu "
+"rakstzīmju platumu („monospace“). Fonti, kuru rakstzīmes ir dažāda platuma, "
+"var radīt atveidošanas problēmas. Tam nav jābūt obligāti, izņemot retus "
+"gadījumus."
 
 #: HistorySizeDialog.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
-msgstr "Regulēt atpakaļriti"
+msgstr "Pielāgot ritināšanas atmiņu"
 
 #: HistorySizeDialog.cpp:46
 #, kde-format
 msgctxt "@info:status"
 msgid "Any adjustments are only temporary to this session."
-msgstr "Jebkurš regulējums ir tikai pagaidu šajā sesijā."
+msgstr "Jebkurš pielāgojums ir tikai pagaidu šai sesijai"
 
 #: KeyBindingEditor.cpp:54
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Enter descriptive label"
-msgstr ""
+msgstr "Ievadiet aprakstošu etiķeti"
 
 #: KeyBindingEditor.cpp:63
 #, kde-format
@@ -853,7 +793,7 @@ msgstr "Rediģēt taustiņu piesaistes sarakstu"
 #: KeyBindingEditor.cpp:286
 #, kde-format
 msgid "A key bindings scheme cannot be saved with an empty description."
-msgstr ""
+msgstr "Taustiņu piesaistes shēmu nevar saglabāt ar tukšu aprakstu."
 
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
@@ -870,7 +810,7 @@ msgstr "Pievienot"
 #: widgets/EditProfileKeyboardPage.ui:83
 #, kde-format
 msgid "Remove"
-msgstr "Izņemt"
+msgstr "Noņemt"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: KeyBindingEditor.ui:94
@@ -892,15 +832,13 @@ msgid "Output:"
 msgstr "Izvade:"
 
 #: main.cpp:163
-#, fuzzy, kde-format
-#| msgid "Konsole"
+#, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
 #: main.cpp:165
-#, fuzzy, kde-format
-#| msgid "Terminal emulator"
+#, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "Termināļa emulators"
@@ -909,46 +847,40 @@ msgstr "Termināļa emulators"
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
-msgstr ""
+msgstr "(c) 1997–2022, „Konsole“ izstrādātāji"
 
 #: main.cpp:314
-#, fuzzy, kde-format
-#| msgid "Kurt Hindenburg"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
-msgstr "Kurts Hindenburgs (Kurt Hindenburg)"
+msgstr "Kurt Hindenburg"
 
 #: main.cpp:316
-#, fuzzy, kde-format
-#| msgid "General maintainer, bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
-msgstr "Uzturētājs, kļūdu labojumi un vispārēji uzlabojumi"
+msgstr "Galvenais uzturētājs, kļūdu labojumi un vispārīgi uzlabojumi"
 
 #: main.cpp:319
-#, fuzzy, kde-format
-#| msgid "Robert Knight"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
-msgstr "Roberts Naits (Robert Knight)"
+msgstr "Robert Knight"
 
 #: main.cpp:320
-#, fuzzy, kde-format
-#| msgid "Previous maintainer, ported to KDE4"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr "Iepriekšējais uzturētājs, portēja uz KDE4"
 
 #: main.cpp:322
-#, fuzzy, kde-format
-#| msgid "Lars Doelle"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
-msgstr "Lars Doells (Lars Doelle)"
+msgstr "Lars Doelle"
 
 #: main.cpp:322
-#, fuzzy, kde-format
-#| msgid "Original author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "Sākotnējais autors"
@@ -957,125 +889,114 @@ msgstr "Sākotnējais autors"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
-msgstr ""
+msgstr "Ahmad Samir"
 
 #: main.cpp:324 main.cpp:327 main.cpp:330 main.cpp:333
-#, fuzzy, kde-format
-#| msgid "General maintainer, bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
-msgstr "Uzturētājs, kļūdu labojumi un vispārēji uzlabojumi"
+msgstr "Lielā pārstrukturēšana, kļūdu labojumi un vispārīgi uzlabojumi"
 
 #: main.cpp:326
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
-msgstr ""
+msgstr "Carlos Alves"
 
 #: main.cpp:329
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
-msgstr ""
+msgstr "Tomaz Canabrava"
 
 #: main.cpp:332
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
-msgstr ""
+msgstr "Gustavo Carneiro"
 
 #: main.cpp:335
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
-msgstr ""
+msgstr "Edwin Pujols"
 
 #: main.cpp:336 main.cpp:339 main.cpp:341 main.cpp:346 main.cpp:348
 #: main.cpp:349 main.cpp:350
-#, fuzzy, kde-format
-#| msgid "Bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
-msgstr "Kļūdu labojumi un uzlabojumi"
+msgstr "Kļūdu labojumi un vispārīgi uzlabojumi"
 
 #: main.cpp:338
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
-msgstr ""
+msgstr "Martin T. H. Sandsmark"
 
 #: main.cpp:341
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
-msgstr ""
+msgstr "Nate Graham"
 
 #: main.cpp:342
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
-msgstr ""
+msgstr "Mariusz Glebocki"
 
 #: main.cpp:343
-#, fuzzy, kde-format
-#| msgid "Bug fixes and general improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
-msgstr "Kļūdu labojumi un uzlabojumi"
+msgstr "Kļūdu labojumi un lieli uzlabojumi"
 
 #: main.cpp:345
-#, fuzzy, kde-format
-#| msgid "Thomas Dreibholz"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
-msgstr "Thomas Dreibholz"
+msgstr "Thomas Surrel"
 
 #: main.cpp:348
-#, fuzzy, kde-format
-#| msgid "Jekyll Wu"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "Jekyll Wu"
 
 #: main.cpp:349
-#, fuzzy, kde-format
-#| msgid "Waldo Bastian"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
-msgstr "Valdo Bastians (Waldo Bastian)"
+msgstr "Waldo Bastian"
 
 #: main.cpp:350
-#, fuzzy, kde-format
-#| msgid "Stephan Binner"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
-msgstr "Stefans Binners (Stephan Binner)"
+msgstr "Stephan Binner"
 
 #: main.cpp:351
-#, fuzzy, kde-format
-#| msgid "Thomas Dreibholz"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "Thomas Dreibholz"
 
 #: main.cpp:351
-#, fuzzy, kde-format
-#| msgid "General improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
-msgstr "Dažādi uzlabojumi"
+msgstr "Vispārīgi uzlabojumi"
 
 #: main.cpp:352
-#, fuzzy, kde-format
-#| msgid "Chris Machemer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
-msgstr "Kriss Mahemers (Chris Machemer)"
+msgstr "Chris Machemer"
 
 #: main.cpp:352 main.cpp:353 main.cpp:380 main.cpp:381 main.cpp:382
 #: main.cpp:383
-#, fuzzy, kde-format
-#| msgid "Bug fixes"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "Kļūdu labojumi"
@@ -1084,197 +1005,166 @@ msgstr "Kļūdu labojumi"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
-msgstr ""
+msgstr "Francesco Cecconi"
 
 #: main.cpp:354
-#, fuzzy, kde-format
-#| msgid "Stephan Kulow"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
-msgstr "Stefans Kulovs (Stephan Kulow)"
+msgstr "Stephan Kulow"
 
 #: main.cpp:354
-#, fuzzy, kde-format
-#| msgid "Solaris support and history"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
-msgstr "Solaris atbalsts un darbs pie vēstures"
+msgstr "„Solaris“ atbalsts un darbs pie vēstures"
 
 #: main.cpp:355
-#, fuzzy, kde-format
-#| msgid "Alexander Neundorf"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
-msgstr "Aleksandrs Noindorfs (Alexander Neundorf)"
+msgstr "Alexander Neundorf"
 
 #: main.cpp:356
-#, fuzzy, kde-format
-#| msgid "Bug fixes and improved startup performance"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
-msgstr "Kļūdu labojumi un samazināts palaišanas laiks"
+msgstr "Kļūdu labojumi un ātrāka palaišana"
 
 #: main.cpp:358
-#, fuzzy, kde-format
-#| msgid "Peter Silva"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
-msgstr "Peters Silva (Peter Silva)"
+msgstr "Peter Silva"
 
 #: main.cpp:358
-#, fuzzy, kde-format
-#| msgid "Marking improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
-msgstr "Uzlabojumi"
+msgstr "Marķēšanas uzlabojumi"
 
 #: main.cpp:359
-#, fuzzy, kde-format
-#| msgid "Lotzi Boloni"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
-msgstr "Lotzi Boloni (Lotzi Boloni)"
+msgstr "Lotzi Boloni"
 
 #: main.cpp:361
-#, fuzzy, kde-format
-#| msgid ""
-#| "Embedded Konsole\n"
-#| "Toolbar and session names"
+#, kde-format
 msgctxt "@info:credit"
 msgid ""
 "Embedded Konsole\n"
 "Toolbar and session names"
 msgstr ""
-"Iegultā Konsole\n"
+"Iegultā „Konsole“\n"
 "Rīkjoslas un sesijas nosaukumi"
 
 #: main.cpp:364
-#, fuzzy, kde-format
-#| msgid "David Faure"
+#, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
-msgstr "Deivids Faure (David Faure)"
+msgstr "David Faure"
 
 #: main.cpp:366
-#, fuzzy, kde-format
-#| msgid ""
-#| "Embedded Konsole\n"
-#| "General improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid ""
 "Embedded Konsole\n"
 "General improvements"
 msgstr ""
-"Iegultā Konsole\n"
-"Vispārēji uzlabojumi"
+"Iegultā „Konsole“\n"
+"Vispārīgi uzlabojumi"
 
 #: main.cpp:369
-#, fuzzy, kde-format
-#| msgid "Antonio Larrosa"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
-msgstr "Antonio Larrosa (Antonio Larrosa)"
+msgstr "Antonio Larrosa"
 
 #: main.cpp:369
-#, fuzzy, kde-format
-#| msgid "Visual effects"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "Vizuālie efekti"
 
 #: main.cpp:370
-#, fuzzy, kde-format
-#| msgid "Matthias Ettrich"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
-msgstr "Matiass Ettrihs (Matthias Ettrich)"
+msgstr "Matthias Ettrich"
 
 #: main.cpp:372
-#, fuzzy, kde-format
-#| msgid ""
-#| "Code from the kvt project\n"
-#| "General improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid ""
 "Code from the kvt project\n"
 "General improvements"
 msgstr ""
 "Kods no kvt projekta\n"
-"vispārēji uzlabojumi"
+"Vispārīgi uzlabojumi"
 
 #: main.cpp:375
-#, fuzzy, kde-format
-#| msgid "Warwick Allison"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
-msgstr "Varviks Elisons (Warwick Allison)"
+msgstr "Warwick Allison"
 
 #: main.cpp:376
-#, fuzzy, kde-format
-#| msgid "Schema and text selection improvements"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "Shēmu un teksta izvēles uzlabojumi"
 
 #: main.cpp:378
-#, fuzzy, kde-format
-#| msgid "Dan Pilone"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
-msgstr "Dens Pilons (Dan Pilone)"
+msgstr "Dan Pilone"
 
 #: main.cpp:378
-#, fuzzy, kde-format
-#| msgid "SGI port"
+#, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "SGI ports"
 
 #: main.cpp:379
-#, fuzzy, kde-format
-#| msgid "Kevin Street"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
-msgstr "Kevins Strīts (Kevin Street)"
+msgstr "Kevin Street"
 
 #: main.cpp:379
-#, fuzzy, kde-format
-#| msgid "FreeBSD port"
+#, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
-msgstr "FreeBSD ports"
+msgstr "„FreeBSD“ ports"
 
 #: main.cpp:380
-#, fuzzy, kde-format
-#| msgid "Sven Fischer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
-msgstr "Svens Fišers (Sven Fischer)"
+msgstr "Sven Fischer"
 
 #: main.cpp:381
-#, fuzzy, kde-format
-#| msgid "Dale M. Flaven"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
-msgstr "Deils M. Flavens (Dale M. Flaven)"
+msgstr "Dale M. Flaven"
 
 #: main.cpp:382
-#, fuzzy, kde-format
-#| msgid "Martin Jones"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
-msgstr "Martins Džounss (Martin Jones)"
+msgstr "Martin Jones"
 
 #: main.cpp:383
-#, fuzzy, kde-format
-#| msgid "Lars Knoll"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
-msgstr "Lars Knolls (Lars Knoll)"
+msgstr "Lars Knoll"
 
 #: main.cpp:384
-#, fuzzy, kde-format
-#| msgid "Thanks to many others.\n"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Paldies daudziem citiem.\n"
@@ -1310,10 +1200,9 @@ msgid "&Bookmarks"
 msgstr "&Grāmatzīmes"
 
 #: MainWindow.cpp:376
-#, fuzzy, kde-format
-#| msgid "New Color Scheme"
+#, kde-format
 msgid "&Window Color Scheme"
-msgstr "Jauna krāsu shēma"
+msgstr "&Loga krāsu shēma"
 
 #: MainWindow.cpp:388
 #, kde-format
@@ -1328,32 +1217,26 @@ msgid "Activate Menu"
 msgstr "Aktivizēt izvēlni"
 
 #: MainWindow.cpp:400
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Pārvietot cilni pa kreisi"
+msgstr "Saglabāt cilnes izkārtojumu..."
 
 #: MainWindow.cpp:409
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr ""
+msgstr "Ielādēt cilnes izkārtojumu..."
 
 #: MainWindow.cpp:725 MainWindow.cpp:742
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "There are %1 tab open in this window. Do you still want to quit?"
-#| msgid_plural ""
-#| "There are %1 tabs open in this window. Do you still want to quit?"
+#, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
 msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
-msgstr[0] "Šajā logā ir %1 atvērta cilne. Vai tiešām vēlaties iziet?"
-msgstr[1] "Šajā logā ir %1 atvērtas cilnes. Vai tiešām vēlaties iziet?"
-msgstr[2] "Šajā logā ir %1 atvērtu ciļņu. Vai tiešām vēlaties iziet?"
+msgstr[0] "Šajā logā ir palaists %1 process. Vai tiešām vēlaties iziet?"
+msgstr[1] "Šajā logā ir palaisti %1 procesi. Vai tiešām vēlaties iziet?"
+msgstr[2] "Šajā logā ir palaisti %1 procesi. Vai tiešām vēlaties iziet?"
 
 #: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
 #, kde-format
@@ -1362,109 +1245,94 @@ msgid "Confirm Close"
 msgstr "Apstiprināt aizvēršanu"
 
 #: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Window"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
-msgstr "Aizvērt logu"
+msgstr "Aizvērt &logu"
 
 #: MainWindow.cpp:750 MainWindow.cpp:764
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Close Current Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
-msgstr "Aizvērt aktīvo cilni"
+msgstr "Aizvērt aktīvo &cilni"
 
 #: MainWindow.cpp:759
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "There are %1 tab open in this window. Do you still want to quit?"
-#| msgid_plural ""
-#| "There are %1 tabs open in this window. Do you still want to quit?"
+#, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
-msgstr "Šajā logā ir %1 atvērta cilne. Vai tiešām vēlaties iziet?"
+msgstr "Šajā logā ir atvērti %1 termināļi. Vai tiešām vēlaties iziet?"
 
 #: MainWindow.cpp:866 Part.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
-msgstr "Jauns profils"
+msgstr "Profili"
 
 #: MainWindow.cpp:883
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
-msgstr "Vispārīgi"
+msgstr "Pamata"
 
 #: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Atmiņa"
 
 #: MainWindow.cpp:901
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr ""
+msgstr "Ciļņu josla / atdalītāji"
 
 #: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
-msgstr ""
+msgstr "Pagaidu datnes"
 
 #: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
-msgstr ""
+msgstr "Sīktēli"
 
 #: Part.cpp:300
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
-msgstr ""
+msgstr "Daļas informācija"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, QuickCommandsWidget)
 #: plugins/QuickCommands/qcwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Forma"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut:"
-msgstr "Īsceļš"
+msgstr "Saīsne:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
-#, fuzzy, kde-format
-#| msgid "Filter:"
+#, kde-format
 msgid "Filter..."
-msgstr "Filtrs:"
+msgstr "Filtrs..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
 #: plugins/QuickCommands/qcwidget.ui:59 plugins/SSHManager/sshwidget.ui:46
 #, kde-format
 msgid "Invert"
-msgstr ""
+msgstr "Invertēt"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
-#, fuzzy, kde-format
-#| msgctxt "@item:intable The session title"
-#| msgid "Title"
+#, kde-format
 msgid "Title"
 msgstr "Virsraksts"
 
@@ -1472,121 +1340,112 @@ msgstr "Virsraksts"
 #: plugins/QuickCommands/qcwidget.ui:107
 #, kde-format
 msgid "Tooltip"
-msgstr ""
+msgstr "Paskaidre"
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
 #: plugins/QuickCommands/qcwidget.ui:117
 #, kde-format
 msgid "Group"
-msgstr ""
+msgstr "Grupa"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "Default"
-msgstr "Ie&statīt kā noklusēto"
+msgstr "Noklusējums"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Command"
-msgstr "Komanda:"
+msgstr "Komanda"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
 #: plugins/QuickCommands/quickcommandswidget.cpp:334
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings"
-msgstr "Brīdinājums: "
+msgstr "Brīdinājumi"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "Palaist"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:256
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Save"
-msgstr "Atvērt datņu pārvaldnieku"
+msgstr "Saglabāt"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Atjaunināt"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
 #: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Atcelt"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
 #: plugins/QuickCommands/quickcommandsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Quick Commands"
-msgstr "Komanda:"
+msgstr "Ātrās komandas"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:71
 #, kde-format
 msgid "Show Quick Access"
-msgstr ""
+msgstr "Parādīt ātro pieeju"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
+"Nav atrastas ātrās komandas. Varat tās pievienot, ejot „Spraudņi —> Ātrās "
+"komandas“"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:107
-#, fuzzy, kde-format
-#| msgid "Command:"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Komanda:"
+msgstr "Spraudņi — Ātrāks komandas"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
 msgid "Show Quick Commands"
-msgstr ""
+msgstr "Parādīt ātrās komandas"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:167
 #: plugins/QuickCommands/quickcommandswidget.cpp:178
 #, kde-format
 msgid "A duplicate item exists"
-msgstr ""
+msgstr "Pastāv vienādi ieraksti"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:184
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
-msgstr ""
+msgstr "Novērsiet visus brīdinājumus pirms skripta palaišanas"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:216
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "There are %1 tab open in this window. Do you still want to quit?"
-#| msgid_plural ""
-#| "There are %1 tabs open in this window. Do you still want to quit?"
+#, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
-msgstr "Šajā logā ir %1 atvērta cilne. Vai tiešām vēlaties iziet?"
+msgstr "Skripts satur kļūdas. Vai tiešām vēlaties to palaist?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgid "Shell Errors"
-msgstr ""
+msgstr "Čaulas kļūdas"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:218
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "Palaist"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
 #, kde-format
@@ -1594,65 +1453,61 @@ msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
+"Jūs grasāties dzēst grupu „%1“,\n"
+" kas satur vairākas konfigurācijas. Vai turpināt?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:244
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
-msgstr ""
+msgstr "Vai droši zināt, ka vēlaties dzēst „%1“?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:247
 #, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr ""
+msgstr "Dzēst ātro komandu konfigurācijas"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:277
 #, kde-format
 msgid "Title can not be empty or blank"
-msgstr ""
+msgstr "Nosaukums nevar būt tukšs"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:281
-#, fuzzy, kde-format
-#| msgid "Command to execute"
+#, kde-format
 msgid "Command can not be empty"
-msgstr "Izpildāmā komanda"
+msgstr "Komanda nevar būt tukša"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:301
-#, fuzzy, kde-format
-#| msgid "Rename Tab"
+#, kde-format
 msgid "Rename"
-msgstr "Pārdēvēt cilni"
+msgstr "Pārdēvēt"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:305
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Dzēst"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:336
-#, fuzzy, kde-format
-#| msgctxt "@info:shell Alert the user with red color text"
-#| msgid "Warning: "
+#, kde-format
 msgid "Warnings (*)"
-msgstr "Brīdinājums: "
+msgstr "Brīdinājumi (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgctxt "@item:inlistbox Hosts from ssh/config file"
 msgid "SSH Config"
-msgstr "Apstiprināt aizvēršanu"
+msgstr "SSH konfigurācija"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "Ie&statīt kā noklusēto"
+msgstr "Noklusējums"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
 msgid "%1 is a folder for SSH entries"
-msgstr ""
+msgstr "„%1“ ir mape SSH ierakstiem"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:318
@@ -1660,84 +1515,85 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:419
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgid "SSH Config"
-msgstr "Apstiprināt aizvēršanu"
+msgstr "SSH konfigurācija"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Local Host: %h"
+#, kde-format
 msgid "Host: %1"
-msgstr "Lokālais dators: %h"
+msgstr "Saimniekdators: „%1“"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
 msgid "SSH Manager"
-msgstr ""
+msgstr "SSH pārvaldnieks"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:96
-#, fuzzy, kde-format
-#| msgid "Show menubar by default"
+#, kde-format
 msgid "Show SSH Manager"
-msgstr "Pēc noklusējuma rādīt izvēļņu joslu"
+msgstr "Parādīt SSH pārvaldnieku"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:115
 #, kde-format
 msgid "Show Quick Access for SSH Actions"
-msgstr ""
+msgstr "Parādīt ātro piekļuvi SSH darbībām"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:146
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
+"Nav atrasta saglabāta SSH konfigurācija. Varat to pievienot, ejot uz "
+"„Spraudņi —> SSH pārvaldnieks“"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:147
-#, fuzzy, kde-format
-#| msgid "Open File Manager"
+#, kde-format
 msgid "Plugins - SSH Manager"
-msgstr "Atvērt datņu pārvaldnieku"
+msgstr "Spraudņi — SSH pārvaldnieks"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH ieraksti"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
+"Neizdevās iegūt procesa nosaukumu, tiek pieņemts, ka nevaram pieprasīt "
+"savienojumu"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:182
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr ""
+msgstr "Kļūda, izdodot SSH komandu"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
+"Nevar izdot SSH komandu ārpus čaulas programmas (t.i., „bash“, „zsh“, „sh“)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
-msgstr ""
+msgstr "SSH atslēga"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:118
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Dzēst"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Nemainīt"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
@@ -1745,161 +1601,156 @@ msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
+"Jūs grasāties dzēst mapi „%1“\n"
+" ar vairākām SSH konfigurācijām. Vai turpināt?"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
-msgstr ""
+msgstr "Dzēst SSh konfigurāciju"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
 msgid "Missing Hostname"
-msgstr ""
+msgstr "Trūkst resursdatora nosaukuma"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
 #, kde-format
 msgid "Missing Name"
-msgstr ""
+msgstr "Trūkst nosaukuma"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:400
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
+"Ja ir iestatīts „Lietot SSH konfigurāciju“, neprecizējiet SSH atslēgu un "
+"lietotāja vārdu."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:405
 #, kde-format
 msgid "At least Username or SSHKey must be set"
-msgstr ""
+msgstr "Jānorāda vismaz lietotājvārds vai SSH atslēga"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
 #, kde-format
 msgid "Missing Folder"
-msgstr ""
+msgstr "Trūkst mapes"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:416
 #, kde-format
 msgid "An SSH session must have a profile"
-msgstr ""
+msgstr "SSH sesijai ir vajadzīgs profils"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:440
 #, kde-format
 msgid "Cannot delete this folder"
-msgstr ""
+msgstr "Nevar izdzēst mapi"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:443
 #, kde-format
 msgid "Delete folder and all of its contents"
-msgstr ""
+msgstr "Dzēst mapi un visu tās saturu"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:447
-#, fuzzy, kde-format
-#| msgid "Double click to change shortcut"
+#, kde-format
 msgid "Double click to change the folder name."
-msgstr "Veiciet dubultklikšķi, lai mainītu īsceļu"
+msgstr "Mainiet mapes nosaukumu ar dubulktklikšķi"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
-#, fuzzy, kde-format
-#| msgid "Do not close the initial session automatically when it ends."
+#, kde-format
 msgid "You can't delete an automatically added entry."
-msgstr "Neveikt automātisku sākotnējās sesijas aizvēršanu, kad tā beigusies."
+msgstr "Nevarat dzēst automātiski pievienotu ierakstu."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected entry"
-msgstr "Rediģēt izvēlēto profilu(s)"
+msgstr "Dzēst atlasīto ierakstu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
-msgstr "Īsceļš"
+msgstr "Saīsne"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
 #: plugins/SSHManager/sshwidget.ui:43
 #, kde-format
 msgid "Show entries that don't match the filter"
-msgstr ""
+msgstr "Parādīt ierakstus, kas neatbilst filtram"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr ""
+msgstr "Mainīt profilu, savienojoties/atvienojoties"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Pārvaldīt profilus"
+msgstr "Pārvaldīt profilu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
 #, kde-format
 msgid "Identifier"
-msgstr ""
+msgstr "Identifikators"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:89
 #, kde-format
 msgid "A name for this ssh entry"
-msgstr ""
+msgstr "SSH ieraksta nosaukums"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
 #: plugins/SSHManager/sshwidget.ui:92
 #, kde-format
 msgid "The name of this entry on the list"
-msgstr ""
+msgstr "Saraksta ieraksta nosaukums"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/SSHManager/sshwidget.ui:99
 #, kde-format
 msgid "SSH Hostname"
-msgstr ""
+msgstr "SSH resursdators"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, hostname)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, hostname)
 #: plugins/SSHManager/sshwidget.ui:106 plugins/SSHManager/sshwidget.ui:109
-#, fuzzy, kde-format
-#| msgid "Change the shape of the cursor"
+#, kde-format
 msgid "The hostname of the server"
-msgstr "Mainīt kursora formu"
+msgstr "Servera resursdatora nosaukums"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: plugins/SSHManager/sshwidget.ui:116
 #, kde-format
 msgid "Port"
-msgstr ""
+msgstr "Ports"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr ""
+msgstr "Servera ports, noklusējuma ports SSH savienojumiem ir 22"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
 #, kde-format
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:142
 #, kde-format
 msgid "The private key to be used for this connection"
-msgstr ""
+msgstr "Privātā atslēga šim savienojumam"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, sshkey)
 #: plugins/SSHManager/sshwidget.ui:148
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgid "The private key"
-msgstr "Termināļa iespējas"
+msgstr "Privātā atslēga"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:167
@@ -1908,51 +1759,48 @@ msgid ""
 "If this is set, we don't rely on the SSH key set above, but on the "
 "configuration on ~/.ssh/config"
 msgstr ""
+"Ja ir iestatīta, nepaļaujamies uz augstāk norādīto SSH atslēgu, bet to, kas "
+"ir norādīta konfigurācijā: ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useSshConfig)
 #: plugins/SSHManager/sshwidget.ui:170
 #, kde-format
 msgid "Use ~/.ssh/config for key"
-msgstr ""
+msgstr "Atslēgai izmantot ~/.ssh/config"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: plugins/SSHManager/sshwidget.ui:177
-#, fuzzy, kde-format
-#| msgid "User Name: %u"
+#, kde-format
 msgid "Username"
-msgstr "Lietotājvārds: %u"
+msgstr "Lietotājvārds"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:184
 #, kde-format
 msgid "The username for the connection"
-msgstr ""
+msgstr "Savienojuma lietotājvārds"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:187
-#, fuzzy, kde-format
-#| msgctxt "NAME OF TRANSLATORS"
-#| msgid "Your names"
+#, kde-format
 msgid "Your username"
-msgstr "Māris Nartišs, Viesturs Zariņš"
+msgstr "Jūsu lietotājvārds"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
 #: plugins/SSHManager/sshwidget.ui:194
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Mape"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
 #: plugins/SSHManager/sshwidget.ui:207
 #, kde-format
 msgid "For organizational purposes, this entry will be inside of this folder."
-msgstr ""
+msgstr "Kārtības labad šis ieraksts atradīsies šajā mapē."
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: plugins/SSHManager/sshwidget.ui:220
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgid "Profile"
 msgstr "Jauns profils"
 
@@ -1960,73 +1808,69 @@ msgstr "Jauns profils"
 #: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
-msgstr ""
+msgstr "Aktivizējamais profils, sākot SSH sesiju"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
 #: plugins/SSHManager/sshwidget.ui:271
 #, kde-format
 msgid "Add a new SSH Entry"
-msgstr ""
+msgstr "Pievienot jaunu SSH ierakstu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnDelete)
 #: plugins/SSHManager/sshwidget.ui:284
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Delete selected SSH entry"
-msgstr "Rediģēt izvēlēto profilu(s)"
+msgstr "Dzēst atlasīto SSH ierakstu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnEdit)
 #: plugins/SSHManager/sshwidget.ui:297
-#, fuzzy, kde-format
-#| msgid "Edit the selected profile(s)"
+#, kde-format
 msgid "Edit selected entry"
-msgstr "Rediģēt izvēlēto profilu(s)"
+msgstr "Rediģēt atlasīto ierakstu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:307
 #, kde-format
 msgid "Add new SSH Configuration"
-msgstr ""
+msgstr "Pievienot jaunu SSH konfigurāciju"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnCancel)
 #: plugins/SSHManager/sshwidget.ui:317
 #, kde-format
 msgid "Cancel Add or Edit"
-msgstr ""
+msgstr "Atcelt pievienošanu vai rediģēšanu"
 
 #: pluginsystem/PluginManager.cpp:70
 #, kde-format
 msgid "No plugins available"
-msgstr ""
+msgstr "Nav pieejamu spraudņu"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PrintOptions)
 #. i18n: ectx: property (title), widget (QGroupBox, OutputOptions)
 #: PrintOptions.ui:14 PrintOptions.ui:20
-#, fuzzy, kde-format
-#| msgctxt "@action:button Display options menu"
-#| msgid "Options"
+#, kde-format
 msgid "Output Options"
-msgstr "Opcijas"
+msgstr "Izvades opcijas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
 #: PrintOptions.ui:39 settings/konsole.kcfg:175
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
-msgstr ""
+msgstr "Printerim &draudzīgs režīms (melns teksts bez fona)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
 #: PrintOptions.ui:46 settings/konsole.kcfg:179
 #, kde-format
 msgid "&Scale output"
-msgstr ""
+msgstr "&Mērogot izvadi"
 
 #: profile/Profile.cpp:263
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Iebūvēts"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
@@ -2034,32 +1878,27 @@ msgid "Default profile"
 msgstr "Noklusētais profils"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgid "Edit Profile \"%1\""
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Rediģēt profilu “%1”"
+msgstr "Profils „%1“"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
-msgstr ""
+msgstr "„Konsole“ nav piešķirtas tiesības saglabāt profilu „%1“"
 
 #: profile/ProfileModel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for color names"
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Profile name"
 msgid "Name"
 msgstr "Nosaukums"
 
 #: profile/ProfileModel.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile shortcut text"
-#| msgid "Shortcut"
+#, kde-format
 msgctxt "@title:column Profile keyboard shortcut"
 msgid "Shortcut"
-msgstr "Īsceļš"
+msgstr "Saīsne"
 
 #: profile/ProfileModel.cpp:80
 #, kde-format
@@ -2067,42 +1906,40 @@ msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr ""
+msgstr " [tikai lasāms]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "Ie&statīt kā noklusēto"
+msgstr " [noklusējums]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Built-in profile is always available"
-msgstr ""
+msgstr "Iebūvētais profils ir redzams vienmēr"
 
 #: profile/ProfileModel.cpp:111
-#, fuzzy, kde-format
-#| msgid "Double click to change shortcut"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Double click to change shortcut"
-msgstr "Veiciet dubultklikšķi, lai mainītu īsceļu"
+msgstr "Dubultklikšķis, lai mainītu saīsni"
 
 #: RenameTabDialog.cpp:25
 #, kde-format
 msgid "Tab Properties"
-msgstr ""
+msgstr "Cilnes īpašības"
 
 #: SaveHistoryTask.cpp:71
 #, kde-format
 msgid "Save Output From %1"
-msgstr "Saglabāt izvadi no %1"
+msgstr "Saglabāt izvadi no „%1“"
 
 #: SaveHistoryTask.cpp:83
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
-msgstr "%1 ir nederīgs URL, nevarēja saglabāt izvadi."
+msgstr "„%1“ ir nederīga URL adrese. Izvadi nevar saglabāt."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2136,7 +1973,7 @@ msgstr "Zils uz melna"
 #: schemas.cpp:5
 #, kde-format
 msgid "Breeze"
-msgstr ""
+msgstr "„Breeze“"
 
 #: schemas.cpp:6
 #, kde-format
@@ -2151,7 +1988,7 @@ msgstr "Zaļš uz melna"
 #: schemas.cpp:8
 #, kde-format
 msgid "Linux Colors"
-msgstr "Linux krāsas"
+msgstr "„Linux“ krāsas"
 
 #: schemas.cpp:9
 #, kde-format
@@ -2164,10 +2001,9 @@ msgid "Solarized"
 msgstr "Solarizēts"
 
 #: schemas.cpp:11
-#, fuzzy, kde-format
-#| msgid "Solarized"
+#, kde-format
 msgid "Solarized Light"
-msgstr "Solarizēts"
+msgstr "Solarizēts gaišs"
 
 #: schemas.cpp:12
 #, kde-format
@@ -2177,28 +2013,27 @@ msgstr "Balts uz melna"
 #: schemas.cpp:13
 #, kde-format
 msgid "Default (XFree 4)"
-msgstr "Noklusējuma (XFree 4)"
+msgstr "Noklusējuma („XFree 4“)"
 
 #: schemas.cpp:14
 #, kde-format
 msgid "Linux console"
-msgstr "Linux konsole"
+msgstr "„Linux“ konsole"
 
 #: schemas.cpp:15
 #, kde-format
 msgid "macOS"
-msgstr ""
+msgstr "„macOS“"
 
 #: schemas.cpp:16
 #, kde-format
 msgid "Solaris console"
-msgstr "Solaris konsole"
+msgstr "„Solaris“ konsole"
 
 #: session/Session.cpp:106
-#, fuzzy, kde-format
-#| msgid "Bell in session '%1'"
+#, kde-format
 msgid "Bell in '%1' (Session '%2')"
-msgstr "Zvans sesijā “%1”"
+msgstr "Zvans „%1“ (sesija „%2“)"
 
 #: session/Session.cpp:413
 #, kde-format
@@ -2222,28 +2057,24 @@ msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
-"Neizdevās atrast “%1”, tā vietā palaiž “%2”. Lūdzu, pārbaudiet sava profila "
-"iestatījumus."
+"Neizdevās atrast „%1“, tā vietā palaiž „%2“. Pārbaudiet profila iestatījumus."
 
 #: session/Session.cpp:587
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
-msgstr "Neizdevās palaist programmu “%1” ar parametriem “%2”."
+msgstr "Neizdevās palaist programmu „%1“ ar parametriem „%2“."
 
 #: session/Session.cpp:735
-#, fuzzy, kde-format
-#| msgid "Silence in session '%1'"
+#, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "Klusums sesijā “%1”"
+msgstr "Klusums „%1“ (sesija „%2“)"
 
 #: session/Session.cpp:736 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1813
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Window"
+#, kde-format
 msgid "Show session"
-msgstr "Aizvērt logu"
+msgstr "Parādīt sesiju"
 
 #: session/Session.cpp:1020
 #, kde-format
@@ -2253,6 +2084,10 @@ msgid ""
 "methods can be changed to internal use only by re-compiling Konsole. <p>This "
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
+"Tikko ir izmantota „D-Bus“ metode „sendText/runCommand“. Šo metožu publiska "
+"atļaušana rada drošības riskus. Ja nepieciešams, šīs metodes vara nomainīt "
+"tikai iekšējai lietošanai, pārkompilējot „Konsole“.<p>Šis brīdinājums šajā "
+"„Konsole“ instancē būs redzams tikai vienu reizi.</p>"
 
 #: session/Session.cpp:1060
 #, kde-format
@@ -2263,43 +2098,42 @@ msgstr "Pabeigts"
 #: session/Session.cpp:1074 session/Session.cpp:1090
 #, kde-format
 msgid "Program '%1' crashed."
-msgstr "Programma “%1” avarēja."
+msgstr "Programma „%1“ avarēja."
 
 #: session/Session.cpp:1076
 #, kde-format
 msgid "Program '%1' exited with status %2."
-msgstr "Programma “%1” beidza darbu ar statusu %2."
+msgstr "Programma „%1“ beidza darbu ar statusu „%2“."
 
 #: session/Session.cpp:1602
 #, kde-format
 msgid "ZModem Progress"
-msgstr "ZModema progress"
+msgstr "„ZModem“ progress"
 
 #: session/Session.cpp:2071
-#, fuzzy, kde-format
-#| msgid "Activity in session '%1'"
+#, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "Aktivitāte sesijā “%1”"
+msgstr "Aktivitāte „%1“ (sesija „%2“)"
 
 #: session/SessionController.cpp:139
 #, kde-format
 msgid "Konsole"
-msgstr "Konsole"
+msgstr "„Konsole“"
 
 #: session/SessionController.cpp:353
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
-msgstr ""
+msgstr "Process „%1“ ir beidzis darboties sesijā „%2“"
 
 #: session/SessionController.cpp:436
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
-msgstr "Konsole nemāk atvērt šo grāmatzīmi: "
+msgstr "„Konsole“ neprot atvērt grāmatzīmi: "
 
 #: session/SessionController.cpp:515
 #, kde-format
 msgid "Search for '%1' with"
-msgstr "Meklēt “%1” ar"
+msgstr "Meklēt „%1“ ar"
 
 #: session/SessionController.cpp:531
 #, kde-format
@@ -2307,11 +2141,9 @@ msgid "Configure Web Shortcuts..."
 msgstr "Konfigurēt tīmekļa saīsnes..."
 
 #: session/SessionController.cpp:641
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Close Window"
+#, kde-format
 msgid "&Close Session"
-msgstr "Aizvērt logu"
+msgstr "&Aizvērt sesiju"
 
 #: session/SessionController.cpp:648
 #, kde-format
@@ -2321,38 +2153,32 @@ msgstr "Atvērt datņu pārvaldnieku"
 #: session/SessionController.cpp:660
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Kopēt"
 
 #: session/SessionController.cpp:667
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Sadalīt skatu kreisajā/labajā"
 
 #: session/SessionController.cpp:672
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Sadalīt skatu augšējā/apakšējā"
 
 #: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Kopēt izņēmumu uzvednes"
 
 #: session/SessionController.cpp:682
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy user input"
-msgstr "Kopēt ievadi"
+msgstr "Kopēt lietotāja ievadi"
 
 #: session/SessionController.cpp:688
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy command output"
-msgstr "Kopēt ievadi"
+msgstr "Kopēt komandu izvadi"
 
 #: session/SessionController.cpp:703
 #, kde-format
@@ -2367,19 +2193,17 @@ msgstr "Tīmekļa meklēšana"
 #: session/SessionController.cpp:716
 #, kde-format
 msgid "&Select All"
-msgstr "Izvēlētie&s visu"
+msgstr "&Atlasīt visu"
 
 #: session/SessionController.cpp:720
-#, fuzzy, kde-format
-#| msgid "Select Text"
+#, kde-format
 msgid "Select &Mode"
-msgstr "Izvēlēties tekstu"
+msgstr "Atlasīšanas &režīms"
 
 #: session/SessionController.cpp:725
-#, fuzzy, kde-format
-#| msgid "Select Text"
+#, kde-format
 msgid "Select &Line"
-msgstr "Izvēlēties tekstu"
+msgstr "A&tlasīt rindu"
 
 #: session/SessionController.cpp:728
 #, kde-format
@@ -2389,22 +2213,22 @@ msgstr "S&aglabāt izvadi kā..."
 #: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
-msgstr ""
+msgstr "&Drukāt ekrānu..."
 
 #: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "Regulēt atpakaļriti..."
+msgstr "Pielāgot ritināšanas atmiņu..."
 
 #: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
-msgstr "Attīrīt atpakaļriti"
+msgstr "Notīrīt ritināšanas atmiņu"
 
 #: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "Attīrīt atpakaļriti un atstatīt"
+msgstr "Notīrīt ritināšanas atmiņu un atstatīt"
 
 #: session/SessionController.cpp:755
 #, kde-format
@@ -2420,29 +2244,28 @@ msgstr "I&estatīt kodējumu"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
-msgstr ""
+msgstr "Atļaut peles izsekošanu"
 
 #: session/SessionController.cpp:811
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
-msgstr ""
+msgstr "Tikai lasāma"
 
 #: session/SessionController.cpp:822
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "Pā&rdēvēt cilni..."
+msgstr "&Konfigurēt vai pārsaukt cilni..."
 
 #: session/SessionController.cpp:828
 #, kde-format
 msgid "&All Tabs in Current Window"
-msgstr "Vis&as cilnes aktīvajā logā"
+msgstr "&Visas cilnes pašreizējā logā"
 
 #: session/SessionController.cpp:835
 #, kde-format
 msgid "&Select Tabs..."
-msgstr "Izvēlētie&s cilnes..."
+msgstr "&Atlasīt cilnes..."
 
 #: session/SessionController.cpp:841
 #, kde-format
@@ -2458,34 +2281,32 @@ msgstr "Kopēt ievadi uz"
 #: session/SessionController.cpp:857
 #, kde-format
 msgid "&ZModem Upload..."
-msgstr "&ZModem augšupielāde..."
+msgstr "„&ZModem“ augšupielāde..."
 
 #: session/SessionController.cpp:862
 #, kde-format
 msgid "One-Shot Monitors"
-msgstr ""
+msgstr "Vienreizlietojami pārraugi"
 
 #: session/SessionController.cpp:867
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Pārraudzīt &aktivitāti"
+msgstr "&Uzvednes pārraugs"
 
 #: session/SessionController.cpp:874
 #, kde-format
 msgid "Monitor for &Activity"
-msgstr "Pārraudzīt &aktivitāti"
+msgstr "&Aktivitātes pārraugs"
 
 #: session/SessionController.cpp:880
 #, kde-format
 msgid "Monitor for &Silence"
-msgstr "Pārraudzīt klu&sēšanu"
+msgstr "&Klusuma pārraugs"
 
 #: session/SessionController.cpp:886
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "Pārraudzīt &aktivitāti"
+msgstr "Procesa pabeigšanas pārraugs"
 
 #: session/SessionController.cpp:893
 #, kde-format
@@ -2500,61 +2321,57 @@ msgstr "Samazināt fontu"
 #: session/SessionController.cpp:906
 #, kde-format
 msgid "Reset Font Size"
-msgstr ""
+msgstr "Atiestatīt fonta izmēru"
 
 #: session/SessionController.cpp:912
 #, kde-format
 msgid "Send Signal"
-msgstr ""
+msgstr "Nosūtīt signālu"
 
 #: session/SessionController.cpp:916
 #, kde-format
 msgid "&Suspend Task"
-msgstr ""
+msgstr "&Aizturēt uzdevumu"
 
 #: session/SessionController.cpp:921
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Clone Tab"
+#, kde-format
 msgid "&Continue Task"
-msgstr "Klonēt &cilni"
+msgstr "&Turpināt uzdevumu"
 
 #: session/SessionController.cpp:926
 #, kde-format
 msgid "&Hangup"
-msgstr ""
+msgstr "&Nolikt"
 
 #: session/SessionController.cpp:931
 #, kde-format
 msgid "&Interrupt Task"
-msgstr ""
+msgstr "&Pārtraukt uzdevumu"
 
 #: session/SessionController.cpp:936
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgid "&Terminate Task"
-msgstr "Termināļa iespējas"
+msgstr "&Izbeigt uzdevumu"
 
 #: session/SessionController.cpp:941
 #, kde-format
 msgid "&Kill Task"
-msgstr ""
+msgstr "&Nobeigt uzdevumu"
 
 #: session/SessionController.cpp:946
 #, kde-format
 msgid "User Signal &1"
-msgstr ""
+msgstr "Lietotāja signāls &1"
 
 #: session/SessionController.cpp:951
 #, kde-format
 msgid "User Signal &2"
-msgstr ""
+msgstr "Lietotāja signāls &2"
 
 #: session/SessionController.cpp:969
-#, fuzzy, kde-format
-#| msgid "&New Profile..."
+#, kde-format
 msgid "Create New Profile..."
-msgstr "Jau&ns profils..."
+msgstr "Izveidot jaunu profilu..."
 
 #: session/SessionController.cpp:971
 #, kde-format
@@ -2573,7 +2390,7 @@ msgstr "Šajā sesijā darbojas programma. Vai tiešām vēlaties to aizvērt?"
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
-msgstr "Šajā sesijā darbojas programma “%1”. Vai tiešām vēlaties to aizvērt?"
+msgstr "Šajā sesijā darbojas programma „%1“. Vai tiešām vēlaties to aizvērt?"
 
 #: session/SessionController.cpp:1099 session/SessionController.cpp:1134
 #, kde-format
@@ -2581,11 +2398,10 @@ msgid "Confirm Close"
 msgstr "Apstiprināt aizvēršanu"
 
 #: session/SessionController.cpp:1100
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
-msgstr "Aizvērt &cilni"
+msgstr "Aizvērt programmu"
 
 #: session/SessionController.cpp:1123
 #, kde-format
@@ -2602,30 +2418,29 @@ msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"Programma “%1” šajā sesijā neaizveras. Vai tiešām vēlaties to nebeigt "
+"Programma „%1“ šajā sesijā neaizveras. Vai tiešām vēlaties to nobeigt "
 "piespiedu kārtā?"
 
 #: session/SessionController.cpp:1135
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
-msgstr ""
+msgstr "Nobeigt programmu"
 
 #: session/SessionController.cpp:1812
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Čaulas uzvedne ir parādīta sesijā „%1“"
 
 #: session/SessionController.cpp:2005
 #, kde-format
 msgid "Open Current Folder With"
-msgstr ""
+msgstr "Atvērt pašreizējo mapi ar"
 
 #: session/SessionController.cpp:2075
-#, fuzzy, kde-format
-#| msgid "Save ZModem Download to..."
+#, kde-format
 msgid "Save ZModem Download to..."
-msgstr "Saglabāt ZModem lejupielādi uz..."
+msgstr "Saglabāt „ZModem“ lejupielādi..."
 
 #: session/SessionController.cpp:2085
 #, kde-format
@@ -2634,15 +2449,15 @@ msgid ""
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 msgstr ""
-"<p>Atklāts ZModem datņu pārsūtīšanas mēģinājums, bet netika atrasta derīga "
-"ZModem programmatūra šajā datorā.</p><p>Varbūt ir jāinstalē 'rzsz' vai "
-"'lrzsz' pakotne.</p>"
+"<p>Konstatēts „ZModem“ datņu pārsūtīšanas mēģinājums, bet sistēmā nav "
+"atrasta derīga „ZModem“ programmatūra.</p><p>Iespējams, ir jāinstalē „rzsz“ "
+"vai „lrzsz“ pakotne.</p>"
 
 #: session/SessionController.cpp:2095
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
-msgstr "<p>Aktīvajā sesijā jau tiek veikta viena ZModem datņu pārsūtīšana.</p>"
+msgstr "<p>Aktīvajā sesijā jau notiek „ZModem“ datņu pārsūtīšana.</p>"
 
 #: session/SessionController.cpp:2108
 #, kde-format
@@ -2650,13 +2465,13 @@ msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
-"<p>Šajā datorā netika atrasta derīga ZModem programmatūra.</p><p>Varbūt ir "
-"jāinstalē 'rzsz' vai 'lrzsz' pakotne.</p>"
+"<p>Šajā datorā nav atrasta piemērota „ZModem“ programmatūra.</"
+"p><p>Iespējams, jāinstalē „rzsz“ vai „lrzsz“ pakotne.</p>"
 
 #: session/SessionController.cpp:2113
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr "Izvēlieties datnes, ko augšupielādēt ar ZModem"
+msgstr "Izvēlieties datnes, ko augšupielādēt ar „ZModem“"
 
 #: session/SessionListModel.cpp:89
 #, kde-format
@@ -2671,60 +2486,57 @@ msgid "Title"
 msgstr "Virsraksts"
 
 #: settings/ConfigurationDialog.cpp:31
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgctxt "@title:window"
 msgid "Configure"
-msgstr "Apstiprināt aizvēršanu"
+msgstr "Konfigurēt"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/GeneralSettings.ui:43
-#, fuzzy, kde-format
-#| msgid "Web Search"
+#, kde-format
 msgctxt "@item:intext Search options"
 msgid "Search:"
-msgstr "Tīmekļa meklēšana"
+msgstr "Meklēt:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:56 settings/konsole.kcfg:22
 #, kde-format
 msgid "Enable menu accelerators"
-msgstr "Aktivēt izvēļņu paātrinātājus"
+msgstr "Ieslēgt izvēļņu paātrinātājus"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_RememberWindowSize)
 #: settings/GeneralSettings.ui:69
 #, kde-format
 msgid "If enabled, profile settings will be ignored"
-msgstr ""
+msgstr "Ja ieslēgts, profila iestatījumi tiks ignorēti"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberWindowSize)
 #: settings/GeneralSettings.ui:72
 #, kde-format
 msgid "Remember window size"
-msgstr ""
+msgstr "Atcerēties loga izmēru"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
-msgstr "Rādīt loga virsrakstu virsraksta joslu"
+msgstr "Virsrakstjoslā rādīt loga virsrakstu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:92 settings/konsole.kcfg:13
 #, kde-format
 msgid "Focus terminals when the mouse pointer is moved over them"
-msgstr ""
+msgstr "Pārvietot fokusu uz termināļiem, virs kuriem atrodas peles kursors"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchRegExpression)
 #. i18n: ectx: label, entry (SearchRegExpression), group (SearchSettings)
 #: settings/GeneralSettings.ui:105 settings/konsole.kcfg:69
-#, fuzzy, kde-format
-#| msgid "Match regular expression"
+#, kde-format
 msgid "Match using regular expressions"
-msgstr "Meklēt regulāro izteiksmi"
+msgstr "Meklēt atbilsmi, izmantojot regulārās izteiksmes"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
@@ -2732,273 +2544,264 @@ msgstr "Meklēt regulāro izteiksmi"
 #, kde-format
 msgid "When launching Konsole re-use existing process if possible"
 msgstr ""
+"Palaižot „Konsole“, ja iespējams, atkārtoti izmantot eksistējošos procesus"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: label, entry (UseSingleInstance), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:121 settings/konsole.kcfg:32
 #, kde-format
 msgid "Run all Konsole windows in a single process"
-msgstr ""
+msgstr "Palaist visus „Konsole“ logus vienā procesā"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchHighlightMatches)
 #: settings/GeneralSettings.ui:134
-#, fuzzy, kde-format
-#| msgid "Highlight all matches"
+#, kde-format
 msgid "Highlight all matches"
 msgstr "Izcelt visas atbilstības"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/GeneralSettings.ui:163 settings/konsole.kcfg:65
-#, fuzzy, kde-format
-#| msgid "Sets whether the search is case sensitive"
+#, kde-format
 msgid "Sets whether the search is case sensitive"
-msgstr "Nosaka, vai meklēšana ņems vērā burtu reģistru"
+msgstr "Nosaka, vai meklēšanā ir nozīme burtu lielumam"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #: settings/GeneralSettings.ui:166
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgid "Case sensitive"
-msgstr "Reģistrjutīgs"
+msgstr "Reģistrjutīga"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:173 settings/konsole.kcfg:9
 #, kde-format
 msgid "Remove window titlebar and frame"
-msgstr ""
+msgstr "Noņemt loga virsrakstjoslu un rāmi"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/GeneralSettings.ui:196
 #, kde-format
 msgid "Process and window:"
-msgstr ""
+msgstr "Process un logs:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:206
 #, kde-format
 msgid "Notifications:"
-msgstr ""
+msgstr "Paziņojumi:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:224
 #, kde-format
 msgid "All dialogs will be shown again"
-msgstr ""
+msgstr "Visi lodziņi tiks parādīti atkal"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:227
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
-msgstr ""
+msgstr "Ieslēgt visus „Nejautāt atkal“ ziņojumus"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
 #: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether search should start from the bottom"
-msgstr ""
+msgstr "Nosaka, vai meklēšanai jāsākas no beigām"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
 #: settings/GeneralSettings.ui:258 settings/konsole.kcfg:78
 #, kde-format
 msgid "Search backwards"
-msgstr ""
+msgstr "Meklēt no beigām"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
-#, fuzzy, kde-format
-#| msgid "Show window title on the titlebar"
+#, kde-format
 msgid "Show window title set by escape sequence on the titlebar"
-msgstr "Rādīt loga virsrakstu virsraksta joslu"
+msgstr "Rāda loga virsrakstu, ko nosaka virsrakstjoslas iziešanas sekvence"
 
 #. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
 #: settings/konsole.kcfg:23
 #, kde-format
 msgid "Allow users to access top menu through Alt+Key combination"
 msgstr ""
+"Ļauj lietotājam piekļūt augšējai izvēlnei ar „Alt+Taustiņš“ kombināciju"
 
 #. i18n: ectx: label, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:27
-#, fuzzy, kde-format
-#| msgid "Save window size and position on exit"
+#, kde-format
 msgid "Use current window size on next startup"
-msgstr "Izejot saglabāt loga izmēru un novietojumu"
+msgstr "Nākamajā palaišanās reizē izmantot pašreizējo loga izmēru"
 
 #. i18n: ectx: tooltip, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:28
-#, fuzzy, kde-format
-#| msgid "Save window size and position on exit"
+#, kde-format
 msgid "The window size will be saved upon exiting Konsole"
-msgstr "Izejot saglabāt loga izmēru un novietojumu"
+msgstr "Izejot no „Konsole“, sistēma saglabās loga izmēru"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:42
 #, kde-format
 msgid "Thumbnail Width"
-msgstr ""
+msgstr "Sīktēla platums"
 
 #. i18n: ectx: tooltip, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:43
 #, kde-format
 msgid "Sets the width of the thumbnail"
-msgstr ""
+msgstr "Nosaka sīktēla platumu"
 
 #. i18n: ectx: label, entry (ThumbnailShift), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailShift), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:47 settings/konsole.kcfg:48
 #, kde-format
 msgid "Use Shift to display a thumbnail"
-msgstr ""
+msgstr "Spiest „Shift“, lai parādītu sīktēlu"
 
 #. i18n: ectx: label, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailAlt), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:52 settings/konsole.kcfg:53
 #, kde-format
 msgid "Use Alt to display a thumbnail"
-msgstr ""
+msgstr "Spiest „Alt“, lai parādītu sīktēlu"
 
 #. i18n: ectx: label, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #. i18n: ectx: tooltip, entry (ThumbnailCtrl), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:57 settings/konsole.kcfg:58
 #, kde-format
 msgid "Use Ctrl to display a thumbnail"
-msgstr ""
+msgstr "Spiest „Ctrl“, lai parādītu sīktēlu"
 
 #. i18n: ectx: label, entry (SearchCaseSensitive), group (SearchSettings)
 #: settings/konsole.kcfg:64
-#, fuzzy, kde-format
-#| msgid "Sets whether the search is case sensitive"
+#, kde-format
 msgid "Search is case sensitive"
-msgstr "Nosaka, vai meklēšana ņems vērā burtu reģistru"
+msgstr "Meklēšana ir reģistrjutīga"
 
 #. i18n: ectx: label, entry (SearchHighlightMatches), group (SearchSettings)
 #: settings/konsole.kcfg:73
-#, fuzzy, kde-format
-#| msgid "Highlight all matches"
+#, kde-format
 msgid "Highlight all search matches"
-msgstr "Izcelt visas atbilstības"
+msgstr "Izcelt visas meklēšanas atbilstības"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
 #: settings/konsole.kcfg:74
-#, fuzzy, kde-format
-#| msgid "Sets whether matching text should be highlighted"
+#, kde-format
 msgid "Sets whether matching text should be highlighted"
-msgstr "Nosaka, vai atbilstības ir jāizceļ"
+msgstr "Nosaka, vai ir jāizceļ meklēšanai atbilstošais teksts"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr ""
+msgstr "Kontrolē to, vai atsevišķām cilnēm tiek izveidotas savas „cgroups“"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "Nosaka atmiņas izmantojuma līmeni, virs kuras tiek bremzēta darbība"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
 #: settings/konsole.kcfg:95 settings/konsole.kcfg:115
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
-msgstr ""
+msgstr "Kontrolēt pilnas ciļņu joslas redzamību"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
 #: settings/konsole.kcfg:104
 #, kde-format
 msgid "Control the size of the handle between panels"
-msgstr ""
+msgstr "Kontrolē tura starp paneļiem izmēru"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
 #: settings/konsole.kcfg:124
 #, kde-format
 msgid "Control the position of the tab bar"
-msgstr ""
+msgstr "Kontrolē ciļņu joslas pozīciju"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:132
 #, kde-format
 msgid "Control the visual style of the tab bar"
-msgstr ""
+msgstr "Kontrolē ciļņu joslas vizuālo stilu"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:136
-#, fuzzy, kde-format
-#| msgid "Use a custom, fixed color for the cursor"
+#, kde-format
 msgid "Use a user-defined .css file for the tab bar"
-msgstr "Lietot pielāgotu kursora krāsu"
+msgstr "Ciļņu joslai izmanto lietotāja definētu „.css“ datni"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
 #: settings/konsole.kcfg:140
 #, kde-format
 msgid "The .css file to use for the tab bar style"
-msgstr ""
+msgstr "Ciļņu joslas stilam izmantotā „.css“ datne"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
 #: settings/konsole.kcfg:144
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
-msgstr ""
+msgstr "Atļaut ciļņu aizvēršanu ar peles vidējo pogu"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
 #: settings/konsole.kcfg:148
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr ""
+msgstr "Kontrolēt „Jauna cilne“ pogas redzamību ciļņu joslā"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:152
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
-msgstr ""
+msgstr "Kontrolē to, vai būs redzama „Aizvērt cilni“ poga"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
 #: settings/konsole.kcfg:161
 #, kde-format
 msgid "Control where to put the new tab"
-msgstr ""
+msgstr "Kontrolē jaunas cilnes novietojumu"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
 #: settings/konsole.kcfg:169
 #, kde-format
 msgid "Expand the tab widths"
-msgstr ""
+msgstr "Palielināt ciļņu platumu"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
 #: settings/konsole.kcfg:185
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr ""
+msgstr "Ritināšanas atmiņas datnēm izmantot visā sistēmā pieejamas mapes vietu"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:189
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr ""
+msgstr "Ritināšanas atmiņas datnēm izmantot lietotāja mapes vietu"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:193
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr ""
+msgstr "Ritināšanas atmiņas datnēm izmantot noteiktas mapes vietu"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:197
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr ""
+msgstr "Ritināšanas atmiņas datnēm izmantot šo mapi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Ciļņu pārraudzība"
+msgstr "Ieslēgt atmiņas pārraudzību:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -3012,18 +2815,27 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Izmaiņas stāsies spēkā pēc pārstartēšanas. Ja ieslēgts, tad „Konsole“ "
+"programmai,\n"
+"ilgstoši pārsniedzot noteiktu atmiņas lietojuma vērtību, „systemd-oomd“ "
+"serviss\n"
+"aizvērs cilni(-es), kas satur atmiņu intensīvu(-us) procesu(-us). Piezīme: "
+"ieslēgšana\n"
+"var izraisīt jūtamākus palēninājumus augstas atmiņas patērēšanas brīžos, "
+"savukārt\n"
+"ārkārtīgi zemu vērtību norādīšana var novest pie „Konsole“ nobeigšanas."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Atmiņas limits:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3036,67 +2848,66 @@ msgid ""
 "format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
 "a change to how these are handled.</body></html>"
 msgstr ""
+"<html><head/><body><p>Programmas, kas izmanto „KonsolePart“ dalās ar "
+"profiliem.</p><p>Tās nedalās ar „Konsole“ vai citu programmu:"
+"<ul><li>noklusējuma profilu</li><li>izvēlnē redzamo</li><li>saīsnēm</li></"
+"ul></p><p>Droši izveidojiet „Konsole“ <a href=\"https://bugs.kde.org/"
+"enter_bug.cgi?format=guided&product=konsole&component=kpart\">kļūdas "
+"ziņojumu</a>, ja vēlaties mainīt to, kā tas notiek.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:54
-#, fuzzy, kde-format
-#| msgid "Create a new profile based upon the selected profile"
+#, kde-format
 msgid "Create a new profile based on the selected profile"
-msgstr "Izveidot jaunu profilu, par pamatu ņemot izvēlēto profilu"
+msgstr "Izveidot jaunu profilu, par pamatu ņemot atlasīto profilu"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:57
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "&New..."
-msgstr "Jauna..."
+msgstr "&Jauns..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:67
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
-msgstr "Iestatīt izvēlēto profilu kā noklusēto jaunām termināļa sesijām"
+msgstr ""
+"Rediģēt atlasīto profilu (šī poga ir izslēgta tikai lasāmiem profiliem)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:70
-#, fuzzy, kde-format
-#| msgid "Edit..."
+#, kde-format
 msgid "&Edit..."
-msgstr "Rediģēt..."
+msgstr "&Rediģēt..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:80
-#, fuzzy, kde-format
-#| msgid "Delete the selected profile(s)"
+#, kde-format
 msgid "Delete the selected profile"
-msgstr "Dzēst izvēlētos profilu(s)"
+msgstr "Dzēst izvēlētos profilu"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:83
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "&Remove"
-msgstr "Izņemt"
+msgstr "&Noņemt"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
-msgstr "Iestatīt izvēlēto profilu kā noklusēto jaunām termināļa sesijām"
+msgstr "Iestatīt atlasīto profilu kā noklusēto jaunām termināļa sesijām"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:96
 #, kde-format
 msgid "&Set as Default"
-msgstr "Ie&statīt kā noklusēto"
+msgstr "&Iestatīt kā noklusēto"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Appearance"
 msgstr "Izskats"
@@ -3105,189 +2916,168 @@ msgstr "Izskats"
 #: settings/TabBarSettings.ui:53
 #, kde-format
 msgid "Show:"
-msgstr ""
+msgstr "Parādīt:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
 #: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
-msgstr ""
+msgstr "Kad vajadzīgs"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
 #: settings/TabBarSettings.ui:73
 #, kde-format
 msgid "Alwa&ys"
-msgstr ""
+msgstr "&Vienmēr"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
 #: settings/TabBarSettings.ui:83
 #, kde-format
 msgid "&Never"
-msgstr ""
+msgstr "&Nekad"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
 #: settings/TabBarSettings.ui:109
-#, fuzzy, kde-format
-#| msgid "Description:"
+#, kde-format
 msgid "Position:"
-msgstr "Apraksts:"
+msgstr "Novietojums:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
 #: settings/TabBarSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgid "Above terminal area"
 msgstr "Virs termināļa lauka"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
 #: settings/TabBarSettings.ui:129
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
+#, kde-format
 msgid "Be&low terminal area"
-msgstr "Zem termināļa lauka"
+msgstr "&Zem termināļa lauka"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:155
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgid "Show Close Tab button:"
-msgstr "Aizvērt &cilni"
+msgstr "Rādīt cilnes aizvēršanas pogu:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:165
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgid "&On each tab"
-msgstr "At&dalīt cilni"
+msgstr "&Katrā cilnē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgid "On &the tab bar"
-msgstr "At&dalīt cilni"
+msgstr "&Ciļņu joslā"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr "&Nevienu"
+msgstr "Nerādīt"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
 #: settings/TabBarSettings.ui:211 settings/TabBarSettings.ui:344
-#, fuzzy, kde-format
-#| msgid "Miscellaneous"
+#, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
-msgstr "Dažādi"
+msgstr "Dažādi:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
 #: settings/TabBarSettings.ui:221
-#, fuzzy, kde-format
-#| msgid "Show 'New Tab' and 'Close Tab' buttons"
+#, kde-format
 msgid "Show 'New Tab' button"
-msgstr "Rādīt ciļņu joslā pogas “Jauna cilne” un “Aizvērt cilni”"
+msgstr "Rādīt „Jauna cilne“ pogu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
 #: settings/TabBarSettings.ui:228
 #, kde-format
 msgid "Expand individual tab widths to full window"
-msgstr ""
+msgstr "Atsevišķu ciļņu platumu izplest līdz visam logam"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:235
-#, fuzzy, kde-format
-#| msgid "Use a custom, fixed color for the cursor"
+#, kde-format
 msgid "Use user-defined stylesheet:"
-msgstr "Lietot pielāgotu kursora krāsu"
+msgstr "Izmantot lietotāja noteiktu stila lapu:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
 #: settings/TabBarSettings.ui:261
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
-msgstr ""
+msgstr "(nav)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
 #: settings/TabBarSettings.ui:284
-#, fuzzy, kde-format
-#| msgid "Behavior"
+#, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "Uzvedība"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
 #: settings/TabBarSettings.ui:298
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Create new tab"
+#, kde-format
 msgid "Put new tabs:"
-msgstr "Izveidot jaunu cilni"
+msgstr "Novietot jaunas cilnes:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
 #: settings/TabBarSettings.ui:308
 #, kde-format
 msgid "At &the end"
-msgstr ""
+msgstr "&Beigās"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
 #: settings/TabBarSettings.ui:318
-#, fuzzy, kde-format
-#| msgid "Close Current Tab"
+#, kde-format
 msgid "After current &tab"
-msgstr "Aizvērt aktīvo cilni"
+msgstr "&Pēc pašreizējās cilnes"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
 #: settings/TabBarSettings.ui:354
 #, kde-format
 msgid "Close tab on middle-click"
-msgstr ""
+msgstr "Aizvērt cilni ar peles vidējo pogu"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
 #: settings/TabBarSettings.ui:377
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgid "Splits"
-msgstr "Sadalīt skatu"
+msgstr "Sadalītie skati"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/TabBarSettings.ui:383
-#, fuzzy, kde-format
-#| msgid "Show menubar by default"
+#, kde-format
 msgid "Show Header:"
-msgstr "Pēc noklusējuma rādīt izvēļņu joslu"
+msgstr "Rādīt galveni:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:390
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
-msgstr ""
+msgstr "Kad vajadzīgs"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
 #: settings/TabBarSettings.ui:400
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
-msgstr ""
+msgstr "Nekad"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "Drag Handle Size:"
-msgstr ""
+msgstr "Vilkšanas tura izmērs:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
 #: settings/TabBarSettings.ui:436
-#, fuzzy, kde-format
-#| msgctxt "@item:inrange Minimum Size"
-#| msgid "Small"
+#, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Mazs"
@@ -3297,13 +3087,11 @@ msgstr "Mazs"
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
-msgstr ""
+msgstr "Vidējs"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
 #: settings/TabBarSettings.ui:456
-#, fuzzy, kde-format
-#| msgctxt "@item:inrange Maximum Size"
-#| msgid "Large"
+#, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Liels"
@@ -3313,7 +3101,7 @@ msgstr "Liels"
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
-msgstr ""
+msgstr "Vienmēr"
 
 #: settings/TemporaryFilesSettings.cpp:31
 #, kde-format
@@ -3321,7 +3109,7 @@ msgctxt ""
 "@option:radio File location; <filename>%1</filename>: path to directory "
 "placeholder"
 msgid "System temporary directory (%1)"
-msgstr ""
+msgstr "Sistēmas pagaidu mape („%1“)"
 
 #: settings/TemporaryFilesSettings.cpp:33
 #, kde-format
@@ -3329,33 +3117,32 @@ msgctxt ""
 "@option:radio File location; <filename>%1</filename>: path to directory "
 "placeholder"
 msgid "User cache directory (%1)"
-msgstr ""
+msgstr "Lietotāja kešatmiņas mape („%1“)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: settings/TemporaryFilesSettings.ui:25
-#, fuzzy, kde-format
-#| msgid "Tab bar position:"
+#, kde-format
 msgid "Scrollback file location:"
-msgstr "Ciļņu joslas novietojums:"
+msgstr "Ritināšanas atmiņas datnes vieta:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
 #: settings/TemporaryFilesSettings.ui:64
 #, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"
-msgstr ""
+msgstr "Pielāgota:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/ThumbnailsSettings.ui:17
 #, kde-format
 msgid "Size:"
-msgstr ""
+msgstr "Izmērs:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
 #: settings/ThumbnailsSettings.ui:24
 #, kde-format
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
@@ -3365,104 +3152,104 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Lai lietotu šo iespēju, profila iestatījumos "
+"ieslēdziet <span style=\" font-weight:600;\">Pele —&gt; Dažādi —&gt; "
+"Pasvītrot </span><span style=\" font-weight:600;\">datnes</span></p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
-#, fuzzy, kde-format
-#| msgctxt "@item"
-#| msgid "Activate Menu"
+#, kde-format
 msgid "Activation:"
-msgstr "Aktivizēt izvēlni"
+msgstr "Aktivizēšana:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: settings/ThumbnailsSettings.ui:63
 #, kde-format
 msgid "Mouse hover plus"
-msgstr ""
+msgstr "Peles kursora pārlikšana virs un"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
 #: settings/ThumbnailsSettings.ui:70
 #, kde-format
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
 #: settings/ThumbnailsSettings.ui:77
 #, kde-format
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
 #: settings/ThumbnailsSettings.ui:84
 #, kde-format
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
-#, fuzzy, kde-format
-#| msgid "Enable menu accelerators"
+#, kde-format
 msgid "Enable thumbnails generation"
-msgstr "Aktivēt izvēļņu paātrinātājus"
+msgstr "Ieslēgt sīktēlu ģenerēšanu"
 
 #: terminalDisplay/TerminalDisplay.cpp:661
 #, kde-format
 msgid "Size: %1 x %2"
-msgstr "Izmērs: %1 x %2"
+msgstr "Izmērs: %1 × %2"
 
 #: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Vai tiešām vēlaties ielīmēt %1 rakstzīmi?"
+msgstr[1] "Vai tiešām vēlaties ielīmēt %1 rakstzīmes?"
+msgstr[2] "Vai tiešām vēlaties ielīmēt %1 rakstzīmju?"
 
 #: terminalDisplay/TerminalDisplay.cpp:2251
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgid "Confirm Paste"
-msgstr "Apstiprināt aizvēršanu"
+msgstr "Apstiprināt ielīmēšanu"
 
 #: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
-msgstr ""
+msgstr "Teksta beigas/pārtraukums: varat iziet no aktīvā procesa"
 
 #: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
-msgstr ""
+msgstr "Nosūtīšanas beigas: varat iziet no aktīvā procesa"
 
 #: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
-msgstr ""
+msgstr "Zvans: mēģinās izdot dzirdamu brīdinājumu"
 
 #: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 #: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
-msgstr ""
+msgstr "Ierīces kontrole 3/XOFF: aiztur izvadi"
 
 #: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
-msgstr ""
+msgstr "Aizvietošana/aizturēšana: varat aizturēt aktīvo procesu"
 
 #: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
-msgstr ""
+msgstr "„Escape“: lietots termināļa stāvokļa manipulēšanai"
 
 #: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
-msgstr ""
+msgstr "Datnes atdalītājs/iziešana: varat izslēgt pašreizējo procesu"
 
 #: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
@@ -3470,52 +3257,48 @@ msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
+"Teksts, kuru grasāties ielīmēt, satur neredzamas kontroles rakstzīmes. Vai "
+"vēlaties tā izfiltrēt laukā?"
 
 #: terminalDisplay/TerminalDisplay.cpp:2317
-#, fuzzy, kde-format
-#| msgid "Confirm Close"
+#, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
-msgstr "Apstiprināt aizvēršanu"
+msgstr "Apstiprināt ielīmēšanu"
 
 #: terminalDisplay/TerminalDisplay.cpp:2318
-#, fuzzy, kde-format
-#| msgid "Set cursor color to match current character"
+#, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
-msgstr "Iestatīt, lai kursora krāsa būtu tāda kā pašreizējam simbolam."
+msgstr "Ielīmēt &bez kontroles rakstzīmēm"
 
 #: terminalDisplay/TerminalDisplay.cpp:2319
-#, fuzzy, kde-format
-#| msgid "Paste Selection"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
-msgstr "Ielīmēt izvēlēto"
+msgstr "&Ielīmēt visu"
 
 #: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
-msgstr ""
+msgstr "&Atcelt"
 
 #: terminalDisplay/TerminalDisplay.cpp:2551
-#, fuzzy, kde-format
-#| msgid ""
-#| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
-#| "\">suspended</a> by pressing Ctrl+S.  Press <b>Ctrl+Q</b> to resume.</qt>"
+#, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
 "Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
 "b> to resume.</qt>"
 msgstr ""
-"<qt>Datu izvadīšana tika <a href=\"http://en.wikipedia.org/wiki/XON"
-"\">apturēta</a>, nospiežot Ctrl+S. Nospiediet <b>Ctrl+Q</b>, lai atsāktu "
-"izvadi.</qt>"
+"<qt>Izvade ir <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
+"\">aizturēta</a>, nospiežot „Ctrl+S“. Nospiediet <b>Ctrl+Q</b>, lai "
+"turpinātu.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
-msgstr ""
+msgstr "Šis terminālis ir tikai lasāmā režīmā"
 
 #: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
@@ -3528,8 +3311,7 @@ msgid "&Paste Location"
 msgstr "&Ielīmēt vietu"
 
 #: ViewManager.cpp:113
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Sadalīt skatu"
@@ -3547,54 +3329,46 @@ msgid "Split View Top/Bottom"
 msgstr "Sadalīt skatu augšējā/apakšējā"
 
 #: ViewManager.cpp:136
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Sadalīt skatu augšējā/apakšējā"
+msgstr "Sadalīt skatu automātiski"
 
 #: ViewManager.cpp:146
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "Sadalīt skatu kreisajā/labajā"
+msgstr "Sadalīt skatu kreisajā/labajā no nākamās cilnes"
 
 #: ViewManager.cpp:154
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "Sadalīt skatu augšējā/apakšējā"
+msgstr "Sadalīt skatu augšējā/apakšējā no nākamās cilnes"
 
 #: ViewManager.cpp:162
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "Sadalīt skatu augšējā/apakšējā"
+msgstr "Sadalīt skatu automātiski no nākamās cilnes"
 
 #: ViewManager.cpp:172
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
-msgstr ""
+msgstr "Ielādēt jaunu cilni ar izkārtojumu 2×2 termināļi"
 
 #: ViewManager.cpp:181
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
-msgstr ""
+msgstr "Ielādēt jaunu cilni ar izkārtojumu 2×1 terminālis"
 
 #: ViewManager.cpp:190
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
-msgstr ""
+msgstr "Ielādēt jaunu cilni ar izkārtojumu 1×2 termināļi"
 
 #: ViewManager.cpp:198
 #, kde-format
@@ -3609,20 +3383,16 @@ msgid "Shrink View"
 msgstr "Sašaurināt skatu"
 
 #: ViewManager.cpp:216
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "D&etach Current Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
-msgstr "A&tdalīt pašreizējo cilni"
+msgstr "Atdalīt pašreizējo &skatu"
 
 #: ViewManager.cpp:228
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "D&etach Current Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr "A&tdalīt pašreizējo cilni"
+msgstr "Atdalīt pašreizējo &cilni"
 
 #: ViewManager.cpp:233
 #, kde-format
@@ -3637,30 +3407,28 @@ msgid "Previous Tab"
 msgstr "Iepriekšējā cilne"
 
 #: ViewManager.cpp:249
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
-msgstr "Virs termināļa lauka"
+msgstr "Fokuss uz augšējo termināli"
 
 #: ViewManager.cpp:256
-#, fuzzy, kde-format
-#| msgid "Below Terminal Area"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
-msgstr "Zem termināļa lauka"
+msgstr "Fokuss uz apakšējo termināli"
 
 #: ViewManager.cpp:263
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
-msgstr ""
+msgstr "Fokuss uz kreiso termināli"
 
 #: ViewManager.cpp:269
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
-msgstr ""
+msgstr "Fokuss uz labo termināli"
 
 #: ViewManager.cpp:275
 #, kde-format
@@ -3672,56 +3440,52 @@ msgstr "Pārslēgties uz pēdējo cilni"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
-msgstr ""
+msgstr "Pēdējās izmantotās cilnes"
 
 #: ViewManager.cpp:285
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
-msgstr ""
+msgstr "Pārslēgties starp divām cilnēm"
 
 #: ViewManager.cpp:290
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
-msgstr ""
+msgstr "Pēdējās izmantotās cilnes (pretēja kārtība)"
 
 #: ViewManager.cpp:295
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
-msgstr ""
+msgstr "Pārslēgt aktīvā skata maksimizēšanu"
 
 #: ViewManager.cpp:296
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
-msgstr ""
+msgstr "Pārslēgt aktīvā skata maksimizēšanu"
 
 #: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr ""
+msgstr "Pārslēgt aktīvā skata maksimizēšanu ar pietuvinājumu"
 
 #: ViewManager.cpp:305
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr ""
+msgstr "Pārslēgt aktīvā skata maksimizēšanu ar pietuvinājumu"
 
 #: ViewManager.cpp:313
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Right"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Pārvietot cilni pa labi"
 
 #: ViewManager.cpp:320
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Pārvietot cilni pa kreisi"
@@ -3730,25 +3494,25 @@ msgstr "Pārvietot cilni pa kreisi"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr ""
+msgstr "Iestatīt semantisko integrāciju („bash“)"
 
 #: ViewManager.cpp:333
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Pārslēgt semantisko ieteikumu parādīšanu"
 
 #: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Pārslēgt rindu numuru parādīšanu"
 
 #: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr ""
+msgstr "Vienāds izmērs visos skatos"
 
 #: ViewManager.cpp:356
 #, kde-format
@@ -3757,62 +3521,52 @@ msgid "Switch to Tab %1"
 msgstr "Pārslēgties uz cilni %1"
 
 #: ViewManager.cpp:569
-#, fuzzy, kde-format
-#| msgid "Mouse Interaction"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Peles darbība"
+msgstr "Semantiskie ieteikumi "
 
 #: ViewManager.cpp:585
-#, fuzzy, kde-format
-#| msgid "Fixed number of lines: "
+#, kde-format
 msgid "Line numbers "
-msgstr "Fiksēts rindu skaits: "
+msgstr "Rindu numuri "
 
 #: ViewManager.cpp:1169
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Move Tab Left"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Pārvietot cilni pa kreisi"
+msgstr "Saglabāt ciļņu izkārtojumu"
 
 #: ViewManager.cpp:1171 ViewManager.cpp:1258
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
-msgstr ""
+msgstr "„Konsole“ skata izkārtojums (*.json)"
 
 #: ViewManager.cpp:1184
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 msgstr ""
-"Saglabājot izvadi, radās problēma.\n"
+"Saglabājot izkārtojumu, radās problēma.\n"
 "%1"
 
 #: ViewManager.cpp:1245
-#, fuzzy, kde-format
-#| msgid ""
-#| "A problem occurred when saving the output.\n"
-#| "%1"
+#, kde-format
 msgctxt "@label:textbox"
 msgid ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 msgstr ""
-"Saglabājot izvadi, radās problēma.\n"
+"Ielādējot izkārtojumu, radās problēma.\n"
 "%1"
 
 #: ViewManager.cpp:1256
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr ""
+msgstr "Ielādēt cilnes izkārtojumu"
 
 #: Vt102Emulation.cpp:2449
 #, kde-format
@@ -3821,62 +3575,60 @@ msgid ""
 "presses into characters to send to the terminal is missing."
 msgstr ""
 "Nav pieejams tastatūras translators. Trūkst informācijas, lai pārveidotu "
-"taustiņu nospiedienus simbolos, kurus sūtīt terminālim."
+"taustiņu spiedienus simbolos, kurus sūtīt terminālim."
 
 #. i18n: ectx: property (text), widget (QLabel, urlHintsLabel)
 #: widgets/EditProfileAdvancedPage.ui:19
 #, kde-format
 msgid "Key combination to show URL hints:"
-msgstr ""
+msgstr "Taustiņu kombinācija, lai parādītu URL ieteikumus:"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:51
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
 #: widgets/EditProfileAdvancedPage.ui:70
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
 #: widgets/EditProfileAdvancedPage.ui:89
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
 #: widgets/EditProfileAdvancedPage.ui:108
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Meta"
-msgstr ""
+msgstr "Meta"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAdvancedPage.ui:154
-#, fuzzy, kde-format
-#| msgid "Miscellaneous"
+#, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous:"
-msgstr "Dažādi"
+msgstr "Dažādi:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:164
-#, fuzzy, kde-format
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgid "Number URL hints in reverse, starting from the bottom"
-msgstr "Atrast meklējamās frāzes nākamo atbilstību"
+msgstr "URL ieteikumu numurēšana pretējā virzienā, sākot no beigām"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:167
 #, kde-format
 msgid "Reverse URL hint numbering"
-msgstr ""
+msgstr "Apgriezt URL ieteikumu numurējumu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingTextButton)
 #: widgets/EditProfileAdvancedPage.ui:180
@@ -3894,13 +3646,13 @@ msgstr "Atļaut mirgojošu tekstu"
 #: widgets/EditProfileAdvancedPage.ui:196
 #, kde-format
 msgid "Allow the output to be suspended by pressing Ctrl+S"
-msgstr "Atļaut izvades apturēšanu, nospiežot Ctrl+S"
+msgstr "Atļaut izvades apturēšanu, nospiežot „Ctrl+S“"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
 #: widgets/EditProfileAdvancedPage.ui:199
 #, kde-format
 msgid "Flow control"
-msgstr ""
+msgstr "Plūsmas kontrole"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:213
@@ -3910,14 +3662,13 @@ msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
 "Hebrew only)"
 msgstr ""
-"Aktivēt termināļos divvirzienu attēlošanu (ietekmē tikai Arābu, Farsi vai "
+"Aktivēt termināļos divvirzienu attēlošanu (ietekmē tikai Arābu, Farsi un "
 "Ebreju lokāles)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:216
 #: widgets/EditProfileAppearancePage.ui:953
-#, fuzzy, kde-format
-#| msgid "Enable Bi-Directional text rendering"
+#, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Ieslēgt divvirzienu teksta attēlošanu"
 
@@ -3931,14 +3682,13 @@ msgstr "Rakstzīmju noklusētais kodējums:"
 #: widgets/EditProfileAdvancedPage.ui:260
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
-msgstr ""
+msgstr "Saīsne, lai palūkotos uz primāro ekrānu:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
-#, fuzzy, kde-format
-#| msgid "Color Scheme && Background"
+#, kde-format
 msgid "Color scheme && font"
-msgstr "Krāsu shēma un fons"
+msgstr "Krāsu shēma un fonts"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:69
@@ -3978,33 +3728,30 @@ msgstr "Dzēst izvēlēto krāsu shēmu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:99
-#, fuzzy, kde-format
-#| msgid "Delete the selected color scheme"
+#, kde-format
 msgid "Reset the selected color scheme settings to the default values"
-msgstr "Dzēst izvēlēto krāsu shēmu"
+msgstr "Atiestatīt izvēlētās krāsu shēmas iestatījumus uz noklusējuma vērtībām"
 
 #. i18n: ectx: property (text), widget (QPushButton, resetKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, resetColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:102
 #: widgets/EditProfileKeyboardPage.ui:93
-#, fuzzy, kde-format
-#| msgid "&Set as Default"
+#, kde-format
 msgid "Defaults"
-msgstr "Ie&statīt kā noklusēto"
+msgstr "Noklusējumi"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: widgets/EditProfileAppearancePage.ui:135
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgid "Font:"
-msgstr "Fonti"
+msgstr "Fonts:"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
 #: widgets/EditProfileAppearancePage.ui:167
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr ""
+msgstr "Izvēlēties..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:174
@@ -4022,13 +3769,13 @@ msgstr "Spilgtas krāsas zīmēt treknā fontā"
 #: widgets/EditProfileAppearancePage.ui:188
 #, kde-format
 msgid "Use the selected font for line characters instead of the builtin code"
-msgstr ""
+msgstr "Atlasīto fontu izmantot līniju rakstzīmēm iebūvētā koda vietā"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
 #, kde-format
 msgid "Use line characters contained in font"
-msgstr ""
+msgstr "Izmantot fontā ietvertās līniju rakstzīmes"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:199
@@ -4040,102 +3787,89 @@ msgstr "Kursors"
 #: widgets/EditProfileAppearancePage.ui:219
 #, kde-format
 msgid "Shape:"
-msgstr ""
+msgstr "Forma:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
 #: widgets/EditProfileAppearancePage.ui:229
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor"
-#| msgid "Block"
+#, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
 msgstr "Bloks"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
 #: widgets/EditProfileAppearancePage.ui:239
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor, similar to a capital I"
-#| msgid "I-Beam"
+#, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
 msgstr "Stabiņš"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
 #: widgets/EditProfileAppearancePage.ui:249
-#, fuzzy, kde-format
-#| msgctxt "The shape of the cursor"
-#| msgid "Underline"
+#, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
 msgstr "Pasvītrojums"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileAppearancePage.ui:281
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
-msgstr "Krāsa"
+msgstr "Krāsa:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:297
 #, kde-format
 msgid "Set the cursor to match the color of the character underneath it."
-msgstr "Iestatīt, lai kursora krāsa sakristu ar simbola krāsu, kas zem tā."
+msgstr "Atlasiet, lai kursora krāsa sakristu ar apakšā esošā simbola krāsu."
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:300
-#, fuzzy, kde-format
-#| msgid "Set cursor color to match current character"
+#, kde-format
 msgid "Match current character"
-msgstr "Iestatīt, lai kursora krāsa būtu tāda kā pašreizējam simbolam."
+msgstr "Atbilst aktīvajai rakstzīmei"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:316
 #, kde-format
 msgid "Use a custom, fixed color for the cursor"
-msgstr "Lietot pielāgotu kursora krāsu"
+msgstr "Lietot pielāgotu, fiksētu kursora krāsu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:319
-#, fuzzy, kde-format
-#| msgid "Custom cursor color:"
+#, kde-format
 msgid "Custom cursor color"
-msgstr "Pielāgota kursora krāsa:"
+msgstr "Pielāgota kursora krāsa"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
 #: widgets/EditProfileAppearancePage.ui:350
-#, fuzzy, kde-format
-#| msgid "Cursor"
+#, kde-format
 msgid "Cursor:"
-msgstr "Kursors"
+msgstr "Kursors:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:363
 #, kde-format
 msgid "Select the color used to draw the cursor"
-msgstr "Izvēlieties krāsu, kurā tiks zīmēts kursors"
+msgstr "Atlasiet krāsu, kurā tiks zīmēts kursors"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
 #: widgets/EditProfileAppearancePage.ui:383
 #, kde-format
 msgid "Text:"
-msgstr ""
+msgstr "Teksts:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:396
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
-msgstr "Izvēlieties krāsu, kurā tiks zīmēts kursors"
+msgstr "Atlasiet krāsu, kurā tiks zīmēta rakstzīme zem kursora"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileAppearancePage.ui:421
-#, fuzzy, kde-format
-#| msgid "Blinking cursor"
+#, kde-format
 msgid "Blinking:"
-msgstr "Mirgojošs kursors"
+msgstr "Mirgojošs:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:437
@@ -4149,23 +3883,21 @@ msgstr "Likt kursoram regulāri mirgot"
 #: widgets/EditProfileAppearancePage.ui:723
 #, kde-format
 msgid "Enabled"
-msgstr ""
+msgstr "Ieslēgts"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
 #: widgets/EditProfileAppearancePage.ui:463 widgets/EditProfileMousePage.ui:252
-#, fuzzy, kde-format
-#| msgid "Miscellaneous"
+#, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
 msgstr "Dažādi"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAppearancePage.ui:474
-#, fuzzy, kde-format
-#| msgid "Window"
+#, kde-format
 msgid "Window:"
-msgstr "Logs"
+msgstr "Logs:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:481
@@ -4174,75 +3906,69 @@ msgid ""
 "Show terminal size in columns and lines in the center of window after "
 "resizing"
 msgstr ""
-"Pēc izmēra maiņas rādīt termināļa izmēru kolonnās un rindās loga centrā"
+"Rādīt termināļa izmēru kolonnās un rindās loga centrā, kad maināt tā izmēru"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:484
 #, kde-format
 msgid "Show hint for terminal size after resizing"
-msgstr "Rādīt paskaidri termināļa izmēram pēc izmēra maiņas"
+msgstr "Rādīt informāciju par termināļa izmēru pēc izmēra maiņas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
 #: widgets/EditProfileAppearancePage.ui:491
 #, kde-format
 msgid "Always invert the colors of selected text"
-msgstr ""
+msgstr "Vienmēr invertēt atlasītā teksta krāsu"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
 #: widgets/EditProfileAppearancePage.ui:500
 #, kde-format
 msgid "Darkening strength:"
-msgstr ""
+msgstr "Aptumšošanas stiprums:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:533
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
-msgstr "Krāsa"
+msgstr "Krāsa:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:549
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Izvēlieties krāsu, kurā tiks zīmēts kursors"
+msgstr "Atlasiet krāsu, kas ir izmantojama apmales zīmēšanai"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:571
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgid "Inactive Terminals:"
-msgstr "Termināļa iespējas"
+msgstr "Neaktīvi termināļi:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:581
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Termināļa iespējas"
+msgstr "Aktīvi termināļi:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:591
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
-msgstr "Termināļa iespējas"
+msgstr "Termināļa saturs"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
 #: widgets/EditProfileAppearancePage.ui:603
 #, kde-format
 msgid "Line spacing:"
-msgstr ""
+msgstr "Atstarpes starp rindām:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
 #: widgets/EditProfileAppearancePage.ui:621
 #, kde-format
 msgid "The number of pixels between two lines"
-msgstr ""
+msgstr "Pikseļu skaits starp divām rindām"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
@@ -4251,74 +3977,73 @@ msgstr ""
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
-msgstr ""
+msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileAppearancePage.ui:658
 #, kde-format
 msgid "Margins:"
-msgstr ""
+msgstr "Malas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileAppearancePage.ui:710
 #, kde-format
 msgid "Align to center:"
-msgstr ""
+msgstr "Izkārtot centrā:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:733
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
-msgstr ""
+msgstr "Parādīt, vai logs ir aktīvs, aptumšojot tā krāsas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:736
 #, kde-format
 msgid "Darken"
-msgstr ""
+msgstr "Aptumšot"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr ""
+msgstr "Parādīt, vai logs ir aktīvs, zīmējot apmali"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Apmale"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:788
 #, kde-format
 msgid "Display Vertical line at column:"
-msgstr ""
+msgstr "Kolonnā parādīt vertikālu līniju"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:833
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Kompleksais teksta izkārtojums</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:836
 #, kde-format
 msgid "Complex Text Layout"
-msgstr ""
+msgstr "Kompleksais teksta izkārtojums"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:860
-#, fuzzy, kde-format
-#| msgid "Enable Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Ieslēgt divvirzienu teksta attēlošanu"
+msgstr "Ieslēgt teksta attēlošanu vārdu režīmā"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:863
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Vārdu režīms"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:876
@@ -4327,81 +4052,84 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignorēt atribūta izmaiņas vārda vidū (pretējā gadījumā attēlošanas laikā "
+"šādas izmaiņas lauzīs vārdus)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:879
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Izmantot tos pašus atribūtus visam vārdam"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:892
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "ASCII rakstzīmju vārdus renderēt kopā"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:895
 #, kde-format
 msgid "ASCII characters "
-msgstr ""
+msgstr "ACII rakstzīmes"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:908
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Brāhmī raksta vārdus attēlot ar rakstzīmēm kopā"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:911
-#, fuzzy, kde-format
-#| msgid "Set cursor color to match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Iestatīt, lai kursora krāsa būtu tāda kā pašreizējam simbolam."
+msgstr "Brāhmī raksta rakstzīmes"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:924
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgid "Emoji Font:"
-msgstr "Fonti"
+msgstr "Emodži fonts:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:966
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"Rindas vienmēr ir no kreisā uz labo, bet ne noteiktas pēc pirmās nozīmīgās "
+"rakstzīmes"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:969
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "rindas vienmēr no kreisās uz labo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:982
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
+"Tabulu zīmēšanas rakstzīmes uzskatīt kā nozīmīgas no kreisās uz labo "
+"rakstzīmes."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:985
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Tabulas rakstzīmes pārraksta divvirzienu režīmu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:998
-#, fuzzy, kde-format
-#| msgid "Set cursor color to match current character"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Iestatīt, lai kursora krāsa būtu tāda kā pašreizējam simbolam."
+msgstr "Ignorēt problemātisko rakstzīmju „wcwidth“"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1001
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Pārrakstīt „wcwidth“"
 
 #: widgets/EditProfileDialog.cpp:67
 #, kde-format
@@ -4412,7 +4140,7 @@ msgstr "Rediģēt profilu"
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
-msgstr "Vispārīgi"
+msgstr "Pamata"
 
 #: widgets/EditProfileDialog.cpp:105
 #, kde-format
@@ -4435,10 +4163,9 @@ msgid "Keyboard"
 msgstr "Tastatūra"
 
 #: widgets/EditProfileDialog.cpp:153
-#, fuzzy, kde-format
-#| msgid "Key Bindings"
+#, kde-format
 msgid "Key bindings"
-msgstr "Taustiņu piesaiste"
+msgstr "Taustiņu saīsnes"
 
 #: widgets/EditProfileDialog.cpp:164
 #, kde-format
@@ -4459,30 +4186,33 @@ msgid ""
 ">Either change the permissions of that file or set a different name to save "
 "the settings to a new profile."
 msgstr ""
+"Nepietiek atļauju, lai saglabātu iestatījumus: <filename>%1</filename>.<nl/"
+">Vai nu mainiet datnes atļaujas, vai arī izvēlieties atšķirīgu nosaukumu "
+"iestatījumu saglabāšanai jaunā profilā."
 
 #: widgets/EditProfileDialog.cpp:305
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
-msgstr ""
+msgstr "Profila nosaukums ir tukšs. Pirms saglabāšanas ierakstiet nosaukumu."
 
 #: widgets/EditProfileDialog.cpp:313
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
-msgstr ""
+msgstr "Profils ar nosaukumu „%1“ jau eksistē."
 
 #: widgets/EditProfileDialog.cpp:337
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Profila nosaukums ir sasniedzis maksimālo atļauto garumu (%1)."
 
 #: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Izceltās rakstzīmes ir nederīgas profila nosaukumos: %1."
 
 #: widgets/EditProfileDialog.cpp:411
 #, kde-format
@@ -4493,15 +4223,14 @@ msgstr[1] "Rediģē %1 profilus: %2"
 msgstr[2] "Rediģē %1 profilu: %2"
 
 #: widgets/EditProfileDialog.cpp:415
-#, fuzzy, kde-format
-#| msgid "&New Profile..."
+#, kde-format
 msgid "Create New Profile"
-msgstr "Jau&ns profils..."
+msgstr "Izveidot jaunu profilu"
 
 #: widgets/EditProfileDialog.cpp:418
 #, kde-format
 msgid "Edit Profile \"%1\""
-msgstr "Rediģēt profilu “%1”"
+msgstr "Rediģēt profilu „%1“"
 
 #: widgets/EditProfileDialog.cpp:509
 #, kde-format
@@ -4510,9 +4239,9 @@ msgctxt ""
 "separate it from the number value."
 msgid " column"
 msgid_plural " columns"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] " kolonna"
+msgstr[1] " kolonnas"
+msgstr[2] " kolonnu"
 
 #: widgets/EditProfileDialog.cpp:511
 #, kde-format
@@ -4521,37 +4250,34 @@ msgctxt ""
 "separate it from the number value."
 msgid " row"
 msgid_plural " rows"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] " rinda"
+msgstr[1] " rindas"
+msgstr[2] " rindu"
 
 #: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "System Bell"
-msgstr ""
+msgstr "Sistēmas zvans"
 
 #: widgets/EditProfileDialog.cpp:521
-#, fuzzy, kde-format
-#| msgid "&Paste Location"
+#, kde-format
 msgid "System Notifications"
-msgstr "&Ielīmēt vietu"
+msgstr "Sistēmas paziņojumi"
 
 #: widgets/EditProfileDialog.cpp:521
-#, fuzzy, kde-format
-#| msgid "Visual effects"
+#, kde-format
 msgid "Visual Bell"
-msgstr "Vizuālie efekti"
+msgstr "Vizuāls zvans"
 
 #: widgets/EditProfileDialog.cpp:521
 #, kde-format
 msgid "Ignore Bell Events"
-msgstr ""
+msgstr "Ignorēt zvana notikumus"
 
 #: widgets/EditProfileDialog.cpp:530
-#, fuzzy, kde-format
-#| msgid "Set the selected profile as the default for new terminal sessions"
+#, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr "Iestatīt izvēlēto profilu kā noklusēto jaunām termināļa sesijām"
+msgstr "Noklusējuma profils jaunām %1 termināļa sesijām"
 
 #: widgets/EditProfileDialog.cpp:635
 #, kde-format
@@ -4559,8 +4285,7 @@ msgid "Edit Environment"
 msgstr "Rediģēt vidi"
 
 #: widgets/EditProfileDialog.cpp:636
-#, fuzzy, kde-format
-#| msgid "One environment variable per line"
+#, kde-format
 msgid "One environment variable per line"
 msgstr "Viens vides mainīgais katrā rindā"
 
@@ -4576,20 +4301,20 @@ msgstr[2] " sekunžu"
 #: widgets/EditProfileDialog.cpp:781
 #, kde-format
 msgid "Select Initial Directory"
-msgstr "Izvēlēties sākotnējo mapi"
+msgstr "Atlasīt sākotnējo mapi"
 
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
-msgstr ""
+msgstr "Neizdevās shēmas <resource>%1</resource> ielāde."
 
 #: widgets/EditProfileDialog.cpp:1505
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
-msgstr "Šai krāsu shēmai ir caurspīdīgs fons, ko neatbalsta jūsu dators"
+msgstr "Šai krāsu shēmai ir caurspīdīgs fons, ko neatbalsta jūsu darbvirsma"
 
 #: widgets/EditProfileDialog.cpp:1511
 #, kde-format
@@ -4597,8 +4322,8 @@ msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
-"Konsole tika palaista pirms tika ieslēgti darbvirsmas efekti. Jums "
-"jāpārstartē Konsole, lai redzētu caurspīdīgo fonu."
+"„Konsole“ tika palaista pirms tika ieslēgti darbvirsmas efekti. Jums "
+"jāpārstartē „Konsole“, lai redzētu caurspīdīgo fonu."
 
 #: widgets/EditProfileDialog.cpp:1902
 #, kde-format
@@ -4616,24 +4341,35 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
+"Formāta piemērs ir „editorExec CEĻŠ:RINDA:KOLONNA“\n"
+"\n"
+"CEĻŠ     tiks aizstāts ar ceļu uz teksta datni\n"
+"RINDA    tiks aizstāts ar rindas numuru\n"
+"KOLONNA  (pēc izvēles) tiks aizstāts ar kolonnas numuru\n"
+"Piezīme: jums būs jāaizstāj „PATH:LINE:COLUMN“ ar faktisko\n"
+"sintaksi, ko izmanto jūsu izvēlētais redaktors, piemēram,\n"
+"„gedit“: +RINDA:KOLONNA CEĻŠ\n"
+"\n"
+"Ja CEĻŠ vai RINDA komandā nav ievadīta, šis iestatījums\n"
+"tiek ignorēts un datne tiek atvērta ar noklusējuma teksta\n"
+"redaktoru."
 
 #: widgets/EditProfileDialog.cpp:1915
 #, kde-format
 msgid "Text Editor Custom Command"
-msgstr ""
+msgstr "Pielāgota teksta redaktora komanda"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:42
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "General Settings"
-msgstr "Rakstzīmju noklusētais kodējums:"
+msgstr "Pamata iestatījumi"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:66
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
-msgstr "Izvēlieties ikonu, kas tiks rādīta šī profila cilnēs"
+msgstr "Atlasiet ikonu, kas tiks rādīta šī profila cilnēs"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:84
@@ -4643,16 +4379,14 @@ msgstr "Profilu aprakstošs nosaukums"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:87
-#, fuzzy, kde-format
-#| msgid "Profile name:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Profile name"
-msgstr "Profila nosaukums:"
+msgstr "Profila nosaukums"
 
 #. i18n: ectx: property (text), widget (QCheckBox, setAsDefaultButton)
 #: widgets/EditProfileGeneralPage.ui:94
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default Profile"
 msgstr "Noklusētais profils"
 
@@ -4669,14 +4403,14 @@ msgid ""
 "The command to execute when new terminal sessions are created using this "
 "profile"
 msgstr ""
-"Komanda, kas jāizpilda, kad jauna termināļa sesija tiek izveidota ar šo "
-"profilu"
+"Komanda, kas jāizpilda, kad ar šo profilu tiek izveidota jauna termināļa "
+"sesija"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
 #: widgets/EditProfileGeneralPage.ui:144
 #, kde-format
 msgid "/bin/sh"
-msgstr ""
+msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
@@ -4696,7 +4430,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:176
 #, kde-format
 msgid "/home/username"
-msgstr ""
+msgstr "/home/lietotājvārds"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, dirSelectButton)
 #: widgets/EditProfileGeneralPage.ui:183
@@ -4706,10 +4440,9 @@ msgstr "Izvēlēties sākotnējo mapi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
 #: widgets/EditProfileGeneralPage.ui:193
-#, fuzzy, kde-format
-#| msgid "Start in same directory as current tab"
+#, kde-format
 msgid "Start in same directory as current session"
-msgstr "Sākt tajā pašā mapē, kurā ir aktīvā cilne"
+msgstr "Sākt tajā pašā mapē, kurā ir aktīvā sesija"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:206
@@ -4725,10 +4458,9 @@ msgstr "Rediģēt vides mainīgo un ar tiem saistīto vērtību sarakstu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, fuzzy, kde-format
-#| msgid "Terminal Features"
+#, kde-format
 msgid "Initial terminal size:"
-msgstr "Termināļa iespējas"
+msgstr "Sākotnējais termināļa izmērs:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4739,38 +4471,39 @@ msgid ""
 "Configure Konsole → General → Remember window size</span> must be disabled "
 "for these entries to work.</p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-style:italic;\">Iestatījumi → "
+"Konfigurēt „Konsole“ → Pamata → Atcerēties loga izmēru</span> jābūt "
+"izslēgtam, lai šīs opcijas darbotos.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, fuzzy, kde-format
-#| msgid "Terminal emulator"
+#, kde-format
 msgid "Terminal bell mode:"
-msgstr "Termināļa emulators"
+msgstr "Termināļa zvana režīms:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
-#, fuzzy, kde-format
-#| msgid "Mouse Interaction"
+#, kde-format
 msgid "Semantic Integration"
-msgstr "Peles darbība"
+msgstr "Semantiskā integrācija"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:383
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr ""
+msgstr "Pogu augšup/lejup emulācija"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:390
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Peles klikšķis ievades rindā pārvieto kursoru"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:403
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Semantiskie ieteikumi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4783,7 +4516,7 @@ msgstr ""
 #, kde-format
 msgctxt "Never"
 msgid "Never"
-msgstr ""
+msgstr "Nekad"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
@@ -4796,7 +4529,7 @@ msgstr ""
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Parādot URL ieteikumus"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4809,43 +4542,35 @@ msgstr ""
 #, kde-format
 msgctxt "Always"
 msgid "Always"
-msgstr ""
+msgstr "Vienmēr"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:449
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Sarkanas kļūdu joslas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:495
-#, fuzzy, kde-format
-#| msgctxt "@item:intable palette"
-#| msgid "Background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Fons"
+msgstr "Sarkans kļūdu fons:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:541
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Pārmaiņu joslas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:587
-#, fuzzy, kde-format
-#| msgctxt "@item:intable palette"
-#| msgid "Background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Fons"
+msgstr "Pārmaiņu fons:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:17
-#, fuzzy, kde-format
-#| msgid ""
-#| "Key bindings control how combinations of keystrokes in the terminal "
-#| "window are converted into the stream of characters which are sent to the "
-#| "current terminal program."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Key bindings control how combinations of keystrokes in the terminal window "
@@ -4853,17 +4578,16 @@ msgid ""
 "terminal program. For more information on how to customize the key bindings "
 "check the Konsole Handbook."
 msgstr ""
-"Taustiņu piesaiste kontrolē to, kā taustiņa piespiešana termināļa logā tiek "
-"pārveidota simbolu virknē, kas tiek nosūtīta termināļa programmai."
+"Taustiņu saīsnes kontrolē, kā termināļu logs taustiņu kombinācijas pārveido "
+"rakstzīmju secībā, kas tiek nosūtīta aktīvajai termināļa programmai. Lai "
+"iegūtu vairāk informācijas par taustiņu saīšņu pielāgošanu, skatiet "
+"„Konsole“ rokasgrāmatu."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:60
-#, fuzzy, kde-format
-#| msgid "Create a new key bindings list based upon the selected bindings"
+#, kde-format
 msgid "Create a new key bindings scheme based upon the selected bindings"
-msgstr ""
-"Izveidot jaunu taustiņu piesaistes sarakstu balstoties uz izvēlētajām "
-"piesaistēm"
+msgstr "Izveidot jaunu taustiņu saīšņu shēmu, balstoties pašreizējās saīsnēs"
 
 #. i18n: ectx: property (text), widget (QPushButton, newKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:63
@@ -4874,66 +4598,57 @@ msgstr "Jauna..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:70
-#, fuzzy, kde-format
-#| msgid "Edit the selected key bindings list"
+#, kde-format
 msgid "Edit the selected key bindings scheme"
-msgstr "Rediģēt izvēlēto taustiņu piesaistes sarakstu"
+msgstr "Rediģēt atlasīto taustiņu saīšņu shēmu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:80
-#, fuzzy, kde-format
-#| msgid "Delete the selected key bindings list"
+#, kde-format
 msgid "Delete the selected key bindings scheme"
-msgstr "Dzēst izvēlēto taustiņu piesaistes sarakstu"
+msgstr "Dzēst atlasīto taustiņu saīšņu shēmu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, resetKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:90
-#, fuzzy, kde-format
-#| msgid "Delete the selected color scheme"
+#, kde-format
 msgid "Reset the selected key bindings scheme to its default values"
-msgstr "Dzēst izvēlēto krāsu shēmu"
+msgstr "Atiestatīt atlasīto taustiņu saīšņu shēmu uz tās noklusējuma vērtībām"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: widgets/EditProfileMousePage.ui:36
-#, fuzzy, kde-format
-#| msgid "Mouse Interaction"
+#, kde-format
 msgid "Text interaction"
-msgstr "Peles darbība"
+msgstr "Mijiedarbība ar tekstu"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, label_11)
 #. i18n: ectx: property (toolTip), widget (QLineEdit, wordCharacterEdit)
 #: widgets/EditProfileMousePage.ui:50 widgets/EditProfileMousePage.ui:71
-#, fuzzy, kde-format
-#| msgid ""
-#| "Characters which are considered part of a word when double-clicking to "
-#| "select whole words in the terminal"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Characters which are considered part of a word when double-clicking to "
 "select whole words in the terminal."
 msgstr ""
-"Rakstzīmes, kuras uzskatīt par vārda daļu, kad ar dubultklikšķi iezīmē "
-"izvēlas terminālī"
+"Rakstzīmes, kas ir uzskatāmas par vārda daļu, terminālī veicot dubultklikšķi "
+"uz vārda, lai to iezīmētu."
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileMousePage.ui:53
 #, kde-format
 msgid "Word characters:"
-msgstr ""
+msgstr "Vārda rakstzīmes:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileMousePage.ui:94
-#, fuzzy, kde-format
-#| msgid "Triple-click select:"
+#, kde-format
 msgid "Triple-click selects:"
-msgstr "Trīskāršā klikšķa izvēlēšanās:"
+msgstr "Trīskāršs peles klikšķis atlasa:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, fuzzy, kde-format
-#| msgid "The whole current line"
+#, kde-format
 msgid "The whole line"
-msgstr "Visu pašreizējo rindu"
+msgstr "Visu rindu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
@@ -4943,86 +4658,79 @@ msgstr "No peles pozīcijas līdz rindas beigām"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
-#, fuzzy, kde-format
-#| msgid "Triple-click select:"
+#, kde-format
 msgid "Middle-click pastes:"
-msgstr "Trīskāršā klikšķa izvēlēšanās:"
+msgstr "Peles vidējais klikšķis ielīmē:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromClipboardButton)
 #: widgets/EditProfileMousePage.ui:150
-#, fuzzy, kde-format
-#| msgid "Paste from clipboard"
+#, kde-format
 msgid "From clipboard"
-msgstr "Ielīmēt no starpliktuves"
+msgstr "No starpliktuves"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:160
-#, fuzzy, kde-format
-#| msgid "Paste from selection"
+#, kde-format
 msgid "From selection"
-msgstr "Ielīmēt no izvēlētā"
+msgstr "No atlases"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:186
-#, fuzzy, kde-format
-#| msgid "Copy Input To"
+#, kde-format
 msgid "Copy options:"
-msgstr "Kopēt ievadi uz"
+msgstr "Kopēšanas opcijas:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
-msgstr "Automātiski kopēt izvēlēto tekstu starpliktuvē"
+msgstr "Automātiski kopēt atlasīto tekstu starpliktuvē"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgid "Copy on select"
-msgstr "Kopēt izvēloties"
+msgstr "Kopēt atlasot"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
 #: widgets/EditProfileMousePage.ui:206
 #, kde-format
 msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
-msgstr ""
+msgstr "Kopēt tekstu kā HTML (tostarp formatējumu, burtveidolus, krāsas utt.)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
 #: widgets/EditProfileMousePage.ui:209
 #, kde-format
 msgid "Copy text as HTML"
-msgstr ""
+msgstr "Kopēt tekstu kā HTML"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimLeadingSpacesButton)
 #: widgets/EditProfileMousePage.ui:216
 #, kde-format
 msgid "Trim leading spaces in selected text, useful in some instances"
-msgstr ""
+msgstr "Dzēst tukšu rakstzīmi atlasīta teksta sākumā — reizēm noderīgi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
 #: widgets/EditProfileMousePage.ui:219
 #, kde-format
 msgid "Trim leading spaces"
-msgstr ""
+msgstr "Dzēst atstarpi sākumā"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:226
 #, kde-format
 msgid "Trim trailing spaces in selected text, useful in some instances"
-msgstr ""
+msgstr "Dzēst tukšu rakstzīmi atlasīta teksta beigās — reizēm noderīgi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:229
 #, kde-format
 msgid "Trim trailing spaces"
-msgstr ""
+msgstr "Dzēst atstarpi beigās"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:266
-#, fuzzy, kde-format
-#| msgid ""
-#| "Text recognized as a link or an email address will be underlined when "
-#| "hovered by the mouse pointer."
+#, kde-format
 msgid ""
 "Text recognized as a link or an email address will be underlined when "
 "hovered by the mouse pointer."
@@ -5032,36 +4740,31 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:269
-#, fuzzy, kde-format
-#| msgid "Underline links"
+#, kde-format
 msgid "Underline links"
 msgstr "Pasvītrot saites"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:276
-#, fuzzy, kde-format
-#| msgid ""
-#| "Text recognized as a link or an email address will be underlined when "
-#| "hovered by the mouse pointer."
+#, kde-format
 msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
 "pointer."
 msgstr ""
-"Teksts, kas atpazīts kā saite vai e-pasta adrese, tiks pasvītrots, kad tas "
-"atradīsies zem peles rādītāja."
+"Teksts, kas atpazīts kā datne, tiks pasvītrots, kad tas atradīsies zem peles "
+"rādītāja."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:279
-#, fuzzy, kde-format
-#| msgid "Underline links"
+#, kde-format
 msgid "Underline files"
-msgstr "Pasvītrot saites"
+msgstr "Pasvītrot datnes"
 
 #. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
 #: widgets/EditProfileMousePage.ui:288
 #, kde-format
 msgid "Text Editor Command: "
-msgstr ""
+msgstr "Teksta redaktora komanda:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
@@ -5070,31 +4773,30 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
 msgstr ""
+"Teksta redaktors, ko izmantot teksta datņu URL atvēršanai norādītajā rindā/"
+"kolonnā."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:332
-#, fuzzy, kde-format
-#| msgid ""
-#| "Text recognized as a link or an email address will be underlined when "
-#| "hovered by the mouse pointer."
+#, kde-format
 msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
 "mouse click."
 msgstr ""
-"Teksts, kas atpazīts kā saite vai e-pasta adrese, tiks pasvītrots, kad tas "
-"atradīsies zem peles rādītāja."
+"Teksts, kas atpazīts kā saite vai e-pasta adrese, var tikt atvērts ar "
+"vienkāršu peles klikšķi."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:335
 #, kde-format
 msgid "Open files/links by direct click"
-msgstr ""
+msgstr "Atvērts datnes/saites ar vienkāršu klikšķi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
 #: widgets/EditProfileMousePage.ui:346
 #, kde-format
 msgid "Allow escape sequences for links"
-msgstr ""
+msgstr "Saitēm atļaut atsoļa sekvenci"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
 #: widgets/EditProfileMousePage.ui:353
@@ -5104,31 +4806,33 @@ msgid ""
 "to be shown as another URL or hidden.<br>Make sure you understand the "
 "implications before turning this on."
 msgstr ""
+"<b>UZMANĪBU</b>: Šai opcijai ir ietekme uz drošību, jo tā ļauj ļaundabīgai "
+"URL adresei parādīties kā citai adresei vai arī būt neredzamai."
+"<br>Pārliecinieties, ka saprotiet ietekmi uz drošību."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileMousePage.ui:371
-#, fuzzy, kde-format
-#| msgid "Allow blinking text"
+#, kde-format
 msgid "Allowed link formats: "
-msgstr "Atļaut mirgojošu tekstu"
+msgstr "Atļautie saišu formāti: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
 #: widgets/EditProfileMousePage.ui:381
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
-msgstr ""
+msgstr "Iespējamie saišu formāti, piemēram, „http://“, „https://“ un „file://“"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:392
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
-msgstr ""
+msgstr "Lai vilktu tekstu, jātur „Ctrl“ un peles taustiņš"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
 #: widgets/EditProfileMousePage.ui:395
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
-msgstr ""
+msgstr "Vilkšanai un nomešanai pieprasīt „Ctrl“ taustiņu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:402
@@ -5137,12 +4841,14 @@ msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
 "Alternate Screen buffer (e.g. less)"
 msgstr ""
+"Peles rullītis atveidos tastatūras augšup/lejup pogu spiedienus programmās, "
+"kas izmanto alternatīvo ekrāna buferi (piemēram, „less“)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:405
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
-msgstr ""
+msgstr "Ieslēgt alternatīvā ekrāna bufera ritināšanu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:412
@@ -5151,24 +4857,27 @@ msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
 "link actions."
 msgstr ""
+"Ievilktās datnes un URL vienmēr ielīmēt kā tekstu, nepiedāvājot pārvietot, "
+"kopēt vai saitēt."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:415
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
-msgstr ""
+msgstr "Izslēgt vilkšanas un nomešanas izvēlni datnēm un URL"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:422
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
 msgstr ""
+"Turot „Ctrl“, ritinot ar peles rullīti palielinās/samazinās teksta izmērs."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
-msgstr ""
+msgstr "Atļaut teksta tālummaiņu ar „Ctrl“ un peles rullīti"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:432
@@ -5177,12 +4886,14 @@ msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
 msgstr ""
+"Pārliekot peli pāri heksadecimālai krāsai, tā parādīsies rāmītī pie peles "
+"rādītāja"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:435
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Priekšskatīt krāsas, pārliekot peles rādītāju"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:455
@@ -5191,90 +4902,87 @@ msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
 "default. It can be toggled on/off while running as well."
 msgstr ""
+"Dažām termināļa programmām ir peles atbalsts. Šī opcija palīdzēs tām to "
+"iegūt pēc noklusējuma, tomēr to iespējams arī ieslēgt vai izslēgt palaišanas "
+"laikā."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:458
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
-msgstr ""
+msgstr "Atļaut termināļa programmām pārvaldīt klikšķināšanu un vilkšanu"
 
 #. i18n: ectx: property (text), widget (QLabel, historySizeLabel)
 #: widgets/EditProfileScrollingPage.ui:25
-#, fuzzy, kde-format
-#| msgid "Scrollback"
+#, kde-format
 msgid "Scrollback:"
-msgstr "Atpakaļrite"
+msgstr "Ritināšanas atmiņa:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:67
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr ""
+msgstr "Ritināt lapu augšup/lejup:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:83
 #, kde-format
 msgid "Scroll the page the half height of window"
-msgstr ""
+msgstr "Ritināt lapu par pusi no loga augstuma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
 #, kde-format
 msgid "Half screen height"
-msgstr ""
+msgstr "Puse ekrāna augstuma"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
 #, kde-format
 msgid "Scroll the page the full height of window"
-msgstr ""
+msgstr "Ritināt lapu par pilnu loga augstumu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
 #, kde-format
 msgid "Full screen height"
-msgstr ""
+msgstr "Pilns ekrāna augstums"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
-#, fuzzy, kde-format
-#| msgid "Tab bar position:"
+#, kde-format
 msgid "Scrollbar position:"
-msgstr "Ciļņu joslas novietojums:"
+msgstr "Ritjoslas novietojums:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:141
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
-msgstr "Rādīt ritināšanas joslu termināļa loga labajā pusē"
+msgstr "Rādīt ritjoslu termināļa loga labajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, fuzzy, kde-format
-#| msgid "Show on right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Right side"
-msgstr "Rādīt labajā pusē"
+msgstr "Labajā pusē"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
-msgstr "Rādīt ritināšanas joslu termināļa loga kreisajā pusē"
+msgstr "Rādīt ritjoslu termināļa loga kreisajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, fuzzy, kde-format
-#| msgid "Text size:"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "Left side"
-msgstr "Teksta izmērs:"
+msgstr "Kreisajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Conceal the scroll bar"
-#| msgid "Hidden"
+#, kde-format
 msgctxt "@option:radio Hide the scroll bar"
 msgid "Hidden"
 msgstr "Slēpta"
@@ -5283,25 +4991,25 @@ msgstr "Slēpta"
 #: widgets/EditProfileScrollingPage.ui:199
 #, kde-format
 msgid "Highlighting:"
-msgstr ""
+msgstr "Izcelšana:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
 #: widgets/EditProfileScrollingPage.ui:209
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr ""
+msgstr "Izcelt skata apgabalā ienākošās rindas"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:222
 #, kde-format
 msgid "Reflow Lines:"
-msgstr ""
+msgstr "Pārkārtot rindas:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:232
 #, kde-format
 msgid "Reflow lines when terminal resizes"
-msgstr ""
+msgstr "Pārkārtot rindas, terminālim mainot izmēru"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5325,13 +5033,10 @@ msgstr "Nepārtraukta klusuma slieksnis:"
 #: widgets/EditProfileTabsPage.ui:93
 #, kde-format
 msgid "The threshold for continuous silence to be detected by Konsole"
-msgstr "Nepārtraukta klusuma slieksnis, ko atklāt ar Konsole"
+msgstr "Nepārtraukta klusuma slieksnis, ko nosaka „Konsole“"
 
 #: widgets/HistorySizeWidget.cpp:40
-#, fuzzy, kde-format
-#| msgctxt "Unit of scrollback"
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgctxt "@label:textbox Unit of scrollback"
 msgid " line"
 msgid_plural " lines"
@@ -5347,14 +5052,12 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
+"Izmantojot šo opciju, ritināšanas atmiņu dati būs saglabāti RAM. Ja "
+"izvēlēsities milzīgu vērtību, sistēmai var beigties brīva RAM atmiņa un "
+"rasties darbības traucējumi."
 
 #: widgets/HistorySizeWidget.cpp:69
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:status"
-#| msgid ""
-#| "When using this option, the scrollback data will be written unencrypted "
-#| "to temporary files. Those temporary files will be deleted automatically "
-#| "when Konsole is closed in a normal manner."
+#, kde-kuit-format
 msgctxt "@info:tooltip"
 msgid ""
 "When using this option, the scrollback data will be written unencrypted to "
@@ -5363,22 +5066,23 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"Kad izmanto šo opciju, atpakaļrites dati tiks ierakstīti pagaidu datnēs "
-"nešifrēti. Šīs pagaidu datnes tiks izdzēstas automātiski, kad Konsole "
-"aizvērs parastā veidā."
+"Kad izmanto šo opciju, ritināšanas atmiņas dati tiks ierakstīti pagaidu "
+"datnēs nešifrēti. Šīs pagaidu datnes tiks dzēstas automātiski, kad „Konsole“ "
+"aizvērsies parastā veidā.<no/>Izmantojiet <emphasis>Iestatījumi → Konfigurēt "
+"„Konsole“ → Pagaidu datnes</emphasis>, lai atlasītu pagaidu datņu atrašanās "
+"vietu."
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:60
 #, kde-format
 msgid "Limit the remembered output to a fixed number of lines"
-msgstr "Ierobežot atmiņā turamos izvaddatus ar noteiktu rindu skaitu"
+msgstr "Ierobežot atmiņā turamos izvaddatus līdz noteiktam rindu skaitam"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size scrollback:"
+#, kde-format
 msgid "Fixed size:"
-msgstr "Fiksēts atpakaļritināšanas apjoms:"
+msgstr "Fiksēts izmērs:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5394,11 +5098,10 @@ msgstr "Atcerēties visu termināļa izvadi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgid "Unlimited scrollback"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "Unlimited"
-msgstr "Neierobežota atpakaļritināšana"
+msgstr "Bez ierobežojuma"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5408,36 +5111,31 @@ msgstr "Neatcerēties iepriekšējo izvadi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "None"
-msgstr "&Nevienu"
+msgstr "Nevienu"
 
 #: widgets/IncrementalSearchBar.cpp:49
-#, fuzzy, kde-format
-#| msgid "Find:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "Meklēt:"
+msgstr "Meklēt..."
 
 #: widgets/IncrementalSearchBar.cpp:51
-#, fuzzy, kde-format
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
-msgstr "Šeit ierakstiet meklējamo tekstu"
+msgstr "Ierakstiet meklējamo tekstu"
 
 #: widgets/IncrementalSearchBar.cpp:75
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
-msgstr "Nākamais"
+msgstr "Nākamā"
 
 #: widgets/IncrementalSearchBar.cpp:78
-#, fuzzy, kde-format
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "Atrast meklējamās frāzes nākamo atbilstību"
@@ -5446,104 +5144,90 @@ msgstr "Atrast meklējamās frāzes nākamo atbilstību"
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
-msgstr "Iepriekšējais"
+msgstr "Iepriekšējā"
 
 #: widgets/IncrementalSearchBar.cpp:87
-#, fuzzy, kde-format
-#| msgid "Find the previous match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Atrast meklējamās frāzes iepriekšējo atbilstību"
 
 #: widgets/IncrementalSearchBar.cpp:102
-#, fuzzy, kde-format
-#| msgid "Display the options menu"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "Rādīt opciju izvēlni"
 
 #: widgets/IncrementalSearchBar.cpp:109
-#, fuzzy, kde-format
-#| msgid "Close the search bar"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "Aizvērt meklēšanas joslu"
 
 #: widgets/IncrementalSearchBar.cpp:119
-#, fuzzy, kde-format
-#| msgid "Case sensitive"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
-msgstr "Reģistrjutīgs"
+msgstr "Reģistrjutīga"
 
 #: widgets/IncrementalSearchBar.cpp:121
-#, fuzzy, kde-format
-#| msgid "Sets whether the search is case sensitive"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
-msgstr "Nosaka, vai meklēšana ņems vērā burtu reģistru"
+msgstr "Nosaka, vai meklēšanā ir nozīme burtu lielumam"
 
 #: widgets/IncrementalSearchBar.cpp:124
-#, fuzzy, kde-format
-#| msgid "Match regular expression"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Meklēt regulāro izteiksmi"
 
 #: widgets/IncrementalSearchBar.cpp:128
-#, fuzzy, kde-format
-#| msgid "Highlight all matches"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Izcelt visas atbilstības"
 
 #: widgets/IncrementalSearchBar.cpp:130
-#, fuzzy, kde-format
-#| msgid "Sets whether matching text should be highlighted"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
-msgstr "Nosaka, vai atbilstības ir jāizceļ"
+msgstr "Nosaka, vai ir jāiekrāso atrastais teksts"
 
 #: widgets/IncrementalSearchBar.cpp:133
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
-msgstr ""
+msgstr "Meklēt no beigām"
 
 #: widgets/IncrementalSearchBar.cpp:135
-#, fuzzy, kde-format
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
-msgstr "Atrast meklējamās frāzes nākamo atbilstību"
+msgstr "Nosaka, vai meklēšanai ir jāsākas no beigām"
 
 #: widgets/IncrementalSearchBar.cpp:165
-#, fuzzy, kde-format
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
-msgstr "Atrast meklējamās frāzes nākamo atbilstību"
+msgstr "Meklēt meklējamo frāzi no beigām"
 
 #: widgets/IncrementalSearchBar.cpp:170
-#, fuzzy, kde-format
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
-msgstr "Atrast meklējamās frāzes nākamo atbilstību"
+msgstr "Meklēt meklējamo frāzi no sākuma"
 
 #: widgets/KonsolePrintManager.cpp:50
-#, fuzzy, kde-format
-#| msgid "Shell"
+#, kde-format
 msgid "Print Shell"
-msgstr "Čaula"
+msgstr "Drukāšanas čaula"
 
 #: widgets/RenameTabWidget.cpp:37
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "@label:listbox No color selected"
 msgid "None"
-msgstr "&Nevienu"
+msgstr "Neviena"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, remoteTabTitleEdit)
 #: widgets/RenameTabWidget.ui:41
@@ -5552,8 +5236,8 @@ msgid ""
 "Tab title format used when a remote command (e.g. connection to another "
 "computer via SSH) is being executed"
 msgstr ""
-"Cilnes virsraksta formāts, ko izmanto, kad tiek izpildīta attālināta komanda "
-"(piemēram, pieslēgšanās citam datoram caur SSH)"
+"Cilnes virsraksta formāts, kad tiek izpildīta attālināta komanda (piemēram, "
+"pieslēgšanās citam datoram caur SSH)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/RenameTabWidget.ui:60
@@ -5575,11 +5259,9 @@ msgstr "Normāls ciļņu virsraksta formāts"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox Column header text for the actual colors"
-#| msgid "Color"
+#, kde-format
 msgid "Tab Color:"
-msgstr "Krāsa"
+msgstr "Ciļņu krāsa:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
@@ -5589,15 +5271,15 @@ msgstr "Programmas nosaukums: %n"
 #: widgets/TabTitleFormatButton.cpp:22
 #, c-format
 msgid "Current Directory (Short): %d"
-msgstr "Pašreizējā mape (īsa): %d"
+msgstr "Pašreizējā mape (īsi): %d"
 
 #: widgets/TabTitleFormatButton.cpp:23
 msgid "Current Directory (Long): %D"
-msgstr "Pašreizējā mape (gara): %D"
+msgstr "Pašreizējā mape (gari): %D"
 
 #: widgets/TabTitleFormatButton.cpp:24 widgets/TabTitleFormatButton.cpp:39
 msgid "Window Title Set by Shell: %w"
-msgstr "Loga virsrakstu iestata čaula: %w"
+msgstr "Čaulas iestatītais loga virsraksts: %w"
 
 #: widgets/TabTitleFormatButton.cpp:25 widgets/TabTitleFormatButton.cpp:40
 msgid "Session Number: %#"
@@ -5614,13 +5296,11 @@ msgstr "Lokālais dators: %h"
 
 #: widgets/TabTitleFormatButton.cpp:28
 msgid "User's Bourne prompt sigil: %B"
-msgstr ""
+msgstr "Lietotāja Borna uzvednes „sigil“: %B"
 
 #: widgets/TabTitleFormatButton.cpp:35
-#, fuzzy
-#| msgid "User Name: %u"
 msgid "User Name@ (if given): %U"
-msgstr "Lietotājvārds: %u"
+msgstr "Lietotāja vārds@ (ja ir): %U"
 
 #: widgets/TabTitleFormatButton.cpp:36
 msgid "Remote Host (Short): %h"
@@ -5633,7 +5313,7 @@ msgstr "Attālinātais dators (gari): %H"
 #: widgets/TabTitleFormatButton.cpp:38
 #, c-format
 msgid "Command and arguments: %c"
-msgstr ""
+msgstr "Komanda un parametri: %c"
 
 #: widgets/TabTitleFormatButton.cpp:48
 #, kde-format
@@ -5641,85 +5321,70 @@ msgid "Insert"
 msgstr "Ievietot"
 
 #: widgets/TabTitleFormatButton.cpp:73
-#, fuzzy, kde-format
-#| msgid "Insert title format"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert title format"
 msgstr "Ievietot virsraksta formātu"
 
 #: widgets/TabTitleFormatButton.cpp:77
-#, fuzzy, kde-format
-#| msgid "Insert remote title format"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert remote title format"
 msgstr "Ievietot attālinātā virsraksta formātu"
 
 #: widgets/TerminalHeaderBar.cpp:80 widgets/TerminalHeaderBar.cpp:188
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Close tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Maximize terminal"
-msgstr "Aizvērt cilni"
+msgstr "Maksimizēt termināli"
 
 #: widgets/TerminalHeaderBar.cpp:91
-#, fuzzy, kde-format
-#| msgid "Above Terminal Area"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Move terminal to new tab"
-msgstr "Virs termināļa lauka"
+msgstr "Pārvietot termināli uz jaunu cilni"
 
 #: widgets/TerminalHeaderBar.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Close tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close terminal"
-msgstr "Aizvērt cilni"
+msgstr "Aizvērt termināli"
 
 #: widgets/TerminalHeaderBar.cpp:186
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Close tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Restore terminal"
-msgstr "Aizvērt cilni"
+msgstr "Atjaunināt termināli"
 
 #: widgets/ViewContainer.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
-msgstr "At&dalīt cilni"
+msgstr "Atvērt jaunu cilni"
 
 #: widgets/ViewContainer.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@info:whatsthis"
-#| msgid "Close the active tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
-msgstr "Aizvērt aktīvo cilni"
+msgstr "Aizvērt šo cilni"
 
 #: widgets/ViewContainer.cpp:94
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
-msgstr "At&dalīt cilni"
+msgstr "&Atdalīt cilni"
 
 #: widgets/ViewContainer.cpp:100
-#, fuzzy, kde-format
-#| msgid "&Rename Tab..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "Pā&rdēvēt cilni..."
+msgstr "&Konfigurēt vai pārsaukt cilni..."
 
 #: widgets/ViewContainer.cpp:105
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
-msgstr "Aizvērt &cilni"
+msgstr "Aizvērt cilni"
 
 #, fuzzy
 #~| msgid "Open File Manager"
