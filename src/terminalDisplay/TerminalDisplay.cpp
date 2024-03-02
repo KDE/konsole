@@ -271,7 +271,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
     prop.setScrollMetric(QScrollerProperties::MaximumVelocity, 1);
     // Workaround for QTBUG-88249 (non-flick gestures recognized as accelerating flick)
     prop.setScrollMetric(QScrollerProperties::AcceleratingFlickMaximumTime, 0.2);
-    prop.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+    prop.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOn);
     prop.setScrollMetric(QScrollerProperties::VerticalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
     prop.setScrollMetric(QScrollerProperties::DragStartDistance, 0.0);
     QScroller::scroller(this)->setScrollerProperties(prop);
@@ -2196,10 +2196,8 @@ void TerminalDisplay::scrollPrepareEvent(QScrollPrepareEvent *event)
     const int lineHeight = _terminalFont->fontHeight() + _terminalFont->lineSpacing();
     // clang-format off
     const QRect scrollableRegion = imageToWidget(QRect(
-        // Allow a line of overscroll in either direction: We'll be rounding the
-        // values QScroller gives us and still want to be able to scroll to every line.
         0, 0,
-        0, _screenWindow->lineCount() + 1));
+        0, _screenWindow->screen()->getHistLines()));
     // clang-format on
 
     // Give Qt the viewport and content window size
@@ -2208,6 +2206,13 @@ void TerminalDisplay::scrollPrepareEvent(QScrollPrepareEvent *event)
     event->setContentPos(QPointF(0.0, _screenWindow->currentLine() * lineHeight));
 
     event->accept();
+
+    // Abandon the scroller if it's still pressed and not being dragged after 500ms
+    QTimer::singleShot(500, this, [this]() {
+        if (QScroller::scroller(this)->state() == QScroller::Pressed) {
+            QScroller::scroller(this)->stop();
+        }
+    });
 }
 
 void TerminalDisplay::scrollEvent(QScrollEvent *event)
