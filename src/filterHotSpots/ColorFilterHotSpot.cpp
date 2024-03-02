@@ -14,6 +14,8 @@
 #include <QTimer>
 #include <QToolTip>
 
+#include <KLocalizedString>
+
 #include "KonsoleSettings.h"
 
 using namespace Konsole;
@@ -78,7 +80,8 @@ void ColorFilterHotSpot::tooltipRequested()
     QBuffer buffer(&data);
     pix.save(&buffer, "PNG");
 
-    const auto tooltipString = QStringLiteral("<img src='data:image/png;base64, %0'>").arg(QString::fromLocal8Bit(data.toBase64()));
+    const auto tooltipString = QStringLiteral("<img src='data:image/png;base64, %0'/><p><a>%1</a>")
+                                   .arg(QString::fromLocal8Bit(data.toBase64()), i18nc("Caption of hover tooltip", "Color Preview"));
 
     QPoint tooltipPosition = QPoint(_toolPos.x(), _toolPos.y());
     QToolTip::showText(tooltipPosition, tooltipString, qApp->focusWidget());
