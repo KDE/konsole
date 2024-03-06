@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-24 00:39+0000\n"
-"PO-Revision-Date: 2024-01-24 10:50+0100\n"
+"PO-Revision-Date: 2024-03-05 11:10+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -3689,7 +3689,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:953
 #, kde-format
 msgid "Bi-Directional text rendering"
-msgstr "Habilita rendering de texto Bi-Directional"
+msgstr "Habilita rendition (rendering) de texto Bi-Directional"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:240
@@ -4059,7 +4059,7 @@ msgstr "Disposition de Texto Complexe"
 #: widgets/EditProfileAppearancePage.ui:860
 #, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Habilita rendering de texto de modo de parola"
+msgstr "Habilita rendition (rendering) de texto de modo de parola"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:863
