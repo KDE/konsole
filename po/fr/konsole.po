@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-15 02:26+0000\n"
-"PO-Revision-Date: 2023-12-05 11:43+0100\n"
+"PO-Revision-Date: 2024-01-26 09:37+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -2611,7 +2611,7 @@ msgstr "Exécuter toutes les fenêtres Konsole dans un processus unique"
 #: settings/GeneralSettings.ui:134
 #, kde-format
 msgid "Highlight all matches"
-msgstr "Mettre en valeur toutes les correspondances"
+msgstr "Mettre en évidence toutes les correspondances"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
@@ -5098,14 +5098,13 @@ msgstr "Caché"
 #: widgets/EditProfileScrollingPage.ui:199
 #, kde-format
 msgid "Highlighting:"
-msgstr "Coloration syntaxique :"
+msgstr "Mise en évidence :"
 
 #. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
 #: widgets/EditProfileScrollingPage.ui:209
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr ""
-"Réaliser une coloration syntaxique dans les lignes allant être affichées"
+msgstr "Mettre en évidence les nouvelles lignes de l'affichage"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:222
@@ -5297,7 +5296,7 @@ msgstr "Correspond à une expression rationnelle"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
-msgstr "Mettre en valeur toutes les correspondances"
+msgstr "Mettre en évidence toutes les correspondances"
 
 #: widgets/IncrementalSearchBar.cpp:130
 #, kde-format
