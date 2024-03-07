@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-24 00:39+0000\n"
+"POT-Creation-Date: 2024-03-07 00:39+0000\n"
 "PO-Revision-Date: 2024-01-26 09:37+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -2611,7 +2611,7 @@ msgstr "Exécuter toutes les fenêtres Konsole dans un processus unique"
 #: settings/GeneralSettings.ui:134
 #, kde-format
 msgid "Highlight all matches"
-msgstr "Mettre en valeur toutes les correspondances"
+msgstr "Mettre en évidence toutes les correspondances"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
@@ -3267,60 +3267,60 @@ msgstr "Activer la génération des vignettes"
 msgid "Size: %1 x %2"
 msgstr "Taille : %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2250
+#: terminalDisplay/TerminalDisplay.cpp:2249
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Voulez-vous vraiment coller %1 caractère ? "
 msgstr[1] "Voulez-vous vraiment coller %1 caractères ? "
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirmer le collage"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2283
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fin de texte / Interruption : peut fermer le processus actuel"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fin de transmission : peut fermer le processus actuel"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Cloche : essaie d'émettre un avertissement audible"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Backspace"
 msgstr "Retour arrière"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Contrôle de périphérique « Trois / XOFF » : suspend la sortie"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substituer /Suspendre : peut suspendre le processus actuel"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Échap : utiliser pour manipuler l'état du terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 "Séparateur de fichiers / Quitter : peut interrompre le processus actuel"
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2313
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3329,31 +3329,31 @@ msgstr ""
 "Le texte que vous essayez de coller contient des caractères de contrôle "
 "cachés. Voulez-vous les filtrer ?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2316
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirmer le collage"
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Coller &sans les caractères de contrôle"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Coller &tout"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Annuler"
 
-#: terminalDisplay/TerminalDisplay.cpp:2551
+#: terminalDisplay/TerminalDisplay.cpp:2550
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3364,17 +3364,17 @@ msgstr ""
 "\">suspendue</a> par l'utilisation de « Ctrl+S ». Veuillez appuyer sur "
 "« <b>Ctrl+Q</b> » pour reprendre.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2606
+#: terminalDisplay/TerminalDisplay.cpp:2605
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ce terminal est en lecture seule."
 
-#: terminalDisplay/TerminalDisplay.cpp:3001
+#: terminalDisplay/TerminalDisplay.cpp:3000
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Modifier le &dossier vers"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3033
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Coller l'emplacement"
@@ -5098,14 +5098,13 @@ msgstr "Caché"
 #: widgets/EditProfileScrollingPage.ui:199
 #, kde-format
 msgid "Highlighting:"
-msgstr "Coloration syntaxique :"
+msgstr "Mise en évidence :"
 
 #. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
 #: widgets/EditProfileScrollingPage.ui:209
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr ""
-"Réaliser une coloration syntaxique dans les lignes allant être affichées"
+msgstr "Mettre en évidence les nouvelles lignes de l'affichage"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:222
@@ -5297,7 +5296,7 @@ msgstr "Correspond à une expression rationnelle"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
-msgstr "Mettre en valeur toutes les correspondances"
+msgstr "Mettre en évidence toutes les correspondances"
 
 #: widgets/IncrementalSearchBar.cpp:130
 #, kde-format
