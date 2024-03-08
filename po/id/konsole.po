@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2022-09-27 18:12+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -681,6 +681,13 @@ msgstr "Pilih Semua"
 #, kde-format
 msgid "Deselect All"
 msgstr "Tak Pilih Semua"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Pratilik:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5647,9 +5654,6 @@ msgstr "Tutup Tab"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "Ini tidak akan mengubah jendela terbuka apapun."
-
-#~ msgid "Preview:"
-#~ msgstr "Pratilik:"
 
 #~ msgid "Select the font used in this profile"
 #~ msgstr "Pilih fonta yang digunakan di profil ini"

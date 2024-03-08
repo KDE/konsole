@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2011-07-18 11:49+0200\n"
 "Last-Translator: Marko Dimjašević <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -777,6 +777,13 @@ msgstr "Odaberi sve"
 #, kde-format
 msgid "Deselect All"
 msgstr "Poništi izbor svega"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Pregled:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5948,9 +5955,6 @@ msgstr "&Zatvori karticu"
 #~ msgctxt "@title:group Generic, common options"
 #~ msgid "General"
 #~ msgstr "Općenito"
-
-#~ msgid "Preview:"
-#~ msgstr "Pregled:"
 
 #, fuzzy
 #~| msgid "Change the font used in this profile"

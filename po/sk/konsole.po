@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2023-12-12 19:29+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -690,6 +690,13 @@ msgstr "Vybrať všetko"
 #, kde-format
 msgid "Deselect All"
 msgstr "Zrušiť výber"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Náhľad:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5702,9 +5709,6 @@ msgstr "&Zavrieť kartu"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "Toto nezmení žiadne otvorené okná."
-
-#~ msgid "Preview:"
-#~ msgstr "Náhľad:"
 
 #~ msgid "Qt::ElideRight"
 #~ msgstr "Qt::ElideRight"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -693,6 +693,13 @@ msgstr "Vali kõik"
 #, kde-format
 msgid "Deselect All"
 msgstr "Tühista valik"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Eelvaatlus:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5743,9 +5750,6 @@ msgstr "Sulge kaart"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "See ei muuda ühtegi avatud akent."
-
-#~ msgid "Preview:"
-#~ msgstr "Eelvaatlus:"
 
 #~ msgid "Select the font used in this profile"
 #~ msgstr "Profiilis kasutatava fondi valimine"

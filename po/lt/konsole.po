@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -730,6 +730,13 @@ msgstr "Pažymėti viską"
 #, kde-format
 msgid "Deselect All"
 msgstr "Atžymėti viską"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Peržiūra:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5849,9 +5856,6 @@ msgstr "&Užverti kortelę"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "Tai nekeis jokio atverto lango."
-
-#~ msgid "Preview:"
-#~ msgstr "Peržiūra:"
 
 #~ msgid "Select the font used in this profile"
 #~ msgstr "Pasirinkite šiame profilyje naudojamą šriftą"

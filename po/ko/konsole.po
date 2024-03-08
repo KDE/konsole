@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2024-02-09 23:54+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -680,6 +680,13 @@ msgstr "모두 선택"
 #, kde-format
 msgid "Deselect All"
 msgstr "모두 선택 해제"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "미리 보기:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5586,9 +5593,6 @@ msgstr "탭 닫기"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "열린 창을 변경하지 않습니다."
-
-#~ msgid "Preview:"
-#~ msgstr "미리 보기:"
 
 #~ msgid "Qt::ElideRight"
 #~ msgstr "Qt::ElideRight"

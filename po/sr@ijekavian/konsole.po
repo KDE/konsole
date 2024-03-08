@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -709,6 +709,14 @@ msgstr "Изабери све"
 #, kde-format
 msgid "Deselect All"
 msgstr "Поништи избор"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "New Color Scheme"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Нова шема боја"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5741,12 +5749,6 @@ msgstr "&Затвори језичак"
 #~ msgid ""
 #~ "<p>Each profile must have a name before it can be saved into disk.</p>"
 #~ msgstr "<p>Сваки профил мора бити именован пре него што се сачува.</p>"
-
-#, fuzzy
-#~| msgctxt "@title:window"
-#~| msgid "New Color Scheme"
-#~ msgid "Color from theme"
-#~ msgstr "Нова шема боја"
 
 #~ msgid "Show menubar by default"
 #~ msgstr "Подразумевано прикажи траку менија"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2023-12-14 22:03+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Assamese <alministradores@softastur.org>\n"
@@ -663,6 +663,12 @@ msgstr ""
 #: CopyInputDialog.ui:53
 #, kde-format
 msgid "Deselect All"
+msgstr ""
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, kde-format
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
 msgstr ""
 
 #: filterHotSpots/FileFilterHotspot.cpp:160

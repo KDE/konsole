@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2024-03-05 11:10+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -685,6 +685,13 @@ msgstr "Selectiona Tote"
 #, kde-format
 msgid "Deselect All"
 msgstr "De-se&lectiona tote"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Vista preliminar:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5638,9 +5645,6 @@ msgstr "Claude scheda"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "Isto non modificara alcun fenestra aperite."
-
-#~ msgid "Preview:"
-#~ msgstr "Vista preliminar:"
 
 #~ msgid "Select the font used in this profile"
 #~ msgstr "Selige le font (dimension de littera) usate in iste profilo"

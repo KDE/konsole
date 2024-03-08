@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2024-01-24 21:47+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -680,6 +680,13 @@ msgstr "全部選擇"
 #, kde-format
 msgid "Deselect All"
 msgstr "全部取消選擇"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Color from theme"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "主題色彩"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5368,9 +5375,6 @@ msgstr "關閉分頁"
 #~ msgctxt "@label:textbox Name of the current default profile"
 #~ msgid " (Default)"
 #~ msgstr "預設"
-
-#~ msgid "Color from theme"
-#~ msgstr "主題色彩"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Shortcut won't work while the profile is not marked as visible."

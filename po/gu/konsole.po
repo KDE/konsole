@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2010-06-22 16:43+0530\n"
 "Last-Translator: Sweta Kothari <swkothar@redhat.com>\n"
 "Language-Team: Gujarati\n"
@@ -748,6 +748,13 @@ msgstr "બધું પસંદ કરો"
 #, kde-format
 msgid "Deselect All"
 msgstr "બધું નાપસંદ કરો"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "પૂર્વદર્શન:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5849,9 +5856,6 @@ msgstr "ટેબ બંધ કરો (&C)"
 #~ msgctxt "@title:group Generic, common options"
 #~ msgid "General"
 #~ msgstr "સામાન્ય"
-
-#~ msgid "Preview:"
-#~ msgstr "પૂર્વદર્શન:"
 
 #, fuzzy
 #~| msgid "Change the font used in this profile"

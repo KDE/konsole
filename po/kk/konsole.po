@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2013-11-18 03:40+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -735,6 +735,13 @@ msgstr "Барлығын таңдау"
 #, kde-format
 msgid "Deselect All"
 msgstr "Барлығын таңдаудан айну"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Мысал:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5836,9 +5843,6 @@ msgstr "Қ&ойындыны жабу"
 #~ msgctxt "@title:group Generic, common options"
 #~ msgid "General"
 #~ msgstr "Жалпы"
-
-#~ msgid "Preview:"
-#~ msgstr "Мысал:"
 
 #~ msgid "Select the font used in this profile"
 #~ msgstr "Осы профилінде пайдаланатын қаріпті таңдау"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2011-08-14 00:07+0530\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: Sinhala <danishka@gmail.com>\n"
@@ -763,6 +763,13 @@ msgstr "සියල්ල තෝරන්න"
 #, kde-format
 msgid "Deselect All"
 msgstr "තේරු සියල්ල අත්හරින්න"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "පූර්‍වදසුන:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5898,9 +5905,6 @@ msgstr "ටැබය වසන්න (&C)"
 #~ msgctxt "@title:group Generic, common options"
 #~ msgid "General"
 #~ msgstr "සාමාන්‍ය"
-
-#~ msgid "Preview:"
-#~ msgstr "පූර්‍වදසුන:"
 
 #, fuzzy
 #~| msgid "Change the font used in this profile"

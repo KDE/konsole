@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2020-08-01 09:45+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -690,6 +690,13 @@ msgstr "Markér alt"
 #, kde-format
 msgid "Deselect All"
 msgstr "Afmarkér alt"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Forhåndsvisning:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5759,9 +5766,6 @@ msgstr "Luk faneblad"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "Dette vil ikke påvirke åbne vinduer."
-
-#~ msgid "Preview:"
-#~ msgstr "Forhåndsvisning:"
 
 #~ msgid "Qt::ElideRight"
 #~ msgstr "Qt::ElideRight"

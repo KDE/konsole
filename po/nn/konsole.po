@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2023-07-27 22:27+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -688,6 +688,12 @@ msgstr "Merk alt"
 #, kde-format
 msgid "Deselect All"
 msgstr "Fjern merking"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, kde-format
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr ""
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2023-09-15 16:56+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -682,6 +682,13 @@ msgstr "Hamısını seçmək"
 #, kde-format
 msgid "Deselect All"
 msgstr "Seçimləri ləğv etmək"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Color from theme"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Mövzudan qaynaqlanan rəng"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5524,9 +5531,6 @@ msgstr "Vərəqi bağlamaq"
 #~ "                  <p>/usr/bin/kate PATH:LINE:COMLUMN</p>\n"
 #~ "                  <p>/usr/bin/gedit +LINE:COLUMN PATH</p>\n"
 #~ "                  </body></html>"
-
-#~ msgid "Color from theme"
-#~ msgstr "Mövzudan qaynaqlanan rəng"
 
 #~ msgid "&Current Tab Settings..."
 #~ msgstr "&Cari Vərəq Ayarları..."

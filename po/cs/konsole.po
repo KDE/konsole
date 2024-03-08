@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2024-01-19 15:54+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -675,6 +675,12 @@ msgstr "Vybrat vše"
 #, kde-format
 msgid "Deselect All"
 msgstr "Zrušit výběr"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, kde-format
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr ""
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2024-01-24 18:43+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -693,6 +693,13 @@ msgstr "Hautatu guztia"
 #, kde-format
 msgid "Deselect All"
 msgstr "Desautatu guztia"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Aurrebista:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5682,9 +5689,6 @@ msgstr "Itxi fitxa"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "Honek ez du aldatuko irekita dagoen leihorik."
-
-#~ msgid "Preview:"
-#~ msgstr "Aurrebista:"
 
 #~ msgid "Qt::ElideRight"
 #~ msgstr "Qt::ElideRight"

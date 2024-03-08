@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole trunk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2020-02-05 14:49+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -705,6 +705,13 @@ msgstr "എല്ലാം തെരഞ്ഞെടുക്കുക"
 #, kde-format
 msgid "Deselect All"
 msgstr "ഒന്നും തെരഞ്ഞെടുക്കണ്ട"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "കണ്ടുനോക്കുക"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5502,9 +5509,6 @@ msgstr "കിളിവാതില്‍ &അടയ്ക്കുക"
 #~ msgctxt "@title:group Generic, common options"
 #~ msgid "General"
 #~ msgstr "പൊതുവായുള്ള"
-
-#~ msgid "Preview:"
-#~ msgstr "കണ്ടുനോക്കുക"
 
 #, fuzzy
 #~ msgid "Select the font used in this profile"

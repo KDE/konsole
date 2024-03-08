@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2007-06-24 15:01+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -758,6 +758,13 @@ msgstr "Chọn"
 #| msgid "Select"
 msgid "Deselect All"
 msgstr "Chọn"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "New Color Scheme"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Giản đồ màu mới"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5658,8 +5665,3 @@ msgstr "Đón&g thẻ"
 #~| msgid "Show menu bar in new windows created from this profile"
 #~ msgid "Show menubar by default in each Konsole window"
 #~ msgstr "Hiển thị thanh trình đơn trong cửa sổ mới được tạo từ hồ sơ này"
-
-#, fuzzy
-#~| msgid "New Color Scheme"
-#~ msgid "Color from theme"
-#~ msgstr "Giản đồ màu mới"

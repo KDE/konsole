@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -737,6 +737,13 @@ msgstr "De&wis..."
 #| msgid "Se&lect..."
 msgid "Deselect All"
 msgstr "De&wis..."
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Find Pre&vious"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Canfod Blae&norol"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5628,11 +5635,6 @@ msgstr "Ca&u Sesiwn"
 #~| msgid "Se&lect..."
 #~ msgid "Select Any Font"
 #~ msgstr "De&wis..."
-
-#, fuzzy
-#~| msgid "Find Pre&vious"
-#~ msgid "Preview:"
-#~ msgstr "Canfod Blae&norol"
 
 #, fuzzy
 #~| msgid "Sc&rollbar"

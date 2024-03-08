@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2023-04-29 12:15+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -696,6 +696,13 @@ msgstr "Alle auswählen"
 #, kde-format
 msgid "Deselect All"
 msgstr "Nichts auswählen"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Vorschau:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5700,9 +5707,6 @@ msgstr "Unterfenster schließen"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "Dies ändert kein geöffnetes Fenster."
-
-#~ msgid "Preview:"
-#~ msgstr "Vorschau:"
 
 #~ msgid "Qt::ElideRight"
 #~ msgstr "Qt::ElideRight"

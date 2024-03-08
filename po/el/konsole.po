@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:39+0000\n"
+"POT-Creation-Date: 2024-03-08 00:40+0000\n"
 "PO-Revision-Date: 2023-01-07 21:31+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -698,6 +698,13 @@ msgstr "Επιλογή όλων"
 #, kde-format
 msgid "Deselect All"
 msgstr "Αποεπιλογή όλων"
+
+#: filterHotSpots/ColorFilterHotSpot.cpp:84
+#, fuzzy, kde-format
+#| msgid "Preview:"
+msgctxt "Caption of hover tooltip"
+msgid "Color Preview"
+msgstr "Προεπισκόπηση:"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -5735,9 +5742,6 @@ msgstr "Κλείσιμο καρτέλας"
 
 #~ msgid "This will not alter any open windows."
 #~ msgstr "Αυτό δε θα αλλάξει κανένα από τα ανοιχτά παράθυρα."
-
-#~ msgid "Preview:"
-#~ msgstr "Προεπισκόπηση:"
 
 #~ msgid "Qt::ElideRight"
 #~ msgstr "Qt::ElideRight"
