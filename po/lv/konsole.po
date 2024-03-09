@@ -5075,7 +5075,7 @@ msgid ""
 msgstr ""
 "Kad izmanto šo opciju, ritināšanas atmiņas dati tiks ierakstīti pagaidu "
 "datnēs nešifrēti. Šīs pagaidu datnes tiks dzēstas automātiski, kad „Konsole“ "
-"aizvērsies parastā veidā.<no/>Izmantojiet <emphasis>Iestatījumi → Konfigurēt "
+"aizvērsies parastā veidā.<nl/>Izmantojiet <emphasis>Iestatījumi → Konfigurēt "
 "„Konsole“ → Pagaidu datnes</emphasis>, lai atlasītu pagaidu datņu atrašanās "
 "vietu."
 

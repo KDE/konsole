@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-08 00:40+0000\n"
-"PO-Revision-Date: 2024-01-26 08:15+0200\n"
+"PO-Revision-Date: 2024-03-08 06:13+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -695,11 +695,10 @@ msgid "Deselect All"
 msgstr "ביטול בחירה"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "תצוגה מקדימה:"
+msgstr "תצוגת צבע מקדימה"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
