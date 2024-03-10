@@ -2039,7 +2039,9 @@ QString Session::validDirectory(const QString &dir) const
     }
 
     const QFileInfo fi(validDir);
-    if (!fi.exists() || !fi.isDir()) {
+    // If the directory does not exist, is not a directory, or is not accessible,
+    // use the home directory as a fallback.
+    if (!fi.exists() || !fi.isDir() || !fi.isReadable() || !fi.isExecutable()) {
         validDir = QDir::homePath();
     }
 
