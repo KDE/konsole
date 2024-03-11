@@ -1000,6 +1000,26 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
 
         // The window is visible and the setting changed
     } else if (windowFlags().testFlag(Qt::FramelessWindowHint) != frameless) {
+        // Usually, a QDialog with a parent stays on top of its parent.
+        // However, after hiding and showing the main window here, this
+        // stops being true.
+        //
+        // This can confuse users, if they apply this setting without closing
+        // the configuration dialog, and the dialog gets behind the main window.
+        // Afterwards, trying to open the configuration dialog doesn't work
+        // (it's already open, but behind the window).
+        //
+        // So, hide and show also the configuration dialog, which makes the dialog
+        // stay on top of its parent again.
+        ConfigurationDialog *confDialog = findChild<ConfigurationDialog *>();
+        QByteArray confDialogGeometry;
+        bool isConfDialogVisible = false;
+        if (confDialog != nullptr && confDialog->isVisible()) {
+            isConfDialogVisible = true;
+            confDialogGeometry = confDialog->saveGeometry();
+            confDialog->hide();
+        }
+
         if (KWindowSystem::isPlatformX11()) {
 #if HAVE_X11
             const auto oldGeometry = saveGeometry();
@@ -1020,6 +1040,11 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
             setWindowFlags(newFlags);
             // The setWindowFlags() has hidden the window. Show it again
             setVisible(true);
+        }
+
+        if (confDialog != nullptr && isConfDialogVisible) {
+            confDialog->restoreGeometry(confDialogGeometry);
+            confDialog->show();
         }
     }
 }
