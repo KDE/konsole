@@ -794,7 +794,7 @@ protected:
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
-        managementInfoBase[2] = KERN_PROC_ARGS;
+        managementInfoBase[2] = KERN_PROC_PID;
         managementInfoBase[3] = pid;
 
         auto kInfoProc = getProcInfoStruct(managementInfoBase, 4);
@@ -819,7 +819,7 @@ private:
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
-        managementInfoBase[2] = KERN_PROC_ARGS;
+        managementInfoBase[2] = KERN_PROC_PID;
         managementInfoBase[3] = pid;
 
         auto kInfoProc = getProcInfoStruct(managementInfoBase, 4);
