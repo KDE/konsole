@@ -606,6 +606,7 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
     painter.setPen(pen);
 
     if (m_parentDisplay->cursorShape() == Enum::BlockCursor) {
+        painter.setRenderHint(QPainter::Antialiasing, true);
         if (m_parentDisplay->hasFocus()) {
             painter.fillRect(cursorRect, cursorColor);
 
@@ -615,6 +616,7 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
             // it is drawn entirely inside cursorRect
             painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
         }
+        painter.setRenderHint(QPainter::Antialiasing, false);
     } else if (m_parentDisplay->cursorShape() == Enum::UnderlineCursor) {
         QLineF line(cursorRect.left() + halfWidth, cursorRect.bottom() - halfWidth, cursorRect.right() - halfWidth, cursorRect.bottom() - halfWidth);
         painter.drawLine(line);
