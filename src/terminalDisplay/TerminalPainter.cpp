@@ -596,6 +596,7 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
     QColor cursorColor = color.isValid() ? color : foregroundColor;
 
     QPen pen(cursorColor);
+    pen.setJoinStyle(Qt::MiterJoin);
     // TODO: the relative pen width to draw the cursor is a bit hacky
     // and set to 1/12 of the font width. Visually it seems to work at
     // all scales but there must be better ways to do it
