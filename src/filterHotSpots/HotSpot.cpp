@@ -138,7 +138,7 @@ void HotSpot::mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev)
         return;
     }
 
-    if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
+    if (td->openLinksByDirectClick() && !td->usesMouseTracking() || (ev->modifiers() & Qt::ControlModifier) != 0u) {
         activate(nullptr);
     }
 }

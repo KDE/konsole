@@ -1227,7 +1227,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent *ev)
                 Q_EMIT mouseSignal(mouseButton(0, ev->modifiers()), charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum(), 0);
             }
         }
-        if (_semanticInputClick && (ev->modifiers() & Qt::ControlModifier) == 0 && _screenWindow->screen()->replMode() == REPL_INPUT) {
+        if (_semanticInputClick && !usesMouseTracking() && (ev->modifiers() & Qt::ControlModifier) == 0 && _screenWindow->screen()->replMode() == REPL_INPUT) {
             Q_EMIT mouseSignal(mouseButton(0, ev->modifiers()), charColumn, charLine + _scrollBar->value() - _scrollBar->maximum(), 3);
         }
 
