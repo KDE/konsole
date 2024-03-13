@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-08 00:40+0000\n"
+"POT-Creation-Date: 2024-03-13 00:40+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -3362,7 +3362,7 @@ msgstr "Aktiviraj ubrzivače u meniju"
 msgid "Size: %1 x %2"
 msgstr "Veličina: %1×%2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2249
+#: terminalDisplay/TerminalDisplay.cpp:2254
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3372,52 +3372,52 @@ msgstr[2] "Želite li zaista da nalepite %1 znakova?"
 msgstr[3] "Želite li zaista da nalepite %1 znak?"
 
 # >> @title:window
-#: terminalDisplay/TerminalDisplay.cpp:2250
+#: terminalDisplay/TerminalDisplay.cpp:2255
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Potvrda nalepljivanja"
 
-#: terminalDisplay/TerminalDisplay.cpp:2283
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2313
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3425,7 +3425,7 @@ msgid ""
 msgstr ""
 
 # >> @title:window
-#: terminalDisplay/TerminalDisplay.cpp:2316
+#: terminalDisplay/TerminalDisplay.cpp:2321
 #, fuzzy, kde-format
 #| msgid "Confirm Paste"
 msgctxt "@title"
@@ -3433,27 +3433,27 @@ msgid "Confirm Paste"
 msgstr "Potvrda nalepljivanja"
 
 # >> @option:radio Cursor options
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2322
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Kursor prati boju znaka pod njim"
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Nalepi izbor"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2550
+#: terminalDisplay/TerminalDisplay.cpp:2555
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/"
@@ -3469,17 +3469,17 @@ msgstr ""
 "\">zaustavljen</a> pritiskom <b>Ctrl+S</b>. Pritisnite <b>Ctrl+Q</b> da "
 "produži. Kliknite <a href=\"#close\">ovde</a> da uklonite poruku.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2605
+#: terminalDisplay/TerminalDisplay.cpp:2610
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3000
+#: terminalDisplay/TerminalDisplay.cpp:3005
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Promeni &fasciklu na"
 
-#: terminalDisplay/TerminalDisplay.cpp:3033
+#: terminalDisplay/TerminalDisplay.cpp:3038
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Nalepi lokaciju"
