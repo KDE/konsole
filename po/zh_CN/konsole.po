@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-13 00:40+0000\n"
-"PO-Revision-Date: 2024-03-09 04:46\n"
+"PO-Revision-Date: 2024-03-13 20:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -681,7 +681,7 @@ msgstr "全部取消选择"
 #, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr ""
+msgstr "颜色预览"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -1275,7 +1275,7 @@ msgstr "内存"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr "标签页栏 / 拆分线"
+msgstr "标签页栏和拆分视图"
 
 #: MainWindow.cpp:906
 #, kde-format
@@ -2992,19 +2992,19 @@ msgstr "行为"
 #: settings/TabBarSettings.ui:298
 #, kde-format
 msgid "Put new tabs:"
-msgstr "放置新标签页："
+msgstr "新标签页位置："
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
 #: settings/TabBarSettings.ui:308
 #, kde-format
 msgid "At &the end"
-msgstr "在末端(&T)"
+msgstr "在最后(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
 #: settings/TabBarSettings.ui:318
 #, kde-format
 msgid "After current &tab"
-msgstr "在当前标签页后面(&T)"
+msgstr "在当前标签页之后(&T)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
 #: settings/TabBarSettings.ui:354
@@ -3016,13 +3016,13 @@ msgstr "中键点击关闭标签页"
 #: settings/TabBarSettings.ui:377
 #, kde-format
 msgid "Splits"
-msgstr "拆分"
+msgstr "拆分视图"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/TabBarSettings.ui:383
 #, kde-format
 msgid "Show Header:"
-msgstr "显示头部："
+msgstr "显示标题："
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:390
@@ -3042,7 +3042,7 @@ msgstr "从不"
 #: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "Drag Handle Size:"
-msgstr "拖拽柄大小："
+msgstr "拖动柄大小："
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
 #: settings/TabBarSettings.ui:436
