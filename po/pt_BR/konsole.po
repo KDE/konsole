@@ -15,30 +15,35 @@
 # Aracele Torres <aracele@kde.org>, 2017.
 # Camila Moura <camila.moura@kde.org>, 2017.
 # Thiago Masato Costa Sueto <herzenschein@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2024 Geraldo Simiao <geraldosimiao@fedoraproject.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-15 02:26+0000\n"
-"PO-Revision-Date: 2023-09-18 10:15-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2024-03-15 23:44-0300\n"
+"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Diniz Bortolotto, André Marcelo Alvarenga, Luiz Fernando Ranghetti"
+msgstr ""
+"Diniz Bortolotto, André Marcelo Alvarenga, Luiz Fernando Ranghetti, Geraldo "
+"Simião"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "diniz.bortolotto@gmail.com, alvarenga@kde.org, elchevive@opensuse.org"
+msgstr ""
+"diniz.bortolotto@gmail.com, alvarenga@kde.org, elchevive@opensuse.org, "
+"geraldosimiao@fedoraproject.org"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -116,11 +121,10 @@ msgstr ""
 "Arquivo de layout JSON a ser carregado para usar na nova instância do Konsole"
 
 #: Application.cpp:55
-#, fuzzy, kde-format
-#| msgid "Create a new profile based on the selected profile"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Use the built-in profile instead of the default profile"
-msgstr "Criar um novo perfil baseado no perfil selecionado"
+msgstr "Use o perfil integrado em vez do perfil padrão"
 
 #: Application.cpp:56
 #, kde-format
@@ -617,16 +621,15 @@ msgstr "Sem escala"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Escala do papel de parede:"
+msgstr "Virar papel de parede:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Sem virar"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
@@ -1893,12 +1896,10 @@ msgid "Default profile"
 msgstr "Perfil padrão"
 
 #: profile/ProfileManager.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Perfil #%1"
+msgstr "Perfil %1"
 
 #: profile/ProfileManager.cpp:270
 #, kde-format
@@ -2186,7 +2187,7 @@ msgstr "Dividir a exibição em superior-inferior"
 #: session/SessionController.cpp:676
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Copiar, exceto prompts"
 
 #: session/SessionController.cpp:682
 #, kde-format
@@ -2304,13 +2305,12 @@ msgstr "Enviar por &ZModem..."
 #: session/SessionController.cpp:861
 #, kde-format
 msgid "One-shot monitors"
-msgstr ""
+msgstr "Monitores únicos"
 
 #: session/SessionController.cpp:866
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitor para &atividades"
+msgstr "Monitor para &prompt"
 
 #: session/SessionController.cpp:873
 #, kde-format
@@ -2453,7 +2453,7 @@ msgstr "Matar programa"
 #: session/SessionController.cpp:1811
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "O prompt do shell é exibido na sessão '%1'"
 
 #: session/SessionController.cpp:2004
 #, kde-format
@@ -2725,7 +2725,7 @@ msgstr "Define se o texto igualado deve ser destacado"
 #: settings/konsole.kcfg:85
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr ""
+msgstr "Controlar se cgroups filhos são criados para guias individuais"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:89
@@ -2733,6 +2733,7 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Determina o nível de consumo de memória acima do qual a aceleração começará"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2828,10 +2829,9 @@ msgstr "Para arquivos de histórico, use esta pasta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Monitoramento de abas"
+msgstr "Habilitar o monitoramento de memória:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2845,6 +2845,14 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"As alterações entrarão em vigor após a reinicialização. Se ativado, o "
+"consumo de memória sustentado pelo Konsole\n"
+"excedendo o valor especificado fará com que o systemd-oomd elimine a(s) "
+"guia(s)\n"
+"contendo o(s) processo(s) que consome(m) muita memória. Observação: ativar\n"
+"pode causar lentidão maior durante alto consumo de memória e especificar\n"
+"valores excessivamente baixos ainda pode fazer com que o Konsole seja "
+"encerrado."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -3489,20 +3497,16 @@ msgid "Toggle maximize current view"
 msgstr "Alternar para maximizar a exibição atual"
 
 #: ViewManager.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Alternar para maximizar a exibição atual"
+msgstr "Alternar para zoom-maximizar a exibição atual"
 
 #: ViewManager.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Alternar para maximizar a exibição atual"
+msgstr "Alternar para zoom-maximizar a exibição atual"
 
 #: ViewManager.cpp:313
 #, kde-format
@@ -3526,13 +3530,13 @@ msgstr "Configurar a integração semântica (bash)"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr ""
+msgstr "Alternar exibição de dicas semânticas"
 
 #: ViewManager.cpp:339
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
-msgstr ""
+msgstr "Alternar exibição de números de linha"
 
 #: ViewManager.cpp:346
 #, kde-format
@@ -3547,8 +3551,7 @@ msgid "Switch to Tab %1"
 msgstr "Mudar para a aba %1"
 
 #: ViewManager.cpp:569
-#, fuzzy, kde-format
-#| msgid "Semantic Integration"
+#, kde-format
 msgid "Semantic hints "
 msgstr "Integração semântica"
 
@@ -3967,10 +3970,9 @@ msgstr "Cor:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:549
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Selecionar a cor a ser usada para desenhar o cursor"
+msgstr "Selecionar a cor a ser usada para desenhar a borda"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:571
@@ -3980,10 +3982,9 @@ msgstr "Terminais inativos:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:581
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Terminais inativos:"
+msgstr "Terminais ativos:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:591
@@ -4039,10 +4040,9 @@ msgstr "Escurecer"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indicar se a janela está ativa escurecendo as cores"
+msgstr "Indicar se a janela está ativa desenhando uma borda"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:746
@@ -4070,16 +4070,15 @@ msgstr "Layout de texto complexo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:860
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Renderização de texto bidirecional"
+msgstr "Ativar renderização de texto no modo palavra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:863
 #, kde-format
 msgid "Word mode"
-msgstr ""
+msgstr "Modo palavra"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:876
@@ -4088,18 +4087,20 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignorar alterações de atributos no meio da palavra (caso contrário, as "
+"alterações de atributos quebram a palavra durante a renderização)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:879
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Utilizar os mesmo atributos para toda a palavra"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:892
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Renderizar palavras de caracteres ASCII juntas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:895
@@ -4111,14 +4112,13 @@ msgstr "Caracteres ASCII "
 #: widgets/EditProfileAppearancePage.ui:908
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Renderizar palavras de caracteres brahmicos juntas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:911
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Corresponder caractere atual"
+msgstr "Caracteres de script brahmicos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:924
@@ -4131,38 +4131,38 @@ msgstr "Fonte emoji:"
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"As linhas são sempre LTR, em vez de determinadas pelo primeiro caractere "
+"forte"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:969
 #, kde-format
 msgid "force LTR line direction"
-msgstr ""
+msgstr "forçar direção da linha LTR"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:982
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Trate os caracteres de desenho de tabela como LTR forte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:985
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Substituição do modo BiDi de caracteres da tabela"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:998
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Colar &sem os caracteres de controle"
+msgstr "Ignore a largura dos caracteres problemáticos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1001
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Substituir wcwidth"
 
 #: widgets/EditProfileDialog.cpp:67
 #, kde-format
@@ -4241,13 +4241,13 @@ msgstr "Um perfil com o nome \"%1\" já existe."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "O nome do perfil excedeu o comprimento máximo permitido (%1)."
 
 #: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Os caracteres destacados são inválidos em nomes de perfis: %1."
 
 #: widgets/EditProfileDialog.cpp:411
 #, kde-format
@@ -4530,13 +4530,13 @@ msgstr "Emulação de teclas para cima/baixo"
 #: widgets/EditProfileGeneralPage.ui:390
 #, kde-format
 msgid "Mouse click in input line moves cursor"
-msgstr ""
+msgstr "Clique do mouse na linha de entrada move o cursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: widgets/EditProfileGeneralPage.ui:403
 #, kde-format
 msgid "Semantic hints:"
-msgstr ""
+msgstr "Dicas semânticas:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4562,7 +4562,7 @@ msgstr "Nunca"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr ""
+msgstr "Quando as dicas de URL são exibidas"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -4581,27 +4581,25 @@ msgstr "Sempre"
 #: widgets/EditProfileGeneralPage.ui:449
 #, kde-format
 msgid "Red error bars:"
-msgstr ""
+msgstr "Barras de erro vermelhas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:495
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Borrar o plano de fundo"
+msgstr "Plano de fundo erro vermelho:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:541
 #, kde-format
 msgid "Alternating bars:"
-msgstr ""
+msgstr "Barras alternadas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:587
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Borrar o plano de fundo"
+msgstr "Alternar o plano de fundo:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:17
@@ -4932,7 +4930,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:435
 #, kde-format
 msgid "Preview Colors on hover"
-msgstr ""
+msgstr "Visualizar cores ao passar o mouse"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
 #: widgets/EditProfileMousePage.ui:455
