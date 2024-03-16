@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-13 00:40+0000\n"
-"PO-Revision-Date: 2024-03-14 19:27\n"
+"POT-Creation-Date: 2024-03-16 00:41+0000\n"
+"PO-Revision-Date: 2024-03-15 21:00\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2051,7 +2051,7 @@ msgstr "无法以参数“%2”启动程序“%1”。"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "“%1“中的静止 (会话”%2“)"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1813
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
@@ -2091,7 +2091,7 @@ msgstr "程序“%1”以状态 %2 退出。"
 msgid "ZModem Progress"
 msgstr "ZModem 进度"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "“%1“中的活动 (会话”%2“)"

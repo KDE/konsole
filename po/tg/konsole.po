@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-13 00:40+0000\n"
+"POT-Creation-Date: 2024-03-16 00:41+0000\n"
 "PO-Revision-Date: 2019-09-29 12:43+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -2251,7 +2251,7 @@ msgstr "Невозможно запустить программу «%1» с п�
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Хомӯшӣ дар сессия '%1'"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1813
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2290,7 +2290,7 @@ msgstr "Программа «%1» завершилась с кодом %2."
 msgid "ZModem Progress"
 msgstr "ZМодем тараққӣ"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

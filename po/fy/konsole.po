@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-13 00:40+0000\n"
+"POT-Creation-Date: 2024-03-16 00:41+0000\n"
 "PO-Revision-Date: 2009-09-13 16:45+0100\n"
 "Last-Translator: Berend Ytsma <berendy@gmail.com>\n"
 "Language-Team: Frysk <kde-i18n-fry@kde.org>\n"
@@ -2305,7 +2305,7 @@ msgstr "Koe programma '%1' net starte mei de arguminten '%2'."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Stilte yn sesje '%1'"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1813
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2344,7 +2344,7 @@ msgstr "Programma '%1' is der útgong mei tastân %2."
 msgid "ZModem Progress"
 msgstr "ZModem-fuortgong"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-13 00:40+0000\n"
-"PO-Revision-Date: 2024-01-25 11:15+0100\n"
+"POT-Creation-Date: 2024-03-16 00:41+0000\n"
+"PO-Revision-Date: 2024-03-09 14:12+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -693,11 +693,10 @@ msgid "Deselect All"
 msgstr "Deseleziona tutto"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Anteprima:"
+msgstr "Anteprima del colore"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -2087,7 +2086,7 @@ msgstr "Impossibile avviare il programma «%1» con gli argomenti «%2»."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silenzio in «%1» (sessione «%2»)"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1813
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
@@ -2129,7 +2128,7 @@ msgstr "Il programma «%1» è terminata con lo stato %2."
 msgid "ZModem Progress"
 msgstr "Avanzamento ZModem"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Attività in «%1» (sessione «%2»)"

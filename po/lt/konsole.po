@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-13 00:40+0000\n"
+"POT-Creation-Date: 2024-03-16 00:41+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -2171,7 +2171,7 @@ msgstr "Nepavyko paleisti programos „%1“ su parametrais „%2“."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Jokios veiklos sesijoje „%1“"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1813
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2209,7 +2209,7 @@ msgstr "Programa „%1“ baigė darbą ir pranešė kodą „%2“."
 msgid "ZModem Progress"
 msgstr "ZModem eiga"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
