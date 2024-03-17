@@ -63,6 +63,7 @@ enum XTERM_EXTENDED {
 
 Vt102Emulation::Vt102Emulation()
     : Emulation()
+    , tokenBuffer(256)
     , _currentModes(TerminalState())
     , _savedModes(TerminalState())
     , _pendingSessionAttributesUpdates(QHash<int, QString>())
@@ -318,7 +319,9 @@ void Vt102Emulation::addSub()
 
 void Vt102Emulation::addToCurrentToken(uint cc)
 {
-    tokenBufferPos = qMin(tokenBufferPos, MAX_TOKEN_LENGTH - 1);
+    if (tokenBuffer.size() <= tokenBufferPos) {
+        tokenBuffer.resize(tokenBufferPos + 1);
+    }
     tokenBuffer[tokenBufferPos] = cc;
     tokenBufferPos++;
 }
@@ -2752,7 +2755,7 @@ char Vt102Emulation::eraseChar() const
 }
 
 // return contents of the scan buffer
-static QString hexdump2(char32_t *s, int len)
+static QString hexdump2(const QList<char32_t> &s, int len)
 {
     int i;
     char dump[128];
@@ -3074,7 +3077,7 @@ bool Vt102Emulation::processSixel(uint cc)
     default:
         break;
     }
-    char32_t *s = tokenBuffer;
+    QList<char32_t>& s = tokenBuffer;
     const int p = tokenBufferPos;
 
     if (!m_SixelStarted && (sixel() || s[0] == '!' || s[0] == '#')) {

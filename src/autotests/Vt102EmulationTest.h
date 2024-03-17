@@ -112,7 +112,7 @@ public:
 
     void processSessionAttributeRequest(const int tokenSize, const uint terminator) override
     {
-        items.push_back(ProcessSessionAttributeRequest{std::vector<uint>(tokenBuffer, tokenBuffer + tokenSize)});
+        items.push_back(ProcessSessionAttributeRequest{std::vector<uint>(tokenBuffer.begin(), tokenBuffer.end())});
         if (!blockFurtherProcessing) {
             Vt102Emulation::processSessionAttributeRequest(tokenSize, terminator);
         }

@@ -14,6 +14,8 @@
 #include <QMediaPlayer>
 #include <QPair>
 #include <QVector>
+#include <QList>
+
 
 // Konsole
 #include "Emulation.h"
@@ -129,7 +131,7 @@ private:
     int tokenBufferPos;
 
 protected:
-    char32_t tokenBuffer[MAX_TOKEN_LENGTH]; // FIXME: overflow?
+    QList<char32_t> tokenBuffer;
 
 private:
 #define MAXARGS 16
