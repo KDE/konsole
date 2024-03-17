@@ -192,7 +192,7 @@ bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
         auto *keyEvent = static_cast<QKeyEvent *>(event);
         QToolButton *toolButton = nullptr;
 
-        if (keyEvent->key() == Qt::Key_Return) {
+        if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) {
             if (watched == _searchEdit && event->type() == QEvent::KeyPress) {
                 if (keyEvent->modifiers() == Qt::NoModifier) {
                     _findNextButton->click();
