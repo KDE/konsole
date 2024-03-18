@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-16 00:41+0000\n"
+"POT-Creation-Date: 2024-03-18 00:40+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -2117,7 +2117,7 @@ msgstr "Biazdziejnasć u \"%1\" (sieans \"%2\")"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1813
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
 #, kde-format
 msgid "Show session"
 msgstr "Pakazać sieans"
@@ -3667,7 +3667,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zahruzić makiet ukladak z fajla"
 
-#: Vt102Emulation.cpp:2449
+#: Vt102Emulation.cpp:2452
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
