@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-18 00:40+0000\n"
-"PO-Revision-Date: 2024-03-08 06:13+0200\n"
+"PO-Revision-Date: 2024-03-19 15:02+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2591,20 +2591,20 @@ msgstr "התראות:"
 #: settings/GeneralSettings.ui:224
 #, kde-format
 msgid "All dialogs will be shown again"
-msgstr "כל הדיאלוגים יוצגו שוב"
+msgstr "כל החלוניות יוצגו שוב"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:227
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "אפשר את כל הודעות \"אל תשאל שוב\""
+msgstr "לאפשר את כל ההודעות שסומנו ב„לא לשאול שוב”"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
 #: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether search should start from the bottom"
-msgstr "קובע האם החיפוש יתחיל מהסוף"
+msgstr "מגדיר האם החיפוש יתחיל מהסוף"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
@@ -2617,7 +2617,7 @@ msgstr "חיפוש לאחור"
 #: settings/konsole.kcfg:18
 #, kde-format
 msgid "Show window title set by escape sequence on the titlebar"
-msgstr "הצג את כותרת החלון כפי שנקבע על ידי escape sequence"
+msgstr "הצגת כותרת החלון כפי שהוגדרה על ידי תו מילוט בשורת הכותרת"
 
 #. i18n: ectx: tooltip, entry (AllowMenuAccelerators), group (KonsoleWindow)
 #: settings/konsole.kcfg:23
@@ -2629,13 +2629,13 @@ msgstr "לאפשר למשתמשים לגשת לתפריט העליון באמצ�
 #: settings/konsole.kcfg:27
 #, kde-format
 msgid "Use current window size on next startup"
-msgstr "השתמש בגודל החלון הנוכחי בהפעלה הבאה"
+msgstr "להשתמש בגודל החלון הנוכחי בהפעלה הבאה"
 
 #. i18n: ectx: tooltip, entry (RememberWindowSize), group (KonsoleWindow)
 #: settings/konsole.kcfg:28
 #, kde-format
 msgid "The window size will be saved upon exiting Konsole"
-msgstr "גודל החלון יישמור בעת היציאה מ־Konsole"
+msgstr "גודל החלון יישמר עם היציאה מ־Konsole"
 
 #. i18n: ectx: label, entry (ThumbnailSize), group (ThumbnailsSettings)
 #: settings/konsole.kcfg:42
@@ -2680,13 +2680,13 @@ msgstr "החיפוש תלוי רישיות"
 #: settings/konsole.kcfg:73
 #, kde-format
 msgid "Highlight all search matches"
-msgstr "הדגש את כל התוצאות"
+msgstr "הדגשת כל התוצאות"
 
 #. i18n: ectx: tooltip, entry (SearchHighlightMatches), group (SearchSettings)
 #: settings/konsole.kcfg:74
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
-msgstr "קובע אם להדגיש את הטקסט שנמצא"
+msgstr "מגדיר האם להדגיש את הטקסט שנמצא"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:85
