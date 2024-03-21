@@ -195,6 +195,8 @@ private:
     bool _ignore = false;
     int _nIntermediate = 0;
     unsigned char _intermediate[1];
+    // Used to get expected behaviour in emulated up/down movement in REPL mode.
+    int _targetCol = -1;
 
     void switchState(const ParserStates newState, const uint cc);
     void esc_dispatch(const uint cc);

@@ -2405,8 +2405,13 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
             && ((up && _currentScreen->replModeStart() <= std::make_pair(cuY - 1, cuX))
                 || (!up && std::make_pair(cuY + 1, cuX) <= _currentScreen->replModeEnd()))) {
             entry = _keyTranslator->findEntry(up ? Qt::Key_Left : Qt::Key_Right, Qt::NoModifier, states);
-            emulateUpDown(up ? 1 : -1, entry, textToSend);
+            if (_targetCol == -1) {
+                _targetCol = cuX;
+            }
+            emulateUpDown(up ? 1 : -1, entry, textToSend, _targetCol);
         } else {
+            _targetCol = -1; // Any non Up/Down key clears the taget column for emulated movement.
+
             // special handling for the Alt (aka. Meta) modifier.  pressing
             // Alt+[Character] results in Esc+[Character] being sent
             // (unless there is an entry defined for this particular combination
