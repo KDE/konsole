@@ -2218,10 +2218,7 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
             int cuY = _currentScreen->getCursorY();
             QByteArray textToSend;
             if (cuY != py) {
-                for (int i = abs(py - cuY); i > 0; i--) {
-                    emulateUpDown(py < cuY, LRKeys[py > cuY], textToSend, i == 1 ? px : -1);
-                    textToSend += LRKeys[py > cuY].text();
-                }
+                emulateUpDown(cuY - py, LRKeys[py > cuY], textToSend, px);
             } else {
                 if (cuX < px) {
                     for (int i = 0; i < px - cuX; i++) {
@@ -2285,29 +2282,39 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
     sendString(command);
 }
 
-void Vt102Emulation::emulateUpDown(bool up, KeyboardTranslator::Entry entry, QByteArray &textToSend, int toCol)
+void Vt102Emulation::emulateUpDown(int up, KeyboardTranslator::Entry entry, QByteArray &textToSend, int toCol)
 {
+    if (up == 0)
+        return;
     int cuX = _currentScreen->getCursorX();
     int cuY = _currentScreen->getCursorY();
-    int realX = cuX;
-    QVector<LineProperty> lineProperties = _currentScreen->getLineProperties(cuY - 1 + _currentScreen->getHistLines(),
-                                                                             qMin(_currentScreen->getLines() - 1, cuY + 1) + _currentScreen->getHistLines());
-    int num = _currentScreen->getColumns();
-    if (up) {
-        if ((lineProperties[0].flags.f.wrapped) == 0) {
-            num = cuX + qMax(0, lineProperties[0].length - cuX) + 1;
-        }
+    int firstLine, lastLine, targetLine;
+    int targetCol;
+    if (up > 0) {
+        firstLine = cuY - up + _currentScreen->getHistLines();
+        lastLine = cuY - 1 + _currentScreen->getHistLines();
+        targetLine = 0;
     } else {
-        if ((lineProperties[1].flags.f.wrapped) == 0 || (lineProperties[2].flags.f.wrapped) == 0) {
-            realX = qMin(cuX, lineProperties[2].length + 1);
-            num = lineProperties[1].length - cuX + realX;
-        }
+        firstLine = cuY + _currentScreen->getHistLines();
+        lastLine = cuY - up + _currentScreen->getHistLines();
+        targetLine = lastLine - firstLine;
     }
-    if (toCol > -1) {
-        num += up ? realX - toCol : toCol - realX;
+    if (firstLine < 0 || lastLine >= _currentScreen->getLines() + _currentScreen->getHistLines()) {
+        return;
     }
-    for (int i = 1; i < num; i++) {
-        // One more will be added by the rest of the code.
+
+    QVector<LineProperty> lineProperties = _currentScreen->getLineProperties(firstLine, lastLine);
+
+    targetCol = qMin(toCol == -1 ? cuX : toCol, lineProperties[targetLine].length - 1);
+
+    if (up < 0) {
+        lineProperties.removeLast();
+    }
+    int num = up > 0 ? cuX - targetCol : targetCol - cuX;
+    for (LineProperty i : lineProperties) {
+        num += i.length + 1;
+    }
+    for (int i = 0; i < num; i++) {
         textToSend += entry.text();
     }
 }
@@ -2393,59 +2400,57 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 
         int cuX = _currentScreen->getCursorX();
         int cuY = _currentScreen->getCursorY();
-        if ((event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) && _currentScreen->replMode() == REPL_INPUT
-            && _currentScreen->currentTerminalDisplay()->semanticUpDown()) {
-            bool up = event->key() == Qt::Key_Up;
-            if ((up && _currentScreen->replModeStart() <= std::make_pair(cuY - 1, cuX))
-                || (!up && std::make_pair(cuY + 1, cuX) <= _currentScreen->replModeEnd())) {
-                entry = _keyTranslator->findEntry(up ? Qt::Key_Left : Qt::Key_Right, Qt::NoModifier, states);
-                emulateUpDown(up, entry, textToSend);
-            }
-        }
-
-        // special handling for the Alt (aka. Meta) modifier.  pressing
-        // Alt+[Character] results in Esc+[Character] being sent
-        // (unless there is an entry defined for this particular combination
-        //  in the keyboard modifier)
-        const bool wantsAltModifier = ((entry.modifiers() & entry.modifierMask() & Qt::AltModifier) != 0U);
-        const bool wantsMetaModifier = ((entry.modifiers() & entry.modifierMask() & Qt::MetaModifier) != 0U);
-        const bool wantsAnyModifier = ((entry.state() & entry.stateMask() & KeyboardTranslator::AnyModifierState) != 0);
-
-        if (((modifiers & Qt::AltModifier) != 0U) && !(wantsAltModifier || wantsAnyModifier) && !event->text().isEmpty()) {
-            textToSend.prepend("\033");
-        }
-        if (((modifiers & Qt::MetaModifier) != 0U) && !(wantsMetaModifier || wantsAnyModifier) && !event->text().isEmpty()) {
-            textToSend.prepend("\030@s");
-        }
-
-        if (entry.command() != KeyboardTranslator::NoCommand) {
-            if ((entry.command() & KeyboardTranslator::EraseCommand) != 0) {
-                textToSend += eraseChar();
-            }
-            if (currentView != nullptr) {
-                if ((entry.command() & KeyboardTranslator::ScrollPageUpCommand) != 0) {
-                    currentView->scrollScreenWindow(ScreenWindow::ScrollPages, -1);
-                } else if ((entry.command() & KeyboardTranslator::ScrollPageDownCommand) != 0) {
-                    currentView->scrollScreenWindow(ScreenWindow::ScrollPages, 1);
-                } else if ((entry.command() & KeyboardTranslator::ScrollLineUpCommand) != 0) {
-                    currentView->scrollScreenWindow(ScreenWindow::ScrollLines, -1);
-                } else if ((entry.command() & KeyboardTranslator::ScrollLineDownCommand) != 0) {
-                    currentView->scrollScreenWindow(ScreenWindow::ScrollLines, 1);
-                } else if ((entry.command() & KeyboardTranslator::ScrollUpToTopCommand) != 0) {
-                    currentView->scrollScreenWindow(ScreenWindow::ScrollLines, -currentView->screenWindow()->currentLine());
-                } else if ((entry.command() & KeyboardTranslator::ScrollDownToBottomCommand) != 0) {
-                    currentView->scrollScreenWindow(ScreenWindow::ScrollLines, lineCount());
-                } else if ((entry.command() & KeyboardTranslator::ScrollPromptUpCommand) != 0) {
-                    currentView->scrollScreenWindow(ScreenWindow::ScrollPrompts, -1);
-                } else if ((entry.command() & KeyboardTranslator::ScrollPromptDownCommand) != 0) {
-                    currentView->scrollScreenWindow(ScreenWindow::ScrollPrompts, 1);
-                }
-            }
-        } else if (!entry.text().isEmpty()) {
-            textToSend += entry.text(true, modifiers);
+        bool up = event->key() == Qt::Key_Up;
+        if (((up || event->key() == Qt::Key_Down) && _currentScreen->replMode() == REPL_INPUT && _currentScreen->currentTerminalDisplay()->semanticUpDown())
+            && ((up && _currentScreen->replModeStart() <= std::make_pair(cuY - 1, cuX))
+                || (!up && std::make_pair(cuY + 1, cuX) <= _currentScreen->replModeEnd()))) {
+            entry = _keyTranslator->findEntry(up ? Qt::Key_Left : Qt::Key_Right, Qt::NoModifier, states);
+            emulateUpDown(up ? 1 : -1, entry, textToSend);
         } else {
-            Q_ASSERT(_codec);
-            textToSend += _codec->fromUnicode(event->text());
+            // special handling for the Alt (aka. Meta) modifier.  pressing
+            // Alt+[Character] results in Esc+[Character] being sent
+            // (unless there is an entry defined for this particular combination
+            //  in the keyboard modifier)
+            const bool wantsAltModifier = ((entry.modifiers() & entry.modifierMask() & Qt::AltModifier) != 0U);
+            const bool wantsMetaModifier = ((entry.modifiers() & entry.modifierMask() & Qt::MetaModifier) != 0U);
+            const bool wantsAnyModifier = ((entry.state() & entry.stateMask() & KeyboardTranslator::AnyModifierState) != 0);
+
+            if (((modifiers & Qt::AltModifier) != 0U) && !(wantsAltModifier || wantsAnyModifier) && !event->text().isEmpty()) {
+                textToSend.prepend("\033");
+            }
+            if (((modifiers & Qt::MetaModifier) != 0U) && !(wantsMetaModifier || wantsAnyModifier) && !event->text().isEmpty()) {
+                textToSend.prepend("\030@s");
+            }
+
+            if (entry.command() != KeyboardTranslator::NoCommand) {
+                if ((entry.command() & KeyboardTranslator::EraseCommand) != 0) {
+                    textToSend += eraseChar();
+                }
+                if (currentView != nullptr) {
+                    if ((entry.command() & KeyboardTranslator::ScrollPageUpCommand) != 0) {
+                        currentView->scrollScreenWindow(ScreenWindow::ScrollPages, -1);
+                    } else if ((entry.command() & KeyboardTranslator::ScrollPageDownCommand) != 0) {
+                        currentView->scrollScreenWindow(ScreenWindow::ScrollPages, 1);
+                    } else if ((entry.command() & KeyboardTranslator::ScrollLineUpCommand) != 0) {
+                        currentView->scrollScreenWindow(ScreenWindow::ScrollLines, -1);
+                    } else if ((entry.command() & KeyboardTranslator::ScrollLineDownCommand) != 0) {
+                        currentView->scrollScreenWindow(ScreenWindow::ScrollLines, 1);
+                    } else if ((entry.command() & KeyboardTranslator::ScrollUpToTopCommand) != 0) {
+                        currentView->scrollScreenWindow(ScreenWindow::ScrollLines, -currentView->screenWindow()->currentLine());
+                    } else if ((entry.command() & KeyboardTranslator::ScrollDownToBottomCommand) != 0) {
+                        currentView->scrollScreenWindow(ScreenWindow::ScrollLines, lineCount());
+                    } else if ((entry.command() & KeyboardTranslator::ScrollPromptUpCommand) != 0) {
+                        currentView->scrollScreenWindow(ScreenWindow::ScrollPrompts, -1);
+                    } else if ((entry.command() & KeyboardTranslator::ScrollPromptDownCommand) != 0) {
+                        currentView->scrollScreenWindow(ScreenWindow::ScrollPrompts, 1);
+                    }
+                }
+            } else if (!entry.text().isEmpty()) {
+                textToSend += entry.text(true, modifiers);
+            } else {
+                Q_ASSERT(_codec);
+                textToSend += _codec->fromUnicode(event->text());
+            }
         }
 
         if (!isReadOnly) {
