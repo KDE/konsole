@@ -2312,7 +2312,7 @@ void Vt102Emulation::emulateUpDown(int up, KeyboardTranslator::Entry entry, QByt
     }
     int num = up > 0 ? cuX - targetCol : targetCol - cuX;
     for (LineProperty i : lineProperties) {
-        num += i.length + 1;
+        num += i.length + 1 - i.flags.f.wrapped;
     }
     for (int i = 0; i < num; i++) {
         textToSend += entry.text();
