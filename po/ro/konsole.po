@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-18 00:40+0000\n"
+"POT-Creation-Date: 2024-03-22 00:40+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -3633,7 +3633,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Încarcă aranjamentul filelor din fișier"
 
-#: Vt102Emulation.cpp:2452
+#: Vt102Emulation.cpp:2459
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
