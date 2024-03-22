@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-15 02:26+0000\n"
-"PO-Revision-Date: 2024-03-14 00:11+0300\n"
+"POT-Creation-Date: 2024-03-22 02:23+0000\n"
+"PO-Revision-Date: 2024-03-21 20:47+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2606,7 +2606,7 @@ msgstr "Tüm pencereler tekrar gösterilecek"
 #: settings/GeneralSettings.ui:227
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "Tüm ‘Bir Daha Sorma’ İletilerini Etkinleştir"
+msgstr "Tüm “Bir Daha Sorma” İletilerini Etkinleştir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
@@ -3206,59 +3206,59 @@ msgstr "Küçük görsel oluşturmayı etkinleştir"
 msgid "Size: %1 x %2"
 msgstr "Boyut: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2250
+#: terminalDisplay/TerminalDisplay.cpp:2249
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "%1 karakter yapıştırmak istediğinizden emin misiniz?"
 msgstr[1] "%1 karakter yapıştırmak istediğinizden emin misiniz?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Yapıştırmayı Doğrula"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2283
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Metnin sonu/Kesinti: Geçerli süreçten çıkabilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "İletimin sonu: Geçerli süreçten çıkılabilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Zil: sesli bir uyarı vermeye çalışacak"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Backspace"
 msgstr "Geri silme"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Aygıt Denetimi Üç/XOFF: Çıktıyı askıya alır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Yerine koy/Askıya al: Geçerli süreci askıya alabilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Vazgeç: Uçbirim durumunu değiştirmek için kullanılır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Dosya ayırıcısı/Çık: Geçerli süreci iptal edebilir"
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2313
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3267,31 +3267,31 @@ msgstr ""
 "Yapıştırmaya çalıştığınız metin gizli denetim karakterleri içeriyor, bunları "
 "süzmek ister misiniz?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2316
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Yapıştırmayı Doğrula"
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Denetim karakterleri olmadan &yapıştır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Her şeyi &yapıştır"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "İ&ptal et"
 
-#: terminalDisplay/TerminalDisplay.cpp:2551
+#: terminalDisplay/TerminalDisplay.cpp:2550
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3302,17 +3302,17 @@ msgstr ""
 "Software_flow_control\">askıya alındı</a>. Sürdürmek için <b>Kontrol+Q</"
 "b>’ya basın.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2606
+#: terminalDisplay/TerminalDisplay.cpp:2605
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Bu uçbirim saltokunurdur."
 
-#: terminalDisplay/TerminalDisplay.cpp:3001
+#: terminalDisplay/TerminalDisplay.cpp:3000
 #, kde-format
 msgid "Change &Directory To"
 msgstr "&Dizini Bu Adresle Değiştir"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3033
 #, kde-format
 msgid "&Paste Location"
 msgstr "Konumu &Yapıştır"
