@@ -835,15 +835,6 @@
       <attribute name="title">
        <string>Complex Text Layout</string>
       </attribute>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>3</x>
-         <y>3</y>
-         <width>611</width>
-         <height>441</height>
-        </rect>
-       </property>
        <layout class="QGridLayout" name="CTL_2">
         <property name="spacing">
          <number>6</number>
@@ -1016,7 +1007,6 @@
          </spacer>
         </item>
        </layout>
-      </widget>
      </widget>
     </widget>
    </item>
