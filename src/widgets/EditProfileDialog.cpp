@@ -934,7 +934,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     auto *getNewButton = new KNSWidgets::Button(this);
     connect(getNewButton, &KNSWidgets::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
 
-    getNewButton->setText(QStringLiteral("Get New..."));
+    getNewButton->setText(i18n("Get New..."));
     getNewButton->setConfigFile(QStringLiteral("konsole.knsrc"));
     _appearanceUi->colorSchemesBtnLayout->addWidget(getNewButton);
 

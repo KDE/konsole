@@ -279,7 +279,7 @@ void SSHManagerTreeWidget::editSshInfo()
     ui->folder->setCurrentText(QStringLiteral("not-used-here"));
     ui->folderLabel->hide();
     ui->folder->hide();
-    ui->btnAdd->setText(tr("Update"));
+    ui->btnAdd->setText(i18n("Update"));
     disconnect(ui->btnAdd, nullptr, this, nullptr);
     connect(ui->btnAdd, &QPushButton::clicked, this, &SSHManagerTreeWidget::saveEdit);
 
@@ -290,7 +290,7 @@ void SSHManagerTreeWidget::handleImportedData(bool isImported)
 {
     QList<QWidget *> elements = {ui->hostname, ui->port, ui->username, ui->sshkey, ui->useSshConfig};
     if (isImported) {
-        ui->errorPanel->setText(QStringLiteral("Imported SSH Profile <br/> Some settings are read only."));
+        ui->errorPanel->setText(i18n("Imported SSH Profile <br/> Some settings are read only."));
         ui->errorPanel->show();
     }
 
@@ -348,7 +348,7 @@ void SSHManagerTreeWidget::showInfoPane()
     ui->folder->addItems(d->model->folders());
 
     setEditComponentsEnabled(true);
-    ui->btnAdd->setText(tr("Add"));
+    ui->btnAdd->setText(i18n("Add"));
     disconnect(ui->btnAdd, nullptr, this, nullptr);
     connect(ui->btnAdd, &QPushButton::clicked, this, &SSHManagerTreeWidget::addSshInfo);
 
