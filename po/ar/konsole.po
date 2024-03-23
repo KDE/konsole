@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:40+0000\n"
+"POT-Creation-Date: 2024-03-23 00:39+0000\n"
 "PO-Revision-Date: 2024-02-10 18:03+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -808,6 +808,7 @@ msgstr "لا يمكن حفظ تشكيلة روابط المفاتيح مع وص�
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1401,6 +1402,7 @@ msgstr "احفظ"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
 #, kde-format
 msgid "Update"
 msgstr "حدّث"
@@ -1621,6 +1623,11 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "احذف إعدادات SSH"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#, kde-format
+msgid "Imported SSH Profile <br/> Some settings are read only."
+msgstr ""
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4313,6 +4320,11 @@ msgstr[5] " ثانية"
 msgid "Select Initial Directory"
 msgstr "اختر دليل مبدئي"
 
+#: widgets/EditProfileDialog.cpp:937
+#, kde-format
+msgid "Get New..."
+msgstr "احصل على جديد..."
+
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
@@ -5406,9 +5418,6 @@ msgstr "أغلق اللسان"
 
 #~ msgid "Size: XXX x XXX"
 #~ msgstr "القياس: XXX × XXX"
-
-#~ msgid "Get New..."
-#~ msgstr "احصل على جديد..."
 
 #~ msgctxt "@info:shell"
 #~ msgid "Use the internal FALLBACK profile"

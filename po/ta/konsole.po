@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:40+0000\n"
+"POT-Creation-Date: 2024-03-23 00:39+0000\n"
 "PO-Revision-Date: 2024-03-08 21:43+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -792,6 +792,7 @@ msgstr "விவரணம் இல்லாமல் ஓர் விசை �
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1382,6 +1383,7 @@ msgstr "சேமி"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
 #, kde-format
 msgid "Update"
 msgstr "புதுப்பி"
@@ -1607,6 +1609,11 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH அமைப்புகளை நீக்குவது"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#, kde-format
+msgid "Imported SSH Profile <br/> Some settings are read only."
+msgstr ""
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4306,6 +4313,11 @@ msgstr[1] " நொடிகள்"
 msgid "Select Initial Directory"
 msgstr "முதலடைவை தேர்வு செய்வது"
 
+#: widgets/EditProfileDialog.cpp:937
+#, kde-format
+msgid "Get New..."
+msgstr "புதியவற்றை பெறு…"
+
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
@@ -5399,9 +5411,6 @@ msgstr "கீற்றை மூடு"
 
 #~ msgid "Size: XXX x XXX"
 #~ msgstr "அளவு: XXX x XXX"
-
-#~ msgid "Get New..."
-#~ msgstr "புதியவற்றை பெறு…"
 
 #~ msgctxt "@info:shell"
 #~ msgid "Use the internal FALLBACK profile"

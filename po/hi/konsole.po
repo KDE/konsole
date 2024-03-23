@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:40+0000\n"
+"POT-Creation-Date: 2024-03-23 00:39+0000\n"
 "PO-Revision-Date: 2021-08-21 16:25+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -876,6 +876,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1530,6 +1531,7 @@ msgstr "लिंक खोलें"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
 #, kde-format
 msgid "Update"
 msgstr ""
@@ -1761,6 +1763,11 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "रिमोट कनेक्शन"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#, kde-format
+msgid "Imported SSH Profile <br/> Some settings are read only."
+msgstr ""
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4572,6 +4579,12 @@ msgstr[1] ""
 msgid "Select Initial Directory"
 msgstr "आरंभिक डिरेक्ट्री चुनें"
 
+#: widgets/EditProfileDialog.cpp:937
+#, fuzzy, kde-format
+#| msgid "New..."
+msgid "Get New..."
+msgstr "नया..."
+
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
@@ -5696,11 +5709,6 @@ msgstr "टैब बंद करें (&C)"
 
 #~ msgid "Size: XXX x XXX"
 #~ msgstr "आकार: XXX x XXX"
-
-#, fuzzy
-#~| msgid "New..."
-#~ msgid "Get New..."
-#~ msgstr "नया..."
 
 #, fuzzy
 #~| msgid "Set as Default"

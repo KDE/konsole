@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:40+0000\n"
+"POT-Creation-Date: 2024-03-23 00:39+0000\n"
 "PO-Revision-Date: 2024-03-08 03:57+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -800,6 +800,7 @@ msgstr "ღილაკების მიბმის სქემის შე
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1383,6 +1384,7 @@ msgstr "შენახვა"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
 #, kde-format
 msgid "Update"
 msgstr "განახლება"
@@ -1609,6 +1611,11 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH-ის კონფიგურაციების წაშლა"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#, kde-format
+msgid "Imported SSH Profile <br/> Some settings are read only."
+msgstr ""
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4307,6 +4314,13 @@ msgstr[1] " წამი"
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "აირჩეთ საწყისი საქაღალდე"
+
+#: widgets/EditProfileDialog.cpp:937
+#, fuzzy, kde-format
+#| msgctxt "@action:button Create an alternate color scheme"
+#| msgid "New..."
+msgid "Get New..."
+msgstr "ახალი..."
 
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format

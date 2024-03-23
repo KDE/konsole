@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:40+0000\n"
+"POT-Creation-Date: 2024-03-23 00:39+0000\n"
 "PO-Revision-Date: 2024-02-28 16:31+0200\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -805,6 +805,7 @@ msgstr "Taustiņu piesaistes shēmu nevar saglabāt ar tukšu aprakstu."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1389,6 +1390,7 @@ msgstr "Saglabāt"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
 #, kde-format
 msgid "Update"
 msgstr "Atjaunināt"
@@ -1616,6 +1618,11 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Dzēst SSh konfigurāciju"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#, kde-format
+msgid "Imported SSH Profile <br/> Some settings are read only."
+msgstr ""
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4310,6 +4317,13 @@ msgstr[2] " sekunžu"
 msgid "Select Initial Directory"
 msgstr "Atlasīt sākotnējo mapi"
 
+#: widgets/EditProfileDialog.cpp:937
+#, fuzzy, kde-format
+#| msgctxt "@action:button Create an alternate color scheme"
+#| msgid "New..."
+msgid "Get New..."
+msgstr "Jauna..."
+
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
@@ -5407,12 +5421,6 @@ msgstr "Aizvērt cilni"
 
 #~ msgid "Size: XXX x XXX"
 #~ msgstr "Izmērs: XXX x XXX"
-
-#, fuzzy
-#~| msgctxt "@action:button Create an alternate color scheme"
-#~| msgid "New..."
-#~ msgid "Get New..."
-#~ msgstr "Jauna..."
 
 #, fuzzy
 #~| msgid "&Set as Default"

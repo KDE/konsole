@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:40+0000\n"
+"POT-Creation-Date: 2024-03-23 00:39+0000\n"
 "PO-Revision-Date: 2009-09-13 16:45+0100\n"
 "Last-Translator: Berend Ytsma <berendy@gmail.com>\n"
 "Language-Team: Frysk <kde-i18n-fry@kde.org>\n"
@@ -896,6 +896,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1574,6 +1575,7 @@ msgstr "Keppeling iepenje"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
 #, kde-format
 msgid "Update"
 msgstr ""
@@ -1810,6 +1812,11 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Eksterne ferbining"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#, kde-format
+msgid "Imported SSH Profile <br/> Some settings are read only."
+msgstr ""
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4696,6 +4703,13 @@ msgstr[1] ""
 msgid "Select Initial Directory"
 msgstr "Begjintafel selektearje"
 
+# msgid "New "
+#: widgets/EditProfileDialog.cpp:937
+#, fuzzy, kde-format
+#| msgid "New..."
+msgid "Get New..."
+msgstr "Nij..."
+
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
@@ -5860,12 +5874,6 @@ msgstr "Ljepper s&lute"
 
 #~ msgid "Size: XXX x XXX"
 #~ msgstr "Grutte: XXX x XXX"
-
-# msgid "New "
-#, fuzzy
-#~| msgid "New..."
-#~ msgid "Get New..."
-#~ msgstr "Nij..."
 
 # msgid "&Save as Default"
 #, fuzzy

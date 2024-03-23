@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:40+0000\n"
+"POT-Creation-Date: 2024-03-23 00:39+0000\n"
 "PO-Revision-Date: 2024-02-15 21:26+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -806,6 +806,7 @@ msgstr "Billentyűparancs-séma nem menthető üres leírással."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1390,6 +1391,7 @@ msgstr "Mentés"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
 #, kde-format
 msgid "Update"
 msgstr "Frissítés"
@@ -1620,6 +1622,11 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH konfigurációk törlése"
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#, kde-format
+msgid "Imported SSH Profile <br/> Some settings are read only."
+msgstr ""
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4324,6 +4331,11 @@ msgstr[1] " másodperc"
 msgid "Select Initial Directory"
 msgstr "Kezdőmappa"
 
+#: widgets/EditProfileDialog.cpp:937
+#, kde-format
+msgid "Get New..."
+msgstr "Új letöltése…"
+
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
@@ -5429,9 +5441,6 @@ msgstr "Lap bezárása"
 
 #~ msgid "Size: XXX x XXX"
 #~ msgstr "Méret: XXX x XXX"
-
-#~ msgid "Get New..."
-#~ msgstr "Új letöltése…"
 
 #~ msgctxt "@info:shell"
 #~ msgid "Use the internal FALLBACK profile"

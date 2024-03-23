@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:40+0000\n"
+"POT-Creation-Date: 2024-03-23 00:39+0000\n"
 "PO-Revision-Date: 2007-06-24 15:01+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -873,6 +873,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1499,6 +1500,7 @@ msgstr "Tựa thẻ"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
 #, kde-format
 msgid "Update"
 msgstr ""
@@ -1720,6 +1722,11 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
+msgstr ""
+
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#, kde-format
+msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr ""
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
@@ -4505,6 +4512,12 @@ msgstr[0] ""
 msgid "Select Initial Directory"
 msgstr "Chọn thư mục đầu tiên"
 
+#: widgets/EditProfileDialog.cpp:937
+#, fuzzy, kde-format
+#| msgid "New..."
+msgid "Get New..."
+msgstr "Mới..."
+
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
 msgctxt "@info"
@@ -5628,11 +5641,6 @@ msgstr "Đón&g thẻ"
 
 #~ msgid "Size: XXX x XXX"
 #~ msgstr "Cỡ: XXX x XXX"
-
-#, fuzzy
-#~| msgid "New..."
-#~ msgid "Get New..."
-#~ msgstr "Mới..."
 
 #, fuzzy
 #~| msgid "Set as Default"
