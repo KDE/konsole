@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:40+0000\n"
 "PO-Revision-Date: 2024-02-15 13:23\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
@@ -3673,7 +3673,7 @@ msgstr "Кіраванне плынню"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:950
+#: widgets/EditProfileAppearancePage.ui:941
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3684,7 +3684,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:953
+#: widgets/EditProfileAppearancePage.ui:944
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Двухкірункавае адлюстраванне тэксту"
@@ -4054,19 +4054,19 @@ msgid "Complex Text Layout"
 msgstr "Комплекснае кампанаванне тэксту"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:860
+#: widgets/EditProfileAppearancePage.ui:851
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "Уключыць паслоўны рэжым рэндэрынгу тэксту"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:863
+#: widgets/EditProfileAppearancePage.ui:854
 #, kde-format
 msgid "Word mode"
 msgstr "Паслоўны рэжым"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:876
+#: widgets/EditProfileAppearancePage.ui:867
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4076,43 +4076,43 @@ msgstr ""
 "візуалізацыі словы разбіваюцца)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:879
+#: widgets/EditProfileAppearancePage.ui:870
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "Выкарыстоўваць аднолькавыя атрыбуты для ўсяго слова"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:892
+#: widgets/EditProfileAppearancePage.ui:883
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "Выводзіць словы з сімвалаў ASCII разам"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:895
+#: widgets/EditProfileAppearancePage.ui:886
 #, kde-format
 msgid "ASCII characters "
 msgstr "Сімвалы ASCII "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:908
+#: widgets/EditProfileAppearancePage.ui:899
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "Выводзіць словы брахманскага пісьма разам"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:911
+#: widgets/EditProfileAppearancePage.ui:902
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "Сімвалы брахманскага пісьма"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:924
+#: widgets/EditProfileAppearancePage.ui:915
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Шрыфт эмодзі:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:966
+#: widgets/EditProfileAppearancePage.ui:957
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
@@ -4120,13 +4120,13 @@ msgstr ""
 "сімвалам"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:969
+#: widgets/EditProfileAppearancePage.ui:960
 #, kde-format
 msgid "force LTR line direction"
 msgstr "прымусовы кірунак тэксту ў радках злева направа"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:982
+#: widgets/EditProfileAppearancePage.ui:973
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
@@ -4134,19 +4134,19 @@ msgstr ""
 "направа."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:985
+#: widgets/EditProfileAppearancePage.ui:976
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Сімвалы табліцы перавызначаюць рэжым BiDi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:998
+#: widgets/EditProfileAppearancePage.ui:989
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "Не зважаць на wcwidth праблемных сімвалаў"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1001
+#: widgets/EditProfileAppearancePage.ui:992
 #, kde-format
 msgid "Override wcwidth"
 msgstr "Перавызначэнне wcwidth"

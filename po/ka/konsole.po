@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:39+0000\n"
-"PO-Revision-Date: 2024-03-08 03:57+0100\n"
+"POT-Creation-Date: 2024-03-24 00:40+0000\n"
+"PO-Revision-Date: 2024-03-23 05:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1615,7 +1615,7 @@ msgstr "SSH-ის კონფიგურაციების წაშლა
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "შემოტანილი SSH პროფილი <br/>ზოგიერთი პარამეტრი მხოლოდ-წაკითხვადია."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -3672,7 +3672,7 @@ msgstr "დინების კონტროლი"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:950
+#: widgets/EditProfileAppearancePage.ui:941
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3683,7 +3683,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:953
+#: widgets/EditProfileAppearancePage.ui:944
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "ორმხრივი ტექსტის რენდერი"
@@ -4053,19 +4053,19 @@ msgid "Complex Text Layout"
 msgstr "კომპლექსური ტექსტის განლაგება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:860
+#: widgets/EditProfileAppearancePage.ui:851
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "ტექსტის რენდერის სიტყვის რეჟიმის ჩართვა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:863
+#: widgets/EditProfileAppearancePage.ui:854
 #, kde-format
 msgid "Word mode"
 msgstr "სიტყვის რეჟიმი"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:876
+#: widgets/EditProfileAppearancePage.ui:867
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4075,73 +4075,73 @@ msgstr ""
 "ცვლილებებმა, შეიძლება, რენდერისას სიტყვა გაწყვიტოს)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:879
+#: widgets/EditProfileAppearancePage.ui:870
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "იგივე ატრიბუტების გამოყენება მთელი სიტყვისთვის"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:892
+#: widgets/EditProfileAppearancePage.ui:883
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "ASCII სიმბოლოების სიტყვების ერთად რენდერი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:895
+#: widgets/EditProfileAppearancePage.ui:886
 #, kde-format
 msgid "ASCII characters "
 msgstr "ASCII სიმბოლოები "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:908
+#: widgets/EditProfileAppearancePage.ui:899
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "ინდური ანბანის სიმბოლოების სიტყვების ერთად რენდერი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:911
+#: widgets/EditProfileAppearancePage.ui:902
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "ინდური ანბანის სიმბოლოები"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:924
+#: widgets/EditProfileAppearancePage.ui:915
 #, kde-format
 msgid "Emoji Font:"
 msgstr "ემოჯის ფონტი:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:966
+#: widgets/EditProfileAppearancePage.ui:957
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr "ხაზები ყოველთვის LTR-ა, პირველი დიდი სიმბოლოთი დადგენის მაგიერ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:969
+#: widgets/EditProfileAppearancePage.ui:960
 #, kde-format
 msgid "force LTR line direction"
 msgstr "ნაძალადევი LTR ხაზის მიმართულება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:982
+#: widgets/EditProfileAppearancePage.ui:973
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "ცხრილის დახატვის სიმბოლოების ძლიერ LTR-ად აღქმა."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:985
+#: widgets/EditProfileAppearancePage.ui:976
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "ცხრილის სიმბოლოების ორმხრივი რეჟიმის გადაფარვა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:998
+#: widgets/EditProfileAppearancePage.ui:989
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "Wcwidth-ის გამოტოვება პრობლემული სიმბოლოებისთვის"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1001
+#: widgets/EditProfileAppearancePage.ui:992
 #, kde-format
 msgid "Override wcwidth"
 msgstr "Wcwidth-ის გადაფარვა"
@@ -4316,11 +4316,9 @@ msgid "Select Initial Directory"
 msgstr "აირჩეთ საწყისი საქაღალდე"
 
 #: widgets/EditProfileDialog.cpp:937
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "Get New..."
-msgstr "ახალი..."
+msgstr "ახლის მიღება..."
 
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format

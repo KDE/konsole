@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:39+0000\n"
-"PO-Revision-Date: 2024-03-08 20:46+0100\n"
+"POT-Creation-Date: 2024-03-24 00:40+0000\n"
+"PO-Revision-Date: 2024-03-23 12:08+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -32,7 +32,7 @@ msgstr ""
 "com>\n"
 "com>\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1645,7 +1645,7 @@ msgstr "Borrar configuraciones de SSH"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Perfil SSH importado<br/>Algunos ajustes son de solo lectura."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -3712,7 +3712,7 @@ msgstr "Control del flujo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:950
+#: widgets/EditProfileAppearancePage.ui:941
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3723,7 +3723,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:953
+#: widgets/EditProfileAppearancePage.ui:944
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Representación de texto bidireccional"
@@ -4096,19 +4096,19 @@ msgid "Complex Text Layout"
 msgstr "Disposición de texto compleja"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:860
+#: widgets/EditProfileAppearancePage.ui:851
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "Activar la representación de texto en modo de palabras"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:863
+#: widgets/EditProfileAppearancePage.ui:854
 #, kde-format
 msgid "Word mode"
 msgstr "Modo de palabras"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:876
+#: widgets/EditProfileAppearancePage.ui:867
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4118,43 +4118,43 @@ msgstr ""
 "cambios de atributos romperían la palabra al representarla)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:879
+#: widgets/EditProfileAppearancePage.ui:870
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "Usar los mismos atributos para palabras completas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:892
+#: widgets/EditProfileAppearancePage.ui:883
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "Representar palabras de caracteres ASCII juntas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:895
+#: widgets/EditProfileAppearancePage.ui:886
 #, kde-format
 msgid "ASCII characters "
 msgstr "Caracteres ASCII"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:908
+#: widgets/EditProfileAppearancePage.ui:899
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "Representar palabras de caracteres de alfabetos bráhmicos juntas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:911
+#: widgets/EditProfileAppearancePage.ui:902
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "Caracteres de alfabetos bráhmicos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:924
+#: widgets/EditProfileAppearancePage.ui:915
 #, kde-format
 msgid "Emoji Font:"
 msgstr "Tipo de letra para emojis:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:966
+#: widgets/EditProfileAppearancePage.ui:957
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
@@ -4162,31 +4162,31 @@ msgstr ""
 "determinadas por el primer carácter fuerte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:969
+#: widgets/EditProfileAppearancePage.ui:960
 #, kde-format
 msgid "force LTR line direction"
 msgstr "Forzar dirección de línea de izquierda a derecha"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:982
+#: widgets/EditProfileAppearancePage.ui:973
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "Tratar los caracteres de dibujo de tablas como LTR fuertes."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:985
+#: widgets/EditProfileAppearancePage.ui:976
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "Sustitución del modo BiDi de los caracteres de tablas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:998
+#: widgets/EditProfileAppearancePage.ui:989
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "Ingorar WcWidth de los caracteres problemáticos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:1001
+#: widgets/EditProfileAppearancePage.ui:992
 #, kde-format
 msgid "Override wcwidth"
 msgstr "Ignorar WcWidth"
