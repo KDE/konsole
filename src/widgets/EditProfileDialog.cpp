@@ -1829,7 +1829,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 void EditProfileDialog::setTextEditorCombo(const Profile::Ptr &profile)
 {
     static const Enum::TextEditorCmd editorsList[] =
-        {Enum::Kate, Enum::KWrite, Enum::KDevelop, Enum::QtCreator, Enum::Gedit, Enum::gVim, Enum::CustomTextEditor};
+        {Enum::Kate, Enum::KWrite, Enum::KDevelop, Enum::QtCreator, Enum::Gedit, Enum::gVim, Enum::CustomTextEditor, Enum::Default};
 
     auto *editorCombo = _mouseUi->textEditorCombo;
 
@@ -1875,6 +1875,9 @@ void EditProfileDialog::setTextEditorCombo(const Profile::Ptr &profile)
             displayName = QStringLiteral("Custom");
             icon = QIcon::fromTheme(QStringLiteral("system-run"));
             break;
+        case Enum::Default:
+            displayName = i18n("Default for file type");
+            icon = QIcon::fromTheme(QStringLiteral("preferences-desktop-default-applications"));
         default:
             break;
         }
@@ -1882,7 +1885,7 @@ void EditProfileDialog::setTextEditorCombo(const Profile::Ptr &profile)
         editorCombo->addItem(icon, displayName);
 
         // For "CustomTextEditor" we don't check if the binary exists
-        const bool isAvailable = editor == Enum::CustomTextEditor || !QStandardPaths::findExecutable(exec).isEmpty();
+        const bool isAvailable = editor == Enum::CustomTextEditor || editor == Enum::Default || !QStandardPaths::findExecutable(exec).isEmpty();
         // Make un-available editors look disabled in the combobox
         model->item(static_cast<int>(editor))->setEnabled(isAvailable);
     }

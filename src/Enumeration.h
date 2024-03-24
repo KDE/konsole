@@ -110,6 +110,7 @@ public:
         Gedit,
         gVim,
         CustomTextEditor,
+        Default,
     };
 
     /**

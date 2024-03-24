@@ -151,7 +151,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {UnderlineLinksEnabled, "UnderlineLinksEnabled", INTERACTION_GROUP, true},
     {UnderlineFilesEnabled, "UnderlineFilesEnabled", INTERACTION_GROUP, false},
     {OpenLinksByDirectClickEnabled, "OpenLinksByDirectClickEnabled", INTERACTION_GROUP, false},
-    {TextEditorCmd, "TextEditorCmd", INTERACTION_GROUP, Enum::Kate},
+    {TextEditorCmd, "TextEditorCmd", INTERACTION_GROUP, Enum::Default},
     {TextEditorCmdCustom, "TextEditorCmdCustom", INTERACTION_GROUP, QLatin1String("kate PATH:LINE:COLUMN")},
     {CtrlRequiredForDrag, "CtrlRequiredForDrag", INTERACTION_GROUP, true},
     {DropUrlsAsText, "DropUrlsAsText", INTERACTION_GROUP, true},
@@ -421,7 +421,7 @@ QString Profile::textEditorCmd() const
     auto current = property<int>(Profile::TextEditorCmd);
 
     QString editorCmd;
-    switch (current) {
+    switch (static_cast<Enum::TextEditorCmd>(current)) {
     case Enum::Kate:
         editorCmd = QStringLiteral("kate PATH:LINE:COLUMN");
         break;
@@ -443,7 +443,7 @@ QString Profile::textEditorCmd() const
     case Enum::CustomTextEditor:
         editorCmd = customTextEditorCmd();
         break;
-    default:
+    case Enum::Default:
         break;
     }
 
