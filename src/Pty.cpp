@@ -145,7 +145,9 @@ bool Pty::flowControlEnabled() const
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        return ((ttmode.c_iflag & IXOFF) != 0U) && ((ttmode.c_iflag & IXON) != 0U);
+        // Check only IXON (flow control on output) on master fd, which corresponds to
+        // IXOFF (flow control on input) on slave side.
+        return ((ttmode.c_iflag & IXON) != 0U);
     } else {
         qCDebug(KonsoleDebug) << "Unable to get flow control status, terminal not connected.";
         return _xonXoff;
