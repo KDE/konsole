@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:40+0000\n"
+"POT-Creation-Date: 2024-03-25 00:39+0000\n"
 "PO-Revision-Date: 2024-03-23 23:12+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -3606,7 +3606,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zamatu fitxen antolaera"
 
-#: Vt102Emulation.cpp:2459
+#: Vt102Emulation.cpp:2469
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4370,7 +4370,13 @@ msgstr ""
 "Konsole, mahaigaineko efektuak gaitu aurretik abiarazi da. Konsole "
 "berrabiatu behar duzu atzealde gardena ikusteko."
 
-#: widgets/EditProfileDialog.cpp:1902
+#: widgets/EditProfileDialog.cpp:1879
+#, fuzzy, kde-format
+#| msgid "Default profile"
+msgid "Default for file type"
+msgstr "Profil lehenetsia"
+
+#: widgets/EditProfileDialog.cpp:1905
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4399,7 +4405,7 @@ msgstr ""
 "ezikusi egingo zaio eta fitxategia testu-editore lehenetsiarekin\n"
 "irekiko da."
 
-#: widgets/EditProfileDialog.cpp:1915
+#: widgets/EditProfileDialog.cpp:1918
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Testu-editore norberak finkatutako komandoa"

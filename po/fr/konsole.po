@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:40+0000\n"
+"POT-Creation-Date: 2024-03-25 00:39+0000\n"
 "PO-Revision-Date: 2024-03-09 09:29+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -3650,7 +3650,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Charger une disposition d'onglets"
 
-#: Vt102Emulation.cpp:2459
+#: Vt102Emulation.cpp:2469
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4396,8 +4396,7 @@ msgid "Select Initial Directory"
 msgstr "Sélectionner le dossier initial"
 
 #: widgets/EditProfileDialog.cpp:937
-#, fuzzy, kde-format
-#| msgid "Get New..."
+#, kde-format
 msgid "Get New..."
 msgstr "En obtenir d'autres..."
 
@@ -4425,7 +4424,13 @@ msgstr ""
 "Konsole a été démarré avant que les effets de bureau soient actifs. Vous "
 "devez redémarrer Konsole pour utiliser l'arrière-plan transparent."
 
-#: widgets/EditProfileDialog.cpp:1902
+#: widgets/EditProfileDialog.cpp:1879
+#, fuzzy, kde-format
+#| msgid "Default profile"
+msgid "Default for file type"
+msgstr "Profil par défaut"
+
+#: widgets/EditProfileDialog.cpp:1905
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4456,7 +4461,7 @@ msgstr ""
 "sera ignoré et le fichier sera ouvert avec l'éditeur de texte\n"
 "par défaut."
 
-#: widgets/EditProfileDialog.cpp:1915
+#: widgets/EditProfileDialog.cpp:1918
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Commande pour la personnalisation de l'éditeur de texte"

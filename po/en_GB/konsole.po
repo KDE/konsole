@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:40+0000\n"
+"POT-Creation-Date: 2024-03-25 00:39+0000\n"
 "PO-Revision-Date: 2023-05-21 14:57+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -3575,7 +3575,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Load Tab Layout"
 
-#: Vt102Emulation.cpp:2459
+#: Vt102Emulation.cpp:2469
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4337,7 +4337,13 @@ msgstr ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 
-#: widgets/EditProfileDialog.cpp:1902
+#: widgets/EditProfileDialog.cpp:1879
+#, fuzzy, kde-format
+#| msgid "Default profile"
+msgid "Default for file type"
+msgstr "Default profile"
+
+#: widgets/EditProfileDialog.cpp:1905
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4366,7 +4372,7 @@ msgstr ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 
-#: widgets/EditProfileDialog.cpp:1915
+#: widgets/EditProfileDialog.cpp:1918
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Text Editor Custom Command"

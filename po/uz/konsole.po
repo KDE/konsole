@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:40+0000\n"
+"POT-Creation-Date: 2024-03-25 00:39+0000\n"
 "PO-Revision-Date: 2008-06-04 01:01+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -3720,7 +3720,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2459
+#: Vt102Emulation.cpp:2469
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4491,7 +4491,13 @@ msgid ""
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1902
+#: widgets/EditProfileDialog.cpp:1879
+#, fuzzy, kde-format
+#| msgid "Delete Profile"
+msgid "Default for file type"
+msgstr "Profilni oʻchirish"
+
+#: widgets/EditProfileDialog.cpp:1905
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4508,7 +4514,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1915
+#: widgets/EditProfileDialog.cpp:1918
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

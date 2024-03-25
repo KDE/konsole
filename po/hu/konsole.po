@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:40+0000\n"
+"POT-Creation-Date: 2024-03-25 00:39+0000\n"
 "PO-Revision-Date: 2024-02-15 21:26+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -3598,7 +3598,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Lapelrendezés betöltése"
 
-#: Vt102Emulation.cpp:2459
+#: Vt102Emulation.cpp:2469
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4360,7 +4360,13 @@ msgstr ""
 "A Konsole az asztali effektusok bekapcsolása előtt lett indítva. Újra kell "
 "indítania a Konsole-t, hogy lássa az átlátszó hátteret."
 
-#: widgets/EditProfileDialog.cpp:1902
+#: widgets/EditProfileDialog.cpp:1879
+#, fuzzy, kde-format
+#| msgid "Default profile"
+msgid "Default for file type"
+msgstr "Alapértelmezett profil"
+
+#: widgets/EditProfileDialog.cpp:1905
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4387,7 +4393,7 @@ msgstr ""
 "Ha a PATH vagy SOR nincs benne a parancsban, ez a beállítás mellőzve lesz,\n"
 "és a fájlt az alapértelmezett szövegszerkesztő nyitja meg."
 
-#: widgets/EditProfileDialog.cpp:1915
+#: widgets/EditProfileDialog.cpp:1918
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Szövegszerkesztő egyéni parancs"

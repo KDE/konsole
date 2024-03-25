@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:40+0000\n"
+"POT-Creation-Date: 2024-03-25 00:39+0000\n"
 "PO-Revision-Date: 2024-03-23 06:37+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -3585,7 +3585,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Naloži razporeditev zavihka"
 
-#: Vt102Emulation.cpp:2459
+#: Vt102Emulation.cpp:2469
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -4350,7 +4350,13 @@ msgstr ""
 "Program Konsole je bil začet preden so bili omogočeni učinki namizja. Da bi "
 "lahko videli prozorno ozadje, ga morate znova zagnati."
 
-#: widgets/EditProfileDialog.cpp:1902
+#: widgets/EditProfileDialog.cpp:1879
+#, fuzzy, kde-format
+#| msgid "Default profile"
+msgid "Default for file type"
+msgstr "Privzeti profil"
+
+#: widgets/EditProfileDialog.cpp:1905
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4378,7 +4384,7 @@ msgstr ""
 "Če v ukazu manjkata PATH ali LINE, bo ta nastavitev\n"
 "prezrta, datoteko pa bo odprl privzeti urejevalnik besedil."
 
-#: widgets/EditProfileDialog.cpp:1915
+#: widgets/EditProfileDialog.cpp:1918
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Ukaz urejevalnika besedil po meri"
