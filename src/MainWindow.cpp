@@ -241,6 +241,10 @@ void MainWindow::activeViewChanged(SessionController *controller)
     if (!SessionManager::instance()->sessionProfile(controller->session())) {
         return;
     }
+
+    // add hamburger menu to controller
+    controller->actionCollection()->addActions({_hamburgerMenu});
+
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
     disconnect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, nullptr, nullptr);
@@ -622,8 +626,6 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     // don't like this happening
     auto newView = _viewManager->createView(session);
     _viewManager->activeContainer()->addView(newView);
-
-    _viewManager->activeViewController()->actionCollection()->addActions({_hamburgerMenu});
 
     return session;
 }
