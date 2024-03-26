@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-23 06:37+0100\n"
+"PO-Revision-Date: 2024-03-25 06:27+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -4351,10 +4351,9 @@ msgstr ""
 "lahko videli prozorno ozadje, ga morate znova zagnati."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Privzeti profil"
+msgstr "Privzeto za vrsto datoteke"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format

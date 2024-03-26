@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-09 09:29+0100\n"
+"PO-Revision-Date: 2024-03-24 09:29+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -1662,6 +1662,7 @@ msgstr "Supprimer les configurations « SSH »"
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr ""
+"Importé d'un profil « SSH ».<br/> Certains paramètres sont en lecture seule."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format

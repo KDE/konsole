@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-23 08:48+0200\n"
+"PO-Revision-Date: 2024-03-25 17:51+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -4372,10 +4372,9 @@ msgstr ""
 "тло, вам слід перезапустити Konsole."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Типовий профіль"
+msgstr "Типова для типу файлів"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format

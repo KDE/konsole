@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-23 05:59+0100\n"
+"PO-Revision-Date: 2024-03-25 04:57+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -157,25 +157,25 @@ msgstr "ცალკე პროცესად გაშვება"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the menubar, overriding the default setting"
-msgstr "მენიუს ზოლის ჩვენება. გადაიფარება ნაგულისხმები მნიშვნელობა"
+msgstr "მენიუს ზოლის ჩვენება. გადაიფარება ნაგულისხმევი მნიშვნელობა"
 
 #: Application.cpp:67
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the menubar, overriding the default setting"
-msgstr "მენიუს ზოლის დამალვა. გადაიფარება ნაგულისხმები მნიშვნელობა"
+msgstr "მენიუს ზოლის დამალვა. გადაიფარება ნაგულისხმევი მნიშვნელობა"
 
 #: Application.cpp:68
 #, kde-format
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
-msgstr "ჩანართის ზოლის ჩვენება. გადაიფარება ნაგულისხმები მნიშვნელობა"
+msgstr "ჩანართის ზოლის ჩვენება. გადაიფარება ნაგულისხმევი მნიშვნელობა"
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
-msgstr "ჩანართის ზოლის დამალვა. გადაიფარება ნაგულისხმები მნიშვნელობა"
+msgstr "ჩანართის ზოლის დამალვა. გადაიფარება ნაგულისხმევი მნიშვნელობა"
 
 #: Application.cpp:70
 #, kde-format
@@ -1355,7 +1355,7 @@ msgstr "ჯგუფი"
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
 #, kde-format
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
@@ -1505,7 +1505,7 @@ msgstr "SSH-ის მორგება"
 #, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
@@ -1882,7 +1882,7 @@ msgstr "ჩაშენებული"
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
 msgid "Default profile"
-msgstr "ნაგულისხმები პროფილი"
+msgstr "ნაგულისხმევი პროფილი"
 
 #: profile/ProfileManager.cpp:256
 #, kde-format
@@ -1919,7 +1919,7 @@ msgstr " [მხოლოდ-კითხვადი]"
 #, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr " [ნაგულისხმები]"
+msgstr " [ნაგულისხმევი]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
@@ -2020,7 +2020,7 @@ msgstr "თეთრი შავ ფონზე"
 #: schemas.cpp:13
 #, kde-format
 msgid "Default (XFree 4)"
-msgstr "ნაგულისხმები (XFree 4)"
+msgstr "ნაგულისხმევი (XFree 4)"
 
 #: schemas.cpp:14
 #, kde-format
@@ -2920,7 +2920,7 @@ msgstr ""
 #: settings/ProfileSettings.ui:96
 #, kde-format
 msgid "&Set as Default"
-msgstr "ნაგულისხმებად &დაყენება"
+msgstr "ნაგულისხმევად &დაყენება"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -3692,7 +3692,7 @@ msgstr "ორმხრივი ტექსტის რენდერი"
 #: widgets/EditProfileAdvancedPage.ui:240
 #, kde-format
 msgid "Default character encoding:"
-msgstr "ნაგულისხმები სიმბოლოების კოდირება:"
+msgstr "ნაგულისხმევი სიმბოლოების კოდირება:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:260
@@ -4345,10 +4345,9 @@ msgstr ""
 "გამჭვირვალე ფონისთვის Konsole თავიდან უნდა გაუშვათ."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "ნაგულისხმები პროფილი"
+msgstr "ნაგულისხმევი, ფაილის ტიპისთვის"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format
@@ -4416,7 +4415,7 @@ msgstr "პროფილის სახელი"
 #: widgets/EditProfileGeneralPage.ui:94
 #, kde-format
 msgid "Default Profile"
-msgstr "ნაგულისხმები პროფილი"
+msgstr "ნაგულისხმევი პროფილი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileGeneralPage.ui:125

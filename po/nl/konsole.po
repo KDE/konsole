@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-23 22:45+0100\n"
+"PO-Revision-Date: 2024-03-25 12:07+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -4380,10 +4380,9 @@ msgstr ""
 "konsole opnieuw te starten om een transparante achtergrond te zien."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Standaard profiel"
+msgstr "Standaard voor bestandstype"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format

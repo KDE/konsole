@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-09 14:12+0100\n"
+"PO-Revision-Date: 2024-03-25 16:35+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.0\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1630,7 +1630,7 @@ msgstr "Elimina le configurazioni SSH"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Profilo SSH importato <br/> Alcune impostazioni sono in sola lettura."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4381,10 +4381,9 @@ msgstr ""
 "Devi riavviare Konsole per vedere lo sfondo trasparente."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Profilo predefinito"
+msgstr "Predefinita per tipo di file"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format

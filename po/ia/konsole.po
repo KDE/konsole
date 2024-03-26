@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-08 11:03+0100\n"
+"PO-Revision-Date: 2024-03-25 12:02+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -1623,7 +1623,7 @@ msgstr "Dele configurationes de SSH"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Importava Profilo de SSH <br/> Alcun preferentias es de sol lectura."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4363,10 +4363,9 @@ msgstr ""
 "Tu necessita de reinitiar Konsole pro vider fundos transparente."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Profilo predefinite"
+msgstr "Predefinite per typo de file"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format

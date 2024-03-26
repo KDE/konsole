@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-24 18:59\n"
+"PO-Revision-Date: 2024-03-25 19:39\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -1600,7 +1600,7 @@ msgstr "删除 SSH 配置"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "已导入 SSH 配置文件<br/>有一些设置是只读的。"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -4256,7 +4256,7 @@ msgstr "选择初始目录"
 #: widgets/EditProfileDialog.cpp:937
 #, kde-format
 msgid "Get New..."
-msgstr ""
+msgstr "获取新方案…"
 
 #: widgets/EditProfileDialog.cpp:1326
 #, kde-kuit-format
@@ -4279,10 +4279,9 @@ msgid ""
 msgstr "Konsole 在桌面特效启用前启动。您需要重启 Konsole 来显示透明背景。"
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "默认配置方案"
+msgstr ""
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format

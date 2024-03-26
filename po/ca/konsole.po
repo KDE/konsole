@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-25 00:39+0000\n"
-"PO-Revision-Date: 2024-03-23 11:28+0100\n"
+"PO-Revision-Date: 2024-03-25 10:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -4386,10 +4386,9 @@ msgstr ""
 "tornar a iniciar el Konsole per a veure el fons transparent."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Perfil predeterminat"
+msgstr "Tipus de fitxer per omissió"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format
