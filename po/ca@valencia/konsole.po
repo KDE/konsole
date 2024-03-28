@@ -4136,7 +4136,7 @@ msgstr "Caràcters dels alfabets bràmics"
 #: widgets/EditProfileAppearancePage.ui:924
 #, kde-format
 msgid "Emoji Font:"
-msgstr "Lletra dels emojis:"
+msgstr "Lletra dels emoji:"
 
 # Nota del traductor: "strong" és terminologia BiDi (algorisme bidireccional de renderització de lletres). Possible traducció: «fort»
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
