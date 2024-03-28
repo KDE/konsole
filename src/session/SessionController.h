@@ -266,6 +266,8 @@ private Q_SLOTS:
     void pasteFromX11Selection(); // shortcut only
     void copyInputActionsTriggered(QAction *action);
     void editCurrentProfile();
+    void nextProfile();
+    void prevProfile();
     void changeCodec(QTextCodec *codec);
     void enableSearchBar(bool showSearchBar);
     void searchHistory(bool showSearchBar);

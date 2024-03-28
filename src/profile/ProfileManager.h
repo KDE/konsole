@@ -162,6 +162,9 @@ public:
      */
     QString generateUniqueName() const;
 
+    Iterator nextProfile(const Profile::Ptr &profile) const;
+    Iterator prevProfile(const Profile::Ptr &profile) const;
+
 Q_SIGNALS:
 
     /** Emitted when a profile is added to the manager. */

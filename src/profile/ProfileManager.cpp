@@ -90,6 +90,30 @@ ProfileManager::Iterator ProfileManager::findProfile(const Profile::Ptr &profile
     return std::find(_profiles.cbegin(), _profiles.cend(), profile);
 }
 
+ProfileManager::Iterator ProfileManager::nextProfile(const Profile::Ptr &profile) const
+{
+    auto next = std::find(_profiles.cbegin(), _profiles.cend(), profile);
+    if (next == _profiles.cend()) {
+        next = _profiles.cbegin();
+    } else {
+        next = std::next(next);
+        if (next == _profiles.cend()) {
+            next = _profiles.cbegin();
+        }
+    }
+    return next;
+}
+
+ProfileManager::Iterator ProfileManager::prevProfile(const Profile::Ptr &profile) const
+{
+    auto prev = std::find(_profiles.cbegin(), _profiles.cend(), profile);
+    if (prev == _profiles.cbegin()) {
+        prev = _profiles.cend();
+    }
+    prev = std::next(prev, -1);
+    return prev;
+}
+
 void ProfileManager::initBuiltinProfile()
 {
     _builtinProfile = Profile::Ptr(new Profile());

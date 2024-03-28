@@ -752,6 +752,16 @@ void SessionController::setupCommonActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
     setEditProfileActionText(SessionManager::instance()->sessionProfile(session()));
 
+    action = collection->addAction(QStringLiteral("next-profile"), this, &SessionController::nextProfile);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
+    action->setText(i18n("Next Profile"));
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_N);
+
+    action = collection->addAction(QStringLiteral("prev-profile"), this, &SessionController::prevProfile);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
+    action->setText(i18n("Previous Profile"));
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_M);
+
     _switchProfileMenu = new KActionMenu(QIcon::fromTheme(QStringLiteral("exchange-positions")), i18n("Switch Profile"), this);
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
     connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
@@ -1019,6 +1029,20 @@ void SessionController::editCurrentProfile()
     dialog->setProfile(profile, state);
 
     dialog->show();
+}
+
+void SessionController::nextProfile()
+{
+    auto profile = SessionManager::instance()->sessionProfile(session());
+    auto next = *ProfileManager::instance()->nextProfile(profile);
+    SessionManager::instance()->setSessionProfile(session(), next);
+}
+
+void SessionController::prevProfile()
+{
+    auto profile = SessionManager::instance()->sessionProfile(session());
+    auto prev = *ProfileManager::instance()->prevProfile(profile);
+    SessionManager::instance()->setSessionProfile(session(), prev);
 }
 
 void SessionController::renameSession()
