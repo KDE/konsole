@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-27 00:40+0000\n"
+"POT-Creation-Date: 2024-03-29 00:39+0000\n"
 "PO-Revision-Date: 2024-03-24 18:05+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1882,13 +1882,13 @@ msgstr "உள்ளமைந்த‍து"
 msgid "Default profile"
 msgstr "இயல்பிருப்பு பயன்முறை"
 
-#: profile/ProfileManager.cpp:256
+#: profile/ProfileManager.cpp:280
 #, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "பயன்முறை %1"
 
-#: profile/ProfileManager.cpp:270
+#: profile/ProfileManager.cpp:294
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "%1 என்ற இடத்திற்கு இப்பயன்முறையை சேமிக்க கான்சோலுக்கு அனுமதி இல்லை"
@@ -2077,7 +2077,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' என்பதில் அமைதி (அமர்வு '%2')"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
-#: session/SessionController.cpp:354 session/SessionController.cpp:1813
+#: session/SessionController.cpp:354 session/SessionController.cpp:1837
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
 #, kde-format
 msgid "Show session"
@@ -2233,155 +2233,167 @@ msgstr "முந்தைய உரையை நீக்கு"
 msgid "Clear Scrollback and Reset"
 msgstr "முந்தைய உரையை நீக்கி முனையத்தை மீட்டமை"
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:757
+#, fuzzy, kde-format
+#| msgid "Edit Profile"
+msgid "Next Profile"
+msgstr "பயன்முறையை திருத்துவது"
+
+#: session/SessionController.cpp:762
+#, fuzzy, kde-format
+#| msgid "Previous View"
+msgid "Previous Profile"
+msgstr "முந்தைய காட்சி"
+
+#: session/SessionController.cpp:765
 #, kde-format
 msgid "Switch Profile"
 msgstr "பயன்முறையை மாற்று"
 
-#: session/SessionController.cpp:780
+#: session/SessionController.cpp:790
 #, kde-format
 msgid "Set &Encoding"
 msgstr "எழுத்துருவாக்கத்தை &அமை"
 
-#: session/SessionController.cpp:802
+#: session/SessionController.cpp:812
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "சுட்டியின் இருப்பிடத்தை நிரல்கள் அறியவிடு"
 
-#: session/SessionController.cpp:811
+#: session/SessionController.cpp:821
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "படித்தல் மட்டும்"
 
-#: session/SessionController.cpp:822
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&கீற்றை அமை அல்லது அதற்கு மறுபெயரிடு…"
 
-#: session/SessionController.cpp:828
+#: session/SessionController.cpp:838
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&தற்போதைய சாளரத்திலுள்ள அனைத்து கீற்றுகளும்"
 
-#: session/SessionController.cpp:835
+#: session/SessionController.cpp:845
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&கீற்றுகளை தேர்ந்தெடு…"
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:851
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&ஏதுமில்லை"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:859
 #, kde-format
 msgid "Copy Input To"
 msgstr "உள்ளீட்டை நகலெடுக்க வேண்டிய இடம்"
 
-#: session/SessionController.cpp:857
+#: session/SessionController.cpp:867
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem பதிவேற்றம்..."
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "ஒருமுறை மட்டும் தூண்டப்படக்கூடிய கண்காணிகள்"
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "&தூண்டிக்காக கண்காணி"
 
-#: session/SessionController.cpp:874
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "&செயல்பாட்டிற்காக கண்காணி"
 
-#: session/SessionController.cpp:880
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&அமைதிக்காக கண்காணி"
 
-#: session/SessionController.cpp:886
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "&பணி முடிவடைவதற்காக கண்காணி"
 
-#: session/SessionController.cpp:893
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Enlarge Font"
 msgstr "எழுத்துருவை பெரிதாக்கு"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:911
 #, kde-format
 msgid "Shrink Font"
 msgstr "எழுத்துருவை சிறிதாக்கு"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Reset Font Size"
 msgstr "எழுத்துருவின் அளவை மீட்டமை"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "Send Signal"
 msgstr "சமிக்ஞை அனுப்பு"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&பணியை இடைநிறுத்து"
 
-#: session/SessionController.cpp:921
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "&Continue Task"
 msgstr "&பணியைத் தொடர்"
 
-#: session/SessionController.cpp:926
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "&Hangup"
 msgstr "&தொடர்பைத் துண்டி"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&பணியில் குறுக்கிடு"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&பணியை முடி"
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "&Kill Task"
 msgstr "&பணியை கட்டாயமாக முடி"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:956
 #, kde-format
 msgid "User Signal &1"
 msgstr "பயனர் சமிக்ஞை &1"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:961
 #, kde-format
 msgid "User Signal &2"
 msgstr "பயனர் சமிக்ஞை &2"
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:979
 #, kde-format
 msgid "Create New Profile..."
 msgstr "புதிய பயன்முறையை உருவாக்கு…"
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:981
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "தற்போதைய பயன்முறையை திருத்து…"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1112
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2389,7 +2401,7 @@ msgid ""
 msgstr ""
 "இவ்வமர்வில் ஓர் நிரல் இயங்கிக் கொண்டிருக்கிறது. உறுதியாக அதை மூட விரும்புகிறீர்களா?"
 
-#: session/SessionController.cpp:1092
+#: session/SessionController.cpp:1116
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2397,18 +2409,18 @@ msgid ""
 msgstr ""
 "இவ்வமர்வில் '%1' என்ற நிரல் இயங்கிக் கொண்டிருக்கிறது. உறுதியாக அதை மூட விரும்புகிறீர்களா?"
 
-#: session/SessionController.cpp:1099 session/SessionController.cpp:1134
+#: session/SessionController.cpp:1123 session/SessionController.cpp:1158
 #, kde-format
 msgid "Confirm Close"
 msgstr "மூடுவதை உறுதிசெய்யுங்கள்"
 
-#: session/SessionController.cpp:1100
+#: session/SessionController.cpp:1124
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "நிரலை மூடு"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1147
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2416,7 +2428,7 @@ msgid ""
 msgstr ""
 "இவ்வமர்விலுள்ள ஓர் நிரல் வெளியேற மறுக்கிறது. அதை கட்டாயப்படுத்தி முடிவடைய வைக்கலாமா?"
 
-#: session/SessionController.cpp:1127
+#: session/SessionController.cpp:1151
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2425,28 +2437,28 @@ msgstr ""
 "இவ்வமர்விலுள்ள '%1' என்ற நிரல் வெளியேற மறுக்கிறது. அதை கட்டாயப்படுத்தி முடிவடைய "
 "வைக்கலாமா?"
 
-#: session/SessionController.cpp:1135
+#: session/SessionController.cpp:1159
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "நிரலை கட்டாயப்படுத்தி மூடு"
 
-#: session/SessionController.cpp:1812
+#: session/SessionController.cpp:1836
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "'%1' அமர்வில் தூண்டி காட்டப்படுகிறது"
 
-#: session/SessionController.cpp:2005
+#: session/SessionController.cpp:2029
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "தற்போதைய அடைவை இதனால் திற"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2099
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "&ZModem பதிவிறக்கத்தை இங்கு சேமி…"
 
-#: session/SessionController.cpp:2085
+#: session/SessionController.cpp:2109
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2461,7 +2473,7 @@ msgstr ""
 "மென்பொருள் அமைப்பில் இல்லை.\n"
 "<p> 'rzsz' அல்லது 'lrzsz' தொகுப்பை வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2095
+#: session/SessionController.cpp:2119
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2469,7 +2481,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<பி>நடப்பு அமர்வில் ஏற்கனவே உள்ள Z மோடம் கோப்பு இடமாற்றம் நடைமுறையில் உள்ளது."
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2132
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2481,7 +2493,7 @@ msgstr ""
 "<p>பொருத்தமான Z மோடம் மென்பொருள் அமைப்பு கிடைக்கவில்லை.\n"
 " <p>'rzsz' அல்லது 'lrzsz '  தொகுப்பு வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2113
+#: session/SessionController.cpp:2137
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"
@@ -5818,9 +5830,6 @@ msgstr "கீற்றை மூடு"
 
 #~ msgid "Next View"
 #~ msgstr "அடுத்த காட்சி"
-
-#~ msgid "Previous View"
-#~ msgstr "முந்தைய காட்சி"
 
 #~ msgid "Match case"
 #~ msgstr "கேஸ் பொருத்தம்"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-27 00:40+0000\n"
-"PO-Revision-Date: 2024-03-27 19:45\n"
+"POT-Creation-Date: 2024-03-29 00:39+0000\n"
+"PO-Revision-Date: 2024-03-28 19:17\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -1867,13 +1867,13 @@ msgstr "内建"
 msgid "Default profile"
 msgstr "默认配置方案"
 
-#: profile/ProfileManager.cpp:256
+#: profile/ProfileManager.cpp:280
 #, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "配置方案 %1"
 
-#: profile/ProfileManager.cpp:270
+#: profile/ProfileManager.cpp:294
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "Konsole 没有写入配置方案到 %1 的权限"
@@ -2059,7 +2059,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "“%1“中的静止 (会话”%2“)"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
-#: session/SessionController.cpp:354 session/SessionController.cpp:1813
+#: session/SessionController.cpp:354 session/SessionController.cpp:1837
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
 #, kde-format
 msgid "Show session"
@@ -2218,215 +2218,228 @@ msgstr "清除回滚"
 msgid "Clear Scrollback and Reset"
 msgstr "清除回滚并重置"
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:757
+#, fuzzy, kde-format
+#| msgid "Edit Profile"
+msgid "Next Profile"
+msgstr "编辑配置方案"
+
+#: session/SessionController.cpp:762
+#, fuzzy, kde-format
+#| msgctxt "@action:button Go to the previous phrase"
+#| msgid "Previous"
+msgid "Previous Profile"
+msgstr "前一个"
+
+#: session/SessionController.cpp:765
 #, kde-format
 msgid "Switch Profile"
 msgstr "切换配置方案"
 
-#: session/SessionController.cpp:780
+#: session/SessionController.cpp:790
 #, kde-format
 msgid "Set &Encoding"
 msgstr "设定编码(&E)"
 
-#: session/SessionController.cpp:802
+#: session/SessionController.cpp:812
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "允许鼠标跟踪"
 
-#: session/SessionController.cpp:811
+#: session/SessionController.cpp:821
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "只读"
 
-#: session/SessionController.cpp:822
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "配置或者重命名标签页(&C)..."
 
-#: session/SessionController.cpp:828
+#: session/SessionController.cpp:838
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "当前窗口中的全部标签页(&A)"
 
-#: session/SessionController.cpp:835
+#: session/SessionController.cpp:845
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "选择标签页(&S)..."
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:851
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "无(&N)"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:859
 #, kde-format
 msgid "Copy Input To"
 msgstr "输入复制到"
 
-#: session/SessionController.cpp:857
+#: session/SessionController.cpp:867
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem 上传..."
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "单次监视器"
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "提示监视器(&P)"
 
-#: session/SessionController.cpp:874
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "活动监视器(&A)"
 
-#: session/SessionController.cpp:880
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "静止监视器(&S)"
 
-#: session/SessionController.cpp:886
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "进程结束监视器"
 
-#: session/SessionController.cpp:893
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Enlarge Font"
 msgstr "放大字体"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:911
 #, kde-format
 msgid "Shrink Font"
 msgstr "缩小字体"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Reset Font Size"
 msgstr "重置字体大小"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "Send Signal"
 msgstr "发送信号"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "&Suspend Task"
 msgstr "暂停任务(&S)"
 
-#: session/SessionController.cpp:921
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "&Continue Task"
 msgstr "继续任务(&C)"
 
-#: session/SessionController.cpp:926
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "&Hangup"
 msgstr "挂起(&H)"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "中断任务(&I)"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "&Terminate Task"
 msgstr "终止任务(&T)"
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "&Kill Task"
 msgstr "杀死任务(&K)"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:956
 #, kde-format
 msgid "User Signal &1"
 msgstr "用户信号 &1"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:961
 #, kde-format
 msgid "User Signal &2"
 msgstr "用户信号 &2"
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:979
 #, kde-format
 msgid "Create New Profile..."
 msgstr "新建配置方案..."
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:981
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "编辑当前方案..."
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1112
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "当前会话内已有一个程序在运行，您确定要关闭它吗？"
 
-#: session/SessionController.cpp:1092
+#: session/SessionController.cpp:1116
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "当前会话内已有程序“%1”在运行，您确定要关闭它吗？"
 
-#: session/SessionController.cpp:1099 session/SessionController.cpp:1134
+#: session/SessionController.cpp:1123 session/SessionController.cpp:1158
 #, kde-format
 msgid "Confirm Close"
 msgstr "确认关闭"
 
-#: session/SessionController.cpp:1100
+#: session/SessionController.cpp:1124
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "关闭程序"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1147
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "当前会话内有一个程序在不会退出，您确定要强制杀死它吗？"
 
-#: session/SessionController.cpp:1127
+#: session/SessionController.cpp:1151
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "当前会话内的程序“%1”不会退出，您想要强制杀死它吗？"
 
-#: session/SessionController.cpp:1135
+#: session/SessionController.cpp:1159
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "杀死程序"
 
-#: session/SessionController.cpp:1812
+#: session/SessionController.cpp:1836
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "外壳程序的提示显示在会话“%1”"
 
-#: session/SessionController.cpp:2005
+#: session/SessionController.cpp:2029
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "打开当前文件夹方式"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2099
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "保存 ZModem 下载数据到..."
 
-#: session/SessionController.cpp:2085
+#: session/SessionController.cpp:2109
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2436,13 +2449,13 @@ msgstr ""
 "<p>检测到一个 ZModem 文件传输尝试，但是在此系统上找不到合适的 ZModem 软件。</"
 "p><p>您可能需要安装“rzsz”或“lrzsz”软件包。</p>"
 
-#: session/SessionController.cpp:2095
+#: session/SessionController.cpp:2119
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>当前会话已经有一个 ZModem 文件传输在进行中。</p>"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2132
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2451,7 +2464,7 @@ msgstr ""
 "<p>在此系统上找不到合适的 ZModem 软件。</p><p>您可能需要安装“rzsz”或“lrzsz”软"
 "件包。</p>"
 
-#: session/SessionController.cpp:2113
+#: session/SessionController.cpp:2137
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "选择要通过 ZModem 上传的文件"

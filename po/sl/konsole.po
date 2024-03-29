@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-27 00:40+0000\n"
+"POT-Creation-Date: 2024-03-29 00:39+0000\n"
 "PO-Revision-Date: 2024-03-25 06:27+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1892,13 +1892,13 @@ msgstr "Vgrajeno"
 msgid "Default profile"
 msgstr "Privzeti profil"
 
-#: profile/ProfileManager.cpp:256
+#: profile/ProfileManager.cpp:280
 #, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "Profil %1"
 
-#: profile/ProfileManager.cpp:270
+#: profile/ProfileManager.cpp:294
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "Konsole nima dovoljenj za shranjevanje tega profila v %1"
@@ -2086,7 +2086,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina v »%1« (Seja »%2«)"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
-#: session/SessionController.cpp:354 session/SessionController.cpp:1813
+#: session/SessionController.cpp:354 session/SessionController.cpp:1837
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
 #, kde-format
 msgid "Show session"
@@ -2246,155 +2246,168 @@ msgstr "Počisti pomnilnik vrstic"
 msgid "Clear Scrollback and Reset"
 msgstr "Počisti pomnilnik vrstic in ponastavi"
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:757
+#, fuzzy, kde-format
+#| msgid "Edit Profile"
+msgid "Next Profile"
+msgstr "Uredi profil"
+
+#: session/SessionController.cpp:762
+#, fuzzy, kde-format
+#| msgctxt "@action:button Go to the previous phrase"
+#| msgid "Previous"
+msgid "Previous Profile"
+msgstr "Predhodni"
+
+#: session/SessionController.cpp:765
 #, kde-format
 msgid "Switch Profile"
 msgstr "Preklopi profil"
 
-#: session/SessionController.cpp:780
+#: session/SessionController.cpp:790
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Nastavi kodiranj&e"
 
-#: session/SessionController.cpp:802
+#: session/SessionController.cpp:812
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Dovoli sledenje miške"
 
-#: session/SessionController.cpp:811
+#: session/SessionController.cpp:821
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Samo za branje"
 
-#: session/SessionController.cpp:822
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "N&astavi ali preimenuj zavihek …"
 
-#: session/SessionController.cpp:828
+#: session/SessionController.cpp:838
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Vsi zavihki v trenutnem oknu"
 
-#: session/SessionController.cpp:835
+#: session/SessionController.cpp:845
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Izbor zavihkov …"
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:851
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Nobenega"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:859
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopiraj vnos v"
 
-#: session/SessionController.cpp:857
+#: session/SessionController.cpp:867
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Pošiljanje prek &ZModema …"
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Enkratni nadzorniki"
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Spremljaj &Poziv"
 
-#: session/SessionController.cpp:874
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Spremljaj dej&avnost"
 
-#: session/SessionController.cpp:880
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Spremljaj nedejavno&st"
 
-#: session/SessionController.cpp:886
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Spremljaj dej&avnost dokler ne konča"
 
-#: session/SessionController.cpp:893
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Povečaj velikost pisave"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:911
 #, kde-format
 msgid "Shrink Font"
 msgstr "Zmanjšaj velikost pisave"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Ponastavi velikost pisave"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "Send Signal"
 msgstr "Pošlji signal"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "&Suspend Task"
 msgstr "Po&stavi opravilo v pripravljenost"
 
-#: session/SessionController.cpp:921
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "&Continue Task"
 msgstr "Nadaljuj opravilo"
 
-#: session/SessionController.cpp:926
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "&Hangup"
 msgstr "Odloži"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "Prekini opravilo"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "&Terminate Task"
 msgstr "Končaj opravilo"
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "&Kill Task"
 msgstr "Uniči opravilo"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:956
 #, kde-format
 msgid "User Signal &1"
 msgstr "Uporabniški signal &1"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:961
 #, kde-format
 msgid "User Signal &2"
 msgstr "Uporabniški signal &2"
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:979
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Ustvari nov profil …"
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:981
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Uredi trenutni profil …"
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1112
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2403,7 +2416,7 @@ msgstr ""
 "V tej seji trenutno teče nek program. Ali ste prepričani, da jo želite "
 "zapreti?"
 
-#: session/SessionController.cpp:1092
+#: session/SessionController.cpp:1116
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2412,18 +2425,18 @@ msgstr ""
 "V tej seji trenutno teče program »%1«. Ali ste prepričani, da jo želite "
 "zapreti?"
 
-#: session/SessionController.cpp:1099 session/SessionController.cpp:1134
+#: session/SessionController.cpp:1123 session/SessionController.cpp:1158
 #, kde-format
 msgid "Confirm Close"
 msgstr "Potrdi zaprtje"
 
-#: session/SessionController.cpp:1100
+#: session/SessionController.cpp:1124
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Zapri program"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1147
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2432,7 +2445,7 @@ msgstr ""
 "V tej seji teče program, ki ga ni mogoče uničiti. Ali ste prepričani, da ga "
 "želite uničiti nasilno?"
 
-#: session/SessionController.cpp:1127
+#: session/SessionController.cpp:1151
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2441,28 +2454,28 @@ msgstr ""
 "V tej seji teče program »%1«, ki ga ni mogoče uničiti. Ali ste prepričani, "
 "da ga želite uničiti nasilno?"
 
-#: session/SessionController.cpp:1135
+#: session/SessionController.cpp:1159
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Ubij program"
 
-#: session/SessionController.cpp:1812
+#: session/SessionController.cpp:1836
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Shellov poziv je prikazan v seji »%1«"
 
-#: session/SessionController.cpp:2005
+#: session/SessionController.cpp:2029
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Odpri trenutno mapo z"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2099
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Shrani prejem prek ZModema v …"
 
-#: session/SessionController.cpp:2085
+#: session/SessionController.cpp:2109
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2473,13 +2486,13 @@ msgstr ""
 "ni bilo mogoče najti ustreznega programa za ZModem.</p><p>Morda bi želeli "
 "namestiti paket »rzsz« ali »lrzsz«.</p>"
 
-#: session/SessionController.cpp:2095
+#: session/SessionController.cpp:2119
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>V trenutni seji že poteka datotečni prenos prek ZModema.</p>"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2132
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2488,7 +2501,7 @@ msgstr ""
 "<p>Na tem sistemu ni bilo mogoče najti ustreznega programa za ZModem.</"
 "p><p>Morda bi  želeli namestiti paket »rzsz« ali »lrzsz«.</p>"
 
-#: session/SessionController.cpp:2113
+#: session/SessionController.cpp:2137
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Izberite datoteke za pošiljanje prek ZModema"

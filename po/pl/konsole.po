@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-27 00:40+0000\n"
+"POT-Creation-Date: 2024-03-29 00:39+0000\n"
 "PO-Revision-Date: 2024-03-23 11:09+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1918,13 +1918,13 @@ msgstr "Wbudowany"
 msgid "Default profile"
 msgstr "Domyślny profil"
 
-#: profile/ProfileManager.cpp:256
+#: profile/ProfileManager.cpp:280
 #, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "Profil %1"
 
-#: profile/ProfileManager.cpp:270
+#: profile/ProfileManager.cpp:294
 #, kde-format
 msgid "Konsole does not have permission to save this profile to %1"
 msgstr "Konsola nie ma uprawnień do zapisania tego profilu w %1"
@@ -2112,7 +2112,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Cisza w „%1” (sesja „%2”)"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
-#: session/SessionController.cpp:354 session/SessionController.cpp:1813
+#: session/SessionController.cpp:354 session/SessionController.cpp:1837
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
 #, kde-format
 msgid "Show session"
@@ -2273,155 +2273,167 @@ msgstr "Wyczyść przewijanie wstecz"
 msgid "Clear Scrollback and Reset"
 msgstr "Wyczyść przewijanie wstecz i wyzeruj"
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:757
+#, fuzzy, kde-format
+#| msgid "Edit Profile"
+msgid "Next Profile"
+msgstr "Edycja profilu"
+
+#: session/SessionController.cpp:762
+#, fuzzy, kde-format
+#| msgid "Previous View"
+msgid "Previous Profile"
+msgstr "Poprzedni widok"
+
+#: session/SessionController.cpp:765
 #, kde-format
 msgid "Switch Profile"
 msgstr "Przełącz profil"
 
-#: session/SessionController.cpp:780
+#: session/SessionController.cpp:790
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Ustaw kodowani&e"
 
-#: session/SessionController.cpp:802
+#: session/SessionController.cpp:812
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Zezwól na śledzenie myszy"
 
-#: session/SessionController.cpp:811
+#: session/SessionController.cpp:821
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Tylko do odczytu"
 
-#: session/SessionController.cpp:822
+#: session/SessionController.cpp:832
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Ustawienia lub zmiana nazwy karty..."
 
-#: session/SessionController.cpp:828
+#: session/SessionController.cpp:838
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Wszystkie k&arty w bieżącym oknie"
 
-#: session/SessionController.cpp:835
+#: session/SessionController.cpp:845
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Wybierz karty..."
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:851
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Nie wybieraj"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:859
 #, kde-format
 msgid "Copy Input To"
 msgstr "Skopiuj wejście do"
 
-#: session/SessionController.cpp:857
+#: session/SessionController.cpp:867
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Wyślij przez &ZModem..."
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Monitory jednorazowe"
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Wyczuwaj za&pytania"
 
-#: session/SessionController.cpp:874
+#: session/SessionController.cpp:884
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Wyczuw&aj ruch"
 
-#: session/SessionController.cpp:880
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Wyczuwaj ci&szę"
 
-#: session/SessionController.cpp:886
+#: session/SessionController.cpp:896
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Monitoruj kończenie procesów"
 
-#: session/SessionController.cpp:893
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Zwiększ czcionkę"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:911
 #, kde-format
 msgid "Shrink Font"
 msgstr "Zmniejsz czcionkę"
 
-#: session/SessionController.cpp:906
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Wyzeruj rozmiar czcionki"
 
-#: session/SessionController.cpp:912
+#: session/SessionController.cpp:922
 #, kde-format
 msgid "Send Signal"
 msgstr "Wyślij sygnał"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:926
 #, kde-format
 msgid "&Suspend Task"
 msgstr "W&strzymaj zadanie"
 
-#: session/SessionController.cpp:921
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Kontynuuj zadanie"
 
-#: session/SessionController.cpp:926
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "&Hangup"
 msgstr "Za&wieś"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:941
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "Przerw&ij zadanie"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Zakończ zadanie"
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Zniszcz zadanie"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:956
 #, kde-format
 msgid "User Signal &1"
 msgstr "Sygnał użytkownika &1"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:961
 #, kde-format
 msgid "User Signal &2"
 msgstr "Sygnał użytkownika &2"
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:979
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Utwórz nowy profil..."
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:981
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Edytuj bieżący profil..."
 
-#: session/SessionController.cpp:1088
+#: session/SessionController.cpp:1112
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2430,7 +2442,7 @@ msgstr ""
 "W tej sesji działa obecnie jakiś program. Czy na pewno chcesz zamknąć tę "
 "sesję?"
 
-#: session/SessionController.cpp:1092
+#: session/SessionController.cpp:1116
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2439,25 +2451,25 @@ msgstr ""
 "W tej sesji działa obecnie program „%1”. Czy na pewno chcesz zamknąć tę "
 "sesję?"
 
-#: session/SessionController.cpp:1099 session/SessionController.cpp:1134
+#: session/SessionController.cpp:1123 session/SessionController.cpp:1158
 #, kde-format
 msgid "Confirm Close"
 msgstr "Potwierdź zamknięcie"
 
-#: session/SessionController.cpp:1100
+#: session/SessionController.cpp:1124
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Zamknij program"
 
-#: session/SessionController.cpp:1123
+#: session/SessionController.cpp:1147
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "Program w tej sesji nie zginął. Czy na pewno chcesz zabić go siłą?"
 
-#: session/SessionController.cpp:1127
+#: session/SessionController.cpp:1151
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2465,28 +2477,28 @@ msgid ""
 msgstr ""
 "Program „%1” w tej sesji nie zginął. Czy na pewno chcesz zabić go siłą?"
 
-#: session/SessionController.cpp:1135
+#: session/SessionController.cpp:1159
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Zniszcz program"
 
-#: session/SessionController.cpp:1812
+#: session/SessionController.cpp:1836
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Zapytanie powłoki jest wyświetlane w posiedzeniu '%1'"
 
-#: session/SessionController.cpp:2005
+#: session/SessionController.cpp:2029
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Otwórz bieżący katalog w"
 
-#: session/SessionController.cpp:2075
+#: session/SessionController.cpp:2099
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Zapisz pobranie ZModem do..."
 
-#: session/SessionController.cpp:2085
+#: session/SessionController.cpp:2109
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2497,14 +2509,14 @@ msgstr ""
 "oprogramowania wspierającego ten protokół.</p><p>Należy zainstalować pakiet "
 "„rzsz” lub „lrzsz”.</p> "
 
-#: session/SessionController.cpp:2095
+#: session/SessionController.cpp:2119
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>W bieżącej sesji już trwa przesyłanie plików przy użyciu ZModem.</p>"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2132
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2513,7 +2525,7 @@ msgstr ""
 "<p>W systemie nie odnaleziono oprogramowania wspierającego protokół ZModem.</"
 "p><p>Należy zainstalować pakiet „rzsz” lub „lrzsz”.</p>"
 
-#: session/SessionController.cpp:2113
+#: session/SessionController.cpp:2137
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Wybierz pliki do wysłania przez ZModem"
@@ -5978,9 +5990,6 @@ msgstr "Zamknij kartę"
 
 #~ msgid "Next View"
 #~ msgstr "Następny widok"
-
-#~ msgid "Previous View"
-#~ msgstr "Poprzedni widok"
 
 #~ msgid "New &Tab"
 #~ msgstr "Nowa &karta"
