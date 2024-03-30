@@ -1,7 +1,7 @@
 # translation of konsole.po to Chinese Traditional
 # Copyright (C) 2001-2002, 2006, 2007, 2008 Free Software Foundation, Inc.
 #
-# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 # Jouston Huang (Huang, Jiun-Jeng) <jouston@housediy.com>, 2001.
 # Roy Hiu-yeung Chan (voidoo) <voidoo@xychen.org>, 2002.
 # Kenduest Lee <kenduest@i18n.linux.org.tw>, 2002.
@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 02:23+0000\n"
-"PO-Revision-Date: 2023-12-22 04:46+0900\n"
+"PO-Revision-Date: 2024-03-29 21:22+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.01.80\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4249,7 +4249,7 @@ msgstr "選擇起始目錄"
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
-msgstr "框架 <resource>%1</resource> 無法載入。"
+msgstr "配色 <resource>%1</resource> 無法載入。"
 
 #: widgets/EditProfileDialog.cpp:1505
 #, kde-format
