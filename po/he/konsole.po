@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-29 00:39+0000\n"
-"PO-Revision-Date: 2024-03-25 08:28+0200\n"
+"PO-Revision-Date: 2024-03-29 08:11+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2240,17 +2240,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "פינוי היסטוריית הגלילה ואיפוס"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "ערוך פרופיל"
+msgstr "הפרופיל הבא"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "הקודם"
+msgstr "הפרופיל הקודם"
 
 #: session/SessionController.cpp:765
 #, kde-format

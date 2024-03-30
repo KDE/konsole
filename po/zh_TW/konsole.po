@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-29 00:39+0000\n"
-"PO-Revision-Date: 2024-03-12 02:04+0900\n"
+"PO-Revision-Date: 2024-03-29 21:24+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -1603,7 +1603,7 @@ msgstr "刪除 SSH 設定"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "已匯入 SSH 設定檔 <br/> 有些設定是唯讀的。"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -2221,17 +2221,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "清除歷史內容並重置"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "編輯設定檔"
+msgstr "下一個設定檔"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "前一個"
+msgstr "上一個設定檔"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -4280,7 +4277,7 @@ msgstr "取得更多…"
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
-msgstr "框架 <resource>%1</resource> 無法載入。"
+msgstr "配色 <resource>%1</resource> 無法載入。"
 
 #: widgets/EditProfileDialog.cpp:1505
 #, kde-format
@@ -4299,10 +4296,9 @@ msgstr ""
 "景。"
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "預設設定檔"
+msgstr "檔案類型的預設"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format
