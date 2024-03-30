@@ -3260,10 +3260,57 @@ int TerminalDisplay::bidiMap(Character *screenline,
                       U_SHAPE_AGGREGATE_TASHKEEL_NOOP | U_SHAPE_LENGTH_FIXED_SPACES_NEAR | U_SHAPE_LETTERS_SHAPE,
                       &errorCode);
         for (int i = 0; i < line.length(); i++) {
-            shapemap[i] = shaped_line[i];
             if (line[i] != shaped_line[i]) {
                 shaped = true;
+                if (i < line.length() - 1 && line[i].unicode() == 0x0644
+                    && (line[i + 1].unicode() == 0x0627 || line[i + 1].unicode() == 0x0625 || line[i + 1].unicode() == 0x0623
+                        || line[i + 1].unicode() == 0x0622)
+                    && shaped_line[i + 1] == 0x0020) {
+                    switch (shaped_line[i]) {
+                    case 0x0fefc:
+                        // Un ligature final form Lam-Alef
+                        shaped_line[i] = 0xfee0;
+                        shaped_line[i + 1] = 0xfe8e;
+                        break;
+                    case 0x0fefb:
+                        // Un ligature isolated form Lam-Alef
+                        shaped_line[i] = 0xfedf;
+                        shaped_line[i + 1] = 0xfe8e;
+                        break;
+                    case 0x0fef6:
+                        // Un ligature final form Lam-Alef with Madda
+                        shaped_line[i] = 0xfee0;
+                        shaped_line[i + 1] = 0xfe82;
+                        break;
+                    case 0x0fef5:
+                        // Un ligature isolated form Lam-Alef with Madda
+                        shaped_line[i] = 0xfedf;
+                        shaped_line[i + 1] = 0xfe82;
+                        break;
+                    case 0x0fef8:
+                        // Un ligature final form Lam-Alef with Hamza above
+                        shaped_line[i] = 0xfee0;
+                        shaped_line[i + 1] = 0xfe84;
+                        break;
+                    case 0x0fef7:
+                        // Un ligature isolated form Lam-Alef with Hamza above
+                        shaped_line[i] = 0xfedf;
+                        shaped_line[i + 1] = 0xfe84;
+                        break;
+                    case 0x0fefa:
+                        // Un ligature final form Lam-Alef with Hamza below
+                        shaped_line[i] = 0xfee0;
+                        shaped_line[i + 1] = 0xfe88;
+                        break;
+                    case 0x0fef9:
+                        // Un ligature isolated form Lam-Alef with Hamza below
+                        shaped_line[i] = 0xfedf;
+                        shaped_line[i + 1] = 0xfe88;
+                        break;
+                    }
+                }
             }
+            shapemap[i] = shaped_line[i];
         }
     }
     if (!bidi) {
