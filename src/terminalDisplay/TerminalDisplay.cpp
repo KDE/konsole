@@ -3221,6 +3221,10 @@ int TerminalDisplay::bidiMap(Character *screenline,
                              bool shape,
                              bool bidi) const
 {
+    // screenline is the input line: the nth element is the nth character in the (logical) line in UCS4 encoding.
+    // line is a translation of screenline to Utf-16 for ICU library
+    // UTF-16 characters are not of constant length (and there are konsole's extended characters as well)
+    // log2line and line2log translate positions in screenline to positions in line (and reverse)
     const int linewidth = _usedColumns;
     uint64_t notSkipped[MAX_LINE_WIDTH / 64] = {};
     int i;
@@ -3257,6 +3261,22 @@ int TerminalDisplay::bidiMap(Character *screenline,
     // line.truncate(lastNonSpace + 1);
     UErrorCode errorCode = U_ZERO_ERROR;
     if (shape) {
+        int added_a = -1;
+        int lineLastNonSpace = log2line[lastNonSpace];
+        // If last letters are Lam Alef, ICU converts to ligature, but puts
+        // The space at the start of the line, ignoring the NEAR flag.
+        // Add a fake 'a' at the end of the text to avoid this.
+        // Remove the 'a' after the shaping.
+        if (lineLastNonSpace > 0 && line[lineLastNonSpace - 1].unicode() == 0x0644
+            && (line[lineLastNonSpace].unicode() == 0x0627 || line[lineLastNonSpace].unicode() == 0x0625 || line[lineLastNonSpace].unicode() == 0x0623
+                || line[lineLastNonSpace].unicode() == 0x0622)) {
+            if (lineLastNonSpace + 1 >= line.length()) {
+                line += u'a';
+            } else {
+                line[lineLastNonSpace + 1] = u'a';
+            }
+            added_a = lineLastNonSpace + 1;
+        }
         UChar shaped_line[MAX_LINE_WIDTH];
         u_shapeArabic(reinterpret_cast<const UChar *>(line.utf16()),
                       line.length(),
@@ -3270,8 +3290,8 @@ int TerminalDisplay::bidiMap(Character *screenline,
                 if (i < line.length() - 1 && line[i].unicode() == 0x0644
                     && (line[i + 1].unicode() == 0x0627 || line[i + 1].unicode() == 0x0625 || line[i + 1].unicode() == 0x0623
                         || line[i + 1].unicode() == 0x0622)
-                    && shaped_line[i + 1] == 0x0020) {
-                    switch (shaped_line[i]) {
+                    && ((shaped_line[i] == 0x0020) != (shaped_line[i + 1] == 0x0020))) {
+                    switch (shaped_line[i] == 0x0020 ? shaped_line[i + 1] : shaped_line[i]) {
                     case 0x0fefc:
                         // Un ligature final form Lam-Alef
                         shaped_line[i] = 0xfee0;
@@ -3316,6 +3336,10 @@ int TerminalDisplay::bidiMap(Character *screenline,
                 }
             }
             shapemap[i] = shaped_line[i];
+        }
+        if (added_a > 0) {
+            shapemap[added_a] = ' ';
+            line[added_a] = u' ';
         }
     }
     if (!bidi) {
