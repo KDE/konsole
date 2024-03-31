@@ -92,7 +92,9 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
     // the title and overriding whatever is set elsewhere.
     // https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=532029
     // https://www.debian.org/doc/debian-policy/ch-customized-programs.html#s11.8.3
-    auto titleOption = QCommandLineOption({QStringLiteral("T")}, QStringLiteral("Debian policy compatibility, not used"), QStringLiteral("value"));
+    // --title is used by the VirtualBox Guest Additions installer
+    auto titleOption =
+        QCommandLineOption({QStringLiteral("T"), QStringLiteral("title")}, QStringLiteral("Debian policy compatibility, not used"), QStringLiteral("value"));
     titleOption.setFlags(QCommandLineOption::HiddenFromHelp);
     parser->addOption(titleOption);
 }
