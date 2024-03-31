@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 02:23+0000\n"
-"PO-Revision-Date: 2024-01-06 03:32\n"
+"PO-Revision-Date: 2024-03-30 19:38\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/konsole/konsole.pot\n"
-"X-Crowdin-File-ID: 46616\n"
+"X-Crowdin-File: /kf6-stable/messages/konsole/konsole.pot\n"
+"X-Crowdin-File-ID: 52522\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1269,7 +1269,7 @@ msgstr "内存"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr "标签页栏 / 拆分线"
+msgstr "标签页栏和拆分视图"
 
 #: MainWindow.cpp:906
 #, kde-format
@@ -2986,19 +2986,19 @@ msgstr "行为"
 #: settings/TabBarSettings.ui:298
 #, kde-format
 msgid "Put new tabs:"
-msgstr "放置新标签页："
+msgstr "新标签页位置："
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
 #: settings/TabBarSettings.ui:308
 #, kde-format
 msgid "At &the end"
-msgstr "在末端(&T)"
+msgstr "在最后(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
 #: settings/TabBarSettings.ui:318
 #, kde-format
 msgid "After current &tab"
-msgstr "在当前标签页后面(&T)"
+msgstr "在当前标签页之后(&T)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
 #: settings/TabBarSettings.ui:354
@@ -3010,13 +3010,13 @@ msgstr "中键点击关闭标签页"
 #: settings/TabBarSettings.ui:377
 #, kde-format
 msgid "Splits"
-msgstr "拆分"
+msgstr "拆分视图"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/TabBarSettings.ui:383
 #, kde-format
 msgid "Show Header:"
-msgstr "显示头部："
+msgstr "显示标题："
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:390
@@ -3036,7 +3036,7 @@ msgstr "从不"
 #: settings/TabBarSettings.ui:426
 #, kde-format
 msgid "Drag Handle Size:"
-msgstr "拖拽柄大小："
+msgstr "拖动柄大小："
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
 #: settings/TabBarSettings.ui:436
@@ -3295,19 +3295,19 @@ msgstr "拆分视图 (自动)"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "拆分视图 (与下一个标签页) (左右)"
+msgstr "拆分视图 (左右) (与后一个标签页一组)"
 
 #: ViewManager.cpp:154
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "拆分视图 (与下一个标签页) (上下)"
+msgstr "拆分视图 (上下) (与后一个标签页一组)"
 
 #: ViewManager.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "拆分视图 (与下一个标签页) (自动)"
+msgstr "拆分视图 (自动) (与后一个标签页一组)"
 
 #: ViewManager.cpp:172
 #, kde-format
