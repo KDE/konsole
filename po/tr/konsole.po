@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-29 00:39+0000\n"
-"PO-Revision-Date: 2024-03-25 13:33+0300\n"
+"PO-Revision-Date: 2024-03-30 14:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2251,17 +2251,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Geçmişi Temizle ve Sıfırla"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Profili Düzenle"
+msgstr "Sonraki Profil"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Önceki"
+msgstr "Önceki Profil"
 
 #: session/SessionController.cpp:765
 #, kde-format

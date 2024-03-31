@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-29 00:39+0000\n"
-"PO-Revision-Date: 2024-02-10 18:03+0400\n"
+"PO-Revision-Date: 2024-03-30 10:49+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -693,11 +693,10 @@ msgid "Deselect All"
 msgstr "ألغ اختيار الكل"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "المعاينة:"
+msgstr "معاينة اللون"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -1627,7 +1626,7 @@ msgstr "احذف إعدادات SSH"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "تشكيلة SSH مستورد <br/> بعض الإعدادات للقراءة فقط."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -2249,16 +2248,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "امح التمرير الخلفي و أعد الضبط"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "حرر التشكيلة"
+msgstr "التّشكيلة التّالية"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "العرض السابق"
+msgstr "التّشكيلة السّابقة"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -4361,10 +4358,9 @@ msgstr ""
 "خلفية شفّافة."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "التشكيلة الافتراضية"
+msgstr "مبدئي لهذا النوع"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format

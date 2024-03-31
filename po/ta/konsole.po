@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-29 00:39+0000\n"
-"PO-Revision-Date: 2024-03-24 18:05+0530\n"
+"PO-Revision-Date: 2024-03-30 21:55+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -1613,7 +1613,7 @@ msgstr "SSH அமைப்புகளை நீக்குவது"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "இறக்குமதி செய்த SSH பயன்முறை <br/> சில அமைப்புகள் படிக்க மட்டும் கூடியவை."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -2234,16 +2234,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "முந்தைய உரையை நீக்கி முனையத்தை மீட்டமை"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "பயன்முறையை திருத்துவது"
+msgstr "அடுத்த பயன்முறை"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "முந்தைய காட்சி"
+msgstr "முந்தைய பயன்முறை"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -4351,10 +4349,9 @@ msgstr ""
 "நீங்கள் கான்சோலை மீள்துவக்க வேண்டும்."
 
 #: widgets/EditProfileDialog.cpp:1879
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "இயல்பிருப்பு பயன்முறை"
+msgstr "கோப்புவகைக்கான இயல்பிருப்பு"
 
 #: widgets/EditProfileDialog.cpp:1905
 #, kde-format

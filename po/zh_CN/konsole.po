@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-29 00:39+0000\n"
-"PO-Revision-Date: 2024-03-28 19:17\n"
+"PO-Revision-Date: 2024-03-30 19:37\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2219,17 +2219,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "清除回滚并重置"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "编辑配置方案"
+msgstr "下一个配置方案"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "前一个"
+msgstr "上一个配置方案"
 
 #: session/SessionController.cpp:765
 #, kde-format
