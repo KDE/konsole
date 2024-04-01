@@ -816,26 +816,52 @@ static inline bool drawLegacyCharacter(QPainter &paint, int x, int y, int w, int
     return false;
 }
 
+static inline bool drawBrailleCharacter(QPainter &paint, int x, int y, int w, int h, uint code, bool bold)
+{
+    Q_UNUSED(bold)
+    QPainterPath path;
+    const QColor color = paint.pen().color();
+    const QRectF rects[8] = {QRectF(x, y, w / 2.0, h / 4.0),
+                             QRectF(x, y + h / 4.0, w / 2.0, h / 4.0),
+                             QRectF(x, y + h / 2.0, w / 2.0, h / 4.0),
+                             QRectF(x + w / 2.0, y, w / 2.0, h / 4.0),
+                             QRectF(x + w / 2.0, y + h / 4.0, w / 2.0, h / 4.0),
+                             QRectF(x + w / 2.0, y + h / 2.0, w / 2.0, h / 4.0),
+                             QRectF(x, y + 3.0 * h / 4.0, w / 2.0, h / 4.0),
+                             QRectF(x + w / 2.0, y + 3.0 * h / 4.0, w / 2.0, h / 4.0)};
+
+    for (int i = 0; i < 8; i++) {
+        if (code & (0x01 << i)) {
+            path.addRect(rects[i]);
+        }
+    }
+
+    paint.fillPath(path, color);
+    return true;
+}
+
 void draw(QPainter &paint, const QRect &cellRect, const uint &chr, bool bold)
 {
     static const ushort FirstBoxDrawingCharacterCodePoint = 0x2500;
+    static const ushort FirstBrailleCodePoint = 0x2800;
     static const uint FirstLegacyCharacterCodePoint = 0x1fb00;
     uint code;
-    if (chr >= FirstLegacyCharacterCodePoint) {
-        code = chr - FirstLegacyCharacterCodePoint + 0x100;
-    } else {
-        code = chr - FirstBoxDrawingCharacterCodePoint;
-    }
 
     int x = cellRect.x();
     int y = cellRect.y();
     int w = cellRect.width();
     int h = cellRect.height();
 
-    if (code >= 0x100) {
-        drawLegacyCharacter(paint, x, y, w, h, code, bold);
+    if (chr >= FirstLegacyCharacterCodePoint) {
+        drawLegacyCharacter(paint, x, y, w, h, chr - FirstLegacyCharacterCodePoint + 0x100, bold);
         return;
+    } else if (chr >= FirstBrailleCodePoint) {
+        drawBrailleCharacter(paint, x, y, w, h, chr - FirstBrailleCodePoint, bold);
+        return;
+    } else {
+        code = chr - FirstBoxDrawingCharacterCodePoint;
     }
+
     // Each function below returns true when it has drawn the character, false otherwise.
     drawBasicLineCharacter(paint, x, y, w, h, code, bold) || drawDashedLineCharacter(paint, x, y, w, h, code, bold)
         || drawRoundedCornerLineCharacter(paint, x, y, w, h, code, bold) || drawDiagonalLineCharacter(paint, x, y, w, h, code, bold)

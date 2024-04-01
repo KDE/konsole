@@ -24,7 +24,12 @@ namespace LineBlockCharacters
  */
 inline static bool canDraw(uint ucs4cp)
 {
-    return (0x2500 <= ucs4cp && ucs4cp <= 0x259F);
+    return (0x2500 <= ucs4cp && ucs4cp <= 0x259F) || (0x2800 <= ucs4cp && ucs4cp <= 0x28FF);
+}
+
+inline static bool isBraille(uint ucs4cp)
+{
+    return (0x2800 <= ucs4cp && ucs4cp <= 0x28ff);
 }
 
 /**

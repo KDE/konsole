@@ -95,6 +95,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {AntiAliasFonts, "AntiAliasFonts", APPEARANCE_GROUP, true},
     {BoldIntense, "BoldIntense", APPEARANCE_GROUP, true},
     {UseFontLineCharacters, "UseFontLineChararacters", APPEARANCE_GROUP, false},
+    {UseFontBrailleCharacters, "UseFontBrailleChararacters", APPEARANCE_GROUP, true},
     {LineSpacing, "LineSpacing", APPEARANCE_GROUP, 0},
     {TabColor, "TabColor", APPEARANCE_GROUP, QColor(QColor::Invalid)},
     {DimValue, "DimmValue", APPEARANCE_GROUP, 128},

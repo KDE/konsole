@@ -46,6 +46,7 @@ public:
     bool boldIntense() const;
     bool antialiasText() const;
     bool useFontLineCharacters() const;
+    bool useFontBrailleCharacters() const;
 
     bool hasExtraFont(int i) const;
     QFont getExtraFont(int i) const;
@@ -66,6 +67,7 @@ private:
     bool m_boldIntense = false;
     bool m_antialiasText = true;
     bool m_useFontLineCharacters = false;
+    bool m_useFontBrailleCharacters = true;
     QMap<int, QFont> extraFonts;
 
     Profile::Ptr m_profile;

@@ -282,6 +282,9 @@ public:
         /** (bool) Whether to use font's line characters instead of the
          * builtin code. */
         UseFontLineCharacters,
+        /** (bool) Whether to use font's Braille characters instead of the
+         * builtin code. */
+        UseFontBrailleCharacters,
         /** (bool) Whether new sessions should be started in the same
          * directory as the currently active session.
          */

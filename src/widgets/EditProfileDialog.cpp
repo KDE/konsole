@@ -858,6 +858,10 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->useFontLineCharactersButton->setChecked(profile->useFontLineCharacters());
     connect(_appearanceUi->useFontLineCharactersButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::useFontLineCharacters);
 
+    _appearanceUi->useFontBrailleCharactersButton->setEnabled(!profile->property<bool>(Profile::UseFontLineCharacters));
+    _appearanceUi->useFontBrailleCharactersButton->setChecked(profile->property<bool>(Profile::UseFontBrailleCharacters));
+    connect(_appearanceUi->useFontBrailleCharactersButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::useFontBrailleCharacters);
+
     _mouseUi->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
     connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 
@@ -1004,8 +1008,15 @@ void EditProfileDialog::setBoldIntense(bool enable)
 
 void EditProfileDialog::useFontLineCharacters(bool enable)
 {
+    _appearanceUi->useFontBrailleCharactersButton->setEnabled(!enable);
     preview(Profile::UseFontLineCharacters, enable);
     updateTempProfileProperty(Profile::UseFontLineCharacters, enable);
+}
+
+void EditProfileDialog::useFontBrailleCharacters(bool enable)
+{
+    preview(Profile::UseFontBrailleCharacters, enable);
+    updateTempProfileProperty(Profile::UseFontBrailleCharacters, enable);
 }
 
 void EditProfileDialog::toggleBlinkingCursor(bool enable)

@@ -139,6 +139,7 @@ private Q_SLOTS:
     void setAntialiasText(bool enable);
     void setBoldIntense(bool enable);
     void useFontLineCharacters(bool enable);
+    void useFontBrailleCharacters(bool enable);
     void newColorScheme();
     void editColorScheme();
     void saveColorScheme(const ColorScheme &scheme, bool isNewScheme);

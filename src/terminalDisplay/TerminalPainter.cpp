@@ -45,13 +45,13 @@ TerminalPainter::TerminalPainter(TerminalDisplay *parent)
 {
 }
 
-static inline bool isLineCharString(const QString &string)
+static inline bool isLineCharString(const QString &string, bool braille)
 {
     if (string.length() == 0) {
         return false;
     }
     if (LineBlockCharacters::canDraw(string.at(0).unicode())) {
-        return true;
+        return !(braille && LineBlockCharacters::isBraille(string.at(0).unicode()));
     }
     if (string.length() <= 1 || !string[0].isSurrogate()) {
         return false;
@@ -692,7 +692,7 @@ void TerminalPainter::drawCharacters(QPainter &painter,
         painter.setPen(color);
     }
     // draw text
-    if (isLineCharString(text) && !m_parentDisplay->terminalFont()->useFontLineCharacters()) {
+    if (!m_parentDisplay->terminalFont()->useFontLineCharacters() && isLineCharString(text, m_parentDisplay->terminalFont()->useFontBrailleCharacters())) {
         int y = rect.y();
 
         if (lineProperty.flags.f.doubleheight_bottom) {
@@ -1125,7 +1125,7 @@ void TerminalPainter::drawTextCharacters(QPainter &painter,
     // const auto origClipRegion = painter.clipRegion();
     // painter.setClipRect(rect);
     // draw text
-    if (isLineCharString(text) && !m_parentDisplay->terminalFont()->useFontLineCharacters()) {
+    if (!m_parentDisplay->terminalFont()->useFontLineCharacters() && isLineCharString(text, m_parentDisplay->terminalFont()->useFontBrailleCharacters())) {
         int y = rect.y();
 
         if (lineProperty.flags.f.doubleheight_bottom) {

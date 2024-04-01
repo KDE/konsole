@@ -391,9 +391,15 @@ public:
         return LineBlockCharacters::canDraw(lhs.character) == lineDraw;
     }
 
+    inline bool hasSameBrailleStatus(Character lhs) const
+    {
+        const bool braille = LineBlockCharacters::isBraille(character);
+        return LineBlockCharacters::isBraille(lhs.character) == braille;
+    }
+
     inline bool hasSameAttributes(Character lhs) const
     {
-        return hasSameColors(lhs) && hasSameRendition(lhs) && hasSameLineDrawStatus(lhs) && isSameScript(lhs);
+        return hasSameColors(lhs) && hasSameRendition(lhs) && hasSameLineDrawStatus(lhs) && isSameScript(lhs) && hasSameBrailleStatus(lhs);
     }
 
     inline bool notSameAttributesText(Character lhs) const

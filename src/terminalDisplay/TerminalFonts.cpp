@@ -33,6 +33,7 @@ void TerminalFont::applyProfile(const Profile::Ptr &profile)
     m_antialiasText = profile->antiAliasFonts();
     m_boldIntense = profile->boldIntense();
     m_useFontLineCharacters = profile->useFontLineCharacters();
+    m_useFontBrailleCharacters = profile->property<bool>(Profile::UseFontBrailleCharacters);
     m_lineSpacing = uint(profile->lineSpacing());
     setVTFont(profile->font());
     extraFonts[0] = profile->emojiFont();
@@ -218,6 +219,11 @@ bool TerminalFont::antialiasText() const
 bool TerminalFont::useFontLineCharacters() const
 {
     return m_useFontLineCharacters;
+}
+
+bool TerminalFont::useFontBrailleCharacters() const
+{
+    return m_useFontBrailleCharacters;
 }
 
 void TerminalFont::fontChange(const QFont &)
