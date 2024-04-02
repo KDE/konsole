@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-29 00:39+0000\n"
+"POT-Creation-Date: 2024-04-02 00:40+0000\n"
 "PO-Revision-Date: 2024-03-29 05:30+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -1873,7 +1873,7 @@ msgstr "&პრინტერის რეჟიმი (შავი ტექ�
 msgid "&Scale output"
 msgstr "გამოტანის &მასშტაბირება"
 
-#: profile/Profile.cpp:263
+#: profile/Profile.cpp:264
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -3682,7 +3682,7 @@ msgstr "დინების კონტროლი"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:941
+#: widgets/EditProfileAppearancePage.ui:951
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3693,7 +3693,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:944
+#: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "ორმხრივი ტექსტის რენდერი"
@@ -3805,130 +3805,148 @@ msgstr ""
 msgid "Use line characters contained in font"
 msgstr "ხაზის სიმბოლოების გამოყენება, რომელსაც არჩეული ფონტი შეიცავს"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:198
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use the selected font for line characters instead of the builtin code"
+msgid ""
+"Use the selected font for unicode Braille characters instead of the builtin "
+"code"
+msgstr ""
+"ხაზის სიმბოლოებისთვის ჩაშენებული კოდის მაგიერ არჩეული ფონტის გამოყენება"
+
+#. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:201
+#, fuzzy, kde-format
+#| msgid "Use line characters contained in font"
+msgid "Use unicode Braille characters contained in font"
+msgstr "ხაზის სიმბოლოების გამოყენება, რომელსაც არჩეული ფონტი შეიცავს"
+
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
-#: widgets/EditProfileAppearancePage.ui:199
+#: widgets/EditProfileAppearancePage.ui:209
 #, kde-format
 msgid "Cursor"
 msgstr "კურსორი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileAppearancePage.ui:219
+#: widgets/EditProfileAppearancePage.ui:229
 #, kde-format
 msgid "Shape:"
 msgstr "ფორმა:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
-#: widgets/EditProfileAppearancePage.ui:229
+#: widgets/EditProfileAppearancePage.ui:239
 #, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
 msgstr "დაბლოკვა"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
-#: widgets/EditProfileAppearancePage.ui:239
+#: widgets/EditProfileAppearancePage.ui:249
 #, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
 msgstr "I-Beam"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
-#: widgets/EditProfileAppearancePage.ui:249
+#: widgets/EditProfileAppearancePage.ui:259
 #, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
 msgstr "ხაზგასმული"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: widgets/EditProfileAppearancePage.ui:281
+#: widgets/EditProfileAppearancePage.ui:291
 #, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
 msgstr "ფერი:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:297
+#: widgets/EditProfileAppearancePage.ui:307
 #, kde-format
 msgid "Set the cursor to match the color of the character underneath it."
 msgstr "კურსორის ფერი დაემთხვევა სიმბოლოს ფერს, რომელიც მის ქვეშაა."
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:300
+#: widgets/EditProfileAppearancePage.ui:310
 #, kde-format
 msgid "Match current character"
 msgstr "მიმდინარე სიმბოლოს დამთხვევა"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:316
+#: widgets/EditProfileAppearancePage.ui:326
 #, kde-format
 msgid "Use a custom, fixed color for the cursor"
 msgstr "კურსორისთვის მითითებული, ფიქსირებული ფერის გამოყენება"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:319
+#: widgets/EditProfileAppearancePage.ui:329
 #, kde-format
 msgid "Custom cursor color"
 msgstr "კურსორის მორგებული ფერი"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
-#: widgets/EditProfileAppearancePage.ui:350
+#: widgets/EditProfileAppearancePage.ui:360
 #, kde-format
 msgid "Cursor:"
 msgstr "კურსორი:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:363
+#: widgets/EditProfileAppearancePage.ui:373
 #, kde-format
 msgid "Select the color used to draw the cursor"
 msgstr "აირჩიეთ კურსორის დასახატად გამოყენებული ფერი"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
-#: widgets/EditProfileAppearancePage.ui:383
+#: widgets/EditProfileAppearancePage.ui:393
 #, kde-format
 msgid "Text:"
 msgstr "ტექსტი:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:396
+#: widgets/EditProfileAppearancePage.ui:406
 #, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
 msgstr "აირჩიეთ ფერი, რომლითაც დაიხატება სიმბოლო, რომელიც კურსორის ქვეშაა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileAppearancePage.ui:421
+#: widgets/EditProfileAppearancePage.ui:431
 #, kde-format
 msgid "Blinking:"
 msgstr "ციმციმი:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
-#: widgets/EditProfileAppearancePage.ui:437
+#: widgets/EditProfileAppearancePage.ui:447
 #, kde-format
 msgid "Make the cursor blink regularly"
 msgstr "კურსორის ციმციმის ჩართვა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
-#: widgets/EditProfileAppearancePage.ui:440
-#: widgets/EditProfileAppearancePage.ui:723
+#: widgets/EditProfileAppearancePage.ui:450
+#: widgets/EditProfileAppearancePage.ui:733
 #, kde-format
 msgid "Enabled"
 msgstr "ჩაირთო"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:463 widgets/EditProfileMousePage.ui:252
+#: widgets/EditProfileAppearancePage.ui:473 widgets/EditProfileMousePage.ui:252
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
 msgstr "სხვადასხვა"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileAppearancePage.ui:474
+#: widgets/EditProfileAppearancePage.ui:484
 #, kde-format
 msgid "Window:"
 msgstr "ფანჯარა:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:481
+#: widgets/EditProfileAppearancePage.ui:491
 #, kde-format
 msgid ""
 "Show terminal size in columns and lines in the center of window after "
@@ -3938,144 +3956,144 @@ msgstr ""
 "ფანჯრის ცენტრში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:484
+#: widgets/EditProfileAppearancePage.ui:494
 #, kde-format
 msgid "Show hint for terminal size after resizing"
 msgstr "ზომის შეცვლის შემდეგ ტერმინალის ზომის მინიშნების ჩვენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
-#: widgets/EditProfileAppearancePage.ui:491
+#: widgets/EditProfileAppearancePage.ui:501
 #, kde-format
 msgid "Always invert the colors of selected text"
 msgstr "მონიშნული ტექსტის ფერების ინვერსია"
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
-#: widgets/EditProfileAppearancePage.ui:500
+#: widgets/EditProfileAppearancePage.ui:510
 #, kde-format
 msgid "Darkening strength:"
 msgstr "დაბნელების სიძლიერე:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
-#: widgets/EditProfileAppearancePage.ui:533
+#: widgets/EditProfileAppearancePage.ui:543
 #, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "ფერი:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
-#: widgets/EditProfileAppearancePage.ui:549
+#: widgets/EditProfileAppearancePage.ui:559
 #, kde-format
 msgid "Select the color used to draw the border"
 msgstr "აირჩიეთ საზღვრის დასახატად გამოყენებული ფერი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:571
+#: widgets/EditProfileAppearancePage.ui:581
 #, kde-format
 msgid "Inactive Terminals:"
 msgstr "არააქტიური ტერმინალები:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileAppearancePage.ui:581
+#: widgets/EditProfileAppearancePage.ui:591
 #, kde-format
 msgid "Active Terminals:"
 msgstr "აქტიური ტერმინალები:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:591
+#: widgets/EditProfileAppearancePage.ui:601
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
 msgstr "ტერმინალის შემცველობა"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:603
+#: widgets/EditProfileAppearancePage.ui:613
 #, kde-format
 msgid "Line spacing:"
 msgstr "ხაზებს შუა მანძილი:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:621
+#: widgets/EditProfileAppearancePage.ui:631
 #, kde-format
 msgid "The number of pixels between two lines"
 msgstr "პიქსელების რიცხვი ხაზებს შორის"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#: widgets/EditProfileAppearancePage.ui:624
-#: widgets/EditProfileAppearancePage.ui:676
+#: widgets/EditProfileAppearancePage.ui:634
+#: widgets/EditProfileAppearancePage.ui:686
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
 msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:658
+#: widgets/EditProfileAppearancePage.ui:668
 #, kde-format
 msgid "Margins:"
 msgstr "ზღვრები:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:710
+#: widgets/EditProfileAppearancePage.ui:720
 #, kde-format
 msgid "Align to center:"
 msgstr "ცენტრზე სწორება:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:733
+#: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
 msgstr "მითითება, რომ ფანჯარა აქტიურია, ფერების მინავლებით"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:736
+#: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Darken"
 msgstr "გამუქება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:743
+#: widgets/EditProfileAppearancePage.ui:753
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
 msgstr "მითითება, რომ ფანჯარა აქტიურია, საზღვრების დახატვით"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:746
+#: widgets/EditProfileAppearancePage.ui:756
 #, kde-format
 msgid "Border"
 msgstr "საზღვარი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:788
+#: widgets/EditProfileAppearancePage.ui:798
 #, kde-format
 msgid "Display Vertical line at column:"
 msgstr "ვერტიკალური ხაზის ჩვენება სვეტთან:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:833
+#: widgets/EditProfileAppearancePage.ui:843
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr "<html><head/><body><p>კომპლექსური ტექსტის განლაგება</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:836
+#: widgets/EditProfileAppearancePage.ui:846
 #, kde-format
 msgid "Complex Text Layout"
 msgstr "კომპლექსური ტექსტის განლაგება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:851
+#: widgets/EditProfileAppearancePage.ui:861
 #, kde-format
 msgid "Enable word mode text rendering"
 msgstr "ტექსტის რენდერის სიტყვის რეჟიმის ჩართვა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:854
+#: widgets/EditProfileAppearancePage.ui:864
 #, kde-format
 msgid "Word mode"
 msgstr "სიტყვის რეჟიმი"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:867
+#: widgets/EditProfileAppearancePage.ui:877
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4085,73 +4103,73 @@ msgstr ""
 "ცვლილებებმა, შეიძლება, რენდერისას სიტყვა გაწყვიტოს)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:870
+#: widgets/EditProfileAppearancePage.ui:880
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr "იგივე ატრიბუტების გამოყენება მთელი სიტყვისთვის"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:883
+#: widgets/EditProfileAppearancePage.ui:893
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr "ASCII სიმბოლოების სიტყვების ერთად რენდერი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:886
+#: widgets/EditProfileAppearancePage.ui:896
 #, kde-format
 msgid "ASCII characters "
 msgstr "ASCII სიმბოლოები "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:899
+#: widgets/EditProfileAppearancePage.ui:909
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr "ინდური ანბანის სიმბოლოების სიტყვების ერთად რენდერი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:902
+#: widgets/EditProfileAppearancePage.ui:912
 #, kde-format
 msgid "Brahmic scripts characters"
 msgstr "ინდური ანბანის სიმბოლოები"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:915
+#: widgets/EditProfileAppearancePage.ui:925
 #, kde-format
 msgid "Emoji Font:"
 msgstr "ემოჯის ფონტი:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:957
+#: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr "ხაზები ყოველთვის LTR-ა, პირველი დიდი სიმბოლოთი დადგენის მაგიერ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:960
+#: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "force LTR line direction"
 msgstr "ნაძალადევი LTR ხაზის მიმართულება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:973
+#: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr "ცხრილის დახატვის სიმბოლოების ძლიერ LTR-ად აღქმა."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:976
+#: widgets/EditProfileAppearancePage.ui:986
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr "ცხრილის სიმბოლოების ორმხრივი რეჟიმის გადაფარვა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:989
+#: widgets/EditProfileAppearancePage.ui:999
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
 msgstr "Wcwidth-ის გამოტოვება პრობლემული სიმბოლოებისთვის"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:992
+#: widgets/EditProfileAppearancePage.ui:1002
 #, kde-format
 msgid "Override wcwidth"
 msgstr "Wcwidth-ის გადაფარვა"
@@ -4325,18 +4343,18 @@ msgstr[1] " წამი"
 msgid "Select Initial Directory"
 msgstr "აირჩეთ საწყისი საქაღალდე"
 
-#: widgets/EditProfileDialog.cpp:937
+#: widgets/EditProfileDialog.cpp:941
 #, kde-format
 msgid "Get New..."
 msgstr "ახლის მიღება..."
 
-#: widgets/EditProfileDialog.cpp:1326
+#: widgets/EditProfileDialog.cpp:1337
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "სქემის <resource>%1</resource> ჩატვირთვა ჩავარდა."
 
-#: widgets/EditProfileDialog.cpp:1505
+#: widgets/EditProfileDialog.cpp:1516
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4345,7 +4363,7 @@ msgstr ""
 "ეს ფერების სქემა იყენებს გამჭვირვალე ფონს, რომელიც, როგორც ჩანს, თქვენს "
 "სამუშაო მაგიდაზე მხარდაჭერილი არაა"
 
-#: widgets/EditProfileDialog.cpp:1511
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4354,12 +4372,12 @@ msgstr ""
 "Konsole მანამდე გაეშვა, სანამ სამუშაო მაგიდის ეფექტები ჩაირთვებოდა. "
 "გამჭვირვალე ფონისთვის Konsole თავიდან უნდა გაუშვათ."
 
-#: widgets/EditProfileDialog.cpp:1879
+#: widgets/EditProfileDialog.cpp:1890
 #, kde-format
 msgid "Default for file type"
 msgstr "ნაგულისხმევი, ფაილის ტიპისთვის"
 
-#: widgets/EditProfileDialog.cpp:1905
+#: widgets/EditProfileDialog.cpp:1916
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4389,7 +4407,7 @@ msgstr ""
 "ეს პარამეტრი გამოტოვებული იქნება და ფაილი\n"
 "ნაგულისხმევი რედაქტორით გაიხსნება."
 
-#: widgets/EditProfileDialog.cpp:1918
+#: widgets/EditProfileDialog.cpp:1929
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "ტექსტური რედაქტორის მითითებული ბრძანება"

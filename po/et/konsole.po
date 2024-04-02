@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-29 00:39+0000\n"
+"POT-Creation-Date: 2024-04-02 00:40+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -1936,7 +1936,7 @@ msgstr "Printerisõ&bralik režiim (must tekst, taustata)"
 msgid "&Scale output"
 msgstr "Väljundi &skaleerimine"
 
-#: profile/Profile.cpp:263
+#: profile/Profile.cpp:264
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -3783,7 +3783,7 @@ msgstr "Vookontroll"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:941
+#: widgets/EditProfileAppearancePage.ui:951
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3794,7 +3794,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:944
+#: widgets/EditProfileAppearancePage.ui:954
 #, kde-format
 msgid "Bi-Directional text rendering"
 msgstr "Kahesuunalise teksti renderdamine"
@@ -3905,130 +3905,148 @@ msgstr ""
 msgid "Use line characters contained in font"
 msgstr "Fondi joonestuselementide kasutamine"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:198
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use the selected font for line characters instead of the builtin code"
+msgid ""
+"Use the selected font for unicode Braille characters instead of the builtin "
+"code"
+msgstr ""
+"Joonestuselementide puhul sisseehitatud koodi asemel valitud fondi kasutamine"
+
+#. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:201
+#, fuzzy, kde-format
+#| msgid "Use line characters contained in font"
+msgid "Use unicode Braille characters contained in font"
+msgstr "Fondi joonestuselementide kasutamine"
+
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
-#: widgets/EditProfileAppearancePage.ui:199
+#: widgets/EditProfileAppearancePage.ui:209
 #, kde-format
 msgid "Cursor"
 msgstr "Kursor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileAppearancePage.ui:219
+#: widgets/EditProfileAppearancePage.ui:229
 #, kde-format
 msgid "Shape:"
 msgstr "Kuju:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
-#: widgets/EditProfileAppearancePage.ui:229
+#: widgets/EditProfileAppearancePage.ui:239
 #, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
 msgstr "Plokk"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
-#: widgets/EditProfileAppearancePage.ui:239
+#: widgets/EditProfileAppearancePage.ui:249
 #, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
 msgstr "I-tala"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
-#: widgets/EditProfileAppearancePage.ui:249
+#: widgets/EditProfileAppearancePage.ui:259
 #, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
 msgstr "Alajoon"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: widgets/EditProfileAppearancePage.ui:281
+#: widgets/EditProfileAppearancePage.ui:291
 #, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
 msgstr "Värv:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:297
+#: widgets/EditProfileAppearancePage.ui:307
 #, kde-format
 msgid "Set the cursor to match the color of the character underneath it."
 msgstr "Kursori värv määratakse vastavalt selle all olevale märgile."
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:300
+#: widgets/EditProfileAppearancePage.ui:310
 #, kde-format
 msgid "Match current character"
 msgstr "Kursori värviks määratakse aktiivse märgi värv"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:316
+#: widgets/EditProfileAppearancePage.ui:326
 #, kde-format
 msgid "Use a custom, fixed color for the cursor"
 msgstr "Kursori kohandatud värvi kasutamine"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:319
+#: widgets/EditProfileAppearancePage.ui:329
 #, kde-format
 msgid "Custom cursor color"
 msgstr "Kohandatud kursori värv"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
-#: widgets/EditProfileAppearancePage.ui:350
+#: widgets/EditProfileAppearancePage.ui:360
 #, kde-format
 msgid "Cursor:"
 msgstr "Kursor:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:363
+#: widgets/EditProfileAppearancePage.ui:373
 #, kde-format
 msgid "Select the color used to draw the cursor"
 msgstr "Vali kursori jaoks kasutatav värv"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
-#: widgets/EditProfileAppearancePage.ui:383
+#: widgets/EditProfileAppearancePage.ui:393
 #, kde-format
 msgid "Text:"
 msgstr "Tekst:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:396
+#: widgets/EditProfileAppearancePage.ui:406
 #, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
 msgstr "Värvi valimine, millega näidata kursori alla jäävat märki"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileAppearancePage.ui:421
+#: widgets/EditProfileAppearancePage.ui:431
 #, kde-format
 msgid "Blinking:"
 msgstr "Vilkumine:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
-#: widgets/EditProfileAppearancePage.ui:437
+#: widgets/EditProfileAppearancePage.ui:447
 #, kde-format
 msgid "Make the cursor blink regularly"
 msgstr "Kursor pannakse regulaarselt vilkuma"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
-#: widgets/EditProfileAppearancePage.ui:440
-#: widgets/EditProfileAppearancePage.ui:723
+#: widgets/EditProfileAppearancePage.ui:450
+#: widgets/EditProfileAppearancePage.ui:733
 #, kde-format
 msgid "Enabled"
 msgstr "Lubatud"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:463 widgets/EditProfileMousePage.ui:252
+#: widgets/EditProfileAppearancePage.ui:473 widgets/EditProfileMousePage.ui:252
 #, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
 msgstr "Muu"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileAppearancePage.ui:474
+#: widgets/EditProfileAppearancePage.ui:484
 #, kde-format
 msgid "Window:"
 msgstr "Aken:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:481
+#: widgets/EditProfileAppearancePage.ui:491
 #, kde-format
 msgid ""
 "Show terminal size in columns and lines in the center of window after "
@@ -4038,25 +4056,25 @@ msgstr ""
 "muutmist"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:484
+#: widgets/EditProfileAppearancePage.ui:494
 #, kde-format
 msgid "Show hint for terminal size after resizing"
 msgstr "Terminali suuruse vihje näitamine pärast suuruse muutmist"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
-#: widgets/EditProfileAppearancePage.ui:491
+#: widgets/EditProfileAppearancePage.ui:501
 #, kde-format
 msgid "Always invert the colors of selected text"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
-#: widgets/EditProfileAppearancePage.ui:500
+#: widgets/EditProfileAppearancePage.ui:510
 #, kde-format
 msgid "Darkening strength:"
 msgstr "Tumendamise intensiivsus:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
-#: widgets/EditProfileAppearancePage.ui:533
+#: widgets/EditProfileAppearancePage.ui:543
 #, fuzzy, kde-format
 #| msgctxt "Cursor color options"
 #| msgid "Color:"
@@ -4065,123 +4083,123 @@ msgid "Color:"
 msgstr "Värv:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
-#: widgets/EditProfileAppearancePage.ui:549
+#: widgets/EditProfileAppearancePage.ui:559
 #, fuzzy, kde-format
 #| msgid "Select the color used to draw the cursor"
 msgid "Select the color used to draw the border"
 msgstr "Vali kursori jaoks kasutatav värv"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:571
+#: widgets/EditProfileAppearancePage.ui:581
 #, kde-format
 msgid "Inactive Terminals:"
 msgstr "Mitteaktiivsed terminalid:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileAppearancePage.ui:581
+#: widgets/EditProfileAppearancePage.ui:591
 #, fuzzy, kde-format
 #| msgid "Inactive Terminals:"
 msgid "Active Terminals:"
 msgstr "Mitteaktiivsed terminalid:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:591
+#: widgets/EditProfileAppearancePage.ui:601
 #, kde-format
 msgctxt "@title:group"
 msgid "Terminal contents"
 msgstr "Terminali sisu"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:603
+#: widgets/EditProfileAppearancePage.ui:613
 #, kde-format
 msgid "Line spacing:"
 msgstr "Reavahe:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:621
+#: widgets/EditProfileAppearancePage.ui:631
 #, kde-format
 msgid "The number of pixels between two lines"
 msgstr "Pikslite arv kahe rea vahel"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#: widgets/EditProfileAppearancePage.ui:624
-#: widgets/EditProfileAppearancePage.ui:676
+#: widgets/EditProfileAppearancePage.ui:634
+#: widgets/EditProfileAppearancePage.ui:686
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
 msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:658
+#: widgets/EditProfileAppearancePage.ui:668
 #, kde-format
 msgid "Margins:"
 msgstr "Veerised:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:710
+#: widgets/EditProfileAppearancePage.ui:720
 #, kde-format
 msgid "Align to center:"
 msgstr "Keskjoondus:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:733
+#: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
 msgstr "Värvide tumendamisega antakse märku, et aken pole enam aktiivne"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:736
+#: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Darken"
 msgstr "Tumendamine"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:743
+#: widgets/EditProfileAppearancePage.ui:753
 #, fuzzy, kde-format
 #| msgid "Indicate whether the window is active by dimming the colors"
 msgid "Indicate whether the window is active by drawing a border"
 msgstr "Värvide tumendamisega antakse märku, et aken pole enam aktiivne"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:746
+#: widgets/EditProfileAppearancePage.ui:756
 #, kde-format
 msgid "Border"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:788
+#: widgets/EditProfileAppearancePage.ui:798
 #, kde-format
 msgid "Display Vertical line at column:"
 msgstr "Püstjoone asukohaveerg:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:833
+#: widgets/EditProfileAppearancePage.ui:843
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:836
+#: widgets/EditProfileAppearancePage.ui:846
 #, kde-format
 msgid "Complex Text Layout"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:851
+#: widgets/EditProfileAppearancePage.ui:861
 #, fuzzy, kde-format
 #| msgid "Bi-Directional text rendering"
 msgid "Enable word mode text rendering"
 msgstr "Kahesuunalise teksti renderdamine"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:854
+#: widgets/EditProfileAppearancePage.ui:864
 #, kde-format
 msgid "Word mode"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:867
+#: widgets/EditProfileAppearancePage.ui:877
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4189,70 +4207,70 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:870
+#: widgets/EditProfileAppearancePage.ui:880
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:883
+#: widgets/EditProfileAppearancePage.ui:893
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:886
+#: widgets/EditProfileAppearancePage.ui:896
 #, fuzzy, kde-format
 #| msgid "Word characters:"
 msgid "ASCII characters "
 msgstr "Sõna märgid:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:899
+#: widgets/EditProfileAppearancePage.ui:909
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:902
+#: widgets/EditProfileAppearancePage.ui:912
 #, fuzzy, kde-format
 #| msgid "Match current character"
 msgid "Brahmic scripts characters"
 msgstr "Kursori värviks määratakse aktiivse märgi värv"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:915
+#: widgets/EditProfileAppearancePage.ui:925
 #, fuzzy, kde-format
 #| msgid "Font:"
 msgid "Emoji Font:"
 msgstr "Font:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:957
+#: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:960
+#: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "force LTR line direction"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:973
+#: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:976
+#: widgets/EditProfileAppearancePage.ui:986
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:989
+#: widgets/EditProfileAppearancePage.ui:999
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Paste &without control characters"
@@ -4260,7 +4278,7 @@ msgid "Ignore wcwidth of problematic characters"
 msgstr "Aseta &ilma juhtmärkideta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:992
+#: widgets/EditProfileAppearancePage.ui:1002
 #, kde-format
 msgid "Override wcwidth"
 msgstr ""
@@ -4446,18 +4464,18 @@ msgstr[1] " sekundit"
 msgid "Select Initial Directory"
 msgstr "Algkataloogi valik"
 
-#: widgets/EditProfileDialog.cpp:937
+#: widgets/EditProfileDialog.cpp:941
 #, kde-format
 msgid "Get New..."
 msgstr "Hangi uus ..."
 
-#: widgets/EditProfileDialog.cpp:1326
+#: widgets/EditProfileDialog.cpp:1337
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Skeemi <resource>%1</resource> laadimine nurjus."
 
-#: widgets/EditProfileDialog.cpp:1505
+#: widgets/EditProfileDialog.cpp:1516
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4466,7 +4484,7 @@ msgstr ""
 "Sellel värviskeemil on läbipaistev taust, mida sinu töölaud ei paista "
 "toetavat."
 
-#: widgets/EditProfileDialog.cpp:1511
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4475,13 +4493,13 @@ msgstr ""
 "Konsole käivitati enne seda, kui lubati töölauaefektid. Läbipaistva tausta "
 "kasutamiseks tuleb Konsole taaskäivitada."
 
-#: widgets/EditProfileDialog.cpp:1879
+#: widgets/EditProfileDialog.cpp:1890
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Vaikeprofiil"
 
-#: widgets/EditProfileDialog.cpp:1905
+#: widgets/EditProfileDialog.cpp:1916
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4498,7 +4516,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1918
+#: widgets/EditProfileDialog.cpp:1929
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-29 00:39+0000\n"
+"POT-Creation-Date: 2024-04-02 00:40+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -1964,7 +1964,7 @@ msgstr "छपाईयंत्राकरिता सुलभ पद्ध�
 msgid "&Scale output"
 msgstr ""
 
-#: profile/Profile.cpp:263
+#: profile/Profile.cpp:264
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -3842,7 +3842,7 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:941
+#: widgets/EditProfileAppearancePage.ui:951
 #, kde-format
 msgid ""
 "Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
@@ -3853,7 +3853,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
 #: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:944
+#: widgets/EditProfileAppearancePage.ui:954
 #, fuzzy, kde-format
 #| msgid "Enable Bi-Directional text rendering"
 msgid "Bi-Directional text rendering"
@@ -3968,20 +3968,34 @@ msgstr ""
 msgid "Use line characters contained in font"
 msgstr ""
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:198
+#, kde-format
+msgid ""
+"Use the selected font for unicode Braille characters instead of the builtin "
+"code"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
+#: widgets/EditProfileAppearancePage.ui:201
+#, kde-format
+msgid "Use unicode Braille characters contained in font"
+msgstr ""
+
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
-#: widgets/EditProfileAppearancePage.ui:199
+#: widgets/EditProfileAppearancePage.ui:209
 #, kde-format
 msgid "Cursor"
 msgstr "कर्सर"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
-#: widgets/EditProfileAppearancePage.ui:219
+#: widgets/EditProfileAppearancePage.ui:229
 #, kde-format
 msgid "Shape:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
-#: widgets/EditProfileAppearancePage.ui:229
+#: widgets/EditProfileAppearancePage.ui:239
 #, fuzzy, kde-format
 #| msgctxt "The shape of the cursor"
 #| msgid "Block"
@@ -3990,7 +4004,7 @@ msgid "Block"
 msgstr "ब्लॉक"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
-#: widgets/EditProfileAppearancePage.ui:239
+#: widgets/EditProfileAppearancePage.ui:249
 #, fuzzy, kde-format
 #| msgctxt "The shape of the cursor, similar to a capital I"
 #| msgid "I-Beam"
@@ -3999,7 +4013,7 @@ msgid "I-Beam"
 msgstr "I-Beam"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
-#: widgets/EditProfileAppearancePage.ui:249
+#: widgets/EditProfileAppearancePage.ui:259
 #, fuzzy, kde-format
 #| msgctxt "The shape of the cursor"
 #| msgid "Underline"
@@ -4008,7 +4022,7 @@ msgid "Underline"
 msgstr "अधोरेखन"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: widgets/EditProfileAppearancePage.ui:281
+#: widgets/EditProfileAppearancePage.ui:291
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox Column header text for the actual colors"
 #| msgid "Color"
@@ -4017,81 +4031,81 @@ msgid "Color:"
 msgstr "रंग"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:297
+#: widgets/EditProfileAppearancePage.ui:307
 #, kde-format
 msgid "Set the cursor to match the color of the character underneath it."
 msgstr "कर्सरला खालील अक्षरच्यचा रंगशी जुळविण्याकरिता निश्चित करा."
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:300
+#: widgets/EditProfileAppearancePage.ui:310
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgid "Match current character"
 msgstr "कर्सर रंगला वर्तमान अक्षरशी जुळविण्याकरिता निश्चित करा"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:316
+#: widgets/EditProfileAppearancePage.ui:326
 #, kde-format
 msgid "Use a custom, fixed color for the cursor"
 msgstr "कर्सर करिता ऐच्छिक, ठराविक रंगचा वापर करा"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
-#: widgets/EditProfileAppearancePage.ui:319
+#: widgets/EditProfileAppearancePage.ui:329
 #, fuzzy, kde-format
 #| msgid "Custom cursor color:"
 msgid "Custom cursor color"
 msgstr "ऐच्छिक कर्सर रंग:"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
-#: widgets/EditProfileAppearancePage.ui:350
+#: widgets/EditProfileAppearancePage.ui:360
 #, fuzzy, kde-format
 #| msgid "Cursor"
 msgid "Cursor:"
 msgstr "कर्सर"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:363
+#: widgets/EditProfileAppearancePage.ui:373
 #, kde-format
 msgid "Select the color used to draw the cursor"
 msgstr "कर्सर रेखाटण्याकरिता वापरलेले रंग निवडा"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
-#: widgets/EditProfileAppearancePage.ui:383
+#: widgets/EditProfileAppearancePage.ui:393
 #, kde-format
 msgid "Text:"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
-#: widgets/EditProfileAppearancePage.ui:396
+#: widgets/EditProfileAppearancePage.ui:406
 #, fuzzy, kde-format
 #| msgid "Select the color used to draw the cursor"
 msgid "Select the color used to draw the character underneath the cursor"
 msgstr "कर्सर रेखाटण्याकरिता वापरलेले रंग निवडा"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileAppearancePage.ui:421
+#: widgets/EditProfileAppearancePage.ui:431
 #, fuzzy, kde-format
 #| msgid "Blinking cursor"
 msgid "Blinking:"
 msgstr "लुकलुक करणारे कर्सर"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
-#: widgets/EditProfileAppearancePage.ui:437
+#: widgets/EditProfileAppearancePage.ui:447
 #, kde-format
 msgid "Make the cursor blink regularly"
 msgstr "कर्सरला नियमीतस्वरूपी लुकलुक करण्यास सज्ज करा"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
-#: widgets/EditProfileAppearancePage.ui:440
-#: widgets/EditProfileAppearancePage.ui:723
+#: widgets/EditProfileAppearancePage.ui:450
+#: widgets/EditProfileAppearancePage.ui:733
 #, kde-format
 msgid "Enabled"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
-#: widgets/EditProfileAppearancePage.ui:463 widgets/EditProfileMousePage.ui:252
+#: widgets/EditProfileAppearancePage.ui:473 widgets/EditProfileMousePage.ui:252
 #, fuzzy, kde-format
 #| msgid "Miscellaneous"
 msgctxt "Items that do not fit in other categories"
@@ -4099,14 +4113,14 @@ msgid "Miscellaneous"
 msgstr "किरकोळ"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileAppearancePage.ui:474
+#: widgets/EditProfileAppearancePage.ui:484
 #, fuzzy, kde-format
 #| msgid "Window"
 msgid "Window:"
 msgstr "चौकट"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:481
+#: widgets/EditProfileAppearancePage.ui:491
 #, kde-format
 msgid ""
 "Show terminal size in columns and lines in the center of window after "
@@ -4114,25 +4128,25 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
-#: widgets/EditProfileAppearancePage.ui:484
+#: widgets/EditProfileAppearancePage.ui:494
 #, kde-format
 msgid "Show hint for terminal size after resizing"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
-#: widgets/EditProfileAppearancePage.ui:491
+#: widgets/EditProfileAppearancePage.ui:501
 #, kde-format
 msgid "Always invert the colors of selected text"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, dimLabel)
-#: widgets/EditProfileAppearancePage.ui:500
+#: widgets/EditProfileAppearancePage.ui:510
 #, kde-format
 msgid "Darkening strength:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
-#: widgets/EditProfileAppearancePage.ui:533
+#: widgets/EditProfileAppearancePage.ui:543
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox Column header text for the actual colors"
 #| msgid "Color"
@@ -4141,28 +4155,28 @@ msgid "Color:"
 msgstr "रंग"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
-#: widgets/EditProfileAppearancePage.ui:549
+#: widgets/EditProfileAppearancePage.ui:559
 #, fuzzy, kde-format
 #| msgid "Select the color used to draw the cursor"
 msgid "Select the color used to draw the border"
 msgstr "कर्सर रेखाटण्याकरिता वापरलेले रंग निवडा"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
-#: widgets/EditProfileAppearancePage.ui:571
+#: widgets/EditProfileAppearancePage.ui:581
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "Inactive Terminals:"
 msgstr "टर्मिनल गुणधर्म"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
-#: widgets/EditProfileAppearancePage.ui:581
+#: widgets/EditProfileAppearancePage.ui:591
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "Active Terminals:"
 msgstr "टर्मिनल गुणधर्म"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
-#: widgets/EditProfileAppearancePage.ui:591
+#: widgets/EditProfileAppearancePage.ui:601
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgctxt "@title:group"
@@ -4170,95 +4184,95 @@ msgid "Terminal contents"
 msgstr "टर्मिनल गुणधर्म"
 
 #. i18n: ectx: property (text), widget (QLabel, lineSpacingLabel)
-#: widgets/EditProfileAppearancePage.ui:603
+#: widgets/EditProfileAppearancePage.ui:613
 #, kde-format
 msgid "Line spacing:"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
-#: widgets/EditProfileAppearancePage.ui:621
+#: widgets/EditProfileAppearancePage.ui:631
 #, kde-format
 msgid "The number of pixels between two lines"
 msgstr ""
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, lineSpacingSpinner)
 #. i18n: ectx: property (suffix), widget (QSpinBox, marginsSpinner)
-#: widgets/EditProfileAppearancePage.ui:624
-#: widgets/EditProfileAppearancePage.ui:676
+#: widgets/EditProfileAppearancePage.ui:634
+#: widgets/EditProfileAppearancePage.ui:686
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: widgets/EditProfileAppearancePage.ui:658
+#: widgets/EditProfileAppearancePage.ui:668
 #, kde-format
 msgid "Margins:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: widgets/EditProfileAppearancePage.ui:710
+#: widgets/EditProfileAppearancePage.ui:720
 #, kde-format
 msgid "Align to center:"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:733
+#: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:736
+#: widgets/EditProfileAppearancePage.ui:746
 #, kde-format
 msgid "Darken"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:743
+#: widgets/EditProfileAppearancePage.ui:753
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
-#: widgets/EditProfileAppearancePage.ui:746
+#: widgets/EditProfileAppearancePage.ui:756
 #, kde-format
 msgid "Border"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
-#: widgets/EditProfileAppearancePage.ui:788
+#: widgets/EditProfileAppearancePage.ui:798
 #, kde-format
 msgid "Display Vertical line at column:"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:833
+#: widgets/EditProfileAppearancePage.ui:843
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
-#: widgets/EditProfileAppearancePage.ui:836
+#: widgets/EditProfileAppearancePage.ui:846
 #, kde-format
 msgid "Complex Text Layout"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:851
+#: widgets/EditProfileAppearancePage.ui:861
 #, fuzzy, kde-format
 #| msgid "Enable Bi-Directional text rendering"
 msgid "Enable word mode text rendering"
 msgstr "Bi-Directional पाठ्य रेनडरींग कार्यान्वित करा"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
-#: widgets/EditProfileAppearancePage.ui:854
+#: widgets/EditProfileAppearancePage.ui:864
 #, kde-format
 msgid "Word mode"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:867
+#: widgets/EditProfileAppearancePage.ui:877
 #, kde-format
 msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
@@ -4266,76 +4280,76 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
-#: widgets/EditProfileAppearancePage.ui:870
+#: widgets/EditProfileAppearancePage.ui:880
 #, kde-format
 msgid "Use the same attributes for whole word"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:883
+#: widgets/EditProfileAppearancePage.ui:893
 #, kde-format
 msgid "Render words of ASCII characters together"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
-#: widgets/EditProfileAppearancePage.ui:886
+#: widgets/EditProfileAppearancePage.ui:896
 #, kde-format
 msgid "ASCII characters "
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:899
+#: widgets/EditProfileAppearancePage.ui:909
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
-#: widgets/EditProfileAppearancePage.ui:902
+#: widgets/EditProfileAppearancePage.ui:912
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgid "Brahmic scripts characters"
 msgstr "कर्सर रंगला वर्तमान अक्षरशी जुळविण्याकरिता निश्चित करा"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
-#: widgets/EditProfileAppearancePage.ui:915
+#: widgets/EditProfileAppearancePage.ui:925
 #, fuzzy, kde-format
 #| msgid "Font"
 msgid "Emoji Font:"
 msgstr "फॉन्ट"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:957
+#: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
-#: widgets/EditProfileAppearancePage.ui:960
+#: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "force LTR line direction"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:973
+#: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
-#: widgets/EditProfileAppearancePage.ui:976
+#: widgets/EditProfileAppearancePage.ui:986
 #, kde-format
 msgid "Table characters BiDi mode override"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:989
+#: widgets/EditProfileAppearancePage.ui:999
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgid "Ignore wcwidth of problematic characters"
 msgstr "कर्सर रंगला वर्तमान अक्षरशी जुळविण्याकरिता निश्चित करा"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
-#: widgets/EditProfileAppearancePage.ui:992
+#: widgets/EditProfileAppearancePage.ui:1002
 #, kde-format
 msgid "Override wcwidth"
 msgstr ""
@@ -4511,40 +4525,40 @@ msgstr[1] " सेकंद"
 msgid "Select Initial Directory"
 msgstr "प्रारंभिक संचयीका निवडा"
 
-#: widgets/EditProfileDialog.cpp:937
+#: widgets/EditProfileDialog.cpp:941
 #, fuzzy, kde-format
 #| msgctxt "@action:button Create an alternate color scheme"
 #| msgid "New..."
 msgid "Get New..."
 msgstr "नवीन..."
 
-#: widgets/EditProfileDialog.cpp:1326
+#: widgets/EditProfileDialog.cpp:1337
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1505
+#: widgets/EditProfileDialog.cpp:1516
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "हे रंग सुत्रयोजना पारदर्शक पार्श्वभूमीचा वापर करते जे डेस्कटॉपवर समर्थीत नाही"
 
-#: widgets/EditProfileDialog.cpp:1511
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1879
+#: widgets/EditProfileDialog.cpp:1890
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "मूलभूत रूपरेषा"
 
-#: widgets/EditProfileDialog.cpp:1905
+#: widgets/EditProfileDialog.cpp:1916
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4561,7 +4575,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1918
+#: widgets/EditProfileDialog.cpp:1929
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
