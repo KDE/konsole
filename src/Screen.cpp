@@ -1096,7 +1096,7 @@ void Screen::displayCharacter(uint c)
     // We indicate the fact that a newline has to be triggered by
     // putting the cursor one right to the last column of the screen.
 
-    int w = Character::width(c);
+    int w = Character::width(c, _ignoreWcWidth);
     const QChar::Category category = QChar::category(c);
     if (w < 0) {
         // Non-printable character
@@ -2189,7 +2189,7 @@ int Screen::copyLineToStream(int line,
     }
 
     // If the last character is wide, account for it
-    if (Character::width(characterBuffer[count - 1].character) == 2)
+    if (Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2)
         count++;
 
     if (appendNewLine) {

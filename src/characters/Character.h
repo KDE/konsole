@@ -226,9 +226,9 @@ public:
         }
     }
 
-    int width() const
+    int width(bool ignoreWcWidth = false) const
     {
-        return width(character);
+        return width(character, ignoreWcWidth);
     }
 
     int repl() const
@@ -309,7 +309,7 @@ public:
         return false;
     }
 
-    static int width(uint ucs4)
+    static int width(uint ucs4, bool ignoreWcWidth = false)
     {
         // ASCII
         if (ucs4 >= 0x20 && ucs4 < 0x7f)
@@ -326,10 +326,15 @@ public:
         if ((ucs4 > 0x0 && ucs4 < 0x20) || (ucs4 >= 0x7F && ucs4 < 0xA0))
             return -1;
 
+        if (ignoreWcWidth && 0x04DC0 <= ucs4 && ucs4 <= 0x04DFF) {
+            // Yijing Hexagram Symbols have wcwidth 2, but unicode width 1
+            return 1;
+        }
+
         return characterWidth(ucs4);
     }
 
-    static int stringWidth(const char32_t *ucs4Str, int len)
+    static int stringWidth(const char32_t *ucs4Str, int len, bool ignoreWcWidth = false)
     {
         int w = 0;
         Hangul::SyllablePos hangulSyllablePos = Hangul::NotInSyllable;
@@ -338,19 +343,19 @@ public:
             const uint c = ucs4Str[i];
 
             if (!Hangul::isHangul(c)) {
-                w += width(c);
+                w += width(c, ignoreWcWidth);
                 hangulSyllablePos = Hangul::NotInSyllable;
             } else {
-                w += Hangul::width(c, width(c), hangulSyllablePos);
+                w += Hangul::width(c, width(c, ignoreWcWidth), hangulSyllablePos);
             }
         }
         return w;
     }
 
-    inline static int stringWidth(const QString &str)
+    inline static int stringWidth(const QString &str, bool ignoreWcWidth = false)
     {
         const auto ucs4Str = str.toStdU32String();
-        return stringWidth(ucs4Str.data(), ucs4Str.size());
+        return stringWidth(ucs4Str.data(), ucs4Str.size()), ignoreWcWidth;
     }
 
     inline uint baseCodePoint() const
