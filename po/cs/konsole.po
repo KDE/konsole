@@ -2209,17 +2209,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Vyčistit rolování a obnovit"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Upravit profil"
+msgstr ""
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Předchozí"
+msgstr ""
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -3757,10 +3754,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Použít znaky řádky obsažené v písmu"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4281,11 +4277,9 @@ msgid "Select Initial Directory"
 msgstr "Zvolit počáteční adresář"
 
 #: widgets/EditProfileDialog.cpp:941
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "Get New..."
-msgstr "Nové..."
+msgstr "Získat nové..."
 
 #: widgets/EditProfileDialog.cpp:1337
 #, kde-kuit-format
@@ -4311,10 +4305,9 @@ msgstr ""
 "pozadí je třeba aplikaci restartovat."
 
 #: widgets/EditProfileDialog.cpp:1890
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Výchozí profil"
+msgstr ""
 
 #: widgets/EditProfileDialog.cpp:1916
 #, kde-format

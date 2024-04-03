@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-02 00:40+0000\n"
-"PO-Revision-Date: 2024-03-29 05:30+0100\n"
+"PO-Revision-Date: 2024-04-02 06:23+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3807,21 +3807,19 @@ msgstr "ხაზის სიმბოლოების გამოყენ�
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"ხაზის სიმბოლოებისთვის ჩაშენებული კოდის მაგიერ არჩეული ფონტის გამოყენება"
+"უნიკოდის ბრაილის სიმბოლოებისთვის ჩაშენებული კოდის მაგიერ არჩეული ფონტის "
+"გამოყენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "ხაზის სიმბოლოების გამოყენება, რომელსაც არჩეული ფონტი შეიცავს"
+msgstr "უნიკოდის ბრაილის სიმბოლოების გამოყენება, რომლებსაც ფონტი შეიცავს"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
