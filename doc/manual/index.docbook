@@ -1531,7 +1531,7 @@ For more information, please visit
 
 </variablelist>
 
-<para>&konsole; also accepts generic &Qt; and &kf5-full; options, see man pages qt5options and kf5options.</para>
+<para>&konsole; also accepts generic &Qt; and &kf6-full; options, see man pages qt6options and kf6options.</para>
 
 </chapter>
 
