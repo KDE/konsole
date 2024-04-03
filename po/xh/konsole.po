@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 02:23+0000\n"
+"POT-Creation-Date: 2024-04-03 02:32+0000\n"
 "PO-Revision-Date: 2002-11-04 09:23SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -1213,70 +1213,70 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr ""
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:328
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Vala Intlanganiso"
 
-#: MainWindow.cpp:334
+#: MainWindow.cpp:338
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Vala Intlanganiso"
 
-#: MainWindow.cpp:341
+#: MainWindow.cpp:345
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Intlanganiso Ents&ha"
 
-#: MainWindow.cpp:348
+#: MainWindow.cpp:352
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "iKonsole"
 
-#: MainWindow.cpp:353
+#: MainWindow.cpp:357
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Iqokobhe Kwinqaku lencwadi"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:380
 #, fuzzy, kde-format
 msgid "&Window Color Scheme"
 msgstr "Qala ngemboniselo yabucala yeentlanganiso"
 
-#: MainWindow.cpp:388
+#: MainWindow.cpp:392
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gcina Intlanganiso &Yemboniselo yabucala..."
 
-#: MainWindow.cpp:394
+#: MainWindow.cpp:398
 #, fuzzy, kde-format
 #| msgid "Activate Menu"
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Yenza i Menu isebenze"
 
-#: MainWindow.cpp:400
+#: MainWindow.cpp:404
 #, fuzzy, kde-format
 #| msgid "&Move Session Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "&Yisa Intlanganiso Ekhohlo"
 
-#: MainWindow.cpp:409
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:725 MainWindow.cpp:742
+#: MainWindow.cpp:727 MainWindow.cpp:744
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1285,63 +1285,63 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr ""
 
-#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
+#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "iKonsole"
 
-#: MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:752 MainWindow.cpp:766
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "&Vala Intlanganiso"
 
-#: MainWindow.cpp:759
+#: MainWindow.cpp:761
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 
-#: MainWindow.cpp:866 Part.cpp:297
+#: MainWindow.cpp:868 Part.cpp:297
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Gcina Intlanganiso &Yemboniselo yabucala..."
 
-#: MainWindow.cpp:883
+#: MainWindow.cpp:885
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr ""
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:897
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:901
+#: MainWindow.cpp:903
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:908
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2129,7 +2129,7 @@ msgstr ""
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tshintsha Kwisiqendu 1"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2170,7 +2170,7 @@ msgstr ""
 msgid "ZModem Progress"
 msgstr ""
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr ""

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 02:23+0000\n"
+"POT-Creation-Date: 2024-04-03 02:32+0000\n"
 "PO-Revision-Date: 2024-01-26 09:37+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -1200,66 +1200,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Remerciements aux nombreux autres contributeurs.\n"
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nouvel onglet"
 
-#: MainWindow.cpp:334
+#: MainWindow.cpp:338
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Cloner l'onglet"
 
-#: MainWindow.cpp:341
+#: MainWindow.cpp:345
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nouvelle &fenêtre"
 
-#: MainWindow.cpp:348
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Fermer la fenêtre"
 
-#: MainWindow.cpp:353
+#: MainWindow.cpp:357
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Signets"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:380
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "Thème de couleurs pour &fenêtres"
 
-#: MainWindow.cpp:388
+#: MainWindow.cpp:392
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gérer les profils..."
 
-#: MainWindow.cpp:394
+#: MainWindow.cpp:398
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activer le menu"
 
-#: MainWindow.cpp:400
+#: MainWindow.cpp:404
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Enregistrer une disposition d'onglets..."
 
-#: MainWindow.cpp:409
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Charger une disposition d'onglets..."
 
-#: MainWindow.cpp:725 MainWindow.cpp:742
+#: MainWindow.cpp:727 MainWindow.cpp:744
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1272,62 +1272,62 @@ msgstr[1] ""
 "%1 processus sont en cours d'exécution dans cette fenêtre. Voulez-vous "
 "vraiment quitter ?"
 
-#: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmer la fermeture"
 
-#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
+#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Fermer la &fenêtre"
 
-#: MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:752 MainWindow.cpp:766
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Fermer l'ongle&t actuel"
 
-#: MainWindow.cpp:759
+#: MainWindow.cpp:761
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Cette fenêtre contient %1 terminaux ouverts. Voulez-vous vraiment quitter ?"
 
-#: MainWindow.cpp:866 Part.cpp:297
+#: MainWindow.cpp:868 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profils"
 
-#: MainWindow.cpp:883
+#: MainWindow.cpp:885
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Général"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:897
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Mémoire"
 
-#: MainWindow.cpp:901
+#: MainWindow.cpp:903
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barre d'onglets / Séparateurs"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:908
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Fichiers temporaires"
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2115,7 +2115,7 @@ msgstr "Impossible de démarrer le programme « %1 » avec les arguments « %
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silence de « %1 » (Session « %2 »)"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
@@ -2157,7 +2157,7 @@ msgstr "Le programme « %1 » s'est terminé avec l'état « %2 »."
 msgid "ZModem Progress"
 msgstr "Progression de « ZMODEM »"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activité de « %1 » (Session « %2 »)"

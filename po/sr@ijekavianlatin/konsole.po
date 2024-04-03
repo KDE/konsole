@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 02:23+0000\n"
+"POT-Creation-Date: 2024-04-03 02:32+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -1204,69 +1204,69 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Hvala mnogima drugima.\n"
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Novi &jezičak"
 
-#: MainWindow.cpp:334
+#: MainWindow.cpp:338
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Umnoži jezičak"
 
-#: MainWindow.cpp:341
+#: MainWindow.cpp:345
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Novi &prozor"
 
-#: MainWindow.cpp:348
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Zatvori prozor"
 
-#: MainWindow.cpp:353
+#: MainWindow.cpp:357
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Obilježivači"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:380
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "Nova šema boja"
 
-#: MainWindow.cpp:388
+#: MainWindow.cpp:392
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Upravljaj profilima..."
 
 # >> @action:inmenu
-#: MainWindow.cpp:394
+#: MainWindow.cpp:398
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktiviraj meni"
 
-#: MainWindow.cpp:400
+#: MainWindow.cpp:404
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:409
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:725 MainWindow.cpp:742
+#: MainWindow.cpp:727 MainWindow.cpp:744
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1277,26 +1277,26 @@ msgstr[1] "U ovom prozoru rade %1 procesa, želite li zaista da ga napustite?"
 msgstr[2] "U ovom prozoru radi %1 procesa, želite li zaista da ga napustite?"
 msgstr[3] "U ovom prozoru radi jedan proces, želite li zaista da ga napustite?"
 
-#: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Potvrda zatvaranja"
 
-#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
+#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Zatvori &prozor"
 
-#: MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:752 MainWindow.cpp:766
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Zatvori tekući &jezičak"
 
 # >! Plurals.
-#: MainWindow.cpp:759
+#: MainWindow.cpp:761
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 open tabs in this window. Do you still want to quit?"
@@ -1307,37 +1307,37 @@ msgstr ""
 "napustite?|/|U ovom prozoru ima %1 $[množ ^1 'otvoren jezičak' 'otvorena "
 "jezička' 'otvorenih jezičaka'], želite li zaista da ga napustite?"
 
-#: MainWindow.cpp:866 Part.cpp:297
+#: MainWindow.cpp:868 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profili"
 
-#: MainWindow.cpp:883
+#: MainWindow.cpp:885
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Opšte"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:897
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:901
+#: MainWindow.cpp:903
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:908
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2159,7 +2159,7 @@ msgstr "Ne mogu da izvršim naredbu %1 sa argumentima „%2“."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina u sesiji „%1“"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, fuzzy, kde-format
@@ -2202,7 +2202,7 @@ msgstr "Program „%1“ završio je stanjem %2."
 msgid "ZModem Progress"
 msgstr "Napredak ZModema"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 02:23+0000\n"
+"POT-Creation-Date: 2024-04-03 02:32+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -1205,55 +1205,55 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "باشقىلارغىمۇ تەشەككۈر.\n"
 
-#: MainWindow.cpp:324
+#: MainWindow.cpp:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "يېڭى بەتكۈچ(&N)"
 
-#: MainWindow.cpp:334
+#: MainWindow.cpp:338
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr ""
 
-#: MainWindow.cpp:341
+#: MainWindow.cpp:345
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "يېڭى كۆزنەك(&W)"
 
-#: MainWindow.cpp:348
+#: MainWindow.cpp:352
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "كۆزنەك ياپ"
 
-#: MainWindow.cpp:353
+#: MainWindow.cpp:357
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "خەتكۈچلەر(&B)"
 
-#: MainWindow.cpp:376
+#: MainWindow.cpp:380
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "يېڭى رەڭ لايىھىسى"
 
-#: MainWindow.cpp:388
+#: MainWindow.cpp:392
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "سەپلەكلەرنى باشقۇرۇش…"
 
-#: MainWindow.cpp:394
+#: MainWindow.cpp:398
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "تىزىملىكنى ئاكتىپلا"
 
-#: MainWindow.cpp:400
+#: MainWindow.cpp:404
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -1261,13 +1261,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "بەتكۈچنى سولغا يۆتكە"
 
-#: MainWindow.cpp:409
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:725 MainWindow.cpp:742
+#: MainWindow.cpp:727 MainWindow.cpp:744
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is currently running in this session.  Are you sure you "
@@ -1279,25 +1279,25 @@ msgid_plural ""
 msgstr[0] ""
 "نۆۋەتتىكى ئەڭگىمە ئىچىدە پروگرامما«%1» ئىجرا بولۇۋاتىدۇ. ئۇنى ياپقۇڭىز بارمۇ؟"
 
-#: MainWindow.cpp:731 MainWindow.cpp:748 MainWindow.cpp:762
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "يېپىشنى جەزملە"
 
-#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
+#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr ""
 
-#: MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:752 MainWindow.cpp:766
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr ""
 
-#: MainWindow.cpp:759
+#: MainWindow.cpp:761
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is currently running in this session.  Are you sure you "
@@ -1307,7 +1307,7 @@ msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "نۆۋەتتىكى ئەڭگىمە ئىچىدە پروگرامما«%1» ئىجرا بولۇۋاتىدۇ. ئۇنى ياپقۇڭىز بارمۇ؟"
 
-#: MainWindow.cpp:866 Part.cpp:297
+#: MainWindow.cpp:868 Part.cpp:297
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1315,31 +1315,31 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "يېڭى سەپلىمە ھۆججەت"
 
-#: MainWindow.cpp:883
+#: MainWindow.cpp:885
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ئادەتتىكى"
 
-#: MainWindow.cpp:895
+#: MainWindow.cpp:897
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:901
+#: MainWindow.cpp:903
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:908
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -2148,7 +2148,7 @@ msgstr "پروگرامما «%1» نى «%2» ئارگۇمېنت بىلەن با
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ئەڭگىمە «%1» نىڭدا  جىمجىتلىق"
 
-#: session/Session.cpp:736 session/Session.cpp:2072
+#: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1812
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1145
 #, kde-format
@@ -2185,7 +2185,7 @@ msgstr "پروگرامما «%1» ئاخىرلاشتى. ھالىتى %2."
 msgid "ZModem Progress"
 msgstr "ZModem ئىجراسى"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2073
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
