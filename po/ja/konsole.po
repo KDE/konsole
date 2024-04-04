@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-02 00:40+0000\n"
+"POT-Creation-Date: 2024-04-04 00:41+0000\n"
 "PO-Revision-Date: 2023-12-03 23:07-0800\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -257,7 +257,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "コマンドに渡す引数"
 
-#: Application.cpp:514
+#: Application.cpp:516
 #, fuzzy, kde-format
 #| msgctxt "@item:intable palette"
 #| msgid "Background (Faint)"

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-02 00:40+0000\n"
-"PO-Revision-Date: 2024-03-25 16:35+0100\n"
+"POT-Creation-Date: 2024-04-04 00:41+0000\n"
+"PO-Revision-Date: 2024-04-02 14:35+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -243,7 +243,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Argomenti passati al comando"
 
-#: Application.cpp:514
+#: Application.cpp:516
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -2256,16 +2256,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Pulisci scorrimento e azzera"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Modifica profilo"
+msgstr "Profilo successivo"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Vista precedente"
+msgstr "Profilo precedente"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -3839,22 +3837,19 @@ msgstr "Utilizza i caratteri di riga contenuti nel carattere"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"Utilizza il carattere selezionato per i caratteri di riga invece del codice "
-"integrato"
+"Utilizza il carattere selezionato per i caratteri Braille unicode invece del "
+"codice integrato"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Utilizza i caratteri di riga contenuti nel carattere"
+msgstr "Utilizza i caratteri Braille unicode contenuti nel carattere"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209

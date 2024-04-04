@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-02 00:40+0000\n"
+"POT-Creation-Date: 2024-04-04 00:41+0000\n"
 "PO-Revision-Date: 2024-04-02 14:53+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -257,7 +257,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Argumenten om aan het commando door te geven"
 
-#: Application.cpp:514
+#: Application.cpp:516
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"

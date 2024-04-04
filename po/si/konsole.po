@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-02 00:40+0000\n"
+"POT-Creation-Date: 2024-04-04 00:41+0000\n"
 "PO-Revision-Date: 2011-08-14 00:07+0530\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: Sinhala <danishka@gmail.com>\n"
@@ -244,7 +244,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "විධානයට වාදය මාරු විය"
 
-#: Application.cpp:514
+#: Application.cpp:516
 #, fuzzy, kde-format
 #| msgid "Background (Intense)"
 msgctxt "@item"

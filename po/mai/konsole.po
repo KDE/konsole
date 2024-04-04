@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-02 00:40+0000\n"
+"POT-Creation-Date: 2024-04-04 00:41+0000\n"
 "PO-Revision-Date: 2010-09-24 21:50+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -244,7 +244,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "कमांड केँ भेजल गेल आर्गुमेंट"
 
-#: Application.cpp:514
+#: Application.cpp:516
 #, fuzzy, kde-format
 #| msgid "Background (Intense)"
 msgctxt "@item"

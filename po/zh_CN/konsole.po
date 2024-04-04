@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-02 00:40+0000\n"
-"PO-Revision-Date: 2024-04-02 19:12\n"
+"POT-Creation-Date: 2024-04-04 00:41+0000\n"
+"PO-Revision-Date: 2024-04-03 19:13\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -233,7 +233,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "传递给命令的参数"
 
-#: Application.cpp:514
+#: Application.cpp:516
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -3759,13 +3759,13 @@ msgstr "使用字体中包含的行字符"
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr ""
+msgstr "unicode 盲文字符将使用选中的字体，而不是内置的字符"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
 #, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr ""
+msgstr "使用字体中包含的 unicode 盲文字符"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209

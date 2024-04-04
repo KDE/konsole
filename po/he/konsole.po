@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-02 00:40+0000\n"
-"PO-Revision-Date: 2024-03-29 08:11+0300\n"
+"POT-Creation-Date: 2024-04-04 00:41+0000\n"
+"PO-Revision-Date: 2024-04-03 08:12+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -247,7 +247,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "ארגומנטים המועברים לפקודה"
 
-#: Application.cpp:514
+#: Application.cpp:516
 #, kde-format
 msgctxt "@item"
 msgid "Toggle Background Window"
@@ -3781,20 +3781,17 @@ msgstr "השתמש בתווי שורה הכלולים בגופן"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr "השתמש בגופן הנבחר עבור מספרי שורות במקום בגופן המובנה"
+msgstr "להשתמש בגופן הנבחר לתווי ברייל ביוניקוד במקום בקוד המובנה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "השתמש בתווי שורה הכלולים בגופן"
+msgstr "להשתמש בתווי ברייל ביוניקוד כחלק מהגופן"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209

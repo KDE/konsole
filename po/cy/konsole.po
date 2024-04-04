@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-02 00:40+0000\n"
+"POT-Creation-Date: 2024-04-04 00:41+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -236,7 +236,7 @@ msgctxt "@info:shell"
 msgid "Arguments passed to command"
 msgstr "Ymresymiadau i'r 'gorchymyn'"
 
-#: Application.cpp:514
+#: Application.cpp:516
 #, fuzzy, kde-format
 #| msgid "transparency"
 msgctxt "@item"
