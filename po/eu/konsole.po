@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-04 00:41+0000\n"
-"PO-Revision-Date: 2024-03-25 11:04+0100\n"
+"PO-Revision-Date: 2024-04-04 21:48+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -2261,16 +2261,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Garbitu «Historikoan atzera» eta berrezarri"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Editatu profila"
+msgstr "Hurrengo profila"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Aurreko ikuspegia"
+msgstr "Aurreko profila"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -3831,22 +3829,19 @@ msgstr "Erabili letra-tipoan dauden lerroko karaktereak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"Erabili hautatutako letra-tipoa lerroko karaktereekin barneratutako kodearen "
-"ordez"
+"Erabili hautatutako letra-tipoa unicode Braille karaktereetarako "
+"barneratutako kodearen ordez"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Erabili letra-tipoan dauden lerroko karaktereak"
+msgstr "Erabili letra-tipoko unicode Braille karaktereak"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
