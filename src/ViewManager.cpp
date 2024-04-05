@@ -775,6 +775,7 @@ void ViewManager::splitView(Qt::Orientation orientation, bool fromNextTab)
         auto *session = createSession(profile, directory);
 
         focused = terminalDisplay = createView(session);
+        Q_EMIT activeViewChanged(activeViewController());
     }
 
     _viewContainer->splitView(terminalDisplay, orientation);

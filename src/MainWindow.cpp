@@ -88,8 +88,7 @@ MainWindow::MainWindow()
     // create view manager
     _viewManager = new ViewManager(this, actionCollection());
     connect(_viewManager, &Konsole::ViewManager::empty, this, &QWidget::close);
-    // QueuedConnection so that KHamburgerMenu showed up properly on the first tab
-    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this, &Konsole::MainWindow::activeViewChanged, Qt::QueuedConnection);
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this, &Konsole::MainWindow::activeViewChanged);
     connect(_viewManager, &Konsole::ViewManager::unplugController, this, &Konsole::MainWindow::disconnectController);
     connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged, bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
     connect(_viewManager, &Konsole::ViewManager::blurSettingChanged, this, &Konsole::MainWindow::setBlur);
