@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-04 00:41+0000\n"
+"POT-Creation-Date: 2024-04-06 00:40+0000\n"
 "PO-Revision-Date: 2023-05-21 14:57+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -1169,66 +1169,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Thanks to many others.\n"
 
-#: MainWindow.cpp:328
+#: MainWindow.cpp:327
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&New Tab"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:337
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Clone Tab"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "New &Window"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:351
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Close Window"
 
-#: MainWindow.cpp:357
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Bookmarks"
 
-#: MainWindow.cpp:380
+#: MainWindow.cpp:379
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Window Colour Scheme"
 
-#: MainWindow.cpp:392
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Manage Profiles..."
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:397
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activate Menu"
 
-#: MainWindow.cpp:404
+#: MainWindow.cpp:403
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Save Tab Layout..."
 
-#: MainWindow.cpp:413
+#: MainWindow.cpp:412
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Load Tab Layout..."
 
-#: MainWindow.cpp:727 MainWindow.cpp:744
+#: MainWindow.cpp:726 MainWindow.cpp:743
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1239,61 +1239,61 @@ msgstr[0] ""
 msgstr[1] ""
 "There are %1 processes running in this window. Do you still want to quit?"
 
-#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirm Close"
 
-#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Close &Window"
 
-#: MainWindow.cpp:752 MainWindow.cpp:766
+#: MainWindow.cpp:751 MainWindow.cpp:765
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Close Current &Tab"
 
-#: MainWindow.cpp:761
+#: MainWindow.cpp:760
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "There are %1 open terminals in this window. Do you still want to quit?"
 
-#: MainWindow.cpp:868 Part.cpp:297
+#: MainWindow.cpp:867 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiles"
 
-#: MainWindow.cpp:885
+#: MainWindow.cpp:884
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:897
+#: MainWindow.cpp:896
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:902
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Tab Bar / Splitters"
 
-#: MainWindow.cpp:908
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Temporary Files"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -3549,19 +3549,19 @@ msgstr "Semantic hints "
 msgid "Line numbers "
 msgstr "Line numbers "
 
-#: ViewManager.cpp:1169
+#: ViewManager.cpp:1170
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Save Tab Layout"
 
-#: ViewManager.cpp:1171 ViewManager.cpp:1258
+#: ViewManager.cpp:1172 ViewManager.cpp:1259
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole View Layout (*.json)"
 
-#: ViewManager.cpp:1184
+#: ViewManager.cpp:1185
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3571,7 +3571,7 @@ msgstr ""
 "A problem occurred when saving the Layout.\n"
 "%1"
 
-#: ViewManager.cpp:1245
+#: ViewManager.cpp:1246
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3581,7 +3581,7 @@ msgstr ""
 "A problem occurred when loading the Layout.\n"
 "%1"
 
-#: ViewManager.cpp:1256
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-04 00:41+0000\n"
+"POT-Creation-Date: 2024-04-06 00:40+0000\n"
 "PO-Revision-Date: 2024-03-29 10:44+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -1198,66 +1198,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Graza a moitos outros.\n"
 
-#: MainWindow.cpp:328
+#: MainWindow.cpp:327
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nova lapela"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:337
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Clonar a lapela"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nova &xanela"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:351
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Pechar a xanela"
 
-#: MainWindow.cpp:357
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Marcadores"
 
-#: MainWindow.cpp:380
+#: MainWindow.cpp:379
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "Esquema de cores de &xanela"
 
-#: MainWindow.cpp:392
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Xestionar os perfís…"
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:397
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activar o menú"
 
-#: MainWindow.cpp:404
+#: MainWindow.cpp:403
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Gardar a disposición de lapelas…"
 
-#: MainWindow.cpp:413
+#: MainWindow.cpp:412
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Cargar unha disposición de lapelas…"
 
-#: MainWindow.cpp:727 MainWindow.cpp:744
+#: MainWindow.cpp:726 MainWindow.cpp:743
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1266,61 +1266,61 @@ msgid_plural ""
 msgstr[0] "Hai un proceso a executarse nesta xanela. Quere saír aínda así?"
 msgstr[1] "Hai %1 procesos a executarse nesta xanela. Quere saír aínda así?"
 
-#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmar o peche"
 
-#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Pechar a &xanela"
 
-#: MainWindow.cpp:752 MainWindow.cpp:766
+#: MainWindow.cpp:751 MainWindow.cpp:765
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Pechar a &lapela actual"
 
-#: MainWindow.cpp:761
+#: MainWindow.cpp:760
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Hai %1 terminais abertos nesta xanela. Quere saír aínda así?"
 
-#: MainWindow.cpp:868 Part.cpp:297
+#: MainWindow.cpp:867 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Perfís"
 
-#: MainWindow.cpp:885
+#: MainWindow.cpp:884
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Xeral"
 
-#: MainWindow.cpp:897
+#: MainWindow.cpp:896
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memoria"
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:902
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de lapelas / Divisores"
 
-#: MainWindow.cpp:908
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Ficheiros temporais"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -3598,19 +3598,19 @@ msgstr "Consellos semánticos"
 msgid "Line numbers "
 msgstr "Números de liña"
 
-#: ViewManager.cpp:1169
+#: ViewManager.cpp:1170
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Gardar a disposición de lapelas"
 
-#: ViewManager.cpp:1171 ViewManager.cpp:1258
+#: ViewManager.cpp:1172 ViewManager.cpp:1259
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Disposición de vista de Konsole (*.json)"
 
-#: ViewManager.cpp:1184
+#: ViewManager.cpp:1185
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3620,7 +3620,7 @@ msgstr ""
 "Produciuse un problema ao gardar a disposición.\n"
 "%1"
 
-#: ViewManager.cpp:1245
+#: ViewManager.cpp:1246
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3630,7 +3630,7 @@ msgstr ""
 "Produciuse un problema ao cargar a disposición.\n"
 "%1"
 
-#: ViewManager.cpp:1256
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

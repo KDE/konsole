@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-04 00:41+0000\n"
+"POT-Creation-Date: 2024-04-06 00:40+0000\n"
 "PO-Revision-Date: 2023-10-14 19:51+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -1180,66 +1180,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Tack till många andra.\n"
 
-#: MainWindow.cpp:328
+#: MainWindow.cpp:327
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Ny flik"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:337
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Duplicera flik"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nytt &fönster"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:351
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Stäng fönster"
 
-#: MainWindow.cpp:357
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Bokmärken"
 
-#: MainWindow.cpp:380
+#: MainWindow.cpp:379
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Fönsterfärgschema"
 
-#: MainWindow.cpp:392
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Hantera profiler..."
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:397
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktivera meny"
 
-#: MainWindow.cpp:404
+#: MainWindow.cpp:403
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Spara fliklayout..."
 
-#: MainWindow.cpp:413
+#: MainWindow.cpp:412
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Läs in fliklayout..."
 
-#: MainWindow.cpp:727 MainWindow.cpp:744
+#: MainWindow.cpp:726 MainWindow.cpp:743
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1252,62 +1252,62 @@ msgstr[1] ""
 "Det finns %1 processer som kör i det här fönstret. Är du säker på att du "
 "vill avsluta?"
 
-#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Bekräfta stängning"
 
-#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Stäng &fönster"
 
-#: MainWindow.cpp:752 MainWindow.cpp:766
+#: MainWindow.cpp:751 MainWindow.cpp:765
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Stäng ak&tuell flik"
 
-#: MainWindow.cpp:761
+#: MainWindow.cpp:760
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Det finns %1 öppna terminaler i det här fönstret. Vill du ändå avsluta?"
 
-#: MainWindow.cpp:868 Part.cpp:297
+#: MainWindow.cpp:867 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiler"
 
-#: MainWindow.cpp:885
+#: MainWindow.cpp:884
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Allmänt"
 
-#: MainWindow.cpp:897
+#: MainWindow.cpp:896
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Minne"
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:902
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Flikrad och avdelare"
 
-#: MainWindow.cpp:908
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Tillfälliga filer"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -3572,19 +3572,19 @@ msgstr "Semantiska tips "
 msgid "Line numbers "
 msgstr "Radnummer "
 
-#: ViewManager.cpp:1169
+#: ViewManager.cpp:1170
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Spara fliklayout"
 
-#: ViewManager.cpp:1171 ViewManager.cpp:1258
+#: ViewManager.cpp:1172 ViewManager.cpp:1259
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Terminal-visningslayout (*.json)"
 
-#: ViewManager.cpp:1184
+#: ViewManager.cpp:1185
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3594,7 +3594,7 @@ msgstr ""
 "Ett problem uppstod när layouten skulle sparas.\n"
 "%1"
 
-#: ViewManager.cpp:1245
+#: ViewManager.cpp:1246
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3604,7 +3604,7 @@ msgstr ""
 "Ett problem uppstod när layouten skulle läsas in.\n"
 "%1"
 
-#: ViewManager.cpp:1256
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

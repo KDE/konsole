@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-04 00:41+0000\n"
-"PO-Revision-Date: 2024-03-29 09:49+0100\n"
+"POT-Creation-Date: 2024-04-06 00:40+0000\n"
+"PO-Revision-Date: 2024-04-05 18:04+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -1177,66 +1177,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Gratias a multe alteres.\n"
 
-#: MainWindow.cpp:328
+#: MainWindow.cpp:327
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nove scheda"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:337
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Cona scheda"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:344
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nove &Fenestra"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:351
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Claude Fenestra"
 
-#: MainWindow.cpp:357
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Marcatores de li&bro"
 
-#: MainWindow.cpp:380
+#: MainWindow.cpp:379
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "&Schema de Color de Fenestra"
 
-#: MainWindow.cpp:392
+#: MainWindow.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gere profilos..."
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:397
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activa menu"
 
-#: MainWindow.cpp:404
+#: MainWindow.cpp:403
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Salveguarda disposition de scheda..."
 
-#: MainWindow.cpp:413
+#: MainWindow.cpp:412
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Carga disposition de scheda..."
 
-#: MainWindow.cpp:727 MainWindow.cpp:744
+#: MainWindow.cpp:726 MainWindow.cpp:743
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1246,61 +1246,61 @@ msgstr[0] ""
 "Il ha un processo executante in iste fenestra. Ancora tu vole quitar?"
 msgstr[1] "Tu ha %1 schedas in le fenestra, tu es secur que tu vole quitar?"
 
-#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirma Clausura"
 
-#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Claude &Fenestra"
 
-#: MainWindow.cpp:752 MainWindow.cpp:766
+#: MainWindow.cpp:751 MainWindow.cpp:765
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Claude &Scheda Currente"
 
-#: MainWindow.cpp:761
+#: MainWindow.cpp:760
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Il ha %1 terminales aperite in iste fenestra. Ancora tu vole quitar?"
 
-#: MainWindow.cpp:868 Part.cpp:297
+#: MainWindow.cpp:867 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profilos"
 
-#: MainWindow.cpp:885
+#: MainWindow.cpp:884
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:897
+#: MainWindow.cpp:896
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memoria"
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:902
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barra de Scheda / Splitters"
 
-#: MainWindow.cpp:908
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Files temporanee"
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -3571,19 +3571,19 @@ msgstr "Suggestiones Semantic"
 msgid "Line numbers "
 msgstr "Numeros de linea"
 
-#: ViewManager.cpp:1169
+#: ViewManager.cpp:1170
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Salveguarda disposition de scheda"
 
-#: ViewManager.cpp:1171 ViewManager.cpp:1258
+#: ViewManager.cpp:1172 ViewManager.cpp:1259
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole View Layout (*.json)"
 
-#: ViewManager.cpp:1184
+#: ViewManager.cpp:1185
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3593,7 +3593,7 @@ msgstr ""
 "Un problema occurreva durante que il salveguardava le disposition (Layout).\n"
 "%1"
 
-#: ViewManager.cpp:1245
+#: ViewManager.cpp:1246
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3603,7 +3603,7 @@ msgstr ""
 "Un problema occurreva durante que il cargava le disposition (Layout).\n"
 "%1"
 
-#: ViewManager.cpp:1256
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -3823,22 +3823,19 @@ msgstr "Usa characteres de line continite in font"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"Usa le font selectionate per characteres de linea in loco del codice "
-"incorporate"
+"Usa le font selectionate per characteres Braille de unicode in loco del "
+"codice incorporate"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Usa characteres de line continite in font"
+msgstr "Usa characteres Braille de unicode continite in font"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209

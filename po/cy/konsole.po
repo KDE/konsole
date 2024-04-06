@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-04 00:41+0000\n"
+"POT-Creation-Date: 2024-04-06 00:40+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -1224,71 +1224,71 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr ""
 
-#: MainWindow.cpp:328
+#: MainWindow.cpp:327
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Ca&u Sesiwn"
 
-#: MainWindow.cpp:338
+#: MainWindow.cpp:337
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "Ca&u Sesiwn"
 
-#: MainWindow.cpp:345
+#: MainWindow.cpp:344
 #, fuzzy, kde-format
 #| msgid "New &Window"
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "&Ffenestr Newydd"
 
-#: MainWindow.cpp:352
+#: MainWindow.cpp:351
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:357
+#: MainWindow.cpp:356
 #, fuzzy, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "Plisgyn wrth Nôd Tudalen"
 
-#: MainWindow.cpp:380
+#: MainWindow.cpp:379
 #, fuzzy, kde-format
 msgid "&Window Color Scheme"
 msgstr "Rhestru'r mathau o sesiynau sydd ar gael."
 
-#: MainWindow.cpp:392
+#: MainWindow.cpp:391
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Cadw &Proffil Sesiwn..."
 
-#: MainWindow.cpp:398
+#: MainWindow.cpp:397
 #, fuzzy, kde-format
 #| msgid "Activate Menu"
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Gweithredu'r Ddewislen"
 
-#: MainWindow.cpp:404
+#: MainWindow.cpp:403
 #, fuzzy, kde-format
 #| msgid "&Move Session Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "&Symud Sesiwn i'r Chwith"
 
-#: MainWindow.cpp:413
+#: MainWindow.cpp:412
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:727 MainWindow.cpp:744
+#: MainWindow.cpp:726 MainWindow.cpp:743
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1297,64 +1297,64 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr ""
 
-#: MainWindow.cpp:734 MainWindow.cpp:751 MainWindow.cpp:765
+#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Konsole"
 
-#: MainWindow.cpp:752 MainWindow.cpp:766
+#: MainWindow.cpp:751 MainWindow.cpp:765
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Ca&u Sesiwn"
 
-#: MainWindow.cpp:761
+#: MainWindow.cpp:760
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 
-#: MainWindow.cpp:868 Part.cpp:297
+#: MainWindow.cpp:867 Part.cpp:297
 #, fuzzy, kde-format
 #| msgid "Save Sessions &Profile..."
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Cadw &Proffil Sesiwn..."
 
-#: MainWindow.cpp:885
+#: MainWindow.cpp:884
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr ""
 
-#: MainWindow.cpp:897
+#: MainWindow.cpp:896
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:903
+#: MainWindow.cpp:902
 #, fuzzy, kde-format
 #| msgid "Tab &Options"
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Dewi&siadau Tab"
 
-#: MainWindow.cpp:908
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:913
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -3661,20 +3661,20 @@ msgstr "Cysylltyddion Geiriau"
 msgid "Line numbers "
 msgstr "&Nifer llinellau:"
 
-#: ViewManager.cpp:1169
+#: ViewManager.cpp:1170
 #, fuzzy, kde-format
 #| msgid "&Move Session Left"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "&Symud Sesiwn i'r Chwith"
 
-#: ViewManager.cpp:1171 ViewManager.cpp:1258
+#: ViewManager.cpp:1172 ViewManager.cpp:1259
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1184
+#: ViewManager.cpp:1185
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3682,7 +3682,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1245
+#: ViewManager.cpp:1246
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3690,7 +3690,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1256
+#: ViewManager.cpp:1257
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

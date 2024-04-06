@@ -2932,7 +2932,7 @@ Various search improvements
 </variablelist>
 
 <para
->&konsole; accepteert ook algemene &Qt;- en &kf5-full;-opties, zie manpagina's qt5options en kf5options.</para>
+>&konsole; accepteert ook algemene &Qt;- en &kf6-full;-opties, zie manpagina's qt6options en kf6options.</para>
 
 </chapter>
 
