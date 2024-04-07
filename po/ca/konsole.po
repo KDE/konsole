@@ -6,7 +6,6 @@
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2003, 2011, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Albert Astals Cid <aacid@kde.org>, 2003, 2004, 2005.
 # Miquel Oliete i Baliarda <ktalanet@yahoo.es>, 2007.
-# Josep M. Ferrer <txemaq@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
