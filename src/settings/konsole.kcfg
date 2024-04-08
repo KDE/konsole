@@ -125,6 +125,8 @@
       <choices>
         <choice name="Top" />
         <choice name="Bottom" />
+        <choice name="Left" />
+        <choice name="Right" />
       </choices>
       <default>Top</default>
     </entry>
