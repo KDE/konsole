@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdebase\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-06 00:40+0000\n"
+"POT-Creation-Date: 2024-04-09 00:41+0000\n"
 "PO-Revision-Date: 2021-03-31 16:13-0400\n"
 "Last-Translator: Agron Selimaj <as9902613@gmail.com>\n"
 "Language-Team: kdeshqip\n"
@@ -1903,14 +1903,14 @@ msgstr "Rezultati"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:175
+#: PrintOptions.ui:39 settings/konsole.kcfg:177
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:179
+#: PrintOptions.ui:46 settings/konsole.kcfg:181
 #, kde-format
 msgid "&Scale output"
 msgstr ""
@@ -2787,73 +2787,73 @@ msgid "Control the position of the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:132
+#: settings/konsole.kcfg:134
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:136
+#: settings/konsole.kcfg:138
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:140
+#: settings/konsole.kcfg:142
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr ""
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:144
+#: settings/konsole.kcfg:146
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:148
+#: settings/konsole.kcfg:150
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:152
+#: settings/konsole.kcfg:154
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:161
+#: settings/konsole.kcfg:163
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr ""
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:169
+#: settings/konsole.kcfg:171
 #, kde-format
 msgid "Expand the tab widths"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:185
+#: settings/konsole.kcfg:187
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:189
+#: settings/konsole.kcfg:191
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:193
+#: settings/konsole.kcfg:195
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:197
+#: settings/konsole.kcfg:199
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr ""
@@ -3003,27 +3003,41 @@ msgstr ""
 msgid "Be&low terminal area"
 msgstr "&Mbylle Tabelën"
 
+#. i18n: ectx: property (text), widget (QRadioButton, Left)
+#: settings/TabBarSettings.ui:139
+#, fuzzy, kde-format
+#| msgid "&Close Tab"
+msgid "To the left of terminal area"
+msgstr "&Mbylle Tabelën"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Right)
+#: settings/TabBarSettings.ui:149
+#, fuzzy, kde-format
+#| msgid "&Close Tab"
+msgid "To the &right of terminal area"
+msgstr "&Mbylle Tabelën"
+
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
-#: settings/TabBarSettings.ui:155
+#: settings/TabBarSettings.ui:175
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgid "Show Close Tab button:"
 msgstr "&Mbylle Tabelën"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
-#: settings/TabBarSettings.ui:165
+#: settings/TabBarSettings.ui:185
 #, kde-format
-msgid "&On each tab"
+msgid "On ea&ch tab"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
-#: settings/TabBarSettings.ui:175
+#: settings/TabBarSettings.ui:195
 #, kde-format
 msgid "On &the tab bar"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
-#: settings/TabBarSettings.ui:185
+#: settings/TabBarSettings.ui:205
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
@@ -3031,125 +3045,125 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:211 settings/TabBarSettings.ui:344
+#: settings/TabBarSettings.ui:231 settings/TabBarSettings.ui:364
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:221
+#: settings/TabBarSettings.ui:241
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgid "Show 'New Tab' button"
 msgstr "&Mbylle Tabelën"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:228
+#: settings/TabBarSettings.ui:248
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:235
+#: settings/TabBarSettings.ui:255
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:261
+#: settings/TabBarSettings.ui:281
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:284
+#: settings/TabBarSettings.ui:304
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:298
+#: settings/TabBarSettings.ui:318
 #, kde-format
 msgid "Put new tabs:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:308
+#: settings/TabBarSettings.ui:328
 #, kde-format
 msgid "At &the end"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:318
+#: settings/TabBarSettings.ui:338
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgid "After current &tab"
 msgstr "Mbylle Tabelën e Tanishme"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:354
+#: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:377
+#: settings/TabBarSettings.ui:397
 #, kde-format
 msgid "Splits"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:383
+#: settings/TabBarSettings.ui:403
 #, kde-format
 msgid "Show Header:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:390
+#: settings/TabBarSettings.ui:410
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:400
+#: settings/TabBarSettings.ui:420
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:426
+#: settings/TabBarSettings.ui:446
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:436
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:446
+#: settings/TabBarSettings.ui:466
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:476
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:479
+#: settings/TabBarSettings.ui:499
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"

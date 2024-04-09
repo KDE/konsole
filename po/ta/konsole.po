@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-06 00:40+0000\n"
+"POT-Creation-Date: 2024-04-09 00:41+0000\n"
 "PO-Revision-Date: 2024-03-30 21:55+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1859,14 +1859,14 @@ msgstr "வெளியீட்டுக்கான விருப்பங�
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:175
+#: PrintOptions.ui:39 settings/konsole.kcfg:177
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "&அச்சடிப்பதற்குரிய பயன்முறை (கருப்பு எழுத்துகள், பின்புலம் இல்லாமல்)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:179
+#: PrintOptions.ui:46 settings/konsole.kcfg:181
 #, kde-format
 msgid "&Scale output"
 msgstr "&வெளியீட்டின் அளவை மாற்று"
@@ -2749,73 +2749,73 @@ msgid "Control the position of the tab bar"
 msgstr "கீற்றுப்பட்டையின் இருப்பிடத்தை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:132
+#: settings/konsole.kcfg:134
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "கீற்றுப்பட்டையின் தோற்றத்தை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:136
+#: settings/konsole.kcfg:138
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "பயனர் குறிப்பிடும் .css கோப்பைக் கீற்றுப்பட்டைக்குப் பயன்படுத்து"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:140
+#: settings/konsole.kcfg:142
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "கீற்றுப்பட்டையின் தோற்றத்திட்டத்திற்கு பயன்படுத்த வேண்டிய .css கோப்பு"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:144
+#: settings/konsole.kcfg:146
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "கீற்றுகளின் மீது நடு-கிளிக் செய்தால் அவற்றை மூடு"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:148
+#: settings/konsole.kcfg:150
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "கீற்றுப்பட்டையில் 'புதிய கீற்று' பட்டன் காட்டப்படுவதை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:152
+#: settings/konsole.kcfg:154
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "கீற்றுகளை மூடும் பட்டன் காட்டப்படும் இடத்தை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:161
+#: settings/konsole.kcfg:163
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "புதிய கீற்றுகள் சேர்க்கப்படும் இடத்தை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:169
+#: settings/konsole.kcfg:171
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "கீற்றுகளை அகலப்படுத்து"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:185
+#: settings/konsole.kcfg:187
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "முந்தைய உரையை சேமிப்பதற்கு, கணினி முழுவதற்குமான இடத்தை பயன்படுத்து"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:189
+#: settings/konsole.kcfg:191
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "முந்தைய உரையை சேமிப்பதற்கு, இப்பயனருக்கான தனிப்பட்ட இடத்தை பயன்படுத்து"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:193
+#: settings/konsole.kcfg:195
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "முந்தைய உரையை சேமிப்பதற்கு, வேறு இடத்தை பயன்படுத்து"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:197
+#: settings/konsole.kcfg:199
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "முந்தைய உரையை சேமிப்பதற்கு, இந்த அடைவை பயன்படுத்து"
@@ -2976,26 +2976,41 @@ msgstr "முனையப்பகுதிக்கு மேல்"
 msgid "Be&low terminal area"
 msgstr "முனையப்பகுதிக்கு அடியில்"
 
+#. i18n: ectx: property (text), widget (QRadioButton, Left)
+#: settings/TabBarSettings.ui:139
+#, fuzzy, kde-format
+#| msgid "Be&low terminal area"
+msgid "To the left of terminal area"
+msgstr "முனையப்பகுதிக்கு அடியில்"
+
+#. i18n: ectx: property (text), widget (QRadioButton, Right)
+#: settings/TabBarSettings.ui:149
+#, fuzzy, kde-format
+#| msgid "Be&low terminal area"
+msgid "To the &right of terminal area"
+msgstr "முனையப்பகுதிக்கு அடியில்"
+
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
-#: settings/TabBarSettings.ui:155
+#: settings/TabBarSettings.ui:175
 #, kde-format
 msgid "Show Close Tab button:"
 msgstr "கீற்றை முடுவதற்கான பட்டனை காட்டுவது:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
-#: settings/TabBarSettings.ui:165
-#, kde-format
-msgid "&On each tab"
+#: settings/TabBarSettings.ui:185
+#, fuzzy, kde-format
+#| msgid "&On each tab"
+msgid "On ea&ch tab"
 msgstr "ஒவ்வொரு &கீற்றிலும்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
-#: settings/TabBarSettings.ui:175
+#: settings/TabBarSettings.ui:195
 #, kde-format
 msgid "On &the tab bar"
 msgstr "&கீற்றுப்பட்டையில்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
-#: settings/TabBarSettings.ui:185
+#: settings/TabBarSettings.ui:205
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
@@ -3003,123 +3018,123 @@ msgstr "வேண்டாம்"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:211 settings/TabBarSettings.ui:344
+#: settings/TabBarSettings.ui:231 settings/TabBarSettings.ui:364
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr "மற்றவை:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:221
+#: settings/TabBarSettings.ui:241
 #, kde-format
 msgid "Show 'New Tab' button"
 msgstr "'புதிய கீற்று' பட்டனை காட்டு"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:228
+#: settings/TabBarSettings.ui:248
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr "கீற்றுகளை சாளரத்தின் முழு அகலத்திற்கு விரி"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:235
+#: settings/TabBarSettings.ui:255
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr "பயனர்-வரையறுக்கும் stylesheet-ஐப் பயன்படுத்து:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:261
+#: settings/TabBarSettings.ui:281
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(ஏதுமில்லை)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:284
+#: settings/TabBarSettings.ui:304
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "நடத்தை"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:298
+#: settings/TabBarSettings.ui:318
 #, kde-format
 msgid "Put new tabs:"
 msgstr "புதிய கீற்றுகளை வைப்பது:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:308
+#: settings/TabBarSettings.ui:328
 #, kde-format
 msgid "At &the end"
 msgstr "க&டைசியில்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:318
+#: settings/TabBarSettings.ui:338
 #, kde-format
 msgid "After current &tab"
 msgstr "தற்போதைய கீற்றுக்கு &பிறகு"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:354
+#: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "நடு கிளிக் செய்தால் கீற்றை மூடு"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:377
+#: settings/TabBarSettings.ui:397
 #, kde-format
 msgid "Splits"
 msgstr "துண்டுகள்"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:383
+#: settings/TabBarSettings.ui:403
 #, kde-format
 msgid "Show Header:"
 msgstr "தலைப்பைக் காட்டுவது:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:390
+#: settings/TabBarSettings.ui:410
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "தேவைப்படும்போது"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:400
+#: settings/TabBarSettings.ui:420
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "ஒருபோதும் வேண்டாம்"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:426
+#: settings/TabBarSettings.ui:446
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "இழுப்பதற்கான இடத்தின் அளவு:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:436
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "சிறியது"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:446
+#: settings/TabBarSettings.ui:466
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "நடுத்தரமானது"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:476
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "பெரியது"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:479
+#: settings/TabBarSettings.ui:499
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
