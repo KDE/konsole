@@ -355,7 +355,7 @@ public:
     inline static int stringWidth(const QString &str, bool ignoreWcWidth = false)
     {
         const auto ucs4Str = str.toStdU32String();
-        return stringWidth(ucs4Str.data(), ucs4Str.size()), ignoreWcWidth;
+        return stringWidth(ucs4Str.data(), ucs4Str.size(), ignoreWcWidth);
     }
 
     inline uint baseCodePoint() const
