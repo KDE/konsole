@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-09 00:41+0000\n"
-"PO-Revision-Date: 2024-04-02 12:40+0200\n"
+"PO-Revision-Date: 2024-04-09 09:15+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -2998,27 +2998,25 @@ msgstr "Позиция:"
 #: settings/TabBarSettings.ui:119
 #, kde-format
 msgid "Above terminal area"
-msgstr "Над зоната за терминали"
+msgstr "Над панела за терминала"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
 #: settings/TabBarSettings.ui:129
 #, kde-format
 msgid "Be&low terminal area"
-msgstr "Под зоната за терминали"
+msgstr "&Под панела за терминала"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "Под зоната за терминали"
+msgstr "Вляво от панела на терминала"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "Под зоната за терминали"
+msgstr "В&дясно от панела на терминала"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3028,16 +3026,15 @@ msgstr "Бутон за затваряне:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "На всеки раздел"
+msgstr "На &всеки раздел"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
 #, kde-format
 msgid "On &the tab bar"
-msgstr "На лентата за раздели"
+msgstr "На &лентата за раздели"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:205
