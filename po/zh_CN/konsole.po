@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-03 02:32+0000\n"
-"PO-Revision-Date: 2024-03-30 19:38\n"
+"PO-Revision-Date: 2024-04-10 19:54\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2933,7 +2933,7 @@ msgstr "在每个标签页上(&O)"
 #: settings/TabBarSettings.ui:175
 #, kde-format
 msgid "On &the tab bar"
-msgstr "在标签页栏(&T)"
+msgstr "在整条标签页栏上(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:185
