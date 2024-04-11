@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-09 00:41+0000\n"
-"PO-Revision-Date: 2024-04-09 19:26\n"
+"PO-Revision-Date: 2024-04-10 19:50\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2944,13 +2944,13 @@ msgstr "在终端下方"
 #: settings/TabBarSettings.ui:139
 #, kde-format
 msgid "To the left of terminal area"
-msgstr ""
+msgstr "在终端左侧"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
 #, kde-format
 msgid "To the &right of terminal area"
-msgstr ""
+msgstr "在终端右侧(&R)"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -2962,13 +2962,13 @@ msgstr "显示关闭标签页按钮："
 #: settings/TabBarSettings.ui:185
 #, kde-format
 msgid "On ea&ch tab"
-msgstr ""
+msgstr "在每个标签页上(&C)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
 #, kde-format
 msgid "On &the tab bar"
-msgstr "在标签页栏(&T)"
+msgstr "在整条标签页栏上(&T)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:205
