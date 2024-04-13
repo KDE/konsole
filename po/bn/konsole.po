@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-09 00:41+0000\n"
+"POT-Creation-Date: 2024-04-13 00:41+0000\n"
 "PO-Revision-Date: 2010-05-30 02:09-0700\n"
 "Last-Translator: Deepayan Sarkar <deepayan.sarkar@gmail.com>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -2023,14 +2023,14 @@ msgstr "ট্যাব সংক্রান্ত &অপশন"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:177
+#: PrintOptions.ui:39 settings/konsole.kcfg:182
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "প্রিন্টার ফ্রেণ্ডলি মো&ড (কালো টেক্সট, কোনো পশ্চাদপট নয়)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:181
+#: PrintOptions.ui:46 settings/konsole.kcfg:186
 #, kde-format
 msgid "&Scale output"
 msgstr ""
@@ -2248,7 +2248,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "সেশন '%1' চুপচাপ"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
-#: session/SessionController.cpp:354 session/SessionController.cpp:1837
+#: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
 #, fuzzy, kde-format
 #| msgid "New Session"
@@ -2640,23 +2640,23 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1836
+#: session/SessionController.cpp:1845
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2029
+#: session/SessionController.cpp:2038
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2099
+#: session/SessionController.cpp:2108
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "জি-মোডে&ম ডাউনলোড এখানে সংরক্ষণ করো..."
 
-#: session/SessionController.cpp:2109
+#: session/SessionController.cpp:2118
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2667,13 +2667,13 @@ msgstr ""
 "সফটওয়্যার পাওয়া যাচ্ছে না।</p><p>আপনি 'rzsz' অথবা 'lrzsz' প্যাকেজটি ইনস্টল করে "
 "দেখতে পারেন।</p>"
 
-#: session/SessionController.cpp:2119
+#: session/SessionController.cpp:2128
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>বর্তমান সেশনে একটি জি-মোডেম ফাইল ট্রান্সফার আগে থেকেই চলছে।</p>"
 
-#: session/SessionController.cpp:2132
+#: session/SessionController.cpp:2141
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2682,7 +2682,7 @@ msgstr ""
 "<p>সিস্টেমে কোনো মানানসই জি-মোডেম সফটওয়ার পাওয়া যায়নি।</p><p>আপনি 'rzsz' বা "
 "'lrzsz' প্যাকেজগুলি ইনস্টল করে দেখতে পারেন।</p>"
 
-#: session/SessionController.cpp:2137
+#: session/SessionController.cpp:2146
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "জি-মোডেম আপলোড করার জন্য ফাইল বেছে নিন"
@@ -2840,6 +2840,20 @@ msgstr ""
 msgid "Search backwards"
 msgstr ""
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
+#, fuzzy, kde-format
+#| msgid "Find the next match for the current search phrase"
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "বর্তমান অনুসন্ধান পংক্তির জন্য পরবর্তী মিল খোঁজো"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:274
+#, kde-format
+msgid "No wrap"
+msgstr ""
+
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
 #, kde-format
@@ -2918,14 +2932,20 @@ msgstr "সব চিহ্নিত করো"
 msgid "Sets whether matching text should be highlighted"
 msgstr "মিলগুলি চিহ্নিত করা হবে কি না নির্ধারণ করে"
 
+#. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
+#: settings/konsole.kcfg:83
+#, kde-format
+msgid "Search stops instead of wrapping"
+msgstr ""
+
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:85
+#: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:89
+#: settings/konsole.kcfg:94
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2933,91 +2953,91 @@ msgstr ""
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:95 settings/konsole.kcfg:115
+#: settings/konsole.kcfg:100 settings/konsole.kcfg:120
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:104
+#: settings/konsole.kcfg:109
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:124
+#: settings/konsole.kcfg:129
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:139
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:138
+#: settings/konsole.kcfg:143
 #, fuzzy, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "একটি স্বনির্বাচিত ব্যবহার করো, কার্সরের জন্য রং মেরামত করেছিলেন"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:142
+#: settings/konsole.kcfg:147
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr ""
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:146
+#: settings/konsole.kcfg:151
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:150
+#: settings/konsole.kcfg:155
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr ""
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:154
+#: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:163
+#: settings/konsole.kcfg:168
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr ""
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:171
+#: settings/konsole.kcfg:176
 #, kde-format
 msgid "Expand the tab widths"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:187
+#: settings/konsole.kcfg:192
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:191
+#: settings/konsole.kcfg:196
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:195
+#: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:199
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr ""
@@ -5432,62 +5452,62 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "None"
 msgstr "কিছু &নয়"
 
-#: widgets/IncrementalSearchBar.cpp:49
+#: widgets/IncrementalSearchBar.cpp:50
 #, fuzzy, kde-format
 #| msgid "Find:"
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "খোঁজো:"
 
-#: widgets/IncrementalSearchBar.cpp:51
+#: widgets/IncrementalSearchBar.cpp:52
 #, fuzzy, kde-format
 #| msgid "Enter the text to search for here"
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "এখানে অনুসন্ধান পংক্তি লেখো"
 
-#: widgets/IncrementalSearchBar.cpp:75
+#: widgets/IncrementalSearchBar.cpp:76
 #, fuzzy, kde-format
 #| msgid "Next"
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "পরবর্তী"
 
-#: widgets/IncrementalSearchBar.cpp:78
+#: widgets/IncrementalSearchBar.cpp:79
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "বর্তমান অনুসন্ধান পংক্তির জন্য পরবর্তী মিল খোঁজো"
 
-#: widgets/IncrementalSearchBar.cpp:85
+#: widgets/IncrementalSearchBar.cpp:86
 #, fuzzy, kde-format
 #| msgid "Previous"
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "পূর্ববর্তী"
 
-#: widgets/IncrementalSearchBar.cpp:87
+#: widgets/IncrementalSearchBar.cpp:88
 #, fuzzy, kde-format
 #| msgid "Find the previous match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "বর্তমান অনুসন্ধান পংক্তির জন্য পূর্ববর্তী মিল খোঁজো"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:109
+#: widgets/IncrementalSearchBar.cpp:110
 #, fuzzy, kde-format
 #| msgid "Close the search bar"
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "অনুসন্ধান বার বন্ধ করো"
 
-#: widgets/IncrementalSearchBar.cpp:119
+#: widgets/IncrementalSearchBar.cpp:120
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu Close Active View"
 #| msgid "Close Active"
@@ -5495,55 +5515,68 @@ msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "সক্রিয় ভিউ বন্ধ করো"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:122
 #, fuzzy, kde-format
 #| msgid "Sets whether the search is case sensitive"
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "অনুসন্ধানটি কেস-সেন্সিটিভ হবে কি না নির্ধারণ করে"
 
-#: widgets/IncrementalSearchBar.cpp:124
+#: widgets/IncrementalSearchBar.cpp:125
 #, fuzzy, kde-format
 #| msgid "Match regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "রেগুলার এক্সপ্রেশন খোঁজো"
 
-#: widgets/IncrementalSearchBar.cpp:128
+#: widgets/IncrementalSearchBar.cpp:129
 #, fuzzy, kde-format
 #| msgid "Highlight all"
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "সব চিহ্নিত করো"
 
-#: widgets/IncrementalSearchBar.cpp:130
+#: widgets/IncrementalSearchBar.cpp:131
 #, fuzzy, kde-format
 #| msgid "Sets whether matching text should be highlighted"
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "মিলগুলি চিহ্নিত করা হবে কি না নির্ধারণ করে"
 
-#: widgets/IncrementalSearchBar.cpp:133
+#: widgets/IncrementalSearchBar.cpp:134
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:136
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "বর্তমান অনুসন্ধান পংক্তির জন্য পরবর্তী মিল খোঁজো"
 
-#: widgets/IncrementalSearchBar.cpp:165
+#: widgets/IncrementalSearchBar.cpp:141
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "No wrap"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:143
+#, fuzzy, kde-format
+#| msgid "Find the next match for the current search phrase"
+msgctxt "@info:tooltip"
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "বর্তমান অনুসন্ধান পংক্তির জন্য পরবর্তী মিল খোঁজো"
+
+#: widgets/IncrementalSearchBar.cpp:172
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "বর্তমান অনুসন্ধান পংক্তির জন্য পরবর্তী মিল খোঁজো"
 
-#: widgets/IncrementalSearchBar.cpp:170
+#: widgets/IncrementalSearchBar.cpp:177
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"

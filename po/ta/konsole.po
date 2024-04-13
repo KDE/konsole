@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-09 00:41+0000\n"
+"POT-Creation-Date: 2024-04-13 00:41+0000\n"
 "PO-Revision-Date: 2024-03-30 21:55+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1859,14 +1859,14 @@ msgstr "வெளியீட்டுக்கான விருப்பங�
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:177
+#: PrintOptions.ui:39 settings/konsole.kcfg:182
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "&அச்சடிப்பதற்குரிய பயன்முறை (கருப்பு எழுத்துகள், பின்புலம் இல்லாமல்)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:181
+#: PrintOptions.ui:46 settings/konsole.kcfg:186
 #, kde-format
 msgid "&Scale output"
 msgstr "&வெளியீட்டின் அளவை மாற்று"
@@ -2077,7 +2077,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' என்பதில் அமைதி (அமர்வு '%2')"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
-#: session/SessionController.cpp:354 session/SessionController.cpp:1837
+#: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
 #, kde-format
 msgid "Show session"
@@ -2441,22 +2441,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "நிரலை கட்டாயப்படுத்தி மூடு"
 
-#: session/SessionController.cpp:1836
+#: session/SessionController.cpp:1845
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "'%1' அமர்வில் தூண்டி காட்டப்படுகிறது"
 
-#: session/SessionController.cpp:2029
+#: session/SessionController.cpp:2038
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "தற்போதைய அடைவை இதனால் திற"
 
-#: session/SessionController.cpp:2099
+#: session/SessionController.cpp:2108
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "&ZModem பதிவிறக்கத்தை இங்கு சேமி…"
 
-#: session/SessionController.cpp:2109
+#: session/SessionController.cpp:2118
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2471,7 +2471,7 @@ msgstr ""
 "மென்பொருள் அமைப்பில் இல்லை.\n"
 "<p> 'rzsz' அல்லது 'lrzsz' தொகுப்பை வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2119
+#: session/SessionController.cpp:2128
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2479,7 +2479,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<பி>நடப்பு அமர்வில் ஏற்கனவே உள்ள Z மோடம் கோப்பு இடமாற்றம் நடைமுறையில் உள்ளது."
 
-#: session/SessionController.cpp:2132
+#: session/SessionController.cpp:2141
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2491,7 +2491,7 @@ msgstr ""
 "<p>பொருத்தமான Z மோடம் மென்பொருள் அமைப்பு கிடைக்கவில்லை.\n"
 " <p>'rzsz' அல்லது 'lrzsz '  தொகுப்பு வேண்டுமானால் நிறுவலாம்.\n"
 
-#: session/SessionController.cpp:2137
+#: session/SessionController.cpp:2146
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"
@@ -2641,6 +2641,20 @@ msgstr "தேடல் கீழிலிருந்து துவங்க 
 msgid "Search backwards"
 msgstr "பின்னோக்கித் தேடு"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
+#, fuzzy, kde-format
+#| msgid "Sets whether search should start from the bottom"
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "தேடல் கீழிலிருந்து துவங்க வேண்டுமா என்பதை அமைக்கும்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:274
+#, kde-format
+msgid "No wrap"
+msgstr ""
+
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
 #, kde-format
@@ -2716,14 +2730,20 @@ msgstr "பொருந்தும் அனைத்தை முன்னி�
 msgid "Sets whether matching text should be highlighted"
 msgstr "பொருந்தும் உரை முன்னிலைப்படுத்தப்பட வேண்டுமா என்பதை அமைக்கும்"
 
+#. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
+#: settings/konsole.kcfg:83
+#, kde-format
+msgid "Search stops instead of wrapping"
+msgstr ""
+
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:85
+#: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr "கீற்றுகளை தனித்தனி cgroup-களில் உருவாக்க வேண்டுமா"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:89
+#: settings/konsole.kcfg:94
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2731,91 +2751,91 @@ msgstr "எவ்வளவு நினைவுக்கு மேல் பய
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:95 settings/konsole.kcfg:115
+#: settings/konsole.kcfg:100 settings/konsole.kcfg:120
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "கீற்றுப்பட்டை காட்டப்படுவதை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:104
+#: settings/konsole.kcfg:109
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "பலகைகளுக்கிடையேயான பிடிப்பியின் அளவை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:124
+#: settings/konsole.kcfg:129
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "கீற்றுப்பட்டையின் இருப்பிடத்தை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:139
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "கீற்றுப்பட்டையின் தோற்றத்தை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:138
+#: settings/konsole.kcfg:143
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "பயனர் குறிப்பிடும் .css கோப்பைக் கீற்றுப்பட்டைக்குப் பயன்படுத்து"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:142
+#: settings/konsole.kcfg:147
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr "கீற்றுப்பட்டையின் தோற்றத்திட்டத்திற்கு பயன்படுத்த வேண்டிய .css கோப்பு"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:146
+#: settings/konsole.kcfg:151
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "கீற்றுகளின் மீது நடு-கிளிக் செய்தால் அவற்றை மூடு"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:150
+#: settings/konsole.kcfg:155
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "கீற்றுப்பட்டையில் 'புதிய கீற்று' பட்டன் காட்டப்படுவதை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:154
+#: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "கீற்றுகளை மூடும் பட்டன் காட்டப்படும் இடத்தை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:163
+#: settings/konsole.kcfg:168
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "புதிய கீற்றுகள் சேர்க்கப்படும் இடத்தை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:171
+#: settings/konsole.kcfg:176
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "கீற்றுகளை அகலப்படுத்து"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:187
+#: settings/konsole.kcfg:192
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "முந்தைய உரையை சேமிப்பதற்கு, கணினி முழுவதற்குமான இடத்தை பயன்படுத்து"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:191
+#: settings/konsole.kcfg:196
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "முந்தைய உரையை சேமிப்பதற்கு, இப்பயனருக்கான தனிப்பட்ட இடத்தை பயன்படுத்து"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:195
+#: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "முந்தைய உரையை சேமிப்பதற்கு, வேறு இடத்தை பயன்படுத்து"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:199
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "முந்தைய உரையை சேமிப்பதற்கு, இந்த அடைவை பயன்படுத்து"
@@ -5166,103 +5186,116 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "None"
 msgstr "ஏதுமில்லை"
 
-#: widgets/IncrementalSearchBar.cpp:49
+#: widgets/IncrementalSearchBar.cpp:50
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "தேடு..."
 
-#: widgets/IncrementalSearchBar.cpp:51
+#: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "கண்டுபிடிக்க வேண்டிய உரையை இங்கு உள்ளிடுங்கள்"
 
-#: widgets/IncrementalSearchBar.cpp:75
+#: widgets/IncrementalSearchBar.cpp:76
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "அடுத்தது"
 
-#: widgets/IncrementalSearchBar.cpp:78
+#: widgets/IncrementalSearchBar.cpp:79
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "தற்போதைய வினாவிற்கான அடுத்த பொருத்தத்தை கண்டுபிடிக்கும்"
 
-#: widgets/IncrementalSearchBar.cpp:85
+#: widgets/IncrementalSearchBar.cpp:86
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "முந்தையது"
 
-#: widgets/IncrementalSearchBar.cpp:87
+#: widgets/IncrementalSearchBar.cpp:88
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "தற்போதைய வினாவிற்கான முந்தைய பொருத்தத்தை கண்டுபிடிக்கும்"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "விருப்பங்களுக்கான பட்டியை காட்டு"
 
-#: widgets/IncrementalSearchBar.cpp:109
+#: widgets/IncrementalSearchBar.cpp:110
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "தேடல் பட்டையை மூடும்"
 
-#: widgets/IncrementalSearchBar.cpp:119
+#: widgets/IncrementalSearchBar.cpp:120
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "எழுத்துவகையை பொருட்படுத்து"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "பெரிய/சிறிய எழுத்துவகையை தேடல் வேறுபடுத்துமா என்பதை அமைக்கும்"
 
-#: widgets/IncrementalSearchBar.cpp:124
+#: widgets/IncrementalSearchBar.cpp:125
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "சுருங்குறித் தொடரை பொருத்து"
 
-#: widgets/IncrementalSearchBar.cpp:128
+#: widgets/IncrementalSearchBar.cpp:129
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "பொருந்தும் அனைத்தை முன்னிலைப்படுத்து"
 
-#: widgets/IncrementalSearchBar.cpp:130
+#: widgets/IncrementalSearchBar.cpp:131
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "பொருந்தும் உரை முன்னிலைப்படுத்தப்பட வேண்டுமா என்பதை அமைக்கும்"
 
-#: widgets/IncrementalSearchBar.cpp:133
+#: widgets/IncrementalSearchBar.cpp:134
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "பின்னோக்கித் தேடு"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:136
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "தேடல் கீழிலிருந்து துவங்க வேண்டுமா என்பதை அமைக்கும்"
 
-#: widgets/IncrementalSearchBar.cpp:165
+#: widgets/IncrementalSearchBar.cpp:141
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "No wrap"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:143
+#, fuzzy, kde-format
+#| msgid "Sets whether search should start from the bottom"
+msgctxt "@info:tooltip"
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "தேடல் கீழிலிருந்து துவங்க வேண்டுமா என்பதை அமைக்கும்"
+
+#: widgets/IncrementalSearchBar.cpp:172
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "தற்போதைய தேடலை கீழிலிருந்து கண்டுபிடி"
 
-#: widgets/IncrementalSearchBar.cpp:170
+#: widgets/IncrementalSearchBar.cpp:177
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"

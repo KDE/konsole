@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-09 00:41+0000\n"
+"POT-Creation-Date: 2024-04-13 00:41+0000\n"
 "PO-Revision-Date: 2023-12-12 19:29+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -1883,14 +1883,14 @@ msgstr "Možnosti výstupu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:177
+#: PrintOptions.ui:39 settings/konsole.kcfg:182
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Režim tlače (čierny text, bez pozadia)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:181
+#: PrintOptions.ui:46 settings/konsole.kcfg:186
 #, kde-format
 msgid "&Scale output"
 msgstr "Škálovať výstup"
@@ -2102,7 +2102,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Ticho v '%1' (Sedenie '%2')"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
-#: session/SessionController.cpp:354 session/SessionController.cpp:1837
+#: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
 #, kde-format
 msgid "Show session"
@@ -2479,22 +2479,22 @@ msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Zabiť program"
 
-#: session/SessionController.cpp:1836
+#: session/SessionController.cpp:1845
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2029
+#: session/SessionController.cpp:2038
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Otvoriť aktuálny priečinok s"
 
-#: session/SessionController.cpp:2099
+#: session/SessionController.cpp:2108
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Uložiť ZModem sťahovanie do..."
 
-#: session/SessionController.cpp:2109
+#: session/SessionController.cpp:2118
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2505,13 +2505,13 @@ msgstr ""
 "žiadny vhodný ZModem softvér.</p><p>Asi bude potrebné nainštalovať balíček "
 "'rzsz' alebo 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2119
+#: session/SessionController.cpp:2128
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Aktuálne sedenie už má spustený ZModem prenos súborov.</p>"
 
-#: session/SessionController.cpp:2132
+#: session/SessionController.cpp:2141
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2520,7 +2520,7 @@ msgstr ""
 "<p>V systéme nebol nájdený žiadny vhodný ZModem softvér.</p><p>Asi bude "
 "potrebné nainštalovať balíček 'rzsz' alebo 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2137
+#: session/SessionController.cpp:2146
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Vyberte súbory pre ZModem odoslanie"
@@ -2668,6 +2668,20 @@ msgstr "Nastaví, či hľadanie má začať od konca"
 msgid "Search backwards"
 msgstr "Spätné vyhľadávanie"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
+#. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
+#: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
+#, fuzzy, kde-format
+#| msgid "Sets whether search should start from the bottom"
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "Nastaví, či hľadanie má začať od konca"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
+#: settings/GeneralSettings.ui:274
+#, kde-format
+msgid "No wrap"
+msgstr ""
+
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
 #, kde-format
@@ -2744,14 +2758,20 @@ msgstr "Zvýrazniť všetky zhody hľadania"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Nastavuje, či má byť zodpovedajúci text zvýraznený"
 
+#. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
+#: settings/konsole.kcfg:83
+#, kde-format
+msgid "Search stops instead of wrapping"
+msgstr ""
+
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
-#: settings/konsole.kcfg:85
+#: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
 msgstr ""
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
-#: settings/konsole.kcfg:89
+#: settings/konsole.kcfg:94
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
@@ -2759,92 +2779,92 @@ msgstr ""
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
-#: settings/konsole.kcfg:95 settings/konsole.kcfg:115
+#: settings/konsole.kcfg:100 settings/konsole.kcfg:120
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
 msgstr "Ovládať viditeľnosť celého panelu kariet"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
-#: settings/konsole.kcfg:104
+#: settings/konsole.kcfg:109
 #, kde-format
 msgid "Control the size of the handle between panels"
 msgstr "Ovládať veľkosť rukoväte medzi panelmi"
 
 #. i18n: ectx: label, entry (TabBarPosition), group (TabBar)
-#: settings/konsole.kcfg:124
+#: settings/konsole.kcfg:129
 #, kde-format
 msgid "Control the position of the tab bar"
 msgstr "Ovládať polohu panelu kariet"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:134
+#: settings/konsole.kcfg:139
 #, kde-format
 msgid "Control the visual style of the tab bar"
 msgstr "Ovládač vizuálny štýl panelu kariet"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
-#: settings/konsole.kcfg:138
+#: settings/konsole.kcfg:143
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr "Použiť používateľom definovaný .css súbor pre panel kariet"
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
-#: settings/konsole.kcfg:142
+#: settings/konsole.kcfg:147
 #, kde-format
 msgid "The .css file to use for the tab bar style"
 msgstr ".css súbor na použitie pre štýl panelu kariet"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
-#: settings/konsole.kcfg:146
+#: settings/konsole.kcfg:151
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
 msgstr "Povoliť zatvorenie karty stredným tlačidlom"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
-#: settings/konsole.kcfg:150
+#: settings/konsole.kcfg:155
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "Ovládať viditeľnosť tlačidla \"Nová karta\" na paneli kariet"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
-#: settings/konsole.kcfg:154
+#: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "Ovládať kde sa zobrazí tlačidlo \"Zatvoriť kartu\""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:163
+#: settings/konsole.kcfg:168
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Ovládať kde vložiť novú kartu"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:171
+#: settings/konsole.kcfg:176
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "Rozšíriť výšku kariet"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:187
+#: settings/konsole.kcfg:192
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "Pre scrollback súbory použiť systémové umiestnenie priečinka"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:191
+#: settings/konsole.kcfg:196
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
 "Pre scrollback súbory použiť používateľovo špecifické umiestnenie priečinka"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:195
+#: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "Pre scrollback súbory použiť špecifické umiestnenie priečinka"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:199
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Pre scrollback súbory použiť tento priečinok"
@@ -5238,103 +5258,116 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "None"
 msgstr "Žiadne"
 
-#: widgets/IncrementalSearchBar.cpp:49
+#: widgets/IncrementalSearchBar.cpp:50
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "Nájsť..."
 
-#: widgets/IncrementalSearchBar.cpp:51
+#: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "Sem zadajte text, ktorý chcete hľadať"
 
-#: widgets/IncrementalSearchBar.cpp:75
+#: widgets/IncrementalSearchBar.cpp:76
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "Nasledujúci"
 
-#: widgets/IncrementalSearchBar.cpp:78
+#: widgets/IncrementalSearchBar.cpp:79
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "Nájde nasledujúci výskyt aktuálnej hľadanej frázy"
 
-#: widgets/IncrementalSearchBar.cpp:85
+#: widgets/IncrementalSearchBar.cpp:86
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "Predchádzajúci"
 
-#: widgets/IncrementalSearchBar.cpp:87
+#: widgets/IncrementalSearchBar.cpp:88
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Nájde predchádzajúci výskyt aktuálnej hľadanej frázy"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "Zobraziť ponuku možností"
 
-#: widgets/IncrementalSearchBar.cpp:109
+#: widgets/IncrementalSearchBar.cpp:110
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "Zavrieť panel hľadania"
 
-#: widgets/IncrementalSearchBar.cpp:119
+#: widgets/IncrementalSearchBar.cpp:120
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "Rozlišovať veľkosť písmen"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "Nastavuje, či sa má rozlišovať veľkosť písmen"
 
-#: widgets/IncrementalSearchBar.cpp:124
+#: widgets/IncrementalSearchBar.cpp:125
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Reg. výraz"
 
-#: widgets/IncrementalSearchBar.cpp:128
+#: widgets/IncrementalSearchBar.cpp:129
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Zvýrazniť všetky zhody"
 
-#: widgets/IncrementalSearchBar.cpp:130
+#: widgets/IncrementalSearchBar.cpp:131
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Nastavuje, či má byť zodpovedajúci text zvýraznený"
 
-#: widgets/IncrementalSearchBar.cpp:133
+#: widgets/IncrementalSearchBar.cpp:134
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Spätné vyhľadávanie"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:136
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Nastaví, či hľadanie má začať od konca"
 
-#: widgets/IncrementalSearchBar.cpp:165
+#: widgets/IncrementalSearchBar.cpp:141
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "No wrap"
+msgstr ""
+
+#: widgets/IncrementalSearchBar.cpp:143
+#, fuzzy, kde-format
+#| msgid "Sets whether search should start from the bottom"
+msgctxt "@info:tooltip"
+msgid "Sets whether search should stop instead of wrapping"
+msgstr "Nastaví, či hľadanie má začať od konca"
+
+#: widgets/IncrementalSearchBar.cpp:172
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Hľadať aktuálnu hľadanú frázu od konca"
 
-#: widgets/IncrementalSearchBar.cpp:170
+#: widgets/IncrementalSearchBar.cpp:177
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
