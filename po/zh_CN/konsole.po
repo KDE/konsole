@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-03 02:32+0000\n"
-"PO-Revision-Date: 2024-04-10 19:54\n"
+"PO-Revision-Date: 2024-04-12 19:13\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -87,7 +87,7 @@ msgstr "主工具栏"
 #: ../desktop/partui.rc:14
 #, kde-format
 msgid "S&crollback"
-msgstr "回滚(&C)"
+msgstr "回滚历史(&C)"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:78
@@ -743,7 +743,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
-msgstr "调整回滚"
+msgstr "调整回滚历史"
 
 #: HistorySizeDialog.cpp:46
 #, kde-format
@@ -2193,17 +2193,17 @@ msgstr "截屏(&P)..."
 #: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "调整回滚..."
+msgstr "调整回滚历史..."
 
 #: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
-msgstr "清除回滚"
+msgstr "清除回滚历史"
 
 #: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "清除回滚并重置"
+msgstr "清除回滚历史并重置"
 
 #: session/SessionController.cpp:755
 #, kde-format
@@ -2745,25 +2745,25 @@ msgstr "扩展标签页宽度"
 #: settings/konsole.kcfg:185
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr "回滚文件使用系统文件夹"
+msgstr "回滚历史文件保存到系统全局文件夹位置"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:189
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr "回滚文件使用用户指定文件夹"
+msgstr "回滚历史文件使用用户指定文件夹"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:193
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr "回滚文件使用指定文件夹"
+msgstr "回滚历史文件保存到指定的文件夹"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:197
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr "回滚文件使用此文件夹"
+msgstr "回滚历史文件保存到此文件夹"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3086,7 +3086,7 @@ msgstr "用户缓存目录 (%1)"
 #: settings/TemporaryFilesSettings.ui:25
 #, kde-format
 msgid "Scrollback file location:"
-msgstr "回滚文件位置："
+msgstr "回滚历史文件位置："
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
 #: settings/TemporaryFilesSettings.ui:64
@@ -4827,7 +4827,7 @@ msgstr "允许终端应用程序处理单击和拖动"
 #: widgets/EditProfileScrollingPage.ui:25
 #, kde-format
 msgid "Scrollback:"
-msgstr "回滚："
+msgstr "回滚历史："
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:67
@@ -4961,8 +4961,8 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"使用此选项时，回滚数据会被保存在内存中。如果您选择了大量数据，系统可能会因为"
-"内存耗尽而产生严重错误。"
+"使用此选项时，回滚历史数据将被保存在运行内存中。如果回滚历史的行数被设置得太"
+"高，系统可能会耗尽内存并导致严重问题。"
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -4974,7 +4974,7 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"当使用此选项时，回滚的数据将写入未经加密的临时文件中。这些临时文件将在 "
+"当使用此选项时，回滚历史的数据将写入未经加密的临时文件中。这些临时文件将在 "
 "Konsole 正常关闭时自动删除。<nl/>使用<emphasis>设置 → 配置 Konsole → 临时文件"
 "位置</emphasis>来选择临时文件的位置。"
 
