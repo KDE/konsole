@@ -1562,6 +1562,14 @@ bool SessionController::reverseSearchChecked() const
     return options.at(IncrementalSearchBar::ReverseSearch);
 }
 
+bool SessionController::noWrapChecked() const
+{
+    Q_ASSERT(_searchBar);
+
+    QBitArray options = _searchBar->optionsChecked();
+    return options.at(IncrementalSearchBar::NoWrap);
+}
+
 QRegularExpression SessionController::regexpFromSearchBarOptions() const
 {
     QBitArray options = _searchBar->optionsChecked();
@@ -1633,7 +1641,7 @@ void SessionController::searchTextChanged(const QString &text)
 
     // update search.  this is called even when the text is
     // empty to clear the view's filters
-    beginSearch(text, reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
+    beginSearch(text, reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch, noWrapChecked());
 }
 void SessionController::searchCompleted(bool success)
 {
@@ -1644,7 +1652,7 @@ void SessionController::searchCompleted(bool success)
     }
 }
 
-void SessionController::beginSearch(const QString &text, Enum::SearchDirection direction)
+void SessionController::beginSearch(const QString &text, Enum::SearchDirection direction, bool noWrap)
 {
     Q_ASSERT(_searchBar);
     Q_ASSERT(_searchFilter);
@@ -1668,6 +1676,7 @@ void SessionController::beginSearch(const QString &text, Enum::SearchDirection d
 
         task->setRegExp(regExp);
         task->setSearchDirection(direction);
+        task->setNoWrap(noWrap);
         task->setAutoDelete(true);
         task->setStartLine(_searchStartLine);
         task->addScreenWindow(session(), view()->screenWindow());
@@ -1701,7 +1710,7 @@ void SessionController::searchFrom()
         setSearchStartTo(0);
     }
 
-    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch, noWrapChecked());
 }
 void SessionController::findNextInHistory()
 {
@@ -1710,7 +1719,7 @@ void SessionController::findNextInHistory()
 
     setSearchStartTo(_prevSearchResultLine);
 
-    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch, noWrapChecked());
 }
 void SessionController::findPreviousInHistory()
 {
@@ -1719,7 +1728,7 @@ void SessionController::findPreviousInHistory()
 
     setSearchStartTo(_prevSearchResultLine);
 
-    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::ForwardsSearch : Enum::BackwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::ForwardsSearch : Enum::BackwardsSearch, noWrapChecked());
 }
 void SessionController::updateMenuIconsAccordingToReverseSearchSetting()
 {
@@ -1738,7 +1747,7 @@ void SessionController::changeSearchMatch()
 
     // reset Selection for new case match
     view()->clearMouseSelection();
-    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch, noWrapChecked());
 }
 void SessionController::showHistoryOptions()
 {

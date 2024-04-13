@@ -174,7 +174,7 @@
        </property>
       </widget>
      </item>
-     <item row="11" column="1">
+     <item row="12" column="1">
       <spacer>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -200,14 +200,14 @@
        </property>
       </widget>
      </item>
-     <item row="12" column="0" alignment="Qt::AlignRight">
+     <item row="13" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Notifications:</string>
        </property>
       </widget>
      </item>
-     <item row="12" column="1">
+     <item row="13" column="1">
       <layout class="QHBoxLayout" stretch="0,1">
        <property name="spacing">
         <number>0</number>
@@ -256,6 +256,22 @@
        </property>
        <property name="text">
         <string>Search backwards</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QCheckBox" name="kcfg_SearchNoWrap">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Sets whether search should stop instead of wrapping</string>
+       </property>
+       <property name="text">
+        <string>No wrap</string>
        </property>
       </widget>
      </item>

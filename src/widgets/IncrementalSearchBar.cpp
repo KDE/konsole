@@ -32,6 +32,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     , _regExpression(nullptr)
     , _highlightMatches(nullptr)
     , _reverseSearch(nullptr)
+    , _noWrap(nullptr)
     , _findNextButton(nullptr)
     , _findPreviousButton(nullptr)
     , _searchFromButton(nullptr)
@@ -136,6 +137,12 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     connect(_reverseSearch, &QAction::toggled, this, &Konsole::IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting);
     connect(_reverseSearch, &QAction::toggled, this, &Konsole::IncrementalSearchBar::reverseSearchToggled);
     updateButtonsAccordingToReverseSearchSetting();
+
+    _noWrap = optionsMenu->addAction(i18nc("@item:inmenu", "No wrap"));
+    _noWrap->setCheckable(true);
+    _noWrap->setToolTip(i18nc("@info:tooltip", "Sets whether search should stop instead of wrapping"));
+    connect(_noWrap, &QAction::toggled, this, &Konsole::IncrementalSearchBar::noWrapToggled);
+
     setOptions();
 
     auto barLayout = new QHBoxLayout(this);
@@ -271,11 +278,12 @@ void IncrementalSearchBar::focusLineEdit()
 
 const QBitArray IncrementalSearchBar::optionsChecked()
 {
-    QBitArray options(4, false);
+    QBitArray options(5, false);
     options.setBit(MatchCase, _caseSensitive->isChecked());
     options.setBit(RegExp, _regExpression->isChecked());
     options.setBit(HighlightMatches, _highlightMatches->isChecked());
     options.setBit(ReverseSearch, _reverseSearch->isChecked());
+    options.setBit(NoWrap, _noWrap->isChecked());
     return options;
 }
 
@@ -285,6 +293,7 @@ void IncrementalSearchBar::setOptions()
     _regExpression->setChecked(KonsoleSettings::searchRegExpression());
     _highlightMatches->setChecked(KonsoleSettings::searchHighlightMatches());
     _reverseSearch->setChecked(KonsoleSettings::searchReverseSearch());
+    _noWrap->setChecked(KonsoleSettings::searchNoWrap());
 }
 
 #include "moc_IncrementalSearchBar.cpp"

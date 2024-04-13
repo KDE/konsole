@@ -58,6 +58,8 @@ public:
         RegExp = 2,
         /** Search from the bottom and up **/
         ReverseSearch = 3,
+        /** Stop search instead of wrapping **/
+        NoWrap = 4,
     };
 
     /**
@@ -121,6 +123,11 @@ Q_SIGNALS:
      * the search text should be treated as a plain string or a regular expression
      */
     void matchRegExpToggled(bool);
+    /**
+     * Emitted when the user toggles the checkbox to indicate whether
+     * the search should stop instead of wrapping.
+     */
+    void noWrapToggled(bool);
     /** Emitted when the close button is clicked */
     void closeClicked();
     /** Emitted when the return button is pressed in the search box */
@@ -148,6 +155,7 @@ private:
     QAction *_regExpression;
     QAction *_highlightMatches;
     QAction *_reverseSearch;
+    QAction *_noWrap;
     QToolButton *_findNextButton;
     QToolButton *_findPreviousButton;
     QToolButton *_searchFromButton;

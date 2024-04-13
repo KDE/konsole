@@ -343,9 +343,10 @@ private:
     // text - pattern to search for
     // direction - value from SearchHistoryTask::SearchDirection enum to specify
     //             the search direction
-    void beginSearch(const QString &text, Enum::SearchDirection direction);
+    void beginSearch(const QString &text, Enum::SearchDirection direction, bool noWrap);
     QRegularExpression regexpFromSearchBarOptions() const;
     bool reverseSearchChecked() const;
+    bool noWrapChecked() const;
     void setupCommonActions();
     void setupExtraActions();
     void removeSearchFilter(); // remove and delete the current search filter if set

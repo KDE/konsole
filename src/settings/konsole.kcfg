@@ -79,6 +79,11 @@
       <tooltip>Sets whether search should start from the bottom</tooltip>
       <default>true</default>
     </entry>
+    <entry name="SearchNoWrap" type="Bool">
+      <label>Search stops instead of wrapping</label>
+      <tooltip>Sets whether search should stop instead of wrapping</tooltip>
+      <default>false</default>
+    </entry>
   </group>
   <group name="MemorySettings">
     <entry name="EnableMemoryMonitoring" type="Bool">

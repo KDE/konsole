@@ -58,6 +58,11 @@ public:
     /** Returns the current search direction.  See setSearchDirection(). */
     Enum::SearchDirection searchDirection() const;
 
+    /** Specifies if search should wrap when execute() is called. */
+    void setNoWrap(bool noWrap);
+    /** Returns the current noWrap value.  See setNoWrap(). */
+    bool noWrap() const;
+
     /** The line from which the search will be done **/
     void setStartLine(int line);
 
@@ -82,6 +87,7 @@ private:
     QMap<QPointer<Session>, ScreenWindowPtr> _windows;
     QRegularExpression _regExp;
     Enum::SearchDirection _direction;
+    bool _noWrap;
     int _startLine;
 };
 

@@ -43,14 +43,18 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
 
     if (!_regExp.pattern().isEmpty()) {
         int pos = -1;
-        const bool forwards = (_direction == Enum::ForwardsSearch);
+        bool forwards = (_direction == Enum::ForwardsSearch);
         const int lastLine = window->lineCount() - 1;
 
-        int startLine;
+        int startLine = _startLine;
         if (forwards && (_startLine == lastLine)) {
-            startLine = 0;
+            if (!_noWrap) {
+                startLine = 0;
+            }
         } else if (!forwards && (_startLine == 0)) {
-            startLine = lastLine;
+            if (!_noWrap) {
+                startLine = lastLine;
+            }
         } else {
             startLine = _startLine + (forwards ? 1 : -1);
         }
@@ -144,6 +148,15 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
                 return;
             }
 
+            // if noWrap is checked and we wrapped, set cursor at last match
+            if (hasWrapped && _noWrap) {
+                // invert search direction
+                forwards = !forwards;
+                delta = -delta;
+                endLine += (forwards ? 1 : -1);
+                hasWrapped = false;
+            }
+
             // clear the current block of text and move to the next one
             string.clear();
             line = endLine;
@@ -211,6 +224,15 @@ QRegularExpression SearchHistoryTask::regExp() const
     return _regExp;
 }
 
+void SearchHistoryTask::setNoWrap(bool noWrap)
+{
+    _noWrap = noWrap;
+}
+
+bool SearchHistoryTask::noWrap() const
+{
+    return _noWrap;
+}
 }
 
 #include "moc_SearchHistoryTask.cpp"
