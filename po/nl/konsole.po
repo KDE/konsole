@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-13 00:41+0000\n"
-"PO-Revision-Date: 2024-04-09 15:46+0200\n"
+"PO-Revision-Date: 2024-04-13 10:37+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2672,16 +2672,16 @@ msgstr "Achterwaarts zoeken"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Stelt in of zoeken moet beginnen vanaf beneden"
+msgstr ""
+"Stelt in of zoeken moet stoppen in plaats van van voren af weer verder gaan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Niet van voren af verder gaan"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2764,7 +2764,7 @@ msgstr "Bepaalt of overeenkomende tekst moet worden geaccentueerd"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Zoeken stopt in plaats van van voren af weer verder te gaan"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
@@ -5341,14 +5341,14 @@ msgstr "Stelt in of zoeken moet beginnen vanaf beneden"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Niet van voren af verder gaan"
 
 #: widgets/IncrementalSearchBar.cpp:143
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Stelt in of zoeken moet beginnen vanaf beneden"
+msgstr ""
+"Stelt in of zoeken moet stoppen in plaats van van voren af weer verder gaan"
 
 #: widgets/IncrementalSearchBar.cpp:172
 #, kde-format

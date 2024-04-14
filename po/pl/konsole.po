@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-13 00:41+0000\n"
-"PO-Revision-Date: 2024-04-01 08:06+0200\n"
+"PO-Revision-Date: 2024-04-13 19:36+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -2674,16 +2674,15 @@ msgstr "Szukaj wstecz"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Określa, czy wyszukiwanie powinno zaczynać się od dołu"
+msgstr "Określa, czy zatrzymać wyszukiwanie zamiast zacząć znowu od początku"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Nie zaczynaj znowu od początku"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2766,7 +2765,7 @@ msgstr "Określa, czy znaleziony tekst ma być zaznaczony"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Wyszukiwanie zatrzyma się zamiast zacząć znowu od początku"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
@@ -3034,17 +3033,15 @@ msgstr "Poniżej obszaru termina&la"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "Poniżej obszaru termina&la"
+msgstr "Po lewej od obszaru terminala"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "Poniżej obszaru termina&la"
+msgstr "Po p&rawej od obszaru terminala"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3054,10 +3051,9 @@ msgstr "Pokaż przycisk zamknięcia karty:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "&Na każdej karcie"
+msgstr "Na każdej kar&cie"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
@@ -3873,20 +3869,18 @@ msgstr "Użyj znaków wiersza zawartych w czcionce"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr "Użyj wybranej czcionki dla znaków wiersza zamiast wbudowanego kodu"
+msgstr ""
+"Użyj wybranej czcionki dla znaków unikodu Brajla zamiast wbudowanego kodu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Użyj znaków wiersza zawartych w czcionce"
+msgstr "Użyj znaków unikodu Brajla zawartych w czcionce"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -5336,14 +5330,13 @@ msgstr "Określa, czy wyszukiwanie powinno zaczynać się od dołu"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Nie zaczynaj znowu od początku"
 
 #: widgets/IncrementalSearchBar.cpp:143
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Określa, czy wyszukiwanie powinno zaczynać się od dołu"
+msgstr "Określa, czy zatrzymać wyszukiwanie zamiast zacząć znowu od początku"
 
 #: widgets/IncrementalSearchBar.cpp:172
 #, kde-format

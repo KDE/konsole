@@ -4397,11 +4397,9 @@ msgid "Select Initial Directory"
 msgstr "Pilih Direktori Awal"
 
 #: widgets/EditProfileDialog.cpp:941
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "Get New..."
-msgstr "Baru..."
+msgstr "Cari Baru..."
 
 #: widgets/EditProfileDialog.cpp:1337
 #, kde-kuit-format

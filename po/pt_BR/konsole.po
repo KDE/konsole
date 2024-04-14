@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-13 00:41+0000\n"
-"PO-Revision-Date: 2024-01-22 10:32-0300\n"
+"PO-Revision-Date: 2024-04-13 01:14-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -704,11 +704,10 @@ msgid "Deselect All"
 msgstr "Desmarcar tudo"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Color from theme"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Cor do tema"
+msgstr "Visualização da cor"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -2265,17 +2264,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Limpar histórico e reiniciar"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Editar perfil"
+msgstr "Próximo perfil"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Anterior"
+msgstr "Perfil anterior"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -2288,18 +2284,13 @@ msgid "Set &Encoding"
 msgstr "Definir &codificação"
 
 #: session/SessionController.cpp:812
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Permitir rastreio de mouse"
 
 #: session/SessionController.cpp:821
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Somente leitura"
@@ -2336,16 +2327,14 @@ msgid "&ZModem Upload..."
 msgstr "Enviar por &ZModem..."
 
 #: session/SessionController.cpp:872
-#, fuzzy, kde-format
-#| msgid "One-shot monitors"
+#, kde-format
 msgid "One-Shot Monitors"
 msgstr "Monitores únicos"
 
 #: session/SessionController.cpp:877
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Monitor para &atividades"
+msgstr "Monitor para &prompot"
 
 #: session/SessionController.cpp:884
 #, kde-format
