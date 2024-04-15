@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-13 00:41+0000\n"
-"PO-Revision-Date: 2024-04-09 07:06+0200\n"
+"PO-Revision-Date: 2024-04-14 05:52+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2643,16 +2643,15 @@ msgstr "უკან ძებნა"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "უნდა დაიწყოს თუ არა ძებნა ბოლოდან"
+msgstr "მიუთითებს, უნდა გაჩერდეს თუ არა ძებნა თავიდან დაწყების მაგიერ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "თავიდან დაწყების გარეშე"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2733,7 +2732,7 @@ msgstr "აყენებს, უნდა გამოიკვეთოს �
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "ძებნა გაჩერდება თავიდან დაწყების მაგიერ"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
@@ -5296,14 +5295,13 @@ msgstr "უნდა დაიწყოს თუ არა ძებნა ბ�
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "თავიდან დაწყების გარეშე"
 
 #: widgets/IncrementalSearchBar.cpp:143
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "უნდა დაიწყოს თუ არა ძებნა ბოლოდან"
+msgstr "უნდა დაიწყოს თუ არა ძებნა ბოლოდან გაჩერების მაგიერ"
 
 #: widgets/IncrementalSearchBar.cpp:172
 #, kde-format
