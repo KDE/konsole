@@ -8,20 +8,20 @@
 # Svanur Palsson <svanur@tern.is>, 2004.
 # Arnar Leosson <leosson@frisurf.no>, 2004, 2005.
 # Sveinn í Felli <sveinki@nett.is>, 2009, 2010, 2011, 2016, 2023.
-# gummi <gudmundure@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 gummi <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-13 00:41+0000\n"
-"PO-Revision-Date: 2023-03-21 14:28+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
-"Language-Team: Icelandic\n"
+"PO-Revision-Date: 2024-04-14 18:15+0000\n"
+"Last-Translator: Gummi <gudmundure@gmail.com>\n"
+"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -696,11 +696,10 @@ msgid "Deselect All"
 msgstr "Afvelja allt"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Forsýning:"
+msgstr "Forskoðun á lit"
 
 #: filterHotSpots/FileFilterHotspot.cpp:160
 #, kde-format
@@ -1292,7 +1291,7 @@ msgstr "Almennt"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Minni"
 
 #: MainWindow.cpp:902
 #, kde-format
@@ -1628,7 +1627,7 @@ msgstr "Eyða SSH-grunnstillingum"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Flutti inn SSH-forsnið <br/> Sumar stillingar eru skrifvarðar."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
 #, kde-format
@@ -1890,7 +1889,7 @@ msgstr "&Kvarða úttak"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Innbyggt"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
 #, kde-format
@@ -1898,11 +1897,10 @@ msgid "Default profile"
 msgstr "Sjálfgefinn prófíll"
 
 #: profile/ProfileManager.cpp:280
-#, fuzzy, kde-format
-#| msgid "Edit Profile \"%1\""
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Breyta sniði \"%1\""
+msgstr "Prófíll \"%1\""
 
 #: profile/ProfileManager.cpp:294
 #, kde-format
@@ -2254,17 +2252,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Hreinsa afturrakningu og endurstilla"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Breyta prófíl"
+msgstr "Næsti prófíll"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Fyrra"
+msgstr "Fyrri prófíll"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -2277,18 +2272,13 @@ msgid "Set &Encoding"
 msgstr "Velja stafa&töflu"
 
 #: session/SessionController.cpp:812
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Leyfa músarrakningu"
 
 #: session/SessionController.cpp:821
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Skrifvarið"
@@ -2327,28 +2317,27 @@ msgstr "&ZModem-upphleðsla..."
 #: session/SessionController.cpp:872
 #, kde-format
 msgid "One-Shot Monitors"
-msgstr ""
+msgstr "Einnota vaktarar (One-Shot)"
 
 #: session/SessionController.cpp:877
-#, fuzzy, kde-format
-#| msgid "Monitor for &Activity"
+#, kde-format
 msgid "Monitor for &Prompt"
-msgstr "Fylgj&ast með virkni"
+msgstr "Vakta &kvaðningu"
 
 #: session/SessionController.cpp:884
 #, kde-format
 msgid "Monitor for &Activity"
-msgstr "Fylgj&ast með virkni"
+msgstr "Vakta &virkni"
 
 #: session/SessionController.cpp:890
 #, kde-format
 msgid "Monitor for &Silence"
-msgstr "&Vakta þögn"
+msgstr "Vakta &þögn"
 
 #: session/SessionController.cpp:896
 #, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "Leita eftir &vinnslu sem er að ljúka"
+msgstr "Vakta eftir &vinnslu sem er að ljúka"
 
 #: session/SessionController.cpp:903
 #, kde-format
@@ -2475,7 +2464,7 @@ msgstr "Drepa forrit"
 #: session/SessionController.cpp:1845
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr ""
+msgstr "Skeljakvaðningin er birt í setu '%1'"
 
 #: session/SessionController.cpp:2038
 #, kde-format
@@ -2665,16 +2654,15 @@ msgstr "Leita afturábak"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Velur hvort leitað er neðan frá og upp"
+msgstr "Velur hvort leitin stöðvast í stað þess að halda áfram hringinn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Ekki fara hringinn"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2755,20 +2743,20 @@ msgstr "Stillir hvort texti sem passar verði áherslulitaður"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Leita stöðvast í stað þess að halda áfram hringinn"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr ""
+msgstr "Stjórnar því hvort cgroups séu búin til fyrir staka flipa"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:94
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "Skilgreinir minnisnotkunarstigið þar sem takmarkanir hefjast"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2863,10 +2851,9 @@ msgstr "Nota þessa möppu undir afturrakningarskrár"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Vöktun flipa"
+msgstr "Virkja minnisvöktun :"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2880,18 +2867,25 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Breytingar ganga í gegn eftir endurræsingu. Ef þetta er virkjað veldurstöðug "
+"minnisnotkun Konsole,\n"
+"fari hún yfir tiltekið gildi, því að systemd-oomd lokar flipunum sem "
+"innihalda\n"
+"vinnslurnar sem krefjast svo mikils minnis. Athugaðu: ef þetta\n"
+"er virkjað gæti það valdið meiri hægagangi þegar mikið minni er notað og\n"
+"ef of lágt gildi er tilgreint getur það valdið því að Konsole sé drepið."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Minnistakmörk:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3011,28 +3005,25 @@ msgstr "Fyrir neðan skjáhermisvæðið"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "Fyrir neðan skjáhermisvæðið"
+msgstr "Vinstra megin við skjáhermisvæðið"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "Fyrir neðan skjáhermisvæðið"
+msgstr "Hæg&ra megin skjáhermisvæðið"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
 #, kde-format
 msgid "Show Close Tab button:"
-msgstr "Sýna hnappinn Loka flipa:"
+msgstr "Sýna lokunarhnapp flipa:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
 msgstr "Á &öllum flipum"
 
@@ -3538,20 +3529,16 @@ msgid "Toggle maximize current view"
 msgstr "Víxla fullstækkun núverandi skeljaglugga"
 
 #: ViewManager.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Víxla fullstækkun núverandi skeljaglugga"
+msgstr "Víxla fullstækkun og aðdrætti núverandi skeljaglugga"
 
 #: ViewManager.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Víxla fullstækkun núverandi skeljaglugga"
+msgstr "Víxla fullstækkun og aðdrætti núverandi skeljaglugga"
 
 #: ViewManager.cpp:313
 #, kde-format
@@ -3854,20 +3841,18 @@ msgstr "Nota línustafi sem letrið inniheldur"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr "Nota valda letrið fyrir línustafi í stað innbyggða kóðans"
+msgstr ""
+"Nota valda letrið fyrir unicode Braille-staftákn í stað innbyggða kóðans"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Nota línustafi sem letrið inniheldur"
+msgstr "Nota unicode Braille-staftákn sem letrið inniheldur"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4021,19 +4006,16 @@ msgstr "Styrkur dimmu:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:543
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Litur:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:559
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Veldu litinn sem á að nota til að teikna bendilinn"
+msgstr "Veldu litinn sem á að nota til að teikna rammann"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:581
@@ -4043,10 +4025,9 @@ msgstr "Óvirkir skjáhermar:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:591
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Óvirkir skjáhermar:"
+msgstr "Virkir skjáhermar:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:601
@@ -4102,16 +4083,15 @@ msgstr "Dimma"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:753
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Sýna hvort glugginn sé virkur með því að dimma litina"
+msgstr "Sýna hvort glugginn sé virkur með því að teikna ramma"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:756
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Rammi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:798
@@ -4303,13 +4283,13 @@ msgstr "Prófíll sem heitir \"%1\" er þegar til staðar."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Nafn prófílsins er lengra en leyfilegt er (%1)."
 
 #: widgets/EditProfileDialog.cpp:375
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Áherslulituðu stafirnir eru ógildir í prófílnöfnum: %1."
 
 #: widgets/EditProfileDialog.cpp:411
 #, kde-format
@@ -4397,11 +4377,9 @@ msgid "Select Initial Directory"
 msgstr "Veldu upphafsmöppu"
 
 #: widgets/EditProfileDialog.cpp:941
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "Get New..."
-msgstr "Nýtt..."
+msgstr "Sækja nýtt..."
 
 #: widgets/EditProfileDialog.cpp:1337
 #, kde-kuit-format
@@ -4428,10 +4406,9 @@ msgstr ""
 "endurræsa Konsole til að sjá gagnsæjan bakgrunn."
 
 #: widgets/EditProfileDialog.cpp:1890
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Sjálfgefinn prófíll"
+msgstr "Sjálfgefið fyrir skrárgerð"
 
 #: widgets/EditProfileDialog.cpp:1916
 #, kde-format
@@ -5312,14 +5289,13 @@ msgstr "Stillir hvort leitin á að byrja neðst"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Ekki fara hringinn"
 
 #: widgets/IncrementalSearchBar.cpp:143
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Velur hvort leitað er neðan frá og upp"
+msgstr "Velur hvort leitin stöðvast í stað þess að halda áfram hringinn"
 
 #: widgets/IncrementalSearchBar.cpp:172
 #, kde-format
