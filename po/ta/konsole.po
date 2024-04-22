@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-13 00:41+0000\n"
-"PO-Revision-Date: 2024-03-30 21:55+0530\n"
+"PO-Revision-Date: 2024-04-21 22:09+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2644,16 +2644,16 @@ msgstr "பின்னோக்கித் தேடு"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "தேடல் கீழிலிருந்து துவங்க வேண்டுமா என்பதை அமைக்கும்"
+msgstr ""
+"கீழ் மற்றும் மேல் எல்லைகளில் தேடல் சுழல வேண்டுமா அல்லது நிற்க வேண்டுமா என்பதை அமைக்கும்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "சுழலாதே"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2734,7 +2734,7 @@ msgstr "பொருந்தும் உரை முன்னிலைப்�
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "தேடல் சுழலாமல் நிற்கும்"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
@@ -2998,17 +2998,15 @@ msgstr "முனையப்பகுதிக்கு அடியில்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "முனையப்பகுதிக்கு அடியில்"
+msgstr "முனையப்பகுதியின் இடதில்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "முனையப்பகுதிக்கு அடியில்"
+msgstr "முனையப்பகுதியின் &வலதில்"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3018,8 +3016,7 @@ msgstr "கீற்றை முடுவதற்கான பட்டனை 
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
 msgstr "ஒவ்வொரு &கீற்றிலும்"
 
@@ -5280,14 +5277,14 @@ msgstr "தேடல் கீழிலிருந்து துவங்க 
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "சுழலாதே"
 
 #: widgets/IncrementalSearchBar.cpp:143
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "தேடல் கீழிலிருந்து துவங்க வேண்டுமா என்பதை அமைக்கும்"
+msgstr ""
+"கீழ் மற்றும் மேல் எல்லைகளில் தேடல் சுழல வேண்டுமா அல்லது நிற்க வேண்டுமா என்பதை அமைக்கும்"
 
 #: widgets/IncrementalSearchBar.cpp:172
 #, kde-format
