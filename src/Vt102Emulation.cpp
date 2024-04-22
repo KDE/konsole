@@ -78,6 +78,7 @@ Vt102Emulation::Vt102Emulation()
     imageId = 0;
     savedKeys = QMap<char, qint64>();
     tokenData = QByteArray();
+    m_currentImage = QImage();
 
     for (int i = 0; i < 256; i++) {
         colorTable[i] = QColor();
