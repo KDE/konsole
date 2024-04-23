@@ -270,6 +270,52 @@
      </item>
     </layout>
    </item>
+          <item row="20" column="0" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="label_linenums">
+               <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                   </sizepolicy>
+               </property>
+               <property name="text">
+                   <string>Line Numbers:</string>
+               </property>
+               <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+           </widget>
+       </item>
+       <item row="20" column="1">
+           <widget class="QRadioButton" name="lineNumsNever">
+               <property name="text">
+                   <string comment="Never">Never</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">lineNums</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="21" column="1">
+           <widget class="QRadioButton" name="lineNumsURL">
+               <property name="text">
+                   <string comment="When showing URL hints">When URL hints show</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">lineNums</string>
+               </attribute>
+           </widget>
+       </item>
+       <item row="22" column="1">
+           <widget class="QRadioButton" name="lineNumsAlways">
+               <property name="text">
+                   <string comment="Always">Always</string>
+               </property>
+               <attribute name="buttonGroup">
+                   <string notr="true">lineNums</string>
+               </attribute>
+           </widget>
+       </item>
    <item>
     <spacer>
      <property name="orientation">
@@ -290,7 +336,13 @@
   <tabstop>urlHintsModifierCtrl</tabstop>
   <tabstop>urlHintsModifierAlt</tabstop>
   <tabstop>urlHintsModifierMeta</tabstop>
+  <tabstop>lineNumsNever</tabstop>
+  <tabstop>lineNumsAlways</tabstop>
+  <tabstop>lineNumsURL</tabstop>
  </tabstops>
+  <buttongroups>
+   <buttongroup name="lineNums"/>
+  </buttongroups>
  <resources/>
  <connections/>
 </ui>
