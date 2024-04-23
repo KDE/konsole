@@ -34,6 +34,7 @@
   <name xml:lang="ka">Konsole</name>
   <name xml:lang="ko">Konsole</name>
   <name xml:lang="lt">Konsolė</name>
+  <name xml:lang="lv">Konsole</name>
   <name xml:lang="ml">കൺസോൾ</name>
   <name xml:lang="nb">Konsole</name>
   <name xml:lang="nl">Konsole</name>
@@ -88,6 +89,7 @@
   <summary xml:lang="ka">ტერმინალი</summary>
   <summary xml:lang="ko">터미널</summary>
   <summary xml:lang="lt">Terminalas</summary>
+  <summary xml:lang="lv">Terminālis</summary>
   <summary xml:lang="ml">ടെർമിനൽ</summary>
   <summary xml:lang="nb">Terminal</summary>
   <summary xml:lang="nl">Terminal</summary>
@@ -131,7 +133,7 @@
     <p xml:lang="fi">Konsole on pääte komentotulkkia varten. Se tarjoaa komentorivikäyttöliittymän tietokoneen hallitsemiseksi.</p>
     <p xml:lang="fr">Konsole est un terminal pour lancer une invite de commande. Il fournit une interface de ligne de commande pour contrôler directement votre ordinateur.</p>
     <p xml:lang="gl">Konsole é un terminal para executar un intérprete de ordes. Fornece unha interface de liña de ordes para controlar directamente o computador.</p>
-    <p xml:lang="he">Konsole הוא מסוף להרצת מעטפת פקודות. הוא מספק מנשק שורת פקודה לשליטה ישירה במחשב שלך.</p>
+    <p xml:lang="he">Konsole הוא מסוף להרצת מעטפת פקודות. הוא מספק ממשק שורת פקודה לשליטה ישירה במחשב שלך.</p>
     <p xml:lang="hu">A Konsole egy terminál parancsértelmezők futtatásához. Parancssosor felületet biztosít a számítógépe közvetlen irányításához.</p>
     <p xml:lang="ia">Konsole es un terminal pro executar un shell de commando.  Illo provide un interfacie de linea de commando pro controlar directemente tu computator.</p>
     <p xml:lang="id">Konsole adalah sebuah terminal untuk menjalankan shell perintah. Ini menyediakan antarmuka baris perintah untuk secara langsung mengendalikan komputer Anda.</p>
@@ -140,6 +142,7 @@
     <p xml:lang="it">Konsole è un terminale per eseguire una shell di comandi. Fornisce un'interfaccia a riga di comando per controllare direttamente il tuo computer.</p>
     <p xml:lang="ka">Konsole წარმადგენს ტერმინალს ბრძანების სტრიქონის გარსის გასაშვებად. ის მოგაწოდებთ ბრძანების სტრიქონის ინტერფეისს, რომლითაც შეგიძლიათ თქვენი კომპიუტერი პირდაპირ აკონტროლოთ.</p>
     <p xml:lang="ko">Konsole은 흔히 터미널, 혹은 셸이라고 불리는 X 터미널 에뮬레이터입니다. 텍스트 창에서 컴퓨터를 직접 재현하는 명령행 인터페이스를 재현합니다.</p>
+    <p xml:lang="lv">„Konsole“ ir termināļa programma komandu čaulas palaišanai. Tā nodrošina komandrindas saskarni tiešai datora kontrolei.</p>
     <p xml:lang="ml">കൺസോൾ എന്നത് ആജ്ഞ ഷെൽ റൺ ചെയ്യുന്നതിനുള്ള ഒരു ടെർമിനലാണ്. ഇത് കമ്പ്യൂട്ടറിനെ നേരിട്ട് നിയന്ത്രിക്കുന്നതിനുള്ള ഒരു ആജ്ഞാസ്ഥാനം നല്‍കുന്നു.</p>
     <p xml:lang="nl">Konsole is een terminal om een opdrachtshell uit te voeren. Het biedt een interface voor een opdrachtregel voor directe besturing van uw computer.</p>
     <p xml:lang="nn">Konsole er ein terminal for å køyra kommandolinjeprogram. Han gjev altså eit tekstbasert grensesnitt til datamaskina.</p>
@@ -187,6 +190,7 @@
     <p xml:lang="ka">თვისებები:</p>
     <p xml:lang="ko">기능:</p>
     <p xml:lang="lt">Ypatybės:</p>
+    <p xml:lang="lv">Iespējas:</p>
     <p xml:lang="ml">വിശേഷതകൾ:</p>
     <p xml:lang="nb">Funksjoner:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
@@ -241,6 +245,7 @@
       <li xml:lang="ka">დაფები</li>
       <li xml:lang="ko">탭</li>
       <li xml:lang="lt">Kortelės</li>
+      <li xml:lang="lv">Cilnes</li>
       <li xml:lang="ml">ടാബുകൾ</li>
       <li xml:lang="nb">Faner</li>
       <li xml:lang="nl">Tabbladen</li>
@@ -293,6 +298,7 @@
       <li xml:lang="ka">სხვადასხვა პროფაილები</li>
       <li xml:lang="ko">다중 프로필</li>
       <li xml:lang="lt">Daugybė profilių</li>
+      <li xml:lang="lv">Vairāki profili</li>
       <li xml:lang="ml">അനേക രൂപങ്ങൾ</li>
       <li xml:lang="nb">Flere profiler</li>
       <li xml:lang="nl">Meerdere profielen</li>
@@ -344,6 +350,7 @@
       <li xml:lang="it">Monitoraggio del silenzio e dell'attività</li>
       <li xml:lang="ka">სიჩუმისა და აქტივობის მონიტორინგი</li>
       <li xml:lang="ko">침묵 및 활동 모니터링</li>
+      <li xml:lang="lv">Klusums un aktivitāšu pārraudzība</li>
       <li xml:lang="ml">നിശ്ശബ്ദതയും പ്രവൃത്തി നിരീക്ഷണവും</li>
       <li xml:lang="nb">Overvåking av stillhet og aktivitet</li>
       <li xml:lang="nl">Monitoring van stilte en activiteit</li>
@@ -395,6 +402,7 @@
       <li xml:lang="it">Supporto dei segnalibri</li>
       <li xml:lang="ka">სანიშნეების მხარდაჭერა</li>
       <li xml:lang="ko">책갈피 지원</li>
+      <li xml:lang="lv">Grāmatzīmju atbalsts</li>
       <li xml:lang="ml">ഓര്‍മ്മക്കുറിപ്പു് സംവിദാനം</li>
       <li xml:lang="nb">Støtte for bokmerker</li>
       <li xml:lang="nl">Ondersteuning van bladwijzers</li>
@@ -447,6 +455,7 @@
       <li xml:lang="ka">ძებნა</li>
       <li xml:lang="ko">찾기</li>
       <li xml:lang="lt">Paieška</li>
+      <li xml:lang="lv">Meklēšana</li>
       <li xml:lang="ml">തിരയൽ</li>
       <li xml:lang="nb">Søking</li>
       <li xml:lang="nl">Zoeken</li>
@@ -499,6 +508,7 @@
       <li xml:lang="ka">გამოტანის შენახვა</li>
       <li xml:lang="ko">출력 저장</li>
       <li xml:lang="lt">Išvesties įrašymas</li>
+      <li xml:lang="lv">Izvades saglabāšana</li>
       <li xml:lang="ml">ഫലം സൂക്ഷിക്കുക</li>
       <li xml:lang="nb">Lagrer utdata</li>
       <li xml:lang="nl">Opslaan van uitvoer</li>
@@ -559,9 +569,11 @@
       <caption xml:lang="it">Konsole utilizzata come un emulatore di terminale</caption>
       <caption xml:lang="ka">Konsole გამოიყენება, როგორც ტერმინალის ემულატორი</caption>
       <caption xml:lang="ko">터미널 에뮬레이터로 사용 중인 Konsole</caption>
+      <caption xml:lang="lv">„Konsole“ kā termināļa emulators</caption>
       <caption xml:lang="ml">കൺസോൾ നിലവിൽ ടെർമിനൽ അനുകരിക്കുന്നതിനായി ഉപയോഗിക്കുന്നു</caption>
       <caption xml:lang="nl">Konsole wordt gebruikt als een terminalemulator</caption>
       <caption xml:lang="nn">Konsole brukt som ein terminalemulator</caption>
+      <caption xml:lang="pa">ਕੇ-ਨਸੋਲ ਵਰਤਣ ਲਈ ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ ਹੈ</caption>
       <caption xml:lang="pl">Konsole używana jako emulator terminala</caption>
       <caption xml:lang="pt">O Konsole a ser usado como um emulador de terminal</caption>
       <caption xml:lang="pt-BR">Konsole sendo usado como emulador de terminal</caption>
