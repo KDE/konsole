@@ -1981,6 +1981,19 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
 
     _advancedUi->peekPrimaryWidget->setKeySequence(profile->peekPrimaryKeySequence());
     connect(_advancedUi->peekPrimaryWidget, &QKeySequenceEdit::editingFinished, this, &EditProfileDialog::peekPrimaryKeySequenceChanged);
+
+    const ButtonGroupOptions lineNums = {
+        _advancedUi->lineNums, // group
+        Profile::LineNumbers, // profileProperty
+        false, // preview
+        {
+            // buttons
+            {_advancedUi->lineNumsNever, Enum::HintsNever},
+            {_advancedUi->lineNumsURL, Enum::HintsURL},
+            {_advancedUi->lineNumsAlways, Enum::HintsAlways},
+        },
+    };
+    setupButtonGroup(lineNums, profile);
 }
 
 int EditProfileDialog::maxSpinBoxWidth(const KPluralHandlingSpinBox *spinBox, const KLocalizedString &suffix)
