@@ -282,15 +282,9 @@ void ProfileTest::testLoadProfileNamedAsBuiltin()
     Profile::Ptr builtin = Profile::Ptr(new Profile);
     builtin->useBuiltin();
 
-    QString profileStr = QStringLiteral(
-        "[General]\n"
-        "Icon=terminator\n"
-        "Name=Built-in\n"
-        "Parent=FALLBACK/\n");
-
-    QTemporaryFile file(QStringLiteral("konsole.XXXXXX.profile"));
-    QVERIFY(file.open());
-    QTextStream(&file) << profileStr;
+    auto profileName = QFINDTESTDATA(QStringLiteral("data/named-built-in.profile"));
+    QFile file(profileName);
+    QVERIFY(file.exists());
 
     Profile::Ptr profile = Profile::Ptr(new Profile(builtin));
 
@@ -308,14 +302,9 @@ void ProfileTest::testInvalidParentProfile()
 {
     auto *manager = ProfileManager::instance();
 
-    QString profileStr = QStringLiteral(
-        "[General]\n"
-        "Name=TestInvalidParentProfile\n"
-        "Parent=/this/doesnt/exist/X.profile/\n");
-
-    QTemporaryFile file(QStringLiteral("konsole.XXXXXX.profile"));
-    QVERIFY(file.open());
-    QTextStream(&file) << profileStr;
+    auto profileName = QFINDTESTDATA(QStringLiteral("data/invalid-parent.profile"));
+    QFile file(profileName);
+    QVERIFY(file.exists());
 
     auto profile = manager->loadProfile(file.fileName());
     QVERIFY(profile);
