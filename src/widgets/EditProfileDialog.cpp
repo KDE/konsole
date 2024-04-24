@@ -333,6 +333,12 @@ bool EditProfileDialog::isProfileNameValid()
 
     nameLenMax -= QStringLiteral(".profile").size();
 
+    // doesn't work on macOS and maybe other systems so make sure we have a sane value always
+    // See https://mail.kde.org/pipermail/kwrite-devel/2024-April/007139.html
+    if (nameLenMax < 0) {
+        nameLenMax = 100;
+    }
+
     if (_tempProfile->name().size() > nameLenMax) {
         setMessageGeneralPage(i18nc("@info", "Profile name exceeded maximum allowed length (%1).", nameLenMax));
         // Revert the name in the dialog
