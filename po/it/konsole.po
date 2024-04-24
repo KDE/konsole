@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-13 00:41+0000\n"
-"PO-Revision-Date: 2024-04-02 14:35+0200\n"
+"POT-Creation-Date: 2024-04-24 02:58+0000\n"
+"PO-Revision-Date: 2024-04-15 11:13+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2095,7 +2095,7 @@ msgstr "Silenzio in «%1» (sessione «%2»)"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, kde-format
 msgid "Show session"
 msgstr "Mostra la sessione"
@@ -2663,16 +2663,16 @@ msgstr "Cerca all'indietro"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Imposta se la ricerca debba cominciare dalla fine"
+msgstr ""
+"Imposta se la ricerca deve interrompersi invece di riprendere dall'inizio"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Non riprendere dall'inizio"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2758,7 +2758,7 @@ msgstr "Imposta se il testo corrispondente dovrebbe essere evidenziato"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "La ricerca si interrompe invece di riprendere dall'inizio"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
@@ -3020,27 +3020,25 @@ msgstr "Posizione:"
 #: settings/TabBarSettings.ui:119
 #, kde-format
 msgid "Above terminal area"
-msgstr "Sopra l'area dei terminali"
+msgstr "Sopra l'area del terminale"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
 #: settings/TabBarSettings.ui:129
 #, kde-format
 msgid "Be&low terminal area"
-msgstr "Sotto &l'area dei terminali"
+msgstr "Sotto &l'area del terminale"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "Sotto &l'area dei terminali"
+msgstr "Alla sinistra dell'area del terminale"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "Sotto &l'area dei terminali"
+msgstr "Alla destra dell'a&rea del terminale"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3050,10 +3048,9 @@ msgstr "Mostra pulsante Chiudi scheda:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "Su &ogni scheda"
+msgstr "Su ogni s&cheda"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
@@ -3656,7 +3653,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carica la disposizione delle schede"
 
-#: Vt102Emulation.cpp:2469
+#: Vt102Emulation.cpp:2470
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3772,6 +3769,55 @@ msgstr "Codifica dei caratteri predefinita:"
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
 msgstr "Scorciatoia per dare un'occhiata alla schermata principale:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_linenums)
+#: widgets/EditProfileAdvancedPage.ui:282
+#, fuzzy, kde-format
+#| msgid "Line numbers "
+msgid "Line Numbers:"
+msgstr "Numeri di riga "
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
+#: widgets/EditProfileAdvancedPage.ui:292 widgets/EditProfileGeneralPage.ui:413
+#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
+#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
+#, kde-format
+msgctxt "Never"
+msgid "Never"
+msgstr "Mai"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
+#: widgets/EditProfileAdvancedPage.ui:302 widgets/EditProfileGeneralPage.ui:423
+#: widgets/EditProfileGeneralPage.ui:469 widgets/EditProfileGeneralPage.ui:515
+#: widgets/EditProfileGeneralPage.ui:561 widgets/EditProfileGeneralPage.ui:607
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr "Quando vengono visualizzati i suggerimenti degli URL"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
+#: widgets/EditProfileAdvancedPage.ui:312 widgets/EditProfileGeneralPage.ui:433
+#: widgets/EditProfileGeneralPage.ui:479 widgets/EditProfileGeneralPage.ui:525
+#: widgets/EditProfileGeneralPage.ui:571 widgets/EditProfileGeneralPage.ui:617
+#, kde-format
+msgctxt "Always"
+msgid "Always"
+msgstr "Sempre"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -4628,45 +4674,6 @@ msgstr "Il clic del mouse nella riga di immissione sposta il cursore"
 msgid "Semantic hints:"
 msgstr "Suggerimenti semantici:"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
-#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
-#: widgets/EditProfileGeneralPage.ui:597
-#, kde-format
-msgctxt "Never"
-msgid "Never"
-msgstr "Mai"
-
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
-#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
-#: widgets/EditProfileGeneralPage.ui:607
-#, kde-format
-msgctxt "When showing URL hints"
-msgid "When URL hints show"
-msgstr "Quando vengono visualizzati i suggerimenti degli URL"
-
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
-#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
-#: widgets/EditProfileGeneralPage.ui:617
-#, kde-format
-msgctxt "Always"
-msgid "Always"
-msgstr "Sempre"
-
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:449
 #, kde-format
@@ -5342,14 +5349,14 @@ msgstr "Imposta se la ricerca debba cominciare dalla fine"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Non riprendere dall'inizio"
 
 #: widgets/IncrementalSearchBar.cpp:143
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Imposta se la ricerca debba cominciare dalla fine"
+msgstr ""
+"Imposta se la ricerca deve interrompersi invece di riprendere dall'inizio"
 
 #: widgets/IncrementalSearchBar.cpp:172
 #, kde-format

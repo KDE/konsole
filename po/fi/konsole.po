@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-13 00:41+0000\n"
+"POT-Creation-Date: 2024-04-24 02:58+0000\n"
 "PO-Revision-Date: 2024-02-14 18:48+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2104,7 +2104,7 @@ msgstr "Hiljaisuus päätteessä ”%1” (istunto ”%2”)"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1148
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, kde-format
 msgid "Show session"
 msgstr "Näytä istunto"
@@ -3650,7 +3650,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Lataa välilehtiasettelu"
 
-#: Vt102Emulation.cpp:2469
+#: Vt102Emulation.cpp:2470
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3764,6 +3764,55 @@ msgstr "Oletusmerkistökoodaus:"
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
 msgstr "Pikanäppäin ensisijaisen näytön vilkaisemiseksi:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_linenums)
+#: widgets/EditProfileAdvancedPage.ui:282
+#, fuzzy, kde-format
+#| msgid "Line numbers "
+msgid "Line Numbers:"
+msgstr "Rivinumerointi"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
+#: widgets/EditProfileAdvancedPage.ui:292 widgets/EditProfileGeneralPage.ui:413
+#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
+#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
+#, kde-format
+msgctxt "Never"
+msgid "Never"
+msgstr "Ei koskaan"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
+#: widgets/EditProfileAdvancedPage.ui:302 widgets/EditProfileGeneralPage.ui:423
+#: widgets/EditProfileGeneralPage.ui:469 widgets/EditProfileGeneralPage.ui:515
+#: widgets/EditProfileGeneralPage.ui:561 widgets/EditProfileGeneralPage.ui:607
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr "Näytettäessä osoitevihjeet"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
+#: widgets/EditProfileAdvancedPage.ui:312 widgets/EditProfileGeneralPage.ui:433
+#: widgets/EditProfileGeneralPage.ui:479 widgets/EditProfileGeneralPage.ui:525
+#: widgets/EditProfileGeneralPage.ui:571 widgets/EditProfileGeneralPage.ui:617
+#, kde-format
+msgctxt "Always"
+msgid "Always"
+msgstr "Aina"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -4609,45 +4658,6 @@ msgstr "Hiiren napsautus syöterivillä siirtää kohdistinta"
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Semanttiset vihjeet:"
-
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
-#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
-#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
-#: widgets/EditProfileGeneralPage.ui:597
-#, kde-format
-msgctxt "Never"
-msgid "Never"
-msgstr "Ei koskaan"
-
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
-#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
-#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
-#: widgets/EditProfileGeneralPage.ui:607
-#, kde-format
-msgctxt "When showing URL hints"
-msgid "When URL hints show"
-msgstr "Näytettäessä osoitevihjeet"
-
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
-#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
-#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
-#: widgets/EditProfileGeneralPage.ui:617
-#, kde-format
-msgctxt "Always"
-msgid "Always"
-msgstr "Aina"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:449
