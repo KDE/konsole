@@ -509,7 +509,7 @@ A vertical line at column 80 (or another). This is configured in the <guilabel>M
 <listitem><para> Line numbers may be displayed as an overlay of the terminal text. Line numbers appear in red on the right end of each line.
 The line are numbered consecutively from the first (top) line in the scrollback. Displaying the line numbers can be configured in
 the <guilabel>Advanced</guilabel> page in the <guilabel>Edit Profile</guilabel> dialog.
-Cycling between the three displayed mode can also be done by a keyboard shortcut. The default shortcut is
+Cycling between the three displayed modes can also be done by a keyboard shortcut. The default shortcut is
 <keycombo>&Ctrl;&Alt;<keycap>\</keycap></keycombo>
 </para></listitem>
 </itemizedlist>
