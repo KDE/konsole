@@ -27,7 +27,7 @@ if(BUILD_SHARED_LIBS)
     ecm_add_test(KeyboardTranslatorTest.cpp LINK_LIBRARIES ${KONSOLE_TEST_LIBS})
 endif(BUILD_SHARED_LIBS)
 
-if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT WIN32)
     ecm_add_test(
         PartTest.cpp
         LINK_LIBRARIES KF6::XmlGui KF6::Parts KF6::Pty ${KONSOLE_TEST_LIBS}
@@ -42,14 +42,19 @@ ecm_add_tests(
     HotSpotFilterTest.cpp
     ProcessInfoTest.cpp
     ProfileTest.cpp
-    PtyTest.cpp
     ScreenTest.cpp
     ShellCommandTest.cpp
     TerminalCharacterDecoderTest.cpp
     Vt102EmulationTest.cpp
     LINK_LIBRARIES ${KONSOLE_TEST_LIBS}
 )
-target_link_libraries(PtyTest KF6::Pty ${KONSOLE_TEST_LIBS})
+
+if (NOT WIN32)
+    ecm_add_tests(
+        PtyTest.cpp
+        LINK_LIBRARIES KF6::Pty ${KONSOLE_TEST_LIBS}
+    )
+endif()
 
 ecm_add_tests(
     HistoryTest.cpp

@@ -13,20 +13,12 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <qtestkeyboard.h>
-// System
-#include <sys/types.h>
-#include <termios.h>
 
 // KDE
 #include <KMainWindow>
 #include <KPluginFactory>
 #include <QTest>
 #include <kservice_version.h>
-
-// Konsole
-#include "../Pty.h"
-#include "../session/Session.h"
-#include "keyboardtranslator/KeyboardTranslator.h"
 
 using namespace Konsole;
 

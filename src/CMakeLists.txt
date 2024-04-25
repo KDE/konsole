@@ -17,11 +17,9 @@ configure_file(config-konsole.h.cmake
 
 ### Tests
 if(BUILD_TESTING)
-    if (NOT WIN32)
         find_package(Qt6Test ${QT_MIN_VERSION} CONFIG REQUIRED)
         add_subdirectory(autotests)
         add_subdirectory(tests)
-    endif()
 endif()
 
 

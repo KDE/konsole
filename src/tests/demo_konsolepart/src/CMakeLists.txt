@@ -9,7 +9,6 @@ target_link_libraries(demo_konsolepart
     KF6::CoreAddons
     KF6::I18n
     KF6::Parts
-    KF6::Pty
     KF6::Service
     Qt::Widgets
     KF6::XmlGui
