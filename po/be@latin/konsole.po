@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-24 02:58+0000\n"
+"POT-Creation-Date: 2024-04-25 02:28+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -1913,7 +1913,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile"
 msgstr "Pradvyznačany profiĺ"
@@ -4430,19 +4430,19 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Užo isnuje profiĺ z nazvaj \"%1\"."
 
-#: widgets/EditProfileDialog.cpp:337
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:375
+#: widgets/EditProfileDialog.cpp:381
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:411
+#: widgets/EditProfileDialog.cpp:417
 #, fuzzy, kde-format
 #| msgid "Editing profile: %2"
 #| msgid_plural "Editing %1 profiles: %2"
@@ -4453,17 +4453,17 @@ msgstr[1] "Redahavannie %1 profiliaŭ: %2"
 msgstr[2] "Redahavannie %1 profiliaŭ: %2"
 msgstr[3] "Redahavannie %1 profiliaŭ: %2"
 
-#: widgets/EditProfileDialog.cpp:415
+#: widgets/EditProfileDialog.cpp:421
 #, kde-format
 msgid "Create New Profile"
 msgstr "Stvaryć novy profiĺ"
 
-#: widgets/EditProfileDialog.cpp:418
+#: widgets/EditProfileDialog.cpp:424
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Redahavać profiĺ \"%1\""
 
-#: widgets/EditProfileDialog.cpp:509
+#: widgets/EditProfileDialog.cpp:515
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4475,7 +4475,7 @@ msgstr[1] " slupki"
 msgstr[2] " slupki"
 msgstr[3] " slupki"
 
-#: widgets/EditProfileDialog.cpp:511
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4487,42 +4487,42 @@ msgstr[1] " radki"
 msgstr[2] " radki"
 msgstr[3] " radki"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Bell"
 msgstr "Sistemnaje hukavoje apaviaščennie"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistemnyja apaviaščenni"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizualizacyja hukavoha apaviaščennia"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Nie zvažać na padziei dlia hukavych apaviaščenniaŭ"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:536
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Pradvyznačany profiĺ dlia novych sieansaŭ terminala ŭ %1"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:641
 #, kde-format
 msgid "Edit Environment"
 msgstr "Redahavać asiaroddzie"
 
-#: widgets/EditProfileDialog.cpp:636
+#: widgets/EditProfileDialog.cpp:642
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Adna zmiennaja asiaroddzia na radok"
 
-#: widgets/EditProfileDialog.cpp:667
+#: widgets/EditProfileDialog.cpp:673
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4532,24 +4532,24 @@ msgstr[1] " siekundy"
 msgstr[2] " siekund"
 msgstr[3] " siekundy"
 
-#: widgets/EditProfileDialog.cpp:781
+#: widgets/EditProfileDialog.cpp:787
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Abrać pačatkovy kataloh"
 
-#: widgets/EditProfileDialog.cpp:941
+#: widgets/EditProfileDialog.cpp:947
 #, fuzzy, kde-format
 #| msgid "New..."
 msgid "Get New..."
 msgstr "Novy..."
 
-#: widgets/EditProfileDialog.cpp:1337
+#: widgets/EditProfileDialog.cpp:1343
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Nie ŭdalosia zahruzić schiemu <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1516
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4558,7 +4558,7 @@ msgstr ""
 "U hetaj kolieravaj schiemie vykarystoŭvajecca prazrysty fon, jaki nie "
 "padtrymlivajecca vašym pracoŭnym asiaroddziem"
 
-#: widgets/EditProfileDialog.cpp:1522
+#: widgets/EditProfileDialog.cpp:1528
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4567,13 +4567,13 @@ msgstr ""
 "Prahrama Konsole byla zapuščanaja da ŭkliučennia efiektaŭ pracoŭnaha "
 "asiaroddzia. Kab ubačyć prazrysty fon, vam treba pierazapuscić Konsole."
 
-#: widgets/EditProfileDialog.cpp:1890
+#: widgets/EditProfileDialog.cpp:1896
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Pradvyznačany profiĺ"
 
-#: widgets/EditProfileDialog.cpp:1916
+#: widgets/EditProfileDialog.cpp:1922
 #, fuzzy, kde-format
 #| msgid ""
 #| "The format is e.g. editorExec PATH:LINE:COLUMN\n"
@@ -4616,7 +4616,7 @@ msgstr ""
 "budzie praihnaravany, i fajl budzie adkryty ŭ pradvyznačanym tekstavym "
 "redaktary."
 
-#: widgets/EditProfileDialog.cpp:1929
+#: widgets/EditProfileDialog.cpp:1935
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Advoĺny zahad tekstavaha redaktara"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-24 02:58+0000\n"
+"POT-Creation-Date: 2024-04-25 02:28+0000\n"
 "PO-Revision-Date: 2024-02-10 14:20+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -1906,7 +1906,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Встроенный"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile"
 msgstr "Профиль по умолчанию"
@@ -4365,19 +4365,19 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Профиль с названием «%1» уже существует."
 
-#: widgets/EditProfileDialog.cpp:337
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "Название профиля превышает максимально допустимую длину (%1)."
 
-#: widgets/EditProfileDialog.cpp:375
+#: widgets/EditProfileDialog.cpp:381
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "Название профиля содержит недопустимые символы (выделены): %1."
 
-#: widgets/EditProfileDialog.cpp:411
+#: widgets/EditProfileDialog.cpp:417
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4386,17 +4386,17 @@ msgstr[1] "Изменение %1 профиля: %2"
 msgstr[2] "Изменение %1 профилей: %2"
 msgstr[3] "Изменение %1 профиль: %2"
 
-#: widgets/EditProfileDialog.cpp:415
+#: widgets/EditProfileDialog.cpp:421
 #, kde-format
 msgid "Create New Profile"
 msgstr "Создать новый профиль"
 
-#: widgets/EditProfileDialog.cpp:418
+#: widgets/EditProfileDialog.cpp:424
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Редактирование профиля «%1»"
 
-#: widgets/EditProfileDialog.cpp:509
+#: widgets/EditProfileDialog.cpp:515
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4408,7 +4408,7 @@ msgstr[1] " столбца"
 msgstr[2] " столбцов"
 msgstr[3] " столбец"
 
-#: widgets/EditProfileDialog.cpp:511
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4420,42 +4420,42 @@ msgstr[1] " строки"
 msgstr[2] " строк"
 msgstr[3] " строка"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Bell"
 msgstr "Системный сигнал"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Notifications"
 msgstr "Системные уведомления"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Visual Bell"
 msgstr "Визуальный сигнал"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Игнорировать сигналы"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:536
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Сделать профилем по умолчанию для новых сеансов в %1"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:641
 #, kde-format
 msgid "Edit Environment"
 msgstr "Изменить переменные среды"
 
-#: widgets/EditProfileDialog.cpp:636
+#: widgets/EditProfileDialog.cpp:642
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Одна строка — одна переменная"
 
-#: widgets/EditProfileDialog.cpp:667
+#: widgets/EditProfileDialog.cpp:673
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4465,23 +4465,23 @@ msgstr[1] " секунды"
 msgstr[2] " секунд"
 msgstr[3] " секунда"
 
-#: widgets/EditProfileDialog.cpp:781
+#: widgets/EditProfileDialog.cpp:787
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Выбор начального каталога"
 
-#: widgets/EditProfileDialog.cpp:941
+#: widgets/EditProfileDialog.cpp:947
 #, kde-format
 msgid "Get New..."
 msgstr "Загрузить…"
 
-#: widgets/EditProfileDialog.cpp:1337
+#: widgets/EditProfileDialog.cpp:1343
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Не удалось загрузить схему <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1516
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4490,7 +4490,7 @@ msgstr ""
 "В выбранной цветовой схеме фон должен быть прозрачным, но данная система не "
 "настроена соответствующим образом"
 
-#: widgets/EditProfileDialog.cpp:1522
+#: widgets/EditProfileDialog.cpp:1528
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4499,13 +4499,13 @@ msgstr ""
 "Konsole был запущен до того, как эффекты рабочего стола были включены. Чтобы "
 "активировать прозрачный фон, перезапустите приложение."
 
-#: widgets/EditProfileDialog.cpp:1890
+#: widgets/EditProfileDialog.cpp:1896
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Профиль по умолчанию"
 
-#: widgets/EditProfileDialog.cpp:1916
+#: widgets/EditProfileDialog.cpp:1922
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4534,7 +4534,7 @@ msgstr ""
 "не будет использован, а файл будет открыт в приложении\n"
 "для редактирования текста, используемом по умолчанию."
 
-#: widgets/EditProfileDialog.cpp:1929
+#: widgets/EditProfileDialog.cpp:1935
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Команда для запуска редактора текста"

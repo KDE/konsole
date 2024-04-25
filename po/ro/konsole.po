@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-24 02:58+0000\n"
+"POT-Creation-Date: 2024-04-25 02:28+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1913,7 +1913,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile"
 msgstr "Profil implicit"
@@ -4400,19 +4400,19 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Există deja un profil cu denumirea „%1”."
 
-#: widgets/EditProfileDialog.cpp:337
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:375
+#: widgets/EditProfileDialog.cpp:381
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:411
+#: widgets/EditProfileDialog.cpp:417
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4420,17 +4420,17 @@ msgstr[0] "Modificare profil: %2"
 msgstr[1] "Modificare %1 profile: %2"
 msgstr[2] "Modificare %1 de profile: %2"
 
-#: widgets/EditProfileDialog.cpp:415
+#: widgets/EditProfileDialog.cpp:421
 #, kde-format
 msgid "Create New Profile"
 msgstr "Creează profil nou"
 
-#: widgets/EditProfileDialog.cpp:418
+#: widgets/EditProfileDialog.cpp:424
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Modifică profilul „%1”"
 
-#: widgets/EditProfileDialog.cpp:509
+#: widgets/EditProfileDialog.cpp:515
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4441,7 +4441,7 @@ msgstr[0] " coloană"
 msgstr[1] " coloane"
 msgstr[2] " de coloane"
 
-#: widgets/EditProfileDialog.cpp:511
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4452,42 +4452,42 @@ msgstr[0] " rând"
 msgstr[1] " rânduri"
 msgstr[2] " de rânduri"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Bell"
 msgstr "Clopoțel de sistem"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Notifications"
 msgstr "Notificări de sistem"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Visual Bell"
 msgstr "Clopoțel vizual"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignoră evenimente de clopoțel"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:536
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Profil implicit pentru sesiunile noi de terminal în %1"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:641
 #, kde-format
 msgid "Edit Environment"
 msgstr "Modifică mediul"
 
-#: widgets/EditProfileDialog.cpp:636
+#: widgets/EditProfileDialog.cpp:642
 #, kde-format
 msgid "One environment variable per line"
 msgstr "O variabilă de mediu pe linie"
 
-#: widgets/EditProfileDialog.cpp:667
+#: widgets/EditProfileDialog.cpp:673
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4496,23 +4496,23 @@ msgstr[0] " secundă"
 msgstr[1] " secunde"
 msgstr[2] " de secunde"
 
-#: widgets/EditProfileDialog.cpp:781
+#: widgets/EditProfileDialog.cpp:787
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Alegeți dosarul inițial"
 
-#: widgets/EditProfileDialog.cpp:941
+#: widgets/EditProfileDialog.cpp:947
 #, kde-format
 msgid "Get New..."
 msgstr "Obține noi..."
 
-#: widgets/EditProfileDialog.cpp:1337
+#: widgets/EditProfileDialog.cpp:1343
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Încărcarea schemei <resource>%1</resource> a eșuat."
 
-#: widgets/EditProfileDialog.cpp:1516
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4521,7 +4521,7 @@ msgstr ""
 "Această schemă de culori utilizează fundal transparent, care nu pare să fie "
 "susținut de calculatorul dumneavoastră"
 
-#: widgets/EditProfileDialog.cpp:1522
+#: widgets/EditProfileDialog.cpp:1528
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4530,13 +4530,13 @@ msgstr ""
 "Konsola a fost pornită înainte de activarea efectelor de birou. Trebuie să "
 "reporniți Konsola pentru a vedea fundalul transparent."
 
-#: widgets/EditProfileDialog.cpp:1890
+#: widgets/EditProfileDialog.cpp:1896
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Profil implicit"
 
-#: widgets/EditProfileDialog.cpp:1916
+#: widgets/EditProfileDialog.cpp:1922
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4553,7 +4553,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1929
+#: widgets/EditProfileDialog.cpp:1935
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Comandă personalizată pentru redactor de text"

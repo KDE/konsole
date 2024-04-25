@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-24 02:58+0000\n"
+"POT-Creation-Date: 2024-04-25 02:28+0000\n"
 "PO-Revision-Date: 2024-04-21 22:09+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1877,7 +1877,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "உள்ளமைந்த‍து"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile"
 msgstr "இயல்பிருப்பு பயன்முறை"
@@ -4317,37 +4317,37 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "\"%1\" என்ற பெயரில் ஏற்கனவேயொரு பயன்முறை உள்ளது."
 
-#: widgets/EditProfileDialog.cpp:337
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "பயன்முறையின் பெயர் அதிகபட்ச நீளத்தைக் கடந்த‍து (%1)."
 
-#: widgets/EditProfileDialog.cpp:375
+#: widgets/EditProfileDialog.cpp:381
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 "முன்னிலைப்படுத்தப்பட்டுள்ள எழுத்துகளை பயன்முறைகளின் பெயர்களில் பயன்படுத்த முடியாது: %1."
 
-#: widgets/EditProfileDialog.cpp:411
+#: widgets/EditProfileDialog.cpp:417
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "திருத்தப்படும் பயன்முறை: %2"
 msgstr[1] "திருத்தப்படும் %1 பயன்முறைகள்: %2"
 
-#: widgets/EditProfileDialog.cpp:415
+#: widgets/EditProfileDialog.cpp:421
 #, kde-format
 msgid "Create New Profile"
 msgstr "புதிய பயன்முறையை உருவாக்குவது"
 
-#: widgets/EditProfileDialog.cpp:418
+#: widgets/EditProfileDialog.cpp:424
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" என்ற பயன்முறையை திருத்துவது"
 
-#: widgets/EditProfileDialog.cpp:509
+#: widgets/EditProfileDialog.cpp:515
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4357,7 +4357,7 @@ msgid_plural " columns"
 msgstr[0] " நெடுவரிசை"
 msgstr[1] " நெடுவரிசைகள்"
 
-#: widgets/EditProfileDialog.cpp:511
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4367,42 +4367,42 @@ msgid_plural " rows"
 msgstr[0] " வரி"
 msgstr[1] " வரிகள்"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Bell"
 msgstr "கணினி மணி"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Notifications"
 msgstr "கணினி அறிவிப்புகள்"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Visual Bell"
 msgstr "காட்சிவழி மணி"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "மணியெழுப்பப்படுவதை பொருட்படுத்தாதே"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:536
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1 என்பதிலுள்ள புதிய முனைய அமர்வுகளுக்கான இயல்பிருப்பு பயன்முறை"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:641
 #, kde-format
 msgid "Edit Environment"
 msgstr "சூழலை திருத்துவது"
 
-#: widgets/EditProfileDialog.cpp:636
+#: widgets/EditProfileDialog.cpp:642
 #, kde-format
 msgid "One environment variable per line"
 msgstr "வரிக்கு ஒரு சூழல் மாறியை உள்ளிடுங்கள்"
 
-#: widgets/EditProfileDialog.cpp:667
+#: widgets/EditProfileDialog.cpp:673
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4410,23 +4410,23 @@ msgid_plural " seconds"
 msgstr[0] " நொடி"
 msgstr[1] " நொடிகள்"
 
-#: widgets/EditProfileDialog.cpp:781
+#: widgets/EditProfileDialog.cpp:787
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "முதலடைவை தேர்வு செய்வது"
 
-#: widgets/EditProfileDialog.cpp:941
+#: widgets/EditProfileDialog.cpp:947
 #, kde-format
 msgid "Get New..."
 msgstr "புதியவற்றை பெறு…"
 
-#: widgets/EditProfileDialog.cpp:1337
+#: widgets/EditProfileDialog.cpp:1343
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "<resource>%1</resource> என்ற திட்டத்தை ஏற்ற முடியவில்லை."
 
-#: widgets/EditProfileDialog.cpp:1516
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4435,7 +4435,7 @@ msgstr ""
 "இந்நிறத்திட்டம் ஒளிபுகும் பின்பலத்தை பயன்படுத்துகிறது. அதை உங்கள் பணிமேடை ஆதரிப்பதுபோல் "
 "தெரியவில்லை."
 
-#: widgets/EditProfileDialog.cpp:1522
+#: widgets/EditProfileDialog.cpp:1528
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4444,12 +4444,12 @@ msgstr ""
 "பணிமேடை அசைவூட்டங்கள் இயக்கப்படுமுன் கான்சோல் துவக்கப்பட்டது. ஒளிபுகும் பின்புலத்தைப் பார்க்க "
 "நீங்கள் கான்சோலை மீள்துவக்க வேண்டும்."
 
-#: widgets/EditProfileDialog.cpp:1890
+#: widgets/EditProfileDialog.cpp:1896
 #, kde-format
 msgid "Default for file type"
 msgstr "கோப்புவகைக்கான இயல்பிருப்பு"
 
-#: widgets/EditProfileDialog.cpp:1916
+#: widgets/EditProfileDialog.cpp:1922
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4476,7 +4476,7 @@ msgstr ""
 "PATH அல்லது LINE இக்கட்டளையில் இல்லாத பட்சத்தில், இத்தேர்வு பொருட்படுத்தப்படாது; "
 "இயல்பிருப்பு உரைத்திருத்தியிலேயே உரைக்கோப்பு திறக்கப்படும்."
 
-#: widgets/EditProfileDialog.cpp:1929
+#: widgets/EditProfileDialog.cpp:1935
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "உரைத்திருத்திக்கான தனிப்பயன் கட்டளை"

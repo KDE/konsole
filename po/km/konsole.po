@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-24 02:58+0000\n"
+"POT-Creation-Date: 2024-04-25 02:28+0000\n"
 "PO-Revision-Date: 2012-12-20 16:07+0700\n"
 "Last-Translator: sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros>\n"
@@ -1990,7 +1990,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile"
 msgstr "ទម្រង់​លំនាំដើម"
@@ -4530,36 +4530,36 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:337
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:375
+#: widgets/EditProfileDialog.cpp:381
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:411
+#: widgets/EditProfileDialog.cpp:417
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "កែសម្រួល​ទម្រង់ %1 ៖ %2"
 
-#: widgets/EditProfileDialog.cpp:415
+#: widgets/EditProfileDialog.cpp:421
 #, fuzzy, kde-format
 #| msgid "&New Profile..."
 msgid "Create New Profile"
 msgstr "ទម្រង់​ថ្មី..."
 
-#: widgets/EditProfileDialog.cpp:418
+#: widgets/EditProfileDialog.cpp:424
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "កែ​សម្រួល​ទម្រង់ \"%1\""
 
-#: widgets/EditProfileDialog.cpp:509
+#: widgets/EditProfileDialog.cpp:515
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4568,7 +4568,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] ""
 
-#: widgets/EditProfileDialog.cpp:511
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4577,79 +4577,79 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] ""
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, fuzzy, kde-format
 #| msgid "&Paste Location"
 msgid "System Notifications"
 msgstr "បិទភ្ជាប់​ទីតាំង"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, fuzzy, kde-format
 #| msgctxt "@info:credit"
 #| msgid "Visual effects"
 msgid "Visual Bell"
 msgstr "Visual effects"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:536
 #, fuzzy, kde-format
 #| msgid "Set the selected profile as the default for new terminal sessions"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "កំណត់​ទម្រង់​ដែល​បាន​ជ្រើស​ជា​លំនាំ​ដើម​សម្រាប់​សម័យ​ស្ថានីយ​ថ្មី"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:641
 #, kde-format
 msgid "Edit Environment"
 msgstr "កែ​សម្រួល​បរិស្ថាន​"
 
-#: widgets/EditProfileDialog.cpp:636
+#: widgets/EditProfileDialog.cpp:642
 #, fuzzy, kde-format
 #| msgid "One environment variable per line"
 msgid "One environment variable per line"
 msgstr "មួយ​អថេរ​បរិស្ថាន​ក្នុង​មួយ​ជួរ"
 
-#: widgets/EditProfileDialog.cpp:667
+#: widgets/EditProfileDialog.cpp:673
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] "វិនាទី"
 
-#: widgets/EditProfileDialog.cpp:781
+#: widgets/EditProfileDialog.cpp:787
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "ជ្រើស​ថត​ដំបូង​"
 
-#: widgets/EditProfileDialog.cpp:941
+#: widgets/EditProfileDialog.cpp:947
 #, fuzzy, kde-format
 #| msgctxt "@action:button Create an alternate color scheme"
 #| msgid "New..."
 msgid "Get New..."
 msgstr "ថ្មី..."
 
-#: widgets/EditProfileDialog.cpp:1337
+#: widgets/EditProfileDialog.cpp:1343
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1516
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "ពណ៌​ចម្រុះ​នេះ​មាន​ផ្ទៃ​ខាងក្រោយ​ថ្លា​ ដែល​មិន​ត្រូវ​បាន​គាំទ្រ​នៅ​លើ​ផ្ទៃ​តុ​របស់​អ្នក​ទេ"
 
-#: widgets/EditProfileDialog.cpp:1522
+#: widgets/EditProfileDialog.cpp:1528
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4658,13 +4658,13 @@ msgstr ""
 "កុងសូល​បាន​ចាប់ផ្ដើម​នៅ​មុន​ពេល​បើក​បែបផែន​ផ្ទៃតុ ។ អ្នក​ចាំបាច់​ត្រូវតែ​ចាប់ផ្ដើម​កុងសូល​ឡើងវិញ​ដើម្បី​ឃើញ​ផ្ទៃ​"
 "ខាងក្រោយ​ថ្លា ។"
 
-#: widgets/EditProfileDialog.cpp:1890
+#: widgets/EditProfileDialog.cpp:1896
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "ទម្រង់​លំនាំដើម"
 
-#: widgets/EditProfileDialog.cpp:1916
+#: widgets/EditProfileDialog.cpp:1922
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4681,7 +4681,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1929
+#: widgets/EditProfileDialog.cpp:1935
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

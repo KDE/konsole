@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-24 02:58+0000\n"
+"POT-Creation-Date: 2024-04-25 02:28+0000\n"
 "PO-Revision-Date: 2024-04-14 05:52+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -1879,7 +1879,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "ჩაშენებული"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:532
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile"
 msgstr "ნაგულისხმევი პროფილი"
@@ -4324,36 +4324,36 @@ msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "პროფილი სახელით '%1' უკვე არსებობს."
 
-#: widgets/EditProfileDialog.cpp:337
+#: widgets/EditProfileDialog.cpp:343
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "პროფილის სახელის სიგრძე დაშვებულს (%1) აჭარბებს."
 
-#: widgets/EditProfileDialog.cpp:375
+#: widgets/EditProfileDialog.cpp:381
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "გამოკვეთილი სიმბოლოები არასწორია პროფილის სახელებისთვის: %1."
 
-#: widgets/EditProfileDialog.cpp:411
+#: widgets/EditProfileDialog.cpp:417
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "პროფილის ჩასწორება: %2"
 msgstr[1] "%1 პროფილის ჩასწორება: %2"
 
-#: widgets/EditProfileDialog.cpp:415
+#: widgets/EditProfileDialog.cpp:421
 #, kde-format
 msgid "Create New Profile"
 msgstr "ახალი პროფილის შექმნა"
 
-#: widgets/EditProfileDialog.cpp:418
+#: widgets/EditProfileDialog.cpp:424
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "პროფილის ჩასწორება (\"%1\")"
 
-#: widgets/EditProfileDialog.cpp:509
+#: widgets/EditProfileDialog.cpp:515
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4363,7 +4363,7 @@ msgid_plural " columns"
 msgstr[0] " სვეტი"
 msgstr[1] " სვეტი"
 
-#: widgets/EditProfileDialog.cpp:511
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4373,42 +4373,42 @@ msgid_plural " rows"
 msgstr[0] " მწკრივი"
 msgstr[1] " მწკრივი"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Bell"
 msgstr "სისტემური ზარი"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "System Notifications"
 msgstr "სისტემური შეტყობინებები"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Visual Bell"
 msgstr "ვიზუალური ზარი"
 
-#: widgets/EditProfileDialog.cpp:521
+#: widgets/EditProfileDialog.cpp:527
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "ზარის მოვლენების იგნორი"
 
-#: widgets/EditProfileDialog.cpp:530
+#: widgets/EditProfileDialog.cpp:536
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "ნაგულისხმევი ახალი ტერმინალის სესიისთვის %1-ში"
 
-#: widgets/EditProfileDialog.cpp:635
+#: widgets/EditProfileDialog.cpp:641
 #, kde-format
 msgid "Edit Environment"
 msgstr "გარემოს ჩასწორება"
 
-#: widgets/EditProfileDialog.cpp:636
+#: widgets/EditProfileDialog.cpp:642
 #, kde-format
 msgid "One environment variable per line"
 msgstr "ერთი გარემოს ცვლადი ერთ ხაზზე"
 
-#: widgets/EditProfileDialog.cpp:667
+#: widgets/EditProfileDialog.cpp:673
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4416,23 +4416,23 @@ msgid_plural " seconds"
 msgstr[0] " წამი"
 msgstr[1] " წამი"
 
-#: widgets/EditProfileDialog.cpp:781
+#: widgets/EditProfileDialog.cpp:787
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "აირჩეთ საწყისი საქაღალდე"
 
-#: widgets/EditProfileDialog.cpp:941
+#: widgets/EditProfileDialog.cpp:947
 #, kde-format
 msgid "Get New..."
 msgstr "ახლის მიღება..."
 
-#: widgets/EditProfileDialog.cpp:1337
+#: widgets/EditProfileDialog.cpp:1343
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "სქემის <resource>%1</resource> ჩატვირთვა ჩავარდა."
 
-#: widgets/EditProfileDialog.cpp:1516
+#: widgets/EditProfileDialog.cpp:1522
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4441,7 +4441,7 @@ msgstr ""
 "ეს ფერების სქემა იყენებს გამჭვირვალე ფონს, რომელიც, როგორც ჩანს, თქვენს "
 "სამუშაო მაგიდაზე მხარდაჭერილი არაა"
 
-#: widgets/EditProfileDialog.cpp:1522
+#: widgets/EditProfileDialog.cpp:1528
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4450,12 +4450,12 @@ msgstr ""
 "Konsole მანამდე გაეშვა, სანამ სამუშაო მაგიდის ეფექტები ჩაირთვებოდა. "
 "გამჭვირვალე ფონისთვის Konsole თავიდან უნდა გაუშვათ."
 
-#: widgets/EditProfileDialog.cpp:1890
+#: widgets/EditProfileDialog.cpp:1896
 #, kde-format
 msgid "Default for file type"
 msgstr "ნაგულისხმევი, ფაილის ტიპისთვის"
 
-#: widgets/EditProfileDialog.cpp:1916
+#: widgets/EditProfileDialog.cpp:1922
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4485,7 +4485,7 @@ msgstr ""
 "ეს პარამეტრი გამოტოვებული იქნება და ფაილი\n"
 "ნაგულისხმევი რედაქტორით გაიხსნება."
 
-#: widgets/EditProfileDialog.cpp:1929
+#: widgets/EditProfileDialog.cpp:1935
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "ტექსტური რედაქტორის მითითებული ბრძანება"
