@@ -92,9 +92,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->25 d'abril de 2023</date>
+>23 d'abril de 2024</date>
 <releaseinfo
->KDE Gear 23.08</releaseinfo>
+>KDE Gear 24.05</releaseinfo>
 
 <abstract
 ><para
@@ -695,11 +695,13 @@
 >Disposició complexa del text</title>
 
 <para
->A la pàgina <guilabel
+>A la pestanya <guilabel
 >Disposició complexa del text</guilabel
+> de la pàgina <guilabel
+>Aparença</guilabel
 > del diàleg <guilabel
 >Edita un perfil</guilabel
->, trobareu opcions que controlen la representació del text. </para>
+>, trobareu les opcions que controlen la representació del text. </para>
 
 <para>
 <itemizedlist>
@@ -768,9 +770,41 @@
 > - Els caràcters problemàtics segueixen l'estàndard Unicode, en lloc de «wcwidth()» de la «glibc». Actualment només el guionet suau (Unicode 0x00AD) que té una amplada «wcwidth» d'1 i Unicode de 0 es veu afectat per aquesta opció. Generalment, aquesta opció s'ha d'inhabilitar quan s'utilitzen principalment aquests caràcters a la línia d'ordres, i habilitar quan només es mostren. </para
 ></listitem>
 
-
 </itemizedlist>
 </para>
+</sect1>
+
+<sect1 id="visualhints">
+<title
+>Consells visuals</title>
+<para
+>A més dels consells visuals diversos descrits a <xref linkend="semantic-shell-integration"/>, el &konsole; té altres consells visuals: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Una línia vertical a la columna 80 (o una altra). Això es configura a la pestanya <guilabel
+>Miscel·lània</guilabel
+> de la pàgina <guilabel
+>Aparença</guilabel
+> al diàleg <guilabel
+>Edita un perfil</guilabel
+>. </para
+></listitem>
+
+<listitem
+><para
+>Line numbers may be displayed as an overlay of the terminal text. Line numbers appear in red on the right end of each line. The line are numbered consecutively from the first (top) line in the scrollback. Displaying the line numbers can be configured in the <guilabel
+>Advanced</guilabel
+> page in the <guilabel
+>Edit Profile</guilabel
+> dialog. Cycling between the three displayed modes can also be done by a keyboard shortcut. The default shortcut is <keycombo
+>&Ctrl;&Alt;<keycap
+>\</keycap
+></keycombo
+> </para
+></listitem>
+</itemizedlist>
 </sect1>
 
 </chapter>

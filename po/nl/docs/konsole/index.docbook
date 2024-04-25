@@ -92,9 +92,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->2023-04-25</date>
+>2024-04-23</date>
 <releaseinfo
->KDE Gear 23.08</releaseinfo>
+>KDE Gear 24.05</releaseinfo>
 
 <abstract
 ><para
@@ -695,11 +695,13 @@
 >Complexe tekstindeling</title>
 
 <para
->In de pagina <guilabel
+>In het tabblad <guilabel
 >Complexe indeling van tekst</guilabel
-> van de dialoog <guilabel
+> van de pagina <guilabel
+>Uiterlijk</guilabel
+> in de dialoog <guilabel
 >Profiel bewerken</guilabel
->, vindt u opties die het renderen van tekst besturen. </para>
+> vindt u opties die het renderen van tekst besturen. </para>
 
 <para>
 <itemizedlist>
@@ -768,9 +770,41 @@
 > - problematische tekens volgen de Unicode standaard, in plaats van wcwidth() van glibc. Op dit moment wordt alleen het zachte streepje (Unicode 0x00AD) die wcwidth heeft van 1 en Unicode breedte van 0 beïnvloed door deze optie. In het algemeen zou deze optie uitgeschakeld moeten zijn wanneer die tekens hoofdzakelijk op de opdrachtregel worden gebruikt en ingeschakeld wanneer ze alleen getoond worden. </para
 ></listitem>
 
-
 </itemizedlist>
 </para>
+</sect1>
+
+<sect1 id="visualhints">
+<title
+>Visuele tips</title>
+<para
+>Naast de verschillende visuele tips beschreven in <xref linkend="semantic-shell-integration"/>, heeft &konsole; andere visuele tips: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Een verticale lijn op kolom 80 (of elders). Deze is te configureren in het tabblad <guilabel
+>Diversen</guilabel
+> van de pagina <guilabel
+>Uiterlijk</guilabel
+> in de dialoog <guilabel
+>Profiel bewerken</guilabel
+>. </para
+></listitem>
+
+<listitem
+><para
+>Line numbers may be displayed as an overlay of the terminal text. Line numbers appear in red on the right end of each line. The line are numbered consecutively from the first (top) line in the scrollback. Displaying the line numbers can be configured in the <guilabel
+>Advanced</guilabel
+> page in the <guilabel
+>Edit Profile</guilabel
+> dialog. Cycling between the three displayed modes can also be done by a keyboard shortcut. The default shortcut is <keycombo
+>&Ctrl;&Alt;<keycap
+>\</keycap
+></keycombo
+> </para
+></listitem>
+</itemizedlist>
 </sect1>
 
 </chapter>
