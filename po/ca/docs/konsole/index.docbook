@@ -794,11 +794,11 @@
 
 <listitem
 ><para
->Line numbers may be displayed as an overlay of the terminal text. Line numbers appear in red on the right end of each line. The line are numbered consecutively from the first (top) line in the scrollback. Displaying the line numbers can be configured in the <guilabel
->Advanced</guilabel
-> page in the <guilabel
->Edit Profile</guilabel
-> dialog. Cycling between the three displayed modes can also be done by a keyboard shortcut. The default shortcut is <keycombo
+>Els números de línia es poden mostrar com una superposició del text del terminal. Els números de línia apareixen en vermell a l'extrem dret de cada línia. Les línies es numeren consecutivament des de la primera (superior) línia de l'historial. La visualització dels números de línia es pot configurar a la pàgina <guilabel
+>Avançat</guilabel
+> en el diàleg <guilabel
+>Edita un perfil</guilabel
+>. La circulació entre els tres modes mostrats també es pot fer mitjançant una drecera de teclat. La drecera predeterminada és <keycombo
 >&Ctrl;&Alt;<keycap
 >\</keycap
 ></keycombo

@@ -808,11 +808,11 @@
 
 <listitem
 ><para
->Line numbers may be displayed as an overlay of the terminal text. Line numbers appear in red on the right end of each line. The line are numbered consecutively from the first (top) line in the scrollback. Displaying the line numbers can be configured in the <guilabel
->Advanced</guilabel
-> page in the <guilabel
->Edit Profile</guilabel
-> dialog. Cycling between the three displayed modes can also be done by a keyboard shortcut. The default shortcut is <keycombo
+>Програма може показувати накладку з номерами рядків для тексту у терміналі. Номери рядків буде показано червоним кольором праворуч від кожного рядка. Нумерація виконуватиметься послідовно від першого (верхнього) рядка у буфері гортання. Показ номерів рядків можна налаштувати на сторінці <guilabel
+>Додатково</guilabel
+> вікна <guilabel
+>Змінити профіль</guilabel
+>. Циклічний перехід трьома режимами показу можна здійснювати за допомогою клавіатурного скорочення. Типовим клавіатурним скороченням є <keycombo
 >&Ctrl;&Alt;<keycap
 >\</keycap
 ></keycombo

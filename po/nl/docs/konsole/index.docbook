@@ -794,11 +794,11 @@
 
 <listitem
 ><para
->Line numbers may be displayed as an overlay of the terminal text. Line numbers appear in red on the right end of each line. The line are numbered consecutively from the first (top) line in the scrollback. Displaying the line numbers can be configured in the <guilabel
->Advanced</guilabel
-> page in the <guilabel
->Edit Profile</guilabel
-> dialog. Cycling between the three displayed modes can also be done by a keyboard shortcut. The default shortcut is <keycombo
+>Regelnummers kunnen getoond worden als een overlay van de terminaltekst. Regelnummers verschijnen in rood aan het rechter einde van elke regel. De regels zijn opvolgend genummerd vanaf de eerste (bovenste) regel in de schuifbalk. Tonen van de regelnummers kan geconfigureerd worden in de pagina <guilabel
+>Geavanceerd</guilabel
+> in de dialoog <guilabel
+>Profiel bewerken</guilabel
+>. Schakelen tussen de drie getoonde modi kan ook gedaan worden met een sneltoets. De standaard sneltoets is <keycombo
 >&Ctrl;&Alt;<keycap
 >\</keycap
 ></keycombo
