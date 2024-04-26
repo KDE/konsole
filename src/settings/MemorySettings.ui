@@ -25,7 +25,7 @@
 exceeding the specified value will cause systemd-oomd to eliminate the tab(s)
 containing the memory-intensive process(es). Note: enabling
 might cause greater slowdowns during high memory consumption and specifying
-excessively low values might still cause Konsole to be killed.</string> 
+excessively low values might still cause Konsole to be killed.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -40,18 +40,18 @@ excessively low values might still cause Konsole to be killed.</string>
      <property name="text">
       <string>Memory limit:</string>
      </property>
-    </widget> 
+    </widget>
    </item>
    <item row="2" column="1">
     <widget class="QSpinBox" name="kcfg_MemoryLimitValue">
+     <property name="suffix">
+      <string> MB</string>
+     </property>
      <property name="minimum">
       <number>1</number>
      </property>
      <property name="maximum">
       <number>999999</number>
-     </property>
-     <property name="suffix">
-      <string> MB</string>
      </property>
     </widget>
    </item>

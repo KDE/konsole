@@ -60,7 +60,7 @@
              <string>Limit the remembered output to a fixed number of lines</string>
             </property>
             <property name="text">
-             <string>Fixed size:</string>
+             <string>Fi&amp;xed size:</string>
             </property>
            </widget>
           </item>
@@ -96,7 +96,7 @@
        <item>
         <spacer>
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -128,17 +128,17 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item alignment="Qt::AlignVCenter">
+          <item alignment="Qt::AlignmentFlag::AlignVCenter">
            <widget class="QRadioButton" name="unlimitedHistoryButton">
             <property name="toolTip">
              <string>Remember all output produced by the terminal</string>
             </property>
             <property name="text">
-             <string comment="Save all lines to the scrollback history">Unlimited</string>
+             <string comment="Save all lines to the scrollback history">&amp;Unlimited</string>
             </property>
            </widget>
           </item>
-          <item alignment="Qt::AlignVCenter">
+          <item alignment="Qt::AlignmentFlag::AlignVCenter">
            <widget class="QToolButton" name="unlimitedHistoryWarningButton">
             <property name="icon">
              <iconset theme="emblem-warning"/>
@@ -154,7 +154,7 @@
        <item>
         <spacer>
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -172,7 +172,7 @@
         <string>Do not remember previous output</string>
        </property>
        <property name="text">
-        <string comment="Do not save any lines to the scrollback history">None</string>
+        <string comment="Do not save any lines to the scrollback history">&amp;None</string>
        </property>
       </widget>
      </item>
@@ -184,7 +184,7 @@
   <customwidget>
    <class>KPluralHandlingSpinBox</class>
    <extends>QSpinBox</extends>
-   <header>KPluralHandlingSpinBox</header>
+   <header>kpluralhandlingspinbox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

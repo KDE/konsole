@@ -53,7 +53,7 @@
             <string>Word characters:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
            <property name="buddy">
             <cstring>wordCharacterEdit</cstring>
@@ -75,10 +75,10 @@
          <item row="1" column="1">
           <spacer>
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Policy::Fixed</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -94,14 +94,14 @@
             <string>Triple-click selects:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="QRadioButton" name="tripleClickSelectsTheWholeLine">
            <property name="text">
-            <string>The whole line</string>
+            <string>&amp;The whole line</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">tripleClickMode</string>
@@ -111,7 +111,7 @@
          <item row="3" column="1">
           <widget class="QRadioButton" name="tripleClickSelectsFromMousePosition">
            <property name="text">
-            <string>From mouse position to the end of line</string>
+            <string>From mouse position to the end of &amp;line</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">tripleClickMode</string>
@@ -121,10 +121,10 @@
          <item row="4" column="1">
           <spacer>
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Policy::Fixed</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -140,7 +140,7 @@
             <string>Middle-click pastes:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -167,10 +167,10 @@
          <item row="7" column="1">
           <spacer>
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Policy::Fixed</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -186,7 +186,7 @@
             <string>Copy options:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -235,7 +235,7 @@
        <item>
         <spacer>
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -284,14 +284,14 @@
           <layout class="QHBoxLayout">
            <item>
             <widget class="QLabel" name="textEditorCommandLabel">
+             <property name="toolTip">
+              <string comment="@info:tooltip">Text editor to use when opening text file URLs at a given line/column.</string>
+             </property>
              <property name="text">
               <string>Text Editor Command: </string>
              </property>
              <property name="buddy">
               <cstring>textEditorCombo</cstring>
-             </property>
-             <property name="toolTip">
-              <string comment="@info:tooltip">Text editor to use when opening text file URLs at a given line/column.</string>
              </property>
             </widget>
            </item>
@@ -300,6 +300,7 @@
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>1</horstretch>
+               <verstretch>0</verstretch>
               </sizepolicy>
              </property>
              <property name="toolTip">
@@ -309,12 +310,14 @@
            </item>
            <item>
             <widget class="QPushButton" name="textEditorCustomBtn">
-             <property name="text">
-              <string>Edit...</string>
-             </property>
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Edit...</string>
              </property>
             </widget>
            </item>
@@ -353,7 +356,7 @@
             <string>&lt;b&gt;WARNING&lt;/b&gt;: This has security implications as it allows malicious URLs to be shown as another URL or hidden.&lt;br&gt;Make sure you understand the implications before turning this on.</string>
            </property>
            <property name="textFormat">
-            <enum>Qt::RichText</enum>
+            <enum>Qt::TextFormat::RichText</enum>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -439,7 +442,7 @@
        <item>
         <spacer>
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -452,7 +455,7 @@
        <item>
         <widget class="QCheckBox" name="allowMouseTrackingButton">
          <property name="toolTip">
-           <string>Some terminal applications have mouse support, this allows them to get it by default. It can be toggled on/off while running as well.</string>
+          <string>Some terminal applications have mouse support, this allows them to get it by default. It can be toggled on/off while running as well.</string>
          </property>
          <property name="text">
           <string>Allow terminal applications to handle clicks and drags</string>

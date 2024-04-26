@@ -20,15 +20,15 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLineEdit" name="filterEdit"/>
-     </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="filterEdit"/>
    </item>
    <item>
     <widget class="QTreeView" name="sessionList">
      <property name="selectionMode">
-      <enum>QAbstractItemView::ExtendedSelection</enum>
+      <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
      </property>
      <property name="rootIsDecorated">
       <bool>false</bool>
@@ -57,7 +57,7 @@
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

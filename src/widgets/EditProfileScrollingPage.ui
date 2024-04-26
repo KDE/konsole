@@ -13,7 +13,7 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout">
-     <item row="0" column="0" alignment="Qt::AlignRight|Qt::AlignTop">
+     <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop">
       <widget class="QLabel" name="historySizeLabel">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -25,7 +25,7 @@
         <string>Scrollback:</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -42,10 +42,10 @@
      <item row="1" column="1">
       <spacer>
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
+        <enum>QSizePolicy::Policy::Fixed</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -55,7 +55,7 @@
        </property>
       </spacer>
      </item>
-     <item row="2" column="0" alignment="Qt::AlignRight">
+     <item row="2" column="0" alignment="Qt::AlignmentFlag::AlignRight">
       <widget class="QLabel" name="label_2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -67,7 +67,7 @@
         <string>Scroll Page Up/Down:</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -83,7 +83,7 @@
         <string>Scroll the page the half height of window</string>
        </property>
        <property name="text">
-        <string>Half screen height</string>
+        <string>Half screen heigh&amp;t</string>
        </property>
        <attribute name="buttonGroup">
         <string notr="true">scrollAmount</string>
@@ -96,7 +96,7 @@
         <string>Scroll the page the full height of window</string>
        </property>
        <property name="text">
-        <string>Full screen height</string>
+        <string>F&amp;ull screen height</string>
        </property>
        <attribute name="buttonGroup">
         <string notr="true">scrollAmount</string>
@@ -106,10 +106,10 @@
      <item row="4" column="1">
       <spacer>
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
+        <enum>QSizePolicy::Policy::Fixed</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -119,7 +119,7 @@
        </property>
       </spacer>
      </item>
-     <item row="5" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+     <item row="5" column="0" alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter">
       <widget class="QLabel" name="labelSize">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -131,7 +131,7 @@
         <string>Scrollbar position:</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -141,7 +141,7 @@
         <string>Show the scroll bar on the right side of the terminal window</string>
        </property>
        <property name="text">
-        <string comment="@option:radio Show scrollbar on the right side">Right side</string>
+        <string comment="@option:radio Show scrollbar on the right side">Ri&amp;ght side</string>
        </property>
        <attribute name="buttonGroup">
         <string notr="true">scrollBarPosition</string>
@@ -154,7 +154,7 @@
         <string>Show the scroll bar on the left side of the terminal window</string>
        </property>
        <property name="text">
-        <string comment="@option:radio Show scrollbar on the left side">Left side</string>
+        <string comment="@option:radio Show scrollbar on the left side">&amp;Left side</string>
        </property>
        <attribute name="buttonGroup">
         <string notr="true">scrollBarPosition</string>
@@ -174,10 +174,10 @@
      <item row="8" column="1">
       <spacer>
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
+        <enum>QSizePolicy::Policy::Fixed</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -187,7 +187,7 @@
        </property>
       </spacer>
      </item>
-     <item row="9" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+     <item row="9" column="0" alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter">
       <widget class="QLabel" name="label">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -199,7 +199,7 @@
         <string>Highlighting:</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -210,7 +210,7 @@
        </property>
       </widget>
      </item>
-     <item row="10" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+     <item row="10" column="0" alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter">
       <widget class="QLabel" name="labelReflowLines">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -222,7 +222,7 @@
         <string>Reflow Lines:</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -238,7 +238,7 @@
    <item>
     <spacer>
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>

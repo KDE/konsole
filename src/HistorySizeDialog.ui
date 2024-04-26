@@ -46,10 +46,10 @@
    <item>
     <spacer>
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::MinimumExpanding</enum>
+      <enum>QSizePolicy::Policy::MinimumExpanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -63,15 +63,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Konsole::HistorySizeWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/HistorySizeWidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMessageWidget</class>
    <extends>QFrame</extends>
    <header>kmessagewidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Konsole::HistorySizeWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/HistorySizeWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -25,10 +25,7 @@
    </property>
    <item>
     <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,1">
-     <property name="verticalSpacing">
-      <number>0</number>
-     </property>
-     <property name="horizontalSpacing">
+     <property name="spacing">
       <number>0</number>
      </property>
      <item row="0" column="2">
@@ -102,7 +99,7 @@
      <item row="1" column="2">
       <spacer>
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -115,7 +112,7 @@
      <item row="0" column="1" rowspan="2">
       <widget class="QFrame" name="separator">
        <property name="frameShape">
-        <enum>QFrame::VLine</enum>
+        <enum>QFrame::Shape::VLine</enum>
        </property>
       </widget>
      </item>
@@ -125,7 +122,7 @@
         <bool>true</bool>
        </property>
        <property name="selectionMode">
-        <enum>QAbstractItemView::ExtendedSelection</enum>
+        <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
        </property>
        <property name="rootIsDecorated">
         <bool>false</bool>

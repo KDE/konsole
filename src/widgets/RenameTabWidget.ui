@@ -48,7 +48,7 @@
    <item row="0" column="2">
     <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton"/>
    </item>
-   <item row="1" column="0" alignment="Qt::AlignRight">
+   <item row="1" column="0" alignment="Qt::AlignmentFlag::AlignRight">
     <widget class="QLabel" name="label_2">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -60,14 +60,14 @@
       <string>Remote tab title format:</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
      </property>
      <property name="buddy">
       <cstring>remoteTabTitleEdit</cstring>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" alignment="Qt::AlignRight">
+   <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignRight">
     <widget class="QLabel" name="label">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -76,10 +76,10 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Tab title format:</string>
+      <string>&amp;Tab title format:</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
      </property>
      <property name="buddy">
       <cstring>tabTitleEdit</cstring>
@@ -102,10 +102,10 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Tab Color:</string>
+      <string>Tab Co&amp;lor:</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
      </property>
      <property name="buddy">
       <cstring>tabColorCombo</cstring>
