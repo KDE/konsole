@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 00:40+0000\n"
+"POT-Creation-Date: 2024-04-27 00:40+0000\n"
 "PO-Revision-Date: 2024-04-21 22:09+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -2872,7 +2872,7 @@ msgid "Memory limit:"
 msgstr "நினைவக வரம்பு"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
-#: settings/MemorySettings.ui:54
+#: settings/MemorySettings.ui:48
 #, kde-format
 msgid " MB"
 msgstr " MB"
@@ -2897,19 +2897,19 @@ msgstr ""
 "செய்யுங்கள்.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:54
+#: settings/ProfileSettings.ui:51
 #, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "தேர்ந்தெடுக்கப்பட்டுள்ள பயன்முறையின் அடிப்படையில் புதிய பயன்முறையை உருவாக்கும்"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:57
+#: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "&New..."
 msgstr "&புதியது..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:67
+#: settings/ProfileSettings.ui:64
 #, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
@@ -2918,31 +2918,31 @@ msgstr ""
 "இப்பட்டன் முடக்கப்பட்டிருக்கும்)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:70
+#: settings/ProfileSettings.ui:67
 #, kde-format
 msgid "&Edit..."
 msgstr "&திருத்து..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:80
+#: settings/ProfileSettings.ui:77
 #, kde-format
 msgid "Delete the selected profile"
 msgstr "தேர்ந்தெடுத்துள்ள பயன்முறையை நீக்கும்"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:83
+#: settings/ProfileSettings.ui:80
 #, kde-format
 msgid "&Remove"
 msgstr "&நீக்கு"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:93
+#: settings/ProfileSettings.ui:90
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
 msgstr "தேர்ந்தெடுத்துள்ள பயன்முறையை புதிய முனைய அமர்வுகளுக்கான இயல்பிருப்பாக அமைக்கும்"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:96
+#: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "&Set as Default"
 msgstr "&இயல்பிருப்பாக அமை"
@@ -3705,84 +3705,50 @@ msgstr "Ctrl+S என்பதை அழுத்தும்போது வெ
 msgid "Flow control"
 msgstr "வெளியீட்டுக் கட்டுப்பாடு"
 
-# Current English string is misleading. See https://invent.kde.org/utilities/konsole/-/merge_requests/544
-#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:951
-#, kde-format
-msgid ""
-"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
-"Hebrew only)"
-msgstr ""
-"முனையத்தில் மேம்பட்ட உரைத்தளவமைப்பை அனுமதிக்கும் (அராபிய, பாரசீக, ஹீப்ரு, மற்றும் பல "
-"இந்திய லிபிகளுக்கு இது தேவை)"
-
-#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:954
-#, kde-format
-msgid "Bi-Directional text rendering"
-msgstr "மேம்பட்ட உரைத்தளவமைப்பு"
-
 #. i18n: ectx: property (text), widget (QLabel, label_14)
-#: widgets/EditProfileAdvancedPage.ui:240
-#, kde-format
-msgid "Default character encoding:"
+#: widgets/EditProfileAdvancedPage.ui:222
+#, fuzzy, kde-format
+#| msgid "Default character encoding:"
+msgid "&Default character encoding:"
 msgstr "எழுத்துகளுக்கான இயல்பிருப்பு குறியாக்கம்:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
-#: widgets/EditProfileAdvancedPage.ui:260
+#: widgets/EditProfileAdvancedPage.ui:242
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
 msgstr "முதன்மையான திரையை காட்டுவதற்கான சுருக்குவழி:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:282
+#: widgets/EditProfileAdvancedPage.ui:263
 #, fuzzy, kde-format
 #| msgid "Line numbers "
 msgid "Line Numbers:"
 msgstr "வரியேண்கள்"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:292 widgets/EditProfileGeneralPage.ui:413
-#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
-#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:273
+#, fuzzy, kde-format
+#| msgid "&Never"
 msgctxt "Never"
-msgid "Never"
-msgstr "ஒருபோதும் வேண்டாம்"
+msgid "&Never"
+msgstr "&ஒருபோதும் வேண்டாம்"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:302 widgets/EditProfileGeneralPage.ui:423
-#: widgets/EditProfileGeneralPage.ui:469 widgets/EditProfileGeneralPage.ui:515
-#: widgets/EditProfileGeneralPage.ui:561 widgets/EditProfileGeneralPage.ui:607
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:283
+#, fuzzy, kde-format
+#| msgctxt "When showing URL hints"
+#| msgid "When URL hints show"
 msgctxt "When showing URL hints"
-msgid "When URL hints show"
+msgid "When &URL hints show"
 msgstr "முகவரித்துப்புகள் காட்டப்படும்போது"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:312 widgets/EditProfileGeneralPage.ui:433
-#: widgets/EditProfileGeneralPage.ui:479 widgets/EditProfileGeneralPage.ui:525
-#: widgets/EditProfileGeneralPage.ui:571 widgets/EditProfileGeneralPage.ui:617
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:293
+#, fuzzy, kde-format
+#| msgctxt "Always"
+#| msgid "Always"
 msgctxt "Always"
-msgid "Always"
+msgid "A&lways"
 msgstr "எப்போதும்"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
@@ -3816,7 +3782,7 @@ msgstr "தேர்ந்தெடுக்கப்பட்டுள்ள �
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
 #: widgets/EditProfileGeneralPage.ui:227 widgets/EditProfileKeyboardPage.ui:73
-#: widgets/EditProfileMousePage.ui:313
+#: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
 msgstr "திருத்து..."
@@ -4208,6 +4174,23 @@ msgstr "இந்திய லிபிகளிலுள்ள எழுத்�
 msgid "Emoji Font:"
 msgstr "முகவடிகளுக்கான எழுத்துரு:"
 
+# Current English string is misleading. See https://invent.kde.org/utilities/konsole/-/merge_requests/544
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAppearancePage.ui:951
+#, kde-format
+msgid ""
+"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
+"Hebrew only)"
+msgstr ""
+"முனையத்தில் மேம்பட்ட உரைத்தளவமைப்பை அனுமதிக்கும் (அராபிய, பாரசீக, ஹீப்ரு, மற்றும் பல "
+"இந்திய லிபிகளுக்கு இது தேவை)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAppearancePage.ui:954
+#, kde-format
+msgid "Bi-Directional text rendering"
+msgstr "மேம்பட்ட உரைத்தளவமைப்பு"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
@@ -4534,8 +4517,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, kde-format
-msgid "Initial directory:"
+#, fuzzy, kde-format
+#| msgid "Initial directory:"
+msgid "I&nitial directory:"
 msgstr "இயல்பிருப்பு அடைவு:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
@@ -4577,8 +4561,9 @@ msgstr "சூழல் மாறிகளின் மற்றும் தொ
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, kde-format
-msgid "Initial terminal size:"
+#, fuzzy, kde-format
+#| msgid "Initial terminal size:"
+msgid "Initial terminal si&ze:"
 msgstr "முனையத்தின் இயல்பிருப்பு அளவு:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
@@ -4596,8 +4581,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, kde-format
-msgid "Terminal bell mode:"
+#, fuzzy, kde-format
+#| msgid "Terminal bell mode:"
+msgid "&Terminal bell mode:"
 msgstr "முனைய மணியின் பயன்முறை:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
@@ -4623,6 +4609,45 @@ msgstr "உள்ளீட்டு வரியில் கிளிக் ச
 #, kde-format
 msgid "Semantic hints:"
 msgstr "பொருளறித் துப்புகள்"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
+#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
+#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
+#: widgets/EditProfileGeneralPage.ui:597
+#, kde-format
+msgctxt "Never"
+msgid "Never"
+msgstr "ஒருபோதும் வேண்டாம்"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
+#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
+#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
+#: widgets/EditProfileGeneralPage.ui:607
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr "முகவரித்துப்புகள் காட்டப்படும்போது"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
+#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
+#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
+#: widgets/EditProfileGeneralPage.ui:617
+#, kde-format
+msgctxt "Always"
+msgid "Always"
+msgstr "எப்போதும்"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:449
@@ -4727,14 +4752,16 @@ msgstr "மூமுறை-கிளிக் தேர்ந்தெடுப�
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, kde-format
-msgid "The whole line"
+#, fuzzy, kde-format
+#| msgid "The whole line"
+msgid "&The whole line"
 msgstr "முழு வரியை"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, kde-format
-msgid "From mouse position to the end of line"
+#, fuzzy, kde-format
+#| msgid "From mouse position to the end of line"
+msgid "From mouse position to the end of &line"
 msgstr "சுட்டிக்குறியின் இருப்பிடத்திலிருந்து வரியின் முடிவு வரை"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
@@ -4839,15 +4866,9 @@ msgstr "சுட்டியை மேல்வைக்கும்போத�
 msgid "Underline files"
 msgstr "கோப்புகளுக்கு அடிக்கோடிடு"
 
-#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
-#: widgets/EditProfileMousePage.ui:288
-#, kde-format
-msgid "Text Editor Command: "
-msgstr "உரைத்திருத்திக்கான கட்டளை:"
-
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
-#: widgets/EditProfileMousePage.ui:294 widgets/EditProfileMousePage.ui:306
+#: widgets/EditProfileMousePage.ui:288 widgets/EditProfileMousePage.ui:307
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
@@ -4855,8 +4876,14 @@ msgstr ""
 "உரைக்கோப்புகளின் குறிப்பிட்ட வரியையும் நெடுவரியையும் சுட்டும் முகவரிகளை திறக்கும்போது "
 "பயன்படுத்த வேண்டிய உரைத்திருத்தி."
 
+#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
+#: widgets/EditProfileMousePage.ui:291
+#, kde-format
+msgid "Text Editor Command: "
+msgstr "உரைத்திருத்திக்கான கட்டளை:"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:332
+#: widgets/EditProfileMousePage.ui:335
 #, kde-format
 msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
@@ -4866,19 +4893,19 @@ msgstr ""
 "திறக்கலாம்."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:335
+#: widgets/EditProfileMousePage.ui:338
 #, kde-format
 msgid "Open files/links by direct click"
 msgstr "கிளிக் செய்தால் இணைப்புகளையும் கோப்புகளையும் திற"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
-#: widgets/EditProfileMousePage.ui:346
+#: widgets/EditProfileMousePage.ui:349
 #, kde-format
 msgid "Allow escape sequences for links"
 msgstr "இணைப்புகளில் விடுபடுக்குறியீடுகளை அனுமதி"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
-#: widgets/EditProfileMousePage.ui:353
+#: widgets/EditProfileMousePage.ui:356
 #, kde-format
 msgid ""
 "<b>WARNING</b>: This has security implications as it allows malicious URLs "
@@ -4890,19 +4917,19 @@ msgstr ""
 "புரிந்துகொள்ளுங்கள்."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileMousePage.ui:371
+#: widgets/EditProfileMousePage.ui:374
 #, kde-format
 msgid "Allowed link formats: "
 msgstr "அனுமதிக்கப்படும் முகவரிப்பாங்குள்: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
-#: widgets/EditProfileMousePage.ui:381
+#: widgets/EditProfileMousePage.ui:384
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
 msgstr "http://, https:// அல்லது file:// பொன்ற அனுமதிக்கப்படும் இணைப்புகளின் பாங்குகள்"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:392
+#: widgets/EditProfileMousePage.ui:395
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
 msgstr ""
@@ -4910,13 +4937,13 @@ msgstr ""
 "இழுக்க வேண்டும்."
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:395
+#: widgets/EditProfileMousePage.ui:398
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
 msgstr "இழுத்துப்போடுவதற்கு Ctrl விசையை கட்டாயப்படுத்து"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:402
+#: widgets/EditProfileMousePage.ui:405
 #, kde-format
 msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
@@ -4926,13 +4953,13 @@ msgstr ""
 "உருட்டுவது, மேல்/கீழ் விசைகளை அழுத்துவதுபோல் செயல்படும்."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:405
+#: widgets/EditProfileMousePage.ui:408
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
 msgstr "வேறுபட்ட திரை இடையகத்தில் உருளலை இயக்கு"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:412
+#: widgets/EditProfileMousePage.ui:415
 #, kde-format
 msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
@@ -4942,25 +4969,25 @@ msgstr ""
 "நகலெடுத்தல், மற்றும் இணைத்தல் போன்ற செயல்களை வழங்காமல்)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:415
+#: widgets/EditProfileMousePage.ui:418
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
 msgstr "கொப்புகளையும் முகவரிகளையும் இழுத்துப்போடும்போது வரும் பட்டியை முடக்கு"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:422
+#: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
 msgstr "Ctrl+சுட்டிச்சக்கரம் என்ற கூட்டு, உரையின் அளவை மாற்றும்."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:425
+#: widgets/EditProfileMousePage.ui:428
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
 msgstr "Ctrl+சுட்டிச்சக்கரத்தால் உரையின் அளவை மாற்று"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:432
+#: widgets/EditProfileMousePage.ui:435
 #, kde-format
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
@@ -4970,13 +4997,13 @@ msgstr ""
 "சுட்டிக்குறிக்கு பக்கத்தில் காட்டப்படும்"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:435
+#: widgets/EditProfileMousePage.ui:438
 #, kde-format
 msgid "Preview Colors on hover"
 msgstr "சுட்டிக்குறியை மேல்வைக்கும்போது நிறங்களின் முன்னோட்டத்தை காட்டு"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:455
+#: widgets/EditProfileMousePage.ui:458
 #, kde-format
 msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
@@ -4986,7 +5013,7 @@ msgstr ""
 "நிரல் ஓடிக்கொண்டிருக்கும்போதும் இதை இயக்கலாம் அல்லது முடக்கலாம்."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:458
+#: widgets/EditProfileMousePage.ui:461
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr "சுட்டியை முனையநிரல்கள் கையாள அனுமதி"
@@ -5011,8 +5038,9 @@ msgstr "திரையின் உயரத்தில் பாதியள�
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, kde-format
-msgid "Half screen height"
+#, fuzzy, kde-format
+#| msgid "Half screen height"
+msgid "Half screen heigh&t"
 msgstr "திரையின் உயரத்தில் பாதி"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
@@ -5023,8 +5051,9 @@ msgstr "திரையின் முழு உயரத்திற்கு 
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, kde-format
-msgid "Full screen height"
+#, fuzzy, kde-format
+#| msgid "Full screen height"
+msgid "F&ull screen height"
 msgstr "திரையின் உயரம் முழுதாக"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
@@ -5041,9 +5070,11 @@ msgstr "உருள்பட்டையை முனையச்சாளர�
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Show scrollbar on the right side"
+#| msgid "Right side"
 msgctxt "@option:radio Show scrollbar on the right side"
-msgid "Right side"
+msgid "Ri&ght side"
 msgstr "வலதுபுறத்தில்"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
@@ -5054,9 +5085,11 @@ msgstr "உருள்பட்டையை முனையச்சாளர�
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Show scrollbar on the left side"
+#| msgid "Left side"
 msgctxt "@option:radio Show scrollbar on the left side"
-msgid "Left side"
+msgid "&Left side"
 msgstr "இடதுபுறம்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
@@ -5157,8 +5190,9 @@ msgstr "நினைவில் கொள்ளப்படும் வெள�
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, kde-format
-msgid "Fixed size:"
+#, fuzzy, kde-format
+#| msgid "Fixed size:"
+msgid "Fi&xed size:"
 msgstr "நிலையான அளவு:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
@@ -5175,9 +5209,11 @@ msgstr "முனையம் தரும் வெளியீட்டனை�
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Save all lines to the scrollback history"
+#| msgid "Unlimited"
 msgctxt "Save all lines to the scrollback history"
-msgid "Unlimited"
+msgid "&Unlimited"
 msgstr "வரம்பில்லாத‍து"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
@@ -5188,10 +5224,12 @@ msgstr "முந்தைய வெளியீட்டை நினைவி�
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu Do not select any tabs"
+#| msgid "&None"
 msgctxt "Do not save any lines to the scrollback history"
-msgid "None"
-msgstr "ஏதுமில்லை"
+msgid "&None"
+msgstr "&ஏதுமில்லை"
 
 #: widgets/IncrementalSearchBar.cpp:50
 #, kde-format
@@ -5337,8 +5375,9 @@ msgstr "தொலை கீற்றின் தலைப்பிற்கா�
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, kde-format
-msgid "Tab title format:"
+#, fuzzy, kde-format
+#| msgid "Tab title format:"
+msgid "&Tab title format:"
 msgstr "கீற்றுத்தலைப்பின் வடிவம்:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
@@ -5349,8 +5388,9 @@ msgstr "சாதாரண கீற்றின் தலைப்பிற்�
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, kde-format
-msgid "Tab Color:"
+#, fuzzy, kde-format
+#| msgid "Tab Color:"
+msgid "Tab Co&lor:"
 msgstr "கீற்றின் நிறம்:"
 
 #: widgets/TabTitleFormatButton.cpp:21
@@ -5475,6 +5515,10 @@ msgstr "&கீற்றை அமை அல்லது அதற்கு ம�
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "கீற்றை மூடு"
+
+#~ msgctxt "Do not save any lines to the scrollback history"
+#~ msgid "None"
+#~ msgstr "ஏதுமில்லை"
 
 #~ msgid "open with"
 #~ msgstr "இதனால் திற"

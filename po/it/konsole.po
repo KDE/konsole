@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 00:40+0000\n"
+"POT-Creation-Date: 2024-04-27 00:40+0000\n"
 "PO-Revision-Date: 2024-04-15 11:13+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -2902,7 +2902,7 @@ msgid "Memory limit:"
 msgstr "Limite di memoria:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
-#: settings/MemorySettings.ui:54
+#: settings/MemorySettings.ui:48
 #, kde-format
 msgid " MB"
 msgstr " MB"
@@ -2927,19 +2927,19 @@ msgstr ""
 "gestiti.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:54
+#: settings/ProfileSettings.ui:51
 #, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "Crea un nuovo profilo in base al profilo selezionato"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:57
+#: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "&New..."
 msgstr "&Nuovo..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:67
+#: settings/ProfileSettings.ui:64
 #, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
@@ -2948,25 +2948,25 @@ msgstr ""
 "profili in sola lettura)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:70
+#: settings/ProfileSettings.ui:67
 #, kde-format
 msgid "&Edit..."
 msgstr "Mo&difica..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:80
+#: settings/ProfileSettings.ui:77
 #, kde-format
 msgid "Delete the selected profile"
 msgstr "Elimina il profilo selezionato"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:83
+#: settings/ProfileSettings.ui:80
 #, kde-format
 msgid "&Remove"
 msgstr "&Rimuovi"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:93
+#: settings/ProfileSettings.ui:90
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
 msgstr ""
@@ -2974,7 +2974,7 @@ msgstr ""
 "terminale"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:96
+#: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "&Set as Default"
 msgstr "Impo&sta come predefinito"
@@ -3740,83 +3740,50 @@ msgstr "Permetti di sospendere l'output premendo Ctrl+S"
 msgid "Flow control"
 msgstr "Controllo di flusso"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:951
-#, kde-format
-msgid ""
-"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
-"Hebrew only)"
-msgstr ""
-"Abilita visualizzazione bidirezionale sui terminali (valida solo per arabo, "
-"farsi o ebraico)"
-
-#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:954
-#, kde-format
-msgid "Bi-Directional text rendering"
-msgstr "Resa del testo bidirezionale"
-
 #. i18n: ectx: property (text), widget (QLabel, label_14)
-#: widgets/EditProfileAdvancedPage.ui:240
-#, kde-format
-msgid "Default character encoding:"
+#: widgets/EditProfileAdvancedPage.ui:222
+#, fuzzy, kde-format
+#| msgid "Default character encoding:"
+msgid "&Default character encoding:"
 msgstr "Codifica dei caratteri predefinita:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
-#: widgets/EditProfileAdvancedPage.ui:260
+#: widgets/EditProfileAdvancedPage.ui:242
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
 msgstr "Scorciatoia per dare un'occhiata alla schermata principale:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:282
+#: widgets/EditProfileAdvancedPage.ui:263
 #, fuzzy, kde-format
 #| msgid "Line numbers "
 msgid "Line Numbers:"
 msgstr "Numeri di riga "
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:292 widgets/EditProfileGeneralPage.ui:413
-#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
-#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:273
+#, fuzzy, kde-format
+#| msgid "&Never"
 msgctxt "Never"
-msgid "Never"
-msgstr "Mai"
+msgid "&Never"
+msgstr "&Mai"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:302 widgets/EditProfileGeneralPage.ui:423
-#: widgets/EditProfileGeneralPage.ui:469 widgets/EditProfileGeneralPage.ui:515
-#: widgets/EditProfileGeneralPage.ui:561 widgets/EditProfileGeneralPage.ui:607
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:283
+#, fuzzy, kde-format
+#| msgctxt "When showing URL hints"
+#| msgid "When URL hints show"
 msgctxt "When showing URL hints"
-msgid "When URL hints show"
+msgid "When &URL hints show"
 msgstr "Quando vengono visualizzati i suggerimenti degli URL"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:312 widgets/EditProfileGeneralPage.ui:433
-#: widgets/EditProfileGeneralPage.ui:479 widgets/EditProfileGeneralPage.ui:525
-#: widgets/EditProfileGeneralPage.ui:571 widgets/EditProfileGeneralPage.ui:617
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:293
+#, fuzzy, kde-format
+#| msgctxt "Always"
+#| msgid "Always"
 msgctxt "Always"
-msgid "Always"
+msgid "A&lways"
 msgstr "Sempre"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
@@ -3850,7 +3817,7 @@ msgstr "Modifica lo schema di colori selezionato"
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
 #: widgets/EditProfileGeneralPage.ui:227 widgets/EditProfileKeyboardPage.ui:73
-#: widgets/EditProfileMousePage.ui:313
+#: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
 msgstr "Modifica..."
@@ -4251,6 +4218,22 @@ msgstr "Caratteri dell'alfabeto brahmi"
 msgid "Emoji Font:"
 msgstr "Carattere emoji:"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAppearancePage.ui:951
+#, kde-format
+msgid ""
+"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
+"Hebrew only)"
+msgstr ""
+"Abilita visualizzazione bidirezionale sui terminali (valida solo per arabo, "
+"farsi o ebraico)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAppearancePage.ui:954
+#, kde-format
+msgid "Bi-Directional text rendering"
+msgstr "Resa del testo bidirezionale"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
@@ -4582,8 +4565,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, kde-format
-msgid "Initial directory:"
+#, fuzzy, kde-format
+#| msgid "Initial directory:"
+msgid "I&nitial directory:"
 msgstr "Cartella iniziale:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
@@ -4627,8 +4611,9 @@ msgstr "Modifica l'elenco di variabili d'ambiente e valori associati"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, kde-format
-msgid "Initial terminal size:"
+#, fuzzy, kde-format
+#| msgid "Initial terminal size:"
+msgid "Initial terminal si&ze:"
 msgstr "Dimensioni iniziali del terminale:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
@@ -4646,8 +4631,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, kde-format
-msgid "Terminal bell mode:"
+#, fuzzy, kde-format
+#| msgid "Terminal bell mode:"
+msgid "&Terminal bell mode:"
 msgstr "Modalità della campanella del terminale:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
@@ -4673,6 +4659,45 @@ msgstr "Il clic del mouse nella riga di immissione sposta il cursore"
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Suggerimenti semantici:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
+#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
+#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
+#: widgets/EditProfileGeneralPage.ui:597
+#, kde-format
+msgctxt "Never"
+msgid "Never"
+msgstr "Mai"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
+#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
+#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
+#: widgets/EditProfileGeneralPage.ui:607
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr "Quando vengono visualizzati i suggerimenti degli URL"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
+#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
+#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
+#: widgets/EditProfileGeneralPage.ui:617
+#, kde-format
+msgctxt "Always"
+msgid "Always"
+msgstr "Sempre"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:449
@@ -4779,14 +4804,16 @@ msgstr "Selezioni con triplo clic:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, kde-format
-msgid "The whole line"
+#, fuzzy, kde-format
+#| msgid "The whole line"
+msgid "&The whole line"
 msgstr "Tutta la riga"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, kde-format
-msgid "From mouse position to the end of line"
+#, fuzzy, kde-format
+#| msgid "From mouse position to the end of line"
+msgid "From mouse position to the end of &line"
 msgstr "Dalla posizione del mouse alla fine della riga"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
@@ -4893,15 +4920,9 @@ msgstr ""
 msgid "Underline files"
 msgstr "Sottolinea i file"
 
-#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
-#: widgets/EditProfileMousePage.ui:288
-#, kde-format
-msgid "Text Editor Command: "
-msgstr "Comando dell'editor di testo: "
-
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
-#: widgets/EditProfileMousePage.ui:294 widgets/EditProfileMousePage.ui:306
+#: widgets/EditProfileMousePage.ui:288 widgets/EditProfileMousePage.ui:307
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
@@ -4909,8 +4930,14 @@ msgstr ""
 "Editor di testo da utilizzare quando si aprono gli URL dei file di testo in "
 "una determinata riga/colonna."
 
+#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
+#: widgets/EditProfileMousePage.ui:291
+#, kde-format
+msgid "Text Editor Command: "
+msgstr "Comando dell'editor di testo: "
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:332
+#: widgets/EditProfileMousePage.ui:335
 #, kde-format
 msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
@@ -4920,19 +4947,19 @@ msgstr ""
 "essere aperto con un clic diretto del mouse."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:335
+#: widgets/EditProfileMousePage.ui:338
 #, kde-format
 msgid "Open files/links by direct click"
 msgstr "Apri i file/collegamenti tramite clic diretto"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
-#: widgets/EditProfileMousePage.ui:346
+#: widgets/EditProfileMousePage.ui:349
 #, kde-format
 msgid "Allow escape sequences for links"
 msgstr "Consenti le sequenze di escape per i collegamenti"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
-#: widgets/EditProfileMousePage.ui:353
+#: widgets/EditProfileMousePage.ui:356
 #, kde-format
 msgid ""
 "<b>WARNING</b>: This has security implications as it allows malicious URLs "
@@ -4944,32 +4971,32 @@ msgstr ""
 "aver compreso le implicazioni prima di attivarla."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileMousePage.ui:371
+#: widgets/EditProfileMousePage.ui:374
 #, kde-format
 msgid "Allowed link formats: "
 msgstr "Consenti i formati dei collegamenti: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
-#: widgets/EditProfileMousePage.ui:381
+#: widgets/EditProfileMousePage.ui:384
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
 msgstr "I formati dei collegamenti possibili, come http://, https:// e file://"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:392
+#: widgets/EditProfileMousePage.ui:395
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
 msgstr ""
 "Il testo selezionato richiederà il tasto Control e clic per il trascinamento"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:395
+#: widgets/EditProfileMousePage.ui:398
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
 msgstr "Richiedi il tasto Ctrl per il trascinamento e rilascio"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:402
+#: widgets/EditProfileMousePage.ui:405
 #, kde-format
 msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
@@ -4979,13 +5006,13 @@ msgstr ""
 "utilizzano il buffer dello schermo Alternativo (ad. es less)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:405
+#: widgets/EditProfileMousePage.ui:408
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
 msgstr "Abilita lo scorrimento del buffer dello schermo alternativo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:412
+#: widgets/EditProfileMousePage.ui:415
 #, kde-format
 msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
@@ -4995,13 +5022,13 @@ msgstr ""
 "azioni di spostamento, copia e collegamento."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:415
+#: widgets/EditProfileMousePage.ui:418
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
 msgstr "Disabilita il menu di trascinamento e rilascio per URL e file"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:422
+#: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
 msgstr ""
@@ -5009,13 +5036,13 @@ msgstr ""
 "dimensioni del testo."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:425
+#: widgets/EditProfileMousePage.ui:428
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
 msgstr "Permetti a Ctrl+rotellina di cambiare le dimensioni dei caratteri"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:432
+#: widgets/EditProfileMousePage.ui:435
 #, kde-format
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
@@ -5025,13 +5052,13 @@ msgstr ""
 "un riquadro accanto al puntatore del mouse"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:435
+#: widgets/EditProfileMousePage.ui:438
 #, kde-format
 msgid "Preview Colors on hover"
 msgstr "Anteprima dei colori al passaggio del puntatore"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:455
+#: widgets/EditProfileMousePage.ui:458
 #, kde-format
 msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
@@ -5042,7 +5069,7 @@ msgstr ""
 "disattivato anche durante l'esecuzione."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:458
+#: widgets/EditProfileMousePage.ui:461
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr ""
@@ -5068,8 +5095,9 @@ msgstr "Scorri la pagina di metà dell'altezza della finestra"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, kde-format
-msgid "Half screen height"
+#, fuzzy, kde-format
+#| msgid "Half screen height"
+msgid "Half screen heigh&t"
 msgstr "Altezza di mezzo schermo"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
@@ -5080,8 +5108,9 @@ msgstr "Scorri la pagina di un'altezza della finestra"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, kde-format
-msgid "Full screen height"
+#, fuzzy, kde-format
+#| msgid "Full screen height"
+msgid "F&ull screen height"
 msgstr "Altezza di schermo intero"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
@@ -5099,9 +5128,11 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Show scrollbar on the right side"
+#| msgid "Right side"
 msgctxt "@option:radio Show scrollbar on the right side"
-msgid "Right side"
+msgid "Ri&ght side"
 msgstr "Lato destro"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
@@ -5113,9 +5144,11 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Show scrollbar on the left side"
+#| msgid "Left side"
 msgctxt "@option:radio Show scrollbar on the left side"
-msgid "Left side"
+msgid "&Left side"
 msgstr "Lato sinistro"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
@@ -5217,8 +5250,9 @@ msgstr "Limita l'output memorizzato a un certo numero di righe"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, kde-format
-msgid "Fixed size:"
+#, fuzzy, kde-format
+#| msgid "Fixed size:"
+msgid "Fi&xed size:"
 msgstr "Dimensione fissa:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
@@ -5235,9 +5269,11 @@ msgstr "Memorizza tutto l'output prodotto dal terminale"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Save all lines to the scrollback history"
+#| msgid "Unlimited"
 msgctxt "Save all lines to the scrollback history"
-msgid "Unlimited"
+msgid "&Unlimited"
 msgstr "Illimitato"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
@@ -5248,10 +5284,12 @@ msgstr "Non memorizzare l'output precedente"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu Do not select any tabs"
+#| msgid "&None"
 msgctxt "Do not save any lines to the scrollback history"
-msgid "None"
-msgstr "Nessuna"
+msgid "&None"
+msgstr "&Nessuna"
 
 #: widgets/IncrementalSearchBar.cpp:50
 #, kde-format
@@ -5399,8 +5437,9 @@ msgstr "Formato del titolo delle schede remote:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, kde-format
-msgid "Tab title format:"
+#, fuzzy, kde-format
+#| msgid "Tab title format:"
+msgid "&Tab title format:"
 msgstr "Formato del titolo delle schede:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
@@ -5411,8 +5450,9 @@ msgstr "Formato del titolo delle schede normali"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, kde-format
-msgid "Tab Color:"
+#, fuzzy, kde-format
+#| msgid "Tab Color:"
+msgid "Tab Co&lor:"
 msgstr "Colore della scheda:"
 
 #: widgets/TabTitleFormatButton.cpp:21
@@ -5537,6 +5577,10 @@ msgstr "&Configura o rinomina scheda..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Chiudi scheda"
+
+#~ msgctxt "Do not save any lines to the scrollback history"
+#~ msgid "None"
+#~ msgstr "Nessuna"
 
 #~ msgid "open with"
 #~ msgstr "apri con"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 00:40+0000\n"
+"POT-Creation-Date: 2024-04-27 00:40+0000\n"
 "PO-Revision-Date: 2024-02-28 16:31+0200\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -2879,7 +2879,7 @@ msgid "Memory limit:"
 msgstr "Atmiņas limits:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
-#: settings/MemorySettings.ui:54
+#: settings/MemorySettings.ui:48
 #, kde-format
 msgid " MB"
 msgstr " MB"
@@ -2903,19 +2903,19 @@ msgstr ""
 "ziņojumu</a>, ja vēlaties mainīt to, kā tas notiek.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:54
+#: settings/ProfileSettings.ui:51
 #, kde-format
 msgid "Create a new profile based on the selected profile"
 msgstr "Izveidot jaunu profilu, par pamatu ņemot atlasīto profilu"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
-#: settings/ProfileSettings.ui:57
+#: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "&New..."
 msgstr "&Jauns..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:67
+#: settings/ProfileSettings.ui:64
 #, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
@@ -2923,31 +2923,31 @@ msgstr ""
 "Rediģēt atlasīto profilu (šī poga ir izslēgta tikai lasāmiem profiliem)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
-#: settings/ProfileSettings.ui:70
+#: settings/ProfileSettings.ui:67
 #, kde-format
 msgid "&Edit..."
 msgstr "&Rediģēt..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:80
+#: settings/ProfileSettings.ui:77
 #, kde-format
 msgid "Delete the selected profile"
 msgstr "Dzēst izvēlētos profilu"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
-#: settings/ProfileSettings.ui:83
+#: settings/ProfileSettings.ui:80
 #, kde-format
 msgid "&Remove"
 msgstr "&Noņemt"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:93
+#: settings/ProfileSettings.ui:90
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
 msgstr "Iestatīt atlasīto profilu kā noklusēto jaunām termināļa sesijām"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
-#: settings/ProfileSettings.ui:96
+#: settings/ProfileSettings.ui:93
 #, kde-format
 msgid "&Set as Default"
 msgstr "&Iestatīt kā noklusēto"
@@ -3716,83 +3716,50 @@ msgstr "Atļaut izvades apturēšanu, nospiežot „Ctrl+S“"
 msgid "Flow control"
 msgstr "Plūsmas kontrole"
 
-#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAdvancedPage.ui:213
-#: widgets/EditProfileAppearancePage.ui:951
-#, kde-format
-msgid ""
-"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
-"Hebrew only)"
-msgstr ""
-"Aktivēt termināļos divvirzienu attēlošanu (ietekmē tikai Arābu, Farsi un "
-"Ebreju lokāles)"
-
-#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
-#: widgets/EditProfileAdvancedPage.ui:216
-#: widgets/EditProfileAppearancePage.ui:954
-#, kde-format
-msgid "Bi-Directional text rendering"
-msgstr "Ieslēgt divvirzienu teksta attēlošanu"
-
 #. i18n: ectx: property (text), widget (QLabel, label_14)
-#: widgets/EditProfileAdvancedPage.ui:240
-#, kde-format
-msgid "Default character encoding:"
+#: widgets/EditProfileAdvancedPage.ui:222
+#, fuzzy, kde-format
+#| msgid "Default character encoding:"
+msgid "&Default character encoding:"
 msgstr "Rakstzīmju noklusētais kodējums:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
-#: widgets/EditProfileAdvancedPage.ui:260
+#: widgets/EditProfileAdvancedPage.ui:242
 #, kde-format
 msgid "Shortcut for peeking the primary screen:"
 msgstr "Saīsne, lai palūkotos uz primāro ekrānu:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:282
+#: widgets/EditProfileAdvancedPage.ui:263
 #, fuzzy, kde-format
 #| msgid "Line numbers "
 msgid "Line Numbers:"
 msgstr "Rindu numuri "
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:292 widgets/EditProfileGeneralPage.ui:413
-#: widgets/EditProfileGeneralPage.ui:459 widgets/EditProfileGeneralPage.ui:505
-#: widgets/EditProfileGeneralPage.ui:551 widgets/EditProfileGeneralPage.ui:597
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:273
+#, fuzzy, kde-format
+#| msgid "&Never"
 msgctxt "Never"
-msgid "Never"
-msgstr "Nekad"
+msgid "&Never"
+msgstr "&Nekad"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:302 widgets/EditProfileGeneralPage.ui:423
-#: widgets/EditProfileGeneralPage.ui:469 widgets/EditProfileGeneralPage.ui:515
-#: widgets/EditProfileGeneralPage.ui:561 widgets/EditProfileGeneralPage.ui:607
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:283
+#, fuzzy, kde-format
+#| msgctxt "When showing URL hints"
+#| msgid "When URL hints show"
 msgctxt "When showing URL hints"
-msgid "When URL hints show"
+msgid "When &URL hints show"
 msgstr "Parādot URL ieteikumus"
 
-#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
-#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:312 widgets/EditProfileGeneralPage.ui:433
-#: widgets/EditProfileGeneralPage.ui:479 widgets/EditProfileGeneralPage.ui:525
-#: widgets/EditProfileGeneralPage.ui:571 widgets/EditProfileGeneralPage.ui:617
-#, kde-format
+#: widgets/EditProfileAdvancedPage.ui:293
+#, fuzzy, kde-format
+#| msgctxt "Always"
+#| msgid "Always"
 msgctxt "Always"
-msgid "Always"
+msgid "A&lways"
 msgstr "Vienmēr"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
@@ -3826,7 +3793,7 @@ msgstr "Rediģēt izvēlēto krāsu shēmu"
 #. i18n: ectx: property (text), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:82
 #: widgets/EditProfileGeneralPage.ui:227 widgets/EditProfileKeyboardPage.ui:73
-#: widgets/EditProfileMousePage.ui:313
+#: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
 msgstr "Rediģēt..."
@@ -4219,6 +4186,22 @@ msgstr "Brāhmī raksta rakstzīmes"
 msgid "Emoji Font:"
 msgstr "Emodži fonts:"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAppearancePage.ui:951
+#, kde-format
+msgid ""
+"Enable Bi-Directional display on terminals (valid for Arabic, Farsi or "
+"Hebrew only)"
+msgstr ""
+"Aktivēt termināļos divvirzienu attēlošanu (ietekmē tikai Arābu, Farsi un "
+"Ebreju lokāles)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableBidiRenderingButton)
+#: widgets/EditProfileAppearancePage.ui:954
+#, kde-format
+msgid "Bi-Directional text rendering"
+msgstr "Ieslēgt divvirzienu teksta attēlošanu"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:967
 #, kde-format
@@ -4555,8 +4538,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, kde-format
-msgid "Initial directory:"
+#, fuzzy, kde-format
+#| msgid "Initial directory:"
+msgid "I&nitial directory:"
 msgstr "Sākotnējā mape:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
@@ -4599,8 +4583,9 @@ msgstr "Rediģēt vides mainīgo un ar tiem saistīto vērtību sarakstu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, kde-format
-msgid "Initial terminal size:"
+#, fuzzy, kde-format
+#| msgid "Initial terminal size:"
+msgid "Initial terminal si&ze:"
 msgstr "Sākotnējais termināļa izmērs:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
@@ -4618,8 +4603,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, kde-format
-msgid "Terminal bell mode:"
+#, fuzzy, kde-format
+#| msgid "Terminal bell mode:"
+msgid "&Terminal bell mode:"
 msgstr "Termināļa zvana režīms:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
@@ -4645,6 +4631,45 @@ msgstr "Peles klikšķis ievades rindā pārvieto kursoru"
 #, kde-format
 msgid "Semantic hints:"
 msgstr "Semantiskie ieteikumi"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsNever)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundNever)
+#: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
+#: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
+#: widgets/EditProfileGeneralPage.ui:597
+#, kde-format
+msgctxt "Never"
+msgid "Never"
+msgstr "Nekad"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsURL)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundURL)
+#: widgets/EditProfileGeneralPage.ui:423 widgets/EditProfileGeneralPage.ui:469
+#: widgets/EditProfileGeneralPage.ui:515 widgets/EditProfileGeneralPage.ui:561
+#: widgets/EditProfileGeneralPage.ui:607
+#, kde-format
+msgctxt "When showing URL hints"
+msgid "When URL hints show"
+msgstr "Parādot URL ieteikumus"
+
+#. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, errorBackgroundAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBarsAlways)
+#. i18n: ectx: property (text), widget (QRadioButton, alternatingBackgroundAlways)
+#: widgets/EditProfileGeneralPage.ui:433 widgets/EditProfileGeneralPage.ui:479
+#: widgets/EditProfileGeneralPage.ui:525 widgets/EditProfileGeneralPage.ui:571
+#: widgets/EditProfileGeneralPage.ui:617
+#, kde-format
+msgctxt "Always"
+msgid "Always"
+msgstr "Vienmēr"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:449
@@ -4748,14 +4773,16 @@ msgstr "Trīskāršs peles klikšķis atlasa:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, kde-format
-msgid "The whole line"
+#, fuzzy, kde-format
+#| msgid "The whole line"
+msgid "&The whole line"
 msgstr "Visu rindu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, kde-format
-msgid "From mouse position to the end of line"
+#, fuzzy, kde-format
+#| msgid "From mouse position to the end of line"
+msgid "From mouse position to the end of &line"
 msgstr "No peles pozīcijas līdz rindas beigām"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
@@ -4862,15 +4889,9 @@ msgstr ""
 msgid "Underline files"
 msgstr "Pasvītrot datnes"
 
-#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
-#: widgets/EditProfileMousePage.ui:288
-#, kde-format
-msgid "Text Editor Command: "
-msgstr "Teksta redaktora komanda:"
-
 #. i18n: ectx: property (toolTip), widget (QLabel, textEditorCommandLabel)
 #. i18n: ectx: property (toolTip), widget (QComboBox, textEditorCombo)
-#: widgets/EditProfileMousePage.ui:294 widgets/EditProfileMousePage.ui:306
+#: widgets/EditProfileMousePage.ui:288 widgets/EditProfileMousePage.ui:307
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Text editor to use when opening text file URLs at a given line/column."
@@ -4878,8 +4899,14 @@ msgstr ""
 "Teksta redaktors, ko izmantot teksta datņu URL atvēršanai norādītajā rindā/"
 "kolonnā."
 
+#. i18n: ectx: property (text), widget (QLabel, textEditorCommandLabel)
+#: widgets/EditProfileMousePage.ui:291
+#, kde-format
+msgid "Text Editor Command: "
+msgstr "Teksta redaktora komanda:"
+
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:332
+#: widgets/EditProfileMousePage.ui:335
 #, kde-format
 msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
@@ -4889,19 +4916,19 @@ msgstr ""
 "vienkāršu peles klikšķi."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
-#: widgets/EditProfileMousePage.ui:335
+#: widgets/EditProfileMousePage.ui:338
 #, kde-format
 msgid "Open files/links by direct click"
 msgstr "Atvērts datnes/saites ar vienkāršu klikšķi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowLinkEscapeSequenceButton)
-#: widgets/EditProfileMousePage.ui:346
+#: widgets/EditProfileMousePage.ui:349
 #, kde-format
 msgid "Allow escape sequences for links"
 msgstr "Saitēm atļaut atsoļa sekvenci"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
-#: widgets/EditProfileMousePage.ui:353
+#: widgets/EditProfileMousePage.ui:356
 #, kde-format
 msgid ""
 "<b>WARNING</b>: This has security implications as it allows malicious URLs "
@@ -4913,31 +4940,31 @@ msgstr ""
 "<br>Pārliecinieties, ka saprotiet ietekmi uz drošību."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileMousePage.ui:371
+#: widgets/EditProfileMousePage.ui:374
 #, kde-format
 msgid "Allowed link formats: "
 msgstr "Atļautie saišu formāti: "
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
-#: widgets/EditProfileMousePage.ui:381
+#: widgets/EditProfileMousePage.ui:384
 #, kde-format
 msgid "The formats of possible links, like http://, https:// and file://"
 msgstr "Iespējamie saišu formāti, piemēram, „http://“, „https://“ un „file://“"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:392
+#: widgets/EditProfileMousePage.ui:395
 #, kde-format
 msgid "Selected text will require control key plus click to drag."
 msgstr "Lai vilktu tekstu, jātur „Ctrl“ un peles taustiņš"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ctrlRequiredForDragButton)
-#: widgets/EditProfileMousePage.ui:395
+#: widgets/EditProfileMousePage.ui:398
 #, kde-format
 msgid "Require Ctrl key for drag && drop"
 msgstr "Vilkšanai un nomešanai pieprasīt „Ctrl“ taustiņu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:402
+#: widgets/EditProfileMousePage.ui:405
 #, kde-format
 msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
@@ -4947,13 +4974,13 @@ msgstr ""
 "kas izmanto alternatīvo ekrāna buferi (piemēram, „less“)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
-#: widgets/EditProfileMousePage.ui:405
+#: widgets/EditProfileMousePage.ui:408
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
 msgstr "Ieslēgt alternatīvā ekrāna bufera ritināšanu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:412
+#: widgets/EditProfileMousePage.ui:415
 #, kde-format
 msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
@@ -4963,26 +4990,26 @@ msgstr ""
 "kopēt vai saitēt."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
-#: widgets/EditProfileMousePage.ui:415
+#: widgets/EditProfileMousePage.ui:418
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
 msgstr "Izslēgt vilkšanas un nomešanas izvēlni datnēm un URL"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:422
+#: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
 msgstr ""
 "Turot „Ctrl“, ritinot ar peles rullīti palielinās/samazinās teksta izmērs."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
-#: widgets/EditProfileMousePage.ui:425
+#: widgets/EditProfileMousePage.ui:428
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
 msgstr "Atļaut teksta tālummaiņu ar „Ctrl“ un peles rullīti"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:432
+#: widgets/EditProfileMousePage.ui:435
 #, kde-format
 msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
@@ -4992,13 +5019,13 @@ msgstr ""
 "rādītāja"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
-#: widgets/EditProfileMousePage.ui:435
+#: widgets/EditProfileMousePage.ui:438
 #, kde-format
 msgid "Preview Colors on hover"
 msgstr "Priekšskatīt krāsas, pārliekot peles rādītāju"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:455
+#: widgets/EditProfileMousePage.ui:458
 #, kde-format
 msgid ""
 "Some terminal applications have mouse support, this allows them to get it by "
@@ -5009,7 +5036,7 @@ msgstr ""
 "laikā."
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowMouseTrackingButton)
-#: widgets/EditProfileMousePage.ui:458
+#: widgets/EditProfileMousePage.ui:461
 #, kde-format
 msgid "Allow terminal applications to handle clicks and drags"
 msgstr "Atļaut termināļa programmām pārvaldīt klikšķināšanu un vilkšanu"
@@ -5034,8 +5061,9 @@ msgstr "Ritināt lapu par pusi no loga augstuma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, kde-format
-msgid "Half screen height"
+#, fuzzy, kde-format
+#| msgid "Half screen height"
+msgid "Half screen heigh&t"
 msgstr "Puse ekrāna augstuma"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
@@ -5046,8 +5074,9 @@ msgstr "Ritināt lapu par pilnu loga augstumu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, kde-format
-msgid "Full screen height"
+#, fuzzy, kde-format
+#| msgid "Full screen height"
+msgid "F&ull screen height"
 msgstr "Pilns ekrāna augstums"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
@@ -5064,9 +5093,11 @@ msgstr "Rādīt ritjoslu termināļa loga labajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Show scrollbar on the right side"
+#| msgid "Right side"
 msgctxt "@option:radio Show scrollbar on the right side"
-msgid "Right side"
+msgid "Ri&ght side"
 msgstr "Labajā pusē"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
@@ -5077,9 +5108,11 @@ msgstr "Rādīt ritjoslu termināļa loga kreisajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Show scrollbar on the left side"
+#| msgid "Left side"
 msgctxt "@option:radio Show scrollbar on the left side"
-msgid "Left side"
+msgid "&Left side"
 msgstr "Kreisajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
@@ -5182,8 +5215,9 @@ msgstr "Ierobežot atmiņā turamos izvaddatus līdz noteiktam rindu skaitam"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, kde-format
-msgid "Fixed size:"
+#, fuzzy, kde-format
+#| msgid "Fixed size:"
+msgid "Fi&xed size:"
 msgstr "Fiksēts izmērs:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
@@ -5200,9 +5234,11 @@ msgstr "Atcerēties visu termināļa izvadi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Save all lines to the scrollback history"
+#| msgid "Unlimited"
 msgctxt "Save all lines to the scrollback history"
-msgid "Unlimited"
+msgid "&Unlimited"
 msgstr "Bez ierobežojuma"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
@@ -5213,10 +5249,12 @@ msgstr "Neatcerēties iepriekšējo izvadi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu Do not select any tabs"
+#| msgid "&None"
 msgctxt "Do not save any lines to the scrollback history"
-msgid "None"
-msgstr "Nevienu"
+msgid "&None"
+msgstr "&Nevienu"
 
 #: widgets/IncrementalSearchBar.cpp:50
 #, kde-format
@@ -5362,8 +5400,9 @@ msgstr "Attālināto ciļņu virsrakstu formāts:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, kde-format
-msgid "Tab title format:"
+#, fuzzy, kde-format
+#| msgid "Tab title format:"
+msgid "&Tab title format:"
 msgstr "Ciļņu virsraksta formāts:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
@@ -5374,8 +5413,9 @@ msgstr "Normāls ciļņu virsraksta formāts"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, kde-format
-msgid "Tab Color:"
+#, fuzzy, kde-format
+#| msgid "Tab Color:"
+msgid "Tab Co&lor:"
 msgstr "Ciļņu krāsa:"
 
 #: widgets/TabTitleFormatButton.cpp:21
@@ -5500,6 +5540,10 @@ msgstr "&Konfigurēt vai pārsaukt cilni..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Aizvērt cilni"
+
+#~ msgctxt "Do not save any lines to the scrollback history"
+#~ msgid "None"
+#~ msgstr "Nevienu"
 
 #, fuzzy
 #~| msgid "Open File Manager"
