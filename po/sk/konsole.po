@@ -6,20 +6,20 @@
 # Michal Sulek <misurel@gmail.com>, 2009, 2010, 2011.
 # Richard Frič <Richard.Fric@kdemail.net>, 2012.
 # SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2021, 2022, 2023 Roman Paholík <wizzardsk@gmail.com>
-# Matej Mrenica <matejm98mthw@gmail.com>, 2018, 2019, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2022, 2024 Matej Mrenica <matejm98mthw@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-25 02:28+0000\n"
-"PO-Revision-Date: 2023-12-12 19:29+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
-"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"PO-Revision-Date: 2024-04-27 16:37+0200\n"
+"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
+"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 24.02.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -620,21 +620,19 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
 msgstr "Horizontálne"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
 msgstr "Vertikálne"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
-#, fuzzy, kde-format
+#, kde-format
 msgid "Both"
 msgstr "Obe"
 
@@ -1228,20 +1226,16 @@ msgid "Activate Menu"
 msgstr "Aktivovať ponuku"
 
 #: MainWindow.cpp:403
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Uložiť rozloženie kariet do súboru"
+msgstr "Uložiť rozloženie kariet..."
 
 #: MainWindow.cpp:412
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Načítať rozloženie kariet zo súboru"
+msgstr "Načítať rozloženie kariet..."
 
 #: MainWindow.cpp:726 MainWindow.cpp:743
 #, kde-format
@@ -1415,10 +1409,9 @@ msgid "Quick Commands"
 msgstr "Rýchle príkazy"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:71
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Zobraziť rýchle príkazy"
+msgstr "Zobraziť rýchly prístup"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
@@ -1426,10 +1419,9 @@ msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:107
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Rýchle príkazy"
+msgstr "Doplnky - Rýchle príkazy"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
@@ -1518,8 +1510,7 @@ msgid "SSH Config"
 msgstr "SSH Nastavenia"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "Predvolené"
@@ -1693,9 +1684,7 @@ msgstr "Odstrániť vybranú položku"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Skratka"
 
@@ -1713,11 +1702,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
-msgstr "Spravovať profily"
+msgstr "Spravovať profil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/SSHManager/sshwidget.ui:82
@@ -1907,12 +1894,10 @@ msgid "Default profile"
 msgstr "Štandardný profil"
 
 #: profile/ProfileManager.cpp:280
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "+Profily"
+msgstr "Profil %1"
 
 #: profile/ProfileManager.cpp:294
 #, kde-format
@@ -2188,16 +2173,12 @@ msgid "Copy"
 msgstr "Kopírovať"
 
 #: session/SessionController.cpp:667
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Rozdeliť pohľad vertikálne"
 
 #: session/SessionController.cpp:672
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Rozdeliť pohľad horizontálne"
 
@@ -2232,8 +2213,7 @@ msgid "&Select All"
 msgstr "Vybrať &všetko"
 
 #: session/SessionController.cpp:720
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
 msgstr "Vybrať riadok"
 
@@ -2268,17 +2248,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Vyčistiť rolovanie a obnoviť"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Upraviť profil"
+msgstr "Ďalší profil"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Predchádzajúci"
+msgstr "Predchádzajúci profil"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -2291,18 +2268,13 @@ msgid "Set &Encoding"
 msgstr "Nastaviť &kódovanie"
 
 #: session/SessionController.cpp:812
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Povoliť sledovanie myši"
 
 #: session/SessionController.cpp:821
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Iba na čítanie"
@@ -2891,7 +2863,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
-#, fuzzy, kde-format
+#, kde-format
 msgid "Memory limit:"
 msgstr "Limit pamäte:"
 
@@ -3409,12 +3381,10 @@ msgid "Split View Top/Bottom"
 msgstr "Rozdeliť pohľad horizontálne"
 
 #: ViewManager.cpp:136
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Rozdeliť pohľad horizontálne"
+msgstr "Rozdeliť pohľad automaticky"
 
 #: ViewManager.cpp:146
 #, fuzzy, kde-format
@@ -3613,23 +3583,20 @@ msgid "Switch to Tab %1"
 msgstr "Prepnúť na kartu %1"
 
 #: ViewManager.cpp:569
-#, fuzzy, kde-format
-#| msgid "Semantic hints:"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Sémantické nápovedy:"
+msgstr "Sémantické nápovedy"
 
 #: ViewManager.cpp:585
-#, fuzzy, kde-format
+#, kde-format
 msgid "Line numbers "
 msgstr "Čísla riadkov"
 
 #: ViewManager.cpp:1170
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Uložiť rozloženie kariet do súboru"
+msgstr "Uložiť rozloženie kariet"
 
 #: ViewManager.cpp:1172 ViewManager.cpp:1259
 #, fuzzy, kde-format
@@ -3665,12 +3632,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1257
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Načítať rozloženie kariet zo súboru"
+msgstr "Načítať rozloženie kariet"
 
 #: Vt102Emulation.cpp:2470
 #, kde-format
@@ -3790,9 +3755,9 @@ msgstr "Skratka na nazretie na hlavnú obrazovku:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:282
-#, fuzzy, kde-format
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Čísla riadkov"
+msgstr "Čísla riadkov:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4184,9 +4149,9 @@ msgstr "Indikovať či je okno aktívne stlmením farieb"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:756
-#, fuzzy, kde-format
+#, kde-format
 msgid "Border"
-msgstr "Hranica"
+msgstr "Okraj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:798
