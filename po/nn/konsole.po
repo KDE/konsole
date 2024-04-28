@@ -5534,7 +5534,3 @@ msgstr "&Tilpass eller endra namn på fane …"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Lukk fane"
-
-#~ msgctxt "Do not save any lines to the scrollback history"
-#~ msgid "None"
-#~ msgstr "Ingen"
