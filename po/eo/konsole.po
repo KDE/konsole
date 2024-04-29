@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-25 02:28+0000\n"
-"PO-Revision-Date: 2024-04-13 11:51+0100\n"
+"PO-Revision-Date: 2024-04-27 17:28+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1254,7 +1254,7 @@ msgstr[1] ""
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
-msgstr "Konfirmi Fermon"
+msgstr "Konfirmi fermon"
 
 #: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
 #, kde-format
@@ -2281,7 +2281,7 @@ msgstr "Nur-Legebla"
 #: session/SessionController.cpp:832
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "&Agordi aŭ Alinomi Langeton..."
+msgstr "&Agordi aŭ Alinomi langeton..."
 
 #: session/SessionController.cpp:838
 #, kde-format
@@ -3265,7 +3265,7 @@ msgstr[1] "Ĉu vi certas ke vi volas alglui %1 signojn?"
 #: terminalDisplay/TerminalDisplay.cpp:2255
 #, kde-format
 msgid "Confirm Paste"
-msgstr "Konfirmi Algluon"
+msgstr "Konfirmi Paston"
 
 #: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
@@ -3525,7 +3525,7 @@ msgstr "Ŝaltigi maksimumigi la nunan vidon"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Baskuligi zom-maksimumigi aktualan vidon"
+msgstr "Baskuligi zom-maksimumigi nunan vidon"
 
 #: ViewManager.cpp:305
 #, kde-format
@@ -3741,10 +3741,9 @@ msgstr "Ŝparvojo por kaŝrigardi la ĉefan ekranon:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:282
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Linia nombroj"
+msgstr "Linionombroj:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -5037,7 +5036,7 @@ msgstr "Plena ekrana alteco"
 #: widgets/EditProfileScrollingPage.ui:131
 #, kde-format
 msgid "Scrollbar position:"
-msgstr "Srollbar pozicio:"
+msgstr "Pozicio de rulumskalo:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:141
