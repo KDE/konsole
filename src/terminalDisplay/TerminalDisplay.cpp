@@ -658,6 +658,8 @@ void TerminalDisplay::updateImage()
 }
 void TerminalDisplay::showResizeNotification()
 {
+    _linesAtLastOsd = _lines;
+    _columnsAtLastOsd = _columns;
     showNotification(i18n("Size: %1 x %2", _columns, _lines));
 }
 
@@ -687,6 +689,10 @@ void TerminalDisplay::showNotification(QString text)
 
 void TerminalDisplay::paintEvent(QPaintEvent *pe)
 {
+    if (_linesAtLastOsd != _lines || _columnsAtLastOsd != _columns) {
+        showResizeNotification();
+    }
+
     QPainter paint(this);
 
     // Determine which characters should be repainted (1 region unit = 1 character)
@@ -996,7 +1002,6 @@ void TerminalDisplay::updateImageSize()
         _iPntSel = QPoint(-1, -1);
         _pntSel = QPoint(-1, -1);
         _tripleSelBegin = QPoint(-1, -1);
-        showResizeNotification();
         Q_EMIT changedContentSizeSignal(_contentRect.height(), _contentRect.width()); // expose resizeEvent
     }
 

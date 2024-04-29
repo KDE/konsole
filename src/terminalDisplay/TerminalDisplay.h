@@ -691,6 +691,9 @@ private:
     int _lines = 1; // the number of lines that can be displayed in the widget
     int _columns = 1; // the number of columns that can be displayed in the widget
 
+    int _linesAtLastOsd = 1;
+    int _columnsAtLastOsd = 1;
+
     // Character line and character column as per a previous call to
     // getCharacterPosition() in mouseMoveEvent().
     int _prevCharacterLine = -1;
