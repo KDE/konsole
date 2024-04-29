@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-27 00:40+0000\n"
-"PO-Revision-Date: 2024-04-21 22:09+0530\n"
+"PO-Revision-Date: 2024-04-28 17:20+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -3707,10 +3707,9 @@ msgstr "வெளியீட்டுக் கட்டுப்பாடு"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "&Default character encoding:"
-msgstr "எழுத்துகளுக்கான இயல்பிருப்பு குறியாக்கம்:"
+msgstr "&எழுத்துகளுக்கான இயல்பிருப்பு குறியாக்கம்:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:242
@@ -3720,36 +3719,30 @@ msgstr "முதன்மையான திரையை காட்டுவ�
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:263
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "வரியேண்கள்"
+msgstr "வரியேண்கள்:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:273
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "&ஒருபோதும் வேண்டாம்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:283
-#, fuzzy, kde-format
-#| msgctxt "When showing URL hints"
-#| msgid "When URL hints show"
+#, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr "முகவரித்துப்புகள் காட்டப்படும்போது"
+msgstr "&முகவரித்துப்புகள் காட்டப்படும்போது"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:293
-#, fuzzy, kde-format
-#| msgctxt "Always"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr "எப்போதும்"
+msgstr "எ&ப்போதும்"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -4517,10 +4510,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, fuzzy, kde-format
-#| msgid "Initial directory:"
+#, kde-format
 msgid "I&nitial directory:"
-msgstr "இயல்பிருப்பு அடைவு:"
+msgstr "&இயல்பிருப்பு அடைவு:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:170
@@ -4561,10 +4553,9 @@ msgstr "சூழல் மாறிகளின் மற்றும் தொ
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Initial terminal si&ze:"
-msgstr "முனையத்தின் இயல்பிருப்பு அளவு:"
+msgstr "&முனையத்தின் இயல்பிருப்பு அளவு:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4581,10 +4572,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, fuzzy, kde-format
-#| msgid "Terminal bell mode:"
+#, kde-format
 msgid "&Terminal bell mode:"
-msgstr "முனைய மணியின் பயன்முறை:"
+msgstr "மு&னைய மணியின் பயன்முறை:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
@@ -4752,17 +4742,15 @@ msgstr "மூமுறை-கிளிக் தேர்ந்தெடுப�
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, fuzzy, kde-format
-#| msgid "The whole line"
+#, kde-format
 msgid "&The whole line"
-msgstr "முழு வரியை"
+msgstr "முழு &வரியை"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, fuzzy, kde-format
-#| msgid "From mouse position to the end of line"
+#, kde-format
 msgid "From mouse position to the end of &line"
-msgstr "சுட்டிக்குறியின் இருப்பிடத்திலிருந்து வரியின் முடிவு வரை"
+msgstr "&சுட்டிக்குறியின் இருப்பிடத்திலிருந்து வரியின் முடிவு வரை"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
@@ -5038,10 +5026,9 @@ msgstr "திரையின் உயரத்தில் பாதியள�
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, fuzzy, kde-format
-#| msgid "Half screen height"
+#, kde-format
 msgid "Half screen heigh&t"
-msgstr "திரையின் உயரத்தில் பாதி"
+msgstr "&திரையின் உயரத்தில் பாதி"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -5051,10 +5038,9 @@ msgstr "திரையின் முழு உயரத்திற்கு 
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, fuzzy, kde-format
-#| msgid "Full screen height"
+#, kde-format
 msgid "F&ull screen height"
-msgstr "திரையின் உயரம் முழுதாக"
+msgstr "திரையின் &உயரம் முழுதாக"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
@@ -5070,12 +5056,10 @@ msgstr "உருள்பட்டையை முனையச்சாளர�
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the right side"
-#| msgid "Right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
-msgstr "வலதுபுறத்தில்"
+msgstr "&வலதுபுறம்"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
@@ -5085,12 +5069,10 @@ msgstr "உருள்பட்டையை முனையச்சாளர�
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr "இடதுபுறம்"
+msgstr "&இடதுபுறம்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
@@ -5190,10 +5172,9 @@ msgstr "நினைவில் கொள்ளப்படும் வெள�
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size:"
+#, kde-format
 msgid "Fi&xed size:"
-msgstr "நிலையான அளவு:"
+msgstr "&நிலையான அளவு:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5209,12 +5190,10 @@ msgstr "முனையம் தரும் வெளியீட்டனை�
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgctxt "Save all lines to the scrollback history"
-#| msgid "Unlimited"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr "வரம்பில்லாத‍து"
+msgstr "வ&ரம்பில்லாத‍து"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5224,9 +5203,7 @@ msgstr "முந்தைய வெளியீட்டை நினைவி�
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&ஏதுமில்லை"
@@ -5375,10 +5352,9 @@ msgstr "தொலை கீற்றின் தலைப்பிற்கா�
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, fuzzy, kde-format
-#| msgid "Tab title format:"
+#, kde-format
 msgid "&Tab title format:"
-msgstr "கீற்றுத்தலைப்பின் வடிவம்:"
+msgstr "&கீற்றுத்தலைப்பின் வடிவம்:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5388,10 +5364,9 @@ msgstr "சாதாரண கீற்றின் தலைப்பிற்�
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgid "Tab Color:"
+#, kde-format
 msgid "Tab Co&lor:"
-msgstr "கீற்றின் நிறம்:"
+msgstr "கீற்றின் &நிறம்:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format

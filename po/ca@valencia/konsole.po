@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-27 00:40+0000\n"
-"PO-Revision-Date: 2024-04-24 09:36+0200\n"
+"PO-Revision-Date: 2024-04-27 11:11+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -3750,10 +3750,9 @@ msgstr "Control de flux"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "&Default character encoding:"
-msgstr "Codificació dels caràcters per defecte:"
+msgstr "Co&dificació predeterminada dels caràcters:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:242
@@ -3769,29 +3768,24 @@ msgstr "Números de línia:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:273
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "&Mai"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:283
-#, fuzzy, kde-format
-#| msgctxt "When showing URL hints"
-#| msgid "When URL hints show"
+#, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr "Mostra els consells dels URL"
+msgstr "Mostra els consells dels &URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:293
-#, fuzzy, kde-format
-#| msgctxt "Always"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr "Sempre"
+msgstr "&Sempre"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -4571,10 +4565,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, fuzzy, kde-format
-#| msgid "Initial directory:"
+#, kde-format
 msgid "I&nitial directory:"
-msgstr "Directori inicial:"
+msgstr "Directori i&nicial:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:170
@@ -4617,10 +4610,9 @@ msgstr "Editeu la llista de les variables d'entorn i els seus valors associats"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Initial terminal si&ze:"
-msgstr "Mida inicial del terminal:"
+msgstr "Mida ini&cial del terminal:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4637,10 +4629,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, fuzzy, kde-format
-#| msgid "Terminal bell mode:"
+#, kde-format
 msgid "&Terminal bell mode:"
-msgstr "Mode de timbre del terminal:"
+msgstr "Mode de &timbre del terminal:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
@@ -4810,17 +4801,15 @@ msgstr "El clic triple selecciona:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, fuzzy, kde-format
-#| msgid "The whole line"
+#, kde-format
 msgid "&The whole line"
-msgstr "Tota la línia"
+msgstr "&Tota la línia"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, fuzzy, kde-format
-#| msgid "From mouse position to the end of line"
+#, kde-format
 msgid "From mouse position to the end of &line"
-msgstr "Des de la posició del ratolí fins al final de la línia"
+msgstr "Des de la posició del ratolí fins al final de la &línia"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
@@ -5109,10 +5098,9 @@ msgstr "Desplaça la pàgina la meitat de l'alçària de la finestra"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, fuzzy, kde-format
-#| msgid "Half screen height"
+#, kde-format
 msgid "Half screen heigh&t"
-msgstr "Mitja pantalla d'alçària"
+msgstr "Mitja pan&talla d'alçària"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -5122,10 +5110,9 @@ msgstr "Desplaça la pàgina tota l'alçària de la finestra"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, fuzzy, kde-format
-#| msgid "Full screen height"
+#, kde-format
 msgid "F&ull screen height"
-msgstr "Tota l'alçària de la pantalla"
+msgstr "T&ota l'alçària de la pantalla"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
@@ -5142,12 +5129,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the right side"
-#| msgid "Right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
-msgstr "Costat dret"
+msgstr "Costat &dret"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
@@ -5159,12 +5144,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr "Costat esquerre"
+msgstr "Costat es&querre"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
@@ -5265,10 +5248,9 @@ msgstr "Limita l'eixida que s'ha de recordar a un nombre fix de línies"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size:"
+#, kde-format
 msgid "Fi&xed size:"
-msgstr "Mida fixa:"
+msgstr "Mida fi&xa:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5284,12 +5266,10 @@ msgstr "Recorda tota l'eixida generada pel terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgctxt "Save all lines to the scrollback history"
-#| msgid "Unlimited"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr "Sense límit"
+msgstr "&Sense límit"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5299,9 +5279,7 @@ msgstr "No recordes l'eixida prèvia"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&Cap"
@@ -5449,10 +5427,9 @@ msgstr "Format del títol de la pestanya remota:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, fuzzy, kde-format
-#| msgid "Tab title format:"
+#, kde-format
 msgid "&Tab title format:"
-msgstr "Format del títol de la pestanya:"
+msgstr "Format del títol de la pes&tanya:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5462,10 +5439,9 @@ msgstr "Format normal del títol de la pestanya"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgid "Tab Color:"
+#, kde-format
 msgid "Tab Co&lor:"
-msgstr "Color de la pestanya:"
+msgstr "Co&lor de la pestanya:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
@@ -5590,7 +5566,3 @@ msgstr "&Configura o canvia el nom de la pestanya..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Tanca la pestanya"
-
-#~ msgctxt "Do not save any lines to the scrollback history"
-#~ msgid "None"
-#~ msgstr "Res"
