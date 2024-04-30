@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-27 00:40+0000\n"
-"PO-Revision-Date: 2024-04-27 13:58+0300\n"
+"PO-Revision-Date: 2024-04-30 00:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2051,7 +2051,7 @@ msgstr "Solaris konsolu"
 #: session/Session.cpp:106
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
-msgstr "‘%1’ içinde Zil (Oturum ‘%2’)"
+msgstr "“%1” içinde Zil (Oturum “%2”)"
 
 #: session/Session.cpp:413
 #, kde-format
@@ -2075,18 +2075,18 @@ msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
-"‘%1’ bulunamadı, onun yerine ‘%2’ başlatılıyor. Lütfen profil ayarlarınızı "
+"“%1” bulunamadı, onun yerine “%2” başlatılıyor. Lütfen profil ayarlarınızı "
 "denetleyin."
 
 #: session/Session.cpp:587
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
-msgstr "‘%1’ uygulaması ‘%2’ argümanıyla başlatılamadı."
+msgstr "“%1” uygulaması “%2” argümanıyla başlatılamadı."
 
 #: session/Session.cpp:735
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "‘%1’ içinde Sessizlik (Oturum ‘%2’)"
+msgstr "“%1” içinde Sessizlik (Oturum “%2”)"
 
 #: session/Session.cpp:736 session/Session.cpp:2074
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
@@ -2118,12 +2118,12 @@ msgstr "Bitti"
 #: session/Session.cpp:1074 session/Session.cpp:1090
 #, kde-format
 msgid "Program '%1' crashed."
-msgstr "‘%1’ uygulaması çöktü."
+msgstr "“%1” uygulaması çöktü."
 
 #: session/Session.cpp:1076
 #, kde-format
 msgid "Program '%1' exited with status %2."
-msgstr "‘%1’ uygulamasından %2 durumu ile çıkıldı."
+msgstr "“%1” uygulamasından %2 durumu ile çıkıldı."
 
 #: session/Session.cpp:1602
 #, kde-format
@@ -2133,7 +2133,7 @@ msgstr "ZModem İlerlemesi"
 #: session/Session.cpp:2073
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "‘%1’ içinde Etkinlik (Oturum ‘%2’)"
+msgstr "“%1” içinde Etkinlik (Oturum “%2”)"
 
 #: session/SessionController.cpp:139
 #, kde-format
@@ -2143,7 +2143,7 @@ msgstr "Konsole"
 #: session/SessionController.cpp:353
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
-msgstr "‘%1’ süreci, ‘%2’ oturumundaki çalışmayı bitirdi"
+msgstr "“%1” süreci, “%2” oturumundaki çalışmayı bitirdi"
 
 #: session/SessionController.cpp:436
 #, kde-format
@@ -2421,7 +2421,7 @@ msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
-"‘%1’ uygulaması bu oturumda çalışıyor. Kapatmak istediğinizden emin misiniz?"
+"“%1” uygulaması bu oturumda çalışıyor. Kapatmak istediğinizden emin misiniz?"
 
 #: session/SessionController.cpp:1123 session/SessionController.cpp:1158
 #, kde-format
@@ -2447,7 +2447,7 @@ msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"‘%1’ uygulaması bu oturumda sonlandırılamadı. Zorla kapatmak istediğinizden "
+"“%1” uygulaması bu oturumda sonlandırılamadı. Zorla kapatmak istediğinizden "
 "emin misiniz?"
 
 #: session/SessionController.cpp:1159
@@ -2459,7 +2459,7 @@ msgstr "Programı Öldür"
 #: session/SessionController.cpp:1845
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr "Kabuk istemi, ‘%1’ oturumunda görüntülenir"
+msgstr "Kabuk istemi, “%1” oturumunda görüntülenir"
 
 #: session/SessionController.cpp:2038
 #, kde-format
