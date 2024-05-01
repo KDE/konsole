@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-25 02:28+0000\n"
-"PO-Revision-Date: 2024-04-15 11:13+0200\n"
+"PO-Revision-Date: 2024-04-28 11:19+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -3772,10 +3772,9 @@ msgstr "Scorciatoia per dare un'occhiata alla schermata principale:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:282
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Numeri di riga "
+msgstr "Numeri di riga:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
