@@ -21,6 +21,7 @@ private Q_SLOTS:
     void initTestCase();
     void testTerminalInterfaceNoShell();
     void testTerminalInterface();
+    void testTerminalInterfaceUsingSpy();
     void testTerminalInterfaceV2();
 
 private:

@@ -108,9 +108,6 @@ void TerminalInterfaceTest::testTerminalInterface()
     // Start a shell in given directory
     terminal->showShellInDir(QDir::home().path());
 
-    // Skip this for now on FreeBSD
-    // -1 is current foreground process and name for process 0 is "kernel"
-
     int foregroundProcessId = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
     QString foregroundProcessName = terminal->foregroundProcessName();
@@ -141,6 +138,40 @@ void TerminalInterfaceTest::testTerminalInterface()
         QCOMPARE(procExeTarget.symLinkTarget(), defaultExePath.trimmed());
     }
 #endif
+
+    // Nothing running in foreground
+    foregroundProcessId = terminal->foregroundProcessId();
+    QCOMPARE(foregroundProcessId, -1);
+    foregroundProcessName = terminal->foregroundProcessName();
+    QCOMPARE(foregroundProcessName, QString());
+
+    delete _terminalPart;
+}
+
+// Test with default shell running using QSignalSpy
+void TerminalInterfaceTest::testTerminalInterfaceUsingSpy()
+{
+#if defined(Q_OS_WIN)
+    return;
+#endif
+    QString currentDirectory;
+
+    // create a Konsole part and attempt to connect to it
+    _terminalPart = createPart();
+    if (_terminalPart == nullptr) {
+        QFAIL("konsolepart not found.");
+    }
+
+    TerminalInterface *terminal = qobject_cast<TerminalInterface *>(_terminalPart);
+    QVERIFY(terminal);
+
+    // Start a shell in given directory
+    terminal->showShellInDir(QDir::home().path());
+
+    int foregroundProcessId = terminal->foregroundProcessId();
+    QCOMPARE(foregroundProcessId, -1);
+    QString foregroundProcessName = terminal->foregroundProcessName();
+    QCOMPARE(foregroundProcessName, QString());
 
     // Let's try using QSignalSpy
     // https://community.kde.org/Guidelines_and_HOWTOs/UnitTests
