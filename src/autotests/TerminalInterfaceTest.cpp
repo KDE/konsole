@@ -268,6 +268,7 @@ void TerminalInterfaceTest::testTerminalInterfaceUsingSpy()
     QCOMPARE(destroyedSpy.count(), 1);
 }
 
+// Oct 2023: KParts merge TerminalInterfaceV2 into TerminalInterface
 void TerminalInterfaceTest::testTerminalInterfaceV2()
 {
     // Use the built-in profile for testing
