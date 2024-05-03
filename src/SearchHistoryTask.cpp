@@ -195,6 +195,7 @@ void SearchHistoryTask::highlightResult(const ScreenWindowPtr &window, int findP
 SearchHistoryTask::SearchHistoryTask(QObject *parent)
     : SessionTask(parent)
     , _direction(Enum::BackwardsSearch)
+    , _noWrap(false)
     , _startLine(0)
 {
 }

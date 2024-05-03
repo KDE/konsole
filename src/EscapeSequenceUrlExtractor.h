@@ -50,7 +50,7 @@ private:
     bool _ignoreNextUrlInput = false;
 
     /* The url / text pair being extracted currently */
-    ExtractedUrl _currentUrl;
+    ExtractedUrl _currentUrl{};
 
     /* The maximum size of url to prevent a bomb
      * that will take over the history file.
