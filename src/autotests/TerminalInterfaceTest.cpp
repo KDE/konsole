@@ -94,10 +94,6 @@ void TerminalInterfaceTest::testTerminalInterfaceNoShell()
 // Test with default shell running
 void TerminalInterfaceTest::testTerminalInterface()
 {
-    // Maybe https://bugreports.qt.io/browse/QTBUG-82351 ???
-    QSKIP("Skipping on CI suse_tumbelweed_qt64", SkipSingle);
-    return;
-
     QString currentDirectory;
 
     // create a Konsole part and attempt to connect to it
@@ -112,11 +108,6 @@ void TerminalInterfaceTest::testTerminalInterface()
     // Start a shell in given directory
     terminal->showShellInDir(QDir::home().path());
 
-// After fa398f56, the CI test failed; also the KF was updated on that build.
-// TODO: research this more
-#if defined(Q_OS_FREEBSD)
-    return;
-#endif
     // Skip this for now on FreeBSD
     // -1 is current foreground process and name for process 0 is "kernel"
 

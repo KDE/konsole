@@ -44,9 +44,10 @@ void PartTest::initTestCase()
 
 void PartTest::testFdShell()
 {
-    // Maybe https://bugreports.qt.io/browse/QTBUG-82351 ???
-    QSKIP("Skipping on CI suse_tumbelweed_qt64", SkipSingle);
+#if defined(Q_OS_FREEBSD)
+    QSKIP("Skipping on CI FreeBSD14_qt6x", SkipSingle);
     return;
+#endif
 
     testFd(true);
 }
