@@ -3695,7 +3695,7 @@ msgstr "暂时显示主屏幕快捷键："
 #: widgets/EditProfileAdvancedPage.ui:282
 #, kde-format
 msgid "Line Numbers:"
-msgstr ""
+msgstr "行号："
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4932,7 +4932,7 @@ msgstr "滚动半个窗口"
 #: widgets/EditProfileScrollingPage.ui:86
 #, kde-format
 msgid "Half screen height"
-msgstr "半屏幕高"
+msgstr "半屏高度"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -4944,7 +4944,7 @@ msgstr "滚动整个页面高度"
 #: widgets/EditProfileScrollingPage.ui:99
 #, kde-format
 msgid "Full screen height"
-msgstr "全屏幕高"
+msgstr "全屏高度"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
