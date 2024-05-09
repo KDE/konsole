@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-03 00:40+0000\n"
-"PO-Revision-Date: 2024-04-13 01:14-0300\n"
+"PO-Revision-Date: 2024-05-07 23:43-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3607,10 +3607,9 @@ msgid "Switch to Tab %1"
 msgstr "Mudar para a aba %1"
 
 #: ViewManager.cpp:569
-#, fuzzy, kde-format
-#| msgid "Semantic Integration"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Integração semântica"
+msgstr "Indicações semânticas"
 
 #: ViewManager.cpp:585
 #, kde-format
@@ -3759,10 +3758,9 @@ msgstr "Atalho para espiar a tela principal:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:263
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Números de linha "
+msgstr "Números de linha:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:273
@@ -3886,21 +3884,19 @@ msgstr "Usar caracteres de linha contidos na fonte"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"Use a fonte selecionada para caracteres de linha em vez do código interno"
+"Usar a fonte selecionada para caracteres braille unicode em vez do código "
+"interno"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Usar caracteres de linha contidos na fonte"
+msgstr "Usar caracteres braille unicode contidos na fonte"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4061,10 +4057,9 @@ msgstr "Cor:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:559
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Selecionar a cor a ser usada para desenhar o cursor"
+msgstr "Selecionar a cor a ser usada para desenhar a borda"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:581
@@ -4074,10 +4069,9 @@ msgstr "Terminais inativos:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:591
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Terminais inativos:"
+msgstr "Terminais ativos:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:601
@@ -4133,10 +4127,9 @@ msgstr "Escurecer"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:753
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indicar se a janela está ativa escurecendo as cores"
+msgstr "Indica se a janela está ativa desenhando uma borda"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:756
@@ -4164,10 +4157,9 @@ msgstr "Layout de texto complexo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:861
-#, fuzzy, kde-format
-#| msgid "Bi-Directional text rendering"
+#, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Renderização de texto bidirecional"
+msgstr "Ativar renderização de texto no modo palavra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:864
@@ -4209,10 +4201,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:912
-#, fuzzy, kde-format
-#| msgid "Match current character"
+#, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Corresponder caractere atual"
+msgstr "Caracteres de escrita brahmica"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:925
@@ -4262,11 +4253,9 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:999
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Paste &without control characters"
+#, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Colar &sem os caracteres de controle"
+msgstr "Ignorar a largura dos caracteres problemáticos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1002
@@ -4474,10 +4463,9 @@ msgstr ""
 "Você precisa reiniciar o Konsole para ver o fundo transparente."
 
 #: widgets/EditProfileDialog.cpp:1896
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Perfil padrão"
+msgstr "Padrão por tipo de arquivo"
 
 #: widgets/EditProfileDialog.cpp:1922
 #, kde-format
@@ -4709,10 +4697,9 @@ msgstr "Barras de erro vermelhas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:495
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Red error background:"
-msgstr "Borrar o plano de fundo"
+msgstr "Plano de fundo para erros severos:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:541
@@ -4722,10 +4709,9 @@ msgstr "Barras alternadas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:587
-#, fuzzy, kde-format
-#| msgid "Blur background"
+#, kde-format
 msgid "Alternating background:"
-msgstr "Borrar o plano de fundo"
+msgstr "Alternando plano de fundo:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:17
@@ -5387,11 +5373,10 @@ msgid "No wrap"
 msgstr ""
 
 #: widgets/IncrementalSearchBar.cpp:143
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Define se a pesquisa deve começar a partir da base"
+msgstr "Define se a pesquisa deve parar em vez de recomeçar do início"
 
 #: widgets/IncrementalSearchBar.cpp:172
 #, kde-format
