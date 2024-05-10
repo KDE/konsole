@@ -129,7 +129,7 @@ MainWindow::MainWindow()
 
 bool MainWindow::wasWindowGeometrySaved() const
 {
-    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
+    KSharedConfigPtr konsoleConfig = KSharedConfig::openStateConfig();
     KConfigGroup cg = konsoleConfig->group(QStringLiteral("MainWindow"));
     if (!cg.exists()) { // First run, no existing konsolerc?
         return false;
