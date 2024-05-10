@@ -14,13 +14,13 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 set(QT_MIN_VERSION "6.5.0")
-set(KF5_DEP_VERSION "5.240.0")
+set(KF6_DEP_VERSION "6.0.0")
 set(QT_MAJOR_VERSION "6")
 
 # Release script will create bugzilla versions
 project(konsole VERSION ${RELEASE_SERVICE_VERSION})
 
-find_package(ECM ${KF5_DEP_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF6_DEP_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -52,7 +52,7 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core5Compat
 )
 
-find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
+find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
     Bookmarks
     Config
     ConfigWidgets
@@ -75,18 +75,18 @@ find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
 )
 
 if (NOT WIN32)
-    find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
+    find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
         Pty
     )
 endif()
 
 if (NOT WIN32 AND NOT APPLE)
-    find_package(KF6 ${KF5_DEP_VERSION} REQUIRED
+    find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
         GlobalAccel
     )
 endif()
 
-find_package(KF6DocTools ${KF5_DEP_VERSION})
+find_package(KF6DocTools ${KF6_DEP_VERSION})
 set_package_properties(KF6DocTools PROPERTIES DESCRIPTION
     "Tools to generate documentation"
     TYPE OPTIONAL
