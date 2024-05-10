@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-03 00:40+0000\n"
-"PO-Revision-Date: 2024-04-27 06:37+0300\n"
+"PO-Revision-Date: 2024-05-09 12:07+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -37,7 +37,7 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "דרור לוין, מארק קרפיבנר,צוות תרגום KDE ישראל"
+msgstr "דרור לוין, מארק קרפיבנר,צוות התרגום של KDE ישראל"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -2340,7 +2340,7 @@ msgstr "הקטנת כתב"
 #: session/SessionController.cpp:916
 #, kde-format
 msgid "Reset Font Size"
-msgstr "איפוס גודל גופן"
+msgstr "איפוס גודל כתב"
 
 #: session/SessionController.cpp:922
 #, kde-format
@@ -2536,7 +2536,7 @@ msgstr "שימור גודל החלון"
 #: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
 #, kde-format
 msgid "Show window title on the titlebar"
-msgstr "הצג את שם החלון בכרטיסייה"
+msgstr "הצגת שם החלון בכרטיסייה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
@@ -2550,7 +2550,7 @@ msgstr "העברת המיקוד למסופים כאשר סמן העכבר עוב
 #: settings/GeneralSettings.ui:105 settings/konsole.kcfg:69
 #, kde-format
 msgid "Match using regular expressions"
-msgstr "השתמש בביטויים רגולריים"
+msgstr "להשתמש בביטויים רגולריים"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseSingleInstance)
 #. i18n: ectx: tooltip, entry (UseSingleInstance), group (KonsoleWindow)
@@ -2846,11 +2846,11 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
-"השינויים יחולו לאחר הפעלה מחדש. אם האפשרות פעילה, צריכת זיכרון ממושכת\n"
-"על ידי Konsole שחורגת מהערך שצוין תגרום ל־systemd-oomd לסלק את הלשוניות\n"
-"שמכילות את התהליכים שמעמיסים על הזיכרון. לתשומת לבך: הפעלה עלולה לגרום\n"
-"להאטות בעת שימוש מוגזם בזיכרון וציון של ערכים נמוכים במיוחד עלולים לגרום\n"
-"לסגירה של Konsole."
+"השינויים יחולו לאחר הפעלה מחדש. אם האפשרות פעילה, צריכת זיכרון\n"
+"ממושכת על ידי Konsole שחורגת מהערך שצוין תגרום\n"
+"ל־systemd-oomd לסלק את הלשוניות שמכילות את התהליכים שמעמיסים\n"
+"על הזיכרון. לתשומת ליבך: הפעלה עלולה לגרום להאטות בעת שימוש מוגזם\n"
+"בזיכרון וציון של ערכים נמוכים במיוחד עלולים לגרום לסגירה של Konsole."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -2875,11 +2875,12 @@ msgid ""
 "format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
 "a change to how these are handled.</body></html>"
 msgstr ""
-"<html><head/><body><p>יישומים שמשתמשים ב־KonsolePart חולקים פרופילים.</"
-"p><p>הם לא חולקים עם Konsole או יישומים אחרים:<ul><li>פרופיל ברירת מחדל</"
-"li><li>הצגה בתפריט</li><li>קיצורי דרך</li></ul></p><p>אפשר <a href=\"https://"
-"bugs.kde.org/enter_bug.cgi?format=guided&product=konsole&component=kpart"
-"\">לפתוח תקלה</a> ב־Konsole כדי לשנות את אופן הטיפול בהם.</body></html>"
+"<html><head/><body dir=\"rtl\"><p>יישומים שמשתמשים ב־KonsolePart חולקים "
+"פרופילים.</p><p>הם לא חולקים עם Konsole או יישומים אחרים:<ul><li>פרופיל "
+"ברירת מחדל</li><li>הצגה בתפריט</li><li>קיצורי דרך</li></ul></p><p>אפשר <a "
+"href=\"https://bugs.kde.org/enter_bug.cgi?"
+"format=guided&product=konsole&component=kpart\">לפתוח תקלה</a> ב־Konsole כדי "
+"לשנות את אופן הטיפול בהם.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:51
@@ -2891,7 +2892,7 @@ msgstr "יצירת פרופיל חדש על בסיס הפרופיל הנבחר"
 #: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "&New..."
-msgstr "&חדשה…"
+msgstr "&חדש…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:64
@@ -3014,7 +3015,7 @@ msgstr "ב&סרגל הלשוניות"
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr "ללא"
+msgstr "לא"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
@@ -3146,7 +3147,7 @@ msgctxt ""
 "@option:radio File location; <filename>%1</filename>: path to directory "
 "placeholder"
 msgid "System temporary directory (%1)"
-msgstr "תיקיית מערכת זמנית (%1)"
+msgstr "תיקיית מערכת זמנית (‎%1‎)"
 
 #: settings/TemporaryFilesSettings.cpp:33
 #, kde-format
@@ -3154,7 +3155,7 @@ msgctxt ""
 "@option:radio File location; <filename>%1</filename>: path to directory "
 "placeholder"
 msgid "User cache directory (%1)"
-msgstr "תיקיית מטמון משתמש (%1)"
+msgstr "תיקיית מטמון המשתמש (‎%1‎)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: settings/TemporaryFilesSettings.ui:25
@@ -3189,9 +3190,9 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
-"<html><head/><body><p>כדי להשתמש ביכולת הזאת, יש להפעיל את <span style=\" "
-"font-weight:600;\">עכבר-&gt;שונות-&gt;קו תחתי </span><span style=\" font-"
-"weight:600;\">לקבצים</span> בהגדרות הפרופיל שלך</p></body></html>"
+"<html><head/><body dir=\"rtl\"><p>כדי להשתמש ביכולת הזאת, יש להפעיל את <span "
+"style=\" font-weight:600;\">עכבר-&gt;שונות-&gt;קו תחתי </span><span style=\" "
+"font-weight:600;\">לקבצים</span> בהגדרות הפרופיל שלך</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3675,7 +3676,7 @@ msgstr "אפשר לתוכניות מסוף ליצור חלקי טקסט מהבה
 #: widgets/EditProfileAdvancedPage.ui:183
 #, kde-format
 msgid "Allow blinking text"
-msgstr "אפשר טקסט מהבהב"
+msgstr "לאפשר טקסט מהבהב"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableFlowControlButton)
 #: widgets/EditProfileAdvancedPage.ui:196
@@ -3819,7 +3820,7 @@ msgstr "השתמש בגופן הנבחר עבור מספרי שורות במקו
 #: widgets/EditProfileAppearancePage.ui:191
 #, kde-format
 msgid "Use line characters contained in font"
-msgstr "השתמש בתווי שורה הכלולים בגופן"
+msgstr "להשתמש בתווי שורה הכלולים בגופן"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
@@ -3963,13 +3964,13 @@ msgstr "חלון:"
 msgid ""
 "Show terminal size in columns and lines in the center of window after "
 "resizing"
-msgstr "הצג את גודל המסוף בשורות ועבודות במרכז החלון לאחר שינוי הגודל"
+msgstr "הצגת גודל המסוף בשורות ועמודות במרכז החלון לאחר שינוי הגודל"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:494
 #, kde-format
 msgid "Show hint for terminal size after resizing"
-msgstr "הצג את גודל המסוף לאחר שינוי הגודל"
+msgstr "הצגת רמז לגודל המסוף לאחר שינוי הגודל"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertSelectionColorsCheckbox)
 #: widgets/EditProfileAppearancePage.ui:501
@@ -4082,7 +4083,7 @@ msgstr "הצגת קו אנכי בעמודה:"
 #: widgets/EditProfileAppearancePage.ui:843
 #, kde-format
 msgid "<html><head/><body><p>Complex Text Layout</p></body></html>"
-msgstr "<html><head/><body><p>פריסת טקסט מורכבת</p></body></html>"
+msgstr "<html><head/><body dir=\"rtl\"><p>פריסת טקסט מורכבת</p></body></html>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:846
@@ -4549,9 +4550,9 @@ msgid ""
 "Configure Konsole → General → Remember window size</span> must be disabled "
 "for these entries to work.</p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-style:italic;\">הגדרות ← הגדרת "
-"Konsole ← כללי ← שימור גודל החלון</span> חייב להיות מושבת כדי שהרשומות האלו "
-"תעבודנה.</p></body></html>"
+"<html><head/><body dir=\"rtl\"><p><span style=\" font-style:italic;\">הגדרות "
+"← הגדרת Konsole ← כללי ← שימור גודל החלון</span> חייב להיות מושבת כדי "
+"שהרשומות האלו תעבודנה.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
@@ -4759,13 +4760,13 @@ msgstr "אפשרויות העתקה:"
 #: widgets/EditProfileMousePage.ui:196
 #, kde-format
 msgid "Automatically copy selected text into clipboard"
-msgstr "העתק באופן אוטומטי את הטקסט הנבחר אל לוח העריכה"
+msgstr "העתקת הטקסט הנבחר אל לוח הגזירים אוטומטית"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:199
 #, kde-format
 msgid "Copy on select"
-msgstr "העתק בעת בחירה"
+msgstr "העתקה בעת בחירה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextAsHTMLButton)
 #: widgets/EditProfileMousePage.ui:206
@@ -4795,13 +4796,13 @@ msgstr "הסרת רווחים פותחים"
 #: widgets/EditProfileMousePage.ui:226
 #, kde-format
 msgid "Trim trailing spaces in selected text, useful in some instances"
-msgstr "הסר רווחים עודפים בטקסט הנבחר, מועיל בשימושים מסויימים"
+msgstr "הסרת רווחים עודפים בטקסט הנבחר, מועיל במצבים מסוימים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:229
 #, kde-format
 msgid "Trim trailing spaces"
-msgstr "הסר רווחים עודפים"
+msgstr "הסרת רווחים עודפים"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:266
@@ -5023,7 +5024,7 @@ msgstr "מיקום פס גלילה:"
 #: widgets/EditProfileScrollingPage.ui:141
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
-msgstr "הצג את פס הגלילה בצד ימין של חלון המסוף"
+msgstr "הצגת פס הגלילה בצד ימין של חלון המסוף"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
@@ -5036,7 +5037,7 @@ msgstr "צד &ימין"
 #: widgets/EditProfileScrollingPage.ui:154
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
-msgstr "הצג את פס הגלילה בצד שמאל של חלון המסוף"
+msgstr "הצגת פס הגלילה בצד שמאל של חלון המסוף"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
@@ -5086,7 +5087,7 @@ msgstr "שמות הכרטיסיות"
 #: widgets/EditProfileTabsPage.ui:65
 #, kde-format
 msgid "Tab Monitoring"
-msgstr "ניתור אחר כרטיסיות"
+msgstr "מעקב אחר כרטיסיות"
 
 #. i18n: ectx: property (text), widget (QLabel, silenceSecondsLabel)
 #: widgets/EditProfileTabsPage.ui:80
@@ -5220,7 +5221,7 @@ msgstr "מצא את המופע הקודם של מחרוזת החיפוש הנו�
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
-msgstr "הצג את תפריט האפשרויות"
+msgstr "הצגת תפריט האפשרויות"
 
 #: widgets/IncrementalSearchBar.cpp:110
 #, kde-format
@@ -5238,7 +5239,7 @@ msgstr "תלוי רישיות"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
-msgstr "קובע האם החיפוש הוא תלוי רישיות"
+msgstr "הגדרה האם החיפוש הוא תלוי רישיות"
 
 #: widgets/IncrementalSearchBar.cpp:125
 #, kde-format
@@ -5256,7 +5257,7 @@ msgstr "הדגש את כל ההתאמות"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
-msgstr "קובע האם יש להדגיש את הטקסט הנמצא"
+msgstr "הגדרה האם להדגיש את הטקסט שאותר"
 
 #: widgets/IncrementalSearchBar.cpp:134
 #, kde-format
