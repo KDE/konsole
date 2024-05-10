@@ -113,6 +113,7 @@
   <summary xml:lang="x-test">xxTerminalxx</summary>
   <summary xml:lang="zh-CN">终端</summary>
   <summary xml:lang="zh-TW">終端機</summary>
+  <developer_name translate="no">KDE</developer_name>
   <description>
     <p>Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
     <p xml:lang="ar">كونسول  هي محطة لتشغيل الأوامر في الصدفة. يوفر واجهة سطر أوامر للتحكم المباشر في جهاز الكمبيوتر الخاص بك.</p>
@@ -538,6 +539,7 @@
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=konsole</url>
   <url type="help">https://docs.kde.org/?application=konsole</url>
   <url type="donation">https://www.kde.org/community/donations/?app=konsole&amp;source=appdata</url>
+  <url type="vcs-browser">https://invent.kde.org/utilities/konsole</url>
   <screenshots>
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/konsole/konsole.png</image>
