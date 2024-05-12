@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 02:28+0000\n"
+"POT-Creation-Date: 2024-05-12 02:53+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -3344,96 +3344,96 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:661
+#: terminalDisplay/TerminalDisplay.cpp:663
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Maint: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2254
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2255
+#: terminalDisplay/TerminalDisplay.cpp:2260
 #, kde-format
 msgid "Confirm Paste"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2298
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2328
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Gludo'r Dewisiad"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2329
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2555
+#: terminalDisplay/TerminalDisplay.cpp:2560
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3441,17 +3441,17 @@ msgid ""
 "b> to resume.</qt>"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2610
+#: terminalDisplay/TerminalDisplay.cpp:2615
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3005
+#: terminalDisplay/TerminalDisplay.cpp:3010
 #, fuzzy, kde-format
 msgid "Change &Directory To"
 msgstr "Newid cyfeiriadur gwaith y konsole yn 'gyf'"
 
-#: terminalDisplay/TerminalDisplay.cpp:3038
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"

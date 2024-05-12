@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-25 02:28+0000\n"
+"POT-Creation-Date: 2024-05-12 02:53+0000\n"
 "PO-Revision-Date: 2011-07-11 13:50+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
@@ -3501,99 +3501,99 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:661
+#: terminalDisplay/TerminalDisplay.cpp:663
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "ಗಾತ್ರ:  %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2254
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2255
+#: terminalDisplay/TerminalDisplay.cpp:2260
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "Confirm Paste"
 msgstr "ಮುಚ್ಚುವುದನ್ನು ದೃಡಪಡಿಸು"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2298
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2321
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "ಮುಚ್ಚುವುದನ್ನು ದೃಡಪಡಿಸು"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "ಸ್ಥಳಸೂಚಕವು ಪ್ರಸಕ್ತ ಲಿಪ್ಯಂಶಕ್ಕೆ ಹೊಂದುವಂತೆ ನಿಗದಿಡಿಸು"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2328
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "ಆಯ್ಕೆ ಅಂಟಿಸಿ"
 
-#: terminalDisplay/TerminalDisplay.cpp:2324
+#: terminalDisplay/TerminalDisplay.cpp:2329
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2555
+#: terminalDisplay/TerminalDisplay.cpp:2560
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3606,17 +3606,17 @@ msgstr ""
 "<qt>Ctrl+S ಒತ್ತುವುದರ ಮೂಲಕ <a href=\"http://en.wikipedia.org/wiki/Flow_control"
 "\">  ಪ್ರದಾನವನ್ನು ಅಮಾನತ್ತುಗೊಳಿಸಲಾಗಿದೆ</a>  ಪುನರಾರಂಭಿಸಲು <b>Ctrl+Q</b> ಒತ್ತಿ.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2610
+#: terminalDisplay/TerminalDisplay.cpp:2615
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3005
+#: terminalDisplay/TerminalDisplay.cpp:3010
 #, kde-format
 msgid "Change &Directory To"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3038
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
