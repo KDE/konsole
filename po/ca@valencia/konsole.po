@@ -577,7 +577,7 @@ msgstr "Escolliu la imatge de fons"
 #: widgets/EditProfileGeneralPage.ui:186
 #, kde-format
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
 #: colorscheme/ColorSchemeEditor.ui:165
@@ -672,7 +672,7 @@ msgstr "A dalt"
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
-msgstr "AaZz09..."
+msgstr "AaZz09…"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -737,7 +737,7 @@ msgstr "Copia l'adreça de l'enllaç"
 #: filterHotSpots/UrlFilterHotspot.cpp:95
 #, kde-format
 msgid "Send Email To..."
-msgstr "Envia un correu a..."
+msgstr "Envia un correu a…"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
@@ -1228,7 +1228,7 @@ msgstr "Esquema de color de les &finestres"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
-msgstr "Gestiona els perfils..."
+msgstr "Gestiona els perfils…"
 
 #: MainWindow.cpp:397
 #, kde-format
@@ -1240,13 +1240,13 @@ msgstr "Activa el menú"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Guarda la disposició de les pestanyes..."
+msgstr "Guarda la disposició de les pestanyes…"
 
 #: MainWindow.cpp:412
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Carrega la disposició de les pestanyes..."
+msgstr "Carrega la disposició de les pestanyes…"
 
 #: MainWindow.cpp:726 MainWindow.cpp:743
 #, kde-format
@@ -1341,7 +1341,7 @@ msgstr "Drecera:"
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
 #, kde-format
 msgid "Filter..."
-msgstr "Filtre..."
+msgstr "Filtre…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
@@ -2168,7 +2168,7 @@ msgstr "Busca «%1» amb"
 #: session/SessionController.cpp:531
 #, kde-format
 msgid "Configure Web Shortcuts..."
-msgstr "Configura les dreceres web..."
+msgstr "Configura les dreceres web…"
 
 #: session/SessionController.cpp:641
 #, kde-format
@@ -2238,18 +2238,18 @@ msgstr "Seleccioneu la &línia"
 #: session/SessionController.cpp:728
 #, kde-format
 msgid "Save Output &As..."
-msgstr "Anomena i gu&arda l'eixida..."
+msgstr "Anomena i gu&arda l'eixida…"
 
 # skip-rule: k-Print_Screen
 #: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
-msgstr "Im&primix la pantalla..."
+msgstr "Im&primix la pantalla…"
 
 #: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "Ajusta l'historial..."
+msgstr "Ajusta l'historial…"
 
 #: session/SessionController.cpp:742
 #, kde-format
@@ -2296,7 +2296,7 @@ msgstr "Només de lectura"
 #: session/SessionController.cpp:832
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "&Configura o canvia el nom de la pestanya..."
+msgstr "&Configura o canvia el nom de la pestanya…"
 
 #: session/SessionController.cpp:838
 #, kde-format
@@ -2306,7 +2306,7 @@ msgstr "Totes les pest&anyes en la finestra actual"
 #: session/SessionController.cpp:845
 #, kde-format
 msgid "&Select Tabs..."
-msgstr "Pestanyes &seleccionades..."
+msgstr "Pestanyes &seleccionades…"
 
 #: session/SessionController.cpp:851
 #, kde-format
@@ -2322,7 +2322,7 @@ msgstr "Copia l'entrada a"
 #: session/SessionController.cpp:867
 #, kde-format
 msgid "&ZModem Upload..."
-msgstr "Envia per &ZModem..."
+msgstr "Envia per &ZModem…"
 
 #: session/SessionController.cpp:872
 #, kde-format
@@ -2412,12 +2412,12 @@ msgstr "Senyal d'usuari &2"
 #: session/SessionController.cpp:979
 #, kde-format
 msgid "Create New Profile..."
-msgstr "Crea un perfil nou..."
+msgstr "Crea un perfil nou…"
 
 #: session/SessionController.cpp:981
 #, kde-format
 msgid "Edit Current Profile..."
-msgstr "Edita el perfil actual..."
+msgstr "Edita el perfil actual…"
 
 #: session/SessionController.cpp:1112
 #, kde-format
@@ -2485,7 +2485,7 @@ msgstr "Obri la carpeta actual amb"
 #: session/SessionController.cpp:2108
 #, kde-format
 msgid "Save ZModem Download to..."
-msgstr "Guarda la baixada de ZModem a..."
+msgstr "Guarda la baixada de ZModem a…"
 
 #: session/SessionController.cpp:2118
 #, kde-format
@@ -2943,7 +2943,7 @@ msgstr "Crea un perfil nou basat en el perfil seleccionat"
 #: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "&New..."
-msgstr "&Nou..."
+msgstr "&Nou…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:64
@@ -2958,7 +2958,7 @@ msgstr ""
 #: settings/ProfileSettings.ui:67
 #, kde-format
 msgid "&Edit..."
-msgstr "&Edita..."
+msgstr "&Edita…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:77
@@ -3804,7 +3804,7 @@ msgstr "Crea un esquema de color nou basat en l'esquema seleccionat"
 #, kde-format
 msgctxt "@action:button Create an alternate color scheme"
 msgid "New..."
-msgstr "Nou..."
+msgstr "Nou…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:79
@@ -3821,7 +3821,7 @@ msgstr "Edita l'esquema de color seleccionat"
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
-msgstr "Edita..."
+msgstr "Edita…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:89
@@ -3856,7 +3856,7 @@ msgstr "Lletra:"
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr "Seleccioneu..."
+msgstr "Seleccioneu…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:174
@@ -4445,7 +4445,7 @@ msgstr "Seleccioneu el directori inicial"
 #: widgets/EditProfileDialog.cpp:947
 #, kde-format
 msgid "Get New..."
-msgstr "Obtín nous..."
+msgstr "Obtín nous…"
 
 #: widgets/EditProfileDialog.cpp:1343
 #, kde-kuit-format
@@ -4747,7 +4747,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button Create an alternate key binding"
 msgid "New..."
-msgstr "Nou..."
+msgstr "Nou…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:70
@@ -5288,7 +5288,7 @@ msgstr "&Cap"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "Busca..."
+msgstr "Busca…"
 
 #: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
@@ -5559,7 +5559,7 @@ msgstr "&Separa la pestanya"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "&Configura o canvia el nom de la pestanya..."
+msgstr "&Configura o canvia el nom de la pestanya…"
 
 #: widgets/ViewContainer.cpp:105
 #, kde-format
