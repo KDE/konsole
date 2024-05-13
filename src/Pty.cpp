@@ -23,7 +23,6 @@
 
 // KDE
 #include <KPtyDevice>
-#include <kpty_version.h>
 
 using Konsole::Pty;
 

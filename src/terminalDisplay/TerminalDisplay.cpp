@@ -43,7 +43,6 @@
 #include <KMessageBox>
 #include <KMessageWidget>
 #include <KShell>
-#include <kwidgetsaddons_version.h>
 
 // Konsole
 #include "extras/AutoScrollHandler.h"

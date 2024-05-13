@@ -21,7 +21,6 @@
 #include <KLocalizedString>
 #include <KStatefulBrush>
 #include <QLineEdit>
-#include <kconfigwidgets_version.h>
 
 using namespace Konsole;
 

@@ -14,9 +14,6 @@
 #include <KPluginFactory>
 #include <KWindowEffects>
 
-#include <kservice_version.h>
-#include <kwindowsystem_version.h>
-
 demo_konsolepart::demo_konsolepart()
     : KMainWindow()
     , _terminalPart(nullptr)

@@ -28,7 +28,6 @@
 #include <KAboutData>
 #include <KCrash>
 #include <KLocalizedString>
-#include <kconfigwidgets_version.h>
 #include <kdbusservice.h>
 
 using Konsole::Application;
