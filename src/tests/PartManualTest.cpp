@@ -18,7 +18,6 @@
 #include <KMainWindow>
 #include <KPluginFactory>
 #include <QTest>
-#include <kservice_version.h>
 
 using namespace Konsole;
 

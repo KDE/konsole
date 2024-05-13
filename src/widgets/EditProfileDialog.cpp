@@ -29,7 +29,6 @@
 #include <KIconDialog>
 #include <KLocalizedString>
 #include <KWindowSystem>
-#include <kconfigwidgets_version.h>
 
 #include <KNSWidgets/Button>
 

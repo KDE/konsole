@@ -12,7 +12,6 @@
 // KDE
 #include <KNSCore/Entry>
 #include <KPageDialog>
-#include <knewstuff_version.h>
 
 // Konsole
 #include "colorscheme/ColorScheme.h"

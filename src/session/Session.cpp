@@ -39,8 +39,6 @@
 #endif
 #include <KShell>
 
-#include <kcoreaddons_version.h>
-
 // Konsole
 #include <sessionadaptor.h>
 

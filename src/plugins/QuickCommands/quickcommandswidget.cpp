@@ -12,7 +12,6 @@
 #include "ui_qcwidget.h"
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <kwidgetsaddons_version.h>
 
 #include <QSettings>
 #include <QStandardPaths>

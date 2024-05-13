@@ -16,7 +16,6 @@
 
 // KDE
 #include <KPluginFactory>
-#include <kcoreaddons_version.h>
 
 // Others
 #if defined(Q_OS_LINUX)

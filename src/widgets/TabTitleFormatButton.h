@@ -13,7 +13,6 @@
 
 // KDE
 #include <KLazyLocalizedString>
-#include <ki18n_version.h>
 
 // Konsole
 #include "session/Session.h"

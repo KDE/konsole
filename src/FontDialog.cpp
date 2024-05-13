@@ -13,7 +13,6 @@
 
 // KDE
 #include <KLocalizedString>
-#include <kwidgetsaddons_version.h>
 
 using namespace Konsole;
 
