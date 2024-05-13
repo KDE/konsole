@@ -59,6 +59,19 @@
   <name xml:lang="zh-CN">Konsole 命令行终端</name>
   <name xml:lang="zh-TW">Konsole</name>
   <summary>Use the command line interface</summary>
+  <summary xml:lang="ca">Feu servir la interfície de la línia d'ordres</summary>
+  <summary xml:lang="ca-valencia">Utilitzeu la interfície de la línia d'ordres</summary>
+  <summary xml:lang="eo">Uzi la komandlinian interfacon</summary>
+  <summary xml:lang="es">Usar la interfaz de la línea de órdenes</summary>
+  <summary xml:lang="he">להשתמש בממשק שורת הפקודה</summary>
+  <summary xml:lang="ka">გამოიყენეთ ბრძანების სტრიქონის ინტერფეისი</summary>
+  <summary xml:lang="nl">Het commandoregel-interface gebruiken</summary>
+  <summary xml:lang="pl">Użyj interfejsu wiersza poleceń</summary>
+  <summary xml:lang="sl">Uporabi vmesnik ukazne vrstice</summary>
+  <summary xml:lang="ta">முனைய இடைமுகப்பைப் பயன்படுத்துங்கள்</summary>
+  <summary xml:lang="tr">Komut satırı arayüzünü kullanın</summary>
+  <summary xml:lang="uk">Використання інтерфейсу командного рядка</summary>
+  <summary xml:lang="x-test">xxUse the command line interfacexx</summary>
   <developer_name translate="no">KDE</developer_name>
   <description>
     <p>Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
