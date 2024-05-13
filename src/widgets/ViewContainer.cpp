@@ -45,7 +45,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
 {
     setAcceptDrops(true);
 
-    auto tabBarWidget = new DetachableTabBar();
+    auto tabBarWidget = new DetachableTabBar(this);
     setTabBar(tabBarWidget);
     setDocumentMode(true);
     setMovable(true);
