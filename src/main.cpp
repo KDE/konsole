@@ -27,8 +27,14 @@
 // KDE
 #include <KAboutData>
 #include <KCrash>
+#include <KDBusService>
+#include <KIconTheme>
 #include <KLocalizedString>
-#include <kdbusservice.h>
+
+#define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
+#if HAVE_STYLE_MANAGER
+#include <KStyleManager>
+#endif
 
 using Konsole::Application;
 
@@ -66,6 +72,11 @@ void deleteQApplication()
 class MenuStyle : public QProxyStyle
 {
 public:
+    MenuStyle(const QString &name)
+        : QProxyStyle(name)
+    {
+    }
+
     int styleHint(const StyleHint stylehint, const QStyleOption *opt, const QWidget *widget, QStyleHintReturn *returnData) const override
     {
         return (stylehint == QStyle::SH_MenuBar_AltKeyNavigation) ? 0 : QProxyStyle::styleHint(stylehint, opt, widget, returnData);
@@ -124,6 +135,13 @@ int main(int argc, char *argv[])
 #endif
 
     /**
+     * trigger initialisation of proper icon theme
+     */
+#if KICONTHEMES_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+    KIconTheme::initTheme();
+#endif
+
+    /**
      * enable dark mode for title bar on Windows
      */
 #if defined(Q_OS_WIN)
@@ -141,16 +159,24 @@ int main(int argc, char *argv[])
     }
 
     auto app = new QApplication(argc, argv);
+
+#if HAVE_STYLE_MANAGER
     /**
-     * For Windows: use Breeze if available
-     * Of all tested styles that works the best for us
-     * NOTE: Taken from Kate
+     * trigger initialisation of proper application style
      */
-#if defined(Q_OS_WIN)
-    QApplication::setStyle(QStringLiteral("breeze"));
+    KStyleManager::initStyle();
 #else
-    app->setStyle(new MenuStyle());
+    /**
+     * For Windows and macOS: use Breeze if available
+     * Of all tested styles that works the best for us
+     */
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+    QApplication::setStyle(QStringLiteral("breeze"));
 #endif
+#endif
+
+    // fix the alt key, ensure we keep the current selected style as base
+    app->setStyle(new MenuStyle(app->style()->name()));
 
     migrateRenamedConfigKeys();
 
