@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-03 00:40+0000\n"
+"POT-Creation-Date: 2024-05-14 00:41+0000\n"
 "PO-Revision-Date: 2024-02-15 21:26+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -37,7 +37,7 @@ msgstr "Fájl"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:297
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:296
 #: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
@@ -695,7 +695,7 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "Előnézet:"
 
-#: filterHotSpots/FileFilterHotspot.cpp:160
+#: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
@@ -705,12 +705,12 @@ msgstr ""
 "szövegszerkesztővel;\n"
 "a fájl a rendszer alapértelmezett szerkesztőjével nyílik meg."
 
-#: filterHotSpots/FileFilterHotspot.cpp:174
+#: filterHotSpots/FileFilterHotspot.cpp:172
 #, kde-format
 msgid "Copy Location"
 msgstr "Hely másolása"
 
-#: filterHotSpots/FileFilterHotspot.cpp:282
+#: filterHotSpots/FileFilterHotspot.cpp:280
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr "Bélyegkép generálása"
@@ -735,19 +735,19 @@ msgstr "E-mail küldése…"
 msgid "Copy Email Address"
 msgstr "E-mail cím másolása"
 
-#: FontDialog.cpp:27
+#: FontDialog.cpp:26
 #, kde-format
 msgctxt "@title:window"
 msgid "Select font"
 msgstr "Betűtípus kiválasztása"
 
-#: FontDialog.cpp:39
+#: FontDialog.cpp:38
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "Összes betűtípus megjelenítése"
 
-#: FontDialog.cpp:68
+#: FontDialog.cpp:67
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -806,7 +806,7 @@ msgstr "Billentyűparancs-séma nem menthető üres leírással."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:350
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -840,225 +840,225 @@ msgstr "Bemenet:"
 msgid "Output:"
 msgstr "Kimenet:"
 
-#: main.cpp:163
+#: main.cpp:188
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: main.cpp:165
+#: main.cpp:190
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "Terminálemulátor"
 
-#: main.cpp:167
+#: main.cpp:192
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr "© A Konsole fejlesztői, 1997-2022."
 
-#: main.cpp:314
+#: main.cpp:339
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "Kurt Hindenburg"
 
-#: main.cpp:316
+#: main.cpp:341
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "Általános karbantartó, hibajavítások és általános fejlesztések"
 
-#: main.cpp:319
+#: main.cpp:344
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "Robert Knight"
 
-#: main.cpp:320
+#: main.cpp:345
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr "Korábbi karbantartó, portolás KDE4-re"
 
-#: main.cpp:322
+#: main.cpp:347
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "Lars Doelle"
 
-#: main.cpp:322
+#: main.cpp:347
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "Eredeti szerző"
 
-#: main.cpp:323
+#: main.cpp:348
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr "Ahmad Samir"
 
-#: main.cpp:324 main.cpp:327 main.cpp:330 main.cpp:333
+#: main.cpp:349 main.cpp:352 main.cpp:355 main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "Komoly refaktorálás, hibajavítások és nagyobb fejlesztések"
 
-#: main.cpp:326
+#: main.cpp:351
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr "Carlos Alves"
 
-#: main.cpp:329
+#: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: main.cpp:332
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr "Gustavo Carneiro"
 
-#: main.cpp:335
+#: main.cpp:360
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr "Edwin Pujols"
 
-#: main.cpp:336 main.cpp:339 main.cpp:341 main.cpp:346 main.cpp:348
-#: main.cpp:349 main.cpp:350
+#: main.cpp:361 main.cpp:364 main.cpp:366 main.cpp:371 main.cpp:373
+#: main.cpp:374 main.cpp:375
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "Hibajavítások és általános fejlesztések"
 
-#: main.cpp:338
+#: main.cpp:363
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr "Martin T. H. Sandsmark"
 
-#: main.cpp:341
+#: main.cpp:366
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr "Nate Graham"
 
-#: main.cpp:342
+#: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr "Mariusz Glebocki"
 
-#: main.cpp:343
+#: main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "Hibajavítások és nagyobb fejlesztések"
 
-#: main.cpp:345
+#: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "Thomas Surrel"
 
-#: main.cpp:348
+#: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "Jekyll Wu"
 
-#: main.cpp:349
+#: main.cpp:374
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "Waldo Bastian"
 
-#: main.cpp:350
+#: main.cpp:375
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "Stephan Binner"
 
-#: main.cpp:351
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:351
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "Általános fejlesztések"
 
-#: main.cpp:352
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "Chris Machemer"
 
-#: main.cpp:352 main.cpp:353 main.cpp:380 main.cpp:381 main.cpp:382
-#: main.cpp:383
+#: main.cpp:377 main.cpp:378 main.cpp:405 main.cpp:406 main.cpp:407
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "Hibajavítások"
 
-#: main.cpp:353
+#: main.cpp:378
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr "Francesco Cecconi"
 
-#: main.cpp:354
+#: main.cpp:379
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "Stephan Kulow"
 
-#: main.cpp:354
+#: main.cpp:379
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Solaris-támogatás és naplózás"
 
-#: main.cpp:355
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "Alexander Neundorf"
 
-#: main.cpp:356
+#: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "Hibajavítások és továbbfejlesztett indulási teljesítmény"
 
-#: main.cpp:358
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "Peter Silva"
 
-#: main.cpp:358
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "Javított jelölés"
 
-#: main.cpp:359
+#: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "Lotzi Boloni"
 
-#: main.cpp:361
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1068,13 +1068,13 @@ msgstr ""
 "Beágyazott Konsole\n"
 "Eszköztár- és munkafolyamat-nevek"
 
-#: main.cpp:364
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:366
+#: main.cpp:391
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1084,25 +1084,25 @@ msgstr ""
 "Beágyazott Konsole\n"
 "Általános fejlesztések"
 
-#: main.cpp:369
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "Antonio Larrosa"
 
-#: main.cpp:369
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "Vizuális effektek"
 
-#: main.cpp:370
+#: main.cpp:395
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "Matthias Ettrich"
 
-#: main.cpp:372
+#: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1112,67 +1112,67 @@ msgstr ""
 "Kód importálása a kvt projektből\n"
 "Általános fejlesztések"
 
-#: main.cpp:375
+#: main.cpp:400
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "Warwick Allison"
 
-#: main.cpp:376
+#: main.cpp:401
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "Séma- és szövegkiválasztás fejlesztések"
 
-#: main.cpp:378
+#: main.cpp:403
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "Dan Pilone"
 
-#: main.cpp:378
+#: main.cpp:403
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "Portolás SGI-re"
 
-#: main.cpp:379
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "Kevin Street"
 
-#: main.cpp:379
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "Portolás FreeBSD-re"
 
-#: main.cpp:380
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "Sven Fischer"
 
-#: main.cpp:381
+#: main.cpp:406
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "Dale M. Flaven"
 
-#: main.cpp:382
+#: main.cpp:407
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "Martin Jones"
 
-#: main.cpp:383
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "Lars Knoll"
 
-#: main.cpp:384
+#: main.cpp:409
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
@@ -1372,7 +1372,7 @@ msgstr "Parancs"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:334
+#: plugins/QuickCommands/quickcommandswidget.cpp:333
 #, kde-format
 msgid "Warnings"
 msgstr "Figyelmeztetések"
@@ -1391,7 +1391,7 @@ msgstr "Mentés"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:281
 #, kde-format
 msgid "Update"
 msgstr "Frissítés"
@@ -1430,36 +1430,36 @@ msgstr "Bővítmények - Gyorsparancsok"
 msgid "Show Quick Commands"
 msgstr "Gyorsparancsok megjelenítése"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:167
-#: plugins/QuickCommands/quickcommandswidget.cpp:178
+#: plugins/QuickCommands/quickcommandswidget.cpp:166
+#: plugins/QuickCommands/quickcommandswidget.cpp:177
 #, kde-format
 msgid "A duplicate item exists"
 msgstr "Duplikált elem létezik"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:184
+#: plugins/QuickCommands/quickcommandswidget.cpp:183
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 "Kérjük, javítson minden figyelmeztetést, mielőtt futtatni próbálja ezt a "
 "parancsfájlt"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:216
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "Hibák találhatók a parancsfájlban, biztosan szeretné futtatni?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:217
+#: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
 msgid "Shell Errors"
 msgstr "Parancsértelmező hibák"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr "Futtatás"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:243
+#: plugins/QuickCommands/quickcommandswidget.cpp:242
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
@@ -1468,38 +1468,38 @@ msgstr ""
 "A(z) %1 csoport törlésére készül,\n"
 " több konfigurációval, biztos benne?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:244
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
+#: plugins/QuickCommands/quickcommandswidget.cpp:243
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "A(z) %1 törlésére készül, biztos benne?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:247
+#: plugins/QuickCommands/quickcommandswidget.cpp:246
 #, kde-format
 msgid "Delete Quick Commands Configurations"
 msgstr "Gyorsparancsok beállításanak törlése"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:277
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr "A cím nem lehet üres"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:281
+#: plugins/QuickCommands/quickcommandswidget.cpp:280
 #, kde-format
 msgid "Command can not be empty"
 msgstr "A parancs nem lehet üres"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:301
+#: plugins/QuickCommands/quickcommandswidget.cpp:300
 #, kde-format
 msgid "Rename"
 msgstr "Átnevezés"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#: plugins/QuickCommands/quickcommandswidget.cpp:304
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:336
+#: plugins/QuickCommands/quickcommandswidget.cpp:335
 #, kde-format
 msgid "Warnings (*)"
 msgstr "Figyelmeztetések (*)"
@@ -1525,8 +1525,8 @@ msgstr "A(z) %1 egy mappa SSH bejegyzésekhez"
 #: plugins/SSHManager/sshmanagermodel.cpp:318
 #: plugins/SSHManager/sshmanagermodel.cpp:386
 #: plugins/SSHManager/sshmanagermodel.cpp:419
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:102
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH konfiguráció"
@@ -1591,24 +1591,24 @@ msgstr ""
 "sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:78
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH kulcs"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:118
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:117
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Törlés"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:159
 #, kde-format
 msgid "Don't Change"
 msgstr "Ne módosítsa"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1617,70 +1617,70 @@ msgstr ""
 "A(z) %1 mappa törlésére készül,\n"
 " több SSH konfigurációval, biztos benne?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:238
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH konfigurációk törlése"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Hiányzó gépnév"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:392
 #, kde-format
 msgid "Missing Name"
 msgstr "Hiányzó név"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:400
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Ha az SSH konfiguráció használata be van állítva, ne adjon meg sshkey-t vagy "
 "felhasználónevet."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:405
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Legalább a felhasználónevet vagy az SSHKey-t be kell állítani"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:410
 #, kde-format
 msgid "Missing Folder"
 msgstr "Hiányzó mappa"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:416
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "Egy SSH munkamenetnek rendelkeznie kell egy profillal"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:440
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Nem lehet törölni ezt a mappát"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:443
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Mappa és teljes tartalmának törlése"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:447
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Kattintson duplán a mappa nevének módosításához."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Nem törölhet egy automatikusan felvett bejegyzést."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Kijelölt bejegyzés törlése"
@@ -1890,7 +1890,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Beépített"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:538
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:537
 #, kde-format
 msgid "Default profile"
 msgstr "Alapértelmezett profil"
@@ -2048,28 +2048,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Solaris konzol"
 
-#: session/Session.cpp:106
+#: session/Session.cpp:104
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Csengő - „%1” („%2” munkamenet)"
 
-#: session/Session.cpp:413
+#: session/Session.cpp:411
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Nem található ez a program: "
 
-#: session/Session.cpp:422
+#: session/Session.cpp:420
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Figyelmeztetés: "
 
-#: session/Session.cpp:516
+#: session/Session.cpp:514
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nem található indítható terminálprogram."
 
-#: session/Session.cpp:522 session/Session.cpp:524
+#: session/Session.cpp:520 session/Session.cpp:522
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2078,24 +2078,24 @@ msgstr ""
 "„%1” nem található, „%2” indul el helyette. Ellenőrizze a profil "
 "beállításait."
 
-#: session/Session.cpp:587
+#: session/Session.cpp:585
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nem sikerült elindítani: „%1” (argumentumok: „%2”)."
 
-#: session/Session.cpp:735
+#: session/Session.cpp:733
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Üresjárat - „%1” („%2” munkamenet)"
 
-#: session/Session.cpp:736 session/Session.cpp:2074
+#: session/Session.cpp:734 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, kde-format
 msgid "Show session"
 msgstr "Munkamenet megjelenítése"
 
-#: session/Session.cpp:1020
+#: session/Session.cpp:1018
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2109,28 +2109,28 @@ msgstr ""
 "módosíthatók. <p>Ez figyelmeztetés csak egyszer jelenik meg ebben a Konsole "
 "példányban.</p>"
 
-#: session/Session.cpp:1060
+#: session/Session.cpp:1058
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Befejezve"
 
-#: session/Session.cpp:1074 session/Session.cpp:1090
+#: session/Session.cpp:1072 session/Session.cpp:1088
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "A(z) „%1” program összeomlott."
 
-#: session/Session.cpp:1076
+#: session/Session.cpp:1074
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "A(z) „%1” program %2 állapotkóddal fejeződött be."
 
-#: session/Session.cpp:1602
+#: session/Session.cpp:1600
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-állapot"
 
-#: session/Session.cpp:2073
+#: session/Session.cpp:2071
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitás - „%1” („%2” munkamenet)"
@@ -3271,64 +3271,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Bélyegkép-generálás bekapcsolása"
 
-#: terminalDisplay/TerminalDisplay.cpp:663
+#: terminalDisplay/TerminalDisplay.cpp:662
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Méret: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2258
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Biztosan be szeretne illeszteni %1 karaktert?"
 msgstr[1] "Biztosan be szeretne illeszteni %1 karaktert?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Beillesztés megerősítése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Megszakítás: kiléphet az aktuális folyamatból"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End of Transmission: kiléphet az aktuális folyamatból"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Csengő: megkísérel kiadni egy hallható figyelmeztetést"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: felfüggeszti a kimenetet"
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: felfüggeszheti az aktuális folyamatot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2298
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: a terminál állapotának manipulálására szolgál"
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: megszakíthatja az aktuális folyamatot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2322
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3337,31 +3337,31 @@ msgstr ""
 "A beilleszteni kívánt szöveg rejtett vezérlőkaraktereket tartalmaz, szeretné "
 "kiszűrni azokat?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Beillesztés megerősítése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Beillesztés vezérlőkarakteren &nélkül"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Minden &beillesztése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2328
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Mégsem"
 
-#: terminalDisplay/TerminalDisplay.cpp:2560
+#: terminalDisplay/TerminalDisplay.cpp:2559
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3372,17 +3372,17 @@ msgstr ""
 "\">fel lett függesztve</a> a Ctrl+S megnyomásával. A folytatáshoz nyomja meg "
 "a <b>Ctrl+Q</b>-t.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2615
+#: terminalDisplay/TerminalDisplay.cpp:2614
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ez a terminál csak."
 
-#: terminalDisplay/TerminalDisplay.cpp:3010
+#: terminalDisplay/TerminalDisplay.cpp:3009
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Mappa váltá&sa erre"
 
-#: terminalDisplay/TerminalDisplay.cpp:3043
+#: terminalDisplay/TerminalDisplay.cpp:3042
 #, kde-format
 msgid "&Paste Location"
 msgstr "Hely bei&llesztése"
@@ -4260,54 +4260,54 @@ msgstr "A problémás karakterek szélességének figyelmen kívül hagyása"
 msgid "Override wcwidth"
 msgstr "Wcwidth felülírása"
 
-#: widgets/EditProfileDialog.cpp:67
+#: widgets/EditProfileDialog.cpp:66
 #, kde-format
 msgid "Edit Profile"
 msgstr "Profil szerkesztése"
 
-#: widgets/EditProfileDialog.cpp:94
+#: widgets/EditProfileDialog.cpp:93
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Általános"
 
-#: widgets/EditProfileDialog.cpp:105
+#: widgets/EditProfileDialog.cpp:104
 #, kde-format
 msgid "Tabs"
 msgstr "Lapok"
 
-#: widgets/EditProfileDialog.cpp:122
+#: widgets/EditProfileDialog.cpp:121
 #, kde-format
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: widgets/EditProfileDialog.cpp:138
+#: widgets/EditProfileDialog.cpp:137
 #, kde-format
 msgid "Scrolling"
 msgstr "Görgetés"
 
-#: widgets/EditProfileDialog.cpp:152
+#: widgets/EditProfileDialog.cpp:151
 #, kde-format
 msgid "Keyboard"
 msgstr "Billentyűzet"
 
-#: widgets/EditProfileDialog.cpp:153
+#: widgets/EditProfileDialog.cpp:152
 #, kde-format
 msgid "Key bindings"
 msgstr "Billentyűparancsok"
 
-#: widgets/EditProfileDialog.cpp:164
+#: widgets/EditProfileDialog.cpp:163
 #, kde-format
 msgid "Mouse"
 msgstr "Egér"
 
-#: widgets/EditProfileDialog.cpp:180
+#: widgets/EditProfileDialog.cpp:179
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Speciális"
 
-#: widgets/EditProfileDialog.cpp:288
+#: widgets/EditProfileDialog.cpp:287
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4319,48 +4319,48 @@ msgstr ""
 "%1</filename>.<nl/>Vagy módosítsa a fájl jogosultságait, vagy adjon másik "
 "nevet a beállítások mentéséhez egy új profilba."
 
-#: widgets/EditProfileDialog.cpp:305
+#: widgets/EditProfileDialog.cpp:304
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "A profilnév üres; adjon meg egy nevet a beállítások mentéséhez."
 
-#: widgets/EditProfileDialog.cpp:313
+#: widgets/EditProfileDialog.cpp:312
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Már létezik „%1” nevű profil."
 
-#: widgets/EditProfileDialog.cpp:343
+#: widgets/EditProfileDialog.cpp:342
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "A profilnév hossza meghaladja a megengedett maximumot (%1)."
 
-#: widgets/EditProfileDialog.cpp:381
+#: widgets/EditProfileDialog.cpp:380
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "A kiemelt karakterek nem használhatók profilnevekben: %1."
 
-#: widgets/EditProfileDialog.cpp:417
+#: widgets/EditProfileDialog.cpp:416
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Profil szerkesztése: %2"
 msgstr[1] "%1 profil szerkesztése: %2"
 
-#: widgets/EditProfileDialog.cpp:421
+#: widgets/EditProfileDialog.cpp:420
 #, kde-format
 msgid "Create New Profile"
 msgstr "Új profil létrehozása"
 
-#: widgets/EditProfileDialog.cpp:424
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Profil szerkesztése - „%1”"
 
-#: widgets/EditProfileDialog.cpp:515
+#: widgets/EditProfileDialog.cpp:514
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4370,7 +4370,7 @@ msgid_plural " columns"
 msgstr[0] " oszlop"
 msgstr[1] "oszlop"
 
-#: widgets/EditProfileDialog.cpp:517
+#: widgets/EditProfileDialog.cpp:516
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4380,42 +4380,42 @@ msgid_plural " rows"
 msgstr[0] " sor"
 msgstr[1] " sor"
 
-#: widgets/EditProfileDialog.cpp:527
+#: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "System Bell"
 msgstr "Rendszercsengő"
 
-#: widgets/EditProfileDialog.cpp:527
+#: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "System Notifications"
 msgstr "Rendszerüzenetek"
 
-#: widgets/EditProfileDialog.cpp:527
+#: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizuális csengő"
 
-#: widgets/EditProfileDialog.cpp:527
+#: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Csengő események mellőzése"
 
-#: widgets/EditProfileDialog.cpp:536
+#: widgets/EditProfileDialog.cpp:535
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Alapértelmezett profil új munkamenetekhez a(z) %1 alkalmazásban"
 
-#: widgets/EditProfileDialog.cpp:641
+#: widgets/EditProfileDialog.cpp:640
 #, kde-format
 msgid "Edit Environment"
 msgstr "Környezeti változók"
 
-#: widgets/EditProfileDialog.cpp:642
+#: widgets/EditProfileDialog.cpp:641
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Egy környezeti változó soronként"
 
-#: widgets/EditProfileDialog.cpp:673
+#: widgets/EditProfileDialog.cpp:672
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4423,23 +4423,23 @@ msgid_plural " seconds"
 msgstr[0] " másodperc"
 msgstr[1] " másodperc"
 
-#: widgets/EditProfileDialog.cpp:787
+#: widgets/EditProfileDialog.cpp:786
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Kezdőmappa"
 
-#: widgets/EditProfileDialog.cpp:947
+#: widgets/EditProfileDialog.cpp:946
 #, kde-format
 msgid "Get New..."
 msgstr "Új letöltése…"
 
-#: widgets/EditProfileDialog.cpp:1343
+#: widgets/EditProfileDialog.cpp:1342
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "A(z) <resource>%1</resource> séma betöltése sikertelen."
 
-#: widgets/EditProfileDialog.cpp:1522
+#: widgets/EditProfileDialog.cpp:1521
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4448,7 +4448,7 @@ msgstr ""
 "Ez a színséma átlátszó hátteret használ, melyet azonban a gép grafikus "
 "alrendszere nem támogat."
 
-#: widgets/EditProfileDialog.cpp:1528
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4457,13 +4457,13 @@ msgstr ""
 "A Konsole az asztali effektusok bekapcsolása előtt lett indítva. Újra kell "
 "indítania a Konsole-t, hogy lássa az átlátszó hátteret."
 
-#: widgets/EditProfileDialog.cpp:1896
+#: widgets/EditProfileDialog.cpp:1895
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Alapértelmezett profil"
 
-#: widgets/EditProfileDialog.cpp:1922
+#: widgets/EditProfileDialog.cpp:1921
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4490,7 +4490,7 @@ msgstr ""
 "Ha a PATH vagy SOR nincs benne a parancsban, ez a beállítás mellőzve lesz,\n"
 "és a fájlt az alapértelmezett szövegszerkesztő nyitja meg."
 
-#: widgets/EditProfileDialog.cpp:1935
+#: widgets/EditProfileDialog.cpp:1934
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Szövegszerkesztő egyéni parancs"
@@ -5270,116 +5270,116 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&Nincs"
 
-#: widgets/IncrementalSearchBar.cpp:50
+#: widgets/IncrementalSearchBar.cpp:49
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "Keresés…"
 
-#: widgets/IncrementalSearchBar.cpp:52
+#: widgets/IncrementalSearchBar.cpp:51
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "Itt adja meg a keresendő szöveget"
 
-#: widgets/IncrementalSearchBar.cpp:76
+#: widgets/IncrementalSearchBar.cpp:75
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "Következő"
 
-#: widgets/IncrementalSearchBar.cpp:79
+#: widgets/IncrementalSearchBar.cpp:78
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "A kifejezés következő előfordulásának keresése"
 
-#: widgets/IncrementalSearchBar.cpp:86
+#: widgets/IncrementalSearchBar.cpp:85
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "Előző"
 
-#: widgets/IncrementalSearchBar.cpp:88
+#: widgets/IncrementalSearchBar.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "A kifejezés előző előfordulásának keresése"
 
-#: widgets/IncrementalSearchBar.cpp:103
+#: widgets/IncrementalSearchBar.cpp:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "A beállítások menü megjelenítése"
 
-#: widgets/IncrementalSearchBar.cpp:110
+#: widgets/IncrementalSearchBar.cpp:109
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "A keresősáv bezárása"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:119
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "Kis- és nagybetűk megkülönböztetése"
 
-#: widgets/IncrementalSearchBar.cpp:122
+#: widgets/IncrementalSearchBar.cpp:121
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "Beállítja, hogy a keresés kis- és nagybetűérzékeny legyen-e"
 
-#: widgets/IncrementalSearchBar.cpp:125
+#: widgets/IncrementalSearchBar.cpp:124
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Reguláris kifejezés illeszkedése"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:128
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Összes találat kiemelése"
 
-#: widgets/IncrementalSearchBar.cpp:131
+#: widgets/IncrementalSearchBar.cpp:130
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Beállítja, hogy ki legyenek-e emelve a találati szövegek"
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:133
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Keresés visszafelé"
 
-#: widgets/IncrementalSearchBar.cpp:136
+#: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Beállítja, hogy a keresés lentről induljon-e"
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:143
+#: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
 #| msgid "Sets whether search should start from the bottom"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Beállítja, hogy a keresés lentről induljon-e"
 
-#: widgets/IncrementalSearchBar.cpp:172
+#: widgets/IncrementalSearchBar.cpp:171
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "A jelenlegi keresési kifejezés keresése lentről"
 
-#: widgets/IncrementalSearchBar.cpp:177
+#: widgets/IncrementalSearchBar.cpp:176
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"

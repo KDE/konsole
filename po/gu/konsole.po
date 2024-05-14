@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-03 00:40+0000\n"
+"POT-Creation-Date: 2024-05-14 00:41+0000\n"
 "PO-Revision-Date: 2010-06-22 16:43+0530\n"
 "Last-Translator: Sweta Kothari <swkothar@redhat.com>\n"
 "Language-Team: Gujarati\n"
@@ -37,7 +37,7 @@ msgstr "ફાઇલ"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
-#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:297
+#: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:296
 #: plugins/SSHManager/sshwidget.ui:300
 #, kde-format
 msgid "Edit"
@@ -756,20 +756,20 @@ msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
 msgstr "પૂર્વદર્શન:"
 
-#: filterHotSpots/FileFilterHotspot.cpp:160
+#: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
 msgid ""
 "Could not open file with the text editor specified in the profile settings;\n"
 "it will be opened with the system default editor."
 msgstr ""
 
-#: filterHotSpots/FileFilterHotspot.cpp:174
+#: filterHotSpots/FileFilterHotspot.cpp:172
 #, fuzzy, kde-format
 #| msgid "Copy Input To"
 msgid "Copy Location"
 msgstr "ઇનપુટને અહીં નકલ કરો"
 
-#: filterHotSpots/FileFilterHotspot.cpp:282
+#: filterHotSpots/FileFilterHotspot.cpp:280
 #, kde-format
 msgid "Generating Thumbnail"
 msgstr ""
@@ -794,21 +794,21 @@ msgstr "આને ઇમેલ મોકલો..."
 msgid "Copy Email Address"
 msgstr "ઇમેલ સરનામું નકલ કરો"
 
-#: FontDialog.cpp:27
+#: FontDialog.cpp:26
 #, fuzzy, kde-format
 #| msgid "Edit Font..."
 msgctxt "@title:window"
 msgid "Select font"
 msgstr "ફોન્ટ ફેરફાર કરો..."
 
-#: FontDialog.cpp:39
+#: FontDialog.cpp:38
 #, fuzzy, kde-format
 #| msgid "Smooth fonts"
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "લીસાં ફોન્ટસ"
 
-#: FontDialog.cpp:68
+#: FontDialog.cpp:67
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -864,7 +864,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:351
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:350
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -898,249 +898,249 @@ msgstr "ઇનપુટ:"
 msgid "Output:"
 msgstr "આઉટપુટ:"
 
-#: main.cpp:163
+#: main.cpp:188
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@title"
 msgid "Konsole"
 msgstr "કોન્સોલ"
 
-#: main.cpp:165
+#: main.cpp:190
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "ટર્મિનલ ઇમ્યુલેટર"
 
-#: main.cpp:167
+#: main.cpp:192
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr ""
 
-#: main.cpp:314
+#: main.cpp:339
 #, fuzzy, kde-format
 #| msgid "Kurt V. Hindenburg"
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "કુર્ટ વી. હિન્ડેનબર્ગ"
 
-#: main.cpp:316
+#: main.cpp:341
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "ક્ષતિ સુધારાઓ અને સામાન્ય સુધારાઓ"
 
-#: main.cpp:319
+#: main.cpp:344
 #, fuzzy, kde-format
 #| msgid "Robert Knight"
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "રોબર્ટ નાઇટ"
 
-#: main.cpp:320
+#: main.cpp:345
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr ""
 
-#: main.cpp:322
+#: main.cpp:347
 #, fuzzy, kde-format
 #| msgid "Lars Doelle"
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "લાર્સ ડોલ્લે"
 
-#: main.cpp:322
+#: main.cpp:347
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "ટર્મિનલ ઇમ્યુલેટર"
 
-#: main.cpp:323
+#: main.cpp:348
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr ""
 
-#: main.cpp:324 main.cpp:327 main.cpp:330 main.cpp:333
+#: main.cpp:349 main.cpp:352 main.cpp:355 main.cpp:358
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "ક્ષતિ સુધારાઓ અને સામાન્ય સુધારાઓ"
 
-#: main.cpp:326
+#: main.cpp:351
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr ""
 
-#: main.cpp:329
+#: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr ""
 
-#: main.cpp:332
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr ""
 
-#: main.cpp:335
+#: main.cpp:360
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr ""
 
-#: main.cpp:336 main.cpp:339 main.cpp:341 main.cpp:346 main.cpp:348
-#: main.cpp:349 main.cpp:350
+#: main.cpp:361 main.cpp:364 main.cpp:366 main.cpp:371 main.cpp:373
+#: main.cpp:374 main.cpp:375
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "ક્ષતિ સુધારાઓ અને સામાન્ય સુધારાઓ"
 
-#: main.cpp:338
+#: main.cpp:363
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr ""
 
-#: main.cpp:341
+#: main.cpp:366
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr ""
 
-#: main.cpp:342
+#: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr ""
 
-#: main.cpp:343
+#: main.cpp:368
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "ક્ષતિ સુધારાઓ અને સામાન્ય સુધારાઓ"
 
-#: main.cpp:345
+#: main.cpp:370
 #, fuzzy, kde-format
 #| msgid "Thomas Dreibholz"
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "થોમસ ડ્રિભોલ્ઝ"
 
-#: main.cpp:348
+#: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr ""
 
-#: main.cpp:349
+#: main.cpp:374
 #, fuzzy, kde-format
 #| msgid "Waldo Bastian"
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "વાલ્ડો બાસ્ટિઅન"
 
-#: main.cpp:350
+#: main.cpp:375
 #, fuzzy, kde-format
 #| msgid "Stephan Binner"
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "સ્ટીફન બિનેર"
 
-#: main.cpp:351
+#: main.cpp:376
 #, fuzzy, kde-format
 #| msgid "Thomas Dreibholz"
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "થોમસ ડ્રિભોલ્ઝ"
 
-#: main.cpp:351
+#: main.cpp:376
 #, fuzzy, kde-format
 #| msgid "General improvements"
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "સામાન્ય સુધારાઓ"
 
-#: main.cpp:352
+#: main.cpp:377
 #, fuzzy, kde-format
 #| msgid "Chris Machemer"
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "ક્રીસ માકેમેર"
 
-#: main.cpp:352 main.cpp:353 main.cpp:380 main.cpp:381 main.cpp:382
-#: main.cpp:383
+#: main.cpp:377 main.cpp:378 main.cpp:405 main.cpp:406 main.cpp:407
+#: main.cpp:408
 #, fuzzy, kde-format
 #| msgid "Bug fixes"
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "ક્ષતિ સુધારાઓ"
 
-#: main.cpp:353
+#: main.cpp:378
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr ""
 
-#: main.cpp:354
+#: main.cpp:379
 #, fuzzy, kde-format
 #| msgid "Stephan Kulow"
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "સ્ટીફન કુલો"
 
-#: main.cpp:354
+#: main.cpp:379
 #, fuzzy, kde-format
 #| msgid "Solaris support and history"
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "સોલારિસ આધાર અને ઇતિહાસ"
 
-#: main.cpp:355
+#: main.cpp:380
 #, fuzzy, kde-format
 #| msgid "Alexander Neundorf"
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "એલેક્ઝાન્ડર ન્યુડ્રોફ"
 
-#: main.cpp:356
+#: main.cpp:381
 #, fuzzy, kde-format
 #| msgid "Bug fixes and improved startup performance"
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "ક્ષતિ સુધારાઓ અને સુધારેલ શરૂઆત કાર્યક્ષમતા"
 
-#: main.cpp:358
+#: main.cpp:383
 #, fuzzy, kde-format
 #| msgid "Peter Silva"
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "પીટર સિલ્વા"
 
-#: main.cpp:358
+#: main.cpp:383
 #, fuzzy, kde-format
 #| msgid "Marking improvements"
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "નિશાનીઓ સુધારાઓ"
 
-#: main.cpp:359
+#: main.cpp:384
 #, fuzzy, kde-format
 #| msgid "Lotzi Boloni"
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "લોટ્ઝી બોલોનિ"
 
-#: main.cpp:361
+#: main.cpp:386
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1153,14 +1153,14 @@ msgstr ""
 "જડિત કોન્સોલ\n"
 "સાધનપટ્ટી અને સત્ર નામો"
 
-#: main.cpp:364
+#: main.cpp:389
 #, fuzzy, kde-format
 #| msgid "David Faure"
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "ડેવિડ ફોઉરે"
 
-#: main.cpp:366
+#: main.cpp:391
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1173,28 +1173,28 @@ msgstr ""
 "જડિત કોન્સોલ\n"
 "સામાન્ય સુધારાઓ"
 
-#: main.cpp:369
+#: main.cpp:394
 #, fuzzy, kde-format
 #| msgid "Antonio Larrosa"
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "એન્ટોનિઓ લાર્રોસ"
 
-#: main.cpp:369
+#: main.cpp:394
 #, fuzzy, kde-format
 #| msgid "Visual effects"
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "દેખાવ અસરો"
 
-#: main.cpp:370
+#: main.cpp:395
 #, fuzzy, kde-format
 #| msgid "Matthias Ettrich"
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "મેથ્થિઆસ ઇટ્રિચ"
 
-#: main.cpp:372
+#: main.cpp:397
 #, fuzzy, kde-format
 #| msgid ""
 #| "Code from the kvt project\n"
@@ -1207,77 +1207,77 @@ msgstr ""
 "kvt પ્રોજેક્ટમાંથી કોડ\n"
 "સામાન્ય સુધારાઓ"
 
-#: main.cpp:375
+#: main.cpp:400
 #, fuzzy, kde-format
 #| msgid "Warwick Allison"
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "વોરવિક એલિસન"
 
-#: main.cpp:376
+#: main.cpp:401
 #, fuzzy, kde-format
 #| msgid "Schema and text selection improvements"
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "સ્કિમા અને લખાણ પસંદગી સુધારાઓ"
 
-#: main.cpp:378
+#: main.cpp:403
 #, fuzzy, kde-format
 #| msgid "Dan Pilone"
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "ડાન પિલોન"
 
-#: main.cpp:378
+#: main.cpp:403
 #, fuzzy, kde-format
 #| msgid "SGI port"
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "SGI પોર્ટ"
 
-#: main.cpp:379
+#: main.cpp:404
 #, fuzzy, kde-format
 #| msgid "Kevin Street"
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "કેવિન સ્ટ્રીટ"
 
-#: main.cpp:379
+#: main.cpp:404
 #, fuzzy, kde-format
 #| msgid "FreeBSD port"
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "FreeBSD પોર્ટ"
 
-#: main.cpp:380
+#: main.cpp:405
 #, fuzzy, kde-format
 #| msgid "Sven Fischer"
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "સવેન ફિશર"
 
-#: main.cpp:381
+#: main.cpp:406
 #, fuzzy, kde-format
 #| msgid "Dale M. Flaven"
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "ડેલ એમ. ફ્લેવેન"
 
-#: main.cpp:382
+#: main.cpp:407
 #, fuzzy, kde-format
 #| msgid "Martin Jones"
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "માર્ટિન જોન્સ"
 
-#: main.cpp:383
+#: main.cpp:408
 #, fuzzy, kde-format
 #| msgid "Lars Knoll"
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "લાર્સ નોલ"
 
-#: main.cpp:384
+#: main.cpp:409
 #, fuzzy, kde-format
 #| msgid "Thanks to many others.\n"
 msgctxt "@info:credit"
@@ -1503,7 +1503,7 @@ msgstr "આદેશ:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
-#: plugins/QuickCommands/quickcommandswidget.cpp:334
+#: plugins/QuickCommands/quickcommandswidget.cpp:333
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1525,7 +1525,7 @@ msgstr "ઓપન ફાઇલ સંચાલક"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:282
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:281
 #, kde-format
 msgid "Update"
 msgstr ""
@@ -1564,77 +1564,77 @@ msgstr "આદેશ:"
 msgid "Show Quick Commands"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:167
-#: plugins/QuickCommands/quickcommandswidget.cpp:178
+#: plugins/QuickCommands/quickcommandswidget.cpp:166
+#: plugins/QuickCommands/quickcommandswidget.cpp:177
 #, kde-format
 msgid "A duplicate item exists"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:184
+#: plugins/QuickCommands/quickcommandswidget.cpp:183
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:216
+#: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
 msgid "There are some errors on the script, do you really want to run it?"
 msgstr "તમારે આ વિન્ડોમાં અનેક ટેબ્સ છે, શું તમે બહાર નીકળવા માટે ચોક્કસ છો?"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:217
+#: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
 msgid "Shell Errors"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:218
+#: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:243
+#: plugins/QuickCommands/quickcommandswidget.cpp:242
 #, kde-format
 msgid ""
 "You are about to delete the group %1,\n"
 " with multiple configurations, are you sure?"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:244
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
+#: plugins/QuickCommands/quickcommandswidget.cpp:243
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:247
+#: plugins/QuickCommands/quickcommandswidget.cpp:246
 #, fuzzy, kde-format
 #| msgid "Remote Connection"
 msgid "Delete Quick Commands Configurations"
 msgstr "દૂરસ્થ જોડાણ"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:277
+#: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
 msgid "Title can not be empty or blank"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:281
+#: plugins/QuickCommands/quickcommandswidget.cpp:280
 #, fuzzy, kde-format
 #| msgid "Command to execute"
 msgid "Command can not be empty"
 msgstr "ચલાવવાનો આદેશ"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:301
+#: plugins/QuickCommands/quickcommandswidget.cpp:300
 #, fuzzy, kde-format
 #| msgid "Rename Tab"
 msgid "Rename"
 msgstr "ટેબનું નામ બદલો"
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:305
+#: plugins/QuickCommands/quickcommandswidget.cpp:304
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: plugins/QuickCommands/quickcommandswidget.cpp:336
+#: plugins/QuickCommands/quickcommandswidget.cpp:335
 #, fuzzy, kde-format
 #| msgctxt "@info:shell Alert the user with red color text"
 #| msgid "Warning: "
@@ -1664,8 +1664,8 @@ msgstr ""
 #: plugins/SSHManager/sshmanagermodel.cpp:318
 #: plugins/SSHManager/sshmanagermodel.cpp:386
 #: plugins/SSHManager/sshmanagermodel.cpp:419
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:103
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:102
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "SSH Config"
@@ -1728,93 +1728,93 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:79
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:78
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:118
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:117
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:160
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:159
 #, kde-format
 msgid "Don't Change"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
 " with multiple SSH Configurations, are you sure?"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:239
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:238
 #, fuzzy, kde-format
 #| msgid "Remote Connection"
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "દૂરસ્થ જોડાણ"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:293
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:388
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
 #, kde-format
 msgid "Missing Hostname"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:393
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:392
 #, kde-format
 msgid "Missing Name"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:400
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:405
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:411
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:410
 #, kde-format
 msgid "Missing Folder"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:416
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:440
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:443
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:447
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:454
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
 #, fuzzy, kde-format
 #| msgid "Edit the selected profile(s)"
 msgid "Delete selected entry"
@@ -2039,7 +2039,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:538
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:537
 #, kde-format
 msgid "Default profile"
 msgstr "મૂળભૂત રૂપરેખા"
@@ -2205,47 +2205,47 @@ msgstr ""
 msgid "Solaris console"
 msgstr "સોલારિસ કોન્સોલ"
 
-#: session/Session.cpp:106
+#: session/Session.cpp:104
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "સત્ર '%1' માં ઘંટ"
 
-#: session/Session.cpp:413
+#: session/Session.cpp:411
 #, kde-format
 msgid "Could not find binary: "
 msgstr "બાયનરી શોધી શકતું નથી: "
 
-#: session/Session.cpp:422
+#: session/Session.cpp:420
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "ચેતવણી: "
 
-#: session/Session.cpp:516
+#: session/Session.cpp:514
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "શરૂ કરવા માટે ઇન્ટરએક્ટિવ શેલ મળ્યું નહી."
 
-#: session/Session.cpp:522 session/Session.cpp:524
+#: session/Session.cpp:520 session/Session.cpp:522
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:587
+#: session/Session.cpp:585
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "કાર્યક્રમ '%1' વિકલ્પ '%2' સાથે શરૂ કરી શકાયો નહી."
 
-#: session/Session.cpp:735
+#: session/Session.cpp:733
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "સત્ર '%1' માં શાંતિ"
 
-#: session/Session.cpp:736 session/Session.cpp:2074
+#: session/Session.cpp:734 session/Session.cpp:2072
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, fuzzy, kde-format
@@ -2253,7 +2253,7 @@ msgstr "સત્ર '%1' માં શાંતિ"
 msgid "Show session"
 msgstr "કોન્સોલ"
 
-#: session/Session.cpp:1020
+#: session/Session.cpp:1018
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2262,28 +2262,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1060
+#: session/Session.cpp:1058
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "સમાપ્ત"
 
-#: session/Session.cpp:1074 session/Session.cpp:1090
+#: session/Session.cpp:1072 session/Session.cpp:1088
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "કાર્યક્રમ '%1' ભાંગી પડ્યો."
 
-#: session/Session.cpp:1076
+#: session/Session.cpp:1074
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "કાર્યક્રમ '%1' સ્થિતિ %2 વડે બહાર નીકળી ગયો."
 
-#: session/Session.cpp:1602
+#: session/Session.cpp:1600
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem પ્રગતિ"
 
-#: session/Session.cpp:2073
+#: session/Session.cpp:2071
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -3458,99 +3458,99 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:663
+#: terminalDisplay/TerminalDisplay.cpp:662
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "કદ: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2258
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "Confirm Paste"
 msgstr "બંઘ કરવાની ખાતરી કરો"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2298
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2322
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "બંઘ કરવાની ખાતરી કરો"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "હાલનાં અક્ષરને મળતો કર્સર રંગ વાપરો"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "પસંદગી કરેલ મૂકો"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2328
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2560
+#: terminalDisplay/TerminalDisplay.cpp:2559
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3563,17 +3563,17 @@ msgstr ""
 "<qt>આઉટપુટ <a href=\"http://en.wikipedia.org/wiki/Flow_control\">છોડી નાખવામાં "
 "આવ્યું છે</a> Ctrl+S દબાવીને.  પાછું શરૂ કરવા <b>Ctrl+Q</b> દબાવો.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2615
+#: terminalDisplay/TerminalDisplay.cpp:2614
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3010
+#: terminalDisplay/TerminalDisplay.cpp:3009
 #, kde-format
 msgid "Change &Directory To"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3043
+#: terminalDisplay/TerminalDisplay.cpp:3042
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
@@ -4490,55 +4490,55 @@ msgstr "હાલનાં અક્ષરને મળતો કર્સર �
 msgid "Override wcwidth"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:67
+#: widgets/EditProfileDialog.cpp:66
 #, kde-format
 msgid "Edit Profile"
 msgstr "રૂપરેખા ફેરફાર કરો"
 
-#: widgets/EditProfileDialog.cpp:94
+#: widgets/EditProfileDialog.cpp:93
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "સામાન્ય"
 
-#: widgets/EditProfileDialog.cpp:105
+#: widgets/EditProfileDialog.cpp:104
 #, kde-format
 msgid "Tabs"
 msgstr "ટેબ્સ"
 
-#: widgets/EditProfileDialog.cpp:122
+#: widgets/EditProfileDialog.cpp:121
 #, kde-format
 msgid "Appearance"
 msgstr "દેખાવ"
 
-#: widgets/EditProfileDialog.cpp:138
+#: widgets/EditProfileDialog.cpp:137
 #, kde-format
 msgid "Scrolling"
 msgstr "સરકવું"
 
-#: widgets/EditProfileDialog.cpp:152
+#: widgets/EditProfileDialog.cpp:151
 #, kde-format
 msgid "Keyboard"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:153
+#: widgets/EditProfileDialog.cpp:152
 #, fuzzy, kde-format
 #| msgid "Key Bindings"
 msgid "Key bindings"
 msgstr "કળ જોડાણો"
 
-#: widgets/EditProfileDialog.cpp:164
+#: widgets/EditProfileDialog.cpp:163
 #, kde-format
 msgid "Mouse"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:180
+#: widgets/EditProfileDialog.cpp:179
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "ઉચ્ચ"
 
-#: widgets/EditProfileDialog.cpp:288
+#: widgets/EditProfileDialog.cpp:287
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4547,49 +4547,49 @@ msgid ""
 "the settings to a new profile."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:305
+#: widgets/EditProfileDialog.cpp:304
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:313
+#: widgets/EditProfileDialog.cpp:312
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:343
+#: widgets/EditProfileDialog.cpp:342
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:381
+#: widgets/EditProfileDialog.cpp:380
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:417
+#: widgets/EditProfileDialog.cpp:416
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "રૂપરેખા ફેરફાર કરો છો: %2"
 msgstr[1] "રૂપરેખાઓ %1 ફેરફાર કરો છો: %2"
 
-#: widgets/EditProfileDialog.cpp:421
+#: widgets/EditProfileDialog.cpp:420
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile"
 msgstr "નવી રૂપરેખા..."
 
-#: widgets/EditProfileDialog.cpp:424
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" રૂપરેખા ફેરફાર કરો"
 
-#: widgets/EditProfileDialog.cpp:515
+#: widgets/EditProfileDialog.cpp:514
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4599,7 +4599,7 @@ msgid_plural " columns"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:517
+#: widgets/EditProfileDialog.cpp:516
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4609,45 +4609,45 @@ msgid_plural " rows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:527
+#: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "System Bell"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:527
+#: widgets/EditProfileDialog.cpp:526
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "System Notifications"
 msgstr "પસંદગી કરેલ મૂકો"
 
-#: widgets/EditProfileDialog.cpp:527
+#: widgets/EditProfileDialog.cpp:526
 #, fuzzy, kde-format
 #| msgid "Visual effects"
 msgid "Visual Bell"
 msgstr "દેખાવ અસરો"
 
-#: widgets/EditProfileDialog.cpp:527
+#: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:536
+#: widgets/EditProfileDialog.cpp:535
 #, fuzzy, kde-format
 #| msgid "Set the selected profile as the default for new terminal sessions"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "નવાં ટર્મિનલ સત્રો માટે પસંદ કરેલ રૂપરેખા મૂળભૂત તરીકે ગોઠવો"
 
-#: widgets/EditProfileDialog.cpp:641
+#: widgets/EditProfileDialog.cpp:640
 #, kde-format
 msgid "Edit Environment"
 msgstr "વાતાવરણ ફેરફાર કરો"
 
-#: widgets/EditProfileDialog.cpp:642
+#: widgets/EditProfileDialog.cpp:641
 #, kde-format
 msgid "One environment variable per line"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:673
+#: widgets/EditProfileDialog.cpp:672
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4655,45 +4655,45 @@ msgid_plural " seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:787
+#: widgets/EditProfileDialog.cpp:786
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "શરૂઆત ડિરેક્ટરી પસંદ કરો"
 
-#: widgets/EditProfileDialog.cpp:947
+#: widgets/EditProfileDialog.cpp:946
 #, fuzzy, kde-format
 #| msgctxt "@action:button Create an alternate color scheme"
 #| msgid "New..."
 msgid "Get New..."
 msgstr "નવું..."
 
-#: widgets/EditProfileDialog.cpp:1343
+#: widgets/EditProfileDialog.cpp:1342
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1522
+#: widgets/EditProfileDialog.cpp:1521
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1528
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1896
+#: widgets/EditProfileDialog.cpp:1895
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "મૂળભૂત રૂપરેખા"
 
-#: widgets/EditProfileDialog.cpp:1922
+#: widgets/EditProfileDialog.cpp:1921
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4710,7 +4710,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1935
+#: widgets/EditProfileDialog.cpp:1934
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
@@ -5471,60 +5471,60 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "કંઇ નહી (&N)"
 
-#: widgets/IncrementalSearchBar.cpp:50
+#: widgets/IncrementalSearchBar.cpp:49
 #, fuzzy, kde-format
 #| msgid "Find:"
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "શોધો:"
 
-#: widgets/IncrementalSearchBar.cpp:52
+#: widgets/IncrementalSearchBar.cpp:51
 #, fuzzy, kde-format
 #| msgid "Enter the text to search for here"
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "શોધવા માટે લખાણ અહીં દાખલ કરો"
 
-#: widgets/IncrementalSearchBar.cpp:76
+#: widgets/IncrementalSearchBar.cpp:75
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "આગળ"
 
-#: widgets/IncrementalSearchBar.cpp:79
+#: widgets/IncrementalSearchBar.cpp:78
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "હાલનાં શોધ લખાણનું આગળનો મેળ શોધો"
 
-#: widgets/IncrementalSearchBar.cpp:86
+#: widgets/IncrementalSearchBar.cpp:85
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "પાછળ"
 
-#: widgets/IncrementalSearchBar.cpp:88
+#: widgets/IncrementalSearchBar.cpp:87
 #, fuzzy, kde-format
 #| msgid "Find the previous match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "હાલનાં શોધ લખાણનું પાછળનો મેળ શોધો"
 
-#: widgets/IncrementalSearchBar.cpp:103
+#: widgets/IncrementalSearchBar.cpp:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:110
+#: widgets/IncrementalSearchBar.cpp:109
 #, fuzzy, kde-format
 #| msgid "Close the search bar"
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "શોધ પટ્ટી બંધ કરો"
 
-#: widgets/IncrementalSearchBar.cpp:120
+#: widgets/IncrementalSearchBar.cpp:119
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu Close Active View"
 #| msgid "Close Active"
@@ -5532,68 +5532,68 @@ msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "સક્રિય બંધ કરો"
 
-#: widgets/IncrementalSearchBar.cpp:122
+#: widgets/IncrementalSearchBar.cpp:121
 #, fuzzy, kde-format
 #| msgid "Sets whether the search is case sensitive"
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "નક્કી કરો કે શોધ કિસ્સા પર આધારિત છે કે નહી"
 
-#: widgets/IncrementalSearchBar.cpp:125
+#: widgets/IncrementalSearchBar.cpp:124
 #, fuzzy, kde-format
 #| msgid "Match regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "રેગ્યુલર એક્સપ્રેશન મેળવો"
 
-#: widgets/IncrementalSearchBar.cpp:129
+#: widgets/IncrementalSearchBar.cpp:128
 #, fuzzy, kde-format
 #| msgid "Highlight all"
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "બધું પ્રકાશિત કરો"
 
-#: widgets/IncrementalSearchBar.cpp:131
+#: widgets/IncrementalSearchBar.cpp:130
 #, fuzzy, kde-format
 #| msgid "Sets whether matching text should be highlighted"
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "નક્કી કરો કે મળતું લખાણ પ્રકાશિત કરવું જોઇએ કે નહી"
 
-#: widgets/IncrementalSearchBar.cpp:134
+#: widgets/IncrementalSearchBar.cpp:133
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:136
+#: widgets/IncrementalSearchBar.cpp:135
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "હાલનાં શોધ લખાણનું આગળનો મેળ શોધો"
 
-#: widgets/IncrementalSearchBar.cpp:141
+#: widgets/IncrementalSearchBar.cpp:140
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:143
+#: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "હાલનાં શોધ લખાણનું આગળનો મેળ શોધો"
 
-#: widgets/IncrementalSearchBar.cpp:172
+#: widgets/IncrementalSearchBar.cpp:171
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "હાલનાં શોધ લખાણનું આગળનો મેળ શોધો"
 
-#: widgets/IncrementalSearchBar.cpp:177
+#: widgets/IncrementalSearchBar.cpp:176
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
