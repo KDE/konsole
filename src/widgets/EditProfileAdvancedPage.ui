@@ -232,7 +232,7 @@
      <item row="7" column="1">
       <widget class="QPushButton" name="selectEncodingButton">
        <property name="text">
-        <string comment="KDE::DoNotExtract">DEFAULTENCODING</string>
+        <string notr="true">DEFAULTENCODING</string>
        </property>
       </widget>
      </item>
