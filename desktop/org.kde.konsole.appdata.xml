@@ -78,6 +78,7 @@
   <summary xml:lang="tr">Komut satırı arayüzünü kullanın</summary>
   <summary xml:lang="uk">Використання інтерфейсу командного рядка</summary>
   <summary xml:lang="x-test">xxUse the command line interfacexx</summary>
+  <summary xml:lang="zh-TW">使用指令列介面</summary>
   <developer_name translate="no">KDE</developer_name>
   <description>
     <p>Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
