@@ -2739,7 +2739,7 @@ msgstr "控制标签页栏的位置"
 #: settings/konsole.kcfg:139
 #, kde-format
 msgid "Control the visual style of the tab bar"
-msgstr "控制标签页栏的视觉风格"
+msgstr "控制标签页栏的外观样式"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:143
@@ -2751,7 +2751,7 @@ msgstr "标签页栏使用用户自定义的 .css 文件"
 #: settings/konsole.kcfg:147
 #, kde-format
 msgid "The .css file to use for the tab bar style"
-msgstr "标签页栏的视觉风格使用的 .css 文件"
+msgstr "标签页栏的外观样式使用的 .css 文件"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
 #: settings/konsole.kcfg:151
