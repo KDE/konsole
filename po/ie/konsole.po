@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-14 00:41+0000\n"
+"POT-Creation-Date: 2024-05-21 00:42+0000\n"
 "PO-Revision-Date: 2022-10-28 16:51+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <kde-i18n-doc@kde.org>\n"
@@ -49,7 +49,8 @@ msgid "View"
 msgstr "Vise"
 
 #. i18n: ectx: Menu (view-split)
-#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:62
+#: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
+#: ../desktop/sessionui.rc:62
 #, kde-format
 msgid "Split View"
 msgstr "Fender li vise"
@@ -79,7 +80,7 @@ msgid "Main Toolbar"
 msgstr "Panel de instrumentarium"
 
 #. i18n: ectx: Menu (history)
-#: ../desktop/partui.rc:14
+#: ../desktop/partui.rc:20
 #, kde-format
 msgid "S&crollback"
 msgstr "B&uffre"

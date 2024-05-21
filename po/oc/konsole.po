@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-14 00:41+0000\n"
+"POT-Creation-Date: 2024-05-21 00:42+0000\n"
 "PO-Revision-Date: 2008-08-05 22:26+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -54,7 +54,8 @@ msgid "View"
 msgstr "Visualizacion"
 
 #. i18n: ectx: Menu (view-split)
-#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:62
+#: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
+#: ../desktop/sessionui.rc:62
 #, fuzzy, kde-format
 #| msgid "Next View"
 msgid "Split View"
@@ -87,7 +88,7 @@ msgid "Main Toolbar"
 msgstr ""
 
 #. i18n: ectx: Menu (history)
-#: ../desktop/partui.rc:14
+#: ../desktop/partui.rc:20
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgid "S&crollback"

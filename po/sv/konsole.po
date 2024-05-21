@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-14 00:41+0000\n"
+"POT-Creation-Date: 2024-05-21 00:42+0000\n"
 "PO-Revision-Date: 2023-10-14 19:51+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -56,7 +56,8 @@ msgid "View"
 msgstr "Visa"
 
 #. i18n: ectx: Menu (view-split)
-#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:62
+#: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
+#: ../desktop/sessionui.rc:62
 #, kde-format
 msgid "Split View"
 msgstr "Dela vy"
@@ -86,7 +87,7 @@ msgid "Main Toolbar"
 msgstr "Huvudverktygsrad"
 
 #. i18n: ectx: Menu (history)
-#: ../desktop/partui.rc:14
+#: ../desktop/partui.rc:20
 #, kde-format
 msgid "S&crollback"
 msgstr "&Historik"

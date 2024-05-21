@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-14 00:41+0000\n"
+"POT-Creation-Date: 2024-05-21 00:42+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -49,7 +49,8 @@ msgid "View"
 msgstr "Amharc"
 
 #. i18n: ectx: Menu (view-split)
-#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:62
+#: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
+#: ../desktop/sessionui.rc:62
 #, kde-format
 msgid "Split View"
 msgstr "Amharc Roinnte"
@@ -79,7 +80,7 @@ msgid "Main Toolbar"
 msgstr ""
 
 #. i18n: ectx: Menu (history)
-#: ../desktop/partui.rc:14
+#: ../desktop/partui.rc:20
 #, kde-format
 msgid "S&crollback"
 msgstr "Iars&crollú"

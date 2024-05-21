@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-14 00:41+0000\n"
+"POT-Creation-Date: 2024-05-21 00:42+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -52,7 +52,8 @@ msgid "View"
 msgstr "Vizualizare"
 
 #. i18n: ectx: Menu (view-split)
-#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:62
+#: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
+#: ../desktop/sessionui.rc:62
 #, kde-format
 msgid "Split View"
 msgstr "Desparte vizualizarea"
@@ -82,7 +83,7 @@ msgid "Main Toolbar"
 msgstr "Bara de unelte principală"
 
 #. i18n: ectx: Menu (history)
-#: ../desktop/partui.rc:14
+#: ../desktop/partui.rc:20
 #, kde-format
 msgid "S&crollback"
 msgstr "Re&venire"

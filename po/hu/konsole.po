@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-14 00:41+0000\n"
-"PO-Revision-Date: 2024-02-15 21:26+0100\n"
+"POT-Creation-Date: 2024-05-21 00:42+0000\n"
+"PO-Revision-Date: 2024-05-20 15:13+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -50,7 +50,8 @@ msgid "View"
 msgstr "Nézet"
 
 #. i18n: ectx: Menu (view-split)
-#: ../desktop/konsoleui.rc:20 ../desktop/sessionui.rc:62
+#: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
+#: ../desktop/sessionui.rc:62
 #, kde-format
 msgid "Split View"
 msgstr "Nézetmegosztás"
@@ -80,7 +81,7 @@ msgid "Main Toolbar"
 msgstr "Alap eszköztár"
 
 #. i18n: ectx: Menu (history)
-#: ../desktop/partui.rc:14
+#: ../desktop/partui.rc:20
 #, kde-format
 msgid "S&crollback"
 msgstr "P&ufferelés"
@@ -689,11 +690,10 @@ msgid "Deselect All"
 msgstr "Kijelölés megszüntetése"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Előnézet:"
+msgstr "Színes előnézet"
 
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
@@ -1626,7 +1626,7 @@ msgstr "SSH konfigurációk törlése"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Importált SSH profil <br/> Néhány beállítás csak olvasható."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
 #, kde-format
@@ -2251,16 +2251,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Puffer törlése és visszaállítás"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Profil szerkesztése"
+msgstr "Következő profil"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Előző nézet"
+msgstr "Előző profil"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -2273,18 +2271,13 @@ msgid "Set &Encoding"
 msgstr "A kódolás b&eállítása"
 
 #: session/SessionController.cpp:812
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Egérkövetés bekapcsolása"
 
 #: session/SessionController.cpp:821
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Csak olvasható"
@@ -2323,7 +2316,7 @@ msgstr "&ZModem feltöltés…"
 #: session/SessionController.cpp:872
 #, kde-format
 msgid "One-Shot Monitors"
-msgstr ""
+msgstr "Egyszer használatos jelzők"
 
 #: session/SessionController.cpp:877
 #, kde-format
@@ -2657,16 +2650,15 @@ msgstr "Keresés visszafelé"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Beállítja, hogy a keresés lentről induljon-e"
+msgstr "Beállítja, hogy a keresés megálljon-e, ahelyett, hogy újrakezdődne"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Nincs újrakezdés"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2750,7 +2742,7 @@ msgstr "Beállítja, hogy ki legyenek-e emelve a találati szövegek"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Keresés leállítása újrakezdés helyett"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
@@ -3019,17 +3011,15 @@ msgstr "A terminálablakok a&latt"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "A terminálablakok a&latt"
+msgstr "A terminálablakoktól balra"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "A terminálablakok a&latt"
+msgstr "A terminálablakoktól jobb&ra"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3039,8 +3029,7 @@ msgstr "Lap bezárása gomb:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
 msgstr "&Minden lapon"
 
@@ -3746,10 +3735,9 @@ msgstr "Gyorsbillentyű az elsődleges képernyőbe tekintéshez:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:263
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Sorszámok"
+msgstr "Sorszámok:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:273
@@ -3875,21 +3863,19 @@ msgstr "A betűkészlet sorjeleinek használata"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"A kiválasztott betűkészlet használata a sorjelekhez a beépített kód helyett"
+"A kiválasztott betűkészlet használata a Unicode Braille karakterekhez a "
+"beépített kód helyett"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "A betűkészlet sorjeleinek használata"
+msgstr "A betűkészlet Unicode Braille karaktereinek használata"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4458,10 +4444,9 @@ msgstr ""
 "indítania a Konsole-t, hogy lássa az átlátszó hátteret."
 
 #: widgets/EditProfileDialog.cpp:1895
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Alapértelmezett profil"
+msgstr "Alapértelmezés fájltípushoz"
 
 #: widgets/EditProfileDialog.cpp:1921
 #, kde-format
@@ -4479,7 +4464,7 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
-"A formátim például a következő: 'editorExec PATH:SOR:OSZLOP'\n"
+"A formátum például a következő: 'editorExec PATH:SOR:OSZLOP'\n"
 "\n"
 "PATH    helyettesítve lesz a szövegfájl elérési útjával\n"
 "SOR    helyettesítve lesz a sor számával\n"
@@ -5364,14 +5349,13 @@ msgstr "Beállítja, hogy a keresés lentről induljon-e"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Nincs újrakezdés"
 
 #: widgets/IncrementalSearchBar.cpp:142
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Beállítja, hogy a keresés lentről induljon-e"
+msgstr "Beállítja, hogy a keresés megálljon-e, ahelyett, hogy újrakezdődne"
 
 #: widgets/IncrementalSearchBar.cpp:171
 #, kde-format
