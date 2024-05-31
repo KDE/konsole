@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-21 00:42+0000\n"
-"PO-Revision-Date: 2024-04-30 15:54+0200\n"
+"PO-Revision-Date: 2024-05-30 13:42+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -3676,21 +3676,21 @@ msgstr "Čísla řádků:"
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
-msgstr ""
+msgstr "N&ikdy"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:283
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr ""
+msgstr "Při zobrazení nápovědy &URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:293
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr ""
+msgstr "Vž&dy"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -4445,7 +4445,7 @@ msgstr "/bin/sh"
 #: widgets/EditProfileGeneralPage.ui:157
 #, kde-format
 msgid "I&nitial directory:"
-msgstr ""
+msgstr "Počáteč&ní adresář:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:170
@@ -4490,7 +4490,7 @@ msgstr "Upravit seznam proměnných prostředí a jejich přiřazených hodnot"
 #: widgets/EditProfileGeneralPage.ui:271
 #, kde-format
 msgid "Initial terminal si&ze:"
-msgstr ""
+msgstr "Výcho&zí velikost terminálu:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4509,7 +4509,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:359
 #, kde-format
 msgid "&Terminal bell mode:"
-msgstr ""
+msgstr "Režim zvonku &terminálu:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
@@ -4676,13 +4676,13 @@ msgstr "Výběr trojitým kliknutím:"
 #: widgets/EditProfileMousePage.ui:104
 #, kde-format
 msgid "&The whole line"
-msgstr ""
+msgstr "&Celý řádek"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
 #, kde-format
 msgid "From mouse position to the end of &line"
-msgstr ""
+msgstr "Od pozice myši až po konec řád&ku"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
@@ -4949,7 +4949,7 @@ msgstr "Rolovat stránku o polovinu výšky okna"
 #: widgets/EditProfileScrollingPage.ui:86
 #, kde-format
 msgid "Half screen heigh&t"
-msgstr ""
+msgstr "Na výšku po&loviny obrazovky"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -4961,7 +4961,7 @@ msgstr "Rolovat stránku o plnou výšku okna"
 #: widgets/EditProfileScrollingPage.ui:99
 #, kde-format
 msgid "F&ull screen height"
-msgstr ""
+msgstr "Na výšk&u celé obrazovky"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
@@ -4980,7 +4980,7 @@ msgstr "Zobrazí posuvný panel na pravé straně terminálového okna"
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
-msgstr ""
+msgstr "Pravá s&trana"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
@@ -4993,7 +4993,7 @@ msgstr "Zobrazovat posuvník na levé straně okna terminálu"
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr ""
+msgstr "&Levá strana"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
@@ -5089,7 +5089,7 @@ msgstr "Omezit zapamatovaný výstup na pevný počet řádků"
 #: widgets/HistorySizeWidget.ui:63
 #, kde-format
 msgid "Fi&xed size:"
-msgstr ""
+msgstr "Pevná vel&ikost:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5108,7 +5108,7 @@ msgstr "Zapamatovat si veškerý výstup terminálem vyprodukovaný"
 #, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr ""
+msgstr "&Bez omezení"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5121,7 +5121,7 @@ msgstr "Nepamatovat si předchozí výstup"
 #, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
-msgstr ""
+msgstr "&Nic"
 
 #: widgets/IncrementalSearchBar.cpp:49
 #, kde-format
@@ -5269,7 +5269,7 @@ msgstr "Formát názvu karty pro vzdálené připojení:"
 #: widgets/RenameTabWidget.ui:79
 #, kde-format
 msgid "&Tab title format:"
-msgstr ""
+msgstr "Formá&t názvu karty:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5281,7 +5281,7 @@ msgstr "Formát titulku normální karty"
 #: widgets/RenameTabWidget.ui:105
 #, kde-format
 msgid "Tab Co&lor:"
-msgstr ""
+msgstr "Barva &karty:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
