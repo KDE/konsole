@@ -3,13 +3,13 @@
 #
 # Malcolm Hunter <malcolm.hunter@gmx.co.uk>, 2002,2003, 2004, 2005, 2008, 2009.
 # Andrew Coles <andrew_coles@yahoo.co.uk>, 2004, 2005, 2009, 2010.
-# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 02:53+0000\n"
-"PO-Revision-Date: 2023-05-21 14:57+0100\n"
+"PO-Revision-Date: 2024-05-30 19:32+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -682,11 +682,10 @@ msgid "Deselect All"
 msgstr "Deselect All"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Preview:"
+msgstr "Colour Preview"
 
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
@@ -1279,7 +1278,7 @@ msgstr "General"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "Memory"
 
 #: MainWindow.cpp:902
 #, kde-format
@@ -1611,7 +1610,7 @@ msgstr "Delete SSH Configurations"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Imported SSH Profile <br/> Some settings are read only."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
 #, kde-format
@@ -1871,7 +1870,7 @@ msgstr "&Scale output"
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "Built-in"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:537
 #, kde-format
@@ -1879,12 +1878,10 @@ msgid "Default profile"
 msgstr "Default profile"
 
 #: profile/ProfileManager.cpp:280
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "Profile #%1"
+msgstr "Profile %1"
 
 #: profile/ProfileManager.cpp:294
 #, kde-format
@@ -2235,16 +2232,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Clear Scrollback and Reset"
 
 #: session/SessionController.cpp:757
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Edit Profile"
+msgstr "Next Profile"
 
 #: session/SessionController.cpp:762
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Previous View"
+msgstr "Previous Profile"
 
 #: session/SessionController.cpp:765
 #, kde-format
@@ -2257,21 +2252,16 @@ msgid "Set &Encoding"
 msgstr "Set &Encoding"
 
 #: session/SessionController.cpp:812
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
-msgstr "Allow mouse tracking"
+msgstr "Allow Mouse Tracking"
 
 #: session/SessionController.cpp:821
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
-msgstr "Read-only"
+msgstr "Read-Only"
 
 #: session/SessionController.cpp:832
 #, kde-format
@@ -2305,10 +2295,9 @@ msgid "&ZModem Upload..."
 msgstr "&ZModem Upload..."
 
 #: session/SessionController.cpp:872
-#, fuzzy, kde-format
-#| msgid "One-shot monitors"
+#, kde-format
 msgid "One-Shot Monitors"
-msgstr "One-shot monitors"
+msgstr "One-Shot Monitors"
 
 #: session/SessionController.cpp:877
 #, kde-format
@@ -2646,16 +2635,15 @@ msgstr "Search backwards"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Sets whether search should start from the bottom"
+msgstr "Sets whether search should stop instead of wrapping"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "No wrap"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2736,13 +2724,13 @@ msgstr "Sets whether matching text should be highlighted"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Search stops instead of wrapping"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr ""
+msgstr "Control whether child cgroups are created for individual tabs"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:94
@@ -2750,6 +2738,7 @@ msgstr ""
 msgid ""
 "Determines the memory consumption level above which throttling will start"
 msgstr ""
+"Determines the memory consumption level above which throttling will start"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2844,10 +2833,9 @@ msgstr "For scrollback files, use this folder"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Tab Monitoring"
+msgstr "Enable memory monitoring:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2861,18 +2849,25 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Changes will take effect upon restart. If enabled, sustained memory "
+"consumption by Konsole\n"
+"exceeding the specified value will cause systemd-oomd to eliminate the "
+"tab(s)\n"
+"containing the memory-intensive process(es). Note: enabling\n"
+"might cause greater slowdowns during high memory consumption and specifying\n"
+"excessively low values might still cause Konsole to be killed."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
 #, kde-format
 msgid "Memory limit:"
-msgstr ""
+msgstr "Memory limit:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_MemoryLimitValue)
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -2993,17 +2988,15 @@ msgstr "Be&low terminal area"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "Be&low terminal area"
+msgstr "To the left of terminal area"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "Be&low terminal area"
+msgstr "To the &right of terminal area"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3013,10 +3006,9 @@ msgstr "Show Close Tab button:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "&On each tab"
+msgstr "On ea&ch tab"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
@@ -3517,20 +3509,16 @@ msgid "Toggle maximize current view"
 msgstr "Toggle maximise current view"
 
 #: ViewManager.cpp:304
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Toggle maximise current view"
+msgstr "Toggle zoom-maximise current view"
 
 #: ViewManager.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Toggle maximise current view"
+msgstr "Toggle zoom-maximise current view"
 
 #: ViewManager.cpp:313
 #, kde-format
@@ -3740,10 +3728,9 @@ msgstr "Shortcut for peeking the primary screen:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:282
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Line numbers "
+msgstr "Line Numbers:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -3882,20 +3869,19 @@ msgstr "Use line characters contained in font"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr "Use the selected font for line characters instead of the builtin code"
+msgstr ""
+"Use the selected font for unicode Braille characters instead of the builtin "
+"code"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Use line characters contained in font"
+msgstr "Use unicode Braille characters contained in font"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4049,19 +4035,16 @@ msgstr "Darkening strength:"
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:543
-#, fuzzy, kde-format
-#| msgctxt "Cursor color options"
-#| msgid "Color:"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
 msgstr "Colour:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:559
-#, fuzzy, kde-format
-#| msgid "Select the color used to draw the cursor"
+#, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Select the colour used to draw the cursor"
+msgstr "Select the colour used to draw the border"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:581
@@ -4071,10 +4054,9 @@ msgstr "Inactive Terminals:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:591
-#, fuzzy, kde-format
-#| msgid "Inactive Terminals:"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "Inactive Terminals:"
+msgstr "Active Terminals:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:601
@@ -4130,16 +4112,15 @@ msgstr "Darken"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:753
-#, fuzzy, kde-format
-#| msgid "Indicate whether the window is active by dimming the colors"
+#, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr "Indicate whether the window is active by dimming the colours"
+msgstr "Indicate whether the window is active by drawing a border"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:756
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Border"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:798
@@ -4328,13 +4309,13 @@ msgstr "A profile with the name \"%1\" already exists."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Profile name exceeded maximum allowed length (%1)."
 
 #: widgets/EditProfileDialog.cpp:380
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "The highlighted characters are invalid in profile names: %1."
 
 #: widgets/EditProfileDialog.cpp:416
 #, kde-format
@@ -4451,10 +4432,9 @@ msgstr ""
 "Konsole to see transparent background."
 
 #: widgets/EditProfileDialog.cpp:1895
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Default profile"
+msgstr "Default for file type"
 
 #: widgets/EditProfileDialog.cpp:1921
 #, kde-format
@@ -5297,14 +5277,13 @@ msgstr "Sets whether search should start from the bottom"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "No wrap"
 
 #: widgets/IncrementalSearchBar.cpp:142
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Sets whether search should start from the bottom"
+msgstr "Sets whether search should stop instead of wrapping"
 
 #: widgets/IncrementalSearchBar.cpp:171
 #, kde-format

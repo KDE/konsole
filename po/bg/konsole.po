@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 02:53+0000\n"
-"PO-Revision-Date: 2024-04-29 08:09+0200\n"
+"PO-Revision-Date: 2024-05-30 18:38+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -30,8 +30,8 @@ msgstr ""
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-"kiril@vladimiroff.org,radnev@yahoo.com,zlatkopopov@fsa-bg.org,yasen@lindeas."
-"com"
+"mkondarev@yahoo.de,kiril@vladimiroff.org,radnev@yahoo.com,zlatkopopov@fsa-bg."
+"org,yasen@lindeas.com"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
@@ -2490,7 +2490,7 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 "<p> Засича се опит за прехвърляне на файлове на ZModem, но на тази система "
-"не е намерен подходящ софтуер на ZModem. </p> <p> Може да искате да "
+"не е намерен подходящ софтуер на ZModem. </p><p> Може да искате да "
 "инсталирате пакета 'rzsz' или 'lrzsz'. </p>"
 
 #: session/SessionController.cpp:2128
@@ -2506,7 +2506,7 @@ msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
-"<p> В тази система не бе намерен подходящ софтуер ZModem. </p> <p> Може да "
+"<p> В тази система не бе намерен подходящ софтуер ZModem. </p><p> Може да "
 "пожелаете да инсталирате пакета 'rzsz' или 'lrzsz'. </p>"
 
 #: session/SessionController.cpp:2146
@@ -2917,13 +2917,13 @@ msgid ""
 "format=guided&product=konsole&component=kpart\">bug report</a> if you desire "
 "a change to how these are handled.</body></html>"
 msgstr ""
-"<html> <head /> <body> <p> Приложения, които използват KonsolePart споделят "
-"профили. </p> <p> Те не споделят с Konsole или други приложения: <ul> <li> "
-"профил по подразбиране </li> <li> показване в меню </li> <li> преки пътища </"
-"li> </ul> </p> <p> Чувствайте се свободни да отворите Konsole <a href = "
+"<html><head /><body><p> Приложения, които използват KonsolePart споделят "
+"профили. </p><p> Те не споделят с Konsole или други приложения: <ul><li> "
+"профил по подразбиране </li><li> показване в меню </li><li> преки пътища </"
+"li></ul></p><p> Чувствайте се свободни да отворите Konsole <a href = "
 "\"https://bugs.kde.org /enter_bug.cgi?"
 "format=guided&product=konsole&component=kpart\">отчет за грешки </a>, ако "
-"желаете промяна в начина, по който се обработват. </body> </html>"
+"желаете промяна в начина, по който се обработват. </body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:54
@@ -3235,10 +3235,10 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
-"<html> <head /> <body> <p> За да използвате тази функция, активирайте <span "
+"<html><head /><body><p> За да използвате тази функция, активирайте <span "
 "style = \" font-weight: 600; \"> Мишка- &gt; Разни- &gt; Подчертаване </"
-"span> <span style = \"font-weight: 600; \"> файлове </span> в настройките на "
-"вашия профил </p> </body> </html>"
+"span><span style = \"font-weight: 600; \"> файлове </span> в настройките на "
+"вашия профил </p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3373,9 +3373,9 @@ msgid ""
 "Software_flow_control\">suspended</a> by pressing Ctrl+S. Press <b>Ctrl+Q</"
 "b> to resume.</qt>"
 msgstr ""
-"<qt> Изходът е <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
-"\"> спрян </a> чрез натискане на Ctrl + S. Натиснете <b> Ctrl + Q </ b > за "
-"възобновяване. </qt>"
+"<qt>Изходът е <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
+"\">спрян</a> чрез натискане на Ctrl+S. Натиснете <b>Ctrl+Q</b> за "
+"възобновяване.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2614
 #, kde-format
@@ -4632,10 +4632,9 @@ msgid ""
 "Configure Konsole → General → Remember window size</span> must be disabled "
 "for these entries to work.</p></body></html>"
 msgstr ""
-"<html> <head /> <body> <p> <span style = \" font-style: italic; \"> "
-"Настройки → Конфигуриране на Konsole → Общи → Запомняне на размера на "
-"прозореца </span> трябва да бъде деактивиран, за да функционират тези опции. "
-"</p> </body> </html>"
+"<html><head /><body><p><span style = \" font-style: italic; \"> Настройки → "
+"Конфигуриране на Konsole → Общи → Запомняне на размера на прозореца </span> "
+"трябва да бъде деактивиран, за да функционират тези опции. </p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
@@ -4997,7 +4996,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:415
 #, kde-format
 msgid "Disable drag && drop menu for files && URLs"
-msgstr "Деактивиране на менюто за плъзгане &&за файлове && URL адреси"
+msgstr "Деактивиране на менюто за плъзгане на файлове и на URL адреси"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:422
