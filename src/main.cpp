@@ -77,10 +77,13 @@ void deleteQApplication()
 class MenuStyle : public QProxyStyle
 {
 public:
+// After a5a9b6e70, on macOS this causes a crash on 2nd tab opened
+#if !defined(Q_OS_MACOS)
     MenuStyle(const QString &name)
         : QProxyStyle(name)
     {
     }
+#endif
 
     int styleHint(const StyleHint stylehint, const QStyleOption *opt, const QWidget *widget, QStyleHintReturn *returnData) const override
     {
@@ -182,8 +185,13 @@ int main(int argc, char *argv[])
 #endif
 #endif
 
+// After a5a9b6e70, on macOS this causes a crash on 2nd tab opened
+#if defined(Q_OS_MACOS)
+    app->setStyle(new MenuStyle());
+#else
     // fix the alt key, ensure we keep the current selected style as base
     app->setStyle(new MenuStyle(app->style()->name()));
+#endif
 
     migrateRenamedConfigKeys();
 
