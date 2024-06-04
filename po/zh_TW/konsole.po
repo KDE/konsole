@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-21 00:42+0000\n"
-"PO-Revision-Date: 2024-05-18 18:03+0900\n"
+"PO-Revision-Date: 2024-06-04 06:09+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -2221,7 +2221,7 @@ msgstr "清除歷史內容"
 #: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "清除歷史內容並重置"
+msgstr "清除歷史內容並重設"
 
 #: session/SessionController.cpp:757
 #, kde-format
