@@ -135,8 +135,9 @@ Session::~Session()
 {
     delete _foregroundProcessInfo;
     delete _sessionProcessInfo;
-    delete _emulation;
+    // kill process before emulation, e.g. QProcess::finished will use _emulation in some cases
     delete _shellProcess;
+    delete _emulation;
     delete _zmodemProc;
 }
 
