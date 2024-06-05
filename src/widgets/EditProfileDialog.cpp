@@ -944,7 +944,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     connect(getNewButton, &KNSWidgets::Button::dialogFinished, this, &Konsole::EditProfileDialog::gotNewColorSchemes);
 
     getNewButton->setText(i18n("Get New..."));
-    getNewButton->setConfigFile(QStringLiteral("konsole.knsrc"));
+    getNewButton->setConfigFile(QStringLiteral(":/konsole/konsole.knsrc"));
     _appearanceUi->colorSchemesBtnLayout->addWidget(getNewButton);
 
     _appearanceUi->enableBidiRenderingButton->setChecked(profile->bidiRenderingEnabled());

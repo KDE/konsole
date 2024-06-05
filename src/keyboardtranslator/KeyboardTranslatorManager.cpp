@@ -72,23 +72,32 @@ bool KeyboardTranslatorManager::isTranslatorDeletable(const QString &name) const
 
 bool KeyboardTranslatorManager::isTranslatorResettable(const QString &name) const
 {
-    const QStringList &paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".keytab"));
-
-    return (paths.count() > 1);
+    auto foundFiles = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".keytab")).count();
+    if (QFile::exists(QStringLiteral(":/konsole/keyboard-layouts/") + name + QStringLiteral(".keytab"))) {
+        ++foundFiles;
+    }
+    return (foundFiles > 1);
 }
 
 const QString KeyboardTranslatorManager::findTranslatorPath(const QString &name) const
 {
-    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".keytab"));
+    auto file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".keytab"));
+
+    // fallback to bundled ones
+    if (file.isEmpty() && QFile::exists(QStringLiteral(":/konsole/keyboard-layouts/") + name + QStringLiteral(".keytab"))) {
+        file = QStringLiteral(":/konsole/keyboard-layouts/") + name + QStringLiteral(".keytab");
+    }
+
+    return file;
 }
 
 void KeyboardTranslatorManager::findTranslators()
 {
-    QStringList list;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
-    list.reserve(dirs.size());
+    QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
+    dirs.append(QStringLiteral(":/konsole/keyboard-layouts")); // fallback to bundled ones
 
-    for (const QString &dir : dirs) {
+    QStringList list;
+    for (const QString &dir : std::as_const(dirs)) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.keytab"));
         for (const QString &file : fileNames) {
             list.append(dir + QLatin1Char('/') + file);

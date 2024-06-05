@@ -103,11 +103,11 @@ QString ColorSchemeManager::colorSchemeNameFromPath(const QString &path)
 
 QStringList ColorSchemeManager::listColorSchemes()
 {
-    QStringList colorschemes;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
-    colorschemes.reserve(dirs.size());
+    QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
+    dirs.append(QStringLiteral(":/konsole/color-schemes")); // fallback to bundled ones
 
-    for (const QString &dir : dirs) {
+    QStringList colorschemes;
+    for (const QString &dir : std::as_const(dirs)) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.colorscheme"));
         for (const QString &file : fileNames) {
             colorschemes.append(dir + QLatin1Char('/') + file);

@@ -1,0 +1,28 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/kconfig">
+        <file>konsolerc</file>
+    </qresource>
+    <qresource prefix="/konsole">
+        <file>konsole.knsrc</file>
+        <file>color-schemes/BlackOnLightYellow.colorscheme</file>
+        <file>color-schemes/BlackOnRandomLight.colorscheme</file>
+        <file>color-schemes/BlackOnWhite.colorscheme</file>
+        <file>color-schemes/BlueOnBlack.colorscheme</file>
+        <file>color-schemes/Breeze.colorscheme</file>
+        <file>color-schemes/GreenOnBlack.colorscheme</file>
+        <file>color-schemes/WhiteOnBlack.colorscheme</file>
+        <file>color-schemes/Linux.colorscheme</file>
+        <file>color-schemes/DarkPastels.colorscheme</file>
+        <file>color-schemes/RedOnBlack.colorscheme</file>
+        <file>color-schemes/Solarized.colorscheme</file>
+        <file>color-schemes/SolarizedLight.colorscheme</file>
+        <file>keyboard-layouts/default.keytab</file>
+        <file>keyboard-layouts/linux.keytab</file>
+        <file>keyboard-layouts/macos.keytab</file>
+        <file>keyboard-layouts/solaris.keytab</file>
+        <file>layouts/1x2-terminals.json</file>
+        <file>layouts/2x1-terminals.json</file>
+        <file>layouts/2x2-terminals.json</file>
+    </qresource>
+</RCC>

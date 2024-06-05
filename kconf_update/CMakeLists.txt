@@ -8,17 +8,12 @@ target_link_libraries(konsole_globalaccel PRIVATE
     KF6::Service
 )
 
-
-set(konsole_show_menubar_SRCS konsole_show_menubar.cpp)
-qt_add_resources(konsole_show_menubar_SRCS ../desktop/konsole.qrc)
-
-add_executable(konsole_show_menubar ${konsole_show_menubar_SRCS})
+add_executable(konsole_show_menubar konsole_show_menubar.cpp ../data/data.qrc ../desktop/konsole.qrc)
 
 target_link_libraries(konsole_show_menubar
     KF6::XmlGui
     KF6::CoreAddons
 )
-
 
 install(FILES konsole.upd DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
 install(PROGRAMS konsole_add_hamburgermenu_to_toolbar.sh DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})

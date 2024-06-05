@@ -235,7 +235,11 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         widgets/ViewContainer.cpp
                         widgets/ViewSplitter.cpp
                         widgets/KonsolePrintManager.cpp
-                        ${dbus_xml_srcs})
+
+                        ${dbus_xml_srcs}
+
+                        ../data/data.qrc
+                        ../desktop/konsole.qrc)
 
 kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
@@ -264,9 +268,6 @@ ki18n_wrap_ui(konsoleprivate_SRCS
     widgets/HistorySizeWidget.ui
     widgets/RenameTabWidget.ui
 )
-
-# add the resource files for the ui files
-qt_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
 
 add_library(konsoleprivate ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)

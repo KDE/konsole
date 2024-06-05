@@ -12,7 +12,6 @@
 // Qt
 #include <QFile>
 #include <QFileDialog>
-#include <QStandardPaths>
 #include <QStringList>
 #include <QTabBar>
 
@@ -179,7 +178,7 @@ void ViewManager::setupActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
     action->setText(i18nc("@action:inmenu", "Load a new tab with layout 2x2 terminals"));
     connect(action, &QAction::triggered, this, [this]() {
-        this->loadLayout(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/2x2-terminals.json")));
+        this->loadLayout(QStringLiteral(":/konsole/layouts/2x2-terminals.json"));
     });
     collection->addAction(QStringLiteral("load-terminals-layout-2x2"), action);
     splitViewActions->addAction(action);
@@ -188,7 +187,7 @@ void ViewManager::setupActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
     action->setText(i18nc("@action:inmenu", "Load a new tab with layout 2x1 terminals"));
     connect(action, &QAction::triggered, this, [this]() {
-        this->loadLayout(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/2x1-terminals.json")));
+        this->loadLayout(QStringLiteral(":/konsole/layouts/2x1-terminals.json"));
     });
     collection->addAction(QStringLiteral("load-terminals-layout-2x1"), action);
     splitViewActions->addAction(action);
@@ -197,7 +196,7 @@ void ViewManager::setupActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
     action->setText(i18nc("@action:inmenu", "Load a new tab with layout 1x2 terminals"));
     connect(action, &QAction::triggered, this, [this]() {
-        this->loadLayout(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/1x2-terminals.json")));
+        this->loadLayout(QStringLiteral(":/konsole/layouts/1x2-terminals.json"));
     });
     collection->addAction(QStringLiteral("load-terminals-layout-1x2"), action);
     splitViewActions->addAction(action);
