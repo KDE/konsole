@@ -24,6 +24,7 @@
 #include <QDir>
 #include <QFile>
 #include <QKeyEvent>
+#include <QThread>
 
 // KDE
 #include <KActionCollection>
@@ -40,7 +41,9 @@
 #include <KShell>
 
 // Konsole
+#if HAVE_DBUS
 #include <sessionadaptor.h>
+#endif
 
 #include "Pty.h"
 #include "SSHProcessInfo.h"
@@ -82,9 +85,6 @@ Session::Session(QObject *parent)
 {
     _uniqueIdentifier = QUuid::createUuid();
 
-    // prepare DBus communication
-    new SessionAdaptor(this);
-
     int maxSessionId = 0;
     auto allSessions = SessionManager::instance()->sessions();
     for (const auto &session : allSessions) {
@@ -93,7 +93,12 @@ Session::Session(QObject *parent)
         }
     }
     _sessionId = maxSessionId + 1;
+
+#if HAVE_DBUS
+    // prepare DBus communication
+    new SessionAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/") + QString::number(_sessionId), this);
+#endif
 
     // create emulation backend
     _emulation = new Vt102Emulation();
@@ -559,11 +564,13 @@ void Session::run()
 
     addEnvironmentEntry(QStringLiteral("WINDOWID=%1").arg(QString::number(windowId())));
 
+#if HAVE_DBUS
     const QString dbusService = QDBusConnection::sessionBus().baseService();
     addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_SERVICE=%1").arg(dbusService));
 
     const QString dbusObject = QStringLiteral("/Sessions/%1").arg(QString::number(_sessionId));
     addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_SESSION=%1").arg(dbusObject));
+#endif
 
 #ifndef Q_OS_WIN
     const auto originalEnvironment = _shellProcess->environment();

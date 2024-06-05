@@ -27,9 +27,12 @@
 // KDE
 #include <KAboutData>
 #include <KCrash>
-#include <KDBusService>
 #include <KIconTheme>
 #include <KLocalizedString>
+
+#if HAVE_DBUS
+#include <KDBusService>
+#endif
 
 #define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
 #if HAVE_STYLE_MANAGER
@@ -54,6 +57,7 @@ bool shouldUseNewProcess(int argc, char *argv[]);
 // restore sessions saved by KDE.
 void restoreSession(Application &app);
 
+#if HAVE_DBUS
 // Workaround for a bug in KDBusService: https://bugs.kde.org/show_bug.cgi?id=355545
 // It calls exit(), but the program can't exit before the QApplication is deleted:
 // https://bugreports.qt.io/browse/QTBUG-48709
@@ -64,6 +68,7 @@ void deleteQApplication()
         delete qApp;
     }
 }
+#endif
 
 // This override resolves following problem: since some qt version if
 // XDG_CURRENT_DESKTOP ≠ kde, then pressing and immediately releasing Alt
@@ -150,6 +155,7 @@ int main(int argc, char *argv[])
     }
 #endif
 
+#if HAVE_DBUS
     // Check if any of the arguments makes it impossible to re-use an existing process.
     // We need to do this manually and before creating a QApplication, because
     // QApplication takes/removes the Qt specific arguments that are incompatible.
@@ -157,6 +163,7 @@ int main(int argc, char *argv[])
     if (!needNewProcess) { // We need to avoid crashing
         needToDeleteQApplication = true;
     }
+#endif
 
     auto app = new QApplication(argc, argv);
 
@@ -210,6 +217,7 @@ int main(int argc, char *argv[])
     parser->process(args);
     about.processCommandLine(parser.data());
 
+#if HAVE_DBUS
     /// ! DON'T TOUCH THIS ! ///
     const KDBusService::StartupOption startupOption =
         Konsole::KonsoleSettings::useSingleInstance() && !needNewProcess ? KDBusService::Unique : KDBusService::Multiple;
@@ -224,14 +232,17 @@ int main(int argc, char *argv[])
     KDBusService dbusService(startupOption | KDBusService::NoExitOnFailure);
 
     needToDeleteQApplication = false;
+#endif
 
     // If we reach this location, there was no existing copy of Konsole
     // running, so create a new instance.
     Application konsoleApp(parser, customCommand);
 
+#if HAVE_DBUS
     // The activateRequested() signal is emitted when a second instance
     // of Konsole is started.
     QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp, &Application::slotActivateRequested);
+#endif
 
     if (app->isSessionRestored()) {
         restoreSession(konsoleApp);

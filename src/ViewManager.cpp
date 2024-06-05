@@ -19,8 +19,10 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
+#if HAVE_DBUS
 #include <QDBusArgument>
 #include <QDBusMetaType>
+#endif
 
 // KDE
 #include <KActionCollection>
@@ -30,7 +32,9 @@
 #include <KMessageBox>
 
 // Konsole
+#if HAVE_DBUS
 #include <windowadaptor.h>
+#endif
 
 #include "colorscheme/ColorScheme.h"
 #include "colorscheme/ColorSchemeManager.h"
@@ -62,7 +66,9 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection)
     , _managerId(0)
     , _terminalDisplayHistoryIndex(-1)
 {
+#if HAVE_DBUS
     qDBusRegisterMetaType<QList<double>>();
+#endif
 
     _viewContainer = createContainer();
     // setup actions which are related to the views
@@ -77,11 +83,13 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection)
     connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this, &Konsole::ViewManager::profileChanged);
     connect(SessionManager::instance(), &Konsole::SessionManager::sessionUpdated, this, &Konsole::ViewManager::updateViewsForSession);
 
+    _managerId = ++lastManagerId;
+
+#if HAVE_DBUS
     // prepare DBus communication
     new WindowAdaptor(this);
-
-    _managerId = ++lastManagerId;
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Windows/") + QString::number(_managerId), this);
+#endif
 }
 
 ViewManager::~ViewManager() = default;

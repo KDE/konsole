@@ -32,28 +32,36 @@ option(ENABLE_DECRQCRA "Konsole: enable DEC request checksum rectangular area" O
 ### Development tools
 option(KONSOLE_BUILD_UNI2CHARACTERWIDTH "Konsole: build uni2characterwidth executable" OFF)
 
-### Konsole source files shared between embedded terminal and main application
-# qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
-# qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
+set(dbus_xml_srcs)
+if (HAVE_DBUS)
+    ### Konsole source files shared between embedded terminal and main application
+    # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
+    # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
-# Generate dbus .xml files; do not store .xml in source folder
-qt_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
+    # Generate dbus .xml files; do not store .xml in source folder
+    qt_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
 
-qt_add_dbus_adaptor(windowadaptors_SRCS
-                    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
-                    ViewManager.h
-                    Konsole::ViewManager)
+    qt_add_dbus_adaptor(windowadaptors_SRCS
+                        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
+                        ViewManager.h
+                        Konsole::ViewManager)
 
-# qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
-# Generate dbus .xml files; do not store .xml in source folder
-qt_generate_dbus_interface(session/Session.h org.kde.konsole.Session.xml OPTIONS -m)
+    # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
+    # Generate dbus .xml files; do not store .xml in source folder
+    qt_generate_dbus_interface(session/Session.h org.kde.konsole.Session.xml OPTIONS -m)
 
-qt_add_dbus_adaptor(
-    sessionadaptors_SRCS
-    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
-    session/Session.h
-    Konsole::Session
-)
+    qt_add_dbus_adaptor(
+        sessionadaptors_SRCS
+        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
+        session/Session.h
+        Konsole::Session
+    )
+
+    set(dbus_xml_srcs
+        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
+        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
+    )
+endif()
 
 set(konsole_LIBS
     KF6::XmlGui
@@ -68,7 +76,6 @@ set(konsole_LIBS
     KF6::Bookmarks
     KF6::I18n
     KF6::KIOWidgets
-    KF6::DBusAddons
     KF6::NewStuffCore
 )
 
@@ -78,8 +85,9 @@ if (NOT WIN32)
     )
 endif()
 
-if (NOT WIN32 AND NOT APPLE)
+if (HAVE_DBUS)
     list(APPEND konsole_LIBS
+        KF6::DBusAddons
         KF6::GlobalAccel
     )
 endif()
@@ -221,14 +229,13 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         session/SessionListModel.cpp
                         session/SessionManager.cpp
                         session/SessionTask.cpp
-                        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
 
                         widgets/TerminalDisplayAccessible.cpp
                         widgets/TerminalHeaderBar.cpp
                         widgets/ViewContainer.cpp
                         widgets/ViewSplitter.cpp
                         widgets/KonsolePrintManager.cpp
-                        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml)
+                        ${dbus_xml_srcs})
 
 kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 

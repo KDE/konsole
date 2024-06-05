@@ -45,7 +45,6 @@ include(ECMEnableSanitizers)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
-    DBus
     Multimedia
     PrintSupport
     Widgets
@@ -59,7 +58,6 @@ find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
     CoreAddons
     Crash
     GuiAddons
-    DBusAddons
     I18n
     IconThemes
     KIO
@@ -80,10 +78,22 @@ if (NOT WIN32)
     )
 endif()
 
-if (NOT WIN32 AND NOT APPLE)
+# shall we use DBus?
+# enabled per default on Linux & BSD systems
+set(USE_DBUS_DEFAULT OFF)
+if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
+    set(USE_DBUS_DEFAULT ON)
+endif()
+option(USE_DBUS "Build components using DBus" ${USE_DBUS_DEFAULT})
+if(USE_DBUS)
+    find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
+        DBus
+    )
     find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
+        DBusAddons
         GlobalAccel
     )
+    set(HAVE_DBUS 1)
 endif()
 
 find_package(KF6DocTools ${KF6_DEP_VERSION})
@@ -94,7 +104,7 @@ set_package_properties(KF6DocTools PROPERTIES DESCRIPTION
 
 find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
 
-if(NOT APPLE)
+if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
     option(WITHOUT_X11 "Build without X11 integration (skips finding X11)" OFF)
     if (NOT WITHOUT_X11)
         find_package(X11)
@@ -130,7 +140,7 @@ add_subdirectory( src )
 add_subdirectory( data )
 add_subdirectory( desktop )
 
-if (NOT WIN32 AND NOT APPLE)
+if (HAVE_DBUS)
     add_subdirectory( kconf_update )
 endif()
 

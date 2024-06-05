@@ -9,7 +9,6 @@ Dependencies:
     'frameworks/knotifications': '@latest-kf6'
     'frameworks/ki18n': '@latest-kf6'
     'frameworks/kcoreaddons': '@latest-kf6'
-    'frameworks/kdbusaddons': '@latest-kf6'
     'frameworks/kbookmarks': '@latest-kf6'
     'frameworks/kconfigwidgets': '@latest-kf6'
     'frameworks/kcrash': '@latest-kf6'
@@ -28,6 +27,7 @@ Dependencies:
 
 - 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
   'require':
+    'frameworks/kdbusaddons': '@latest-kf6'
     'frameworks/kpty': '@latest-kf6'
     'frameworks/kglobalaccel': '@latest-kf6'
 

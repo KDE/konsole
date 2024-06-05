@@ -18,7 +18,7 @@
 
 // KDE
 #include <KActionCollection>
-#if !defined(Q_OS_WIN) && !defined(Q_OS_MACOS)
+#if HAVE_DBUS
 #include <KGlobalAccel>
 #endif
 #include <KLocalizedString>
@@ -509,7 +509,7 @@ void Application::startBackgroundMode(MainWindow *window)
         return;
     }
 
-#if !defined(Q_OS_WIN) && !defined(Q_OS_MACOS)
+#if HAVE_DBUS
     KActionCollection *collection = window->actionCollection();
     QAction *action = collection->addAction(QStringLiteral("toggle-background-window"));
     action->setObjectName(QStringLiteral("Konsole Background Mode"));
