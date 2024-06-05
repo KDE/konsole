@@ -149,15 +149,6 @@ int main(int argc, char *argv[])
     KIconTheme::initTheme();
 #endif
 
-    /**
-     * enable dark mode for title bar on Windows
-     */
-#if defined(Q_OS_WIN)
-    if (!qEnvironmentVariableIsSet("QT_QPA_PLATFORM")) {
-        qputenv("QT_QPA_PLATFORM", "windows:darkmode=1");
-    }
-#endif
-
 #if HAVE_DBUS
     // Check if any of the arguments makes it impossible to re-use an existing process.
     // We need to do this manually and before creating a QApplication, because
