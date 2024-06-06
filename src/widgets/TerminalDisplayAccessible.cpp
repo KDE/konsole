@@ -13,7 +13,7 @@
 using namespace Konsole;
 
 TerminalDisplayAccessible::TerminalDisplayAccessible(TerminalDisplay *display)
-    : QAccessibleWidget(display, QAccessible::Terminal, display->sessionController()->userTitle())
+    : QAccessibleWidget(display, QAccessible::Terminal, display->sessionController() ? display->sessionController()->userTitle() : QString())
 {
 }
 
