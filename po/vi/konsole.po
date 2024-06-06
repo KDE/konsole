@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-21 00:42+0000\n"
+"POT-Creation-Date: 2024-06-06 00:41+0000\n"
 "PO-Revision-Date: 2007-06-24 15:01+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -909,237 +909,237 @@ msgstr "Vào:"
 msgid "Output:"
 msgstr "Ra:"
 
-#: main.cpp:188
+#: main.cpp:194
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: main.cpp:190
+#: main.cpp:196
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "Bộ mô phỏng thiết bị cuối"
 
-#: main.cpp:192
+#: main.cpp:198
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr ""
 
-#: main.cpp:339
+#: main.cpp:349
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr ""
 
-#: main.cpp:341
+#: main.cpp:351
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "Sửa chữa lỗi và cải tiến chung"
 
-#: main.cpp:344
+#: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr ""
 
-#: main.cpp:345
+#: main.cpp:355
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr ""
 
-#: main.cpp:347
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr ""
 
-#: main.cpp:347
+#: main.cpp:357
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "Bộ mô phỏng thiết bị cuối"
 
-#: main.cpp:348
+#: main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr ""
 
-#: main.cpp:349 main.cpp:352 main.cpp:355 main.cpp:358
+#: main.cpp:359 main.cpp:362 main.cpp:365 main.cpp:368
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "Sửa chữa lỗi và cải tiến chung"
 
-#: main.cpp:351
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr ""
 
-#: main.cpp:354
+#: main.cpp:364
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr ""
 
-#: main.cpp:357
+#: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr ""
 
-#: main.cpp:360
+#: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr ""
 
-#: main.cpp:361 main.cpp:364 main.cpp:366 main.cpp:371 main.cpp:373
-#: main.cpp:374 main.cpp:375
+#: main.cpp:371 main.cpp:374 main.cpp:376 main.cpp:381 main.cpp:383
+#: main.cpp:384 main.cpp:385
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "Sửa chữa lỗi và cải tiến chung"
 
-#: main.cpp:363
+#: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr ""
 
-#: main.cpp:366
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr ""
 
-#: main.cpp:367
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr ""
 
-#: main.cpp:368
+#: main.cpp:378
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "Sửa chữa lỗi và cải tiến chung"
 
-#: main.cpp:370
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr ""
 
-#: main.cpp:373
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr ""
 
-#: main.cpp:374
+#: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr ""
 
-#: main.cpp:375
+#: main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr ""
 
-#: main.cpp:376
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr ""
 
-#: main.cpp:376
+#: main.cpp:386
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "Sửa chữa lỗi và cải tiến chung"
 
-#: main.cpp:377
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr ""
 
-#: main.cpp:377 main.cpp:378 main.cpp:405 main.cpp:406 main.cpp:407
-#: main.cpp:408
+#: main.cpp:387 main.cpp:388 main.cpp:415 main.cpp:416 main.cpp:417
+#: main.cpp:418
 #, fuzzy, kde-format
 #| msgid "Bug fixes"
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "Sửa chữa lỗi"
 
-#: main.cpp:378
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr ""
 
-#: main.cpp:379
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr ""
 
-#: main.cpp:379
+#: main.cpp:389
 #, fuzzy, kde-format
 #| msgid "Solaris support and history"
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Hỗ trợ Solaris và lịch sử"
 
-#: main.cpp:380
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr ""
 
-#: main.cpp:381
+#: main.cpp:391
 #, fuzzy, kde-format
 #| msgid "Bug fixes and improved startup performance"
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "Sửa chữa lỗi và cải tiến hiệu suất khởi chạy"
 
-#: main.cpp:383
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr ""
 
-#: main.cpp:383
+#: main.cpp:393
 #, fuzzy, kde-format
 #| msgid "Marking improvements"
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "Cải tiến đánh dấu"
 
-#: main.cpp:384
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr ""
 
-#: main.cpp:386
+#: main.cpp:396
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1152,13 +1152,13 @@ msgstr ""
 "Konsole nhúng\n"
 "Tên thanh công cụ và phiên chạy"
 
-#: main.cpp:389
+#: main.cpp:399
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr ""
 
-#: main.cpp:391
+#: main.cpp:401
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1171,26 +1171,26 @@ msgstr ""
 "Konsole nhúng\n"
 "Cải tiến chung"
 
-#: main.cpp:394
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr ""
 
-#: main.cpp:394
+#: main.cpp:404
 #, fuzzy, kde-format
 #| msgid "Visual effects"
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "Hiệu ứng hiển thị"
 
-#: main.cpp:395
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr ""
 
-#: main.cpp:397
+#: main.cpp:407
 #, fuzzy, kde-format
 #| msgid ""
 #| "Code from the kvt project\n"
@@ -1203,70 +1203,70 @@ msgstr ""
 "Mã từ dự án kvt\n"
 "Cải tiến chung"
 
-#: main.cpp:400
+#: main.cpp:410
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr ""
 
-#: main.cpp:401
+#: main.cpp:411
 #, fuzzy, kde-format
 #| msgid "Schema and text selection improvements"
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "Cải tiến giản đồ và cách chọn văn bản"
 
-#: main.cpp:403
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr ""
 
-#: main.cpp:403
+#: main.cpp:413
 #, fuzzy, kde-format
 #| msgid "SGI port"
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "Chuyển sang SGI"
 
-#: main.cpp:404
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr ""
 
-#: main.cpp:404
+#: main.cpp:414
 #, fuzzy, kde-format
 #| msgid "FreeBSD port"
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "Chuyển sang FreeBSD"
 
-#: main.cpp:405
+#: main.cpp:415
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr ""
 
-#: main.cpp:406
+#: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr ""
 
-#: main.cpp:407
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr ""
 
-#: main.cpp:408
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr ""
 
-#: main.cpp:409
+#: main.cpp:419
 #, fuzzy, kde-format
 #| msgid "Thanks to many others.\n"
 msgctxt "@info:credit"
@@ -2172,47 +2172,47 @@ msgstr ""
 msgid "Solaris console"
 msgstr "Bàn giao tiếp Solaris"
 
-#: session/Session.cpp:104
+#: session/Session.cpp:109
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Tiếng chuông trong phiên chạy '%1'"
 
-#: session/Session.cpp:411
+#: session/Session.cpp:417
 #, kde-format
 msgid "Could not find binary: "
 msgstr ""
 
-#: session/Session.cpp:420
+#: session/Session.cpp:426
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr ""
 
-#: session/Session.cpp:514
+#: session/Session.cpp:520
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:520 session/Session.cpp:522
+#: session/Session.cpp:526 session/Session.cpp:528
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:585
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr ""
 
-#: session/Session.cpp:733
+#: session/Session.cpp:741
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Không có hoạt động trong phiên chạy '%1'"
 
-#: session/Session.cpp:734 session/Session.cpp:2072
+#: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, fuzzy, kde-format
@@ -2220,7 +2220,7 @@ msgstr "Không có hoạt động trong phiên chạy '%1'"
 msgid "Show session"
 msgstr "Konsole"
 
-#: session/Session.cpp:1018
+#: session/Session.cpp:1026
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2229,31 +2229,31 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1058
+#: session/Session.cpp:1066
 #, fuzzy, kde-format
 #| msgid "<Finished>"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "<Kết thúc>"
 
-#: session/Session.cpp:1072 session/Session.cpp:1088
+#: session/Session.cpp:1080 session/Session.cpp:1096
 #, fuzzy, kde-format
 #| msgid "Session '%1' exited unexpectedly."
 msgid "Program '%1' crashed."
 msgstr "Phiên chạy '%1' thoát ra bất ngờ."
 
-#: session/Session.cpp:1074
+#: session/Session.cpp:1082
 #, fuzzy, kde-format
 #| msgid "Session '%1' exited with status %2."
 msgid "Program '%1' exited with status %2."
 msgstr "Phiên chạy '%1' thoát ra với trạng thái %2."
 
-#: session/Session.cpp:1600
+#: session/Session.cpp:1608
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Tiến trình ZModem"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2079
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -3528,258 +3528,258 @@ msgstr "Đổi thư mục"
 msgid "&Paste Location"
 msgstr "&Dán"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, fuzzy, kde-format
 #| msgid "Shrink View"
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Thu nhỏ ô xem"
 
-#: ViewManager.cpp:120
+#: ViewManager.cpp:127
 #, fuzzy, kde-format
 #| msgid "Split View Left/Right"
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Chia ô xem trái/phải"
 
-#: ViewManager.cpp:128
+#: ViewManager.cpp:135
 #, fuzzy, kde-format
 #| msgid "Split View Top/Bottom"
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Chia ô xem trên/xuống"
 
-#: ViewManager.cpp:136
+#: ViewManager.cpp:143
 #, fuzzy, kde-format
 #| msgid "Split View Top/Bottom"
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Chia ô xem trên/xuống"
 
-#: ViewManager.cpp:146
+#: ViewManager.cpp:153
 #, fuzzy, kde-format
 #| msgid "Split View Left/Right"
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Chia ô xem trái/phải"
 
-#: ViewManager.cpp:154
+#: ViewManager.cpp:161
 #, fuzzy, kde-format
 #| msgid "Split View Top/Bottom"
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Chia ô xem trên/xuống"
 
-#: ViewManager.cpp:162
+#: ViewManager.cpp:169
 #, fuzzy, kde-format
 #| msgid "Split View Top/Bottom"
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Chia ô xem trên/xuống"
 
-#: ViewManager.cpp:172
+#: ViewManager.cpp:179
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:188
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr ""
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:197
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:198
+#: ViewManager.cpp:205
 #, fuzzy, kde-format
 #| msgid "Expand View"
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Phóng to ô xem"
 
-#: ViewManager.cpp:206
+#: ViewManager.cpp:213
 #, fuzzy, kde-format
 #| msgid "Shrink View"
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Thu nhỏ ô xem"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:223
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Đón&g thẻ"
 
-#: ViewManager.cpp:228
+#: ViewManager.cpp:235
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Đón&g thẻ"
 
-#: ViewManager.cpp:233
+#: ViewManager.cpp:240
 #, fuzzy, kde-format
 #| msgid "New &Tab"
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "&Thẻ mới"
 
-#: ViewManager.cpp:241
+#: ViewManager.cpp:248
 #, fuzzy, kde-format
 #| msgid "Previous"
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Lùi"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, fuzzy, kde-format
 #| msgid "Above terminal displays"
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Bên trên cửa sổ dòng lệnh"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, fuzzy, kde-format
 #| msgid "Below terminal displays"
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Bên dưới cửa sổ dòng lệnh"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:270
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr ""
 
-#: ViewManager.cpp:269
+#: ViewManager.cpp:276
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr ""
 
-#: ViewManager.cpp:275
+#: ViewManager.cpp:282
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr ""
 
-#: ViewManager.cpp:280
+#: ViewManager.cpp:287
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr ""
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr ""
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr ""
 
-#: ViewManager.cpp:295
+#: ViewManager.cpp:302
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:305
+#: ViewManager.cpp:312
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:313
+#: ViewManager.cpp:320
 #, fuzzy, kde-format
 #| msgid "Split View Left/Right"
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Chia ô xem trái/phải"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:327
 #, fuzzy, kde-format
 #| msgid "Move Here"
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Chuyển vào đây"
 
-#: ViewManager.cpp:327
+#: ViewManager.cpp:334
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:333
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:353
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr ""
 
-#: ViewManager.cpp:356
+#: ViewManager.cpp:363
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr ""
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:576
 #, fuzzy, kde-format
 #| msgid "Interaction Options"
 msgid "Semantic hints "
 msgstr "Tuỳ chọn tương tác"
 
-#: ViewManager.cpp:585
+#: ViewManager.cpp:592
 #, kde-format
 msgid "Line numbers "
 msgstr ""
 
-#: ViewManager.cpp:1170
+#: ViewManager.cpp:1177
 #, fuzzy, kde-format
 #| msgid "Move Here"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Chuyển vào đây"
 
-#: ViewManager.cpp:1172 ViewManager.cpp:1259
+#: ViewManager.cpp:1179 ViewManager.cpp:1266
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1185
+#: ViewManager.cpp:1192
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3792,7 +3792,7 @@ msgstr ""
 "Gặp lỗi khi lưu kết xuất.\n"
 "%1"
 
-#: ViewManager.cpp:1246
+#: ViewManager.cpp:1253
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3805,7 +3805,7 @@ msgstr ""
 "Gặp lỗi khi lưu kết xuất.\n"
 "%1"
 
-#: ViewManager.cpp:1257
+#: ViewManager.cpp:1264
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

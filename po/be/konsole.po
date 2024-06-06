@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-21 00:42+0000\n"
-"PO-Revision-Date: 2024-05-16 21:13\n"
+"POT-Creation-Date: 2024-06-06 00:41+0000\n"
+"PO-Revision-Date: 2024-06-03 19:40\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -221,8 +221,8 @@ msgid ""
 "Command to execute. This option will catch all following arguments, so use "
 "it as the last option."
 msgstr ""
-"Загад для выканання. Гэты параметр ахоплівае ўсе параметры, якія знаходзяцца "
-"за ім, таму выкарыстоўвайце яго апошнім."
+"Каманда для выканання. Гэты параметр ахоплівае ўсе параметры, якія "
+"знаходзяцца за ім, таму выкарыстоўвайце яго апошнім."
 
 #: Application.cpp:79
 #, kde-format
@@ -239,7 +239,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Arguments passed to command"
-msgstr "Аргументы, якія былі адпраўленыя загаду"
+msgstr "Аргументы, якія былі адпраўленыя камандзе"
 
 #: Application.cpp:516
 #, kde-format
@@ -839,225 +839,225 @@ msgstr "Увод:"
 msgid "Output:"
 msgstr "Вывад:"
 
-#: main.cpp:188
+#: main.cpp:194
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: main.cpp:190
+#: main.cpp:196
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "Эмулятар тэрмінала"
 
-#: main.cpp:192
+#: main.cpp:198
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr "(c) 1997-2022, распрацоўнікі Konsole"
 
-#: main.cpp:339
+#: main.cpp:349
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "Kurt Hindenburg"
 
-#: main.cpp:341
+#: main.cpp:351
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "Галоўны суправаджальнік, выпраўленні памылак і агульныя паляпшэнні"
 
-#: main.cpp:344
+#: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "Robert Knight"
 
-#: main.cpp:345
+#: main.cpp:355
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr "Папярэдні суправаджальнік, порт на KDE4"
 
-#: main.cpp:347
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "Lars Doelle"
 
-#: main.cpp:347
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "Першапачатковы стваральнік"
 
-#: main.cpp:348
+#: main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr "Ahmad Samir"
 
-#: main.cpp:349 main.cpp:352 main.cpp:355 main.cpp:358
+#: main.cpp:359 main.cpp:362 main.cpp:365 main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "Асноўны рэфактарынг, выпраўленні хібаў і асноўныя паляпшэнні"
 
-#: main.cpp:351
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr "Carlos Alves"
 
-#: main.cpp:354
+#: main.cpp:364
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: main.cpp:357
+#: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr "Gustavo Carneiro"
 
-#: main.cpp:360
+#: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr "Edwin Pujols"
 
-#: main.cpp:361 main.cpp:364 main.cpp:366 main.cpp:371 main.cpp:373
-#: main.cpp:374 main.cpp:375
+#: main.cpp:371 main.cpp:374 main.cpp:376 main.cpp:381 main.cpp:383
+#: main.cpp:384 main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "Выпраўленні хібаў і агульныя паляпшэнні"
 
-#: main.cpp:363
+#: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr "Martin T. H. Sandsmark"
 
-#: main.cpp:366
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr "Nate Graham"
 
-#: main.cpp:367
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr "Mariusz Glebocki"
 
-#: main.cpp:368
+#: main.cpp:378
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "Выпраўленні хібаў і асноўныя паляпшэнні"
 
-#: main.cpp:370
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "Thomas Surrel"
 
-#: main.cpp:373
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "Jekyll Wu"
 
-#: main.cpp:374
+#: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "Waldo Bastian"
 
-#: main.cpp:375
+#: main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "Stephan Binner"
 
-#: main.cpp:376
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:376
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "Агульныя паляпшэнні"
 
-#: main.cpp:377
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "Chris Machemer"
 
-#: main.cpp:377 main.cpp:378 main.cpp:405 main.cpp:406 main.cpp:407
-#: main.cpp:408
+#: main.cpp:387 main.cpp:388 main.cpp:415 main.cpp:416 main.cpp:417
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "Выпраўленні хібаў"
 
-#: main.cpp:378
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr "Francesco Cecconi"
 
-#: main.cpp:379
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "Stephan Kulow"
 
-#: main.cpp:379
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Падтрымка і рэалізацыя гісторыі Solaris"
 
-#: main.cpp:380
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "Alexander Neundorf"
 
-#: main.cpp:381
+#: main.cpp:391
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "Выпраўленні хібаў і паляпшэнне прадукцыйнасці запуску"
 
-#: main.cpp:383
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "Peter Silva"
 
-#: main.cpp:383
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "Пазначэнне паляпшэнняў"
 
-#: main.cpp:384
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "Lotzi Boloni"
 
-#: main.cpp:386
+#: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1067,13 +1067,13 @@ msgstr ""
 "Убудаваныя функцыі Konsole\n"
 "Панэль інструментаў і назвы сеансаў"
 
-#: main.cpp:389
+#: main.cpp:399
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:391
+#: main.cpp:401
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1083,25 +1083,25 @@ msgstr ""
 "Убудаваныя функцыі Konsole\n"
 "Агульныя паляпшэнні"
 
-#: main.cpp:394
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "Antonio Larrosa"
 
-#: main.cpp:394
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "Візуальныя эфекты"
 
-#: main.cpp:395
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "Matthias Ettrich"
 
-#: main.cpp:397
+#: main.cpp:407
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1111,67 +1111,67 @@ msgstr ""
 "Код з праекта kvt\n"
 "Агульныя паляпшэнні"
 
-#: main.cpp:400
+#: main.cpp:410
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "Warwick Allison"
 
-#: main.cpp:401
+#: main.cpp:411
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "Паляпшэнні схемы і вылучэння тэксту"
 
-#: main.cpp:403
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "Dan Pilone"
 
-#: main.cpp:403
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "Порт для SGI"
 
-#: main.cpp:404
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "Kevin Street"
 
-#: main.cpp:404
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "Порт для FreeBSD"
 
-#: main.cpp:405
+#: main.cpp:415
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "Sven Fischer"
 
-#: main.cpp:406
+#: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "Dale M. Flaven"
 
-#: main.cpp:407
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "Martin Jones"
 
-#: main.cpp:408
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "Lars Knoll"
 
-#: main.cpp:409
+#: main.cpp:419
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
@@ -1368,7 +1368,7 @@ msgstr "Прадвызначана"
 #: plugins/QuickCommands/qcwidget.ui:143
 #, kde-format
 msgid "Command"
-msgstr "Загад"
+msgstr "Каманда"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
@@ -1406,7 +1406,7 @@ msgstr "Скасаваць"
 #: plugins/QuickCommands/quickcommandsplugin.cpp:113
 #, kde-format
 msgid "Quick Commands"
-msgstr "Хуткія загады"
+msgstr "Хуткія каманды"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:71
 #, kde-format
@@ -1417,18 +1417,18 @@ msgstr "Хуткі доступ"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
-"Хуткія загады не знойдзены. Вы можаце дадаць іх у \"Убудовы -> Хуткія загады"
-"\""
+"Хуткія каманды не знойдзены. Вы можаце дадаць іх у \"Убудовы -> Хуткія "
+"каманды\""
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:107
 #, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Убудовы - Хуткія загады"
+msgstr "Убудовы - Хуткія каманды"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
 msgid "Show Quick Commands"
-msgstr "Паказваць хуткія загады"
+msgstr "Паказваць хуткія каманды"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:166
 #: plugins/QuickCommands/quickcommandswidget.cpp:177
@@ -1473,7 +1473,7 @@ msgstr "Сапраўды хочаце выдаліць %1?"
 #: plugins/QuickCommands/quickcommandswidget.cpp:246
 #, kde-format
 msgid "Delete Quick Commands Configurations"
-msgstr "Выдаліць канфігурацыі хуткіх загадаў"
+msgstr "Выдаліць канфігурацыі хуткіх каманд"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:276
 #, kde-format
@@ -1483,7 +1483,7 @@ msgstr "Загаловак не можа быць пустым"
 #: plugins/QuickCommands/quickcommandswidget.cpp:280
 #, kde-format
 msgid "Command can not be empty"
-msgstr "Загад не можа быць пустым"
+msgstr "Каманда не можа быць пустой"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:300
 #, kde-format
@@ -1574,15 +1574,15 @@ msgstr "Не ўдалося атрымаць назву працэсу. Магч
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid "Error issuing SSH Command"
-msgstr "Падчас выканання загаду SSH адбылася памылка"
+msgstr "Падчас выканання каманды SSH адбылася памылка"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:194
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
 msgstr ""
-"Немагчыма выканаць загад SSH па-за межамі праграмы абалонкі (eg, bash, zsh, "
-"sh)"
+"Немагчыма выканаць каманду SSH па-за межамі праграмы абалонкі (eg, bash, "
+"zsh, sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:78
@@ -2042,28 +2042,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Кансоль Solaris"
 
-#: session/Session.cpp:104
+#: session/Session.cpp:109
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Гукавое апавяшчэнне ў \"%1\" (сеанс \"%2\")"
 
-#: session/Session.cpp:411
+#: session/Session.cpp:417
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Не ўдалося знайсці двайковы файл: "
 
-#: session/Session.cpp:420
+#: session/Session.cpp:426
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Увага: "
 
-#: session/Session.cpp:514
+#: session/Session.cpp:520
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Не ўдалося знайсці інтэрактыўную абалонку для запуску."
 
-#: session/Session.cpp:520 session/Session.cpp:522
+#: session/Session.cpp:526 session/Session.cpp:528
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2072,24 +2072,24 @@ msgstr ""
 "Не ўдалося знайсці \"%1\", замест гэтага запускаецца \"%2\". Праверце налады "
 "профілю."
 
-#: session/Session.cpp:585
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Не ўдалося запусціць \"%1\" з аргументамі \"%2\"."
 
-#: session/Session.cpp:733
+#: session/Session.cpp:741
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Бяздзейнасць у \"%1\" (сеанс \"%2\")"
 
-#: session/Session.cpp:734 session/Session.cpp:2072
+#: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, kde-format
 msgid "Show session"
 msgstr "Паказаць сеанс"
 
-#: session/Session.cpp:1018
+#: session/Session.cpp:1026
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2103,28 +2103,28 @@ msgstr ""
 "<p>Гэтае папярэджанне будзе паказвацца для гэтага асобніка Konsole толькі "
 "адзін раз.</p>"
 
-#: session/Session.cpp:1058
+#: session/Session.cpp:1066
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Завершана"
 
-#: session/Session.cpp:1072 session/Session.cpp:1088
+#: session/Session.cpp:1080 session/Session.cpp:1096
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Праграма \"%1\" аварыйна завяршыла працэс."
 
-#: session/Session.cpp:1074
+#: session/Session.cpp:1082
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Праграма \"%1\" закрылася са статусам %2."
 
-#: session/Session.cpp:1600
+#: session/Session.cpp:1608
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Ход выканання працэсаў ZModem"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2079
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Актыўнасць у \"%1\" (сеанс \"%2\")"
@@ -2192,7 +2192,7 @@ msgstr "Скапіяваць карыстальніцкі вывад"
 #: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy command output"
-msgstr "Скапіяваць вывад загаду"
+msgstr "Скапіяваць вывад каманды"
 
 #: session/SessionController.cpp:703
 #, kde-format
@@ -2475,7 +2475,7 @@ msgid ""
 msgstr ""
 "<p>Была выяўлена спроба перадачы файлаў па пратаколе ZModem, але ў гэтай "
 "сістэме не знойдзена адпаведнага праграмнага забеспячэння ZModem.</p><p>Вы "
-"можаце ўсталяваць пакунак \"rzsz\" або \"lrzsz\".</p>"
+"можаце ўсталяваць пакет \"rzsz\" або \"lrzsz\".</p>"
 
 #: session/SessionController.cpp:2128
 #, kde-format
@@ -2492,7 +2492,7 @@ msgid ""
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 "<p>У гэтай сістэме не знойдзена адпаведнага праграмнага забеспячэння ZModem."
-"</p><p>Магчыма, вы захочаце ўсталяваць пакунак \"rzsz\" або \"lrzsz\".</p>"
+"</p><p>Магчыма, вы захочаце ўсталяваць пакет \"rzsz\" або \"lrzsz\".</p>"
 
 #: session/SessionController.cpp:2146
 #, kde-format
@@ -3368,239 +3368,239 @@ msgstr "З&мяніць каталог на"
 msgid "&Paste Location"
 msgstr "Уставіць &размяшчэнне"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Падзяліць"
 
-#: ViewManager.cpp:120
+#: ViewManager.cpp:127
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Падзяліць па вертыкалі"
 
-#: ViewManager.cpp:128
+#: ViewManager.cpp:135
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Падзяліць па гарызанталі"
 
-#: ViewManager.cpp:136
+#: ViewManager.cpp:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Падзяліць аўтаматычна"
 
-#: ViewManager.cpp:146
+#: ViewManager.cpp:153
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Падзяліць па вертыкалі з наступнай укладкі"
 
-#: ViewManager.cpp:154
+#: ViewManager.cpp:161
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Падзяліць па гарызанталі з наступнай укладкі"
 
-#: ViewManager.cpp:162
+#: ViewManager.cpp:169
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Падзяліць аўтаматычна з наступнай укладкі"
 
-#: ViewManager.cpp:172
+#: ViewManager.cpp:179
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Загрузіць новую ўкладку з макетам тэрміналаў 2х2"
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:188
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Загрузіць новую ўкладку з макетам тэрміналаў 2х1"
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:197
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Загрузіць новую ўкладку з макетам тэрміналаў 1х2"
 
-#: ViewManager.cpp:198
+#: ViewManager.cpp:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Разгорнуты выгляд"
 
-#: ViewManager.cpp:206
+#: ViewManager.cpp:213
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Сціслы выгляд"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:223
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Адчапіць бягучы аддзелены &тэрмінал"
 
-#: ViewManager.cpp:228
+#: ViewManager.cpp:235
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Адчапіць бягучую &ўкладку"
 
-#: ViewManager.cpp:233
+#: ViewManager.cpp:240
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Наступная ўкладка"
 
-#: ViewManager.cpp:241
+#: ViewManager.cpp:248
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Папярэдняя ўкладка"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Над тэрміналам"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Пад тэрміналам"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:270
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Злева ад тэрмінала"
 
-#: ViewManager.cpp:269
+#: ViewManager.cpp:276
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Справа ад тэрмінала"
 
-#: ViewManager.cpp:275
+#: ViewManager.cpp:282
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Перайсці на апошнюю ўкладку"
 
-#: ViewManager.cpp:280
+#: ViewManager.cpp:287
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Нядаўнія ўкладкі"
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Пераключэнне паміж дзвюма ўкладкамі"
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Нядаўнія ўкладкі(адваротны парадак)"
 
-#: ViewManager.cpp:295
+#: ViewManager.cpp:302
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Разгарнуць бягучыя аддзеленыя тэрміналы"
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Разгарнуць бягучыя аддзеленыя тэрміналы"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Пераключыць максімальнае маштабаванне"
 
-#: ViewManager.cpp:305
+#: ViewManager.cpp:312
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Пераключыць максімальнае маштабаванне"
 
-#: ViewManager.cpp:313
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Перамясціць укладку ўправа"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Перамясціць укладку ўлева"
 
-#: ViewManager.cpp:327
+#: ViewManager.cpp:334
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Наладжванне семантычнай інтэграцыі (bash)"
 
-#: ViewManager.cpp:333
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Паказваць семантычныя падказкі"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Паказваць нумары радкоў"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:353
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Аднолькавы памер усіх аддзеленых тэрміналаў"
 
-#: ViewManager.cpp:356
+#: ViewManager.cpp:363
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Перайсці на ўкладку %1"
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:576
 #, kde-format
 msgid "Semantic hints "
 msgstr "Семантычныя падказкі "
 
-#: ViewManager.cpp:585
+#: ViewManager.cpp:592
 #, kde-format
 msgid "Line numbers "
 msgstr "Нумары радкоў "
 
-#: ViewManager.cpp:1170
+#: ViewManager.cpp:1177
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Захаваць макет укладак"
 
-#: ViewManager.cpp:1172 ViewManager.cpp:1259
+#: ViewManager.cpp:1179 ViewManager.cpp:1266
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Макет кампанавання тэрміналаў Konsole (*.json)"
 
-#: ViewManager.cpp:1185
+#: ViewManager.cpp:1192
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3610,7 +3610,7 @@ msgstr ""
 "Падчас захавання макета ўзнікла праблема.\n"
 "%1"
 
-#: ViewManager.cpp:1246
+#: ViewManager.cpp:1253
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3620,7 +3620,7 @@ msgstr ""
 "Падчас загрузкі макета ўзнікла праблема.\n"
 "%1"
 
-#: ViewManager.cpp:1257
+#: ViewManager.cpp:1264
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -4472,14 +4472,14 @@ msgstr ""
 "напрыклад:\n"
 "gedit + PATH:LINE:COLUMN\n"
 "\n"
-"Калі PATH або LINE не будзе ў загадзе, гэты параметр\n"
+"Калі PATH або LINE не будзе ў камандзе, гэты параметр\n"
 "будзе праігнараваны, і файл будзе адкрыты ў прадвызначаным тэкставым "
 "рэдактары."
 
 #: widgets/EditProfileDialog.cpp:1934
 #, kde-format
 msgid "Text Editor Custom Command"
-msgstr "Адвольны загад тэкставага рэдактара"
+msgstr "Адвольная каманда тэкставага рэдактара"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:42
@@ -4516,7 +4516,7 @@ msgstr "Прадвызначаны профіль"
 #: widgets/EditProfileGeneralPage.ui:125
 #, kde-format
 msgid "Command:"
-msgstr "Загад:"
+msgstr "Каманда:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, commandEdit)
 #: widgets/EditProfileGeneralPage.ui:138
@@ -4525,7 +4525,7 @@ msgid ""
 "The command to execute when new terminal sessions are created using this "
 "profile"
 msgstr ""
-"Загад для выканання пры стварэнні новых сеансаў тэрмінала з выкарыстаннем "
+"Каманда для выканання пры стварэнні новых сеансаў тэрмінала з выкарыстаннем "
 "гэтага профілю"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
@@ -4900,7 +4900,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:291
 #, kde-format
 msgid "Text Editor Command: "
-msgstr "Загад рэдактара тэксту: "
+msgstr "Каманда рэдактара тэксту: "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, openLinksByDirectClickButton)
 #: widgets/EditProfileMousePage.ui:335
@@ -5375,7 +5375,7 @@ msgid ""
 "Tab title format used when a remote command (e.g. connection to another "
 "computer via SSH) is being executed"
 msgstr ""
-"Фармат загалоўка ўкладкі, якая выкарыстоўваецца для адлеглых загадаў "
+"Фармат загалоўка ўкладкі, якая выкарыстоўваецца для адлеглых каманд "
 "(напрыклад, падлучэнне да іншага камп'ютара з дапамогай SSH)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -5452,7 +5452,7 @@ msgstr "Адлеглы хост (цалкам): %H"
 #: widgets/TabTitleFormatButton.cpp:38
 #, c-format
 msgid "Command and arguments: %c"
-msgstr "Загад і аргументы: %c"
+msgstr "Каманда і аргументы: %c"
 
 #: widgets/TabTitleFormatButton.cpp:48
 #, kde-format

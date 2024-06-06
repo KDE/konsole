@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-21 00:42+0000\n"
+"POT-Creation-Date: 2024-06-06 00:41+0000\n"
 "PO-Revision-Date: 2008-12-29 15:34+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <fedora-trans-bn_IN@redhat.com>\n"
@@ -909,247 +909,247 @@ msgstr "ইনপুট:"
 msgid "Output:"
 msgstr "ফলাফল:"
 
-#: main.cpp:188
+#: main.cpp:194
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: main.cpp:190
+#: main.cpp:196
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "টার্মিন্যাল এমুলেটর"
 
-#: main.cpp:192
+#: main.cpp:198
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr ""
 
-#: main.cpp:339
+#: main.cpp:349
 #, fuzzy, kde-format
 #| msgid "Kurt V. Hindenburg"
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "কার্ট ভি. হিন্ডেনবার্গ"
 
-#: main.cpp:341
+#: main.cpp:351
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "বাগ সংশোধন ও সাধারণ কিছু উন্নতি"
 
-#: main.cpp:344
+#: main.cpp:354
 #, fuzzy, kde-format
 #| msgid "Robert Knight"
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "রবার্ট নাইট"
 
-#: main.cpp:345
+#: main.cpp:355
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr ""
 
-#: main.cpp:347
+#: main.cpp:357
 #, fuzzy, kde-format
 #| msgid "Lars Doelle"
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "লার্স ডোয়েল"
 
-#: main.cpp:347
+#: main.cpp:357
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "টার্মিন্যাল এমুলেটর"
 
-#: main.cpp:348
+#: main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr ""
 
-#: main.cpp:349 main.cpp:352 main.cpp:355 main.cpp:358
+#: main.cpp:359 main.cpp:362 main.cpp:365 main.cpp:368
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "বাগ সংশোধন ও সাধারণ কিছু উন্নতি"
 
-#: main.cpp:351
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr ""
 
-#: main.cpp:354
+#: main.cpp:364
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr ""
 
-#: main.cpp:357
+#: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr ""
 
-#: main.cpp:360
+#: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr ""
 
-#: main.cpp:361 main.cpp:364 main.cpp:366 main.cpp:371 main.cpp:373
-#: main.cpp:374 main.cpp:375
+#: main.cpp:371 main.cpp:374 main.cpp:376 main.cpp:381 main.cpp:383
+#: main.cpp:384 main.cpp:385
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "বাগ সংশোধন ও সাধারণ কিছু উন্নতি"
 
-#: main.cpp:363
+#: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr ""
 
-#: main.cpp:366
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr ""
 
-#: main.cpp:367
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr ""
 
-#: main.cpp:368
+#: main.cpp:378
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "বাগ সংশোধন ও সাধারণ কিছু উন্নতি"
 
-#: main.cpp:370
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr ""
 
-#: main.cpp:373
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr ""
 
-#: main.cpp:374
+#: main.cpp:384
 #, fuzzy, kde-format
 #| msgid "Waldo Bastian"
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "ওয়াল্ডো ব্যাস্টিয়ান"
 
-#: main.cpp:375
+#: main.cpp:385
 #, fuzzy, kde-format
 #| msgid "Stephan Binner"
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "স্টিফান বিনার"
 
-#: main.cpp:376
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr ""
 
-#: main.cpp:376
+#: main.cpp:386
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "বাগ সংশোধন ও সাধারণ কিছু উন্নতি"
 
-#: main.cpp:377
+#: main.cpp:387
 #, fuzzy, kde-format
 #| msgid "Chris Machemer"
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "ক্রিস মাখেমার"
 
-#: main.cpp:377 main.cpp:378 main.cpp:405 main.cpp:406 main.cpp:407
-#: main.cpp:408
+#: main.cpp:387 main.cpp:388 main.cpp:415 main.cpp:416 main.cpp:417
+#: main.cpp:418
 #, fuzzy, kde-format
 #| msgid "Bug fixes"
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "বাগ সংশোধন"
 
-#: main.cpp:378
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr ""
 
-#: main.cpp:379
+#: main.cpp:389
 #, fuzzy, kde-format
 #| msgid "Stephan Kulow"
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "স্টিফান কুলো"
 
-#: main.cpp:379
+#: main.cpp:389
 #, fuzzy, kde-format
 #| msgid "Solaris support and history"
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Solaris সমর্থন ও পূর্ববর্তী তথ্য"
 
-#: main.cpp:380
+#: main.cpp:390
 #, fuzzy, kde-format
 #| msgid "Alexander Neundorf"
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "আলেকজান্ডার নিওনডোর্ফ"
 
-#: main.cpp:381
+#: main.cpp:391
 #, fuzzy, kde-format
 #| msgid "Bug fixes and improved startup performance"
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "বাগ সংশোধন ও প্রারম্ভিক কর্মক্ষমতার উন্নতি"
 
-#: main.cpp:383
+#: main.cpp:393
 #, fuzzy, kde-format
 #| msgid "Peter Silva"
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "পিটার সিলভা"
 
-#: main.cpp:383
+#: main.cpp:393
 #, fuzzy, kde-format
 #| msgid "Marking improvements"
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "উল্লেখযোগ্য উন্নতি"
 
-#: main.cpp:384
+#: main.cpp:394
 #, fuzzy, kde-format
 #| msgid "Lotzi Boloni"
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "লোটজি বোলোনি"
 
-#: main.cpp:386
+#: main.cpp:396
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1162,14 +1162,14 @@ msgstr ""
 "এমবেড করা Konsole\n"
 "টুলবার ও সেশানের নাম"
 
-#: main.cpp:389
+#: main.cpp:399
 #, fuzzy, kde-format
 #| msgid "David Faure"
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "ডেভিড ফাউরে"
 
-#: main.cpp:391
+#: main.cpp:401
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1182,28 +1182,28 @@ msgstr ""
 "এমবেড করা Konsole\n"
 "সাধারণ কিছু উন্নতি"
 
-#: main.cpp:394
+#: main.cpp:404
 #, fuzzy, kde-format
 #| msgid "Antonio Larrosa"
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "আন্টোনিও লারোসা"
 
-#: main.cpp:394
+#: main.cpp:404
 #, fuzzy, kde-format
 #| msgid "Visual effects"
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "ভিসুয়াল ইফেক্ট"
 
-#: main.cpp:395
+#: main.cpp:405
 #, fuzzy, kde-format
 #| msgid "Matthias Ettrich"
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "ম্যাথায়েস এট্রিখ"
 
-#: main.cpp:397
+#: main.cpp:407
 #, fuzzy, kde-format
 #| msgid ""
 #| "Code from the kvt project\n"
@@ -1216,77 +1216,77 @@ msgstr ""
 "kvt প্রজেক্টের কোড\n"
 "সাধারণ উন্নতি"
 
-#: main.cpp:400
+#: main.cpp:410
 #, fuzzy, kde-format
 #| msgid "Warwick Allison"
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "ওয়ারউইক অ্যালিসন"
 
-#: main.cpp:401
+#: main.cpp:411
 #, fuzzy, kde-format
 #| msgid "Schema and text selection improvements"
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "স্কিমা ও টেক্সট নির্বাচন সংক্রান্ত উন্নতি"
 
-#: main.cpp:403
+#: main.cpp:413
 #, fuzzy, kde-format
 #| msgid "Dan Pilone"
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "ড্যান পিলোন"
 
-#: main.cpp:403
+#: main.cpp:413
 #, fuzzy, kde-format
 #| msgid "SGI port"
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "SGI পোর্ট"
 
-#: main.cpp:404
+#: main.cpp:414
 #, fuzzy, kde-format
 #| msgid "Kevin Street"
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "কেভিন স্ট্রিট"
 
-#: main.cpp:404
+#: main.cpp:414
 #, fuzzy, kde-format
 #| msgid "FreeBSD port"
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "FreeBSD পোর্ট"
 
-#: main.cpp:405
+#: main.cpp:415
 #, fuzzy, kde-format
 #| msgid "Sven Fischer"
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "সওয়েন ফিশার"
 
-#: main.cpp:406
+#: main.cpp:416
 #, fuzzy, kde-format
 #| msgid "Dale M. Flaven"
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "ডেইল এম. ফ্লাভেন"
 
-#: main.cpp:407
+#: main.cpp:417
 #, fuzzy, kde-format
 #| msgid "Martin Jones"
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "মার্টিন জোন্স"
 
-#: main.cpp:408
+#: main.cpp:418
 #, fuzzy, kde-format
 #| msgid "Lars Knoll"
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "লার্স নোল"
 
-#: main.cpp:409
+#: main.cpp:419
 #, fuzzy, kde-format
 #| msgid "Thanks to many others.\n"
 msgctxt "@info:credit"
@@ -2206,30 +2206,30 @@ msgstr ""
 msgid "Solaris console"
 msgstr "Solaris কনসোল"
 
-#: session/Session.cpp:104
+#: session/Session.cpp:109
 #, fuzzy, kde-format
 #| msgid "Bell in session '%1'"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "সেশান '%1'-এ ঘন্টাধ্বনি"
 
-#: session/Session.cpp:411
+#: session/Session.cpp:417
 #, kde-format
 msgid "Could not find binary: "
 msgstr "বাইনারি পাওয়া যায়নি: "
 
-#: session/Session.cpp:420
+#: session/Session.cpp:426
 #, fuzzy, kde-format
 #| msgid "Warning: "
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "সতর্কবার্তা: "
 
-#: session/Session.cpp:514
+#: session/Session.cpp:520
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "আরম্ভ করার জন্য কোনো ইন্টারেক্টিভ শেল পাওয়া যায়নি।"
 
-#: session/Session.cpp:520 session/Session.cpp:522
+#: session/Session.cpp:526 session/Session.cpp:528
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2238,18 +2238,18 @@ msgstr ""
 "'%1' পাওয়া না যাওয়ার ফলে, পরিবর্তে '%2' আরম্ভ করা হচ্ছে।  অনুগ্রহ করে আপনার "
 "প্রোফাইল সংক্রান্ত বৈশিষ্ট্যগুলি নিরীক্ষা করুন।"
 
-#: session/Session.cpp:585
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "'%1' প্রোগ্রামটি, '%2' আর্গুমেন্ট সহ আরম্ভ করা যায়নি।"
 
-#: session/Session.cpp:733
+#: session/Session.cpp:741
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' সেশানে নিরবতা"
 
-#: session/Session.cpp:734 session/Session.cpp:2072
+#: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, fuzzy, kde-format
@@ -2257,7 +2257,7 @@ msgstr "'%1' সেশানে নিরবতা"
 msgid "Show session"
 msgstr "Konsole"
 
-#: session/Session.cpp:1018
+#: session/Session.cpp:1026
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2266,29 +2266,29 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1058
+#: session/Session.cpp:1066
 #, fuzzy, kde-format
 #| msgid "Finished"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "সমাপ্ত"
 
-#: session/Session.cpp:1072 session/Session.cpp:1088
+#: session/Session.cpp:1080 session/Session.cpp:1096
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "প্রোগ্রাম '%1' বিপর্যস্ত হয়েছে।"
 
-#: session/Session.cpp:1074
+#: session/Session.cpp:1082
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "প্রোগ্রাম '%1' প্রস্থানকালে, %2 অবস্থা উৎপন্ন হয়েছে।"
 
-#: session/Session.cpp:1600
+#: session/Session.cpp:1608
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-র প্রগতি"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2079
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -3573,249 +3573,249 @@ msgstr ""
 msgid "&Paste Location"
 msgstr "নির্বাচিত অংশ পেস্ট করুন"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr ""
 
-#: ViewManager.cpp:120
+#: ViewManager.cpp:127
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr ""
 
-#: ViewManager.cpp:128
+#: ViewManager.cpp:135
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr ""
 
-#: ViewManager.cpp:136
+#: ViewManager.cpp:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr ""
 
-#: ViewManager.cpp:146
+#: ViewManager.cpp:153
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr ""
 
-#: ViewManager.cpp:154
+#: ViewManager.cpp:161
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr ""
 
-#: ViewManager.cpp:162
+#: ViewManager.cpp:169
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr ""
 
-#: ViewManager.cpp:172
+#: ViewManager.cpp:179
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:188
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr ""
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:197
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr ""
 
-#: ViewManager.cpp:198
+#: ViewManager.cpp:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr ""
 
-#: ViewManager.cpp:206
+#: ViewManager.cpp:213
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr ""
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:223
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "বর্তমান ট্যাব বন্ধ করুন"
 
-#: ViewManager.cpp:228
+#: ViewManager.cpp:235
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "বর্তমান ট্যাব বন্ধ করুন"
 
-#: ViewManager.cpp:233
+#: ViewManager.cpp:240
 #, fuzzy, kde-format
 #| msgid "New &Tab"
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "নতুন ট্যাব (&T)"
 
-#: ViewManager.cpp:241
+#: ViewManager.cpp:248
 #, fuzzy, kde-format
 #| msgid "Previous"
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "পূর্ববর্তী"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, fuzzy, kde-format
 #| msgid "Above Terminal Displays"
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "টার্মিন্যালের প্রদর্শনের উপরেী"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, fuzzy, kde-format
 #| msgid "Below Terminal Displays"
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "টার্মিন্যালের প্রদর্শনের নীচে"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:270
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr ""
 
-#: ViewManager.cpp:269
+#: ViewManager.cpp:276
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr ""
 
-#: ViewManager.cpp:275
+#: ViewManager.cpp:282
 #, fuzzy, kde-format
 #| msgid "Switch to Tab %1"
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "%1 ট্যাবে পরিবর্তন করুন"
 
-#: ViewManager.cpp:280
+#: ViewManager.cpp:287
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr ""
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr ""
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr ""
 
-#: ViewManager.cpp:295
+#: ViewManager.cpp:302
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr ""
 
-#: ViewManager.cpp:305
+#: ViewManager.cpp:312
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr ""
-
-#: ViewManager.cpp:313
-#, kde-format
-msgctxt "@action Shortcut entry"
-msgid "Move tab to the right"
 msgstr ""
 
 #: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
-msgid "Move tab to the left"
+msgid "Move tab to the right"
 msgstr ""
 
 #: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
+msgid "Move tab to the left"
+msgstr ""
+
+#: ViewManager.cpp:334
+#, kde-format
+msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr ""
 
-#: ViewManager.cpp:333
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr ""
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr ""
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:353
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr ""
 
-#: ViewManager.cpp:356
+#: ViewManager.cpp:363
 #, fuzzy, kde-format
 #| msgid "Switch to Tab %1"
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "%1 ট্যাবে পরিবর্তন করুন"
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:576
 #, fuzzy, kde-format
 #| msgid "Remote Connection"
 msgid "Semantic hints "
 msgstr "দূরবর্তী সংযোগ"
 
-#: ViewManager.cpp:585
+#: ViewManager.cpp:592
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line numbers "
 msgstr "সুনিশ্চিত পংক্তি সংখ্যা: "
 
-#: ViewManager.cpp:1170
+#: ViewManager.cpp:1177
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr ""
 
-#: ViewManager.cpp:1172 ViewManager.cpp:1259
+#: ViewManager.cpp:1179 ViewManager.cpp:1266
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1185
+#: ViewManager.cpp:1192
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3828,7 +3828,7 @@ msgstr ""
 "ফলাফল সংরক্ষণে সমস্যা।\n"
 "%1"
 
-#: ViewManager.cpp:1246
+#: ViewManager.cpp:1253
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3841,7 +3841,7 @@ msgstr ""
 "ফলাফল সংরক্ষণে সমস্যা।\n"
 "%1"
 
-#: ViewManager.cpp:1257
+#: ViewManager.cpp:1264
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

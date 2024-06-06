@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-21 00:42+0000\n"
+"POT-Creation-Date: 2024-06-06 00:41+0000\n"
 "PO-Revision-Date: 2024-04-28 17:20+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -827,226 +827,226 @@ msgstr "உள்ளீடு:"
 msgid "Output:"
 msgstr "வெளியீடு:"
 
-#: main.cpp:188
+#: main.cpp:194
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "கான்சோல்"
 
-#: main.cpp:190
+#: main.cpp:196
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "முனைய செயலி"
 
-#: main.cpp:192
+#: main.cpp:198
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr "(c) 1997-2022, கான்சோல் நிரலாளர்கள்"
 
-#: main.cpp:339
+#: main.cpp:349
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "குர்ட் ஹின்டன்பர்க்"
 
-#: main.cpp:341
+#: main.cpp:351
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "பொதுவான பராமரிப்பாளர், பிழைநீக்கல், மற்றும் பொதுவான முன்னேற்றங்கள்"
 
-#: main.cpp:344
+#: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "ராபர்ட் நைட்"
 
-#: main.cpp:345
+#: main.cpp:355
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr ""
 
-#: main.cpp:347
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "லாரஸ் டொயல்லெ"
 
-#: main.cpp:347
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "முதிலில் இயற்றியவர்"
 
-#: main.cpp:348
+#: main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr "அஹமது சமீர்"
 
-#: main.cpp:349 main.cpp:352 main.cpp:355 main.cpp:358
+#: main.cpp:359 main.cpp:362 main.cpp:365 main.cpp:368
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "வழு களைதல்களும் பொதுவான முன்னேற்றங்களும்"
 
-#: main.cpp:351
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr "கார்லோஸ் ஆல்வெஸ்"
 
-#: main.cpp:354
+#: main.cpp:364
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr "தாமசு கானாபிராவா"
 
-#: main.cpp:357
+#: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr "குஸ்தாவோ கார்னெயிரோ"
 
-#: main.cpp:360
+#: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr "எடுவின் புயோல்ஸ்"
 
-#: main.cpp:361 main.cpp:364 main.cpp:366 main.cpp:371 main.cpp:373
-#: main.cpp:374 main.cpp:375
+#: main.cpp:371 main.cpp:374 main.cpp:376 main.cpp:381 main.cpp:383
+#: main.cpp:384 main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "பிழைதிருத்தங்களும் பொதுவான மேம்பாடுகளும்"
 
-#: main.cpp:363
+#: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr "மார்ட்டின் டி. ஹ. சான்டுஸ்மார்க்"
 
-#: main.cpp:366
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr "நேட் கிரஹாம்"
 
-#: main.cpp:367
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr "மாரியஸ் குலெபொக்கி"
 
-#: main.cpp:368
+#: main.cpp:378
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "பிழைதிருத்தங்களும் முக்கிய மேம்பாடுகளும்"
 
-#: main.cpp:370
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "தாமஸ் சர்ரெல்"
 
-#: main.cpp:373
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "ஜெக்கில் வூ"
 
-#: main.cpp:374
+#: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "வாலுடோ பாஸ்டியான்"
 
-#: main.cpp:375
+#: main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "ஸ்டீபன் பின்னர்"
 
-#: main.cpp:376
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "தாமஸ் டுரைபுஹோல்சு"
 
-#: main.cpp:376
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "பொதுவான மேம்பாடுகள்"
 
-#: main.cpp:377
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "கிரிஸ் மேகெமர்"
 
-#: main.cpp:377 main.cpp:378 main.cpp:405 main.cpp:406 main.cpp:407
-#: main.cpp:408
+#: main.cpp:387 main.cpp:388 main.cpp:415 main.cpp:416 main.cpp:417
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "பிழைதிருத்தங்கள்"
 
-#: main.cpp:378
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr "ஃபரான்செஸ்க்கோ செக்கோனி"
 
-#: main.cpp:379
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "ஸ்டீபன் குளோ"
 
-#: main.cpp:379
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "சோலாரிஸ் ஆதரவும் வரலாறும்"
 
-#: main.cpp:380
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "அலெக்ஸாண்டர் நியுன்டார்ப்"
 
-#: main.cpp:381
+#: main.cpp:391
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "பிழைநீக்கமும் துவக்கத்தை விரைவுபடுத்தியதும்"
 
-#: main.cpp:383
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "பீட்டர் சில்வா"
 
-#: main.cpp:383
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "குறிகளில் முன்னேற்றங்கள்"
 
-#: main.cpp:384
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "லாட்சி பொலோனி"
 
-#: main.cpp:386
+#: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1056,13 +1056,13 @@ msgstr ""
 "உட்பொதிந்த கான்சோல்\n"
 "கருவிப்பட்டையும் அமர்வுப் பெயர்களும்"
 
-#: main.cpp:389
+#: main.cpp:399
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "டேவிட் ஃபவுர்"
 
-#: main.cpp:391
+#: main.cpp:401
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1072,25 +1072,25 @@ msgstr ""
 "உட்பொதிந்த கான்சோல்\n"
 "பொதுவான முன்னேற்றங்கள்"
 
-#: main.cpp:394
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "அன்டோனியோ லாராஸோ"
 
-#: main.cpp:394
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "காட்சிமுறை அசைவூட்டங்கள்"
 
-#: main.cpp:395
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "மத்தையாஸ் எட்ரிச்"
 
-#: main.cpp:397
+#: main.cpp:407
 #, fuzzy, kde-format
 #| msgid ""
 #| "Code from the kvt project\n"
@@ -1103,70 +1103,70 @@ msgstr ""
 "kvt திட்டத்தினின்று நிரல்\n"
 "பொதுவான முன்னேற்றங்கள்"
 
-#: main.cpp:400
+#: main.cpp:410
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "வார்விக் அலிசன்"
 
-#: main.cpp:401
+#: main.cpp:411
 #, fuzzy, kde-format
 #| msgid "Schema and text selection improvements"
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "ஸ்கீமா மற்றும் உரை தேர்வு முன்னேற்றங்கள்"
 
-#: main.cpp:403
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "டான் பிலோன்"
 
-#: main.cpp:403
+#: main.cpp:413
 #, fuzzy, kde-format
 #| msgid "SGI port"
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "SGI துறை"
 
-#: main.cpp:404
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "கெவின் ஸ்டிரீட்"
 
-#: main.cpp:404
+#: main.cpp:414
 #, fuzzy, kde-format
 #| msgid "FreeBSD port"
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "FreeBSD துறை"
 
-#: main.cpp:405
+#: main.cpp:415
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "செவன் ஃபிஸ்சர்"
 
-#: main.cpp:406
+#: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "டேல் எம். ப்ளேவன்"
 
-#: main.cpp:407
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "மார்ட்டின் ஜோன்ஸ்"
 
-#: main.cpp:408
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "லர்ஸ் க்னோல்"
 
-#: main.cpp:409
+#: main.cpp:419
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
@@ -2036,29 +2036,29 @@ msgstr ""
 msgid "Solaris console"
 msgstr "சோலரிஸ் முனையம்"
 
-#: session/Session.cpp:104
+#: session/Session.cpp:109
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "'%1' என்பதில் மணியடிக்கிறது (அமர்வு '%2')"
 
-#: session/Session.cpp:411
+#: session/Session.cpp:417
 #, kde-format
 msgid "Could not find binary: "
 msgstr "இருமத்தை கண்டுபிடிக்க முடியவில்லை: "
 
-#: session/Session.cpp:420
+#: session/Session.cpp:426
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "எச்சரிக்கை: "
 
-#: session/Session.cpp:514
+#: session/Session.cpp:520
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr ""
 "துவக்க வேண்டிய மனிதப்பயன்பாட்டிற்கான (interactive) முனையத்தை கண்டுபிடிக்க முடியவில்லை."
 
-#: session/Session.cpp:520 session/Session.cpp:522
+#: session/Session.cpp:526 session/Session.cpp:528
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2067,24 +2067,24 @@ msgstr ""
 "'%1' கண்டுபிடிக்கப்படவில்லை; மாற்றாக '%2' துவக்கப்படுகிறது.  உங்கள் பயனர் கணக்கின் "
 "அமைப்புகளை சரிபாருங்கள்."
 
-#: session/Session.cpp:585
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "'%1' நிரலை '%2' என்ற தருமதிப்புகளுடன் துவக்க முடியவில்லை."
 
-#: session/Session.cpp:733
+#: session/Session.cpp:741
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' என்பதில் அமைதி (அமர்வு '%2')"
 
-#: session/Session.cpp:734 session/Session.cpp:2072
+#: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, kde-format
 msgid "Show session"
 msgstr "அமர்வைக் காட்டு"
 
-#: session/Session.cpp:1018
+#: session/Session.cpp:1026
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2093,28 +2093,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1058
+#: session/Session.cpp:1066
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "நிறைவடைந்தது"
 
-#: session/Session.cpp:1072 session/Session.cpp:1088
+#: session/Session.cpp:1080 session/Session.cpp:1096
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' நிரல் முறிவடைந்தது."
 
-#: session/Session.cpp:1074
+#: session/Session.cpp:1082
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' நிரல், %2 என்ற நிலையுடன் வெளிவந்தது."
 
-#: session/Session.cpp:1600
+#: session/Session.cpp:1608
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem முன்னேற்றம்"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2079
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1' என்பதில் செயல்பாடு (அமர்வு '%2')"
@@ -3362,239 +3362,239 @@ msgstr "&இந்த அடைவிற்கு மாறு"
 msgid "&Paste Location"
 msgstr "&இருப்பிடத்தை ஒட்டு"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "பிரிந்த காட்சிமுறை"
 
-#: ViewManager.cpp:120
+#: ViewManager.cpp:127
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "காட்சியை இடது/வலது என பிரி"
 
-#: ViewManager.cpp:128
+#: ViewManager.cpp:135
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "காட்சியை மேல்/கீழ் என பிரி"
 
-#: ViewManager.cpp:136
+#: ViewManager.cpp:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "காட்சியை தானாக பிரி"
 
-#: ViewManager.cpp:146
+#: ViewManager.cpp:153
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "அடுத்த கீற்றிலிருந்து காட்சியை இடது/வலது என பிரி"
 
-#: ViewManager.cpp:154
+#: ViewManager.cpp:161
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "அடுத்த கீற்றிலிருந்து காட்சியை மேல்/கீழ் என பிரி"
 
-#: ViewManager.cpp:162
+#: ViewManager.cpp:169
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "அடுத்த கீற்றிலிருந்து காட்சியை தானாக பிரி"
 
-#: ViewManager.cpp:172
+#: ViewManager.cpp:179
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "2x2 முனையங்களை கொண்ட புதிய கீற்றை திற"
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:188
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "2x1 முனையங்களை கொண்ட புதிய கீற்றை திற"
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:197
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "1x2 முனையங்களை கொண்ட புதிய கீற்றை திற"
 
-#: ViewManager.cpp:198
+#: ViewManager.cpp:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "காட்சிப்பகுதியை பெரிதாக்கு"
 
-#: ViewManager.cpp:206
+#: ViewManager.cpp:213
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "காட்சிப்பகுதியை சுருக்கு"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:223
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "&தற்போதைய காட்சிப்பகுதியை பிரித்தெடு"
 
-#: ViewManager.cpp:228
+#: ViewManager.cpp:235
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "தற்போதைய &கீற்றை பிரித்தெடு"
 
-#: ViewManager.cpp:233
+#: ViewManager.cpp:240
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "அடுத்த கீற்று"
 
-#: ViewManager.cpp:241
+#: ViewManager.cpp:248
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "முந்தைய கீற்று"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "மேலுள்ள முனையத்தை குவியப்படுத்து"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "கீழுள்ள முனையத்தை குவியப்படுத்து"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:270
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "இடதிலுள்ள முனையத்தை குவியப்படுத்து"
 
-#: ViewManager.cpp:269
+#: ViewManager.cpp:276
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "வலதிலுள்ள முனையத்தை குவியப்படுத்து"
 
-#: ViewManager.cpp:275
+#: ViewManager.cpp:282
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "கடைசி கீற்றுக்கு தாவு"
 
-#: ViewManager.cpp:280
+#: ViewManager.cpp:287
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "கடைசியாக பயன்படுத்திய கீற்றுகள்"
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "இரண்டு கீற்றுகளுக்கிடையே தாவு"
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "கடைசியாக பயன்படுத்திய கீற்றுகள் (தற்போதையதை நோக்கி)"
 
-#: ViewManager.cpp:295
+#: ViewManager.cpp:302
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "தற்போதைய காட்சிப்பகுதியின் அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "தற்போதைய காட்சிப்பகுதியின் அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "தற்போதைய காட்சிப்பகுதியின் பெரிதாக்கல்-அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
 
-#: ViewManager.cpp:305
+#: ViewManager.cpp:312
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "தற்போதைய காட்சிப்பகுதியின் பெரிதாக்கல்-அதிகபட்சப்பெரிதாக்கல் நிலையை மாற்று"
 
-#: ViewManager.cpp:313
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "கீற்றை வலது பக்கமாக நகர்த்து"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "கீற்றை இடது பக்கமாக நகர்த்து"
 
-#: ViewManager.cpp:327
+#: ViewManager.cpp:334
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "பொருளறி அம்சங்களை அமை (bash)"
 
-#: ViewManager.cpp:333
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "பொருளறி கருவித்துப்புகளை நிலைமாற்று"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "வரியெண்கள் காட்டப்படுவதை நிலைமாற்று"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:353
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "அனைத்து காட்சிப்பகுதிகளையும் ஒரே அளவாக்கு"
 
-#: ViewManager.cpp:356
+#: ViewManager.cpp:363
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "%1-ஆம் கீற்றுக்கு தாவு"
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:576
 #, kde-format
 msgid "Semantic hints "
 msgstr "பொருளறித் துப்புகள் "
 
-#: ViewManager.cpp:585
+#: ViewManager.cpp:592
 #, kde-format
 msgid "Line numbers "
 msgstr "வரியேண்கள்"
 
-#: ViewManager.cpp:1170
+#: ViewManager.cpp:1177
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "கீற்றுகளின் தளவமைப்பை சேமித்தல்"
 
-#: ViewManager.cpp:1172 ViewManager.cpp:1259
+#: ViewManager.cpp:1179 ViewManager.cpp:1266
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "கான்சோல் காட்சிப்பகுதி தளவமைப்பு (*.json)"
 
-#: ViewManager.cpp:1185
+#: ViewManager.cpp:1192
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3604,7 +3604,7 @@ msgstr ""
 "தளவமைப்பை சேமிப்பதில் சிக்கல் ஏற்பட்டது.\n"
 "%1"
 
-#: ViewManager.cpp:1246
+#: ViewManager.cpp:1253
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3614,7 +3614,7 @@ msgstr ""
 "தளவமைப்பை ஏற்றுவதில் சிக்கல் ஏற்பட்டது.\n"
 "%1"
 
-#: ViewManager.cpp:1257
+#: ViewManager.cpp:1264
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-21 00:42+0000\n"
+"POT-Creation-Date: 2024-06-06 00:41+0000\n"
 "PO-Revision-Date: 2024-04-29 15:45+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -840,225 +840,225 @@ msgstr "Ingresso:"
 msgid "Output:"
 msgstr "Egresso:"
 
-#: main.cpp:188
+#: main.cpp:194
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Konsole"
 
-#: main.cpp:190
+#: main.cpp:196
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "Emulator de Terminal"
 
-#: main.cpp:192
+#: main.cpp:198
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr "(c) 1997-2022 , Le disveloppatores de Konsole"
 
-#: main.cpp:339
+#: main.cpp:349
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "Kurt Hindenburg"
 
-#: main.cpp:341
+#: main.cpp:351
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "Mantenitor general, Fixationes de bug e melioramentos general"
 
-#: main.cpp:344
+#: main.cpp:354
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "Robert Knight"
 
-#: main.cpp:345
+#: main.cpp:355
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr "Previe mantenitor, portate a KDE4"
 
-#: main.cpp:347
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "Lars Doelle"
 
-#: main.cpp:347
+#: main.cpp:357
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "Autor original"
 
-#: main.cpp:348
+#: main.cpp:358
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr "Ahmad Samir"
 
-#: main.cpp:349 main.cpp:352 main.cpp:355 main.cpp:358
+#: main.cpp:359 main.cpp:362 main.cpp:365 main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "Mantenitor general, correctiones de bug e melioramentos major"
 
-#: main.cpp:351
+#: main.cpp:361
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr "Carlos Alves"
 
-#: main.cpp:354
+#: main.cpp:364
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: main.cpp:357
+#: main.cpp:367
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr "Gustavo Carneiro"
 
-#: main.cpp:360
+#: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr "Edwin Pujols"
 
-#: main.cpp:361 main.cpp:364 main.cpp:366 main.cpp:371 main.cpp:373
-#: main.cpp:374 main.cpp:375
+#: main.cpp:371 main.cpp:374 main.cpp:376 main.cpp:381 main.cpp:383
+#: main.cpp:384 main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "Fixationes de bug e melioramentos general"
 
-#: main.cpp:363
+#: main.cpp:373
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr "Martin T. H. Sandsmark"
 
-#: main.cpp:366
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr "Nate Graham"
 
-#: main.cpp:367
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr "Mariusz Glebocki"
 
-#: main.cpp:368
+#: main.cpp:378
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "Correctiones de bug e melioramentos major"
 
-#: main.cpp:370
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "Thomas Surrel"
 
-#: main.cpp:373
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "Jekyll Wu"
 
-#: main.cpp:374
+#: main.cpp:384
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "Waldo Bastian"
 
-#: main.cpp:375
+#: main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "Stephan Binner"
 
-#: main.cpp:376
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:376
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "Melioramentos General"
 
-#: main.cpp:377
+#: main.cpp:387
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "Chris Machemer"
 
-#: main.cpp:377 main.cpp:378 main.cpp:405 main.cpp:406 main.cpp:407
-#: main.cpp:408
+#: main.cpp:387 main.cpp:388 main.cpp:415 main.cpp:416 main.cpp:417
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "Fixationes de bug"
 
-#: main.cpp:378
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr "Francesco Cecconi"
 
-#: main.cpp:379
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "Stephan Kulow"
 
-#: main.cpp:379
+#: main.cpp:389
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Supporto de Solaris e historia"
 
-#: main.cpp:380
+#: main.cpp:390
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "Alexander Neundorf"
 
-#: main.cpp:381
+#: main.cpp:391
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "Fixationes de bug e meliorate prestationes de initio"
 
-#: main.cpp:383
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "Peter Silva"
 
-#: main.cpp:383
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "Marcar melioramentos"
 
-#: main.cpp:384
+#: main.cpp:394
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "Lotzi Boloni"
 
-#: main.cpp:386
+#: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1068,13 +1068,13 @@ msgstr ""
 "Konsole Interne\n"
 "Barra de instrumento e nomines de session"
 
-#: main.cpp:389
+#: main.cpp:399
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:391
+#: main.cpp:401
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1084,25 +1084,25 @@ msgstr ""
 "Konsole Interne\n"
 "Melioramentos General"
 
-#: main.cpp:394
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "Antonio Larrosa"
 
-#: main.cpp:394
+#: main.cpp:404
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "Effectos Visual"
 
-#: main.cpp:395
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "Matthias Ettrich"
 
-#: main.cpp:397
+#: main.cpp:407
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1112,67 +1112,67 @@ msgstr ""
 "Codice ex le projecto kvt\n"
 "Melioramentos General"
 
-#: main.cpp:400
+#: main.cpp:410
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "Warwick Allison"
 
-#: main.cpp:401
+#: main.cpp:411
 #, kde-format
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "Melioramentos de Schema e selection de texto"
 
-#: main.cpp:403
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "Dan Pilone"
 
-#: main.cpp:403
+#: main.cpp:413
 #, kde-format
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "Porto a SGI"
 
-#: main.cpp:404
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "Kevin Street"
 
-#: main.cpp:404
+#: main.cpp:414
 #, kde-format
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "Porto a FreeBSD"
 
-#: main.cpp:405
+#: main.cpp:415
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "Sven Fischer"
 
-#: main.cpp:406
+#: main.cpp:416
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "Dale M.Flaven"
 
-#: main.cpp:407
+#: main.cpp:417
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "Martin Jones"
 
-#: main.cpp:408
+#: main.cpp:418
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "Lars Knoll"
 
-#: main.cpp:409
+#: main.cpp:419
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
@@ -2047,28 +2047,28 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "console de Solaris"
 
-#: session/Session.cpp:104
+#: session/Session.cpp:109
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Campana in '%1' (Session '%2')"
 
-#: session/Session.cpp:411
+#: session/Session.cpp:417
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Il non pote trovar binari:"
 
-#: session/Session.cpp:420
+#: session/Session.cpp:426
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Aviso: "
 
-#: session/Session.cpp:514
+#: session/Session.cpp:520
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Il non pote trovar un shell interactive de initiar."
 
-#: session/Session.cpp:520 session/Session.cpp:522
+#: session/Session.cpp:526 session/Session.cpp:528
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2077,24 +2077,24 @@ msgstr ""
 "Il non pote trovar '%1', in vice il initiava '%2'. Pro favor tu verifica tu "
 "preferentias de profilo."
 
-#: session/Session.cpp:585
+#: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Il non pote initiar programma '%1' con argumentos '%2'."
 
-#: session/Session.cpp:733
+#: session/Session.cpp:741
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silentio in '%1' (Session '%2')"
 
-#: session/Session.cpp:734 session/Session.cpp:2072
+#: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
 #, kde-format
 msgid "Show session"
 msgstr "Monstra Session"
 
-#: session/Session.cpp:1018
+#: session/Session.cpp:1026
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2108,28 +2108,28 @@ msgstr ""
 "Konsole <p> Iste aviso essera monstrate solmente un vice per iste instantia "
 "de Konsole.</p>"
 
-#: session/Session.cpp:1058
+#: session/Session.cpp:1066
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Terminate"
 
-#: session/Session.cpp:1072 session/Session.cpp:1088
+#: session/Session.cpp:1080 session/Session.cpp:1096
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programma '%1' ruinava."
 
-#: session/Session.cpp:1074
+#: session/Session.cpp:1082
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programma '%1' habeva exite con status %2."
 
-#: session/Session.cpp:1600
+#: session/Session.cpp:1608
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progresso de ZModem"
 
-#: session/Session.cpp:2071
+#: session/Session.cpp:2079
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitate in  '%1' (Session '%2')"
@@ -3383,239 +3383,239 @@ msgstr "Modifica un &Directorio in"
 msgid "&Paste Location"
 msgstr "Colla &Location"
 
-#: ViewManager.cpp:113
+#: ViewManager.cpp:120
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Scinde Vista"
 
-#: ViewManager.cpp:120
+#: ViewManager.cpp:127
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
 msgstr "Scinde vista a Sinistra/Dextera"
 
-#: ViewManager.cpp:128
+#: ViewManager.cpp:135
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
 msgstr "Scinde  le vista a Culmine/Basso"
 
-#: ViewManager.cpp:136
+#: ViewManager.cpp:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
 msgstr "Scinde  le vista automaticamente"
 
-#: ViewManager.cpp:146
+#: ViewManager.cpp:153
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
 msgstr "Scinde vista a Sinistra/Dextera ex proxime scheda"
 
-#: ViewManager.cpp:154
+#: ViewManager.cpp:161
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
 msgstr "Scinde  le vista a Culmine/Basso ex proxime scheda"
 
-#: ViewManager.cpp:162
+#: ViewManager.cpp:169
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
 msgstr "Scinde  le vista automaticamente ex proxime scheda"
 
-#: ViewManager.cpp:172
+#: ViewManager.cpp:179
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x2 terminals"
 msgstr "Carga un nove scheda con terminales de disposition 2x2"
 
-#: ViewManager.cpp:181
+#: ViewManager.cpp:188
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 2x1 terminals"
 msgstr "Carga un nove scheda con terminales de disposition 1x2"
 
-#: ViewManager.cpp:190
+#: ViewManager.cpp:197
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load a new tab with layout 1x2 terminals"
 msgstr "Carga un nove scheda con terminales de disposition 1x2"
 
-#: ViewManager.cpp:198
+#: ViewManager.cpp:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
 msgstr "Expande vista"
 
-#: ViewManager.cpp:206
+#: ViewManager.cpp:213
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
 msgstr "Restringe vista"
 
-#: ViewManager.cpp:216
+#: ViewManager.cpp:223
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &View"
 msgstr "Distacca &Vista currente"
 
-#: ViewManager.cpp:228
+#: ViewManager.cpp:235
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
 msgstr "Dis&tacca scheda currente"
 
-#: ViewManager.cpp:233
+#: ViewManager.cpp:240
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Next Tab"
 msgstr "Proxime scheda"
 
-#: ViewManager.cpp:241
+#: ViewManager.cpp:248
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
 msgstr "Previe scheda"
 
-#: ViewManager.cpp:249
+#: ViewManager.cpp:256
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Above Terminal"
 msgstr "Focus supra terminal"
 
-#: ViewManager.cpp:256
+#: ViewManager.cpp:263
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
 msgstr "Focus a  basso de terminal"
 
-#: ViewManager.cpp:263
+#: ViewManager.cpp:270
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Left Terminal"
 msgstr "Focalisa Terminal sinistre"
 
-#: ViewManager.cpp:269
+#: ViewManager.cpp:276
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Right Terminal"
 msgstr "Focalisa terminal dextere"
 
-#: ViewManager.cpp:275
+#: ViewManager.cpp:282
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
 msgstr "Passa  a ultime scheda"
 
-#: ViewManager.cpp:280
+#: ViewManager.cpp:287
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs"
 msgstr "Ultime schedas usate"
 
-#: ViewManager.cpp:285
+#: ViewManager.cpp:292
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle Between Two Tabs"
 msgstr "Commuta inter duo schedas"
 
-#: ViewManager.cpp:290
+#: ViewManager.cpp:297
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
 msgstr "Ultime shedas usate (Invertite)"
 
-#: ViewManager.cpp:295
+#: ViewManager.cpp:302
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle maximize current view"
 msgstr "Commuta maximisa vista currente"
 
-#: ViewManager.cpp:296
+#: ViewManager.cpp:303
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Commuta maximisar vista currente"
 
-#: ViewManager.cpp:304
+#: ViewManager.cpp:311
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
 msgstr "Commuta zoom-maximisa vista currente"
 
-#: ViewManager.cpp:305
+#: ViewManager.cpp:312
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
 msgstr "Commuta zoom-maximisa vista currente"
 
-#: ViewManager.cpp:313
+#: ViewManager.cpp:320
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the right"
 msgstr "Move scheda a dextera"
 
-#: ViewManager.cpp:320
+#: ViewManager.cpp:327
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Move tab to the left"
 msgstr "Move scheda a sinistra"
 
-#: ViewManager.cpp:327
+#: ViewManager.cpp:334
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
 msgstr "Integration semntic de configuration (bash)"
 
-#: ViewManager.cpp:333
+#: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
 msgstr "Commuta monstrator de suggestiones semantic"
 
-#: ViewManager.cpp:339
+#: ViewManager.cpp:346
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle line numbers display"
 msgstr "Commuta monstrator de numeros de linea"
 
-#: ViewManager.cpp:346
+#: ViewManager.cpp:353
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
 msgstr "Grandor equal a omne vistas"
 
-#: ViewManager.cpp:356
+#: ViewManager.cpp:363
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
 msgstr "Passa  a scheda %1"
 
-#: ViewManager.cpp:569
+#: ViewManager.cpp:576
 #, kde-format
 msgid "Semantic hints "
 msgstr "Suggestiones Semantic"
 
-#: ViewManager.cpp:585
+#: ViewManager.cpp:592
 #, kde-format
 msgid "Line numbers "
 msgstr "Numeros de linea"
 
-#: ViewManager.cpp:1170
+#: ViewManager.cpp:1177
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Salveguarda disposition de scheda"
 
-#: ViewManager.cpp:1172 ViewManager.cpp:1259
+#: ViewManager.cpp:1179 ViewManager.cpp:1266
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole View Layout (*.json)"
 
-#: ViewManager.cpp:1185
+#: ViewManager.cpp:1192
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3625,7 +3625,7 @@ msgstr ""
 "Un problema occurreva durante que il salveguardava le disposition (Layout).\n"
 "%1"
 
-#: ViewManager.cpp:1246
+#: ViewManager.cpp:1253
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3635,7 +3635,7 @@ msgstr ""
 "Un problema occurreva durante que il cargava le disposition (Layout).\n"
 "%1"
 
-#: ViewManager.cpp:1257
+#: ViewManager.cpp:1264
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
