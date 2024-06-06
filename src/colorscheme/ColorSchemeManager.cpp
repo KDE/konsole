@@ -185,12 +185,16 @@ std::shared_ptr<const ColorScheme> ColorSchemeManager::findColorScheme(const QSt
 QString ColorSchemeManager::findColorSchemePath(const QString &name) const
 {
     QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".colorscheme"));
-
-    if (!path.isEmpty()) {
-        return path;
+    if (path.isEmpty()) {
+        path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".schema"));
     }
-
-    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".schema"));
+    if (path.isEmpty()) {
+        const QString resource = QStringLiteral(":/konsole/color-schemes/") + name + QStringLiteral(".colorscheme");
+        if (QFile::exists(resource)) {
+            path = resource;
+        }
+    }
+    return path;
 }
 
 bool ColorSchemeManager::pathIsColorScheme(const QString &path)
