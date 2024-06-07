@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-06 00:41+0000\n"
+"POT-Creation-Date: 2024-06-07 00:41+0000\n"
 "PO-Revision-Date: 2024-04-28 17:20+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -827,226 +827,226 @@ msgstr "உள்ளீடு:"
 msgid "Output:"
 msgstr "வெளியீடு:"
 
-#: main.cpp:194
+#: main.cpp:186
 #, kde-format
 msgctxt "@title"
 msgid "Konsole"
 msgstr "கான்சோல்"
 
-#: main.cpp:196
+#: main.cpp:188
 #, kde-format
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "முனைய செயலி"
 
-#: main.cpp:198
+#: main.cpp:190
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr "(c) 1997-2022, கான்சோல் நிரலாளர்கள்"
 
-#: main.cpp:349
+#: main.cpp:341
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "குர்ட் ஹின்டன்பர்க்"
 
-#: main.cpp:351
+#: main.cpp:343
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "பொதுவான பராமரிப்பாளர், பிழைநீக்கல், மற்றும் பொதுவான முன்னேற்றங்கள்"
 
-#: main.cpp:354
+#: main.cpp:346
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "ராபர்ட் நைட்"
 
-#: main.cpp:355
+#: main.cpp:347
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr ""
 
-#: main.cpp:357
+#: main.cpp:349
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "லாரஸ் டொயல்லெ"
 
-#: main.cpp:357
+#: main.cpp:349
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "முதிலில் இயற்றியவர்"
 
-#: main.cpp:358
+#: main.cpp:350
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr "அஹமது சமீர்"
 
-#: main.cpp:359 main.cpp:362 main.cpp:365 main.cpp:368
+#: main.cpp:351 main.cpp:354 main.cpp:357 main.cpp:360
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "வழு களைதல்களும் பொதுவான முன்னேற்றங்களும்"
 
-#: main.cpp:361
+#: main.cpp:353
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr "கார்லோஸ் ஆல்வெஸ்"
 
-#: main.cpp:364
+#: main.cpp:356
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr "தாமசு கானாபிராவா"
 
-#: main.cpp:367
+#: main.cpp:359
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr "குஸ்தாவோ கார்னெயிரோ"
 
-#: main.cpp:370
+#: main.cpp:362
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr "எடுவின் புயோல்ஸ்"
 
-#: main.cpp:371 main.cpp:374 main.cpp:376 main.cpp:381 main.cpp:383
-#: main.cpp:384 main.cpp:385
+#: main.cpp:363 main.cpp:366 main.cpp:368 main.cpp:373 main.cpp:375
+#: main.cpp:376 main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "பிழைதிருத்தங்களும் பொதுவான மேம்பாடுகளும்"
 
-#: main.cpp:373
+#: main.cpp:365
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr "மார்ட்டின் டி. ஹ. சான்டுஸ்மார்க்"
 
-#: main.cpp:376
+#: main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr "நேட் கிரஹாம்"
 
-#: main.cpp:377
+#: main.cpp:369
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr "மாரியஸ் குலெபொக்கி"
 
-#: main.cpp:378
+#: main.cpp:370
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "பிழைதிருத்தங்களும் முக்கிய மேம்பாடுகளும்"
 
-#: main.cpp:380
+#: main.cpp:372
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "தாமஸ் சர்ரெல்"
 
-#: main.cpp:383
+#: main.cpp:375
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr "ஜெக்கில் வூ"
 
-#: main.cpp:384
+#: main.cpp:376
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "வாலுடோ பாஸ்டியான்"
 
-#: main.cpp:385
+#: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "ஸ்டீபன் பின்னர்"
 
-#: main.cpp:386
+#: main.cpp:378
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "தாமஸ் டுரைபுஹோல்சு"
 
-#: main.cpp:386
+#: main.cpp:378
 #, kde-format
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "பொதுவான மேம்பாடுகள்"
 
-#: main.cpp:387
+#: main.cpp:379
 #, kde-format
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "கிரிஸ் மேகெமர்"
 
-#: main.cpp:387 main.cpp:388 main.cpp:415 main.cpp:416 main.cpp:417
-#: main.cpp:418
+#: main.cpp:379 main.cpp:380 main.cpp:407 main.cpp:408 main.cpp:409
+#: main.cpp:410
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "பிழைதிருத்தங்கள்"
 
-#: main.cpp:388
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr "ஃபரான்செஸ்க்கோ செக்கோனி"
 
-#: main.cpp:389
+#: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "ஸ்டீபன் குளோ"
 
-#: main.cpp:389
+#: main.cpp:381
 #, kde-format
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "சோலாரிஸ் ஆதரவும் வரலாறும்"
 
-#: main.cpp:390
+#: main.cpp:382
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "அலெக்ஸாண்டர் நியுன்டார்ப்"
 
-#: main.cpp:391
+#: main.cpp:383
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "பிழைநீக்கமும் துவக்கத்தை விரைவுபடுத்தியதும்"
 
-#: main.cpp:393
+#: main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "பீட்டர் சில்வா"
 
-#: main.cpp:393
+#: main.cpp:385
 #, kde-format
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "குறிகளில் முன்னேற்றங்கள்"
 
-#: main.cpp:394
+#: main.cpp:386
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "லாட்சி பொலோனி"
 
-#: main.cpp:396
+#: main.cpp:388
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1056,13 +1056,13 @@ msgstr ""
 "உட்பொதிந்த கான்சோல்\n"
 "கருவிப்பட்டையும் அமர்வுப் பெயர்களும்"
 
-#: main.cpp:399
+#: main.cpp:391
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "டேவிட் ஃபவுர்"
 
-#: main.cpp:401
+#: main.cpp:393
 #, kde-format
 msgctxt "@info:credit"
 msgid ""
@@ -1072,25 +1072,25 @@ msgstr ""
 "உட்பொதிந்த கான்சோல்\n"
 "பொதுவான முன்னேற்றங்கள்"
 
-#: main.cpp:404
+#: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "அன்டோனியோ லாராஸோ"
 
-#: main.cpp:404
+#: main.cpp:396
 #, kde-format
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "காட்சிமுறை அசைவூட்டங்கள்"
 
-#: main.cpp:405
+#: main.cpp:397
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "மத்தையாஸ் எட்ரிச்"
 
-#: main.cpp:407
+#: main.cpp:399
 #, fuzzy, kde-format
 #| msgid ""
 #| "Code from the kvt project\n"
@@ -1103,70 +1103,70 @@ msgstr ""
 "kvt திட்டத்தினின்று நிரல்\n"
 "பொதுவான முன்னேற்றங்கள்"
 
-#: main.cpp:410
+#: main.cpp:402
 #, kde-format
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "வார்விக் அலிசன்"
 
-#: main.cpp:411
+#: main.cpp:403
 #, fuzzy, kde-format
 #| msgid "Schema and text selection improvements"
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "ஸ்கீமா மற்றும் உரை தேர்வு முன்னேற்றங்கள்"
 
-#: main.cpp:413
+#: main.cpp:405
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "டான் பிலோன்"
 
-#: main.cpp:413
+#: main.cpp:405
 #, fuzzy, kde-format
 #| msgid "SGI port"
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "SGI துறை"
 
-#: main.cpp:414
+#: main.cpp:406
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "கெவின் ஸ்டிரீட்"
 
-#: main.cpp:414
+#: main.cpp:406
 #, fuzzy, kde-format
 #| msgid "FreeBSD port"
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "FreeBSD துறை"
 
-#: main.cpp:415
+#: main.cpp:407
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "செவன் ஃபிஸ்சர்"
 
-#: main.cpp:416
+#: main.cpp:408
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "டேல் எம். ப்ளேவன்"
 
-#: main.cpp:417
+#: main.cpp:409
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "மார்ட்டின் ஜோன்ஸ்"
 
-#: main.cpp:418
+#: main.cpp:410
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "லர்ஸ் க்னோல்"
 
-#: main.cpp:419
+#: main.cpp:411
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thanks to many others.\n"

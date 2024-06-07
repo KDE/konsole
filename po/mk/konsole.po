@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-06 00:41+0000\n"
+"POT-Creation-Date: 2024-06-07 00:41+0000\n"
 "PO-Revision-Date: 2010-01-29 22:59+0100\n"
 "Last-Translator: Bozidar Proevski <bobibobi@freemail.com.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -919,249 +919,249 @@ msgstr "Влез:"
 msgid "Output:"
 msgstr "Излез:"
 
-#: main.cpp:194
+#: main.cpp:186
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@title"
 msgid "Konsole"
 msgstr "Конзола"
 
-#: main.cpp:196
+#: main.cpp:188
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@title"
 msgid "Terminal emulator"
 msgstr "Емулатор на терминал"
 
-#: main.cpp:198
+#: main.cpp:190
 #, kde-format
 msgctxt "@info:credit"
 msgid "(c) 1997-2022, The Konsole Developers"
 msgstr ""
 
-#: main.cpp:349
+#: main.cpp:341
 #, fuzzy, kde-format
 #| msgid "Kurt V. Hindenburg"
 msgctxt "@info:credit"
 msgid "Kurt Hindenburg"
 msgstr "Kurt V. Hindenburg"
 
-#: main.cpp:351
+#: main.cpp:343
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
 msgstr "Поправање грешки и подобрувања"
 
-#: main.cpp:354
+#: main.cpp:346
 #, fuzzy, kde-format
 #| msgid "Robert Knight"
 msgctxt "@info:credit"
 msgid "Robert Knight"
 msgstr "Robert Knight"
 
-#: main.cpp:355
+#: main.cpp:347
 #, kde-format
 msgctxt "@info:credit"
 msgid "Previous maintainer, ported to KDE4"
 msgstr ""
 
-#: main.cpp:357
+#: main.cpp:349
 #, fuzzy, kde-format
 #| msgid "Lars Doelle"
 msgctxt "@info:credit"
 msgid "Lars Doelle"
 msgstr "Lars Doelle"
 
-#: main.cpp:357
+#: main.cpp:349
 #, fuzzy, kde-format
 #| msgid "Terminal emulator"
 msgctxt "@info:credit"
 msgid "Original author"
 msgstr "Емулатор на терминал"
 
-#: main.cpp:358
+#: main.cpp:350
 #, kde-format
 msgctxt "@info:credit"
 msgid "Ahmad Samir"
 msgstr ""
 
-#: main.cpp:359 main.cpp:362 main.cpp:365 main.cpp:368
+#: main.cpp:351 main.cpp:354 main.cpp:357 main.cpp:360
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Major refactoring, bug fixes and major improvements"
 msgstr "Поправање грешки и подобрувања"
 
-#: main.cpp:361
+#: main.cpp:353
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carlos Alves"
 msgstr ""
 
-#: main.cpp:364
+#: main.cpp:356
 #, kde-format
 msgctxt "@info:credit"
 msgid "Tomaz Canabrava"
 msgstr ""
 
-#: main.cpp:367
+#: main.cpp:359
 #, kde-format
 msgctxt "@info:credit"
 msgid "Gustavo Carneiro"
 msgstr ""
 
-#: main.cpp:370
+#: main.cpp:362
 #, kde-format
 msgctxt "@info:credit"
 msgid "Edwin Pujols"
 msgstr ""
 
-#: main.cpp:371 main.cpp:374 main.cpp:376 main.cpp:381 main.cpp:383
-#: main.cpp:384 main.cpp:385
+#: main.cpp:363 main.cpp:366 main.cpp:368 main.cpp:373 main.cpp:375
+#: main.cpp:376 main.cpp:377
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and general improvements"
 msgstr "Поправање грешки и подобрувања"
 
-#: main.cpp:373
+#: main.cpp:365
 #, kde-format
 msgctxt "@info:credit"
 msgid "Martin T. H. Sandsmark"
 msgstr ""
 
-#: main.cpp:376
+#: main.cpp:368
 #, kde-format
 msgctxt "@info:credit"
 msgid "Nate Graham"
 msgstr ""
 
-#: main.cpp:377
+#: main.cpp:369
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mariusz Glebocki"
 msgstr ""
 
-#: main.cpp:378
+#: main.cpp:370
 #, fuzzy, kde-format
 #| msgid "Bug fixes and general improvements"
 msgctxt "@info:credit"
 msgid "Bug fixes and major improvements"
 msgstr "Поправање грешки и подобрувања"
 
-#: main.cpp:380
+#: main.cpp:372
 #, fuzzy, kde-format
 #| msgid "Thomas Dreibholz"
 msgctxt "@info:credit"
 msgid "Thomas Surrel"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:383
+#: main.cpp:375
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jekyll Wu"
 msgstr ""
 
-#: main.cpp:384
+#: main.cpp:376
 #, fuzzy, kde-format
 #| msgid "Waldo Bastian"
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
 msgstr "Waldo Bastian"
 
-#: main.cpp:385
+#: main.cpp:377
 #, fuzzy, kde-format
 #| msgid "Stephan Binner"
 msgctxt "@info:credit"
 msgid "Stephan Binner"
 msgstr "Stephan Binner"
 
-#: main.cpp:386
+#: main.cpp:378
 #, fuzzy, kde-format
 #| msgid "Thomas Dreibholz"
 msgctxt "@info:credit"
 msgid "Thomas Dreibholz"
 msgstr "Thomas Dreibholz"
 
-#: main.cpp:386
+#: main.cpp:378
 #, fuzzy, kde-format
 #| msgid "General improvements"
 msgctxt "@info:credit"
 msgid "General improvements"
 msgstr "Општи подобрувања"
 
-#: main.cpp:387
+#: main.cpp:379
 #, fuzzy, kde-format
 #| msgid "Chris Machemer"
 msgctxt "@info:credit"
 msgid "Chris Machemer"
 msgstr "Chris Machemer"
 
-#: main.cpp:387 main.cpp:388 main.cpp:415 main.cpp:416 main.cpp:417
-#: main.cpp:418
+#: main.cpp:379 main.cpp:380 main.cpp:407 main.cpp:408 main.cpp:409
+#: main.cpp:410
 #, fuzzy, kde-format
 #| msgid "Bug fixes"
 msgctxt "@info:credit"
 msgid "Bug fixes"
 msgstr "Поправање грешки"
 
-#: main.cpp:388
+#: main.cpp:380
 #, kde-format
 msgctxt "@info:credit"
 msgid "Francesco Cecconi"
 msgstr ""
 
-#: main.cpp:389
+#: main.cpp:381
 #, fuzzy, kde-format
 #| msgid "Stephan Kulow"
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
 msgstr "Stephan Kulow"
 
-#: main.cpp:389
+#: main.cpp:381
 #, fuzzy, kde-format
 #| msgid "Solaris support and history"
 msgctxt "@info:credit"
 msgid "Solaris support and history"
 msgstr "Поддршка за Соларис и работа со историја"
 
-#: main.cpp:390
+#: main.cpp:382
 #, fuzzy, kde-format
 #| msgid "Alexander Neundorf"
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
 msgstr "Alexander Neundorf"
 
-#: main.cpp:391
+#: main.cpp:383
 #, fuzzy, kde-format
 #| msgid "Bug fixes and improved startup performance"
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
 msgstr "Поправки на грешки и подобрени перформанси при стартување"
 
-#: main.cpp:393
+#: main.cpp:385
 #, fuzzy, kde-format
 #| msgid "Peter Silva"
 msgctxt "@info:credit"
 msgid "Peter Silva"
 msgstr "Peter Silva"
 
-#: main.cpp:393
+#: main.cpp:385
 #, fuzzy, kde-format
 #| msgid "Marking improvements"
 msgctxt "@info:credit"
 msgid "Marking improvements"
 msgstr "Важни подобрувања"
 
-#: main.cpp:394
+#: main.cpp:386
 #, fuzzy, kde-format
 #| msgid "Lotzi Boloni"
 msgctxt "@info:credit"
 msgid "Lotzi Boloni"
 msgstr "Lotzi Boloni"
 
-#: main.cpp:396
+#: main.cpp:388
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1174,14 +1174,14 @@ msgstr ""
 "Вградена Конзола\n"
 "Имиња на алатници и сесии"
 
-#: main.cpp:399
+#: main.cpp:391
 #, fuzzy, kde-format
 #| msgid "David Faure"
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:401
+#: main.cpp:393
 #, fuzzy, kde-format
 #| msgid ""
 #| "Embedded Konsole\n"
@@ -1194,28 +1194,28 @@ msgstr ""
 "Вградена Конзола\n"
 "Општи подобрувања"
 
-#: main.cpp:404
+#: main.cpp:396
 #, fuzzy, kde-format
 #| msgid "Antonio Larrosa"
 msgctxt "@info:credit"
 msgid "Antonio Larrosa"
 msgstr "Antonio Larrosa"
 
-#: main.cpp:404
+#: main.cpp:396
 #, fuzzy, kde-format
 #| msgid "Visual effects"
 msgctxt "@info:credit"
 msgid "Visual effects"
 msgstr "Визуелни ефекти"
 
-#: main.cpp:405
+#: main.cpp:397
 #, fuzzy, kde-format
 #| msgid "Matthias Ettrich"
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
 msgstr "Matthias Ettrich"
 
-#: main.cpp:407
+#: main.cpp:399
 #, fuzzy, kde-format
 #| msgid ""
 #| "Code from the kvt project\n"
@@ -1228,77 +1228,77 @@ msgstr ""
 "Код од проектот kvt\n"
 "Општи подобрувања"
 
-#: main.cpp:410
+#: main.cpp:402
 #, fuzzy, kde-format
 #| msgid "Warwick Allison"
 msgctxt "@info:credit"
 msgid "Warwick Allison"
 msgstr "Warwick Allison"
 
-#: main.cpp:411
+#: main.cpp:403
 #, fuzzy, kde-format
 #| msgid "Schema and text selection improvements"
 msgctxt "@info:credit"
 msgid "Schema and text selection improvements"
 msgstr "Подобрување на шемите и на избирањата"
 
-#: main.cpp:413
+#: main.cpp:405
 #, fuzzy, kde-format
 #| msgid "Dan Pilone"
 msgctxt "@info:credit"
 msgid "Dan Pilone"
 msgstr "Dan Pilone"
 
-#: main.cpp:413
+#: main.cpp:405
 #, fuzzy, kde-format
 #| msgid "SGI port"
 msgctxt "@info:credit"
 msgid "SGI port"
 msgstr "Пренос на SGI"
 
-#: main.cpp:414
+#: main.cpp:406
 #, fuzzy, kde-format
 #| msgid "Kevin Street"
 msgctxt "@info:credit"
 msgid "Kevin Street"
 msgstr "Kevin Street"
 
-#: main.cpp:414
+#: main.cpp:406
 #, fuzzy, kde-format
 #| msgid "FreeBSD port"
 msgctxt "@info:credit"
 msgid "FreeBSD port"
 msgstr "Пренос на FreeBSD"
 
-#: main.cpp:415
+#: main.cpp:407
 #, fuzzy, kde-format
 #| msgid "Sven Fischer"
 msgctxt "@info:credit"
 msgid "Sven Fischer"
 msgstr "Sven Fischer"
 
-#: main.cpp:416
+#: main.cpp:408
 #, fuzzy, kde-format
 #| msgid "Dale M. Flaven"
 msgctxt "@info:credit"
 msgid "Dale M. Flaven"
 msgstr "Dale M. Flaven"
 
-#: main.cpp:417
+#: main.cpp:409
 #, fuzzy, kde-format
 #| msgid "Martin Jones"
 msgctxt "@info:credit"
 msgid "Martin Jones"
 msgstr "Martin Jones"
 
-#: main.cpp:418
+#: main.cpp:410
 #, fuzzy, kde-format
 #| msgid "Lars Knoll"
 msgctxt "@info:credit"
 msgid "Lars Knoll"
 msgstr "Lars Knoll"
 
-#: main.cpp:419
+#: main.cpp:411
 #, fuzzy, kde-format
 #| msgid "Thanks to many others.\n"
 msgctxt "@info:credit"
