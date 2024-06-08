@@ -5,6 +5,7 @@
 # Author: Lliehu
 # Author: Niklas Laxström
 # Author: Rytilahti
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2024 Tommi Nieminen <translator@legisign.org>
 # Kim Enkovaara <kim.enkovaara@iki.fi>, 2002,2003, 2006.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2003, 2012.
 # Mikko Ikola <ikola@iki.fi>, 2003, 2005.
@@ -12,7 +13,6 @@
 # Tapio Kautto <eleknader@phnet.fi>, 2004.
 # Ilpo Kantonen <ilpo@iki.fi>, 2005.
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007, 2010, 2012.
-# Tommi Nieminen <translator@legisign.org>, 2009, 2010, 2011.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2010, 2011, 2012, 2013, 2014, 2015, 2016.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012.
 # Tommi Nieminen <translator@legisign.org>, 2010, 2012, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 02:53+0000\n"
-"PO-Revision-Date: 2024-02-14 18:48+0200\n"
+"PO-Revision-Date: 2024-04-18 22:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -705,11 +705,10 @@ msgid "Deselect All"
 msgstr "Poista valinta"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Esikatselu:"
+msgstr "Värien esikatselu"
 
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
@@ -2656,7 +2655,7 @@ msgstr "Ota käyttöön kaikki ”Älä kysy uudelleen” -viestit"
 #: settings/GeneralSettings.ui:255 settings/konsole.kcfg:79
 #, kde-format
 msgid "Sets whether search should start from the bottom"
-msgstr "Asettaa haun alkamisen alhaalta"
+msgstr "Asettaa, aloitetaanko haku lopusta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
@@ -2753,7 +2752,7 @@ msgstr "Korosta kaikki osumat"
 #: settings/konsole.kcfg:74
 #, kde-format
 msgid "Sets whether matching text should be highlighted"
-msgstr "Asettaa, korostetaan haun osumat"
+msgstr "Asettaa, korostetaanko hakuosumat"
 
 #. i18n: ectx: label, entry (SearchNoWrap), group (SearchSettings)
 #: settings/konsole.kcfg:83
@@ -2815,19 +2814,19 @@ msgstr "Välilehtipalkin tyylin CSS-tiedosto"
 #: settings/konsole.kcfg:151
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
-msgstr "Sulje avoimet välilehdet keskimmäisen painikkeen napsautuksella"
+msgstr "Sulje avoimet välilehdet keskipainikkeen napsautuksella"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
 #: settings/konsole.kcfg:155
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr "Valitse, milloin ”Uusi välilehti” -painike näytetään"
+msgstr "Valitse, milloin näytetään ”Uusi välilehti” -painike"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
-msgstr "Valitse, milloin ”Sulje välilehti” -painike näytetään"
+msgstr "Valitse, milloin näytetään ”Sulje välilehti” -painike"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
 #: settings/konsole.kcfg:168
@@ -2851,13 +2850,13 @@ msgstr "Käytä rivihistoriatiedostoille järjestelmänlaajuista kansiota"
 #: settings/konsole.kcfg:196
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr "Käytä käyttäjäkohtaista kansiota rivihistoriatiedostoille"
+msgstr "Käytä rivihistoriatiedostoille käyttäjäkohtaista kansiota"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use specified folder location"
-msgstr "Määritä rivihistoriatiedostokansioiden sijainti"
+msgstr "Aseta rivihistoriatiedostokansioiden sijainti"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:204
@@ -2928,7 +2927,7 @@ msgstr ""
 #: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "Create a new profile based on the selected profile"
-msgstr "Luo valitun profiilin pohjalta uusi profiili"
+msgstr "Luo valitusta profiilista uusi profiili"
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:57
@@ -2941,9 +2940,7 @@ msgstr "&Uusi…"
 #, kde-format
 msgid ""
 "Edit the selected profile (this button is disabled for read-only profiles)"
-msgstr ""
-"Muokkaa valittua profiilia (painike ei ole käytettävissä vain luku -"
-"profiileille)"
+msgstr "Muokkaa valittua profiilia (ei käytettävissä vain luku -profiileille)"
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:70
@@ -2992,19 +2989,19 @@ msgstr "Näytä:"
 #: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
-msgstr "Tarvittaessa"
+msgstr "tarvittaessa"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
 #: settings/TabBarSettings.ui:73
 #, kde-format
 msgid "Alwa&ys"
-msgstr "&Aina"
+msgstr "&aina"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
 #: settings/TabBarSettings.ui:83
 #, kde-format
 msgid "&Never"
-msgstr "&Ei koskaan"
+msgstr "&ei koskaan"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
 #: settings/TabBarSettings.ui:109
@@ -3016,7 +3013,7 @@ msgstr "Sijainti:"
 #: settings/TabBarSettings.ui:119
 #, kde-format
 msgid "Above terminal area"
-msgstr "Päätteen yllä"
+msgstr " \tPäätteen yllä"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
 #: settings/TabBarSettings.ui:129
@@ -3187,7 +3184,7 @@ msgstr "Suuri"
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
-msgstr "Aina"
+msgstr "aina"
 
 #: settings/TemporaryFilesSettings.cpp:31
 #, kde-format
@@ -3784,7 +3781,7 @@ msgstr "Rivinumerointi"
 #, kde-format
 msgctxt "Never"
 msgid "Never"
-msgstr "Ei koskaan"
+msgstr "ei koskaan"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
@@ -3798,7 +3795,7 @@ msgstr "Ei koskaan"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When URL hints show"
-msgstr "Näytettäessä osoitevihjeet"
+msgstr "näytettäessä osoitevihjeitä"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsAlways)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsAlways)
@@ -3812,7 +3809,7 @@ msgstr "Näytettäessä osoitevihjeet"
 #, kde-format
 msgctxt "Always"
 msgid "Always"
-msgstr "Aina"
+msgstr "aina"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -5037,7 +5034,7 @@ msgstr "Rivihistoria:"
 #: widgets/EditProfileScrollingPage.ui:67
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr "PgUp/Dn-vieritys:"
+msgstr "PgUp/PgDn-vieritys:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:83
@@ -5114,17 +5111,18 @@ msgstr "Korostus:"
 msgid "Highlight the lines coming into view"
 msgstr "Korosta näkyviin tulevat rivit"
 
+# Tämän yllä ”Highlighting:” on substantiivi (”Korostus:”), joten yhdenmukaisuussyistä tämänkin on hyvä olla substantiivi
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:222
 #, kde-format
 msgid "Reflow Lines:"
-msgstr "Rivitä uudelleen:"
+msgstr "Rivitys:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:232
 #, kde-format
 msgid "Reflow lines when terminal resizes"
-msgstr "Rivitä rivit uudelleen päätteen koon muututtua"
+msgstr "Rivitä uudelleen päätteen koon muututtua"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5166,9 +5164,9 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"Tätä asetusta käytettäessä rivihistoria tallennetaan keskusmuistiin. Jos "
-"arvo on liian suuri, koneesi muisti voi loppua, mikä aiheuttaa ongelmia "
-"järjestelmässäsi."
+"Asetusta käytettäessä rivihistoria tallennetaan keskusmuistiin. Jos arvo on "
+"liian suuri, koneen muisti voi loppua, mikä aiheuttaisi järjestelmään "
+"ongelmia."
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -5421,11 +5419,11 @@ msgstr "Käyttäjätunnus: %u"
 
 #: widgets/TabTitleFormatButton.cpp:27
 msgid "Local Host: %h"
-msgstr "Paikallinen palvelin: %h"
+msgstr "Paikallinen konenimi: %h"
 
 #: widgets/TabTitleFormatButton.cpp:28
 msgid "User's Bourne prompt sigil: %B"
-msgstr "Käytä Bournen kehotemerkkiä: %B"
+msgstr "Käytä Bourne-kehotetunnusta: %B"
 
 #: widgets/TabTitleFormatButton.cpp:35
 msgid "User Name@ (if given): %U"
@@ -5433,16 +5431,16 @@ msgstr "Käyttäjätunnus@ (jos annettu): %U"
 
 #: widgets/TabTitleFormatButton.cpp:36
 msgid "Remote Host (Short): %h"
-msgstr "Etäpalvelin (lyhyt muoto): %h"
+msgstr "Etäkonenimi (lyhyt): %h"
 
 #: widgets/TabTitleFormatButton.cpp:37
 msgid "Remote Host (Long): %H"
-msgstr "Etäpalvelin (pitkä muoto): %H"
+msgstr "Etäkonenimi (pitkä): %H"
 
 #: widgets/TabTitleFormatButton.cpp:38
 #, c-format
 msgid "Command and arguments: %c"
-msgstr "Komento ja parametrit: %c"
+msgstr "Komento parametreineen: %c"
 
 #: widgets/TabTitleFormatButton.cpp:48
 #, kde-format
@@ -5453,13 +5451,13 @@ msgstr "Lisää"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert title format"
-msgstr "Lisää otsikon muoto"
+msgstr "Lisää otsikkomuoto"
 
 #: widgets/TabTitleFormatButton.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Insert remote title format"
-msgstr "Lisää etäyhteyden otsikon muoto"
+msgstr "Lisää etäotsikon muoto"
 
 #: widgets/TerminalHeaderBar.cpp:80 widgets/TerminalHeaderBar.cpp:188
 #, kde-format
