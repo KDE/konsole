@@ -5,8 +5,8 @@
 # Anders Widell <d95-awi@nada.kth.se>, 1998.
 # Per Lindström <pelinstr@algonet.se>, 2000.
 # Mattias Newzella <newzella@linux.nu>, 2000, 2001, 2002,2003, 2004.
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
-# Stefan Asserhall <stefan.asserhall@bredband.net>, 2005, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
+# Stefan Asserhall <stefan.asserhall@gmail.com>, 2005, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-07 00:41+0000\n"
 "PO-Revision-Date: 2023-10-14 19:51+0200\n"
-"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "d95-awi@nada.kth.se,pelinstr@algonet.se,newzella@linux.nu,stefan."
-"asserhall@bredband.net"
+"asserhall@gmail.com"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
