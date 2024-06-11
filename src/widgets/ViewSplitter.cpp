@@ -115,7 +115,7 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
         splitter->setOrientation(containerOrientation);
         splitter->updateSizes();
     } else if (containerOrientation == splitter->orientation()) {
-        splitter->insertWidget(currentIndex, terminalDisplay);
+        splitter->insertWidget(behavior == AddBehavior::AddBefore ? currentIndex : currentIndex + 1, terminalDisplay);
         splitter->updateSizes();
     } else {
         QList<int> sizes = splitter->sizes();
