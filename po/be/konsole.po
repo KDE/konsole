@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-07 00:41+0000\n"
-"PO-Revision-Date: 2024-06-03 19:40\n"
+"PO-Revision-Date: 2024-06-11 08:11\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -2647,13 +2647,13 @@ msgstr "Пошук у адваротным кірунку"
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
 #, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr ""
+msgstr "Вызначае, ці павінен пошук спыняцца замест цыклічнага пошуку"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Не цыклічна"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2734,7 +2734,7 @@ msgstr "Вызначае, ці павінен падсвятляцца тэкс�
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Спыненне пры дасягненні канца замест цыклічнага пошуку"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
@@ -3004,13 +3004,13 @@ msgstr "Вы&шэй вобласці тэрмінала"
 #: settings/TabBarSettings.ui:139
 #, kde-format
 msgid "To the left of terminal area"
-msgstr ""
+msgstr "Злева ад вобласці тэрмінала"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
 #, kde-format
 msgid "To the &right of terminal area"
-msgstr ""
+msgstr "Спр&ава ад вобласці тэрмінала"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3022,7 +3022,7 @@ msgstr "Паказваць кнопку закрыцця ўкладкі:"
 #: settings/TabBarSettings.ui:185
 #, kde-format
 msgid "On ea&ch tab"
-msgstr ""
+msgstr "На &кожнай укладцы"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
@@ -3717,7 +3717,7 @@ msgstr "Кіраванне плынню"
 #: widgets/EditProfileAdvancedPage.ui:222
 #, kde-format
 msgid "&Default character encoding:"
-msgstr ""
+msgstr "&Прадвызначанае кадаванне:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:242
@@ -3729,7 +3729,7 @@ msgstr "Цэтлік для прагляду галоўнага экрана:"
 #: widgets/EditProfileAdvancedPage.ui:263
 #, kde-format
 msgid "Line Numbers:"
-msgstr ""
+msgstr "Нумары радкоў:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:273
@@ -3743,14 +3743,14 @@ msgstr "&Ніколі"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr ""
+msgstr "Калі &паказваюцца URL-падказкі"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:293
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr ""
+msgstr "&Заўсёды"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -4538,7 +4538,7 @@ msgstr "/bin/sh"
 #: widgets/EditProfileGeneralPage.ui:157
 #, kde-format
 msgid "I&nitial directory:"
-msgstr ""
+msgstr "Па&чатковы каталог:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:170
@@ -4583,7 +4583,7 @@ msgstr "Рэдагаваць спіс зменных асяроддзя і зв�
 #: widgets/EditProfileGeneralPage.ui:271
 #, kde-format
 msgid "Initial terminal si&ze:"
-msgstr ""
+msgstr "Пачатковы памер &тэрмінала:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4602,7 +4602,7 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:359
 #, kde-format
 msgid "&Terminal bell mode:"
-msgstr ""
+msgstr "&Рэжым гукавога апавяшчэння тэрмінала:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
@@ -4772,13 +4772,13 @@ msgstr "Патройнае пстрыканне:"
 #: widgets/EditProfileMousePage.ui:104
 #, kde-format
 msgid "&The whole line"
-msgstr ""
+msgstr "&Суцэльны радок"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
 #, kde-format
 msgid "From mouse position to the end of &line"
-msgstr ""
+msgstr "Ад пазіцыі мышы да канца &радка"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
@@ -5059,7 +5059,7 @@ msgstr "Пракручванне старонкі на палову вышыні
 #: widgets/EditProfileScrollingPage.ui:86
 #, kde-format
 msgid "Half screen heigh&t"
-msgstr ""
+msgstr "Палова &вышыні экрана"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -5071,7 +5071,7 @@ msgstr "Пракручванне на ўсю вышыню акна"
 #: widgets/EditProfileScrollingPage.ui:99
 #, kde-format
 msgid "F&ull screen height"
-msgstr ""
+msgstr "Ус&я вышыня экрана"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
@@ -5090,7 +5090,7 @@ msgstr "Паказваць паласу пракручвання на правы
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
-msgstr ""
+msgstr "&Правы бок"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
@@ -5103,7 +5103,7 @@ msgstr "Паказваць паласу пракручвання на левым
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr ""
+msgstr "&Левы бок"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
@@ -5209,7 +5209,7 @@ msgstr "Абмежаваць журнал вываду фіксаванай ко
 #: widgets/HistorySizeWidget.ui:63
 #, kde-format
 msgid "Fi&xed size:"
-msgstr ""
+msgstr "&Фіксаваны памер:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5228,7 +5228,7 @@ msgstr "Запамінаць увесь вывад тэрмінала"
 #, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr ""
+msgstr "&Без абмежаванняў"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5337,13 +5337,13 @@ msgstr "Вызначае, ці павінен пошук пачынацца зн
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Не цыклічна"
 
 #: widgets/IncrementalSearchBar.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr ""
+msgstr "Вызначае, ці павінен пошук спыняцца замест цыклічнага пошуку"
 
 #: widgets/IncrementalSearchBar.cpp:171
 #, kde-format
@@ -5388,7 +5388,7 @@ msgstr "Фармат загалоўка адлеглай укладкі:"
 #: widgets/RenameTabWidget.ui:79
 #, kde-format
 msgid "&Tab title format:"
-msgstr ""
+msgstr "&Фармат загалоўка ўкладкі:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5400,7 +5400,7 @@ msgstr "Фармат загалоўка звычайнай укладкі"
 #: widgets/RenameTabWidget.ui:105
 #, kde-format
 msgid "Tab Co&lor:"
-msgstr ""
+msgstr "Ко&лер укладкі:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
