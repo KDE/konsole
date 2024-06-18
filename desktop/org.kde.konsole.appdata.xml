@@ -503,6 +503,7 @@
       <li xml:lang="zh-TW">儲存輸出</li>
     </ul>
   </description>
+  <launchable type="desktop-id">org.kde.konsole.desktop</launchable>
   <url type="homepage">https://konsole.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=konsole</url>
   <url type="help">https://docs.kde.org/?application=konsole</url>
