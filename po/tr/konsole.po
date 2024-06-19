@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-07 00:41+0000\n"
-"PO-Revision-Date: 2024-04-30 00:20+0300\n"
+"PO-Revision-Date: 2024-06-18 20:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -258,7 +258,7 @@ msgstr "Arka Plan Penceresine Geçiş Yap"
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
-msgstr "%2 üzerine %1"
+msgstr "%1, %2 üzerinde"
 
 #: BookmarkHandler.cpp:109
 #, kde-format
@@ -3714,7 +3714,7 @@ msgstr "Kontrol+S düğmelerine basıldığında çıktıyı askıya almaya izin
 #: widgets/EditProfileAdvancedPage.ui:199
 #, kde-format
 msgid "Flow control"
-msgstr "Akış Denetimi"
+msgstr "Akış denetimi"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
@@ -4985,15 +4985,13 @@ msgstr "Dosya URL’leri için sürükle bırak menüsünü devre dışı bırak
 #: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
-msgstr ""
-"Kontrol+sarma tekerleğini çevirme işlemi metin boyutunu büyütecek/küçültecek."
+msgstr "Kontrol+Sarma Tekerleği, metin boyutunu büyütecek/küçültecek."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:428
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
-msgstr ""
-"Kontrol+sarma tekerleği çevirmesinin metin boyutunu yaklaştırmasına izin ver"
+msgstr "Kontrol+Sarma Tekerleği işleminin metni büyütmesine izin ver"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:435
