@@ -3225,7 +3225,7 @@ int TerminalDisplay::bidiMap(Character *screenline,
     // UTF-16 characters are not of constant length (and there are konsole's extended characters as well)
     // log2line and line2log translate positions in screenline to positions in line (and reverse)
     const int linewidth = _usedColumns;
-    uint64_t notSkipped[MAX_LINE_WIDTH / 64] = {};
+    uint32_t notSkipped[MAX_LINE_WIDTH / 32] = {};
     int i;
     int lastNonSpace = 0;
     shaped = false;
@@ -3237,7 +3237,7 @@ int TerminalDisplay::bidiMap(Character *screenline,
         int pos = line.size();
         log2line[i] = pos;
         line2log[pos] = i;
-        notSkipped[pos / 64] |= 1ul << (pos % 64);
+        notSkipped[pos / 32] |= 1ul << (pos % 32);
         const Character char_value = screenline[i];
         if (char_value.rendition.f.extended != 0) {
             // sequence of characters
@@ -3354,7 +3354,7 @@ int TerminalDisplay::bidiMap(Character *screenline,
     ubidi_getVisualMap(ubidi, semi_vis2line, &errorCode);
     int p = 0;
     for (int i = 0; i < len; i++) {
-        if ((notSkipped[semi_vis2line[i] / 64] & (1ul << (semi_vis2line[i] % 64))) != 0) {
+        if ((notSkipped[semi_vis2line[i] / 32] & (1ul << (semi_vis2line[i] % 32))) != 0) {
             vis2line[p++] = semi_vis2line[i];
         }
     }
