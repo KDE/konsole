@@ -1,10 +1,10 @@
 # Konsole project
 
 # KDE Application Version, managed by release script
-set (RELEASE_SERVICE_VERSION_MAJOR "24")
-set (RELEASE_SERVICE_VERSION_MINOR "07")
-set (RELEASE_SERVICE_VERSION_MICRO "70")
-set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+set(RELEASE_SERVICE_VERSION_MAJOR "24")
+set(RELEASE_SERVICE_VERSION_MINOR "07")
+set(RELEASE_SERVICE_VERSION_MICRO "70")
+set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
 
 # Do not increase these requirements without a merge-request or/and
 # approval from maintainer(s).
@@ -72,7 +72,7 @@ find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
     XmlGui
 )
 
-if (NOT WIN32)
+if(NOT WIN32)
     find_package(KF6 ${KF6_DEP_VERSION} REQUIRED
         Pty
     )
@@ -106,7 +106,7 @@ find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
 
 if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
     option(WITHOUT_X11 "Build without X11 integration (skips finding X11)" OFF)
-    if (NOT WITHOUT_X11)
+    if(NOT WITHOUT_X11)
         find_package(X11)
         set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
         set(HAVE_X11 ${X11_FOUND})
@@ -129,7 +129,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 
 file(GLOB ICONS_SRCS "data/icons/*.png")
 
@@ -139,11 +139,11 @@ option(ENABLE_PLUGIN_QUICKCOMMANDS "Build the Quick Commands plugin" ON)
 add_subdirectory( src )
 add_subdirectory( desktop )
 
-if (HAVE_DBUS)
+if(HAVE_DBUS)
     add_subdirectory( kconf_update )
 endif()
 
-if (KF6DocTools_FOUND)
+if(KF6DocTools_FOUND)
     add_subdirectory( doc/manual )
 endif()
 
@@ -151,7 +151,7 @@ add_subdirectory( tools )
 
 # Conditionally install icons for Linux as they may not be provided by the user theme
 option(INSTALL_ICONS "Install icons" OFF)
-if (INSTALL_ICONS)
+if(INSTALL_ICONS)
     include(ECMInstallIcons)
     ecm_install_icons( ICONS ${ICONS_SRCS} DESTINATION ${KDE_INSTALL_ICONDIR} )
 endif()
@@ -163,11 +163,11 @@ ecm_qt_install_logging_categories(
 )
 
 ki18n_install( po )
-if (KF6DocTools_FOUND)
+if(KF6DocTools_FOUND)
     kdoctools_install( po )
 endif()
 
-if (ECM_VERSION VERSION_GREATER_EQUAL 5.101.0)
+if(ECM_VERSION VERSION_GREATER_EQUAL 5.101.0)
   install(FILES completions/konsole.zsh RENAME _konsole DESTINATION ${KDE_INSTALL_ZSHAUTOCOMPLETEDIR})
 endif()
 
@@ -176,6 +176,6 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAG
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.c *.cpp *.h *.hpp)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
-if (ECM_VERSION VERSION_GREATER_EQUAL 5.79.0)
+if(ECM_VERSION VERSION_GREATER_EQUAL 5.79.0)
     kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 endif()

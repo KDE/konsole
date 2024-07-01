@@ -7,9 +7,9 @@ set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate konsolecharacters konsoledecoders)
 # Temporary bypass for BKO 432379
 if(BUILD_SHARED_LIBS)
     ecm_add_test(KeyboardTranslatorTest.cpp LINK_LIBRARIES ${KONSOLE_TEST_LIBS})
-endif(BUILD_SHARED_LIBS)
+endif()
 
-if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT WIN32)
+if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT WIN32)
     ecm_add_test(
         PartTest.cpp
         LINK_LIBRARIES KF6::XmlGui KF6::Parts KF6::Pty ${KONSOLE_TEST_LIBS}
@@ -31,7 +31,7 @@ ecm_add_tests(
     LINK_LIBRARIES ${KONSOLE_TEST_LIBS}
 )
 
-if (NOT WIN32)
+if(NOT WIN32)
     ecm_add_tests(
         PtyTest.cpp
         LINK_LIBRARIES KF6::Pty ${KONSOLE_TEST_LIBS}

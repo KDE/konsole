@@ -3,7 +3,7 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
 
 ### Handle DragonFlyBSD here instead of using __DragonFly__
-IF(${CMAKE_SYSTEM_NAME} MATCHES "DragonFly")
+if(${CMAKE_SYSTEM_NAME} MATCHES "DragonFly")
   set(HAVE_OS_DRAGONFLYBSD 1)
 else()
   set(HAVE_OS_DRAGONFLYBSD 0)
@@ -33,7 +33,7 @@ option(ENABLE_DECRQCRA "Konsole: enable DEC request checksum rectangular area" O
 option(KONSOLE_BUILD_UNI2CHARACTERWIDTH "Konsole: build uni2characterwidth executable" OFF)
 
 set(dbus_xml_srcs)
-if (HAVE_DBUS)
+if(HAVE_DBUS)
     ### Konsole source files shared between embedded terminal and main application
     # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
     # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
@@ -79,13 +79,13 @@ set(konsole_LIBS
     KF6::NewStuffCore
 )
 
-if (NOT WIN32)
+if(NOT WIN32)
     list(APPEND konsole_LIBS
         KF6::Pty
     )
 endif()
 
-if (HAVE_DBUS)
+if(HAVE_DBUS)
     list(APPEND konsole_LIBS
         KF6::DBusAddons
         KF6::GlobalAccel
@@ -136,7 +136,7 @@ add_subdirectory(keyboardtranslator)
 add_subdirectory(characters)
 add_subdirectory(decoders)
 add_subdirectory(plugins)
-if (WIN32)
+if(WIN32)
     set(ptyqt_srcs ptyqt/iptyprocess.cpp ptyqt/conptyprocess.cpp)
 endif()
 
@@ -305,18 +305,18 @@ set_target_properties(konsoleprivate PROPERTIES
 install(TARGETS konsoleprivate ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 
 add_library(konsoleapp SHARED Application.cpp
-   MainWindow.cpp
-   settings/ConfigurationDialog.cpp
-   settings/ConfigDialogButtonGroupManager.cpp
-   settings/TemporaryFilesSettings.cpp
-   settings/GeneralSettings.cpp
-   settings/MemorySettings.cpp
-   settings/ProfileSettings.cpp
-   settings/TabBarSettings.cpp
-   settings/ThumbnailsSettings.cpp
-   pluginsystem/IKonsolePlugin.cpp
-   pluginsystem/PluginManager.cpp
-   delegates/ProfileShortcutDelegate.cpp
+    MainWindow.cpp
+    settings/ConfigurationDialog.cpp
+    settings/ConfigDialogButtonGroupManager.cpp
+    settings/TemporaryFilesSettings.cpp
+    settings/GeneralSettings.cpp
+    settings/MemorySettings.cpp
+    settings/ProfileSettings.cpp
+    settings/TabBarSettings.cpp
+    settings/ThumbnailsSettings.cpp
+    pluginsystem/IKonsolePlugin.cpp
+    pluginsystem/PluginManager.cpp
+    delegates/ProfileShortcutDelegate.cpp
 )
 
 generate_export_header(konsoleapp BASE_NAME konsoleapp)
@@ -341,7 +341,7 @@ set_target_properties(konsoleapp PROPERTIES
 install(TARGETS konsoleapp ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 
 set(konsole_SRCS
-   main.cpp
+    main.cpp
 )
 
 # Sets the icon on Windows and OSX
