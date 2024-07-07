@@ -286,7 +286,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     QStringList qtProblematicOptions;
     qtProblematicOptions << QStringLiteral("--session") << QStringLiteral("--name") << QStringLiteral("--reverse") << QStringLiteral("--stylesheet")
                          << QStringLiteral("--graphicssystem");
-#if HAVE_X11
+#if WITH_X11
     qtProblematicOptions << QStringLiteral("--display") << QStringLiteral("--visual");
 #endif
     for (const QString &option : std::as_const(qtProblematicOptions)) {
@@ -298,7 +298,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     // take KDE options into consideration
     QStringList kdeProblematicOptions;
     kdeProblematicOptions << QStringLiteral("--config") << QStringLiteral("--style");
-#if HAVE_X11
+#if WITH_X11
     kdeProblematicOptions << QStringLiteral("--waitforwm");
 #endif
 

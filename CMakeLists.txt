@@ -105,12 +105,7 @@ set_package_properties(KF6DocTools PROPERTIES DESCRIPTION
 find_package(ICU 61.0 COMPONENTS uc i18n REQUIRED)
 
 if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
-    option(WITHOUT_X11 "Build without X11 integration (skips finding X11)" OFF)
-    if(NOT WITHOUT_X11)
-        find_package(X11)
-        set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
-        set(HAVE_X11 ${X11_FOUND})
-    endif()
+    option(WITH_X11 "Build with X11 integration" ON)
 endif()
 
 # Check for function GETPWUID

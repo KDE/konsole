@@ -3,7 +3,7 @@
 /* Defined if on DragonFly BSD */
 #cmakedefine01 HAVE_OS_DRAGONFLYBSD
 
-#cmakedefine01 HAVE_X11
+#cmakedefine01 WITH_X11
 
 #cmakedefine01 HAVE_DBUS
 

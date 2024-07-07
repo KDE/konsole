@@ -35,7 +35,7 @@
 #include <KWindowSystem>
 #include <KXMLGUIFactory>
 
-#if HAVE_X11
+#if WITH_X11
 #include <KX11Extras>
 #endif
 
@@ -156,7 +156,7 @@ void MainWindow::activationRequest(const QString &xdgActivationToken)
     KWindowSystem::setCurrentXdgActivationToken(xdgActivationToken);
 
     if (KWindowSystem::isPlatformX11()) {
-#if HAVE_X11
+#if WITH_X11
         KX11Extras::forceActiveWindow(winId());
 #endif
     } else {
@@ -713,7 +713,7 @@ bool MainWindow::queryClose()
     // NOTE: Some, if not all, of the below KWindowSystem calls are only
     //       implemented under x11 (KDE4.8 kdelibs/kdeui/windowmanagement).
 
-#if HAVE_X11
+#if WITH_X11
     // make sure the window is shown on current desktop and is not minimized
     KX11Extras::setOnDesktop(winId(), KX11Extras::currentDesktop());
 #endif
@@ -1022,7 +1022,7 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
         }
 
         if (KWindowSystem::isPlatformX11()) {
-#if HAVE_X11
+#if WITH_X11
             const auto oldGeometry = saveGeometry();
             // This happens for every Konsole window. It depends on
             // the fact that every window is processed in single thread
