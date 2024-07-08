@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 02:53+0000\n"
-"PO-Revision-Date: 2024-05-08 19:49+0200\n"
+"PO-Revision-Date: 2024-07-07 14:49+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -1622,7 +1622,7 @@ msgstr "Slett SSH-oppsett"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Importer SSH-profil<br/>Nokre innstillingar er skriveverna."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
 #, kde-format
@@ -2994,17 +2994,15 @@ msgstr "&Under terminalområdet"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "&Under terminalområdet"
+msgstr "Til venstre for terminalområdet"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "&Under terminalområdet"
+msgstr "Til &høgre for terminalområdet"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3014,10 +3012,9 @@ msgstr "Vis knapp for fanelukking:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "&På kvar fane"
+msgstr "På &kvar fane"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
@@ -3739,10 +3736,9 @@ msgstr "Snøggtast for snikkikk på hovudskjermen:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:282
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Linjenummer"
+msgstr "Linjenummer:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4071,7 +4067,7 @@ msgstr "Ikkje-gjeldande terminalar:"
 #: widgets/EditProfileAppearancePage.ui:591
 #, kde-format
 msgid "Active Terminals:"
-msgstr ""
+msgstr "Gjeldande terminalar:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:601
@@ -4135,7 +4131,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:756
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Kantlinje"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:798
@@ -4450,10 +4446,9 @@ msgstr ""
 "i bruk gjennomsiktig bakgrunn."
 
 #: widgets/EditProfileDialog.cpp:1895
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Standardprofil"
+msgstr "Standard for filtypen"
 
 #: widgets/EditProfileDialog.cpp:1921
 #, kde-format
