@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-07 00:41+0000\n"
-"PO-Revision-Date: 2024-06-20 14:28+0300\n"
+"PO-Revision-Date: 2024-07-07 21:57+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -127,7 +127,7 @@ msgstr "Öntanımlı profil yerine gömülü gelen profili kullanın"
 msgctxt "@info:shell"
 msgid "Set the initial working directory of the new tab or window to 'dir'"
 msgstr ""
-"Yeni sekme/pencereler için başlangıç çalışma dizinini ‘dizin’ olarak ayarla"
+"Yeni sekme/pencereler için başlangıç çalışma dizinini “dir” olarak ayarla"
 
 #: Application.cpp:57
 #, kde-format
@@ -143,7 +143,7 @@ msgid ""
 "('Run all Konsole windows in a single process' must be enabled)"
 msgstr ""
 "Yeni bir pencere oluşturma yerine geçerli pencerede yeni bir sekme oluştur "
-"(‘Tüm Konsole pencerelerini tek süreçte çalıştır’ etkin olmalıdır)"
+"(“Tüm Konsole pencerelerini tek süreçte çalıştır” etkin olmalıdır)"
 
 #: Application.cpp:62
 #, kde-format
@@ -2480,7 +2480,7 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 "<p>Bir ZModem dosya aktarım isteği algılandı; ancak uygun ZModem yazılımı "
-"bulunamadı.</p><p>‘rzsz’ veya ‘lrzsz’ paketini kurmak isteyebilirsiniz.</p>"
+"bulunamadı.</p><p>“rzsz” veya “lrzsz” paketini kurmak isteyebilirsiniz.</p>"
 
 #: session/SessionController.cpp:2128
 #, kde-format
@@ -2495,7 +2495,7 @@ msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
-"<p>Uygun ZModem yazılımı bulunamadı.</p><p>‘rzsz’ veya ‘lrzsz’ paketini "
+"<p>Uygun ZModem yazılımı bulunamadı.</p><p>“rzsz” veya “lrzsz” paketini "
 "kurmak isteyebilirsiniz.</p>"
 
 #: session/SessionController.cpp:2146
@@ -2803,13 +2803,13 @@ msgstr "Açık sekmeleri kapatmak için orta tıklamaya izin ver"
 #: settings/konsole.kcfg:155
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr "Sekme çubuğunda ‘Yeni Sekme’ düğmesinin görünürlüğünü denetle"
+msgstr "Sekme çubuğunda “Yeni Sekme” düğmesinin görünürlüğünü denetle"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
-msgstr "‘Sekmeyi Kapat’ düğmesinin nerede görüntüleneceğini denetle"
+msgstr "“Sekmeyi Kapat” düğmesinin nerede görüntüleneceğini denetle"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
 #: settings/konsole.kcfg:168
@@ -3054,7 +3054,7 @@ msgstr "Diğer:"
 #: settings/TabBarSettings.ui:241
 #, kde-format
 msgid "Show 'New Tab' button"
-msgstr "‘Yeni Sekme’ düğmesini göster"
+msgstr "“Yeni Sekme” düğmesini göster"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
 #: settings/TabBarSettings.ui:248
@@ -4453,12 +4453,12 @@ msgid ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 msgstr ""
-"Biçim; örneğin, ‘düzenleyici YOL:SATIR:SÜTUN’\n"
+"Biçim; örneğin, “düzenleyici YOL:SATIR:SÜTUN”\n"
 "\n"
 "YOL      metin dosyasının yolu ile değiştirilir\n"
 "SATIR    satır numarası ile değiştirilir\n"
 "SÜTUN    (isteğe bağlı) sütun numarası ile değiştirilir\n"
-"Not: ‘YOL:SATIR:SÜTUN’ yerine kullanmak istediğiniz düzenleyicinin\n"
+"Not: “YOL:SATIR:SÜTUN” yerine kullanmak istediğiniz düzenleyicinin\n"
 "desteklediği sözdizimiyle değiştirin; örneğin:\n"
 "gedit +SATIR:SÜTUN YOL\n"
 "\n"
