@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 02:53+0000\n"
-"PO-Revision-Date: 2024-07-07 14:49+0200\n"
+"PO-Revision-Date: 2024-07-10 21:03+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -2647,16 +2647,15 @@ msgstr "Søk bakover"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Bruk omvend søkjeretning, frå botnen og opp."
+msgstr "Vel om søket skal stoppa eller starta om att frå toppen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Start om att frå toppen"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2737,20 +2736,20 @@ msgstr "Vel om tekst som samsvarar med søket skal merkjast"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Søket stoppar i staden for å starta om att"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr ""
+msgstr "Vel om barne-cgrupper skal opprettast for enkeltfaner"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:94
 #, kde-format
 msgid ""
 "Determines the memory consumption level above which throttling will start"
-msgstr ""
+msgstr "Vel grensa for minnebruk (høgare minnebruk fører til struping)"
 
 #. i18n: ectx: label, entry (SplitViewVisibility), group (SplitView)
 #. i18n: ectx: label, entry (TabBarVisibility), group (TabBar)
@@ -2847,7 +2846,7 @@ msgstr "Bruk denne mappa for rulleminnefiler"
 #: settings/MemorySettings.ui:17
 #, kde-format
 msgid "Enable memory monitoring:"
-msgstr ""
+msgstr "Slå på minneovervaking:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2861,6 +2860,13 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"Endringane trer i kraft etter omstart. Viss det er kryssa av her, vil høgare "
+"minnebruk av Konsole\n"
+"over tid føra til at systemd-oomd fjernar fanen(e) som køyrer dei minne­"
+"intensive\n"
+"prosessane. Merk: Med denne funksjonen kan programmet verta tregt ved høg\n"
+"minnebruk, og om du vel ein veldig låg verdi, kan likevel heile Konsole "
+"verta tvangsavslutta."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -2872,7 +2878,7 @@ msgstr "Minnegrense:"
 #: settings/MemorySettings.ui:54
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -3515,17 +3521,18 @@ msgctxt "@action:inmenu"
 msgid "Toggle maximize current view"
 msgstr "Maksimer/avmaksimer gjeldande vising"
 
+# Forstørrer heile visinga (eks. små ruter når vindauget er delt både loddrett og vassrett). Visinga fyller ikkje berre heile vindauget (som ved maksimering); skrifta vert òg forstørra.
 #: ViewManager.cpp:304
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr ""
+msgstr "Forstørr/forminsk gjeldande vising"
 
 #: ViewManager.cpp:305
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr ""
+msgstr "Forstørr/forminsk gjeldande vising"
 
 #: ViewManager.cpp:313
 #, kde-format
@@ -3877,20 +3884,19 @@ msgstr "Bruk linjeteikna som finst i skrifta"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr "Bruk den valde skrifta for linjeteikn i staden for den innebygde koden"
+msgstr ""
+"Bruk den valde skrifta for blindeskrift-teikn i staden for den innebygde "
+"koden"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Bruk linjeteikna som finst i skrifta"
+msgstr "Bruk blindeskrift-teikna som finst i skrifta"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4055,7 +4061,7 @@ msgstr "Farge:"
 #: widgets/EditProfileAppearancePage.ui:559
 #, kde-format
 msgid "Select the color used to draw the border"
-msgstr ""
+msgstr "Vel fargen som skal brukast til å teikna opp kantlinja"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:581
@@ -4113,7 +4119,7 @@ msgstr "Midtstill:"
 #: widgets/EditProfileAppearancePage.ui:743
 #, kde-format
 msgid "Indicate whether the window is active by dimming the colors"
-msgstr "Marker om vindauget har mista fokus ved dempa fargane"
+msgstr "Marker om vindauget har mista fokus ved å dempa fargane"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dimWhenInactiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:746
@@ -4125,7 +4131,7 @@ msgstr "Formørk"
 #: widgets/EditProfileAppearancePage.ui:753
 #, kde-format
 msgid "Indicate whether the window is active by drawing a border"
-msgstr ""
+msgstr "Marker om vindauget har mista fokus ved å teikna ei kantlinje"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:756
@@ -4323,13 +4329,13 @@ msgstr "Det finst alt ein profil med namnet «%1»."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "Profilnamnet er for langt (makslengd %1)."
 
 #: widgets/EditProfileDialog.cpp:380
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Dei merkte teikna er ikkje gyldige i profilnamn: %1."
 
 #: widgets/EditProfileDialog.cpp:416
 #, kde-format
@@ -5298,14 +5304,13 @@ msgstr "Bruk omvend søkjeretning, frå botnen og opp."
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Ikkje start om att frå toppen"
 
 #: widgets/IncrementalSearchBar.cpp:142
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Bruk omvend søkjeretning, frå botnen og opp."
+msgstr "Vel om søket skal stoppa eller starta om att frå toppen"
 
 #: widgets/IncrementalSearchBar.cpp:171
 #, kde-format
