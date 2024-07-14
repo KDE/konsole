@@ -12,6 +12,7 @@
 #include <cstdio>
 
 // Qt
+#include <QAudioOutput>
 #include <QBuffer>
 #include <QEvent>
 #include <QKeyEvent>
@@ -1290,6 +1291,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         if (inlineMedia) {
             if (player == nullptr) {
                 player = new QMediaPlayer(this);
+                player->setAudioOutput(new QAudioOutput(player));
                 connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(deletePlayer(QMediaPlayer::MediaStatus)));
             }
             QBuffer *buffer = new QBuffer(player);
