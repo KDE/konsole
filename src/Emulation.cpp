@@ -305,7 +305,7 @@ void Emulation::setImageSize(int lines, int columns)
 
     if (newSize == screenSize[0] && newSize == screenSize[1]) {
         // If this method is called for the first time, always emit
-        // SIGNAL(imageSizeChange()), even if the new size is the same as the
+        // imageSizeChanged() signal, even if the new size is the same as the
         // current size.  See #176902
         if (!_imageSizeInitialized) {
             Q_EMIT imageSizeChanged(lines, columns);

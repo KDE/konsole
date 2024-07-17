@@ -1292,7 +1292,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             if (player == nullptr) {
                 player = new QMediaPlayer(this);
                 player->setAudioOutput(new QAudioOutput(player));
-                connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(deletePlayer(QMediaPlayer::MediaStatus)));
+                connect(player, &QMediaPlayer::mediaStatusChanged, this, &Vt102Emulation::deletePlayer);
             }
             QBuffer *buffer = new QBuffer(player);
             buffer->setData(tokenData);
