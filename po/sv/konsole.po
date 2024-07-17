@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-07 00:41+0000\n"
+"POT-Creation-Date: 2024-07-17 00:42+0000\n"
 "PO-Revision-Date: 2024-06-19 22:16+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -2091,7 +2091,7 @@ msgstr "Tystnad i '%1' (session '%2')"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1150
 #, kde-format
 msgid "Show session"
 msgstr "Visa session"
@@ -3630,7 +3630,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Läs in fliklayout"
 
-#: Vt102Emulation.cpp:2470
+#: Vt102Emulation.cpp:2472
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-07 00:41+0000\n"
+"POT-Creation-Date: 2024-07-17 00:42+0000\n"
 "PO-Revision-Date: 2024-04-29 10:23+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -2080,7 +2080,7 @@ msgstr "ჩაჩუმება '%1'-ში (სესია '%2')"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1150
 #, kde-format
 msgid "Show session"
 msgstr "სესიის ჩვენება"
@@ -3625,7 +3625,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "ჩანართების განლაგების ჩატვირთვა"
 
-#: Vt102Emulation.cpp:2470
+#: Vt102Emulation.cpp:2472
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

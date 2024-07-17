@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-07 00:41+0000\n"
+"POT-Creation-Date: 2024-07-17 00:42+0000\n"
 "PO-Revision-Date: 2024-01-19 07:50-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -2075,7 +2075,7 @@ msgstr "'%1' (ਸ਼ੈਸ਼ਨ '%2') ਵਿੱਚ ਖਾਮੋਸ਼ੀ"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1149
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1150
 #, kde-format
 msgid "Show session"
 msgstr "ਸ਼ੈਸ਼ਨ ਵੇਖਾਓ"
@@ -3609,7 +3609,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "ਟੈਬ ਖਾਕੇ ਨੂੰ ਲੋਡ ਕਰੋ"
 
-#: Vt102Emulation.cpp:2470
+#: Vt102Emulation.cpp:2472
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
