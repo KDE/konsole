@@ -185,6 +185,9 @@ private Q_SLOTS:
     void toggleHighlightScrolledLines(bool enable);
     void toggleReflowLines(bool enable);
 
+    void toggleScrollbarMarkerColor(QColor color);
+    void toggleScrollbarMarkerSize(double pSize);
+
     // keyboard page
     void editKeyBinding();
     void newKeyBinding();

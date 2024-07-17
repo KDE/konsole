@@ -29,6 +29,8 @@ class KONSOLEPRIVATE_EXPORT TerminalScrollBar : public QScrollBar
 public:
     explicit TerminalScrollBar(QWidget *parent);
 
+    ~TerminalScrollBar() override;
+
     /**
      * Specifies whether the terminal display has a vertical scroll bar, and if so whether it
      * is shown on the left or right side of the display.
@@ -58,6 +60,10 @@ public:
      * Enabled by default.
      */
     void setAlternateScrolling(bool enable);
+
+    void setMarkerColor(QColor color);
+
+    void setMarkerSize(double percentageSize);
 
     // applies changes to scrollbarLocation to the scroll bar and
     // if @propagate is true, propagates size information
@@ -93,13 +99,57 @@ public Q_SLOTS:
     void scrollBarPositionChanged(int value);
     void highlightScrolledLinesEvent();
 
+    // Reimplmentation to paint scrollbar markers over the standard drawing
+    void paintEvent(QPaintEvent *event) override;
+
+    // Reimplementation to derive scrollbar marker geometry again.
+    void resizeEvent(QResizeEvent *event) override;
+
+    // Reimplementation to check for input indicating marker addition or removal
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+
 private:
+    class Marker
+    {
+    public:
+        // as a percentage of the scrollbar's height
+        double position;
+
+        QRectF geometry;
+    };
+
+    /**
+     * Given a y-coordinate relative to the scrollbar,
+     * removes any markers encompassing that coordinatte and
+     * redraws the scrollbar and the remaining markers
+     */
+    void removeMarker(int position);
+
+    // Checks if any marker exists at a given y-coordiante on the scrollbar
+    bool markerExists(int position);
+
+    // Adds a marker to the existing list of markers and redraws the scrollbar and the markers
+    void registerMarker(Marker *marker);
+
+    // Creates an object representing  a scrollbar marker
+    Marker *createMarker(int position);
+
+    void regenerateMarkersGeometry();
+
+    void generateMarkerGeometry(double pPosition, Marker &marker);
+
+    double markerHeight() const;
+
     bool _scrollFullPage = false;
     bool _alternateScrolling = false;
     Enum::ScrollBarPositionEnum _scrollbarLocation = Enum::ScrollBarRight;
     HighlightScrolledLines _highlightScrolledLines;
     QPalette _backgroundMatchingPalette;
+    QColor _markerColor;
+    double _markerPSize;
+    QList<Marker *> _markers;
 };
+
 } // namespace Konsole
 
 #endif

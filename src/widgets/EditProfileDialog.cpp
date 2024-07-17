@@ -1740,6 +1740,14 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
     _scrollingUi->reflowLinesButton->setChecked(profile->property<bool>(Profile::ReflowLines));
     connect(_scrollingUi->reflowLinesButton, &QPushButton::clicked, this, &EditProfileDialog::toggleReflowLines);
 
+    // setup marker color button
+    _scrollingUi->markerColorButton->setColor(profile->property<QColor>(Profile::MarkerColor));
+    connect(_scrollingUi->markerColorButton, &KColorButton::changed, this, &Konsole::EditProfileDialog::toggleScrollbarMarkerColor);
+
+    // setup marker size widget
+    _scrollingUi->markerSizeWidget->setValue(profile->property<double>(Profile::MarkerSize));
+    connect(_scrollingUi->markerSizeWidget, &QDoubleSpinBox::valueChanged, this, &Konsole::EditProfileDialog::toggleScrollbarMarkerSize);
+
     // signals and slots
     connect(_scrollingUi->historySizeWidget, &Konsole::HistorySizeWidget::historySizeChanged, this, &Konsole::EditProfileDialog::historySizeChanged);
 }
@@ -1772,6 +1780,16 @@ void EditProfileDialog::toggleHighlightScrolledLines(bool enable)
 void EditProfileDialog::toggleReflowLines(bool enable)
 {
     updateTempProfileProperty(Profile::ReflowLines, enable);
+}
+
+void EditProfileDialog::toggleScrollbarMarkerColor(QColor color)
+{
+    updateTempProfileProperty(Profile::MarkerColor, color);
+}
+
+void EditProfileDialog::toggleScrollbarMarkerSize(double pSize)
+{
+    updateTempProfileProperty(Profile::MarkerSize, pSize);
 }
 
 void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)

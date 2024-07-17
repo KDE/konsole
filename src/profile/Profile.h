@@ -383,6 +383,12 @@ public:
         /** (QFont) Emoji font override
          */
         EmojiFont,
+        /** (QColor) Color for scrollbar markers */
+        MarkerColor,
+        /** (double) Size of a scrollbar marker
+         * as a percentage of scrollbar length
+         */
+        MarkerSize,
         /** When to show line numbers.
          * 0 for Never, 1 when showing URL hints, 2 for always
          */

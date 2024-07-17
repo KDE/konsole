@@ -124,6 +124,8 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {ScrollFullPage, "ScrollFullPage", SCROLLING_GROUP, false},
     {HighlightScrolledLines, "HighlightScrolledLines", SCROLLING_GROUP, true},
     {ReflowLines, "ReflowLines", SCROLLING_GROUP, true},
+    {MarkerColor, "MarkerColor", SCROLLING_GROUP, QColor(Qt::red)},
+    {MarkerSize, "MarkerSize", SCROLLING_GROUP, 2},
 
     // Terminal Features
     {UrlHintsModifiers, "UrlHintsModifiers", TERMINAL_GROUP, 0},

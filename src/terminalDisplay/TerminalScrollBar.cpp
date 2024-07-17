@@ -18,6 +18,7 @@
 
 // Qt
 #include <QGuiApplication>
+#include <QMouseEvent>
 #include <QProxyStyle>
 #include <QRect>
 
@@ -27,6 +28,13 @@ TerminalScrollBar::TerminalScrollBar(QWidget *parent)
     : QScrollBar(parent)
 {
     connect(this, &QScrollBar::valueChanged, this, &TerminalScrollBar::scrollBarPositionChanged);
+}
+
+TerminalScrollBar::~TerminalScrollBar()
+{
+    for (int i = 0; i < _markers.size(); i++) {
+        delete _markers[i];
+    }
 }
 
 void TerminalScrollBar::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
@@ -83,6 +91,20 @@ bool TerminalScrollBar::alternateScrolling() const
 void TerminalScrollBar::setAlternateScrolling(bool enable)
 {
     _alternateScrolling = enable;
+}
+
+void TerminalScrollBar::setMarkerColor(QColor color)
+{
+    _markerColor = color;
+    update();
+}
+
+void TerminalScrollBar::setMarkerSize(double pSize)
+{
+    _markerPSize = pSize;
+
+    regenerateMarkersGeometry();
+    update();
 }
 
 void TerminalScrollBar::scrollBarPositionChanged(int)
@@ -233,6 +255,130 @@ void TerminalScrollBar::updatePalette(const QPalette &pal)
     } else {
         setPalette(QGuiApplication::palette());
     }
+}
+
+void TerminalScrollBar::paintEvent(QPaintEvent *event)
+{
+    QScrollBar::paintEvent(event);
+
+    QPainter p(this);
+
+    for (int i = 0; i < _markers.size(); ++i) {
+        p.setOpacity(0.75);
+        p.fillRect(_markers[i]->geometry, _markerColor);
+    }
+}
+
+void TerminalScrollBar::resizeEvent(QResizeEvent *event)
+{
+    QScrollBar::resizeEvent(event);
+    regenerateMarkersGeometry();
+}
+
+void TerminalScrollBar::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    int position = event->position().y();
+
+    if (markerExists(position)) {
+        removeMarker(position);
+    } else {
+        registerMarker(createMarker(position));
+    }
+}
+
+void TerminalScrollBar::removeMarker(int clickedYCoord)
+{
+    for (int i = 0; i < _markers.size(); ++i) {
+        Marker *marker = _markers[i];
+        double markerTop = marker->geometry.top();
+        double markerHeight = marker->geometry.height();
+
+        if (markerTop > clickedYCoord) {
+            break;
+        }
+
+        if (markerTop <= clickedYCoord && (markerTop + markerHeight >= clickedYCoord)) {
+            _markers.remove(i);
+            delete marker;
+            break;
+        }
+    }
+
+    update();
+}
+
+bool TerminalScrollBar::markerExists(int clickedYCoord)
+{
+    for (Marker *marker : _markers) {
+        double markerTop = marker->geometry.top();
+        double markerHeight = marker->geometry.height();
+
+        if (markerTop >= clickedYCoord) {
+            break;
+        }
+
+        if (markerTop <= clickedYCoord && (markerTop + markerHeight >= clickedYCoord)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void TerminalScrollBar::registerMarker(TerminalScrollBar::Marker *marker)
+{
+    bool added = false;
+
+    for (int i = 0; i < _markers.size(); ++i) {
+        if (marker->position <= _markers[i]->position) {
+            _markers.insert(i, marker);
+            added = true;
+            break;
+        }
+    }
+
+    if (!added) {
+        _markers.append(marker);
+    }
+
+    update();
+}
+
+void TerminalScrollBar::regenerateMarkersGeometry()
+{
+    for (Marker *marker : _markers) {
+        generateMarkerGeometry(marker->position, *marker);
+    }
+}
+
+TerminalScrollBar::Marker *TerminalScrollBar::createMarker(int clickedYCoord)
+{
+    Marker *newMarker = new Marker();
+
+    generateMarkerGeometry((double)clickedYCoord / height() * 100, *newMarker);
+
+    return newMarker;
+}
+
+void TerminalScrollBar::generateMarkerGeometry(double pPosition, TerminalScrollBar::Marker &marker)
+{
+    marker.position = pPosition;
+    double proposedYMidPt = marker.position * height() / 100;
+    double markerSize = markerHeight();
+    double markerYTop = proposedYMidPt - markerSize / 2;
+
+    if (proposedYMidPt + markerSize / 2 > height()) {
+        markerYTop = height() - markerSize;
+    } else if (proposedYMidPt - markerSize / 2 < 0) {
+        markerYTop = 0;
+    }
+
+    marker.geometry.setRect(0, markerYTop, width(), markerSize);
+}
+
+double TerminalScrollBar::markerHeight() const
+{
+    return height() * _markerPSize / 100;
 }
 
 } // namespace Konsole

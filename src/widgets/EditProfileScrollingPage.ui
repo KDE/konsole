@@ -233,6 +233,40 @@
        </property>
       </widget>
      </item>
+	 <item row="11" column="0">
+	  <widget class="QLabel" name="labelMarkerColor">
+	   <property name="text">
+	    <string>Color of scrollbar markers:</string>
+	   </property>
+	  </widget>
+	 </item>
+	 <item row="11" column="1">
+	  <widget class="KColorButton" name="markerColorButton">
+	  </widget>
+	 </item>
+	 <item row="12" column="0">
+	  <widget class="QLabel" name="labelMarkerSize">
+	   <property name="text">
+	    <string>Size of each marker (as a percentage of scrollbar length):</string>
+	   </property>
+	  </widget>
+	 </item>
+	 <item row="12" column="1">
+	  <widget class="QDoubleSpinBox" name="markerSizeWidget">
+	   <property name="decimals">
+	    <number>1</number>
+	   </property>
+	   <property name="minimum">
+	    <number>0.1</number>
+	   </property>
+	   <property name="maximum">
+	    <number>100</number>
+	   </property>
+	   <property name="suffix">
+	    <string> %</string>
+	   </property>
+	  </widget>
+	 </item>
     </layout>
    </item>
    <item>

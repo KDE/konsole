@@ -17,6 +17,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
+#include <QColor>
 #include <QDesktopServices>
 #include <QDrag>
 #include <QElapsedTimer>
@@ -3168,6 +3169,8 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _displayVerticalLine = profile->verticalLine();
     _displayVerticalLineAtChar = profile->verticalLineAtChar();
     _scrollBar->setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
+    _scrollBar->setMarkerSize(profile->property<double>(Profile::MarkerSize));
+    _scrollBar->setMarkerColor(profile->property<QColor>(Profile::MarkerColor));
     _dimValue = profile->dimValue();
     _focusBorderColor = profile->focusBorderColor();
 
