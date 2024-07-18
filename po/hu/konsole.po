@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-17 00:42+0000\n"
+"POT-Creation-Date: 2024-07-18 00:41+0000\n"
 "PO-Revision-Date: 2024-05-20 15:13+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1884,7 +1884,7 @@ msgstr "Nyomtató&kímélő mód (fekete szöveg, üres háttérrel)"
 msgid "&Scale output"
 msgstr "Kimenet &méretezése"
 
-#: profile/Profile.cpp:264
+#: profile/Profile.cpp:266
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -3260,64 +3260,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Bélyegkép-generálás bekapcsolása"
 
-#: terminalDisplay/TerminalDisplay.cpp:662
+#: terminalDisplay/TerminalDisplay.cpp:663
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Méret: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2258
+#: terminalDisplay/TerminalDisplay.cpp:2259
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Biztosan be szeretne illeszteni %1 karaktert?"
 msgstr[1] "Biztosan be szeretne illeszteni %1 karaktert?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2260
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Beillesztés megerősítése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2292
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Megszakítás: kiléphet az aktuális folyamatból"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End of Transmission: kiléphet az aktuális folyamatból"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Csengő: megkísérel kiadni egy hallható figyelmeztetést"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: felfüggeszti a kimenetet"
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2298
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: felfüggeszheti az aktuális folyamatot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2299
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: a terminál állapotának manipulálására szolgál"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2300
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit: megszakíthatja az aktuális folyamatot"
 
-#: terminalDisplay/TerminalDisplay.cpp:2322
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3326,31 +3326,31 @@ msgstr ""
 "A beilleszteni kívánt szöveg rejtett vezérlőkaraktereket tartalmaz, szeretné "
 "kiszűrni azokat?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2325
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Beillesztés megerősítése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2327
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Beillesztés vezérlőkarakteren &nélkül"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2328
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Minden &beillesztése"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2329
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Mégsem"
 
-#: terminalDisplay/TerminalDisplay.cpp:2559
+#: terminalDisplay/TerminalDisplay.cpp:2560
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3361,17 +3361,17 @@ msgstr ""
 "\">fel lett függesztve</a> a Ctrl+S megnyomásával. A folytatáshoz nyomja meg "
 "a <b>Ctrl+Q</b>-t.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2614
+#: terminalDisplay/TerminalDisplay.cpp:2615
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ez a terminál csak."
 
-#: terminalDisplay/TerminalDisplay.cpp:3009
+#: terminalDisplay/TerminalDisplay.cpp:3010
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Mappa váltá&sa erre"
 
-#: terminalDisplay/TerminalDisplay.cpp:3042
+#: terminalDisplay/TerminalDisplay.cpp:3043
 #, kde-format
 msgid "&Paste Location"
 msgstr "Hely bei&llesztése"
@@ -4443,12 +4443,12 @@ msgstr ""
 "A Konsole az asztali effektusok bekapcsolása előtt lett indítva. Újra kell "
 "indítania a Konsole-t, hogy lássa az átlátszó hátteret."
 
-#: widgets/EditProfileDialog.cpp:1895
+#: widgets/EditProfileDialog.cpp:1913
 #, kde-format
 msgid "Default for file type"
 msgstr "Alapértelmezés fájltípushoz"
 
-#: widgets/EditProfileDialog.cpp:1921
+#: widgets/EditProfileDialog.cpp:1939
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4475,7 +4475,7 @@ msgstr ""
 "Ha a PATH vagy SOR nincs benne a parancsban, ez a beállítás mellőzve lesz,\n"
 "és a fájlt az alapértelmezett szövegszerkesztő nyitja meg."
 
-#: widgets/EditProfileDialog.cpp:1934
+#: widgets/EditProfileDialog.cpp:1952
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Szövegszerkesztő egyéni parancs"
@@ -5145,6 +5145,24 @@ msgstr "Sorok újrarendezése:"
 #, kde-format
 msgid "Reflow lines when terminal resizes"
 msgstr "Sorok újrarendezése a terminál átméretezésekor"
+
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
+#: widgets/EditProfileScrollingPage.ui:239
+#, kde-format
+msgid "Color of scrollbar markers:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
+#: widgets/EditProfileScrollingPage.ui:250
+#, kde-format
+msgid "Size of each marker (as a percentage of scrollbar length):"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
+#: widgets/EditProfileScrollingPage.ui:266
+#, no-c-format, kde-format
+msgid " %"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
