@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-18 00:41+0000\n"
-"PO-Revision-Date: 2024-04-27 09:16+0200\n"
+"PO-Revision-Date: 2024-07-18 06:38+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5129,19 +5129,19 @@ msgstr "Ponovni potek vrstic ob spremembi velikosti"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Barva oznak drsnika:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "Velikost vsakega markerja (kot odstotek dolžine drsnika):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

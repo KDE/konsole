@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-18 00:41+0000\n"
-"PO-Revision-Date: 2024-04-27 11:11+0200\n"
+"PO-Revision-Date: 2024-07-18 10:13+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -5185,19 +5185,21 @@ msgstr "Redistribució de les línies quan el terminal es redimensiona"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Color dels marcadors de les barres de desplaçament:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
 msgstr ""
+"Mida de cada marcador (tant per cent de la llargària de la barra de "
+"desplaçament):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-18 00:41+0000\n"
-"PO-Revision-Date: 2024-06-19 22:16+0200\n"
+"PO-Revision-Date: 2024-07-18 17:32+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -5130,19 +5130,19 @@ msgstr "Formatera om rader när terminalens storlek ändras"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Färg på rullningslistmarkörer:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "Varje markörs storlek (som procent av rullningslistens längd):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

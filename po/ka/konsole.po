@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-18 00:41+0000\n"
-"PO-Revision-Date: 2024-04-29 10:23+0200\n"
+"PO-Revision-Date: 2024-07-18 05:43+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -5128,19 +5128,19 @@ msgstr "ხაზების თავიდან დახატვა ტე
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "ჩოჩიას მარკერების ფერი:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "თითოეული მარკერის ზომა (ჩოჩიას სიგრძის პროცენტული ნაწილით):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
