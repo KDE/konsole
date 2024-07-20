@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 02:53+0000\n"
-"PO-Revision-Date: 2024-04-27 20:58+0200\n"
+"PO-Revision-Date: 2024-07-19 08:47+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -92,7 +92,7 @@ msgstr "Tresna-barra nagusia"
 #: ../desktop/partui.rc:14
 #, kde-format
 msgid "S&crollback"
-msgstr "&Historikoan atzera"
+msgstr "Atzerantz &kiribiltzea"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:78
@@ -769,7 +769,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
-msgstr "Doitu «Historikoan atzera»"
+msgstr "Doitu Atzerantz-kiribiltzea"
 
 #: HistorySizeDialog.cpp:46
 #, kde-format
@@ -2248,17 +2248,17 @@ msgstr "&Pantaila inprimatu..."
 #: session/SessionController.cpp:738
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "Doitu «Historikoan atzera»..."
+msgstr "Doitu Atzerantz kiribiltzea..."
 
 #: session/SessionController.cpp:742
 #, kde-format
 msgid "Clear Scrollback"
-msgstr "Garbitu «Historikoan atzera»"
+msgstr "Garbitu Atzerantz kiribiltzea"
 
 #: session/SessionController.cpp:746
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "Garbitu «Historikoan atzera» eta berrezarri"
+msgstr "Garbitu Atzerantz kiribiltzea eta berrezarri"
 
 #: session/SessionController.cpp:757
 #, kde-format
@@ -2842,7 +2842,7 @@ msgstr "Zabaldu fitxen zabalera"
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
-"«Historikoan atzera» fitxategientzat, erabili sistema-osoko karpeten "
+"Atzerantz kiribiltzeko fitxategientarako, erabili sistema-osorako karpeten "
 "kokalekua"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
@@ -2850,7 +2850,7 @@ msgstr ""
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
-"«Historikoan atzera» fitxategientzat, erabili erabiltzaileak zehaztutako "
+"Atzerantz kiribiltzeko fitxategietarako, erabili erabiltzaileak zehaztutako "
 "karpeta kokalekua"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
@@ -2858,13 +2858,14 @@ msgstr ""
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
-"«Historikoan atzera» fitxategientzat, erabili zehaztutako karpeta kokalekua"
+"Atzerantz kiribiltzeko fitxategietarako, erabili zehaztutako karpeta "
+"kokalekua"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
 #: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use this folder"
-msgstr "«Historikoan atzera» fitxategientzako, erabili karpeta hau"
+msgstr "Atzerantz kiribiltzeko fitxategietarako, erabili karpeta hau"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
@@ -3204,7 +3205,7 @@ msgstr "Erabiltzailearen cache direktorioa (%1)"
 #: settings/TemporaryFilesSettings.ui:25
 #, kde-format
 msgid "Scrollback file location:"
-msgstr "«Historikoan atzera» fitxategiaren kokalekua:"
+msgstr "Atzerantz kiribiltzeko fitxategiaren kokalekua:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
 #: settings/TemporaryFilesSettings.ui:64
@@ -4300,7 +4301,7 @@ msgstr "Itxura"
 #: widgets/EditProfileDialog.cpp:137
 #, kde-format
 msgid "Scrolling"
-msgstr "Labaintzea"
+msgstr "Kiribiltzea"
 
 #: widgets/EditProfileDialog.cpp:151
 #, kde-format
@@ -4962,14 +4963,14 @@ msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
 "Alternate Screen buffer (e.g. less)"
 msgstr ""
-"Saguaren gurpilak gora/behera gezi teklen sakatzea emulatuko du pantailako "
-"ordezko tarteko-memoria erabiltzen duten programetan (adib. less)"
+"Saguaren kiribiltzeko gurpilak gora/behera gezi teklen sakatzea emulatuko du "
+"pantailako ordezko tarteko-memoria erabiltzen duten programetan (adib. less)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:405
 #, kde-format
 msgid "Enable Alternate Screen buffer scrolling"
-msgstr "Gaitu pantailako ordezko tarteko-memoria"
+msgstr "Gaitu pantailako ordezko tarteko-memorian kiribiltzea"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:412
@@ -4991,13 +4992,15 @@ msgstr "Desgaitu arrastatu eta jaregin menua fitxategi eta URLentzako"
 #: widgets/EditProfileMousePage.ui:422
 #, kde-format
 msgid "Pressing Ctrl+scrollwheel will increase/decrease the text size."
-msgstr "«Ktrl+saguaren-gurpila»k testuaren neurria handiagotu/txikiagotuko du."
+msgstr ""
+"Sakatu «Ktrl+kiribiltzeko-gurpila» testuaren neurria handiagotu/txikiagotuko "
+"du."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableMouseWheelZoomButton)
 #: widgets/EditProfileMousePage.ui:425
 #, kde-format
 msgid "Allow Ctrl+scrollwheel to zoom text size"
-msgstr "Utzi «Ktrl+saguaren-gurpila»ri testu neurriaren zoom egiten"
+msgstr "Utzi «Ktrl+kiribiltzeko-gurpila»ri testu neurriaren zoom egiten"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:432
@@ -5036,19 +5039,19 @@ msgstr "Baimendu terminal aplikazioei klikak eta arrastatzea maneiatzea"
 #: widgets/EditProfileScrollingPage.ui:25
 #, kde-format
 msgid "Scrollback:"
-msgstr "Historikoan atzera:"
+msgstr "Atzerantz kiribiltzea:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:67
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr "Labaindu orria gora/behera:"
+msgstr "Kiribildu orria gora/behera:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:83
 #, kde-format
 msgid "Scroll the page the half height of window"
-msgstr "Labaindu orria leihoaren altueraren erdia"
+msgstr "Kiribildu orria leihoaren altueraren erdia"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
@@ -5060,7 +5063,7 @@ msgstr "Pantaila erdiaren altuera"
 #: widgets/EditProfileScrollingPage.ui:96
 #, kde-format
 msgid "Scroll the page the full height of window"
-msgstr "Labaindu orria leihoaren altuera osoa"
+msgstr "Kiribildu orria leihoaren altuera osoa"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
@@ -5072,13 +5075,13 @@ msgstr "Pantaila osoaren altuera"
 #: widgets/EditProfileScrollingPage.ui:131
 #, kde-format
 msgid "Scrollbar position:"
-msgstr "Labaintze-barraren kokapena:"
+msgstr "Kiribiltze-barraren kokapena:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:141
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
-msgstr "Erakutsi labaintze-barra terminalaren leihoaren eskuineko aldean"
+msgstr "Erakutsi kiribiltze-barra terminal-leihoaren eskuineko aldean"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
@@ -5091,7 +5094,7 @@ msgstr "Eskuineko aldean"
 #: widgets/EditProfileScrollingPage.ui:154
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
-msgstr "Erakutsi labaintze-barra terminalaren leihoaren ezkerreko aldean"
+msgstr "Erakutsi kiribiltze-barra terminala-leihoaren ezkerreko aldean"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
@@ -5105,7 +5108,7 @@ msgstr "Ezkerreko aldea"
 #, kde-format
 msgctxt "@option:radio Hide the scroll bar"
 msgid "Hidden"
-msgstr "Ezkutua"
+msgstr "Ezkutuan"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileScrollingPage.ui:199
@@ -5171,7 +5174,7 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"Aukera hau erabiltzean, historikoan-atzerako datuak RAMean gordeko dira. "
+"Aukera hau erabiltzean, Atzerantz kiribiltzeko datuak RAMean gordeko dira. "
 "Balio itzela hautatzen baduzu, zure sistema erabili gabeko RAM gabe gera "
 "liteke zure sistemari arazo larriak sortuz."
 
@@ -5185,7 +5188,7 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"Aukera hau erabiltzean, historikoan-atzerako datuak zifratu gabe idatziko "
+"Aukera hau erabiltzean, Atzerantz kiribiltzeko datuak zifratu gabe idatziko "
 "dira aldi baterako fitxategietan. Aldi baterako fitxategi horiek "
 "automatikoki ezabatuko dira Konsole era arruntean ixten denean.<nl/>Erabili "
 "<emphasis>Ezarpenak → Konfiguratu Konsole → Aldi baterako fitxategiak</"
