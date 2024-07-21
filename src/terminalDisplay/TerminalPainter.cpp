@@ -71,11 +71,11 @@ QColor alphaBlend(const QColor &foreground, const QColor &background)
     const auto inverseForegroundAlpha = 1.0 - foregroundAlpha;
     const auto backgroundAlpha = background.alphaF();
 
-    if (foregroundAlpha == 0.0) {
+    if (qFuzzyIsNull(foregroundAlpha)) {
         return background;
     }
 
-    if (backgroundAlpha == 1.0) {
+    if (qFuzzyCompare(1.0 + backgroundAlpha, 1.0 + 1.0)) {
         return QColor::fromRgb((foregroundAlpha * foreground.red()) + (inverseForegroundAlpha * background.red()),
                                (foregroundAlpha * foreground.green()) + (inverseForegroundAlpha * background.green()),
                                (foregroundAlpha * foreground.blue()) + (inverseForegroundAlpha * background.blue()),
@@ -83,7 +83,7 @@ QColor alphaBlend(const QColor &foreground, const QColor &background)
     } else {
         const auto inverseBackgroundAlpha = (backgroundAlpha * inverseForegroundAlpha);
         const auto finalAlpha = foregroundAlpha + inverseBackgroundAlpha;
-        Q_ASSERT(finalAlpha != 0.0);
+        Q_ASSERT(!qFuzzyIsNull(finalAlpha));
 
         return QColor::fromRgb((foregroundAlpha * foreground.red()) + (inverseBackgroundAlpha * background.red()),
                                (foregroundAlpha * foreground.green()) + (inverseBackgroundAlpha * background.green()),
