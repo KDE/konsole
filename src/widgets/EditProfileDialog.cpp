@@ -1987,6 +1987,9 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
         connect(_advancedUi->urlHintsModifierMeta, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
     }
 
+    _advancedUi->autoSaveIntervalWidget->setValue(profile->property<int>(Profile::AutoSaveInterval));
+    connect(_advancedUi->autoSaveIntervalWidget, &QSpinBox::valueChanged, this, &EditProfileDialog::setAutoSaveInterval);
+
     // encoding options
     auto codecAction = new KCodecAction(this);
     codecAction->setCurrentCodec(profile->defaultEncoding());
@@ -2180,6 +2183,11 @@ void EditProfileDialog::toggleBlinkingText(bool enable)
 void EditProfileDialog::toggleFlowControl(bool enable)
 {
     updateTempProfileProperty(Profile::FlowControlEnabled, enable);
+}
+
+void EditProfileDialog::setAutoSaveInterval(int newVal)
+{
+    updateTempProfileProperty(Profile::AutoSaveInterval, newVal);
 }
 
 void EditProfileDialog::peekPrimaryKeySequenceChanged()

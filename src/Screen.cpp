@@ -62,6 +62,7 @@ Screen::Screen(int lines, int columns)
     , _scrolledLines(0)
     , _lastScrolledRegion(QRect())
     , _droppedLines(0)
+    , _fastDroppedLines(0)
     , _oldTotalLines(0)
     , _isResize(false)
     , _enableReflowLines(false)
@@ -1338,9 +1339,14 @@ int Screen::droppedLines() const
 {
     return _droppedLines;
 }
+int Screen::fastDroppedLines() const
+{
+    return _fastDroppedLines;
+}
 void Screen::resetDroppedLines()
 {
     _droppedLines = 0;
+    _fastDroppedLines = 0;
 }
 void Screen::resetScrolledLines()
 {
@@ -2090,6 +2096,78 @@ Character *Screen::getCharacterBuffer(const int size)
     return characterBuffer.data();
 }
 
+QList<int> Screen::getCharacterCounts() const
+{
+    QList<int> counts;
+    int totalLines = _history->getLines() + getLines();
+
+    for (int line = 0; line < totalLines; ++line) {
+        int count = getLineLength(line);
+        bool lineIsWrapped = false;
+        Character *characterBuffer = getCharacterBuffer(count - 1);
+
+        Q_ASSERT(count >= 0);
+
+        if (line < _history->getLines()) {
+            // safety checks
+            Q_ASSERT(count <= _history->getLineLen(line));
+
+            _history->getCells(line, 0, count, characterBuffer);
+
+            // Exclude trailing empty cells from count and don't bother processing them further.
+            // See the comment on the similar case for screen lines for an explanation.
+            while (count > 0 && (characterBuffer[count - 1].flags & EF_REAL) == 0) {
+                count--;
+            }
+
+            if (_history->isWrappedLine(line)) {
+                lineIsWrapped = true;
+            }
+        } else {
+            int screenLine = line - _history->getLines();
+
+            Q_ASSERT(screenLine <= _screenLinesSize);
+
+            screenLine = qMin(screenLine, _screenLinesSize);
+
+            auto *data = _screenLines[screenLine].data();
+            int length = _screenLines.at(screenLine).count();
+
+            // Exclude trailing empty cells from count and don't bother processing them further.
+            // This is necessary because a newline gets added to the last line when
+            // the selection extends beyond the last character (last non-whitespace
+            // character when TrimTrailingWhitespace is true), so the returned
+            // count from this function must not include empty cells beyond that
+            // last character.
+            while (length > 0 && (data[length - 1].flags & EF_REAL) == 0) {
+                length--;
+            }
+
+            if (_lineProperties.at(screenLine).flags.f.wrapped == 1) {
+                lineIsWrapped = true;
+            }
+
+            // count cannot be any greater than length
+            count = qBound(0, length, count);
+        }
+
+        // If the last character is wide, account for it
+        if (Character::width(characterBuffer[count - 1].character, _ignoreWcWidth) == 2)
+            count++;
+
+        // When users ask not to preserve the linebreaks, they usually mean:
+        // `treat LINEBREAK as SPACE, thus joining multiple _lines into
+        // single line in the same way as 'J' does in VIM.`
+        if (_blockSelectionMode || !lineIsWrapped) {
+            ++count;
+        }
+
+        counts.append(count);
+    }
+
+    return counts;
+}
+
 int Screen::copyLineToStream(int line,
                              int start,
                              int count,
@@ -2261,8 +2339,12 @@ void Screen::fastAddHistLine()
 
     // If _history size > max history size it will drop a line from _history.
     // We need to verify if we need to remove a URL.
-    if (removeLine && _escapeSequenceUrlExtractor) {
-        _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+    if (removeLine) {
+        if (_escapeSequenceUrlExtractor) {
+            _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+        }
+
+        _fastDroppedLines++;
     }
     // Rotate left + clear the last line
     std::rotate(_screenLines.begin(), _screenLines.begin() + 1, _screenLines.end());

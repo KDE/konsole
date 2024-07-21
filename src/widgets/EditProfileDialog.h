@@ -220,6 +220,7 @@ private Q_SLOTS:
     void toggleFlowControl(bool);
     void updateUrlHintsModifier(bool);
     void toggleReverseUrlHints(bool);
+    void setAutoSaveInterval(int);
 
     void setDefaultCodec(QTextCodec *);
 

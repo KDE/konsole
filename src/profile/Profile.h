@@ -423,6 +423,9 @@ public:
          * soft hyphen (\u00ad) has wcwidth=1, but should not be displayed per Unicode.
          */
         IgnoreWcWidth,
+        /** (int) Milliseconds interval between autosave activations
+         */
+        AutoSaveInterval,
     };
 
     Q_ENUM(Property)

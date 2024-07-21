@@ -53,6 +53,7 @@ class TerminalDisplay;
 class UrlFilter;
 class ColorFilter;
 class HotSpot;
+class SaveHistoryAutoTask;
 
 /**
  * Provides the menu actions to manipulate a single terminal session and view pair.
@@ -277,6 +278,8 @@ private Q_SLOTS:
     void findPreviousInHistory();
     void updateMenuIconsAccordingToReverseSearchSetting();
     void changeSearchMatch();
+    void autoSaveHistory();
+    void stopAutoSaveHistory();
     void saveHistory();
     void showHistoryOptions();
     void clearHistory();
@@ -415,6 +418,10 @@ private:
     std::unique_ptr<KXMLGUIBuilder> _clientBuilder;
 
     QSharedPointer<HotSpot> _currentHotSpot;
+
+    QAction *_startAutoSaveAction;
+    QAction *_stopAutoSaveAction;
+    QPointer<SaveHistoryAutoTask> _autoSaveTask;
 };
 
 }

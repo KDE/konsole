@@ -634,6 +634,8 @@ public:
      */
     int droppedLines() const;
 
+    int fastDroppedLines() const;
+
     /**
      * Resets the count of the number of lines dropped from
      * the history.
@@ -704,6 +706,8 @@ public:
         return _hasGraphics;
     }
     void setIgnoreWcWidth(bool ignore);
+
+    QList<int> getCharacterCounts() const;
 
 private:
     // copies a line of text from the screen or history into a stream using a
@@ -804,6 +808,7 @@ private:
     QRect _lastScrolledRegion;
 
     int _droppedLines;
+    int _fastDroppedLines;
 
     int _oldTotalLines;
     bool _isResize;

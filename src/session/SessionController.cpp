@@ -55,6 +55,7 @@
 #include "Emulation.h"
 #include "HistorySizeDialog.h"
 #include "RenameTabDialog.h"
+#include "SaveHistoryAutoTask.h"
 #include "SaveHistoryTask.h"
 #include "ScreenWindow.h"
 #include "SearchHistoryTask.h"
@@ -329,6 +330,10 @@ void SessionController::snapshot()
     // use the fallback title if needed
     if (title.isEmpty()) {
         title = session()->title(Session::NameRole);
+    }
+
+    if (!_autoSaveTask.isNull()) {
+        title.append(QStringLiteral(" (autosaving)"));
     }
 
     QColor color = session()->color();
@@ -729,6 +734,14 @@ void SessionController::setupCommonActions()
 #ifdef Q_OS_MACOS
     action->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_S));
 #endif
+
+    _startAutoSaveAction = collection->addAction(QStringLiteral("file-autosave"), this, &SessionController::autoSaveHistory);
+    _startAutoSaveAction->setText(i18n("Auto Save Output As..."));
+    _startAutoSaveAction->setVisible(true);
+
+    _stopAutoSaveAction = collection->addAction(QStringLiteral("stop-autosave"), this, &SessionController::stopAutoSaveHistory);
+    _stopAutoSaveAction->setText(i18n("Stop Auto Save"));
+    _stopAutoSaveAction->setVisible(false);
 
     action = KStandardAction::print(this, &SessionController::requestPrint, collection);
     action->setText(i18n("&Print Screen..."));
@@ -1791,6 +1804,29 @@ void SessionController::scrollBackOptionsChanged(int mode, int lines)
         session()->setHistoryType(HistoryTypeFile());
         break;
     }
+}
+
+void SessionController::autoSaveHistory()
+{
+    _autoSaveTask = new SaveHistoryAutoTask(this);
+    _autoSaveTask->setAutoDelete(true);
+    _autoSaveTask->addSession(session());
+    _autoSaveTask->execute();
+
+    // Only show the button to start autosave when autosave is not ongoing.
+    // Only show the button to stop autosave when auytosave is ongoing.
+    connect(_autoSaveTask, &SaveHistoryAutoTask::completed, this, [&]() {
+        _startAutoSaveAction->setVisible(true);
+        _stopAutoSaveAction->setVisible(false);
+    });
+
+    _startAutoSaveAction->setVisible(false);
+    _stopAutoSaveAction->setVisible(true);
+}
+
+void SessionController::stopAutoSaveHistory()
+{
+    _autoSaveTask->stop();
 }
 
 void SessionController::saveHistory()

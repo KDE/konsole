@@ -105,6 +105,8 @@ void Vt102Emulation::clearHistory()
 
 void Vt102Emulation::reset(bool softReset, bool preservePrompt)
 {
+    Q_EMIT updateDroppedLines(_currentScreen->getLines());
+
     // Save the current codec so we can set it later.
     // Ideally we would want to use the profile setting
     const QTextCodec *currentCodec = codec();

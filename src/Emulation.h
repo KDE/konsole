@@ -194,6 +194,8 @@ public:
 
     bool programBracketedPasteMode() const;
 
+    QList<int> getCurrentScreenCharacterCounts() const;
+
 public Q_SLOTS:
 
     /** Change the size of the emulation's image */
@@ -406,6 +408,13 @@ Q_SIGNALS:
     void resetCursorStyleRequest();
 
     void toggleUrlExtractionRequest();
+
+    /**
+     * Mainly used to communicate dropped lines to active autosave tasks.
+     * Takes into account lines dropped by Screen::addHistLine and Screen::fastAddHistLine.
+     * Also includes lines dropped by clearing scrollback and resetting the screen.
+     */
+    void updateDroppedLines(int droppedLines);
 
 protected:
     virtual void setMode(int mode) = 0;

@@ -5,6 +5,8 @@
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
+			<Action name="file-autosave" group="session-operations"/>
+			<Action name="stop-autosave" group="session-operations"/>
             <Separator group="session-operations"/>
             <Action name="file_print" group="session-operations"/>
             <Separator group="session-operations"/>

@@ -129,6 +129,10 @@ void Emulation::setScreenInternal(int index)
 
 void Emulation::clearHistory()
 {
+    if (_currentScreen == _screen[0]) {
+        Q_EMIT updateDroppedLines(_screen[0]->getHistLines());
+    }
+
     _screen[0]->setScroll(_screen[0]->getScroll(), false);
 }
 
@@ -269,6 +273,7 @@ void Emulation::showBulk()
     _bulkTimer1.stop();
     _bulkTimer2.stop();
 
+    Q_EMIT updateDroppedLines(_currentScreen->fastDroppedLines() + _currentScreen->droppedLines());
     Q_EMIT outputChanged();
 
     _currentScreen->resetScrolledLines();
@@ -329,6 +334,11 @@ void Emulation::setImageSize(int lines, int columns)
 QSize Emulation::imageSize() const
 {
     return {_currentScreen->getColumns(), _currentScreen->getLines()};
+}
+
+QList<int> Emulation::getCurrentScreenCharacterCounts() const
+{
+    return _currentScreen->getCharacterCounts();
 }
 
 #include "moc_Emulation.cpp"
