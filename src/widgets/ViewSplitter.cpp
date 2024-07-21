@@ -403,7 +403,7 @@ void ViewSplitter::handleMinimizeMaximize(bool maximize, bool zoom)
         // toggleMaximizeCurrentTerminal or toggleZoomMaximizeCurrentTerminal.
         // Only the method which was used to maximize, determines if the font size needs
         // to be restored.
-        if (fontSizeBeforeMaximization) {
+        if (!qFuzzyIsNull(fontSizeBeforeMaximization)) {
             currentTerminalFont.setPointSizeF(fontSizeBeforeMaximization);
             currentTerminalDisplay->terminalFont()->setVTFont(currentTerminalFont);
         }
