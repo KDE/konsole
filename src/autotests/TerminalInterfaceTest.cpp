@@ -114,8 +114,8 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     // terminalProcessId() is the user's default shell
     // FIXME: find a way to verify this
-    int terminalProcessId = terminal->terminalProcessId();
 #if defined(Q_OS_LINUX)
+    int terminalProcessId = terminal->terminalProcessId();
     const int uid = getuid();
     QFile passwdFile(QStringLiteral("/etc/passwd"));
     QString defaultExePath;
