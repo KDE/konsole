@@ -99,7 +99,7 @@ public Q_SLOTS:
     void scrollBarPositionChanged(int value);
     void highlightScrolledLinesEvent();
 
-    // Reimplmentation to paint scrollbar markers over the standard drawing
+    // Reimplementation to paint scrollbar markers over the standard drawing
     void paintEvent(QPaintEvent *event) override;
 
     // Reimplementation to derive scrollbar marker geometry again.

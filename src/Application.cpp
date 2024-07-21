@@ -543,7 +543,8 @@ void Application::slotActivateRequested(QStringList args, const QString & /*work
 
     m_customCommand = getCustomCommand(args);
 
-    // We can't re-use QCommandLineParser instances, it preserves earlier parsed values
+    // We can't reuse QCommandLineParser instances, it preserves earlier
+    // parsed values
     auto parser = new QCommandLineParser;
     populateCommandLineParser(parser);
     parser->parse(args);

@@ -28,7 +28,7 @@ class ViewManager;
 class ViewProperties;
 
 /**
- * A re-usable terminal emulator component using the KParts framework which can
+ * A reusable terminal emulator component using the KParts framework which can
  * be used to embed terminal emulators into other applications.
  */
 class Part : public KParts::ReadOnlyPart, public TerminalInterface

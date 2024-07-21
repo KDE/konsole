@@ -1514,7 +1514,7 @@ bool ViewManager::createSplitWithExisting(int targetSplitterId, QStringList widg
         forbiddenSplitters.append(splitter->id());
     }
 
-    // to make positioning clearer by avoiding situtations where
+    // to make positioning clearer by avoiding situations where
     // e.g. splitter to be created is at index x of targetSplitter
     // and some direct children of targetSplitter are used as
     // children of created splitter, causing the final position

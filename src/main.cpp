@@ -51,7 +51,7 @@ using Konsole::Application;
 void fillAboutData(KAboutData &aboutData);
 
 // check and report whether this konsole instance should use a new konsole
-// process, or re-use an existing konsole process.
+// process, or reuse an existing konsole process.
 bool shouldUseNewProcess(int argc, char *argv[]);
 
 // restore sessions saved by KDE.
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 #endif
 
 #if HAVE_DBUS
-    // Check if any of the arguments makes it impossible to re-use an existing process.
+    // Check if any of the arguments makes it impossible to reuse an existing process.
     // We need to do this manually and before creating a QApplication, because
     // QApplication takes/removes the Qt specific arguments that are incompatible.
     const bool needNewProcess = shouldUseNewProcess(argc, argv);

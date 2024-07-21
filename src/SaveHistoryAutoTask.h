@@ -90,7 +90,7 @@ private:
      */
     QFileSystemWatcher _watcher;
 
-    // Number of bytes used to accomodate dropped content in the autosave file.
+    // Number of bytes used to accommodate dropped content in the autosave file.
     qint64 _droppedBytes;
 
     /**

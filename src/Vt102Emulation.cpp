@@ -2415,7 +2415,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
             }
             emulateUpDown(up ? 1 : -1, entry, textToSend, _targetCol);
         } else {
-            _targetCol = -1; // Any non Up/Down key clears the taget column for emulated movement.
+            _targetCol = -1; // Any non Up/Down key clears the target column for emulated movement.
 
             // special handling for the Alt (aka. Meta) modifier.  pressing
             // Alt+[Character] results in Esc+[Character] being sent
