@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-18 00:41+0000\n"
-"PO-Revision-Date: 2024-07-10 21:03+0200\n"
+"POT-Creation-Date: 2024-07-22 00:42+0000\n"
+"PO-Revision-Date: 2024-07-21 11:46+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -55,7 +55,7 @@ msgstr "Vis"
 
 #. i18n: ectx: Menu (view-split)
 #: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
-#: ../desktop/sessionui.rc:62
+#: ../desktop/sessionui.rc:64
 #, kde-format
 msgid "Split View"
 msgstr "Delt vising"
@@ -91,7 +91,7 @@ msgid "S&crollback"
 msgstr "&Rulleminne"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:78
+#: ../desktop/sessionui.rc:80
 #, kde-format
 msgid "Session Toolbar"
 msgstr "Øktverktøylinje"
@@ -1880,7 +1880,7 @@ msgstr "Skrivar&vennleg modus (svart tekst, ingen bakgrunn)"
 msgid "&Scale output"
 msgstr "&Skaler utdata"
 
-#: profile/Profile.cpp:266
+#: profile/Profile.cpp:267
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -1945,15 +1945,36 @@ msgstr "Dobbeltklikk for å endra snarveg"
 msgid "Tab Properties"
 msgstr "Faneeigenskapar"
 
-#: SaveHistoryTask.cpp:71
+#: SaveHistoryAutoTask.cpp:63 SaveHistoryTask.cpp:71
 #, kde-format
 msgid "Save Output From %1"
 msgstr "Lagra utdata frå %1"
 
-#: SaveHistoryTask.cpp:83
+#: SaveHistoryAutoTask.cpp:75 SaveHistoryTask.cpp:83
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 er ei ugyldig nettadresse, så klarte ikkje lagra utdata."
+
+#: SaveHistoryAutoTask.cpp:88
+#, kde-format
+msgid "Failed to create autosave file at %1."
+msgstr ""
+
+#: SaveHistoryAutoTask.cpp:102
+#, kde-format
+msgid "Stopping autosave due to switching of screens."
+msgstr ""
+
+#: SaveHistoryAutoTask.cpp:115
+#, kde-format
+msgid ""
+"Autosave file has been modified externally, preventing further autosaves."
+msgstr ""
+
+#: SaveHistoryAutoTask.cpp:172
+#, kde-format
+msgid "Failed to update autosave state on output changes."
+msgstr ""
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2085,8 +2106,8 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Stilt i «%1» (økt «%2»)"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
-#: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1150
+#: session/SessionController.cpp:359 session/SessionController.cpp:1882
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
 #, kde-format
 msgid "Show session"
 msgstr "Vis økt"
@@ -2130,281 +2151,292 @@ msgstr "ZModem-framdrift"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitet i «%1» (økt «%2»)"
 
-#: session/SessionController.cpp:139
+#: session/SessionController.cpp:140
 #, kde-format
 msgid "Konsole"
 msgstr "Konsoll"
 
-#: session/SessionController.cpp:353
+#: session/SessionController.cpp:358
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Prosessen «%1» er ferdig i økta «%2»"
 
-#: session/SessionController.cpp:436
+#: session/SessionController.cpp:441
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole veit ikkje korleis bokmerket skal opnast: "
 
-#: session/SessionController.cpp:515
+#: session/SessionController.cpp:520
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Søk etter «%1» med"
 
-#: session/SessionController.cpp:531
+#: session/SessionController.cpp:536
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Set opp vevsnarvegar …"
 
-#: session/SessionController.cpp:641
+#: session/SessionController.cpp:646
 #, kde-format
 msgid "&Close Session"
 msgstr "&Lukk økt"
 
-#: session/SessionController.cpp:648
+#: session/SessionController.cpp:653
 #, kde-format
 msgid "Open File Manager"
 msgstr "Opna filhandsamaren"
 
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:665
 #, kde-format
 msgid "Copy"
 msgstr "Kopier"
 
-#: session/SessionController.cpp:667
+#: session/SessionController.cpp:672
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Del visinga venstre/høgre"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:677
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Del visinga oppe/nede"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:681
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Kopier utanom innkommando"
 
-#: session/SessionController.cpp:682
+#: session/SessionController.cpp:687
 #, kde-format
 msgid "Copy user input"
 msgstr "Kopier inndata"
 
-#: session/SessionController.cpp:688
+#: session/SessionController.cpp:693
 #, kde-format
 msgid "Copy command output"
 msgstr "Kopier kommandoresultat"
 
-#: session/SessionController.cpp:703
+#: session/SessionController.cpp:708
 #, kde-format
 msgid "Paste Selection"
 msgstr "Lim inn utval"
 
-#: session/SessionController.cpp:710
+#: session/SessionController.cpp:715
 #, kde-format
 msgid "Web Search"
 msgstr "Nettsøk"
 
-#: session/SessionController.cpp:716
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "&Select All"
 msgstr "&Merk alt"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:725
 #, kde-format
 msgid "Select &Mode"
 msgstr "&Merkjemodus"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:730
 #, kde-format
 msgid "Select &Line"
 msgstr "Vel &linje"
 
-#: session/SessionController.cpp:728
+#: session/SessionController.cpp:733
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Lagra utdata &som …"
 
-#: session/SessionController.cpp:734
+#: session/SessionController.cpp:739
+#, fuzzy, kde-format
+#| msgid "Save Output &As..."
+msgid "Auto Save Output As..."
+msgstr "Lagra utdata &som …"
+
+#: session/SessionController.cpp:743
+#, kde-format
+msgid "Stop Auto Save"
+msgstr ""
+
+#: session/SessionController.cpp:747
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Skriv ut skjermen …"
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:751
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Juster rulleminne …"
 
-#: session/SessionController.cpp:742
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Tøm rulleminne"
 
-#: session/SessionController.cpp:746
+#: session/SessionController.cpp:759
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Tøm rulleminne og skjerm"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:770
 #, kde-format
 msgid "Next Profile"
 msgstr "Neste profil"
 
-#: session/SessionController.cpp:762
+#: session/SessionController.cpp:775
 #, kde-format
 msgid "Previous Profile"
 msgstr "Førre profil"
 
-#: session/SessionController.cpp:765
+#: session/SessionController.cpp:778
 #, kde-format
 msgid "Switch Profile"
 msgstr "Byt profil"
 
-#: session/SessionController.cpp:790
+#: session/SessionController.cpp:803
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Vel &teiknkoding"
 
-#: session/SessionController.cpp:812
+#: session/SessionController.cpp:825
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Tillat sporing av musa"
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:834
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Skriveverna"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:845
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Tilpass eller endra namn på fane …"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:851
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Alle fanene i det gjeldande vindauget"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Vel faner …"
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:864
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Ingen"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopier inndata til"
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:880
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem-opplasting …"
 
-#: session/SessionController.cpp:872
+#: session/SessionController.cpp:885
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Éingangsovervaking"
 
 # Gjev varsling når kommandolinja vert tilgjengeleg for inntasting att. Menyvalet vert vist på «Vis»-menyen.
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Overvak for ledig &kommandolinje"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Overvak for &aktivitet"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Overvak for &stille"
 
-#: session/SessionController.cpp:896
+#: session/SessionController.cpp:909
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Overvak for &prosessfullføring"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Større skrift"
 
-#: session/SessionController.cpp:911
+#: session/SessionController.cpp:924
 #, kde-format
 msgid "Shrink Font"
 msgstr "Mindre skrift"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:929
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Tilbakestill skriftstorleik"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "Send Signal"
 msgstr "Send signal"
 
-#: session/SessionController.cpp:926
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Set oppgåve i pause"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Hald fram oppgåve"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:949
 #, kde-format
 msgid "&Hangup"
 msgstr "&Legg på"
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:954
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Avbryt oppgåve"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:959
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Avslutt oppgåve"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Drep oppgåve"
 
-#: session/SessionController.cpp:956
+#: session/SessionController.cpp:969
 #, kde-format
 msgid "User Signal &1"
 msgstr "Brukarsignal &1"
 
-#: session/SessionController.cpp:961
+#: session/SessionController.cpp:974
 #, kde-format
 msgid "User Signal &2"
 msgstr "Brukarsignal &2"
 
-#: session/SessionController.cpp:979
+#: session/SessionController.cpp:992
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Lag ny profil …"
 
-#: session/SessionController.cpp:981
+#: session/SessionController.cpp:994
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Endra gjeldande profil …"
 
-#: session/SessionController.cpp:1112
+#: session/SessionController.cpp:1125
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2412,7 +2444,7 @@ msgid ""
 msgstr ""
 "Det køyrer eit program i denne økta. Er du sikker på at du vil lukka ho?"
 
-#: session/SessionController.cpp:1116
+#: session/SessionController.cpp:1129
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2420,18 +2452,18 @@ msgid ""
 msgstr ""
 "Programmet «%1» køyrer i denne økta. Er du sikker på at du vil lukka ho?"
 
-#: session/SessionController.cpp:1123 session/SessionController.cpp:1158
+#: session/SessionController.cpp:1136 session/SessionController.cpp:1171
 #, kde-format
 msgid "Confirm Close"
 msgstr "Stadfest lukking"
 
-#: session/SessionController.cpp:1124
+#: session/SessionController.cpp:1137
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Lukk programmet"
 
-#: session/SessionController.cpp:1147
+#: session/SessionController.cpp:1160
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2440,7 +2472,7 @@ msgstr ""
 "Eit program i denne økta ville ikkje døy. Er du sikker på at du vil drepa "
 "det med makt?"
 
-#: session/SessionController.cpp:1151
+#: session/SessionController.cpp:1164
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2449,29 +2481,29 @@ msgstr ""
 "Programmet «%1» i denne økta ville ikkje døy. Er du sikker på at du vil "
 "drepa det med makt?"
 
-#: session/SessionController.cpp:1159
+#: session/SessionController.cpp:1172
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Tvangsavslutt programmet"
 
 # Jf. «Monitor for &Prompt»-teksten.
-#: session/SessionController.cpp:1845
+#: session/SessionController.cpp:1881
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Ledig kommandolinje vert vist i økta «%1»"
 
-#: session/SessionController.cpp:2038
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Opna gjeldande mappe med"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2144
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Lagra ZModem-nedlasting til …"
 
-#: session/SessionController.cpp:2118
+#: session/SessionController.cpp:2154
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2482,13 +2514,13 @@ msgstr ""
 "passande ZModem-programvare på systemet.</p><p>Du kan prøva å installera "
 "pakkane «rzsz» eller «lrzsz».</p>"
 
-#: session/SessionController.cpp:2128
+#: session/SessionController.cpp:2164
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Økta har alt ei ZModem-filoverføring på gang.</p>"
 
-#: session/SessionController.cpp:2141
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2497,7 +2529,7 @@ msgstr ""
 "<p>Fann ikkje noka passande ZModem-programvare på systemet.</p><p>Du kan "
 "prøva å installera pakkane «rzsz» eller «lrzsz».</p>"
 
-#: session/SessionController.cpp:2146
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Vel filer til ZModem-opplasting"
@@ -3625,7 +3657,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Opna faneutforming"
 
-#: Vt102Emulation.cpp:2472
+#: Vt102Emulation.cpp:2474
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3725,28 +3757,40 @@ msgstr "&Standard teiknkoding:"
 msgid "Shortcut for peeking the primary screen:"
 msgstr "Snøggtast for snikkikk på hovudskjermen:"
 
+#. i18n: ectx: property (text), widget (QLabel, autoSaveIntervalLabel)
+#: widgets/EditProfileAdvancedPage.ui:255
+#, kde-format
+msgid "Set interval between autosaves:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
+#: widgets/EditProfileAdvancedPage.ui:268
+#, kde-format
+msgid " ms"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:263
+#: widgets/EditProfileAdvancedPage.ui:283
 #, kde-format
 msgid "Line Numbers:"
 msgstr "Linjenummer:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:273
+#: widgets/EditProfileAdvancedPage.ui:293
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "&Aldri"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:283
+#: widgets/EditProfileAdvancedPage.ui:303
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
 msgstr "Når &URL-hint vert viste"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:293
+#: widgets/EditProfileAdvancedPage.ui:313
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"
@@ -5128,19 +5172,19 @@ msgstr "Bryt linjer på nytt ved endring av terminalstorleik"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Farge på rullefeltmerke:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "Storleik på rullefeltmerke (i prosent av høgda til rullefeltet):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

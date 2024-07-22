@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-18 00:41+0000\n"
+"POT-Creation-Date: 2024-07-22 00:42+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -56,7 +56,7 @@ msgstr "Vyhliad"
 
 #. i18n: ectx: Menu (view-split)
 #: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
-#: ../desktop/sessionui.rc:62
+#: ../desktop/sessionui.rc:64
 #, kde-format
 msgid "Split View"
 msgstr "Padzialić"
@@ -92,7 +92,7 @@ msgid "S&crollback"
 msgstr "&Žurnal vyvadu"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
-#: ../desktop/sessionui.rc:78
+#: ../desktop/sessionui.rc:80
 #, kde-format
 msgid "Session Toolbar"
 msgstr "Paneĺ instrumientaŭ sieansa"
@@ -1908,7 +1908,7 @@ msgstr "Režym &druku (čorny tekst, biez fonu)"
 msgid "&Scale output"
 msgstr "&Vyvad maštabu"
 
-#: profile/Profile.cpp:266
+#: profile/Profile.cpp:267
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
@@ -1978,15 +1978,37 @@ msgstr "Dvojčy pstryknicie, kab zmianić spalučennie klaviš"
 msgid "Tab Properties"
 msgstr "Ulascivasci ŭkladki"
 
-#: SaveHistoryTask.cpp:71
+#: SaveHistoryAutoTask.cpp:63 SaveHistoryTask.cpp:71
 #, kde-format
 msgid "Save Output From %1"
 msgstr "Zachavać vyvad z %1"
 
-#: SaveHistoryTask.cpp:83
+#: SaveHistoryAutoTask.cpp:75 SaveHistoryTask.cpp:83
 #, kde-format
 msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 - chibny URL-adras, niemahčyma zachavać vyvad."
+
+#: SaveHistoryAutoTask.cpp:88
+#, fuzzy, kde-format
+#| msgid "Unable to write to file."
+msgid "Failed to create autosave file at %1."
+msgstr "Niemahčyma zapisać u fajl."
+
+#: SaveHistoryAutoTask.cpp:102
+#, kde-format
+msgid "Stopping autosave due to switching of screens."
+msgstr ""
+
+#: SaveHistoryAutoTask.cpp:115
+#, kde-format
+msgid ""
+"Autosave file has been modified externally, preventing further autosaves."
+msgstr ""
+
+#: SaveHistoryAutoTask.cpp:172
+#, kde-format
+msgid "Failed to update autosave state on output changes."
+msgstr ""
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2124,8 +2146,8 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Biazdziejnasć u \"%1\" (sieans \"%2\")"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
-#: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1150
+#: session/SessionController.cpp:359 session/SessionController.cpp:1882
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
 #, kde-format
 msgid "Show session"
 msgstr "Pakazać sieans"
@@ -2173,151 +2195,162 @@ msgstr "Chod vykanannia pracesaŭ ZModem"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktyŭnasć u \"%1\" (sieans \"%2\")"
 
-#: session/SessionController.cpp:139
+#: session/SessionController.cpp:140
 #, kde-format
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:353
+#: session/SessionController.cpp:358
 #, fuzzy, kde-format
 #| msgid "The process %1 has finished running in session %2"
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Praces \"%1\" zavieršany ŭ sieansie \"%2\""
 
-#: session/SessionController.cpp:436
+#: session/SessionController.cpp:441
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole nie viedaje, jak adkryć zakladku: "
 
-#: session/SessionController.cpp:515
+#: session/SessionController.cpp:520
 #, fuzzy, kde-format
 #| msgid "Search for %1 with"
 msgid "Search for '%1' with"
 msgstr "Pošuk \"%1\" z dapamohaj"
 
-#: session/SessionController.cpp:531
+#: session/SessionController.cpp:536
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Naladžvannie sieciŭnych skarotaŭ..."
 
-#: session/SessionController.cpp:641
+#: session/SessionController.cpp:646
 #, kde-format
 msgid "&Close Session"
 msgstr "&Skončyć sieans"
 
-#: session/SessionController.cpp:648
+#: session/SessionController.cpp:653
 #, kde-format
 msgid "Open File Manager"
 msgstr "Adkryć kiraŭnik fajlaŭ"
 
-#: session/SessionController.cpp:660
+#: session/SessionController.cpp:665
 #, kde-format
 msgid "Copy"
 msgstr "Kapijavać"
 
-#: session/SessionController.cpp:667
+#: session/SessionController.cpp:672
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
 msgid "Split View Left-Right"
 msgstr "Padzialić pa viertykali"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:677
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
 msgid "Split View Top-Bottom"
 msgstr "Padzialić pa haryzantali"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:681
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Skapijavać aproč padkazak"
 
-#: session/SessionController.cpp:682
+#: session/SessionController.cpp:687
 #, kde-format
 msgid "Copy user input"
 msgstr "Skapijavać karystaĺnicki vyvad"
 
-#: session/SessionController.cpp:688
+#: session/SessionController.cpp:693
 #, kde-format
 msgid "Copy command output"
 msgstr "Skapijavać vyvad zahadu"
 
-#: session/SessionController.cpp:703
+#: session/SessionController.cpp:708
 #, kde-format
 msgid "Paste Selection"
 msgstr "Ustavić abranaje"
 
-#: session/SessionController.cpp:710
+#: session/SessionController.cpp:715
 #, kde-format
 msgid "Web Search"
 msgstr "Pošuk u siecivie"
 
-#: session/SessionController.cpp:716
+#: session/SessionController.cpp:721
 #, kde-format
 msgid "&Select All"
 msgstr "&Abrać usio"
 
-#: session/SessionController.cpp:720
+#: session/SessionController.cpp:725
 #, fuzzy, kde-format
 #| msgid "Select &Line"
 msgid "Select &Mode"
 msgstr "Abrać &radok"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:730
 #, kde-format
 msgid "Select &Line"
 msgstr "Abrać &radok"
 
-#: session/SessionController.cpp:728
+#: session/SessionController.cpp:733
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Zachavać vyvad &jak..."
 
-#: session/SessionController.cpp:734
+#: session/SessionController.cpp:739
+#, fuzzy, kde-format
+#| msgid "Save Output &As..."
+msgid "Auto Save Output As..."
+msgstr "Zachavać vyvad &jak..."
+
+#: session/SessionController.cpp:743
+#, kde-format
+msgid "Stop Auto Save"
+msgstr ""
+
+#: session/SessionController.cpp:747
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Drukavannie..."
 
-#: session/SessionController.cpp:738
+#: session/SessionController.cpp:751
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Padladžvannie žurnala vyvadu..."
 
-#: session/SessionController.cpp:742
+#: session/SessionController.cpp:755
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Ačyscić žurnal vyvadu"
 
-#: session/SessionController.cpp:746
+#: session/SessionController.cpp:759
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Ačyscić žurnal vyvadu i skinuć"
 
-#: session/SessionController.cpp:757
+#: session/SessionController.cpp:770
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Next Profile"
 msgstr "Redahavać profiĺ"
 
-#: session/SessionController.cpp:762
+#: session/SessionController.cpp:775
 #, fuzzy, kde-format
 #| msgid "Previous View"
 msgid "Previous Profile"
 msgstr "Papiaredni vyhliad"
 
-#: session/SessionController.cpp:765
+#: session/SessionController.cpp:778
 #, kde-format
 msgid "Switch Profile"
 msgstr "Pierakliučyć profiĺ"
 
-#: session/SessionController.cpp:790
+#: session/SessionController.cpp:803
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Vyznačyć &kadavannie"
 
-#: session/SessionController.cpp:812
+#: session/SessionController.cpp:825
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "@item:inmenu Allows terminal applications to request mouse tracking"
@@ -2326,7 +2359,7 @@ msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Dazvolić prakručvannie myššu"
 
-#: session/SessionController.cpp:821
+#: session/SessionController.cpp:834
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu A read only (locked) session"
 #| msgid "Read-only"
@@ -2334,141 +2367,141 @@ msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Toĺki dlia čytannia"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:845
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Naladžvannie abo zmiena nazvy ŭkladki..."
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:851
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Usie ŭkladki ŭ biahučym aknie"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Abrać ukladki..."
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:864
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Niama"
 
-#: session/SessionController.cpp:859
+#: session/SessionController.cpp:872
 #, kde-format
 msgid "Copy Input To"
 msgstr "Skapijavać uvod u"
 
-#: session/SessionController.cpp:867
+#: session/SessionController.cpp:880
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Zapampoŭvannie pa pratakolie &ZModem..."
 
-#: session/SessionController.cpp:872
+#: session/SessionController.cpp:885
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr ""
 
-#: session/SessionController.cpp:877
+#: session/SessionController.cpp:890
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "Adsočvać &aktyŭnasć"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Adsočvać &aktyŭnasć"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:903
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Adsočvać &biazdziejnasć"
 
-#: session/SessionController.cpp:896
+#: session/SessionController.cpp:909
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Adsočvać zaviaršennie pracesu"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Pavialičyć šryft"
 
-#: session/SessionController.cpp:911
+#: session/SessionController.cpp:924
 #, kde-format
 msgid "Shrink Font"
 msgstr "Pamienšyć šryft"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:929
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Skinuć pamier šryftu"
 
-#: session/SessionController.cpp:922
+#: session/SessionController.cpp:935
 #, kde-format
 msgid "Send Signal"
 msgstr "Adpravić sihnal"
 
-#: session/SessionController.cpp:926
+#: session/SessionController.cpp:939
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Prypynić zadaču"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Praciahnuć vykanannie zadačy"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:949
 #, kde-format
 msgid "&Hangup"
 msgstr "&Paviesić"
 
-#: session/SessionController.cpp:941
+#: session/SessionController.cpp:954
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Pierarvać vykanannie zadačy"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:959
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Zniščyć zadaču"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Zabić zadaču"
 
-#: session/SessionController.cpp:956
+#: session/SessionController.cpp:969
 #, kde-format
 msgid "User Signal &1"
 msgstr "Sihnal karystaĺnika &1"
 
-#: session/SessionController.cpp:961
+#: session/SessionController.cpp:974
 #, kde-format
 msgid "User Signal &2"
 msgstr "Sihnal karystaĺnika &2"
 
-#: session/SessionController.cpp:979
+#: session/SessionController.cpp:992
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Stvaryć novy profiĺ..."
 
-#: session/SessionController.cpp:981
+#: session/SessionController.cpp:994
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Redahavać biahučy profiĺ..."
 
-#: session/SessionController.cpp:1112
+#: session/SessionController.cpp:1125
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "U hetym sieansie pracuje prahrama. Sapraŭdy chočacie zakryć?"
 
-#: session/SessionController.cpp:1116
+#: session/SessionController.cpp:1129
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program %1 is currently running in this session.  Are you sure you "
@@ -2478,18 +2511,18 @@ msgid ""
 "want to close it?"
 msgstr "U hetym sieansie pracuje prahrama \"%1\". Sapraŭdy chočacie zakryć?"
 
-#: session/SessionController.cpp:1123 session/SessionController.cpp:1158
+#: session/SessionController.cpp:1136 session/SessionController.cpp:1171
 #, kde-format
 msgid "Confirm Close"
 msgstr "Pacvierdzić zakryccio"
 
-#: session/SessionController.cpp:1124
+#: session/SessionController.cpp:1137
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Zakryć prahramu"
 
-#: session/SessionController.cpp:1147
+#: session/SessionController.cpp:1160
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2498,7 +2531,7 @@ msgstr ""
 "Prahrama ŭ hetym sieansie nie choča zaviaršać praces. Sapraŭdy chočacie "
 "prymusova zniščyć praces?"
 
-#: session/SessionController.cpp:1151
+#: session/SessionController.cpp:1164
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program %1 is in this session would not die.  Are you sure you want "
@@ -2510,28 +2543,28 @@ msgstr ""
 "Prahrama \"%1\" ŭ hetym sieansie nie choča zaviaršać praces. Sapraŭdy "
 "chočacie prymusova zniščyć praces?"
 
-#: session/SessionController.cpp:1159
+#: session/SessionController.cpp:1172
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Zniščyć praces prahramy"
 
-#: session/SessionController.cpp:1845
+#: session/SessionController.cpp:1881
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2038
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Adkryć &biahučy kataloh z dapamohaj"
 
-#: session/SessionController.cpp:2108
+#: session/SessionController.cpp:2144
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Zachavać spampavanyja z dapamohaj pratakola ZModem fajly u..."
 
-#: session/SessionController.cpp:2118
+#: session/SessionController.cpp:2154
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2546,7 +2579,7 @@ msgstr ""
 "hetaj sistemie nie znojdziena adpaviednaha prahramnaha zabiespiačennia "
 "ZModem.</p><p>Vy možacie ŭstaliavać pakunak \"rzsz\" abo \"lrzsz\".</p>"
 
-#: session/SessionController.cpp:2128
+#: session/SessionController.cpp:2164
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2554,7 +2587,7 @@ msgstr ""
 "<p>U biahučym sieansie ŭžo vykonvajecca praces pieradačy fajlaŭ pa "
 "pratakolie ZModem.</p>"
 
-#: session/SessionController.cpp:2141
+#: session/SessionController.cpp:2177
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on this system.</p><p>You may "
@@ -2567,7 +2600,7 @@ msgstr ""
 "ZModem.</p><p>Mahčyma, vy zachočacie ŭstaliavać pakunak \"rzsz\" abo \"lrzsz"
 "\".</p>"
 
-#: session/SessionController.cpp:2146
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Abiarycie fajly dlia zapampoŭvannia z dapamohaj pratakola ZModem"
@@ -3722,7 +3755,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zahruzić makiet ukladak z fajla"
 
-#: Vt102Emulation.cpp:2472
+#: Vt102Emulation.cpp:2474
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3822,15 +3855,27 @@ msgstr "Pradvyznačanaje kadavannie:"
 msgid "Shortcut for peeking the primary screen:"
 msgstr "Cetlik dlia prahliadu haloŭnaha ekrana:"
 
+#. i18n: ectx: property (text), widget (QLabel, autoSaveIntervalLabel)
+#: widgets/EditProfileAdvancedPage.ui:255
+#, kde-format
+msgid "Set interval between autosaves:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
+#: widgets/EditProfileAdvancedPage.ui:268
+#, kde-format
+msgid " ms"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:263
+#: widgets/EditProfileAdvancedPage.ui:283
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line Numbers:"
 msgstr "Stalaja koĺkasć radkoŭ: "
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:273
+#: widgets/EditProfileAdvancedPage.ui:293
 #, fuzzy, kde-format
 #| msgid "&Never"
 msgctxt "Never"
@@ -3838,7 +3883,7 @@ msgid "&Never"
 msgstr "&Nikoli"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:283
+#: widgets/EditProfileAdvancedPage.ui:303
 #, fuzzy, kde-format
 #| msgctxt "When showing URL hints"
 #| msgid "When URL hints show"
@@ -3847,7 +3892,7 @@ msgid "When &URL hints show"
 msgstr "Kali pakazvajucca URL-padkazki"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:293
+#: widgets/EditProfileAdvancedPage.ui:313
 #, fuzzy, kde-format
 #| msgctxt "Always"
 #| msgid "Always"
@@ -6708,9 +6753,6 @@ msgstr "Zakryć ukladku"
 
 #~ msgid "Overwrite"
 #~ msgstr "Pierazapisać"
-
-#~ msgid "Unable to write to file."
-#~ msgstr "Niemahčyma zapisać u fajl."
 
 #~ msgid ""
 #~ "A ZModem file transfer attempt has been detected.\n"
