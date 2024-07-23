@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-19 08:48+0200\n"
+"PO-Revision-Date: 2024-07-22 20:54+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -1969,23 +1969,26 @@ msgstr "%1 baliogabeko URLa da. Ezin izan da irteera gorde."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "%1(a)n automatikoki gordetzeko fitxategia sortzea huts egin du."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Pantaila aldaketa dela eta gordetze automatikoa gelditzen."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Automatikoki gordetzeko fitxategia kanpotik aldatu da, gordetze automatiko "
+"gehiago egitea eragotziz."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Irteera aldaketetan gordetze automatikoaren egoera eguneratzea huts egin du."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2263,15 +2266,14 @@ msgid "Save Output &As..."
 msgstr "Gorde irteera &honela..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Gorde irteera &honela..."
+msgstr "Gorde automatikoki irteera honela..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Gelditu gordetze automatikoa"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3783,13 +3785,13 @@ msgstr "Pantaila nagusiari kirika egiteko lasterbidea:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Ezarri gordetze automatikoen arteko bitartea:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

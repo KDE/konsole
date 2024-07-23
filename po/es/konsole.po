@@ -1,27 +1,27 @@
 # Translation of konsole to Spanish
-# translation of konsole.po to Spanish
-# Copyright (C) 2001-2002.
+# Copyright (C) 2001-2024 This file is copyright:
+# This file is distributed under the same license as the konsole package.
 #
-# Pablo de Vicente <vicente@oan.es>,2001-2002,2003.
-# Jaime Robles <jaime@kde.org>, 2003, 2004, 2005, 2007, 2008, 2009.
-# Miguel Revilla Rodríguez <yo@miguelrevilla.com>, 2003, 2004.
-# Pablo de Vicente <p.devicente@wanadoo.es>, 2004, 2005.
-# Jaime Robles <jaime@robles.nu>, 2005.
-# Santiago Fernandez Sancho <santi@kde-es.org>, 2005.
-# Pablo de Vicente <pablo.devicente@gmail.com>, 2006.
-# Pablo Pita Leira <pablo.pita@kdemail.net>, 2007.
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2007.
+# SPDX-FileCopyrightText: 2001, 2002, 2003 Pablo de Vicente <vicente@oan.es>
+# SPDX-FileCopyrightText: 2003, 2004, 2005, 2007, 2008, 2009 Jaime Robles <jaime@kde.org>
+# SPDX-FileCopyrightText: 2003, 2004 Miguel Revilla Rodríguez <yo@miguelrevilla.com>
+# SPDX-FileCopyrightText: 2004, 2005 Pablo de Vicente <p.devicente@wanadoo.es>
+# SPDX-FileCopyrightText: 2005 Jaime Robles <jaime@robles.nu>
+# SPDX-FileCopyrightText: 2005 Santiago Fernandez Sancho <santi@kde-es.org>
+# SPDX-FileCopyrightText: 2006 Pablo de Vicente <pablo.devicente@gmail.com>
+# SPDX-FileCopyrightText: 2007 Pablo Pita Leira <pablo.pita@kdemail.net>
+# SPDX-FileCopyrightText: 2007 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
 # SPDX-FileCopyrightText: 2009, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
-# Cristina Yenyxe González García <the.blue.valkyrie@gmail.com>, 2010, 2011, 2012, 2013.
-# Javier Vinal <fjvinal@gmail.com>, 2011.
-# arklad, 2011.
-# Rocio Gallego <traducciones@rociogallego.com>, 2013, 2014, 2015.
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013 Cristina Yenyxe González García <the.blue.valkyrie@gmail.com>
+# SPDX-FileCopyrightText: 2011 Javier Vinal <fjvinal@gmail.com>
+# SPDX-FileCopyrightText: 2011 arklad
+# SPDX-FileCopyrightText: 2013, 2014, 2015 Rocio Gallego <traducciones@rociogallego.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-19 01:17+0200\n"
+"PO-Revision-Date: 2024-07-23 00:37+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -1983,23 +1983,29 @@ msgstr "%1 es una URL no válida, la salida no puede guardarse."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "No se ha podido crear el archivo para guardar automáticamente en %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
 msgstr ""
+"Se ha detenido la función de guardar automáticamente debido al cambio de "
+"pantallas."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"El archivo para guardar automáticamente se ha modificado externamente, "
+"impidiendo que se siga guardando automáticamente en él."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"No se ha podido actualizar el estado de guardar automáticamente en los "
+"cambios de salida."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2272,15 +2278,14 @@ msgid "Save Output &As..."
 msgstr "Guardar la &salida como..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Guardar la &salida como..."
+msgstr "Guardar automáticamente la salida como..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Detener la función de guardar automáticamente"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3800,13 +3805,13 @@ msgstr "Atajo de teclado para echar un vistazo a la pantalla principal:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Intervalo para guardar automáticamente:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

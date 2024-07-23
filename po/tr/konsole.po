@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-19 00:53+0300\n"
+"PO-Revision-Date: 2024-07-22 12:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1963,23 +1963,25 @@ msgstr "%1 geçersiz bir URL, çıktı kaydedilmeyecek."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "%1 konumunda kendiliğinden kayıt dosyası oluşturulamadı."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Ekran değiştirme nedeniyle kendiliğinden kayıt durduruluyor."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Kendiliğinden kayıt dosyası, sonraki kayıtları önleyecek biçimde dışarıdan "
+"değiştirildi."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "Çıktı değişikliklerinde kendiliğinden kayıt durumu güncellenemedi."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2253,15 +2255,14 @@ msgid "Save Output &As..."
 msgstr "Çıktıyı &Farklı Kaydet…"
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Çıktıyı &Farklı Kaydet…"
+msgstr "Çıktıyı Kendiliğinden Farklı Kaydet…"
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Kendiliğinden Kaydı Durdur"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3764,13 +3765,13 @@ msgstr "Birincil ekrana göz atmak için kısayol:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Kayıtlar arası aralığı ayarla:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

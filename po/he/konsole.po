@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-18 08:15+0300\n"
+"PO-Revision-Date: 2024-07-22 08:15+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1954,23 +1954,23 @@ msgstr "הכתובת %1 שגויה, אי אפשר לשמור את הפלט."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "יצירת קובץ שמירה אוטומטית ב־%1 נכשלה."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "שמירה אוטומטית נעצרת עקב החלפת מסכים."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
-msgstr ""
+msgstr "קובץ השמירה האוטומטית השתנה מבחוץ, מה שמונע שמירות אוטומטיות נוספות"
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "עדכון מצב השמירה האוטומטית עם שינויי הפלט נכשל."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2242,15 +2242,14 @@ msgid "Save Output &As..."
 msgstr "שמירת הפלט &בתור…"
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "שמירת הפלט &בתור…"
+msgstr "שמירת הפלט אוטומטית בתור…"
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "עצירת שמירה אוטומטית"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3739,13 +3738,13 @@ msgstr "קיצור דרך להצצה במסך העיקרי:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "הגדרת מרווח בין שמירות אוטומטיות:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " מ״ש"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

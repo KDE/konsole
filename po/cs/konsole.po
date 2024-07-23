@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-18 10:42+0200\n"
+"PO-Revision-Date: 2024-07-22 16:56+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -1926,7 +1926,7 @@ msgstr "%1 není platné URL, nelze uložit výstup."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Nelze vytvořit soubor pro automatické uložení v \"%1\""
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
@@ -2211,15 +2211,14 @@ msgid "Save Output &As..."
 msgstr "Uložit výstup jako..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Uložit výstup jako..."
+msgstr "Automaticky uložit výstup jako..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Zastavit automatické ukládání"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3707,7 +3706,7 @@ msgstr ""
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283
@@ -5436,7 +5435,7 @@ msgstr "Zavřít terminál"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Restore terminal"
-msgstr ""
+msgstr "Obnovit terminál"
 
 #: widgets/ViewContainer.cpp:56
 #, kde-format

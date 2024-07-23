@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-18 10:16+0200\n"
+"PO-Revision-Date: 2024-07-22 10:32+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -1978,23 +1978,27 @@ msgstr "%1 is een ongeldig URL-adres, de uitvoer kon niet worden opgeslagen."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Aanmaken van bestand voor automatische opslag op %1 is mislukt."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Automatisch opslaan wordt gestopt vanwege omschakelen van schermen."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Bestand voor automatisch opslaan is extern gewijzigd, verder automatisch "
+"opslaan wordt voorkomen."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Bijwerken van status voor automatisch opslaan bij wijzigingen van uitvoer is "
+"mislukt."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2268,15 +2272,14 @@ msgid "Save Output &As..."
 msgstr "Uitvoer opslaan &als..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Uitvoer opslaan &als..."
+msgstr "Uitvoer van automatisch opslaan als..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Automatisch opslaan stoppen"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3795,13 +3798,13 @@ msgstr "Sneltoets voor bekijken van het primaire scherm:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Interval tussen automatisch opslaan instellen:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

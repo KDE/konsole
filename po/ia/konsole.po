@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-18 12:26+0200\n"
+"PO-Revision-Date: 2024-07-22 11:08+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -1961,23 +1961,26 @@ msgstr "%1 es un invalide URL, le resultato de egresso non pote esser salvate."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Falleva a crear file de salveguardar automatic a %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Stoppante salveguardar automatic debite a commutar de schermos."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"File de salveguardar automatic ha essite modificate externemente, impediente "
+"ulterior salvamentos automatic."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Falleva a actualisar le stato de salveguardar automatic sur cambios de exito."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2251,15 +2254,14 @@ msgid "Save Output &As..."
 msgstr "S&alva resultato de egresso como ..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "S&alva resultato de egresso como ..."
+msgstr "Salveguarda automaticamente exito como ..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Stoppa Dalveguardar Atomatic"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3776,13 +3778,13 @@ msgstr "Via breve per reguardar le schermo primari:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Assigna intervallo inter salvamentos automatic:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr "ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

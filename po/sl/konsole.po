@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-18 06:38+0200\n"
+"PO-Revision-Date: 2024-07-22 06:37+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -1960,23 +1960,26 @@ msgstr "%1 ni veljaven URL. Izpisa ni bilo mogoče shraniti."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Datoteke za samodejno shranjevanje ni bilo mogoče ustvariti na %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Ustavitev samodejnega shranjevanja zaradi preklapljanja zaslonov."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Datoteka za samodejno shranjevanje je bila spremenjena od zunaj, kar "
+"preprečuje nadaljnje samodejno shranjevanje."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Posodobitev stanja samodejnega shranjevanja ob spremembah izhoda ni uspela."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2249,25 +2252,24 @@ msgid "Save Output &As..."
 msgstr "Shrani izpis &kot …"
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Shrani izpis &kot …"
+msgstr "Samodejno shrani izhod kot..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Ustavi samodejno shranjevanje"
 
 #: session/SessionController.cpp:747
 #, kde-format
 msgid "&Print Screen..."
-msgstr "&Natisni zaslon …"
+msgstr "Natisni zaslon..."
 
 #: session/SessionController.cpp:751
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "Nastavi pomnilnik vrstic …"
+msgstr "Nastavi pomnilnik vrstic..."
 
 #: session/SessionController.cpp:755
 #, kde-format
@@ -3761,13 +3763,13 @@ msgstr "Bližnjica za kukanje na primarni zaslon:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Nastavi interval med samodejnimi shranjevanji:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

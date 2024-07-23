@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-18 05:43+0200\n"
+"PO-Revision-Date: 2024-07-22 05:26+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1952,23 +1952,23 @@ msgstr "%1 არასწორი ბმულია. გამოტანა
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "ფაილის ავტოშენახვა ჩავარდა მისამართზე %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "ავტოშენახვა გაჩერდა ეკრანების შეცვლის გამო."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
-msgstr ""
+msgstr "ავტოშენახვის ფაილი გარედან შეიცვალა. ავტოშენახვა აღარ მოხდება."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "ავტოშენახვის მდგომარეობის განახლების შეცდომა გამოტანის ცვლილებებზე."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2242,15 +2242,14 @@ msgid "Save Output &As..."
 msgstr "ტესტის გამონატანის შენახვა, &როგორც..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "ტესტის გამონატანის შენახვა, &როგორც..."
+msgstr "გამოტანის ავტოშენახვა, როგორც..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "ავტოშენახვის გაჩერება"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3760,13 +3759,13 @@ msgstr "მალსახმობი ძირითად ეკრანზ�
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "შუალედი ავტოშენახვებს შორის:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " მწმ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-18 10:13+0200\n"
+"PO-Revision-Date: 2024-07-22 18:15+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -1973,23 +1973,27 @@ msgstr "%1 no és un URL vàlid, la sortida no es pot desar."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Ha fallat en crear el fitxer de desament automàtic a %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "S'ha aturat el desament automàtic pel canvi de pantalles."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"El fitxer de desament automàtic s'ha modificat externament. S'evitaran els "
+"desaments automàtics posteriors."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Ha fallat en actualitzar l'estat del desament automàtic en els canvis de la "
+"sortida."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2263,15 +2267,14 @@ msgid "Save Output &As..."
 msgstr "Desa la sortida com &a..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Desa la sortida com &a..."
+msgstr "Desa la sortida automàtica com a..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Atura el desament automàtic"
 
 # skip-rule: k-Print_Screen
 #: session/SessionController.cpp:747
@@ -3795,13 +3798,13 @@ msgstr "Drecera per a mirar la pantalla primària:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Establiu l'interval entre desaments automàtics:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283
