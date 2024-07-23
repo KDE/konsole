@@ -38,6 +38,8 @@
 
 #include <QStandardPaths>
 
+Q_LOGGING_CATEGORY(SshManagerPluginWidget, "org.kde.konsole.plugin.widget.sshmanager")
+
 struct SSHManagerTreeWidget::Private {
     SSHManagerModel *model = nullptr;
     SSHManagerFilterModel *filterModel = nullptr;
@@ -369,7 +371,7 @@ void SSHManagerTreeWidget::setModel(SSHManagerModel *model)
 
 void SSHManagerTreeWidget::setCurrentController(Konsole::SessionController *controller)
 {
-    qCDebug(KonsoleDebug) << "Controller changed to" << controller;
+    qCDebug(SshManagerPluginWidget) << "Controller changed to" << controller;
 
     d->controller = controller;
     d->model->setSessionController(controller);
