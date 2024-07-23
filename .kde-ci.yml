@@ -33,3 +33,9 @@ Dependencies:
 
 Options:
     require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
+    cppcheck-arguments:
+        - --enable=warning,style,performance
+#        - --suppress-xml=cppcheck-suppressions.xml
+#    cppcheck-ignore-files:
+#        - autotests
+
