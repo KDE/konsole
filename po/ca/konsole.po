@@ -5584,7 +5584,3 @@ msgstr "&Configura o reanomena la pestanya..."
 msgctxt "@action:inmenu"
 msgid "Close Tab"
 msgstr "Tanca la pestanya"
-
-#~ msgctxt "Do not save any lines to the scrollback history"
-#~ msgid "None"
-#~ msgstr "Res"
