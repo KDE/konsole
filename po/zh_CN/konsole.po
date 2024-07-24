@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 00:42+0000\n"
+"POT-Creation-Date: 2024-07-24 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -792,7 +792,7 @@ msgstr "无法用空描述保存按键绑定方案。"
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:350
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:352
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1375,7 +1375,7 @@ msgstr "保存"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:281
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
 #, kde-format
 msgid "Update"
 msgstr "更新"
@@ -1449,7 +1449,7 @@ msgstr ""
 " 它包含多个配置，您确定要继续吗？"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:233
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "您将要删除 %1，您确定吗？"
@@ -1505,8 +1505,8 @@ msgstr "%1 是 SSH 条目的文件夹"
 #: plugins/SSHManager/sshmanagermodel.cpp:318
 #: plugins/SSHManager/sshmanagermodel.cpp:386
 #: plugins/SSHManager/sshmanagermodel.cpp:419
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:102
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH 配置"
@@ -1566,24 +1566,24 @@ msgid ""
 msgstr "无法在外壳应用程序之外发出 SSH 命令 (例如 bash、zsh、sh 等)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:78
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:80
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH 密钥"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:117
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:119
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "删除"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:159
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:161
 #, kde-format
 msgid "Don't Change"
 msgstr "保持不变"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1592,68 +1592,68 @@ msgstr ""
 "您将要删除文件夹  %1，\n"
 " 它包含多组 SSH 配置，您确定要继续吗？"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:238
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:240
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "删除 SSH 配置"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr "已导入 SSH 配置文件<br/>有一些设置是只读的。"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
 #, kde-format
 msgid "Missing Hostname"
 msgstr "缺少主机名"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:392
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Name"
 msgstr "缺少名称"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr "如果勾选了“为密钥使用 ~/.ssh/config”，请不要指定 SSH 密钥或用户名。"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "必须至少设置用户名或 SSHKey 的其中一个"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:410
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
 #, kde-format
 msgid "Missing Folder"
 msgstr "缺少文件夹"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH 会话必须具备配置方案"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "无法删除此文件夹"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "删除文件夹及其所有内容"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "双击更改文件夹名称。"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "您不能删除自动添加的条目。"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "Delete selected entry"
 msgstr "删除选中条目"

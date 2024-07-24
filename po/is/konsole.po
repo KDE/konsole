@@ -13,15 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 00:42+0000\n"
-"PO-Revision-Date: 2024-05-06 12:21+0000\n"
+"POT-Creation-Date: 2024-07-24 00:42+0000\n"
+"PO-Revision-Date: 2024-07-22 22:10+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -812,7 +812,7 @@ msgstr "Ekki er hægt að vista lyklabindingaskema með tóma lýsingu."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:350
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:352
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1396,7 +1396,7 @@ msgstr "Vista"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:281
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
 #, kde-format
 msgid "Update"
 msgstr "Uppfæra"
@@ -1473,7 +1473,7 @@ msgstr ""
 " með ýmsar grunnstillingar, ertu viss?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:233
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Þú ert að fara að eyða %1, ertu viss?"
@@ -1529,8 +1529,8 @@ msgstr "%1 er mappa fyrir SSH-færslur"
 #: plugins/SSHManager/sshmanagermodel.cpp:318
 #: plugins/SSHManager/sshmanagermodel.cpp:386
 #: plugins/SSHManager/sshmanagermodel.cpp:419
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:102
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
 msgid "SSH Config"
 msgstr "Grunnstilling SSH"
@@ -1593,24 +1593,24 @@ msgid ""
 msgstr "Get ekki gefið SSH-skipanir utan við skeljaforrit (t.d. bash, zsh, sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:78
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:80
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH-lykill"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:117
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:119
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Eyða"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:159
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:161
 #, kde-format
 msgid "Don't Change"
 msgstr "Ekki breyta"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1619,70 +1619,70 @@ msgstr ""
 "Þú ert að fara að eyða möppunni %1\n"
 " sem inniheldur ýmsar SSH-grunnstillingar, ertu viss?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:238
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:240
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Eyða SSH-grunnstillingum"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr "Flutti inn SSH-forsnið <br/> Sumar stillingar eru skrifvarðar."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Vélarheiti vantar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:392
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Name"
 msgstr "Heiti vantar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Ef stillt er á Nota Ssh-grunnstillingu, skal ekki tilgreina ssh-lykil eða "
 "notandanafn."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Stilla verður annað hvort notandanafn eða SSH-lykil"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:410
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
 #, kde-format
 msgid "Missing Folder"
 msgstr "Möppu vantar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH-seta verður að vera með prófíl"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Get ekki eytt þessari möppu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Eyða möppu og öllu innihaldi hennar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Tvísmelltu til að breyta möppuheitinu."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Þú getur ekki eytt færslu sem var bætt við sjálfkrafa."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Breyta valinni færslu"
@@ -1964,23 +1964,25 @@ msgstr "%1 er ógild slóð, ekki tókst að vista úttakið."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Mistókst að búa til sjálfvirka vistunarskrá á %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Stöðva sjálfvirka vistun þar sem verið er að skipta um skjá."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Sjálfvirkri vistunarskrá var breytt utan frá, sem kemur í veg fyrir frekari "
+"sjálfvirka vistun."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "Mistókst að uppfæra stöðu sjálfvirkrar vistunar á breytingar á úttaki."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2254,15 +2256,14 @@ msgid "Save Output &As..."
 msgstr "Vista útt&ak sem..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Vista útt&ak sem..."
+msgstr "Vista úttak sjálfvirkt sem..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Stöðva sjálfvirka vistun"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3765,13 +3766,13 @@ msgstr "Flýtilykill til að kíkja á aðalskjá:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Velja millibil sjálfvirkrar vistunar:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " msek."
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283
@@ -5165,19 +5166,19 @@ msgstr "Laga línuflæðið þegar stærð skjáhermisins er breytt"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Litur á merkjum á skrunstiku:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "Stærð hvers merkis (sem hlutfall af lengd skrunstikunnar):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

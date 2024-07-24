@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 00:42+0000\n"
+"POT-Creation-Date: 2024-07-24 00:42+0000\n"
 "PO-Revision-Date: 2024-02-09 23:54+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -798,7 +798,7 @@ msgstr "키 바인딩 배열 설명을 비워 둘 수 없습니다."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:350
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:352
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1381,7 +1381,7 @@ msgstr "저장"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:281
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
 #, kde-format
 msgid "Update"
 msgstr "업데이트"
@@ -1455,7 +1455,7 @@ msgstr ""
 "삭제하려고 합니다. 계속 진행하시겠습니까?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:233
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "%1을(를) 삭제하려고 합니다. 계속 진행하시겠습니까?"
@@ -1511,8 +1511,8 @@ msgstr "%1은(는) SSH 항목의 폴더임"
 #: plugins/SSHManager/sshmanagermodel.cpp:318
 #: plugins/SSHManager/sshmanagermodel.cpp:386
 #: plugins/SSHManager/sshmanagermodel.cpp:419
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:102
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH 설정"
@@ -1571,24 +1571,24 @@ msgid ""
 msgstr "셸 앱(예: bash, zsh, sh) 외부에서 SSH 명령을 전달할 수 없음"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:78
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:80
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH 키"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:117
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:119
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "삭제"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:159
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:161
 #, kde-format
 msgid "Don't Change"
 msgstr "바꾸지 않기"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1597,68 +1597,68 @@ msgstr ""
 "SSH 설정 여러 개가 들어 있는 폴더 %1을(를)\n"
 "삭제하려고 합니다. 계속 진행하시겠습니까?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:238
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:240
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "SSH 설정 삭제"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
 #, kde-format
 msgid "Missing Hostname"
 msgstr "호스트 이름이 지정되지 않았음"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:392
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Name"
 msgstr "이름이 지정되지 않았음"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr "SSH 설정 사용을 선택했으면 SSH 키나 사용자 이름을 지정하지 마십시오."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "최소한 사용자 이름이나 SSH 키를 설정해야 함"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:410
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
 #, kde-format
 msgid "Missing Folder"
 msgstr "폴더가 없음"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH 세션에는 프로필을 지정해야 함"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "이 폴더를 삭제할 수 없음"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "폴더와 그 모든 내용 삭제"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "폴더 이름을 바꾸려면 두 번 클릭하십시오."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "자동으로 추가된 항목을 삭제할 수 없습니다."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "Delete selected entry"
 msgstr "선택한 항목 삭제"

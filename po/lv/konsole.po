@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 00:42+0000\n"
+"POT-Creation-Date: 2024-07-24 00:42+0000\n"
 "PO-Revision-Date: 2024-02-28 16:31+0200\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -806,7 +806,7 @@ msgstr "Taustiņu piesaistes shēmu nevar saglabāt ar tukšu aprakstu."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:350
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:352
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1391,7 +1391,7 @@ msgstr "Saglabāt"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:281
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
 #, kde-format
 msgid "Update"
 msgstr "Atjaunināt"
@@ -1467,7 +1467,7 @@ msgstr ""
 " kas satur vairākas konfigurācijas. Vai turpināt?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:231
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:233
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Vai droši zināt, ka vēlaties dzēst „%1“?"
@@ -1523,8 +1523,8 @@ msgstr "„%1“ ir mape SSH ierakstiem"
 #: plugins/SSHManager/sshmanagermodel.cpp:318
 #: plugins/SSHManager/sshmanagermodel.cpp:386
 #: plugins/SSHManager/sshmanagermodel.cpp:419
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:102
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:437
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
 msgid "SSH Config"
 msgstr "SSH konfigurācija"
@@ -1588,24 +1588,24 @@ msgstr ""
 "Nevar izdot SSH komandu ārpus čaulas programmas (t.i., „bash“, „zsh“, „sh“)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:78
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:80
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH atslēga"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:117
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:119
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Dzēst"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:159
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:161
 #, kde-format
 msgid "Don't Change"
 msgstr "Nemainīt"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1614,70 +1614,70 @@ msgstr ""
 "Jūs grasāties dzēst mapi „%1“\n"
 " ar vairākām SSH konfigurācijām. Vai turpināt?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:238
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:240
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Dzēst SSh konfigurāciju"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:292
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr ""
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:387
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Trūkst resursdatora nosaukuma"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:392
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
 msgid "Missing Name"
 msgstr "Trūkst nosaukuma"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:399
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Ja ir iestatīts „Lietot SSH konfigurāciju“, neprecizējiet SSH atslēgu un "
 "lietotāja vārdu."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:404
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Jānorāda vismaz lietotājvārds vai SSH atslēga"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:410
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
 #, kde-format
 msgid "Missing Folder"
 msgstr "Trūkst mapes"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH sesijai ir vajadzīgs profils"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Nevar izdzēst mapi"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:442
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Dzēst mapi un visu tās saturu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:446
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Mainiet mapes nosaukumu ar dubulktklikšķi"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Nevarat dzēst automātiski pievienotu ierakstu."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:453
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Dzēst atlasīto ierakstu"
