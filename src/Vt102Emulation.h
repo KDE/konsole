@@ -126,7 +126,6 @@ private:
     void resetModes();
 
     void resetTokenizer();
-#define MAX_TOKEN_LENGTH 256 // Max length of tokens (e.g. window title)
     void addToCurrentToken(uint cc);
     int tokenBufferPos;
 
@@ -183,6 +182,7 @@ private:
     enum osc {
         // https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Operating-System-Commands
         ReportColors = 4,
+        Clipboard = 52,
         ResetColors = 104,
         // https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
         SemanticPrompts = 133,

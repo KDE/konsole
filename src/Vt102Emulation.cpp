@@ -12,8 +12,10 @@
 #include <cstdio>
 
 // Qt
+#include <QApplication>
 #include <QAudioOutput>
 #include <QBuffer>
+#include <QClipboard>
 #include <QEvent>
 #include <QKeyEvent>
 #include <QTimer>
@@ -1153,6 +1155,40 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         connect(action, &KNotificationAction::activated, this, [this, notification]() {
             _currentScreen->currentTerminalDisplay()->notificationClicked(notification->xdgActivationToken());
         });
+    }
+    if (attribute == Clipboard) {
+        // Clipboard
+        QStringList params = value.split(QLatin1Char(';'));
+        if (params.length() == 0) {
+            return;
+        }
+
+        bool clipboard = false;
+        bool selection = false;
+        if (params[0].isEmpty() || params[0].contains(QLatin1Char('c')) || params[0].contains(QLatin1Char('s'))) {
+            clipboard = true;
+        }
+        if (params[0].contains(QLatin1Char('p'))) {
+            selection = true;
+        }
+
+        if (params.length() == 2) {
+            // Copy to clipboard
+            if (clipboard) {
+                QApplication::clipboard()->setText(QString::fromUtf8(QByteArray::fromBase64(params[1].toUtf8())), QClipboard::Clipboard);
+            }
+            if (selection) {
+                QApplication::clipboard()->setText(QString::fromUtf8(QByteArray::fromBase64(params[1].toUtf8())), QClipboard::Selection);
+            }
+        } else {
+            // Clear clipboard
+            if (clipboard) {
+                QApplication::clipboard()->clear(QClipboard::Clipboard);
+            }
+            if (selection) {
+                QApplication::clipboard()->clear(QClipboard::Selection);
+            }
+        }
 
         return;
     }
