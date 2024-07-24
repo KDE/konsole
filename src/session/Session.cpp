@@ -652,6 +652,15 @@ void Session::setSessionAttribute(int what, const QString &caption)
         }
     }
 
+    if (what == SessionColor) {
+        QString colorString = caption.section(QLatin1Char(';'), 0, 0);
+        QColor color = QColor(colorString);
+        if (color.isValid()) {
+            setColor(color);
+            tabColorSetByUser(true);
+        }
+    }
+
     if (what == CurrentDirectory) {
         _reportedWorkingUrl = QUrl::fromUserInput(caption);
         Q_EMIT currentDirectoryChanged(currentWorkingDirectory());

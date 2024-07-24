@@ -389,6 +389,7 @@ public:
         BackgroundColor = 11,
         SessionName = 30, // Non-standard
         SessionIcon = 32, // Non-standard
+        SessionColor = 34, // Non-standard
         ProfileChange = 50, // this clashes with Xterm's font change command
     };
 
