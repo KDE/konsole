@@ -114,7 +114,6 @@ private:
 
     bool _haveLoadedAll;
 
-    const KeyboardTranslator *_fallbackTranslator;
     QHash<QString, KeyboardTranslator *> _translators;
 };
 }

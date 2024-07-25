@@ -7,7 +7,6 @@
 // Own
 #include "KeyboardTranslatorTest.h"
 
-#include "keyboardtranslator/FallbackKeyboardTranslator.h"
 #include "keyboardtranslator/KeyboardTranslatorReader.h"
 
 // KDE
@@ -88,31 +87,6 @@ void KeyboardTranslatorTest::testEntryTextWildcards()
     QCOMPARE(entry.text(wildcards, modifiers), result);
 }
 
-// Use FallbackKeyboardTranslator to test basic functionality
-void KeyboardTranslatorTest::testFallback()
-{
-    auto fallback = std::unique_ptr<FallbackKeyboardTranslator>(new FallbackKeyboardTranslator());
-
-    QCOMPARE(QStringLiteral("fallback"), fallback->name());
-    QCOMPARE(QStringLiteral("Fallback Keyboard Translator"), fallback->description());
-
-    auto entries = fallback->entries();
-    QCOMPARE(1, entries.size());
-    auto entry = fallback->findEntry(Qt::Key_Tab, Qt::NoModifier);
-    QVERIFY(!entry.isNull());
-    QCOMPARE(FallbackKeyboardTranslator::Command::NoCommand, entry.command());
-    QCOMPARE(int(Qt::Key_Tab), entry.keyCode());
-    QCOMPARE(QByteArray("\t"), entry.text());
-    QCOMPARE(QByteArray("\\t"), entry.escapedText());
-    QCOMPARE(Qt::KeyboardModifiers(Qt::NoModifier), entry.modifiers());
-    QCOMPARE(Qt::KeyboardModifiers(Qt::NoModifier), entry.modifierMask());
-    QCOMPARE(KeyboardTranslator::States(KeyboardTranslator::NoState), entry.state());
-    QCOMPARE(QStringLiteral("Tab"), entry.conditionToString());
-    QCOMPARE(QStringLiteral("\\t"), entry.resultToString());
-    QVERIFY(entry.matches(Qt::Key_Tab, Qt::NoModifier, KeyboardTranslator::NoState));
-    QVERIFY(entry == fallback->findEntry(Qt::Key_Tab, Qt::NoModifier));
-}
-
 void KeyboardTranslatorTest::testHexKeys()
 {
     QFile linuxkeytab(QFINDTESTDATA(QStringLiteral("data/test.keytab")));
@@ -137,7 +111,6 @@ void KeyboardTranslatorTest::testHexKeys()
 
     auto entry = translator->findEntry(Qt::Key_Backspace, Qt::NoModifier);
     QVERIFY(!entry.isNull());
-    QCOMPARE(FallbackKeyboardTranslator::Command::NoCommand, entry.command());
     QCOMPARE(int(Qt::Key_Backspace), entry.keyCode());
     QCOMPARE(QByteArray("\x7F"), entry.text());
     QCOMPARE(QByteArray("\\x7f"), entry.escapedText());
@@ -151,7 +124,6 @@ void KeyboardTranslatorTest::testHexKeys()
 
     entry = translator->findEntry(Qt::Key_Delete, Qt::NoModifier);
     QVERIFY(!entry.isNull());
-    QCOMPARE(FallbackKeyboardTranslator::Command::NoCommand, entry.command());
     QCOMPARE(int(Qt::Key_Delete), entry.keyCode());
     QCOMPARE(QByteArray("\x08"), entry.text());
     QCOMPARE(QByteArray("\\b"), entry.escapedText());
@@ -166,7 +138,6 @@ void KeyboardTranslatorTest::testHexKeys()
 
     entry = translator->findEntry(Qt::Key_Space, Qt::NoModifier);
     QVERIFY(!entry.isNull());
-    QCOMPARE(FallbackKeyboardTranslator::Command::NoCommand, entry.command());
     QCOMPARE(int(Qt::Key_Space), entry.keyCode());
     QEXPECT_FAIL("", "Several keytabs use x00 as Space +Control;  text() fails", Continue);
     QCOMPARE(QByteArray("\x00"), entry.text());

@@ -1,6 +1,5 @@
 add_library(keyboardtranslator
     STATIC
-    FallbackKeyboardTranslator.cpp
     KeyboardTranslatorManager.cpp
     KeyboardTranslatorWriter.cpp
     KeyboardTranslator.cpp

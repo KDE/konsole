@@ -9,7 +9,6 @@
 // Own
 #include "KeyboardTranslatorManager.h"
 
-#include "FallbackKeyboardTranslator.h"
 #include "KeyboardTranslatorReader.h"
 #include "KeyboardTranslatorWriter.h"
 
@@ -23,16 +22,13 @@ using namespace Konsole;
 
 KeyboardTranslatorManager::KeyboardTranslatorManager()
     : _haveLoadedAll(false)
-    , _fallbackTranslator(nullptr)
     , _translators(QHash<QString, KeyboardTranslator *>())
 {
-    _fallbackTranslator = new FallbackKeyboardTranslator();
 }
 
 KeyboardTranslatorManager::~KeyboardTranslatorManager()
 {
     qDeleteAll(_translators);
-    delete _fallbackTranslator;
 }
 
 Q_GLOBAL_STATIC(KeyboardTranslatorManager, theKeyboardTranslatorManager)
@@ -199,13 +195,25 @@ KeyboardTranslator *KeyboardTranslatorManager::loadTranslator(QIODevice *source,
 
 const KeyboardTranslator *KeyboardTranslatorManager::defaultTranslator()
 {
+    // Note that as of 24.08, all keytab files are bundled into the
+    // executable via qrc.  Hence there should be no way for this code
+    // to not find the default translator.
+    //
     // Try to find the default.keytab file if it exists, otherwise
     // fall back to the internal hard-coded fallback translator
-    const KeyboardTranslator *translator = findTranslator(QStringLiteral("default"));
-    if (translator == nullptr) {
-        translator = _fallbackTranslator;
+    auto translator = findTranslator(QStringLiteral("default"));
+    if (translator != nullptr) {
+        return translator;
     }
-    return translator;
+
+    auto fallback = new KeyboardTranslator(QStringLiteral("fallback"));
+    fallback->setDescription(QStringLiteral("Fallback Keyboard Translator"));
+    // Key "TAB" should send out '\t'
+    KeyboardTranslator::Entry entry;
+    entry.setKeyCode(Qt::Key_Tab);
+    entry.setText("\t");
+    fallback->addEntry(entry);
+    return fallback;
 }
 
 const QStringList KeyboardTranslatorManager::allTranslators()
