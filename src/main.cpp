@@ -322,11 +322,10 @@ bool shouldUseNewProcess(int argc, char *argv[])
     // if users have explicitly requested starting a new process
     // Support --nofork to retain argument compatibility with older
     // versions.
-    if (arguments.contains(QStringLiteral("--separate")) || arguments.contains(QStringLiteral("--nofork"))) {
+    if (arguments.contains(QStringLiteral("--separate"))) {
         if (wantsNewTab) {
             qWarning() << "--separate can't be used with --new-tab";
         }
-
         return true;
     }
     if (arguments.contains(QStringLiteral("--nofork"))) {
