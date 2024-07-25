@@ -29,7 +29,7 @@ class KONSOLEPRIVATE_EXPORT TerminalColor : public QObject
 public:
     explicit TerminalColor(QObject *parent);
 
-    void applyProfile(const Profile::Ptr &profile, const std::shared_ptr<const ColorScheme> &colorScheme, uint randomSeed);
+    void applyProfile(const Profile::Ptr &profile, const std::shared_ptr<const ColorScheme> &colorScheme, uint sessionId);
 
     QColor backgroundColor() const;
     QColor foregroundColor() const;

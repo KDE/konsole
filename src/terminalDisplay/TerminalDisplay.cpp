@@ -419,15 +419,6 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
     viewScrolledByUser();
 }
 
-void TerminalDisplay::setRandomSeed(uint randomSeed)
-{
-    _randomSeed = randomSeed;
-}
-uint TerminalDisplay::randomSeed() const
-{
-    return _randomSeed;
-}
-
 void TerminalDisplay::processFilters()
 {
     if (_screenWindow.isNull()) {
@@ -3111,7 +3102,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 {
     // load color scheme
     _colorScheme = ViewManager::colorSchemeForProfile(profile);
-    _terminalColor->applyProfile(profile, _colorScheme, randomSeed());
+    _terminalColor->applyProfile(profile, _colorScheme, sessionController()->session()->sessionId());
     setWallpaper(_colorScheme->wallpaper());
 
     // load font
