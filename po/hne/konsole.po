@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-24 00:42+0000\n"
+"POT-Creation-Date: 2024-07-25 00:41+0000\n"
 "PO-Revision-Date: 2009-01-29 20:59+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -2269,21 +2269,21 @@ msgstr ""
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "प्रोग्राम '%1' ल आर्गुमेंट '%2'.के साथ चालू नइ कर सकिस."
 
-#: session/Session.cpp:741
+#: session/Session.cpp:750
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' सत्र मं सांति"
 
-#: session/Session.cpp:742 session/Session.cpp:2080
+#: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Show session"
 msgstr "कंसोल"
 
-#: session/Session.cpp:1026
+#: session/Session.cpp:1035
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2292,29 +2292,29 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1075
 #, fuzzy, kde-format
 #| msgid "Finished"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "पूरा"
 
-#: session/Session.cpp:1080 session/Session.cpp:1096
+#: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "प्रोग्राम '%1' क्रैस होइस."
 
-#: session/Session.cpp:1082
+#: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "प्रोग्राम '%1'  स्थिति %2 के साथ बाहिर होइस."
 
-#: session/Session.cpp:1608
+#: session/Session.cpp:1617
 #, kde-format
 msgid "ZModem Progress"
 msgstr "जेड-माडम प्रगति"
 
-#: session/Session.cpp:2079
+#: session/Session.cpp:2088
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -2691,17 +2691,17 @@ msgstr ""
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr ""
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2709,20 +2709,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr ""
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr ""
@@ -3903,7 +3903,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2474
+#: Vt102Emulation.cpp:2510
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

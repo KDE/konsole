@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-24 00:42+0000\n"
+"POT-Creation-Date: 2024-07-25 00:41+0000\n"
 "PO-Revision-Date: 2024-07-22 20:36+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -2109,19 +2109,19 @@ msgstr ""
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Kunde inte starta programmet '%1' med argumenten '%2'."
 
-#: session/Session.cpp:741
+#: session/Session.cpp:750
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tystnad i '%1' (session '%2')"
 
-#: session/Session.cpp:742 session/Session.cpp:2080
+#: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
 #, kde-format
 msgid "Show session"
 msgstr "Visa session"
 
-#: session/Session.cpp:1026
+#: session/Session.cpp:1035
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2134,28 +2134,28 @@ msgstr ""
 "metoderna ändras till bara intern användning genom att kompilera om Terminal."
 "<p>Varningen visas bara en gång för den här instansen av Terminal.</p>"
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1075
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Avslutad"
 
-#: session/Session.cpp:1080 session/Session.cpp:1096
+#: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programmet '%1' kraschade."
 
-#: session/Session.cpp:1082
+#: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programmet '%1' avslutades med status %2."
 
-#: session/Session.cpp:1608
+#: session/Session.cpp:1617
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Z-modemförlopp"
 
-#: session/Session.cpp:2079
+#: session/Session.cpp:2088
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitet i '%1' (session '%2')"
@@ -2501,17 +2501,17 @@ msgstr "Döda program"
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Skalprompten visas i session '%1'"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Öppna nuvarande katalog med"
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Spara nerladdning med Zmodem som..."
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2522,14 +2522,14 @@ msgstr ""
 "programvara för Zmodem hittades på systemet.</p><p>Du kanske bör installera "
 "paketet 'rzsz' eller 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Den aktuella sessionen har redan en pågående filöverföring med Zmodem.</p>"
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2538,7 +2538,7 @@ msgstr ""
 "<p>Ingen lämplig programvara för Zmodem hittades på systemet.</p><p>Du "
 "kanske bör installera paketet 'rzsz' eller 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Välj filer för uppladdning med Zmodem"
@@ -3665,7 +3665,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Läs in fliklayout"
 
-#: Vt102Emulation.cpp:2474
+#: Vt102Emulation.cpp:2510
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-24 00:42+0000\n"
+"POT-Creation-Date: 2024-07-25 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1935,23 +1935,23 @@ msgstr "%1 是无效 URL，输出无法保存。"
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "创建自动保存文件于 %1 失败。"
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "停止自动保存，因为屏幕发生了切换。"
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
-msgstr ""
+msgstr "自动保存文件已被外部修改，在这之后的自动保存因此被阻止。"
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "输出发生变化时更新自动保存状态失败。"
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2075,19 +2075,19 @@ msgstr "找不到“%1”，已使用“%2”替代启动。请检查配置方�
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "无法以参数“%2”启动程序“%1”。"
 
-#: session/Session.cpp:741
+#: session/Session.cpp:750
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "“%1“中的静止 (会话”%2“)"
 
-#: session/Session.cpp:742 session/Session.cpp:2080
+#: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
 #, kde-format
 msgid "Show session"
 msgstr "显示会话"
 
-#: session/Session.cpp:1026
+#: session/Session.cpp:1035
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2099,28 +2099,28 @@ msgstr ""
 "全风险。如果愿意，可以重新编译 Konsole ，将这些方法更改为只允许内部使用。<p>"
 "此警告在此 Konsole 实例中只显示一次。</p>"
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1075
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "已完成"
 
-#: session/Session.cpp:1080 session/Session.cpp:1096
+#: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "程序“%1”崩溃。"
 
-#: session/Session.cpp:1082
+#: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "程序“%1”以状态 %2 退出。"
 
-#: session/Session.cpp:1608
+#: session/Session.cpp:1617
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 进度"
 
-#: session/Session.cpp:2079
+#: session/Session.cpp:2088
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "“%1“中的活动 (会话”%2“)"
@@ -2221,15 +2221,14 @@ msgid "Save Output &As..."
 msgstr "输出保存为(&A)..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "输出保存为(&A)..."
+msgstr "自动保存输出为..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "停止自动保存"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -2459,17 +2458,17 @@ msgstr "杀死程序"
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "外壳程序的提示显示在会话“%1”"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "打开当前文件夹方式"
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "保存 ZModem 下载数据到..."
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2479,13 +2478,13 @@ msgstr ""
 "<p>检测到一个 ZModem 文件传输尝试，但是在此系统上找不到合适的 ZModem 软件。</"
 "p><p>您可能需要安装“rzsz”或“lrzsz”软件包。</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>当前会话已经有一个 ZModem 文件传输在进行中。</p>"
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2494,7 +2493,7 @@ msgstr ""
 "<p>在此系统上找不到合适的 ZModem 软件。</p><p>您可能需要安装“rzsz”或“lrzsz”软"
 "件包。</p>"
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "选择要通过 ZModem 上传的文件"
@@ -3612,7 +3611,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "加载标签页布局"
 
-#: Vt102Emulation.cpp:2474
+#: Vt102Emulation.cpp:2510
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3712,13 +3711,13 @@ msgstr "暂时显示主屏幕快捷键："
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "设置自动保存间隔："
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " 毫秒"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

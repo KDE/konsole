@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-24 00:42+0000\n"
+"POT-Creation-Date: 2024-07-25 00:41+0000\n"
 "PO-Revision-Date: 2024-07-22 05:26+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -2094,19 +2094,19 @@ msgstr ""
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "ვერ გავუშვი პროგრამა '%1' არგუმენტებით '%2'."
 
-#: session/Session.cpp:741
+#: session/Session.cpp:750
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ჩაჩუმება '%1'-ში (სესია '%2')"
 
-#: session/Session.cpp:742 session/Session.cpp:2080
+#: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
 #, kde-format
 msgid "Show session"
 msgstr "სესიის ჩვენება"
 
-#: session/Session.cpp:1026
+#: session/Session.cpp:1035
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2120,28 +2120,28 @@ msgstr ""
 "თავიდან აგება მოგიწევთ. <p>ეს გაფრთხილება Konsole-ის ამ გაშვებული ასლისთვის, "
 "მხოლოდ, ერთხელ გამოჩნდება.</p>"
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1075
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "დასრულებულია"
 
-#: session/Session.cpp:1080 session/Session.cpp:1096
+#: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "პროგრამა %1 ავარიულად დასრულდა."
 
-#: session/Session.cpp:1082
+#: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "პროგრამა %1 ავარიულად დასრულდა, კოდით %2."
 
-#: session/Session.cpp:1608
+#: session/Session.cpp:1617
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem -ის მიმდინარეობა"
 
-#: session/Session.cpp:2079
+#: session/Session.cpp:2088
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "აქტივობა '%1'-ში (სესია '%2')"
@@ -2487,17 +2487,17 @@ msgstr "პროგრამის მოკვლა"
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "გარსის შეტყობინება ნაჩვენებია სესიაში '%1'"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "მიმდინარე საქაღალდის პროგრამით გახსნა"
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "ZModem-ით გადმოწერილის შენახვა ფაილში..."
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2508,13 +2508,13 @@ msgstr ""
 "შესაბამისი ZModem-ის პროგრამები ვერ ვიპოვე.</p></p>შეიძლება, 'rzsz' ან "
 "'lrzsz' პაკეტების დაყენებამ გიშველოთ.</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>მიმდინარე სესიაში ZModem-ით ფაილის გადაცემა უკვე მიმდინარეობს.</p>"
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2523,7 +2523,7 @@ msgstr ""
 "<p>ამ სისტემაში შესაბამისი ZModem-ის პროგრამები ვერ ვიპოვე.</p></p>შეიძლება, "
 "'rzsz' ან 'lrzsz' პაკეტების დაყენებამ გიშველოთ.</p>"
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "აირჩიეთ ფაილები ZModem-ით ასატვირთად"
@@ -3656,7 +3656,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "ჩანართების განლაგების ჩატვირთვა"
 
-#: Vt102Emulation.cpp:2474
+#: Vt102Emulation.cpp:2510
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

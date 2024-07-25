@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-24 00:42+0000\n"
+"POT-Creation-Date: 2024-07-25 00:41+0000\n"
 "PO-Revision-Date: 2024-07-23 22:09+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2079,19 +2079,19 @@ msgstr "找不到 %1，改啟動 %2。請檢查您的設定檔。"
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "無法啟動程式 %1，參數為 %2。"
 
-#: session/Session.cpp:741
+#: session/Session.cpp:750
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "分頁 %1 目前靜默中（於工作階段 %2）"
 
-#: session/Session.cpp:742 session/Session.cpp:2080
+#: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
 #, kde-format
 msgid "Show session"
 msgstr "顯示工作階段"
 
-#: session/Session.cpp:1026
+#: session/Session.cpp:1035
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2103,28 +2103,28 @@ msgstr ""
 "要的話，這些方法只能由重新編譯 Konsole 來變更為內部使用。<p>這個警告將只會在"
 "這個Konsole 實體中顯示一次。</p>"
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1075
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "已完成"
 
-#: session/Session.cpp:1080 session/Session.cpp:1096
+#: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "程式 %1 當掉了。"
 
-#: session/Session.cpp:1082
+#: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "程式 %1 以 %2 狀態結束。"
 
-#: session/Session.cpp:1608
+#: session/Session.cpp:1617
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem 進度"
 
-#: session/Session.cpp:2079
+#: session/Session.cpp:2088
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "分頁 %1 目前活躍中（於工作階段 %2）"
@@ -2462,17 +2462,17 @@ msgstr "砍除程式"
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "shell 提示字元會顯示在工作階段「%1」"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "以…開啟目前資料夾"
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "儲存 ZModem 下載檔到..."
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2482,13 +2482,13 @@ msgstr ""
 "<p>偵測到要使用 ZModem 做檔案傳輸，但是此系統上找不到適合的 ZModem 軟體。</"
 "p><p>您可能需要安裝 rzsz 或 lrzsz 等軟體包。</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>目前的工作階段已經有一個 ZModem 檔案傳輸在進行中。</p>"
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2497,7 +2497,7 @@ msgstr ""
 "<p>此系統上找不到適合的 ZModem 軟體。</p><p>您可能需要安裝 rzsz 或 lrzsz 等軟"
 "體包。</p>"
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "選擇要用 ZModem 上傳的檔案"
@@ -3618,7 +3618,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "載入分頁佈局"
 
-#: Vt102Emulation.cpp:2474
+#: Vt102Emulation.cpp:2510
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

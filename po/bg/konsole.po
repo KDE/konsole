@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-24 00:42+0000\n"
-"PO-Revision-Date: 2024-05-30 20:42+0200\n"
+"POT-Creation-Date: 2024-07-25 00:41+0000\n"
+"PO-Revision-Date: 2024-07-24 13:09+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1969,23 +1969,27 @@ msgstr "%1 е невалиден URL адрес, изходът не можа д
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Неуспешно автоматично запазване на файл в %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Спиране на автоматичното запазване при превключване на екраните."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Файлът за автоматично запазване е променен от външен процес, "
+"предотвратявайки по-нататъшно автоматично запазване."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Неуспешно актуализиране на състоянието на автоматично запазване при промяна "
+"на изхода."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2111,19 +2115,19 @@ msgstr ""
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Не може да се стартира програма '%1' с аргументи '%2'."
 
-#: session/Session.cpp:741
+#: session/Session.cpp:750
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Пасивност в \"%1\" (Сесия \"%2\")"
 
-#: session/Session.cpp:742 session/Session.cpp:2080
+#: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
 #, kde-format
 msgid "Show session"
 msgstr "Показване на сесия"
 
-#: session/Session.cpp:1026
+#: session/Session.cpp:1035
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2137,28 +2141,28 @@ msgstr ""
 "употреба само чрез прекомпилиране на Konsole.<p>Това предупреждение ще бъде "
 "показано само веднъж за тази инстанция на Konsole.</p>"
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1075
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Завършено"
 
-#: session/Session.cpp:1080 session/Session.cpp:1096
+#: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Програмата \"%1\" блокира."
 
-#: session/Session.cpp:1082
+#: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Програмата \"%1\" беше спряна - %2."
 
-#: session/Session.cpp:1608
+#: session/Session.cpp:1617
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Индикатор на прогреса на качването"
 
-#: session/Session.cpp:2079
+#: session/Session.cpp:2088
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Активност в '%1' (Сесия '%2')"
@@ -2259,15 +2263,14 @@ msgid "Save Output &As..."
 msgstr "Запис на &изхода като..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Запис на &изхода като..."
+msgstr "Автоматичен запис на изхода като..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Спиране на автоматичното запазване"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -2505,17 +2508,17 @@ msgstr "Прекратяване на програмата"
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Курсорът на обвивката се показва в сесия '%1'"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Отваряне на текущата папка с"
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Запазване на ZModem изтегляния в..."
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2526,14 +2529,14 @@ msgstr ""
 "не е намерен подходящ софтуер на ZModem.</p><p> Може да искате да "
 "инсталирате пакета 'rzsz' или 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Текущата сесия вече има стартиран процес за обмен на файл (ZModem).</p>"
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2542,7 +2545,7 @@ msgstr ""
 "<p> В тази система не бе намерен подходящ софтуер ZModem.</p><p> Може да "
 "пожелаете да инсталирате пакета 'rzsz' или 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Избор на файлове за качване на ZModem"
@@ -3683,7 +3686,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Зареждане подредбата на разделите"
 
-#: Vt102Emulation.cpp:2474
+#: Vt102Emulation.cpp:2510
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -3785,13 +3788,13 @@ msgstr "Клавишна комбинация за надникване в ос�
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Интервал между автоматичните записи:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283
@@ -5214,19 +5217,21 @@ msgstr "Преформатиране на редовете при преораз
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Цвят на маркерите на лентата за превъртане:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
 msgstr ""
+"Размер на всеки отделен маркер (като процент от дължината на лентата за "
+"превъртане):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

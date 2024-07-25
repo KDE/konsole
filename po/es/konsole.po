@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-24 00:42+0000\n"
+"POT-Creation-Date: 2024-07-25 00:41+0000\n"
 "PO-Revision-Date: 2024-07-23 00:37+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -2131,19 +2131,19 @@ msgstr ""
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "No fue posible iniciar «%1» con los argumentos «%2»."
 
-#: session/Session.cpp:741
+#: session/Session.cpp:750
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silencio en «%1» (sesión «%2»)"
 
-#: session/Session.cpp:742 session/Session.cpp:2080
+#: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1152
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
 #, kde-format
 msgid "Show session"
 msgstr "Mostrar sesión"
 
-#: session/Session.cpp:1026
+#: session/Session.cpp:1035
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2156,28 +2156,28 @@ msgstr ""
 "métodos solo se usen internamente volviendo a compilar Konsole. <p>Esta "
 "advertencia solo se mostrará una vez para esta instancia de Konsole.</p>"
 
-#: session/Session.cpp:1066
+#: session/Session.cpp:1075
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finalizado"
 
-#: session/Session.cpp:1080 session/Session.cpp:1096
+#: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "El programa «%1» se cerró inesperadamente."
 
-#: session/Session.cpp:1082
+#: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "El programa «%1» finalizó con el estado %2."
 
-#: session/Session.cpp:1608
+#: session/Session.cpp:1617
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Progreso de ZModem"
 
-#: session/Session.cpp:2079
+#: session/Session.cpp:2088
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Actividad en «%1» (sesión «%2»)"
@@ -2521,17 +2521,17 @@ msgstr "Matar programa"
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "La línea de órdenes se muestra en la sesión «%1»"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Abrir la carpeta actual con"
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Guardar descarga ZModem en..."
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2542,7 +2542,7 @@ msgstr ""
 "no se ha encontrado ningún software adecuado para ello en su equipo.</"
 "p><p>Quizá desee instalar los paquetes «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2550,7 +2550,7 @@ msgstr ""
 "<p>La sesión actual ya está procesando una transferencia de archivo ZModem.</"
 "p>"
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2559,7 +2559,7 @@ msgstr ""
 "<p>No se ha encontrado ningún software adecuado para ZModem en su equipo.</"
 "p><p>Quizá desee instalar los paquetes «rzsz» o «lrzsz».</p>"
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Seleccione los archivos del envío por ZModem"
@@ -3702,7 +3702,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Cargar configuración de pestañas"
 
-#: Vt102Emulation.cpp:2474
+#: Vt102Emulation.cpp:2510
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
