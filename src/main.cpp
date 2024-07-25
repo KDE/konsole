@@ -278,6 +278,9 @@ bool shouldUseNewProcess(int argc, char *argv[])
         arguments.append(QString::fromLocal8Bit(argv[i]));
     }
 
+    // the only way to create new tab is to reuse existing Konsole process.
+    const bool wantsNewTab = arguments.contains(QStringLiteral("--new-tab"));
+
     if (arguments.contains(QLatin1String("--force-reuse"))) {
         return false;
     }
@@ -291,6 +294,10 @@ bool shouldUseNewProcess(int argc, char *argv[])
 #endif
     for (const QString &option : std::as_const(qtProblematicOptions)) {
         if (arguments.contains(option)) {
+            if (wantsNewTab) {
+                qWarning() << "Argument" << option << "can't be used with --new-tab";
+            }
+
             return true;
         }
     }
@@ -304,6 +311,10 @@ bool shouldUseNewProcess(int argc, char *argv[])
 
     for (const QString &option : std::as_const(kdeProblematicOptions)) {
         if (arguments.contains(option)) {
+            if (wantsNewTab) {
+                qWarning() << "Argument" << option << "can't be used with --new-tab";
+            }
+
             return true;
         }
     }
@@ -312,12 +323,17 @@ bool shouldUseNewProcess(int argc, char *argv[])
     // Support --nofork to retain argument compatibility with older
     // versions.
     if (arguments.contains(QStringLiteral("--separate")) || arguments.contains(QStringLiteral("--nofork"))) {
+        if (wantsNewTab) {
+            qWarning() << "--separate can't be used with --new-tab";
+        }
+
         return true;
     }
-
-    // the only way to create new tab is to reuse existing Konsole process.
-    if (arguments.contains(QStringLiteral("--new-tab"))) {
-        return false;
+    if (arguments.contains(QStringLiteral("--nofork"))) {
+        if (wantsNewTab) {
+            qWarning() << "--no-fork can't be used with --new-tab";
+        }
+        return true;
     }
 
     // when starting Konsole from a terminal, a new process must be used
@@ -329,6 +345,12 @@ bool shouldUseNewProcess(int argc, char *argv[])
     if (fd != -1) {
         hasControllingTTY = true;
         close(fd);
+    }
+
+    // TODO: find out how to pass environment, so we don't need to do this
+    if (wantsNewTab) {
+        qWarning() << "--new-tab will not propagate the environment from your current environment, and warnings from Konsole will not be printed";
+        return false;
     }
 
     return hasControllingTTY;
