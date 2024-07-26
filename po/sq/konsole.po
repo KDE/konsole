@@ -3,22 +3,22 @@
 # This file is distributed under the same license as the kdebase package.
 #
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
-# Agron Selimaj <as9902613@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2021, 2024 Agron Selimaj <as9902613@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdebase\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-25 00:41+0000\n"
-"PO-Revision-Date: 2021-03-31 16:13-0400\n"
+"POT-Creation-Date: 2024-07-26 00:42+0000\n"
+"PO-Revision-Date: 2024-07-25 02:49-0400\n"
 "Last-Translator: Agron Selimaj <as9902613@gmail.com>\n"
-"Language-Team: kdeshqip\n"
+"Language-Team: sq\n"
 "Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2011-04-22 06:28+0000\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -65,9 +65,9 @@ msgstr "Parametrat"
 
 #. i18n: ectx: Menu (plugins)
 #: ../desktop/konsoleui.rc:54
-#, kde-format
+#, fuzzy, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "Pluginat"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -238,209 +238,207 @@ msgstr "Sfondi"
 #, kde-format
 msgctxt "@item:inmenu The user's name and host they are connected to via ssh"
 msgid "%1 on %2"
-msgstr ""
+msgstr "%1 në %2"
 
 #: BookmarkHandler.cpp:109
 #, kde-format
 msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
-msgstr ""
+msgstr "%1"
 
-#: colorscheme/ColorScheme.cpp:123
-#, fuzzy
-#| msgid "Foreground"
+#: colorscheme/ColorScheme.cpp:124
 msgctxt "@item:intable palette"
 msgid "Foreground"
 msgstr "Pamja Parësore"
 
-#: colorscheme/ColorScheme.cpp:124
+#: colorscheme/ColorScheme.cpp:125
 #, fuzzy
 #| msgid "Background"
 msgctxt "@item:intable palette"
 msgid "Background"
 msgstr "Sfondi"
 
-#: colorscheme/ColorScheme.cpp:125
+#: colorscheme/ColorScheme.cpp:126
 #, fuzzy
 #| msgid "Color 1"
 msgctxt "@item:intable palette"
 msgid "Color 1"
-msgstr "Ngjyra 1"
+msgstr "Ngjyra"
 
-#: colorscheme/ColorScheme.cpp:126
+#: colorscheme/ColorScheme.cpp:127
 #, fuzzy
 #| msgid "Color 2"
 msgctxt "@item:intable palette"
 msgid "Color 2"
-msgstr "Ngjyra 2"
+msgstr "Ngjyra"
 
-#: colorscheme/ColorScheme.cpp:127
+#: colorscheme/ColorScheme.cpp:128
 #, fuzzy
 #| msgid "Color 3"
 msgctxt "@item:intable palette"
 msgid "Color 3"
-msgstr "Ngjyra 3"
+msgstr "Ngjyra"
 
-#: colorscheme/ColorScheme.cpp:128
+#: colorscheme/ColorScheme.cpp:129
 #, fuzzy
 #| msgid "Color 4"
 msgctxt "@item:intable palette"
 msgid "Color 4"
-msgstr "Ngjyra 4"
+msgstr "Ngjyra"
 
-#: colorscheme/ColorScheme.cpp:129
+#: colorscheme/ColorScheme.cpp:130
 #, fuzzy
 #| msgid "Color 5"
 msgctxt "@item:intable palette"
 msgid "Color 5"
-msgstr "Ngjyra 5"
+msgstr "Ngjyra"
 
-#: colorscheme/ColorScheme.cpp:130
+#: colorscheme/ColorScheme.cpp:131
 #, fuzzy
 #| msgid "Color 6"
 msgctxt "@item:intable palette"
 msgid "Color 6"
-msgstr "Ngjyra 6"
+msgstr "Ngjyra"
 
-#: colorscheme/ColorScheme.cpp:131
+#: colorscheme/ColorScheme.cpp:132
 #, fuzzy
 #| msgid "Color 7"
 msgctxt "@item:intable palette"
 msgid "Color 7"
-msgstr "Ngjyra 7"
+msgstr "Ngjyra"
 
-#: colorscheme/ColorScheme.cpp:132
+#: colorscheme/ColorScheme.cpp:133
 #, fuzzy
 #| msgid "Color 8"
 msgctxt "@item:intable palette"
 msgid "Color 8"
-msgstr "Ngjyra 8"
+msgstr "Ngjyra"
 
-#: colorscheme/ColorScheme.cpp:133
+#: colorscheme/ColorScheme.cpp:134
 #, fuzzy
 #| msgid "Foreground"
 msgctxt "@item:intable palette"
 msgid "Foreground (Intense)"
 msgstr "Pamja Parësore"
 
-#: colorscheme/ColorScheme.cpp:134
+#: colorscheme/ColorScheme.cpp:135
 #, fuzzy
 #| msgid "Background"
 msgctxt "@item:intable palette"
 msgid "Background (Intense)"
 msgstr "Sfondi"
 
-#: colorscheme/ColorScheme.cpp:135
+#: colorscheme/ColorScheme.cpp:136
 msgctxt "@item:intable palette"
 msgid "Color 1 (Intense)"
 msgstr ""
 
-#: colorscheme/ColorScheme.cpp:136
+#: colorscheme/ColorScheme.cpp:137
 msgctxt "@item:intable palette"
 msgid "Color 2 (Intense)"
 msgstr ""
 
-#: colorscheme/ColorScheme.cpp:137
+#: colorscheme/ColorScheme.cpp:138
 msgctxt "@item:intable palette"
 msgid "Color 3 (Intense)"
 msgstr ""
 
-#: colorscheme/ColorScheme.cpp:138
+#: colorscheme/ColorScheme.cpp:139
 msgctxt "@item:intable palette"
 msgid "Color 4 (Intense)"
 msgstr ""
 
-#: colorscheme/ColorScheme.cpp:139
+#: colorscheme/ColorScheme.cpp:140
 msgctxt "@item:intable palette"
 msgid "Color 5 (Intense)"
 msgstr ""
 
-#: colorscheme/ColorScheme.cpp:140
+#: colorscheme/ColorScheme.cpp:141
 msgctxt "@item:intable palette"
 msgid "Color 6 (Intense)"
 msgstr ""
 
-#: colorscheme/ColorScheme.cpp:141
+#: colorscheme/ColorScheme.cpp:142
 msgctxt "@item:intable palette"
 msgid "Color 7 (Intense)"
 msgstr ""
 
-#: colorscheme/ColorScheme.cpp:142
+#: colorscheme/ColorScheme.cpp:143
 msgctxt "@item:intable palette"
 msgid "Color 8 (Intense)"
 msgstr ""
 
-#: colorscheme/ColorScheme.cpp:143
+#: colorscheme/ColorScheme.cpp:144
 #, fuzzy
 #| msgid "Foreground"
 msgctxt "@item:intable palette"
 msgid "Foreground (Faint)"
 msgstr "Pamja Parësore"
 
-#: colorscheme/ColorScheme.cpp:144
+#: colorscheme/ColorScheme.cpp:145
 #, fuzzy
 #| msgid "Background"
 msgctxt "@item:intable palette"
 msgid "Background (Faint)"
 msgstr "Sfondi"
 
-#: colorscheme/ColorScheme.cpp:145
+#: colorscheme/ColorScheme.cpp:146
 #, fuzzy
 #| msgid "Color 1"
 msgctxt "@item:intable palette"
 msgid "Color 1 (Faint)"
 msgstr "Ngjyra 1"
 
-#: colorscheme/ColorScheme.cpp:146
+#: colorscheme/ColorScheme.cpp:147
 #, fuzzy
 #| msgid "Color 2"
 msgctxt "@item:intable palette"
 msgid "Color 2 (Faint)"
 msgstr "Ngjyra 2"
 
-#: colorscheme/ColorScheme.cpp:147
+#: colorscheme/ColorScheme.cpp:148
 #, fuzzy
 #| msgid "Color 3"
 msgctxt "@item:intable palette"
 msgid "Color 3 (Faint)"
 msgstr "Ngjyra 3"
 
-#: colorscheme/ColorScheme.cpp:148
+#: colorscheme/ColorScheme.cpp:149
 #, fuzzy
 #| msgid "Color 4"
 msgctxt "@item:intable palette"
 msgid "Color 4 (Faint)"
 msgstr "Ngjyra 4"
 
-#: colorscheme/ColorScheme.cpp:149
+#: colorscheme/ColorScheme.cpp:150
 #, fuzzy
 #| msgid "Color 5"
 msgctxt "@item:intable palette"
 msgid "Color 5 (Faint)"
 msgstr "Ngjyra 5"
 
-#: colorscheme/ColorScheme.cpp:150
+#: colorscheme/ColorScheme.cpp:151
 #, fuzzy
 #| msgid "Color 6"
 msgctxt "@item:intable palette"
 msgid "Color 6 (Faint)"
 msgstr "Ngjyra 6"
 
-#: colorscheme/ColorScheme.cpp:151
+#: colorscheme/ColorScheme.cpp:152
 #, fuzzy
 #| msgid "Color 7"
 msgctxt "@item:intable palette"
 msgid "Color 7 (Faint)"
 msgstr "Ngjyra 7"
 
-#: colorscheme/ColorScheme.cpp:152
+#: colorscheme/ColorScheme.cpp:153
 #, fuzzy
 #| msgid "Color 8"
 msgctxt "@item:intable palette"
 msgid "Color 8 (Faint)"
 msgstr "Ngjyra 8"
 
-#: colorscheme/ColorScheme.cpp:451
+#: colorscheme/ColorScheme.cpp:452
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgctxt "@item"
@@ -448,16 +446,16 @@ msgid "Un-named Color Scheme"
 msgstr "Skemë e Re Ngjyre"
 
 #: colorscheme/ColorSchemeEditor.cpp:110
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label:listbox Column header text for color names"
 msgid "Name"
-msgstr ""
+msgstr "Emri"
 
 #: colorscheme/ColorSchemeEditor.cpp:110
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual colors"
 msgid "Color"
-msgstr ""
+msgstr "Ngjyra"
 
 #: colorscheme/ColorSchemeEditor.cpp:111
 #, kde-format
@@ -492,8 +490,7 @@ msgid "Supported Images"
 msgstr ""
 
 #: colorscheme/ColorSchemeEditor.cpp:334
-#, fuzzy, kde-format
-#| msgid "New Color Scheme"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Color Scheme"
 msgstr "Skemë e Re Ngjyre"
@@ -526,9 +523,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
 #. i18n: ectx: property (text), widget (QLabel, discriptionLabel)
 #: colorscheme/ColorSchemeEditor.ui:31 KeyBindingEditor.ui:31
-#, kde-format
+#, fuzzy, kde-format
 msgid "Description:"
-msgstr ""
+msgstr "Përshkrimi:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, randomizedBackgroundCheck)
 #: colorscheme/ColorSchemeEditor.ui:50
@@ -565,7 +562,7 @@ msgstr "Sfondi"
 #: colorscheme/ColorSchemeEditor.ui:89 colorscheme/ColorSchemeEditor.ui:123
 #, kde-format
 msgid "Percent"
-msgstr ""
+msgstr "Përqind"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperTransparencyLabel)
 #: colorscheme/ColorSchemeEditor.ui:103
@@ -623,15 +620,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:183
-#, kde-format
+#, fuzzy, kde-format
 msgid "Crop"
-msgstr ""
+msgstr "Preje"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:188
 #, kde-format
 msgid "Adapt"
-msgstr ""
+msgstr "Përshtat"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:193
@@ -655,21 +652,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, kde-format
+#, fuzzy, kde-format
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, kde-format
+#, fuzzy, kde-format
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikal"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
 #, kde-format
 msgid "Both"
-msgstr ""
+msgstr "Së bashku"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperHorizontalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:240
@@ -681,7 +678,7 @@ msgstr ""
 #: colorscheme/ColorSchemeEditor.ui:266
 #, kde-format
 msgid "Left"
-msgstr ""
+msgstr "Majtas"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorLabel)
 #: colorscheme/ColorSchemeEditor.ui:277
@@ -691,9 +688,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperVerticalAnchorPosition)
 #: colorscheme/ColorSchemeEditor.ui:303
-#, kde-format
+#, fuzzy, kde-format
 msgid "Top"
-msgstr ""
+msgstr "Kreu"
 
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
@@ -710,19 +707,19 @@ msgstr "Kopjo Hyrjen"
 #: CopyInputDialog.ui:19 KeyBindingEditor.ui:41
 #, kde-format
 msgid "Filter:"
-msgstr ""
+msgstr "Filtri:"
 
 #. i18n: ectx: property (text), widget (QPushButton, selectAllButton)
 #: CopyInputDialog.ui:46
 #, kde-format
 msgid "Select All"
-msgstr ""
+msgstr "Zgjidhi të Gjitha"
 
 #. i18n: ectx: property (text), widget (QPushButton, deselectAllButton)
 #: CopyInputDialog.ui:53
 #, kde-format
 msgid "Deselect All"
-msgstr ""
+msgstr "Lësho Gjithçka"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
 #, fuzzy, kde-format
@@ -739,10 +736,9 @@ msgid ""
 msgstr ""
 
 #: filterHotSpots/FileFilterHotspot.cpp:172
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Copy Location"
-msgstr "Kopjo Hyrjen"
+msgstr "Kopjo Vendndodhjen"
 
 #: filterHotSpots/FileFilterHotspot.cpp:280
 #, kde-format
@@ -774,7 +770,7 @@ msgstr "Kopjo Adresën Email"
 #| msgid "Paste Selection"
 msgctxt "@title:window"
 msgid "Select font"
-msgstr "Ngjit Përzgjedhjen"
+msgstr "Zgjidh Gërmën"
 
 #: FontDialog.cpp:38
 #, kde-format
@@ -842,16 +838,16 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
-msgstr ""
+msgstr "Shto"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, removeKeyBindingsButton)
 #. i18n: ectx: property (text), widget (QPushButton, removeColorSchemeButton)
 #: KeyBindingEditor.ui:72 widgets/EditProfileAppearancePage.ui:92
 #: widgets/EditProfileKeyboardPage.ui:83
-#, kde-format
+#, fuzzy, kde-format
 msgid "Remove"
-msgstr ""
+msgstr "Hiqe"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: KeyBindingEditor.ui:94
@@ -862,17 +858,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: KeyBindingEditor.ui:115
-#, fuzzy, kde-format
-#| msgid "Copy Input"
+#, kde-format
 msgid "Input:"
-msgstr "Kopjo Hyrjen"
+msgstr "Hyrja:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: KeyBindingEditor.ui:128
-#, fuzzy, kde-format
-#| msgid "Output"
+#, kde-format
 msgid "Output:"
-msgstr "Rezultati"
+msgstr "Dalja:"
 
 #: main.cpp:186
 #, fuzzy, kde-format
@@ -909,7 +903,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Robert Knight"
-msgstr ""
+msgstr "Robert Knight"
 
 #: main.cpp:347
 #, kde-format
@@ -924,10 +918,10 @@ msgid "Lars Doelle"
 msgstr ""
 
 #: main.cpp:349
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
-msgstr ""
+msgstr "Autori origjinal"
 
 #: main.cpp:350
 #, kde-format
@@ -1012,13 +1006,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Waldo Bastian"
-msgstr ""
+msgstr "Waldo Bastian"
 
 #: main.cpp:377
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Binner"
-msgstr ""
+msgstr "Stephan Binner"
 
 #: main.cpp:378
 #, kde-format
@@ -1043,7 +1037,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes"
-msgstr ""
+msgstr "Rregullimet e gabimeve"
 
 #: main.cpp:380
 #, kde-format
@@ -1055,7 +1049,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Stephan Kulow"
-msgstr ""
+msgstr "Stephan Kulow"
 
 #: main.cpp:381
 #, kde-format
@@ -1067,7 +1061,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Neundorf"
-msgstr ""
+msgstr "Alexander Neundorf"
 
 #: main.cpp:383
 #, kde-format
@@ -1105,7 +1099,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
-msgstr ""
+msgstr "David Faure"
 
 #: main.cpp:393
 #, kde-format
@@ -1131,7 +1125,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Matthias Ettrich"
-msgstr ""
+msgstr "Matthias Ettrich"
 
 #: main.cpp:399
 #, kde-format
@@ -1157,7 +1151,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dan Pilone"
-msgstr ""
+msgstr "Dan Pilone"
 
 #: main.cpp:405
 #, kde-format
@@ -1199,7 +1193,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:credit"
 msgid "Lars Knoll"
-msgstr ""
+msgstr "Lars Knoll"
 
 #: main.cpp:411
 #, kde-format
@@ -1208,11 +1202,10 @@ msgid "Thanks to many others.\n"
 msgstr ""
 
 #: MainWindow.cpp:327
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
-msgstr "&Mbylle Tabelën"
+msgstr "&Tabelë e Re"
 
 #: MainWindow.cpp:337
 #, fuzzy, kde-format
@@ -1234,11 +1227,10 @@ msgid "Close Window"
 msgstr "Mbylle Dritaren"
 
 #: MainWindow.cpp:356
-#, fuzzy, kde-format
-#| msgid "&Bookmarks"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
-msgstr "&Faqeruajtës"
+msgstr "&Faqeruajtëset"
 
 #: MainWindow.cpp:379
 #, fuzzy, kde-format
@@ -1317,10 +1309,10 @@ msgid "General"
 msgstr "Të Përgjithshme"
 
 #: MainWindow.cpp:896
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "&Kujtesa:"
 
 #: MainWindow.cpp:902
 #, kde-format
@@ -1338,7 +1330,7 @@ msgstr "Skedat e përkohshme"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
-msgstr ""
+msgstr "Miniaturat"
 
 #: Part.cpp:300
 #, kde-format
@@ -1350,27 +1342,27 @@ msgstr ""
 #: plugins/QuickCommands/qcwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Forma"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: plugins/QuickCommands/qcwidget.ui:22
 #, kde-format
 msgid "Shortcut:"
-msgstr ""
+msgstr "Shkurtore:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterLine)
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, filterText)
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
 #, kde-format
 msgid "Filter..."
-msgstr ""
+msgstr "Filtri..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
 #: plugins/QuickCommands/qcwidget.ui:59 plugins/SSHManager/sshwidget.ui:46
 #, kde-format
 msgid "Invert"
-msgstr ""
+msgstr "Inverto"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: plugins/QuickCommands/qcwidget.ui:97
@@ -1388,22 +1380,22 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelGroup)
 #: plugins/QuickCommands/qcwidget.ui:117
-#, kde-format
+#, fuzzy, kde-format
 msgid "Group"
-msgstr ""
+msgstr "Grupi"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, group)
 #. i18n: ectx: property (currentText), widget (QComboBox, folder)
 #: plugins/QuickCommands/qcwidget.ui:128 plugins/SSHManager/sshwidget.ui:213
-#, kde-format
+#, fuzzy, kde-format
 msgid "Default"
-msgstr ""
+msgstr "I Parazgjedhur"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: plugins/QuickCommands/qcwidget.ui:143
 #, kde-format
 msgid "Command"
-msgstr ""
+msgstr "Komanda"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: plugins/QuickCommands/qcwidget.ui:193
@@ -1416,27 +1408,26 @@ msgstr ""
 #: plugins/QuickCommands/qcwidget.ui:236
 #, kde-format
 msgid "Run"
-msgstr ""
+msgstr "Ekzekuto"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSave)
 #: plugins/QuickCommands/qcwidget.ui:256
-#, fuzzy, kde-format
-#| msgid "Open Link"
+#, kde-format
 msgid "Save"
-msgstr "Hap Lidhje"
+msgstr "Ruaje"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
-#, kde-format
+#, fuzzy, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Përditëso"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnCancel)
 #: plugins/QuickCommands/qcwidget.ui:276 plugins/SSHManager/sshwidget.ui:320
-#, kde-format
+#, fuzzy, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Anullo"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:46
 #: plugins/QuickCommands/quickcommandsplugin.cpp:113
@@ -1489,7 +1480,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Run"
-msgstr ""
+msgstr "Ekzekuto"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:242
 #, kde-format
@@ -1522,12 +1513,12 @@ msgstr ""
 #: plugins/QuickCommands/quickcommandswidget.cpp:300
 #, kde-format
 msgid "Rename"
-msgstr ""
+msgstr "Riemërto"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:304
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Fshije"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:335
 #, kde-format
@@ -1547,7 +1538,7 @@ msgstr "Konfiguro"
 #| msgid "Edit Profile"
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
-msgstr "Modifiko Profilin"
+msgstr "I Parazgjedhur"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:75
 #, kde-format
@@ -1567,9 +1558,9 @@ msgid "SSH Config"
 msgstr "Konfiguro"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:103
-#, kde-format
+#, fuzzy, kde-format
 msgid "Host: %1"
-msgstr ""
+msgstr "Hosti:"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
@@ -1630,7 +1621,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
-msgstr ""
+msgstr "Fshije"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:161
 #, kde-format
@@ -1715,7 +1706,7 @@ msgstr "Modifiko Profilin"
 #: plugins/SSHManager/sshwidget.ui:19
 #, kde-format
 msgid "Shortcut"
-msgstr ""
+msgstr "Shkurtore"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, btnInvertFilter)
 #: plugins/SSHManager/sshwidget.ui:43
@@ -1771,7 +1762,7 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:116
 #, kde-format
 msgid "Port"
-msgstr ""
+msgstr "Porti"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:123
@@ -1815,7 +1806,7 @@ msgstr ""
 #: plugins/SSHManager/sshwidget.ui:177
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "Emri i Përdoruesit"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, username)
 #: plugins/SSHManager/sshwidget.ui:184
@@ -1834,9 +1825,9 @@ msgstr "KDE Shqip, Launchpad Contributions: Vilson Gjeci"
 
 #. i18n: ectx: property (text), widget (QLabel, folderLabel)
 #: plugins/SSHManager/sshwidget.ui:194
-#, kde-format
+#, fuzzy, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Dosje"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, folder)
 #: plugins/SSHManager/sshwidget.ui:207
@@ -1905,9 +1896,9 @@ msgstr "Rezultati"
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
 #: PrintOptions.ui:39 settings/konsole.kcfg:182
-#, kde-format
+#, fuzzy, kde-format
 msgid "Printer &friendly mode (black text, no background)"
-msgstr ""
+msgstr "Mënyrë miqësore printimi (tekst i zi, pa sfond)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
@@ -1920,7 +1911,7 @@ msgstr ""
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
-msgstr ""
+msgstr "E brendshme"
 
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:537
 #, kde-format
@@ -1940,16 +1931,16 @@ msgid "Konsole does not have permission to save this profile to %1"
 msgstr ""
 
 #: profile/ProfileModel.cpp:55
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:column Profile name"
 msgid "Name"
-msgstr ""
+msgstr "Emri"
 
 #: profile/ProfileModel.cpp:57
 #, kde-format
 msgctxt "@title:column Profile keyboard shortcut"
 msgid "Shortcut"
-msgstr ""
+msgstr "Shkurtore"
 
 #: profile/ProfileModel.cpp:80
 #, kde-format
@@ -1957,13 +1948,13 @@ msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr ""
+msgstr " [Vetëm lexim]"
 
 #: profile/ProfileModel.cpp:84
 #, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr ""
+msgstr " [I Parazgjedhur]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
@@ -2033,7 +2024,7 @@ msgstr ""
 #: schemas.cpp:3
 #, kde-format
 msgid "Black on White"
-msgstr ""
+msgstr "E Zezë mbi të Bardhë"
 
 #: schemas.cpp:4
 #, kde-format
@@ -2093,7 +2084,7 @@ msgstr ""
 #: schemas.cpp:15
 #, kde-format
 msgid "macOS"
-msgstr ""
+msgstr "macOS"
 
 #: schemas.cpp:16
 #, kde-format
@@ -2111,10 +2102,10 @@ msgid "Could not find binary: "
 msgstr ""
 
 #: session/Session.cpp:426
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
-msgstr ""
+msgstr "Kujdes"
 
 #: session/Session.cpp:520
 #, kde-format
@@ -2156,10 +2147,10 @@ msgid ""
 msgstr ""
 
 #: session/Session.cpp:1075
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
-msgstr ""
+msgstr "Përfunduar"
 
 #: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
@@ -2200,7 +2191,7 @@ msgstr ""
 #: session/SessionController.cpp:520
 #, kde-format
 msgid "Search for '%1' with"
-msgstr ""
+msgstr "Kërko për '%1' me"
 
 #: session/SessionController.cpp:536
 #, kde-format
@@ -2221,19 +2212,19 @@ msgstr ""
 #: session/SessionController.cpp:665
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Kopjo"
 
 #: session/SessionController.cpp:672
 #, fuzzy, kde-format
 #| msgid "Split View"
 msgid "Split View Left-Right"
-msgstr "Ndaj Pamjen"
+msgstr "Ndaje Pamjen &Majtas/Djathtas"
 
 #: session/SessionController.cpp:677
 #, fuzzy, kde-format
 #| msgid "Split View"
 msgid "Split View Top-Bottom"
-msgstr "Ndaj Pamjen"
+msgstr "Ndaje Pamjen Lart/Poshtë"
 
 #: session/SessionController.cpp:681
 #, kde-format
@@ -2265,7 +2256,7 @@ msgstr ""
 #: session/SessionController.cpp:721
 #, kde-format
 msgid "&Select All"
-msgstr ""
+msgstr "Zgjidhi të &Gjitha"
 
 #: session/SessionController.cpp:725
 #, fuzzy, kde-format
@@ -2327,15 +2318,14 @@ msgid "Previous Profile"
 msgstr "Modifiko Profilin"
 
 #: session/SessionController.cpp:778
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Switch Profile"
-msgstr "Modifiko Profilin"
+msgstr "Ndërro Profilin"
 
 #: session/SessionController.cpp:803
 #, kde-format
 msgid "Set &Encoding"
-msgstr ""
+msgstr "Vendos &Kodimin"
 
 #: session/SessionController.cpp:825
 #, kde-format
@@ -2344,10 +2334,10 @@ msgid "Allow Mouse Tracking"
 msgstr ""
 
 #: session/SessionController.cpp:834
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
-msgstr ""
+msgstr " [Vetëm lexim]"
 
 #: session/SessionController.cpp:845
 #, fuzzy, kde-format
@@ -2369,7 +2359,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
-msgstr ""
+msgstr "&Asnjë"
 
 #: session/SessionController.cpp:872
 #, kde-format
@@ -2432,10 +2422,9 @@ msgid "&Suspend Task"
 msgstr ""
 
 #: session/SessionController.cpp:944
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgid "&Continue Task"
-msgstr "&Mbylle Tabelën"
+msgstr "&Vazhdoni detyrën"
 
 #: session/SessionController.cpp:949
 #, kde-format
@@ -2471,7 +2460,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Create New Profile..."
-msgstr "Modifiko Profilin"
+msgstr "Krijoni Profil të Ri"
 
 #: session/SessionController.cpp:994
 #, fuzzy, kde-format
@@ -2589,7 +2578,7 @@ msgstr "Konfiguro"
 #, kde-format
 msgctxt "@item:intext Search options"
 msgid "Search:"
-msgstr ""
+msgstr "Kërko:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
@@ -2661,9 +2650,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #: settings/GeneralSettings.ui:166
-#, kde-format
+#, fuzzy, kde-format
 msgid "Case sensitive"
-msgstr ""
+msgstr "I &Ndjeshëm Ndaj Madhësisë së Gërmave"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoveWindowTitleBarAndFrame)
 #. i18n: ectx: label, entry (RemoveWindowTitleBarAndFrame), group (KonsoleWindow)
@@ -2680,9 +2669,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/GeneralSettings.ui:206
-#, kde-format
+#, fuzzy, kde-format
 msgid "Notifications:"
-msgstr ""
+msgstr "Njoftime"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:224
@@ -2706,9 +2695,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: label, entry (SearchReverseSearch), group (SearchSettings)
 #: settings/GeneralSettings.ui:258 settings/konsole.kcfg:78
-#, kde-format
+#, fuzzy, kde-format
 msgid "Search backwards"
-msgstr ""
+msgstr "Kërko mbrapsht."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
@@ -2938,7 +2927,7 @@ msgstr ""
 #: settings/MemorySettings.ui:48
 #, kde-format
 msgid " MB"
-msgstr ""
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/PartInfo.ui:17
@@ -2960,10 +2949,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:54
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "&New..."
-msgstr "Modifiko Profilin"
+msgstr "&I Ri..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:64
@@ -2974,10 +2962,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:67
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "&Edit..."
-msgstr "Modifiko Profilin"
+msgstr "&Modifiko..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:77
@@ -2990,7 +2977,7 @@ msgstr "Modifiko Profilin"
 #: settings/ProfileSettings.ui:80
 #, kde-format
 msgid "&Remove"
-msgstr ""
+msgstr "&Hiqe"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:90
@@ -3006,16 +2993,16 @@ msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Appearance"
-msgstr ""
+msgstr "Paraqitja"
 
 #. i18n: ectx: property (text), widget (QLabel, showTabBarLabel)
 #: settings/TabBarSettings.ui:53
 #, kde-format
 msgid "Show:"
-msgstr ""
+msgstr "Shfaq:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowTabBarWhenNeeded)
 #: settings/TabBarSettings.ui:63
@@ -3025,21 +3012,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
 #: settings/TabBarSettings.ui:73
-#, kde-format
+#, fuzzy, kde-format
 msgid "Alwa&ys"
-msgstr ""
+msgstr "Gjithmonë"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
 #: settings/TabBarSettings.ui:83
 #, kde-format
 msgid "&Never"
-msgstr ""
+msgstr "&Kurrë"
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
 #: settings/TabBarSettings.ui:109
-#, kde-format
+#, fuzzy, kde-format
 msgid "Position:"
-msgstr ""
+msgstr "Pozicioni"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
 #: settings/TabBarSettings.ui:119
@@ -3089,18 +3076,18 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:205
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr ""
+msgstr "Asnjë"
 
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
 #: settings/TabBarSettings.ui:231 settings/TabBarSettings.ui:364
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
-msgstr ""
+msgstr "Të Ndryshme"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
 #: settings/TabBarSettings.ui:241
@@ -3126,14 +3113,14 @@ msgstr ""
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
-msgstr ""
+msgstr "(asnjë)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
 #: settings/TabBarSettings.ui:304
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
-msgstr ""
+msgstr "Sjellja"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
 #: settings/TabBarSettings.ui:318
@@ -3181,10 +3168,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
 #: settings/TabBarSettings.ui:420
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
-msgstr ""
+msgstr "Kurrë"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/TabBarSettings.ui:446
@@ -3197,28 +3184,28 @@ msgstr ""
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
-msgstr ""
+msgstr "E vogël"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
 #: settings/TabBarSettings.ui:466
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
-msgstr ""
+msgstr "Mesatare"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
 #: settings/TabBarSettings.ui:476
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
-msgstr ""
+msgstr "E madhe"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
 #: settings/TabBarSettings.ui:499
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
-msgstr ""
+msgstr "Gjithmonë"
 
 #: settings/TemporaryFilesSettings.cpp:31
 #, kde-format
@@ -3245,22 +3232,22 @@ msgstr "Opsionet e Rrëshkitjes Mbrapsht"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_scrollbackUseSpecifiedLocation)
 #: settings/TemporaryFilesSettings.ui:64
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@option:radio Custom (file location); followed by text entry field"
 msgid "Custom:"
-msgstr ""
+msgstr "Përshtatur:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/ThumbnailsSettings.ui:17
 #, kde-format
 msgid "Size:"
-msgstr ""
+msgstr "Madhësia:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_ThumbnailSize)
 #: settings/ThumbnailsSettings.ui:24
 #, kde-format
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
@@ -3285,21 +3272,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
 #: settings/ThumbnailsSettings.ui:70
-#, kde-format
+#, fuzzy, kde-format
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailAlt)
 #: settings/ThumbnailsSettings.ui:77
 #, kde-format
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailCtrl)
 #: settings/ThumbnailsSettings.ui:84
 #, kde-format
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableThumbnails)
 #: settings/ThumbnailsSettings.ui:93
@@ -3307,98 +3294,98 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:663
+#: terminalDisplay/TerminalDisplay.cpp:654
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgid "Confirm Paste"
 msgstr "Konfirmo Mbylljen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
-#, kde-format
+#: terminalDisplay/TerminalDisplay.cpp:2287
+#, fuzzy, kde-format
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Konfirmo Mbylljen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "Ngjit Përzgjedhjen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
-msgstr ""
+msgstr "&Anullo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2560
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3406,40 +3393,39 @@ msgid ""
 "b> to resume.</qt>"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2615
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3010
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3043
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "&Paste Location"
 msgstr "Ngjit Përzgjedhjen"
 
 #: ViewManager.cpp:120
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "Ndaj Pamjen"
 
 #: ViewManager.cpp:127
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
-msgstr ""
+msgstr "Ndaje Pamjen &Majtas/Djathtas"
 
 #: ViewManager.cpp:135
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
-msgstr ""
+msgstr "Ndaje Pamjen Lart/Poshtë"
 
 #: ViewManager.cpp:143
 #, kde-format
@@ -3507,7 +3493,7 @@ msgstr "Mbylle Tabelën e Tanishme"
 #| msgid "Close Current Tab"
 msgctxt "@action:inmenu"
 msgid "Detach Current &Tab"
-msgstr "Mbylle Tabelën e Tanishme"
+msgstr "Ndaje Tabelën e Tanishme"
 
 #: ViewManager.cpp:240
 #, kde-format
@@ -3645,19 +3631,19 @@ msgstr ""
 msgid "Line numbers "
 msgstr ""
 
-#: ViewManager.cpp:1177
+#: ViewManager.cpp:1176
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr ""
 
-#: ViewManager.cpp:1179 ViewManager.cpp:1266
+#: ViewManager.cpp:1178 ViewManager.cpp:1265
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1192
+#: ViewManager.cpp:1191
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3665,7 +3651,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1253
+#: ViewManager.cpp:1252
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3673,7 +3659,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1264
+#: ViewManager.cpp:1263
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
@@ -3694,38 +3680,38 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierShift)
 #: widgets/EditProfileAdvancedPage.ui:51
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
 #: widgets/EditProfileAdvancedPage.ui:70
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierAlt)
 #: widgets/EditProfileAdvancedPage.ui:89
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierMeta)
 #: widgets/EditProfileAdvancedPage.ui:108
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Meta"
-msgstr ""
+msgstr "Meta"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAdvancedPage.ui:154
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous:"
-msgstr ""
+msgstr "Të Ndryshme"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:164
@@ -3785,7 +3771,7 @@ msgstr ""
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283
@@ -3800,7 +3786,7 @@ msgstr "Numër"
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
-msgstr ""
+msgstr "&Kurrë"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:303
@@ -3814,7 +3800,7 @@ msgstr ""
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr ""
+msgstr "&Gjithmonë"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -3831,10 +3817,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, newColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:72
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:button Create an alternate color scheme"
 msgid "New..."
-msgstr ""
+msgstr "I Ri..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:79
@@ -3852,7 +3838,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Edit..."
-msgstr "Modifiko Profilin"
+msgstr "Ndrysho..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:89
@@ -3872,20 +3858,20 @@ msgstr ""
 #: widgets/EditProfileKeyboardPage.ui:93
 #, kde-format
 msgid "Defaults"
-msgstr ""
+msgstr "Parazgjedhje"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: widgets/EditProfileAppearancePage.ui:135
 #, kde-format
 msgid "Font:"
-msgstr ""
+msgstr "Gërma:"
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseFontButton)
 #: widgets/EditProfileAppearancePage.ui:167
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr ""
+msgstr "Zgjidhni..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:174
@@ -3939,10 +3925,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeBlock)
 #: widgets/EditProfileAppearancePage.ui:239
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
-msgstr ""
+msgstr "blloku"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
 #: widgets/EditProfileAppearancePage.ui:249
@@ -3956,15 +3942,14 @@ msgstr ""
 #, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
-msgstr ""
+msgstr "Nënvizuar"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileAppearancePage.ui:291
-#, fuzzy, kde-format
-#| msgid "Color 1"
+#, kde-format
 msgctxt "Cursor color options"
 msgid "Color:"
-msgstr "Ngjyra 1"
+msgstr "Ngjyra:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:307
@@ -4006,7 +3991,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:393
 #, kde-format
 msgid "Text:"
-msgstr ""
+msgstr "Teksti:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, customTextColorSelectButton)
 #: widgets/EditProfileAppearancePage.ui:406
@@ -4032,22 +4017,22 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:733
 #, kde-format
 msgid "Enabled"
-msgstr ""
+msgstr "I Aktivizuar"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #. i18n: ectx: attribute (title), widget (QWidget, miscTab)
 #: widgets/EditProfileAppearancePage.ui:473 widgets/EditProfileMousePage.ui:252
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Items that do not fit in other categories"
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Të Ndryshme"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileAppearancePage.ui:484
 #, fuzzy, kde-format
 #| msgid "New &Window"
 msgid "Window:"
-msgstr "Dritare e &Re"
+msgstr "&Dritare"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:491
@@ -4077,11 +4062,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, borderLabel)
 #: widgets/EditProfileAppearancePage.ui:543
-#, fuzzy, kde-format
-#| msgid "Color 1"
+#, kde-format
 msgctxt "Border color options"
 msgid "Color:"
-msgstr "Ngjyra 1"
+msgstr "Ngjyra:"
 
 #. i18n: ectx: property (toolTip), widget (KColorButton, focusBorderColor)
 #: widgets/EditProfileAppearancePage.ui:559
@@ -4098,10 +4082,9 @@ msgstr "&Mbylle Tabelën"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: widgets/EditProfileAppearancePage.ui:591
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgid "Active Terminals:"
-msgstr "&Mbylle Tabelën"
+msgstr "Terminalet Aktive:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, contentsGroup)
 #: widgets/EditProfileAppearancePage.ui:601
@@ -4129,7 +4112,7 @@ msgstr ""
 #, kde-format
 msgctxt "(pixels) visual size unit"
 msgid " px"
-msgstr ""
+msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileAppearancePage.ui:668
@@ -4165,7 +4148,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:756
 #, kde-format
 msgid "Border"
-msgstr ""
+msgstr "Kufiri"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:798
@@ -4297,20 +4280,20 @@ msgid "Edit Profile"
 msgstr "Modifiko Profilin"
 
 #: widgets/EditProfileDialog.cpp:93
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
-msgstr ""
+msgstr "Të Përgjithshme"
 
 #: widgets/EditProfileDialog.cpp:104
 #, kde-format
 msgid "Tabs"
-msgstr ""
+msgstr "Tabelat"
 
 #: widgets/EditProfileDialog.cpp:121
-#, kde-format
+#, fuzzy, kde-format
 msgid "Appearance"
-msgstr ""
+msgstr "Paraqitja"
 
 #: widgets/EditProfileDialog.cpp:137
 #, fuzzy, kde-format
@@ -4321,23 +4304,23 @@ msgstr "Pa rrëshkitje"
 #: widgets/EditProfileDialog.cpp:151
 #, kde-format
 msgid "Keyboard"
-msgstr ""
+msgstr "Tastierë"
 
 #: widgets/EditProfileDialog.cpp:152
-#, kde-format
+#, fuzzy, kde-format
 msgid "Key bindings"
-msgstr ""
+msgstr "Lidhjet e tasteve"
 
 #: widgets/EditProfileDialog.cpp:163
-#, kde-format
+#, fuzzy, kde-format
 msgid "Mouse"
-msgstr ""
+msgstr "mi"
 
 #: widgets/EditProfileDialog.cpp:179
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
-msgstr ""
+msgstr "Të Avancuara"
 
 #: widgets/EditProfileDialog.cpp:287
 #, kde-kuit-format
@@ -4380,15 +4363,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: widgets/EditProfileDialog.cpp:420
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Create New Profile"
-msgstr "Modifiko Profilin"
+msgstr "Krijoni Profil të Ri"
 
 #: widgets/EditProfileDialog.cpp:423
-#, kde-format
+#, fuzzy, kde-format
 msgid "Edit Profile \"%1\""
-msgstr ""
+msgstr "Modifiko Profilin"
 
 #: widgets/EditProfileDialog.cpp:514
 #, kde-format
@@ -4397,8 +4379,8 @@ msgctxt ""
 "separate it from the number value."
 msgid " column"
 msgid_plural " columns"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " shtyllë"
+msgstr[1] " shtylla"
 
 #: widgets/EditProfileDialog.cpp:516
 #, kde-format
@@ -4407,13 +4389,13 @@ msgctxt ""
 "separate it from the number value."
 msgid " row"
 msgid_plural " rows"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " rresht"
+msgstr[1] " rreshta"
 
 #: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "System Bell"
-msgstr ""
+msgstr "Zilja e sistemit"
 
 #: widgets/EditProfileDialog.cpp:526
 #, fuzzy, kde-format
@@ -4451,8 +4433,8 @@ msgstr ""
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " sekondë"
+msgstr[1] " sekonda"
 
 #: widgets/EditProfileDialog.cpp:786
 #, kde-format
@@ -4518,7 +4500,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgid "General Settings"
-msgstr "Parametrat"
+msgstr "Parametrat e Përgjithshëm"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, iconSelectButton)
 #: widgets/EditProfileGeneralPage.ui:66
@@ -4549,9 +4531,9 @@ msgstr "Modifiko Profilin"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileGeneralPage.ui:125
-#, kde-format
+#, fuzzy, kde-format
 msgid "Command:"
-msgstr ""
+msgstr "Komanda"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, commandEdit)
 #: widgets/EditProfileGeneralPage.ui:138
@@ -4666,10 +4648,10 @@ msgstr ""
 #: widgets/EditProfileGeneralPage.ui:413 widgets/EditProfileGeneralPage.ui:459
 #: widgets/EditProfileGeneralPage.ui:505 widgets/EditProfileGeneralPage.ui:551
 #: widgets/EditProfileGeneralPage.ui:597
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Never"
 msgid "Never"
-msgstr ""
+msgstr "Kurrë"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsURL)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsURL)
@@ -4695,7 +4677,7 @@ msgstr ""
 #, kde-format
 msgctxt "Always"
 msgid "Always"
-msgstr ""
+msgstr "Gjithmonë"
 
 #. i18n: ectx: property (text), widget (QLabel, label_20)
 #: widgets/EditProfileGeneralPage.ui:449
@@ -4742,10 +4724,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, newKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:63
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:button Create an alternate key binding"
 msgid "New..."
-msgstr ""
+msgstr "I Ri..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:70
@@ -4816,7 +4798,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgid "From clipboard"
-msgstr "Ngjit Përzgjedhjen"
+msgstr "&Nga Kujtesa"
 
 #. i18n: ectx: property (text), widget (QRadioButton, pasteFromX11SelectionButton)
 #: widgets/EditProfileMousePage.ui:160
@@ -5048,7 +5030,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "No scrollback"
 msgid "Scrollback:"
-msgstr "Pa rrëshkitje"
+msgstr "Rrëshqitje mbrapa"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:67
@@ -5115,10 +5097,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@option:radio Hide the scroll bar"
 msgid "Hidden"
-msgstr ""
+msgstr "i fshehur"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileScrollingPage.ui:199
@@ -5160,7 +5142,7 @@ msgstr ""
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5187,13 +5169,12 @@ msgid "The threshold for continuous silence to be detected by Konsole"
 msgstr ""
 
 #: widgets/HistorySizeWidget.cpp:40
-#, fuzzy, kde-format
-#| msgid "lines"
+#, kde-format
 msgctxt "@label:textbox Unit of scrollback"
 msgid " line"
 msgid_plural " lines"
-msgstr[0] "rreshta"
-msgstr[1] "rreshta"
+msgstr[0] "Rresht"
+msgstr[1] "Vijë"
 
 #: widgets/HistorySizeWidget.cpp:57
 #, kde-format
@@ -5242,11 +5223,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgid "No scrollback"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr "Pa rrëshkitje"
+msgstr "&Pa Kufi"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5259,14 +5239,14 @@ msgstr ""
 #, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
-msgstr ""
+msgstr "&Asnjë"
 
 #: widgets/IncrementalSearchBar.cpp:49
 #, fuzzy, kde-format
 #| msgid "Find:"
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "Gjej:"
+msgstr "&Gjej"
 
 #: widgets/IncrementalSearchBar.cpp:51
 #, kde-format
@@ -5275,10 +5255,10 @@ msgid "Enter the text to search for here"
 msgstr ""
 
 #: widgets/IncrementalSearchBar.cpp:75
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
-msgstr ""
+msgstr "Tjetra"
 
 #: widgets/IncrementalSearchBar.cpp:78
 #, kde-format
@@ -5287,10 +5267,10 @@ msgid "Find the next match for the current search phrase"
 msgstr ""
 
 #: widgets/IncrementalSearchBar.cpp:85
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
-msgstr ""
+msgstr "E mëparshmja"
 
 #: widgets/IncrementalSearchBar.cpp:87
 #, kde-format
@@ -5312,10 +5292,10 @@ msgid "Close the search bar"
 msgstr "Mbylle shiritin e kërkimit"
 
 #: widgets/IncrementalSearchBar.cpp:119
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
-msgstr ""
+msgstr "I &Ndjeshëm Ndaj Madhësisë së Gërmave"
 
 #: widgets/IncrementalSearchBar.cpp:121
 #, kde-format
@@ -5343,10 +5323,10 @@ msgid "Sets whether matching text should be highlighted"
 msgstr ""
 
 #: widgets/IncrementalSearchBar.cpp:133
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
-msgstr ""
+msgstr "Kërko mbrapsht."
 
 #: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
@@ -5385,10 +5365,10 @@ msgid "Print Shell"
 msgstr "Shell"
 
 #: widgets/RenameTabWidget.cpp:37
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label:listbox No color selected"
 msgid "None"
-msgstr ""
+msgstr "Asnjë"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, remoteTabTitleEdit)
 #: widgets/RenameTabWidget.ui:41
@@ -5476,9 +5456,9 @@ msgid "Command and arguments: %c"
 msgstr ""
 
 #: widgets/TabTitleFormatButton.cpp:48
-#, kde-format
+#, fuzzy, kde-format
 msgid "Insert"
-msgstr ""
+msgstr "Shto"
 
 #: widgets/TabTitleFormatButton.cpp:73
 #, kde-format
@@ -5523,20 +5503,19 @@ msgstr "&Mbylle Tabelën"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
-msgstr ""
+msgstr "Hap një skedë të re"
 
 #: widgets/ViewContainer.cpp:61
-#, fuzzy, kde-format
-#| msgid "Close the search bar"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
-msgstr "Mbylle shiritin e kërkimit"
+msgstr "Mbylle këtë tabelë"
 
 #: widgets/ViewContainer.cpp:94
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
-msgstr ""
+msgstr "S&hkëpute Tabelën"
 
 #: widgets/ViewContainer.cpp:100
 #, fuzzy, kde-format
@@ -5550,7 +5529,7 @@ msgstr "&Riemërto Tabelën..."
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
 msgid "Close Tab"
-msgstr "&Mbylle Tabelën"
+msgstr "Mbylle Tabelën"
 
 #, fuzzy
 #~| msgid "Open Link"

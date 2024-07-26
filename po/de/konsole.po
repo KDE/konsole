@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-25 00:41+0000\n"
+"POT-Creation-Date: 2024-07-26 00:42+0000\n"
 "PO-Revision-Date: 2023-04-29 12:15+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -267,157 +267,157 @@ msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
 msgstr "%1"
 
-#: colorscheme/ColorScheme.cpp:123
+#: colorscheme/ColorScheme.cpp:124
 msgctxt "@item:intable palette"
 msgid "Foreground"
 msgstr "Vordergrund"
 
-#: colorscheme/ColorScheme.cpp:124
+#: colorscheme/ColorScheme.cpp:125
 msgctxt "@item:intable palette"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: colorscheme/ColorScheme.cpp:125
+#: colorscheme/ColorScheme.cpp:126
 msgctxt "@item:intable palette"
 msgid "Color 1"
 msgstr "Farbe 1"
 
-#: colorscheme/ColorScheme.cpp:126
+#: colorscheme/ColorScheme.cpp:127
 msgctxt "@item:intable palette"
 msgid "Color 2"
 msgstr "Farbe 2"
 
-#: colorscheme/ColorScheme.cpp:127
+#: colorscheme/ColorScheme.cpp:128
 msgctxt "@item:intable palette"
 msgid "Color 3"
 msgstr "Farbe 3"
 
-#: colorscheme/ColorScheme.cpp:128
+#: colorscheme/ColorScheme.cpp:129
 msgctxt "@item:intable palette"
 msgid "Color 4"
 msgstr "Farbe 4"
 
-#: colorscheme/ColorScheme.cpp:129
+#: colorscheme/ColorScheme.cpp:130
 msgctxt "@item:intable palette"
 msgid "Color 5"
 msgstr "Farbe 5"
 
-#: colorscheme/ColorScheme.cpp:130
+#: colorscheme/ColorScheme.cpp:131
 msgctxt "@item:intable palette"
 msgid "Color 6"
 msgstr "Farbe 6"
 
-#: colorscheme/ColorScheme.cpp:131
+#: colorscheme/ColorScheme.cpp:132
 msgctxt "@item:intable palette"
 msgid "Color 7"
 msgstr "Farbe 7"
 
-#: colorscheme/ColorScheme.cpp:132
+#: colorscheme/ColorScheme.cpp:133
 msgctxt "@item:intable palette"
 msgid "Color 8"
 msgstr "Farbe 8"
 
-#: colorscheme/ColorScheme.cpp:133
+#: colorscheme/ColorScheme.cpp:134
 msgctxt "@item:intable palette"
 msgid "Foreground (Intense)"
 msgstr "Vordergrund (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:134
+#: colorscheme/ColorScheme.cpp:135
 msgctxt "@item:intable palette"
 msgid "Background (Intense)"
 msgstr "Hintergrund (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:135
+#: colorscheme/ColorScheme.cpp:136
 msgctxt "@item:intable palette"
 msgid "Color 1 (Intense)"
 msgstr "Farbe 1 (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:136
+#: colorscheme/ColorScheme.cpp:137
 msgctxt "@item:intable palette"
 msgid "Color 2 (Intense)"
 msgstr "Farbe 2 (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:137
+#: colorscheme/ColorScheme.cpp:138
 msgctxt "@item:intable palette"
 msgid "Color 3 (Intense)"
 msgstr "Farbe 3 (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:138
+#: colorscheme/ColorScheme.cpp:139
 msgctxt "@item:intable palette"
 msgid "Color 4 (Intense)"
 msgstr "Farbe 4 (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:139
+#: colorscheme/ColorScheme.cpp:140
 msgctxt "@item:intable palette"
 msgid "Color 5 (Intense)"
 msgstr "Farbe 5 (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:140
+#: colorscheme/ColorScheme.cpp:141
 msgctxt "@item:intable palette"
 msgid "Color 6 (Intense)"
 msgstr "Farbe 6 (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:141
+#: colorscheme/ColorScheme.cpp:142
 msgctxt "@item:intable palette"
 msgid "Color 7 (Intense)"
 msgstr "Farbe 7 (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:142
+#: colorscheme/ColorScheme.cpp:143
 msgctxt "@item:intable palette"
 msgid "Color 8 (Intense)"
 msgstr "Farbe 8 (kräftig)"
 
-#: colorscheme/ColorScheme.cpp:143
+#: colorscheme/ColorScheme.cpp:144
 msgctxt "@item:intable palette"
 msgid "Foreground (Faint)"
 msgstr "Vordergrund (blass)"
 
-#: colorscheme/ColorScheme.cpp:144
+#: colorscheme/ColorScheme.cpp:145
 msgctxt "@item:intable palette"
 msgid "Background (Faint)"
 msgstr "Hintergrund (blass)"
 
-#: colorscheme/ColorScheme.cpp:145
+#: colorscheme/ColorScheme.cpp:146
 msgctxt "@item:intable palette"
 msgid "Color 1 (Faint)"
 msgstr "Farbe 1 (blass)"
 
-#: colorscheme/ColorScheme.cpp:146
+#: colorscheme/ColorScheme.cpp:147
 msgctxt "@item:intable palette"
 msgid "Color 2 (Faint)"
 msgstr "Farbe 2 (blass)"
 
-#: colorscheme/ColorScheme.cpp:147
+#: colorscheme/ColorScheme.cpp:148
 msgctxt "@item:intable palette"
 msgid "Color 3 (Faint)"
 msgstr "Farbe 3 (blass)"
 
-#: colorscheme/ColorScheme.cpp:148
+#: colorscheme/ColorScheme.cpp:149
 msgctxt "@item:intable palette"
 msgid "Color 4 (Faint)"
 msgstr "Farbe 4 (blass)"
 
-#: colorscheme/ColorScheme.cpp:149
+#: colorscheme/ColorScheme.cpp:150
 msgctxt "@item:intable palette"
 msgid "Color 5 (Faint)"
 msgstr "Farbe 5 (blass)"
 
-#: colorscheme/ColorScheme.cpp:150
+#: colorscheme/ColorScheme.cpp:151
 msgctxt "@item:intable palette"
 msgid "Color 6 (Faint)"
 msgstr "Farbe 6 (blass)"
 
-#: colorscheme/ColorScheme.cpp:151
+#: colorscheme/ColorScheme.cpp:152
 msgctxt "@item:intable palette"
 msgid "Color 7 (Faint)"
 msgstr "Farbe 7 (blass)"
 
-#: colorscheme/ColorScheme.cpp:152
+#: colorscheme/ColorScheme.cpp:153
 msgctxt "@item:intable palette"
 msgid "Color 8 (Faint)"
 msgstr "Farbe 8 (blass)"
 
-#: colorscheme/ColorScheme.cpp:451
+#: colorscheme/ColorScheme.cpp:452
 #, kde-format
 msgctxt "@item"
 msgid "Un-named Color Scheme"
@@ -3319,64 +3319,64 @@ msgstr "Strg"
 msgid "Enable thumbnails generation"
 msgstr "Vorschaubilderstellung aktivieren"
 
-#: terminalDisplay/TerminalDisplay.cpp:663
+#: terminalDisplay/TerminalDisplay.cpp:654
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Größe: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Möchten Sie wirklich %1 Zeichen einfügen?"
 msgstr[1] "Möchten Sie wirklich %1 Zeichen einfügen?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Einfügen bestätigen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Signalton: versucht, eine akustische Warnung abzugeben"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
 msgstr "Rücktaste"
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Gerätekontrollzeichen 3/XOFF: Ausgabe aussetzen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Ersatz/Aussetzen: kann den laufenden Prozess aussetzen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Esc: für die Steuerung des Terminalstatus verwendet"
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Datei-Trennzeichen/Beenden: kann den aktuellen Prozess abbrechen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3385,31 +3385,31 @@ msgstr ""
 "Der Text, den Sie einfügen möchten, enthält ausgeblendete Kontrollzeichen, "
 "möchten Sie sie ausfiltern?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Einfügen bestätigen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "&Ohne Kontrollzeichen einfügen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Alles einfügen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Abbrechen"
 
-#: terminalDisplay/TerminalDisplay.cpp:2560
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3420,17 +3420,17 @@ msgstr ""
 "org/wiki/Datenflusskontrolle\">angehalten</a> worden. Drücken Sie <b>Strg+Q</"
 "b>, um fortzufahren.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2615
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Dieses Terminal ist schreibgeschützt."
 
-#: terminalDisplay/TerminalDisplay.cpp:3010
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Ordner &wechseln zu"
 
-#: terminalDisplay/TerminalDisplay.cpp:3043
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
 msgstr "Speicherort &einfügen"
@@ -3665,19 +3665,19 @@ msgstr "Semantische Hinweise "
 msgid "Line numbers "
 msgstr "Zeilennummern "
 
-#: ViewManager.cpp:1177
+#: ViewManager.cpp:1176
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Unterfenster-Layout speichern"
 
-#: ViewManager.cpp:1179 ViewManager.cpp:1266
+#: ViewManager.cpp:1178 ViewManager.cpp:1265
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole-Ansichtslayout (*.json)"
 
-#: ViewManager.cpp:1192
+#: ViewManager.cpp:1191
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3687,7 +3687,7 @@ msgstr ""
 "Beim Speichern des Layouts ist ein Fehler aufgetreten.\n"
 "%1"
 
-#: ViewManager.cpp:1253
+#: ViewManager.cpp:1252
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3697,7 +3697,7 @@ msgstr ""
 "Beim Laden des Layouts ist ein Fehler aufgetreten.\n"
 "%1"
 
-#: ViewManager.cpp:1264
+#: ViewManager.cpp:1263
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

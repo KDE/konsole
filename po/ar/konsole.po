@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-25 00:41+0000\n"
+"POT-Creation-Date: 2024-07-26 00:42+0000\n"
 "PO-Revision-Date: 2024-05-02 10:49+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -263,157 +263,157 @@ msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
 msgstr "%1"
 
-#: colorscheme/ColorScheme.cpp:123
+#: colorscheme/ColorScheme.cpp:124
 msgctxt "@item:intable palette"
 msgid "Foreground"
 msgstr "الأمامية"
 
-#: colorscheme/ColorScheme.cpp:124
+#: colorscheme/ColorScheme.cpp:125
 msgctxt "@item:intable palette"
 msgid "Background"
 msgstr "الخلفية"
 
-#: colorscheme/ColorScheme.cpp:125
+#: colorscheme/ColorScheme.cpp:126
 msgctxt "@item:intable palette"
 msgid "Color 1"
 msgstr "اللون 1"
 
-#: colorscheme/ColorScheme.cpp:126
+#: colorscheme/ColorScheme.cpp:127
 msgctxt "@item:intable palette"
 msgid "Color 2"
 msgstr "اللون 2"
 
-#: colorscheme/ColorScheme.cpp:127
+#: colorscheme/ColorScheme.cpp:128
 msgctxt "@item:intable palette"
 msgid "Color 3"
 msgstr "اللون 3"
 
-#: colorscheme/ColorScheme.cpp:128
+#: colorscheme/ColorScheme.cpp:129
 msgctxt "@item:intable palette"
 msgid "Color 4"
 msgstr "اللون 4"
 
-#: colorscheme/ColorScheme.cpp:129
+#: colorscheme/ColorScheme.cpp:130
 msgctxt "@item:intable palette"
 msgid "Color 5"
 msgstr "اللون 5"
 
-#: colorscheme/ColorScheme.cpp:130
+#: colorscheme/ColorScheme.cpp:131
 msgctxt "@item:intable palette"
 msgid "Color 6"
 msgstr "اللون 6"
 
-#: colorscheme/ColorScheme.cpp:131
+#: colorscheme/ColorScheme.cpp:132
 msgctxt "@item:intable palette"
 msgid "Color 7"
 msgstr "اللون 7"
 
-#: colorscheme/ColorScheme.cpp:132
+#: colorscheme/ColorScheme.cpp:133
 msgctxt "@item:intable palette"
 msgid "Color 8"
 msgstr "اللون 8"
 
-#: colorscheme/ColorScheme.cpp:133
+#: colorscheme/ColorScheme.cpp:134
 msgctxt "@item:intable palette"
 msgid "Foreground (Intense)"
 msgstr "الأمامية (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:134
+#: colorscheme/ColorScheme.cpp:135
 msgctxt "@item:intable palette"
 msgid "Background (Intense)"
 msgstr "الخلفية (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:135
+#: colorscheme/ColorScheme.cpp:136
 msgctxt "@item:intable palette"
 msgid "Color 1 (Intense)"
 msgstr "اللون 1 (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:136
+#: colorscheme/ColorScheme.cpp:137
 msgctxt "@item:intable palette"
 msgid "Color 2 (Intense)"
 msgstr "اللون 2 (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:137
+#: colorscheme/ColorScheme.cpp:138
 msgctxt "@item:intable palette"
 msgid "Color 3 (Intense)"
 msgstr "اللون 3 (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:138
+#: colorscheme/ColorScheme.cpp:139
 msgctxt "@item:intable palette"
 msgid "Color 4 (Intense)"
 msgstr "اللون 4 (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:139
+#: colorscheme/ColorScheme.cpp:140
 msgctxt "@item:intable palette"
 msgid "Color 5 (Intense)"
 msgstr "اللون 5 (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:140
+#: colorscheme/ColorScheme.cpp:141
 msgctxt "@item:intable palette"
 msgid "Color 6 (Intense)"
 msgstr "اللون 6 (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:141
+#: colorscheme/ColorScheme.cpp:142
 msgctxt "@item:intable palette"
 msgid "Color 7 (Intense)"
 msgstr "اللون 7 (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:142
+#: colorscheme/ColorScheme.cpp:143
 msgctxt "@item:intable palette"
 msgid "Color 8 (Intense)"
 msgstr "اللون 8 (مكثف)"
 
-#: colorscheme/ColorScheme.cpp:143
+#: colorscheme/ColorScheme.cpp:144
 msgctxt "@item:intable palette"
 msgid "Foreground (Faint)"
 msgstr "الأمامية (باهتة)"
 
-#: colorscheme/ColorScheme.cpp:144
+#: colorscheme/ColorScheme.cpp:145
 msgctxt "@item:intable palette"
 msgid "Background (Faint)"
 msgstr "الخلفية (باهتة)"
 
-#: colorscheme/ColorScheme.cpp:145
+#: colorscheme/ColorScheme.cpp:146
 msgctxt "@item:intable palette"
 msgid "Color 1 (Faint)"
 msgstr "اللون 1 (باهت)"
 
-#: colorscheme/ColorScheme.cpp:146
+#: colorscheme/ColorScheme.cpp:147
 msgctxt "@item:intable palette"
 msgid "Color 2 (Faint)"
 msgstr "اللون 2 (باهت)"
 
-#: colorscheme/ColorScheme.cpp:147
+#: colorscheme/ColorScheme.cpp:148
 msgctxt "@item:intable palette"
 msgid "Color 3 (Faint)"
 msgstr "اللون 3 (باهت)"
 
-#: colorscheme/ColorScheme.cpp:148
+#: colorscheme/ColorScheme.cpp:149
 msgctxt "@item:intable palette"
 msgid "Color 4 (Faint)"
 msgstr "اللون 4 (باهت)"
 
-#: colorscheme/ColorScheme.cpp:149
+#: colorscheme/ColorScheme.cpp:150
 msgctxt "@item:intable palette"
 msgid "Color 5 (Faint)"
 msgstr "اللون 5 (باهت)"
 
-#: colorscheme/ColorScheme.cpp:150
+#: colorscheme/ColorScheme.cpp:151
 msgctxt "@item:intable palette"
 msgid "Color 6 (Faint)"
 msgstr "اللون 6 (باهت)"
 
-#: colorscheme/ColorScheme.cpp:151
+#: colorscheme/ColorScheme.cpp:152
 msgctxt "@item:intable palette"
 msgid "Color 7 (Faint)"
 msgstr "اللون 7 (باهت)"
 
-#: colorscheme/ColorScheme.cpp:152
+#: colorscheme/ColorScheme.cpp:153
 msgctxt "@item:intable palette"
 msgid "Color 8 (Faint)"
 msgstr "اللون 8 (باهت)"
 
-#: colorscheme/ColorScheme.cpp:451
+#: colorscheme/ColorScheme.cpp:452
 #, kde-format
 msgctxt "@item"
 msgid "Un-named Color Scheme"
@@ -3275,12 +3275,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "مكّن توليد المصغرات"
 
-#: terminalDisplay/TerminalDisplay.cpp:663
+#: terminalDisplay/TerminalDisplay.cpp:654
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "القياس: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3291,83 +3291,83 @@ msgstr[3] "هل أنت متأكد من لصق %1 محارف؟"
 msgstr[4] "هل أنت متأكد من لصق %1 محرفًا؟"
 msgstr[5] "هل أنت متأكد من لصق %1 محرف؟"
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
 msgstr "تأكيد اللصق"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "نهاية النص/المقاطعة: قد تخرج من العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "نهاية النقل: قد تخرج من العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "الجرس: سيحاول إصدار تحذير صوتي"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
 msgstr "مسافة للخلف"
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "التحكم بالجهاز الثالثة/XOFF: يعلق الخرج"
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "بديل/ معلق: قد يوقف العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "الهروب: يستخدم للتلاعب بالحالة الطرفية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "فاصل/ إنهاء الملف: قد يحبط العملية الحالية"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr "يحتوي النص الذي تحاول لصقه على أحرف تحكم مخفية، هل تريد تصفيتها؟ "
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "تأكيد اللصق"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "ألصق &بدون أحرف التحكم"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "ألصق &كل شيء"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "أل&غِ"
 
-#: terminalDisplay/TerminalDisplay.cpp:2560
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3377,17 +3377,17 @@ msgstr ""
 "<qt>المخرجات <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
 "\">علقت</a> بواسطة ضغط  Ctrl+S.  اضغط  <b>Ctrl+Q</b> للاستئنافها.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2615
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "الطرفية للقراءة فقط"
 
-#: terminalDisplay/TerminalDisplay.cpp:3010
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr "غيّر ال&دليل إلى"
 
-#: terminalDisplay/TerminalDisplay.cpp:3043
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
 msgstr "أ&لصق المكان"
@@ -3612,19 +3612,19 @@ msgstr "التلميحات الدلالية "
 msgid "Line numbers "
 msgstr "أرقام الأسطر "
 
-#: ViewManager.cpp:1177
+#: ViewManager.cpp:1176
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "احفظ تخطيط الألسنة"
 
-#: ViewManager.cpp:1179 ViewManager.cpp:1266
+#: ViewManager.cpp:1178 ViewManager.cpp:1265
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "تخطيط عرض كونسول (*.json)"
 
-#: ViewManager.cpp:1192
+#: ViewManager.cpp:1191
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3634,7 +3634,7 @@ msgstr ""
 "حصلت مشكلة أثناء حفظ التخطيط.\n"
 "%1"
 
-#: ViewManager.cpp:1253
+#: ViewManager.cpp:1252
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3644,7 +3644,7 @@ msgstr ""
 "حصلت مشكلة أثناء تحميل التخطيط.\n"
 "%1"
 
-#: ViewManager.cpp:1264
+#: ViewManager.cpp:1263
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-25 00:41+0000\n"
+"POT-Creation-Date: 2024-07-26 00:42+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -258,107 +258,107 @@ msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
 msgstr "%1"
 
-#: colorscheme/ColorScheme.cpp:123
+#: colorscheme/ColorScheme.cpp:124
 msgctxt "@item:intable palette"
 msgid "Foreground"
 msgstr "पृष्ठभूमी"
 
-#: colorscheme/ColorScheme.cpp:124
+#: colorscheme/ColorScheme.cpp:125
 msgctxt "@item:intable palette"
 msgid "Background"
 msgstr "पार्श्वभूमी"
 
-#: colorscheme/ColorScheme.cpp:125
+#: colorscheme/ColorScheme.cpp:126
 msgctxt "@item:intable palette"
 msgid "Color 1"
 msgstr "रंग 1"
 
-#: colorscheme/ColorScheme.cpp:126
+#: colorscheme/ColorScheme.cpp:127
 msgctxt "@item:intable palette"
 msgid "Color 2"
 msgstr "रंग 2"
 
-#: colorscheme/ColorScheme.cpp:127
+#: colorscheme/ColorScheme.cpp:128
 msgctxt "@item:intable palette"
 msgid "Color 3"
 msgstr "रंग 3"
 
-#: colorscheme/ColorScheme.cpp:128
+#: colorscheme/ColorScheme.cpp:129
 msgctxt "@item:intable palette"
 msgid "Color 4"
 msgstr "रंग 4"
 
-#: colorscheme/ColorScheme.cpp:129
+#: colorscheme/ColorScheme.cpp:130
 msgctxt "@item:intable palette"
 msgid "Color 5"
 msgstr "रंग 5"
 
-#: colorscheme/ColorScheme.cpp:130
+#: colorscheme/ColorScheme.cpp:131
 msgctxt "@item:intable palette"
 msgid "Color 6"
 msgstr "रंग 6"
 
-#: colorscheme/ColorScheme.cpp:131
+#: colorscheme/ColorScheme.cpp:132
 msgctxt "@item:intable palette"
 msgid "Color 7"
 msgstr "रंग 7"
 
-#: colorscheme/ColorScheme.cpp:132
+#: colorscheme/ColorScheme.cpp:133
 msgctxt "@item:intable palette"
 msgid "Color 8"
 msgstr "रंग 8"
 
-#: colorscheme/ColorScheme.cpp:133
+#: colorscheme/ColorScheme.cpp:134
 msgctxt "@item:intable palette"
 msgid "Foreground (Intense)"
 msgstr "पृष्ठभूमी (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:134
+#: colorscheme/ColorScheme.cpp:135
 msgctxt "@item:intable palette"
 msgid "Background (Intense)"
 msgstr "पार्श्वभूमी (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:135
+#: colorscheme/ColorScheme.cpp:136
 msgctxt "@item:intable palette"
 msgid "Color 1 (Intense)"
 msgstr "रंग 1 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:136
+#: colorscheme/ColorScheme.cpp:137
 msgctxt "@item:intable palette"
 msgid "Color 2 (Intense)"
 msgstr "रंग 2 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:137
+#: colorscheme/ColorScheme.cpp:138
 msgctxt "@item:intable palette"
 msgid "Color 3 (Intense)"
 msgstr "रंग 3 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:138
+#: colorscheme/ColorScheme.cpp:139
 msgctxt "@item:intable palette"
 msgid "Color 4 (Intense)"
 msgstr "रंग 4 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:139
+#: colorscheme/ColorScheme.cpp:140
 msgctxt "@item:intable palette"
 msgid "Color 5 (Intense)"
 msgstr "रंग 5 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:140
+#: colorscheme/ColorScheme.cpp:141
 msgctxt "@item:intable palette"
 msgid "Color 6 (Intense)"
 msgstr "रंग 6 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:141
+#: colorscheme/ColorScheme.cpp:142
 msgctxt "@item:intable palette"
 msgid "Color 7 (Intense)"
 msgstr "रंग 7 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:142
+#: colorscheme/ColorScheme.cpp:143
 msgctxt "@item:intable palette"
 msgid "Color 8 (Intense)"
 msgstr "रंग 8 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:143
+#: colorscheme/ColorScheme.cpp:144
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Foreground (Intense)"
@@ -366,7 +366,7 @@ msgctxt "@item:intable palette"
 msgid "Foreground (Faint)"
 msgstr "पृष्ठभूमी (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:144
+#: colorscheme/ColorScheme.cpp:145
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Background (Intense)"
@@ -374,7 +374,7 @@ msgctxt "@item:intable palette"
 msgid "Background (Faint)"
 msgstr "पार्श्वभूमी (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:145
+#: colorscheme/ColorScheme.cpp:146
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Color 1 (Intense)"
@@ -382,7 +382,7 @@ msgctxt "@item:intable palette"
 msgid "Color 1 (Faint)"
 msgstr "रंग 1 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:146
+#: colorscheme/ColorScheme.cpp:147
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Color 2 (Intense)"
@@ -390,7 +390,7 @@ msgctxt "@item:intable palette"
 msgid "Color 2 (Faint)"
 msgstr "रंग 2 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:147
+#: colorscheme/ColorScheme.cpp:148
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Color 3 (Intense)"
@@ -398,7 +398,7 @@ msgctxt "@item:intable palette"
 msgid "Color 3 (Faint)"
 msgstr "रंग 3 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:148
+#: colorscheme/ColorScheme.cpp:149
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Color 4 (Intense)"
@@ -406,7 +406,7 @@ msgctxt "@item:intable palette"
 msgid "Color 4 (Faint)"
 msgstr "रंग 4 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:149
+#: colorscheme/ColorScheme.cpp:150
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Color 5 (Intense)"
@@ -414,7 +414,7 @@ msgctxt "@item:intable palette"
 msgid "Color 5 (Faint)"
 msgstr "रंग 5 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:150
+#: colorscheme/ColorScheme.cpp:151
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Color 6 (Intense)"
@@ -422,7 +422,7 @@ msgctxt "@item:intable palette"
 msgid "Color 6 (Faint)"
 msgstr "रंग 6 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:151
+#: colorscheme/ColorScheme.cpp:152
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Color 7 (Intense)"
@@ -430,7 +430,7 @@ msgctxt "@item:intable palette"
 msgid "Color 7 (Faint)"
 msgstr "रंग 7 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:152
+#: colorscheme/ColorScheme.cpp:153
 #, fuzzy
 #| msgctxt "@item:intable palette"
 #| msgid "Color 8 (Intense)"
@@ -438,7 +438,7 @@ msgctxt "@item:intable palette"
 msgid "Color 8 (Faint)"
 msgstr "रंग 8 (तीव्र)"
 
-#: colorscheme/ColorScheme.cpp:451
+#: colorscheme/ColorScheme.cpp:452
 #, fuzzy, kde-format
 #| msgid "Un-named Color Scheme"
 msgctxt "@item"
@@ -3413,98 +3413,98 @@ msgstr ""
 msgid "Enable thumbnails generation"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:663
+#: terminalDisplay/TerminalDisplay.cpp:654
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "आकार: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
 msgstr "चिटकविण्याची खात्री करा"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
 "want to filter them out?"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, fuzzy, kde-format
 #| msgid "Confirm Paste"
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "चिटकविण्याची खात्री करा"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, fuzzy, kde-format
 #| msgid "Set cursor color to match current character"
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "कर्सर रंगला वर्तमान अक्षरशी जुळविण्याकरिता निश्चित करा"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, fuzzy, kde-format
 #| msgid "Paste Selection"
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "निवड चिटकवा"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:2560
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Output has been <a href=\"http://en.wikipedia.org/wiki/Flow_control"
@@ -3517,17 +3517,17 @@ msgstr ""
 "<qt>Ctrl+S दाबून आऊटपुट <a href=\"http://en.wikipedia.org/wiki/Flow_control"
 "\">सस्पेंड</a> केले गेले आहे.  पुन्हप्रारंभ करण्याकरिता <b>Ctrl+Q</b> दाबा.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2615
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr ""
 
-#: terminalDisplay/TerminalDisplay.cpp:3010
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr "संचयीका येथे बदला (&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:3043
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
 msgstr "स्थान चिटकवा (&P)"
@@ -3773,7 +3773,7 @@ msgstr "माऊस संवाद"
 msgid "Line numbers "
 msgstr "ओळ संख्या निश्चित करा: "
 
-#: ViewManager.cpp:1177
+#: ViewManager.cpp:1176
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -3781,13 +3781,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "टॅब डावीकडे हलवा"
 
-#: ViewManager.cpp:1179 ViewManager.cpp:1266
+#: ViewManager.cpp:1178 ViewManager.cpp:1265
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1192
+#: ViewManager.cpp:1191
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3800,7 +3800,7 @@ msgstr ""
 "आऊटपुट संचयीत करतेवेळी अडचण आढळली.\n"
 "%1"
 
-#: ViewManager.cpp:1253
+#: ViewManager.cpp:1252
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3813,7 +3813,7 @@ msgstr ""
 "आऊटपुट संचयीत करतेवेळी अडचण आढळली.\n"
 "%1"
 
-#: ViewManager.cpp:1264
+#: ViewManager.cpp:1263
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

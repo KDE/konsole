@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-25 00:41+0000\n"
+"POT-Creation-Date: 2024-07-26 00:42+0000\n"
 "PO-Revision-Date: 2024-07-22 22:10+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -266,157 +266,157 @@ msgctxt "@item:inmenu The host the user is connected to via ssh"
 msgid "%1"
 msgstr "%1"
 
-#: colorscheme/ColorScheme.cpp:123
+#: colorscheme/ColorScheme.cpp:124
 msgctxt "@item:intable palette"
 msgid "Foreground"
 msgstr "Forgrunnur"
 
-#: colorscheme/ColorScheme.cpp:124
+#: colorscheme/ColorScheme.cpp:125
 msgctxt "@item:intable palette"
 msgid "Background"
 msgstr "Bakgrunnur"
 
-#: colorscheme/ColorScheme.cpp:125
+#: colorscheme/ColorScheme.cpp:126
 msgctxt "@item:intable palette"
 msgid "Color 1"
 msgstr "Litur 1"
 
-#: colorscheme/ColorScheme.cpp:126
+#: colorscheme/ColorScheme.cpp:127
 msgctxt "@item:intable palette"
 msgid "Color 2"
 msgstr "Litur 2"
 
-#: colorscheme/ColorScheme.cpp:127
+#: colorscheme/ColorScheme.cpp:128
 msgctxt "@item:intable palette"
 msgid "Color 3"
 msgstr "Litur 3"
 
-#: colorscheme/ColorScheme.cpp:128
+#: colorscheme/ColorScheme.cpp:129
 msgctxt "@item:intable palette"
 msgid "Color 4"
 msgstr "Litur 4"
 
-#: colorscheme/ColorScheme.cpp:129
+#: colorscheme/ColorScheme.cpp:130
 msgctxt "@item:intable palette"
 msgid "Color 5"
 msgstr "Litur 5"
 
-#: colorscheme/ColorScheme.cpp:130
+#: colorscheme/ColorScheme.cpp:131
 msgctxt "@item:intable palette"
 msgid "Color 6"
 msgstr "Litur 6"
 
-#: colorscheme/ColorScheme.cpp:131
+#: colorscheme/ColorScheme.cpp:132
 msgctxt "@item:intable palette"
 msgid "Color 7"
 msgstr "Litur 7"
 
-#: colorscheme/ColorScheme.cpp:132
+#: colorscheme/ColorScheme.cpp:133
 msgctxt "@item:intable palette"
 msgid "Color 8"
 msgstr "Litur 8"
 
-#: colorscheme/ColorScheme.cpp:133
+#: colorscheme/ColorScheme.cpp:134
 msgctxt "@item:intable palette"
 msgid "Foreground (Intense)"
 msgstr "Forgrunnur (skær)"
 
-#: colorscheme/ColorScheme.cpp:134
+#: colorscheme/ColorScheme.cpp:135
 msgctxt "@item:intable palette"
 msgid "Background (Intense)"
 msgstr "Bakgrunnur (skær)"
 
-#: colorscheme/ColorScheme.cpp:135
+#: colorscheme/ColorScheme.cpp:136
 msgctxt "@item:intable palette"
 msgid "Color 1 (Intense)"
 msgstr "Litur 1 (skær)"
 
-#: colorscheme/ColorScheme.cpp:136
+#: colorscheme/ColorScheme.cpp:137
 msgctxt "@item:intable palette"
 msgid "Color 2 (Intense)"
 msgstr "Litur 2 (skær)"
 
-#: colorscheme/ColorScheme.cpp:137
+#: colorscheme/ColorScheme.cpp:138
 msgctxt "@item:intable palette"
 msgid "Color 3 (Intense)"
 msgstr "Litur 3 (skær)"
 
-#: colorscheme/ColorScheme.cpp:138
+#: colorscheme/ColorScheme.cpp:139
 msgctxt "@item:intable palette"
 msgid "Color 4 (Intense)"
 msgstr "Litur 4 (skær)"
 
-#: colorscheme/ColorScheme.cpp:139
+#: colorscheme/ColorScheme.cpp:140
 msgctxt "@item:intable palette"
 msgid "Color 5 (Intense)"
 msgstr "Litur 5 (skær)"
 
-#: colorscheme/ColorScheme.cpp:140
+#: colorscheme/ColorScheme.cpp:141
 msgctxt "@item:intable palette"
 msgid "Color 6 (Intense)"
 msgstr "Litur 6 (skær)"
 
-#: colorscheme/ColorScheme.cpp:141
+#: colorscheme/ColorScheme.cpp:142
 msgctxt "@item:intable palette"
 msgid "Color 7 (Intense)"
 msgstr "Litur 7 (skær)"
 
-#: colorscheme/ColorScheme.cpp:142
+#: colorscheme/ColorScheme.cpp:143
 msgctxt "@item:intable palette"
 msgid "Color 8 (Intense)"
 msgstr "Litur 8 (skær)"
 
-#: colorscheme/ColorScheme.cpp:143
+#: colorscheme/ColorScheme.cpp:144
 msgctxt "@item:intable palette"
 msgid "Foreground (Faint)"
 msgstr "Forgrunnur (daufur)"
 
-#: colorscheme/ColorScheme.cpp:144
+#: colorscheme/ColorScheme.cpp:145
 msgctxt "@item:intable palette"
 msgid "Background (Faint)"
 msgstr "Bakgrunnur (daufur)"
 
-#: colorscheme/ColorScheme.cpp:145
+#: colorscheme/ColorScheme.cpp:146
 msgctxt "@item:intable palette"
 msgid "Color 1 (Faint)"
 msgstr "Litur 1 (daufur)"
 
-#: colorscheme/ColorScheme.cpp:146
+#: colorscheme/ColorScheme.cpp:147
 msgctxt "@item:intable palette"
 msgid "Color 2 (Faint)"
 msgstr "Litur 2 (daufur)"
 
-#: colorscheme/ColorScheme.cpp:147
+#: colorscheme/ColorScheme.cpp:148
 msgctxt "@item:intable palette"
 msgid "Color 3 (Faint)"
 msgstr "Litur 3 (daufur)"
 
-#: colorscheme/ColorScheme.cpp:148
+#: colorscheme/ColorScheme.cpp:149
 msgctxt "@item:intable palette"
 msgid "Color 4 (Faint)"
 msgstr "Litur 4 (daufur)"
 
-#: colorscheme/ColorScheme.cpp:149
+#: colorscheme/ColorScheme.cpp:150
 msgctxt "@item:intable palette"
 msgid "Color 5 (Faint)"
 msgstr "Litur 5 (daufur)"
 
-#: colorscheme/ColorScheme.cpp:150
+#: colorscheme/ColorScheme.cpp:151
 msgctxt "@item:intable palette"
 msgid "Color 6 (Faint)"
 msgstr "Litur 6 (daufur)"
 
-#: colorscheme/ColorScheme.cpp:151
+#: colorscheme/ColorScheme.cpp:152
 msgctxt "@item:intable palette"
 msgid "Color 7 (Faint)"
 msgstr "Litur 7 (daufur)"
 
-#: colorscheme/ColorScheme.cpp:152
+#: colorscheme/ColorScheme.cpp:153
 msgctxt "@item:intable palette"
 msgid "Color 8 (Faint)"
 msgstr "Litur 8 (daufur)"
 
-#: colorscheme/ColorScheme.cpp:451
+#: colorscheme/ColorScheme.cpp:452
 #, kde-format
 msgctxt "@item"
 msgid "Un-named Color Scheme"
@@ -3288,66 +3288,66 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Virkja myndun smámynda"
 
-#: terminalDisplay/TerminalDisplay.cpp:663
+#: terminalDisplay/TerminalDisplay.cpp:654
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Stærð: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2259
+#: terminalDisplay/TerminalDisplay.cpp:2250
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "Ertu viss um að þú viljir líma %1 staf?"
 msgstr[1] "Ertu viss um að þú viljir líma %1 stafi?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2260
+#: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Staðfesta límingu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2293
+#: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt (lok texta/rof): getur hætt í núverandi vinnslu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2294
+#: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission (lok miðlunar): getur hætt í núverandi vinnslu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2295
+#: terminalDisplay/TerminalDisplay.cpp:2286
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell (bjalla): reynir að gefa frá sér hljóðviðvörun"
 
-#: terminalDisplay/TerminalDisplay.cpp:2296
+#: terminalDisplay/TerminalDisplay.cpp:2287
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace (baklykill)"
 
-#: terminalDisplay/TerminalDisplay.cpp:2297
+#: terminalDisplay/TerminalDisplay.cpp:2288
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF (tækisstýring þrjú/XOFF): stöðvar úttak"
 
-#: terminalDisplay/TerminalDisplay.cpp:2298
+#: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend (skipta út/stöðva): getur stöðvað núverandi vinnslu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2299
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape (Esc): notaður til að stjórna stöðu skjáhermis"
 
-#: terminalDisplay/TerminalDisplay.cpp:2300
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr ""
 "File Separator/Quit (skráaskiltákn/hætta): getur stöðvað núverandi vinnslu "
 "alveg"
 
-#: terminalDisplay/TerminalDisplay.cpp:2323
+#: terminalDisplay/TerminalDisplay.cpp:2314
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3356,31 +3356,31 @@ msgstr ""
 "Textinn sem þú ert að reyna að líma inniheldur falin stýringartákn, viltu "
 "sía þau út?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2326
+#: terminalDisplay/TerminalDisplay.cpp:2317
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Staðfesta límingu"
 
-#: terminalDisplay/TerminalDisplay.cpp:2327
+#: terminalDisplay/TerminalDisplay.cpp:2318
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Lí&ma án stýristafa"
 
-#: terminalDisplay/TerminalDisplay.cpp:2328
+#: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Líma allt"
 
-#: terminalDisplay/TerminalDisplay.cpp:2329
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Hætta við"
 
-#: terminalDisplay/TerminalDisplay.cpp:2560
+#: terminalDisplay/TerminalDisplay.cpp:2551
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3391,17 +3391,17 @@ msgstr ""
 "\">stöðvað</a> með því að ýta á Ctrl+S. Ýttu á <b>Ctrl+Q</b> til að halda "
 "áfram.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2615
+#: terminalDisplay/TerminalDisplay.cpp:2606
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Þessi skjáhermir er skrifvarinn."
 
-#: terminalDisplay/TerminalDisplay.cpp:3010
+#: terminalDisplay/TerminalDisplay.cpp:3001
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Breyta &möppu í"
 
-#: terminalDisplay/TerminalDisplay.cpp:3043
+#: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Staðsetning límingar"
@@ -3626,19 +3626,19 @@ msgstr "Merkingarvísbendingar "
 msgid "Line numbers "
 msgstr "Línunúmer "
 
-#: ViewManager.cpp:1177
+#: ViewManager.cpp:1176
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Vista framsetningu flipa"
 
-#: ViewManager.cpp:1179 ViewManager.cpp:1266
+#: ViewManager.cpp:1178 ViewManager.cpp:1265
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Framsetning Konsole-skeljaglugga (*.json)"
 
-#: ViewManager.cpp:1192
+#: ViewManager.cpp:1191
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3648,7 +3648,7 @@ msgstr ""
 "Vandamál kom upp þegar framsetningin var vistuð.\n"
 "%1"
 
-#: ViewManager.cpp:1253
+#: ViewManager.cpp:1252
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3658,7 +3658,7 @@ msgstr ""
 "Vandamál kom upp við opnun framsetningar.\n"
 "%1"
 
-#: ViewManager.cpp:1264
+#: ViewManager.cpp:1263
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
