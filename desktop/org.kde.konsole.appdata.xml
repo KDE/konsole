@@ -83,6 +83,7 @@
   <summary xml:lang="tr">Komut satırı arayüzünü kullanın</summary>
   <summary xml:lang="uk">Використання інтерфейсу командного рядка</summary>
   <summary xml:lang="x-test">xxUse the command line interfacexx</summary>
+  <summary xml:lang="zh-CN">使用命令行界面</summary>
   <summary xml:lang="zh-TW">使用指令列介面</summary>
   <developer_name translate="no">KDE</developer_name>
   <description>
