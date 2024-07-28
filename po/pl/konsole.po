@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-18 00:41+0000\n"
-"PO-Revision-Date: 2024-07-21 06:59+0200\n"
+"PO-Revision-Date: 2024-07-27 09:38+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -95,7 +95,7 @@ msgstr "Przewijanie wste&cz"
 #: ../desktop/sessionui.rc:78
 #, kde-format
 msgid "Session Toolbar"
-msgstr "Pasek narzędzi sesji"
+msgstr "Pasek narzędzi posiedzenia"
 
 #: Application.cpp:53
 #, kde-format
@@ -125,7 +125,7 @@ msgstr "Ustaw początkowy katalog roboczy nowej karty lub okna na „katalog”"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Do not close the initial session automatically when it ends."
-msgstr "Nie zamykaj pierwotnej sesji samoczynnie po jej zakończeniu."
+msgstr "Nie zamykaj pierwotnego posiedzenia samoczynnie po jego zakończeniu."
 
 #: Application.cpp:61
 #, kde-format
@@ -514,7 +514,7 @@ msgstr ""
 #: colorscheme/ColorSchemeEditor.ui:53
 #, kde-format
 msgid "Randomly adjust colors for each session"
-msgstr "Losowo dostosuj barwy dla każdej sesji"
+msgstr "Losowo dostosuj barwy dla każdego posiedzenia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blurCheckBox)
 #: colorscheme/ColorSchemeEditor.ui:60
@@ -768,7 +768,7 @@ msgstr "Dostosuj przewijanie wstecz"
 #, kde-format
 msgctxt "@info:status"
 msgid "Any adjustments are only temporary to this session."
-msgstr "Poniższe zmiany są tylko tymczasowe dla tej sesji."
+msgstr "Poniższe zmiany są tylko tymczasowe dla tego posiedzenia."
 
 #: KeyBindingEditor.cpp:54
 #, kde-format
@@ -1064,7 +1064,7 @@ msgid ""
 "Toolbar and session names"
 msgstr ""
 "Osadzona Konsola\n"
-"Nazwy sesji i pasków narzędzi"
+"Nazwy posiedzeń i pasków narzędzi"
 
 #: main.cpp:391
 #, kde-format
@@ -1654,7 +1654,7 @@ msgstr "Brak katalogu"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:415
 #, kde-format
 msgid "An SSH session must have a profile"
-msgstr "Sesja SSH musi mieć profil"
+msgstr "Posiedzenie SSH musi mieć profil"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
@@ -1822,7 +1822,7 @@ msgstr "Profil"
 #: plugins/SSHManager/sshwidget.ui:233
 #, kde-format
 msgid "The profile to be active when the ssh session starts"
-msgstr "Profil do użycia, gdy zaczyna się sesja ssh"
+msgstr "Profil do użycia, gdy zaczyna się posiedzenie ssh"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSSHConfig)
 #: plugins/SSHManager/sshwidget.ui:271
@@ -2047,7 +2047,7 @@ msgstr "Konsola Solarisa"
 #: session/Session.cpp:109
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
-msgstr "Dzwonek w „%1” (sesja „%2”)"
+msgstr "Dzwonek w „%1” (posiedzenie „%2”)"
 
 #: session/Session.cpp:417
 #, kde-format
@@ -2082,14 +2082,14 @@ msgstr "Nie można uruchomić programu „%1” z parametrami „%2”."
 #: session/Session.cpp:741
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "Cisza w „%1” (sesja „%2”)"
+msgstr "Cisza w „%1” (posiedzenie „%2”)"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
 #: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1150
 #, kde-format
 msgid "Show session"
-msgstr "Pokaż sesję"
+msgstr "Pokaż posiedzenie"
 
 #: session/Session.cpp:1026
 #, kde-format
@@ -2129,7 +2129,7 @@ msgstr "Postęp transmisji ZModem"
 #: session/Session.cpp:2079
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "Ruch w „%1” (sesja „%2”)"
+msgstr "Ruch w „%1” (posiedzenie „%2”)"
 
 #: session/SessionController.cpp:139
 #, kde-format
@@ -2139,7 +2139,7 @@ msgstr "Konsola"
 #: session/SessionController.cpp:353
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
-msgstr "Proces „%1” zakończył działanie w sesji „%2”"
+msgstr "Proces „%1” zakończył działanie w posiedzeniu „%2”"
 
 #: session/SessionController.cpp:436
 #, kde-format
@@ -2159,7 +2159,7 @@ msgstr "Ustawienia skrótów sieciowych..."
 #: session/SessionController.cpp:641
 #, kde-format
 msgid "&Close Session"
-msgstr "&Zamknij sesję"
+msgstr "&Zamknij posiedzenie"
 
 #: session/SessionController.cpp:648
 #, kde-format
@@ -2410,8 +2410,8 @@ msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr ""
-"W tej sesji działa obecnie jakiś program. Czy na pewno chcesz zamknąć tę "
-"sesję?"
+"W tym posiedzeniu działa obecnie jakiś program. Czy na pewno chcesz zamknąć "
+"to posiedzenie?"
 
 #: session/SessionController.cpp:1116
 #, kde-format
@@ -2419,8 +2419,8 @@ msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
-"W tej sesji działa obecnie program „%1”. Czy na pewno chcesz zamknąć tę "
-"sesję?"
+"W tym posiedzeniu działa obecnie program „%1”. Czy na pewno chcesz zamknąć "
+"to posiedzenie?"
 
 #: session/SessionController.cpp:1123 session/SessionController.cpp:1158
 #, kde-format
@@ -2438,7 +2438,8 @@ msgstr "Zamknij program"
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
-msgstr "Program w tej sesji nie zginął. Czy na pewno chcesz zabić go siłą?"
+msgstr ""
+"Program w tym posiedzeniu nie zginął. Czy na pewno chcesz zabić go siłą?"
 
 #: session/SessionController.cpp:1151
 #, kde-format
@@ -2446,7 +2447,7 @@ msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"Program „%1” w tej sesji nie zginął. Czy na pewno chcesz zabić go siłą?"
+"Program „%1” w tym posiedzeniu nie zginął. Czy na pewno chcesz zabić go siłą?"
 
 #: session/SessionController.cpp:1159
 #, kde-format
@@ -2485,7 +2486,7 @@ msgstr ""
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
-"<p>W bieżącej sesji już trwa przesyłanie plików przy użyciu ZModem.</p>"
+"<p>W bieżącym posiedzeniu już trwa przesyłanie plików przy użyciu ZModem.</p>"
 
 #: session/SessionController.cpp:2141
 #, kde-format
@@ -2947,7 +2948,7 @@ msgstr "&Usuń"
 #: settings/ProfileSettings.ui:90
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
-msgstr "Ustaw wybrany profil jako domyślny dla nowych sesji terminala"
+msgstr "Ustaw wybrany profil jako domyślny dla nowych posiedzeń terminala"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:93
@@ -4378,7 +4379,7 @@ msgstr "Pomiń zdarzenia dzwonka"
 #: widgets/EditProfileDialog.cpp:535
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
-msgstr "Domyślny profil dla nowych sesji terminala w %1"
+msgstr "Domyślny profil dla nowych posiedzeń terminala w %1"
 
 #: widgets/EditProfileDialog.cpp:640
 #, kde-format
@@ -4515,7 +4516,8 @@ msgstr "Polecenie:"
 msgid ""
 "The command to execute when new terminal sessions are created using this "
 "profile"
-msgstr "Polecenie do wykonania po utworzeniu nowej sesji dla tego profilu"
+msgstr ""
+"Polecenie do wykonania po utworzeniu nowego posiedzenia dla tego profilu"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
 #: widgets/EditProfileGeneralPage.ui:144
@@ -4534,7 +4536,7 @@ msgstr "&Katalog początkowy:"
 #, kde-format
 msgid ""
 "The initial working directory for new terminal sessions using this profile"
-msgstr "Początkowy katalog roboczy nowych sesji dla tego profilu"
+msgstr "Początkowy katalog roboczy nowych posiedzeń dla tego profilu"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:176
@@ -4552,7 +4554,7 @@ msgstr "Wybierz katalog początkowy"
 #: widgets/EditProfileGeneralPage.ui:193
 #, kde-format
 msgid "Start in same directory as current session"
-msgstr "Rozpocznij w katalogu bieżącej sesji"
+msgstr "Rozpocznij w katalogu bieżącego posiedzenia"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:206
@@ -5432,7 +5434,7 @@ msgstr "Nazwa okna ustawiona przez powłokę: %w"
 
 #: widgets/TabTitleFormatButton.cpp:25 widgets/TabTitleFormatButton.cpp:40
 msgid "Session Number: %#"
-msgstr "Numer sesji: %#"
+msgstr "Numer posiedzenia: %#"
 
 #: widgets/TabTitleFormatButton.cpp:26 widgets/TabTitleFormatButton.cpp:34
 #, c-format
