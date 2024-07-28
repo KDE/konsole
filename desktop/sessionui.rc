@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<gui name="session" version="35">
+<gui name="session" version="36">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
