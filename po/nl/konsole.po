@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-26 00:42+0000\n"
-"PO-Revision-Date: 2024-07-22 10:32+0200\n"
+"PO-Revision-Date: 2024-07-27 10:12+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -4441,7 +4441,7 @@ msgstr "Systeembel"
 #: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "System Notifications"
-msgstr "Systeemberichten"
+msgstr "Systeemmeldingen"
 
 #: widgets/EditProfileDialog.cpp:526
 #, kde-format

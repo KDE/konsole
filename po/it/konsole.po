@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-26 00:42+0000\n"
-"PO-Revision-Date: 2024-07-18 14:43+0200\n"
+"PO-Revision-Date: 2024-07-22 14:10+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -1966,26 +1966,30 @@ msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 è un URL non valido, impossibile salvarne l'output."
 
 #: SaveHistoryAutoTask.cpp:88
-#, fuzzy, kde-format
-#| msgid "Unable to write to file."
+#, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr "Impossibile scrivere sul file."
+msgstr "Impossibile creare il file di salvataggio automatico in %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
 msgstr ""
+"Interruzione del salvataggio automatico a causa del cambio di schermata."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Il file di salvataggio automatico è stato modificato esternamente, impedendo "
+"ulteriori salvataggi automatici."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Impossibile aggiornare lo stato di salvataggio automatico sulle modifiche "
+"all'output."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2259,15 +2263,14 @@ msgid "Save Output &As..."
 msgstr "S&alva output come..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "S&alva output come..."
+msgstr "Salvataggio automatico output come..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Interrompi il salvataggio automatico"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3790,13 +3793,13 @@ msgstr "Scorciatoia per dare un'occhiata alla schermata principale:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Imposta l'intervallo tra i salvataggi automatici:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283

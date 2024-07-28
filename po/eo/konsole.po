@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-26 00:42+0000\n"
-"PO-Revision-Date: 2024-07-20 17:03+0200\n"
+"PO-Revision-Date: 2024-07-27 14:20+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1960,23 +1960,25 @@ msgstr "%1 ne estas valida adreso, ne povis konservi la eligon."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Malsukcesis krei aŭtokonservan dosieron ĉe %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Haltigante aŭtokonservon pro ŝanĝado de ekranoj."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Aŭtokonserva dosiero estos modifita de ekstere, preventante pluajn "
+"aŭtokonservojn."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "Malsukcesis ĝisdatigi aŭtokonservan staton pri eligaj ŝanĝoj."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2246,18 +2248,17 @@ msgstr "Elekti &Linion"
 #: session/SessionController.cpp:733
 #, kde-format
 msgid "Save Output &As..."
-msgstr "Konservi elig&aĵon kiel..."
+msgstr "Konservi elig&aĵon Kiel..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Konservi elig&aĵon kiel..."
+msgstr "Aŭtokonservi Eligaĵon Kiel..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Halti Aŭtokonservon"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3758,13 +3759,13 @@ msgstr "Ŝparvojo por kaŝrigardi la ĉefan ekranon:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Meti intervalon inter aŭtokonservadoj:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms "
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283
