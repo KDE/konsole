@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-26 00:42+0000\n"
-"PO-Revision-Date: 2024-07-26 14:34+0200\n"
+"PO-Revision-Date: 2024-08-01 15:58+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -3895,14 +3895,13 @@ msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"Bruk den valde skrifta for blindeskrift-teikn i staden for den innebygde "
-"koden"
+"Bruk den valde skrifta for punktskrift-teikn i staden for den innebygde koden"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
 #, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Bruk blindeskrift-teikna som finst i skrifta"
+msgstr "Bruk punktskrift-teikna som finst i skrifta"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
