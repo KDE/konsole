@@ -961,6 +961,31 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
     }
 }
 
+static QString resolveIcon(QList<QString> icons)
+{
+    if (icons.isEmpty())
+        return QString();
+    for (QString iconName : icons) {
+        if (iconName == QLatin1String("error"))
+            return QLatin1String("dialog-error");
+        if (iconName == QLatin1String("warn") || iconName == QLatin1String("warning"))
+            return QLatin1String("dialog-warning");
+        if (iconName == QLatin1String("info"))
+            return QLatin1String("dialog-info");
+        if (iconName == QLatin1String("question"))
+            return QLatin1String("dialog-question");
+        if (iconName == QLatin1String("help"))
+            return QLatin1String("help-about");
+        if (iconName == QLatin1String("file-manager"))
+            return QLatin1String("system-file-manager");
+        if (iconName == QLatin1String("system-monitor"))
+            return QLatin1String("utilities-system-monitor");
+        if (iconName == QLatin1String("text-editor"))
+            return QLatin1String("accessories-text-editor");
+    }
+    return icons[0];
+}
+
 void Vt102Emulation::processChecksumRequest([[maybe_unused]] int crargc, int crargv[])
 {
     int checksum = 0;
@@ -1212,12 +1237,18 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             Unknown,
             Title,
             Body,
+            Query,
+            Buttons,
         } payloadType = PayloadType::Title;
         QString payload = value.mid(pos + 1);
         QStringList params = value.mid(0, pos).split(u':');
         KittyNotificationOption option = KittyNotificationOption::None;
         int addedActions = NotificationActionNone;
         int removedActions = NotificationActionNone;
+        QList<QString> iconNames;
+        int urgency = -1;
+        int closeSignal = -1;
+        QString applicationName;
 
         for (QString param: params) {
             if (param.startsWith(QString::fromLatin1("i="))) {
@@ -1225,6 +1256,12 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 QString payloadValue = param.mid(2);
                 if (isIdentifier(payloadValue))
                     notificationId = payloadValue;
+            } else if (param.startsWith(QString::fromLatin1("c="))) {
+                // Whether the notification is complete:
+                bool parseOk;
+                int parsedCloseSignal = param.mid(2).toInt(&parseOk);
+                if (parseOk && parsedCloseSignal >= 0 && parsedCloseSignal < 2)
+                    closeSignal = parsedCloseSignal;
             } else if (param.startsWith(QString::fromLatin1("d="))) {
                 // Whether the notification is complete:
                 bool parseOk;
@@ -1266,6 +1303,10 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                     payloadType = PayloadType::Title;
                 } else if (payloadValue == QString::fromLatin1("body")) {
                     payloadType = PayloadType::Body;
+                } else if (payloadValue == QString::fromLatin1("buttons")) {
+                    payloadType = PayloadType::Buttons;
+                } else if (payloadValue == QString::fromLatin1("?")) {
+                    payloadType = PayloadType::Query;
                 } else {
                     payloadType = PayloadType::Unknown;
                 }
@@ -1277,6 +1318,19 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                     option = KittyNotificationOption::Unfocused;
                 } else if (payloadValue == QString::fromLatin1("invisible")) {
                     option = KittyNotificationOption::Invisible;
+                }
+            } else if (param.startsWith(QString::fromLatin1("n="))) {
+                QString payloadValue = param.mid(2);
+                iconNames.append(QString::fromUtf8(QByteArray::fromBase64(payloadValue.toUtf8())));
+            } else if (param.startsWith(QString::fromLatin1("f="))) {
+                QString payloadValue = param.mid(2);
+                applicationName = QString::fromUtf8(QByteArray::fromBase64(payloadValue.toUtf8()));
+            } else if (param.startsWith(QString::fromLatin1("u="))) {
+                QString payloadValue = param.mid(2);
+                bool parseOk;
+                int parsedUrgency = param.mid(2).toInt(&parseOk);
+                if (parseOk && parsedUrgency >= 0 && parsedUrgency < 3) {
+                    urgency = parsedUrgency;
                 }
             }
         }
@@ -1292,11 +1346,23 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             notificationState = &_kittyNotifications[notificationId];
             notificationState->serial = _kittyNotificationSerial++;
         }
+        if (closeSignal >= 0) {
+            notificationState->closeSignal = closeSignal;
+        }
 
         if (option != KittyNotificationOption::None) {
             notificationState->option = option;
         }
         notificationState->action = (notificationState->action | addedActions) & (~removedActions);
+        for (QString iconName : iconNames) {
+            if (notificationState->iconNames.length() >= 10)
+                continue;
+            notificationState->iconNames.append(iconName);
+        }
+        if (urgency >= 0)
+            notificationState->urgency = urgency;
+        if (!applicationName.isEmpty())
+            notificationState->applicationName = applicationName;
 
         if (encoding == 1) {
             payload = QString::fromUtf8(QByteArray::fromBase64(payload.toUtf8()));
@@ -1305,11 +1371,20 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         switch (payloadType) {
             case Unknown:
                 break;
+            case Query:
+                _kittyNotifications.remove(notificationId);
+                sendString((QStringLiteral("\033]99;i=") + notificationId
+                            + QStringLiteral(";p=?;p=title,body,buttons:a=report,focus:o=always,unfocus,invisible:u=0,1,2:c=1\033\\"))
+                               .toLatin1());
+                return;
             case Title:
                 notificationState->title += payload.left(max_notification_size - notificationState->title.size());
                 break;
             case Body:
                 notificationState->body += payload.left(max_notification_size - notificationState->body.size());
+                break;
+            case Buttons:
+                notificationState->buttons = payload.split(QString::fromUtf8(u8"\u2028"));
                 break;
         }
 
@@ -1334,15 +1409,41 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
 
             if (enabled) {
                     KNotification *notification;
-                    if (!notificationState->body.isEmpty()) {
-                    notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"),
-                                                        notificationState->title,
-                                                        notificationState->body);
-                    } else {
-                    notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"),
-                                                        notificationState->title);
+                    QString iconName = resolveIcon(notificationState->iconNames);
+
+                    // KNotification does not support application name, add it to the title instead:
+                    QString fullTitle = notificationState->applicationName;
+                    if (!notificationState->title.isEmpty()) {
+                    if (!fullTitle.isEmpty())
+                        fullTitle += QStringLiteral(": ");
+                    fullTitle += notificationState->title;
                     }
+
+                    notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"),
+                                                        fullTitle,
+                                                        notificationState->body,
+                                                        iconName);
+
+                    KNotification::Urgency resultUrgency = KNotification::Urgency::NormalUrgency;
+                    switch (notificationState->urgency) {
+                    case 0:
+                    resultUrgency = KNotification::Urgency::LowUrgency;
+                    break;
+                    case 1:
+                    resultUrgency = KNotification::Urgency::NormalUrgency;
+                    break;
+                    case 2:
+                    resultUrgency = KNotification::Urgency::CriticalUrgency;
+                    break;
+                    }
+                    notification->setUrgency(resultUrgency);
                     auto action = notification->addDefaultAction(i18n("Show session"));
+
+                    if (notificationState->closeSignal) {
+                    connect(notification, &KNotification::closed, this, [this, notificationId]() {
+                        sendString((QStringLiteral("\033]99;i=") + notificationId + QStringLiteral(":p=close;\033\\")).toLatin1());
+                    });
+                    }
 
                     int notificationAction = notificationState->action;
                     if (notificationAction != 0) {
@@ -1353,6 +1454,14 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                         if (notificationAction & NotificationActionFocus) {
                             _currentScreen->currentTerminalDisplay()->notificationClicked(notification->xdgActivationToken());
                         }
+                    });
+                    }
+
+                    for (int i = 0; i < notificationState->buttons.size(); ++i) {
+                    KNotificationAction *action = notification->addAction(notificationState->buttons[i]);
+                    connect(action, &KNotificationAction::activated, this, [this, notificationId, i]() {
+                        sendString((QStringLiteral("\033]99;i=") + notificationId + QStringLiteral(";") + QString::number(i + 1) + QStringLiteral("\033\\"))
+                                       .toLatin1());
                     });
                     }
             }

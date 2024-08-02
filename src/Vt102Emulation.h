@@ -288,10 +288,15 @@ private:
 
     struct KittyNotificationState {
         qint64 serial;
+        QString applicationName;
         QString body;
         QString title;
+        QList<QString> iconNames;
         KittyNotificationOption option = KittyNotificationOption::Always;
+        int urgency = 1;
         int action = NotificationActionNone;
+        int closeSignal = 0;
+        QList<QString> buttons;
     };
 
     qint64 _kittyNotificationSerial = 0;
