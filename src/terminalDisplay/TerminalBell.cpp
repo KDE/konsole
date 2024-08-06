@@ -9,6 +9,7 @@
 #include "TerminalBell.h"
 #include "TerminalDisplay.h"
 
+#include <QApplication>
 #include <QTimer>
 
 #include <KLocalizedString>
@@ -31,7 +32,7 @@ void TerminalBell::bell(TerminalDisplay *terminalDisplay, const QString &message
 {
     switch (_bellMode) {
     case Enum::SystemBeepBell:
-        KNotification::beep();
+        QApplication::beep();
         break;
     case Enum::NotifyBell: {
         // STABLE API:
