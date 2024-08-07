@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-26 00:42+0000\n"
+"POT-Creation-Date: 2024-08-07 00:43+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -2186,7 +2186,7 @@ msgstr "ئەڭگىمە «%1» نىڭدا  جىمجىتلىق"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1154
 #, kde-format
 msgid "Show session"
 msgstr ""

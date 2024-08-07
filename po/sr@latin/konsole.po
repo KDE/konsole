@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-26 00:42+0000\n"
+"POT-Creation-Date: 2024-08-07 00:43+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -2198,7 +2198,7 @@ msgstr "Tišina u sesiji „%1“"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1154
 #, fuzzy, kde-format
 #| msgid "&Close Session"
 msgid "Show session"

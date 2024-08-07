@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-26 00:42+0000\n"
+"POT-Creation-Date: 2024-08-07 00:43+0000\n"
 "PO-Revision-Date: 2014-07-01 22:04+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -2209,7 +2209,7 @@ msgstr "Törn \"%1\" is still"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1154
 #, fuzzy, kde-format
 #| msgid "&Close Session"
 msgid "Show session"

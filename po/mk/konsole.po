@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-26 00:42+0000\n"
+"POT-Creation-Date: 2024-08-07 00:43+0000\n"
 "PO-Revision-Date: 2010-01-29 22:59+0100\n"
 "Last-Translator: Bozidar Proevski <bobibobi@freemail.com.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -2290,7 +2290,7 @@ msgstr "Тишина во сесијата „%1“"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1154
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Show session"

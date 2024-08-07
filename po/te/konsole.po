@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-26 00:42+0000\n"
+"POT-Creation-Date: 2024-08-07 00:43+0000\n"
 "PO-Revision-Date: 2009-01-16 22:16+0530\n"
 "Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <en@li.org>\n"
@@ -2284,7 +2284,7 @@ msgstr "%1 సెషన్ లో నిశబ్దం"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1154
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Show session"

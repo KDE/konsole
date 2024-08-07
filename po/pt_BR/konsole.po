@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-26 00:42+0000\n"
-"PO-Revision-Date: 2024-05-07 23:43-0300\n"
+"POT-Creation-Date: 2024-08-07 00:43+0000\n"
+"PO-Revision-Date: 2024-08-06 11:11-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -622,16 +622,15 @@ msgstr "Sem escala"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
-#, fuzzy, kde-format
-#| msgid "Wallpaper scaling:"
+#, kde-format
 msgid "Wallpaper flip:"
-msgstr "Escala do papel de parede:"
+msgstr "Inverter o papel de parede:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr ""
+msgstr "Sem inverter"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
@@ -1641,7 +1640,7 @@ msgstr "Excluir configurações SSH"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Perfil SSH importado <br/> Algumas configurações são somente leitura."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
 #, kde-format
@@ -1977,23 +1976,26 @@ msgstr "%1 é uma URL inválida, a saída não poderá ser salva."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Falha ao criar arquivo de salvamento automático em %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Interrompendo o salvamento automático devido à troca de telas."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"O arquivo de salvamento automático foi modificado externamente, impedindo "
+"salvamentos automáticos posteriores."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Falha ao atualizar o estado de salvamento automático nas alterações de saída."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2126,7 +2128,7 @@ msgstr "Silêncio em '%1' (sessão '%2')"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1154
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1154
 #, kde-format
 msgid "Show session"
 msgstr "Mostrar sessão"
@@ -2223,7 +2225,7 @@ msgstr "Dividir a exibição em superior-inferior"
 #: session/SessionController.cpp:681
 #, kde-format
 msgid "Copy except prompts"
-msgstr ""
+msgstr "Copiar exceto prompts"
 
 #: session/SessionController.cpp:687
 #, kde-format
@@ -2266,15 +2268,14 @@ msgid "Save Output &As..."
 msgstr "S&alvar saída como..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "S&alvar saída como..."
+msgstr "Salvar saída automaticamente como..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Parar salvamento automático"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -2703,16 +2704,15 @@ msgstr "Pesquisar para trás"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Define se a pesquisa deve começar a partir da base"
+msgstr "Define se a pesquisa deve parar em vez de recomeçar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Sem recomeçar"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2796,13 +2796,13 @@ msgstr "Define se o texto igualado deve ser destacado"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "A pesquisa deve parar em vez de recomeçar"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr ""
+msgstr "Controlar se cgroups filhos são criados para guias individuais"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:94
@@ -2906,10 +2906,9 @@ msgstr "Para arquivos de histórico, use esta pasta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableMemoryMonitoring)
 #: settings/MemorySettings.ui:17
-#, fuzzy, kde-format
-#| msgid "Tab Monitoring"
+#, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Monitoramento de abas"
+msgstr "Habilita o monitoramento de memória:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -2923,6 +2922,15 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
+"As alterações entrarão em vigor após a reinicialização. Se habilitado, o "
+"consumo sustentado de memória pelo Konsole\n"
+" excedendo o valor especificado fará com que o systemd-oomd elimine a(s) "
+"aba(s)\n"
+" contendo o(s) processo(s) que consomem muita memória. Observação: "
+"habilitar\n"
+" pode causar lentidão maior durante alto consumo de memória e especificar\n"
+" valores excessivamente baixos ainda pode fazer com que o Konsole seja "
+"encerrado."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -3057,17 +3065,15 @@ msgstr "A&baixo da área do terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "A&baixo da área do terminal"
+msgstr "Para bai&xo da área do terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "A&baixo da área do terminal"
+msgstr "Para a direi&ta da área do terminal"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3077,10 +3083,9 @@ msgstr "Mostrar botão de fechar aba:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "&Em cada aba"
+msgstr "Em ca&da aba"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
@@ -3582,20 +3587,16 @@ msgid "Toggle maximize current view"
 msgstr "Alternar para maximizar a exibição atual"
 
 #: ViewManager.cpp:311
-#, fuzzy, kde-format
-#| msgctxt "@action Shortcut entry"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Alternar para maximizar a exibição atual"
+msgstr "Alternar para ampliar/maximizar a exibição atual"
 
 #: ViewManager.cpp:312
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Toggle maximize current view"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Toggle zoom-maximize current view"
-msgstr "Alternar para maximizar a exibição atual"
+msgstr "Alternar para ampliar/maximizar a exibição atual"
 
 #: ViewManager.cpp:320
 #, kde-format
@@ -3778,10 +3779,9 @@ msgstr "Controle de fluxo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "&Default character encoding:"
-msgstr "Codificação de caracteres padrão:"
+msgstr "Codificação de caracteres &padrão:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:242
@@ -3793,13 +3793,13 @@ msgstr "Atalho para espiar a tela principal:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Definir intervalo entre salvamentos automáticos:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:268
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:283
@@ -3809,29 +3809,24 @@ msgstr "Números de linha:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:293
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "&Nunca"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:303
-#, fuzzy, kde-format
-#| msgctxt "When showing URL hints"
-#| msgid "When URL hints show"
+#, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr "Quando as dicas de URL são exibidas"
+msgstr "Quando as dicas de &URL são exibidas"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:313
-#, fuzzy, kde-format
-#| msgctxt "Always"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr "Sempre"
+msgstr "Sem&pre"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -4219,18 +4214,20 @@ msgid ""
 "Ignore attribute changes mid-word (otherwise, attribute changes break word "
 "when rendering)"
 msgstr ""
+"Ignorar alterações de atributos no meio da palavra (caso contrário, as "
+"alterações de atributos quebram a palavra durante a renderização)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAttr)
 #: widgets/EditProfileAppearancePage.ui:880
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr ""
+msgstr "Use os mesmos atributos para a palavra inteira"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:893
 #, kde-format
 msgid "Render words of ASCII characters together"
-msgstr ""
+msgstr "Renderizar palavras de caracteres ASCII juntas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:896
@@ -4242,7 +4239,7 @@ msgstr "Caracteres ASCII "
 #: widgets/EditProfileAppearancePage.ui:909
 #, kde-format
 msgid "Render words of Brahmic scripts characters together"
-msgstr ""
+msgstr "Renderizar palavras de caracteres de scripts Brahmico juntos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordModeBrahmic)
 #: widgets/EditProfileAppearancePage.ui:912
@@ -4277,6 +4274,8 @@ msgstr "Renderização de texto bidirecional"
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
+"As linhas são sempre LTR, em vez de serem determinadas pelo primeiro "
+"caractere forte"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:970
@@ -4288,13 +4287,13 @@ msgstr "forçar direção da linha LTR"
 #: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
-msgstr ""
+msgstr "Trate os caracteres de desenho de tabela como um LTR forte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:986
 #, kde-format
 msgid "Table characters BiDi mode override"
-msgstr ""
+msgstr "Sobrescrever o modo BiDi de caracteres de tabela"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:999
@@ -4306,7 +4305,7 @@ msgstr "Ignorar a largura dos caracteres problemáticos"
 #: widgets/EditProfileAppearancePage.ui:1002
 #, kde-format
 msgid "Override wcwidth"
-msgstr ""
+msgstr "Sobrescrever wcwidth"
 
 #: widgets/EditProfileDialog.cpp:66
 #, kde-format
@@ -4385,13 +4384,13 @@ msgstr "Um perfil com o nome \"%1\" já existe."
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
-msgstr ""
+msgstr "O nome do perfil excedeu o comprimento máximo permitido (%1)."
 
 #: widgets/EditProfileDialog.cpp:380
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
-msgstr ""
+msgstr "Os caracteres destacados são inválidos em nomes de perfil: %1."
 
 #: widgets/EditProfileDialog.cpp:416
 #, kde-format
@@ -4601,10 +4600,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, fuzzy, kde-format
-#| msgid "Initial directory:"
+#, kde-format
 msgid "I&nitial directory:"
-msgstr "Pasta inicial:"
+msgstr "Pa&sta inicial:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:170
@@ -4646,10 +4644,9 @@ msgstr "Edita a lista de variáveis de ambiente e valores associados"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Initial terminal si&ze:"
-msgstr "Tamanho do terminal inicial:"
+msgstr "Tamanho ini&cial do terminal:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4666,10 +4663,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, fuzzy, kde-format
-#| msgid "Terminal bell mode:"
+#, kde-format
 msgid "&Terminal bell mode:"
-msgstr "Modo de campainha do terminal:"
+msgstr "Modo de campainha do &terminal:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
@@ -4837,17 +4833,15 @@ msgstr "Seleção com clique triplo:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, fuzzy, kde-format
-#| msgid "The whole line"
+#, kde-format
 msgid "&The whole line"
-msgstr "A linha inteira"
+msgstr "A linha i&nteira"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, fuzzy, kde-format
-#| msgid "From mouse position to the end of line"
+#, kde-format
 msgid "From mouse position to the end of &line"
-msgstr "Da posição do ponteiro do mouse até ao fim da linha"
+msgstr "Da posição do ponteiro do mouse até ao fim da l&inha"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
@@ -5127,10 +5121,9 @@ msgstr "Rolar a página em metade da altura da janela"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, fuzzy, kde-format
-#| msgid "Half screen height"
+#, kde-format
 msgid "Half screen heigh&t"
-msgstr "Metade da altura da tela"
+msgstr "M&etade da altura da tela"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -5140,10 +5133,9 @@ msgstr "Rolar a página a altura total da janela"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, fuzzy, kde-format
-#| msgid "Full screen height"
+#, kde-format
 msgid "F&ull screen height"
-msgstr "Total da altura da tela"
+msgstr "Altura t&otal da tela"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
@@ -5159,12 +5151,10 @@ msgstr "Mostrar a barra de rolagem no lado direito da janela do terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the right side"
-#| msgid "Right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
-msgstr "Lado direito"
+msgstr "Lado d&ireito"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
@@ -5174,12 +5164,10 @@ msgstr "Mostrar a barra de rolagem no lado esquerdo da janela do terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr "Lado esquerdo"
+msgstr "Lado e&squerdo"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
@@ -5216,19 +5204,21 @@ msgstr "Refluir linhas quando o terminal for redimensionado"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Cor dos marcadores da barra de rolagem:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
 msgstr ""
+"Tamanho de cada marcador (como uma porcentagem do comprimento da barra de "
+"rolagem):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5298,10 +5288,9 @@ msgstr "Limita a saída memorizada a um número fixo de linhas"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size:"
+#, kde-format
 msgid "Fi&xed size:"
-msgstr "Tamanho fixo:"
+msgstr "Tamanho fi&xo:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5317,12 +5306,10 @@ msgstr "Memoriza todas as saídas produzidas pelo terminal"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgctxt "Save all lines to the scrollback history"
-#| msgid "Unlimited"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr "Sem limite"
+msgstr "Sem &limite"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5332,12 +5319,10 @@ msgstr "Não memoriza a saída anterior"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
-msgstr "&Nenhuma"
+msgstr "&Nenhum"
 
 #: widgets/IncrementalSearchBar.cpp:49
 #, kde-format
@@ -5433,13 +5418,13 @@ msgstr "Define se a pesquisa deve começar a partir da base"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Sem recomeçar"
 
 #: widgets/IncrementalSearchBar.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Define se a pesquisa deve parar em vez de recomeçar do início"
+msgstr "Define se a pesquisa deve parar em vez de recomeçar"
 
 #: widgets/IncrementalSearchBar.cpp:171
 #, kde-format
@@ -5482,10 +5467,9 @@ msgstr "Formato do título da aba remota:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, fuzzy, kde-format
-#| msgid "Tab title format:"
+#, kde-format
 msgid "&Tab title format:"
-msgstr "Formato do título da aba:"
+msgstr "Formato do &título da aba:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5495,10 +5479,9 @@ msgstr "Formato normal do título da aba"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgid "Tab Color:"
+#, kde-format
 msgid "Tab Co&lor:"
-msgstr "Cor da aba:"
+msgstr "&Cor da aba:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
