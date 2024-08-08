@@ -331,9 +331,6 @@
   <tabstop>urlHintsModifierCtrl</tabstop>
   <tabstop>urlHintsModifierAlt</tabstop>
   <tabstop>urlHintsModifierMeta</tabstop>
-  <tabstop>lineNumsNever</tabstop>
-  <tabstop>lineNumsAlways</tabstop>
-  <tabstop>lineNumsURL</tabstop>
  </tabstops>
  <resources/>
  <connections/>
