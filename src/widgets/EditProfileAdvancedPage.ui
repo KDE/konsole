@@ -249,67 +249,67 @@
      <item row="8" column="1" alignment="Qt::AlignmentFlag::AlignRight">
       <widget class="QKeySequenceEdit" name="peekPrimaryWidget"/>
      </item>
-	 <item row="9" column="0" alignment="Qt::AlignmentFlag::AlignRight">
-	  <widget class="QLabel" name="autoSaveIntervalLabel">
-	   <property name="text">
-	    <string>Set interval between autosaves:</string>
-	   </property>
-	  </widget>
-	 </item>
-	 <item row="9" column="1" alignment="Qt::AlignmentFlag::AlignRight">
-	  <widget class="QSpinBox" name="autoSaveIntervalWidget">
-	   <property name="maximum">
-	    <number>3600000</number>
-	   </property>
-	   <property name="minimum">
-	    <number>0</number>
-	   </property>
-	   <property name="suffix">
-	    <string> ms</string>
-	   </property>
-	  </widget>
-	 </item>
-   <item row="10" column="0">
-    <widget class="QLabel" name="label_linenums">
-     <property name="text">
-      <string>Line Numbers:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="1">
-    <widget class="QRadioButton" name="lineNumsNever">
-     <property name="text">
-      <string comment="Never">&amp;Never</string>
-     </property>
-     <attribute name="buttonGroup">
-      <string notr="true">lineNums</string>
-     </attribute>
-    </widget>
-   </item>
-   <item row="11" column="1">
-    <widget class="QRadioButton" name="lineNumsURL">
-     <property name="text">
-      <string comment="When showing URL hints">When &amp;URL hints show</string>
-     </property>
-     <attribute name="buttonGroup">
-      <string notr="true">lineNums</string>
-     </attribute>
-    </widget>
-   </item>
-   <item row="12" column="1">
-    <widget class="QRadioButton" name="lineNumsAlways">
-     <property name="text">
-      <string comment="Always">A&amp;lways</string>
-     </property>
-     <attribute name="buttonGroup">
-      <string notr="true">lineNums</string>
-     </attribute>
-    </widget>
-   </item>
-   </layout>
+     <item row="9" column="0" alignment="Qt::AlignmentFlag::AlignRight">
+      <widget class="QLabel" name="autoSaveIntervalLabel">
+       <property name="text">
+        <string>Set interval between autosaves:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1" alignment="Qt::AlignmentFlag::AlignRight">
+      <widget class="QSpinBox" name="autoSaveIntervalWidget">
+          <property name="maximum">
+           <number>3600000</number>
+       </property>
+       <property name="minimum">
+        <number>0</number>
+       </property>
+          <property name="suffix">
+           <string> ms</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_linenums">
+       <property name="text">
+        <string>Line Numbers:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QRadioButton" name="lineNumsNever">
+       <property name="text">
+        <string comment="Never">&amp;Never</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">lineNums</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QRadioButton" name="lineNumsURL">
+       <property name="text">
+        <string comment="When showing URL hints">When &amp;URL hints show</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">lineNums</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="12" column="1">
+      <widget class="QRadioButton" name="lineNumsAlways">
+       <property name="text">
+        <string comment="Always">A&amp;lways</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">lineNums</string>
+       </attribute>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <spacer>
