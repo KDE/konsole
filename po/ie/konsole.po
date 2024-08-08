@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 00:43+0000\n"
+"POT-Creation-Date: 2024-08-08 00:42+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -3694,28 +3694,28 @@ msgid " ms"
 msgstr "MS Windows 9x"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:283
+#: widgets/EditProfileAdvancedPage.ui:275
 #, fuzzy, kde-format
 #| msgid "Line numbers "
 msgid "Line Numbers:"
 msgstr "Numerós de lineas"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:293
+#: widgets/EditProfileAdvancedPage.ui:285
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "&Nequande"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:303
+#: widgets/EditProfileAdvancedPage.ui:295
 #, fuzzy, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
 msgstr "Monstrar li buton «Nov carte»"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:313
+#: widgets/EditProfileAdvancedPage.ui:305
 #, fuzzy, kde-format
 #| msgctxt "Always"
 #| msgid "Always"

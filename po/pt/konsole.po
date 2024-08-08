@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 00:43+0000\n"
+"POT-Creation-Date: 2024-08-08 00:42+0000\n"
 "PO-Revision-Date: 2023-05-15 10:35+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -3818,14 +3818,14 @@ msgid " ms"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:283
+#: widgets/EditProfileAdvancedPage.ui:275
 #, fuzzy, kde-format
 #| msgid "Line numbers "
 msgid "Line Numbers:"
 msgstr "Números de linha "
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:293
+#: widgets/EditProfileAdvancedPage.ui:285
 #, fuzzy, kde-format
 #| msgid "&Never"
 msgctxt "Never"
@@ -3833,7 +3833,7 @@ msgid "&Never"
 msgstr "&Nunca"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:303
+#: widgets/EditProfileAdvancedPage.ui:295
 #, fuzzy, kde-format
 #| msgctxt "When showing URL hints"
 #| msgid "When URL hints show"
@@ -3842,7 +3842,7 @@ msgid "When &URL hints show"
 msgstr "No caso de sugestões de URL's mostrar"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:313
+#: widgets/EditProfileAdvancedPage.ui:305
 #, fuzzy, kde-format
 #| msgctxt "Always"
 #| msgid "Always"
