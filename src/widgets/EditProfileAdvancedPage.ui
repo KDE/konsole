@@ -258,14 +258,14 @@
      </item>
      <item row="9" column="1" alignment="Qt::AlignmentFlag::AlignRight">
       <widget class="QSpinBox" name="autoSaveIntervalWidget">
-          <property name="maximum">
-           <number>3600000</number>
+       <property name="suffix">
+        <string> ms</string>
        </property>
        <property name="minimum">
         <number>0</number>
        </property>
-          <property name="suffix">
-           <string> ms</string>
+       <property name="maximum">
+        <number>3600000</number>
        </property>
       </widget>
      </item>
