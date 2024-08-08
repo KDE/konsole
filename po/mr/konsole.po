@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-18 00:41+0000\n"
+"POT-Creation-Date: 2024-08-08 02:34+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -3890,28 +3890,28 @@ msgid "Shortcut for peeking the primary screen:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:263
+#: widgets/EditProfileAdvancedPage.ui:255
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line Numbers:"
 msgstr "ओळ संख्या निश्चित करा: "
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:273
+#: widgets/EditProfileAdvancedPage.ui:265
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:283
+#: widgets/EditProfileAdvancedPage.ui:275
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:293
+#: widgets/EditProfileAdvancedPage.ui:285
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"

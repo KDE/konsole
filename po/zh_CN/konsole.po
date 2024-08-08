@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-18 00:41+0000\n"
+"POT-Creation-Date: 2024-08-08 02:34+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -3677,27 +3677,27 @@ msgid "Shortcut for peeking the primary screen:"
 msgstr "暂时显示主屏幕快捷键："
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:263
+#: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Line Numbers:"
 msgstr "行号："
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:273
+#: widgets/EditProfileAdvancedPage.ui:265
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "永不(&N)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:283
+#: widgets/EditProfileAdvancedPage.ui:275
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
 msgstr "当显示 &URL 提示时"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:293
+#: widgets/EditProfileAdvancedPage.ui:285
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"

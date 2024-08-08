@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-18 00:41+0000\n"
+"POT-Creation-Date: 2024-08-08 02:34+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -3831,14 +3831,14 @@ msgid "Shortcut for peeking the primary screen:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:263
+#: widgets/EditProfileAdvancedPage.ui:255
 #, fuzzy, kde-format
 #| msgid "Fixed number of lines: "
 msgid "Line Numbers:"
 msgstr "Ridade arv: "
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:273
+#: widgets/EditProfileAdvancedPage.ui:265
 #, fuzzy, kde-format
 #| msgid "&Never"
 msgctxt "Never"
@@ -3846,7 +3846,7 @@ msgid "&Never"
 msgstr "&Mitte kunagi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:283
+#: widgets/EditProfileAdvancedPage.ui:275
 #, fuzzy, kde-format
 #| msgid "Enable URL hints"
 msgctxt "When showing URL hints"
@@ -3854,7 +3854,7 @@ msgid "When &URL hints show"
 msgstr "URL-i vihje lubamine"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:293
+#: widgets/EditProfileAdvancedPage.ui:285
 #, fuzzy, kde-format
 #| msgctxt "@option:radio Always show the split header"
 #| msgid "Always"

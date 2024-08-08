@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-18 00:41+0000\n"
+"POT-Creation-Date: 2024-08-08 02:34+0000\n"
 "PO-Revision-Date: 2024-07-18 10:42+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -3666,27 +3666,27 @@ msgid "Shortcut for peeking the primary screen:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
-#: widgets/EditProfileAdvancedPage.ui:263
+#: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Line Numbers:"
 msgstr "Čísla řádků:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
-#: widgets/EditProfileAdvancedPage.ui:273
+#: widgets/EditProfileAdvancedPage.ui:265
 #, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "N&ikdy"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
-#: widgets/EditProfileAdvancedPage.ui:283
+#: widgets/EditProfileAdvancedPage.ui:275
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
 msgstr "Při zobrazení nápovědy &URL"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
-#: widgets/EditProfileAdvancedPage.ui:293
+#: widgets/EditProfileAdvancedPage.ui:285
 #, kde-format
 msgctxt "Always"
 msgid "A&lways"
