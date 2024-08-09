@@ -47,6 +47,7 @@
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
 #include "widgets/ViewSplitter.h"
+#include "konsoledebug.h"
 
 using namespace Konsole;
 
@@ -1239,27 +1240,30 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject &jsonSplitter, Vi
 }
 
 } // namespace
-void ViewManager::loadLayout(QString file)
+bool ViewManager::loadLayout(QString file)
 {
     // User pressed cancel in dialog
     if (file.isEmpty()) {
-        return;
+        return false;
     }
 
     QFile jsonFile(file);
 
     if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        KMessageBox::error(this->widget(), i18nc("@label:textbox", "A problem occurred when loading the Layout.\n%1", jsonFile.fileName()));
+        qCDebug(KonsoleDebug) << "A problem occurred when loading the Layout " << jsonFile.fileName();
+        return false;
     }
     auto json = QJsonDocument::fromJson(jsonFile.readAll());
     if (!json.isEmpty()) {
         auto splitter = restoreSessionsSplitterRecurse(json.object(), this, false);
         _viewContainer->addSplitter(splitter, _viewContainer->count());
+        return true;
     }
+    return false;
 }
 void ViewManager::loadLayoutFile()
 {
-    loadLayout(QFileDialog::getOpenFileName(this->widget(),
+    auto result = loadLayout(QFileDialog::getOpenFileName(this->widget(),
                                             i18nc("@title:window", "Load Tab Layout"),
                                             QStringLiteral("~/"),
                                             i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));

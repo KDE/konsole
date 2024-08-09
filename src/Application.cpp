@@ -195,9 +195,13 @@ int Application::newInstance()
 
     // if layout file is enable load it and create session from definitions,
     // else create new session
+    bool validSessions = false;
     if (m_parser->isSet(QStringLiteral("layout"))) {
-        window->viewManager()->loadLayout(m_parser->value(QStringLiteral("layout")));
-    } else {
+        validSessions = window->viewManager()->loadLayout(m_parser->value(QStringLiteral("layout")));
+    }
+
+    // loadLayout() failed or not using --layout
+    if (!validSessions) {
         Session *session = window->createSession(newProfile, QString());
 
         const QString workingDir = m_parser->value(QStringLiteral("workdir"));

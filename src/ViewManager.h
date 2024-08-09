@@ -312,7 +312,7 @@ public Q_SLOTS:
     // Creates json file with split config
     Q_SCRIPTABLE void saveLayoutFile();
     Q_SCRIPTABLE void loadLayoutFile();
-    Q_SCRIPTABLE void loadLayout(QString File);
+    Q_SCRIPTABLE bool loadLayout(QString File);
 
     /** DBus slot that returns a description of the layout hierarchy
      * in each tab.
