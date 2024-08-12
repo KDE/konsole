@@ -2202,7 +2202,7 @@ msgstr "输出保存为(&A)..."
 #: session/SessionController.cpp:734
 #, kde-format
 msgid "&Print Screen..."
-msgstr "截屏(&P)..."
+msgstr "打印屏幕(&P)..."
 
 #: session/SessionController.cpp:738
 #, kde-format
@@ -2375,7 +2375,7 @@ msgstr "新建配置方案..."
 #: session/SessionController.cpp:981
 #, kde-format
 msgid "Edit Current Profile..."
-msgstr "编辑当前方案..."
+msgstr "编辑当前配置方案..."
 
 #: session/SessionController.cpp:1112
 #, kde-format
@@ -3386,13 +3386,13 @@ msgstr "加载新标签页 (使用 1x2 终端布局)"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Expand View"
-msgstr "展开标签"
+msgstr "扩大视图"
 
 #: ViewManager.cpp:213
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Shrink View"
-msgstr "卷起标签"
+msgstr "缩小视图"
 
 #: ViewManager.cpp:223
 #, kde-format
