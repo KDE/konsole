@@ -30,7 +30,7 @@
 
 #include "sshconfigurationdata.h"
 
-Q_LOGGING_CATEGORY(SshManagerPlugin, "org.kde.konsole.plugin.sshmanager")
+#include "sshmanagerplugindebug.h"
 
 namespace
 {
@@ -331,7 +331,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
 {
     QFile sshConfig(file);
     if (!sshConfig.open(QIODevice::ReadOnly)) {
-        qCDebug(SshManagerPlugin) << "Can't open config file";
+        qCDebug(SshManagerPluginDebug) << "Can't open config file";
     }
     QTextStream stream(&sshConfig);
     QString line;
