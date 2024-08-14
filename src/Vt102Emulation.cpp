@@ -1176,8 +1176,9 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         const auto hasFocus = _currentScreen->currentTerminalDisplay()->hasFocus();
         KNotification *notification = nullptr;
         if (params.length() >= 3) {
-            notification =
-                KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"), params[1], params[2]);
+            notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"),
+                                                params[1],
+                                                params[2].toHtmlEscaped());
         } else {
             notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"), params[1]);
         }
@@ -1421,7 +1422,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
 
                     notification = KNotification::event(hasFocus ? QStringLiteral("ProcessNotification") : QStringLiteral("ProcessNotificationHidden"),
                                                         fullTitle,
-                                                        notificationState->body,
+                                                        notificationState->body.toHtmlEscaped(),
                                                         iconName);
 
                     KNotification::Urgency resultUrgency = KNotification::Urgency::NormalUrgency;
