@@ -4099,7 +4099,7 @@ msgstr "Terminalinnehåll"
 #: widgets/EditProfileAppearancePage.ui:613
 #, kde-format
 msgid "Line spacing:"
-msgstr "Radmellanrum:"
+msgstr "Radavstånd:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, lineSpacingSpinner)
 #: widgets/EditProfileAppearancePage.ui:631
