@@ -74,6 +74,7 @@
   <summary xml:lang="he">להשתמש בממשק שורת הפקודה</summary>
   <summary xml:lang="hu">A parancssori felület használata</summary>
   <summary xml:lang="ia">Usa le ionterfacie de linea de commando</summary>
+  <summary xml:lang="is">Nota skipanalínuviðmótið</summary>
   <summary xml:lang="it">Utilizzare l'interfaccia a riga di comando</summary>
   <summary xml:lang="ka">გამოიყენეთ ბრძანების სტრიქონის ინტერფეისი</summary>
   <summary xml:lang="nl">Het commandoregel-interface gebruiken</summary>
@@ -114,7 +115,7 @@
     <p xml:lang="ia">Konsole es un terminal pro executar un shell de commando.  Illo provide un interfacie de linea de commando pro controlar directemente tu computator.</p>
     <p xml:lang="id">Konsole adalah sebuah terminal untuk menjalankan shell perintah. Ini menyediakan antarmuka baris perintah untuk secara langsung mengendalikan komputer Anda.</p>
     <p xml:lang="ie">Konsole es un terminal quel lansa un shell de comandes. It provide un interfacie del linea de comandes por controlar vor computator directmen.</p>
-    <p xml:lang="is">Konsole er skjáhermir til að keyra skeljaskipanir. Það gefur skipanalínuviðmót til að stýra tölvum beint.</p>
+    <p xml:lang="is">Konsole er skjáhermir til að keyra skeljaskipanir. Hann býður upp á skipanalínuviðmót til að stjórna tölvunni með beinum hætti.</p>
     <p xml:lang="it">Konsole è un terminale per eseguire una shell di comandi. Fornisce un'interfaccia a riga di comando per controllare direttamente il tuo computer.</p>
     <p xml:lang="ka">Konsole წარმადგენს ტერმინალს ბრძანების სტრიქონის გარსის გასაშვებად. ის მოგაწოდებთ ბრძანების სტრიქონის ინტერფეისს, რომლითაც შეგიძლიათ თქვენი კომპიუტერი პირდაპირ აკონტროლოთ.</p>
     <p xml:lang="ko">Konsole은 흔히 터미널, 혹은 셸이라고 불리는 X 터미널 에뮬레이터입니다. 텍스트 창에서 컴퓨터를 직접 재현하는 명령행 인터페이스를 재현합니다.</p>
@@ -269,7 +270,7 @@
       <li xml:lang="ia">Profilos multiple</li>
       <li xml:lang="id">Beberapa profil</li>
       <li xml:lang="ie">Multiplic profiles</li>
-      <li xml:lang="is">Mörg notendasnið</li>
+      <li xml:lang="is">Margir prófílar</li>
       <li xml:lang="it">Profili multipli</li>
       <li xml:lang="ka">სხვადასხვა პროფაილები</li>
       <li xml:lang="ko">다중 프로필</li>
@@ -479,7 +480,7 @@
       <li xml:lang="ia">Salveguardante exito</li>
       <li xml:lang="id">Penyimpanan keluaran</li>
       <li xml:lang="ie">Gardation de production</li>
-      <li xml:lang="is">Vista frálag</li>
+      <li xml:lang="is">Vista úttak</li>
       <li xml:lang="it">Salvataggio del risultato</li>
       <li xml:lang="ka">გამოტანის შენახვა</li>
       <li xml:lang="ko">출력 저장</li>
