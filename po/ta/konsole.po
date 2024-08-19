@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-08 02:34+0000\n"
-"PO-Revision-Date: 2024-04-28 17:20+0530\n"
+"PO-Revision-Date: 2024-08-18 16:44+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3831,6 +3831,8 @@ msgstr "பகட்டான நிறங்களை தடித்த எழ
 #, kde-format
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
+"கோடுகளை வரைய முனைய கட்டுப்பாட்டு குறிகளுக்கு பதிலாக தேர்ந்தெடுத்துள்ள எழுத்துருவிலுள்ள "
+"குறிகளைப் பயன்படுத்து"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
@@ -3845,13 +3847,14 @@ msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
+"புற்றெழுத்தை (பிரெயில் எழுத்தை) காட்ட முனைய கட்டுப்பாட்டு குறிகளுக்கு பதிலாக "
+"தேர்ந்தெடுத்துள்ள எழுத்துருவிலுள்ள யூனிகோடு குறிகளைப் பயன்படுத்து"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "கொடுகளுக்கு எழுத்துருவிலுள்ள குறிகளையேப் பயன்படுத்து"
+msgstr "எழுத்துருவிலுள்ள புற்றெழுத்து குறிகளையேப் பயன்படுத்து"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -5110,19 +5113,19 @@ msgstr "முனையச்சாளரத்தின் அளவை மா�
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "உருள் பட்டைக் குறிகளின் நிறம்:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "ஒவ்வொரு குறியின் நீளம் (உருள் பட்டையின் சதவீதமாக):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
