@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-09 00:42+0000\n"
-"PO-Revision-Date: 2024-04-28 17:20+0530\n"
+"PO-Revision-Date: 2024-08-18 16:44+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1948,21 +1948,21 @@ msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "முறையற்ற முகவரியாய் %1 உள்ளதால், வெளியீட்டை சேமிக்க முடியவில்லை."
 
 #: SaveHistoryAutoTask.cpp:88
-#, fuzzy, kde-format
-#| msgid "Unable to write to file."
+#, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr "கோப்புக்கு எழுத முடியவில்லை."
+msgstr "%1 தனில் தானியக்க சேமிப்பு கோப்பை உருவாக்க முடியவில்லை."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "வேறு திரைக்கு மாறியதால் தானியக்க சேமிப்பு இடைநிறுத்தப்பட்டுள்ளது."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"தானியக்க சேமிப்பு கோப்பு வேறு நிரலால் மாற்றப்பட்டுள்ளதால் இனிமேல் சேமிக்க முடியாது."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
@@ -2237,15 +2237,14 @@ msgid "Save Output &As..."
 msgstr "வெளியீட்டை &இவ்வாறு சேமி…"
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "வெளியீட்டை &இவ்வாறு சேமி…"
+msgstr "வெளியீட்டை தானாக இவ்வாறு சேமி…"
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "தானியக்க சேமிப்பை நிறுத்து"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3755,13 +3754,13 @@ msgstr "முதன்மையான திரையை காட்டுவ�
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "தானியக்க சேமிப்பு இடைவெளி:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:262
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " மி.நொ."
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:275
@@ -3876,6 +3875,8 @@ msgstr "பகட்டான நிறங்களை தடித்த எழ
 #, kde-format
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
+"கோடுகளை வரைய முனைய கட்டுப்பாட்டு குறிகளுக்கு பதிலாக தேர்ந்தெடுத்துள்ள எழுத்துருவிலுள்ள "
+"குறிகளைப் பயன்படுத்து"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
@@ -3890,13 +3891,14 @@ msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
+"புற்றெழுத்தை (பிரெயில் எழுத்தை) காட்ட முனைய கட்டுப்பாட்டு குறிகளுக்கு பதிலாக "
+"தேர்ந்தெடுத்துள்ள எழுத்துருவிலுள்ள யூனிகோடு குறிகளைப் பயன்படுத்து"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "கொடுகளுக்கு எழுத்துருவிலுள்ள குறிகளையேப் பயன்படுத்து"
+msgstr "எழுத்துருவிலுள்ள புற்றெழுத்து குறிகளையேப் பயன்படுத்து"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -5155,19 +5157,19 @@ msgstr "முனையச்சாளரத்தின் அளவை மா�
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "உருள் பட்டைக் குறிகளின் நிறம்:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "ஒவ்வொரு குறியின் நீளம் (உருள் பட்டையின் சதவீதமாக):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
