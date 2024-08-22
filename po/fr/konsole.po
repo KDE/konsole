@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-09 00:42+0000\n"
-"PO-Revision-Date: 2024-07-23 09:03+0200\n"
+"PO-Revision-Date: 2024-08-16 14:12+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -2672,7 +2672,7 @@ msgstr "Exécuter toutes les fenêtres Konsole dans un processus unique"
 #: settings/GeneralSettings.ui:134
 #, kde-format
 msgid "Highlight all matches"
-msgstr "Mettre en évidence toutes les correspondances"
+msgstr "Mettre en valeur toutes les correspondances"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #. i18n: ectx: tooltip, entry (SearchCaseSensitive), group (SearchSettings)
@@ -2947,7 +2947,7 @@ msgstr "Pour les fichiers d'historique, utiliser ce dossier"
 #: settings/MemorySettings.ui:17
 #, kde-format
 msgid "Enable memory monitoring:"
-msgstr "Activer la surveuillance de la mémoire :"
+msgstr "Activer la surveillance de la mémoire :"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/MemorySettings.ui:28
@@ -3863,7 +3863,7 @@ msgstr "&Jamais"
 #, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr "Lorsque les conseils d'&URL s’affichent"
+msgstr "Lorsque les conseils d'&URL s'affichent"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:305
@@ -4294,7 +4294,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:912
 #, kde-format
 msgid "Brahmic scripts characters"
-msgstr "Caractères brahmi de script"
+msgstr "Caractères « brahmi » de script"
 
 #. i18n: ectx: property (text), widget (QLabel, label_17)
 #: widgets/EditProfileAppearancePage.ui:925
@@ -5261,7 +5261,7 @@ msgstr "Mise en évidence :"
 #: widgets/EditProfileScrollingPage.ui:209
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr "Mettre en évidence les nouvelles lignes de l'affichage"
+msgstr "Mettre en valeur les nouvelles lignes de l'affichage"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:222
@@ -5473,7 +5473,7 @@ msgstr "Correspond à une expression rationnelle"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
-msgstr "Mettre en évidence toutes les correspondances"
+msgstr "Mettre en valeur toutes les correspondances"
 
 #: widgets/IncrementalSearchBar.cpp:130
 #, kde-format
