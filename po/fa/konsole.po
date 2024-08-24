@@ -6,12 +6,13 @@
 # مهدی فولادگر <foladgar@itland.ir>, 2007.
 # Mohamad Reza Mirdamadi <mohi@ubuntu.ir>, 2011.
 # SPDX-FileCopyrightText: 2024 Mohi Mirdamadi <mohi.pub@gmail.com>
+# SPDX-FileCopyrightText: 2024 aligholipour <aligholipour995@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-08 02:34+0000\n"
-"PO-Revision-Date: 2024-08-14 00:32+0330\n"
+"PO-Revision-Date: 2024-08-24 00:11+0330\n"
 "Last-Translator: Mohi Mirdamadi <mohi.pub@gmail.com>\n"
 "Language-Team: fa\n"
 "Language: fa\n"
@@ -33,8 +34,7 @@ msgstr "mohi.pub@gmail.com , kazemi@itland.ir , mebrahim@gmail.com"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
-#, fuzzy, kde-format
-#| msgid "File"
+#, kde-format
 msgid "File"
 msgstr "پرونده"
 
@@ -42,30 +42,26 @@ msgstr "پرونده"
 #. i18n: ectx: Menu (edit)
 #: ../desktop/konsoleui.rc:16 plugins/QuickCommands/quickcommandswidget.cpp:296
 #: plugins/SSHManager/sshwidget.ui:300
-#, fuzzy, kde-format
-#| msgid "Edit"
+#, kde-format
 msgid "Edit"
-msgstr "ویرایش"
+msgstr "عویرایش"
 
 #. i18n: ectx: Menu (view)
 #: ../desktop/konsoleui.rc:19
-#, fuzzy, kde-format
-#| msgid "View"
+#, kde-format
 msgid "View"
-msgstr "نما"
+msgstr "uنما"
 
 #. i18n: ectx: Menu (view-split)
 #: ../desktop/konsoleui.rc:20 ../desktop/partui.rc:12
 #: ../desktop/sessionui.rc:62
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgid "Split View"
 msgstr "شکافتن نما"
 
 #. i18n: ectx: Menu (settings)
 #: ../desktop/konsoleui.rc:41
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgid "Settings"
 msgstr "تنظیمات"
 
@@ -509,7 +505,7 @@ msgstr "رنگ"
 #, kde-format
 msgctxt "@label:listbox Column header text for the actual intense colors"
 msgid "Intense color"
-msgstr ""
+msgstr "رنگ تند"
 
 #: colorscheme/ColorSchemeEditor.cpp:112
 #, fuzzy, kde-format
@@ -535,13 +531,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
-msgstr ""
+msgstr "پرونده تصویرزمینه را انتخاب کنید"
 
 #: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
 msgctxt "@label:textbox Filter in file open dialog"
 msgid "Supported Images"
-msgstr ""
+msgstr "نگاره های پشتیبانی شده"
 
 #: colorscheme/ColorSchemeEditor.cpp:334
 #, fuzzy, kde-format
@@ -1425,8 +1421,7 @@ msgid "Profiles"
 msgstr "Profile جدید"
 
 #: MainWindow.cpp:884
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "عمومی"
