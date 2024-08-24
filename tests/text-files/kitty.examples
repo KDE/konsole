@@ -1,0 +1,27 @@
+
+# Basic usage:
+printf '\x1b]99;;Title\x1b\\'
+printf '\x1b]99;d=0;%s\x1b\\\x1b]99;d=1:p=body;%s\x1b\\' Title Body
+printf '\x1b]99;e=1:d=0;%s\x1b\\\x1b]99;e=1:d=1:p=body;%s\x1b\\' "$(echo -n Title😺 | base64)" "$(echo -n Body😽 | base64)"
+
+# Application name
+printf '\x1b]99;f=%s;Title\x1b\\' "$(echo -n htop | base64)"
+
+# Icon:
+printf '\x1b]99;n=%s;Title\x1b\\' "$(echo -n warn | base64)"
+printf '\x1b]99;n=%s;Title\x1b\\' "$(echo -n emacs | base64)"
+
+# Urgency:
+printf '\x1b]99;u=2:d=0;%s\x1b\\\x1b]99;d=1:p=body;%s\x1b\\' "Explosion imminent" "Spaceship will explodes in 5 minutes"
+
+# Buttons:
+printf '\x1b]99;i=1:d=0:p=buttons;OK\xE2\x80\xa8Cancel\x1b\\\x1b]99;i=1:d=1;Proceed?\x1b\\\'
+
+# Report activation
+printf '\x1b]99;i=98542:a=report;3 new messages\x1b\\'
+
+# Report close
+printf '\x1b]99;i=98542:c=1;3 new messages\x1b\\'
+
+# Report only when unfocused:
+sleep 5 ; printf '\x1b]99;o=unfocused;3 new messages\x1b\\'
