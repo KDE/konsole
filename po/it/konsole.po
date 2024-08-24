@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:42+0000\n"
+"POT-Creation-Date: 2024-08-24 00:42+0000\n"
 "PO-Revision-Date: 2024-07-22 14:10+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -3269,11 +3269,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
+#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
+#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-"font-weight:600;\">files</span> in your profile settings</p></body></html>"
+"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
+"profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Per utilizzare questa funzionalità, abilita <span "
 "style=\" font-weight:600;\">Mouse-&gt;Varie-&gt;Sottolinea i</span> <span "

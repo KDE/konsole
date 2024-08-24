@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:42+0000\n"
+"POT-Creation-Date: 2024-08-24 00:42+0000\n"
 "PO-Revision-Date: 2024-08-01 15:58+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -3234,11 +3234,15 @@ msgstr "pikslar"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
+#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
+#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-"font-weight:600;\">files</span> in your profile settings</p></body></html>"
+"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
+"profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Viss du vil bruka denne funksjonen, slå på <span style="
 "\" font-weight:600;\">Mus → Ymse → Strek under filer</span> i "

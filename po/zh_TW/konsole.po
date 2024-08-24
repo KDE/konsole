@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:42+0000\n"
+"POT-Creation-Date: 2024-08-24 00:42+0000\n"
 "PO-Revision-Date: 2024-07-27 13:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -3199,11 +3199,15 @@ msgstr " 像素(px)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
+#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
+#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-"font-weight:600;\">files</span> in your profile settings</p></body></html>"
+"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
+"profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>本功能需先啟用檔案底線，相關功能請至<span style=\" "
 "font-weight:600;\">編輯設定檔</span>中的 <span style=\" font-weight:600;\">滑"

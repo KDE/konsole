@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:42+0000\n"
+"POT-Creation-Date: 2024-08-24 00:42+0000\n"
 "PO-Revision-Date: 2023-05-15 10:35+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -3278,11 +3278,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
+#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
+#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-"font-weight:600;\">files</span> in your profile settings</p></body></html>"
+"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
+"profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p><span style=\" font-weight:600;\">Lembre-se</span>: "
 "Para usar esta funcionalidade, activar os <span style=\" font-weight:600;"

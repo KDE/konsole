@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:42+0000\n"
+"POT-Creation-Date: 2024-08-24 00:42+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -3275,11 +3275,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
+#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
+#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-"font-weight:600;\">files</span> in your profile settings</p></body></html>"
+"weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
+"profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Pentru a folosi această funcție, activați <span style="
 "\" font-weight:600;\">Maus-&gt;Diverse-&gt;Subliniază </span><span style=\" "
