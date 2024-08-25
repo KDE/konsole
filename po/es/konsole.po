@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 00:42+0000\n"
-"PO-Revision-Date: 2024-07-23 00:37+0200\n"
+"POT-Creation-Date: 2024-08-25 00:42+0000\n"
+"PO-Revision-Date: 2024-08-24 12:22+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -2138,7 +2138,8 @@ msgstr "Silencio en «%1» (sesión «%2»)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1154
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1186
+#: Vt102Emulation.cpp:1441
 #, kde-format
 msgid "Show session"
 msgstr "Mostrar sesión"
@@ -3281,20 +3282,15 @@ msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Para usar esta función, active <span style=\" font-"
-"weight:600;\">Ratón-&gt;Varios-&gt;Subrayar </span><span style=\" font-"
-"weight:600;\">archivos</span> en las preferencias del perfil.</p></body></"
-"html>"
+"weight:600;\">Ratón-&gt;Varios-&gt;Subrayar archivos</span> en las "
+"preferencias del perfil.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3706,7 +3702,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Cargar configuración de pestañas"
 
-#: Vt102Emulation.cpp:2510
+#: Vt102Emulation.cpp:2799
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 00:42+0000\n"
-"PO-Revision-Date: 2024-07-22 05:26+0200\n"
+"POT-Creation-Date: 2024-08-25 00:42+0000\n"
+"PO-Revision-Date: 2024-08-24 05:22+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2101,7 +2101,8 @@ msgstr "ჩაჩუმება '%1'-ში (სესია '%2')"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1154
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1186
+#: Vt102Emulation.cpp:1441
 #, kde-format
 msgid "Show session"
 msgstr "სესიის ჩვენება"
@@ -3236,20 +3237,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>იმისთვის, რომ ეს ფუნქცია გამოიყენოთ, ჩართეთ <span "
-"style=\" font-weight:600;\">თაგუნა-&gt;სხვადასხვა-&gt;ხაზგასმა </span><span "
-"style=\" font-weight:600;\">ფაილებში</span> თქვენს პროფილის პარამეტრებში</"
-"p></body></html>"
+"style=\" font-weight:600;\">თაგუნა-&gt;სხვადასხვა-&gt;ფაილების ხაზგასმა </"
+"span> თქვენი პროფილის პარამეტრებში.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3660,7 +3656,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "ჩანართების განლაგების ჩატვირთვა"
 
-#: Vt102Emulation.cpp:2510
+#: Vt102Emulation.cpp:2799
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
