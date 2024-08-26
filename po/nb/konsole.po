@@ -1874,8 +1874,6 @@ msgstr "Standardprofil"
 
 #: profile/ProfileManager.cpp:280
 #, fuzzy, kde-format
-#| msgctxt "@title Preferences page name"
-#| msgid "Profiles"
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "Profiler"
@@ -2226,14 +2224,11 @@ msgstr "Slett rulleminnet og tilbakestill"
 
 #: session/SessionController.cpp:757
 #, fuzzy, kde-format
-#| msgid "Edit Profile"
 msgid "Next Profile"
 msgstr "Endre profil"
 
 #: session/SessionController.cpp:762
 #, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
 msgid "Previous Profile"
 msgstr "Forrige"
 
@@ -2629,7 +2624,6 @@ msgstr "Søk bakover"
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
 #, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Bestemmer om søk skal begynne nedenfra"
 
@@ -3666,7 +3660,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
 #, fuzzy, kde-format
-#| msgid "Default character encoding:"
 msgid "&Default character encoding:"
 msgstr "Standard tegnkoding:"
 
@@ -3679,7 +3672,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:255
 #, fuzzy, kde-format
-#| msgid "Session Number: %#"
 msgid "Line Numbers:"
 msgstr "Økt nummer: %#"
 
@@ -4343,8 +4335,6 @@ msgstr "Velg startmappe"
 
 #: widgets/EditProfileDialog.cpp:946
 #, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
 msgid "Get New..."
 msgstr "Ny …"
 
@@ -4374,7 +4364,6 @@ msgstr ""
 
 #: widgets/EditProfileDialog.cpp:1913
 #, fuzzy, kde-format
-#| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Standardprofil"
 
@@ -4454,7 +4443,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
 #, fuzzy, kde-format
-#| msgid "Initial directory:"
 msgid "I&nitial directory:"
 msgstr "Startmappe:"
 
@@ -4514,8 +4502,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
 #, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Terminal emulator"
 msgid "&Terminal bell mode:"
 msgstr "Terminalemulator"
 
@@ -4685,7 +4671,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
 #, fuzzy, kde-format
-#| msgid "From mouse position to the end of line"
 msgid "From mouse position to the end of &line"
 msgstr "Fra museposisjonen til slutten av linja"
 
@@ -5136,8 +5121,6 @@ msgstr "Ikke husk tidligere utdata"
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
 #, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&Ingen"
@@ -5240,7 +5223,6 @@ msgstr ""
 
 #: widgets/IncrementalSearchBar.cpp:142
 #, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Bestemmer om søk skal begynne nedenfra"
@@ -5287,7 +5269,6 @@ msgstr "Oppsett for fanenavn på eksterne skall:"
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
 #, fuzzy, kde-format
-#| msgid "Tab title format:"
 msgid "&Tab title format:"
 msgstr "Format på fanenavnene:"
 

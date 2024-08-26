@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-08 02:34+0000\n"
-"PO-Revision-Date: 2024-07-27 13:52+0900\n"
+"PO-Revision-Date: 2024-08-25 01:54+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -3182,13 +3182,13 @@ msgstr ""
 #: settings/ThumbnailsSettings.ui:53
 #, kde-format
 msgid "Activation:"
-msgstr "啟動方式："
+msgstr "觸發方式："
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: settings/ThumbnailsSettings.ui:63
 #, kde-format
 msgid "Mouse hover plus"
-msgstr "指標覆蓋並按下"
+msgstr "滑鼠停留於目標上並按下"
 
 # key on keyboard
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)
