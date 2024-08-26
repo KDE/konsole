@@ -1845,7 +1845,6 @@ msgstr ""
 
 #: profile/ProfileManager.cpp:280
 #, fuzzy, kde-format
-#| msgid "Edit Profile \"%1\""
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
 msgstr "Doaimmat profiilla «%1»"
@@ -2226,13 +2225,11 @@ msgstr ""
 
 #: session/SessionController.cpp:770
 #, fuzzy, kde-format
-#| msgid "Edit Profile"
 msgid "Next Profile"
 msgstr "Doaimmat profiilla"
 
 #: session/SessionController.cpp:775
 #, fuzzy, kde-format
-#| msgid "Edit Profile"
 msgid "Previous Profile"
 msgstr "Doaimmat profiilla"
 
@@ -3655,7 +3652,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
 #, fuzzy, kde-format
-#| msgid "Default character encoding:"
 msgid "&Default character encoding:"
 msgstr "Standárda mearkakoden:"
 
@@ -4444,7 +4440,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
 #, fuzzy, kde-format
-#| msgid "Initial directory:"
 msgid "I&nitial directory:"
 msgstr "Álgovuolggalaš máhppa:"
 
@@ -5266,7 +5261,6 @@ msgstr "Gáiddus gilkora namahusformáhtta:"
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
 #, fuzzy, kde-format
-#| msgid "Tab title format:"
 msgid "&Tab title format:"
 msgstr "Gilkornamahusaid formáhtta:"
 
