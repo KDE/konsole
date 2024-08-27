@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-25 00:42+0000\n"
-"PO-Revision-Date: 2024-07-27 13:52+0900\n"
+"PO-Revision-Date: 2024-08-25 01:54+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -3200,31 +3200,26 @@ msgstr " 像素(px)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>本功能需先啟用檔案底線，相關功能請至<span style=\" "
-"font-weight:600;\">編輯設定檔</span>中的 <span style=\" font-weight:600;\">滑"
-"鼠→雜項→在檔案下加底線 </span>啟用</p></body></html>"
+"<html><head/><body><p>此功能需要先至設定檔的設定頁面中啟用 <span style=\" "
+"font-weight:600;\">滑鼠→雜項→在檔案下加底線</span> 功能。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
 #, kde-format
 msgid "Activation:"
-msgstr "啟動方式："
+msgstr "觸發方式："
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: settings/ThumbnailsSettings.ui:63
 #, kde-format
 msgid "Mouse hover plus"
-msgstr "指標覆蓋並按下"
+msgstr "滑鼠停留於目標上並按下"
 
 # key on keyboard
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ThumbnailShift)

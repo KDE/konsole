@@ -3197,10 +3197,6 @@ msgstr "像素"
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
 #, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
