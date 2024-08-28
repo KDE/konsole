@@ -3196,15 +3196,12 @@ msgstr "像素"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>要使用此特性，请在配置方案的设置中启用<span style=\" "
-"font-weight:600;\">鼠标-&gt;杂项-&gt;下划线</span><span style=\" font-"
-"weight:600;\">文件</span></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
