@@ -3202,6 +3202,8 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>要使用此特性，请在配置方案的设置中启用<span style=\" "
+"font-weight:600;\">鼠标-&gt;杂项-&gt;下划线</span>文件。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
