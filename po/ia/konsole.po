@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-25 00:42+0000\n"
-"PO-Revision-Date: 2024-07-22 11:08+0200\n"
+"PO-Revision-Date: 2024-08-30 17:22+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -3255,20 +3255,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Per usar iste characteristica, habilita <span style=\" "
-"font-weight:600;\">Mus-&gt;Miscellanee-&gt;Sublinea </span><span style=\" "
-"font-weight:600;\">files</span> in tu preferentias de profilo</p></body></"
-"html>"
+"font-weight:600;\">Mus-&gt;Miscellanee-&gt;Sublinea files</span> in tu "
+"preferentias de profilo</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
