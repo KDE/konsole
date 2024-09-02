@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-25 00:42+0000\n"
+"POT-Creation-Date: 2024-09-02 00:41+0000\n"
 "PO-Revision-Date: 2011-07-11 13:50+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
@@ -1340,13 +1340,13 @@ msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "ಅಂಕ&ನಗಳು"
 
-#: MainWindow.cpp:379
+#: MainWindow.cpp:383
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "ಹೊಸ ಬಣ್ಣ ಪದ್ಧತಿ"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:395
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Manage Profiles"
@@ -1354,27 +1354,27 @@ msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "ವ್ಯಕ್ತಿವೈಶಿಷ್ಟ್ಯಗಳನ್ನು (ಪ್ರೊಫೈಲ್) ವ್ಯವಸ್ಥಾಪಿಸು"
 
-#: MainWindow.cpp:397
+#: MainWindow.cpp:401
 #, fuzzy, kde-format
 #| msgid "Activate Menu"
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "ಪರಿವಿಡಿಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸು"
 
-#: MainWindow.cpp:403
+#: MainWindow.cpp:407
 #, fuzzy, kde-format
 #| msgid "Move Tab Left"
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "ಹಾಳೆಯನ್ನು ಎಡಕ್ಕೆ ಸರಿಸು"
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:416
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:726 MainWindow.cpp:743
+#: MainWindow.cpp:730 MainWindow.cpp:747
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1385,28 +1385,28 @@ msgid_plural ""
 msgstr[0] "ಈ ವಿಂಡೋದಲ್ಲಿ ಅನೇಕ ಹಾಳೆಗಳಿವೆ, ಅವನ್ನು ತ್ಯಜಿಸುವ ಬಗ್ಗೆ ನಿಮಗೆ ಖಚಿತವಿದೆಯೇ?"
 msgstr[1] "ಈ ವಿಂಡೋದಲ್ಲಿ ಅನೇಕ ಹಾಳೆಗಳಿವೆ, ಅವನ್ನು ತ್ಯಜಿಸುವ ಬಗ್ಗೆ ನಿಮಗೆ ಖಚಿತವಿದೆಯೇ?"
 
-#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
+#: MainWindow.cpp:736 MainWindow.cpp:753 MainWindow.cpp:767
 #, fuzzy, kde-format
 #| msgid "Confirm Close"
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "ಮುಚ್ಚುವುದನ್ನು ದೃಡಪಡಿಸು"
 
-#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:737 MainWindow.cpp:754 MainWindow.cpp:768
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "ಕನ್ಸೋಲ್"
 
-#: MainWindow.cpp:751 MainWindow.cpp:765
+#: MainWindow.cpp:755 MainWindow.cpp:769
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "ಈಗಿನ ಹಾಳೆಯನ್ನು ಮುಚ್ಚು"
 
-#: MainWindow.cpp:760
+#: MainWindow.cpp:764
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have multiple tabs in this window, are you sure you want to quit?"
@@ -1414,7 +1414,7 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "ಈ ವಿಂಡೋದಲ್ಲಿ ಅನೇಕ ಹಾಳೆಗಳಿವೆ, ಅವನ್ನು ತ್ಯಜಿಸುವ ಬಗ್ಗೆ ನಿಮಗೆ ಖಚಿತವಿದೆಯೇ?"
 
-#: MainWindow.cpp:867 Part.cpp:297
+#: MainWindow.cpp:871 Part.cpp:297
 #, fuzzy, kde-format
 #| msgctxt "@item This will be used as part of the file name"
 #| msgid "New Profile"
@@ -1422,7 +1422,7 @@ msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "ಹೊಸ ವ್ಯಕ್ತಿವೈಶಿಷ್ಟ್ಯ (ಪ್ರೊಫೈಲ್)"
 
-#: MainWindow.cpp:884
+#: MainWindow.cpp:888
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Generic, common options"
 #| msgid "General"
@@ -1430,25 +1430,25 @@ msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ಸಾಮಾನ್ಯ"
 
-#: MainWindow.cpp:896
+#: MainWindow.cpp:900
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:902
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:912
+#: MainWindow.cpp:916
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

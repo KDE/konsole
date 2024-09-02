@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-25 00:42+0000\n"
+"POT-Creation-Date: 2024-09-02 00:41+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -1244,39 +1244,39 @@ msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Obilježivači"
 
-#: MainWindow.cpp:379
+#: MainWindow.cpp:383
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "Nova šema boja"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:395
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Upravljaj profilima..."
 
 # >> @action:inmenu
-#: MainWindow.cpp:397
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktiviraj meni"
 
-#: MainWindow.cpp:403
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:416
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:726 MainWindow.cpp:743
+#: MainWindow.cpp:730 MainWindow.cpp:747
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1287,26 +1287,26 @@ msgstr[1] "U ovom prozoru rade %1 procesa, želite li zaista da ga napustite?"
 msgstr[2] "U ovom prozoru radi %1 procesa, želite li zaista da ga napustite?"
 msgstr[3] "U ovom prozoru radi jedan proces, želite li zaista da ga napustite?"
 
-#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
+#: MainWindow.cpp:736 MainWindow.cpp:753 MainWindow.cpp:767
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Potvrda zatvaranja"
 
-#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:737 MainWindow.cpp:754 MainWindow.cpp:768
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Zatvori &prozor"
 
-#: MainWindow.cpp:751 MainWindow.cpp:765
+#: MainWindow.cpp:755 MainWindow.cpp:769
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Zatvori tekući &jezičak"
 
 # >! Plurals.
-#: MainWindow.cpp:760
+#: MainWindow.cpp:764
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 open tabs in this window. Do you still want to quit?"
@@ -1317,37 +1317,37 @@ msgstr ""
 "napustite?|/|U ovom prozoru ima %1 $[množ ^1 'otvoren jezičak' 'otvorena "
 "jezička' 'otvorenih jezičaka'], želite li zaista da ga napustite?"
 
-#: MainWindow.cpp:867 Part.cpp:297
+#: MainWindow.cpp:871 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profili"
 
-#: MainWindow.cpp:884
+#: MainWindow.cpp:888
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Opšte"
 
-#: MainWindow.cpp:896
+#: MainWindow.cpp:900
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:902
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:912
+#: MainWindow.cpp:916
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

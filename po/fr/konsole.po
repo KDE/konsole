@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-25 00:42+0000\n"
-"PO-Revision-Date: 2024-08-16 14:12+0200\n"
+"POT-Creation-Date: 2024-09-02 00:41+0000\n"
+"PO-Revision-Date: 2024-08-25 11:46+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -1238,36 +1238,36 @@ msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Signets"
 
-#: MainWindow.cpp:379
+#: MainWindow.cpp:383
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "Thème de couleurs pour &fenêtres"
 
-#: MainWindow.cpp:391
+#: MainWindow.cpp:395
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Gérer les profils..."
 
-#: MainWindow.cpp:397
+#: MainWindow.cpp:401
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Activer le menu"
 
-#: MainWindow.cpp:403
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Enregistrer une disposition d'onglets..."
 
-#: MainWindow.cpp:412
+#: MainWindow.cpp:416
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "Charger une disposition d'onglets..."
 
-#: MainWindow.cpp:726 MainWindow.cpp:743
+#: MainWindow.cpp:730 MainWindow.cpp:747
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1280,62 +1280,62 @@ msgstr[1] ""
 "%1 processus sont en cours d'exécution dans cette fenêtre. Voulez-vous "
 "vraiment quitter ?"
 
-#: MainWindow.cpp:732 MainWindow.cpp:749 MainWindow.cpp:763
+#: MainWindow.cpp:736 MainWindow.cpp:753 MainWindow.cpp:767
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Confirmer la fermeture"
 
-#: MainWindow.cpp:733 MainWindow.cpp:750 MainWindow.cpp:764
+#: MainWindow.cpp:737 MainWindow.cpp:754 MainWindow.cpp:768
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Fermer la &fenêtre"
 
-#: MainWindow.cpp:751 MainWindow.cpp:765
+#: MainWindow.cpp:755 MainWindow.cpp:769
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Fermer l'ongle&t actuel"
 
-#: MainWindow.cpp:760
+#: MainWindow.cpp:764
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr ""
 "Cette fenêtre contient %1 terminaux ouverts. Voulez-vous vraiment quitter ?"
 
-#: MainWindow.cpp:867 Part.cpp:297
+#: MainWindow.cpp:871 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profils"
 
-#: MainWindow.cpp:884
+#: MainWindow.cpp:888
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Général"
 
-#: MainWindow.cpp:896
+#: MainWindow.cpp:900
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Mémoire"
 
-#: MainWindow.cpp:902
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Barre d'onglets / Séparateurs"
 
-#: MainWindow.cpp:907
+#: MainWindow.cpp:911
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Fichiers temporaires"
 
-#: MainWindow.cpp:912
+#: MainWindow.cpp:916
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
@@ -3310,20 +3310,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
-"\"<html><head/><body>\"\"<p>Pour utiliser cette fonctionnalité, veuillez "
-"activer l'option <span style=\" font-weight:600;\">Souris-&gt;Divers-&gt;"
-"Souligner les </span><span style=\" font-weight:600;\">fichiers</span> dans "
-"les paramètres de votre profil</p>\"\"</body></html>\""
+"\"<html><head/><body><p>Pour utiliser cette fonctionnalité, veuillez activer "
+"l'option <span style=\" font-weight:600;\">Souris / Divers / Souligner les "
+"fichiers</span> dans les paramètres de votre profil</p></body></html>\""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
