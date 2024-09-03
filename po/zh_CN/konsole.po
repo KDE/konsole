@@ -30,7 +30,7 @@ msgid "Your emails"
 msgstr ""
 "kde-china@kde.org, albert_lew2002@eyou.com, chaofeng111@gmail.com, "
 "fundawang@en2china.com, i@guoyunhe.me, cavendish.qi@gmail.com, lilith."
-"ex@gmail.com, gerongfeng@kde.org, shuizhuyuanluo@126.com, lark@linux.ustc."
+"ex@gmail.com, shuizhuyuanluo@126.com, stellarpurr@gmail.com, lark@linux.ustc."
 "edu.cn, wengxt@gmail.com, jxiong@offtopic.org"
 
 #. i18n: ectx: Menu (file)
@@ -3171,8 +3171,7 @@ msgid ""
 "font-weight:600;\">files</span> in your profile settings</p></body></html>"
 msgstr ""
 "<html><head/><body><p>要使用此特性，请在配置方案的设置中启用<span style=\" "
-"font-weight:600;\">鼠标-&gt;杂项-&gt;下划线</span><span style=\" font-"
-"weight:600;\">文件</span></p></body></html>"
+"font-weight:600;\">鼠标-&gt;杂项-&gt;文件加下划线</span>。</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
