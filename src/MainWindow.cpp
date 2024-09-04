@@ -111,6 +111,12 @@ MainWindow::MainWindow()
     // The "Create" flag will make it call createGUI()
     setupGUI(guiOpts, xmlFile);
 
+    // Hamburger menu for when the menubar is hidden
+    _hamburgerMenu = KStandardAction::hamburgerMenu(nullptr, nullptr, actionCollection());
+    _hamburgerMenu->setShowMenuBarAction(_toggleMenuBarAction);
+    _hamburgerMenu->setMenuBar(menuBar());
+    connect(_hamburgerMenu, &KHamburgerMenu::aboutToShowMenu, this, &MainWindow::updateHamburgerMenu);
+
     // remember the original menu accelerators for later use
     rememberMenuAccelerators();
 
@@ -204,6 +210,12 @@ void MainWindow::correctStandardShortcuts()
     QAction *helpAction = actionCollection()->action(QStringLiteral("help_contents"));
     if (helpAction != nullptr) {
         actionCollection()->setDefaultShortcut(helpAction, QKeySequence());
+    }
+
+    // replace F10 shortcut for main menu to pass F10 key to the console application
+    QAction *openMenu = actionCollection()->action(QStringLiteral("hamburger_menu"));
+    if (openMenu != nullptr) {
+        actionCollection()->setDefaultShortcut(openMenu, QKeySequence(Qt::SHIFT | Qt::Key_F10));
     }
 }
 
@@ -419,12 +431,6 @@ void MainWindow::setupActions()
             viewManager()->loadLayoutFile();
         }
     });
-
-    // Hamburger menu for when the menubar is hidden
-    _hamburgerMenu = KStandardAction::hamburgerMenu(nullptr, nullptr, collection);
-    _hamburgerMenu->setShowMenuBarAction(_toggleMenuBarAction);
-    _hamburgerMenu->setMenuBar(menuBar());
-    connect(_hamburgerMenu, &KHamburgerMenu::aboutToShowMenu, this, &MainWindow::updateHamburgerMenu);
 }
 
 void MainWindow::updateHamburgerMenu()
