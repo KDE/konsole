@@ -2140,6 +2140,10 @@ void Session::setSelectMode(bool mode)
 
 void Session::setColor(const QColor &color)
 {
+    if (_tabColor == color) {
+        return;
+    }
+
     _tabColor = color;
     Q_EMIT sessionAttributeChanged();
 }
