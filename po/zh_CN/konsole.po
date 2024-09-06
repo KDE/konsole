@@ -5330,7 +5330,7 @@ msgstr "远程标签页标题格式："
 #: widgets/RenameTabWidget.ui:79
 #, kde-format
 msgid "&Tab title format:"
-msgstr "标签页标题格式(&T）："
+msgstr "标签页标题格式(&T)："
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-02 00:41+0000\n"
-"PO-Revision-Date: 2024-08-15 10:56+0400\n"
+"PO-Revision-Date: 2024-09-05 13:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1961,23 +1961,24 @@ msgstr "العنوان %1 غير صالح ، لا يمكن حفظ المخرجا
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "فشل في إنشاء ملف الحفظ الآلي في  %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "إيقاف الحفظ التلقائي بسبب تبديل الشاشات."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"عُدل ملف الحفظ التلقائي خارجيًا، مما يمنع عمليات الحفظ التلقائي الإضافية."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "فشل في تحديث حالة الحفظ التلقائي لتغييرات الإخراج."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2258,7 +2259,7 @@ msgstr "احفظ المخرجات آليا كـ..."
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "أوقف الحفظ تلقائي"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -3230,19 +3231,15 @@ msgstr "بكسل"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>لتستخدم هذه الميزة، مكن <span style=\" font-weight:600;"
-"\">الفأرة-&gt;متنوع-&gt;تسطير </span><span style=\" font-weight:600;"
-"\">الملفات</span> في إعدادات التشكيلة</p></body></html>"
+"\">الفأرة-&gt;متنوع-&gt;تسطير الملفات</span> في إعدادات التشكيلة</p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3757,7 +3754,7 @@ msgstr "اختصار لإلقاء نظرة خاطفة على الشاشة الر
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "عيّن الفاصل الزمني بين الحفظ التلقائي:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:262
@@ -5162,13 +5159,13 @@ msgstr "إعادة دفق السطور عند تغيير حجم الطرفية"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "لون علامات شريط التمرير:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "حجم كل علامة (كنسبة مئوية من طول شريط التمرير):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266

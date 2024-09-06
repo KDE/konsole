@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-02 00:41+0000\n"
-"PO-Revision-Date: 2024-02-28 16:31+0200\n"
-"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
+"PO-Revision-Date: 2024-08-30 12:53+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.0\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
@@ -689,11 +689,10 @@ msgid "Deselect All"
 msgstr "Neatlasīt neko"
 
 #: filterHotSpots/ColorFilterHotSpot.cpp:84
-#, fuzzy, kde-format
-#| msgid "Preview:"
+#, kde-format
 msgctxt "Caption of hover tooltip"
 msgid "Color Preview"
-msgstr "Priekšskatījums:"
+msgstr "Krāsu priekšskatījums"
 
 #: filterHotSpots/FileFilterHotspot.cpp:158
 #, kde-format
@@ -1623,7 +1622,7 @@ msgstr "Dzēst SSh konfigurāciju"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Importēts SSH profils <br/> Daži iestatījumi ir tikai lasāmi."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
 #, kde-format
@@ -1959,23 +1958,26 @@ msgstr "„%1“ ir nederīga URL adrese. Izvadi nevar saglabāt."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Neizdevās izveidot automātiskās saglabāšanas datni „%1“."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Aptur automātisko saglabāšanu ekrānu pārslēgšanas dēļ."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Automātiskās saglabāšanas datne ir ārēji izmainīta, kas liedz turpmāku "
+"automātisku saglabāšanu."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Neizdevās atjaunināt automātiskās saglabāšanas statusu pēc izvades izmaiņām."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2248,15 +2250,14 @@ msgid "Save Output &As..."
 msgstr "S&aglabāt izvadi kā..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "S&aglabāt izvadi kā..."
+msgstr "Automātiski saglabāt izvadi kā..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Apturēt automātisko saglabāšanu"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -2279,17 +2280,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Notīrīt ritināšanas atmiņu un atstatīt"
 
 #: session/SessionController.cpp:770
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Rediģēt profilu"
+msgstr "Nākamais profils"
 
 #: session/SessionController.cpp:775
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Iepriekšējā"
+msgstr "Iepriekšējais profils"
 
 #: session/SessionController.cpp:778
 #, kde-format
@@ -2681,16 +2679,15 @@ msgstr "Meklēt no beigām"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Nosaka, vai meklēšanai jāsākas no beigām"
+msgstr "Nosaka, vai meklēšana ir jāaptur vai jāsāk no sākuma"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Bez aplaušanas"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2772,13 +2769,13 @@ msgstr "Nosaka, vai ir jāizceļ meklēšanai atbilstošais teksts"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Meklēšana izbeidzas un beigās neaplaužas, turpinot no sākuma"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr "Kontrolē to, vai atsevišķām cilnēm tiek izveidotas savas „cgroups“"
+msgstr "Kontrolē, vai „Konsole“ atsevišķām cilnēm izveido savas „cgroups“"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:94
@@ -3037,17 +3034,15 @@ msgstr "&Zem termināļa lauka"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "&Zem termināļa lauka"
+msgstr "Pa kreisi no termināļa lauka"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "&Zem termināļa lauka"
+msgstr "Pa &labi no termināļa lauka"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3057,8 +3052,7 @@ msgstr "Rādīt cilnes aizvēršanas pogu:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
 msgstr "&Katrā cilnē"
 
@@ -3242,11 +3236,7 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
@@ -3254,8 +3244,7 @@ msgid ""
 msgstr ""
 "<html><head/><body><p>Lai lietotu šo iespēju, profila iestatījumos "
 "ieslēdziet <span style=\" font-weight:600;\">Pele —&gt; Dažādi —&gt; "
-"Pasvītrot </span><span style=\" font-weight:600;\">datnes</span></p></body></"
-"html>"
+"Pasvītrot datnes</span>.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3756,10 +3745,9 @@ msgstr "Plūsmas kontrole"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "&Default character encoding:"
-msgstr "Rakstzīmju noklusētais kodējums:"
+msgstr "Noklusējuma rakstzīmju ko&dējums:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:242
@@ -3771,46 +3759,40 @@ msgstr "Saīsne, lai palūkotos uz primāro ekrānu:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Intervāls starp automātiskajām saglabāšanām:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:262
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:275
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Rindu numuri "
+msgstr "Rindu numuri:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:285
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "&Nekad"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:295
-#, fuzzy, kde-format
-#| msgctxt "When showing URL hints"
-#| msgid "When URL hints show"
+#, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr "Parādot URL ieteikumus"
+msgstr "Parādot &URL ieteikumus"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:305
-#, fuzzy, kde-format
-#| msgctxt "Always"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr "Vienmēr"
+msgstr "Vie&nmēr"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -3907,20 +3889,17 @@ msgstr "Izmantot fontā ietvertās līniju rakstzīmes"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr "Atlasīto fontu izmantot līniju rakstzīmēm iebūvētā koda vietā"
+msgstr "Iebūvētā koda vietā unikoda Braila rakstzīmēm izmantot atlasīto fontu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Izmantot fontā ietvertās līniju rakstzīmes"
+msgstr "Izmantot fontā ietvertās unikoda Braila rakstzīmes"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4465,11 +4444,9 @@ msgid "Select Initial Directory"
 msgstr "Atlasīt sākotnējo mapi"
 
 #: widgets/EditProfileDialog.cpp:946
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "Get New..."
-msgstr "Jauna..."
+msgstr "Iegūt jaunus..."
 
 #: widgets/EditProfileDialog.cpp:1342
 #, kde-kuit-format
@@ -4494,10 +4471,9 @@ msgstr ""
 "jāpārstartē „Konsole“, lai redzētu caurspīdīgo fonu."
 
 #: widgets/EditProfileDialog.cpp:1913
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Noklusētais profils"
+msgstr "Noklusējums datņu tipam"
 
 #: widgets/EditProfileDialog.cpp:1939
 #, kde-format
@@ -4588,10 +4564,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, fuzzy, kde-format
-#| msgid "Initial directory:"
+#, kde-format
 msgid "I&nitial directory:"
-msgstr "Sākotnējā mape:"
+msgstr "&Sākotnējā mape:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:170
@@ -4633,10 +4608,9 @@ msgstr "Rediģēt vides mainīgo un ar tiem saistīto vērtību sarakstu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Initial terminal si&ze:"
-msgstr "Sākotnējais termināļa izmērs:"
+msgstr "Sākotnējais termināļa i&zmērs:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4653,10 +4627,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, fuzzy, kde-format
-#| msgid "Terminal bell mode:"
+#, kde-format
 msgid "&Terminal bell mode:"
-msgstr "Termināļa zvana režīms:"
+msgstr "&Termināļa zvana režīms:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
@@ -4823,17 +4796,15 @@ msgstr "Trīskāršs peles klikšķis atlasa:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, fuzzy, kde-format
-#| msgid "The whole line"
+#, kde-format
 msgid "&The whole line"
-msgstr "Visu rindu"
+msgstr "&Visu rindu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, fuzzy, kde-format
-#| msgid "From mouse position to the end of line"
+#, kde-format
 msgid "From mouse position to the end of &line"
-msgstr "No peles pozīcijas līdz rindas beigām"
+msgstr "No peles pozīcijas līdz rindas &beigām"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
@@ -5111,10 +5082,9 @@ msgstr "Ritināt lapu par pusi no loga augstuma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, fuzzy, kde-format
-#| msgid "Half screen height"
+#, kde-format
 msgid "Half screen heigh&t"
-msgstr "Puse ekrāna augstuma"
+msgstr "&Puse ekrāna augstuma"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -5124,10 +5094,9 @@ msgstr "Ritināt lapu par pilnu loga augstumu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, fuzzy, kde-format
-#| msgid "Full screen height"
+#, kde-format
 msgid "F&ull screen height"
-msgstr "Pilns ekrāna augstums"
+msgstr "&Pilns ekrāna augstums"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
@@ -5143,12 +5112,10 @@ msgstr "Rādīt ritjoslu termināļa loga labajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the right side"
-#| msgid "Right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
-msgstr "Labajā pusē"
+msgstr "&Labajā pusē"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
@@ -5158,12 +5125,10 @@ msgstr "Rādīt ritjoslu termināļa loga kreisajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr "Kreisajā pusē"
+msgstr "&Kreisajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
@@ -5200,19 +5165,19 @@ msgstr "Pārkārtot rindas, terminālim mainot izmēru"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Ritjoslas marķieru krāsa:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "Katra marķiera izmērs (procentuāli no ritjoslas garuma):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5283,10 +5248,9 @@ msgstr "Ierobežot atmiņā turamos izvaddatus līdz noteiktam rindu skaitam"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size:"
+#, kde-format
 msgid "Fi&xed size:"
-msgstr "Fiksēts izmērs:"
+msgstr "&Fiksēts izmērs:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5302,12 +5266,10 @@ msgstr "Atcerēties visu termināļa izvadi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgctxt "Save all lines to the scrollback history"
-#| msgid "Unlimited"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr "Bez ierobežojuma"
+msgstr "&Bez ierobežojuma"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5317,12 +5279,10 @@ msgstr "Neatcerēties iepriekšējo izvadi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
-msgstr "&Nevienu"
+msgstr "&Neko"
 
 #: widgets/IncrementalSearchBar.cpp:49
 #, kde-format
@@ -5418,14 +5378,14 @@ msgstr "Nosaka, vai meklēšanai ir jāsākas no beigām"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Bez aplaušanas"
 
 #: widgets/IncrementalSearchBar.cpp:142
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Nosaka, vai meklēšanai jāsākas no beigām"
+msgstr ""
+"Nosaka, vai meklēšana beigās apstājas, vai arī aplaužas un sākas no sākuma"
 
 #: widgets/IncrementalSearchBar.cpp:171
 #, kde-format
@@ -5468,10 +5428,9 @@ msgstr "Attālināto ciļņu virsrakstu formāts:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, fuzzy, kde-format
-#| msgid "Tab title format:"
+#, kde-format
 msgid "&Tab title format:"
-msgstr "Ciļņu virsraksta formāts:"
+msgstr "&Ciļņu virsraksta formāts:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5481,10 +5440,9 @@ msgstr "Normāls ciļņu virsraksta formāts"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgid "Tab Color:"
+#, kde-format
 msgid "Tab Co&lor:"
-msgstr "Ciļņu krāsa:"
+msgstr "&Ciļņu krāsa:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
