@@ -1,0 +1,16 @@
+version = 1
+SPDX-PackageName = "konsole"
+SPDX-PackageSupplier = "Kurt Hindenburg <khindenburg@kde.org>"
+SPDX-PackageDownloadLocation = "https://invent.kde.org/utilities/konsole"
+
+[[annotations]]
+path = [".gitignore", ".git-blame-ignore-revs", ".krazy", ".editorconfig"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "None"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "desktop/konsole.qrc"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "None"
+SPDX-License-Identifier = "CC0-1.0"
