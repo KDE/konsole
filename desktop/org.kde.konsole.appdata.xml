@@ -65,6 +65,7 @@
   <summary xml:lang="ca">Feu servir la interfície de la línia d'ordres</summary>
   <summary xml:lang="ca-valencia">Utilitzeu la interfície de la línia d'ordres</summary>
   <summary xml:lang="cs">Použít příkazový řádek</summary>
+  <summary xml:lang="el">Χρήση της διεπαφής γραμμής εντολών</summary>
   <summary xml:lang="en-GB">Use the command line interface</summary>
   <summary xml:lang="eo">Uzi la komandlinian interfacon</summary>
   <summary xml:lang="es">Usar la interfaz de la línea de órdenes</summary>
@@ -363,7 +364,7 @@
       <li xml:lang="cs">Podpora záložek</li>
       <li xml:lang="da">Understøttelse af bogmærker</li>
       <li xml:lang="de">Lesezeichen-Unterstützung</li>
-      <li xml:lang="el">υποστήριξη σελιδοδεικτών</li>
+      <li xml:lang="el">Υποστήριξη σελιδοδεικτών</li>
       <li xml:lang="en-GB">Bookmark support</li>
       <li xml:lang="eo">Legomarksubteno</li>
       <li xml:lang="es">Uso de marcadores</li>
