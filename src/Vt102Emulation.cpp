@@ -29,6 +29,7 @@
 #include "EscapeSequenceUrlExtractor.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
+#include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalFonts.h"
 
@@ -1105,6 +1106,17 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         return;
     }
 
+    if (attribute == CursorColor) {
+        int j = i;
+        while (j < tokenSize && tokenBuffer[j] != ';') {
+            j++;
+        }
+        QColor color = QColor::fromString(QString::fromUcs4(&tokenBuffer[i], j - i));
+        if (color.isValid()) {
+            _currentScreen->currentTerminalDisplay()->terminalColor()->setCursorColor(color);
+        }
+        return;
+    }
     if (attribute == SemanticPrompts) {
         if (value[0] == QLatin1Char('A') || value[0] == QLatin1Char('N') || value[0] == QLatin1Char('P')) {
             _currentScreen->setReplMode(REPL_PROMPT);
