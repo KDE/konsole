@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-08 02:34+0000\n"
-"PO-Revision-Date: 2024-07-18 10:42+0200\n"
+"PO-Revision-Date: 2024-08-27 13:51+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -1210,13 +1210,13 @@ msgstr "Aktivovat nabídku"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Uložit rozložení karet..."
+msgstr "Uložit rozvržení karet..."
 
 #: MainWindow.cpp:412
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Načíst rozložení karet..."
+msgstr "Načíst rozvržení karet..."
 
 #: MainWindow.cpp:726 MainWindow.cpp:743
 #, kde-format
@@ -3533,7 +3533,7 @@ msgstr "Čísla řádků "
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Uložit rozložení karet"
+msgstr "Uložit rozvržení karet"
 
 #: ViewManager.cpp:1179 ViewManager.cpp:1266
 #, kde-format
@@ -3565,7 +3565,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Načíst rozložení karet"
+msgstr "Načíst rozvržení karet"
 
 #: Vt102Emulation.cpp:2472
 #, kde-format
@@ -4054,7 +4054,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:846
 #, kde-format
 msgid "Complex Text Layout"
-msgstr "Komplexní rozložení textu"
+msgstr "Komplexní rozvržení textu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:861
@@ -4292,7 +4292,7 @@ msgstr "Systémový zvonek"
 #: widgets/EditProfileDialog.cpp:526
 #, kde-format
 msgid "System Notifications"
-msgstr "Systémová hlášení"
+msgstr "Systémová upozornění"
 
 #: widgets/EditProfileDialog.cpp:526
 #, kde-format
@@ -5392,7 +5392,7 @@ msgstr "Zavřít terminál"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Restore terminal"
-msgstr ""
+msgstr "Obnovit terminál"
 
 #: widgets/ViewContainer.cpp:56
 #, kde-format
