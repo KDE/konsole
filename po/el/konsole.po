@@ -3397,7 +3397,7 @@ msgstr "Επιβεβαίωση επικόλλησης"
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
-msgstr "Επικόλληση χωρί&ς χαρακτήρες ελέγχου"
+msgstr "Επικόλληση χωρίς χαρακτήρες ελέ&γχου"
 
 #: terminalDisplay/TerminalDisplay.cpp:2319
 #, kde-format
