@@ -185,3 +185,5 @@ bool Konsole::HotSpot::hasDragOperation() const
 void Konsole::HotSpot::startDrag()
 {
 }
+
+#include "moc_HotSpot.cpp"
