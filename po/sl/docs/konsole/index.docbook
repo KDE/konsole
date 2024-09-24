@@ -1,0 +1,3866 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+ "dtd/kdedbx45.dtd" [
+<!ENTITY % Slovenian "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+<!ENTITY Ahmad.Samir '<personname
+><firstname
+>Ahmad</firstname
+><surname
+>Samir</surname
+></personname
+>'>
+<!ENTITY Ahmad.Samir.mail '<email
+>a.samirh78@gmail.com</email
+>'>
+]>
+
+<book id="konsole" lang="&language;">
+
+<bookinfo>
+<title
+>&konsole; - uporabniški priročnik</title>
+<authorgroup>
+<author
+>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author
+>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
+
+<othercredit role="developer"
+>&Robert.Knight; &Robert.Knight.mail; </othercredit>
+
+<othercredit role="developer"
+>&Kurt.Hindenburg; &Kurt.Hindenburg.mail; </othercredit>
+
+<othercredit role="developer"
+>&Waldo.Bastian; &Waldo.Bastian.mail; </othercredit>
+
+<othercredit role="reviewer"
+>&Mike.McBride; &Mike.McBride.mail; </othercredit>
+
+<othercredit role="translator"
+><firstname
+>Andrej</firstname
+><surname
+>Vernekar</surname
+><affiliation
+><address
+><email
+>andrej.vernekar@moj.net</email
+></address
+></affiliation
+><contrib
+>Prevod</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>2000</year
+><year
+>2001</year
+><year
+>2002</year>
+<holder
+>&Jonathan.Singer;</holder>
+</copyright>
+<copyright>
+    <year
+>2005</year
+><year
+>2008</year
+><year
+>2009</year
+><year
+>2010</year
+><year
+>2011</year
+><year
+>2014</year
+><year
+>2016</year
+><year
+>2017</year
+><year
+>2018</year
+><year
+>2020</year
+><year
+>2021</year>
+<holder
+>&Kurt.Hindenburg;</holder>
+</copyright>
+
+<copyright>
+    <year
+>2018</year>
+<holder
+>&Ahmad.Samir;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>23.04.2024</date>
+<releaseinfo
+>KDE Gear 24.05</releaseinfo>
+
+<abstract
+><para
+>&konsole; je terminalski emulator &kde;.</para
+></abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>konzola</keyword>
+<keyword
+>kdebase</keyword>
+<keyword
+>ukaz</keyword>
+<keyword
+>vrsta</keyword>
+<keyword
+>terminal</keyword>
+<keyword
+>cli</keyword>
+</keywordset>
+
+</bookinfo>
+<chapter id="introduction">
+<title
+>Uvod</title>
+
+<sect1 id="terminal">
+<title
+>Kaj je terminal?</title>
+
+<para
+>&konsole; je terminalski emulator X, ki se pogosto imenuje terminal ali lupina. Posnema vmesnik ukazne vrstice v oknu samo z besedilom. </para>
+
+<para
+>&konsole; običajno zažene ukazno lupino, aplikacijo, ki izvaja ukaze, ki jih vnesete. Lupina &konsole; je odvisno od nastavitev vašega računa. Oglejte si dokumentacijo svojega operacijskega sistema, da izveste, kaj je lupina, kako jo konfigurirati in kako jo uporabljati. </para>
+</sect1>
+
+<sect1 id="scrollback">
+<title
+>Pomik nazaj</title>
+
+<para
+>&konsole; uporablja pojem drsenja nazaj, da uporabnikom omogoči ogled predhodno prikazanega izhoda. Pomikanje nazaj je privzeto vklopljeno in nastavljeno tako, da shrani 1000 vrstic izhoda poleg tega, kar je trenutno prikazano na zaslonu. </para>
+<para
+>Ko se vrstice besedila pomaknejo z vrha zaslona, jih lahko pregledate tako, da drsni trak premaknete navzgor, se pomaknete s kolescem miške ali z uporabo <keycombo action="simul"
+>&Shift;<keycap
+>Stran gor</keycap
+></keycombo
+> (za pomik nazaj), <keycombo action="simul"
+>&Shift;<keycap
+>Stran dol</keycap
+></keycombo
+> (za pomik naprej), <keycombo action="simul"
+> &Shift;<keycap
+>Puščica navzgor</keycap
+></keycombo
+> (za pomik vrstice navzgor) in <keycombo action="simul"
+>&Shift;<keycap
+>Puščica dol</keycap
+></keycombo
+> (za pomik navzdol vrstica) tipke. </para>
+<para
+>Količino drsenja z uporabo <keycombo action="simul"
+>&Shift;<keycap
+>Stran Gor/Dol</keycap
+></keycombo
+> lahko preklapljate med polovico in celotno stranjo v zavihku <guilabel
+>Drsenje</guilabel
+> okno za konfiguracijo profila (uporabite <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Uredi trenutni profil ...</guimenuitem
+></menuchoice
+>, da odprete to okno). </para>
+
+</sect1>
+
+<sect1 id="selection">
+<title
+>Način izbire</title>
+<para
+>&konsole; ima izbiro po načinu tipkovnice. V tem načinu se je mogoče premikati po pomiku nazaj in izbirati besedilo brez miške.</para>
+
+<para
+>V ta način vstopite in ga zapustite z uporabo bližnjice na tipkovnici (<keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>D</keycap
+></keycombo
+> privzeto). </para>
+
+<para
+><keycap
+>Esc</keycap
+> tudi zapusti način izbire tipkovnice. </para>
+
+<para
+>Premikanje kazalke: puščice, <keycap
+>StranGor</keycap
+>, <keycap
+>StranGor</keycap
+>, <keycap
+>Domov</keycap
+>, <keycap
+>Konec</keycap
+>. </para>
+
+<para
+>Premikanje kazalke v slogu <application
+>vi</application
+>: h,j,k,l, za premik enega znaka, <keycap
+>Ctrl</keycap
+>+b,f,u,d za stran gor/dol ali polovico strani gor, dol.</para>
+
+<para
+>Besedilo izberite tako, da uporabite <keycap
+>Ctrl</keycap
+> ali <keycap
+>Shift</keycap
+> s puščicami ali uporabite <keycap
+>V</keycap
+> za začetek izbire, premaknite kazalec in nato <keycap
+>V</keycap
+> znova, da končate izbiro. <keycombo
+>&Shift;<keycap
+>V</keycap
+></keycombo
+> izbere cele vrstice namesto znakov. </para>
+
+</sect1>
+
+
+<sect1 id="profiles">
+<title
+>Profili</title>
+<para
+>Profili uporabniku omogočajo hitro in enostavno avtomatizacijo izvajanja običajnih ukazov. Primeri lahko vključujejo: <itemizedlist>
+<listitem
+><para
+>ssh v drug stroj</para
+></listitem>
+<listitem
+><para
+>začetek seje irc</para
+></listitem>
+<listitem
+><para
+>uporabite rep za ogled datoteke</para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para
+>Vsi novi in spremenjeni profili so shranjeni v lokalni domači mapi uporabnika v <filename
+>$<envar
+>XDG_DATA_HOME</envar
+>/konsole</filename
+>.</para>
+
+<para
+>Postopek za ustvarjanje novega profila: <orderedlist>
+<listitem
+><para
+>Kliknite menijski vnos <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Upravljanje profilov ...</guimenuitem
+> </menuchoice
+></para
+></listitem>
+
+<listitem
+><para
+>Preklopite na stran <guibutton
+>Profili</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Kliknite na gumb <guibutton
+>Nov profil ...</guibutton
+>.</para
+></listitem>
+
+<listitem
+><para
+>Izpolnite prvi vnos z imenom. To je ime, ki bo prikazano v meniju in bo privzeta oznaka namesto <guilabel
+>Lupina</guilabel
+>, ko začnete sejo te vrste. </para
+></listitem>
+
+<listitem
+><para
+>Vnesite ukaz tako kot običajno, če bi odprli novo lupino in nameravali izdati ta ukaz. Za naš prvi zgornji primer lahko vnesete <userinput
+><command
+>ssh</command
+> <replaceable
+>administracija</replaceable
+></userinput
+>.</para
+></listitem>
+
+<listitem
+><para
+>Na drugih zavihkih pogovornega okna konfigurirajte videz te seje. Za vsako sejo lahko konfigurirate drugo pisavo, barvno shemo, vrsto $<envar
+>TERM</envar
+> in številne druge nastavitve.</para
+></listitem>
+
+<listitem
+><para
+>Pritisnite gumb <guibutton
+>V redu</guibutton
+>. Nova seja je zdaj na voljo v pogovornem oknu <guilabel
+>Upravljanje profilov...</guilabel
+>. </para
+></listitem>
+
+</orderedlist>
+</para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title
+>Tipke miške</title>
+
+<para
+>V tem razdelku je podrobno opisana uporaba gumbov miške za običajni vrstni red gumbov desničarja. Za vrstni red levih gumbov miške zamenjajte levo in desno v spodnjem besedilu. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><mousebutton
+>Leva</mousebutton
+></term>
+
+<listitem
+><para
+>Vse &LMB; kliki bodo poslani aplikaciji, ki pozna miško in se izvaja v &konsole;. Če se aplikacija odzove na klike miške, &konsole; označuje to s prikazom puščičnega kazalca. Če ni, se prikaže kazalec v obliki črke I.</para>
+
+<para
+>Držite &LMB; dol in vlečenje miške čez zaslon z zagnano aplikacijo, ki ne pozna miške, bo označilo območje besedila. Med vlečenjem miške je označeno besedilo prikazano v obrnjeni barvi za vizualno povratno informacijo. Izberite <guimenuitem
+>Kopiraj</guimenuitem
+> v meniju <guimenu
+>Urejanje</guimenu
+>, da kopirate označeno besedilo v odložišče za nadaljnjo uporabo znotraj &konsole; ali drugo aplikacijo. Izbrano besedilo lahko tudi povlečete in spustite v združljive aplikacije. Držite &Ctrl; in povlecite izbrano besedilo na želeno mesto.</para>
+
+<para
+>Običajno se znaki za novo vrstico vstavijo na koncu vsake izbrane vrstice. To je najboljše za izrezovanje in lepljenje izvorne kode ali izhod določenega ukaza. Za običajno besedilo prelomi vrstic pogosto niso pomembni. Morda bi bilo bolje, da bi bilo besedilo tok znakov, ki bodo samodejno preoblikovani, ko bodo prilepljeni v drugo aplikacijo. Če želite izbrati v načinu besedilnega toka, pridržite &Ctrl; tipko med običajnim izbiranjem.</para>
+
+<para
+>S pritiskom tipke &Ctrl; in &Alt; tipke skupaj z &LMB; bo izbral besedilo v stolpcih. </para>
+
+<para
+>Dvakrat kliknite z &LMB; izbrati besedo; trikrat kliknite, da izberete celotno vrstico.</para>
+
+<para
+>Če sta med označevanjem dotaknjena zgornji ali spodnji rob območja besedila &konsole; drsi navzgor ali navzodol in tako razkrije besedilo v pomnilniku zgodovine. Drsenje se ustavi takoj, ko premaknete miško.</para>
+
+<para
+>Ko izpustite miško, &konsole; poskuša ohraniti vidno besedilo v odložišču tako, da drži označeno območje obrnjeno. Označeno območje se vrne nazaj v normalno stanje takoj, ko se vsebina odložišča spremeni, se spremeni besedilo v označenem območju ali &LMB; je kliknjen.</para>
+
+<para
+>Če želite označiti besedilo v aplikaciji, ki podpira miško (na primer Midnight Commander), gumb &Shift; ob kliku je treba pritisniti tipko.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Sredina</mousebutton
+></term>
+
+<listitem
+><para
+>S pritiskom &MMB; prilepi besedilo, ki je trenutno v odložišču. Če držite &Ctrl; tipko, ko pritisnete &MMB; prilepi besedilo in doda novo vrstico. To je priročno za hitro izvajanje prilepljenega ukaza, vendar je lahko nevarno, zato ga uporabljajte previdno. </para>
+
+<note
+><para
+>Če imate miško s samo dvema gumboma, pritisnite oba &LMB; in &RMB; skupaj posnema &MMB; miške s tremi gumbi.</para
+></note>
+
+<para
+>Če imate kot srednji gumb <mousebutton
+>kolesce</mousebutton
+>, bo premikanje v programu, ki ne pozna miške, odstranilo drsni trak &konsole;.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><mousebutton
+>Desna</mousebutton
+></term>
+<listitem>
+<para
+>Ti elementi se prikažejo v meniju, ko &RMB; je pritisnjeno:</para>
+<itemizedlist>
+<listitem
+><para
+><guimenuitem
+>Kopiraj</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Prilepi</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+>Z izbiro besedila se prikaže podmeni <guisubmenu
+>Išči</guisubmenu
+> s seznamom prednostnih spletnih bližnjic in možnostjo konfiguracije spletnih bližnjic.</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Odprite upravitelja datotek</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Nastavite kodiranje</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Počisti Pomik nazaj</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Prilagodi pomik nazaj ...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Pokaži menijsko vrstico</guimenuitem
+>, samo ko je menijska vrstica skrita</para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Preklopi profil</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Uredi trenutni profil ...</guimenuitem
+></para
+></listitem>
+<listitem
+><para
+><guimenuitem
+>Zapri zavihek</guimenuitem
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>V aplikaciji, ki podpira miško, pritisnite &Shift; tipko skupaj z &RMB; da dobite pojavni meni. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="drag-and-drop">
+<title
+>Povleci in spusti</title>
+<para
+>Če spustite datoteko, mapo ali &URL; na &konsole; se prikaže kontekstni meni s temi dejanji: </para>
+<screenshot>
+<screeninfo
+>Povleci in spusti kontekstni meni</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Povleci in spusti kontekstni meni</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Shift;</shortcut
+><guimenuitem
+>Premakni sem</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Premaknite spuščeni element v trenutno mapo. Ta element se pojavi samo v kontekstnem meniju, če imate pravice za brisanje izpuščene datoteke ali mape. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Ctrl;</shortcut
+><guimenuitem
+>Kopiraj sem</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Kopirajte spuščeni element v trenutno mapo.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;</keycombo
+></shortcut
+><guimenuitem
+>Povezava tukaj</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Vstavite simbolično povezavo do izpuščenega predmeta.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Prilepi lokacijo</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>V kazalko vstavite celotno pot datoteke spuščenega elementa.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice>
+<guimenuitem
+>Spremeni imenik v</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Če je mapa izpuščena, se to dejanje pojavi v kontekstnem meniju in vam omogoča, da spremenite delovno mapo &konsole; sejo.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Esc;</shortcut
+><guimenuitem
+>Prekliči</guimenuitem
+> </menuchoice>
+</term
+> <listitem>
+<para
+>Prekinite dejanje povleci in spusti.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Če pritisnete bližnjice, preden spustite &LMB; med povleci in spusti se ne prikaže kontekstni meni in dejanja se bodo izvršila takoj. </para>
+
+<para
+>Če želite uporabiti &Ctrl; tipko za povleci in spusti ali onemogočite kontekstni meni, da privzeto vstavite &URL; kot besedilo, omogočite ustrezne možnosti na zavihku <guilabel
+>Miška</guilabel
+> v pogovornem oknu z nastavitvami profila. </para>
+
+</sect1>
+
+<sect1 id="semantic-shell-integration">
+<title
+>Integracija semantične lupine</title>
+
+<para
+>Lupinski program, ki se izvaja v Konsole, lahko odda ubežna zaporedja, ki razdelijo prikazano besedilo na tri vrste: lupinski poziv, uporabniški vnos in ukazni izhod. Uporaba teh semantičnih informacij omogoča različne izboljšave v Konsole. <itemizedlist>
+<listitem
+><para
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgUp</keycap
+></keycombo
+> in <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>PgDown</keycap
+></keycombo
+> drsenje gor/dol na prejšnji/naslednji ukazni poziv.</para
+></listitem>
+<listitem
+><para
+>Vizualni namigi:</para>
+<itemizedlist>
+<listitem
+><para
+>Nad vsakim pozivom je prikazana vrstica, barve poziva so manj intenzivne, barve izpisa pa so bolj intenzivne. </para
+></listitem>
+<listitem
+><para
+>Rdeča vrstica je prikazana na levi strani vhodnih in izhodnih vrstic ukazov, ki so povzročili napako </para
+></listitem>
+<listitem
+><para
+>Rdeče ozadje za vhodne in izhodne vrstice ukazov, ki so povzročili napako </para
+></listitem>
+<listitem
+><para
+>Levo od vhodne in izhodne vrstice vsakega drugega ukaza je prikazana siva vrstica. </para
+></listitem>
+<listitem
+><para
+>Sivo ozadje za vhodne in izhodne vrstice vsakega drugega ukaza. </para
+></listitem>
+</itemizedlist>
+<para
+>Vsak od teh je lahko konfiguriran tako, da se nikoli ne prikaže, vedno prikaže ali samo, ko so prikazani namigi za URL. Konfiguracija je na zavihku <guilabel
+>Semantična integracija</guilabel
+> na strani <guilabel
+>Splošno</guilabel
+> okna za konfiguracijo profila. </para
+></listitem>
+
+<listitem
+><para
+>Možnosti kontekstnega menija <guimenuitem
+>Kopiraj uporabniški vnos</guimenuitem
+>, <guimenuitem
+>Kopiraj izhod ukaza</guimenuitem
+> in <guimenuitem
+>Kopiraj razen poziva</guimenuitem
+> se lahko uporabljajo za filtriranje izbire, ko je ta kopirana v odložišče. </para
+></listitem>
+<listitem
+><para
+>Ko je izbor prazen, kopiranje v odložišče kopira trenutno vhodno vrstico, če ni prazna, ali zadnji izhod, če ni trenutnega vnosa. </para
+></listitem>
+<listitem
+><para
+>Če med urejanjem dolgega vnosa pritisnete puščico navzgor/navzdol, namesto tega postavite kazalec eno vrstico navzgor/navzdol, tako da lupini pošljete ustrezno število dogodkov tipk levo/desno. Nastavljivo v nastavitvah profila.</para
+></listitem>
+<listitem
+><para
+>S klikom miške pri vnosu besedila se kazalec postavi na kliknjeno mesto. Nastavljivo v nastavitvah profila.</para
+></listitem>
+<listitem
+><para
+>S pritiskom tipke &Ctrl; s trikratnim klikom miške na izhod ukaza izbere celoten izhod tega ukaza.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Semantično integracijo lupine je treba nastaviti v lupini. Če pritisnete <keycombo
+>&Ctrl;&Alt;<keycap
+>]</keycap
+></keycombo
+>, boste potrebne ukaze prilepili v bash. Za druge lupine, kot so fish, zsh, python itd., si oglejte dokumentacijo ustreznega programa. </para>
+
+</sect1>
+
+
+<sect1 id="complex-text-rendering">
+<title
+>Kompleksna postavitev besedila</title>
+
+<para
+>Na zavihku <guilabel
+>Zapletena postavitev besedila</guilabel
+> na strani <guilabel
+>Videz</guilabel
+> v pogovornem oknu <guilabel
+>Urejanje profila</guilabel
+> boste našli možnosti, ki nadzorujejo upodabljanje besedila. </para>
+
+<para>
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>Besedni način</guilabel
+> - v tem načinu so (nekateri) nizi prikazani na zaslonu kot celota, namesto po znakih. To omogoča, da Qt pravilno upodablja besedilo, ko je oblika znaka odvisna od znakov pred ali za njim. To lahko povzroči nepravilen položaj nekaterih znakov. </para
+><para
+>Presledki vedno prekinejo nize, zato so vedno na pravilnih položajih. To zagotavlja, da liki nikoli niso predaleč od svojega pravilnega položaja. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Uporabi iste atribute za vsako celotno besedo</guilabel
+> - Ko je to omogočeno, so besede upodobljene z enakimi atributi (barva besedila, krepko, ležeče itd.). Če se atribut spremeni na sredini besede, bo začel veljati šele po koncu besede. Ko je to onemogočeno, se ob spremembi atributov začne nova beseda. Posledica tega je, da znaki spreminjajo obliko in položaj, ko premikate kazalec ali izbirate besedilo. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Znaki ASCII</guilabel
+> - Združi znake ASCII v besede, kot je opisano zgoraj. Najbolj opazen učinek te možnosti je, da omogočanje te možnosti prikaže programske ligature (za pisave, ki jih podpirajo). Npr. niz &lt;= je lahko prikazan kot ⩽. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Znaki brahmske pisave</guilabel
+> - Združi brahmske znake, kot je opisano zgoraj. Brez te možnosti (odvisno od pisave) nekatere besede morda ne bodo povezane, kot bi morale. Če je to omogočeno, se lahko brahmski znaki zdijo izven položaja. Npr. tretji znak v drugi vrstici morda ne bo prikazan neposredno pod tretjim znakom v prvi vrstici. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Pisava Emoji:</guilabel
+> – To omogoča določanje pisave za uporabo znakov Unicode Emoji. Če ni nastavljena, bo uporabljena privzeta pisava profila ali pa bo sistem morda uporabil kakšno nadomestno pisavo, če v tej pisavi manjkajo glifi. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Dvosmerno upodabljanje besedila</guilabel
+> - Prerazporedite znake od desne proti levi, tako da so arabska in hebrejska besedila prikazana pravilno. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>usili smer črte LTR</guilabel
+> – Črte so vedno od leve proti desni. Brez tega je smer vsake vrstice določena s prvim znakom z močno usmerjenostjo. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Znaki tabele preglasijo način BiDi</guilabel
+> - Upoštevajte znake grafične tabele kot močne znake LTR. To omogoča pravilen prikaz tabele, ki vsebuje znake RTL, vendar lahko povzroči nepravilen vrstni red, če so ti znaki uporabljeni v besedilih RTL. </para
+></listitem>
+
+<listitem
+><para
+><guilabel
+>Preglasi wcwidth</guilabel
+> – Problematični znaki sledijo standardu Unicode, namesto wcwidth() glibc. Ta možnost trenutno vpliva samo na mehki vezaj (Unicode 0x00AD), ki ima wcwidth 1 in Unicode širino 0. Na splošno bi morala biti ta možnost onemogočena, ko večinoma uporabljate te znake v ukazni vrstici, in omogočena, ko so samo prikazani. </para
+></listitem>
+
+</itemizedlist>
+</para>
+</sect1>
+
+<sect1 id="visualhints">
+<title
+>Vizualni namigi</title>
+<para
+>Poleg različnih vizualnih namigov, opisanih v <xref linkend="semantic-shell-integration"/>, ima &konsole; še druge vizualne namige: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Navpična črta pri stolpcu 80 (ali drugem). To je konfigurirano na zavihku <guilabel
+>Razno</guilabel
+> na strani <guilabel
+>Videz</guilabel
+> v pogovornem oknu <guilabel
+>Urejanje profila</guilabel
+>. </para
+></listitem>
+
+<listitem
+><para
+>Številke vrstic so lahko prikazane kot prekrivek besedila terminala. Številke vrstic so v rdeči barvi na desnem koncu vsake vrstice. Vrstice so zaporedno oštevilčene od prve (zgornje) vrstice v pomiku nazaj. Prikazovanje številk vrstic lahko konfigurirate na strani <guilabel
+>Napredno</guilabel
+> v pogovornem oknu <guilabel
+>Urejanje profila</guilabel
+>. Med tremi prikazanimi načini lahko krožite tudi z bližnjico na tipkovnici. Privzeta bližnjica je <keycombo
+>&Ctrl;&Alt;<keycap
+>\</keycap
+></keycombo
+> </para
+></listitem>
+</itemizedlist>
+</sect1>
+
+</chapter>
+
+<chapter id="commandreference">
+<title
+>Referenca ukazov</title>
+
+<sect1 id="menubar">
+<title
+>Menijska vrstica</title>
+
+<para
+>Menijska vrstica je na vrhu &konsole; okno. Če je menijska vrstica skrita, je <guimenuitem
+>Pokaži menijsko vrstico</guimenuitem
+> mogoče doseči z <mousebutton
+>desnim</mousebutton
+> klikom v oknu (če se v tem oknu ne izvaja celozaslonska aplikacija, kot je vi, minicom itd.). Privzeta bližnjica je navedena za vsakim elementom menija. </para>
+<para
+>Lahko pa uporabite tudi bližnjico <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+>, da prikažete ali skrijete menijsko vrstico. </para>
+<sect2 id="file-menu">
+<title
+>Datoteka Meni</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+><guimenuitem
+>Novo okno</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Odpre novo ločeno &konsole; okno s privzetim profilom</action>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+><guimenuitem
+>Nov zavihek</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Odpre nov zavihek s privzetim profilom</action>
+<note
+><para
+>Prvi profil v podmeniju bo vedno "Privzeto", ki je vgrajen profil. Vsi ostali profili bodo navedeni pod tem po abecednem vrstnem redu. Privzeti profil, ki ga je določil uporabnik, bo v krepkem tisku. </para
+></note>
+</para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Kloniraj zavihek</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Poskuša klonirati trenutni zavihek v nov zavihek</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Shrani izhod kot ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Shrani trenutni pomik nazaj kot besedilno ali html datoteko</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Natisni zaslon ...</guimenuitem 
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Natisni trenutni zaslon.</action
+> Izpis je privzeto prilagojen velikosti papirja, na katerega se tiska, s črno barvo besedila in brez ozadja. V pogovornem oknu za tiskanje lahko te možnosti spremenite na zavihku <guilabel
+>Izpisne možnosti</guilabel
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Odpri upravitelja datotek</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Odpre upravitelja datotek &kde; v trenutnem imeniku</action
+>. Privzeto je to <ulink url="help:/dolphin/index.html"
+>&dolphin;</ulink
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Zapri sejo</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Zapre trenutno sejo</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Zapri okno</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Zapusti &konsole;</action
+></para>
+<note
+><para
+>&konsole; prikaže potrditveno pogovorno okno, če je odprtih več kot ena seja ali če se v kateri koli seji izvajajo določeni programi. Ta pogovorna okna lahko onemogočite s klikom na potrditveno polje <guibutton
+>Ne sprašuj več</guibutton
+>. </para>
+</note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>Uredi Meni</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Kopiraj</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Kopira izbrano besedilo v odložišče</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>V</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+><guimenuitem
+>Prilepi</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Prilepi besedilo iz odložišča na mesto kazalca</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Uredi</guimenu
+><guimenuitem
+>Izberi vse</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Izbere celotno</action
+> besedilo v trenutnem oknu </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Uredi</guimenu
+><guisubmenu
+>Kopiraj vnos v</guisubmenu
+><guimenuitem
+>Vse zavihke v trenutnem oknu</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Omogoča, da se vnos iz trenutne seje hkrati pošlje vsem sejam v trenutnem oknu</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>.</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+><guisubmenu
+>Kopiraj vnos v</guisubmenu
+><guimenuitem
+>Izberi zavihke ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Omogoča, da se vnos iz trenutne seje hkrati pošlje sejam, ki jih izbere uporabnik</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>/</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+><guisubmenu
+>Kopiraj vnos v</guisubmenu
+><guimenuitem
+>Brez</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ustavi pošiljanje vnosa iz trenutne seje v druge seje</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Uredi</guimenu
+> <guisubmenu
+>Pošlji signal</guisubmenu
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Pošlji podani signal procesu lupine ali drugemu procesu, ki je bil zagnan ob zagonu nove seje</action
+>.</para
+><para
+>Trenutno dosegljivi signali so:</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><errorcode
+>STOP</errorcode
+></entry>
+<entry
+>ustavi proces</entry>
+</row>
+<row>
+<entry
+><errorcode
+>CONT</errorcode
+></entry>
+<entry
+>nadaljuj, če ustavljeno</entry>
+</row>
+<row>
+<entry
+><errorcode
+>HUP</errorcode
+></entry>
+<entry
+>zaznan hangup na nadzorovanem terminalu ali smrt nadzorovanega procesa</entry>
+</row>
+<row>
+<entry
+><errorcode
+>INT</errorcode
+></entry>
+<entry
+>prekinitev s tipkovnice</entry>
+</row>
+<row>
+<entry
+><errorcode
+>TERM</errorcode
+></entry>
+<entry
+>zaustavitveni signal</entry>
+</row>
+<row>
+<entry
+><errorcode
+>KILL</errorcode
+></entry>
+<entry
+>signal ubij (kill)</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR1</errorcode
+></entry>
+<entry
+>uporabniški signal 1</entry>
+</row>
+<row>
+<entry
+><errorcode
+>USR2</errorcode
+></entry>
+<entry
+>uporabniški signal 2</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para
+>O nadaljnih podrobnostih se pozanimajte v vašem sistemskem priročniku z uporabo ukaza <userinput
+><command
+>man</command
+><option
+>7 signal</option
+></userinput
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+><guimenuitem
+>Konfiguriraj nastavitve zavihka ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre pogovorno okno, v katerem lahko spremenite obliko imena, obliko naslova oddaljenega zavihka in barvo trenutnega zavihka</action
+> (<link linkend="configure-tab-settings-dialog"
+>več informacij</link
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+><guimenuitem
+>ZModem Upload ...</guimenuitem 
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre pogovorno okno za izbiro datoteke za nalaganje, če je nameščena potrebna programska oprema</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+><guimenuitem
+>Najdi ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre iskalno vrstico na dnu &konsole; okna </action
+></para>
+<para
+>To omogoča iskanje z upoštevanjem velikih in malih črk, naprej ali nazaj ter regularnih izrazov.</para>
+</listitem>
+</varlistentry>
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch
+-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+><keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+><guimenuitem
+>Najdi naslednje</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Premakne se na naslednji primer iskanja </action
+>. Če ima iskalna vrstica fokus, lahko uporabite bližnjico &Enter; prav tako.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Shift;<keycap
+>F3</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+><guimenuitem
+>Poišči prejšnje</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Premakne se na prejšnji primer iskanja </action
+>. Če ima iskalna vrstica fokus, lahko uporabite tudi bližnjico <keycombo action="simul"
+>&Shift;&Enter;</keycombo
+>.</para
+></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>Izgled Menija</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>(</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guisubmenu
+>Razdeljeni pogled</guisubmenu
+><guimenuitem
+>Razdeljen Pogled levo/desno</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Razdeli vse zavihke v levi in ​​desni pogled</action>
+</para
+><para
+>Vsak izhod v enem pogledu se podvoji v drugem pogledu. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>)</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guisubmenu
+>Razdeljeni pogled</guisubmenu
+><guimenuitem
+>Razdeljen Pogled zgoraj/spodaj</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Razdeli vse zavihke v zgornji in spodnji pogled</action>
+</para
+><para
+>Vsak izhod v enem pogledu se podvoji v drugem pogledu. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>]</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guisubmenu
+>Deljeni pogled</guisubmenu
+><guimenuitem 
+>Razširi pogled</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Poveča trenutni pogled</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>[</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guisubmenu
+>Deljeni pogled</guisubmenu
+><guimenuitem 
+>Zmanjšaj pogled</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Pomanjša trenutni pogled</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>E</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guisubmenu
+>Deljeni pogled</guisubmenu
+><guimenuitem 
+>Preklopi povečaj trenutni pogled</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Preklaplja trenutni pogled med trenutno velikostjo in največjo velikostjo</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>\</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guisubmenu
+>Deljeni pogled</guisubmenu
+><guimenuitem 
+>Enaka velikost za vse poglede</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Nastavi enako velikost za vse poglede</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Odstrani trenutni zavihek</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Odpre trenutni zavihek v ločenem oknu</action>
+</para
+><para
+>Zapiranje prejšnje &konsole; okno ne bo vplivalo na novo ustvarjeno okno. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Odstrani trenutni pogled</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Odpre trenutni razdeljeni pogled v ločenem oknu</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry id="save-layout">
+<term
+><menuchoice
+><guimenu
+>Pogled</guimenu
+><guimenuitem
+>Shrani postavitev zavihka v datoteko</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Omogoča vam, da shranite postavitev zavihkov trenutnega pogleda v specializirano &konsole; datoteko postavitve, ki jo lahko nato naložite, da obnovite eno od svojih najljubših postavitev.</action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Pogled</guimenu
+><guimenuitem
+>Naloži postavitev zavihka iz datoteke</guimenuitem
+></menuchoice>
+</term>
+<listitem
+><para
+><action
+>Omogoča vam, da naložite eno od vaših najljubših postavitev pogleda iz datoteke postavitve, ki je bila shranjena z uporabo <menuchoice
+><guimenu
+>Pogled</guimenu
+><guimenuitem
+>Shrani postavitev zavihka v datoteko</guimenuitem
+></menuchoice
+> element menija prej.</action
+> Privzete postavitve (2x2, 2x1 in 1x2) lahko naložite prek orodne vrstice. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ogled</guimenu
+><guimenuitem
+>Monitorji za enkratno uporabo</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Naslednji monitorji obvestijo samo enkrat in so nato onemogočeni. </action>
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Nadzor za poziv</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklopi spremljanje trenutnega zavihka za lupinski poziv.</action>
+</para
+><para
+>Ko se prikaže ukazna lupina, &konsole; prikaže obvestilo. Ta možnost je prikazana le, če je v lupini omogočena semantična integracija. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Monitor za tišino</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklopi spremljanje trenutnega zavihka zaradi pomanjkanja dejavnosti</action>
+</para
+><para
+>Privzeto se po 10 sekundah nedejavnosti na zavihku seje prikaže ikona z informacijami. Vrsto opozoril lahko spremenite v <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj obvestila</guimenuitem
+><guimenuitem
+>Tišina v nadzorovani seji</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Monitor za dejavnost</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklopi spremljanje aktivnosti trenutnega zavihka</action>
+</para
+><para
+>Ob kakršni koli dejavnosti se na zavihku seje prikaže ikona z informacijami. Vrsto opozoril lahko spremenite prek <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj obvestila</guimenuitem
+><guimenuitem
+>Dejavnost v nadzorovani seji</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Pogled</guimenu
+><guimenuitem
+>Monitor za zaključek procesa</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklopi spremljanje trenutnega zavihka za dokončanje procesa</action
+>. </para
+><para
+>Če je označeno, se po končanem trenutnem procesu &konsole; bo prikazal obvestilo <guilabel
+>Proces '<replaceable
+>ime procesa</replaceable
+>' se je končal v seji '<replaceable
+>ime seje</replaceable
+>'</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Pogled</guimenu
+><guimenuitem
+>Samo za branje</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklopi sejo v samo za branje: noben vnos ni sprejet, povleci in spusti je onemogočeno. </action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Povečaj pisavo</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Poveča velikost pisave besedila</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>0</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Ponastavi velikost pisave</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Ponastavite velikost pisave besedila na privzeto profil</action
+></para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Skrči pisavo</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Zmanjša velikost pisave besedila</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Pogled</guimenu
+> <guimenuitem
+>Nastavi kodiranje</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Nastavi kodiranje znakov</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Pogled</guimenu
+><guimenuitem
+>Počisti pomikanje nazaj</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Počisti besedilo v pomiku nazaj</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>K</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Pogled</guimenu
+><guimenuitem
+>Počisti pomik nazaj in ponastavi</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Počisti besedilo v trenutnem zavihku in se pomakne nazaj ter ponastavi terminal</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F11</keycap
+></shortcut
+><guimenu
+>Pogled</guimenu
+><guimenuitem
+>Celozaslonski način</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklopi &konsole; zapolni celoten zaslon</action
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>Meni z zaznamki</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Zaznamki</guimenu
+><guimenuitem
+>Dodaj zaznamek</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Doda trenutno lokacijo</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Zaznamki</guimenu
+><guimenuitem
+>Dodaj zavihke kot mapo ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Doda vse zavihke v mapo z zaznamki</action>
+</para
+><para
+>Odpre se pogovorno okno za ime mape z zaznamki. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Zaznamki</guimenu
+><guimenuitem
+>Nova mapa z zaznamki ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Doda novo mapo na seznam zaznamkov</action>
+</para
+><para
+>Odpre se pogovorno okno za ime mape z zaznamki. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Zaznamki</guimenu
+><guimenuitem
+>Urejanje zaznamkov</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre urejevalnik zaznamkov</action
+></para>
+<note
+><para
+>Za prikaz tega menijskega elementa mora biti nameščen program keditbookmarks.</para>
+<para
+>Za ročno dodajanje URL-jev lahko uporabite urejevalnik zaznamkov. Trenutno &konsole; sprejema naslednje: <itemizedlist mark="opencircle">
+<listitem
+><para
+>ssh://uporabnik@gostitelj:vrata</para
+></listitem>
+<listitem
+><para
+>telnet://uporabnik@gostitelj:vrata</para
+></listitem>
+</itemizedlist>
+</para
+></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="plugins-menu">
+<title
+>Meni vtičnikov</title>
+
+<para
+>Vsi nameščeni vtičniki bodo navedeni ali "Ni na voljo vtičnikov" </para>
+
+</sect2>
+
+
+<sect2 id="settings-menu">
+<title
+>Meni z nastavitvami</title>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Uredi trenutni profil ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre pogovorno okno za konfiguracijo trenutnega profila</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Preklopi profil </guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklop trenutnega profila na navedeni profil</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Upravljanje profilov ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre urejevalnik za upravljanje profilov</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Barvna shema oken</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Spremenite &konsole; &GUI; na določeno shemo</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>M</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Pokaži menijsko vrstico</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklopi, da je menijska vrstica vidna</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Prikazane orodne vrstice</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Omogoča spreminjanje vidnosti &konsole; orodne vrstice</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Prikaži vrstico stanja</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Preklopi prikaz vrstice stanja</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj jezik ... </guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre okno za izbiro prevoda vmesnika &konsole;.</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj bližnjice na tipkovnici ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre urejevalnik bližnjic na tipkovnici.</action
+> Več o konfiguraciji bližnjic lahko najdete v <ulink url="help:/fundamentals/shortcuts.html"
+>&kde; Osnove</ulink
+>.</para>
+
+<para
+>Poleg tega &konsole; ima nekaj posebnih bližnjic brez ustrezne menijske postavke:</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Bližnjica</entry>
+<entry
+>Opis</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Desna</keysym
+></keycombo
+></entry>
+<entry
+>Naslednji zavihek</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keysym
+>Leva</keysym
+></keycombo
+></entry>
+<entry
+>Prejšnji zavihek</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Leva</keysym
+></keycombo
+></entry>
+<entry
+>Premakni zavihek levo</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Alt;<keysym
+>Desna</keysym
+></keycombo
+></entry>
+<entry
+>Premakni zavihek desno</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;&Shift;<keysym
+>Ins</keysym
+></keycombo
+></entry>
+<entry
+>Prilepi izbor</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj orodne vrstice ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre <ulink url="help:/fundamentals/config.html#toolbars-items"
+>konfiguracijsko okno orodne vrstice</ulink
+></action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj obvestila ...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre urejevalnik obvestil</action
+></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj &konsole;...</guimenuitem
+></menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre &konsole; urejevalnik nastavitev</action
+></para>
+<para
+>To pogovorno okno ima možnosti, ki vplivajo na videz in obnašanje &konsole; okno. </para>
+<itemizedlist>
+    <listitem>
+        <para
+>Stran <guilabel
+>Splošno</guilabel
+> omogoča nastavitev vidnosti menijske vrstice, zapomni si &konsole; velikost okna, izvajanje vseh &konsole; okna v enem samem procesu, omogočanje menijskih pospeševalnikov, prikazovanje naslova okna v naslovni vrstici, odstranjevanje naslovne vrstice in okvirja okna ter ostrenje terminalov, ko miškin kazalec premaknete čeznje. Prav tako je mogoče konfigurirati občutljivost na velike in male črke pri iskanju, uporabo regularnega izraza, označevanje vseh ujemanj in smer iskanja (<guilabel
+>Iskanje nazaj</guilabel
+> je privzeto). Stran <guilabel
+>Splošno</guilabel
+> je tudi mesto, kjer lahko znova <guibutton
+>omogočite vsa sporočila »Ne sprašuj znova«</guibutton
+>, če so bila prej izklopljena. </para>
+    </listitem>
+    <listitem>
+        <para
+>Stran <guilabel
+>Profili</guilabel
+> je namenjena ustvarjanju in upravljanju <link linkend="profiles"
+>profilov</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>Na strani <guilabel
+>Vrstica z zavihki/razdelilniki</guilabel
+> lahko konfigurirate vidnost in postavitev vrstice z zavihki, definirate vedenje zavihkov in natančno prilagodite možnosti gumbov zavihkov. Možno je konfigurirati, če želite <guilabel
+>Prikazati gumb 'Nov zavihek'</guilabel
+> in <guilabel
+>Razširiti posamezne širine zavihkov na celotno okno</guilabel
+> ali konfigurirati <guilabel
+>Uporabi uporabniško definirano slogovno tabelo</guilabel 
+>. Zavihek <guilabel
+>Vedenje</guilabel
+> lahko uporabite za določitev mesta za nove zavihke (<guilabel
+>Na koncu</guilabel
+> ali <guilabel
+>Za trenutnim zavihkom</guilabel
+>) in zapiranje zavihkov z &MMB; kliknite. </para>
+        <para
+>Prav tako je mogoče konfigurirati vidnost razdeljenih glav (<guilabel
+>Po potrebi</guilabel
+> (privzeto), <guilabel
+>Vedno</guilabel
+> ali <guilabel
+>Nikoli</guilabel
+>) in določiti velikost ročaja za vlečenje za razdelitve (<guilabel
+>Majhne</guilabel
+> (privzeto), <guilabel
+>Srednje</guilabel
+> ali <guilabel
+>Velike</guilabel
+>) z uporabo zavihka <guilabel
+>Razdeli</guilabel
+> na tej konfiguracijski strani. </para>
+    </listitem>
+    <listitem>
+        <para
+>Stran <guilabel
+>Začasne datoteke</guilabel
+> se uporablja za določitev lokacije datoteke <link linkend="scrollback"
+>pomik nazaj</link
+>. </para>
+    </listitem>
+    <listitem>
+        <para
+>Stran <guilabel
+>Sličice</guilabel
+> lahko uporabite za določitev velikosti sličic in možnosti aktivacije (izberete lahko tipko za nadzor aktivacije med &Shift;, &Alt; in &Ctrl;). </para>
+        <note>
+            <para
+>Če želite uporabiti funkcijo sličic, ki prikazuje sličice slik v pojavnih oknih, ko s kazalcem miške lebdite nad slikovnimi elementi, omogočite podčrtanje datoteke za vaš trenutni profil: <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Uredi trenutni profil ...</guimenuitem
+><guimenuitem
+>Miška</guimenuitem
+><guimenuitem
+>Razno</guimenuitem
+><guimenuitem
+>Podčrtane datoteke</guimenuitem
+></menuchoice
+>. </para>
+        </note>
+    </listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title
+>Meni Pomoč</title>
+<para
+>&konsole; ima nekaj običajnih &kde; Elementi menija <guimenu
+>Pomoč</guimenu
+>, za več informacij preberite razdelek o <ulink url="help:/fundamentals/menus.html#menus-help"
+>meniju Pomoč</ulink
+> programa &kde; Osnove. </para
+><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
+</sect2>
+
+</sect1>
+
+<sect1 id="console-dialogs">
+<title
+>&konsole; Pogovorna okna</title>
+
+<sect2 id="configure-tab-settings-dialog">
+<title
+>Pogovorno okno za konfiguracijo nastavitev zavihka</title>
+
+<para
+>V tem pogovornem oknu lahko spremenite obliko imena, obliko naslova oddaljenega zavihka in barvo trenutnega zavihka. Pogovorno okno je mogoče prikazati prek menija, bližnjice <keycombo action="simul"
+>&Ctrl;&Alt;<keycap
+>S</keycap
+></keycombo
+> ali z dvojnim klikom na zavihek v vrstici z zavihki. Te spremembe so začasne in jih lahko naredite trajne z urejanjem trenutnega profila. </para>
+
+<para
+>&konsole; bo nadomestil te žetone za lokalne zavihke: </para>
+<itemizedlist mark="opencircle">
+<listitem
+><para
+>%n : ime programa</para
+></listitem>
+<listitem
+><para
+>%d : trenutni imenik (kratek)</para
+></listitem>
+<listitem
+><para
+>%D : trenutni imenik (dolg)</para
+></listitem>
+<listitem
+><para
+>%h : lokalni gostitelj (kratko)</para
+></listitem>
+<listitem
+><para
+>%u : uporabniško ime</para
+></listitem>
+<listitem
+><para
+>%B : Bournov pozivni znak uporabnika ($ = običajni uporabnik, # = superuporabnik)</para
+></listitem>
+<listitem
+><para
+>%w : naslov okna, ki ga nastavi lupina</para
+></listitem>
+<listitem
+><para
+>%# : številka seje</para
+></listitem>
+</itemizedlist>
+
+<para
+>&konsole; bo nadomestil te žetone za oddaljene zavihke: <itemizedlist mark="opencircle">
+    <listitem
+><para
+>%c : trenutni program</para
+></listitem>
+    <listitem
+><para
+>%h : oddaljeni gostitelj (kratko)</para
+></listitem>
+    <listitem
+><para
+>%H : oddaljeni gostitelj (dolgo)</para
+></listitem>
+    <listitem
+><para
+>%u : uporabniško ime</para
+></listitem>
+    <listitem
+><para
+>%U : uporabniško ime@ (če je podano)</para
+></listitem>
+    <listitem
+><para
+>%w : naslov okna, ki ga nastavi lupina</para
+></listitem>
+    <listitem
+><para
+>%# : številka seje</para
+></listitem>
+</itemizedlist>
+
+</para>
+<para
+>Primeri: <itemizedlist mark="opencircle">
+
+<listitem
+><para
+><userinput
+>%d : %n</userinput
+> z /usr/src kot trenutnim imenikom in izvajanjem <application
+>bash</application
+> bo prikazal <guibutton
+>src : bash</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%D : %n</userinput
+> z /usr/src kot trenutnim imenikom in izvajanjem <application
+>top</application
+> bo prikazal <guibutton
+>/usr/src : top</guibutton
+> </para
+></listitem>
+
+<listitem
+><para
+><userinput
+>%w (%#)</userinput
+> z ~ kot trenutnim imenikom in izvajanjem <application
+>vim</application
+> na prvem zavihku bo prikazal <guibutton
+>[Brez imena] (~) - VIM(1)</guibutton
+> </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect2>
+
+<sect2 id="copy-input-dialog">
+<title
+>Pogovorno okno za kopiranje vnosa</title>
+
+<para
+>Besedilo, vneseno v enem zavihku, je mogoče hkrati poslati na druge zavihke. To pogovorno okno vam omogoča, da izberete, kateri zavihki bodo prejeli ta vnos. Trenutni zavihek bo zatemnjen. </para>
+
+</sect2>
+
+<sect2 id="scrollback-options-dialog">
+<title
+>Prilagodi pogovorno okno za pomikanje nazaj</title>
+
+<para
+>Možnosti <link linkend="scrollback"
+>pomik nazaj</link
+> za velikost zgodovine lahko spremenite v tem pogovornem oknu. Vse spremembe so samo za trenutni zavihek in ne bodo shranjene v profilu. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title
+>Možnosti ukazne vrstice</title>
+
+<para
+>Ko &konsole; se zažene iz ukazne vrstice, lahko določite različne možnosti za spreminjanje njegovega delovanja.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--pomoč</option
+></term>
+<listitem
+><para
+><action
+>Seznam različnih možnosti</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--profil</option
+> <parameter
+>datoteka</parameter
+></term>
+<listitem
+><para
+><action
+>Zaženi &konsole;</action
+> z navedenim profilom namesto s privzetim profilom.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--razpored</option
+> <parameter
+>datoteka</parameter
+></term>
+<listitem
+><para
+><action
+>Zaženi &konsole;</action
+> s pomočjo <link linkend="save-layout"
+>shranjenega &JSON; datoteka postavitve</link
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--vgrajeni-profil</option
+></term>
+<listitem
+><para
+>Uporabite vgrajeni profil namesto trenutnega privzetega profila.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--delovnidir</option
+> <parameter
+>dir</parameter
+></term>
+<listitem
+><para
+><action
+>Odpri z</action
+> <parameter
+>dir</parameter
+> kot začetnim delovnim imenikom.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--drži, --nezapri</option
+></term>
+<listitem
+><para
+><action
+>Ne zapri</action
+> začetne seje samodejno, ko se konča. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--nov zavihek</option
+></term>
+<listitem
+><para
+><action
+>Ustvarite nov zavihek</action
+> v obstoječem oknu namesto ustvarjanja novega okna. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--tabs-from-file </option
+><parameter
+>datoteka</parameter
+></term>
+<listitem
+><para
+><action
+>Ustvari zavihke</action
+>, kot je določeno v dani konfiguracijski datoteki zavihkov. </para>
+<note
+><para
+>Datoteka ima en zavihek na vrstico v naslednji obliki:</para>
+<para
+>Vsaka vrstica določa zavihek za odpiranje z uporabo do 4 polj, ki določajo, kako naj se odpre. Polja so ločena z <userinput
+>;;</userinput
+>, imenu polja pa mora biti dodan <userinput
+>:</userinput
+>. Prazne vrstice ali vrstice z <userinput
+>#</userinput
+> na začetku so prezrte, tako da lahko za dodajanje komentarjev uporabite vrstico, ki se začne z <userinput
+>#</userinput
+>. </para>
+
+<simplelist>
+<member
+><userinput
+>naslov:</userinput
+> ime za ta zavihek, privzeti zavihek, če je prazen ali ni določen</member>
+<member
+><userinput
+>delovnidir:</userinput
+> delovni imenik, <filename class="directory"
+> ~</filename
+>, če je prazno ali ni navedeno</member>
+<member
+><userinput
+>profil:</userinput
+> &konsole; profil za uporabo, privzeti, če je prazen ali ni določen</member>
+<member
+><userinput
+>ukaz:</userinput
+> ukaz za zagon</member>
+</simplelist>
+<para
+>Vsaka vrstica mora vsebovati vsaj eno polje <userinput
+>ukaz</userinput
+> ali <userinput
+>profil</userinput
+>. </para>
+<para
+>Primer: <userinput
+>naslov: %n;; ukaz: /usr/bin/top ;; profil: Lupina</userinput
+></para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--način-ozadje</option
+></term>
+<listitem
+><para
+><action
+>Zaženite &konsole;</action
+> v ozadju in ga pomaknite v ospredje, ko pritisnete <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F12</keycap
+></keycombo
+> (privzeto). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--ločeno</option
+></term>
+<term
+><option
+>--nofork</option
+></term>
+<listitem
+><para
+><action
+>Zaženi</action
+> nov primerek &konsole; v ločenem postopku. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--prikaži-menijsko vrstico</option
+></term>
+<listitem
+><para
+><action
+>Prikaži</action
+> menijsko vrstico, ki preglasi privzeto vedenje. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--skrij-menijsko vrstico</option
+></term>
+<listitem
+><para
+><action
+>Skrij</action
+> menijsko vrstico in preglasi privzeto vedenje. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--prikaži-vrstica z zavihki</option
+></term>
+<listitem
+><para
+><action
+>Prikaži</action
+> vrstico z zavihki, ki preglasi privzeto vedenje. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--skrij-vrstica z zavihki</option
+></term>
+<listitem
+><para
+><action
+>Skrij</action
+> vrstico z zavihki in preglasi privzeto vedenje. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--celoten zaslon</option
+></term>
+<listitem
+><para
+><action
+>Zaženi &konsole; v celozaslonskem načinu</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--brez preglednosti</option
+></term>
+<listitem
+><para
+><action
+>Onemogoči</action
+> prosojna ozadja, tudi če jih sistem podpira. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--seznam-profilov</option
+></term>
+<listitem
+><para
+><action
+>Seznam</action
+> vseh razpoložljivih profilov. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--lastnosti-profila-seznama</option
+></term>
+<listitem>
+<para
+><action
+>Seznam</action
+> vseh možnih lastnosti z imenom in vrsto. Glej možnost <option
+>-p</option
+>. </para>
+<para
+>Za več informacij obiščite <ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html"
+>&konsole; Referenca za API</ulink
+>. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-p</option
+> <parameter
+>lastnost=vrednost</parameter
+></term>
+<listitem
+><para
+><action
+>Spremenite</action
+> vrednost lastnosti profila.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-e</option
+> <parameter
+>command</parameter
+></term>
+<listitem
+><para
+><action
+>Izvedi</action
+> <parameter
+>command</parameter
+> namesto običajne lupine.</para>
+<note
+><para
+>Ta možnost bo ujela vse naslednje argumente, posredovane &konsole;, in jih izvedla kot <parameter
+>command</parameter
+>. Zato je treba to možnost vedno uporabiti kot zadnjo možnost.</para
+></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>&konsole; sprejema tudi generične &Qt; in &kf5-full; možnosti, glejte man strani qt6options in kf6options.</para>
+
+</chapter>
+
+<chapter id="scripting">
+<title
+>Skriptiranje &konsole;</title>
+
+<para
+>&konsole; podpira številne metode, ki jih je mogoče uporabiti z &DBus;. </para>
+<para
+>Obstajata dva načina za uporabo &DBus; vmesnik: &Qt;'s &GUI; <application
+>qdbusviewer</application
+> in ukazna vrstica <application
+>qdbus</application
+>. </para>
+
+<para
+>Primeri: <itemizedlist mark='opencircle'>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> bo prikazal vse storitve, ki so na voljo. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole</option
+> bo prikazal &DBus; vmesnik za &konsole;. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Windows/1</option
+> bo prikazal metode za nadzor okna 1. </para>
+</listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_WINDOW</option
+> bo prikazal metode za nadzor trenutnega okna. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole /Sessions/1</option
+> bo prikazal metode za nadzor seje 1. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>org.kde.konsole $KONSOLE_DBUS_SESSION</option
+> bo prikazal metode za nadzor trenutne seje. </para
+></listitem>
+
+<listitem
+><para
+><prompt
+>&percnt;</prompt
+> <command
+>qdbus</command
+> <option
+>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option
+> bo prikazal metode za nadzor trenutne seje &konsole;. </para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Če kateri koli od zgornjih ukazov izpiše: Storitev 'org.kde.konsole' ne obstaja, spremenite <option
+>org.kde.konsole</option
+> v eno od naslednjih: <itemizedlist>
+
+<listitem
+><para
+><option
+>org.kde.konsole-`pidof -s konsole`</option
+> (izbral bo prvi pid) </para
+></listitem>
+<listitem
+><para
+><option
+>$KONSOLE_DBUS_SERVICE</option
+> (to lahko uporabite iz trenutne &konsole;) </para
+></listitem>
+<listitem
+><para>
+<option
+>izberite eno iz izhoda 'qdbus | grep konzola'</option>
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+<para
+>Za več informacij obiščite <ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction"
+>&DBus; vadnica</ulink
+>. </para>
+
+</chapter>
+
+<chapter id="key-bindings">
+<title
+>Vezave terminalskih tipk</title>
+
+<sect1>
+<title
+>Kako &konsole; Uporablja vezave tipk</title>
+
+<sect2 id="intro">
+<title
+>Uvod</title>
+<para
+>&konsole; uporablja datoteke *.keytab za prevajanje kombinacij tipk v kontrolne znake in ubežna zaporedja, ki so poslana lupini ali interaktivnim programom (običajno programi, ki uporabljajo medpomnilnik nadomestnega zaslona, &eg; <application
+>vim</application
+>, <application
+>manj</application
+>, <application
+>screen</application
+>), ki se izvaja v lupini.</para>
+
+<para
+>Uporabniki lahko prilagodijo nastavitve vezave tipk v &konsole; z uporabo urejevalnika vezav tipk. Kombinacijo tipk je mogoče konfigurirati tako, da terminalu pošlje določeno krmilno ali ubežno zaporedje.</para>
+
+<para
+>Urejevalnik vezav tipk lahko odprete z menijskim vnosom <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Urejanje trenutnega profila</guimenuitem
+></menuchoice
+> in pojdite na zavihek <guilabel
+>Tipkovnica</guilabel
+> . Tam so navedene sheme vezav tipk, ki so privzeto vključene v &konsole;.</para>
+</sect2>
+
+<sect2 id="table-fields">
+<title
+>Kombinacije tipk in načini</title>
+
+<para
+>Kombinacije tipk sledijo vzorcu: <programlisting
+>Ključni (+|-) načini</programlisting>
+</para>
+
+<para
+>na primer: <programlisting
+>Gor+Shift+AppScreen
+Dol+Shift-AppScreen
+Preslednica + Ctrl
+</programlisting>
+</para>
+
+<para
+>Imena ključev so definirana v datoteki glave qnamespace.h z odstranjeno predpono <quote
+>Qt::Ključ_</quote
+>, za seznam imen ključev preverite <ulink url="https://doc.qt.io /qt-5/qt.html#Key-enum"
+>Qt::Enumeracija ključev v &Qt; dokumentacija</ulink
+>.</para>
+
+<para
+><quote
+>+</quote
+> pred imenom načina pomeni, da je način <emphasis
+>nastavljen</emphasis
+>; za modifikacijsko tipko to pomeni, da je pritisnjena, medtem ko za vse druge načine pomeni, da je določen način v veljavi (&ie; aktiven). Na primer <quote
+>+Ctrl</quote
+> pomeni, da bo kombinacija tipk delovala le, če &Ctrl; tipka je pritisnjena.</para>
+
+<para
+><quote
+>-</quote
+> pred imenom načina pomeni, da je način <emphasis
+>ponastavljen</emphasis
+>; v bistvu je to nasprotno od postavljanja <quote
+>+</quote
+> pred ime načina, tako da za modifikacijsko tipko to pomeni, da tipka ni pritisnjena, medtem ko za vse druge načine pomeni, da določen način ni aktiven. Na primer <quote
+>-Ctrl</quote
+> pomeni, da bo kombinacija tipk delovala le, če &Ctrl; tipka <emphasis
+>ni</emphasis
+> pritisnjena.</para>
+
+<note>
+<para
+>Če ime načina ni prisotno v kombinaciji tipk, se njegovo stanje prezre.</para>
+</note>
+
+<para
+>Spodaj so navedeni podprti načini vezave tipk:</para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Alt, Ctrl, Shift</term>
+<listitem>
+<para
+>Enega ali več teh načinov je mogoče uporabiti v kombinaciji tipk; če je kateri koli od njih nastavljen, kombinacija tipk uporablja to tipko za spreminjanje; in obratno, če je ponastavljen</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>VsakModifikator</term>
+<listitem>
+<para
+>Če je ta način nastavljen, kombinacija tipk uporablja katero koli modifikacijsko tipko (katera koli od prejšnjih treh modifikacijskih tipk); in obratno, če je ponastavljen</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ansi</term>
+<listitem>
+<para
+>Če je ta način nastavljen, &konsole; bo poslal ubežna in kontrolna zaporedja ANSI</para>
+<para
+>Če je ta način ponastavljen &konsole; bo poslal VT52 ubežna in kontrolna zaporedja</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AplikacijskiZaslon</term>
+<listitem>
+<para
+>Če je ta način nastavljen, bo kombinacija tipk vplivala le na interaktivne programe, ki uporabljajo medpomnilnik nadomestnega zaslona</para>
+<para
+>Če je ta način ponastavljen, bo kombinacija tipk vplivala samo na terminal, ko ta uporablja medpomnilnik Normalni zaslon</para>
+
+<note>
+<para
+>&konsole; uporablja dva medpomnilnika zaslona:</para>
+<itemizedlist>
+<listitem>
+<para
+>Medpomnilnik Normalni zaslon (privzeto): omogoča, da se pomaknete nazaj, da si ogledate prejšnje vrstice izhoda, to je privzeti medpomnilnik, ki ga običajno uporabljate za izvajanje ukazov ... &etc;</para>
+</listitem>
+<listitem>
+<para
+>Medpomnilnik nadomestnega zaslona: terminal preklopi na ta medpomnilnik, ko zaženete interaktivni program (&eg; <application
+>manj</application
+>, <application
+>vim</application
+>, <application
+>zaslon</application
+>, <application
+> tmux</application
+>... &etc;)</para>
+</listitem>
+</itemizedlist>
+</note>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Tipkovnica</term>
+<listitem>
+<para
+>Če je ta način nastavljen, kombinacija tipk uporablja tipko na tipkovnici (številčnici). Ta način je uporaben za razlikovanje med tipkami na tipkovnici in tipkami na tipkovnici. Ko je na primer Zaklepanje številke <emphasis
+>vklopljen</emphasis
+>, lahko konfigurirate dve ločeni kombinaciji tipk, eno s tipko z oznako <quote
+>1</quote
+> na tipkovnici (običajno pod <keycap
+>F1</keycap
+> tipko), drugo pa s tipko <quote
+>1</quote
+> na tipkovnici. Isti koncept velja, ko je Zaklepanje številke <emphasis
+>izklopljen</emphasis
+> za tipke Konec, Dom, Kazalkine tipke ...itd na tipkovnici</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AppCursorKeys</term>
+<listitem>
+<para
+>Ta način izvaja VT100 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM"
+>Način kazalkinih tipk (DECCKM)</ulink
+>. Nadzira ubežna zaporedja, ki jih pošlje vsaka kazalkina tipka (<keycap
+>Gor</keycap
+>, <keycap
+>Dol</keycap
+>, <keycap
+>Desno</keycap
+>, <keycap
+>Levo</keycap
+>), odvisno od tega, ali ta način je nastavljen ali ponastavljen</para>
+<para
+>Privzeto &konsole; sledi vedenju XTerm pri obravnavanju tipk <keycap
+>Dom</keycap
+> in <keycap
+>Konec</keycap
+> kot kazalkinih tipk glede na DECCKM</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>AplikacijskaTipkovnica</term>
+<listitem>
+<para
+>Če je ta način nastavljen, bo kombinacija tipk delovala le, ko je tipkovnica v aplikacijskem načinu (DECKPAM)</para>
+<para
+>Če je ta način ponastavljen, bo kombinacija tipk delovala le, ko je tipkovnica v številskem načinu (DECKPNM)</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>NovaVrstica</term>
+<listitem>
+<para
+>Če je ta način nastavljen, bo tipka <keycap
+>Vrni</keycap
+> (Enter) na tipkovnici poslala kontrolna znaka za vrnitev v prvi vrstico "\r" in za novo vrstico "\n"</para>
+<para
+>Če je ta način ponastavljen, bo tipka <keycap
+>Vrni</keycap
+> poslala samo vrnitev v prvi vrstico "\r"</para>
+<para
+>Enako velja za tipko <keycap
+>Enter</keycap
+> na tipkovnici</para>
+<para
+>Ta način posnema <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM"
+>LNM – način podajanja vrstice/nove vrstice</ulink
+></para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Upoštevajte, da mora biti vsaka kombinacija ključa in načinov (nastavitev/ponastavitev) edinstvena. Upoštevajte na primer naslednji dve pravili:</para>
+
+<itemizedlist>
+<listitem
+><para
+>A+Shift : <quote
+>A</quote
+></para
+></listitem>
+<listitem
+><para
+>a : <quote
+>a</quote
+></para
+></listitem>
+</itemizedlist>
+<para
+>&konsole; <emphasis
+>ne</emphasis
+> bo sprejel pravila male črke <quote
+>a</quote
+>, morate temu pravilu dodati <quote
+>-Shift</quote
+>, da bo delovalo.</para>
+</sect2>
+
+<sect2 id="output-field">
+<title
+>Izhodno polje</title>
+
+<para
+>V polje Izhod lahko dodate ubežna zaporedja ali kontrolne znake, ki jih želite &konsole; za pošiljanje na terminal, ko pritisnete povezano kombinacijo tipk.</para>
+
+<para
+>Uporabite lahko tudi katero koli od naslednjih ključnih besed, od katerih ima vsaka poseben pomen v &konsole;:</para>
+
+<itemizedlist>
+<listitem
+><para
+>pomakniteSePoVrsticiNavzgor : pomaknite se za eno vrstico navzgor v medpomnilniku za pomikanje zgodovine lupine</para
+></listitem>
+<listitem
+><para
+>pomakniteSePoStraniNavzgor : pomaknite se za eno stran navzgor v medpomnilniku za pomikanje zgodovine lupine</para
+></listitem>
+<listitem
+><para
+>pomakniteSePoVrsticiNavzdol : pomaknite se za eno vrstico navzdol v medpomnilniku za pomikanje zgodovine lupine</para
+></listitem>
+<listitem
+><para
+>pomakniteSePoStraniNavzdol : pomaknite se za eno stran navzdol v medpomnilniku za pomikanje zgodovine lupine</para
+></listitem>
+<listitem
+><para
+>pomakniteSeNaVrh : pomaknite se navzgor do začetka medpomnilnika za pomikanje zgodovine lupine</para
+></listitem>
+<listitem
+><para
+>pomakniteSeNaDno : pomaknite se navzdol do konca medpomnilnika za pomikanje zgodovine lupine</para
+></listitem>
+</itemizedlist>
+
+<para
+>Uporabite lahko tudi nize s sintakso C-niza; uporabite lahko naslednja ubežna zaporedja:</para>
+
+<itemizedlist>
+<listitem
+><para
+>\E: Izhod</para
+></listitem>
+<listitem
+><para
+>\\ : poševnica nazaj</para
+></listitem>
+<listitem
+><para
+>\" : dvojni narekovaj</para
+></listitem>
+<listitem
+><para
+>\t : Zavihek</para
+></listitem>
+<listitem
+><para
+>\r : Carriage Return</para
+></listitem>
+<listitem
+><para
+>\n : Nova vrstica</para
+></listitem>
+<listitem
+><para
+>\b : Backspace</para
+></listitem>
+<listitem>
+<para
+>\xHH : kjer sta HH dve šestnajstiški števki</para>
+<tip>
+<para
+>To lahko uporabite za pošiljanje &ASCII; kontrolni znaki, &eg; <quote
+>\x00</quote
+>, ki je znak NUL</para>
+</tip>
+</listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="other-factors">
+<title
+>Drugi sistemski viri</title>
+<para
+>Obstajajo še drugi sistemski viri, ki lahko vplivajo na vezave tipk terminala:</para>
+<itemizedlist>
+<listitem>
+<para
+>Oglejte si zbirko podatkov <ulink url="man:terminfo(5)"
+>terminfo</ulink
+> ali <ulink url="man:termcap(5)"
+>termcap</ulink
+> za pričakovana ubežna zaporedja in krmilne znake, ki jih vsak kombinacija tipk naj bi poslala.</para>
+</listitem>
+<listitem>
+<para
+>Verjetno ima vaš sistem tudi druge podatkovne baze tipkovnic, ki morajo biti sinhronizirane (&eg; <ulink url="man:bash(1)"
+>/etc/inputrc in readline</ulink
+> za <application
+>BASH lupina</application
+>), saj vplivajo na operacije (interakcije), vezane na kombinacije tipk.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="further-reading">
+<title
+>Nadaljnje branje</title>
+<para
+>Za več informacij o ubežnih zaporedjih in kontrolnih znakih preverite naslednjo dokumentacijo:</para>
+<itemizedlist>
+<listitem>
+<para
+><ulink url="https://www.vt100.net/docs/vt100-ug/"
+>Navodila za uporabo VT100</ulink
+></para>
+</listitem>
+<listitem>
+<para
+><ulink url="https://vt100.net/docs/vt102-ug/"
+>Uporabniški priročnik VT102</ulink
+></para>
+</listitem>
+<listitem>
+<para
+>Obsežna in nepogrešljiva dokumentacija <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html"
+>XTerm Control Sequences</ulink
+></para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title
+>Uporaba slogovnega lista za vrstico z zavihki</title>
+<para
+>Privzeti slogovni list za vrstico z zavihki nastavi najmanjšo in največjo širino zavihkov. Uporabnik lahko ustvari datoteko <filename role="extension"
+>.css</filename
+> in ima &konsole; uporabite to kot slogovni list za vrstico z zavihki. V datoteki <filename role="extension"
+>.css</filename
+> je pripomoček za uporabo <userinput
+>QVrstica z zavihki::zavihek</userinput
+>. </para>
+<para
+>Za več informacij razmislite o branju <ulink url="https://doc.qt.io/qt-5/stylesheet.html"
+>&Qt; Slogovne datoteke</ulink
+> </para>
+
+<para
+>Primeri: </para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>Spremeni ozadje izbranega zavihka v svetlo sivo <programlisting
+>QVrstica z zavihki::zavihek:izbrano {
+     ozadje: #999999
+}
+</programlisting>
+</para
+></listitem>
+
+
+<listitem
+><para
+>Spremenite besedilo izbranega zavihka v rdeče <programlisting
+>QVrstica z zavihki::zavihek:izbrano {
+     barva: rdeča
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Vsi zavihki bodo široki vsaj 200 slikovnih pik <programlisting
+>QVrstica z zavihki::zavihek {
+     minimalna širina: 200 slikovnih pik
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Samo izbrani zavihek bo širok vsaj 200 slikovnih pik <programlisting
+>QVrstica z zavihki::zavihek::izbrano {
+     minimalna širina: 200 slikovnih pik
+}
+</programlisting>
+</para
+></listitem>
+
+<listitem
+><para
+>Vsak od teh je mogoče združiti v eno datoteko <programlisting
+>QVrstica z zavihki::zavihek::izbrano {
+     ozadje: #999999;
+     barva: rdeča;
+     najmanjša širina: 200 slikovnih pik;
+}
+QVrstica z zavihki::zavihek {
+     minimalna širina: 100 slikovnih pik
+}
+</programlisting>
+</para
+></listitem>
+
+
+</itemizedlist>
+</para>
+
+</chapter>
+
+<chapter id="faqtips">
+<title
+>Ali ste vedeli?, pogoste težave in več</title>
+
+<sect1 id="didyouknow">
+<title
+>Ali ste vedeli?</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem
+><para
+>S pritiskom &Ctrl; medtem ko bo izbira besedila povzročila, da se prelomi vrstic pri lepljenju pretvorijo v presledke. </para
+></listitem>
+
+<listitem
+><para
+>Če med izbiranjem besedila pritisnete tipki <keycombo action="simul"
+>&Ctrl;&Alt;</keycombo
+>, boste izbrali stolpce. </para
+></listitem>
+
+<listitem
+><para
+>Kombinacija <keycombo action="simul"
+>&Ctrl;<mousebutton
+>Kolesce</mousebutton
+></keycombo
+> bo povečala velikost besedila, kot v konquerorju in firefoxu. </para
+></listitem>
+
+<listitem
+><para
+>Ko program ovrednoti kateri koli gumb miške, pritisk &Shift; tipka bo omogočila prikaz pojavnega menija. </para
+></listitem>
+
+<listitem
+><para
+>Bližnjica <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F10</keycap
+></keycombo
+> bo aktivirala meni. </para
+></listitem>
+
+<listitem
+><para
+>Tipke <keycombo action="simul"
+>&Shift;<keycap
+>Insert</keycap
+></keycombo
+> vstavijo odložišče. </para
+></listitem>
+
+<listitem
+><para
+>Dvojni klik bo izbral celotno besedo. Z nadaljnjim držanjem gumba miške in premikanjem miške se izbor razširi. </para
+></listitem>
+
+<listitem
+><para
+>S trojnim klikom izberete celotno vrstico. Z nadaljnjim držanjem gumba miške in premikanjem miške se izbor razširi. </para
+></listitem>
+
+<listitem
+><para
+>V naslovu zavihka je skrita funkcija za oblikovalnik »%d«. Lahko rečete &konsole; da skrajšate ime imenika v prvi znak. Na primer, "/path/to/konsole/src" se lahko skrajša v "konsole/s". Če želite omogočiti in nadzorovati to skrito funkcijo, odprite <filename
+>konsolerc</filename
+> v <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> in dodajte naslednje vrstice:</para>
+
+<para
+><programlisting
+>[InfromacijeProcesa]
+ObičajnaDirImena=ime1,ime2,ime3...
+</programlisting>
+
+<note
+><para
+>Če uporabljate <application
+>Yakuake</application
+>, morate urediti <filename
+>yakuakerc</filename
+> v <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericConfigLocation</option
+></userinput
+> namesto tega.</para
+></note>
+
+</para
+></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="commonissues">
+<title
+>Pogoste težave</title>
+<itemizedlist>
+
+<listitem>
+<para
+>Nekatere pisave morda niso na voljo za uporabo v &konsole;, čeprav so na voljo v drugih aplikacijah. To ne pomeni, da je v &konsole; napaka. &konsole; zahteva enoprostorne pisave za najboljši vizualni rezultat, zato vpraša &Qt; za seznam samo enoprostornih pisav.</para>
+
+<para
+>Od različice 16.08 (avgust 2016), &konsole; je mogoče konfigurirati tako, da omogoča izbiro katere koli pisave z opozorilom, da prikaz morda ni pravilen.</para>
+</listitem>
+
+<listitem
+><para
+>Od KDE4 naprej vsi zavihki uporabljajo isti ID procesa. To ima stranski učinek, da če ima proces enega zavihka težave, se lahko težave pojavijo tudi pri vseh drugih zavihkih. </para>
+<para
+>To je najbolj opazno, ko ima ukaz, ki se poveže z zunanjo napravo ali sistemom (ssh, nfs), težave. </para
+></listitem>
+
+<listitem
+><para
+>&konsole; obravnava argumente za možnostjo <option
+>-e</option
+> kot en ukaz in ga izvaja neposredno, namesto da bi ga razčlenil in morda razdelil na podukaze za izvajanje. To se razlikuje od xterm. </para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem
+><para
+><command
+>konzola -e "ukaz1 ; ukaz2"</command
+> ne deluje </para
+></listitem>
+
+    <listitem
+><para
+><command
+>konzola -e $SHELL -c "ukaz1 ; ukaz2"</command
+> deluje </para
+></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
+<listitem
+><para
+>&konsole; ne zagotavlja priročnosti za zagon lupine za prijavo, ker razvijalcem ni všeč zamisel o izvajanju lupine za prijavo v emulatorju terminala. </para>
+<para
+>Seveda lahko uporabniki še vedno zaženejo lupino za prijavo v &konsole; če res potrebujejo. Uredite profil, ki je v uporabi, in spremenite njegov ukaz v obliko eksplicitnega zagona lupine za prijavo, na primer »<command
+>bash -l</command
+>« in »<command
+>zsh -l</command
+>«. </para>
+</listitem>
+
+<listitem
+><para
+>Možnost <option
+>--nov-zavihek</option
+> se včasih obnaša nenavadno. Lahko ustvari novo okno ali pa ustvari nov zavihek v drugi obstoječi &konsole; namesto trenutnega okna &konsole; okno. </para>
+<para
+>Ta vedenja se zdijo čudna, vendar niso nujno hrošči. Možnost <option
+>--nov-zavihek</option
+> poskuša ponovno uporabiti obstoječo &konsole; okno, vendar ne vsa &konsole; okna so za večkratno uporabo. Vse &konsole; okna, odprta prek &krunner; so za večkratno uporabo, večina &konsole; okna, odprta iz ukazne vrstice, niso. </para>
+</listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title
+>Zahvale in Copyright</title>
+
+<para
+>&konsole; trenutno vzdržuje &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Prejšnji &konsole; vzdrževalci vključujejo: &Robert.Knight; &Robert.Knight.mail; in &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+
+<para
+>Aplikacija &konsole; Copyright &copy; 1997-2008 &Lars.Doelle; &Lars.Doelle.mail;</para>
+
+<para
+>Ta dokument je prvotno napisal &Jonathan.Singer; &Jonathan.Singer.mail;</para>
+
+<para
+>Ta dokument je bil posodobljen za &kde; 4.x avtor &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>Ta dokument je bil posodobljen za &kde; 3.4 avtor &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para
+>&Mike.McBride; prvotno pretvorjen v DocBook <acronym
+>SGML</acronym
+> in &Lauri.Watts;</para>
+
+<para
+>Prevod: Andrej Vernekar <email
+>andrej.vernekar@moj.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="links">
+<title
+>Povezave</title>
+
+<para
+>Za več informacij obiščite te spletne strani:</para>
+<itemizedlist>
+<listitem
+><para
+><ulink url="https://userbase.kde.org/Konsole"
+>Domača stran &konsole; na &kde;'s UserBase</ulink
+>&nbsp;</para
+></listitem>
+<listitem
+><para
+><ulink url="https://konsole.kde.org/"
+>&konsole; domača stran</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel"
+>&konsole; poštni seznam</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://freebsd.kde.org/"
+>&kde; na FreeBSD</ulink
+></para
+></listitem>
+<listitem
+><para
+><ulink url="https://solaris.kde.org/"
+>&kde; na &Solaris;</ulink
+></para
+></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+
