@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-15 00:43+0000\n"
+"POT-Creation-Date: 2024-09-28 00:42+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -1224,55 +1224,55 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Ačiū daugeliui kitų.\n"
 
-#: MainWindow.cpp:327
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nauja kortelė"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:349
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klonuoti kortelę"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Naujas &langas"
 
-#: MainWindow.cpp:351
+#: MainWindow.cpp:363
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Uždaryti langą"
 
-#: MainWindow.cpp:356
+#: MainWindow.cpp:368
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Žymelės"
 
-#: MainWindow.cpp:383
+#: MainWindow.cpp:395
 #, fuzzy, kde-format
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "Nauja spalvų schema"
 
-#: MainWindow.cpp:395
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Tvarkyti profilius..."
 
-#: MainWindow.cpp:401
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktyvuoti meniu"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:419
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -1280,13 +1280,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Pastumti kortelę kairėn"
 
-#: MainWindow.cpp:416
+#: MainWindow.cpp:428
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:730 MainWindow.cpp:747
+#: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1297,25 +1297,25 @@ msgstr[1] "Yra veikiantys %1 procesai šiame lange. Ar tikrai norite išeiti?"
 msgstr[2] "Yra veikiančių %1 procesų šiame lange. Ar tikrai norite išeiti?"
 msgstr[3] "Yra veikiantis %1 procesas šiame lange. Ar tikrai norite išeiti?"
 
-#: MainWindow.cpp:736 MainWindow.cpp:753 MainWindow.cpp:767
+#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Patvirtinti uždarymą"
 
-#: MainWindow.cpp:737 MainWindow.cpp:754 MainWindow.cpp:768
+#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Užverti &langą"
 
-#: MainWindow.cpp:755 MainWindow.cpp:769
+#: MainWindow.cpp:761 MainWindow.cpp:775
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Užverti dabartinę kortelę"
 
-#: MainWindow.cpp:764
+#: MainWindow.cpp:770
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid ""
@@ -1326,37 +1326,37 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Yra veikiantis procesas šiame lange. Ar tikrai norite išeiti?"
 
-#: MainWindow.cpp:871 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiliai"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:894
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Bendri"
 
-#: MainWindow.cpp:900
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:916
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

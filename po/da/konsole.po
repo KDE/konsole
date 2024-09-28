@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-15 00:43+0000\n"
+"POT-Creation-Date: 2024-09-28 00:42+0000\n"
 "PO-Revision-Date: 2020-08-01 09:45+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -1187,56 +1187,56 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Tak til mange andre.\n"
 
-#: MainWindow.cpp:327
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "&Nyt faneblad"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:349
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Klon faneblad"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Nyt &vindue"
 
-#: MainWindow.cpp:351
+#: MainWindow.cpp:363
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Luk vindue"
 
-#: MainWindow.cpp:356
+#: MainWindow.cpp:368
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Bogmærker"
 
-#: MainWindow.cpp:383
+#: MainWindow.cpp:395
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "Nyt farvetema"
 
-#: MainWindow.cpp:395
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Håndtér profiler..."
 
-#: MainWindow.cpp:401
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Aktivér menu"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:419
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move tab to the left"
@@ -1244,13 +1244,13 @@ msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Flyt faneblad til venstre"
 
-#: MainWindow.cpp:416
+#: MainWindow.cpp:428
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:730 MainWindow.cpp:747
+#: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1261,61 +1261,61 @@ msgstr[0] ""
 msgstr[1] ""
 "Der er %1 processer der kører i dette vindue. Vil du afslutte alligevel?"
 
-#: MainWindow.cpp:736 MainWindow.cpp:753 MainWindow.cpp:767
+#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Bekræft lukning"
 
-#: MainWindow.cpp:737 MainWindow.cpp:754 MainWindow.cpp:768
+#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Luk &vindue"
 
-#: MainWindow.cpp:755 MainWindow.cpp:769
+#: MainWindow.cpp:761 MainWindow.cpp:775
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Luk nuværende fane&blad"
 
-#: MainWindow.cpp:764
+#: MainWindow.cpp:770
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Der er %1 åbne terminaler i dette vindue. Vil du afslutte alligevel?"
 
-#: MainWindow.cpp:871 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiler"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:894
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Generelt"
 
-#: MainWindow.cpp:900
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Fanebladslinje / opdelere"
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Midlertidige filer"
 
-#: MainWindow.cpp:916
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

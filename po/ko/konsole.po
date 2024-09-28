@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-15 00:43+0000\n"
+"POT-Creation-Date: 2024-09-28 00:42+0000\n"
 "PO-Revision-Date: 2024-08-19 23:50+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1169,66 +1169,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "이 외의 많은 사람들에게 감사드립니다.\n"
 
-#: MainWindow.cpp:327
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "새 탭(&N)"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:349
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "탭 복제(&C)"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "새 창(&W)"
 
-#: MainWindow.cpp:351
+#: MainWindow.cpp:363
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "창 닫기"
 
-#: MainWindow.cpp:356
+#: MainWindow.cpp:368
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "책갈피(&B)"
 
-#: MainWindow.cpp:383
+#: MainWindow.cpp:395
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "창 색 구성표(&W)"
 
-#: MainWindow.cpp:395
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "프로필 관리..."
 
-#: MainWindow.cpp:401
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "메뉴 활성화"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "탭 레이아웃 저장..."
 
-#: MainWindow.cpp:416
+#: MainWindow.cpp:428
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr "탭 레이아웃 불러오기..."
 
-#: MainWindow.cpp:730 MainWindow.cpp:747
+#: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1236,61 +1236,61 @@ msgid_plural ""
 "There are %1 processes running in this window. Do you still want to quit?"
 msgstr[0] "현재 창에 프로세스 %1개가 실행 중입니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:736 MainWindow.cpp:753 MainWindow.cpp:767
+#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "닫기 확인"
 
-#: MainWindow.cpp:737 MainWindow.cpp:754 MainWindow.cpp:768
+#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "창 닫기(&W)"
 
-#: MainWindow.cpp:755 MainWindow.cpp:769
+#: MainWindow.cpp:761 MainWindow.cpp:775
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "현재 탭 닫기(&T)"
 
-#: MainWindow.cpp:764
+#: MainWindow.cpp:770
 #, kde-format
 msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "현재 창에 터미널 %1개가 열려 있습니다. 종료하시겠습니까?"
 
-#: MainWindow.cpp:871 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "프로필"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:894
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "일반"
 
-#: MainWindow.cpp:900
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "메모리"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "탭 표시줄/구분자"
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "임시 파일"
 
-#: MainWindow.cpp:916
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

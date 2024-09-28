@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-15 00:43+0000\n"
+"POT-Creation-Date: 2024-09-28 00:42+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -1214,69 +1214,69 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "Хвала многима другима.\n"
 
-#: MainWindow.cpp:327
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "Нови &језичак"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:349
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "&Умножи језичак"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "Нови &прозор"
 
-#: MainWindow.cpp:351
+#: MainWindow.cpp:363
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "Затвори прозор"
 
-#: MainWindow.cpp:356
+#: MainWindow.cpp:368
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&Обиљеживачи"
 
-#: MainWindow.cpp:383
+#: MainWindow.cpp:395
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "New Color Scheme"
 msgid "&Window Color Scheme"
 msgstr "Нова шема боја"
 
-#: MainWindow.cpp:395
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "Управљај профилима..."
 
 # >> @action:inmenu
-#: MainWindow.cpp:401
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "Активирај мени"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:416
+#: MainWindow.cpp:428
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:730 MainWindow.cpp:747
+#: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1287,26 +1287,26 @@ msgstr[1] "У овом прозору раде %1 процеса, желите �
 msgstr[2] "У овом прозору ради %1 процеса, желите ли заиста да га напустите?"
 msgstr[3] "У овом прозору ради један процес, желите ли заиста да га напустите?"
 
-#: MainWindow.cpp:736 MainWindow.cpp:753 MainWindow.cpp:767
+#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "Потврда затварања"
 
-#: MainWindow.cpp:737 MainWindow.cpp:754 MainWindow.cpp:768
+#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "Затвори &прозор"
 
-#: MainWindow.cpp:755 MainWindow.cpp:769
+#: MainWindow.cpp:761 MainWindow.cpp:775
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "Затвори текући &језичак"
 
 # >! Plurals.
-#: MainWindow.cpp:764
+#: MainWindow.cpp:770
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "There are %1 open tabs in this window. Do you still want to quit?"
@@ -1317,37 +1317,37 @@ msgstr ""
 "напустите?|/|У овом прозору има %1 $[множ ^1 'отворен језичак' 'отворена "
 "језичка' 'отворених језичака'], желите ли заиста да га напустите?"
 
-#: MainWindow.cpp:871 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Профили"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:894
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Опште"
 
-#: MainWindow.cpp:900
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:916
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-15 00:43+0000\n"
+"POT-Creation-Date: 2024-09-28 00:42+0000\n"
 "PO-Revision-Date: 2024-01-19 07:50-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -1165,66 +1165,66 @@ msgctxt "@info:credit"
 msgid "Thanks to many others.\n"
 msgstr "ਕਈ ਹੋਰਾਂ ਦਾ ਧੰਨਵਾਦ ਹੈ।\n"
 
-#: MainWindow.cpp:327
+#: MainWindow.cpp:339
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "ਨਵੀਂ ਟੈਬ(&N)"
 
-#: MainWindow.cpp:337
+#: MainWindow.cpp:349
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Clone Tab"
 msgstr "ਟੈਬ ਕਲੋਨ ਕਰੋ(&C)"
 
-#: MainWindow.cpp:344
+#: MainWindow.cpp:356
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
 msgstr "ਨਵੀਂ ਵਿੰਡੋ(&W)"
 
-#: MainWindow.cpp:351
+#: MainWindow.cpp:363
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Window"
 msgstr "ਵਿੰਡੋ ਬੰਦ ਕਰੋ"
 
-#: MainWindow.cpp:356
+#: MainWindow.cpp:368
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "ਬੁੱਕਮਾਰਕ(&B)"
 
-#: MainWindow.cpp:383
+#: MainWindow.cpp:395
 #, kde-format
 msgid "&Window Color Scheme"
 msgstr "ਵਿੰਡੋ ਰੰਗ ਸਕੀਮ(&W)"
 
-#: MainWindow.cpp:395
+#: MainWindow.cpp:407
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
 msgstr "....ਪਰੋਫਾਇਲ ਇੰਤਜ਼ਾਮ"
 
-#: MainWindow.cpp:401
+#: MainWindow.cpp:413
 #, kde-format
 msgctxt "@item"
 msgid "Activate Menu"
 msgstr "ਮੇਨੂ ਐਕਟੀਵੇਟ ਕਰੋ"
 
-#: MainWindow.cpp:407
+#: MainWindow.cpp:419
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "ਟੈਬ ਖਾਕੇ ਨੂੰ ਸੰਭਾਲੋ..."
 
-#: MainWindow.cpp:416
+#: MainWindow.cpp:428
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
 msgstr ""
 
-#: MainWindow.cpp:730 MainWindow.cpp:747
+#: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "There is a process running in this window. Do you still want to quit?"
@@ -1233,25 +1233,25 @@ msgid_plural ""
 msgstr[0] "ਇਸ ਵਿੰਡੋ ਵਿੱਚ ਇੱਕ ਪਰੋਸੈਸ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 msgstr[1] "ਇਸ ਵਿੰਡੋ ਵਿੱਚ %1 ਪਰੋਸੈਸ ਚੱਲ ਰਹੇ ਹਨ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: MainWindow.cpp:736 MainWindow.cpp:753 MainWindow.cpp:767
+#: MainWindow.cpp:742 MainWindow.cpp:759 MainWindow.cpp:773
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
 msgstr "ਬੰਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ"
 
-#: MainWindow.cpp:737 MainWindow.cpp:754 MainWindow.cpp:768
+#: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
 msgctxt "@action:button"
 msgid "Close &Window"
 msgstr "ਵਿੰਡੋ ਬੰਦ ਕਰੋ(&W)"
 
-#: MainWindow.cpp:755 MainWindow.cpp:769
+#: MainWindow.cpp:761 MainWindow.cpp:775
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Current &Tab"
 msgstr "ਮੌਜੂਦਾ ਟੈਬ ਬੰਦ ਕਰੋ(&T)"
 
-#: MainWindow.cpp:764
+#: MainWindow.cpp:770
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid ""
@@ -1262,37 +1262,37 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "ਇਸ ਵਿੰਡੋ ਵਿੱਚ ਇੱਕ ਪਰੋਸੈਸ ਚੱਲ ਰਿਹਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: MainWindow.cpp:871 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:297
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "ਪਰੋਫਾਇਲ"
 
-#: MainWindow.cpp:888
+#: MainWindow.cpp:894
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ਆਮ"
 
-#: MainWindow.cpp:900
+#: MainWindow.cpp:906
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:912
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:911
+#: MainWindow.cpp:917
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:916
+#: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
