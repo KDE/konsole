@@ -1110,6 +1110,9 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 return;
             }
             int c = params[j].toInt();
+            if (c > 256 || c < 0) {
+                return;
+            }
             if (params[j + 1] == QLatin1String("?")) {
                 QColor color = colorTable[c];
                 if (!color.isValid()) {
