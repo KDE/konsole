@@ -1157,8 +1157,8 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 return;
             }
             int c = params[j].toInt();
-            if (c > 256 || c < 0) {
-                return;
+            if (c > 255 || c < 0) {
+                continue;
             }
             if (params[j + 1] == QLatin1String("?")) {
                 QColor color = colorTable[c];
@@ -1178,6 +1178,9 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         QStringList params = value.split(QLatin1Char(';'));
         for (int k = 0; k < params.length(); k++) {
             int c = params[k].toInt();
+            if (c > 255 || c < 0) {
+                continue;
+            }
             colorTable[c] = QColor();
         }
     }
