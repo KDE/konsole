@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-28 00:42+0000\n"
+"POT-Creation-Date: 2024-10-08 00:42+0000\n"
 "PO-Revision-Date: 2024-07-22 22:10+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -2115,8 +2115,8 @@ msgstr "Þögn í '%1' (seta '%2')"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1198
-#: Vt102Emulation.cpp:1453
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1201
+#: Vt102Emulation.cpp:1456
 #, kde-format
 msgid "Show session"
 msgstr "Sýna setu"
@@ -3669,7 +3669,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Hlaða framsetningu flipa"
 
-#: Vt102Emulation.cpp:2811
+#: Vt102Emulation.cpp:2814
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

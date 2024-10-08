@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-28 00:42+0000\n"
+"POT-Creation-Date: 2024-10-08 00:42+0000\n"
 "PO-Revision-Date: 2024-08-18 16:44+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -2101,8 +2101,8 @@ msgstr "'%1' என்பதில் அமைதி (அமர்வு '%2')"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1198
-#: Vt102Emulation.cpp:1453
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1201
+#: Vt102Emulation.cpp:1456
 #, kde-format
 msgid "Show session"
 msgstr "அமர்வைக் காட்டு"
@@ -3657,7 +3657,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "கீற்றுகளின் தளவமைப்பை ஏற்றுல்"
 
-#: Vt102Emulation.cpp:2811
+#: Vt102Emulation.cpp:2814
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-28 00:42+0000\n"
+"POT-Creation-Date: 2024-10-08 00:42+0000\n"
 "PO-Revision-Date: 2023-04-29 12:15+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -2124,8 +2124,8 @@ msgstr "Keine Aktivität in „%1“ (Sitzung „%2“)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1198
-#: Vt102Emulation.cpp:1453
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1201
+#: Vt102Emulation.cpp:1456
 #, kde-format
 msgid "Show session"
 msgstr "Sitzung anzeigen"
@@ -3708,7 +3708,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Unterfenster-Layout laden"
 
-#: Vt102Emulation.cpp:2811
+#: Vt102Emulation.cpp:2814
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
