@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-08 02:34+0000\n"
+"POT-Creation-Date: 2024-10-08 02:32+0000\n"
 "PO-Revision-Date: 2024-07-18 08:15+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -2081,7 +2081,7 @@ msgstr "שקט אצל ‚%1’ (הפעלה ‚%2’)"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1150
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1153
 #, kde-format
 msgid "Show session"
 msgstr "הצגת הפעלה"
@@ -3605,7 +3605,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "טעינת פריסת לשוניות"
 
-#: Vt102Emulation.cpp:2472
+#: Vt102Emulation.cpp:2475
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
