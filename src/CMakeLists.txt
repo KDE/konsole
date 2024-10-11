@@ -158,7 +158,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         RenameTabDialog.cpp
                         SSHProcessInfo.cpp
                         SaveHistoryTask.cpp
-						SaveHistoryAutoTask.cpp
+                        SaveHistoryAutoTask.cpp
                         Screen.cpp
                         ScreenWindow.cpp
                         ScrollState.cpp
