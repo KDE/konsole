@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-08 00:42+0000\n"
-"PO-Revision-Date: 2024-07-22 22:10+0000\n"
+"POT-Creation-Date: 2024-10-11 00:43+0000\n"
+"PO-Revision-Date: 2024-10-10 14:41+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
@@ -66,7 +66,7 @@ msgstr "Skoða"
 #: ../desktop/sessionui.rc:64
 #, kde-format
 msgid "Split View"
-msgstr "Kljúfa glugga"
+msgstr "Kljúfa skeljaglugga"
 
 #. i18n: ectx: Menu (settings)
 #: ../desktop/konsoleui.rc:41
@@ -617,7 +617,7 @@ msgstr "Óbreytt"
 #: colorscheme/ColorSchemeEditor.ui:205
 #, kde-format
 msgid "Wallpaper flip:"
-msgstr "Snúningur veggfóðurs:"
+msgstr "Umsnúa veggfóðri:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
@@ -1380,7 +1380,7 @@ msgstr "Skipun"
 #: plugins/QuickCommands/quickcommandswidget.cpp:333
 #, kde-format
 msgid "Warnings"
-msgstr "Aðvaranir"
+msgstr "Viðvaranir"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnRun)
 #: plugins/QuickCommands/qcwidget.ui:236
@@ -1422,7 +1422,7 @@ msgstr "Sýna flýtiaðgang"
 #, kde-format
 msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
-"Engar flýtiskipanir fundust. Þú getur bætt slíku við í Viðbætur -> "
+"Engar flýtiskipanir fundust. Þú getur bætt þeim við í Viðbætur -> "
 "Flýtiskipanir"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:107
@@ -1445,7 +1445,7 @@ msgstr "Tvítekið atriði er til staðar"
 #, kde-format
 msgid "Please fix all the warnings before trying to run this script"
 msgstr ""
-"Lagaðu endilega allar aðvaranir áður en reynt er að keyra þessa skriftu"
+"Lagaðu endilega allar viðvaranir áður en reynt er að keyra þessa skriftu"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:215
 #, kde-format
@@ -1455,7 +1455,7 @@ msgstr "Það eru villur í skriftunni. Viltu í alvörunni keyra hana?"
 #: plugins/QuickCommands/quickcommandswidget.cpp:216
 #, kde-format
 msgid "Shell Errors"
-msgstr "Villur í skel"
+msgstr "Skeljavillur"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:217
 #, kde-format
@@ -1506,7 +1506,7 @@ msgstr "Eyða"
 #: plugins/QuickCommands/quickcommandswidget.cpp:335
 #, kde-format
 msgid "Warnings (*)"
-msgstr "Aðvaranir (*)"
+msgstr "Viðvaranir (*)"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:46
 #, kde-format
@@ -1559,7 +1559,7 @@ msgstr "Sýna flýtiaðgang fyrir SSH-aðgerðir"
 #, kde-format
 msgid "No saved SSH config found. You can add one on Plugins -> SSH Manager"
 msgstr ""
-"Engar vistaðar SSH-uppsetningar fundust. Þú getur bætt slíku við í Viðbætur -"
+"Engar vistaðar SSH-uppsetningar fundust. Þú getur bætt þeim við í Viðbætur -"
 "> SSH-stýring"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:147
@@ -1577,7 +1577,7 @@ msgstr "SSH-færslur"
 msgid ""
 "Could not get the process name, assume that we can't request a connection"
 msgstr ""
-"Tókst ekki að sækja vinnsluheiti, gerðu ráð fyrir að við getum ekki beðið um "
+"Gat ekki sótt vinnsluheiti, gera má ráð fyrir að við getum ekki beðið um "
 "tengingu"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:182
@@ -1590,7 +1590,8 @@ msgstr "Villa við að gefa út SSH-skipun"
 #, kde-format
 msgid ""
 "Can't issue SSH command outside the shell application (eg, bash, zsh, sh)"
-msgstr "Get ekki gefið SSH-skipanir utan við skeljaforrit (t.d. bash, zsh, sh)"
+msgstr ""
+"Get ekki gefið SSH-skipanir utan við skeljaforritið (t.d. bash, zsh, sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:80
@@ -1685,7 +1686,7 @@ msgstr "Þú getur ekki eytt færslu sem var bætt við sjálfkrafa."
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
 #, kde-format
 msgid "Delete selected entry"
-msgstr "Breyta valinni færslu"
+msgstr "Eyða valinni færslu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
@@ -1703,7 +1704,7 @@ msgstr "Sýna færslur sem samsvara ekki síunni"
 #: plugins/SSHManager/sshwidget.ui:57
 #, kde-format
 msgid "Change profile on connect/disconnect"
-msgstr "Breyta prófíl við tengingu/aftengingu"
+msgstr "Skipta um prófíl við tengingu/aftengingu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
@@ -1746,13 +1747,13 @@ msgstr "Vélarheiti þjónsins"
 #: plugins/SSHManager/sshwidget.ui:116
 #, kde-format
 msgid "Port"
-msgstr "Gátt"
+msgstr "Tengi"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:123
 #, kde-format
 msgid "The port of the server, 22 is the default for ssh connections"
-msgstr "Gátt þjónsins, 22 er sjálfgefið fyrir ssh-tengingar"
+msgstr "Tengi þjónsins, 22 er sjálfgefið fyrir ssh-tengingar"
 
 #. i18n: ectx: property (text), widget (QLineEdit, port)
 #: plugins/SSHManager/sshwidget.ui:126
@@ -1846,7 +1847,7 @@ msgstr "Eyða völdum SSH-færslum"
 #: plugins/SSHManager/sshwidget.ui:297
 #, kde-format
 msgid "Edit selected entry"
-msgstr "Eyða valinni færslu"
+msgstr "Breyta valinni færslu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, btnAdd)
 #: plugins/SSHManager/sshwidget.ui:307
@@ -1976,13 +1977,13 @@ msgstr "Stöðva sjálfvirka vistun þar sem verið er að skipta um skjá."
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
-"Sjálfvirkri vistunarskrá var breytt utan frá, sem kemur í veg fyrir frekari "
+"Sjálfvirkri vistunarskrá var breytt utan frá sem kemur í veg fyrir frekari "
 "sjálfvirka vistun."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr "Mistókst að uppfæra stöðu sjálfvirkrar vistunar á breytingar á úttaki."
+msgstr "Mistókst að uppfæra sjálfvirka vistunarstöðu á breytingum á úttaki."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2115,8 +2116,8 @@ msgstr "Þögn í '%1' (seta '%2')"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1201
-#: Vt102Emulation.cpp:1456
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
+#: Vt102Emulation.cpp:1459
 #, kde-format
 msgid "Show session"
 msgstr "Sýna setu"
@@ -2129,11 +2130,11 @@ msgid ""
 "methods can be changed to internal use only by re-compiling Konsole. <p>This "
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
-"Verið var að nota D-Bus aðferðirnar sendText/runCommand.  Það er viss "
+"D-Bus aðferðirnar sendText/runCommand voru notaðar rétt í þessu.  Það er "
 "öryggisáhætta fólgin í því að leyfa þessum aðferðum að vera opnar öllum. Ef "
 "þess er óskað er hægt að breyta þessu þannig að aðferðirnar séu einungis "
 "notaðar í innri vinnslu með því að vistþýða Konsole aftur. <p>Þessi viðvörun "
-"verður aðeins birt einu sinni fyrir þetta tilvik af Konsole.</p>"
+"verður aðeins birt einu sinni fyrir þetta Konsole tilvik.</p>"
 
 #: session/Session.cpp:1075
 #, kde-format
@@ -2149,7 +2150,7 @@ msgstr "Forritið '%1' hrundi."
 #: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
-msgstr "Forritið '%1' hætti með stöðuna %2."
+msgstr "Forritið '%1' stöðvaðist með stöðuna %2."
 
 #: session/Session.cpp:1617
 #, kde-format
@@ -2204,22 +2205,22 @@ msgstr "Afrita"
 #: session/SessionController.cpp:672
 #, kde-format
 msgid "Split View Left-Right"
-msgstr "Kljúfa sýn lóðrétt"
+msgstr "Kljúfa skeljaglugga lóðrétt"
 
 #: session/SessionController.cpp:677
 #, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Kljúfa sýn lárétt"
+msgstr "Kljúfa skeljaglugga lárétt"
 
 #: session/SessionController.cpp:681
 #, kde-format
 msgid "Copy except prompts"
-msgstr "Afrita að kvaðningum undanskildum"
+msgstr "Afrita nema kvaðningar"
 
 #: session/SessionController.cpp:687
 #, kde-format
 msgid "Copy user input"
-msgstr "Afrita inntak notanda"
+msgstr "Afrita notandainntak"
 
 #: session/SessionController.cpp:693
 #, kde-format
@@ -2372,7 +2373,7 @@ msgstr "Vakta &þögn"
 #: session/SessionController.cpp:909
 #, kde-format
 msgid "Monitor for Process Finishing"
-msgstr "Vakta eftir &vinnslu sem er að ljúka"
+msgstr "Vakta að &vinnslu ljúki"
 
 #: session/SessionController.cpp:916
 #, kde-format
@@ -2633,7 +2634,7 @@ msgstr "Áherslulita allar samsvaranir"
 #: settings/GeneralSettings.ui:163 settings/konsole.kcfg:65
 #, kde-format
 msgid "Sets whether the search is case sensitive"
-msgstr "Stillir hvort leit sé háð há-/lágstöfum"
+msgstr "Velur hvort leit sé háð há-/lágstöfum"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchCaseSensitive)
 #: settings/GeneralSettings.ui:166
@@ -2778,13 +2779,13 @@ msgstr "Stillir hvort texti sem passar verði áherslulitaður"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr "Leita stöðvast í stað þess að halda áfram hringinn"
+msgstr "Leit stöðvast í stað þess að halda áfram hringinn"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
 #, kde-format
 msgid "Control whether child cgroups are created for individual tabs"
-msgstr "Stjórnar því hvort cgroups séu búin til fyrir staka flipa"
+msgstr "Stjórnar því hvort undir-cgroups séu búin til fyrir einstaka flipa"
 
 #. i18n: ectx: label, entry (MemoryLimitValue), group (MemorySettings)
 #: settings/konsole.kcfg:94
@@ -2840,13 +2841,13 @@ msgstr "Leyfa miðjusmell á opna flipa til að loka þeim"
 #: settings/konsole.kcfg:155
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr "Stjórnar sýnileika hnappsins 'Nýr flipi' á flipastikunni"
+msgstr "Stjórna sýnileika hnappsins \"Nýr flipi\" á flipastikunni"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
-msgstr "Stjórna því hvar hnappurinn 'Loka flipa' birtist"
+msgstr "Stjórna því hvar hnappurinn \"Loka flipa\" birtist"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
 #: settings/konsole.kcfg:168
@@ -2864,13 +2865,13 @@ msgstr "Víkka út breidd flipanna"
 #: settings/konsole.kcfg:192
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
-msgstr "Nota möppu fyrir allt kerfið undir afturrakningarskrár"
+msgstr "Nota kerfismöppu fyrir afturrakningarskrár"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
 #: settings/konsole.kcfg:196
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
-msgstr "Nota möppu notanda undir afturrakningarskrár"
+msgstr "Nota möppu hvers notanda fyrir afturrakningarskrár"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
 #: settings/konsole.kcfg:200
@@ -2902,13 +2903,13 @@ msgid ""
 "might cause greater slowdowns during high memory consumption and specifying\n"
 "excessively low values might still cause Konsole to be killed."
 msgstr ""
-"Breytingar ganga í gegn eftir endurræsingu. Ef þetta er virkjað veldurstöðug "
-"minnisnotkun Konsole,\n"
-"fari hún yfir tiltekið gildi, því að systemd-oomd lokar flipunum sem "
-"innihalda\n"
-"vinnslurnar sem krefjast svo mikils minnis. Athugaðu: ef þetta\n"
-"er virkjað gæti það valdið meiri hægagangi þegar mikið minni er notað og\n"
-"ef of lágt gildi er tilgreint getur það valdið því að Konsole sé drepið."
+"Breytingar ganga í gegn eftir endurræsingu. Ef minnisnotkun Konsole fer yfir "
+"tiltekið gildi og þetta\n"
+"er virkt mun 'systemd-oomd' loka flipunum sem innihalda vinnslurnar sem\n"
+"krefjast mikils minnis. Athugaðu: ef þetta er virkjað gæti það\n"
+"valdið meiri hægagangi þegar mikið minni er notað og ef of lágt gildi er "
+"tilgreint\n"
+"getur það valdið því að Konsole sé drepið."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
@@ -3006,7 +3007,7 @@ msgstr "Sýna:"
 #: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
-msgstr "Þegar þess er þörf"
+msgstr "Þegar þess þarf"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
 #: settings/TabBarSettings.ui:73
@@ -3048,7 +3049,7 @@ msgstr "Vinstra megin við skjáhermisvæðið"
 #: settings/TabBarSettings.ui:149
 #, kde-format
 msgid "To the &right of terminal area"
-msgstr "Hæg&ra megin skjáhermisvæðið"
+msgstr "Hæg&ra megin við skjáhermisvæðið"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3093,7 +3094,7 @@ msgstr "Sýna hnappinn 'Nýr flipi'"
 #: settings/TabBarSettings.ui:248
 #, kde-format
 msgid "Expand individual tab widths to full window"
-msgstr "Breikka hvern flipa svo þeir nái yfir allan gluggann"
+msgstr "Víkka út hvern flipa svo þeir nái yfir allan gluggann"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:255
@@ -3143,13 +3144,13 @@ msgstr "Loka flipa með miðjusmelli"
 #: settings/TabBarSettings.ui:397
 #, kde-format
 msgid "Splits"
-msgstr "Klofnir gluggar"
+msgstr "Kljúfar"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/TabBarSettings.ui:403
 #, kde-format
 msgid "Show Header:"
-msgstr "Sýna hausa:"
+msgstr "Sýna haus:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
 #: settings/TabBarSettings.ui:410
@@ -3242,20 +3243,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Til að nota þennan eiginleika þarf að virkja <span "
-"style=\" font-weight:600;\"> Mús-&gt;Ýmislegt-&gt;Undirstrika </span><span "
-"style=\" font-weight:600;\">skrár</span> í prófílstillingunum þínum</p></"
-"body></html>"
+"style=\" font-weight:600;\"> Mús-&gt;Ýmislegt-&gt;Undirstrika skrár</span> í "
+"prófílstillingunum þínum</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3313,7 +3309,7 @@ msgstr "Staðfesta límingu"
 #: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
-msgstr "End Of Text/Interrupt (lok texta/rof): getur hætt í núverandi vinnslu"
+msgstr "End Of Text/Interrupt (lok texta/rof): gæti hætt í núverandi vinnslu"
 
 #: terminalDisplay/TerminalDisplay.cpp:2285
 #, kde-format
@@ -3338,7 +3334,8 @@ msgstr "Device Control Three/XOFF (tækisstýring þrjú/XOFF): stöðvar úttak
 #: terminalDisplay/TerminalDisplay.cpp:2289
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
-msgstr "Substitute/Suspend (skipta út/stöðva): getur stöðvað núverandi vinnslu"
+msgstr ""
+"Substitute/Suspend (skipta út/í bið): getur sett núverandi vinnslu í bið"
 
 #: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
@@ -3393,7 +3390,7 @@ msgid ""
 "b> to resume.</qt>"
 msgstr ""
 "<qt>Úttakið var <a href=\"https://en.wikipedia.org/wiki/Software_flow_control"
-"\">stöðvað</a> með því að ýta á Ctrl+S. Ýttu á <b>Ctrl+Q</b> til að halda "
+"\">sett í bið</a> með því að ýta á Ctrl+S. Ýttu á <b>Ctrl+Q</b> til að halda "
 "áfram.</qt>"
 
 #: terminalDisplay/TerminalDisplay.cpp:2606
@@ -3409,7 +3406,7 @@ msgstr "Breyta &möppu í"
 #: terminalDisplay/TerminalDisplay.cpp:3034
 #, kde-format
 msgid "&Paste Location"
-msgstr "&Staðsetning límingar"
+msgstr "&Límingarstaður"
 
 #: ViewManager.cpp:120
 #, kde-format
@@ -3433,7 +3430,7 @@ msgstr "Kljúfa skeljaglugga lárétt"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Kljúfa skeljaglugga sjálfkrafa"
+msgstr "Kljúfa skeljaglugga sjálfvirkt"
 
 #: ViewManager.cpp:153
 #, kde-format
@@ -3517,7 +3514,7 @@ msgstr "Fókus á skeljaglugga fyrir ofan"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Focus Below Terminal"
-msgstr "Fócus á skeljaglugga fyrir neðan"
+msgstr "Fókus á skeljaglugga fyrir neðan"
 
 #: ViewManager.cpp:270
 #, kde-format
@@ -3535,7 +3532,7 @@ msgstr "Fókus á skeljaglugga til hægri"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Last Tab"
-msgstr "Skipta yfir á síðasta flipa"
+msgstr "Skipta á síðasta flipa"
 
 #: ViewManager.cpp:287
 #, kde-format
@@ -3553,7 +3550,7 @@ msgstr "Víxla á milli tveggja flipa"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
-msgstr "Síðast notuðu flipar (öfugt)"
+msgstr "Síðast notuðu flipar (afturábak)"
 
 #: ViewManager.cpp:302
 #, kde-format
@@ -3595,13 +3592,13 @@ msgstr "Færa flipa til vinstri"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Setup semantic integration (bash)"
-msgstr "Setja upp merkingarsamþættingu (bash)"
+msgstr "Setja upp merkingarlega virkni (bash)"
 
 #: ViewManager.cpp:340
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle semantic hints display"
-msgstr "Víxla birtingu merkingarvísbendinga af/á"
+msgstr "Víxla af/á birtingu vísbendinga út frá merkingu"
 
 #: ViewManager.cpp:346
 #, kde-format
@@ -3613,18 +3610,18 @@ msgstr "Víxla birtingu línunúmera"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Equal size to all views"
-msgstr "Jöfn stærð allra skeljaglugga"
+msgstr "Gera alla skeljaglugga jafnstóra"
 
 #: ViewManager.cpp:363
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Switch to Tab %1"
-msgstr "Skipta yfir á flipa %1"
+msgstr "Skipta á flipa %1"
 
 #: ViewManager.cpp:576
 #, kde-format
 msgid "Semantic hints "
-msgstr "Merkingarvísbendingar "
+msgstr "Vísbendingar út frá merkingu "
 
 #: ViewManager.cpp:592
 #, kde-format
@@ -3635,7 +3632,7 @@ msgstr "Línunúmer "
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Vista framsetningu flipa"
+msgstr "Vista flipaframsetningu"
 
 #: ViewManager.cpp:1178 ViewManager.cpp:1265
 #, kde-format
@@ -3667,15 +3664,15 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Hlaða framsetningu flipa"
+msgstr "Hlaða inn flipaframsetningu"
 
-#: Vt102Emulation.cpp:2814
+#: Vt102Emulation.cpp:2817
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
 "presses into characters to send to the terminal is missing."
 msgstr ""
-"Enginn lyklaborðsþýðandi tiltækir. Upplýsingarnar sem þarf til að umbreyta "
+"Enginn lyklaborðsþýðandi tiltækur. Upplýsingarnar sem þarf til að umbreyta "
 "lyklaborðsvirkni í stafi og senda þá í skjáherminn eru ekki til staðar."
 
 #. i18n: ectx: property (text), widget (QLabel, urlHintsLabel)
@@ -3723,7 +3720,7 @@ msgstr "Ýmislegt:"
 #: widgets/EditProfileAdvancedPage.ui:164
 #, kde-format
 msgid "Number URL hints in reverse, starting from the bottom"
-msgstr "Númera slóðavísbendingar öfugt, byrja neðan frá og upp"
+msgstr "Númera slóðavísbendingar afturábak, byrja neðst"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableReverseUrlHints)
 #: widgets/EditProfileAdvancedPage.ui:167
@@ -3735,7 +3732,7 @@ msgstr "Snúa við númerasetningu slóðavísbendinga"
 #: widgets/EditProfileAdvancedPage.ui:180
 #, kde-format
 msgid "Allow terminal programs to create blinking sections of text"
-msgstr "Leyfa skeljaforritum að setja upp textahluta sem blikka"
+msgstr "Leyfa skeljaforritum að láta texta blikka"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingTextButton)
 #: widgets/EditProfileAdvancedPage.ui:183
@@ -3747,7 +3744,7 @@ msgstr "Leyfa blikkandi texta"
 #: widgets/EditProfileAdvancedPage.ui:196
 #, kde-format
 msgid "Allow the output to be suspended by pressing Ctrl+S"
-msgstr "Leyfa að stöðva úttak með því að ýta á Ctrl+S"
+msgstr "Leyfa að setja úttak í bið með því að ýta á Ctrl+S"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableFlowControlButton)
 #: widgets/EditProfileAdvancedPage.ui:199
@@ -3860,7 +3857,7 @@ msgstr "Endurstilla valkosti valda litastefsins á sjálfgefin gildi"
 #: widgets/EditProfileKeyboardPage.ui:93
 #, kde-format
 msgid "Defaults"
-msgstr "Sjálfgildi"
+msgstr "Sjálfgefið"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: widgets/EditProfileAppearancePage.ui:135
@@ -3906,13 +3903,14 @@ msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
 msgstr ""
-"Nota valda letrið fyrir unicode Braille-staftákn í stað innbyggða kóðans"
+"Nota valda letrið fyrir unicode blindraletur (Braille) í stað innbyggða "
+"kóðans"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
 #, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Nota unicode Braille-staftákn sem letrið inniheldur"
+msgstr "Nota unicode blindraletur (Braille) sem letrið inniheldur"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -3931,21 +3929,21 @@ msgstr "Lögun:"
 #, kde-format
 msgctxt "A solid rectangular"
 msgid "Block"
-msgstr "Blokk"
+msgstr "Kubbur"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeIBeam)
 #: widgets/EditProfileAppearancePage.ui:249
 #, kde-format
 msgctxt "A vertical line on the left edge"
 msgid "I-Beam"
-msgstr "I-biti"
+msgstr "I-lögun"
 
 #. i18n: ectx: property (text), widget (QRadioButton, cursorShapeUnderline)
 #: widgets/EditProfileAppearancePage.ui:259
 #, kde-format
 msgctxt "A hortizonal line on the bottom edge"
 msgid "Underline"
-msgstr "Undirstrikun"
+msgstr "Undirstrik"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/EditProfileAppearancePage.ui:291
@@ -3958,7 +3956,7 @@ msgstr "Litur:"
 #: widgets/EditProfileAppearancePage.ui:307
 #, kde-format
 msgid "Set the cursor to match the color of the character underneath it."
-msgstr "Láta lit bendilsins passa við lit stafsins undir honum."
+msgstr "Láta lit bendilsins samsvara lit stafsins undir honum."
 
 #. i18n: ectx: property (text), widget (QRadioButton, autoCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:310
@@ -3970,13 +3968,13 @@ msgstr "Passa við núverandi staf"
 #: widgets/EditProfileAppearancePage.ui:326
 #, kde-format
 msgid "Use a custom, fixed color for the cursor"
-msgstr "Nota sérstilltan, fastan lit á bendilinn"
+msgstr "Nota sérsniðinn fastan lit á bendilinn"
 
 #. i18n: ectx: property (text), widget (QRadioButton, customCursorColorButton)
 #: widgets/EditProfileAppearancePage.ui:329
 #, kde-format
 msgid "Custom cursor color"
-msgstr "Sérstilltur litur bendils"
+msgstr "Sérsniðinn litur bendils"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorColorLabel)
 #: widgets/EditProfileAppearancePage.ui:360
@@ -3988,7 +3986,7 @@ msgstr "Bendill:"
 #: widgets/EditProfileAppearancePage.ui:373
 #, kde-format
 msgid "Select the color used to draw the cursor"
-msgstr "Veldu litinn sem á að nota til að teikna bendilinn"
+msgstr "Veldu litinn sem á að nota á bendilinn"
 
 #. i18n: ectx: property (text), widget (QLabel, customCursorTextColorLabel)
 #: widgets/EditProfileAppearancePage.ui:393
@@ -4000,19 +3998,19 @@ msgstr "Texti:"
 #: widgets/EditProfileAppearancePage.ui:406
 #, kde-format
 msgid "Select the color used to draw the character underneath the cursor"
-msgstr "Veldu litinn sem á að nota til að teikna stafinn undir bendlinum"
+msgstr "Veldu litinn sem á að nota á stafinn undir bendlinum"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileAppearancePage.ui:431
 #, kde-format
 msgid "Blinking:"
-msgstr "Blikkandi:"
+msgstr "Blikk:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBlinkingCursorButton)
 #: widgets/EditProfileAppearancePage.ui:447
 #, kde-format
 msgid "Make the cursor blink regularly"
-msgstr "Láta bendilinn blikka reglubundið"
+msgstr "Láta bendilinn blikka reglulega"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBlinkingCursorButton)
 #. i18n: ectx: property (text), widget (QCheckBox, alignToCenterButton)
@@ -4043,8 +4041,8 @@ msgid ""
 "Show terminal size in columns and lines in the center of window after "
 "resizing"
 msgstr ""
-"Sýna stærð skjáhermis í dálkum og línum í miðju gluggans eftir að stærðinni "
-"hefur verið breytt"
+"Sýna stærð skjáhermis í dálkum og línum í miðju gluggans þegar stærðinni er "
+"breytt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, showTerminalSizeHintButton)
 #: widgets/EditProfileAppearancePage.ui:494
@@ -4075,7 +4073,7 @@ msgstr "Litur:"
 #: widgets/EditProfileAppearancePage.ui:559
 #, kde-format
 msgid "Select the color used to draw the border"
-msgstr "Veldu litinn sem á að nota til að teikna rammann"
+msgstr "Veldu litinn sem á að nota á rammann"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: widgets/EditProfileAppearancePage.ui:581
@@ -4127,7 +4125,7 @@ msgstr "Spássíur:"
 #: widgets/EditProfileAppearancePage.ui:720
 #, kde-format
 msgid "Align to center:"
-msgstr "Miðjujafna:"
+msgstr "Stilla við miðju:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dimWhenInactiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:743
@@ -4157,7 +4155,7 @@ msgstr "Rammi"
 #: widgets/EditProfileAppearancePage.ui:798
 #, kde-format
 msgid "Display Vertical line at column:"
-msgstr "Birta lóðrétta línu við dálk:"
+msgstr "Sýna lóðrétta línu við dálk:"
 
 #. i18n: ectx: property (toolTip), widget (QWidget, CTLtab)
 #: widgets/EditProfileAppearancePage.ui:843
@@ -4175,7 +4173,7 @@ msgstr "Framsetning tengiskriftar"
 #: widgets/EditProfileAppearancePage.ui:861
 #, kde-format
 msgid "Enable word mode text rendering"
-msgstr "Virkja orðasnið í textabirtingu"
+msgstr "Nota orðasnið í textabirtingu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, wordMode)
 #: widgets/EditProfileAppearancePage.ui:864
@@ -4197,7 +4195,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:880
 #, kde-format
 msgid "Use the same attributes for whole word"
-msgstr "Nota sömu eigindi fyrir orð sem heild"
+msgstr "Nota sömu eigindi fyrir heilt orð"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, wordModeAscii)
 #: widgets/EditProfileAppearancePage.ui:893
@@ -4250,21 +4248,21 @@ msgstr "Tvíátta textabirting"
 #, kde-format
 msgid "Lines are always LTR, rather than determined by first strong character"
 msgstr ""
-"Línustefna er alltaf vinstri til hægri en ekki skilgreind af fyrsta ráðandi "
-"staf"
+"Línustefna er alltaf frá vinstri til hægri en ekki skilgreind af fyrsta "
+"ráðandi staf"
 
 #. i18n: ectx: property (text), widget (QCheckBox, bidiLineLTR)
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "force LTR line direction"
-msgstr "þvinga línustefnu vinstri til hægri"
+msgstr "þvinga línustefnu frá vinstri til hægri"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:983
 #, kde-format
 msgid "Treat table drawing characters as strong LTR."
 msgstr ""
-"Líta á stafi fyrir töfluteiknun sem ráðandi fyrir vinstri til hægri stefnu."
+"Láta stafi fyrir töfluteiknun vera ráðandi fyrir vinstri til hægri-stefnu."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:986
@@ -4276,13 +4274,13 @@ msgstr "Töflustafir hnekkja tvíátta sniði"
 #: widgets/EditProfileAppearancePage.ui:999
 #, kde-format
 msgid "Ignore wcwidth of problematic characters"
-msgstr "Hunsa wcwidth á vandræðastöfum"
+msgstr "Hunsa 'wcwidth' á vandræðastöfum"
 
 #. i18n: ectx: property (text), widget (QCheckBox, ignoreWcWidth)
 #: widgets/EditProfileAppearancePage.ui:1002
 #, kde-format
 msgid "Override wcwidth"
-msgstr "Gefa öðru en wcwidth vægi"
+msgstr "Hnekkja 'wcwidth'"
 
 #: widgets/EditProfileDialog.cpp:66
 #, kde-format
@@ -4517,7 +4515,7 @@ msgstr ""
 #: widgets/EditProfileDialog.cpp:1952
 #, kde-format
 msgid "Text Editor Custom Command"
-msgstr "Sérstillt skipun fyrir textaritil"
+msgstr "Sérsniðin skipun fyrir textaritil"
 
 #. i18n: ectx: attribute (title), widget (QWidget, general)
 #: widgets/EditProfileGeneralPage.ui:42
@@ -4529,7 +4527,7 @@ msgstr "Almennar stillingar"
 #: widgets/EditProfileGeneralPage.ui:66
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
-msgstr "Veldu táknið sem er birt á flipum í þessum prófíl"
+msgstr "Veldu táknið sem birtist á flipum sem nota prófílinn"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:84
@@ -4582,7 +4580,7 @@ msgstr "Upp&hafsmappa:"
 #, kde-format
 msgid ""
 "The initial working directory for new terminal sessions using this profile"
-msgstr "Upphafsmappan fyrir nýja skjáhermissetu þegar þessi prófíll er notaður"
+msgstr "Upphafsmappan fyrir nýja skjáhermissetu sem notar þennan prófíl"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:176
@@ -4594,13 +4592,13 @@ msgstr "/home/username"
 #: widgets/EditProfileGeneralPage.ui:183
 #, kde-format
 msgid "Choose the initial directory"
-msgstr "Velja upphafsmöppu"
+msgstr "Veldu upphafsmöppu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startInSameDirButton)
 #: widgets/EditProfileGeneralPage.ui:193
 #, kde-format
 msgid "Start in same directory as current session"
-msgstr "Byrja í sömu möppu og núverandi seta notar"
+msgstr "Byrja í sömu möppu og núverandi seta"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: widgets/EditProfileGeneralPage.ui:206
@@ -4643,13 +4641,13 @@ msgstr "Bjöllus&nið skjáhermis:"
 #: widgets/EditProfileGeneralPage.ui:377
 #, kde-format
 msgid "Semantic Integration"
-msgstr "Merkingarsamþætting"
+msgstr "Merkingarleg virkni"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticUpDown)
 #: widgets/EditProfileGeneralPage.ui:383
 #, kde-format
 msgid "Up/Down Arrows emulation"
-msgstr "Herming á upp-/niðurörvum"
+msgstr "Hermt eftir upp-/niðurörvum"
 
 #. i18n: ectx: property (text), widget (QCheckBox, semanticInputClick)
 #: widgets/EditProfileGeneralPage.ui:390
@@ -4661,7 +4659,7 @@ msgstr "Músarsmellur í inntakslínu færir bendilinn"
 #: widgets/EditProfileGeneralPage.ui:403
 #, kde-format
 msgid "Semantic hints:"
-msgstr "Merkingarvísbendingar:"
+msgstr "Vísbendingar út frá merkingu:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, semanticHintsNever)
 #. i18n: ectx: property (text), widget (QRadioButton, errorBarsNever)
@@ -4706,25 +4704,25 @@ msgstr "Alltaf"
 #: widgets/EditProfileGeneralPage.ui:449
 #, kde-format
 msgid "Red error bars:"
-msgstr "Rauðar villustikur:"
+msgstr "Rauð strik við villur:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_30)
 #: widgets/EditProfileGeneralPage.ui:495
 #, kde-format
 msgid "Red error background:"
-msgstr "Rauður villubakgrunnur:"
+msgstr "Rauður bakgrunnur á villu:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_40)
 #: widgets/EditProfileGeneralPage.ui:541
 #, kde-format
 msgid "Alternating bars:"
-msgstr "Víxlstikur:"
+msgstr "Strik til skiptis:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_50)
 #: widgets/EditProfileGeneralPage.ui:587
 #, kde-format
 msgid "Alternating background:"
-msgstr "Víxlbakgrunnur:"
+msgstr "Bakgrunnur til skiptis:"
 
 #. i18n: ectx: property (text), widget (QLabel, note)
 #: widgets/EditProfileKeyboardPage.ui:17
@@ -4787,7 +4785,7 @@ msgid ""
 "Characters which are considered part of a word when double-clicking to "
 "select whole words in the terminal."
 msgstr ""
-"Stafir sem litið er á sem hluta orðs þegar tvísmellt er á það til að velja "
+"Stafir sem teljast vera hluti orðs þegar tvísmellt er á það til að velja "
 "allt orðið í skjáhermi"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
@@ -4812,7 +4810,7 @@ msgstr "&Alla línuna"
 #: widgets/EditProfileMousePage.ui:114
 #, kde-format
 msgid "From mouse position to the end of &line"
-msgstr "Frá músarstöðu út að enda &línu"
+msgstr "Frá músarbendli og út að enda &línu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
@@ -4830,7 +4828,7 @@ msgstr "Af klippispjaldi"
 #: widgets/EditProfileMousePage.ui:160
 #, kde-format
 msgid "From selection"
-msgstr "Val"
+msgstr "Það sem er valið"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/EditProfileMousePage.ui:186
@@ -4854,7 +4852,7 @@ msgstr "Afrita við val"
 #: widgets/EditProfileMousePage.ui:206
 #, kde-format
 msgid "Copy text as HTML (including formatting, font faces, colors... etc)"
-msgstr "Afrita texta sem HTML (þ.m.t. snið, leturgerðir, liti... o.s.frv.)"
+msgstr "Afrita texta sem HTML (þ.m.t. forsnið, leturgerðir, liti... o.s.frv.)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, copyTextAsHTMLButton)
 #: widgets/EditProfileMousePage.ui:209
@@ -4866,25 +4864,25 @@ msgstr "Afrita texta sem HTML"
 #: widgets/EditProfileMousePage.ui:216
 #, kde-format
 msgid "Trim leading spaces in selected text, useful in some instances"
-msgstr "Klippa burt autt bil fremst í völdum texta, gagnlegt í sumum tilvikum"
+msgstr "Klippa burt auð bil fremst í völdum texta, gagnlegt í sumum tilvikum"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimLeadingSpacesButton)
 #: widgets/EditProfileMousePage.ui:219
 #, kde-format
 msgid "Trim leading spaces"
-msgstr "Klippa burt autt bil fremst"
+msgstr "Klippa burt auð bil fremst"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:226
 #, kde-format
 msgid "Trim trailing spaces in selected text, useful in some instances"
-msgstr "Klippa burt autt bil aftast í völdum texta, gagnlegt í sumum tilvikum"
+msgstr "Klippa burt auð bil aftast í völdum texta, gagnlegt í sumum tilvikum"
 
 #. i18n: ectx: property (text), widget (QCheckBox, trimTrailingSpacesButton)
 #: widgets/EditProfileMousePage.ui:229
 #, kde-format
 msgid "Trim trailing spaces"
-msgstr "Klippa burt autt bil aftast"
+msgstr "Klippa burt auð bil aftast"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, underlineLinksButton)
 #: widgets/EditProfileMousePage.ui:266
@@ -4909,8 +4907,8 @@ msgid ""
 "Text recognized as a file will be underlined when hovered by the mouse "
 "pointer."
 msgstr ""
-"Texti sem er greindur sem skrárheiti verður undirstrikaður þegar "
-"músarbendillinn sveimar yfir."
+"Texti sem er skrárheiti verður undirstrikaður þegar músarbendillinn sveimar "
+"yfir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, underlineFilesButton)
 #: widgets/EditProfileMousePage.ui:279
@@ -4941,7 +4939,7 @@ msgid ""
 "Text recognized as a file, link or an email address can be opened by direct "
 "mouse click."
 msgstr ""
-"Texta sem greindur er sem skrá, tengill eða netfang er hægt að opna með "
+"Texta, sem greindur er sem skrá, tengill eða netfang, er hægt að opna með "
 "músarsmelli."
 
 #. i18n: ectx: property (text), widget (QCheckBox, openLinksByDirectClickButton)
@@ -4954,7 +4952,7 @@ msgstr "Opna skrár/tengla með músarsmelli"
 #: widgets/EditProfileMousePage.ui:349
 #, kde-format
 msgid "Allow escape sequences for links"
-msgstr "Leyfa escape-raðir fyrir tengla"
+msgstr "Leyfa lausnarrunur fyrir tengla"
 
 #. i18n: ectx: property (text), widget (QLabel, allowLinkEscapeSequenceButtonWarning)
 #: widgets/EditProfileMousePage.ui:356
@@ -4972,7 +4970,7 @@ msgstr ""
 #: widgets/EditProfileMousePage.ui:374
 #, kde-format
 msgid "Allowed link formats: "
-msgstr "Leyft tenglasnið:"
+msgstr "Leyfilegt tenglasnið:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, linkEscapeSequenceTexts)
 #: widgets/EditProfileMousePage.ui:384
@@ -5043,8 +5041,8 @@ msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
 msgstr ""
-"Þegar músarbendillinn er settur yfir sextándakerfislit birtist liturinn í "
-"ramma við hliðina á músarbendlinum"
+"Þegar músarbendillinn er settur yfir hex-litakóða birtist liturinn í ramma "
+"við hliðina á músarbendlinum"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:438
@@ -5078,13 +5076,13 @@ msgstr "Afturrakning:"
 #: widgets/EditProfileScrollingPage.ui:67
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr "Fletta upp/niður um síðu:"
+msgstr "Skruna upp/niður um síðu:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:83
 #, kde-format
 msgid "Scroll the page the half height of window"
-msgstr "Fletta síðunni um hálfa hæð gluggans"
+msgstr "Skruna síðunni um hálfa hæð gluggans"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
@@ -5096,25 +5094,25 @@ msgstr "Hálf hæ&ð glugga"
 #: widgets/EditProfileScrollingPage.ui:96
 #, kde-format
 msgid "Scroll the page the full height of window"
-msgstr "Fletta síðu um alla hæð gluggans"
+msgstr "Skruna síðunni um fulla hæð gluggans"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
 #, kde-format
 msgid "F&ull screen height"
-msgstr "&Öll hæð gluggans"
+msgstr "&Full hæð gluggans"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
 #, kde-format
 msgid "Scrollbar position:"
-msgstr "Staðsetning flettistiku:"
+msgstr "Staðsetning skrunstiku:"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:141
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
-msgstr "Sýna flettistikuna hægra megin á skjáhermiglugganum"
+msgstr "Sýna skrunstikuna hægra megin á skjáhermisglugganum"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
@@ -5127,7 +5125,7 @@ msgstr "Hæ&gra megin"
 #: widgets/EditProfileScrollingPage.ui:154
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
-msgstr "Sýna flettistikuna vinstra megin á skjáhermisglugganum"
+msgstr "Sýna skrunstikuna vinstra megin á skjáhermisglugganum"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
@@ -5153,7 +5151,7 @@ msgstr "Áherslulitun:"
 #: widgets/EditProfileScrollingPage.ui:209
 #, kde-format
 msgid "Highlight the lines coming into view"
-msgstr "Áherslulita línurnar sem birtast"
+msgstr "Áherslulita línurnar sem birtast í glugganum"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:222
@@ -5165,7 +5163,7 @@ msgstr "Endurstilla línuflæði:"
 #: widgets/EditProfileScrollingPage.ui:232
 #, kde-format
 msgid "Reflow lines when terminal resizes"
-msgstr "Laga línuflæðið þegar stærð skjáhermisins er breytt"
+msgstr "Endurstilla línuflæðið þegar stærð skjáhermisins er breytt"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
 #: widgets/EditProfileScrollingPage.ui:239
@@ -5365,13 +5363,13 @@ msgstr "Áherslulita allar samsvaranir"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
-msgstr "Stillir hvort texti sem stemmir verði áherslulitaður"
+msgstr "Stillir hvort samsvarandi texti verði áherslulitaður"
 
 #: widgets/IncrementalSearchBar.cpp:133
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
-msgstr "Leita aftur á bak"
+msgstr "Leita afturábak"
 
 #: widgets/IncrementalSearchBar.cpp:135
 #, kde-format
@@ -5557,7 +5555,7 @@ msgstr "Loka þessum flipa"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
-msgstr "Af&tengja flipa"
+msgstr "&Losa flipa af"
 
 #: widgets/ViewContainer.cpp:100
 #, kde-format

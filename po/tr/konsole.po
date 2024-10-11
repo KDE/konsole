@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-08 00:42+0000\n"
+"POT-Creation-Date: 2024-10-11 00:43+0000\n"
 "PO-Revision-Date: 2024-09-23 15:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2114,8 +2114,8 @@ msgstr "“%1” içinde Sessizlik (Oturum “%2”)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1201
-#: Vt102Emulation.cpp:1456
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
+#: Vt102Emulation.cpp:1459
 #, kde-format
 msgid "Show session"
 msgstr "Oturumu göster"
@@ -3663,7 +3663,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Sekme Yerleşimi Yükle"
 
-#: Vt102Emulation.cpp:2814
+#: Vt102Emulation.cpp:2817
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

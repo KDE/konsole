@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-08 00:42+0000\n"
+"POT-Creation-Date: 2024-10-11 00:43+0000\n"
 "PO-Revision-Date: 2024-08-30 18:55+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -2125,8 +2125,8 @@ msgstr "Isiltasuna «%1»(e)an (Saioa «%2»)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1201
-#: Vt102Emulation.cpp:1456
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
+#: Vt102Emulation.cpp:1459
 #, kde-format
 msgid "Show session"
 msgstr "Erakutsi saioa"
@@ -3684,7 +3684,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Zamatu fitxen antolaera"
 
-#: Vt102Emulation.cpp:2814
+#: Vt102Emulation.cpp:2817
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
