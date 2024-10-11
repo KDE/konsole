@@ -50,7 +50,12 @@ using namespace Konsole;
 #define loc(X, Y) ((Y)*_columns + (X))
 #endif
 
-const Character Screen::DefaultChar =
+const Character Screen::DefaultChar = Character(' ',
+                                                CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
+                                                CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
+                                                DEFAULT_RENDITION | RE_TRANSPARENT,
+                                                0);
+const Character Screen::VisibleChar =
     Character(' ', CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR), CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR), DEFAULT_RENDITION, 0);
 
 Screen::Screen(int lines, int columns)
@@ -1495,7 +1500,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
 
     // if the character being used to clear the area is the same as the
     // default character, the affected _lines can simply be shrunk.
-    const bool isDefaultCh = (clearCh == Screen::DefaultChar);
+    const bool isDefaultCh = (clearCh == Screen::DefaultChar || clearCh == Screen::VisibleChar);
 
     for (int y = topLine; y <= bottomLine; ++y) {
         const int endCol = (y == bottomLine) ? loce % _columns : _columns - 1;
@@ -1895,6 +1900,7 @@ Character Screen::getCharacter(int col, int row) const
             _history->getCells(row, col, 1, &ch);
         } else {
             ch = Character();
+            ch.rendition.f.transparent = 1;
         }
     }
     return ch;
@@ -2557,6 +2563,7 @@ void Screen::addPlacement(QPixmap pixmap,
                           int &cols,
                           int row,
                           int col,
+                          enum TerminalGraphicsPlacement_t::source source,
                           bool scrolling,
                           int moveCursor,
                           bool leaveText,
@@ -2598,6 +2605,7 @@ void Screen::addPlacement(QPixmap pixmap,
     p->scrolling = scrolling;
     p->X = X;
     p->Y = Y;
+    p->source = source;
 
     if (!leaveText) {
         eraseBlock(row, col, rows, cols);
@@ -2605,7 +2613,13 @@ void Screen::addPlacement(QPixmap pixmap,
     addPlacement(p);
     int needScroll = qBound(0, row + rows - _lines, rows);
     if (moveCursor && scrolling && needScroll > 0) {
-        scrollUp(needScroll);
+        while (needScroll > 0) {
+            scrollUp(qMin(needScroll, _lines));
+            if (!leaveText) {
+                eraseBlock(qMax(0, _lines - needScroll - 1), col, needScroll + 1, cols);
+            }
+            needScroll -= _lines;
+        }
     }
     if (moveCursor) {
         if (rows - needScroll - 1 > 0) {

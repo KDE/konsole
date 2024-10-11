@@ -166,7 +166,7 @@ public:
     explicit constexpr Character(uint _c = ' ',
                                  CharacterColor _f = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
                                  CharacterColor _b = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
-                                 RenditionFlags _r = DEFAULT_RENDITION,
+                                 RenditionFlags _r = DEFAULT_RENDITION | RE_TRANSPARENT,
                                  ExtraFlags _flags = EF_REAL)
         : character(_c)
         , rendition({_r})

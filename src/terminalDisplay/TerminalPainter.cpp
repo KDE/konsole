@@ -198,8 +198,9 @@ void TerminalPainter::drawContents(Character *image,
     const int fontHeight = m_parentDisplay->terminalFont()->fontHeight();
     const QRect textArea(QPoint(leftPadding + fontWidth * rect.x(), topPadding + rect.y() * fontHeight),
                          QSize(rect.width() * fontWidth, rect.height() * fontHeight));
+    QRegion sixelRegion = QRegion();
     if (!printerFriendly) {
-        drawImagesBelowText(paint, textArea, fontWidth, fontHeight, placementIdx);
+        drawImagesBelowText(paint, textArea, fontWidth, fontHeight, placementIdx, sixelRegion);
     }
 
     static const QFont::Weight FontWeights[] = {
@@ -296,7 +297,9 @@ void TerminalPainter::drawContents(Character *image,
                           line2log,
                           bidiEnabled,
                           lastNonSpace,
-                          background);
+                          background,
+                          y,
+                          sixelRegion);
         }
 
         RenditionFlags oldRendition = -1;
@@ -775,7 +778,9 @@ void TerminalPainter::drawBelowText(QPainter &painter,
                                     int *line2log,
                                     bool bidiEnabled,
                                     int lastNonSpace,
-                                    QColor background)
+                                    QColor background,
+                                    int Y,
+                                    QRegion sixelRegion)
 {
     // setup painter
 
@@ -824,10 +829,12 @@ void TerminalPainter::drawBelowText(QPainter &painter,
             if (backgroundColor == colorTable[DEFAULT_BACK_COLOR]) {
                 backgroundColor = background;
             }
-            drawBG = backgroundColor != colorTable[DEFAULT_BACK_COLOR];
             if (style[x].rendition.f.transparent) {
                 drawBG = false;
+            } else {
+                drawBG = backgroundColor != colorTable[DEFAULT_BACK_COLOR] || sixelRegion.contains(QPoint(i + startX, Y));
             }
+
             constRect = QRect(rect.x() + fontWidth * i, rect.y(), fontWidth, rect.height());
         } else {
             constRect.setWidth(constRect.width() + fontWidth);
@@ -960,7 +967,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
     }
 }
 
-void TerminalPainter::drawImagesBelowText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx)
+void TerminalPainter::drawImagesBelowText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx, QRegion &sixelRegion)
 {
     Screen *screen = m_parentDisplay->screenWindow()->screen();
 
@@ -982,6 +989,9 @@ void TerminalPainter::drawImagesBelowText(QPainter &painter, const QRect &rect, 
             QRectF dstRect(x, y - scrollDelta, p->pixmap.width(), p->pixmap.height());
             painter.setOpacity(p->opacity);
             painter.drawPixmap(dstRect, p->pixmap, srcRect);
+            if (p->source == TerminalGraphicsPlacement_t::Sixel) {
+                sixelRegion = sixelRegion.united(QRect(p->col, p->row, p->cols, p->rows));
+            }
             placementIdx++;
         }
         painter.setOpacity(opacity);

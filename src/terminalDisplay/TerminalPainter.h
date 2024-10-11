@@ -101,7 +101,9 @@ private:
                        int *line2log,
                        bool bidiEnabled,
                        int lastNonSpace,
-                       QColor background);
+                       QColor background,
+                       int Y,
+                       QRegion sixelRegion);
     void drawAboveText(QPainter &painter,
                        const QRect &rect,
                        Character *style,
@@ -115,7 +117,7 @@ private:
                        bool bidiEnabled,
                        int lastNonSpace,
                        CharacterColor const *ulColorTable);
-    void drawImagesBelowText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx);
+    void drawImagesBelowText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx, QRegion &sixelRegion);
     void drawImagesAboveText(QPainter &painter, const QRect &rect, int fontWidth, int fontHeight, int &placementIdx);
 
     void drawTextCharacters(QPainter &painter,

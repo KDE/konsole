@@ -44,6 +44,7 @@ struct TerminalGraphicsPlacement_t {
     int z, X, Y, col, row, cols, rows;
     qreal opacity;
     bool scrolling;
+    enum source { Sixel, iTerm, Kitty } source;
 };
 
 namespace Konsole
@@ -675,6 +676,7 @@ public:
     void setEnableUrlExtractor(const bool enable);
 
     static const Character DefaultChar;
+    static const Character VisibleChar;
 
     // Return the total number of lines before resize (fix scroll glitch)
     int getOldTotalLines();
@@ -689,6 +691,7 @@ public:
                       int &cols,
                       int row = -1,
                       int col = -1,
+                      enum TerminalGraphicsPlacement_t::source source = TerminalGraphicsPlacement_t::Sixel,
                       bool scrolling = true,
                       int moveCursor = 1,
                       bool leaveText = false,

@@ -1666,7 +1666,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             }
         }
         int rows = -1, cols = -1;
-        _currentScreen->addPlacement(pixmap, rows, cols, -1, -1, true, moveCursor);
+        _currentScreen->addPlacement(pixmap, rows, cols, -1, -1, TerminalGraphicsPlacement_t::iTerm, true, moveCursor);
     }
     _pendingSessionAttributesUpdates[attribute] = value;
     _sessionAttributesUpdateTimer->start(20);
@@ -2310,6 +2310,7 @@ void Vt102Emulation::processGraphicsToken(int tokenSize)
                                          cols,
                                          -1,
                                          -1,
+                                         TerminalGraphicsPlacement_t::Kitty,
                                          true,
                                          keys['C'] == 0,
                                          true,
@@ -3281,7 +3282,7 @@ void Vt102Emulation::SixelModeDisable()
         pixmap = pixmap.scaled(pixmap.width(), m_aspect.first * pixmap.height() / m_aspect.second);
     }
     int rows = -1, cols = -1;
-    _currentScreen->addPlacement(pixmap, rows, cols, row, col, m_SixelScrolling, m_SixelScrolling * 2, false);
+    _currentScreen->addPlacement(pixmap, rows, cols, row, col, TerminalGraphicsPlacement_t::Sixel, m_SixelScrolling, m_SixelScrolling * 2, false);
 }
 
 void Vt102Emulation::SixelColorChangeRGB(const int index, int red, int green, int blue)
