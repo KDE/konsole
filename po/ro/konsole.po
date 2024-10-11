@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-08 02:32+0000\n"
+"POT-Creation-Date: 2024-10-11 02:43+0000\n"
 "PO-Revision-Date: 2022-06-01 15:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -2116,7 +2116,7 @@ msgstr "Liniște în „%1” (sesiunea „%2”)"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1153
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1156
 #, fuzzy, kde-format
 #| msgid "&Close Session"
 msgid "Show session"
@@ -3688,7 +3688,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Încarcă aranjamentul filelor din fișier"
 
-#: Vt102Emulation.cpp:2475
+#: Vt102Emulation.cpp:2478
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

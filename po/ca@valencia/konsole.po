@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-08 02:32+0000\n"
+"POT-Creation-Date: 2024-10-11 02:43+0000\n"
 "PO-Revision-Date: 2024-07-18 10:13+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2101,7 +2101,7 @@ msgstr "Silenci a «%1» (Sessió «%2»)"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1153
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1156
 #, kde-format
 msgid "Show session"
 msgstr "Mostra la sessió"
@@ -3661,7 +3661,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Carrega la disposició de les pestanyes"
 
-#: Vt102Emulation.cpp:2475
+#: Vt102Emulation.cpp:2478
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

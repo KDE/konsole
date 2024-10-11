@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-08 02:32+0000\n"
+"POT-Creation-Date: 2024-10-11 02:43+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -2202,7 +2202,7 @@ msgstr "Tost i seisiún '%1'"
 
 #: session/Session.cpp:742 session/Session.cpp:2080
 #: session/SessionController.cpp:354 session/SessionController.cpp:1846
-#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1153
+#: terminalDisplay/TerminalBell.cpp:43 Vt102Emulation.cpp:1156
 #, fuzzy, kde-format
 #| msgid "Switch to Session %1"
 msgid "Show session"
@@ -3827,7 +3827,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2475
+#: Vt102Emulation.cpp:2478
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
