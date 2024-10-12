@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-11 00:43+0000\n"
+"POT-Creation-Date: 2024-10-12 00:41+0000\n"
 "PO-Revision-Date: 2024-08-24 11:40+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -3664,7 +3664,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Wczytaj układ kart"
 
-#: Vt102Emulation.cpp:2817
+#: Vt102Emulation.cpp:2818
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

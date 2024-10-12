@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-11 00:43+0000\n"
+"POT-Creation-Date: 2024-10-12 00:41+0000\n"
 "PO-Revision-Date: 2023-09-15 16:56+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -3701,7 +3701,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Vərəq tərtibatını yüklə"
 
-#: Vt102Emulation.cpp:2817
+#: Vt102Emulation.cpp:2818
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

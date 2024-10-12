@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole trunk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-11 00:43+0000\n"
+"POT-Creation-Date: 2024-10-12 00:41+0000\n"
 "PO-Revision-Date: 2020-02-05 14:49+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -3672,7 +3672,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2817
+#: Vt102Emulation.cpp:2818
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
