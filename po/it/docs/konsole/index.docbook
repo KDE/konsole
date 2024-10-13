@@ -120,9 +120,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->25/4/2023</date>
+>23/4/2024</date>
 <releaseinfo
->KDE Gear 23.08</releaseinfo>
+>KDE Gear 24.05</releaseinfo>
 
 <abstract
 ><para
@@ -723,8 +723,10 @@
 >Disposizione complessa del testo</title>
 
 <para
->Nella pagina <guilabel
+>Nella scheda <guilabel
 >Disposizione complessa del testo</guilabel
+> della pagina <guilabel
+>Aspetto</guilabel
 > della finestra <guilabel
 >Modifica profilo</guilabel
 >, troverai le opzioni che controllano il rendering del testo. </para>
@@ -796,9 +798,41 @@
 > - I caratteri problematici seguono lo standard Unicode, piuttosto che il wcwidth() di glibc. Attualmente solo il trattino leggero (Unicode 0x00AD) con larghezza wc pari a 1 e larghezza Unicode pari a 0 è interessato da questa opzione. Generalmente, questa opzione dovrebbe essere disabilitata quando si utilizzano principalmente quei caratteri sulla riga di comando e abilitata quando sono solo visualizzati. </para
 ></listitem>
 
-
 </itemizedlist>
 </para>
+</sect1>
+
+<sect1 id="visualhints">
+<title
+>Suggerimenti visivi</title>
+<para
+>Oltre ai vari suggerimenti visivi descritti in <xref linkend="semantic-shell-integration"/>, &konsole; ha altri suggerimenti visivi: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Una linea verticale alla colonna 80 (o un'altra). Questo è configurato nella scheda <guilabel
+>Varie</guilabel
+> della <guilabel
+>Aspetto</guilabel
+> nella finestra <guilabel
+>Modifica profilo</guilabel
+>. </para
+></listitem>
+
+<listitem
+><para
+>I numeri di riga possono essere visualizzati come sovrapposizione del testo del terminale. I numeri di riga sono visualizzati in rosso all'estremità destra di ciascuna riga. Le righe sono numerate consecutivamente a partire dalla prima riga (in alto) nello scorrimento. La visualizzazione dei numeri di riga può essere configurata nella pagina <guilabel
+>Avanzate</guilabel
+> nella finestra <guilabel
+>Modifica profilo</guilabel
+>. È possibile cambiare tra le tre modalità visualizzate anche tramite una scorciatoia da tastiera. La scorciatoia predefinita è <keycombo
+>&Ctrl;&Alt;<keycap
+>\</keycap
+></keycombo
+> </para
+></listitem>
+</itemizedlist>
 </sect1>
 
 </chapter>
@@ -2964,7 +2998,7 @@ Various search improvements
 </variablelist>
 
 <para
->&konsole; accetta inoltre opzioni generiche &Qt; e &kf5-full;, vedere le pagine di manuale qt5options e kf5options.</para>
+>&konsole; accetta inoltre opzioni generiche &Qt; e&kf6-full;, vedere le pagine di manuale qt6options e kf6options.</para>
 
 </chapter>
 
