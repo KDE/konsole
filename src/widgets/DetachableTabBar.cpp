@@ -125,6 +125,13 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
+void DetachableTabBar::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        QTabBar::mouseDoubleClickEvent(event);
+    }
+}
+
 void DetachableTabBar::dragEnterEvent(QDragEnterEvent *event)
 {
     const auto dragId = QStringLiteral("konsole/terminal_display");
