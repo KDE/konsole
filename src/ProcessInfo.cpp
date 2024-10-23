@@ -411,7 +411,10 @@ public:
         }
 
         if (_createdAppCGroupPath.isEmpty() && !_cGroupCreationFailed) {
-            _cGroupCreationFailed = KonsoleSettings::enableMemoryMonitoring() && !initCGroupHierachy(pid);
+            _cGroupCreationFailed = !initCGroupHierachy(pid);
+            if (KonsoleSettings::enableMemoryMonitoring() && !_cGroupCreationFailed) {
+                setUnitMemLimit(KonsoleSettings::memoryLimitValue());
+            }
             return;
         }
 
@@ -675,7 +678,7 @@ private:
 
         appCGroupSTContsFile.write(contsToEnable.toLocal8Bit());
 
-        return setUnitMemLimit(KonsoleSettings::memoryLimitValue());
+        return true;
     }
 
     QString getProcCGroup(const int pid)
