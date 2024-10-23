@@ -620,7 +620,7 @@ private:
         qDBusRegisterMetaType<EmptyArray>();
 
         const QString managerObjPath(QStringLiteral("/org/freedesktop/systemd1"));
-        const QString appUnitName(QStringLiteral("transientKonsole.scope"));
+        const QString appUnitName(QStringLiteral("app-org.kde.konsole-%1.scope").arg(getpid()));
 
         // check if systemd dbus services exist
         if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(QStringLiteral("org.freedesktop.systemd1"))) {
