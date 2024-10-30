@@ -235,7 +235,7 @@ private:
     int _windowWidth;
     int _windowHeight;
     char _eraseChar;
-    bool _xonXoff;
+    bool _xon;
     bool _utf8;
 #ifdef Q_OS_WIN
     std::unique_ptr<IPtyProcess> m_proc;

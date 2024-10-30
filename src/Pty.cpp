@@ -59,11 +59,11 @@ Pty::Pty(int masterFd, QObject *aParent)
     _windowWidth = 0;
     _windowHeight = 0;
     _eraseChar = 0;
-    _xonXoff = true;
+    _xon = true;
     _utf8 = true;
 
     setEraseChar(_eraseChar);
-    setFlowControlEnabled(_xonXoff);
+    setFlowControlEnabled(_xon);
     setUtf8Mode(_utf8);
 
     setWindowSize(_windowColumns, _windowLines, _windowWidth, _windowHeight);
@@ -122,15 +122,18 @@ QSize Pty::pixelSize() const
 
 void Pty::setFlowControlEnabled(bool enable)
 {
-    _xonXoff = enable;
+    // Only set IXON flow control ^S ^Q capabilities on the master
+    // side.  IXOFF flow control is not used by PTYs, that's for
+    // hardware terminals such as those working over RS232.
+    _xon = enable;
 
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
         if (enable) {
-            ttmode.c_iflag |= (IXOFF | IXON);
+            ttmode.c_iflag |= IXON;
         } else {
-            ttmode.c_iflag &= ~(IXOFF | IXON);
+            ttmode.c_iflag &= ~IXON;
         }
 
         if (!pty()->tcSetAttr(&ttmode)) {
@@ -144,12 +147,10 @@ bool Pty::flowControlEnabled() const
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        // Check only IXON (flow control on output) on master fd, which corresponds to
-        // IXOFF (flow control on input) on slave side.
         return ((ttmode.c_iflag & IXON) != 0U);
     } else {
         qCDebug(KonsoleDebug) << "Unable to get flow control status, terminal not connected.";
-        return _xonXoff;
+        return _xon;
     }
 }
 
@@ -345,7 +346,7 @@ Pty::Pty(int masterFd, QObject *aParent)
     _windowWidth = 0;
     _windowHeight = 0;
     _eraseChar = 0;
-    _xonXoff = true;
+    _xon = true;
     _utf8 = true;
 
     setEraseChar(_eraseChar);
@@ -390,7 +391,7 @@ QSize Pty::pixelSize() const
 
 void Pty::setFlowControlEnabled(bool enable)
 {
-    _xonXoff = enable;
+    _xon = enable;
 }
 
 bool Pty::flowControlEnabled() const
