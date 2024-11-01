@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-12 00:41+0000\n"
-"PO-Revision-Date: 2024-06-11 08:11\n"
+"PO-Revision-Date: 2024-10-28 19:13\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -1954,26 +1954,26 @@ msgid "%1 is an invalid URL, the output could not be saved."
 msgstr "%1 - хібны URL-адрас, немагчыма захаваць вывад."
 
 #: SaveHistoryAutoTask.cpp:88
-#, fuzzy, kde-format
-#| msgid "Unable to write to file."
+#, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr "Немагчыма запісаць у файл."
+msgstr "Не ўдалося стварыць файл аўтазахавання ў %1."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Спыненне аўтазахавання праз пераключэнне экранаў."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Файл аўтазахавання быў зменены звонку. Гэта перарвала далейшае аўтазахаванне."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr ""
+msgstr "Не ўдалося абнавіць стан аўтазахавання праз змену даных вываду."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2248,15 +2248,14 @@ msgid "Save Output &As..."
 msgstr "Захаваць вывад &як..."
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Захаваць вывад &як..."
+msgstr "Аўтазахаванне выходных даных як..."
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Спыніць аўтазахаванне"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -2498,7 +2497,7 @@ msgstr "Адкрыць &бягучы каталог з дапамогай"
 #: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
-msgstr "Захаваць спампаваныя з дапамогай пратакола ZModem файлы у..."
+msgstr "Захаваць спампаваныя з дапамогай пратаколу ZModem файлы у..."
 
 #: session/SessionController.cpp:2157
 #, kde-format
@@ -2531,7 +2530,7 @@ msgstr ""
 #: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr "Абярыце файлы для запампоўвання з дапамогай пратакола ZModem"
+msgstr "Абярыце файлы для запампоўвання з дапамогай пратаколу ZModem"
 
 #: session/SessionListModel.cpp:89
 #, kde-format
@@ -3238,19 +3237,15 @@ msgstr "пікс."
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Каб выкарыстоўваць гэтую функцыю, уключыце <span style="
-"\" font-weight:600;\">Мыш-&gt;Рознае-&gt;Падкрэсліванне </span><span style="
-"\" font-weight:600;\">файлаў</span> ў наладах профілю</p></body></html>"
+"\" font-weight:600;\">Мыш-&gt;Рознае-&gt;Падкрэсліванне файлаў</span> у "
+"наладах вашага профілю.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3767,13 +3762,13 @@ msgstr "Цэтлік для прагляду галоўнага экрана:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Інтэрвал паміж аўтазахаваннямі:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:262
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " мс"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:275
@@ -5190,19 +5185,19 @@ msgstr "Перакампаноўваць радкі пры змене памер
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Колер адзнак паласы пракручвання:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "Памер кожнай адзнакі (у адсотках ад даўжыні паласы пракручвання):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
