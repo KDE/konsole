@@ -104,7 +104,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {FocusBorderColor, "FocusBorderColor", APPEARANCE_GROUP, QColor(Qt::gray)},
     {InvertSelectionColors, "InvertSelectionColors", GENERAL_GROUP, false},
     {EmojiFont, "EmojiFont", APPEARANCE_GROUP, QFont()},
-    {WordMode, "WordMode", APPEARANCE_GROUP, true},
+    {WordMode, "WordMode", APPEARANCE_GROUP, false},
     {WordModeAttr, "WordModeAttr", APPEARANCE_GROUP, false},
     {WordModeAscii, "WordModeAscii", APPEARANCE_GROUP, true},
     {WordModeBrahmic, "WordModeBrahmic", APPEARANCE_GROUP, false},
