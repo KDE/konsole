@@ -79,10 +79,6 @@ void TerminalFont::setVTFont(const QFont &f)
     // Disabling kerning saves some computation when rendering text.
     newFont.setKerning(false);
 
-    // QFont::ForceIntegerMetrics has been removed.
-    // Set full hinting instead to ensure the letters are aligned properly.
-    newFont.setHintingPreference(QFont::PreferFullHinting);
-
     // "Draw intense colors in bold font" feature needs to use different font weights. StyleName
     // property, when set, doesn't allow weight changes. Since all properties (weight, stretch,
     // italic, etc) are stored in QFont independently, in almost all cases styleName is not needed.
