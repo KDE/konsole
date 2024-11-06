@@ -1995,9 +1995,6 @@ void SessionController::sessionAttributeChanged()
 
     setTitle(title);
     setColor(session()->color());
-
-    viewFocusChangeHandler(true);
-
     Q_EMIT rawTitleChanged();
 }
 

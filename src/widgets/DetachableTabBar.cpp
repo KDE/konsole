@@ -33,11 +33,13 @@ DetachableTabBar::DetachableTabBar(QWidget *parent)
 void DetachableTabBar::setColor(int idx, const QColor &color)
 {
     setTabData(idx, color);
+    update();
 }
 
 void DetachableTabBar::removeColor(int idx)
 {
     setTabData(idx, QVariant());
+    update();
 }
 
 void DetachableTabBar::middleMouseButtonClickAt(const QPoint &pos)
