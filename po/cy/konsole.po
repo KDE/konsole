@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-12 00:41+0000\n"
+"POT-Creation-Date: 2024-11-06 00:43+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -2576,18 +2576,18 @@ msgstr ""
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2077
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2147
+#: session/SessionController.cpp:2144
 #, fuzzy, kde-format
 #| msgid "&ZModem Upload..."
 msgid "Save ZModem Download to..."
 msgstr "Fyny-lwytho â &ZModem..."
 
-#: session/SessionController.cpp:2157
+#: session/SessionController.cpp:2154
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2602,7 +2602,7 @@ msgstr ""
 "ZModem addas ar y cysawd.\n"
 "<p>Efallai hoffech osod y pecyn 'rzsz' neu'r un 'lrzsz'.\n"
 
-#: session/SessionController.cpp:2167
+#: session/SessionController.cpp:2164
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2611,7 +2611,7 @@ msgid ""
 msgstr ""
 "<p>Mae trosglwyddiad ffeil ZModem ar waith yn barod yn y sesiwn cyfredol."
 
-#: session/SessionController.cpp:2180
+#: session/SessionController.cpp:2177
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on the system.\n"
@@ -2623,7 +2623,7 @@ msgstr ""
 "<p>Ni ganfuwyd meddalwedd ZModem addas ar y cysawd.\n"
 "<p>Efallai hoffech osod y pecyn 'rzsz' neu'r un 'lrzsz'.\n"
 
-#: session/SessionController.cpp:2185
+#: session/SessionController.cpp:2182
 #, fuzzy, kde-format
 #| msgid "Select Files to Upload"
 msgid "Select Files for ZModem Upload"

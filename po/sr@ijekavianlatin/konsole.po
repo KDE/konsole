@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-12 00:41+0000\n"
+"POT-Creation-Date: 2024-11-06 00:43+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -2610,18 +2610,18 @@ msgstr ""
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2077
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
 # rewrite-msgid: /Save//
-#: session/SessionController.cpp:2147
+#: session/SessionController.cpp:2144
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Preuzimanje ZModemom u..."
 
-#: session/SessionController.cpp:2157
+#: session/SessionController.cpp:2154
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2632,13 +2632,13 @@ msgstr ""
 "softvera za ZModem.</p><p>Instalirajte paket <tt>rzsz</tt> ili <tt>lrzsz</"
 "tt>.</p>"
 
-#: session/SessionController.cpp:2167
+#: session/SessionController.cpp:2164
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>U tekućoj sesiji se već odvija zmodemski prenos fajla.</p>"
 
-#: session/SessionController.cpp:2180
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2648,7 +2648,7 @@ msgstr ""
 "tt> ili <tt>lrzsz</tt>.</p>"
 
 # >> @title:window
-#: session/SessionController.cpp:2185
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Izbor fajlova za otpremanje ZModemom"

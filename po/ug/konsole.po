@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-12 00:41+0000\n"
+"POT-Creation-Date: 2024-11-06 00:43+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -2583,18 +2583,18 @@ msgstr ""
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2077
+#: session/SessionController.cpp:2074
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2147
+#: session/SessionController.cpp:2144
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "ZModem دا چۈشۈرگەننى ساقلا…"
 
-#: session/SessionController.cpp:2157
+#: session/SessionController.cpp:2154
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2605,14 +2605,14 @@ msgstr ""
 "ZModem يۇمشاق دېتالى يوق ئىكەن.</p><p>'rzsz' ياكى 'lrzsz' بوغچىسىنى "
 "قاچىلىسىڭىز بولارمىكىن.</p>"
 
-#: session/SessionController.cpp:2167
+#: session/SessionController.cpp:2164
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>نۆۋەتتىكى ئەڭگىمەدە ZModem ھۆججەت يوللاش مەشغۇلاتى ئېلىپ بېرىلىۋاتىدۇ.</p>"
 
-#: session/SessionController.cpp:2180
+#: session/SessionController.cpp:2177
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2621,7 +2621,7 @@ msgstr ""
 "<p>سىستېمىدا مۇۋاپىق ZModem يۇمشاق دېتالى يوق ئىكەن.</p><p>'rzsz' ياكى "
 "'lrzsz' بوغچىسىنى قاچىلىسىڭىز بولارمىكىن.</p>"
 
-#: session/SessionController.cpp:2185
+#: session/SessionController.cpp:2182
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem دا يۈكلەيدىغان ھۆججەتلەرنى تاللا"
