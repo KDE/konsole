@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-09-11 12:34+0200\n"
+"PO-Revision-Date: 2024-11-09 20:09+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 24.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2107,8 +2107,8 @@ msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
-"\"Не можа да се намери  \"%1\", вместо това се стартира \"%2\" . Моля, "
-"проверете настройките на вашия профил."
+"\"Не можа да се намери  „%1“, вместо това се стартира „%2“ . Моля, проверете "
+"настройките на вашия профил."
 
 #: session/Session.cpp:593
 #, kde-format
@@ -2118,7 +2118,7 @@ msgstr "Не може да се стартира програма '%1' с арг
 #: session/Session.cpp:750
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
-msgstr "Пасивност в \"%1\" (Сесия \"%2\")"
+msgstr "Пасивност в „%1“ (Сесия „%2“)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
 #: session/SessionController.cpp:359 session/SessionController.cpp:1882
@@ -2151,12 +2151,12 @@ msgstr "Завършено"
 #: session/Session.cpp:1089 session/Session.cpp:1105
 #, kde-format
 msgid "Program '%1' crashed."
-msgstr "Програмата \"%1\" блокира."
+msgstr "Програмата „%1“ блокира."
 
 #: session/Session.cpp:1091
 #, kde-format
 msgid "Program '%1' exited with status %2."
-msgstr "Програмата \"%1\" беше спряна - %2."
+msgstr "Програмата „%1“ беше спряна - %2."
 
 #: session/Session.cpp:1617
 #, kde-format
@@ -2176,7 +2176,7 @@ msgstr "Konsole"
 #: session/SessionController.cpp:358
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
-msgstr "Процесът \"%1\"приключи в сесията \"%2\""
+msgstr "Процесът „%1“приключи в сесията „%2“"
 
 #: session/SessionController.cpp:441
 #, kde-format
@@ -2186,7 +2186,7 @@ msgstr "Konsole не знае как да отвори отметката: "
 #: session/SessionController.cpp:520
 #, kde-format
 msgid "Search for '%1' with"
-msgstr "Търсене за \"%1\" с"
+msgstr "Търсене за „%1“ с"
 
 #: session/SessionController.cpp:536
 #, kde-format
@@ -4374,7 +4374,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
-msgstr "Профил с име \"%1\" вече съществува."
+msgstr "Профил с име „%1“ вече съществува."
 
 #: widgets/EditProfileDialog.cpp:342
 #, kde-format
@@ -4403,7 +4403,7 @@ msgstr "Създаване на нов профил"
 #: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Edit Profile \"%1\""
-msgstr "Редактиране на профил \"%1\""
+msgstr "Редактиране на профил „%1“"
 
 #: widgets/EditProfileDialog.cpp:514
 #, kde-format
