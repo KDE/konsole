@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-11-09 20:09+0100\n"
+"PO-Revision-Date: 2024-11-10 20:12+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.11.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2083,7 +2083,7 @@ msgstr "Конзола на Solaris"
 #: session/Session.cpp:109
 #, kde-format
 msgid "Bell in '%1' (Session '%2')"
-msgstr "Звуков сигнал в '%1' (Сесия '%2')"
+msgstr "Звуков сигнал в „%1“ (Сесия „%2“)"
 
 #: session/Session.cpp:417
 #, kde-format
@@ -2113,7 +2113,7 @@ msgstr ""
 #: session/Session.cpp:593
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
-msgstr "Не може да се стартира програма '%1' с аргументи '%2'."
+msgstr "Не може да се стартира програма „%1“ с аргументи „%2“."
 
 #: session/Session.cpp:750
 #, kde-format
@@ -2166,7 +2166,7 @@ msgstr "Индикатор на прогреса на качването"
 #: session/Session.cpp:2088
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
-msgstr "Активност в '%1' (Сесия '%2')"
+msgstr "Активност в „%1“ (Сесия „%2“)"
 
 #: session/SessionController.cpp:140
 #, kde-format
@@ -2466,7 +2466,7 @@ msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr ""
-"В момента се изпълнява програма '%1' в тази сесия. Наистина ли искате да я "
+"В момента се изпълнява програма „%1“ в тази сесия. Наистина ли искате да я "
 "затворите?"
 
 #: session/SessionController.cpp:1136 session/SessionController.cpp:1171
@@ -2495,7 +2495,7 @@ msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"Програмата  '%1'в тази сесия няма да прекрати. Наистина ли искате да я "
+"Програмата  „%1“в тази сесия няма да прекрати. Наистина ли искате да я "
 "прекъснете принудително?"
 
 #: session/SessionController.cpp:1172
@@ -2507,7 +2507,7 @@ msgstr "Прекратяване на програмата"
 #: session/SessionController.cpp:1881
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
-msgstr "Курсорът на обвивката се показва в сесия '%1'"
+msgstr "Курсорът на обвивката се показва в сесия „%1“"
 
 #: session/SessionController.cpp:2074
 #, kde-format
@@ -3570,7 +3570,7 @@ msgstr "Превключване между два раздела"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Last Used Tabs (Reverse)"
-msgstr "Последно използвани попрозорци (обратен ред)"
+msgstr "Последно използвани подпрозорци (обратен ред)"
 
 #: ViewManager.cpp:302
 #, kde-format
