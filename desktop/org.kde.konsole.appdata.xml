@@ -593,4 +593,7 @@
     <release version="23.08.5" date="2024-02-15"/>
   </releases>
   <content_rating type="oars-1.1"/>
+  <custom>
+      <value key="KDE::supporters">Anders Lund</value>
+  </custom>
 </component>
