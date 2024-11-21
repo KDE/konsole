@@ -594,6 +594,6 @@
   </releases>
   <content_rating type="oars-1.1"/>
   <custom>
-      <value key="KDE::supporters">Anders Lund;GhulDev</value>
+    <value key="KDE::supporters">Anders Lund;GhulDev</value>
   </custom>
 </component>
