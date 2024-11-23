@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:43+0000\n"
+"POT-Creation-Date: 2024-11-23 00:43+0000\n"
 "PO-Revision-Date: 2014-02-12 22:52+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -2105,55 +2105,60 @@ msgstr ""
 
 #: schemas.cpp:6
 #, kde-format
+msgid "Campbell"
+msgstr ""
+
+#: schemas.cpp:7
+#, kde-format
 msgid "Dark Pastels"
 msgstr "Tamne pastele"
 
-#: schemas.cpp:7
+#: schemas.cpp:8
 #, kde-format
 msgid "Green on Black"
 msgstr "Zeleno na crnom"
 
-#: schemas.cpp:8
+#: schemas.cpp:9
 #, kde-format
 msgid "Linux Colors"
 msgstr "Linux boje"
 
-#: schemas.cpp:9
+#: schemas.cpp:10
 #, kde-format
 msgid "Red on Black"
 msgstr "Crveno na crnom"
 
-#: schemas.cpp:10
+#: schemas.cpp:11
 #, kde-format
 msgid "Solarized"
 msgstr "Solarizovano"
 
-#: schemas.cpp:11
+#: schemas.cpp:12
 #, kde-format
 msgid "Solarized Light"
 msgstr "Solarizovano svjetlo"
 
-#: schemas.cpp:12
+#: schemas.cpp:13
 #, kde-format
 msgid "White on Black"
 msgstr "Bijelo na crnom"
 
-#: schemas.cpp:13
+#: schemas.cpp:14
 #, kde-format
 msgid "Default (XFree 4)"
 msgstr "Zadano (XFree 4)"
 
-#: schemas.cpp:14
+#: schemas.cpp:15
 #, kde-format
 msgid "Linux console"
 msgstr "Linux konzola"
 
-#: schemas.cpp:15
+#: schemas.cpp:16
 #, kde-format
 msgid "macOS"
 msgstr ""
 
-#: schemas.cpp:16
+#: schemas.cpp:17
 #, kde-format
 msgid "Solaris console"
 msgstr "Solaris konzola"

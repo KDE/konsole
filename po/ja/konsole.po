@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:43+0000\n"
+"POT-Creation-Date: 2024-11-23 00:43+0000\n"
 "PO-Revision-Date: 2023-12-03 23:07-0800\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -2037,55 +2037,60 @@ msgstr "Breeze"
 
 #: schemas.cpp:6
 #, kde-format
+msgid "Campbell"
+msgstr ""
+
+#: schemas.cpp:7
+#, kde-format
 msgid "Dark Pastels"
 msgstr "ダークパステル"
 
-#: schemas.cpp:7
+#: schemas.cpp:8
 #, kde-format
 msgid "Green on Black"
 msgstr "黒地に緑"
 
-#: schemas.cpp:8
+#: schemas.cpp:9
 #, kde-format
 msgid "Linux Colors"
 msgstr "Linux 色"
 
-#: schemas.cpp:9
+#: schemas.cpp:10
 #, kde-format
 msgid "Red on Black"
 msgstr "黒地に赤"
 
-#: schemas.cpp:10
+#: schemas.cpp:11
 #, kde-format
 msgid "Solarized"
 msgstr "Solarized"
 
-#: schemas.cpp:11
+#: schemas.cpp:12
 #, kde-format
 msgid "Solarized Light"
 msgstr "Solarized Light"
 
-#: schemas.cpp:12
+#: schemas.cpp:13
 #, kde-format
 msgid "White on Black"
 msgstr "黒地に白"
 
-#: schemas.cpp:13
+#: schemas.cpp:14
 #, kde-format
 msgid "Default (XFree 4)"
 msgstr "標準 (XFree 4)"
 
-#: schemas.cpp:14
+#: schemas.cpp:15
 #, kde-format
 msgid "Linux console"
 msgstr "linux コンソール"
 
-#: schemas.cpp:15
+#: schemas.cpp:16
 #, kde-format
 msgid "macOS"
 msgstr "macOS"
 
-#: schemas.cpp:16
+#: schemas.cpp:17
 #, kde-format
 msgid "Solaris console"
 msgstr "Solaris コンソール"

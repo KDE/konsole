@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:43+0000\n"
+"POT-Creation-Date: 2024-11-23 00:43+0000\n"
 "PO-Revision-Date: 2021-10-15 10:45+0200\n"
 "Last-Translator: Prof. Dr. Eduard Werner <e.werner@rz.uni-leipzig.de>\n"
 "Language-Team: Upper Sorbian\n"
@@ -1993,57 +1993,62 @@ msgstr ""
 
 #: schemas.cpp:6
 #, kde-format
-msgid "Dark Pastels"
+msgid "Campbell"
 msgstr ""
 
 #: schemas.cpp:7
 #, kde-format
-msgid "Green on Black"
+msgid "Dark Pastels"
 msgstr ""
 
 #: schemas.cpp:8
+#, kde-format
+msgid "Green on Black"
+msgstr ""
+
+#: schemas.cpp:9
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Linux Colors"
 msgstr "Konsole"
 
-#: schemas.cpp:9
+#: schemas.cpp:10
 #, kde-format
 msgid "Red on Black"
 msgstr ""
 
-#: schemas.cpp:10
+#: schemas.cpp:11
 #, kde-format
 msgid "Solarized"
 msgstr ""
 
-#: schemas.cpp:11
+#: schemas.cpp:12
 #, kde-format
 msgid "Solarized Light"
 msgstr ""
 
-#: schemas.cpp:12
+#: schemas.cpp:13
 #, kde-format
 msgid "White on Black"
 msgstr ""
 
-#: schemas.cpp:13
+#: schemas.cpp:14
 #, kde-format
 msgid "Default (XFree 4)"
 msgstr ""
 
-#: schemas.cpp:14
+#: schemas.cpp:15
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Linux console"
 msgstr "Konsole"
 
-#: schemas.cpp:15
+#: schemas.cpp:16
 #, kde-format
 msgid "macOS"
 msgstr ""
 
-#: schemas.cpp:16
+#: schemas.cpp:17
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Solaris console"

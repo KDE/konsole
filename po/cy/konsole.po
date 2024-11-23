@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:43+0000\n"
+"POT-Creation-Date: 2024-11-23 00:43+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -2072,60 +2072,65 @@ msgstr ""
 
 #: schemas.cpp:6
 #, kde-format
-msgid "Dark Pastels"
+msgid "Campbell"
 msgstr ""
 
 #: schemas.cpp:7
 #, kde-format
+msgid "Dark Pastels"
+msgstr ""
+
+#: schemas.cpp:8
+#, kde-format
 msgid "Green on Black"
 msgstr "Gwyrdd ar Ddu"
 
-#: schemas.cpp:8
+#: schemas.cpp:9
 #, kde-format
 msgid "Linux Colors"
 msgstr "Lliwiau Linux"
 
-#: schemas.cpp:9
+#: schemas.cpp:10
 #, fuzzy, kde-format
 #| msgid "White on Black"
 msgid "Red on Black"
 msgstr "Gwyn ar Ddu"
 
-#: schemas.cpp:10
+#: schemas.cpp:11
 #, fuzzy, kde-format
 #| msgid "Solaris"
 msgid "Solarized"
 msgstr "Solaris"
 
-#: schemas.cpp:11
+#: schemas.cpp:12
 #, fuzzy, kde-format
 #| msgid "Solaris"
 msgid "Solarized Light"
 msgstr "Solaris"
 
-#: schemas.cpp:12
+#: schemas.cpp:13
 #, kde-format
 msgid "White on Black"
 msgstr "Gwyn ar Ddu"
 
-#: schemas.cpp:13
+#: schemas.cpp:14
 #, fuzzy, kde-format
 #| msgid "XTerm (XFree 4.x.x)"
 msgid "Default (XFree 4)"
 msgstr "XTerm (XFree 4.x.x)"
 
-#: schemas.cpp:14
+#: schemas.cpp:15
 #, fuzzy, kde-format
 #| msgid "linux console"
 msgid "Linux console"
 msgstr "terfynell linux"
 
-#: schemas.cpp:15
+#: schemas.cpp:16
 #, kde-format
 msgid "macOS"
 msgstr ""
 
-#: schemas.cpp:16
+#: schemas.cpp:17
 #, fuzzy, kde-format
 #| msgid "linux console"
 msgid "Solaris console"
