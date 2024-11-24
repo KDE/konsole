@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-23 00:43+0000\n"
-"PO-Revision-Date: 2024-08-24 12:22+0200\n"
+"PO-Revision-Date: 2024-11-23 12:33+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -32,7 +32,7 @@ msgstr ""
 "com>\n"
 "com>\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2044,7 +2044,7 @@ msgstr "Brisa"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Campbell"
 
 #: schemas.cpp:7
 #, kde-format
