@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-23 00:43+0000\n"
-"PO-Revision-Date: 2024-09-05 13:09+0400\n"
+"PO-Revision-Date: 2024-11-28 08:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -2017,7 +2017,7 @@ msgstr "النسيم"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "كامبل"
 
 #: schemas.cpp:7
 #, kde-format
