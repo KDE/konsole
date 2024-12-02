@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-04-18 22:56+0300\n"
+"PO-Revision-Date: 2024-10-18 18:47+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -29,8 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-POT-Import-Date: 2012-12-01 22:22:03+0000\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1638,7 +1637,7 @@ msgstr "Poista SSH-asetukset"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
-msgstr ""
+msgstr "Tuotiin SSH-profiili<br/>Jotkin asetukset ovat vain luettavissa."
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
 #, kde-format
@@ -1974,23 +1973,27 @@ msgstr "Sijainti ”%1” ei kelpaa. Rivihistorian tallennus epäonnistui."
 #: SaveHistoryAutoTask.cpp:88
 #, kde-format
 msgid "Failed to create autosave file at %1."
-msgstr ""
+msgstr "Automaattitallennustiedoston ”%1” luominen epäonnistui."
 
 #: SaveHistoryAutoTask.cpp:102
 #, kde-format
 msgid "Stopping autosave due to switching of screens."
-msgstr ""
+msgstr "Näytönvaihdon vuoksi lopetetaan automaattitallennus."
 
 #: SaveHistoryAutoTask.cpp:115
 #, kde-format
 msgid ""
 "Autosave file has been modified externally, preventing further autosaves."
 msgstr ""
+"Automaattitallennustiedostoa on ulkoisesti muutettu, mikä estää sen "
+"jatkamisen."
 
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
 msgstr ""
+"Ulostulomuutosten takia automaattitallennuksen tilan päivittäminen "
+"epäonnistui."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
@@ -2267,15 +2270,14 @@ msgid "Save Output &As..."
 msgstr "Tallenna tuloste nimellä…"
 
 #: session/SessionController.cpp:739
-#, fuzzy, kde-format
-#| msgid "Save Output &As..."
+#, kde-format
 msgid "Auto Save Output As..."
-msgstr "Tallenna tuloste nimellä…"
+msgstr "Automaattitallenna tuloste nimellä…"
 
 #: session/SessionController.cpp:743
 #, kde-format
 msgid "Stop Auto Save"
-msgstr ""
+msgstr "Pysäytä automaattitallennus"
 
 #: session/SessionController.cpp:747
 #, kde-format
@@ -2298,16 +2300,14 @@ msgid "Clear Scrollback and Reset"
 msgstr "Tyhjennä rivihistoria ja alusta näkymä"
 
 #: session/SessionController.cpp:770
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Muokkaa profiilia"
+msgstr "Seuraava profiili"
 
 #: session/SessionController.cpp:775
-#, fuzzy, kde-format
-#| msgid "Previous View"
+#, kde-format
 msgid "Previous Profile"
-msgstr "Edellinen näkymä"
+msgstr "Edellinen profiiili"
 
 # Tämä muoto, koska kyseessä on alivalikko, jossa on luettelo profiileista.
 #: session/SessionController.cpp:778
@@ -2701,16 +2701,15 @@ msgstr "Etsi taaksepäin"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchNoWrap)
 #. i18n: ectx: tooltip, entry (SearchNoWrap), group (SearchSettings)
 #: settings/GeneralSettings.ui:271 settings/konsole.kcfg:84
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Asettaa haun alkamisen alhaalta"
+msgstr "Asettaa, pysähtyykö haku vai kiertääkö se toiseen päähän"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SearchNoWrap)
 #: settings/GeneralSettings.ui:274
 #, kde-format
 msgid "No wrap"
-msgstr ""
+msgstr "Ei kiertoa"
 
 #. i18n: ectx: tooltip, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/konsole.kcfg:18
@@ -2792,7 +2791,7 @@ msgstr "Asettaa, korostetaanko hakuosumat"
 #: settings/konsole.kcfg:83
 #, kde-format
 msgid "Search stops instead of wrapping"
-msgstr ""
+msgstr "Haku pysähtyy kiertämättä"
 
 #. i18n: ectx: label, entry (EnableMemoryMonitoring), group (MemorySettings)
 #: settings/konsole.kcfg:90
@@ -3057,17 +3056,15 @@ msgstr "Päätteen &alla"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "Päätteen &alla"
+msgstr "Päätealueesta vasempaan"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Be&low terminal area"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "Päätteen &alla"
+msgstr "Päätealueesta &oikeaan"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
@@ -3077,8 +3074,7 @@ msgstr "Näytä Sulje välilehti -painike:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
 msgstr "K&ussakin välilehdessä"
 
@@ -3263,19 +3259,15 @@ msgstr " px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Ominaisuuden saa käyttöön valitsemalla profiilin "
-"asetuksista <span style=\" font-weight:600;\">Hiiri→Sekalaista→Alleviivaa "
-"tiedostot</span></p></body></html>"
+"asetuksista <span style=\" font-weight:600;\">Hiiri → Sekalaista → "
+"Alleviivaa tiedostot</span></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -3705,7 +3697,7 @@ msgstr "Verkko-osoitevihjeet näyttävä näppäinyhdistelmä:"
 #, kde-format
 msgctxt "key on keyboard"
 msgid "Shift"
-msgstr "Shift"
+msgstr "Vaihto"
 
 #. i18n: ectx: property (text), widget (QToolButton, urlHintsModifierCtrl)
 #: widgets/EditProfileAdvancedPage.ui:70
@@ -3773,10 +3765,9 @@ msgstr "Vuonhallinta"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "&Default character encoding:"
-msgstr "Oletusmerkistökoodaus:"
+msgstr "Oletus&merkistökoodaus:"
 
 #. i18n: ectx: property (text), widget (QLabel, peekPrimaryLabel)
 #: widgets/EditProfileAdvancedPage.ui:242
@@ -3788,46 +3779,40 @@ msgstr "Pikanäppäin ensisijaisen näytön vilkaisemiseksi:"
 #: widgets/EditProfileAdvancedPage.ui:255
 #, kde-format
 msgid "Set interval between autosaves:"
-msgstr ""
+msgstr "Aseta automaattitallennusväli:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, autoSaveIntervalWidget)
 #: widgets/EditProfileAdvancedPage.ui:262
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:275
-#, fuzzy, kde-format
-#| msgid "Line numbers "
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Rivinumerointi"
+msgstr "Rivinumerointi:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:285
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "Never"
 msgid "&Never"
-msgstr "&Ei koskaan"
+msgstr "&ei koskaan"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsURL)
 #: widgets/EditProfileAdvancedPage.ui:295
-#, fuzzy, kde-format
-#| msgctxt "When showing URL hints"
-#| msgid "When URL hints show"
+#, kde-format
 msgctxt "When showing URL hints"
 msgid "When &URL hints show"
-msgstr "Näytettäessä osoitevihjeet"
+msgstr "näytettäessä &osoitevihjeitä"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:305
-#, fuzzy, kde-format
-#| msgctxt "Always"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "A&lways"
-msgstr "Aina"
+msgstr "&aina"
 
 #. i18n: ectx: attribute (title), widget (QWidget, colorSchemeTab)
 #: widgets/EditProfileAppearancePage.ui:36
@@ -3924,20 +3909,18 @@ msgstr "Käytä fontin sisältämiä viivamerkkejä"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgid ""
 "Use the selected font for unicode Braille characters instead of the builtin "
 "code"
-msgstr "Käytä valittua fonttia viivamerkkeihin sisäänrakennetun koodin sijaan"
+msgstr ""
+"Käytä pistekirjoitukseen valittua fonttia sisäänrakennetun koodin sijaan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:201
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgid "Use unicode Braille characters contained in font"
-msgstr "Käytä fontin sisältämiä viivamerkkejä"
+msgstr "Käytä fontin sisältämiä pistekirjoitusmerkkejä"
 
 #. i18n: ectx: attribute (title), widget (QWidget, cursorTab)
 #: widgets/EditProfileAppearancePage.ui:209
@@ -4285,7 +4268,7 @@ msgstr ""
 #: widgets/EditProfileAppearancePage.ui:970
 #, kde-format
 msgid "force LTR line direction"
-msgstr "pakota rivisuunta vasemmalta oikealle"
+msgstr "Pakota rivin suunta vasemmalta oikealle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, enableBidiTableDirOverrideButton)
 #: widgets/EditProfileAppearancePage.ui:983
@@ -4508,10 +4491,9 @@ msgstr ""
 "taustan käynnistettyäsi Konsolen uudelleen."
 
 #: widgets/EditProfileDialog.cpp:1913
-#, fuzzy, kde-format
-#| msgid "Default profile"
+#, kde-format
 msgid "Default for file type"
-msgstr "Oletusprofiili"
+msgstr "Tiedostotyypin oletus"
 
 #: widgets/EditProfileDialog.cpp:1939
 #, kde-format
@@ -4599,10 +4581,9 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, fuzzy, kde-format
-#| msgid "Initial directory:"
+#, kde-format
 msgid "I&nitial directory:"
-msgstr "Aloituskansio:"
+msgstr "A&loituskansio:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:170
@@ -4643,10 +4624,9 @@ msgstr "Muokkaa ympäristömuuttujien ja niiden arvojen luetteloa"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Initial terminal si&ze:"
-msgstr "Päätteen alustava koko:"
+msgstr "&Päätteen alustava koko:"
 
 #. i18n: ectx: property (text), widget (QLabel, useCurrentWindowSizeNote)
 #: widgets/EditProfileGeneralPage.ui:346
@@ -4663,10 +4643,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, fuzzy, kde-format
-#| msgid "Terminal bell mode:"
+#, kde-format
 msgid "&Terminal bell mode:"
-msgstr "Järjestelmän äänimerkin tyyli:"
+msgstr "Järjestelmän &äänimerkin tyyli:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, semantic)
 #: widgets/EditProfileGeneralPage.ui:377
@@ -4832,17 +4811,15 @@ msgstr "Kolmoisnapsautus valitsee:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, fuzzy, kde-format
-#| msgid "The whole line"
+#, kde-format
 msgid "&The whole line"
-msgstr "koko rivin"
+msgstr "k&oko rivin"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, fuzzy, kde-format
-#| msgid "From mouse position to the end of line"
+#, kde-format
 msgid "From mouse position to the end of &line"
-msgstr "tekstin hiirikohdistimesta rivin loppuun"
+msgstr "&hiiren sijainnista rivin loppuun"
 
 #. i18n: ectx: property (text), widget (QLabel, label_13)
 #: widgets/EditProfileMousePage.ui:140
@@ -5121,10 +5098,9 @@ msgstr "Vieritä sivua puolet ikkunan korkeudesta"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:86
-#, fuzzy, kde-format
-#| msgid "Half screen height"
+#, kde-format
 msgid "Half screen heigh&t"
-msgstr "puolet näytön korkeudesta"
+msgstr "&puolet näytön korkeudesta"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:96
@@ -5134,10 +5110,9 @@ msgstr "Vieritä sivua ikkunan koko korkeuden verran"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:99
-#, fuzzy, kde-format
-#| msgid "Full screen height"
+#, kde-format
 msgid "F&ull screen height"
-msgstr "koko näytön korkeus"
+msgstr "&koko näytön korkeus"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSize)
 #: widgets/EditProfileScrollingPage.ui:131
@@ -5153,12 +5128,10 @@ msgstr "Näytä vierityspalkki päätteen oikeassa reunassa."
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:144
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the right side"
-#| msgid "Right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
-msgstr "oikealla"
+msgstr "&oikealla"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:154
@@ -5168,12 +5141,10 @@ msgstr "Näytä vierityspalkki päätteen vasemmassa reunassa."
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:157
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr "vasemmalla"
+msgstr "&vasemmalla"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
 #: widgets/EditProfileScrollingPage.ui:167
@@ -5211,19 +5182,19 @@ msgstr "Rivitä uudelleen päätteen koon muututtua"
 #: widgets/EditProfileScrollingPage.ui:239
 #, kde-format
 msgid "Color of scrollbar markers:"
-msgstr ""
+msgstr "Vierityspalkkimerkkien väri:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
 #: widgets/EditProfileScrollingPage.ui:250
 #, kde-format
 msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr ""
+msgstr "Kunkin merkin koko (osuutena vierityspalkin pituudesta):"
 
 #. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
 #: widgets/EditProfileScrollingPage.ui:266
 #, no-c-format, kde-format
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5293,10 +5264,9 @@ msgstr "Voit rajoittaa rivihistoriaan tallennettavien rivien määrää"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size:"
+#, kde-format
 msgid "Fi&xed size:"
-msgstr "annettu koko:"
+msgstr "k&iinteä koko:"
 
 #. i18n: ectx: property (toolTip), widget (KPluralHandlingSpinBox, historyLineSpinner)
 #: widgets/HistorySizeWidget.ui:73
@@ -5313,12 +5283,10 @@ msgstr "Rivihistoriasta ei poisteta mitään, ellet tyhjennä sitä itse"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgctxt "Save all lines to the scrollback history"
-#| msgid "Unlimited"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr "ei rajoitettu"
+msgstr "ei &rajoitettu"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5328,12 +5296,10 @@ msgstr "Älä muista aiempaa tulostetta"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
-msgstr "&Ei mitään"
+msgstr "&ei mitään"
 
 #: widgets/IncrementalSearchBar.cpp:49
 #, kde-format
@@ -5429,14 +5395,13 @@ msgstr "Asettaa, alkaako haku alhaalta"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
-msgstr ""
+msgstr "Ei kiertoa"
 
 #: widgets/IncrementalSearchBar.cpp:142
-#, fuzzy, kde-format
-#| msgid "Sets whether search should start from the bottom"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
-msgstr "Asettaa haun alkamisen alhaalta"
+msgstr "Asettaa, pysähtyykö haku vai kiertääkö se toiseen päähän"
 
 #: widgets/IncrementalSearchBar.cpp:171
 #, kde-format
@@ -5480,10 +5445,9 @@ msgstr "Etävälilehden otsikon muoto:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, fuzzy, kde-format
-#| msgid "Tab title format:"
+#, kde-format
 msgid "&Tab title format:"
-msgstr "Välilehden otsikon muoto:"
+msgstr "Välilehden &otsikon muoto:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5493,10 +5457,9 @@ msgstr "Tavallisen välilehtiotsikon muoto"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgid "Tab Color:"
+#, kde-format
 msgid "Tab Co&lor:"
-msgstr "Välilehden väri:"
+msgstr "&Välilehden väri:"
 
 #: widgets/TabTitleFormatButton.cpp:21
 #, c-format
