@@ -155,6 +155,14 @@
       <label>Control the visibility of 'New Tab' button on the tab bar</label>
       <default>false</default>
     </entry>
+    <entry name="SearchTabsButton" type="Enum">
+      <label>Control the visibility of 'Search Tabs' button on the tab bar</label>
+      <choices>
+        <choice name="ShowSearchTabsButton" />
+        <choice name="HideSearchTabsButton" />
+      </choices>
+      <default>ShowSearchTabsButton</default>
+    </entry>
     <entry name="CloseTabButton" type="Enum">
       <label>Control where the "Close tab" button will be displayed</label>
       <choices>

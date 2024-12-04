@@ -117,6 +117,7 @@ public:
     // TODO: Re-enable this later.
     //    void setNewViewMenu(QMenu *menu);
     void renameTab(int index);
+    void searchTabs();
     ViewManager *connectedViewManager();
     void currentTabChanged(int index);
     void closeCurrentTab();
@@ -245,6 +246,7 @@ private:
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
     QToolButton *_newTabButton;
+    QToolButton *_searchTabsButton;
     QToolButton *_closeTabButton;
     int _contextMenuTabIndex;
     NewTabBehavior _newTabBehavior;

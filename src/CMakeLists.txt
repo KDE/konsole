@@ -200,6 +200,9 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         widgets/RenameTabWidget.cpp
                         widgets/TabTitleFormatButton.cpp
 
+                        searchtabs/SearchTabs.cpp
+                        searchtabs/SearchTabsModel.cpp
+
                         terminalDisplay/extras/CompositeWidgetFocusWatcher.cpp
                         terminalDisplay/extras/AutoScrollHandler.cpp
                         terminalDisplay/extras/HighlightScrolledLines.cpp

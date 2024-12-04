@@ -9,6 +9,7 @@
 #include "config-konsole.h"
 
 // Qt
+#include <QBoxLayout>
 #include <QFile>
 #include <QKeyEvent>
 #include <QMenu>
@@ -25,6 +26,7 @@
 #include "KonsoleSettings.h"
 #include "ViewProperties.h"
 #include "profile/ProfileList.h"
+#include "searchtabs/SearchTabs.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
 #include "terminalDisplay/TerminalDisplay.h"
@@ -39,6 +41,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     : QTabWidget(parent)
     , _connectedViewManager(connectedViewManager)
     , _newTabButton(new QToolButton(this))
+    , _searchTabsButton(new QToolButton(this))
     , _closeTabButton(new QToolButton(this))
     , _contextMenuTabIndex(-1)
     , _newTabBehavior(PutNewTabAtTheEnd)
@@ -55,6 +58,11 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     _newTabButton->setAutoRaise(true);
     _newTabButton->setToolTip(i18nc("@info:tooltip", "Open a new tab"));
     connect(_newTabButton, &QToolButton::clicked, this, &TabbedViewContainer::newViewRequest);
+
+    _searchTabsButton->setIcon(QIcon::fromTheme(QStringLiteral("quickopen")));
+    _searchTabsButton->setAutoRaise(true);
+    _searchTabsButton->setToolTip(i18nc("@info:tooltip", "Search Tabs"));
+    connect(_searchTabsButton, &QToolButton::clicked, this, &TabbedViewContainer::searchTabs);
 
     _closeTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
     _closeTabButton->setAutoRaise(true);
@@ -205,8 +213,22 @@ void TabbedViewContainer::konsoleConfigChanged()
     setCornerWidget(KonsoleSettings::newTabButton() ? _newTabButton : nullptr, Qt::TopLeftCorner);
     _newTabButton->setVisible(KonsoleSettings::newTabButton());
 
-    setCornerWidget(KonsoleSettings::closeTabButton() == 1 ? _closeTabButton : nullptr, Qt::TopRightCorner);
+    // Add Layout for right corner tool buttons
+    auto layout = new QHBoxLayout();
+    layout->setStretch(0, 10);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+
+    layout->addWidget(KonsoleSettings::searchTabsButton() == 0 ? _searchTabsButton : nullptr);
+    _searchTabsButton->setVisible(KonsoleSettings::searchTabsButton() == 0);
+
+    layout->addWidget(KonsoleSettings::closeTabButton() == 1 ? _closeTabButton : nullptr);
     _closeTabButton->setVisible(KonsoleSettings::closeTabButton() == 1);
+
+    QWidget *rightCornerWidget = new QWidget();
+    rightCornerWidget->setLayout(layout);
+    setCornerWidget(rightCornerWidget, Qt::TopRightCorner);
+    rightCornerWidget->setVisible(true);
 
     tabBar()->setTabsClosable(KonsoleSettings::closeTabButton() == 0);
 
@@ -465,6 +487,17 @@ void TabbedViewContainer::renameTab(int index)
         setCurrentIndex(index);
         viewSplitterAt(index)->activeTerminalDisplay()->sessionController()->rename();
     }
+}
+
+void TabbedViewContainer::searchTabs()
+{
+    /**
+     * show tab search and pass focus to it
+     */
+    SearchTabs *searchTabs = new SearchTabs(this->connectedViewManager());
+    setFocusProxy(searchTabs);
+    searchTabs->raise();
+    searchTabs->show();
 }
 
 void TabbedViewContainer::openTabContextMenu(const QPoint &point)
