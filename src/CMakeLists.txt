@@ -197,6 +197,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         widgets/EditProfileDialog.cpp
                         widgets/HistorySizeWidget.cpp
                         widgets/IncrementalSearchBar.cpp
+                        widgets/IncrementalSearchBarSizeGrip.cpp
                         widgets/RenameTabWidget.cpp
                         widgets/TabTitleFormatButton.cpp
 

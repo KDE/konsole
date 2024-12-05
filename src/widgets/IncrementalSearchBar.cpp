@@ -17,6 +17,7 @@
 
 // KDE
 #include "KonsoleSettings.h"
+#include "widgets/IncrementalSearchBarSizeGrip.h"
 
 #include <KLocalizedString>
 #include <KStatefulBrush>
@@ -56,13 +57,11 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
     setFocusProxy(_searchEdit);
 
     setCursor(Qt::ArrowCursor);
-    // text box may be a minimum of 6 characters wide and a maximum of 10 characters wide
-    // (since the maxWidth metric is used here, more characters probably will fit in than 6
-    //  and 10)
+    // text box may be a minimum of 6 characters wide
+    // (since the maxWidth metric is used here, more characters probably will fit in than 6)
     QFontMetrics metrics(_searchEdit->font());
     int maxWidth = metrics.maxWidth();
     _searchEdit->setMinimumWidth(maxWidth * 6);
-    _searchEdit->setMaximumWidth(maxWidth * 10);
 
     _searchTimer = new QTimer(this);
     _searchTimer->setInterval(250);
@@ -144,7 +143,12 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent)
 
     setOptions();
 
+    // Allow this widget to be user resizable
+    this->setWindowFlags(Qt::SubWindow);
+    auto sizeGrip = new IncrementalSearchBarSizeGrip(this);
+
     auto barLayout = new QHBoxLayout(this);
+    barLayout->addWidget(sizeGrip, 0);
     barLayout->addWidget(_searchEdit);
     barLayout->addWidget(_findNextButton);
     barLayout->addWidget(_findPreviousButton);
