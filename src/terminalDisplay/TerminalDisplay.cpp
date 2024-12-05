@@ -3019,10 +3019,12 @@ void TerminalDisplay::dropEvent(QDropEvent *event)
     if (mimeData == nullptr) {
         return;
     }
-    auto urls = mimeData->urls();
+    const auto urls = mimeData->urls();
+    const bool canBePasted = mimeData->hasFormat(QStringLiteral("text/plain")) || mimeData->hasFormat(QStringLiteral("text/uri-list"));
 
     QString dropText;
     if (!urls.isEmpty()) {
+        // might invalidate mimeData thanks to job->exec()
         dropText = extractDroppedText(urls);
 
         // If our target is local we will open a popup - otherwise the fallback kicks
@@ -3055,7 +3057,7 @@ void TerminalDisplay::dropEvent(QDropEvent *event)
         dropText = mimeData->text();
     }
 
-    if (mimeData->hasFormat(QStringLiteral("text/plain")) || mimeData->hasFormat(QStringLiteral("text/uri-list"))) {
+    if (canBePasted) {
         doPaste(dropText, false);
     }
 
