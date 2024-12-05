@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-23 00:43+0000\n"
+"POT-Creation-Date: 2024-12-05 00:43+0000\n"
 "PO-Revision-Date: 2011-07-11 13:50+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
@@ -2047,14 +2047,14 @@ msgstr "ಆಯ್ಕೆಗಳು"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:182
+#: PrintOptions.ui:39 settings/konsole.kcfg:190
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:186
+#: PrintOptions.ui:46 settings/konsole.kcfg:194
 #, kde-format
 msgid "&Scale output"
 msgstr ""
@@ -2256,6 +2256,20 @@ msgstr ""
 #, kde-format
 msgid "Solaris console"
 msgstr "ಸೊಲಾರಿಸ್ ಕನ್ಸೋಲ್"
+
+#: searchtabs/SearchTabs.cpp:130
+#, fuzzy, kde-format
+#| msgid "Search Output..."
+msgctxt "@label:textbox"
+msgid "Search..."
+msgstr "ಪ್ರದಾನವನ್ನು ಹುಡುಕು..."
+
+#: searchtabs/SearchTabs.cpp:131
+#, fuzzy, kde-format
+#| msgid "Enter the text to search for here"
+msgctxt "@info:tooltip"
+msgid "Enter a tab name to search for here"
+msgstr "ಹುಡುಕಬೇಕಾದ ಪಠ್ಯವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ"
 
 #: session/Session.cpp:109
 #, fuzzy, kde-format
@@ -3074,44 +3088,50 @@ msgstr ""
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr ""
 
-#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
+#, kde-format
+msgid "Control the visibility of 'Search Tabs' button on the tab bar"
+msgstr ""
+
+#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#: settings/konsole.kcfg:167
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:168
+#: settings/konsole.kcfg:176
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr ""
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:176
+#: settings/konsole.kcfg:184
 #, kde-format
 msgid "Expand the tab widths"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:192
+#: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:196
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:200
+#: settings/konsole.kcfg:208
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:204
+#: settings/konsole.kcfg:212
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr ""
@@ -3318,110 +3338,129 @@ msgctxt "Do not show a close button"
 msgid "None"
 msgstr "ಯಾವುದೂ ಇಲ್ಲ (&N)"
 
+#. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
+#: settings/TabBarSettings.ui:231
+#, fuzzy, kde-format
+#| msgid "&Close Tab"
+msgid "Show Search Tabs button:"
+msgstr "ಹಾಳೆ&ಯನ್ನುಮುಚ್ಚು"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
+#: settings/TabBarSettings.ui:241
+#, kde-format
+msgid "Always"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
+#: settings/TabBarSettings.ui:251
+#, kde-format
+msgid "Never"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:231 settings/TabBarSettings.ui:364
+#: settings/TabBarSettings.ui:277 settings/TabBarSettings.ui:410
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:241
+#: settings/TabBarSettings.ui:287
 #, fuzzy, kde-format
 #| msgid "Show 'New Tab' and 'Close Tab' buttons in tab bar"
 msgid "Show 'New Tab' button"
 msgstr "ಹಾಳೆಯಲ್ಲಿ \"ಹೊಸ ಹಾಳೆ\" ಮತ್ತು \"ಹಾಳೆ ಮುಚ್ಚು\" ಗುಂಡಿಗಳನ್ನು ತೋರಿಸಿ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:248
+#: settings/TabBarSettings.ui:294
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:255
+#: settings/TabBarSettings.ui:301
 #, fuzzy, kde-format
 #| msgid "Use a custom, fixed color for the cursor"
 msgid "Use user-defined stylesheet:"
 msgstr "ಸ್ಥಳಸೂಚಕಕ್ಕೆ ಗ್ರಾಹಕೀಯ, ನಿಗದಿತ ಬಣ್ಣ ಪದ್ಧತಿಯನ್ನು ಉಪಯೋಗಿಸು"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:281
+#: settings/TabBarSettings.ui:327
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:304
+#: settings/TabBarSettings.ui:350
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:318
+#: settings/TabBarSettings.ui:364
 #, fuzzy, kde-format
 #| msgid "Enter new tab text:"
 msgid "Put new tabs:"
 msgstr "ಹೊಸ ಹಾಳೆ ಪಠ್ಯವನ್ನು ನಮೂದಿಸು:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:328
+#: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "At &the end"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:338
+#: settings/TabBarSettings.ui:384
 #, fuzzy, kde-format
 #| msgid "Close Current Tab"
 msgid "After current &tab"
 msgstr "ಈಗಿನ ಹಾಳೆಯನ್ನು ಮುಚ್ಚು"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:374
+#: settings/TabBarSettings.ui:420
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:397
+#: settings/TabBarSettings.ui:443
 #, fuzzy, kde-format
 #| msgid "Split View"
 msgid "Splits"
 msgstr "ನೋಟವನ್ನು ವಿಭಜಿಸು"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:403
+#: settings/TabBarSettings.ui:449
 #, fuzzy, kde-format
 #| msgid "Show Menu Bar"
 msgid "Show Header:"
 msgstr "ಪರಿವಿಡಿ ಪಟ್ಟಿಯನ್ನು ತೋರಿಸು"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:410
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:420
+#: settings/TabBarSettings.ui:466
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:446
+#: settings/TabBarSettings.ui:492
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:502
 #, fuzzy, kde-format
 #| msgctxt "@item:inrange Minimum Size"
 #| msgid "Small"
@@ -3430,14 +3469,14 @@ msgid "Small"
 msgstr "ಚಿಕ್ಕದು"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:466
+#: settings/TabBarSettings.ui:512
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:476
+#: settings/TabBarSettings.ui:522
 #, fuzzy, kde-format
 #| msgctxt "@item:inrange Maximum Size"
 #| msgid "Large"
@@ -3446,7 +3485,7 @@ msgid "Large"
 msgstr "ದೊಡ್ಡದು"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:499
+#: settings/TabBarSettings.ui:545
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -5608,129 +5647,129 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "ಯಾವುದೂ ಇಲ್ಲ (&N)"
 
-#: widgets/IncrementalSearchBar.cpp:49
+#: widgets/IncrementalSearchBar.cpp:50
 #, fuzzy, kde-format
 #| msgid "Find:"
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "ಹುಡುಕು:"
 
-#: widgets/IncrementalSearchBar.cpp:51
+#: widgets/IncrementalSearchBar.cpp:52
 #, fuzzy, kde-format
 #| msgid "Enter the text to search for here"
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "ಹುಡುಕಬೇಕಾದ ಪಠ್ಯವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ"
 
-#: widgets/IncrementalSearchBar.cpp:75
+#: widgets/IncrementalSearchBar.cpp:74
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "ಮುಂದಕ್ಕೆ"
 
-#: widgets/IncrementalSearchBar.cpp:78
+#: widgets/IncrementalSearchBar.cpp:77
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಮುಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:85
+#: widgets/IncrementalSearchBar.cpp:84
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "ಹಿಂದಕ್ಕೆ"
 
-#: widgets/IncrementalSearchBar.cpp:87
+#: widgets/IncrementalSearchBar.cpp:86
 #, fuzzy, kde-format
 #| msgid "Find the previous match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಹಿಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:101
 #, fuzzy, kde-format
 #| msgid "Display the options menu"
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "ಆಯ್ಕೆ ಪರಿವಿಡಿಯನ್ನು ತೋರಿಸು"
 
-#: widgets/IncrementalSearchBar.cpp:109
+#: widgets/IncrementalSearchBar.cpp:108
 #, fuzzy, kde-format
 #| msgid "Close the search bar"
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "ಹುಡುಕು ಪಟ್ಟಿಯನ್ನು ಮುಚ್ಚು"
 
-#: widgets/IncrementalSearchBar.cpp:119
+#: widgets/IncrementalSearchBar.cpp:118
 #, fuzzy, kde-format
 #| msgid "Case sensitive"
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "ಅಕ್ಷರಸ್ತರ ಸಂವೇದಿ"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:120
 #, fuzzy, kde-format
 #| msgid "Sets whether the search is case sensitive"
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "ಹುಡುಕು ಅಕ್ಷರಸ್ತರ ಸಂವೇದಿಯೇ ಅಲ್ಲವೇ ಎಂಬುದನ್ನು ನಿಗದಿಗೊಳಿಸುತ್ತದೆ"
 
-#: widgets/IncrementalSearchBar.cpp:124
+#: widgets/IncrementalSearchBar.cpp:123
 #, fuzzy, kde-format
 #| msgid "Match regular expression"
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "ನಿಯತ ಕ್ರಮೋಕ್ತಿಯನ್ನು (ಎಕ್ಸ್ಪ್ರೆಷನ್) ಹೊಂದಿಸು"
 
-#: widgets/IncrementalSearchBar.cpp:128
+#: widgets/IncrementalSearchBar.cpp:127
 #, fuzzy, kde-format
 #| msgid "Highlight all matches"
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "ತಾಳೆಯಾದ ಎಲ್ಲವನ್ನೂ ಪ್ರಶಸ್ತಗೊಳಿಸು"
 
-#: widgets/IncrementalSearchBar.cpp:130
+#: widgets/IncrementalSearchBar.cpp:129
 #, fuzzy, kde-format
 #| msgid "Sets whether matching text should be highlighted"
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "ಸರಿಹೊಂದುವ ಪಠ್ಯವನ್ನು ಪ್ರಶಸ್ತಗೊಳಿಸಬೇಕೆ ಬೇಡವೆ ಎಂಬುದನ್ನು ನಿಗದಿಗೊಳಿಸುತ್ತದೆ"
 
-#: widgets/IncrementalSearchBar.cpp:133
+#: widgets/IncrementalSearchBar.cpp:132
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:134
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಮುಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:139
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:141
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಮುಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:171
+#: widgets/IncrementalSearchBar.cpp:175
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "ಹಾಲಿ ಪದಪುಂಜದ ಮುಂದಿನ ತಾಳೆಯನ್ನು ಕಂಡುಹಿಡಿ"
 
-#: widgets/IncrementalSearchBar.cpp:176
+#: widgets/IncrementalSearchBar.cpp:180
 #, fuzzy, kde-format
 #| msgid "Find the next match for the current search phrase"
 msgctxt "@info:tooltip"
@@ -5905,7 +5944,7 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "ಹಾಳೆ&ಯನ್ನುಮುಚ್ಚು"
 
-#: widgets/ViewContainer.cpp:56
+#: widgets/ViewContainer.cpp:59
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -5913,27 +5952,35 @@ msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "ಹಾಳೆಯನ್ನು ಬೇರ್ಪಡಿಸು (&D)"
 
-#: widgets/ViewContainer.cpp:61
+#: widgets/ViewContainer.cpp:64
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Detach Tab"
+msgctxt "@info:tooltip"
+msgid "Search Tabs"
+msgstr "ಹಾಳೆಯನ್ನು ಬೇರ್ಪಡಿಸು (&D)"
+
+#: widgets/ViewContainer.cpp:69
 #, fuzzy, kde-format
 #| msgid "Close the search bar"
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "ಹುಡುಕು ಪಟ್ಟಿಯನ್ನು ಮುಚ್ಚು"
 
-#: widgets/ViewContainer.cpp:94
+#: widgets/ViewContainer.cpp:102
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "ಹಾಳೆಯನ್ನು ಬೇರ್ಪಡಿಸು (&D)"
 
-#: widgets/ViewContainer.cpp:100
+#: widgets/ViewContainer.cpp:108
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "ಹಾಳೆಯನ್ನು &ಮರುಹೆಸರಿಸು..."
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:113
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"
@@ -6393,9 +6440,6 @@ msgstr "ಹಾಳೆ&ಯನ್ನುಮುಚ್ಚು"
 
 #~ msgid "Decrease Text Size"
 #~ msgstr "ಪಠ್ಯ ಗಾತ್ರವನ್ನು ಕಡಿಮೆ ಮಾಡು"
-
-#~ msgid "Search Output..."
-#~ msgstr "ಪ್ರದಾನವನ್ನು ಹುಡುಕು..."
 
 #~ msgid "Find Next"
 #~ msgstr "ಮುಂದಕ್ಕೆ ಹುಡುಕು"

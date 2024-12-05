@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-23 00:43+0000\n"
+"POT-Creation-Date: 2024-12-05 00:43+0000\n"
 "PO-Revision-Date: 2023-04-29 12:15+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -1883,14 +1883,14 @@ msgstr "Optionen für die Ausgabe"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:182
+#: PrintOptions.ui:39 settings/konsole.kcfg:190
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Druck&freundlicher Modus (schwarzer Text ohne Hintergrund)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:186
+#: PrintOptions.ui:46 settings/konsole.kcfg:194
 #, kde-format
 msgid "&Scale output"
 msgstr "Ausgabe &skalieren"
@@ -2086,6 +2086,22 @@ msgstr "macOS"
 #, kde-format
 msgid "Solaris console"
 msgstr "Solaris-Konsole"
+
+#: searchtabs/SearchTabs.cpp:130
+#, fuzzy, kde-format
+#| msgctxt "@item:intext Search options"
+#| msgid "Search:"
+msgctxt "@label:textbox"
+msgid "Search..."
+msgstr "Suchen:"
+
+#: searchtabs/SearchTabs.cpp:131
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the text to search for here"
+msgctxt "@info:tooltip"
+msgid "Enter a tab name to search for here"
+msgstr "Geben Sie hier Suchtext ein"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2875,8 +2891,17 @@ msgstr ""
 "Steuert die Anzeige des Knopfs »Neues Unterfenster“ auf der "
 "Unterfensterleiste"
 
-#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
+#, fuzzy, kde-format
+#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+msgid "Control the visibility of 'Search Tabs' button on the tab bar"
+msgstr ""
+"Steuert die Anzeige des Knopfs »Neues Unterfenster“ auf der "
+"Unterfensterleiste"
+
+#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#: settings/konsole.kcfg:167
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr ""
@@ -2884,37 +2909,37 @@ msgstr ""
 "Unterfensterleiste"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:168
+#: settings/konsole.kcfg:176
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Legt fest, wo das neue Unterfenster eingefügt wird"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:176
+#: settings/konsole.kcfg:184
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "Breite der Unterfenster erweitern"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:192
+#: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "System-Speicherort für Verlaufsdateien verwenden"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:196
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "Benutzer-Speicherort für Verlaufsdateien verwenden"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:200
+#: settings/konsole.kcfg:208
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "Angegebenen Speicherort für Verlaufsdateien verwenden"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:204
+#: settings/konsole.kcfg:212
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Diesen Ordner für Verlaufsdateien verwenden"
@@ -3111,125 +3136,148 @@ msgctxt "Do not show a close button"
 msgid "None"
 msgstr "Keine"
 
+#. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
+#: settings/TabBarSettings.ui:231
+#, fuzzy, kde-format
+#| msgid "Show Close Tab button:"
+msgid "Show Search Tabs button:"
+msgstr "Knopf zum Unterfenster schließen anzeigen"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
+#: settings/TabBarSettings.ui:241
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Always show the split header"
+#| msgid "Always"
+msgid "Always"
+msgstr "Immer"
+
+#. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
+#: settings/TabBarSettings.ui:251
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Never show the split header"
+#| msgid "Never"
+msgid "Never"
+msgstr "Niemals"
+
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:231 settings/TabBarSettings.ui:364
+#: settings/TabBarSettings.ui:277 settings/TabBarSettings.ui:410
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr "Verschiedenes:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:241
+#: settings/TabBarSettings.ui:287
 #, kde-format
 msgid "Show 'New Tab' button"
 msgstr "Knöpfe „Neues Unterfenster“ anzeigen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:248
+#: settings/TabBarSettings.ui:294
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr "Breite einzelner Unterfenster auf die volle Fensterbreite erweitern"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:255
+#: settings/TabBarSettings.ui:301
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr "Benutzerdefinierte Stilvorlage verwenden:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:281
+#: settings/TabBarSettings.ui:327
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(keine)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:304
+#: settings/TabBarSettings.ui:350
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "Verhalten"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:318
+#: settings/TabBarSettings.ui:364
 #, kde-format
 msgid "Put new tabs:"
 msgstr "Neue Unterfenster:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:328
+#: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "At &the end"
 msgstr "&Am Ende"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:338
+#: settings/TabBarSettings.ui:384
 #, kde-format
 msgid "After current &tab"
 msgstr "Nach dem akt&uelles Unterfenster"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:374
+#: settings/TabBarSettings.ui:420
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "Unterfenster bei Klicken mit der mittleren Maustaste schließen"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:397
+#: settings/TabBarSettings.ui:443
 #, kde-format
 msgid "Splits"
 msgstr "Geteilte Ansicht"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:403
+#: settings/TabBarSettings.ui:449
 #, kde-format
 msgid "Show Header:"
 msgstr "Titelzeile anzeigen:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:410
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "Wenn nötig"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:420
+#: settings/TabBarSettings.ui:466
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "Niemals"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:446
+#: settings/TabBarSettings.ui:492
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "Größe des Ziehgriffs:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:502
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Klein"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:466
+#: settings/TabBarSettings.ui:512
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "Mittel"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:476
+#: settings/TabBarSettings.ui:522
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Groß"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:499
+#: settings/TabBarSettings.ui:545
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -5397,116 +5445,116 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&Keine"
 
-#: widgets/IncrementalSearchBar.cpp:49
+#: widgets/IncrementalSearchBar.cpp:50
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "Suchen ..."
 
-#: widgets/IncrementalSearchBar.cpp:51
+#: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "Geben Sie hier Suchtext ein"
 
-#: widgets/IncrementalSearchBar.cpp:75
+#: widgets/IncrementalSearchBar.cpp:74
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "Weiter"
 
-#: widgets/IncrementalSearchBar.cpp:78
+#: widgets/IncrementalSearchBar.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "Nächstes Vorkommen des Suchtextes finden"
 
-#: widgets/IncrementalSearchBar.cpp:85
+#: widgets/IncrementalSearchBar.cpp:84
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "Zurück"
 
-#: widgets/IncrementalSearchBar.cpp:87
+#: widgets/IncrementalSearchBar.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Vorheriges Vorkommen des Suchtextes finden"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "Einstellungsmenü anzeigen"
 
-#: widgets/IncrementalSearchBar.cpp:109
+#: widgets/IncrementalSearchBar.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "Suchleiste schließen"
 
-#: widgets/IncrementalSearchBar.cpp:119
+#: widgets/IncrementalSearchBar.cpp:118
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "Groß-/Kleinschreibung beachten"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:120
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "Legt fest, ob die Suche Groß-/Kleinschreibung beachten soll"
 
-#: widgets/IncrementalSearchBar.cpp:124
+#: widgets/IncrementalSearchBar.cpp:123
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Regulären Ausdruck verwenden"
 
-#: widgets/IncrementalSearchBar.cpp:128
+#: widgets/IncrementalSearchBar.cpp:127
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Alle Treffer hervorheben"
 
-#: widgets/IncrementalSearchBar.cpp:130
+#: widgets/IncrementalSearchBar.cpp:129
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Legt fest, ob der gefundene Text hervorgehoben werden soll"
 
-#: widgets/IncrementalSearchBar.cpp:133
+#: widgets/IncrementalSearchBar.cpp:132
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Rückwärts suchen"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:134
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Legt fest, ob die Suche von unten beginnen soll"
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:139
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:141
 #, fuzzy, kde-format
 #| msgid "Sets whether search should start from the bottom"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Legt fest, ob die Suche von unten beginnen soll"
 
-#: widgets/IncrementalSearchBar.cpp:171
+#: widgets/IncrementalSearchBar.cpp:175
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Nächstes Vorkommen des Suchtextes von unten finden"
 
-#: widgets/IncrementalSearchBar.cpp:176
+#: widgets/IncrementalSearchBar.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
@@ -5652,31 +5700,39 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Terminal wiederherstellen"
 
-#: widgets/ViewContainer.cpp:56
+#: widgets/ViewContainer.cpp:59
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Neues Unterfenster öffnen"
 
-#: widgets/ViewContainer.cpp:61
+#: widgets/ViewContainer.cpp:64
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Detach Tab"
+msgctxt "@info:tooltip"
+msgid "Search Tabs"
+msgstr "Unterfenster &verselbständigen"
+
+#: widgets/ViewContainer.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Dieses Unterfenster schließen"
 
-#: widgets/ViewContainer.cpp:94
+#: widgets/ViewContainer.cpp:102
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "Unterfenster &verselbständigen"
 
-#: widgets/ViewContainer.cpp:100
+#: widgets/ViewContainer.cpp:108
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "Unterfenster einrichten oder &umbenennen ..."
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"

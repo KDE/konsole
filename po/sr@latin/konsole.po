@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-23 00:43+0000\n"
+"POT-Creation-Date: 2024-12-05 00:43+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -1948,14 +1948,14 @@ msgstr "Opcije izlaza"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:182
+#: PrintOptions.ui:39 settings/konsole.kcfg:190
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "&Naklonjeno štampaču (crn tekst, bez pozadine)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:186
+#: PrintOptions.ui:46 settings/konsole.kcfg:194
 #, kde-format
 msgid "&Scale output"
 msgstr "&Skaliraj izlaz"
@@ -2159,6 +2159,21 @@ msgstr ""
 #, kde-format
 msgid "Solaris console"
 msgstr "Konzola Solarisa"
+
+#: searchtabs/SearchTabs.cpp:130
+#, fuzzy, kde-format
+#| msgid "Web Search"
+msgctxt "@label:textbox"
+msgid "Search..."
+msgstr "Veb pretraga"
+
+#: searchtabs/SearchTabs.cpp:131
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the text to search for here"
+msgctxt "@info:tooltip"
+msgid "Enter a tab name to search for here"
+msgstr "Unesite tekst koji treba potražiti."
 
 #: session/Session.cpp:109
 #, fuzzy, kde-format
@@ -2968,44 +2983,51 @@ msgstr ""
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "Upravljanje vidljivošću brzih dugmadi na traci jezičaka"
 
-#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
+#, fuzzy, kde-format
+#| msgid "Control the visibility of quick buttons on the tab bar"
+msgid "Control the visibility of 'Search Tabs' button on the tab bar"
+msgstr "Upravljanje vidljivošću brzih dugmadi na traci jezičaka"
+
+#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#: settings/konsole.kcfg:167
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr ""
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:168
+#: settings/konsole.kcfg:176
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Upravljanje smeštanjem novog jezička"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:176
+#: settings/konsole.kcfg:184
 #, kde-format
 msgid "Expand the tab widths"
 msgstr ""
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:192
+#: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "Koristi sistemsku lokaciju za fajlove prepisa"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:196
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "Koristi lokaciju prema korisniku za fajlove prepisa"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:200
+#: settings/konsole.kcfg:208
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "Koristi zadatu lokaciju fascikle za fajlove prepisa"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:204
+#: settings/konsole.kcfg:212
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Koristi ovu fasciklu za fajlove prepisa"
@@ -3224,9 +3246,28 @@ msgctxt "Do not show a close button"
 msgid "None"
 msgstr "&nigde"
 
+#. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
+#: settings/TabBarSettings.ui:231
+#, fuzzy, kde-format
+#| msgid "&Close Tab"
+msgid "Show Search Tabs button:"
+msgstr "&Zatvori jezičak"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
+#: settings/TabBarSettings.ui:241
+#, kde-format
+msgid "Always"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
+#: settings/TabBarSettings.ui:251
+#, kde-format
+msgid "Never"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:231 settings/TabBarSettings.ui:364
+#: settings/TabBarSettings.ui:277 settings/TabBarSettings.ui:410
 #, fuzzy, kde-format
 #| msgid "Miscellaneous"
 msgctxt "@item:intext Miscellaneous Options"
@@ -3235,35 +3276,35 @@ msgstr "Razno"
 
 # >> @option:check
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:241
+#: settings/TabBarSettings.ui:287
 #, fuzzy, kde-format
 #| msgid "Show 'New Tab' and 'Close Tab' buttons"
 msgid "Show 'New Tab' button"
 msgstr "Dugme za otvaranje/zatvaranje jezička"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:248
+#: settings/TabBarSettings.ui:294
 #, fuzzy, kde-format
 #| msgid "Expand Individual Tab Widths to Full Window"
 msgid "Expand individual tab widths to full window"
 msgstr "Proširi pojedinačne jezičke na ceo prozor"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:255
+#: settings/TabBarSettings.ui:301
 #, fuzzy, kde-format
 #| msgid "Use user-defined stylesheet"
 msgid "Use user-defined stylesheet:"
 msgstr "Korisnički definisan opis stila"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:281
+#: settings/TabBarSettings.ui:327
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:304
+#: settings/TabBarSettings.ui:350
 #, fuzzy, kde-format
 #| msgid "Behavior"
 msgctxt "@title:tab Tab bar settings"
@@ -3271,19 +3312,19 @@ msgid "Behavior"
 msgstr "Ponašanje"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:318
+#: settings/TabBarSettings.ui:364
 #, kde-format
 msgid "Put new tabs:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:328
+#: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "At &the end"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:338
+#: settings/TabBarSettings.ui:384
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Close Current &Tab"
@@ -3291,69 +3332,69 @@ msgid "After current &tab"
 msgstr "Zatvori tekući &jezičak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:374
+#: settings/TabBarSettings.ui:420
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr ""
 
 # >> @title:menu
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:397
+#: settings/TabBarSettings.ui:443
 #, fuzzy, kde-format
 #| msgid "Split View"
 msgid "Splits"
 msgstr "Podeljen prikaz"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:403
+#: settings/TabBarSettings.ui:449
 #, fuzzy, kde-format
 #| msgid "Show menubar by default"
 msgid "Show Header:"
 msgstr "Podrazumevano prikaži traku menija"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:410
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:420
+#: settings/TabBarSettings.ui:466
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:446
+#: settings/TabBarSettings.ui:492
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:502
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:466
+#: settings/TabBarSettings.ui:512
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:476
+#: settings/TabBarSettings.ui:522
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:499
+#: settings/TabBarSettings.ui:545
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -5621,7 +5662,7 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&nigde"
 
-#: widgets/IncrementalSearchBar.cpp:49
+#: widgets/IncrementalSearchBar.cpp:50
 #, fuzzy, kde-format
 #| msgctxt "@label:textbox"
 #| msgid "Find:"
@@ -5629,110 +5670,110 @@ msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "Nađi:"
 
-#: widgets/IncrementalSearchBar.cpp:51
+#: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "Unesite tekst koji treba potražiti."
 
-#: widgets/IncrementalSearchBar.cpp:75
+#: widgets/IncrementalSearchBar.cpp:74
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "Sledeće"
 
-#: widgets/IncrementalSearchBar.cpp:78
+#: widgets/IncrementalSearchBar.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "Nađi sledeće poklapanje sa zadatim izrazom"
 
-#: widgets/IncrementalSearchBar.cpp:85
+#: widgets/IncrementalSearchBar.cpp:84
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "Prethodno"
 
-#: widgets/IncrementalSearchBar.cpp:87
+#: widgets/IncrementalSearchBar.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Nađi prethodno poklapanje sa zadatim izrazom"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "Prikaži meni opcija"
 
-#: widgets/IncrementalSearchBar.cpp:109
+#: widgets/IncrementalSearchBar.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "Zatvori traku pretrage"
 
-#: widgets/IncrementalSearchBar.cpp:119
+#: widgets/IncrementalSearchBar.cpp:118
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "Razlikuj veličinu slova"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:120
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "Da li pretraga razlikuje veličinu slova."
 
-#: widgets/IncrementalSearchBar.cpp:124
+#: widgets/IncrementalSearchBar.cpp:123
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Poklopi regularni izraz"
 
-#: widgets/IncrementalSearchBar.cpp:128
+#: widgets/IncrementalSearchBar.cpp:127
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Istakni sva poklapanja"
 
-#: widgets/IncrementalSearchBar.cpp:130
+#: widgets/IncrementalSearchBar.cpp:129
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Treba li isticati nađeni tekst."
 
-#: widgets/IncrementalSearchBar.cpp:133
+#: widgets/IncrementalSearchBar.cpp:132
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Traži unazad"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:134
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Treba li tražiti počev od dna."
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:139
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr ""
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:141
 #, fuzzy, kde-format
 #| msgid "Sets whether search should start from the bottom"
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Treba li tražiti počev od dna."
 
-#: widgets/IncrementalSearchBar.cpp:171
+#: widgets/IncrementalSearchBar.cpp:175
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Traži trenutno zadati izraz počev od dna"
 
-#: widgets/IncrementalSearchBar.cpp:176
+#: widgets/IncrementalSearchBar.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
@@ -5903,7 +5944,7 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "iznad zone terminala"
 
-#: widgets/ViewContainer.cpp:56
+#: widgets/ViewContainer.cpp:59
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Detach Tab"
@@ -5911,27 +5952,35 @@ msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "&Otkači jezičak"
 
-#: widgets/ViewContainer.cpp:61
+#: widgets/ViewContainer.cpp:64
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Detach Tab"
+msgctxt "@info:tooltip"
+msgid "Search Tabs"
+msgstr "&Otkači jezičak"
+
+#: widgets/ViewContainer.cpp:69
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "&Zatvori jezičak"
 
-#: widgets/ViewContainer.cpp:94
+#: widgets/ViewContainer.cpp:102
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "&Otkači jezičak"
 
-#: widgets/ViewContainer.cpp:100
+#: widgets/ViewContainer.cpp:108
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "&Preimenuj jezičak..."
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:113
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:inmenu"

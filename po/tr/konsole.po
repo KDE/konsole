@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-23 00:43+0000\n"
+"POT-Creation-Date: 2024-12-05 00:43+0000\n"
 "PO-Revision-Date: 2024-11-23 21:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1873,14 +1873,14 @@ msgstr "Çıktı Seçenekleri"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
-#: PrintOptions.ui:39 settings/konsole.kcfg:182
+#: PrintOptions.ui:39 settings/konsole.kcfg:190
 #, kde-format
 msgid "Printer &friendly mode (black text, no background)"
 msgstr "Yazıcı &dostu kip (siyah metin, arka plan yok)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, scaleOutput)
 #. i18n: ectx: label, entry (ScaleOutput), group (PrintOptions)
-#: PrintOptions.ui:46 settings/konsole.kcfg:186
+#: PrintOptions.ui:46 settings/konsole.kcfg:194
 #, kde-format
 msgid "&Scale output"
 msgstr "Çıkı&şı Ölçeklendir"
@@ -2076,6 +2076,22 @@ msgstr "macOS"
 #, kde-format
 msgid "Solaris console"
 msgstr "Solaris konsolu"
+
+#: searchtabs/SearchTabs.cpp:130
+#, fuzzy, kde-format
+#| msgctxt "@item:intext Search options"
+#| msgid "Search:"
+msgctxt "@label:textbox"
+msgid "Search..."
+msgstr "Ara:"
+
+#: searchtabs/SearchTabs.cpp:131
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the text to search for here"
+msgctxt "@info:tooltip"
+msgid "Enter a tab name to search for here"
+msgstr "Aranacak metni buraya girin"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2844,44 +2860,51 @@ msgstr "Açık sekmeleri kapatmak için orta tıklamaya izin ver"
 msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgstr "Sekme çubuğunda “Yeni Sekme” düğmesinin görünürlüğünü denetle"
 
-#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
+#, fuzzy, kde-format
+#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+msgid "Control the visibility of 'Search Tabs' button on the tab bar"
+msgstr "Sekme çubuğunda “Yeni Sekme” düğmesinin görünürlüğünü denetle"
+
+#. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
+#: settings/konsole.kcfg:167
 #, kde-format
 msgid "Control where the \"Close tab\" button will be displayed"
 msgstr "“Sekmeyi Kapat” düğmesinin nerede görüntüleneceğini denetle"
 
 #. i18n: ectx: label, entry (NewTabBehavior), group (TabBar)
-#: settings/konsole.kcfg:168
+#: settings/konsole.kcfg:176
 #, kde-format
 msgid "Control where to put the new tab"
 msgstr "Yeni sekmenin nereye konulacağını denetle"
 
 #. i18n: ectx: label, entry (ExpandTabWidth), group (TabBar)
-#: settings/konsole.kcfg:176
+#: settings/konsole.kcfg:184
 #, kde-format
 msgid "Expand the tab widths"
 msgstr "Sekme genişliklerini genişlet"
 
 #. i18n: ectx: label, entry (scrollbackUseSystemLocation), group (FileLocation)
-#: settings/konsole.kcfg:192
+#: settings/konsole.kcfg:200
 #, kde-format
 msgid "For scrollback files, use system-wide folder location"
 msgstr "Geçmiş dosyaları için sistem genelindeki dosya konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseCacheLocation), group (FileLocation)
-#: settings/konsole.kcfg:196
+#: settings/konsole.kcfg:204
 #, kde-format
 msgid "For scrollback files, use user's specific folder location"
 msgstr "Geçmiş dosyaları için kullanıcı ev tanımlı klasör konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocation), group (FileLocation)
-#: settings/konsole.kcfg:200
+#: settings/konsole.kcfg:208
 #, kde-format
 msgid "For scrollback files, use specified folder location"
 msgstr "Geçmiş dosyaları için belirtilen klasör konumunu kullan"
 
 #. i18n: ectx: label, entry (scrollbackUseSpecifiedLocationDirectory), group (FileLocation)
-#: settings/konsole.kcfg:204
+#: settings/konsole.kcfg:212
 #, kde-format
 msgid "For scrollback files, use this folder"
 msgstr "Geçmiş dosyaları için bu klasörü kullan"
@@ -3081,125 +3104,148 @@ msgctxt "Do not show a close button"
 msgid "None"
 msgstr "&Yok"
 
+#. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
+#: settings/TabBarSettings.ui:231
+#, fuzzy, kde-format
+#| msgid "Show Close Tab button:"
+msgid "Show Search Tabs button:"
+msgstr "Sekmeyi Kapat düğmesini göster:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
+#: settings/TabBarSettings.ui:241
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Always show the split header"
+#| msgid "Always"
+msgid "Always"
+msgstr "Her zaman"
+
+#. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
+#: settings/TabBarSettings.ui:251
+#, fuzzy, kde-format
+#| msgctxt "@option:radio Never show the split header"
+#| msgid "Never"
+msgid "Never"
+msgstr "Asla"
+
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousAppearanceLabel)
 #. i18n: ectx: property (text), widget (QLabel, miscellaneousBehaviorLabel)
-#: settings/TabBarSettings.ui:231 settings/TabBarSettings.ui:364
+#: settings/TabBarSettings.ui:277 settings/TabBarSettings.ui:410
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
 msgstr "Diğer:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
-#: settings/TabBarSettings.ui:241
+#: settings/TabBarSettings.ui:287
 #, kde-format
 msgid "Show 'New Tab' button"
 msgstr "“Yeni Sekme” düğmesini göster"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
-#: settings/TabBarSettings.ui:248
+#: settings/TabBarSettings.ui:294
 #, kde-format
 msgid "Expand individual tab widths to full window"
 msgstr "Bireysel sekme genişliklerini tam pencereye genişlet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
-#: settings/TabBarSettings.ui:255
+#: settings/TabBarSettings.ui:301
 #, kde-format
 msgid "Use user-defined stylesheet:"
 msgstr "Kullanıcı tanımlı biçem sayfası kullan:"
 
 #. i18n: ectx: property (placeholderText), widget (KUrlRequester, kcfg_TabBarUserStyleSheetFile)
-#: settings/TabBarSettings.ui:281
+#: settings/TabBarSettings.ui:327
 #, kde-format
 msgctxt "@item:intext Optional file path is empty"
 msgid "(none)"
 msgstr "(yok)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, behaviorTab)
-#: settings/TabBarSettings.ui:304
+#: settings/TabBarSettings.ui:350
 #, kde-format
 msgctxt "@title:tab Tab bar settings"
 msgid "Behavior"
 msgstr "Davranış"
 
 #. i18n: ectx: property (text), widget (QLabel, putNewTabsLabel)
-#: settings/TabBarSettings.ui:318
+#: settings/TabBarSettings.ui:364
 #, kde-format
 msgid "Put new tabs:"
 msgstr "Yeni sekmeleri şuraya koy:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAtTheEnd)
-#: settings/TabBarSettings.ui:328
+#: settings/TabBarSettings.ui:374
 #, kde-format
 msgid "At &the end"
 msgstr "&Sona"
 
 #. i18n: ectx: property (text), widget (QRadioButton, PutNewTabAfterCurrentTab)
-#: settings/TabBarSettings.ui:338
+#: settings/TabBarSettings.ui:384
 #, kde-format
 msgid "After current &tab"
 msgstr "&Geçerli sekmeden sonra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_CloseTabOnMiddleMouseButton)
-#: settings/TabBarSettings.ui:374
+#: settings/TabBarSettings.ui:420
 #, kde-format
 msgid "Close tab on middle-click"
 msgstr "Orta tık ile sekmeyi kapat"
 
 #. i18n: ectx: attribute (title), widget (QWidget, splitTab)
-#: settings/TabBarSettings.ui:397
+#: settings/TabBarSettings.ui:443
 #, kde-format
 msgid "Splits"
 msgstr "Bölmeler"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/TabBarSettings.ui:403
+#: settings/TabBarSettings.ui:449
 #, kde-format
 msgid "Show Header:"
 msgstr "Üstbilgiyi göster:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSplitHeaderWhenNeeded)
-#: settings/TabBarSettings.ui:410
+#: settings/TabBarSettings.ui:456
 #, kde-format
 msgctxt "@option:radio When needed show the split header"
 msgid "When needed"
 msgstr "Gerektiğinde"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideSplitHeader)
-#: settings/TabBarSettings.ui:420
+#: settings/TabBarSettings.ui:466
 #, kde-format
 msgctxt "@option:radio Never show the split header"
 msgid "Never"
 msgstr "Asla"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: settings/TabBarSettings.ui:446
+#: settings/TabBarSettings.ui:492
 #, kde-format
 msgid "Drag Handle Size:"
 msgstr "Sürükleme tutacı boyutu:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleSmall)
-#: settings/TabBarSettings.ui:456
+#: settings/TabBarSettings.ui:502
 #, kde-format
 msgctxt "@option:radio Small height/width of splitter widget"
 msgid "Small"
 msgstr "Küçük"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleMedium)
-#: settings/TabBarSettings.ui:466
+#: settings/TabBarSettings.ui:512
 #, kde-format
 msgctxt "@option:radio Medium height/width of splitter widget"
 msgid "Medium"
 msgstr "Orta"
 
 #. i18n: ectx: property (text), widget (QRadioButton, SplitDragHandleLarge)
-#: settings/TabBarSettings.ui:476
+#: settings/TabBarSettings.ui:522
 #, kde-format
 msgctxt "@option:radio Large height/width of splitter widget"
 msgid "Large"
 msgstr "Büyük"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowSplitHeader)
-#: settings/TabBarSettings.ui:499
+#: settings/TabBarSettings.ui:545
 #, kde-format
 msgctxt "@option:radio Always show the split header"
 msgid "Always"
@@ -5296,115 +5342,115 @@ msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
 msgstr "&Yok"
 
-#: widgets/IncrementalSearchBar.cpp:49
+#: widgets/IncrementalSearchBar.cpp:50
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
 msgstr "Bul…"
 
-#: widgets/IncrementalSearchBar.cpp:51
+#: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the text to search for here"
 msgstr "Aranacak metni buraya girin"
 
-#: widgets/IncrementalSearchBar.cpp:75
+#: widgets/IncrementalSearchBar.cpp:74
 #, kde-format
 msgctxt "@action:button Go to the next phrase"
 msgid "Next"
 msgstr "Sonraki"
 
-#: widgets/IncrementalSearchBar.cpp:78
+#: widgets/IncrementalSearchBar.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
 msgstr "Geçerli arama ifadesi ile eşleşen sonraki sonucu bul"
 
-#: widgets/IncrementalSearchBar.cpp:85
+#: widgets/IncrementalSearchBar.cpp:84
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
 msgstr "Önceki"
 
-#: widgets/IncrementalSearchBar.cpp:87
+#: widgets/IncrementalSearchBar.cpp:86
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
 msgstr "Geçerli arama ifadesi ile eşleşen önceki sonucu bul"
 
-#: widgets/IncrementalSearchBar.cpp:102
+#: widgets/IncrementalSearchBar.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "Seçenekler menüsünü göster"
 
-#: widgets/IncrementalSearchBar.cpp:109
+#: widgets/IncrementalSearchBar.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close the search bar"
 msgstr "Arama çubuğunu kapat"
 
-#: widgets/IncrementalSearchBar.cpp:119
+#: widgets/IncrementalSearchBar.cpp:118
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Case sensitive"
 msgstr "BÜYÜK/küçük harf duyarlı"
 
-#: widgets/IncrementalSearchBar.cpp:121
+#: widgets/IncrementalSearchBar.cpp:120
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether the search is case sensitive"
 msgstr "Aramanın BÜYÜK/küçük harf duyarlı olup olmayacağını ayarlar"
 
-#: widgets/IncrementalSearchBar.cpp:124
+#: widgets/IncrementalSearchBar.cpp:123
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Match regular expression"
 msgstr "Düzenli ifadeleri eşleştir"
 
-#: widgets/IncrementalSearchBar.cpp:128
+#: widgets/IncrementalSearchBar.cpp:127
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Highlight all matches"
 msgstr "Tüm eşleşenleri vurgula"
 
-#: widgets/IncrementalSearchBar.cpp:130
+#: widgets/IncrementalSearchBar.cpp:129
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether matching text should be highlighted"
 msgstr "Eşleşen metnin vurgulanıp vurgulanmayacağını ayarlar"
 
-#: widgets/IncrementalSearchBar.cpp:133
+#: widgets/IncrementalSearchBar.cpp:132
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Search backwards"
 msgstr "Geriye doğru ara"
 
-#: widgets/IncrementalSearchBar.cpp:135
+#: widgets/IncrementalSearchBar.cpp:134
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should start from the bottom"
 msgstr "Aramanın sondan başlayıp başlamayacağını ayarlar"
 
-#: widgets/IncrementalSearchBar.cpp:140
+#: widgets/IncrementalSearchBar.cpp:139
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "No wrap"
 msgstr "Sardırma yok"
 
-#: widgets/IncrementalSearchBar.cpp:142
+#: widgets/IncrementalSearchBar.cpp:141
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets whether search should stop instead of wrapping"
 msgstr "Aramanın sardırmak yerine durup durmaması gerektiğini ayarlar"
 
-#: widgets/IncrementalSearchBar.cpp:171
+#: widgets/IncrementalSearchBar.cpp:175
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the bottom"
 msgstr "Geçerli arama ifadesini alttan başlayarak ara"
 
-#: widgets/IncrementalSearchBar.cpp:176
+#: widgets/IncrementalSearchBar.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search for the current search phrase from the top"
@@ -5548,31 +5594,39 @@ msgctxt "@info:tooltip"
 msgid "Restore terminal"
 msgstr "Uçbirimi geri yükle"
 
-#: widgets/ViewContainer.cpp:56
+#: widgets/ViewContainer.cpp:59
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open a new tab"
 msgstr "Yeni bir sekme aç"
 
-#: widgets/ViewContainer.cpp:61
+#: widgets/ViewContainer.cpp:64
+#, fuzzy, kde-format
+#| msgctxt "@action:inmenu"
+#| msgid "&Detach Tab"
+msgctxt "@info:tooltip"
+msgid "Search Tabs"
+msgstr "Sekmeyi &Ayır"
+
+#: widgets/ViewContainer.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Close this tab"
 msgstr "Bu sekmeyi kapat"
 
-#: widgets/ViewContainer.cpp:94
+#: widgets/ViewContainer.cpp:102
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Detach Tab"
 msgstr "Sekmeyi &Ayır"
 
-#: widgets/ViewContainer.cpp:100
+#: widgets/ViewContainer.cpp:108
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
 msgstr "Sekmeyi Yapılandır/&Yeniden Adlandır…"
 
-#: widgets/ViewContainer.cpp:105
+#: widgets/ViewContainer.cpp:113
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Close Tab"
