@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 00:43+0000\n"
+"POT-Creation-Date: 2024-12-06 00:43+0000\n"
 "PO-Revision-Date: 2024-10-28 19:13\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian\n"
@@ -3447,7 +3447,7 @@ msgstr "Гэты тэрмінал даступны толькі для чыта�
 msgid "Change &Directory To"
 msgstr "З&мяніць каталог на"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3036
 #, kde-format
 msgid "&Paste Location"
 msgstr "Уставіць &размяшчэнне"

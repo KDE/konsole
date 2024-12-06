@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 00:43+0000\n"
+"POT-Creation-Date: 2024-12-06 00:43+0000\n"
 "PO-Revision-Date: 2002-11-04 09:23SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -3495,7 +3495,7 @@ msgstr ""
 msgid "Change &Directory To"
 msgstr "Tshintshela ulawulo lokusebenza lwe konsole kwi 'dir'"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3036
 #, fuzzy, kde-format
 msgid "&Paste Location"
 msgstr "&Isaziso Sendlela"

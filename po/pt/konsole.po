@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 00:43+0000\n"
+"POT-Creation-Date: 2024-12-06 00:43+0000\n"
 "PO-Revision-Date: 2023-05-15 10:35+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -3493,7 +3493,7 @@ msgstr "Este terminal está apenas para leitura."
 msgid "Change &Directory To"
 msgstr "Mu&dar a Pasta Para"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3036
 #, kde-format
 msgid "&Paste Location"
 msgstr "Co&lar a Localização"

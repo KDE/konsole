@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 00:43+0000\n"
-"PO-Revision-Date: 2024-11-23 09:24+0200\n"
+"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"PO-Revision-Date: 2024-12-05 13:04+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2086,20 +2086,16 @@ msgid "Solaris console"
 msgstr "Консоль Solaris"
 
 #: searchtabs/SearchTabs.cpp:130
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Пошук:"
+msgstr "Шукати…"
 
 #: searchtabs/SearchTabs.cpp:131
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Введіть сюди текст, за яким шукати"
+msgstr "Введіть назву вкладки, щоб виконати пошук"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2876,10 +2872,9 @@ msgstr "Керування видимістю кнопки «Нова вклад
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Керування видимістю кнопки «Нова вкладка» на смужці вкладок"
+msgstr "Керує видимістю кнопки «Шукати вкладки» на панелі вкладок"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3119,24 +3114,19 @@ msgstr "Не показувати"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Показувати кнопку «Закрити вкладку»:"
+msgstr "Показувати кнопку «Шукати вкладки»:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Завжди"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Ніколи"
 
@@ -3467,7 +3457,7 @@ msgstr "Термінал відкрито лише для читання."
 msgid "Change &Directory To"
 msgstr "Змінити &каталог"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3036
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Вставити адресу"
@@ -5635,12 +5625,10 @@ msgid "Open a new tab"
 msgstr "Відкрити нову вкладку"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "В&ідокремити вкладку"
+msgstr "Шукати вкладки"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format

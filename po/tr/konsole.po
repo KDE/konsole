@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 00:43+0000\n"
-"PO-Revision-Date: 2024-11-23 21:07+0300\n"
+"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"PO-Revision-Date: 2024-12-05 20:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2078,20 +2078,16 @@ msgid "Solaris console"
 msgstr "Solaris konsolu"
 
 #: searchtabs/SearchTabs.cpp:130
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Ara:"
+msgstr "Ara…"
 
 #: searchtabs/SearchTabs.cpp:131
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Aranacak metni buraya girin"
+msgstr "Buraya aramak için bir sekme adı girin"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2862,10 +2858,9 @@ msgstr "Sekme çubuğunda “Yeni Sekme” düğmesinin görünürlüğünü den
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Sekme çubuğunda “Yeni Sekme” düğmesinin görünürlüğünü denetle"
+msgstr "Sekme çubuğunda “Sekmeler Ara” düğmesinin görünürlüğünü denetle"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3106,24 +3101,19 @@ msgstr "&Yok"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Sekmeyi Kapat düğmesini göster:"
+msgstr "Sekmeler Ara düğmesini göster:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Her zaman"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Asla"
 
@@ -3451,7 +3441,7 @@ msgstr "Bu uçbirim saltokunurdur."
 msgid "Change &Directory To"
 msgstr "&Dizini Bu Adresle Değiştir"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3036
 #, kde-format
 msgid "&Paste Location"
 msgstr "Konumu &Yapıştır"
@@ -5601,12 +5591,10 @@ msgid "Open a new tab"
 msgstr "Yeni bir sekme aç"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "Sekmeyi &Ayır"
+msgstr "Sekmeler ara"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 00:43+0000\n"
+"POT-Creation-Date: 2024-12-06 00:43+0000\n"
 "PO-Revision-Date: 2024-01-19 07:50-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -3423,7 +3423,7 @@ msgstr "ਇਹ ਟਰਮੀਨਲ ਕੇਵਲ ਪੜ੍ਹਨ ਲਈ ਹੈ।"
 msgid "Change &Directory To"
 msgstr "ਡਾਇਰੈਕਟਰੀ ਬਦਲੋ(&D)"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3036
 #, kde-format
 msgid "&Paste Location"
 msgstr "ਟਿਕਾਣਾ ਚੇਪੋ(&P)"

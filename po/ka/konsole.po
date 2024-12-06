@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 00:43+0000\n"
-"PO-Revision-Date: 2024-11-23 04:44+0100\n"
+"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"PO-Revision-Date: 2024-12-05 06:33+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2065,20 +2065,16 @@ msgid "Solaris console"
 msgstr "Solaris-ის კონსოლი"
 
 #: searchtabs/SearchTabs.cpp:130
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "ძიება:"
+msgstr "ძებნა..."
 
 #: searchtabs/SearchTabs.cpp:131
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "შეიყვანეთ საძებნი სტრიქონი"
+msgstr "შეიყვანეთ საძებნი ჩანართის სახელი"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2573,7 +2569,7 @@ msgstr "მორგება"
 #, kde-format
 msgctxt "@item:intext Search options"
 msgid "Search:"
-msgstr "ძიება:"
+msgstr "ძებნა:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AllowMenuAccelerators)
 #. i18n: ectx: label, entry (AllowMenuAccelerators), group (KonsoleWindow)
@@ -2855,10 +2851,9 @@ msgstr "მართავს ჩანართების პანელზ�
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "მართავს ჩანართების პანელზე 'ახალი ჩანართის' ღილაკის მდებარეობას"
+msgstr "მართავს ჩანართების პანელზე 'ჩანართების ძებნის' ღილაკის ხილვადობას"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3100,24 +3095,19 @@ msgstr "არაფერი"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "ჩანართებზე დახურვის ღილაკის ჩვენება:"
+msgstr "ჩანართების ძებნის ღილაკის ჩვენება:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "ყოველთვის"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "არასდროს"
 
@@ -3444,7 +3434,7 @@ msgstr "ეს ტერმინალი მხოლოდ-კითხვა
 msgid "Change &Directory To"
 msgstr "საქაღალდის &შეცვლა"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3036
 #, kde-format
 msgid "&Paste Location"
 msgstr "მდებარეობის &ჩასმა"
@@ -5598,12 +5588,10 @@ msgid "Open a new tab"
 msgstr "ახალი ჩანართის გახსნა"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "&ჩანართის მოხსნა"
+msgstr "ჩანართების ძებნა"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format
