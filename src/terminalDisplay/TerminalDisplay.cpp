@@ -2296,7 +2296,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         if (isUnsafe(c)) {
             const QString sequence = charToSequence(c);
             const QString description = characterDescriptions.value(c.unicode(), QString());
-            QString entry = QStringLiteral("U+%1").arg(c.unicode(), 4, 16, QLatin1Char('0'));
+            QString entry = QStringLiteral("U+%1").arg(static_cast<uint>(c.unicode()), 4, 16, QLatin1Char('0'));
             if (!sequence.isEmpty()) {
                 entry += QStringLiteral("\t%1").arg(sequence);
             }
