@@ -281,7 +281,7 @@ void Session::setInitialWorkingDirectory(const QString &dir)
 
 QString Session::currentWorkingDirectory()
 {
-    if (_reportedWorkingUrl.isValid() && _reportedWorkingUrl.isLocalFile()) {
+    if (_reportedWorkingUrl.isValid() && _reportedWorkingUrl.isLocalFile() && (_reportedWorkingUrl.host().length() == 0 || _reportedWorkingUrl.host().compare(QSysInfo::machineHostName(), Qt::CaseInsensitive) == 0)) {
         return _reportedWorkingUrl.path();
     }
 
