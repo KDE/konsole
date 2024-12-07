@@ -6,7 +6,6 @@
 
 // Own
 #include "SearchTabs.h"
-#include "kfts_fuzzy_match.h"
 
 // Qt
 #include <QApplication>
@@ -16,6 +15,7 @@
 #include <QVBoxLayout>
 
 // KDE
+#include <KFuzzyMatcher>
 #include <KLocalizedString>
 
 // Konsole
@@ -64,20 +64,17 @@ protected:
 
         const QString &name = sm->idxToName(sourceRow);
 
-        int score = 0;
-        bool result;
         // dont use the QStringView(QString) ctor
         if (tabNameMatchPattern.isEmpty()) {
-            result = true;
-        } else {
-            result = filterByName(QStringView(name.data(), name.size()), tabNameMatchPattern, score);
+            sm->setScoreForIndex(sourceRow, 1);
+            return true;
         }
-        //         if (result && pattern == QStringLiteral(""))
-        //             qDebug() << score << ", " << name << "==================== END\n";
 
-        sm->setScoreForIndex(sourceRow, score);
+        auto result = filterByName(QStringView(name.data(), name.size()), tabNameMatchPattern);
 
-        return result;
+        sm->setScoreForIndex(sourceRow, result.score);
+
+        return result.matched;
     }
 
 public Q_SLOTS:
@@ -91,9 +88,9 @@ public Q_SLOTS:
     }
 
 private:
-    static inline bool filterByName(QStringView name, QStringView pattern, int &score)
+    static inline KFuzzyMatcher::Result filterByName(QStringView name, QStringView pattern)
     {
-        return kfts::fuzzy_match(pattern, name, score);
+        return KFuzzyMatcher::match(pattern, name);
     }
 
 private:
