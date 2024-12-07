@@ -2051,13 +2051,13 @@ msgstr "Solaris 控制台"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr ""
+msgstr "搜索..."
 
 #: searchtabs/SearchTabs.cpp:131
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr ""
+msgstr "在此输入要搜索的标签页名称"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2819,7 +2819,7 @@ msgstr "控制标签页栏上“新建标签页”按钮的显示/隐藏状态"
 #: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr ""
+msgstr "控制标签页栏上“搜索标签页”按钮的显示/隐藏状态"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3056,7 +3056,7 @@ msgstr "无"
 #: settings/TabBarSettings.ui:231
 #, kde-format
 msgid "Show Search Tabs button:"
-msgstr ""
+msgstr "显示搜索标签页按钮："
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
@@ -5488,7 +5488,7 @@ msgstr "打开新标签页"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr ""
+msgstr "搜索标签页"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format

@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-06 00:43+0000\n"
-"PO-Revision-Date: 2024-11-23 12:32+0100\n"
+"PO-Revision-Date: 2024-12-06 11:20+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2095,20 +2095,16 @@ msgid "Solaris console"
 msgstr "Solaris-console"
 
 #: searchtabs/SearchTabs.cpp:130
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Zoeken:"
+msgstr "Zoeken..."
 
 #: searchtabs/SearchTabs.cpp:131
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Voer hier de tekst in waarnaar u wilt zoeken"
+msgstr "Voer hier een naam van een tabblad in waarnaar u wilt zoeken"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2891,10 +2887,10 @@ msgstr "Bestuur de zichtbaarheid van de knop 'Nieuw tabblad' op de tabbladbalk"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Bestuur de zichtbaarheid van de knop 'Nieuw tabblad' op de tabbladbalk"
+msgstr ""
+"Bestuur de zichtbaarheid van de knop 'Tabblad zoeken' op de tabbladbalk"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3135,24 +3131,19 @@ msgstr "Geen"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Knop Tabblad sluiten tonen:"
+msgstr "Knop Tabblad zoeken tonen:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Altijd"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Nooit"
 
@@ -5651,12 +5642,10 @@ msgid "Open a new tab"
 msgstr "Een nieuw tabblad openen"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "Tabblad &losmaken"
+msgstr "Tabbladen zoeken"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format
