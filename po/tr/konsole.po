@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-11-08 19:27+0300\n"
+"PO-Revision-Date: 2024-12-07 14:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2640,7 +2640,7 @@ msgstr "BÜYÜK/küçük harf duyarlı"
 #: settings/GeneralSettings.ui:173 settings/konsole.kcfg:9
 #, kde-format
 msgid "Remove window titlebar and frame"
-msgstr "Pencere başlık çubuğunu ve çerçeveyi kaldır"
+msgstr "Pencere başlık çubuğunu ve çerçevesini kaldır"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: settings/GeneralSettings.ui:196
@@ -5045,8 +5045,8 @@ msgid ""
 "When positioning the mouse over a hexadecimal color it will be displayed in "
 "a frame next to the mouse pointer"
 msgstr ""
-"Fareyi onaltılık bir rengin üzerine getirdiğinizde, renk, fare işaretçisinin "
-"yanında bir çerçeve içinde görüntülenecektir"
+"Fareyi onaltılık bir rengin üzerine getirdiğinizde renk, fare işaretçisinin "
+"yanında bir çerçeve içinde görüntülenir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, allowColorFilters)
 #: widgets/EditProfileMousePage.ui:438
