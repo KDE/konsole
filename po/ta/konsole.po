@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-11-24 16:47+0530\n"
+"PO-Revision-Date: 2024-12-08 13:03+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -3234,19 +3234,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>இவ்வம்சத்தை பயன்படுத்த, <span style=\" font-weight:600;"
-"\">சுட்டி-&gt;மற்றவை-&gt;கோப்புகளுக்கு </span><span style=\" font-weight:600;"
-"\">அடிக்கோடிடு</span> என்பதை பயன்முறையின் அமைப்புகளில் இயக்குங்கள்</p></body></html>"
+"\">சுட்டி-&gt;மற்றவை-&gt;கோப்புகளுக்கு அடிக்கோடிடு</span> என்பதை பயன்முறையின் "
+"அமைப்புகளில் இயக்கவும்.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
