@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-06 00:43+0000\n"
-"PO-Revision-Date: 2024-11-24 16:47+0530\n"
+"PO-Revision-Date: 2024-12-08 13:03+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -2064,20 +2064,16 @@ msgid "Solaris console"
 msgstr "சோலரிஸ் முனையம்"
 
 #: searchtabs/SearchTabs.cpp:130
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "தேடல்:"
+msgstr "தேடு..."
 
 #: searchtabs/SearchTabs.cpp:131
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "கண்டுபிடிக்க வேண்டிய உரையை இங்கு உள்ளிடுங்கள்"
+msgstr "கண்டுபிடிக்க வேண்டிய கீற்றின் பெயரை இங்கு உள்ளிடவும்"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2855,10 +2851,9 @@ msgstr "கீற்றுப்பட்டையில் 'புதிய க
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "கீற்றுப்பட்டையில் 'புதிய கீற்று' பட்டன் காட்டப்படுவதை கட்டுப்படுத்தும்"
+msgstr "கீற்றுப்பட்டையில் 'கீற்றுகளை கண்டுபிடி' பட்டன் காட்டப்படுவதை கட்டுப்படுத்தும்"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3097,24 +3092,19 @@ msgstr "வேண்டாம்"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "கீற்றை முடுவதற்கான பட்டனை காட்டுவது:"
+msgstr "கீற்றைகளைக் கண்டுபிடிப்பதற்கான பட்டனை காட்டுவது:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "எப்போதும்"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "ஒருபோதும் வேண்டாம்"
 
@@ -3285,19 +3275,15 @@ msgstr "px"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>இவ்வம்சத்தை பயன்படுத்த, <span style=\" font-weight:600;"
-"\">சுட்டி-&gt;மற்றவை-&gt;கோப்புகளுக்கு </span><span style=\" font-weight:600;"
-"\">அடிக்கோடிடு</span> என்பதை பயன்முறையின் அமைப்புகளில் இயக்குங்கள்</p></body></html>"
+"\">சுட்டி-&gt;மற்றவை-&gt;கோப்புகளுக்கு அடிக்கோடிடு</span> என்பதை பயன்முறையின் "
+"அமைப்புகளில் இயக்கவும்.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -5590,12 +5576,10 @@ msgid "Open a new tab"
 msgstr "புதிய கீற்றைத் திறக்கும்"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "&கீற்றை பிரித்தெடு"
+msgstr "கீற்றுகளை கண்டுபிடி"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format
