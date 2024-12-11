@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"POT-Creation-Date: 2024-12-11 00:43+0000\n"
 "PO-Revision-Date: 2003-12-27 14:17+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -2136,14 +2136,14 @@ msgstr ""
 msgid "Solaris console"
 msgstr "terfynell linux"
 
-#: searchtabs/SearchTabs.cpp:130
+#: searchtabs/SearchTabs.cpp:127
 #, fuzzy, kde-format
 #| msgid "Clear &History"
 msgctxt "@label:textbox"
 msgid "Search..."
 msgstr "Clirio'r &Hanes"
 
-#: searchtabs/SearchTabs.cpp:131
+#: searchtabs/SearchTabs.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"POT-Creation-Date: 2024-12-11 00:43+0000\n"
 "PO-Revision-Date: 2010-06-22 16:43+0530\n"
 "Last-Translator: Sweta Kothari <swkothar@redhat.com>\n"
 "Language-Team: Gujarati\n"
@@ -2232,13 +2232,13 @@ msgstr ""
 msgid "Solaris console"
 msgstr "સોલારિસ કોન્સોલ"
 
-#: searchtabs/SearchTabs.cpp:130
+#: searchtabs/SearchTabs.cpp:127
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
 msgstr ""
 
-#: searchtabs/SearchTabs.cpp:131
+#: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
 #| msgid "Enter the text to search for here"
 msgctxt "@info:tooltip"

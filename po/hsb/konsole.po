@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"POT-Creation-Date: 2024-12-11 00:43+0000\n"
 "PO-Revision-Date: 2021-10-15 10:45+0200\n"
 "Last-Translator: Prof. Dr. Eduard Werner <e.werner@rz.uni-leipzig.de>\n"
 "Language-Team: Upper Sorbian\n"
@@ -2054,14 +2054,14 @@ msgstr ""
 msgid "Solaris console"
 msgstr "Konsole"
 
-#: searchtabs/SearchTabs.cpp:130
+#: searchtabs/SearchTabs.cpp:127
 #, fuzzy, kde-format
 #| msgid "Clear &History"
 msgctxt "@label:textbox"
 msgid "Search..."
 msgstr "&Pomjatk wuprózdnić"
 
-#: searchtabs/SearchTabs.cpp:131
+#: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Enter the text to search for here"

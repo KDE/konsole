@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole trunk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"POT-Creation-Date: 2024-12-11 00:43+0000\n"
 "PO-Revision-Date: 2020-02-05 14:49+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -2090,13 +2090,13 @@ msgstr ""
 msgid "Solaris console"
 msgstr "സോളാരിസ് കണ്‍സോള്‍"
 
-#: searchtabs/SearchTabs.cpp:130
+#: searchtabs/SearchTabs.cpp:127
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
 msgstr ""
 
-#: searchtabs/SearchTabs.cpp:131
+#: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"POT-Creation-Date: 2024-12-11 00:43+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -2164,14 +2164,14 @@ msgstr ""
 msgid "Solaris console"
 msgstr "Solaris konsolė"
 
-#: searchtabs/SearchTabs.cpp:130
+#: searchtabs/SearchTabs.cpp:127
 #, fuzzy, kde-format
 #| msgid "Web Search"
 msgctxt "@label:textbox"
 msgid "Search..."
 msgstr "Paieška žiniatinklyje "
 
-#: searchtabs/SearchTabs.cpp:131
+#: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Enter the text to search for here"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"POT-Creation-Date: 2024-12-11 00:43+0000\n"
 "PO-Revision-Date: 2023-04-29 12:15+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -2087,7 +2087,7 @@ msgstr "macOS"
 msgid "Solaris console"
 msgstr "Solaris-Konsole"
 
-#: searchtabs/SearchTabs.cpp:130
+#: searchtabs/SearchTabs.cpp:127
 #, fuzzy, kde-format
 #| msgctxt "@item:intext Search options"
 #| msgid "Search:"
@@ -2095,7 +2095,7 @@ msgctxt "@label:textbox"
 msgid "Search..."
 msgstr "Suchen:"
 
-#: searchtabs/SearchTabs.cpp:131
+#: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Enter the text to search for here"

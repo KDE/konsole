@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-06 00:43+0000\n"
+"POT-Creation-Date: 2024-12-11 00:43+0000\n"
 "PO-Revision-Date: 2006-05-07 16:35+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -2144,14 +2144,14 @@ msgstr ""
 msgid "Solaris console"
 msgstr "konsol linux"
 
-#: searchtabs/SearchTabs.cpp:130
+#: searchtabs/SearchTabs.cpp:127
 #, fuzzy, kde-format
 #| msgid "Clear &History"
 msgctxt "@label:textbox"
 msgid "Search..."
 msgstr "Kosong&kan Sejarah"
 
-#: searchtabs/SearchTabs.cpp:131
+#: searchtabs/SearchTabs.cpp:128
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
