@@ -45,6 +45,7 @@
   <name xml:lang="pt-BR">Konsole</name>
   <name xml:lang="ro">Konsolă</name>
   <name xml:lang="ru">Konsole</name>
+  <name xml:lang="sa">सान्त्वनम्</name>
   <name xml:lang="sk">Konsole</name>
   <name xml:lang="sl">Konsole</name>
   <name xml:lang="sr">Конзола</name>
@@ -86,6 +87,7 @@
   <summary xml:lang="pl">Użyj interfejsu wiersza poleceń</summary>
   <summary xml:lang="pt-BR">Use a interface de linha de comando</summary>
   <summary xml:lang="ru">Использование интерфейса командной строки</summary>
+  <summary xml:lang="sa">आदेशपङ्क्ति-अन्तरफलकस्य उपयोगं कुर्वन्तु</summary>
   <summary xml:lang="sl">Uporabi vmesnik ukazne vrstice</summary>
   <summary xml:lang="sv">Använd kommandoradsgränssnitt</summary>
   <summary xml:lang="ta">முனைய இடைமுகப்பைப் பயன்படுத்துங்கள்</summary>
@@ -135,6 +137,7 @@
     <p xml:lang="pt-BR">O Konsole é um emulador de terminal para executar uma linha de comandos. Ele oferece uma interface de linha de comandos para controlar diretamente o seu computador.</p>
     <p xml:lang="ro">Konsolă e un terminal pentru rularea unui interpretor de comenzi. Aceasta oferă o interfață în linie de comandă pentru controlul direct al calculatorului.</p>
     <p xml:lang="ru">Konsole — терминал для работы в командной оболочке. Konsole предоставляет интерфейс командной строки для непосредственного взаимодействия с компьютером.</p>
+    <p xml:lang="sa">Konsole इति आदेश-शेल् चालयितुं टर्मिनल् अस्ति । एतत् भवतः सङ्गणकस्य प्रत्यक्षनियन्त्रणार्थं आदेशपङ्क्ति-अन्तरफलकं प्रदाति ।</p>
     <p xml:lang="sk">Konsole je emulátor terminálu, často sa označuje ako terminál alebo shell. Emuluje rozhranie príkazového riadku v textovom okne.</p>
     <p xml:lang="sl">Konsole je posnemovalnik terminala, kjer teče ukazni jezik shell. Nudi vam ukazno vrstico, kjer lahko neposredno upravljate vaš računalnik.</p>
     <p xml:lang="sv">Terminal är en terminal för att köra ett kommandoskal. Det tillhandahåller ett kommandoradsgränssnitt för att direkt styra datorn.</p>
@@ -185,6 +188,7 @@
     <p xml:lang="pt-BR">Funcionalidades:</p>
     <p xml:lang="ro">Caracteristici:</p>
     <p xml:lang="ru">Возможности:</p>
+    <p xml:lang="sa">गुणाः:</p>
     <p xml:lang="sk">Funkcie:</p>
     <p xml:lang="sl">Zmožnosti:</p>
     <p xml:lang="sr">Могућности:</p>
@@ -240,6 +244,7 @@
       <li xml:lang="pt-BR">Abas</li>
       <li xml:lang="ro">File</li>
       <li xml:lang="ru">Вкладки</li>
+      <li xml:lang="sa">टब्स्</li>
       <li xml:lang="sk">Karty</li>
       <li xml:lang="sl">Zavihki</li>
       <li xml:lang="sr">језичци</li>
@@ -293,6 +298,7 @@
       <li xml:lang="pt-BR">Vários perfis</li>
       <li xml:lang="ro">Profiluri multiple</li>
       <li xml:lang="ru">Выбор профиля</li>
+      <li xml:lang="sa">अनेकाः प्रोफाइलाः</li>
       <li xml:lang="sk">Viacnásobné profily.</li>
       <li xml:lang="sl">Več profilov</li>
       <li xml:lang="sr">вишеструки профили</li>
@@ -345,6 +351,7 @@
       <li xml:lang="pt-BR">Monitoramento do silêncio e atividade</li>
       <li xml:lang="ro">Monitorizarea liniștii și activității</li>
       <li xml:lang="ru">Отслеживание активности и простоя</li>
+      <li xml:lang="sa">मौन एवं गतिविधिनिरीक्षण</li>
       <li xml:lang="sk">Monitorovanie ticha a aktivity</li>
       <li xml:lang="sl">Nadzorovanje dejavnosti in nedejavnosti</li>
       <li xml:lang="sr">надзирање тишине и активности</li>
@@ -397,6 +404,7 @@
       <li xml:lang="pt-BR">Suporte para favoritos</li>
       <li xml:lang="ro">Suport pentru semne de carte</li>
       <li xml:lang="ru">Закладки</li>
+      <li xml:lang="sa">बुकमार्क समर्थनम्</li>
       <li xml:lang="sk">Podpora záložiek</li>
       <li xml:lang="sl">Podpora zaznamkom</li>
       <li xml:lang="sr">обележивачи</li>
@@ -450,6 +458,7 @@
       <li xml:lang="pt-BR">Pesquisa</li>
       <li xml:lang="ro">Căutare</li>
       <li xml:lang="ru">Поиск</li>
+      <li xml:lang="sa">अन्वेषणम्</li>
       <li xml:lang="sk">Hľadanie</li>
       <li xml:lang="sl">Iskanje</li>
       <li xml:lang="sr">претрага</li>
@@ -503,6 +512,7 @@
       <li xml:lang="pt-BR">Gravação do resultado</li>
       <li xml:lang="ro">Salvarea datelor de ieșire</li>
       <li xml:lang="ru">Сохранение вывода</li>
+      <li xml:lang="sa">उत्पादनस्य रक्षणम्</li>
       <li xml:lang="sk">Ukladanie výstupu</li>
       <li xml:lang="sl">Shranjevanje izhoda</li>
       <li xml:lang="sr">уписивање излаза</li>
@@ -565,6 +575,7 @@
       <caption xml:lang="pt-BR">Konsole sendo usado como emulador de terminal</caption>
       <caption xml:lang="ro">Konsola fiind folosită ca emulator de terminal</caption>
       <caption xml:lang="ru">Konsole является эмулятором терминала.</caption>
+      <caption xml:lang="sa">Konsole इत्यस्य उपयोगः टर्मिनल् एमुलेटर् इत्यस्य रूपेण क्रियते</caption>
       <caption xml:lang="sk">Konsole používaný ako emulátor terminálu.</caption>
       <caption xml:lang="sl">Program Konsole, ko je uporabljen kot posnemovalnik terminala</caption>
       <caption xml:lang="sv">Terminal används som en terminalemulator.</caption>
