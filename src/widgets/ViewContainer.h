@@ -78,6 +78,9 @@ public:
     /** Sets tab special state (copy input or read-only) */
     void updateSpecialState(ViewProperties *item);
 
+    void progressVisibleChanged(ViewProperties *item);
+    void progressChanged(ViewProperties *item);
+
     /** Changes the active view to the next view */
     void activateNextView();
 
@@ -208,6 +211,10 @@ Q_SIGNALS:
 
     /** remove the color tab */
     void removeColor(int idx);
+
+    void setProgress(int idx, int progress);
+
+    void removeProgress(int idx);
 
 protected:
     // close tabs and unregister

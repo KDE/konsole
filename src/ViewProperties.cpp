@@ -16,6 +16,8 @@ ViewProperties::ViewProperties(QObject *parent)
     , _icon(QIcon())
     , _title(QString())
     , _identifier(0)
+    , _progressVisible(false)
+    , _progress(false)
 {
 }
 
@@ -86,6 +88,22 @@ void ViewProperties::setIdentifier(int id)
     _viewProperties.insert(id, this);
 }
 
+void ViewProperties::setProgressVisible(bool visible)
+{
+    if (_progressVisible != visible) {
+        _progressVisible = visible;
+        Q_EMIT progressVisibleChanged(this);
+    }
+}
+
+void ViewProperties::setProgress(int progress)
+{
+    if (_progress != progress) {
+        _progress = progress;
+        Q_EMIT progressChanged(this);
+    }
+}
+
 QString ViewProperties::title() const
 {
     return _title;
@@ -104,6 +122,16 @@ int ViewProperties::identifier() const
 QColor ViewProperties::color() const
 {
     return _color;
+}
+
+bool ViewProperties::progressVisible() const
+{
+    return _progressVisible;
+}
+
+int ViewProperties::progress() const
+{
+    return _progress;
 }
 
 #include "moc_ViewProperties.cpp"

@@ -416,6 +416,10 @@ Q_SIGNALS:
      */
     void updateDroppedLines(int droppedLines);
 
+    void progressChanged(int progress);
+
+    void progressHidden();
+
 protected:
     virtual void setMode(int mode) = 0;
     virtual void resetMode(int mode) = 0;

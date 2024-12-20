@@ -42,6 +42,9 @@ public:
     /** Returns the color associated with a view */
     QColor color() const;
 
+    bool progressVisible() const;
+    int progress() const;
+
     /**
      * Returns the URL current associated with a view.
      * The default implementation returns an empty URL.
@@ -90,6 +93,9 @@ Q_SIGNALS:
     /** Emitted when "copy input" state changes */
     void copyInputChanged(ViewProperties *item);
 
+    void progressVisibleChanged(ViewProperties *item);
+    void progressChanged(ViewProperties *item);
+
 public Q_SLOTS:
     /**
      * Requests the renaming of this view.
@@ -120,6 +126,9 @@ protected:
     /** Subclasses may call this method to change the identifier. */
     void setIdentifier(int id);
 
+    void setProgressVisible(bool visible);
+    void setProgress(int progress);
+
 private:
     Q_DISABLE_COPY(ViewProperties)
 
@@ -127,6 +136,9 @@ private:
     QString _title;
     QColor _color;
     int _identifier;
+
+    bool _progressVisible;
+    int _progress;
 
     static QHash<int, ViewProperties *> _viewProperties;
 };

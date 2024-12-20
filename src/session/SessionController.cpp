@@ -228,6 +228,14 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
     // xterm '11;?' request
     connect(session(), &Konsole::Session::getBackgroundColor, this, &Konsole::SessionController::sendBackgroundColor);
 
+    connect(session()->emulation(), &Konsole::Emulation::progressChanged, this, [this](int progress) {
+        setProgress(progress);
+        setProgressVisible(true);
+    });
+    connect(session()->emulation(), &Konsole::Emulation::progressHidden, this, [this] {
+        setProgressVisible(false);
+    });
+
     _allControllers.insert(this);
 
     // A list of programs that accept Ctrl+C to clear command line used
