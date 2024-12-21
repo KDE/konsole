@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 00:43+0000\n"
+"POT-Creation-Date: 2024-12-21 00:44+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -2192,12 +2192,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Upozorenje: "
 
-#: session/Session.cpp:520
+#: session/Session.cpp:521
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Ne mogu da nađem interaktivnu školjku za pokretanje."
 
-#: session/Session.cpp:526 session/Session.cpp:528
+#: session/Session.cpp:527 session/Session.cpp:529
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "

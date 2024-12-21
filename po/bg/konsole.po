@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 00:43+0000\n"
+"POT-Creation-Date: 2024-12-21 00:44+0000\n"
 "PO-Revision-Date: 2024-12-05 21:57+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -2113,12 +2113,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Предупреждение: "
 
-#: session/Session.cpp:520
+#: session/Session.cpp:521
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Не е открита интерактивна обвивка за зареждане."
 
-#: session/Session.cpp:526 session/Session.cpp:528
+#: session/Session.cpp:527 session/Session.cpp:529
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "

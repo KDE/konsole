@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 00:43+0000\n"
+"POT-Creation-Date: 2024-12-21 00:44+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -2196,12 +2196,12 @@ msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Dėmesio: "
 
-#: session/Session.cpp:520
+#: session/Session.cpp:521
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Nepavyko rasti ir paleisti interaktyvaus apvalkalo."
 
-#: session/Session.cpp:526 session/Session.cpp:528
+#: session/Session.cpp:527 session/Session.cpp:529
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
