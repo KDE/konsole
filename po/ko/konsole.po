@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-21 00:44+0000\n"
-"PO-Revision-Date: 2024-08-19 23:50+0200\n"
+"PO-Revision-Date: 2024-12-24 17:36+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -1997,7 +1997,7 @@ msgstr "Breeze"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "캠벨"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2055,20 +2055,16 @@ msgid "Solaris console"
 msgstr "솔라리스 콘솔"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "검색:"
+msgstr "검색..."
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "검색할 문자열 입력"
+msgstr "검색할 탭 이름 문자열 입력"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2838,10 +2834,9 @@ msgstr "탭 표시줄의 '새 탭' 단추 표시 설정"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "탭 표시줄의 '새 탭' 단추 표시 설정"
+msgstr "탭 표시줄의 '탭 검색' 단추 표시 설정"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3076,24 +3071,19 @@ msgstr "없음"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "탭 닫기 단추 표시:"
+msgstr "탭 검색 단추 표시:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "항상"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "하지 않음"
 
@@ -3264,19 +3254,15 @@ msgstr "픽셀"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>이 기능을 사용하려면 프로필 설정에서 <span style=\" "
-"font-weight:600;\">마우스-&gt;기타-&gt;</span><span style=\" font-weight:600;"
-"\">파일에 밑줄 긋기</span>를 활성화해야 합니다</p></body></html>"
+"font-weight:600;\">마우스-&gt;기타-&gt;파일에 밑줄 긋기</span>를 활성화해야 "
+"합니다.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
@@ -5540,12 +5526,10 @@ msgid "Open a new tab"
 msgstr "새 탭 열기"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "탭 떼내기(&D)"
+msgstr "탭 검색"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format
