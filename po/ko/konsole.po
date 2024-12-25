@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-08-19 23:50+0200\n"
+"PO-Revision-Date: 2024-12-24 17:36+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -3213,19 +3213,15 @@ msgstr "픽셀"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: settings/ThumbnailsSettings.ui:37
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>To use this feature, enable <span style=\" font-"
-#| "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline </span><span style=\" "
-#| "font-weight:600;\">files</span> in your profile settings</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>To use this feature, enable <span style=\" font-"
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>이 기능을 사용하려면 프로필 설정에서 <span style=\" "
-"font-weight:600;\">마우스-&gt;기타-&gt;</span><span style=\" font-weight:600;"
-"\">파일에 밑줄 긋기</span>를 활성화해야 합니다</p></body></html>"
+"font-weight:600;\">마우스-&gt;기타-&gt;파일에 밑줄 긋기</span>를 활성화해야 "
+"합니다.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
