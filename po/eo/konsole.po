@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-21 00:44+0000\n"
-"PO-Revision-Date: 2024-08-24 09:18+0200\n"
+"PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1866,7 +1866,7 @@ msgstr "Neniuj kromaĵoj haveblaj"
 #: PrintOptions.ui:14 PrintOptions.ui:20
 #, kde-format
 msgid "Output Options"
-msgstr "Eligo Opcioj"
+msgstr "Elektebloj de Eligo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
@@ -2075,20 +2075,16 @@ msgid "Solaris console"
 msgstr "Solaris-konzolo"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Serĉu:"
+msgstr "Serĉi..."
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Enmeti la serĉendan tekston tie"
+msgstr "Enmetu langetnomon serĉendan ĉi tie"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2860,10 +2856,9 @@ msgstr "Regi la videblecon de la butono \"Nova Langeto\" sur la langeto"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Regi la videblecon de la butono \"Nova Langeto\" sur la langeto"
+msgstr "Regi la videblecon de la butono 'Serĉi Langetojn' sur la langetaro"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3102,24 +3097,19 @@ msgstr "Neniu"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Montri la butonon Fermi Langeton:"
+msgstr "Montri la butonon Serĉi Langetoin:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Ĉiam"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Neniam"
 
@@ -4877,7 +4867,7 @@ msgstr "El elekto"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Copy options:"
-msgstr "Kopiaj opcioj:"
+msgstr "Elektebloj de kopiado:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:196
@@ -5267,9 +5257,9 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"Uzante ĉi tiun opcion, la retrorulumaj datumoj estos konservataj al RAM. Se "
-"vi elektas grandegan valoron, via sistemo povus elĉerpiĝi je libera RAM kaj "
-"kaŭzus gravajn problemojn kun via sistemo."
+"Uzante ĉi tiun elekteblon, la retrorulumaj datumoj estos konservataj al RAM. "
+"Se vi elektas grandegan valoron, via sistemo povus elĉerpiĝi je libera RAM "
+"kaj kaŭzus gravajn problemojn kun via sistemo."
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -5281,7 +5271,7 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"Kiam vi uzas tiun opcion, la retrorulumaj datumoj estos skribataj neĉifrite "
+"Uzante ĉi tiun elekteblon, la retrorulumaj datumoj estos skribataj neĉifrite "
 "al provizoraj dosieroj. Tiuj provizoraj dosieroj estos aŭtomate forigataj "
 "kiam Konsole estas fermita en normala maniero.<nl/>Uzu <emphasis>Agordoj → "
 "Agordi Konsole → Provizoraj dosieroj</emphasis> por elekti la lokon de la "
@@ -5371,7 +5361,7 @@ msgstr "Trovi la antaŭan kongruon kun la nuna serĉofrazo"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
-msgstr "Montri la opciomenuon"
+msgstr "Montri la elekteblomenuon"
 
 #: widgets/IncrementalSearchBar.cpp:108
 #, kde-format
@@ -5590,12 +5580,10 @@ msgid "Open a new tab"
 msgstr "Malfermi novan langeton"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "&Dekroĉi langeton"
+msgstr "Serĉi Langetojn"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format
