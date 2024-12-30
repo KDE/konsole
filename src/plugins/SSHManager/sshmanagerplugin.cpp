@@ -202,7 +202,7 @@ void SSHManagerPlugin::requestConnection(QSortFilterProxyModel *filterModel,
     auto data = item->data(SSHManagerModel::SSHRole).value<SSHConfigurationData>();
 
     QString sshCommand = QStringLiteral("ssh ");
-    if (!data.useSshConfig) {
+    if (data.useSshConfig) {
         if (data.sshKey.length()) {
             sshCommand += QStringLiteral("-i %1 ").arg(data.sshKey);
         }
