@@ -655,7 +655,10 @@ void SessionController::setupCommonActions()
 
     // Copy and Paste
     action = KStandardAction::copy(this, &SessionController::copy, collection);
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_C);
+    QList<QKeySequence> copyShortcut;
+    copyShortcut.append(QKeySequence(Konsole::ACCEL | Qt::Key_C));
+    copyShortcut.append(QKeySequence(Qt::CTRL | Qt::Key_Insert));
+    collection->setDefaultShortcuts(action, copyShortcut);
     // disabled at first, since nothing has been selected now
     action->setEnabled(false);
 
