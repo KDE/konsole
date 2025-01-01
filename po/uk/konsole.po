@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-21 00:44+0000\n"
+"POT-Creation-Date: 2025-01-01 00:44+0000\n"
 "PO-Revision-Date: 2024-12-05 13:04+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -2138,7 +2138,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Тиша у «%1» (сеанс «%2»)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:359 session/SessionController.cpp:1882
+#: session/SessionController.cpp:359 session/SessionController.cpp:1885
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, kde-format
@@ -2220,280 +2220,280 @@ msgstr "&Завершити сеанс"
 msgid "Open File Manager"
 msgstr "Відкрити менеджер файлів"
 
-#: session/SessionController.cpp:665
+#: session/SessionController.cpp:668
 #, kde-format
 msgid "Copy"
 msgstr "Копіювати"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:675
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Розділений перегляд: ліворуч/праворуч"
 
-#: session/SessionController.cpp:677
+#: session/SessionController.cpp:680
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Розділений перегляд: вгорі/внизу"
 
-#: session/SessionController.cpp:681
+#: session/SessionController.cpp:684
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Копіювати без рядка запиту"
 
-#: session/SessionController.cpp:687
+#: session/SessionController.cpp:690
 #, kde-format
 msgid "Copy user input"
 msgstr "Копіювати введене користувачем"
 
-#: session/SessionController.cpp:693
+#: session/SessionController.cpp:696
 #, kde-format
 msgid "Copy command output"
 msgstr "Копіювати виведення команди"
 
-#: session/SessionController.cpp:708
+#: session/SessionController.cpp:711
 #, kde-format
 msgid "Paste Selection"
 msgstr "Вставити вибір"
 
-#: session/SessionController.cpp:715
+#: session/SessionController.cpp:718
 #, kde-format
 msgid "Web Search"
 msgstr "Пошук у інтернеті"
 
-#: session/SessionController.cpp:721
+#: session/SessionController.cpp:724
 #, kde-format
 msgid "&Select All"
 msgstr "&Позначити все"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Select &Mode"
 msgstr "Режим п&означення"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:733
 #, kde-format
 msgid "Select &Line"
 msgstr "Позначити &рядок"
 
-#: session/SessionController.cpp:733
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Зберегти виведене &як…"
 
-#: session/SessionController.cpp:739
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "Автоматично зберегти виведене як…"
 
-#: session/SessionController.cpp:743
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "Припинити автозбереження"
 
-#: session/SessionController.cpp:747
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Надрукувати зображення з екрана…"
 
-#: session/SessionController.cpp:751
+#: session/SessionController.cpp:754
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Виправити гортання…"
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:758
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Спорожнити буфер гортання"
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:762
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Спорожнити буфер гортання і відновити початковий стан"
 
-#: session/SessionController.cpp:770
+#: session/SessionController.cpp:773
 #, kde-format
 msgid "Next Profile"
 msgstr "Наступний профіль"
 
-#: session/SessionController.cpp:775
+#: session/SessionController.cpp:778
 #, kde-format
 msgid "Previous Profile"
 msgstr "Попередній профіль"
 
-#: session/SessionController.cpp:778
+#: session/SessionController.cpp:781
 #, kde-format
 msgid "Switch Profile"
 msgstr "Перемкнути профіль"
 
-#: session/SessionController.cpp:803
+#: session/SessionController.cpp:806
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Встановити &кодування"
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:828
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Дозволити стеження за мишею"
 
-#: session/SessionController.cpp:834
+#: session/SessionController.cpp:837
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Лише читання"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:848
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Налаштувати або перейменувати вкладку…"
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:854
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Всіх вкладок у поточному вікні"
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:861
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "Ви&брати вкладки…"
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:867
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Жодної"
 
-#: session/SessionController.cpp:872
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Copy Input To"
 msgstr "Копіювати введене до"
 
-#: session/SessionController.cpp:880
+#: session/SessionController.cpp:883
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "В&ивантаження ZModem…"
 
-#: session/SessionController.cpp:885
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Одноразові спостереження"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:893
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Спостерігати за &запитом"
 
-#: session/SessionController.cpp:897
+#: session/SessionController.cpp:900
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Слідкувати за &діяльністю"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Слідкувати за &бездіяльністю"
 
-#: session/SessionController.cpp:909
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Слідкувати за завершенням процесу"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:919
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Збільшити шрифт"
 
-#: session/SessionController.cpp:924
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "Shrink Font"
 msgstr "Зменшити шрифт"
 
-#: session/SessionController.cpp:929
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Відновити розмір шрифту"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:938
 #, kde-format
 msgid "Send Signal"
 msgstr "Надіслати сигнал"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Призупинити завдання"
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "&Continue Task"
 msgstr "Про&довжити завдання"
 
-#: session/SessionController.cpp:949
+#: session/SessionController.cpp:952
 #, kde-format
 msgid "&Hangup"
 msgstr "Від'&єднатися"
 
-#: session/SessionController.cpp:954
+#: session/SessionController.cpp:957
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "П&ерервати завдання"
 
-#: session/SessionController.cpp:959
+#: session/SessionController.cpp:962
 #, kde-format
 msgid "&Terminate Task"
 msgstr "П&рипинити завдання"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:967
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Завершити завдання"
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:972
 #, kde-format
 msgid "User Signal &1"
 msgstr "Сигнал користувача &1"
 
-#: session/SessionController.cpp:974
+#: session/SessionController.cpp:977
 #, kde-format
 msgid "User Signal &2"
 msgstr "Сигнал користувача &2"
 
-#: session/SessionController.cpp:992
+#: session/SessionController.cpp:995
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Створити профіль…"
 
-#: session/SessionController.cpp:994
+#: session/SessionController.cpp:997
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Редагувати поточний профіль…"
 
-#: session/SessionController.cpp:1125
+#: session/SessionController.cpp:1128
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "В цьому сеансі в даний час виконується програма. Дійсно закрити?"
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1132
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "В цьому сеансі в даний час виконується програма «%1». Дійсно закрити?"
 
-#: session/SessionController.cpp:1136 session/SessionController.cpp:1171
+#: session/SessionController.cpp:1139 session/SessionController.cpp:1174
 #, kde-format
 msgid "Confirm Close"
 msgstr "Підтвердження закриття"
 
-#: session/SessionController.cpp:1137
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Закрити програму"
 
-#: session/SessionController.cpp:1160
+#: session/SessionController.cpp:1163
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2502,7 +2502,7 @@ msgstr ""
 "Програма у цьому сеансі не бажає завершувати роботу. Хочете завершити її "
 "роботу у примусовому режимі?"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1167
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2511,28 +2511,28 @@ msgstr ""
 "Програма «%1» у цьому сеансі не бажає завершувати роботу. Хочете завершити "
 "її роботу у примусовому режимі?"
 
-#: session/SessionController.cpp:1172
+#: session/SessionController.cpp:1175
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Завершити роботу програми"
 
-#: session/SessionController.cpp:1881
+#: session/SessionController.cpp:1884
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "У командній оболонці показано запит у сеансі «%1»"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Відкрити поточну теку за допомогою"
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Зберегти отримання ZModem до…"
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2543,7 +2543,7 @@ msgstr ""
 "програмного забезпечення ZModem.</p><p>Вам, ймовірно, слід встановити "
 "пакунок «rzsz» або «lrzsz».</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
@@ -2551,7 +2551,7 @@ msgstr ""
 "<p>У поточному сеансі вже виконується передавання файлів за допомогою ZModem."
 "</p>"
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2560,7 +2560,7 @@ msgstr ""
 "<p>У системі не виявлено програмного забезпечення ZModem.</p><p>Вам, "
 "ймовірно, слід встановити пакунок «rzsz» або «lrzsz».</p>"
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Оберіть файли для вивантаження за допомогою ZModem"

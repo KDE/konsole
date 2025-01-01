@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-21 00:44+0000\n"
+"POT-Creation-Date: 2025-01-01 00:44+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -2148,7 +2148,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Σιγή στην '%1' (Συνεδρία '%2')"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:359 session/SessionController.cpp:1882
+#: session/SessionController.cpp:359 session/SessionController.cpp:1885
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, kde-format
@@ -2231,255 +2231,255 @@ msgstr "&Κλείσιμο συνεδρίας"
 msgid "Open File Manager"
 msgstr "Άνοιγμα διαχειριστή αρχείων"
 
-#: session/SessionController.cpp:665
+#: session/SessionController.cpp:668
 #, kde-format
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: session/SessionController.cpp:672
+#: session/SessionController.cpp:675
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Διαίρεση προβολής αριστερά/δεξιά"
 
-#: session/SessionController.cpp:677
+#: session/SessionController.cpp:680
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Διαίρεση προβολής πάνω/κάτω"
 
-#: session/SessionController.cpp:681
+#: session/SessionController.cpp:684
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Αντιγραφή εκτός των συμβόλων αναμονής"
 
-#: session/SessionController.cpp:687
+#: session/SessionController.cpp:690
 #, kde-format
 msgid "Copy user input"
 msgstr "Αντιγραφή δεδομένων εισόδου χρήστη"
 
-#: session/SessionController.cpp:693
+#: session/SessionController.cpp:696
 #, kde-format
 msgid "Copy command output"
 msgstr "Αντιγραφή εξόδου εντολής"
 
-#: session/SessionController.cpp:708
+#: session/SessionController.cpp:711
 #, kde-format
 msgid "Paste Selection"
 msgstr "Επικόλληση επιλογής"
 
-#: session/SessionController.cpp:715
+#: session/SessionController.cpp:718
 #, kde-format
 msgid "Web Search"
 msgstr "Αναζήτηση στον ιστό"
 
-#: session/SessionController.cpp:721
+#: session/SessionController.cpp:724
 #, kde-format
 msgid "&Select All"
 msgstr "&Επιλογή όλων"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "Select &Mode"
 msgstr "Επιλογή &λειτουργίας"
 
-#: session/SessionController.cpp:730
+#: session/SessionController.cpp:733
 #, kde-format
 msgid "Select &Line"
 msgstr "Επιλογή &γραμμής"
 
-#: session/SessionController.cpp:733
+#: session/SessionController.cpp:736
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Αποθήκευση εξόδου &ως..."
 
-#: session/SessionController.cpp:739
+#: session/SessionController.cpp:742
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "Αυτόματη αποθήκευση εξόδου ως..."
 
-#: session/SessionController.cpp:743
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "Διακοπή αυτόματης αποθήκευσης"
 
-#: session/SessionController.cpp:747
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Εκτύπωση οθόνης..."
 
-#: session/SessionController.cpp:751
+#: session/SessionController.cpp:754
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Προσαρμογή κύλισης..."
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:758
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Εκκαθάριση κύλισης"
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:762
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Εκκαθάριση κύλισης και επαναφορά"
 
-#: session/SessionController.cpp:770
+#: session/SessionController.cpp:773
 #, kde-format
 msgid "Next Profile"
 msgstr "Επόμενο προφίλ"
 
-#: session/SessionController.cpp:775
+#: session/SessionController.cpp:778
 #, kde-format
 msgid "Previous Profile"
 msgstr "Προηγούμενο προφίλ"
 
-#: session/SessionController.cpp:778
+#: session/SessionController.cpp:781
 #, kde-format
 msgid "Switch Profile"
 msgstr "Εναλλαγή προφίλ"
 
-#: session/SessionController.cpp:803
+#: session/SessionController.cpp:806
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Ορισμός &κωδικοποίησης"
 
-#: session/SessionController.cpp:825
+#: session/SessionController.cpp:828
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Να επιτρέπεται η ιχνηλάτηση του ποντικιού"
 
-#: session/SessionController.cpp:834
+#: session/SessionController.cpp:837
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Ανάγνωση-μόνο"
 
-#: session/SessionController.cpp:845
+#: session/SessionController.cpp:848
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "Διαμόρ&φωση ή μετονομασία καρτέλας..."
 
-#: session/SessionController.cpp:851
+#: session/SessionController.cpp:854
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Όλες τις καρτέλες στο τρέχον παράθυρο"
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:861
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Επιλογή καρτελών..."
 
-#: session/SessionController.cpp:864
+#: session/SessionController.cpp:867
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Καμία"
 
-#: session/SessionController.cpp:872
+#: session/SessionController.cpp:875
 #, kde-format
 msgid "Copy Input To"
 msgstr "Αντιγραφή εισόδου σε..."
 
-#: session/SessionController.cpp:880
+#: session/SessionController.cpp:883
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Αποστολή &ΖModem..."
 
-#: session/SessionController.cpp:885
+#: session/SessionController.cpp:888
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Επόπτες μίας χρήσης"
 
-#: session/SessionController.cpp:890
+#: session/SessionController.cpp:893
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Εποπτεία για &προτροπή"
 
-#: session/SessionController.cpp:897
+#: session/SessionController.cpp:900
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Εποπτεία για &δραστηριότητα"
 
-#: session/SessionController.cpp:903
+#: session/SessionController.cpp:906
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Εποπτεία για σ&ιγή"
 
-#: session/SessionController.cpp:909
+#: session/SessionController.cpp:912
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Εποπτεία για τον τερματισμό διεργασίας"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:919
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Μεγέθυνση γραμματοσειράς"
 
-#: session/SessionController.cpp:924
+#: session/SessionController.cpp:927
 #, kde-format
 msgid "Shrink Font"
 msgstr "Σμίκρυνση γραμματοσειράς"
 
-#: session/SessionController.cpp:929
+#: session/SessionController.cpp:932
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Επαναφορά μεγέθους γραμματοσειράς"
 
-#: session/SessionController.cpp:935
+#: session/SessionController.cpp:938
 #, kde-format
 msgid "Send Signal"
 msgstr "Αποστολή σήματος"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Αναστολή διεργασίας"
 
-#: session/SessionController.cpp:944
+#: session/SessionController.cpp:947
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Συνέχεια διεργασίας"
 
-#: session/SessionController.cpp:949
+#: session/SessionController.cpp:952
 #, kde-format
 msgid "&Hangup"
 msgstr "&Αποσύνδεση"
 
-#: session/SessionController.cpp:954
+#: session/SessionController.cpp:957
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Διακοπή διεργασίας"
 
-#: session/SessionController.cpp:959
+#: session/SessionController.cpp:962
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Τερματισμός διεργασίας"
 
-#: session/SessionController.cpp:964
+#: session/SessionController.cpp:967
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Βίαιος τερματισμός διεργασίας"
 
-#: session/SessionController.cpp:969
+#: session/SessionController.cpp:972
 #, kde-format
 msgid "User Signal &1"
 msgstr "Σήμα χρήστη &1"
 
-#: session/SessionController.cpp:974
+#: session/SessionController.cpp:977
 #, kde-format
 msgid "User Signal &2"
 msgstr "Σήμα χρήστη &2"
 
-#: session/SessionController.cpp:992
+#: session/SessionController.cpp:995
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Δημιουργία νέου προφίλ..."
 
-#: session/SessionController.cpp:994
+#: session/SessionController.cpp:997
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Επεξεργασία τρέχοντος προφίλ..."
 
-#: session/SessionController.cpp:1125
+#: session/SessionController.cpp:1128
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2488,7 +2488,7 @@ msgstr ""
 "Ένα πρόγραμμα εκτελείται αυτήν τη στιγμή στη συνεδρία αυτή. Επιθυμείτε το "
 "κλείσιμό του;"
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1132
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2497,18 +2497,18 @@ msgstr ""
 "Το πρόγραμμα '%1' εκτελείται αυτήν τη στιγμή στη συνεδρία αυτή. Επιθυμείτε "
 "το κλείσιμό του;"
 
-#: session/SessionController.cpp:1136 session/SessionController.cpp:1171
+#: session/SessionController.cpp:1139 session/SessionController.cpp:1174
 #, kde-format
 msgid "Confirm Close"
 msgstr "Επιβεβαίωση κλεισίματος"
 
-#: session/SessionController.cpp:1137
+#: session/SessionController.cpp:1140
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Κλείσιμο προγράμματος"
 
-#: session/SessionController.cpp:1160
+#: session/SessionController.cpp:1163
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2517,7 +2517,7 @@ msgstr ""
 "Ένα πρόγραμμα στη συνεδρία αυτή δεν κλείνει. Επιθυμείτε το βίαιο τερματισμό "
 "του;"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1167
 #, kde-format
 msgid ""
 "The program '%1' is in this session would not die.  Are you sure you want to "
@@ -2526,28 +2526,28 @@ msgstr ""
 "Το πρόγραμμα '%1' εκτελείται στη συνεδρία αυτή. Επιθυμείτε τον βίαιο "
 "τερματισμό του;"
 
-#: session/SessionController.cpp:1172
+#: session/SessionController.cpp:1175
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Διακοπή προγράμματος"
 
-#: session/SessionController.cpp:1881
+#: session/SessionController.cpp:1884
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Η προτροπή του κελύφους εμφανίζεται στη συνεδρία '%1'"
 
-#: session/SessionController.cpp:2074
+#: session/SessionController.cpp:2077
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Άνοιγμα τρέχοντος φακέλου με"
 
-#: session/SessionController.cpp:2144
+#: session/SessionController.cpp:2147
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Αποθήκευση της ZModem λήψης σε..."
 
-#: session/SessionController.cpp:2154
+#: session/SessionController.cpp:2157
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2558,14 +2558,14 @@ msgstr ""
 "υπάρχουν κατάλληλα λογισμικά ZModem σε αυτό το σύστημα.</p><p>Ίσως "
 "επιθυμείτε να εγκαταστήσετε το 'rzsz' ή το πακέτο 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2164
+#: session/SessionController.cpp:2167
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Η τρέχουσα συνεδρία έχει ήδη μία μεταφορά αρχείου ZModem σε εξέλιξη.</p>"
 
-#: session/SessionController.cpp:2177
+#: session/SessionController.cpp:2180
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2574,7 +2574,7 @@ msgstr ""
 "<p>Κανένα κατάλληλο λογισμικό ZModem δεν βρέθηκε σε αυτό το σύστημα.</"
 "p><p>Ίσως επιθυμείτε να εγκαταστήσετε το 'rzsz' ή το πακέτο 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2182
+#: session/SessionController.cpp:2185
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Επιλογή αρχείων για αποστολή ZModem"
