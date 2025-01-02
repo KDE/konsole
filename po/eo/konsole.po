@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-08-24 09:18+0200\n"
+"PO-Revision-Date: 2024-12-28 17:41+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1255,7 +1255,7 @@ msgstr[1] ""
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Close"
-msgstr "Konfirmi Fermon"
+msgstr "Konfirmi fermon"
 
 #: MainWindow.cpp:743 MainWindow.cpp:760 MainWindow.cpp:774
 #, kde-format
@@ -1866,7 +1866,7 @@ msgstr "Neniuj kromaĵoj haveblaj"
 #: PrintOptions.ui:14 PrintOptions.ui:20
 #, kde-format
 msgid "Output Options"
-msgstr "Eligo Opcioj"
+msgstr "Elektebloj de Eligo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, printerFriendly)
 #. i18n: ectx: label, entry (PrinterFriendly), group (PrintOptions)
@@ -2316,7 +2316,7 @@ msgstr "Nur-Legebla"
 #: session/SessionController.cpp:845
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "&Agordi aŭ Alinomi Langeton..."
+msgstr "&Agordi aŭ Alinomi langeton..."
 
 #: session/SessionController.cpp:851
 #, kde-format
@@ -3300,7 +3300,7 @@ msgstr[1] "Ĉu vi certas ke vi volas alglui %1 signojn?"
 #: terminalDisplay/TerminalDisplay.cpp:2251
 #, kde-format
 msgid "Confirm Paste"
-msgstr "Konfirmi Algluon"
+msgstr "Konfirmi Paston"
 
 #: terminalDisplay/TerminalDisplay.cpp:2284
 #, kde-format
@@ -3560,7 +3560,7 @@ msgstr "Ŝaltigi maksimumigi la nunan vidon"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Toggle zoom-maximize current view"
-msgstr "Baskuligi zom-maksimumigi aktualan vidon"
+msgstr "Baskuligi zom-maksimumigi nunan vidon"
 
 #: ViewManager.cpp:312
 #, kde-format
@@ -4826,7 +4826,7 @@ msgstr "El elekto"
 #: widgets/EditProfileMousePage.ui:186
 #, kde-format
 msgid "Copy options:"
-msgstr "Kopiaj opcioj:"
+msgstr "Elektebloj de kopiado:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, copyTextToClipboardButton)
 #: widgets/EditProfileMousePage.ui:196
@@ -5216,9 +5216,9 @@ msgid ""
 "choose a huge value, your system may run out of free RAM and cause serious "
 "issues with your system."
 msgstr ""
-"Uzante ĉi tiun opcion, la retrorulumaj datumoj estos konservataj al RAM. Se "
-"vi elektas grandegan valoron, via sistemo povus elĉerpiĝi je libera RAM kaj "
-"kaŭzus gravajn problemojn kun via sistemo."
+"Uzante ĉi tiun elekteblon, la retrorulumaj datumoj estos konservataj al RAM. "
+"Se vi elektas grandegan valoron, via sistemo povus elĉerpiĝi je libera RAM "
+"kaj kaŭzus gravajn problemojn kun via sistemo."
 
 #: widgets/HistorySizeWidget.cpp:69
 #, kde-kuit-format
@@ -5230,7 +5230,7 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"Kiam vi uzas tiun opcion, la retrorulumaj datumoj estos skribataj neĉifrite "
+"Uzante ĉi tiun elekteblon, la retrorulumaj datumoj estos skribataj neĉifrite "
 "al provizoraj dosieroj. Tiuj provizoraj dosieroj estos aŭtomate forigataj "
 "kiam Konsole estas fermita en normala maniero.<nl/>Uzu <emphasis>Agordoj → "
 "Agordi Konsole → Provizoraj dosieroj</emphasis> por elekti la lokon de la "
@@ -5320,7 +5320,7 @@ msgstr "Trovi la antaŭan kongruon kun la nuna serĉofrazo"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
-msgstr "Montri la opciomenuon"
+msgstr "Montri la elekteblomenuon"
 
 #: widgets/IncrementalSearchBar.cpp:109
 #, kde-format
