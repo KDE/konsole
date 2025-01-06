@@ -2053,15 +2053,12 @@ msgstr "Solaris skall"
 
 #: searchtabs/SearchTabs.cpp:127
 #, fuzzy, kde-format
-#| msgid "Web Search"
 msgctxt "@label:textbox"
 msgid "Search..."
 msgstr "Nettsøk"
 
 #: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Skriv inn søketeksten her"
@@ -2831,7 +2828,6 @@ msgstr ""
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
 #, fuzzy, kde-format
-#| msgid "Control the visibility of the whole tab bar"
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr "Styr synlighet for hele fanelinja"
 
@@ -5474,8 +5470,6 @@ msgstr ""
 
 #: widgets/ViewContainer.cpp:64
 #, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "&Frakoble fane"

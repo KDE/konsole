@@ -2072,16 +2072,12 @@ msgstr "Solaris-konsoll"
 
 #: searchtabs/SearchTabs.cpp:127
 #, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
 msgctxt "@label:textbox"
 msgid "Search..."
 msgstr "Søk:"
 
 #: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
 msgstr "Skriv inn søkjeteksten her"
@@ -2857,7 +2853,6 @@ msgstr "Styr om «Ny fane»-knappen på fanelinja skal visast"
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
 #, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr "Styr om «Ny fane»-knappen på fanelinja skal visast"
 
@@ -3099,23 +3094,18 @@ msgstr "Ingen"
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
 #, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
 msgid "Show Search Tabs button:"
 msgstr "Vis knapp for fanelukking:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
 #, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
 msgid "Always"
 msgstr "Alltid"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
 #, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
 msgid "Never"
 msgstr "Aldri"
 
@@ -5599,8 +5589,6 @@ msgstr "Opna ei ny fane"
 
 #: widgets/ViewContainer.cpp:64
 #, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
 msgstr "&Kopla frå fane"
