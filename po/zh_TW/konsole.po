@@ -1,7 +1,7 @@
 # translation of konsole.po to Chinese Traditional
 # Copyright (C) 2001-2002, 2006, 2007, 2008 Free Software Foundation, Inc.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 # Jouston Huang (Huang, Jiun-Jeng) <jouston@housediy.com>, 2001.
 # Roy Hiu-yeung Chan (voidoo) <voidoo@xychen.org>, 2002.
 # Kenduest Lee <kenduest@i18n.linux.org.tw>, 2002.
@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-12-19 17:40+0900\n"
+"PO-Revision-Date: 2025-01-06 15:40+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3454,7 +3454,7 @@ msgstr "下一個分頁"
 #, kde-format
 msgctxt "@action Shortcut entry"
 msgid "Previous Tab"
-msgstr "前一個分頁"
+msgstr "上一個分頁"
 
 #: ViewManager.cpp:256
 #, kde-format
@@ -5224,13 +5224,13 @@ msgstr "尋找下一筆符合的結果"
 #, kde-format
 msgctxt "@action:button Go to the previous phrase"
 msgid "Previous"
-msgstr "前一個"
+msgstr "上一個"
 
 #: widgets/IncrementalSearchBar.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
-msgstr "尋找前一筆符合的結果"
+msgstr "尋找上一筆符合的結果"
 
 #: widgets/IncrementalSearchBar.cpp:102
 #, kde-format
