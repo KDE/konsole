@@ -11,7 +11,7 @@
 # Nicolas Ternisien <nicolas.ternisien@gmail.com>, 2005, 2007, 2008, 2010.
 # Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2008.
 # Anne-Marie Mahfouf <annemarie.mahfouf@free.fr>, 2009, 2012.
-# SPDX-FileCopyrightText: 2012, 2013, 2020, 2021, 2022, 2023, 2024 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2012, 2013, 2020, 2021, 2022, 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
 # Sebastien Renard <renard@kde.org>, 2013, 2014, 2015.
 # Vincent Pinon <vpinon@kde.org>, 2017.
 # Peter Potrowl <peter.potrowl@gmail.com>, 2017, 2018, 2019.
@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-08-25 11:46+0200\n"
+"PO-Revision-Date: 2025-01-06 12:06+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 24.11.90\n"
+"X-Generator: Lokalize 24.12.0\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -3316,9 +3316,9 @@ msgid ""
 "weight:600;\">Mouse-&gt;Miscellaneous-&gt;Underline files</span> in your "
 "profile settings.</p></body></html>"
 msgstr ""
-"\"<html><head/><body><p>Pour utiliser cette fonctionnalité, veuillez activer "
+"<html><head/><body><p>Pour utiliser cette fonctionnalité, veuillez activer "
 "l'option <span style=\" font-weight:600;\">Souris / Divers / Souligner les "
-"fichiers</span> dans les paramètres de votre profil</p></body></html>\""
+"fichiers</span> dans les paramètres de votre profil</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/ThumbnailsSettings.ui:53
