@@ -2092,12 +2092,10 @@ msgid "Solaris console"
 msgstr "Κονσόλα Solaris"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Αναζήτηση:"
+msgstr "Αναζήτηση..."
 
 #: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
@@ -3145,17 +3143,13 @@ msgstr "Εμφάνιση κουμπιού κλεισίματος καρτέλα�
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Πάντα"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Ποτέ"
 
