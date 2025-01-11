@@ -203,6 +203,14 @@ void SSHManagerPlugin::requestConnection(QSortFilterProxyModel *filterModel,
 
     QString sshCommand = QStringLiteral("ssh ");
     if (data.useSshConfig) {
+        // useSshConfig is defined in sshwidget.ui:165 -> meaning wheather the ssh config is taken from .ssh/config
+        if (!data.name.isEmpty()) {
+            // if we got data.name (which is the profile identifier as in sshmanagermodel.cpp:263
+            sshCommand += data.name;
+        }
+    }
+    if (!data.useSshConfig) {
+        // useSshConfig is false aka not set, so we just a assume a manual profile entry in terms of an entry that was added manually to Konsole
         if (data.sshKey.length()) {
             sshCommand += QStringLiteral("-i %1 ").arg(data.sshKey);
         }
@@ -214,10 +222,10 @@ void SSHManagerPlugin::requestConnection(QSortFilterProxyModel *filterModel,
         if (!data.username.isEmpty()) {
             sshCommand += data.username + QLatin1Char('@');
         }
-    }
-
-    if (!data.host.isEmpty()) {
-        sshCommand += data.host;
+        
+        if (!data.host.isEmpty()) {
+            sshCommand += data.host;
+        }
     }
 
     controller->session()->sendTextToTerminal(sshCommand, QLatin1Char('\r'));
