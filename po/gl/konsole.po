@@ -9,7 +9,7 @@
 # Marce Villarino <mvillarino@kde-espana.es>, 2009, 2011, 2012, 2013, 2014.
 # Miguel Branco <mgl.branco@gmail.com>, 2013.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016, 2017.
-# SPDX-FileCopyrightText: 2023, 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Adrián Chaves (Gallaecio)
 #
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en http://trasno.gpul.org
@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-01 00:44+0000\n"
-"PO-Revision-Date: 2024-12-13 22:51+0100\n"
+"PO-Revision-Date: 2025-01-19 12:43+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2001,7 +2001,8 @@ msgstr ""
 #: SaveHistoryAutoTask.cpp:172
 #, kde-format
 msgid "Failed to update autosave state on output changes."
-msgstr "Non foi posíbel gardar automaticamente o estado nos cambios da saída."
+msgstr ""
+"Non foi posíbel actualizar o estado de garda automática nos cambios da saída."
 
 #: SaveHistoryTask.cpp:173
 #, kde-format
