@@ -34,8 +34,7 @@ include(GenerateExportHeader)
 include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
 include(KDEClangFormat)
-# Remove OPTIONAL when we require EMC >= 5.79
-include(KDEGitCommitHooks OPTIONAL)
+include(KDEGitCommitHooks)
 include(CheckFunctionExists)
 include(CheckIncludeFiles)
 
