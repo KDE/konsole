@@ -1164,7 +1164,7 @@ bool SessionController::confirmForceClose() const
                 "  Are you sure you want to kill it by force?");
         } else {
             question = i18n(
-                "The program '%1' is in this session would not die."
+                "The program '%1' in this session would not die."
                 "  Are you sure you want to kill it by force?",
                 title);
         }
