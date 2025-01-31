@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Windows/Qt6']
-  'require':
+ - 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Windows/Qt6']
+   'require':
     'frameworks/extra-cmake-modules': '@latest-kf6'
     'frameworks/kconfig': '@latest-kf6'
     'frameworks/knotifications': '@latest-kf6'
@@ -25,18 +25,17 @@ Dependencies:
     'frameworks/kxmlgui': '@latest-kf6'
     'frameworks/kdoctools': '@latest-kf6'
 
-- 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
-  'require':
+ - 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
+   'require':
     'frameworks/kdbusaddons': '@latest-kf6'
     'frameworks/kpty': '@latest-kf6'
     'frameworks/kglobalaccel': '@latest-kf6'
 
 Options:
-    require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
-    cppcheck-arguments:
-        - --enable=warning,style,performance
+ require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
+ cppcheck-arguments:
+  - --enable=warning,style,performance
 #        - --suppress-xml=cppcheck-suppressions.xml
-    cppcheck-ignore-files:
-        - src/characters/CharacterWidth.src.cpp
+ cppcheck-ignore-files:
+  - src/characters/CharacterWidth.src.cpp
 #        - autotests
-
