@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-01 00:44+0000\n"
+"POT-Creation-Date: 2025-02-01 00:44+0000\n"
 "PO-Revision-Date: 2024-07-31 22:16+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -2496,9 +2496,12 @@ msgstr ""
 "Egy program a munkamenetben nem akar meghalni. Biztosan ki szeretné lőni?"
 
 #: session/SessionController.cpp:1167
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "The program '%1' is in this session would not die.  Are you sure you want "
+#| "to kill it by force?"
 msgid ""
-"The program '%1' is in this session would not die.  Are you sure you want to "
+"The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 "A munkamenetben még nem akar meghalni a(z) „%1” nevű program. Biztosan ki "

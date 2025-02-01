@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-01 00:44+0000\n"
+"POT-Creation-Date: 2025-02-01 00:44+0000\n"
 "PO-Revision-Date: 2020-10-23 12:16+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -2579,9 +2579,12 @@ msgstr ""
 "töö vägisi?"
 
 #: session/SessionController.cpp:1167
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "The program '%1' is in this session would not die.  Are you sure you want "
+#| "to kill it by force?"
 msgid ""
-"The program '%1' is in this session would not die.  Are you sure you want to "
+"The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 "Selle seansi programm '%1' ei taha tööd lõpetada. Kas tõesti lõpetada selle "

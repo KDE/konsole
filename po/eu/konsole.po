@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-01 00:44+0000\n"
+"POT-Creation-Date: 2025-02-01 00:44+0000\n"
 "PO-Revision-Date: 2024-12-05 18:28+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -2506,9 +2506,12 @@ msgstr ""
 "duzula?"
 
 #: session/SessionController.cpp:1167
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "The program '%1' is in this session would not die.  Are you sure you want "
+#| "to kill it by force?"
 msgid ""
-"The program '%1' is in this session would not die.  Are you sure you want to "
+"The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 "Saio honetako '%1' programa ez da hiltzen. Ziur zaude indarrez akabatu nahi "

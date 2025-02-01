@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-01 00:44+0000\n"
+"POT-Creation-Date: 2025-02-01 00:44+0000\n"
 "PO-Revision-Date: 2014-07-01 22:04+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -2609,9 +2609,12 @@ msgstr ""
 "En Programm binnen dissen Törn löppt noch. Wullt Du dat redig afscheten?"
 
 #: session/SessionController.cpp:1167
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "The program '%1' is in this session would not die.  Are you sure you want "
+#| "to kill it by force?"
 msgid ""
-"The program '%1' is in this session would not die.  Are you sure you want to "
+"The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 "Dat Programm \"%1\" binnen dissen Törn löppt noch. Wullt Du dat redig "

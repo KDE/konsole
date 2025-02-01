@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole trunk\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-01 00:44+0000\n"
+"POT-Creation-Date: 2025-02-01 00:44+0000\n"
 "PO-Revision-Date: 2020-02-05 14:49+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -2516,7 +2516,7 @@ msgstr "ഒരു പ്രോഗ്രാം ഈ സെഷനില്‍ പ�
 #: session/SessionController.cpp:1167
 #, fuzzy, kde-format
 msgid ""
-"The program '%1' is in this session would not die.  Are you sure you want to "
+"The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "'%1' എന്ന പ്രോഗ്രാം ഈ സെഷനില്‍ പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിയ്ക്കുന്നു. അതു് അടയ്ക്കണമെന്നുറപ്പുണ്ടോ?"
 

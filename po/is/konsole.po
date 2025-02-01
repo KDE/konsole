@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-01 00:44+0000\n"
+"POT-Creation-Date: 2025-02-01 00:44+0000\n"
 "PO-Revision-Date: 2024-10-10 14:41+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -2504,9 +2504,12 @@ msgstr ""
 "með valdi?"
 
 #: session/SessionController.cpp:1167
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "The program '%1' is in this session would not die.  Are you sure you want "
+#| "to kill it by force?"
 msgid ""
-"The program '%1' is in this session would not die.  Are you sure you want to "
+"The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 "Forritið '%1' í þessari lotu neitar að deyja. Ertu viss um að þú viljir "

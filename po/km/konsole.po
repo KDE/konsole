@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-01 00:44+0000\n"
+"POT-Creation-Date: 2025-02-01 00:44+0000\n"
 "PO-Revision-Date: 2012-12-20 16:07+0700\n"
 "Last-Translator: sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros>\n"
@@ -2618,9 +2618,12 @@ msgid ""
 msgstr "កម្មវិធី​នៅ​ក្នុង​សម័យ​នេះ​មិន​គួរ​ត្រូវ​បាន​បិទ​ទេ ។ តើ​អ្នក​ពិតជា​ចង់​បិទ​វា​ដោយ​បង្ខំ​មែន​ឬ ?"
 
 #: session/SessionController.cpp:1167
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "The program '%1' is in this session would not die.  Are you sure you want "
+#| "to kill it by force?"
 msgid ""
-"The program '%1' is in this session would not die.  Are you sure you want to "
+"The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
 "កម្មវិធី '%1' ដែល​មាន​នៅ​ក្នុង​សម័យ​នេះ​មិន​គួរ​ត្រូវ​បាន​បិទ​ទេ ។ តើ​អ្នក​ពិតជា​ចង់​បិទ​វា​ដោយ​បង្ខំ​មែន​ឬ ?"
