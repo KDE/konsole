@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-01 00:44+0000\n"
-"PO-Revision-Date: 2024-12-05 07:36+0100\n"
+"PO-Revision-Date: 2025-02-01 07:15+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -2496,16 +2496,13 @@ msgstr ""
 "želite uničiti nasilno?"
 
 #: session/SessionController.cpp:1167
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"V tej seji teče program »%1«, ki ga ni mogoče uničiti. Ali ste prepričani, "
-"da ga želite uničiti nasilno?"
+"Program '%1' v tej seji ne bi umrl.  Ali ste prepričani, da ga želite ubiti "
+"na silo?"
 
 #: session/SessionController.cpp:1175
 #, kde-format
