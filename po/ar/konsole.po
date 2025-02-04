@@ -1,7 +1,7 @@
 # translation of konsole.po to Arabic
 # translation of konsole.po to
 # Copyright (C) 2001,2002, 2004, 2006, 2007, 2008 Free Software Foundation, Inc.
-# SPDX-FileCopyrightText: 2008, 2024 zayed <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2008, 2024, 2025 zayed <zayed.alsaidi@gmail.com>
 # Mohammed Gamal <f2c2001@yahoo.com>, 2001.
 # Sayed Jaffer Al-Mosawi <mosawi@arabeyes.org>, 2002.
 # Isam Bayazidi <bayazidi@arabeyes.org>, 2002.
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-01 00:44+0000\n"
-"PO-Revision-Date: 2024-12-06 07:33+0400\n"
+"PO-Revision-Date: 2025-02-03 16:29+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -2489,14 +2489,12 @@ msgid ""
 msgstr "يوجد برنامج في هذه الجلسة لن يموت. هل أنت متأكد أنك تريد قتلها بالقوة؟"
 
 #: session/SessionController.cpp:1167
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
-msgstr "البرنامج '%1' لن يموت في هذه الجلسة. أمتأكد أنك تريد إغلاقها؟"
+msgstr ""
+"لن يتوقف البرنامج '%1' في هذه الجلسة. هل أنت متأكد من أنك تريد إيقافه بالقوة؟"
 
 #: session/SessionController.cpp:1175
 #, kde-format
