@@ -128,6 +128,7 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
     , _monitorProcessFinish(false)
     , _monitorOnce(false)
     , _escapedUrlFilter(nullptr)
+    , _addedHamburgerMenu(false)
 {
     Q_ASSERT(sessionParam);
     Q_ASSERT(viewParam);
@@ -2089,9 +2090,12 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 
         _preventClose = true;
 
-        auto hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(KStandardAction::name(KStandardAction::HamburgerMenu)));
-        if (hamburger) {
-            hamburger->addToMenu(popup);
+        if (!_addedHamburgerMenu) {
+            auto hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(KStandardAction::name(KStandardAction::HamburgerMenu)));
+            if (hamburger) {
+                hamburger->addToMenu(popup);
+                _addedHamburgerMenu = true;
+            }
         }
 
         // they are here.

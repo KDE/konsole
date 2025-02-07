@@ -422,6 +422,8 @@ private:
     QAction *_startAutoSaveAction;
     QAction *_stopAutoSaveAction;
     QPointer<SaveHistoryAutoTask> _autoSaveTask;
+
+    bool _addedHamburgerMenu;
 };
 
 }
