@@ -646,11 +646,18 @@ private:
         }
 
         // get created app cgroup path
-        while (getProcCGroup(getpid()) == oldAppCGroupPath) {
-            QThread::msleep(100); // wait for new unit to be created
+        QString newAppCGroupPath = getProcCGroup(getpid());
+        if (newAppCGroupPath == oldAppCGroupPath) {
+            // FIXME, find a better way to do this
+            QThread::msleep(5); // wait for new unit to be created.
+            newAppCGroupPath = getProcCGroup(getpid());
+
+            if (newAppCGroupPath == oldAppCGroupPath) {
+                return false;
+            }
         }
 
-        _createdAppCGroupPath = getProcCGroup(getpid());
+        _createdAppCGroupPath = newAppCGroupPath;
 
         // create sub cgroups
         if (!createCGroup(QStringLiteral("main.scope"), getpid()) || !createCGroup(QStringLiteral("tab(%1).scope").arg(pid), pid)) {
