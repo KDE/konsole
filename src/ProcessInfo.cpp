@@ -700,10 +700,13 @@ private:
         }
 
         const QString data = QString::fromUtf8(cGroupFile.readAll());
+        const qsizetype lastColonPos = data.lastIndexOf(QLatin1Char(':'));
+        if (lastColonPos < 0) {
+            return QString();
+        }
 
-        const QString cGroupPath(data.mid(data.lastIndexOf(QLatin1Char(':')) + 1));
-
-        return QString(QStringLiteral("/sys/fs/cgroup") + cGroupPath).trimmed();
+        QStringView cGroupPath(QStringView(data).mid(lastColonPos + 1).trimmed());
+        return QString(QStringLiteral("/sys/fs/cgroup") + cGroupPath);
     }
 
     bool createSystemdUnit(const QString &name, const VariantList &propList)
