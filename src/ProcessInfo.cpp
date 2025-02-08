@@ -621,9 +621,10 @@ private:
         qDBusRegisterMetaType<VariantList>();
         qDBusRegisterMetaType<QPair<QString, VariantList>>();
         qDBusRegisterMetaType<EmptyArray>();
+        const pid_t selfPid = getpid();
 
         const QString managerObjPath(QStringLiteral("/org/freedesktop/systemd1"));
-        const QString appUnitName(QStringLiteral("app-org.kde.konsole-%1.scope").arg(getpid()));
+        const QString appUnitName(QStringLiteral("app-org.kde.konsole-%1.scope").arg(selfPid));
 
         // check if systemd dbus services exist
         if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(QStringLiteral("org.freedesktop.systemd1"))) {
@@ -631,11 +632,11 @@ private:
         }
 
         // get current application cgroup path
-        const QString oldAppCGroupPath(getProcCGroup(getpid()));
+        const QString oldAppCGroupPath(getProcCGroup(selfPid));
 
         // create application unit
         VariantList properties;
-        const QList<uint> mainPid({static_cast<quint32>(getpid())});
+        const QList<uint> mainPid({static_cast<quint32>(selfPid)});
 
         properties.append(VariantPair({QStringLiteral("Delegate"), QDBusVariant(QVariant::fromValue(true))}));
         properties.append(VariantPair({QStringLiteral("ManagedOOMMemoryPressure"), QDBusVariant(QVariant::fromValue(QStringLiteral("kill")))}));
@@ -646,11 +647,11 @@ private:
         }
 
         // get created app cgroup path
-        QString newAppCGroupPath = getProcCGroup(getpid());
+        QString newAppCGroupPath = getProcCGroup(selfPid);
         if (newAppCGroupPath == oldAppCGroupPath) {
             // FIXME, find a better way to do this
             QThread::msleep(5); // wait for new unit to be created.
-            newAppCGroupPath = getProcCGroup(getpid());
+            newAppCGroupPath = getProcCGroup(selfPid);
 
             if (newAppCGroupPath == oldAppCGroupPath) {
                 return false;
@@ -660,7 +661,7 @@ private:
         _createdAppCGroupPath = newAppCGroupPath;
 
         // create sub cgroups
-        if (!createCGroup(QStringLiteral("main.scope"), getpid()) || !createCGroup(QStringLiteral("tab(%1).scope").arg(pid), pid)) {
+        if (!createCGroup(QStringLiteral("main.scope"), selfPid) || !createCGroup(QStringLiteral("tab(%1).scope").arg(pid), pid)) {
             return false;
         }
 
