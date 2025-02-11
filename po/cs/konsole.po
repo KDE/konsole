@@ -2045,12 +2045,10 @@ msgid "Search..."
 msgstr "Hledat..."
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the text to search for here"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Zde zadejte text pro vyhledání"
+msgstr ""
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2453,16 +2451,11 @@ msgstr ""
 "ukončení?"
 
 #: session/SessionController.cpp:1167
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"V tomto sezení zůstal viset program '%1'. Opravdu si přejete vynutit jeho "
-"ukončení?"
 
 #: session/SessionController.cpp:1175
 #, kde-format
@@ -2817,10 +2810,9 @@ msgstr "Ovládání viditelnosti tlačítka 'Nová karta' v panelu karet"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
-#| msgid "Control the visibility of 'New Tab' button on the tab bar"
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Ovládání viditelnosti tlačítka 'Nová karta' v panelu karet"
+msgstr ""
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3045,10 +3037,9 @@ msgstr "Nic"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
-#| msgid "Show Close Tab button:"
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Zobrazit tlačítko pro zavření karty:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
@@ -5493,12 +5484,10 @@ msgid "Open a new tab"
 msgstr "Otevřít novou kartu"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "&Vytrhnout kartu"
+msgstr ""
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format
