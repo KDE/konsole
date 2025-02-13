@@ -2459,14 +2459,11 @@ msgid ""
 msgstr "当前会话内有一个程序在不会退出，您确定要强制杀死它吗？"
 
 #: session/SessionController.cpp:1167
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
-msgstr "当前会话内的程序“%1”不会退出，您想要强制杀死它吗？"
+msgstr "当前会话中的“%1”程序无法退出，您想要强制中止它吗？"
 
 #: session/SessionController.cpp:1175
 #, kde-format
