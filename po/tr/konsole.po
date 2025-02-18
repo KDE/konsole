@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 # Adem Alp Yıldız <ademalp@kde.org.tr>, 2005.
 # Bekir SONAT <cortexbs@yahoo.com>, 2005.
 # Görkem Çetin <gorkem@kde.org>, 2003-2004.
@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-06 00:43+0000\n"
-"PO-Revision-Date: 2024-12-07 14:25+0300\n"
+"PO-Revision-Date: 2025-02-17 19:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1045,7 +1045,7 @@ msgstr "Alexander Neundorf"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Bug fixes and improved startup performance"
-msgstr "Hata düzeltmeleri ve başlangıç performansı"
+msgstr "Hata düzeltmeleri ve başlangıç başarımı"
 
 #: main.cpp:385
 #, kde-format
@@ -2203,12 +2203,12 @@ msgstr "Kopyala"
 #: session/SessionController.cpp:672
 #, kde-format
 msgid "Split View Left-Right"
-msgstr "Görünümü Sol–Sağ Şeklinde Böl"
+msgstr "Görünümü Sol/Sağ Şeklinde Böl"
 
 #: session/SessionController.cpp:677
 #, kde-format
 msgid "Split View Top-Bottom"
-msgstr "Görünümü Üst–Alt Şeklinde Böl"
+msgstr "Görünümü Üst/Alt Şeklinde Böl"
 
 #: session/SessionController.cpp:681
 #, kde-format
