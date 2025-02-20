@@ -9,6 +9,7 @@
 #include "EditProfileDialog.h"
 
 // Qt
+#include <QColor>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QFileDialog>
@@ -17,6 +18,7 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QRegularExpressionValidator>
+#include <QSlider>
 #include <QStandardItem>
 #include <QStandardPaths>
 #include <QStringListModel>
@@ -26,6 +28,7 @@
 
 // KDE
 #include <KCodecAction>
+#include <KColorButton>
 #include <KIconDialog>
 #include <KLocalizedString>
 #include <KWindowSystem>
@@ -1748,6 +1751,13 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
     _scrollingUi->markerSizeWidget->setValue(profile->property<double>(Profile::MarkerSize));
     connect(_scrollingUi->markerSizeWidget, &QDoubleSpinBox::valueChanged, this, &Konsole::EditProfileDialog::toggleScrollbarMarkerSize);
 
+    // setup search highlighter color button
+    _scrollingUi->searchHighligheterColorButton->setColor(profile->property<QColor>(Profile::SearchLineColor));
+    connect(_scrollingUi->searchHighligheterColorButton, &KColorButton::changed, this, &Konsole::EditProfileDialog::toggleScrollbarSearchLineColor);
+
+    // setup search highlighter opacity widget
+    _scrollingUi->labelSearchHighlighterOpacitySlider->setValue(profile->property<int>(Profile::SearchLineOpacity));
+    connect(_scrollingUi->labelSearchHighlighterOpacitySlider, &QSlider::valueChanged, this, &Konsole::EditProfileDialog::toggleScrollbarSearchLineOpacity);
     // signals and slots
     connect(_scrollingUi->historySizeWidget, &Konsole::HistorySizeWidget::historySizeChanged, this, &Konsole::EditProfileDialog::historySizeChanged);
 }
@@ -1790,6 +1800,14 @@ void EditProfileDialog::toggleScrollbarMarkerColor(QColor color)
 void EditProfileDialog::toggleScrollbarMarkerSize(double pSize)
 {
     updateTempProfileProperty(Profile::MarkerSize, pSize);
+}
+
+void EditProfileDialog::toggleScrollbarSearchLineColor(QColor color) {
+    updateTempProfileProperty(Profile::SearchLineColor, color);
+}
+
+void EditProfileDialog::toggleScrollbarSearchLineOpacity(int opacity) {
+    updateTempProfileProperty(Profile::SearchLineOpacity, opacity);
 }
 
 void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)

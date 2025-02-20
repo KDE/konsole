@@ -9,6 +9,7 @@
 #include "SessionController.h"
 
 #include "profile/ProfileManager.h"
+#include "src/SearchHistoryTask.h"
 #include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalFonts.h"
 
@@ -86,6 +87,7 @@
 
 #include "terminalDisplay/TerminalColor.h"
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalScrollBar.h"
 
 // For Unix signal names
 #include <csignal>
@@ -619,6 +621,7 @@ void SessionController::setupSearchBar()
 {
     connect(_searchBar, &Konsole::IncrementalSearchBar::unhandledMovementKeyPressed, this, &Konsole::SessionController::movementKeyFromSearchBarReceived);
     connect(_searchBar, &Konsole::IncrementalSearchBar::closeClicked, this, &Konsole::SessionController::searchClosed);
+    connect(_searchBar, &Konsole::IncrementalSearchBar::closeClicked, view()->scrollBar(), &Konsole::TerminalScrollBar::clearSearchLines);
     connect(_searchBar, &Konsole::IncrementalSearchBar::searchFromClicked, this, &Konsole::SessionController::searchFrom);
     connect(_searchBar, &Konsole::IncrementalSearchBar::findNextClicked, this, &Konsole::SessionController::findNextInHistory);
     connect(_searchBar, &Konsole::IncrementalSearchBar::findPreviousClicked, this, &Konsole::SessionController::findPreviousInHistory);
@@ -1690,6 +1693,7 @@ void SessionController::beginSearch(const QString &text, Enum::SearchDirection d
         auto task = new SearchHistoryTask(this);
 
         connect(task, &Konsole::SearchHistoryTask::completed, this, &Konsole::SessionController::searchCompleted);
+        connect(task, &Konsole::SearchHistoryTask::searchResults, view()->scrollBar(), &Konsole::TerminalScrollBar::searchLines);
 
         task->setRegExp(regExp);
         task->setSearchDirection(direction);
@@ -1699,6 +1703,7 @@ void SessionController::beginSearch(const QString &text, Enum::SearchDirection d
         task->addScreenWindow(session(), view()->screenWindow());
         task->execute();
     } else if (text.isEmpty()) {
+        view()->scrollBar()->clearSearchLines();
         searchCompleted(false);
     }
 

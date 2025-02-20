@@ -82,6 +82,33 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
         // of the output and continue from the other
         // end
 
+        QSet<int> matchPositions;
+
+        decoder.begin(&searchStream);
+        emulation->writeToStream(&decoder, 0, lastLine);
+        decoder.end();
+
+        QRegularExpressionMatchIterator matchIterator = _regExp.globalMatch(string);
+        while (matchIterator.hasNext()) {
+            QRegularExpressionMatch match = matchIterator.next();
+            int pos = match.capturedStart();
+            if (pos != -1) {
+                int newLines = 0;
+                QList<int> linePositions = decoder.linePositions();
+                while (newLines < linePositions.count() && linePositions[newLines] <= pos) {
+                    newLines++;
+                }
+                newLines--;
+
+                int findPos = qMin(0, lastLine) + newLines;
+                matchPositions.insert(findPos);
+            }
+        }
+
+        Q_EMIT searchResults(matchPositions, window->lineCount());
+
+        string.clear();
+
         // loop through history in blocks of <delta> lines.
         do {
             // ensure that application does not appear to hang
@@ -165,6 +192,8 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
             // if no match was found, clear selection to indicate this,
             window->clearSelection();
             window->notifyOutputChanged();
+
+            Q_EMIT searchResults(QSet<int>{}, window->lineCount());
         }
     }
 

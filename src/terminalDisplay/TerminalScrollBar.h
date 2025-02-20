@@ -65,6 +65,10 @@ public:
 
     void setMarkerSize(double percentageSize);
 
+    void setSearchHighlightLineColor(QColor lineColor);
+
+    void setSearchHighlightLineOpacity(int lineOpacity);
+
     // applies changes to scrollbarLocation to the scroll bar and
     // if @propagate is true, propagates size information
     void applyScrollBarPosition(bool propagate = true);
@@ -98,6 +102,8 @@ public Q_SLOTS:
 
     void scrollBarPositionChanged(int value);
     void highlightScrolledLinesEvent();
+    void searchLines(const QSet<int>&, int);
+    void clearSearchLines();
 
     // Reimplementation to paint scrollbar markers over the standard drawing
     void paintEvent(QPaintEvent *event) override;
@@ -107,6 +113,9 @@ public Q_SLOTS:
 
     // Reimplementation to check for input indicating marker addition or removal
     void mouseDoubleClickEvent(QMouseEvent *event) override;
+
+    // Reimplementation to show a tooltip with the line number when hovering over lines.
+    void mouseMoveEvent(QMouseEvent *event) override;
 
 private:
     class Marker
@@ -148,6 +157,10 @@ private:
     QColor _markerColor;
     double _markerPSize;
     QList<Marker *> _markers;
+    QSet<int> _searchLines;
+    int _terminalLines;
+    QColor _searchHighlightLineColor;
+    int _lineOpacity;
 };
 
 } // namespace Konsole

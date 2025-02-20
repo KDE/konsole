@@ -13,6 +13,7 @@
 #include "../characters/Character.h"
 #include "TerminalDisplay.h"
 #include "TerminalFonts.h"
+#include "session/SessionController.h"
 
 // KDE
 
@@ -21,6 +22,7 @@
 #include <QMouseEvent>
 #include <QProxyStyle>
 #include <QRect>
+#include <QToolTip>
 
 namespace Konsole
 {
@@ -28,6 +30,7 @@ TerminalScrollBar::TerminalScrollBar(QWidget *parent)
     : QScrollBar(parent)
 {
     connect(this, &QScrollBar::valueChanged, this, &TerminalScrollBar::scrollBarPositionChanged);
+    setMouseTracking(true);
 }
 
 TerminalScrollBar::~TerminalScrollBar()
@@ -107,6 +110,15 @@ void TerminalScrollBar::setMarkerSize(double pSize)
     update();
 }
 
+void TerminalScrollBar::setSearchHighlightLineColor(QColor color) {
+    _searchHighlightLineColor = color;
+    update();
+}
+
+void TerminalScrollBar::setSearchHighlightLineOpacity(int lineOpacity) {
+    _lineOpacity = lineOpacity;
+    update();
+}
 void TerminalScrollBar::scrollBarPositionChanged(int)
 {
     const auto display = qobject_cast<TerminalDisplay *>(this->parent());
@@ -259,14 +271,44 @@ void TerminalScrollBar::updatePalette(const QPalette &pal)
 
 void TerminalScrollBar::paintEvent(QPaintEvent *event)
 {
-    QScrollBar::paintEvent(event);
-
     QPainter p(this);
+
+    const QColor searchLineColor(_searchHighlightLineColor.red(), _searchHighlightLineColor.green(), _searchHighlightLineColor.blue(), _lineOpacity);
+    const int cornerRadius = 2;
+    const int stripeHeight = 1;
+
+    p.setPen(Qt::NoPen);
+
+    for (int y: _searchLines) {
+        y = (y * height()) / _terminalLines;
+        p.setBrush(searchLineColor);
+        p.drawRoundedRect(2, y, width() - 4, stripeHeight, cornerRadius, cornerRadius);
+    }
+
+    QScrollBar::paintEvent(event);
 
     for (int i = 0; i < _markers.size(); ++i) {
         p.setOpacity(0.75);
         p.fillRect(_markers[i]->geometry, _markerColor);
     }
+}
+
+void TerminalScrollBar::searchLines(const QSet<int>& indexSet, int lines) {
+    if (indexSet.isEmpty()) {
+        _searchLines.clear();
+    } else {
+        _searchLines = indexSet;
+    }
+
+    if(sender()) {
+        _terminalLines = lines;
+    }
+
+    update();
+}
+
+void TerminalScrollBar::clearSearchLines() {
+    searchLines(QSet<int>{}, 1000);
 }
 
 void TerminalScrollBar::resizeEvent(QResizeEvent *event)
@@ -284,6 +326,28 @@ void TerminalScrollBar::mouseDoubleClickEvent(QMouseEvent *event)
     } else {
         registerMarker(createMarker(position));
     }
+}
+
+void TerminalScrollBar::mouseMoveEvent(QMouseEvent *event) {
+    int posY = event->pos().y();
+    bool showToolTip = false;
+
+    for (int y: _searchLines) {
+        int x = y;
+        y = (y * height()) / _terminalLines;
+        if (abs(y - posY) <= 3) {
+            QString tooltipText = QString::fromUtf8("line %1").arg(x);
+            QToolTip::showText(event->globalPosition().toPoint(), tooltipText);
+            showToolTip = true;
+            break;
+        }
+    }
+
+    if (!showToolTip) {
+        QToolTip::hideText();
+    }
+
+    QScrollBar::mouseMoveEvent(event);
 }
 
 void TerminalScrollBar::removeMarker(int clickedYCoord)

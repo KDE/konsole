@@ -126,6 +126,8 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {ReflowLines, "ReflowLines", SCROLLING_GROUP, true},
     {MarkerColor, "MarkerColor", SCROLLING_GROUP, QColor(Qt::red)},
     {MarkerSize, "MarkerSize", SCROLLING_GROUP, 2},
+    {SearchLineColor, "SearchLineColor", SCROLLING_GROUP, QColor(Qt::yellow)},
+    {SearchLineOpacity, "SearchLineOpacity", SCROLLING_GROUP, 100},
 
     // Terminal Features
     {UrlHintsModifiers, "UrlHintsModifiers", TERMINAL_GROUP, 0},

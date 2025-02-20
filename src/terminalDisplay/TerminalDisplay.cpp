@@ -3164,6 +3164,8 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _scrollBar->setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
     _scrollBar->setMarkerSize(profile->property<double>(Profile::MarkerSize));
     _scrollBar->setMarkerColor(profile->property<QColor>(Profile::MarkerColor));
+    _scrollBar->setSearchHighlightLineOpacity(profile->property<int>(Profile::SearchLineOpacity));
+    _scrollBar->setSearchHighlightLineColor(profile->property<QColor>(Profile::SearchLineColor));
     _dimValue = profile->dimValue();
     _focusBorderColor = profile->focusBorderColor();
 

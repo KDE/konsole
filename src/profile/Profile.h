@@ -389,6 +389,10 @@ public:
          * as a percentage of scrollbar length
          */
         MarkerSize,
+        /** (QColor) Color for scrollbar result highlighting lines */
+        SearchLineColor,
+        /** (int) Alpha value - Opacity for the search lines */
+        SearchLineOpacity,
         /** When to show line numbers.
          * 0 for Never, 1 when showing URL hints, 2 for always
          */

@@ -188,6 +188,9 @@ private Q_SLOTS:
     void toggleScrollbarMarkerColor(QColor color);
     void toggleScrollbarMarkerSize(double pSize);
 
+    void toggleScrollbarSearchLineColor(QColor color);
+    void toggleScrollbarSearchLineOpacity(int opacity);
+
     // keyboard page
     void editKeyBinding();
     void newKeyBinding();

@@ -89,6 +89,9 @@ private:
     Enum::SearchDirection _direction;
     bool _noWrap;
     int _startLine;
+
+Q_SIGNALS:
+    void searchResults(const QSet<int>&, int);
 };
 
 }
