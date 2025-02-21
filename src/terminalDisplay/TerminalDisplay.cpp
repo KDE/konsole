@@ -57,6 +57,7 @@
 #include "../decoders/PlainTextDecoder.h"
 #include "../widgets/KonsolePrintManager.h"
 #include "../widgets/TerminalDisplayAccessible.h"
+#include "Emulation.h" // to connect the URL escape sequence extractor
 #include "EscapeSequenceUrlExtractor.h"
 #include "PrintOptions.h"
 #include "Screen.h"
@@ -151,9 +152,14 @@ void TerminalDisplay::setScreenWindow(ScreenWindow *window)
         auto profile = SessionManager::instance()->sessionProfile(_sessionController->session());
         _screenWindow->screen()->setReflowLines(profile->property<bool>(Profile::ReflowLines));
         _screenWindow->screen()->setIgnoreWcWidth(profile->property<bool>(Profile::IgnoreWcWidth));
+        _screenWindow->screen()->setEnableUrlExtractor(profile->allowEscapedLinks());
 
         if (_screenWindow->screen()->urlExtractor()) {
             _screenWindow->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
+            connect(_sessionController->session()->emulation(),
+                    &Emulation::toggleUrlExtractionRequest,
+                    _screenWindow->screen()->urlExtractor(),
+                    &EscapeSequenceUrlExtractor::toggleUrlInput);
         }
     }
 }
