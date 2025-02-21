@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:43+0000\n"
+"POT-Creation-Date: 2025-02-21 00:44+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -1898,13 +1898,13 @@ msgstr "Λειτουργία φιλική προς εκτύπωση (μαύρο 
 msgid "&Scale output"
 msgstr "&Κλιμάκωση εξόδου"
 
-#: profile/Profile.cpp:267
+#: profile/Profile.cpp:269
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Ενσωματωμένο"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:537
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Default profile"
 msgstr "Προκαθορισμένο προφίλ"
@@ -2146,7 +2146,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Σιγή στην '%1' (Συνεδρία '%2')"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:360 session/SessionController.cpp:1886
+#: session/SessionController.cpp:362 session/SessionController.cpp:1891
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, kde-format
@@ -2194,290 +2194,290 @@ msgstr "Πρόοδος ZModem"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Δραστηριότητα στην '%1' (Συνεδρία '%2')"
 
-#: session/SessionController.cpp:141
+#: session/SessionController.cpp:143
 #, kde-format
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:359
+#: session/SessionController.cpp:361
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Η διεργασία '%1' έχει τερματίσει την εκτέλεσή της στη συνεδρία '%2'"
 
-#: session/SessionController.cpp:442
+#: session/SessionController.cpp:444
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Το Konsole δεν γνωρίζει πώς να ανοίξει τον σελιδοδείκτη: "
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:523
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Αναζήτηση για '%1' με"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:539
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Διαμόρφωση συντομεύσεων ιστού..."
 
-#: session/SessionController.cpp:647
+#: session/SessionController.cpp:650
 #, kde-format
 msgid "&Close Session"
 msgstr "&Κλείσιμο συνεδρίας"
 
-#: session/SessionController.cpp:654
+#: session/SessionController.cpp:657
 #, kde-format
 msgid "Open File Manager"
 msgstr "Άνοιγμα διαχειριστή αρχείων"
 
-#: session/SessionController.cpp:669
+#: session/SessionController.cpp:672
 #, kde-format
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:679
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Διαίρεση προβολής αριστερά/δεξιά"
 
-#: session/SessionController.cpp:681
+#: session/SessionController.cpp:684
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Διαίρεση προβολής πάνω/κάτω"
 
-#: session/SessionController.cpp:685
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Αντιγραφή εκτός των συμβόλων αναμονής"
 
-#: session/SessionController.cpp:691
+#: session/SessionController.cpp:694
 #, kde-format
 msgid "Copy user input"
 msgstr "Αντιγραφή δεδομένων εισόδου χρήστη"
 
-#: session/SessionController.cpp:697
+#: session/SessionController.cpp:700
 #, kde-format
 msgid "Copy command output"
 msgstr "Αντιγραφή εξόδου εντολής"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:715
 #, kde-format
 msgid "Paste Selection"
 msgstr "Επικόλληση επιλογής"
 
-#: session/SessionController.cpp:719
+#: session/SessionController.cpp:722
 #, kde-format
 msgid "Web Search"
 msgstr "Αναζήτηση στον ιστό"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "&Select All"
 msgstr "&Επιλογή όλων"
 
-#: session/SessionController.cpp:729
+#: session/SessionController.cpp:732
 #, kde-format
 msgid "Select &Mode"
 msgstr "Επιλογή &λειτουργίας"
 
-#: session/SessionController.cpp:734
+#: session/SessionController.cpp:737
 #, kde-format
 msgid "Select &Line"
 msgstr "Επιλογή &γραμμής"
 
-#: session/SessionController.cpp:737
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Αποθήκευση εξόδου &ως..."
 
-#: session/SessionController.cpp:743
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "Αυτόματη αποθήκευση εξόδου ως..."
 
-#: session/SessionController.cpp:747
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "Διακοπή αυτόματης αποθήκευσης"
 
-#: session/SessionController.cpp:751
+#: session/SessionController.cpp:754
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Εκτύπωση οθόνης..."
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:758
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Προσαρμογή κύλισης..."
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:762
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Εκκαθάριση κύλισης"
 
-#: session/SessionController.cpp:763
+#: session/SessionController.cpp:766
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Εκκαθάριση κύλισης και επαναφορά"
 
-#: session/SessionController.cpp:774
+#: session/SessionController.cpp:777
 #, kde-format
 msgid "Next Profile"
 msgstr "Επόμενο προφίλ"
 
-#: session/SessionController.cpp:779
+#: session/SessionController.cpp:782
 #, kde-format
 msgid "Previous Profile"
 msgstr "Προηγούμενο προφίλ"
 
-#: session/SessionController.cpp:782
+#: session/SessionController.cpp:785
 #, kde-format
 msgid "Switch Profile"
 msgstr "Εναλλαγή προφίλ"
 
-#: session/SessionController.cpp:807
+#: session/SessionController.cpp:810
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Ορισμός &κωδικοποίησης"
 
-#: session/SessionController.cpp:829
+#: session/SessionController.cpp:832
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Να επιτρέπεται η ιχνηλάτηση του ποντικιού"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:841
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Ανάγνωση-μόνο"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:852
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "Διαμόρ&φωση ή μετονομασία καρτέλας..."
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Όλες τις καρτέλες στο τρέχον παράθυρο"
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:865
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Επιλογή καρτελών..."
 
-#: session/SessionController.cpp:868
+#: session/SessionController.cpp:871
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Καμία"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:879
 #, kde-format
 msgid "Copy Input To"
 msgstr "Αντιγραφή εισόδου σε..."
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:887
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Αποστολή &ΖModem..."
 
-#: session/SessionController.cpp:889
+#: session/SessionController.cpp:892
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Επόπτες μίας χρήσης"
 
-#: session/SessionController.cpp:894
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "Εποπτεία για &προτροπή"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:904
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Εποπτεία για &δραστηριότητα"
 
-#: session/SessionController.cpp:907
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Εποπτεία για σ&ιγή"
 
-#: session/SessionController.cpp:913
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Εποπτεία για τον τερματισμό διεργασίας"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:923
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Μεγέθυνση γραμματοσειράς"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "Shrink Font"
 msgstr "Σμίκρυνση γραμματοσειράς"
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Επαναφορά μεγέθους γραμματοσειράς"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "Send Signal"
 msgstr "Αποστολή σήματος"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Αναστολή διεργασίας"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Συνέχεια διεργασίας"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:956
 #, kde-format
 msgid "&Hangup"
 msgstr "&Αποσύνδεση"
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:961
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Διακοπή διεργασίας"
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:966
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Τερματισμός διεργασίας"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:971
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Βίαιος τερματισμός διεργασίας"
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:976
 #, kde-format
 msgid "User Signal &1"
 msgstr "Σήμα χρήστη &1"
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:981
 #, kde-format
 msgid "User Signal &2"
 msgstr "Σήμα χρήστη &2"
 
-#: session/SessionController.cpp:996
+#: session/SessionController.cpp:999
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Δημιουργία νέου προφίλ..."
 
-#: session/SessionController.cpp:998
+#: session/SessionController.cpp:1001
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Επεξεργασία τρέχοντος προφίλ..."
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1132
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2486,7 +2486,7 @@ msgstr ""
 "Ένα πρόγραμμα εκτελείται αυτήν τη στιγμή στη συνεδρία αυτή. Επιθυμείτε το "
 "κλείσιμό του;"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1136
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2495,18 +2495,18 @@ msgstr ""
 "Το πρόγραμμα '%1' εκτελείται αυτήν τη στιγμή στη συνεδρία αυτή. Επιθυμείτε "
 "το κλείσιμό του;"
 
-#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
+#: session/SessionController.cpp:1143 session/SessionController.cpp:1178
 #, kde-format
 msgid "Confirm Close"
 msgstr "Επιβεβαίωση κλεισίματος"
 
-#: session/SessionController.cpp:1141
+#: session/SessionController.cpp:1144
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Κλείσιμο προγράμματος"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1167
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2515,7 +2515,7 @@ msgstr ""
 "Ένα πρόγραμμα στη συνεδρία αυτή δεν κλείνει. Επιθυμείτε το βίαιο τερματισμό "
 "του;"
 
-#: session/SessionController.cpp:1168
+#: session/SessionController.cpp:1171
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is in this session would not die.  Are you sure you want "
@@ -2527,28 +2527,28 @@ msgstr ""
 "Το πρόγραμμα '%1' εκτελείται στη συνεδρία αυτή. Επιθυμείτε τον βίαιο "
 "τερματισμό του;"
 
-#: session/SessionController.cpp:1176
+#: session/SessionController.cpp:1179
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Διακοπή προγράμματος"
 
-#: session/SessionController.cpp:1885
+#: session/SessionController.cpp:1890
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Η προτροπή του κελύφους εμφανίζεται στη συνεδρία '%1'"
 
-#: session/SessionController.cpp:2078
+#: session/SessionController.cpp:2083
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Άνοιγμα τρέχοντος φακέλου με"
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2156
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Αποθήκευση της ZModem λήψης σε..."
 
-#: session/SessionController.cpp:2161
+#: session/SessionController.cpp:2166
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2559,14 +2559,14 @@ msgstr ""
 "υπάρχουν κατάλληλα λογισμικά ZModem σε αυτό το σύστημα.</p><p>Ίσως "
 "επιθυμείτε να εγκαταστήσετε το 'rzsz' ή το πακέτο 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2171
+#: session/SessionController.cpp:2176
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr ""
 "<p>Η τρέχουσα συνεδρία έχει ήδη μία μεταφορά αρχείου ZModem σε εξέλιξη.</p>"
 
-#: session/SessionController.cpp:2184
+#: session/SessionController.cpp:2189
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2575,7 +2575,7 @@ msgstr ""
 "<p>Κανένα κατάλληλο λογισμικό ZModem δεν βρέθηκε σε αυτό το σύστημα.</"
 "p><p>Ίσως επιθυμείτε να εγκαταστήσετε το 'rzsz' ή το πακέτο 'lrzsz'.</p>"
 
-#: session/SessionController.cpp:2189
+#: session/SessionController.cpp:2194
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Επιλογή αρχείων για αποστολή ZModem"
@@ -4370,54 +4370,54 @@ msgstr "Αγνόηση του wcwidth των προβληματικών χαρα
 msgid "Override wcwidth"
 msgstr "Παράκαμψη wcwidth"
 
-#: widgets/EditProfileDialog.cpp:66
+#: widgets/EditProfileDialog.cpp:69
 #, kde-format
 msgid "Edit Profile"
 msgstr "Επεξεργασία προφίλ"
 
-#: widgets/EditProfileDialog.cpp:93
+#: widgets/EditProfileDialog.cpp:96
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Γενικά"
 
-#: widgets/EditProfileDialog.cpp:104
+#: widgets/EditProfileDialog.cpp:107
 #, kde-format
 msgid "Tabs"
 msgstr "Καρτέλες"
 
-#: widgets/EditProfileDialog.cpp:121
+#: widgets/EditProfileDialog.cpp:124
 #, kde-format
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
-#: widgets/EditProfileDialog.cpp:137
+#: widgets/EditProfileDialog.cpp:140
 #, kde-format
 msgid "Scrolling"
 msgstr "Κύλιση"
 
-#: widgets/EditProfileDialog.cpp:151
+#: widgets/EditProfileDialog.cpp:154
 #, kde-format
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
 
-#: widgets/EditProfileDialog.cpp:152
+#: widgets/EditProfileDialog.cpp:155
 #, kde-format
 msgid "Key bindings"
 msgstr "Πλήκτρα συνδυασμών"
 
-#: widgets/EditProfileDialog.cpp:163
+#: widgets/EditProfileDialog.cpp:166
 #, kde-format
 msgid "Mouse"
 msgstr "Ποντίκι"
 
-#: widgets/EditProfileDialog.cpp:179
+#: widgets/EditProfileDialog.cpp:182
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
-#: widgets/EditProfileDialog.cpp:287
+#: widgets/EditProfileDialog.cpp:290
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4429,7 +4429,7 @@ msgstr ""
 "<nl/>Ή αλλάξτε τα δικαιώματα του αρχείου ή αποθηκεύσετε τις ρυθμίσεις σε νέο "
 "προφίλ με άλλο όνομα."
 
-#: widgets/EditProfileDialog.cpp:304
+#: widgets/EditProfileDialog.cpp:307
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
@@ -4437,42 +4437,42 @@ msgstr ""
 "Το όνομα του προφίλ ήταν κενό: δώστε ένα όνομα για να μπορείτε να "
 "αποθηκεύσετε τις ρυθμίσεις."
 
-#: widgets/EditProfileDialog.cpp:312
+#: widgets/EditProfileDialog.cpp:315
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Υπάρχει ήδη ένα προφίλ με το όνομα «%1»."
 
-#: widgets/EditProfileDialog.cpp:342
+#: widgets/EditProfileDialog.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "Το όνομα προφίλ υπερέβη το μέγιστο επιτρεπόμενο μήκος (%1)."
 
-#: widgets/EditProfileDialog.cpp:380
+#: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "Οι επισημασμένοι χαρακτήρες είναι άκυροι σε ονόματα προφίλ: %1."
 
-#: widgets/EditProfileDialog.cpp:416
+#: widgets/EditProfileDialog.cpp:419
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "Επεξεργασία του προφίλ: %2"
 msgstr[1] "Επεξεργασία %1 προφίλ: %2"
 
-#: widgets/EditProfileDialog.cpp:420
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Create New Profile"
 msgstr "Δημιουργία νέου προφίλ"
 
-#: widgets/EditProfileDialog.cpp:423
+#: widgets/EditProfileDialog.cpp:426
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Επεξεργασία προφίλ «%1»"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4482,7 +4482,7 @@ msgid_plural " columns"
 msgstr[0] " στήλη"
 msgstr[1] " στήλες"
 
-#: widgets/EditProfileDialog.cpp:516
+#: widgets/EditProfileDialog.cpp:519
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4492,42 +4492,42 @@ msgid_plural " rows"
 msgstr[0] " γραμμή"
 msgstr[1] " γραμμές"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Bell"
 msgstr "Κουδούνι συστήματος"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Notifications"
 msgstr "Ειδοποιήσεις συστήματος"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Visual Bell"
 msgstr "Οπτικό κουδούνι"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Αγνόηση των γεγονότων από το κουδούνι"
 
-#: widgets/EditProfileDialog.cpp:535
+#: widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Προκαθορισμένο προφίλ για τις νέες συνεδρίες τερματικού στο %1"
 
-#: widgets/EditProfileDialog.cpp:640
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "Edit Environment"
 msgstr "Επεξεργασία περιβάλλοντος"
 
-#: widgets/EditProfileDialog.cpp:641
+#: widgets/EditProfileDialog.cpp:644
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Μια μεταβλητή περιβάλλοντος ανά γραμμή"
 
-#: widgets/EditProfileDialog.cpp:672
+#: widgets/EditProfileDialog.cpp:675
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4535,23 +4535,23 @@ msgid_plural " seconds"
 msgstr[0] " δευτερόλεπτο"
 msgstr[1] " δευτερόλεπτα"
 
-#: widgets/EditProfileDialog.cpp:786
+#: widgets/EditProfileDialog.cpp:789
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Επιλέξτε αρχικό κατάλογο"
 
-#: widgets/EditProfileDialog.cpp:946
+#: widgets/EditProfileDialog.cpp:949
 #, kde-format
 msgid "Get New..."
 msgstr "Λήψη νέου..."
 
-#: widgets/EditProfileDialog.cpp:1342
+#: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Αποτυχία φόρτωσης του θέματος <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1521
+#: widgets/EditProfileDialog.cpp:1524
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4560,7 +4560,7 @@ msgstr ""
 "Αυτό το θέμα χρωμάτων έχει ένα διαφανές φόντο, το οποίο δε φαίνεται να "
 "υποστηρίζεται από το σύστημά σας."
 
-#: widgets/EditProfileDialog.cpp:1527
+#: widgets/EditProfileDialog.cpp:1530
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4569,12 +4569,12 @@ msgstr ""
 "Το Konsole ξεκίνησε πριν την ενεργοποίηση των εφέ επιφάνειας εργασίας. "
 "Πρέπει να επανεκκινήσετε το Konsole για να δείτε διαφανές φόντο."
 
-#: widgets/EditProfileDialog.cpp:1913
+#: widgets/EditProfileDialog.cpp:1931
 #, kde-format
 msgid "Default for file type"
 msgstr "Προεπιλογή για τον τύπο αρχείου"
 
-#: widgets/EditProfileDialog.cpp:1939
+#: widgets/EditProfileDialog.cpp:1957
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4603,7 +4603,7 @@ msgstr ""
 "θα αγνοηθεί και το αρχείο θα ανοίξει με τον προκαθορισμένο\n"
 "κειμενογράφο."
 
-#: widgets/EditProfileDialog.cpp:1952
+#: widgets/EditProfileDialog.cpp:1970
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Προσαρμοσμένη εντολή κειμενογράφου"
@@ -5181,57 +5181,101 @@ msgid "Scrollback:"
 msgstr "Κύλιση:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileScrollingPage.ui:67
+#: widgets/EditProfileScrollingPage.ui:41
 #, kde-format
 msgid "Scroll Page Up/Down:"
 msgstr "Κύλιση σελίδας πάνω/κάτω:"
 
+#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
+#: widgets/EditProfileScrollingPage.ui:51
+#, kde-format
+msgid "Highlight the lines coming into view"
+msgstr "Να τονίζονται οι γραμμές καθώς προβάλλονται"
+
+#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
+#: widgets/EditProfileScrollingPage.ui:58
+#, no-c-format, kde-format
+msgid " %"
+msgstr " %"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
+#: widgets/EditProfileScrollingPage.ui:74
+#, kde-format
+msgctxt "@option:radio Hide the scroll bar"
+msgid "Hidden"
+msgstr "Κρυφό"
+
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
+#: widgets/EditProfileScrollingPage.ui:84
+#, kde-format
+msgid "Size of each marker (as a percentage of scrollbar length):"
+msgstr "Μέγεθος κάθε δείκτη (ως ποσοστό του μήκους της γραμμής κύλισης):"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileScrollingPage.ui:97
+#, kde-format
+msgid "Highlighting:"
+msgstr "Τονισμός:"
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:83
+#: widgets/EditProfileScrollingPage.ui:129
 #, kde-format
 msgid "Scroll the page the half height of window"
 msgstr "Κύλιση σελίδας στο μισό ύψος του παραθύρου"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:86
+#: widgets/EditProfileScrollingPage.ui:132
 #, kde-format
 msgid "Half screen heigh&t"
 msgstr "Ύψ&ος μισής οθόνης"
 
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
+#: widgets/EditProfileScrollingPage.ui:142
+#, kde-format
+msgid "Color of scrollbar markers:"
+msgstr "Χρώμα των δεικτών γραμμής κύλισης:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
+#: widgets/EditProfileScrollingPage.ui:168
+#, fuzzy, kde-format
+#| msgid "Color of scrollbar markers:"
+msgid "Color of scrollbar search highlighting lines:"
+msgstr "Χρώμα των δεικτών γραμμής κύλισης:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
+#: widgets/EditProfileScrollingPage.ui:181
+#, kde-format
+msgid "Reflow Lines:"
+msgstr "Επαναρροή γραμμών:"
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:96
+#: widgets/EditProfileScrollingPage.ui:191
 #, kde-format
 msgid "Scroll the page the full height of window"
 msgstr "Κύλιση σελίδας στο πλήρες ύψος του παραθύρου"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:99
+#: widgets/EditProfileScrollingPage.ui:194
 #, kde-format
 msgid "F&ull screen height"
 msgstr "Ύψος πλή&ρους οθόνης"
 
-#. i18n: ectx: property (text), widget (QLabel, labelSize)
-#: widgets/EditProfileScrollingPage.ui:131
-#, kde-format
-msgid "Scrollbar position:"
-msgstr "Θέση γραμμής κύλισης:"
-
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:141
+#: widgets/EditProfileScrollingPage.ui:215
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
 msgstr ""
 "Εμφάνιση της γραμμής κύλισης στη δεξιά πλευρά του παραθύρου του τερματικού"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:144
+#: widgets/EditProfileScrollingPage.ui:218
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
 msgstr "Δεξιά πλευ&ρά"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:154
+#: widgets/EditProfileScrollingPage.ui:238
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
 msgstr ""
@@ -5239,60 +5283,29 @@ msgstr ""
 "τερματικού"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:157
+#: widgets/EditProfileScrollingPage.ui:241
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
 msgstr "&Αριστερή πλευρά"
 
-#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
-#: widgets/EditProfileScrollingPage.ui:167
-#, kde-format
-msgctxt "@option:radio Hide the scroll bar"
-msgid "Hidden"
-msgstr "Κρυφό"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileScrollingPage.ui:199
-#, kde-format
-msgid "Highlighting:"
-msgstr "Τονισμός:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
-#: widgets/EditProfileScrollingPage.ui:209
-#, kde-format
-msgid "Highlight the lines coming into view"
-msgstr "Να τονίζονται οι γραμμές καθώς προβάλλονται"
-
-#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
-#: widgets/EditProfileScrollingPage.ui:222
-#, kde-format
-msgid "Reflow Lines:"
-msgstr "Επαναρροή γραμμών:"
-
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
-#: widgets/EditProfileScrollingPage.ui:232
+#: widgets/EditProfileScrollingPage.ui:251
 #, kde-format
 msgid "Reflow lines when terminal resizes"
 msgstr "Να γίνεται επαναρροή γραμμών όταν το τερματικό αλλάζει μέγεθος"
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
-#: widgets/EditProfileScrollingPage.ui:239
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: widgets/EditProfileScrollingPage.ui:280
 #, kde-format
-msgid "Color of scrollbar markers:"
-msgstr "Χρώμα των δεικτών γραμμής κύλισης:"
+msgid "Scrollbar position:"
+msgstr "Θέση γραμμής κύλισης:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
-#: widgets/EditProfileScrollingPage.ui:250
+#. i18n: ectx: property (text), widget (QLabel, lableSearchHighlighterOpacity)
+#: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
-msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr "Μέγεθος κάθε δείκτη (ως ποσοστό του μήκους της γραμμής κύλισης):"
-
-#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
-#: widgets/EditProfileScrollingPage.ui:266
-#, no-c-format, kde-format
-msgid " %"
-msgstr " %"
+msgid "Search highlighting line opacity:"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:43+0000\n"
+"POT-Creation-Date: 2025-02-21 00:44+0000\n"
 "PO-Revision-Date: 2024-08-04 17:18+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: Interlingue <>\n"
@@ -1836,13 +1836,13 @@ msgstr "Por &printation (nigri textu sin funde)"
 msgid "&Scale output"
 msgstr "Production"
 
-#: profile/Profile.cpp:267
+#: profile/Profile.cpp:269
 #, fuzzy, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Activitá in «%1» (Session «%2»)"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:537
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Default profile"
 msgstr "Profil predefinit"
@@ -2077,7 +2077,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Ínactivitá in «%1» (Session «%2»)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:360 session/SessionController.cpp:1886
+#: session/SessionController.cpp:362 session/SessionController.cpp:1891
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, kde-format
@@ -2119,359 +2119,359 @@ msgstr "Progresse de ZModem"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activitá in «%1» (Session «%2»)"
 
-#: session/SessionController.cpp:141
+#: session/SessionController.cpp:143
 #, kde-format
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:359
+#: session/SessionController.cpp:361
 #, fuzzy, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Panel de session"
 
-#: session/SessionController.cpp:442
+#: session/SessionController.cpp:444
 #, fuzzy, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole"
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:523
 #, fuzzy, kde-format
 msgid "Search for '%1' with"
 msgstr "Serchar retro"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:539
 #, fuzzy, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Configurar"
 
-#: session/SessionController.cpp:647
+#: session/SessionController.cpp:650
 #, kde-format
 msgid "&Close Session"
 msgstr "&Cluder li session"
 
-#: session/SessionController.cpp:654
+#: session/SessionController.cpp:657
 #, kde-format
 msgid "Open File Manager"
 msgstr "Aperter li gerente de files"
 
-#: session/SessionController.cpp:669
+#: session/SessionController.cpp:672
 #, kde-format
 msgid "Copy"
 msgstr "Copiar"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:679
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Left/Right"
 msgid "Split View Left-Right"
 msgstr "Fender li vise"
 
-#: session/SessionController.cpp:681
+#: session/SessionController.cpp:684
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Split View Top/Bottom"
 msgid "Split View Top-Bottom"
 msgstr "Fender li vise"
 
-#: session/SessionController.cpp:685
+#: session/SessionController.cpp:688
 #, fuzzy, kde-format
 msgid "Copy except prompts"
 msgstr "Copiar"
 
-#: session/SessionController.cpp:691
+#: session/SessionController.cpp:694
 #, fuzzy, kde-format
 msgid "Copy user input"
 msgstr "Copiar"
 
-#: session/SessionController.cpp:697
+#: session/SessionController.cpp:700
 #, fuzzy, kde-format
 msgid "Copy command output"
 msgstr "Copiar"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:715
 #, kde-format
 msgid "Paste Selection"
 msgstr "Collar li selection"
 
-#: session/SessionController.cpp:719
+#: session/SessionController.cpp:722
 #, kde-format
 msgid "Web Search"
 msgstr "Sercha web"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "&Select All"
 msgstr "&Selecter omnicos"
 
-#: session/SessionController.cpp:729
+#: session/SessionController.cpp:732
 #, kde-format
 msgid "Select &Mode"
 msgstr "&Mode de section"
 
-#: session/SessionController.cpp:734
+#: session/SessionController.cpp:737
 #, kde-format
 msgid "Select &Line"
 msgstr "Selecter li &linea"
 
-#: session/SessionController.cpp:737
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Save Output &As..."
 msgstr "Gardar li production &quam..."
 
-#: session/SessionController.cpp:743
+#: session/SessionController.cpp:746
 #, fuzzy, kde-format
 #| msgid "Save Output &As..."
 msgid "Auto Save Output As..."
 msgstr "Gardar"
 
-#: session/SessionController.cpp:747
+#: session/SessionController.cpp:750
 #, fuzzy, kde-format
 msgid "Stop Auto Save"
 msgstr "Gardar"
 
-#: session/SessionController.cpp:751
+#: session/SessionController.cpp:754
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Printar li ecran..."
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:758
 #, fuzzy, kde-format
 msgid "Adjust Scrollback..."
 msgstr "B&uffre"
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:762
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Vacuar li buffre"
 
-#: session/SessionController.cpp:763
+#: session/SessionController.cpp:766
 #, fuzzy, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Comande e li argumentes: %c"
 
-#: session/SessionController.cpp:774
+#: session/SessionController.cpp:777
 #, fuzzy, kde-format
 #| msgid "Edit Profile"
 msgid "Next Profile"
 msgstr "Profil predefinit"
 
-#: session/SessionController.cpp:779
+#: session/SessionController.cpp:782
 #, fuzzy, kde-format
 #| msgctxt "@action:button Go to the previous phrase"
 #| msgid "Previous"
 msgid "Previous Profile"
 msgstr "Profil predefinit"
 
-#: session/SessionController.cpp:782
+#: session/SessionController.cpp:785
 #, kde-format
 msgid "Switch Profile"
 msgstr "Cambiar li profil"
 
-#: session/SessionController.cpp:807
+#: session/SessionController.cpp:810
 #, kde-format
 msgid "Set &Encoding"
 msgstr "Assignar co&dification"
 
-#: session/SessionController.cpp:829
+#: session/SessionController.cpp:832
 #, fuzzy, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Mus"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:841
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Solmen letion"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:852
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Configurar o renominar li carte..."
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:858
 #, fuzzy, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Cartes"
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:865
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Selecter cartes..."
 
-#: session/SessionController.cpp:868
+#: session/SessionController.cpp:871
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Null"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:879
 #, fuzzy, kde-format
 msgid "Copy Input To"
 msgstr "Copiar"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:887
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "Carga med &ZModem..."
 
-#: session/SessionController.cpp:889
+#: session/SessionController.cpp:892
 #, fuzzy, kde-format
 msgid "One-Shot Monitors"
 msgstr "Extraente ún file"
 
-#: session/SessionController.cpp:894
+#: session/SessionController.cpp:897
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "Controlar &activitá"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:904
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Controlar &activitá"
 
-#: session/SessionController.cpp:907
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Co&ntrolar li ínactivitá"
 
-#: session/SessionController.cpp:913
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Controlar li fin de processus"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:923
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Agrandar li fonde"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "Shrink Font"
 msgstr "Diminuer li fonde"
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:936
 #, fuzzy, kde-format
 msgid "Reset Font Size"
 msgstr "Fonde de emoji:"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "Send Signal"
 msgstr "Inviar un signale"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:946
 #, fuzzy, kde-format
 msgid "&Suspend Task"
 msgstr "&Interrupter li tache"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:951
 #, fuzzy, kde-format
 msgid "&Continue Task"
 msgstr "&Interrupter li tache"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:956
 #, kde-format
 msgid "&Hangup"
 msgstr ""
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:961
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Interrupter li tache"
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:966
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Finir li tache"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:971
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Terminar li tache"
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:976
 #, kde-format
 msgid "User Signal &1"
 msgstr "Signale de usator &1"
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:981
 #, kde-format
 msgid "User Signal &2"
 msgstr "Signale de usator &2"
 
-#: session/SessionController.cpp:996
+#: session/SessionController.cpp:999
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Crear un nov profil..."
 
-#: session/SessionController.cpp:998
+#: session/SessionController.cpp:1001
 #, fuzzy, kde-format
 msgid "Edit Current Profile..."
 msgstr "Redacter"
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1132
 #, fuzzy, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "Confirmar clusion"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1136
 #, fuzzy, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "Confirmar clusion"
 
-#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
+#: session/SessionController.cpp:1143 session/SessionController.cpp:1178
 #, kde-format
 msgid "Confirm Close"
 msgstr "Confirmar clusion"
 
-#: session/SessionController.cpp:1141
+#: session/SessionController.cpp:1144
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Cluder li programma"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1167
 #, fuzzy, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "Numeró de session: %#"
 
-#: session/SessionController.cpp:1168
+#: session/SessionController.cpp:1171
 #, fuzzy, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "Numeró de session: %#"
 
-#: session/SessionController.cpp:1176
+#: session/SessionController.cpp:1179
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Terminar li programma"
 
-#: session/SessionController.cpp:1885
+#: session/SessionController.cpp:1890
 #, fuzzy, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Panel de session"
 
-#: session/SessionController.cpp:2078
+#: session/SessionController.cpp:2083
 #, fuzzy, kde-format
 msgid "Open Current Folder With"
 msgstr "Aperter li ligament"
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2156
 #, fuzzy, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Gardar"
 
-#: session/SessionController.cpp:2161
+#: session/SessionController.cpp:2166
 #, fuzzy, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2479,20 +2479,20 @@ msgid ""
 "or 'lrzsz' package.</p>"
 msgstr "File"
 
-#: session/SessionController.cpp:2171
+#: session/SessionController.cpp:2176
 #, fuzzy, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "File"
 
-#: session/SessionController.cpp:2184
+#: session/SessionController.cpp:2189
 #, fuzzy, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
 "to install the 'rzsz' or 'lrzsz' package.</p>"
 msgstr "Notificationes del sistema"
 
-#: session/SessionController.cpp:2189
+#: session/SessionController.cpp:2194
 #, fuzzy, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Carga med &ZModem..."
@@ -4244,54 +4244,54 @@ msgstr "Collar &sin caracteres de control"
 msgid "Override wcwidth"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:66
+#: widgets/EditProfileDialog.cpp:69
 #, kde-format
 msgid "Edit Profile"
 msgstr "Modificar li profil"
 
-#: widgets/EditProfileDialog.cpp:93
+#: widgets/EditProfileDialog.cpp:96
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "General"
 
-#: widgets/EditProfileDialog.cpp:104
+#: widgets/EditProfileDialog.cpp:107
 #, kde-format
 msgid "Tabs"
 msgstr "Cartes"
 
-#: widgets/EditProfileDialog.cpp:121
+#: widgets/EditProfileDialog.cpp:124
 #, kde-format
 msgid "Appearance"
 msgstr "Aspecte"
 
-#: widgets/EditProfileDialog.cpp:137
+#: widgets/EditProfileDialog.cpp:140
 #, kde-format
 msgid "Scrolling"
 msgstr "Rulament"
 
-#: widgets/EditProfileDialog.cpp:151
+#: widgets/EditProfileDialog.cpp:154
 #, kde-format
 msgid "Keyboard"
 msgstr "Tastatura"
 
-#: widgets/EditProfileDialog.cpp:152
+#: widgets/EditProfileDialog.cpp:155
 #, kde-format
 msgid "Key bindings"
 msgstr "Rapid-tastes"
 
-#: widgets/EditProfileDialog.cpp:163
+#: widgets/EditProfileDialog.cpp:166
 #, kde-format
 msgid "Mouse"
 msgstr "Mus"
 
-#: widgets/EditProfileDialog.cpp:179
+#: widgets/EditProfileDialog.cpp:182
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Avansat"
 
-#: widgets/EditProfileDialog.cpp:287
+#: widgets/EditProfileDialog.cpp:290
 #, fuzzy, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4300,48 +4300,48 @@ msgid ""
 "the settings to a new profile."
 msgstr "Un profil con li nómine «%1» ja existe."
 
-#: widgets/EditProfileDialog.cpp:304
+#: widgets/EditProfileDialog.cpp:307
 #, fuzzy, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "Un profil con li nómine «%1» ja existe."
 
-#: widgets/EditProfileDialog.cpp:312
+#: widgets/EditProfileDialog.cpp:315
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Un profil con li nómine «%1» ja existe."
 
-#: widgets/EditProfileDialog.cpp:342
+#: widgets/EditProfileDialog.cpp:345
 #, fuzzy, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "Un profil con li nómine «%1» ja existe."
 
-#: widgets/EditProfileDialog.cpp:380
+#: widgets/EditProfileDialog.cpp:383
 #, fuzzy, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "Un profil con li nómine «%1» ja existe."
 
-#: widgets/EditProfileDialog.cpp:416
+#: widgets/EditProfileDialog.cpp:419
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] ""
 msgstr[1] "Gerentie de profiles..."
 
-#: widgets/EditProfileDialog.cpp:420
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Create New Profile"
 msgstr "Crear un nov profil"
 
-#: widgets/EditProfileDialog.cpp:423
+#: widgets/EditProfileDialog.cpp:426
 #, fuzzy, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Redacter"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4351,7 +4351,7 @@ msgid_plural " columns"
 msgstr[0] " columne"
 msgstr[1] " columnes"
 
-#: widgets/EditProfileDialog.cpp:516
+#: widgets/EditProfileDialog.cpp:519
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4361,42 +4361,42 @@ msgid_plural " rows"
 msgstr[0] " range"
 msgstr[1] " ranges"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Bell"
 msgstr "Sonette del sistema"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Notifications"
 msgstr "Notificationes del sistema"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Visual Bell"
 msgstr "Visualisar sonette"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, fuzzy, kde-format
 msgid "Ignore Bell Events"
 msgstr "Sonette del sistema"
 
-#: widgets/EditProfileDialog.cpp:535
+#: widgets/EditProfileDialog.cpp:538
 #, fuzzy, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Predefinit"
 
-#: widgets/EditProfileDialog.cpp:640
+#: widgets/EditProfileDialog.cpp:643
 #, fuzzy, kde-format
 msgid "Edit Environment"
 msgstr "Redacter"
 
-#: widgets/EditProfileDialog.cpp:641
+#: widgets/EditProfileDialog.cpp:644
 #, fuzzy, kde-format
 msgid "One environment variable per line"
 msgstr "Selecter li &linea"
 
-#: widgets/EditProfileDialog.cpp:672
+#: widgets/EditProfileDialog.cpp:675
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4404,43 +4404,43 @@ msgid_plural " seconds"
 msgstr[0] " seconde"
 msgstr[1] " secondes"
 
-#: widgets/EditProfileDialog.cpp:786
+#: widgets/EditProfileDialog.cpp:789
 #, fuzzy, kde-format
 msgid "Select Initial Directory"
 msgstr "&Selecter omnicos"
 
-#: widgets/EditProfileDialog.cpp:946
+#: widgets/EditProfileDialog.cpp:949
 #, fuzzy, kde-format
 msgid "Get New..."
 msgstr "Aperter un nov carte"
 
-#: widgets/EditProfileDialog.cpp:1342
+#: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Ne successat cargar li schema <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1521
+#: widgets/EditProfileDialog.cpp:1524
 #, fuzzy, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "OIS"
 
-#: widgets/EditProfileDialog.cpp:1527
+#: widgets/EditProfileDialog.cpp:1530
 #, fuzzy, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr "Konsole"
 
-#: widgets/EditProfileDialog.cpp:1913
+#: widgets/EditProfileDialog.cpp:1931
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "File"
 
-#: widgets/EditProfileDialog.cpp:1939
+#: widgets/EditProfileDialog.cpp:1957
 #, fuzzy, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4457,7 +4457,7 @@ msgid ""
 "editor."
 msgstr "File"
 
-#: widgets/EditProfileDialog.cpp:1952
+#: widgets/EditProfileDialog.cpp:1970
 #, fuzzy, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Comande:"
@@ -4994,51 +4994,94 @@ msgid "Scrollback:"
 msgstr "Buffre:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileScrollingPage.ui:67
+#: widgets/EditProfileScrollingPage.ui:41
 #, fuzzy, kde-format
 msgid "Scroll Page Up/Down:"
 msgstr "Extinter"
 
+#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
+#: widgets/EditProfileScrollingPage.ui:51
+#, fuzzy, kde-format
+msgid "Highlight the lines coming into view"
+msgstr "Fender li vise"
+
+#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
+#: widgets/EditProfileScrollingPage.ui:58
+#, no-c-format, kde-format
+msgid " %"
+msgstr " %"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
+#: widgets/EditProfileScrollingPage.ui:74
+#, kde-format
+msgctxt "@option:radio Hide the scroll bar"
+msgid "Hidden"
+msgstr "Celat"
+
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
+#: widgets/EditProfileScrollingPage.ui:84
+#, fuzzy, kde-format
+msgid "Size of each marker (as a percentage of scrollbar length):"
+msgstr "Dimension: %1 x %2"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileScrollingPage.ui:97
+#, kde-format
+msgid "Highlighting:"
+msgstr "Coloration:"
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:83
+#: widgets/EditProfileScrollingPage.ui:129
 #, fuzzy, kde-format
 msgid "Scroll the page the half height of window"
 msgstr "Nov &fenestre"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:86
+#: widgets/EditProfileScrollingPage.ui:132
 #, fuzzy, kde-format
 #| msgid "Half screen height"
 msgid "Half screen heigh&t"
 msgstr "&Printar li ecran..."
 
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
+#: widgets/EditProfileScrollingPage.ui:142
+#, fuzzy, kde-format
+msgid "Color of scrollbar markers:"
+msgstr "Color:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
+#: widgets/EditProfileScrollingPage.ui:168
+#, fuzzy, kde-format
+msgid "Color of scrollbar search highlighting lines:"
+msgstr "Color:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
+#: widgets/EditProfileScrollingPage.ui:181
+#, fuzzy, kde-format
+msgid "Reflow Lines:"
+msgstr "Li númere de pixeles inter du lineas"
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:96
+#: widgets/EditProfileScrollingPage.ui:191
 #, fuzzy, kde-format
 msgid "Scroll the page the full height of window"
 msgstr "Li titul assignat de shell: %w"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:99
+#: widgets/EditProfileScrollingPage.ui:194
 #, fuzzy, kde-format
 #| msgid "Full screen height"
 msgid "F&ull screen height"
 msgstr "&Printar li ecran..."
 
-#. i18n: ectx: property (text), widget (QLabel, labelSize)
-#: widgets/EditProfileScrollingPage.ui:131
-#, fuzzy, kde-format
-msgid "Scrollbar position:"
-msgstr "Position:"
-
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:141
+#: widgets/EditProfileScrollingPage.ui:215
 #, fuzzy, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
 msgstr "Processu e fenestre:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:144
+#: widgets/EditProfileScrollingPage.ui:218
 #, fuzzy, kde-format
 #| msgctxt "@option:radio Show scrollbar on the right side"
 #| msgid "Right side"
@@ -5047,13 +5090,13 @@ msgid "Ri&ght side"
 msgstr "Fender li vise verticalmen"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:154
+#: widgets/EditProfileScrollingPage.ui:238
 #, fuzzy, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
 msgstr "Processu e fenestre:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:157
+#: widgets/EditProfileScrollingPage.ui:241
 #, fuzzy, kde-format
 #| msgctxt "@option:radio Show scrollbar on the left side"
 #| msgid "Left side"
@@ -5061,54 +5104,23 @@ msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
 msgstr "Levul"
 
-#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
-#: widgets/EditProfileScrollingPage.ui:167
-#, kde-format
-msgctxt "@option:radio Hide the scroll bar"
-msgid "Hidden"
-msgstr "Celat"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileScrollingPage.ui:199
-#, kde-format
-msgid "Highlighting:"
-msgstr "Coloration:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
-#: widgets/EditProfileScrollingPage.ui:209
-#, fuzzy, kde-format
-msgid "Highlight the lines coming into view"
-msgstr "Fender li vise"
-
-#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
-#: widgets/EditProfileScrollingPage.ui:222
-#, fuzzy, kde-format
-msgid "Reflow Lines:"
-msgstr "Li númere de pixeles inter du lineas"
-
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
-#: widgets/EditProfileScrollingPage.ui:232
+#: widgets/EditProfileScrollingPage.ui:251
 #, fuzzy, kde-format
 msgid "Reflow lines when terminal resizes"
 msgstr "Restituer li terminal"
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
-#: widgets/EditProfileScrollingPage.ui:239
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: widgets/EditProfileScrollingPage.ui:280
 #, fuzzy, kde-format
-msgid "Color of scrollbar markers:"
-msgstr "Color:"
+msgid "Scrollbar position:"
+msgstr "Position:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
-#: widgets/EditProfileScrollingPage.ui:250
-#, fuzzy, kde-format
-msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr "Dimension: %1 x %2"
-
-#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
-#: widgets/EditProfileScrollingPage.ui:266
-#, no-c-format, kde-format
-msgid " %"
-msgstr " %"
+#. i18n: ectx: property (text), widget (QLabel, lableSearchHighlighterOpacity)
+#: widgets/EditProfileScrollingPage.ui:290
+#, kde-format
+msgid "Search highlighting line opacity:"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

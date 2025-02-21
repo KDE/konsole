@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:43+0000\n"
+"POT-Creation-Date: 2025-02-21 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1857,13 +1857,13 @@ msgstr "打印友好模式，黑文本、无背景(&F)"
 msgid "&Scale output"
 msgstr "缩放输出(&S)"
 
-#: profile/Profile.cpp:267
+#: profile/Profile.cpp:269
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "内建"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:537
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Default profile"
 msgstr "默认配置方案"
@@ -2098,7 +2098,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "“%1“中的静止 (会话”%2“)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:360 session/SessionController.cpp:1886
+#: session/SessionController.cpp:362 session/SessionController.cpp:1891
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, kde-format
@@ -2143,350 +2143,350 @@ msgstr "ZModem 进度"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "“%1“中的活动 (会话”%2“)"
 
-#: session/SessionController.cpp:141
+#: session/SessionController.cpp:143
 #, kde-format
 msgid "Konsole"
 msgstr "Konsole"
 
-#: session/SessionController.cpp:359
+#: session/SessionController.cpp:361
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "运行于会话“%2”中的进程“%1”已经运行完成"
 
-#: session/SessionController.cpp:442
+#: session/SessionController.cpp:444
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "Konsole 不知道如何打开该书签："
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:523
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "搜索“%1”于"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:539
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "配置网页快捷方式..."
 
-#: session/SessionController.cpp:647
+#: session/SessionController.cpp:650
 #, kde-format
 msgid "&Close Session"
 msgstr "关闭会话(&C)"
 
-#: session/SessionController.cpp:654
+#: session/SessionController.cpp:657
 #, kde-format
 msgid "Open File Manager"
 msgstr "打开文件管理器"
 
-#: session/SessionController.cpp:669
+#: session/SessionController.cpp:672
 #, kde-format
 msgid "Copy"
 msgstr "复制"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:679
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "拆分视图 (左右)"
 
-#: session/SessionController.cpp:681
+#: session/SessionController.cpp:684
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "拆分视图 (上下)"
 
-#: session/SessionController.cpp:685
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy except prompts"
 msgstr "复制 - 不包含提示"
 
-#: session/SessionController.cpp:691
+#: session/SessionController.cpp:694
 #, kde-format
 msgid "Copy user input"
 msgstr "复制用户输入"
 
-#: session/SessionController.cpp:697
+#: session/SessionController.cpp:700
 #, kde-format
 msgid "Copy command output"
 msgstr "复制命令输出"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:715
 #, kde-format
 msgid "Paste Selection"
 msgstr "粘贴选中范围"
 
-#: session/SessionController.cpp:719
+#: session/SessionController.cpp:722
 #, kde-format
 msgid "Web Search"
 msgstr "网页搜索"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "&Select All"
 msgstr "全部选择(&S)"
 
-#: session/SessionController.cpp:729
+#: session/SessionController.cpp:732
 #, kde-format
 msgid "Select &Mode"
 msgstr "选择模式 (&M)"
 
-#: session/SessionController.cpp:734
+#: session/SessionController.cpp:737
 #, kde-format
 msgid "Select &Line"
 msgstr "选择行(&L)"
 
-#: session/SessionController.cpp:737
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Save Output &As..."
 msgstr "输出保存为(&A)..."
 
-#: session/SessionController.cpp:743
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "自动保存输出为..."
 
-#: session/SessionController.cpp:747
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "停止自动保存"
 
-#: session/SessionController.cpp:751
+#: session/SessionController.cpp:754
 #, kde-format
 msgid "&Print Screen..."
 msgstr "打印屏幕(&P)..."
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:758
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "调整回滚历史..."
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:762
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "清除回滚历史"
 
-#: session/SessionController.cpp:763
+#: session/SessionController.cpp:766
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "清除回滚历史并重置"
 
-#: session/SessionController.cpp:774
+#: session/SessionController.cpp:777
 #, kde-format
 msgid "Next Profile"
 msgstr "下一个配置方案"
 
-#: session/SessionController.cpp:779
+#: session/SessionController.cpp:782
 #, kde-format
 msgid "Previous Profile"
 msgstr "上一个配置方案"
 
-#: session/SessionController.cpp:782
+#: session/SessionController.cpp:785
 #, kde-format
 msgid "Switch Profile"
 msgstr "切换配置方案"
 
-#: session/SessionController.cpp:807
+#: session/SessionController.cpp:810
 #, kde-format
 msgid "Set &Encoding"
 msgstr "设定编码(&E)"
 
-#: session/SessionController.cpp:829
+#: session/SessionController.cpp:832
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "允许鼠标跟踪"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:841
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "只读"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:852
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "配置或者重命名标签页(&C)..."
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "当前窗口中的全部标签页(&A)"
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:865
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "选择标签页(&S)..."
 
-#: session/SessionController.cpp:868
+#: session/SessionController.cpp:871
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "无(&N)"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:879
 #, kde-format
 msgid "Copy Input To"
 msgstr "输入复制到"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:887
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem 上传..."
 
-#: session/SessionController.cpp:889
+#: session/SessionController.cpp:892
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "单次监视器"
 
-#: session/SessionController.cpp:894
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "提示监视器(&P)"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:904
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "活动监视器(&A)"
 
-#: session/SessionController.cpp:907
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "静止监视器(&S)"
 
-#: session/SessionController.cpp:913
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "进程结束监视器"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:923
 #, kde-format
 msgid "Enlarge Font"
 msgstr "放大字体"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "Shrink Font"
 msgstr "缩小字体"
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "Reset Font Size"
 msgstr "重置字体大小"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "Send Signal"
 msgstr "发送信号"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "&Suspend Task"
 msgstr "暂停任务(&S)"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "&Continue Task"
 msgstr "继续任务(&C)"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:956
 #, kde-format
 msgid "&Hangup"
 msgstr "挂起(&H)"
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:961
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "中断任务(&I)"
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:966
 #, kde-format
 msgid "&Terminate Task"
 msgstr "终止任务(&T)"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:971
 #, kde-format
 msgid "&Kill Task"
 msgstr "杀死任务(&K)"
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:976
 #, kde-format
 msgid "User Signal &1"
 msgstr "用户信号 &1"
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:981
 #, kde-format
 msgid "User Signal &2"
 msgstr "用户信号 &2"
 
-#: session/SessionController.cpp:996
+#: session/SessionController.cpp:999
 #, kde-format
 msgid "Create New Profile..."
 msgstr "新建配置方案..."
 
-#: session/SessionController.cpp:998
+#: session/SessionController.cpp:1001
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "编辑当前配置方案..."
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1132
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "当前会话内已有一个程序在运行，您确定要关闭它吗？"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1136
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "当前会话内已有程序“%1”在运行，您确定要关闭它吗？"
 
-#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
+#: session/SessionController.cpp:1143 session/SessionController.cpp:1178
 #, kde-format
 msgid "Confirm Close"
 msgstr "确认关闭"
 
-#: session/SessionController.cpp:1141
+#: session/SessionController.cpp:1144
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "关闭程序"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1167
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
 "by force?"
 msgstr "当前会话内有一个程序在不会退出，您确定要强制杀死它吗？"
 
-#: session/SessionController.cpp:1168
+#: session/SessionController.cpp:1171
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr "当前会话中的“%1”程序无法退出，您想要强制中止它吗？"
 
-#: session/SessionController.cpp:1176
+#: session/SessionController.cpp:1179
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "杀死程序"
 
-#: session/SessionController.cpp:1885
+#: session/SessionController.cpp:1890
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "外壳程序的提示显示在会话“%1”"
 
-#: session/SessionController.cpp:2078
+#: session/SessionController.cpp:2083
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "打开当前文件夹方式"
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2156
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "保存 ZModem 下载数据到..."
 
-#: session/SessionController.cpp:2161
+#: session/SessionController.cpp:2166
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2496,13 +2496,13 @@ msgstr ""
 "<p>检测到一个 ZModem 文件传输尝试，但是在此系统上找不到合适的 ZModem 软件。</"
 "p><p>您可能需要安装“rzsz”或“lrzsz”软件包。</p>"
 
-#: session/SessionController.cpp:2171
+#: session/SessionController.cpp:2176
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>当前会话已经有一个 ZModem 文件传输在进行中。</p>"
 
-#: session/SessionController.cpp:2184
+#: session/SessionController.cpp:2189
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2511,7 +2511,7 @@ msgstr ""
 "<p>在此系统上找不到合适的 ZModem 软件。</p><p>您可能需要安装“rzsz”或“lrzsz”软"
 "件包。</p>"
 
-#: session/SessionController.cpp:2189
+#: session/SessionController.cpp:2194
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "选择要通过 ZModem 上传的文件"
@@ -4255,54 +4255,54 @@ msgstr "忽略有问题字符的 wcwidth"
 msgid "Override wcwidth"
 msgstr "覆盖 wcwidth"
 
-#: widgets/EditProfileDialog.cpp:66
+#: widgets/EditProfileDialog.cpp:69
 #, kde-format
 msgid "Edit Profile"
 msgstr "编辑配置方案"
 
-#: widgets/EditProfileDialog.cpp:93
+#: widgets/EditProfileDialog.cpp:96
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "常规"
 
-#: widgets/EditProfileDialog.cpp:104
+#: widgets/EditProfileDialog.cpp:107
 #, kde-format
 msgid "Tabs"
 msgstr "标签页"
 
-#: widgets/EditProfileDialog.cpp:121
+#: widgets/EditProfileDialog.cpp:124
 #, kde-format
 msgid "Appearance"
 msgstr "外观"
 
-#: widgets/EditProfileDialog.cpp:137
+#: widgets/EditProfileDialog.cpp:140
 #, kde-format
 msgid "Scrolling"
 msgstr "滚动"
 
-#: widgets/EditProfileDialog.cpp:151
+#: widgets/EditProfileDialog.cpp:154
 #, kde-format
 msgid "Keyboard"
 msgstr "键盘"
 
-#: widgets/EditProfileDialog.cpp:152
+#: widgets/EditProfileDialog.cpp:155
 #, kde-format
 msgid "Key bindings"
 msgstr "按键绑定"
 
-#: widgets/EditProfileDialog.cpp:163
+#: widgets/EditProfileDialog.cpp:166
 #, kde-format
 msgid "Mouse"
 msgstr "鼠标"
 
-#: widgets/EditProfileDialog.cpp:179
+#: widgets/EditProfileDialog.cpp:182
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "高级"
 
-#: widgets/EditProfileDialog.cpp:287
+#: widgets/EditProfileDialog.cpp:290
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4313,47 +4313,47 @@ msgstr ""
 "保存设置到此位置时权限不足：<filename>%1</filename>。<nl/>请修改该文件的权"
 "限，或更换配置方案文件名称以将配置方案保存到新的文件。"
 
-#: widgets/EditProfileDialog.cpp:304
+#: widgets/EditProfileDialog.cpp:307
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "配置方案名称为空，请设置名称以存储设置。"
 
-#: widgets/EditProfileDialog.cpp:312
+#: widgets/EditProfileDialog.cpp:315
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "同名的配置方案“%1”已存在。"
 
-#: widgets/EditProfileDialog.cpp:342
+#: widgets/EditProfileDialog.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "配置方案文件名超过了所允许的最大长度 (%1)。"
 
-#: widgets/EditProfileDialog.cpp:380
+#: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "高亮显示的字符在配置方案文件名中无效：%1。"
 
-#: widgets/EditProfileDialog.cpp:416
+#: widgets/EditProfileDialog.cpp:419
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "正在编辑 %1 个配置方案：%2"
 
-#: widgets/EditProfileDialog.cpp:420
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Create New Profile"
 msgstr "新建配置方案"
 
-#: widgets/EditProfileDialog.cpp:423
+#: widgets/EditProfileDialog.cpp:426
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "编辑配置方案“%1”"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4362,7 +4362,7 @@ msgid " column"
 msgid_plural " columns"
 msgstr[0] " 列"
 
-#: widgets/EditProfileDialog.cpp:516
+#: widgets/EditProfileDialog.cpp:519
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4371,84 +4371,84 @@ msgid " row"
 msgid_plural " rows"
 msgstr[0] " 行"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Bell"
 msgstr "系统提示"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Notifications"
 msgstr "系统通知"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Visual Bell"
 msgstr "视觉提示"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "忽略系统提示事件"
 
-#: widgets/EditProfileDialog.cpp:535
+#: widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1 中的新建终端会话的默认方案"
 
-#: widgets/EditProfileDialog.cpp:640
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "Edit Environment"
 msgstr "编辑环境"
 
-#: widgets/EditProfileDialog.cpp:641
+#: widgets/EditProfileDialog.cpp:644
 #, kde-format
 msgid "One environment variable per line"
 msgstr "每个环境变量一行"
 
-#: widgets/EditProfileDialog.cpp:672
+#: widgets/EditProfileDialog.cpp:675
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] " 秒"
 
-#: widgets/EditProfileDialog.cpp:786
+#: widgets/EditProfileDialog.cpp:789
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "选择初始目录"
 
-#: widgets/EditProfileDialog.cpp:946
+#: widgets/EditProfileDialog.cpp:949
 #, kde-format
 msgid "Get New..."
 msgstr "获取新方案…"
 
-#: widgets/EditProfileDialog.cpp:1342
+#: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "方案 <resource>%1</resource> 加载失败。"
 
-#: widgets/EditProfileDialog.cpp:1521
+#: widgets/EditProfileDialog.cpp:1524
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "这个配色方案中使用了透明背景，您的桌面不支持此特性"
 
-#: widgets/EditProfileDialog.cpp:1527
+#: widgets/EditProfileDialog.cpp:1530
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr "Konsole 在桌面特效启用前启动。您需要重启 Konsole 来显示透明背景。"
 
-#: widgets/EditProfileDialog.cpp:1913
+#: widgets/EditProfileDialog.cpp:1931
 #, kde-format
 msgid "Default for file type"
 msgstr "文件类型默认值"
 
-#: widgets/EditProfileDialog.cpp:1939
+#: widgets/EditProfileDialog.cpp:1957
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4476,7 +4476,7 @@ msgstr ""
 "如果 PATH 或者 LINE 任何一个没有出现在命令行中，那么这个设定会被直接忽略，文"
 "件会用默认的文本编辑器打开。"
 
-#: widgets/EditProfileDialog.cpp:1952
+#: widgets/EditProfileDialog.cpp:1970
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "自定义的文本编辑器命令"
@@ -5018,115 +5018,128 @@ msgid "Scrollback:"
 msgstr "回滚历史："
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileScrollingPage.ui:67
+#: widgets/EditProfileScrollingPage.ui:41
 #, kde-format
 msgid "Scroll Page Up/Down:"
 msgstr "向上/下滚动页面："
 
+#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
+#: widgets/EditProfileScrollingPage.ui:51
+#, kde-format
+msgid "Highlight the lines coming into view"
+msgstr "高亮显示刚刚进入视图的行"
+
+#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
+#: widgets/EditProfileScrollingPage.ui:58
+#, no-c-format, kde-format
+msgid " %"
+msgstr " %"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
+#: widgets/EditProfileScrollingPage.ui:74
+#, kde-format
+msgctxt "@option:radio Hide the scroll bar"
+msgid "Hidden"
+msgstr "隐藏"
+
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
+#: widgets/EditProfileScrollingPage.ui:84
+#, kde-format
+msgid "Size of each marker (as a percentage of scrollbar length):"
+msgstr "每个标记的大小 (滚动条长度的百分比)："
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileScrollingPage.ui:97
+#, kde-format
+msgid "Highlighting:"
+msgstr "高亮："
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:83
+#: widgets/EditProfileScrollingPage.ui:129
 #, kde-format
 msgid "Scroll the page the half height of window"
 msgstr "滚动半个窗口"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:86
+#: widgets/EditProfileScrollingPage.ui:132
 #, kde-format
 msgid "Half screen heigh&t"
 msgstr "半屏高度(&T)"
 
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
+#: widgets/EditProfileScrollingPage.ui:142
+#, kde-format
+msgid "Color of scrollbar markers:"
+msgstr "滚动条标记的颜色："
+
+#. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
+#: widgets/EditProfileScrollingPage.ui:168
+#, fuzzy, kde-format
+#| msgid "Color of scrollbar markers:"
+msgid "Color of scrollbar search highlighting lines:"
+msgstr "滚动条标记的颜色："
+
+#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
+#: widgets/EditProfileScrollingPage.ui:181
+#, kde-format
+msgid "Reflow Lines:"
+msgstr "重排行："
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:96
+#: widgets/EditProfileScrollingPage.ui:191
 #, kde-format
 msgid "Scroll the page the full height of window"
 msgstr "滚动整个页面高度"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:99
+#: widgets/EditProfileScrollingPage.ui:194
 #, kde-format
 msgid "F&ull screen height"
 msgstr "全屏高度(&U)"
 
-#. i18n: ectx: property (text), widget (QLabel, labelSize)
-#: widgets/EditProfileScrollingPage.ui:131
-#, kde-format
-msgid "Scrollbar position:"
-msgstr "滚动条位置："
-
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:141
+#: widgets/EditProfileScrollingPage.ui:215
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
 msgstr "在终端窗口的右侧显示滚动条"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:144
+#: widgets/EditProfileScrollingPage.ui:218
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
 msgstr "右侧(&G)"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:154
+#: widgets/EditProfileScrollingPage.ui:238
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
 msgstr "在终端窗口的左侧显示滚动条"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:157
+#: widgets/EditProfileScrollingPage.ui:241
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
 msgstr "左侧(&L)"
 
-#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
-#: widgets/EditProfileScrollingPage.ui:167
-#, kde-format
-msgctxt "@option:radio Hide the scroll bar"
-msgid "Hidden"
-msgstr "隐藏"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileScrollingPage.ui:199
-#, kde-format
-msgid "Highlighting:"
-msgstr "高亮："
-
-#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
-#: widgets/EditProfileScrollingPage.ui:209
-#, kde-format
-msgid "Highlight the lines coming into view"
-msgstr "高亮显示刚刚进入视图的行"
-
-#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
-#: widgets/EditProfileScrollingPage.ui:222
-#, kde-format
-msgid "Reflow Lines:"
-msgstr "重排行："
-
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
-#: widgets/EditProfileScrollingPage.ui:232
+#: widgets/EditProfileScrollingPage.ui:251
 #, kde-format
 msgid "Reflow lines when terminal resizes"
 msgstr "终端调整大小时重排行"
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
-#: widgets/EditProfileScrollingPage.ui:239
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: widgets/EditProfileScrollingPage.ui:280
 #, kde-format
-msgid "Color of scrollbar markers:"
-msgstr "滚动条标记的颜色："
+msgid "Scrollbar position:"
+msgstr "滚动条位置："
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
-#: widgets/EditProfileScrollingPage.ui:250
+#. i18n: ectx: property (text), widget (QLabel, lableSearchHighlighterOpacity)
+#: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
-msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr "每个标记的大小 (滚动条长度的百分比)："
-
-#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
-#: widgets/EditProfileScrollingPage.ui:266
-#, no-c-format, kde-format
-msgid " %"
-msgstr " %"
+msgid "Search highlighting line opacity:"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

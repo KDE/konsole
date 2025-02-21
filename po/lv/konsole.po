@@ -6,20 +6,20 @@
 # Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
 # Einars Sprugis <einars8@gmail.com>, 2012.
 # Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2012.
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 00:43+0000\n"
-"PO-Revision-Date: 2024-12-16 17:19+0200\n"
+"POT-Creation-Date: 2025-02-21 00:44+0000\n"
+"PO-Revision-Date: 2025-02-19 16:50+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
@@ -1880,13 +1880,13 @@ msgstr "Printerim &draudzīgs režīms (melns teksts bez fona)"
 msgid "&Scale output"
 msgstr "&Mērogot izvadi"
 
-#: profile/Profile.cpp:267
+#: profile/Profile.cpp:269
 #, kde-format
 msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Iebūvēts"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:537
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
 #, kde-format
 msgid "Default profile"
 msgstr "Noklusētais profils"
@@ -2125,7 +2125,7 @@ msgid "Silence in '%1' (Session '%2')"
 msgstr "Klusums „%1“ (sesija „%2“)"
 
 #: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:360 session/SessionController.cpp:1886
+#: session/SessionController.cpp:362 session/SessionController.cpp:1891
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, kde-format
@@ -2171,315 +2171,315 @@ msgstr "„ZModem“ progress"
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitāte „%1“ (sesija „%2“)"
 
-#: session/SessionController.cpp:141
+#: session/SessionController.cpp:143
 #, kde-format
 msgid "Konsole"
 msgstr "„Konsole“"
 
-#: session/SessionController.cpp:359
+#: session/SessionController.cpp:361
 #, kde-format
 msgid "The process '%1' has finished running in session '%2'"
 msgstr "Process „%1“ ir beidzis darboties sesijā „%2“"
 
-#: session/SessionController.cpp:442
+#: session/SessionController.cpp:444
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
 msgstr "„Konsole“ neprot atvērt grāmatzīmi: "
 
-#: session/SessionController.cpp:521
+#: session/SessionController.cpp:523
 #, kde-format
 msgid "Search for '%1' with"
 msgstr "Meklēt „%1“ ar"
 
-#: session/SessionController.cpp:537
+#: session/SessionController.cpp:539
 #, kde-format
 msgid "Configure Web Shortcuts..."
 msgstr "Konfigurēt tīmekļa saīsnes..."
 
-#: session/SessionController.cpp:647
+#: session/SessionController.cpp:650
 #, kde-format
 msgid "&Close Session"
 msgstr "&Aizvērt sesiju"
 
-#: session/SessionController.cpp:654
+#: session/SessionController.cpp:657
 #, kde-format
 msgid "Open File Manager"
 msgstr "Atvērt datņu pārvaldnieku"
 
-#: session/SessionController.cpp:669
+#: session/SessionController.cpp:672
 #, kde-format
 msgid "Copy"
 msgstr "Kopēt"
 
-#: session/SessionController.cpp:676
+#: session/SessionController.cpp:679
 #, kde-format
 msgid "Split View Left-Right"
 msgstr "Sadalīt skatu kreisajā/labajā"
 
-#: session/SessionController.cpp:681
+#: session/SessionController.cpp:684
 #, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Sadalīt skatu augšējā/apakšējā"
 
-#: session/SessionController.cpp:685
+#: session/SessionController.cpp:688
 #, kde-format
 msgid "Copy except prompts"
 msgstr "Kopēt izņēmumu uzvednes"
 
-#: session/SessionController.cpp:691
+#: session/SessionController.cpp:694
 #, kde-format
 msgid "Copy user input"
 msgstr "Kopēt lietotāja ievadi"
 
-#: session/SessionController.cpp:697
+#: session/SessionController.cpp:700
 #, kde-format
 msgid "Copy command output"
 msgstr "Kopēt komandu izvadi"
 
-#: session/SessionController.cpp:712
+#: session/SessionController.cpp:715
 #, kde-format
 msgid "Paste Selection"
 msgstr "Ielīmēt izvēlēto"
 
-#: session/SessionController.cpp:719
+#: session/SessionController.cpp:722
 #, kde-format
 msgid "Web Search"
 msgstr "Tīmekļa meklēšana"
 
-#: session/SessionController.cpp:725
+#: session/SessionController.cpp:728
 #, kde-format
 msgid "&Select All"
 msgstr "&Atlasīt visu"
 
-#: session/SessionController.cpp:729
+#: session/SessionController.cpp:732
 #, kde-format
 msgid "Select &Mode"
 msgstr "Atlasīšanas &režīms"
 
-#: session/SessionController.cpp:734
+#: session/SessionController.cpp:737
 #, kde-format
 msgid "Select &Line"
 msgstr "A&tlasīt rindu"
 
-#: session/SessionController.cpp:737
+#: session/SessionController.cpp:740
 #, kde-format
 msgid "Save Output &As..."
 msgstr "S&aglabāt izvadi kā..."
 
-#: session/SessionController.cpp:743
+#: session/SessionController.cpp:746
 #, kde-format
 msgid "Auto Save Output As..."
 msgstr "Automātiski saglabāt izvadi kā..."
 
-#: session/SessionController.cpp:747
+#: session/SessionController.cpp:750
 #, kde-format
 msgid "Stop Auto Save"
 msgstr "Apturēt automātisko saglabāšanu"
 
-#: session/SessionController.cpp:751
+#: session/SessionController.cpp:754
 #, kde-format
 msgid "&Print Screen..."
 msgstr "&Drukāt ekrānu..."
 
-#: session/SessionController.cpp:755
+#: session/SessionController.cpp:758
 #, kde-format
 msgid "Adjust Scrollback..."
 msgstr "Pielāgot ritināšanas atmiņu..."
 
-#: session/SessionController.cpp:759
+#: session/SessionController.cpp:762
 #, kde-format
 msgid "Clear Scrollback"
 msgstr "Notīrīt ritināšanas atmiņu"
 
-#: session/SessionController.cpp:763
+#: session/SessionController.cpp:766
 #, kde-format
 msgid "Clear Scrollback and Reset"
 msgstr "Notīrīt ritināšanas atmiņu un atstatīt"
 
-#: session/SessionController.cpp:774
+#: session/SessionController.cpp:777
 #, kde-format
 msgid "Next Profile"
 msgstr "Nākamais profils"
 
-#: session/SessionController.cpp:779
+#: session/SessionController.cpp:782
 #, kde-format
 msgid "Previous Profile"
 msgstr "Iepriekšējais profils"
 
-#: session/SessionController.cpp:782
+#: session/SessionController.cpp:785
 #, kde-format
 msgid "Switch Profile"
 msgstr "Pārslēgt profilu"
 
-#: session/SessionController.cpp:807
+#: session/SessionController.cpp:810
 #, kde-format
 msgid "Set &Encoding"
 msgstr "I&estatīt kodējumu"
 
-#: session/SessionController.cpp:829
+#: session/SessionController.cpp:832
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Atļaut peles izsekošanu"
 
-#: session/SessionController.cpp:838
+#: session/SessionController.cpp:841
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Tikai lasāma"
 
-#: session/SessionController.cpp:849
+#: session/SessionController.cpp:852
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Konfigurēt vai pārsaukt cilni..."
 
-#: session/SessionController.cpp:855
+#: session/SessionController.cpp:858
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Visas cilnes pašreizējā logā"
 
-#: session/SessionController.cpp:862
+#: session/SessionController.cpp:865
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Atlasīt cilnes..."
 
-#: session/SessionController.cpp:868
+#: session/SessionController.cpp:871
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Nevienu"
 
-#: session/SessionController.cpp:876
+#: session/SessionController.cpp:879
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopēt ievadi uz"
 
-#: session/SessionController.cpp:884
+#: session/SessionController.cpp:887
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "„&ZModem“ augšupielāde..."
 
-#: session/SessionController.cpp:889
+#: session/SessionController.cpp:892
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Vienreizlietojami pārraugi"
 
-#: session/SessionController.cpp:894
+#: session/SessionController.cpp:897
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "&Uzvednes pārraugs"
 
-#: session/SessionController.cpp:901
+#: session/SessionController.cpp:904
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "&Aktivitātes pārraugs"
 
-#: session/SessionController.cpp:907
+#: session/SessionController.cpp:910
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&Klusuma pārraugs"
 
-#: session/SessionController.cpp:913
+#: session/SessionController.cpp:916
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Procesa pabeigšanas pārraugs"
 
-#: session/SessionController.cpp:920
+#: session/SessionController.cpp:923
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Palielināt fontu"
 
-#: session/SessionController.cpp:928
+#: session/SessionController.cpp:931
 #, kde-format
 msgid "Shrink Font"
 msgstr "Samazināt fontu"
 
-#: session/SessionController.cpp:933
+#: session/SessionController.cpp:936
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Atiestatīt fonta izmēru"
 
-#: session/SessionController.cpp:939
+#: session/SessionController.cpp:942
 #, kde-format
 msgid "Send Signal"
 msgstr "Nosūtīt signālu"
 
-#: session/SessionController.cpp:943
+#: session/SessionController.cpp:946
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Aizturēt uzdevumu"
 
-#: session/SessionController.cpp:948
+#: session/SessionController.cpp:951
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Turpināt uzdevumu"
 
-#: session/SessionController.cpp:953
+#: session/SessionController.cpp:956
 #, kde-format
 msgid "&Hangup"
 msgstr "&Nolikt"
 
-#: session/SessionController.cpp:958
+#: session/SessionController.cpp:961
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Pārtraukt uzdevumu"
 
-#: session/SessionController.cpp:963
+#: session/SessionController.cpp:966
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Izbeigt uzdevumu"
 
-#: session/SessionController.cpp:968
+#: session/SessionController.cpp:971
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Nobeigt uzdevumu"
 
-#: session/SessionController.cpp:973
+#: session/SessionController.cpp:976
 #, kde-format
 msgid "User Signal &1"
 msgstr "Lietotāja signāls &1"
 
-#: session/SessionController.cpp:978
+#: session/SessionController.cpp:981
 #, kde-format
 msgid "User Signal &2"
 msgstr "Lietotāja signāls &2"
 
-#: session/SessionController.cpp:996
+#: session/SessionController.cpp:999
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Izveidot jaunu profilu..."
 
-#: session/SessionController.cpp:998
+#: session/SessionController.cpp:1001
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Rediģēt pašreizējo profilu..."
 
-#: session/SessionController.cpp:1129
+#: session/SessionController.cpp:1132
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "Šajā sesijā darbojas programma. Vai tiešām vēlaties to aizvērt?"
 
-#: session/SessionController.cpp:1133
+#: session/SessionController.cpp:1136
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "Šajā sesijā darbojas programma „%1“. Vai tiešām vēlaties to aizvērt?"
 
-#: session/SessionController.cpp:1140 session/SessionController.cpp:1175
+#: session/SessionController.cpp:1143 session/SessionController.cpp:1178
 #, kde-format
 msgid "Confirm Close"
 msgstr "Apstiprināt aizvēršanu"
 
-#: session/SessionController.cpp:1141
+#: session/SessionController.cpp:1144
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Aizvērt programmu"
 
-#: session/SessionController.cpp:1164
+#: session/SessionController.cpp:1167
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2488,11 +2488,8 @@ msgstr ""
 "Programma šajā sesijā neaizveras. Vai tiešām vēlaties to nobeigt piespiedu "
 "kārtā?"
 
-#: session/SessionController.cpp:1168
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#: session/SessionController.cpp:1171
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
@@ -2500,28 +2497,28 @@ msgstr ""
 "Programma „%1“ šajā sesijā neaizveras. Vai tiešām vēlaties to nobeigt "
 "piespiedu kārtā?"
 
-#: session/SessionController.cpp:1176
+#: session/SessionController.cpp:1179
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Nobeigt programmu"
 
-#: session/SessionController.cpp:1885
+#: session/SessionController.cpp:1890
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Čaulas uzvedne ir parādīta sesijā „%1“"
 
-#: session/SessionController.cpp:2078
+#: session/SessionController.cpp:2083
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Atvērt pašreizējo mapi ar"
 
-#: session/SessionController.cpp:2151
+#: session/SessionController.cpp:2156
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Saglabāt „ZModem“ lejupielādi..."
 
-#: session/SessionController.cpp:2161
+#: session/SessionController.cpp:2166
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2532,13 +2529,13 @@ msgstr ""
 "atrasta derīga „ZModem“ programmatūra.</p><p>Iespējams, ir jāinstalē „rzsz“ "
 "vai „lrzsz“ pakotne.</p>"
 
-#: session/SessionController.cpp:2171
+#: session/SessionController.cpp:2176
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Aktīvajā sesijā jau notiek „ZModem“ datņu pārsūtīšana.</p>"
 
-#: session/SessionController.cpp:2184
+#: session/SessionController.cpp:2189
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2547,7 +2544,7 @@ msgstr ""
 "<p>Šajā datorā nav atrasta piemērota „ZModem“ programmatūra.</"
 "p><p>Iespējams, jāinstalē „rzsz“ vai „lrzsz“ pakotne.</p>"
 
-#: session/SessionController.cpp:2189
+#: session/SessionController.cpp:2194
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Izvēlieties datnes, ko augšupielādēt ar „ZModem“"
@@ -2953,11 +2950,11 @@ msgid ""
 "a change to how these are handled.</body></html>"
 msgstr ""
 "<html><head/><body><p>Programmas, kas izmanto „KonsolePart“ dalās ar "
-"profiliem.</p><p>Tās nedalās ar „Konsole“ vai citu programmu:"
+"profiliem.</p><p>Tās nedalās ar „Konsole“ vai citu programmu ar:"
 "<ul><li>noklusējuma profilu</li><li>izvēlnē redzamo</li><li>saīsnēm</li></"
 "ul></p><p>Droši izveidojiet „Konsole“ <a href=\"https://bugs.kde.org/"
 "enter_bug.cgi?format=guided&product=konsole&component=kpart\">kļūdas "
-"ziņojumu</a>, ja vēlaties mainīt to, kā tas notiek.</body></html>"
+"ziņojumu</a>, ja vēlaties mainīt šo darbību.</body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:51
@@ -4315,54 +4312,54 @@ msgstr "Ignorēt problemātisko rakstzīmju „wcwidth“"
 msgid "Override wcwidth"
 msgstr "Pārrakstīt „wcwidth“"
 
-#: widgets/EditProfileDialog.cpp:66
+#: widgets/EditProfileDialog.cpp:69
 #, kde-format
 msgid "Edit Profile"
 msgstr "Rediģēt profilu"
 
-#: widgets/EditProfileDialog.cpp:93
+#: widgets/EditProfileDialog.cpp:96
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Pamata"
 
-#: widgets/EditProfileDialog.cpp:104
+#: widgets/EditProfileDialog.cpp:107
 #, kde-format
 msgid "Tabs"
 msgstr "Cilnes"
 
-#: widgets/EditProfileDialog.cpp:121
+#: widgets/EditProfileDialog.cpp:124
 #, kde-format
 msgid "Appearance"
 msgstr "Izskats"
 
-#: widgets/EditProfileDialog.cpp:137
+#: widgets/EditProfileDialog.cpp:140
 #, kde-format
 msgid "Scrolling"
 msgstr "Ritināšana"
 
-#: widgets/EditProfileDialog.cpp:151
+#: widgets/EditProfileDialog.cpp:154
 #, kde-format
 msgid "Keyboard"
 msgstr "Tastatūra"
 
-#: widgets/EditProfileDialog.cpp:152
+#: widgets/EditProfileDialog.cpp:155
 #, kde-format
 msgid "Key bindings"
 msgstr "Taustiņu saīsnes"
 
-#: widgets/EditProfileDialog.cpp:163
+#: widgets/EditProfileDialog.cpp:166
 #, kde-format
 msgid "Mouse"
 msgstr "Pele"
 
-#: widgets/EditProfileDialog.cpp:179
+#: widgets/EditProfileDialog.cpp:182
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Paplašināti"
 
-#: widgets/EditProfileDialog.cpp:287
+#: widgets/EditProfileDialog.cpp:290
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4374,31 +4371,31 @@ msgstr ""
 ">Vai nu mainiet datnes atļaujas, vai arī izvēlieties atšķirīgu nosaukumu "
 "iestatījumu saglabāšanai jaunā profilā."
 
-#: widgets/EditProfileDialog.cpp:304
+#: widgets/EditProfileDialog.cpp:307
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "Profila nosaukums ir tukšs. Pirms saglabāšanas ierakstiet nosaukumu."
 
-#: widgets/EditProfileDialog.cpp:312
+#: widgets/EditProfileDialog.cpp:315
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Profils ar nosaukumu „%1“ jau eksistē."
 
-#: widgets/EditProfileDialog.cpp:342
+#: widgets/EditProfileDialog.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "Profila nosaukums ir sasniedzis maksimālo atļauto garumu (%1)."
 
-#: widgets/EditProfileDialog.cpp:380
+#: widgets/EditProfileDialog.cpp:383
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "Izceltās rakstzīmes ir nederīgas profila nosaukumos: %1."
 
-#: widgets/EditProfileDialog.cpp:416
+#: widgets/EditProfileDialog.cpp:419
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4406,17 +4403,17 @@ msgstr[0] "Rediģē %1 profilu: %2"
 msgstr[1] "Rediģē %1 profilus: %2"
 msgstr[2] "Rediģē %1 profilu: %2"
 
-#: widgets/EditProfileDialog.cpp:420
+#: widgets/EditProfileDialog.cpp:423
 #, kde-format
 msgid "Create New Profile"
 msgstr "Izveidot jaunu profilu"
 
-#: widgets/EditProfileDialog.cpp:423
+#: widgets/EditProfileDialog.cpp:426
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Rediģēt profilu „%1“"
 
-#: widgets/EditProfileDialog.cpp:514
+#: widgets/EditProfileDialog.cpp:517
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4427,7 +4424,7 @@ msgstr[0] " kolonna"
 msgstr[1] " kolonnas"
 msgstr[2] " kolonnu"
 
-#: widgets/EditProfileDialog.cpp:516
+#: widgets/EditProfileDialog.cpp:519
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4438,42 +4435,42 @@ msgstr[0] " rinda"
 msgstr[1] " rindas"
 msgstr[2] " rindu"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Bell"
 msgstr "Sistēmas zvans"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistēmas paziņojumi"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizuāls zvans"
 
-#: widgets/EditProfileDialog.cpp:526
+#: widgets/EditProfileDialog.cpp:529
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignorēt zvana notikumus"
 
-#: widgets/EditProfileDialog.cpp:535
+#: widgets/EditProfileDialog.cpp:538
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Noklusējuma profils jaunām %1 termināļa sesijām"
 
-#: widgets/EditProfileDialog.cpp:640
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "Edit Environment"
 msgstr "Rediģēt vidi"
 
-#: widgets/EditProfileDialog.cpp:641
+#: widgets/EditProfileDialog.cpp:644
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Viens vides mainīgais katrā rindā"
 
-#: widgets/EditProfileDialog.cpp:672
+#: widgets/EditProfileDialog.cpp:675
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4482,30 +4479,30 @@ msgstr[0] " sekunde"
 msgstr[1] " sekundes"
 msgstr[2] " sekunžu"
 
-#: widgets/EditProfileDialog.cpp:786
+#: widgets/EditProfileDialog.cpp:789
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Atlasīt sākotnējo mapi"
 
-#: widgets/EditProfileDialog.cpp:946
+#: widgets/EditProfileDialog.cpp:949
 #, kde-format
 msgid "Get New..."
 msgstr "Iegūt jaunus..."
 
-#: widgets/EditProfileDialog.cpp:1342
+#: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Neizdevās shēmas <resource>%1</resource> ielāde."
 
-#: widgets/EditProfileDialog.cpp:1521
+#: widgets/EditProfileDialog.cpp:1524
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "Šai krāsu shēmai ir caurspīdīgs fons, ko neatbalsta jūsu darbvirsma"
 
-#: widgets/EditProfileDialog.cpp:1527
+#: widgets/EditProfileDialog.cpp:1530
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4514,12 +4511,12 @@ msgstr ""
 "„Konsole“ tika palaista pirms tika ieslēgti darbvirsmas efekti. Jums "
 "jāpārstartē „Konsole“, lai redzētu caurspīdīgo fonu."
 
-#: widgets/EditProfileDialog.cpp:1913
+#: widgets/EditProfileDialog.cpp:1931
 #, kde-format
 msgid "Default for file type"
 msgstr "Noklusējums datņu tipam"
 
-#: widgets/EditProfileDialog.cpp:1939
+#: widgets/EditProfileDialog.cpp:1957
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4548,7 +4545,7 @@ msgstr ""
 "tiek ignorēts un datne tiek atvērta ar noklusējuma teksta\n"
 "redaktoru."
 
-#: widgets/EditProfileDialog.cpp:1952
+#: widgets/EditProfileDialog.cpp:1970
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Pielāgota teksta redaktora komanda"
@@ -5113,115 +5110,128 @@ msgid "Scrollback:"
 msgstr "Ritināšanas atmiņa:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: widgets/EditProfileScrollingPage.ui:67
+#: widgets/EditProfileScrollingPage.ui:41
 #, kde-format
 msgid "Scroll Page Up/Down:"
 msgstr "Ritināt lapu augšup/lejup:"
 
+#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
+#: widgets/EditProfileScrollingPage.ui:51
+#, kde-format
+msgid "Highlight the lines coming into view"
+msgstr "Izcelt skata apgabalā ienākošās rindas"
+
+#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
+#: widgets/EditProfileScrollingPage.ui:58
+#, no-c-format, kde-format
+msgid " %"
+msgstr " %"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
+#: widgets/EditProfileScrollingPage.ui:74
+#, kde-format
+msgctxt "@option:radio Hide the scroll bar"
+msgid "Hidden"
+msgstr "Slēpta"
+
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
+#: widgets/EditProfileScrollingPage.ui:84
+#, kde-format
+msgid "Size of each marker (as a percentage of scrollbar length):"
+msgstr "Katra marķiera izmērs (procentuāli no ritjoslas garuma):"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: widgets/EditProfileScrollingPage.ui:97
+#, kde-format
+msgid "Highlighting:"
+msgstr "Izcelšana:"
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:83
+#: widgets/EditProfileScrollingPage.ui:129
 #, kde-format
 msgid "Scroll the page the half height of window"
 msgstr "Ritināt lapu par pusi no loga augstuma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
-#: widgets/EditProfileScrollingPage.ui:86
+#: widgets/EditProfileScrollingPage.ui:132
 #, kde-format
 msgid "Half screen heigh&t"
 msgstr "&Puse ekrāna augstuma"
 
+#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
+#: widgets/EditProfileScrollingPage.ui:142
+#, kde-format
+msgid "Color of scrollbar markers:"
+msgstr "Ritjoslas marķieru krāsa:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
+#: widgets/EditProfileScrollingPage.ui:168
+#, fuzzy, kde-format
+#| msgid "Color of scrollbar markers:"
+msgid "Color of scrollbar search highlighting lines:"
+msgstr "Ritjoslas marķieru krāsa:"
+
+#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
+#: widgets/EditProfileScrollingPage.ui:181
+#, kde-format
+msgid "Reflow Lines:"
+msgstr "Pārkārtot rindas:"
+
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:96
+#: widgets/EditProfileScrollingPage.ui:191
 #, kde-format
 msgid "Scroll the page the full height of window"
 msgstr "Ritināt lapu par pilnu loga augstumu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
-#: widgets/EditProfileScrollingPage.ui:99
+#: widgets/EditProfileScrollingPage.ui:194
 #, kde-format
 msgid "F&ull screen height"
 msgstr "&Pilns ekrāna augstums"
 
-#. i18n: ectx: property (text), widget (QLabel, labelSize)
-#: widgets/EditProfileScrollingPage.ui:131
-#, kde-format
-msgid "Scrollbar position:"
-msgstr "Ritjoslas novietojums:"
-
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:141
+#: widgets/EditProfileScrollingPage.ui:215
 #, kde-format
 msgid "Show the scroll bar on the right side of the terminal window"
 msgstr "Rādīt ritjoslu termināļa loga labajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
-#: widgets/EditProfileScrollingPage.ui:144
+#: widgets/EditProfileScrollingPage.ui:218
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
 msgstr "&Labajā pusē"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:154
+#: widgets/EditProfileScrollingPage.ui:238
 #, kde-format
 msgid "Show the scroll bar on the left side of the terminal window"
 msgstr "Rādīt ritjoslu termināļa loga kreisajā pusē"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
-#: widgets/EditProfileScrollingPage.ui:157
+#: widgets/EditProfileScrollingPage.ui:241
 #, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
 msgstr "&Kreisajā pusē"
 
-#. i18n: ectx: property (text), widget (QRadioButton, scrollBarHiddenButton)
-#: widgets/EditProfileScrollingPage.ui:167
-#, kde-format
-msgctxt "@option:radio Hide the scroll bar"
-msgid "Hidden"
-msgstr "Slēpta"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: widgets/EditProfileScrollingPage.ui:199
-#, kde-format
-msgid "Highlighting:"
-msgstr "Izcelšana:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
-#: widgets/EditProfileScrollingPage.ui:209
-#, kde-format
-msgid "Highlight the lines coming into view"
-msgstr "Izcelt skata apgabalā ienākošās rindas"
-
-#. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
-#: widgets/EditProfileScrollingPage.ui:222
-#, kde-format
-msgid "Reflow Lines:"
-msgstr "Pārkārtot rindas:"
-
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
-#: widgets/EditProfileScrollingPage.ui:232
+#: widgets/EditProfileScrollingPage.ui:251
 #, kde-format
 msgid "Reflow lines when terminal resizes"
 msgstr "Pārkārtot rindas, terminālim mainot izmēru"
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerColor)
-#: widgets/EditProfileScrollingPage.ui:239
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: widgets/EditProfileScrollingPage.ui:280
 #, kde-format
-msgid "Color of scrollbar markers:"
-msgstr "Ritjoslas marķieru krāsa:"
+msgid "Scrollbar position:"
+msgstr "Ritjoslas novietojums:"
 
-#. i18n: ectx: property (text), widget (QLabel, labelMarkerSize)
-#: widgets/EditProfileScrollingPage.ui:250
+#. i18n: ectx: property (text), widget (QLabel, lableSearchHighlighterOpacity)
+#: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
-msgid "Size of each marker (as a percentage of scrollbar length):"
-msgstr "Katra marķiera izmērs (procentuāli no ritjoslas garuma):"
-
-#. i18n: ectx: property (suffix), widget (QDoubleSpinBox, markerSizeWidget)
-#: widgets/EditProfileScrollingPage.ui:266
-#, no-c-format, kde-format
-msgid " %"
-msgstr " %"
+msgid "Search highlighting line opacity:"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
