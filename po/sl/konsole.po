@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:43+0000\n"
+"POT-Creation-Date: 2025-02-22 02:34+0000\n"
 "PO-Revision-Date: 2024-08-24 06:56+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -3286,12 +3286,12 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Omogoči tvorbo predoglednih sličic"
 
-#: terminalDisplay/TerminalDisplay.cpp:654
+#: terminalDisplay/TerminalDisplay.cpp:660
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Velikost: %1 × %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2250
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
@@ -3300,52 +3300,52 @@ msgstr[1] "Ali res želite prilepiti %1 znak?"
 msgstr[2] "Ali res želite prilepiti %1 znaka?"
 msgstr[3] "Ali res želite prilepiti %1 znake?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Potrditev lepljenja"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "End Of Text/Interrupt: lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "End Of Transmission:  lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Bell: bo poskusil oddati zvočno opozorilo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Backspace"
 msgstr "Backspace"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Device Control Three/XOFF: začasno prekini izhod"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Substitute/Suspend: lahko začasno ustavi trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: se uporablja za spremembo stanja terminala"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "File Separator/Quit:  lahko konča trenutni proces"
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3354,31 +3354,31 @@ msgstr ""
 "Besedilo, ki ga želite prilepiti vsebuje nekatere skrite kontrolne znake. "
 "Ali želite te znake odfiltrirati?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Potrdi lepljenje"
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Prilepi brez kontrolnih znakov"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Prilepi vse"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "Prekliči"
 
-#: terminalDisplay/TerminalDisplay.cpp:2551
+#: terminalDisplay/TerminalDisplay.cpp:2557
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3389,17 +3389,17 @@ msgstr ""
 "Software_flow_control\">zaustavljen</a> s pritiskom Ctrl+S.  Pritisnite "
 "<b>Ctrl+Q</b>za nadaljevanje.</qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2606
+#: terminalDisplay/TerminalDisplay.cpp:2612
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Ta terminal je samo za branje."
 
-#: terminalDisplay/TerminalDisplay.cpp:3001
+#: terminalDisplay/TerminalDisplay.cpp:3007
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Spremeni mapo v"
 
-#: terminalDisplay/TerminalDisplay.cpp:3034
+#: terminalDisplay/TerminalDisplay.cpp:3040
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Prilepi naslov"
