@@ -15,14 +15,12 @@
 
 using namespace Konsole;
 
-HTMLDecoder::HTMLDecoder(const QColor *colorTable, const QFont &profileFont)
+HTMLDecoder::HTMLDecoder(const QColor *colorTable)
     : _output(nullptr)
-    , _profileFont(profileFont)
     , _innerSpanOpen(false)
     , _lastRendition(DEFAULT_RENDITION)
     , _lastForeColor(CharacterColor())
     , _lastBackColor(CharacterColor())
-    , _validProfile(false)
 {
     Q_ASSERT(colorTable);
     std::copy_n(colorTable, TABLE_COLORS, _colorTable);
@@ -32,40 +30,18 @@ void HTMLDecoder::begin(QTextStream *output)
 {
     _output = output;
 
-    if (_validProfile) {
-        QString style;
-
-        style.append(QStringLiteral("font-family:'%1',monospace;").arg(_profileFont.family()));
-
-        // Prefer point size if set
-        if (_profileFont.pointSizeF() > 0) {
-            style.append(QStringLiteral("font-size:%1pt;").arg(_profileFont.pointSizeF()));
-        } else {
-            style.append(QStringLiteral("font-size:%1px;").arg(_profileFont.pixelSize()));
-        }
-
-        style.append(QStringLiteral("color:%1;").arg(_colorTable[DEFAULT_FORE_COLOR].name()));
-        style.append(QStringLiteral("background-color:%1;").arg(_colorTable[DEFAULT_BACK_COLOR].name()));
-
-        *output << QStringLiteral("<body style=\"%1\">").arg(style);
-    } else {
-        QString text;
-        openSpan(text, QStringLiteral("font-family:monospace"));
-        *output << text;
-    }
+    QString text;
+    openSpan(text, QStringLiteral("font-family:monospace"));
+    *output << text;
 }
 
 void HTMLDecoder::end()
 {
     Q_ASSERT(_output);
 
-    if (_validProfile) {
-        *_output << QStringLiteral("</body>");
-    } else {
-        QString text;
-        closeSpan(text);
-        *_output << text;
-    }
+    QString text;
+    closeSpan(text);
+    *_output << text;
 
     _output = nullptr;
 }

@@ -24,7 +24,7 @@ public:
     /**
      * Constructs an HTML decoder using a default black-on-white color scheme.
      */
-    explicit HTMLDecoder(const QColor *colorTable, const QFont &profileFont = QFont());
+    explicit HTMLDecoder(const QColor *colorTable);
 
     void decodeLine(const Character *const characters, int count, LineProperty properties) override;
 
@@ -36,13 +36,11 @@ private:
     void closeSpan(QString &text);
 
     QTextStream *_output;
-    QFont _profileFont;
     QColor _colorTable[TABLE_COLORS];
     bool _innerSpanOpen;
     RenditionFlags _lastRendition;
     CharacterColor _lastForeColor;
     CharacterColor _lastBackColor;
-    bool _validProfile;
 };
 }
 

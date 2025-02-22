@@ -122,7 +122,7 @@ void SaveHistoryTask::execute()
                 std::copy_n(ColorScheme::defaultTable, TABLE_COLORS, colorTable);
             }
 
-            jobInfo.decoder = new HTMLDecoder(colorTable, profile->font());
+            jobInfo.decoder = new HTMLDecoder(colorTable);
         } else {
             jobInfo.decoder = new PlainTextDecoder();
         }
