@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-21 00:44+0000\n"
-"PO-Revision-Date: 2025-02-01 12:11+0100\n"
+"POT-Creation-Date: 2025-02-22 00:44+0000\n"
+"PO-Revision-Date: 2025-02-22 01:44+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -583,7 +583,7 @@ msgstr "Escoger la imagen del fondo"
 #: widgets/EditProfileGeneralPage.ui:186
 #, kde-format
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperScalingLabel)
 #: colorscheme/ColorSchemeEditor.ui:165
@@ -678,7 +678,7 @@ msgstr "Arriba"
 #: colorscheme/ColorSchemeViewDelegate.cpp:52
 #, kde-format
 msgid "AaZz09..."
-msgstr "AaZz09..."
+msgstr "AaZz09…"
 
 #: CopyInputDialog.cpp:30
 #, kde-format
@@ -743,7 +743,7 @@ msgstr "Copiar dirección del enlace"
 #: filterHotSpots/UrlFilterHotspot.cpp:95
 #, kde-format
 msgid "Send Email To..."
-msgstr "Enviar mensaje a..."
+msgstr "Enviar mensaje a…"
 
 #: filterHotSpots/UrlFilterHotspot.cpp:97
 #, kde-format
@@ -1234,7 +1234,7 @@ msgstr "Esquema de color de las &ventanas"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage Profiles..."
-msgstr "Gestionar perfiles..."
+msgstr "Gestionar perfiles…"
 
 #: MainWindow.cpp:413
 #, kde-format
@@ -1246,13 +1246,13 @@ msgstr "Activar menú"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
-msgstr "Guardar configuración de pestañas..."
+msgstr "Guardar configuración de pestañas…"
 
 #: MainWindow.cpp:428
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Cargar configuración de pestañas..."
+msgstr "Cargar configuración de pestañas…"
 
 #: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
@@ -1348,7 +1348,7 @@ msgstr "Atajo de teclado:"
 #: plugins/QuickCommands/qcwidget.ui:52 plugins/SSHManager/sshwidget.ui:33
 #, kde-format
 msgid "Filter..."
-msgstr "Filtro..."
+msgstr "Filtro…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, invertFilter)
 #. i18n: ectx: property (text), widget (QCheckBox, btnInvertFilter)
@@ -2102,7 +2102,7 @@ msgstr "Consola de Solaris"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #: searchtabs/SearchTabs.cpp:128
 #, kde-format
@@ -2220,7 +2220,7 @@ msgstr "Buscar «%1» con"
 #: session/SessionController.cpp:539
 #, kde-format
 msgid "Configure Web Shortcuts..."
-msgstr "Configurar los atajos web..."
+msgstr "Configurar los atajos web…"
 
 #: session/SessionController.cpp:650
 #, kde-format
@@ -2290,12 +2290,12 @@ msgstr "Seleccionar &línea"
 #: session/SessionController.cpp:740
 #, kde-format
 msgid "Save Output &As..."
-msgstr "Guardar la &salida como..."
+msgstr "Guardar la &salida como…"
 
 #: session/SessionController.cpp:746
 #, kde-format
 msgid "Auto Save Output As..."
-msgstr "Guardar automáticamente la salida como..."
+msgstr "Guardar automáticamente la salida como…"
 
 #: session/SessionController.cpp:750
 #, kde-format
@@ -2305,12 +2305,12 @@ msgstr "Detener la función de guardar automáticamente"
 #: session/SessionController.cpp:754
 #, kde-format
 msgid "&Print Screen..."
-msgstr "Imprimir &pantalla..."
+msgstr "Imprimir &pantalla…"
 
 #: session/SessionController.cpp:758
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "Ajustar historial de desplazamiento..."
+msgstr "Ajustar historial de desplazamiento…"
 
 #: session/SessionController.cpp:762
 #, kde-format
@@ -2357,7 +2357,7 @@ msgstr "Solo lectura"
 #: session/SessionController.cpp:852
 #, kde-format
 msgid "&Configure or Rename Tab..."
-msgstr "&Configurar o cambiar el nombre de la pestaña..."
+msgstr "&Configurar o cambiar el nombre de la pestaña…"
 
 #: session/SessionController.cpp:858
 #, kde-format
@@ -2367,7 +2367,7 @@ msgstr "&Todas las pestañas de la ventana actual"
 #: session/SessionController.cpp:865
 #, kde-format
 msgid "&Select Tabs..."
-msgstr "&Seleccionar pestañas..."
+msgstr "&Seleccionar pestañas…"
 
 #: session/SessionController.cpp:871
 #, kde-format
@@ -2383,7 +2383,7 @@ msgstr "Copiar entrada a"
 #: session/SessionController.cpp:887
 #, kde-format
 msgid "&ZModem Upload..."
-msgstr "Envío &ZModem..."
+msgstr "Envío &ZModem…"
 
 #: session/SessionController.cpp:892
 #, kde-format
@@ -2473,12 +2473,12 @@ msgstr "Señal de usuario &2"
 #: session/SessionController.cpp:999
 #, kde-format
 msgid "Create New Profile..."
-msgstr "Crear nuevo perfil..."
+msgstr "Crear nuevo perfil…"
 
 #: session/SessionController.cpp:1001
 #, kde-format
 msgid "Edit Current Profile..."
-msgstr "Editar el perfil actual..."
+msgstr "Editar el perfil actual…"
 
 #: session/SessionController.cpp:1132
 #, kde-format
@@ -2544,7 +2544,7 @@ msgstr "Abrir la carpeta actual con"
 #: session/SessionController.cpp:2156
 #, kde-format
 msgid "Save ZModem Download to..."
-msgstr "Guardar descarga ZModem en..."
+msgstr "Guardar descarga ZModem en…"
 
 #: session/SessionController.cpp:2166
 #, kde-format
@@ -3007,7 +3007,7 @@ msgstr "Crear un perfil nuevo basado en el perfil seleccionado"
 #: settings/ProfileSettings.ui:54
 #, kde-format
 msgid "&New..."
-msgstr "&Nuevo..."
+msgstr "&Nuevo…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:64
@@ -3022,7 +3022,7 @@ msgstr ""
 #: settings/ProfileSettings.ui:67
 #, kde-format
 msgid "&Edit..."
-msgstr "&Editar..."
+msgstr "&Editar…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:77
@@ -3367,64 +3367,64 @@ msgstr "Ctrl"
 msgid "Enable thumbnails generation"
 msgstr "Activar la generación de miniaturas"
 
-#: terminalDisplay/TerminalDisplay.cpp:654
+#: terminalDisplay/TerminalDisplay.cpp:660
 #, kde-format
 msgid "Size: %1 x %2"
 msgstr "Tamaño: %1 x %2"
 
-#: terminalDisplay/TerminalDisplay.cpp:2250
+#: terminalDisplay/TerminalDisplay.cpp:2256
 #, kde-format
 msgid "Are you sure you want to paste %1 character?"
 msgid_plural "Are you sure you want to paste %1 characters?"
 msgstr[0] "¿Seguro que quiere pegar %1 carácter?"
 msgstr[1] "¿Seguro que quiere pegar %1 caracteres?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2251
+#: terminalDisplay/TerminalDisplay.cpp:2257
 #, kde-format
 msgid "Confirm Paste"
 msgstr "Confirmar el pegado"
 
-#: terminalDisplay/TerminalDisplay.cpp:2284
+#: terminalDisplay/TerminalDisplay.cpp:2290
 #, kde-format
 msgid "End Of Text/Interrupt: may exit the current process"
 msgstr "Fin de texto/Interrumpir: puede salir del proceso actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2285
+#: terminalDisplay/TerminalDisplay.cpp:2291
 #, kde-format
 msgid "End Of Transmission: may exit the current process"
 msgstr "Fin de transmisión: puede salir del proceso actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2286
+#: terminalDisplay/TerminalDisplay.cpp:2292
 #, kde-format
 msgid "Bell: will try to emit an audible warning"
 msgstr "Campana: tratará de emitir una advertencia sonora"
 
-#: terminalDisplay/TerminalDisplay.cpp:2287
+#: terminalDisplay/TerminalDisplay.cpp:2293
 #, kde-format
 msgid "Backspace"
 msgstr "Retroceso"
 
-#: terminalDisplay/TerminalDisplay.cpp:2288
+#: terminalDisplay/TerminalDisplay.cpp:2294
 #, kde-format
 msgid "Device Control Three/XOFF: suspends output"
 msgstr "Control de dispositivo 3/XOFF: suspende la salida"
 
-#: terminalDisplay/TerminalDisplay.cpp:2289
+#: terminalDisplay/TerminalDisplay.cpp:2295
 #, kde-format
 msgid "Substitute/Suspend: may suspend current process"
 msgstr "Sustituir/Suspender: puede suspender el proceso actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2290
+#: terminalDisplay/TerminalDisplay.cpp:2296
 #, kde-format
 msgid "Escape: used for manipulating terminal state"
 msgstr "Escape: se usa para manejar el estado del terminal"
 
-#: terminalDisplay/TerminalDisplay.cpp:2291
+#: terminalDisplay/TerminalDisplay.cpp:2297
 #, kde-format
 msgid "File Separator/Quit: may abort the current process"
 msgstr "Separador de archivo/Salir: puede interrumpir el proceso actual"
 
-#: terminalDisplay/TerminalDisplay.cpp:2314
+#: terminalDisplay/TerminalDisplay.cpp:2320
 #, kde-format
 msgid ""
 "The text you're trying to paste contains hidden control characters, do you "
@@ -3433,31 +3433,31 @@ msgstr ""
 "El texto que está intentando pegar contiene caracteres de control ocultos. "
 "¿Desea eliminarlos?"
 
-#: terminalDisplay/TerminalDisplay.cpp:2317
+#: terminalDisplay/TerminalDisplay.cpp:2323
 #, kde-format
 msgctxt "@title"
 msgid "Confirm Paste"
 msgstr "Confirmar pegado"
 
-#: terminalDisplay/TerminalDisplay.cpp:2318
+#: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
 msgstr "Pe&gar sin caracteres de control"
 
-#: terminalDisplay/TerminalDisplay.cpp:2319
+#: terminalDisplay/TerminalDisplay.cpp:2325
 #, kde-format
 msgctxt "@action:button"
 msgid "&Paste everything"
 msgstr "&Pegar todo"
 
-#: terminalDisplay/TerminalDisplay.cpp:2320
+#: terminalDisplay/TerminalDisplay.cpp:2326
 #, kde-format
 msgctxt "@action:button"
 msgid "&Cancel"
 msgstr "&Cancelar"
 
-#: terminalDisplay/TerminalDisplay.cpp:2551
+#: terminalDisplay/TerminalDisplay.cpp:2557
 #, kde-format
 msgid ""
 "<qt>Output has been <a href=\"https://en.wikipedia.org/wiki/"
@@ -3468,17 +3468,17 @@ msgstr ""
 "XOFF\">suspendida</a> pulsando Ctrl+S. Pulse <b>Ctrl+Q</b> para continuar.</"
 "qt>"
 
-#: terminalDisplay/TerminalDisplay.cpp:2606
+#: terminalDisplay/TerminalDisplay.cpp:2612
 #, kde-format
 msgid "This terminal is read-only."
 msgstr "Este terminal es de solo lectura."
 
-#: terminalDisplay/TerminalDisplay.cpp:3001
+#: terminalDisplay/TerminalDisplay.cpp:3007
 #, kde-format
 msgid "Change &Directory To"
 msgstr "Cambiar &directorio a"
 
-#: terminalDisplay/TerminalDisplay.cpp:3036
+#: terminalDisplay/TerminalDisplay.cpp:3042
 #, kde-format
 msgid "&Paste Location"
 msgstr "&Pegar posición"
@@ -3896,7 +3896,7 @@ msgstr "Crear un esquema de color nuevo basado en el esquema seleccionado"
 #, kde-format
 msgctxt "@action:button Create an alternate color scheme"
 msgid "New..."
-msgstr "Nueva..."
+msgstr "Nueva…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:79
@@ -3913,7 +3913,7 @@ msgstr "Editar el esquema de color seleccionado"
 #: widgets/EditProfileMousePage.ui:320
 #, kde-format
 msgid "Edit..."
-msgstr "Editar..."
+msgstr "Editar…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, removeColorSchemeButton)
 #: widgets/EditProfileAppearancePage.ui:89
@@ -3948,7 +3948,7 @@ msgstr "Tipo de letra:"
 #, kde-format
 msgctxt "@action:button open a dialog with list of fonts"
 msgid "Choose..."
-msgstr "Escoger..."
+msgstr "Escoger…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, antialiasTextButton)
 #: widgets/EditProfileAppearancePage.ui:174
@@ -4535,7 +4535,7 @@ msgstr "Seleccionar directorio inicial"
 #: widgets/EditProfileDialog.cpp:949
 #, kde-format
 msgid "Get New..."
-msgstr "Obtener novedades..."
+msgstr "Obtener novedades…"
 
 #: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
@@ -4837,7 +4837,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button Create an alternate key binding"
 msgid "New..."
-msgstr "Nueva..."
+msgstr "Nueva…"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editKeyBindingsButton)
 #: widgets/EditProfileKeyboardPage.ui:70
@@ -5225,10 +5225,9 @@ msgstr "Color de los marcadores de la barra de desplazamiento:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
-#, fuzzy, kde-format
-#| msgid "Color of scrollbar markers:"
+#, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr "Color de los marcadores de la barra de desplazamiento:"
+msgstr "Color de las líneas resaltadas de la barra de desplazamiento:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:181
@@ -5292,7 +5291,7 @@ msgstr "Posición de la barra de desplazamiento:"
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "Opacidad de líneas resaltadas de búsqueda:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5402,7 +5401,7 @@ msgstr "&Ninguna"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #: widgets/IncrementalSearchBar.cpp:52
 #, kde-format
@@ -5678,7 +5677,7 @@ msgstr "&Desprender pestaña"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Configure or Rename Tab..."
-msgstr "&Configurar o cambiar el nombre de la pestaña..."
+msgstr "&Configurar o cambiar el nombre de la pestaña…"
 
 #: widgets/ViewContainer.cpp:113
 #, kde-format
