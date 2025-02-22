@@ -54,6 +54,7 @@ ViewSplitter::ViewSplitter(QWidget *parent)
     , _id(++lastSplitterId)
 {
     setAcceptDrops(true);
+    setHandleWidth(calculateHandleWidth(KonsoleSettings::self()->splitDragHandleSize()));
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, [this] {
         setHandleWidth(calculateHandleWidth(KonsoleSettings::self()->splitDragHandleSize()));
     });
