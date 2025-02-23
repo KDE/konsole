@@ -5076,7 +5076,7 @@ msgstr "滚动条标记的颜色："
 #: widgets/EditProfileScrollingPage.ui:168
 #, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr ""
+msgstr "查找时滚动条高亮显示行的颜色："
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:181
@@ -5138,7 +5138,7 @@ msgstr "滚动条位置："
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "查找高亮行不透明度："
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
