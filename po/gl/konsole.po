@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-22 00:44+0000\n"
-"PO-Revision-Date: 2025-02-14 08:16+0100\n"
-"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"PO-Revision-Date: 2025-02-24 07:21+0100\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
@@ -5240,10 +5240,9 @@ msgstr "Cor dos marcadores das barras de desprazamento:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
-#, fuzzy, kde-format
-#| msgid "Color of scrollbar markers:"
+#, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr "Cor dos marcadores das barras de desprazamento:"
+msgstr "Cor das liñas de realce de busca das barras de desprazamento:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:181
@@ -5305,7 +5304,7 @@ msgstr "Posición da barra de desprazamento:"
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "Opacidade das liñas de realce de busca:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
