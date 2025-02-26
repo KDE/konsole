@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-22 00:44+0000\n"
-"PO-Revision-Date: 2025-02-01 10:28+0100\n"
+"PO-Revision-Date: 2025-02-21 10:10+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -5232,10 +5232,10 @@ msgstr "Color dels marcadors de les barres de desplaçament:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
-#, fuzzy, kde-format
-#| msgid "Color of scrollbar markers:"
+#, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr "Color dels marcadors de les barres de desplaçament:"
+msgstr ""
+"Color de les línies ressaltades de busca de les barres de desplaçament:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:181
@@ -5300,7 +5300,7 @@ msgstr "Posició de la barra de desplaçament:"
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "Opacitat de les línies ressaltades de busca:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
