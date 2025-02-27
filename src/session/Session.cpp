@@ -236,32 +236,19 @@ bool Session::hasFocus() const
     });
 }
 
-void Session::setCodec(QTextCodec *codec)
+bool Session::setCodec(QAnyStringView name)
 {
-    if (isReadOnly()) {
-        return;
-    }
-
-    emulation()->setCodec(codec);
-
-    Q_EMIT sessionCodecChanged(codec);
-}
-
-bool Session::setCodec(const QByteArray &name)
-{
-    QTextCodec *codec = QTextCodec::codecForName(name);
-
-    if (codec != nullptr) {
-        setCodec(codec);
-        return true;
-    } else {
+    if (isReadOnly() || !emulation()->setCodec(name)) {
         return false;
     }
+
+    Q_EMIT sessionCodecChanged(codec());
+    return true;
 }
 
 QByteArray Session::codec()
 {
-    return _emulation->codec()->name();
+    return _emulation->encoder().name();
 }
 
 void Session::setProgram(const QString &program)

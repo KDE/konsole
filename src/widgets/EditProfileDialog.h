@@ -225,7 +225,7 @@ private Q_SLOTS:
     void toggleReverseUrlHints(bool);
     void setAutoSaveInterval(int);
 
-    void setDefaultCodec(QTextCodec *);
+    void setDefaultCodec(const QByteArray &codec);
 
     void setTextEditorCombo(const Profile::Ptr &profile);
 

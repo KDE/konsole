@@ -22,7 +22,6 @@
 #include <QStandardItem>
 #include <QStandardPaths>
 #include <QStringListModel>
-#include <QTextCodec>
 #include <QTimer>
 #include <QUrl>
 
@@ -2014,11 +2013,11 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
     _advancedUi->selectEncodingButton->setMenu(codecAction->menu());
 
     connect(codecAction, &KCodecAction::codecNameTriggered, this, [this](const QByteArray &codecName) {
-        setDefaultCodec(QTextCodec::codecForName(codecName));
+        setDefaultCodec(codecName);
     });
 
     connect(codecAction, &KCodecAction::defaultItemTriggered, this, [this] {
-        setDefaultCodec(QTextCodec::codecForLocale());
+        setDefaultCodec(QStringConverter::nameForEncoding(QStringConverter::System));
     });
 
     _advancedUi->selectEncodingButton->setText(profile->defaultEncoding());
@@ -2069,9 +2068,9 @@ int EditProfileDialog::maxSpinBoxWidth(const KPluralHandlingSpinBox *spinBox, co
     return spinBoxSize.width();
 }
 
-void EditProfileDialog::setDefaultCodec(QTextCodec *codec)
+void EditProfileDialog::setDefaultCodec(const QByteArray &codec)
 {
-    QString name = QString::fromLocal8Bit(codec->name());
+    QString name = QString::fromLocal8Bit(codec);
 
     updateTempProfileProperty(Profile::DefaultEncoding, name);
     _advancedUi->selectEncodingButton->setText(name);

@@ -10,7 +10,8 @@
 
 // Qt
 #include <QSize>
-#include <QTextCodec>
+#include <QStringDecoder>
+#include <QStringEncoder>
 #include <QTimer>
 
 // Konsole
@@ -135,14 +136,20 @@ public:
      */
     virtual void writeToStream(TerminalCharacterDecoder *decoder, int startLine, int endLine);
 
-    /** Returns the codec used to decode incoming characters.  See setCodec() */
-    const QTextCodec *codec() const
+    /** Returns the decoder used to decode incoming characters.  See setCodec() */
+    const QStringDecoder &decoder() const
     {
-        return _codec;
+        return _decoder;
+    }
+
+    /** Returns the encoder used to encode characters send to the terminal.  See setCodec() */
+    const QStringEncoder &encoder() const
+    {
+        return _encoder;
     }
 
     /** Sets the codec used to decode incoming characters.  */
-    void setCodec(const QTextCodec *);
+    bool setCodec(QAnyStringView name);
 
     /**
      * Convenience method.
@@ -151,8 +158,8 @@ public:
      */
     bool utf8() const
     {
-        Q_ASSERT(_codec);
-        return _codec->mibEnum() == 106;
+        Q_ASSERT(_decoder.isValid());
+        return QStringConverter::encodingForName(_decoder.name()) == QStringConverter::Utf8;
     }
 
     /** Returns the special character used for erasing character. */
@@ -453,9 +460,12 @@ protected:
     //                      scrollbars are not enabled in this mode )
 
     // decodes an incoming C-style character stream into a unicode QString using
-    // the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
-    const QTextCodec *_codec = nullptr;
-    std::unique_ptr<QTextDecoder> _decoder;
+    QStringDecoder _decoder;
+
+    // the current text encoder to send unicode to the terminal
+    // (this allows for rendering of non-ASCII characters in text files etc.)
+    QStringEncoder _encoder;
+
     const KeyboardTranslator *_keyTranslator = nullptr; // the keyboard layout
 
 protected Q_SLOTS:

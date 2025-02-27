@@ -393,9 +393,6 @@ public:
         ProfileChange = 50, // this clashes with Xterm's font change command
     };
 
-    // Sets the text codec used by this sessions terminal emulation.
-    void setCodec(QTextCodec *codec);
-
     // session management
     void saveSession(KConfigGroup &group);
     void restoreSession(KConfigGroup &group);
@@ -594,7 +591,7 @@ public Q_SLOTS:
      * Overloaded to accept a QByteArray for convenience since DBus
      * does not accept QTextCodec directly.
      */
-    Q_SCRIPTABLE bool setCodec(const QByteArray &name);
+    Q_SCRIPTABLE bool setCodec(QAnyStringView name);
 
     /** Returns the codec used to decode incoming characters in this
      * terminal emulation
@@ -755,7 +752,7 @@ Q_SIGNALS:
     /**
      * Emitted when the session text encoding changes.
      */
-    void sessionCodecChanged(QTextCodec *codec);
+    void sessionCodecChanged(const QByteArray &codec);
 
     /** Emitted when a bell event occurs in the session. */
     void bellRequest(const QString &message);

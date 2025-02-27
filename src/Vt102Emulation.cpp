@@ -112,7 +112,7 @@ void Vt102Emulation::reset(bool softReset, bool preservePrompt)
 
     // Save the current codec so we can set it later.
     // Ideally we would want to use the profile setting
-    const QTextCodec *currentCodec = codec();
+    const QByteArray currentCodec(encoder().name());
 
     resetTokenizer();
     if (softReset) {
@@ -2802,8 +2802,8 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
             } else if (!entry.text().isEmpty()) {
                 textToSend += entry.text(true, modifiers);
             } else {
-                Q_ASSERT(_codec);
-                textToSend += _codec->fromUnicode(event->text());
+                Q_ASSERT(_encoder.isValid());
+                textToSend += _encoder.encode(event->text());
             }
         }
 

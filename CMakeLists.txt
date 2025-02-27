@@ -46,7 +46,6 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Multimedia
     PrintSupport
     Widgets
-    Core5Compat
 )
 
 find_package(KF6 ${KF6_DEP_VERSION} REQUIRED

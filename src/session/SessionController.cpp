@@ -814,14 +814,12 @@ void SessionController::setupCommonActions()
     connect(session(), &Konsole::Session::sessionCodecChanged, this, &Konsole::SessionController::updateCodecAction);
 
     connect(_codecAction, &KCodecAction::codecNameTriggered, this, [this](const QByteArray &codecName) {
-        changeCodec(QTextCodec::codecForName(codecName));
+        changeCodec(codecName);
     });
 
     connect(_codecAction, &KCodecAction::defaultItemTriggered, this, [this] {
         Profile::Ptr profile = SessionManager::instance()->sessionProfile(session());
-        QByteArray name = profile->defaultEncoding().toUtf8();
-
-        changeCodec(QTextCodec::codecForName(name));
+        changeCodec(profile->defaultEncoding().toUtf8());
     });
 
     // Mouse tracking enabled
@@ -1012,12 +1010,12 @@ void SessionController::prepareSwitchProfileMenu()
     _switchProfileMenu->menu()->clear();
     _switchProfileMenu->menu()->addActions(_profileList->actions());
 }
-void SessionController::updateCodecAction(QTextCodec *codec)
+void SessionController::updateCodecAction(const QByteArray &codec)
 {
-    _codecAction->setCurrentCodec(QString::fromUtf8(codec->name()));
+    _codecAction->setCurrentCodec(QString::fromUtf8(codec));
 }
 
-void SessionController::changeCodec(QTextCodec *codec)
+void SessionController::changeCodec(const QByteArray &codec)
 {
     session()->setCodec(codec);
 }
@@ -1861,7 +1859,7 @@ void SessionController::clearHistoryAndReset()
     Emulation *emulation = session()->emulation();
     emulation->reset(false, true);
     session()->refresh();
-    session()->setCodec(QTextCodec::codecForName(name));
+    session()->setCodec(name);
     clearHistory();
 }
 

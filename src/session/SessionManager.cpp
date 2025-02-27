@@ -11,7 +11,6 @@
 
 // Qt
 #include <QStringList>
-#include <QTextCodec>
 
 // KDE
 #include <KConfig>
@@ -266,8 +265,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
 
     // Encoding
     if (apply.shouldApply(Profile::DefaultEncoding)) {
-        QByteArray name = profile->defaultEncoding().toUtf8();
-        session->setCodec(QTextCodec::codecForName(name));
+        session->setCodec(profile->defaultEncoding());
     }
 
     // Monitor Silence

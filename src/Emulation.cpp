@@ -148,29 +148,38 @@ const HistoryType &Emulation::history() const
     return _screen[0]->getScroll();
 }
 
-void Emulation::setCodec(const QTextCodec *codec)
+bool Emulation::setCodec(QAnyStringView name)
 {
-    if (codec != nullptr) {
-        _codec = codec;
-
-        _decoder.reset(_codec->makeDecoder());
-
-        Q_EMIT useUtf8Request(utf8());
-    } else {
-#if defined(Q_OS_WIN)
-        setCodec(Utf8Codec);
-#else
-        setCodec(LocaleCodec);
-#endif
+    // if we requested a specific codec, only try that one
+    if (!name.isEmpty()) {
+        QStringDecoder decoder(name);
+        QStringEncoder encoder(name);
+        if (decoder.isValid() && encoder.isValid()) {
+            _decoder = std::move(decoder);
+            _encoder = std::move(encoder);
+            Q_EMIT useUtf8Request(utf8());
+            return true;
+        }
+        return false;
     }
+
+    // try with a fallback if no name given
+#if defined(Q_OS_WIN)
+    setCodec(Utf8Codec);
+#else
+    setCodec(LocaleCodec);
+#endif
+
+    // fallback always works
+    return true;
 }
 
 void Emulation::setCodec(EmulationCodec codec)
 {
     if (codec == Utf8Codec) {
-        setCodec(QTextCodec::codecForName("utf8"));
+        setCodec(QStringConverter::nameForEncoding(QStringConverter::Utf8));
     } else if (codec == LocaleCodec) {
-        setCodec(QTextCodec::codecForLocale());
+        setCodec(QStringConverter::nameForEncoding(QStringConverter::System));
     }
 }
 
@@ -228,12 +237,13 @@ void Emulation::sendKeyEvent(QKeyEvent *ev)
 
 void Emulation::receiveData(const char *text, int length)
 {
-    Q_ASSERT(_decoder);
+    Q_ASSERT(_decoder.isValid());
 
     bufferedUpdate();
 
     // send characters to terminal emulator
-    const QVector<uint> chars = _decoder->toUnicode(text, length).toUcs4();
+    const QString readString = _decoder.decode(QByteArrayView(text, length));
+    const QVector<uint> chars = readString.toUcs4();
     receiveChars(chars);
 
     // look for z-modem indicator

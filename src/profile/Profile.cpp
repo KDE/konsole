@@ -13,7 +13,7 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
-#include <QTextCodec>
+#include <QStringConverter>
 
 // KDE
 #include <KLocalizedString>
@@ -274,9 +274,9 @@ void Profile::useBuiltin()
     setProperty(Arguments, QStringList{defaultShell()});
     setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
 #if defined(Q_OS_WIN)
-    setProperty(DefaultEncoding, QLatin1String(QTextCodec::codecForName("utf8")->name()));
+    setProperty(DefaultEncoding, QString::fromUtf8(QStringConverter::nameForEncoding(QStringConverter::Utf8)));
 #else
-    setProperty(DefaultEncoding, QLatin1String(QTextCodec::codecForLocale()->name()));
+    setProperty(DefaultEncoding, QString::fromUtf8(QStringConverter::nameForEncoding(QStringConverter::System)));
 #endif
     // Built-in profile should not be shown in menus
     setHidden(true);

@@ -269,7 +269,7 @@ private Q_SLOTS:
     void editCurrentProfile();
     void nextProfile();
     void prevProfile();
-    void changeCodec(QTextCodec *codec);
+    void changeCodec(const QByteArray &codec);
     void enableSearchBar(bool showSearchBar);
     void searchHistory(bool showSearchBar);
     void searchBarEvent();
@@ -305,7 +305,7 @@ private Q_SLOTS:
     // other
     void setupSearchBar();
     void prepareSwitchProfileMenu();
-    void updateCodecAction(QTextCodec *codec);
+    void updateCodecAction(const QByteArray &codec);
     void showDisplayContextMenu(const QPoint &position);
     void movementKeyFromSearchBarReceived(QKeyEvent *event);
     void sessionNotificationsChanged(Session::Notification notification, bool enabled);
