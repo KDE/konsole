@@ -98,7 +98,7 @@ bool ShellCommand::expandEnv(QString &text)
     const QLatin1Char dollarChar('$');
     const QLatin1Char backslashChar('\\');
 
-    int dollarPos = 0;
+    qsizetype dollarPos = 0;
     bool expanded = false;
 
     // find and expand all environment variables beginning with '$'
@@ -120,13 +120,13 @@ bool ShellCommand::expandEnv(QString &text)
             continue;
         }
 
-        int endPos = dollarPos + 1;
+        qsizetype endPos = dollarPos + 1;
         Q_ASSERT(endPos < text.length());
         while (endPos < text.length() && isValidEnvCharacter(text.at(endPos))) {
             endPos++;
         }
 
-        const int len = endPos - dollarPos;
+        const qsizetype len = endPos - dollarPos;
         const QString key = text.mid(dollarPos + 1, len - 1);
         const QString value = QString::fromLocal8Bit(qgetenv(key.toLocal8Bit().constData()));
 
