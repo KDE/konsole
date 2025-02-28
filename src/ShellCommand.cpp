@@ -37,10 +37,10 @@ QString ShellCommand::fullCommand() const
             }
         }
         if (hasSpace) {
-            quotedArgs[i] = QLatin1Char('\"') + arg + QLatin1Char('\"');
+            quotedArgs[i] = QStringLiteral(u"\"") + arg + QStringLiteral(u"\"");
         }
     }
-    return quotedArgs.join(QLatin1Char(' '));
+    return quotedArgs.join(QStringLiteral(u" "));
 }
 
 QString ShellCommand::command() const
