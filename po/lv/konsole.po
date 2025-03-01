@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-22 00:44+0000\n"
+"POT-Creation-Date: 2025-03-01 00:54+0000\n"
 "PO-Revision-Date: 2025-02-19 16:50+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -1886,7 +1886,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "Iebūvēts"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
 #, kde-format
 msgid "Default profile"
 msgstr "Noklusētais profils"
@@ -2090,23 +2090,23 @@ msgstr "Ierakstiet meklējamās cilnes nosaukumu"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Zvans „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:417
+#: session/Session.cpp:404
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Neizdevās atrast izpildāmu datni: "
 
-#: session/Session.cpp:426
+#: session/Session.cpp:413
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Brīdinājums: "
 
-#: session/Session.cpp:521
+#: session/Session.cpp:508
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Neizdevās atrast interaktīvu čaulu, ko palaist."
 
-#: session/Session.cpp:527 session/Session.cpp:529
+#: session/Session.cpp:514 session/Session.cpp:516
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2114,25 +2114,25 @@ msgid ""
 msgstr ""
 "Neizdevās atrast „%1“, tā vietā palaiž „%2“. Pārbaudiet profila iestatījumus."
 
-#: session/Session.cpp:593
+#: session/Session.cpp:580
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Neizdevās palaist programmu „%1“ ar parametriem „%2“."
 
-#: session/Session.cpp:750
+#: session/Session.cpp:737
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Klusums „%1“ (sesija „%2“)"
 
-#: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:362 session/SessionController.cpp:1891
+#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/SessionController.cpp:362 session/SessionController.cpp:1889
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, kde-format
 msgid "Show session"
 msgstr "Parādīt sesiju"
 
-#: session/Session.cpp:1035
+#: session/Session.cpp:1022
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2145,28 +2145,28 @@ msgstr ""
 "tikai iekšējai lietošanai, pārkompilējot „Konsole“.<p>Šis brīdinājums šajā "
 "„Konsole“ instancē būs redzams tikai vienu reizi.</p>"
 
-#: session/Session.cpp:1075
+#: session/Session.cpp:1062
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Pabeigts"
 
-#: session/Session.cpp:1089 session/Session.cpp:1105
+#: session/Session.cpp:1076 session/Session.cpp:1092
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programma „%1“ avarēja."
 
-#: session/Session.cpp:1091
+#: session/Session.cpp:1078
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programma „%1“ beidza darbu ar statusu „%2“."
 
-#: session/Session.cpp:1617
+#: session/Session.cpp:1604
 #, kde-format
 msgid "ZModem Progress"
 msgstr "„ZModem“ progress"
 
-#: session/Session.cpp:2088
+#: session/Session.cpp:2075
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivitāte „%1“ (sesija „%2“)"
@@ -2316,170 +2316,170 @@ msgstr "Pārslēgt profilu"
 msgid "Set &Encoding"
 msgstr "I&estatīt kodējumu"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Atļaut peles izsekošanu"
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:839
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Tikai lasāma"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:850
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&Konfigurēt vai pārsaukt cilni..."
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:856
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&Visas cilnes pašreizējā logā"
 
-#: session/SessionController.cpp:865
+#: session/SessionController.cpp:863
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&Atlasīt cilnes..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Nevienu"
 
-#: session/SessionController.cpp:879
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Copy Input To"
 msgstr "Kopēt ievadi uz"
 
-#: session/SessionController.cpp:887
+#: session/SessionController.cpp:885
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "„&ZModem“ augšupielāde..."
 
-#: session/SessionController.cpp:892
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "Vienreizlietojami pārraugi"
 
-#: session/SessionController.cpp:897
+#: session/SessionController.cpp:895
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "&Uzvednes pārraugs"
 
-#: session/SessionController.cpp:904
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "&Aktivitātes pārraugs"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&Klusuma pārraugs"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "Procesa pabeigšanas pārraugs"
 
-#: session/SessionController.cpp:923
+#: session/SessionController.cpp:921
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Palielināt fontu"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:929
 #, kde-format
 msgid "Shrink Font"
 msgstr "Samazināt fontu"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:934
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Atiestatīt fonta izmēru"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "Send Signal"
 msgstr "Nosūtīt signālu"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Aizturēt uzdevumu"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:949
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Turpināt uzdevumu"
 
-#: session/SessionController.cpp:956
+#: session/SessionController.cpp:954
 #, kde-format
 msgid "&Hangup"
 msgstr "&Nolikt"
 
-#: session/SessionController.cpp:961
+#: session/SessionController.cpp:959
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Pārtraukt uzdevumu"
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&Izbeigt uzdevumu"
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:969
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Nobeigt uzdevumu"
 
-#: session/SessionController.cpp:976
+#: session/SessionController.cpp:974
 #, kde-format
 msgid "User Signal &1"
 msgstr "Lietotāja signāls &1"
 
-#: session/SessionController.cpp:981
+#: session/SessionController.cpp:979
 #, kde-format
 msgid "User Signal &2"
 msgstr "Lietotāja signāls &2"
 
-#: session/SessionController.cpp:999
+#: session/SessionController.cpp:997
 #, kde-format
 msgid "Create New Profile..."
 msgstr "Izveidot jaunu profilu..."
 
-#: session/SessionController.cpp:1001
+#: session/SessionController.cpp:999
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Rediģēt pašreizējo profilu..."
 
-#: session/SessionController.cpp:1132
+#: session/SessionController.cpp:1130
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "Šajā sesijā darbojas programma. Vai tiešām vēlaties to aizvērt?"
 
-#: session/SessionController.cpp:1136
+#: session/SessionController.cpp:1134
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "Šajā sesijā darbojas programma „%1“. Vai tiešām vēlaties to aizvērt?"
 
-#: session/SessionController.cpp:1143 session/SessionController.cpp:1178
+#: session/SessionController.cpp:1141 session/SessionController.cpp:1176
 #, kde-format
 msgid "Confirm Close"
 msgstr "Apstiprināt aizvēršanu"
 
-#: session/SessionController.cpp:1144
+#: session/SessionController.cpp:1142
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Aizvērt programmu"
 
-#: session/SessionController.cpp:1167
+#: session/SessionController.cpp:1165
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2488,7 +2488,7 @@ msgstr ""
 "Programma šajā sesijā neaizveras. Vai tiešām vēlaties to nobeigt piespiedu "
 "kārtā?"
 
-#: session/SessionController.cpp:1171
+#: session/SessionController.cpp:1169
 #, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
@@ -2497,28 +2497,28 @@ msgstr ""
 "Programma „%1“ šajā sesijā neaizveras. Vai tiešām vēlaties to nobeigt "
 "piespiedu kārtā?"
 
-#: session/SessionController.cpp:1179
+#: session/SessionController.cpp:1177
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "Nobeigt programmu"
 
-#: session/SessionController.cpp:1890
+#: session/SessionController.cpp:1888
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "Čaulas uzvedne ir parādīta sesijā „%1“"
 
-#: session/SessionController.cpp:2083
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Atvērt pašreizējo mapi ar"
 
-#: session/SessionController.cpp:2156
+#: session/SessionController.cpp:2154
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "Saglabāt „ZModem“ lejupielādi..."
 
-#: session/SessionController.cpp:2166
+#: session/SessionController.cpp:2164
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2529,13 +2529,13 @@ msgstr ""
 "atrasta derīga „ZModem“ programmatūra.</p><p>Iespējams, ir jāinstalē „rzsz“ "
 "vai „lrzsz“ pakotne.</p>"
 
-#: session/SessionController.cpp:2176
+#: session/SessionController.cpp:2174
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Aktīvajā sesijā jau notiek „ZModem“ datņu pārsūtīšana.</p>"
 
-#: session/SessionController.cpp:2189
+#: session/SessionController.cpp:2187
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2544,7 +2544,7 @@ msgstr ""
 "<p>Šajā datorā nav atrasta piemērota „ZModem“ programmatūra.</"
 "p><p>Iespējams, jāinstalē „rzsz“ vai „lrzsz“ pakotne.</p>"
 
-#: session/SessionController.cpp:2194
+#: session/SessionController.cpp:2192
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Izvēlieties datnes, ko augšupielādēt ar „ZModem“"
@@ -4312,54 +4312,54 @@ msgstr "Ignorēt problemātisko rakstzīmju „wcwidth“"
 msgid "Override wcwidth"
 msgstr "Pārrakstīt „wcwidth“"
 
-#: widgets/EditProfileDialog.cpp:69
+#: widgets/EditProfileDialog.cpp:68
 #, kde-format
 msgid "Edit Profile"
 msgstr "Rediģēt profilu"
 
-#: widgets/EditProfileDialog.cpp:96
+#: widgets/EditProfileDialog.cpp:95
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Pamata"
 
-#: widgets/EditProfileDialog.cpp:107
+#: widgets/EditProfileDialog.cpp:106
 #, kde-format
 msgid "Tabs"
 msgstr "Cilnes"
 
-#: widgets/EditProfileDialog.cpp:124
+#: widgets/EditProfileDialog.cpp:123
 #, kde-format
 msgid "Appearance"
 msgstr "Izskats"
 
-#: widgets/EditProfileDialog.cpp:140
+#: widgets/EditProfileDialog.cpp:139
 #, kde-format
 msgid "Scrolling"
 msgstr "Ritināšana"
 
-#: widgets/EditProfileDialog.cpp:154
+#: widgets/EditProfileDialog.cpp:153
 #, kde-format
 msgid "Keyboard"
 msgstr "Tastatūra"
 
-#: widgets/EditProfileDialog.cpp:155
+#: widgets/EditProfileDialog.cpp:154
 #, kde-format
 msgid "Key bindings"
 msgstr "Taustiņu saīsnes"
 
-#: widgets/EditProfileDialog.cpp:166
+#: widgets/EditProfileDialog.cpp:165
 #, kde-format
 msgid "Mouse"
 msgstr "Pele"
 
-#: widgets/EditProfileDialog.cpp:182
+#: widgets/EditProfileDialog.cpp:181
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Paplašināti"
 
-#: widgets/EditProfileDialog.cpp:290
+#: widgets/EditProfileDialog.cpp:289
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4371,31 +4371,31 @@ msgstr ""
 ">Vai nu mainiet datnes atļaujas, vai arī izvēlieties atšķirīgu nosaukumu "
 "iestatījumu saglabāšanai jaunā profilā."
 
-#: widgets/EditProfileDialog.cpp:307
+#: widgets/EditProfileDialog.cpp:306
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "Profila nosaukums ir tukšs. Pirms saglabāšanas ierakstiet nosaukumu."
 
-#: widgets/EditProfileDialog.cpp:315
+#: widgets/EditProfileDialog.cpp:314
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "Profils ar nosaukumu „%1“ jau eksistē."
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:344
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "Profila nosaukums ir sasniedzis maksimālo atļauto garumu (%1)."
 
-#: widgets/EditProfileDialog.cpp:383
+#: widgets/EditProfileDialog.cpp:382
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "Izceltās rakstzīmes ir nederīgas profila nosaukumos: %1."
 
-#: widgets/EditProfileDialog.cpp:419
+#: widgets/EditProfileDialog.cpp:418
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
@@ -4403,17 +4403,17 @@ msgstr[0] "Rediģē %1 profilu: %2"
 msgstr[1] "Rediģē %1 profilus: %2"
 msgstr[2] "Rediģē %1 profilu: %2"
 
-#: widgets/EditProfileDialog.cpp:423
+#: widgets/EditProfileDialog.cpp:422
 #, kde-format
 msgid "Create New Profile"
 msgstr "Izveidot jaunu profilu"
 
-#: widgets/EditProfileDialog.cpp:426
+#: widgets/EditProfileDialog.cpp:425
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Rediģēt profilu „%1“"
 
-#: widgets/EditProfileDialog.cpp:517
+#: widgets/EditProfileDialog.cpp:516
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4424,7 +4424,7 @@ msgstr[0] " kolonna"
 msgstr[1] " kolonnas"
 msgstr[2] " kolonnu"
 
-#: widgets/EditProfileDialog.cpp:519
+#: widgets/EditProfileDialog.cpp:518
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4435,42 +4435,42 @@ msgstr[0] " rinda"
 msgstr[1] " rindas"
 msgstr[2] " rindu"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "System Bell"
 msgstr "Sistēmas zvans"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "System Notifications"
 msgstr "Sistēmas paziņojumi"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "Visual Bell"
 msgstr "Vizuāls zvans"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "Ignorēt zvana notikumus"
 
-#: widgets/EditProfileDialog.cpp:538
+#: widgets/EditProfileDialog.cpp:537
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Noklusējuma profils jaunām %1 termināļa sesijām"
 
-#: widgets/EditProfileDialog.cpp:643
+#: widgets/EditProfileDialog.cpp:642
 #, kde-format
 msgid "Edit Environment"
 msgstr "Rediģēt vidi"
 
-#: widgets/EditProfileDialog.cpp:644
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "One environment variable per line"
 msgstr "Viens vides mainīgais katrā rindā"
 
-#: widgets/EditProfileDialog.cpp:675
+#: widgets/EditProfileDialog.cpp:674
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4479,30 +4479,30 @@ msgstr[0] " sekunde"
 msgstr[1] " sekundes"
 msgstr[2] " sekunžu"
 
-#: widgets/EditProfileDialog.cpp:789
+#: widgets/EditProfileDialog.cpp:788
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Atlasīt sākotnējo mapi"
 
-#: widgets/EditProfileDialog.cpp:949
+#: widgets/EditProfileDialog.cpp:948
 #, kde-format
 msgid "Get New..."
 msgstr "Iegūt jaunus..."
 
-#: widgets/EditProfileDialog.cpp:1345
+#: widgets/EditProfileDialog.cpp:1344
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Neizdevās shēmas <resource>%1</resource> ielāde."
 
-#: widgets/EditProfileDialog.cpp:1524
+#: widgets/EditProfileDialog.cpp:1523
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "Šai krāsu shēmai ir caurspīdīgs fons, ko neatbalsta jūsu darbvirsma"
 
-#: widgets/EditProfileDialog.cpp:1530
+#: widgets/EditProfileDialog.cpp:1529
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4511,12 +4511,12 @@ msgstr ""
 "„Konsole“ tika palaista pirms tika ieslēgti darbvirsmas efekti. Jums "
 "jāpārstartē „Konsole“, lai redzētu caurspīdīgo fonu."
 
-#: widgets/EditProfileDialog.cpp:1931
+#: widgets/EditProfileDialog.cpp:1930
 #, kde-format
 msgid "Default for file type"
 msgstr "Noklusējums datņu tipam"
 
-#: widgets/EditProfileDialog.cpp:1957
+#: widgets/EditProfileDialog.cpp:1956
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4545,7 +4545,7 @@ msgstr ""
 "tiek ignorēts un datne tiek atvērta ar noklusējuma teksta\n"
 "redaktoru."
 
-#: widgets/EditProfileDialog.cpp:1970
+#: widgets/EditProfileDialog.cpp:1969
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Pielāgota teksta redaktora komanda"

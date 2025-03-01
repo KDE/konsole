@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-22 00:44+0000\n"
+"POT-Creation-Date: 2025-03-01 00:54+0000\n"
 "PO-Revision-Date: 2019-09-29 12:43+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -2052,7 +2052,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr ""
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
 #, fuzzy, kde-format
 #| msgid "Delete Profile"
 msgid "Default profile"
@@ -2263,24 +2263,24 @@ msgstr "Введите текст, который ищите"
 msgid "Bell in '%1' (Session '%2')"
 msgstr "Зангӯла дар сессия '%1'"
 
-#: session/Session.cpp:417
+#: session/Session.cpp:404
 #, kde-format
 msgid "Could not find binary: "
 msgstr "Невозможно найти исполняемый файл:"
 
-#: session/Session.cpp:426
+#: session/Session.cpp:413
 #, fuzzy, kde-format
 #| msgid "Warning: "
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "Огоҳинома:"
 
-#: session/Session.cpp:521
+#: session/Session.cpp:508
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "Невозможно найти интерактивную оболочку."
 
-#: session/Session.cpp:527 session/Session.cpp:529
+#: session/Session.cpp:514 session/Session.cpp:516
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2289,19 +2289,19 @@ msgstr ""
 "Невозможно найти «%1», вместо этого будет запущена программа «%2». Проверьте "
 "параметры вашего профиля."
 
-#: session/Session.cpp:593
+#: session/Session.cpp:580
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Невозможно запустить программу «%1» с параметрами «%2»."
 
-#: session/Session.cpp:750
+#: session/Session.cpp:737
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Хомӯшӣ дар сессия '%1'"
 
-#: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:362 session/SessionController.cpp:1891
+#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/SessionController.cpp:362 session/SessionController.cpp:1889
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, fuzzy, kde-format
@@ -2309,7 +2309,7 @@ msgstr "Хомӯшӣ дар сессия '%1'"
 msgid "Show session"
 msgstr "Сессияи Нав"
 
-#: session/Session.cpp:1035
+#: session/Session.cpp:1022
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2318,29 +2318,29 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1075
+#: session/Session.cpp:1062
 #, fuzzy, kde-format
 #| msgid "Finished"
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Поёншуда"
 
-#: session/Session.cpp:1089 session/Session.cpp:1105
+#: session/Session.cpp:1076 session/Session.cpp:1092
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Сбой программы «%1»."
 
-#: session/Session.cpp:1091
+#: session/Session.cpp:1078
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Программа «%1» завершилась с кодом %2."
 
-#: session/Session.cpp:1617
+#: session/Session.cpp:1604
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZМодем тараққӣ"
 
-#: session/Session.cpp:2088
+#: session/Session.cpp:2075
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -2511,181 +2511,181 @@ msgstr "Таҳрири профил"
 msgid "Set &Encoding"
 msgstr "Рамзгузорӣ"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr ""
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:839
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr ""
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:850
 #, fuzzy, kde-format
 #| msgid "&Rename Tab..."
 msgid "&Configure or Rename Tab..."
 msgstr "&Ивази номи ҷадвалбандӣ"
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:856
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "Во &все вкладки данного окна"
 
-#: session/SessionController.cpp:865
+#: session/SessionController.cpp:863
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "В &некоторые вкладки..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, fuzzy, kde-format
 #| msgid "&None"
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&Ничего"
 
-#: session/SessionController.cpp:879
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Copy Input To"
 msgstr "Направлять ввод также"
 
-#: session/SessionController.cpp:887
+#: session/SessionController.cpp:885
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZМодем пурборкардан"
 
-#: session/SessionController.cpp:892
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr ""
 
-#: session/SessionController.cpp:897
+#: session/SessionController.cpp:895
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for &Prompt"
 msgstr "Тамошо барои &Фаъол кардан"
 
-#: session/SessionController.cpp:904
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "Тамошо барои &Фаъол кардан"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "Нишон барои &Хомӯшӣ"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:914
 #, fuzzy, kde-format
 #| msgid "Monitor for &Activity"
 msgid "Monitor for Process Finishing"
 msgstr "Тамошо барои &Фаъол кардан"
 
-#: session/SessionController.cpp:923
+#: session/SessionController.cpp:921
 #, fuzzy, kde-format
 msgid "Enlarge Font"
 msgstr "Ҳарфи калонтар"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:929
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Shrink View"
 msgid "Shrink Font"
 msgstr "Уменьшить размер представления"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:934
 #, fuzzy, kde-format
 #| msgid "Increase Text Size"
 msgid "Reset Font Size"
 msgstr "Увеличить размер шрифта"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, fuzzy, kde-format
 #| msgid "&Send Signal"
 msgid "Send Signal"
 msgstr "&Бонги Фиристодан"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&Супоришро Муваққатон хобондан"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:949
 #, kde-format
 msgid "&Continue Task"
 msgstr "&Супоришро Давом додан"
 
-#: session/SessionController.cpp:956
+#: session/SessionController.cpp:954
 #, kde-format
 msgid "&Hangup"
 msgstr "&Канор гузоштан"
 
-#: session/SessionController.cpp:961
+#: session/SessionController.cpp:959
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&Супоришро Куштан"
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, fuzzy, kde-format
 #| msgid "Terminal Features"
 msgid "&Terminate Task"
 msgstr "Возможности терминала"
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:969
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Супоришро Нест кардан"
 
-#: session/SessionController.cpp:976
+#: session/SessionController.cpp:974
 #, kde-format
 msgid "User Signal &1"
 msgstr "&1 Бонги Сарфкунанда"
 
-#: session/SessionController.cpp:981
+#: session/SessionController.cpp:979
 #, kde-format
 msgid "User Signal &2"
 msgstr "&2 Бонги Сарфкунанда"
 
-#: session/SessionController.cpp:999
+#: session/SessionController.cpp:997
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile..."
 msgstr "Профили нав..."
 
-#: session/SessionController.cpp:1001
+#: session/SessionController.cpp:999
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "Настроить профиль..."
 
-#: session/SessionController.cpp:1132
+#: session/SessionController.cpp:1130
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
 "close it?"
 msgstr "В сеансе выполняется программа. Прекратить её работу?"
 
-#: session/SessionController.cpp:1136
+#: session/SessionController.cpp:1134
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
 "want to close it?"
 msgstr "В сеансе выполняется программа «%1». Прекратить её работу?"
 
-#: session/SessionController.cpp:1143 session/SessionController.cpp:1178
+#: session/SessionController.cpp:1141 session/SessionController.cpp:1176
 #, kde-format
 msgid "Confirm Close"
 msgstr "Подтверждение выхода"
 
-#: session/SessionController.cpp:1144
+#: session/SessionController.cpp:1142
 #, fuzzy, kde-format
 #| msgid "&Close Tab"
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "&Хуруҷи ҷадвалбандӣ"
 
-#: session/SessionController.cpp:1167
+#: session/SessionController.cpp:1165
 #, fuzzy, kde-format
 #| msgid ""
 #| "A program is currently running in this session.  Are you sure you want to "
@@ -2695,7 +2695,7 @@ msgid ""
 "by force?"
 msgstr "В сеансе выполняется программа. Прекратить её работу?"
 
-#: session/SessionController.cpp:1171
+#: session/SessionController.cpp:1169
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is currently running in this session.  Are you sure you "
@@ -2705,29 +2705,29 @@ msgid ""
 "kill it by force?"
 msgstr "В сеансе выполняется программа «%1». Прекратить её работу?"
 
-#: session/SessionController.cpp:1179
+#: session/SessionController.cpp:1177
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr ""
 
-#: session/SessionController.cpp:1890
+#: session/SessionController.cpp:1888
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr ""
 
-#: session/SessionController.cpp:2083
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid "Open Current Folder With"
 msgstr ""
 
-#: session/SessionController.cpp:2156
+#: session/SessionController.cpp:2154
 #, fuzzy, kde-format
 #| msgid "Save ZModem Download to..."
 msgid "Save ZModem Download to..."
 msgstr "Сохранить получаемый по ZModem файл в..."
 
-#: session/SessionController.cpp:2166
+#: session/SessionController.cpp:2164
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>A ZModem file transfer attempt has been detected, but no suitable "
@@ -2742,7 +2742,7 @@ msgstr ""
 "программ для работы с этим протоколом.\n"
 "<p>Вы можете установить пакет «rzsz» или «lrzsz».\n"
 
-#: session/SessionController.cpp:2176
+#: session/SessionController.cpp:2174
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The current session already has a ZModem file transfer in progress."
@@ -2750,7 +2750,7 @@ msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>Сессияи шоранда аллакай файли мутараққӣ ZModem доштан. "
 
-#: session/SessionController.cpp:2189
+#: session/SessionController.cpp:2187
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>No suitable ZModem software was found on this system.\n"
@@ -2762,7 +2762,7 @@ msgstr ""
 "<p>Не найдено программ для работы с протоколом ZModem.\n"
 "<p>Вы можете установить пакет «rzsz» или «lrzsz».\n"
 
-#: session/SessionController.cpp:2194
+#: session/SessionController.cpp:2192
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "Выберите файлы для передачи по ZModem"
@@ -4614,58 +4614,58 @@ msgstr "Установить цвет курсора таким же как цв
 msgid "Override wcwidth"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:69
+#: widgets/EditProfileDialog.cpp:68
 #, kde-format
 msgid "Edit Profile"
 msgstr "Таҳрири профил"
 
-#: widgets/EditProfileDialog.cpp:96
+#: widgets/EditProfileDialog.cpp:95
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "Умумӣ"
 
-#: widgets/EditProfileDialog.cpp:107
+#: widgets/EditProfileDialog.cpp:106
 #, kde-format
 msgid "Tabs"
 msgstr "Вкладки"
 
-#: widgets/EditProfileDialog.cpp:124
+#: widgets/EditProfileDialog.cpp:123
 #, kde-format
 msgid "Appearance"
 msgstr "Намуди зоҳирӣ"
 
-#: widgets/EditProfileDialog.cpp:140
+#: widgets/EditProfileDialog.cpp:139
 #, kde-format
 msgid "Scrolling"
 msgstr "Прокрутка"
 
-#: widgets/EditProfileDialog.cpp:154
+#: widgets/EditProfileDialog.cpp:153
 #, fuzzy, kde-format
 #| msgid "Keyboard Setup"
 msgid "Keyboard"
 msgstr "&Тугмача"
 
-#: widgets/EditProfileDialog.cpp:155
+#: widgets/EditProfileDialog.cpp:154
 #, fuzzy, kde-format
 #| msgid "Key Bindings"
 msgid "Key bindings"
 msgstr "Привязки клавиш"
 
-#: widgets/EditProfileDialog.cpp:166
+#: widgets/EditProfileDialog.cpp:165
 #, kde-format
 msgid "Mouse"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:182
+#: widgets/EditProfileDialog.cpp:181
 #, fuzzy, kde-format
 #| msgid "Advanced"
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "Иловагӣ"
 
-#: widgets/EditProfileDialog.cpp:290
+#: widgets/EditProfileDialog.cpp:289
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4674,13 +4674,13 @@ msgid ""
 "the settings to a new profile."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:307
+#: widgets/EditProfileDialog.cpp:306
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:315
+#: widgets/EditProfileDialog.cpp:314
 #, fuzzy, kde-format
 #| msgid ""
 #| "A file with this name already exists.\n"
@@ -4691,37 +4691,37 @@ msgstr ""
 "Файл катӣ ҳамин ном аллакай будан.\n"
 "Шумо мехоед ин аз сари нав навиштан?"
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:344
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:383
+#: widgets/EditProfileDialog.cpp:382
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:419
+#: widgets/EditProfileDialog.cpp:418
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:423
+#: widgets/EditProfileDialog.cpp:422
 #, fuzzy, kde-format
 #| msgid "New Profile..."
 msgid "Create New Profile"
 msgstr "Профили нав..."
 
-#: widgets/EditProfileDialog.cpp:426
+#: widgets/EditProfileDialog.cpp:425
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "Таҳрири профили \"%1\""
 
-#: widgets/EditProfileDialog.cpp:517
+#: widgets/EditProfileDialog.cpp:516
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4731,7 +4731,7 @@ msgid_plural " columns"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:519
+#: widgets/EditProfileDialog.cpp:518
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4741,46 +4741,46 @@ msgid_plural " rows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, fuzzy, kde-format
 #| msgid "System &Bell"
 msgid "System Bell"
 msgstr "&Тартиби Занг"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, fuzzy, kde-format
 #| msgid "System &Notification"
 msgid "System Notifications"
 msgstr "&Тартиби Хабар додани"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, fuzzy, kde-format
 #| msgid "&Visible Bell"
 msgid "Visual Bell"
 msgstr "&Занги Зоҳир"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:538
+#: widgets/EditProfileDialog.cpp:537
 #, fuzzy, kde-format
 #| msgid "Set the selected profile as the default for new terminal sessions"
 msgid "Default profile for new terminal sessions in %1"
 msgstr "Сделать профилем по умолчанию для новых сеансов"
 
-#: widgets/EditProfileDialog.cpp:643
+#: widgets/EditProfileDialog.cpp:642
 #, kde-format
 msgid "Edit Environment"
 msgstr "Изменить переменные среды"
 
-#: widgets/EditProfileDialog.cpp:644
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "One environment variable per line"
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:675
+#: widgets/EditProfileDialog.cpp:674
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4788,24 +4788,24 @@ msgid_plural " seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: widgets/EditProfileDialog.cpp:789
+#: widgets/EditProfileDialog.cpp:788
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "Выбор начального каталога"
 
-#: widgets/EditProfileDialog.cpp:949
+#: widgets/EditProfileDialog.cpp:948
 #, fuzzy, kde-format
 #| msgid "New..."
 msgid "Get New..."
 msgstr "Нав..."
 
-#: widgets/EditProfileDialog.cpp:1345
+#: widgets/EditProfileDialog.cpp:1344
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1524
+#: widgets/EditProfileDialog.cpp:1523
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4814,20 +4814,20 @@ msgstr ""
 "В выбранной цветовой схеме фон должен быть прозрачным, но данная низом не "
 "настроена соответствующим образом"
 
-#: widgets/EditProfileDialog.cpp:1530
+#: widgets/EditProfileDialog.cpp:1529
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1931
+#: widgets/EditProfileDialog.cpp:1930
 #, fuzzy, kde-format
 #| msgid "Delete Profile"
 msgid "Default for file type"
 msgstr "Нест кардани профил"
 
-#: widgets/EditProfileDialog.cpp:1957
+#: widgets/EditProfileDialog.cpp:1956
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4844,7 +4844,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1970
+#: widgets/EditProfileDialog.cpp:1969
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""

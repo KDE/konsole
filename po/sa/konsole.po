@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-22 00:44+0000\n"
+"POT-Creation-Date: 2025-03-01 00:54+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -1869,7 +1869,7 @@ msgctxt "Name of the built-in profile"
 msgid "Built-in"
 msgstr "अन्तर्निर्मितम्"
 
-#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:540
+#: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
 #, kde-format
 msgid "Default profile"
 msgstr "पूर्वनिर्धारित प्रोफाइल"
@@ -2071,48 +2071,48 @@ msgstr "अत्र अन्वेष्टुं ट्याब्-नाम
 msgid "Bell in '%1' (Session '%2')"
 msgstr "'%1' (सत्र '%2') इत्यत्र घण्टी ।"
 
-#: session/Session.cpp:417
+#: session/Session.cpp:404
 #, kde-format
 msgid "Could not find binary: "
 msgstr "द्विचक्रीयम् न प्राप्नोत्: "
 
-#: session/Session.cpp:426
+#: session/Session.cpp:413
 #, kde-format
 msgctxt "@info:shell Alert the user with red color text"
 msgid "Warning: "
 msgstr "चेतवानी: "
 
-#: session/Session.cpp:521
+#: session/Session.cpp:508
 #, kde-format
 msgid "Could not find an interactive shell to start."
 msgstr "आरम्भार्थं अन्तरक्रियाशीलं शेल् न प्राप्नोत् ।"
 
-#: session/Session.cpp:527 session/Session.cpp:529
+#: session/Session.cpp:514 session/Session.cpp:516
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr "'%1' न प्राप्नोत्, तस्य स्थाने '%2' आरभ्य ।  कृपया स्वस्य प्रोफाइलसेटिंग्स् पश्यन्तु।"
 
-#: session/Session.cpp:593
+#: session/Session.cpp:580
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "'%2' इति तर्कैः सह '%1' इति कार्यक्रमं आरभुं न शक्तवान् ।"
 
-#: session/Session.cpp:750
+#: session/Session.cpp:737
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' (सत्र '%2') मध्ये मौनम्"
 
-#: session/Session.cpp:751 session/Session.cpp:2089
-#: session/SessionController.cpp:362 session/SessionController.cpp:1891
+#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/SessionController.cpp:362 session/SessionController.cpp:1889
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
 #: Vt102Emulation.cpp:1459
 #, kde-format
 msgid "Show session"
 msgstr "सत्रं दर्शयतु"
 
-#: session/Session.cpp:1035
+#: session/Session.cpp:1022
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2125,28 +2125,28 @@ msgstr ""
 "Konsole इत्यस्य पुनः संकलनेन एव आन्तरिकप्रयोगे परिवर्तयितुं शक्यन्ते ।<p> एषा चेतावनी केवलं "
 "एकवारं अस्य Konsole उदाहरणस्य कृते दर्शयिष्यति ।</p>"
 
-#: session/Session.cpp:1075
+#: session/Session.cpp:1062
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "सम्पूर्ण"
 
-#: session/Session.cpp:1089 session/Session.cpp:1105
+#: session/Session.cpp:1076 session/Session.cpp:1092
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "'%1' इति कार्यक्रमः दुर्घटनाम् अभवत् ।"
 
-#: session/Session.cpp:1091
+#: session/Session.cpp:1078
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "'%1' इति कार्यक्रमः %2 स्थितिना सह निर्गतवान् ।"
 
-#: session/Session.cpp:1617
+#: session/Session.cpp:1604
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem प्रगति"
 
-#: session/Session.cpp:2088
+#: session/Session.cpp:2075
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1' (सत्र '%2') इत्यस्मिन् क्रियाकलापः"
@@ -2296,145 +2296,145 @@ msgstr "प्रोफाइल स्विच करें"
 msgid "Set &Encoding"
 msgstr "सेट् &एन्कोडिंग"
 
-#: session/SessionController.cpp:832
+#: session/SessionController.cpp:830
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Mouse Tracking इत्यस्य अनुमतिं ददातु"
 
-#: session/SessionController.cpp:841
+#: session/SessionController.cpp:839
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "केवलं पठनीयम्"
 
-#: session/SessionController.cpp:852
+#: session/SessionController.cpp:850
 #, kde-format
 msgid "&Configure or Rename Tab..."
 msgstr "&ट्याब् विन्यस्तं वा पुनर्नामकरणं वा..."
 
-#: session/SessionController.cpp:858
+#: session/SessionController.cpp:856
 #, kde-format
 msgid "&All Tabs in Current Window"
 msgstr "&वर्तमानविण्डो मध्ये सर्वाणि ट्याब्स्"
 
-#: session/SessionController.cpp:865
+#: session/SessionController.cpp:863
 #, kde-format
 msgid "&Select Tabs..."
 msgstr "&ट्याब्स् चयनं कुर्वन्तु..."
 
-#: session/SessionController.cpp:871
+#: session/SessionController.cpp:869
 #, kde-format
 msgctxt "@action:inmenu Do not select any tabs"
 msgid "&None"
 msgstr "&न कश्चित्"
 
-#: session/SessionController.cpp:879
+#: session/SessionController.cpp:877
 #, kde-format
 msgid "Copy Input To"
 msgstr "Copy Input To इति"
 
-#: session/SessionController.cpp:887
+#: session/SessionController.cpp:885
 #, kde-format
 msgid "&ZModem Upload..."
 msgstr "&ZModem अपलोड..."
 
-#: session/SessionController.cpp:892
+#: session/SessionController.cpp:890
 #, kde-format
 msgid "One-Shot Monitors"
 msgstr "एक-शॉट् निरीक्षकाः"
 
-#: session/SessionController.cpp:897
+#: session/SessionController.cpp:895
 #, kde-format
 msgid "Monitor for &Prompt"
 msgstr "&Prompt कृते निरीक्षणं कुर्वन्तु"
 
-#: session/SessionController.cpp:904
+#: session/SessionController.cpp:902
 #, kde-format
 msgid "Monitor for &Activity"
 msgstr "&Activity कृते निरीक्षणं कुर्वन्तु"
 
-#: session/SessionController.cpp:910
+#: session/SessionController.cpp:908
 #, kde-format
 msgid "Monitor for &Silence"
 msgstr "&Silence कृते निरीक्षणं कुर्वन्तु"
 
-#: session/SessionController.cpp:916
+#: session/SessionController.cpp:914
 #, kde-format
 msgid "Monitor for Process Finishing"
 msgstr "प्रक्रियासमाप्त्यर्थं निरीक्षकम्"
 
-#: session/SessionController.cpp:923
+#: session/SessionController.cpp:921
 #, kde-format
 msgid "Enlarge Font"
 msgstr "Font विस्तारित करें"
 
-#: session/SessionController.cpp:931
+#: session/SessionController.cpp:929
 #, kde-format
 msgid "Shrink Font"
 msgstr "संकुचित फॉन्ट"
 
-#: session/SessionController.cpp:936
+#: session/SessionController.cpp:934
 #, kde-format
 msgid "Reset Font Size"
 msgstr "Font Size पुनः सेट् करें"
 
-#: session/SessionController.cpp:942
+#: session/SessionController.cpp:940
 #, kde-format
 msgid "Send Signal"
 msgstr "संकेतं प्रेषयन्तु"
 
-#: session/SessionController.cpp:946
+#: session/SessionController.cpp:944
 #, kde-format
 msgid "&Suspend Task"
 msgstr "&कार्यं निलम्बयतु"
 
-#: session/SessionController.cpp:951
+#: session/SessionController.cpp:949
 #, kde-format
 msgid "&Continue Task"
 msgstr "&कार्यं निरन्तरं कुर्वन्तु"
 
-#: session/SessionController.cpp:956
+#: session/SessionController.cpp:954
 #, kde-format
 msgid "&Hangup"
 msgstr "&हङ्गुप्"
 
-#: session/SessionController.cpp:961
+#: session/SessionController.cpp:959
 #, kde-format
 msgid "&Interrupt Task"
 msgstr "&व्यवधान कार्य"
 
-#: session/SessionController.cpp:966
+#: session/SessionController.cpp:964
 #, kde-format
 msgid "&Terminate Task"
 msgstr "&कार्य समाप्त करना"
 
-#: session/SessionController.cpp:971
+#: session/SessionController.cpp:969
 #, kde-format
 msgid "&Kill Task"
 msgstr "&Kill Task इति"
 
-#: session/SessionController.cpp:976
+#: session/SessionController.cpp:974
 #, kde-format
 msgid "User Signal &1"
 msgstr "उपयोगकर्ता संकेत &1"
 
-#: session/SessionController.cpp:981
+#: session/SessionController.cpp:979
 #, kde-format
 msgid "User Signal &2"
 msgstr "उपयोगकर्ता संकेत &2"
 
-#: session/SessionController.cpp:999
+#: session/SessionController.cpp:997
 #, kde-format
 msgid "Create New Profile..."
 msgstr "नूतनं प्रोफाइलं रचयन्तु..."
 
-#: session/SessionController.cpp:1001
+#: session/SessionController.cpp:999
 #, kde-format
 msgid "Edit Current Profile..."
 msgstr "वर्तमान प्रोफाइल सम्पादयतु..."
 
-#: session/SessionController.cpp:1132
+#: session/SessionController.cpp:1130
 #, kde-format
 msgid ""
 "A program is currently running in this session.  Are you sure you want to "
@@ -2443,7 +2443,7 @@ msgstr ""
 "अस्मिन् सत्रे सम्प्रति एकः कार्यक्रमः प्रचलति ।  किं भवन्तः तत् पिधातुम् इच्छन्ति इति "
 "निश्चितम्?"
 
-#: session/SessionController.cpp:1136
+#: session/SessionController.cpp:1134
 #, kde-format
 msgid ""
 "The program '%1' is currently running in this session.  Are you sure you "
@@ -2452,18 +2452,18 @@ msgstr ""
 "अस्मिन् सत्रे सम्प्रति '%1' इति कार्यक्रमः प्रचलति ।  किं भवन्तः तत् पिधातुम् इच्छन्ति इति "
 "निश्चितम्?"
 
-#: session/SessionController.cpp:1143 session/SessionController.cpp:1178
+#: session/SessionController.cpp:1141 session/SessionController.cpp:1176
 #, kde-format
 msgid "Confirm Close"
 msgstr "Confirm Close इति"
 
-#: session/SessionController.cpp:1144
+#: session/SessionController.cpp:1142
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Program"
 msgstr "Close Program"
 
-#: session/SessionController.cpp:1167
+#: session/SessionController.cpp:1165
 #, kde-format
 msgid ""
 "A program in this session would not die.  Are you sure you want to kill it "
@@ -2471,7 +2471,7 @@ msgid ""
 msgstr ""
 "अस्मिन् सत्रे कश्चन कार्यक्रमः न म्रियते स्म।  किं त्वं निश्चयेन तत् बलात् मारयितुम् इच्छसि ?"
 
-#: session/SessionController.cpp:1171
+#: session/SessionController.cpp:1169
 #, fuzzy, kde-format
 #| msgid ""
 #| "The program '%1' is in this session would not die.  Are you sure you want "
@@ -2483,28 +2483,28 @@ msgstr ""
 "अस्मिन् सत्रे '%1' इति कार्यक्रमः न म्रियते स्म ।  किं त्वं निश्चयेन तत् बलात् मारयितुम् "
 "इच्छसि ?"
 
-#: session/SessionController.cpp:1179
+#: session/SessionController.cpp:1177
 #, kde-format
 msgctxt "@action:button"
 msgid "Kill Program"
 msgstr "किल प्रोग्राम"
 
-#: session/SessionController.cpp:1890
+#: session/SessionController.cpp:1888
 #, kde-format
 msgid "The shell prompt is displayed in session '%1'"
 msgstr "शेल् प्रॉम्प्ट् '%1' सत्रे प्रदर्शितं भवति ।"
 
-#: session/SessionController.cpp:2083
+#: session/SessionController.cpp:2081
 #, kde-format
 msgid "Open Current Folder With"
 msgstr "Current Folder With उद्घाटयन्तु"
 
-#: session/SessionController.cpp:2156
+#: session/SessionController.cpp:2154
 #, kde-format
 msgid "Save ZModem Download to..."
 msgstr "ZModem Download इत्येतत् रक्षतु..."
 
-#: session/SessionController.cpp:2166
+#: session/SessionController.cpp:2164
 #, kde-format
 msgid ""
 "<p>A ZModem file transfer attempt has been detected, but no suitable ZModem "
@@ -2515,13 +2515,13 @@ msgstr ""
 "सॉफ्टवेयरः न प्राप्तः ।</p><p> भवान् &#39;rzsz&#39; अथवा &#39;lrzsz&#39; संकुलं "
 "संस्थापयितुम् इच्छति ।</p>"
 
-#: session/SessionController.cpp:2176
+#: session/SessionController.cpp:2174
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
 msgstr "<p>वर्तमानसत्रे पूर्वमेव ZModem सञ्चिकास्थापनं प्रचलति ।</p>"
 
-#: session/SessionController.cpp:2189
+#: session/SessionController.cpp:2187
 #, kde-format
 msgid ""
 "<p>No suitable ZModem software was found on this system.</p><p>You may wish "
@@ -2530,7 +2530,7 @@ msgstr ""
 "<p>अस्मिन् प्रणाल्यां कोऽपि उपयुक्तः ZModem सॉफ्टवेयरः न प्राप्तः ।</p><p> भवान् &#39;"
 "rzsz&#39; अथवा &#39;lrzsz&#39; संकुलं संस्थापयितुम् इच्छति ।</p>"
 
-#: session/SessionController.cpp:2194
+#: session/SessionController.cpp:2192
 #, kde-format
 msgid "Select Files for ZModem Upload"
 msgstr "ZModem अपलोड् कृते Files इति चिनोतु"
@@ -4287,54 +4287,54 @@ msgstr "समस्याग्रस्तवर्णानां wcwidth इ
 msgid "Override wcwidth"
 msgstr "wcwidth अधिलिखित करें"
 
-#: widgets/EditProfileDialog.cpp:69
+#: widgets/EditProfileDialog.cpp:68
 #, kde-format
 msgid "Edit Profile"
 msgstr "प्रोफाइल सम्पादयतु"
 
-#: widgets/EditProfileDialog.cpp:96
+#: widgets/EditProfileDialog.cpp:95
 #, kde-format
 msgctxt "@title:tab Generic, common options"
 msgid "General"
 msgstr "सामान्य"
 
-#: widgets/EditProfileDialog.cpp:107
+#: widgets/EditProfileDialog.cpp:106
 #, kde-format
 msgid "Tabs"
 msgstr "टब्स्"
 
-#: widgets/EditProfileDialog.cpp:124
+#: widgets/EditProfileDialog.cpp:123
 #, kde-format
 msgid "Appearance"
 msgstr "स्वरूपम्‌"
 
-#: widgets/EditProfileDialog.cpp:140
+#: widgets/EditProfileDialog.cpp:139
 #, kde-format
 msgid "Scrolling"
 msgstr "स्क्रॉल करणम्"
 
-#: widgets/EditProfileDialog.cpp:154
+#: widgets/EditProfileDialog.cpp:153
 #, kde-format
 msgid "Keyboard"
 msgstr "कीबोर्ड"
 
-#: widgets/EditProfileDialog.cpp:155
+#: widgets/EditProfileDialog.cpp:154
 #, kde-format
 msgid "Key bindings"
 msgstr "कीलबन्धनानि"
 
-#: widgets/EditProfileDialog.cpp:166
+#: widgets/EditProfileDialog.cpp:165
 #, kde-format
 msgid "Mouse"
 msgstr "मूषकः"
 
-#: widgets/EditProfileDialog.cpp:182
+#: widgets/EditProfileDialog.cpp:181
 #, kde-format
 msgctxt "@title:tab Complex options"
 msgid "Advanced"
 msgstr "उन्नतं"
 
-#: widgets/EditProfileDialog.cpp:290
+#: widgets/EditProfileDialog.cpp:289
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -4345,48 +4345,48 @@ msgstr ""
 "सेटिङ्ग्स् रक्षितुं अपर्याप्ताः अनुमतिः: <filename>%1</filename>.<nl/>तस्याः सञ्चिकायाः "
 "अनुमतिः परिवर्तयन्तु अथवा सेटिङ्ग्स् नूतने प्रोफाइल् मध्ये रक्षितुं भिन्नं नाम सेट् कुर्वन्तु ।"
 
-#: widgets/EditProfileDialog.cpp:307
+#: widgets/EditProfileDialog.cpp:306
 #, kde-format
 msgctxt "@info"
 msgid "Profile Name was empty; please set a name to be able to save settings."
 msgstr "प्रोफाइल नाम रिक्तम् आसीत्; कृपया सेटिङ्ग्स् रक्षितुं शक्नुवन्ति इति नाम सेट् कुर्वन्तु ।"
 
-#: widgets/EditProfileDialog.cpp:315
+#: widgets/EditProfileDialog.cpp:314
 #, kde-format
 msgctxt "@info"
 msgid "A profile with the name \"%1\" already exists."
 msgstr "\"%1\" इति नामयुक्तं प्रोफाइल पूर्वमेव अस्ति ।"
 
-#: widgets/EditProfileDialog.cpp:345
+#: widgets/EditProfileDialog.cpp:344
 #, kde-format
 msgctxt "@info"
 msgid "Profile name exceeded maximum allowed length (%1)."
 msgstr "प्रोफाइलनाम अधिकतमं अनुमतदीर्घतां (%1) अतिक्रान्तम् ।"
 
-#: widgets/EditProfileDialog.cpp:383
+#: widgets/EditProfileDialog.cpp:382
 #, kde-format
 msgctxt "@info"
 msgid "The highlighted characters are invalid in profile names: %1."
 msgstr "हाइलाइट् कृतानि वर्णाः प्रोफाइलनाम्नि अमान्यानि सन्ति: %1."
 
-#: widgets/EditProfileDialog.cpp:419
+#: widgets/EditProfileDialog.cpp:418
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
 msgstr[0] "प्रोफाइल सम्पादनम्: %2"
 msgstr[1] "%1 प्रोफाइल सम्पादयति: %2"
 
-#: widgets/EditProfileDialog.cpp:423
+#: widgets/EditProfileDialog.cpp:422
 #, kde-format
 msgid "Create New Profile"
 msgstr "New Profile रचयन्तु"
 
-#: widgets/EditProfileDialog.cpp:426
+#: widgets/EditProfileDialog.cpp:425
 #, kde-format
 msgid "Edit Profile \"%1\""
 msgstr "\"%1\" इति प्रोफाइल सम्पादयतु ।"
 
-#: widgets/EditProfileDialog.cpp:517
+#: widgets/EditProfileDialog.cpp:516
 #, kde-format
 msgctxt ""
 "Suffix of the number of columns (N columns). The leading space is needed to "
@@ -4396,7 +4396,7 @@ msgid_plural " columns"
 msgstr[0] " स्तम्भ:"
 msgstr[1] " स्तम्भाः"
 
-#: widgets/EditProfileDialog.cpp:519
+#: widgets/EditProfileDialog.cpp:518
 #, kde-format
 msgctxt ""
 "Suffix of the number of rows (N rows). The leading space is needed to "
@@ -4406,42 +4406,42 @@ msgid_plural " rows"
 msgstr[0] " पंक्ति"
 msgstr[1] " पङ्क्तयः"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "System Bell"
 msgstr "प्रणाली घण्टी"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "System Notifications"
 msgstr "प्रणाली सूचनाएँ"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "Visual Bell"
 msgstr "दृश्य घण्टी"
 
-#: widgets/EditProfileDialog.cpp:529
+#: widgets/EditProfileDialog.cpp:528
 #, kde-format
 msgid "Ignore Bell Events"
 msgstr "बेल इवेण्ट्स् इत्यस्य अवहेलना कुर्वन्तु"
 
-#: widgets/EditProfileDialog.cpp:538
+#: widgets/EditProfileDialog.cpp:537
 #, kde-format
 msgid "Default profile for new terminal sessions in %1"
 msgstr "%1 मध्ये नूतनटर्मिनलसत्रस्य पूर्वनिर्धारितरूपरेखा"
 
-#: widgets/EditProfileDialog.cpp:643
+#: widgets/EditProfileDialog.cpp:642
 #, kde-format
 msgid "Edit Environment"
 msgstr "परिवेश सम्पादयतु"
 
-#: widgets/EditProfileDialog.cpp:644
+#: widgets/EditProfileDialog.cpp:643
 #, kde-format
 msgid "One environment variable per line"
 msgstr "प्रतिपङ्क्तिः एकः वातावरणचरः"
 
-#: widgets/EditProfileDialog.cpp:675
+#: widgets/EditProfileDialog.cpp:674
 #, kde-format
 msgctxt "Unit of time"
 msgid " second"
@@ -4449,30 +4449,30 @@ msgid_plural " seconds"
 msgstr[0] " क्षण"
 msgstr[1] " सेकण्ड्"
 
-#: widgets/EditProfileDialog.cpp:789
+#: widgets/EditProfileDialog.cpp:788
 #, kde-format
 msgid "Select Initial Directory"
 msgstr "प्रारम्भिकनिर्देशिकां चिनोतु"
 
-#: widgets/EditProfileDialog.cpp:949
+#: widgets/EditProfileDialog.cpp:948
 #, kde-format
 msgid "Get New..."
 msgstr "Get New..."
 
-#: widgets/EditProfileDialog.cpp:1345
+#: widgets/EditProfileDialog.cpp:1344
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "योजना <resource>%1</resource> लोड् कर्तुं असफलम् ।"
 
-#: widgets/EditProfileDialog.cpp:1524
+#: widgets/EditProfileDialog.cpp:1523
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 msgstr "एषा वर्णयोजना पारदर्शकं पृष्ठभूमिं प्रयुङ्क्ते यत् भवतः डेस्कटॉप् मध्ये समर्थितं न दृश्यते"
 
-#: widgets/EditProfileDialog.cpp:1530
+#: widgets/EditProfileDialog.cpp:1529
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4481,12 +4481,12 @@ msgstr ""
 "डेस्कटॉप् इफेक्ट्स् सक्षमीकरणात् पूर्वं Konsole आरब्धम् आसीत् । पारदर्शी पृष्ठभूमिं द्रष्टुं भवद्भिः "
 "Konsole पुनः आरभ्यत इति आवश्यकम् ।"
 
-#: widgets/EditProfileDialog.cpp:1931
+#: widgets/EditProfileDialog.cpp:1930
 #, kde-format
 msgid "Default for file type"
 msgstr "सञ्चिकाप्रकारस्य कृते पूर्वनिर्धारितम्"
 
-#: widgets/EditProfileDialog.cpp:1957
+#: widgets/EditProfileDialog.cpp:1956
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4515,7 +4515,7 @@ msgstr ""
 "उपेक्षितं भविष्यति तथा च सञ्चिका पूर्वनिर्धारितपाठेन उद्घाटिता भविष्यति\n"
 "सम्पादक।"
 
-#: widgets/EditProfileDialog.cpp:1970
+#: widgets/EditProfileDialog.cpp:1969
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "पाठ सम्पादक कस्टम आदेश"
