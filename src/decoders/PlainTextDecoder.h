@@ -26,18 +26,6 @@ public:
     PlainTextDecoder();
 
     /**
-     * Set whether leading whitespace at the end of lines should be included
-     * in the output.
-     * Defaults to true.
-     */
-    void setLeadingWhitespace(bool enable);
-    /**
-     * Set whether trailing whitespace at the end of lines should be included
-     * in the output.
-     * Defaults to true.
-     */
-    void setTrailingWhitespace(bool enable);
-    /**
      * Returns of character positions in the output stream
      * at which new lines where added.  Returns an empty if setTrackLinePositions() is false or if
      * the output device is not a string.
@@ -53,8 +41,6 @@ public:
 
 private:
     QTextStream *_output;
-    bool _includeLeadingWhitespace;
-    bool _includeTrailingWhitespace;
 
     bool _recordLinePositions;
     QList<int> _linePositions;
