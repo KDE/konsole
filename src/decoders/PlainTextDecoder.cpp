@@ -18,21 +18,9 @@ using namespace Konsole;
 
 PlainTextDecoder::PlainTextDecoder()
     : _output(nullptr)
-    , _includeLeadingWhitespace(true)
-    , _includeTrailingWhitespace(true)
     , _recordLinePositions(false)
     , _linePositions(QList<int>())
 {
-}
-
-void PlainTextDecoder::setLeadingWhitespace(bool enable)
-{
-    _includeLeadingWhitespace = enable;
-}
-
-void PlainTextDecoder::setTrailingWhitespace(bool enable)
-{
-    _includeTrailingWhitespace = enable;
 }
 
 void PlainTextDecoder::begin(QTextStream *output)
@@ -61,6 +49,7 @@ QList<int> PlainTextDecoder::linePositions() const
 void PlainTextDecoder::decodeLine(const Character *const characters, int count, LineProperty /*properties*/)
 {
     Q_ASSERT(_output);
+    // TODO: This entire method is convoluted and needs a rewrite.
 
     if (_recordLinePositions && (_output->string() != nullptr)) {
         int pos = _output->string()->length();
@@ -69,26 +58,11 @@ void PlainTextDecoder::decodeLine(const Character *const characters, int count, 
 
     // TODO should we ignore or respect the LINE_WRAPPED line property?
 
-    // If we should remove leading whitespace find the first non-space character
     int start = 0;
-    if (!_includeLeadingWhitespace) {
-        while (start < count && characters[start].isSpace()) {
-            start++;
-        }
-    }
-
     int outputCount = count - start;
 
     if (outputCount <= 0) {
         return;
-    }
-
-    // if inclusion of trailing whitespace is disabled then find the end of the
-    // line
-    if (!_includeTrailingWhitespace) {
-        while (outputCount > 0 && characters[start + outputCount - 1].isSpace()) {
-            outputCount--;
-        }
     }
 
     // find out the last technically real character in the line

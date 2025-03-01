@@ -34,8 +34,6 @@ void TerminalImageFilterChain::setImage(const Character *const image, int lines,
     reset();
 
     PlainTextDecoder decoder;
-    decoder.setLeadingWhitespace(true);
-    decoder.setTrailingWhitespace(true);
 
     // setup new shared buffers for the filters to process on
     _buffer.reset(new QString());
