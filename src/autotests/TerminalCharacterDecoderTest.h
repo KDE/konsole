@@ -24,6 +24,8 @@ private Q_SLOTS:
     void testPlainTextDecoder_data();
     void testHTMLDecoder();
     void testHTMLDecoder_data();
+    void testIncludingWhitespacePlainTextDecoder();
+    void testIncludingWhitespacePlainTextDecoder_data();
 };
 
 }

@@ -115,6 +115,44 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
     QCOMPARE(outputString, result);
 }
 
+void TerminalCharacterDecoderTest::testIncludingWhitespacePlainTextDecoder_data()
+{
+    QTest::addColumn<QString>("text");
+    QTest::addColumn<QVector<RenditionFlags>>("renditions");
+    QTest::addColumn<QString>("result");
+
+    /* Notes:
+     * - rendition has no effect on plain decoded text
+     */
+    QTest::newRow("simple text with no leading space") << "hello" << QVector<RenditionFlags>(6).fill(DEFAULT_RENDITION) << "hello";
+    QTest::newRow("simple text with one leading space") << " hello" << QVector<RenditionFlags>(6).fill(DEFAULT_RENDITION) << "hello";
+    QTest::newRow("simple text with multiple leading spaces") << "     hello" << QVector<RenditionFlags>(6).fill(DEFAULT_RENDITION) << "hello";
+
+}
+
+void TerminalCharacterDecoderTest::testIncludingWhitespacePlainTextDecoder()
+{
+    QFETCH(QString, text);
+    QFETCH(QVector<RenditionFlags>, renditions);
+    QFETCH(QString, result);
+
+    // We can't use TerminalCharacterDecoder here
+    auto *decoder = new PlainTextDecoder();
+    // The method name is not obvious - false will remove leading spaces
+    // True is the default, the other tests will test that.
+    decoder->setLeadingWhitespace(false);
+    auto testCharacters = new Character[text.size()];
+    convertToCharacter(testCharacters, text, renditions);
+    QString outputString;
+    QTextStream outputStream(&outputString);
+    decoder->begin(&outputStream);
+    decoder->decodeLine(testCharacters, text.size(), /* ignored */ LineProperty());
+    decoder->end();
+    delete[] testCharacters;
+    delete decoder;
+    QCOMPARE(outputString, result);
+}
+
 QTEST_GUILESS_MAIN(TerminalCharacterDecoderTest)
 
 #include "moc_TerminalCharacterDecoderTest.cpp"
