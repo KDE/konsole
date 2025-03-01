@@ -77,7 +77,7 @@ void HTMLDecoder::decodeLine(const Character *const characters, int count, LineP
             }
 
             if ((_lastRendition & RE_UNDERLINE_MASK) != 0) {
-                style.append(QLatin1String("font-decoration:underline;"));
+                style.append(QLatin1String("text-decoration:underline;"));
             }
 
             style.append(QStringLiteral("color:%1;").arg(_lastForeColor.color(_colorTable).name()));

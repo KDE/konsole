@@ -89,7 +89,7 @@ void TerminalCharacterDecoderTest::testHTMLDecoder_data()
     // The below is wrong; only the first rendition is used (eg ignores the |)
     QTest::newRow("simple text with underline and italic rendition")
         << "hello" << QVector<RenditionFlags>(6).fill(RE_UNDERLINE_BIT | RE_ITALIC)
-        << R"(<span style="font-family:monospace"><span style="font-decoration:underline;color:#000000;background-color:#ffffff;">hello</span><br></span>)";
+        << R"(<span style="font-family:monospace"><span style="text-decoration:underline;color:#000000;background-color:#ffffff;">hello</span><br></span>)";
 
     QTest::newRow("text with &")
         << "hello &there" << QVector<RenditionFlags>(6).fill(DEFAULT_RENDITION)
