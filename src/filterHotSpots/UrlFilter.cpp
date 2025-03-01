@@ -97,7 +97,7 @@ QSharedPointer<HotSpot> UrlFilter::newHotSpot(int startLine, int startColumn, in
     QStringList texts{};
 
     // remove final invalid characters
-    // we want URLs in single quotes like the followings to work correctly:
+    // we want URLs in single quotes like the following to work correctly:
     // 'https://en.wikipedia.org/wiki/Earth's_rotation'
     // https://example.com.
     static const QRegularExpression invalidCharRegex(LS1("[',.:;]+$"));

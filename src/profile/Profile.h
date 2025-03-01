@@ -513,7 +513,7 @@ public:
     bool isEmpty() const;
 
     /**
-     * Clears all set properties in this profile. Afte calling this, isEmpty()
+     * Clears all set properties in this profile. After calling this, isEmpty()
      * will return true.
      */
     void clear()
