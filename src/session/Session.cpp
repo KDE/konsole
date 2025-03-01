@@ -236,7 +236,7 @@ bool Session::hasFocus() const
     });
 }
 
-bool Session::setCodec(QAnyStringView name)
+bool Session::setCodec(const QByteArray &name)
 {
     if (isReadOnly() || !emulation()->setCodec(name)) {
         return false;

@@ -265,7 +265,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
 
     // Encoding
     if (apply.shouldApply(Profile::DefaultEncoding)) {
-        session->setCodec(profile->defaultEncoding());
+        session->setCodec(profile->defaultEncoding().toUtf8());
     }
 
     // Monitor Silence

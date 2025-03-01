@@ -149,7 +149,7 @@ public:
     }
 
     /** Sets the codec used to decode incoming characters.  */
-    bool setCodec(QAnyStringView name);
+    bool setCodec(const QByteArray &name);
 
     /**
      * Convenience method.

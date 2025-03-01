@@ -148,12 +148,12 @@ const HistoryType &Emulation::history() const
     return _screen[0]->getScroll();
 }
 
-bool Emulation::setCodec(QAnyStringView name)
+bool Emulation::setCodec(const QByteArray &name)
 {
     // if we requested a specific codec, only try that one
     if (!name.isEmpty()) {
-        QStringDecoder decoder(name);
-        QStringEncoder encoder(name);
+        QStringDecoder decoder(name.constData());
+        QStringEncoder encoder(name.constData());
         if (decoder.isValid() && encoder.isValid()) {
             _decoder = std::move(decoder);
             _encoder = std::move(encoder);

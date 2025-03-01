@@ -591,7 +591,7 @@ public Q_SLOTS:
      * Overloaded to accept a QByteArray for convenience since DBus
      * does not accept QTextCodec directly.
      */
-    Q_SCRIPTABLE bool setCodec(QAnyStringView name);
+    Q_SCRIPTABLE bool setCodec(const QByteArray &name);
 
     /** Returns the codec used to decode incoming characters in this
      * terminal emulation
