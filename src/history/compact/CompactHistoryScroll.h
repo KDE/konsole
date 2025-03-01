@@ -28,10 +28,10 @@ public:
     void getCells(const int lineNumber, const int startColumn, const int count, Character buffer[]) const override;
     bool isWrappedLine(const int lineNumber) const override;
     LineProperty getLineProperty(const int lineNumber) const override;
-    void setLineProperty(const int lineno, LineProperty prop) override;
+    void setLineProperty(const int lineNumber, LineProperty prop) override;
 
     void addCells(const Character a[], const int count) override;
-    void addCellsMove(Character a[], const int count) override;
+    void addCellsMove(Character characters[], const int count) override;
     void addLine(const LineProperty lineProperty = LineProperty()) override;
 
     void removeCells() override;

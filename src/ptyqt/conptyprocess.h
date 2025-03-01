@@ -147,7 +147,7 @@ public:
     ~ConPtyProcess();
 
     bool
-    startProcess(const QString &shellPath, const QStringList &arguments, const QString &workingDirectory, QStringList environment, qint16 cols, qint16 rows);
+    startProcess(const QString &shellPath, const QStringList &arguments, const QString &workingDir, QStringList environment, qint16 cols, qint16 rows);
     bool resize(qint16 cols, qint16 rows);
     bool kill();
     PtyType type();

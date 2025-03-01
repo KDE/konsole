@@ -36,7 +36,7 @@ public:
     };
 
     static int width(uint c, int widthFromTable, enum SyllablePos &syllablePos);
-    static bool combinesWith(Character prev, uint c);
+    static bool combinesWith(Character prevChar, uint c);
 
     static bool isHangul(const uint c)
     {
