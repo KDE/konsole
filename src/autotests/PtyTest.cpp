@@ -73,9 +73,9 @@ void PtyTest::testRunProgram()
     const int result = pty.start(program, arguments, environments);
 
     QCOMPARE(result, 0);
-    auto fpg = pty.foregroundProcessGroup();
-    auto pid = pty.processId();
     // FIXME: This often fails on multiple CIs
+    // auto fpg = pty.foregroundProcessGroup();
+    // auto pid = pty.processId();
     //  Actual   (fpg): 100000; Expected (pid): 28534
     //  Actual   (fpg): 0; Expected (pid): 3487
     QSKIP("This often fails on multiple CIs", SkipSingle);
