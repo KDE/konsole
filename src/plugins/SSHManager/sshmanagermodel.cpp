@@ -332,6 +332,7 @@ void SSHManagerModel::importFromSshConfigFile(const QString &file)
     QFile sshConfig(file);
     if (!sshConfig.open(QIODevice::ReadOnly)) {
         qCDebug(SshManagerPluginDebug) << "Can't open config file";
+        return;
     }
     QTextStream stream(&sshConfig);
     QString line;
