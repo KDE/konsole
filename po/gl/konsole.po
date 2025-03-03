@@ -192,14 +192,15 @@ msgstr "Agochar a barra de menú, sobredefinindo a configuración predeterminada
 msgctxt "@info:shell"
 msgid "Show the tabbar, overriding the default setting"
 msgstr ""
-"Amosar a barra de lapelas, sobredefinindo a configuración predeterminada."
+"Amosar a barra de separadores, sobredefinindo a configuración predeterminada."
 
 #: Application.cpp:69
 #, kde-format
 msgctxt "@info:shell"
 msgid "Hide the tabbar, overriding the default setting"
 msgstr ""
-"Agochar a barra de lapelas, sobredefinindo a configuración predeterminada."
+"Agochar a barra de separadores, sobredefinindo a configuración "
+"predeterminada."
 
 #: Application.cpp:70
 #, kde-format
@@ -1313,7 +1314,7 @@ msgstr "Memoria"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
-msgstr "Barra de lapelas / Divisores"
+msgstr "Barra de separadores / Divisores"
 
 #: MainWindow.cpp:917
 #, kde-format
@@ -2576,7 +2577,7 @@ msgstr ""
 #: session/SessionController.cpp:2192
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr "Escoller ficheiros para enviar por ZModem"
+msgstr "Escoller ficheiros para subir por ZModem"
 
 #: session/SessionListModel.cpp:89
 #, kde-format
@@ -2839,7 +2840,7 @@ msgstr ""
 #: settings/konsole.kcfg:100 settings/konsole.kcfg:120
 #, kde-format
 msgid "Control the visibility of the whole tab bar"
-msgstr "Controlar a visibilidade da barra de lapelas"
+msgstr "Controlar a visibilidade da barra de separadores"
 
 #. i18n: ectx: label, entry (SplitDragHandleSize), group (SplitView)
 #: settings/konsole.kcfg:109
@@ -2851,26 +2852,27 @@ msgstr "Controlar o tamaño da asa entre paneis"
 #: settings/konsole.kcfg:129
 #, kde-format
 msgid "Control the position of the tab bar"
-msgstr "Controlar a posición da barra de lapelas"
+msgstr "Controlar a posición da barra de separadores"
 
 #. i18n: ectx: label, entry (TabBarStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:139
 #, kde-format
 msgid "Control the visual style of the tab bar"
-msgstr "Controlar o estilo visual da barra de lapelas"
+msgstr "Controlar o estilo visual da barra de separadores"
 
 #. i18n: ectx: label, entry (TabBarUseUserStyleSheet), group (TabBar)
 #: settings/konsole.kcfg:143
 #, kde-format
 msgid "Use a user-defined .css file for the tab bar"
 msgstr ""
-"Usar un ficheiro de CSS definido pola persoa usuaria para a barra de lapelas."
+"Usar un ficheiro de CSS definido pola persoa usuaria para a barra de "
+"separadores."
 
 #. i18n: ectx: label, entry (TabBarUserStyleSheetFile), group (TabBar)
 #: settings/konsole.kcfg:147
 #, kde-format
 msgid "The .css file to use for the tab bar style"
-msgstr "O ficheiro de CSS que usar para o estilo da barra de lapelas"
+msgstr "O ficheiro de CSS que usar para o estilo da barra de separadores"
 
 #. i18n: ectx: label, entry (CloseTabOnMiddleMouseButton), group (TabBar)
 #: settings/konsole.kcfg:151
@@ -2882,14 +2884,16 @@ msgstr "Permitir clic central nas lapelas abertas para pechalas."
 #: settings/konsole.kcfg:155
 #, kde-format
 msgid "Control the visibility of 'New Tab' button on the tab bar"
-msgstr "Controlar a visibilidade d botón de «Nova lapela» na barra de lapelas"
+msgstr ""
+"Controlar a visibilidade d botón de «Nova lapela» na barra de separadores"
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
 #, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
 msgstr ""
-"Controlar a visibilidade d botón de «Buscar nas lapelas» na barra de lapelas."
+"Controlar a visibilidade d botón de «Buscar nas lapelas» na barra de "
+"separadores."
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3709,7 +3713,7 @@ msgstr "Números de liña"
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
-msgstr "Gardar a disposición de lapelas"
+msgstr "Gardar a disposición de separadores"
 
 #: ViewManager.cpp:1178 ViewManager.cpp:1265
 #, kde-format
@@ -3741,7 +3745,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Cargar unha disposición de lapelas"
+msgstr "Cargar unha disposición de separadores"
 
 #: Vt102Emulation.cpp:2818
 #, kde-format
