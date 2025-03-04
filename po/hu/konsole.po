@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-22 02:34+0000\n"
+"POT-Creation-Date: 2025-03-04 02:36+0000\n"
 "PO-Revision-Date: 2025-02-01 22:02+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1523,8 +1523,8 @@ msgstr "A(z) %1 egy mappa SSH bejegyzésekhez"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:318
-#: plugins/SSHManager/sshmanagermodel.cpp:386
-#: plugins/SSHManager/sshmanagermodel.cpp:419
+#: plugins/SSHManager/sshmanagermodel.cpp:387
+#: plugins/SSHManager/sshmanagermodel.cpp:420
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format

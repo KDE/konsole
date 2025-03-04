@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-22 02:34+0000\n"
+"POT-Creation-Date: 2025-03-04 02:36+0000\n"
 "PO-Revision-Date: 2017-12-31 22:42+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -1589,8 +1589,8 @@ msgstr ""
 # >> @title:window
 #: plugins/SSHManager/sshmanagermodel.cpp:79
 #: plugins/SSHManager/sshmanagermodel.cpp:318
-#: plugins/SSHManager/sshmanagermodel.cpp:386
-#: plugins/SSHManager/sshmanagermodel.cpp:419
+#: plugins/SSHManager/sshmanagermodel.cpp:387
+#: plugins/SSHManager/sshmanagermodel.cpp:420
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, fuzzy, kde-format
