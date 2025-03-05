@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-04 02:36+0000\n"
-"PO-Revision-Date: 2025-02-17 19:38+0300\n"
+"PO-Revision-Date: 2025-03-04 12:41+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2130,7 +2130,7 @@ msgid ""
 msgstr ""
 "D-Bus yöntemleri olan sendText/runCommand kullanıldı. Bu yöntemlerin genele "
 "açık olması konusunda güvenlik endişeleri bulunmaktadır. Dilerseniz Konsole "
-"tekrar derlenerek bu yöntemler yalnızca içsel olarak kullanılmak üzere "
+"yeniden derlenerek bu yöntemler yalnızca içsel olarak kullanılmak üzere "
 "değiştirilebilir.<p>Bu uyarı yalnızca bu Konsole örneği için bir kez "
 "gösterilecek.</p>"
 
@@ -2658,13 +2658,13 @@ msgstr "Bildirimler:"
 #: settings/GeneralSettings.ui:224
 #, kde-format
 msgid "All dialogs will be shown again"
-msgstr "Tüm pencereler tekrar gösterilecek"
+msgstr "Tüm iletişim kutuları yeniden gösterilecek"
 
 #. i18n: ectx: property (text), widget (QPushButton, enableAllMessagesButton)
 #: settings/GeneralSettings.ui:227
 #, kde-format
 msgid "Enable all \"Don't Ask Again\" messages"
-msgstr "Tüm “Bir Daha Sorma” İletilerini Etkinleştir"
+msgstr "“Bir Daha Sorma” İletilerini Etkinleştir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SearchReverseSearch)
 #. i18n: ectx: tooltip, entry (SearchReverseSearch), group (SearchSettings)
