@@ -271,21 +271,20 @@ void TerminalScrollBar::updatePalette(const QPalette &pal)
 
 void TerminalScrollBar::paintEvent(QPaintEvent *event)
 {
-    QPainter p(this);
+    QScrollBar::paintEvent(event);
 
     const QColor searchLineColor(_searchHighlightLineColor.red(), _searchHighlightLineColor.green(), _searchHighlightLineColor.blue(), _lineOpacity);
     const int cornerRadius = 2;
     const int stripeHeight = 1;
 
+    QPainter p(this);
     p.setPen(Qt::NoPen);
 
+    p.setBrush(searchLineColor);
     for (int y: _searchLines) {
         y = (y * height()) / _terminalLines;
-        p.setBrush(searchLineColor);
         p.drawRoundedRect(2, y, width() - 4, stripeHeight, cornerRadius, cornerRadius);
     }
-
-    QScrollBar::paintEvent(event);
 
     for (int i = 0; i < _markers.size(); ++i) {
         p.setOpacity(0.75);
