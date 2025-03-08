@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-04 02:36+0000\n"
-"PO-Revision-Date: 2025-03-04 12:41+0300\n"
+"PO-Revision-Date: 2025-03-07 23:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -874,8 +874,7 @@ msgstr "Kurt Hindenburg"
 #, kde-format
 msgctxt "@info:credit"
 msgid "General maintainer, bug fixes and general improvements"
-msgstr ""
-"Projeyi yürüten ana geliştirici, hata düzeltmeleri ve genel geliştirmeler"
+msgstr "Genel bakımcı, hata düzeltmeleri ve genel geliştirmeler"
 
 #: main.cpp:346
 #, kde-format
@@ -899,7 +898,7 @@ msgstr "Lars Doelle"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original author"
-msgstr "Asıl yazar"
+msgstr "Özgün yazar"
 
 #: main.cpp:350
 #, kde-format
