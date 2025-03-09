@@ -274,6 +274,10 @@ constexpr int token_apc(int a)
 {
     return token_construct(15, a, 0);
 }
+constexpr int token_csi_pl(int a)
+{
+    return token_construct(16, a, 0);
+}
 
 const int MAX_ARGUMENT = 40960;
 
@@ -524,6 +528,8 @@ void Vt102Emulation::csi_dispatch(const uint cc)
         for (int i = 0; i <= params.count; i++) {
             if (tokenBufferPos != 0 && tokenBuffer[0] == '?') {
                 processToken(token_csi_pr(cc, params.value[i]), i, 0);
+            } else if (tokenBufferPos != 0 && tokenBuffer[0] == '<') {
+                processToken(token_csi_pl(cc), 0, 0);
             } else if (tokenBufferPos != 0 && tokenBuffer[0] == '=') {
                 processToken(token_csi_pq(cc), 0, 0);
             } else if (tokenBufferPos != 0 && tokenBuffer[0] == '>') {
