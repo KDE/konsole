@@ -45,6 +45,7 @@
 #include <sessionadaptor.h>
 #endif
 
+#include "DumbEmulation.h"
 #include "Pty.h"
 #include "SSHProcessInfo.h"
 #include "SessionController.h"
@@ -79,8 +80,12 @@ using namespace Konsole;
 static bool show_disallow_certain_dbus_methods_message = true;
 
 static const int ZMODEM_BUFFER_SIZE = 1048576; // 1 Mb
-
 Session::Session(QObject *parent)
+{
+    Session(parent, Profile::Ptr());
+}
+
+Session::Session(QObject *parent, Profile::Ptr profile)
     : QObject(parent)
 {
     _uniqueIdentifier = QUuid::createUuid();
@@ -101,7 +106,11 @@ Session::Session(QObject *parent)
 #endif
 
     // create emulation backend
-    _emulation = new Vt102Emulation();
+    if (profile->emulation() == QStringLiteral("dumb")) {
+        _emulation = new DumbEmulation();
+    } else {
+        _emulation = new Vt102Emulation();
+    }
     _emulation->reset();
 
     connect(_emulation, &Konsole::Emulation::sessionAttributeChanged, this, &Konsole::Session::setSessionAttribute);
@@ -552,6 +561,7 @@ void Session::run()
     addEnvironmentEntry(QStringLiteral("SHELL_SESSION_ID=%1").arg(shellSessionId()));
 
     addEnvironmentEntry(QStringLiteral("WINDOWID=%1").arg(QString::number(windowId())));
+    addEnvironmentEntry(QStringLiteral("TERM=%1").arg(_emulation->TERM));
 
 #if HAVE_DBUS
     const QString dbusService = QDBusConnection::sessionBus().baseService();

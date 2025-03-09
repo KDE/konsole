@@ -144,6 +144,7 @@ const std::vector<Profile::PropertyInfo> Profile::DefaultProperties = {
     {PeekPrimaryKeySequence, "PeekPrimaryKeySequence", TERMINAL_GROUP, QString()},
     {LineNumbers, "LineNumbers", TERMINAL_GROUP, 0},
     {AutoSaveInterval, "AutoSaveInterval", TERMINAL_GROUP, 10000},
+    {Emulation, "Emulation", TERMINAL_GROUP, QVariant::String},
 
     // Cursor
     {UseCustomCursorColor, "UseCustomCursorColor", CURSOR_GROUP, false},

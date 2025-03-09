@@ -361,6 +361,8 @@ public:
         /** Shortcut for peeking primary screen */
         PeekPrimaryKeySequence,
 
+        Emulation,
+
         /** (bool) If true, text that matches a color in hex format
          *  when hovered by the mouse pointer.
          */
@@ -901,6 +903,11 @@ public:
     bool semanticInputClick() const
     {
         return property<bool>(Profile::SemanticInputClick);
+    }
+
+    QString emulation() const
+    {
+        return property<QString>(Profile::Emulation);
     }
 
     /** Return a list of all properties names and their type

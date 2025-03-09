@@ -89,6 +89,8 @@ public:
     Emulation();
     ~Emulation() override;
 
+    QString TERM;
+
     /**
      * Creates a new window onto the output from this emulation.  The contents
      * of the window are then rendered by views which are set to use this window using the

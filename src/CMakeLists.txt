@@ -168,6 +168,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         ViewManager.cpp
                         ViewProperties.cpp
                         Vt102Emulation.cpp
+                        DumbEmulation.cpp
                         WindowSystemInfo.cpp
                         ZModemDialog.cpp
                         filterHotSpots/EscapeSequenceUrlFilter.cpp

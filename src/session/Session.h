@@ -23,6 +23,7 @@
 #include "Shortcut_p.h"
 #include "config-konsole.h"
 #include "konsoleprivate_export.h"
+#include "profile/Profile.h"
 
 class QColor;
 class QTextCodec;
@@ -76,6 +77,7 @@ public:
      * variable.
      */
     explicit Session(QObject *parent = nullptr);
+    explicit Session(QObject *parent, Profile::Ptr profile);
     ~Session() override;
 
     /* Returns the process info so the plugins can peek at it's name */

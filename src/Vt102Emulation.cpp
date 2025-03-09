@@ -78,6 +78,8 @@ Vt102Emulation::Vt102Emulation()
     _sessionAttributesUpdateTimer->setSingleShot(true);
     QObject::connect(_sessionAttributesUpdateTimer, &QTimer::timeout, this, &Konsole::Vt102Emulation::updateSessionAttributes);
 
+    TERM = QStringLiteral("xterm-256color");
+
     initTokenizer();
     imageId = 0;
     savedKeys = QMap<char, qint64>();
