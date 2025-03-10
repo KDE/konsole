@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-04 00:43+0000\n"
+"POT-Creation-Date: 2025-03-10 00:45+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -2147,8 +2147,8 @@ msgstr "Σιγή στην '%1' (Συνεδρία '%2')"
 
 #: session/Session.cpp:738 session/Session.cpp:2076
 #: session/SessionController.cpp:362 session/SessionController.cpp:1889
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
-#: Vt102Emulation.cpp:1459
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
+#: Vt102Emulation.cpp:1465
 #, kde-format
 msgid "Show session"
 msgstr "Εμφάνιση συνεδρίας"
@@ -3743,7 +3743,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Φόρτωση διάταξης καρτελών"
 
-#: Vt102Emulation.cpp:2818
+#: Vt102Emulation.cpp:2824
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
