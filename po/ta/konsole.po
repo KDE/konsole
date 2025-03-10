@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-04 00:43+0000\n"
-"PO-Revision-Date: 2025-02-02 16:08+0530\n"
+"POT-Creation-Date: 2025-03-10 03:01+0000\n"
+"PO-Revision-Date: 2025-03-09 18:15+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2118,8 +2118,8 @@ msgstr "'%1' என்பதில் அமைதி (அமர்வு '%2')"
 
 #: session/Session.cpp:738 session/Session.cpp:2076
 #: session/SessionController.cpp:362 session/SessionController.cpp:1889
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
-#: Vt102Emulation.cpp:1459
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
+#: Vt102Emulation.cpp:1465
 #, kde-format
 msgid "Show session"
 msgstr "அமர்வைக் காட்டு"
@@ -3691,7 +3691,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "கீற்றுகளின் தளவமைப்பை ஏற்றுல்"
 
-#: Vt102Emulation.cpp:2818
+#: Vt102Emulation.cpp:2824
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
@@ -5156,10 +5156,9 @@ msgstr "உருள் பட்டைக் குறிகளின் நி
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
-#, fuzzy, kde-format
-#| msgid "Color of scrollbar markers:"
+#, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr "உருள் பட்டைக் குறிகளின் நிறம்:"
+msgstr "தேடியதை உருள் பட்டையில் குறிக்கும் கோடுகளின் நிறம்:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:181
@@ -5221,7 +5220,7 @@ msgstr "உருள்பட்டையின் இருப்பிடம�
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "தேடியதை குறிக்கும் கோடுகளின் ஒளிபுகாமை:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43

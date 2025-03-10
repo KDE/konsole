@@ -5,7 +5,7 @@
 # Author: Lliehu
 # Author: Niklas Laxström
 # Author: Rytilahti
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 # Kim Enkovaara <kim.enkovaara@iki.fi>, 2002,2003, 2006.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2003, 2012.
 # Mikko Ikola <ikola@iki.fi>, 2003, 2005.
@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-04 00:43+0000\n"
-"PO-Revision-Date: 2024-12-09 21:26+0200\n"
+"POT-Creation-Date: 2025-03-10 03:01+0000\n"
+"PO-Revision-Date: 2025-02-14 19:36+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2145,8 +2145,8 @@ msgstr "Hiljaisuus päätteessä ”%1” (istunto ”%2”)"
 
 #: session/Session.cpp:738 session/Session.cpp:2076
 #: session/SessionController.cpp:362 session/SessionController.cpp:1889
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
-#: Vt102Emulation.cpp:1459
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
+#: Vt102Emulation.cpp:1465
 #, kde-format
 msgid "Show session"
 msgstr "Näytä istunto"
@@ -2510,15 +2510,12 @@ msgstr ""
 "väkisin?"
 
 #: session/SessionController.cpp:1169
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
 msgstr ""
-"Tämän istunnon ohjelma %1 ei suostu lopettamaan. Haluatko varmasti tappaa "
+"Tämän istunnon ohjelma %1 ei suostunut päättymään. Haluatko varmasti tappaa "
 "sen väkisin?"
 
 #: session/SessionController.cpp:1177
@@ -3721,7 +3718,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr "Lataa välilehtiasettelu"
 
-#: Vt102Emulation.cpp:2818
+#: Vt102Emulation.cpp:2824
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "

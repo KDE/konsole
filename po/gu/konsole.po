@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-04 00:43+0000\n"
+"POT-Creation-Date: 2025-03-10 03:01+0000\n"
 "PO-Revision-Date: 2010-06-22 16:43+0530\n"
 "Last-Translator: Sweta Kothari <swkothar@redhat.com>\n"
 "Language-Team: Gujarati\n"
@@ -2287,8 +2287,8 @@ msgstr "સત્ર '%1' માં શાંતિ"
 
 #: session/Session.cpp:738 session/Session.cpp:2076
 #: session/SessionController.cpp:362 session/SessionController.cpp:1889
-#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1204
-#: Vt102Emulation.cpp:1459
+#: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
+#: Vt102Emulation.cpp:1465
 #, fuzzy, kde-format
 #| msgid "Konsole"
 msgid "Show session"
@@ -3943,7 +3943,7 @@ msgctxt "@title:window"
 msgid "Load Tab Layout"
 msgstr ""
 
-#: Vt102Emulation.cpp:2818
+#: Vt102Emulation.cpp:2824
 #, kde-format
 msgid ""
 "No keyboard translator available.  The information needed to convert key "
