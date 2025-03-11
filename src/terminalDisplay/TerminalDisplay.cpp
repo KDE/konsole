@@ -1517,6 +1517,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
             clearSelection();
         } else {
             if (_actSel > 1) {
+                copyToX11Selection();
                 if (_possibleTripleClick) {
                     const QString text = _screenWindow->selectedText(currentDecodingOptions());
                     if (!text.isEmpty()) {
@@ -1525,8 +1526,6 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent *ev)
                             _doubleClickSelectedHtml = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
                         }
                     }
-                } else {
-                    copyToX11Selection();
                 }
             }
 
