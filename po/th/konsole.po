@@ -1,39 +1,40 @@
 # translation of konsole.po to Thai
 # Copyright (C) 2003, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
-#
 # Thanomsub Noppaburana <donga_n@yahoo.com>, 2003, 2005.
 # Sahachart Anukulkitch <drrider@gmail.com>, 2005, 2006, 2007.
 # Thanomsub Noppaburana <donga.nb@gmail.com>, 2008, 2010.
+# SPDX-FileCopyrightText: 2025 Atirut Wattanamongkol <atirut.wattanamongkol@gmailcom>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-17 00:44+0000\n"
-"PO-Revision-Date: 2010-12-17 20:05+0700\n"
-"Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
-"Language-Team: Thai <thai-l10n@googlegroups.com>\n"
+"PO-Revision-Date: 2025-03-17 21:03+0700\n"
+"Last-Translator: Atirut Wattanamongkol <atirut.wattanamongkol@gmailcom>\n"
+"Language-Team: Thai\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ถนอมทรัพย์ นพบูรณ์"
+msgstr "ถนอมทรัพย์ นพบูรณ์, อติรุจ วัฒนะมงคล"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "donga.nb@gmail.com"
+msgstr "donga.nb@gmail.com, atirut.wattanamongkol@gmail.com"
 
 #. i18n: ectx: Menu (file)
 #: ../desktop/konsoleui.rc:6
 #, kde-format
 msgid "File"
-msgstr "แฟ้ม"
+msgstr "ไฟล์"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnEdit)
 #. i18n: ectx: Menu (edit)
@@ -66,7 +67,7 @@ msgstr "ตั้งค่า"
 #: ../desktop/konsoleui.rc:54
 #, kde-format
 msgid "Plugins"
-msgstr ""
+msgstr "ปลั๊กอิน"
 
 #. i18n: ectx: Menu (help)
 #: ../desktop/konsoleui.rc:57
@@ -78,7 +79,7 @@ msgstr "ช่วยเหลือ"
 #: ../desktop/konsoleui.rc:61
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "แถบเครื่องมือหลัก"
 
 #. i18n: ectx: Menu (history)
 #: ../desktop/partui.rc:20
@@ -88,10 +89,9 @@ msgstr "การเ&ลื่อนกลับ"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:80
-#, fuzzy, kde-format
-#| msgid "Session Number"
+#, kde-format
 msgid "Session Toolbar"
-msgstr "หมายเลขวาระ"
+msgstr "เครื่องมือเซสชัน"
 
 #: Application.cpp:53
 #, fuzzy, kde-format
@@ -811,11 +811,10 @@ msgid ""
 msgstr ""
 
 #: HistorySizeDialog.cpp:25
-#, fuzzy, kde-format
-#| msgid "Adjust Scrollback"
+#, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
-msgstr "ปรับการเลื่อนกลับ"
+msgstr "ปรับแต่งการเลื่อนกลับ"
 
 #: HistorySizeDialog.cpp:46
 #, kde-format
@@ -1278,8 +1277,7 @@ msgid "Thanks to many others.\n"
 msgstr "ขอขอบคุณอีกหลาย ๆ ท่าน\n"
 
 #: MainWindow.cpp:339
-#, fuzzy, kde-format
-#| msgid "&New Tab"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Tab"
 msgstr "เปิดแ&ท็บใหม่"
@@ -1292,11 +1290,10 @@ msgid "&Clone Tab"
 msgstr "&ปิดแท็บ"
 
 #: MainWindow.cpp:356
-#, fuzzy, kde-format
-#| msgid "New &Window"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Window"
-msgstr "เปิด&หน้าต่างใหม่"
+msgstr "ห&น้าต่างใหม่"
 
 #: MainWindow.cpp:363
 #, fuzzy, kde-format
@@ -1306,8 +1303,7 @@ msgid "Close Window"
 msgstr "คอนโซล-K"
 
 #: MainWindow.cpp:368
-#, fuzzy, kde-format
-#| msgid "&Bookmarks"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Bookmarks"
 msgstr "&ที่คั่นหน้า"
@@ -1385,17 +1381,13 @@ msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "คุณมีแท็บหลายแท็บในหน้าต่างนี้ คุณแน่ใจหรือว่าคุณต้องการออกจากโปรแกรม?"
 
 #: MainWindow.cpp:877 Part.cpp:297
-#, fuzzy, kde-format
-#| msgctxt "@item This will be used as part of the file name"
-#| msgid "New Profile"
+#, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
-msgstr "สร้างโพรไฟล์ใหม่"
+msgstr "โปรไฟล์"
 
 #: MainWindow.cpp:894
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Generic, common options"
-#| msgid "General"
+#, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "ทั่วไป"
@@ -1404,7 +1396,7 @@ msgstr "ทั่วไป"
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
-msgstr ""
+msgstr "ความจำ"
 
 #: MainWindow.cpp:912
 #, kde-format
@@ -1416,13 +1408,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
-msgstr ""
+msgstr "ไฟล์ชั่วคราว"
 
 #: MainWindow.cpp:922
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
-msgstr ""
+msgstr "รูปขนาดย่อ"
 
 #: Part.cpp:300
 #, kde-format
@@ -2037,7 +2029,7 @@ msgstr ""
 #: profile/ProfileList.cpp:37 widgets/EditProfileDialog.cpp:539
 #, kde-format
 msgid "Default profile"
-msgstr "โพรไฟล์ปริยาย"
+msgstr "โปรไฟล์ปริยาย"
 
 #: profile/ProfileManager.cpp:280
 #, fuzzy, kde-format
@@ -2073,14 +2065,13 @@ msgctxt ""
 "@label:textbox added to the name of the built-in profile, to point out it's "
 "read-only"
 msgid " [Read-only]"
-msgstr ""
+msgstr " [อ่านอย่างเดียว]"
 
 #: profile/ProfileModel.cpp:84
-#, fuzzy, kde-format
-#| msgid "Set as Default"
+#, kde-format
 msgctxt "@label:textbox added to the name of the current default profile"
 msgid " [Default]"
-msgstr "ตั้งเป็นค่าปริยาย"
+msgstr " [ปริยาย]"
 
 #: profile/ProfileModel.cpp:99
 #, kde-format
@@ -2249,7 +2240,7 @@ msgstr "มีออดเตือนในวาระ '%1'"
 #: session/Session.cpp:404
 #, kde-format
 msgid "Could not find binary: "
-msgstr "ไม่สามารถค้นหาแฟ้มไบนารีได้: "
+msgstr "ไม่สามารถค้นหาไฟล์ไบนารีได้: "
 
 #: session/Session.cpp:413
 #, kde-format
@@ -2268,7 +2259,7 @@ msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
-"ไม่สามารถค้นหา '%1' ได้, กำลังเริ่ม '%2' เพื่อใช้งานแทน  โปรดตรวจสอบการตั้งค่าโพรไฟล์ของคุณ"
+"ไม่สามารถค้นหา '%1' ได้, กำลังเริ่ม '%2' เพื่อใช้งานแทน  โปรดตรวจสอบการตั้งค่าโปรไฟล์ของคุณ"
 
 #: session/Session.cpp:580
 #, kde-format
@@ -2339,7 +2330,7 @@ msgstr ""
 #: session/SessionController.cpp:444
 #, kde-format
 msgid "Konsole does not know how to open the bookmark: "
-msgstr "คอนโซล-K ไม่ทราบว่าจะทำการเปิดที่คั่นหน้าต่อไปนี้ได้อย่างไร: "
+msgstr "Konsole ไม่ทราบว่าจะทำการเปิดที่คั่นหน้าต่อไปนี้ได้อย่างไร: "
 
 #: session/SessionController.cpp:523
 #, kde-format
@@ -2361,27 +2352,22 @@ msgstr "คอนโซล-K"
 #: session/SessionController.cpp:657
 #, kde-format
 msgid "Open File Manager"
-msgstr "เปิดเครื่องมือจัดการแฟ้ม"
+msgstr "เปิดเครื่องมือจัดการไฟล์"
 
 #: session/SessionController.cpp:672
-#, fuzzy, kde-format
-#| msgid "&Copy"
+#, kde-format
 msgid "Copy"
 msgstr "&คัดลอก"
 
 #: session/SessionController.cpp:679
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
-msgstr "มุมมองแยก ซ้าย/ขวา"
+msgstr "แยกมุมมอง ซ้าย/ขวา"
 
 #: session/SessionController.cpp:684
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
-msgstr "มุมมองแยก บน/ล่าง"
+msgstr "แยกมุมมอง บน/ล่าง"
 
 #: session/SessionController.cpp:688
 #, kde-format
@@ -2452,10 +2438,9 @@ msgid "&Print Screen..."
 msgstr ""
 
 #: session/SessionController.cpp:758
-#, fuzzy, kde-format
-#| msgid "Configure Scrollback..."
+#, kde-format
 msgid "Adjust Scrollback..."
-msgstr "ปรับแต่งหน้าจอเลื่อนกลับ..."
+msgstr "ปรับแต่งการเลื่อนกลับ..."
 
 #: session/SessionController.cpp:762
 #, kde-format
@@ -2480,10 +2465,9 @@ msgid "Previous Profile"
 msgstr "มุมมองก่อนหน้า"
 
 #: session/SessionController.cpp:785
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Switch Profile"
-msgstr "แก้ไขโพรไฟล์"
+msgstr "สลับโปรไฟล์"
 
 #: session/SessionController.cpp:810
 #, kde-format
@@ -2494,13 +2478,13 @@ msgstr "ตั้งชุด&รหัสอักขระ"
 #, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
-msgstr ""
+msgstr "อนุญาตให้ติดตามเมาส์"
 
 #: session/SessionController.cpp:839
 #, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
-msgstr ""
+msgstr "อ่านอย่างเดียว"
 
 #: session/SessionController.cpp:850
 #, fuzzy, kde-format
@@ -2572,10 +2556,9 @@ msgid "Shrink Font"
 msgstr "ลดขนาดตัวอักษร"
 
 #: session/SessionController.cpp:934
-#, fuzzy, kde-format
-#| msgid "Increase Text Size"
+#, kde-format
 msgid "Reset Font Size"
-msgstr "เพิ่มขนาดอักษร"
+msgstr "คืนขนาดอักษร"
 
 #: session/SessionController.cpp:940
 #, kde-format
@@ -2625,15 +2608,14 @@ msgid "User Signal &2"
 msgstr ""
 
 #: session/SessionController.cpp:997
-#, fuzzy, kde-format
-#| msgid "New Profile..."
+#, kde-format
 msgid "Create New Profile..."
-msgstr "สร้างโพรไฟล์ใหม่..."
+msgstr "สร้างโปรไฟล์ใหม่..."
 
 #: session/SessionController.cpp:999
 #, kde-format
 msgid "Edit Current Profile..."
-msgstr "แก้ไขโพรไฟล์ปัจจุบัน"
+msgstr "แก้ไขโปรไฟล์ปัจจุบัน"
 
 #: session/SessionController.cpp:1130
 #, kde-format
@@ -2710,14 +2692,14 @@ msgid ""
 "software was found on this system.</p><p>You may wish to install the 'rzsz' "
 "or 'lrzsz' package.</p>"
 msgstr ""
-"<p>ตรวจพบการพยายามส่งถ่ายแฟ้มผ่าน ZModem แต่ไม่พบโปรแกรม ZModem ที่เหมาะสมในระบบนี้</"
+"<p>ตรวจพบการพยายามส่งถ่ายไฟล์ผ่าน ZModem แต่ไม่พบโปรแกรม ZModem ที่เหมาะสมในระบบนี้</"
 "p><p>คุณควรจะทำการติดตั้งแพกเกจ 'rzsz' หรือ 'lrzsz' ก่อน</p>"
 
 #: session/SessionController.cpp:2174
 #, kde-format
 msgid ""
 "<p>The current session already has a ZModem file transfer in progress.</p>"
-msgstr "<p>มีการส่งถ่ายแฟ้มผ่านทาง ZModem ในวาระปัจจุบันอยู่แล้ว</p>"
+msgstr "<p>มีการส่งถ่ายไฟล์ผ่านทาง ZModem ในวาระปัจจุบันอยู่แล้ว</p>"
 
 #: session/SessionController.cpp:2187
 #, kde-format
@@ -2731,7 +2713,7 @@ msgstr ""
 #: session/SessionController.cpp:2192
 #, kde-format
 msgid "Select Files for ZModem Upload"
-msgstr "เลือกแฟ้มสำหรับอัปโหลดผ่าน ZModem"
+msgstr "เลือกไฟล์สำหรับอัปโหลดผ่าน ZModem"
 
 #: session/SessionListModel.cpp:89
 #, fuzzy, kde-format
@@ -2778,15 +2760,14 @@ msgstr ""
 #: settings/GeneralSettings.ui:72
 #, kde-format
 msgid "Remember window size"
-msgstr ""
+msgstr "จำขนาดหน้าต่าง"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowWindowTitleOnTitleBar)
 #. i18n: ectx: label, entry (ShowWindowTitleOnTitleBar), group (KonsoleWindow)
 #: settings/GeneralSettings.ui:85 settings/konsole.kcfg:17
-#, fuzzy, kde-format
-#| msgid "Save window size and position on exit"
+#, kde-format
 msgid "Show window title on the titlebar"
-msgstr "จดจำขนาดและตำแหน่งของหน้าต่างไว้เมื่อออกจากโปรแกรม"
+msgstr "แสดงชื่อหน้าต่างบนแถบชื่อ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusFollowsMouse)
 #. i18n: ectx: label, entry (FocusFollowsMouse), group (KonsoleWindow)
@@ -3148,11 +3129,9 @@ msgstr "สร้างโพรไฟล์ใหม่ โดยใช้ค�
 
 #. i18n: ectx: property (text), widget (QPushButton, newProfileButton)
 #: settings/ProfileSettings.ui:54
-#, fuzzy, kde-format
-#| msgctxt "@action:button Create an alternate color scheme"
-#| msgid "New..."
+#, kde-format
 msgid "&New..."
-msgstr "สร้าง..."
+msgstr "&สร้าง..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:64
@@ -3164,10 +3143,9 @@ msgstr "ตั้งโพรไฟล์ที่เลือกไว้เป
 
 #. i18n: ectx: property (text), widget (QPushButton, editProfileButton)
 #: settings/ProfileSettings.ui:67
-#, fuzzy, kde-format
-#| msgid "Edit..."
+#, kde-format
 msgid "&Edit..."
-msgstr "แก้ไข..."
+msgstr "แ&ก้ไข..."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:77
@@ -3178,23 +3156,21 @@ msgstr "ลบโพรไฟล์ที่เลือกไว้"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteProfileButton)
 #: settings/ProfileSettings.ui:80
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "&Remove"
-msgstr "ลบออก"
+msgstr "&ลบออก"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:90
 #, kde-format
 msgid "Set the selected profile as the default for new terminal sessions"
-msgstr "ตั้งโพรไฟล์ที่เลือกไว้เป็นค่าปริยาย สำหรับวาระเทอร์มินัลใหม่"
+msgstr "ตั้งโปรไฟล์ที่เลือกไว้เป็นค่าปริยาย สำหรับวาระเทอร์มินัลใหม่"
 
 #. i18n: ectx: property (text), widget (QPushButton, setAsDefaultButton)
 #: settings/ProfileSettings.ui:93
-#, fuzzy, kde-format
-#| msgid "Set as Default"
+#, kde-format
 msgid "&Set as Default"
-msgstr "ตั้งเป็นค่าปริยาย"
+msgstr "&ตั้งเป็นค่าปริยาย"
 
 #. i18n: ectx: attribute (title), widget (QWidget, appearanceTab)
 #: settings/TabBarSettings.ui:39
@@ -3214,13 +3190,13 @@ msgstr ""
 #: settings/TabBarSettings.ui:63
 #, kde-format
 msgid "When needed"
-msgstr ""
+msgstr "เมื่อจำเป็น"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysShowTabBar)
 #: settings/TabBarSettings.ui:73
 #, kde-format
 msgid "Alwa&ys"
-msgstr ""
+msgstr "&ทุกเมื่อ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, AlwaysHideTabBar)
 #: settings/TabBarSettings.ui:83
@@ -3230,70 +3206,58 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, positionLabel)
 #: settings/TabBarSettings.ui:109
-#, fuzzy, kde-format
-#| msgid "Description:"
+#, kde-format
 msgid "Position:"
-msgstr "คำอธิบาย:"
+msgstr "ตำแหน่ง:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Top)
 #: settings/TabBarSettings.ui:119
-#, fuzzy, kde-format
-#| msgid "Above Terminal Displays"
+#, kde-format
 msgid "Above terminal area"
-msgstr "เหนือหน้าจอเทอร์มินัล"
+msgstr "เหนือพื้นที่เทอร์มินัล"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Bottom)
 #: settings/TabBarSettings.ui:129
-#, fuzzy, kde-format
-#| msgid "Below Terminal Displays"
+#, kde-format
 msgid "Be&low terminal area"
-msgstr "ข้างใต้หน้าจอเทอร์มินัล"
+msgstr "ข้างใ&ต้พื้นที่เทอร์มินัล"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Left)
 #: settings/TabBarSettings.ui:139
-#, fuzzy, kde-format
-#| msgid "Below Terminal Displays"
+#, kde-format
 msgid "To the left of terminal area"
-msgstr "ข้างใต้หน้าจอเทอร์มินัล"
+msgstr "ด้านซ้ายของพื้นที่เทอร์มินัล"
 
 #. i18n: ectx: property (text), widget (QRadioButton, Right)
 #: settings/TabBarSettings.ui:149
-#, fuzzy, kde-format
-#| msgid "Below Terminal Displays"
+#, kde-format
 msgid "To the &right of terminal area"
-msgstr "ข้างใต้หน้าจอเทอร์มินัล"
+msgstr "ด้าน&ขวาของพื้นที่เทอร์มินัล"
 
 #. i18n: ectx: property (text), widget (QLabel, showCloseTabButtonLabel)
 #: settings/TabBarSettings.ui:175
-#, fuzzy, kde-format
-#| msgid "&Close Tab"
+#, kde-format
 msgid "Show Close Tab button:"
-msgstr "&ปิดแท็บ"
+msgstr "แสดงปุ่มปิดแท็บ:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgid "On ea&ch tab"
-msgstr "แ&ยกแท็บ"
+msgstr "บน&ทุก ๆ แท็บ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnTabBar)
 #: settings/TabBarSettings.ui:195
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Detach Tab"
+#, kde-format
 msgid "On &the tab bar"
-msgstr "แ&ยกแท็บ"
+msgstr "บน&แถบแท็บ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, None)
 #: settings/TabBarSettings.ui:205
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr "&ไม่มี"
+msgstr "ไม่แสดง"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
@@ -3320,20 +3284,19 @@ msgstr ""
 #, kde-format
 msgctxt "@item:intext Miscellaneous Options"
 msgid "Miscellaneous:"
-msgstr ""
+msgstr "เบ็ดเตล็ด"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NewTabButton)
 #: settings/TabBarSettings.ui:287
-#, fuzzy, kde-format
-#| msgid "Show 'New Tab' and 'Close Tab' buttons in tab bar"
+#, kde-format
 msgid "Show 'New Tab' button"
-msgstr "แสดงปุ่ม 'สร้างแท็บใหม่' และ 'ปิดแท็บ' ในแถบแท็บ"
+msgstr "แสดงปุ่ม 'แท็บใหม่'"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpandTabWidth)
 #: settings/TabBarSettings.ui:294
 #, kde-format
 msgid "Expand individual tab widths to full window"
-msgstr ""
+msgstr "ขยายความกว้างแท็บให้เต็มหน้าต่าง"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabBarUseUserStyleSheet)
 #: settings/TabBarSettings.ui:301
@@ -3643,7 +3606,7 @@ msgstr ""
 #: terminalDisplay/TerminalDisplay.cpp:2611
 #, kde-format
 msgid "This terminal is read-only."
-msgstr ""
+msgstr "เทอร์มินัลนี้อ่านอย่างเดียว"
 
 #: terminalDisplay/TerminalDisplay.cpp:3006
 #, kde-format
@@ -3657,8 +3620,7 @@ msgid "&Paste Location"
 msgstr "วางการเลือก"
 
 #: ViewManager.cpp:120
-#, fuzzy, kde-format
-#| msgid "Split View"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View"
 msgstr "แยกมุมมอง"
@@ -3667,45 +3629,37 @@ msgstr "แยกมุมมอง"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right"
-msgstr "มุมมองแยก ซ้าย/ขวา"
+msgstr "แยกมุมมอง ซ้าย/ขวา"
 
 #: ViewManager.cpp:135
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom"
-msgstr "มุมมองแยก บน/ล่าง"
+msgstr "แยกมุมมอง บน/ล่าง"
 
 #: ViewManager.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "มุมมองแยก บน/ล่าง"
+msgstr "แยกมุมมองโดยอัตโนมัติ"
 
 #: ViewManager.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Left/Right from next tab"
-msgstr "มุมมองแยก ซ้าย/ขวา"
+msgstr "แยกมุมมอง ซ้าย/ขวา จากแท็บต่อไป"
 
 #: ViewManager.cpp:161
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Top/Bottom from next tab"
-msgstr "มุมมองแยก บน/ล่าง"
+msgstr "แยกมุมมอง บน/ล่าง จากแท็บต่อไป"
 
 #: ViewManager.cpp:169
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically from next tab"
-msgstr "มุมมองแยก บน/ล่าง"
+msgstr "แยกมุมมองจากแท็บต่อไปโดยอัตโนมัติ"
 
 #: ViewManager.cpp:179
 #, kde-format
@@ -4582,7 +4536,7 @@ msgstr ""
 #: widgets/EditProfileDialog.cpp:68
 #, kde-format
 msgid "Edit Profile"
-msgstr "แก้ไขโพรไฟล์"
+msgstr "แก้ไขโปรไฟล์"
 
 #: widgets/EditProfileDialog.cpp:95
 #, kde-format
@@ -4664,18 +4618,17 @@ msgstr ""
 #, kde-format
 msgid "Editing profile: %2"
 msgid_plural "Editing %1 profiles: %2"
-msgstr[0] "กำลังแก้ไขโพรไฟล์ %1: %2"
+msgstr[0] "กำลังแก้ไขโปรไฟล์ %1: %2"
 
 #: widgets/EditProfileDialog.cpp:422
-#, fuzzy, kde-format
-#| msgid "New Profile..."
+#, kde-format
 msgid "Create New Profile"
-msgstr "สร้างโพรไฟล์ใหม่..."
+msgstr "สร้างโปรไฟล์ใหม่"
 
 #: widgets/EditProfileDialog.cpp:425
 #, kde-format
 msgid "Edit Profile \"%1\""
-msgstr "แก้ไขโพรไฟล์ \"%1\""
+msgstr "แก้ไขโปรไฟล์ \"%1\""
 
 #: widgets/EditProfileDialog.cpp:516
 #, kde-format
@@ -4811,13 +4764,13 @@ msgstr "การเข้ารหัสอักขระปริยาย:"
 #: widgets/EditProfileGeneralPage.ui:66
 #, kde-format
 msgid "Select the icon displayed on tabs using this profile"
-msgstr "เลือกไอคอนที่จะให้แสดงบนแท็บที่ใช้โพรไฟล์นี้"
+msgstr "เลือกไอคอนที่จะให้แสดงบนแท็บที่ใช้โปรไฟล์นี้"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:84
 #, kde-format
 msgid "A descriptive name for the profile"
-msgstr "ชื่ออธิบายของโพรไฟล์"
+msgstr "ชื่ออธิบายของโปรไฟล์"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, profileNameEdit)
 #: widgets/EditProfileGeneralPage.ui:87
@@ -4846,7 +4799,7 @@ msgstr "คำสั่ง:"
 msgid ""
 "The command to execute when new terminal sessions are created using this "
 "profile"
-msgstr "คำสั่งที่จะเรียกใช้ เมื่อมีการสร้างวาระของเทอร์มินัลขึ้นมาใหม่โดยใช้โพรไฟล์นี้"
+msgstr "คำสั่งที่จะเรียกใช้ เมื่อมีการสร้างวาระของเทอร์มินัลขึ้นมาใหม่โดยใช้โปรไฟล์นี้"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, commandEdit)
 #: widgets/EditProfileGeneralPage.ui:144
@@ -4866,7 +4819,7 @@ msgstr "ไดเรกทอรีเริ่มต้น"
 #, kde-format
 msgid ""
 "The initial working directory for new terminal sessions using this profile"
-msgstr "ไดเรกทอรีทำงานเริ่มต้นสำหรับวาระเทอร์มินัลใหม่ที่ใช้โพรไฟล์นี้"
+msgstr "ไดเรกทอรีทำงานเริ่มต้นสำหรับวาระเทอร์มินัลใหม่ที่ใช้โปรไฟล์นี้"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, initialDirEdit)
 #: widgets/EditProfileGeneralPage.ui:176
@@ -5593,11 +5546,10 @@ msgid "&None"
 msgstr "&ไม่มี"
 
 #: widgets/IncrementalSearchBar.cpp:50
-#, fuzzy, kde-format
-#| msgid "Find:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Find..."
-msgstr "ค้นหา:"
+msgstr "ค้นหา..."
 
 #: widgets/IncrementalSearchBar.cpp:52
 #, fuzzy, kde-format
@@ -5613,11 +5565,10 @@ msgid "Next"
 msgstr "ถัดไป"
 
 #: widgets/IncrementalSearchBar.cpp:77
-#, fuzzy, kde-format
-#| msgid "Find the next match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the next match for the current search phrase"
-msgstr "ค้นหาคำที่ตรงกันกับคำค้นในปัจจุบันตัวถัดไป"
+msgstr "ค้นหาคำถัดไปที่ตรงกัน"
 
 #: widgets/IncrementalSearchBar.cpp:84
 #, kde-format
@@ -5626,15 +5577,13 @@ msgid "Previous"
 msgstr "ก่อนหน้า"
 
 #: widgets/IncrementalSearchBar.cpp:86
-#, fuzzy, kde-format
-#| msgid "Find the previous match for the current search phrase"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Find the previous match for the current search phrase"
-msgstr "ค้นหาคำที่ตรงกันกับคำค้นในปัจจุบันตัวก่อนหน้า"
+msgstr "ค้นหาคำก่อนหน้าที่ตรงกัน"
 
 #: widgets/IncrementalSearchBar.cpp:101
-#, fuzzy, kde-format
-#| msgid "Display the options menu"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Display the options menu"
 msgstr "แสดงเมนูตัวเลือก"
