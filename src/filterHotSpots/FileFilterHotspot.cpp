@@ -77,9 +77,9 @@ void FileFilterHotSpot::activate(QObject *)
     // Output of e.g.:
     // - grep with line numbers: "path/to/some/file:123:"
     //   grep with long lines e.g. "path/to/some/file:123:void blah" i.e. no space after 123:
-    // - compiler errors with line/column numbers: "/path/to/file.cpp:123:123:"
+    // - compiler errors with line/column numbers: "/path/to/file.cpp:123:123:" or "/path/to/file.cpp:123:123"
     // - ctest failing unit tests: "/path/to/file(204)"
-    static const QRegularExpression re(QStringLiteral(R"foo([:\(](\d+)(?:\)\])?(?::(\d+):|:[^\d]*)?$)foo"));
+    static const QRegularExpression re(QStringLiteral(R"foo([:\(](\d+)(?:\)\])?(?::(\d+):?|:[^\d]*)?$)foo"));
     const QRegularExpressionMatch match = re.match(_filePath);
     if (match.hasMatch()) {
         // The file path without the ":123" ... etc part
