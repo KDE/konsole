@@ -475,9 +475,8 @@ void SessionController::updateCopyAction(const bool selectionEmpty)
     QAction *copyAction = actionCollection()->action(QStringLiteral("edit_copy"));
     QAction *copyContextMenu = actionCollection()->action(QStringLiteral("edit_copy_contextmenu"));
     // copy action is meaningful only when some text is selected.
-    // Or when semantic integration is used.
     bool hasRepl = view() && view()->screenWindow() && view()->screenWindow()->screen() && view()->screenWindow()->screen()->hasRepl();
-    copyAction->setEnabled(!selectionEmpty || hasRepl);
+    copyAction->setEnabled(!selectionEmpty);
     copyContextMenu->setVisible(!selectionEmpty || hasRepl);
     QAction *Action = actionCollection()->action(QStringLiteral("edit_copy_contextmenu_in"));
     Action->setVisible(!selectionEmpty && hasRepl);
