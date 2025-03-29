@@ -78,6 +78,8 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
         int delta = forwards ? maxDelta : -maxDelta;
 
         int endLine = line;
+        bool continueLoop = true;
+        bool invertDirection = false;
         bool hasWrapped = false; // set to true when we reach the top/bottom
         // of the output and continue from the other
         // end
@@ -126,9 +128,15 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
                 endLine += delta;
 
                 if (forwards) {
-                    endLine = qMin(startLine, endLine);
+                    if (endLine >= startLine) {
+                        endLine = startLine;
+                        continueLoop = false;
+                    }
                 } else {
-                    endLine = qMax(startLine, endLine);
+                    if (endLine <= startLine) {
+                        endLine = startLine;
+                        continueLoop = false;
+                    }
                 }
             } else {
                 endLine += delta;
@@ -177,7 +185,11 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
 
             // if noWrap is checked and we wrapped, set cursor at last match
             if (hasWrapped && _noWrap) {
-                // invert search direction
+                // one chance to invert search direction
+                if (invertDirection) {
+                    continueLoop = false;
+                }
+                invertDirection = true;
                 forwards = !forwards;
                 delta = -delta;
                 endLine += (forwards ? 1 : -1);
@@ -187,7 +199,7 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
             // clear the current block of text and move to the next one
             string.clear();
             line = endLine;
-        } while (startLine != endLine);
+        } while (continueLoop);
         if (!session->getSelectMode()) {
             // if no match was found, clear selection to indicate this,
             window->clearSelection();
