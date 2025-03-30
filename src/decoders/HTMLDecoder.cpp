@@ -30,6 +30,15 @@ void HTMLDecoder::begin(QTextStream *output)
 {
     _output = output;
 
+    // open html document & body, ensure right encoding set, bug 500515
+    *_output << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    *_output << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"DTD/xhtml1-strict.dtd\">\n";
+    *_output << "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
+    *_output << "<head>\n";
+    *_output << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
+    *_output << "</head>\n";
+    *_output << "<body>\n";
+
     QString text;
     openSpan(text, QStringLiteral("font-family:monospace"));
     *output << text;
@@ -42,6 +51,10 @@ void HTMLDecoder::end()
     QString text;
     closeSpan(text);
     *_output << text;
+
+    // close body & html document
+    *_output << "</body>\n";
+    *_output << "</html>\n";
 
     _output = nullptr;
 }

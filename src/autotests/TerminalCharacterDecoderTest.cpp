@@ -112,6 +112,14 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
     decoder->end();
     delete[] testCharacters;
     delete decoder;
+
+    // ensure we exported the encoding, bug 500515
+    QVERIFY(outputString.contains(QStringLiteral("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />")));
+
+    // strip HTML document
+    outputString.replace(QRegularExpression(QStringLiteral("^.*<body>\\n"), QRegularExpression::DotMatchesEverythingOption), QString());
+    outputString.replace(QRegularExpression(QStringLiteral("</body>.*$"), QRegularExpression::DotMatchesEverythingOption), QString());
+
     QCOMPARE(outputString, result);
 }
 
