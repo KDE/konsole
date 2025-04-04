@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-10 03:01+0000\n"
-"PO-Revision-Date: 2025-02-14 19:36+0200\n"
+"PO-Revision-Date: 2025-04-03 17:44+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -5182,10 +5182,9 @@ msgstr "Vierityspalkkimerkkien väri:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
-#, fuzzy, kde-format
-#| msgid "Color of scrollbar markers:"
+#, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr "Vierityspalkkimerkkien väri:"
+msgstr "Vierityspalkin haun korostettujen rivien väri:"
 
 # Tämän yllä ”Highlighting:” on substantiivi (”Korostus:”), joten yhdenmukaisuussyistä tämänkin on hyvä olla substantiivi
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
@@ -5248,7 +5247,7 @@ msgstr "Vierityspalkin sijainti:"
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "Haun korostetun rivin peittävyys:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
