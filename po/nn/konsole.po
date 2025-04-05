@@ -2491,9 +2491,6 @@ msgstr ""
 
 #: session/SessionController.cpp:1169
 #, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
@@ -5176,7 +5173,6 @@ msgstr "Farge på rullefeltmerke:"
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
 #, fuzzy, kde-format
-#| msgid "Color of scrollbar markers:"
 msgid "Color of scrollbar search highlighting lines:"
 msgstr "Farge på rullefeltmerke:"
 
