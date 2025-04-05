@@ -11,14 +11,14 @@
 # Alexander Potashev <aspotashev@gmail.com>, 2009, 2010, 2011, 2014, 2015, 2016, 2017, 2019.
 # Yuri Efremov <yur.arh@gmail.com>, 2012, 2013.
 # Alexander Lakhin <exclusion@gmail.com>, 2013, 2014.
-# SPDX-FileCopyrightText: 2022, 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 # Alexander Yavorsky <kekcuha@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-10 03:01+0000\n"
-"PO-Revision-Date: 2024-12-11 15:27+0300\n"
+"PO-Revision-Date: 2025-04-04 11:54+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -2039,7 +2039,7 @@ msgstr "Breeze"
 #: schemas.cpp:6
 #, kde-format
 msgid "Campbell"
-msgstr ""
+msgstr "Кемпбел"
 
 #: schemas.cpp:7
 #, kde-format
@@ -2097,16 +2097,16 @@ msgid "Solaris console"
 msgstr "Консоль Solaris"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Поиск:"
+msgstr "Поиск…"
 
 #: searchtabs/SearchTabs.cpp:128
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter a tab name to search for here"
-msgstr "Введите текст, который ищете"
+msgstr "Введите название вкладки, которую ищете"
 
 #: session/Session.cpp:109
 #, kde-format
@@ -2512,10 +2512,7 @@ msgid ""
 msgstr "В сеансе выполняется программа. Прекратить её работу?"
 
 #: session/SessionController.cpp:1169
-#, fuzzy, kde-format
-#| msgid ""
-#| "The program '%1' is in this session would not die.  Are you sure you want "
-#| "to kill it by force?"
+#, kde-format
 msgid ""
 "The program '%1' in this session would not die.  Are you sure you want to "
 "kill it by force?"
@@ -2881,9 +2878,9 @@ msgstr "Управление видимостью кнопки «Новая вк
 
 #. i18n: ectx: label, entry (SearchTabsButton), group (TabBar)
 #: settings/konsole.kcfg:159
-#, fuzzy, kde-format
+#, kde-format
 msgid "Control the visibility of 'Search Tabs' button on the tab bar"
-msgstr "Управление видимостью кнопки «Новая вкладка» на панели вкладок"
+msgstr "Управление видимостью кнопки «Поиск вкладок» на панели вкладок"
 
 #. i18n: ectx: label, entry (CloseTabButton), group (TabBar)
 #: settings/konsole.kcfg:167
@@ -3126,19 +3123,19 @@ msgstr "Не показывать"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show Search Tabs button:"
-msgstr "Кнопка «Закрыть»:"
+msgstr "Кнопка «Поиск вкладок»:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
+#, kde-format
 msgid "Always"
 msgstr "Всегда"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
+#, kde-format
 msgid "Never"
 msgstr "Никогда"
 
@@ -5225,10 +5222,9 @@ msgstr "Цвет маркеров полосы прокрутки:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSearhcHighlighterColor)
 #: widgets/EditProfileScrollingPage.ui:168
-#, fuzzy, kde-format
-#| msgid "Color of scrollbar markers:"
+#, kde-format
 msgid "Color of scrollbar search highlighting lines:"
-msgstr "Цвет маркеров полосы прокрутки:"
+msgstr "Цвет подсветки строк при поиске в полосе прокрутки:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelReflowLines)
 #: widgets/EditProfileScrollingPage.ui:181
@@ -5290,7 +5286,7 @@ msgstr "Размещение полосы прокрутки:"
 #: widgets/EditProfileScrollingPage.ui:290
 #, kde-format
 msgid "Search highlighting line opacity:"
-msgstr ""
+msgstr "Непрозрачность подсветки строки при поиске:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #: widgets/EditProfileTabsPage.ui:43
@@ -5658,10 +5654,10 @@ msgid "Open a new tab"
 msgstr "Открыть новую вкладку"
 
 #: widgets/ViewContainer.cpp:64
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Search Tabs"
-msgstr "&Отделить вкладку"
+msgstr "Поиск вкладок"
 
 #: widgets/ViewContainer.cpp:69
 #, kde-format
