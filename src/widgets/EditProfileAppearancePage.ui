@@ -185,10 +185,10 @@
        <item row="6" column="1" colspan="2">
         <widget class="QCheckBox" name="useFontLineCharactersButton">
          <property name="toolTip">
-          <string>Use the selected font for line characters instead of the builtin code</string>
+          <string comment="Characters for drawing lines for a frame or box in TUI programs. Not a row of characters.">Use the selected font for line characters instead of the builtin code</string>
          </property>
          <property name="text">
-          <string>Use line characters contained in font</string>
+          <string comment="Characters for drawing lines for a frame or box in TUI programs. Not a row of characters.">>Use line characters contained in font</string>
          </property>
         </widget>
        </item>
