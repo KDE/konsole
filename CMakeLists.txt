@@ -131,10 +131,6 @@ option(ENABLE_PLUGIN_QUICKCOMMANDS "Build the Quick Commands plugin" ON)
 add_subdirectory( src )
 add_subdirectory( desktop )
 
-if(HAVE_DBUS)
-    add_subdirectory( kconf_update )
-endif()
-
 if(KF6DocTools_FOUND)
     add_subdirectory( doc/manual )
 endif()
