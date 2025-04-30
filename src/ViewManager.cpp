@@ -1144,6 +1144,10 @@ QJsonObject saveSessionTerminal(TerminalDisplay *terminalDisplay)
     auto terminalSession = terminalDisplay->sessionController()->session();
     const int sessionRestoreId = SessionManager::instance()->getRestoreId(terminalSession);
     thisTerminal.insert(QStringLiteral("SessionRestoreId"), sessionRestoreId);
+    thisTerminal.insert(QStringLiteral("Columns"), terminalDisplay->columns());
+    thisTerminal.insert(QStringLiteral("Lines"), terminalDisplay->lines());
+    thisTerminal.insert(QStringLiteral("WorkingDirectory"), terminalDisplay->session()->currentWorkingDirectory());
+    thisTerminal.insert(QStringLiteral("Process"), terminalDisplay->session()->foregroundProcessName());
     return thisTerminal;
 }
 
@@ -1224,12 +1228,48 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject &jsonSplitter, Vi
     for (const auto widgetJsonValue : splitterWidgets) {
         const auto widgetJsonObject = widgetJsonValue.toObject();
         const auto sessionIterator = widgetJsonObject.constFind(QStringLiteral("SessionRestoreId"));
+        const auto columnsIterator = widgetJsonObject.constFind(QStringLiteral("Columns"));
+        const auto linesIterator = widgetJsonObject.constFind(QStringLiteral("Lines"));
+        const auto processIterator = widgetJsonObject.constFind(QStringLiteral("Process"));
+        const auto cwdIterator = widgetJsonObject.constFind(QStringLiteral("WorkingDirectory"));
 
         if (sessionIterator != widgetJsonObject.constEnd()) {
             Session *session = useSessionId ? SessionManager::instance()->idToSession(sessionIterator->toInt()) : SessionManager::instance()->createSession();
 
             auto newView = manager->createView(session);
             currentSplitter->addWidget(newView);
+
+            // Set the columns and lines only if both are not 0
+            int columns = 0;
+            int lines = 0;
+            if (columnsIterator != widgetJsonObject.constEnd()) {
+                columns = columnsIterator->toInt();
+            }
+            if (columns != 0) {
+                if (linesIterator != widgetJsonObject.constEnd()) {
+                    lines = linesIterator->toInt();
+                }
+                if (lines != 0) {
+                    newView->setSize(columns, lines);
+                }
+            }
+
+            // Set the current working directory if the key is not empty
+            if (cwdIterator != widgetJsonObject.constEnd()) {
+                auto cwd = cwdIterator->toString();
+                if (!cwd.isEmpty()) {
+                    newView->session()->setInitialWorkingDirectory(cwd);
+                }
+            }
+
+            if (processIterator != widgetJsonObject.constEnd()) {
+                auto processName = processIterator->toString();
+                // Don't open a program that is already running, such as bash
+                if (!processName.isEmpty() && processName != newView->session()->program()) {
+                    newView->session()->setProgram(processName);
+                }
+            }
+
         } else {
             auto nextSplitter = restoreSessionsSplitterRecurse(widgetJsonObject, manager, useSessionId);
             currentSplitter->addWidget(nextSplitter);
