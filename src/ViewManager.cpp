@@ -1240,19 +1240,15 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject &jsonSplitter, Vi
             currentSplitter->addWidget(newView);
 
             // Set the columns and lines only if both are not 0
-            int columns = 0;
-            int lines = 0;
+            int columns = newView->columns();
+            int lines = newView->lines();
             if (columnsIterator != widgetJsonObject.constEnd()) {
                 columns = columnsIterator->toInt();
             }
-            if (columns != 0) {
-                if (linesIterator != widgetJsonObject.constEnd()) {
-                    lines = linesIterator->toInt();
-                }
-                if (lines != 0) {
-                    newView->setSize(columns, lines);
-                }
+            if (linesIterator != widgetJsonObject.constEnd()) {
+                lines = linesIterator->toInt();
             }
+            newView->setSize(columns, lines);
 
             // Set the current working directory if the key is not empty
             if (cwdIterator != widgetJsonObject.constEnd()) {
