@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-13 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:45+0000\n"
 "PO-Revision-Date: 2025-04-06 23:22+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -3893,14 +3893,23 @@ msgstr "진한 글꼴에 강조색 넣기"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use the selected font for line characters instead of the builtin code"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr "내장 코드가 아닌 선택한 글꼴에 포함된 괘선 문자 사용"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, kde-format
-msgid "Use line characters contained in font"
+#, fuzzy, kde-format
+#| msgid "Use line characters contained in font"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
+msgid ">Use line characters contained in font"
 msgstr "글꼴에 포함된 괘선 문자 사용"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)

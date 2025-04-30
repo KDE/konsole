@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-13 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:45+0000\n"
 "PO-Revision-Date: 2025-02-21 20:09+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -3928,15 +3928,24 @@ msgstr "Rita starka färger med fetstil"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use the selected font for line characters instead of the builtin code"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
 "Använd valt teckensnitt för linjetecken istället för den inbyggda koden"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, kde-format
-msgid "Use line characters contained in font"
+#, fuzzy, kde-format
+#| msgid "Use line characters contained in font"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
+msgid ">Use line characters contained in font"
 msgstr "Använd linjetecken som finns i teckensnittet"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)

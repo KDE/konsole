@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-13 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:45+0000\n"
 "PO-Revision-Date: 2022-09-04 10:59+0300\n"
 "Last-Translator: Zmicier <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <kde-i18n-doc@kde.org>\n"
@@ -4039,14 +4039,23 @@ msgstr "Maliavannie toŭstych šryftoŭ intensiŭnymi kolierami"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use the selected font for line characters instead of the builtin code"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr "Vykarystoŭvać abrany šryft dlia simvalaŭ zamiest ubudavanaha koda"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, kde-format
-msgid "Use line characters contained in font"
+#, fuzzy, kde-format
+#| msgid "Use line characters contained in font"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
+msgid ">Use line characters contained in font"
 msgstr "Vykarystoŭvać liniejnyja simvaly, jakija zmiaščajucca ŭ šryfcie"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)

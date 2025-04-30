@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-13 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:45+0000\n"
 "PO-Revision-Date: 2010-09-24 21:50+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Maithili <bhashaghar@googlegroups.com>\n"
@@ -4192,13 +4192,19 @@ msgstr ""
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
 #, kde-format
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
 #, kde-format
-msgid "Use line characters contained in font"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
+msgid ">Use line characters contained in font"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)

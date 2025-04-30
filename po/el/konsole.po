@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-13 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:45+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -3969,7 +3969,12 @@ msgstr "Σχεδίαση έντονων χρωμάτων σε έντονη γρ�
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use the selected font for line characters instead of the builtin code"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
 msgstr ""
 "Χρήση της επιλεγμένης γραμματοσειράς για τους χαρακτήρες γραμμής αντί του "
@@ -3977,8 +3982,12 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, kde-format
-msgid "Use line characters contained in font"
+#, fuzzy, kde-format
+#| msgid "Use line characters contained in font"
+msgctxt ""
+"Characters for drawing lines for a frame or box in TUI programs. Not a row "
+"of characters."
+msgid ">Use line characters contained in font"
 msgstr "Χρήση χαρακτήρων γραμμής που περιέχει η γραμματοσειρά"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
