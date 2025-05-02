@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-30 00:45+0000\n"
-"PO-Revision-Date: 2025-03-05 19:46+0900\n"
+"PO-Revision-Date: 2025-05-01 17:27+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3877,24 +3877,21 @@ msgstr "以粗體字型繪製強烈的顏色"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:188
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the selected font for line characters instead of the builtin code"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid "Use the selected font for line characters instead of the builtin code"
-msgstr "使用選定的字型來顯示行字元而不是內建的代碼"
+msgstr "使用選定的字型來顯示線條字元而不是內建的代碼"
 
 #. i18n: ectx: property (text), widget (QCheckBox, useFontLineCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:191
-#, fuzzy, kde-format
-#| msgid "Use line characters contained in font"
+#, kde-format
 msgctxt ""
 "Characters for drawing lines for a frame or box in TUI programs. Not a row "
 "of characters."
 msgid ">Use line characters contained in font"
-msgstr "使用包含在字型內的行字元"
+msgstr ">使用包含在字型內的線條字元"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, useFontBrailleCharactersButton)
 #: widgets/EditProfileAppearancePage.ui:198
