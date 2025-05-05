@@ -896,7 +896,7 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                     if (ulColorTable != nullptr && (style[lastX].flags & EF_UNDERLINE_COLOR) != 0) {
                         pen.setColor(ulColorTable[((style[lastX].flags & EF_UNDERLINE_COLOR)) / EF_UNDERLINE_COLOR_1 - 1].color(colorTable));
                     }
-                    int lw = m_parentDisplay->terminalFont()->lineWidth();
+                    const int lw = m_parentDisplay->terminalFont()->lineWidth();
                     qreal y = rect.y() + m_parentDisplay->terminalFont()->fontAscent() + m_parentDisplay->terminalFont()->underlinePos()
                         + m_parentDisplay->terminalFont()->lineSpacing() / static_cast<qreal>(2);
                     if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
@@ -914,12 +914,14 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         pen.setDashPattern(dashes);
                     }
                     painter.setPen(pen);
-                    painter.drawLine(QLineF(rect.x() + fontWidth * startUnderline, y, rect.x() + fontWidth * i - 1, y));
+                    const int x1 = rect.x() + fontWidth * startUnderline;
+                    const int x2 = rect.x() + fontWidth * i - 1;
+                    painter.drawLine(QLineF(x1, y, x2, y));
                     if (underline == RE_UNDERLINE_DOUBLE) {
-                        painter.drawLine(rect.x() + fontWidth * startUnderline, y - 2, rect.x() + fontWidth * i - 1, y - 2);
+                        painter.drawLine(x1, y - 2, x2, y - 2);
                     }
                     if (underline == RE_UNDERLINE_CURL) {
-                        painter.drawLine(QLineF(rect.x() + fontWidth * startUnderline + 2, y - 1, rect.x() + fontWidth * i - 1, y - 1));
+                        painter.drawLine(QLineF(x1 + 2, y - 1, x2, y - 1));
                     }
 
                     startUnderline = -1;
