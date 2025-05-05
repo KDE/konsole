@@ -901,7 +901,6 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                         + m_parentDisplay->terminalFont()->lineSpacing() / static_cast<qreal>(2);
                     if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
                         y = rect.bottom() - 1;
-                        lw = 1;
                     }
                     pen.setWidth(lw);
                     if (underline == RE_UNDERLINE_DOT) {
@@ -909,19 +908,33 @@ void TerminalPainter::drawAboveText(QPainter &painter,
                     } else if (underline == RE_UNDERLINE_DASH) {
                         pen.setStyle(Qt::DashLine);
                     }
-                    if (underline == RE_UNDERLINE_CURL) {
-                        QVector<qreal> dashes(2, 2);
-                        pen.setDashPattern(dashes);
-                    }
                     painter.setPen(pen);
                     const int x1 = rect.x() + fontWidth * startUnderline;
                     const int x2 = rect.x() + fontWidth * i - 1;
-                    painter.drawLine(QLineF(x1, y, x2, y));
-                    if (underline == RE_UNDERLINE_DOUBLE) {
-                        painter.drawLine(x1, y - 2, x2, y - 2);
-                    }
-                    if (underline == RE_UNDERLINE_CURL) {
-                        painter.drawLine(QLineF(x1 + 2, y - 1, x2, y - 1));
+                    if (underline != RE_UNDERLINE_CURL)
+                        painter.drawLine(QLineF(x1, y, x2, y));
+                    if (underline == RE_UNDERLINE_DOUBLE || underline == RE_UNDERLINE_CURL) {
+                        const int fontHeight = m_parentDisplay->terminalFont()->fontHeight();
+                        const int amplitude = fontHeight / 8;
+                        if (underline == RE_UNDERLINE_DOUBLE) {
+                            if (amplitude)
+                                painter.drawLine(x1, y - amplitude, x2, y - amplitude);
+                        } else {
+                            y = std::max(static_cast<qreal>(0), y - amplitude);
+                            assert(underline == RE_UNDERLINE_CURL);
+                            const int len = x2 - x1;
+                            if (len > 0) {
+                                const int halfPeriodsPerGlyph = 2;
+                                const int numHalfPeriods = len * halfPeriodsPerGlyph / fontWidth;
+                                for (int j = 0; j < numHalfPeriods; j++) {
+                                    const int begin = j * len / numHalfPeriods;
+                                    const int end = (j + 1) * len / numHalfPeriods;
+                                    const qreal angle1 = 0.0;
+                                    const qreal angle2 = 360.0 * 16.0 * ((j % 2 == 0) ? 0.5 : -0.5);
+                                    painter.drawArc(x1 + begin, y, end-begin, amplitude, angle1, angle2);
+                                }
+                            }
+                        }
                     }
 
                     startUnderline = -1;
