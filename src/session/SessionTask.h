@@ -63,7 +63,7 @@ Q_SIGNALS:
 
 protected:
     /** Returns a list of sessions in the group */
-    QList<QPointer<Session>> sessions() const;
+    const QList<QPointer<Session>> &sessions() const;
 
 private:
     bool _autoDelete = false;

@@ -29,7 +29,7 @@ void SessionTask::addSession(Session *session)
     _sessions.append(session);
 }
 
-QList<QPointer<Session>> SessionTask::sessions() const
+const QList<QPointer<Session>> &SessionTask::sessions() const
 {
     return _sessions;
 }
