@@ -130,7 +130,6 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
     , _monitorProcessFinish(false)
     , _monitorOnce(false)
     , _escapedUrlFilter(nullptr)
-    , _addedHamburgerMenu(false)
 {
     Q_ASSERT(sessionParam);
     Q_ASSERT(viewParam);
@@ -1962,6 +1961,32 @@ void SessionController::updateReadOnlyActionStates()
     });
 }
 
+void SessionController::appendHamburgerMenuIfNeeded(QMenu *menu)
+{
+    const QString hambugerMenuName = KStandardAction::name(KStandardAction::HamburgerMenu);
+    const QList<QAction*> actions = menu->actions();
+    const bool hamburgerMenuFound = std::find_if(actions.begin(), actions.end(), [&hambugerMenuName] (const QAction *action) {
+        return action && action->objectName() == hambugerMenuName;
+    }) != actions.end();
+    if (hamburgerMenuFound) {
+        return;
+    }
+
+    auto* hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(hambugerMenuName));
+    if (hamburger) {
+        hamburger->addToMenu(menu);
+
+        // Add the object name to be able to find it in the list afterwards.
+        const QList<QAction*> actions = menu->actions();
+        Q_ASSERT(!actions.isEmpty());
+
+        if (!actions.isEmpty()) {
+            QAction* hamburgerMenuAction = menu->actions().last();
+            hamburgerMenuAction->setObjectName(KStandardAction::name(KStandardAction::HamburgerMenu));
+        }
+    }
+}
+
 bool SessionController::isReadOnly() const
 {
     if (!session().isNull()) {
@@ -2092,13 +2117,10 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
 
         _preventClose = true;
 
-        if (!_addedHamburgerMenu) {
-            auto hamburger = static_cast<KHamburgerMenu *>(actionCollection()->action(KStandardAction::name(KStandardAction::HamburgerMenu)));
-            if (hamburger) {
-                hamburger->addToMenu(popup);
-                _addedHamburgerMenu = true;
-            }
-        }
+        // The hamburger menu should be added when not already appended before to the
+        // popup menu. Note that, in some cases, the popup menu may be re-instantiated,
+        // so we must verify to know if we need to add it or not.
+        appendHamburgerMenuIfNeeded(popup.data());
 
         // they are here.
         // qDebug() << popup->actions().indexOf(contentActions[0]) << popup->actions().indexOf(contentActions[1]) << popup->actions()[3];

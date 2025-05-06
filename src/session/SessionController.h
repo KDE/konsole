@@ -359,6 +359,7 @@ private:
 private:
     void updateSessionIcon();
     void updateReadOnlyActionStates();
+    void appendHamburgerMenuIfNeeded(QMenu *menu);
 
     SessionGroup *_copyToGroup;
 
@@ -422,8 +423,6 @@ private:
     QAction *_startAutoSaveAction;
     QAction *_stopAutoSaveAction;
     QPointer<SaveHistoryAutoTask> _autoSaveTask;
-
-    bool _addedHamburgerMenu;
 };
 
 }
