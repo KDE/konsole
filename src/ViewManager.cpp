@@ -1147,7 +1147,7 @@ QJsonObject saveSessionTerminal(TerminalDisplay *terminalDisplay)
     thisTerminal.insert(QStringLiteral("Columns"), terminalDisplay->columns());
     thisTerminal.insert(QStringLiteral("Lines"), terminalDisplay->lines());
     thisTerminal.insert(QStringLiteral("WorkingDirectory"), terminalDisplay->session()->currentWorkingDirectory());
-    thisTerminal.insert(QStringLiteral("Process"), terminalDisplay->session()->foregroundProcessName());
+    thisTerminal.insert(QStringLiteral("Command"), QStringLiteral(""));
     return thisTerminal;
 }
 
@@ -1230,7 +1230,7 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject &jsonSplitter, Vi
         const auto sessionIterator = widgetJsonObject.constFind(QStringLiteral("SessionRestoreId"));
         const auto columnsIterator = widgetJsonObject.constFind(QStringLiteral("Columns"));
         const auto linesIterator = widgetJsonObject.constFind(QStringLiteral("Lines"));
-        const auto processIterator = widgetJsonObject.constFind(QStringLiteral("Process"));
+        const auto commandIterator = widgetJsonObject.constFind(QStringLiteral("Command"));
         const auto cwdIterator = widgetJsonObject.constFind(QStringLiteral("WorkingDirectory"));
 
         if (sessionIterator != widgetJsonObject.constEnd()) {
@@ -1258,11 +1258,11 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject &jsonSplitter, Vi
                 }
             }
 
-            if (processIterator != widgetJsonObject.constEnd()) {
-                auto processName = processIterator->toString();
+            if (commandIterator != widgetJsonObject.constEnd()) {
+                auto command = commandIterator->toString();
                 // Don't open a program that is already running, such as bash
-                if (!processName.isEmpty() && processName != newView->session()->program()) {
-                    newView->session()->setProgram(processName);
+                if (!command.isEmpty() && command != newView->session()->program()) {
+                    newView->session()->runCommandFromLayout(command);
                 }
             }
 
