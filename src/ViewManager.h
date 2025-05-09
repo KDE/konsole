@@ -311,6 +311,7 @@ public Q_SLOTS:
 
     // Creates json file with split config
     Q_SCRIPTABLE void saveLayoutFile();
+    void saveLayout(QString fileName); // For testing
     Q_SCRIPTABLE void loadLayoutFile();
     Q_SCRIPTABLE void loadLayout(QString File);
 
@@ -526,6 +527,8 @@ private:
     // containers open
     QList<QAction *> _multiTabOnlyActions;
     QList<QAction *> _multiSplitterOnlyActions;
+
+    friend class ViewManagerTest;
 };
 }
 

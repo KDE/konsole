@@ -1176,11 +1176,14 @@ QJsonObject saveSessionsRecurse(QSplitter *splitter)
 
 void ViewManager::saveLayoutFile()
 {
-    QString fileName(QFileDialog::getSaveFileName(this->widget(),
-                                                  i18nc("@title:window", "Save Tab Layout"),
-                                                  QStringLiteral("~/"),
-                                                  i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));
+    saveLayout(QFileDialog::getSaveFileName(this->widget(),
+                                            i18nc("@title:window", "Save Tab Layout"),
+                                            QStringLiteral("~/"),
+                                            i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));
+}
 
+void ViewManager::saveLayout(QString fileName)
+{
     // User pressed cancel in dialog
     if (fileName.isEmpty()) {
         return;
