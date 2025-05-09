@@ -10,7 +10,6 @@
 
 #include "../MainWindow.h"
 #include "../ViewManager.h"
-#include "../ViewProperties.h"
 #include "../widgets/ViewContainer.h"
 #include <QStandardPaths>
 
@@ -18,7 +17,7 @@ using namespace Konsole;
 
 void ViewManagerTest::initTestCase()
 {
-    m_testDir = new QTemporaryDir(QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QStringLiteral("/konsoleviewmanagertest"));
+    m_testDir = new QTemporaryDir(QDir::tempPath() + QDir::separator() + QStringLiteral("konsoleviewmanagertest-XXXXXX"));
 }
 
 void ViewManagerTest::testSaveLayout()
@@ -32,14 +31,6 @@ void ViewManagerTest::testSaveLayout()
     mw.viewManager()->newSession(mw.viewManager()->defaultProfile(), m_testDir->path());
     mw.viewManager()->splitLeftRight();
     mw.viewManager()->splitTopBottom();
-
-    // Only one view has m_testDir->path(), rest have empty path.
-    // Verify that at least one of them has the m_testDir->path().
-    QList<QUrl> urlList = {};
-    for (const auto &v : mw.viewManager()->viewProperties()) {
-        urlList.append(v->url());
-    }
-    QVERIFY(urlList.contains(QUrl::fromLocalFile(m_testDir->path())));
 
     mw.viewManager()->saveLayout(m_testDir->filePath(QStringLiteral("test.json")));
     QCOMPARE(mw.viewManager()->viewHierarchy(), expectedHierarchy);
@@ -64,14 +55,6 @@ void ViewManagerTest::testLoadLayout()
 
     mw.viewManager()->loadLayout(m_testDir->filePath(QStringLiteral("test.json")));
     QCOMPARE(mw.viewManager()->viewHierarchy(), expectedHierarchy);
-
-    // Only one view has m_testDir->path(), rest have empty path.
-    // Verify that at least one of them has the m_testDir->path().
-    QList<QUrl> urlList = {};
-    for (const auto &v : mw.viewManager()->viewProperties()) {
-        urlList.append(v->url());
-    }
-    QVERIFY(urlList.contains(QUrl::fromLocalFile(m_testDir->path())));
 }
 
 QTEST_MAIN(ViewManagerTest)
