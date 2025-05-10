@@ -61,7 +61,7 @@ public:
     void load();
 
     /** Returns true if wallpaper available and drawn */
-    bool draw(QPainter &painter, const QRect rect, qreal bgColorOpacity, const QColor &backgroundColor);
+    bool draw(QPainter &painter, const QRect& rect, qreal bgColorOpacity, const QColor &backgroundColor);
 
     bool isNull() const;
 
@@ -93,9 +93,9 @@ private:
     bool _isAnimated;
     int _frameDelay;
 
-    QRectF ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect);
+    QRectF ScaledRect(const QSize &viewportSize, const QSize &pictureSize, const QRect &rect);
     Qt::AspectRatioMode RatioMode();
-    QImage FlipImage(const QImage image, const ColorSchemeWallpaper::FlipType flipType);
+    QImage FlipImage(const QImage &image, const ColorSchemeWallpaper::FlipType flipType);
 };
 
 }

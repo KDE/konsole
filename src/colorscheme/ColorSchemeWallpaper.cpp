@@ -98,7 +98,7 @@ bool ColorSchemeWallpaper::isNull() const
     return _path.isEmpty();
 }
 
-bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect rect, qreal bgColorOpacity, const QColor &backgroundColor)
+bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect& rect, qreal bgColorOpacity, const QColor &backgroundColor)
 {
     if ((_picture == nullptr) || _picture->isNull()) {
         return false;
@@ -163,7 +163,7 @@ qreal ColorSchemeWallpaper::opacity() const
     return _opacity;
 }
 
-QRectF ColorSchemeWallpaper::ScaledRect(const QSize viewportSize, const QSize pictureSize, const QRect rect)
+QRectF ColorSchemeWallpaper::ScaledRect(const QSize &viewportSize, const QSize &pictureSize, const QRect &rect)
 {
     QRectF scaledRect = QRectF();
     QSize scaledSize = _style == NoScaling ? pictureSize : pictureSize.scaled(viewportSize, RatioMode());
@@ -197,7 +197,7 @@ Qt::AspectRatioMode ColorSchemeWallpaper::RatioMode()
     }
 }
 
-QImage ColorSchemeWallpaper::FlipImage(const QImage image, const ColorSchemeWallpaper::FlipType flipType)
+QImage ColorSchemeWallpaper::FlipImage(const QImage &image, const ColorSchemeWallpaper::FlipType flipType)
 {
     switch (flipType) {
     case Horizontal:
