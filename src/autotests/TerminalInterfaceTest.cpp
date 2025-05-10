@@ -93,8 +93,6 @@ void TerminalInterfaceTest::testTerminalInterfaceNoShell()
 // Test with default shell running
 void TerminalInterfaceTest::testTerminalInterface()
 {
-    QString currentDirectory;
-
     // create a Konsole part and attempt to connect to it
     _terminalPart = createPart();
     if (_terminalPart == nullptr) {

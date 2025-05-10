@@ -782,7 +782,6 @@ static inline bool drawLegacyCharacter(QPainter &paint, int x, int y, int w, int
     };
 
     // Default rect fills entire cell
-    QRectF rect(x, y, w, h);
     if (code <= 0x13f) {
         const QRectF upperLeft(x, y, w / 2.0, h / 3.0);
         const QRectF upperRight(center.x(), y, w / 2.0, h / 3.0);

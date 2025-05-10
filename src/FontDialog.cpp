@@ -29,7 +29,6 @@ FontDialog::FontDialog(QWidget *parent, bool emoji, const QFont font)
 
     _fontChooser = new KFontChooser(onlyFixed, this);
     if (_emoji) {
-        QStringList list = KFontChooser::createFontList(0).filter(QStringLiteral("emoji"), Qt::CaseInsensitive);
         _fontChooser->setFont(font);
         _fontChooser->setFontListItems(KFontChooser::createFontList(0).filter(QStringLiteral("emoji"), Qt::CaseInsensitive));
         _fontChooser->setFont(font);

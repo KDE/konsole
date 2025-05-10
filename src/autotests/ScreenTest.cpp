@@ -63,7 +63,6 @@ void ScreenTest::testBlockSelection()
     // ...
     // I'm selecting the first two lines of the first column of strings,
     // so, abcd ijkl.
-    const QString selectedText = screen.selectedText(Screen::PlainText);
     QCOMPARE(screen.selectedText(Screen::PlainText), QStringLiteral("abcd ijkl"));
 }
 
