@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-07 00:45+0000\n"
-"PO-Revision-Date: 2025-04-30 09:29+0300\n"
+"PO-Revision-Date: 2025-05-09 07:59+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5003,8 +5003,8 @@ msgid ""
 "Mouse scroll wheel will emulate up/down key presses in programs that use the "
 "Alternate Screen buffer (e.g. less)"
 msgstr ""
-"גלגלת העכבר תדמה לחיצות מקשים למעלה/למטה בתוכניות שמשתמשות בזכרון המסך "
-"החלופי (למשל: less)"
+"גלגלת העכבר תדמה לחיצות מקשים למעלה/למטה בתוכניות שמשתמשות בזיכרון מסך חלופי "
+"(למשל: less)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableAlternateScrollingButton)
 #: widgets/EditProfileMousePage.ui:408
@@ -5263,7 +5263,7 @@ msgstr ""
 #: widgets/HistorySizeWidget.ui:60
 #, kde-format
 msgid "Limit the remembered output to a fixed number of lines"
-msgstr "הגבל את מספר השורות של פלט בזכרון למספר קבוע"
+msgstr "הגבל את מספר השורות של פלט בזיכרון למספר קבוע"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
