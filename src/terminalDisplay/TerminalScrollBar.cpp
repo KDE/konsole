@@ -281,7 +281,7 @@ void TerminalScrollBar::paintEvent(QPaintEvent *event)
     p.setPen(Qt::NoPen);
 
     p.setBrush(searchLineColor);
-    for (int y: _searchLines) {
+    for (int y: std::as_const(_searchLines)) {
         y = (y * height()) / _terminalLines;
         p.drawRoundedRect(2, y, width() - 4, stripeHeight, cornerRadius, cornerRadius);
     }
@@ -331,7 +331,7 @@ void TerminalScrollBar::mouseMoveEvent(QMouseEvent *event) {
     int posY = event->pos().y();
     bool showToolTip = false;
 
-    for (int y: _searchLines) {
+    for (int y: std::as_const(_searchLines)) {
         int x = y;
         y = (y * height()) / _terminalLines;
         if (abs(y - posY) <= 3) {
@@ -372,7 +372,7 @@ void TerminalScrollBar::removeMarker(int clickedYCoord)
 
 bool TerminalScrollBar::markerExists(int clickedYCoord)
 {
-    for (Marker *marker : _markers) {
+    for (Marker *marker : std::as_const(_markers)) {
         double markerTop = marker->geometry.top();
         double markerHeight = marker->geometry.height();
 
@@ -409,7 +409,7 @@ void TerminalScrollBar::registerMarker(TerminalScrollBar::Marker *marker)
 
 void TerminalScrollBar::regenerateMarkersGeometry()
 {
-    for (Marker *marker : _markers) {
+    for (Marker *marker : std::as_const(_markers)) {
         generateMarkerGeometry(marker->position, *marker);
     }
 }

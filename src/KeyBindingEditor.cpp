@@ -91,7 +91,8 @@ void KeyBindingEditor::filterRows(const QString &text)
 
     QList<int> matchedRows;
 
-    for (QTableWidgetItem *matchedItem : _ui->keyBindingTable->findItems(text, Qt::MatchContains)) {
+    const auto items = _ui->keyBindingTable->findItems(text, Qt::MatchContains);
+    for (QTableWidgetItem *matchedItem : items) {
         matchedRows.append(matchedItem->row());
     }
 

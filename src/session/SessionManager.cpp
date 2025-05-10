@@ -276,7 +276,8 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
         const bool shouldEnableUrlExtractor = profile->allowEscapedLinks();
         const bool enableReflowLines = profile->property<bool>(Profile::ReflowLines);
         const bool ignoreWcWidth = profile->property<bool>(Profile::IgnoreWcWidth);
-        for (TerminalDisplay *view : session->views()) {
+        const auto views = session->views();
+        for (TerminalDisplay *view : views) {
             view->screenWindow()->screen()->setReflowLines(enableReflowLines);
             view->screenWindow()->screen()->setIgnoreWcWidth(ignoreWcWidth);
             view->screenWindow()->screen()->setEnableUrlExtractor(shouldEnableUrlExtractor);

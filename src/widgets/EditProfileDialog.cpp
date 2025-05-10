@@ -1332,8 +1332,9 @@ void EditProfileDialog::gotNewColorSchemes(const QList<KNSCore::Entry> &changedE
     int failures = 0;
     for (auto &entry : std::as_const(changedEntries)) {
         switch (entry.status()) {
-        case KNSCore::Entry::Installed:
-            for (const QString &file : entry.installedFiles()) {
+        case KNSCore::Entry::Installed: {
+            const auto installedFiles = entry.installedFiles();
+            for (const QString &file : installedFiles) {
                 if (ColorSchemeManager::instance()->loadColorScheme(file)) {
                     continue;
                 }
@@ -1346,8 +1347,10 @@ void EditProfileDialog::gotNewColorSchemes(const QList<KNSCore::Entry> &changedE
                 QTimer::singleShot(8000, _appearanceUi->colorSchemeMessageWidget, &KMessageWidget::animatedHide);
             }
             break;
-        case KNSCore::Entry::Deleted:
-            for (const auto &file : entry.uninstalledFiles()) {
+        }
+        case KNSCore::Entry::Deleted: {
+            const auto uninstalledFiles = entry.uninstalledFiles();
+            for (const auto &file : uninstalledFiles) {
                 if (ColorSchemeManager::instance()->unloadColorScheme(file)) {
                     continue;
                 }
@@ -1356,6 +1359,7 @@ void EditProfileDialog::gotNewColorSchemes(const QList<KNSCore::Entry> &changedE
                 // it either wasn't loaded or was invalid to begin with.
             }
             break;
+        }
         case KNSCore::Entry::Invalid:
         case KNSCore::Entry::Installing:
         case KNSCore::Entry::Downloadable:

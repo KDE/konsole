@@ -38,7 +38,8 @@ QList<std::shared_ptr<const ColorScheme>> ColorSchemeManager::allColorSchemes()
     int failed = 0;
 
     QList<std::shared_ptr<const ColorScheme>> ret;
-    for (const QString &name : listColorSchemes()) {
+    const auto schemes = listColorSchemes();
+    for (const QString &name : schemes) {
         std::shared_ptr<const ColorScheme> scheme = findColorScheme(colorSchemeNameFromPath(name));
         if (!scheme) {
             failed++;

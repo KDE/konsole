@@ -22,10 +22,12 @@ QuickCommandsModel::~QuickCommandsModel() noexcept
 void QuickCommandsModel::load()
 {
     auto config = KConfig(QStringLiteral("konsolequickcommandsconfig"), KConfig::OpenFlag::SimpleConfig);
-    for (const QString &groupName : config.groupList()) {
+    const auto groupList = config.groupList();
+    for (const QString &groupName : groupList) {
         KConfigGroup group = config.group(groupName);
         addTopLevelItem(groupName);
-        for (const QString &commandGroup : group.groupList()) {
+        const auto groupGroupList = group.groupList();
+        for (const QString &commandGroup : groupGroupList) {
             QuickCommandData data;
             KConfigGroup element = group.group(commandGroup);
             data.name = element.readEntry("name");
@@ -39,7 +41,8 @@ void QuickCommandsModel::load()
 void QuickCommandsModel::save()
 {
     auto config = KConfig(QStringLiteral("konsolequickcommandsconfig"), KConfig::OpenFlag::SimpleConfig);
-    for (const QString &groupName : config.groupList()) {
+    const auto groupList = config.groupList();
+    for (const QString &groupName : groupList) {
         config.deleteGroup(groupName);
     }
     for (int i = 0, end = invisibleRootItem()->rowCount(); i < end; i++) {

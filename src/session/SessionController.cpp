@@ -2100,7 +2100,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
             // Open Folder With - with different folders on each.
             // Change the text of the second one, that points to the
             // current folder.
-            for (auto *action : newActions) {
+            for (auto *action : std::as_const(newActions)) {
                 if (action->objectName() == QStringLiteral("openWith_submenu")) {
                     action->setText(i18n("Open Current Folder With"));
                 }
@@ -2130,7 +2130,7 @@ void SessionController::showDisplayContextMenu(const QPoint &position)
         if (!popup.isNull()) {
             delete contentSeparator;
             // Remove the 'Open with' actions from it.
-            for (auto *act : toRemove) {
+            for (auto *act : std::as_const(toRemove)) {
                 popup->removeAction(act);
             }
 

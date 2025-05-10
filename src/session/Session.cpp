@@ -1859,7 +1859,8 @@ QList<int> Session::copyingSessions()
         if (auto copyToGroup = c->copyToGroup()) {
             QList<int> sessionIds;
 
-            for (auto session : copyToGroup->sessions()) {
+            const auto sessions = copyToGroup->sessions();
+            for (auto session : sessions) {
                 sessionIds.append(session->sessionId());
             }
 

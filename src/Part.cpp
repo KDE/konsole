@@ -203,7 +203,8 @@ QString Part::currentProfileName() const
 bool Part::setCurrentProfile(const QString &profileName)
 {
     Profile::Ptr profile;
-    for (auto p : ProfileManager::instance()->allProfiles()) {
+    const auto profiles = ProfileManager::instance()->allProfiles();
+    for (const auto& p : profiles) {
         if (p->name() == profileName) {
             profile = p;
             break;

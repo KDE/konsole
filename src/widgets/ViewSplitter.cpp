@@ -223,7 +223,7 @@ void ViewSplitter::childEvent(QChildEvent *event)
         }
     }
 
-    auto terminals = getToplevelSplitter()->findChildren<TerminalDisplay *>();
+    const auto terminals = getToplevelSplitter()->findChildren<TerminalDisplay *>();
     for (auto terminal : terminals) {
         terminal->headerBar()->applyVisibilitySettings();
     }
@@ -433,7 +433,8 @@ ViewSplitter *ViewSplitter::getToplevelSplitter()
 
 ViewSplitter *ViewSplitter::getChildSplitter(int id)
 {
-    for (auto childSplitter : findChildren<ViewSplitter *>()) {
+    const auto viewSplitters = findChildren<ViewSplitter *>();
+    for (auto childSplitter : viewSplitters) {
         if (childSplitter->id() == id)
             return childSplitter;
     }
@@ -616,13 +617,14 @@ void Konsole::ViewSplitterHandle::mousePressEvent(QMouseEvent *ev)
     QList<ViewSplitter *> splitters = topLevelSplitter->findChildren<ViewSplitter *>();
     splitters.append(topLevelSplitter);
 
-    for (auto splitter : splitters) {
+    for (auto splitter : std::as_const(splitters)) {
         if (splitter->orientation() != orientation()) {
             continue;
         }
 
         int delta = 0;
-        for (auto point : splitter->sizes()) {
+        const auto sizes = splitter->sizes();
+        for (auto point : sizes) {
             delta += point;
             QPoint thisPoint = orientation() == Qt::Horizontal ? QPoint(delta, 0) : QPoint(0, delta);
 

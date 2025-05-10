@@ -878,7 +878,8 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
 
     if (confDialog != nullptr) {
         if (showProfilePage) {
-            for (auto page : confDialog->findChildren<KPageWidgetItem *>()) {
+            const auto items = confDialog->findChildren<KPageWidgetItem *>();
+            for (const auto page : items) {
                 if (page->name().contains(profilePageName)) {
                     confDialog->setCurrentPage(page);
                     break;

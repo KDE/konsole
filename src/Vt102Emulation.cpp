@@ -1275,7 +1275,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         int closeSignal = -1;
         QString applicationName;
 
-        for (QString param: params) {
+        for (QString param: std::as_const(params)) {
             if (param.startsWith(QString::fromLatin1("i="))) {
                 // Notification ID:
                 QString payloadValue = param.mid(2);
@@ -1303,7 +1303,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 // Parse a comma-separated of actions with optional "-" (eg. "-focus,report"):
                 QString payloadValue = param.mid(2);
                 QStringList tokens = payloadValue.split(u',');
-                for (QString token : tokens) {
+                for (QString token : std::as_const(tokens)) {
                     int tokenValue = NotificationActionNone;
                     bool removed = false;
                     if (token.startsWith(QString::fromLatin1("-"))) {
@@ -1598,7 +1598,7 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
         int scaledWidth = 0;
         int scaledHeight = 0;
         bool moveCursor = true;
-        for (const auto &p : params) {
+        for (const auto &p : std::as_const(params)) {
             int eq = p.indexOf(QLatin1Char('='));
             if (eq > 0) {
                 QString var = p.mid(0, eq);
@@ -2666,7 +2666,7 @@ void Vt102Emulation::emulateUpDown(int up, KeyboardTranslator::Entry entry, QByt
         lineProperties.removeLast();
     }
     int num = up > 0 ? cuX - targetCol : targetCol - cuX;
-    for (LineProperty i : lineProperties) {
+    for (LineProperty i : std::as_const(lineProperties)) {
         num += i.length + 1 - i.flags.f.wrapped;
     }
     for (int i = 0; i < num; i++) {

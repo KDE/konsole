@@ -249,14 +249,17 @@ void SSHManagerModel::triggerProfileChange(const QString &sshHost)
 void SSHManagerModel::load()
 {
     auto config = KConfig(QStringLiteral("konsolesshconfig"), KConfig::OpenFlag::SimpleConfig);
-    for (const QString &groupName : config.groupList()) {
+
+    const auto groupList = config.groupList();
+    for (const QString &groupName : groupList) {
         KConfigGroup group = config.group(groupName);
         if (groupName == QStringLiteral("Global plugin config")) {
             manageProfile = group.readEntry<bool>("manageProfile", false);
             continue;
         }
         addTopLevelItem(groupName);
-        for (const QString &sessionName : group.groupList()) {
+        const auto groupGroupList = group.groupList();
+        for (const QString &sessionName : groupGroupList) {
             SSHConfigurationData data;
             KConfigGroup sessionGroup = group.group(sessionName);
             data.host = sessionGroup.readEntry("hostname");
@@ -275,7 +278,8 @@ void SSHManagerModel::load()
 void SSHManagerModel::save()
 {
     auto config = KConfig(QStringLiteral("konsolesshconfig"), KConfig::OpenFlag::SimpleConfig);
-    for (const QString &groupName : config.groupList()) {
+    const auto groupList = config.groupList();
+    for (const QString &groupName : groupList) {
         config.deleteGroup(groupName);
     }
 

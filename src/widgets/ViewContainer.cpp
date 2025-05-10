@@ -513,7 +513,8 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
 
     // TODO: add a countChanged signal so we can remove this for.
     // Detaching in mac causes crashes.
-    for (auto action : _contextPopupMenu->actions()) {
+    const auto actions = _contextPopupMenu->actions();
+    for (auto action : actions) {
         if (action->objectName() == QStringLiteral("tab-detach")) {
             action->setEnabled(count() > 1);
         }
@@ -705,7 +706,8 @@ void TabbedViewContainer::closeTerminalTab(int idx)
 {
     Q_EMIT removeColor(idx);
     // TODO: This for should probably go to the ViewSplitter
-    for (auto terminal : viewSplitterAt(idx)->findChildren<TerminalDisplay *>()) {
+    const auto viewSplitters = viewSplitterAt(idx)->findChildren<TerminalDisplay *>();
+    for (auto terminal : viewSplitters) {
         terminal->sessionController()->closeSession();
     }
 }

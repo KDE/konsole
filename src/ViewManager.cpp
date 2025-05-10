@@ -692,8 +692,8 @@ void ViewManager::focusAnotherTerminal(ViewSplitter *toplevelSplitter)
 
     if (tabTterminalDisplays.count() > 1) {
         // Give focus to the last used terminal in this tab
-        for (auto *historyItem : _terminalDisplayHistory) {
-            for (auto *terminalDisplay : tabTterminalDisplays) {
+        for (const auto *historyItem : std::as_const(_terminalDisplayHistory)) {
+            for (auto *terminalDisplay : std::as_const(tabTterminalDisplays)) {
                 if (terminalDisplay == historyItem) {
                     terminalDisplay->setFocus(Qt::OtherFocusReason);
                     return;
@@ -1126,10 +1126,10 @@ QList<ViewProperties *> ViewManager::viewProperties() const
         return {};
     }
 
-    auto terminalContainers = _viewContainer->findChildren<TerminalDisplay *>();
+    const auto terminalContainers = _viewContainer->findChildren<TerminalDisplay *>();
     list.reserve(terminalContainers.size());
 
-    for (auto terminalDisplay : _viewContainer->findChildren<TerminalDisplay *>()) {
+    for (auto terminalDisplay : terminalContainers) {
         list.append(terminalDisplay->sessionController());
     }
 
@@ -1371,7 +1371,7 @@ QStringList ViewManager::sessionList()
     QStringList ids;
 
     for (int i = 0; i < _viewContainer->count(); i++) {
-        auto terminaldisplayList = _viewContainer->widget(i)->findChildren<TerminalDisplay *>();
+        const auto terminaldisplayList = _viewContainer->widget(i)->findChildren<TerminalDisplay *>();
         for (auto *terminaldisplay : terminaldisplayList) {
             ids.append(QString::number(terminaldisplay->sessionController()->session()->sessionId()));
         }
@@ -1499,21 +1499,22 @@ QStringList ViewManager::viewHierarchy()
 
 QList<double> ViewManager::getSplitProportions(int splitterId)
 {
-    auto splitter = _viewContainer->findSplitter(splitterId);
+    const auto *splitter = _viewContainer->findSplitter(splitterId);
     if (splitter == nullptr)
         return QList<double>();
 
+    const QList<int> sizes = splitter->sizes();
     int totalSize = 0;
-    QList<double> percentages;
 
-    for (auto size : splitter->sizes()) {
+    for (const auto& size : sizes) {
         totalSize += size;
     }
 
+    QList<double> percentages;
     if (totalSize == 0)
-        return QList<double>();
+        return percentages;
 
-    for (auto size : splitter->sizes()) {
+    for (auto size : sizes) {
         percentages.append((size / static_cast<double>(totalSize)) * 100);
     }
 
@@ -1599,7 +1600,7 @@ bool ViewManager::createSplitWithExisting(int targetSplitterId, QStringList widg
         ViewSplitter *createdSplitter = new ViewSplitter();
         createdSplitter->setOrientation(horizontalSplit ? Qt::Horizontal : Qt::Vertical);
 
-        for (auto widget : linearLayout) {
+        for (auto widget : std::as_const(linearLayout)) {
             if (auto s = qobject_cast<ViewSplitter *>(widget))
                 createdSplitter->addSplitter(s);
             else
@@ -1644,7 +1645,8 @@ bool ViewManager::resizeSplits(int splitterId, QList<double> percentages)
     int sum = 0;
     QList<int> newSizes;
 
-    for (int size : splitter->sizes()) {
+    const auto sizes = splitter->sizes();
+    for (int size : sizes) {
         sum += size;
     }
 

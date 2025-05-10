@@ -38,7 +38,8 @@ ProfileList::ProfileList(bool addShortcuts, QObject *parent)
 
     connect(_group, &QActionGroup::triggered, this, &ProfileList::triggered);
 
-    for (const auto &profile : ProfileManager::instance()->allProfiles()) {
+    const auto profiles = ProfileManager::instance()->allProfiles();
+    for (const auto &profile : profiles) {
         addShortcutAction(profile);
     }
 

@@ -47,7 +47,7 @@ void PluginManager::loadAllPlugins()
             return false;
         }
     });
-    for (const auto &metaData : pluginMetaData) {
+    for (const auto &metaData : std::as_const(pluginMetaData)) {
         const KPluginFactory::Result result = KPluginFactory::instantiatePlugin<IKonsolePlugin>(metaData);
         if (!result) {
             continue;

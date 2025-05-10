@@ -45,21 +45,21 @@ void FilterChain::removeFilter(Filter *filter)
 
 void FilterChain::reset()
 {
-    for (auto *filter : _filters) {
+    for (auto *filter : std::as_const(_filters)) {
         filter->reset();
     }
 }
 
 void FilterChain::setBuffer(const QString *buffer, const QList<int> *linePositions)
 {
-    for (auto *filter : _filters) {
+    for (auto *filter : std::as_const(_filters)) {
         filter->setBuffer(buffer, linePositions);
     }
 }
 
 void FilterChain::process()
 {
-    for (auto *filter : _filters) {
+    for (auto *filter : std::as_const(_filters)) {
         filter->process();
     }
 }
@@ -92,7 +92,8 @@ QList<QSharedPointer<HotSpot>> FilterChain::hotSpots() const
 QRegion FilterChain::hotSpotRegion() const
 {
     QRegion region;
-    for (const auto &hotSpot : hotSpots()) {
+    const auto _hotSpots = hotSpots();
+    for (const auto &hotSpot : _hotSpots) {
         QRect r;
         r.setLeft(hotSpot->startColumn());
         r.setTop(hotSpot->startLine());
@@ -131,7 +132,8 @@ int FilterChain::count(HotSpot::Type type) const
 QList<QSharedPointer<HotSpot>> FilterChain::filterBy(HotSpot::Type type) const
 {
     QList<QSharedPointer<HotSpot>> hotspots;
-    for (const auto &spot : hotSpots()) {
+    const auto _hotSpots = hotSpots();
+    for (const auto &spot : _hotSpots) {
         if (spot->type() == type) {
             hotspots.append(spot);
         }
