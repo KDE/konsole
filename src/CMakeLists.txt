@@ -97,6 +97,10 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     list(APPEND konsole_LIBS util)
 endif()
 
+if(HAIKU)
+    list(APPEND konsole_LIBS network) # for undefined reference to `inet_aton'
+endif()
+
 # TODO: Move this to an internal folder if it grows too much.
 # This konsoleprivate_core is the "core" library that depends in nothing from konsole itself
 # so we can start to detangle the codebase.
