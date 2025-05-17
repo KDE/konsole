@@ -92,17 +92,14 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
 
         QRegularExpressionMatchIterator matchIterator = _regExp.globalMatch(string);
         while (matchIterator.hasNext()) {
-            QRegularExpressionMatch match = matchIterator.next();
-            int pos = match.capturedStart();
-            if (pos != -1) {
-                int newLines = 0;
-                while (newLines < linePositions.count() && linePositions[newLines] <= pos) {
-                    newLines++;
+            const QRegularExpressionMatch match = matchIterator.next();
+            const qsizetype startPos = match.capturedStart();
+            if (startPos != -1) {
+                const auto lineMatch = std::upper_bound(linePositions.begin(), linePositions.end(), startPos);
+                if (lineMatch != linePositions.end()) {
+                    const auto lineIdx = qMin(0ll, lastLine) + std::distance(linePositions.begin(), lineMatch) - 1;
+                    matchPositions.insert(static_cast<int>(lineIdx));
                 }
-                newLines--;
-
-                int findPos = qMin(0, lastLine) + newLines;
-                matchPositions.insert(findPos);
             }
         }
 
