@@ -433,6 +433,11 @@ public:
     // returns the binary name if available or an empty string otherwise
     static QString checkProgram(const QString &program);
 
+    /*
+     * Same as runCommand but only used when layout is loaded in ViewManager.
+     */
+    void runCommandFromLayout(const QString &command) const;
+
 public Q_SLOTS:
 
     /**

@@ -2,7 +2,7 @@ include(ECMAddTests)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate konsolecharacters konsoledecoders)
+set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate konsolecharacters konsoledecoders konsoleapp)
 
 # Temporary bypass for BKO 432379
 if(BUILD_SHARED_LIBS)
@@ -43,5 +43,6 @@ ecm_add_tests(
     SessionTest.cpp
     TerminalInterfaceTest.cpp
     TerminalTest.cpp
+    ViewManagerTest.cpp
     LINK_LIBRARIES ${KONSOLE_TEST_LIBS} KF6::Parts
 )

@@ -1144,6 +1144,10 @@ QJsonObject saveSessionTerminal(TerminalDisplay *terminalDisplay)
     auto terminalSession = terminalDisplay->sessionController()->session();
     const int sessionRestoreId = SessionManager::instance()->getRestoreId(terminalSession);
     thisTerminal.insert(QStringLiteral("SessionRestoreId"), sessionRestoreId);
+    thisTerminal.insert(QStringLiteral("Columns"), terminalDisplay->columns());
+    thisTerminal.insert(QStringLiteral("Lines"), terminalDisplay->lines());
+    thisTerminal.insert(QStringLiteral("WorkingDirectory"), terminalDisplay->session()->currentWorkingDirectory());
+    thisTerminal.insert(QStringLiteral("Command"), QStringLiteral(""));
     return thisTerminal;
 }
 
@@ -1172,11 +1176,14 @@ QJsonObject saveSessionsRecurse(QSplitter *splitter)
 
 void ViewManager::saveLayoutFile()
 {
-    QString fileName(QFileDialog::getSaveFileName(this->widget(),
-                                                  i18nc("@title:window", "Save Tab Layout"),
-                                                  QStringLiteral("~/"),
-                                                  i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));
+    saveLayout(QFileDialog::getSaveFileName(this->widget(),
+                                            i18nc("@title:window", "Save Tab Layout"),
+                                            QStringLiteral("~/"),
+                                            i18nc("@item:inlistbox", "Konsole View Layout (*.json)")));
+}
 
+void ViewManager::saveLayout(QString fileName)
+{
     // User pressed cancel in dialog
     if (fileName.isEmpty()) {
         return;
@@ -1224,12 +1231,43 @@ ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject &jsonSplitter, Vi
     for (const auto widgetJsonValue : splitterWidgets) {
         const auto widgetJsonObject = widgetJsonValue.toObject();
         const auto sessionIterator = widgetJsonObject.constFind(QStringLiteral("SessionRestoreId"));
+        const auto columnsIterator = widgetJsonObject.constFind(QStringLiteral("Columns"));
+        const auto linesIterator = widgetJsonObject.constFind(QStringLiteral("Lines"));
+        const auto commandIterator = widgetJsonObject.constFind(QStringLiteral("Command"));
+        const auto cwdIterator = widgetJsonObject.constFind(QStringLiteral("WorkingDirectory"));
 
         if (sessionIterator != widgetJsonObject.constEnd()) {
             Session *session = useSessionId ? SessionManager::instance()->idToSession(sessionIterator->toInt()) : SessionManager::instance()->createSession();
 
             auto newView = manager->createView(session);
             currentSplitter->addWidget(newView);
+
+            int columns = newView->columns();
+            int lines = newView->lines();
+            if (columnsIterator != widgetJsonObject.constEnd()) {
+                columns = columnsIterator->toInt();
+            }
+            if (linesIterator != widgetJsonObject.constEnd()) {
+                lines = linesIterator->toInt();
+            }
+            newView->setSize(columns, lines);
+
+            // Set the current working directory if the key is not empty
+            if (cwdIterator != widgetJsonObject.constEnd()) {
+                auto cwd = cwdIterator->toString();
+                if (!cwd.isEmpty()) {
+                    newView->session()->setInitialWorkingDirectory(cwd);
+                }
+            }
+
+            if (commandIterator != widgetJsonObject.constEnd()) {
+                auto command = commandIterator->toString();
+                // Don't open a program that is already running, such as bash
+                if (!command.isEmpty() && command != newView->session()->program()) {
+                    newView->session()->runCommandFromLayout(command);
+                }
+            }
+
         } else {
             auto nextSplitter = restoreSessionsSplitterRecurse(widgetJsonObject, manager, useSessionId);
             currentSplitter->addWidget(nextSplitter);

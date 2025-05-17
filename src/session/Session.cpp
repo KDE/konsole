@@ -2148,4 +2148,14 @@ SessionController *Session::controller()
     return nullptr;
 }
 
+// Only called during LoadLayout
+void Session::runCommandFromLayout(const QString &command) const
+{
+    if (isReadOnly()) {
+        return;
+    }
+
+    _emulation->sendText(command + QLatin1Char('\n'));
+}
+
 #include "moc_Session.cpp"
