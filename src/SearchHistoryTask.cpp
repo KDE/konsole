@@ -42,7 +42,6 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
     Emulation *emulation = session->emulation();
 
     if (!_regExp.pattern().isEmpty()) {
-        int pos = -1;
         bool forwards = (_direction == Enum::ForwardsSearch);
         const int lastLine = window->lineCount() - 1;
 
@@ -157,11 +156,7 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
             // line number search below assumes that the buffer ends with a new-line
             string.append(QLatin1Char('\n'));
 
-            if (forwards) {
-                pos = string.indexOf(_regExp);
-            } else {
-                pos = string.lastIndexOf(_regExp);
-            }
+            const auto pos = forwards ? string.indexOf(_regExp) : string.lastIndexOf(_regExp);
 
             // if a match is found, position the cursor on that line and update the screen
             if (pos != -1) {
