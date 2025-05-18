@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2025-04-30 17:32+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -748,13 +748,13 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "Yazıtipi Seç"
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "Tüm yazıtiplerini göster"
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3665,19 +3665,19 @@ msgstr "Anlamsal ipuçları "
 msgid "Line numbers "
 msgstr "Satır numaraları"
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Sekme Yerleşimini Kaydet…"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole Görünüm Yerleşimi (*.json)"
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3687,7 +3687,7 @@ msgstr ""
 "Yerleşim kaydedilirken bir sorun oluştu.\n"
 "%1"
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3697,7 +3697,7 @@ msgstr ""
 "Yerleşim yüklenirken bir sorun oluştu.\n"
 "%1"
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

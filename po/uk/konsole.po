@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2025-04-30 09:23+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -746,13 +746,13 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "Вибір шрифту"
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "Показати усі шрифти"
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3682,19 +3682,19 @@ msgstr "Семантичні підказки "
 msgid "Line numbers "
 msgstr "Номери рядків "
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Збереження компонування вкладок"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "компонування перегляду Konsole (*.json)"
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3704,7 +3704,7 @@ msgstr ""
 "Під час спроби збереження компонування сталася помилка.\n"
 "%1"
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3714,7 +3714,7 @@ msgstr ""
 "Під час спроби завантажити компонування сталася помилка.\n"
 "%1"
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

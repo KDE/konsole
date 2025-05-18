@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2023-12-12 19:29+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -745,13 +745,13 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "Vybrať písmo"
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "Zobraziť všetky písma"
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3715,7 +3715,7 @@ msgstr "Sémantické nápovedy:"
 msgid "Line numbers "
 msgstr "Čísla riadkov"
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3723,14 +3723,14 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Uložiť rozloženie kariet do súboru"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, fuzzy, kde-format
 #| msgid "Konsole View Layout (*.json)"
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Rozloženie pohľadu Konsole (*.json)"
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the Layout.\n"
@@ -3743,7 +3743,7 @@ msgstr ""
 "+Nastal problém pri ukladaní výstupu.\n"
 "%1"
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when loading the Layout.\n"
@@ -3756,7 +3756,7 @@ msgstr ""
 "Nastal problém pri načítaní rozloženia.\n"
 "%1"
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"

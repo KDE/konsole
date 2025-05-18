@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2025-02-23 13:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -746,13 +746,13 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "Elekti tiparon"
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "Montri ĉiujn tiparojn"
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3661,19 +3661,19 @@ msgstr "Semantikaj sugestoj"
 msgid "Line numbers "
 msgstr "Linia nombroj"
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Konservi langetan aranĝon"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole Vida Aranĝo (*.json)"
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3683,7 +3683,7 @@ msgstr ""
 "Problemo okazis dum konservado de la Aranĝo.\n"
 "%1"
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3693,7 +3693,7 @@ msgstr ""
 "Problemo okazis dum ŝargo de la Aranĝo.\n"
 "%1"
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

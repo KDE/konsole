@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2025-05-09 07:59+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -746,13 +746,13 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "בחירת גופן"
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "הצגת כל הגופנים"
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3640,19 +3640,19 @@ msgstr "רמזים סמנטיים "
 msgid "Line numbers "
 msgstr "מספרי שורות "
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "שמירת פריסת לשוניות"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "פריסת תצוגת Konsole‏ (‎*.json)"
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3662,7 +3662,7 @@ msgstr ""
 "אירעה שגיאה בשמירת הפריסה.\n"
 "%1"
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3672,7 +3672,7 @@ msgstr ""
 "אירעה שגיאה בטעינת הפריסה.\n"
 "%1"
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

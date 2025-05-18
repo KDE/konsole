@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2025-04-06 23:22+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -733,13 +733,13 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "글꼴 선택"
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "모든 글꼴 표시"
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3635,19 +3635,19 @@ msgstr "시맨틱 힌트 "
 msgid "Line numbers "
 msgstr "줄 번호 "
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "탭 레이아웃 저장"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr "Konsole 보기 레이아웃 (*.json)"
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3657,7 +3657,7 @@ msgstr ""
 "레이아웃을 저장하는 중 문제가 발생했습니다.\n"
 "%1"
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3667,7 +3667,7 @@ msgstr ""
 "레이아웃을 불러오는 중 문제가 발생했습니다.\n"
 "%1"
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

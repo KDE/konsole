@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -784,14 +784,14 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "Pasirinkti šriftą..."
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, fuzzy, kde-format
 #| msgid "Show All Fonts"
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "Rodyti visus šriftus"
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3840,7 +3840,7 @@ msgstr ""
 msgid "Line numbers "
 msgstr ""
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, fuzzy, kde-format
 #| msgctxt "@action Shortcut entry"
 #| msgid "Move Tab Left"
@@ -3848,13 +3848,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Pastumti kortelę kairėn"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3867,7 +3867,7 @@ msgstr ""
 "Įrašant išvestį įvyko klaida.\n"
 "%1"
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3880,7 +3880,7 @@ msgstr ""
 "Įrašant išvestį įvyko klaida.\n"
 "%1"
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

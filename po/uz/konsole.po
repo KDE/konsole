@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2008-06-04 01:01+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -791,13 +791,13 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "Shriftni tahrirlash..."
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr ""
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3807,20 +3807,20 @@ msgstr "Soʻzlarni bogʻlovchilar"
 msgid "Line numbers "
 msgstr "Sa&trlar soni: "
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, fuzzy, kde-format
 #| msgid "&Move Session Left"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Seansni chapga s&urish"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3828,7 +3828,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3836,7 +3836,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2011-08-14 00:07+0530\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: Sinhala <danishka@gmail.com>\n"
@@ -817,14 +817,14 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "අකුරු සකසන්න..."
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, fuzzy, kde-format
 #| msgid "Smooth fonts"
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr "සුමට අකුරු"
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3934,20 +3934,20 @@ msgstr "මවුසයේ අන්තර්ක්‍රියාකාරි�
 msgid "Line numbers "
 msgstr "ස්තිර පෙළී ගණන:"
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, fuzzy, kde-format
 #| msgid "Move Tab Left"
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "ටැබය වමට ගෙන යන්න"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3960,7 +3960,7 @@ msgstr ""
 "A problem occurred when saving the output.\n"
 "%1"
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, fuzzy, kde-format
 #| msgid ""
 #| "A problem occurred when saving the output.\n"
@@ -3973,7 +3973,7 @@ msgstr ""
 "A problem occurred when saving the output.\n"
 "%1"
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-07 00:45+0000\n"
+"POT-Creation-Date: 2025-05-18 00:45+0000\n"
 "PO-Revision-Date: 2021-10-15 10:45+0200\n"
 "Last-Translator: Prof. Dr. Eduard Werner <e.werner@rz.uni-leipzig.de>\n"
 "Language-Team: Upper Sorbian\n"
@@ -724,13 +724,13 @@ msgctxt "@title:window"
 msgid "Select font"
 msgstr "Proces za&kónčić"
 
-#: FontDialog.cpp:38
+#: FontDialog.cpp:37
 #, kde-format
 msgctxt "@action:button"
 msgid "Show all fonts"
 msgstr ""
 
-#: FontDialog.cpp:67
+#: FontDialog.cpp:66
 #, kde-format
 msgctxt "@info:status"
 msgid ""
@@ -3653,7 +3653,7 @@ msgstr ""
 msgid "Line numbers "
 msgstr "&Kelko linkow:"
 
-#: ViewManager.cpp:1176
+#: ViewManager.cpp:1180
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Save tab layout to file"
@@ -3661,13 +3661,13 @@ msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Layout jězdnikow do dataje zawěsćić"
 
-#: ViewManager.cpp:1178 ViewManager.cpp:1265
+#: ViewManager.cpp:1182 ViewManager.cpp:1303
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Konsole View Layout (*.json)"
 msgstr ""
 
-#: ViewManager.cpp:1191
+#: ViewManager.cpp:1198
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3675,7 +3675,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1252
+#: ViewManager.cpp:1290
 #, kde-format
 msgctxt "@label:textbox"
 msgid ""
@@ -3683,7 +3683,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: ViewManager.cpp:1263
+#: ViewManager.cpp:1301
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Load tab layout from file"
