@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 00:45+0000\n"
+"POT-Creation-Date: 2025-05-19 00:45+0000\n"
 "PO-Revision-Date: 2024-11-23 12:11+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -779,17 +779,17 @@ msgstr "Key Combination"
 msgid "Output"
 msgstr "Output"
 
-#: KeyBindingEditor.cpp:219 KeyBindingEditor.cpp:220
+#: KeyBindingEditor.cpp:220 KeyBindingEditor.cpp:221
 #, kde-format
 msgid "New Key Binding List"
 msgstr "New Key Binding List"
 
-#: KeyBindingEditor.cpp:223
+#: KeyBindingEditor.cpp:224
 #, kde-format
 msgid "Edit Key Binding List"
 msgstr "Edit Key Binding List"
 
-#: KeyBindingEditor.cpp:286
+#: KeyBindingEditor.cpp:287
 #, kde-format
 msgid "A key bindings scheme cannot be saved with an empty description."
 msgstr "A key bindings scheme cannot be saved with an empty description."
@@ -1263,43 +1263,43 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "There are %1 open terminals in this window. Do you still want to quit?"
 
-#: MainWindow.cpp:877 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiles"
 
-#: MainWindow.cpp:894
+#: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "General"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Memory"
 
-#: MainWindow.cpp:912
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Tab Bar / Splitters"
 
-#: MainWindow.cpp:917
+#: MainWindow.cpp:918
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Temporary Files"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Thumbnails"
 
-#: Part.cpp:300
+#: Part.cpp:301
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -1510,9 +1510,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1 is a folder for SSH entries"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:318
-#: plugins/SSHManager/sshmanagermodel.cpp:387
-#: plugins/SSHManager/sshmanagermodel.cpp:420
+#: plugins/SSHManager/sshmanagermodel.cpp:322
+#: plugins/SSHManager/sshmanagermodel.cpp:391
+#: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
@@ -2114,7 +2114,7 @@ msgstr "Could not start program '%1' with arguments '%2'."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silence in '%1' (Session '%2')"
 
-#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/Session.cpp:738 session/Session.cpp:2077
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2156,7 +2156,7 @@ msgstr "Program '%1' exited with status %2."
 msgid "ZModem Progress"
 msgstr "ZModem Progress"
 
-#: session/Session.cpp:2075
+#: session/Session.cpp:2076
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Activity in '%1' (Session '%2')"
@@ -4493,13 +4493,13 @@ msgstr "Select Initial Directory"
 msgid "Get New..."
 msgstr "Get New..."
 
-#: widgets/EditProfileDialog.cpp:1344
+#: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Scheme <resource>%1</resource> failed to load."
 
-#: widgets/EditProfileDialog.cpp:1523
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4508,7 +4508,7 @@ msgstr ""
 "This colour scheme uses a transparent background which does not appear to be "
 "supported on your desktop"
 
-#: widgets/EditProfileDialog.cpp:1529
+#: widgets/EditProfileDialog.cpp:1533
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4517,12 +4517,12 @@ msgstr ""
 "Konsole was started before desktop effects were enabled. You need to restart "
 "Konsole to see transparent background."
 
-#: widgets/EditProfileDialog.cpp:1930
+#: widgets/EditProfileDialog.cpp:1934
 #, kde-format
 msgid "Default for file type"
 msgstr "Default for file type"
 
-#: widgets/EditProfileDialog.cpp:1956
+#: widgets/EditProfileDialog.cpp:1960
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4551,7 +4551,7 @@ msgstr ""
 "will be ignored and the file will be opened by the default text\n"
 "editor."
 
-#: widgets/EditProfileDialog.cpp:1969
+#: widgets/EditProfileDialog.cpp:1973
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Text Editor Custom Command"

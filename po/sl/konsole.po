@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 00:45+0000\n"
+"POT-Creation-Date: 2025-05-19 00:45+0000\n"
 "PO-Revision-Date: 2025-04-30 06:47+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -791,17 +791,17 @@ msgstr "Kombinacija tipk"
 msgid "Output"
 msgstr "Izpis"
 
-#: KeyBindingEditor.cpp:219 KeyBindingEditor.cpp:220
+#: KeyBindingEditor.cpp:220 KeyBindingEditor.cpp:221
 #, kde-format
 msgid "New Key Binding List"
 msgstr "Nov seznam tipkovnih bližnjic"
 
-#: KeyBindingEditor.cpp:223
+#: KeyBindingEditor.cpp:224
 #, kde-format
 msgid "Edit Key Binding List"
 msgstr "Uredi seznam tipkovnih bližnjic"
 
-#: KeyBindingEditor.cpp:286
+#: KeyBindingEditor.cpp:287
 #, kde-format
 msgid "A key bindings scheme cannot be saved with an empty description."
 msgstr "Sheme povezave tipk ne morem shraniti s praznim opisom."
@@ -1275,43 +1275,43 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "V tem oknu je %1 odprtih terminalov. Ali res želite končati?"
 
-#: MainWindow.cpp:877 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profili"
 
-#: MainWindow.cpp:894
+#: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Splošno"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Pomnilnik"
 
-#: MainWindow.cpp:912
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Vrstica z zavihki / Razdelilniki"
 
-#: MainWindow.cpp:917
+#: MainWindow.cpp:918
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Začasne datoteke"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Predogledne sličice"
 
-#: Part.cpp:300
+#: Part.cpp:301
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -1523,9 +1523,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr "%1 je mapa za vnose SSH"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:318
-#: plugins/SSHManager/sshmanagermodel.cpp:387
-#: plugins/SSHManager/sshmanagermodel.cpp:420
+#: plugins/SSHManager/sshmanagermodel.cpp:322
+#: plugins/SSHManager/sshmanagermodel.cpp:391
+#: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
@@ -2127,7 +2127,7 @@ msgstr "Ni bilo mogoče zagnati programa »%1« z argumenti »%2«."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Tišina v »%1« (Seja »%2«)"
 
-#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/Session.cpp:738 session/Session.cpp:2077
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2169,7 +2169,7 @@ msgstr "Program »%1« je končal s stanjem %2."
 msgid "ZModem Progress"
 msgstr "Napredek ZModema"
 
-#: session/Session.cpp:2075
+#: session/Session.cpp:2076
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Dejavnost v »%1« (Seja »%2«)"
@@ -4503,13 +4503,13 @@ msgstr "Izberi začetno mapo"
 msgid "Get New..."
 msgstr "Dobi novo…"
 
-#: widgets/EditProfileDialog.cpp:1344
+#: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Shema <resource>%1</resource> se ni uspela naložiti."
 
-#: widgets/EditProfileDialog.cpp:1523
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4517,7 +4517,7 @@ msgid ""
 msgstr ""
 "Ta barvna shema uporablja prozorno ozadje, kar na tem sistemu ni podprto"
 
-#: widgets/EditProfileDialog.cpp:1529
+#: widgets/EditProfileDialog.cpp:1533
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4526,12 +4526,12 @@ msgstr ""
 "Program Konsole je bil začet preden so bili omogočeni učinki namizja. Da bi "
 "lahko videli prozorno ozadje, ga morate znova zagnati."
 
-#: widgets/EditProfileDialog.cpp:1930
+#: widgets/EditProfileDialog.cpp:1934
 #, kde-format
 msgid "Default for file type"
 msgstr "Privzeto za vrsto datoteke"
 
-#: widgets/EditProfileDialog.cpp:1956
+#: widgets/EditProfileDialog.cpp:1960
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4559,7 +4559,7 @@ msgstr ""
 "Če v ukazu manjkata PATH ali LINE, bo ta nastavitev\n"
 "prezrta, datoteko pa bo odprl privzeti urejevalnik besedil."
 
-#: widgets/EditProfileDialog.cpp:1969
+#: widgets/EditProfileDialog.cpp:1973
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Ukaz urejevalnika besedil po meri"

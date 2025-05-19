@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 00:45+0000\n"
+"POT-Creation-Date: 2025-05-19 00:45+0000\n"
 "PO-Revision-Date: 2024-09-05 12:59+0300\n"
 "Last-Translator: Αντώνης Γέραλης <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -798,17 +798,17 @@ msgstr "Συνδυασμός πλήκτρων"
 msgid "Output"
 msgstr "Έξοδος"
 
-#: KeyBindingEditor.cpp:219 KeyBindingEditor.cpp:220
+#: KeyBindingEditor.cpp:220 KeyBindingEditor.cpp:221
 #, kde-format
 msgid "New Key Binding List"
 msgstr "Νέα λίστα πλήκτρων συνδυασμών"
 
-#: KeyBindingEditor.cpp:223
+#: KeyBindingEditor.cpp:224
 #, kde-format
 msgid "Edit Key Binding List"
 msgstr "Επεξεργασία λίστας πλήκτρων συνδυασμών"
 
-#: KeyBindingEditor.cpp:286
+#: KeyBindingEditor.cpp:287
 #, kde-format
 msgid "A key bindings scheme cannot be saved with an empty description."
 msgstr "Αδυναμία αποθήκευσης θέματος συνδυασμού πλήκτρων χωρίς περιγραφή."
@@ -1282,43 +1282,43 @@ msgstr ""
 "Υπάρχουν %1 ανοιχτά τερματικά σε αυτό το παράθυρο. Σίγουρα θέλετε να "
 "κλείσετε;"
 
-#: MainWindow.cpp:877 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Προφίλ"
 
-#: MainWindow.cpp:894
+#: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Γενικά"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr "Μνήμη"
 
-#: MainWindow.cpp:912
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr "Γραμμή καρτελών / Διαχωριστές"
 
-#: MainWindow.cpp:917
+#: MainWindow.cpp:918
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr "Προσωρινά αρχεία"
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr "Εικόνες επισκόπησης"
 
-#: Part.cpp:300
+#: Part.cpp:301
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -1535,9 +1535,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr "Το %1 είναι φάκελος για SSH εγγραφές"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:318
-#: plugins/SSHManager/sshmanagermodel.cpp:387
-#: plugins/SSHManager/sshmanagermodel.cpp:420
+#: plugins/SSHManager/sshmanagermodel.cpp:322
+#: plugins/SSHManager/sshmanagermodel.cpp:391
+#: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, kde-format
@@ -2145,7 +2145,7 @@ msgstr "Αδυναμία εκκίνησης του προγράμματος '%1'
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Σιγή στην '%1' (Συνεδρία '%2')"
 
-#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/Session.cpp:738 session/Session.cpp:2077
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2189,7 +2189,7 @@ msgstr "Το πρόγραμμα '%1' τερμάτισε με κατάσταση 
 msgid "ZModem Progress"
 msgstr "Πρόοδος ZModem"
 
-#: session/Session.cpp:2075
+#: session/Session.cpp:2076
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Δραστηριότητα στην '%1' (Συνεδρία '%2')"
@@ -4554,13 +4554,13 @@ msgstr "Επιλέξτε αρχικό κατάλογο"
 msgid "Get New..."
 msgstr "Λήψη νέου..."
 
-#: widgets/EditProfileDialog.cpp:1344
+#: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr "Αποτυχία φόρτωσης του θέματος <resource>%1</resource>."
 
-#: widgets/EditProfileDialog.cpp:1523
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4569,7 +4569,7 @@ msgstr ""
 "Αυτό το θέμα χρωμάτων έχει ένα διαφανές φόντο, το οποίο δε φαίνεται να "
 "υποστηρίζεται από το σύστημά σας."
 
-#: widgets/EditProfileDialog.cpp:1529
+#: widgets/EditProfileDialog.cpp:1533
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4578,12 +4578,12 @@ msgstr ""
 "Το Konsole ξεκίνησε πριν την ενεργοποίηση των εφέ επιφάνειας εργασίας. "
 "Πρέπει να επανεκκινήσετε το Konsole για να δείτε διαφανές φόντο."
 
-#: widgets/EditProfileDialog.cpp:1930
+#: widgets/EditProfileDialog.cpp:1934
 #, kde-format
 msgid "Default for file type"
 msgstr "Προεπιλογή για τον τύπο αρχείου"
 
-#: widgets/EditProfileDialog.cpp:1956
+#: widgets/EditProfileDialog.cpp:1960
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4612,7 +4612,7 @@ msgstr ""
 "θα αγνοηθεί και το αρχείο θα ανοίξει με τον προκαθορισμένο\n"
 "κειμενογράφο."
 
-#: widgets/EditProfileDialog.cpp:1969
+#: widgets/EditProfileDialog.cpp:1973
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr "Προσαρμοσμένη εντολή κειμενογράφου"

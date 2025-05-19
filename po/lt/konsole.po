@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 00:45+0000\n"
+"POT-Creation-Date: 2025-05-19 00:45+0000\n"
 "PO-Revision-Date: 2017-10-02 10:32+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -828,17 +828,17 @@ msgstr "Klavišų kombinacija"
 msgid "Output"
 msgstr "Išvestis"
 
-#: KeyBindingEditor.cpp:219 KeyBindingEditor.cpp:220
+#: KeyBindingEditor.cpp:220 KeyBindingEditor.cpp:221
 #, kde-format
 msgid "New Key Binding List"
 msgstr "Naujas sparčiųjų klavišų sąrašas"
 
-#: KeyBindingEditor.cpp:223
+#: KeyBindingEditor.cpp:224
 #, kde-format
 msgid "Edit Key Binding List"
 msgstr "Keisti sparčiųjų klavišų sąrašą"
 
-#: KeyBindingEditor.cpp:286
+#: KeyBindingEditor.cpp:287
 #, kde-format
 msgid "A key bindings scheme cannot be saved with an empty description."
 msgstr ""
@@ -1326,43 +1326,43 @@ msgctxt "@info"
 msgid "There are %1 open terminals in this window. Do you still want to quit?"
 msgstr "Yra veikiantis procesas šiame lange. Ar tikrai norite išeiti?"
 
-#: MainWindow.cpp:877 Part.cpp:297
+#: MainWindow.cpp:877 Part.cpp:298
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Profiles"
 msgstr "Profiliai"
 
-#: MainWindow.cpp:894
+#: MainWindow.cpp:895
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "General"
 msgstr "Bendri"
 
-#: MainWindow.cpp:906
+#: MainWindow.cpp:907
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Memory"
 msgstr ""
 
-#: MainWindow.cpp:912
+#: MainWindow.cpp:913
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Tab Bar / Splitters"
 msgstr ""
 
-#: MainWindow.cpp:917
+#: MainWindow.cpp:918
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Temporary Files"
 msgstr ""
 
-#: MainWindow.cpp:922
+#: MainWindow.cpp:923
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Thumbnails"
 msgstr ""
 
-#: Part.cpp:300
+#: Part.cpp:301
 #, kde-format
 msgctxt "@title Preferences page name"
 msgid "Part Info"
@@ -1593,9 +1593,9 @@ msgid "%1 is a folder for SSH entries"
 msgstr ""
 
 #: plugins/SSHManager/sshmanagermodel.cpp:79
-#: plugins/SSHManager/sshmanagermodel.cpp:318
-#: plugins/SSHManager/sshmanagermodel.cpp:387
-#: plugins/SSHManager/sshmanagermodel.cpp:420
+#: plugins/SSHManager/sshmanagermodel.cpp:322
+#: plugins/SSHManager/sshmanagermodel.cpp:391
+#: plugins/SSHManager/sshmanagermodel.cpp:424
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
 #, fuzzy, kde-format
@@ -2220,7 +2220,7 @@ msgstr "Nepavyko paleisti programos „%1“ su parametrais „%2“."
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Jokios veiklos sesijoje „%1“"
 
-#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/Session.cpp:738 session/Session.cpp:2077
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2259,7 +2259,7 @@ msgstr "Programa „%1“ baigė darbą ir pranešė kodą „%2“."
 msgid "ZModem Progress"
 msgstr "ZModem eiga"
 
-#: session/Session.cpp:2075
+#: session/Session.cpp:2076
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
@@ -4731,13 +4731,13 @@ msgstr "Nurodykite pradinį aplanką"
 msgid "Get New..."
 msgstr "Nauja..."
 
-#: widgets/EditProfileDialog.cpp:1344
+#: widgets/EditProfileDialog.cpp:1345
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Scheme <resource>%1</resource> failed to load."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1523
+#: widgets/EditProfileDialog.cpp:1527
 #, kde-format
 msgid ""
 "This color scheme uses a transparent background which does not appear to be "
@@ -4745,7 +4745,7 @@ msgid ""
 msgstr ""
 "Spalvų schemoje naudojamas permatomas fonas, kurio jūsų darbalaukis nepalaiko"
 
-#: widgets/EditProfileDialog.cpp:1529
+#: widgets/EditProfileDialog.cpp:1533
 #, kde-format
 msgid ""
 "Konsole was started before desktop effects were enabled. You need to restart "
@@ -4754,13 +4754,13 @@ msgstr ""
 "Konsolė buvo paleista prieš įjungiant darbalaukio efektus. Jums reikia iš "
 "naujo paleisti Konsolę, kad matytumėte permatomą foną."
 
-#: widgets/EditProfileDialog.cpp:1930
+#: widgets/EditProfileDialog.cpp:1934
 #, fuzzy, kde-format
 #| msgid "Default profile"
 msgid "Default for file type"
 msgstr "Numatytas profilis"
 
-#: widgets/EditProfileDialog.cpp:1956
+#: widgets/EditProfileDialog.cpp:1960
 #, kde-format
 msgid ""
 "The format is e.g. 'editorExec PATH:LINE:COLUMN'\n"
@@ -4777,7 +4777,7 @@ msgid ""
 "editor."
 msgstr ""
 
-#: widgets/EditProfileDialog.cpp:1969
+#: widgets/EditProfileDialog.cpp:1973
 #, kde-format
 msgid "Text Editor Custom Command"
 msgstr ""
