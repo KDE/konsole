@@ -2512,11 +2512,11 @@ void Screen::setReplMode(int mode)
     }
 }
 
-void Screen::setExitCode(int /*exitCode*/)
+void Screen::setExitCode(int exitCode)
 {
     int y = _cuY - 1;
     while (y >= 0) {
-        _lineProperties[y].flags.f.error = 1;
+        _lineProperties[y].flags.f.error = (exitCode != 0);
         if (_lineProperties[y].flags.f.prompt_start) {
             return;
         }
