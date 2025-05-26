@@ -7,19 +7,20 @@
 # Richard Frič <Richard.Fric@kdemail.net>, 2012.
 # SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2021, 2022, 2023 Roman Paholík <wizzardsk@gmail.com>
 # Matej Mrenica <matejm98mthw@gmail.com>, 2018, 2019, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2025 Lucia Mrenica <lucia.mrenica@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-17 02:34+0000\n"
-"PO-Revision-Date: 2023-12-12 19:29+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
-"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"PO-Revision-Date: 2025-05-25 12:16+0200\n"
+"Last-Translator: Lucia Mrenica <lucia.mrenica@gmail.com>\n"
+"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 25.04.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -621,21 +622,19 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
-#, fuzzy, kde-format
-#| msgid "Horizontal Anchor:"
+#, kde-format
 msgid "Horizontal"
-msgstr "Horizontálne"
+msgstr "1Horizontálne"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:223
-#, fuzzy, kde-format
-#| msgid "Vertical Anchor:"
+#, kde-format
 msgid "Vertical"
 msgstr "Vertikálne"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:228
-#, fuzzy, kde-format
+#, kde-format
 msgid "Both"
 msgstr "Obe"
 
@@ -1229,20 +1228,16 @@ msgid "Activate Menu"
 msgstr "Aktivovať ponuku"
 
 #: MainWindow.cpp:419
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Save Tab Layout..."
 msgstr "Uložiť rozloženie kariet do súboru"
 
 #: MainWindow.cpp:428
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Load Tab Layout..."
-msgstr "Načítať rozloženie kariet zo súboru"
+msgstr "Načítať rozloženie kariet..."
 
 #: MainWindow.cpp:736 MainWindow.cpp:753
 #, kde-format
@@ -1416,10 +1411,9 @@ msgid "Quick Commands"
 msgstr "Rýchle príkazy"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:71
-#, fuzzy, kde-format
-#| msgid "Show Quick Commands"
+#, kde-format
 msgid "Show Quick Access"
-msgstr "Zobraziť rýchle príkazy"
+msgstr "Zobraziť rýchly prístup"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:106
 #, kde-format
@@ -1427,10 +1421,9 @@ msgid "No quick commands found. You can add one on Plugins -> Quick Commands"
 msgstr ""
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:107
-#, fuzzy, kde-format
-#| msgid "Quick Commands"
+#, kde-format
 msgid "Plugins - Quick Commands"
-msgstr "Rýchle príkazy"
+msgstr "Doplnky - Rýchle príkazy"
 
 #: plugins/QuickCommands/quickcommandsplugin.cpp:125
 #, kde-format
@@ -1519,8 +1512,7 @@ msgid "SSH Config"
 msgstr "SSH Nastavenia"
 
 #: plugins/SSHManager/sshmanagermodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Default"
+#, kde-format
 msgctxt "@item:inlistbox The default list of ssh hosts"
 msgid "Default"
 msgstr "Predvolené"
@@ -1574,7 +1566,7 @@ msgstr "Otvoriť správcu súborov"
 #: plugins/SSHManager/sshmanagerplugin.cpp:153
 #, kde-format
 msgid "SSH Entries"
-msgstr ""
+msgstr "SSH Položky"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:182
 #, kde-format
@@ -1613,7 +1605,7 @@ msgstr "Vymazať"
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:161
 #, kde-format
 msgid "Don't Change"
-msgstr ""
+msgstr "Nemeniť"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
 #, kde-format
@@ -1694,9 +1686,7 @@ msgstr "Odstrániť vybranú položku"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: plugins/SSHManager/sshwidget.ui:19
-#, fuzzy, kde-format
-#| msgctxt "@title:column Profile keyboard shortcut"
-#| msgid "Shortcut"
+#, kde-format
 msgid "Shortcut"
 msgstr "Skratka"
 
@@ -1714,9 +1704,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, btnManageProfile)
 #: plugins/SSHManager/sshwidget.ui:60
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Manage Profiles"
+#, kde-format
 msgid "Manage profile"
 msgstr "Spravovať profily"
 
@@ -2089,12 +2077,10 @@ msgid "Solaris console"
 msgstr "Solaris konzola"
 
 #: searchtabs/SearchTabs.cpp:127
-#, fuzzy, kde-format
-#| msgctxt "@item:intext Search options"
-#| msgid "Search:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Search..."
-msgstr "Hľadať:"
+msgstr "Hľadať..."
 
 #: searchtabs/SearchTabs.cpp:128
 #, fuzzy, kde-format
@@ -2232,16 +2218,12 @@ msgid "Copy"
 msgstr "Kopírovať"
 
 #: session/SessionController.cpp:678
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Left/Right"
+#, kde-format
 msgid "Split View Left-Right"
 msgstr "Rozdeliť pohľad vertikálne"
 
 #: session/SessionController.cpp:683
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgid "Split View Top-Bottom"
 msgstr "Rozdeliť pohľad horizontálne"
 
@@ -2276,8 +2258,7 @@ msgid "&Select All"
 msgstr "Vybrať &všetko"
 
 #: session/SessionController.cpp:731
-#, fuzzy, kde-format
-#| msgid "Select &Line"
+#, kde-format
 msgid "Select &Mode"
 msgstr "Vybrať riadok"
 
@@ -2323,15 +2304,12 @@ msgid "Clear Scrollback and Reset"
 msgstr "Vyčistiť rolovanie a obnoviť"
 
 #: session/SessionController.cpp:776
-#, fuzzy, kde-format
-#| msgid "Edit Profile"
+#, kde-format
 msgid "Next Profile"
-msgstr "Upraviť profil"
+msgstr "Ďalší profil"
 
 #: session/SessionController.cpp:781
-#, fuzzy, kde-format
-#| msgctxt "@action:button Go to the previous phrase"
-#| msgid "Previous"
+#, kde-format
 msgid "Previous Profile"
 msgstr "Predchádzajúci"
 
@@ -2346,18 +2324,13 @@ msgid "Set &Encoding"
 msgstr "Nastaviť &kódovanie"
 
 #: session/SessionController.cpp:829
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inmenu Allows terminal applications to request mouse tracking"
-#| msgid "Allow mouse tracking"
+#, kde-format
 msgctxt "@item:inmenu Allows terminal applications to request mouse tracking"
 msgid "Allow Mouse Tracking"
 msgstr "Povoliť sledovanie myši"
 
 #: session/SessionController.cpp:838
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu A read only (locked) session"
-#| msgid "Read-only"
+#, kde-format
 msgctxt "@item:inmenu A read only (locked) session"
 msgid "Read-Only"
 msgstr "Iba na čítanie"
@@ -2956,7 +2929,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: settings/MemorySettings.ui:41
-#, fuzzy, kde-format
+#, kde-format
 msgid "Memory limit:"
 msgstr "Limit pamäte:"
 
@@ -3106,8 +3079,7 @@ msgstr "Tlačidlo Zatvoriť kartu zobraziť:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, OnEachTab)
 #: settings/TabBarSettings.ui:185
-#, fuzzy, kde-format
-#| msgid "&On each tab"
+#, kde-format
 msgid "On ea&ch tab"
 msgstr "Na každej karte"
 
@@ -3133,17 +3105,13 @@ msgstr "Tlačidlo Zatvoriť kartu zobraziť:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, ShowSearchTabsButton)
 #: settings/TabBarSettings.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Always show the split header"
-#| msgid "Always"
+#, kde-format
 msgid "Always"
 msgstr "Vždy"
 
 #. i18n: ectx: property (text), widget (QRadioButton, HideSearchTabsButton)
 #: settings/TabBarSettings.ui:251
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Never show the split header"
-#| msgid "Never"
+#, kde-format
 msgid "Never"
 msgstr "Nikdy"
 
@@ -3501,12 +3469,10 @@ msgid "Split View Top/Bottom"
 msgstr "Rozdeliť pohľad horizontálne"
 
 #: ViewManager.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Split View Top/Bottom"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Split View Automatically"
-msgstr "Rozdeliť pohľad horizontálne"
+msgstr "Rozdeliť pohľad automaticky"
 
 #: ViewManager.cpp:153
 #, fuzzy, kde-format
@@ -3705,20 +3671,17 @@ msgid "Switch to Tab %1"
 msgstr "Prepnúť na kartu %1"
 
 #: ViewManager.cpp:576
-#, fuzzy, kde-format
-#| msgid "Semantic hints:"
+#, kde-format
 msgid "Semantic hints "
-msgstr "Sémantické nápovedy:"
+msgstr "Sémantické nápovedy"
 
 #: ViewManager.cpp:592
-#, fuzzy, kde-format
+#, kde-format
 msgid "Line numbers "
-msgstr "Čísla riadkov"
+msgstr "Čísla riadkov "
 
 #: ViewManager.cpp:1176
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Save tab layout to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save Tab Layout"
 msgstr "Uložiť rozloženie kariet do súboru"
@@ -3757,12 +3720,10 @@ msgstr ""
 "%1"
 
 #: ViewManager.cpp:1263
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Load tab layout from file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load Tab Layout"
-msgstr "Načítať rozloženie kariet zo súboru"
+msgstr "Načítať rozloženie kariet"
 
 #: Vt102Emulation.cpp:2824
 #, kde-format
@@ -3852,8 +3813,7 @@ msgstr "Riadenie toku"
 
 #. i18n: ectx: property (text), widget (QLabel, label_14)
 #: widgets/EditProfileAdvancedPage.ui:222
-#, fuzzy, kde-format
-#| msgid "Default character encoding:"
+#, kde-format
 msgid "&Default character encoding:"
 msgstr "Štandardné kódovanie znakov:"
 
@@ -3873,18 +3833,17 @@ msgstr ""
 #: widgets/EditProfileAdvancedPage.ui:262
 #, kde-format
 msgid " ms"
-msgstr ""
+msgstr " ms"
 
 #. i18n: ectx: property (text), widget (QLabel, label_linenums)
 #: widgets/EditProfileAdvancedPage.ui:275
-#, fuzzy, kde-format
+#, kde-format
 msgid "Line Numbers:"
-msgstr "Čísla riadkov"
+msgstr "Čísla riadkov:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsNever)
 #: widgets/EditProfileAdvancedPage.ui:285
-#, fuzzy, kde-format
-#| msgid "&Never"
+#, kde-format
 msgctxt "Never"
 msgid "&Never"
 msgstr "Nikdy"
@@ -3898,9 +3857,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, lineNumsAlways)
 #: widgets/EditProfileAdvancedPage.ui:305
-#, fuzzy, kde-format
-#| msgctxt "Always"
-#| msgid "Always"
+#, kde-format
 msgctxt "Always"
 msgid "A&lways"
 msgstr "Vždy"
@@ -4253,9 +4210,9 @@ msgstr "Indikovať či je okno aktívne stlmením farieb"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderWhenActiveCheckbox)
 #: widgets/EditProfileAppearancePage.ui:756
-#, fuzzy, kde-format
+#, kde-format
 msgid "Border"
-msgstr "Hranica"
+msgstr "Okraj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, displayVerticalLine)
 #: widgets/EditProfileAppearancePage.ui:798
@@ -4686,8 +4643,7 @@ msgstr "/bin/sh"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: widgets/EditProfileGeneralPage.ui:157
-#, fuzzy, kde-format
-#| msgid "Initial directory:"
+#, kde-format
 msgid "I&nitial directory:"
 msgstr "Počiatočný adresár:"
 
@@ -4730,8 +4686,7 @@ msgstr "Upravte zoznam premenných prostredia a pridelených hodnôt"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: widgets/EditProfileGeneralPage.ui:271
-#, fuzzy, kde-format
-#| msgid "Initial terminal size:"
+#, kde-format
 msgid "Initial terminal si&ze:"
 msgstr "Počiatočná veľkosť terminálu:"
 
@@ -4750,8 +4705,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, terminalBellLabel)
 #: widgets/EditProfileGeneralPage.ui:359
-#, fuzzy, kde-format
-#| msgid "Terminal bell mode:"
+#, kde-format
 msgid "&Terminal bell mode:"
 msgstr "Režim zvončeku terminálu"
 
@@ -4923,15 +4877,13 @@ msgstr "Výber trojkliku:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsTheWholeLine)
 #: widgets/EditProfileMousePage.ui:104
-#, fuzzy, kde-format
-#| msgid "The whole line"
+#, kde-format
 msgid "&The whole line"
 msgstr "Celý aktuálny riadok"
 
 #. i18n: ectx: property (text), widget (QRadioButton, tripleClickSelectsFromMousePosition)
 #: widgets/EditProfileMousePage.ui:114
-#, fuzzy, kde-format
-#| msgid "From mouse position to the end of line"
+#, kde-format
 msgid "From mouse position to the end of &line"
 msgstr "Od polohy myši po koniec riadku"
 
@@ -5244,8 +5196,7 @@ msgstr "Rolovať stranu polovičnou výškou okna"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:132
-#, fuzzy, kde-format
-#| msgid "Half screen height"
+#, kde-format
 msgid "Half screen heigh&t"
 msgstr "Polovica výšky strany"
 
@@ -5275,8 +5226,7 @@ msgstr "Rolovať stranu plnou výškou okna"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:194
-#, fuzzy, kde-format
-#| msgid "Full screen height"
+#, kde-format
 msgid "F&ull screen height"
 msgstr "Celá výška strany"
 
@@ -5288,9 +5238,7 @@ msgstr "Zobraziť posuvník na pravej strane terminálového okna"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarRightButton)
 #: widgets/EditProfileScrollingPage.ui:218
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the right side"
-#| msgid "Right side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the right side"
 msgid "Ri&ght side"
 msgstr "Pravá strana"
@@ -5303,12 +5251,10 @@ msgstr "Zobraziť posuvník na ľavej strane terminálového okna"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollBarLeftButton)
 #: widgets/EditProfileScrollingPage.ui:241
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show scrollbar on the left side"
-#| msgid "Left side"
+#, kde-format
 msgctxt "@option:radio Show scrollbar on the left side"
 msgid "&Left side"
-msgstr "Ľavá strana"
+msgstr "&Ľavá strana"
 
 #. i18n: ectx: property (text), widget (QCheckBox, reflowLinesButton)
 #: widgets/EditProfileScrollingPage.ui:251
@@ -5396,8 +5342,7 @@ msgstr "Obmedziť zapamätaný výstup na pevný počet riadkov"
 
 #. i18n: ectx: property (text), widget (QRadioButton, fixedSizeHistoryButton)
 #: widgets/HistorySizeWidget.ui:63
-#, fuzzy, kde-format
-#| msgid "Fixed size:"
+#, kde-format
 msgid "Fi&xed size:"
 msgstr "Pevná veľkosť:"
 
@@ -5415,12 +5360,10 @@ msgstr "Zapamätať celý výstup z terminálu"
 
 #. i18n: ectx: property (text), widget (QRadioButton, unlimitedHistoryButton)
 #: widgets/HistorySizeWidget.ui:137
-#, fuzzy, kde-format
-#| msgctxt "Save all lines to the scrollback history"
-#| msgid "Unlimited"
+#, kde-format
 msgctxt "Save all lines to the scrollback history"
 msgid "&Unlimited"
-msgstr "Neobmedzené"
+msgstr "&Neobmedzené"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:172
@@ -5430,12 +5373,10 @@ msgstr "Nepamätať si predošlý výstup"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noHistoryButton)
 #: widgets/HistorySizeWidget.ui:175
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Do not select any tabs"
-#| msgid "&None"
+#, kde-format
 msgctxt "Do not save any lines to the scrollback history"
 msgid "&None"
-msgstr "Žiad&ne"
+msgstr "Ži&adne"
 
 #: widgets/IncrementalSearchBar.cpp:50
 #, kde-format
@@ -5581,10 +5522,9 @@ msgstr "Formát titulku vzdialenej karty:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: widgets/RenameTabWidget.ui:79
-#, fuzzy, kde-format
-#| msgid "Tab title format:"
+#, kde-format
 msgid "&Tab title format:"
-msgstr "Formát titulku karty:"
+msgstr "&Formát titulku karty:"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, tabTitleEdit)
 #: widgets/RenameTabWidget.ui:98
@@ -5594,8 +5534,7 @@ msgstr "Formát titulku normálnej karty"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: widgets/RenameTabWidget.ui:105
-#, fuzzy, kde-format
-#| msgid "Tab Color:"
+#, kde-format
 msgid "Tab Co&lor:"
 msgstr "Farba karty:"
 
