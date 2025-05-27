@@ -584,13 +584,11 @@ void TerminalPainter::updateCursorTextColor(const QColor &backgroundColor, QColo
     }
 }
 
-void TerminalPainter::drawCursor(QPainter &painter, const QRectF &rect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor)
+void TerminalPainter::drawCursor(QPainter &painter, const QRectF &cursorRect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor)
 {
     if (m_parentDisplay->cursorBlinking()) {
         return;
     }
-
-    const QRectF& cursorRect = rect;
 
     QColor color = m_parentDisplay->terminalColor()->cursorColor();
     QColor cursorColor = color.isValid() ? color : foregroundColor;
