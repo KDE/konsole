@@ -933,7 +933,7 @@ void TerminalDisplay::updateCursor()
     Q_ASSERT(cursorLocation < _imageSize);
 
     int charWidth = _image[cursorLocation].width();
-    QRect cursorRect = imageToWidget(QRect(_visualCursorPosition, QSize(charWidth, 1)));
+    QRect cursorRect = imageToWidget(highdpi_adjust_rect(QRect(_visualCursorPosition, QSize(charWidth, 1))));
     update(cursorRect);
 }
 

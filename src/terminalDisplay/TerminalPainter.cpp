@@ -584,16 +584,11 @@ void TerminalPainter::updateCursorTextColor(const QColor &backgroundColor, QColo
     }
 }
 
-void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor)
+void TerminalPainter::drawCursor(QPainter &painter, const QRectF &cursorRect, const QColor &foregroundColor, const QColor &backgroundColor, QColor &characterColor)
 {
     if (m_parentDisplay->cursorBlinking()) {
         return;
     }
-
-    // shift rectangle top down one pixel to leave some space
-    // between top and bottom
-    // noticeable when linespace>1
-    QRectF cursorRect = rect.adjusted(0, 1, 0, 0);
 
     QColor color = m_parentDisplay->terminalColor()->cursorColor();
     QColor cursorColor = color.isValid() ? color : foregroundColor;
@@ -609,7 +604,6 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
     painter.setPen(pen);
 
     if (m_parentDisplay->cursorShape() == Enum::BlockCursor) {
-        painter.setRenderHint(QPainter::Antialiasing, true);
         if (m_parentDisplay->hasFocus()) {
             painter.fillRect(cursorRect, cursorColor);
 
@@ -617,9 +611,10 @@ void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QCo
         } else {
             // draw the cursor outline, adjusting the area so that
             // it is drawn entirely inside cursorRect
+            painter.setRenderHint(QPainter::Antialiasing, true);
             painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
+            painter.setRenderHint(QPainter::Antialiasing, false);
         }
-        painter.setRenderHint(QPainter::Antialiasing, false);
     } else if (m_parentDisplay->cursorShape() == Enum::UnderlineCursor) {
         QLineF line(cursorRect.left() + halfWidth, cursorRect.bottom() - halfWidth, cursorRect.right() - halfWidth, cursorRect.bottom() - halfWidth);
         painter.drawLine(line);

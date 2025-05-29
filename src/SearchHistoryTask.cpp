@@ -42,7 +42,6 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
     Emulation *emulation = session->emulation();
 
     if (!_regExp.pattern().isEmpty()) {
-        int pos = -1;
         bool forwards = (_direction == Enum::ForwardsSearch);
         const int lastLine = window->lineCount() - 1;
 
@@ -89,21 +88,18 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
         decoder.begin(&searchStream);
         emulation->writeToStream(&decoder, 0, lastLine);
         decoder.end();
+        const QList<int> linePositions = decoder.linePositions();
 
         QRegularExpressionMatchIterator matchIterator = _regExp.globalMatch(string);
         while (matchIterator.hasNext()) {
-            QRegularExpressionMatch match = matchIterator.next();
-            int pos = match.capturedStart();
-            if (pos != -1) {
-                int newLines = 0;
-                QList<int> linePositions = decoder.linePositions();
-                while (newLines < linePositions.count() && linePositions[newLines] <= pos) {
-                    newLines++;
+            const QRegularExpressionMatch match = matchIterator.next();
+            const qsizetype startPos = match.capturedStart();
+            if (startPos != -1) {
+                const auto lineMatch = std::upper_bound(linePositions.begin(), linePositions.end(), startPos);
+                if (lineMatch != linePositions.end()) {
+                    const auto lineIdx = qMin(0ll, lastLine) + std::distance(linePositions.begin(), lineMatch) - 1;
+                    matchPositions.insert(static_cast<int>(lineIdx));
                 }
-                newLines--;
-
-                int findPos = qMin(0, lastLine) + newLines;
-                matchPositions.insert(findPos);
             }
         }
 
@@ -157,11 +153,7 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, 
             // line number search below assumes that the buffer ends with a new-line
             string.append(QLatin1Char('\n'));
 
-            if (forwards) {
-                pos = string.indexOf(_regExp);
-            } else {
-                pos = string.lastIndexOf(_regExp);
-            }
+            const auto pos = forwards ? string.indexOf(_regExp) : string.lastIndexOf(_regExp);
 
             // if a match is found, position the cursor on that line and update the screen
             if (pos != -1) {

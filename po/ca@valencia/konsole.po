@@ -568,7 +568,7 @@ msgstr "Edita el camí de la imatge de fons"
 #: colorscheme/ColorSchemeEditor.ui:151
 #, kde-format
 msgid "Choose the background image"
-msgstr "Escolliu la imatge de fons"
+msgstr "Trieu la imatge de fons"
 
 #. i18n: ectx: property (text), widget (QToolButton, wallpaperSelectButton)
 #. i18n: ectx: property (text), widget (QToolButton, dirSelectButton)
@@ -1543,7 +1543,7 @@ msgstr "Configureu SSH"
 #: plugins/SSHManager/sshmanagermodel.cpp:103
 #, kde-format
 msgid "Host: %1"
-msgstr "Servidor: %1"
+msgstr "Amfitrió: %1"
 
 #: plugins/SSHManager/sshmanagerplugin.cpp:66
 #, kde-format
@@ -1640,7 +1640,7 @@ msgstr "Perfil SSH importat <br/> Algunes opcions només són de lectura."
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
 #, kde-format
 msgid "Missing Hostname"
-msgstr "Falta el nom de la màquina"
+msgstr "Falta el nom de l'amfitrió"
 
 #: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
 #, kde-format
@@ -2872,7 +2872,8 @@ msgstr ""
 #: settings/konsole.kcfg:151
 #, kde-format
 msgid "Allow middle-clicking on open tabs to close them"
-msgstr "Permetre el clic del mig sobre les pestanyes obertes per a tancar-les"
+msgstr ""
+"Permetre el clic del mig damunt de les pestanyes obertes per a tancar-les"
 
 #. i18n: ectx: label, entry (NewTabButton), group (TabBar)
 #: settings/konsole.kcfg:155

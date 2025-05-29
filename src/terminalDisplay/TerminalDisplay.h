@@ -65,12 +65,10 @@ class Profile;
  * This function adjusts a rect by adding a 1px border around it. The idea is to
  * compensate in case of approximation issues on highdpi displays with fractional
  * scaling applied.
- * As Qt6 may not be affected by this issue, the adjustment is not added in that
- * case. Hopefully the compiler ignores this function in that case.
  */
 inline QRect highdpi_adjust_rect(const QRect &rect)
 {
-    return rect;
+    return rect.adjusted(-1, -1, 1, 1);
 }
 
 /**
