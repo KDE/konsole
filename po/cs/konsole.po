@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-17 02:34+0000\n"
+"POT-Creation-Date: 2025-05-29 02:45+0000\n"
 "PO-Revision-Date: 2024-08-27 13:51+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -2071,7 +2071,7 @@ msgstr "Varování: "
 msgid "Could not find an interactive shell to start."
 msgstr "Nelze najít interaktivní shell ke spuštění."
 
-#: session/Session.cpp:514 session/Session.cpp:516
+#: session/Session.cpp:514 session/Session.cpp:517
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2080,17 +2080,17 @@ msgstr ""
 "Nelze najít '%1', spouštím '%2' jako náhradu. Prosím, zkontrolujte nastavení "
 "svého profilu."
 
-#: session/Session.cpp:580
+#: session/Session.cpp:582
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Nepovedlo se spustit program '%1' s argumenty '%2'."
 
-#: session/Session.cpp:737
+#: session/Session.cpp:739
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Ticho v '%1' (sezení '%2')"
 
-#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/Session.cpp:740 session/Session.cpp:2078
 #: session/SessionController.cpp:362 session/SessionController.cpp:1888
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2098,7 +2098,7 @@ msgstr "Ticho v '%1' (sezení '%2')"
 msgid "Show session"
 msgstr "Zastavit sezení"
 
-#: session/Session.cpp:1022
+#: session/Session.cpp:1024
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2107,28 +2107,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1062
+#: session/Session.cpp:1064
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Hotovo"
 
-#: session/Session.cpp:1076 session/Session.cpp:1092
+#: session/Session.cpp:1078 session/Session.cpp:1094
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Program '%1' zhavaroval."
 
-#: session/Session.cpp:1078
+#: session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Program '%1' ukončen se stavem %2."
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1606
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem průběh"
 
-#: session/Session.cpp:2075
+#: session/Session.cpp:2077
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Aktivita v '%1' (Sezení '%2')"

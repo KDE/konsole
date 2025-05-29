@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-17 02:34+0000\n"
+"POT-Creation-Date: 2025-05-29 02:45+0000\n"
 "PO-Revision-Date: 2014-07-01 22:04+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -2207,7 +2207,7 @@ msgstr "Wohrschoen: "
 msgid "Could not find an interactive shell to start."
 msgstr "Keen Wesselwark-Konsool lett sik finnen, de sik starten lett"
 
-#: session/Session.cpp:514 session/Session.cpp:516
+#: session/Session.cpp:514 session/Session.cpp:517
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2216,18 +2216,18 @@ msgstr ""
 "\"%1\" lett sik nich finnen, ansteed warrt \"%2\" opropen. Prööv bitte Dien "
 "Profil-Instellen."
 
-#: session/Session.cpp:580
+#: session/Session.cpp:582
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Dat Programm \"%1\" lett sik nich mit de Argumenten \"%2\" opropen."
 
-#: session/Session.cpp:737
+#: session/Session.cpp:739
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Törn \"%1\" is still"
 
-#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/Session.cpp:740 session/Session.cpp:2078
 #: session/SessionController.cpp:362 session/SessionController.cpp:1888
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2236,7 +2236,7 @@ msgstr "Törn \"%1\" is still"
 msgid "Show session"
 msgstr "Törn &tomaken"
 
-#: session/Session.cpp:1022
+#: session/Session.cpp:1024
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2245,28 +2245,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1062
+#: session/Session.cpp:1064
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Afslaten"
 
-#: session/Session.cpp:1076 session/Session.cpp:1092
+#: session/Session.cpp:1078 session/Session.cpp:1094
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Programm \"%1\" is afstört."
 
-#: session/Session.cpp:1078
+#: session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Programm \"%1\" hett mit Status %2 ophollen."
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1606
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem-Vörankamen"
 
-#: session/Session.cpp:2075
+#: session/Session.cpp:2077
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

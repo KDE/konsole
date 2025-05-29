@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-17 02:34+0000\n"
+"POT-Creation-Date: 2025-05-29 02:45+0000\n"
 "PO-Revision-Date: 2012-12-20 16:07+0700\n"
 "Last-Translator: sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros>\n"
@@ -2219,25 +2219,25 @@ msgstr "ការ​ព្រមាន ៖"
 msgid "Could not find an interactive shell to start."
 msgstr "មិន​អាច​រក​សែល​អន្តរកម្ម​ដើម្បី​ចាប់ផ្ដើម​បាន​ទេ ។"
 
-#: session/Session.cpp:514 session/Session.cpp:516
+#: session/Session.cpp:514 session/Session.cpp:517
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr "មិន​​អាច​រក '%1' ចាប់ផ្ដើម '%2' ជំនួស ។  សូម​ពិនិត្យ​​ការ​កំណត់​ទម្រង់​របស់​អ្នក ។"
 
-#: session/Session.cpp:580
+#: session/Session.cpp:582
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "មិន​អាច​ចាប់ផ្ដើម​កម្មវិធី '%1' ដែល​មាន​អាគុយម៉ង់ '%2' បាន​ទេ ។"
 
-#: session/Session.cpp:737
+#: session/Session.cpp:739
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ស្ងាត់​ក្នុង​សម័យ '%1'"
 
-#: session/Session.cpp:738 session/Session.cpp:2076
+#: session/Session.cpp:740 session/Session.cpp:2078
 #: session/SessionController.cpp:362 session/SessionController.cpp:1888
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2247,7 +2247,7 @@ msgstr "ស្ងាត់​ក្នុង​សម័យ '%1'"
 msgid "Show session"
 msgstr "បិទ​បង្អួច"
 
-#: session/Session.cpp:1022
+#: session/Session.cpp:1024
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2256,28 +2256,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1062
+#: session/Session.cpp:1064
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "បាន​បញ្ចប់"
 
-#: session/Session.cpp:1076 session/Session.cpp:1092
+#: session/Session.cpp:1078 session/Session.cpp:1094
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "កម្មវិធី '%1' បានគាំង ។"
 
-#: session/Session.cpp:1078
+#: session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "កម្មវិធី '%1' បាន​ចេញ​ដោយ​មាន​ស្ថានភាព %2 ។"
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1606
 #, kde-format
 msgid "ZModem Progress"
 msgstr "វឌ្ឍនភាព ZModem"
 
-#: session/Session.cpp:2075
+#: session/Session.cpp:2077
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"
