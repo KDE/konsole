@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-19 00:45+0000\n"
+"POT-Creation-Date: 2025-05-29 00:46+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -2185,25 +2185,25 @@ msgstr "ئاگاھلاندۇرۇش: "
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:514 session/Session.cpp:516
+#: session/Session.cpp:514 session/Session.cpp:517
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr "«%1» تېپىلمىدى، شۇڭا «%2» نى باشلاڭ. profile تەڭشىكىڭىزنى تەكشۈرۈڭ."
 
-#: session/Session.cpp:580
+#: session/Session.cpp:582
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "پروگرامما «%1» نى «%2» ئارگۇمېنت بىلەن باشلىغىلى بولمىدى."
 
-#: session/Session.cpp:737
+#: session/Session.cpp:739
 #, fuzzy, kde-format
 #| msgid "Silence in session '%1'"
 msgid "Silence in '%1' (Session '%2')"
 msgstr "ئەڭگىمە «%1» نىڭدا  جىمجىتلىق"
 
-#: session/Session.cpp:738 session/Session.cpp:2077
+#: session/Session.cpp:740 session/Session.cpp:2079
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2211,7 +2211,7 @@ msgstr "ئەڭگىمە «%1» نىڭدا  جىمجىتلىق"
 msgid "Show session"
 msgstr ""
 
-#: session/Session.cpp:1022
+#: session/Session.cpp:1024
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2220,28 +2220,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1062
+#: session/Session.cpp:1064
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "تاماملاندى"
 
-#: session/Session.cpp:1076 session/Session.cpp:1092
+#: session/Session.cpp:1078 session/Session.cpp:1094
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "پروگرامما «%1» غۇلىدى."
 
-#: session/Session.cpp:1078
+#: session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "پروگرامما «%1» ئاخىرلاشتى. ھالىتى %2."
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1606
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem ئىجراسى"
 
-#: session/Session.cpp:2076
+#: session/Session.cpp:2078
 #, fuzzy, kde-format
 #| msgid "Activity in session '%1'"
 msgid "Activity in '%1' (Session '%2')"

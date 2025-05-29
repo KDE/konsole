@@ -5,21 +5,21 @@
 # Pino Toscano <toscano.pino@tiscali.it>, 2006.
 # Andrea Celli <andrea.celli@libero.it>, 2007.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008, 2012, 2013, 2014, 2015.
-# Paolo Zamponi <feus73@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Paolo Zamponi <feus73@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-19 00:45+0000\n"
-"PO-Revision-Date: 2025-04-30 15:43+0200\n"
-"Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
+"POT-Creation-Date: 2025-05-29 00:46+0000\n"
+"PO-Revision-Date: 2025-05-24 17:16+0200\n"
+"Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -511,7 +511,7 @@ msgid ""
 "To see any effect, set colors with saturation value greater than 0."
 msgstr ""
 "I valori di tonalità e saturazione dei colori predefiniti di primo piano e "
-"sfondo sono resi casuali. Alcuni schermi di colore potrebbero utilizzare "
+"sfondo sono resi casuali. Alcuni schemi di colori potrebbero utilizzare "
 "impostazioni di casualità diverse.\n"
 "Per vedere l'effetto, impostare i colori con valore di saturazione maggiore "
 "di 0."
@@ -2118,7 +2118,7 @@ msgstr "Avviso: "
 msgid "Could not find an interactive shell to start."
 msgstr "Impossibile trovare una shell interattiva da avviare."
 
-#: session/Session.cpp:514 session/Session.cpp:516
+#: session/Session.cpp:514 session/Session.cpp:517
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
@@ -2127,17 +2127,17 @@ msgstr ""
 "Impossibile trovare «%1», avvio di «%2» al suo posto. Controlla le "
 "impostazioni del tuo profilo."
 
-#: session/Session.cpp:580
+#: session/Session.cpp:582
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "Impossibile avviare il programma «%1» con gli argomenti «%2»."
 
-#: session/Session.cpp:737
+#: session/Session.cpp:739
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "Silenzio in «%1» (sessione «%2»)"
 
-#: session/Session.cpp:738 session/Session.cpp:2077
+#: session/Session.cpp:740 session/Session.cpp:2079
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2145,7 +2145,7 @@ msgstr "Silenzio in «%1» (sessione «%2»)"
 msgid "Show session"
 msgstr "Mostra la sessione"
 
-#: session/Session.cpp:1022
+#: session/Session.cpp:1024
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2159,28 +2159,28 @@ msgstr ""
 "Konsole.<p>Questo avviso sarà visualizzato solo una volta per questa istanza "
 "di Konsole.</p>"
 
-#: session/Session.cpp:1062
+#: session/Session.cpp:1064
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "Finito"
 
-#: session/Session.cpp:1076 session/Session.cpp:1092
+#: session/Session.cpp:1078 session/Session.cpp:1094
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "Il programma «%1» è andato in crash."
 
-#: session/Session.cpp:1078
+#: session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "Il programma «%1» è terminata con lo stato %2."
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1606
 #, kde-format
 msgid "ZModem Progress"
 msgstr "Avanzamento ZModem"
 
-#: session/Session.cpp:2076
+#: session/Session.cpp:2078
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "Attività in «%1» (sessione «%2»)"

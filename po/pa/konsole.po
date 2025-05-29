@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-19 00:45+0000\n"
+"POT-Creation-Date: 2025-05-29 00:46+0000\n"
 "PO-Revision-Date: 2024-01-19 07:50-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -2098,24 +2098,24 @@ msgstr "ਚੇਤਾਵਨੀ: "
 msgid "Could not find an interactive shell to start."
 msgstr ""
 
-#: session/Session.cpp:514 session/Session.cpp:516
+#: session/Session.cpp:514 session/Session.cpp:517
 #, kde-format
 msgid ""
 "Could not find '%1', starting '%2' instead.  Please check your profile "
 "settings."
 msgstr ""
 
-#: session/Session.cpp:580
+#: session/Session.cpp:582
 #, kde-format
 msgid "Could not start program '%1' with arguments '%2'."
 msgstr "ਪਰੋਗਰਾਮ '%1' ਆਰਗੂਮੈਂਟ '%2' ਨਾਲ ਚਾਲੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।"
 
-#: session/Session.cpp:737
+#: session/Session.cpp:739
 #, kde-format
 msgid "Silence in '%1' (Session '%2')"
 msgstr "'%1' (ਸ਼ੈਸ਼ਨ '%2') ਵਿੱਚ ਖਾਮੋਸ਼ੀ"
 
-#: session/Session.cpp:738 session/Session.cpp:2077
+#: session/Session.cpp:740 session/Session.cpp:2079
 #: session/SessionController.cpp:361 session/SessionController.cpp:1887
 #: terminalDisplay/TerminalBell.cpp:44 Vt102Emulation.cpp:1210
 #: Vt102Emulation.cpp:1465
@@ -2123,7 +2123,7 @@ msgstr "'%1' (ਸ਼ੈਸ਼ਨ '%2') ਵਿੱਚ ਖਾਮੋਸ਼ੀ"
 msgid "Show session"
 msgstr "ਸ਼ੈਸ਼ਨ ਵੇਖਾਓ"
 
-#: session/Session.cpp:1022
+#: session/Session.cpp:1024
 #, kde-format
 msgid ""
 "The D-Bus methods sendText/runCommand were just used.  There are security "
@@ -2132,28 +2132,28 @@ msgid ""
 "warning will only show once for this Konsole instance.</p>"
 msgstr ""
 
-#: session/Session.cpp:1062
+#: session/Session.cpp:1064
 #, kde-format
 msgctxt "@info:shell This session is done"
 msgid "Finished"
 msgstr "ਸਮਾਪਤ"
 
-#: session/Session.cpp:1076 session/Session.cpp:1092
+#: session/Session.cpp:1078 session/Session.cpp:1094
 #, kde-format
 msgid "Program '%1' crashed."
 msgstr "ਪਰੋਗਰਾਮ '%1' ਕਰੈਸ਼ ਹੋ ਗਿਆ।"
 
-#: session/Session.cpp:1078
+#: session/Session.cpp:1080
 #, kde-format
 msgid "Program '%1' exited with status %2."
 msgstr "ਪਰੋਗਰਾਮ '%1' ਹਾਲਤ %2 ਵਿੱਚ ਬੰਦ ਹੋ ਗਿਆ ਹੈ।"
 
-#: session/Session.cpp:1604
+#: session/Session.cpp:1606
 #, kde-format
 msgid "ZModem Progress"
 msgstr "ZModem ਤਰੱਕੀ"
 
-#: session/Session.cpp:2076
+#: session/Session.cpp:2078
 #, kde-format
 msgid "Activity in '%1' (Session '%2')"
 msgstr "'%1' (ਸ਼ੈਸ਼ਨ '%2') ਵਿੱਚ ਕਾਰਵਾਈ"
