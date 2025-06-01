@@ -30,8 +30,6 @@
 #include <QItemSelectionModel>
 #include <QMenu>
 #include <QPoint>
-#include <QRegularExpression>
-#include <QRegularExpressionValidator>
 
 #include <QSettings>
 #include <QSortFilterProxyModel>
@@ -57,16 +55,8 @@ SSHManagerTreeWidget::SSHManagerTreeWidget(QWidget *parent)
 
     d->filterModel = new SSHManagerFilterModel(this);
 
-    // https://stackoverflow.com/questions/1418423/the-hostname-regex
-    const auto hostnameRegex =
-        QRegularExpression(QStringLiteral(R"(^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$)"));
-
-    const auto *hostnameValidator = new QRegularExpressionValidator(hostnameRegex, this);
-    ui->hostname->setValidator(hostnameValidator);
-
-    // System and User ports see:
-    // https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
-    const auto *portValidator = new QIntValidator(0, 49151, this);
+    // full port range, users can setup ssh on any port they want
+    const auto *portValidator = new QIntValidator(0, 65535, this);
     ui->port->setValidator(portValidator);
 
     connect(ui->newSSHConfig, &QPushButton::clicked, this, &SSHManagerTreeWidget::showInfoPane);
