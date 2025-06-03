@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:46+0000\n"
+"POT-Creation-Date: 2025-06-03 00:46+0000\n"
 "PO-Revision-Date: 2025-05-31 11:30+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -808,7 +808,7 @@ msgstr "Ett tangentbindningsschema kan inte sparas med en tom beskrivning."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:352
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:342
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1397,7 +1397,7 @@ msgstr "Spara"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:273
 #, kde-format
 msgid "Update"
 msgstr "Uppdatera"
@@ -1473,7 +1473,7 @@ msgstr ""
 " med flera inställningar. Är du säker?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:233
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Du ska just ta bort %1. Är du säker?"
@@ -1529,8 +1529,8 @@ msgstr "%1 är en katalog för SSH-poster"
 #: plugins/SSHManager/sshmanagermodel.cpp:322
 #: plugins/SSHManager/sshmanagermodel.cpp:391
 #: plugins/SSHManager/sshmanagermodel.cpp:424
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:94
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, kde-format
 msgid "SSH Config"
 msgstr "Inställning av SSH"
@@ -1593,24 +1593,24 @@ msgstr ""
 "Kan inte utföra SSH-kommandon utanför skalprogrammet (t.ex. bash, zsh, sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:80
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:70
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH-nyckel"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:119
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:109
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Ta bort"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:161
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
 msgstr "Ändra inte"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1619,69 +1619,69 @@ msgstr ""
 "Du ska just ta bort katalogen %1,\n"
 " med flera SSH-inställningar. Är du säker?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:240
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Ta bort SSH-inställningar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr "Importerad SSH-profil<br/> Vissa inställningar är skrivskyddade."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Saknar värddatornamn"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:384
 #, kde-format
 msgid "Missing Name"
 msgstr "Saknar namn"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Om Använd SSH-inställning anges, använd inte SSH-nyckel eller användarnamn."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Åtminstone användarnamn eller SSH-nyckel måste anges"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:402
 #, kde-format
 msgid "Missing Folder"
 msgstr "Saknar katalog"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:407
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "En SSH-session måste ha en profil"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Kan inte ta bort katalogen"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:434
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Ta bort katalog och hela dess innehåll"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Dubbelklicka för att ändra katalognamnet."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "En automatiskt tillagd post kan inte tas bort."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Ta bort vald post"

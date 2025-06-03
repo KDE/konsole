@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:46+0000\n"
+"POT-Creation-Date: 2025-06-03 00:46+0000\n"
 "PO-Revision-Date: 2024-10-10 14:41+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -812,7 +812,7 @@ msgstr "Ekki er hægt að vista lyklabindingaskema með tóma lýsingu."
 #. i18n: ectx: property (text), widget (QPushButton, addEntryButton)
 #. i18n: ectx: property (text), widget (QPushButton, btnAdd)
 #: KeyBindingEditor.ui:65 plugins/QuickCommands/qcwidget.ui:246
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:352
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:342
 #: plugins/SSHManager/sshwidget.ui:310
 #, kde-format
 msgid "Add"
@@ -1396,7 +1396,7 @@ msgstr "Vista"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdate)
 #: plugins/QuickCommands/qcwidget.ui:266
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:283
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:273
 #, kde-format
 msgid "Update"
 msgstr "Uppfæra"
@@ -1473,7 +1473,7 @@ msgstr ""
 " með ýmsar grunnstillingar, ertu viss?"
 
 #: plugins/QuickCommands/quickcommandswidget.cpp:243
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:233
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:223
 #, kde-format
 msgid "You are about to delete %1, are you sure?"
 msgstr "Þú ert að fara að eyða %1, ertu viss?"
@@ -1529,8 +1529,8 @@ msgstr "%1 er mappa fyrir SSH-færslur"
 #: plugins/SSHManager/sshmanagermodel.cpp:322
 #: plugins/SSHManager/sshmanagermodel.cpp:391
 #: plugins/SSHManager/sshmanagermodel.cpp:424
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:104
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:439
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:94
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:429
 #, kde-format
 msgid "SSH Config"
 msgstr "Grunnstilling SSH"
@@ -1594,24 +1594,24 @@ msgstr ""
 "Get ekki gefið SSH-skipanir utan við skeljaforritið (t.d. bash, zsh, sh)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:80
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:70
 #: plugins/SSHManager/sshwidget.ui:133
 #, kde-format
 msgid "SSH Key"
 msgstr "SSH-lykill"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:119
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:109
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Eyða"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:161
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:151
 #, kde-format
 msgid "Don't Change"
 msgstr "Ekki breyta"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:232
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:222
 #, kde-format
 msgid ""
 "You are about to delete the folder %1,\n"
@@ -1620,70 +1620,70 @@ msgstr ""
 "Þú ert að fara að eyða möppunni %1\n"
 " sem inniheldur ýmsar SSH-grunnstillingar, ertu viss?"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:240
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:230
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete SSH Configurations"
 msgstr "Eyða SSH-grunnstillingum"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:294
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:284
 #, kde-format
 msgid "Imported SSH Profile <br/> Some settings are read only."
 msgstr "Flutti inn SSH-forsnið <br/> Sumar stillingar eru skrifvarðar."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:389
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:379
 #, kde-format
 msgid "Missing Hostname"
 msgstr "Vélarheiti vantar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:394
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:384
 #, kde-format
 msgid "Missing Name"
 msgstr "Heiti vantar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:401
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:391
 #, kde-format
 msgid "If Use Ssh Config is set, do not specify sshkey or username."
 msgstr ""
 "Ef stillt er á Nota Ssh-grunnstillingu, skal ekki tilgreina ssh-lykil eða "
 "notandanafn."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:406
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:396
 #, kde-format
 msgid "At least Username or SSHKey must be set"
 msgstr "Stilla verður annað hvort notandanafn eða SSH-lykil"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:412
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:402
 #, kde-format
 msgid "Missing Folder"
 msgstr "Möppu vantar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:417
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:407
 #, kde-format
 msgid "An SSH session must have a profile"
 msgstr "SSH-seta verður að vera með prófíl"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:441
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:431
 #, kde-format
 msgid "Cannot delete this folder"
 msgstr "Get ekki eytt þessari möppu"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:444
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:434
 #, kde-format
 msgid "Delete folder and all of its contents"
 msgstr "Eyða möppu og öllu innihaldi hennar"
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:448
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:438
 #, kde-format
 msgid "Double click to change the folder name."
 msgstr "Tvísmelltu til að breyta möppuheitinu."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
 msgid "You can't delete an automatically added entry."
 msgstr "Þú getur ekki eytt færslu sem var bætt við sjálfkrafa."
 
-#: plugins/SSHManager/sshmanagerpluginwidget.cpp:455
+#: plugins/SSHManager/sshmanagerpluginwidget.cpp:445
 #, kde-format
 msgid "Delete selected entry"
 msgstr "Eyða valinni færslu"
