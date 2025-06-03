@@ -11,6 +11,7 @@
 #include "NullProcessInfo.h"
 #include "ProcessInfo.h"
 #include "UnixProcessInfo.h"
+#include "konsoledebug.h"
 
 // Unix
 #ifndef Q_OS_WIN
@@ -26,7 +27,9 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
+#include <QGuiApplication>
 #include <QHostInfo>
+#include <QRegularExpression>
 #include <QStringList>
 #include <QTextStream>
 #include <QtGlobal>
@@ -624,7 +627,6 @@ private:
         const pid_t selfPid = getpid();
 
         const QString managerObjPath(QStringLiteral("/org/freedesktop/systemd1"));
-        const QString appUnitName(QStringLiteral("app-org.kde.konsole-%1.scope").arg(selfPid));
 
         // check if systemd dbus services exist
         if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(QStringLiteral("org.freedesktop.systemd1"))) {
@@ -633,6 +635,9 @@ private:
 
         // get current application cgroup path
         const QString oldAppCGroupPath(getProcCGroup(selfPid));
+
+        auto appUnitName = QStringLiteral("app-%1-%2.scope").arg(QGuiApplication::desktopFileName()).arg(selfPid);
+        qCDebug(KonsoleDebug) << "Creating scope" << appUnitName;
 
         // create application unit
         VariantList properties;
