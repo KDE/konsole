@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-29 02:45+0000\n"
-"PO-Revision-Date: 2025-05-25 12:16+0200\n"
+"PO-Revision-Date: 2025-05-26 21:15+0200\n"
 "Last-Translator: Lucia Mrenica <lucia.mrenica@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
@@ -90,7 +90,7 @@ msgstr "Hlavný panel nástrojov"
 #: ../desktop/partui.rc:20
 #, kde-format
 msgid "S&crollback"
-msgstr "&Rolovanie"
+msgstr "&Skrolovanie"
 
 #. i18n: ectx: ToolBar (sessionToolbar)
 #: ../desktop/sessionui.rc:80
@@ -766,7 +766,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Adjust Scrollback"
-msgstr "Upraviť rolovanie späť"
+msgstr "Upraviť skrolovanie späť"
 
 #: HistorySizeDialog.cpp:46
 #, kde-format
@@ -1896,12 +1896,10 @@ msgid "Default profile"
 msgstr "Štandardný profil"
 
 #: profile/ProfileManager.cpp:280
-#, fuzzy, kde-format
-#| msgctxt "The default name of a profile"
-#| msgid "Profile #%1"
+#, kde-format
 msgctxt "New profile name, %1 is a number"
 msgid "Profile %1"
-msgstr "+Profily"
+msgstr "Profil %1"
 
 #: profile/ProfileManager.cpp:294
 #, kde-format
@@ -2291,17 +2289,17 @@ msgstr "Tlačiť obrazovku..."
 #: session/SessionController.cpp:757
 #, kde-format
 msgid "Adjust Scrollback..."
-msgstr "Upraviť rolovanie späť..."
+msgstr "Upraviť skrolovanie späť..."
 
 #: session/SessionController.cpp:761
 #, kde-format
 msgid "Clear Scrollback"
-msgstr "Vyčistiť rolovanie"
+msgstr "Vyčistiť skrolovanie"
 
 #: session/SessionController.cpp:765
 #, kde-format
 msgid "Clear Scrollback and Reset"
-msgstr "Vyčistiť rolovanie a obnoviť"
+msgstr "Vyčistiť skrolovanie a obnoviť"
 
 #: session/SessionController.cpp:776
 #, kde-format
@@ -4370,7 +4368,7 @@ msgstr "Vzhľad"
 #: widgets/EditProfileDialog.cpp:139
 #, kde-format
 msgid "Scrolling"
-msgstr "Rolovanie"
+msgstr "Skrolovanie"
 
 #: widgets/EditProfileDialog.cpp:153
 #, kde-format
@@ -5149,13 +5147,13 @@ msgstr "Umožniť terminálovým aplikáciám spracovávať kliknutia a ťahanie
 #: widgets/EditProfileScrollingPage.ui:25
 #, kde-format
 msgid "Scrollback:"
-msgstr "Rolovanie:"
+msgstr "Skrolovanie:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: widgets/EditProfileScrollingPage.ui:41
 #, kde-format
 msgid "Scroll Page Up/Down:"
-msgstr "O koľko rolovať stranu hore/dolu:"
+msgstr "O koľko skrolovať stranu hore/dolu:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, highlightScrolledLinesButton)
 #: widgets/EditProfileScrollingPage.ui:51
@@ -5192,7 +5190,7 @@ msgstr "Zvýrazňovanie:"
 #: widgets/EditProfileScrollingPage.ui:129
 #, kde-format
 msgid "Scroll the page the half height of window"
-msgstr "Rolovať stranu polovičnou výškou okna"
+msgstr "Skrolovať stranu polovičnou výškou okna"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollHalfPage)
 #: widgets/EditProfileScrollingPage.ui:132
@@ -5222,7 +5220,7 @@ msgstr "Pretiecť riadky:"
 #: widgets/EditProfileScrollingPage.ui:191
 #, kde-format
 msgid "Scroll the page the full height of window"
-msgstr "Rolovať stranu plnou výškou okna"
+msgstr "Skrolovať stranu plnou výškou okna"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scrollFullPage)
 #: widgets/EditProfileScrollingPage.ui:194
@@ -5329,7 +5327,7 @@ msgid ""
 "Konsole → Temporary Files</emphasis> to select the location of the temporary "
 "files."
 msgstr ""
-"Pri použití tejto voľby, rolovacie dáta sa zapíšu nešifrované do dočasných "
+"Pri použití tejto voľby, skrolovacie dáta sa zapíšu nešifrované do dočasných "
 "súborov. Tieto dočasné súbory budú vymazané automaticky pri zatvorení "
 "Konsole bežným spôsobom.<nl/>Použite <emphasis>Nastavenie->Nastaviť Konsole-"
 ">Umiestnenie súborov</emphasis> na výber umiestnenia dočasných súborov."
