@@ -219,10 +219,14 @@ void TabbedViewContainer::konsoleConfigChanged()
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    layout->addWidget(KonsoleSettings::searchTabsButton() == 0 ? _searchTabsButton : nullptr);
+    if (KonsoleSettings::searchTabsButton() == 0) {
+        layout->addWidget(_searchTabsButton);
+    }
     _searchTabsButton->setVisible(KonsoleSettings::searchTabsButton() == 0);
 
-    layout->addWidget(KonsoleSettings::closeTabButton() == 1 ? _closeTabButton : nullptr);
+    if (KonsoleSettings::closeTabButton() == 1) {
+        layout->addWidget(_closeTabButton);
+    }
     _closeTabButton->setVisible(KonsoleSettings::closeTabButton() == 1);
 
     QWidget *rightCornerWidget = new QWidget();
