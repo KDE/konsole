@@ -21,6 +21,7 @@
 #if defined(Q_OS_LINUX)
 #include <unistd.h>
 #elif defined(Q_OS_OPENBSD)
+#include <fcntl.h>
 #include <kvm.h>
 #include <sys/param.h>
 #include <sys/sysctl.h>
@@ -232,11 +233,11 @@ void TerminalInterfaceTest::testTerminalInterfaceUsingSpy()
     QVERIFY(procExeTarget.open(QIODevice::ReadOnly));
     QCOMPARE(QStringLiteral(procExeTarget.readAll()), command);
 #elif defined(Q_OS_OPENBSD)
-    kvm_t *kd = kvm_openfiles(NULL, NULL, NULL, O_RD_ONLY, NULL);
+    kvm_t *kd = kvm_openfiles(NULL, NULL, NULL, O_RDONLY, NULL);
     int count;
-    auto kProcStruct = ::kvm_getprocs(kd, KERN_PROC_PID, foregroundProcessId, &count);
+    auto kProcStruct = ::kvm_getprocs(kd, KERN_PROC_PID, foregroundProcessId, sizeof(struct kinfo_proc), &count);
     QCOMPARE(count, 1);
-    QCOMPARE(QStringLiteral(kProcStruct->p_comm), command);
+    QCOMPARE(QString::fromUtf8(kProcStruct->p_comm), command);
     kvm_close(kd);
 #endif
 
