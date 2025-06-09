@@ -4,6 +4,10 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 set(KONSOLE_TEST_LIBS Qt::Test konsoleprivate konsolecharacters konsoledecoders konsoleapp)
 
+if (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+    set(KONSOLE_TEST_LIBS ${KONSOLE_TEST_LIBS} kvm)
+endif()
+
 # Temporary bypass for BKO 432379
 if(BUILD_SHARED_LIBS)
     ecm_add_test(KeyboardTranslatorTest.cpp LINK_LIBRARIES ${KONSOLE_TEST_LIBS})
