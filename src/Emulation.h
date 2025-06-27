@@ -159,7 +159,12 @@ public:
     bool utf8() const
     {
         Q_ASSERT(_decoder.isValid());
-        return QStringConverter::encodingForName(_decoder.name()) == QStringConverter::Utf8;
+        const std::optional<QStringConverter::Encoding> encoding = QStringConverter::encodingForName(_decoder.name());
+#if defined(Q_OS_WIN)
+        return encoding == QStringConverter::Utf8;
+#else
+        return encoding == QStringConverter::Utf8 || encoding == QStringConverter::System;
+#endif
     }
 
     /** Returns the special character used for erasing character. */
