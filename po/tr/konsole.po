@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: applications-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-04-30 17:32+0300\n"
+"PO-Revision-Date: 2025-06-29 09:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -460,7 +460,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Select wallpaper image file"
-msgstr "Duvar kağıdı görseli dosyası seç"
+msgstr "Duvar kâğıdı görseli dosyası seç"
 
 #: colorscheme/ColorSchemeEditor.cpp:190
 #, kde-format
@@ -549,7 +549,7 @@ msgstr "Yüzde"
 #: colorscheme/ColorSchemeEditor.ui:103
 #, kde-format
 msgid "Wallpaper transparency:"
-msgstr "Duvar kağıdı saydamlığı:"
+msgstr "Duvar kâğıdı saydamlığı:"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperLabel)
 #: colorscheme/ColorSchemeEditor.ui:137
@@ -582,7 +582,7 @@ msgstr "…"
 #: colorscheme/ColorSchemeEditor.ui:165
 #, kde-format
 msgid "Wallpaper scaling:"
-msgstr "Duvar kağıdı ölçeklendirme:"
+msgstr "Duvar kâğıdı ölçeklendirme:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperScalingType)
 #: colorscheme/ColorSchemeEditor.ui:173
@@ -618,7 +618,7 @@ msgstr "Ölçeklendirme Yok"
 #: colorscheme/ColorSchemeEditor.ui:205
 #, kde-format
 msgid "Wallpaper flip:"
-msgstr "Duvar kağıdı ters çevirme:"
+msgstr "Duvar kâğıdı ters çevirme:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:213
