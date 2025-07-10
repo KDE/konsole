@@ -149,6 +149,9 @@ protected:
     // reimplemented from QWidget
     bool focusNextPrevChild(bool next) override;
 
+    // reimplemented from KXMLGUIBuilder
+    QWidget *createContainer(QWidget *parent, int index, const QDomElement &element, QAction *&containerAction) override;
+
 protected Q_SLOTS:
     void saveNewToolbarConfig() override;
 

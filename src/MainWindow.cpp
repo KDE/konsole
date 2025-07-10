@@ -1127,6 +1127,16 @@ bool MainWindow::focusNextPrevChild(bool v)
     return QMainWindow::focusNextPrevChild(v);
 }
 
+QWidget *MainWindow::createContainer(QWidget *parent, int index, const QDomElement &element, QAction *&containerAction)
+{
+    // ensure we don't have toolbar accelerators that clash with other stuff
+    QWidget *createdContainer = KXmlGuiWindow::createContainer(parent, index, element, containerAction);
+    if (element.tagName() == QLatin1String("ToolBar")) {
+        KAcceleratorManager::setNoAccel(createdContainer);
+    }
+    return createdContainer;
+}
+
 void MainWindow::saveNewToolbarConfig()
 {
     KXmlGuiWindow::saveNewToolbarConfig();
