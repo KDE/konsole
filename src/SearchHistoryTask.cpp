@@ -20,7 +20,7 @@ void SearchHistoryTask::addScreenWindow(Session *session, ScreenWindow *searchWi
     _windows.insert(session, searchWindow);
 }
 
-void SearchHistoryTask::execute()
+bool SearchHistoryTask::execute()
 {
     auto iter = QMapIterator<QPointer<Session>, ScreenWindowPtr>(_windows);
 
@@ -32,6 +32,7 @@ void SearchHistoryTask::execute()
     if (autoDelete()) {
         deleteLater();
     }
+    return true;
 }
 
 void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session, const ScreenWindowPtr &window)

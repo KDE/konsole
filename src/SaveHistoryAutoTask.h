@@ -36,7 +36,7 @@ public:
      *
      * The data transfer is performed asynchronously and will continue after execute() returns.
      */
-    void execute() override;
+    bool execute() override;
 
 public Q_SLOTS:
     // Stops the autosave process.

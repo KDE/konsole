@@ -46,10 +46,11 @@ public:
 
     /**
      * Executes the task on each of the sessions in the group.
+     * Returns true if the task has been spawned successfully.
      * The completed() signal is emitted when the task is finished, depending on the specific sub-class
      * execute() may be synchronous or asynchronous
      */
-    virtual void execute() = 0;
+    virtual bool execute() = 0;
 
 Q_SIGNALS:
     /**

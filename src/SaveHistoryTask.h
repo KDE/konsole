@@ -36,7 +36,7 @@ public:
      *
      * The data transfer is performed asynchronously and will continue after execute() returns.
      */
-    void execute() override;
+    bool execute() override;
 
 private Q_SLOTS:
     void jobDataRequested(KIO::Job *job, QByteArray &data);

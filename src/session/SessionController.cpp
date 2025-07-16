@@ -1816,17 +1816,22 @@ void SessionController::autoSaveHistory()
     _autoSaveTask = new SaveHistoryAutoTask(this);
     _autoSaveTask->setAutoDelete(true);
     _autoSaveTask->addSession(session());
-    _autoSaveTask->execute();
+    auto success = _autoSaveTask->execute();
 
-    // Only show the button to start autosave when autosave is not ongoing.
-    // Only show the button to stop autosave when auytosave is ongoing.
-    connect(_autoSaveTask, &SaveHistoryAutoTask::completed, this, [&]() {
-        _startAutoSaveAction->setVisible(true);
-        _stopAutoSaveAction->setVisible(false);
-    });
+    if (success) {
+        // Only show the button to start autosave when autosave is not ongoing.
+        // Only show the button to stop autosave when autosave is ongoing.
+        connect(_autoSaveTask, &SaveHistoryAutoTask::completed, this, [&]() {
+            _startAutoSaveAction->setVisible(true);
+            _stopAutoSaveAction->setVisible(false);
+        });
 
-    _startAutoSaveAction->setVisible(false);
-    _stopAutoSaveAction->setVisible(true);
+        _startAutoSaveAction->setVisible(false);
+        _stopAutoSaveAction->setVisible(true);
+    } else {
+        // Reset to avoid snapshot changing title.
+        _autoSaveTask->stop();
+    }
 }
 
 void SessionController::stopAutoSaveHistory()

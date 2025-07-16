@@ -37,7 +37,7 @@ SaveHistoryTask::SaveHistoryTask(QObject *parent)
 
 SaveHistoryTask::~SaveHistoryTask() = default;
 
-void SaveHistoryTask::execute()
+bool SaveHistoryTask::execute()
 {
     // TODO - think about the UI when saving multiple history sessions, if there are more than two or
     //        three then providing a URL for each one will be tedious
@@ -134,6 +134,7 @@ void SaveHistoryTask::execute()
     }
 
     dialog->deleteLater();
+    return true;
 }
 
 void SaveHistoryTask::jobDataRequested(KIO::Job *job, QByteArray &data)

@@ -36,7 +36,7 @@ SaveHistoryAutoTask::SaveHistoryAutoTask(QObject *parent)
 
 SaveHistoryAutoTask::~SaveHistoryAutoTask() = default;
 
-void SaveHistoryAutoTask::execute()
+bool SaveHistoryAutoTask::execute()
 {
     QFileDialog *dialog = new QFileDialog(QApplication::activeWindow());
     dialog->setAcceptMode(QFileDialog::AcceptSave);
@@ -65,7 +65,7 @@ void SaveHistoryAutoTask::execute()
     int result = dialog->exec();
 
     if (result != QDialog::Accepted) {
-        return;
+        return false;
     }
 
     QUrl url = (dialog->selectedUrls()).at(0);
@@ -73,7 +73,7 @@ void SaveHistoryAutoTask::execute()
     if (!url.isValid()) {
         // UI:  Can we make this friendlier?
         KMessageBox::error(nullptr, i18n("%1 is an invalid URL, the output could not be saved.", url.url()));
-        return;
+        return false;
     }
 
     // Save selected URL for next time
@@ -86,7 +86,7 @@ void SaveHistoryAutoTask::execute()
 
     if (!_destinationFile.open(QFile::ReadWrite)) {
         KMessageBox::error(nullptr, i18n("Failed to create autosave file at %1.", url.url()));
-        return;
+        return false;
     }
 
     _watcher.addPath(path);
@@ -107,6 +107,7 @@ void SaveHistoryAutoTask::execute()
 
     readLines();
     dialog->deleteLater();
+    return true;
 }
 
 void SaveHistoryAutoTask::fileModified()

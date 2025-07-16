@@ -76,7 +76,7 @@ public:
      *
      * To continue the search looking for further matches, call execute() again.
      */
-    void execute() override;
+    bool execute() override;
 
 private:
     using ScreenWindowPtr = QPointer<ScreenWindow>;
