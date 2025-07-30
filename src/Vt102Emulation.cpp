@@ -401,7 +401,7 @@ void Vt102Emulation::initTokenizer()
     for (i = 0x20; i < 0x30; ++i) {
         charClass[i] |= INT;
     }
-    for (s = (quint8 *)"`@ABCDEFGHILMPSTXZabcdfry"; *s != 0U; ++s) {
+    for (s = (quint8 *)"`@ABCDEFGHILMPSTXZabcdefry"; *s != 0U; ++s) {
         charClass[*s] |= CPN;
     }
     // resize = \e[8;<row>;<col>t
@@ -2093,6 +2093,12 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pn('b'      ) : _currentScreen->repeatChars          (p         ); break;
     case token_csi_pn('c'      ) :      reportTerminalType   (          ); break; //VT100
     case token_csi_pn('d'      ) : _currentScreen->setCursorY           (p         ); break; //LINUX
+    case token_csi_pn('e'      ) :
+        if (p == 0) {
+            ++p;
+        }
+        _currentScreen->setCursorY(_currentScreen->getCursorY()+1+p);
+        break;
     case token_csi_pn('f'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100
     case token_csi_pn('r'      ) :      setMargins           (p,      q); break; //VT100
     case token_csi_pn('y'      ) : /* IGNORED: Confidence test          */ break; //VT100
