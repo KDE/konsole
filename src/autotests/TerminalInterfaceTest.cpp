@@ -133,7 +133,11 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     QFile procExeTarget(QStringLiteral("/proc/%1/exe").arg(terminalProcessId));
     if (procExeTarget.exists()) {
-        QCOMPARE(procExeTarget.symLinkTarget(), defaultExePath.trimmed());
+        const auto procExeTargetNormalized = QFileInfo(procExeTarget.symLinkTarget()).canonicalFilePath();
+        const auto defaultExePathNormalized = QFileInfo(defaultExePath.trimmed()).canonicalFilePath();
+        QVERIFY(!procExeTargetNormalized.isEmpty());
+        QVERIFY(!defaultExePathNormalized.isEmpty());
+        QCOMPARE(procExeTargetNormalized, defaultExePathNormalized);
     }
 #endif
 
