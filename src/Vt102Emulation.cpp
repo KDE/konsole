@@ -1095,7 +1095,8 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
             _currentScreen->currentTerminalDisplay()->terminalColor()->setCursorColor(QColor());
             break;
         default:
-            reportDecodingError(token_osc(terminator));
+            _pendingSessionAttributesUpdates[attribute] = QString();
+            _sessionAttributesUpdateTimer->start(20);
             break;
         }
 
