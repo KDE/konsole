@@ -184,6 +184,7 @@ private:
         Clipboard = 52,
         KittyNotification = 99,
         ResetColors = 104,
+        ResetCursorColor = 112,
         // https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
         SemanticPrompts = 133,
         // https://chromium.googlesource.com/apps/libapps/+/master/hterm/doc/ControlSequences.md#OSC

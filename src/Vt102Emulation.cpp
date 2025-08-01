@@ -1091,6 +1091,9 @@ void Vt102Emulation::processSessionAttributeRequest(const int tokenSize, const u
                 colorTable[i] = QColor();
             }
             break;
+        case ResetCursorColor: // 112 clears the cursor color and has no arguments.
+            _currentScreen->currentTerminalDisplay()->terminalColor()->setCursorColor(QColor());
+            break;
         default:
             reportDecodingError(token_osc(terminator));
             break;
