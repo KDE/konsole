@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: konsole\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-03 00:46+0000\n"
-"PO-Revision-Date: 2025-05-04 06:23+0400\n"
+"PO-Revision-Date: 2025-07-31 18:23+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -608,7 +608,7 @@ msgstr "متكيف"
 #: colorscheme/ColorSchemeEditor.ui:193
 #, kde-format
 msgid "NoScaling"
-msgstr "بدون تكبير"
+msgstr "بلا تكبير"
 
 #. i18n: ectx: property (text), widget (QLabel, wallpaperFlipLabel)
 #: colorscheme/ColorSchemeEditor.ui:205
@@ -620,7 +620,7 @@ msgstr "عكس الخلفية:"
 #: colorscheme/ColorSchemeEditor.ui:213
 #, kde-format
 msgid "NoFlip"
-msgstr "بدون عكس"
+msgstr "بلا عكس"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, wallpaperFlipType)
 #: colorscheme/ColorSchemeEditor.ui:218
@@ -3086,7 +3086,7 @@ msgstr "على &شريط الألسنة"
 #, kde-format
 msgctxt "Do not show a close button"
 msgid "None"
-msgstr "بدون"
+msgstr "لا تعرض"
 
 #. i18n: ectx: property (text), widget (QLabel, showSearchTabsButtonLabel)
 #: settings/TabBarSettings.ui:231
@@ -3397,7 +3397,7 @@ msgstr "تأكيد اللصق"
 #, kde-format
 msgctxt "@action:button"
 msgid "Paste &without control characters"
-msgstr "ألصق &بدون أحرف التحكم"
+msgstr "ألصق &دون أحرف التحكم"
 
 #: terminalDisplay/TerminalDisplay.cpp:2324
 #, kde-format
@@ -5052,8 +5052,7 @@ msgid ""
 "Always paste dropped files and URLs as text without offering move, copy and "
 "link actions."
 msgstr ""
-"قم دائمًا بلصق الملفات وعناوين URL التي تم إسقاطها كنص بدون تقديم إجراءات "
-"النقل والنسخ والربط."
+"ألصق الملفات والعناوين المسقطة كنص دون تقديم إجراءات النقل والنسخ والربط."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dropUrlsAsText)
 #: widgets/EditProfileMousePage.ui:418
