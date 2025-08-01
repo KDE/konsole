@@ -34,6 +34,8 @@ void TerminalColor::applyProfile(const Profile::Ptr &profile, const std::shared_
 
     m_cursorColor = profile->useCustomCursorColor() ? profile->customCursorColor() : QColor();
     m_cursorTextColor = profile->useCustomCursorColor() ? profile->customCursorTextColor() : QColor();
+    m_defaultForeColor = colorScheme->foregroundColor();
+    m_defaultBackColor = colorScheme->backgroundColor();
 }
 
 QColor TerminalColor::backgroundColor() const
@@ -92,13 +94,21 @@ void TerminalColor::setCursorColor(const QColor &color)
 
 void TerminalColor::setBackgroundColor(const QColor &color)
 {
-    m_colorTable[DEFAULT_BACK_COLOR] = color;
+    if (color == QColor()) {
+        m_colorTable[DEFAULT_BACK_COLOR] = m_defaultBackColor;
+    } else {
+        m_colorTable[DEFAULT_BACK_COLOR] = color;
+    }
     onColorsChanged();
 }
 
 void TerminalColor::setForegroundColor(const QColor &color)
 {
-    m_colorTable[DEFAULT_FORE_COLOR] = color;
+    if (color == QColor()) {
+        m_colorTable[DEFAULT_FORE_COLOR] = m_defaultForeColor;
+    } else {
+        m_colorTable[DEFAULT_FORE_COLOR] = color;
+    }
     onColorsChanged();
 }
 

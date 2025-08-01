@@ -691,6 +691,15 @@ void Session::setSessionAttribute(int what, const QString &caption)
         return;
     }
 
+    if (what == ResetTextColor || what == ResetBackgroundColor) {
+        QColor color;
+        if (what == ResetTextColor) {
+            Q_EMIT changeForegroundColorRequest(color);
+        } else {
+            Q_EMIT changeBackgroundColorRequest(color);
+        }
+    }
+
     if (modified) {
         Q_EMIT sessionAttributeChanged();
     }

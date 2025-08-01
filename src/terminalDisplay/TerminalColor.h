@@ -73,6 +73,8 @@ private:
 
     QColor m_cursorColor;
     QColor m_cursorTextColor;
+    QColor m_defaultForeColor;
+    QColor m_defaultBackColor;
 
     QColor m_colorTable[TABLE_COLORS];
 };
